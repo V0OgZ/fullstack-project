@@ -40,6 +40,36 @@ const GameSelector: React.FC = () => {
       <div className="scenario-explanation">
         <p>💡 <strong>Both scenarios use the same game interface</strong></p>
         <p>The Mystical scenario adds special objects on the map that you can discover!</p>
+        <p>🎮 <strong>Real-time multiplayer sessions</strong> - Play with friends via WebSocket connections</p>
+        <p>🏰 <strong>8 different castle types</strong> with unique units and specializations</p>
+        <p>⚔️ <strong>Advanced combat system</strong> with tactical positioning on hexagonal battlefields</p>
+        <p>🧙‍♂️ <strong>30+ magical artifacts</strong> including temporal objects that manipulate time</p>
+        <p>🌍 <strong>Dynamic resource management</strong> - Gold, Wood, Stone, Mana, and more</p>
+        <p>🏛️ <strong>Political intrigue system</strong> with advisors and diplomatic consequences</p>
+        <p>🎯 <strong>Comprehensive game save system</strong> - Never lose your progress</p>
+        <p>🔮 <strong>ZFC (Zone de Causalité)</strong> - Revolutionary async gameplay mechanics</p>
+      </div>
+      
+      <div className="technical-highlights">
+        <h3>🚀 Technical Excellence</h3>
+        <div className="tech-grid">
+          <div className="tech-item">
+            <span className="tech-icon">🧪</span>
+            <span><strong>77 Total Tests</strong><br/>44 Backend + 26 Frontend + 7 Map Loading</span>
+          </div>
+          <div className="tech-item">
+            <span className="tech-icon">⚡</span>
+            <span><strong>Spring Boot Backend</strong><br/>RESTful API + WebSocket Support</span>
+          </div>
+          <div className="tech-item">
+            <span className="tech-icon">🎨</span>
+            <span><strong>React TypeScript</strong><br/>60 FPS Canvas Rendering</span>
+          </div>
+          <div className="tech-item">
+            <span className="tech-icon">🌐</span>
+            <span><strong>Multi-language</strong><br/>French, English, Russian Support</span>
+          </div>
+        </div>
       </div>
       
       <footer className="selector-footer">
