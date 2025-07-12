@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { ALL_MAGIC_OBJECTS, MAGIC_OBJECTS_STATS, MagicObject } from '../data/magicObjects';
+import { useTranslation } from '../i18n';
 import './MagicInventory.css';
 
 interface MagicInventoryProps {
@@ -21,6 +22,7 @@ const MagicInventory: React.FC<MagicInventoryProps> = ({
   playerGold = 0,
   playerLevel = 1
 }) => {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<string>('all');
   const [selectedRarity, setSelectedRarity] = useState<string>('all');
   const [selectedType, setSelectedType] = useState<string>('all');
@@ -30,15 +32,15 @@ const MagicInventory: React.FC<MagicInventoryProps> = ({
 
   // Compute tab categories
   const tabs = [
-    { id: 'all', name: 'Tous', icon: '🎒' },
-    { id: 'equipped', name: 'Équipé', icon: '⚔️' },
-    { id: 'weapon', name: 'Armes', icon: '⚔️' },
-    { id: 'armor', name: 'Armures', icon: '🛡️' },
-    { id: 'accessory', name: 'Accessoires', icon: '💍' },
-    { id: 'artifact', name: 'Artefacts', icon: '⭐' },
-    { id: 'temporal', name: 'Temporel', icon: '⏰' },
-    { id: 'consumable', name: 'Consommables', icon: '🧪' },
-    { id: 'resource', name: 'Ressources', icon: '💰' }
+    { id: 'all', name: t('all'), icon: '🎒' },
+    { id: 'equipped', name: t('equipped'), icon: '⚔️' },
+    { id: 'weapon', name: t('weapons'), icon: '⚔️' },
+    { id: 'armor', name: t('armor'), icon: '🛡️' },
+    { id: 'accessory', name: t('accessories'), icon: '💍' },
+    { id: 'artifact', name: t('artifacts'), icon: '⭐' },
+    { id: 'temporal', name: t('temporal'), icon: '⏰' },
+    { id: 'consumable', name: t('consumables'), icon: '🧪' },
+    { id: 'resource', name: t('resources'), icon: '💰' }
   ];
 
   // Filter and sort objects
@@ -156,12 +158,12 @@ const MagicInventory: React.FC<MagicInventoryProps> = ({
       </button>
 
       <div className="inventory-header">
-        <h2>Inventaire Magique</h2>
+        <h2>{t('magicInventoryTitle')}</h2>
         <div className="inventory-stats">
-          <span>📦 {filteredObjects.length} objets</span>
-          <span>⚔️ {Object.keys(equippedItems).length} équipés</span>
-          <span>💰 {playerGold} or</span>
-          <span>📈 Niv. {playerLevel}</span>
+          <span>📦 {filteredObjects.length} {t('objects')}</span>
+          <span>⚔️ {Object.keys(equippedItems).length} {t('equipped')}</span>
+          <span>💰 {playerGold} {t('gold')}</span>
+          <span>📈 {t('level')} {playerLevel}</span>
         </div>
       </div>
 
@@ -184,40 +186,40 @@ const MagicInventory: React.FC<MagicInventoryProps> = ({
             <select
               value={selectedRarity}
               onChange={(e) => setSelectedRarity(e.target.value)}
-              title="Filtrer par rareté"
+              title={t('filterByRarity')}
             >
-              <option value="all">Toutes raretés</option>
-              <option value="common">Commun</option>
-              <option value="uncommon">Inhabituel</option>
-              <option value="rare">Rare</option>
-              <option value="epic">Épique</option>
-              <option value="legendary">Légendaire</option>
-              <option value="temporal">Temporel</option>
+              <option value="all">{t('allRarities')}</option>
+              <option value="common">{t('common')}</option>
+              <option value="uncommon">{t('uncommon')}</option>
+              <option value="rare">{t('rare')}</option>
+              <option value="epic">{t('epic')}</option>
+              <option value="legendary">{t('legendary')}</option>
+              <option value="temporal">{t('temporal')}</option>
             </select>
 
             <select
               value={selectedType}
               onChange={(e) => setSelectedType(e.target.value)}
-              title="Filtrer par type"
+              title={t('filterByType')}
             >
-              <option value="all">Tous types</option>
-              <option value="weapon">Armes</option>
-              <option value="armor">Armures</option>
-              <option value="accessory">Accessoires</option>
-              <option value="artifact">Artefacts</option>
-              <option value="temporal">Temporel</option>
-              <option value="consumable">Consommables</option>
-              <option value="resource">Ressources</option>
+              <option value="all">{t('allTypes')}</option>
+              <option value="weapon">{t('weapons')}</option>
+              <option value="armor">{t('armor')}</option>
+              <option value="accessory">{t('accessories')}</option>
+              <option value="artifact">{t('artifacts')}</option>
+              <option value="temporal">{t('temporal')}</option>
+              <option value="consumable">{t('consumables')}</option>
+              <option value="resource">{t('resources')}</option>
             </select>
 
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              title="Trier par"
+              title={t('sortBy')}
             >
-              <option value="name">Nom</option>
-              <option value="value">Valeur</option>
-              <option value="rarity">Rareté</option>
+              <option value="name">{t('sortByName')}</option>
+              <option value="value">{t('sortByValue')}</option>
+              <option value="rarity">{t('sortByRarity')}</option>
             </select>
 
             <label style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.85rem' }}>
@@ -226,7 +228,7 @@ const MagicInventory: React.FC<MagicInventoryProps> = ({
                 checked={showOnlyOwned}
                 onChange={(e) => setShowOnlyOwned(e.target.checked)}
               />
-              Seulement possédés
+              {t('onlyOwned')}
             </label>
           </div>
         </div>
@@ -235,8 +237,8 @@ const MagicInventory: React.FC<MagicInventoryProps> = ({
         <div className="inventory-main">
           {filteredObjects.length === 0 ? (
             <div className="empty-inventory">
-              <h3>Aucun objet trouvé</h3>
-              <p>Ajustez vos filtres ou explorez le monde pour trouver des objets magiques !</p>
+              <h3>{t('noItemsFound')}</h3>
+              <p>{t('adjustFiltersOrExplore')}</p>
             </div>
           ) : (
             <div className="objects-grid">
@@ -258,8 +260,8 @@ const MagicInventory: React.FC<MagicInventoryProps> = ({
                       <div className="object-rarity" style={{ color: getRarityColor(object.rarity) }}>
                         {getRarityIcon(object.rarity)}
                       </div>
-                      {equipped && <span className="equipped-badge">Équipé</span>}
-                      {object.temporal && <span className="temporal-badge">Temporel</span>}
+                      {equipped && <span className="equipped-badge">{t('equipped')}</span>}
+                      {object.temporal && <span className="temporal-badge">{t('temporal')}</span>}
                     </div>
 
                     <h3 className="object-name">{object.name}</h3>
@@ -277,20 +279,20 @@ const MagicInventory: React.FC<MagicInventoryProps> = ({
                       {object.effects.gold && <span>💰 +{object.effects.gold}</span>}
                     </div>
 
-                    <div className="object-value">💰 {object.value.toLocaleString()} or</div>
+                    <div className="object-value">💰 {object.value.toLocaleString()} {t('gold')}</div>
 
                     {object.effects.specialEffect && (
                       <div className="special-effect">
-                        <strong>Effet spécial:</strong> {object.effects.specialEffect}
+                        <strong>{t('specialEffect')}:</strong> {object.effects.specialEffect}
                       </div>
                     )}
 
                     <div className="object-details">
                       <div className="details-grid">
-                        <div>Type: {object.type}</div>
-                        <div>Rareté: {object.rarity}</div>
-                        {object.slot && <div>Slot: {object.slot}</div>}
-                        {object.requiresLevel && <div>Niveau: {object.requiresLevel}</div>}
+                        <div>{t('type')}: {object.type}</div>
+                        <div>{t('rarity')}: {object.rarity}</div>
+                        {object.slot && <div>{t('slot')}: {object.slot}</div>}
+                        {object.requiresLevel && <div>{t('requiresLevel')}: {object.requiresLevel}</div>}
                       </div>
 
                       <div className="object-actions">
@@ -300,7 +302,7 @@ const MagicInventory: React.FC<MagicInventoryProps> = ({
                             onClick={() => handleEquipItem(object.id)}
                             disabled={!canEquip}
                           >
-                            Équiper
+                            {t('equipItem')}
                           </button>
                         )}
                         {equipped && (
@@ -308,7 +310,7 @@ const MagicInventory: React.FC<MagicInventoryProps> = ({
                             className="unequip-btn"
                             onClick={() => handleUnequipItem(object.id)}
                           >
-                            Déséquiper
+                            {t('unequipItem')}
                           </button>
                         )}
                         {owned && object.type === 'consumable' && (
@@ -316,7 +318,7 @@ const MagicInventory: React.FC<MagicInventoryProps> = ({
                             className="use-btn"
                             onClick={() => handleUseItem(object.id)}
                           >
-                            Utiliser
+                            {t('useItem')}
                           </button>
                         )}
                       </div>
@@ -330,21 +332,21 @@ const MagicInventory: React.FC<MagicInventoryProps> = ({
       </div>
 
       <div className="library-stats">
-        <h3>Statistiques de la Bibliothèque</h3>
+        <h3>{t('libraryStatsTitle')}</h3>
         <div className="stats-grid">
-          <div>Total: {MAGIC_OBJECTS_STATS.total}</div>
-          <div>Temporel: {MAGIC_OBJECTS_STATS.temporal}</div>
-          <div>Armes: {MAGIC_OBJECTS_STATS.weapons}</div>
-          <div>Armures: {MAGIC_OBJECTS_STATS.armor}</div>
-          <div>Accessoires: {MAGIC_OBJECTS_STATS.accessories}</div>
-          <div>Légendaire: {MAGIC_OBJECTS_STATS.legendary}</div>
-          <div>Consommables: {MAGIC_OBJECTS_STATS.consumables}</div>
-          <div>Commun: {MAGIC_OBJECTS_STATS.byRarity.common}</div>
-          <div>Inhabituel: {MAGIC_OBJECTS_STATS.byRarity.uncommon}</div>
-          <div>Rare: {MAGIC_OBJECTS_STATS.byRarity.rare}</div>
-          <div>Épique: {MAGIC_OBJECTS_STATS.byRarity.epic}</div>
-          <div>Légendaire: {MAGIC_OBJECTS_STATS.byRarity.legendary}</div>
-          <div>Temporel: {MAGIC_OBJECTS_STATS.byRarity.temporal}</div>
+          <div>{t('total')}: {MAGIC_OBJECTS_STATS.total}</div>
+          <div>{t('temporal')}: {MAGIC_OBJECTS_STATS.temporal}</div>
+          <div>{t('weapons')}: {MAGIC_OBJECTS_STATS.weapons}</div>
+          <div>{t('armor')}: {MAGIC_OBJECTS_STATS.armor}</div>
+          <div>{t('accessories')}: {MAGIC_OBJECTS_STATS.accessories}</div>
+          <div>{t('legendary')}: {MAGIC_OBJECTS_STATS.legendary}</div>
+          <div>{t('consumables')}: {MAGIC_OBJECTS_STATS.consumables}</div>
+          <div>{t('common')}: {MAGIC_OBJECTS_STATS.byRarity.common}</div>
+          <div>{t('uncommon')}: {MAGIC_OBJECTS_STATS.byRarity.uncommon}</div>
+          <div>{t('rare')}: {MAGIC_OBJECTS_STATS.byRarity.rare}</div>
+          <div>{t('epic')}: {MAGIC_OBJECTS_STATS.byRarity.epic}</div>
+          <div>{t('legendary')}: {MAGIC_OBJECTS_STATS.byRarity.legendary}</div>
+          <div>{t('temporal')}: {MAGIC_OBJECTS_STATS.byRarity.temporal}</div>
         </div>
       </div>
     </div>
