@@ -1,0 +1,405 @@
+.political-system-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.political-system-modal {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: 3px solid #FFD700;
+  border-radius: 15px;
+  width: 90vw;
+  max-width: 1200px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+  font-family: 'Cinzel', serif;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+  background: linear-gradient(135deg, rgba(139, 69, 19, 0.8) 0%, rgba(160, 82, 45, 0.8) 100%);
+}
+
+.modal-header h2 {
+  color: #FFD700;
+  margin: 0;
+  font-size: 28px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.close-button {
+  background: rgba(244, 67, 54, 0.8);
+  border: none;
+  color: white;
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.close-button:hover {
+  background: rgba(244, 67, 54, 1);
+  transform: scale(1.1);
+}
+
+.modal-content {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Réputation Panel */
+.reputation-panel {
+  background: rgba(139, 69, 19, 0.3);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.reputation-panel h3 {
+  color: #FFD700;
+  margin: 0 0 15px 0;
+  font-size: 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.reputation-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.reputation-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #FFD700;
+  font-weight: bold;
+}
+
+.reputation-item span {
+  min-width: 120px;
+  font-size: 14px;
+}
+
+.reputation-bar {
+  flex: 1;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  position: relative;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.reputation-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+.reputation-value {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Advisors Panel */
+.advisors-panel {
+  background: rgba(139, 69, 19, 0.3);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.advisors-panel h3 {
+  color: #FFD700;
+  margin: 0 0 15px 0;
+  font-size: 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.advisors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.advisor-card {
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 10px;
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.advisor-card:hover {
+  border-color: #FFD700;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+}
+
+.advisor-card.selected {
+  border-color: #FFD700;
+  background: rgba(255, 215, 0, 0.1);
+}
+
+.advisor-avatar {
+  font-size: 32px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 215, 0, 0.2);
+  border-radius: 50%;
+  border: 2px solid rgba(255, 215, 0, 0.5);
+}
+
+.advisor-info {
+  flex: 1;
+}
+
+.advisor-name {
+  color: #FFD700;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.advisor-role {
+  color: #CCC;
+  font-size: 14px;
+  margin-bottom: 5px;
+  text-transform: capitalize;
+}
+
+.advisor-opinion {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Event Panel */
+.event-panel {
+  background: rgba(139, 69, 19, 0.3);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.event-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.event-header h3 {
+  color: #FFD700;
+  margin: 0;
+  font-size: 22px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  flex: 1;
+}
+
+.event-severity {
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.event-severity.low {
+  background: rgba(76, 175, 80, 0.8);
+  color: white;
+}
+
+.event-severity.medium {
+  background: rgba(255, 193, 7, 0.8);
+  color: black;
+}
+
+.event-severity.high {
+  background: rgba(255, 152, 0, 0.8);
+  color: white;
+}
+
+.event-severity.critical {
+  background: rgba(244, 67, 54, 0.8);
+  color: white;
+}
+
+.event-timer {
+  background: rgba(0, 0, 0, 0.7);
+  color: #FFD700;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.event-description {
+  color: #CCC;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  border-left: 4px solid #FFD700;
+}
+
+/* Choices Panel */
+.choices-panel h4 {
+  color: #FFD700;
+  margin: 0 0 15px 0;
+  font-size: 18px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.choice-card {
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.choice-card:hover {
+  border-color: #FFD700;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+}
+
+.choice-card.selected {
+  border-color: #FFD700;
+  background: rgba(255, 215, 0, 0.1);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}
+
+.choice-text {
+  color: #FFD700;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.advisor-recommendations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.advisor-recommendation {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  border: 1px solid currentColor;
+}
+
+.consequences {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.consequence-item {
+  background: rgba(0, 0, 0, 0.7);
+  color: #CCC;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.confirm-button {
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+  font-family: 'Cinzel', serif;
+}
+
+.confirm-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+}
+
+.confirm-button:disabled {
+  background: rgba(128, 128, 128, 0.5);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .political-system-modal {
+    width: 95vw;
+    max-height: 95vh;
+  }
+  
+  .modal-content {
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  .advisors-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .event-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .advisor-recommendations {
+    flex-direction: column;
+  }
+  
+  .consequences {
+    flex-direction: column;
+  }
+} 
