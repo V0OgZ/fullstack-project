@@ -103,13 +103,22 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
               ✕
             </button>
             <MagicInventory
-              playerInventory={[]}
-              equippedItems={{}}
+              playerInventory={[
+                'basic_sword', 'leather_armor', 'healing_potion', 'mana_crystal',
+                'speed_boots', 'temporal_anchor', 'phoenix_feather', 'dragon_scale',
+                'magic_scroll', 'gold_coins', 'wisdom_crystal', 'power_ring'
+              ]} // Add demo items so user can see the inventory working
+              equippedItems={{
+                weapon: 'basic_sword',
+                armor: 'leather_armor',
+                boots: 'speed_boots',
+                ring: 'power_ring'
+              }} // Add some equipped items for demo
               onEquipItem={handleEquipItem}
               onUnequipItem={handleUnequipItem}
               onUseItem={handleUseItem}
-              playerGold={currentPlayer?.resources?.gold || 0}
-              playerLevel={currentPlayer?.heroes?.[0]?.level || 1}
+              playerGold={currentPlayer?.resources?.gold || 25000}
+              playerLevel={currentPlayer?.heroes?.[0]?.level || 12}
             />
           </div>
         </div>
