@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import com.example.demo.model.Building;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -10,6 +12,9 @@ public class GameService {
     // Real game storage instead of mock
     private final Map<String, Map<String, Object>> games = new ConcurrentHashMap<>();
     private final Map<String, List<Map<String, Object>>> gameActions = new ConcurrentHashMap<>();
+    
+    @Autowired
+    private BuildingService buildingService;
     
     public Map<String, Object> getGame(String gameId) {
         return games.getOrDefault(gameId, createNewGame(gameId));
@@ -104,26 +109,184 @@ public class GameService {
         return gameActions.getOrDefault(gameId, new ArrayList<>());
     }
 
-    public void endTurn(String gameId) {
-        // Real turn processing
-        processZFCActions(gameId);
-    }
-
-    public List<Map<String, Object>> getCombatResults(String gameId) {
-        // Return real combat results
-        return new ArrayList<>();
-    }
-
-    public Map<String, Object> getGameState(String gameId) {
-        return getGame(gameId);
-    }
-
-    public List<Map<String, Object>> getGameHistory(String gameId) {
-        return new ArrayList<>();
-    }
-
     // ======================
-    // REAL GAME LOGIC
+    // CASTLE MANAGEMENT
+    // ======================
+    
+    public Map<String, Object> buildStructure(String gameId, String playerId, String castleId, String buildingType, Integer positionX, Integer positionY) {
+        Map<String, Object> game = getGame(gameId);
+        Map<String, Object> player = getPlayerById(game, playerId);
+        
+        if (player == null) {
+            throw new RuntimeException("Player not found");
+        }
+        
+        // Get player resources
+        Map<String, Integer> playerResources = (Map<String, Integer>) player.get("resources");
+        
+        try {
+            // Start construction using BuildingService
+            Building building = buildingService.startConstructionWithResources(castleId, playerId, gameId, buildingType, positionX, positionY, playerResources);
+            
+            // Deduct resources from player
+            Map<String, Integer> buildingCost = getBuildingCost(building);
+            for (Map.Entry<String, Integer> entry : buildingCost.entrySet()) {
+                String resource = entry.getKey();
+                Integer cost = entry.getValue();
+                Integer currentAmount = playerResources.getOrDefault(resource, 0);
+                playerResources.put(resource, currentAmount - cost);
+            }
+            
+            // Create action for construction
+            Map<String, Object> action = new HashMap<>();
+            action.put("id", UUID.randomUUID().toString());
+            action.put("type", "build");
+            action.put("playerId", playerId);
+            action.put("castleId", castleId);
+            action.put("buildingType", buildingType);
+            action.put("buildingId", building.getBuildingId());
+            action.put("positionX", positionX);
+            action.put("positionY", positionY);
+            action.put("scheduledTime", new Date());
+            action.put("executionTime", new Date(System.currentTimeMillis() + (building.getConstructionTime() * 1000L)));
+            action.put("status", "pending");
+            action.put("constructionTime", building.getConstructionTime());
+            
+            // Add action to game
+            List<Map<String, Object>> actions = gameActions.get(gameId);
+            if (actions == null) {
+                actions = new ArrayList<>();
+                gameActions.put(gameId, actions);
+            }
+            actions.add(action);
+            
+            return action;
+        } catch (Exception e) {
+            throw new RuntimeException("Construction failed: " + e.getMessage());
+        }
+    }
+    
+    public Map<String, Object> upgradeBuilding(String gameId, String playerId, String buildingId) {
+        Map<String, Object> game = getGame(gameId);
+        Map<String, Object> player = getPlayerById(game, playerId);
+        
+        if (player == null) {
+            throw new RuntimeException("Player not found");
+        }
+        
+        // Get player resources
+        Map<String, Integer> playerResources = (Map<String, Integer>) player.get("resources");
+        
+        try {
+            // Upgrade building using BuildingService
+            Building building = buildingService.upgradeBuilding(buildingId, playerResources);
+            
+            // Create action for upgrade
+            Map<String, Object> action = new HashMap<>();
+            action.put("id", UUID.randomUUID().toString());
+            action.put("type", "upgrade");
+            action.put("playerId", playerId);
+            action.put("buildingId", buildingId);
+            action.put("newLevel", building.getLevel());
+            action.put("scheduledTime", new Date());
+            action.put("executionTime", new Date(System.currentTimeMillis() + (building.getConstructionTime() * 1000L)));
+            action.put("status", "pending");
+            action.put("constructionTime", building.getConstructionTime());
+            
+            // Add action to game
+            List<Map<String, Object>> actions = gameActions.get(gameId);
+            if (actions == null) {
+                actions = new ArrayList<>();
+                gameActions.put(gameId, actions);
+            }
+            actions.add(action);
+            
+            return action;
+        } catch (Exception e) {
+            throw new RuntimeException("Upgrade failed: " + e.getMessage());
+        }
+    }
+    
+    public Map<String, Object> recruitUnits(String gameId, String playerId, String buildingId, String unitType, Integer quantity) {
+        Map<String, Object> game = getGame(gameId);
+        Map<String, Object> player = getPlayerById(game, playerId);
+        
+        if (player == null) {
+            throw new RuntimeException("Player not found");
+        }
+        
+        try {
+            // Recruit units using BuildingService
+            Building building = buildingService.recruitUnits(buildingId, unitType, quantity);
+            
+            // Add units to player's army
+            List<Map<String, Object>> heroes = (List<Map<String, Object>>) player.get("heroes");
+            if (!heroes.isEmpty()) {
+                Map<String, Object> hero = heroes.get(0); // Add to first hero for now
+                List<Map<String, Object>> units = (List<Map<String, Object>>) hero.get("units");
+                if (units == null) {
+                    units = new ArrayList<>();
+                    hero.put("units", units);
+                }
+                
+                // Find existing unit or create new one
+                Map<String, Object> unitStack = units.stream()
+                        .filter(u -> unitType.equals(u.get("type")))
+                        .findFirst()
+                        .orElse(null);
+                
+                if (unitStack == null) {
+                    unitStack = new HashMap<>();
+                    unitStack.put("type", unitType);
+                    unitStack.put("quantity", quantity);
+                    units.add(unitStack);
+                } else {
+                    Integer currentQuantity = (Integer) unitStack.get("quantity");
+                    unitStack.put("quantity", currentQuantity + quantity);
+                }
+            }
+            
+            // Create recruitment action
+            Map<String, Object> action = new HashMap<>();
+            action.put("id", UUID.randomUUID().toString());
+            action.put("type", "recruit");
+            action.put("playerId", playerId);
+            action.put("buildingId", buildingId);
+            action.put("unitType", unitType);
+            action.put("quantity", quantity);
+            action.put("scheduledTime", new Date());
+            action.put("executionTime", new Date());
+            action.put("status", "completed");
+            
+            return action;
+        } catch (Exception e) {
+            throw new RuntimeException("Recruitment failed: " + e.getMessage());
+        }
+    }
+    
+    public List<Building> getCastleBuildings(String gameId, String playerId) {
+        // Get player's castle ID (for now, use playerId as castleId)
+        String castleId = "castle_" + playerId;
+        return buildingService.getBuildingsByCastle(castleId);
+    }
+    
+    public Map<String, Integer> getCastleBonuses(String gameId, String playerId) {
+        String castleId = "castle_" + playerId;
+        return buildingService.getCastleBonuses(castleId);
+    }
+    
+    public Map<String, Integer> getAvailableUnitsForRecruitment(String gameId, String playerId) {
+        String castleId = "castle_" + playerId;
+        return buildingService.getAvailableUnitsForRecruitment(castleId);
+    }
+    
+    public List<String> getAvailableSpells(String gameId, String playerId) {
+        String castleId = "castle_" + playerId;
+        return buildingService.getAvailableSpells(castleId);
+    }
+    
+    // ======================
+    // ENHANCED GAME CREATION
     // ======================
     
     private Map<String, Object> createNewGame(String gameId) {
@@ -134,14 +297,14 @@ public class GameService {
         game.put("turnStartTime", new Date());
         game.put("turnDuration", 30);
         game.put("status", "active");
-        game.put("scenario", "conquest-classique"); // ou conquest-mystique
+        game.put("scenario", "conquest-classique");
 
         // Real hexagonal map
         Map<String, Object> map = createHexagonalMap();
         game.put("map", map);
 
-        // Real players with resources
-        List<Map<String, Object>> players = createPlayers();
+        // Real players with resources and castles
+        List<Map<String, Object>> players = createPlayersWithCastles(gameId);
         game.put("players", players);
         
         game.put("currentPlayer", players.get(0));
@@ -149,104 +312,138 @@ public class GameService {
         
         return game;
     }
-
-    private Map<String, Object> createHexagonalMap() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("id", "hex-map-1");
-        map.put("type", "hexagonal");
-        map.put("width", 20);
-        map.put("height", 20);
-        
-        List<Map<String, Object>> tiles = new ArrayList<>();
-        for (int y = 0; y < 20; y++) {
-            for (int x = 0; x < 20; x++) {
-                Map<String, Object> tile = new HashMap<>();
-                tile.put("x", x);
-                tile.put("y", y);
-                tile.put("type", getRandomTerrain());
-                tile.put("walkable", true);
-                tile.put("movementCost", getTerrainMovementCost(tile.get("type")));
-                tiles.add(tile);
-            }
-        }
-        map.put("tiles", tiles);
-        
-        // Add real objects
-        List<Map<String, Object>> objects = createMapObjects();
-        map.put("objects", objects);
-        
-        return map;
-    }
-
-    private List<Map<String, Object>> createPlayers() {
+    
+    private List<Map<String, Object>> createPlayersWithCastles(String gameId) {
         List<Map<String, Object>> players = new ArrayList<>();
         
-        // Player 1
+        // Player 1 with castle
         Map<String, Object> player1 = new HashMap<>();
         player1.put("id", "player1");
         player1.put("username", "Joueur 1");
         player1.put("color", "#3b82f6");
         player1.put("isActive", true);
         player1.put("resources", Map.of(
-            "gold", 1000,
-            "wood", 200,
-            "stone", 100,
-            "ore", 50,
-            "crystal", 10,
-            "gems", 5,
-            "sulfur", 8
+            "gold", 10000,
+            "wood", 500,
+            "stone", 300,
+            "ore", 200,
+            "crystal", 50,
+            "gems", 30,
+            "sulfur", 40
         ));
         
-        // Heroes with real stats
+        // Create starting castle
+        String castleId = "castle_player1";
+        player1.put("castleId", castleId);
+        List<Building> castleBuildings = buildingService.createStartingCastle(castleId, "player1", gameId, "castle");
+        player1.put("buildings", castleBuildings);
+        
+        // Heroes with castle position
         List<Map<String, Object>> heroes1 = new ArrayList<>();
         Map<String, Object> hero1 = createHero("hero-1", "Arthur", "Knight", 2, 2, "player1");
         heroes1.add(hero1);
         player1.put("heroes", heroes1);
         
         players.add(player1);
+        
+        // Player 2 with castle
+        Map<String, Object> player2 = new HashMap<>();
+        player2.put("id", "player2");
+        player2.put("username", "Joueur 2");
+        player2.put("color", "#ef4444");
+        player2.put("isActive", false);
+        player2.put("resources", Map.of(
+            "gold", 10000,
+            "wood", 500,
+            "stone", 300,
+            "ore", 200,
+            "crystal", 50,
+            "gems", 30,
+            "sulfur", 40
+        ));
+        
+        // Create starting castle
+        String castleId2 = "castle_player2";
+        player2.put("castleId", castleId2);
+        List<Building> castleBuildings2 = buildingService.createStartingCastle(castleId2, "player2", gameId, "castle");
+        player2.put("buildings", castleBuildings2);
+        
+        // Heroes with castle position
+        List<Map<String, Object>> heroes2 = new ArrayList<>();
+        Map<String, Object> hero2 = createHero("hero-2", "Morgana", "Sorceress", 18, 18, "player2");
+        heroes2.add(hero2);
+        player2.put("heroes", heroes2);
+        
+        players.add(player2);
+        
         return players;
     }
-
-    private Map<String, Object> createHero(String id, String name, String heroClass, int x, int y, String playerId) {
-        Map<String, Object> hero = new HashMap<>();
-        hero.put("id", id);
-        hero.put("name", name);
-        hero.put("class", heroClass);
-        hero.put("position", Map.of("x", x, "y", y));
-        hero.put("level", 1);
-        hero.put("experience", 0);
-        hero.put("movementPoints", 3);
-        hero.put("maxMovementPoints", 3);
-        hero.put("stats", Map.of(
-            "attack", 5,
-            "defense", 3,
-            "knowledge", 2,
-            "spellPower", 1
-        ));
-        hero.put("playerId", playerId);
-        hero.put("units", new ArrayList<>());
-        hero.put("inventory", new ArrayList<>());
-        return hero;
-    }
-
-    private List<Map<String, Object>> createMapObjects() {
-        List<Map<String, Object>> objects = new ArrayList<>();
+    
+    // ======================
+    // ENHANCED TURN PROCESSING
+    // ======================
+    
+    public void endTurn(String gameId) {
+        // Process ZFC actions
+        processZFCActions(gameId);
         
-        // Treasure chests
-        for (int i = 0; i < 10; i++) {
-            Map<String, Object> chest = new HashMap<>();
-            chest.put("id", "chest-" + i);
-            chest.put("x", (int)(Math.random() * 20));
-            chest.put("y", (int)(Math.random() * 20));
-            chest.put("type", "treasure");
-            chest.put("content", Map.of(
-                "gold", (int)(Math.random() * 500) + 100,
-                "gems", (int)(Math.random() * 3) + 1
-            ));
-            objects.add(chest);
+        // Complete ready buildings
+        buildingService.checkAndCompleteReadyBuildings(gameId);
+        
+        // Apply daily bonuses from buildings
+        applyDailyBonuses(gameId);
+        
+        // Reset weekly growth if it's a new week
+        if (isNewWeek(gameId)) {
+            buildingService.resetWeeklyGrowth(gameId);
         }
+    }
+    
+    private void applyDailyBonuses(String gameId) {
+        Map<String, Object> game = getGame(gameId);
+        List<Map<String, Object>> players = (List<Map<String, Object>>) game.get("players");
         
-        return objects;
+        for (Map<String, Object> player : players) {
+            String playerId = (String) player.get("id");
+            Map<String, Integer> bonuses = getCastleBonuses(gameId, playerId);
+            Map<String, Integer> resources = (Map<String, Integer>) player.get("resources");
+            
+            // Apply bonuses
+            resources.merge("gold", bonuses.getOrDefault("gold", 0), Integer::sum);
+            // Apply other resource bonuses here
+        }
+    }
+    
+    private boolean isNewWeek(String gameId) {
+        Map<String, Object> game = getGame(gameId);
+        Integer currentTurn = (Integer) game.get("currentTurn");
+        return currentTurn % 7 == 0; // Reset every 7 turns
+    }
+    
+    // ======================
+    // UTILITY METHODS
+    // ======================
+    
+    private Map<String, Object> getPlayerById(Map<String, Object> game, String playerId) {
+        List<Map<String, Object>> players = (List<Map<String, Object>>) game.get("players");
+        return players.stream()
+                .filter(p -> playerId.equals(p.get("id")))
+                .findFirst()
+                .orElse(null);
+    }
+    
+    private Map<String, Integer> getBuildingCost(Building building) {
+        Map<String, Integer> cost = new HashMap<>();
+        
+        if (building.getGoldCost() != null) cost.put("gold", building.getGoldCost());
+        if (building.getWoodCost() != null) cost.put("wood", building.getWoodCost());
+        if (building.getStoneCost() != null) cost.put("stone", building.getStoneCost());
+        if (building.getOreCost() != null) cost.put("ore", building.getOreCost());
+        if (building.getCrystalCost() != null) cost.put("crystal", building.getCrystalCost());
+        if (building.getGemsCost() != null) cost.put("gems", building.getGemsCost());
+        if (building.getSulfurCost() != null) cost.put("sulfur", building.getSulfurCost());
+        
+        return cost;
     }
 
     // ======================
@@ -491,5 +688,111 @@ public class GameService {
             case "swamp": return 3;
             default: return 1;
         }
+    }
+    
+    private Map<String, Object> createHexagonalMap() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", "hex-map-1");
+        map.put("type", "hexagonal");
+        map.put("width", 20);
+        map.put("height", 20);
+        
+        List<Map<String, Object>> tiles = new ArrayList<>();
+        for (int y = 0; y < 20; y++) {
+            for (int x = 0; x < 20; x++) {
+                Map<String, Object> tile = new HashMap<>();
+                tile.put("x", x);
+                tile.put("y", y);
+                tile.put("type", getRandomTerrain());
+                tile.put("walkable", true);
+                tile.put("movementCost", getTerrainMovementCost(tile.get("type")));
+                tiles.add(tile);
+            }
+        }
+        map.put("tiles", tiles);
+        
+        // Add real objects
+        List<Map<String, Object>> objects = createMapObjects();
+        map.put("objects", objects);
+        
+        return map;
+    }
+    
+    private Map<String, Object> createHero(String id, String name, String heroClass, int x, int y, String playerId) {
+        Map<String, Object> hero = new HashMap<>();
+        hero.put("id", id);
+        hero.put("name", name);
+        hero.put("class", heroClass);
+        hero.put("position", Map.of("x", x, "y", y));
+        hero.put("level", 1);
+        hero.put("experience", 0);
+        hero.put("movementPoints", 3);
+        hero.put("maxMovementPoints", 3);
+        hero.put("stats", Map.of(
+            "attack", 5,
+            "defense", 3,
+            "knowledge", 2,
+            "spellPower", 1
+        ));
+        hero.put("playerId", playerId);
+        hero.put("units", new ArrayList<>());
+        hero.put("inventory", new ArrayList<>());
+        return hero;
+    }
+    
+    private List<Map<String, Object>> createMapObjects() {
+        List<Map<String, Object>> objects = new ArrayList<>();
+        
+        // Treasure chests
+        for (int i = 0; i < 10; i++) {
+            Map<String, Object> chest = new HashMap<>();
+            chest.put("id", "chest-" + i);
+            chest.put("x", (int)(Math.random() * 20));
+            chest.put("y", (int)(Math.random() * 20));
+            chest.put("type", "treasure");
+            chest.put("content", Map.of(
+                "gold", (int)(Math.random() * 500) + 100,
+                "gems", (int)(Math.random() * 3) + 1
+            ));
+            objects.add(chest);
+        }
+        
+        // Player castles
+        Map<String, Object> castle1 = new HashMap<>();
+        castle1.put("id", "castle_player1");
+        castle1.put("x", 2);
+        castle1.put("y", 2);
+        castle1.put("type", "castle");
+        castle1.put("owner", "player1");
+        castle1.put("castleType", "castle");
+        objects.add(castle1);
+        
+        Map<String, Object> castle2 = new HashMap<>();
+        castle2.put("id", "castle_player2");
+        castle2.put("x", 18);
+        castle2.put("y", 18);
+        castle2.put("type", "castle");
+        castle2.put("owner", "player2");
+        castle2.put("castleType", "castle");
+        objects.add(castle2);
+        
+        return objects;
+    }
+    
+    // ======================
+    // ADDITIONAL MISSING METHODS
+    // ======================
+    
+    public List<Map<String, Object>> getCombatResults(String gameId) {
+        // Return real combat results
+        return new ArrayList<>();
+    }
+    
+    public Map<String, Object> getGameState(String gameId) {
+        return getGame(gameId);
+    }
+    
+    public List<Map<String, Object>> getGameHistory(String gameId) {
+        return new ArrayList<>();
     }
 } 
