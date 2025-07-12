@@ -1,340 +1,487 @@
+// 🏛️ Heroes of Time - Phase 4: Complete Perestroika Political System Interface
+// Revolutionary political simulation with 4 specialized advisors and dynamic crisis events
+
 import React, { useState, useEffect } from 'react';
-import { useGameStore } from '../store/useGameStore';
-import { PoliticalAdvisor, PoliticalEvent, PoliticalChoice, Reputation } from '../types/game';
+import { 
+  Advisor, 
+  CrisisEvent, 
+  CrisisDecision, 
+  ReputationSystem, 
+  PoliticalSystemState,
+  ADVISORS,
+  ALL_CRISIS_EVENTS,
+  MILITARY_CRISES,
+  ECONOMIC_CRISES,
+  DIPLOMATIC_CRISES,
+  SCIENTIFIC_CRISES
+} from '../types/political';
 import './PoliticalSystem.css';
 
 interface PoliticalSystemProps {
-  isVisible: boolean;
-  onClose: () => void;
+  gameState: any;
+  onDecisionMade: (crisisId: string, decisionId: string) => void;
 }
 
-const PoliticalSystem: React.FC<PoliticalSystemProps> = ({ isVisible, onClose }) => {
-  const { 
-    currentPlayer
-  } = useGameStore();
-
-  const [selectedChoice, setSelectedChoice] = useState<string | null>(null);
-  const [showAdvisorDetails, setShowAdvisorDetails] = useState<string | null>(null);
-
-  // Données de démonstration pour les conseillers
-  const demoAdvisors: PoliticalAdvisor[] = [
-    {
-      id: 'military_advisor',
-      name: 'Général Volkov',
-      role: 'military',
-      opinion: 75,
-      influence: 85,
-      personality: 'aggressive',
-      avatar: '🎖️'
+const PoliticalSystem: React.FC<PoliticalSystemProps> = ({ gameState, onDecisionMade }) => {
+  const [politicalState, setPoliticalState] = useState<PoliticalSystemState>({
+    advisors: ADVISORS.map(advisor => ({
+      ...advisor,
+      relationships: {
+        'general_volkov': 0,
+        'dr_petrova': 0,
+        'ambassador_kozlov': 0,
+        'prof_ivanova': 0
+      }
+    })),
+    currentCrisis: null,
+    crisisHistory: [],
+    reputation: {
+      international: 50,
+      domestic: 50,
+      military: 50,
+      economic: 50,
+      diplomatic: 50,
+      scientific: 50
     },
-    {
-      id: 'economic_advisor',
-      name: 'Dr. Petrov',
-      role: 'economic',
-      opinion: -20,
-      influence: 70,
-      personality: 'cautious',
-      avatar: '📊'
-    },
-    {
-      id: 'diplomatic_advisor',
-      name: 'Ambassadeur Kozlov',
-      role: 'diplomatic',
-      opinion: 45,
-      influence: 60,
-      personality: 'opportunistic',
-      avatar: '🤝'
-    },
-    {
-      id: 'scientific_advisor',
-      name: 'Prof. Ivanova',
-      role: 'scientific',
-      opinion: 10,
-      influence: 55,
-      personality: 'idealistic',
-      avatar: '🔬'
-    }
-  ];
+    reputationHistory: [],
+    advisorInfluenceHistory: {},
+    decisionHistory: [],
+    turnsUntilNextCrisis: 3,
+    crisisQueue: []
+  });
 
-  // Événement politique de démonstration
-  const demoEvent: PoliticalEvent = {
-    id: 'border_crisis',
-    type: 'crisis',
-    title: 'Crise Frontalière',
-    description: 'Des tensions montent à la frontière nord. Les forces ennemies se massent près de nos territoires. Nos espions rapportent une possible invasion imminente. Comment réagissons-nous ?',
-    choices: [
-      {
-        id: 'military_response',
-        text: 'Mobiliser nos forces et préparer une réponse militaire',
-        consequences: {
-          reputation: -10,
-          resources: { gold: -500, mana: -100 },
-          advisorOpinions: { 'military_advisor': 30, 'diplomatic_advisor': -20 },
-          futureEvents: ['military_escalation']
-        },
-        advisorRecommendations: {
-          'military_advisor': 'strongly_support',
-          'economic_advisor': 'oppose',
-          'diplomatic_advisor': 'strongly_oppose',
-          'scientific_advisor': 'neutral'
+  const [selectedAdvisor, setSelectedAdvisor] = useState<Advisor | null>(null);
+  const [showCrisisModal, setShowCrisisModal] = useState(false);
+  const [selectedDecision, setSelectedDecision] = useState<CrisisDecision | null>(null);
+
+  // Initialize advisor relationships
+  useEffect(() => {
+    const initializeRelationships = () => {
+      const updatedAdvisors = politicalState.advisors.map(advisor => ({
+        ...advisor,
+        relationships: {
+          'general_volkov': advisor.id === 'general_volkov' ? 0 : 
+            advisor.id === 'dr_petrova' ? -20 : 
+            advisor.id === 'ambassador_kozlov' ? 10 : -10,
+          'dr_petrova': advisor.id === 'dr_petrova' ? 0 :
+            advisor.id === 'general_volkov' ? -20 :
+            advisor.id === 'ambassador_kozlov' ? 30 : 40,
+          'ambassador_kozlov': advisor.id === 'ambassador_kozlov' ? 0 :
+            advisor.id === 'general_volkov' ? 10 :
+            advisor.id === 'dr_petrova' ? 30 : 20,
+          'prof_ivanova': advisor.id === 'prof_ivanova' ? 0 :
+            advisor.id === 'general_volkov' ? -10 :
+            advisor.id === 'dr_petrova' ? 40 : 20
         }
-      },
-      {
-        id: 'diplomatic_solution',
-        text: 'Envoyer des diplomates pour négocier',
-        consequences: {
-          reputation: 15,
-          resources: { gold: -200 },
-          advisorOpinions: { 'diplomatic_advisor': 25, 'military_advisor': -15 },
-          futureEvents: ['diplomatic_summit']
-        },
-        advisorRecommendations: {
-          'military_advisor': 'oppose',
-          'economic_advisor': 'support',
-          'diplomatic_advisor': 'strongly_support',
-          'scientific_advisor': 'support'
-        }
-      },
-      {
-        id: 'economic_pressure',
-        text: 'Imposer des sanctions économiques',
-        consequences: {
-          reputation: 5,
-          resources: { gold: -300, wood: -100 },
-          advisorOpinions: { 'economic_advisor': 20, 'military_advisor': -10 },
-          futureEvents: ['trade_war']
-        },
-        advisorRecommendations: {
-          'military_advisor': 'neutral',
-          'economic_advisor': 'strongly_support',
-          'diplomatic_advisor': 'support',
-          'scientific_advisor': 'neutral'
-        }
-      },
-      {
-        id: 'scientific_approach',
-        text: 'Développer de nouvelles technologies défensives',
-        consequences: {
-          reputation: 8,
-          resources: { gold: -400, mana: -200 },
-          advisorOpinions: { 'scientific_advisor': 35, 'military_advisor': 10 },
-          futureEvents: ['tech_breakthrough']
-        },
-        advisorRecommendations: {
-          'military_advisor': 'support',
-          'economic_advisor': 'neutral',
-          'diplomatic_advisor': 'neutral',
-          'scientific_advisor': 'strongly_support'
+      }));
+      
+      setPoliticalState(prev => ({
+        ...prev,
+        advisors: updatedAdvisors
+      }));
+    };
+
+    initializeRelationships();
+  }, []);
+
+  // Generate crisis events
+  useEffect(() => {
+    const generateCrisis = () => {
+      if (politicalState.turnsUntilNextCrisis <= 0 && !politicalState.currentCrisis) {
+        const availableCrises = ALL_CRISIS_EVENTS.filter(crisis => 
+          !politicalState.crisisHistory.some(resolved => resolved.id === crisis.id)
+        );
+        
+        if (availableCrises.length > 0) {
+          const randomCrisis = availableCrises[Math.floor(Math.random() * availableCrises.length)];
+          setPoliticalState(prev => ({
+            ...prev,
+            currentCrisis: randomCrisis,
+            turnsUntilNextCrisis: Math.floor(Math.random() * 5) + 3
+          }));
+          setShowCrisisModal(true);
         }
       }
-    ],
-    deadline: new Date(Date.now() + 3 * 60 * 1000).toISOString(), // 3 minutes
-    severity: 'high',
-    consequences: ['La décision affectera nos relations internationales', 'Impact sur l\'économie à long terme']
-  };
+    };
 
-  const demoReputation: Reputation = {
-    international: 45,
-    domestic: 60,
-    military: 75,
-    economic: 30,
-    diplomatic: 55
-  };
+    generateCrisis();
+  }, [politicalState.turnsUntilNextCrisis, politicalState.currentCrisis]);
 
-  const getAdvisorRecommendationColor = (recommendation: string) => {
-    switch (recommendation) {
-      case 'strongly_support': return '#4CAF50';
-      case 'support': return '#8BC34A';
-      case 'neutral': return '#FFC107';
-      case 'oppose': return '#FF9800';
-      case 'strongly_oppose': return '#F44336';
-      default: return '#9E9E9E';
-    }
-  };
+  const handleDecisionMade = (decisionId: string) => {
+    if (!politicalState.currentCrisis) return;
 
-  const getAdvisorRecommendationText = (recommendation: string) => {
-    switch (recommendation) {
-      case 'strongly_support': return 'Fortement Favorable';
-      case 'support': return 'Favorable';
-      case 'neutral': return 'Neutre';
-      case 'oppose': return 'Défavorable';
-      case 'strongly_oppose': return 'Fortement Défavorable';
-      default: return 'Inconnu';
-    }
-  };
+    const decision = politicalState.currentCrisis.decisions.find(d => d.id === decisionId);
+    if (!decision) return;
 
-  const handleChoiceSelection = (choiceId: string) => {
-    setSelectedChoice(choiceId);
-  };
-
-  const handleConfirmChoice = () => {
-    if (selectedChoice && demoEvent) {
-      const choice = demoEvent.choices.find(c => c.id === selectedChoice);
-      if (choice) {
-        // Appliquer les conséquences (simulation)
-        console.log('Choix politique:', selectedChoice);
-        onClose();
+    // Apply decision effects
+    const updatedReputation = { ...politicalState.reputation };
+    decision.immediateEffects.forEach(effect => {
+      if (effect.type === 'reputation' && Math.random() < effect.probability) {
+        updatedReputation[effect.target as keyof ReputationSystem] += effect.value;
       }
+    });
+
+    // Update advisor moods based on their support
+    const updatedAdvisors = politicalState.advisors.map(advisor => {
+      const support = politicalState.currentCrisis!.decisions.find(d => d.id === decisionId)?.advisorSupport[advisor.id] || 0;
+      const moodChange = support > 50 ? 'pleased' : support < -50 ? 'angry' : 'neutral';
+      
+      return {
+        ...advisor,
+        mood: {
+          ...advisor.mood,
+          current: moodChange as any,
+          factors: [`Decision: ${decision.title}`]
+        }
+      };
+    });
+
+    setPoliticalState(prev => ({
+      ...prev,
+      currentCrisis: null,
+      crisisHistory: [...prev.crisisHistory, prev.currentCrisis!],
+      reputation: updatedReputation,
+      advisors: updatedAdvisors,
+      decisionHistory: [...prev.decisionHistory, {
+        crisisId: prev.currentCrisis!.id,
+        decisionId,
+        outcome: decision.title
+      }]
+    }));
+
+    setShowCrisisModal(false);
+    setSelectedDecision(null);
+    onDecisionMade(politicalState.currentCrisis.id, decisionId);
+  };
+
+  const getMoodColor = (mood: string) => {
+    switch (mood) {
+      case 'pleased': return '#2ECC71';
+      case 'neutral': return '#95A5A6';
+      case 'concerned': return '#F39C12';
+      case 'angry': return '#E74C3C';
+      case 'furious': return '#8E44AD';
+      default: return '#95A5A6';
     }
   };
 
-  const formatTimeRemaining = (deadline: string) => {
-    const now = new Date();
-    const end = new Date(deadline);
-    const diff = end.getTime() - now.getTime();
-    
-    if (diff <= 0) return 'Expiré';
-    
-    const minutes = Math.floor(diff / 60000);
-    const seconds = Math.floor((diff % 60000) / 1000);
-    
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  const getInfluenceBarColor = (influence: number) => {
+    if (influence >= 80) return '#E74C3C';
+    if (influence >= 60) return '#F39C12';
+    if (influence >= 40) return '#F1C40F';
+    return '#95A5A6';
   };
 
-  // Utiliser les données de démonstration
-  const advisors = demoAdvisors;
-  const event = demoEvent;
-  const rep = demoReputation;
+  const getSeverityColor = (severity: string) => {
+    switch (severity) {
+      case 'minor': return '#3498DB';
+      case 'moderate': return '#F39C12';
+      case 'major': return '#E74C3C';
+      case 'catastrophic': return '#8E44AD';
+      default: return '#95A5A6';
+    }
+  };
 
-  if (!isVisible) return null;
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
+      case 'military': return '🎖️';
+      case 'economic': return '💰';
+      case 'diplomatic': return '🤝';
+      case 'scientific': return '🔬';
+      default: return '⚡';
+    }
+  };
 
   return (
-    <div className="political-system-overlay">
-      <div className="political-system-modal">
-        <div className="modal-header">
-          <h2>🏛️ Conseil Politique</h2>
-          <button className="close-button" onClick={onClose}>✕</button>
+    <div className="political-system">
+      <div className="political-header">
+        <h2>🏛️ Political Council - Perestroika System</h2>
+        <div className="crisis-countdown">
+          <span>Next Crisis: {politicalState.turnsUntilNextCrisis} turns</span>
         </div>
+      </div>
 
-        <div className="modal-content">
-          {/* Réputation actuelle */}
-          <div className="reputation-panel">
-            <h3>📊 Réputation</h3>
-            <div className="reputation-bars">
-              <div className="reputation-item">
-                <span>International:</span>
-                <div className="reputation-bar">
-                  <div 
-                    className="reputation-fill" 
-                    style={{ 
-                      width: `${Math.max(0, rep.international + 100) / 2}%`,
-                      backgroundColor: rep.international > 0 ? '#4CAF50' : '#F44336'
-                    }}
-                  />
-                  <span className="reputation-value">{rep.international}</span>
-                </div>
-              </div>
-              <div className="reputation-item">
-                <span>Domestique:</span>
-                <div className="reputation-bar">
-                  <div 
-                    className="reputation-fill" 
-                    style={{ 
-                      width: `${Math.max(0, rep.domestic + 100) / 2}%`,
-                      backgroundColor: rep.domestic > 0 ? '#4CAF50' : '#F44336'
-                    }}
-                  />
-                  <span className="reputation-value">{rep.domestic}</span>
-                </div>
+      {/* Reputation Display */}
+      <div className="reputation-panel">
+        <h3>📊 National Reputation</h3>
+        <div className="reputation-bars">
+          {Object.entries(politicalState.reputation).map(([type, value]) => (
+            <div key={type} className="reputation-bar">
+              <label>{type.charAt(0).toUpperCase() + type.slice(1)}</label>
+              <div className="bar-container">
+                <div 
+                  className="bar-fill"
+                  style={{ 
+                    width: `${Math.max(0, (value + 100) / 2)}%`,
+                    backgroundColor: value > 0 ? '#2ECC71' : '#E74C3C'
+                  }}
+                />
+                <span className="bar-value">{value}</span>
               </div>
             </div>
-          </div>
+          ))}
+        </div>
+      </div>
 
-          {/* Conseillers */}
-          <div className="advisors-panel">
-            <h3>👥 Conseillers</h3>
-            <div className="advisors-grid">
-              {advisors.map(advisor => (
+      {/* Advisors Panel */}
+      <div className="advisors-panel">
+        <h3>👥 The Inner Circle</h3>
+        <div className="advisors-grid">
+          {politicalState.advisors.map(advisor => (
+            <div 
+              key={advisor.id}
+              className={`advisor-card ${selectedAdvisor?.id === advisor.id ? 'selected' : ''}`}
+              onClick={() => setSelectedAdvisor(selectedAdvisor?.id === advisor.id ? null : advisor)}
+            >
+              <div className="advisor-portrait">
+                <div className="advisor-avatar">{advisor.name.split(' ')[0][0]}</div>
                 <div 
-                  key={advisor.id} 
-                  className={`advisor-card ${showAdvisorDetails === advisor.id ? 'selected' : ''}`}
-                  onClick={() => setShowAdvisorDetails(showAdvisorDetails === advisor.id ? null : advisor.id)}
-                >
-                  <div className="advisor-avatar">{advisor.avatar}</div>
-                  <div className="advisor-info">
-                    <div className="advisor-name">{advisor.name}</div>
-                    <div className="advisor-role">{advisor.role}</div>
-                    <div className="advisor-opinion" style={{ 
-                      color: advisor.opinion > 0 ? '#4CAF50' : advisor.opinion < 0 ? '#F44336' : '#FFC107'
-                    }}>
-                      Opinion: {advisor.opinion > 0 ? '+' : ''}{advisor.opinion}
-                    </div>
+                  className="advisor-mood"
+                  style={{ backgroundColor: getMoodColor(advisor.mood.current) }}
+                  title={`Mood: ${advisor.mood.current}`}
+                />
+              </div>
+              
+              <div className="advisor-info">
+                <h4>{advisor.name}</h4>
+                <p className="advisor-role">{advisor.type.charAt(0).toUpperCase() + advisor.type.slice(1)} Advisor</p>
+                
+                <div className="advisor-influence">
+                  <span>Influence: {advisor.influence}%</span>
+                  <div className="influence-bar">
+                    <div 
+                      className="influence-fill"
+                      style={{ 
+                        width: `${advisor.influence}%`,
+                        backgroundColor: getInfluenceBarColor(advisor.influence)
+                      }}
+                    />
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Événement politique actuel */}
-          <div className="event-panel">
-            <div className="event-header">
-              <h3>⚡ {event.title}</h3>
-              <div className={`event-severity ${event.severity}`}>
-                {event.severity.toUpperCase()}
+                
+                <div className="advisor-personality">
+                  <span>Aggression: {advisor.personality.aggression}</span>
+                  <span>Caution: {advisor.personality.caution}</span>
+                  <span>Loyalty: {advisor.personality.loyalty}</span>
+                </div>
               </div>
-              <div className="event-timer">
-                ⏱️ {formatTimeRemaining(event.deadline)}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Selected Advisor Details */}
+      {selectedAdvisor && (
+        <div className="advisor-details">
+          <h3>📋 {selectedAdvisor.name} - Detailed Profile</h3>
+          <div className="advisor-detail-content">
+            <div className="advisor-biography">
+              <h4>Biography</h4>
+              <p>{selectedAdvisor.biography}</p>
+            </div>
+            
+            <div className="advisor-expertise">
+              <h4>Expertise</h4>
+              <div className="expertise-tags">
+                {selectedAdvisor.expertise.map(skill => (
+                  <span key={skill} className="expertise-tag">{skill}</span>
+                ))}
               </div>
             </div>
             
-            <div className="event-description">
-              {event.description}
-            </div>
-
-            {/* Choix disponibles */}
-            <div className="choices-panel">
-              <h4>Choix disponibles:</h4>
-              {event.choices.map(choice => (
-                <div 
-                  key={choice.id} 
-                  className={`choice-card ${selectedChoice === choice.id ? 'selected' : ''}`}
-                  onClick={() => handleChoiceSelection(choice.id)}
-                >
-                  <div className="choice-text">{choice.text}</div>
+            <div className="advisor-relationships">
+              <h4>Relationships with Other Advisors</h4>
+              <div className="relationships-grid">
+                {Object.entries(selectedAdvisor.relationships).map(([advisorId, relationship]) => {
+                  const otherAdvisor = politicalState.advisors.find(a => a.id === advisorId);
+                  if (!otherAdvisor || advisorId === selectedAdvisor.id) return null;
                   
-                  {/* Recommandations des conseillers */}
-                  <div className="advisor-recommendations">
-                    {advisors.map(advisor => (
-                      <div 
-                        key={advisor.id} 
-                        className="advisor-recommendation"
-                        style={{ 
-                          color: getAdvisorRecommendationColor(choice.advisorRecommendations[advisor.id])
-                        }}
-                      >
-                        {advisor.avatar} {getAdvisorRecommendationText(choice.advisorRecommendations[advisor.id])}
+                  return (
+                    <div key={advisorId} className="relationship-item">
+                      <span>{otherAdvisor.name.split(' ')[0]}</span>
+                      <div className="relationship-bar">
+                        <div 
+                          className="relationship-fill"
+                          style={{ 
+                            width: `${(relationship + 100) / 2}%`,
+                            backgroundColor: relationship > 0 ? '#2ECC71' : '#E74C3C'
+                          }}
+                        />
                       </div>
-                    ))}
-                  </div>
-
-                  {/* Conséquences prévues */}
-                  <div className="consequences">
-                    <div className="consequence-item">
-                      📈 Réputation: {choice.consequences.reputation > 0 ? '+' : ''}{choice.consequences.reputation}
+                      <span>{relationship > 0 ? '+' : ''}{relationship}</span>
                     </div>
-                    {Object.entries(choice.consequences.resources).map(([resource, amount]) => (
-                      <div key={resource} className="consequence-item">
-                        💰 {resource}: {amount && amount > 0 ? '+' : ''}{amount}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
+                  );
+                })}
+              </div>
             </div>
+          </div>
+        </div>
+      )}
 
-            {/* Bouton de confirmation */}
-            <div className="action-buttons">
-              <button 
-                className="confirm-button"
-                onClick={handleConfirmChoice}
-                disabled={!selectedChoice}
+      {/* Crisis History */}
+      <div className="crisis-history">
+        <h3>📜 Crisis History</h3>
+        <div className="crisis-timeline">
+          {politicalState.crisisHistory.length === 0 ? (
+            <p>No crises resolved yet.</p>
+          ) : (
+            politicalState.crisisHistory.map((crisis, index) => (
+              <div key={crisis.id} className="crisis-history-item">
+                <div className="crisis-icon">{getCategoryIcon(crisis.category)}</div>
+                <div className="crisis-summary">
+                  <h4>{crisis.title}</h4>
+                  <p className="crisis-category">{crisis.category} crisis</p>
+                  <span className={`crisis-severity ${crisis.severity}`}>
+                    {crisis.severity}
+                  </span>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+
+      {/* Current Crisis Modal */}
+      {showCrisisModal && politicalState.currentCrisis && (
+        <div className="crisis-modal-overlay">
+          <div className="crisis-modal">
+            <div className="crisis-header">
+              <h2>
+                {getCategoryIcon(politicalState.currentCrisis.category)} {politicalState.currentCrisis.title}
+              </h2>
+              <span 
+                className={`crisis-severity ${politicalState.currentCrisis.severity}`}
+                style={{ color: getSeverityColor(politicalState.currentCrisis.severity) }}
               >
-                Confirmer la Décision
+                {politicalState.currentCrisis.severity.toUpperCase()}
+              </span>
+            </div>
+            
+            <div className="crisis-content">
+              <div className="crisis-description">
+                <p>{politicalState.currentCrisis.description}</p>
+                <div className="crisis-background">
+                  <h4>Background Information</h4>
+                  <p>{politicalState.currentCrisis.backgroundInfo}</p>
+                </div>
+              </div>
+              
+              <div className="crisis-decisions">
+                <h3>Decision Options</h3>
+                <div className="decisions-grid">
+                  {politicalState.currentCrisis.decisions.map(decision => (
+                    <div 
+                      key={decision.id}
+                      className={`decision-card ${selectedDecision?.id === decision.id ? 'selected' : ''}`}
+                      onClick={() => setSelectedDecision(decision)}
+                    >
+                      <h4>{decision.title}</h4>
+                      <p>{decision.description}</p>
+                      
+                      <div className="decision-risk">
+                        <span className={`risk-level ${decision.riskLevel}`}>
+                          Risk: {decision.riskLevel}
+                        </span>
+                        <span className="success-chance">
+                          Success: {Math.round(decision.probability * 100)}%
+                        </span>
+                      </div>
+                      
+                      <div className="advisor-support">
+                        <h5>Advisor Support</h5>
+                        <div className="support-grid">
+                          {Object.entries(decision.advisorSupport).map(([advisorId, support]) => {
+                            const advisor = politicalState.advisors.find(a => a.id === advisorId);
+                            if (!advisor) return null;
+                            
+                            return (
+                              <div key={advisorId} className="support-item">
+                                <span>{advisor.name.split(' ')[0]}</span>
+                                <div className="support-bar">
+                                  <div 
+                                    className="support-fill"
+                                    style={{ 
+                                      width: `${(support + 100) / 2}%`,
+                                      backgroundColor: support > 0 ? '#2ECC71' : '#E74C3C'
+                                    }}
+                                  />
+                                </div>
+                                <span>{support > 0 ? '+' : ''}{support}</span>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            
+            <div className="crisis-actions">
+              <button
+                className="crisis-cancel-btn"
+                onClick={() => setShowCrisisModal(false)}
+              >
+                Delay Decision
+              </button>
+              <button
+                className="crisis-confirm-btn"
+                onClick={() => selectedDecision && handleDecisionMade(selectedDecision.id)}
+                disabled={!selectedDecision}
+              >
+                Confirm Decision
               </button>
             </div>
           </div>
         </div>
-      </div>
+      )}
+
+      {/* Advisor Recommendations Panel */}
+      {politicalState.currentCrisis && (
+        <div className="advisor-recommendations">
+          <h3>🗣️ Advisor Recommendations</h3>
+          <div className="recommendations-grid">
+            {politicalState.advisors.map(advisor => {
+              const reaction = politicalState.currentCrisis!.advisorReactions[advisor.id];
+              if (!reaction) return null;
+              
+              return (
+                <div key={advisor.id} className="recommendation-card">
+                  <div className="recommendation-header">
+                    <h4>{advisor.name}</h4>
+                    <span className="advisor-type">{advisor.type}</span>
+                  </div>
+                  
+                  <div className="recommendation-content">
+                    <blockquote>"{reaction.recommendation}"</blockquote>
+                    
+                    <div className="reasoning">
+                      <h5>Reasoning:</h5>
+                      <ul>
+                        {reaction.reasoning.map((reason, index) => (
+                          <li key={index}>{reason}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    
+                    {reaction.warnings.length > 0 && (
+                      <div className="warnings">
+                        <h5>⚠️ Warnings:</h5>
+                        <ul>
+                          {reaction.warnings.map((warning, index) => (
+                            <li key={index}>{warning}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
