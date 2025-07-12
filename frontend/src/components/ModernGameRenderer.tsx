@@ -29,9 +29,12 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
 
   // Configuration du rendu
   const config = {
-    tileSize: 64,
-    hexHeight: 55,
-    hexWidth: 64,
+    tileSize: 50,
+    hexRadius: 25,
+    hexWidth: 43.3, // Math.sqrt(3) * hexRadius
+    hexHeight: 50,  // 2 * hexRadius
+    offsetX: 50,
+    offsetY: 50,
     colors: {
       grass: '#4CAF50',
       forest: '#2E7D32',
@@ -50,16 +53,20 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
     }
   };
 
-  // Conversion coordonnées hexagonales
+  // Conversion coordonnées hexagonales (pointy-top hexagons)
   const hexToPixel = useCallback((hex: Position): Position => {
-    const x = config.hexWidth * (hex.x + hex.y / 2);
-    const y = config.hexHeight * hex.y * 0.75;
+    const x = config.hexWidth * (hex.x + hex.y * 0.5) + config.offsetX;
+    const y = config.hexHeight * hex.y * 0.75 + config.offsetY;
     return { x, y };
   }, []);
 
   const pixelToHex = useCallback((pixel: Position): Position => {
-    const y = Math.round(pixel.y / (config.hexHeight * 0.75));
-    const x = Math.round(pixel.x / config.hexWidth - y / 2);
+    const adjustedX = (pixel.x - config.offsetX) / config.hexWidth;
+    const adjustedY = (pixel.y - config.offsetY) / (config.hexHeight * 0.75);
+    
+    const y = Math.round(adjustedY);
+    const x = Math.round(adjustedX - y * 0.5);
+    
     return { x, y };
   }, []);
 
@@ -72,14 +79,14 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
     isHovered: boolean
   ) => {
     const { x, y } = center;
-    const size = config.tileSize / 2;
+    const radius = config.hexRadius;
 
-    // Créer le chemin hexagonal
+    // Créer le chemin hexagonal (pointy-top)
     ctx.beginPath();
     for (let i = 0; i < 6; i++) {
-      const angle = (Math.PI / 3) * i;
-      const hexX = x + size * Math.cos(angle);
-      const hexY = y + size * Math.sin(angle);
+      const angle = (Math.PI / 3) * i + Math.PI / 6; // Offset pour pointy-top
+      const hexX = x + radius * Math.cos(angle);
+      const hexY = y + radius * Math.sin(angle);
       if (i === 0) {
         ctx.moveTo(hexX, hexY);
       } else {
@@ -107,7 +114,7 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
       ctx.lineWidth = 3;
       ctx.stroke();
     } else {
-      ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
       ctx.lineWidth = 1;
       ctx.stroke();
     }
@@ -135,31 +142,71 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
     hero: Hero
   ) => {
     const { x, y } = center;
-    const size = 20;
+    const size = 18;
 
-    // Cercle de base
+    // Halo autour du héros
     ctx.beginPath();
-    ctx.arc(x, y - 10, size, 0, Math.PI * 2);
-    ctx.fillStyle = '#FF5722';
+    ctx.arc(x, y, size + 3, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(255, 215, 0, 0.4)';
     ctx.fill();
-    ctx.strokeStyle = '#D32F2F';
+
+    // Cercle de base avec gradient
+    const gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+    gradient.addColorStop(0, '#FFD700');
+    gradient.addColorStop(1, '#FFA500');
+    
+    ctx.beginPath();
+    ctx.arc(x, y, size, 0, Math.PI * 2);
+    ctx.fillStyle = gradient;
+    ctx.fill();
+    ctx.strokeStyle = '#B8860B';
     ctx.lineWidth = 2;
     ctx.stroke();
 
-    // Symbole héros
-    ctx.fillStyle = 'white';
-    ctx.font = '16px Arial';
+    // Symbole héros selon le nom/type
+    ctx.fillStyle = '#8B4513';
+    ctx.font = 'bold 14px Arial';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('⚔️', x, y - 10);
+    let heroIcon = '⚔️';
+    const heroName = hero.name.toLowerCase();
+    if (heroName.includes('mage') || heroName.includes('wizard')) heroIcon = '🔮';
+    else if (heroName.includes('archer') || heroName.includes('ranger')) heroIcon = '🏹';
+    else if (heroName.includes('paladin') || heroName.includes('knight')) heroIcon = '🛡️';
+    else if (heroName.includes('barbarian')) heroIcon = '🪓';
+    ctx.fillText(heroIcon, x, y);
 
-    // Nom du héros
+    // Niveau du héros
+    ctx.beginPath();
+    ctx.arc(x + 12, y - 12, 8, 0, Math.PI * 2);
+    ctx.fillStyle = '#FF4444';
+    ctx.fill();
+    ctx.strokeStyle = '#CC0000';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    
     ctx.fillStyle = 'white';
-    ctx.font = '12px Arial';
+    ctx.font = 'bold 10px Arial';
+    ctx.fillText(hero.level.toString(), x + 12, y - 12);
+
+    // Nom du héros avec contour
+    ctx.fillStyle = 'white';
+    ctx.font = 'bold 11px Arial';
     ctx.strokeStyle = 'black';
     ctx.lineWidth = 3;
-    ctx.strokeText(hero.name, x, y + 20);
-    ctx.fillText(hero.name, x, y + 20);
+    ctx.strokeText(hero.name, x, y + 28);
+    ctx.fillText(hero.name, x, y + 28);
+
+    // Barre de mouvement
+    const mpBarWidth = 30;
+    const mpBarHeight = 4;
+    const mpRatio = hero.movementPoints / hero.maxMovementPoints;
+    
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+    ctx.fillRect(x - mpBarWidth/2, y + 35, mpBarWidth, mpBarHeight);
+    
+    ctx.fillStyle = mpRatio > 0.5 ? '#4CAF50' : mpRatio > 0.2 ? '#FF9800' : '#F44336';
+    ctx.fillRect(x - mpBarWidth/2, y + 35, mpBarWidth * mpRatio, mpBarHeight);
   }, []);
 
   // Rendu d'une structure
@@ -169,20 +216,30 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
     structure: any
   ) => {
     const { x, y } = center;
-    const size = 25;
+    const size = 22;
 
-    // Fond de la structure
+    // Halo de la structure
+    ctx.beginPath();
+    ctx.arc(x, y, size + 4, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(139, 69, 19, 0.3)';
+    ctx.fill();
+
+    // Fond de la structure avec gradient
+    const gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+    gradient.addColorStop(0, '#DEB887');
+    gradient.addColorStop(1, '#8B4513');
+    
     ctx.beginPath();
     ctx.arc(x, y, size, 0, Math.PI * 2);
-    ctx.fillStyle = '#8D6E63';
+    ctx.fillStyle = gradient;
     ctx.fill();
-    ctx.strokeStyle = '#5D4037';
-    ctx.lineWidth = 3;
+    ctx.strokeStyle = '#654321';
+    ctx.lineWidth = 2;
     ctx.stroke();
 
     // Icône de la structure
     ctx.fillStyle = 'white';
-    ctx.font = '20px Arial';
+    ctx.font = 'bold 16px Arial';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     
@@ -202,13 +259,24 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
     
     ctx.fillText(icon, x, y);
 
-    // Nom de la structure
+    // Indicateur de propriétaire
+    if (structure.owner) {
+      ctx.beginPath();
+      ctx.arc(x + 15, y - 15, 6, 0, Math.PI * 2);
+      ctx.fillStyle = structure.owner === 'player1' ? '#4CAF50' : '#F44336';
+      ctx.fill();
+      ctx.strokeStyle = 'white';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
+    // Nom de la structure avec contour
     ctx.fillStyle = 'white';
-    ctx.font = '10px Arial';
+    ctx.font = 'bold 9px Arial';
     ctx.strokeStyle = 'black';
     ctx.lineWidth = 2;
-    ctx.strokeText(structure.name, x, y + 35);
-    ctx.fillText(structure.name, x, y + 35);
+    ctx.strokeText(structure.name, x, y + 32);
+    ctx.fillText(structure.name, x, y + 32);
   }, []);
 
   // Rendu d'une créature
@@ -247,16 +315,15 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
   const drawZFCZones = useCallback((ctx: CanvasRenderingContext2D) => {
     visibleZFCs.forEach(zfc => {
       zfc.reachableTiles.forEach(tile => {
-        const pixel = hexToPixel(tile);
-        const center = { x: pixel.x + config.hexWidth / 2, y: pixel.y + config.hexHeight / 2 };
+        const center = hexToPixel(tile);
         
         // Dessiner la zone
         ctx.beginPath();
-        const size = config.tileSize / 2;
+        const radius = config.hexRadius;
         for (let i = 0; i < 6; i++) {
-          const angle = (Math.PI / 3) * i;
-          const hexX = center.x + size * Math.cos(angle);
-          const hexY = center.y + size * Math.sin(angle);
+          const angle = (Math.PI / 3) * i + Math.PI / 6;
+          const hexX = center.x + radius * Math.cos(angle);
+          const hexY = center.y + radius * Math.sin(angle);
           if (i === 0) {
             ctx.moveTo(hexX, hexY);
           } else {
@@ -352,8 +419,7 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
     // Dessiner les tuiles
     map.forEach((row, y) => {
       row.forEach((tile, x) => {
-        const pixel = hexToPixel({ x, y });
-        const center = { x: pixel.x + config.hexWidth / 2, y: pixel.y + config.hexHeight / 2 };
+        const center = hexToPixel({ x, y });
         
         const isSelected = selectedTile?.x === x && selectedTile?.y === y;
         const isHovered = hoveredTile?.x === x && hoveredTile?.y === y;
@@ -366,8 +432,7 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
     if (currentGame && currentGame.players) {
       currentGame.players.forEach(player => {
         player.heroes.forEach(hero => {
-          const pixel = hexToPixel(hero.position);
-          const center = { x: pixel.x + config.hexWidth / 2, y: pixel.y + config.hexHeight / 2 };
+          const center = hexToPixel(hero.position);
           drawHero(ctx, center, hero);
         });
       });
@@ -451,8 +516,8 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
         <div 
           className="tile-tooltip"
           style={{
-            left: hexToPixel(hoveredTile).x + config.hexWidth / 2,
-            top: hexToPixel(hoveredTile).y
+            left: hexToPixel(hoveredTile).x,
+            top: hexToPixel(hoveredTile).y - 40
           }}
         >
           <div className="tooltip-content">

@@ -287,3 +287,211 @@ body {
   .matrix-game-map { padding: 2px 0 24px 0; }
   .map-tile { width: 18px; height: 18px; font-size: 8px; }
 }
+
+/* ============================================================================
+   GAME SELECTOR
+   ============================================================================ */
+
+.game-selector {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Courier New', monospace;
+  position: relative;
+  overflow: hidden;
+}
+
+.game-selector::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(255, 0, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 50% 10%, rgba(255, 255, 0, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.game-selector > * {
+  position: relative;
+  z-index: 2;
+}
+
+.selector-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.selector-header h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  background: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+  animation: title-glow 3s ease-in-out infinite alternate;
+}
+
+.selector-header p {
+  font-size: 1.2rem;
+  color: #cccccc;
+  font-style: italic;
+}
+
+.game-options {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 60px;
+}
+
+.game-option {
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid transparent;
+  border-radius: 20px;
+  padding: 40px 30px;
+  width: 350px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.game-option::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.game-option:hover::before {
+  opacity: 1;
+}
+
+.game-option.classic {
+  border-color: #00ffff;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+.game-option.classic:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 40px rgba(0, 255, 255, 0.4);
+  border-color: #00ffff;
+}
+
+.game-option.temporal {
+  border-color: #ff00ff;
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.2);
+}
+
+.game-option.temporal:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 40px rgba(255, 0, 255, 0.4);
+  border-color: #ff00ff;
+}
+
+.game-icon {
+  font-size: 4rem;
+  text-align: center;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+}
+
+.game-option h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.game-option.classic h2 {
+  color: #00ffff;
+}
+
+.game-option.temporal h2 {
+  color: #ff00ff;
+}
+
+.game-option p {
+  font-size: 1rem;
+  color: #cccccc;
+  text-align: center;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.game-features {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.game-features span {
+  font-size: 0.9rem;
+  color: #999999;
+  padding: 5px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 5px;
+  text-align: center;
+}
+
+.game-option.classic .game-features span {
+  background: rgba(0, 255, 255, 0.1);
+  color: #00ffff;
+}
+
+.game-option.temporal .game-features span {
+  background: rgba(255, 0, 255, 0.1);
+  color: #ff00ff;
+}
+
+.selector-footer {
+  text-align: center;
+  color: #666666;
+  font-size: 0.9rem;
+  margin-top: 40px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .selector-header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .game-options {
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .game-option {
+    width: 90vw;
+    max-width: 400px;
+    padding: 30px 20px;
+  }
+  
+  .game-icon {
+    font-size: 3rem;
+  }
+  
+  .game-option h2 {
+    font-size: 1.5rem;
+  }
+}

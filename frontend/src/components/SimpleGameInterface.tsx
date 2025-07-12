@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useTranslation } from '../i18n';
 import { useGameStore } from '../store/useGameStore';
 import ModernGameRenderer from './ModernGameRenderer';
@@ -6,13 +6,39 @@ import ModernGameRenderer from './ModernGameRenderer';
 const SimpleGameInterface: React.FC = () => {
   const { t, language, setLanguage } = useTranslation();
   const [showSidePanel, setShowSidePanel] = useState(true);
+  const [activeTab, setActiveTab] = useState<'heroes' | 'map' | 'structures'>('heroes');
   
   const { 
     currentGame, 
     currentPlayer, 
+    selectedTile,
+    map,
     endTurn,
     nextPlayer 
   } = useGameStore();
+
+  // Get selected tile info
+  const selectedTileInfo = useMemo(() => {
+    if (!selectedTile || !map || !map[selectedTile.y] || !map[selectedTile.y][selectedTile.x]) {
+      return null;
+    }
+    return map[selectedTile.y][selectedTile.x];
+  }, [selectedTile, map]);
+
+  // Get all structures owned by current player
+  const playerStructures = useMemo(() => {
+    if (!map || !currentPlayer) return [];
+    const structures = [];
+    for (let y = 0; y < map.length; y++) {
+      for (let x = 0; x < map[y].length; x++) {
+        const tile = map[y][x];
+        if (tile.structure && tile.structure.owner === currentPlayer.id) {
+          structures.push({ ...tile.structure, position: { x, y } });
+        }
+      }
+    }
+    return structures;
+  }, [map, currentPlayer]);
 
   if (!currentGame || !currentPlayer) {
     return (
@@ -250,162 +276,384 @@ const SimpleGameInterface: React.FC = () => {
           <ModernGameRenderer width={1200} height={800} />
         </div>
 
-        {/* Side Panel - Simple */}
+        {/* Enhanced Side Panel */}
         {showSidePanel && (
           <div style={{
-            width: '320px',
+            width: '380px',
             background: '#2a2a2a',
             borderLeft: '1px solid #404040',
             display: 'flex',
             flexDirection: 'column',
             flexShrink: 0
           }}>
+            {/* Header with tabs */}
             <div style={{
-              padding: '20px',
-              borderBottom: '1px solid #404040',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between'
+              padding: '16px 20px 0 20px',
+              borderBottom: '1px solid #404040'
             }}>
-              <h3 style={{ 
-                margin: 0, 
-                fontSize: '18px', 
-                fontWeight: '600', 
-                color: '#ffffff' 
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                marginBottom: '16px'
               }}>
-                {t('myHeroes')}
-              </h3>
-              <button 
-                onClick={() => setShowSidePanel(false)}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  color: '#b0b0b0',
-                  fontSize: '20px',
-                  cursor: 'pointer',
-                  padding: '5px',
-                  borderRadius: '4px',
-                  transition: 'all 0.2s ease'
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.background = '#404040';
-                  e.currentTarget.style.color = '#ffffff';
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.background = 'none';
-                  e.currentTarget.style.color = '#b0b0b0';
-                }}
-              >
-                ×
-              </button>
-            </div>
-
-            <div style={{ 
-              flex: 1, 
-              padding: '20px', 
-              overflowY: 'auto' 
-            }}>
-              {currentPlayer.heroes.map(hero => (
-                <div 
-                  key={hero.id} 
+                <h3 style={{ 
+                  margin: 0, 
+                  fontSize: '18px', 
+                  fontWeight: '600', 
+                  color: '#ffffff' 
+                }}>
+                  Game Info
+                </h3>
+                <button 
+                  onClick={() => setShowSidePanel(false)}
                   style={{
-                    background: '#333333',
-                    borderRadius: '8px',
-                    padding: '16px',
-                    marginBottom: '12px',
-                    border: '1px solid #404040',
-                    transition: 'all 0.2s ease',
-                    cursor: 'pointer'
+                    background: 'none',
+                    border: 'none',
+                    color: '#b0b0b0',
+                    fontSize: '20px',
+                    cursor: 'pointer',
+                    padding: '5px',
+                    borderRadius: '4px',
+                    transition: 'all 0.2s ease'
                   }}
                   onMouseOver={(e) => {
-                    e.currentTarget.style.background = '#3a3a3a';
-                    e.currentTarget.style.borderColor = '#00d4ff';
-                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.background = '#404040';
+                    e.currentTarget.style.color = '#ffffff';
                   }}
                   onMouseOut={(e) => {
-                    e.currentTarget.style.background = '#333333';
-                    e.currentTarget.style.borderColor = '#404040';
-                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.background = 'none';
+                    e.currentTarget.style.color = '#b0b0b0';
                   }}
                 >
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    marginBottom: '12px'
-                  }}>
-                    <span style={{ 
-                      fontWeight: '600', 
-                      color: '#ffffff', 
-                      fontSize: '16px' 
-                    }}>
-                      {hero.name}
-                    </span>
-                    <span style={{
-                      background: '#00d4ff',
-                      color: '#1a1a1a',
-                      padding: '4px 8px',
-                      borderRadius: '4px',
+                  ×
+                </button>
+              </div>
+
+              {/* Tab Navigation */}
+              <div style={{
+                display: 'flex',
+                gap: '4px',
+                marginBottom: '16px'
+              }}>
+                {(['heroes', 'map', 'structures'] as const).map(tab => (
+                  <button
+                    key={tab}
+                    onClick={() => setActiveTab(tab)}
+                    style={{
+                      flex: 1,
+                      padding: '8px 12px',
+                      background: activeTab === tab ? '#00d4ff' : '#333333',
+                      border: '1px solid #404040',
+                      borderRadius: '6px',
+                      color: activeTab === tab ? '#1a1a1a' : '#b0b0b0',
                       fontSize: '12px',
-                      fontWeight: '600'
-                    }}>
-                      Niv. {hero.level}
-                    </span>
-                  </div>
-                  
-                  <div style={{ 
-                    display: 'flex', 
-                    flexDirection: 'column', 
-                    gap: '6px' 
-                  }}>
-                    <div style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      fontSize: '13px'
-                    }}>
-                      <span style={{ color: '#b0b0b0' }}>Position:</span>
-                      <span style={{ 
-                        color: '#ffffff', 
-                        fontWeight: '500', 
-                        fontFamily: 'JetBrains Mono, monospace' 
+                      fontWeight: '500',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease'
+                    }}
+                    onMouseOver={(e) => {
+                      if (activeTab !== tab) {
+                        e.currentTarget.style.background = '#3a3a3a';
+                        e.currentTarget.style.color = '#ffffff';
+                      }
+                    }}
+                    onMouseOut={(e) => {
+                      if (activeTab !== tab) {
+                        e.currentTarget.style.background = '#333333';
+                        e.currentTarget.style.color = '#b0b0b0';
+                      }
+                    }}
+                  >
+                    {tab === 'heroes' ? '⚔️ Heroes' : tab === 'map' ? '🗺️ Map' : '🏰 Structures'}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Tab Content */}
+            <div style={{ 
+              flex: 1, 
+              padding: '16px', 
+              overflowY: 'auto' 
+            }}>
+              {/* Heroes Tab */}
+              {activeTab === 'heroes' && (
+                <div>
+                  {currentPlayer.heroes.map(hero => (
+                    <div 
+                      key={hero.id} 
+                      style={{
+                        background: '#333333',
+                        borderRadius: '8px',
+                        padding: '16px',
+                        marginBottom: '12px',
+                        border: '1px solid #404040',
+                        transition: 'all 0.2s ease',
+                        cursor: 'pointer'
+                      }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.background = '#3a3a3a';
+                        e.currentTarget.style.borderColor = '#00d4ff';
+                        e.currentTarget.style.transform = 'translateY(-2px)';
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.background = '#333333';
+                        e.currentTarget.style.borderColor = '#404040';
+                        e.currentTarget.style.transform = 'translateY(0)';
+                      }}
+                    >
+                      <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        marginBottom: '12px'
                       }}>
-                        ({hero.position.x}, {hero.position.y})
-                      </span>
-                    </div>
-                    <div style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      fontSize: '13px'
-                    }}>
-                      <span style={{ color: '#b0b0b0' }}>MP:</span>
-                      <span style={{ 
-                        color: '#ffffff', 
-                        fontWeight: '500', 
-                        fontFamily: 'JetBrains Mono, monospace' 
+                        <span style={{ 
+                          fontWeight: '600', 
+                          color: '#ffffff', 
+                          fontSize: '16px' 
+                        }}>
+                          {hero.name}
+                        </span>
+                        <span style={{
+                          background: '#00d4ff',
+                          color: '#1a1a1a',
+                          padding: '4px 8px',
+                          borderRadius: '4px',
+                          fontSize: '12px',
+                          fontWeight: '600'
+                        }}>
+                          Niv. {hero.level}
+                        </span>
+                      </div>
+                      
+                      {/* Hero Stats */}
+                      <div style={{ 
+                        display: 'grid',
+                        gridTemplateColumns: '1fr 1fr',
+                        gap: '8px',
+                        marginBottom: '12px'
                       }}>
-                        {hero.movementPoints}/{hero.maxMovementPoints}
-                      </span>
-                    </div>
-                    <div style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      fontSize: '13px'
-                    }}>
-                      <span style={{ color: '#b0b0b0' }}>Unités:</span>
-                      <span style={{ 
-                        color: '#ffffff', 
-                        fontWeight: '500', 
-                        fontFamily: 'JetBrains Mono, monospace' 
+                        <div style={{ background: '#404040', padding: '6px', borderRadius: '4px' }}>
+                          <div style={{ fontSize: '10px', color: '#b0b0b0' }}>Attack</div>
+                          <div style={{ fontSize: '14px', fontWeight: '600', color: '#ffffff' }}>
+                            {hero.stats.attack}
+                          </div>
+                        </div>
+                        <div style={{ background: '#404040', padding: '6px', borderRadius: '4px' }}>
+                          <div style={{ fontSize: '10px', color: '#b0b0b0' }}>Defense</div>
+                          <div style={{ fontSize: '14px', fontWeight: '600', color: '#ffffff' }}>
+                            {hero.stats.defense}
+                          </div>
+                        </div>
+                        <div style={{ background: '#404040', padding: '6px', borderRadius: '4px' }}>
+                          <div style={{ fontSize: '10px', color: '#b0b0b0' }}>Knowledge</div>
+                          <div style={{ fontSize: '14px', fontWeight: '600', color: '#ffffff' }}>
+                            {hero.stats.knowledge}
+                          </div>
+                        </div>
+                        <div style={{ background: '#404040', padding: '6px', borderRadius: '4px' }}>
+                          <div style={{ fontSize: '10px', color: '#b0b0b0' }}>Spell Power</div>
+                          <div style={{ fontSize: '14px', fontWeight: '600', color: '#ffffff' }}>
+                            {hero.stats.spellPower}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Basic Info */}
+                      <div style={{ 
+                        display: 'flex', 
+                        flexDirection: 'column', 
+                        gap: '4px',
+                        fontSize: '12px'
                       }}>
-                        {hero.units.length}
-                      </span>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                          <span style={{ color: '#b0b0b0' }}>Position:</span>
+                          <span style={{ color: '#ffffff', fontWeight: '500' }}>
+                            ({hero.position.x}, {hero.position.y})
+                          </span>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                          <span style={{ color: '#b0b0b0' }}>Movement:</span>
+                          <span style={{ color: '#ffffff', fontWeight: '500' }}>
+                            {hero.movementPoints}/{hero.maxMovementPoints}
+                          </span>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                          <span style={{ color: '#b0b0b0' }}>Experience:</span>
+                          <span style={{ color: '#ffffff', fontWeight: '500' }}>
+                            {hero.experience}
+                          </span>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                          <span style={{ color: '#b0b0b0' }}>Units:</span>
+                          <span style={{ color: '#ffffff', fontWeight: '500' }}>
+                            {hero.units.length}
+                          </span>
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  ))}
                 </div>
-              ))}
+              )}
+
+              {/* Map Tab */}
+              {activeTab === 'map' && (
+                <div>
+                  {selectedTileInfo ? (
+                    <div style={{
+                      background: '#333333',
+                      borderRadius: '8px',
+                      padding: '16px',
+                      border: '1px solid #404040',
+                      marginBottom: '16px'
+                    }}>
+                      <h4 style={{ margin: '0 0 12px 0', color: '#ffffff' }}>
+                        Selected Tile
+                      </h4>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '13px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                          <span style={{ color: '#b0b0b0' }}>Position:</span>
+                          <span style={{ color: '#ffffff', fontWeight: '500' }}>
+                            ({selectedTile?.x}, {selectedTile?.y})
+                          </span>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                          <span style={{ color: '#b0b0b0' }}>Terrain:</span>
+                          <span style={{ color: '#ffffff', fontWeight: '500' }}>
+                            {selectedTileInfo.terrain}
+                          </span>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                          <span style={{ color: '#b0b0b0' }}>Movement Cost:</span>
+                          <span style={{ color: '#ffffff', fontWeight: '500' }}>
+                            {selectedTileInfo.movementCost}
+                          </span>
+                        </div>
+                        {selectedTileInfo.hero && (
+                          <div style={{ marginTop: '8px', paddingTop: '8px', borderTop: '1px solid #404040' }}>
+                            <div style={{ color: '#00d4ff', fontWeight: '600' }}>
+                              Hero: {selectedTileInfo.hero.name}
+                            </div>
+                          </div>
+                        )}
+                        {selectedTileInfo.creature && (
+                          <div style={{ marginTop: '8px', paddingTop: '8px', borderTop: '1px solid #404040' }}>
+                            <div style={{ color: '#ff6b6b', fontWeight: '600' }}>
+                              Creature: {selectedTileInfo.creature.name}
+                            </div>
+                          </div>
+                        )}
+                        {selectedTileInfo.structure && (
+                          <div style={{ marginTop: '8px', paddingTop: '8px', borderTop: '1px solid #404040' }}>
+                            <div style={{ color: '#4ecdc4', fontWeight: '600' }}>
+                              Structure: {selectedTileInfo.structure.name}
+                            </div>
+                            <div style={{ fontSize: '12px', color: '#b0b0b0' }}>
+                              Owner: {selectedTileInfo.structure.owner || 'None'}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ) : (
+                    <div style={{
+                      background: '#333333',
+                      borderRadius: '8px',
+                      padding: '16px',
+                      border: '1px solid #404040',
+                      textAlign: 'center',
+                      color: '#b0b0b0'
+                    }}>
+                      Click on a tile to see its information
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Structures Tab */}
+              {activeTab === 'structures' && (
+                <div>
+                  {playerStructures.length > 0 ? (
+                    playerStructures.map(structure => (
+                      <div 
+                        key={structure.id}
+                        style={{
+                          background: '#333333',
+                          borderRadius: '8px',
+                          padding: '16px',
+                          marginBottom: '12px',
+                          border: '1px solid #404040',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        <div style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          marginBottom: '8px'
+                        }}>
+                          <span style={{ 
+                            fontWeight: '600', 
+                            color: '#ffffff', 
+                            fontSize: '14px' 
+                          }}>
+                            {structure.name}
+                          </span>
+                          <span style={{
+                            background: '#4ecdc4',
+                            color: '#1a1a1a',
+                            padding: '2px 6px',
+                            borderRadius: '4px',
+                            fontSize: '10px',
+                            fontWeight: '600'
+                          }}>
+                            Lv. {structure.level}
+                          </span>
+                        </div>
+                        
+                        <div style={{ 
+                          display: 'flex', 
+                          flexDirection: 'column', 
+                          gap: '4px',
+                          fontSize: '12px'
+                        }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <span style={{ color: '#b0b0b0' }}>Type:</span>
+                            <span style={{ color: '#ffffff', fontWeight: '500' }}>
+                              {structure.type}
+                            </span>
+                          </div>
+                          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <span style={{ color: '#b0b0b0' }}>Position:</span>
+                            <span style={{ color: '#ffffff', fontWeight: '500' }}>
+                              ({structure.position.x}, {structure.position.y})
+                            </span>
+                          </div>
+                          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <span style={{ color: '#b0b0b0' }}>Health:</span>
+                            <span style={{ color: '#ffffff', fontWeight: '500' }}>
+                              {structure.health}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div style={{
+                      background: '#333333',
+                      borderRadius: '8px',
+                      padding: '16px',
+                      border: '1px solid #404040',
+                      textAlign: 'center',
+                      color: '#b0b0b0'
+                    }}>
+                      No structures owned
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         )}
