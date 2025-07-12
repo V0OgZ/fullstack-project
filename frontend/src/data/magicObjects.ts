@@ -1,8 +1,8 @@
 // Types for magic objects
 export interface MagicObject {
   id: string;
-  nameKey: string; // Translation key instead of hardcoded name
-  descriptionKey: string; // Translation key instead of hardcoded description
+  name: string; // Direct name instead of translation key
+  description: string; // Direct description instead of translation key
   type: 'weapon' | 'armor' | 'accessory' | 'artifact' | 'temporal' | 'consumable' | 'resource';
   rarity: 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary' | 'temporal';
   value: number;
@@ -16,20 +16,20 @@ export interface MagicObject {
     temporalMana?: number;
     experience?: number;
     gold?: number;
-    specialEffectKey?: string; // Translation key for special effects
+    specialEffect?: string; // Direct special effect text
   };
   slot?: 'weapon' | 'armor' | 'helmet' | 'boots' | 'ring' | 'amulet' | 'cape';
   requiresLevel?: number;
   temporal?: boolean;
 }
 
-// All magic objects collection - now using translation keys
+// All magic objects collection - using direct text for now
 export const ALL_MAGIC_OBJECTS: MagicObject[] = [
   // === WEAPONS ===
   {
     id: 'sword_basic',
-    nameKey: 'items.sword_basic.name',
-    descriptionKey: 'items.sword_basic.description',
+    name: 'Basic Sword',
+    description: 'A simple and robust sword.',
     type: 'weapon',
     rarity: 'common',
     value: 100,
@@ -38,8 +38,8 @@ export const ALL_MAGIC_OBJECTS: MagicObject[] = [
   },
   {
     id: 'sword_steel',
-    nameKey: 'items.sword_steel.name',
-    descriptionKey: 'items.sword_steel.description',
+    name: 'Steel Sword',
+    description: 'A light and fast sword.',
     type: 'weapon',
     rarity: 'uncommon',
     value: 250,
@@ -48,8 +48,8 @@ export const ALL_MAGIC_OBJECTS: MagicObject[] = [
   },
   {
     id: 'sword_magic',
-    nameKey: 'items.sword_magic.name',
-    descriptionKey: 'items.sword_magic.description',
+    name: 'Magic Sword',
+    description: 'A sword infused with magical energy.',
     type: 'weapon',
     rarity: 'rare',
     value: 500,
@@ -58,12 +58,12 @@ export const ALL_MAGIC_OBJECTS: MagicObject[] = [
   },
   {
     id: 'sword_legendary',
-    nameKey: 'items.sword_legendary.name',
-    descriptionKey: 'items.sword_legendary.description',
+    name: 'Legendary Blade',
+    description: 'A legendary sword of immense power.',
     type: 'weapon',
     rarity: 'legendary',
     value: 2000,
-    effects: { attack: 12, defense: 3, specialEffectKey: 'items.sword_legendary.effect' },
+    effects: { attack: 12, defense: 3, specialEffect: 'Critical hits deal double damage' },
     slot: 'weapon',
     requiresLevel: 10
   },
@@ -71,8 +71,8 @@ export const ALL_MAGIC_OBJECTS: MagicObject[] = [
   // === ARMOR ===
   {
     id: 'armor_leather',
-    nameKey: 'items.armor_leather.name',
-    descriptionKey: 'items.armor_leather.description',
+    name: 'Leather Armor',
+    description: 'Basic protection made of leather.',
     type: 'armor',
     rarity: 'common',
     value: 80,
@@ -81,8 +81,8 @@ export const ALL_MAGIC_OBJECTS: MagicObject[] = [
   },
   {
     id: 'armor_chain',
-    nameKey: 'items.armor_chain.name',
-    descriptionKey: 'items.armor_chain.description',
+    name: 'Chain Mail',
+    description: 'Flexible metallic protection.',
     type: 'armor',
     rarity: 'uncommon',
     value: 200,
@@ -91,8 +91,8 @@ export const ALL_MAGIC_OBJECTS: MagicObject[] = [
   },
   {
     id: 'armor_plate',
-    nameKey: 'items.armor_plate.name',
-    descriptionKey: 'items.armor_plate.description',
+    name: 'Plate Armor',
+    description: 'Heavy metallic protection.',
     type: 'armor',
     rarity: 'rare',
     value: 450,
@@ -101,12 +101,12 @@ export const ALL_MAGIC_OBJECTS: MagicObject[] = [
   },
   {
     id: 'armor_dragon',
-    nameKey: 'items.armor_dragon.name',
-    descriptionKey: 'items.armor_dragon.description',
+    name: 'Dragon Scale Armor',
+    description: 'Armor made from dragon scales.',
     type: 'armor',
     rarity: 'legendary',
     value: 1800,
-    effects: { defense: 10, attack: 2, specialEffectKey: 'items.armor_dragon.effect' },
+    effects: { defense: 10, attack: 2, specialEffect: 'Immune to fire damage' },
     slot: 'armor',
     requiresLevel: 8
   },
@@ -114,8 +114,8 @@ export const ALL_MAGIC_OBJECTS: MagicObject[] = [
   // === ACCESSORIES ===
   {
     id: 'ring_power',
-    nameKey: 'items.ring_power.name',
-    descriptionKey: 'items.ring_power.description',
+    name: 'Ring of Power',
+    description: 'A ring that enhances magical abilities.',
     type: 'accessory',
     rarity: 'rare',
     value: 400,
@@ -124,8 +124,8 @@ export const ALL_MAGIC_OBJECTS: MagicObject[] = [
   },
   {
     id: 'amulet_wisdom',
-    nameKey: 'items.amulet_wisdom.name',
-    descriptionKey: 'items.amulet_wisdom.description',
+    name: 'Amulet of Wisdom',
+    description: 'An amulet that increases knowledge.',
     type: 'accessory',
     rarity: 'uncommon',
     value: 300,
@@ -134,8 +134,8 @@ export const ALL_MAGIC_OBJECTS: MagicObject[] = [
   },
   {
     id: 'boots_speed',
-    nameKey: 'items.boots_speed.name',
-    descriptionKey: 'items.boots_speed.description',
+    name: 'Boots of Speed',
+    description: 'Boots that increase movement speed.',
     type: 'accessory',
     rarity: 'rare',
     value: 350,
@@ -144,12 +144,12 @@ export const ALL_MAGIC_OBJECTS: MagicObject[] = [
   },
   {
     id: 'cape_stealth',
-    nameKey: 'items.cape_stealth.name',
-    descriptionKey: 'items.cape_stealth.description',
+    name: 'Cape of Stealth',
+    description: 'A cape that provides stealth abilities.',
     type: 'accessory',
     rarity: 'epic',
     value: 800,
-    effects: { defense: 2, specialEffectKey: 'items.cape_stealth.effect' },
+    effects: { defense: 2, specialEffect: 'Grants invisibility for 1 turn' },
     slot: 'cape',
     requiresLevel: 5
   },
@@ -157,8 +157,8 @@ export const ALL_MAGIC_OBJECTS: MagicObject[] = [
   // === ARTIFACTS ===
   {
     id: 'crown_kings',
-    nameKey: 'items.crown_kings.name',
-    descriptionKey: 'items.crown_kings.description',
+    name: 'Crown of Kings',
+    description: 'A crown worn by legendary rulers.',
     type: 'artifact',
     rarity: 'legendary',
     value: 2500,
@@ -167,14 +167,14 @@ export const ALL_MAGIC_OBJECTS: MagicObject[] = [
       defense: 3, 
       knowledge: 3, 
       spellPower: 3,
-      specialEffectKey: 'items.crown_kings.effect'
+      specialEffect: 'Increases all stats and grants leadership bonus'
     },
     requiresLevel: 12
   },
   {
     id: 'orb_knowledge',
-    nameKey: 'items.orb_knowledge.name',
-    descriptionKey: 'items.orb_knowledge.description',
+    name: 'Orb of Knowledge',
+    description: 'A mystical orb containing ancient wisdom.',
     type: 'artifact',
     rarity: 'epic',
     value: 1200,
@@ -183,8 +183,8 @@ export const ALL_MAGIC_OBJECTS: MagicObject[] = [
   },
   {
     id: 'staff_archmage',
-    nameKey: 'items.staff_archmage.name',
-    descriptionKey: 'items.staff_archmage.description',
+    name: 'Staff of the Archmage',
+    description: 'The legendary staff of a powerful archmage.',
     type: 'artifact',
     rarity: 'legendary',
     value: 3000,
@@ -192,7 +192,7 @@ export const ALL_MAGIC_OBJECTS: MagicObject[] = [
       spellPower: 10, 
       mana: 20, 
       knowledge: 5,
-      specialEffectKey: 'items.staff_archmage.effect'
+      specialEffect: 'All spells cost 50% less mana'
     },
     requiresLevel: 15
   },
@@ -200,59 +200,59 @@ export const ALL_MAGIC_OBJECTS: MagicObject[] = [
   // === TEMPORAL OBJECTS ===
   {
     id: 'temporal_anchor',
-    nameKey: 'items.temporal_anchor.name',
-    descriptionKey: 'items.temporal_anchor.description',
+    name: 'Temporal Anchor',
+    description: 'An artifact that stabilizes temporal distortions.',
     type: 'temporal',
     rarity: 'temporal',
     value: 1500,
     effects: { 
       temporalMana: 10, 
-      specialEffectKey: 'items.temporal_anchor.effect'
+      specialEffect: 'Prevents temporal paradoxes'
     },
     temporal: true,
     requiresLevel: 8
   },
   {
     id: 'temporal_prism',
-    nameKey: 'items.temporal_prism.name',
-    descriptionKey: 'items.temporal_prism.description',
+    name: 'Temporal Prism',
+    description: 'A crystal that refracts time itself.',
     type: 'temporal',
     rarity: 'temporal',
     value: 2000,
     effects: { 
       temporalMana: 15, 
       knowledge: 5,
-      specialEffectKey: 'items.temporal_prism.effect'
+      specialEffect: 'Can see 3 turns into the future'
     },
     temporal: true,
     requiresLevel: 10
   },
   {
     id: 'temporal_hourglass',
-    nameKey: 'items.temporal_hourglass.name',
-    descriptionKey: 'items.temporal_hourglass.description',
+    name: 'Eternal Hourglass',
+    description: 'An hourglass that controls the flow of time.',
     type: 'temporal',
     rarity: 'temporal',
     value: 5000,
     effects: { 
       temporalMana: 30, 
       spellPower: 8,
-      specialEffectKey: 'items.temporal_hourglass.effect'
+      specialEffect: 'Can rewind one action per turn'
     },
     temporal: true,
     requiresLevel: 20
   },
   {
     id: 'temporal_compass',
-    nameKey: 'items.temporal_compass.name',
-    descriptionKey: 'items.temporal_compass.description',
+    name: 'Temporal Compass',
+    description: 'A compass that points to temporal anomalies.',
     type: 'temporal',
     rarity: 'temporal',
     value: 800,
     effects: { 
       temporalMana: 5, 
       movementPoints: 1,
-      specialEffectKey: 'items.temporal_compass.effect'
+      specialEffect: 'Detects temporal objects nearby'
     },
     temporal: true,
     requiresLevel: 3
@@ -261,17 +261,17 @@ export const ALL_MAGIC_OBJECTS: MagicObject[] = [
   // === CONSUMABLES ===
   {
     id: 'potion_health',
-    nameKey: 'items.potion_health.name',
-    descriptionKey: 'items.potion_health.description',
+    name: 'Health Potion',
+    description: 'A potion that restores health.',
     type: 'consumable',
     rarity: 'common',
     value: 50,
-    effects: { specialEffectKey: 'items.potion_health.effect' }
+    effects: { specialEffect: 'Restores 50 HP' }
   },
   {
     id: 'potion_mana',
-    nameKey: 'items.potion_mana.name',
-    descriptionKey: 'items.potion_mana.description',
+    name: 'Mana Potion',
+    description: 'A potion that restores mana.',
     type: 'consumable',
     rarity: 'uncommon',
     value: 80,
@@ -279,17 +279,17 @@ export const ALL_MAGIC_OBJECTS: MagicObject[] = [
   },
   {
     id: 'scroll_teleport',
-    nameKey: 'items.scroll_teleport.name',
-    descriptionKey: 'items.scroll_teleport.description',
+    name: 'Teleport Scroll',
+    description: 'A scroll that enables instant teleportation.',
     type: 'consumable',
     rarity: 'rare',
     value: 200,
-    effects: { specialEffectKey: 'items.scroll_teleport.effect' }
+    effects: { specialEffect: 'Teleport to any visible location' }
   },
   {
     id: 'elixir_experience',
-    nameKey: 'items.elixir_experience.name',
-    descriptionKey: 'items.elixir_experience.description',
+    name: 'Experience Elixir',
+    description: 'An elixir that grants experience.',
     type: 'consumable',
     rarity: 'epic',
     value: 400,
@@ -299,8 +299,8 @@ export const ALL_MAGIC_OBJECTS: MagicObject[] = [
   // === RESOURCES ===
   {
     id: 'gold_pile',
-    nameKey: 'items.gold_pile.name',
-    descriptionKey: 'items.gold_pile.description',
+    name: 'Gold Pile',
+    description: 'A pile of gold that can be used to buy objects.',
     type: 'resource',
     rarity: 'common',
     value: 500,
@@ -308,8 +308,8 @@ export const ALL_MAGIC_OBJECTS: MagicObject[] = [
   },
   {
     id: 'gold_chest',
-    nameKey: 'items.gold_chest.name',
-    descriptionKey: 'items.gold_chest.description',
+    name: 'Gold Chest',
+    description: 'A gold chest that can contain lots of gold.',
     type: 'resource',
     rarity: 'uncommon',
     value: 1000,
@@ -317,8 +317,8 @@ export const ALL_MAGIC_OBJECTS: MagicObject[] = [
   },
   {
     id: 'gold_vault',
-    nameKey: 'items.gold_vault.name',
-    descriptionKey: 'items.gold_vault.description',
+    name: 'Gold Vault',
+    description: 'A gold vault that is very secure.',
     type: 'resource',
     rarity: 'rare',
     value: 2000,
