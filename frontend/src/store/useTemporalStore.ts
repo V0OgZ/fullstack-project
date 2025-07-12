@@ -2,6 +2,7 @@
 // Revolutionary spacetime game state management
 
 import { create } from 'zustand';
+import { useRef, useCallback, useEffect } from 'react';
 import { 
   TemporalGameState, 
   ActionPlan, 
@@ -332,21 +333,53 @@ export const useEntropyMonitor = () => {
   };
 };
 
-// Game loop manager
+// Game loop manager avec gestion correcte du lifecycle
 export const useGameLoop = () => {
   const { tick, isPaused, gameSpeed } = useTemporalStore();
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const isRunningRef = useRef(false);
   
-  const startGameLoop = () => {
+  const startGameLoop = useCallback(() => {
+    if (isRunningRef.current) return; // Éviter les boucles multiples
+    
+    isRunningRef.current = true;
+    
     const loop = () => {
+      if (!isRunningRef.current) return; // Arrêter si demandé
+      
       if (!isPaused) {
-        tick();
+        try {
+          tick();
+        } catch (error) {
+          console.error('Error in game loop tick:', error);
+          stopGameLoop(); // Arrêter en cas d'erreur
+          return;
+        }
       }
-      setTimeout(loop, 1000 / gameSpeed); // Adjust speed
+      
+      // Utiliser un timeout contrôlé au lieu d'une récursion infinie
+      intervalRef.current = setTimeout(loop, Math.max(100, 1000 / gameSpeed));
     };
+    
     loop();
-  };
+  }, [tick, isPaused, gameSpeed]);
   
-  return { startGameLoop };
+  const stopGameLoop = useCallback(() => {
+    isRunningRef.current = false;
+    if (intervalRef.current) {
+      clearTimeout(intervalRef.current);
+      intervalRef.current = null;
+    }
+  }, []);
+  
+  // Nettoyage automatique quand le composant est démonté
+  useEffect(() => {
+    return () => {
+      stopGameLoop();
+    };
+  }, [stopGameLoop]);
+  
+  return { startGameLoop, stopGameLoop };
 };
 
 // Export the store for external use
