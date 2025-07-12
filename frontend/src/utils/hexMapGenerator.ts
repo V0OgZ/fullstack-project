@@ -153,14 +153,14 @@ const addDemoEntities = (map: Tile[][]) => {
           id: `creature-${x}-${y}`,
           name: 'Dragon',
           type: 'dragon',
-          hp: 100,
-          maxHp: 100,
+          level: 5,
+          health: 100,
+          maxHealth: 100,
           attack: 15,
           defense: 10,
-          speed: 5,
-          initiative: 8,
-          quantity: 1,
-          heroId: '',
+          position: { x, y },
+          isGuardian: true,
+          treasure: { gold: 1000, items: ['Dragon Scale'] }
         };
       }
     }

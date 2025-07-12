@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 // Types pour les traductions
-export type Language = 'fr' | 'en';
+export type Language = 'fr' | 'en' | 'ru';
 
 export interface Translation {
   // Header
@@ -88,6 +88,9 @@ export interface Translation {
   water: string;
   desert: string;
   swamp: string;
+  
+  // Heroes
+  myHeroes: string;
   
   // Common
   close: string;
@@ -187,6 +190,9 @@ const frenchTranslations: Translation = {
   desert: 'Désert',
   swamp: 'Marécage',
   
+  // Heroes
+  myHeroes: 'Mes Héros',
+  
   // Common
   close: 'Fermer',
   save: 'Sauvegarder',
@@ -284,6 +290,9 @@ const englishTranslations: Translation = {
   water: 'Water',
   desert: 'Desert',
   swamp: 'Swamp',
+  
+  // Heroes
+  myHeroes: 'My Heroes',
   
   // Common
   close: 'Close',

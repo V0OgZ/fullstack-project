@@ -22,7 +22,7 @@ interface AnimatedElement {
 const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
-  const { map, currentGame, selectedTile, visibleZFCs, shadowActions } = useGameStore();
+  const { map, currentGame, currentPlayer, selectedTile, visibleZFCs, shadowActions } = useGameStore();
   
   const [animatedElements, setAnimatedElements] = useState<AnimatedElement[]>([]);
   const [hoveredTile, setHoveredTile] = useState<Position | null>(null);
@@ -112,14 +112,19 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
       ctx.stroke();
     }
 
-    // Dessiner héros si présent
-    if (tile.hero) {
-      drawHero(ctx, center, tile.hero);
+    // Dessiner structure si présente
+    if (tile.structure) {
+      drawStructure(ctx, center, tile.structure);
     }
 
     // Dessiner créature si présente
     if (tile.creature) {
       drawCreature(ctx, center, tile.creature);
+    }
+
+    // Dessiner héros si présent
+    if (tile.hero) {
+      drawHero(ctx, center, tile.hero);
     }
   }, []);
 
@@ -157,6 +162,55 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
     ctx.fillText(hero.name, x, y + 20);
   }, []);
 
+  // Rendu d'une structure
+  const drawStructure = useCallback((
+    ctx: CanvasRenderingContext2D,
+    center: Position,
+    structure: any
+  ) => {
+    const { x, y } = center;
+    const size = 25;
+
+    // Fond de la structure
+    ctx.beginPath();
+    ctx.arc(x, y, size, 0, Math.PI * 2);
+    ctx.fillStyle = '#8D6E63';
+    ctx.fill();
+    ctx.strokeStyle = '#5D4037';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+
+    // Icône de la structure
+    ctx.fillStyle = 'white';
+    ctx.font = '20px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    
+    // Déterminer l'icône selon le type
+    let icon = '🏰';
+    if (structure.type === 'gold_mine') icon = '💰';
+    else if (structure.type === 'sawmill') icon = '🪵';
+    else if (structure.type === 'stone_quarry') icon = '🗿';
+    else if (structure.type === 'crystal_mine') icon = '💎';
+    else if (structure.type === 'village') icon = '🏘️';
+    else if (structure.type === 'tavern') icon = '🍺';
+    else if (structure.type === 'temple') icon = '⛪';
+    else if (structure.type === 'laboratory') icon = '🧪';
+    else if (structure.type === 'elven_fortress') icon = '🌲';
+    else if (structure.type === 'dwarven_citadel') icon = '⛰️';
+    else if (structure.type === 'magic_tower') icon = '🔮';
+    
+    ctx.fillText(icon, x, y);
+
+    // Nom de la structure
+    ctx.fillStyle = 'white';
+    ctx.font = '10px Arial';
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = 2;
+    ctx.strokeText(structure.name, x, y + 35);
+    ctx.fillText(structure.name, x, y + 35);
+  }, []);
+
   // Rendu d'une créature
   const drawCreature = useCallback((
     ctx: CanvasRenderingContext2D,
@@ -174,11 +228,19 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
     ctx.lineWidth = 2;
     ctx.stroke();
 
+    // Icône de la créature
     ctx.fillStyle = 'white';
     ctx.font = '14px Arial';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('🐉', x, y + 10);
+    
+    let icon = '🐉';
+    if (creature.type === 'wolf') icon = '🐺';
+    else if (creature.type === 'golem') icon = '🗿';
+    else if (creature.type === 'elemental') icon = '💫';
+    else if (creature.type === 'sea_monster') icon = '🐙';
+    
+    ctx.fillText(icon, x, y + 10);
   }, []);
 
   // Rendu des zones ZFC
@@ -299,6 +361,17 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
         drawHexTile(ctx, center, tile, isSelected, isHovered);
       });
     });
+
+    // Dessiner les héros de tous les joueurs
+    if (currentGame && currentGame.players) {
+      currentGame.players.forEach(player => {
+        player.heroes.forEach(hero => {
+          const pixel = hexToPixel(hero.position);
+          const center = { x: pixel.x + config.hexWidth / 2, y: pixel.y + config.hexHeight / 2 };
+          drawHero(ctx, center, hero);
+        });
+      });
+    }
 
     // Dessiner les effets de particules
     drawParticles(ctx);

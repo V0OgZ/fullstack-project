@@ -5,14 +5,40 @@ export interface Position {
   y: number;
 }
 
+export interface Structure {
+  id: string;
+  type: string;
+  name: string;
+  owner: string | null;
+  level: number;
+  health: number;
+  position: Position;
+}
+
+export interface Creature {
+  id: string;
+  type: string;
+  name: string;
+  level: number;
+  health: number;
+  maxHealth: number;
+  attack: number;
+  defense: number;
+  position: Position;
+  isGuardian: boolean;
+  treasure?: { gold: number; items: string[] };
+}
+
 export interface Tile {
   x: number;
   y: number;
   terrain: 'grass' | 'forest' | 'mountain' | 'water' | 'desert' | 'swamp';
-  walkable: boolean;
+  walkable?: boolean;
   movementCost: number;
   hero?: Hero | null;
-  creature?: any | null;
+  creature?: Creature | null;
+  structure?: Structure | null;
+  isVisible?: boolean;
 }
 
 export interface MapObject {
