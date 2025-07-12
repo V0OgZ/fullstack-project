@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { ALL_MAGIC_OBJECTS, MAGIC_OBJECTS_STATS, MagicObject } from '../data/magicObjects';
 import { useTranslation } from '../i18n';
 import './MagicInventory.css';
@@ -30,23 +30,20 @@ const MagicInventory: React.FC<MagicInventoryProps> = ({
   const [showOnlyOwned, setShowOnlyOwned] = useState(false);
   const [layoutVertical, setLayoutVertical] = useState(true);
 
-  // Helper function to get translated object name
-  const getObjectName = (object: MagicObject): string => {
-    return t(object.nameKey as any) || object.nameKey;
-  };
+  // Helper function to get object name
+  const getObjectName = useCallback((object: MagicObject): string => {
+    return object.name;
+  }, []);
 
-  // Helper function to get translated object description
-  const getObjectDescription = (object: MagicObject): string => {
-    return t(object.descriptionKey as any) || object.descriptionKey;
-  };
+  // Helper function to get object description  
+  const getObjectDescription = useCallback((object: MagicObject): string => {
+    return object.description;
+  }, []);
 
-  // Helper function to get translated special effect
-  const getSpecialEffect = (object: MagicObject): string => {
-    if (object.effects.specialEffectKey) {
-      return t(object.effects.specialEffectKey as any) || object.effects.specialEffectKey;
-    }
-    return '';
-  };
+  // Helper function to get special effect
+  const getSpecialEffect = useCallback((object: MagicObject): string => {
+    return object.effects.specialEffect || '';
+  }, []);
 
   // Compute tab categories
   const tabs = [
@@ -103,7 +100,7 @@ const MagicInventory: React.FC<MagicInventoryProps> = ({
     });
 
     return objects;
-  }, [activeTab, selectedRarity, selectedType, showOnlyOwned, sortBy, playerInventory, equippedItems, t]);
+  }, [activeTab, selectedRarity, selectedType, showOnlyOwned, sortBy, playerInventory, equippedItems, getObjectName]);
 
   const isItemOwned = (itemId: string) => playerInventory.includes(itemId);
   const isItemEquipped = (itemId: string) => Object.values(equippedItems).includes(itemId);

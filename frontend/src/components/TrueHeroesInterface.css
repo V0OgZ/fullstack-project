@@ -45,54 +45,64 @@
   display: flex;
   gap: 15px;
   align-items: center;
-  z-index: 100;
+  z-index: 200; /* Increased z-index to prevent overlap */
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
 
 .scenario-badge {
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 0.9rem;
+  padding: 10px 18px; /* Slightly larger padding */
+  border-radius: 25px; /* More rounded */
+  font-size: 0.95rem;
   font-weight: 600;
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255, 255, 255, 0.15);
   transition: all 0.3s ease;
+  white-space: nowrap; /* Prevent text wrapping */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Add depth */
 }
 
 .scenario-badge.classique {
-  background: linear-gradient(135deg, rgba(67, 56, 202, 0.8), rgba(139, 92, 246, 0.8));
+  background: linear-gradient(135deg, rgba(67, 56, 202, 0.9), rgba(139, 92, 246, 0.9));
   color: white;
-  border-color: rgba(139, 92, 246, 0.3);
+  border-color: rgba(139, 92, 246, 0.4);
+  box-shadow: 0 4px 12px rgba(67, 56, 202, 0.3);
 }
 
 .scenario-badge.mystique {
-  background: linear-gradient(135deg, rgba(236, 72, 153, 0.8), rgba(168, 85, 247, 0.8));
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.9), rgba(168, 85, 247, 0.9));
   color: white;
-  border-color: rgba(236, 72, 153, 0.3);
+  border-color: rgba(236, 72, 153, 0.4);
+  box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
 }
 
 .magic-inventory-toggle {
-  padding: 8px 16px;
+  padding: 10px 18px; /* Match scenario badge padding */
   background: linear-gradient(135deg, rgba(236, 72, 153, 0.9), rgba(168, 85, 247, 0.9));
-  border: 2px solid rgba(236, 72, 153, 0.3);
-  border-radius: 20px;
+  border: 2px solid rgba(236, 72, 153, 0.4);
+  border-radius: 25px; /* Match scenario badge style */
   color: white;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(15px);
   transition: all 0.3s ease;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
 }
 
 .magic-inventory-toggle:hover {
   background: linear-gradient(135deg, rgba(236, 72, 153, 1), rgba(168, 85, 247, 1));
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(236, 72, 153, 0.4);
+  box-shadow: 0 6px 18px rgba(236, 72, 153, 0.5);
+  border-color: rgba(236, 72, 153, 0.6);
 }
 
 /* Main interface */
 .main-interface {
   width: 100%;
   height: 100%;
+  position: relative; /* Ensure proper stacking context */
+  z-index: 1; /* Lower than UI elements */
 }
 
 /* Magic inventory overlay */
@@ -102,9 +112,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(5px);
-  z-index: 1000;
+  background: rgba(0, 0, 0, 0.85); /* Slightly more opaque */
+  backdrop-filter: blur(8px);
+  z-index: 2000; /* Much higher z-index */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -116,36 +126,40 @@
   width: 95%;
   max-width: 1200px;
   height: 90%;
-  background: rgba(26, 26, 26, 0.95);
+  background: rgba(26, 26, 26, 0.98); /* More opaque */
   border-radius: 20px;
-  border: 2px solid rgba(236, 72, 153, 0.3);
+  border: 2px solid rgba(236, 72, 153, 0.4);
   overflow: hidden;
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(20px);
   animation: slideIn 0.3s ease;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); /* Stronger shadow */
 }
 
 .close-inventory {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 40px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  top: 15px;
+  right: 15px;
+  width: 45px;
+  height: 45px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.25);
   border-radius: 50%;
   color: white;
-  font-size: 20px;
+  font-size: 22px;
+  font-weight: bold;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  z-index: 10;
+  z-index: 2100; /* Higher than container */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .close-inventory:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.25);
   transform: scale(1.1);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
 }
 
 /* Mystical enhancements */
@@ -224,31 +238,78 @@
 @media (max-width: 768px) {
   .scenario-indicator {
     flex-direction: column;
-    gap: 10px;
-    top: 10px;
-    left: 10px;
+    gap: 8px;
+    top: 15px;
+    left: 15px;
+    right: 15px; /* Prevent overflow */
+    max-width: calc(100vw - 30px);
   }
   
   .scenario-badge,
   .magic-inventory-toggle {
-    font-size: 0.75rem;
-    padding: 6px 12px;
+    font-size: 0.8rem;
+    padding: 8px 14px;
+    text-align: center;
+    width: 100%; /* Full width on mobile */
+    max-width: 280px;
   }
   
   .magic-inventory-container {
     width: 98%;
     height: 95%;
     border-radius: 15px;
+    margin: 1%;
+  }
+  
+  .close-inventory {
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
   }
   
   .mystical-enhancements {
-    bottom: 10px;
-    right: 10px;
+    bottom: 15px;
+    right: 15px;
+    left: 15px; /* Prevent overflow */
   }
   
   .temporal-indicator {
     padding: 8px 12px;
     font-size: 0.75rem;
+    width: 100%; /* Full width on mobile */
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .scenario-indicator {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    gap: 6px;
+  }
+  
+  .scenario-badge,
+  .magic-inventory-toggle {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+    border-radius: 20px;
+  }
+  
+  .magic-inventory-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 0; /* Full screen on very small devices */
+  }
+  
+  .close-inventory {
+    top: 5px;
+    right: 5px;
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
   }
 }
 
@@ -286,4 +347,16 @@
     opacity: 1; 
     transform: scale(1.2);
   }
+} 
+
+/* Fix potential conflicts with other UI elements */
+.true-heroes-interface .header,
+.true-heroes-interface .top-bar,
+.true-heroes-interface .game-header {
+  z-index: 150; /* Lower than scenario indicator but higher than main interface */
+}
+
+/* Ensure proper stacking order */
+.true-heroes-interface {
+  isolation: isolate; /* Create new stacking context */
 } 
