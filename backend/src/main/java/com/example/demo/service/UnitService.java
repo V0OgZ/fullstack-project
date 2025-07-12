@@ -14,7 +14,91 @@ public class UnitService {
     @Autowired
     private UnitRepository unitRepository;
     
-    // Get all units
+    // I18n service temporarily disabled
+    
+    // Get all units with localized names/descriptions
+    public List<Map<String, Object>> getAllUnitsLocalized(String language) {
+        List<Unit> units = unitRepository.findAll();
+        return units.stream()
+                .map(unit -> createLocalizedUnitMap(unit, language))
+                .collect(Collectors.toList());
+    }
+    
+    // Get unit by ID with localization
+    public Map<String, Object> getUnitByIdLocalized(String id, String language) {
+        Optional<Unit> unit = unitRepository.findById(id);
+        return unit.map(u -> createLocalizedUnitMap(u, language)).orElse(null);
+    }
+    
+    // Get units by castle with localization
+    public List<Map<String, Object>> getUnitsByCastleLocalized(String castle, String language) {
+        List<Unit> units = unitRepository.findByCastle(castle);
+        return units.stream()
+                .map(unit -> createLocalizedUnitMap(unit, language))
+                .collect(Collectors.toList());
+    }
+    
+    // Get complete castle roster with localization
+    public Map<String, Object> getCastleRosterLocalized(String castle, String language) {
+        List<Unit> castleUnits = unitRepository.findByCastle(castle);
+        Map<Integer, List<Map<String, Object>>> groupedByTier = castleUnits.stream()
+                .collect(Collectors.groupingBy(Unit::getTier,
+                        Collectors.mapping(unit -> createLocalizedUnitMap(unit, language), Collectors.toList())));
+        
+        Map<String, Object> result = new HashMap<>();
+        result.put("castle", castle);
+        result.put("castleName", castle.substring(0, 1).toUpperCase() + castle.substring(1));
+        result.put("castleDescription", "Castle of " + castle);
+        result.put("units", groupedByTier);
+        
+        return result;
+    }
+    
+    // Helper method to create localized unit map
+    private Map<String, Object> createLocalizedUnitMap(Unit unit, String language) {
+        Map<String, Object> unitMap = new HashMap<>();
+        
+        // Basic unit data
+        unitMap.put("id", unit.getId());
+        unitMap.put("name", unit.getName());
+        unitMap.put("description", unit.getName() + " unit from " + unit.getCastle() + " castle");
+        unitMap.put("castle", unit.getCastle());
+        unitMap.put("tier", unit.getTier());
+        unitMap.put("variant", unit.getVariant());
+        
+        // Stats
+        Map<String, Object> stats = new HashMap<>();
+        stats.put("attack", unit.getAttack());
+        stats.put("defense", unit.getDefense());
+        stats.put("health", unit.getHealth());
+        stats.put("minDamage", unit.getMinDamage());
+        stats.put("maxDamage", unit.getMaxDamage());
+        stats.put("speed", unit.getSpeed());
+        if (unit.getShots() != null) {
+            stats.put("shots", unit.getShots());
+        }
+        unitMap.put("stats", stats);
+        
+        // Costs
+        Map<String, Object> costs = new HashMap<>();
+        if (unit.getGoldCost() != null) costs.put("gold", unit.getGoldCost());
+        if (unit.getWoodCost() != null) costs.put("wood", unit.getWoodCost());
+        if (unit.getStoneCost() != null) costs.put("stone", unit.getStoneCost());
+        if (unit.getOreCost() != null) costs.put("ore", unit.getOreCost());
+        if (unit.getCrystalCost() != null) costs.put("crystal", unit.getCrystalCost());
+        if (unit.getGemsCost() != null) costs.put("gems", unit.getGemsCost());
+        if (unit.getSulfurCost() != null) costs.put("sulfur", unit.getSulfurCost());
+        unitMap.put("costs", costs);
+        
+        // Other properties
+        unitMap.put("growth", unit.getGrowth());
+        unitMap.put("aiValue", unit.getAiValue());
+        unitMap.put("abilities", unit.getAbilities());
+        
+        return unitMap;
+    }
+    
+    // Get all units (original method for backward compatibility)
     public List<Unit> getAllUnits() {
         return unitRepository.findAll();
     }
@@ -34,7 +118,7 @@ public class UnitService {
         return unitRepository.findByTier(tier);
     }
     
-    // Get complete castle roster (all tiers for a castle)
+    // Get complete castle roster (grouped by tier)
     public Map<Integer, List<Unit>> getCastleRoster(String castle) {
         List<Unit> castleUnits = unitRepository.findByCastle(castle);
         return castleUnits.stream()

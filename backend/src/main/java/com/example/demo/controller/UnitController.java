@@ -18,7 +18,41 @@ public class UnitController {
     @Autowired
     private UnitService unitService;
     
-    // Get all units
+    // Get all units with localization
+    @GetMapping("/localized/{language}")
+    public ResponseEntity<List<Map<String, Object>>> getAllUnitsLocalized(@PathVariable String language) {
+        List<Map<String, Object>> units = unitService.getAllUnitsLocalized(language);
+        return ResponseEntity.ok(units);
+    }
+    
+    // Get unit by ID with localization
+    @GetMapping("/{id}/localized/{language}")
+    public ResponseEntity<Map<String, Object>> getUnitByIdLocalized(
+            @PathVariable String id, 
+            @PathVariable String language) {
+        Map<String, Object> unit = unitService.getUnitByIdLocalized(id, language);
+        return unit != null ? ResponseEntity.ok(unit) : ResponseEntity.notFound().build();
+    }
+    
+    // Get units by castle with localization
+    @GetMapping("/castle/{castle}/localized/{language}")
+    public ResponseEntity<List<Map<String, Object>>> getUnitsByCastleLocalized(
+            @PathVariable String castle, 
+            @PathVariable String language) {
+        List<Map<String, Object>> units = unitService.getUnitsByCastleLocalized(castle, language);
+        return ResponseEntity.ok(units);
+    }
+    
+    // Get complete castle roster with localization
+    @GetMapping("/castle/{castle}/roster/localized/{language}")
+    public ResponseEntity<Map<String, Object>> getCastleRosterLocalized(
+            @PathVariable String castle, 
+            @PathVariable String language) {
+        Map<String, Object> roster = unitService.getCastleRosterLocalized(castle, language);
+        return ResponseEntity.ok(roster);
+    }
+    
+    // Get all units (original endpoint for backward compatibility)
     @GetMapping
     public ResponseEntity<List<Unit>> getAllUnits() {
         List<Unit> units = unitService.getAllUnits();
