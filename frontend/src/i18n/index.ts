@@ -184,6 +184,7 @@ export interface Translation {
   classicDescription: string;
   mysticalConquest: string;
   mysticalDescription: string;
+  multiplayerArena: string;
   turnBasedCombat: string;
   captureBuildings: string;
   hexagonalMaps: string;
@@ -456,6 +457,7 @@ const frenchTranslations: Translation = {
   classicDescription: 'Un jeu de stratégie où vous devez conquérir le monde.',
   mysticalConquest: 'Conquête Mystique',
   mysticalDescription: 'Un jeu de rôle où vous devez résoudre des mystères.',
+  multiplayerArena: 'Arène Multijoueur',
   turnBasedCombat: 'Combat de Tour',
   captureBuildings: 'Capturer les Bâtiments',
   hexagonalMaps: 'Cartes Hexagonales',
@@ -728,6 +730,7 @@ const englishTranslations: Translation = {
   classicDescription: 'A strategy game where you must conquer the world.',
   mysticalConquest: 'Mystical Conquest',
   mysticalDescription: 'A role-playing game where you must solve mysteries.',
+  multiplayerArena: 'Multiplayer Arena',
   turnBasedCombat: 'Turn-Based Combat',
   captureBuildings: 'Capture Buildings',
   hexagonalMaps: 'Hexagonal Maps',
@@ -1000,6 +1003,7 @@ const russianTranslations: Translation = {
   classicDescription: 'Стратегическая игра, где вы должны завоевать мир.',
   mysticalConquest: 'Мистическое завоевание',
   mysticalDescription: 'Ролевая игра, где вы должны раскрыть тайны.',
+  multiplayerArena: 'Мультиплеерная арена',
   turnBasedCombat: 'Пошаговый бой',
   captureBuildings: 'Захват зданий',
   hexagonalMaps: 'Шестиугольные карты',

@@ -1,9 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import Game from './pages/Game';
 
 const GameSelector: React.FC = () => {
+  // Random tips that rotate one by one
+  const tips = [
+    "💡 Both scenarios use the same game interface",
+    "🔮 The Mystical scenario adds special objects on the map that you can discover!",
+    "🎮 Real-time multiplayer sessions - Play with friends via WebSocket connections",
+    "🏰 8 different castle types with unique units and specializations",
+    "⚔️ Advanced combat system with tactical positioning on hexagonal battlefields",
+    "🧙‍♂️ 30+ magical artifacts including temporal objects that manipulate time",
+    "🌍 Dynamic resource management - Gold, Wood, Stone, Mana, and more",
+    "🏛️ Political intrigue system with advisors and diplomatic consequences",
+    "🎯 Comprehensive game save system - Never lose your progress",
+    "🔮 ZFC (Zone de Causalité) - Revolutionary async gameplay mechanics",
+    "⚡ Use hotkeys for faster gameplay and strategic advantage",
+    "🌟 Discover hidden treasures and ancient artifacts across the map",
+    "🔥 Epic boss battles await in the deepest dungeons",
+    "🏆 Multiplayer tournaments with seasonal rankings and rewards"
+  ];
+
+  const [currentTip, setCurrentTip] = useState(0);
+
+  // Rotate tips every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTip((prev) => (prev + 1) % tips.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [tips.length]);
+
   return (
     <div className="game-selector">
       <header className="selector-header">
@@ -35,40 +64,23 @@ const GameSelector: React.FC = () => {
           </div>
           <div className="difficulty-indicator hard">ADVANCED</div>
         </Link>
+
+        <Link to="/game/multiplayer-arena" className="game-option multiplayer">
+          <div className="game-icon">🌐</div>
+          <h2>Multiplayer Arena</h2>
+          <p>Compete against other players in real-time battles</p>
+          <div className="game-features">
+            <span>🏆 Ranked matches</span>
+            <span>👥 2-8 players</span>
+            <span>⚡ Real-time strategy</span>
+          </div>
+          <div className="difficulty-indicator multiplayer">COMPETITIVE</div>
+        </Link>
       </div>
       
-      <div className="scenario-explanation">
-        <p>💡 <strong>Both scenarios use the same game interface</strong></p>
-        <p>The Mystical scenario adds special objects on the map that you can discover!</p>
-        <p>🎮 <strong>Real-time multiplayer sessions</strong> - Play with friends via WebSocket connections</p>
-        <p>🏰 <strong>8 different castle types</strong> with unique units and specializations</p>
-        <p>⚔️ <strong>Advanced combat system</strong> with tactical positioning on hexagonal battlefields</p>
-        <p>🧙‍♂️ <strong>30+ magical artifacts</strong> including temporal objects that manipulate time</p>
-        <p>🌍 <strong>Dynamic resource management</strong> - Gold, Wood, Stone, Mana, and more</p>
-        <p>🏛️ <strong>Political intrigue system</strong> with advisors and diplomatic consequences</p>
-        <p>🎯 <strong>Comprehensive game save system</strong> - Never lose your progress</p>
-        <p>🔮 <strong>ZFC (Zone de Causalité)</strong> - Revolutionary async gameplay mechanics</p>
-      </div>
-      
-      <div className="technical-highlights">
-        <h3>🚀 Technical Excellence</h3>
-        <div className="tech-grid">
-          <div className="tech-item">
-            <span className="tech-icon">🧪</span>
-            <span><strong>77 Total Tests</strong><br/>44 Backend + 26 Frontend + 7 Map Loading</span>
-          </div>
-          <div className="tech-item">
-            <span className="tech-icon">⚡</span>
-            <span><strong>Spring Boot Backend</strong><br/>RESTful API + WebSocket Support</span>
-          </div>
-          <div className="tech-item">
-            <span className="tech-icon">🎨</span>
-            <span><strong>React TypeScript</strong><br/>60 FPS Canvas Rendering</span>
-          </div>
-          <div className="tech-item">
-            <span className="tech-icon">🌐</span>
-            <span><strong>Multi-language</strong><br/>French, English, Russian Support</span>
-          </div>
+      <div className="rotating-tips">
+        <div className="tip-display" key={currentTip}>
+          <strong>{tips[currentTip]}</strong>
         </div>
       </div>
       

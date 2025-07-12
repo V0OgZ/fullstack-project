@@ -7,7 +7,7 @@ import './TrueHeroesInterface.css';
 
 interface TrueHeroesInterfaceProps {
   playerCount: number;
-  scenarioType: 'classique' | 'mystique';
+  scenarioType: 'classique' | 'mystique' | 'multiplayer';
   scenarioId: string;
 }
 
@@ -59,7 +59,9 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
         <div className="loading-content">
           <div className="spinner"></div>
           <h2>
-            {scenarioType === 'mystique' ? `🔮 ${t('loading')}` : `🏰 ${t('loading')}`}
+            {scenarioType === 'mystique' ? `�� ${t('loading')}` : 
+             scenarioType === 'multiplayer' ? `🌐 ${t('loading')}` : 
+             `🏰 ${t('loading')}`}
           </h2>
           <p>
             {t('loading')}
@@ -74,9 +76,11 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
       {/* Scenario indicator */}
       <div className="scenario-indicator">
         <div className={`scenario-badge ${scenarioType}`}>
-          {scenarioType === 'mystique' ? `🔮 ${t('mysticalConquest')}` : `🏰 ${t('classicConquest')}`}
+          {scenarioType === 'mystique' ? `🔮 ${t('mysticalConquest')}` : 
+           scenarioType === 'multiplayer' ? `🌐 ${t('multiplayerArena')}` : 
+           `🏰 ${t('classicConquest')}`}
         </div>
-        {scenarioType === 'mystique' && (
+        {(scenarioType === 'mystique' || scenarioType === 'multiplayer') && (
           <button 
             className="magic-inventory-toggle"
             onClick={() => setShowMagicInventory(!showMagicInventory)}
@@ -92,8 +96,8 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
         <SimpleGameInterface />
       </div>
 
-      {/* Magic inventory overlay for mystical scenario */}
-      {scenarioType === 'mystique' && showMagicInventory && (
+      {/* Magic inventory overlay for mystical and multiplayer scenarios */}
+      {(scenarioType === 'mystique' || scenarioType === 'multiplayer') && showMagicInventory && (
         <div className="magic-inventory-overlay">
           <div className="magic-inventory-container">
             <button 
@@ -129,6 +133,25 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
         <div className="mystical-overlay">
           <div className="temporal-effects">
             {/* Subtle mystical effects */}
+          </div>
+        </div>
+      )}
+      
+      {/* Multiplayer-specific UI enhancements */}
+      {scenarioType === 'multiplayer' && (
+        <div className="multiplayer-overlay">
+          <div className="multiplayer-indicators">
+            <div className="player-list">
+              <h4>🏆 Players ({playerCount})</h4>
+              <div className="online-players">
+                {Array.from({ length: playerCount }, (_, i) => (
+                  <div key={i} className="player-indicator">
+                    <span className="player-status online"></span>
+                    Player {i + 1}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       )}
