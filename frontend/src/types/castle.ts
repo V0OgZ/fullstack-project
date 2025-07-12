@@ -317,8 +317,559 @@ export const UNIT_TYPES: UnitType[] = [
     aiValue: 300
   },
 
-  // Continue with more tiers... (This is just a sample)
-  // TODO: Implement remaining 159 units (7 more castles × 7 tiers × 3 variants = 147 units + Castle tiers 4-7)
+  // Tier 4: Swordsman line
+  {
+    id: 'castle_swordsman_basic',
+    name: 'Swordsman',
+    castle: 'castle',
+    tier: 4,
+    variant: 'basic',
+    stats: { attack: 10, defense: 12, health: 35, damage: [6, 9], speed: 5 },
+    abilities: [{ id: 'magic_resistance', name: 'Magic Resistance', description: '20% magic damage reduction', type: 'passive' }],
+    cost: { gold: 300, ore: 10 },
+    growth: 4,
+    aiValue: 300
+  },
+  {
+    id: 'castle_swordsman_upgraded',
+    name: 'Crusader',
+    castle: 'castle',
+    tier: 4,
+    variant: 'upgraded',
+    stats: { attack: 12, defense: 12, health: 35, damage: [7, 10], speed: 6 },
+    abilities: [
+      { id: 'magic_resistance', name: 'Magic Resistance', description: '20% magic damage reduction', type: 'passive' },
+      { id: 'double_attack', name: 'Double Attack', description: 'Attacks twice per turn', type: 'active', cooldown: 3 }
+    ],
+    cost: { gold: 400, ore: 10 },
+    growth: 4,
+    aiValue: 400
+  },
+  {
+    id: 'castle_swordsman_champion',
+    name: 'Temple Guard',
+    castle: 'castle',
+    tier: 4,
+    variant: 'champion',
+    stats: { attack: 14, defense: 14, health: 40, damage: [8, 12], speed: 7 },
+    abilities: [
+      { id: 'magic_resistance', name: 'Magic Resistance', description: '40% magic damage reduction', type: 'passive' },
+      { id: 'double_attack', name: 'Double Attack', description: 'Attacks twice per turn', type: 'active', cooldown: 3 },
+      { id: 'holy_strike', name: 'Holy Strike', description: 'Deals +50% damage to undead', type: 'passive' }
+    ],
+    cost: { gold: 500, ore: 15, crystal: 3 },
+    growth: 4,
+    aiValue: 500
+  },
+
+  // Tier 5: Monk line
+  {
+    id: 'castle_monk_basic',
+    name: 'Monk',
+    castle: 'castle',
+    tier: 5,
+    variant: 'basic',
+    stats: { attack: 12, defense: 7, health: 30, damage: [10, 12], speed: 5, shots: 12 },
+    abilities: [
+      { id: 'ranged_attack', name: 'Ranged Attack', description: 'Can attack from distance', type: 'passive' },
+      { id: 'no_melee_penalty', name: 'No Melee Penalty', description: 'No penalty for ranged attacks in melee', type: 'passive' }
+    ],
+    cost: { gold: 400, crystal: 5 },
+    growth: 3,
+    aiValue: 400
+  },
+  {
+    id: 'castle_monk_upgraded',
+    name: 'Zealot',
+    castle: 'castle',
+    tier: 5,
+    variant: 'upgraded',
+    stats: { attack: 12, defense: 10, health: 30, damage: [10, 12], speed: 7, shots: 24 },
+    abilities: [
+      { id: 'ranged_attack', name: 'Ranged Attack', description: 'Can attack from distance', type: 'passive' },
+      { id: 'no_melee_penalty', name: 'No Melee Penalty', description: 'No penalty for ranged attacks in melee', type: 'passive' },
+      { id: 'no_range_penalty', name: 'No Range Penalty', description: 'No penalty for long-range attacks', type: 'passive' }
+    ],
+    cost: { gold: 450, crystal: 5 },
+    growth: 3,
+    aiValue: 450
+  },
+  {
+    id: 'castle_monk_champion',
+    name: 'Divine Zealot',
+    castle: 'castle',
+    tier: 5,
+    variant: 'champion',
+    stats: { attack: 14, defense: 12, health: 35, damage: [12, 15], speed: 8, shots: 32 },
+    abilities: [
+      { id: 'ranged_attack', name: 'Ranged Attack', description: 'Can attack from distance', type: 'passive' },
+      { id: 'no_melee_penalty', name: 'No Melee Penalty', description: 'No penalty for ranged attacks in melee', type: 'passive' },
+      { id: 'no_range_penalty', name: 'No Range Penalty', description: 'No penalty for long-range attacks', type: 'passive' },
+      { id: 'divine_blessing', name: 'Divine Blessing', description: 'Heals nearby allies at start of turn', type: 'passive' }
+    ],
+    cost: { gold: 600, crystal: 8, gems: 2 },
+    growth: 3,
+    aiValue: 600
+  },
+
+  // Tier 6: Cavalier line
+  {
+    id: 'castle_cavalier_basic',
+    name: 'Cavalier',
+    castle: 'castle',
+    tier: 6,
+    variant: 'basic',
+    stats: { attack: 15, defense: 15, health: 100, damage: [15, 25], speed: 7 },
+    abilities: [
+      { id: 'charge', name: 'Charge', description: 'Deals +50% damage when moving before attack', type: 'passive' },
+      { id: 'jousting', name: 'Jousting', description: 'Damage bonus increases with distance traveled', type: 'passive' }
+    ],
+    cost: { gold: 1000, ore: 20 },
+    growth: 2,
+    aiValue: 1000
+  },
+  {
+    id: 'castle_cavalier_upgraded',
+    name: 'Champion',
+    castle: 'castle',
+    tier: 6,
+    variant: 'upgraded',
+    stats: { attack: 16, defense: 16, health: 100, damage: [20, 25], speed: 9 },
+    abilities: [
+      { id: 'charge', name: 'Charge', description: 'Deals +50% damage when moving before attack', type: 'passive' },
+      { id: 'jousting', name: 'Jousting', description: 'Damage bonus increases with distance traveled', type: 'passive' },
+      { id: 'trample', name: 'Trample', description: 'Can attack through enemies', type: 'active', cooldown: 2 }
+    ],
+    cost: { gold: 1200, ore: 20 },
+    growth: 2,
+    aiValue: 1200
+  },
+  {
+    id: 'castle_cavalier_champion',
+    name: 'Sacred Champion',
+    castle: 'castle',
+    tier: 6,
+    variant: 'champion',
+    stats: { attack: 18, defense: 18, health: 120, damage: [25, 30], speed: 10 },
+    abilities: [
+      { id: 'charge', name: 'Charge', description: 'Deals +50% damage when moving before attack', type: 'passive' },
+      { id: 'jousting', name: 'Jousting', description: 'Damage bonus increases with distance traveled', type: 'passive' },
+      { id: 'trample', name: 'Trample', description: 'Can attack through enemies', type: 'active', cooldown: 2 },
+      { id: 'divine_armor', name: 'Divine Armor', description: 'Immune to curse spells', type: 'passive' }
+    ],
+    cost: { gold: 1500, ore: 25, crystal: 5 },
+    growth: 2,
+    aiValue: 1500
+  },
+
+  // Tier 7: Angel line
+  {
+    id: 'castle_angel_basic',
+    name: 'Angel',
+    castle: 'castle',
+    tier: 7,
+    variant: 'basic',
+    stats: { attack: 20, defense: 20, health: 200, damage: [50, 50], speed: 12 },
+    abilities: [
+      { id: 'flying', name: 'Flying', description: 'Can fly over obstacles', type: 'passive' },
+      { id: 'no_retaliation', name: 'No Retaliation', description: 'Never receives retaliation', type: 'passive' },
+      { id: 'resurrection', name: 'Resurrection', description: 'Can resurrect fallen allies', type: 'active', cooldown: 5 }
+    ],
+    cost: { gold: 3000, crystal: 20, gems: 5 },
+    growth: 1,
+    aiValue: 3000
+  },
+  {
+    id: 'castle_angel_upgraded',
+    name: 'Archangel',
+    castle: 'castle',
+    tier: 7,
+    variant: 'upgraded',
+    stats: { attack: 30, defense: 30, health: 250, damage: [50, 50], speed: 18 },
+    abilities: [
+      { id: 'flying', name: 'Flying', description: 'Can fly over obstacles', type: 'passive' },
+      { id: 'no_retaliation', name: 'No Retaliation', description: 'Never receives retaliation', type: 'passive' },
+      { id: 'resurrection', name: 'Resurrection', description: 'Can resurrect fallen allies', type: 'active', cooldown: 3 },
+      { id: 'spell_immunity', name: 'Spell Immunity', description: 'Immune to all spells below level 4', type: 'passive' }
+    ],
+    cost: { gold: 4000, crystal: 20, gems: 5 },
+    growth: 1,
+    aiValue: 4000
+  },
+  {
+    id: 'castle_angel_champion',
+    name: 'Seraphim',
+    castle: 'castle',
+    tier: 7,
+    variant: 'champion',
+    stats: { attack: 35, defense: 35, health: 300, damage: [60, 80], speed: 20 },
+    abilities: [
+      { id: 'flying', name: 'Flying', description: 'Can fly over obstacles', type: 'passive' },
+      { id: 'no_retaliation', name: 'No Retaliation', description: 'Never receives retaliation', type: 'passive' },
+      { id: 'resurrection', name: 'Resurrection', description: 'Can resurrect fallen allies', type: 'active', cooldown: 3 },
+      { id: 'spell_immunity', name: 'Spell Immunity', description: 'Immune to all spells below level 5', type: 'passive' },
+      { id: 'divine_wrath', name: 'Divine Wrath', description: 'Area attack that damages all adjacent enemies', type: 'active', cooldown: 4 }
+    ],
+    cost: { gold: 5000, crystal: 25, gems: 10, sulfur: 5 },
+    growth: 1,
+    aiValue: 5000
+  },
+
+  // 🌲 RAMPART UNITS (21 units: 7 tiers × 3 variants)
+  
+  // Tier 1: Centaur line
+  {
+    id: 'rampart_centaur_basic',
+    name: 'Centaur',
+    castle: 'rampart',
+    tier: 1,
+    variant: 'basic',
+    stats: { attack: 5, defense: 3, health: 8, damage: [2, 3], speed: 6 },
+    abilities: [{ id: 'no_melee_penalty', name: 'No Melee Penalty', description: 'No penalty for ranged attacks in melee', type: 'passive' }],
+    cost: { gold: 70, wood: 10 },
+    growth: 14,
+    aiValue: 70
+  },
+  {
+    id: 'rampart_centaur_upgraded',
+    name: 'Centaur Captain',
+    castle: 'rampart',
+    tier: 1,
+    variant: 'upgraded',
+    stats: { attack: 6, defense: 3, health: 10, damage: [2, 3], speed: 8 },
+    abilities: [
+      { id: 'no_melee_penalty', name: 'No Melee Penalty', description: 'No penalty for ranged attacks in melee', type: 'passive' },
+      { id: 'leadership', name: 'Leadership', description: '+1 speed to adjacent allies', type: 'passive' }
+    ],
+    cost: { gold: 90, wood: 10 },
+    growth: 14,
+    aiValue: 90
+  },
+  {
+    id: 'rampart_centaur_champion',
+    name: 'Centaur Warchief',
+    castle: 'rampart',
+    tier: 1,
+    variant: 'champion',
+    stats: { attack: 8, defense: 5, health: 12, damage: [3, 4], speed: 10 },
+    abilities: [
+      { id: 'no_melee_penalty', name: 'No Melee Penalty', description: 'No penalty for ranged attacks in melee', type: 'passive' },
+      { id: 'leadership', name: 'Leadership', description: '+1 speed to adjacent allies', type: 'passive' },
+      { id: 'forest_knowledge', name: 'Forest Knowledge', description: '+2 speed in forest terrain', type: 'passive' }
+    ],
+    cost: { gold: 120, wood: 15, ore: 2 },
+    growth: 14,
+    aiValue: 120
+  },
+
+  // Tier 2: Dwarf line
+  {
+    id: 'rampart_dwarf_basic',
+    name: 'Dwarf',
+    castle: 'rampart',
+    tier: 2,
+    variant: 'basic',
+    stats: { attack: 6, defense: 7, health: 20, damage: [2, 4], speed: 3 },
+    abilities: [
+      { id: 'magic_resistance', name: 'Magic Resistance', description: '20% magic damage reduction', type: 'passive' },
+      { id: 'mountain_walking', name: 'Mountain Walking', description: 'No penalty in rocky terrain', type: 'passive' }
+    ],
+    cost: { gold: 120, ore: 5 },
+    growth: 8,
+    aiValue: 120
+  },
+  {
+    id: 'rampart_dwarf_upgraded',
+    name: 'Battle Dwarf',
+    castle: 'rampart',
+    tier: 2,
+    variant: 'upgraded',
+    stats: { attack: 7, defense: 8, health: 20, damage: [2, 4], speed: 5 },
+    abilities: [
+      { id: 'magic_resistance', name: 'Magic Resistance', description: '40% magic damage reduction', type: 'passive' },
+      { id: 'mountain_walking', name: 'Mountain Walking', description: 'No penalty in rocky terrain', type: 'passive' },
+      { id: 'axe_mastery', name: 'Axe Mastery', description: '+1 damage against large creatures', type: 'passive' }
+    ],
+    cost: { gold: 150, ore: 5 },
+    growth: 8,
+    aiValue: 150
+  },
+  {
+    id: 'rampart_dwarf_champion',
+    name: 'Dwarf Lord',
+    castle: 'rampart',
+    tier: 2,
+    variant: 'champion',
+    stats: { attack: 9, defense: 10, health: 25, damage: [3, 5], speed: 6 },
+    abilities: [
+      { id: 'magic_resistance', name: 'Magic Resistance', description: '60% magic damage reduction', type: 'passive' },
+      { id: 'mountain_walking', name: 'Mountain Walking', description: 'No penalty in rocky terrain', type: 'passive' },
+      { id: 'axe_mastery', name: 'Axe Mastery', description: '+2 damage against large creatures', type: 'passive' },
+      { id: 'forge_blessing', name: 'Forge Blessing', description: 'Weapons cannot be broken', type: 'passive' }
+    ],
+    cost: { gold: 200, ore: 8, crystal: 2 },
+    growth: 8,
+    aiValue: 200
+  },
+
+  // Tier 3: Elf line
+  {
+    id: 'rampart_elf_basic',
+    name: 'Wood Elf',
+    castle: 'rampart',
+    tier: 3,
+    variant: 'basic',
+    stats: { attack: 9, defense: 5, health: 15, damage: [3, 5], speed: 6, shots: 24 },
+    abilities: [
+      { id: 'ranged_attack', name: 'Ranged Attack', description: 'Can attack from distance', type: 'passive' },
+      { id: 'double_shot', name: 'Double Shot', description: 'Attacks twice per turn', type: 'passive' }
+    ],
+    cost: { gold: 200, wood: 15 },
+    growth: 7,
+    aiValue: 200
+  },
+  {
+    id: 'rampart_elf_upgraded',
+    name: 'Grand Elf',
+    castle: 'rampart',
+    tier: 3,
+    variant: 'upgraded',
+    stats: { attack: 9, defense: 5, health: 15, damage: [3, 5], speed: 7, shots: 24 },
+    abilities: [
+      { id: 'ranged_attack', name: 'Ranged Attack', description: 'Can attack from distance', type: 'passive' },
+      { id: 'double_shot', name: 'Double Shot', description: 'Attacks twice per turn', type: 'passive' },
+      { id: 'blind_immunity', name: 'Blind Immunity', description: 'Immune to blind spells', type: 'passive' }
+    ],
+    cost: { gold: 225, wood: 15 },
+    growth: 7,
+    aiValue: 225
+  },
+  {
+    id: 'rampart_elf_champion',
+    name: 'Elven Ranger',
+    castle: 'rampart',
+    tier: 3,
+    variant: 'champion',
+    stats: { attack: 11, defense: 7, health: 18, damage: [4, 6], speed: 9, shots: 32 },
+    abilities: [
+      { id: 'ranged_attack', name: 'Ranged Attack', description: 'Can attack from distance', type: 'passive' },
+      { id: 'double_shot', name: 'Double Shot', description: 'Attacks twice per turn', type: 'passive' },
+      { id: 'blind_immunity', name: 'Blind Immunity', description: 'Immune to blind spells', type: 'passive' },
+      { id: 'forest_stealth', name: 'Forest Stealth', description: '+50% defense in forest terrain', type: 'passive' }
+    ],
+    cost: { gold: 275, wood: 20, crystal: 3 },
+    growth: 7,
+    aiValue: 275
+  },
+
+  // Tier 4: Pegasus line
+  {
+    id: 'rampart_pegasus_basic',
+    name: 'Pegasus',
+    castle: 'rampart',
+    tier: 4,
+    variant: 'basic',
+    stats: { attack: 9, defense: 8, health: 30, damage: [5, 9], speed: 8 },
+    abilities: [
+      { id: 'flying', name: 'Flying', description: 'Can fly over obstacles', type: 'passive' },
+      { id: 'magic_resistance', name: 'Magic Resistance', description: '20% magic damage reduction', type: 'passive' }
+    ],
+    cost: { gold: 250, crystal: 5 },
+    growth: 5,
+    aiValue: 250
+  },
+  {
+    id: 'rampart_pegasus_upgraded',
+    name: 'Silver Pegasus',
+    castle: 'rampart',
+    tier: 4,
+    variant: 'upgraded',
+    stats: { attack: 9, defense: 10, health: 30, damage: [5, 9], speed: 12 },
+    abilities: [
+      { id: 'flying', name: 'Flying', description: 'Can fly over obstacles', type: 'passive' },
+      { id: 'magic_resistance', name: 'Magic Resistance', description: '40% magic damage reduction', type: 'passive' },
+      { id: 'spell_immunity', name: 'Spell Immunity', description: 'Immune to spells below level 2', type: 'passive' }
+    ],
+    cost: { gold: 300, crystal: 5 },
+    growth: 5,
+    aiValue: 300
+  },
+  {
+    id: 'rampart_pegasus_champion',
+    name: 'Celestial Pegasus',
+    castle: 'rampart',
+    tier: 4,
+    variant: 'champion',
+    stats: { attack: 11, defense: 12, health: 35, damage: [6, 11], speed: 14 },
+    abilities: [
+      { id: 'flying', name: 'Flying', description: 'Can fly over obstacles', type: 'passive' },
+      { id: 'magic_resistance', name: 'Magic Resistance', description: '60% magic damage reduction', type: 'passive' },
+      { id: 'spell_immunity', name: 'Spell Immunity', description: 'Immune to spells below level 3', type: 'passive' },
+      { id: 'divine_grace', name: 'Divine Grace', description: 'Heals 10 HP at start of turn', type: 'passive' }
+    ],
+    cost: { gold: 400, crystal: 8, gems: 2 },
+    growth: 5,
+    aiValue: 400
+  },
+
+  // Tier 5: Dendroid line
+  {
+    id: 'rampart_dendroid_basic',
+    name: 'Dendroid Guard',
+    castle: 'rampart',
+    tier: 5,
+    variant: 'basic',
+    stats: { attack: 9, defense: 12, health: 55, damage: [10, 14], speed: 3 },
+    abilities: [
+      { id: 'binding', name: 'Binding', description: 'Prevents enemy from moving', type: 'active', cooldown: 3 },
+      { id: 'magic_resistance', name: 'Magic Resistance', description: '50% magic damage reduction', type: 'passive' }
+    ],
+    cost: { gold: 350, wood: 20 },
+    growth: 3,
+    aiValue: 350
+  },
+  {
+    id: 'rampart_dendroid_upgraded',
+    name: 'Dendroid Soldier',
+    castle: 'rampart',
+    tier: 5,
+    variant: 'upgraded',
+    stats: { attack: 9, defense: 12, health: 65, damage: [10, 14], speed: 4 },
+    abilities: [
+      { id: 'binding', name: 'Binding', description: 'Prevents enemy from moving', type: 'active', cooldown: 3 },
+      { id: 'magic_resistance', name: 'Magic Resistance', description: '50% magic damage reduction', type: 'passive' },
+      { id: 'death_blow', name: 'Death Blow', description: 'Deals +20 damage on death', type: 'passive' }
+    ],
+    cost: { gold: 425, wood: 20 },
+    growth: 3,
+    aiValue: 425
+  },
+  {
+    id: 'rampart_dendroid_champion',
+    name: 'Ancient Treant',
+    castle: 'rampart',
+    tier: 5,
+    variant: 'champion',
+    stats: { attack: 11, defense: 15, health: 80, damage: [12, 18], speed: 5 },
+    abilities: [
+      { id: 'binding', name: 'Binding', description: 'Prevents enemy from moving', type: 'active', cooldown: 2 },
+      { id: 'magic_resistance', name: 'Magic Resistance', description: '70% magic damage reduction', type: 'passive' },
+      { id: 'death_blow', name: 'Death Blow', description: 'Deals +30 damage on death', type: 'passive' },
+      { id: 'forest_regeneration', name: 'Forest Regeneration', description: 'Regenerates 15 HP per turn', type: 'passive' }
+    ],
+    cost: { gold: 550, wood: 25, crystal: 5 },
+    growth: 3,
+    aiValue: 550
+  },
+
+  // Tier 6: Unicorn line
+  {
+    id: 'rampart_unicorn_basic',
+    name: 'Unicorn',
+    castle: 'rampart',
+    tier: 6,
+    variant: 'basic',
+    stats: { attack: 15, defense: 14, health: 90, damage: [18, 22], speed: 7 },
+    abilities: [
+      { id: 'magic_resistance', name: 'Magic Resistance', description: '20% magic damage reduction', type: 'passive' },
+      { id: 'aura_of_resistance', name: 'Aura of Resistance', description: 'Allies get +20% magic resistance', type: 'passive' },
+      { id: 'blind_immunity', name: 'Blind Immunity', description: 'Immune to blind spells', type: 'passive' }
+    ],
+    cost: { gold: 850, gems: 10 },
+    growth: 2,
+    aiValue: 850
+  },
+  {
+    id: 'rampart_unicorn_upgraded',
+    name: 'War Unicorn',
+    castle: 'rampart',
+    tier: 6,
+    variant: 'upgraded',
+    stats: { attack: 15, defense: 14, health: 110, damage: [18, 22], speed: 9 },
+    abilities: [
+      { id: 'magic_resistance', name: 'Magic Resistance', description: '40% magic damage reduction', type: 'passive' },
+      { id: 'aura_of_resistance', name: 'Aura of Resistance', description: 'Allies get +40% magic resistance', type: 'passive' },
+      { id: 'blind_immunity', name: 'Blind Immunity', description: 'Immune to blind spells', type: 'passive' },
+      { id: 'spell_immunity', name: 'Spell Immunity', description: 'Immune to spells below level 4', type: 'passive' }
+    ],
+    cost: { gold: 950, gems: 10 },
+    growth: 2,
+    aiValue: 950
+  },
+  {
+    id: 'rampart_unicorn_champion',
+    name: 'Sacred Unicorn',
+    castle: 'rampart',
+    tier: 6,
+    variant: 'champion',
+    stats: { attack: 17, defense: 16, health: 130, damage: [20, 26], speed: 11 },
+    abilities: [
+      { id: 'magic_resistance', name: 'Magic Resistance', description: '60% magic damage reduction', type: 'passive' },
+      { id: 'aura_of_resistance', name: 'Aura of Resistance', description: 'Allies get +60% magic resistance', type: 'passive' },
+      { id: 'blind_immunity', name: 'Blind Immunity', description: 'Immune to blind spells', type: 'passive' },
+      { id: 'spell_immunity', name: 'Spell Immunity', description: 'Immune to spells below level 5', type: 'passive' },
+      { id: 'healing_horn', name: 'Healing Horn', description: 'Heals all allies in area', type: 'active', cooldown: 4 }
+    ],
+    cost: { gold: 1200, gems: 15, crystal: 8 },
+    growth: 2,
+    aiValue: 1200
+  },
+
+  // Tier 7: Dragon line
+  {
+    id: 'rampart_dragon_basic',
+    name: 'Green Dragon',
+    castle: 'rampart',
+    tier: 7,
+    variant: 'basic',
+    stats: { attack: 18, defense: 18, health: 180, damage: [40, 50], speed: 10 },
+    abilities: [
+      { id: 'flying', name: 'Flying', description: 'Can fly over obstacles', type: 'passive' },
+      { id: 'dragon_breath', name: 'Dragon Breath', description: 'Breath attack damages multiple enemies', type: 'active', cooldown: 3 },
+      { id: 'spell_immunity', name: 'Spell Immunity', description: 'Immune to spells below level 4', type: 'passive' }
+    ],
+    cost: { gold: 2400, crystal: 15, sulfur: 10 },
+    growth: 1,
+    aiValue: 2400
+  },
+  {
+    id: 'rampart_dragon_upgraded',
+    name: 'Gold Dragon',
+    castle: 'rampart',
+    tier: 7,
+    variant: 'upgraded',
+    stats: { attack: 27, defense: 27, health: 250, damage: [40, 50], speed: 16 },
+    abilities: [
+      { id: 'flying', name: 'Flying', description: 'Can fly over obstacles', type: 'passive' },
+      { id: 'dragon_breath', name: 'Dragon Breath', description: 'Breath attack damages multiple enemies', type: 'active', cooldown: 2 },
+      { id: 'spell_immunity', name: 'Spell Immunity', description: 'Immune to spells below level 5', type: 'passive' },
+      { id: 'spell_casting', name: 'Spell Casting', description: 'Can cast spells like a hero', type: 'active', cooldown: 5 }
+    ],
+    cost: { gold: 3000, crystal: 15, sulfur: 10 },
+    growth: 1,
+    aiValue: 3000
+  },
+  {
+    id: 'rampart_dragon_champion',
+    name: 'Ancient Dragon',
+    castle: 'rampart',
+    tier: 7,
+    variant: 'champion',
+    stats: { attack: 32, defense: 32, health: 300, damage: [50, 70], speed: 18 },
+    abilities: [
+      { id: 'flying', name: 'Flying', description: 'Can fly over obstacles', type: 'passive' },
+      { id: 'dragon_breath', name: 'Dragon Breath', description: 'Breath attack damages multiple enemies', type: 'active', cooldown: 2 },
+      { id: 'spell_immunity', name: 'Spell Immunity', description: 'Immune to all spells', type: 'passive' },
+      { id: 'spell_casting', name: 'Spell Casting', description: 'Can cast spells like a hero', type: 'active', cooldown: 3 },
+      { id: 'ancient_wisdom', name: 'Ancient Wisdom', description: 'Nearby allies gain +2 to all stats', type: 'passive' }
+    ],
+    cost: { gold: 4000, crystal: 20, sulfur: 15, gems: 10 },
+    growth: 1,
+    aiValue: 4000
+  },
+
+  // Continue with more castles... (Castle and Rampart complete)
+  // TODO: Implement remaining 126 units (6 more castles × 21 units)
 ];
 
 // 🏗️ BUILDING DEFINITIONS
