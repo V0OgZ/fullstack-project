@@ -892,9 +892,5 @@ export default {
   MILITARY_CRISES,
   ECONOMIC_CRISES,
   DIPLOMATIC_CRISES,
-  SCIENTIFIC_CRISES,
-  AdvisorType,
-  CrisisCategory,
-  CrisisSeverity,
-  ReputationType
+  SCIENTIFIC_CRISES
 }; 

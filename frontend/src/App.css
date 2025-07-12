@@ -573,3 +573,28 @@ body {
   .resource-item { padding: 3px 8px; font-size: 12px; }
   .btn { padding: 5px 12px; font-size: 12px; }
 }
+
+/* BACKEND TEST SECTION */
+.backend-test-section {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.backend-test-link {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.backend-test-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  color: white;
+  text-decoration: none;
+}

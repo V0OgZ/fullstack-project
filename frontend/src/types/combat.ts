@@ -89,7 +89,7 @@ export interface Spell {
 export interface SpellEffect {
   type: 'damage' | 'heal' | 'buff' | 'debuff' | 'summon' | 'teleport' | 'special';
   value: number | string;
-  stat?: keyof UnitStack;
+  stat?: 'attack' | 'defense' | 'speed' | 'initiative' | 'luck' | 'morale' | 'knowledge' | 'spell_power';
   condition?: string;
   scaling?: 'knowledge' | 'spell_power' | 'unit_count';
 }

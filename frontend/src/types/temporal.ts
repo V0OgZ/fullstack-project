@@ -7,6 +7,22 @@ export type TemporalState = 'stable' | 'unstable' | 'contested' | 'corrupted' | 
 export type ParadoxType = 'grandfather' | 'bootstrap' | 'causal_loop' | 'timeline_split' | 'quantum_entanglement';
 export type ShadowType = 'real' | 'bluff' | 'decoy' | 'quantum_superposition' | 'temporal_echo';
 
+// Basic types for temporal mechanics
+export interface ActionPlan {
+  id: string;
+  type: 'move' | 'attack' | 'cast' | 'build' | 'recruit';
+  targetPosition?: Position;
+  parameters?: any;
+}
+
+export interface ConflictZone {
+  id: string;
+  center: Position;
+  radius: number;
+  players: string[];
+  severity: 'low' | 'medium' | 'high';
+}
+
 // 🌀 ADVANCED ZFC ZONE SYSTEM
 
 export interface QuantumZone {
@@ -51,8 +67,8 @@ export interface MultiLayerZone {
 
 export interface TemporalLayer {
   timeline: number; // Which timeline/branch this exists in
-  actions: ShadowAction[];
-  conflicts: ConflictZone[];
+  actions: AdvancedShadowAction[];
+  conflicts: QuantumZone[];
   temporalMana: number;
   locked: boolean; // Cannot be modified
 }
@@ -463,13 +479,5 @@ export interface AdvancedTemporalEngine {
 }
 
 export default {
-  TEMPORAL_SPELLS,
-  TemporalState,
-  ParadoxType,
-  ShadowType,
-  QuantumZone,
-  AdvancedShadowAction,
-  TemporalParadox,
-  QuantumSuperposition,
-  TemporalGameState
+  TEMPORAL_SPELLS
 }; 
