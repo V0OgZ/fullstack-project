@@ -102,6 +102,25 @@ export interface Translation {
   previous: string;
   yes: string;
   no: string;
+  
+  // Game Selector
+  chooseScenario: string;
+  classicConquest: string;
+  classicDescription: string;
+  mysticalConquest: string;
+  mysticalDescription: string;
+  turnBasedCombat: string;
+  captureBuildings: string;
+  hexagonalMaps: string;
+  easy: string;
+  advanced: string;
+  temporalObjects: string;
+  advancedMagic: string;
+  mysticPortals: string;
+  sameInterface: string;
+  mysticalAddsObjects: string;
+  testBackendConnection: string;
+  builtWith: string;
 }
 
 // Traductions françaises
@@ -203,6 +222,25 @@ const frenchTranslations: Translation = {
   previous: 'Précédent',
   yes: 'Oui',
   no: 'Non',
+  
+  // Game Selector
+  chooseScenario: 'Choisir un scénario',
+  classicConquest: 'Conquête Classique',
+  classicDescription: 'Un jeu de stratégie où vous devez conquérir le monde.',
+  mysticalConquest: 'Conquête Mystique',
+  mysticalDescription: 'Un jeu de rôle où vous devez résoudre des mystères.',
+  turnBasedCombat: 'Combat de Tour',
+  captureBuildings: 'Capturer les Bâtiments',
+  hexagonalMaps: 'Cartes Hexagonales',
+  easy: 'Facile',
+  advanced: 'Avancé',
+  temporalObjects: 'Objets Temporaires',
+  advancedMagic: 'Magie Avancée',
+  mysticPortals: 'Portails Mystiques',
+  sameInterface: 'Interface Identique',
+  mysticalAddsObjects: 'Ajoute des objets mystiques',
+  testBackendConnection: 'Tester la connexion du backend',
+  builtWith: 'Construit avec',
 };
 
 // Traductions anglaises
@@ -304,6 +342,25 @@ const englishTranslations: Translation = {
   previous: 'Previous',
   yes: 'Yes',
   no: 'No',
+  
+  // Game Selector
+  chooseScenario: 'Choose a scenario',
+  classicConquest: 'Classic Conquest',
+  classicDescription: 'A strategy game where you must conquer the world.',
+  mysticalConquest: 'Mystical Conquest',
+  mysticalDescription: 'A role-playing game where you must solve mysteries.',
+  turnBasedCombat: 'Turn-Based Combat',
+  captureBuildings: 'Capture Buildings',
+  hexagonalMaps: 'Hexagonal Maps',
+  easy: 'Easy',
+  advanced: 'Advanced',
+  temporalObjects: 'Temporal Objects',
+  advancedMagic: 'Advanced Magic',
+  mysticPortals: 'Mystic Portals',
+  sameInterface: 'Same Interface',
+  mysticalAddsObjects: 'Adds mystical objects',
+  testBackendConnection: 'Test backend connection',
+  builtWith: 'Built with',
 };
 
 // Store pour les traductions

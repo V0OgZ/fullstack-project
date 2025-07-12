@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useGameStore } from '../store/useGameStore';
 import SimpleGameInterface from './SimpleGameInterface';
 import MagicInventory from './MagicInventory';
+import { useTranslation } from '../i18n';
 import './TrueHeroesInterface.css';
 
 interface TrueHeroesInterfaceProps {
@@ -16,6 +17,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
   scenarioId
 }) => {
   const { currentPlayer, loadGame } = useGameStore();
+  const { t } = useTranslation();
   const [showMagicInventory, setShowMagicInventory] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
 
@@ -57,12 +59,10 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
         <div className="loading-content">
           <div className="spinner"></div>
           <h2>
-            {scenarioType === 'mystique' ? '🔮 Chargement du monde mystique...' : '🏰 Chargement du monde classique...'}
+            {scenarioType === 'mystique' ? `🔮 ${t('loading')}` : `🏰 ${t('loading')}`}
           </h2>
           <p>
-            {scenarioType === 'mystique' 
-              ? 'Préparation des objets magiques et temporels...' 
-              : 'Préparation des héros et des châteaux...'}
+            {t('loading')}
           </p>
         </div>
       </div>
@@ -74,15 +74,15 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
       {/* Scenario indicator */}
       <div className="scenario-indicator">
         <div className={`scenario-badge ${scenarioType}`}>
-          {scenarioType === 'mystique' ? '🔮 Conquête Mystique' : '🏰 Conquête Classique'}
+          {scenarioType === 'mystique' ? `🔮 ${t('mysticalConquest')}` : `🏰 ${t('classicConquest')}`}
         </div>
         {scenarioType === 'mystique' && (
           <button 
             className="magic-inventory-toggle"
             onClick={() => setShowMagicInventory(!showMagicInventory)}
-            title="Inventaire Magique"
+            title="Magic Inventory"
           >
-            🎒 Inventaire Magique
+            🎒 Magic Inventory
           </button>
         )}
       </div>
@@ -117,16 +117,9 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
 
       {/* Scenario-specific UI enhancements */}
       {scenarioType === 'mystique' && (
-        <div className="mystical-enhancements">
-          <div className="temporal-indicator">
-            <span>⏰</span>
-            <div className="temporal-info">
-              <small>Objets temporels disponibles</small>
-              <div className="temporal-count">
-                {/* TODO: Get actual temporal objects count */}
-                {Math.floor(Math.random() * 5) + 1}
-              </div>
-            </div>
+        <div className="mystical-overlay">
+          <div className="temporal-effects">
+            {/* Subtle mystical effects */}
           </div>
         </div>
       )}
