@@ -22,7 +22,7 @@ interface AnimatedElement {
 const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
-  const { map, currentGame, currentPlayer, selectedTile, visibleZFCs, shadowActions } = useGameStore();
+  const { map, currentGame, selectedTile, visibleZFCs } = useGameStore();
   
   const [animatedElements, setAnimatedElements] = useState<AnimatedElement[]>([]);
   const [hoveredTile, setHoveredTile] = useState<Position | null>(null);
@@ -58,7 +58,7 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
     const x = config.hexWidth * (hex.x + hex.y * 0.5) + config.offsetX;
     const y = config.hexHeight * hex.y * 0.75 + config.offsetY;
     return { x, y };
-  }, []);
+  }, [config.hexWidth, config.hexHeight, config.offsetX, config.offsetY]);
 
   const pixelToHex = useCallback((pixel: Position): Position => {
     const adjustedX = (pixel.x - config.offsetX) / config.hexWidth;
@@ -68,6 +68,205 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
     const x = Math.round(adjustedX - y * 0.5);
     
     return { x, y };
+  }, [config.hexWidth, config.hexHeight, config.offsetX, config.offsetY]);
+
+  // Rendu d'une structure
+  const drawStructure = useCallback((
+    ctx: CanvasRenderingContext2D,
+    center: Position,
+    structure: any
+  ) => {
+    const { x, y } = center;
+    const size = 22;
+
+    // Halo de la structure
+    ctx.beginPath();
+    ctx.arc(x, y, size + 4, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(139, 69, 19, 0.3)';
+    ctx.fill();
+
+    // Fond de la structure avec gradient
+    const gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+    gradient.addColorStop(0, '#DEB887');
+    gradient.addColorStop(1, '#8B4513');
+    
+    ctx.beginPath();
+    ctx.arc(x, y, size, 0, Math.PI * 2);
+    ctx.fillStyle = gradient;
+    ctx.fill();
+    ctx.strokeStyle = '#654321';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Icône de la structure avec des formes géométriques au lieu d'émojis
+    ctx.fillStyle = 'white';
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = 1;
+    
+    // Dessiner différentes formes selon le type
+    if (structure.type === 'castle') {
+      // Château - forme rectangulaire avec créneaux
+      ctx.fillRect(x - 8, y - 8, 16, 16);
+      ctx.strokeRect(x - 8, y - 8, 16, 16);
+      // Créneaux
+      ctx.fillRect(x - 10, y - 10, 4, 4);
+      ctx.fillRect(x - 2, y - 10, 4, 4);
+      ctx.fillRect(x + 6, y - 10, 4, 4);
+    } else if (structure.type === 'gold_mine') {
+      // Mine d'or - forme de diamant
+      ctx.beginPath();
+      ctx.moveTo(x, y - 8);
+      ctx.lineTo(x + 8, y);
+      ctx.lineTo(x, y + 8);
+      ctx.lineTo(x - 8, y);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+    } else if (structure.type === 'village') {
+      // Village - forme de maison
+      ctx.beginPath();
+      ctx.moveTo(x, y - 8);
+      ctx.lineTo(x + 8, y);
+      ctx.lineTo(x + 6, y + 8);
+      ctx.lineTo(x - 6, y + 8);
+      ctx.lineTo(x - 8, y);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+    } else {
+      // Défaut - cercle
+      ctx.beginPath();
+      ctx.arc(x, y, 8, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+    }
+
+    // Indicateur de propriétaire
+    if (structure.owner) {
+      ctx.beginPath();
+      ctx.arc(x + 15, y - 15, 6, 0, Math.PI * 2);
+      ctx.fillStyle = structure.owner === 'player1' ? '#4CAF50' : '#F44336';
+      ctx.fill();
+      ctx.strokeStyle = 'white';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
+    // Nom de la structure avec contour
+    ctx.fillStyle = 'white';
+    ctx.font = 'bold 9px Arial';
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = 2;
+    ctx.strokeText(structure.name, x, y + 32);
+    ctx.fillText(structure.name, x, y + 32);
+  }, []);
+
+  // Rendu d'une créature
+  const drawCreature = useCallback((
+    ctx: CanvasRenderingContext2D,
+    center: Position,
+    creature: any
+  ) => {
+    const { x, y } = center;
+    const size = 15;
+
+    ctx.beginPath();
+    ctx.arc(x, y + 10, size, 0, Math.PI * 2);
+    ctx.fillStyle = '#9C27B0';
+    ctx.fill();
+    ctx.strokeStyle = '#7B1FA2';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Forme géométrique pour la créature
+    ctx.fillStyle = 'white';
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = 1;
+    
+    // Triangle pour représenter la créature
+    ctx.beginPath();
+    ctx.moveTo(x, y + 5);
+    ctx.lineTo(x - 6, y + 15);
+    ctx.lineTo(x + 6, y + 15);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+  }, []);
+
+  // Rendu d'un héros
+  const drawHero = useCallback((
+    ctx: CanvasRenderingContext2D,
+    center: Position,
+    hero: Hero
+  ) => {
+    const { x, y } = center;
+    const size = 18;
+
+    // Halo autour du héros
+    ctx.beginPath();
+    ctx.arc(x, y, size + 3, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(255, 215, 0, 0.4)';
+    ctx.fill();
+
+    // Cercle de base avec gradient
+    const gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+    gradient.addColorStop(0, '#FFD700');
+    gradient.addColorStop(1, '#FFA500');
+    
+    ctx.beginPath();
+    ctx.arc(x, y, size, 0, Math.PI * 2);
+    ctx.fillStyle = gradient;
+    ctx.fill();
+    ctx.strokeStyle = '#B8860B';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Symbole héros avec formes géométriques
+    ctx.fillStyle = '#8B4513';
+    ctx.strokeStyle = 'white';
+    ctx.lineWidth = 1;
+    
+    // Épée stylisée
+    ctx.beginPath();
+    ctx.moveTo(x, y - 8);
+    ctx.lineTo(x, y + 8);
+    ctx.moveTo(x - 4, y - 4);
+    ctx.lineTo(x + 4, y - 4);
+    ctx.stroke();
+
+    // Niveau du héros
+    ctx.beginPath();
+    ctx.arc(x + 12, y - 12, 8, 0, Math.PI * 2);
+    ctx.fillStyle = '#FF4444';
+    ctx.fill();
+    ctx.strokeStyle = '#CC0000';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    
+    ctx.fillStyle = 'white';
+    ctx.font = 'bold 10px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(hero.level.toString(), x + 12, y - 12);
+
+    // Nom du héros avec contour
+    ctx.fillStyle = 'white';
+    ctx.font = 'bold 11px Arial';
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = 3;
+    ctx.strokeText(hero.name, x, y + 28);
+    ctx.fillText(hero.name, x, y + 28);
+
+    // Barre de mouvement
+    const mpBarWidth = 30;
+    const mpBarHeight = 4;
+    const mpRatio = hero.movementPoints / hero.maxMovementPoints;
+    
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+    ctx.fillRect(x - mpBarWidth/2, y + 35, mpBarWidth, mpBarHeight);
+    
+    ctx.fillStyle = mpRatio > 0.5 ? '#4CAF50' : mpRatio > 0.2 ? '#FF9800' : '#F44336';
+    ctx.fillRect(x - mpBarWidth/2, y + 35, mpBarWidth * mpRatio, mpBarHeight);
   }, []);
 
   // Rendu d'une tuile hexagonale
@@ -84,7 +283,7 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
     // Créer le chemin hexagonal (pointy-top)
     ctx.beginPath();
     for (let i = 0; i < 6; i++) {
-      const angle = (Math.PI / 3) * i + Math.PI / 6; // Offset pour pointy-top
+      const angle = (Math.PI / 3) * i - Math.PI / 2; // Ajusté pour pointy-top
       const hexX = x + radius * Math.cos(angle);
       const hexY = y + radius * Math.sin(angle);
       if (i === 0) {
@@ -133,183 +332,7 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
     if (tile.hero) {
       drawHero(ctx, center, tile.hero);
     }
-  }, []);
-
-  // Rendu d'un héros
-  const drawHero = useCallback((
-    ctx: CanvasRenderingContext2D,
-    center: Position,
-    hero: Hero
-  ) => {
-    const { x, y } = center;
-    const size = 18;
-
-    // Halo autour du héros
-    ctx.beginPath();
-    ctx.arc(x, y, size + 3, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(255, 215, 0, 0.4)';
-    ctx.fill();
-
-    // Cercle de base avec gradient
-    const gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
-    gradient.addColorStop(0, '#FFD700');
-    gradient.addColorStop(1, '#FFA500');
-    
-    ctx.beginPath();
-    ctx.arc(x, y, size, 0, Math.PI * 2);
-    ctx.fillStyle = gradient;
-    ctx.fill();
-    ctx.strokeStyle = '#B8860B';
-    ctx.lineWidth = 2;
-    ctx.stroke();
-
-    // Symbole héros selon le nom/type
-    ctx.fillStyle = '#8B4513';
-    ctx.font = 'bold 14px Arial';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    let heroIcon = '⚔️';
-    const heroName = hero.name.toLowerCase();
-    if (heroName.includes('mage') || heroName.includes('wizard')) heroIcon = '🔮';
-    else if (heroName.includes('archer') || heroName.includes('ranger')) heroIcon = '🏹';
-    else if (heroName.includes('paladin') || heroName.includes('knight')) heroIcon = '🛡️';
-    else if (heroName.includes('barbarian')) heroIcon = '🪓';
-    ctx.fillText(heroIcon, x, y);
-
-    // Niveau du héros
-    ctx.beginPath();
-    ctx.arc(x + 12, y - 12, 8, 0, Math.PI * 2);
-    ctx.fillStyle = '#FF4444';
-    ctx.fill();
-    ctx.strokeStyle = '#CC0000';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-    
-    ctx.fillStyle = 'white';
-    ctx.font = 'bold 10px Arial';
-    ctx.fillText(hero.level.toString(), x + 12, y - 12);
-
-    // Nom du héros avec contour
-    ctx.fillStyle = 'white';
-    ctx.font = 'bold 11px Arial';
-    ctx.strokeStyle = 'black';
-    ctx.lineWidth = 3;
-    ctx.strokeText(hero.name, x, y + 28);
-    ctx.fillText(hero.name, x, y + 28);
-
-    // Barre de mouvement
-    const mpBarWidth = 30;
-    const mpBarHeight = 4;
-    const mpRatio = hero.movementPoints / hero.maxMovementPoints;
-    
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
-    ctx.fillRect(x - mpBarWidth/2, y + 35, mpBarWidth, mpBarHeight);
-    
-    ctx.fillStyle = mpRatio > 0.5 ? '#4CAF50' : mpRatio > 0.2 ? '#FF9800' : '#F44336';
-    ctx.fillRect(x - mpBarWidth/2, y + 35, mpBarWidth * mpRatio, mpBarHeight);
-  }, []);
-
-  // Rendu d'une structure
-  const drawStructure = useCallback((
-    ctx: CanvasRenderingContext2D,
-    center: Position,
-    structure: any
-  ) => {
-    const { x, y } = center;
-    const size = 22;
-
-    // Halo de la structure
-    ctx.beginPath();
-    ctx.arc(x, y, size + 4, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(139, 69, 19, 0.3)';
-    ctx.fill();
-
-    // Fond de la structure avec gradient
-    const gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
-    gradient.addColorStop(0, '#DEB887');
-    gradient.addColorStop(1, '#8B4513');
-    
-    ctx.beginPath();
-    ctx.arc(x, y, size, 0, Math.PI * 2);
-    ctx.fillStyle = gradient;
-    ctx.fill();
-    ctx.strokeStyle = '#654321';
-    ctx.lineWidth = 2;
-    ctx.stroke();
-
-    // Icône de la structure
-    ctx.fillStyle = 'white';
-    ctx.font = 'bold 16px Arial';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    
-    // Déterminer l'icône selon le type
-    let icon = '🏰';
-    if (structure.type === 'gold_mine') icon = '💰';
-    else if (structure.type === 'sawmill') icon = '🪵';
-    else if (structure.type === 'stone_quarry') icon = '🗿';
-    else if (structure.type === 'crystal_mine') icon = '💎';
-    else if (structure.type === 'village') icon = '🏘️';
-    else if (structure.type === 'tavern') icon = '🍺';
-    else if (structure.type === 'temple') icon = '⛪';
-    else if (structure.type === 'laboratory') icon = '🧪';
-    else if (structure.type === 'elven_fortress') icon = '🌲';
-    else if (structure.type === 'dwarven_citadel') icon = '⛰️';
-    else if (structure.type === 'magic_tower') icon = '🔮';
-    
-    ctx.fillText(icon, x, y);
-
-    // Indicateur de propriétaire
-    if (structure.owner) {
-      ctx.beginPath();
-      ctx.arc(x + 15, y - 15, 6, 0, Math.PI * 2);
-      ctx.fillStyle = structure.owner === 'player1' ? '#4CAF50' : '#F44336';
-      ctx.fill();
-      ctx.strokeStyle = 'white';
-      ctx.lineWidth = 1;
-      ctx.stroke();
-    }
-
-    // Nom de la structure avec contour
-    ctx.fillStyle = 'white';
-    ctx.font = 'bold 9px Arial';
-    ctx.strokeStyle = 'black';
-    ctx.lineWidth = 2;
-    ctx.strokeText(structure.name, x, y + 32);
-    ctx.fillText(structure.name, x, y + 32);
-  }, []);
-
-  // Rendu d'une créature
-  const drawCreature = useCallback((
-    ctx: CanvasRenderingContext2D,
-    center: Position,
-    creature: any
-  ) => {
-    const { x, y } = center;
-    const size = 15;
-
-    ctx.beginPath();
-    ctx.arc(x, y + 10, size, 0, Math.PI * 2);
-    ctx.fillStyle = '#9C27B0';
-    ctx.fill();
-    ctx.strokeStyle = '#7B1FA2';
-    ctx.lineWidth = 2;
-    ctx.stroke();
-
-    // Icône de la créature
-    ctx.fillStyle = 'white';
-    ctx.font = '14px Arial';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    
-    let icon = '🐉';
-    if (creature.type === 'wolf') icon = '🐺';
-    else if (creature.type === 'golem') icon = '🗿';
-    else if (creature.type === 'elemental') icon = '💫';
-    else if (creature.type === 'sea_monster') icon = '🐙';
-    
-    ctx.fillText(icon, x, y + 10);
-  }, []);
+  }, [config, drawStructure, drawCreature, drawHero]);
 
   // Rendu des zones ZFC
   const drawZFCZones = useCallback((ctx: CanvasRenderingContext2D) => {
@@ -321,7 +344,7 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
         ctx.beginPath();
         const radius = config.hexRadius;
         for (let i = 0; i < 6; i++) {
-          const angle = (Math.PI / 3) * i + Math.PI / 6;
+          const angle = (Math.PI / 3) * i - Math.PI / 2;
           const hexX = center.x + radius * Math.cos(angle);
           const hexY = center.y + radius * Math.sin(angle);
           if (i === 0) {
@@ -344,7 +367,7 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
         ctx.stroke();
       });
     });
-  }, [visibleZFCs, hexToPixel]);
+  }, [visibleZFCs, hexToPixel, config.hexRadius]);
 
   // Rendu des effets de particules
   const drawParticles = useCallback((ctx: CanvasRenderingContext2D) => {
@@ -399,8 +422,11 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
     // Effacer le canvas
     ctx.clearRect(0, 0, width, height);
 
-    // Dessiner le fond
-    ctx.fillStyle = 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)';
+    // Dessiner le fond avec un vrai gradient
+    const gradient = ctx.createLinearGradient(0, 0, width, height);
+    gradient.addColorStop(0, '#1a1a2e');
+    gradient.addColorStop(1, '#16213e');
+    ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, width, height);
 
     if (!map || map.length === 0) {
@@ -443,7 +469,7 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
 
     // Programmer le prochain rendu
     animationRef.current = requestAnimationFrame(render);
-  }, [map, selectedTile, hoveredTile, width, height, drawZFCZones, drawHexTile, drawParticles, hexToPixel]);
+  }, [map, selectedTile, hoveredTile, width, height, drawZFCZones, drawHexTile, drawParticles, hexToPixel, currentGame]);
 
   // Gestion des événements de souris
   const handleMouseMove = useCallback((event: React.MouseEvent) => {
@@ -500,40 +526,16 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
   }, [render]);
 
   return (
-    <div className="modern-game-renderer">
-      <canvas
-        ref={canvasRef}
-        width={width}
-        height={height}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        onClick={handleClick}
-        className="game-canvas"
-      />
-      
-      {/* Overlay pour les informations */}
-      {hoveredTile && map && (
-        <div 
-          className="tile-tooltip"
-          style={{
-            left: hexToPixel(hoveredTile).x,
-            top: hexToPixel(hoveredTile).y - 40
-          }}
-        >
-          <div className="tooltip-content">
-            <strong>{map[hoveredTile.y][hoveredTile.x].terrain}</strong>
-            <br />
-            Position: ({hoveredTile.x}, {hoveredTile.y})
-            {map[hoveredTile.y][hoveredTile.x].hero && (
-              <>
-                <br />
-                Héros: {map[hoveredTile.y][hoveredTile.x].hero?.name}
-              </>
-            )}
-          </div>
-        </div>
-      )}
-    </div>
+    <canvas
+      ref={canvasRef}
+      width={width}
+      height={height}
+      className="game-canvas"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
+      style={{ cursor: 'crosshair' }}
+    />
   );
 };
 
