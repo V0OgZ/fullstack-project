@@ -1,506 +1,475 @@
-// Heroes of Time and Magic - Temporal Game Types
-// Revolutionary spacetime strategy game types
+// 🔮 Heroes of Time - Advanced ZFC System (Phase 3)
+// Revolutionary temporal mechanics with quantum superposition and paradox resolution
 
-import { Position, Hero, Player } from './game';
+import { Position } from './game';
 
-// ============================================================================
-// CORE TEMPORAL TYPES
-// ============================================================================
+export type TemporalState = 'stable' | 'unstable' | 'contested' | 'corrupted' | 'quantum';
+export type ParadoxType = 'grandfather' | 'bootstrap' | 'causal_loop' | 'timeline_split' | 'quantum_entanglement';
+export type ShadowType = 'real' | 'bluff' | 'decoy' | 'quantum_superposition' | 'temporal_echo';
 
-/**
- * Position in spacetime (x, y, t)
- * The fundamental unit of the temporal strategy game
- */
-export interface SpacetimePosition {
-  x: number;
-  y: number;
-  t: number; // Time coordinate - turn or timestamp
-}
+// 🌀 ADVANCED ZFC ZONE SYSTEM
 
-/**
- * Zone states in the temporal engine
- */
-export type ZoneState = 
-  | 'STABLE'     // No interference possible, player has full control
-  | 'UNSTABLE'   // Another player could potentially interfere
-  | 'CONTESTED'  // Multiple players converging, requires resolution
-  | 'CORRUPTED'; // Zone degraded due to entropy, negative effects
-
-/**
- * Entropy levels affecting zones and actions
- */
-export type EntropyLevel = 
-  | 'NONE'       // 0-25% - Clean, stable
-  | 'LOW'        // 25-50% - Minor instability
-  | 'MEDIUM'     // 50-75% - Noticeable degradation
-  | 'HIGH'       // 75-90% - Severe corruption
-  | 'CRITICAL';  // 90-100% - Zone breakdown
-
-// ============================================================================
-// TEMPORAL ACTIONS & PLANS
-// ============================================================================
-
-/**
- * Types of temporal actions
- */
-export type TemporalActionType = 
-  | 'MOVE'
-  | 'LOOT'
-  | 'ATTACK'
-  | 'CAST_SPELL'
-  | 'BUILD'
-  | 'EXPLORE'
-  | 'ANCHOR'
-  | 'RETREAT';
-
-/**
- * Action planned in spacetime
- * Core unit of temporal strategy
- */
-export interface ActionPlan {
+export interface QuantumZone {
   id: string;
   playerId: string;
-  heroId: string;
-  type: TemporalActionType;
-  
-  // Spacetime coordinates
-  fromPosition: SpacetimePosition;
-  toPosition: SpacetimePosition;
-  
-  // Temporal properties
-  plannedAt: number;        // When player planned this action
-  startsAt: number;         // When action begins in game time
-  endsAt: number;          // When action completes
-  
-  // State and dependencies
-  status: 'PLANNED' | 'EXECUTING' | 'COMPLETED' | 'CANCELLED' | 'CORRUPTED';
-  requiredArtifacts?: string[];
-  conflictsWith?: string[]; // Other action IDs this conflicts with
-  
-  // Metadata
-  metadata?: {
-    target?: string;        // Target object/player ID
-    spell?: TemporalSpellType;
-    resources?: Record<string, number>;
-    notes?: string;
+  center: Position;
+  radius: number;
+  temporalState: TemporalState;
+  superpositionStates: TemporalState[];
+  probability: number; // Probability of collapse to stable state
+  entangledZones: string[]; // IDs of quantum entangled zones
+  chronoflame?: ChronoflameEffect;
+}
+
+export interface ChronoflameEffect {
+  type: 'chronoflame' | 'aetheric_pyre' | 'void_ember' | 'celestial_blaze' | 'temporal_conflagration';
+  intensity: number; // 1-10 scale
+  duration: number;
+  effects: {
+    timeAcceleration?: number; // Multiplier for actions in zone
+    entropyReduction?: number; // Reduces chaos/instability  
+    visionRadius?: number; // See future actions
+    paradoxImmunity?: boolean; // Immune to temporal paradoxes
+    quantumLocking?: boolean; // Prevents superposition collapse
+  };
+  origin: Position;
+  createdBy: string;
+  manaCost: number;
+}
+
+export interface MultiLayerZone {
+  baseZone: QuantumZone;
+  layers: {
+    past: TemporalLayer;
+    present: TemporalLayer;
+    future: TemporalLayer;
+    quantum: TemporalLayer;
+  };
+  interactions: LayerInteraction[];
+  stability: number; // 0-100, affects probability of collapse
+}
+
+export interface TemporalLayer {
+  timeline: number; // Which timeline/branch this exists in
+  actions: ShadowAction[];
+  conflicts: ConflictZone[];
+  temporalMana: number;
+  locked: boolean; // Cannot be modified
+}
+
+export interface LayerInteraction {
+  sourceLayer: keyof MultiLayerZone['layers'];
+  targetLayer: keyof MultiLayerZone['layers'];
+  interactionType: 'causal_influence' | 'quantum_entanglement' | 'temporal_bleeding' | 'paradox_formation';
+  strength: number; // 0-1 influence strength
+  consequences: TemporalConsequence[];
+}
+
+// 🎭 SHADOW ACTION BLUFFING SYSTEM
+
+export interface AdvancedShadowAction {
+  id: string;
+  playerId: string;
+  shadowType: ShadowType;
+  realAction?: ActionPlan; // Only exists if shadowType is 'real'
+  bluffData?: BluffAction; // Fake action data for deception
+  quantumStates?: QuantumActionState[]; // Multiple possible states
+  detectionProbability: number; // 0-1 chance enemies detect it's a bluff
+  psychologicalValue: number; // Impact on enemy decision making
+  manaCost: number;
+  complexity: number; // Higher = harder to detect but more expensive
+}
+
+export interface BluffAction {
+  fakeActionType: string;
+  fakeTarget: Position;
+  fakeUnit?: string;
+  convincingness: number; // 0-1 how believable the bluff is
+  tells: BluffTell[]; // Subtle hints it might be fake
+  consequences: string[]; // What happens if bluff is called
+}
+
+export interface BluffTell {
+  type: 'timing_inconsistency' | 'resource_mismatch' | 'tactical_illogic' | 'pattern_deviation';
+  detectability: number; // 0-1 how obvious it is
+  description: string;
+  counters: string[]; // How players can use this information
+}
+
+export interface QuantumActionState {
+  probability: number;
+  action: ActionPlan;
+  prerequisites: string[];
+  entangledWith: string[]; // Other quantum actions this is linked to
+  collapseConditions: CollapseCondition[];
+}
+
+export interface CollapseCondition {
+  type: 'observation' | 'interaction' | 'time_limit' | 'external_force' | 'paradox_resolution';
+  trigger: any;
+  resultingState: TemporalState;
+  probability: number;
+}
+
+// ⚡ TEMPORAL PARADOX RESOLUTION ENGINE
+
+export interface TemporalParadox {
+  id: string;
+  type: ParadoxType;
+  severity: 'minor' | 'major' | 'catastrophic' | 'reality_breaking';
+  involvedPlayers: string[];
+  involvedActions: string[];
+  timeline: number;
+  detectAt: number; // Game turn when paradox was detected
+  resolutionOptions: ParadoxResolution[];
+  autoResolveIn: number; // Turns until automatic resolution
+  temporalStability: number; // How much this affects overall timeline
+}
+
+export interface ParadoxResolution {
+  id: string;
+  type: 'accept_paradox' | 'revert_actions' | 'split_timeline' | 'quantum_superposition' | 'chronoflame_intervention';
+  cost: {
+    temporalMana?: number;
+    gameActions?: number;
+    probability?: number; // Chance of success
+    sideEffects?: TemporalConsequence[];
+  };
+  description: string;
+  consequences: TemporalConsequence[];
+  voterRequirements?: {
+    minimumPlayers: number;
+    unanimousRequired: boolean;
+    timeLimit: number;
   };
 }
 
-/**
- * Zone state in spacetime
- * Tracks what's happening at each (x, y, t) coordinate
- */
-export interface TemporalZone {
-  position: SpacetimePosition;
-  state: ZoneState;
-  entropy: EntropyLevel;
-  
-  // What's in this zone
-  occupiedBy?: string[];    // Player/hero IDs
-  contains?: string[];      // Object/artifact IDs
-  
-  // Temporal properties
-  lastActivity: number;     // Last time something happened here
-  stabilityUntil?: number;  // When zone might become unstable
-  corruptionRate: number;   // How fast entropy increases
-  
-  // Effects and modifiers
-  activeSpells?: TemporalSpell[];
-  temporalBarriers?: TemporalBarrier[];
-  
-  // History and predictions
-  history: ZoneEvent[];
-  predictions: PredictedEvent[];
-  
-  // Additional zone properties for map generation
-  terrain?: string;
-  structure?: {
-    name: string;
-    type: string;
-    owner: string;
-    description: string;
-    specialAbilities: string[];
-    garrison: string[];
-  };
-  hero?: Hero;
-  objects?: Array<{
-    id: string;
-    type: string;
-    name: string;
-    effect: string;
-    description: string;
-  }>;
-  entities?: Array<{
-    id: string;
-    type: string;
-    name: string;
-    position: SpacetimePosition;
-    level: number;
-    abilities: string[];
-    description: string;
-  }>;
-  temporalEffects?: Array<{
-    type: string;
-    name: string;
-    description: string;
-    duration: number;
-    strength: number;
-  }>;
-  stability?: number;
-  influence?: Map<string, number>;
-  lastModified?: number;
+export interface TemporalConsequence {
+  type: 'timeline_split' | 'action_revert' | 'unit_temporal_displacement' | 'resource_fluctuation' | 'memory_alteration' | 'quantum_entanglement';
+  magnitude: number;
+  affectedPlayers: string[];
+  duration: number;
+  reversible: boolean;
+  description: string;
+  gameplayEffect: any;
 }
 
-// ============================================================================
-// TEMPORAL SPELLS & MAGIC
-// ============================================================================
+// 🎯 QUANTUM SUPERPOSITION MECHANICS
 
-/**
- * Types of temporal spells
- */
-export type TemporalSpellType = 
-  | 'VISION_FUTURE'      // See what will happen at (x,y,t+n)
-  | 'ANCRAGE_TEMPOREL'   // Lock an action to make it unchangeable
-  | 'RETOUR_ARRIERE'     // Undo actions in a zone retroactively
-  | 'ACCELERATION'       // Skip time/space for a hero
-  | 'MUR_CAUSALITE'      // Create temporal barrier
-  | 'FAILLE_TEMPORELLE'  // Create chaos zone
-  | 'EMPATHIE_CAUSALE'   // Detect nearby plans
-  | 'SONDE_TEMPORELLE'   // Take snapshot of future zone
-  | 'STABILISATION'      // Reduce entropy in zone
-  | 'CORRUPTION_ACTIVE'; // Increase entropy in enemy zone
+export interface QuantumSuperposition {
+  id: string;
+  states: SuperpositionState[];
+  observer: string | null; // Player who can collapse the superposition
+  collapseConditions: CollapseCondition[];
+  entanglements: QuantumEntanglement[];
+  stability: number; // Decreases over time, forced collapse at 0
+  manaMaintenance: number; // Per turn cost to maintain
+}
 
-/**
- * Temporal spell effect
- */
+export interface SuperpositionState {
+  probability: number;
+  gameState: Partial<any>; // The game state if this possibility is real
+  actions: ActionPlan[];
+  resources: { [playerId: string]: any };
+  conflicts: ConflictZone[];
+  label: string; // Human readable description
+}
+
+export interface QuantumEntanglement {
+  id: string;
+  entangledSuperpositions: string[];
+  entanglementType: 'action_dependent' | 'resource_linked' | 'outcome_correlated' | 'causal_chain';
+  strength: number; // 0-1 how strongly linked
+  collapseRules: {
+    simultaneousCollapse: boolean;
+    correlatedOutcomes: boolean;
+    causalDependency: boolean;
+  };
+}
+
+// 🕰️ ADVANCED TEMPORAL SPELLS AND ABILITIES
+
 export interface TemporalSpell {
   id: string;
-  type: TemporalSpellType;
-  casterId: string;
-  
-  // Spacetime effect area
-  targetZone: SpacetimePosition;
-  effectRadius: number;
-  
-  // Temporal properties
-  castAt: number;
-  duration: number;
-  strength: number;
-  
-  // Effect details
-  effects: {
-    zoneStateChange?: Partial<TemporalZone>;
-    entropyDelta?: number;
-    visionRange?: number;
-    anchoredActions?: string[];
-    undoneActions?: string[];
-  };
-}
-
-/**
- * Temporal barrier blocking future actions
- */
-export interface TemporalBarrier {
-  id: string;
-  createdBy: string;
-  
-  // Spacetime bounds
-  area: SpacetimePosition[];
-  activeFrom: number;
-  activeUntil: number;
-  
-  // Properties
-  strength: number;
-  bypassRequirements?: string[]; // Artifacts/spells needed to pass
-  
-  // Effects
-  blocksActionTypes: TemporalActionType[];
-  entropyGeneration: number;
-}
-
-// ============================================================================
-// CONFLICT RESOLUTION
-// ============================================================================
-
-/**
- * Conflict between multiple players in same spacetime zone
- */
-export interface TemporalConflict {
-  id: string;
-  zone: SpacetimePosition;
-  
-  // Conflicting parties
-  conflictingActions: ActionPlan[];
-  involvedPlayers: string[];
-  
-  // Resolution
-  detectedAt: number;
-  status: 'DETECTED' | 'RESOLVING' | 'RESOLVED' | 'CORRUPTED';
-  resolution?: ConflictResolution;
-  
-  // Outcome
-  winner?: string;
-  effects: ConflictEffect[];
-}
-
-/**
- * How a temporal conflict was resolved
- */
-export interface ConflictResolution {
-  method: 'PRIORITY' | 'COMBAT' | 'SPELL' | 'ARTIFACT' | 'RANDOM' | 'CORRUPTION';
-  factors: {
-    arrivalOrder?: string[];    // Who planned first
-    actionAnchor?: string[];    // Who had anchored actions
-    artifacts?: Record<string, string[]>; // Artifacts used
-    spells?: Record<string, TemporalSpell[]>; // Spells cast
-    randomSeed?: number;        // For random resolution
-  };
-}
-
-/**
- * Effect of conflict resolution
- */
-export interface ConflictEffect {
-  targetId: string; // Player or action ID affected
-  type: 'ACTION_CANCELLED' | 'ACTION_DELAYED' | 'HERO_DAMAGED' | 'RESOURCE_LOSS' | 'ENTROPY_INCREASE';
-  magnitude: number;
-  description: string;
-}
-
-// ============================================================================
-// EVENTS & HISTORY
-// ============================================================================
-
-/**
- * Event that happened in a zone
- */
-export interface ZoneEvent {
-  id: string;
-  timestamp: number;
-  spacetime: SpacetimePosition;
-  
-  type: 'ACTION_EXECUTED' | 'CONFLICT_RESOLVED' | 'SPELL_CAST' | 'ENTROPY_CHANGE' | 'ZONE_STATE_CHANGE';
-  actorId?: string;
-  
-  // Event data
-  description: string;
-  data: Record<string, any>;
-  
-  // Links to other events
-  causedBy?: string[];     // Event IDs that caused this
-  triggered?: string[];    // Event IDs this triggered
-}
-
-/**
- * Predicted future event
- */
-export interface PredictedEvent {
-  id: string;
-  predictedAt: number;
-  spacetime: SpacetimePosition;
-  
-  // Prediction details
-  type: 'PLAYER_ARRIVAL' | 'OBJECT_AVAILABLE' | 'CONFLICT_LIKELY' | 'ENTROPY_CRITICAL';
-  probability: number;     // 0-1 confidence
-  
-  // What would happen
-  projectedOutcome: {
-    description: string;
-    involvedPlayers?: string[];
-    effects?: ConflictEffect[];
-  };
-  
-  // Prediction metadata
-  basedOn: string[];       // Action IDs this prediction is based on
-  invalidatedBy?: string[]; // Events that would invalidate this
-}
-
-// ============================================================================
-// ENTROPY & ANTI-ABUSE
-// ============================================================================
-
-/**
- * Entropy state for zones and players
- */
-export interface EntropyState {
-  zoneEntropy: Record<string, number>; // Zone ID -> entropy level
-  playerEntropy: Record<string, number>; // Player ID -> entropy penalty
-  
-  // Global entropy tracking
-  globalEntropy: number;
-  entropyTrend: 'INCREASING' | 'STABLE' | 'DECREASING';
-  
-  // Anti-spam tracking
-  spamDetection: {
-    playerActionCounts: Record<string, number>;
-    recentLowLevelSpam: Record<string, number>;
-    repetitivePatterns: Record<string, string[]>;
-  };
-}
-
-/**
- * Penalty applied due to entropy/spam
- */
-export interface EntropyPenalty {
-  targetId: string; // Player or action ID
-  type: 'MOVEMENT_SLOW' | 'MANA_DRAIN' | 'ACTION_DELAY' | 'ZONE_CORRUPTION' | 'TEMPORARY_BAN';
-  
-  severity: number;     // 1-10 scale
-  duration: number;     // How long penalty lasts
-  
-  reason: string;
-  appliedAt: number;
-}
-
-// ============================================================================
-// REPLAY & ANALYSIS
-// ============================================================================
-
-/**
- * Complete timeline of a game
- */
-export interface GameTimeline {
-  gameId: string;
-  startTime: number;
-  endTime?: number;
-  
-  // All events in chronological order
-  events: ZoneEvent[];
-  
-  // Player timelines
-  playerTimelines: Record<string, PlayerTimeline>;
-  
-  // Key moments
-  majorConflicts: TemporalConflict[];
-  gameChangingSpells: TemporalSpell[];
-  
-  // Analysis
-  entropyEvolution: EntropyState[];
-  zoneControlHistory: Record<string, ZoneControlEvent[]>;
-}
-
-/**
- * Individual player's timeline
- */
-export interface PlayerTimeline {
-  playerId: string;
-  actions: ActionPlan[];
-  spellsCast: TemporalSpell[];
-  conflictsInvolved: string[]; // Conflict IDs
-  
-  // Performance metrics
-  successfulActions: number;
-  cancelledActions: number;
-  entropyGenerated: number;
-  zonesControlled: string[];
-}
-
-/**
- * Zone control change event
- */
-export interface ZoneControlEvent {
-  timestamp: number;
-  zone: Position;
-  previousController?: string;
-  newController?: string;
-  method: 'EXPLORATION' | 'COMBAT' | 'SPELL' | 'ABANDONMENT' | 'CORRUPTION';
-}
-
-// ============================================================================
-// GAME STATE
-// ============================================================================
-
-/**
- * Complete temporal game state
- */
-export interface TemporalGameState {
-  gameId: string;
-  currentTime: number;
-  maxTime: number;
-  
-  // Players and their states
-  players: Player[];
-  currentActivePlayer?: string; // For UI focus, not turns
-  
-  // World state
-  mapZones: Record<string, TemporalZone>; // Position key -> zone state
-  activeActions: ActionPlan[];
-  activeSpells: TemporalSpell[];
-  activeBarriers: TemporalBarrier[];
-  
-  // Conflicts and entropy
-  activeConflicts: TemporalConflict[];
-  entropyState: EntropyState;
-  
-  // History and prediction
-  timeline: GameTimeline;
-  futurePredictions: PredictedEvent[];
-  
-  // Game rules
-  settings: {
-    maxEntropyThreshold: number;
-    spellCooldowns: Record<TemporalSpellType, number>;
-    conflictResolutionMethod: 'AUTO' | 'PLAYER_CHOICE' | 'RANDOM';
-    enableAntiSpam: boolean;
-  };
-}
-
-// ============================================================================
-// UTILITY TYPES
-// ============================================================================
-
-/**
- * Helper for spacetime calculations
- */
-export interface SpacetimeDistance {
-  spatialDistance: number;
-  temporalDistance: number;
-  totalDistance: number;
-  
-  canReach: boolean;
-  requiredArtifacts?: string[];
-  alternativeRoutes?: SpacetimePosition[];
-}
-
-/**
- * Vision/prediction query result
- */
-export interface TemporalVision {
-  queriedZone: SpacetimePosition;
-  visionRange: number;
-  confidence: number;
-  
-  // What the vision reveals
-  predictedState: Partial<TemporalZone>;
-  predictedOccupants: string[];
-  predictedObjects: string[];
-  
-  // Uncertainty factors
-  possibleAlternatives: Array<{
-    probability: number;
-    outcome: Partial<TemporalZone>;
-    description: string;
-  }>;
-}
-
-/**
- * Complete temporal map structure
- */
-export interface TemporalMap {
   name: string;
   description: string;
-  size: { width: number; height: number };
-  timeLines: number[];
-  defaultTimeline: number;
-  zones: TemporalZone[][][]; // [timeline][y][x]
-  startingPositions: SpacetimePosition[];
-  victoryConditions: Array<{
-    type: string;
-    description: string;
-  }>;
-  ambientEffects: Array<{
-    name: string;
-    description: string;
-    effect: string;
-  }>;
-} 
+  school: 'temporal' | 'chronoflame' | 'quantum' | 'paradox';
+  level: 1 | 2 | 3 | 4 | 5 | 6; // Level 6 = Reality-altering
+  manaCost: number;
+  temporalManaCost?: number;
+  castingTime: number; // Turns to cast
+  effects: TemporalSpellEffect[];
+  requiresParadoxStability?: number;
+  forbiddenInQuantumZones?: boolean;
+  chronoflameResonance?: boolean; // Enhanced by chronoflame presence
+}
+
+export interface TemporalSpellEffect {
+  type: 'timeline_manipulation' | 'quantum_state_control' | 'paradox_induction' | 'chronoflame_summoning' | 'reality_anchor';
+  value: number | string;
+  target: 'zone' | 'player' | 'timeline' | 'reality' | 'quantum_state';
+  duration?: number;
+  probability?: number;
+  sideEffects?: TemporalConsequence[];
+}
+
+// 🌊 TEMPORAL SPELLS COLLECTION
+
+export const TEMPORAL_SPELLS: TemporalSpell[] = [
+  // Level 1 - Basic Temporal Manipulation
+  {
+    id: 'temporal_echo',
+    name: 'Temporal Echo',
+    description: 'Creates a faint shadow of future actions',
+    school: 'temporal',
+    level: 1,
+    manaCost: 5,
+    temporalManaCost: 2,
+    castingTime: 1,
+    effects: [{
+      type: 'timeline_manipulation',
+      value: 'create_shadow_preview',
+      target: 'zone',
+      duration: 3
+    }]
+  },
+  {
+    id: 'chronostatic_field',
+    name: 'Chronostatic Field', 
+    description: 'Slows time in target area',
+    school: 'temporal',
+    level: 1,
+    manaCost: 8,
+    temporalManaCost: 3,
+    castingTime: 2,
+    effects: [{
+      type: 'timeline_manipulation',
+      value: 0.5, // Half speed
+      target: 'zone',
+      duration: 5
+    }]
+  },
+
+  // Level 2 - Quantum Manipulation
+  {
+    id: 'quantum_uncertainty',
+    name: 'Quantum Uncertainty',
+    description: 'Places action in superposition state',
+    school: 'quantum',
+    level: 2,
+    manaCost: 15,
+    temporalManaCost: 8,
+    castingTime: 1,
+    effects: [{
+      type: 'quantum_state_control',
+      value: 'create_superposition',
+      target: 'player',
+      probability: 0.7
+    }]
+  },
+  {
+    id: 'quantum_entanglement',
+    name: 'Quantum Entanglement',
+    description: 'Links two zones quantum-mechanically',
+    school: 'quantum',
+    level: 2,
+    manaCost: 20,
+    temporalManaCost: 12,
+    castingTime: 3,
+    effects: [{
+      type: 'quantum_state_control',
+      value: 'create_entanglement',
+      target: 'zone',
+      duration: 10
+    }]
+  },
+
+  // Level 3 - Chronoflame Magic
+  {
+    id: 'summon_chronoflame',
+    name: 'Summon Chronoflame',
+    description: 'Calls forth eternal flames that burn through time',
+    school: 'chronoflame',
+    level: 3,
+    manaCost: 30,
+    temporalManaCost: 20,
+    castingTime: 4,
+    effects: [{
+      type: 'chronoflame_summoning',
+      value: 'chronoflame',
+      target: 'zone',
+      duration: 15
+    }],
+    chronoflameResonance: true
+  },
+  {
+    id: 'aetheric_pyre_ritual',
+    name: 'Aetheric Pyre Ritual',
+    description: 'Kindles sacred fires from ethereal realms',
+    school: 'chronoflame', 
+    level: 3,
+    manaCost: 35,
+    temporalManaCost: 25,
+    castingTime: 5,
+    effects: [{
+      type: 'chronoflame_summoning',
+      value: 'aetheric_pyre',
+      target: 'zone',
+      duration: 20
+    }],
+    chronoflameResonance: true
+  },
+
+  // Level 4 - Paradox Manipulation
+  {
+    id: 'grandfather_paradox',
+    name: 'Grandfather Paradox',
+    description: 'Creates intentional causality violation',
+    school: 'paradox',
+    level: 4,
+    manaCost: 50,
+    temporalManaCost: 40,
+    castingTime: 6,
+    effects: [{
+      type: 'paradox_induction',
+      value: 'grandfather',
+      target: 'timeline',
+      sideEffects: [
+        {
+          type: 'timeline_split',
+          magnitude: 0.8,
+          affectedPlayers: ['all'],
+          duration: -1, // Permanent
+          reversible: false,
+          description: 'Reality branches into multiple timelines',
+          gameplayEffect: 'create_parallel_game'
+        }
+      ]
+    }],
+    requiresParadoxStability: 80,
+    forbiddenInQuantumZones: true
+  },
+
+  // Level 5 - Reality Manipulation
+  {
+    id: 'temporal_singularity',
+    name: 'Temporal Singularity',
+    description: 'Creates point where all timelines converge',
+    school: 'temporal',
+    level: 5,
+    manaCost: 75,
+    temporalManaCost: 60,
+    castingTime: 8,
+    effects: [{
+      type: 'reality_anchor',
+      value: 'convergence_point',
+      target: 'reality',
+      duration: 25
+    }],
+    requiresParadoxStability: 90
+  },
+
+  // Level 6 - Reality-Altering
+  {
+    id: 'reset_timeline',
+    name: 'Reset Timeline',
+    description: 'Returns game to previous state, erasing all actions since',
+    school: 'temporal',
+    level: 6,
+    manaCost: 100,
+    temporalManaCost: 100,
+    castingTime: 10,
+    effects: [{
+      type: 'timeline_manipulation',
+      value: 'complete_revert',
+      target: 'reality',
+      sideEffects: [
+        {
+          type: 'memory_alteration',
+          magnitude: 1.0,
+          affectedPlayers: ['all'],
+          duration: -1,
+          reversible: false,
+          description: 'All players lose memory of reverted actions',
+          gameplayEffect: 'revert_to_checkpoint'
+        }
+      ]
+    }],
+    requiresParadoxStability: 95,
+    forbiddenInQuantumZones: true
+  }
+];
+
+// 🎮 ADVANCED TEMPORAL GAME MECHANICS
+
+export interface TemporalGameState {
+  currentTimeline: number;
+  alternateTimelines: TemporalTimeline[];
+  paradoxLevel: number; // 0-100, higher = more unstable
+  quantumZones: QuantumZone[];
+  activeParadoxes: TemporalParadox[];
+  superpositions: QuantumSuperposition[];
+  chronoflameEffects: ChronoflameEffect[];
+  temporalSpellsAvailable: TemporalSpell[];
+  temporalManaPool: { [playerId: string]: number };
+  realityStability: number; // 0-100, 0 = reality collapse
+}
+
+export interface TemporalTimeline {
+  id: number;
+  parentTimeline?: number;
+  branchPoint: number; // Game turn where split occurred
+  probability: number; // Likelihood this timeline becomes "real"
+  gameState: any; // Complete game state for this timeline
+  active: boolean; // Is this timeline being played
+  players: string[]; // Which players exist in this timeline
+}
+
+// 🧠 ADVANCED AI FOR TEMPORAL MECHANICS
+
+export interface TemporalAI {
+  evaluateBluffValue(action: AdvancedShadowAction, gameState: TemporalGameState): number;
+  predictParadoxOutcome(paradox: TemporalParadox, resolutions: ParadoxResolution[]): ParadoxResolution;
+  optimizeQuantumSuperposition(states: SuperpositionState[]): SuperpositionState;
+  detectBluffs(shadowActions: AdvancedShadowAction[], confidence: number): BluffDetection[];
+  calculateTemporalStrategy(zones: QuantumZone[], spells: TemporalSpell[]): TemporalStrategy;
+}
+
+export interface BluffDetection {
+  shadowActionId: string;
+  confidence: number; // 0-1 how sure AI is it's a bluff
+  reasoning: string[];
+  suggestedCounterplay: string[];
+  riskAssessment: number; // Cost of being wrong
+}
+
+export interface TemporalStrategy {
+  priorityActions: string[];
+  riskTolerance: number;
+  bluffFrequency: number;
+  paradoxManagement: 'aggressive' | 'conservative' | 'adaptive';
+  quantumExploitation: number; // How much to abuse superposition
+}
+
+// 🌟 MASTER TEMPORAL ENGINE
+
+export interface AdvancedTemporalEngine {
+  processQuantumCollapse(superposition: QuantumSuperposition): SuperpositionState;
+  resolveParadox(paradox: TemporalParadox, resolution: ParadoxResolution): TemporalConsequence[];
+  updateRealityStability(events: TemporalConsequence[]): number;
+  manageChronoflameInteractions(flames: ChronoflameEffect[], zones: QuantumZone[]): void;
+  simulateTimelineConsequences(action: ActionPlan, depth: number): TemporalTimeline[];
+  optimizeTemporalManaFlow(players: string[], usage: { [spellId: string]: number }): void;
+}
+
+export default {
+  TEMPORAL_SPELLS,
+  TemporalState,
+  ParadoxType,
+  ShadowType,
+  QuantumZone,
+  AdvancedShadowAction,
+  TemporalParadox,
+  QuantumSuperposition,
+  TemporalGameState
+}; 
