@@ -1,123 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useGameStore } from '../store/useGameStore';
-import SimpleGameInterface from '../components/SimpleGameInterface';
-import PoliticalSystem from '../components/PoliticalSystem';
-import { generateAdvancedMap } from '../utils/advancedMapGenerator';
+import TrueHeroesInterface from '../components/TrueHeroesInterface';
 import { useTranslation } from '../i18n';
 
 const Game: React.FC = () => {
-  const { gameId } = useParams<{ gameId: string }>();
+  const { scenarioId } = useParams<{ scenarioId: string }>();
   const { t } = useTranslation();
-  const {
-    currentGame,
-    currentPlayer,
-    isLoading,
-    error,
-    map,
-    setMap,
-    loadGame,
-    refreshGameState,
-  } = useGameStore();
-
-  const [showPoliticalSystem, setShowPoliticalSystem] = useState(false);
+  const [scenarioType, setScenarioType] = useState<'classique' | 'mystique'>('classique');
 
   useEffect(() => {
-    if (gameId) {
-      loadGame(gameId);
+    // Déterminer le type de scénario
+    if (scenarioId === 'mystique-temporel') {
+      setScenarioType('mystique');
+      console.log('🔮 Loading Mystique scenario with temporal objects...');
+    } else {
+      setScenarioType('classique');
+      console.log('🏰 Loading Classic scenario...');
     }
-  }, [gameId, loadGame]);
+  }, [scenarioId]);
 
-  // Initialize the advanced map
-  useEffect(() => {
-    if (map.length === 0) {
-      const advancedMap = generateAdvancedMap(20, 15, 12345);
-      setMap(advancedMap);
-    }
-  }, [map.length, setMap]);
-
-  useEffect(() => {
-    if (currentGame) {
-      // Auto-refresh every 30 seconds
-      const interval = setInterval(() => {
-        refreshGameState();
-      }, 30000);
-
-      return () => clearInterval(interval);
-    }
-  }, [currentGame, refreshGameState]);
-
-  if (isLoading) {
+  if (!scenarioId) {
     return (
-      <div style={{ 
-        height: '100vh', 
-        display: 'flex', 
-        alignItems: 'center', 
+      <div style={{
+        height: '100vh',
+        display: 'flex',
+        alignItems: 'center',
         justifyContent: 'center',
-        background: '#0F0F0F',
+        background: '#1a1a1a',
         color: 'white'
       }}>
-        <div style={{ textAlign: 'center' }}>
-          <div style={{ 
-            width: '40px', 
-            height: '40px', 
-            border: '4px solid rgba(255,255,255,0.1)', 
-            borderTop: '4px solid #00D4FF', 
-            borderRadius: '50%', 
-            animation: 'spin 1s linear infinite',
-            margin: '0 auto 16px'
-          }}></div>
-          <p>{t('loading')}</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div style={{ 
-        height: '100vh', 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center',
-        background: '#0F0F0F',
-        color: 'white'
-      }}>
-        <div style={{ textAlign: 'center' }}>
-          <div style={{ color: '#FF6B6B', fontSize: '18px', marginBottom: '16px' }}>{t('error')}</div>
-          <p>{error}</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!currentGame || !currentPlayer) {
-    return (
-      <div style={{ 
-        height: '100vh', 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center',
-        background: '#0F0F0F',
-        color: 'white'
-      }}>
-        <div style={{ textAlign: 'center' }}>
-          <p>{t('gameNotFound')}</p>
-        </div>
+        <h2>❌ Scénario non trouvé</h2>
       </div>
     );
   }
 
   return (
-    <>
-      <SimpleGameInterface />
-      
-      {/* Système politique */}
-      <PoliticalSystem 
-        isVisible={showPoliticalSystem} 
-        onClose={() => setShowPoliticalSystem(false)} 
+    <div className="game-page">
+      {/* Utiliser la même interface Heroes pour les deux scénarios */}
+      <TrueHeroesInterface 
+        playerCount={2} 
+        scenarioType={scenarioType}
+        scenarioId={scenarioId}
       />
-    </>
+    </div>
   );
 };
 

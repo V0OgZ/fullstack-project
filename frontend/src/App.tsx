@@ -2,42 +2,48 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import Game from './pages/Game';
-import TemporalGame from './pages/TemporalGame';
 
 const GameSelector: React.FC = () => {
   return (
     <div className="game-selector">
       <header className="selector-header">
-        <h1>🎮 Heroes Reforged Universe 🎮</h1>
-        <p>Choose your strategic adventure</p>
+        <h1>🎮 Heroes Reforged 🎮</h1>
+        <p>Choisissez votre scénario d'aventure</p>
       </header>
       
       <div className="game-options">
-        <Link to="/game/demo-game-1" className="game-option classic">
+        <Link to="/game/conquete-classique" className="game-option classic">
           <div className="game-icon">🏰</div>
-          <h2>Heroes Reforged</h2>
-          <p>Classic turn-based strategy with async shadow modes</p>
+          <h2>Conquête Classique</h2>
+          <p>Scénario d'introduction - Heroes traditionnel</p>
           <div className="game-features">
-            <span>✨ ZFC Shadow Actions</span>
-            <span>🏛️ Perestroika Politics</span>
-            <span>🗺️ Hexagonal Maps</span>
+            <span>⚔️ Combat au tour par tour</span>
+            <span>🏰 Capture des châteaux</span>
+            <span>🗺️ Cartes hexagonales</span>
           </div>
+          <div className="difficulty-indicator easy">FACILE</div>
         </Link>
         
-        <Link to="/temporal" className="game-option temporal">
-          <div className="game-icon">⚡</div>
-          <h2>Heroes of Time and Magic</h2>
-          <p>Revolutionary spacetime strategy - plan actions across time dimensions</p>
+        <Link to="/game/mystique-temporel" className="game-option temporal">
+          <div className="game-icon">🔮</div>
+          <h2>Conquête Mystique</h2>
+          <p>Scénario avancé avec objets magiques et temporels</p>
           <div className="game-features">
-            <span>🕐 Temporal Planning</span>
-            <span>🌀 Entropy System</span>
-            <span>⚔️ Spacetime Conflicts</span>
+            <span>🔮 Objets temporels</span>
+            <span>⚡ Magie avancée</span>
+            <span>🌀 Portails mystiques</span>
           </div>
+          <div className="difficulty-indicator hard">AVANCÉ</div>
         </Link>
       </div>
       
+      <div className="scenario-explanation">
+        <p>💡 <strong>Les deux scénarios utilisent la même interface de jeu</strong></p>
+        <p>Le scénario Mystique ajoute des objets spéciaux sur la carte que vous pouvez découvrir !</p>
+      </div>
+      
       <footer className="selector-footer">
-        <p>Built with cutting-edge React & TypeScript</p>
+        <p>Construit avec React & TypeScript</p>
       </footer>
     </div>
   );
@@ -47,22 +53,10 @@ const App: React.FC = () => {
   return (
     <Router>
       <div className="App">
-        {/* Google Fonts pour Cinzel */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link 
-          href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&display=swap" 
-          rel="stylesheet" 
-        />
-        
         <Routes>
           <Route 
-            path="/game/:gameId" 
+            path="/game/:scenarioId" 
             element={<Game />} 
-          />
-          <Route 
-            path="/temporal" 
-            element={<TemporalGame />} 
           />
           <Route 
             path="/" 

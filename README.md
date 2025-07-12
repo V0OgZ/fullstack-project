@@ -92,6 +92,95 @@ npm start
 - **Build Reputation**: International standing affects all interactions
 - **Strategic Consequences**: Every decision has long-term effects
 
+## 🎭 **Magic Objects Library**
+
+### 🌟 **Temporal Objects (6 items)**
+Revolutionary objects that manipulate time and space:
+
+- **Cristal de Temps** - Regenerates temporal mana each turn
+- **Sablier Éternel** - Slows time in a 2-zone radius
+- **Miroir des Époques** - Reveals enemy actions in other timelines
+- **Coffre Temporel** - Contains 1-3 artifacts from different eras
+- **Amulette de Chronos** - Cast temporal spells without mana cost
+- **Ancre Temporelle** - Prevents temporal modifications in 3-zone radius
+
+### ⚔️ **Magic Weapons (5 items)**
+From basic enhanced blades to legendary divine weapons:
+
+- **Épée de Puissance** - Basic magic sword (+3 Attack)
+- **Lame des Héros** - Legendary blade (+6 Attack, +500 XP)
+- **Épée de l'Archange** - Divine weapon (+12 Attack, +5 Spell Power, Auto-Resurrection)
+- **Tueur de Dragons** - Dragon-slaying sword (+8 Attack, +50% vs Dragons)
+- **Bâton de Puissance** - Magic staff (+10 Spell Power, +20 Mana)
+
+### 🛡️ **Magic Armor (5 items)**
+Protection ranging from reinforced leather to titan-forged plates:
+
+- **Armure de Cuir Renforcé** - Basic protection (+2 Defense)
+- **Cotte de Mailles** - Good metal armor (+4 Defense)
+- **Armure de Plates** - Heavy protection (+8 Defense, -1 Movement)
+- **Armure d'Écailles de Dragon** - Dragon scale armor (+12 Defense, 50% Fire Resistance)
+- **Cuirasse des Titans** - Legendary titan armor (+15 Defense, +3 Attack, Spell Immunity)
+
+### 💍 **Magic Accessories (6 items)**
+Rings, amulets, boots, and other enchanted items:
+
+- **Anneau de Pouvoir** - Increases spell power (+3 Spell Power)
+- **Amulette de Vie** - Regenerates health (10% HP per turn)
+- **Bottes de Vitesse** - Enhanced movement (+3 Movement Points)
+- **Couronne de Sagesse** - Royal crown (+10 Knowledge, +50 Mana)
+- **Cape des Ombres** - Shadow cloak (3-turn invisibility)
+- **Gants de Dextérité** - Precision gloves (+2 Attack, +10% Critical)
+
+### ⭐ **Legendary Artifacts (4 items)**
+Ultimate items of immense power:
+
+- **Graal** - The Holy Grail (+10 to all stats, +50% to all creatures)
+- **Orbe du Firmament** - Cosmic orb (+15 Spell Power, 50% mana cost reduction)
+- **Armure des Damnés** - Cursed armor (converts dead enemies to skeleton allies)
+- **Tonnerre des Titans** - Titan's weapon (lightning attack hits all enemies)
+
+### 🧪 **Consumables & Resources (5 items)**
+Potions, tomes, and treasures:
+
+- **Potion de Mana** - Restores 50 mana
+- **Potion de Soin** - Restores 100% HP
+- **Tome d'Expérience** - Grants 1000 experience
+- **Essence Temporelle** - Temporal mana restoration (+10)
+- **Coffre d'Or** - Contains 1000 gold
+
+### 📊 **Library Statistics**
+- **Total Objects**: 31 unique items
+- **Rarity Distribution**: 6 Common, 6 Uncommon, 5 Rare, 4 Epic, 4 Legendary, 6 Temporal
+- **Type Distribution**: 5 Weapons, 5 Armor, 6 Accessories, 4 Artifacts, 6 Temporal, 5 Consumables
+
+## 🎯 Game Modes
+
+### 🔥 **Temporal Conquest** (Revolutionary Mode)
+- **2-8 players** on massive spacetime maps
+- **Full ZFC system** with shadow actions and temporal spells
+- **Real-time political events** and advisor consultations
+- **Victory**: Control key temporal artifacts or eliminate all enemies
+
+### ⚡ **Classic Heroes** (Traditional Mode)
+- **Traditional turn-based** HoMM3-style gameplay
+- **Local multiplayer** on single device
+- **Simplified politics** for faster games
+- **Victory**: Capture enemy castles or complete objectives
+
+### 🏆 **How the Two Scenarios Work**
+**Heroes Reforged** offers two distinct gaming experiences:
+
+1. **Temporal Mode** - Revolutionary async strategy with ZFC zones, shadow actions, and temporal magic
+2. **Classic Mode** - Traditional Heroes of Might & Magic experience with enhanced UI
+
+Both modes share the same **complete magic object library**, **political system**, and **beautiful modern interface**, but differ in their core mechanics:
+
+- **Temporal**: Asynchronous gameplay, time manipulation, spacetime strategy
+- **Classic**: Turn-based, immediate execution, traditional strategy
+
+Players can switch between modes or play both simultaneously - your hero progression and items carry over between modes!
+
 ## 🛠️ Technical Innovation
 
 ### 🎨 **Canvas Rendering Engine**
@@ -124,112 +213,6 @@ public class AsyncGameEngine {
             : executeImmediateAction(action);
     }
 }
-```
-
-## 🎯 Game Modes
-
-### 🔥 **Async Conquest** (Primary Mode)
-- **2-8 players** on massive maps
-- **Full ZFC system** with shadow actions
-- **Real-time political events**
-- **Victory**: Control 75% of castles or eliminate all enemies
-
-### ⚡ **Hot Seat Classic**
-- **Traditional turn-based** HoMM3 experience
-- **Local multiplayer** on single device
-- **Simplified politics** for faster games
-
-### 🤖 **Solo Campaign**
-- **Story-driven missions** with narrative
-- **AI opponents** with unique personalities
-- **Tutorial mode** for learning ZFC mechanics
-
-### 🏆 **Tournament Mode**
-- **Competitive ranked** gameplay
-- **Balanced maps** and equal starts
-- **Professional esports** features
-
-## 🛣️ Development Roadmap
-
-### 🎯 **Phase 1: Foundation** ✅ **COMPLETE**
-- ✅ Canvas hexagonal rendering
-- ✅ Basic ZFC system
-- ✅ Enhanced UI with info panels
-- ✅ Hero movement and management
-- ✅ Political advisor framework
-
-### 🏰 **Phase 2A: Castle & Units** (Q1 2025)
-- 📋 8 complete castle types
-- 📋 168 unit types (7 tiers × 8 castles × 3 variants)
-- 📋 Resource economy with 7 resource types
-- 📋 Building construction and upgrades
-
-### ⚔️ **Phase 2B: Combat & Magic** (Q2 2025)
-- 📋 Tactical hex-based combat
-- 📋 70+ spells across 5 magic schools
-- 📋 150+ artifacts with equipment
-- 📋 Morale, luck, and special abilities
-
-### 🔮 **Phase 3: Advanced ZFC** (Q3 2025)
-- 📋 Shadow action bluffing
-- 📋 Temporal paradox resolution
-- 📋 Multi-layer zone interactions
-- 📋 Quantum superposition mechanics
-
-### 🏛️ **Phase 4: Full Political** (Q4 2025)
-- 📋 20+ dynamic crisis events
-- 📋 Advisor personality conflicts
-- 📋 Reputation-based diplomacy
-- 📋 Long-term consequence chains
-
-## 💡 Why This Is Revolutionary
-
-### 🔮 **First True Async Strategy Game**
-- No more waiting for slow players
-- Actions execute in real-time when possible
-- Conflicts handled intelligently
-- Psychological layer adds new depth
-
-### 🎭 **Genius Shadow System**
-- See "ghosts" of enemy actions
-- Creates natural paranoia and bluffing
-- Information warfare becomes key
-- Trust and deception matter
-
-### 🧠 **Deep Strategic Layers**
-- All HoMM3 complexity preserved
-- Political decisions affect everything
-- Multiple victory paths available
-- Emergent gameplay from simple rules
-
-## 🏆 Success Metrics
-
-### 🎯 **Target Goals**
-- **10,000+ daily players** within 6 months
-- **90%+ positive reviews** across platforms
-- **Competitive esports scene** with tournaments
-- **$1M+ revenue** in first year
-
-### 📊 **Innovation Benchmarks**
-- **<100ms** action response time
-- **95%+ accuracy** in ZFC conflict detection
-- **60 FPS constant** with 500+ units on screen
-- **<5 minutes** to learn ZFC basics
-
-## 🤝 Contributing
-
-We're building the future of strategy gaming! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
-```bash
-# Development setup
-npm install
-npm start
-
-# Backend development
-cd backend && mvn spring-boot:run
-
-# Run tests
-npm test
 ```
 
 ## 📚 Documentation
