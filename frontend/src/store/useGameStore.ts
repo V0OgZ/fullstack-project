@@ -21,6 +21,9 @@ interface GameStore extends GameState {
   setLoading: (loading: boolean) => void;
   setError: (error: string | null) => void;
   
+  // Helper functions
+  convertTilesToMap: (tiles: any[], width: number, height: number) => Tile[][];
+  
   // NOUVEAU: Actions pour le système ZFC
   addTimelineAction: (action: TimelineAction) => void;
   updateTimelineAction: (actionId: string, status: TimelineAction['status']) => void;
@@ -72,6 +75,43 @@ export const useGameStore = create<GameStore>((set, get) => ({
     diplomatic: 0
   },
   activeEvents: [],
+
+  // Helper function to convert flat tiles array to 2D array
+  convertTilesToMap: (tiles: any[], width: number, height: number): Tile[][] => {
+    const map: Tile[][] = [];
+    for (let y = 0; y < height; y++) {
+      const row: Tile[] = [];
+      for (let x = 0; x < width; x++) {
+        const tileIndex = y * width + x;
+        const tile = tiles[tileIndex];
+        if (tile) {
+          // Convert from flat tile format to game store tile format
+          row.push({
+            x: tile.x || x,
+            y: tile.y || y,
+            terrain: tile.terrain || 'grass',
+            walkable: tile.walkable !== undefined ? tile.walkable : true,
+            movementCost: tile.movementCost || 1,
+            hero: tile.hero || null,
+            creature: tile.creature || null
+          });
+        } else {
+          // Fallback tile
+          row.push({
+            x,
+            y,
+            terrain: 'grass',
+            walkable: true,
+            movementCost: 1,
+            hero: null,
+            creature: null
+          });
+        }
+      }
+      map.push(row);
+    }
+    return map;
+  },
 
   // State setters
   setCurrentGame: (game) => set({ currentGame: game }),
@@ -326,7 +366,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
   // Game state management
   loadGame: async (gameId: string) => {
-    const { setLoading, setError, setCurrentGame, setCurrentPlayer } = get();
+    const { setLoading, setError, setCurrentGame, setCurrentPlayer, setMap } = get();
     setLoading(true);
     setError(null);
 
@@ -335,6 +375,10 @@ export const useGameStore = create<GameStore>((set, get) => ({
       
       if (gameState.currentGame) {
         setCurrentGame(gameState.currentGame);
+        // CRITICAL FIX: Set the map state when game loads
+        if (gameState.currentGame.map && gameState.currentGame.map.tiles) {
+          setMap(get().convertTilesToMap(gameState.currentGame.map.tiles, gameState.currentGame.map.width, gameState.currentGame.map.height));
+        }
       }
       if (gameState.currentPlayer) {
         setCurrentPlayer(gameState.currentPlayer);
@@ -347,7 +391,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   },
 
   refreshGameState: async () => {
-    const { currentGame, setLoading, setError, setCurrentGame, setCurrentPlayer } = get();
+    const { currentGame, setLoading, setError, setCurrentGame, setCurrentPlayer, setMap } = get();
     if (!currentGame) return;
 
     setLoading(true);
@@ -357,6 +401,10 @@ export const useGameStore = create<GameStore>((set, get) => ({
       const gameState = await GameService.getGameState(currentGame.id);
       if (gameState.currentGame) {
         setCurrentGame(gameState.currentGame);
+        // CRITICAL FIX: Set the map state when refreshing
+        if (gameState.currentGame.map && gameState.currentGame.map.tiles) {
+          setMap(get().convertTilesToMap(gameState.currentGame.map.tiles, gameState.currentGame.map.width, gameState.currentGame.map.height));
+        }
       }
       if (gameState.currentPlayer) {
         setCurrentPlayer(gameState.currentPlayer);

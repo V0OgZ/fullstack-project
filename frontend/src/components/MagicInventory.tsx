@@ -30,6 +30,24 @@ const MagicInventory: React.FC<MagicInventoryProps> = ({
   const [showOnlyOwned, setShowOnlyOwned] = useState(false);
   const [layoutVertical, setLayoutVertical] = useState(true);
 
+  // Helper function to get translated object name
+  const getObjectName = (object: MagicObject): string => {
+    return t(object.nameKey as any) || object.nameKey;
+  };
+
+  // Helper function to get translated object description
+  const getObjectDescription = (object: MagicObject): string => {
+    return t(object.descriptionKey as any) || object.descriptionKey;
+  };
+
+  // Helper function to get translated special effect
+  const getSpecialEffect = (object: MagicObject): string => {
+    if (object.effects.specialEffectKey) {
+      return t(object.effects.specialEffectKey as any) || object.effects.specialEffectKey;
+    }
+    return '';
+  };
+
   // Compute tab categories
   const tabs = [
     { id: 'all', name: t('all'), icon: '🎒' },
@@ -73,7 +91,7 @@ const MagicInventory: React.FC<MagicInventoryProps> = ({
     objects.sort((a, b) => {
       switch (sortBy) {
         case 'name':
-          return a.name.localeCompare(b.name);
+          return getObjectName(a).localeCompare(getObjectName(b));
         case 'value':
           return b.value - a.value;
         case 'rarity':
@@ -85,7 +103,7 @@ const MagicInventory: React.FC<MagicInventoryProps> = ({
     });
 
     return objects;
-  }, [activeTab, selectedRarity, selectedType, showOnlyOwned, sortBy, playerInventory, equippedItems]);
+  }, [activeTab, selectedRarity, selectedType, showOnlyOwned, sortBy, playerInventory, equippedItems, t]);
 
   const isItemOwned = (itemId: string) => playerInventory.includes(itemId);
   const isItemEquipped = (itemId: string) => Object.values(equippedItems).includes(itemId);
@@ -104,18 +122,6 @@ const MagicInventory: React.FC<MagicInventoryProps> = ({
     }
   };
 
-  const getRarityIcon = (rarity: string) => {
-    switch (rarity) {
-      case 'common': return '⚪';
-      case 'uncommon': return '🟢';
-      case 'rare': return '🔵';
-      case 'epic': return '🟣';
-      case 'legendary': return '🟡';
-      case 'temporal': return '🌸';
-      default: return '⚪';
-    }
-  };
-
   const getTypeIcon = (type: string) => {
     switch (type) {
       case 'weapon': return '⚔️';
@@ -125,7 +131,19 @@ const MagicInventory: React.FC<MagicInventoryProps> = ({
       case 'temporal': return '⏰';
       case 'consumable': return '🧪';
       case 'resource': return '💰';
-      default: return '❓';
+      default: return '📦';
+    }
+  };
+
+  const getRarityIcon = (rarity: string) => {
+    switch (rarity) {
+      case 'common': return '◦';
+      case 'uncommon': return '○';
+      case 'rare': return '◉';
+      case 'epic': return '★';
+      case 'legendary': return '✦';
+      case 'temporal': return '⟡';
+      default: return '◦';
     }
   };
 
@@ -149,26 +167,34 @@ const MagicInventory: React.FC<MagicInventoryProps> = ({
 
   return (
     <div className="magic-inventory">
-      <button 
-        className="layout-toggle"
-        onClick={() => setLayoutVertical(!layoutVertical)}
-        title={layoutVertical ? "Passer aux onglets horizontaux" : "Passer aux onglets verticaux"}
-      >
-        {layoutVertical ? '📋 Horizontal' : '📑 Vertical'}
-      </button>
-
       <div className="inventory-header">
         <h2>{t('magicInventoryTitle')}</h2>
         <div className="inventory-stats">
-          <span>📦 {filteredObjects.length} {t('objects')}</span>
-          <span>⚔️ {Object.keys(equippedItems).length} {t('equipped')}</span>
-          <span>💰 {playerGold} {t('gold')}</span>
-          <span>📈 {t('level')} {playerLevel}</span>
+          <span>{t('objects')}: {filteredObjects.length}</span>
+          <span>💰 {playerGold.toLocaleString()} {t('gold')}</span>
+          <span>📊 {t('level')}: {playerLevel}</span>
+        </div>
+        
+        <div className="layout-controls">
+          <button 
+            className={`layout-btn ${layoutVertical ? 'active' : ''}`}
+            onClick={() => setLayoutVertical(true)}
+            title={t('verticalTabs')}
+          >
+            ⬇
+          </button>
+          <button 
+            className={`layout-btn ${!layoutVertical ? 'active' : ''}`}
+            onClick={() => setLayoutVertical(false)}
+            title={t('horizontalTabs')}
+          >
+            ➡
+          </button>
         </div>
       </div>
 
-      <div className="inventory-layout">
-        {/* Sidebar with tabs */}
+      <div className={`inventory-content ${layoutVertical ? 'vertical' : 'horizontal'}`}>
+        {/* Sidebar with tabs and filters */}
         <div className="inventory-sidebar">
           <div className={`inventory-tabs ${layoutVertical ? '' : 'horizontal'}`}>
             {tabs.map(tab => (
@@ -247,6 +273,9 @@ const MagicInventory: React.FC<MagicInventoryProps> = ({
                 const equipped = isItemEquipped(object.id);
                 const canEquip = canEquipItem(object);
                 const unavailable = !owned && !canEquip;
+                const objectName = getObjectName(object);
+                const objectDescription = getObjectDescription(object);
+                const specialEffect = getSpecialEffect(object);
 
                 return (
                   <div
@@ -264,8 +293,8 @@ const MagicInventory: React.FC<MagicInventoryProps> = ({
                       {object.temporal && <span className="temporal-badge">{t('temporal')}</span>}
                     </div>
 
-                    <h3 className="object-name">{object.name}</h3>
-                    <p className="object-description">{object.description}</p>
+                    <h3 className="object-name">{objectName}</h3>
+                    <p className="object-description">{objectDescription}</p>
 
                     <div className="object-effects">
                       {object.effects.attack && <span>⚔️ +{object.effects.attack}</span>}
@@ -281,9 +310,9 @@ const MagicInventory: React.FC<MagicInventoryProps> = ({
 
                     <div className="object-value">💰 {object.value.toLocaleString()} {t('gold')}</div>
 
-                    {object.effects.specialEffect && (
+                    {specialEffect && (
                       <div className="special-effect">
-                        <strong>{t('specialEffect')}:</strong> {object.effects.specialEffect}
+                        <strong>{t('specialEffect')}:</strong> {specialEffect}
                       </div>
                     )}
 
@@ -331,22 +360,14 @@ const MagicInventory: React.FC<MagicInventoryProps> = ({
         </div>
       </div>
 
+      {/* Library Statistics */}
       <div className="library-stats">
         <h3>{t('libraryStatsTitle')}</h3>
         <div className="stats-grid">
           <div>{t('total')}: {MAGIC_OBJECTS_STATS.total}</div>
-          <div>{t('temporal')}: {MAGIC_OBJECTS_STATS.temporal}</div>
           <div>{t('weapons')}: {MAGIC_OBJECTS_STATS.weapons}</div>
           <div>{t('armor')}: {MAGIC_OBJECTS_STATS.armor}</div>
-          <div>{t('accessories')}: {MAGIC_OBJECTS_STATS.accessories}</div>
-          <div>{t('legendary')}: {MAGIC_OBJECTS_STATS.legendary}</div>
-          <div>{t('consumables')}: {MAGIC_OBJECTS_STATS.consumables}</div>
-          <div>{t('common')}: {MAGIC_OBJECTS_STATS.byRarity.common}</div>
-          <div>{t('uncommon')}: {MAGIC_OBJECTS_STATS.byRarity.uncommon}</div>
-          <div>{t('rare')}: {MAGIC_OBJECTS_STATS.byRarity.rare}</div>
-          <div>{t('epic')}: {MAGIC_OBJECTS_STATS.byRarity.epic}</div>
-          <div>{t('legendary')}: {MAGIC_OBJECTS_STATS.byRarity.legendary}</div>
-          <div>{t('temporal')}: {MAGIC_OBJECTS_STATS.byRarity.temporal}</div>
+          <div>{t('temporal')}: {MAGIC_OBJECTS_STATS.temporal}</div>
         </div>
       </div>
     </div>
