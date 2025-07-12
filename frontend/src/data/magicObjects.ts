@@ -1,12 +1,11 @@
-// Heroes of Time and Magic - Complete Magic Objects Library
-// Objets temporels spéciaux + objets classiques Heroes of Might and Magic
-
+// Types for magic objects
 export interface MagicObject {
   id: string;
   name: string;
-  type: 'weapon' | 'armor' | 'accessory' | 'artifact' | 'consumable' | 'temporal' | 'resource';
-  rarity: 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary' | 'temporal';
   description: string;
+  type: 'weapon' | 'armor' | 'accessory' | 'artifact' | 'temporal' | 'consumable' | 'resource';
+  rarity: 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary' | 'temporal';
+  value: number;
   effects: {
     attack?: number;
     defense?: number;
@@ -14,438 +13,320 @@ export interface MagicObject {
     spellPower?: number;
     movementPoints?: number;
     mana?: number;
-    gold?: number;
-    experience?: number;
     temporalMana?: number;
+    experience?: number;
+    gold?: number;
     specialEffect?: string;
   };
+  slot?: 'weapon' | 'armor' | 'helmet' | 'boots' | 'ring' | 'amulet' | 'cape';
   requiresLevel?: number;
-  slot?: 'weapon' | 'armor' | 'helmet' | 'boots' | 'ring' | 'amulet' | 'cape' | 'gloves' | 'belt' | 'temporal';
-  value: number;
   temporal?: boolean;
 }
 
-// ============================================================================
-// OBJETS TEMPORELS SPÉCIAUX
-// ============================================================================
-
-export const TEMPORAL_OBJECTS: MagicObject[] = [
+// All magic objects collection
+export const ALL_MAGIC_OBJECTS: MagicObject[] = [
+  // === WEAPONS ===
   {
-    id: 'time_crystal',
-    name: 'Cristal de Temps',
-    type: 'temporal',
-    rarity: 'temporal',
-    description: 'Énergie temporelle cristallisée qui régénère le mana temporel',
-    effects: {
-      temporalMana: 2,
-      specialEffect: '+2 Mana temporel par tour'
-    },
-    slot: 'temporal',
-    value: 5000,
-    temporal: true
+    id: 'sword_basic',
+    name: 'Épée du Novice',
+    description: 'Une épée simple mais efficace pour débuter.',
+    type: 'weapon',
+    rarity: 'common',
+    value: 100,
+    effects: { attack: 2 },
+    slot: 'weapon'
   },
   {
-    id: 'eternal_hourglass',
-    name: 'Sablier Éternel',
-    type: 'temporal',
-    rarity: 'temporal',
-    description: 'Relique des premiers chronurgistes permettant de ralentir le temps local',
-    effects: {
-      specialEffect: 'Ralentit le temps dans un rayon de 2 zones'
-    },
-    slot: 'temporal',
-    value: 8000,
-    temporal: true
-  },
-  {
-    id: 'epoch_mirror',
-    name: 'Miroir des Époques',
-    type: 'temporal',
-    rarity: 'temporal',
-    description: 'Reflet des réalités alternatives révélant les actions des autres timelines',
-    effects: {
-      specialEffect: 'Révèle les actions prévues des ennemis dans les autres timelines'
-    },
-    slot: 'temporal',
-    value: 6000,
-    temporal: true
-  },
-  {
-    id: 'temporal_chest',
-    name: 'Coffre Temporel',
-    type: 'temporal',
-    rarity: 'temporal',
-    description: 'Trésor perdu dans le temps contenant des artefacts de différentes époques',
-    effects: {
-      specialEffect: 'Contient 1-3 artefacts aléatoires de différentes époques'
-    },
-    slot: 'temporal',
-    value: 10000,
-    temporal: true
-  },
-  {
-    id: 'chronos_amulet',
-    name: 'Amulette de Chronos',
-    type: 'temporal',
-    rarity: 'temporal',
-    description: 'Amulette divine permettant de manipuler le flux temporel',
-    effects: {
-      temporalMana: 3,
-      specialEffect: 'Permet de lancer des sorts temporels sans coût de mana (1 fois par tour)'
-    },
-    slot: 'amulet',
-    value: 15000,
-    temporal: true
-  },
-  {
-    id: 'time_anchor',
-    name: 'Ancre Temporelle',
-    type: 'temporal',
-    rarity: 'temporal',
-    description: 'Dispositif stabilisant une zone contre les interférences temporelles',
-    effects: {
-      specialEffect: 'Empêche les modifications temporelles dans un rayon de 3 zones'
-    },
-    slot: 'temporal',
-    value: 12000,
-    temporal: true
-  }
-];
-
-// ============================================================================
-// ARMES MAGIQUES
-// ============================================================================
-
-export const MAGIC_WEAPONS: MagicObject[] = [
-  {
-    id: 'sword_of_might',
-    name: 'Épée de Puissance',
+    id: 'sword_steel',
+    name: 'Épée d\'Acier',
+    description: 'Une épée solide forgée dans l\'acier le plus pur.',
     type: 'weapon',
     rarity: 'uncommon',
-    description: 'Épée enchantée qui augmente la force de son porteur',
-    effects: { attack: 3 },
-    slot: 'weapon',
-    value: 1000
+    value: 250,
+    effects: { attack: 4 },
+    slot: 'weapon'
   },
   {
-    id: 'blade_of_heroes',
-    name: 'Lame des Héros',
+    id: 'sword_magic',
+    name: 'Lame Enchantée',
+    description: 'Une épée magique qui brille d\'une lueur mystique.',
     type: 'weapon',
     rarity: 'rare',
-    description: 'Épée légendaire forgée pour les plus grands héros',
-    effects: { attack: 6, experience: 500 },
+    value: 500,
+    effects: { attack: 6, spellPower: 2 },
+    slot: 'weapon'
+  },
+  {
+    id: 'sword_legendary',
+    name: 'Excalibur',
+    description: 'L\'épée légendaire des rois. Confère une autorité naturelle.',
+    type: 'weapon',
+    rarity: 'legendary',
+    value: 2000,
+    effects: { attack: 12, defense: 3, specialEffect: 'Augmente le moral des troupes' },
     slot: 'weapon',
-    value: 3000,
+    requiresLevel: 10
+  },
+
+  // === ARMOR ===
+  {
+    id: 'armor_leather',
+    name: 'Armure de Cuir',
+    description: 'Protection légère mais flexible.',
+    type: 'armor',
+    rarity: 'common',
+    value: 80,
+    effects: { defense: 2 },
+    slot: 'armor'
+  },
+  {
+    id: 'armor_chain',
+    name: 'Cotte de Mailles',
+    description: 'Armure métallique offrant une bonne protection.',
+    type: 'armor',
+    rarity: 'uncommon',
+    value: 200,
+    effects: { defense: 4 },
+    slot: 'armor'
+  },
+  {
+    id: 'armor_plate',
+    name: 'Armure de Plates',
+    description: 'Protection maximale pour les guerriers expérimentés.',
+    type: 'armor',
+    rarity: 'rare',
+    value: 450,
+    effects: { defense: 7 },
+    slot: 'armor'
+  },
+  {
+    id: 'armor_dragon',
+    name: 'Écailles de Dragon',
+    description: 'Armure légendaire taillée dans les écailles d\'un dragon ancien.',
+    type: 'armor',
+    rarity: 'legendary',
+    value: 1800,
+    effects: { defense: 10, attack: 2, specialEffect: 'Résistance au feu' },
+    slot: 'armor',
+    requiresLevel: 8
+  },
+
+  // === ACCESSORIES ===
+  {
+    id: 'ring_power',
+    name: 'Anneau de Pouvoir',
+    description: 'Augmente la puissance magique de son porteur.',
+    type: 'accessory',
+    rarity: 'rare',
+    value: 400,
+    effects: { spellPower: 3, mana: 5 },
+    slot: 'ring'
+  },
+  {
+    id: 'amulet_wisdom',
+    name: 'Amulette de Sagesse',
+    description: 'Confère une grande connaissance à son porteur.',
+    type: 'accessory',
+    rarity: 'uncommon',
+    value: 300,
+    effects: { knowledge: 4, experience: 10 },
+    slot: 'amulet'
+  },
+  {
+    id: 'boots_speed',
+    name: 'Bottes de Célérité',
+    description: 'Permet de se déplacer plus rapidement sur la carte.',
+    type: 'accessory',
+    rarity: 'rare',
+    value: 350,
+    effects: { movementPoints: 2 },
+    slot: 'boots'
+  },
+  {
+    id: 'cape_stealth',
+    name: 'Cape d\'Invisibilité',
+    description: 'Permet de passer inaperçu aux yeux des ennemis.',
+    type: 'accessory',
+    rarity: 'epic',
+    value: 800,
+    effects: { defense: 2, specialEffect: 'Évite certains combats' },
+    slot: 'cape',
     requiresLevel: 5
   },
-  {
-    id: 'archangel_sword',
-    name: 'Épée de l\'Archange',
-    type: 'weapon',
-    rarity: 'legendary',
-    description: 'Arme divine bénie par les archanges',
-    effects: { attack: 12, spellPower: 5, specialEffect: 'Résurrection automatique 1 fois par combat' },
-    slot: 'weapon',
-    value: 10000,
-    requiresLevel: 10
-  },
-  {
-    id: 'dragon_slayer',
-    name: 'Tueur de Dragons',
-    type: 'weapon',
-    rarity: 'epic',
-    description: 'Épée spécialement forgée pour tuer les dragons',
-    effects: { attack: 8, specialEffect: '+50% dégâts contre les dragons' },
-    slot: 'weapon',
-    value: 5000,
-    requiresLevel: 7
-  },
-  {
-    id: 'staff_of_power',
-    name: 'Bâton de Puissance',
-    type: 'weapon',
-    rarity: 'rare',
-    description: 'Bâton magique amplifiant les sorts',
-    effects: { spellPower: 10, mana: 20 },
-    slot: 'weapon',
-    value: 4000,
-    requiresLevel: 6
-  }
-];
 
-// ============================================================================
-// ARMURES MAGIQUES
-// ============================================================================
-
-export const MAGIC_ARMOR: MagicObject[] = [
+  // === ARTIFACTS ===
   {
-    id: 'leather_armor',
-    name: 'Armure de Cuir Renforcé',
-    type: 'armor',
-    rarity: 'common',
-    description: 'Armure légère offrant une protection de base',
-    effects: { defense: 2 },
-    slot: 'armor',
-    value: 500
-  },
-  {
-    id: 'chain_mail',
-    name: 'Cotte de Mailles',
-    type: 'armor',
-    rarity: 'uncommon',
-    description: 'Armure métallique offrant une bonne protection',
-    effects: { defense: 4 },
-    slot: 'armor',
-    value: 1200
-  },
-  {
-    id: 'plate_armor',
-    name: 'Armure de Plates',
-    type: 'armor',
-    rarity: 'rare',
-    description: 'Armure lourde offrant une excellente protection',
-    effects: { defense: 8, movementPoints: -1 },
-    slot: 'armor',
-    value: 3000
-  },
-  {
-    id: 'dragon_scale_armor',
-    name: 'Armure d\'Écailles de Dragon',
-    type: 'armor',
-    rarity: 'epic',
-    description: 'Armure forgée avec des écailles de dragon légendaire',
-    effects: { defense: 12, specialEffect: 'Résistance au feu 50%' },
-    slot: 'armor',
-    value: 8000,
-    requiresLevel: 8
-  },
-  {
-    id: 'titans_cuirass',
-    name: 'Cuirasse des Titans',
-    type: 'armor',
-    rarity: 'legendary',
-    description: 'Armure légendaire portée par les titans',
-    effects: { defense: 15, attack: 3, specialEffect: 'Immunité aux sorts de niveau 1-2' },
-    slot: 'armor',
-    value: 15000,
-    requiresLevel: 12
-  }
-];
-
-// ============================================================================
-// ACCESSOIRES MAGIQUES
-// ============================================================================
-
-export const MAGIC_ACCESSORIES: MagicObject[] = [
-  {
-    id: 'ring_of_power',
-    name: 'Anneau de Pouvoir',
-    type: 'accessory',
-    rarity: 'uncommon',
-    description: 'Anneau augmentant la puissance magique',
-    effects: { spellPower: 3 },
-    slot: 'ring',
-    value: 800
-  },
-  {
-    id: 'amulet_of_life',
-    name: 'Amulette de Vie',
-    type: 'accessory',
-    rarity: 'rare',
-    description: 'Amulette protégeant contre la mort',
-    effects: { specialEffect: 'Régénère 10% des PV par tour' },
-    slot: 'amulet',
-    value: 2500
-  },
-  {
-    id: 'boots_of_speed',
-    name: 'Bottes de Vitesse',
-    type: 'accessory',
-    rarity: 'uncommon',
-    description: 'Bottes enchantées augmentant la vitesse',
-    effects: { movementPoints: 3 },
-    slot: 'boots',
-    value: 1000
-  },
-  {
-    id: 'crown_of_wisdom',
-    name: 'Couronne de Sagesse',
-    type: 'accessory',
-    rarity: 'epic',
-    description: 'Couronne royale augmentant la connaissance',
-    effects: { knowledge: 10, mana: 50 },
-    slot: 'helmet',
-    value: 6000,
-    requiresLevel: 8
-  },
-  {
-    id: 'cape_of_shadows',
-    name: 'Cape des Ombres',
-    type: 'accessory',
-    rarity: 'rare',
-    description: 'Cape magique permettant de se faufiler discrètement',
-    effects: { specialEffect: 'Invisibilité pendant 3 tours (1 fois par jour)' },
-    slot: 'cape',
-    value: 3500
-  },
-  {
-    id: 'gloves_of_dexterity',
-    name: 'Gants de Dextérité',
-    type: 'accessory',
-    rarity: 'uncommon',
-    description: 'Gants améliorant la précision des attaques',
-    effects: { attack: 2, specialEffect: '+10% chance de coup critique' },
-    slot: 'gloves',
-    value: 1200
-  }
-];
-
-// ============================================================================
-// ARTEFACTS LÉGENDAIRES
-// ============================================================================
-
-export const LEGENDARY_ARTIFACTS: MagicObject[] = [
-  {
-    id: 'grail',
-    name: 'Graal',
+    id: 'crown_kings',
+    name: 'Couronne des Rois',
+    description: 'Artefact royal qui inspire le respect et la loyauté.',
     type: 'artifact',
     rarity: 'legendary',
-    description: 'Le Saint Graal, artefact ultime conférant des pouvoirs divins',
+    value: 2500,
     effects: { 
-      attack: 10, 
-      defense: 10, 
-      knowledge: 10, 
-      spellPower: 10,
-      specialEffect: 'Toutes les créatures gagnent +50% statistiques'
+      attack: 3, 
+      defense: 3, 
+      knowledge: 3, 
+      spellPower: 3,
+      specialEffect: 'Augmente les revenus de tous les châteaux' 
     },
-    slot: 'temporal',
-    value: 100000,
+    requiresLevel: 12
+  },
+  {
+    id: 'orb_knowledge',
+    name: 'Orbe de Connaissance',
+    description: 'Artefact mystique contenant le savoir des anciens.',
+    type: 'artifact',
+    rarity: 'epic',
+    value: 1200,
+    effects: { knowledge: 8, experience: 50 },
+    requiresLevel: 6
+  },
+  {
+    id: 'staff_archmage',
+    name: 'Bâton de l\'Archimage',
+    description: 'Bâton légendaire amplifiant tous les pouvoirs magiques.',
+    type: 'artifact',
+    rarity: 'legendary',
+    value: 3000,
+    effects: { 
+      spellPower: 10, 
+      mana: 20, 
+      knowledge: 5,
+      specialEffect: 'Double les effets de tous les sorts' 
+    },
     requiresLevel: 15
   },
+
+  // === TEMPORAL OBJECTS ===
   {
-    id: 'orb_of_the_firmament',
-    name: 'Orbe du Firmament',
-    type: 'artifact',
-    rarity: 'legendary',
-    description: 'Orbe céleste contrôlant les forces cosmiques',
+    id: 'temporal_anchor',
+    name: 'Ancre Temporelle',
+    description: 'Permet de fixer un point dans le temps pour y revenir.',
+    type: 'temporal',
+    rarity: 'temporal',
+    value: 1500,
     effects: { 
-      spellPower: 15, 
-      mana: 100,
-      specialEffect: 'Tous les sorts coûtent 50% de mana en moins'
+      temporalMana: 10, 
+      specialEffect: 'Permet de créer un point de sauvegarde temporel' 
     },
-    slot: 'temporal',
-    value: 50000,
-    requiresLevel: 12
+    temporal: true,
+    requiresLevel: 8
   },
   {
-    id: 'armor_of_the_damned',
-    name: 'Armure des Damnés',
-    type: 'artifact',
-    rarity: 'legendary',
-    description: 'Armure maudite conférant des pouvoirs nécromantiques',
+    id: 'temporal_prism',
+    name: 'Prisme Temporel',
+    description: 'Cristal qui révèle les futurs possibles.',
+    type: 'temporal',
+    rarity: 'temporal',
+    value: 2000,
     effects: { 
-      defense: 12, 
-      specialEffect: 'Transforme les ennemis morts en squelettes alliés'
+      temporalMana: 15, 
+      knowledge: 5,
+      specialEffect: 'Vision des actions futures ennemies' 
     },
-    slot: 'armor',
-    value: 40000,
+    temporal: true,
     requiresLevel: 10
   },
   {
-    id: 'titan_thunder',
-    name: 'Tonnerre des Titans',
-    type: 'artifact',
-    rarity: 'legendary',
-    description: 'Arme des titans maîtres de la foudre',
+    id: 'temporal_hourglass',
+    name: 'Sablier Éternel',
+    description: 'Artefact légendaire permettant de manipuler le temps.',
+    type: 'temporal',
+    rarity: 'temporal',
+    value: 5000,
     effects: { 
-      attack: 15, 
-      specialEffect: 'Attaque de foudre touchant tous les ennemis'
+      temporalMana: 30, 
+      spellPower: 8,
+      specialEffect: 'Permet de rejouer un tour' 
     },
-    slot: 'weapon',
-    value: 60000,
-    requiresLevel: 14
-  }
-];
-
-// ============================================================================
-// CONSOMMABLES ET RESSOURCES
-// ============================================================================
-
-export const CONSUMABLES: MagicObject[] = [
+    temporal: true,
+    requiresLevel: 20
+  },
   {
-    id: 'mana_potion',
+    id: 'temporal_compass',
+    name: 'Boussole Temporelle',
+    description: 'Indique la direction des anomalies temporelles.',
+    type: 'temporal',
+    rarity: 'temporal',
+    value: 800,
+    effects: { 
+      temporalMana: 5, 
+      movementPoints: 1,
+      specialEffect: 'Détecte les objets temporels sur la carte' 
+    },
+    temporal: true,
+    requiresLevel: 3
+  },
+
+  // === CONSUMABLES ===
+  {
+    id: 'potion_health',
+    name: 'Potion de Soins',
+    description: 'Restaure la santé des unités blessées.',
+    type: 'consumable',
+    rarity: 'common',
+    value: 50,
+    effects: { specialEffect: 'Restaure 25% des PV de toutes les unités' }
+  },
+  {
+    id: 'potion_mana',
     name: 'Potion de Mana',
-    type: 'consumable',
-    rarity: 'common',
-    description: 'Potion restaurant le mana magique',
-    effects: { mana: 50 },
-    slot: 'temporal',
-    value: 200
-  },
-  {
-    id: 'healing_potion',
-    name: 'Potion de Soin',
-    type: 'consumable',
-    rarity: 'common',
-    description: 'Potion restaurant les points de vie',
-    effects: { specialEffect: 'Restaure 100% des PV' },
-    slot: 'temporal',
-    value: 300
-  },
-  {
-    id: 'experience_tome',
-    name: 'Tome d\'Expérience',
+    description: 'Restaure les points de mana du héros.',
     type: 'consumable',
     rarity: 'uncommon',
-    description: 'Livre magique conférant de l\'expérience',
-    effects: { experience: 1000 },
-    slot: 'temporal',
-    value: 1500
+    value: 80,
+    effects: { mana: 20 }
   },
   {
-    id: 'temporal_essence',
-    name: 'Essence Temporelle',
+    id: 'scroll_teleport',
+    name: 'Parchemin de Téléportation',
+    description: 'Permet de se téléporter instantanément.',
     type: 'consumable',
-    rarity: 'temporal',
-    description: 'Essence pure du temps permettant des manipulations temporelles',
-    effects: { temporalMana: 10 },
-    slot: 'temporal',
-    value: 2000,
-    temporal: true
+    rarity: 'rare',
+    value: 200,
+    effects: { specialEffect: 'Téléportation vers n\'importe quelle position' }
+  },
+  {
+    id: 'elixir_experience',
+    name: 'Élixir d\'Expérience',
+    description: 'Accélère la progression du héros.',
+    type: 'consumable',
+    rarity: 'epic',
+    value: 400,
+    effects: { experience: 1000 }
+  },
+
+  // === RESOURCES ===
+  {
+    id: 'gold_pile',
+    name: 'Tas d\'Or',
+    description: 'Une petite fortune en pièces d\'or.',
+    type: 'resource',
+    rarity: 'common',
+    value: 500,
+    effects: { gold: 500 }
   },
   {
     id: 'gold_chest',
-    name: 'Coffre d\'Or',
+    name: 'Coffre au Trésor',
+    description: 'Un coffre rempli de richesses.',
     type: 'resource',
-    rarity: 'common',
-    description: 'Coffre contenant de l\'or',
-    effects: { gold: 1000 },
-    slot: 'temporal',
-    value: 1000
+    rarity: 'uncommon',
+    value: 1000,
+    effects: { gold: 1000 }
+  },
+  {
+    id: 'gold_vault',
+    name: 'Chambre au Trésor',
+    description: 'Une fortune considérable.',
+    type: 'resource',
+    rarity: 'rare',
+    value: 2000,
+    effects: { gold: 2000 }
   }
 ];
 
-// ============================================================================
-// OBJETS COMBINÉS - TOUS LES OBJETS
-// ============================================================================
-
-export const ALL_MAGIC_OBJECTS: MagicObject[] = [
-  ...TEMPORAL_OBJECTS,
-  ...MAGIC_WEAPONS,
-  ...MAGIC_ARMOR,
-  ...MAGIC_ACCESSORIES,
-  ...LEGENDARY_ARTIFACTS,
-  ...CONSUMABLES
-];
-
-// ============================================================================
-// FONCTIONS UTILITAIRES
-// ============================================================================
-
-export const getObjectById = (id: string): MagicObject | undefined => {
-  return ALL_MAGIC_OBJECTS.find(obj => obj.id === id);
-};
-
+// Helper functions
 export const getObjectsByType = (type: MagicObject['type']): MagicObject[] => {
   return ALL_MAGIC_OBJECTS.filter(obj => obj.type === type);
 };
@@ -458,32 +339,21 @@ export const getTemporalObjects = (): MagicObject[] => {
   return ALL_MAGIC_OBJECTS.filter(obj => obj.temporal === true);
 };
 
-export const getClassicObjects = (): MagicObject[] => {
-  return ALL_MAGIC_OBJECTS.filter(obj => obj.temporal !== true);
+export const getObjectById = (id: string): MagicObject | undefined => {
+  return ALL_MAGIC_OBJECTS.find(obj => obj.id === id);
 };
 
-export const getRandomObject = (rarity?: MagicObject['rarity']): MagicObject => {
-  const objects = rarity ? getObjectsByRarity(rarity) : ALL_MAGIC_OBJECTS;
-  return objects[Math.floor(Math.random() * objects.length)];
-};
-
-export const getObjectValue = (id: string): number => {
-  const obj = getObjectById(id);
-  return obj ? obj.value : 0;
-};
-
-// ============================================================================
-// STATISTIQUES
-// ============================================================================
-
+// Statistics
 export const MAGIC_OBJECTS_STATS = {
   total: ALL_MAGIC_OBJECTS.length,
-  temporal: TEMPORAL_OBJECTS.length,
-  weapons: MAGIC_WEAPONS.length,
-  armor: MAGIC_ARMOR.length,
-  accessories: MAGIC_ACCESSORIES.length,
-  legendary: LEGENDARY_ARTIFACTS.length,
-  consumables: CONSUMABLES.length,
+  temporal: getTemporalObjects().length,
+  weapons: getObjectsByType('weapon').length,
+  armor: getObjectsByType('armor').length,
+  accessories: getObjectsByType('accessory').length,
+  artifacts: getObjectsByType('artifact').length,
+  consumables: getObjectsByType('consumable').length,
+  resources: getObjectsByType('resource').length,
+  legendary: getObjectsByRarity('legendary').length,
   byRarity: {
     common: getObjectsByRarity('common').length,
     uncommon: getObjectsByRarity('uncommon').length,
@@ -494,4 +364,4 @@ export const MAGIC_OBJECTS_STATS = {
   }
 };
 
-console.log('🎮 Magic Objects Library loaded:', MAGIC_OBJECTS_STATS); 
+export default ALL_MAGIC_OBJECTS; 

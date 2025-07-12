@@ -28,7 +28,7 @@ const TemporalGame: React.FC = () => {
   } = useTemporalStore();
 
   const currentPlayer = useCurrentPlayer();
-  const { startGameLoop } = useGameLoop();
+  const { startGameLoop, stopGameLoop } = useGameLoop();
   const entropyMonitor = useEntropyMonitor();
 
   const [isInitialized, setIsInitialized] = useState(false);
@@ -47,7 +47,12 @@ const TemporalGame: React.FC = () => {
     if (isInitialized && gameState.players.length > 0) {
       startGameLoop();
     }
-  }, [isInitialized, gameState.players.length, startGameLoop]);
+    
+    // Cleanup on unmount
+    return () => {
+      stopGameLoop();
+    };
+  }, [isInitialized, gameState.players.length, startGameLoop, stopGameLoop]);
 
   const initializeTemporalGame = async () => {
     try {
