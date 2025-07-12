@@ -1,7 +1,10 @@
 import React from 'react';
+import { useTranslation } from '../i18n';
 import { CREATURE_ASSETS, HERO_ASSETS } from '../constants/gameAssets';
 
 const ImageTest: React.FC = () => {
+  const { t } = useTranslation();
+  
   return (
     <div style={{ padding: '20px', background: '#1a1a2e', color: 'white' }}>
       <h2>Test des Images</h2>
@@ -50,7 +53,7 @@ const ImageTest: React.FC = () => {
         </div>
       </div>
 
-      <h3>Héros (PNGs)</h3>
+      <h3>{t('heroes')} (PNGs)</h3>
       <div style={{ display: 'flex', gap: '10px' }}>
         <div>
           <p>Guerrier:</p>
