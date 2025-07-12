@@ -1,11 +1,11 @@
 import React from 'react';
-import { useTranslation } from '../i18n';
+import { useTranslation, Language } from '../i18n';
 import './LanguageSelector.css';
 
 const LanguageSelector: React.FC = () => {
   const { language, setLanguage } = useTranslation();
 
-  const handleLanguageChange = (newLanguage: 'fr' | 'en') => {
+  const handleLanguageChange = (newLanguage: Language) => {
     setLanguage(newLanguage);
   };
 
@@ -25,6 +25,13 @@ const LanguageSelector: React.FC = () => {
           title="English"
         >
           🇬🇧 EN
+        </button>
+        <button
+          className={`language-option ${language === 'ru' ? 'active' : ''}`}
+          onClick={() => handleLanguageChange('ru')}
+          title="Русский"
+        >
+          🇷🇺 RU
         </button>
       </div>
     </div>

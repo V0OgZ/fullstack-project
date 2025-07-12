@@ -84,6 +84,12 @@ const SimpleModernInterface: React.FC = () => {
             >
               🇬🇧 EN
             </button>
+            <button 
+              className={`lang-btn ${language === 'ru' ? 'active' : ''}`}
+              onClick={() => setLanguage('ru')}
+            >
+              🇷🇺 RU
+            </button>
           </div>
         </div>
       </header>

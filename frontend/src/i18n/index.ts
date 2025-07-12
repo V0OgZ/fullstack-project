@@ -72,6 +72,7 @@ export interface Translation {
   
   // Game States
   loading: string;
+  loadingMap: string;
   error: string;
   gameNotFound: string;
   
@@ -102,6 +103,28 @@ export interface Translation {
   previous: string;
   yes: string;
   no: string;
+  change: string;
+  choosePlayer: string;
+  heroes: string;
+  instructions: string;
+  eachPlayerTakesturns: string;
+  planActionsForCurrentPlayer: string;
+  passToNextPlayerWhenDone: string;
+  useChangePlayerToCorrectError: string;
+  
+  // Action Planner
+  actionPlanner: string;
+  selectHero: string;
+  selectHeroForPlanning: string;
+  changeHero: string;
+  quickActions: string;
+  recruit: string;
+  clickMapToMove: string;
+  clickEnemyToAttack: string;
+  clickObjectToCollect: string;
+  selectUnitType: string;
+  level: string;
+  movementPoints: string;
   
   // Game Selector
   chooseScenario: string;
@@ -192,6 +215,7 @@ const frenchTranslations: Translation = {
   
   // Game States
   loading: 'Chargement...',
+  loadingMap: 'Chargement de la carte...',
   error: 'Erreur',
   gameNotFound: 'Jeu non trouvé',
   
@@ -222,6 +246,28 @@ const frenchTranslations: Translation = {
   previous: 'Précédent',
   yes: 'Oui',
   no: 'Non',
+  change: 'Changer',
+  choosePlayer: 'Choisir un joueur',
+  heroes: 'Héros',
+  instructions: 'Instructions',
+  eachPlayerTakesturns: 'Chaque joueur prend son tour',
+  planActionsForCurrentPlayer: 'Planifiez les actions pour le joueur actuel',
+  passToNextPlayerWhenDone: 'Passez au joueur suivant lorsque vous avez terminé',
+  useChangePlayerToCorrectError: 'Utilisez "Changer de joueur" pour corriger l\'erreur',
+  
+  // Action Planner
+  actionPlanner: 'Planificateur d\'Actions',
+  selectHero: 'Sélectionner un Héros',
+  selectHeroForPlanning: 'Sélectionner un Héros pour le Planification',
+  changeHero: 'Changer de Héros',
+  quickActions: 'Actions Rapides',
+  recruit: 'Recruter',
+  clickMapToMove: 'Cliquez sur la carte pour déplacer',
+  clickEnemyToAttack: 'Cliquez sur l\'ennemi pour attaquer',
+  clickObjectToCollect: 'Cliquez sur l\'objet pour le collecter',
+  selectUnitType: 'Sélectionner le Type d\'Unité',
+  level: 'Niveau',
+  movementPoints: 'Points de Mouvement',
   
   // Game Selector
   chooseScenario: 'Choisir un scénario',
@@ -312,6 +358,7 @@ const englishTranslations: Translation = {
   
   // Game States
   loading: 'Loading...',
+  loadingMap: 'Loading map...',
   error: 'Error',
   gameNotFound: 'Game not found',
   
@@ -342,6 +389,28 @@ const englishTranslations: Translation = {
   previous: 'Previous',
   yes: 'Yes',
   no: 'No',
+  change: 'Change',
+  choosePlayer: 'Choose a player',
+  heroes: 'Heroes',
+  instructions: 'Instructions',
+  eachPlayerTakesturns: 'Each player takes their turn',
+  planActionsForCurrentPlayer: 'Plan actions for the current player',
+  passToNextPlayerWhenDone: 'Pass to the next player when done',
+  useChangePlayerToCorrectError: 'Use "Change Player" to correct the error',
+  
+  // Action Planner
+  actionPlanner: 'Action Planner',
+  selectHero: 'Select Hero',
+  selectHeroForPlanning: 'Select Hero for Planning',
+  changeHero: 'Change Hero',
+  quickActions: 'Quick Actions',
+  recruit: 'Recruit',
+  clickMapToMove: 'Click map to move',
+  clickEnemyToAttack: 'Click enemy to attack',
+  clickObjectToCollect: 'Click object to collect',
+  selectUnitType: 'Select Unit Type',
+  level: 'Level',
+  movementPoints: 'Movement Points',
   
   // Game Selector
   chooseScenario: 'Choose a scenario',
@@ -363,6 +432,163 @@ const englishTranslations: Translation = {
   builtWith: 'Built with',
 };
 
+// Traductions russes
+const russianTranslations: Translation = {
+  // Header
+  gameTitle: 'Герои Возрождения',
+  turn: 'Ход',
+  player: 'Игрок',
+  
+  // Resources
+  gold: 'Золото',
+  wood: 'Дерево',
+  stone: 'Камень',
+  mana: 'Мана',
+  
+  // Buttons
+  endTurn: 'Конец хода',
+  nextPlayer: 'Следующий игрок',
+  credits: 'Авторы',
+  showZFC: 'Показать ZFC',
+  hideZFC: 'Скрыть ZFC',
+  showTimeline: 'Показать линию времени',
+  hideTimeline: 'Скрыть линию времени',
+  politicalCouncil: 'Политический совет',
+  
+  // Game Actions
+  move: 'Двигаться',
+  attack: 'Атаковать',
+  collect: 'Собрать',
+  cancel: 'Отменить',
+  confirm: 'Подтвердить',
+  
+  // Political System
+  reputation: 'Репутация',
+  advisors: 'Советники',
+  international: 'Международные',
+  domestic: 'Внутренние',
+  military: 'Военные',
+  economic: 'Экономические',
+  diplomatic: 'Дипломатические',
+  scientific: 'Научные',
+  
+  // Advisor Names
+  generalVolkov: 'Генерал Волков',
+  drPetrov: 'Д-р Петров',
+  ambassadorKozlov: 'Посол Козлов',
+  profIvanova: 'Проф. Иванова',
+  
+  // Advisor Roles
+  militaryAdvisor: 'Военный советник',
+  economicAdvisor: 'Экономический советник',
+  diplomaticAdvisor: 'Дипломатический советник',
+  scientificAdvisor: 'Научный советник',
+  
+  // Advisor Recommendations
+  stronglySupport: 'Полностью поддерживает',
+  support: 'Поддерживает',
+  neutral: 'Нейтральный',
+  oppose: 'Против',
+  stronglyOppose: 'Решительно против',
+  
+  // Political Events
+  borderCrisis: 'Пограничный кризис',
+  borderCrisisDescription: 'Напряженность растет на северной границе. Вражеские силы собираются возле наших территорий. Наши шпионы сообщают о возможном неминуемом вторжении. Как мы реагируем?',
+  militaryResponse: 'Мобилизовать силы и подготовить военный ответ',
+  diplomaticSolution: 'Отправить дипломатов для переговоров',
+  economicPressure: 'Наложить экономические санкции',
+  scientificApproach: 'Разработать новые оборонительные технологии',
+  
+  // Game States
+  loading: 'Загрузка...',
+  loadingMap: 'Загрузка карты...',
+  error: 'Ошибка',
+  gameNotFound: 'Игра не найдена',
+  
+  // Map
+  position: 'Позиция',
+  terrain: 'Местность',
+  hero: 'Герой',
+  creature: 'Существо',
+  
+  // Terrain Types
+  grass: 'Трава',
+  forest: 'Лес',
+  mountain: 'Гора',
+  water: 'Вода',
+  desert: 'Пустыня',
+  swamp: 'Болото',
+  
+  // Heroes
+  myHeroes: 'Мои герои',
+  
+  // Common
+  close: 'Закрыть',
+  save: 'Сохранить',
+  delete: 'Удалить',
+  edit: 'Редактировать',
+  back: 'Назад',
+  next: 'Далее',
+  previous: 'Предыдущий',
+  yes: 'Да',
+  no: 'Нет',
+  change: 'Изменить',
+  choosePlayer: 'Выберите игрока',
+  heroes: 'Герои',
+  instructions: 'Инструкции',
+  eachPlayerTakesturns: 'Каждый игрок делает свой ход',
+  planActionsForCurrentPlayer: 'Планируйте действия для текущего игрока',
+  passToNextPlayerWhenDone: 'Переходите к следующему игроку после завершения',
+  useChangePlayerToCorrectError: 'Используйте "Изменить игрока" для исправления ошибки',
+  
+  // Action Planner
+  actionPlanner: 'Планировщик действий',
+  selectHero: 'Выберите героя',
+  selectHeroForPlanning: 'Выберите героя для планирования',
+  changeHero: 'Изменить героя',
+  quickActions: 'Быстрые действия',
+  recruit: 'Набор',
+  clickMapToMove: 'Нажмите на карту для перемещения',
+  clickEnemyToAttack: 'Нажмите на врага для атаки',
+  clickObjectToCollect: 'Нажмите на объект для сбора',
+  selectUnitType: 'Выберите тип юнита',
+  level: 'Уровень',
+  movementPoints: 'Очки передвижения',
+  
+  // Game Selector
+  chooseScenario: 'Выберите сценарий',
+  classicConquest: 'Классическое завоевание',
+  classicDescription: 'Стратегическая игра, где вы должны завоевать мир.',
+  mysticalConquest: 'Мистическое завоевание',
+  mysticalDescription: 'Ролевая игра, где вы должны раскрыть тайны.',
+  turnBasedCombat: 'Пошаговый бой',
+  captureBuildings: 'Захват зданий',
+  hexagonalMaps: 'Шестиугольные карты',
+  easy: 'Легко',
+  advanced: 'Продвинутый',
+  temporalObjects: 'Временные объекты',
+  advancedMagic: 'Продвинутая магия',
+  mysticPortals: 'Мистические порталы',
+  sameInterface: 'Тот же интерфейс',
+  mysticalAddsObjects: 'Добавляет мистические объекты',
+  testBackendConnection: 'Тестировать соединение с бэкендом',
+  builtWith: 'Построено с',
+};
+
+// Helper function to get translations
+const getTranslations = (language: Language): Translation => {
+  switch (language) {
+    case 'fr':
+      return frenchTranslations;
+    case 'en':
+      return englishTranslations;
+    case 'ru':
+      return russianTranslations;
+    default:
+      return englishTranslations;
+  }
+};
+
 // Store pour les traductions
 interface I18nStore {
   language: Language;
@@ -374,11 +600,11 @@ interface I18nStore {
 export const useI18n = create<I18nStore>()(
   persist(
     (set, get) => ({
-      language: 'fr',
-      translations: frenchTranslations,
+      language: 'en',
+      translations: englishTranslations,
       
       setLanguage: (language: Language) => {
-        const translations = language === 'fr' ? frenchTranslations : englishTranslations;
+        const translations = getTranslations(language);
         set({ language, translations });
       },
       
@@ -403,5 +629,6 @@ export const useTranslation = () => {
     t,
     isEnglish: language === 'en',
     isFrench: language === 'fr',
+    isRussian: language === 'ru',
   };
 }; 

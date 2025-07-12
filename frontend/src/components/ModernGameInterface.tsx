@@ -316,6 +316,12 @@ const ModernGameInterface: React.FC = () => {
             >
               🇬🇧 EN
             </LanguageButton>
+            <LanguageButton 
+              active={language === 'ru'} 
+              onClick={() => setLanguage('ru')}
+            >
+              🇷🇺 RU
+            </LanguageButton>
           </LanguageToggle>
         </ActionBar>
       </TopBar>

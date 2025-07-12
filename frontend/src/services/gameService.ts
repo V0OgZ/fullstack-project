@@ -1,12 +1,195 @@
 import { ApiService } from './api';
-import { GameState, Game, Position, GameAction } from '../types/game';
+import { GameState, Game, Position, GameAction, Player, GameMap, Tile } from '../types/game';
 
 export class GameService {
   private static gameCache: Map<string, GameState> = new Map();
 
+  // Create mock game data for scenario-based games
+  private static createMockGameData(scenarioId: string): any {
+    const baseMap = GameService.generateDemoMap(20, 20);
+    
+    const mockPlayer: Player = {
+      id: 'player1',
+      username: 'Player 1',
+      email: 'player1@example.com',
+      color: '#ff6b6b',
+      isActive: true,
+      resources: {
+        gold: 1000,
+        wood: 200,
+        stone: 100,
+        mana: 50
+      },
+      heroes: [{
+        id: 'hero1',
+        name: 'Arthur',
+        position: { x: 2, y: 2 },
+        level: 1,
+        experience: 0,
+        movementPoints: 3,
+        maxMovementPoints: 3,
+        stats: {
+          attack: 5,
+          defense: 3,
+          knowledge: 2,
+          spellPower: 1
+        },
+        playerId: 'player1',
+        units: [],
+        inventory: []
+      }]
+    };
+
+    const mockPlayer2: Player = {
+      id: 'player2',
+      username: 'Player 2',
+      email: 'player2@example.com',
+      color: '#4ecdc4',
+      isActive: false,
+      resources: {
+        gold: 1000,
+        wood: 200,
+        stone: 100,
+        mana: 50
+      },
+      heroes: [{
+        id: 'hero2',
+        name: 'Merlin',
+        position: { x: 17, y: 17 },
+        level: 1,
+        experience: 0,
+        movementPoints: 3,
+        maxMovementPoints: 3,
+        stats: {
+          attack: 3,
+          defense: 2,
+          knowledge: 4,
+          spellPower: 5
+        },
+        playerId: 'player2',
+        units: [],
+        inventory: []
+      }]
+    };
+
+    return {
+      id: scenarioId,
+      name: scenarioId.includes('mystique') ? 'Mystical Conquest' : 'Classic Conquest',
+      status: 'active',
+      currentTurn: 1,
+      turnStartTime: new Date().toISOString(),
+      turnDuration: 300000, // 5 minutes
+      players: [mockPlayer, mockPlayer2],
+      map: baseMap,
+      actions: [],
+      gameSettings: {
+        maxPlayers: 2,
+        turnTimeLimit: 300000,
+        victoryConditions: ['capture_all_cities', 'eliminate_enemies']
+      },
+      currentPlayer: mockPlayer
+    };
+  }
+
+  // Generate a demo map
+  private static generateDemoMap(width: number, height: number): GameMap {
+    const tiles: Tile[] = [];
+    
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        let terrain: 'grass' | 'forest' | 'mountain' | 'water' | 'desert' | 'swamp' = 'grass';
+        let walkable = true;
+        let movementCost = 1;
+        
+        // Add some variety
+        if (Math.random() < 0.2) {
+          terrain = 'forest';
+          movementCost = 2;
+        } else if (Math.random() < 0.1) {
+          terrain = 'mountain';
+          walkable = false;
+          movementCost = 3;
+        } else if (Math.random() < 0.05) {
+          terrain = 'water';
+          walkable = false;
+          movementCost = 1;
+        }
+        
+        tiles.push({
+          x,
+          y,
+          terrain,
+          walkable,
+          movementCost,
+          isVisible: true
+        });
+      }
+    }
+    
+    return {
+      id: 'demo-map',
+      width,
+      height,
+      tiles,
+      objects: []
+    };
+  }
+
   // Game state management
   static async initializeGame(gameId: string): Promise<GameState> {
     try {
+      // Check if this is a scenario-based game (demo mode)
+      if (gameId.includes('classique') || gameId.includes('mystique')) {
+        const gameData = this.createMockGameData(gameId);
+        
+        // Transform mock data to Game object
+        const game: Game = {
+          id: gameData.id,
+          name: gameData.name,
+          status: gameData.status,
+          currentTurn: gameData.currentTurn,
+          turnStartTime: gameData.turnStartTime,
+          turnDuration: gameData.turnDuration,
+          players: gameData.players,
+          map: gameData.map,
+          actions: gameData.actions || [],
+          timeline: [],
+          zfcMap: [],
+          gameSettings: gameData.gameSettings,
+          gameMode: 'async',
+          currentPlayerTurn: gameData.currentPlayer ? gameData.currentPlayer.id : undefined
+        };
+
+        // Create GameState
+        const gameState: GameState = {
+          currentGame: game,
+          currentPlayer: gameData.currentPlayer || null,
+          pendingActions: [],
+          combatResults: [],
+          isLoading: false,
+          error: null,
+          shadowActions: [],
+          visibleZFCs: [],
+          lockedZones: [],
+          politicalAdvisors: [],
+          currentPoliticalEvent: null,
+          reputation: {
+            international: 0,
+            domestic: 0,
+            military: 0,
+            economic: 0,
+            diplomatic: 0
+          },
+          activeEvents: []
+        };
+
+        // Cache the game state
+        this.gameCache.set(gameId, gameState);
+        
+        return gameState;
+      }
+      
+      // For real games, use the API
       const gameData = await ApiService.getGame(gameId);
       
       // Transform backend data to Game object
@@ -89,6 +272,16 @@ export class GameService {
   // Get current game state (with backend sync)
   static async getGameState(gameId: string): Promise<GameState> {
     try {
+      // Check for cached demo games first
+      if (gameId.includes('classique') || gameId.includes('mystique')) {
+        const cached = this.gameCache.get(gameId);
+        if (cached) {
+          return cached;
+        }
+        // If not cached, initialize it
+        return await this.initializeGame(gameId);
+      }
+      
       const gameData = await ApiService.getGameState(gameId);
       
       // Transform backend data to Game object

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { ApiService } from '../services/api';
 
 interface MultiplayerSession {
@@ -29,13 +29,7 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
   const [gameMode, setGameMode] = useState('conquest-classique');
   const [playerId, setPlayerId] = useState('');
 
-  useEffect(() => {
-    loadSessions();
-    // Generate random player ID for testing
-    setPlayerId(`player_${Math.random().toString(36).substr(2, 9)}`);
-  }, []);
-
-  const loadSessions = async () => {
+  const loadSessions = useCallback(async () => {
     try {
       setLoading(true);
       const response = await ApiService.getJoinableSessions();
@@ -46,7 +40,13 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
     } finally {
       setLoading(false);
     }
-  };
+  }, [onError]);
+
+  useEffect(() => {
+    loadSessions();
+    // Generate random player ID for testing
+    setPlayerId(`player_${Math.random().toString(36).substr(2, 9)}`);
+  }, [loadSessions]);
 
   const createSession = async () => {
     if (!sessionName.trim()) {
