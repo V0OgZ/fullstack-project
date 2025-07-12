@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useGameStore } from '../store/useGameStore';
 import { TimelineAction } from '../types/game';
 import './TimelineViewer.css';
+import { useTranslation } from '../i18n';
 
 interface TimelineViewerProps {
   isVisible: boolean;
@@ -10,6 +11,7 @@ interface TimelineViewerProps {
 const TimelineViewer: React.FC<TimelineViewerProps> = ({ isVisible }) => {
   const { currentGame, validateAction, updateTimelineAction } = useGameStore();
   const [selectedAction, setSelectedAction] = useState<string | null>(null);
+  const { t } = useTranslation();
 
   if (!isVisible || !currentGame) return null;
 
@@ -91,7 +93,7 @@ const TimelineViewer: React.FC<TimelineViewerProps> = ({ isVisible }) => {
                       {action.action.type.toUpperCase()}
                     </div>
                     <div className="action-player">
-                      Joueur {action.playerId}
+                      {t('player')} {action.playerId}
                     </div>
                   </div>
                   <div 

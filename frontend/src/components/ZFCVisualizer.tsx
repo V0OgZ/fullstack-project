@@ -1,6 +1,7 @@
 import React from 'react';
 import { useGameStore } from '../store/useGameStore';
 import { ZoneOfCausality, ShadowAction } from '../types/game';
+import { useTranslation } from '../i18n';
 import './ZFCVisualizer.css';
 
 interface ZFCVisualizerProps {
@@ -9,6 +10,7 @@ interface ZFCVisualizerProps {
 
 const ZFCVisualizer: React.FC<ZFCVisualizerProps> = ({ isVisible }) => {
   const { visibleZFCs, shadowActions, lockedZones, map } = useGameStore();
+  const { t } = useTranslation();
 
   if (!isVisible || !map.length) return null;
 
@@ -76,11 +78,11 @@ const ZFCVisualizer: React.FC<ZFCVisualizerProps> = ({ isVisible }) => {
         <h4>Zones de Causalité</h4>
         <div className="legend-item">
           <div className="legend-color" style={{ backgroundColor: '#4CAF50' }}></div>
-          <span>Joueur 1</span>
+          <span>{t('player')} 1</span>
         </div>
         <div className="legend-item">
           <div className="legend-color" style={{ backgroundColor: '#F44336' }}></div>
-          <span>Joueur 2</span>
+          <span>{t('player')} 2</span>
         </div>
         <div className="legend-item">
           <div className="legend-color" style={{ backgroundColor: '#FF9800' }}></div>
