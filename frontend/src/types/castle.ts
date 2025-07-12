@@ -1229,8 +1229,370 @@ export const UNIT_TYPES: UnitType[] = [
     aiValue: 4000
   },
 
-  // Continue with more castles... (Castle, Rampart, and Tower complete)
-  // TODO: Implement remaining 105 units (5 more castles × 21 units)
+  // 🔥 INFERNO UNITS (21 units: 7 tiers × 3 variants)
+  
+  // Tier 1: Imp line
+  {
+    id: 'inferno_imp_basic',
+    name: 'Imp',
+    castle: 'inferno',
+    tier: 1,
+    variant: 'basic',
+    stats: { attack: 2, defense: 3, health: 4, damage: [1, 2], speed: 5 },
+    abilities: [{ id: 'flying', name: 'Flying', description: 'Can fly over obstacles', type: 'passive' }],
+    cost: { gold: 50, sulfur: 1 },
+    growth: 15,
+    aiValue: 50
+  },
+  {
+    id: 'inferno_imp_upgraded',
+    name: 'Familiar',
+    castle: 'inferno',
+    tier: 1,
+    variant: 'upgraded',
+    stats: { attack: 4, defense: 4, health: 4, damage: [1, 2], speed: 7 },
+    abilities: [
+      { id: 'flying', name: 'Flying', description: 'Can fly over obstacles', type: 'passive' },
+      { id: 'magic_channel', name: 'Magic Channel', description: 'Can channel mana to hero', type: 'active', cooldown: 5 }
+    ],
+    cost: { gold: 60, sulfur: 1 },
+    growth: 15,
+    aiValue: 60
+  },
+  {
+    id: 'inferno_imp_champion',
+    name: 'Demon Familiar',
+    castle: 'inferno',
+    tier: 1,
+    variant: 'champion',
+    stats: { attack: 6, defense: 6, health: 6, damage: [2, 3], speed: 9 },
+    abilities: [
+      { id: 'flying', name: 'Flying', description: 'Can fly over obstacles', type: 'passive' },
+      { id: 'magic_channel', name: 'Magic Channel', description: 'Can channel mana to hero', type: 'active', cooldown: 3 },
+      { id: 'fire_immunity', name: 'Fire Immunity', description: 'Immune to fire magic', type: 'passive' }
+    ],
+    cost: { gold: 80, sulfur: 2 },
+    growth: 15,
+    aiValue: 80
+  },
+
+  // Tier 2: Gog line
+  {
+    id: 'inferno_gog_basic',
+    name: 'Gog',
+    castle: 'inferno',
+    tier: 2,
+    variant: 'basic',
+    stats: { attack: 6, defense: 4, health: 13, damage: [2, 4], speed: 4, shots: 12 },
+    abilities: [
+      { id: 'ranged_attack', name: 'Ranged Attack', description: 'Can attack from distance', type: 'passive' },
+      { id: 'fire_ball', name: 'Fire Ball', description: 'Ranged attacks deal fire damage', type: 'passive' }
+    ],
+    cost: { gold: 125, sulfur: 3 },
+    growth: 8,
+    aiValue: 125
+  },
+  {
+    id: 'inferno_gog_upgraded',
+    name: 'Magog',
+    castle: 'inferno',
+    tier: 2,
+    variant: 'upgraded',
+    stats: { attack: 7, defense: 4, health: 13, damage: [2, 4], speed: 6, shots: 24 },
+    abilities: [
+      { id: 'ranged_attack', name: 'Ranged Attack', description: 'Can attack from distance', type: 'passive' },
+      { id: 'fire_ball', name: 'Fire Ball', description: 'Ranged attacks deal fire damage and splash', type: 'passive' },
+      { id: 'area_attack', name: 'Area Attack', description: 'Attacks damage multiple enemies', type: 'passive' }
+    ],
+    cost: { gold: 175, sulfur: 3 },
+    growth: 8,
+    aiValue: 175
+  },
+  {
+    id: 'inferno_gog_champion',
+    name: 'Infernal Magog',
+    castle: 'inferno',
+    tier: 2,
+    variant: 'champion',
+    stats: { attack: 9, defense: 6, health: 16, damage: [3, 5], speed: 8, shots: 32 },
+    abilities: [
+      { id: 'ranged_attack', name: 'Ranged Attack', description: 'Can attack from distance', type: 'passive' },
+      { id: 'fire_ball', name: 'Fire Ball', description: 'Ranged attacks deal fire damage and splash', type: 'passive' },
+      { id: 'area_attack', name: 'Area Attack', description: 'Attacks damage multiple enemies', type: 'passive' },
+      { id: 'infernal_blast', name: 'Infernal Blast', description: 'Larger area damage and burning effect', type: 'passive' }
+    ],
+    cost: { gold: 225, sulfur: 5, ore: 2 },
+    growth: 8,
+    aiValue: 225
+  },
+
+  // Tier 3: Hell Hound line
+  {
+    id: 'inferno_hellhound_basic',
+    name: 'Hell Hound',
+    castle: 'inferno',
+    tier: 3,
+    variant: 'basic',
+    stats: { attack: 10, defense: 6, health: 25, damage: [2, 7], speed: 7 },
+    abilities: [
+      { id: 'fire_immunity', name: 'Fire Immunity', description: 'Immune to fire magic', type: 'passive' },
+      { id: 'no_retaliation', name: 'No Retaliation', description: 'Never receives retaliation', type: 'passive' }
+    ],
+    cost: { gold: 200, sulfur: 5 },
+    growth: 5,
+    aiValue: 200
+  },
+  {
+    id: 'inferno_hellhound_upgraded',
+    name: 'Cerberus',
+    castle: 'inferno',
+    tier: 3,
+    variant: 'upgraded',
+    stats: { attack: 10, defense: 8, health: 25, damage: [2, 5], speed: 8 },
+    abilities: [
+      { id: 'fire_immunity', name: 'Fire Immunity', description: 'Immune to fire magic', type: 'passive' },
+      { id: 'no_retaliation', name: 'No Retaliation', description: 'Never receives retaliation', type: 'passive' },
+      { id: 'three_headed_attack', name: 'Three-Headed Attack', description: 'Can attack 3 adjacent enemies', type: 'passive' }
+    ],
+    cost: { gold: 250, sulfur: 5 },
+    growth: 5,
+    aiValue: 250
+  },
+  {
+    id: 'inferno_hellhound_champion',
+    name: 'Infernal Cerberus',
+    castle: 'inferno',
+    tier: 3,
+    variant: 'champion',
+    stats: { attack: 12, defense: 10, health: 30, damage: [3, 7], speed: 10 },
+    abilities: [
+      { id: 'fire_immunity', name: 'Fire Immunity', description: 'Immune to fire magic', type: 'passive' },
+      { id: 'no_retaliation', name: 'No Retaliation', description: 'Never receives retaliation', type: 'passive' },
+      { id: 'three_headed_attack', name: 'Three-Headed Attack', description: 'Can attack 3 adjacent enemies', type: 'passive' },
+      { id: 'fire_breath', name: 'Fire Breath', description: 'Breath attack that burns enemies', type: 'active', cooldown: 4 }
+    ],
+    cost: { gold: 325, sulfur: 8, gems: 2 },
+    growth: 5,
+    aiValue: 325
+  },
+
+  // Tier 4: Demon line
+  {
+    id: 'inferno_demon_basic',
+    name: 'Demon',
+    castle: 'inferno',
+    tier: 4,
+    variant: 'basic',
+    stats: { attack: 10, defense: 10, health: 35, damage: [7, 9], speed: 5 },
+    abilities: [
+      { id: 'teleport', name: 'Teleport', description: 'Can teleport across battlefield', type: 'active', cooldown: 3 },
+      { id: 'fire_immunity', name: 'Fire Immunity', description: 'Immune to fire magic', type: 'passive' }
+    ],
+    cost: { gold: 400, sulfur: 8 },
+    growth: 4,
+    aiValue: 400
+  },
+  {
+    id: 'inferno_demon_upgraded',
+    name: 'Horned Demon',
+    castle: 'inferno',
+    tier: 4,
+    variant: 'upgraded',
+    stats: { attack: 10, defense: 10, health: 40, damage: [7, 9], speed: 6 },
+    abilities: [
+      { id: 'teleport', name: 'Teleport', description: 'Can teleport across battlefield', type: 'active', cooldown: 2 },
+      { id: 'fire_immunity', name: 'Fire Immunity', description: 'Immune to fire magic', type: 'passive' },
+      { id: 'magic_resistance', name: 'Magic Resistance', description: '20% magic damage reduction', type: 'passive' }
+    ],
+    cost: { gold: 500, sulfur: 8 },
+    growth: 4,
+    aiValue: 500
+  },
+  {
+    id: 'inferno_demon_champion',
+    name: 'Demon Lord',
+    castle: 'inferno',
+    tier: 4,
+    variant: 'champion',
+    stats: { attack: 12, defense: 12, health: 50, damage: [8, 12], speed: 8 },
+    abilities: [
+      { id: 'teleport', name: 'Teleport', description: 'Can teleport across battlefield', type: 'active', cooldown: 2 },
+      { id: 'fire_immunity', name: 'Fire Immunity', description: 'Immune to fire magic', type: 'passive' },
+      { id: 'magic_resistance', name: 'Magic Resistance', description: '40% magic damage reduction', type: 'passive' },
+      { id: 'demonic_aura', name: 'Demonic Aura', description: 'Nearby enemies take fire damage', type: 'passive' }
+    ],
+    cost: { gold: 650, sulfur: 12, gems: 3 },
+    growth: 4,
+    aiValue: 650
+  },
+
+  // Tier 5: Pit Fiend line
+  {
+    id: 'inferno_pitfiend_basic',
+    name: 'Pit Fiend',
+    castle: 'inferno',
+    tier: 5,
+    variant: 'basic',
+    stats: { attack: 13, defense: 13, health: 45, damage: [13, 17], speed: 6 },
+    abilities: [
+      { id: 'flying', name: 'Flying', description: 'Can fly over obstacles', type: 'passive' },
+      { id: 'fire_immunity', name: 'Fire Immunity', description: 'Immune to fire magic', type: 'passive' },
+      { id: 'no_retaliation', name: 'No Retaliation', description: 'Never receives retaliation', type: 'passive' }
+    ],
+    cost: { gold: 700, sulfur: 12 },
+    growth: 3,
+    aiValue: 700
+  },
+  {
+    id: 'inferno_pitfiend_upgraded',
+    name: 'Pit Lord',
+    castle: 'inferno',
+    tier: 5,
+    variant: 'upgraded',
+    stats: { attack: 13, defense: 13, health: 45, damage: [13, 17], speed: 7 },
+    abilities: [
+      { id: 'flying', name: 'Flying', description: 'Can fly over obstacles', type: 'passive' },
+      { id: 'fire_immunity', name: 'Fire Immunity', description: 'Immune to fire magic', type: 'passive' },
+      { id: 'no_retaliation', name: 'No Retaliation', description: 'Never receives retaliation', type: 'passive' },
+      { id: 'summon_demons', name: 'Summon Demons', description: 'Can summon lesser demons in battle', type: 'active', cooldown: 6 }
+    ],
+    cost: { gold: 850, sulfur: 12 },
+    growth: 3,
+    aiValue: 850
+  },
+  {
+    id: 'inferno_pitfiend_champion',
+    name: 'Inferno Lord',
+    castle: 'inferno',
+    tier: 5,
+    variant: 'champion',
+    stats: { attack: 15, defense: 15, health: 55, damage: [15, 20], speed: 9 },
+    abilities: [
+      { id: 'flying', name: 'Flying', description: 'Can fly over obstacles', type: 'passive' },
+      { id: 'fire_immunity', name: 'Fire Immunity', description: 'Immune to fire magic', type: 'passive' },
+      { id: 'no_retaliation', name: 'No Retaliation', description: 'Never receives retaliation', type: 'passive' },
+      { id: 'summon_demons', name: 'Summon Demons', description: 'Can summon lesser demons in battle', type: 'active', cooldown: 4 },
+      { id: 'hellfire_aura', name: 'Hellfire Aura', description: 'All nearby enemies take continuous fire damage', type: 'passive' }
+    ],
+    cost: { gold: 1100, sulfur: 15, gems: 5 },
+    growth: 3,
+    aiValue: 1100
+  },
+
+  // Tier 6: Efreet line
+  {
+    id: 'inferno_efreet_basic',
+    name: 'Efreet',
+    castle: 'inferno',
+    tier: 6,
+    variant: 'basic',
+    stats: { attack: 16, defense: 12, health: 90, damage: [16, 24], speed: 7 },
+    abilities: [
+      { id: 'flying', name: 'Flying', description: 'Can fly over obstacles', type: 'passive' },
+      { id: 'fire_immunity', name: 'Fire Immunity', description: 'Immune to fire magic', type: 'passive' },
+      { id: 'fire_shield', name: 'Fire Shield', description: 'Attackers take fire damage', type: 'passive' },
+      { id: 'hate_genie', name: 'Hate Genie', description: 'Deals +50% damage to Genies', type: 'passive' }
+    ],
+    cost: { gold: 900, sulfur: 15 },
+    growth: 2,
+    aiValue: 900
+  },
+  {
+    id: 'inferno_efreet_upgraded',
+    name: 'Efreet Sultan',
+    castle: 'inferno',
+    tier: 6,
+    variant: 'upgraded',
+    stats: { attack: 16, defense: 14, health: 90, damage: [16, 24], speed: 9 },
+    abilities: [
+      { id: 'flying', name: 'Flying', description: 'Can fly over obstacles', type: 'passive' },
+      { id: 'fire_immunity', name: 'Fire Immunity', description: 'Immune to fire magic', type: 'passive' },
+      { id: 'fire_shield', name: 'Fire Shield', description: 'Attackers take fire damage', type: 'passive' },
+      { id: 'hate_genie', name: 'Hate Genie', description: 'Deals +100% damage to Genies', type: 'passive' },
+      { id: 'spell_immunity', name: 'Spell Immunity', description: 'Immune to spells below level 3', type: 'passive' }
+    ],
+    cost: { gold: 1100, sulfur: 15 },
+    growth: 2,
+    aiValue: 1100
+  },
+  {
+    id: 'inferno_efreet_champion',
+    name: 'Infernal Sultan',
+    castle: 'inferno',
+    tier: 6,
+    variant: 'champion',
+    stats: { attack: 18, defense: 16, health: 110, damage: [18, 28], speed: 11 },
+    abilities: [
+      { id: 'flying', name: 'Flying', description: 'Can fly over obstacles', type: 'passive' },
+      { id: 'fire_immunity', name: 'Fire Immunity', description: 'Immune to fire magic', type: 'passive' },
+      { id: 'fire_shield', name: 'Fire Shield', description: 'Attackers take fire damage', type: 'passive' },
+      { id: 'hate_genie', name: 'Hate Genie', description: 'Deals +150% damage to Genies', type: 'passive' },
+      { id: 'spell_immunity', name: 'Spell Immunity', description: 'Immune to spells below level 4', type: 'passive' },
+      { id: 'infernal_wish', name: 'Infernal Wish', description: 'Can grant destructive effects to allies', type: 'active', cooldown: 8 }
+    ],
+    cost: { gold: 1400, sulfur: 20, gems: 8 },
+    growth: 2,
+    aiValue: 1400
+  },
+
+  // Tier 7: Devil line
+  {
+    id: 'inferno_devil_basic',
+    name: 'Devil',
+    castle: 'inferno',
+    tier: 7,
+    variant: 'basic',
+    stats: { attack: 19, defense: 21, health: 160, damage: [30, 40], speed: 8 },
+    abilities: [
+      { id: 'teleport', name: 'Teleport', description: 'Can teleport across battlefield', type: 'active', cooldown: 2 },
+      { id: 'fire_immunity', name: 'Fire Immunity', description: 'Immune to fire magic', type: 'passive' },
+      { id: 'no_retaliation', name: 'No Retaliation', description: 'Never receives retaliation', type: 'passive' },
+      { id: 'spell_immunity', name: 'Spell Immunity', description: 'Immune to spells below level 4', type: 'passive' }
+    ],
+    cost: { gold: 2700, sulfur: 25, gems: 10 },
+    growth: 1,
+    aiValue: 2700
+  },
+  {
+    id: 'inferno_devil_upgraded',
+    name: 'Arch Devil',
+    castle: 'inferno',
+    tier: 7,
+    variant: 'upgraded',
+    stats: { attack: 26, defense: 28, health: 200, damage: [30, 40], speed: 11 },
+    abilities: [
+      { id: 'teleport', name: 'Teleport', description: 'Can teleport across battlefield', type: 'active', cooldown: 1 },
+      { id: 'fire_immunity', name: 'Fire Immunity', description: 'Immune to fire magic', type: 'passive' },
+      { id: 'no_retaliation', name: 'No Retaliation', description: 'Never receives retaliation', type: 'passive' },
+      { id: 'spell_immunity', name: 'Spell Immunity', description: 'Immune to spells below level 5', type: 'passive' },
+      { id: 'hate_angels', name: 'Hate Angels', description: 'Deals +50% damage to Angels', type: 'passive' }
+    ],
+    cost: { gold: 3500, sulfur: 25, gems: 10 },
+    growth: 1,
+    aiValue: 3500
+  },
+  {
+    id: 'inferno_devil_champion',
+    name: 'Demon Prince',
+    castle: 'inferno',
+    tier: 7,
+    variant: 'champion',
+    stats: { attack: 30, defense: 32, health: 250, damage: [35, 50], speed: 13 },
+    abilities: [
+      { id: 'teleport', name: 'Teleport', description: 'Can teleport across battlefield', type: 'active', cooldown: 1 },
+      { id: 'fire_immunity', name: 'Fire Immunity', description: 'Immune to fire magic', type: 'passive' },
+      { id: 'no_retaliation', name: 'No Retaliation', description: 'Never receives retaliation', type: 'passive' },
+      { id: 'spell_immunity', name: 'Spell Immunity', description: 'Immune to all spells', type: 'passive' },
+      { id: 'hate_angels', name: 'Hate Angels', description: 'Deals +100% damage to Angels', type: 'passive' },
+      { id: 'infernal_dominion', name: 'Infernal Dominion', description: 'Area effect that weakens all enemies', type: 'active', cooldown: 6 }
+    ],
+    cost: { gold: 4500, sulfur: 30, gems: 15, crystal: 5 },
+    growth: 1,
+    aiValue: 4500
+  },
+
+  // Continue with more castles... (Castle, Rampart, Tower, and Inferno complete)
+  // TODO: Implement remaining 84 units (4 more castles × 21 units)
 ];
 
 // 🏗️ BUILDING DEFINITIONS
