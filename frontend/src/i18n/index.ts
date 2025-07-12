@@ -196,6 +196,83 @@ export interface Translation {
   mysticalAddsObjects: string;
   testBackendConnection: string;
   builtWith: string;
+
+  // Magic Items - Weapons
+  'items.sword_basic.name': string;
+  'items.sword_basic.description': string;
+  'items.sword_steel.name': string;
+  'items.sword_steel.description': string;
+  'items.sword_magic.name': string;
+  'items.sword_magic.description': string;
+  'items.sword_legendary.name': string;
+  'items.sword_legendary.description': string;
+  'items.sword_legendary.effect': string;
+
+  // Magic Items - Armor
+  'items.armor_leather.name': string;
+  'items.armor_leather.description': string;
+  'items.armor_chain.name': string;
+  'items.armor_chain.description': string;
+  'items.armor_plate.name': string;
+  'items.armor_plate.description': string;
+  'items.armor_dragon.name': string;
+  'items.armor_dragon.description': string;
+  'items.armor_dragon.effect': string;
+
+  // Magic Items - Accessories
+  'items.ring_power.name': string;
+  'items.ring_power.description': string;
+  'items.amulet_wisdom.name': string;
+  'items.amulet_wisdom.description': string;
+  'items.boots_speed.name': string;
+  'items.boots_speed.description': string;
+  'items.cape_stealth.name': string;
+  'items.cape_stealth.description': string;
+  'items.cape_stealth.effect': string;
+
+  // Magic Items - Artifacts
+  'items.crown_kings.name': string;
+  'items.crown_kings.description': string;
+  'items.crown_kings.effect': string;
+  'items.orb_knowledge.name': string;
+  'items.orb_knowledge.description': string;
+  'items.staff_archmage.name': string;
+  'items.staff_archmage.description': string;
+  'items.staff_archmage.effect': string;
+
+  // Magic Items - Temporal
+  'items.temporal_anchor.name': string;
+  'items.temporal_anchor.description': string;
+  'items.temporal_anchor.effect': string;
+  'items.temporal_prism.name': string;
+  'items.temporal_prism.description': string;
+  'items.temporal_prism.effect': string;
+  'items.temporal_hourglass.name': string;
+  'items.temporal_hourglass.description': string;
+  'items.temporal_hourglass.effect': string;
+  'items.temporal_compass.name': string;
+  'items.temporal_compass.description': string;
+  'items.temporal_compass.effect': string;
+
+  // Magic Items - Consumables
+  'items.potion_health.name': string;
+  'items.potion_health.description': string;
+  'items.potion_health.effect': string;
+  'items.potion_mana.name': string;
+  'items.potion_mana.description': string;
+  'items.scroll_teleport.name': string;
+  'items.scroll_teleport.description': string;
+  'items.scroll_teleport.effect': string;
+  'items.elixir_experience.name': string;
+  'items.elixir_experience.description': string;
+
+  // Magic Items - Resources
+  'items.gold_pile.name': string;
+  'items.gold_pile.description': string;
+  'items.gold_chest.name': string;
+  'items.gold_chest.description': string;
+  'items.gold_vault.name': string;
+  'items.gold_vault.description': string;
 }
 
 // Traductions françaises
@@ -391,6 +468,83 @@ const frenchTranslations: Translation = {
   mysticalAddsObjects: 'Ajoute des objets mystiques',
   testBackendConnection: 'Tester la connexion du backend',
   builtWith: 'Construit avec',
+
+  // Magic Items - Weapons
+  'items.sword_basic.name': 'Épée de base',
+  'items.sword_basic.description': 'Une épée simple et robuste.',
+  'items.sword_steel.name': 'Épée en acier',
+  'items.sword_steel.description': 'Une épée légère et rapide.',
+  'items.sword_magic.name': 'Épée magique',
+  'items.sword_magic.description': 'Une épée qui brille de façon mystérieuse.',
+  'items.sword_legendary.name': 'Épée légendaire',
+  'items.sword_legendary.description': 'Une épée qui a été forgée par un dieu.',
+  'items.sword_legendary.effect': 'Augmente la puissance de l\'attaque.',
+
+  // Magic Items - Armor
+  'items.armor_leather.name': 'Armure en cuir',
+  'items.armor_leather.description': 'Une armure légère et flexible.',
+  'items.armor_chain.name': 'Armure en chaîne',
+  'items.armor_chain.description': 'Une armure robuste et résistante.',
+  'items.armor_plate.name': 'Armure en acier',
+  'items.armor_plate.description': 'Une armure très résistante et lourde.',
+  'items.armor_dragon.name': 'Armure de dragon',
+  'items.armor_dragon.description': 'Une armure qui ressemble à un dragon.',
+  'items.armor_dragon.effect': 'Augmente la résistance aux dégâts.',
+
+  // Magic Items - Accessories
+  'items.ring_power.name': 'Anneau de puissance',
+  'items.ring_power.description': 'Un anneau qui augmente la puissance.',
+  'items.amulet_wisdom.name': 'Amulette de sagesse',
+  'items.amulet_wisdom.description': 'Un amulette qui augmente la sagesse.',
+  'items.boots_speed.name': 'Bottes de vitesse',
+  'items.boots_speed.description': 'Des bottes qui augmentent la vitesse.',
+  'items.cape_stealth.name': 'Cape de furtivité',
+  'items.cape_stealth.description': 'Une cape qui rend le porteur furtif.',
+  'items.cape_stealth.effect': 'Augmente la furtivité.',
+
+  // Magic Items - Artifacts
+  'items.crown_kings.name': 'Couronne royale',
+  'items.crown_kings.description': 'Une couronne qui symbolise la royauté.',
+  'items.crown_kings.effect': 'Augmente la réputation.',
+  'items.orb_knowledge.name': 'Orbe de connaissance',
+  'items.orb_knowledge.description': 'Un orbe qui augmente la connaissance.',
+  'items.staff_archmage.name': 'Baguette d\'archimage',
+  'items.staff_archmage.description': 'Une baguette qui permet de lancer des sorts.',
+  'items.staff_archmage.effect': 'Augmente la puissance des sorts.',
+
+  // Magic Items - Temporal
+  'items.temporal_anchor.name': 'Ancre temporelle',
+  'items.temporal_anchor.description': 'Une ancre qui permet de voyager dans le temps.',
+  'items.temporal_anchor.effect': 'Permet de voyager dans le temps.',
+  'items.temporal_prism.name': 'Prisme temporel',
+  'items.temporal_prism.description': 'Un prisme qui permet de modifier le temps.',
+  'items.temporal_prism.effect': 'Permet de modifier le temps.',
+  'items.temporal_hourglass.name': 'Sablier temporel',
+  'items.temporal_hourglass.description': 'Un sablier qui permet de contrôler le temps.',
+  'items.temporal_hourglass.effect': 'Permet de contrôler le temps.',
+  'items.temporal_compass.name': 'Boussole temporelle',
+  'items.temporal_compass.description': 'Une boussole qui permet de se repérer dans le temps.',
+  'items.temporal_compass.effect': 'Permet de se repérer dans le temps.',
+
+  // Magic Items - Consumables
+  'items.potion_health.name': 'Potion de santé',
+  'items.potion_health.description': 'Une potion qui restaure la santé.',
+  'items.potion_health.effect': 'Restaure la santé.',
+  'items.potion_mana.name': 'Potion de mana',
+  'items.potion_mana.description': 'Une potion qui restaure le mana.',
+  'items.scroll_teleport.name': 'Parchemin de téléportation',
+  'items.scroll_teleport.description': 'Un parchemin qui permet de se téléporter.',
+  'items.scroll_teleport.effect': 'Permet de se téléporter.',
+  'items.elixir_experience.name': 'Elixir d\'expérience',
+  'items.elixir_experience.description': 'Un elixir qui augmente l\'expérience.',
+
+  // Magic Items - Resources
+  'items.gold_pile.name': 'Pile d\'or',
+  'items.gold_pile.description': 'Une pile d\'or qui peut être utilisée pour acheter des objets.',
+  'items.gold_chest.name': 'Coffre d\'or',
+  'items.gold_chest.description': 'Un coffre d\'or qui peut contenir beaucoup d\'or.',
+  'items.gold_vault.name': 'Coffre-fort d\'or',
+  'items.gold_vault.description': 'Un coffre-fort d\'or qui est très sécurisé.',
 };
 
 // Traductions anglaises
@@ -586,6 +740,83 @@ const englishTranslations: Translation = {
   mysticalAddsObjects: 'Adds mystical objects',
   testBackendConnection: 'Test backend connection',
   builtWith: 'Built with',
+
+  // Magic Items - Weapons
+  'items.sword_basic.name': 'Basic Sword',
+  'items.sword_basic.description': 'A simple and robust sword.',
+  'items.sword_steel.name': 'Steel Sword',
+  'items.sword_steel.description': 'A light and fast sword.',
+  'items.sword_magic.name': 'Magic Sword',
+  'items.sword_magic.description': 'A sword that glows mysteriously.',
+  'items.sword_legendary.name': 'Legendary Sword',
+  'items.sword_legendary.description': 'A sword that was forged by a god.',
+  'items.sword_legendary.effect': 'Increases attack power.',
+
+  // Magic Items - Armor
+  'items.armor_leather.name': 'Leather Armor',
+  'items.armor_leather.description': 'A light and flexible armor.',
+  'items.armor_chain.name': 'Chain Armor',
+  'items.armor_chain.description': 'A robust and resistant armor.',
+  'items.armor_plate.name': 'Steel Armor',
+  'items.armor_plate.description': 'A very resistant and heavy armor.',
+  'items.armor_dragon.name': 'Dragon Armor',
+  'items.armor_dragon.description': 'An armor that looks like a dragon.',
+  'items.armor_dragon.effect': 'Increases resistance to damage.',
+
+  // Magic Items - Accessories
+  'items.ring_power.name': 'Power Ring',
+  'items.ring_power.description': 'A ring that increases power.',
+  'items.amulet_wisdom.name': 'Wisdom Amulet',
+  'items.amulet_wisdom.description': 'An amulet that increases wisdom.',
+  'items.boots_speed.name': 'Speed Boots',
+  'items.boots_speed.description': 'Boots that increase speed.',
+  'items.cape_stealth.name': 'Stealth Cape',
+  'items.cape_stealth.description': 'A cape that makes the wearer stealthy.',
+  'items.cape_stealth.effect': 'Increases stealth.',
+
+  // Magic Items - Artifacts
+  'items.crown_kings.name': 'Crown of Kings',
+  'items.crown_kings.description': 'A crown that symbolizes royalty.',
+  'items.crown_kings.effect': 'Increases reputation.',
+  'items.orb_knowledge.name': 'Orb of Knowledge',
+  'items.orb_knowledge.description': 'An orb that increases knowledge.',
+  'items.staff_archmage.name': 'Archmage Staff',
+  'items.staff_archmage.description': 'A staff that allows casting spells.',
+  'items.staff_archmage.effect': 'Increases spell power.',
+
+  // Magic Items - Temporal
+  'items.temporal_anchor.name': 'Temporal Anchor',
+  'items.temporal_anchor.description': 'An anchor that allows traveling through time.',
+  'items.temporal_anchor.effect': 'Allows traveling through time.',
+  'items.temporal_prism.name': 'Temporal Prism',
+  'items.temporal_prism.description': 'A prism that allows time manipulation.',
+  'items.temporal_prism.effect': 'Allows time manipulation.',
+  'items.temporal_hourglass.name': 'Temporal Hourglass',
+  'items.temporal_hourglass.description': 'An hourglass that allows controlling time.',
+  'items.temporal_hourglass.effect': 'Allows controlling time.',
+  'items.temporal_compass.name': 'Temporal Compass',
+  'items.temporal_compass.description': 'A compass that allows navigation through time.',
+  'items.temporal_compass.effect': 'Allows navigation through time.',
+
+  // Magic Items - Consumables
+  'items.potion_health.name': 'Health Potion',
+  'items.potion_health.description': 'A potion that restores health.',
+  'items.potion_health.effect': 'Restores health.',
+  'items.potion_mana.name': 'Mana Potion',
+  'items.potion_mana.description': 'A potion that restores mana.',
+  'items.scroll_teleport.name': 'Teleport Scroll',
+  'items.scroll_teleport.description': 'A scroll that allows teleportation.',
+  'items.scroll_teleport.effect': 'Allows teleportation.',
+  'items.elixir_experience.name': 'Experience Elixir',
+  'items.elixir_experience.description': 'An elixir that increases experience.',
+
+  // Magic Items - Resources
+  'items.gold_pile.name': 'Gold Pile',
+  'items.gold_pile.description': 'A pile of gold that can be used to buy items.',
+  'items.gold_chest.name': 'Gold Chest',
+  'items.gold_chest.description': 'A gold chest that can contain a lot of gold.',
+  'items.gold_vault.name': 'Gold Vault',
+  'items.gold_vault.description': 'A very secure gold vault.',
 };
 
 // Traductions russes
@@ -781,6 +1012,83 @@ const russianTranslations: Translation = {
   mysticalAddsObjects: 'Добавляет мистические объекты',
   testBackendConnection: 'Тестировать соединение с бэкендом',
   builtWith: 'Построено с',
+
+  // Magic Items - Weapons
+  'items.sword_basic.name': 'Простая меч',
+  'items.sword_basic.description': 'Простая и надежная меча.',
+  'items.sword_steel.name': 'Железная меча',
+  'items.sword_steel.description': 'Легкая и быстрая меча.',
+  'items.sword_magic.name': 'Магическая меча',
+  'items.sword_magic.description': 'Меча, которая светится таинственным образом.',
+  'items.sword_legendary.name': 'Легендарная меча',
+  'items.sword_legendary.description': 'Меча, которая была отлита богом.',
+  'items.sword_legendary.effect': 'Увеличивает силу атаки.',
+
+  // Magic Items - Armor
+  'items.armor_leather.name': 'Кожанная броня',
+  'items.armor_leather.description': 'Легкая и гибкая броня.',
+  'items.armor_chain.name': 'Кольчужная броня',
+  'items.armor_chain.description': 'Надежная и устойчивая броня.',
+  'items.armor_plate.name': 'Железная броня',
+  'items.armor_plate.description': 'Очень надежная и тяжелая броня.',
+  'items.armor_dragon.name': 'Драконская броня',
+  'items.armor_dragon.description': 'Броня, похожая на дракона.',
+  'items.armor_dragon.effect': 'Увеличивает сопротивление урону.',
+
+  // Magic Items - Accessories
+  'items.ring_power.name': 'Кольцо силы',
+  'items.ring_power.description': 'Кольцо, увеличивающее силу.',
+  'items.amulet_wisdom.name': 'Амулет мудрости',
+  'items.amulet_wisdom.description': 'Амулет, увеличивающий мудрость.',
+  'items.boots_speed.name': 'Ботинки скорости',
+  'items.boots_speed.description': 'Ботинки, увеличивающие скорость.',
+  'items.cape_stealth.name': 'Плащ невидимости',
+  'items.cape_stealth.description': 'Плащ, делающий носителя невидимым.',
+  'items.cape_stealth.effect': 'Увеличивает скрытность.',
+
+  // Magic Items - Artifacts
+  'items.crown_kings.name': 'Корона королей',
+  'items.crown_kings.description': 'Корона, символизирующая королевство.',
+  'items.crown_kings.effect': 'Увеличивает репутацию.',
+  'items.orb_knowledge.name': 'Орб знаний',
+  'items.orb_knowledge.description': 'Орб, увеличивающий знания.',
+  'items.staff_archmage.name': 'Посох архимага',
+  'items.staff_archmage.description': 'Посох, позволяющий применять заклинания.',
+  'items.staff_archmage.effect': 'Увеличивает силу заклинаний.',
+
+  // Magic Items - Temporal
+  'items.temporal_anchor.name': 'Временная якорь',
+  'items.temporal_anchor.description': 'Якорь, позволяющий путешествовать во времени.',
+  'items.temporal_anchor.effect': 'Позволяет путешествовать во времени.',
+  'items.temporal_prism.name': 'Временной призм',
+  'items.temporal_prism.description': 'Призма, позволяющая манипулировать временем.',
+  'items.temporal_prism.effect': 'Позволяет манипулировать временем.',
+  'items.temporal_hourglass.name': 'Временной песочные часы',
+  'items.temporal_hourglass.description': 'Песочные часы, позволяющие контролировать время.',
+  'items.temporal_hourglass.effect': 'Позволяет контролировать время.',
+  'items.temporal_compass.name': 'Временной компас',
+  'items.temporal_compass.description': 'Компас, позволяющий навигацию во времени.',
+  'items.temporal_compass.effect': 'Позволяет навигацию во времени.',
+
+  // Magic Items - Consumables
+  'items.potion_health.name': 'Зелье здоровья',
+  'items.potion_health.description': 'Зелье, восстанавливающее здоровье.',
+  'items.potion_health.effect': 'Восстанавливает здоровье.',
+  'items.potion_mana.name': 'Зелье маны',
+  'items.potion_mana.description': 'Зелье, восстанавливающее ману.',
+  'items.scroll_teleport.name': 'Свиток телепортации',
+  'items.scroll_teleport.description': 'Свиток, позволяющий телепортироваться.',
+  'items.scroll_teleport.effect': 'Позволяет телепортироваться.',
+  'items.elixir_experience.name': 'Эликсир опыта',
+  'items.elixir_experience.description': 'Эликсир, увеличивающий опыт.',
+
+  // Magic Items - Resources
+  'items.gold_pile.name': 'Куча золота',
+  'items.gold_pile.description': 'Куча золота, которая может быть использована для покупки предметов.',
+  'items.gold_chest.name': 'Золотой сундук',
+  'items.gold_chest.description': 'Золотой сундук, который может содержать много золота.',
+  'items.gold_vault.name': 'Золотой сейф',
+  'items.gold_vault.description': 'Очень надежный золотой сейф.',
 };
 
 // Helper function to get translations
