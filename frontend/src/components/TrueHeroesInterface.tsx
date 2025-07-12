@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useGameStore } from '../store/useGameStore';
 import SimpleGameInterface from './SimpleGameInterface';
 import MagicInventory from './MagicInventory';
@@ -16,7 +16,16 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
   scenarioType,
   scenarioId
 }) => {
-  const { currentPlayer, loadGame } = useGameStore();
+  const { 
+    currentPlayer, 
+    loadGame, 
+    playerInventory,
+    equippedItems,
+    equipItem,
+    unequipItem,
+    consumeItem,
+    getEnhancedHero
+  } = useGameStore();
   const { t } = useTranslation();
   const [showMagicInventory, setShowMagicInventory] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
@@ -39,19 +48,86 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
 
   // Handle equipping magical items
   const handleEquipItem = (itemId: string) => {
-    console.log(`🔮 Equipping item: ${itemId}`);
-    // TODO: Implement item equipping logic with backend
+    if (!currentPlayer?.heroes?.[0]) {
+      console.log('❌ No hero available to equip item');
+      return;
+    }
+
+    const heroId = currentPlayer.heroes[0].id;
+    
+    // Determine slot based on item type
+    // This is a simplified version - you might want more sophisticated slot detection
+    const slotMapping: { [key: string]: string } = {
+      'sword_': 'weapon',
+      'armor_': 'armor', 
+      'ring_': 'ring',
+      'boots_': 'boots',
+      'amulet_': 'amulet',
+      'cape_': 'cape',
+      'crown_': 'helmet',
+      'staff_': 'weapon'
+    };
+
+    let slot = 'weapon'; // default
+    for (const [prefix, slotType] of Object.entries(slotMapping)) {
+      if (itemId.startsWith(prefix)) {
+        slot = slotType;
+        break;
+      }
+    }
+
+    const success = equipItem(heroId, itemId, slot);
+    if (success) {
+      console.log(`🔮 Equipped ${itemId} to ${slot} slot`);
+    }
   };
 
   const handleUnequipItem = (itemId: string) => {
-    console.log(`📤 Unequipping item: ${itemId}`);
-    // TODO: Implement item unequipping logic with backend
+    if (!currentPlayer?.heroes?.[0]) return;
+
+    const heroId = currentPlayer.heroes[0].id;
+    const heroEquippedItems = equippedItems[heroId];
+    
+    if (!heroEquippedItems) return;
+
+    // Find which slot the item is in
+    for (const [slot, equippedItemId] of Object.entries(heroEquippedItems)) {
+      if (equippedItemId === itemId) {
+        const success = unequipItem(heroId, slot);
+        if (success) {
+          console.log(`📤 Unequipped ${itemId} from ${slot} slot`);
+        }
+        break;
+      }
+    }
   };
 
   const handleUseItem = (itemId: string) => {
-    console.log(`🧪 Using item: ${itemId}`);
-    // TODO: Implement item usage logic with backend
+    if (!currentPlayer?.heroes?.[0]) return;
+
+    const heroId = currentPlayer.heroes[0].id;
+    const success = consumeItem(itemId, heroId);
+    if (success) {
+      console.log(`🧪 Used ${itemId}`);
+    }
   };
+
+  // Get current equipped items for the active hero (convert to expected format)
+  const currentEquippedItems = useMemo(() => {
+    if (!currentPlayer?.heroes?.[0]) return {};
+    
+    const heroEquipped = equippedItems[currentPlayer.heroes[0].id] || {};
+    
+    // Convert EquippedItems to Record<string, string>
+    const convertedItems: Record<string, string> = {};
+    Object.entries(heroEquipped).forEach(([slot, itemId]) => {
+      if (itemId) {
+        convertedItems[slot] = itemId;
+      }
+    });
+    
+    return convertedItems;
+  }, [currentPlayer, equippedItems]);
 
   if (!isInitialized) {
     return (
@@ -59,7 +135,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
         <div className="loading-content">
           <div className="spinner"></div>
           <h2>
-            {scenarioType === 'mystique' ? `�� ${t('loading')}` : 
+            {scenarioType === 'mystique' ? `🔮 ${t('loading')}` : 
              scenarioType === 'multiplayer' ? `🌐 ${t('loading')}` : 
              `🏰 ${t('loading')}`}
           </h2>
@@ -86,7 +162,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
             onClick={() => setShowMagicInventory(!showMagicInventory)}
             title={t('magicInventoryTitle')}
           >
-            🎒 {t('magicInventoryTitle')}
+            🎒 {t('magicInventoryTitle')} ({playerInventory.length})
           </button>
         )}
       </div>
@@ -107,24 +183,47 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
               ✕
             </button>
             <MagicInventory
-              playerInventory={[
-                'basic_sword', 'leather_armor', 'healing_potion', 'mana_crystal',
-                'speed_boots', 'temporal_anchor', 'phoenix_feather', 'dragon_scale',
-                'magic_scroll', 'gold_coins', 'wisdom_crystal', 'power_ring'
-              ]} // Add demo items so user can see the inventory working
-              equippedItems={{
-                weapon: 'basic_sword',
-                armor: 'leather_armor',
-                boots: 'speed_boots',
-                ring: 'power_ring'
-              }} // Add some equipped items for demo
+              playerInventory={playerInventory}
+              equippedItems={currentEquippedItems}
               onEquipItem={handleEquipItem}
               onUnequipItem={handleUnequipItem}
               onUseItem={handleUseItem}
-              playerGold={currentPlayer?.resources?.gold || 25000}
-              playerLevel={currentPlayer?.heroes?.[0]?.level || 12}
+              playerGold={currentPlayer?.resources?.gold || 0}
+              playerLevel={currentPlayer?.heroes?.[0]?.level || 1}
             />
           </div>
+        </div>
+      )}
+
+      {/* Enhanced hero display with item effects */}
+      {currentPlayer?.heroes?.[0] && (
+        <div className="hero-enhancement-display" style={{
+          position: 'absolute',
+          top: '10px',
+          right: '10px',
+          background: 'rgba(0, 0, 0, 0.8)',
+          color: 'white',
+          padding: '10px',
+          borderRadius: '8px',
+          fontSize: '12px',
+          maxWidth: '200px'
+        }}>
+          <h4>🦸 Enhanced Stats</h4>
+          {(() => {
+            const hero = currentPlayer.heroes[0];
+            const enhanced = getEnhancedHero(hero.id);
+            if (!enhanced) return null;
+            
+            return (
+              <div>
+                <div>⚔️ Attack: {hero.stats.attack} → {enhanced.stats.attack}</div>
+                <div>🛡️ Defense: {hero.stats.defense} → {enhanced.stats.defense}</div>
+                <div>📚 Knowledge: {hero.stats.knowledge} → {enhanced.stats.knowledge}</div>
+                <div>🔮 Spell Power: {hero.stats.spellPower} → {enhanced.stats.spellPower}</div>
+                <div>🏃 Movement: {hero.movementPoints}/{hero.maxMovementPoints} → {enhanced.movementPoints}/{enhanced.maxMovementPoints}</div>
+              </div>
+            );
+          })()}
         </div>
       )}
 

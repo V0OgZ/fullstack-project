@@ -1,12 +1,17 @@
 import { create } from 'zustand';
-import { GameState, Game, Player, GameAction, Position, CombatResult, Tile, ZoneOfCausality, TimelineAction, ShadowAction } from '../types/game';
+import { GameState, Game, Player, GameAction, Position, CombatResult, Tile, ZoneOfCausality, TimelineAction, ShadowAction, Hero } from '../types/game';
 import { GameService } from '../services/gameService';
+import { MagicItemService, EquippedItems } from '../services/magicItemService';
 
 interface GameStore extends GameState {
   // Map state
   map: Tile[][];
   selectedTile: Position | null;
   currentPlayerNumber: number;
+  
+  // NEW: Magic Item State
+  playerInventory: string[];
+  equippedItems: { [heroId: string]: EquippedItems };
   
   // Actions
   setCurrentGame: (game: Game) => void;
@@ -21,10 +26,18 @@ interface GameStore extends GameState {
   setLoading: (loading: boolean) => void;
   setError: (error: string | null) => void;
   
+  // NEW: Magic Item Actions
+  equipItem: (heroId: string, itemId: string, slot: string) => boolean;
+  unequipItem: (heroId: string, slot: string) => boolean;
+  consumeItem: (itemId: string, heroId: string) => boolean;
+  addItemToInventory: (itemId: string) => void;
+  removeItemFromInventory: (itemId: string) => void;
+  getEnhancedHero: (heroId: string) => Hero | null;
+  
   // Helper functions
   convertTilesToMap: (tiles: any[], width: number, height: number) => Tile[][];
   
-  // NOUVEAU: Actions pour le système ZFC
+  // ZFC Actions
   addTimelineAction: (action: TimelineAction) => void;
   updateTimelineAction: (actionId: string, status: TimelineAction['status']) => void;
   setShadowActions: (shadows: ShadowAction[]) => void;
@@ -76,6 +89,10 @@ export const useGameStore = create<GameStore>((set, get) => ({
   },
   activeEvents: [],
 
+  // NEW: Magic Item State
+  playerInventory: [],
+  equippedItems: {},
+
   // Helper function to convert flat tiles array to 2D array
   convertTilesToMap: (tiles: any[], width: number, height: number): Tile[][] => {
     const map: Tile[][] = [];
@@ -111,6 +128,107 @@ export const useGameStore = create<GameStore>((set, get) => ({
       map.push(row);
     }
     return map;
+  },
+
+  // NEW: Magic Item Actions
+  equipItem: (heroId: string, itemId: string, slot: string) => {
+    const { equippedItems, currentGame, currentPlayer } = get();
+    if (!currentGame || !currentPlayer) return false;
+
+    const hero = currentPlayer.heroes.find(h => h.id === heroId);
+    if (!hero) return false;
+
+    // Check level requirement using MagicItemService
+    const result = MagicItemService.equipItem(itemId, hero.level);
+    if (!result.success) {
+      console.log(result.message);
+      return false;
+    }
+
+    // Update equipped items
+    const newEquippedItems = { ...equippedItems };
+    if (!newEquippedItems[heroId]) {
+      newEquippedItems[heroId] = {};
+    }
+
+    // Use type assertion for slot access
+    (newEquippedItems[heroId] as any)[slot] = itemId;
+    
+    set({ equippedItems: newEquippedItems });
+    console.log(result.message);
+    return true;
+  },
+
+  unequipItem: (heroId: string, slot: string) => {
+    const { equippedItems } = get();
+    if (!equippedItems[heroId]) return false;
+
+    const newEquippedItems = { ...equippedItems };
+    
+    // Use type assertion for slot access
+    delete (newEquippedItems[heroId] as any)[slot];
+
+    if (Object.keys(newEquippedItems[heroId]).length === 0) {
+      delete newEquippedItems[heroId];
+    }
+
+    set({ equippedItems: newEquippedItems });
+    return true;
+  },
+
+  consumeItem: (itemId: string, heroId: string) => {
+    const { currentGame, currentPlayer } = get();
+    if (!currentGame || !currentPlayer) return false;
+
+    const hero = currentPlayer.heroes.find(h => h.id === heroId);
+    if (!hero) return false;
+
+    const result = MagicItemService.consumeItem(
+      itemId, 
+      hero, 
+      currentPlayer.resources.gold
+    );
+
+    if (result.success) {
+      console.log(result.message);
+      // Remove item from inventory after use
+      get().removeItemFromInventory(itemId);
+      return true;
+    } else {
+      console.log(result.message);
+      return false;
+    }
+  },
+
+  addItemToInventory: (itemId: string) => {
+    const { playerInventory } = get();
+    if (playerInventory.includes(itemId)) return;
+    
+    set((state) => ({
+      playerInventory: [...state.playerInventory, itemId]
+    }));
+  },
+
+  removeItemFromInventory: (itemId: string) => {
+    set((state) => ({
+      playerInventory: state.playerInventory.filter(id => id !== itemId)
+    }));
+  },
+
+  getEnhancedHero: (heroId: string) => {
+    const { equippedItems, currentGame, currentPlayer } = get();
+    if (!currentGame || !currentPlayer) return null;
+
+    const hero = currentPlayer.heroes.find(h => h.id === heroId);
+    if (!hero) return null;
+
+    // Apply item effects using MagicItemService
+    const enhancedHero = MagicItemService.applyItemEffectsToHero(
+      hero, 
+      equippedItems[heroId] || {}
+    );
+
+    return enhancedHero;
   },
 
   // State setters
@@ -382,6 +500,28 @@ export const useGameStore = create<GameStore>((set, get) => ({
       }
       if (gameState.currentPlayer) {
         setCurrentPlayer(gameState.currentPlayer);
+        
+        // Initialize magic item system with demo items
+        const demoItems = [
+          'sword_basic', 'armor_leather', 'ring_power', 'boots_speed',
+          'potion_health', 'potion_mana', 'scroll_teleport',
+          'temporal_anchor', 'temporal_prism', 'crown_kings',
+          'staff_archmage', 'orb_knowledge', 'sword_legendary'
+        ];
+        
+        set({ 
+          playerInventory: demoItems,
+          equippedItems: {
+            [gameState.currentPlayer.heroes[0]?.id]: {
+              weapon: 'sword_basic',
+              armor: 'armor_leather',
+              ring: 'ring_power',
+              boots: 'boots_speed'
+            }
+          }
+        });
+        
+        console.log('🎒 Magic item system initialized with', demoItems.length, 'items');
       }
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Failed to load game');
