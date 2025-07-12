@@ -218,6 +218,62 @@
       "position": { "x": 8, "y": 12 },
       "effect": "Contient des artefacts de différentes époques",
       "description": "Trésor perdu dans le temps"
+    },
+    {
+      "name": "Épée de l'Archange",
+      "type": "archangel_sword",
+      "position": { "x": 1, "y": 1 },
+      "effect": "+12 Attaque, +5 Puissance Magique, Résurrection automatique",
+      "description": "Arme divine bénie par les archanges"
+    },
+    {
+      "name": "Armure d'Écailles de Dragon",
+      "type": "dragon_scale_armor",
+      "position": { "x": 18, "y": 13 },
+      "effect": "+12 Défense, Résistance au feu 50%",
+      "description": "Armure forgée avec des écailles de dragon légendaire"
+    },
+    {
+      "name": "Couronne de Sagesse",
+      "type": "crown_of_wisdom",
+      "position": { "x": 10, "y": 1 },
+      "effect": "+10 Connaissance, +50 Mana",
+      "description": "Couronne royale augmentant la connaissance"
+    },
+    {
+      "name": "Bottes de Vitesse",
+      "type": "boots_of_speed",
+      "position": { "x": 9, "y": 13 },
+      "effect": "+3 Points de Mouvement",
+      "description": "Bottes enchantées augmentant la vitesse"
+    },
+    {
+      "name": "Orbe du Firmament",
+      "type": "orb_of_the_firmament",
+      "position": { "x": 19, "y": 1 },
+      "effect": "+15 Puissance Magique, +100 Mana, -50% coût sorts",
+      "description": "Orbe céleste contrôlant les forces cosmiques"
+    },
+    {
+      "name": "Amulette de Chronos",
+      "type": "chronos_amulet",
+      "position": { "x": 1, "y": 13 },
+      "effect": "+3 Mana temporel, Sort temporel gratuit par tour",
+      "description": "Amulette divine permettant de manipuler le flux temporel"
+    },
+    {
+      "name": "Essence Temporelle",
+      "type": "temporal_essence",
+      "position": { "x": 14, "y": 10 },
+      "effect": "+10 Mana temporel (consommable)",
+      "description": "Essence pure du temps permettant des manipulations temporelles"
+    },
+    {
+      "name": "Potion de Mana",
+      "type": "mana_potion",
+      "position": { "x": 6, "y": 4 },
+      "effect": "+50 Mana (consommable)",
+      "description": "Potion restaurant le mana magique"
     }
   ],
   "startingPositions": [
