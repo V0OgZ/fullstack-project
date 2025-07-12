@@ -2,7 +2,15 @@
   "name": "heroes-of-time-frontend",
   "version": "1.0.0",
   "description": "Heroes of Time - Revolutionary dual-scenario strategy game frontend",
-  "keywords": ["strategy-game", "heroes", "react", "typescript", "hexagonal", "temporal", "magic"],
+  "keywords": [
+    "strategy-game",
+    "heroes",
+    "react",
+    "typescript",
+    "hexagonal",
+    "temporal",
+    "magic"
+  ],
   "author": "V0OgZ",
   "license": "MIT",
   "homepage": "https://github.com/V0OgZ/heroes-of-time",
@@ -31,7 +39,14 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "test:e2e": "start-server-and-test start http://localhost:3000 cypress:run",
+    "test:e2e:open": "start-server-and-test start http://localhost:3000 cypress:open",
+    "test:backend": "wait-on http://localhost:8080/api/units/health && echo 'Backend is ready'",
+    "test:full": "npm run test:backend && npm run test:e2e",
+    "test:dev": "concurrently \"npm start\" \"npm run test:backend\" \"npm run cypress:open\""
   },
   "eslintConfig": {
     "extends": [
@@ -55,6 +70,10 @@
     "@types/node": "^24.0.13",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
-    "typescript": "^4.9.5"
+    "concurrently": "^9.2.0",
+    "cypress": "^14.5.1",
+    "start-server-and-test": "^2.0.12",
+    "typescript": "^4.9.5",
+    "wait-on": "^8.0.3"
   }
 }

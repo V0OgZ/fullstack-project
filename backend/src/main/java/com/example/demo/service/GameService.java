@@ -289,8 +289,192 @@ public class GameService {
     }
 
     // ======================
+    // MULTIPLAYER SESSION METHODS
+    // ======================
+    
+    public Map<String, Object> createMultiplayerGame(Map<String, Object> gameConfig) {
+        String sessionId = (String) gameConfig.get("sessionId");
+        String gameMode = (String) gameConfig.get("gameMode");
+        List<String> playerIds = (List<String>) gameConfig.get("players");
+        
+        Map<String, Object> game = createNewGame(sessionId);
+        game.put("sessionId", sessionId);
+        game.put("gameMode", gameMode);
+        game.put("multiplayerPlayers", playerIds);
+        
+        // Initialize players for multiplayer
+        List<Map<String, Object>> mpPlayers = new ArrayList<>();
+        for (int i = 0; i < playerIds.size(); i++) {
+            String playerId = playerIds.get(i);
+            Map<String, Object> player = createMultiplayerPlayer(playerId, i);
+            mpPlayers.add(player);
+        }
+        game.put("players", mpPlayers);
+        
+        games.put(sessionId, game);
+        gameActions.put(sessionId, new ArrayList<>());
+        
+        return game;
+    }
+    
+    public Map<String, Object> moveHeroInSession(String sessionId, String playerId, String heroId, Integer targetX, Integer targetY) {
+        Map<String, Object> game = getGame(sessionId);
+        
+        // Validate player owns this hero
+        if (!validatePlayerOwnsHero(game, playerId, heroId)) {
+            throw new RuntimeException("Player does not own this hero");
+        }
+        
+        // Create movement action
+        Map<String, Object> action = new HashMap<>();
+        action.put("id", UUID.randomUUID().toString());
+        action.put("type", "move");
+        action.put("playerId", playerId);
+        action.put("heroId", heroId);
+        action.put("targetX", targetX);
+        action.put("targetY", targetY);
+        action.put("timestamp", new Date());
+        action.put("status", "pending");
+        
+        // Add to game actions
+        List<Map<String, Object>> actions = gameActions.get(sessionId);
+        actions.add(action);
+        
+        return action;
+    }
+    
+    public Map<String, Object> processAttackInSession(String sessionId, String playerId, String attackerId, String targetId) {
+        Map<String, Object> action = new HashMap<>();
+        action.put("id", UUID.randomUUID().toString());
+        action.put("type", "attack");
+        action.put("playerId", playerId);
+        action.put("attackerId", attackerId);
+        action.put("targetId", targetId);
+        action.put("timestamp", new Date());
+        action.put("status", "pending");
+        
+        List<Map<String, Object>> actions = gameActions.get(sessionId);
+        actions.add(action);
+        
+        return action;
+    }
+    
+    public Map<String, Object> processBuildInSession(String sessionId, String playerId, String buildingType, Integer x, Integer y) {
+        Map<String, Object> action = new HashMap<>();
+        action.put("id", UUID.randomUUID().toString());
+        action.put("type", "build");
+        action.put("playerId", playerId);
+        action.put("buildingType", buildingType);
+        action.put("x", x);
+        action.put("y", y);
+        action.put("timestamp", new Date());
+        action.put("status", "pending");
+        
+        List<Map<String, Object>> actions = gameActions.get(sessionId);
+        actions.add(action);
+        
+        return action;
+    }
+    
+    public Map<String, Object> processCastSpellInSession(String sessionId, String playerId, String spellId, Integer targetX, Integer targetY) {
+        Map<String, Object> action = new HashMap<>();
+        action.put("id", UUID.randomUUID().toString());
+        action.put("type", "spell");
+        action.put("playerId", playerId);
+        action.put("spellId", spellId);
+        action.put("targetX", targetX);
+        action.put("targetY", targetY);
+        action.put("timestamp", new Date());
+        action.put("status", "pending");
+        
+        List<Map<String, Object>> actions = gameActions.get(sessionId);
+        actions.add(action);
+        
+        return action;
+    }
+    
+    public Map<String, Object> processRecruitUnitsInSession(String sessionId, String playerId, String unitType, Integer quantity) {
+        Map<String, Object> action = new HashMap<>();
+        action.put("id", UUID.randomUUID().toString());
+        action.put("type", "recruit");
+        action.put("playerId", playerId);
+        action.put("unitType", unitType);
+        action.put("quantity", quantity);
+        action.put("timestamp", new Date());
+        action.put("status", "pending");
+        
+        List<Map<String, Object>> actions = gameActions.get(sessionId);
+        actions.add(action);
+        
+        return action;
+    }
+    
+    public Map<String, Object> processEndTurnInSession(String sessionId, String playerId) {
+        Map<String, Object> action = new HashMap<>();
+        action.put("id", UUID.randomUUID().toString());
+        action.put("type", "endTurn");
+        action.put("playerId", playerId);
+        action.put("timestamp", new Date());
+        action.put("status", "pending");
+        
+        List<Map<String, Object>> actions = gameActions.get(sessionId);
+        actions.add(action);
+        
+        return action;
+    }
+    
+    // ======================
     // HELPER METHODS
     // ======================
+    
+    private Map<String, Object> createMultiplayerPlayer(String playerId, int playerIndex) {
+        String[] colors = {"#3b82f6", "#ef4444", "#10b981", "#f59e0b", "#8b5cf6", "#06b6d4", "#f97316", "#84cc16"};
+        
+        Map<String, Object> player = new HashMap<>();
+        player.put("id", playerId);
+        player.put("username", "Joueur " + (playerIndex + 1));
+        player.put("color", colors[playerIndex % colors.length]);
+        player.put("isActive", playerIndex == 0);
+        player.put("resources", Map.of(
+            "gold", 1000,
+            "wood", 200,
+            "stone", 100,
+            "ore", 50,
+            "crystal", 10,
+            "gems", 5,
+            "sulfur", 8
+        ));
+        
+        // Create hero for this player
+        List<Map<String, Object>> heroes = new ArrayList<>();
+        Map<String, Object> hero = createHero(
+            "hero-" + playerId, 
+            "Hero " + (playerIndex + 1), 
+            "Knight", 
+            2 + playerIndex * 3, 
+            2 + playerIndex * 3, 
+            playerId
+        );
+        heroes.add(hero);
+        player.put("heroes", heroes);
+        
+        return player;
+    }
+    
+    private boolean validatePlayerOwnsHero(Map<String, Object> game, String playerId, String heroId) {
+        List<Map<String, Object>> players = (List<Map<String, Object>>) game.get("players");
+        for (Map<String, Object> player : players) {
+            if (playerId.equals(player.get("id"))) {
+                List<Map<String, Object>> heroes = (List<Map<String, Object>>) player.get("heroes");
+                for (Map<String, Object> hero : heroes) {
+                    if (heroId.equals(hero.get("id"))) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
     
     private String getRandomTerrain() {
         String[] terrains = {"grass", "forest", "mountain", "water", "desert", "swamp"};

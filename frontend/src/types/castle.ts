@@ -174,10 +174,11 @@ export const CASTLE_TYPES: { [key in CastleType]: {
   }
 };
 
-// 🛡️ UNIT DEFINITIONS (168 Total: 8 castles × 7 tiers × 3 variants)
+// 🛡️ UNIT DEFINITIONS - NOW LOADED FROM BACKEND API
+// Use unitService.getAllUnits() instead of hardcoded data
 
-export const UNIT_TYPES: UnitType[] = [
-  // 🏰 CASTLE UNITS (21 units: 7 tiers × 3 variants)
+// Note: UNIT_TYPES moved to backend database
+// Frontend should use: import { unitService } from '../services/unitService';
   
   // Tier 1: Pikeman line
   {
