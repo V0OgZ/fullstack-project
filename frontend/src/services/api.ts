@@ -115,4 +115,48 @@ export class ApiService {
   static async getCombatResults(gameId: string): Promise<any[]> {
     return this.makeRequest(`/games/${gameId}/combat-results`);
   }
+
+  // Multiplayer session management
+  static async createMultiplayerSession(request: any): Promise<any> {
+    return this.makeRequest('/multiplayer/create', {
+      method: 'POST',
+      body: JSON.stringify(request)
+    });
+  }
+
+  static async getJoinableSessions(): Promise<any> {
+    return this.makeRequest('/multiplayer/sessions');
+  }
+
+  static async joinMultiplayerSession(sessionId: string, playerId: string): Promise<any> {
+    return this.makeRequest(`/multiplayer/join/${sessionId}`, {
+      method: 'POST',
+      body: JSON.stringify({ playerId })
+    });
+  }
+
+  static async leaveMultiplayerSession(sessionId: string, playerId: string): Promise<any> {
+    return this.makeRequest(`/multiplayer/leave/${sessionId}`, {
+      method: 'POST',
+      body: JSON.stringify({ playerId })
+    });
+  }
+
+  static async startMultiplayerSession(sessionId: string, playerId: string): Promise<any> {
+    return this.makeRequest(`/multiplayer/start/${sessionId}`, {
+      method: 'POST',
+      body: JSON.stringify({ playerId })
+    });
+  }
+
+  static async getMultiplayerGameState(sessionId: string): Promise<any> {
+    return this.makeRequest(`/multiplayer/game-state/${sessionId}`);
+  }
+
+  static async sendGameAction(sessionId: string, playerId: string, actionType: string, actionData: any): Promise<any> {
+    return this.makeRequest(`/multiplayer/action/${sessionId}`, {
+      method: 'POST',
+      body: JSON.stringify({ playerId, actionType, actionData })
+    });
+  }
 } 
