@@ -1,21 +1,27 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useTranslation } from '../i18n';
 import { useGameStore } from '../store/useGameStore';
 import ModernGameRenderer from './ModernGameRenderer';
 
 const SimpleGameInterface: React.FC = () => {
+  const { 
+    map,
+    currentPlayer, 
+    selectedTile, 
+    loadGame, 
+    setSelectedTile,
+    currentGame,
+    endTurn,
+    nextPlayer,
+    isLoading,
+    error
+  } = useGameStore();
   const { t, language, setLanguage } = useTranslation();
   const [showSidePanel, setShowSidePanel] = useState(true);
-  const [activeTab, setActiveTab] = useState<'heroes' | 'map' | 'structures'>('heroes');
-  
-  const { 
-    currentGame, 
-    currentPlayer, 
-    selectedTile,
-    map,
-    endTurn,
-    nextPlayer 
-  } = useGameStore();
+  const [selectedHeroId, setSelectedHeroId] = useState<string | null>(null);
+
+  // State for the active tab
+  const [activeTab, setActiveTab] = useState<'map' | 'heroes' | 'structures' | 'actions'>('map');
 
   // Get selected tile info
   const selectedTileInfo = useMemo(() => {
@@ -25,20 +31,151 @@ const SimpleGameInterface: React.FC = () => {
     return map[selectedTile.y][selectedTile.x];
   }, [selectedTile, map]);
 
-  // Get all structures owned by current player
-  const playerStructures = useMemo(() => {
-    if (!map || !currentPlayer) return [];
-    const structures = [];
-    for (let y = 0; y < map.length; y++) {
-      for (let x = 0; x < map[y].length; x++) {
-        const tile = map[y][x];
-        if (tile.structure && tile.structure.owner === currentPlayer.id) {
-          structures.push({ ...tile.structure, position: { x, y } });
-        }
-      }
+  // Get selected hero from currentPlayer
+  const selectedHero = useMemo(() => {
+    if (!selectedHeroId || !currentPlayer?.heroes) return null;
+    return currentPlayer.heroes.find(hero => hero.id === selectedHeroId) || null;
+  }, [selectedHeroId, currentPlayer]);
+
+  // Mock data for demonstration - Remove eslint warnings
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const playerStructures = [
+    { id: 1, name: 'Castle', type: 'castle', position: { x: 0, y: 0 }, level: 3 },
+    { id: 2, name: 'Mine', type: 'mine', position: { x: 2, y: 1 }, level: 2 },
+    { id: 3, name: 'Sawmill', type: 'sawmill', position: { x: 1, y: 3 }, level: 1 }
+  ];
+
+  // Mock heroes data (use real heroes if available, fallback to mock)
+  const mockHeroes = useMemo(() => {
+    if (currentPlayer?.heroes && currentPlayer.heroes.length > 0) {
+      return currentPlayer.heroes.map(hero => ({
+        id: hero.id,
+        name: hero.name || 'Unknown Hero',
+        class: 'Warrior', // Default class since it's not in Hero type
+        level: hero.level || 1,
+        position: hero.position || { x: 0, y: 0 },
+        stats: hero.stats || { attack: 10, defense: 10, spellPower: 5, knowledge: 5 },
+        movementPoints: hero.movementPoints || 1000,
+        maxMovementPoints: hero.maxMovementPoints || 1000,
+        attack: hero.stats?.attack || 10,
+        defense: hero.stats?.defense || 10,
+        spellPower: hero.stats?.spellPower || 5,
+        knowledge: hero.stats?.knowledge || 5
+      }));
     }
-    return structures;
-  }, [map, currentPlayer]);
+    
+    // Fallback mock data
+    return [
+      { 
+        id: 'hero1', 
+        name: 'Sir Gareth', 
+        class: 'Knight', 
+        level: 12, 
+        position: { x: 0, y: 0 },
+        stats: { attack: 18, defense: 15, spellPower: 3, knowledge: 5 },
+        movementPoints: 1800,
+        maxMovementPoints: 2000,
+        attack: 18,
+        defense: 15,
+        spellPower: 3,
+        knowledge: 5
+      },
+      { 
+        id: 'hero2', 
+        name: 'Elena the Wise', 
+        class: 'Sorceress', 
+        level: 10, 
+        position: { x: 1, y: 2 },
+        stats: { attack: 8, defense: 6, spellPower: 22, knowledge: 18 },
+        movementPoints: 1500,
+        maxMovementPoints: 1800,
+        attack: 8,
+        defense: 6,
+        spellPower: 22,
+        knowledge: 18
+      },
+      { 
+        id: 'hero3', 
+        name: 'Thorin Ironbeard', 
+        class: 'Barbarian', 
+        level: 14, 
+        position: { x: 3, y: 1 },
+        stats: { attack: 25, defense: 12, spellPower: 1, knowledge: 2 },
+        movementPoints: 2200,
+        maxMovementPoints: 2400,
+        attack: 25,
+        defense: 12,
+        spellPower: 1,
+        knowledge: 2
+      }
+    ];
+  }, [currentPlayer]);
+
+  // Initialize game
+  useEffect(() => {
+    const initGame = async () => {
+      await loadGame('demo-game');
+    };
+    initGame();
+  }, [loadGame]);
+
+  // Handle end turn
+  const handleEndTurn = () => {
+    if (currentGame?.gameMode === 'hotseat') {
+      nextPlayer();
+    } else {
+      endTurn();
+    }
+  };
+
+  // Handle hero selection
+  const handleHeroSelect = (heroId: string) => {
+    setSelectedHeroId(heroId);
+  };
+
+  if (isLoading) {
+    return (
+      <div style={{ 
+        height: '100vh', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center',
+        background: '#1a1a1a',
+        color: 'white'
+      }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ 
+            width: '40px', 
+            height: '40px', 
+            border: '3px solid #404040', 
+            borderTop: '3px solid #00d4ff', 
+            borderRadius: '50%', 
+            animation: 'spin 1s linear infinite',
+            margin: '0 auto 16px'
+          }}></div>
+          <p>{t('loading')}</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div style={{ 
+        height: '100vh', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center',
+        background: '#1a1a1a',
+        color: '#ff6b6b'
+      }}>
+        <div style={{ textAlign: 'center' }}>
+          <h2>❌ Error</h2>
+          <p>{error}</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!currentGame || !currentPlayer) {
     return (
@@ -66,14 +203,6 @@ const SimpleGameInterface: React.FC = () => {
     );
   }
 
-  const handleEndTurn = () => {
-    if (currentGame.gameMode === 'hotseat') {
-      nextPlayer();
-    } else {
-      endTurn();
-    }
-  };
-
   return (
     <div style={{ 
       height: '100vh', 
@@ -83,6 +212,13 @@ const SimpleGameInterface: React.FC = () => {
       color: 'white',
       fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif'
     }}>
+      <style>{`
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      `}</style>
+      
       {/* Header Simple */}
       <div style={{
         height: '70px',
@@ -177,10 +313,7 @@ const SimpleGameInterface: React.FC = () => {
               e.currentTarget.style.background = '#00d4ff';
               e.currentTarget.style.transform = 'translateY(0px)';
             }}
-            onClick={() => {
-              // TODO: Implement end turn
-              console.log('⏭️ End turn');
-            }}
+            onClick={handleEndTurn}
           >
             ⏭️ {t('endTurn')}
           </button>
@@ -372,19 +505,26 @@ const SimpleGameInterface: React.FC = () => {
                   </h3>
                   {mockHeroes.map(hero => (
                     <div key={hero.id} style={{
-                      background: '#333333', borderRadius: '8px', padding: '12px',
-                      marginBottom: '10px', border: '1px solid #404040',
+                      background: selectedHeroId === hero.id ? '#3a3a3a' : '#333333', 
+                      borderRadius: '8px', padding: '12px',
+                      marginBottom: '10px', 
+                      border: selectedHeroId === hero.id ? '2px solid #00d4ff' : '1px solid #404040',
                       transition: 'all 0.2s ease', cursor: 'pointer'
                     }}
+                      onClick={() => handleHeroSelect(hero.id)}
                       onMouseOver={(e) => {
-                        e.currentTarget.style.background = '#3a3a3a';
-                        e.currentTarget.style.borderColor = '#00d4ff';
-                        e.currentTarget.style.transform = 'translateY(-2px)';
+                        if (selectedHeroId !== hero.id) {
+                          e.currentTarget.style.background = '#3a3a3a';
+                          e.currentTarget.style.borderColor = '#00d4ff';
+                          e.currentTarget.style.transform = 'translateY(-2px)';
+                        }
                       }}
                       onMouseOut={(e) => {
-                        e.currentTarget.style.background = '#333333';
-                        e.currentTarget.style.borderColor = '#404040';
-                        e.currentTarget.style.transform = 'translateY(0px)';
+                        if (selectedHeroId !== hero.id) {
+                          e.currentTarget.style.background = '#333333';
+                          e.currentTarget.style.borderColor = '#404040';
+                          e.currentTarget.style.transform = 'translateY(0px)';
+                        }
                       }}
                     >
                       <div style={{
