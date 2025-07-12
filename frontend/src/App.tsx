@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import Game from './pages/Game';
+import BackendTester from './components/BackendTester';
 
 const GameSelector: React.FC = () => {
   return (
@@ -42,6 +43,12 @@ const GameSelector: React.FC = () => {
         <p>Le scénario Mystique ajoute des objets spéciaux sur la carte que vous pouvez découvrir !</p>
       </div>
       
+      <div className="backend-test-section">
+        <Link to="/backend-test" className="backend-test-link">
+          🔧 Tester la connexion Backend
+        </Link>
+      </div>
+      
       <footer className="selector-footer">
         <p>Construit avec React & TypeScript</p>
       </footer>
@@ -57,6 +64,10 @@ const App: React.FC = () => {
           <Route 
             path="/game/:scenarioId" 
             element={<Game />} 
+          />
+          <Route 
+            path="/backend-test" 
+            element={<BackendTester />} 
           />
           <Route 
             path="/" 

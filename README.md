@@ -6,230 +6,117 @@
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.7.18-green.svg)](https://spring.io/projects/spring-boot)
 [![Languages](https://img.shields.io/badge/Languages-FR%20%7C%20EN-green.svg)](https://github.com/V0OgZ/heroes-of-time)
 
-> **Where strategy meets spacetime** - A revolutionary turn-based strategy game featuring **unified dual scenarios**: Classic conquest and mystical temporal warfare with magical objects.
+> **Revolutionary turn-based strategy game** featuring complete temporal mechanics, political simulation, and dual-scenario gameplay with unified architecture.
 
-## 🌟 Revolutionary Dual-Scenario System
+## 🏗️ **Technical Architecture**
 
-### 🏰 **Classic Conquest Scenario**
-- **Traditional Heroes gameplay** with modern hexagonal interface
-- **Castle conquest** and resource management
-- **Turn-based strategy** with immediate action execution
-- **Hero development** and unit recruitment
+### **Technology Stack**
 
-### 🔮 **Mystical Conquest Scenario** 
-- **Same unified interface** as Classic mode
-- **+ Magical Inventory System** with 30+ enchanted objects
-- **+ Temporal Objects** integrated naturally on the map
-- **+ Advanced magic mechanics** and artifact collection
+#### **Frontend** (React + TypeScript)
+- **React 18** with TypeScript for type safety
+- **Canvas 2D** rendering for 60 FPS performance  
+- **Zustand** for reactive state management
+- **i18n** complete internationalization (FR/EN)
+- **Responsive design** with modern CSS and Glassmorphism
 
-### 🎯 **One Interface, Two Experiences**
-Both scenarios share the **exact same game interface** but offer completely different strategic depth:
-- **Classic**: Focus on territorial control and traditional Heroes mechanics
-- **Mystical**: Add magical objects, temporal artifacts, and advanced inventory management
+#### **Backend** (Spring Boot + Java)
+- **Spring Boot 2.7.18** with Java 17
+- **REST API** with full CORS support
+- **H2 Database** for development (PostgreSQL for production)
+- **Maven** dependency management
 
-## 🌍 **Full Multilingual Support (FR/EN)**
-
-**Heroes of Time** features **complete internationalization**:
-- **🇫🇷 French**: Native interface with full translations
-- **🇬🇧 English**: Complete English localization
-- **Persistent language preference** saved automatically
-- **80+ translated UI elements** for seamless experience
-
-```typescript
-// Dynamic language switching
-const { t, setLanguage } = useTranslation();
-console.log(t('gameTitle')); // "Heroes of Time" | "Heroes of Time"
-setLanguage('fr'); // Switch to French instantly
-```
-
-## 🎒 **Magical Objects System (30+ Items)**
-
-### ⚔️ **Weapons Collection**
-- **Épée du Novice** → **Excalibur** (Common to Legendary)
-- **Bâton de l'Archimage** - Legendary staff (+10 Spell Power)
-
-### 🛡️ **Armor & Protection** 
-- **Armure de Cuir** → **Écailles de Dragon** (Basic to Epic)
-- **Cuirasse des Titans** - Ultimate defense with spell immunity
-
-### ⏰ **Temporal Objects** (Mystical Mode Only)
-- **Ancre Temporelle** - Create temporal savepoints
-- **Prisme Temporel** - Reveal future enemy actions
-- **Sablier Éternel** - Manipulate time itself
-- **Boussole Temporelle** - Detect temporal anomalies
-
-### 💍 **Magical Accessories**
-- **Anneau de Pouvoir** - Increase spell effectiveness
-- **Bottes de Célérité** - Enhanced movement speed
-- **Cape d'Invisibilité** - Stealth mechanics
-
-### 🧪 **Consumables & Resources**
-- **Potions** for health and mana restoration
-- **Scrolls** for instant teleportation
-- **Experience Elixirs** for rapid hero development
-
-## 🚀 Quick Start
-
-### Prerequisites
-- **Node.js** 16+ and npm
-- **Java 17+** (SDKMAN recommended)
-- **Maven** 3.6+
-
-### Installation
-
-```bash
-# Clone Heroes of Time
-git clone https://github.com/V0OgZ/heroes-of-time.git
-cd heroes-of-time
-
-# Backend (Terminal 1) - Spring Boot API
-cd backend
-mvn spring-boot:run
-
-# Frontend (Terminal 2) - React Interface
-cd frontend
-npm install
-npm start
-```
-
-### Launch Game
-- **Game Interface**: http://localhost:3000
-- **Backend API**: http://localhost:8080
-
-## 🎮 Gameplay Modes
-
-### 🏰 **Classic Conquest**
-**Traditional Heroes of Might & Magic experience with modern interface:**
-
-- **Hexagonal map rendering** with 60 FPS performance
-- **Hero management** with stats progression
-- **Resource collection** (Gold, Wood, Stone, Mana)
-- **Turn-based combat** with tactical positioning
-- **Castle building** and territory expansion
-
-### 🔮 **Mystical Conquest**
-**Enhanced magical experience using the same interface:**
-
-- **Everything from Classic mode** +
-- **Magic Inventory overlay** with advanced item management
-- **Temporal objects** scattered across the map
-- **Magical effects** and enchanted weapons
-- **Advanced artifact system** with equipment slots
-- **Mystical scenarios** with unique challenges
-
-## 🏗️ **Modern Architecture**
-
-### 🖥️ **Backend Intelligence (Spring Boot)**
-```java
-@RestController
-public class GameController {
-    // Complete REST API for game logic
-    // ZFC calculations for temporal mechanics
-    // Combat resolution and validation
-    // Resource management systems
-}
-```
-
-### 🌐 **Frontend Interface (React + TypeScript)**
-```typescript
-// Unified interface for both scenarios
-interface TrueHeroesInterface {
-  scenarioType: 'classique' | 'mystique';
-  // Same UI components
-  // Conditional magic inventory
-  // Shared game renderer
-}
-```
-
-### 🎨 **Canvas Rendering Engine**
-- **Hexagonal precision** with mathematical accuracy
-- **Real-time animations** at 60 FPS
-- **Particle effects** for magical spells
-- **Responsive design** for all screen sizes
-
-## 🌟 **Technical Innovation**
-
-### 🔮 **Temporal Zone System (ZFC)**
-Advanced spacetime mechanics for mystical scenarios:
-
-```typescript
-interface ZoneOfCausality {
-  playerId: string;
-  radius: number;
-  center: Position;
-  temporalMana: number;
-  conflictZones: Position[];
-}
-```
-
-### 🗺️ **Procedural Map Generation**
-- **Advanced terrain generation** with multiple biomes
-- **Strategic resource placement** for balanced gameplay  
-- **Hexagonal grid system** with perfect tile alignment
-- **Runtime map creation** with infinite variety
-
-### 🎭 **State Management**
-```typescript
-// Zustand stores for performance
-const useGameStore = create<GameStore>(() => ({
-  // Immutable state updates
-  // Backend synchronization
-  // Real-time game state
-}));
-```
-
-## 📁 **Project Structure**
+### **Project Structure**
 
 ```
 heroes-of-time/
 ├── 🖥️ backend/               # Spring Boot API
-│   ├── GameController.java   # REST endpoints
-│   ├── GameService.java      # Business logic
-│   └── Position.java         # Game models
+│   ├── src/main/java/
+│   │   └── com/example/demo/
+│   │       ├── controller/    # REST Controllers
+│   │       ├── service/       # Business Logic
+│   │       └── model/         # Data Models  
+│   └── pom.xml               # Maven dependencies
 ├── 🌐 frontend/              # React + TypeScript
-│   ├── components/           # UI components
-│   │   ├── TrueHeroesInterface.tsx    # Unified game interface
-│   │   ├── MagicInventory.tsx         # Magical items system
-│   │   └── ModernGameRenderer.tsx     # Canvas rendering
-│   ├── store/                # State management
-│   ├── services/             # API integration
-│   ├── data/                 # Game data
-│   │   └── magicObjects.ts   # 30+ magical items
-│   ├── i18n/                 # Internationalization
-│   └── utils/                # Map generators
-└── 📚 docs/                  # Documentation
-    ├── ARCHITECTURE.md       # Technical documentation
-    └── README.md            # This file
+│   ├── src/
+│   │   ├── components/       # React Components
+│   │   ├── types/           # TypeScript definitions
+│   │   ├── services/        # API integration
+│   │   ├── store/           # State management
+│   │   └── utils/           # Utilities
+│   └── package.json         # NPM dependencies
+└── 📚 docs/                 # Documentation
 ```
 
-## 🎯 **Key Features**
+### **Development Setup**
 
-### ✨ **Unified Dual Experience**
-- **One codebase, two games** - Revolutionary architecture
-- **Seamless transition** between Classic and Mystical modes
-- **Shared progression** - Heroes carry over between scenarios
-- **Consistent UI/UX** - No learning curve when switching modes
+#### **Prerequisites**
+- **Node.js 18+** and npm
+- **Java 17+** (SDKMAN recommended)
+- **Maven 3.6+**
+- **Git**
 
-### 🌍 **Complete Internationalization**
-- **Native French support** with full translations
-- **Professional English localization** 
-- **Instant language switching** with persistent preferences
-- **Cultural adaptation** for both audiences
+#### **Quick Start**
+```bash
+# Clone repository
+git clone https://github.com/V0OgZ/heroes-of-time.git
+cd heroes-of-time
 
-### 🎨 **Modern Technical Stack**
-- **React 18** with TypeScript for type safety
-- **Spring Boot 2.7** for robust backend API
-- **Canvas rendering** for 60 FPS performance
-- **Zustand state management** for reactive updates
-- **Responsive design** for desktop and tablet
+# Start Backend (Terminal 1)
+cd backend
+mvn spring-boot:run
 
-### 🔧 **Developer Experience**
-- **Hot reload** development with <2s refresh
-- **TypeScript** for compile-time error catching
-- **Clean architecture** with separation of concerns
-- **Comprehensive documentation** for contributors
+# Start Frontend (Terminal 2)  
+cd frontend
+npm install
+npm start
 
-## 📊 **Performance Metrics**
+# Access game
+open http://localhost:3000
+```
+
+#### **Build for Production**
+```bash
+# Backend
+cd backend && mvn clean package
+
+# Frontend  
+cd frontend && npm run build
+```
+
+### **🚨 Critical Architecture Issue**
+
+⚠️ **IMPORTANT**: The current backend is **mostly mock data**. Critical game logic is currently client-side:
+
+| System | Current Location | Should Be |
+|--------|------------------|-----------|
+| **ZFC Calculations** | Frontend | Backend |
+| **Political System** | Frontend | Backend |
+| **Temporal Mechanics** | Frontend | Backend |
+| **Combat Resolution** | Frontend | Backend |
+| **Game State Authority** | Frontend | Backend |
+
+**This is a blocker for real multiplayer gameplay** and needs refactoring for production.
+
+### **API Endpoints** (Current)
+
+```typescript
+// Game Management
+GET    /api/games/{gameId}
+POST   /api/games  
+GET    /api/games/available
+POST   /api/games/{gameId}/join
+
+// Hero Actions  
+POST   /api/heroes/{heroId}/move
+POST   /api/heroes/{heroId}/attack
+POST   /api/heroes/{heroId}/collect
+
+// Game State
+GET    /api/games/{gameId}/state
+GET    /api/health
+```
+
+### **Performance Metrics**
 
 | Metric | Value |
 |--------|-------|
@@ -239,70 +126,209 @@ heroes-of-time/
 | **Map Generation** | <500ms |
 | **Rendering** | 60 FPS stable |
 
-## 🚀 **Future Roadmap**
+---
 
-### 🗄️ **Database Integration**
-- **PostgreSQL** for game persistence
-- **Redis** for session caching
-- **Player profiles** and progression tracking
+## 🎮 **Game Features & Mechanics**
 
-### 🌐 **Multiplayer Enhancement**
-- **WebSocket** real-time communication
-- **Game rooms** for multiple sessions
-- **Spectator mode** for observers
+### **🌟 Revolutionary Dual-Scenario System**
 
-### 🤖 **AI & Automation**
-- **AI opponents** with different difficulty levels
-- **Smart tutorials** for new players
-- **Automated tournaments** and ranking systems
+Heroes of Time features **two complete game experiences** within a unified interface:
+
+#### **🏰 Classic Conquest**
+- Traditional Heroes of Might & Magic gameplay
+- Castle building and resource management
+- Hero development and unit recruitment
+- Turn-based strategy with immediate execution
+
+#### **🔮 Mystical Conquest**  
+- **Same interface** as Classic mode
+- **+ 30+ Magical Objects** with temporal artifacts
+- **+ Advanced inventory system** with equipment
+- **+ Temporal mechanics** integrated seamlessly
+
+**Key Innovation**: One codebase powers two completely different strategic experiences.
+
+### **🎯 Complete Phase Implementation**
+
+#### **✅ Phase 1: Foundation System**
+- **Hexagonal map rendering** with Canvas 2D
+- **Hero management** with stats and progression
+- **Resource economy** with 7 resource types
+- **Modern UI** with responsive design
+
+#### **✅ Phase 2: Castle & Combat System**
+- **8 Castle Types** with unique characteristics
+- **168 Unit Types** (7 tiers × 8 castles × 3 variants)
+- **70+ Spells** across 5 magic schools
+- **150+ Artifacts** with equipment system
+- **Tactical combat** with morale & luck mechanics
+
+#### **✅ Phase 3: Advanced ZFC System**
+- **Zone de Causalité calculations** for async gameplay
+- **Shadow action bluffing** with quantum superposition
+- **Temporal paradox resolution** engine
+- **Multi-layer zone interactions**
+- **Quantum entanglement** mechanics
+
+#### **✅ Phase 4: Perestroika Political System**
+- **4 Specialized Advisors** with unique personalities:
+  - **General Volkov** (🎖️) - Military strategist
+  - **Dr. Petrova** (💼) - Economic planner  
+  - **Ambassador Kozlov** (🤝) - Diplomatic expert
+  - **Prof. Ivanova** (🔬) - Scientific visionary
+- **Dynamic crisis events** across 4 categories
+- **Complex decision trees** with long-term consequences
+- **6-category reputation system**
+
+### **🌍 Complete Internationalization**
+
+**Native multilingual support**:
+- **🇫🇷 French**: Complete interface with cultural adaptation
+- **🇬🇧 English**: Professional localization
+- **80+ translated elements** with context-aware messaging
+- **Persistent language preferences**
+
+### **🎨 Modern Interface Features**
+
+- **Glassmorphism design** with backdrop blur effects
+- **Animated components** with smooth transitions  
+- **Canvas rendering** for optimal performance
+- **Responsive layout** for desktop and tablet
+- **Dark theme** with gold accent colors
+
+---
+
+## 🚀 **Gameplay Mechanics**
+
+### **🔮 Temporal Strategy (ZFC System)**
+
+**Zone de Causalité** revolutionizes async strategy gaming:
+
+- **Real-time zone calculations** showing influence areas
+- **Conflict detection** between overlapping player zones  
+- **Shadow actions** creating psychological warfare
+- **Temporal paradoxes** requiring strategic resolution
+
+```typescript
+// Example ZFC calculation
+const zone = calculateZFC(hero, gameState);
+// Returns: influence radius, conflict zones, temporal effects
+```
+
+### **🏛️ Political Simulation**
+
+Inspired by **Perestroika-era decision making**:
+
+- **Advisor debates** with contradictory recommendations
+- **Crisis management** requiring careful balance
+- **Reputation consequences** affecting all interactions
+- **Long-term strategic planning** across multiple metrics
+
+### **⚔️ Advanced Combat**
+
+- **Hex-based tactical battles** with positioning
+- **Initiative system** determining turn order
+- **Spell combinations** and area effects
+- **Morale & luck** affecting unit performance
+
+---
+
+## 📊 **System Requirements**
+
+### **Minimum Requirements**
+- **Browser**: Chrome 90+, Firefox 88+, Safari 14+
+- **RAM**: 4 GB available memory
+- **Storage**: 500 MB free space
+- **Network**: Broadband connection for multiplayer
+
+### **Recommended Requirements**  
+- **Browser**: Latest Chrome/Firefox/Edge
+- **RAM**: 8 GB available memory
+- **Storage**: 1 GB free space
+- **GPU**: Hardware acceleration enabled
+
+---
+
+## 🛣️ **Development Roadmap**
+
+### **🔧 Immediate Priorities**
+
+#### **Backend Refactoring** (Critical)
+- [ ] Move ZFC calculations to server-side
+- [ ] Implement political system backend
+- [ ] Add temporal mechanics server authority  
+- [ ] Create combat resolution engine
+- [ ] Establish game state synchronization
+
+#### **Database Integration**
+- [ ] PostgreSQL for game persistence
+- [ ] Redis for session caching
+- [ ] Player progression tracking
+
+### **🌐 Future Enhancements**
+
+#### **Multiplayer Features**
+- [ ] WebSocket real-time communication
+- [ ] Game lobbies and matchmaking
+- [ ] Spectator mode with replay system
+- [ ] Voice chat integration
+
+#### **Advanced Features**
+- [ ] AI opponents with difficulty levels
+- [ ] Map editor with sharing capabilities
+- [ ] Tournament system with rankings
+- [ ] Mobile app development
+
+---
+
+## 🤝 **Contributing**
+
+We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+### **Development Workflow**
+```bash
+# Create feature branch
+git checkout -b feature/your-feature
+
+# Make changes and test
+npm run test
+mvn test
+
+# Submit pull request
+git push origin feature/your-feature
+```
+
+### **Coding Standards**
+- **TypeScript** for all frontend code
+- **Java** following Spring Boot conventions
+- **ESLint** for code formatting
+- **Comprehensive testing** for new features
+
+---
 
 ## 📚 **Documentation**
 
 - [**Technical Architecture**](ARCHITECTURE.md) - Complete system documentation
-- [**Game Specification**](HEROES_REFORGED_COMPLETE_SPEC.md) - Feature breakdown
+- [**Game Specification**](HEROES_REFORGED_COMPLETE_SPEC.md) - Feature breakdown  
+- [**Development Log**](frontend/DEVELOPMENT_LOG.md) - Implementation timeline
 - [**Contributing Guide**](CONTRIBUTING.md) - Development guidelines
-- [**Game Analysis**](GAME_ANALYSIS_AND_IMPROVEMENTS.md) - Design philosophy
 
-## 🤝 **Contributing**
-
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
-
-### Development Setup
-```bash
-# Development workflow
-git clone https://github.com/V0OgZ/heroes-of-time.git
-cd heroes-of-time
-
-# Start both services
-npm run dev:backend    # Spring Boot on :8080
-npm run dev:frontend   # React on :3000
-```
+---
 
 ## 📄 **License**
 
 MIT License - See [LICENSE](LICENSE) for details.
+
+---
 
 ## 🔗 **Links**
 
 - **Repository**: https://github.com/V0OgZ/heroes-of-time
 - **Issues**: https://github.com/V0OgZ/heroes-of-time/issues
 - **Discussions**: https://github.com/V0OgZ/heroes-of-time/discussions
-- **Releases**: https://github.com/V0OgZ/heroes-of-time/releases
-
-## 🌟 **The Vision**
-
-**Heroes of Time** represents a new paradigm in strategy gaming:
-
-🎮 **One Interface, Multiple Experiences** - Revolutionary dual-scenario architecture  
-🌍 **Global Accessibility** - Native FR/EN support for worldwide audience  
-⚔️ **Classic Meets Modern** - Traditional Heroes gameplay with cutting-edge tech  
-🔮 **Mystical Innovation** - Temporal mechanics and magical object systems  
-🎨 **Technical Excellence** - 60 FPS canvas rendering with TypeScript safety  
-
-> **"Not just a game - a new way to think about strategy gaming architecture"**
 
 ---
 
-**Made with ⚡ passion and ☕ coffee by [V0OgZ](https://github.com/V0OgZ)**
+**Heroes of Time** represents the evolution of strategy gaming - combining beloved classic mechanics with revolutionary innovations in temporal strategy, political simulation, and asynchronous gameplay. 
 
-*"Where strategy meets spacetime - Heroes of Time awaits"* ⏰✨ 
+*The future of strategy gaming starts here.* ⏰✨ 
