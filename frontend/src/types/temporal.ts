@@ -111,6 +111,44 @@ export interface TemporalZone {
   // History and predictions
   history: ZoneEvent[];
   predictions: PredictedEvent[];
+  
+  // Additional zone properties for map generation
+  terrain?: string;
+  structure?: {
+    name: string;
+    type: string;
+    owner: string;
+    description: string;
+    specialAbilities: string[];
+    garrison: string[];
+  };
+  hero?: Hero;
+  objects?: Array<{
+    id: string;
+    type: string;
+    name: string;
+    effect: string;
+    description: string;
+  }>;
+  entities?: Array<{
+    id: string;
+    type: string;
+    name: string;
+    position: SpacetimePosition;
+    level: number;
+    abilities: string[];
+    description: string;
+  }>;
+  temporalEffects?: Array<{
+    type: string;
+    name: string;
+    description: string;
+    duration: number;
+    strength: number;
+  }>;
+  stability?: number;
+  influence?: Map<string, number>;
+  lastModified?: number;
 }
 
 // ============================================================================
@@ -442,5 +480,27 @@ export interface TemporalVision {
     probability: number;
     outcome: Partial<TemporalZone>;
     description: string;
+  }>;
+}
+
+/**
+ * Complete temporal map structure
+ */
+export interface TemporalMap {
+  name: string;
+  description: string;
+  size: { width: number; height: number };
+  timeLines: number[];
+  defaultTimeline: number;
+  zones: TemporalZone[][][]; // [timeline][y][x]
+  startingPositions: SpacetimePosition[];
+  victoryConditions: Array<{
+    type: string;
+    description: string;
+  }>;
+  ambientEffects: Array<{
+    name: string;
+    description: string;
+    effect: string;
   }>;
 } 
