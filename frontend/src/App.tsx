@@ -14,7 +14,7 @@ const GameSelector: React.FC = () => {
       </header>
       
       <div className="game-options">
-        <Link to="/game/demo-game-1" className="game-option classic">
+        <Link to="/game/heroes-conquest-1" className="game-option classic">
           <div className="game-icon">🏰</div>
           <h2>Heroes Reforged</h2>
           <p>Classic turn-based strategy with async shadow modes</p>
@@ -26,13 +26,13 @@ const GameSelector: React.FC = () => {
         </Link>
         
         <Link to="/temporal" className="game-option temporal">
-          <div className="game-icon">⚡</div>
+          <div className="game-icon">🌀</div>
           <h2>Heroes of Time and Magic</h2>
-          <p>Revolutionary spacetime strategy - plan actions across time dimensions</p>
+          <p>Revolutionary spacetime strategy - explore the epic Temporal Rift map</p>
           <div className="game-features">
-            <span>🕐 Temporal Planning</span>
-            <span>🌀 Entropy System</span>
-            <span>⚔️ Spacetime Conflicts</span>
+            <span>⚡ Temporal Rift Map</span>
+            <span>🏰 Nexus Temporel</span>
+            <span>🔮 Portails Temporels</span>
           </div>
         </Link>
       </div>
@@ -49,7 +49,7 @@ const App: React.FC = () => {
 
   // For now, we'll show a demo game interface
   // In a real app, you'd have proper authentication and game selection
-  const demoGameId = 'demo-game-1';
+  const demoGameId = 'heroes-conquest-1';
 
   return (
     <Router>

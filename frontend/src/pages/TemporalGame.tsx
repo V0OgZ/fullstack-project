@@ -6,6 +6,7 @@ import { TemporalInterface } from '../components/TemporalInterface';
 import { useTemporalStore, useCurrentPlayer, useGameLoop, useEntropyMonitor } from '../store/useTemporalStore';
 import { Player, Position } from '../types/game';
 import { SpacetimePosition, TemporalSpellType, ActionPlan } from '../types/temporal';
+import { temporalMapGenerator } from '../utils/temporalMapGenerator';
 import './TemporalGame.css';
 
 /**
@@ -48,75 +49,116 @@ const TemporalGame: React.FC = () => {
     }
   }, [isInitialized, gameState.players.length, startGameLoop]);
 
-  const initializeTemporalGame = () => {
-    // Create demo players for the temporal game
-    const players: Player[] = [
-      {
-        id: 'player1',
-        username: 'Temporal Master',
-        email: 'temporal@master.com',
-        color: '#00ffff',
-        heroes: [{
-          id: 'hero1',
-          name: 'Chronos',
-          position: { x: 10, y: 10 },
-          level: 1,
-          experience: 0,
-          movementPoints: 10,
-          maxMovementPoints: 10,
-          stats: {
-            attack: 5,
-            defense: 3,
-            knowledge: 8,
-            spellPower: 7
-          },
-          units: [],
-          inventory: [],
-          playerId: 'player1'
-        }],
-        resources: {
-          gold: 1000,
-          wood: 500,
-          stone: 300,
-          mana: 200
-        },
-        isActive: true
-      },
-      {
-        id: 'player2',
-        username: 'Space Weaver',
-        email: 'space@weaver.com',
-        color: '#ff00ff',
-        heroes: [{
-          id: 'hero2',
-          name: 'Aether',
-          position: { x: 20, y: 20 },
-          level: 1,
-          experience: 0,
-          movementPoints: 10,
-          maxMovementPoints: 10,
-          stats: {
-            attack: 4,
-            defense: 4,
-            knowledge: 7,
-            spellPower: 8
-          },
-          units: [],
-          inventory: [],
-          playerId: 'player2'
-        }],
-        resources: {
-          gold: 1000,
-          wood: 500,
-          stone: 300,
-          mana: 200
-        },
-        isActive: true
-      }
-    ];
+  const initializeTemporalGame = async () => {
+    try {
+      // Generate the epic Temporal Rift map
+      const temporalMap = await temporalMapGenerator.generateTemporalRiftMap();
+      console.log('🗺️ Temporal Rift map generated:', temporalMap);
 
-    initializeGame(players);
-    console.log('🎮 Temporal Game initialized with demo players!');
+      // Create demo players for the temporal game using map starting positions
+      const players: Player[] = [
+        {
+          id: 'player1',
+          username: 'Temporal Master',
+          email: 'temporal@master.com',
+          color: '#00ffff',
+          heroes: [{
+            id: 'hero1',
+            name: 'Chronos',
+            position: { x: temporalMap.startingPositions[0].x, y: temporalMap.startingPositions[0].y },
+            level: 1,
+            experience: 0,
+            movementPoints: 10,
+            maxMovementPoints: 10,
+            stats: {
+              attack: 5,
+              defense: 3,
+              knowledge: 8,
+              spellPower: 7
+            },
+            units: [],
+            inventory: [],
+            playerId: 'player1'
+          }],
+          resources: {
+            gold: 1000,
+            wood: 500,
+            stone: 300,
+            mana: 200
+          },
+          isActive: true
+        },
+        {
+          id: 'player2',
+          username: 'Space Weaver',
+          email: 'space@weaver.com',
+          color: '#ff00ff',
+          heroes: [{
+            id: 'hero2',
+            name: 'Aether',
+            position: { x: temporalMap.startingPositions[1].x, y: temporalMap.startingPositions[1].y },
+            level: 1,
+            experience: 0,
+            movementPoints: 10,
+            maxMovementPoints: 10,
+            stats: {
+              attack: 4,
+              defense: 4,
+              knowledge: 7,
+              spellPower: 8
+            },
+            units: [],
+            inventory: [],
+            playerId: 'player2'
+          }],
+          resources: {
+            gold: 1000,
+            wood: 500,
+            stone: 300,
+            mana: 200
+          },
+          isActive: true
+        }
+      ];
+
+      // Initialize game with players positioned according to the map
+      initializeGame(players);
+      console.log('🎮 Temporal Game initialized with Temporal Rift map!');
+      console.log('🏰 Map features:', {
+        name: temporalMap.name,
+        size: temporalMap.size,
+        timelines: temporalMap.timeLines.length,
+        zones: temporalMap.zones.length,
+        victory: temporalMap.victoryConditions.length
+      });
+    } catch (error) {
+      console.error('Failed to initialize temporal game:', error);
+      // Fallback to simple initialization
+      const players: Player[] = [
+        {
+          id: 'player1',
+          username: 'Temporal Master',
+          email: 'temporal@master.com',
+          color: '#00ffff',
+          heroes: [{
+            id: 'hero1',
+            name: 'Chronos',
+            position: { x: 2, y: 7 },
+            level: 1,
+            experience: 0,
+            movementPoints: 10,
+            maxMovementPoints: 10,
+            stats: { attack: 5, defense: 3, knowledge: 8, spellPower: 7 },
+            units: [],
+            inventory: [],
+            playerId: 'player1'
+          }],
+          resources: { gold: 1000, wood: 500, stone: 300, mana: 200 },
+          isActive: true
+        }
+      ];
+      initializeGame(players);
+    }
   };
 
   const handlePlanAction = (action: Omit<ActionPlan, 'id' | 'playerId' | 'plannedAt' | 'status'>) => {
