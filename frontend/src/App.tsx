@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import Game from './pages/Game';
 import BackendTester from './components/BackendTester';
+import MultiplayerSessionManager from './components/MultiplayerSessionManager';
 
 const GameSelector: React.FC = () => {
   return (
@@ -68,6 +69,10 @@ const App: React.FC = () => {
           <Route 
             path="/backend-test" 
             element={<BackendTester />} 
+          />
+          <Route 
+            path="/multiplayer" 
+            element={<MultiplayerSessionManager onSessionJoined={(sessionId) => console.log('Joined session:', sessionId)} onError={(error) => console.error(error)} />} 
           />
           <Route 
             path="/" 

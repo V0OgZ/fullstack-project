@@ -179,6 +179,9 @@ export const CASTLE_TYPES: { [key in CastleType]: {
 
 // Note: UNIT_TYPES moved to backend database
 // Frontend should use: import { unitService } from '../services/unitService';
+
+export const UNIT_TYPES: UnitType[] = [
+  // 🏰 CASTLE UNITS (21 units: 7 tiers × 3 variants)
   
   // Tier 1: Pikeman line
   {
