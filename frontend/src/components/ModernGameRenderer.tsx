@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, { useRef, useEffect, useState, useCallback, useMemo } from 'react';
 import { useGameStore } from '../store/useGameStore';
 import { Position, Tile, Hero } from '../types/game';
 import { useTranslation } from '../i18n';
@@ -23,18 +23,18 @@ interface AnimatedElement {
 const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
-  const { map, currentGame, selectedTile, visibleZFCs } = useGameStore();
+  const { map, currentGame, selectedTile, setSelectedTile, visibleZFCs } = useGameStore();
   const { t } = useTranslation();
   
   const [animatedElements, setAnimatedElements] = useState<AnimatedElement[]>([]);
   const [hoveredTile, setHoveredTile] = useState<Position | null>(null);
 
-  // Configuration du rendu
-  const config = {
+  // Render configuration
+  const config = useMemo(() => ({
     tileSize: 50,
     hexRadius: 25,
-    hexWidth: 43.3, // Math.sqrt(3) * hexRadius
-    hexHeight: 50,  // 2 * hexRadius
+    hexWidth: 43.3,
+    hexHeight: 50,
     offsetX: 50,
     offsetY: 50,
     colors: {
@@ -44,6 +44,7 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
       water: '#2196F3',
       desert: '#FFC107',
       swamp: '#8BC34A',
+      default: '#4CAF50',
       selected: '#FFD700',
       hover: '#FFA726',
       zfc: {
@@ -53,7 +54,7 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
         locked: 'rgba(156, 39, 176, 0.5)'
       }
     }
-  };
+  }), []);
 
   // Conversion coordonnées hexagonales (pointy-top hexagons)
   const hexToPixel = useCallback((hex: Position): Position => {
@@ -271,7 +272,7 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
     ctx.fillRect(x - mpBarWidth/2, y + 35, mpBarWidth * mpRatio, mpBarHeight);
   }, []);
 
-  // Rendu d'une tuile hexagonale
+  // Render hexagonal tile
   const drawHexTile = useCallback((
     ctx: CanvasRenderingContext2D,
     center: Position,
@@ -282,10 +283,10 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
     const { x, y } = center;
     const radius = config.hexRadius;
 
-    // Créer le chemin hexagonal (pointy-top)
+    // Create hexagonal path
     ctx.beginPath();
     for (let i = 0; i < 6; i++) {
-      const angle = (Math.PI / 3) * i - Math.PI / 2; // Ajusté pour pointy-top
+      const angle = (Math.PI / 3) * i - Math.PI / 2;
       const hexX = x + radius * Math.cos(angle);
       const hexY = y + radius * Math.sin(angle);
       if (i === 0) {
@@ -296,12 +297,21 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
     }
     ctx.closePath();
 
-    // Remplir avec la couleur du terrain
-    const baseColor = config.colors[tile.terrain as keyof typeof config.colors] || config.colors.grass;
-    ctx.fillStyle = typeof baseColor === 'string' ? baseColor : config.colors.grass;
+    // Fill with terrain color - Fix the color mapping
+    let baseColor = config.colors.default;
+    const terrainKey = tile.terrain;
+    
+    if (terrainKey && config.colors[terrainKey as keyof typeof config.colors]) {
+      const colorValue = config.colors[terrainKey as keyof typeof config.colors];
+      if (typeof colorValue === 'string') {
+        baseColor = colorValue;
+      }
+    }
+    
+    ctx.fillStyle = baseColor;
     ctx.fill();
 
-    // Effet de survol
+    // Hover effect
     if (isHovered) {
       ctx.fillStyle = config.colors.hover;
       ctx.globalAlpha = 0.3;
@@ -309,7 +319,7 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
       ctx.globalAlpha = 1;
     }
 
-    // Bordure de sélection
+    // Selection border
     if (isSelected) {
       ctx.strokeStyle = config.colors.selected;
       ctx.lineWidth = 3;
@@ -320,29 +330,29 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
       ctx.stroke();
     }
 
-    // Dessiner structure si présente
+    // Draw structure if present
     if (tile.structure) {
       drawStructure(ctx, center, tile.structure);
     }
 
-    // Dessiner créature si présente
+    // Draw creature if present
     if (tile.creature) {
       drawCreature(ctx, center, tile.creature);
     }
 
-    // Dessiner héros si présent
+    // Draw hero if present
     if (tile.hero) {
       drawHero(ctx, center, tile.hero);
     }
   }, [config, drawStructure, drawCreature, drawHero]);
 
-  // Rendu des zones ZFC
+  // Render ZFC zones
   const drawZFCZones = useCallback((ctx: CanvasRenderingContext2D) => {
     visibleZFCs.forEach(zfc => {
       zfc.reachableTiles.forEach(tile => {
         const center = hexToPixel(tile);
         
-        // Dessiner la zone
+        // Draw zone
         ctx.beginPath();
         const radius = config.hexRadius;
         for (let i = 0; i < 6; i++) {
@@ -357,11 +367,11 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
         }
         ctx.closePath();
 
-        // Couleur selon le type de zone
+        // Color by zone type
         ctx.fillStyle = config.colors.zfc.friendly;
         ctx.fill();
         
-        // Bordure animée
+        // Animated border
         const time = Date.now() / 1000;
         const alpha = 0.5 + 0.3 * Math.sin(time * 2);
         ctx.strokeStyle = `rgba(76, 175, 80, ${alpha})`;
@@ -369,7 +379,7 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
         ctx.stroke();
       });
     });
-  }, [visibleZFCs, hexToPixel, config.hexRadius]);
+  }, [visibleZFCs, hexToPixel, config]);
 
   // Rendu des effets de particules
   const drawParticles = useCallback((ctx: CanvasRenderingContext2D) => {
@@ -413,7 +423,7 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
     setAnimatedElements(prev => [...prev, newParticle]);
   }, []);
 
-  // Boucle de rendu principale
+  // Main render loop
   const render = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -421,10 +431,10 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Effacer le canvas
+    // Clear canvas
     ctx.clearRect(0, 0, width, height);
 
-    // Dessiner le fond avec un vrai gradient
+    // Draw gradient background
     const gradient = ctx.createLinearGradient(0, 0, width, height);
     gradient.addColorStop(0, '#1a1a2e');
     gradient.addColorStop(1, '#16213e');
@@ -432,7 +442,7 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
     ctx.fillRect(0, 0, width, height);
 
     if (!map || map.length === 0) {
-      // Message de chargement
+      // Loading message
       ctx.fillStyle = '#FFD700';
       ctx.font = '24px Arial';
       ctx.textAlign = 'center';
@@ -441,10 +451,10 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
       return;
     }
 
-    // Dessiner les zones ZFC en arrière-plan
+    // Draw ZFC zones in background
     drawZFCZones(ctx);
 
-    // Dessiner les tuiles
+    // Draw tiles
     map.forEach((row, y) => {
       row.forEach((tile, x) => {
         const center = hexToPixel({ x, y });
@@ -456,7 +466,7 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
       });
     });
 
-    // Dessiner les héros de tous les joueurs
+    // Draw all player heroes
     if (currentGame && currentGame.players) {
       currentGame.players.forEach(player => {
         player.heroes.forEach(hero => {
@@ -466,12 +476,12 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
       });
     }
 
-    // Dessiner les effets de particules
+    // Draw particle effects
     drawParticles(ctx);
 
-    // Programmer le prochain rendu
+    // Schedule next render
     animationRef.current = requestAnimationFrame(render);
-  }, [map, selectedTile, hoveredTile, width, height, drawZFCZones, drawHexTile, drawParticles, hexToPixel, currentGame, t]);
+  }, [map, selectedTile, hoveredTile, width, height, drawZFCZones, drawHexTile, drawParticles, hexToPixel, currentGame, drawHero, t]);
 
   // Gestion des événements de souris
   const handleMouseMove = useCallback((event: React.MouseEvent) => {
@@ -508,13 +518,12 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
     
     if (map && hexCoord.y >= 0 && hexCoord.y < map.length && 
         hexCoord.x >= 0 && hexCoord.x < map[0].length) {
-      const { setSelectedTile } = useGameStore.getState();
       setSelectedTile(hexCoord);
       
       // Ajouter un effet de particule au clic
       addParticleEffect(hexCoord, '#FFD700');
     }
-  }, [map, pixelToHex, addParticleEffect]);
+  }, [map, pixelToHex, setSelectedTile, addParticleEffect]);
 
   // Initialiser le rendu
   useEffect(() => {
@@ -532,11 +541,13 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
       ref={canvasRef}
       width={width}
       height={height}
-      className="game-canvas"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
       onClick={handleClick}
-      style={{ cursor: 'crosshair' }}
+      style={{
+        border: '1px solid #444',
+        borderRadius: '8px',
+        cursor: 'crosshair',
+        imageRendering: 'pixelated'
+      }}
     />
   );
 };
