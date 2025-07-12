@@ -101,7 +101,7 @@ const SimpleGameInterface: React.FC = () => {
             margin: 0, 
             color: '#00d4ff' 
           }}>
-            Heroes Reforged
+            ⚔️ Heroes of Time
           </h1>
           <div style={{ 
             display: 'flex', 
@@ -110,113 +110,79 @@ const SimpleGameInterface: React.FC = () => {
             color: '#b0b0b0', 
             fontSize: '14px' 
           }}>
-            <span>{t('turn')} {currentGame.currentTurn}</span>
+            <span>🎯 {t('turn')} {currentGame.currentTurn}</span>
             <span style={{ color: '#606060' }}>•</span>
-            <span>{currentPlayer.username}</span>
+            <span>👤 {currentPlayer.username}</span>
           </div>
         </div>
 
-        {/* Resources */}
-        <div style={{ display: 'flex', gap: '20px' }}>
-          <div style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            gap: '8px', 
-            padding: '8px 16px', 
-            background: '#333333', 
-            borderRadius: '8px', 
-            border: '1px solid #404040' 
-          }}>
-            <span style={{ fontSize: '18px' }}>💰</span>
-            <span style={{ 
-              fontWeight: '600', 
-              color: '#ffffff', 
-              fontFamily: 'JetBrains Mono, monospace' 
+        {/* Resources with cool icons */}
+        <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', gap: '20px' }}>
+            <div style={{
+              display: 'flex', alignItems: 'center', gap: '8px',
+              padding: '8px 16px', background: '#333333', borderRadius: '8px',
+              border: '1px solid #404040'
             }}>
-              {currentPlayer.resources.gold}
-            </span>
-          </div>
-          <div style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            gap: '8px', 
-            padding: '8px 16px', 
-            background: '#333333', 
-            borderRadius: '8px', 
-            border: '1px solid #404040' 
-          }}>
-            <span style={{ fontSize: '18px' }}>🪵</span>
-            <span style={{ 
-              fontWeight: '600', 
-              color: '#ffffff', 
-              fontFamily: 'JetBrains Mono, monospace' 
+              <span style={{ fontSize: '18px' }}>💰</span>
+              <span style={{ fontWeight: '600', color: '#FFD700', fontFamily: 'JetBrains Mono, monospace' }}>
+                {currentPlayer.resources?.gold?.toLocaleString() || '0'}
+              </span>
+            </div>
+            <div style={{
+              display: 'flex', alignItems: 'center', gap: '8px',
+              padding: '8px 16px', background: '#333333', borderRadius: '8px',
+              border: '1px solid #404040'
             }}>
-              {currentPlayer.resources.wood}
-            </span>
-          </div>
-          <div style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            gap: '8px', 
-            padding: '8px 16px', 
-            background: '#333333', 
-            borderRadius: '8px', 
-            border: '1px solid #404040' 
-          }}>
-            <span style={{ fontSize: '18px' }}>🗿</span>
-            <span style={{ 
-              fontWeight: '600', 
-              color: '#ffffff', 
-              fontFamily: 'JetBrains Mono, monospace' 
+              <span style={{ fontSize: '18px' }}>🪵</span>
+              <span style={{ fontWeight: '600', color: '#8B4513', fontFamily: 'JetBrains Mono, monospace' }}>
+                {currentPlayer.resources?.wood || '0'}
+              </span>
+            </div>
+            <div style={{
+              display: 'flex', alignItems: 'center', gap: '8px',
+              padding: '8px 16px', background: '#333333', borderRadius: '8px',
+              border: '1px solid #404040'
             }}>
-              {currentPlayer.resources.stone}
-            </span>
-          </div>
-          <div style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            gap: '8px', 
-            padding: '8px 16px', 
-            background: '#333333', 
-            borderRadius: '8px', 
-            border: '1px solid #404040' 
-          }}>
-            <span style={{ fontSize: '18px' }}>💎</span>
-            <span style={{ 
-              fontWeight: '600', 
-              color: '#ffffff', 
-              fontFamily: 'JetBrains Mono, monospace' 
+              <span style={{ fontSize: '18px' }}>🪨</span>
+              <span style={{ fontWeight: '600', color: '#708090', fontFamily: 'JetBrains Mono, monospace' }}>
+                {currentPlayer.resources?.stone || '0'}
+              </span>
+            </div>
+            <div style={{
+              display: 'flex', alignItems: 'center', gap: '8px',
+              padding: '8px 16px', background: '#333333', borderRadius: '8px',
+              border: '1px solid #404040'
             }}>
-              {currentPlayer.resources.mana}
-            </span>
+              <span style={{ fontSize: '18px' }}>💎</span>
+              <span style={{ fontWeight: '600', color: '#00BFFF', fontFamily: 'JetBrains Mono, monospace' }}>
+                {currentPlayer.resources?.mana || '0'}
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* Actions */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-          <button 
-            onClick={handleEndTurn}
-            style={{
-              padding: '10px 20px',
-              border: 'none',
-              borderRadius: '6px',
-              fontWeight: '500',
-              cursor: 'pointer',
-              fontSize: '14px',
-              background: '#00d4ff',
-              color: '#1a1a1a',
-              transition: 'all 0.2s ease'
-            }}
+          <button style={{
+            padding: '10px 20px', border: 'none', borderRadius: '6px',
+            fontWeight: '500', cursor: 'pointer', fontSize: '14px',
+            background: '#00d4ff', color: '#1a1a1a',
+            transition: 'all 0.2s ease'
+          }}
             onMouseOver={(e) => {
               e.currentTarget.style.background = '#00b8e6';
               e.currentTarget.style.transform = 'translateY(-1px)';
             }}
             onMouseOut={(e) => {
               e.currentTarget.style.background = '#00d4ff';
-              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.transform = 'translateY(0px)';
+            }}
+            onClick={() => {
+              // TODO: Implement end turn
+              console.log('⏭️ End turn');
             }}
           >
-            {currentGame.gameMode === 'hotseat' ? t('nextPlayer') : t('endTurn')}
+            ⏭️ {t('endTurn')}
           </button>
           
           <div style={{ 
@@ -350,7 +316,7 @@ const SimpleGameInterface: React.FC = () => {
                 gap: '4px',
                 marginBottom: '16px'
               }}>
-                {(['heroes', 'map', 'structures'] as const).map(tab => (
+                {(['heroes', 'actions', 'structures'] as const).map(tab => (
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
@@ -379,7 +345,7 @@ const SimpleGameInterface: React.FC = () => {
                       }
                     }}
                   >
-                    {tab === 'heroes' ? '⚔️ Heroes' : tab === 'map' ? '🗺️ Map' : '🏰 Structures'}
+                    {tab === 'heroes' ? '⚔️ Heroes' : tab === 'actions' ? '🎯 Actions' : '🏰 Buildings'}
                   </button>
                 ))}
               </div>
@@ -393,19 +359,23 @@ const SimpleGameInterface: React.FC = () => {
             }}>
               {/* Heroes Tab */}
               {activeTab === 'heroes' && (
-                <div>
-                  {currentPlayer.heroes.map(hero => (
-                    <div 
-                      key={hero.id} 
-                      style={{
-                        background: '#333333',
-                        borderRadius: '8px',
-                        padding: '16px',
-                        marginBottom: '12px',
-                        border: '1px solid #404040',
-                        transition: 'all 0.2s ease',
-                        cursor: 'pointer'
-                      }}
+                <div style={{ padding: '15px' }}>
+                  <h3 style={{ 
+                    margin: '0 0 15px 0', 
+                    fontSize: '16px', 
+                    color: '#ffffff',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px'
+                  }}>
+                    ⚔️ Your Heroes ({mockHeroes.length})
+                  </h3>
+                  {mockHeroes.map(hero => (
+                    <div key={hero.id} style={{
+                      background: '#333333', borderRadius: '8px', padding: '12px',
+                      marginBottom: '10px', border: '1px solid #404040',
+                      transition: 'all 0.2s ease', cursor: 'pointer'
+                    }}
                       onMouseOver={(e) => {
                         e.currentTarget.style.background = '#3a3a3a';
                         e.currentTarget.style.borderColor = '#00d4ff';
@@ -414,97 +384,58 @@ const SimpleGameInterface: React.FC = () => {
                       onMouseOut={(e) => {
                         e.currentTarget.style.background = '#333333';
                         e.currentTarget.style.borderColor = '#404040';
-                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.transform = 'translateY(0px)';
                       }}
                     >
                       <div style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        marginBottom: '12px'
+                        display: 'flex', justifyContent: 'space-between',
+                        alignItems: 'center', marginBottom: '8px'
                       }}>
                         <span style={{ 
                           fontWeight: '600', 
                           color: '#ffffff', 
-                          fontSize: '16px' 
+                          fontSize: '14px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '6px'
                         }}>
-                          {hero.name}
+                          🛡️ {hero.name}
                         </span>
                         <span style={{
-                          background: '#00d4ff',
-                          color: '#1a1a1a',
-                          padding: '4px 8px',
-                          borderRadius: '4px',
-                          fontSize: '12px',
-                          fontWeight: '600'
+                          background: '#00d4ff', color: '#1a1a1a',
+                          padding: '3px 8px', borderRadius: '4px',
+                          fontSize: '11px', fontWeight: '600'
                         }}>
-                          Niv. {hero.level}
+                          ⭐ LVL {hero.level}
                         </span>
                       </div>
-                      
-                      {/* Hero Stats */}
-                      <div style={{ 
-                        display: 'grid',
-                        gridTemplateColumns: '1fr 1fr',
-                        gap: '8px',
-                        marginBottom: '12px'
-                      }}>
-                        <div style={{ background: '#404040', padding: '6px', borderRadius: '4px' }}>
-                          <div style={{ fontSize: '10px', color: '#b0b0b0' }}>Attack</div>
-                          <div style={{ fontSize: '14px', fontWeight: '600', color: '#ffffff' }}>
-                            {hero.stats.attack}
-                          </div>
-                        </div>
-                        <div style={{ background: '#404040', padding: '6px', borderRadius: '4px' }}>
-                          <div style={{ fontSize: '10px', color: '#b0b0b0' }}>Defense</div>
-                          <div style={{ fontSize: '14px', fontWeight: '600', color: '#ffffff' }}>
-                            {hero.stats.defense}
-                          </div>
-                        </div>
-                        <div style={{ background: '#404040', padding: '6px', borderRadius: '4px' }}>
-                          <div style={{ fontSize: '10px', color: '#b0b0b0' }}>Knowledge</div>
-                          <div style={{ fontSize: '14px', fontWeight: '600', color: '#ffffff' }}>
-                            {hero.stats.knowledge}
-                          </div>
-                        </div>
-                        <div style={{ background: '#404040', padding: '6px', borderRadius: '4px' }}>
-                          <div style={{ fontSize: '10px', color: '#b0b0b0' }}>Spell Power</div>
-                          <div style={{ fontSize: '14px', fontWeight: '600', color: '#ffffff' }}>
-                            {hero.stats.spellPower}
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Basic Info */}
-                      <div style={{ 
-                        display: 'flex', 
-                        flexDirection: 'column', 
-                        gap: '4px',
-                        fontSize: '12px'
+                      <div style={{
+                        display: 'grid', gridTemplateColumns: '1fr 1fr',
+                        gap: '6px', fontSize: '11px'
                       }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                          <span style={{ color: '#b0b0b0' }}>Position:</span>
-                          <span style={{ color: '#ffffff', fontWeight: '500' }}>
-                            ({hero.position.x}, {hero.position.y})
-                          </span>
+                          <span style={{ color: '#b0b0b0' }}>⚔️ Attack:</span>
+                          <span style={{ color: '#ff6b6b', fontWeight: '500' }}>{hero.attack}</span>
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                          <span style={{ color: '#b0b0b0' }}>Movement:</span>
-                          <span style={{ color: '#ffffff', fontWeight: '500' }}>
-                            {hero.movementPoints}/{hero.maxMovementPoints}
-                          </span>
+                          <span style={{ color: '#b0b0b0' }}>🛡️ Defense:</span>
+                          <span style={{ color: '#4ecdc4', fontWeight: '500' }}>{hero.defense}</span>
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                          <span style={{ color: '#b0b0b0' }}>Experience:</span>
-                          <span style={{ color: '#ffffff', fontWeight: '500' }}>
-                            {hero.experience}
-                          </span>
+                          <span style={{ color: '#b0b0b0' }}>📚 Knowledge:</span>
+                          <span style={{ color: '#45b7d1', fontWeight: '500' }}>{hero.knowledge}</span>
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                          <span style={{ color: '#b0b0b0' }}>Units:</span>
-                          <span style={{ color: '#ffffff', fontWeight: '500' }}>
-                            {hero.units.length}
-                          </span>
+                          <span style={{ color: '#b0b0b0' }}>🔮 Spell Power:</span>
+                          <span style={{ color: '#9b59b6', fontWeight: '500' }}>{hero.spellPower}</span>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                          <span style={{ color: '#b0b0b0' }}>🏃 Movement:</span>
+                          <span style={{ color: '#f39c12', fontWeight: '500' }}>{hero.movementPoints}</span>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                          <span style={{ color: '#b0b0b0' }}>📍 Position:</span>
+                          <span style={{ color: '#95a5a6', fontWeight: '500' }}>({hero.position.x},{hero.position.y})</span>
                         </div>
                       </div>
                     </div>
@@ -588,84 +519,247 @@ const SimpleGameInterface: React.FC = () => {
 
               {/* Structures Tab */}
               {activeTab === 'structures' && (
-                <div>
-                  {playerStructures.length > 0 ? (
-                    playerStructures.map(structure => (
-                      <div 
-                        key={structure.id}
-                        style={{
-                          background: '#333333',
-                          borderRadius: '8px',
-                          padding: '16px',
-                          marginBottom: '12px',
-                          border: '1px solid #404040',
-                          cursor: 'pointer'
-                        }}
-                      >
-                        <div style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'space-between',
-                          marginBottom: '8px'
-                        }}>
-                          <span style={{ 
-                            fontWeight: '600', 
-                            color: '#ffffff', 
-                            fontSize: '14px' 
-                          }}>
-                            {structure.name}
-                          </span>
-                          <span style={{
-                            background: '#4ecdc4',
-                            color: '#1a1a1a',
-                            padding: '2px 6px',
-                            borderRadius: '4px',
-                            fontSize: '10px',
-                            fontWeight: '600'
-                          }}>
-                            Lv. {structure.level}
-                          </span>
+                <div style={{ padding: '15px' }}>
+                  <h3 style={{ 
+                    margin: '0 0 15px 0', 
+                    fontSize: '16px', 
+                    color: '#ffffff',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px'
+                  }}>
+                    🏰 Your Structures
+                  </h3>
+                  
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                    <div style={{
+                      background: '#333333', borderRadius: '8px', padding: '12px',
+                      border: '1px solid #404040'
+                    }}>
+                      <h4 style={{ 
+                        margin: '0 0 8px 0', 
+                        color: '#e74c3c',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px'
+                      }}>
+                        🏛️ Main Castle
+                      </h4>
+                      <div style={{ fontSize: '12px', color: '#b0b0b0' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                          <span>⭐ Level:</span>
+                          <span style={{ color: '#f39c12' }}>3</span>
                         </div>
-                        
-                        <div style={{ 
-                          display: 'flex', 
-                          flexDirection: 'column', 
-                          gap: '4px',
-                          fontSize: '12px'
-                        }}>
-                          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <span style={{ color: '#b0b0b0' }}>Type:</span>
-                            <span style={{ color: '#ffffff', fontWeight: '500' }}>
-                              {structure.type}
-                            </span>
-                          </div>
-                          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <span style={{ color: '#b0b0b0' }}>Position:</span>
-                            <span style={{ color: '#ffffff', fontWeight: '500' }}>
-                              ({structure.position.x}, {structure.position.y})
-                            </span>
-                          </div>
-                          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <span style={{ color: '#b0b0b0' }}>Health:</span>
-                            <span style={{ color: '#ffffff', fontWeight: '500' }}>
-                              {structure.health}
-                            </span>
-                          </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                          <span>🛡️ Defense:</span>
+                          <span style={{ color: '#2ecc71' }}>85</span>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                          <span>👥 Garrison:</span>
+                          <span style={{ color: '#3498db' }}>120 units</span>
                         </div>
                       </div>
-                    ))
-                  ) : (
-                    <div style={{
-                      background: '#333333',
-                      borderRadius: '8px',
-                      padding: '16px',
-                      border: '1px solid #404040',
-                      textAlign: 'center',
-                      color: '#b0b0b0'
-                    }}>
-                      No structures owned
                     </div>
-                  )}
+                    
+                    <div style={{
+                      background: '#333333', borderRadius: '8px', padding: '12px',
+                      border: '1px solid #404040'
+                    }}>
+                      <h4 style={{ 
+                        margin: '0 0 8px 0', 
+                        color: '#f39c12',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px'
+                      }}>
+                        ⛏️ Gold Mine
+                      </h4>
+                      <div style={{ fontSize: '12px', color: '#b0b0b0' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                          <span>💰 Production:</span>
+                          <span style={{ color: '#f1c40f' }}>+1000/day</span>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                          <span>🔧 Status:</span>
+                          <span style={{ color: '#2ecc71' }}>Active</span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div style={{
+                      background: '#333333', borderRadius: '8px', padding: '12px',
+                      border: '1px solid #404040'
+                    }}>
+                      <h4 style={{ 
+                        margin: '0 0 8px 0', 
+                        color: '#27ae60',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px'
+                      }}>
+                        🌲 Sawmill
+                      </h4>
+                      <div style={{ fontSize: '12px', color: '#b0b0b0' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                          <span>🪵 Production:</span>
+                          <span style={{ color: '#8B4513' }}>+7/day</span>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                          <span>🔧 Status:</span>
+                          <span style={{ color: '#2ecc71' }}>Active</span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <button style={{
+                      marginTop: '10px',
+                      padding: '10px 15px', background: '#3498db', border: 'none',
+                      borderRadius: '6px', color: 'white', cursor: 'pointer',
+                      fontWeight: '500', transition: 'all 0.2s ease',
+                      display: 'flex', alignItems: 'center', gap: '8px',
+                      justifyContent: 'center'
+                    }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.background = '#2980b9';
+                        e.currentTarget.style.transform = 'translateY(-1px)';
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.background = '#3498db';
+                        e.currentTarget.style.transform = 'translateY(0px)';
+                      }}
+                    >
+                      🔨 Build New Structure
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 'actions' && (
+                <div style={{ padding: '15px' }}>
+                  <h3 style={{ 
+                    margin: '0 0 15px 0', 
+                    fontSize: '16px', 
+                    color: '#ffffff',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px'
+                  }}>
+                    🎯 Available Actions
+                  </h3>
+                  
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    <button style={{
+                      padding: '10px 15px', background: '#2ecc71', border: 'none',
+                      borderRadius: '6px', color: 'white', cursor: 'pointer',
+                      fontWeight: '500', transition: 'all 0.2s ease',
+                      display: 'flex', alignItems: 'center', gap: '8px'
+                    }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.background = '#27ae60';
+                        e.currentTarget.style.transform = 'translateY(-1px)';
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.background = '#2ecc71';
+                        e.currentTarget.style.transform = 'translateY(0px)';
+                      }}
+                    >
+                      🚶 Move Hero
+                    </button>
+                    
+                    <button style={{
+                      padding: '10px 15px', background: '#e74c3c', border: 'none',
+                      borderRadius: '6px', color: 'white', cursor: 'pointer',
+                      fontWeight: '500', transition: 'all 0.2s ease',
+                      display: 'flex', alignItems: 'center', gap: '8px'
+                    }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.background = '#c0392b';
+                        e.currentTarget.style.transform = 'translateY(-1px)';
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.background = '#e74c3c';
+                        e.currentTarget.style.transform = 'translateY(0px)';
+                      }}
+                    >
+                      ⚔️ Attack Enemy
+                    </button>
+                    
+                    <button style={{
+                      padding: '10px 15px', background: '#f39c12', border: 'none',
+                      borderRadius: '6px', color: 'white', cursor: 'pointer',
+                      fontWeight: '500', transition: 'all 0.2s ease',
+                      display: 'flex', alignItems: 'center', gap: '8px'
+                    }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.background = '#e67e22';
+                        e.currentTarget.style.transform = 'translateY(-1px)';
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.background = '#f39c12';
+                        e.currentTarget.style.transform = 'translateY(0px)';
+                      }}
+                    >
+                      💎 Collect Resources
+                    </button>
+                    
+                    <button style={{
+                      padding: '10px 15px', background: '#9b59b6', border: 'none',
+                      borderRadius: '6px', color: 'white', cursor: 'pointer',
+                      fontWeight: '500', transition: 'all 0.2s ease',
+                      display: 'flex', alignItems: 'center', gap: '8px'
+                    }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.background = '#8e44ad';
+                        e.currentTarget.style.transform = 'translateY(-1px)';
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.background = '#9b59b6';
+                        e.currentTarget.style.transform = 'translateY(0px)';
+                      }}
+                    >
+                      ✨ Cast Spell
+                    </button>
+                    
+                    <button style={{
+                      padding: '10px 15px', background: '#34495e', border: 'none',
+                      borderRadius: '6px', color: 'white', cursor: 'pointer',
+                      fontWeight: '500', transition: 'all 0.2s ease',
+                      display: 'flex', alignItems: 'center', gap: '8px'
+                    }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.background = '#2c3e50';
+                        e.currentTarget.style.transform = 'translateY(-1px)';
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.background = '#34495e';
+                        e.currentTarget.style.transform = 'translateY(0px)';
+                      }}
+                    >
+                      🏰 Build Structure
+                    </button>
+                  </div>
+                  
+                  <div style={{ 
+                    marginTop: '20px', 
+                    padding: '12px', 
+                    background: 'rgba(52, 152, 219, 0.1)',
+                    border: '1px solid rgba(52, 152, 219, 0.3)',
+                    borderRadius: '8px'
+                  }}>
+                    <h4 style={{ 
+                      margin: '0 0 8px 0', 
+                      color: '#3498db',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px'
+                    }}>
+                      💡 Quick Tips
+                    </h4>
+                    <p style={{ margin: 0, fontSize: '12px', color: '#b0b0b0', lineHeight: '1.4' }}>
+                      🎯 Click on a hero first, then choose an action. 
+                      ⚡ Use hotkeys for faster gameplay!
+                    </p>
+                  </div>
                 </div>
               )}
             </div>

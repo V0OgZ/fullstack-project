@@ -27,7 +27,7 @@ const MagicInventory: React.FC<MagicInventoryProps> = ({
   const [selectedRarity, setSelectedRarity] = useState<string>('all');
   const [selectedType, setSelectedType] = useState<string>('all');
   const [sortBy, setSortBy] = useState<string>('name');
-  const [showOnlyOwned, setShowOnlyOwned] = useState(false);
+  const [showOnlyOwned, setShowOnlyOwned] = useState(false); // Set to false so all items show by default
   const [layoutVertical, setLayoutVertical] = useState(true);
 
   // Helper function to get object name
