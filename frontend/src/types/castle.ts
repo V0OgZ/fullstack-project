@@ -868,8 +868,369 @@ export const UNIT_TYPES: UnitType[] = [
     aiValue: 4000
   },
 
-  // Continue with more castles... (Castle and Rampart complete)
-  // TODO: Implement remaining 126 units (6 more castles × 21 units)
+  // 🔮 TOWER UNITS (21 units: 7 tiers × 3 variants)
+  
+  // Tier 1: Gremlin line
+  {
+    id: 'tower_gremlin_basic',
+    name: 'Gremlin',
+    castle: 'tower',
+    tier: 1,
+    variant: 'basic',
+    stats: { attack: 3, defense: 3, health: 4, damage: [1, 2], speed: 4 },
+    abilities: [{ id: 'mechanical_repair', name: 'Mechanical Repair', description: 'Can repair mechanical units', type: 'active', cooldown: 5 }],
+    cost: { gold: 30, ore: 2 },
+    growth: 16,
+    aiValue: 30
+  },
+  {
+    id: 'tower_gremlin_upgraded',
+    name: 'Master Gremlin',
+    castle: 'tower',
+    tier: 1,
+    variant: 'upgraded',
+    stats: { attack: 4, defense: 4, health: 4, damage: [1, 2], speed: 5, shots: 8 },
+    abilities: [
+      { id: 'mechanical_repair', name: 'Mechanical Repair', description: 'Can repair mechanical units', type: 'active', cooldown: 3 },
+      { id: 'ranged_attack', name: 'Ranged Attack', description: 'Can attack from distance', type: 'passive' }
+    ],
+    cost: { gold: 40, ore: 2 },
+    growth: 16,
+    aiValue: 40
+  },
+  {
+    id: 'tower_gremlin_champion',
+    name: 'Gremlin Engineer',
+    castle: 'tower',
+    tier: 1,
+    variant: 'champion',
+    stats: { attack: 6, defense: 6, health: 6, damage: [2, 3], speed: 6, shots: 12 },
+    abilities: [
+      { id: 'mechanical_repair', name: 'Mechanical Repair', description: 'Can repair mechanical units', type: 'active', cooldown: 2 },
+      { id: 'ranged_attack', name: 'Ranged Attack', description: 'Can attack from distance', type: 'passive' },
+      { id: 'invention', name: 'Invention', description: 'Can create temporary mechanical constructs', type: 'active', cooldown: 8 }
+    ],
+    cost: { gold: 60, ore: 3, crystal: 1 },
+    growth: 16,
+    aiValue: 60
+  },
+
+  // Tier 2: Stone Gargoyle line
+  {
+    id: 'tower_gargoyle_basic',
+    name: 'Stone Gargoyle',
+    castle: 'tower',
+    tier: 2,
+    variant: 'basic',
+    stats: { attack: 6, defense: 6, health: 16, damage: [2, 3], speed: 6 },
+    abilities: [
+      { id: 'flying', name: 'Flying', description: 'Can fly over obstacles', type: 'passive' },
+      { id: 'unliving', name: 'Unliving', description: 'Immune to mind spells', type: 'passive' }
+    ],
+    cost: { gold: 130, stone: 5 },
+    growth: 9,
+    aiValue: 130
+  },
+  {
+    id: 'tower_gargoyle_upgraded',
+    name: 'Obsidian Gargoyle',
+    castle: 'tower',
+    tier: 2,
+    variant: 'upgraded',
+    stats: { attack: 7, defense: 7, health: 16, damage: [2, 3], speed: 9 },
+    abilities: [
+      { id: 'flying', name: 'Flying', description: 'Can fly over obstacles', type: 'passive' },
+      { id: 'unliving', name: 'Unliving', description: 'Immune to mind spells', type: 'passive' },
+      { id: 'damage_resistance', name: 'Damage Resistance', description: 'Reduced damage from physical attacks', type: 'passive' }
+    ],
+    cost: { gold: 160, stone: 5 },
+    growth: 9,
+    aiValue: 160
+  },
+  {
+    id: 'tower_gargoyle_champion',
+    name: 'Marble Gargoyle',
+    castle: 'tower',
+    tier: 2,
+    variant: 'champion',
+    stats: { attack: 9, defense: 9, health: 20, damage: [3, 4], speed: 11 },
+    abilities: [
+      { id: 'flying', name: 'Flying', description: 'Can fly over obstacles', type: 'passive' },
+      { id: 'unliving', name: 'Unliving', description: 'Immune to mind spells', type: 'passive' },
+      { id: 'damage_resistance', name: 'Damage Resistance', description: 'Reduced damage from physical attacks', type: 'passive' },
+      { id: 'stone_skin', name: 'Stone Skin', description: 'Magical armor that reduces all damage', type: 'passive' }
+    ],
+    cost: { gold: 200, stone: 8, crystal: 2 },
+    growth: 9,
+    aiValue: 200
+  },
+
+  // Tier 3: Stone Golem line
+  {
+    id: 'tower_golem_basic',
+    name: 'Stone Golem',
+    castle: 'tower',
+    tier: 3,
+    variant: 'basic',
+    stats: { attack: 7, defense: 10, health: 30, damage: [4, 5], speed: 3 },
+    abilities: [
+      { id: 'unliving', name: 'Unliving', description: 'Immune to mind spells', type: 'passive' },
+      { id: 'magic_resistance', name: 'Magic Resistance', description: '50% magic damage reduction', type: 'passive' },
+      { id: 'spell_immunity', name: 'Spell Immunity', description: 'Immune to spells below level 2', type: 'passive' }
+    ],
+    cost: { gold: 250, stone: 15 },
+    growth: 6,
+    aiValue: 250
+  },
+  {
+    id: 'tower_golem_upgraded',
+    name: 'Iron Golem',
+    castle: 'tower',
+    tier: 3,
+    variant: 'upgraded',
+    stats: { attack: 9, defense: 10, health: 35, damage: [4, 5], speed: 5 },
+    abilities: [
+      { id: 'unliving', name: 'Unliving', description: 'Immune to mind spells', type: 'passive' },
+      { id: 'magic_resistance', name: 'Magic Resistance', description: '75% magic damage reduction', type: 'passive' },
+      { id: 'spell_immunity', name: 'Spell Immunity', description: 'Immune to spells below level 3', type: 'passive' }
+    ],
+    cost: { gold: 300, stone: 15, ore: 5 },
+    growth: 6,
+    aiValue: 300
+  },
+  {
+    id: 'tower_golem_champion',
+    name: 'Adamantine Golem',
+    castle: 'tower',
+    tier: 3,
+    variant: 'champion',
+    stats: { attack: 11, defense: 12, health: 40, damage: [5, 7], speed: 7 },
+    abilities: [
+      { id: 'unliving', name: 'Unliving', description: 'Immune to mind spells', type: 'passive' },
+      { id: 'magic_resistance', name: 'Magic Resistance', description: '90% magic damage reduction', type: 'passive' },
+      { id: 'spell_immunity', name: 'Spell Immunity', description: 'Immune to spells below level 4', type: 'passive' },
+      { id: 'adamantine_shell', name: 'Adamantine Shell', description: 'Reflects 25% of damage back to attacker', type: 'passive' }
+    ],
+    cost: { gold: 400, stone: 20, ore: 10, crystal: 3 },
+    growth: 6,
+    aiValue: 400
+  },
+
+  // Tier 4: Mage line
+  {
+    id: 'tower_mage_basic',
+    name: 'Mage',
+    castle: 'tower',
+    tier: 4,
+    variant: 'basic',
+    stats: { attack: 11, defense: 8, health: 25, damage: [7, 9], speed: 5, shots: 12 },
+    abilities: [
+      { id: 'ranged_attack', name: 'Ranged Attack', description: 'Can attack from distance', type: 'passive' },
+      { id: 'spell_casting', name: 'Spell Casting', description: 'Can cast spells in combat', type: 'active', cooldown: 4 },
+      { id: 'no_melee_penalty', name: 'No Melee Penalty', description: 'No penalty for ranged attacks in melee', type: 'passive' }
+    ],
+    cost: { gold: 350, crystal: 8 },
+    growth: 4,
+    aiValue: 350
+  },
+  {
+    id: 'tower_mage_upgraded',
+    name: 'Arch Mage',
+    castle: 'tower',
+    tier: 4,
+    variant: 'upgraded',
+    stats: { attack: 12, defense: 9, health: 30, damage: [7, 9], speed: 7, shots: 24 },
+    abilities: [
+      { id: 'ranged_attack', name: 'Ranged Attack', description: 'Can attack from distance', type: 'passive' },
+      { id: 'spell_casting', name: 'Spell Casting', description: 'Can cast spells in combat', type: 'active', cooldown: 3 },
+      { id: 'no_melee_penalty', name: 'No Melee Penalty', description: 'No penalty for ranged attacks in melee', type: 'passive' },
+      { id: 'magic_channel', name: 'Magic Channel', description: 'Can channel spells without mana cost', type: 'active', cooldown: 6 }
+    ],
+    cost: { gold: 450, crystal: 8 },
+    growth: 4,
+    aiValue: 450
+  },
+  {
+    id: 'tower_mage_champion',
+    name: 'Arcane Master',
+    castle: 'tower',
+    tier: 4,
+    variant: 'champion',
+    stats: { attack: 14, defense: 11, health: 35, damage: [8, 12], speed: 9, shots: 32 },
+    abilities: [
+      { id: 'ranged_attack', name: 'Ranged Attack', description: 'Can attack from distance', type: 'passive' },
+      { id: 'spell_casting', name: 'Spell Casting', description: 'Can cast spells in combat', type: 'active', cooldown: 2 },
+      { id: 'no_melee_penalty', name: 'No Melee Penalty', description: 'No penalty for ranged attacks in melee', type: 'passive' },
+      { id: 'magic_channel', name: 'Magic Channel', description: 'Can channel spells without mana cost', type: 'active', cooldown: 4 },
+      { id: 'arcane_mastery', name: 'Arcane Mastery', description: 'Spells have enhanced effects', type: 'passive' }
+    ],
+    cost: { gold: 600, crystal: 12, gems: 3 },
+    growth: 4,
+    aiValue: 600
+  },
+
+  // Tier 5: Genie line
+  {
+    id: 'tower_genie_basic',
+    name: 'Genie',
+    castle: 'tower',
+    tier: 5,
+    variant: 'basic',
+    stats: { attack: 12, defense: 12, health: 40, damage: [13, 16], speed: 7 },
+    abilities: [
+      { id: 'flying', name: 'Flying', description: 'Can fly over obstacles', type: 'passive' },
+      { id: 'spell_casting', name: 'Spell Casting', description: 'Can cast spells in combat', type: 'active', cooldown: 3 },
+      { id: 'hate_efreet', name: 'Hate Efreet', description: 'Deals +50% damage to Efreet', type: 'passive' }
+    ],
+    cost: { gold: 550, gems: 5 },
+    growth: 3,
+    aiValue: 550
+  },
+  {
+    id: 'tower_genie_upgraded',
+    name: 'Master Genie',
+    castle: 'tower',
+    tier: 5,
+    variant: 'upgraded',
+    stats: { attack: 12, defense: 12, health: 40, damage: [13, 16], speed: 11 },
+    abilities: [
+      { id: 'flying', name: 'Flying', description: 'Can fly over obstacles', type: 'passive' },
+      { id: 'spell_casting', name: 'Spell Casting', description: 'Can cast spells in combat', type: 'active', cooldown: 2 },
+      { id: 'hate_efreet', name: 'Hate Efreet', description: 'Deals +50% damage to Efreet', type: 'passive' },
+      { id: 'spell_immunity', name: 'Spell Immunity', description: 'Immune to spells below level 4', type: 'passive' }
+    ],
+    cost: { gold: 650, gems: 5 },
+    growth: 3,
+    aiValue: 650
+  },
+  {
+    id: 'tower_genie_champion',
+    name: 'Djinn Sultan',
+    castle: 'tower',
+    tier: 5,
+    variant: 'champion',
+    stats: { attack: 14, defense: 14, health: 50, damage: [15, 20], speed: 13 },
+    abilities: [
+      { id: 'flying', name: 'Flying', description: 'Can fly over obstacles', type: 'passive' },
+      { id: 'spell_casting', name: 'Spell Casting', description: 'Can cast spells in combat', type: 'active', cooldown: 2 },
+      { id: 'hate_efreet', name: 'Hate Efreet', description: 'Deals +100% damage to Efreet', type: 'passive' },
+      { id: 'spell_immunity', name: 'Spell Immunity', description: 'Immune to spells below level 5', type: 'passive' },
+      { id: 'wish_granting', name: 'Wish Granting', description: 'Can grant beneficial effects to allies', type: 'active', cooldown: 6 }
+    ],
+    cost: { gold: 800, gems: 8, crystal: 5 },
+    growth: 3,
+    aiValue: 800
+  },
+
+  // Tier 6: Naga line
+  {
+    id: 'tower_naga_basic',
+    name: 'Naga',
+    castle: 'tower',
+    tier: 6,
+    variant: 'basic',
+    stats: { attack: 16, defense: 13, health: 110, damage: [20, 20], speed: 5 },
+    abilities: [
+      { id: 'no_retaliation', name: 'No Retaliation', description: 'Never receives retaliation', type: 'passive' },
+      { id: 'spell_casting', name: 'Spell Casting', description: 'Can cast spells in combat', type: 'active', cooldown: 3 }
+    ],
+    cost: { gold: 1100, crystal: 12 },
+    growth: 2,
+    aiValue: 1100
+  },
+  {
+    id: 'tower_naga_upgraded',
+    name: 'Naga Queen',
+    castle: 'tower',
+    tier: 6,
+    variant: 'upgraded',
+    stats: { attack: 16, defense: 13, health: 110, damage: [30, 30], speed: 7 },
+    abilities: [
+      { id: 'no_retaliation', name: 'No Retaliation', description: 'Never receives retaliation', type: 'passive' },
+      { id: 'spell_casting', name: 'Spell Casting', description: 'Can cast spells in combat', type: 'active', cooldown: 2 },
+      { id: 'poison_attack', name: 'Poison Attack', description: 'Attacks poison enemies', type: 'passive' }
+    ],
+    cost: { gold: 1300, crystal: 12 },
+    growth: 2,
+    aiValue: 1300
+  },
+  {
+    id: 'tower_naga_champion',
+    name: 'Naga Empress',
+    castle: 'tower',
+    tier: 6,
+    variant: 'champion',
+    stats: { attack: 18, defense: 15, health: 130, damage: [35, 40], speed: 9 },
+    abilities: [
+      { id: 'no_retaliation', name: 'No Retaliation', description: 'Never receives retaliation', type: 'passive' },
+      { id: 'spell_casting', name: 'Spell Casting', description: 'Can cast spells in combat', type: 'active', cooldown: 2 },
+      { id: 'poison_attack', name: 'Poison Attack', description: 'Attacks poison enemies', type: 'passive' },
+      { id: 'serpent_strike', name: 'Serpent Strike', description: 'Can attack multiple adjacent enemies', type: 'active', cooldown: 4 },
+      { id: 'magic_mastery', name: 'Magic Mastery', description: 'Spells cost 50% less mana', type: 'passive' }
+    ],
+    cost: { gold: 1600, crystal: 15, gems: 5 },
+    growth: 2,
+    aiValue: 1600
+  },
+
+  // Tier 7: Titan line
+  {
+    id: 'tower_titan_basic',
+    name: 'Titan',
+    castle: 'tower',
+    tier: 7,
+    variant: 'basic',
+    stats: { attack: 24, defense: 24, health: 300, damage: [40, 60], speed: 11, shots: 24 },
+    abilities: [
+      { id: 'ranged_attack', name: 'Ranged Attack', description: 'Can attack from distance', type: 'passive' },
+      { id: 'lightning_bolt', name: 'Lightning Bolt', description: 'Ranged attacks chain to nearby enemies', type: 'passive' },
+      { id: 'spell_immunity', name: 'Spell Immunity', description: 'Immune to spells below level 5', type: 'passive' },
+      { id: 'no_melee_penalty', name: 'No Melee Penalty', description: 'No penalty for ranged attacks in melee', type: 'passive' }
+    ],
+    cost: { gold: 2500, crystal: 20, gems: 10 },
+    growth: 1,
+    aiValue: 2500
+  },
+  {
+    id: 'tower_titan_upgraded',
+    name: 'Greater Titan',
+    castle: 'tower',
+    tier: 7,
+    variant: 'upgraded',
+    stats: { attack: 24, defense: 24, health: 300, damage: [40, 60], speed: 15, shots: 24 },
+    abilities: [
+      { id: 'ranged_attack', name: 'Ranged Attack', description: 'Can attack from distance', type: 'passive' },
+      { id: 'lightning_bolt', name: 'Lightning Bolt', description: 'Ranged attacks chain to nearby enemies', type: 'passive' },
+      { id: 'spell_immunity', name: 'Spell Immunity', description: 'Immune to all spells', type: 'passive' },
+      { id: 'no_melee_penalty', name: 'No Melee Penalty', description: 'No penalty for ranged attacks in melee', type: 'passive' },
+      { id: 'spell_casting', name: 'Spell Casting', description: 'Can cast spells in combat', type: 'active', cooldown: 3 }
+    ],
+    cost: { gold: 3000, crystal: 20, gems: 10 },
+    growth: 1,
+    aiValue: 3000
+  },
+  {
+    id: 'tower_titan_champion',
+    name: 'Primordial Titan',
+    castle: 'tower',
+    tier: 7,
+    variant: 'champion',
+    stats: { attack: 28, defense: 28, health: 400, damage: [50, 80], speed: 18, shots: 32 },
+    abilities: [
+      { id: 'ranged_attack', name: 'Ranged Attack', description: 'Can attack from distance', type: 'passive' },
+      { id: 'lightning_bolt', name: 'Lightning Bolt', description: 'Ranged attacks chain to nearby enemies', type: 'passive' },
+      { id: 'spell_immunity', name: 'Spell Immunity', description: 'Immune to all spells', type: 'passive' },
+      { id: 'no_melee_penalty', name: 'No Melee Penalty', description: 'No penalty for ranged attacks in melee', type: 'passive' },
+      { id: 'spell_casting', name: 'Spell Casting', description: 'Can cast spells in combat', type: 'active', cooldown: 2 },
+      { id: 'thunderstorm', name: 'Thunderstorm', description: 'Area lightning attack that hits all enemies', type: 'active', cooldown: 5 }
+    ],
+    cost: { gold: 4000, crystal: 25, gems: 15, sulfur: 5 },
+    growth: 1,
+    aiValue: 4000
+  },
+
+  // Continue with more castles... (Castle, Rampart, and Tower complete)
+  // TODO: Implement remaining 105 units (5 more castles × 21 units)
 ];
 
 // 🏗️ BUILDING DEFINITIONS
