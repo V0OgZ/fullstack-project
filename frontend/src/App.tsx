@@ -2,63 +2,48 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import Game from './pages/Game';
-import BackendTester from './components/BackendTester';
-import MultiplayerSessionManager from './components/MultiplayerSessionManager';
-import { useTranslation } from './i18n';
-import LanguageSelector from './components/LanguageSelector';
 
 const GameSelector: React.FC = () => {
-  const { t } = useTranslation();
-  
   return (
     <div className="game-selector">
       <header className="selector-header">
-        <div className="header-top">
-          <h1>🎮 Heroes Reforged 🎮</h1>
-          <LanguageSelector />
-        </div>
-        <p>{t('chooseScenario')}</p>
+        <h1>🎮 Heroes of Time 🎮</h1>
+        <p>Choose your adventure scenario</p>
       </header>
       
       <div className="game-options">
         <Link to="/game/conquete-classique" className="game-option classic">
           <div className="game-icon">🏰</div>
-          <h2>{t('classicConquest')}</h2>
-          <p>{t('classicDescription')}</p>
+          <h2>Classic Conquest</h2>
+          <p>Introduction scenario - Traditional Heroes gameplay</p>
           <div className="game-features">
-            <span>⚔️ {t('turnBasedCombat')}</span>
-            <span>🏰 {t('captureBuildings')}</span>
-            <span>🗺️ {t('hexagonalMaps')}</span>
+            <span>⚔️ Turn-based combat</span>
+            <span>🏰 Castle capture</span>
+            <span>🗺️ Hexagonal maps</span>
           </div>
-          <div className="difficulty-indicator easy">{t('easy')}</div>
+          <div className="difficulty-indicator easy">EASY</div>
         </Link>
         
         <Link to="/game/mystique-temporel" className="game-option temporal">
           <div className="game-icon">🔮</div>
-          <h2>{t('mysticalConquest')}</h2>
-          <p>{t('mysticalDescription')}</p>
+          <h2>Mystical Conquest</h2>
+          <p>Advanced scenario with magical and temporal objects</p>
           <div className="game-features">
-            <span>🔮 {t('temporalObjects')}</span>
-            <span>⚡ {t('advancedMagic')}</span>
-            <span>🌀 {t('mysticPortals')}</span>
+            <span>🔮 Temporal objects</span>
+            <span>⚡ Advanced magic</span>
+            <span>🌀 Mystical portals</span>
           </div>
-          <div className="difficulty-indicator hard">{t('advanced')}</div>
+          <div className="difficulty-indicator hard">ADVANCED</div>
         </Link>
       </div>
       
       <div className="scenario-explanation">
-        <p>💡 <strong>{t('sameInterface')}</strong></p>
-        <p>{t('mysticalAddsObjects')}</p>
-      </div>
-      
-      <div className="backend-test-section">
-        <Link to="/backend-test" className="backend-test-link">
-          🔧 {t('testBackendConnection')}
-        </Link>
+        <p>💡 <strong>Both scenarios use the same game interface</strong></p>
+        <p>The Mystical scenario adds special objects on the map that you can discover!</p>
       </div>
       
       <footer className="selector-footer">
-        <p>{t('builtWith')}</p>
+        <p>Built with React & TypeScript</p>
       </footer>
     </div>
   );
@@ -67,19 +52,11 @@ const GameSelector: React.FC = () => {
 const App: React.FC = () => {
   return (
     <Router>
-      <div className="App" data-testid="app-container">
+      <div className="App">
         <Routes>
           <Route 
             path="/game/:scenarioId" 
             element={<Game />} 
-          />
-          <Route 
-            path="/backend-test" 
-            element={<BackendTester />} 
-          />
-          <Route 
-            path="/multiplayer" 
-            element={<MultiplayerSessionManager onSessionJoined={(sessionId: string) => console.log('Joined session:', sessionId)} onError={(error: string) => console.error(error)} />} 
           />
           <Route 
             path="/" 
