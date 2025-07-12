@@ -80,9 +80,9 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
           <button 
             className="magic-inventory-toggle"
             onClick={() => setShowMagicInventory(!showMagicInventory)}
-            title="Magic Inventory"
+            title={t('magicInventoryTitle')}
           >
-            🎒 Magic Inventory
+            🎒 {t('magicInventoryTitle')}
           </button>
         )}
       </div>

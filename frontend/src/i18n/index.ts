@@ -126,6 +126,58 @@ export interface Translation {
   level: string;
   movementPoints: string;
   
+  // Magic Inventory
+  magicInventory: string;
+  all: string;
+  equipped: string;
+  weapons: string;
+  armor: string;
+  accessories: string;
+  artifacts: string;
+  temporal: string;
+  consumables: string;
+  resources: string;
+  allRarities: string;
+  common: string;
+  uncommon: string;
+  rare: string;
+  epic: string;
+  legendary: string;
+  allTypes: string;
+  sortBy: string;
+  name: string;
+  value: string;
+  rarity: string;
+  onlyOwned: string;
+  noObjectsFound: string;
+  adjustFilters: string;
+  equip: string;
+  unequip: string;
+  use: string;
+  libraryStatistics: string;
+  total: string;
+  type: string;
+  slot: string;
+  specialEffect: string;
+  horizontalTabs: string;
+  verticalTabs: string;
+  filterByRarity: string;
+  filterByType: string;
+  
+  // Additional Magic Inventory keys
+  magicInventoryTitle: string;
+  noItemsFound: string;
+  adjustFiltersOrExplore: string;
+  sortByName: string;
+  sortByValue: string;
+  sortByRarity: string;
+  equipItem: string;
+  unequipItem: string;
+  useItem: string;
+  libraryStatsTitle: string;
+  requiresLevel: string;
+  objects: string;
+  
   // Game Selector
   chooseScenario: string;
   classicConquest: string;
@@ -268,6 +320,58 @@ const frenchTranslations: Translation = {
   selectUnitType: 'Sélectionner le Type d\'Unité',
   level: 'Niveau',
   movementPoints: 'Points de Mouvement',
+  
+  // Magic Inventory
+  magicInventory: 'Inventaire Magique',
+  all: 'Tous',
+  equipped: 'Équipé',
+  weapons: 'Armes',
+  armor: 'Armures',
+  accessories: 'Accessoires',
+  artifacts: 'Artifacts',
+  temporal: 'Temporaires',
+  consumables: 'Consommables',
+  resources: 'Ressources',
+  allRarities: 'Toutes les Rarités',
+  common: 'Commun',
+  uncommon: 'Non commun',
+  rare: 'Rare',
+  epic: 'Épique',
+  legendary: 'Légendaire',
+  allTypes: 'Tous les Types',
+  sortBy: 'Trier par',
+  name: 'Nom',
+  value: 'Valeur',
+  rarity: 'Rarité',
+  onlyOwned: 'Seulement possédés',
+  noObjectsFound: 'Aucun objet trouvé',
+  adjustFilters: 'Ajuster les filtres',
+  equip: 'Équiper',
+  unequip: 'Déséquiper',
+  use: 'Utiliser',
+  libraryStatistics: 'Statistiques de la bibliothèque',
+  total: 'Total',
+  type: 'Type',
+  slot: 'Slot',
+  specialEffect: 'Effet spécial',
+  horizontalTabs: 'Onglets horizontaux',
+  verticalTabs: 'Onglets verticaux',
+  filterByRarity: 'Filtrer par Rarité',
+  filterByType: 'Filtrer par Type',
+  
+  // Additional Magic Inventory keys
+  magicInventoryTitle: 'Inventaire Magique',
+  noItemsFound: 'Aucun objet trouvé',
+  adjustFiltersOrExplore: 'Ajuster les filtres ou explorer',
+  sortByName: 'Trier par nom',
+  sortByValue: 'Trier par valeur',
+  sortByRarity: 'Trier par rareté',
+  equipItem: 'Équiper l\'objet',
+  unequipItem: 'Déséquiper l\'objet',
+  useItem: 'Utiliser l\'objet',
+  libraryStatsTitle: 'Statistiques de la bibliothèque',
+  requiresLevel: 'Nécessite le niveau',
+  objects: 'Objets',
   
   // Game Selector
   chooseScenario: 'Choisir un scénario',
@@ -412,6 +516,58 @@ const englishTranslations: Translation = {
   level: 'Level',
   movementPoints: 'Movement Points',
   
+  // Magic Inventory
+  magicInventory: 'Magic Inventory',
+  all: 'All',
+  equipped: 'Equipped',
+  weapons: 'Weapons',
+  armor: 'Armor',
+  accessories: 'Accessories',
+  artifacts: 'Artifacts',
+  temporal: 'Temporal',
+  consumables: 'Consumables',
+  resources: 'Resources',
+  allRarities: 'All Rarities',
+  common: 'Common',
+  uncommon: 'Uncommon',
+  rare: 'Rare',
+  epic: 'Epic',
+  legendary: 'Legendary',
+  allTypes: 'All Types',
+  sortBy: 'Sort By',
+  name: 'Name',
+  value: 'Value',
+  rarity: 'Rarity',
+  onlyOwned: 'Only Owned',
+  noObjectsFound: 'No objects found',
+  adjustFilters: 'Adjust Filters',
+  equip: 'Equip',
+  unequip: 'Unequip',
+  use: 'Use',
+  libraryStatistics: 'Library Statistics',
+  total: 'Total',
+  type: 'Type',
+  slot: 'Slot',
+  specialEffect: 'Special Effect',
+  horizontalTabs: 'Horizontal Tabs',
+  verticalTabs: 'Vertical Tabs',
+  filterByRarity: 'Filter by Rarity',
+  filterByType: 'Filter by Type',
+  
+  // Additional Magic Inventory keys
+  magicInventoryTitle: 'Magic Inventory',
+  noItemsFound: 'No items found',
+  adjustFiltersOrExplore: 'Adjust filters or explore',
+  sortByName: 'Sort by Name',
+  sortByValue: 'Sort by Value',
+  sortByRarity: 'Sort by Rarity',
+  equipItem: 'Equip Item',
+  unequipItem: 'Unequip Item',
+  useItem: 'Use Item',
+  libraryStatsTitle: 'Library Statistics',
+  requiresLevel: 'Requires Level',
+  objects: 'Objects',
+  
   // Game Selector
   chooseScenario: 'Choose a scenario',
   classicConquest: 'Classic Conquest',
@@ -555,24 +711,76 @@ const russianTranslations: Translation = {
   level: 'Уровень',
   movementPoints: 'Очки передвижения',
   
+  // Magic Inventory
+  magicInventory: 'Магический Инвентарь',
+  all: 'Все',
+  equipped: 'Экипированные',
+  weapons: 'Оружие',
+  armor: 'Броня',
+  accessories: 'Аксессуары',
+  artifacts: 'Артефакты',
+  temporal: 'Временные',
+  consumables: 'Потребляемые',
+  resources: 'Ресурсы',
+  allRarities: 'Все раритеты',
+  common: 'Обычные',
+  uncommon: 'Необычные',
+  rare: 'Редкие',
+  epic: 'Эпические',
+  legendary: 'Легендарные',
+  allTypes: 'Все типы',
+  sortBy: 'Сортировать по',
+  name: 'Название',
+  value: 'Ценность',
+  rarity: 'Редкость',
+  onlyOwned: 'Только в собственности',
+  noObjectsFound: 'Объекты не найдены',
+  adjustFilters: 'Настроить фильтры',
+  equip: 'Экипировать',
+  unequip: 'Снять экипировку',
+  use: 'Использовать',
+  libraryStatistics: 'Статистика библиотеки',
+  total: 'Всего',
+  type: 'Тип',
+  slot: 'Слот',
+  specialEffect: 'Специальный эффект',
+  horizontalTabs: 'Горизонтальные вкладки',
+  verticalTabs: 'Вертикальные вкладки',
+  filterByRarity: 'Фильтровать по редкости',
+  filterByType: 'Фильтровать по типу',
+  
+  // Additional Magic Inventory keys
+  magicInventoryTitle: 'Магический Инвентарь',
+  noItemsFound: 'Объекты не найдены',
+  adjustFiltersOrExplore: 'Настроить фильтры или исследовать',
+  sortByName: 'Сортировать по имени',
+  sortByValue: 'Сортировать по значению',
+  sortByRarity: 'Сортировать по редкости',
+  equipItem: 'Экипировать предмет',
+  unequipItem: 'Снять экипировку предмета',
+  useItem: 'Использовать предмет',
+  libraryStatsTitle: 'Статистика библиотеки',
+  requiresLevel: 'Требуется уровень',
+  objects: 'Предметы',
+  
   // Game Selector
-  chooseScenario: 'Выберите сценарий',
-  classicConquest: 'Классическое завоевание',
-  classicDescription: 'Стратегическая игра, где вы должны завоевать мир.',
-  mysticalConquest: 'Мистическое завоевание',
-  mysticalDescription: 'Ролевая игра, где вы должны раскрыть тайны.',
-  turnBasedCombat: 'Пошаговый бой',
-  captureBuildings: 'Захват зданий',
-  hexagonalMaps: 'Шестиугольные карты',
-  easy: 'Легко',
-  advanced: 'Продвинутый',
-  temporalObjects: 'Временные объекты',
-  advancedMagic: 'Продвинутая магия',
-  mysticPortals: 'Мистические порталы',
-  sameInterface: 'Тот же интерфейс',
-  mysticalAddsObjects: 'Добавляет мистические объекты',
-  testBackendConnection: 'Тестировать соединение с бэкендом',
-  builtWith: 'Построено с',
+  chooseScenario: 'Choose a scenario',
+  classicConquest: 'Classic Conquest',
+  classicDescription: 'A strategy game where you must conquer the world.',
+  mysticalConquest: 'Mystical Conquest',
+  mysticalDescription: 'A role-playing game where you must solve mysteries.',
+  turnBasedCombat: 'Turn-Based Combat',
+  captureBuildings: 'Capture Buildings',
+  hexagonalMaps: 'Hexagonal Maps',
+  easy: 'Easy',
+  advanced: 'Advanced',
+  temporalObjects: 'Temporal Objects',
+  advancedMagic: 'Advanced Magic',
+  mysticPortals: 'Mystic Portals',
+  sameInterface: 'Same Interface',
+  mysticalAddsObjects: 'Adds mystical objects',
+  testBackendConnection: 'Test backend connection',
+  builtWith: 'Built with',
 };
 
 // Helper function to get translations
