@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import TrueHeroesInterface from '../components/TrueHeroesInterface';
-import { useTranslation } from '../i18n';
 
 const Game: React.FC = () => {
   const { scenarioId } = useParams<{ scenarioId: string }>();
-  const { t } = useTranslation();
   const [scenarioType, setScenarioType] = useState<'classique' | 'mystique'>('classique');
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { GameState, Game, Player, GameAction, Hero, Position, CombatResult, Tile, ZoneOfCausality, TimelineAction, ShadowAction } from '../types/game';
+import { GameState, Game, Player, GameAction, Position, CombatResult, Tile, ZoneOfCausality, TimelineAction, ShadowAction } from '../types/game';
 import { GameService } from '../services/gameService';
 
 interface GameStore extends GameState {

@@ -1,6 +1,15 @@
 {
-  "name": "frontend",
-  "version": "0.1.0",
+  "name": "heroes-of-time-frontend",
+  "version": "1.0.0",
+  "description": "Heroes of Time - Revolutionary dual-scenario strategy game frontend",
+  "keywords": ["strategy-game", "heroes", "react", "typescript", "hexagonal", "temporal", "magic"],
+  "author": "V0OgZ",
+  "license": "MIT",
+  "homepage": "https://github.com/V0OgZ/heroes-of-time",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/V0OgZ/heroes-of-time.git"
+  },
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
