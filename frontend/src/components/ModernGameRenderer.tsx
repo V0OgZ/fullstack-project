@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { useGameStore } from '../store/useGameStore';
 import { Position, Tile, Hero } from '../types/game';
+import { useTranslation } from '../i18n';
 import './ModernGameRenderer.css';
 
 interface ModernGameRendererProps {
@@ -23,6 +24,7 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
   const { map, currentGame, selectedTile, visibleZFCs } = useGameStore();
+  const { t } = useTranslation();
   
   const [animatedElements, setAnimatedElements] = useState<AnimatedElement[]>([]);
   const [hoveredTile, setHoveredTile] = useState<Position | null>(null);
@@ -435,7 +437,7 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
       ctx.font = '24px Arial';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText('Chargement de la carte...', width / 2, height / 2);
+      ctx.fillText(t('loadingMap'), width / 2, height / 2);
       return;
     }
 
@@ -469,7 +471,7 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
 
     // Programmer le prochain rendu
     animationRef.current = requestAnimationFrame(render);
-  }, [map, selectedTile, hoveredTile, width, height, drawZFCZones, drawHexTile, drawParticles, hexToPixel, currentGame]);
+  }, [map, selectedTile, hoveredTile, width, height, drawZFCZones, drawHexTile, drawParticles, hexToPixel, currentGame, t]);
 
   // Gestion des événements de souris
   const handleMouseMove = useCallback((event: React.MouseEvent) => {

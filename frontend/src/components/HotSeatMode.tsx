@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Game, Player, Hero } from '../types/game';
+import { useTranslation } from '../i18n';
+import { Game, Player } from '../types/game';
 import { GAME_ICONS } from '../constants/gameIcons';
 import CreatureDisplay from './CreatureDisplay';
 
 interface HotSeatModeProps {
   game: Game;
   onPlayerSwitch: (playerId: string) => void;
-  onActionComplete: () => void;
+  onActionComplete: (action: any) => void;
 }
 
 const HotSeatMode: React.FC<HotSeatModeProps> = ({
@@ -14,6 +15,7 @@ const HotSeatMode: React.FC<HotSeatModeProps> = ({
   onPlayerSwitch,
   onActionComplete,
 }) => {
+  const { t } = useTranslation();
   const [showPlayerSelector, setShowPlayerSelector] = useState(false);
   const currentPlayer = game.players.find(p => p.id === game.currentPlayerTurn);
 
@@ -42,41 +44,33 @@ const HotSeatMode: React.FC<HotSeatModeProps> = ({
             className="btn"
             onClick={() => setShowPlayerSelector(!showPlayerSelector)}
           >
-            {GAME_ICONS.UI_SETTINGS} Changer Joueur
+            {GAME_ICONS.UI_SETTINGS} {t('change')} {t('player')}
           </button>
         </div>
 
         {/* Joueur actuel */}
-        {currentPlayer && (
-          <div className="current-player-info">
-            <div className="player-avatar">
-              <CreatureDisplay
-                type="hero"
-                name="WARRIOR"
-                size="small"
-                className="hero-player1"
-              />
-            </div>
-            <div className="player-details">
-              <h4 className="hero-name">{currentPlayer.username}</h4>
-              <div className="player-stats">
-                <div>Héros: {currentPlayer.heroes.length}</div>
-                <div>Or: {currentPlayer.resources.gold}</div>
-                <div>Tour: {game.currentTurn}</div>
-              </div>
-            </div>
-            <div className="player-turn-indicator">
-              <div className="turn-badge">
-                {GAME_ICONS.STATUS_ACTIVE} À vous de jouer
-              </div>
+        <div className="current-player">
+          <div className="player-avatar">
+            <CreatureDisplay
+              type="hero"
+              name="WARRIOR"
+              size="medium"
+              className={currentPlayer?.id === 'player1' ? 'hero-player1' : 'hero-player2'}
+            />
+          </div>
+          <div className="player-details">
+            <div className="player-name">{currentPlayer?.username}</div>
+            <div className="player-resources">
+              <div>{t('heroes')}: {currentPlayer?.heroes.length}</div>
+              <div>{t('gold')}: {currentPlayer?.resources.gold}</div>
             </div>
           </div>
-        )}
+        </div>
 
         {/* Sélecteur de joueur */}
         {showPlayerSelector && (
           <div className="player-selector">
-            <h4 className="title-small">Choisir le joueur</h4>
+            <h4 className="title-small">{t('choosePlayer')}</h4>
             <div className="player-list">
               {game.players.map(player => (
                 <div
@@ -95,7 +89,7 @@ const HotSeatMode: React.FC<HotSeatModeProps> = ({
                   <div className="player-info">
                     <div className="player-name">{player.username}</div>
                     <div className="player-heroes">
-                      {player.heroes.length} héros • {player.resources.gold} or
+                      {player.heroes.length} {t('heroes')} • {player.resources.gold} {t('gold')}
                     </div>
                   </div>
                   {player.id === game.currentPlayerTurn && (
@@ -113,7 +107,7 @@ const HotSeatMode: React.FC<HotSeatModeProps> = ({
         {nextPlayer && (
           <div className="next-player-info">
             <div className="next-player-label">
-              {GAME_ICONS.GAME_FAST_FORWARD} Prochain: {nextPlayer.username}
+              {GAME_ICONS.GAME_FAST_FORWARD} {t('next')}: {nextPlayer.username}
             </div>
           </div>
         )}
@@ -121,23 +115,23 @@ const HotSeatMode: React.FC<HotSeatModeProps> = ({
 
       {/* Instructions pour le mode Hot Seat */}
       <div className="hotseat-instructions">
-        <h4 className="title-small">Instructions Hot Seat</h4>
-        <div className="instructions-list">
+        <h4 className="title-small">{GAME_ICONS.UI_INFO} {t('instructions')}</h4>
+        <div className="instruction-list">
           <div className="instruction-item">
-            <span className="instruction-icon">{GAME_ICONS.UI_INFO}</span>
-            <span>Chaque joueur joue à tour de rôle sur le même écran</span>
+            <span>{GAME_ICONS.GAME_PLAY}</span>
+            <span>{t('eachPlayerTakesturns')}</span>
           </div>
           <div className="instruction-item">
-            <span className="instruction-icon">{GAME_ICONS.ACTION_MOVE}</span>
-            <span>Planifiez vos actions pour le joueur actuel</span>
+            <span>{GAME_ICONS.ACTION_UPGRADE}</span>
+            <span>{t('planActionsForCurrentPlayer')}</span>
           </div>
           <div className="instruction-item">
-            <span className="instruction-icon">{GAME_ICONS.GAME_FAST_FORWARD}</span>
-            <span>Passez au joueur suivant quand vous avez fini</span>
+            <span>{GAME_ICONS.GAME_FAST_FORWARD}</span>
+            <span>{t('passToNextPlayerWhenDone')}</span>
           </div>
           <div className="instruction-item">
-            <span className="instruction-icon">{GAME_ICONS.UI_SETTINGS}</span>
-            <span>Utilisez "Changer Joueur" pour corriger une erreur</span>
+            <span>{GAME_ICONS.UI_SETTINGS}</span>
+            <span>{t('useChangePlayerToCorrectError')}</span>
           </div>
         </div>
       </div>

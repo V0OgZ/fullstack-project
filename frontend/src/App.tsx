@@ -5,6 +5,7 @@ import Game from './pages/Game';
 import BackendTester from './components/BackendTester';
 import MultiplayerSessionManager from './components/MultiplayerSessionManager';
 import { useTranslation } from './i18n';
+import LanguageSelector from './components/LanguageSelector';
 
 const GameSelector: React.FC = () => {
   const { t } = useTranslation();
@@ -12,7 +13,10 @@ const GameSelector: React.FC = () => {
   return (
     <div className="game-selector">
       <header className="selector-header">
-        <h1>🎮 Heroes Reforged 🎮</h1>
+        <div className="header-top">
+          <h1>🎮 Heroes Reforged 🎮</h1>
+          <LanguageSelector />
+        </div>
         <p>{t('chooseScenario')}</p>
       </header>
       
@@ -63,7 +67,7 @@ const GameSelector: React.FC = () => {
 const App: React.FC = () => {
   return (
     <Router>
-      <div className="App">
+      <div className="App" data-testid="app-container">
         <Routes>
           <Route 
             path="/game/:scenarioId" 

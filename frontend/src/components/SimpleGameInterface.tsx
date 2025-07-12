@@ -254,6 +254,20 @@ const SimpleGameInterface: React.FC = () => {
             >
               🇬🇧 EN
             </button>
+            <button 
+              onClick={() => setLanguage('ru')}
+              style={{
+                padding: '8px 12px',
+                background: language === 'ru' ? '#00d4ff' : 'transparent',
+                border: 'none',
+                color: language === 'ru' ? '#1a1a1a' : '#b0b0b0',
+                cursor: 'pointer',
+                fontSize: '12px',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              🇷🇺 RU
+            </button>
           </div>
         </div>
       </div>

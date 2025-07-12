@@ -118,9 +118,14 @@ export class ApiService {
 
   // Multiplayer session management
   static async createMultiplayerSession(request: any): Promise<any> {
-    return this.makeRequest('/multiplayer/create', {
+    return this.makeRequest('/multiplayer/sessions', {
       method: 'POST',
-      body: JSON.stringify(request)
+      body: JSON.stringify({
+        name: request.sessionName,
+        maxPlayers: request.maxPlayers,
+        gameMode: request.gameMode,
+        creatorId: request.creatorId
+      })
     });
   }
 
@@ -129,32 +134,32 @@ export class ApiService {
   }
 
   static async joinMultiplayerSession(sessionId: string, playerId: string): Promise<any> {
-    return this.makeRequest(`/multiplayer/join/${sessionId}`, {
+    return this.makeRequest(`/multiplayer/sessions/${sessionId}/join`, {
       method: 'POST',
       body: JSON.stringify({ playerId })
     });
   }
 
   static async leaveMultiplayerSession(sessionId: string, playerId: string): Promise<any> {
-    return this.makeRequest(`/multiplayer/leave/${sessionId}`, {
+    return this.makeRequest(`/multiplayer/sessions/${sessionId}/leave`, {
       method: 'POST',
       body: JSON.stringify({ playerId })
     });
   }
 
   static async startMultiplayerSession(sessionId: string, playerId: string): Promise<any> {
-    return this.makeRequest(`/multiplayer/start/${sessionId}`, {
+    return this.makeRequest(`/multiplayer/sessions/${sessionId}/start`, {
       method: 'POST',
       body: JSON.stringify({ playerId })
     });
   }
 
   static async getMultiplayerGameState(sessionId: string): Promise<any> {
-    return this.makeRequest(`/multiplayer/game-state/${sessionId}`);
+    return this.makeRequest(`/multiplayer/sessions/${sessionId}`);
   }
 
   static async sendGameAction(sessionId: string, playerId: string, actionType: string, actionData: any): Promise<any> {
-    return this.makeRequest(`/multiplayer/action/${sessionId}`, {
+    return this.makeRequest(`/multiplayer/sessions/${sessionId}/action`, {
       method: 'POST',
       body: JSON.stringify({ playerId, actionType, actionData })
     });
