@@ -3,20 +3,23 @@ import { useTranslation } from '../i18n';
 import { useGameStore } from '../store/useGameStore';
 import ModernGameRenderer from './ModernGameRenderer';
 
-const SimpleGameInterface: React.FC = () => {
+interface SimpleGameInterfaceProps {
+  scenarioId?: string;
+}
+
+const SimpleGameInterface: React.FC<SimpleGameInterfaceProps> = ({ scenarioId = 'demo-game' }) => {
   const { 
     map,
     currentPlayer, 
     selectedTile, 
     loadGame, 
-    setSelectedTile,
     currentGame,
     endTurn,
     nextPlayer,
     isLoading,
     error
   } = useGameStore();
-  const { t, language, setLanguage } = useTranslation();
+  const { t } = useTranslation();
   const [showSidePanel, setShowSidePanel] = useState(true);
   const [selectedHeroId, setSelectedHeroId] = useState<string | null>(null);
 
@@ -30,12 +33,6 @@ const SimpleGameInterface: React.FC = () => {
     }
     return map[selectedTile.y][selectedTile.x];
   }, [selectedTile, map]);
-
-  // Get selected hero from currentPlayer
-  const selectedHero = useMemo(() => {
-    if (!selectedHeroId || !currentPlayer?.heroes) return null;
-    return currentPlayer.heroes.find(hero => hero.id === selectedHeroId) || null;
-  }, [selectedHeroId, currentPlayer]);
 
   // Mock data for demonstration - Remove eslint warnings
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -114,10 +111,10 @@ const SimpleGameInterface: React.FC = () => {
   // Initialize game
   useEffect(() => {
     const initGame = async () => {
-      await loadGame('demo-game');
+      await loadGame(scenarioId);
     };
     initGame();
-  }, [loadGame]);
+  }, [loadGame, scenarioId]);
 
   // Handle end turn
   const handleEndTurn = () => {
@@ -317,57 +314,6 @@ const SimpleGameInterface: React.FC = () => {
           >
             ⏭️ {t('endTurn')}
           </button>
-          
-          <div style={{ 
-            display: 'flex', 
-            background: '#333333', 
-            borderRadius: '6px', 
-            overflow: 'hidden', 
-            border: '1px solid #404040' 
-          }}>
-            <button 
-              onClick={() => setLanguage('fr')}
-              style={{
-                padding: '8px 12px',
-                background: language === 'fr' ? '#00d4ff' : 'transparent',
-                border: 'none',
-                color: language === 'fr' ? '#1a1a1a' : '#b0b0b0',
-                cursor: 'pointer',
-                fontSize: '12px',
-                transition: 'all 0.2s ease'
-              }}
-            >
-              🇫🇷 FR
-            </button>
-            <button 
-              onClick={() => setLanguage('en')}
-              style={{
-                padding: '8px 12px',
-                background: language === 'en' ? '#00d4ff' : 'transparent',
-                border: 'none',
-                color: language === 'en' ? '#1a1a1a' : '#b0b0b0',
-                cursor: 'pointer',
-                fontSize: '12px',
-                transition: 'all 0.2s ease'
-              }}
-            >
-              🇬🇧 EN
-            </button>
-            <button 
-              onClick={() => setLanguage('ru')}
-              style={{
-                padding: '8px 12px',
-                background: language === 'ru' ? '#00d4ff' : 'transparent',
-                border: 'none',
-                color: language === 'ru' ? '#1a1a1a' : '#b0b0b0',
-                cursor: 'pointer',
-                fontSize: '12px',
-                transition: 'all 0.2s ease'
-              }}
-            >
-              🇷🇺 RU
-            </button>
-          </div>
         </div>
       </div>
 
@@ -389,10 +335,10 @@ const SimpleGameInterface: React.FC = () => {
           <ModernGameRenderer width={1200} height={800} />
         </div>
 
-        {/* Enhanced Side Panel */}
+        {/* Enhanced Side Panel - Make it narrower */}
         {showSidePanel && (
           <div style={{
-            width: '380px',
+            width: '300px', // Reduced from 380px
             background: '#2a2a2a',
             borderLeft: '1px solid #404040',
             display: 'flex',

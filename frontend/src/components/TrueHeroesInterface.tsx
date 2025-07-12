@@ -93,7 +93,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
 
       {/* Main game interface */}
       <div className="main-interface">
-        <SimpleGameInterface />
+        <SimpleGameInterface scenarioId={scenarioId} />
       </div>
 
       {/* Magic inventory overlay for mystical and multiplayer scenarios */}

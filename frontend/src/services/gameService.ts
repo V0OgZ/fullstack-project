@@ -101,18 +101,26 @@ export class GameService {
         let walkable = true;
         let movementCost = 1;
         
-        // Add some variety
-        if (Math.random() < 0.2) {
+        // Create more varied terrain based on position
+        const noise = (Math.sin(x * 0.1) + Math.cos(y * 0.1)) * 0.5;
+        const distanceFromCenter = Math.sqrt((x - width/2) ** 2 + (y - height/2) ** 2);
+        
+        if (noise > 0.3) {
           terrain = 'forest';
           movementCost = 2;
-        } else if (Math.random() < 0.1) {
+        } else if (noise < -0.3) {
           terrain = 'mountain';
-          walkable = false;
           movementCost = 3;
-        } else if (Math.random() < 0.05) {
+        } else if (distanceFromCenter > width * 0.4 && Math.random() < 0.3) {
           terrain = 'water';
           walkable = false;
-          movementCost = 1;
+          movementCost = 4;
+        } else if (Math.random() < 0.1) {
+          terrain = 'desert';
+          movementCost = 2;
+        } else if (Math.random() < 0.05) {
+          terrain = 'swamp';
+          movementCost = 3;
         }
         
         tiles.push({
@@ -126,12 +134,99 @@ export class GameService {
       }
     }
     
+    // Add structures to the map
+    const structures = [];
+    
+    // Player 1 castle at (2, 2)
+    structures.push({
+      id: 'castle_player1',
+      type: 'castle',
+      name: 'Castle',
+      position: { x: 2, y: 2 },
+      owner: 'player1',
+      level: 1,
+      health: 100
+    });
+    
+    // Player 2 castle at (width-3, height-3)
+    structures.push({
+      id: 'castle_player2',
+      type: 'castle',
+      name: 'Castle',
+      position: { x: width - 3, y: height - 3 },
+      owner: 'player2',
+      level: 1,
+      health: 100
+    });
+    
+    // Add some gold mines
+    const goldMinePositions = [
+      { x: 5, y: 5 },
+      { x: width - 6, y: 5 },
+      { x: 5, y: height - 6 },
+      { x: width - 6, y: height - 6 }
+    ];
+    
+    goldMinePositions.forEach((pos, index) => {
+      structures.push({
+        id: `gold_mine_${index}`,
+        type: 'gold_mine',
+        name: 'Gold Mine',
+        position: pos,
+        owner: null,
+        level: 1,
+        health: 50
+      });
+    });
+    
+    // Add some villages
+    const villagePositions = [
+      { x: Math.floor(width / 4), y: Math.floor(height / 2) },
+      { x: Math.floor(width * 3 / 4), y: Math.floor(height / 2) },
+      { x: Math.floor(width / 2), y: Math.floor(height / 4) },
+      { x: Math.floor(width / 2), y: Math.floor(height * 3 / 4) }
+    ];
+    
+    villagePositions.forEach((pos, index) => {
+      structures.push({
+        id: `village_${index}`,
+        type: 'village',
+        name: 'Village',
+        position: pos,
+        owner: null,
+        level: 1,
+        health: 30
+      });
+    });
+    
+    // Add structures to tiles
+    structures.forEach(structure => {
+      const tileIndex = structure.position.y * width + structure.position.x;
+      if (tiles[tileIndex]) {
+        tiles[tileIndex].structure = structure;
+      }
+    });
+    
+    // Create MapObjects for the objects array
+    const mapObjects = structures.map(structure => ({
+      id: structure.id,
+      x: structure.position.x,
+      y: structure.position.y,
+      type: (structure.type === 'castle' ? 'city' : 
+            structure.type === 'gold_mine' ? 'mine' : 
+            structure.type === 'village' ? 'city' : 'city') as 'chest' | 'enemy' | 'mine' | 'temple' | 'city' | 'fort',
+      content: {
+        resource: (structure.type === 'gold_mine' ? 'gold' : undefined) as 'gold' | 'wood' | 'stone' | 'mana' | undefined,
+        amount: structure.type === 'gold_mine' ? 500 : undefined
+      }
+    }));
+    
     return {
       id: 'demo-map',
       width,
       height,
       tiles,
-      objects: []
+      objects: mapObjects
     };
   }
 

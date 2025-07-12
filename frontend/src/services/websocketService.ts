@@ -1,10 +1,4 @@
-import { Client, over, StompSubscription } from '@stomp/stompjs';
-import SockJS from 'sockjs-client';
-
-interface WebSocketMessage {
-  type: string;
-  payload: any;
-}
+import { Client, StompSubscription } from '@stomp/stompjs';
 
 interface GameActionMessage {
   type: 'GAME_ACTION';
@@ -47,24 +41,27 @@ export class WebSocketService {
   }
 
   private initializeClient() {
-    const socket = new SockJS('http://localhost:8080/ws');
-    this.client = over(socket);
-    
-    // Disable debug logs in production
-    this.client.debug = (str) => {
-      console.log('[WebSocket]', str);
-    };
+    this.client = new Client({
+      brokerURL: 'ws://localhost:8080/ws',
+      connectHeaders: {},
+      debug: (str) => {
+        console.log('[WebSocket]', str);
+      },
+      reconnectDelay: 5000,
+      heartbeatIncoming: 4000,
+      heartbeatOutgoing: 4000,
+    });
 
     this.client.onConnect = (frame) => {
-      console.log('🌐 Connected to WebSocket server:', frame);
+      console.log('Connected to WebSocket server:', frame);
     };
 
     this.client.onDisconnect = (frame) => {
-      console.log('🌐 Disconnected from WebSocket server:', frame);
+      console.log('Disconnected from WebSocket server:', frame);
     };
 
     this.client.onStompError = (frame) => {
-      console.error('🚨 WebSocket error:', frame);
+      console.error('WebSocket error:', frame);
     };
   }
 
@@ -75,13 +72,13 @@ export class WebSocketService {
         return;
       }
 
-      this.client.onConnect = (frame) => {
-        console.log('✅ WebSocket connected successfully');
+      this.client.onConnect = () => {
+        console.log('WebSocket connected successfully');
         resolve();
       };
 
-      this.client.onStompError = (frame) => {
-        console.error('❌ WebSocket connection error:', frame);
+      this.client.onStompError = () => {
+        console.error('WebSocket connection error');
         reject(new Error('Failed to connect to WebSocket server'));
       };
 
@@ -91,14 +88,13 @@ export class WebSocketService {
 
   disconnect() {
     if (this.client && this.client.connected) {
-      // Unsubscribe from all subscriptions
       this.subscriptions.forEach((subscription) => {
         subscription.unsubscribe();
       });
       this.subscriptions.clear();
       
       this.client.deactivate();
-      console.log('🌐 WebSocket disconnected');
+      console.log('WebSocket disconnected');
     }
   }
 
@@ -112,7 +108,6 @@ export class WebSocketService {
       this.currentSessionId = sessionId;
       this.currentPlayerId = playerId;
 
-      // Subscribe to session-specific messages
       const sessionSubscription = this.client.subscribe(
         `/topic/session/${sessionId}`,
         (message) => {
@@ -125,51 +120,8 @@ export class WebSocketService {
         }
       );
 
-      // Subscribe to player-specific messages
-      const playerSubscription = this.client.subscribe(
-        `/user/${playerId}/queue/reply`,
-        (message) => {
-          try {
-            const data = JSON.parse(message.body);
-            this.handleMessage(data);
-          } catch (error) {
-            console.error('Error parsing player message:', error);
-          }
-        }
-      );
-
-      // Subscribe to sync messages
-      const syncSubscription = this.client.subscribe(
-        `/user/${playerId}/queue/sync`,
-        (message) => {
-          try {
-            const data = JSON.parse(message.body);
-            this.handleMessage(data);
-          } catch (error) {
-            console.error('Error parsing sync message:', error);
-          }
-        }
-      );
-
-      // Subscribe to error messages
-      const errorSubscription = this.client.subscribe(
-        `/user/${playerId}/queue/error`,
-        (message) => {
-          try {
-            const data = JSON.parse(message.body);
-            console.error('Server error:', data);
-          } catch (error) {
-            console.error('Error parsing error message:', error);
-          }
-        }
-      );
-
       this.subscriptions.set(`session-${sessionId}`, sessionSubscription);
-      this.subscriptions.set(`player-${playerId}`, playerSubscription);
-      this.subscriptions.set(`sync-${playerId}`, syncSubscription);
-      this.subscriptions.set(`error-${playerId}`, errorSubscription);
 
-      // Send join message
       this.client.publish({
         destination: '/app/game.join',
         body: JSON.stringify({
@@ -178,7 +130,7 @@ export class WebSocketService {
         })
       });
 
-      console.log(`🎮 Joined WebSocket session: ${sessionId}`);
+      console.log(`Joined WebSocket session: ${sessionId}`);
       resolve();
     });
   }
