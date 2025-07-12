@@ -91,7 +91,7 @@ public class GameService {
 
     private Map<String, Object> createMockGame() {
         Map<String, Object> game = new HashMap<>();
-        game.put("id", "demo-game-1");
+        game.put("id", "heroes-conquest-1");
         game.put("name", "Partie de Démonstration");
         game.put("currentTurn", 1);
         game.put("turnStartTime", new Date());
