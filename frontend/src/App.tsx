@@ -1,9 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import Game from './pages/Game';
 import TemporalGame from './pages/TemporalGame';
-import { useGameStore } from './store/useGameStore';
 
 const GameSelector: React.FC = () => {
   return (
@@ -45,12 +44,6 @@ const GameSelector: React.FC = () => {
 };
 
 const App: React.FC = () => {
-  const { currentGame, isLoading, error } = useGameStore();
-
-  // For now, we'll show a demo game interface
-  // In a real app, you'd have proper authentication and game selection
-  const demoGameId = 'demo-game-1';
-
   return (
     <Router>
       <div className="App">

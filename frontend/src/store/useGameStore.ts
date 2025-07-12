@@ -331,11 +331,14 @@ export const useGameStore = create<GameStore>((set, get) => ({
     setError(null);
 
     try {
-      const game = await GameService.getGame(gameId);
-      const currentPlayer = await GameService.getCurrentPlayer(gameId);
+      const gameState = await GameService.initializeGame(gameId);
       
-      setCurrentGame(game);
-      setCurrentPlayer(currentPlayer);
+      if (gameState.currentGame) {
+        setCurrentGame(gameState.currentGame);
+      }
+      if (gameState.currentPlayer) {
+        setCurrentPlayer(gameState.currentPlayer);
+      }
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Failed to load game');
     } finally {
@@ -344,15 +347,20 @@ export const useGameStore = create<GameStore>((set, get) => ({
   },
 
   refreshGameState: async () => {
-    const { currentGame, setLoading, setError, setCurrentGame } = get();
+    const { currentGame, setLoading, setError, setCurrentGame, setCurrentPlayer } = get();
     if (!currentGame) return;
 
     setLoading(true);
     setError(null);
 
     try {
-      const updatedGame = await GameService.getGame(currentGame.id);
-      setCurrentGame(updatedGame);
+      const gameState = await GameService.getGameState(currentGame.id);
+      if (gameState.currentGame) {
+        setCurrentGame(gameState.currentGame);
+      }
+      if (gameState.currentPlayer) {
+        setCurrentPlayer(gameState.currentPlayer);
+      }
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Failed to refresh game state');
     } finally {
