@@ -1,0 +1,323 @@
+/* Reset et styles de base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Cinzel', 'Times New Roman', serif;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  color: #e8e8e8;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a2e;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #c9a66b 0%, #8b7355 100%);
+  border-radius: 6px;
+  border: 2px solid #1a1a2e;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #d4b77c 0%, #9c8a6a 100%);
+}
+
+/* Variables CSS pour les couleurs du thème */
+:root {
+  --primary-gold: #c9a66b;
+  --secondary-gold: #8b7355;
+  --dark-blue: #1a1a2e;
+  --medium-blue: #16213e;
+  --light-blue: #0f3460;
+  --accent-red: #e74c3c;
+  --accent-green: #27ae60;
+  --accent-purple: #9b59b6;
+  --text-light: #e8e8e8;
+  --text-dark: #2c2c2c;
+  --border-gold: #c9a66b;
+  --shadow-dark: rgba(0, 0, 0, 0.8);
+  --shadow-gold: rgba(201, 166, 107, 0.3);
+}
+
+/* Animations globales */
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 5px var(--shadow-gold); }
+  50% { box-shadow: 0 0 20px var(--shadow-gold), 0 0 30px var(--shadow-gold); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Classes utilitaires */
+.glow-effect {
+  animation: glow 2s ease-in-out infinite;
+}
+
+.float-effect {
+  animation: float 3s ease-in-out infinite;
+}
+
+.pulse-effect {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.shimmer-effect {
+  background: linear-gradient(90deg, transparent, var(--primary-gold), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Styles pour les boutons */
+.btn {
+  padding: 12px 24px;
+  border: 2px solid var(--border-gold);
+  background: linear-gradient(135deg, var(--primary-gold) 0%, var(--secondary-gold) 100%);
+  color: var(--text-dark);
+  font-family: 'Cinzel', serif;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px var(--shadow-gold);
+  background: linear-gradient(135deg, #d4b77c 0%, #9c8a6a 100%);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Styles pour les cartes */
+.card {
+  background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.9) 100%);
+  border: 2px solid var(--border-gold);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 32px var(--shadow-dark);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px var(--shadow-dark), 0 0 20px var(--shadow-gold);
+}
+
+/* Styles pour les titres */
+.title {
+  font-family: 'Cinzel', serif;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px var(--shadow-dark);
+}
+
+.title-large {
+  font-size: 2.5rem;
+  color: var(--primary-gold);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.title-medium {
+  font-size: 1.8rem;
+  color: var(--primary-gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.title-small {
+  font-size: 1.2rem;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Styles pour les grilles */
+.grid {
+  display: grid;
+  gap: 20px;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4 {
+    grid-template-columns: 1fr;
+  }
+  
+  .title-large {
+    font-size: 2rem;
+  }
+  
+  .title-medium {
+    font-size: 1.5rem;
+  }
+}
+
+/* Styles pour les icônes et figurines */
+.icon {
+  font-size: 24px;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.icon-large {
+  font-size: 48px;
+}
+
+.icon-medium {
+  font-size: 32px;
+}
+
+.icon-small {
+  font-size: 16px;
+}
+
+/* Styles pour les statuts */
+.status {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.status-active {
+  background: var(--accent-green);
+  color: white;
+}
+
+.status-waiting {
+  background: var(--primary-gold);
+  color: var(--text-dark);
+}
+
+.status-error {
+  background: var(--accent-red);
+  color: white;
+}
+
+/* Styles pour les tooltips */
+.tooltip {
+  position: relative;
+  cursor: help;
+}
+
+.tooltip:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--dark-blue);
+  color: var(--text-light);
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 1000;
+  border: 1px solid var(--border-gold);
+  box-shadow: 0 4px 12px var(--shadow-dark);
+}
+
+/* Styles pour les chargements */
+.loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid var(--border-gold);
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Styles pour les notifications */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 15px 20px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  z-index: 1000;
+  animation: slideIn 0.3s ease-out;
+}
+
+.notification.success {
+  background: var(--accent-green);
+}
+
+.notification.error {
+  background: var(--accent-red);
+}
+
+.notification.warning {
+  background: var(--primary-gold);
+  color: var(--text-dark);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
