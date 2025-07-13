@@ -36,6 +36,11 @@ public class MultiplayerService {
         GameSession session = gameSessionRepository.findBySessionId(sessionId)
             .orElseThrow(() -> new RuntimeException("Session not found: " + sessionId));
         
+        // Check if player is already in the session
+        if (session.getPlayerIds().contains(playerId)) {
+            return session; // Player already in session, just return the session
+        }
+        
         if (session.isFull()) {
             throw new RuntimeException("Session is full");
         }
@@ -134,6 +139,12 @@ public class MultiplayerService {
         gameState.put("zfcEnabled", session.getZfcEnabled());
         
         return gameState;
+    }
+    
+    // Add method to clean up sessions
+    public void deleteSession(String sessionId) {
+        gameSessionRepository.findBySessionId(sessionId)
+            .ifPresent(session -> gameSessionRepository.delete(session));
     }
     
     // Private helper methods

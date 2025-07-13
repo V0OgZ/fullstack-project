@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import org.springframework.http.ResponseEntity;
 
 @Controller
 @RestController
@@ -63,6 +64,22 @@ public class MultiplayerController {
     @GetMapping("/sessions/{sessionId}")
     public GameSession getSession(@PathVariable String sessionId) {
         return multiplayerService.getSession(sessionId);
+    }
+
+    @DeleteMapping("/sessions/{sessionId}")
+    public ResponseEntity<Map<String, Object>> deleteSession(@PathVariable String sessionId) {
+        try {
+            multiplayerService.deleteSession(sessionId);
+            return ResponseEntity.ok(Map.of(
+                "success", true,
+                "message", "Session deleted successfully"
+            ));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of(
+                "success", false,
+                "message", e.getMessage()
+            ));
+        }
     }
     
     // WebSocket message handlers for real-time communication

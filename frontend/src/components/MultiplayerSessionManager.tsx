@@ -38,7 +38,7 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
     try {
       setLoading(true);
       const response = await ApiService.getJoinableSessions();
-      setSessions(response.data || []);
+      setSessions(response || []);
     } catch (error) {
       console.error('Failed to load sessions:', error);
       onError('Failed to load multiplayer sessions');
@@ -118,17 +118,17 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
         creatorId: playerId
       });
       
-      console.log('✅ Session created:', response.data);
+      console.log('✅ Session created:', response);
       
       // Join the WebSocket session
-      await websocketService.joinSession(response.data.sessionId, playerId);
+      await websocketService.joinSession(response.sessionId, playerId);
       
-      onSessionJoined(response.data.sessionId);
+      onSessionJoined(response.sessionId);
       setCreateSessionMode(false);
       setSessionName('');
     } catch (error) {
       console.error('❌ Failed to create session:', error);
-      onError('Failed to create multiplayer session');
+      onError(`Failed to create session: ${error instanceof Error ? error.message : 'Unknown error'}`);
     } finally {
       setLoading(false);
     }
@@ -143,7 +143,7 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
     try {
       setLoading(true);
       const response = await ApiService.joinMultiplayerSession(sessionId, playerId);
-      console.log('✅ Joined session:', response.data);
+      console.log('✅ Joined session:', response);
       
       // Join the WebSocket session
       await websocketService.joinSession(sessionId, playerId);

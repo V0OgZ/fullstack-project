@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ApiService } from '../services/api';
 import { useTranslation } from '../i18n';
@@ -34,41 +34,28 @@ const ScenarioSelector: React.FC = () => {
   const [selectedScenario, setSelectedScenario] = useState<Scenario | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    loadScenarios();
-  }, [selectedCategory, selectedDifficulty]);
-
-  const loadScenarios = async () => {
+  const loadScenarios = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
       
-      let scenarioData: Scenario[] = [];
+      // Initialize default scenarios first
+      await ApiService.initializeDefaultScenarios();
       
-      // Load scenarios based on selected category
-      if (selectedCategory === 'single') {
-        scenarioData = await ApiService.getSinglePlayerScenarios();
-      } else if (selectedCategory === 'multiplayer') {
-        scenarioData = await ApiService.getMultiplayerScenarios();
-      } else if (selectedCategory === 'campaign') {
-        scenarioData = await ApiService.getCampaignScenarios();
-      } else {
-        scenarioData = await ApiService.getAllScenarios();
-      }
-      
-      // Filter by difficulty if selected
-      if (selectedDifficulty !== 'all') {
-        scenarioData = scenarioData.filter(s => s.difficulty === selectedDifficulty);
-      }
-      
-      setScenarios(scenarioData);
+      // Then load all scenarios
+      const response = await ApiService.getAllScenarios();
+      setScenarios(response);
     } catch (err) {
-      console.error('Failed to load scenarios:', err);
-      setError('Failed to load scenarios. Please try again.');
+      setError('Failed to load scenarios');
+      console.error('Error loading scenarios:', err);
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    loadScenarios();
+  }, [loadScenarios]);
 
   const initializeDefaultScenarios = async () => {
     try {

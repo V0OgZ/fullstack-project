@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import Game from './pages/Game';
 import LanguageSelector from './components/LanguageSelector';
-import ScenarioSelector from './components/ScenarioSelector';
+// import ScenarioSelector from './components/ScenarioSelector'; // Hidden for now
 import { useTranslation } from './i18n';
 
 const GameSelector: React.FC = () => {
@@ -47,21 +47,6 @@ const GameSelector: React.FC = () => {
       </header>
       
       <div className="game-options">
-        <Link to="/scenarios" className="game-option scenarios">
-          <div className="game-icon">🎯</div>
-          <h2>{t('selectScenario')}</h2>
-          <p>{t('chooseYourAdventure')}</p>
-          <div className="game-features">
-            <span>📚 {t('campaign')}</span>
-            <span>🏰 {t('singlePlayer')}</span>
-            <span>🌐 {t('multiplayer')}</span>
-          </div>
-          <div className="difficulty-indicator easy">{t('allDifficulties')}</div>
-          <button data-testid="scenario-selector-button" className="start-game-btn">
-            Choose Scenario
-          </button>
-        </Link>
-
         <Link to="/game/conquete-classique" className="game-option classic">
           <div className="game-icon">🏰</div>
           <h2>{t('classicConquest')}</h2>
@@ -73,7 +58,7 @@ const GameSelector: React.FC = () => {
           </div>
           <div className="difficulty-indicator easy">{t('easy')}</div>
           <button data-testid="start-game-button" className="start-game-btn">
-            Start Game
+            {t('startGame')}
           </button>
         </Link>
         
@@ -88,22 +73,22 @@ const GameSelector: React.FC = () => {
           </div>
           <div className="difficulty-indicator hard">{t('advanced')}</div>
           <button data-testid="start-game-button" className="start-game-btn">
-            Start Game
+            {t('startGame')}
           </button>
         </Link>
 
         <Link to="/game/multiplayer-arena" className="game-option multiplayer">
           <div className="game-icon">🌐</div>
           <h2>{t('multiplayerArena')}</h2>
-          <p>Compete against other players in real-time battles</p>
+          <p>{t('multiplayerArenaDescription')}</p>
           <div className="game-features">
-            <span>🏆 Ranked matches</span>
-            <span>👥 2-8 players</span>
-            <span>⚡ Real-time strategy</span>
+            <span>🏆 {t('rankedMatches')}</span>
+            <span>👥 {t('playersRange')}</span>
+            <span>⚡ {t('realTimeStrategy')}</span>
           </div>
-          <div className="difficulty-indicator multiplayer">COMPETITIVE</div>
+          <div className="difficulty-indicator multiplayer">{t('competitive')}</div>
           <button data-testid="start-game-button" className="start-game-btn">
-            Start Game
+            {t('startGame')}
           </button>
         </Link>
       </div>
@@ -126,10 +111,11 @@ const App: React.FC = () => {
     <Router>
       <div className="App" data-testid="app-container">
         <Routes>
-          <Route 
+          {/* Scenario Selector - Hidden for now, can be restored later */}
+          {/* <Route 
             path="/scenarios" 
             element={<ScenarioSelector />} 
-          />
+          /> */}
           <Route 
             path="/game/:scenarioId" 
             element={<Game />} 
