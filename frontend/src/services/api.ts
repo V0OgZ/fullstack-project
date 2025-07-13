@@ -1,56 +1,51 @@
 import { ApiResponse, HealthResponse } from '../types/api';
 
-const API_BASE_URL = 'http://localhost:8080/api';
+const BASE_URL = 'http://localhost:8080/api';
 
 export class ApiService {
-  private static async makeRequest<T>(endpoint: string, options?: RequestInit): Promise<T> {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+  private static async makeRequest(endpoint: string, options: RequestInit = {}): Promise<any> {
+    const url = `${BASE_URL}${endpoint}`;
+    const config: RequestInit = {
       headers: {
         'Content-Type': 'application/json',
-        ...options?.headers
+        ...options.headers,
       },
-      ...options
-    });
-    
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    
-    return response.json();
-  }
+      ...options,
+    };
 
-  // Basic health endpoints
-  static async getHello(): Promise<ApiResponse> {
-    return this.makeRequest<ApiResponse>('/hello');
-  }
-
-  static async getHealth(): Promise<HealthResponse> {
-    return this.makeRequest<HealthResponse>('/health');
-  }
-
-  static async checkBackendStatus(): Promise<boolean> {
     try {
-      await this.getHealth();
-      return true;
-    } catch {
-      return false;
+      const response = await fetch(url, config);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      return await response.json();
+    } catch (error) {
+      console.error(`API request failed: ${endpoint}`, error);
+      throw error;
     }
+  }
+
+  // Health check
+  static async getHealth(): Promise<any> {
+    return this.makeRequest('/health');
   }
 
   // Game management
+  static async createGame(gameData: any): Promise<any> {
+    return this.makeRequest('/games', {
+      method: 'POST',
+      body: JSON.stringify(gameData)
+    });
+  }
+
   static async getGame(gameId: string): Promise<any> {
     return this.makeRequest(`/games/${gameId}`);
   }
 
-  static async getAvailableGames(): Promise<any[]> {
-    return this.makeRequest('/games/available');
-  }
-
-  static async createGame(request: any): Promise<any> {
-    return this.makeRequest('/games', {
-      method: 'POST',
-      body: JSON.stringify(request)
-    });
+  static async getGameState(gameId: string): Promise<any> {
+    return this.makeRequest(`/games/${gameId}/state`);
   }
 
   static async joinGame(gameId: string): Promise<any> {
@@ -59,15 +54,21 @@ export class ApiService {
     });
   }
 
+  static async getAvailableGames(): Promise<any> {
+    return this.makeRequest('/games/available');
+  }
+
   static async getCurrentPlayer(gameId: string): Promise<any> {
     return this.makeRequest(`/games/${gameId}/current-player`);
   }
 
-  static async getGameState(gameId: string): Promise<any> {
-    return this.makeRequest(`/games/${gameId}/state`);
+  static async endTurn(gameId: string): Promise<any> {
+    return this.makeRequest(`/games/${gameId}/end-turn`, {
+      method: 'POST'
+    });
   }
 
-  static async getGameHistory(gameId: string): Promise<any[]> {
+  static async getGameHistory(gameId: string): Promise<any> {
     return this.makeRequest(`/games/${gameId}/history`);
   }
 
@@ -93,224 +94,148 @@ export class ApiService {
     });
   }
 
-  // Action management (for ZFC shadow actions)
-  static async getPendingActions(gameId: string): Promise<any[]> {
+  // Actions
+  static async getPendingActions(gameId: string): Promise<any> {
     return this.makeRequest(`/games/${gameId}/actions/pending`);
   }
 
-  static async cancelAction(actionId: string): Promise<void> {
-    await this.makeRequest(`/actions/${actionId}/cancel`, {
+  static async cancelAction(actionId: string): Promise<any> {
+    return this.makeRequest(`/actions/${actionId}/cancel`, {
       method: 'POST'
     });
   }
 
-  // Turn management
-  static async endTurn(gameId: string): Promise<void> {
-    await this.makeRequest(`/games/${gameId}/end-turn`, {
-      method: 'POST'
-    });
-  }
-
-  // Combat results
-  static async getCombatResults(gameId: string): Promise<any[]> {
+  static async getCombatResults(gameId: string): Promise<any> {
     return this.makeRequest(`/games/${gameId}/combat-results`);
   }
 
-  // Multiplayer session management
-  static async createMultiplayerSession(request: any): Promise<any> {
-    return this.makeRequest('/multiplayer/sessions', {
-      method: 'POST',
-      body: JSON.stringify({
-        name: request.sessionName,
-        maxPlayers: request.maxPlayers,
-        gameMode: request.gameMode,
-        creatorId: request.creatorId
-      })
+  // Magic Items API
+  static async getAllMagicItems(): Promise<any> {
+    return this.makeRequest('/magic-items', {
+      method: 'GET'
     });
   }
 
-  static async getJoinableSessions(): Promise<any> {
-    return this.makeRequest('/multiplayer/sessions');
-  }
-
-  static async joinMultiplayerSession(sessionId: string, playerId: string): Promise<any> {
-    return this.makeRequest(`/multiplayer/sessions/${sessionId}/join`, {
-      method: 'POST',
-      body: JSON.stringify({ playerId })
+  static async getMagicItem(itemId: string): Promise<any> {
+    return this.makeRequest(`/magic-items/${itemId}`, {
+      method: 'GET'
     });
   }
 
-  static async leaveMultiplayerSession(sessionId: string, playerId: string): Promise<any> {
-    return this.makeRequest(`/multiplayer/sessions/${sessionId}/leave`, {
+  static async applyItemEffects(hero: any, equippedItems: any): Promise<any> {
+    return this.makeRequest('/magic-items/apply-effects', {
       method: 'POST',
-      body: JSON.stringify({ playerId })
+      body: JSON.stringify({ hero, equippedItems })
     });
   }
 
-  static async startMultiplayerSession(sessionId: string, playerId: string): Promise<any> {
-    return this.makeRequest(`/multiplayer/sessions/${sessionId}/start`, {
+  static async validateEquipItem(itemId: string, heroLevel: number): Promise<any> {
+    return this.makeRequest('/magic-items/validate-equip', {
       method: 'POST',
-      body: JSON.stringify({ playerId })
+      body: JSON.stringify({ itemId, heroLevel })
     });
   }
 
-  static async getMultiplayerGameState(sessionId: string): Promise<any> {
-    return this.makeRequest(`/multiplayer/sessions/${sessionId}`);
-  }
-
-  static async sendGameAction(sessionId: string, playerId: string, actionType: string, actionData: any): Promise<any> {
-    return this.makeRequest(`/multiplayer/sessions/${sessionId}/actions`, {
+  static async consumeItem(itemId: string, hero: any, playerGold: number): Promise<any> {
+    return this.makeRequest('/magic-items/consume', {
       method: 'POST',
-      body: JSON.stringify({ playerId, actionType, actionData })
+      body: JSON.stringify({ itemId, hero, playerGold })
     });
   }
 
-  // AI and Political Advisor endpoints
-  static async getPoliticalAdvisors(): Promise<any> {
-    return this.makeRequest('/ai/political-advisors');
-  }
-
-  static async generateAdvisorRecommendations(event: any, choice: any): Promise<any> {
-    return this.makeRequest('/ai/political-advisors/recommendations', {
+  static async calculateTemporalEffects(equippedItems: any): Promise<any> {
+    return this.makeRequest('/magic-items/temporal-effects', {
       method: 'POST',
-      body: JSON.stringify({ event, choice })
+      body: JSON.stringify(equippedItems)
     });
   }
 
-  static async generatePoliticalEvent(currentReputation: any, turn: number): Promise<any> {
-    return this.makeRequest('/ai/political-events/generate', {
+  static async getTotalItemBonuses(equippedItems: any): Promise<any> {
+    return this.makeRequest('/magic-items/total-bonuses', {
       method: 'POST',
-      body: JSON.stringify({ currentReputation, turn })
+      body: JSON.stringify(equippedItems)
     });
   }
 
-  static async updateAdvisorOpinions(currentAdvisors: any, choice: any): Promise<any> {
-    return this.makeRequest('/ai/political-advisors/update-opinions', {
+  // ZFC API
+  static async calculateZFC(playerId: string, heroId: string, hero: any, map: any, currentTurn: number): Promise<any> {
+    return this.makeRequest('/zfc/calculate', {
       method: 'POST',
-      body: JSON.stringify({ currentAdvisors, choice })
+      body: JSON.stringify({ playerId, heroId, hero, map, currentTurn })
     });
   }
 
-  static async calculatePoliticalStability(advisors: any): Promise<any> {
-    return this.makeRequest('/ai/political-advisors/calculate-stability', {
+  static async calculateZFCMovementCost(from: any, to: any, hero: any, map: any): Promise<any> {
+    return this.makeRequest('/zfc/movement-cost', {
       method: 'POST',
-      body: JSON.stringify({ advisors })
+      body: JSON.stringify({ from, to, hero, map })
     });
   }
 
-  // Scenario management
-  static async getAllScenarios(): Promise<any> {
-    return this.makeRequest('/scenarios');
+  static async validateZFCAction(actionType: string, heroId: string, targetPosition: any, zfc: any, map: any): Promise<any> {
+    return this.makeRequest('/zfc/validate-action', {
+      method: 'POST',
+      body: JSON.stringify({ actionType, heroId, targetPosition, zfc, map })
+    });
   }
 
-  static async getScenarioById(scenarioId: string): Promise<any> {
-    return this.makeRequest(`/scenarios/${scenarioId}`);
+  static async generateShadowActions(pendingActions: any, currentTurn: number): Promise<any> {
+    return this.makeRequest('/zfc/shadow-actions', {
+      method: 'POST',
+      body: JSON.stringify({ pendingActions, currentTurn })
+    });
   }
 
-  static async getActiveScenarios(): Promise<any> {
-    return this.makeRequest('/scenarios/active');
+  static async calculateTemporalInterference(activeZFCs: any): Promise<any> {
+    return this.makeRequest('/zfc/temporal-interference', {
+      method: 'POST',
+      body: JSON.stringify({ activeZFCs })
+    });
   }
 
-  static async getScenariosByDifficulty(difficulty: string): Promise<any> {
-    return this.makeRequest(`/scenarios/difficulty/${difficulty}`);
+  // Castle Management
+  static async getBuildingsByCastle(castleId: string): Promise<any> {
+    return this.makeRequest(`/castles/${castleId}/buildings`);
   }
 
-  static async getSinglePlayerScenarios(): Promise<any> {
-    return this.makeRequest('/scenarios/single-player');
+  static async getAvailableUnitsForRecruitment(castleId: string): Promise<any> {
+    return this.makeRequest(`/castles/${castleId}/units/available`);
   }
 
-  static async getMultiplayerScenarios(): Promise<any> {
-    return this.makeRequest('/scenarios/multiplayer');
+  static async getCastleBonuses(castleId: string): Promise<any> {
+    return this.makeRequest(`/castles/${castleId}/bonuses`);
   }
 
-  static async getBeginnerScenarios(): Promise<any> {
-    return this.makeRequest('/scenarios/beginner');
-  }
-
-  static async getCampaignScenarios(): Promise<any> {
-    return this.makeRequest('/scenarios/campaign');
-  }
-
-  static async getScenarioObjectives(scenarioId: string): Promise<any> {
-    return this.makeRequest(`/scenarios/${scenarioId}/objectives`);
-  }
-
-  static async initializeDefaultScenarios(): Promise<any> {
-    return this.makeRequest('/scenarios/initialize-defaults', {
+  static async constructBuilding(castleId: string, buildingId: string): Promise<any> {
+    return this.makeRequest(`/castles/${castleId}/buildings/${buildingId}/construct`, {
       method: 'POST'
     });
   }
 
-  static async checkVictoryCondition(scenarioId: string): Promise<any> {
-    return this.makeRequest(`/scenarios/${scenarioId}/victory-check`);
-  }
-
-  static async generateScenarioMap(scenarioId: string): Promise<any> {
-    return this.makeRequest(`/scenarios/${scenarioId}/map`);
-  }
-
-  // AI management
-  static async getAIPlayer(aiPlayerId: string): Promise<any> {
-    return this.makeRequest(`/ai/players/${aiPlayerId}`);
-  }
-
-  static async getAIPlayersForGame(gameId: string): Promise<any> {
-    return this.makeRequest(`/ai/players/game/${gameId}`);
-  }
-
-  static async createAIPlayer(playerData: any): Promise<any> {
-    return this.makeRequest('/ai/players', {
+  static async upgradeBuilding(buildingId: string, data: any): Promise<any> {
+    return this.makeRequest(`/buildings/${buildingId}/upgrade`, {
       method: 'POST',
-      body: JSON.stringify(playerData)
+      body: JSON.stringify(data)
     });
   }
 
-  static async makeAIDecision(aiPlayerId: string, gameState: any): Promise<any> {
-    return this.makeRequest(`/ai/players/${aiPlayerId}/decision`, {
+  static async recruitUnits(buildingId: string, data: any): Promise<any> {
+    return this.makeRequest(`/buildings/${buildingId}/recruit`, {
       method: 'POST',
-      body: JSON.stringify(gameState)
+      body: JSON.stringify(data)
     });
   }
 
-  static async updateAIPlayerStats(aiPlayerId: string, outcome: string): Promise<any> {
-    return this.makeRequest(`/ai/players/${aiPlayerId}/stats`, {
-      method: 'POST',
-      body: JSON.stringify({ outcome })
+  static async checkAndCompleteReadyBuildings(gameId: string): Promise<any> {
+    return this.makeRequest(`/games/${gameId}/buildings/check-ready`, {
+      method: 'POST'
     });
   }
 
-  // Building Management endpoints
-  static async getAllBuildings(): Promise<any> {
-    return this.makeRequest('/buildings');
-  }
-
-  static async getBuildingById(buildingId: string): Promise<any> {
-    return this.makeRequest(`/buildings/${buildingId}`);
-  }
-
-  static async getBuildingsByCastle(castleId: string): Promise<any> {
-    return this.makeRequest(`/buildings/castle/${castleId}`);
-  }
-
-  static async getBuildingsByPlayer(playerId: string): Promise<any> {
-    return this.makeRequest(`/buildings/player/${playerId}`);
-  }
-
-  static async getBuildingsByGame(gameId: string): Promise<any> {
-    return this.makeRequest(`/buildings/game/${gameId}`);
-  }
-
-  static async startConstruction(buildingData: any): Promise<any> {
-    return this.makeRequest('/buildings/construct', {
+  static async startConstructionWithResources(data: any): Promise<any> {
+    return this.makeRequest('/buildings/start-construction', {
       method: 'POST',
-      body: JSON.stringify(buildingData)
-    });
-  }
-
-  static async startConstructionWithResources(buildingData: any): Promise<any> {
-    return this.makeRequest('/buildings/construct/with-resources', {
-      method: 'POST',
-      body: JSON.stringify(buildingData)
+      body: JSON.stringify(data)
     });
   }
 
@@ -320,46 +245,72 @@ export class ApiService {
     });
   }
 
-  static async upgradeBuilding(buildingId: string, upgradeData: any): Promise<any> {
-    return this.makeRequest(`/buildings/${buildingId}/upgrade`, {
+  static async getJoinableSessions(): Promise<any> {
+    return this.makeRequest('/games/joinable');
+  }
+
+  static async createMultiplayerSession(data: any): Promise<any> {
+    return this.makeRequest('/games/multiplayer', {
       method: 'POST',
-      body: JSON.stringify(upgradeData)
+      body: JSON.stringify(data)
     });
   }
 
-  static async recruitUnits(buildingId: string, recruitData: any): Promise<any> {
-    return this.makeRequest(`/buildings/${buildingId}/recruit`, {
+  static async joinMultiplayerSession(sessionId: string, playerId: string): Promise<any> {
+    return this.makeRequest(`/games/multiplayer/${sessionId}/join`, {
       method: 'POST',
-      body: JSON.stringify(recruitData)
+      body: JSON.stringify({ playerId })
     });
   }
 
-  static async getAvailableUnitsForRecruitment(castleId: string): Promise<any> {
-    return this.makeRequest(`/buildings/castle/${castleId}/units/available`);
-  }
-
-  static async canRecruitUnit(castleId: string, unitType: string, quantity: number): Promise<any> {
-    return this.makeRequest(`/buildings/castle/${castleId}/units/${unitType}/can-recruit?quantity=${quantity}`);
-  }
-
-  static async getCastleBonuses(castleId: string): Promise<any> {
-    return this.makeRequest(`/buildings/castle/${castleId}/bonuses`);
-  }
-
-  static async getAvailableSpells(castleId: string): Promise<any> {
-    return this.makeRequest(`/buildings/castle/${castleId}/spells`);
-  }
-
-  static async createStartingCastle(castleData: any): Promise<any> {
-    return this.makeRequest('/buildings/castle/create-starting', {
-      method: 'POST',
-      body: JSON.stringify(castleData)
-    });
-  }
-
-  static async checkAndCompleteReadyBuildings(gameId: string): Promise<any> {
-    return this.makeRequest(`/buildings/game/${gameId}/check-construction`, {
+  static async initializeDefaultScenarios(): Promise<any> {
+    return this.makeRequest('/scenarios/initialize', {
       method: 'POST'
     });
+  }
+
+  static async getAllScenarios(): Promise<any> {
+    return this.makeRequest('/scenarios');
+  }
+
+  static async getPoliticalAdvisors(): Promise<any> {
+    return this.makeRequest('/political/advisors');
+  }
+
+  static async generateAdvisorRecommendations(event: any, choice: any): Promise<any> {
+    return this.makeRequest('/political/recommendations', {
+      method: 'POST',
+      body: JSON.stringify({ event, choice })
+    });
+  }
+
+  static async generatePoliticalEvent(currentReputation: any, turn: number): Promise<any> {
+    return this.makeRequest('/political/events/generate', {
+      method: 'POST',
+      body: JSON.stringify({ currentReputation, turn })
+    });
+  }
+
+  static async updateAdvisorOpinions(currentAdvisors: any, choice: any): Promise<any> {
+    return this.makeRequest('/political/advisors/update', {
+      method: 'POST',
+      body: JSON.stringify({ currentAdvisors, choice })
+    });
+  }
+
+  static async calculatePoliticalStability(advisors: any): Promise<any> {
+    return this.makeRequest('/political/stability/calculate', {
+      method: 'POST',
+      body: JSON.stringify({ advisors })
+    });
+  }
+
+  static async checkBackendStatus(): Promise<boolean> {
+    try {
+      await this.makeRequest('/health');
+      return true;
+    } catch (error) {
+      return false;
+    }
   }
 } 

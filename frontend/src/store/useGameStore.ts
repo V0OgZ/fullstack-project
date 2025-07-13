@@ -1,7 +1,9 @@
 import { create } from 'zustand';
-import { GameState, Game, Player, GameAction, Position, CombatResult, Tile, ZoneOfCausality, TimelineAction, ShadowAction, Hero } from '../types/game';
-import { GameService } from '../services/gameService';
+import { persist } from 'zustand/middleware';
+import { GameState, Game, Player, Tile, Position, Hero, GameAction, CombatResult, TimelineAction, ShadowAction, ZoneOfCausality, InventoryItem } from '../types/game';
 import { MagicItemService, EquippedItems } from '../services/magicItemService';
+import { ZFCService } from '../services/zfcService';
+import { GameService } from '../services/gameService';
 
 interface GameStore extends GameState {
   // Map state
@@ -26,24 +28,24 @@ interface GameStore extends GameState {
   setLoading: (loading: boolean) => void;
   setError: (error: string | null) => void;
   
-  // NEW: Magic Item Actions
-  equipItem: (heroId: string, itemId: string, slot: string) => boolean;
+  // NEW: Magic Item Actions (now using backend)
+  equipItem: (heroId: string, itemId: string, slot: string) => Promise<boolean>;
   unequipItem: (heroId: string, slot: string) => boolean;
-  consumeItem: (itemId: string, heroId: string) => boolean;
+  consumeItem: (itemId: string, heroId: string) => Promise<boolean>;
   addItemToInventory: (itemId: string) => void;
   removeItemFromInventory: (itemId: string) => void;
-  getEnhancedHero: (heroId: string) => Hero | null;
+  getEnhancedHero: (heroId: string) => Promise<Hero | null>;
   
   // Helper functions
   convertTilesToMap: (tiles: any[], width: number, height: number) => Tile[][];
   
-  // ZFC Actions
+  // ZFC Actions (now using backend)
   addTimelineAction: (action: TimelineAction) => void;
   updateTimelineAction: (actionId: string, status: TimelineAction['status']) => void;
   setShadowActions: (shadows: ShadowAction[]) => void;
   setVisibleZFCs: (zfcs: ZoneOfCausality[]) => void;
   setLockedZones: (zones: Position[]) => void;
-  calculateZFC: (playerId: string, heroId: string) => ZoneOfCausality;
+  calculateZFC: (playerId: string, heroId: string) => Promise<ZoneOfCausality>;
   validateAction: (actionId: string) => Promise<boolean>;
   
   // Game actions
@@ -130,33 +132,38 @@ export const useGameStore = create<GameStore>((set, get) => ({
     return map;
   },
 
-  // NEW: Magic Item Actions
-  equipItem: (heroId: string, itemId: string, slot: string) => {
+  // NEW: Magic Item Actions (now using backend)
+  equipItem: async (heroId: string, itemId: string, slot: string) => {
     const { equippedItems, currentGame, currentPlayer } = get();
     if (!currentGame || !currentPlayer) return false;
 
     const hero = currentPlayer.heroes.find(h => h.id === heroId);
     if (!hero) return false;
 
-    // Check level requirement using MagicItemService
-    const result = MagicItemService.equipItem(itemId, hero.level);
-    if (!result.success) {
+    try {
+      // Check level requirement using backend MagicItemService
+      const result = await MagicItemService.equipItem(itemId, hero.level);
+      if (!result.success) {
+        console.log(result.message);
+        return false;
+      }
+
+      // Update equipped items
+      const newEquippedItems = { ...equippedItems };
+      if (!newEquippedItems[heroId]) {
+        newEquippedItems[heroId] = {};
+      }
+
+      // Use type assertion for slot access
+      (newEquippedItems[heroId] as any)[slot] = itemId;
+      
+      set({ equippedItems: newEquippedItems });
       console.log(result.message);
+      return true;
+    } catch (error) {
+      console.error('Error equipping item:', error);
       return false;
     }
-
-    // Update equipped items
-    const newEquippedItems = { ...equippedItems };
-    if (!newEquippedItems[heroId]) {
-      newEquippedItems[heroId] = {};
-    }
-
-    // Use type assertion for slot access
-    (newEquippedItems[heroId] as any)[slot] = itemId;
-    
-    set({ equippedItems: newEquippedItems });
-    console.log(result.message);
-    return true;
   },
 
   unequipItem: (heroId: string, slot: string) => {
@@ -176,26 +183,31 @@ export const useGameStore = create<GameStore>((set, get) => ({
     return true;
   },
 
-  consumeItem: (itemId: string, heroId: string) => {
+  consumeItem: async (itemId: string, heroId: string) => {
     const { currentGame, currentPlayer } = get();
     if (!currentGame || !currentPlayer) return false;
 
     const hero = currentPlayer.heroes.find(h => h.id === heroId);
     if (!hero) return false;
 
-    const result = MagicItemService.consumeItem(
-      itemId, 
-      hero, 
-      currentPlayer.resources.gold
-    );
+    try {
+      const result = await MagicItemService.consumeItem(
+        itemId, 
+        hero, 
+        currentPlayer.resources.gold
+      );
 
-    if (result.success) {
-      console.log(result.message);
-      // Remove item from inventory after use
-      get().removeItemFromInventory(itemId);
-      return true;
-    } else {
-      console.log(result.message);
+      if (result.success) {
+        console.log(result.message);
+        // Remove item from inventory after use
+        get().removeItemFromInventory(itemId);
+        return true;
+      } else {
+        console.log(result.message);
+        return false;
+      }
+    } catch (error) {
+      console.error('Error consuming item:', error);
       return false;
     }
   },
@@ -215,20 +227,25 @@ export const useGameStore = create<GameStore>((set, get) => ({
     }));
   },
 
-  getEnhancedHero: (heroId: string) => {
+  getEnhancedHero: async (heroId: string) => {
     const { equippedItems, currentGame, currentPlayer } = get();
     if (!currentGame || !currentPlayer) return null;
 
     const hero = currentPlayer.heroes.find(h => h.id === heroId);
     if (!hero) return null;
 
-    // Apply item effects using MagicItemService
-    const enhancedHero = MagicItemService.applyItemEffectsToHero(
-      hero, 
-      equippedItems[heroId] || {}
-    );
+    try {
+      // Apply item effects using backend MagicItemService
+      const enhancedHero = await MagicItemService.applyItemEffectsToHero(
+        hero, 
+        equippedItems[heroId] || {}
+      );
 
-    return enhancedHero;
+      return enhancedHero;
+    } catch (error) {
+      console.error('Error getting enhanced hero:', error);
+      return hero;
+    }
   },
 
   // State setters
@@ -254,7 +271,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   setLoading: (loading) => set({ isLoading: loading }),
   setError: (error) => set({ error }),
 
-  // NOUVEAU: Actions ZFC
+  // NOUVEAU: Actions ZFC (now using backend)
   addTimelineAction: (action) => set((state) => ({
     currentGame: state.currentGame ? {
       ...state.currentGame,
@@ -275,8 +292,8 @@ export const useGameStore = create<GameStore>((set, get) => ({
   setVisibleZFCs: (zfcs) => set({ visibleZFCs: zfcs }),
   setLockedZones: (zones) => set({ lockedZones: zones }),
 
-  // NOUVEAU: Calcul de Zone de Causalité
-  calculateZFC: (playerId: string, heroId: string) => {
+  // NOUVEAU: Calcul de Zone de Causalité (now using backend)
+  calculateZFC: async (playerId: string, heroId: string) => {
     const { map, currentGame } = get();
     const hero = currentGame?.players
       .find(p => p.id === playerId)
@@ -290,70 +307,108 @@ export const useGameStore = create<GameStore>((set, get) => ({
         includesTeleport: false,
         validUntil: 0,
         reachableTiles: [],
-        conflictZones: []
+        conflictZones: [],
+        temporalStability: 0.5,
+        metadata: {}
       };
     }
 
-    const reachableTiles: Position[] = [];
-    const radius = hero.movementPoints;
-    
-    // Calcul des cases atteignables (simplifié pour MVP)
-    for (let y = Math.max(0, hero.position.y - radius); y <= Math.min(map.length - 1, hero.position.y + radius); y++) {
-      for (let x = Math.max(0, hero.position.x - radius); x <= Math.min(map[0].length - 1, hero.position.x + radius); x++) {
-        const distance = Math.abs(x - hero.position.x) + Math.abs(y - hero.position.y);
-        if (distance <= radius && map[y][x].walkable) {
-          reachableTiles.push({ x, y });
-        }
+    try {
+      // Convert map to the format expected by the backend
+      const gameMap = {
+        width: map[0]?.length || 0,
+        height: map.length,
+        tiles: map.map(row => row.map(tile => ({
+          x: tile.x,
+          y: tile.y,
+          terrain: tile.terrain,
+          walkable: tile.walkable !== false,
+          movementCost: tile.movementCost,
+          hero: tile.hero || null,
+          creature: tile.creature || null,
+          structure: tile.structure || null,
+          isVisible: tile.isVisible
+        })))
+      };
+
+      const result = await ZFCService.calculateZFC(playerId, heroId, hero, gameMap, currentGame?.currentTurn || 1);
+      
+      // Extract the first ZFC zone from the result, or return a default one
+      const zfcZone = result.zfc[0];
+      if (zfcZone) {
+        return {
+          playerId: zfcZone.playerId,
+          radius: zfcZone.radius,
+          center: zfcZone.center,
+          includesTeleport: false,
+          validUntil: zfcZone.validUntil,
+          reachableTiles: zfcZone.reachableTiles,
+          conflictZones: zfcZone.conflictZones,
+          temporalStability: zfcZone.temporalStability,
+          metadata: zfcZone.metadata
+        };
       }
+    } catch (error) {
+      console.error('Error calculating ZFC:', error);
     }
 
     return {
       playerId,
-      radius,
-      center: hero.position,
-      includesTeleport: false, // À implémenter avec les sorts
-      validUntil: currentGame?.currentTurn || 1,
-      reachableTiles,
-      conflictZones: []
+      radius: 0,
+      center: { x: 0, y: 0 },
+      includesTeleport: false,
+      validUntil: 0,
+      reachableTiles: [],
+      conflictZones: [],
+      temporalStability: 0.5,
+      metadata: {}
     };
   },
 
-  // NOUVEAU: Validation d'action
   validateAction: async (actionId: string) => {
-    const { currentGame, updateTimelineAction } = get();
+    const { currentGame } = get();
     if (!currentGame) return false;
 
+    const action = currentGame.timeline.find(a => a.id === actionId);
+    if (!action) return false;
+
     try {
-      // Simulation de validation (à remplacer par l'API)
-      const action = currentGame.timeline.find(a => a.id === actionId);
-      if (!action) return false;
-
-      // Vérification des conflits ZFC
-      const hasConflict = currentGame.timeline.some(otherAction => 
-        otherAction.id !== actionId && 
-        otherAction.status === 'PENDING' &&
-        otherAction.playerId !== action.playerId &&
-        otherAction.zfc.reachableTiles.some(tile => 
-          action.zfc.reachableTiles.some(actionTile => 
-            actionTile.x === tile.x && actionTile.y === tile.y
-          )
-        )
-      );
-
-      if (hasConflict) {
-        updateTimelineAction(actionId, 'LOCKED');
-        return false;
-      } else {
-        updateTimelineAction(actionId, 'CONFIRMED');
-        return true;
+      const actionData = action.action;
+      const zfcMap = ZFCService.convertGameTilesToZFCTiles(get().map);
+      
+      // Extract target position from action
+      let targetPosition = { x: 0, y: 0 };
+      if (actionData.targetPosition) {
+        targetPosition = actionData.targetPosition;
       }
+      
+      // Validate using backend
+      if (!actionData.heroId) {
+        return false;
+      }
+      
+      const gameMapForValidation = {
+        width: zfcMap[0]?.length || 0,
+        height: zfcMap.length,
+        tiles: zfcMap
+      };
+      
+      const isValid = await ZFCService.validateZFCAction(
+        actionData.type,
+        actionData.heroId,
+        targetPosition,
+        [], // ZFC zones - we'll need to convert or get from backend
+        gameMapForValidation
+      );
+      
+      return isValid;
     } catch (error) {
-      console.error('Validation error:', error);
+      console.error('Error validating action:', error);
       return false;
     }
   },
 
-  // Game actions
+  // Game actions (updated to use backend ZFC)
   moveHero: async (heroId: string, targetPosition: Position) => {
     const { setLoading, setError, addTimelineAction, calculateZFC, currentGame, currentPlayer } = get();
     setLoading(true);
@@ -362,7 +417,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
     try {
       if (!currentGame || !currentPlayer) throw new Error('No active game or player');
 
-      const zfc = calculateZFC(currentPlayer.id, heroId);
+      const zfc = await calculateZFC(currentPlayer.id, heroId);
       
       const timelineAction: TimelineAction = {
         id: `action_${Date.now()}`,
@@ -400,7 +455,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
     try {
       if (!currentGame || !currentPlayer) throw new Error('No active game or player');
 
-      const zfc = calculateZFC(currentPlayer.id, heroId);
+      const zfc = await calculateZFC(currentPlayer.id, heroId);
       
       const timelineAction: TimelineAction = {
         id: `action_${Date.now()}`,
@@ -438,7 +493,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
     try {
       if (!currentGame || !currentPlayer) throw new Error('No active game or player');
 
-      const zfc = calculateZFC(currentPlayer.id, heroId);
+      const zfc = await calculateZFC(currentPlayer.id, heroId);
       
       const timelineAction: TimelineAction = {
         id: `action_${Date.now()}`,
@@ -539,9 +594,10 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
     try {
       const gameState = await GameService.getGameState(currentGame.id);
+      
       if (gameState.currentGame) {
         setCurrentGame(gameState.currentGame);
-        // CRITICAL FIX: Set the map state when refreshing
+        // Update the map state when refreshing
         if (gameState.currentGame.map && gameState.currentGame.map.tiles) {
           setMap(get().convertTilesToMap(gameState.currentGame.map.tiles, gameState.currentGame.map.width, gameState.currentGame.map.height));
         }
@@ -575,31 +631,25 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
   // Hot Seat mode
   switchPlayer: (playerId: string) => {
-    const { currentGame, setCurrentGame, setCurrentPlayer } = get();
+    const { currentGame, setCurrentPlayer } = get();
     if (!currentGame) return;
 
-    const newPlayer = currentGame.players.find(p => p.id === playerId);
-    if (!newPlayer) return;
-
-    const updatedGame = {
-      ...currentGame,
-      currentPlayerTurn: playerId,
-    };
-
-    setCurrentGame(updatedGame);
-    setCurrentPlayer(newPlayer);
+    const player = currentGame.players.find(p => p.id === playerId);
+    if (player) {
+      setCurrentPlayer(player);
+    }
   },
 
   nextPlayer: () => {
-    const { currentGame, switchPlayer } = get();
-    if (!currentGame || !currentGame.currentPlayerTurn) return;
+    const { currentGame, currentPlayer, switchPlayer } = get();
+    if (!currentGame || !currentPlayer) return;
 
-    const currentIndex = currentGame.players.findIndex(p => p.id === currentGame.currentPlayerTurn);
+    const currentIndex = currentGame.players.findIndex(p => p.id === currentPlayer.id);
     const nextIndex = (currentIndex + 1) % currentGame.players.length;
     const nextPlayer = currentGame.players[nextIndex];
-
+    
     if (nextPlayer) {
       switchPlayer(nextPlayer.id);
     }
-  },
+  }
 })); 

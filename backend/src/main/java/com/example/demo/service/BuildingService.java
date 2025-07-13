@@ -458,7 +458,7 @@ public class BuildingService {
     // ======================
     
     private String generateBuildingId(String castleId, String buildingType) {
-        return castleId + "_" + buildingType + "_" + System.currentTimeMillis();
+        return castleId + "_" + buildingType + "_" + java.util.UUID.randomUUID().toString().substring(0, 8);
     }
     
     private boolean canAffordBuilding(Building building, Map<String, Integer> playerResources) {

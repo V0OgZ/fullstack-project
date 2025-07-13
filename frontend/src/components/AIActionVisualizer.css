@@ -1,0 +1,598 @@
+.ai-action-visualizer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.ai-visualizer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-bottom: 2px solid #00d4ff;
+  box-shadow: 0 2px 10px rgba(0, 212, 255, 0.2);
+}
+
+.ai-visualizer-header h2 {
+  margin: 0;
+  font-size: 24px;
+  color: #00d4ff;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.header-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.refresh-btn, .manual-refresh-btn, .close-btn {
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid #00d4ff;
+  color: #00d4ff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.refresh-btn:hover, .manual-refresh-btn:hover, .close-btn:hover {
+  background: rgba(0, 212, 255, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+}
+
+.refresh-btn.active {
+  background: rgba(0, 212, 255, 0.3);
+  animation: pulse 2s infinite;
+}
+
+.close-btn {
+  background: rgba(255, 68, 68, 0.1);
+  border-color: #ff4444;
+  color: #ff4444;
+}
+
+.close-btn:hover {
+  background: rgba(255, 68, 68, 0.2);
+  box-shadow: 0 4px 12px rgba(255, 68, 68, 0.3);
+}
+
+.error-message {
+  background: rgba(255, 68, 68, 0.1);
+  border: 1px solid #ff4444;
+  color: #ff4444;
+  padding: 15px;
+  margin: 10px 30px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.ai-visualizer-content {
+  flex: 1;
+  display: flex;
+  padding: 20px 30px;
+  gap: 20px;
+  overflow: hidden;
+}
+
+.ai-players-sidebar {
+  width: 300px;
+  background: rgba(26, 26, 46, 0.8);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  overflow-y: auto;
+}
+
+.ai-players-sidebar h3 {
+  margin: 0 0 15px 0;
+  color: #00d4ff;
+  font-size: 18px;
+  text-align: center;
+}
+
+.ai-players-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ai-player-card {
+  background: rgba(22, 33, 62, 0.6);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  border-radius: 8px;
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.ai-player-card:hover {
+  background: rgba(22, 33, 62, 0.8);
+  border-color: #00d4ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
+}
+
+.ai-player-card.selected {
+  background: rgba(0, 212, 255, 0.1);
+  border-color: #00d4ff;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.ai-player-card.active-turn {
+  border-color: #4CAF50;
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.3);
+}
+
+.ai-player-card.active-turn::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #4CAF50, #00d4ff);
+  border-radius: 10px;
+  z-index: -1;
+  animation: pulse 2s infinite;
+}
+
+.ai-player-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.ai-player-name {
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.ai-difficulty-badge {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: white;
+}
+
+.ai-player-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.ai-personality {
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.ai-status {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.ai-details-panel {
+  flex: 1;
+  background: rgba(26, 26, 46, 0.8);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.ai-details-header {
+  padding: 20px;
+  background: rgba(22, 33, 62, 0.8);
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.ai-details-header h3 {
+  margin: 0 0 15px 0;
+  color: #00d4ff;
+  font-size: 20px;
+}
+
+.ai-tabs {
+  display: flex;
+  gap: 10px;
+}
+
+.tab-btn {
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  color: #00d4ff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.tab-btn:hover {
+  background: rgba(0, 212, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.tab-btn.active {
+  background: rgba(0, 212, 255, 0.3);
+  border-color: #00d4ff;
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+}
+
+.ai-details-content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.ai-decisions-tab h4,
+.ai-goals-tab h4,
+.ai-personality-tab h4 {
+  margin: 0 0 15px 0;
+  color: #ffffff;
+  font-size: 18px;
+}
+
+.decisions-list,
+.goals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.decision-item,
+.goal-item {
+  background: rgba(22, 33, 62, 0.6);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 8px;
+  padding: 15px;
+  transition: all 0.3s ease;
+}
+
+.decision-item:hover,
+.goal-item:hover {
+  background: rgba(22, 33, 62, 0.8);
+  border-color: #00d4ff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.2);
+}
+
+.decision-header,
+.goal-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.decision-icon,
+.goal-icon {
+  font-size: 20px;
+  width: 30px;
+  text-align: center;
+}
+
+.decision-info,
+.goal-info {
+  flex: 1;
+}
+
+.decision-type,
+.goal-description {
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.decision-time,
+.goal-target {
+  font-size: 12px;
+  color: #aaaaaa;
+  margin-top: 2px;
+}
+
+.decision-outcome {
+  font-size: 18px;
+}
+
+.decision-outcome.success {
+  color: #4CAF50;
+}
+
+.decision-outcome.failure {
+  color: #ff4444;
+}
+
+.decision-outcome.pending {
+  color: #FFC107;
+  animation: pulse 2s infinite;
+}
+
+.decision-rationale,
+.decision-score {
+  font-size: 13px;
+  color: #cccccc;
+  margin-top: 5px;
+}
+
+.goal-priority {
+  font-size: 12px;
+  color: #FFC107;
+  font-weight: 500;
+}
+
+.goal-progress {
+  margin: 10px 0;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4CAF50, #00d4ff);
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 12px;
+  color: #aaaaaa;
+  text-align: center;
+}
+
+.goal-status {
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 12px;
+  display: inline-block;
+  margin-top: 5px;
+}
+
+.goal-status.active {
+  background: rgba(76, 175, 80, 0.2);
+  color: #4CAF50;
+}
+
+.goal-status.completed {
+  background: rgba(0, 212, 255, 0.2);
+  color: #00d4ff;
+}
+
+.goal-status.failed {
+  background: rgba(255, 68, 68, 0.2);
+  color: #ff4444;
+}
+
+.goal-status.paused {
+  background: rgba(255, 193, 7, 0.2);
+  color: #FFC107;
+}
+
+.personality-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.stat-label {
+  width: 120px;
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.stat-bar {
+  flex: 1;
+  height: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.stat-fill {
+  height: 100%;
+  transition: width 0.3s ease;
+  border-radius: 5px;
+}
+
+.stat-fill.aggression {
+  background: linear-gradient(90deg, #ff4444, #ff6666);
+}
+
+.stat-fill.economic {
+  background: linear-gradient(90deg, #4CAF50, #66bb6a);
+}
+
+.stat-fill.military {
+  background: linear-gradient(90deg, #ff9800, #ffb74d);
+}
+
+.stat-value {
+  width: 40px;
+  text-align: center;
+  font-size: 14px;
+  color: #00d4ff;
+  font-weight: 600;
+}
+
+.personality-description {
+  background: rgba(22, 33, 62, 0.6);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 8px;
+  padding: 15px;
+  font-size: 14px;
+  color: #cccccc;
+  line-height: 1.5;
+}
+
+.no-ai-selected {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.no-ai-message {
+  text-align: center;
+  color: #aaaaaa;
+  font-size: 16px;
+}
+
+.no-data,
+.no-actions {
+  text-align: center;
+  color: #aaaaaa;
+  font-style: italic;
+  padding: 20px;
+}
+
+.recent-actions-feed {
+  background: rgba(26, 26, 46, 0.8);
+  border-top: 1px solid rgba(0, 212, 255, 0.2);
+  padding: 15px 30px;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.recent-actions-feed h4 {
+  margin: 0 0 10px 0;
+  color: #00d4ff;
+  font-size: 16px;
+}
+
+.actions-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.action-feed-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: rgba(22, 33, 62, 0.6);
+  border-radius: 6px;
+  font-size: 13px;
+  transition: all 0.3s ease;
+}
+
+.action-feed-item:hover {
+  background: rgba(22, 33, 62, 0.8);
+  transform: translateX(5px);
+}
+
+.action-feed-item .action-icon {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}
+
+.action-feed-item .action-text {
+  flex: 1;
+  color: #ffffff;
+}
+
+.action-feed-item .action-time {
+  color: #aaaaaa;
+  font-size: 11px;
+}
+
+/* Animations */
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .ai-visualizer-content {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .ai-players-sidebar {
+    width: 100%;
+    max-height: 200px;
+  }
+  
+  .ai-players-list {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 10px;
+    padding-bottom: 5px;
+  }
+  
+  .ai-player-card {
+    min-width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ai-visualizer-header {
+    padding: 15px 20px;
+  }
+  
+  .ai-visualizer-header h2 {
+    font-size: 20px;
+  }
+  
+  .ai-visualizer-content {
+    padding: 15px 20px;
+  }
+  
+  .recent-actions-feed {
+    padding: 10px 20px;
+  }
+  
+  .ai-tabs {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  
+  .tab-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+} 

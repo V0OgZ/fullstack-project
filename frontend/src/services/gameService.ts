@@ -528,7 +528,7 @@ export class GameService {
     try {
       const actions = await ApiService.getPendingActions(gameId);
       
-      return actions.map(action => ({
+      return actions.map((action: any) => ({
         id: action.id,
         type: action.type,
         heroId: action.heroId,

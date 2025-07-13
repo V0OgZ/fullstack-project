@@ -1,0 +1,695 @@
+.enhanced-scenario-selector {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 50%, #16213e 100%);
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Header */
+.selector-header {
+  padding: 30px 40px;
+  background: linear-gradient(90deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+  border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+}
+
+.title-section {
+  text-align: left;
+}
+
+.game-title {
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin: 0;
+  background: linear-gradient(45deg, #ffd700, #ffed4a, #ffd700);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: goldShimmer 3s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.title-icon {
+  font-size: 3rem;
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+}
+
+.subtitle {
+  font-size: 1.3rem;
+  color: #e0e0e0;
+  margin: 10px 0 0 0;
+  opacity: 0.9;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+}
+
+/* Main Content */
+.selector-main {
+  padding: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: 2.2rem;
+  color: #ffd700;
+  text-align: center;
+  margin: 0 0 40px 0;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+/* Scenarios Grid */
+.scenarios-section {
+  margin-bottom: 60px;
+}
+
+.scenarios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.scenario-card {
+  position: relative;
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 20px;
+  padding: 30px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.scenario-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.scenario-card:hover::before {
+  opacity: 0.2;
+}
+
+.scenario-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: #ffd700;
+  box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
+}
+
+.scenario-card.selected {
+  border-color: #ffd700;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+}
+
+.scenario-card.locked {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.scenario-card.locked:hover {
+  transform: none;
+  border-color: rgba(255, 215, 0, 0.3);
+  box-shadow: none;
+}
+
+.lock-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border-radius: 18px;
+}
+
+.lock-icon {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  opacity: 0.7;
+}
+
+.lock-text {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ccc;
+}
+
+.scenario-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.scenario-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.scenario-icon {
+  font-size: 4rem;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+}
+
+.scenario-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.difficulty-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.player-count {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 8px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  color: #e0e0e0;
+}
+
+.scenario-info {
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+.scenario-name {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #ffd700;
+  margin: 0 0 12px 0;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.scenario-description {
+  color: #e0e0e0;
+  line-height: 1.6;
+  margin: 0 0 20px 0;
+  font-size: 1rem;
+}
+
+.scenario-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.feature-tag {
+  background: rgba(255, 215, 0, 0.2);
+  color: #ffd700;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.feature-tag.more {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ccc;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.scenario-details {
+  margin-bottom: 20px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+.detail-icon {
+  font-size: 1rem;
+}
+
+.scenario-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.details-button,
+.play-button {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.details-button {
+  background: rgba(255, 255, 255, 0.1);
+  color: #e0e0e0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.details-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.play-button {
+  background: linear-gradient(45deg, #ffd700, #ffed4a);
+  color: #000;
+  border: 1px solid #ffd700;
+}
+
+.play-button:hover {
+  background: linear-gradient(45deg, #ffed4a, #ffd700);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(255, 215, 0, 0.3);
+}
+
+.play-button.disabled {
+  background: #666;
+  color: #999;
+  cursor: not-allowed;
+  border-color: #666;
+}
+
+.play-button.disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.button-icon {
+  font-size: 1.1rem;
+}
+
+/* Tips Section */
+.tips-section {
+  margin-bottom: 40px;
+}
+
+.tip-container {
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 15px;
+  padding: 20px 30px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  backdrop-filter: blur(10px);
+}
+
+.tip-icon {
+  font-size: 2rem;
+  color: #ffd700;
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+}
+
+.tip-content {
+  flex: 1;
+}
+
+.tip-text {
+  font-size: 1.1rem;
+  color: #e0e0e0;
+  animation: tipFadeIn 0.5s ease-in-out;
+}
+
+/* Footer */
+.selector-footer {
+  background: rgba(0, 0, 0, 0.5);
+  border-top: 1px solid rgba(255, 215, 0, 0.3);
+  padding: 30px 40px;
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-link {
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #ffd700;
+}
+
+/* Details Modal */
+.details-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.details-modal {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: 2px solid #ffd700;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.modal-title {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffd700;
+}
+
+.modal-icon {
+  font-size: 2rem;
+}
+
+.modal-close {
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+  background: #c82333;
+  transform: scale(1.1);
+}
+
+.modal-content {
+  padding: 30px;
+}
+
+.modal-description {
+  color: #e0e0e0;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  font-size: 1.1rem;
+}
+
+.modal-features h4 {
+  color: #ffd700;
+  margin: 0 0 15px 0;
+  font-size: 1.2rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #e0e0e0;
+  padding: 8px 0;
+}
+
+.feature-bullet {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.modal-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 25px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.stat-label {
+  color: #ccc;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  color: #ffd700;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.modal-actions {
+  padding: 0 30px 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.modal-play-button {
+  padding: 15px 30px;
+  background: linear-gradient(45deg, #ffd700, #ffed4a);
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.modal-play-button:hover {
+  background: linear-gradient(45deg, #ffed4a, #ffd700);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(255, 215, 0, 0.3);
+}
+
+.modal-play-button.disabled {
+  background: #666;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.modal-play-button.disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Animations */
+@keyframes goldShimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes tipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .scenarios-grid {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .selector-header {
+    padding: 20px;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  
+  .game-title {
+    font-size: 2.5rem;
+  }
+  
+  .title-icon {
+    font-size: 2rem;
+  }
+  
+  .selector-main {
+    padding: 20px;
+  }
+  
+  .scenarios-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .scenario-card {
+    padding: 20px;
+    min-height: 300px;
+  }
+  
+  .scenario-actions {
+    flex-direction: column;
+  }
+  
+  .footer-content {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .details-modal {
+    width: 95%;
+    margin: 20px;
+  }
+  
+  .modal-content {
+    padding: 20px;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .modal-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-title {
+    font-size: 2rem;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .scenario-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+  }
+  
+  .scenario-meta {
+    align-items: center;
+  }
+  
+  .tip-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+}
+
+/* Scrollbar Styling */
+.details-modal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.details-modal::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+.details-modal::-webkit-scrollbar-thumb {
+  background: #ffd700;
+  border-radius: 4px;
+}
+
+.details-modal::-webkit-scrollbar-thumb:hover {
+  background: #ffed4a;
+} 

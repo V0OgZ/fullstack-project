@@ -48,7 +48,7 @@ public interface AIPlayerRepository extends JpaRepository<AIPlayer, Long> {
     List<AIPlayer> findByIsTurnActiveTrue();
     
     /**
-     * Find AI players by game and turn priority
+     * Find AI players by game ordered by turn priority
      */
     List<AIPlayer> findByGameIdOrderByTurnPriorityAsc(String gameId);
     
@@ -75,4 +75,9 @@ public interface AIPlayerRepository extends JpaRepository<AIPlayer, Long> {
      * Delete all AI players for a game
      */
     void deleteByGameId(String gameId);
+    
+    /**
+     * Delete AI player by AI player ID
+     */
+    void deleteByAiPlayerId(String aiPlayerId);
 } 

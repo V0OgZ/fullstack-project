@@ -29,6 +29,7 @@ export interface Translation {
   // Game Actions
   move: string;
   attack: string;
+  defense: string;
   collect: string;
   cancel: string;
   confirm: string;
@@ -103,6 +104,7 @@ export interface Translation {
   previous: string;
   yes: string;
   no: string;
+  retry: string;
   change: string;
   choosePlayer: string;
   heroes: string;
@@ -346,6 +348,26 @@ export interface Translation {
   realTimeStrategy: string;
   competitive: string;
   startGame: string;
+
+  // Castle Management
+  overview: string;
+  buildings: string;
+  recruitment: string;
+  upgrades: string;
+  dailyIncome: string;
+  castleSpecialty: string;
+  garrison: string;
+  currentBuildings: string;
+  availableBuildings: string;
+  construct: string;
+  upgrade: string;
+  recruitUnits: string;
+  available: string;
+  castleUpgrades: string;
+  castleWalls: string;
+  improvesCastleDefense: string;
+  magicGuild: string;
+  unlocksPowerfulSpells: string;
 }
 
 // Traductions françaises
@@ -374,6 +396,7 @@ const frenchTranslations: Translation = {
   // Game Actions
   move: 'Déplacer',
   attack: 'Attaquer',
+  defense: 'Défendre',
   collect: 'Collecter',
   cancel: 'Annuler',
   confirm: 'Confirmer',
@@ -448,6 +471,7 @@ const frenchTranslations: Translation = {
   previous: 'Précédent',
   yes: 'Oui',
   no: 'Non',
+  retry: 'Réessayer',
   change: 'Changer',
   choosePlayer: 'Choisir un joueur',
   heroes: 'Héros',
@@ -691,6 +715,26 @@ const frenchTranslations: Translation = {
   realTimeStrategy: 'Stratégie en temps réel',
   competitive: 'Compétitif',
   startGame: 'Démarrer la partie',
+
+  // Castle Management
+  overview: 'Aperçu',
+  buildings: 'Bâtiments',
+  recruitment: 'Recrutement',
+  upgrades: 'Améliorations',
+  dailyIncome: 'Revenus quotidiens',
+  castleSpecialty: 'Spécialité du château',
+  garrison: 'Garnison',
+  currentBuildings: 'Bâtiments actuels',
+  availableBuildings: 'Bâtiments disponibles',
+  construct: 'Construire',
+  upgrade: 'Améliorer',
+  recruitUnits: 'Recruter des unités',
+  available: 'Disponible',
+  castleUpgrades: 'Améliorations du château',
+  castleWalls: 'Murailles du château',
+  improvesCastleDefense: 'Améliore la défense du château',
+  magicGuild: 'Guilde de magie',
+  unlocksPowerfulSpells: 'Débloque des sorts puissants',
 };
 
 // Traductions anglaises
@@ -719,6 +763,7 @@ const englishTranslations: Translation = {
   // Game Actions
   move: 'Move',
   attack: 'Attack',
+  defense: 'Defense',
   collect: 'Collect',
   cancel: 'Cancel',
   confirm: 'Confirm',
@@ -793,6 +838,7 @@ const englishTranslations: Translation = {
   previous: 'Previous',
   yes: 'Yes',
   no: 'No',
+  retry: 'Retry',
   change: 'Change',
   choosePlayer: 'Choose a player',
   heroes: 'Heroes',
@@ -1036,6 +1082,26 @@ const englishTranslations: Translation = {
   realTimeStrategy: 'Real-Time Strategy',
   competitive: 'Competitive',
   startGame: 'Start Game',
+
+  // Castle Management
+  overview: 'Overview',
+  buildings: 'Buildings',
+  recruitment: 'Recruitment',
+  upgrades: 'Upgrades',
+  dailyIncome: 'Daily Income',
+  castleSpecialty: 'Castle Specialty',
+  garrison: 'Garrison',
+  currentBuildings: 'Current Buildings',
+  availableBuildings: 'Available Buildings',
+  construct: 'Construct',
+  upgrade: 'Upgrade',
+  recruitUnits: 'Recruit Units',
+  available: 'Available',
+  castleUpgrades: 'Castle Upgrades',
+  castleWalls: 'Castle Walls',
+  improvesCastleDefense: 'Improves castle defense',
+  magicGuild: 'Magic Guild',
+  unlocksPowerfulSpells: 'Unlocks powerful spells',
 };
 
 // Traductions russes
@@ -1064,6 +1130,7 @@ const russianTranslations: Translation = {
   // Game Actions
   move: 'Двигаться',
   attack: 'Атаковать',
+  defense: 'Защищать',
   collect: 'Собрать',
   cancel: 'Отменить',
   confirm: 'Подтвердить',
@@ -1138,6 +1205,7 @@ const russianTranslations: Translation = {
   previous: 'Предыдущий',
   yes: 'Да',
   no: 'Нет',
+  retry: 'Повторить',
   change: 'Изменить',
   choosePlayer: 'Выберите игрока',
   heroes: 'Герои',
@@ -1381,6 +1449,26 @@ const russianTranslations: Translation = {
   realTimeStrategy: 'Стратегия в реальном времени',
   competitive: 'Конкурентный',
   startGame: 'Начать игру',
+
+  // Castle Management
+  overview: 'Обзор',
+  buildings: 'Здания',
+  recruitment: 'Набор',
+  upgrades: 'Улучшения',
+  dailyIncome: 'Ежедневный доход',
+  castleSpecialty: 'Специализация замка',
+  garrison: 'Гарнизон',
+  currentBuildings: 'Текущие здания',
+  availableBuildings: 'Доступные здания',
+  construct: 'Строить',
+  upgrade: 'Улучшать',
+  recruitUnits: 'Набирать войска',
+  available: 'Доступно',
+  castleUpgrades: 'Улучшения замка',
+  castleWalls: 'Стены замка',
+  improvesCastleDefense: 'Улучшает защиту замка',
+  magicGuild: 'Магическая гильдия',
+  unlocksPowerfulSpells: 'Разблокирует сильные заклинания',
 };
 
 // Helper function to get translations

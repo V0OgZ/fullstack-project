@@ -1,8 +1,13 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { useGameStore } from '../store/useGameStore';
-import SimpleGameInterface from './SimpleGameInterface';
-import MagicInventory from './MagicInventory';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from '../i18n';
+import { useGameStore } from '../store/useGameStore';
+import ModernGameRenderer from './ModernGameRenderer';
+import OptimizedGameRenderer from './OptimizedGameRenderer';
+import MagicInventory from './MagicInventory';
+import AIActionVisualizer from './AIActionVisualizer';
+import PerformanceDashboard from './PerformanceDashboard';
+import CastleManagement from './CastleManagement';
+import { GAME_ICONS } from '../constants/gameIcons';
 import './TrueHeroesInterface.css';
 
 interface TrueHeroesInterfaceProps {
@@ -11,248 +16,279 @@ interface TrueHeroesInterfaceProps {
   scenarioId: string;
 }
 
-const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
-  playerCount,
-  scenarioType,
-  scenarioId
-}) => {
+const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, scenarioType }) => {
+  const { t } = useTranslation();
   const { 
+    currentGame, 
     currentPlayer, 
     loadGame, 
-    playerInventory,
-    equippedItems,
-    equipItem,
-    unequipItem,
-    consumeItem,
-    getEnhancedHero
+    isLoading, 
+    error,
+    getEnhancedHero,
+    endTurn,
+    nextPlayer
   } = useGameStore();
-  const { t } = useTranslation();
+  
   const [showMagicInventory, setShowMagicInventory] = useState(false);
-  const [isInitialized, setIsInitialized] = useState(false);
+  const [showAIVisualizer, setShowAIVisualizer] = useState(false);
+  const [showPerformanceDashboard, setShowPerformanceDashboard] = useState(false);
+  const [showCastleManagement, setShowCastleManagement] = useState(false);
+  const [selectedHeroId, setSelectedHeroId] = useState<string | null>(null);
+  const [selectedCastleId, setSelectedCastleId] = useState<string | null>(null);
+  const [useOptimizedRenderer, setUseOptimizedRenderer] = useState(false);
 
-  // Initialize game when component mounts
   useEffect(() => {
-    const initGame = async () => {
-      if (!isInitialized) {
-        console.log(`🎮 Initializing ${scenarioType} scenario...`);
-        
-        // Load game with scenario ID
-        await loadGame(scenarioId);
-        
-        setIsInitialized(true);
-      }
-    };
-
-    initGame();
-  }, [scenarioId, scenarioType, loadGame, isInitialized]);
-
-  // Handle equipping magical items
-  const handleEquipItem = (itemId: string) => {
-    if (!currentPlayer?.heroes?.[0]) {
-      console.log('❌ No hero available to equip item');
-      return;
+    if (scenarioId) {
+      loadGame(scenarioId);
     }
+  }, [scenarioId, loadGame]);
 
-    const heroId = currentPlayer.heroes[0].id;
-    
-    // Determine slot based on item type
-    // This is a simplified version - you might want more sophisticated slot detection
-    const slotMapping: { [key: string]: string } = {
-      'sword_': 'weapon',
-      'armor_': 'armor', 
-      'ring_': 'ring',
-      'boots_': 'boots',
-      'amulet_': 'amulet',
-      'cape_': 'cape',
-      'crown_': 'helmet',
-      'staff_': 'weapon'
-    };
-
-    let slot = 'weapon'; // default
-    for (const [prefix, slotType] of Object.entries(slotMapping)) {
-      if (itemId.startsWith(prefix)) {
-        slot = slotType;
-        break;
-      }
-    }
-
-    const success = equipItem(heroId, itemId, slot);
-    if (success) {
-      console.log(`🔮 Equipped ${itemId} to ${slot} slot`);
+  const handleEndTurn = () => {
+    if (currentGame?.gameMode === 'hotseat') {
+      nextPlayer();
+    } else {
+      endTurn();
     }
   };
 
-  const handleUnequipItem = (itemId: string) => {
-    if (!currentPlayer?.heroes?.[0]) return;
-
-    const heroId = currentPlayer.heroes[0].id;
-    const heroEquippedItems = equippedItems[heroId];
-    
-    if (!heroEquippedItems) return;
-
-    // Find which slot the item is in
-    for (const [slot, equippedItemId] of Object.entries(heroEquippedItems)) {
-      if (equippedItemId === itemId) {
-        const success = unequipItem(heroId, slot);
-        if (success) {
-          console.log(`📤 Unequipped ${itemId} from ${slot} slot`);
-        }
-        break;
-      }
-    }
+  const handleHeroSelect = (heroId: string) => {
+    setSelectedHeroId(heroId);
   };
 
-  const handleUseItem = (itemId: string) => {
-    if (!currentPlayer?.heroes?.[0]) return;
-
-    const heroId = currentPlayer.heroes[0].id;
-    const success = consumeItem(itemId, heroId);
-    if (success) {
-      console.log(`🧪 Used ${itemId}`);
-    }
+  const handleCastleSelect = (castleId: string) => {
+    setSelectedCastleId(castleId);
+    setShowCastleManagement(true);
   };
 
-  // Get current equipped items for the active hero (convert to expected format)
-  const currentEquippedItems = useMemo(() => {
-    if (!currentPlayer?.heroes?.[0]) return {};
-    
-    const heroEquipped = equippedItems[currentPlayer.heroes[0].id] || {};
-    
-    // Convert EquippedItems to Record<string, string>
-    const convertedItems: Record<string, string> = {};
-    Object.entries(heroEquipped).forEach(([slot, itemId]) => {
-      if (itemId) {
-        convertedItems[slot] = itemId;
-      }
-    });
-    
-    return convertedItems;
-  }, [currentPlayer, equippedItems]);
-
-  if (!isInitialized) {
+  if (isLoading) {
     return (
       <div className="true-heroes-loading">
-        <div className="loading-content">
-          <div className="spinner"></div>
-          <h2>
-            {scenarioType === 'mystique' ? `🔮 ${t('loading')}` : 
-             scenarioType === 'multiplayer' ? `🌐 ${t('loading')}` : 
-             `🏰 ${t('loading')}`}
-          </h2>
-          <p>
-            {t('loading')}
-          </p>
-        </div>
+        <div className="loading-spinner"></div>
+        <p>{t('loading')}</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="true-heroes-error">
+        <h2>{t('error')}</h2>
+        <p>{error}</p>
+        <button onClick={() => loadGame(scenarioId)} className="retry-button">
+          {t('back')}
+        </button>
+      </div>
+    );
+  }
+
+  if (!currentGame || !currentPlayer) {
+    return (
+      <div className="true-heroes-no-game">
+        <p>{t('loading')}</p>
+        <button onClick={() => loadGame(scenarioId)} className="load-game-button">
+          {t('startGame')}
+        </button>
       </div>
     );
   }
 
   return (
     <div className="true-heroes-interface">
-      {/* Scenario indicator */}
-      <div className="scenario-indicator">
-        <div className={`scenario-badge ${scenarioType}`}>
-          {scenarioType === 'mystique' ? `🔮 ${t('mysticalConquest')}` : 
-           scenarioType === 'multiplayer' ? `🌐 ${t('multiplayerArena')}` : 
-           `🏰 ${t('classicConquest')}`}
+      {/* Header */}
+      <div className="game-header">
+        <div className="game-info">
+          <h1 className="game-title">
+            <span className="scenario-badge" data-scenario={scenarioType}>
+              {scenarioType === 'classique' && '🏰 Classic'}
+              {scenarioType === 'mystique' && '🔮 Mystical'}
+              {scenarioType === 'multiplayer' && '🌐 Multiplayer'}
+            </span>
+            Heroes of Time
+          </h1>
+          <div className="turn-info">
+            <span className="turn-label">{t('turn')}</span>
+            <span className="turn-number">{currentGame.currentTurn}</span>
+          </div>
         </div>
-        {(scenarioType === 'mystique' || scenarioType === 'multiplayer') && (
-          <button 
-            className="magic-inventory-toggle"
-            onClick={() => setShowMagicInventory(!showMagicInventory)}
-            title={t('magicInventoryTitle')}
-          >
-            🎒 {t('magicInventoryTitle')} ({playerInventory.length})
-          </button>
-        )}
-      </div>
 
-      {/* Main game interface */}
-      <div className="main-interface">
-        <SimpleGameInterface scenarioId={scenarioId} />
-      </div>
-
-      {/* Magic inventory overlay for mystical and multiplayer scenarios */}
-      {(scenarioType === 'mystique' || scenarioType === 'multiplayer') && showMagicInventory && (
-        <div className="magic-inventory-overlay">
-          <div className="magic-inventory-container">
+        <div className="header-controls">
+          {/* Enhanced Control Panel */}
+          <div className="control-panel">
             <button 
-              className="close-inventory"
-              onClick={() => setShowMagicInventory(false)}
+              className={`control-btn ${useOptimizedRenderer ? 'active' : ''}`}
+              onClick={() => setUseOptimizedRenderer(!useOptimizedRenderer)}
+              title="Toggle Optimized Renderer"
             >
-              ✕
+              <span className="btn-icon">⚡</span>
+              <span className="btn-label">Optimized</span>
             </button>
-            <MagicInventory
-              playerInventory={playerInventory}
-              equippedItems={currentEquippedItems}
-              onEquipItem={handleEquipItem}
-              onUnequipItem={handleUnequipItem}
-              onUseItem={handleUseItem}
-              playerGold={currentPlayer?.resources?.gold || 0}
-              playerLevel={currentPlayer?.heroes?.[0]?.level || 1}
+
+            <button 
+              className={`control-btn ${showMagicInventory ? 'active' : ''}`}
+              onClick={() => setShowMagicInventory(!showMagicInventory)}
+              title="Magic Inventory"
+            >
+              <span className="btn-icon">🎒</span>
+              <span className="btn-label">Inventory</span>
+            </button>
+
+            <button 
+              className={`control-btn ${showAIVisualizer ? 'active' : ''}`}
+              onClick={() => setShowAIVisualizer(!showAIVisualizer)}
+              title="AI Visualizer"
+            >
+              <span className="btn-icon">🤖</span>
+              <span className="btn-label">AI</span>
+            </button>
+
+            <button 
+              className={`control-btn ${showPerformanceDashboard ? 'active' : ''}`}
+              onClick={() => setShowPerformanceDashboard(!showPerformanceDashboard)}
+              title="Performance Dashboard"
+            >
+              <span className="btn-icon">📊</span>
+              <span className="btn-label">Performance</span>
+            </button>
+
+            <button 
+              className="control-btn castle-btn"
+              onClick={() => handleCastleSelect('main-castle')}
+              title="Castle Management"
+            >
+              <span className="btn-icon">🏰</span>
+              <span className="btn-label">Castle</span>
+            </button>
+          </div>
+
+          <button className="end-turn-btn" onClick={handleEndTurn}>
+            <span className="btn-icon">➡️</span>
+            <span className="btn-label">{t('endTurn')}</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Main Game Area */}
+      <div className="game-main">
+        {/* Game Renderer */}
+        <div className="game-renderer-container">
+          {useOptimizedRenderer ? (
+            <OptimizedGameRenderer 
+              width={800} 
+              height={600} 
+              onHeroSelect={handleHeroSelect}
+              selectedHeroId={selectedHeroId}
             />
-          </div>
+          ) : (
+            <ModernGameRenderer 
+              width={800} 
+              height={600} 
+            />
+          )}
         </div>
-      )}
 
-      {/* Enhanced hero display with item effects */}
-      {currentPlayer?.heroes?.[0] && (
-        <div className="hero-enhancement-display" style={{
-          position: 'absolute',
-          top: '10px',
-          right: '10px',
-          background: 'rgba(0, 0, 0, 0.8)',
-          color: 'white',
-          padding: '10px',
-          borderRadius: '8px',
-          fontSize: '12px',
-          maxWidth: '200px'
-        }}>
-          <h4>🦸 Enhanced Stats</h4>
-          {(() => {
-            const hero = currentPlayer.heroes[0];
-            const enhanced = getEnhancedHero(hero.id);
-            if (!enhanced) return null;
-            
-            return (
-              <div>
-                <div>⚔️ Attack: {hero.stats.attack} → {enhanced.stats.attack}</div>
-                <div>🛡️ Defense: {hero.stats.defense} → {enhanced.stats.defense}</div>
-                <div>📚 Knowledge: {hero.stats.knowledge} → {enhanced.stats.knowledge}</div>
-                <div>🔮 Spell Power: {hero.stats.spellPower} → {enhanced.stats.spellPower}</div>
-                <div>🏃 Movement: {hero.movementPoints}/{hero.maxMovementPoints} → {enhanced.movementPoints}/{enhanced.maxMovementPoints}</div>
-              </div>
-            );
-          })()}
-        </div>
-      )}
-
-      {/* Scenario-specific UI enhancements */}
-      {scenarioType === 'mystique' && (
-        <div className="mystical-overlay">
-          <div className="temporal-effects">
-            {/* Subtle mystical effects */}
-          </div>
-        </div>
-      )}
-      
-      {/* Multiplayer-specific UI enhancements */}
-      {scenarioType === 'multiplayer' && (
-        <div className="multiplayer-overlay">
-          <div className="multiplayer-indicators">
-            <div className="player-list">
-              <h4>🏆 Players ({playerCount})</h4>
-              <div className="online-players">
-                {Array.from({ length: playerCount }, (_, i) => (
-                  <div key={i} className="player-indicator">
-                    <span className="player-status online"></span>
-                    Player {i + 1}
-                  </div>
-                ))}
+        {/* Side Panel */}
+        <div className="game-side-panel">
+          {/* Player Info */}
+          <div className="player-info-section">
+            <h3>{t('player')}</h3>
+            <div className="player-card">
+              <div className="player-name">{currentPlayer.username}</div>
+              <div className="player-resources">
+                <div className="resource-item">
+                  <span className="resource-icon">💰</span>
+                  <span className="resource-value">{currentPlayer.resources.gold}</span>
+                </div>
+                <div className="resource-item">
+                  <span className="resource-icon">🪵</span>
+                  <span className="resource-value">{currentPlayer.resources.wood}</span>
+                </div>
+                <div className="resource-item">
+                  <span className="resource-icon">🪨</span>
+                  <span className="resource-value">{currentPlayer.resources.stone}</span>
+                </div>
               </div>
             </div>
           </div>
+
+          {/* Heroes Section */}
+          <div className="heroes-section">
+            <h3>{t('heroes')}</h3>
+            <div className="heroes-list">
+              {currentPlayer.heroes.map(hero => (
+                <div 
+                  key={hero.id} 
+                  className={`hero-card ${selectedHeroId === hero.id ? 'selected' : ''}`}
+                  onClick={() => handleHeroSelect(hero.id)}
+                >
+                  <div className="hero-avatar">⚔️</div>
+                  <div className="hero-info">
+                    <div className="hero-name">{hero.name}</div>
+                    <div className="hero-level">Level {hero.level}</div>
+                    <div className="hero-mp">
+                      MP: {hero.movementPoints}/{hero.maxMovementPoints}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Quick Actions */}
+          <div className="quick-actions">
+            <h3>Quick Actions</h3>
+            <div className="action-buttons">
+              <button 
+                className="action-btn"
+                onClick={() => setShowMagicInventory(true)}
+              >
+                <span className="action-icon">🎒</span>
+                <span className="action-label">Inventory</span>
+              </button>
+              <button 
+                className="action-btn"
+                onClick={() => handleCastleSelect('main-castle')}
+              >
+                <span className="action-icon">🏰</span>
+                <span className="action-label">Castle</span>
+              </button>
+              <button 
+                className="action-btn"
+                onClick={() => setShowAIVisualizer(true)}
+              >
+                <span className="action-icon">🤖</span>
+                <span className="action-label">AI Status</span>
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
+
+      {/* Overlay Components */}
+      {showMagicInventory && (
+        <MagicInventory />
+      )}
+
+      {showAIVisualizer && (
+        <AIActionVisualizer 
+          gameId={scenarioId}
+          isVisible={showAIVisualizer}
+          onClose={() => setShowAIVisualizer(false)}
+        />
+      )}
+
+      {showPerformanceDashboard && (
+        <PerformanceDashboard 
+          isVisible={showPerformanceDashboard}
+          onClose={() => setShowPerformanceDashboard(false)}
+        />
+      )}
+
+      {showCastleManagement && selectedCastleId && (
+        <CastleManagement 
+          castleId={selectedCastleId}
+          isVisible={showCastleManagement}
+          onClose={() => setShowCastleManagement(false)}
+        />
       )}
     </div>
   );
