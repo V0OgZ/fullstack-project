@@ -38,7 +38,7 @@ const HotSeatMode: React.FC<HotSeatModeProps> = ({
       <div className="hotseat-status">
         <div className="hotseat-header">
           <h3 className="title-small">
-            {GAME_ICONS.GAME_PLAY} Mode Hot Seat
+            {GAME_ICONS.GAME_PLAY} {t('modeHotSeat')}
           </h3>
           <button
             className="btn"
