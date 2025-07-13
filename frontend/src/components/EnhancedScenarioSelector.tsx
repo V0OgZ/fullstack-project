@@ -149,6 +149,11 @@ const EnhancedScenarioSelector: React.FC = () => {
         </button>
       </div>
 
+      {/* Game Title */}
+      <div className="game-title-header">
+        <h1 className="main-game-title">🎮 Heroes of Time ⚔️</h1>
+      </div>
+
       <main className="selector-main">
         <section className="scenarios-section game-options">
           <h2 className="section-title">{t('availableAdventures')}</h2>
@@ -170,8 +175,14 @@ const EnhancedScenarioSelector: React.FC = () => {
                 
                 <div className="scenario-content">
                   <div className="scenario-header">
-                    <div className="scenario-icon game-icon">{scenario.icon}</div>
-                    <div className="scenario-meta">
+                    <div className="scenario-icon-large game-icon">{scenario.icon}</div>
+                  </div>
+                  
+                  <div className="scenario-body">
+                    <h3 className="scenario-title">{scenario.name}</h3>
+                    <p className="scenario-description">{scenario.description}</p>
+                    
+                    <div className="scenario-meta-info">
                       <div 
                         className="difficulty-badge difficulty-indicator"
                         style={{ backgroundColor: getDifficultyColor(scenario.difficulty) }}
@@ -180,11 +191,6 @@ const EnhancedScenarioSelector: React.FC = () => {
                       </div>
                       <div className="scenario-time">{scenario.estimatedTime}</div>
                     </div>
-                  </div>
-                  
-                  <div className="scenario-body">
-                    <h3 className="scenario-title">{scenario.name}</h3>
-                    <p className="scenario-description">{scenario.description}</p>
                     
                     <div className="scenario-features">
                       {scenario.features.slice(0, 3).map((feature, index) => (
