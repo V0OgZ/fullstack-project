@@ -331,7 +331,7 @@ const SimpleGameInterface: React.FC<SimpleGameInterfaceProps> = ({ scenarioId = 
           display: 'flex', 
           alignItems: 'center', 
           justifyContent: 'center' 
-        }}>
+        }} data-testid="game-canvas">
           <ModernGameRenderer width={1200} height={800} />
         </div>
 

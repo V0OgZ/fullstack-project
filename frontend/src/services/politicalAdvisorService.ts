@@ -123,7 +123,7 @@ export class PoliticalAdvisorService {
           if (event.type === 'diplomatic') confidenceLevel += 20;
           break;
         case 'scientific':
-          if (event.type === 'discovery') confidenceLevel += 25;
+          if (event.type === 'economic') confidenceLevel += 25;
           break;
       }
 
