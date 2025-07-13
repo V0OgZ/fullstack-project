@@ -113,7 +113,8 @@ const EnhancedScenarioSelector: React.FC = () => {
     } else {
       try {
         await loadGame(scenarioId);
-        // The navigation will be handled by the component that observes the game state
+        // Navigate to the game page after loading the scenario
+        navigate(`/game/${scenarioId}`);
       } catch (error) {
         console.error("Failed to load scenario:", error);
         // Optionally, show an error message to the user
