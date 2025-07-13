@@ -1,716 +1,368 @@
-# 🔧 Technical Documentation - Heroes Reforged
+# 🔧 Technical Documentation - Heroes of Time
 
-## 🏗️ Technical Architecture
+## 🏗️ Architecture Overview
 
-### Backend - Spring Boot
-- **Framework**: Spring Boot 2.7.18
-- **Database**: H2 (development) / PostgreSQL (production)
-- **API**: REST with CORS configured
-- **WebSocket**: STOMP over SockJS for real-time multiplayer
-- **Port**: 8080
+Heroes of Time is built with a **modern full-stack architecture** designed for scalability and real-time multiplayer gameplay.
 
-### Frontend - React TypeScript
-- **Framework**: React 18 with TypeScript
-- **State Management**: Zustand
-- **Styling**: CSS modules + Tailwind CSS
-- **WebSocket**: STOMP.js for multiplayer communication
-- **Port**: 3000
+### Technology Stack
 
----
+#### Backend - Spring Boot
+- **Framework:** Spring Boot 2.7.18
+- **Language:** Java 17
+- **Database:** H2 (development) / PostgreSQL (production)  
+- **WebSocket:** STOMP over SockJS for real-time communication
+- **Testing:** JUnit 5, Mockito
+- **Build Tool:** Maven
+- **Port:** 8080
 
-## 📁 Directory Structure
+#### Frontend - React TypeScript
+- **Framework:** React 18 with TypeScript
+- **State Management:** Zustand
+- **Styling:** CSS Modules + Custom CSS
+- **WebSocket:** STOMP.js client
+- **Testing:** Jest, React Testing Library, Cypress
+- **Build Tool:** Create React App
+- **Port:** 3000
 
-### Backend
+## 📁 Project Structure
+
+### Backend Structure
 ```
 backend/
 ├── src/main/java/com/example/demo/
-│   ├── controller/        # REST Controllers
-│   ├── service/          # Business Logic
-│   ├── model/            # JPA Entities
-│   ├── repository/       # Data Access
-│   └── DemoApplication.java
-├── pom.xml               # Maven Dependencies
-└── target/              # Compiled Files
+│   ├── controller/           # REST API Controllers
+│   │   ├── GameController.java
+│   │   ├── MultiplayerController.java
+│   │   ├── AIController.java
+│   │   └── BuildingController.java
+│   ├── service/             # Business Logic Layer
+│   │   ├── GameService.java
+│   │   ├── BuildingService.java
+│   │   ├── AIService.java
+│   │   ├── MultiplayerService.java
+│   │   └── ScenarioService.java
+│   ├── model/               # JPA Entities
+│   │   ├── GameSession.java
+│   │   ├── Building.java
+│   │   ├── AIPlayer.java
+│   │   └── Scenario.java
+│   ├── repository/          # Data Access Layer
+│   │   ├── GameSessionRepository.java
+│   │   ├── BuildingRepository.java
+│   │   └── AIPlayerRepository.java
+│   ├── config/              # Configuration
+│   │   └── WebSocketConfig.java
+│   └── DemoApplication.java # Main Application
+├── src/test/java/           # Unit & Integration Tests
+└── pom.xml                  # Maven Configuration
 ```
 
-### Frontend
+### Frontend Structure
 ```
 frontend/
 ├── src/
-│   ├── components/       # React Components
-│   ├── services/         # API Services
-│   ├── store/           # Zustand State Management
-│   ├── types/           # TypeScript Types
-│   ├── utils/           # Utilities
-│   └── pages/           # Main Pages
-├── public/              # Static Assets
-└── package.json         # NPM Dependencies
+│   ├── components/          # React Components
+│   │   ├── EnhancedScenarioSelector.tsx
+│   │   ├── TrueHeroesInterface.tsx
+│   │   ├── CastleManagement.tsx
+│   │   ├── MagicInventory.tsx
+│   │   └── LanguageSelector.tsx
+│   ├── pages/               # Main Pages
+│   │   └── Game.tsx
+│   ├── services/            # API Services
+│   │   ├── api.ts
+│   │   ├── gameService.ts
+│   │   └── magicItemService.ts
+│   ├── store/               # State Management
+│   │   └── useGameStore.ts
+│   ├── types/               # TypeScript Types
+│   │   ├── game.ts
+│   │   ├── castle.ts
+│   │   └── temporal.ts
+│   ├── utils/               # Utility Functions
+│   │   └── hexMapGenerator.ts
+│   ├── i18n/                # Internationalization
+│   │   └── index.ts
+│   └── constants/           # Constants & Assets
+│       └── gameAssets.ts
+├── cypress/                 # E2E Tests
+│   ├── e2e/
+│   └── support/
+├── public/                  # Static Assets
+│   └── assets/
+└── package.json            # NPM Configuration
 ```
 
----
+## 🔌 API Documentation
 
-## 🛠️ Installation and Setup
+### Core Game Endpoints
 
-### Prerequisites
-- Java 17+
-- Maven 3.6+
-- Node.js 16+
-- NPM or Yarn
-
-### Backend Setup
-```bash
-cd backend
-mvn clean install
-mvn spring-boot:run
+#### Game Management
+```
+GET    /api/games/{gameId}              # Get game state
+POST   /api/games                       # Create new game
+POST   /api/games/{gameId}/join         # Join game
+GET    /api/games/available             # List available games
+POST   /api/games/{gameId}/end-turn     # End current turn
 ```
 
-### Frontend Setup
-```bash
-cd frontend
-npm install
-npm start
+#### Hero Actions
+```
+POST   /api/heroes/{heroId}/move        # Move hero
+POST   /api/heroes/{heroId}/attack      # Attack target
+POST   /api/heroes/{heroId}/collect     # Collect resource
 ```
 
----
+#### Building System
+```
+GET    /api/games/{gameId}/players/{playerId}/buildings    # Get player buildings
+POST   /api/games/{gameId}/buildings/construct            # Construct building
+POST   /api/games/{gameId}/buildings/{buildingId}/upgrade # Upgrade building
+POST   /api/games/{gameId}/buildings/{buildingId}/recruit # Recruit units
+```
 
-## 🔌 API Endpoints
+#### Multiplayer
+```
+GET    /api/multiplayer/sessions        # List multiplayer sessions
+POST   /api/multiplayer/sessions        # Create session
+POST   /api/multiplayer/sessions/{id}/join    # Join session
+```
 
-### Game Management
-- `GET /api/games/{gameId}` - Get game by ID
-- `POST /api/games` - Create new game
-- `POST /api/games/{gameId}/join` - Join game
-- `GET /api/games/{gameId}/state` - Get game state
+### WebSocket Events
 
-### Unit Management
-- `GET /api/units` - Get all units
-- `GET /api/units/localized/{language}` - Get localized units
-- `GET /api/units/castle/{castle}` - Get units by castle
-- `GET /api/units/castle/{castle}/roster/localized/{language}` - Get complete roster
+#### Connection
+```
+CONNECT    /ws                          # WebSocket connection
+SUBSCRIBE  /topic/session/{sessionId}   # Subscribe to session updates
+SEND       /app/game.action             # Send game action
+```
 
-### Internationalization
-- `GET /api/i18n/translations/{language}` - Get translations by language
-- `GET /api/i18n/translations/{language}/{category}` - Get translations by category
-- `POST /api/i18n/initialize` - Initialize default translations
+#### Message Types
+```javascript
+// Join session
+{
+  type: "PLAYER_JOINED",
+  playerId: "player-123",
+  session: { ... }
+}
 
-### Hero Actions
-- `POST /api/heroes/{heroId}/move` - Move hero
-- `POST /api/heroes/{heroId}/attack` - Attack target
-- `POST /api/heroes/{heroId}/collect` - Collect resource
-
----
-
-## 🎯 ZFC System (Zermelo-Fraenkel-Choice)
-
-### Temporal Calculations
-The ZFC system uses real mathematics for:
-- Temporal movement cost calculations
-- Temporal paradox resolution
-- Quantum superposition state management
-
-### Key Formulas
-- **ZFC Cost**: `1.0 + (|x - 10| + |y - 10|) * 0.1`
-- **Paradox Resolution**: Temporal convergence algorithm
-- **Superposition**: Probabilistic unit states
-
----
-
-## 🗄️ Data Model
-
-### Core Entities
-
-#### Unit
-```java
-@Entity
-public class Unit {
-    private String id;
-    private String name;
-    private String castle;
-    private Integer tier;
-    private String variant;
-    private Integer attack;
-    private Integer defense;
-    private Integer health;
-    // ... other properties
+// Game action
+{
+  type: "GAME_ACTION", 
+  playerId: "player-123",
+  actionType: "MOVE_HERO",
+  actionData: { ... },
+  result: { ... }
 }
 ```
 
-#### Translation
-```java
-@Entity
-public class Translation {
-    private String translationKey;
-    private String language;
-    private String value;
-    private String category;
-    // ... other properties
+## 🎮 Game Systems
+
+### State Management (Frontend)
+```typescript
+// Zustand store structure
+interface GameStore {
+  // Game state
+  currentGame: Game | null;
+  gameMap: HexTile[][];
+  selectedHero: Hero | null;
+  
+  // Actions
+  loadGame: (gameId: string) => void;
+  moveHero: (heroId: string, position: Position) => void;
+  endTurn: () => void;
+  
+  // Magic system
+  playerInventory: MagicObject[];
+  equippedItems: Record<string, MagicObject>;
+  equipItem: (item: MagicObject) => void;
 }
 ```
 
-#### Game
+### Database Schema (Backend)
+
+#### Core Entities
+```sql
+-- Game Sessions
+CREATE TABLE game_sessions (
+    id BIGINT PRIMARY KEY,
+    session_id VARCHAR(255) UNIQUE,
+    name VARCHAR(255),
+    status VARCHAR(50),
+    max_players INTEGER,
+    current_players INTEGER,
+    created_at TIMESTAMP
+);
+
+-- Buildings
+CREATE TABLE buildings (
+    id VARCHAR(255) PRIMARY KEY,
+    castle_id VARCHAR(255),
+    player_id VARCHAR(255),
+    building_type VARCHAR(100),
+    level INTEGER,
+    construction_time INTEGER,
+    is_constructed BOOLEAN
+);
+
+-- AI Players
+CREATE TABLE ai_players (
+    id VARCHAR(255) PRIMARY KEY,
+    name VARCHAR(255),
+    difficulty VARCHAR(50),
+    personality VARCHAR(50),
+    game_id VARCHAR(255)
+);
+```
+
+## 🧪 Testing Strategy
+
+### Backend Testing
 ```java
-public class Game {
-    private String id;
-    private String name;
-    private Integer currentTurn;
-    private List<Player> players;
-    private Map map;
-    // ... other properties
+// Example test structure
+@SpringBootTest
+@AutoConfigureTestDatabase
+class GameControllerTest {
+    
+    @Autowired
+    private TestRestTemplate restTemplate;
+    
+    @Test
+    void shouldCreateGame() {
+        // Test game creation
+    }
+    
+    @Test
+    void shouldMoveHero() {
+        // Test hero movement
+    }
 }
 ```
 
----
+### Frontend Testing
+```typescript
+// Jest unit tests
+describe('GameStore', () => {
+  test('should load game correctly', () => {
+    // Test state management
+  });
+});
 
-## 🎨 Translation System
-
-### Key Structure
-- **Castles**: `castle.{type}.name`, `castle.{type}.description`
-- **Units**: `unit.{id}.name`, `unit.{id}.description`
-- **Interface**: `game.{element}`, `ui.{component}`
-
-### Supported Languages
-- **fr**: French (default)
-- **en**: English
-- Extensible for other languages
-
-### Categories
-- **castle**: Castle names and descriptions
-- **unit**: Unit names and descriptions
-- **game**: Game interface
-- **ui**: UI elements
-
----
+// Cypress E2E tests
+describe('Solo Gameplay', () => {
+  it('should display game selector', () => {
+    cy.visit('/');
+    cy.contains('🎮 Heroes of Time 🎮').should('be.visible');
+  });
+});
+```
 
 ## 🚀 Deployment
 
-### Local Development
-1. Start backend on port 8080
-2. Start frontend on port 3000
-3. APIs configured with CORS
-
-### Production
-- Backend: Docker/Kubernetes deployment
-- Frontend: Static build to CDN
-- Database: PostgreSQL
-
----
-
-## 🧪 Comprehensive Testing Suite
-
-### 🔍 **Backend Testing (44 Tests)**
-
-#### **Test Structure**
-```
-backend/src/test/java/com/example/demo/controller/
-├── GameControllerTest.java      # 15 tests
-├── UnitControllerTest.java      # 20+ tests
-└── MultiplayerControllerTest.java # 9 tests
-```
-
-#### **GameController Tests (15 Tests)**
-- **Game Management**: Create, retrieve, and manage game sessions
-- **Hero Actions**: Move, attack, collect resource endpoints
-- **Combat System**: Battle resolution and damage calculations
-- **Health Monitoring**: System health and status checks
-- **Turn Management**: End turn and state transitions
-
-#### **UnitController Tests (20+ Tests)**
-- **Unit Retrieval**: All units, localized units, castle-specific units
-- **Castle Rosters**: Complete unit rosters with localization
-- **CRUD Operations**: Create, read, update, delete unit operations
-- **Localization**: French, English, Russian language support
-- **Data Validation**: Input validation and error handling
-
-#### **MultiplayerController Tests (9 Tests)**
-- **Session Management**: Create, join, leave multiplayer sessions
-- **WebSocket Handlers**: Real-time communication testing
-- **Game State Sync**: Multiplayer state synchronization
-- **Network Protocols**: STOMP and SockJS functionality
-- **Error Handling**: Network failure and recovery scenarios
-
-#### **Testing Framework**
+### Development Environment
 ```bash
-mvn test                 # Run all 44 unit tests
-mvn test -Dtest=GameControllerTest # Run specific test class
-mvn spring-boot:run      # Development startup
+# Start backend
+cd backend && mvn spring-boot:run
+
+# Start frontend  
+cd frontend && npm start
 ```
 
-#### **Test Technologies**
-- **JUnit 5**: Modern Java testing framework
-- **Spring Boot Test**: Integration testing with full Spring context
-- **MockMvc**: HTTP endpoint testing without server startup
-- **Mockito**: Service and dependency mocking
-- **TestContainers**: Database integration testing (if needed)
-
-### 🎯 **Frontend Testing (26 Cypress Tests)**
-
-#### **Test Structure**
-```
-frontend/cypress/
-├── e2e/
-│   ├── 01-solo-gameplay.cy.js           # Basic gameplay
-│   ├── 07-comprehensive-screen-tests.cy.js # Screen coverage
-│   ├── 08-map-loading-specific.cy.js    # Map functionality
-│   └── 09-corrected-comprehensive-tests.cy.js # Main suite (26 tests)
-├── fixtures/
-│   ├── game-data.json                   # Mock game data
-│   └── classic-map.json                 # Map test data
-└── support/
-    ├── commands.js                      # Custom commands
-    └── e2e.js                          # Global configuration
-```
-
-#### **Comprehensive Test Categories**
-
-| Category | Tests | Coverage |
-|----------|-------|----------|
-| **🎮 Game Screens** | 8 tests | All major UI screens and navigation |
-| **🌐 Language Support** | 6 tests | French, English, Russian switching |
-| **🗺️ Map Loading** | 4 tests | Classic and Mystique map functionality |
-| **⚡ Performance** | 3 tests | Load testing and error handling |
-| **📱 Responsive Design** | 3 tests | Desktop, tablet, mobile viewports |
-| **♿ Accessibility** | 2 tests | Keyboard navigation and usability |
-
-#### **Key Test Scenarios**
-- **Game Navigation**: Selector screen, scenario switching, game loading
-- **Multilingual Support**: Language persistence, UI translation updates
-- **Map Functionality**: Classic/Mystique map loading with 5-second waits
-- **Performance Testing**: Load testing, concurrent user simulation
-- **Responsive Design**: Cross-device compatibility (macbook-15, ipad-2, iphone-x)
-- **Accessibility**: Keyboard navigation, screen reader support
-
-#### **Testing Commands**
+### Production Build
 ```bash
-# Development testing
-npx cypress open                  # Interactive test runner
-npx cypress run                   # Headless test execution
-npx cypress run --spec "cypress/e2e/09-corrected-comprehensive-tests.cy.js"
+# Build frontend
+cd frontend && npm run build
 
-# Production testing
-npm run test:e2e                  # Full E2E test suite
-npm run test:e2e:headless        # CI/CD pipeline testing
+# Build backend JAR
+cd backend && mvn clean package -DskipTests
 ```
 
-#### **Test Configuration**
-```javascript
-// cypress.config.js
-module.exports = {
-  e2e: {
-    baseUrl: 'http://localhost:3000',
-    viewportWidth: 1280,
-    viewportHeight: 720,
-    defaultCommandTimeout: 10000,
-    requestTimeout: 10000,
-    responseTimeout: 10000,
-    video: true,
-    screenshotOnRunFailure: true
-  }
-}
+### Docker Deployment
+```dockerfile
+# Multi-stage build for production
+FROM node:16 AS frontend-build
+WORKDIR /app/frontend
+COPY frontend/package*.json ./
+RUN npm install
+COPY frontend/ .
+RUN npm run build
+
+FROM openjdk:17-jdk-slim
+WORKDIR /app
+COPY backend/target/*.jar app.jar
+COPY --from=frontend-build /app/frontend/build ./static
+EXPOSE 8080
+CMD ["java", "-jar", "app.jar"]
 ```
-
-### 🔧 **Testing Infrastructure**
-
-#### **CI/CD Integration**
-- **GitHub Actions**: Automated testing on every push
-- **Test Parallelization**: Backend and frontend tests run simultaneously
-- **Coverage Reporting**: Automatic test coverage analysis
-- **Failure Notifications**: Immediate alerts on test failures
-
-#### **Quality Gates**
-- **Backend**: All 44 tests must pass before deployment
-- **Frontend**: All 26 Cypress tests must pass before deployment
-- **Performance**: Load testing validates response times
-- **Accessibility**: WCAG compliance testing integrated
-
-### 🏥 **Health Monitoring**
-
-#### **Backend Health Endpoints**
-- `GET /api/health` - General application health
-- `GET /api/units/health` - Unit service health
-- `GET /api/i18n/health` - Internationalization service health
-- `GET /api/multiplayer/health` - Multiplayer service health
-
-#### **Frontend Health Checks**
-- **Bundle Analysis**: Automated bundle size monitoring
-- **Performance Metrics**: Core Web Vitals tracking
-- **Error Tracking**: Real-time JavaScript error monitoring
-- **User Experience**: Synthetic user journey monitoring
-
-### 📊 **Test Metrics**
-
-#### **Backend Test Coverage**
-- **Controllers**: 100% endpoint coverage
-- **Services**: 90%+ business logic coverage
-- **Models**: 85%+ data model coverage
-- **Integration**: Complete API integration testing
-
-#### **Frontend Test Coverage**
-- **Components**: 85%+ component coverage
-- **User Flows**: 100% critical path coverage
-- **Browser Compatibility**: Chrome, Firefox, Safari, Edge
-- **Device Coverage**: Desktop, tablet, mobile viewports
-
-#### **Performance Benchmarks**
-- **Backend Tests**: < 30 seconds execution time
-- **Frontend Tests**: < 3 minutes full suite execution
-- **API Response**: < 100ms average response time
-- **UI Load Time**: < 2 seconds initial page load
-
----
-
-## 🎯 Performance Optimizations
-
-### Backend
-- Translation caching
-- Entity lazy loading
-- Result pagination
-- Optimized connection pool
-
-### Frontend
-- Route-based code splitting
-- API caching
-- React render optimizations
-- Component lazy loading
-
----
-
-## 📊 Monitoring
-
-### Backend Metrics
-- API response times
-- JVM memory usage
-- Database connections
-- Structured logging
-
-### Frontend Metrics
-- Load times
-- JavaScript errors
-- Component performance
-- Bundle sizes
-
----
 
 ## 🔧 Configuration
 
-### Backend (application.properties)
+### Backend Configuration (application.properties)
 ```properties
-spring.application.name=heroes-reforged
+# Database
 spring.datasource.url=jdbc:h2:mem:testdb
-spring.jpa.hibernate.ddl-auto=create-drop
-server.port=8080
+spring.h2.console.enabled=true
+
+# WebSocket
+spring.websocket.sockjs.enabled=true
+
+# CORS
+cors.allowed.origins=http://localhost:3000
 ```
 
-### Frontend (package.json)
+### Frontend Configuration (package.json)
 ```json
 {
-  "name": "heroes-reforged-frontend",
-  "version": "1.0.0",
-  "dependencies": {
-    "react": "^18.0.0",
-    "typescript": "^4.9.0",
-    "zustand": "^4.0.0"
+  "proxy": "http://localhost:8080",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "cypress": "cypress open"
   }
 }
 ```
 
----
+## 🐛 Troubleshooting
 
-## 🔒 Security
+### Common Issues
 
-### Backend
-- Input validation
-- JWT authentication (coming)
-- CORS configuration
-- CSRF protection
+#### Backend won't start
+```bash
+# Check Java version
+java -version
 
-### Frontend
-- Client-side validation
-- Secure token handling
-- Data sanitization
-- Error handling
-
----
-
-## 🌍 Multilingual Architecture
-
-### Backend Internationalization
-- **Translation Entity**: Stores all game text in multiple languages
-- **I18n Service**: Manages translation retrieval and caching
-- **Localized Endpoints**: All game data endpoints support language parameters
-- **Category System**: Organized by castle, unit, game, ui categories
-
-### Frontend Language Support
-- **I18n Service**: Connects to backend translation API
-- **Language Switching**: Runtime language change support
-- **Fallback System**: Graceful degradation for missing translations
-- **Caching**: Client-side translation caching for performance
-
----
-
-## 🚀 **Phase 5 Network Mode - Implementation Complete**
-
-### 🌐 **Real-Time Multiplayer Architecture**
-
-#### **WebSocket Configuration**
-- **STOMP over SockJS**: Reliable WebSocket communication
-- **Message Brokers**: `/topic` (broadcast) and `/queue` (private messages)
-- **Auto-reconnection**: Handles network interruptions gracefully
-- **Cross-origin Support**: Configured for development and production
-
-#### **Game Session Management**
-- **Session Lifecycle**: WAITING → ACTIVE → PAUSED → ENDED
-- **Player Management**: Join/leave sessions, max player limits
-- **Real-time Synchronization**: Instant state updates across all players
-- **Spectator Mode**: Watch games without participating
-
-#### **Advanced Features**
-- **ZFC Network Mode**: Multiplayer Zone de Causalité calculations
-- **Shadow Actions**: See translucent previews of other players' pending actions
-- **Conflict Resolution**: Automatic detection and resolution of conflicting actions
-- **Temporal Synchronization**: Maintains game state consistency across all clients
-
-### 🎮 **Multiplayer Game Modes**
-
-#### **Async Conquest** (Primary Network Mode)
-- **2-8 Players**: Large-scale strategic battles
-- **Real-time ZFC**: Dynamic influence zone calculations
-- **Shadow Bluffing**: Psychological warfare with fake actions
-- **Temporal Mechanics**: Actions exist in multiple states until resolved
-
-#### **Hot Seat Network** 
-- **2-4 Players**: Turn-based with real-time chat
-- **Shared Screen**: Players pass control seamlessly
-- **Network Backup**: Cloud save for session persistence
-- **Spectator Streaming**: Others can watch the game
-
-#### **Tournament Mode**
-- **Bracket System**: Automated tournament management
-- **Ranked Matches**: ELO-based matchmaking
-- **Live Streaming**: Built-in broadcast capabilities
-- **Professional Rules**: Standardized competitive settings
-
-### 🔌 **Network API Endpoints**
-
-#### **Session Management**
-- `POST /api/multiplayer/sessions` - Create new multiplayer session
-- `GET /api/multiplayer/sessions` - List joinable sessions
-- `POST /api/multiplayer/sessions/{id}/join` - Join session
-- `POST /api/multiplayer/sessions/{id}/leave` - Leave session
-- `POST /api/multiplayer/sessions/{id}/start` - Start session
-- `GET /api/multiplayer/sessions/{id}` - Get session details
-
-#### **WebSocket Endpoints**
-- `ws://localhost:8080/ws` - Main WebSocket connection
-- `/app/game.join` - Join game session
-- `/app/game.leave` - Leave game session
-- `/app/game.action` - Send game action
-- `/app/game.sync` - Request state synchronization
-- `/app/game.chat` - Send chat messages
-
-#### **Topic Subscriptions**
-- `/topic/session/{sessionId}` - Session-wide broadcasts
-- `/queue/reply` - Personal action responses
-- `/queue/sync` - Personal state synchronization
-- `/queue/error` - Error messages
-
-### 📊 **Real-Time Data Flow**
-
-#### **Action Processing Pipeline**
-1. **Client Action**: Player performs action (move, attack, build)
-2. **WebSocket Send**: Action sent via STOMP to server
-3. **Server Validation**: Action validated against game rules
-4. **ZFC Calculation**: Influence zones updated for all players
-5. **Conflict Detection**: Check for overlapping actions
-6. **State Update**: Game state modified and persisted
-7. **Broadcast**: All players receive updated state
-8. **Shadow Update**: Translucent previews updated for pending actions
-
-#### **Network Synchronization**
-- **Heartbeat**: Regular ping/pong to maintain connection
-- **State Checksum**: Validates client-server state consistency
-- **Recovery Protocol**: Automatic resync on desynchronization
-- **Lag Compensation**: Predictive movement for smooth gameplay
-
----
-
-## 🛠️ **Phase 5 Network Components**
-
-### 🏗️ **Backend Components**
-
-#### **GameSession Entity**
-```java
-@Entity
-@Table(name = "game_sessions")
-public class GameSession {
-    private String sessionId;
-    private GameSessionStatus status;
-    private List<String> playerIds;
-    private Boolean networkMode;
-    private Boolean realTimeSync;
-    private Boolean zfcEnabled;
-    // ... network-specific fields
-}
+# Clean and rebuild
+mvn clean install
 ```
 
-#### **MultiplayerService**
-```java
-@Service
-public class MultiplayerService {
-    // Session management
-    public GameSession createSession(String name, Integer maxPlayers, String gameMode, String creatorId);
-    public GameSession joinSession(String sessionId, String playerId);
-    public Map<String, Object> processGameAction(String sessionId, String playerId, String actionType, Map<String, Object> actionData);
-    public Map<String, Object> getGameState(String sessionId);
-}
+#### Frontend compilation errors
+```bash
+# Clear node modules
+rm -rf node_modules package-lock.json
+npm install
 ```
 
-#### **MultiplayerController**
-```java
-@Controller
-@RestController
-@RequestMapping("/api/multiplayer")
-public class MultiplayerController {
-    @MessageMapping("/game.action")
-    public void handleGameAction(@Payload Map<String, Object> message);
-    
-    @MessageMapping("/game.sync")
-    public void handleSync(@Payload Map<String, Object> message);
-}
+#### WebSocket connection issues
+```bash
+# Check CORS configuration
+# Verify WebSocket endpoint: ws://localhost:8080/ws
 ```
 
-### 🖥️ **Frontend Components**
+## 📈 Performance Considerations
 
-#### **WebSocket Service**
-```typescript
-class WebSocketService {
-  private stompClient: Client;
-  private sessionId: string;
-  
-  connect(sessionId: string): Promise<void>;
-  sendAction(actionType: string, actionData: any): void;
-  subscribeToSession(callback: (message: any) => void): void;
-  disconnect(): void;
-}
-```
+### Backend Optimization
+- **Database indexing** on frequently queried fields
+- **Connection pooling** for database connections
+- **Caching** for static game data
+- **Async processing** for long-running operations
 
-#### **Multiplayer Game Store**
-```typescript
-interface MultiplayerStore {
-  // Session state
-  currentSession: GameSession | null;
-  players: Player[];
-  gameState: any;
-  
-  // Network state
-  isConnected: boolean;
-  latency: number;
-  pendingActions: Action[];
-  
-  // Actions
-  joinSession: (sessionId: string) => Promise<void>;
-  sendAction: (actionType: string, actionData: any) => void;
-  processIncomingMessage: (message: any) => void;
-}
-```
-
-### 🎨 **Advanced Network Features**
-
-#### **ZFC Network Calculations**
-- **Distributed Processing**: ZFC calculations run on both client and server
-- **Conflict Prediction**: AI predicts potential conflicts before they occur
-- **Temporal Buffering**: Actions buffered to resolve timing conflicts
-- **Shadow Rendering**: Translucent overlays show other players' potential actions
-
-#### **Anti-Cheat Systems**
-- **Server Authority**: All game logic validated server-side
-- **Action Validation**: Client actions verified against game rules
-- **State Checksums**: Regular validation of client-server state consistency
-- **Replay Recording**: Complete action history for audit purposes
-
-#### **Network Optimization**
-- **Delta Compression**: Only send state changes, not full game state
-- **Predictive Movement**: Client-side prediction for smooth gameplay
-- **Adaptive Quality**: Adjust update frequency based on network conditions
-- **Bandwidth Monitoring**: Real-time network usage optimization
-
-### 🔧 **Configuration**
-
-#### **WebSocket Configuration**
-```properties
-# WebSocket settings
-spring.websocket.stomp.heartbeat.client=10000
-spring.websocket.stomp.heartbeat.server=10000
-spring.websocket.stomp.relay.port=61613
-```
-
-#### **Network Mode Settings**
-```properties
-# Phase 5 Network Mode
-multiplayer.max-sessions=1000
-multiplayer.max-players-per-session=8
-multiplayer.session-timeout=3600000
-multiplayer.zfc-enabled=true
-multiplayer.shadow-actions=true
-multiplayer.real-time-sync=true
-```
+### Frontend Optimization
+- **Code splitting** for large components
+- **Memoization** for expensive calculations
+- **Virtual scrolling** for large lists
+- **Image optimization** for game assets
 
 ---
 
-## 🎯 **Network Performance Metrics**
-
-### 📈 **Real-Time Monitoring**
-- **Latency**: < 50ms for local, < 200ms for international
-- **Throughput**: 1000+ actions per second per session
-- **Concurrent Sessions**: 500+ simultaneous multiplayer games
-- **Uptime**: 99.9% availability target
-
-### 🔍 **Network Diagnostics**
-- **Connection Health**: Real-time connection status monitoring
-- **Packet Loss**: Automatic detection and recovery
-- **Bandwidth Usage**: Optimized for mobile and low-bandwidth connections
-- **Server Load**: Distributed across multiple instances
-
----
-
-## 🚀 **Phase 5 Success Metrics**
-
-### 🎮 **Multiplayer Engagement**
-- **Session Duration**: 60+ minutes average
-- **Player Retention**: 80% return for second multiplayer session
-- **Concurrent Players**: 2000+ peak concurrent users
-- **Match Completion**: 95% games completed without disconnection
-
-### 🏆 **Competitive Features**
-- **Tournament Participation**: 500+ players in monthly tournaments
-- **Ranked Ladder**: 10,000+ active ranked players
-- **Professional Matches**: 100+ streamed competitive games
-- **Esports Viewership**: 10,000+ concurrent viewers
-
----
-
-## 🔮 **Future Network Enhancements**
-
-### 📱 **Mobile Network Mode**
-- **Cross-platform Play**: Mobile vs Desktop multiplayer
-- **Optimized Protocols**: Low-bandwidth network optimization
-- **Touch Interface**: Mobile-specific multiplayer controls
-- **Offline Sync**: Play offline and sync when reconnected
-
-### 🌍 **Global Infrastructure**
-- **Regional Servers**: Dedicated servers in major regions
-- **CDN Integration**: Content delivery network for assets
-- **Load Balancing**: Automatic server selection based on load
-- **Disaster Recovery**: Multi-region failover capability
-
-### 🤖 **AI Integration**
-- **Smart Matchmaking**: AI-powered player matching
-- **Cheat Detection**: Machine learning anti-cheat systems
-- **Predictive Scaling**: AI-driven server capacity planning
-- **Behavioral Analysis**: Player behavior monitoring and optimization
-
----
-
-This Phase 5 Network Mode implementation represents the culmination of Heroes Reforged's multiplayer vision. With real-time WebSocket communication, advanced ZFC calculations, and sophisticated shadow action systems, players can now experience true async strategy gaming with friends worldwide.
-
----
-
-This technical documentation covers all implementation aspects of Heroes Reforged. For gameplay documentation, see the main README.md. 
+For more detailed information, see the individual component documentation in the `docs/` directory. 

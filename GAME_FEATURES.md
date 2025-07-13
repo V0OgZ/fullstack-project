@@ -1,258 +1,244 @@
-# 🎮 Game Features - Heroes of Time
+# 🎮 Heroes of Time - Game Features
 
-## 🏰 Core Gameplay Features
+## 🎯 Core Game Modes
 
-### **Two Epic Game Modes**
+### 🗡️ Classic Conquest
+**Traditional Heroes of Might and Magic gameplay with modern enhancements**
 
-#### **🗡️ Conquête Classique (Classic Conquest)**
-- **Pure Heroes Experience** - Traditional turn-based strategy
-- **Enhanced Mechanics** - Modern improvements to classic formulas
-- **Hexagonal Maps** - Beautiful tactical positioning
-- **Resource Management** - 7-type economy system
-- **Castle Building** - Construct and upgrade your empire
+- **Turn-based Strategy**: Plan your moves carefully
+- **Resource Management**: Gold, wood, stone, ore, crystal, gems, sulfur
+- **Castle Building**: Construct and upgrade your empire
+- **Hero Development**: Level up heroes with skills and artifacts
+- **Tactical Combat**: Hexagonal battlefield battles
+- **AI Opponents**: Intelligent computer players
 
-#### **⚡ Conquête Mystique (Mystique Conquest)**
-- **Everything from Classic** - All the core Heroes gameplay
-- **PLUS Temporal Objects** - Reality-altering magical items
-- **Quantum Warfare** - Units exist in multiple states
-- **Time Manipulation** - Actions ripple through past and future
-- **Paradox Resolution** - Advanced ZFC mathematics engine
+### ⚡ Mystique Conquest
+**Advanced mode with temporal mechanics and magical depth**
 
-## 🏰 Castle & Building System
-
-### **8 Castle Types**
-1. **🏰 Castle** - Human knights and holy magic
-2. **🌲 Rampart** - Elven archers and nature magic
-3. **🗼 Tower** - Wizard towers and arcane knowledge
-4. **🔥 Inferno** - Demons and destructive magic
-5. **💀 Necropolis** - Undead hordes and death magic
-6. **⚫ Dungeon** - Dark elves and subterranean creatures
-7. **⚔️ Stronghold** - Orcs and brutal combat
-8. **🏔️ Fortress** - Barbarians and elemental magic
-
-### **Building Construction**
-- **Town Hall** - Upgrade for more resources
-- **Castle** - Unlock higher tier creatures
-- **Barracks** - Train basic units
-- **Archery Range** - Train ranged units
-- **Stable** - Train cavalry units
-- **Mage Guild** - Learn and cast spells
-- **Marketplace** - Trade resources
-- **Tavern** - Hire additional heroes
-
-## ⚔️ Combat System
-
-### **Tactical Hex Combat**
-- **Hexagonal Battlefield** - 6-direction movement and positioning
-- **Initiative System** - Speed determines turn order
-- **Damage Calculations** - Attack vs Defense with randomization
-- **Terrain Effects** - Different hex types affect combat
-- **Range Combat** - Archers and magic users attack from distance
-- **Melee Combat** - Adjacent hex attacks with retaliation
-
-### **168 Unit Types**
-- **7 Tiers per Castle** - From basic to legendary creatures
-- **3 Upgrade Variants** - Each unit has multiple upgrade paths
-- **Special Abilities** - Unique powers for each creature type
-- **Stack Management** - Combine identical units for power
-
-### **Morale & Luck System**
-- **7 Morale Levels** (-3 to +3) - Affects initiative and damage
-- **7 Luck Levels** (-3 to +3) - Chance for critical hits
-- **Faction Mixing** - Different castle types affect morale
-- **Leadership Skills** - Heroes can improve army morale
-
-## 🔮 Magic System
-
-### **5 Schools of Magic**
-1. **💨 Air Magic** - Lightning, speed, and precision spells
-2. **🔥 Fire Magic** - Destructive damage and area effects
-3. **💧 Water Magic** - Healing, protection, and ice attacks
-4. **🌍 Earth Magic** - Stone skin, slow, and earth damage
-5. **☠️ Death Magic** - Curses, drain life, and undead control
-
-### **70+ Spells Available**
-- **Combat Spells** - Direct damage and battlefield control
-- **Adventure Spells** - Exploration and resource management
-- **Buff Spells** - Enhance your armies and heroes
-- **Debuff Spells** - Weaken enemy forces
-- **Utility Spells** - Town portal, dimension door, etc.
-
-### **Spell Mechanics**
-- **Mana System** - Heroes have limited spell casting
-- **Spell Power** - Higher skill = more powerful effects
-- **Resistance** - Units can resist magical effects
-- **Spell Books** - Learn spells from mage guilds
-
-## 🏆 Artifact System
-
-### **150+ Artifacts**
-- **Weapons** - Swords, bows, staves for combat bonuses
-- **Armor** - Helmets, shields, armor for defense
-- **Accessories** - Rings, cloaks, boots for special effects
-- **Miscellaneous** - Orbs, tomes, relics with unique powers
-
-### **Artifact Features**
-- **Set Bonuses** - Wearing multiple related artifacts
-- **Combinable Items** - Create powerful composite artifacts
-- **Rare Drops** - Find legendary items in exploration
-- **Quest Rewards** - Earn artifacts through adventures
-
-## 🌀 Temporal Warfare (Mystique Mode)
-
-### **Quantum Zones**
-- **Superposition Fields** - Units exist in multiple states
-- **Entanglement Zones** - Actions affect distant battlefields
-- **Temporal Distortions** - Time flows differently in areas
-- **Collapse Events** - Quantum states resolve into reality
-
-### **Shadow Action System**
-- **Bluffing Mechanics** - Hide your true intentions
-- **Parallel Timelines** - Actions exist in superposition
-- **Detection AI** - Opponents try to uncover your plans
-- **Psychological Warfare** - Mislead and confuse enemies
-
-### **Temporal Spells (6 Levels)**
-1. **Temporal Glimpse** - See possible futures
-2. **Chronological Shift** - Alter turn order
-3. **Temporal Echo** - Repeat past actions
-4. **Paradox Weaving** - Create temporal loops
-5. **Reality Fracture** - Split timelines
-6. **Temporal Mastery** - Control time itself
-
-### **Paradox Resolution**
-- **5 Paradox Types** - Different temporal conflicts
-- **Automatic Resolution** - AI handles simple paradoxes
-- **Manual Resolution** - Player chooses outcomes
-- **Consequences** - All paradoxes have lasting effects
-
-## 🎭 Political System (Perestroika)
-
-### **4 Specialized Advisors**
-1. **General Volkov (Militsiya)** - Military strategy and warfare
-2. **Dr. Petrova (Ekonomist)** - Economic policy and resources
-3. **Ambassador Kozlov (Diplomat)** - International relations
-4. **Prof. Ivanova (Scientist)** - Technological advancement
-
-### **Crisis Management**
-- **20+ Crisis Types** - Economic, military, diplomatic, scientific
-- **Advisor Debates** - Conflicting recommendations
-- **Long-term Consequences** - Decisions affect future events
-- **Reputation System** - 6 types of reputation to manage
-
-### **Political Features**
-- **Advisor Influence** - Advisors gain/lose power over time
-- **Animated Portraits** - Expressive character reactions
-- **Decision Trees** - Complex branching storylines
-- **Power Struggles** - Advisors compete for your attention
-
-## 💰 Economic System
-
-### **7 Resource Types**
-1. **💰 Gold** - Primary currency for everything
-2. **🌳 Wood** - Building construction and some units
-3. **🏔️ Stone** - Advanced buildings and fortifications
-4. **⚒️ Ore** - Military units and weapon upgrades
-5. **💎 Crystal** - Magical buildings and spell research
-6. **💍 Gems** - Precious magical components
-7. **🔥 Sulfur** - Powerful magical creatures and spells
-
-### **Economic Features**
-- **Resource Generation** - Mines, sawmills, and other producers
-- **Trade System** - Convert resources at marketplaces
-- **Supply Lines** - Protect resource convoys
-- **Economic Advisors** - Get recommendations for growth
-
-## 🗺️ Map & Exploration
-
-### **Hexagonal Maps**
-- **Beautiful Terrain** - Grass, forest, mountains, water, etc.
-- **Resource Locations** - Mines, mills, and treasure sites
-- **Neutral Creatures** - Wild armies to fight or recruit
-- **Hidden Treasures** - Artifacts and resources to discover
-
-### **Exploration Features**
-- **Fog of War** - Gradually reveal the map
-- **Scouting** - Fast units reveal distant areas
-- **Watchtowers** - Permanent vision of regions
-- **Teleportation** - Magic allows instant travel
-
-## 🎯 Victory Conditions
-
-### **Multiple Victory Types**
-- **Conquest Victory** - Defeat all enemy players
-- **Economic Victory** - Accumulate massive wealth
-- **Magical Victory** - Master all schools of magic
-- **Temporal Victory** - Control time itself (Mystique mode)
-- **Political Victory** - Achieve maximum reputation
-
-### **Campaign Features**
-- **Story Campaigns** - Follow epic narratives
-- **Scenario Maps** - Quick battles with specific goals
-- **Random Maps** - Procedurally generated challenges
-- **Custom Maps** - Create your own battles
-
-## 🎨 Visual & Audio
-
-### **Visual Features**
-- **Animated Creatures** - All 168 units have unique animations
-- **Spell Effects** - Spectacular magical visual effects
-- **Terrain Variety** - Beautiful hexagonal landscapes
-- **UI Design** - Modern interface with classic Heroes feel
-
-### **Audio Features**
-- **Epic Soundtrack** - Orchestral music for each castle type
-- **Combat Sounds** - Realistic battle audio
-- **Magic Effects** - Unique sounds for each spell
-- **Ambient Audio** - Immersive environmental sounds
-
-## 🧪 Quality Assurance & Testing
-
-### **Comprehensive Testing Suite**
-- **44 Backend Tests** - Complete API endpoint coverage
-- **26 Frontend Tests** - Full UI and user experience validation
-- **Performance Testing** - Load testing and optimization
-- **Accessibility Testing** - WCAG 2.1 AA compliance
-- **Cross-browser Testing** - Chrome, Firefox, Safari, Edge
-- **Responsive Testing** - Desktop, tablet, mobile devices
-
-### **Backend Test Coverage**
-- **GameController** - 15 tests covering all game mechanics
-- **UnitController** - 20+ tests for unit management and localization
-- **MultiplayerController** - 9 tests for real-time multiplayer features
-- **Service Layer** - Business logic and data validation
-- **Integration Tests** - End-to-end API functionality
-
-### **Frontend Test Coverage**
-- **Screen Testing** - All major UI components and navigation
-- **Language Testing** - French, English, Russian language support
-- **Map Testing** - Classic and Mystique conquest modes
-- **Performance Testing** - Load times and responsiveness
-- **Accessibility Testing** - Keyboard navigation and screen readers
-
-### **Quality Metrics**
-- **Test Execution Time** - Backend <30s, Frontend <3min
-- **Code Coverage** - 90%+ for critical business logic
-- **Performance Benchmarks** - <100ms API response, <2s page load
-- **Accessibility Score** - WCAG 2.1 AA compliance
-- **Browser Compatibility** - 98%+ modern browser support
-
-## 🌍 Multilingual Support
-
-### **Language Support**
-- **🇫🇷 French** - Complete translation and localization
-- **🇬🇧 English** - Full native language support
-- **🇷🇺 Russian** - Comprehensive language implementation
-- **Future Languages** - German, Spanish, Italian planned
-
-### **Localization Features**
-- **Dynamic Language Switching** - Change language without restart
-- **Cultural Adaptation** - Region-specific content and references
-- **Right-to-Left Support** - Prepared for Arabic and Hebrew
-- **Font Optimization** - Proper character rendering for all languages
+- **All Classic Features**: Everything from Classic Conquest
+- **Temporal Objects**: 31+ magical items with reality-altering effects
+- **ZFC System**: Zone of Temporal Causality mechanics
+- **Advanced Magic**: Complex spellcasting system
+- **Quantum Strategy**: Actions ripple through time
+- **Shadow Actions**: Preview other players' moves
 
 ---
 
-**🏆 Heroes of Time offers the deepest strategy experience ever created, combining classic Heroes gameplay with revolutionary temporal mechanics, political intrigue, and comprehensive quality assurance!** 
+## 🏰 Castle & Building System
 
-*Where Strategy Meets Spacetime* ⏰✨ 
+### 8 Unique Castle Types
+1. **🏰 Castle** - Human knights with balanced units and holy magic
+2. **🌲 Rampart** - Elven archers with nature magic and forest creatures
+3. **🗼 Tower** - Wizard towers with powerful magic and mechanical units
+4. **🔥 Inferno** - Demons with destructive magic and fire creatures
+5. **💀 Necropolis** - Undead hordes with death magic and dark creatures
+6. **⚫ Dungeon** - Dark elves with subterranean creatures and shadow magic
+7. **⚔️ Stronghold** - Orcs with brutal combat and savage creatures
+8. **🏔️ Fortress** - Barbarians with elemental magic and primal creatures
+
+### Building Types
+- **🏛️ Town Hall** - Generate daily gold income
+- **🏰 Castle** - Unlock higher tier creatures
+- **⚔️ Barracks** - Train basic warrior units
+- **🏹 Archery Range** - Train ranged combat units
+- **🐎 Stable** - Train cavalry and mounted units
+- **🔮 Mage Guild** - Learn spells and magical knowledge
+- **🏪 Marketplace** - Trade resources efficiently
+- **🍺 Tavern** - Hire additional heroes
+
+### Construction System
+- **Resource Costs**: Different buildings require specific resources
+- **Construction Time**: Buildings take time to complete
+- **Upgrade Paths**: Improve buildings for better benefits
+- **Prerequisites**: Advanced buildings require basic ones first
+
+---
+
+## 🦸 Hero System
+
+### Hero Development
+- **Experience Points**: Gain XP from combat and exploration
+- **Level Progression**: Unlimited leveling with increasing requirements
+- **Skill Trees**: Choose specializations and abilities
+- **Attribute Growth**: Increase Attack, Defense, Spell Power, Knowledge
+
+### Hero Equipment
+- **Weapons**: Swords, bows, staves with combat bonuses
+- **Armor**: Protection gear with defensive bonuses
+- **Accessories**: Rings, amulets with special effects
+- **Artifacts**: Legendary items with unique powers
+
+### Hero Actions
+- **Movement**: Explore the map and discover new areas
+- **Combat**: Lead armies in tactical battles
+- **Magic**: Cast spells to aid allies or harm enemies
+- **Collection**: Gather resources and treasures
+
+---
+
+## ⚔️ Combat System
+
+### Tactical Hex Combat
+- **Hexagonal Grid**: 6-direction movement and positioning
+- **Initiative Order**: Speed determines turn sequence
+- **Damage Calculation**: Attack vs Defense with randomization
+- **Range Combat**: Archers and mages attack from distance
+- **Spell Effects**: Magic influences battlefield dynamics
+
+### Unit Types
+- **Tier 1-2**: Basic units (Peasants, Archers, Skeletons)
+- **Tier 3-4**: Advanced units (Knights, Mages, Vampires)
+- **Tier 5-6**: Elite units (Angels, Dragons, Liches)
+- **Tier 7**: Legendary creatures (Archangels, Ancient Dragons)
+
+### Combat Mechanics
+- **Morale System**: Unit effectiveness based on leadership
+- **Terrain Effects**: Different hexes provide bonuses/penalties
+- **Formation Strategy**: Unit positioning affects combat outcomes
+- **Spell Integration**: Magic spells enhance combat tactics
+
+---
+
+## 🔮 Magic System
+
+### 31+ Magical Objects
+#### Temporal Objects (Mystique Mode)
+- **⏰ Time Crystal** - Manipulate turn order
+- **⌛ Eternal Hourglass** - Extend action duration
+- **🌀 Temporal Vortex** - Create time distortions
+- **⚡ Quantum Resonator** - Duplicate actions across timelines
+
+#### Classic Magic Items
+- **⚔️ Weapons** - Enchanted swords, bows, staves
+- **🛡️ Armor** - Protective gear with magical properties
+- **💍 Accessories** - Rings and amulets with special effects
+- **📜 Consumables** - Potions, scrolls, and temporary boosts
+
+### Magic Effects
+- **Stat Bonuses**: Increase hero attributes
+- **Special Abilities**: Unique powers and effects
+- **Combat Enhancements**: Improve battle performance
+- **Utility Functions**: Non-combat magical benefits
+
+---
+
+## 🌐 Multiplayer Features
+
+### Session Management
+- **Create Sessions**: Host multiplayer games
+- **Join Sessions**: Connect to existing games
+- **Player Limits**: Support for 2-8 players
+- **Real-time Updates**: WebSocket-based communication
+
+### Multiplayer Mechanics
+- **Simultaneous Play**: Multiple players act at once
+- **Turn Synchronization**: Coordinated turn progression
+- **Chat System**: Communicate with other players
+- **Spectator Mode**: Watch games in progress
+
+### Network Features
+- **Low Latency**: Optimized for responsive gameplay
+- **Reconnection**: Automatic reconnection on disconnect
+- **State Sync**: Consistent game state across players
+- **Conflict Resolution**: Handle simultaneous actions
+
+---
+
+## 🤖 AI System
+
+### AI Difficulty Levels
+- **🟢 Easy** - Basic decision making, forgiving mistakes
+- **🟡 Normal** - Balanced gameplay, moderate challenge
+- **🟠 Hard** - Advanced tactics, aggressive strategy
+- **🔴 Expert** - Maximum difficulty, perfect play
+
+### AI Personalities
+- **⚔️ Aggressive** - Focuses on military conquest
+- **🛡️ Defensive** - Prioritizes castle building and defense
+- **💰 Economic** - Emphasizes resource generation
+- **⚖️ Balanced** - Adapts strategy to game situation
+
+### AI Capabilities
+- **Strategic Planning** - Long-term goal setting
+- **Tactical Combat** - Intelligent battle decisions
+- **Resource Management** - Efficient economy building
+- **Threat Assessment** - Evaluate risks and opportunities
+
+---
+
+## 🎨 User Interface
+
+### Modern Design
+- **Responsive Layout** - Works on all screen sizes
+- **Intuitive Controls** - Easy to learn and use
+- **Visual Feedback** - Clear indication of actions
+- **Accessibility** - Keyboard and screen reader support
+
+### Language Support
+- **🇬🇧 English** - Full localization
+- **🇫🇷 French** - Complete translation
+- **🌍 Extensible** - Easy to add new languages
+
+### Interface Components
+- **Game Selector** - Choose game modes and scenarios
+- **Castle Management** - Build and upgrade interface
+- **Magic Inventory** - Item management system
+- **Combat Interface** - Battle control panel
+
+---
+
+## 📱 Platform Support
+
+### Web Platform
+- **Modern Browsers** - Chrome, Firefox, Safari, Edge
+- **Desktop** - Full-featured gameplay
+- **Tablet** - Touch-optimized interface
+- **Mobile** - Responsive design for phones
+
+### Technical Requirements
+- **JavaScript Enabled** - Modern ES6+ support
+- **WebSocket Support** - For real-time features
+- **Local Storage** - For game state persistence
+- **Canvas Support** - For advanced graphics
+
+---
+
+## 🔧 Advanced Features
+
+### ZFC System (Mystique Mode)
+- **Temporal Zones** - Areas where time flows differently
+- **Causality Tracking** - Monitor cause and effect chains
+- **Paradox Resolution** - Handle temporal conflicts
+- **Timeline Manipulation** - Alter past events
+
+### Performance Optimization
+- **Efficient Rendering** - Smooth 60 FPS gameplay
+- **Memory Management** - Optimized resource usage
+- **Network Optimization** - Minimal bandwidth usage
+- **Caching System** - Fast asset loading
+
+### Developer Features
+- **Debug Mode** - Development tools and logging
+- **Testing Suite** - Comprehensive test coverage
+- **Performance Monitoring** - Real-time metrics
+- **Error Reporting** - Automatic issue tracking
+
+---
+
+## 🎯 Victory Conditions
+
+### Classic Victory Types
+- **🏰 Conquest** - Capture all enemy castles
+- **💰 Economic** - Accumulate vast wealth
+- **🏆 Artifact** - Collect legendary items
+- **⏰ Survival** - Last player standing
+
+### Custom Scenarios
+- **📜 Story Mode** - Narrative-driven objectives
+- **🎯 Challenge Mode** - Specific gameplay constraints
+- **🏁 Time Trials** - Speed-based competitions
+- **🎪 Special Events** - Unique temporary modes
+
+---
+
+**🎮 Ready to experience the ultimate strategy game? Start your conquest today!** 

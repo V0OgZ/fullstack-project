@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from '../i18n';
 import LanguageSelector from './LanguageSelector';
@@ -19,9 +19,8 @@ interface Scenario {
 }
 
 const EnhancedScenarioSelector: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, language, setLanguage } = useTranslation();
   const [selectedScenario, setSelectedScenario] = useState<string | null>(null);
-  const [currentTip, setCurrentTip] = useState(0);
   const [showDetails, setShowDetails] = useState(false);
 
   const scenarios: Scenario[] = [
@@ -87,44 +86,25 @@ const EnhancedScenarioSelector: React.FC = () => {
     },
     {
       id: 'campaign-mode',
-      name: 'Epic Campaign',
-      description: 'Embark on an epic journey through interconnected scenarios with a rich storyline.',
+      name: t('epicCampaign'),
+      description: t('epicCampaignDescription'),
       longDescription: 'Follow the legendary heroes through an epic campaign spanning multiple kingdoms and timelines. Each victory unlocks new scenarios and reveals more of the overarching story.',
       difficulty: 'medium',
       features: [
-        'Story-driven Gameplay',
-        'Character Development',
-        'Unlockable Content',
-        'Multiple Endings',
-        'Cinematic Cutscenes',
-        'Save Progress'
+        t('storyDrivenGameplay'),
+        t('characterDevelopment'),
+        t('unlockableContent'),
+        t('multipleEndings'),
+        t('cinematicCutscenes'),
+        t('saveProgress')
       ],
-      icon: '📚',
-      backgroundImage: 'linear-gradient(135deg, #8b4513 0%, #5d2f0a 100%)',
+      icon: '📖',
+      backgroundImage: 'linear-gradient(135deg, #8B4513 0%, #654321 100%)',
       estimatedTime: '2-4 hours',
       playerCount: '1 player',
       unlocked: false
     }
   ];
-
-  const tips = [
-    "💡 Each scenario offers unique gameplay mechanics and challenges",
-    "🔮 Mystical scenarios introduce time manipulation and quantum strategy",
-    "🎮 Multiplayer supports both real-time and turn-based modes",
-    "🏰 Classic mode is perfect for learning the core game mechanics",
-    "⚡ Quick Arena matches are great for competitive play",
-    "🌟 Campaign mode tells an epic story across multiple scenarios",
-    "🎯 Different difficulty levels cater to all skill levels",
-    "🔥 Master one scenario before moving to the next for best experience"
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTip((prev) => (prev + 1) % tips.length);
-    }, 4000);
-
-    return () => clearInterval(interval);
-  }, [tips.length]);
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
@@ -148,26 +128,30 @@ const EnhancedScenarioSelector: React.FC = () => {
 
   return (
     <div className="enhanced-scenario-selector">
-      {/* Header */}
-      <header className="selector-header">
-        <div className="title-section">
-          <h1 className="game-title">
-            <span className="title-icon">⚔️</span>
-            Heroes of Time
-            <span className="title-icon">🏰</span>
-          </h1>
-          <p className="subtitle">{t('chooseScenario')}</p>
-        </div>
-        <div className="header-controls">
-          <LanguageSelector />
-        </div>
-      </header>
+      <div className="language-switch">
+        <button 
+          className={`lang-btn ${language === 'fr' ? 'active' : ''}`}
+          onClick={() => setLanguage('fr')}
+        >
+          🇫🇷 FR
+        </button>
+        <button 
+          className={`lang-btn ${language === 'en' ? 'active' : ''}`}
+          onClick={() => setLanguage('en')}
+        >
+          🇺🇸 EN
+        </button>
+        <button 
+          className={`lang-btn ${language === 'ru' ? 'active' : ''}`}
+          onClick={() => setLanguage('ru')}
+        >
+          🇷🇺 RU
+        </button>
+      </div>
 
-      {/* Main Content */}
       <main className="selector-main">
-        {/* Scenarios Grid */}
-        <section className="scenarios-section">
-          <h2 className="section-title">Available Adventures</h2>
+        <section className="scenarios-section game-options">
+          <h2 className="section-title">{t('availableAdventures')}</h2>
           <div className="scenarios-grid">
             {scenarios.map((scenario) => (
               <div
@@ -180,64 +164,40 @@ const EnhancedScenarioSelector: React.FC = () => {
                 {!scenario.unlocked && (
                   <div className="lock-overlay">
                     <div className="lock-icon">🔒</div>
-                    <div className="lock-text">Coming Soon</div>
+                    <div className="lock-text">{t('comingSoon')}</div>
                   </div>
                 )}
                 
                 <div className="scenario-content">
                   <div className="scenario-header">
-                    <div className="scenario-icon">{scenario.icon}</div>
+                    <div className="scenario-icon game-icon">{scenario.icon}</div>
                     <div className="scenario-meta">
                       <div 
-                        className="difficulty-badge"
+                        className="difficulty-badge difficulty-indicator"
                         style={{ backgroundColor: getDifficultyColor(scenario.difficulty) }}
                       >
                         {getDifficultyLabel(scenario.difficulty)}
                       </div>
-                      <div className="player-count">{scenario.playerCount}</div>
+                      <div className="scenario-time">{scenario.estimatedTime}</div>
                     </div>
                   </div>
-
-                  <div className="scenario-info">
-                    <h3 className="scenario-name">{scenario.name}</h3>
+                  
+                  <div className="scenario-body">
+                    <h3 className="scenario-title">{scenario.name}</h3>
                     <p className="scenario-description">{scenario.description}</p>
                     
                     <div className="scenario-features">
                       {scenario.features.slice(0, 3).map((feature, index) => (
-                        <span key={index} className="feature-tag">
-                          {feature}
-                        </span>
+                        <span key={index} className="feature-tag">{feature}</span>
                       ))}
-                      {scenario.features.length > 3 && (
-                        <span className="feature-tag more">
-                          +{scenario.features.length - 3} more
-                        </span>
-                      )}
-                    </div>
-
-                    <div className="scenario-details">
-                      <div className="detail-item">
-                        <span className="detail-icon">⏱️</span>
-                        <span>{scenario.estimatedTime}</span>
-                      </div>
                     </div>
                   </div>
-
+                  
                   <div className="scenario-actions">
-                    <button
-                      className="details-button"
-                      onClick={() => setShowDetails(true)}
-                      disabled={!scenario.unlocked}
-                    >
-                      <span className="button-icon">ℹ️</span>
-                      Details
-                    </button>
-                    
                     {scenario.unlocked ? (
                       <Link 
-                        to={`/game/${scenario.id}`} 
+                        to={`/game?mode=${scenario.id}`}
                         className="play-button"
-                        data-testid="start-game-button"
                       >
                         <span className="button-icon">🎮</span>
                         {t('startGame')}
@@ -245,7 +205,7 @@ const EnhancedScenarioSelector: React.FC = () => {
                     ) : (
                       <button className="play-button disabled" disabled>
                         <span className="button-icon">🔒</span>
-                        Locked
+                        {t('scenarioLocked')}
                       </button>
                     )}
                   </div>
@@ -254,115 +214,7 @@ const EnhancedScenarioSelector: React.FC = () => {
             ))}
           </div>
         </section>
-
-        {/* Tips Section */}
-        <section className="tips-section">
-          <div className="tip-container">
-            <div className="tip-icon">💡</div>
-            <div className="tip-content">
-              <div className="tip-text" key={currentTip}>
-                {tips[currentTip]}
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
-
-      {/* Footer */}
-      <footer className="selector-footer">
-        <div className="footer-content">
-          <p>{t('builtWith')}</p>
-          <div className="footer-links">
-            <a href="#" className="footer-link">About</a>
-            <a href="#" className="footer-link">Help</a>
-            <a href="#" className="footer-link">Community</a>
-          </div>
-        </div>
-      </footer>
-
-      {/* Scenario Details Modal */}
-      {showDetails && selectedScenario && (
-        <div className="details-modal-overlay" onClick={() => setShowDetails(false)}>
-          <div className="details-modal" onClick={(e) => e.stopPropagation()}>
-            {(() => {
-              const scenario = scenarios.find(s => s.id === selectedScenario);
-              if (!scenario) return null;
-              
-              return (
-                <>
-                  <div className="modal-header">
-                    <div className="modal-title">
-                      <span className="modal-icon">{scenario.icon}</span>
-                      {scenario.name}
-                    </div>
-                    <button 
-                      className="modal-close"
-                      onClick={() => setShowDetails(false)}
-                    >
-                      ✕
-                    </button>
-                  </div>
-                  
-                  <div className="modal-content">
-                    <div className="modal-description">
-                      {scenario.longDescription}
-                    </div>
-                    
-                    <div className="modal-features">
-                      <h4>Features:</h4>
-                      <div className="features-grid">
-                        {scenario.features.map((feature, index) => (
-                          <div key={index} className="feature-item">
-                            <span className="feature-bullet">✓</span>
-                            {feature}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    
-                    <div className="modal-stats">
-                      <div className="stat-item">
-                        <span className="stat-label">Difficulty:</span>
-                        <span 
-                          className="stat-value"
-                          style={{ color: getDifficultyColor(scenario.difficulty) }}
-                        >
-                          {getDifficultyLabel(scenario.difficulty)}
-                        </span>
-                      </div>
-                      <div className="stat-item">
-                        <span className="stat-label">Duration:</span>
-                        <span className="stat-value">{scenario.estimatedTime}</span>
-                      </div>
-                      <div className="stat-item">
-                        <span className="stat-label">Players:</span>
-                        <span className="stat-value">{scenario.playerCount}</span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="modal-actions">
-                    {scenario.unlocked ? (
-                      <Link 
-                        to={`/game/${scenario.id}`} 
-                        className="modal-play-button"
-                      >
-                        <span className="button-icon">🎮</span>
-                        Start Adventure
-                      </Link>
-                    ) : (
-                      <button className="modal-play-button disabled" disabled>
-                        <span className="button-icon">🔒</span>
-                        Coming Soon
-                      </button>
-                    )}
-                  </div>
-                </>
-              );
-            })()}
-          </div>
-        </div>
-      )}
     </div>
   );
 };
