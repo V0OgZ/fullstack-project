@@ -88,10 +88,84 @@
 
 .scenarios-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr) !important;
   gap: 30px;
   max-width: 1600px;
   width: 100%;
+  /* Add scaling for small screens */
+  transition: transform 0.2s;
+}
+
+/* Remove media queries that change grid columns */
+@media (max-width: 1400px) {
+  .scenarios-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    max-width: 100vw;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .scenarios-grid {
+    transform: scale(0.9);
+    transform-origin: top center;
+  }
+}
+@media (max-width: 1000px) {
+  .scenarios-grid {
+    transform: scale(0.8);
+    transform-origin: top center;
+  }
+}
+@media (max-width: 800px) {
+  .scenarios-grid {
+    transform: scale(0.7);
+    transform-origin: top center;
+  }
+}
+@media (max-width: 700px) {
+  .scenarios-grid {
+    transform: scale(0.6);
+    transform-origin: top center;
+  }
+}
+
+body, html, .enhanced-scenario-selector, .selector-main {
+  overflow: hidden !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
+}
+
+/* Optionally, reduce card padding and height for small screens */
+@media (max-width: 1000px) {
+  .scenario-card {
+    padding: 12px;
+    height: 300px;
+  }
+}
+@media (max-width: 700px) {
+  .scenario-card {
+    padding: 6px;
+    height: 220px;
+  }
+}
+
+/* Remove the 1-column mobile override */
+@media (max-width: 768px) {
+  .scenarios-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 10px;
+    max-width: 100vw;
+  }
+  .main-game-title {
+    font-size: 2rem;
+  }
+  .section-title {
+    font-size: 1.2rem;
+  }
+  .selector-main {
+    padding: 0 5px;
+  }
 }
 
 .scenario-card {
@@ -274,46 +348,4 @@
 
 .button-icon {
   font-size: 1.2rem;
-}
-
-/* Responsive Design */
-@media (max-width: 1400px) {
-  .scenarios-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-    max-width: 1000px;
-  }
-  
-  .scenario-card {
-    height: 400px;
-  }
-}
-
-@media (max-width: 768px) {
-  .main-game-title {
-    font-size: 2.5rem;
-  }
-  
-  .section-title {
-    font-size: 2rem;
-  }
-  
-  .selector-main {
-    padding: 0 20px;
-  }
-  
-  .scenarios-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    max-width: 100%;
-  }
-  
-  .scenario-card {
-    padding: 20px;
-    height: 350px;
-  }
-  
-  .scenario-icon-large {
-    font-size: 3rem !important;
-  }
 } 
