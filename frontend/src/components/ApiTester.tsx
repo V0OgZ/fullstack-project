@@ -13,7 +13,7 @@ const ApiTester: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const data = await ApiService.getHello();
+      const data = await ApiService.getHealth();
       setApiData(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch API data');

@@ -1,15 +1,5 @@
-import { MagicObject, getObjectById } from '../data/magicObjects';
+import { ApiService } from './api';
 import { Hero } from '../types/game';
-
-export interface EquippedItems {
-  weapon?: string;
-  armor?: string;
-  helmet?: string;
-  boots?: string;
-  ring?: string;
-  amulet?: string;
-  cape?: string;
-}
 
 export interface ItemEffectResult {
   success: boolean;
@@ -27,222 +17,133 @@ export interface ItemEffectResult {
   };
 }
 
+export interface EquippedItems {
+  weapon?: string;
+  armor?: string;
+  helmet?: string;
+  boots?: string;
+  ring?: string;
+  amulet?: string;
+  cape?: string;
+}
+
 export class MagicItemService {
   
   /**
-   * Apply magical item effects to a hero's base stats
+   * Apply magical item effects to a hero's base stats (now using backend)
    */
-  static applyItemEffectsToHero(hero: Hero, equippedItems: EquippedItems): Hero {
-    const enhancedHero = { ...hero };
-    let totalEffects = {
-      attack: 0,
-      defense: 0,
-      knowledge: 0,
-      spellPower: 0,
-      movementPoints: 0,
-      mana: 0,
-      temporalMana: 0,
-      experience: 0
-    };
-
-    // Apply effects from each equipped item
-    Object.values(equippedItems).forEach(itemId => {
-      if (itemId) {
-        const item = getObjectById(itemId);
-        if (item && item.effects) {
-          totalEffects.attack += item.effects.attack || 0;
-          totalEffects.defense += item.effects.defense || 0;
-          totalEffects.knowledge += item.effects.knowledge || 0;
-          totalEffects.spellPower += item.effects.spellPower || 0;
-          totalEffects.movementPoints += item.effects.movementPoints || 0;
-          totalEffects.mana += item.effects.mana || 0;
-          totalEffects.temporalMana += item.effects.temporalMana || 0;
-          totalEffects.experience += item.effects.experience || 0;
-        }
-      }
-    });
-
-    // Apply the cumulative effects to hero stats
-    enhancedHero.stats = {
-      attack: (hero.stats?.attack || 0) + totalEffects.attack,
-      defense: (hero.stats?.defense || 0) + totalEffects.defense,
-      knowledge: (hero.stats?.knowledge || 0) + totalEffects.knowledge,
-      spellPower: (hero.stats?.spellPower || 0) + totalEffects.spellPower
-    };
-
-    // Apply movement points bonus
-    enhancedHero.maxMovementPoints = (hero.maxMovementPoints || 1000) + (totalEffects.movementPoints * 100);
-    enhancedHero.movementPoints = Math.min(
-      enhancedHero.movementPoints || 0, 
-      enhancedHero.maxMovementPoints
-    );
-
-    // Apply experience bonus
-    enhancedHero.experience = (hero.experience || 0) + totalEffects.experience;
-
-    return enhancedHero;
+  static async applyItemEffectsToHero(hero: Hero, equippedItems: EquippedItems): Promise<Hero> {
+    try {
+      const response = await ApiService.applyItemEffects(hero, equippedItems);
+      return response;
+    } catch (error) {
+      console.error('Error applying item effects:', error);
+      // Fallback to original hero if backend fails
+      return hero;
+    }
   }
 
   /**
-   * Equip an item to a hero (with validation)
+   * Equip an item to a hero (with validation using backend)
    */
-  static equipItem(itemId: string, heroLevel: number): ItemEffectResult {
-    const item = getObjectById(itemId);
-    
-    if (!item) {
+  static async equipItem(itemId: string, heroLevel: number): Promise<ItemEffectResult> {
+    try {
+      const response = await ApiService.validateEquipItem(itemId, heroLevel);
+      return response;
+    } catch (error) {
+      console.error('Error validating item equip:', error);
       return {
         success: false,
-        message: `Item ${itemId} not found`
+        message: 'Failed to validate item equipping'
       };
     }
-
-    // Check level requirement
-    if (item.requiresLevel && heroLevel < item.requiresLevel) {
-      return {
-        success: false,
-        message: `Requires level ${item.requiresLevel} (current: ${heroLevel})`
-      };
-    }
-
-    return {
-      success: true,
-      message: `${item.name} equipped successfully!`,
-      effectsApplied: item.effects
-    };
   }
 
   /**
-   * Consume a consumable item (potions, scrolls, etc.)
+   * Consume a consumable item (potions, scrolls, etc.) using backend
    */
-  static consumeItem(itemId: string, hero: Hero, playerGold: number): ItemEffectResult {
-    const item = getObjectById(itemId);
-    
-    if (!item) {
+  static async consumeItem(itemId: string, hero: Hero, playerGold: number): Promise<ItemEffectResult> {
+    try {
+      const response = await ApiService.consumeItem(itemId, hero, playerGold);
+      return response;
+    } catch (error) {
+      console.error('Error consuming item:', error);
       return {
         success: false,
-        message: `Item ${itemId} not found`
+        message: 'Failed to consume item'
       };
     }
-
-    if (item.type !== 'consumable') {
-      return {
-        success: false,
-        message: `${item.name} is not a consumable item`
-      };
-    }
-
-    // Check if player can afford it (if it's a purchasable consumable)
-    if (item.value > playerGold) {
-      return {
-        success: false,
-        message: `Not enough gold (need ${item.value}, have ${playerGold})`
-      };
-    }
-
-    let message = `Used ${item.name}`;
-    const effectsApplied: any = {};
-
-    // Apply consumable effects
-    if (item.effects.mana) {
-      effectsApplied.mana = item.effects.mana;
-      message += ` (+${item.effects.mana} mana)`;
-    }
-
-    if (item.effects.experience) {
-      effectsApplied.experience = item.effects.experience;
-      message += ` (+${item.effects.experience} XP)`;
-    }
-
-    if (item.effects.specialEffect) {
-      message += ` - ${item.effects.specialEffect}`;
-    }
-
-    return {
-      success: true,
-      message,
-      effectsApplied
-    };
   }
 
   /**
-   * Get total stat bonuses from equipped items
+   * Get total stat bonuses from equipped items using backend
    */
-  static getTotalItemBonuses(equippedItems: EquippedItems): {
+  static async getTotalItemBonuses(equippedItems: EquippedItems): Promise<{
     attack: number;
     defense: number;
     knowledge: number;
     spellPower: number;
     movementPoints: number;
     specialEffects: string[];
-  } {
-    let totalBonuses = {
-      attack: 0,
-      defense: 0,
-      knowledge: 0,
-      spellPower: 0,
-      movementPoints: 0,
-      specialEffects: [] as string[]
-    };
-
-    Object.values(equippedItems).forEach(itemId => {
-      if (itemId) {
-        const item = getObjectById(itemId);
-        if (item && item.effects) {
-          totalBonuses.attack += item.effects.attack || 0;
-          totalBonuses.defense += item.effects.defense || 0;
-          totalBonuses.knowledge += item.effects.knowledge || 0;
-          totalBonuses.spellPower += item.effects.spellPower || 0;
-          totalBonuses.movementPoints += item.effects.movementPoints || 0;
-          
-          if (item.effects.specialEffect) {
-            totalBonuses.specialEffects.push(`${item.name}: ${item.effects.specialEffect}`);
-          }
-        }
-      }
-    });
-
-    return totalBonuses;
+  }> {
+    try {
+      const response = await ApiService.getTotalItemBonuses(equippedItems);
+      return response;
+    } catch (error) {
+      console.error('Error getting item bonuses:', error);
+      return {
+        attack: 0,
+        defense: 0,
+        knowledge: 0,
+        spellPower: 0,
+        movementPoints: 0,
+        specialEffects: []
+      };
+    }
   }
 
   /**
-   * Check if an item can be equipped in a specific slot
+   * Calculate temporal mana effects using backend
    */
-  static canEquipInSlot(itemId: string, slot: string): boolean {
-    const item = getObjectById(itemId);
-    return item?.slot === slot || false;
-  }
-
-  /**
-   * Get all temporal objects (for mystical scenario)
-   */
-  static getTemporalObjects(): MagicObject[] {
-    const { getTemporalObjects } = require('../data/magicObjects');
-    return getTemporalObjects();
-  }
-
-  /**
-   * Calculate temporal mana effects
-   */
-  static calculateTemporalEffects(equippedItems: EquippedItems): {
+  static async calculateTemporalEffects(equippedItems: EquippedItems): Promise<{
     temporalMana: number;
     temporalEffects: string[];
-  } {
-    let temporalMana = 0;
-    let temporalEffects: string[] = [];
+  }> {
+    try {
+      const response = await ApiService.calculateTemporalEffects(equippedItems);
+      return response;
+    } catch (error) {
+      console.error('Error calculating temporal effects:', error);
+      return {
+        temporalMana: 0,
+        temporalEffects: []
+      };
+    }
+  }
 
-    Object.values(equippedItems).forEach(itemId => {
-      if (itemId) {
-        const item = getObjectById(itemId);
-        if (item && item.temporal && item.effects) {
-          temporalMana += item.effects.temporalMana || 0;
-          
-          if (item.effects.specialEffect) {
-            temporalEffects.push(`${item.name}: ${item.effects.specialEffect}`);
-          }
-        }
-      }
-    });
+  /**
+   * Get all magic items from backend
+   */
+  static async getAllMagicItems(): Promise<any[]> {
+    try {
+      const response = await ApiService.getAllMagicItems();
+      return response;
+    } catch (error) {
+      console.error('Error getting magic items:', error);
+      return [];
+    }
+  }
 
-    return { temporalMana, temporalEffects };
+  /**
+   * Get magic item by ID from backend
+   */
+  static async getMagicItem(itemId: string): Promise<any> {
+    try {
+      const response = await ApiService.getMagicItem(itemId);
+      return response;
+    } catch (error) {
+      console.error('Error getting magic item:', error);
+      return null;
+    }
   }
 } 

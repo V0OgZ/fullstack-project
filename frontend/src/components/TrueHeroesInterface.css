@@ -1,395 +1,533 @@
+/* Enhanced True Heroes Interface Styles */
 .true-heroes-interface {
-  position: relative;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
   height: 100vh;
-  background: #1a1a1a;
+  background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 50%, #16213e 100%);
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   overflow: hidden;
 }
 
-/* Loading state */
-.true-heroes-loading {
-  width: 100%;
-  height: 100vh;
+/* Enhanced Header */
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  background: linear-gradient(90deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+  border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+
+.game-info {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.game-title {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 0;
+  color: #ffd700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.scenario-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 1px solid;
+}
+
+.scenario-badge[data-scenario="classique"] {
+  background: linear-gradient(45deg, #2d5a87, #1e3a5f);
+  border-color: #4a90e2;
+  color: #87ceeb;
+}
+
+.scenario-badge[data-scenario="mystique"] {
+  background: linear-gradient(45deg, #4a1a4a, #2d1b3d);
+  border-color: #9c27b0;
+  color: #e1bee7;
+}
+
+.scenario-badge[data-scenario="multiplayer"] {
+  background: linear-gradient(45deg, #1a4a2e, #0d2818);
+  border-color: #4caf50;
+  color: #a5d6a7;
+}
+
+.turn-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.turn-label {
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+.turn-number {
+  color: #ffd700;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+/* Enhanced Header Controls */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.control-panel {
+  display: flex;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.control-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: #ccc;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 60px;
+}
+
+.control-btn:hover {
+  background: rgba(255, 215, 0, 0.1);
+  color: #ffd700;
+  transform: translateY(-2px);
+}
+
+.control-btn.active {
+  background: rgba(255, 215, 0, 0.2);
+  color: #ffd700;
+  border: 1px solid rgba(255, 215, 0, 0.5);
+}
+
+.control-btn.castle-btn:hover {
+  background: rgba(74, 144, 226, 0.2);
+  color: #4a90e2;
+}
+
+.btn-icon {
+  font-size: 1.2rem;
+}
+
+.btn-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.end-turn-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: linear-gradient(45deg, #ffd700, #ffed4a);
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
+}
+
+.end-turn-btn:hover {
+  background: linear-gradient(45deg, #ffed4a, #ffd700);
+  transform: translateY(-2px);
+}
+
+/* Main Game Area */
+.game-main {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.game-renderer-container {
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-  color: white;
+  background: radial-gradient(circle at center, rgba(255, 215, 0, 0.05) 0%, transparent 70%);
+  position: relative;
 }
 
-.loading-content {
+/* Enhanced Side Panel */
+.game-side-panel {
+  width: 350px;
+  background: linear-gradient(180deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.95) 100%);
+  border-left: 2px solid rgba(255, 215, 0, 0.3);
+  padding: 20px;
+  overflow-y: auto;
+  backdrop-filter: blur(10px);
+}
+
+.player-info-section,
+.heroes-section,
+.quick-actions {
+  margin-bottom: 25px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 12px;
+  padding: 15px;
+}
+
+.player-info-section h3,
+.heroes-section h3,
+.quick-actions h3 {
+  color: #ffd700;
+  margin: 0 0 15px 0;
+  font-size: 1.1rem;
   text-align: center;
-  padding: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.spinner {
+/* Player Card */
+.player-card {
+  text-align: center;
+}
+
+.player-name {
+  color: #ffd700;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+}
+
+.player-resources {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.resource-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.resource-icon {
+  font-size: 1.2rem;
+}
+
+.resource-value {
+  color: #4caf50;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+/* Heroes List */
+.heroes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hero-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hero-card:hover {
+  background: rgba(255, 215, 0, 0.1);
+  border-color: rgba(255, 215, 0, 0.5);
+  transform: translateX(5px);
+}
+
+.hero-card.selected {
+  background: rgba(255, 215, 0, 0.2);
+  border-color: #ffd700;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+}
+
+.hero-avatar {
+  font-size: 2rem;
   width: 50px;
   height: 50px;
-  border: 4px solid rgba(255, 255, 255, 0.1);
-  border-top: 4px solid #00d4ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(45deg, #4a90e2, #357abd);
   border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin: 0 auto 1.5rem;
+  border: 2px solid rgba(255, 215, 0, 0.3);
 }
 
+.hero-info {
+  flex: 1;
+}
+
+.hero-name {
+  color: #ffd700;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.hero-level {
+  color: #4caf50;
+  font-size: 0.9rem;
+  margin-bottom: 2px;
+}
+
+.hero-mp {
+  color: #87ceeb;
+  font-size: 0.8rem;
+}
+
+/* Quick Actions */
+.action-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 8px;
+  color: #ccc;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.action-btn:hover {
+  background: rgba(255, 215, 0, 0.1);
+  border-color: rgba(255, 215, 0, 0.5);
+  color: #ffd700;
+  transform: translateY(-2px);
+}
+
+.action-icon {
+  font-size: 1.5rem;
+}
+
+.action-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Loading and Error States */
+.true-heroes-loading,
+.true-heroes-error,
+.true-heroes-no-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 100%);
+  color: white;
+  text-align: center;
+  padding: 40px;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 215, 0, 0.3);
+  border-top: 4px solid #ffd700;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+.true-heroes-error h2 {
+  color: #ff6b6b;
+  margin-bottom: 15px;
+}
+
+.retry-button,
+.load-game-button {
+  padding: 12px 24px;
+  background: linear-gradient(45deg, #ffd700, #ffed4a);
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+}
+
+.retry-button:hover,
+.load-game-button:hover {
+  background: linear-gradient(45deg, #ffed4a, #ffd700);
+  transform: translateY(-2px);
+}
+
+/* Animations */
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
-/* Scenario indicator */
-.scenario-indicator {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  display: flex;
-  gap: 15px;
-  align-items: center;
-  z-index: 200; /* Increased z-index to prevent overlap */
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
-}
-
-.scenario-badge {
-  padding: 10px 18px; /* Slightly larger padding */
-  border-radius: 25px; /* More rounded */
-  font-size: 0.95rem;
-  font-weight: 600;
-  backdrop-filter: blur(15px);
-  border: 2px solid rgba(255, 255, 255, 0.15);
-  transition: all 0.3s ease;
-  white-space: nowrap; /* Prevent text wrapping */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Add depth */
-}
-
-/* Fix blue element layering issues */
-.scenario-badge.classique {
-  background: linear-gradient(135deg, rgba(67, 56, 202, 0.9), rgba(139, 92, 246, 0.9));
-  color: white;
-  border-color: rgba(139, 92, 246, 0.4);
-  box-shadow: 0 4px 12px rgba(67, 56, 202, 0.3);
-  z-index: 300; /* Higher z-index to prevent blue showing underneath */
-}
-
-.scenario-badge.mystique {
-  background: linear-gradient(135deg, rgba(236, 72, 153, 0.9), rgba(168, 85, 247, 0.9));
-  color: white;
-  border-color: rgba(236, 72, 153, 0.4);
-  box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
-  z-index: 300; /* Higher z-index to prevent blue showing underneath */
-}
-
-.magic-inventory-toggle {
-  padding: 10px 18px;
-  background: linear-gradient(135deg, rgba(236, 72, 153, 0.9), rgba(168, 85, 247, 0.9));
-  border: 2px solid rgba(236, 72, 153, 0.4);
-  border-radius: 25px;
-  color: white;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  backdrop-filter: blur(15px);
-  transition: all 0.3s ease;
-  white-space: nowrap;
-  box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
-  z-index: 300; /* Higher z-index to prevent blue showing underneath */
-}
-
-.magic-inventory-toggle:hover {
-  background: linear-gradient(135deg, rgba(236, 72, 153, 1), rgba(168, 85, 247, 1));
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(236, 72, 153, 0.5);
-  border-color: rgba(236, 72, 153, 0.6);
-}
-
-/* Main interface - ensure it has lower z-index than UI elements */
-.main-interface {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  z-index: 1; /* Lower than UI elements but higher than background */
-}
-
-/* Fix any blue elements that might be showing through */
-.game-canvas,
-.modern-game-renderer,
-.map-container,
-.hex-tile {
-  z-index: 1; /* Keep map elements at base level */
-}
-
-/* Ensure all UI panels have proper z-index */
-.floating-ui,
-.ui-panel,
-.side-panel {
-  z-index: 100; /* Higher than map but lower than scenario indicators */
-}
-
-/* Fix blue water tiles and hex elements */
-.hex-tile.has-hero,
-.hex-tile.has-creature,
-.hex-tile.selected {
-  z-index: 5; /* Slightly higher than normal tiles but much lower than UI */
-}
-
-/* Fix any blue accent colors that might be bleeding through */
-.btn-primary,
-.action-button,
-.language-button {
-  z-index: 250; /* High enough to be above map elements */
-}
-
-/* Magic inventory overlay */
-.magic-inventory-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.85); /* Slightly more opaque */
-  backdrop-filter: blur(8px);
-  z-index: 2000; /* Much higher z-index */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: fadeIn 0.3s ease;
-}
-
-.magic-inventory-container {
-  position: relative;
-  width: 95%;
-  max-width: 1200px;
-  height: 90%;
-  background: rgba(26, 26, 26, 0.98); /* More opaque */
-  border-radius: 20px;
-  border: 2px solid rgba(236, 72, 153, 0.4);
-  overflow: hidden;
-  backdrop-filter: blur(20px);
-  animation: slideIn 0.3s ease;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); /* Stronger shadow */
-}
-
-.close-inventory {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 45px;
-  height: 45px;
-  background: rgba(255, 255, 255, 0.15);
-  border: 2px solid rgba(255, 255, 255, 0.25);
-  border-radius: 50%;
-  color: white;
-  font-size: 22px;
-  font-weight: bold;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  z-index: 2100; /* Higher than container */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.close-inventory:hover {
-  background: rgba(255, 255, 255, 0.25);
-  transform: scale(1.1);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
-}
-
-/* Mystical enhancements */
-.mystical-enhancements {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  z-index: 100;
-}
-
-.temporal-indicator {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 16px;
-  background: linear-gradient(135deg, rgba(236, 72, 153, 0.9), rgba(168, 85, 247, 0.9));
-  border: 2px solid rgba(236, 72, 153, 0.3);
-  border-radius: 25px;
-  backdrop-filter: blur(10px);
-  color: white;
-  font-size: 0.85rem;
-  transition: all 0.3s ease;
-}
-
-.temporal-indicator:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(236, 72, 153, 0.4);
-}
-
-.temporal-indicator span {
-  font-size: 1.2rem;
-  animation: pulse 2s infinite;
-}
-
-.temporal-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.temporal-info small {
-  opacity: 0.8;
-  font-size: 0.7rem;
-}
-
-.temporal-count {
-  font-weight: 700;
-  font-size: 1.1rem;
-  color: #FFD700;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideIn {
-  from { 
-    opacity: 0; 
-    transform: translateY(50px) scale(0.9);
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .game-side-panel {
+    width: 300px;
   }
-  to { 
-    opacity: 1; 
-    transform: translateY(0) scale(1);
+  
+  .control-panel {
+    flex-wrap: wrap;
   }
 }
 
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-}
-
-/* Responsive design */
 @media (max-width: 768px) {
-  .scenario-indicator {
+  .game-header {
     flex-direction: column;
-    gap: 8px;
-    top: 15px;
-    left: 15px;
-    right: 15px; /* Prevent overflow */
-    max-width: calc(100vw - 30px);
+    gap: 15px;
+    padding: 15px;
   }
   
-  .scenario-badge,
-  .magic-inventory-toggle {
-    font-size: 0.8rem;
-    padding: 8px 14px;
+  .game-info {
+    flex-direction: column;
+    gap: 15px;
     text-align: center;
-    width: 100%; /* Full width on mobile */
-    max-width: 280px;
   }
   
-  .magic-inventory-container {
-    width: 98%;
-    height: 95%;
-    border-radius: 15px;
-    margin: 1%;
+  .game-title {
+    font-size: 1.5rem;
   }
   
-  .close-inventory {
-    top: 10px;
-    right: 10px;
-    width: 40px;
-    height: 40px;
-    font-size: 18px;
+  .game-main {
+    flex-direction: column;
   }
   
-  .mystical-enhancements {
-    bottom: 15px;
-    right: 15px;
-    left: 15px; /* Prevent overflow */
+  .game-side-panel {
+    width: 100%;
+    height: 200px;
+    border-left: none;
+    border-top: 2px solid rgba(255, 215, 0, 0.3);
   }
   
-  .temporal-indicator {
-    padding: 8px 12px;
-    font-size: 0.75rem;
-    width: 100%; /* Full width on mobile */
+  .control-panel {
     justify-content: center;
+  }
+  
+  .player-resources {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .action-buttons {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 480px) {
-  .scenario-indicator {
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    gap: 6px;
+  .game-header {
+    padding: 10px;
   }
   
-  .scenario-badge,
-  .magic-inventory-toggle {
-    font-size: 0.75rem;
-    padding: 6px 12px;
-    border-radius: 20px;
+  .game-title {
+    font-size: 1.2rem;
+    flex-direction: column;
+    gap: 10px;
   }
   
-  .magic-inventory-container {
-    width: 100%;
-    height: 100%;
-    border-radius: 0; /* Full screen on very small devices */
+  .control-panel {
+    padding: 6px;
+    gap: 4px;
   }
   
-  .close-inventory {
-    top: 5px;
-    right: 5px;
-    width: 35px;
-    height: 35px;
-    font-size: 16px;
+  .control-btn {
+    min-width: 50px;
+    padding: 6px 8px;
+  }
+  
+  .btn-label {
+    font-size: 0.6rem;
+  }
+  
+  .end-turn-btn {
+    padding: 10px 16px;
+    font-size: 0.9rem;
   }
 }
 
-/* Dark mode enhancements */
-.true-heroes-interface {
-  --primary-color: #00d4ff;
-  --secondary-color: #ec4899;
-  --accent-color: #8b5cf6;
-  --background-dark: #1a1a1a;
-  --background-medium: #2a2a2a;
-  --text-light: #ffffff;
-  --text-muted: #b0b0b0;
+/* Scrollbar Styling */
+.game-side-panel::-webkit-scrollbar {
+  width: 6px;
 }
 
-/* Mystical particle effects */
-.mystical-enhancements::before {
+.game-side-panel::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+}
+
+.game-side-panel::-webkit-scrollbar-thumb {
+  background: rgba(255, 215, 0, 0.5);
+  border-radius: 3px;
+}
+
+.game-side-panel::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 215, 0, 0.7);
+}
+
+/* Enhanced Visual Effects */
+.true-heroes-interface::before {
   content: '';
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  background: radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.1) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: mysticalGlow 3s ease-in-out infinite alternate;
-  z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(74, 144, 226, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
 }
 
-@keyframes mysticalGlow {
-  0% { 
-    opacity: 0.5; 
-    transform: scale(0.8);
-  }
-  100% { 
-    opacity: 1; 
-    transform: scale(1.2);
-  }
-} 
-
-/* Fix potential conflicts with other UI elements */
-.true-heroes-interface .header,
-.true-heroes-interface .top-bar,
-.true-heroes-interface .game-header {
-  z-index: 150; /* Lower than scenario indicator but higher than main interface */
-}
-
-/* Ensure proper stacking order */
-.true-heroes-interface {
-  isolation: isolate; /* Create new stacking context */
+.game-header,
+.game-side-panel {
+  position: relative;
+  z-index: 2;
 } 
