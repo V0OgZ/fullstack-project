@@ -159,9 +159,72 @@ export class ApiService {
   }
 
   static async sendGameAction(sessionId: string, playerId: string, actionType: string, actionData: any): Promise<any> {
-    return this.makeRequest(`/multiplayer/sessions/${sessionId}/action`, {
+    return this.makeRequest(`/multiplayer/sessions/${sessionId}/actions`, {
       method: 'POST',
       body: JSON.stringify({ playerId, actionType, actionData })
+    });
+  }
+
+  // AI and Political Advisor endpoints
+  static async getPoliticalAdvisors(): Promise<any> {
+    return this.makeRequest('/ai/political-advisors');
+  }
+
+  static async generateAdvisorRecommendations(event: any, choice: any): Promise<any> {
+    return this.makeRequest('/ai/political-advisors/recommendations', {
+      method: 'POST',
+      body: JSON.stringify({ event, choice })
+    });
+  }
+
+  static async generatePoliticalEvent(currentReputation: any, turn: number): Promise<any> {
+    return this.makeRequest('/ai/political-events/generate', {
+      method: 'POST',
+      body: JSON.stringify({ currentReputation, turn })
+    });
+  }
+
+  static async updateAdvisorOpinions(currentAdvisors: any, choice: any): Promise<any> {
+    return this.makeRequest('/ai/political-advisors/update-opinions', {
+      method: 'POST',
+      body: JSON.stringify({ currentAdvisors, choice })
+    });
+  }
+
+  static async calculatePoliticalStability(advisors: any): Promise<any> {
+    return this.makeRequest('/ai/political-advisors/calculate-stability', {
+      method: 'POST',
+      body: JSON.stringify({ advisors })
+    });
+  }
+
+  // AI Players
+  static async getAIPlayer(aiPlayerId: string): Promise<any> {
+    return this.makeRequest(`/ai/players/${aiPlayerId}`);
+  }
+
+  static async getAIPlayersForGame(gameId: string): Promise<any> {
+    return this.makeRequest(`/ai/players/game/${gameId}`);
+  }
+
+  static async createAIPlayer(playerData: any): Promise<any> {
+    return this.makeRequest('/ai/players', {
+      method: 'POST',
+      body: JSON.stringify(playerData)
+    });
+  }
+
+  static async makeAIDecision(aiPlayerId: string, gameState: any): Promise<any> {
+    return this.makeRequest(`/ai/players/${aiPlayerId}/decision`, {
+      method: 'POST',
+      body: JSON.stringify(gameState)
+    });
+  }
+
+  static async updateAIPlayerStats(aiPlayerId: string, outcome: string): Promise<any> {
+    return this.makeRequest(`/ai/players/${aiPlayerId}/stats`, {
+      method: 'POST',
+      body: JSON.stringify({ outcome })
     });
   }
 } 
