@@ -338,6 +338,14 @@ export interface Translation {
   rewards: string;
   startScenario: string;
   scenarioLocked: string;
+  
+  // New keys for multiplayer arena and buttons
+  multiplayerArenaDescription: string;
+  rankedMatches: string;
+  playersRange: string;
+  realTimeStrategy: string;
+  competitive: string;
+  startGame: string;
 }
 
 // Traductions françaises
@@ -675,6 +683,14 @@ const frenchTranslations: Translation = {
   rewards: 'Récompenses',
   startScenario: 'Démarrer le scénario',
   scenarioLocked: 'Verrouillé',
+  
+  // New keys for multiplayer arena and buttons
+  multiplayerArenaDescription: 'Un jeu de stratégie multijoueur où vous pouvez affronter d\'autres joueurs en temps réel ou en tour par tour.',
+  rankedMatches: 'Matches classés',
+  playersRange: 'Nombre de joueurs (2-8)',
+  realTimeStrategy: 'Stratégie en temps réel',
+  competitive: 'Compétitif',
+  startGame: 'Démarrer la partie',
 };
 
 // Traductions anglaises
@@ -1012,6 +1028,14 @@ const englishTranslations: Translation = {
   rewards: 'Rewards',
   startScenario: 'Start Scenario',
   scenarioLocked: 'Locked',
+  
+  // New keys for multiplayer arena and buttons
+  multiplayerArenaDescription: 'A multiplayer strategy game where you can face other players in real-time or turn-by-turn.',
+  rankedMatches: 'Ranked Matches',
+  playersRange: 'Number of Players (2-8)',
+  realTimeStrategy: 'Real-Time Strategy',
+  competitive: 'Competitive',
+  startGame: 'Start Game',
 };
 
 // Traductions russes
@@ -1349,6 +1373,14 @@ const russianTranslations: Translation = {
   rewards: 'Награды',
   startScenario: 'Начать сценарий',
   scenarioLocked: 'Заблокировано',
+  
+  // New keys for multiplayer arena and buttons
+  multiplayerArenaDescription: 'Игра в стратегию с несколькими игроками, где вы можете сражаться с другими игроками в реальном времени или по очереди.',
+  rankedMatches: 'Матчи с рейтингом',
+  playersRange: 'Количество игроков (2-8)',
+  realTimeStrategy: 'Стратегия в реальном времени',
+  competitive: 'Конкурентный',
+  startGame: 'Начать игру',
 };
 
 // Helper function to get translations
