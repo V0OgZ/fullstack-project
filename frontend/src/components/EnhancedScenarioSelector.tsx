@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useTranslation } from '../i18n';
-import { useGameStore } from '../store/useGameStore'; // Import the store
 import './EnhancedScenarioSelector.css';
 
 interface Scenario {
@@ -21,107 +20,92 @@ interface Scenario {
 const EnhancedScenarioSelector: React.FC = () => {
   const { t, language, setLanguage } = useTranslation();
   const [selectedScenario, setSelectedScenario] = useState<string | null>(null);
-  const navigate = useNavigate();
-  const loadGame = useGameStore((state) => state.loadGame); // Get the loadGame action
+  // Removed unused showDetails state to fix ESLint warning
+
+  console.log('%c[EnhancedScenarioSelector] Component rendered', 'color: blue; font-weight: bold');
 
   const scenarios: Scenario[] = [
     {
-      id: 'conquete-classique',
+      id: 'conquest-classic',
       name: t('classicConquest'),
       description: t('classicDescription'),
-      longDescription: 'Experience the timeless strategy gameplay that defined the genre. Build your kingdom, recruit mighty armies, and conquer enemy territories in this classic turn-based strategy experience.',
+      longDescription: 'Experience the classic Heroes of Might and Magic gameplay with this balanced conquest scenario. Perfect for new players and veterans alike.',
       difficulty: 'easy',
       features: [
-        t('turnBasedCombat'),
-        t('captureBuildings'),
-        t('hexagonalMaps'),
+        'Balanced Gameplay',
+        'All Castles',
+        'Standard Victory',
         'Resource Management',
-        'Hero Development',
+        'Hero Progression',
         'Tactical Combat'
       ],
-      icon: '🏰',
-      backgroundImage: 'linear-gradient(135deg, #2d5a87 0%, #1e3a5f 100%)',
-      estimatedTime: '30-60 min',
-      playerCount: '1-2 players',
+      icon: '⚔️',
+      backgroundImage: 'linear-gradient(135deg, #2196F3 0%, #1976D2 100%)',
+      estimatedTime: '1-2 hours',
+      playerCount: '2-6 players',
       unlocked: true
     },
     {
-      id: 'mystique-temporel',
+      id: 'temporal-rift',
       name: t('mysticalConquest'),
       description: t('mysticalDescription'),
-      longDescription: 'Dive into a world where time itself becomes your greatest weapon. Discover temporal artifacts, manipulate causality, and master the mysterious Zone of Temporal Causality system.',
+      longDescription: 'Dive into a mystical world where temporal magic-warps reality. Master the Zone of Temporal Causality (ZFC) to outmaneuver your opponents in this advanced scenario.',
       difficulty: 'hard',
       features: [
-        t('temporalObjects'),
-        t('advancedMagic'),
-        t('mysticPortals'),
+        'Temporal Mechanics',
+        'Quantum Objects',
         'ZFC System',
-        'Time Manipulation',
-        'Quantum Strategy'
+        'Advanced Magic',
+        'Paradox Resolution',
+        'Multi-timeline Strategy'
       ],
       icon: '🔮',
-      backgroundImage: 'linear-gradient(135deg, #4a1a4a 0%, #2d1b3d 100%)',
-      estimatedTime: '45-90 min',
-      playerCount: '1-2 players',
+      backgroundImage: 'linear-gradient(135deg, #9C27B0 0%, #673AB7 100%)',
+      estimatedTime: '2-4 hours',
+      playerCount: '2-8 players',
       unlocked: true
     },
     {
       id: 'multiplayer-arena',
       name: t('multiplayerArena'),
       description: t('multiplayerArenaDescription'),
-      longDescription: 'Challenge players from around the world in intense real-time battles. Form alliances, betray enemies, and prove your strategic supremacy in the ultimate multiplayer experience.',
-      difficulty: 'expert',
+      longDescription: 'Engage in real-time battles with friends in this multiplayer arena mode. Coordinate strategies and compete for dominance in dynamic matches.',
+      difficulty: 'hard',
       features: [
-        t('rankedMatches'),
-        t('realTimeStrategy'),
-        'Global Leaderboards',
-        'Clan System',
-        'Tournament Mode',
+        'Real-time Multiplayer',
+        'Team Battles',
+        'Custom Rules',
+        'Voice Chat Integration',
+        'Ranking System',
         'Spectator Mode'
       ],
-      icon: '🌐',
-      backgroundImage: 'linear-gradient(135deg, #1a4a2e 0%, #0d2818 100%)',
-      estimatedTime: '20-45 min',
+      icon: '🏟️',
+      backgroundImage: 'linear-gradient(135deg, #F44336 0%, #D32F2F 100%)',
+      estimatedTime: '30-60 min',
       playerCount: '2-8 players',
       unlocked: true
     },
     {
-      id: 'campaign-mode',
+      id: 'epic-campaign',
       name: t('epicCampaign'),
       description: t('epicCampaignDescription'),
-      longDescription: 'Follow the legendary heroes through an epic campaign spanning multiple kingdoms and timelines. Each victory unlocks new scenarios and reveals more of the overarching story.',
-      difficulty: 'medium',
+      longDescription: 'Embark on an epic campaign across multiple scenarios. Build your empire over time and face increasing challenges in this story-driven mode.',
+      difficulty: 'expert',
       features: [
-        t('storyDrivenGameplay'),
-        t('characterDevelopment'),
-        t('unlockableContent'),
-        t('multipleEndings'),
-        t('cinematicCutscenes'),
-        t('saveProgress')
+        'Story Campaign',
+        'Persistent Progression',
+        'Multiple Chapters',
+        'Branching Narratives',
+        'Legendary Artifacts',
+        'Boss Encounters'
       ],
       icon: '📖',
-      backgroundImage: 'linear-gradient(135deg, #8B4513 0%, #654321 100%)',
-      estimatedTime: '2-4 hours',
-      playerCount: '1 player',
+      backgroundImage: 'linear-gradient(135deg, #4CAF50 0%, #388E3C 100%)',
+      estimatedTime: '4+ hours',
+      playerCount: '1-4 players',
       unlocked: false
     }
   ];
-
-  const handleScenarioSelect = async (scenarioId: string) => {
-    if (scenarioId === 'multiplayer-arena') {
-      navigate('/multiplayer');
-    } else {
-      try {
-        await loadGame(scenarioId);
-        // Navigate to the game page after loading the scenario
-        navigate(`/game/${scenarioId}`);
-      } catch (error) {
-        console.error("Failed to load scenario:", error);
-        // Optionally, show an error message to the user
-      }
-    }
-  };
-
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
@@ -142,6 +126,13 @@ const EnhancedScenarioSelector: React.FC = () => {
       default: return 'Unknown';
     }
   };
+
+  const handleScenarioClick = (scenarioId: string) => {
+    console.log('%c[EnhancedScenarioSelector] Scenario clicked:', 'color: green; font-weight: bold', scenarioId);
+    setSelectedScenario(scenarioId);
+  };
+
+
 
   return (
     <div className="enhanced-scenario-selector">
@@ -181,8 +172,15 @@ const EnhancedScenarioSelector: React.FC = () => {
                 data-testid={`scenario-card-${scenario.id}`}
                 className={`scenario-card ${!scenario.unlocked ? 'locked' : ''} ${selectedScenario === scenario.id ? 'selected' : ''}`}
                 style={{ background: scenario.backgroundImage }}
-                onMouseEnter={() => setSelectedScenario(scenario.id)}
-                onMouseLeave={() => setSelectedScenario(null)}
+                onMouseEnter={() => {
+                  console.log('%c[EnhancedScenarioSelector] Mouse enter scenario:', 'color: cyan', scenario.id);
+                  setSelectedScenario(scenario.id);
+                }}
+                onMouseLeave={() => {
+                  console.log('%c[EnhancedScenarioSelector] Mouse leave scenario:', 'color: cyan', scenario.id);
+                  setSelectedScenario(null);
+                }}
+                onClick={() => handleScenarioClick(scenario.id)}
               >
                 {!scenario.unlocked && (
                   <div className="lock-overlay">
@@ -219,14 +217,23 @@ const EnhancedScenarioSelector: React.FC = () => {
                   
                   <div className="scenario-actions">
                     {scenario.unlocked ? (
-                      <button 
-                        onClick={() => handleScenarioSelect(scenario.id)}
-                        className="play-button"
+                      <Link 
+                        to={`/game/${scenario.id}`}
                         data-testid={`play-button-${scenario.id}`}
+                        className={`play-button ${!scenario.unlocked ? 'disabled' : ''}`}
+                        onClick={(e) => {
+                          console.log(`[SELECTOR] --- Play button clicked for scenario: ${scenario.id} ---`);
+                          if (!scenario.unlocked) {
+                            console.log(`[SELECTOR] Scenario is LOCKED. Preventing navigation.`);
+                            e.preventDefault();
+                          } else {
+                            console.log(`[SELECTOR] Scenario is UNLOCKED. Proceeding with navigation to /game/${scenario.id}`);
+                          }
+                        }}
                       >
                         <span className="button-icon">🎮</span>
                         {t('startGame')}
-                      </button>
+                      </Link>
                     ) : (
                       <button className="play-button disabled" disabled>
                         <span className="button-icon">🔒</span>

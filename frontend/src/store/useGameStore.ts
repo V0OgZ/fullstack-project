@@ -3,6 +3,7 @@ import { GameState, Game, Player, Tile, Position, Hero, GameAction, CombatResult
 import { MagicItemService, EquippedItems } from '../services/magicItemService';
 import { ZFCService } from '../services/zfcService';
 import { GameService } from '../services/gameService';
+import { ApiService } from '../services/api'; // Corrected import path
 
 interface GameStore extends GameState {
   // Map state
@@ -539,48 +540,48 @@ export const useGameStore = create<GameStore>((set, get) => ({
   // Game state management
   resetGame: () => set(initialState),
 
-  loadGame: async (gameId: string) => {
+  loadGame: async (scenarioId: string) => {
+    console.log(`%c🎮 [GameStore] loadGame called with scenarioId: "${scenarioId}"`, 'color: purple; font-weight: bold');
+    
     get().resetGame(); // Reset state before loading
     const { setLoading, setError, setCurrentGame, setCurrentPlayer, setMap } = get();
     setLoading(true);
     setError(null);
 
     try {
-      const gameState = await GameService.initializeGame(gameId);
+      console.log(`%c📡 [GameStore] About to call API for scenario: ${scenarioId}`, 'color: blue');
       
+      // Use GameService to initialize the game
+      const gameState = await GameService.initializeGame(scenarioId);
+      
+      console.log(`%c✅ [GameStore] Game state created:`, 'color: green', gameState);
+      
+      // Set the game state in the store
       if (gameState.currentGame) {
         setCurrentGame(gameState.currentGame);
-        // CRITICAL FIX: Set the map state when game loads
+        
+        // Convert tiles to map format
         if (gameState.currentGame.map && gameState.currentGame.map.tiles) {
-          setMap(get().convertTilesToMap(gameState.currentGame.map.tiles, gameState.currentGame.map.width, gameState.currentGame.map.height));
+          const mapData = get().convertTilesToMap(
+            gameState.currentGame.map.tiles, 
+            gameState.currentGame.map.width, 
+            gameState.currentGame.map.height
+          );
+          setMap(mapData);
         }
       }
+      
       if (gameState.currentPlayer) {
         setCurrentPlayer(gameState.currentPlayer);
-        
-        // Initialize magic item system with demo items
-        const demoItems = [
-          'sword_basic', 'armor_leather', 'ring_power', 'boots_speed',
-          'potion_health', 'potion_mana', 'scroll_teleport',
-          'temporal_anchor', 'temporal_prism', 'crown_kings',
-          'staff_archmage', 'orb_knowledge', 'sword_legendary'
-        ];
-        
-        set({ 
-          playerInventory: demoItems,
-          equippedItems: {
-            [gameState.currentPlayer.heroes[0]?.id]: {
-              weapon: 'sword_basic',
-              armor: 'armor_leather',
-              ring: 'ring_power',
-              boots: 'boots_speed'
-            }
-          }
-        });
-        
-        console.log('🎒 Magic item system initialized with', demoItems.length, 'items');
       }
+      
+      console.log(`%c🎉 [GameStore] loadGame completed successfully!`, 'color: green; font-weight: bold');
+
     } catch (error) {
+      console.error(`%c💥 [GameStore] loadGame failed:`, 'color: red; font-weight: bold');
+      console.error(`%c   Scenario ID: ${scenarioId}`, 'color: red');
+      console.error(`%c   Error:`, 'color: red', error);
+      
       setError(error instanceof Error ? error.message : 'Failed to load game');
     } finally {
       setLoading(false);

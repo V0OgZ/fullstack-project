@@ -100,7 +100,8 @@ npm test
 ### E2E Tests
 ```bash
 cd frontend
-npx cypress run
+npx cypress open  # Interactive mode
+npx cypress run   # Headless mode
 ```
 
 ## 🚀 Deployment

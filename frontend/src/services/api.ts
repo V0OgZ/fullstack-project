@@ -3,6 +3,11 @@ const BASE_URL = 'http://localhost:8080/api';
 export class ApiService {
   private static async makeRequest(endpoint: string, options: RequestInit = {}): Promise<any> {
     const url = `${BASE_URL}${endpoint}`;
+    console.log(`%c🚀 [ApiService] Making request:`, 'color: purple; font-weight: bold');
+    console.log(`%c   Method: ${options.method || 'GET'}`, 'color: blue');
+    console.log(`%c   URL: ${url}`, 'color: blue');
+    console.log(`%c   Options:`, 'color: blue', options);
+    
     const config: RequestInit = {
       headers: {
         'Content-Type': 'application/json',
@@ -12,15 +17,29 @@ export class ApiService {
     };
 
     try {
+      console.log(`%c📡 Sending fetch request...`, 'color: orange');
       const response = await fetch(url, config);
       
+      console.log(`%c📥 Response received:`, 'color: cyan');
+      console.log(`%c   Status: ${response.status} ${response.statusText}`, 'color: cyan');
+      console.log(`%c   Headers:`, 'color: cyan', response.headers);
+      
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorText = await response.text();
+        console.error(`%c❌ API Error:`, 'color: red; font-weight: bold');
+        console.error(`%c   Status: ${response.status} ${response.statusText}`, 'color: red');
+        console.error(`%c   Error body: ${errorText}`, 'color: red');
+        throw new Error(`HTTP error! status: ${response.status}, body: ${errorText}`);
       }
       
-      return await response.json();
+      const data = await response.json();
+      console.log(`%c✅ API Success:`, 'color: green; font-weight: bold', data);
+      return data;
     } catch (error) {
-      console.error(`API request failed: ${endpoint}`, error);
+      console.error(`%c💥 API Request Failed:`, 'color: red; font-weight: bold');
+      console.error(`%c   URL: ${url}`, 'color: red');
+      console.error(`%c   Method: ${options.method || 'GET'}`, 'color: red');
+      console.error(`%c   Error:`, 'color: red', error);
       throw error;
     }
   }
@@ -276,7 +295,7 @@ export class ApiService {
   }
 
   static async getAllScenarios(): Promise<any> {
-    return this.makeRequest('/scenarios');
+    return this.makeRequest('/scenarios/all');
   }
 
   static async getPoliticalAdvisors(): Promise<any> {

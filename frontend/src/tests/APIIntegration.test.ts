@@ -28,7 +28,7 @@ describe('API Integration Tests', () => {
 
     it('should create a new game', async () => {
       const gameData = {
-        scenario: 'conquest-classique',
+        scenario: 'conquest-classic',
         playerCount: 2,
         gameMode: 'async'
       };
@@ -99,7 +99,7 @@ describe('API Integration Tests', () => {
     beforeAll(async () => {
       // Create a test game
       const gameData = {
-        scenario: 'conquest-classique',
+        scenario: 'conquest-classic',
         playerCount: 2,
         gameMode: 'async'
       };
@@ -145,7 +145,7 @@ describe('API Integration Tests', () => {
 
     beforeAll(async () => {
       const gameData = {
-        scenario: 'conquest-classique',
+        scenario: 'conquest-classic',
         playerCount: 2,
         gameMode: 'async'
       };
@@ -226,7 +226,7 @@ describe('API Integration Tests', () => {
       const sessionData = {
         sessionName: 'Test Session',
         maxPlayers: 4,
-        gameMode: 'conquest-classique',
+        gameMode: 'conquest-classic',
         createdBy: 'test-player'
       };
 

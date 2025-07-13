@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/scenarios")
-@CrossOrigin(origins = "http://localhost:3000")
 public class ScenarioController {
 
     @Autowired

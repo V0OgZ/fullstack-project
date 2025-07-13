@@ -103,9 +103,9 @@ export class GameService {
     
     try {
       let scenarioData: any;
-      if (scenarioId === 'conquete-classique') {
+      if (scenarioId === 'conquest-classic') {
         scenarioData = await ApiService.createConquestClassicScenario();
-      } else if (scenarioId === 'mystique-temporel') {
+      } else if (scenarioId === 'temporal-rift') {
         scenarioData = await ApiService.createTemporalRiftScenario();
       } else {
         throw new Error(`Unknown scenario ID: ${scenarioId}`);
