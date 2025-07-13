@@ -2,7 +2,7 @@
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
     "builder": "NIXPACKS",
-    "buildCommand": "cd server && mvn clean package -DskipTests",
+    "buildCommand": "cd server && ./mvnw clean package -DskipTests",
     "watchPatterns": [
       "server/**",
       "client/**"
@@ -10,7 +10,7 @@
   },
   "deploy": {
     "startCommand": "cd server && java -jar target/monjeu.jar",
-    "healthcheckPath": "/",
+    "healthcheckPath": "/api/units/health",
     "healthcheckTimeout": 100,
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10
