@@ -1,0 +1,84 @@
+{
+  "name": "heroes-of-time-frontend",
+  "version": "1.0.0",
+  "description": "Heroes of Time - Revolutionary dual-scenario strategy game frontend",
+  "keywords": [
+    "strategy-game",
+    "heroes",
+    "react",
+    "typescript",
+    "hexagonal",
+    "temporal",
+    "magic"
+  ],
+  "author": "V0OgZ",
+  "license": "MIT",
+  "homepage": "./",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/V0OgZ/heroes-of-time.git"
+  },
+  "private": true,
+  "dependencies": {
+    "@stomp/stompjs": "^7.1.1",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/styled-components": "^5.1.34",
+    "framer-motion": "^12.23.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.3",
+    "sockjs-client": "^1.6.1",
+    "styled-components": "^6.1.19",
+    "web-vitals": "^2.1.4",
+    "zustand": "^5.0.6"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "build:railway": "npm run build && npm run copy-to-server",
+    "copy-to-server": "rm -rf ../server/src/main/resources/static/* && cp -r build/* ../server/src/main/resources/static/",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "test:e2e": "start-server-and-test start http://localhost:3000 cypress:run",
+    "test:e2e:open": "start-server-and-test start http://localhost:3000 cypress:open",
+    "test:backend": "wait-on http://localhost:8080/api/units/health && echo 'Backend is ready'",
+    "test:full": "npm run test:backend && npm run test:e2e",
+    "test:dev": "concurrently \"npm start\" \"npm run test:backend\" \"npm run cypress:open\""
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.13",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@types/sockjs-client": "^1.5.4",
+    "concurrently": "^9.2.0",
+    "cypress": "^14.5.1",
+    "react-scripts": "^5.0.1",
+    "start-server-and-test": "^2.0.12",
+    "typescript": "^4.9.5",
+    "wait-on": "^8.0.3"
+  }
+}

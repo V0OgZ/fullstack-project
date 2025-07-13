@@ -1,0 +1,56 @@
+{
+  "id": "classic-map",
+  "type": "hexagonal",
+  "width": 20,
+  "height": 15,
+  "scenario": "conquest-classique",
+  "tiles": [
+    {
+      "x": 0,
+      "y": 0,
+      "terrain": "grass",
+      "walkable": true,
+      "movementCost": 1
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "terrain": "forest",
+      "walkable": true,
+      "movementCost": 2
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "terrain": "mountain",
+      "walkable": true,
+      "movementCost": 3
+    }
+  ],
+  "objects": [
+    {
+      "id": "chest-1",
+      "x": 5,
+      "y": 5,
+      "type": "treasure",
+      "content": {
+        "gold": 300,
+        "gems": 1
+      }
+    },
+    {
+      "id": "mine-1",
+      "x": 10,
+      "y": 8,
+      "type": "mine",
+      "content": {
+        "resource": "gold",
+        "amount": 1000
+      }
+    }
+  ],
+  "startingPositions": [
+    { "x": 2, "y": 2 },
+    { "x": 17, "y": 12 }
+  ]
+} 
