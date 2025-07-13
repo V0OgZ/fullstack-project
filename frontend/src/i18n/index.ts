@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import React from 'react'; // Added missing import for React.useEffect
 
 // Types pour les traductions
 export type Language = 'fr' | 'en' | 'ru';
@@ -1578,6 +1579,12 @@ export const useI18n = create<I18nStore>()(
 // Hook pour faciliter l'utilisation
 export const useTranslation = () => {
   const { language, setLanguage, t } = useI18n();
+
+  // Ensure translations object is up-to-date with latest keys every time the hook mounts
+  React.useEffect(() => {
+    setLanguage(language);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   
   return {
     language,
