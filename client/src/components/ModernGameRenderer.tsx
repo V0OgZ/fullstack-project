@@ -23,11 +23,14 @@ interface AnimatedElement {
 const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
-  const { map, currentGame, selectedTile, setSelectedTile, visibleZFCs } = useGameStore();
+  const { map, currentGame, selectedTile, setSelectedTile, visibleZFCs, moveHero, attackTarget, collectResource } = useGameStore();
   const { t } = useTranslation();
   
   const [animatedElements, setAnimatedElements] = useState<AnimatedElement[]>([]);
   const [hoveredTile, setHoveredTile] = useState<Position | null>(null);
+  const [selectedHeroId, setSelectedHeroId] = useState<string | null>(null);
+  const [validMoveTiles, setValidMoveTiles] = useState<Position[]>([]);
+  const [validTargets, setValidTargets] = useState<{position: Position, type: 'enemy' | 'resource'}[]>([]);
 
   // Render configuration
   const config = useMemo(() => ({
@@ -311,6 +314,32 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
     ctx.fillStyle = baseColor;
     ctx.fill();
 
+    // Visual feedback for valid moves
+    const isValidMove = validMoveTiles.some(t => t.x === tile.x && t.y === tile.y);
+    if (isValidMove) {
+      ctx.fillStyle = 'rgba(46, 204, 113, 0.4)';
+      ctx.fill();
+    }
+
+    // Visual feedback for valid targets
+    const isValidTarget = validTargets.some(t => t.position.x === tile.x && t.position.y === tile.y);
+    if (isValidTarget) {
+      const targetType = validTargets.find(t => t.position.x === tile.x && t.position.y === tile.y)?.type;
+      if (targetType === 'enemy') {
+        ctx.fillStyle = 'rgba(231, 76, 60, 0.4)';
+      } else {
+        ctx.fillStyle = 'rgba(243, 156, 18, 0.4)';
+      }
+      ctx.fill();
+    }
+
+    // Visual feedback for selected hero
+    const isSelectedHero = tile.hero && selectedHeroId === tile.hero.id;
+    if (isSelectedHero) {
+      ctx.fillStyle = 'rgba(255, 215, 0, 0.6)';
+      ctx.fill();
+    }
+
     // Hover effect
     if (isHovered) {
       ctx.fillStyle = config.colors.hover;
@@ -344,7 +373,7 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
     if (tile.hero) {
       drawHero(ctx, center, tile.hero);
     }
-  }, [config, drawStructure, drawCreature, drawHero]);
+  }, [config, drawStructure, drawCreature, drawHero, validMoveTiles, validTargets, selectedHeroId]);
 
   // Render ZFC zones
   const drawZFCZones = useCallback((ctx: CanvasRenderingContext2D) => {
@@ -422,6 +451,144 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
     
     setAnimatedElements(prev => [...prev, newParticle]);
   }, []);
+
+  // Helper function to calculate valid moves for a hero
+  const calculateValidMoves = useCallback((hero: Hero): Position[] => {
+    if (!map || !map.length) return [];
+    
+    const validMoves: Position[] = [];
+    const maxDistance = hero.movementPoints;
+    
+    for (let y = 0; y < map.length; y++) {
+      for (let x = 0; x < map[y].length; x++) {
+        const distance = Math.abs(x - hero.position.x) + Math.abs(y - hero.position.y);
+        if (distance <= maxDistance && map[y][x].walkable && !map[y][x].hero) {
+          validMoves.push({ x, y });
+        }
+      }
+    }
+    
+    return validMoves;
+  }, [map]);
+
+  // Helper function to find valid targets
+  const findValidTargets = useCallback((hero: Hero): {position: Position, type: 'enemy' | 'resource'}[] => {
+    if (!map || !map.length) return [];
+    
+    const targets: {position: Position, type: 'enemy' | 'resource'}[] = [];
+    const maxDistance = 1; // Attack range
+    
+    for (let y = 0; y < map.length; y++) {
+      for (let x = 0; x < map[y].length; x++) {
+        const distance = Math.abs(x - hero.position.x) + Math.abs(y - hero.position.y);
+        if (distance <= maxDistance) {
+          if (map[y][x].creature) {
+            targets.push({ position: { x, y }, type: 'enemy' });
+          } else if (map[y][x].structure && map[y][x].structure?.owner !== hero.playerId) {
+            targets.push({ position: { x, y }, type: 'enemy' });
+          } else if (map[y][x].structure && map[y][x].structure?.type === 'gold_mine') {
+            targets.push({ position: { x, y }, type: 'resource' });
+          }
+        }
+      }
+    }
+    
+    return targets;
+  }, [map]);
+
+  // Handle hero selection and action execution
+  const handleTileClick = useCallback(async (position: Position) => {
+    if (!map || !currentGame) return;
+    
+    const tile = map[position.y]?.[position.x];
+    if (!tile) return;
+    
+    // If clicking on a hero, select it
+    if (tile.hero && tile.hero.playerId === currentGame.currentPlayerTurn) {
+      setSelectedHeroId(tile.hero.id);
+      const validMoves = calculateValidMoves(tile.hero);
+      const validTargets = findValidTargets(tile.hero);
+      setValidMoveTiles(validMoves);
+      setValidTargets(validTargets);
+      console.log(`🎯 Selected hero: ${tile.hero.name}`);
+      return;
+    }
+    
+    // If a hero is selected, try to perform an action
+    if (selectedHeroId) {
+      const selectedHero = currentGame.players
+        .flatMap(p => p.heroes)
+        .find(h => h.id === selectedHeroId);
+      
+      if (!selectedHero) return;
+      
+      // Check if clicking on a valid move tile
+      if (validMoveTiles.some(t => t.x === position.x && t.y === position.y)) {
+        try {
+          await moveHero(selectedHeroId, position);
+          console.log(`🚶 Moved hero to (${position.x}, ${position.y})`);
+          setSelectedHeroId(null);
+          setValidMoveTiles([]);
+          setValidTargets([]);
+        } catch (error) {
+          console.error('Failed to move hero:', error);
+        }
+        return;
+      }
+      
+      // Check if clicking on a valid target
+      const target = validTargets.find(t => t.position.x === position.x && t.position.y === position.y);
+      if (target) {
+        try {
+          if (target.type === 'enemy') {
+            const targetId = tile.creature?.id || tile.structure?.id;
+            if (targetId) {
+              await attackTarget(selectedHeroId, targetId);
+              console.log(`⚔️ Attacking target at (${position.x}, ${position.y})`);
+            }
+          } else if (target.type === 'resource') {
+            const objectId = tile.structure?.id;
+            if (objectId) {
+              await collectResource(selectedHeroId, objectId);
+              console.log(`💎 Collecting resource at (${position.x}, ${position.y})`);
+            }
+          }
+          setSelectedHeroId(null);
+          setValidMoveTiles([]);
+          setValidTargets([]);
+        } catch (error) {
+          console.error('Failed to perform action:', error);
+        }
+        return;
+      }
+      
+      // If clicking elsewhere, deselect hero
+      setSelectedHeroId(null);
+      setValidMoveTiles([]);
+      setValidTargets([]);
+    }
+    
+    // Set selected tile for info display
+    setSelectedTile(position);
+  }, [map, currentGame, selectedHeroId, validMoveTiles, validTargets, moveHero, attackTarget, collectResource, calculateValidMoves, findValidTargets, setSelectedTile]);
+
+  // Handle keyboard events
+  const handleKeyDown = useCallback((event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      setSelectedHeroId(null);
+      setValidMoveTiles([]);
+      setValidTargets([]);
+      console.log('🎯 Hero deselected');
+    }
+  }, []);
+
+  // Add keyboard event listener
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleKeyDown]);
 
   // Main render loop
   const render = useCallback(() => {
@@ -518,12 +685,9 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
     
     if (map && hexCoord.y >= 0 && hexCoord.y < map.length && 
         hexCoord.x >= 0 && hexCoord.x < map[0].length) {
-      setSelectedTile(hexCoord);
-      
-      // Ajouter un effet de particule au clic
-      addParticleEffect(hexCoord, '#FFD700');
+      handleTileClick(hexCoord);
     }
-  }, [map, pixelToHex, setSelectedTile, addParticleEffect]);
+  }, [map, pixelToHex, handleTileClick]);
 
   // Initialiser le rendu
   useEffect(() => {
