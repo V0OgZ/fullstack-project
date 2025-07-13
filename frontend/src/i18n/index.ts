@@ -198,6 +198,47 @@ export interface Translation {
   testBackendConnection: string;
   builtWith: string;
 
+  // NEW: Missing translation keys for hardcoded strings
+  modeHotSeat: string;
+  testImages: string;
+  imageTest: string;
+  creatures: string;
+  creatureGifs: string;
+  redDragon: string;
+  phoenix: string;
+  unicorn: string;
+  griffin: string;
+  heroesPngs: string;
+  warrior: string;
+  mage: string;
+  archer: string;
+  paladin: string;
+  filePaths: string;
+  nationalReputation: string;
+  nextCrisis: string;
+  turns: string;
+  politicalCouncil: string;
+  perestroikaSystem: string;
+  pending: string;
+  confirmed: string;
+  discarded: string;
+  locked: string;
+  unknown: string;
+  recommendations: string;
+  hideRecommendations: string;
+  showRecommendations: string;
+  makeDecision: string;
+  severity: string;
+  minor: string;
+  moderate: string;
+  major: string;
+  catastrophic: string;
+  fetchApiData: string;
+  backendApiTest: string;
+  apiResponse: string;
+  loadingSpinner: string;
+  errorMessage: string;
+
   // Magic Items - Weapons
   'items.sword_basic.name': string;
   'items.sword_basic.description': string;
@@ -279,7 +320,7 @@ export interface Translation {
 // Traductions françaises
 const frenchTranslations: Translation = {
   // Header
-  gameTitle: 'Heroes Reforged',
+  gameTitle: 'Heroes of Time',
   turn: 'Tour',
   player: 'Joueur',
   
@@ -471,6 +512,47 @@ const frenchTranslations: Translation = {
   testBackendConnection: 'Tester la connexion du backend',
   builtWith: 'Construit avec',
 
+  // NEW: Missing translation keys for hardcoded strings
+  modeHotSeat: 'Mode Hot Seat',
+  testImages: 'Test des Images',
+  imageTest: 'Test des Images',
+  creatures: 'Créatures',
+  creatureGifs: 'Créatures (GIFs)',
+  redDragon: 'Dragon Rouge',
+  phoenix: 'Phoenix',
+  unicorn: 'Licorne',
+  griffin: 'Griffon',
+  heroesPngs: 'Héros (PNGs)',
+  warrior: 'Guerrier',
+  mage: 'Mage',
+  archer: 'Archer',
+  paladin: 'Paladin',
+  filePaths: 'Chemins des fichiers',
+  nationalReputation: 'Réputation Nationale',
+  nextCrisis: 'Prochaine Crise',
+  turns: 'tours',
+  politicalCouncil: 'Conseil Politique',
+  perestroikaSystem: 'Système Perestroika',
+  pending: 'En attente',
+  confirmed: 'Confirmé',
+  discarded: 'Annulé',
+  locked: 'Verrouillé',
+  unknown: 'Inconnu',
+  recommendations: 'Recommandations',
+  hideRecommendations: 'Masquer les recommandations',
+  showRecommendations: 'Afficher les recommandations',
+  makeDecision: 'Prendre une décision',
+  severity: 'Gravité',
+  minor: 'Mineure',
+  moderate: 'Modérée',
+  major: 'Majeure',
+  catastrophic: 'Catastrophique',
+  fetchApiData: 'Récupérer les données API',
+  backendApiTest: 'Test API Backend',
+  apiResponse: 'Réponse API',
+  loadingSpinner: 'Chargement en cours',
+  errorMessage: 'Message d\'erreur',
+
   // Magic Items - Weapons
   'items.sword_basic.name': 'Épée de base',
   'items.sword_basic.description': 'Une épée simple et robuste.',
@@ -552,7 +634,7 @@ const frenchTranslations: Translation = {
 // Traductions anglaises
 const englishTranslations: Translation = {
   // Header
-  gameTitle: 'Heroes Reforged',
+  gameTitle: 'Heroes of Time',
   turn: 'Turn',
   player: 'Player',
   
@@ -825,7 +907,7 @@ const englishTranslations: Translation = {
 // Traductions russes
 const russianTranslations: Translation = {
   // Header
-  gameTitle: 'Герои Возрождения',
+  gameTitle: 'Герои Времени',
   turn: 'Ход',
   player: 'Игрок',
   

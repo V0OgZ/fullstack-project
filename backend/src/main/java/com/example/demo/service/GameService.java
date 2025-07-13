@@ -292,7 +292,7 @@ public class GameService {
     private Map<String, Object> createNewGame(String gameId) {
         Map<String, Object> game = new HashMap<>();
         game.put("id", gameId);
-        game.put("name", "Heroes Reforged - " + gameId);
+        game.put("name", "Heroes of Time - " + gameId);
         game.put("currentTurn", 1);
         game.put("turnStartTime", new Date());
         game.put("turnDuration", 30);
