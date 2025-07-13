@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { ApiResponse } from '../types/api';
 import { ApiService } from '../services/api';
+import { useTranslation } from '../i18n';
 
 const ApiTester: React.FC = () => {
+  const { t } = useTranslation();
   const [apiData, setApiData] = useState<ApiResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -22,24 +24,24 @@ const ApiTester: React.FC = () => {
 
   return (
     <div className="api-section">
-      <h2>Backend API Test</h2>
+      <h2>{t('backendApiTest')}</h2>
       <button 
         onClick={fetchApiData}
         disabled={loading}
         className="api-button"
       >
-        {loading ? 'Loading...' : 'Fetch API Data'}
+        {loading ? t('loading') : t('fetchApiData')}
       </button>
 
       {error && (
         <div className="error-message">
-          Error: {error}
+          {t('error')}: {error}
         </div>
       )}
 
       {apiData && (
         <div className="api-response">
-          <h3>API Response:</h3>
+          <h3>{t('apiResponse')}:</h3>
           <pre>{JSON.stringify(apiData, null, 2)}</pre>
         </div>
       )}

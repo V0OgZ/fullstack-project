@@ -7,45 +7,45 @@ const ImageTest: React.FC = () => {
   
   return (
     <div style={{ padding: '20px', background: '#1a1a2e', color: 'white' }}>
-      <h2>Test des Images</h2>
+      <h2>{t('testImages')}</h2>
       
-      <h3>Créatures (GIFs)</h3>
+      <h3>{t('creatureGifs')}</h3>
       <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
         <div>
-          <p>Dragon Rouge:</p>
+          <p>{t('redDragon')}:</p>
           <img 
             src={CREATURE_ASSETS.DRAGON_RED} 
-            alt="Dragon Rouge" 
+            alt={t('redDragon')} 
             style={{ width: '100px', height: '100px', border: '2px solid gold' }}
             onError={(e) => console.error('Erreur dragon rouge:', e)}
             onLoad={() => console.log('Dragon rouge chargé!')}
           />
         </div>
         <div>
-          <p>Phoenix:</p>
+          <p>{t('phoenix')}:</p>
           <img 
             src={CREATURE_ASSETS.PHOENIX} 
-            alt="Phoenix" 
+            alt={t('phoenix')} 
             style={{ width: '100px', height: '100px', border: '2px solid gold' }}
             onError={(e) => console.error('Erreur phoenix:', e)}
             onLoad={() => console.log('Phoenix chargé!')}
           />
         </div>
         <div>
-          <p>Licorne:</p>
+          <p>{t('unicorn')}:</p>
           <img 
             src={CREATURE_ASSETS.UNICORN} 
-            alt="Licorne" 
+            alt={t('unicorn')} 
             style={{ width: '100px', height: '100px', border: '2px solid gold' }}
             onError={(e) => console.error('Erreur licorne:', e)}
             onLoad={() => console.log('Licorne chargée!')}
           />
         </div>
         <div>
-          <p>Griffon:</p>
+          <p>{t('griffin')}:</p>
           <img 
             src={CREATURE_ASSETS.GRIFFIN} 
-            alt="Griffon" 
+            alt={t('griffin')} 
             style={{ width: '100px', height: '100px', border: '2px solid gold' }}
             onError={(e) => console.error('Erreur griffon:', e)}
             onLoad={() => console.log('Griffon chargé!')}
@@ -53,43 +53,43 @@ const ImageTest: React.FC = () => {
         </div>
       </div>
 
-      <h3>{t('heroes')} (PNGs)</h3>
+      <h3>{t('heroesPngs')}</h3>
       <div style={{ display: 'flex', gap: '10px' }}>
         <div>
-          <p>Guerrier:</p>
+          <p>{t('warrior')}:</p>
           <img 
             src={HERO_ASSETS.WARRIOR} 
-            alt="Guerrier" 
+            alt={t('warrior')} 
             style={{ width: '100px', height: '100px', border: '2px solid gold' }}
             onError={(e) => console.error('Erreur guerrier:', e)}
             onLoad={() => console.log('Guerrier chargé!')}
           />
         </div>
         <div>
-          <p>Mage:</p>
+          <p>{t('mage')}:</p>
           <img 
             src={HERO_ASSETS.MAGE} 
-            alt="Mage" 
+            alt={t('mage')} 
             style={{ width: '100px', height: '100px', border: '2px solid gold' }}
             onError={(e) => console.error('Erreur mage:', e)}
             onLoad={() => console.log('Mage chargé!')}
           />
         </div>
         <div>
-          <p>Archer:</p>
+          <p>{t('archer')}:</p>
           <img 
             src={HERO_ASSETS.ARCHER} 
-            alt="Archer" 
+            alt={t('archer')} 
             style={{ width: '100px', height: '100px', border: '2px solid gold' }}
             onError={(e) => console.error('Erreur archer:', e)}
             onLoad={() => console.log('Archer chargé!')}
           />
         </div>
         <div>
-          <p>Paladin:</p>
+          <p>{t('paladin')}:</p>
           <img 
             src={HERO_ASSETS.PALADIN} 
-            alt="Paladin" 
+            alt={t('paladin')} 
             style={{ width: '100px', height: '100px', border: '2px solid gold' }}
             onError={(e) => console.error('Erreur paladin:', e)}
             onLoad={() => console.log('Paladin chargé!')}
@@ -97,16 +97,16 @@ const ImageTest: React.FC = () => {
         </div>
       </div>
 
-      <h3>Chemins des fichiers:</h3>
+      <h3>{t('filePaths')}:</h3>
       <ul>
         <li>Dragon: {CREATURE_ASSETS.DRAGON_RED}</li>
         <li>Phoenix: {CREATURE_ASSETS.PHOENIX}</li>
-        <li>Licorne: {CREATURE_ASSETS.UNICORN}</li>
-        <li>Griffon: {CREATURE_ASSETS.GRIFFIN}</li>
-        <li>Guerrier: {HERO_ASSETS.WARRIOR}</li>
-        <li>Mage: {HERO_ASSETS.MAGE}</li>
-        <li>Archer: {HERO_ASSETS.ARCHER}</li>
-        <li>Paladin: {HERO_ASSETS.PALADIN}</li>
+        <li>{t('unicorn')}: {CREATURE_ASSETS.UNICORN}</li>
+        <li>{t('griffin')}: {CREATURE_ASSETS.GRIFFIN}</li>
+        <li>{t('warrior')}: {HERO_ASSETS.WARRIOR}</li>
+        <li>{t('mage')}: {HERO_ASSETS.MAGE}</li>
+        <li>{t('archer')}: {HERO_ASSETS.ARCHER}</li>
+        <li>{t('paladin')}: {HERO_ASSETS.PALADIN}</li>
       </ul>
     </div>
   );
