@@ -34,6 +34,18 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
   const [sessionCreated, setSessionCreated] = useState(false);
   const [createdSessionId, setCreatedSessionId] = useState<string | null>(null);
 
+  // Generate a unique player ID when component mounts
+  useEffect(() => {
+    const generatePlayerId = () => {
+      const timestamp = Date.now();
+      const random = Math.random().toString(36).substring(2, 15);
+      return `player_${timestamp}_${random}`;
+    };
+    
+    setPlayerId(generatePlayerId());
+    setHeroName(`Hero_${Math.floor(Math.random() * 1000)}`);
+  }, []);
+
   const loadSessions = useCallback(async () => {
     try {
       setLoading(true);
@@ -97,7 +109,7 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
   useEffect(() => {
     loadSessions();
     // Generate random player ID for testing
-    setPlayerId(`player_${Math.random().toString(36).substr(2, 9)}`);
+    // setPlayerId(`player_${Math.random().toString(36).substr(2, 9)}`);
   }, [loadSessions]);
 
   const createSession = async () => {
@@ -142,8 +154,19 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
       return;
     }
 
+    if (!playerId || playerId.trim() === '') {
+      onError('Player ID not set. Please refresh the page.');
+      return;
+    }
+
+    if (!sessionId || sessionId.trim() === '') {
+      onError('Invalid session ID.');
+      return;
+    }
+
     try {
       setLoading(true);
+      console.log(`🎮 Attempting to join session ${sessionId} with player ID ${playerId}`);
       const response = await ApiService.joinMultiplayerSession(sessionId, playerId);
       console.log('✅ Joined session:', response);
       
