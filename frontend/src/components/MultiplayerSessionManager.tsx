@@ -67,7 +67,7 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
       try {
         console.log('🌐 Initializing WebSocket connection...');
         await websocketService.connect();
-        setWebsocketConnected(true);
+        setWebsocketConnected(websocketService.isConnected());
         
         // Set up message handlers
         websocketService.onMessage('PLAYER_JOINED', (message) => {
@@ -366,6 +366,7 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
         <button
           onClick={() => setCreateSessionMode(true)}
           disabled={loading || !websocketConnected}
+          data-testid="create-session-btn"
           style={{
             padding: '8px 16px',
             background: (!websocketConnected || loading) ? '#666' : '#00d4ff',

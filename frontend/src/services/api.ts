@@ -1,5 +1,3 @@
-import { ApiResponse, HealthResponse } from '../types/api';
-
 const BASE_URL = 'http://localhost:8080/api';
 
 export class ApiService {
@@ -312,5 +310,14 @@ export class ApiService {
     } catch (error) {
       return false;
     }
+  }
+
+  // Scenario Creation
+  static async createConquestClassicScenario(): Promise<any> {
+    return this.makeRequest('/scenarios/predefined/conquest-classic', { method: 'POST' });
+  }
+
+  static async createTemporalRiftScenario(): Promise<any> {
+    return this.makeRequest('/scenarios/predefined/temporal-rift', { method: 'POST' });
   }
 } 

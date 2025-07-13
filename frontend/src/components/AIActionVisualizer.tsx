@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useTranslation } from '../i18n';
-import { ApiService } from '../services/api';
 import './AIActionVisualizer.css';
 
 interface AIDecision {
@@ -50,7 +48,6 @@ const AIActionVisualizer: React.FC<AIActionVisualizerProps> = ({
   isVisible, 
   onClose 
 }) => {
-  const { t } = useTranslation();
   const [aiPlayers, setAiPlayers] = useState<AIPlayer[]>([]);
   const [selectedAI, setSelectedAI] = useState<string | null>(null);
   const [recentActions, setRecentActions] = useState<AIDecision[]>([]);

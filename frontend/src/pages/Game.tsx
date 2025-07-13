@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import TrueHeroesInterface from '../components/TrueHeroesInterface';
 import MultiplayerSessionManager from '../components/MultiplayerSessionManager';
 import { useTranslation } from '../i18n';
 
 const Game: React.FC = () => {
   const { scenarioId } = useParams<{ scenarioId: string }>();
+  const location = useLocation();
   const { t } = useTranslation();
   const [scenarioType, setScenarioType] = useState<'classique' | 'mystique' | 'multiplayer'>('classique');
   const [playerCount, setPlayerCount] = useState(2);
   const [multiplayerSessionId, setMultiplayerSessionId] = useState<string | null>(null);
 
   useEffect(() => {
+    const isMultiplayerRoute = location.pathname === '/multiplayer';
+
     // Determine scenario type
     if (scenarioId === 'mystique-temporel') {
       setScenarioType('mystique');
       setPlayerCount(2);
       console.log('🔮 Loading Mystique scenario with temporal objects...');
-    } else if (scenarioId === 'multiplayer-arena') {
+    } else if (isMultiplayerRoute || scenarioId === 'multiplayer-arena') {
       setScenarioType('multiplayer');
       setPlayerCount(4); // Default to 4 players for multiplayer
       console.log('🌐 Loading Multiplayer Arena with 4 players...');
@@ -26,9 +29,9 @@ const Game: React.FC = () => {
       setPlayerCount(2);
       console.log('🏰 Loading Classic scenario...');
     }
-  }, [scenarioId]);
+  }, [scenarioId, location.pathname]);
 
-  if (!scenarioId) {
+  if (!scenarioId && location.pathname !== '/multiplayer') {
     return (
       <div style={{
         height: '100vh',
@@ -81,7 +84,7 @@ const Game: React.FC = () => {
       <TrueHeroesInterface 
         playerCount={playerCount} 
         scenarioType={scenarioType}
-        scenarioId={scenarioId}
+        scenarioId={scenarioId as string}
       />
     </div>
   );

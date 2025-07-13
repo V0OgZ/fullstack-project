@@ -1,6 +1,5 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import { GameState, Game, Player, Tile, Position, Hero, GameAction, CombatResult, TimelineAction, ShadowAction, ZoneOfCausality, InventoryItem } from '../types/game';
+import { GameState, Game, Player, Tile, Position, Hero, GameAction, CombatResult, TimelineAction, ShadowAction, ZoneOfCausality } from '../types/game';
 import { MagicItemService, EquippedItems } from '../services/magicItemService';
 import { ZFCService } from '../services/zfcService';
 import { GameService } from '../services/gameService';
@@ -55,6 +54,7 @@ interface GameStore extends GameState {
   cancelAction: (actionId: string) => Promise<void>;
   
   // Game state management
+  resetGame: () => void; // New action
   loadGame: (gameId: string) => Promise<void>;
   refreshGameState: () => Promise<void>;
   endTurn: () => Promise<void>;
@@ -64,8 +64,7 @@ interface GameStore extends GameState {
   nextPlayer: () => void;
 }
 
-export const useGameStore = create<GameStore>((set, get) => ({
-  // Initial state
+const initialState = {
   currentGame: null,
   currentPlayer: null,
   pendingActions: [],
@@ -75,11 +74,9 @@ export const useGameStore = create<GameStore>((set, get) => ({
   map: [],
   selectedTile: null,
   currentPlayerNumber: 1,
-  // NOUVEAU: État ZFC
   shadowActions: [],
   visibleZFCs: [],
   lockedZones: [],
-  // NOUVEAU: État politique
   politicalAdvisors: [],
   currentPoliticalEvent: null,
   reputation: {
@@ -90,10 +87,12 @@ export const useGameStore = create<GameStore>((set, get) => ({
     diplomatic: 0
   },
   activeEvents: [],
-
-  // NEW: Magic Item State
   playerInventory: [],
   equippedItems: {},
+};
+
+export const useGameStore = create<GameStore>((set, get) => ({
+  ...initialState,
 
   // Helper function to convert flat tiles array to 2D array
   convertTilesToMap: (tiles: any[], width: number, height: number): Tile[][] => {
@@ -538,7 +537,10 @@ export const useGameStore = create<GameStore>((set, get) => ({
   },
 
   // Game state management
+  resetGame: () => set(initialState),
+
   loadGame: async (gameId: string) => {
+    get().resetGame(); // Reset state before loading
     const { setLoading, setError, setCurrentGame, setCurrentPlayer, setMap } = get();
     setLoading(true);
     setError(null);

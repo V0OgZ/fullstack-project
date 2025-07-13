@@ -46,6 +46,8 @@
     "cypress:run": "cypress run",
     "test:e2e": "start-server-and-test start http://localhost:3000 cypress:run",
     "test:e2e:open": "start-server-and-test start http://localhost:3000 cypress:open",
+    "cy:run:headed": "cypress run --headed",
+    "test:e2e:headed": "start-server-and-test start http://localhost:3000 cy:run:headed",
     "test:backend": "wait-on http://localhost:8080/api/units/health && echo 'Backend is ready'",
     "test:full": "npm run test:backend && npm run test:e2e",
     "test:dev": "concurrently \"npm start\" \"npm run test:backend\" \"npm run cypress:open\""

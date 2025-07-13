@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from '../i18n';
-import LanguageSelector from './LanguageSelector';
 import './EnhancedScenarioSelector.css';
 
 interface Scenario {
@@ -21,7 +20,7 @@ interface Scenario {
 const EnhancedScenarioSelector: React.FC = () => {
   const { t, language, setLanguage } = useTranslation();
   const [selectedScenario, setSelectedScenario] = useState<string | null>(null);
-  const [showDetails, setShowDetails] = useState(false);
+  const navigate = useNavigate();
 
   const scenarios: Scenario[] = [
     {
@@ -106,6 +105,15 @@ const EnhancedScenarioSelector: React.FC = () => {
     }
   ];
 
+  const handleScenarioSelect = (scenarioId: string) => {
+    if (scenarioId === 'multiplayer-arena') {
+      navigate('/multiplayer');
+    } else {
+      navigate(`/game/${scenarioId}`);
+    }
+  };
+
+
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case 'easy': return '#4caf50';
@@ -161,6 +169,7 @@ const EnhancedScenarioSelector: React.FC = () => {
             {scenarios.map((scenario) => (
               <div
                 key={scenario.id}
+                data-testid={`scenario-card-${scenario.id}`}
                 className={`scenario-card ${!scenario.unlocked ? 'locked' : ''} ${selectedScenario === scenario.id ? 'selected' : ''}`}
                 style={{ background: scenario.backgroundImage }}
                 onMouseEnter={() => setSelectedScenario(scenario.id)}
@@ -201,13 +210,14 @@ const EnhancedScenarioSelector: React.FC = () => {
                   
                   <div className="scenario-actions">
                     {scenario.unlocked ? (
-                      <Link 
-                        to={`/game/${scenario.id}`}
+                      <button 
+                        onClick={() => handleScenarioSelect(scenario.id)}
                         className="play-button"
+                        data-testid={`play-button-${scenario.id}`}
                       >
                         <span className="button-icon">🎮</span>
                         {t('startGame')}
-                      </Link>
+                      </button>
                     ) : (
                       <button className="play-button disabled" disabled>
                         <span className="button-icon">🔒</span>

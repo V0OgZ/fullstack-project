@@ -1,5 +1,8 @@
 // Import commands.js using ES2015 syntax:
 import './commands';
+import './actions/MainMenu.actions';
+import './actions/MultiplayerLobby.actions';
+import './actions/Game.actions';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
