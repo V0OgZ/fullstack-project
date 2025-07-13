@@ -349,6 +349,21 @@ export interface Translation {
   competitive: string;
   startGame: string;
 
+  // Campaign scenario
+  epicCampaign: string;
+  epicCampaignDescription: string;
+  storyDrivenGameplay: string;
+  characterDevelopment: string;
+  unlockableContent: string;
+  multipleEndings: string;
+  cinematicCutscenes: string;
+  saveProgress: string;
+
+  // Scenario selector UI
+  availableAdventures: string;
+  details: string;
+  comingSoon: string;
+
   // Castle Management
   overview: string;
   buildings: string;
@@ -715,6 +730,21 @@ const frenchTranslations: Translation = {
   realTimeStrategy: 'Stratégie en temps réel',
   competitive: 'Compétitif',
   startGame: 'Démarrer la partie',
+
+  // Campaign scenario
+  epicCampaign: 'Campagne Épique',
+  epicCampaignDescription: 'Embarquez dans un voyage épique à travers des scénarios interconnectés avec une histoire riche.',
+  storyDrivenGameplay: 'Gameplay narratif',
+  characterDevelopment: 'Développement de personnage',
+  unlockableContent: 'Contenu débloquable',
+  multipleEndings: 'Fins multiples',
+  cinematicCutscenes: 'Cinématiques',
+  saveProgress: 'Sauvegarder les progrès',
+
+  // Scenario selector UI
+  availableAdventures: 'Choisir un scénario',
+  details: 'Détails',
+  comingSoon: 'Bientôt Disponible',
 
   // Castle Management
   overview: 'Aperçu',
@@ -1083,6 +1113,21 @@ const englishTranslations: Translation = {
   competitive: 'Competitive',
   startGame: 'Start Game',
 
+  // Campaign scenario
+  epicCampaign: 'Epic Campaign',
+  epicCampaignDescription: 'A campaign that offers a more immersive and richer gameplay experience.',
+  storyDrivenGameplay: 'Story-Driven Gameplay',
+  characterDevelopment: 'Character Development',
+  unlockableContent: 'Unlockable Content',
+  multipleEndings: 'Multiple Endings',
+  cinematicCutscenes: 'Cinematic Cutscenes',
+  saveProgress: 'Save Progress',
+
+  // Scenario selector UI
+  availableAdventures: 'Available Adventures',
+  details: 'Details',
+  comingSoon: 'Coming Soon',
+
   // Castle Management
   overview: 'Overview',
   buildings: 'Buildings',
@@ -1449,6 +1494,21 @@ const russianTranslations: Translation = {
   realTimeStrategy: 'Стратегия в реальном времени',
   competitive: 'Конкурентный',
   startGame: 'Начать игру',
+
+  // Campaign scenario
+  epicCampaign: 'Эпическая кампания',
+  epicCampaignDescription: 'Кампания, предлагающая более погруженный и богатый по опыту игровой процесс.',
+  storyDrivenGameplay: 'Игровой процесс, управляемый историей',
+  characterDevelopment: 'Развитие персонажа',
+  unlockableContent: 'Неразблокируемый контент',
+  multipleEndings: 'Несколько возможных концов',
+  cinematicCutscenes: 'Кинематографические катсцены',
+  saveProgress: 'Сохранить прогресс',
+
+  // Scenario selector UI
+  availableAdventures: 'Доступные приключения',
+  details: 'Детали',
+  comingSoon: 'Скоро доступно',
 
   // Castle Management
   overview: 'Обзор',

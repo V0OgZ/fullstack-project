@@ -38,9 +38,11 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
     try {
       setLoading(true);
       const response = await ApiService.getJoinableSessions();
-      setSessions(response || []);
+      // Ensure sessions is always an array
+      setSessions(Array.isArray(response) ? response : []);
     } catch (error) {
       console.error('Failed to load sessions:', error);
+      setSessions([]); // Set empty array on error
       onError('Failed to load multiplayer sessions');
     } finally {
       setLoading(false);

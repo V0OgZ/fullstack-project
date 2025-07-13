@@ -1,286 +1,338 @@
 # 🤝 Contributing to Heroes of Time
 
-Thank you for your interest in contributing to Heroes of Time! This document provides guidelines for contributing to this revolutionary asynchronous strategy game.
+Thank you for your interest in contributing to **Heroes of Time**! This document provides guidelines for contributing to this modern turn-based strategy game.
 
 ## 🌟 Ways to Contribute
 
 ### 🐛 Bug Reports
-- Use the [GitHub Issues](https://github.com/V0OgZ/Heroes-of-Time/issues) to report bugs
+- Use [GitHub Issues](https://github.com/V0OgZ/Heroes-of-Time/issues) to report bugs
 - Include detailed reproduction steps
 - Provide browser/OS information
-- Include screenshots if relevant
+- Include screenshots or videos if relevant
+- Test with the latest version first
 
 ### 💡 Feature Requests
 - Check existing issues before creating new ones
-- Explain the use case and benefits
-- Consider the impact on the ZFC system
+- Explain the use case and benefits clearly
+- Consider the impact on game balance
 - Provide mockups or examples if possible
+- Tag with appropriate labels
 
 ### 🔧 Code Contributions
 - Fork the repository
-- Create a feature branch
+- Create a feature branch from `main`
 - Follow the coding standards
-- Add tests for new features
+- Add comprehensive tests
 - Update documentation
+- Submit a pull request
+
+### 📚 Documentation
+- Improve existing documentation
+- Add examples and tutorials
+- Fix typos and formatting
+- Translate to other languages
 
 ## 🚀 Development Setup
 
 ### Prerequisites
-- Node.js 16+
-- Java 17+ (SDKMAN recommended)
-- Maven 3.6+
-- Git
+- **Node.js** 16+ (LTS recommended)
+- **Java** 17+ (OpenJDK recommended)
+- **Maven** 3.6+
+- **Git** 2.0+
 
-### Local Development
+### Quick Start
 ```bash
 # Clone your fork
 git clone https://github.com/YOUR_USERNAME/Heroes-of-Time.git
 cd Heroes-of-Time
 
-# Install dependencies
-cd frontend && npm install
-cd ../backend && mvn clean install
+# Install frontend dependencies
+cd frontend
+npm install
+
+# Install backend dependencies
+cd ../backend
+mvn clean install
 
 # Start development servers
 # Terminal 1: Backend
-cd backend && mvn spring-boot:run
+cd backend
+mvn spring-boot:run
 
 # Terminal 2: Frontend
-cd frontend && npm start
+cd frontend
+npm start
 ```
 
-## 📝 Coding Standards
+### Verify Setup
+- Backend: http://localhost:8080/api/health
+- Frontend: http://localhost:3000
+- Game should load and be playable
 
-### Frontend (React/TypeScript)
-- Use TypeScript for all new files
-- Follow React Hooks patterns
-- Use Zustand for state management
-- Implement responsive design
-- Add proper error handling
-
-### Backend (Spring Boot/Java)
-- Follow Spring Boot conventions
-- Use proper REST API design
-- Implement proper error handling
-- Add unit tests for business logic
-- Follow hexagonal architecture
+## 📝 Development Guidelines
 
 ### Code Style
-- Use meaningful variable names
-- Add comments for complex logic
-- Follow existing patterns
-- Keep functions small and focused
-- Use proper TypeScript types
 
-## 🎮 Game Design Guidelines
+#### Backend (Java)
+```java
+// Use descriptive names
+public class GameService {
+    
+    // Document complex methods
+    /**
+     * Processes a hero move action with validation
+     * @param heroId The ID of the hero to move
+     * @param position The target position
+     * @return ActionResult containing success/failure
+     */
+    public ActionResult moveHero(String heroId, Position position) {
+        // Implementation
+    }
+}
+```
 
-### ZFC System
-- Maintain backward compatibility
-- Consider performance implications
-- Test with multiple players
-- Ensure visual clarity
-- Document algorithm changes
+#### Frontend (TypeScript)
+```typescript
+// Use interfaces for type safety
+interface GameState {
+    currentTurn: number;
+    players: Player[];
+    gameMap: HexTile[][];
+}
 
-### Political System
-- Balance advisor personalities
-- Create meaningful choices
-- Consider long-term consequences
-- Maintain historical accuracy
-- Test decision trees
+// Use descriptive component names
+const EnhancedScenarioSelector: React.FC = () => {
+    // Component logic
+};
+```
 
-### UI/UX
-- Maintain the fantasy theme
-- Ensure accessibility
-- Test on different screen sizes
-- Provide clear feedback
-- Use consistent animations
+### Testing Requirements
 
-## 🧪 Comprehensive Testing Requirements
+#### Backend Tests
+```java
+@SpringBootTest
+class GameServiceTest {
+    
+    @Test
+    void shouldCreateGameSuccessfully() {
+        // Arrange
+        GameConfig config = new GameConfig();
+        
+        // Act
+        Game game = gameService.createGame(config);
+        
+        // Assert
+        assertThat(game.getId()).isNotNull();
+        assertThat(game.getStatus()).isEqualTo(GameStatus.WAITING);
+    }
+}
+```
 
-### Backend Testing (44 Tests)
+#### Frontend Tests
+```typescript
+describe('GameStore', () => {
+    test('should load game correctly', async () => {
+        // Arrange
+        const gameId = 'test-game-1';
+        
+        // Act
+        await gameStore.loadGame(gameId);
+        
+        // Assert
+        expect(gameStore.currentGame).toBeDefined();
+        expect(gameStore.currentGame?.id).toBe(gameId);
+    });
+});
+```
+
+#### E2E Tests
+```typescript
+describe('Game Flow', () => {
+    it('should allow complete game playthrough', () => {
+        cy.visit('/');
+        cy.contains('🎮 Heroes of Time 🎮').should('be.visible');
+        cy.get('[data-testid="start-game-button"]').click();
+        cy.url().should('include', '/game/');
+        // Continue testing game flow
+    });
+});
+```
+
+### Git Workflow
+
+#### Branch Naming
+- **Features**: `feature/hero-movement-system`
+- **Bug Fixes**: `fix/castle-building-bug`
+- **Documentation**: `docs/api-documentation`
+- **Refactoring**: `refactor/game-service-cleanup`
+
+#### Commit Messages
 ```bash
-cd backend
+# Good commit messages
+feat: add hero movement validation
+fix: resolve castle building resource bug
+docs: update API documentation
+test: add comprehensive combat tests
 
-# Run all backend tests
+# Bad commit messages
+fix bug
+update code
+changes
+```
+
+#### Pull Request Process
+1. **Create Branch**: `git checkout -b feature/your-feature`
+2. **Make Changes**: Implement your feature
+3. **Add Tests**: Ensure comprehensive test coverage
+4. **Update Docs**: Update relevant documentation
+5. **Run Tests**: Verify all tests pass locally
+6. **Commit**: Use conventional commit messages
+7. **Push**: `git push origin feature/your-feature`
+8. **Create PR**: Use the GitHub interface
+9. **Code Review**: Address reviewer feedback
+10. **Merge**: Squash and merge when approved
+
+## 🧪 Testing Strategy
+
+### Test Categories
+
+#### Unit Tests
+- Test individual functions/methods
+- Mock external dependencies
+- Fast execution (< 1 second each)
+- High coverage (> 80%)
+
+#### Integration Tests
+- Test component interactions
+- Use real database (H2 in-memory)
+- Test API endpoints
+- Verify data persistence
+
+#### E2E Tests
+- Test complete user workflows
+- Use Cypress for browser automation
+- Test critical game paths
+- Verify UI interactions
+
+### Running Tests
+```bash
+# Backend tests
+cd backend
 mvn test
 
-# Run specific test class
-mvn test -Dtest=GameControllerTest
-
-# Generate test coverage report
-mvn jacoco:report
-```
-
-**Required Test Coverage:**
-- **GameController**: All REST endpoints must have tests
-- **UnitController**: CRUD operations and localization
-- **MultiplayerController**: WebSocket and session management
-- **Services**: Business logic with >90% coverage
-- **Integration**: End-to-end API testing
-
-### Frontend Testing (26+ Cypress Tests)
-```bash
+# Frontend unit tests
 cd frontend
+npm test
 
-# Run all E2E tests
-npm run test:e2e
+# E2E tests
+cd frontend
+npx cypress run
 
-# Open Cypress test runner
-npx cypress open
-
-# Run specific test file
-npx cypress run --spec "cypress/e2e/09-corrected-comprehensive-tests.cy.js"
+# All tests
+./test-full-suite.sh
 ```
 
-**Required Test Coverage:**
-- **Screen Tests**: All major UI components
-- **Language Tests**: French, English, Russian switching
-- **Map Tests**: Classic and Mystique functionality
-- **Performance Tests**: Load testing and error handling
-- **Accessibility Tests**: Keyboard navigation and WCAG compliance
+## 📋 Issue Guidelines
 
-### Test Requirements for Contributions
-- **New Backend Features**: Must include comprehensive unit tests
-- **New Frontend Features**: Must include Cypress E2E tests
-- **API Changes**: Must update existing tests
-- **UI Changes**: Must pass accessibility tests
-- **Performance**: Must not degrade existing benchmarks
+### Bug Reports
+Use this template:
+```markdown
+**Bug Description**
+A clear description of the bug.
 
-## 📋 Pull Request Process
+**Steps to Reproduce**
+1. Go to '...'
+2. Click on '....'
+3. See error
 
-1. **Create a Feature Branch**
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
+**Expected Behavior**
+What should happen.
 
-2. **Make Your Changes**
-   - Follow coding standards
-   - Add comprehensive tests
-   - Update documentation
+**Actual Behavior**
+What actually happens.
 
-3. **Test Thoroughly**
-   - Run all 44 backend tests: `mvn test`
-   - Run all 26+ frontend tests: `npm run test:e2e`
-   - Test manually across devices
-   - Check performance benchmarks
+**Environment**
+- OS: [e.g., Windows 10, macOS 12]
+- Browser: [e.g., Chrome 91, Firefox 89]
+- Game Version: [e.g., v1.0.0]
 
-4. **Quality Gates**
-   - All tests must pass
-   - Test coverage must not decrease
-   - Performance benchmarks must be maintained
-   - Accessibility standards must be met
-
-5. **Submit Pull Request**
-   - Clear title and description
-   - Reference related issues
-   - Include screenshots if UI changes
-   - Include test results summary
-
-6. **Review Process**
-   - Address feedback
-   - Update tests as needed
-   - Maintain clean commit history
-
-## 🏷️ Commit Messages
-
-Use conventional commits:
-```
-feat: add new political event system
-fix: resolve ZFC calculation bug
-docs: update API documentation
-style: improve code formatting
-refactor: optimize canvas rendering
-test: add unit tests for advisor logic
+**Screenshots**
+If applicable, add screenshots.
 ```
 
-## 🎯 Priority Areas
+### Feature Requests
+Use this template:
+```markdown
+**Feature Summary**
+Brief description of the feature.
 
-### High Priority
-- Performance optimizations
-- Mobile responsiveness
-- Accessibility improvements (WCAG 2.1 AA)
-- Bug fixes
-- Test coverage improvements
+**Problem Statement**
+What problem does this solve?
 
-### Medium Priority
-- New political events
-- Additional advisor types
-- UI/UX enhancements
-- Documentation improvements
-- Multi-language support
+**Proposed Solution**
+How should this work?
 
-### Low Priority
-- New game modes
-- Advanced features
-- Experimental mechanics
-- Community features
+**Alternative Solutions**
+Other approaches considered.
 
-## 🌍 Internationalization
-
-We support multiple languages:
-- English (primary)
-- French (secondary)
-- Russian (implemented)
-- More languages welcome
-
-### Translation Guidelines
-- Use translation keys
-- Maintain context
-- Consider cultural differences
-- Test with different text lengths
-- Add Cypress tests for new languages
-
-## 🔧 Development Tools
-
-### Recommended IDE Setup
-- **VS Code** with extensions:
-  - TypeScript Hero
-  - ES7+ React/Redux/React-Native snippets
-  - Prettier
-  - ESLint
-  - GitLens
-
-### Debug Configuration
-```bash
-# Frontend debugging
-npm run start:debug
-
-# Backend debugging
-mvn spring-boot:run -Dspring-boot.run.jvmArguments="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
+**Additional Context**
+Any other relevant information.
 ```
 
-## 📞 Communication
+## 🎮 Game Development Guidelines
 
-### Discord Server
-Join our community: [Discord Invite](#)
+### Game Balance
+- Consider impact on all game modes
+- Test with different player counts
+- Maintain strategic depth
+- Avoid overpowered combinations
 
-### GitHub Discussions
-Use for:
-- Feature discussions
-- Architecture decisions
-- Community questions
-- Showcase contributions
+### User Experience
+- Intuitive interface design
+- Clear visual feedback
+- Responsive interactions
+- Accessibility considerations
+
+### Performance
+- Optimize for 60 FPS gameplay
+- Minimize memory usage
+- Efficient network communication
+- Fast loading times
 
 ## 🏆 Recognition
 
-Contributors will be:
-- Added to the credits
-- Mentioned in release notes
-- Invited to beta testing
-- Given special Discord roles
+### Contributors
+We recognize contributors through:
+- GitHub contributor graph
+- Release notes mentions
+- Special contributor badges
+- Community Discord roles
+
+### Types of Contributions
+- **Code** - Features, bug fixes, optimizations
+- **Documentation** - Guides, API docs, tutorials
+- **Testing** - Bug reports, test cases, QA
+- **Design** - UI/UX, graphics, animations
+- **Community** - Support, moderation, feedback
+
+## 📞 Getting Help
+
+### Channels
+- **GitHub Issues** - Bug reports and feature requests
+- **GitHub Discussions** - General questions and ideas
+- **Discord** - Real-time chat and support
+- **Email** - Direct contact for sensitive issues
+
+### Response Times
+- **Critical Bugs** - Within 24 hours
+- **Feature Requests** - Within 1 week
+- **Documentation** - Within 3 days
+- **General Questions** - Within 2 days
 
 ## 📄 License
 
-By contributing, you agree that your contributions will be licensed under the MIT License.
-
-## ❓ Questions?
-
-- Check the [FAQ](https://github.com/V0OgZ/Heroes-of-Time/wiki/FAQ)
-- Ask in [Discussions](https://github.com/V0OgZ/Heroes-of-Time/discussions)
-- Contact [@V0OgZ](https://github.com/V0OgZ)
+By contributing to Heroes of Time, you agree that your contributions will be licensed under the MIT License.
 
 ---
 
-**Thank you for contributing to Heroes of Time!** 🎮✨ 
-
-*The future of strategy gaming starts with your contributions.* 🔮 
+**Thank you for helping make Heroes of Time better! 🎮** 

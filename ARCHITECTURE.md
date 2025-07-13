@@ -1,504 +1,460 @@
-# 🏗️ Heroes of Time - Technical Architecture
+# 🏗️ Heroes of Time - System Architecture
 
 ## 📋 Overview
 
-**Heroes of Time** is a turn-based strategy game with advanced temporal mechanics, developed with a modern **React + Spring Boot** architecture.
+**Heroes of Time** is built with a modern **microservices-inspired architecture** using **React + Spring Boot**, designed for scalability, real-time multiplayer, and maintainability.
 
-### 🎯 Scenario Architectures
-
-- **🏰 Classic Conquest** : Traditional Heroes gameplay with hexagons
-- **🔮 Mystique Conquest** : Same interface + integrated magical and temporal objects
-
----
-
-## 🧠 Intelligence Distribution
-
-### 🖥️ **BACKEND (Spring Boot) - MAIN INTELLIGENCE**
-
-#### 📍 Location
-```
-backend/src/main/java/com/example/demo/service/GameService.java (7.4KB)
-```
-
-#### 🎯 Critical Responsibilities
-- **Combat System** : Battle resolution, damage calculations
-- **Movement Validation** : Movement verification, movement costs
-- **Resource Management** : Gold/wood/stone/mana management
-- **ZFC Algorithms** : Causality Zone calculations for temporal system
-- **Action Scheduling** : Scheduled actions with 30-second delays
-- **Victory Conditions** : Victory condition verification
-- **Turn Management** : Turn management and transitions
-
-#### 🛡️ REST Endpoints
-```
-📍 backend/src/main/java/com/example/demo/controller/GameController.java (4.5KB)
-```
-
-| Endpoint | Method | Function |
-|----------|--------|----------|
-| `/api/games/{gameId}` | GET | Retrieve game state |
-| `/api/heroes/{heroId}/move` | POST | Move hero |
-| `/api/heroes/{heroId}/attack` | POST | Attack target |
-| `/api/heroes/{heroId}/collect` | POST | Collect resource |
-| `/api/games/{gameId}/end-turn` | POST | End turn |
-| `/api/games/{gameId}/state` | GET | State polling |
+### 🎯 Architecture Principles
+- **Separation of Concerns** - Clear layer boundaries
+- **Real-time Communication** - WebSocket integration
+- **Stateless Backend** - RESTful API design
+- **Reactive Frontend** - Event-driven UI updates
+- **Testable Code** - Comprehensive testing strategy
 
 ---
 
-### 🔮 **FRONTEND (React) - INTERFACE & TEMPORAL INTELLIGENCE**
+## 🧠 System Intelligence Distribution
 
-#### 📍 State Stores (Zustand)
+### 🖥️ Backend (Spring Boot) - Core Game Logic
 
-**🎮 useGameStore.ts (13KB)**
-```typescript
-📍 frontend/src/store/useGameStore.ts
+#### 📍 Primary Components
 ```
-- **Game State Management** : Global game state
-- **Hero Actions** : Hero actions with backend
-- **ZFC Integration** : Causality zone calculations integration
-- **Hot Seat Mode** : Local multiplayer mode management
-
-**⏰ useTemporalStore.ts (11KB)**
-```typescript
-📍 frontend/src/store/useTemporalStore.ts
+backend/src/main/java/com/example/demo/
+├── service/GameService.java           # Main game engine
+├── service/BuildingService.java       # Castle management
+├── service/AIService.java             # AI opponents
+├── service/MultiplayerService.java    # Session management
+└── service/ScenarioService.java       # Game scenarios
 ```
-- **Timeline Management** : Timeline management
-- **Entropy System** : Anti-spam entropy calculations
-- **Spacetime Conflicts** : Temporal conflict resolution
-- **Shadow Actions** : Shadow actions and predictions
-- **Game Loop** : Game loop with lifecycle control
+
+#### 🎯 Backend Responsibilities
+- **🎮 Game State Management** - Authoritative game state
+- **⚔️ Combat Resolution** - Battle calculations and outcomes
+- **🏰 Building System** - Construction and upgrade logic
+- **🤖 AI Decision Making** - Computer player intelligence
+- **🌐 Multiplayer Coordination** - Session and player management
+- **💾 Data Persistence** - Database operations and caching
+- **🔐 Validation** - Input validation and security
+- **📊 Analytics** - Performance metrics and logging
+
+### 🎨 Frontend (React) - User Interface & Experience
+
+#### 📍 Primary Components
+```
+frontend/src/
+├── components/EnhancedScenarioSelector.tsx  # Game mode selection
+├── components/TrueHeroesInterface.tsx        # Main game interface
+├── components/CastleManagement.tsx           # Building management
+├── components/MagicInventory.tsx             # Item system
+├── store/useGameStore.ts                     # State management
+└── services/api.ts                           # Backend communication
+```
+
+#### 🎯 Frontend Responsibilities
+- **🎨 User Interface** - Interactive game presentation
+- **📱 Responsive Design** - Multi-device compatibility
+- **🔄 State Management** - Local state synchronization
+- **🌐 API Communication** - Backend service integration
+- **🎭 Animation System** - Visual effects and transitions
+- **🌍 Internationalization** - Multi-language support
+- **📊 Performance Optimization** - Efficient rendering
 
 ---
 
-## 🗺️ Map Generation and Management
-
-### 🎨 **FRONTEND - PROCEDURAL GENERATION**
-
-#### 📍 Map Generators
-```
-📍 frontend/src/utils/advancedMapGenerator.ts (18KB)
-📍 frontend/src/utils/hexMapGenerator.ts (4.5KB) 
-📍 frontend/src/utils/mapGenerator.ts (9.1KB)
-```
-
-#### 🌍 Features
-- **Complex Terrains** : Forests, mountains, swamps, deserts
-- **Hexagonal Grids** : Hexagonal system as desired
-- **Strategic Placement** : Intelligently positioned resources and enemies
-- **Runtime Generation** : Maps created at runtime
-- **Multiple Biomes** : Environmental variations
-
-### 🖥️ **BACKEND - DEMO MAPS**
-
-#### 📍 Mock Data
-```java
-// In GameService.java - createMockGame()
-10x10 Map with :
-- Grass/forest tiles
-- Objects : chests (x:3,y:3), enemies (x:7,y:7)  
-- Differentiated movement costs
-```
-
----
-
-## 🎒 Magic Object System
-
-### 🔮 **COMPLETE COLLECTION (30+ Objects)**
-
-#### 📍 Location
-```typescript
-📍 frontend/src/data/magicObjects.ts (9.4KB)
-```
-
-#### 📦 Object Categories
-
-| Type | Quantity | Examples | Effects |
-|------|----------|----------|---------|
-| **⚔️ Weapons** | 4 | Novice Sword → Excalibur | +2 to +12 Attack |
-| **🛡️ Armor** | 4 | Leather → Dragon Scales | +2 to +10 Defense |
-| **💍 Accessories** | 4 | Rings, Amulets, Boots | Various bonuses |
-| **⭐ Artifacts** | 3 | Crown of Kings, Archmagus Staff | Multiple bonuses |
-| **⏰ Temporal** | 4 | Anchor, Prism, Eternal Hourglass | Temporal mana |
-| **🧪 Consumables** | 4 | Potions, Scrolls | Instant effects |
-| **💰 Resources** | 3 | Gold piles, Chests | Resources |
-
-#### 🎨 Rarity System
-- **⚪ Common** : Basic objects
-- **🟢 Uncommon** : Improved objects  
-- **🔵 Rare** : Powerful objects
-- **🟣 Epic** : Very rare objects
-- **🟡 Legendary** : Legendary objects
-- **🌸 Temporal** : Unique temporal objects
-
----
-
-## 🏛️ UI Component Architecture
-
-### 🎮 **UNIFIED INTERFACE**
-
-#### 📍 Main Component
-```typescript
-📍 frontend/src/components/TrueHeroesInterface.tsx
-```
-
-**🎯 Scenario Management**
-- **Classic Conquest** : Standard interface
-- **Mystique Conquest** : Interface + MagicInventory overlay
-
-#### 🧩 Key Components
-
-| Component | File | Function |
-|-----------|------|----------|
-| **🎮 TrueHeroesInterface** | `TrueHeroesInterface.tsx` | Unified interface 2 scenarios |
-| **🛡️ SimpleGameInterface** | `SimpleGameInterface.tsx` | Main game interface |
-| **🎨 ModernGameRenderer** | `ModernGameRenderer.tsx` | Hexagonal rendering engine |
-| **🎒 MagicInventory** | `MagicInventory.tsx` | Advanced magic inventory |
-| **⏰ TemporalInterface** | `TemporalInterface.tsx` | Temporal interface |
-
----
-
-## 🔄 Data Flow
-
-### 📊 **DATA FLOW ARCHITECTURE**
-
-```mermaid
-graph LR
-    A[User Action] --> B[TrueHeroesInterface]
-    B --> C[useGameStore]
-    C --> D[api.ts]
-    D --> E[GameController]
-    E --> F[GameService]
-    F --> G[Business Logic]
-    G --> H[Response]
-    H --> I[Store Update]
-    I --> J[UI Refresh]
-```
-
-### 🌐 **BACKEND COMMUNICATION**
-
-#### 📍 API Service
-```typescript
-📍 frontend/src/services/api.ts (3.2KB)
-📍 frontend/src/services/gameService.ts (8.8KB)
-```
-
-**🔌 Integration**
-- **HTTP Client** : Axios for REST calls
-- **Error Handling** : Centralized error management
-- **State Sync** : Backend state synchronization
-- **CORS Setup** : Cross-origin configuration
-
----
-
-## 💾 Data Management
-
-### 🗄️ **CURRENT STORAGE**
-
-#### ❌ **No Database**
-- **Backend** : Mock data in memory (RAM)
-- **Frontend** : Zustand stores in memory
-- **Persistence** : None (data lost on restart)
-
-#### 📊 **Backend Mock Data**
-```java
-// GameService.createMockGame()
-- 2 predefined players (Arthur, Morgane)
-- Heroes with complete stats
-- Initial resources (500 gold, 100 wood, 50 stone, 25 mana)
-- 10x10 Map with objects
-```
-
-### 🔮 **Frontend Temporal Data**
-```typescript
-// useTemporalStore.ts
-- Timeline actions
-- Shadow actions  
-- Entropy monitoring
-- Zone conflicts
-```
-
----
-
-## 🧪 Comprehensive Testing Architecture
-
-### 🔍 **BACKEND TESTING SUITE (44 Tests)**
-
-#### 📍 Test Coverage
-```
-📍 backend/src/test/java/com/example/demo/controller/
-```
-
-| Controller | Tests | Coverage |
-|------------|-------|----------|
-| **🎮 GameController** | 15 tests | Games, heroes, actions, combat, health endpoints |
-| **🛡️ UnitController** | 20+ tests | Localized units, castle rosters, CRUD operations |
-| **🌐 MultiplayerController** | 9 tests | REST endpoints, WebSocket handlers |
-
-#### 🛠️ Testing Framework
-- **JUnit 5** : Modern testing framework
-- **Spring Boot Test** : Integration testing
-- **MockMvc** : HTTP endpoint testing
-- **Mockito** : Service mocking
-- **Comprehensive Coverage** : All business logic tested
-
-### 🎯 **FRONTEND TESTING SUITE (26 Cypress Tests)**
-
-#### 📍 Test Coverage
-```
-📍 frontend/cypress/e2e/09-corrected-comprehensive-tests.cy.js
-```
-
-| Test Category | Tests | Coverage |
-|---------------|-------|----------|
-| **🎮 Game Screens** | 8 tests | All major UI screens and navigation |
-| **🌐 Language Support** | 6 tests | French, English, Russian switching |
-| **🗺️ Map Loading** | 4 tests | Classic and Mystique map functionality |
-| **⚡ Performance** | 3 tests | Load testing, error handling |
-| **📱 Responsive** | 3 tests | Desktop, tablet, mobile viewports |
-| **♿ Accessibility** | 2 tests | Keyboard navigation, usability |
-
-#### 🛠️ Testing Framework
-- **Cypress** : Modern E2E testing
-- **Custom Fixtures** : Mock data and scenarios
-- **Multi-viewport** : Responsive design testing
-- **Performance Testing** : Load and stress testing
-- **Accessibility Testing** : WCAG compliance
-
----
-
-## 🚀 Deployment and Environment
-
-### 🌐 **DEVELOPMENT SERVERS**
-
-| Service | URL | Port | Technology |
-|---------|-----|------|-------------|
-| **Frontend** | `http://localhost:3000` | 3000 | React Dev Server |
-| **Backend** | `http://localhost:8080` | 8080 | Spring Boot Embedded |
-
-### 🔧 **CONFIGURATION**
-
-#### Frontend (package.json)
-```json
-{
-  "name": "frontend",
-  "dependencies": {
-    "react": "^18.x",
-    "zustand": "^4.x", 
-    "axios": "^1.x",
-    "cypress": "^13.x"
-  }
-}
-```
-
-#### Backend (pom.xml)
-```xml
-<dependencies>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-starter-web</artifactId>
-  <artifactId>spring-boot-starter-test</artifactId>
-</dependencies>
-```
-
----
-
-## 🎯 Advanced Game Mechanics
-
-### ⏰ **TEMPORAL SYSTEM (Mystique Mode)**
-
-#### 🔮 Zones of Causality (ZFC)
-```typescript
-interface ZoneOfCausality {
-  playerId: string;
-  radius: number;
-  center: Position;
-  includesTeleport: boolean;
-  validUntil: number;
-  reachableTiles: Position[];
-  conflictZones: Position[];
-}
-```
-
-#### 🎭 Shadow Actions
-- **Predictions** : Visible future actions
-- **Conflicts** : Spatio-temporal conflict detection
-- **Validation** : Action feasibility verification
-
-### 🎮 **UNIFIED GAMEPLAY**
-
-#### 🏰 Classic Mode
-- Traditional Heroes gameplay
-- Turn-based combat
-- Resource management
-- Territory capture
-
-#### 🔮 Mystique Mode
-- **Same interface** as classic
-- **+ Magic Inventory** overlay
-- **+ Temporal Objects** on map
-- **+ ZFC Mechanics** integrated
-
----
-
-## 📁 Project Structure
-
-### 🗂️ **FILE ORGANIZATION**
-
-```
-heroes-of-time/
-├── 🖥️ backend/
-│   └── src/main/java/com/example/demo/
-│       ├── controller/GameController.java    # 🌐 REST API
-│       ├── service/GameService.java          # 🧠 Intelligence
-│       ├── model/Position.java               # 📍 Models
-│       └── test/                             # 🧪 Test Suite
-│           ├── GameControllerTest.java       # 🎮 Game tests
-│           ├── UnitControllerTest.java       # 🛡️ Unit tests
-│           └── MultiplayerControllerTest.java # 🌐 Multiplayer tests
-├── 🌐 frontend/
-│   └── src/
-│       ├── components/                       # 🧩 UI Components
-│       │   ├── TrueHeroesInterface.tsx      # 🎮 Unified interface
-│       │   ├── SimpleGameInterface.tsx      # 🛡️ Main interface  
-│       │   ├── ModernGameRenderer.tsx       # 🎨 Rendering engine
-│       │   └── MagicInventory.tsx           # 🎒 Magic inventory
-│       ├── store/                           # 🗄️ Global state
-│       │   ├── useGameStore.ts              # 🎮 Main store
-│       │   └── useTemporalStore.ts          # ⏰ Temporal store
-│       ├── services/                        # 🔌 Services
-│       │   ├── api.ts                       # 🌐 HTTP client
-│       │   └── gameService.ts               # 🎮 Game service
-│       ├── data/                            # 📊 Data
-│       │   └── magicObjects.ts              # 🎒 Magic objects
-│       ├── utils/                           # 🛠️ Utilities
-│       │   ├── advancedMapGenerator.ts      # 🗺️ Advanced generator
-│       │   ├── hexMapGenerator.ts           # ⬡ Hex generator
-│       │   └── mapGenerator.ts              # 🌍 Base generator
-│       └── cypress/                         # 🧪 E2E Tests
-│           ├── e2e/                         # 🎯 Test scenarios
-│           ├── fixtures/                    # 📊 Mock data
-│           └── support/                     # 🛠️ Test utilities
-└── 📚 Documentation/
-    ├── README.md                            # 📖 User guide
-    ├── ARCHITECTURE.md                      # 🏗️ Technical doc
-    ├── HEROES_REFORGED_COMPLETE_SPEC.md     # 📋 Specifications
-    └── CONTRIBUTING.md                      # 🤝 Contributor guide
-```
-
----
-
-## 🔬 Critical Technical Points
-
-### ⚡ **PERFORMANCE**
-
-#### 🎨 Rendering
-- **HTML5 Canvas** : Optimized hexagonal rendering
-- **RAF Animation** : RequestAnimationFrame for fluidity
-- **Memoization** : React.memo on heavy components
-
-#### 🧠 Backend  
-- **Action Scheduling** : 30s delay for strategic thinking
-- **In-Memory** : No database latency
-- **REST Stateless** : Stateless API for scalability
-
-### 🔄 **STATE AND SYNCHRONIZATION**
-
-#### 🎮 Frontend State Management
-```typescript
-// Zustand stores for performance
-const useGameStore = create<GameStore>((set, get) => ({
-  // Immutable and reactive state
+## 🔌 Communication Architecture
+
+### REST API Endpoints
+
+#### Game Management
+| Endpoint | Method | Purpose | Response |
+|----------|--------|---------|----------|
+| `/api/games/{id}` | GET | Get game state | Game object |
+| `/api/games` | POST | Create new game | Game ID |
+| `/api/games/{id}/join` | POST | Join game | Updated game |
+| `/api/games/{id}/end-turn` | POST | End current turn | Turn result |
+
+#### Hero Actions
+| Endpoint | Method | Purpose | Response |
+|----------|--------|---------|----------|
+| `/api/heroes/{id}/move` | POST | Move hero | Action result |
+| `/api/heroes/{id}/attack` | POST | Attack target | Combat result |
+| `/api/heroes/{id}/collect` | POST | Collect resource | Resource update |
+
+#### Castle System
+| Endpoint | Method | Purpose | Response |
+|----------|--------|---------|----------|
+| `/api/games/{id}/buildings` | GET | List buildings | Building array |
+| `/api/games/{id}/buildings/construct` | POST | Build structure | Construction result |
+| `/api/games/{id}/buildings/{id}/upgrade` | POST | Upgrade building | Upgrade result |
+
+### WebSocket Communication
+
+#### Connection Flow
+```javascript
+// 1. Client connects to WebSocket
+const socket = new SockJS('/ws');
+const stompClient = Stomp.over(socket);
+
+// 2. Subscribe to game updates
+stompClient.subscribe('/topic/game/' + gameId, (message) => {
+    const update = JSON.parse(message.body);
+    handleGameUpdate(update);
+});
+
+// 3. Send game actions
+stompClient.send('/app/game.action', {}, JSON.stringify({
+    type: 'MOVE_HERO',
+    heroId: 'hero-123',
+    position: { x: 5, y: 3 }
 }));
 ```
 
-#### 🌐 Backend-Frontend Sync
-```typescript
-// State polling every 30s
-useEffect(() => {
-  const interval = setInterval(() => {
-    refreshGameState();
-  }, 30000);
-  return () => clearInterval(interval);
-}, []);
+#### Message Types
+- **GAME_UPDATE** - Game state changes
+- **PLAYER_ACTION** - Player action notifications
+- **TURN_CHANGE** - Turn progression updates
+- **COMBAT_RESULT** - Battle outcome notifications
+
+---
+
+## 💾 Data Architecture
+
+### Database Schema (H2/PostgreSQL)
+
+#### Core Entities
+```sql
+-- Game Sessions
+CREATE TABLE game_sessions (
+    id BIGINT PRIMARY KEY,
+    session_id VARCHAR(255) UNIQUE NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    max_players INTEGER NOT NULL,
+    current_players INTEGER DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Buildings
+CREATE TABLE buildings (
+    id VARCHAR(255) PRIMARY KEY,
+    castle_id VARCHAR(255) NOT NULL,
+    player_id VARCHAR(255) NOT NULL,
+    game_id VARCHAR(255) NOT NULL,
+    building_type VARCHAR(100) NOT NULL,
+    level INTEGER DEFAULT 1,
+    position_x INTEGER,
+    position_y INTEGER,
+    construction_time INTEGER DEFAULT 0,
+    is_constructed BOOLEAN DEFAULT FALSE
+);
+
+-- AI Players
+CREATE TABLE ai_players (
+    id VARCHAR(255) PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    difficulty VARCHAR(50) NOT NULL,
+    personality VARCHAR(50) NOT NULL,
+    game_id VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Scenarios
+CREATE TABLE scenarios (
+    id BIGINT PRIMARY KEY,
+    scenario_id VARCHAR(255) UNIQUE NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    difficulty VARCHAR(50) NOT NULL,
+    max_players INTEGER NOT NULL,
+    victory_condition VARCHAR(100) NOT NULL,
+    is_active BOOLEAN DEFAULT TRUE
+);
 ```
 
-### 🧪 **QUALITY ASSURANCE**
+### State Management (Frontend)
 
-#### 📊 Test Metrics
-- **Backend Coverage** : 44 comprehensive unit tests
-- **Frontend Coverage** : 26 E2E tests covering all screens
-- **API Coverage** : 100% endpoint testing
-- **UI Coverage** : Complete user flow testing
-- **Performance Testing** : Load and stress testing
-- **Accessibility Testing** : WCAG compliance validation
-
----
-
-## 🚀 Future Evolutions
-
-### 🗄️ **DATABASE**
-- **PostgreSQL** for persistence
-- **Redis** for session cache
-- **Spring Boot Migrations**
-
-### 🌐 **REAL-TIME MULTIPLAYER**
-- **WebSockets** for real-time
-- **Game Rooms** for multiple sessions
-- **Spectator Mode** for observers
-
-### 🔮 **ADVANCED MECHANICS**
-- **AI Players** : AI for missing players
-- **Replay System** : Replay complete games
-- **Map Editor** : Custom map editor
-
----
-
-## 📊 Technical Metrics
-
-### 📈 **CODEBASE SIZE**
-
-| Component | Files | Lines | Size |
-|-----------|-------|-------|------|
-| **Backend Java** | 6 | ~800 | ~25KB |
-| **Frontend TS/React** | 25+ | ~3000+ | ~150KB+ |
-| **Tests** | 12 | ~2000 | ~80KB |
-| **Documentation** | 10 | ~2000 | ~100KB |
-| **Assets/Config** | 15+ | ~800 | ~30KB |
-
-### ⚡ **MEASURED PERFORMANCE**
-- **Build Time** : ~30s (frontend)
-- **Hot Reload** : <2s
-- **API Response** : <100ms (local)
-- **Map Generation** : <500ms
-- **Test Execution** : Backend <30s, Frontend <3min
-
-### 🧪 **TEST COVERAGE**
-- **Backend Unit Tests** : 44 tests covering all controllers
-- **Frontend E2E Tests** : 26 tests covering all screens
-- **API Coverage** : 100% of REST endpoints
-- **UI Coverage** : All major components and workflows
-- **Performance Testing** : Load testing and error handling
-- **Accessibility Testing** : Keyboard navigation and WCAG compliance
+#### Zustand Store Structure
+```typescript
+interface GameStore {
+    // Core game state
+    currentGame: Game | null;
+    gameMap: HexTile[][];
+    selectedHero: Hero | null;
+    currentPlayer: Player | null;
+    
+    // UI state
+    isLoading: boolean;
+    error: string | null;
+    selectedTile: HexTile | null;
+    
+    // Game actions
+    loadGame: (gameId: string) => Promise<void>;
+    moveHero: (heroId: string, position: Position) => Promise<void>;
+    attackTarget: (heroId: string, targetId: string) => Promise<void>;
+    endTurn: () => Promise<void>;
+    
+    // Magic system
+    playerInventory: MagicObject[];
+    equippedItems: Record<string, MagicObject>;
+    equipItem: (item: MagicObject) => void;
+    unequipItem: (slotId: string) => void;
+    
+    // Multiplayer
+    multiplayerSession: MultiplayerSession | null;
+    joinSession: (sessionId: string) => Promise<void>;
+    leaveSession: () => Promise<void>;
+}
+```
 
 ---
 
-## 🎮 Unique Game Architecture
+## 🔄 System Flow
 
-### 🌟 **MAIN INNOVATION**
+### Game Initialization
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Frontend
+    participant Backend
+    participant Database
+    
+    Client->>Frontend: Select game mode
+    Frontend->>Backend: POST /api/games
+    Backend->>Database: Create game record
+    Database-->>Backend: Game ID
+    Backend->>Backend: Initialize game state
+    Backend-->>Frontend: Game object
+    Frontend->>Frontend: Load game interface
+    Frontend-->>Client: Display game
+```
 
-**A single interface for two completely different game modes** :
+### Turn Processing
+```mermaid
+sequenceDiagram
+    participant Player
+    participant Frontend
+    participant Backend
+    participant AI
+    
+    Player->>Frontend: Perform action
+    Frontend->>Backend: POST /api/heroes/{id}/move
+    Backend->>Backend: Validate action
+    Backend->>Backend: Update game state
+    Backend-->>Frontend: Action result
+    Frontend->>Frontend: Update UI
+    
+    Backend->>AI: Process AI turn
+    AI->>Backend: AI actions
+    Backend->>Backend: Update game state
+    Backend-->>Frontend: Turn complete
+```
 
-1. **🏰 Classic Conquest** : Classic Heroes with modern rendering
-2. **🔮 Mystique Conquest** : Same interface + magical/temporal objects
-
-### 🎯 **ARCHITECTURAL ADVANTAGES**
-
-- **Code Reuse** : One interface for two experiences
-- **Simplified Maintenance** : One UI codebase to maintain  
-- **Consistent UX** : Smooth transition between modes
-- **Scalability** : Easy to add new scenarios
+### Multiplayer Synchronization
+```mermaid
+sequenceDiagram
+    participant Player1
+    participant Player2
+    participant Backend
+    participant WebSocket
+    
+    Player1->>Backend: Perform action
+    Backend->>Backend: Process action
+    Backend->>WebSocket: Broadcast update
+    WebSocket-->>Player1: Action confirmed
+    WebSocket-->>Player2: Player1 action
+    Player2->>Player2: Update local state
+```
 
 ---
 
-*Architecture designed for performance, maintainability, and scalability.* 🚀
+## 🏗️ Component Architecture
 
-**Heroes of Time** - *Where strategy meets spacetime* ⏰✨ 
+### Backend Layer Structure
+
+#### Controller Layer
+```java
+@RestController
+@RequestMapping("/api")
+public class GameController {
+    
+    @Autowired
+    private GameService gameService;
+    
+    @GetMapping("/games/{gameId}")
+    public ResponseEntity<Game> getGame(@PathVariable String gameId) {
+        // Handle HTTP request
+    }
+}
+```
+
+#### Service Layer
+```java
+@Service
+@Transactional
+public class GameService {
+    
+    @Autowired
+    private GameRepository gameRepository;
+    
+    public Game createGame(GameConfig config) {
+        // Business logic
+    }
+}
+```
+
+#### Repository Layer
+```java
+@Repository
+public interface GameRepository extends JpaRepository<Game, String> {
+    
+    @Query("SELECT g FROM Game g WHERE g.status = :status")
+    List<Game> findByStatus(@Param("status") GameStatus status);
+}
+```
+
+### Frontend Component Structure
+
+#### Container Components
+```typescript
+// Game page container
+const Game: React.FC = () => {
+    const { gameId } = useParams();
+    const { currentGame, loadGame } = useGameStore();
+    
+    useEffect(() => {
+        loadGame(gameId);
+    }, [gameId]);
+    
+    return <TrueHeroesInterface />;
+};
+```
+
+#### Presentation Components
+```typescript
+// Reusable UI component
+interface HeroCardProps {
+    hero: Hero;
+    onSelect: (hero: Hero) => void;
+}
+
+const HeroCard: React.FC<HeroCardProps> = ({ hero, onSelect }) => {
+    return (
+        <div className="hero-card" onClick={() => onSelect(hero)}>
+            <img src={hero.avatar} alt={hero.name} />
+            <h3>{hero.name}</h3>
+            <p>Level {hero.level}</p>
+        </div>
+    );
+};
+```
+
+---
+
+## 🔧 Configuration & Deployment
+
+### Development Environment
+```yaml
+# docker-compose.yml
+version: '3.8'
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - DB_URL=jdbc:h2:mem:testdb
+    
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      - REACT_APP_API_URL=http://localhost:8080
+```
+
+### Production Configuration
+```properties
+# application-prod.properties
+spring.datasource.url=${DATABASE_URL}
+spring.jpa.hibernate.ddl-auto=validate
+spring.jpa.show-sql=false
+logging.level.root=INFO
+server.port=${PORT:8080}
+```
+
+---
+
+## 📊 Performance Considerations
+
+### Backend Optimization
+- **Connection Pooling** - Efficient database connections
+- **Caching Strategy** - Redis for frequently accessed data
+- **Async Processing** - Non-blocking operations
+- **Query Optimization** - Efficient database queries
+
+### Frontend Optimization
+- **Code Splitting** - Lazy loading of components
+- **Memoization** - React.memo and useMemo
+- **Virtual Scrolling** - Efficient large list rendering
+- **Bundle Optimization** - Webpack optimization
+
+### Network Optimization
+- **Compression** - Gzip response compression
+- **CDN Integration** - Static asset delivery
+- **WebSocket Optimization** - Efficient real-time updates
+- **Request Batching** - Reduce HTTP requests
+
+---
+
+## 🔐 Security Architecture
+
+### Authentication & Authorization
+```java
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+    
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) {
+        return http
+            .cors().and()
+            .csrf().disable()
+            .authorizeRequests()
+            .antMatchers("/api/public/**").permitAll()
+            .anyRequest().authenticated()
+            .and()
+            .build();
+    }
+}
+```
+
+### Input Validation
+```java
+@Valid
+@RequestBody
+public ResponseEntity<Game> createGame(@Valid @RequestBody GameRequest request) {
+    // Validation handled by @Valid annotation
+}
+```
+
+### CORS Configuration
+```java
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+    
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/api/**")
+                .allowedOrigins("http://localhost:3000")
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowCredentials(true);
+    }
+}
+```
+
+---
+
+This architecture provides a solid foundation for a scalable, maintainable, and performant strategy game that can handle real-time multiplayer gameplay while maintaining code quality and developer productivity. 

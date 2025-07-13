@@ -33,6 +33,10 @@ public class MultiplayerService {
     }
     
     public GameSession joinSession(String sessionId, String playerId) {
+        if (sessionId == null || sessionId.equals("undefined")) {
+            throw new RuntimeException("Invalid session ID: " + sessionId);
+        }
+        
         GameSession session = gameSessionRepository.findBySessionId(sessionId)
             .orElseThrow(() -> new RuntimeException("Session not found: " + sessionId));
         
