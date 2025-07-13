@@ -314,6 +314,30 @@ export interface Translation {
   'items.gold_chest.description': string;
   'items.gold_vault.name': string;
   'items.gold_vault.description': string;
+
+  // Scenario Selection
+  selectScenario: string;
+  chooseYourAdventure: string;
+  noScenariosAvailable: string;
+  initializeScenarios: string;
+  category: string;
+  allScenarios: string;
+  singlePlayer: string;
+  multiplayer: string;
+  campaign: string;
+  difficulty: string;
+  allDifficulties: string;
+  beginner: string;
+  intermediate: string;
+  expert: string;
+  mapSize: string;
+  players: string;
+  duration: string;
+  objectives: string;
+  allObjectives: string;
+  rewards: string;
+  startScenario: string;
+  scenarioLocked: string;
 }
 
 // Traductions françaises
@@ -627,6 +651,30 @@ const frenchTranslations: Translation = {
   'items.gold_chest.description': 'Un coffre d\'or qui peut contenir beaucoup d\'or.',
   'items.gold_vault.name': 'Coffre-fort d\'or',
   'items.gold_vault.description': 'Un coffre-fort d\'or qui est très sécurisé.',
+
+  // Scenario Selection
+  selectScenario: 'Sélectionner un scénario',
+  chooseYourAdventure: 'Choisissez votre aventure',
+  noScenariosAvailable: 'Aucun scénario disponible',
+  initializeScenarios: 'Initialiser les scénarios',
+  category: 'Catégorie',
+  allScenarios: 'Tous les scénarios',
+  singlePlayer: 'Joueur unique',
+  multiplayer: 'Multijoueur',
+  campaign: 'Campagne',
+  difficulty: 'Difficulté',
+  allDifficulties: 'Toutes les difficultés',
+  beginner: 'Débutant',
+  intermediate: 'Intermédiaire',
+  expert: 'Expert',
+  mapSize: 'Taille de la carte',
+  players: 'Joueurs',
+  duration: 'Durée',
+  objectives: 'Objectifs',
+  allObjectives: 'Tous les objectifs',
+  rewards: 'Récompenses',
+  startScenario: 'Démarrer le scénario',
+  scenarioLocked: 'Verrouillé',
 };
 
 // Traductions anglaises
@@ -940,6 +988,30 @@ const englishTranslations: Translation = {
   'items.gold_chest.description': 'A gold chest that can contain a lot of gold.',
   'items.gold_vault.name': 'Gold Vault',
   'items.gold_vault.description': 'A very secure gold vault.',
+
+  // Scenario Selection
+  selectScenario: 'Choose a scenario',
+  chooseYourAdventure: 'Choose your adventure',
+  noScenariosAvailable: 'No scenarios available',
+  initializeScenarios: 'Initialize scenarios',
+  category: 'Category',
+  allScenarios: 'All Scenarios',
+  singlePlayer: 'Single Player',
+  multiplayer: 'Multiplayer',
+  campaign: 'Campaign',
+  difficulty: 'Difficulty',
+  allDifficulties: 'All Difficulties',
+  beginner: 'Beginner',
+  intermediate: 'Intermediate',
+  expert: 'Expert',
+  mapSize: 'Map Size',
+  players: 'Players',
+  duration: 'Duration',
+  objectives: 'Objectives',
+  allObjectives: 'All Objectives',
+  rewards: 'Rewards',
+  startScenario: 'Start Scenario',
+  scenarioLocked: 'Locked',
 };
 
 // Traductions russes
@@ -1253,6 +1325,30 @@ const russianTranslations: Translation = {
   'items.gold_chest.description': 'Золотой сундук, который может содержать много золота.',
   'items.gold_vault.name': 'Золотой сейф',
   'items.gold_vault.description': 'Очень надежный золотой сейф.',
+
+  // Scenario Selection
+  selectScenario: 'Выберите сценарий',
+  chooseYourAdventure: 'Выберите свою приключение',
+  noScenariosAvailable: 'Сценариев нет',
+  initializeScenarios: 'Инициализировать сценарии',
+  category: 'Категория',
+  allScenarios: 'Все сценарии',
+  singlePlayer: 'Одиночная игра',
+  multiplayer: 'Мультиплеер',
+  campaign: 'Кампания',
+  difficulty: 'Сложность',
+  allDifficulties: 'Все сложности',
+  beginner: 'Начинающий',
+  intermediate: 'Средний',
+  expert: 'Эксперт',
+  mapSize: 'Размер карты',
+  players: 'Игроки',
+  duration: 'Продолжительность',
+  objectives: 'Цели',
+  allObjectives: 'Все цели',
+  rewards: 'Награды',
+  startScenario: 'Начать сценарий',
+  scenarioLocked: 'Заблокировано',
 };
 
 // Helper function to get translations

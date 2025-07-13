@@ -198,7 +198,58 @@ export class ApiService {
     });
   }
 
-  // AI Players
+  // Scenario management
+  static async getAllScenarios(): Promise<any> {
+    return this.makeRequest('/scenarios');
+  }
+
+  static async getScenarioById(scenarioId: string): Promise<any> {
+    return this.makeRequest(`/scenarios/${scenarioId}`);
+  }
+
+  static async getActiveScenarios(): Promise<any> {
+    return this.makeRequest('/scenarios/active');
+  }
+
+  static async getScenariosByDifficulty(difficulty: string): Promise<any> {
+    return this.makeRequest(`/scenarios/difficulty/${difficulty}`);
+  }
+
+  static async getSinglePlayerScenarios(): Promise<any> {
+    return this.makeRequest('/scenarios/single-player');
+  }
+
+  static async getMultiplayerScenarios(): Promise<any> {
+    return this.makeRequest('/scenarios/multiplayer');
+  }
+
+  static async getBeginnerScenarios(): Promise<any> {
+    return this.makeRequest('/scenarios/beginner');
+  }
+
+  static async getCampaignScenarios(): Promise<any> {
+    return this.makeRequest('/scenarios/campaign');
+  }
+
+  static async getScenarioObjectives(scenarioId: string): Promise<any> {
+    return this.makeRequest(`/scenarios/${scenarioId}/objectives`);
+  }
+
+  static async initializeDefaultScenarios(): Promise<any> {
+    return this.makeRequest('/scenarios/initialize-defaults', {
+      method: 'POST'
+    });
+  }
+
+  static async checkVictoryCondition(scenarioId: string): Promise<any> {
+    return this.makeRequest(`/scenarios/${scenarioId}/victory-check`);
+  }
+
+  static async generateScenarioMap(scenarioId: string): Promise<any> {
+    return this.makeRequest(`/scenarios/${scenarioId}/map`);
+  }
+
+  // AI management
   static async getAIPlayer(aiPlayerId: string): Promise<any> {
     return this.makeRequest(`/ai/players/${aiPlayerId}`);
   }

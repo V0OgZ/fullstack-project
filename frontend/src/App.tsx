@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import Game from './pages/Game';
 import LanguageSelector from './components/LanguageSelector';
+import ScenarioSelector from './components/ScenarioSelector';
 import { useTranslation } from './i18n';
 
 const GameSelector: React.FC = () => {
@@ -46,6 +47,21 @@ const GameSelector: React.FC = () => {
       </header>
       
       <div className="game-options">
+        <Link to="/scenarios" className="game-option scenarios">
+          <div className="game-icon">🎯</div>
+          <h2>{t('selectScenario')}</h2>
+          <p>{t('chooseYourAdventure')}</p>
+          <div className="game-features">
+            <span>📚 {t('campaign')}</span>
+            <span>🏰 {t('singlePlayer')}</span>
+            <span>🌐 {t('multiplayer')}</span>
+          </div>
+          <div className="difficulty-indicator easy">{t('allDifficulties')}</div>
+          <button data-testid="scenario-selector-button" className="start-game-btn">
+            Choose Scenario
+          </button>
+        </Link>
+
         <Link to="/game/conquete-classique" className="game-option classic">
           <div className="game-icon">🏰</div>
           <h2>{t('classicConquest')}</h2>
@@ -110,6 +126,10 @@ const App: React.FC = () => {
     <Router>
       <div className="App" data-testid="app-container">
         <Routes>
+          <Route 
+            path="/scenarios" 
+            element={<ScenarioSelector />} 
+          />
           <Route 
             path="/game/:scenarioId" 
             element={<Game />} 
