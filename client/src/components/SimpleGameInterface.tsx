@@ -24,7 +24,7 @@ const SimpleGameInterface: React.FC<SimpleGameInterfaceProps> = ({ scenarioId = 
   const [selectedHeroId, setSelectedHeroId] = useState<string | null>(null);
 
   // State for the active tab
-  const [activeTab, setActiveTab] = useState<'map' | 'heroes' | 'structures' | 'actions'>('map');
+  const [activeTab, setActiveTab] = useState<'map' | 'heroes' | 'structures'>('map');
 
   // Get selected tile info
   const selectedTileInfo = useMemo(() => {
@@ -395,7 +395,7 @@ const SimpleGameInterface: React.FC<SimpleGameInterfaceProps> = ({ scenarioId = 
                 gap: '4px',
                 marginBottom: '16px'
               }}>
-                {(['heroes', 'actions', 'structures'] as const).map(tab => (
+                {(['heroes', 'structures'] as const).map(tab => (
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
@@ -424,9 +424,94 @@ const SimpleGameInterface: React.FC<SimpleGameInterfaceProps> = ({ scenarioId = 
                       }
                     }}
                   >
-                    {tab === 'heroes' ? '⚔️ Heroes' : tab === 'actions' ? '🎯 Actions' : '🏰 Buildings'}
+                    {tab === 'heroes' ? '⚔️ Heroes' : '🏰 Buildings'}
                   </button>
                 ))}
+              </div>
+            </div>
+
+            {/* Game Status */}
+            <div style={{
+              background: 'linear-gradient(135deg, #2c3e50 0%, #34495e 100%)',
+              border: '1px solid #404040',
+              borderRadius: '8px',
+              padding: '15px',
+              marginBottom: '15px'
+            }}>
+              <h3 style={{ 
+                margin: '0 0 10px 0', 
+                fontSize: '14px', 
+                color: '#ffffff',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px'
+              }}>
+                🎮 Game Status
+              </h3>
+              
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div style={{ 
+                  display: 'flex', 
+                  justifyContent: 'space-between', 
+                  alignItems: 'center',
+                  fontSize: '12px'
+                }}>
+                  <span style={{ color: '#b0b0b0' }}>Turn:</span>
+                  <span style={{ color: '#ffffff', fontWeight: '500' }}>
+                    {currentGame?.currentTurn || 1}
+                  </span>
+                </div>
+                
+                <div style={{ 
+                  display: 'flex', 
+                  justifyContent: 'space-between', 
+                  alignItems: 'center',
+                  fontSize: '12px'
+                }}>
+                  <span style={{ color: '#b0b0b0' }}>Player:</span>
+                  <span style={{ color: '#ffffff', fontWeight: '500' }}>
+                    {currentPlayer?.username || 'Unknown'}
+                  </span>
+                </div>
+                
+                <div style={{ 
+                  display: 'flex', 
+                  justifyContent: 'space-between', 
+                  alignItems: 'center',
+                  fontSize: '12px'
+                }}>
+                  <span style={{ color: '#b0b0b0' }}>Heroes:</span>
+                  <span style={{ color: '#ffffff', fontWeight: '500' }}>
+                    {currentPlayer?.heroes?.length || 0}
+                  </span>
+                </div>
+              </div>
+              
+              {/* Natural Click Interface Instructions */}
+              <div style={{ 
+                marginTop: '12px', 
+                padding: '10px', 
+                background: 'rgba(46, 204, 113, 0.1)',
+                border: '1px solid rgba(46, 204, 113, 0.3)',
+                borderRadius: '6px'
+              }}>
+                <h4 style={{ 
+                  margin: '0 0 6px 0', 
+                  color: '#2ecc71',
+                  fontSize: '12px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '4px'
+                }}>
+                  🎯 Natural Controls
+                </h4>
+                <div style={{ fontSize: '11px', color: '#b0b0b0', lineHeight: '1.3' }}>
+                  <div>• Click hero to select</div>
+                  <div>• Click tile to move</div>
+                  <div>• Click enemy to attack</div>
+                  <div>• Click resource to collect</div>
+                  <div>• ESC to deselect</div>
+                </div>
               </div>
             </div>
 
@@ -720,134 +805,7 @@ const SimpleGameInterface: React.FC<SimpleGameInterfaceProps> = ({ scenarioId = 
                 </div>
               )}
 
-              {activeTab === 'actions' && (
-                <div style={{ padding: '15px' }}>
-                  <h3 style={{ 
-                    margin: '0 0 15px 0', 
-                    fontSize: '16px', 
-                    color: '#ffffff',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '8px'
-                  }}>
-                    🎯 Available Actions
-                  </h3>
-                  
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    <button style={{
-                      padding: '10px 15px', background: '#2ecc71', border: 'none',
-                      borderRadius: '6px', color: 'white', cursor: 'pointer',
-                      fontWeight: '500', transition: 'all 0.2s ease',
-                      display: 'flex', alignItems: 'center', gap: '8px'
-                    }}
-                      onMouseOver={(e) => {
-                        e.currentTarget.style.background = '#27ae60';
-                        e.currentTarget.style.transform = 'translateY(-1px)';
-                      }}
-                      onMouseOut={(e) => {
-                        e.currentTarget.style.background = '#2ecc71';
-                        e.currentTarget.style.transform = 'translateY(0px)';
-                      }}
-                    >
-                      🚶 Move Hero
-                    </button>
-                    
-                    <button style={{
-                      padding: '10px 15px', background: '#e74c3c', border: 'none',
-                      borderRadius: '6px', color: 'white', cursor: 'pointer',
-                      fontWeight: '500', transition: 'all 0.2s ease',
-                      display: 'flex', alignItems: 'center', gap: '8px'
-                    }}
-                      onMouseOver={(e) => {
-                        e.currentTarget.style.background = '#c0392b';
-                        e.currentTarget.style.transform = 'translateY(-1px)';
-                      }}
-                      onMouseOut={(e) => {
-                        e.currentTarget.style.background = '#e74c3c';
-                        e.currentTarget.style.transform = 'translateY(0px)';
-                      }}
-                    >
-                      ⚔️ Attack Enemy
-                    </button>
-                    
-                    <button style={{
-                      padding: '10px 15px', background: '#f39c12', border: 'none',
-                      borderRadius: '6px', color: 'white', cursor: 'pointer',
-                      fontWeight: '500', transition: 'all 0.2s ease',
-                      display: 'flex', alignItems: 'center', gap: '8px'
-                    }}
-                      onMouseOver={(e) => {
-                        e.currentTarget.style.background = '#e67e22';
-                        e.currentTarget.style.transform = 'translateY(-1px)';
-                      }}
-                      onMouseOut={(e) => {
-                        e.currentTarget.style.background = '#f39c12';
-                        e.currentTarget.style.transform = 'translateY(0px)';
-                      }}
-                    >
-                      💎 Collect Resources
-                    </button>
-                    
-                    <button style={{
-                      padding: '10px 15px', background: '#9b59b6', border: 'none',
-                      borderRadius: '6px', color: 'white', cursor: 'pointer',
-                      fontWeight: '500', transition: 'all 0.2s ease',
-                      display: 'flex', alignItems: 'center', gap: '8px'
-                    }}
-                      onMouseOver={(e) => {
-                        e.currentTarget.style.background = '#8e44ad';
-                        e.currentTarget.style.transform = 'translateY(-1px)';
-                      }}
-                      onMouseOut={(e) => {
-                        e.currentTarget.style.background = '#9b59b6';
-                        e.currentTarget.style.transform = 'translateY(0px)';
-                      }}
-                    >
-                      ✨ Cast Spell
-                    </button>
-                    
-                    <button style={{
-                      padding: '10px 15px', background: '#34495e', border: 'none',
-                      borderRadius: '6px', color: 'white', cursor: 'pointer',
-                      fontWeight: '500', transition: 'all 0.2s ease',
-                      display: 'flex', alignItems: 'center', gap: '8px'
-                    }}
-                      onMouseOver={(e) => {
-                        e.currentTarget.style.background = '#2c3e50';
-                        e.currentTarget.style.transform = 'translateY(-1px)';
-                      }}
-                      onMouseOut={(e) => {
-                        e.currentTarget.style.background = '#34495e';
-                        e.currentTarget.style.transform = 'translateY(0px)';
-                      }}
-                    >
-                      🏰 Build Structure
-                    </button>
-                  </div>
-                  
-                  <div style={{ 
-                    marginTop: '20px', 
-                    padding: '12px', 
-                    background: 'rgba(52, 152, 219, 0.1)',
-                    border: '1px solid rgba(52, 152, 219, 0.3)',
-                    borderRadius: '8px'
-                  }}>
-                    <h4 style={{ 
-                      margin: '0 0 8px 0', 
-                      color: '#3498db',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '6px'
-                    }}>
-                      💡 Quick Tips
-                    </h4>
-                    <p style={{ margin: 0, fontSize: '12px', color: '#b0b0b0', lineHeight: '1.4' }}>
-                      🎯 Click on a hero first, then choose an action. 
-                      ⚡ Use hotkeys for faster gameplay!
-                    </p>
-                  </div>
-                </div>
-              )}
+
             </div>
           </div>
         )}

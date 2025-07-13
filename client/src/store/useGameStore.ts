@@ -355,35 +355,49 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
   // Game actions
   moveHero: async (heroId: string, targetPosition: Position) => {
-    const { setLoading, setError, addTimelineAction, calculateZFC, currentGame, currentPlayer } = get();
+    const { setLoading, setError, addTimelineAction, calculateZFC, currentGame, currentPlayer, refreshGameState } = get();
     setLoading(true);
     setError(null);
 
     try {
       if (!currentGame || !currentPlayer) throw new Error('No active game or player');
 
-      const zfc = calculateZFC(currentPlayer.id, heroId);
-      
-      const timelineAction: TimelineAction = {
-        id: `action_${Date.now()}`,
-        turn: currentGame.currentTurn,
-        playerId: currentPlayer.id,
-        action: {
-          type: 'move',
-          heroId,
-          targetPosition
-        },
-        status: 'PENDING',
-        zfc,
-        originTimestamp: new Date().toISOString(),
-        shadowVisible: true
-      };
-
-      addTimelineAction(timelineAction);
-      
-      // Validation automatique si possible
-      const { validateAction } = get();
-      await validateAction(timelineAction.id);
+      // Check if this is a demo game
+      if (currentGame.id.includes('classique') || currentGame.id.includes('mystique')) {
+        // For demo games, update the hero position immediately
+        const updatedGame = { ...currentGame };
+        const player = updatedGame.players.find(p => p.id === currentPlayer.id);
+        if (player) {
+          const hero = player.heroes.find(h => h.id === heroId);
+          if (hero) {
+            hero.position = targetPosition;
+            // Update the map to reflect the new position
+            const { setCurrentGame, setMap } = get();
+            setCurrentGame(updatedGame);
+            
+            // Update map tiles
+            const updatedMap = [...get().map];
+            // Remove hero from old position
+            for (let y = 0; y < updatedMap.length; y++) {
+              for (let x = 0; x < updatedMap[y].length; x++) {
+                if (updatedMap[y][x].hero?.id === heroId) {
+                  updatedMap[y][x].hero = null;
+                }
+              }
+            }
+            // Add hero to new position
+            if (updatedMap[targetPosition.y] && updatedMap[targetPosition.y][targetPosition.x]) {
+              updatedMap[targetPosition.y][targetPosition.x].hero = hero;
+            }
+            setMap(updatedMap);
+          }
+        }
+        console.log(`🚶 Hero moved to (${targetPosition.x}, ${targetPosition.y})`);
+      } else {
+        // For real games, call the backend
+        await GameService.moveHero(heroId, targetPosition);
+        await refreshGameState();
+      }
       
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Failed to move hero');
@@ -393,35 +407,24 @@ export const useGameStore = create<GameStore>((set, get) => ({
   },
 
   attackTarget: async (heroId: string, targetId: string) => {
-    const { setLoading, setError, addTimelineAction, calculateZFC, currentGame, currentPlayer } = get();
+    const { setLoading, setError, addTimelineAction, calculateZFC, currentGame, currentPlayer, refreshGameState } = get();
     setLoading(true);
     setError(null);
 
     try {
       if (!currentGame || !currentPlayer) throw new Error('No active game or player');
 
-      const zfc = calculateZFC(currentPlayer.id, heroId);
-      
-      const timelineAction: TimelineAction = {
-        id: `action_${Date.now()}`,
-        turn: currentGame.currentTurn,
-        playerId: currentPlayer.id,
-        action: {
-          type: 'attack',
-          heroId,
-          targetId
-        },
-        status: 'PENDING',
-        zfc,
-        originTimestamp: new Date().toISOString(),
-        shadowVisible: true
-      };
-
-      addTimelineAction(timelineAction);
-      
-      // Validation automatique si possible
-      const { validateAction } = get();
-      await validateAction(timelineAction.id);
+      // Check if this is a demo game
+      if (currentGame.id.includes('classique') || currentGame.id.includes('mystique')) {
+        // For demo games, simulate the attack
+        console.log(`⚔️ Hero ${heroId} attacks target ${targetId}`);
+        // In a real implementation, you might want to remove the target from the map
+        // or update its health, etc.
+      } else {
+        // For real games, call the backend
+        await GameService.attackTarget(heroId, targetId);
+        await refreshGameState();
+      }
       
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Failed to attack target');
@@ -431,35 +434,24 @@ export const useGameStore = create<GameStore>((set, get) => ({
   },
 
   collectResource: async (heroId: string, objectId: string) => {
-    const { setLoading, setError, addTimelineAction, calculateZFC, currentGame, currentPlayer } = get();
+    const { setLoading, setError, addTimelineAction, calculateZFC, currentGame, currentPlayer, refreshGameState } = get();
     setLoading(true);
     setError(null);
 
     try {
       if (!currentGame || !currentPlayer) throw new Error('No active game or player');
 
-      const zfc = calculateZFC(currentPlayer.id, heroId);
-      
-      const timelineAction: TimelineAction = {
-        id: `action_${Date.now()}`,
-        turn: currentGame.currentTurn,
-        playerId: currentPlayer.id,
-        action: {
-          type: 'collect',
-          heroId,
-          targetId: objectId
-        },
-        status: 'PENDING',
-        zfc,
-        originTimestamp: new Date().toISOString(),
-        shadowVisible: true
-      };
-
-      addTimelineAction(timelineAction);
-      
-      // Validation automatique si possible
-      const { validateAction } = get();
-      await validateAction(timelineAction.id);
+      // Check if this is a demo game
+      if (currentGame.id.includes('classique') || currentGame.id.includes('mystique')) {
+        // For demo games, simulate resource collection
+        console.log(`💎 Hero ${heroId} collects resource ${objectId}`);
+        // In a real implementation, you might want to update player resources
+        // or remove the resource from the map
+      } else {
+        // For real games, call the backend
+        await GameService.collectResource(heroId, objectId);
+        await refreshGameState();
+      }
       
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Failed to collect resource');
