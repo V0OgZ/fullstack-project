@@ -2,8 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import Game from './pages/Game';
+import LanguageSelector from './components/LanguageSelector';
+import { useTranslation } from './i18n';
 
 const GameSelector: React.FC = () => {
+  const { t } = useTranslation();
+  
   // Random tips that rotate one by one
   const tips = [
     "💡 Both scenarios use the same game interface",
@@ -37,37 +41,44 @@ const GameSelector: React.FC = () => {
     <div className="game-selector">
       <header className="selector-header">
         <h1>🎮 Heroes of Time 🎮</h1>
-        <p>Choose your adventure scenario</p>
+        <p>{t('chooseScenario')}</p>
+        <LanguageSelector />
       </header>
       
       <div className="game-options">
         <Link to="/game/conquete-classique" className="game-option classic">
           <div className="game-icon">🏰</div>
-          <h2>Classic Conquest</h2>
-          <p>Introduction scenario - Traditional Heroes gameplay</p>
+          <h2>{t('classicConquest')}</h2>
+          <p>{t('classicDescription')}</p>
           <div className="game-features">
-            <span>⚔️ Turn-based combat</span>
-            <span>🏰 Castle capture</span>
-            <span>🗺️ Hexagonal maps</span>
+            <span>⚔️ {t('turnBasedCombat')}</span>
+            <span>🏰 {t('captureBuildings')}</span>
+            <span>🗺️ {t('hexagonalMaps')}</span>
           </div>
-          <div className="difficulty-indicator easy">EASY</div>
+          <div className="difficulty-indicator easy">{t('easy')}</div>
+          <button data-testid="start-game-button" className="start-game-btn">
+            Start Game
+          </button>
         </Link>
         
         <Link to="/game/mystique-temporel" className="game-option temporal">
           <div className="game-icon">🔮</div>
-          <h2>Mystical Conquest</h2>
-          <p>Advanced scenario with magical and temporal objects</p>
+          <h2>{t('mysticalConquest')}</h2>
+          <p>{t('mysticalDescription')}</p>
           <div className="game-features">
-            <span>🔮 Temporal objects</span>
-            <span>⚡ Advanced magic</span>
-            <span>🌀 Mystical portals</span>
+            <span>🔮 {t('temporalObjects')}</span>
+            <span>⚡ {t('advancedMagic')}</span>
+            <span>🌀 {t('mysticPortals')}</span>
           </div>
-          <div className="difficulty-indicator hard">ADVANCED</div>
+          <div className="difficulty-indicator hard">{t('advanced')}</div>
+          <button data-testid="start-game-button" className="start-game-btn">
+            Start Game
+          </button>
         </Link>
 
         <Link to="/game/multiplayer-arena" className="game-option multiplayer">
           <div className="game-icon">🌐</div>
-          <h2>Multiplayer Arena</h2>
+          <h2>{t('multiplayerArena')}</h2>
           <p>Compete against other players in real-time battles</p>
           <div className="game-features">
             <span>🏆 Ranked matches</span>
@@ -75,6 +86,9 @@ const GameSelector: React.FC = () => {
             <span>⚡ Real-time strategy</span>
           </div>
           <div className="difficulty-indicator multiplayer">COMPETITIVE</div>
+          <button data-testid="start-game-button" className="start-game-btn">
+            Start Game
+          </button>
         </Link>
       </div>
       
@@ -85,7 +99,7 @@ const GameSelector: React.FC = () => {
       </div>
       
       <footer className="selector-footer">
-        <p>Built with React & TypeScript</p>
+        <p>{t('builtWith')}</p>
       </footer>
     </div>
   );
@@ -94,7 +108,7 @@ const GameSelector: React.FC = () => {
 const App: React.FC = () => {
   return (
     <Router>
-      <div className="App">
+      <div className="App" data-testid="app-container">
         <Routes>
           <Route 
             path="/game/:scenarioId" 

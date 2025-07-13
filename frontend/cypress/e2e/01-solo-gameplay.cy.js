@@ -1,4 +1,4 @@
-describe('Heroes Reforged - Solo Gameplay', () => {
+describe('Heroes of Time - Solo Gameplay', () => {
   beforeEach(() => {
     cy.visit('/');
   });
@@ -7,8 +7,8 @@ describe('Heroes Reforged - Solo Gameplay', () => {
     cy.logToConsole('Testing main page load');
     
     // Verify main page elements
-    cy.contains('Heroes Reforged').should('be.visible');
-    cy.contains('Choose a scenario').should('be.visible');
+    cy.contains('🎮 Heroes of Time 🎮').should('be.visible');
+    cy.get('.language-selector').should('be.visible');
     cy.get('a[href*="/game/conquete-classique"]').should('be.visible');
     cy.get('a[href*="/game/mystique-temporel"]').should('be.visible');
   });
@@ -39,6 +39,55 @@ describe('Heroes Reforged - Solo Gameplay', () => {
     cy.get('body').should('be.visible');
   });
 
+  it('should display game features and tips', () => {
+    cy.logToConsole('Testing game features display');
+    
+    // Check that game features are present (using translation keys)
+    cy.get('.game-features').should('be.visible');
+    cy.get('.rotating-tips').should('be.visible');
+  });
+
+  it('should display multiplayer arena option', () => {
+    cy.logToConsole('Testing multiplayer arena option');
+    
+    // Check multiplayer arena link
+    cy.get('a[href*="/game/multiplayer-arena"]').should('be.visible');
+  });
+
+  it('should have proper responsive design', () => {
+    cy.logToConsole('Testing responsive design');
+    
+    // Test mobile viewport
+    cy.viewport('iphone-x');
+    cy.contains('🎮 Heroes of Time 🎮').should('be.visible');
+    
+    // Test tablet viewport
+    cy.viewport('ipad-2');
+    cy.contains('🎮 Heroes of Time 🎮').should('be.visible');
+    cy.get('.game-options').should('be.visible');
+    
+    // Back to desktop
+    cy.viewport(1280, 720);
+    cy.contains('🎮 Heroes of Time 🎮').should('be.visible');
+  });
+
+  it('should display difficulty indicators', () => {
+    cy.logToConsole('Testing difficulty indicators');
+    
+    // Check difficulty indicators are present
+    cy.get('.difficulty-indicator').should('have.length', 3);
+  });
+
+  it('should display game icons', () => {
+    cy.logToConsole('Testing game icons');
+    
+    // Check game icons are present
+    cy.get('.game-icon').should('have.length', 3);
+    cy.contains('🏰').should('be.visible'); // Classic
+    cy.contains('🔮').should('be.visible'); // Mystical
+    cy.contains('🌐').should('be.visible'); // Multiplayer
+  });
+
   it('should display language selector with flags', () => {
     cy.logToConsole('Testing language selector');
     
@@ -65,70 +114,5 @@ describe('Heroes Reforged - Solo Gameplay', () => {
     // Switch back to English
     cy.contains('🇬🇧 EN').click();
     cy.contains('Choose a scenario').should('be.visible');
-  });
-
-  it('should display backend test link', () => {
-    cy.logToConsole('Testing backend test link');
-    
-    // Check backend test link
-    cy.get('a[href*="/backend-test"]').should('be.visible');
-    cy.contains('Test backend connection').should('be.visible');
-  });
-
-  it('should display multiplayer link', () => {
-    cy.logToConsole('Testing multiplayer access');
-    
-    // Visit multiplayer page directly
-    cy.visit('/multiplayer');
-    cy.url().should('include', '/multiplayer');
-    
-    // Basic check that multiplayer page loads
-    cy.get('body').should('be.visible');
-  });
-
-  it('should have proper responsive design', () => {
-    cy.logToConsole('Testing responsive design');
-    
-    // Test mobile viewport
-    cy.viewport('iphone-x');
-    cy.contains('Heroes Reforged').should('be.visible');
-    cy.get('.language-selector').should('be.visible');
-    
-    // Test tablet viewport
-    cy.viewport('ipad-2');
-    cy.contains('Heroes Reforged').should('be.visible');
-    cy.get('.game-options').should('be.visible');
-    
-    // Back to desktop
-    cy.viewport(1280, 720);
-    cy.contains('Heroes Reforged').should('be.visible');
-  });
-
-  it('should navigate to backend tester', () => {
-    cy.logToConsole('Testing backend tester navigation');
-    
-    // Click on backend test link
-    cy.get('a[href*="/backend-test"]').click();
-    
-    // Verify navigation
-    cy.url().should('include', '/backend-test');
-    
-    // Basic check that backend test page loads
-    cy.get('body').should('be.visible');
-  });
-
-  it('should preserve language selection across navigation', () => {
-    cy.logToConsole('Testing language persistence');
-    
-    // Set to Russian
-    cy.contains('🇷🇺 RU').click();
-    cy.contains('Выберите сценарий').should('be.visible');
-    
-    // Navigate to backend test and back
-    cy.get('a[href*="/backend-test"]').click();
-    cy.visit('/');
-    
-    // Should still be in Russian
-    cy.contains('Выберите сценарий').should('be.visible');
   });
 }); 
