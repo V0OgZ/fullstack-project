@@ -227,4 +227,88 @@ export class ApiService {
       body: JSON.stringify({ outcome })
     });
   }
+
+  // Building Management endpoints
+  static async getAllBuildings(): Promise<any> {
+    return this.makeRequest('/buildings');
+  }
+
+  static async getBuildingById(buildingId: string): Promise<any> {
+    return this.makeRequest(`/buildings/${buildingId}`);
+  }
+
+  static async getBuildingsByCastle(castleId: string): Promise<any> {
+    return this.makeRequest(`/buildings/castle/${castleId}`);
+  }
+
+  static async getBuildingsByPlayer(playerId: string): Promise<any> {
+    return this.makeRequest(`/buildings/player/${playerId}`);
+  }
+
+  static async getBuildingsByGame(gameId: string): Promise<any> {
+    return this.makeRequest(`/buildings/game/${gameId}`);
+  }
+
+  static async startConstruction(buildingData: any): Promise<any> {
+    return this.makeRequest('/buildings/construct', {
+      method: 'POST',
+      body: JSON.stringify(buildingData)
+    });
+  }
+
+  static async startConstructionWithResources(buildingData: any): Promise<any> {
+    return this.makeRequest('/buildings/construct/with-resources', {
+      method: 'POST',
+      body: JSON.stringify(buildingData)
+    });
+  }
+
+  static async completeConstruction(buildingId: string): Promise<any> {
+    return this.makeRequest(`/buildings/${buildingId}/complete`, {
+      method: 'POST'
+    });
+  }
+
+  static async upgradeBuilding(buildingId: string, upgradeData: any): Promise<any> {
+    return this.makeRequest(`/buildings/${buildingId}/upgrade`, {
+      method: 'POST',
+      body: JSON.stringify(upgradeData)
+    });
+  }
+
+  static async recruitUnits(buildingId: string, recruitData: any): Promise<any> {
+    return this.makeRequest(`/buildings/${buildingId}/recruit`, {
+      method: 'POST',
+      body: JSON.stringify(recruitData)
+    });
+  }
+
+  static async getAvailableUnitsForRecruitment(castleId: string): Promise<any> {
+    return this.makeRequest(`/buildings/castle/${castleId}/units/available`);
+  }
+
+  static async canRecruitUnit(castleId: string, unitType: string, quantity: number): Promise<any> {
+    return this.makeRequest(`/buildings/castle/${castleId}/units/${unitType}/can-recruit?quantity=${quantity}`);
+  }
+
+  static async getCastleBonuses(castleId: string): Promise<any> {
+    return this.makeRequest(`/buildings/castle/${castleId}/bonuses`);
+  }
+
+  static async getAvailableSpells(castleId: string): Promise<any> {
+    return this.makeRequest(`/buildings/castle/${castleId}/spells`);
+  }
+
+  static async createStartingCastle(castleData: any): Promise<any> {
+    return this.makeRequest('/buildings/castle/create-starting', {
+      method: 'POST',
+      body: JSON.stringify(castleData)
+    });
+  }
+
+  static async checkAndCompleteReadyBuildings(gameId: string): Promise<any> {
+    return this.makeRequest(`/buildings/game/${gameId}/check-construction`, {
+      method: 'POST'
+    });
+  }
 } 
