@@ -37,7 +37,7 @@ const SimpleModernInterface: React.FC = () => {
       {/* Header Simple */}
       <header className="game-header">
         <div className="header-left">
-          <h1 className="game-title">Heroes Reforged</h1>
+          <h1 className="game-title">Heroes of Time</h1>
           <div className="game-info">
             <span>{t('turn')} {currentGame.currentTurn}</span>
             <span className="separator">•</span>

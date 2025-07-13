@@ -266,7 +266,7 @@ const ModernGameInterface: React.FC = () => {
         transition={{ duration: 0.3 }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: modernTheme.spacing.lg }}>
-          <GameTitle>Heroes Reforged</GameTitle>
+          <GameTitle>Heroes of Time</GameTitle>
           <GameInfo>
             <span>{t('turn')} {currentGame.currentTurn}</span>
             <span>•</span>

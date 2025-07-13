@@ -30,6 +30,9 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
   const [gameMode, setGameMode] = useState('conquest-classique');
   const [playerId, setPlayerId] = useState('');
   const [websocketConnected, setWebsocketConnected] = useState(false);
+  const [heroName, setHeroName] = useState('');
+  const [sessionCreated, setSessionCreated] = useState(false);
+  const [createdSessionId, setCreatedSessionId] = useState<string | null>(null);
 
   // Initialize WebSocket connection
   useEffect(() => {
@@ -161,28 +164,19 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
         borderRadius: '8px',
         maxWidth: '500px',
         margin: '20px auto'
-      }}>
+      }} data-testid="multiplayer-lobby">
         <h2 style={{ color: '#00d4ff', marginBottom: '20px' }}>🌐 Create New Session</h2>
-        
-        {/* WebSocket Status */}
-        <div style={{ 
-          marginBottom: '15px', 
-          padding: '10px', 
-          background: websocketConnected ? '#1a4d1a' : '#4d1a1a',
-          borderRadius: '4px',
-          color: websocketConnected ? '#4ade80' : '#f87171'
-        }}>
-          {websocketConnected ? '✅ Real-time connection active' : '❌ Real-time connection failed'}
-        </div>
-        
+        {/* Hero Name Input */}
         <div style={{ marginBottom: '15px' }}>
           <label style={{ display: 'block', color: '#fff', marginBottom: '5px' }}>
-            Session Name:
+            Hero Name:
           </label>
           <input
             type="text"
-            value={sessionName}
-            onChange={(e) => setSessionName(e.target.value)}
+            value={heroName}
+            onChange={e => setHeroName(e.target.value)}
+            placeholder="Enter your hero name..."
+            data-testid="hero-name-input"
             style={{
               width: '100%',
               padding: '8px',
@@ -191,17 +185,17 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
               borderRadius: '4px',
               color: '#fff'
             }}
-            placeholder="Enter session name"
           />
         </div>
-
+        {/* Player Count Select */}
         <div style={{ marginBottom: '15px' }}>
           <label style={{ display: 'block', color: '#fff', marginBottom: '5px' }}>
-            Max Players:
+            Number of Players:
           </label>
           <select
             value={maxPlayers}
-            onChange={(e) => setMaxPlayers(parseInt(e.target.value))}
+            onChange={e => setMaxPlayers(Number(e.target.value))}
+            data-testid="player-count-select"
             style={{
               width: '100%',
               padding: '8px',
@@ -211,21 +205,19 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
               color: '#fff'
             }}
           >
-            <option value={2}>2 Players</option>
-            <option value={3}>3 Players</option>
-            <option value={4}>4 Players</option>
-            <option value={6}>6 Players</option>
-            <option value={8}>8 Players</option>
+            <option value={2}>2 Players - Duel</option>
+            <option value={3}>3 Players - Triangle</option>
+            <option value={4}>4 Players - Free-for-All</option>
           </select>
         </div>
-
+        {/* Game Mode Select (keep existing) */}
         <div style={{ marginBottom: '15px' }}>
           <label style={{ display: 'block', color: '#fff', marginBottom: '5px' }}>
             Game Mode:
           </label>
           <select
             value={gameMode}
-            onChange={(e) => setGameMode(e.target.value)}
+            onChange={e => setGameMode(e.target.value)}
             style={{
               width: '100%',
               padding: '8px',
@@ -240,22 +232,27 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
             <option value="arena-rapide">⚡ Quick Arena</option>
           </select>
         </div>
-
+        {/* Create New Game Button */}
         <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
           <button
-            onClick={createSession}
-            disabled={loading || !websocketConnected}
+            onClick={async () => {
+              await createSession();
+              setSessionCreated(true);
+              setCreatedSessionId(playerId);
+            }}
+            disabled={loading || !websocketConnected || !heroName}
+            data-testid="create-new-game-btn"
             style={{
               flex: 1,
               padding: '10px',
-              background: (!websocketConnected || loading) ? '#666' : '#00d4ff',
-              color: (!websocketConnected || loading) ? '#aaa' : '#000',
+              background: (!websocketConnected || loading || !heroName) ? '#666' : '#00d4ff',
+              color: (!websocketConnected || loading || !heroName) ? '#aaa' : '#000',
               border: 'none',
               borderRadius: '4px',
-              cursor: (!websocketConnected || loading) ? 'not-allowed' : 'pointer'
+              cursor: (!websocketConnected || loading || !heroName) ? 'not-allowed' : 'pointer'
             }}
           >
-            {loading ? 'Creating...' : '🎮 Create Session'}
+            {loading ? 'Creating...' : '🎮 Create New Game'}
           </button>
           <button
             onClick={() => setCreateSessionMode(false)}
@@ -272,6 +269,34 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
             Cancel
           </button>
         </div>
+        {/* Session Created Message and Start Battle Button */}
+        {sessionCreated && (
+          <div style={{ marginTop: '30px', textAlign: 'center' }}>
+            <div data-testid="session-created-msg">
+              <strong>🎯 Session Created!</strong>
+              <div>Session ID: <strong>{createdSessionId}</strong></div>
+            </div>
+            <button
+              data-testid="start-battle-btn"
+              style={{
+                marginTop: '20px',
+                padding: '12px 32px',
+                background: '#8b5cf6',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '6px',
+                fontWeight: 700,
+                fontSize: '1.1rem',
+                cursor: 'pointer',
+                boxShadow: '0 2px 8px #8b5cf644',
+                transition: 'background 0.2s'
+              }}
+              onClick={() => setCreateSessionMode(false)}
+            >
+              🚀 Start Battle
+            </button>
+          </div>
+        )}
       </div>
     );
   }
