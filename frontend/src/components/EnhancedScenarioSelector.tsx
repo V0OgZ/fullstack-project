@@ -202,7 +202,7 @@ const EnhancedScenarioSelector: React.FC = () => {
                   <div className="scenario-actions">
                     {scenario.unlocked ? (
                       <Link 
-                        to={`/game?mode=${scenario.id}`}
+                        to={`/game/${scenario.id}`}
                         className="play-button"
                       >
                         <span className="button-icon">🎮</span>
