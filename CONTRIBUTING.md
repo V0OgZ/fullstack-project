@@ -1,11 +1,11 @@
-# 🤝 Contributing to Heroes Reforged
+# 🤝 Contributing to Heroes of Time
 
-Thank you for your interest in contributing to Heroes Reforged! This document provides guidelines for contributing to this revolutionary asynchronous strategy game.
+Thank you for your interest in contributing to Heroes of Time! This document provides guidelines for contributing to this revolutionary asynchronous strategy game.
 
 ## 🌟 Ways to Contribute
 
 ### 🐛 Bug Reports
-- Use the [GitHub Issues](https://github.com/V0OgZ/heroes-reforged/issues) to report bugs
+- Use the [GitHub Issues](https://github.com/V0OgZ/Heroes-of-Time/issues) to report bugs
 - Include detailed reproduction steps
 - Provide browser/OS information
 - Include screenshots if relevant
@@ -34,8 +34,8 @@ Thank you for your interest in contributing to Heroes Reforged! This document pr
 ### Local Development
 ```bash
 # Clone your fork
-git clone https://github.com/YOUR_USERNAME/heroes-reforged.git
-cd heroes-reforged
+git clone https://github.com/YOUR_USERNAME/Heroes-of-Time.git
+cd Heroes-of-Time
 
 # Install dependencies
 cd frontend && npm install
@@ -95,28 +95,56 @@ cd frontend && npm start
 - Provide clear feedback
 - Use consistent animations
 
-## 🧪 Testing
+## 🧪 Comprehensive Testing Requirements
 
-### Frontend Tests
-```bash
-cd frontend
-npm test
-npm run test:coverage
-```
-
-### Backend Tests
+### Backend Testing (44 Tests)
 ```bash
 cd backend
+
+# Run all backend tests
 mvn test
+
+# Run specific test class
+mvn test -Dtest=GameControllerTest
+
+# Generate test coverage report
 mvn jacoco:report
 ```
 
-### Manual Testing
-- Test all game features
-- Verify ZFC calculations
-- Check political system balance
-- Test responsive design
-- Verify performance
+**Required Test Coverage:**
+- **GameController**: All REST endpoints must have tests
+- **UnitController**: CRUD operations and localization
+- **MultiplayerController**: WebSocket and session management
+- **Services**: Business logic with >90% coverage
+- **Integration**: End-to-end API testing
+
+### Frontend Testing (26+ Cypress Tests)
+```bash
+cd frontend
+
+# Run all E2E tests
+npm run test:e2e
+
+# Open Cypress test runner
+npx cypress open
+
+# Run specific test file
+npx cypress run --spec "cypress/e2e/09-corrected-comprehensive-tests.cy.js"
+```
+
+**Required Test Coverage:**
+- **Screen Tests**: All major UI components
+- **Language Tests**: French, English, Russian switching
+- **Map Tests**: Classic and Mystique functionality
+- **Performance Tests**: Load testing and error handling
+- **Accessibility Tests**: Keyboard navigation and WCAG compliance
+
+### Test Requirements for Contributions
+- **New Backend Features**: Must include comprehensive unit tests
+- **New Frontend Features**: Must include Cypress E2E tests
+- **API Changes**: Must update existing tests
+- **UI Changes**: Must pass accessibility tests
+- **Performance**: Must not degrade existing benchmarks
 
 ## 📋 Pull Request Process
 
@@ -127,23 +155,30 @@ mvn jacoco:report
 
 2. **Make Your Changes**
    - Follow coding standards
-   - Add tests
+   - Add comprehensive tests
    - Update documentation
 
 3. **Test Thoroughly**
-   - Run all tests
-   - Test manually
-   - Check performance
+   - Run all 44 backend tests: `mvn test`
+   - Run all 26+ frontend tests: `npm run test:e2e`
+   - Test manually across devices
+   - Check performance benchmarks
 
-4. **Submit Pull Request**
+4. **Quality Gates**
+   - All tests must pass
+   - Test coverage must not decrease
+   - Performance benchmarks must be maintained
+   - Accessibility standards must be met
+
+5. **Submit Pull Request**
    - Clear title and description
    - Reference related issues
    - Include screenshots if UI changes
-   - Request review
+   - Include test results summary
 
-5. **Review Process**
+6. **Review Process**
    - Address feedback
-   - Update as needed
+   - Update tests as needed
    - Maintain clean commit history
 
 ## 🏷️ Commit Messages
@@ -163,14 +198,16 @@ test: add unit tests for advisor logic
 ### High Priority
 - Performance optimizations
 - Mobile responsiveness
-- Accessibility improvements
+- Accessibility improvements (WCAG 2.1 AA)
 - Bug fixes
+- Test coverage improvements
 
 ### Medium Priority
 - New political events
 - Additional advisor types
 - UI/UX enhancements
 - Documentation improvements
+- Multi-language support
 
 ### Low Priority
 - New game modes
@@ -180,9 +217,10 @@ test: add unit tests for advisor logic
 
 ## 🌍 Internationalization
 
-We're working on multi-language support:
+We support multiple languages:
 - English (primary)
 - French (secondary)
+- Russian (implemented)
 - More languages welcome
 
 ### Translation Guidelines
@@ -190,6 +228,26 @@ We're working on multi-language support:
 - Maintain context
 - Consider cultural differences
 - Test with different text lengths
+- Add Cypress tests for new languages
+
+## 🔧 Development Tools
+
+### Recommended IDE Setup
+- **VS Code** with extensions:
+  - TypeScript Hero
+  - ES7+ React/Redux/React-Native snippets
+  - Prettier
+  - ESLint
+  - GitLens
+
+### Debug Configuration
+```bash
+# Frontend debugging
+npm run start:debug
+
+# Backend debugging
+mvn spring-boot:run -Dspring-boot.run.jvmArguments="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
+```
 
 ## 📞 Communication
 
@@ -217,10 +275,12 @@ By contributing, you agree that your contributions will be licensed under the MI
 
 ## ❓ Questions?
 
-- Check the [FAQ](https://github.com/V0OgZ/heroes-reforged/wiki/FAQ)
-- Ask in [Discussions](https://github.com/V0OgZ/heroes-reforged/discussions)
+- Check the [FAQ](https://github.com/V0OgZ/Heroes-of-Time/wiki/FAQ)
+- Ask in [Discussions](https://github.com/V0OgZ/Heroes-of-Time/discussions)
 - Contact [@V0OgZ](https://github.com/V0OgZ)
 
 ---
 
-**Thank you for contributing to Heroes Reforged!** 🎮✨ 
+**Thank you for contributing to Heroes of Time!** 🎮✨ 
+
+*The future of strategy gaming starts with your contributions.* 🔮 
