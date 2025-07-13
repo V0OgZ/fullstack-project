@@ -1,0 +1,63 @@
+{
+  "scenarioId": "conquest-classic",
+  "name": "Classic Conquest",
+  "description": "A traditional conquest scenario where players must eliminate all enemies or capture their main towns.",
+  "difficulty": "normal",
+  "maxPlayers": 6,
+  "mapWidth": 30,
+  "mapHeight": 30,
+  "victoryCondition": "conquest",
+  "turnLimit": 200,
+  "timeLimit": null,
+  "victoryRequirement": "Eliminate all enemy players or capture all enemy towns",
+  "defeatCondition": "All towns are captured or all heroes are eliminated",
+  "recommendedPlayers": 2,
+  "mapSize": "conquest",
+  "isActive": true,
+  "isCampaign": false,
+  "objectives": [
+    {
+      "objectiveId": "obj1",
+      "objectiveType": "eliminate",
+      "objectiveTitle": "Total Victory",
+      "objectiveDescription": "Eliminate all enemy players",
+      "targetValue": 5,
+      "currentValue": 0,
+      "isRequired": true,
+      "isCompleted": false
+    },
+    {
+      "objectiveId": "obj2",
+      "objectiveType": "capture",
+      "objectiveTitle": "Capture All Towns",
+      "objectiveDescription": "Capture all enemy towns",
+      "targetValue": 5,
+      "currentValue": 0,
+      "isRequired": false,
+      "isCompleted": false
+    }
+  ],
+  "startingPositions": [
+    {
+      "playerId": "player1",
+      "positionX": 5,
+      "positionY": 15,
+      "castleType": "castle",
+      "startingHero": "Arthur",
+      "handicap": 0,
+      "startingResources": "{\"gold\": 10000, \"wood\": 10, \"stone\": 10}",
+      "startingArmy": "10x Peasants"
+    },
+    {
+      "playerId": "player2",
+      "positionX": 15,
+      "positionY": 5,
+      "castleType": "rampart",
+      "startingHero": "Elara",
+      "handicap": 0,
+      "startingResources": "{\"gold\": 10000, \"wood\": 10, \"stone\": 10}",
+      "startingArmy": "10x Peasants"
+    }
+  ],
+  "events": []
+} 

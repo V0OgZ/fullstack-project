@@ -1,0 +1,73 @@
+{
+  "scenarioId": "temporal-rift",
+  "name": "The Temporal Rift",
+  "description": "A mysterious rift in time threatens to tear reality apart. Heroes must navigate through temporal zones to restore balance.",
+  "difficulty": "hard",
+  "maxPlayers": 4,
+  "mapWidth": 25,
+  "mapHeight": 25,
+  "victoryCondition": "custom",
+  "turnLimit": 100,
+  "timeLimit": 180,
+  "victoryRequirement": "Control the Temporal Nexus and close 3 time rifts",
+  "defeatCondition": "All heroes are lost or time runs out",
+  "recommendedPlayers": 4,
+  "mapSize": "custom",
+  "isActive": true,
+  "isCampaign": false,
+  "objectives": [
+    {
+      "objectiveId": "obj1",
+      "objectiveType": "capture",
+      "objectiveTitle": "Control the Temporal Nexus",
+      "objectiveDescription": "Capture and hold the central Temporal Nexus",
+      "targetValue": 1,
+      "currentValue": 0,
+      "isRequired": true,
+      "isCompleted": false
+    },
+    {
+      "objectiveId": "obj2",
+      "objectiveType": "collect",
+      "objectiveTitle": "Close Time Rifts",
+      "objectiveDescription": "Find and close 3 unstable time rifts",
+      "targetValue": 3,
+      "currentValue": 0,
+      "isRequired": true,
+      "isCompleted": false
+    }
+  ],
+  "startingPositions": [
+    {
+      "playerId": "player1",
+      "positionX": 2,
+      "positionY": 2,
+      "castleType": "castle",
+      "startingHero": "Arthur",
+      "handicap": 0,
+      "startingResources": "{\"gold\": 10000, \"wood\": 10, \"stone\": 10}",
+      "startingArmy": "10x Peasants"
+    },
+    {
+      "playerId": "player2",
+      "positionX": 22,
+      "positionY": 2,
+      "castleType": "rampart",
+      "startingHero": "Elara",
+      "handicap": 0,
+      "startingResources": "{\"gold\": 10000, \"wood\": 10, \"stone\": 10}",
+      "startingArmy": "10x Peasants"
+    }
+  ],
+  "events": [
+    {
+      "eventId": "event1",
+      "eventType": "timed",
+      "eventTitle": "Temporal Storm",
+      "eventDescription": "A temporal storm sweeps across the land, affecting all units",
+      "triggerTurn": 20,
+      "isTriggered": false,
+      "isRepeatable": false
+    }
+  ]
+} 

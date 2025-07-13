@@ -1,30 +1,129 @@
 import { ApiService } from './api';
-import { GameState, Game, Position, GameAction, Player, GameMap, Tile } from '../types/game';
+import { GameState, Player, Game } from '../types/game';
 
-const gameCache: Map<string, GameState> = new Map();
+export class GameService {
+  
+  // Transform backend Scenario data to frontend Game data
+  private static transformScenarioToGame(scenarioData: any): Game {
+    // Create mock players based on starting positions
+    const players: Player[] = scenarioData.startingPositions?.map((pos: any, index: number) => ({
+      id: pos.playerId,
+      username: pos.startingHero || `Player ${index + 1}`,
+      email: `${pos.playerId}@example.com`,
+      color: ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#f0932b', '#eb4d4b'][index % 6],
+      isActive: index === 0, // First player is active
+      resources: {
+        gold: 1000,
+        wood: 200,
+        stone: 100,
+        mana: 50
+      },
+      heroes: [{
+        id: `hero_${pos.playerId}`,
+        name: pos.startingHero || 'Unknown Hero',
+        position: { x: pos.positionX, y: pos.positionY },
+        level: 1,
+        experience: 0,
+        movementPoints: 3,
+        maxMovementPoints: 3,
+        stats: {
+          attack: 5,
+          defense: 3,
+          knowledge: 2,
+          spellPower: 1
+        },
+        playerId: pos.playerId,
+        units: [],
+        inventory: []
+      }]
+    })) || [];
 
-function createMockClassicGame(): GameState {
-    const player1: Player = { id: 'player1', username: 'Player 1', email: 'p1@example.com', color: '#3b82f6', isActive: true, resources: { gold: 1000, wood: 10, stone: 10, mana: 10 }, heroes: [] };
-    const player2: Player = { id: 'player2', username: 'AI', email: 'ai@example.com', color: '#ef4444', isActive: false, resources: { gold: 1000, wood: 10, stone: 10, mana: 10 }, heroes: [] };
+    // Create a basic map structure
+    const mapWidth = scenarioData.mapWidth || 20;
+    const mapHeight = scenarioData.mapHeight || 20;
+    const tiles = [];
+    
+    for (let y = 0; y < mapHeight; y++) {
+      for (let x = 0; x < mapWidth; x++) {
+        tiles.push({
+          x,
+          y,
+          terrain: 'grass' as const,
+          walkable: true,
+          movementCost: 1,
+          isVisible: true
+        });
+      }
+    }
+
+    // Create map objects from starting positions
+    const objects = scenarioData.startingPositions?.map((pos: any, index: number) => ({
+      id: `castle_${pos.playerId}`,
+      x: pos.positionX,
+      y: pos.positionY,
+      type: 'city' as const,
+      content: {
+        resource: 'gold' as const,
+        amount: 500
+      }
+    })) || [];
+
     const game: Game = {
-        id: 'conquete-classique',
-        name: 'Classic Conquest',
-        status: 'active',
-        currentTurn: 1,
-        players: [player1, player2],
-        map: { id: 'map1', width: 20, height: 20, tiles: [], objects: [] },
-        gameMode: 'async',
-        currentPlayerTurn: 'player1',
-        turnStartTime: new Date().toISOString(),
-        turnDuration: 300,
-        actions: [],
-        timeline: [],
-        zfcMap: [],
-        gameSettings: { maxPlayers: 2, turnTimeLimit: 300, victoryConditions: [] },
+      id: scenarioData.scenarioId,
+      name: scenarioData.name,
+      status: 'active',
+      currentTurn: 1,
+      turnStartTime: new Date().toISOString(),
+      turnDuration: 300000, // 5 minutes
+      players: players,
+      map: {
+        id: `map_${scenarioData.scenarioId}`,
+        width: mapWidth,
+        height: mapHeight,
+        tiles: tiles,
+        objects: objects
+      },
+      actions: [],
+      timeline: [],
+      zfcMap: [],
+      gameSettings: {
+        maxPlayers: scenarioData.maxPlayers || 2,
+        turnTimeLimit: scenarioData.timeLimit ? scenarioData.timeLimit * 1000 : 300000,
+        victoryConditions: [scenarioData.victoryCondition || 'conquest']
+      },
+      gameMode: 'async',
+      currentPlayerTurn: players[0]?.id
     };
-    return {
-        currentGame: game,
-        currentPlayer: player1,
+
+    return game;
+  }
+
+  static async initializeGame(scenarioId: string): Promise<GameState> {
+    console.log(`Initializing game for scenario: ${scenarioId}`);
+    
+    try {
+      let scenarioData: any;
+      if (scenarioId === 'conquete-classique') {
+        scenarioData = await ApiService.createConquestClassicScenario();
+      } else if (scenarioId === 'mystique-temporel') {
+        scenarioData = await ApiService.createTemporalRiftScenario();
+      } else {
+        throw new Error(`Unknown scenario ID: ${scenarioId}`);
+      }
+      
+      if (!scenarioData || !scenarioData.scenarioId) {
+        throw new Error('Failed to create game from the backend.');
+      }
+
+      // Transform scenario data to game data
+      const gameData = this.transformScenarioToGame(scenarioData);
+
+      // Find the current player
+      const currentPlayer = gameData.players.find(p => p.id === gameData.currentPlayerTurn);
+
+      return {
+        currentGame: gameData,
+        currentPlayer: currentPlayer || null,
         isLoading: false,
         error: null,
         pendingActions: [],
@@ -36,38 +135,21 @@ function createMockClassicGame(): GameState {
         currentPoliticalEvent: null,
         reputation: { international: 0, domestic: 0, military: 0, economic: 0, diplomatic: 0 },
         activeEvents: [],
-    };
-}
+      };
 
-export class GameService {
-  static async initializeGame(gameId: string): Promise<GameState> {
-    console.log(`Initializing scenario: ${gameId}`);
-    if (gameId.includes('classique') || gameId.includes('mystique')) {
-        const mockState = createMockClassicGame();
-        gameCache.set(gameId, mockState);
-        return Promise.resolve(mockState);
+    } catch (error) {
+      console.error('Error initializing game:', error);
+      throw error;
     }
-    
-    // Fallback for any other ID
-    return Promise.reject(new Error(`Game ID "${gameId}" not found.`));
   }
 
   static async getGameState(gameId: string): Promise<GameState> {
-    const cachedState = gameCache.get(gameId);
-    if(cachedState) {
-        console.log(`Returning cached state for game: ${gameId}`);
-        return Promise.resolve(cachedState);
-    }
-    return Promise.reject(new Error(`Game state for "${gameId}" not found.`));
+    // For now, we'll reinitialize the game since the backend doesn't store game state
+    // This is a temporary solution - in a real app, we'd have proper game state storage
+    return this.initializeGame(gameId);
   }
 
   static async endTurn(gameId: string): Promise<void> {
-    console.log(`Ending turn for game: ${gameId}`);
-    const state = gameCache.get(gameId);
-    if (state && state.currentGame) {
-        state.currentGame.currentTurn += 1;
-        gameCache.set(gameId, state);
-    }
-    return Promise.resolve();
+    return ApiService.endTurn(gameId);
   }
 } 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from '../i18n';
+import { useGameStore } from '../store/useGameStore'; // Import the store
 import './EnhancedScenarioSelector.css';
 
 interface Scenario {
@@ -21,6 +22,7 @@ const EnhancedScenarioSelector: React.FC = () => {
   const { t, language, setLanguage } = useTranslation();
   const [selectedScenario, setSelectedScenario] = useState<string | null>(null);
   const navigate = useNavigate();
+  const loadGame = useGameStore((state) => state.loadGame); // Get the loadGame action
 
   const scenarios: Scenario[] = [
     {
@@ -105,11 +107,17 @@ const EnhancedScenarioSelector: React.FC = () => {
     }
   ];
 
-  const handleScenarioSelect = (scenarioId: string) => {
+  const handleScenarioSelect = async (scenarioId: string) => {
     if (scenarioId === 'multiplayer-arena') {
       navigate('/multiplayer');
     } else {
-      navigate(`/game/${scenarioId}`);
+      try {
+        await loadGame(scenarioId);
+        // The navigation will be handled by the component that observes the game state
+      } catch (error) {
+        console.error("Failed to load scenario:", error);
+        // Optionally, show an error message to the user
+      }
     }
   };
 
