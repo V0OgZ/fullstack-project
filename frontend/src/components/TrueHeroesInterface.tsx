@@ -23,14 +23,14 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
   
   const [selectedHeroId, setSelectedHeroId] = useState<string | null>(null);
   const [selectedCastleId, setSelectedCastleId] = useState<string | null>(null);
-  const [rightPanelContent, setRightPanelContent] = useState<'empty' | 'hero' | 'inventory' | 'castle'>('empty');
+  const [rightPanelContent, setRightPanelContent] = useState<'scenario' | 'hero' | 'inventory' | 'castle'>('scenario');
 
   const handleHeroSelect = (heroId: string | null) => {
     setSelectedHeroId(heroId);
     if (heroId) {
       setRightPanelContent('hero');
     } else {
-      setRightPanelContent('empty');
+      setRightPanelContent('scenario');
     }
   };
 
@@ -171,14 +171,103 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
         </div>
 
         {/* Right side: Dynamic Panel */}
-        <div className={`right-panel ${rightPanelContent !== 'empty' ? 'visible' : 'hidden'}`}>
+        <div className="right-panel visible">
+          {rightPanelContent === 'scenario' && (
+            <div className="panel-content scenario-panel">
+              <div className="panel-header">
+                <h3>🎮 Scenario Info</h3>
+              </div>
+              
+              <div className="scenario-details">
+                <div className="scenario-overview">
+                  <div className="scenario-name">
+                    <span className="scenario-icon">🏰</span>
+                    <span className="scenario-title">Conquest Classic</span>
+                  </div>
+                  <div className="scenario-type">
+                    <span className="type-badge">{scenarioType}</span>
+                  </div>
+                </div>
+
+                <div className="game-info">
+                  <div className="info-item">
+                    <span className="info-label">🎯 Turn:</span>
+                    <span className="info-value">{currentGame?.currentTurn || 1}</span>
+                  </div>
+                  <div className="info-item">
+                    <span className="info-label">👑 Current Player:</span>
+                    <span className="info-value">{currentPlayer?.username}</span>
+                  </div>
+                  <div className="info-item">
+                    <span className="info-label">🌍 Map Size:</span>
+                    <span className="info-value">20x20</span>
+                  </div>
+                  <div className="info-item">
+                    <span className="info-label">⚔️ Game Mode:</span>
+                    <span className="info-value">{currentGame?.gameMode || 'Standard'}</span>
+                  </div>
+                </div>
+
+                <div className="objectives">
+                  <h4>🎯 Objectives</h4>
+                  <div className="objective-item">
+                    <span className="objective-icon">🏆</span>
+                    <span className="objective-text">Defeat all enemy heroes</span>
+                  </div>
+                  <div className="objective-item">
+                    <span className="objective-icon">🏰</span>
+                    <span className="objective-text">Capture all enemy castles</span>
+                  </div>
+                  <div className="objective-item">
+                    <span className="objective-icon">💎</span>
+                    <span className="objective-text">Collect rare artifacts</span>
+                  </div>
+                </div>
+
+                <div className="quick-stats">
+                  <h4>📊 Quick Stats</h4>
+                  <div className="stats-grid">
+                    <div className="stat-card">
+                      <div className="stat-icon">⚔️</div>
+                      <div className="stat-info">
+                        <div className="stat-number">{currentPlayer?.heroes?.length || 0}</div>
+                        <div className="stat-label">Heroes</div>
+                      </div>
+                    </div>
+                    <div className="stat-card">
+                      <div className="stat-icon">🏰</div>
+                      <div className="stat-info">
+                        <div className="stat-number">1</div>
+                        <div className="stat-label">Castles</div>
+                      </div>
+                    </div>
+                    <div className="stat-card">
+                      <div className="stat-icon">🏗️</div>
+                      <div className="stat-info">
+                        <div className="stat-number">4</div>
+                        <div className="stat-label">Buildings</div>
+                      </div>
+                    </div>
+                    <div className="stat-card">
+                      <div className="stat-icon">💰</div>
+                      <div className="stat-info">
+                        <div className="stat-number">{currentPlayer?.resources?.gold || 0}</div>
+                        <div className="stat-label">Gold</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
           {rightPanelContent === 'hero' && selectedHero && (
             <div className="panel-content hero-panel">
               <div className="panel-header">
                 <h3>⚔️ {selectedHero.name}</h3>
                 <button 
                   className="close-panel-btn"
-                  onClick={() => setRightPanelContent('empty')}
+                  onClick={() => setRightPanelContent('scenario')}
                 >
                   ×
                 </button>
@@ -250,7 +339,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
                 <h3>🎒 Equipped Items</h3>
                 <button 
                   className="close-panel-btn"
-                  onClick={() => setRightPanelContent('empty')}
+                  onClick={() => setRightPanelContent('scenario')}
                 >
                   ×
                 </button>
@@ -297,7 +386,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
                 <h3>🏰 Your Castles</h3>
                 <button 
                   className="close-panel-btn"
-                  onClick={() => setRightPanelContent('empty')}
+                  onClick={() => setRightPanelContent('scenario')}
                 >
                   ×
                 </button>
