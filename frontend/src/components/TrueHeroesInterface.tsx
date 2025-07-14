@@ -42,7 +42,9 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
 
   const handleHeroesClick = () => {
     if (!currentPlayer?.heroes || currentPlayer.heroes.length === 0) {
-      setRightPanelContent('hero');
+      // Si pas de héros, garder le panneau scénario avec les infos de map
+      setRightPanelContent('scenario');
+      setSelectedHeroId(null);
       return;
     }
 
@@ -203,6 +205,15 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
               <span className="btn-icon">🤖</span>
               <span className="btn-label">AI</span>
             </button>
+
+            <button 
+              className="end-turn-btn"
+              onClick={endTurn}
+              title="End current turn"
+            >
+              <span className="btn-icon">🔄</span>
+              <span className="btn-label">End Turn</span>
+            </button>
           </div>
         </div>
       </div>
@@ -346,13 +357,26 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
                       alt={selectedHero.name}
                       className="hero-portrait-img"
                       onError={(e) => {
-                        // Fallback vers un emoji si l'image ne charge pas
+                        // Fallback simple avec emoji
                         const target = e.target as HTMLImageElement;
                         target.style.display = 'none';
-                        const fallback = document.createElement('div');
-                        fallback.className = 'hero-emoji-fallback';
-                        fallback.textContent = getHeroEmoji(selectedHero.name);
-                        target.parentNode?.appendChild(fallback);
+                        const parent = target.parentNode as HTMLElement;
+                        if (parent && !parent.querySelector('.hero-emoji-fallback')) {
+                          const fallback = document.createElement('div');
+                          fallback.className = 'hero-emoji-fallback';
+                          fallback.textContent = getHeroEmoji(selectedHero.name);
+                          parent.appendChild(fallback);
+                        }
+                      }}
+                      onLoad={(e) => {
+                        // S'assurer que l'emoji fallback est retiré si l'image charge
+                        const target = e.target as HTMLImageElement;
+                        const parent = target.parentNode as HTMLElement;
+                        const fallback = parent?.querySelector('.hero-emoji-fallback');
+                        if (fallback) {
+                          fallback.remove();
+                        }
+                        target.style.display = 'block';
                       }}
                     />
                   </div>
@@ -496,16 +520,6 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
             </div>
           )}
         </div>
-      </div>
-
-      {/* Turn End Button */}
-      <div className="game-footer">
-        <button 
-          className="end-turn-btn"
-          onClick={endTurn}
-        >
-          🔄 End Turn
-        </button>
       </div>
     </div>
   );

@@ -10,63 +10,62 @@ test.describe('🎮 Heroes of Time - Gameplay Demo', () => {
       await page.evaluate(({ text, position, duration }) => {
         // Supprimer l'ancien tooltip s'il existe
         const oldTooltip = document.querySelector('.demo-tooltip');
-        if (oldTooltip) oldTooltip.remove();
+        if (oldTooltip) {
+          // Ne pas supprimer, juste changer le contenu
+          const contentDiv = oldTooltip.querySelector('.tooltip-content');
+          if (contentDiv) {
+            contentDiv.textContent = text;
+            return;
+          }
+        }
         
-        // Créer le nouveau tooltip
+        // Créer le nouveau tooltip seulement s'il n'existe pas
         const tooltip = document.createElement('div');
         tooltip.className = 'demo-tooltip';
         tooltip.innerHTML = `
           <div style="
             position: fixed;
-            top: ${position === 'top' ? '20px' : position === 'bottom' ? 'auto' : '50%'};
-            bottom: ${position === 'bottom' ? '20px' : 'auto'};
+            top: ${position === 'top' ? '80px' : position === 'bottom' ? 'auto' : '50%'};
+            bottom: ${position === 'bottom' ? '80px' : 'auto'};
             left: 50%;
             transform: translateX(-50%) ${position === 'center' ? 'translateY(-50%)' : ''};
-                         background: linear-gradient(135deg, rgba(26,26,46,0.85) 0%, rgba(22,33,62,0.85) 50%, rgba(15,52,96,0.85) 100%);
-             color: #ffd700;
-             padding: 15px 25px;
-             border-radius: 12px;
-             border: 2px solid rgba(255,215,0,0.8);
-             font-family: 'Georgia', serif;
-             font-size: 16px;
-             font-weight: bold;
-             text-align: center;
-             box-shadow: 0 8px 25px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,215,0,0.2);
-             z-index: 10000;
-             min-width: 280px;
-             max-width: 480px;
-             backdrop-filter: blur(5px);
-            animation: heroesTooltip 0.5s ease-out;
+            background: rgba(26,26,46,0.75);
+            color: #ffd700;
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,215,0,0.6);
+            font-family: 'Georgia', serif;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            backdrop-filter: blur(3px);
+            z-index: 9999;
+            min-width: 200px;
+            max-width: 400px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            transition: opacity 0.3s ease;
           ">
-            <div style="
-              background: linear-gradient(45deg, transparent 30%, rgba(255,215,0,0.1) 50%, transparent 70%);
-              margin: -20px -30px 10px -30px;
-              padding: 10px;
-              border-radius: 12px 12px 0 0;
-              font-size: 14px;
-              color: #ffed4e;
-            ">⚡ DÉMO HEROES OF TIME ⚡</div>
-            ${text}
+            <div class="tooltip-content" style="
+              margin: 0;
+              padding: 0;
+            ">${text}</div>
           </div>
-          <style>
-            @keyframes heroesTooltip {
-              0% { opacity: 0; transform: translateX(-50%) translateY(-30px) scale(0.8); }
-              100% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
-            }
-          </style>
         `;
+        
         document.body.appendChild(tooltip);
         
-        // Supprimer après la durée spécifiée
+        // Auto-remove après la durée spécifiée
         setTimeout(() => {
-          if (tooltip.parentNode) {
-            tooltip.style.animation = 'heroesTooltip 0.3s ease-in reverse';
-            setTimeout(() => tooltip.remove(), 300);
+          if (tooltip && tooltip.parentNode) {
+            tooltip.style.opacity = '0';
+            setTimeout(() => {
+              if (tooltip.parentNode) {
+                tooltip.parentNode.removeChild(tooltip);
+              }
+            }, 300);
           }
         }, duration);
       }, { text, position, duration });
-      
-      await page.waitForTimeout(duration);
     };
     
          // 1. Page principale

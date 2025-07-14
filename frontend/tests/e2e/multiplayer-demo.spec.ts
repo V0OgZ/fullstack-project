@@ -52,50 +52,57 @@ test.describe('🎮 Heroes of Time - Démo Multijoueur', () => {
   // Fonction helper pour les tooltips
   const showDemoTooltip = async (page: Page, text: string, playerName: string, duration: number = 2000) => {
     await page.evaluate(({ text, playerName, duration }) => {
-      const oldTooltip = document.querySelector('.multiplayer-demo-tooltip');
-      if (oldTooltip) oldTooltip.remove();
+      // Supprimer l'ancien tooltip s'il existe pour ce joueur
+      const oldTooltip = document.querySelector(`.demo-tooltip-${playerName.toLowerCase()}`);
+      if (oldTooltip) {
+        const contentDiv = oldTooltip.querySelector('.tooltip-content');
+        if (contentDiv) {
+          contentDiv.textContent = text;
+          return;
+        }
+      }
       
+      // Créer le nouveau tooltip
       const tooltip = document.createElement('div');
-      tooltip.className = 'multiplayer-demo-tooltip';
+      tooltip.className = `demo-tooltip-${playerName.toLowerCase()}`;
       tooltip.innerHTML = `
         <div style="
           position: fixed;
-          top: 20px;
-          left: 50%;
-          transform: translateX(-50%);
-          background: linear-gradient(135deg, rgba(26,26,46,0.9) 0%, rgba(22,33,62,0.9) 50%, rgba(15,52,96,0.9) 100%);
+          top: 60px;
+          left: 20px;
+          background: rgba(26,26,46,0.8);
           color: #ffd700;
-          padding: 12px 20px;
-          border-radius: 10px;
-          border: 2px solid rgba(255,215,0,0.9);
-          font-family: 'Georgia', serif;
-          font-size: 14px;
+          padding: 10px 16px;
+          border-radius: 6px;
+          border: 1px solid rgba(255,215,0,0.6);
+          font-family: Arial, sans-serif;
+          font-size: 12px;
           font-weight: bold;
-          text-align: center;
-          box-shadow: 0 6px 20px rgba(0,0,0,0.7);
-          z-index: 10000;
-          min-width: 250px;
-          max-width: 400px;
           backdrop-filter: blur(3px);
+          z-index: 9999;
+          max-width: 250px;
+          box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+          transition: opacity 0.3s ease;
         ">
-          <div style="
-            color: #ffed4e;
-            font-size: 12px;
-            margin-bottom: 5px;
-          ">🎮 ${playerName}</div>
-          ${text}
+          <div style="color: #87CEEB; margin-bottom: 4px; font-size: 10px;">${playerName}</div>
+          <div class="tooltip-content" style="margin: 0; padding: 0;">${text}</div>
         </div>
       `;
+      
       document.body.appendChild(tooltip);
       
+      // Auto-remove après la durée
       setTimeout(() => {
-        if (tooltip.parentNode) {
-          tooltip.remove();
+        if (tooltip && tooltip.parentNode) {
+          tooltip.style.opacity = '0';
+          setTimeout(() => {
+            if (tooltip.parentNode) {
+              tooltip.parentNode.removeChild(tooltip);
+            }
+          }, 300);
         }
       }, duration);
     }, { text, playerName, duration });
-    
-    await page.waitForTimeout(duration);
   };
 
   test('Démo multijoueur complète: 2 joueurs, choix scénario, partie', async () => {
