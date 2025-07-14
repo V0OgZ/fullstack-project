@@ -7,6 +7,7 @@ import './ModernGameRenderer.css';
 interface ModernGameRendererProps {
   width: number;
   height: number;
+  onTileClick?: (coord: Position) => void;
 }
 
 interface AnimatedElement {
@@ -20,7 +21,7 @@ interface AnimatedElement {
   size: number;
 }
 
-const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }) => {
+const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height, onTileClick }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
   const { map, currentGame, selectedTile, setSelectedTile, visibleZFCs } = useGameStore();
@@ -522,8 +523,9 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height }
       
       // Ajouter un effet de particule au clic
       addParticleEffect(hexCoord, '#FFD700');
+      if (onTileClick) onTileClick(hexCoord);
     }
-  }, [map, pixelToHex, setSelectedTile, addParticleEffect]);
+  }, [map, pixelToHex, setSelectedTile, addParticleEffect, onTileClick]);
 
   // Initialiser le rendu
   useEffect(() => {

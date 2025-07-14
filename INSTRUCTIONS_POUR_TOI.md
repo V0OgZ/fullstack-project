@@ -101,3 +101,9 @@ lsof -i:3000  # Frontend
 2. Vérifier console errors
 3. Vérifier Network requests
 4. Si tout est OK mais ça charge pas → problème de state management React 
+
+## 🧪 Processus de Tests
+Toujours suivre ces étapes avant de merger des changements:
+1. **Build the project:** Run `./start-app.sh` to build and start backend/frontend.
+2. **Fix errors:** Check logs/backend.log and logs/frontend.log for errors. Fix any compilation or runtime errors.
+3. **Run tests:** cd frontend && npx playwright test --ui to run tests in interactive UI mode with single browser. 
