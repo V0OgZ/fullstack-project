@@ -329,13 +329,13 @@ public class GameService {
         game.put("status", "active");
         game.put("scenario", "conquest-classique");
 
-        // Real hexagonal map
-        Map<String, Object> map = createHexagonalMap();
-        game.put("map", map);
-
         // Real players with resources and castles
         List<Map<String, Object>> players = createPlayersWithCastles(gameId);
         game.put("players", players);
+        
+        // Real hexagonal map with heroes placed on tiles
+        Map<String, Object> map = createHexagonalMapWithHeroes(players);
+        game.put("map", map);
         
         game.put("currentPlayer", players.get(0));
         game.put("actions", new ArrayList<>());
@@ -744,8 +744,14 @@ public class GameService {
     }
     
     private String getRandomTerrain() {
-        String[] terrains = {"grass", "forest", "mountain", "water", "desert", "swamp"};
-        return terrains[(int)(Math.random() * terrains.length)];
+        // More balanced terrain distribution for better gameplay
+        double rand = Math.random();
+        if (rand < 0.35) return "grass";      // 35% - most common
+        if (rand < 0.55) return "forest";     // 20% - common
+        if (rand < 0.70) return "mountain";   // 15% - moderate
+        if (rand < 0.80) return "water";      // 10% - creates obstacles
+        if (rand < 0.90) return "desert";     // 10% - varied terrain
+        return "swamp";                       // 10% - challenging terrain
     }
 
     private int getTerrainMovementCost(Object terrainType) {
@@ -773,9 +779,56 @@ public class GameService {
                 Map<String, Object> tile = new HashMap<>();
                 tile.put("x", x);
                 tile.put("y", y);
-                tile.put("type", getRandomTerrain());
+                String terrainType = getRandomTerrain();
+                tile.put("terrain", terrainType);  // Fixed: use "terrain" instead of "type"
                 tile.put("walkable", true);
-                tile.put("movementCost", getTerrainMovementCost(tile.get("type")));
+                tile.put("movementCost", getTerrainMovementCost(terrainType));
+                tiles.add(tile);
+            }
+        }
+        map.put("tiles", tiles);
+        
+        // Add real objects
+        List<Map<String, Object>> objects = createMapObjects();
+        map.put("objects", objects);
+        
+        return map;
+    }
+    
+    private Map<String, Object> createHexagonalMapWithHeroes(List<Map<String, Object>> players) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", "hex-map-1");
+        map.put("type", "hexagonal");
+        map.put("width", 20);
+        map.put("height", 20);
+        
+        List<Map<String, Object>> tiles = new ArrayList<>();
+        for (int y = 0; y < 20; y++) {
+            for (int x = 0; x < 20; x++) {
+                Map<String, Object> tile = new HashMap<>();
+                tile.put("x", x);
+                tile.put("y", y);
+                String terrainType = getRandomTerrain();
+                tile.put("terrain", terrainType);
+                tile.put("walkable", true);
+                tile.put("movementCost", getTerrainMovementCost(terrainType));
+                
+                // Check if any hero should be placed on this tile
+                for (Map<String, Object> player : players) {
+                    List<Map<String, Object>> heroes = (List<Map<String, Object>>) player.get("heroes");
+                    if (heroes != null) {
+                        for (Map<String, Object> hero : heroes) {
+                            Map<String, Object> heroPosition = (Map<String, Object>) hero.get("position");
+                            if (heroPosition != null && 
+                                ((Integer) heroPosition.get("x")).equals(x) && 
+                                ((Integer) heroPosition.get("y")).equals(y)) {
+                                tile.put("hero", hero);
+                                break;
+                            }
+                        }
+                    }
+                }
+                
                 tiles.add(tile);
             }
         }

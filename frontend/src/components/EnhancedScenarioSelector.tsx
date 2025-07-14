@@ -206,6 +206,36 @@ const EnhancedScenarioSelector: React.FC = () => {
       {/* Game Title */}
       <div className="game-title-header">
         <h1 className="main-game-title">🎮 Heroes of Time ⚔️</h1>
+        {/* Discrete demo button */}
+        <button
+          onClick={() => navigate('/demo')}
+          className="demo-button"
+          style={{
+            position: 'absolute',
+            top: '50px',
+            right: '20px',
+            padding: '4px 8px',
+            fontSize: '10px',
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            borderRadius: '4px',
+            color: 'rgba(255, 255, 255, 0.6)',
+            cursor: 'pointer',
+            transition: 'all 0.2s ease',
+            zIndex: 100
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+            e.currentTarget.style.color = 'rgba(255, 255, 255, 0.9)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+            e.currentTarget.style.color = 'rgba(255, 255, 255, 0.6)';
+          }}
+          title="Quick Demo Mode"
+        >
+          🎬 demo
+        </button>
       </div>
 
       <main className="selector-main">

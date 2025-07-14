@@ -4,7 +4,7 @@ import { generateSessionNameId, useSessionNameTranslator } from '../services/ses
 
 interface MultiplayerSession {
   sessionId: string;
-  sessionName: string;
+  name: string;  // Changed from sessionName to name to match backend
   maxPlayers: number;
   currentPlayers: number;
   gameMode: string;
@@ -83,20 +83,31 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
   const [connectionMode, setConnectionMode] = useState<'polling' | 'websocket'>('polling');
   const isWebSocketAvailable = false; // WebSocket is disabled for stability
 
+  // Load available sessions
   const loadSessions = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await ApiService.getJoinableSessions();
-      // Ensure sessions is always an array
-      setSessions(Array.isArray(response) ? response : []);
+      const sessionsData = await ApiService.getJoinableSessions();
+      setSessions(sessionsData);
+      
+      // Check if current session started and navigate to game
+      if (currentSessionId && waitingForPlayers) {
+        try {
+          const currentSession = await ApiService.getMultiplayerSession(currentSessionId);
+          if (currentSession && currentSession.status === 'ACTIVE') {
+            console.log('🎮 Session started! Navigating to game...');
+            onSessionJoined(currentSessionId);
+          }
+        } catch (error) {
+          console.log('Session check failed:', error);
+        }
+      }
     } catch (error) {
       console.error('Failed to load sessions:', error);
-      setSessions([]); // Set empty array on error
-      onError('Failed to load multiplayer sessions');
     } finally {
       setLoading(false);
     }
-  }, [onError]);
+  }, [currentSessionId, waitingForPlayers, onSessionJoined]);
 
   // WebSocket disabled - using polling mode only for better reliability
   useEffect(() => {
@@ -184,12 +195,17 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
       const response = await ApiService.joinMultiplayerSession(sessionId, playerId);
       console.log('✅ Successfully joined session:', response);
       
+      // Set the current session to show waiting room
+      setCurrentSessionId(sessionId);
+      setWaitingForPlayers(true);
+      
       // Wait a moment for the session to update, then refresh
       setTimeout(async () => {
         await loadSessions();
       }, 1000);
       
-      onSessionJoined(sessionId);
+      // Don't navigate to game immediately - stay in waiting room
+      // onSessionJoined(sessionId);
       
     } catch (error) {
       console.error('❌ Failed to join session:', error);
@@ -210,8 +226,14 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
 
     try {
       setLoading(true);
-      // Start the game by joining the session
+      console.log(`🚀 Starting game for session ${currentSessionId}`);
+      
+      const response = await ApiService.startMultiplayerSession(currentSessionId, playerId);
+      console.log('✅ Game started successfully:', response);
+      
+      // Navigate to the actual game
       onSessionJoined(currentSessionId);
+      
     } catch (error) {
       console.error('❌ Failed to start game:', error);
       onError(`Failed to start game: ${error instanceof Error ? error.message : 'Unknown error'}`);
@@ -248,7 +270,7 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
           marginBottom: '20px'
         }}>
           <h3 style={{ color: '#fff', marginBottom: '10px' }}>
-            {currentSession?.sessionName || 'Your Session'}
+            {currentSession?.name || 'Your Session'}
           </h3>
           <div style={{ color: '#888', marginBottom: '15px' }}>
             Session ID: <strong style={{ color: '#00d4ff' }}>{currentSessionId}</strong>
@@ -658,9 +680,9 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
             >
               <div>
                 <h3 style={{ color: '#fff', margin: '0 0 5px 0' }}>
-                  🎮 {session.sessionName && session.sessionName.includes('_') ? translateSessionName(session.sessionName) : (session.sessionName || 'Unnamed Session')}
+                  🎮 {session.name && session.name.includes('_') ? translateSessionName(session.name) : (session.name || 'Unnamed Session')}
                 </h3>
-                {session.sessionName && session.sessionName.includes('_') && (
+                {session.name && session.name.includes('_') && (
                   <div style={{ color: '#FF6B35', fontSize: '10px', marginBottom: '3px' }}>
                     ⚡ Epic Generated Name
                   </div>

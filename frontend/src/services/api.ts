@@ -302,6 +302,19 @@ export class ApiService {
     });
   }
 
+  static async startMultiplayerSession(sessionId: string, playerId: string): Promise<any> {
+    return this.makeRequest(`/multiplayer/sessions/${sessionId}/start`, {
+      method: 'POST',
+      body: JSON.stringify({ playerId })
+    });
+  }
+
+  static async getMultiplayerSession(sessionId: string): Promise<any> {
+    return this.makeRequest(`/multiplayer/sessions/${sessionId}`, {
+      method: 'GET'
+    });
+  }
+
   static async createConquestClassicScenario(): Promise<any> {
     return this.makeRequest('/scenarios/predefined/conquest-classic', { method: 'POST' });
   }
