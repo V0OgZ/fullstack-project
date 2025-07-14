@@ -143,3 +143,32 @@ test.describe('Heroes of Time - Solo Gameplay', () => {
     await expect(page.locator('.turn-display, .turn-controls')).toBeVisible({ timeout: 10000 });
   });
 }); 
+
+test.describe('Full Turn Gameplay', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+    await page.locator('[data-testid="scenario-card"]').first().click();
+    await page.locator('[data-testid="start-game-button"]').click();
+    await expect(page).toHaveURL(/game/);
+  });
+
+  test('should perform a full turn including hero movement and opening screens', async ({ page }) => {
+    // Select hero
+    await page.locator('.hero-card').first().click();
+    
+    // Click on a tile to move (click at coordinates on canvas)
+    await page.locator('canvas').click({ position: { x: 100, y: 100 } });
+    
+    // Open inventory
+    await page.locator('[data-testid="inventory-button"]').click();
+    await expect(page.locator('.inventory-modal')).toBeVisible();
+    
+    // Open other screens
+    await page.locator('[data-testid="castle-management-button"]').click();
+    await expect(page.locator('.castle-panel')).toBeVisible();
+    
+    // End turn
+    await page.locator('[data-testid="end-turn-button"]').click();
+    await expect(page.locator('[data-testid="turn-indicator"]')).toContainText('Turn 2');
+  });
+}); 

@@ -85,23 +85,8 @@ echo "🌐 Frontend: http://localhost:3000"
 echo "🔧 Backend:  http://localhost:8080"
 echo "📊 Health:   http://localhost:8080/api/health"
 echo ""
-echo "📝 Logs:"
-echo "   Backend:  logs/backend.log"
-echo "   Frontend: logs/frontend.log"
+echo "📝 To see backend logs: tail -f logs/backend.log"
+echo "📝 To see frontend logs: tail -f logs/frontend.log"
 echo ""
 echo "🛑 To stop the application, run: ./stop-app.sh"
-echo ""
-echo "Press Ctrl+C to stop monitoring (apps will continue running)"
-
-# Monitor the processes
-while true; do
-    if ! kill -0 $BACKEND_PID 2>/dev/null; then
-        echo "❌ Backend process died!"
-        break
-    fi
-    if ! kill -0 $FRONTEND_PID 2>/dev/null; then
-        echo "❌ Frontend process died!"
-        break
-    fi
-    sleep 5
-done 
+echo "" 

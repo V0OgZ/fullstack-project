@@ -3,10 +3,13 @@ import { useTranslation } from '../i18n';
 import { useGameStore } from '../store/useGameStore';
 import ModernGameRenderer from './ModernGameRenderer';
 import './SimpleModernInterface.css';
+import { Hero, Position } from '../types/game';
+import { ApiService } from '../services/api';
 
 const SimpleModernInterface: React.FC = () => {
   const { t, language, setLanguage } = useTranslation();
   const [showSidePanel, setShowSidePanel] = useState(true);
+  const [selectedHero, setSelectedHero] = useState<Hero | null>(null);
   
   const { 
     currentGame, 
@@ -29,6 +32,17 @@ const SimpleModernInterface: React.FC = () => {
       nextPlayer();
     } else {
       endTurn();
+    }
+  };
+
+  const handleTileClick = (coord: Position) => {
+    if (selectedHero) {
+      ApiService.moveHero(selectedHero.id, coord)
+        .then(() => {
+          useGameStore.getState().refreshGameState();
+          setSelectedHero(null);
+        })
+        .catch((error: any) => console.error('Failed to move hero:', error));
     }
   };
 
@@ -98,7 +112,11 @@ const SimpleModernInterface: React.FC = () => {
       <main className="game-main">
         {/* Map - 80% de l'écran */}
         <div className="map-area">
-          <ModernGameRenderer width={1200} height={800} />
+          <ModernGameRenderer 
+            width={1200} 
+            height={800} 
+            onTileClick={handleTileClick}
+          />
         </div>
 
         {/* Side Panel - Simple et efficace */}
@@ -116,7 +134,9 @@ const SimpleModernInterface: React.FC = () => {
 
             <div className="heroes-list">
               {currentPlayer.heroes.map(hero => (
-                <div key={hero.id} className="hero-card">
+                <div key={hero.id} className={`hero-card ${selectedHero?.id === hero.id ? 'selected' : ''}`}
+                  onClick={() => setSelectedHero(hero)}
+                >
                   <div className="hero-header">
                     <span className="hero-name">{hero.name}</span>
                     <span className="hero-level">Niv. {hero.level}</span>
