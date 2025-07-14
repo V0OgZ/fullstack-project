@@ -258,6 +258,13 @@ export class ApiService {
     });
   }
 
+  static async recruitUnitsFromGame(gameId: string, buildingId: string, data: any): Promise<any> {
+    return this.makeRequest(`/games/${gameId}/buildings/${buildingId}/recruit`, {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+  }
+
   static async checkAndCompleteReadyBuildings(gameId: string): Promise<any> {
     return this.makeRequest(`/games/${gameId}/buildings/check-ready`, {
       method: 'POST'
@@ -351,10 +358,25 @@ export class ApiService {
 
   static async checkBackendStatus(): Promise<boolean> {
     try {
-      await this.makeRequest('/health');
-      return true;
+      const response = await this.makeRequest('/health');
+      return response.status === 'UP';
     } catch (error) {
+      console.error('Backend health check failed:', error);
       return false;
     }
   }
+
+  // New methods for castle management
+  static async getPlayerBuildings(gameId: string, playerId: string): Promise<any> {
+    return this.makeRequest(`/games/${gameId}/players/${playerId}/buildings`);
+  }
+
+  static async getAvailableUnits(gameId: string, playerId: string): Promise<any> {
+    return this.makeRequest(`/games/${gameId}/players/${playerId}/units/available`);
+  }
+
+  static async getUnitDetails(unitType: string): Promise<any> {
+    return this.makeRequest(`/units/${unitType}`);
+  }
+
 } 

@@ -127,7 +127,6 @@ export interface Translation {
   clickObjectToCollect: string;
   selectUnitType: string;
   level: string;
-  movementPoints: string;
   
   // Magic Inventory
   magicInventory: string;
@@ -443,6 +442,20 @@ export interface Translation {
   'demo.endTurn': string;
   'demo.nextTurn': string;
   'demo.finished': string;
+
+  // Hero movement
+  clickHeroToSelect: string;
+  clickTileToMove: string;
+  heroSelected: string;
+  heroMoved: string;
+  notEnoughMovement: string;
+  cannotMoveHere: string;
+  movementPoints: string;
+  
+  // Hero actions
+  heroStats: string;
+  noHeroSelected: string;
+  selectHeroPrompt: string;
 }
 
 // Traductions françaises
@@ -568,7 +581,6 @@ const frenchTranslations: Translation = {
   clickObjectToCollect: 'Cliquez sur l\'objet pour le collecter',
   selectUnitType: 'Sélectionner le Type d\'Unité',
   level: 'Niveau',
-  movementPoints: 'Points de Mouvement',
   
   // Magic Inventory
   magicInventory: 'Inventaire Magique',
@@ -884,6 +896,20 @@ const frenchTranslations: Translation = {
   'demo.endTurn': '🔄 Fin du tour - Cliquez sur "End Turn" pour terminer.',
   'demo.nextTurn': '🔄 Tour suivant en cours<br/>Votre royaume évolue et grandit !',
   'demo.finished': '🎉 Démonstration terminée !<br/>Vous savez maintenant jouer à Heroes of Time<br/><br/>✨ Amusez-vous bien dans vos conquêtes ! ✨',
+
+  // Hero movement
+  clickHeroToSelect: 'Cliquez sur un héros pour le sélectionner',
+  clickTileToMove: 'Cliquez sur une case verte pour déplacer votre héros',
+  heroSelected: 'Héros sélectionné',
+  heroMoved: 'Héros déplacé avec succès',
+  notEnoughMovement: 'Pas assez de points de déplacement',
+  cannotMoveHere: 'Impossible de se déplacer ici',
+  movementPoints: 'Points de déplacement',
+  
+  // Hero actions
+  heroStats: 'Statistiques du héros',
+  noHeroSelected: 'Aucun héros sélectionné',
+  selectHeroPrompt: 'Sélectionnez un héros pour voir ses statistiques et planifier des actions',
 };
 
 // Traductions anglaises
@@ -1009,7 +1035,6 @@ const englishTranslations: Translation = {
   clickObjectToCollect: 'Click object to collect',
   selectUnitType: 'Select Unit Type',
   level: 'Level',
-  movementPoints: 'Movement Points',
   
   // Magic Inventory
   magicInventory: 'Magic Inventory',
@@ -1325,6 +1350,20 @@ const englishTranslations: Translation = {
   'demo.endTurn': '🔄 End turn - Click "End Turn" to finish.',
   'demo.nextTurn': '🔄 Next turn in progress<br/>Your kingdom evolves and grows!',
   'demo.finished': '🎉 Demonstration complete!<br/>You now know how to play Heroes of Time<br/><br/>✨ Have fun in your conquests! ✨',
+
+  // Hero movement
+  clickHeroToSelect: 'Click on a hero to select them',
+  clickTileToMove: 'Click on a green tile to move your hero',
+  heroSelected: 'Hero selected',
+  heroMoved: 'Hero moved successfully',
+  notEnoughMovement: 'Not enough movement points',
+  cannotMoveHere: 'Cannot move to this location',
+  movementPoints: 'Movement Points',
+  
+  // Hero actions
+  heroStats: 'Hero Stats',
+  noHeroSelected: 'No hero selected',
+  selectHeroPrompt: 'Select a hero to see their stats and plan actions',
 };
 
 // Traductions russes
@@ -1450,7 +1489,6 @@ const russianTranslations: Translation = {
   clickObjectToCollect: 'Нажмите на объект для сбора',
   selectUnitType: 'Выберите тип юнита',
   level: 'Уровень',
-  movementPoints: 'Очки передвижения',
   
   // Magic Inventory
   magicInventory: 'Магический Инвентарь',
@@ -1766,6 +1804,20 @@ const russianTranslations: Translation = {
   'demo.endTurn': '🔄 Завершение хода - Нажмите "End Turn" для завершения.',
   'demo.nextTurn': '🔄 Следующий ход в процессе<br/>Ваше королевство развивается и растет!',
   'demo.finished': '🎉 Демонстрация завершена!<br/>Теперь вы знаете, как играть в Heroes of Time<br/><br/>✨ Удачи в ваших завоеваниях! ✨',
+
+  // Hero movement
+  clickHeroToSelect: 'Нажмите на героя, чтобы выбрать его',
+  clickTileToMove: 'Нажмите на зеленую клетку, чтобы переместить вашего героя',
+  heroSelected: 'Герой выбран',
+  heroMoved: 'Герой успешно перемещен',
+  notEnoughMovement: 'Недостаточно очков передвижения',
+  cannotMoveHere: 'Невозможно переместиться сюда',
+  movementPoints: 'Очки передвижения',
+  
+  // Hero actions
+  heroStats: 'Статистика героя',
+  noHeroSelected: 'Герой не выбран',
+  selectHeroPrompt: 'Выберите героя, чтобы увидеть его статистику и составить план действий',
 };
 
 // Helper function to get translations

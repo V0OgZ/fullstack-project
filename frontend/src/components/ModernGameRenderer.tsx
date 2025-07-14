@@ -28,13 +28,41 @@ interface AnimatedElement {
 const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererProps>(({ width, height, onTileClick }, ref) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
-  const { map, currentGame, selectedTile, setSelectedTile, visibleZFCs } = useGameStore();
+  const { map, currentGame, selectedTile, setSelectedTile, visibleZFCs, selectedHero, movementRange, movementMode, selectHero, moveHero, canMoveToPosition } = useGameStore();
   const { t } = useTranslation();
   
   const [animatedElements, setAnimatedElements] = useState<AnimatedElement[]>([]);
   const [hoveredTile, setHoveredTile] = useState<Position | null>(null);
   const [heroImages, setHeroImages] = useState<Map<string, HTMLImageElement>>(new Map());
   const [mapOffset, setMapOffset] = useState<Position>({ x: 0, y: 0 });
+  
+  // Handle tile clicks for hero selection and movement
+  const handleTileClick = useCallback((position: Position) => {
+    if (!map || map.length === 0 || !currentGame) return;
+    
+    const tile = map[position.y]?.[position.x];
+    if (!tile) return;
+    
+    // If there's a hero on this tile, select it
+    if (tile.hero) {
+      selectHero(tile.hero);
+      setSelectedTile(position);
+      return;
+    }
+    
+    // If we have a selected hero and are in movement mode, try to move
+    if (selectedHero && movementMode && canMoveToPosition(selectedHero, position)) {
+      moveHero(selectedHero.id, position);
+      selectHero(null); // Deselect hero after movement
+      return;
+    }
+    
+    // Regular tile selection
+    setSelectedTile(position);
+    if (onTileClick) {
+      onTileClick(position);
+    }
+  }, [map, currentGame, selectedHero, movementMode, canMoveToPosition, moveHero, selectHero, setSelectedTile, onTileClick]);
 
   // Fonction pour obtenir l'image du héros
   const getHeroImage = useCallback((heroName: string): string => {
@@ -370,6 +398,12 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
   ) => {
     const { x, y } = center;
     const radius = config.hexRadius;
+    
+    // Check if this tile is in movement range
+    const isInMovementRange = movementRange.some(pos => pos.x === tile.x && pos.y === tile.y);
+    
+    // Check if this tile has the selected hero
+    const hasSelectedHero = selectedHero && tile.hero && tile.hero.id === selectedHero.id;
 
     // Create hexagonal path
     ctx.beginPath();
@@ -399,6 +433,12 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     ctx.fillStyle = baseColor;
     ctx.fill();
 
+    // Movement range highlight
+    if (isInMovementRange && movementMode) {
+      ctx.fillStyle = 'rgba(0, 255, 0, 0.3)';
+      ctx.fill();
+    }
+
     // Hover effect
     if (isHovered) {
       ctx.fillStyle = config.colors.hover;
@@ -408,9 +448,13 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     }
 
     // Selection border
-    if (isSelected) {
-      ctx.strokeStyle = config.colors.selected;
-      ctx.lineWidth = 3;
+    if (isSelected || hasSelectedHero) {
+      ctx.strokeStyle = hasSelectedHero ? '#FFD700' : config.colors.selected;
+      ctx.lineWidth = hasSelectedHero ? 4 : 3;
+      ctx.stroke();
+    } else if (isInMovementRange && movementMode) {
+      ctx.strokeStyle = 'rgba(0, 255, 0, 0.8)';
+      ctx.lineWidth = 2;
       ctx.stroke();
     } else {
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
@@ -432,7 +476,7 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     if (tile.hero) {
       drawHero(ctx, center, tile.hero);
     }
-  }, [config, drawStructure, drawCreature, drawHero]);
+  }, [config, drawStructure, drawCreature, drawHero, movementRange, movementMode, selectedHero]);
 
   // Render ZFC zones
   const drawZFCZones = useCallback((ctx: CanvasRenderingContext2D) => {
@@ -619,13 +663,9 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     
     if (map && hexCoord.y >= 0 && hexCoord.y < map.length && 
         hexCoord.x >= 0 && hexCoord.x < map[0].length) {
-      setSelectedTile(hexCoord);
-      
-      // Ajouter un effet de particule au clic
-      addParticleEffect(hexCoord, '#FFD700');
-      if (onTileClick) onTileClick(hexCoord);
+      handleTileClick(hexCoord);
     }
-  }, [map, pixelToHex, setSelectedTile, addParticleEffect, onTileClick]);
+  }, [map, pixelToHex, handleTileClick]);
 
   // Initialiser le rendu
   useEffect(() => {
