@@ -3,8 +3,10 @@ package com.example.demo.service;
 import com.example.demo.model.Building;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.Random;
 
 @Service
 public class GameService {
@@ -802,13 +804,16 @@ public class GameService {
         map.put("width", 20);
         map.put("height", 20);
         
+        // Create terrain with logical patterns
+        String[][] terrainMap = generateRealisticTerrain(20, 20);
+        
         List<Map<String, Object>> tiles = new ArrayList<>();
         for (int y = 0; y < 20; y++) {
             for (int x = 0; x < 20; x++) {
                 Map<String, Object> tile = new HashMap<>();
                 tile.put("x", x);
                 tile.put("y", y);
-                String terrainType = getRandomTerrain();
+                String terrainType = terrainMap[y][x];
                 tile.put("terrain", terrainType);
                 tile.put("walkable", true);
                 tile.put("movementCost", getTerrainMovementCost(terrainType));
@@ -818,10 +823,10 @@ public class GameService {
                     List<Map<String, Object>> heroes = (List<Map<String, Object>>) player.get("heroes");
                     if (heroes != null) {
                         for (Map<String, Object> hero : heroes) {
-                            Map<String, Object> heroPosition = (Map<String, Object>) hero.get("position");
-                            if (heroPosition != null && 
-                                ((Integer) heroPosition.get("x")).equals(x) && 
-                                ((Integer) heroPosition.get("y")).equals(y)) {
+                            Map<String, Object> position = (Map<String, Object>) hero.get("position");
+                            if (position != null && 
+                                position.get("x").equals(x) && 
+                                position.get("y").equals(y)) {
                                 tile.put("hero", hero);
                                 break;
                             }
@@ -839,6 +844,183 @@ public class GameService {
         map.put("objects", objects);
         
         return map;
+    }
+    
+    private String[][] generateRealisticTerrain(int width, int height) {
+        String[][] terrain = new String[height][width];
+        Random random = new Random();
+        
+        // Step 1: Generate base terrain with noise
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                // Use Perlin-like noise for realistic terrain
+                double noiseValue = generateNoise(x, y, width, height);
+                terrain[y][x] = getTerrainFromNoise(noiseValue);
+            }
+        }
+        
+        // Step 2: Add logical terrain clusters
+        addTerrainClusters(terrain, width, height, random);
+        
+        // Step 3: Add rivers and lakes
+        addWaterFeatures(terrain, width, height, random);
+        
+        // Step 4: Smooth and finalize terrain
+        smoothTerrain(terrain, width, height);
+        
+        return terrain;
+    }
+    
+    private double generateNoise(int x, int y, int width, int height) {
+        // Simple noise function for terrain generation
+        double scale = 0.1;
+        double noise = 0;
+        
+        // Add multiple octaves of noise
+        for (int i = 0; i < 4; i++) {
+            double frequency = Math.pow(2, i) * scale;
+            double amplitude = Math.pow(0.5, i);
+            noise += Math.sin(x * frequency) * Math.cos(y * frequency) * amplitude;
+        }
+        
+        return noise;
+    }
+    
+    private String getTerrainFromNoise(double noise) {
+        if (noise < -0.3) return "water";
+        if (noise < -0.1) return "swamp";
+        if (noise < 0.1) return "grass";
+        if (noise < 0.3) return "forest";
+        if (noise < 0.5) return "mountain";
+        return "desert";
+    }
+    
+    private void addTerrainClusters(String[][] terrain, int width, int height, Random random) {
+        // Add forest clusters
+        for (int i = 0; i < 3; i++) {
+            int centerX = random.nextInt(width);
+            int centerY = random.nextInt(height);
+            int radius = 2 + random.nextInt(3);
+            
+            for (int y = Math.max(0, centerY - radius); y < Math.min(height, centerY + radius); y++) {
+                for (int x = Math.max(0, centerX - radius); x < Math.min(width, centerX + radius); x++) {
+                    double distance = Math.sqrt((x - centerX) * (x - centerX) + (y - centerY) * (y - centerY));
+                    if (distance < radius && random.nextDouble() < 0.7) {
+                        terrain[y][x] = "forest";
+                    }
+                }
+            }
+        }
+        
+        // Add mountain ranges
+        for (int i = 0; i < 2; i++) {
+            int startX = random.nextInt(width);
+            int startY = random.nextInt(height);
+            int length = 5 + random.nextInt(8);
+            
+            for (int j = 0; j < length; j++) {
+                int x = startX + j;
+                int y = startY + (random.nextInt(3) - 1);
+                
+                if (x >= 0 && x < width && y >= 0 && y < height) {
+                    terrain[y][x] = "mountain";
+                    
+                    // Add surrounding hills
+                    for (int dy = -1; dy <= 1; dy++) {
+                        for (int dx = -1; dx <= 1; dx++) {
+                            int nx = x + dx;
+                            int ny = y + dy;
+                            if (nx >= 0 && nx < width && ny >= 0 && ny < height && 
+                                random.nextDouble() < 0.3) {
+                                terrain[ny][nx] = "mountain";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private void addWaterFeatures(String[][] terrain, int width, int height, Random random) {
+        // Add a river
+        int riverY = height / 2 + random.nextInt(3) - 1;
+        for (int x = 0; x < width; x++) {
+            if (riverY >= 0 && riverY < height) {
+                terrain[riverY][x] = "water";
+                
+                // Add riverbanks
+                if (riverY > 0 && random.nextDouble() < 0.3) {
+                    terrain[riverY - 1][x] = "grass";
+                }
+                if (riverY < height - 1 && random.nextDouble() < 0.3) {
+                    terrain[riverY + 1][x] = "grass";
+                }
+            }
+            
+            // River meanders
+            if (random.nextDouble() < 0.3) {
+                riverY += random.nextInt(3) - 1;
+                riverY = Math.max(0, Math.min(height - 1, riverY));
+            }
+        }
+        
+        // Add a lake
+        int lakeX = width / 4 + random.nextInt(width / 2);
+        int lakeY = height / 4 + random.nextInt(height / 2);
+        int lakeSize = 2 + random.nextInt(3);
+        
+        for (int y = Math.max(0, lakeY - lakeSize); y < Math.min(height, lakeY + lakeSize); y++) {
+            for (int x = Math.max(0, lakeX - lakeSize); x < Math.min(width, lakeX + lakeSize); x++) {
+                double distance = Math.sqrt((x - lakeX) * (x - lakeX) + (y - lakeY) * (y - lakeY));
+                if (distance < lakeSize) {
+                    terrain[y][x] = "water";
+                }
+            }
+        }
+    }
+    
+    private void smoothTerrain(String[][] terrain, int width, int height) {
+        // Smooth terrain to remove isolated tiles
+        String[][] smoothed = new String[height][width];
+        
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                smoothed[y][x] = terrain[y][x];
+                
+                // Count neighbors
+                Map<String, Integer> neighbors = new HashMap<>();
+                for (int dy = -1; dy <= 1; dy++) {
+                    for (int dx = -1; dx <= 1; dx++) {
+                        int nx = x + dx;
+                        int ny = y + dy;
+                        if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
+                            String neighborTerrain = terrain[ny][nx];
+                            neighbors.put(neighborTerrain, neighbors.getOrDefault(neighborTerrain, 0) + 1);
+                        }
+                    }
+                }
+                
+                // If current terrain is isolated, change to most common neighbor
+                if (neighbors.getOrDefault(terrain[y][x], 0) <= 2) {
+                    String mostCommon = terrain[y][x];
+                    int maxCount = 0;
+                    for (Map.Entry<String, Integer> entry : neighbors.entrySet()) {
+                        if (entry.getValue() > maxCount) {
+                            maxCount = entry.getValue();
+                            mostCommon = entry.getKey();
+                        }
+                    }
+                    smoothed[y][x] = mostCommon;
+                }
+            }
+        }
+        
+        // Copy smoothed terrain back
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                terrain[y][x] = smoothed[y][x];
+            }
+        }
     }
     
     private Map<String, Object> createHero(String id, String name, String heroClass, int x, int y, String playerId) {
