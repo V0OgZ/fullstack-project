@@ -3,6 +3,7 @@ import { useGameStore } from '../store/useGameStore';
 import { Position, Tile, Hero } from '../types/game';
 import { useTranslation } from '../i18n';
 import { HERO_ASSETS } from '../constants/gameAssets';
+import { terrainSpriteSelector } from '../constants/terrainSprites';
 import './ModernGameRenderer.css';
 
 interface ModernGameRendererProps {
@@ -34,6 +35,7 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
   const [animatedElements, setAnimatedElements] = useState<AnimatedElement[]>([]);
   const [hoveredTile, setHoveredTile] = useState<Position | null>(null);
   const [heroImages, setHeroImages] = useState<Map<string, HTMLImageElement>>(new Map());
+  const [terrainImages, setTerrainImages] = useState<Map<string, HTMLImageElement>>(new Map());
   const [mapOffset, setMapOffset] = useState<Position>({ x: 0, y: 0 });
   
   // Handle tile clicks for hero selection and movement
@@ -133,6 +135,38 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     
     loadHeroImages();
   }, [preloadHeroImage]);
+
+  // Précharger les images de terrain
+  useEffect(() => {
+    const loadTerrainImages = async () => {
+      const terrainTypes = ['grass', 'forest', 'mountain', 'water', 'desert', 'swamp'];
+      
+      try {
+        const imagePromises = terrainTypes.map(terrain => {
+          return new Promise<[string, HTMLImageElement]>((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => resolve([terrain, img]);
+            img.onerror = (error) => reject(new Error(`Failed to load terrain image for ${terrain}: ${error}`));
+            img.src = `/assets/terrain/${terrain}.png`;
+          });
+        });
+        
+        const loadedImages = await Promise.all(imagePromises);
+        const newTerrainImages = new Map<string, HTMLImageElement>();
+        
+        loadedImages.forEach(([terrain, img]) => {
+          newTerrainImages.set(terrain, img);
+        });
+        
+        setTerrainImages(newTerrainImages);
+        console.log('✅ Terrain images loaded successfully:', newTerrainImages.size);
+      } catch (error) {
+        console.error('❌ Failed to load terrain images:', error);
+      }
+    };
+    
+    loadTerrainImages();
+  }, []);
 
   // Render configuration
   const config = useMemo(() => ({
@@ -388,7 +422,7 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     ctx.fillRect(x - mpBarWidth/2, y + 35, mpBarWidth * mpRatio, mpBarHeight);
   }, [heroImages]);
 
-  // Render hexagonal tile
+  // Render hexagonal tile with sprites
   const drawHexTile = useCallback((
     ctx: CanvasRenderingContext2D,
     center: Position,
@@ -405,7 +439,8 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     // Check if this tile has the selected hero
     const hasSelectedHero = selectedHero && tile.hero && tile.hero.id === selectedHero.id;
 
-    // Create hexagonal path
+    // Create hexagonal path for clipping
+    ctx.save();
     ctx.beginPath();
     for (let i = 0; i < 6; i++) {
       const angle = (Math.PI / 3) * i - Math.PI / 2;
@@ -419,19 +454,51 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     }
     ctx.closePath();
 
-    // Fill with terrain color - Fix the color mapping
-    let baseColor = config.colors.default;
-    const terrainKey = tile.terrain;
-    
-    if (terrainKey && config.colors[terrainKey as keyof typeof config.colors]) {
-      const colorValue = config.colors[terrainKey as keyof typeof config.colors];
-      if (typeof colorValue === 'string') {
-        baseColor = colorValue;
+    // Use terrain sprite if available, otherwise fallback to color
+    const terrainImage = terrainImages.get(tile.terrain);
+    if (terrainImage && map) {
+      // Clip to hexagon
+      ctx.clip();
+      
+      // Calculate sprite position and size
+      const spriteSize = radius * 2;
+      const spriteX = x - spriteSize / 2;
+      const spriteY = y - spriteSize / 2;
+      
+      // Draw terrain sprite
+      ctx.drawImage(terrainImage, spriteX, spriteY, spriteSize, spriteSize);
+      
+      ctx.restore();
+    } else {
+      // Fallback to colored hexagon
+      let baseColor = config.colors.default;
+      const terrainKey = tile.terrain;
+      
+      if (terrainKey && config.colors[terrainKey as keyof typeof config.colors]) {
+        const colorValue = config.colors[terrainKey as keyof typeof config.colors];
+        if (typeof colorValue === 'string') {
+          baseColor = colorValue;
+        }
+      }
+      
+      ctx.fillStyle = baseColor;
+      ctx.fill();
+      ctx.restore();
+    }
+
+    // Create hexagonal path again for overlays
+    ctx.beginPath();
+    for (let i = 0; i < 6; i++) {
+      const angle = (Math.PI / 3) * i - Math.PI / 2;
+      const hexX = x + radius * Math.cos(angle);
+      const hexY = y + radius * Math.sin(angle);
+      if (i === 0) {
+        ctx.moveTo(hexX, hexY);
+      } else {
+        ctx.lineTo(hexX, hexY);
       }
     }
-    
-    ctx.fillStyle = baseColor;
-    ctx.fill();
+    ctx.closePath();
 
     // Movement range highlight
     if (isInMovementRange && movementMode) {
@@ -476,7 +543,7 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     if (tile.hero) {
       drawHero(ctx, center, tile.hero);
     }
-  }, [config, drawStructure, drawCreature, drawHero, movementRange, movementMode, selectedHero]);
+  }, [config, drawStructure, drawCreature, drawHero, movementRange, movementMode, selectedHero, terrainImages, map]);
 
   // Render ZFC zones
   const drawZFCZones = useCallback((ctx: CanvasRenderingContext2D) => {

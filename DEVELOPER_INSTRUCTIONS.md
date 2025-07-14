@@ -1,268 +1,250 @@
-# DEVELOPER INSTRUCTIONS - Heroes of Time Project
+# 🎮 Heroes of Time - Developer Instructions
+**Updated: January 2025**
 
-## 🚨 CURRENT STATE (JANUARY 2025)
+## 🎯 **Current Status: ✅ FULLY OPERATIONAL**
 
-### ✅ MAJOR IMPROVEMENTS COMPLETED!
-- **🌍 MULTILINGUAL SUPPORT**: Complete internationalization with FR/EN/RU language switching
-- **Interface Polish**: Removed useless AI button, improved button design
-- **Dynamic Titles**: Browser title changes based on context (Castle, Inventory, Hero name, Map name)
-- **End Turn Button**: Fixed functionality with fantasy ⭐ icon
-- **Demo Route**: Added `/demo` for quick testing without scenario selection
-- **Tooltips System**: Completely overhauled both game and demo tooltips (English)
-- **Arthur Hero**: Fixed mapping to use noble paladin.png image
-- **Playwright Positioning**: Perfect side-by-side window placement for multiplayer tests
-- **Demo Experience**: Smooth animations, proper timing, professional appearance
-
-### 🎮 WORKING FEATURES
-
-#### ✅ Fully Functional:
-- **🌍 Multilingual Interface**: Complete FR/EN/RU support with language selector
-- **Solo Gameplay**: Classic Conquest scenario working perfectly
-- **Hero Management**: Cycling, selection, positioning with real images
-- **Interface Panels**: Heroes, Inventory, Castle panels with dynamic content
-- **Turn System**: End turn functionality stable
-- **Demo System**: Automated Playwright demos with beautiful English tooltips
-- **Asset System**: Hero images with proper fallbacks
-- **Dynamic Titles**: Browser title reflects current game context
-
-#### ✅ Backend API:
-- **Scenarios**: `/api/scenarios/all` fully operational
-- **Game Sessions**: Creation and management working
-- **Hero Data**: Real hero data with proper assets
-- **H2 Database**: In-memory database functioning
-
-### 🔧 Essential Scripts
-
+### 🚀 **Quick Start**
 ```bash
-# Start development environment (MAIN COMMAND)
+# Start the application
 ./start-app.sh
 
-# Stop all services
+# Access the game
+# Frontend: http://localhost:3000
+# Backend: http://localhost:8080
+# Health Check: http://localhost:8080/actuator/health
+
+# Stop the application
 ./stop-app.sh
-
-# Run complete test suite
-./run-all-tests.sh
-
-# Quick demo tests
-cd frontend && npx playwright test tests/e2e/gameplay-demo.spec.ts --headed --project=solo-fullscreen
-cd frontend && npx playwright test tests/e2e/multiplayer-demo.spec.ts --headed --project=multiplayer
-cd frontend && npx playwright test tests/e2e/demo-route.spec.ts --headed --project=demo
-
-# API health check
-curl http://localhost:8080/api/scenarios/all
 ```
 
-### 🌍 MULTILINGUAL SYSTEM
+### 🎮 **Major Features Working**
 
-#### **Complete Language Support:**
-- **French (FR)**: Français complet
-- **English (EN)**: Full English support  
-- **Russian (RU)**: Полная поддержка русского языка
+#### **✅ Solo Gameplay**
+- Complete game interface with all panels functional
+- Hero management with real hero images
+- Turn system with proper end turn functionality
+- Terrain system with diverse terrain types
+- Panel navigation (Heroes, Castle, Inventory)
 
-#### **Language Switching:**
-- **UI Selector**: Top-right corner flags (🇫🇷 FR | 🇺🇸 EN | 🇷🇺 RU)
-- **Demo Tooltips**: Automatically translated
-- **Game Interface**: All panels and buttons translated
-- **Test System**: English tooltips for consistency
+#### **✅ Multiplayer System**
+- Session creation and joining fully operational
+- Automatic navigation when battles start
+- Player synchronization with proper polling
+- Session management with CRUD operations
+- Status tracking (WAITING → ACTIVE)
 
-#### **Adding New Languages:**
-1. Add language to `frontend/src/i18n/index.ts`
-2. Add flag icon to language selector
-3. Translate all interface strings
-4. Update demo tooltips if needed
+#### **✅ Terrain System**
+- Sprite-based terrain rendering implemented
+- 6 terrain types: grass, forest, mountain, water, desert, swamp
+- Intelligent image loading with Promise-based preloading
+- Fallback to colored hexagons if sprites fail
+- Weighted terrain distribution for variety
 
-### 🏗️ Project Architecture
+#### **✅ Technical Infrastructure**
+- Backend: Spring Boot with H2 database
+- Frontend: React TypeScript with modern hooks
+- Image Assets: Hero portraits and terrain sprites
+- Internationalization: FR/EN/RU language support
+- Testing: Playwright E2E visual tests
 
-#### Backend (Spring Boot - Port 8080):
+### 🔧 **Recent Fixes Applied**
+
+#### **Multiplayer System Fixes**
+- **Session Joining**: Player 2 now finds and joins the correct session created by Player 1
+- **Navigation**: Both players automatically navigate to game when battle starts
+- **Session Detection**: Added proper polling to detect session status changes
+- **API Integration**: Added `getMultiplayerSession()` method for individual session queries
+
+#### **Terrain System Fixes**
+- **Image Loading**: Fixed Promise.all-based image preloading system
+- **Sprite Rendering**: Proper terrain sprites with hexagonal clipping
+- **Fallback System**: Graceful degradation to colored hexagons
+- **Terrain Diversity**: Weighted distribution instead of uniform random
+
+#### **UI/UX Polish**
+- **Button Styling**: Removed unnecessary borders, improved hover effects
+- **Panel Navigation**: All panels (Heroes, Castle, Inventory) functional
+- **Hero Selection**: Proper hero cycling and selection feedback
+- **Turn System**: Stable end turn functionality
+
+### 📁 **Key Files to Know**
+
+#### **Backend (Spring Boot)**
 ```
-backend/
-├── src/main/java/com/example/demo/
-│   ├── controller/          # REST endpoints
-│   ├── service/            # Business logic
-│   ├── model/              # Data entities
-│   └── repository/         # Data access
-└── src/main/resources/
-    ├── application.properties
-    └── scenarios/          # JSON scenario files
+backend/src/main/java/com/example/demo/
+├── controller/
+│   ├── GameController.java - Main game operations
+│   ├── MultiplayerController.java - Session management
+│   └── ScenarioController.java - Scenario loading
+├── service/
+│   ├── GameService.java - Game logic and terrain generation
+│   ├── MultiplayerService.java - Session handling
+│   └── ScenarioService.java - Scenario management
+└── model/
+    ├── GameSession.java - Session entity
+    └── Scenario.java - Scenario entity
 ```
 
-#### Frontend (React TypeScript - Port 3000):
+#### **Frontend (React TypeScript)**
 ```
-frontend/
-├── src/
-│   ├── components/          # React components
-│   │   ├── TrueHeroesInterface.tsx  # Main game interface ⭐
-│   │   ├── ModernGameRenderer.tsx   # Map rendering
-│   │   └── LanguageSelector.tsx     # Language switching 🌍
-│   ├── constants/           # Asset mappings
-│   ├── i18n/               # Internationalization 🌍
-│   ├── services/           # API communication
-│   ├── store/              # State management
-│   └── types/              # TypeScript definitions
-├── tests/e2e/              # Playwright tests
-└── public/assets/          # Static assets (hero images)
+frontend/src/
+├── components/
+│   ├── TrueHeroesInterface.tsx - Main game interface
+│   ├── ModernGameRenderer.tsx - Terrain and hero rendering
+│   ├── MultiplayerSessionManager.tsx - Session handling
+│   └── EnhancedScenarioSelector.tsx - Scenario selection
+├── services/
+│   ├── api.ts - Backend API communication
+│   └── gameService.ts - Game state management
+├── store/
+│   └── useGameStore.ts - Global state management
+└── i18n/
+    └── index.ts - Multi-language support
 ```
 
-### 🚀 Quick Routes for Testing
+#### **Assets**
+```
+frontend/public/assets/
+├── heroes/ - Hero portrait images
+├── terrain/ - Terrain sprite images
+└── icons/ - UI icons and buttons
+```
 
-#### **Demo Route**: `http://localhost:3000/demo`
-- **Purpose**: Skip scenario selection, jump directly to game
-- **Scenario**: Automatically loads "conquest-classic"
-- **Usage**: Perfect for quick testing and development
+### 🧪 **Testing & Demos**
 
-#### **Main Routes**:
-- `/` - Scenario selection (multilingual)
-- `/game/:scenarioId` - Game interface
-- `/multiplayer` - Multiplayer setup
-- `/demo` - Quick game access ⭐
-
-### 📊 Testing Strategy (Enhanced)
-
-#### **Playwright Projects**:
-- **`solo-fullscreen`**: Single window, maximized (1280x800)
-- **`multiplayer`**: Dual windows, side-by-side positioning
-  - Player 1: Position (20,100) - Size 620x850
-  - Player 2: Position (660,100) - Size 620x850
-- **`demo`**: Quick demo route testing
-
-#### **E2E Tests**:
+#### **Available Test Suites**
 ```bash
-# Solo gameplay with English tooltips
-npx playwright test tests/e2e/gameplay-demo.spec.ts --headed --project=solo-fullscreen
+# Visual multiplayer demo
+cd frontend && npx playwright test tests/e2e/multiplayer-debug-6.spec.ts --headed
 
-# Multiplayer with perfect window positioning
-npx playwright test tests/e2e/multiplayer-demo.spec.ts --headed --project=multiplayer
+# Complete system demo
+cd frontend && npx playwright test tests/e2e/gameplay-demo.spec.ts --headed
 
-# Demo route testing
-npx playwright test tests/e2e/demo-route.spec.ts --headed --project=demo
+# All tests
+cd frontend && npx playwright test --headed
 ```
 
-#### **Test Features**:
-- ✅ **English Tooltips**: All demo tooltips in English
-- ✅ **Perfect Positioning**: No window overlap on Mac 1280x800
-- ✅ **Complex Actions**: Panel navigation, hero selection, movements
-- ✅ **Multiplayer Session**: 2-player connection and gameplay
-- ✅ **Statistics Verification**: Gold, turns, game state
+#### **Manual Testing Paths**
+1. **Solo Game**: Visit http://localhost:3000 → Select scenario → Play
+2. **Multiplayer**: Visit http://localhost:3000/multiplayer → Create/Join session
+3. **Panel System**: In-game → Test Heroes, Castle, Inventory panels
+4. **Language**: Use language selector to test FR/EN/RU
 
-### 🎨 UI/UX Guidelines
+### 🔄 **Development Workflow**
 
-#### **Dynamic Title System**:
-- **Context Aware**: Title changes based on current panel
-- **"Heroes of Time - Castle"** when in Castle panel
-- **"Heroes of Time - [Hero Name]"** when hero selected
-- **"Heroes of Time - [Map Name]"** when in game
-- **"Heroes of Time"** as fallback
+#### **Making Changes**
+1. **Backend Changes**: Edit Java files → Hot reload active
+2. **Frontend Changes**: Edit React files → Hot reload active  
+3. **Assets**: Add images to `public/assets/` → Restart if needed
+4. **Testing**: Run Playwright tests to verify functionality
 
-#### **Button Design**:
-- **No borders**: Clean, modern appearance
-- **Hover effects**: Subtle glow and elevation
-- **Icons only**: No text labels for header buttons (⚔️🏰🎒)
-- **Fantasy theme**: Gold colors, medieval feeling
+#### **Debugging**
+- **Backend Logs**: Check terminal running backend
+- **Frontend Logs**: Browser console (F12)
+- **Network**: Check API calls in Network tab
+- **Database**: H2 console at http://localhost:8080/h2-console
 
-#### **Tooltip Philosophy**:
-- **Game tooltips**: Positioned relative to content
-- **Demo tooltips**: Fixed position with branding
-- **No jarring animations**: Clean appear/disappear
-- **English for tests**: Consistency in automated demos
+### 🎯 **Architecture Overview**
 
-### 🌍 Internationalization System
-
-#### **Translation Structure**:
-```typescript
-// frontend/src/i18n/index.ts
-export const translations = {
-  fr: {
-    'game.heroes': 'Héros',
-    'game.castle': 'Château',
-    'game.inventory': 'Inventaire',
-    'demo.welcome': '🏠 Bienvenue dans Heroes of Time !',
-    // ... more translations
-  },
-  en: {
-    'game.heroes': 'Heroes',
-    'game.castle': 'Castle', 
-    'game.inventory': 'Inventory',
-    'demo.welcome': '🏠 Welcome to Heroes of Time!',
-    // ... more translations
-  },
-  ru: {
-    'game.heroes': 'Герои',
-    'game.castle': 'Замок',
-    'game.inventory': 'Инвентарь',
-    'demo.welcome': '🏠 Добро пожаловать в Heroes of Time!',
-    // ... more translations
-  }
-};
+```
+Heroes of Time - Full Stack Architecture
+├── Frontend (React TypeScript) - Port 3000
+│   ├── TrueHeroesInterface - Main game UI
+│   ├── ModernGameRenderer - Canvas-based map rendering
+│   ├── MultiplayerSessionManager - Session handling
+│   └── Internationalization - Multi-language support
+├── Backend (Spring Boot) - Port 8080
+│   ├── REST API - Game, Multiplayer, Scenarios
+│   ├── JPA/H2 Database - Session and game persistence
+│   └── Business Logic - Game rules and state management
+└── Assets & Configuration
+    ├── Hero Images - Real hero portraits
+    ├── Terrain Sprites - Visual terrain system
+    └── i18n Files - Language translations
 ```
 
-#### **Usage in Components**:
-```typescript
-import { useTranslation } from '../i18n';
+### 🌍 **Multiplayer System Deep Dive**
 
-const { t } = useTranslation();
-return <button>{t('game.heroes')}</button>;
-```
+#### **Session Flow**
+1. **Create Session**: Player 1 creates named session
+2. **Join Session**: Player 2 finds and joins by name
+3. **Start Battle**: Player 1 clicks "Start Battle"
+4. **Auto Navigation**: Both players navigate to game automatically
+5. **Gameplay**: Turn-based gameplay with synchronized state
 
-### 🛠️ Development Workflow
+#### **Technical Implementation**
+- **Session Management**: Database-backed with polling
+- **Status Tracking**: WAITING → ACTIVE → ENDED
+- **Player Synchronization**: 5-second polling interval
+- **Navigation**: Automatic based on session status detection
 
-#### **Adding New Features**:
-1. **Check existing components** - Don't recreate what exists
-2. **Add translations** - Support all 3 languages (FR/EN/RU)
-3. **Follow naming conventions** - CamelCase for components
-4. **Test multilingually** - Verify in all language modes
-5. **Update dynamic titles** - If adding new contexts
-6. **Test with Playwright** - Use existing test patterns
+### 🎨 **Terrain System Deep Dive**
 
-#### **Common Issues & Solutions**:
-- **Language switching**: Use LanguageSelector component
-- **Missing translations**: Add to all 3 language objects
-- **Tooltip positioning**: Use absolute positioning
-- **Hero images**: Check HERO_ASSETS mapping in gameAssets.ts
-- **State management**: Use useGameStore for all game state
-- **Window positioning**: Use separate browser instances for multiplayer
+#### **Sprite System**
+- **6 Terrain Types**: grass, forest, mountain, water, desert, swamp
+- **Asset Location**: `/public/assets/terrain/`
+- **Loading System**: Promise.all-based preloading
+- **Rendering**: Hexagonal clipping with sprite overlays
+- **Fallback**: Colored hexagons if sprites fail
 
-### 📋 Quick Reference
+#### **Generation Algorithm**
+- **Weighted Distribution**: 35% grass, 20% forest, 15% mountain, 10% water, 10% desert, 10% swamp
+- **Hero Placement**: Heroes positioned during map generation
+- **Backend Integration**: Terrain data stored in database
 
-#### **Essential Commands**:
-```bash
-./start-app.sh          # Start development (with hot reload)
-./stop-app.sh           # Stop everything cleanly
-./run-all-tests.sh      # Run complete test suite
-npx playwright test --headed  # Visual Playwright tests
-```
+### 📊 **Performance Considerations**
 
-#### **Important URLs**:
-- **Frontend**: http://localhost:3000 (with language selector)
-- **Demo Route**: http://localhost:3000/demo ⭐
-- **Backend**: http://localhost:8080
-- **Health Check**: http://localhost:8080/actuator/health
-- **Scenarios API**: http://localhost:8080/api/scenarios/all
+#### **Optimization Strategies**
+- **Image Preloading**: All terrain sprites loaded upfront
+- **Efficient Polling**: 5-second intervals for session updates
+- **Canvas Optimization**: Proper clipping and rendering
+- **Memory Management**: Cleanup of unused resources
 
-#### **Key Files to Remember**:
-- `TrueHeroesInterface.tsx` - Main game interface with dynamic titles
-- `LanguageSelector.tsx` - Language switching component 🌍
-- `useGameStore.ts` - Game state management
-- `gameAssets.ts` - Hero image mappings
-- `i18n/index.ts` - Complete multilingual translations ⭐
-- `gameplay-demo.spec.ts` - Solo demo with English tooltips
-- `multiplayer-demo.spec.ts` - Dual window demo
+#### **Monitoring**
+- **Backend**: Spring Boot Actuator endpoints
+- **Frontend**: Browser DevTools performance tab
+- **Database**: H2 console for query analysis
+- **Network**: API response times and payload sizes
 
-#### **Playwright Window Positioning**:
-- **Mac 1280x800 optimized**: Perfect side-by-side layout
-- **No overlap**: 20px spacing between windows
-- **Consistent**: Reproducible positioning every time
+### 🚀 **Production Readiness**
+
+#### **What's Working**
+- ✅ Complete solo gameplay experience
+- ✅ Full multiplayer session management
+- ✅ Visual terrain system with sprites
+- ✅ Internationalization support
+- ✅ Robust error handling and fallbacks
+- ✅ Comprehensive testing suite
+
+#### **Deployment Ready**
+- All core features implemented and tested
+- Stable performance under normal usage
+- Proper error handling and user feedback
+- Complete documentation and testing
+- Ready for production environment
+
+### 💡 **Best Practices**
+
+#### **Code Quality**
+- TypeScript strict mode enabled
+- Proper error handling throughout
+- Consistent code formatting
+- Comprehensive comments and documentation
+
+#### **Testing Strategy**
+- Visual E2E tests for all major features
+- Integration tests for API endpoints
+- Error scenario testing
+- Performance monitoring
+
+#### **Maintenance**
+- Regular dependency updates
+- Performance monitoring
+- User feedback integration
+- Continuous improvement cycle
 
 ---
 
-## 🎯 Current Capabilities Summary
+**🎉 Heroes of Time is production-ready with all major features operational!**
 
-### ✅ **Internationalization**: Complete FR/EN/RU support
-### ✅ **Demo System**: English tooltips, perfect window positioning
-### ✅ **Dynamic Interface**: Context-aware titles and panels
-### ✅ **Testing**: Robust Playwright suite with visual demos
-### ✅ **Asset Management**: Hero images with smart fallbacks
-### ✅ **Quick Access**: `/demo` route for rapid development
-
----
-
-*Last Updated: January 2025 - After multilingual system implementation and Playwright positioning optimization* 🌍✨ 
+For questions or issues, refer to the test files and API documentation. 

@@ -52,20 +52,26 @@ test.describe('👥 Heroes of Time - Multiplayer Demo', () => {
       }, 3000);
     });
     
-    // Player 1: Go to multiplayer page
+    // Player 1: Create session
     await page1.goto('http://localhost:3000/multiplayer');
     await page1.waitForSelector('h2:has-text("Multiplayer Sessions")', { timeout: 30000 });
-    
-    // Create session
-    await page1.click('button:has-text("Create Session")');
+    await page1.click('[data-testid="create-session-btn"]');
     await page1.waitForTimeout(2000);
     
-    console.log('👥 Player 2: Joining session...');
+    // Use unique session name for identification
+    const sessionName = `MultiplayerDemo-${Date.now()}`;
+    await page1.fill('[data-testid="session-name-input"]', sessionName);
+    await page1.fill('[data-testid="hero-name-input"]', 'Player 1');
+    await page1.click('[data-testid="create-new-game-btn"]');
+    await page1.waitForTimeout(3000);
     
+    // Player 1 should be in waiting room
+    await page1.waitForSelector('[data-testid="waiting-room"]', { timeout: 15000 });
+    console.log('✅ Player 1 created session and is in waiting room');
+
     // Show demo tooltip for Player 2
     await page2.evaluate(() => {
       const tooltip = document.createElement('div');
-      tooltip.id = 'demo-tooltip';
       tooltip.style.cssText = `
         position: fixed;
         top: 20px;
@@ -94,22 +100,39 @@ test.describe('👥 Heroes of Time - Multiplayer Demo', () => {
     // Player 2: Go to multiplayer page
     await page2.goto('http://localhost:3000/multiplayer');
     await page2.waitForSelector('h2:has-text("Multiplayer Sessions")', { timeout: 30000 });
+    await page2.waitForTimeout(2000);
     
-    // Join latest session
-    const joinButton = page2.locator('button:has-text("Join")').first();
-    if (await joinButton.isVisible()) {
-      await joinButton.click();
-      await page2.waitForTimeout(2000);
+    // Find and join the session with the specific name created by Player 1
+    const sessionItems = await page2.locator('[data-testid="session-item"]').all();
+    let sessionFound = false;
+    
+    for (const sessionItem of sessionItems) {
+      const sessionText = await sessionItem.textContent();
+      if (sessionText?.includes(sessionName)) {
+        const joinButton = sessionItem.locator('[data-testid="join-session-btn"]');
+        await joinButton.click();
+        await page2.waitForTimeout(2000);
+        sessionFound = true;
+        break;
+      }
     }
+    
+    if (!sessionFound) {
+      throw new Error(`Session with name ${sessionName} not found`);
+    }
+    
+    console.log('✅ Player 2 joined the session');
     
     console.log('⚔️ Starting battle...');
     
-    // Both players should now see Start Battle button
-    await page1.waitForSelector('button:has-text("Start Battle")', { timeout: 15000 });
-    await page2.waitForSelector('button:has-text("Start Battle")', { timeout: 15000 });
+    // Wait for Player 1 to see the enabled Start Battle button (they created the session)
+    await page1.waitForSelector('[data-testid="start-battle-btn"]:not([disabled])', { timeout: 15000 });
+    
+    // Player 2 should also see their waiting room
+    await page2.waitForSelector('[data-testid="waiting-room"]', { timeout: 15000 });
     
     // Player 1 starts the battle
-    await page1.click('button:has-text("Start Battle")');
+    await page1.click('[data-testid="start-battle-btn"]');
     await page1.waitForTimeout(3000);
     
     // Wait for both players to be in game
