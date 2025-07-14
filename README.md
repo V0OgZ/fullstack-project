@@ -22,7 +22,9 @@ Heroes of Time is a next-generation strategy game that combines classic Heroes o
 ./stop-app.sh
 ```
 
-**For detailed debugging instructions, see `INSTRUCTIONS_POUR_TOI.md`**
+**For detailed debugging instructions:**
+- English: `INSTRUCTIONS_FOR_DEVELOPERS.md`
+- French: `INSTRUCTIONS_POUR_TOI_FR.md`
 
 ## ✅ Current Status (December 2024)
 
@@ -135,7 +137,8 @@ cd frontend && npx playwright test
 
 - `DEPLOYMENT_GUIDE.md` - Complete deployment instructions
 - `GAMESTATUS.md` - Detailed game status and features
-- `INSTRUCTIONS_POUR_TOI.md` - Development and debugging guide
+- `INSTRUCTIONS_FOR_DEVELOPERS.md` - Development and debugging guide (English)
+- `INSTRUCTIONS_POUR_TOI_FR.md` - Development and debugging guide (French)
 - `TECHNICAL_DOCUMENTATION.md` - Technical architecture details
 
 ## 🤝 Contributing
