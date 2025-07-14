@@ -1,4 +1,5 @@
 import { useTranslation } from '../i18n';
+import { useCallback } from 'react';
 
 // Use existing translated resources from i18n
 export interface GameResources {
@@ -80,38 +81,72 @@ const NAME_PATTERNS = [
 
 // Get random element from array
 function getRandomElement<T>(array: T[]): T {
+  if (!array || array.length === 0) {
+    throw new Error('Cannot get random element from empty or undefined array');
+  }
   return array[Math.floor(Math.random() * array.length)];
 }
 
 // Replace pattern placeholders with actual resource IDs
 function fillPattern(pattern: string, resources: GameResources): string {
-  let result = pattern;
-  
-  // Replace all placeholders
-  result = result.replace(/{HERO}/g, getRandomElement(resources.heroes));
-  result = result.replace(/{CREATURE}/g, getRandomElement(resources.creatures));
-  result = result.replace(/{TERRAIN}/g, getRandomElement(resources.terrains));
-  result = result.replace(/{BUILDING}/g, getRandomElement(resources.buildings));
-  result = result.replace(/{ARTIFACT}/g, getRandomElement(resources.artifacts));
-  
-  return result;
+  try {
+    let result = pattern;
+    
+    // Replace all placeholders with safe fallbacks
+    result = result.replace(/{HERO}/g, () => {
+      try { return getRandomElement(resources.heroes); } catch { return 'warrior'; }
+    });
+    result = result.replace(/{CREATURE}/g, () => {
+      try { return getRandomElement(resources.creatures); } catch { return 'dragon'; }
+    });
+    result = result.replace(/{TERRAIN}/g, () => {
+      try { return getRandomElement(resources.terrains); } catch { return 'grass'; }
+    });
+    result = result.replace(/{BUILDING}/g, () => {
+      try { return getRandomElement(resources.buildings); } catch { return 'castle'; }
+    });
+    result = result.replace(/{ARTIFACT}/g, () => {
+      try { return getRandomElement(resources.artifacts); } catch { return 'sword'; }
+    });
+    
+    return result;
+  } catch (error) {
+    console.warn('Error in fillPattern, using fallback:', error);
+    return 'EPIC_BATTLE';
+  }
 }
 
 // Generate a session name ID (for storage)
 export function generateSessionNameId(): string {
-  const pattern = getRandomElement(NAME_PATTERNS);
-  return fillPattern(pattern, EXISTING_GAME_RESOURCES);
+  try {
+    const pattern = getRandomElement(NAME_PATTERNS);
+    const result = fillPattern(pattern, EXISTING_GAME_RESOURCES);
+    return result || 'EPIC_BATTLE';
+  } catch (error) {
+    console.warn('Failed to generate session name ID, using fallback:', error);
+    return 'EPIC_BATTLE';
+  }
 }
 
 // Custom hook for translating session names using existing translations
 export function useSessionNameTranslator() {
   const { t } = useTranslation();
   
-  const translateSessionName = (nameId: string): string => {
+  const translateSessionName = useCallback((nameId: string): string => {
     try {
+      // Validate input
+      if (!nameId || typeof nameId !== 'string') {
+        return 'Epic Battle';
+      }
+      
       // Split the name by underscores and translate each part
       const parts = nameId.split('_');
       const translatedParts = parts.map(part => {
+        // Safety check for undefined parts
+        if (!part || typeof part !== 'string') {
+          return 'Epic';
+        }
+        
         // Try to use existing translation keys from i18n
         const lowerPart = part.toLowerCase();
         
@@ -180,7 +215,7 @@ export function useSessionNameTranslator() {
         part.toLowerCase().replace(/^\w/, c => c.toUpperCase())
       ).join(' ');
     }
-  };
+  }, [t]);
   
   return { translateSessionName };
 }

@@ -21,7 +21,29 @@ public class ScenarioService {
     // ======================
     
     public List<Scenario> getAllScenarios() {
-        return scenarioRepository.findAll();
+        List<Scenario> scenarios = scenarioRepository.findAll();
+        // Fix isMultiplayer field for all scenarios that have null value
+        scenarios.forEach(this::fixMultiplayerField);
+        return scenarios;
+    }
+    
+    /**
+     * Fix the isMultiplayer field for scenarios that have null value
+     * This method automatically calculates isMultiplayer based on maxPlayers > 1
+     */
+    public void fixMultiplayerField(Scenario scenario) {
+        if (scenario.getIsMultiplayer() == null) {
+            scenario.setIsMultiplayer(scenario.getMaxPlayers() > 1);
+            scenarioRepository.save(scenario);
+        }
+    }
+    
+    /**
+     * Fix all scenarios with null isMultiplayer field
+     */
+    public void fixAllMultiplayerFields() {
+        List<Scenario> scenarios = scenarioRepository.findAll();
+        scenarios.forEach(this::fixMultiplayerField);
     }
     
     public Optional<Scenario> getScenarioById(String scenarioId) {
@@ -259,6 +281,40 @@ public class ScenarioService {
         return scenarioRepository.save(scenario);
     }
     
+    public Scenario createMultiplayerArenaScenario() {
+        // Vérifier si le scénario existe déjà
+        Optional<Scenario> existing = scenarioRepository.findByScenarioId("multiplayer-arena");
+        if (existing.isPresent()) {
+            return existing.get();
+        }
+        
+        Scenario scenario = new Scenario("multiplayer-arena", "Multiplayer Arena", 
+                                       "A fast-paced multiplayer battle where players compete in a smaller arena for quick matches.",
+                                       "normal", 4, 20, 20, "elimination");
+        
+        scenario.setTurnLimit(50);
+        scenario.setTimeLimit(60); // 1 hour
+        scenario.setVictoryRequirement("Be the last player standing");
+        scenario.setDefeatCondition("All heroes eliminated");
+        
+        // Add objectives
+        scenario.addObjective(new Scenario.ScenarioObjective("obj1", "eliminate", "Last Player Standing", 
+                                                           "Eliminate all other players", 3));
+        
+        // Add starting positions
+        scenario.addStartingPosition(new Scenario.StartingPosition("player1", 3, 3, "castle", "Arthur"));
+        scenario.addStartingPosition(new Scenario.StartingPosition("player2", 17, 3, "rampart", "Elara"));
+        scenario.addStartingPosition(new Scenario.StartingPosition("player3", 3, 17, "tower", "Zoltan"));
+        scenario.addStartingPosition(new Scenario.StartingPosition("player4", 17, 17, "inferno", "Dagon"));
+        
+        // Add events
+        scenario.addEvent(new Scenario.ScenarioEvent("event1", "timed", "Resource Boost", 
+                                                   "All players receive bonus resources", 
+                                                   "{\"effect\": \"resource_boost\", \"gold\": 5000, \"turn\": 10}"));
+        
+        return scenarioRepository.save(scenario);
+    }
+
     // ======================
     // OBJECTIVE MANAGEMENT
     // ======================
@@ -608,6 +664,7 @@ public class ScenarioService {
             createEconomicRaceScenario();
             createArtifactHuntScenario();
             createSurvivalScenario();
+            createMultiplayerArenaScenario();
         }
     }
 } 
