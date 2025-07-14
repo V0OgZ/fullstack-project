@@ -27,12 +27,10 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
   } = useGameStore();
   
   const [showMagicInventory, setShowMagicInventory] = useState(false);
-  const [showAIVisualizer, setShowAIVisualizer] = useState(false);
-  const [showPerformanceDashboard, setShowPerformanceDashboard] = useState(false);
+  const [showHeroesPanel, setShowHeroesPanel] = useState(false);
   const [showCastleManagement, setShowCastleManagement] = useState(false);
   const [selectedHeroId, setSelectedHeroId] = useState<string | null>(null);
   const [selectedCastleId, setSelectedCastleId] = useState<string | null>(null);
-  const [useOptimizedRenderer, setUseOptimizedRenderer] = useState(false);
 
   // THIS useEffect was causing the infinite loop. It has been removed.
   // The Game.tsx component is now solely responsible for loading the game.
@@ -113,15 +111,15 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
         </div>
 
         <div className="header-controls">
-          {/* Enhanced Control Panel */}
+          {/* Simplified Control Panel */}
           <div className="control-panel">
             <button 
-              className={`control-btn ${useOptimizedRenderer ? 'active' : ''}`}
-              onClick={() => setUseOptimizedRenderer(!useOptimizedRenderer)}
-              title="Toggle Optimized Renderer"
+              className={`control-btn ${showHeroesPanel ? 'active' : ''}`}
+              onClick={() => setShowHeroesPanel(!showHeroesPanel)}
+              title="Heroes Management"
             >
-              <span className="btn-icon">⚡</span>
-              <span className="btn-label">Optimized</span>
+              <span className="btn-icon">⚔️</span>
+              <span className="btn-label">Heroes</span>
             </button>
 
             <button 
@@ -134,30 +132,21 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
             </button>
 
             <button 
-              className={`control-btn ${showAIVisualizer ? 'active' : ''}`}
-              onClick={() => setShowAIVisualizer(!showAIVisualizer)}
-              title="AI Visualizer"
-            >
-              <span className="btn-icon">🤖</span>
-              <span className="btn-label">AI</span>
-            </button>
-
-            <button 
-              className={`control-btn ${showPerformanceDashboard ? 'active' : ''}`}
-              onClick={() => setShowPerformanceDashboard(!showPerformanceDashboard)}
-              title="Performance Dashboard"
-            >
-              <span className="btn-icon">📊</span>
-              <span className="btn-label">Performance</span>
-            </button>
-
-            <button 
               className="control-btn castle-btn"
               onClick={() => handleCastleSelect('main-castle')}
               title="Castle Management"
             >
               <span className="btn-icon">🏰</span>
               <span className="btn-label">Castle</span>
+            </button>
+
+            <button 
+              className="control-btn disabled"
+              disabled
+              title="AI Features - Coming Soon!"
+            >
+              <span className="btn-icon">🤖</span>
+              <span className="btn-label">AI</span>
             </button>
           </div>
 
@@ -170,21 +159,12 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
 
       {/* Main Game Area */}
       <div className="game-main">
-        {/* Game Renderer */}
+        {/* Game Renderer - Only ModernGameRenderer */}
         <div className="game-renderer-container">
-          {useOptimizedRenderer ? (
-            <OptimizedGameRenderer 
-              width={800} 
-              height={600} 
-              onHeroSelect={handleHeroSelect}
-              selectedHeroId={selectedHeroId}
-            />
-          ) : (
-            <ModernGameRenderer 
-              width={800} 
-              height={600} 
-            />
-          )}
+          <ModernGameRenderer 
+            width={800} 
+            height={600} 
+          />
         </div>
 
         {/* Side Panel */}
@@ -252,13 +232,6 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
                 <span className="action-icon">🏰</span>
                 <span className="action-label">Castle</span>
               </button>
-              <button 
-                className="action-btn"
-                onClick={() => setShowAIVisualizer(true)}
-              >
-                <span className="action-icon">🤖</span>
-                <span className="action-label">AI Status</span>
-              </button>
             </div>
           </div>
         </div>
@@ -269,19 +242,54 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
         <MagicInventory />
       )}
 
-      {showAIVisualizer && (
-        <AIActionVisualizer 
-          gameId={scenarioId}
-          isVisible={showAIVisualizer}
-          onClose={() => setShowAIVisualizer(false)}
-        />
-      )}
-
-      {showPerformanceDashboard && (
-        <PerformanceDashboard 
-          isVisible={showPerformanceDashboard}
-          onClose={() => setShowPerformanceDashboard(false)}
-        />
+      {showHeroesPanel && currentPlayer && (
+        <div className="heroes-panel">
+          <div className="heroes-panel-header">
+            <h3 className="heroes-panel-title">⚔️ {t('myHeroes')}</h3>
+            <button 
+              className="close-panel-btn"
+              onClick={() => setShowHeroesPanel(false)}
+            >
+              ×
+            </button>
+          </div>
+          <div className="heroes-list">
+            {currentPlayer.heroes && currentPlayer.heroes.length > 0 ? (
+              currentPlayer.heroes.map(hero => (
+                <div 
+                  key={hero.id} 
+                  className={`hero-item ${selectedHeroId === hero.id ? 'selected' : ''}`}
+                  onClick={() => handleHeroSelect(hero.id)}
+                >
+                  <div className="hero-avatar">
+                    {hero.name.includes('Arthur') ? '👑' : 
+                     hero.name.includes('Morgana') ? '🔮' : 
+                     hero.name.includes('Archer') ? '🏹' : 
+                     hero.name.includes('Paladin') ? '🛡️' : '⚔️'}
+                  </div>
+                  <div className="hero-details">
+                    <div className="hero-name">{hero.name}</div>
+                    <div className="hero-stats">
+                      <span className="hero-stat">
+                        📍 {hero.position?.x || 0},{hero.position?.y || 0}
+                      </span>
+                      <span className="hero-stat">
+                        ⭐ Lv.{hero.level || 1}
+                      </span>
+                      <span className="hero-stat">
+                        🦶 {hero.movementPoints || 0}/{hero.maxMovementPoints || 3}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div style={{ color: '#999', textAlign: 'center', padding: '20px' }}>
+                No heroes available
+              </div>
+            )}
+          </div>
+        </div>
       )}
 
       {showCastleManagement && selectedCastleId && (

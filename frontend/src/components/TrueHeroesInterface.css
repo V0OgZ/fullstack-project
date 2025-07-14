@@ -135,6 +135,26 @@
   color: #4a90e2;
 }
 
+.control-btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed !important;
+  background: rgba(128, 128, 128, 0.3) !important;
+  color: #777 !important;
+  border: 1px solid rgba(128, 128, 128, 0.2) !important;
+}
+
+.control-btn.disabled:hover {
+  background: rgba(128, 128, 128, 0.3) !important;
+  color: #777 !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.control-btn.disabled .btn-label::after {
+  content: " 🚧";
+  opacity: 0.7;
+}
+
 .btn-icon {
   font-size: 1.2rem;
 }
@@ -530,4 +550,115 @@
 .game-side-panel {
   position: relative;
   z-index: 2;
+} 
+
+/* Heroes Panel Styles */
+.heroes-panel {
+  position: fixed;
+  top: 100px;
+  left: 20px;
+  width: 300px;
+  max-height: 70vh;
+  background: rgba(0, 0, 0, 0.9);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 12px;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.heroes-panel-header {
+  padding: 15px;
+  background: rgba(255, 215, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.heroes-panel-title {
+  color: #ffd700;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.close-panel-btn {
+  background: transparent;
+  border: none;
+  color: #ffd700;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.close-panel-btn:hover {
+  background: rgba(255, 215, 0, 0.2);
+}
+
+.heroes-list {
+  padding: 15px;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.hero-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hero-item:hover {
+  background: rgba(255, 215, 0, 0.1);
+  border-color: rgba(255, 215, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+.hero-item.selected {
+  background: rgba(255, 215, 0, 0.2);
+  border-color: rgba(255, 215, 0, 0.5);
+}
+
+.hero-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  background: radial-gradient(circle, #4a90e2, #357abd);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.hero-details {
+  flex: 1;
+}
+
+.hero-name {
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+.hero-stats {
+  color: #ccc;
+  font-size: 0.8rem;
+  display: flex;
+  gap: 12px;
+}
+
+.hero-stat {
+  display: flex;
+  align-items: center;
+  gap: 2px;
 } 

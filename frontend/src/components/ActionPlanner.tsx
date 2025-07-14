@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from '../i18n';
 import { Hero, GameAction } from '../types/game';
 import { GAME_ICONS } from '../constants/gameIcons';
+import UnitRecruitment from './UnitRecruitment';
 
 interface ActionPlannerProps {
   selectedHero: Hero | null;
@@ -20,6 +21,7 @@ const ActionPlanner: React.FC<ActionPlannerProps> = ({
 }) => {
   const { t } = useTranslation();
   const [selectedAction, setSelectedAction] = useState<GameAction | null>(null);
+  const [showRecruitment, setShowRecruitment] = useState(false);
 
   if (!selectedHero) {
     return (
@@ -100,7 +102,7 @@ const ActionPlanner: React.FC<ActionPlannerProps> = ({
           <button
             className="quick-action-btn"
             disabled={isPlanning}
-            onClick={() => setSelectedAction({ type: 'recruit' } as GameAction)}
+            onClick={() => setShowRecruitment(true)}
           >
             {GAME_ICONS.ACTION_RECRUIT} {t('recruit')}
           </button>
@@ -114,7 +116,6 @@ const ActionPlanner: React.FC<ActionPlannerProps> = ({
             {selectedAction.type === 'move' && t('clickMapToMove')}
             {selectedAction.type === 'attack' && t('clickEnemyToAttack')}
             {selectedAction.type === 'collect' && t('clickObjectToCollect')}
-            {selectedAction.type === 'recruit' && t('selectUnitType')}
           </p>
           <button
             onClick={() => setSelectedAction(null)}
@@ -125,6 +126,13 @@ const ActionPlanner: React.FC<ActionPlannerProps> = ({
           </button>
         </div>
       )}
+
+      {/* Unit Recruitment Modal */}
+      <UnitRecruitment
+        isVisible={showRecruitment}
+        onClose={() => setShowRecruitment(false)}
+        selectedBuilding={undefined} // Will be enhanced later with castle selection
+      />
     </div>
   );
 };
