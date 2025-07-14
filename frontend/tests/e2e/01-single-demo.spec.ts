@@ -10,6 +10,10 @@ test.describe('🎮 Heroes of Time - Single Player Demo', () => {
     await page.goto('http://localhost:3000');
     await page.waitForTimeout(2000);
     
+    // 📸 SCREENSHOT 1: Home page
+    await page.screenshot({ path: 'test-results/01-home-page.png' });
+    console.log('📸 Home page screenshot captured');
+    
     // Show demo tooltip
     await page.evaluate(() => {
       const tooltip = document.createElement('div');
@@ -49,6 +53,10 @@ test.describe('🎮 Heroes of Time - Single Player Demo', () => {
     await expect(page.locator('.true-heroes-interface')).toBeVisible();
     console.log('✅ Game interface loaded successfully');
     
+    // 📸 SCREENSHOT 2: Game interface
+    await page.screenshot({ path: 'test-results/02-game-interface.png' });
+    console.log('📸 Game interface screenshot captured');
+    
     // Test panel buttons (using more robust selectors)
     console.log('🎛️ Testing panel buttons...');
     
@@ -58,6 +66,10 @@ test.describe('🎮 Heroes of Time - Single Player Demo', () => {
       await heroesBtn.click();
       await page.waitForTimeout(2000);
       console.log('✅ Heroes panel button clicked');
+      
+      // 📸 SCREENSHOT 3: Heroes panel
+      await page.screenshot({ path: 'test-results/03-heroes-panel.png' });
+      console.log('📸 Heroes panel screenshot captured');
     }
     
     const castleBtn = page.locator('button[title*="castle"], button[title*="Castle"], button:has-text("🏰"), [data-testid="castle-panel-btn"]').first();
@@ -65,6 +77,10 @@ test.describe('🎮 Heroes of Time - Single Player Demo', () => {
       await castleBtn.click();
       await page.waitForTimeout(2000);
       console.log('✅ Castle panel button clicked');
+      
+      // 📸 SCREENSHOT 4: Castle panel
+      await page.screenshot({ path: 'test-results/04-castle-panel.png' });
+      console.log('📸 Castle panel screenshot captured');
     }
     
     const inventoryBtn = page.locator('button[title*="inventory"], button[title*="Inventory"], button:has-text("🎒"), [data-testid="inventory-panel-btn"]').first();
@@ -72,6 +88,22 @@ test.describe('🎮 Heroes of Time - Single Player Demo', () => {
       await inventoryBtn.click();
       await page.waitForTimeout(2000);
       console.log('✅ Inventory panel button clicked');
+      
+      // 📸 SCREENSHOT 5: Inventory panel
+      await page.screenshot({ path: 'test-results/05-inventory-panel.png' });
+      console.log('📸 Inventory panel screenshot captured');
+    }
+    
+    // 📸 SCREENSHOT 6: Terrain map focus
+    const canvas = page.locator('canvas');
+    if (await canvas.isVisible()) {
+      await canvas.click({ position: { x: 200, y: 200 } });
+      await page.waitForTimeout(1000);
+      await page.screenshot({ 
+        path: 'test-results/06-terrain-map.png',
+        clip: { x: 0, y: 0, width: 800, height: 600 }
+      });
+      console.log('📸 Terrain map screenshot captured');
     }
     
     // Test turn system
@@ -81,6 +113,10 @@ test.describe('🎮 Heroes of Time - Single Player Demo', () => {
       await endTurnBtn.click();
       await page.waitForTimeout(3000);
       console.log('✅ Turn system button clicked');
+      
+      // 📸 SCREENSHOT 7: After turn
+      await page.screenshot({ path: 'test-results/07-after-turn.png' });
+      console.log('📸 After turn screenshot captured');
     }
     
     // Test language switching
@@ -91,6 +127,10 @@ test.describe('🎮 Heroes of Time - Single Player Demo', () => {
       await page.waitForTimeout(2000);
       console.log('✅ Language button clicked');
     }
+    
+    // 📸 SCREENSHOT 8: Final state
+    await page.screenshot({ path: 'test-results/08-final-state.png', fullPage: true });
+    console.log('📸 Final state screenshot captured');
     
     // Success message
     await page.evaluate(() => {
@@ -124,6 +164,15 @@ test.describe('🎮 Heroes of Time - Single Player Demo', () => {
     await page.waitForTimeout(5000);
     
     console.log('🎉 Single player demo completed successfully!');
+    console.log('📸 Screenshots analysis ready:');
+    console.log('  01-home-page.png - Home page state');
+    console.log('  02-game-interface.png - Main game interface');
+    console.log('  03-heroes-panel.png - Heroes panel view');
+    console.log('  04-castle-panel.png - Castle panel view');
+    console.log('  05-inventory-panel.png - Inventory panel view');
+    console.log('  06-terrain-map.png - Terrain map closeup');
+    console.log('  07-after-turn.png - After turn state');
+    console.log('  08-final-state.png - Final game state');
     console.log('✅ Demo button: Working');
     console.log('✅ Game interface: Working');
     console.log('✅ Panel buttons: Working');
