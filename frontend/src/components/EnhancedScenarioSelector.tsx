@@ -16,6 +16,7 @@ interface Scenario {
   estimatedTime: string;
   playerCount: string;
   unlocked: boolean;
+  isMultiplayer: boolean;
 }
 
 interface BackendScenario {
@@ -27,6 +28,7 @@ interface BackendScenario {
   maxPlayers: number;
   estimatedDuration?: string;
   isActive: boolean;
+  isMultiplayer: boolean;
 }
 
 const EnhancedScenarioSelector: React.FC = () => {
@@ -58,14 +60,15 @@ const EnhancedScenarioSelector: React.FC = () => {
         features: [t('features.backend-loaded'), t('features.dynamic-content'), t('features.real-time-data')],
         icon: scenario.scenarioId === 'conquest-classic' ? '⚔️' : 
               scenario.scenarioId === 'temporal-rift' ? '🔮' : 
-              scenario.scenarioId === 'multiplayer-arena' ? '🌐' : '🎮',
+              scenario.isMultiplayer ? '🌐' : '🎮',
         backgroundImage: scenario.scenarioId === 'conquest-classic' ? 'linear-gradient(135deg, #2196F3 0%, #1976D2 100%)' :
                         scenario.scenarioId === 'temporal-rift' ? 'linear-gradient(135deg, #9C27B0 0%, #673AB7 100%)' :
-                        scenario.scenarioId === 'multiplayer-arena' ? 'linear-gradient(135deg, #FF5722 0%, #F44336 100%)' :
+                        scenario.isMultiplayer ? 'linear-gradient(135deg, #FF5722 0%, #F44336 100%)' :
                         'linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%)',
         estimatedTime: scenario.estimatedDuration || '1-2 hours',
         playerCount: `${scenario.maxPlayers} players`,
-        unlocked: scenario.isActive
+        unlocked: scenario.isActive,
+        isMultiplayer: scenario.isMultiplayer
       }));
 
       // Add a locked scenario for demonstration
@@ -80,7 +83,8 @@ const EnhancedScenarioSelector: React.FC = () => {
         backgroundImage: 'linear-gradient(135deg, #FF6B35 0%, #F7931E 100%)',
         estimatedTime: '3-5 hours',
         playerCount: '1-2 players',
-        unlocked: false
+        unlocked: false,
+        isMultiplayer: false
       };
 
       // Combine backend scenarios with locked scenario
@@ -105,7 +109,8 @@ const EnhancedScenarioSelector: React.FC = () => {
           backgroundImage: 'linear-gradient(135deg, #2196F3 0%, #1976D2 100%)',
           estimatedTime: '1-2 hours',
           playerCount: '2-6 players',
-          unlocked: true
+          unlocked: true,
+          isMultiplayer: true
         },
         {
           id: 'dragon-campaign',
@@ -118,7 +123,8 @@ const EnhancedScenarioSelector: React.FC = () => {
           backgroundImage: 'linear-gradient(135deg, #FF6B35 0%, #F7931E 100%)',
           estimatedTime: '3-5 hours',
           playerCount: '1-2 players',
-          unlocked: false
+          unlocked: false,
+          isMultiplayer: false
         }
       ];
       setScenarios(fallbackScenarios);
@@ -159,8 +165,13 @@ const EnhancedScenarioSelector: React.FC = () => {
     // Navigate to the game immediately when clicking on a scenario
     const scenario = scenarios.find(s => s.id === scenarioId);
     if (scenario && scenario.unlocked) {
-      console.log(`[SELECTOR] Navigating to game for scenario: ${scenarioId}`);
-      navigate(`/game/${scenarioId}`);
+      if (scenario.isMultiplayer) {
+        console.log(`[SELECTOR] Multiplayer scenario detected, navigating to multiplayer lobby`);
+        navigate('/multiplayer');
+      } else {
+        console.log(`[SELECTOR] Single player scenario, navigating to game: ${scenarioId}`);
+        navigate(`/game/${scenarioId}`);
+      }
     } else {
       console.log(`[SELECTOR] Scenario ${scenarioId} is locked or not found`);
     }
@@ -199,6 +210,9 @@ const EnhancedScenarioSelector: React.FC = () => {
       <main className="selector-main">
         <section className="scenarios-section game-options">
           <h2 className="section-title">{t('availableAdventures')}</h2>
+          
+
+          
           {loading && (
             <div className="loading-message">
               <div className="loading-spinner"></div>
@@ -217,7 +231,7 @@ const EnhancedScenarioSelector: React.FC = () => {
               <div
                 key={scenario.id}
                 data-testid={`scenario-card-${scenario.id}`}
-                className={`scenario-card ${!scenario.unlocked ? 'locked' : ''} ${selectedScenario === scenario.id ? 'selected' : ''}`}
+                className={`scenario-card ${!scenario.unlocked ? 'locked' : ''} ${selectedScenario === scenario.id ? 'selected' : ''} ${scenario.isMultiplayer ? 'multiplayer' : ''}`}
                 style={{ background: scenario.backgroundImage }}
                 onMouseEnter={() => {
                   console.log('%c[EnhancedScenarioSelector] Mouse enter scenario:', 'color: cyan', scenario.id);
@@ -233,6 +247,12 @@ const EnhancedScenarioSelector: React.FC = () => {
                   <div className="lock-overlay">
                     <div className="lock-icon">🔒</div>
                     <div className="lock-text">{t('comingSoon')}</div>
+                  </div>
+                )}
+                
+                {scenario.isMultiplayer && scenario.unlocked && (
+                  <div className="multiplayer-badge">
+                    🌐 MULTIPLAYER
                   </div>
                 )}
                 

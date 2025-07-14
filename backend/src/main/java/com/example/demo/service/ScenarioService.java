@@ -45,11 +45,11 @@ public class ScenarioService {
     }
     
     public List<Scenario> getSinglePlayerScenarios() {
-        return scenarioRepository.findSinglePlayerScenarios();
+        return scenarioRepository.findByIsMultiplayer(false);
     }
     
     public List<Scenario> getMultiplayerScenarios() {
-        return scenarioRepository.findMultiplayerScenarios();
+        return scenarioRepository.findByIsMultiplayer(true);
     }
     
     public List<Scenario> getBeginnerScenarios() {

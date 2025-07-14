@@ -350,4 +350,44 @@ body, html, .enhanced-scenario-selector, .selector-main {
   font-size: 1.2rem;
 } 
 
- 
+/* Multiplayer Scenario Badge */
+.multiplayer-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 6px rgba(255, 107, 53, 0.3);
+  z-index: 10;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Enhanced multiplayer scenario styling */
+.scenario-card.multiplayer {
+  border: 2px solid #FF6B35;
+  box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+}
+
+.scenario-card.multiplayer:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4);
+}
+
+.scenario-card.multiplayer .scenario-icon-large {
+  color: #FF6B35;
+  text-shadow: 0 0 10px rgba(255, 107, 53, 0.6);
+}
+
+   

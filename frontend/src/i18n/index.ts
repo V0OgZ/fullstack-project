@@ -349,6 +349,8 @@ export interface Translation {
   realTimeStrategy: string;
   competitive: string;
   startGame: string;
+  
+
 
   // Campaign scenario
   epicCampaign: string;
@@ -773,6 +775,8 @@ const frenchTranslations: Translation = {
   realTimeStrategy: 'Stratégie en temps réel',
   competitive: 'Compétitif',
   startGame: 'Démarrer la partie',
+  
+
 
   // Campaign scenario
   epicCampaign: 'Campagne Épique',
@@ -1197,6 +1201,8 @@ const englishTranslations: Translation = {
   realTimeStrategy: 'Real-Time Strategy',
   competitive: 'Competitive',
   startGame: 'Start Game',
+  
+
 
   // Campaign scenario
   epicCampaign: 'Epic Campaign',
@@ -1621,6 +1627,8 @@ const russianTranslations: Translation = {
   realTimeStrategy: 'Стратегия в реальном времени',
   competitive: 'Конкурентный',
   startGame: 'Начать игру',
+  
+
 
   // Campaign scenario
   epicCampaign: 'Эпическая кампания',
