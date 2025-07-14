@@ -332,7 +332,7 @@ test.describe('🎮 Heroes of Time - Démo Multijoueur', () => {
     // Joueur 1 termine son tour
     await showDemoTooltip(player1, '⏭️ Fin du tour - Passage au joueur 2', 'JOUEUR 1', 1500);
     
-    const endTurnButton1 = player1.locator('button[title*="End"], .end-turn-btn, .control-btn:has(.btn-icon:text("⏭️"))').first();
+    const endTurnButton1 = player1.locator('button[title*="End"], .end-turn-btn, .control-btn:has(.btn-icon:text("✅"))').first();
     if (await endTurnButton1.isVisible({ timeout: 3000 })) {
       await endTurnButton1.click();
     }

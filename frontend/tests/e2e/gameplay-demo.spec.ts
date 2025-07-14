@@ -149,8 +149,8 @@ test.describe('🎮 Heroes of Time - Gameplay Demo', () => {
     await showTooltip('🔄 Fin du tour - Cliquez sur "End Turn" pour terminer.', 'center', 1000);
     await page.waitForTimeout(1000);
     
-    // Utiliser les nouveaux sélecteurs pour le bouton End Turn (avec icône seulement)
-    const nextTurnButton = page.locator('button[title*="End"], .end-turn-btn, .control-btn:has(.btn-icon:text("⏭️"))').first();
+    // Utiliser les nouveaux sélecteurs pour le bouton End Turn (avec icône check)
+    const nextTurnButton = page.locator('button[title*="End"], .end-turn-btn, .control-btn:has(.btn-icon:text("✅"))').first();
     
     // Surligner le bouton
     await page.evaluate(() => {

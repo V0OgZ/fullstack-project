@@ -138,8 +138,15 @@
 }
 
 .end-turn-btn {
-  background: linear-gradient(135deg, #FF6B35, #FF8E53);
-  border: 2px solid #FF6B35;
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  border: 2px solid #4CAF50;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+}
+
+.end-turn-btn:hover {
+  background: linear-gradient(135deg, #45a049, #4CAF50);
+  border-color: #45a049;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.5);
 }
 
 .control-btn:hover:not(.disabled), .end-turn-btn:hover {
@@ -147,12 +154,6 @@
   border-color: rgba(255, 215, 0, 0.5);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
-}
-
-.end-turn-btn:hover {
-  background: linear-gradient(135deg, #FF8E53, #FF6B35);
-  border-color: #FF8E53;
-  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
 }
 
 .control-btn.active {

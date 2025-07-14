@@ -175,7 +175,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
               className={`control-btn ${rightPanelContent === 'hero' ? 'active' : ''}`}
               onClick={handleHeroesClick}
               disabled={!currentPlayer?.heroes || currentPlayer.heroes.length === 0}
-              title={currentPlayer?.heroes && currentPlayer.heroes.length > 0 ? `Show ${selectedHero?.name || 'a hero'}` : 'No heroes available'}
+              title="Heroes"
             >
               <span className="btn-icon">⚔️</span>
             </button>
@@ -183,7 +183,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
             <button 
               className={`control-btn ${rightPanelContent === 'inventory' ? 'active' : ''}`}
               onClick={handleInventoryClick}
-              title="Show inventory"
+              title="Inventory"
             >
               <span className="btn-icon">🎒</span>
             </button>
@@ -191,7 +191,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
             <button 
               className={`control-btn ${rightPanelContent === 'castle' ? 'active' : ''}`}
               onClick={handleCastleClick}
-              title="Manage castles"
+              title="Castle"
             >
               <span className="btn-icon">🏰</span>
             </button>
@@ -199,7 +199,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
             <button 
               className="control-btn disabled"
               disabled
-              title="AI features coming soon"
+              title="AI (coming soon)"
             >
               <span className="btn-icon">🤖</span>
             </button>
@@ -207,9 +207,9 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
             <button 
               className="end-turn-btn"
               onClick={endTurn}
-              title="End current turn"
+              title="End Turn"
             >
-              <span className="btn-icon">⏭️</span>
+              <span className="btn-icon">✅</span>
             </button>
           </div>
         </div>
