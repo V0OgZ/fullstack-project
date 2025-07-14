@@ -22,21 +22,29 @@ Heroes of Time is a next-generation strategy game that combines classic Heroes o
 ./stop-app.sh
 ```
 
-**For detailed debugging instructions:**
-- English: `INSTRUCTIONS_FOR_DEVELOPERS.md`
-- French: `INSTRUCTIONS_POUR_TOI_FR.md`
+**📋 Important Documentation (READ THESE FIRST!):**
+- 🎯 **Current Reality**: `GAMESTATUS_UPDATED.md` - Honest assessment of what actually works
+- 🗺️ **Development Plan**: `DEVELOPMENT_ROADMAP.md` - Realistic next steps to make game playable
+- 🔧 **Developer Instructions**: `INSTRUCTIONS_FOR_DEVELOPERS.md` (English) / `INSTRUCTIONS_POUR_TOI_FR.md` (French)
 
-## ✅ Current Status (December 2024)
+## 🚨 Honest Current Status (December 2024)
 
-### 🎯 Production Ready Features
-- **✅ Scenario Selection**: Three epic scenarios available
-- **✅ Multiplayer System**: Create/join sessions with epic names
+### ✅ What Actually Works
+- **✅ Scenario Selection**: Three epic scenarios load correctly
+- **✅ Multiplayer System**: Create/join sessions with epic auto-generated names
 - **✅ Session Management**: Polling-based updates (5-second intervals)
-- **✅ Hero Movement**: Complete pathfinding and terrain system
-- **✅ Castle Management**: Building construction and unit recruitment
-- **✅ Combat System**: Turn-based tactical combat
+- **✅ Beautiful UI**: Multiple modern interfaces and visual displays
 - **✅ WebSocket**: Disabled for better reliability (polling mode)
 - **✅ Bug Fixes**: Session name generation fully resolved
+
+### 🚧 What's Missing (Development Needed)
+- **❌ Hero Movement**: Heroes display but cannot be controlled by users
+- **❌ Unit Recruitment**: Backend exists but no UI implementation
+- **❌ Combat System**: Placeholder only, no actual combat mechanics
+- **❌ Building System**: No construction mechanics implemented
+- **❌ Turn Management**: Basic backend, no game flow implementation
+
+**⚠️ Current State**: Beautiful demo/prototype, not a playable game yet
 
 ### 🛠️ Technical Stack
 - **Backend**: Spring Boot (Java 17) - Port 8080
@@ -137,6 +145,8 @@ cd frontend && npx playwright test
 
 - `DEPLOYMENT_GUIDE.md` - Complete deployment instructions
 - `GAMESTATUS.md` - Detailed game status and features
+- `GAMESTATUS_UPDATED.md` - Honest assessment of current game state
+- `DEVELOPMENT_ROADMAP.md` - Realistic development roadmap
 - `INSTRUCTIONS_FOR_DEVELOPERS.md` - Development and debugging guide (English)
 - `INSTRUCTIONS_POUR_TOI_FR.md` - Development and debugging guide (French)
 - `TECHNICAL_DOCUMENTATION.md` - Technical architecture details
