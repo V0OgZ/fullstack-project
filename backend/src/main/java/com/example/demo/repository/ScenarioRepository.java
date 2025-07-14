@@ -30,6 +30,9 @@ public interface ScenarioRepository extends JpaRepository<Scenario, Long> {
     // Find campaign scenarios
     List<Scenario> findByIsCampaign(Boolean isCampaign);
     
+    // Find multiplayer scenarios
+    List<Scenario> findByIsMultiplayer(Boolean isMultiplayer);
+    
     // Find scenarios by victory condition
     List<Scenario> findByVictoryCondition(String victoryCondition);
     
@@ -44,11 +47,11 @@ public interface ScenarioRepository extends JpaRepository<Scenario, Long> {
     List<Scenario> findByDifficultyAndMapSize(String difficulty, String mapSize);
     
     // Find scenarios suitable for multiplayer
-    @Query("SELECT s FROM Scenario s WHERE s.maxPlayers > 1 AND s.isActive = true")
+    @Query("SELECT s FROM Scenario s WHERE s.isMultiplayer = true AND s.isActive = true")
     List<Scenario> findMultiplayerScenarios();
     
     // Find scenarios suitable for single player
-    @Query("SELECT s FROM Scenario s WHERE s.maxPlayers = 1 AND s.isActive = true")
+    @Query("SELECT s FROM Scenario s WHERE s.isMultiplayer = false AND s.isActive = true")
     List<Scenario> findSinglePlayerScenarios();
     
     // Find scenarios by map dimensions

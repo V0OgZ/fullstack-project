@@ -67,6 +67,9 @@ public class Scenario {
     @Column(name = "is_campaign", nullable = false)
     private Boolean isCampaign;
     
+    @Column(name = "is_multiplayer", nullable = false)
+    private Boolean isMultiplayer;
+    
     @Column(name = "campaign_order")
     private Integer campaignOrder;
     
@@ -113,6 +116,7 @@ public class Scenario {
         this.updatedAt = LocalDateTime.now();
         this.isActive = true;
         this.isCampaign = false;
+        this.isMultiplayer = false;
     }
     
     public Scenario(String scenarioId, String name, String description, String difficulty, 
@@ -128,6 +132,7 @@ public class Scenario {
         this.mapHeight = mapHeight;
         this.victoryCondition = victoryCondition;
         this.mapSize = determineMapSize(mapWidth, mapHeight);
+        this.isMultiplayer = maxPlayers > 1;
     }
     
     // Getters and Setters
@@ -147,7 +152,10 @@ public class Scenario {
     public void setDifficulty(String difficulty) { this.difficulty = difficulty; }
     
     public Integer getMaxPlayers() { return maxPlayers; }
-    public void setMaxPlayers(Integer maxPlayers) { this.maxPlayers = maxPlayers; }
+    public void setMaxPlayers(Integer maxPlayers) { 
+        this.maxPlayers = maxPlayers; 
+        this.isMultiplayer = maxPlayers > 1;
+    }
     
     public Integer getRecommendedPlayers() { return recommendedPlayers; }
     public void setRecommendedPlayers(Integer recommendedPlayers) { this.recommendedPlayers = recommendedPlayers; }
@@ -187,6 +195,9 @@ public class Scenario {
     
     public Boolean getIsCampaign() { return isCampaign; }
     public void setIsCampaign(Boolean isCampaign) { this.isCampaign = isCampaign; }
+    
+    public Boolean getIsMultiplayer() { return isMultiplayer; }
+    public void setIsMultiplayer(Boolean isMultiplayer) { this.isMultiplayer = isMultiplayer; }
     
     public Integer getCampaignOrder() { return campaignOrder; }
     public void setCampaignOrder(Integer campaignOrder) { this.campaignOrder = campaignOrder; }

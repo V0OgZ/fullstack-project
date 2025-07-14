@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ApiService } from '../services/api';
 import { websocketService } from '../services/websocketService';
+import { generateSessionNameId, useSessionNameTranslator } from '../services/sessionNameGenerator';
 
 interface MultiplayerSession {
   sessionId: string;
@@ -33,6 +34,16 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
   const [heroName, setHeroName] = useState('');
   const [waitingForPlayers, setWaitingForPlayers] = useState(false);
   const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
+  
+  // Use the session name translator
+  const { translateSessionName } = useSessionNameTranslator();
+
+  // Generate a new session name using game resources
+  const generateNewSessionName = useCallback(() => {
+    const nameId = generateSessionNameId();
+    const translatedName = translateSessionName(nameId);
+    setSessionName(translatedName);
+  }, [translateSessionName]);
 
   // Generate a unique player ID when component mounts
   useEffect(() => {
@@ -44,7 +55,10 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
     
     setPlayerId(generatePlayerId());
     setHeroName(`Hero_${Math.floor(Math.random() * 1000)}`);
-  }, []);
+    
+    // Generate initial session name automatically
+    generateNewSessionName();
+  }, [generateNewSessionName]);
 
   const loadSessions = useCallback(async () => {
     try {
@@ -122,8 +136,20 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
 
     try {
       setLoading(true);
+      
+      // If the session name looks like it was generated (contains underscores),
+      // store the original ID for consistent translation
+      let nameToStore = sessionName.trim();
+      
+      // Check if this is a manually entered name vs generated name
+      // If it's a translated name, find the original ID
+      if (!sessionName.includes('_') && sessionName !== sessionName.toLowerCase()) {
+        // This might be a translated name, keep it as is for manual names
+        nameToStore = sessionName;
+      }
+      
       const response = await ApiService.createMultiplayerSession({
-        sessionName: sessionName.trim(),
+        sessionName: nameToStore,
         maxPlayers,
         gameMode,
         creatorId: playerId
@@ -330,21 +356,40 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
           <label style={{ display: 'block', color: '#fff', marginBottom: '5px' }}>
             Session Name:
           </label>
-          <input
-            type="text"
-            value={sessionName}
-            onChange={e => setSessionName(e.target.value)}
-            placeholder="Enter session name..."
-            data-testid="session-name-input"
-            style={{
-              width: '100%',
-              padding: '8px',
-              background: '#1a1a1a',
-              border: '1px solid #404040',
-              borderRadius: '4px',
-              color: '#fff'
-            }}
-          />
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <input
+              type="text"
+              value={sessionName}
+              onChange={e => setSessionName(e.target.value)}
+              placeholder="Enter session name..."
+              data-testid="session-name-input"
+              style={{
+                flex: 1,
+                padding: '8px',
+                background: '#1a1a1a',
+                border: '1px solid #404040',
+                borderRadius: '4px',
+                color: '#fff'
+              }}
+            />
+            <button
+              type="button"
+              onClick={generateNewSessionName}
+              title="Generate epic session name"
+              style={{
+                padding: '8px 12px',
+                background: '#FF6B35',
+                border: 'none',
+                borderRadius: '4px',
+                color: '#fff',
+                cursor: 'pointer',
+                fontSize: '14px',
+                whiteSpace: 'nowrap'
+              }}
+            >
+              🎲 Epic Name
+            </button>
+          </div>
         </div>
 
         {/* Hero Name Input */}
@@ -562,8 +607,13 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
             >
               <div>
                 <h3 style={{ color: '#fff', margin: '0 0 5px 0' }}>
-                  🎮 {session.sessionName}
+                  🎮 {session.sessionName.includes('_') ? translateSessionName(session.sessionName) : session.sessionName}
                 </h3>
+                {session.sessionName.includes('_') && (
+                  <div style={{ color: '#FF6B35', fontSize: '10px', marginBottom: '3px' }}>
+                    ⚡ Epic Generated Name
+                  </div>
+                )}
                 <div style={{ color: '#888', fontSize: '12px' }}>
                   👥 Players: {session.currentPlayers}/{session.maxPlayers} | 
                   🎯 Mode: {session.gameMode} | 
