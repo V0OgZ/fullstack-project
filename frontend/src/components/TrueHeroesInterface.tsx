@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from '../i18n';
 import { useGameStore } from '../store/useGameStore';
 import ModernGameRenderer from './ModernGameRenderer';
+import { HERO_ASSETS } from '../constants/gameAssets';
 import './TrueHeroesInterface.css';
 
 interface TrueHeroesInterfaceProps {
@@ -48,6 +49,41 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
   };
 
   const selectedHero = currentPlayer?.heroes?.find(hero => hero.id === selectedHeroId);
+
+  // Fonction pour obtenir l'image du héros
+  const getHeroImage = (heroName: string): string => {
+    const name = heroName.toLowerCase();
+    if (name.includes('arthur') || name.includes('knight')) {
+      return HERO_ASSETS.KNIGHT;
+    } else if (name.includes('merlin') || name.includes('mage') || name.includes('wizard')) {
+      return HERO_ASSETS.MAGE;
+    } else if (name.includes('lancelot') || name.includes('warrior')) {
+      return HERO_ASSETS.WARRIOR;
+    } else if (name.includes('archer') || name.includes('bow')) {
+      return HERO_ASSETS.ARCHER;
+    } else if (name.includes('paladin')) {
+      return HERO_ASSETS.PALADIN;
+    } else if (name.includes('necromancer')) {
+      return HERO_ASSETS.NECROMANCER;
+    } else {
+      // Défaut basé sur la classe du héros s'il en a une
+      return HERO_ASSETS.WARRIOR;
+    }
+  };
+
+  // Fonction pour obtenir l'emoji de fallback
+  const getHeroEmoji = (heroName: string): string => {
+    const name = heroName.toLowerCase();
+    if (name.includes('arthur')) return '👑';
+    if (name.includes('merlin')) return '🧙';
+    if (name.includes('lancelot')) return '⚔️';
+    if (name.includes('mage')) return '🔮';
+    if (name.includes('warrior')) return '🛡️';
+    if (name.includes('archer')) return '🏹';
+    if (name.includes('paladin')) return '✨';
+    if (name.includes('necromancer')) return '💀';
+    return '⚔️';
+  };
 
   if (isLoading) {
     return (
@@ -276,16 +312,20 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
               <div className="hero-details">
                 <div className="hero-portrait">
                   <div className="hero-image">
-                    {selectedHero.name === 'Arthur' && '👑'}
-                    {selectedHero.name === 'Merlin' && '🧙'}
-                    {selectedHero.name === 'Lancelot' && '⚔️'}
-                    {selectedHero.name.toLowerCase().includes('mage') && '🔮'}
-                    {selectedHero.name.toLowerCase().includes('warrior') && '🛡️'}
-                    {selectedHero.name.toLowerCase().includes('archer') && '🏹'}
-                    {!['Arthur', 'Merlin', 'Lancelot'].includes(selectedHero.name) && 
-                     !selectedHero.name.toLowerCase().includes('mage') && 
-                     !selectedHero.name.toLowerCase().includes('warrior') && 
-                     !selectedHero.name.toLowerCase().includes('archer') && '⚔️'}
+                    <img 
+                      src={getHeroImage(selectedHero.name)} 
+                      alt={selectedHero.name}
+                      className="hero-portrait-img"
+                      onError={(e) => {
+                        // Fallback vers un emoji si l'image ne charge pas
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const fallback = document.createElement('div');
+                        fallback.className = 'hero-emoji-fallback';
+                        fallback.textContent = getHeroEmoji(selectedHero.name);
+                        target.parentNode?.appendChild(fallback);
+                      }}
+                    />
                   </div>
                   <div className="hero-basic-info">
                     <div className="hero-name">{selectedHero.name}</div>
