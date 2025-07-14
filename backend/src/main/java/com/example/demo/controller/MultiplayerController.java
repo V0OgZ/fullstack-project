@@ -30,7 +30,7 @@ public class MultiplayerController {
     
     @PostMapping("/sessions")
     public GameSession createSession(@RequestBody Map<String, Object> request) {
-        String sessionName = (String) request.get("name");
+        String sessionName = (String) request.get("sessionName");
         Integer maxPlayers = (Integer) request.get("maxPlayers");
         String gameMode = (String) request.get("gameMode");
         String creatorId = (String) request.get("creatorId");

@@ -411,6 +411,21 @@ export interface Translation {
   improvesCastleDefense: string;
   magicGuild: string;
   unlocksPowerfulSpells: string;
+
+  // Demo System
+  demonstrations: string;
+  demoDescription: string;
+  soloDemo: string;
+  soloDemoDescription: string;
+  multiplayerDemo: string;
+  multiplayerDemoDescription: string;
+  quickDemo: string;
+  quickDemoDescription: string;
+  launchDemo: string;
+  launchSoloDemo: string;
+  launchMultiplayerDemo: string;
+  launchQuickDemo: string;
+  demoNote: string;
 }
 
 // Traductions françaises
@@ -820,6 +835,21 @@ const frenchTranslations: Translation = {
   improvesCastleDefense: 'Améliore la défense du château',
   magicGuild: 'Guilde de magie',
   unlocksPowerfulSpells: 'Débloque des sorts puissants',
+
+  // Demo System
+  demonstrations: 'Démonstrations',
+  demoDescription: 'Découvrez Heroes of Time avec nos démonstrations automatiques',
+  soloDemo: 'Démo Solo',
+  soloDemoDescription: 'Choisit un scénario, sélectionne un héros et joue automatiquement un tour complet',
+  multiplayerDemo: 'Démo Multijoueur',
+  multiplayerDemoDescription: '2 écrans côte à côte montrant une partie multijoueur synchronisée avec création de session et gameplay',
+  quickDemo: 'Démo Rapide',
+  quickDemoDescription: 'Aperçu rapide des fonctionnalités principales sans navigateur visible',
+  launchDemo: 'Lancer la Démo',
+  launchSoloDemo: 'Lancer la démonstration solo ? Un navigateur va s\'ouvrir pour montrer le gameplay automatique.',
+  launchMultiplayerDemo: 'Lancer la démonstration multijoueur ? Deux navigateurs vont s\'ouvrir côte à côte pour montrer le jeu en réseau.',
+  launchQuickDemo: 'Lancer la démonstration rapide ? Tests automatiques en arrière-plan.',
+  demoNote: 'Les démonstrations utilisent des navigateurs automatisés pour montrer le gameplay sans intervention manuelle.',
 };
 
 // Traductions anglaises
@@ -1229,6 +1259,21 @@ const englishTranslations: Translation = {
   improvesCastleDefense: 'Improves castle defense',
   magicGuild: 'Magic Guild',
   unlocksPowerfulSpells: 'Unlocks powerful spells',
+
+  // Demo System
+  demonstrations: 'Demonstrations',
+  demoDescription: 'Discover Heroes of Time with our automated demonstrations',
+  soloDemo: 'Solo Demo',
+  soloDemoDescription: 'Chooses a scenario, selects a hero and automatically plays a complete turn',
+  multiplayerDemo: 'Multiplayer Demo',
+  multiplayerDemoDescription: '2 side-by-side screens showing a synchronized multiplayer game with session creation and gameplay',
+  quickDemo: 'Quick Demo',
+  quickDemoDescription: 'Quick overview of main features without visible browser',
+  launchDemo: 'Launch Demo',
+  launchSoloDemo: 'Launch solo demonstration? A browser will open to show automatic gameplay.',
+  launchMultiplayerDemo: 'Launch multiplayer demonstration? Two browsers will open side by side to show network gaming.',
+  launchQuickDemo: 'Launch quick demonstration? Automated background tests.',
+  demoNote: 'Demonstrations use automated browsers to show gameplay without manual intervention.',
 };
 
 // Traductions russes
@@ -1638,6 +1683,21 @@ const russianTranslations: Translation = {
   improvesCastleDefense: 'Улучшает защиту замка',
   magicGuild: 'Магическая гильдия',
   unlocksPowerfulSpells: 'Разблокирует сильные заклинания',
+
+  // Demo System
+  demonstrations: 'Демонстрации',
+  demoDescription: 'Откройте для себя Heroes of Time с нашими автоматическими демонстрациями',
+  soloDemo: 'Демо Соло',
+  soloDemoDescription: 'Выбирает сценарий, выбирает героя и автоматически играет полный ход',
+  multiplayerDemo: 'Демо Мультиплеер',
+  multiplayerDemoDescription: '2 экрана рядом показывают синхронизированную игру мультиплеер с созданием сессии и геймплеем',
+  quickDemo: 'Быстрая Демо',
+  quickDemoDescription: 'Быстрый обзор основных функций без видимого браузера',
+  launchDemo: 'Запустить Демо',
+  launchSoloDemo: 'Запустить демонстрацию соло? Браузер откроется, чтобы показать автоматический геймплей.',
+  launchMultiplayerDemo: 'Запустить демонстрацию мультиплеер? Два браузера откроются рядом, чтобы показать сетевую игру.',
+  launchQuickDemo: 'Запустить быструю демонстрацию? Автоматические фоновые тесты.',
+  demoNote: 'Демонстрации используют автоматизированные браузеры для показа геймплея без ручного вмешательства.',
 };
 
 // Helper function to get translations
