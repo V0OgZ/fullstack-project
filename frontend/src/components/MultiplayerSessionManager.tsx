@@ -70,6 +70,10 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
     }
   }, []); // Empty dependency array to run only once on mount
 
+  // Connection mode settings
+  const [connectionMode, setConnectionMode] = useState<'polling' | 'websocket'>('polling');
+  const isWebSocketAvailable = false; // WebSocket is disabled for stability
+
   const loadSessions = useCallback(async () => {
     try {
       setLoading(true);
@@ -123,19 +127,27 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
         creatorId: playerId
       });
       
-      console.log('✅ Session created:', response);
+      console.log('✅ Session created successfully:', response);
       
-      // WebSocket disabled - using polling mode only
-      console.log('🔄 Session created in polling mode (WebSocket disabled)');
+      // Log connection mode for debugging
+      console.log(`🔄 Using ${connectionMode} mode (WebSocket ${isWebSocketAvailable ? 'available' : 'disabled'})`);
       
-      // Set waiting state and session ID
       setCurrentSessionId(response.sessionId);
       setWaitingForPlayers(true);
       setCreateSessionMode(false);
       setSessionName('');
       
-      // Refresh sessions list so others can see it
+      // Refresh sessions list immediately and more frequently when waiting
       await loadSessions();
+      
+      // Auto-refresh every 2 seconds while waiting for players
+      const waitingInterval = setInterval(async () => {
+        if (waitingForPlayers) {
+          await loadSessions();
+        } else {
+          clearInterval(waitingInterval);
+        }
+      }, 2000);
       
     } catch (error) {
       console.error('❌ Failed to create session:', error);
@@ -151,24 +163,31 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
       return;
     }
 
-    if (!sessionId || sessionId.trim() === '') {
-      onError('Invalid session ID.');
+    if (!sessionId || sessionId.trim() === '' || sessionId === 'undefined') {
+      onError('Invalid session ID. Please select a valid session.');
       return;
     }
 
     try {
       setLoading(true);
-      console.log(`🎮 Attempting to join session ${sessionId} with player ID ${playerId}`);
-      const response = await ApiService.joinMultiplayerSession(sessionId, playerId);
-      console.log('✅ Joined session:', response);
+      console.log(`🎮 Joining session ${sessionId} with player ${playerId} using ${connectionMode} mode`);
       
-      // WebSocket disabled - using polling mode only
-      console.log('🔄 Session joined in polling mode (WebSocket disabled)');
+      const response = await ApiService.joinMultiplayerSession(sessionId, playerId);
+      console.log('✅ Successfully joined session:', response);
+      
+      // Wait a moment for the session to update, then refresh
+      setTimeout(async () => {
+        await loadSessions();
+      }, 1000);
       
       onSessionJoined(sessionId);
+      
     } catch (error) {
       console.error('❌ Failed to join session:', error);
       onError(`Failed to join session: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      
+      // Refresh sessions list in case of error
+      await loadSessions();
     } finally {
       setLoading(false);
     }
@@ -408,10 +427,62 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
               color: '#fff'
             }}
           >
-            <option value="conquest-classic">🏰 Classic Conquest</option>
-            <option value="temporal-rift">🔮 Temporal Rift</option>
-            <option value="multiplayer-arena">⚡ Multiplayer Arena</option>
+            <option value="multiplayer-arena">Multiplayer Arena</option>
+            <option value="conquest-classic">Classic Conquest</option>
+            <option value="temporal-rift">Temporal Rift</option>
           </select>
+        </div>
+
+        {/* Connection Mode Select */}
+        <div style={{ marginBottom: '15px' }}>
+          <label style={{ display: 'block', color: '#fff', marginBottom: '5px' }}>
+            Connection Mode:
+          </label>
+          <div style={{ display: 'flex', gap: '10px' }}>
+            <button
+              type="button"
+              onClick={() => setConnectionMode('polling')}
+              style={{
+                flex: 1,
+                padding: '8px 12px',
+                background: connectionMode === 'polling' ? '#4CAF50' : '#2a2a2a',
+                color: connectionMode === 'polling' ? '#fff' : '#ccc',
+                border: `1px solid ${connectionMode === 'polling' ? '#4CAF50' : '#404040'}`,
+                borderRadius: '4px',
+                cursor: 'pointer'
+              }}
+            >
+              📡 Polling (Stable)
+            </button>
+            <button
+              type="button"
+              onClick={() => setConnectionMode('websocket')}
+              disabled={!isWebSocketAvailable}
+              style={{
+                flex: 1,
+                padding: '8px 12px',
+                background: connectionMode === 'websocket' ? '#4CAF50' : '#2a2a2a',
+                color: isWebSocketAvailable ? 
+                  (connectionMode === 'websocket' ? '#fff' : '#ccc') : '#666',
+                border: `1px solid ${connectionMode === 'websocket' ? '#4CAF50' : '#404040'}`,
+                borderRadius: '4px',
+                cursor: isWebSocketAvailable ? 'pointer' : 'not-allowed',
+                opacity: isWebSocketAvailable ? 1 : 0.5
+              }}
+            >
+              ⚡ WebSocket 🚧
+            </button>
+          </div>
+          <div style={{ 
+            fontSize: '11px', 
+            color: '#888', 
+            marginTop: '5px',
+            fontStyle: 'italic'
+          }}>
+            {connectionMode === 'polling' ? 
+              'Polling: Stable connection, updates every 5 seconds' : 
+              'WebSocket: Real-time but currently disabled for stability'}
+          </div>
         </div>
 
         {/* Create Button */}

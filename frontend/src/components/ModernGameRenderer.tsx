@@ -467,13 +467,26 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height, 
       });
     });
 
-    // Draw all player heroes
+    // Draw heroes - CORRECTED: Use currentPlayer and currentGame properly
+    const { currentGame, currentPlayer } = useGameStore.getState();
+    
+    // Draw current player heroes
+    if (currentPlayer && currentPlayer.heroes && currentPlayer.heroes.length > 0) {
+      currentPlayer.heroes.forEach(hero => {
+        const center = hexToPixel(hero.position);
+        drawHero(ctx, center, hero);
+      });
+    }
+
+    // Draw other players' heroes if available
     if (currentGame && currentGame.players) {
       currentGame.players.forEach(player => {
-        player.heroes.forEach(hero => {
-          const center = hexToPixel(hero.position);
-          drawHero(ctx, center, hero);
-        });
+        if (player.id !== currentPlayer?.id && player.heroes) {
+          player.heroes.forEach(hero => {
+            const center = hexToPixel(hero.position);
+            drawHero(ctx, center, hero);
+          });
+        }
       });
     }
 
@@ -482,7 +495,7 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height, 
 
     // Schedule next render
     animationRef.current = requestAnimationFrame(render);
-  }, [map, selectedTile, hoveredTile, width, height, drawZFCZones, drawHexTile, drawParticles, hexToPixel, currentGame, drawHero, t]);
+  }, [map, selectedTile, hoveredTile, width, height, drawZFCZones, drawHexTile, drawParticles, hexToPixel, drawHero, t]);
 
   // Gestion des événements de souris
   const handleMouseMove = useCallback((event: React.MouseEvent) => {
