@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useCallback, useMemo } from 'react';
+import React, { useRef, useEffect, useState, useCallback, useMemo, useImperativeHandle, forwardRef } from 'react';
 import { useGameStore } from '../store/useGameStore';
 import { Position, Tile, Hero } from '../types/game';
 import { useTranslation } from '../i18n';
@@ -8,21 +8,24 @@ import './ModernGameRenderer.css';
 interface ModernGameRendererProps {
   width: number;
   height: number;
-  onTileClick?: (coord: Position) => void;
+  onTileClick?: (position: Position) => void;
+}
+
+export interface ModernGameRendererRef {
+  centerOnPosition: (position: Position) => void;
 }
 
 interface AnimatedElement {
   id: string;
-  type: 'hero' | 'effect' | 'particle';
+  type: 'particle' | 'effect';
   position: Position;
-  targetPosition?: Position;
   startTime: number;
   duration: number;
   color: string;
   size: number;
 }
 
-const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height, onTileClick }) => {
+const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererProps>(({ width, height, onTileClick }, ref) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
   const { map, currentGame, selectedTile, setSelectedTile, visibleZFCs } = useGameStore();
@@ -31,6 +34,7 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height, 
   const [animatedElements, setAnimatedElements] = useState<AnimatedElement[]>([]);
   const [hoveredTile, setHoveredTile] = useState<Position | null>(null);
   const [heroImages, setHeroImages] = useState<Map<string, HTMLImageElement>>(new Map());
+  const [mapOffset, setMapOffset] = useState<Position>({ x: 0, y: 0 });
 
   // Fonction pour obtenir l'image du héros
   const getHeroImage = useCallback((heroName: string): string => {
@@ -108,8 +112,8 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height, 
     hexRadius: 25,
     hexWidth: 43.3,
     hexHeight: 50,
-    offsetX: 50,
-    offsetY: 50,
+    offsetX: 50 + mapOffset.x,
+    offsetY: 50 + mapOffset.y,
     colors: {
       grass: '#4CAF50',
       forest: '#2E7D32',
@@ -127,7 +131,7 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height, 
         locked: 'rgba(156, 39, 176, 0.5)'
       }
     }
-  }), []);
+  }), [mapOffset]);
 
   // Conversion coordonnées hexagonales (pointy-top hexagons)
   const hexToPixel = useCallback((hex: Position): Position => {
@@ -634,6 +638,23 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height, 
     };
   }, [render]);
 
+  // Exposer la fonction centerOnPosition
+  useImperativeHandle(ref, () => ({
+    centerOnPosition: (position: Position) => {
+      // Calculer la position pixel du héros
+      const heroPixel = hexToPixel(position);
+      
+      // Calculer l'offset nécessaire pour centrer ce point sur l'écran
+      const centerX = width / 2;
+      const centerY = height / 2;
+      
+      const newOffsetX = centerX - heroPixel.x + 50; // +50 pour le offset initial
+      const newOffsetY = centerY - heroPixel.y + 50; // +50 pour le offset initial
+      
+      setMapOffset({ x: newOffsetX - 50, y: newOffsetY - 50 });
+    }
+  }), [hexToPixel, width, height]);
+
   return (
     <canvas
       ref={canvasRef}
@@ -650,6 +671,6 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height, 
       }}
     />
   );
-};
+});
 
 export default ModernGameRenderer; 
