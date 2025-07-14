@@ -1,0 +1,73 @@
+{
+  "scenarioId": "multiplayer-arena",
+  "name": "Multiplayer Arena",
+  "description": "A fast-paced multiplayer battle where players compete in a smaller arena for quick matches.",
+  "difficulty": "normal",
+  "maxPlayers": 4,
+  "recommendedPlayers": 4,
+  "mapSize": "small",
+  "mapWidth": 20,
+  "mapHeight": 20,
+  "turnLimit": 50,
+  "timeLimit": 60,
+  "victoryCondition": "elimination",
+  "victoryRequirement": "Be the last player standing",
+  "defeatCondition": "All heroes eliminated",
+  "isActive": true,
+  "isCampaign": false,
+  "objectives": [
+    {
+      "objectiveId": "obj1",
+      "objectiveType": "eliminate",
+      "objectiveTitle": "Last Player Standing",
+      "objectiveDescription": "Eliminate all other players",
+      "targetValue": 3,
+      "isRequired": true
+    }
+  ],
+  "startingPositions": [
+    {
+      "playerId": "player1",
+      "positionX": 3,
+      "positionY": 3,
+      "castleType": "castle",
+      "startingHero": "Arthur",
+      "handicap": 0
+    },
+    {
+      "playerId": "player2",
+      "positionX": 17,
+      "positionY": 3,
+      "castleType": "rampart",
+      "startingHero": "Elara",
+      "handicap": 0
+    },
+    {
+      "playerId": "player3",
+      "positionX": 3,
+      "positionY": 17,
+      "castleType": "tower",
+      "startingHero": "Zoltan",
+      "handicap": 0
+    },
+    {
+      "playerId": "player4",
+      "positionX": 17,
+      "positionY": 17,
+      "castleType": "inferno",
+      "startingHero": "Dagon",
+      "handicap": 0
+    }
+  ],
+  "events": [
+    {
+      "eventId": "event1",
+      "eventType": "timed",
+      "eventTitle": "Resource Boost",
+      "eventDescription": "All players receive bonus resources",
+      "eventEffect": "{\"effect\": \"resource_boost\", \"gold\": 5000, \"turn\": 10}",
+      "isTriggered": false,
+      "isRepeatable": false
+    }
+  ]
+} 

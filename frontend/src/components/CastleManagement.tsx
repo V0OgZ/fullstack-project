@@ -33,9 +33,8 @@ interface CastleData {
 
 const CastleManagement: React.FC<CastleManagementProps> = ({ castleId, isVisible, onClose }) => {
   const { t } = useTranslation();
-  const { currentPlayer, currentGame } = useGameStore();
+  const { currentPlayer } = useGameStore();
   const [activeTab, setActiveTab] = useState<'overview' | 'buildings' | 'recruitment' | 'upgrades'>('overview');
-  const [selectedBuilding, setSelectedBuilding] = useState<Building | null>(null);
   const [castle, setCastle] = useState<CastleData | null>(null);
 
   useEffect(() => {
@@ -110,11 +109,6 @@ const CastleManagement: React.FC<CastleManagementProps> = ({ castleId, isVisible
     if (!castle) return;
     
     const currentLevel = castle.buildings[building.id] || 0;
-    const upgradeCost = {
-      gold: (building.cost.gold || 0) * (currentLevel + 1),
-      wood: (building.cost.wood || 0) * (currentLevel + 1),
-      stone: (building.cost.stone || 0) * (currentLevel + 1)
-    };
     
     console.log(`Upgrading ${building.name} to level ${currentLevel + 1}`);
     // Update local state for demo

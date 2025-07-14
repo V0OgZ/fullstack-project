@@ -1691,10 +1691,4 @@ export interface CastleManager {
   canBuild(castle: Castle, buildingId: string): boolean;
 }
 
-export default {
-  CASTLE_TYPES,
-  UNIT_TYPES,
-  BUILDING_TYPES,
-  RESOURCE_INFO,
-  DAILY_RESOURCE_GENERATION
-}; 
+export default {}; 

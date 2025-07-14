@@ -34,8 +34,33 @@ public class GameController {
 
     @PostMapping("/games")
     public ResponseEntity<Map<String, Object>> createGame(@RequestBody Map<String, Object> request) {
+        // Validate input data
+        Integer playerCount = (Integer) request.get("playerCount");
+        if (playerCount != null && playerCount < 1) {
+            throw new RuntimeException("Invalid player count: " + playerCount);
+        }
+        
         Map<String, Object> game = gameService.createGame(request);
         return ResponseEntity.ok(game);
+    }
+
+    @PostMapping("/games/multiplayer")
+    public ResponseEntity<Map<String, Object>> createMultiplayerSession(@RequestBody Map<String, Object> sessionData) {
+        String sessionName = (String) sessionData.getOrDefault("sessionName", "Multiplayer Session");
+        Integer maxPlayers = (Integer) sessionData.getOrDefault("maxPlayers", 4);
+        String gameMode = (String) sessionData.getOrDefault("gameMode", "conquest-classic");
+        String createdBy = (String) sessionData.getOrDefault("createdBy", "anonymous");
+        
+        // Create a multiplayer game session
+        Map<String, Object> session = gameService.createMultiplayerSession(sessionName, maxPlayers, gameMode, createdBy);
+        return ResponseEntity.ok(session);
+    }
+
+    @GetMapping("/games/joinable")
+    public ResponseEntity<Map<String, Object>> getJoinableSessions() {
+        // For now, return a mock joinable session
+        Map<String, Object> session = gameService.getGame("joinable");
+        return ResponseEntity.ok(session);
     }
 
     @PostMapping("/games/{gameId}/join")
@@ -193,9 +218,12 @@ public class GameController {
 
     // Turn management endpoints
     @PostMapping("/games/{gameId}/end-turn")
-    public ResponseEntity<Void> endTurn(@PathVariable String gameId) {
+    public ResponseEntity<Map<String, Object>> endTurn(@PathVariable String gameId) {
         gameService.endTurn(gameId);
-        return ResponseEntity.ok().build();
+        Map<String, Object> response = new HashMap<>();
+        response.put("success", true);
+        response.put("message", "Turn ended successfully");
+        return ResponseEntity.ok(response);
     }
 
     // Combat results endpoints
