@@ -44,24 +44,25 @@ const PoliticalAdvisorPanel: React.FC<PoliticalAdvisorPanelProps> = ({
   useEffect(() => {
     if (!backendAvailable) return;
 
-    const eventTimer = setInterval(async () => {
-      if (!currentEvent && Math.random() < 0.3) { // 30% chance each interval
-        try {
-          const newEvent = await BackendPoliticalAdvisorService.generateRandomPoliticalEvent(
-            currentReputation, 
-            currentTurn
-          );
-          if (newEvent) {
-            setCurrentEvent(newEvent);
-            console.log('🏛️ New political event from backend:', newEvent.title);
-          }
-        } catch (error) {
-          console.error('Error generating political event:', error);
-        }
-      }
-    }, 10000); // Check every 10 seconds
+    // DISABLED: Too many requests causing backend to crash
+    // const eventTimer = setInterval(async () => {
+    //   if (!currentEvent && Math.random() < 0.3) { // 30% chance each interval
+    //     try {
+    //       const newEvent = await BackendPoliticalAdvisorService.generateRandomPoliticalEvent(
+    //         currentReputation, 
+    //         currentTurn
+    //       );
+    //       if (newEvent) {
+    //         setCurrentEvent(newEvent);
+    //         console.log('🏛️ New political event from backend:', newEvent.title);
+    //       }
+    //     } catch (error) {
+    //       console.error('Error generating political event:', error);
+    //     }
+    //   }
+    // }, 10000); // Check every 10 seconds
 
-    return () => clearInterval(eventTimer);
+    // return () => clearInterval(eventTimer);
   }, [currentEvent, currentReputation, currentTurn, backendAvailable]);
 
   const handleDecision = async (choiceId: string) => {

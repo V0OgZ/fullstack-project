@@ -365,6 +365,33 @@ export interface Translation {
   details: string;
   comingSoon: string;
 
+  // Backend Scenario Names and Descriptions
+  'scenarios.conquest-classic.name': string;
+  'scenarios.conquest-classic.description': string;
+  'scenarios.temporal-rift.name': string;
+  'scenarios.temporal-rift.description': string;
+  'scenarios.multiplayer-arena.name': string;
+  'scenarios.multiplayer-arena.description': string;
+  'scenarios.dragon-campaign.name': string;
+  'scenarios.dragon-campaign.description': string;
+  'scenarios.economic-race.name': string;
+  'scenarios.economic-race.description': string;
+  'scenarios.artifact-hunt.name': string;
+  'scenarios.artifact-hunt.description': string;
+  'scenarios.survival.name': string;
+  'scenarios.survival.description': string;
+
+  // Scenario Features
+  'features.backend-loaded': string;
+  'features.dynamic-content': string;
+  'features.real-time-data': string;
+  'features.epic-campaign': string;
+  'features.dragon-lords': string;
+  'features.ultimate-challenge': string;
+  'features.balanced-gameplay': string;
+  'features.all-castles': string;
+  'features.standard-victory': string;
+
   // Castle Management
   overview: string;
   buildings: string;
@@ -746,6 +773,33 @@ const frenchTranslations: Translation = {
   availableAdventures: 'Choisir un scénario',
   details: 'Détails',
   comingSoon: 'Bientôt Disponible',
+
+  // Backend Scenario Names and Descriptions
+  'scenarios.conquest-classic.name': 'Conquête Classique',
+  'scenarios.conquest-classic.description': 'Un scénario de conquête traditionnel où les joueurs doivent éliminer tous les ennemis ou capturer leurs villes principales.',
+  'scenarios.temporal-rift.name': 'La Faille Temporelle',
+  'scenarios.temporal-rift.description': 'Une faille mystérieuse dans le temps menace de déchirer la réalité. Les héros doivent naviguer à travers les zones temporelles pour rétablir l\'équilibre.',
+  'scenarios.multiplayer-arena.name': 'Arène Multijoueur',
+  'scenarios.multiplayer-arena.description': 'Une bataille multijoueur rapide où les joueurs s\'affrontent dans une arène plus petite pour des matchs rapides.',
+  'scenarios.dragon-campaign.name': 'Campagne du Dragon',
+  'scenarios.dragon-campaign.description': 'Affrontez les anciens seigneurs dragons dans cette campagne épique. Complétez d\'autres scénarios pour débloquer.',
+  'scenarios.economic-race.name': 'Course Économique',
+  'scenarios.economic-race.description': 'Une compétition économique pacifique où les joueurs rivalisent pour accumuler des ressources et construire le royaume le plus prospère.',
+  'scenarios.artifact-hunt.name': 'Chasse aux Artefacts',
+  'scenarios.artifact-hunt.description': 'Un scénario de chasse au trésor où les joueurs recherchent de puissants artefacts dispersés sur la carte.',
+  'scenarios.survival.name': 'Dernier Rempart',
+  'scenarios.survival.description': 'Survivez aux vagues d\'ennemis de plus en plus puissants tout en défendant votre forteresse.',
+
+  // Scenario Features
+  'features.backend-loaded': 'Chargé depuis le Backend',
+  'features.dynamic-content': 'Contenu Dynamique',
+  'features.real-time-data': 'Données en Temps Réel',
+  'features.epic-campaign': 'Campagne Épique',
+  'features.dragon-lords': 'Seigneurs Dragons',
+  'features.ultimate-challenge': 'Défi Ultime',
+  'features.balanced-gameplay': 'Gameplay Équilibré',
+  'features.all-castles': 'Tous les Châteaux',
+  'features.standard-victory': 'Victoire Standard',
 
   // Castle Management
   overview: 'Aperçu',
@@ -1129,6 +1183,33 @@ const englishTranslations: Translation = {
   details: 'Details',
   comingSoon: 'Coming Soon',
 
+  // Backend Scenario Names and Descriptions
+  'scenarios.conquest-classic.name': 'Classic Conquest',
+  'scenarios.conquest-classic.description': 'A traditional conquest scenario where players must eliminate all enemies or capture their main towns.',
+  'scenarios.temporal-rift.name': 'The Temporal Rift',
+  'scenarios.temporal-rift.description': 'A mysterious rift in time threatens to tear reality apart. Heroes must navigate through temporal zones to restore balance.',
+  'scenarios.multiplayer-arena.name': 'Multiplayer Arena',
+  'scenarios.multiplayer-arena.description': 'A fast-paced multiplayer battle where players compete in a smaller arena for quick matches.',
+  'scenarios.dragon-campaign.name': 'Dragon Campaign',
+  'scenarios.dragon-campaign.description': 'Face the ancient dragon lords in this epic campaign. Complete other scenarios to unlock.',
+  'scenarios.economic-race.name': 'Economic Race',
+  'scenarios.economic-race.description': 'A peaceful economic competition where players race to accumulate resources and build the most prosperous kingdom.',
+  'scenarios.artifact-hunt.name': 'Artifact Hunt',
+  'scenarios.artifact-hunt.description': 'A treasure hunting scenario where players search for powerful artifacts scattered across the map.',
+  'scenarios.survival.name': 'Last Stand',
+  'scenarios.survival.description': 'Survive waves of increasingly powerful enemies while defending your stronghold.',
+
+  // Scenario Features
+  'features.backend-loaded': 'Backend Loaded',
+  'features.dynamic-content': 'Dynamic Content',
+  'features.real-time-data': 'Real-time Data',
+  'features.epic-campaign': 'Epic Campaign',
+  'features.dragon-lords': 'Dragon Lords',
+  'features.ultimate-challenge': 'Ultimate Challenge',
+  'features.balanced-gameplay': 'Balanced Gameplay',
+  'features.all-castles': 'All Castles',
+  'features.standard-victory': 'Standard Victory',
+
   // Castle Management
   overview: 'Overview',
   buildings: 'Buildings',
@@ -1510,6 +1591,33 @@ const russianTranslations: Translation = {
   availableAdventures: 'Доступные приключения',
   details: 'Детали',
   comingSoon: 'Скоро доступно',
+
+  // Backend Scenario Names and Descriptions
+  'scenarios.conquest-classic.name': 'Классическое Завоевание',
+  'scenarios.conquest-classic.description': 'Традиционный сценарий завоевания, где игроки должны уничтожить всех врагов или захватить их главные города.',
+  'scenarios.temporal-rift.name': 'Временной Разлом',
+  'scenarios.temporal-rift.description': 'Таинственный разлом во времени угрожает разорвать реальность. Герои должны пройти через временные зоны, чтобы восстановить равновесие.',
+  'scenarios.multiplayer-arena.name': 'Многопользовательская Арена',
+  'scenarios.multiplayer-arena.description': 'Быстрый многопользовательский бой, где игроки соревнуются на меньшей арене для быстрых матчей.',
+  'scenarios.dragon-campaign.name': 'Кампания Дракона',
+  'scenarios.dragon-campaign.description': 'Столкнитесь с древними повелителями драконов в этой эпической кампании. Завершите другие сценарии, чтобы разблокировать.',
+  'scenarios.economic-race.name': 'Экономическая Гонка',
+  'scenarios.economic-race.description': 'Мирное экономическое соревнование, где игроки соревнуются за накопление ресурсов и строительство самого процветающего королевства.',
+  'scenarios.artifact-hunt.name': 'Охота за Артефактами',
+  'scenarios.artifact-hunt.description': 'Сценарий охоты за сокровищами, где игроки ищут мощные артефакты, разбросанные по карте.',
+  'scenarios.survival.name': 'Последний Рубеж',
+  'scenarios.survival.description': 'Выживайте против волн все более мощных врагов, защищая свою крепость.',
+
+  // Scenario Features
+  'features.backend-loaded': 'Загружено с Backend',
+  'features.dynamic-content': 'Динамический Контент',
+  'features.real-time-data': 'Данные в Реальном Времени',
+  'features.epic-campaign': 'Эпическая Кампания',
+  'features.dragon-lords': 'Повелители Драконов',
+  'features.ultimate-challenge': 'Высший Вызов',
+  'features.balanced-gameplay': 'Сбалансированный Геймплей',
+  'features.all-castles': 'Все Замки',
+  'features.standard-victory': 'Стандартная Победа',
 
   // Castle Management
   overview: 'Обзор',

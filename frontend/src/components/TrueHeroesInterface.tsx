@@ -20,7 +20,6 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
   const { 
     currentGame, 
     currentPlayer, 
-    loadGame, 
     isLoading, 
     error,
     endTurn,
@@ -35,11 +34,16 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
   const [selectedCastleId, setSelectedCastleId] = useState<string | null>(null);
   const [useOptimizedRenderer, setUseOptimizedRenderer] = useState(false);
 
+  // THIS useEffect was causing the infinite loop. It has been removed.
+  // The Game.tsx component is now solely responsible for loading the game.
+  /*
   useEffect(() => {
     if (scenarioId) {
       loadGame(scenarioId);
     }
-  }, [scenarioId, loadGame]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [scenarioId]); // Only reload when scenarioId changes
+  */
 
   const handleEndTurn = () => {
     if (currentGame?.gameMode === 'hotseat') {
@@ -72,9 +76,9 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
       <div className="true-heroes-error">
         <h2>{t('error')}</h2>
         <p>{error}</p>
-        <button onClick={() => loadGame(scenarioId)} className="retry-button">
+        {/* <button onClick={() => loadGame(scenarioId)} className="retry-button">
           {t('back')}
-        </button>
+        </button> */}
       </div>
     );
   }

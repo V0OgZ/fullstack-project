@@ -1,7 +1,7 @@
 {
   "scenarioId": "conquest-classic",
-  "name": "Classic Conquest",
-  "description": "A traditional conquest scenario where players must eliminate all enemies or capture their main towns.",
+  "name": "scenarios.conquest-classic.name",
+  "description": "scenarios.conquest-classic.description",
   "difficulty": "normal",
   "maxPlayers": 6,
   "recommendedPlayers": 6,
@@ -11,24 +11,24 @@
   "turnLimit": 200,
   "timeLimit": null,
   "victoryCondition": "conquest",
-  "victoryRequirement": "Eliminate all enemy players or capture all enemy towns",
-  "defeatCondition": "All towns are captured or all heroes are eliminated",
+  "victoryRequirement": "victory.conquest-classic",
+  "defeatCondition": "defeat.conquest-classic",
   "isActive": true,
   "isCampaign": false,
   "objectives": [
     {
       "objectiveId": "obj1",
       "objectiveType": "eliminate",
-      "objectiveTitle": "Total Victory",
-      "objectiveDescription": "Eliminate all enemy players",
+      "objectiveTitle": "objectives.conquest-classic.obj1.title",
+      "objectiveDescription": "objectives.conquest-classic.obj1.description",
       "targetValue": 5,
       "isRequired": true
     },
     {
       "objectiveId": "obj2",
       "objectiveType": "capture",
-      "objectiveTitle": "Capture All Towns",
-      "objectiveDescription": "Capture all enemy towns",
+      "objectiveTitle": "objectives.conquest-classic.obj2.title",
+      "objectiveDescription": "objectives.conquest-classic.obj2.description",
       "targetValue": 5,
       "isRequired": true
     }
@@ -39,48 +39,42 @@
       "positionX": 5,
       "positionY": 15,
       "castleType": "castle",
-      "startingHero": "Arthur",
-      "handicap": 0
+      "startingHero": "Arthur"
     },
     {
       "playerId": "player2",
       "positionX": 15,
       "positionY": 5,
       "castleType": "rampart",
-      "startingHero": "Elara",
-      "handicap": 0
+      "startingHero": "Elara"
     },
     {
       "playerId": "player3",
       "positionX": 25,
       "positionY": 15,
       "castleType": "tower",
-      "startingHero": "Zoltan",
-      "handicap": 0
+      "startingHero": "Zoltan"
     },
     {
       "playerId": "player4",
       "positionX": 15,
       "positionY": 25,
       "castleType": "inferno",
-      "startingHero": "Dagon",
-      "handicap": 0
+      "startingHero": "Dagon"
     },
     {
       "playerId": "player5",
       "positionX": 5,
       "positionY": 25,
       "castleType": "necropolis",
-      "startingHero": "Thant",
-      "handicap": 0
+      "startingHero": "Thant"
     },
     {
       "playerId": "player6",
       "positionX": 25,
       "positionY": 5,
       "castleType": "dungeon",
-      "startingHero": "Gunnar",
-      "handicap": 0
+      "startingHero": "Gunnar"
     }
   ],
   "events": []

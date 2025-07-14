@@ -309,8 +309,12 @@ export class ApiService {
     });
   }
 
-  static async getAllScenarios(): Promise<any> {
-    return this.makeRequest('/scenarios/all');
+  static async getAllScenarios(language = 'en'): Promise<any> {
+    return this.makeRequest(`/scenarios/all?lang=${language}`);
+  }
+
+  static async getAvailableLanguages(): Promise<any> {
+    return this.makeRequest('/scenarios/languages');
   }
 
   static async getPoliticalAdvisors(): Promise<any> {

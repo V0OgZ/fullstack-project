@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from '../i18n';
 import { ApiService } from '../services/api';
 import './EnhancedScenarioSelector.css';
@@ -31,6 +31,7 @@ interface BackendScenario {
 
 const EnhancedScenarioSelector: React.FC = () => {
   const { t, language, setLanguage } = useTranslation();
+  const navigate = useNavigate();
   const [selectedScenario, setSelectedScenario] = useState<string | null>(null);
   const [scenarios, setScenarios] = useState<Scenario[]>([]);
   const [loading, setLoading] = useState(true);
@@ -44,17 +45,17 @@ const EnhancedScenarioSelector: React.FC = () => {
       setLoading(true);
       setError(null);
       
-      // Load all scenarios from backend
-      const backendScenarios = await ApiService.getAllScenarios();
+      // Load all scenarios from backend with current language
+      const backendScenarios = await ApiService.getAllScenarios(language);
       
       // Convert backend scenarios to EnhancedScenarioSelector format
       const enhancedScenarios: Scenario[] = backendScenarios.map((scenario: BackendScenario) => ({
         id: scenario.scenarioId,
-        name: scenario.name,
-        description: scenario.description,
-        longDescription: scenario.description,
+        name: scenario.name, // Now localized by backend
+        description: scenario.description, // Now localized by backend
+        longDescription: scenario.description, // Using same description for now
         difficulty: scenario.difficulty.toLowerCase() as 'easy' | 'medium' | 'hard' | 'expert',
-        features: ['Backend Loaded', 'Dynamic Content', 'Real-time Data'],
+        features: [t('features.backend-loaded'), t('features.dynamic-content'), t('features.real-time-data')],
         icon: scenario.scenarioId === 'conquest-classic' ? '⚔️' : 
               scenario.scenarioId === 'temporal-rift' ? '🔮' : 
               scenario.scenarioId === 'multiplayer-arena' ? '🌐' : '🎮',
@@ -66,8 +67,27 @@ const EnhancedScenarioSelector: React.FC = () => {
         playerCount: `${scenario.maxPlayers} players`,
         unlocked: scenario.isActive
       }));
+
+      // Add a locked scenario for demonstration
+      const lockedScenario: Scenario = {
+        id: 'dragon-campaign',
+        name: t('scenarios.dragon-campaign.name'),
+        description: t('scenarios.dragon-campaign.description'),
+        longDescription: t('scenarios.dragon-campaign.description'),
+        difficulty: 'expert',
+        features: [t('features.epic-campaign'), t('features.dragon-lords'), t('features.ultimate-challenge')],
+        icon: '🐉',
+        backgroundImage: 'linear-gradient(135deg, #FF6B35 0%, #F7931E 100%)',
+        estimatedTime: '3-5 hours',
+        playerCount: '1-2 players',
+        unlocked: false
+      };
+
+      // Combine backend scenarios with locked scenario
+      const allScenarios = [...enhancedScenarios, lockedScenario];
       
-      setScenarios(enhancedScenarios);
+      setScenarios(allScenarios);
+      console.log('%c[EnhancedScenarioSelector] Loaded scenarios:', 'color: green; font-weight: bold', allScenarios);
     } catch (err) {
       setError('Failed to load scenarios from backend');
       console.error('Error loading scenarios:', err);
@@ -76,27 +96,41 @@ const EnhancedScenarioSelector: React.FC = () => {
       const fallbackScenarios: Scenario[] = [
         {
           id: 'conquest-classic',
-          name: t('classicConquest'),
-          description: t('classicDescription'),
-          longDescription: 'Experience the classic Heroes of Might and Magic gameplay with this balanced conquest scenario. Perfect for new players and veterans alike.',
+          name: t('scenarios.conquest-classic.name'),
+          description: t('scenarios.conquest-classic.description'),
+          longDescription: t('scenarios.conquest-classic.description'),
           difficulty: 'easy',
-          features: ['Balanced Gameplay', 'All Castles', 'Standard Victory'],
+          features: [t('features.balanced-gameplay'), t('features.all-castles'), t('features.standard-victory')],
           icon: '⚔️',
           backgroundImage: 'linear-gradient(135deg, #2196F3 0%, #1976D2 100%)',
           estimatedTime: '1-2 hours',
           playerCount: '2-6 players',
           unlocked: true
+        },
+        {
+          id: 'dragon-campaign',
+          name: t('scenarios.dragon-campaign.name'),
+          description: t('scenarios.dragon-campaign.description'),
+          longDescription: t('scenarios.dragon-campaign.description'),
+          difficulty: 'expert',
+          features: [t('features.epic-campaign'), t('features.dragon-lords'), t('features.ultimate-challenge')],
+          icon: '🐉',
+          backgroundImage: 'linear-gradient(135deg, #FF6B35 0%, #F7931E 100%)',
+          estimatedTime: '3-5 hours',
+          playerCount: '1-2 players',
+          unlocked: false
         }
       ];
       setScenarios(fallbackScenarios);
     } finally {
       setLoading(false);
     }
-  }, [t]);
+  }, [t, language]);
 
   useEffect(() => {
     loadScenarios();
-  }, [loadScenarios]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [language]); // Only reload when language changes
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
@@ -126,7 +160,7 @@ const EnhancedScenarioSelector: React.FC = () => {
     const scenario = scenarios.find(s => s.id === scenarioId);
     if (scenario && scenario.unlocked) {
       console.log(`[SELECTOR] Navigating to game for scenario: ${scenarioId}`);
-      window.location.href = `/game/${scenarioId}`;
+      navigate(`/game/${scenarioId}`);
     } else {
       console.log(`[SELECTOR] Scenario ${scenarioId} is locked or not found`);
     }

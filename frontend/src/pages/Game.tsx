@@ -16,15 +16,14 @@ const Game: React.FC = () => {
     console.log(`[GAME PAGE] Current URL: ${window.location.href}`);
     console.log(`[GAME PAGE] Current pathname: ${window.location.pathname}`);
     
-    // If we have a scenarioId and no game loaded, load it.
-    if (scenarioId && !currentGame) {
-      console.log(`[GAME PAGE] Current game not found. Calling loadGame with scenarioId: ${scenarioId}`);
+    // ALWAYS load the game when scenarioId is provided
+    // This ensures fresh data from backend every time
+    if (scenarioId) {
+      console.log(`[GAME PAGE] Force loading game for scenarioId: ${scenarioId}`);
       loadGame(scenarioId);
-    } else {
-      console.log(`[GAME PAGE] Game already loaded or no scenarioId provided.`);
-      console.log(`[GAME PAGE] scenarioId: ${scenarioId}, currentGame: ${currentGame ? currentGame.id : 'null'}`);
     }
-  }, [scenarioId, currentGame, loadGame]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [scenarioId]); // Only depend on scenarioId to avoid infinite loops
 
   // Remove the navigation logic that was causing issues
   // The game should stay on the current URL
@@ -49,12 +48,23 @@ const Game: React.FC = () => {
   }
 
   console.log('[GAME PAGE] Status: Game data loaded successfully. Rendering game components.');
+  
+  // Determine scenario type based on the URL parameter, not the game name
+  let scenarioType: 'classique' | 'mystique' | 'multiplayer' = 'classique';
+  if (scenarioId) {
+    if (scenarioId.includes('mystique')) {
+      scenarioType = 'mystique';
+    } else if (scenarioId.includes('multiplayer') || scenarioId.includes('arena')) {
+      scenarioType = 'multiplayer';
+    }
+  }
+  
   return (
     <div className="game-page">
       <TrueHeroesInterface
         playerCount={currentGame.players.length}
-        scenarioType={currentGame.name.toLowerCase().includes('mystique') ? 'mystique' : 'classique'}
-        scenarioId={currentGame.id}
+        scenarioType={scenarioType}
+        scenarioId={scenarioId || currentGame.id}
       />
     </div>
   );

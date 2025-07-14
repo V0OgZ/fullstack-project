@@ -102,52 +102,53 @@ export class GameService {
     console.log(`%c🎮 [GameService] Initializing game for scenario: ${scenarioId}`, 'color: purple; font-weight: bold');
     
     try {
-      let scenarioData: any;
-      if (scenarioId === 'conquest-classic') {
-        console.log(`%c📡 [GameService] Calling createConquestClassicScenario()`, 'color: blue');
-        scenarioData = await ApiService.createConquestClassicScenario();
-      } else if (scenarioId === 'temporal-rift') {
-        console.log(`%c📡 [GameService] Calling createTemporalRiftScenario()`, 'color: blue');
-        scenarioData = await ApiService.createTemporalRiftScenario();
-      } else if (scenarioId === 'multiplayer-arena') {
-        // For now, use conquest-classic as fallback for multiplayer-arena
-        console.log(`%c📡 [GameService] Using conquest-classic fallback for multiplayer-arena`, 'color: orange');
-        scenarioData = await ApiService.createConquestClassicScenario();
-        scenarioData.scenarioId = 'multiplayer-arena';
-        scenarioData.name = 'Multiplayer Arena';
-      } else if (scenarioId === 'epic-campaign') {
-        // For now, use conquest-classic as fallback for epic-campaign
-        console.log(`%c📡 [GameService] Using conquest-classic fallback for epic-campaign`, 'color: orange');
-        scenarioData = await ApiService.createConquestClassicScenario();
-        scenarioData.scenarioId = 'epic-campaign';
-        scenarioData.name = 'Epic Campaign';
-      } else {
-        // Default fallback - use conquest-classic for any unknown scenario
-        console.warn(`%c⚠️ [GameService] Unknown scenario ID: ${scenarioId}, falling back to conquest-classic`, 'color: orange');
-        scenarioData = await ApiService.createConquestClassicScenario();
-        scenarioData.scenarioId = scenarioId;
-        scenarioData.name = `Scenario: ${scenarioId}`;
-      }
+      // Step 1: Create a game directly using the scenario ID
+      console.log(`%c🎯 [GameService] Creating game for scenario: ${scenarioId}`, 'color: blue');
+      const gameData = await ApiService.createGame({
+        scenarioId: scenarioId,
+        playerCount: 2, // Default to 2 players
+        gameMode: scenarioId
+      });
       
-      console.log(`%c✅ [GameService] Backend response:`, 'color: green; font-weight: bold', scenarioData);
+      console.log(`%c🎮 [GameService] Game created successfully:`, 'color: green', gameData);
       
-      if (!scenarioData || !scenarioData.scenarioId) {
-        console.error(`%c💥 [GameService] Invalid scenario data:`, 'color: red; font-weight: bold', scenarioData);
-        throw new Error('Failed to create game from the backend.');
-      }
-
-      // Transform scenario data to game data
-      console.log(`%c🔄 [GameService] Transforming scenario data to game data...`, 'color: blue');
-      const gameData = this.transformScenarioToGame(scenarioData);
-      console.log(`%c✅ [GameService] Game data created:`, 'color: green; font-weight: bold', gameData);
-
-      // Find the current player
-      const currentPlayer = gameData.players.find(p => p.id === gameData.currentPlayerTurn);
-      console.log(`%c👤 [GameService] Current player:`, 'color: blue', currentPlayer);
-
-      return {
-        currentGame: gameData,
-        currentPlayer: currentPlayer || null,
+      // The backend returns the full game state directly from createGame
+      // No need to make a second API call
+      const fullGameState = gameData;
+      
+      // Step 2: Transform to frontend format
+      const transformedGame: Game = {
+        id: fullGameState.id,
+        name: fullGameState.name || `Game ${scenarioId}`,
+        currentTurn: fullGameState.currentTurn || 1,
+        currentPlayerTurn: fullGameState.currentPlayer?.id || 'player1',
+        turnStartTime: fullGameState.turnStartTime || new Date().toISOString(),
+        turnDuration: fullGameState.turnDuration || 30,
+        status: fullGameState.status || 'active',
+        gameMode: 'hotseat',
+        players: fullGameState.players || [],
+        map: {
+          id: fullGameState.map?.id || 'default-map',
+          width: fullGameState.map?.width || 20,
+          height: fullGameState.map?.height || 20,
+          tiles: fullGameState.map?.tiles || [],
+          objects: fullGameState.map?.objects || []
+        },
+        actions: fullGameState.actions || [],
+        timeline: [],
+        zfcMap: [],
+        gameSettings: {
+          maxPlayers: 2,
+          turnTimeLimit: 30,
+          victoryConditions: ['conquest']
+        }
+      };
+      
+      console.log(`%c🎯 [GameService] Transformed game:`, 'color: green', transformedGame);
+      
+      const gameState: GameState = {
+        currentGame: transformedGame,
+        currentPlayer: transformedGame.players[0] || null,
         isLoading: false,
         error: null,
         pendingActions: [],
@@ -158,11 +159,14 @@ export class GameService {
         politicalAdvisors: [],
         currentPoliticalEvent: null,
         reputation: { international: 0, domestic: 0, military: 0, economic: 0, diplomatic: 0 },
-        activeEvents: [],
+        activeEvents: []
       };
-
+      
+      console.log(`%c🎉 [GameService] Game initialization complete!`, 'color: green; font-weight: bold', gameState);
+      return gameState;
+      
     } catch (error) {
-      console.error('Error initializing game:', error);
+      console.error(`%c💥 [GameService] Failed to initialize game:`, 'color: red; font-weight: bold', error);
       throw error;
     }
   }

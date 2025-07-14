@@ -363,6 +363,36 @@ npm install
 - **Virtual scrolling** for large lists
 - **Image optimization** for game assets
 
+## 🐞 Known Issues & Debugging
+
+A persistent and difficult-to-trace bug was causing the frontend to spam the backend with thousands of `POST /api/games` requests, leading to a backend crash and the game getting stuck on the "Loading..." screen.
+
+### Root Cause: React `useEffect` Infinite Loops
+
+The primary cause was a series of `useEffect` hooks that created infinite re-render loops. This happened in multiple components (`Game.tsx`, `TrueHeroesInterface.tsx`, `EnhancedScenarioSelector.tsx`) where a `useEffect` hook had a dependency on a function (e.g., `loadGame`) that was redefined on every render.
+
+**Example of the faulty pattern:**
+```javascript
+// This creates an infinite loop because `loadGame` is a new function on every render
+useEffect(() => {
+  loadGame(scenarioId);
+}, [scenarioId, loadGame]);
+```
+
+### Solution: Correct `useEffect` Dependencies
+
+The issue was resolved by removing the function from the dependency array and adding an `eslint-disable-next-line` comment to acknowledge the intentional omission. This ensures the effect only runs when the `scenarioId` (or other relevant data) changes.
+
+**Corrected pattern:**
+```javascript
+useEffect(() => {
+  loadGame(scenarioId);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [scenarioId]);
+```
+
+Additionally, responsibility for loading game data was centralized into the top-level `Game.tsx` component to prevent child components from re-triggering the load process. Several `setInterval` calls that were polling the API too frequently were also disabled to improve stability.
+
 ---
 
 For more detailed information, see the individual component documentation in the `docs/` directory. 

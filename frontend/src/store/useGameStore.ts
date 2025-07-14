@@ -542,10 +542,15 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
   loadGame: async (scenarioId: string) => {
     console.log(`%c🎮 [GameStore] loadGame called with scenarioId: "${scenarioId}"`, 'color: purple; font-weight: bold');
-    get().resetGame(); // Reset state before loading
+    
+    // IMPORTANT: Always reset state completely before loading a new game
     const { setLoading, setError, setCurrentGame, setCurrentPlayer, setMap } = get();
+    
+    // Reset everything to initial state
+    set(initialState);
+    
+    // Now set loading true after reset
     setLoading(true);
-    setError(null);
 
     try {
       console.log(`%c📡 [GameStore] About to call API for scenario: ${scenarioId}`, 'color: blue');
@@ -565,6 +570,13 @@ export const useGameStore = create<GameStore>((set, get) => ({
           );
           setMap(mapData);
           console.log('%c[DEBUG] setMap:', 'color: orange', mapData);
+          console.log('%c[DEBUG] Map dimensions:', 'color: orange', {
+            width: gameState.currentGame.map.width,
+            height: gameState.currentGame.map.height,
+            tilesLength: gameState.currentGame.map.tiles.length,
+            mapRows: mapData.length,
+            mapCols: mapData[0]?.length || 0
+          });
         } else {
           console.warn('[DEBUG] No map or tiles in currentGame!');
         }
@@ -582,7 +594,9 @@ export const useGameStore = create<GameStore>((set, get) => ({
       console.log('%c[DEBUG] Final store state after loadGame:', 'color: orange; font-weight: bold', {
         currentGame: state.currentGame,
         currentPlayer: state.currentPlayer,
-        map: state.map
+        map: state.map,
+        isLoading: state.isLoading,
+        error: state.error
       });
       console.log(`%c🎉 [GameStore] loadGame completed successfully!`, 'color: green; font-weight: bold');
     } catch (error) {

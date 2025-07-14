@@ -81,18 +81,19 @@ const CastleManagementPanel: React.FC<CastleManagementPanelProps> = ({
 
   // Check for completed construction every 5 seconds
   useEffect(() => {
-    const interval = setInterval(async () => {
-      try {
-        await ApiService.checkAndCompleteReadyBuildings(gameId);
-        // Reload buildings to get updated status
-        const buildingsData = await ApiService.getBuildingsByCastle(castleId);
-        setBuildings(buildingsData);
-      } catch (err) {
-        console.error('Error checking construction:', err);
-      }
-    }, 5000);
+    // DISABLED: Too many requests causing backend to crash
+    // const interval = setInterval(async () => {
+    //   try {
+    //     await ApiService.checkAndCompleteReadyBuildings(gameId);
+    //     // Reload buildings to get updated status
+    //     const buildingsData = await ApiService.getBuildingsByCastle(castleId);
+    //     setBuildings(buildingsData);
+    //   } catch (err) {
+    //     console.error('Error checking construction:', err);
+    //   }
+    // }, 5000);
 
-    return () => clearInterval(interval);
+    // return () => clearInterval(interval);
   }, [gameId, castleId]);
 
   const handleStartConstruction = async (buildingType: string) => {
