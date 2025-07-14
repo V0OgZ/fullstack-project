@@ -278,18 +278,18 @@ export class ApiService {
   }
 
   static async getJoinableSessions(): Promise<any> {
-    return this.makeRequest('/games/joinable');
+    return this.makeRequest('/multiplayer/sessions');
   }
 
   static async createMultiplayerSession(data: any): Promise<any> {
-    return this.makeRequest('/games/multiplayer', {
+    return this.makeRequest('/multiplayer/sessions', {
       method: 'POST',
       body: JSON.stringify(data)
     });
   }
 
   static async joinMultiplayerSession(sessionId: string, playerId: string): Promise<any> {
-    return this.makeRequest(`/games/multiplayer/${sessionId}/join`, {
+    return this.makeRequest(`/multiplayer/sessions/${sessionId}/join`, {
       method: 'POST',
       body: JSON.stringify({ playerId })
     });

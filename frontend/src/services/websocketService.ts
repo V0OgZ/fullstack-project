@@ -72,17 +72,45 @@ export class WebSocketService {
         return;
       }
 
+      // Set up timeout for connection
+      const connectionTimeout = setTimeout(() => {
+        console.error('WebSocket connection timeout after 10 seconds');
+        reject(new Error('WebSocket connection timeout'));
+      }, 10000);
+
       this.client.onConnect = () => {
         console.log('WebSocket connected successfully');
+        clearTimeout(connectionTimeout);
         resolve();
       };
 
-      this.client.onStompError = () => {
-        console.error('WebSocket connection error');
+      this.client.onStompError = (frame) => {
+        console.error('WebSocket connection error:', frame);
+        clearTimeout(connectionTimeout);
         reject(new Error('Failed to connect to WebSocket server'));
       };
 
-      this.client.activate();
+      this.client.onWebSocketError = (error) => {
+        console.error('WebSocket error:', error);
+        clearTimeout(connectionTimeout);
+        reject(new Error('WebSocket connection failed'));
+      };
+
+      this.client.onWebSocketClose = (event) => {
+        console.log('WebSocket closed:', event);
+        clearTimeout(connectionTimeout);
+        if (event.code !== 1000) {
+          reject(new Error('WebSocket connection closed unexpectedly'));
+        }
+      };
+
+      try {
+        this.client.activate();
+      } catch (error) {
+        console.error('Error activating WebSocket client:', error);
+        clearTimeout(connectionTimeout);
+        reject(error);
+      }
     });
   }
 
