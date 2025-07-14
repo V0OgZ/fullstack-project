@@ -130,6 +130,15 @@ const EnhancedScenarioSelector: React.FC = () => {
   const handleScenarioClick = (scenarioId: string) => {
     console.log('%c[EnhancedScenarioSelector] Scenario clicked:', 'color: green; font-weight: bold', scenarioId);
     setSelectedScenario(scenarioId);
+    
+    // Navigate to the game immediately when clicking on a scenario
+    const scenario = scenarios.find(s => s.id === scenarioId);
+    if (scenario && scenario.unlocked) {
+      console.log(`[SELECTOR] Navigating to game for scenario: ${scenarioId}`);
+      window.location.href = `/game/${scenarioId}`;
+    } else {
+      console.log(`[SELECTOR] Scenario ${scenarioId} is locked or not found`);
+    }
   };
 
 
