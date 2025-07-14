@@ -428,6 +428,21 @@ export interface Translation {
   launchMultiplayerDemo: string;
   launchQuickDemo: string;
   demoNote: string;
+
+  // Demo Tooltips
+  'demo.welcome': string;
+  'demo.loadingScenarios': string;
+  'demo.selectScenario': string;
+  'demo.launchGame': string;
+  'demo.gameInitialization': string;
+  'demo.gameInterface': string;
+  'demo.controlButtons': string;
+  'demo.heroesPanel': string;
+  'demo.inventoryPanel': string;
+  'demo.castlePanel': string;
+  'demo.endTurn': string;
+  'demo.nextTurn': string;
+  'demo.finished': string;
 }
 
 // Traductions françaises
@@ -854,6 +869,21 @@ const frenchTranslations: Translation = {
   launchMultiplayerDemo: 'Lancer la démonstration multijoueur ? Deux navigateurs vont s\'ouvrir côte à côte pour montrer le jeu en réseau.',
   launchQuickDemo: 'Lancer la démonstration rapide ? Tests automatiques en arrière-plan.',
   demoNote: 'Les démonstrations utilisent des navigateurs automatisés pour montrer le gameplay sans intervention manuelle.',
+
+  // Demo Tooltips
+  'demo.welcome': '🏠 Bienvenue dans Heroes of Time !<br/>Je vais vous montrer comment jouer une partie...',
+  'demo.loadingScenarios': '📊 Chargement des scénarios disponibles...<br/>Veuillez patienter pendant que je récupère les missions',
+  'demo.selectScenario': '🎯 Je choisis le scénario "Classic Conquest"<br/>Une aventure épique vous attend !',
+  'demo.launchGame': '▶️ Clic sur le bouton "Jouer" !<br/>L\'aventure commence maintenant...',
+  'demo.gameInitialization': '🎮 Initialisation de la partie...<br/>Création de la carte et des héros en cours',
+  'demo.gameInterface': '🖥️ Interface de jeu chargée !<br/>Voici votre royaume à conquérir',
+  'demo.controlButtons': '🎮 Test des boutons de contrôle - Heroes, Inventory, Castle',
+  'demo.heroesPanel': '⚔️ Panneau Heroes ouvert ! Vous pouvez voir vos héros ici.',
+  'demo.inventoryPanel': '🎒 Panneau Inventory ouvert ! Gérez vos objets équipés.',
+  'demo.castlePanel': '🏰 Panneau Castle ouvert ! Construisez et gérez vos châteaux.',
+  'demo.endTurn': '🔄 Fin du tour - Cliquez sur "End Turn" pour terminer.',
+  'demo.nextTurn': '🔄 Tour suivant en cours<br/>Votre royaume évolue et grandit !',
+  'demo.finished': '🎉 Démonstration terminée !<br/>Vous savez maintenant jouer à Heroes of Time<br/><br/>✨ Amusez-vous bien dans vos conquêtes ! ✨',
 };
 
 // Traductions anglaises
@@ -1280,6 +1310,21 @@ const englishTranslations: Translation = {
   launchMultiplayerDemo: 'Launch multiplayer demonstration? Two browsers will open side by side to show network gaming.',
   launchQuickDemo: 'Launch quick demonstration? Automated background tests.',
   demoNote: 'Demonstrations use automated browsers to show gameplay without manual intervention.',
+
+  // Demo Tooltips
+  'demo.welcome': '🏠 Welcome to Heroes of Time!<br/>Let me show you how to play a game...',
+  'demo.loadingScenarios': '📊 Loading available scenarios...<br/>Please wait while I fetch the missions',
+  'demo.selectScenario': '🎯 I choose the "Classic Conquest" scenario<br/>An epic adventure awaits you!',
+  'demo.launchGame': '▶️ Click the "Play" button!<br/>The adventure begins now...',
+  'demo.gameInitialization': '🎮 Game initialization...<br/>Creating the map and heroes in progress',
+  'demo.gameInterface': '🖥️ Game interface loaded!<br/>Here is your kingdom to conquer',
+  'demo.controlButtons': '🎮 Testing control buttons - Heroes, Inventory, Castle',
+  'demo.heroesPanel': '⚔️ Heroes panel opened! You can see your heroes here.',
+  'demo.inventoryPanel': '🎒 Inventory panel opened! Manage your equipped items.',
+  'demo.castlePanel': '🏰 Castle panel opened! Build and manage your castles.',
+  'demo.endTurn': '🔄 End turn - Click "End Turn" to finish.',
+  'demo.nextTurn': '🔄 Next turn in progress<br/>Your kingdom evolves and grows!',
+  'demo.finished': '🎉 Demonstration complete!<br/>You now know how to play Heroes of Time<br/><br/>✨ Have fun in your conquests! ✨',
 };
 
 // Traductions russes
@@ -1706,6 +1751,21 @@ const russianTranslations: Translation = {
   launchMultiplayerDemo: 'Запустить демонстрацию мультиплеер? Два браузера откроются рядом, чтобы показать сетевую игру.',
   launchQuickDemo: 'Запустить быструю демонстрацию? Автоматические фоновые тесты.',
   demoNote: 'Демонстрации используют автоматизированные браузеры для показа геймплея без ручного вмешательства.',
+
+  // Demo Tooltips
+  'demo.welcome': '🏠 Добро пожаловать в Heroes of Time!<br/>Я покажу вам, как играть в эту игру...',
+  'demo.loadingScenarios': '📊 Загрузка доступных сценариев...<br/>Пожалуйста, подождите, пока я получаю миссии',
+  'demo.selectScenario': '🎯 Я выбираю сценарий "Classic Conquest"<br/>Вас ждет эпическое приключение!',
+  'demo.launchGame': '▶️ Нажмите кнопку "Играть"!<br/>Приключение начинается сейчас...',
+  'demo.gameInitialization': '🎮 Инициализация игры...<br/>Создание карты и героев в процессе',
+  'demo.gameInterface': '🖥️ Игровой интерфейс загружен!<br/>Вот ваше королевство для завоевания',
+  'demo.controlButtons': '🎮 Тестирование кнопок управления - Герои, Инвентарь, Замок',
+  'demo.heroesPanel': '⚔️ Панель героев открыта! Здесь вы можете увидеть своих героев.',
+  'demo.inventoryPanel': '🎒 Панель инвентаря открыта! Управляйте экипированными предметами.',
+  'demo.castlePanel': '🏰 Панель замка открыта! Стройте и управляйте своими замками.',
+  'demo.endTurn': '🔄 Завершение хода - Нажмите "End Turn" для завершения.',
+  'demo.nextTurn': '🔄 Следующий ход в процессе<br/>Ваше королевство развивается и растет!',
+  'demo.finished': '🎉 Демонстрация завершена!<br/>Теперь вы знаете, как играть в Heroes of Time<br/><br/>✨ Удачи в ваших завоеваниях! ✨',
 };
 
 // Helper function to get translations

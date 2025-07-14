@@ -23,7 +23,7 @@ export const HERO_ASSETS = {
   PALADIN: '/assets/heroes/paladin.png',
   NECROMANCER: '/assets/heroes/mage.png', // Réutilisation pour l'instant
   WIZARD: '/assets/heroes/mage.png', // Réutilisation pour l'instant
-  KNIGHT: '/assets/heroes/warrior.png', // Réutilisation pour l'instant
+  KNIGHT: '/assets/heroes/paladin.png', // Arthur = Noble Knight = Paladin
   DRUID: '/assets/heroes/mage.png', // Réutilisation pour l'instant
 };
 
