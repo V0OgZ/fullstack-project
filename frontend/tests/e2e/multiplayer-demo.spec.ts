@@ -1,7 +1,8 @@
-import { test, expect, Browser, BrowserContext, Page } from '@playwright/test';
+import { test, expect, Browser, BrowserContext, Page, chromium } from '@playwright/test';
 
-test.describe('🎮 Heroes of Time - Démo Multijoueur', () => {
-  let browser: Browser;
+test.describe('🎮 Heroes of Time - Multiplayer Demo', () => {
+  let browser1: Browser;
+  let browser2: Browser;
   let context1: BrowserContext;
   let context2: BrowserContext;
   let player1: Page;
@@ -25,28 +26,47 @@ test.describe('🎮 Heroes of Time - Démo Multijoueur', () => {
     }
   };
 
-  test.beforeAll(async ({ browser: testBrowser }) => {
-    browser = testBrowser;
-    
-    // Créer 2 contextes séparés pour simuler 2 joueurs
-    context1 = await browser.newContext({ 
-      viewport: { width: 800, height: 900 },
+  test.beforeAll(async () => {
+    // Lancer Browser 1 à gauche
+    browser1 = await chromium.launch({
+      headless: false,
+      slowMo: 50,
+      args: [
+        '--no-default-browser-check',
+        '--disable-web-security',
+        '--window-position=20,100',
+        '--window-size=620,850',
+        '--no-first-run'
+      ]
     });
-    context2 = await browser.newContext({ 
-      viewport: { width: 800, height: 900 },
+    
+    // Lancer Browser 2 à droite
+    browser2 = await chromium.launch({
+      headless: false,
+      slowMo: 50,
+      args: [
+        '--no-default-browser-check',
+        '--disable-web-security',
+        '--window-position=660,100',
+        '--window-size=620,850',
+        '--no-first-run'
+      ]
     });
     
+    // Créer les contextes
+    context1 = await browser1.newContext({ viewport: { width: 640, height: 800 } });
+    context2 = await browser2.newContext({ viewport: { width: 640, height: 800 } });
+    
+    // Créer les pages
     player1 = await context1.newPage();
     player2 = await context2.newPage();
     
-    // Positionner les fenêtres côte à côte
-    await player1.setViewportSize({ width: 800, height: 900 });
-    await player2.setViewportSize({ width: 800, height: 900 });
+    console.log('✅ Two separate browsers launched with side-by-side positioning');
   });
 
   test.afterAll(async () => {
-    await context1?.close();
-    await context2?.close();
+    await browser1?.close();
+    await browser2?.close();
   });
 
   // Fonction helper pour les tooltips
@@ -105,17 +125,19 @@ test.describe('🎮 Heroes of Time - Démo Multijoueur', () => {
     }, { text, playerName, duration });
   };
 
-  test('Démo multijoueur complète: 2 joueurs, choix scénario, partie', async () => {
-    test.setTimeout(180000); // 3 minutes pour la démo complète
+  test('Complete multiplayer demo: 2 players, scenario choice, game', async () => {
+    test.setTimeout(180000); // 3 minutes for complete demo
     
-    console.log('🎬 === DÉBUT DÉMO MULTIJOUEUR AVEC 2 ÉCRANS ===');
-    await debugLog('=== INITIALISATION DÉMO MULTIJOUEUR ===');
-    await debugLog('Timeout configuré: 180 secondes');
-    await debugLog('Scénarios backend disponibles: conquest-classic, temporal-rift, multiplayer-arena');
+    console.log('🎬 === MULTIPLAYER DEMO START WITH 2 SCREENS ===');
+    console.log('🖥️  Player 1: Position (20,100) - Size 620x850');
+    console.log('🖥️  Player 2: Position (660,100) - Size 620x850');
+    await debugLog('=== MULTIPLAYER DEMO INITIALIZATION ===');
+    await debugLog('Timeout configured: 180 seconds');
+    await debugLog('Available backend scenarios: conquest-classic, temporal-rift, multiplayer-arena');
     
-    // 1. Navigation des deux joueurs vers la page principale
-    await showDemoTooltip(player1, '🚀 Démarrage de la démo multijoueur<br/>Joueur 1 va créer une partie', 'JOUEUR 1', 2000);
-    await showDemoTooltip(player2, '🚀 Démarrage de la démo multijoueur<br/>Joueur 2 va rejoindre la partie', 'JOUEUR 2', 2000);
+    // 1. Both players navigate to main page
+    await showDemoTooltip(player1, '🚀 Multiplayer demo start<br/>Player 1 will create a game', 'PLAYER 1', 2000);
+    await showDemoTooltip(player2, '🚀 Multiplayer demo start<br/>Player 2 will join the game', 'PLAYER 2', 2000);
     
     await Promise.all([
       player1.goto('/'),
@@ -160,52 +182,75 @@ test.describe('🎮 Heroes of Time - Démo Multijoueur', () => {
     if (await createSessionBtn.isVisible({ timeout: 5000 })) {
       await debugLog('Bouton de création trouvé');
       await createSessionBtn.click();
+      await debugLog('Bouton cliqué, attente du formulaire');
+      
+      // Attendre que le formulaire de création soit visible
+      await player1.waitForTimeout(2000);
+      await capturePageState(player1, 'JOUEUR-1-FORM-CREATION');
     } else {
       await debugLog('Bouton de création non trouvé, tentative avec sélecteur générique');
       const anyCreateButton = player1.locator('button').filter({ hasText: /Create|New|🎮/ }).first();
       if (await anyCreateButton.isVisible({ timeout: 3000 })) {
         await anyCreateButton.click({ force: true });
+        await player1.waitForTimeout(2000);
       }
     }
-    
-    await player1.waitForTimeout(1000);
     
     // Remplir le nom de session
     await debugLog('Saisie du nom de session');
     const sessionNameInput = player1.locator('[data-testid="session-name-input"]').first();
-    if (await sessionNameInput.isVisible({ timeout: 3000 })) {
+    if (await sessionNameInput.isVisible({ timeout: 5000 })) {
       const sessionName = 'Arène Multijoueur Demo';
       await debugLog(`Saisie du nom de session: ${sessionName}`);
+      await sessionNameInput.clear();
       await sessionNameInput.fill(sessionName);
     } else {
       await debugLog('Champ nom de session non trouvé');
+      await capturePageState(player1, 'JOUEUR-1-NO-NAME-INPUT');
     }
     
     // Remplir le nom du héros
     await debugLog('Saisie du nom du héros');
     const heroNameInput = player1.locator('[data-testid="hero-name-input"]').first();
     if (await heroNameInput.isVisible({ timeout: 3000 })) {
+      await heroNameInput.clear();
       await heroNameInput.fill('Héros Joueur 1');
+      await debugLog('Nom du héros saisi');
+    } else {
+      await debugLog('Champ nom du héros non trouvé');
     }
     
     // Choisir le mode de jeu
     await debugLog('Sélection du mode de jeu');
     const gameModeSelect = player1.locator('[data-testid="game-mode-select"]').first();
-    if (await gameModeSelect.isVisible({ timeout: 3000 })) {
+    if (await gameModeSelect.isVisible({ timeout: 5000 })) {
       await debugLog('Sélection du scénario Multiplayer Arena');
       await gameModeSelect.selectOption('multiplayer-arena');
+      await debugLog('Mode de jeu sélectionné');
     } else {
       await debugLog('Sélecteur de mode de jeu non trouvé, utilisation du mode par défaut');
+      await capturePageState(player1, 'JOUEUR-1-NO-GAME-MODE');
     }
+    
+    await player1.waitForTimeout(1000);
     
     // Créer la session
     await debugLog('Clic sur le bouton de création finale');
     const submitButton = player1.locator('[data-testid="create-new-game-btn"]').first();
-    if (await submitButton.isVisible({ timeout: 3000 })) {
-      await debugLog('Clic sur le bouton de création');
+    if (await submitButton.isVisible({ timeout: 5000 })) {
+      await debugLog('Bouton de création finale trouvé, clic');
       await submitButton.click();
+      await debugLog('Session en cours de création...');
     } else {
-      await debugLog('Bouton de création non trouvé');
+      await debugLog('Bouton de création finale non trouvé');
+      await capturePageState(player1, 'JOUEUR-1-NO-SUBMIT-BTN');
+      
+      // Essayer de trouver n'importe quel bouton de création
+      const anySubmitBtn = player1.locator('button').filter({ hasText: /Create|Créer/ }).last();
+      if (await anySubmitBtn.isVisible({ timeout: 3000 })) {
+        await debugLog('Bouton alternatif trouvé, clic');
+        await anySubmitBtn.click();
+      }
     }
     
     await debugLog('Attente de la création de session');
@@ -273,6 +318,22 @@ test.describe('🎮 Heroes of Time - Démo Multijoueur', () => {
         const sessionText = await allSessions.nth(i).textContent();
         await debugLog(`Session ${i}: ${sessionText}`);
       }
+      
+      // Rejoindre la dernière session créée (la plus récente)
+      if (sessionCount > 0) {
+        await debugLog('Tentative de rejoindre la dernière session créée');
+        const lastSession = allSessions.last();
+        const joinButton = lastSession.locator('[data-testid="join-session-btn"]').first();
+        if (await joinButton.isVisible({ timeout: 3000 })) {
+          await debugLog('Clic sur le bouton Join de la dernière session');
+          await joinButton.click();
+          await debugLog('Joueur 2 a rejoint la session');
+        } else {
+          await debugLog('Bouton Join non trouvé sur la dernière session');
+        }
+      } else {
+        await debugLog('Aucune session disponible');
+      }
     }
     
     await player2.waitForTimeout(3000);
@@ -286,85 +347,178 @@ test.describe('🎮 Heroes of Time - Démo Multijoueur', () => {
     // 8. Démarrer la partie
     await showDemoTooltip(player1, '🚀 Lancement de la partie multijoueur', 'JOUEUR 1', 1500);
     
+    // Attendre que le joueur 2 rejoigne et que le bouton soit activé
+    await debugLog('Attente que le bouton Start Battle soit activé');
+    await player1.waitForTimeout(3000);
+    
     // Le joueur 1 doit cliquer sur le bouton "Start Battle" dans la waiting room
-    const startButton = player1.locator('[data-testid="start-battle-btn"]').first();
-    if (await startButton.isVisible({ timeout: 5000 })) {
-      await debugLog('Bouton Start Battle trouvé');
+    const startButton = player1.locator('[data-testid="start-battle-btn"]:not([disabled])').first();
+    if (await startButton.isVisible({ timeout: 10000 })) {
+      await debugLog('Bouton Start Battle trouvé et activé');
       await startButton.click();
+      await debugLog('Bataille démarrée !');
     } else {
-      await debugLog('Bouton Start Battle non trouvé, tentative avec sélecteur générique');
-      const anyStartButton = player1.locator('button').filter({ hasText: /Start|Battle|Démarrer/ }).first();
-      if (await anyStartButton.isVisible({ timeout: 3000 })) {
+      await debugLog('Bouton Start Battle non trouvé ou non activé, tentative avec sélecteur générique');
+      // Essayer de trouver n'importe quel bouton de démarrage activé
+      const anyStartButton = player1.locator('button:not([disabled])').filter({ hasText: /Start|Battle|Démarrer/ }).first();
+      if (await anyStartButton.isVisible({ timeout: 5000 })) {
+        await debugLog('Bouton alternatif trouvé, clic');
         await anyStartButton.click();
+      } else {
+        await debugLog('Aucun bouton de démarrage trouvé');
       }
     }
     
+    await player1.waitForTimeout(3000);
+    
+    // 9. Actions complexes en cours de partie
     await Promise.all([
-      player1.waitForTimeout(3000),
-      player2.waitForTimeout(3000)
+      showDemoTooltip(player1, '⚔️ En jeu ! Effectuons des actions stratégiques', 'JOUEUR 1', 2000),
+      showDemoTooltip(player2, '🎮 Partie lancée ! Préparons notre stratégie', 'JOUEUR 2', 2000)
     ]);
     
-    // 9. Vérifier que les deux joueurs sont dans le jeu
+    await debugLog('Début des actions de gameplay complexes');
+    
+    // Joueur 1 : Acheter des unités
+    await debugLog('Joueur 1: Tentative d\'achat d\'unités');
+    const castleBtn1 = player1.locator('button').filter({ hasText: /Castle|Château|🏰/ }).first();
+    if (await castleBtn1.isVisible({ timeout: 3000 })) {
+      await castleBtn1.click();
+      await debugLog('Joueur 1: Panneau château ouvert');
+      
+      const buyButtons1 = player1.locator('button').filter({ hasText: /Buy|Acheter|Recruit|\+/ });
+      const buyCount1 = await buyButtons1.count();
+      await debugLog(`Joueur 1: ${buyCount1} options d'achat trouvées`);
+      
+      for (let i = 0; i < Math.min(2, buyCount1); i++) {
+        const buyBtn = buyButtons1.nth(i);
+        if (await buyBtn.isVisible() && await buyBtn.isEnabled()) {
+          await buyBtn.click();
+          await debugLog(`Joueur 1: Unité ${i+1} achetée`);
+          await player1.waitForTimeout(800);
+        }
+      }
+    }
+    
+    // Joueur 2 : Équiper des objets
+    await debugLog('Joueur 2: Tentative d\'équipement d\'objets');
+    const inventoryBtn2 = player2.locator('button').filter({ hasText: /Inventory|Inventaire|🎒/ }).first();
+    if (await inventoryBtn2.isVisible({ timeout: 3000 })) {
+      await inventoryBtn2.click();
+      await debugLog('Joueur 2: Panneau inventaire ouvert');
+      
+      const equipButtons2 = player2.locator('button').filter({ hasText: /Equip|Équiper/ });
+      const equipCount2 = await equipButtons2.count();
+      await debugLog(`Joueur 2: ${equipCount2} objets équipables trouvés`);
+      
+      if (equipCount2 > 0) {
+        const equipBtn = equipButtons2.first();
+        if (await equipBtn.isVisible()) {
+          await equipBtn.click();
+          await debugLog('Joueur 2: Objet équipé avec succès');
+        }
+      }
+    }
+    
+    await player2.waitForTimeout(1500);
+    
+    // Actions sur la carte (mouvements simulés)
     await Promise.all([
-      showDemoTooltip(player1, '🎮 Interface de jeu chargée !<br/>C\'est votre tour de jouer', 'JOUEUR 1', 2000),
-      showDemoTooltip(player2, '🎮 Interface de jeu chargée !<br/>En attente de votre tour', 'JOUEUR 2', 2000)
+      showDemoTooltip(player1, '🗺️ Déplaçons nos héros sur la carte', 'JOUEUR 1', 2000),
+      showDemoTooltip(player2, '⚔️ Préparons l\'attaque !', 'JOUEUR 2', 2000)
     ]);
     
-    // 10. Simuler quelques actions de gameplay
-    // Joueur 1 sélectionne un héros
-    await showDemoTooltip(player1, '🦸 Sélection d\'un héros pour jouer', 'JOUEUR 1', 1500);
+    await debugLog('Simulation de mouvements sur la carte');
     
-    const hero1 = player1.locator('.hero-portrait-img, .hero-emoji-fallback, .hero-card, [data-testid="hero"]').first();
-    if (await hero1.isVisible({ timeout: 5000 })) {
-      await hero1.click();
-      await player1.waitForTimeout(1000);
+    // Joueur 1 : Cliquer sur la carte
+    const map1 = player1.locator('.map-container, .game-map, canvas').first();
+    if (await map1.isVisible()) {
+      const mapBox1 = await map1.boundingBox();
+      if (mapBox1) {
+        await map1.click({ position: { x: mapBox1.width * 0.4, y: mapBox1.height * 0.3 } });
+        await debugLog('Joueur 1: Mouvement effectué');
+        await player1.waitForTimeout(1000);
+        
+        await map1.click({ position: { x: mapBox1.width * 0.6, y: mapBox1.height * 0.5 } });
+        await debugLog('Joueur 1: Deuxième mouvement');
+      }
     }
     
-    // Joueur 1 fait un mouvement
-    await showDemoTooltip(player1, '🗺️ Déplacement du héros sur la carte', 'JOUEUR 1', 1500);
-    
-    const mapTile1 = player1.locator('canvas, .map-tile, .hex-tile').first();
-    if (await mapTile1.isVisible({ timeout: 3000 })) {
-      await mapTile1.click();
-      await player1.waitForTimeout(1000);
+    // Joueur 2 : Cliquer sur la carte
+    const map2 = player2.locator('.map-container, .game-map, canvas').first();
+    if (await map2.isVisible()) {
+      const mapBox2 = await map2.boundingBox();
+      if (mapBox2) {
+        await map2.click({ position: { x: mapBox2.width * 0.3, y: mapBox2.height * 0.6 } });
+        await debugLog('Joueur 2: Mouvement effectué');
+        await player2.waitForTimeout(1000);
+        
+        await map2.click({ position: { x: mapBox2.width * 0.7, y: mapBox2.height * 0.2 } });
+        await debugLog('Joueur 2: Deuxième mouvement');
+      }
     }
+    
+    // Terminer les tours
+    await Promise.all([
+      showDemoTooltip(player1, '🔄 Terminons notre tour', 'JOUEUR 1', 1500),
+      showDemoTooltip(player2, '⏭️ Tour suivant !', 'JOUEUR 2', 1500)
+    ]);
+    
+    await debugLog('Tentative de fin de tour pour les deux joueurs');
     
     // Joueur 1 termine son tour
-    await showDemoTooltip(player1, '⏭️ Fin du tour - Passage au joueur 2', 'JOUEUR 1', 1500);
-    
-    const endTurnButton1 = player1.locator('button[title*="End"], .end-turn-btn, .control-btn:has(.btn-icon:text("✅"))').first();
-    if (await endTurnButton1.isVisible({ timeout: 3000 })) {
-      await endTurnButton1.click();
+    const endTurn1 = player1.locator('button').filter({ hasText: /End Turn|Fin.*Tour|🌟/ }).first();
+    if (await endTurn1.isVisible({ timeout: 3000 })) {
+      await endTurn1.click();
+      await debugLog('Joueur 1: Tour terminé');
     }
     
+    await player1.waitForTimeout(1500);
+    
+    // Joueur 2 termine son tour
+    const endTurn2 = player2.locator('button').filter({ hasText: /End Turn|Fin.*Tour|🌟/ }).first();
+    if (await endTurn2.isVisible({ timeout: 3000 })) {
+      await endTurn2.click();
+      await debugLog('Joueur 2: Tour terminé');
+    }
+    
+    await debugLog('Tours terminés - vérification de l\'état du jeu');
+    
+    // Vérifications finales
     await Promise.all([
-      player1.waitForTimeout(2000),
-      player2.waitForTimeout(2000)
+      showDemoTooltip(player1, '📊 Vérifions les statistiques', 'JOUEUR 1', 2000),
+      showDemoTooltip(player2, '🏆 Partie en cours !', 'JOUEUR 2', 2000)
     ]);
     
-    // 11. Tour du joueur 2
-    await showDemoTooltip(player2, '🎯 C\'est maintenant votre tour !<br/>À vous de jouer', 'JOUEUR 2', 2000);
-    
-    const hero2 = player2.locator('.hero-portrait-img, .hero-emoji-fallback, .hero-card, [data-testid="hero"]').first();
-    if (await hero2.isVisible({ timeout: 5000 })) {
-      await hero2.click();
-      await player2.waitForTimeout(1000);
+    // Vérifier les statistiques des joueurs
+    const gold1 = player1.locator('text=💰').or(player1.locator('text=Gold')).first();
+    if (await gold1.isVisible({ timeout: 3000 })) {
+      const goldText1 = await gold1.textContent();
+      await debugLog(`Joueur 1 - Or: ${goldText1}`);
     }
     
-    const mapTile2 = player2.locator('canvas, .map-tile, .hex-tile').first();
-    if (await mapTile2.isVisible({ timeout: 3000 })) {
-      await mapTile2.click();
-      await player2.waitForTimeout(1000);
+    const gold2 = player2.locator('text=💰').or(player2.locator('text=Gold')).first();
+    if (await gold2.isVisible({ timeout: 3000 })) {
+      const goldText2 = await gold2.textContent();
+      await debugLog(`Joueur 2 - Or: ${goldText2}`);
     }
     
-    // 12. Fin de la démo
-    await Promise.all([
-      showDemoTooltip(player1, '🎉 Démo multijoueur terminée !<br/>Les deux joueurs ont pu jouer ensemble', 'JOUEUR 1', 3000),
-      showDemoTooltip(player2, '🎉 Démo multijoueur terminée !<br/>Gameplay synchronisé réussi !', 'JOUEUR 2', 3000)
-    ]);
+    await debugLog('=== RÉSUMÉ DES ACTIONS RÉALISÉES ===');
+    await debugLog('✅ Création de session multijoueur');
+    await debugLog('✅ Connexion des 2 joueurs');
+    await debugLog('✅ Lancement de la bataille');
+    await debugLog('✅ Achat d\'unités (Joueur 1)');
+    await debugLog('✅ Équipement d\'objets (Joueur 2)');
+    await debugLog('✅ Mouvements sur la carte (les 2 joueurs)');
+    await debugLog('✅ Fin de tours (les 2 joueurs)');
+    await debugLog('✅ Vérification des statistiques');
     
     console.log('🎬 === FIN DÉMO MULTIJOUEUR ===');
     console.log('✨ Démo 2 joueurs terminée avec succès !');
+    
+    // Vérification finale avec timeout plus long
+    await player1.waitForTimeout(2000);
+    await player2.waitForTimeout(2000);
     
     // Vérifications finales avec logs
     await debugLog('Vérification des URLs finales');

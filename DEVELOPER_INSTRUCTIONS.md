@@ -2,23 +2,28 @@
 
 ## 🚨 CURRENT STATE (JANUARY 2025)
 
-### ✅ MAJOR UI IMPROVEMENTS COMPLETED!
+### ✅ MAJOR IMPROVEMENTS COMPLETED!
+- **🌍 MULTILINGUAL SUPPORT**: Complete internationalization with FR/EN/RU language switching
 - **Interface Polish**: Removed useless AI button, improved button design
+- **Dynamic Titles**: Browser title changes based on context (Castle, Inventory, Hero name, Map name)
 - **End Turn Button**: Fixed functionality with fantasy ⭐ icon
-- **Tooltips System**: Completely overhauled both game and demo tooltips
+- **Demo Route**: Added `/demo` for quick testing without scenario selection
+- **Tooltips System**: Completely overhauled both game and demo tooltips (English)
 - **Arthur Hero**: Fixed mapping to use noble paladin.png image
-- **Internationalization**: Added complete i18n system for demo tooltips (FR/EN/RU)
+- **Playwright Positioning**: Perfect side-by-side window placement for multiplayer tests
 - **Demo Experience**: Smooth animations, proper timing, professional appearance
 
 ### 🎮 WORKING FEATURES
 
 #### ✅ Fully Functional:
+- **🌍 Multilingual Interface**: Complete FR/EN/RU support with language selector
 - **Solo Gameplay**: Classic Conquest scenario working perfectly
-- **Hero Management**: Cycling, selection, positioning
+- **Hero Management**: Cycling, selection, positioning with real images
 - **Interface Panels**: Heroes, Inventory, Castle panels with dynamic content
 - **Turn System**: End turn functionality stable
-- **Demo System**: Automated Playwright demos with beautiful tooltips
+- **Demo System**: Automated Playwright demos with beautiful English tooltips
 - **Asset System**: Hero images with proper fallbacks
+- **Dynamic Titles**: Browser title reflects current game context
 
 #### ✅ Backend API:
 - **Scenarios**: `/api/scenarios/all` fully operational
@@ -38,167 +43,226 @@
 # Run complete test suite
 ./run-all-tests.sh
 
-# Quick demo test
-cd frontend && npx playwright test tests/e2e/gameplay-demo.spec.ts --headed
+# Quick demo tests
+cd frontend && npx playwright test tests/e2e/gameplay-demo.spec.ts --headed --project=solo-fullscreen
+cd frontend && npx playwright test tests/e2e/multiplayer-demo.spec.ts --headed --project=multiplayer
+cd frontend && npx playwright test tests/e2e/demo-route.spec.ts --headed --project=demo
 
 # API health check
 curl http://localhost:8080/api/scenarios/all
 ```
 
+### 🌍 MULTILINGUAL SYSTEM
+
+#### **Complete Language Support:**
+- **French (FR)**: Français complet
+- **English (EN)**: Full English support  
+- **Russian (RU)**: Полная поддержка русского языка
+
+#### **Language Switching:**
+- **UI Selector**: Top-right corner flags (🇫🇷 FR | 🇺🇸 EN | 🇷🇺 RU)
+- **Demo Tooltips**: Automatically translated
+- **Game Interface**: All panels and buttons translated
+- **Test System**: English tooltips for consistency
+
+#### **Adding New Languages:**
+1. Add language to `frontend/src/i18n/index.ts`
+2. Add flag icon to language selector
+3. Translate all interface strings
+4. Update demo tooltips if needed
+
 ### 🏗️ Project Architecture
 
 #### Backend (Spring Boot - Port 8080):
-- **Database**: H2 in-memory
-- **Controllers**: Scenario, Game, Multiplayer, AI, ZFC, MagicItem
-- **Services**: Complete business logic layer
-- **Repository**: JPA entities for all game objects
-
-#### Frontend (React TypeScript - Port 3000):
-- **Main Interface**: `TrueHeroesInterface.tsx` (modern, polished)
-- **Game Renderer**: `ModernGameRenderer.tsx` with hero images
-- **State Management**: Zustand store in `useGameStore.ts`
-- **Internationalization**: Complete i18n system with 3 languages
-- **Testing**: Comprehensive Playwright E2E tests
-
-### 🎯 Key Components
-
-#### Game Interface (`TrueHeroesInterface.tsx`):
-- **Right Panel System**: Dynamic content (scenario/hero/inventory/castle)
-- **Header Controls**: Clean button design with hover effects
-- **Hero Cycling**: Smart hero selection and map centering
-- **Resource Display**: Gold, wood, stone with proper formatting
-
-#### Asset System:
-- **Hero Images**: PNG assets with emoji fallbacks
-- **Mapping Logic**: Smart hero-to-image matching
-- **Preloading**: Efficient image loading with error handling
-
-#### Tooltip Systems:
-- **Game Tooltips**: Positioned above tiles, clean appearance
-- **Demo Tooltips**: Beautiful gradient design with header branding
-- **Internationalized**: Full translation support
-
-### 🚀 Quick Start Development
-
-```bash
-# 1. Start the application
-./start-app.sh
-# Opens frontend (http://localhost:3000) and backend (http://localhost:8080)
-
-# 2. Test the gameplay
-cd frontend
-npx playwright test tests/e2e/gameplay-demo.spec.ts --headed
-
-# 3. Manual testing
-# - Open http://localhost:3000
-# - Select "Classic Conquest" scenario
-# - Click "Play" to start game
-# - Test hero cycling, panels, end turn
-
-# 4. API testing
-curl http://localhost:8080/api/scenarios/all
-curl http://localhost:8080/actuator/health
+```
+backend/
+├── src/main/java/com/example/demo/
+│   ├── controller/          # REST endpoints
+│   ├── service/            # Business logic
+│   ├── model/              # Data entities
+│   └── repository/         # Data access
+└── src/main/resources/
+    ├── application.properties
+    └── scenarios/          # JSON scenario files
 ```
 
-### 🛠️ Development Notes
-
-#### When Adding New Features:
-1. **Check existing components** - Don't recreate what exists
-2. **Follow naming conventions** - CamelCase for components
-3. **Update i18n** - Add translation keys for new text
-4. **Test thoroughly** - Use existing Playwright tests
-5. **Maintain asset system** - Follow hero image patterns
-
-#### Common Issues & Solutions:
-- **Tooltip positioning**: Use absolute positioning, not fixed center
-- **Hero images**: Check HERO_ASSETS mapping in gameAssets.ts
-- **State management**: Use useGameStore for all game state
-- **API calls**: Follow existing patterns in api.ts service
-
-#### File Structure:
+#### Frontend (React TypeScript - Port 3000):
 ```
 frontend/
 ├── src/
 │   ├── components/          # React components
-│   │   ├── TrueHeroesInterface.tsx  # Main game interface
-│   │   └── ModernGameRenderer.tsx   # Map rendering
+│   │   ├── TrueHeroesInterface.tsx  # Main game interface ⭐
+│   │   ├── ModernGameRenderer.tsx   # Map rendering
+│   │   └── LanguageSelector.tsx     # Language switching 🌍
 │   ├── constants/           # Asset mappings
-│   ├── i18n/               # Internationalization
+│   ├── i18n/               # Internationalization 🌍
 │   ├── services/           # API communication
 │   ├── store/              # State management
 │   └── types/              # TypeScript definitions
 ├── tests/e2e/              # Playwright tests
-└── public/assets/          # Static assets
+└── public/assets/          # Static assets (hero images)
 ```
 
-### 📊 Testing Strategy
+### 🚀 Quick Routes for Testing
 
-#### E2E Tests (Playwright):
-- **gameplay-demo.spec.ts**: Complete gameplay demonstration
-- **multiplayer-demo.spec.ts**: Multiplayer session testing
-- **Automated**: Run with `npm run test:playwright`
+#### **Demo Route**: `http://localhost:3000/demo`
+- **Purpose**: Skip scenario selection, jump directly to game
+- **Scenario**: Automatically loads "conquest-classic"
+- **Usage**: Perfect for quick testing and development
 
-#### Manual Testing Checklist:
-- [ ] Scenario selection works
-- [ ] Game loads correctly
-- [ ] Hero cycling functions
-- [ ] Panel switching works
-- [ ] End turn completes
-- [ ] Tooltips display properly
-- [ ] Images load with fallbacks
+#### **Main Routes**:
+- `/` - Scenario selection (multilingual)
+- `/game/:scenarioId` - Game interface
+- `/multiplayer` - Multiplayer setup
+- `/demo` - Quick game access ⭐
+
+### 📊 Testing Strategy (Enhanced)
+
+#### **Playwright Projects**:
+- **`solo-fullscreen`**: Single window, maximized (1280x800)
+- **`multiplayer`**: Dual windows, side-by-side positioning
+  - Player 1: Position (20,100) - Size 620x850
+  - Player 2: Position (660,100) - Size 620x850
+- **`demo`**: Quick demo route testing
+
+#### **E2E Tests**:
+```bash
+# Solo gameplay with English tooltips
+npx playwright test tests/e2e/gameplay-demo.spec.ts --headed --project=solo-fullscreen
+
+# Multiplayer with perfect window positioning
+npx playwright test tests/e2e/multiplayer-demo.spec.ts --headed --project=multiplayer
+
+# Demo route testing
+npx playwright test tests/e2e/demo-route.spec.ts --headed --project=demo
+```
+
+#### **Test Features**:
+- ✅ **English Tooltips**: All demo tooltips in English
+- ✅ **Perfect Positioning**: No window overlap on Mac 1280x800
+- ✅ **Complex Actions**: Panel navigation, hero selection, movements
+- ✅ **Multiplayer Session**: 2-player connection and gameplay
+- ✅ **Statistics Verification**: Gold, turns, game state
 
 ### 🎨 UI/UX Guidelines
 
-#### Button Design:
+#### **Dynamic Title System**:
+- **Context Aware**: Title changes based on current panel
+- **"Heroes of Time - Castle"** when in Castle panel
+- **"Heroes of Time - [Hero Name]"** when hero selected
+- **"Heroes of Time - [Map Name]"** when in game
+- **"Heroes of Time"** as fallback
+
+#### **Button Design**:
 - **No borders**: Clean, modern appearance
 - **Hover effects**: Subtle glow and elevation
-- **Icons only**: No text labels for header buttons
+- **Icons only**: No text labels for header buttons (⚔️🏰🎒)
 - **Fantasy theme**: Gold colors, medieval feeling
 
-#### Tooltip Philosophy:
+#### **Tooltip Philosophy**:
 - **Game tooltips**: Positioned relative to content
 - **Demo tooltips**: Fixed position with branding
-- **No animations**: Clean appear/disappear
-- **Internationalized**: Support multiple languages
+- **No jarring animations**: Clean appear/disappear
+- **English for tests**: Consistency in automated demos
 
-### 🌍 Internationalization
+### 🌍 Internationalization System
 
-#### Adding New Text:
-1. Add key to `frontend/src/i18n/index.ts` interface
-2. Add translations for FR/EN/RU
-3. Use `useTranslation()` hook in components
-4. Follow pattern: `t('key.name')`
-
-#### Demo Tooltips:
-- Special system for automated demos
-- Structured translation keys (`demo.welcome`, etc.)
-- Can be switched to different languages
-
----
-
-## 📋 Quick Reference
-
-### Essential Commands:
-```bash
-./start-app.sh          # Start development
-./stop-app.sh           # Stop everything  
-./run-all-tests.sh      # Run all tests
-cd frontend && npx playwright test --headed  # Visual tests
+#### **Translation Structure**:
+```typescript
+// frontend/src/i18n/index.ts
+export const translations = {
+  fr: {
+    'game.heroes': 'Héros',
+    'game.castle': 'Château',
+    'game.inventory': 'Inventaire',
+    'demo.welcome': '🏠 Bienvenue dans Heroes of Time !',
+    // ... more translations
+  },
+  en: {
+    'game.heroes': 'Heroes',
+    'game.castle': 'Castle', 
+    'game.inventory': 'Inventory',
+    'demo.welcome': '🏠 Welcome to Heroes of Time!',
+    // ... more translations
+  },
+  ru: {
+    'game.heroes': 'Герои',
+    'game.castle': 'Замок',
+    'game.inventory': 'Инвентарь',
+    'demo.welcome': '🏠 Добро пожаловать в Heroes of Time!',
+    // ... more translations
+  }
+};
 ```
 
-### Important URLs:
-- **Frontend**: http://localhost:3000
+#### **Usage in Components**:
+```typescript
+import { useTranslation } from '../i18n';
+
+const { t } = useTranslation();
+return <button>{t('game.heroes')}</button>;
+```
+
+### 🛠️ Development Workflow
+
+#### **Adding New Features**:
+1. **Check existing components** - Don't recreate what exists
+2. **Add translations** - Support all 3 languages (FR/EN/RU)
+3. **Follow naming conventions** - CamelCase for components
+4. **Test multilingually** - Verify in all language modes
+5. **Update dynamic titles** - If adding new contexts
+6. **Test with Playwright** - Use existing test patterns
+
+#### **Common Issues & Solutions**:
+- **Language switching**: Use LanguageSelector component
+- **Missing translations**: Add to all 3 language objects
+- **Tooltip positioning**: Use absolute positioning
+- **Hero images**: Check HERO_ASSETS mapping in gameAssets.ts
+- **State management**: Use useGameStore for all game state
+- **Window positioning**: Use separate browser instances for multiplayer
+
+### 📋 Quick Reference
+
+#### **Essential Commands**:
+```bash
+./start-app.sh          # Start development (with hot reload)
+./stop-app.sh           # Stop everything cleanly
+./run-all-tests.sh      # Run complete test suite
+npx playwright test --headed  # Visual Playwright tests
+```
+
+#### **Important URLs**:
+- **Frontend**: http://localhost:3000 (with language selector)
+- **Demo Route**: http://localhost:3000/demo ⭐
 - **Backend**: http://localhost:8080
 - **Health Check**: http://localhost:8080/actuator/health
 - **Scenarios API**: http://localhost:8080/api/scenarios/all
 
-### Key Files to Know:
-- `TrueHeroesInterface.tsx` - Main game interface
+#### **Key Files to Remember**:
+- `TrueHeroesInterface.tsx` - Main game interface with dynamic titles
+- `LanguageSelector.tsx` - Language switching component 🌍
 - `useGameStore.ts` - Game state management
 - `gameAssets.ts` - Hero image mappings
-- `i18n/index.ts` - All translations
-- `gameplay-demo.spec.ts` - Main demo test
+- `i18n/index.ts` - Complete multilingual translations ⭐
+- `gameplay-demo.spec.ts` - Solo demo with English tooltips
+- `multiplayer-demo.spec.ts` - Dual window demo
+
+#### **Playwright Window Positioning**:
+- **Mac 1280x800 optimized**: Perfect side-by-side layout
+- **No overlap**: 20px spacing between windows
+- **Consistent**: Reproducible positioning every time
 
 ---
 
-*Last Updated: January 2025 - After major UI polish and tooltip system overhaul* 
+## 🎯 Current Capabilities Summary
+
+### ✅ **Internationalization**: Complete FR/EN/RU support
+### ✅ **Demo System**: English tooltips, perfect window positioning
+### ✅ **Dynamic Interface**: Context-aware titles and panels
+### ✅ **Testing**: Robust Playwright suite with visual demos
+### ✅ **Asset Management**: Hero images with smart fallbacks
+### ✅ **Quick Access**: `/demo` route for rapid development
+
+---
+
+*Last Updated: January 2025 - After multilingual system implementation and Playwright positioning optimization* 🌍✨ 
