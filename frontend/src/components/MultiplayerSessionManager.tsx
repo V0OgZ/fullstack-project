@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ApiService } from '../services/api';
-import { websocketService } from '../services/websocketService';
 import { generateSessionNameId, useSessionNameTranslator } from '../services/sessionNameGenerator';
 
 interface MultiplayerSession {
@@ -39,11 +38,16 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
   const { translateSessionName } = useSessionNameTranslator();
 
   // Generate a new session name using game resources
-  const generateNewSessionName = useCallback(() => {
-    const nameId = generateSessionNameId();
-    const translatedName = translateSessionName(nameId);
-    setSessionName(translatedName);
-  }, [translateSessionName]);
+  const generateNewSessionName = () => {
+    try {
+      const nameId = generateSessionNameId();
+      const translatedName = translateSessionName(nameId);
+      setSessionName(translatedName || `Epic Battle ${Math.floor(Math.random() * 1000)}`);
+    } catch (error) {
+      console.warn('Failed to generate session name, using fallback:', error);
+      setSessionName(`Epic Battle ${Math.floor(Math.random() * 1000)}`);
+    }
+  };
 
   // Generate a unique player ID when component mounts
   useEffect(() => {
@@ -56,9 +60,16 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
     setPlayerId(generatePlayerId());
     setHeroName(`Hero_${Math.floor(Math.random() * 1000)}`);
     
-    // Generate initial session name automatically
-    generateNewSessionName();
-  }, [generateNewSessionName]);
+    // Generate initial session name automatically (only once on mount)
+    try {
+      const nameId = generateSessionNameId();
+      const translatedName = translateSessionName(nameId);
+      setSessionName(translatedName || `Epic Battle ${Math.floor(Math.random() * 1000)}`);
+    } catch (error) {
+      console.warn('Failed to generate session name, using fallback:', error);
+      setSessionName(`Epic Battle ${Math.floor(Math.random() * 1000)}`);
+    }
+  }, []); // Empty dependency array to run only once on mount
 
   const loadSessions = useCallback(async () => {
     try {
@@ -75,49 +86,12 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
     }
   }, [onError]);
 
-  // Initialize WebSocket connection
+  // WebSocket disabled - using polling mode only for better reliability
   useEffect(() => {
-    const initWebSocket = async () => {
-      try {
-        console.log('🌐 Initializing WebSocket connection...');
-        await websocketService.connect();
-        setWebsocketConnected(websocketService.isConnected());
-        
-        // Set up message handlers
-        websocketService.onMessage('PLAYER_JOINED', (message) => {
-          console.log('👥 Player joined:', message);
-          loadSessions(); // Refresh session list
-        });
-
-        websocketService.onMessage('PLAYER_LEFT', (message) => {
-          console.log('🚪 Player left:', message);
-          loadSessions(); // Refresh session list
-        });
-
-        websocketService.onMessage('GAME_ACTION', (message) => {
-          console.log('⚡ Game action received:', message);
-          // Handle game actions in real-time
-        });
-
-        websocketService.onMessage('CHAT_MESSAGE', (message) => {
-          console.log('💬 Chat message:', message);
-          // Handle chat messages
-        });
-
-      } catch (error) {
-        console.error('❌ Failed to connect WebSocket:', error);
-        setWebsocketConnected(false);
-        console.warn('⚠️  WebSocket connection failed, but continuing with limited functionality');
-        // Don't show error to user, just continue with limited functionality
-      }
-    };
-
-    initWebSocket();
-
-    // Cleanup on unmount
-    return () => {
-      websocketService.disconnect();
-    };
+    console.log('🔄 Multiplayer mode: Polling every 5 seconds (WebSocket disabled)');
+    setWebsocketConnected(false);
+    
+    // No WebSocket initialization - polling mode only
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onError]);
 
@@ -129,7 +103,7 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
   }, [loadSessions]);
 
   const createSession = async () => {
-    if (!sessionName.trim()) {
+    if (!sessionName || !sessionName.trim()) {
       onError('Please enter a session name');
       return;
     }
@@ -137,15 +111,13 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
     try {
       setLoading(true);
       
-      // If the session name looks like it was generated (contains underscores),
-      // store the original ID for consistent translation
+      // Simple name storage without complex logic
       let nameToStore = sessionName.trim();
       
-      // Check if this is a manually entered name vs generated name
-      // If it's a translated name, find the original ID
-      if (!sessionName.includes('_') && sessionName !== sessionName.toLowerCase()) {
-        // This might be a translated name, keep it as is for manual names
-        nameToStore = sessionName;
+      // Basic validation - if session name is empty after trim, generate a new one
+      if (!nameToStore) {
+        const nameId = generateSessionNameId();
+        nameToStore = translateSessionName(nameId);
       }
       
       const response = await ApiService.createMultiplayerSession({
@@ -157,16 +129,8 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
       
       console.log('✅ Session created:', response);
       
-      // Join the WebSocket session if connected
-      if (websocketConnected) {
-        try {
-          await websocketService.joinSession(response.sessionId, playerId);
-        } catch (error) {
-          console.warn('⚠️  Failed to join WebSocket session, continuing anyway:', error);
-        }
-      } else {
-        console.warn('⚠️  WebSocket not connected, creating session in basic mode');
-      }
+      // WebSocket disabled - using polling mode only
+      console.log('🔄 Session created in polling mode (WebSocket disabled)');
       
       // Set waiting state and session ID
       setCurrentSessionId(response.sessionId);
@@ -202,16 +166,8 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
       const response = await ApiService.joinMultiplayerSession(sessionId, playerId);
       console.log('✅ Joined session:', response);
       
-      // Join the WebSocket session if connected
-      if (websocketConnected) {
-        try {
-          await websocketService.joinSession(sessionId, playerId);
-        } catch (error) {
-          console.warn('⚠️  Failed to join WebSocket session, continuing anyway:', error);
-        }
-      } else {
-        console.warn('⚠️  WebSocket not connected, joining session in basic mode');
-      }
+      // WebSocket disabled - using polling mode only
+      console.log('🔄 Session joined in polling mode (WebSocket disabled)');
       
       onSessionJoined(sessionId);
     } catch (error) {
@@ -607,9 +563,9 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
             >
               <div>
                 <h3 style={{ color: '#fff', margin: '0 0 5px 0' }}>
-                  🎮 {session.sessionName.includes('_') ? translateSessionName(session.sessionName) : session.sessionName}
+                  🎮 {session.sessionName && session.sessionName.includes('_') ? translateSessionName(session.sessionName) : (session.sessionName || 'Unnamed Session')}
                 </h3>
-                {session.sessionName.includes('_') && (
+                {session.sessionName && session.sessionName.includes('_') && (
                   <div style={{ color: '#FF6B35', fontSize: '10px', marginBottom: '3px' }}>
                     ⚡ Epic Generated Name
                   </div>

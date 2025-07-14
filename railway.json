@@ -2,15 +2,15 @@
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
     "builder": "NIXPACKS",
-    "buildCommand": "cd server && ./mvnw clean package -DskipTests",
+    "buildCommand": "cd backend && ./mvnw clean package -DskipTests",
     "watchPatterns": [
-      "server/**",
-      "client/**"
+      "backend/**",
+      "frontend/**"
     ]
   },
   "deploy": {
-    "startCommand": "cd server && java -jar target/monjeu.jar",
-    "healthcheckPath": "/api/units/health",
+    "startCommand": "cd backend && java -jar target/demo-0.0.1-SNAPSHOT.jar",
+    "healthcheckPath": "/actuator/health",
     "healthcheckTimeout": 100,
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10

@@ -42,7 +42,7 @@ export class WebSocketService {
 
   private initializeClient() {
     this.client = new Client({
-      brokerURL: 'ws://localhost:8080/ws',
+      webSocketFactory: () => new WebSocket('ws://localhost:8080/ws'),
       connectHeaders: {},
       debug: (str) => {
         console.log('[WebSocket]', str);

@@ -89,6 +89,43 @@ public class ScenarioController {
         }
     }
 
+    @PostMapping("/fix-multiplayer-fields")
+    public ResponseEntity<String> fixMultiplayerFields() {
+        try {
+            scenarioService.fixAllMultiplayerFields();
+            return ResponseEntity.ok("✅ Fixed isMultiplayer fields for all scenarios");
+        } catch (Exception e) {
+            System.out.println("❌ Error fixing multiplayer fields: " + e.getMessage());
+            return ResponseEntity.status(500).body("Error fixing multiplayer fields: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/debug-multiplayer")
+    public ResponseEntity<String> debugMultiplayerFields() {
+        try {
+            List<Scenario> scenarios = scenarioService.getAllScenarios();
+            StringBuilder debug = new StringBuilder("🔍 Debug info:\n");
+            
+            for (Scenario scenario : scenarios) {
+                debug.append("- ").append(scenario.getScenarioId())
+                     .append(": maxPlayers=").append(scenario.getMaxPlayers())
+                     .append(", isMultiplayer=").append(scenario.getIsMultiplayer())
+                     .append("\n");
+                     
+                // Force set isMultiplayer based on maxPlayers
+                scenario.setIsMultiplayer(scenario.getMaxPlayers() > 1);
+                scenarioService.updateScenario(scenario);
+                
+                debug.append("  → Updated to: isMultiplayer=").append(scenario.getIsMultiplayer()).append("\n");
+            }
+            
+            return ResponseEntity.ok(debug.toString());
+        } catch (Exception e) {
+            System.out.println("❌ Error debugging multiplayer fields: " + e.getMessage());
+            return ResponseEntity.status(500).body("Error debugging: " + e.getMessage());
+        }
+    }
+
     @GetMapping("/languages")
     public ResponseEntity<?> getAvailableLanguages() {
         try {
@@ -166,6 +203,7 @@ public class ScenarioController {
         localized.put("updatedAt", scenario.getUpdatedAt());
         localized.put("isActive", scenario.getIsActive());
         localized.put("isCampaign", scenario.getIsCampaign());
+        localized.put("isMultiplayer", scenario.getIsMultiplayer());
         localized.put("campaignOrder", scenario.getCampaignOrder());
         localized.put("previousScenarioId", scenario.getPreviousScenarioId());
         localized.put("nextScenarioId", scenario.getNextScenarioId());

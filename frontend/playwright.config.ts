@@ -15,7 +15,7 @@ export default defineConfig({
     trace: 'on-first-retry',
     video: 'retain-on-failure',
     screenshot: 'only-on-failure',
-    headless: true,
+    headless: false,
     launchOptions: {
       slowMo: 100,
     },
@@ -27,6 +27,17 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
         launchOptions: {
           slowMo: 100,
+          args: ['--no-default-browser-check'],
+        },
+      },
+    },
+    {
+      name: 'chromium-player2',
+      use: { 
+        ...devices['Desktop Chrome'],
+        launchOptions: {
+          slowMo: 100,
+          args: ['--no-default-browser-check', '--window-position=800,0'],
         },
       },
     },
