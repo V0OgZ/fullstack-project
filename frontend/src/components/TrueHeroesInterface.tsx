@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from '../i18n';
 import { useGameStore } from '../store/useGameStore';
-import ModernGameRenderer from './ModernGameRenderer';
+import ModernGameRenderer, { ModernGameRendererRef } from './ModernGameRenderer';
 import { HERO_ASSETS } from '../constants/gameAssets';
 import './TrueHeroesInterface.css';
 
@@ -25,6 +25,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
   const [selectedHeroId, setSelectedHeroId] = useState<string | null>(null);
   const [selectedCastleId, setSelectedCastleId] = useState<string | null>(null);
   const [rightPanelContent, setRightPanelContent] = useState<'scenario' | 'hero' | 'inventory' | 'castle'>('scenario');
+  const mapRendererRef = useRef<ModernGameRendererRef>(null);
 
   const handleHeroSelect = (heroId: string | null) => {
     setSelectedHeroId(heroId);
@@ -37,6 +38,33 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
 
   const handleInventoryClick = () => {
     setRightPanelContent('inventory');
+  };
+
+  const handleHeroesClick = () => {
+    if (!currentPlayer?.heroes || currentPlayer.heroes.length === 0) {
+      setRightPanelContent('hero');
+      return;
+    }
+
+    let targetHero;
+
+    // Si aucun héros n'est sélectionné, sélectionner le premier
+    if (!selectedHeroId) {
+      targetHero = currentPlayer.heroes[0];
+    } else {
+      // Sinon, cycler au héros suivant
+      const currentIndex = currentPlayer.heroes.findIndex(hero => hero.id === selectedHeroId);
+      const nextIndex = (currentIndex + 1) % currentPlayer.heroes.length;
+      targetHero = currentPlayer.heroes[nextIndex];
+    }
+
+    setSelectedHeroId(targetHero.id);
+    setRightPanelContent('hero');
+
+    // Centrer la carte sur le héros (sera implémenté dans ModernGameRenderer)
+    if (mapRendererRef.current && mapRendererRef.current.centerOnPosition) {
+      mapRendererRef.current.centerOnPosition(targetHero.position);
+    }
   };
 
   const handleCastleClick = () => {
@@ -143,9 +171,9 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
           <div className="control-buttons">
             <button 
               className={`control-btn ${rightPanelContent === 'hero' ? 'active' : ''}`}
-              onClick={() => selectedHero ? setRightPanelContent('hero') : null}
-              disabled={!selectedHero}
-              title={selectedHero ? `Show ${selectedHero.name}` : 'Select a hero first'}
+              onClick={handleHeroesClick}
+              disabled={!currentPlayer?.heroes || currentPlayer.heroes.length === 0}
+              title={currentPlayer?.heroes && currentPlayer.heroes.length > 0 ? `Show ${selectedHero?.name || 'a hero'}` : 'No heroes available'}
             >
               <span className="btn-icon">⚔️</span>
               <span className="btn-label">Heroes</span>
@@ -203,6 +231,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
                 console.log(`Moving ${selectedHero.name} to`, position);
               }
             }}
+            ref={mapRendererRef}
           />
         </div>
 
