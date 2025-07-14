@@ -9,6 +9,11 @@
 - **Epic Names**: Auto-generation ("Dragon vs Mage") OPERATIONAL
 - **React Hooks**: Infinite loops and dependencies FIXED
 
+### 📋 IMPORTANT: READ THESE FIRST!
+- **🎯 Real Game Status**: `GAMESTATUS_UPDATED.md` - Honest assessment of what actually works
+- **🗺️ Development Plan**: `DEVELOPMENT_ROADMAP.md` - Realistic roadmap to make game playable
+- **⚠️ Gap Analysis**: Many features documented as "working" are actually incomplete
+
 ### 🔧 Main Scripts (IMPROVED):
 - `./start-app.sh` - Start backend + frontend **with hot reload**
 - `./stop-app.sh` - Stop all services cleanly
