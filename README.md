@@ -39,35 +39,106 @@ A modern web-based strategy game inspired by Heroes of Might and Magic III, buil
 - **Java** 11+ and Maven
 - **PostgreSQL** (or use H2 for development)
 
-### Running the Game
+### ⚡ **RECOMMENDED: Use the Scripts!**
 
-1. **Start Backend**:
+**Stop fighting with port conflicts and process management:**
+
+```bash
+# 🚀 Start the entire application (handles everything!)
+./start-app.sh
+
+# 🛑 Stop the entire application (kills all processes)
+./stop-app.sh
+
+# 🧪 Run ALL tests (backend + frontend + E2E with Playwright)
+./test-app.sh
+```
+
+### 📱 Manual Setup (If You Must)
+
+1. **Install Dependencies**:
    ```bash
-   cd backend
-   ./mvnw spring-boot:run
+   cd frontend && npm install && cd ..
    ```
 
-2. **Start Frontend**:
+2. **Start Backend**:
+   ```bash
+   cd backend
+   mvn spring-boot:run
+   ```
+
+3. **Start Frontend** (new terminal):
    ```bash
    cd frontend
-   npm install
    npm start
    ```
 
-3. **Play**: Open http://localhost:3000
+### 🌐 Access Points
+- **Game**: http://localhost:3000
+- **Backend API**: http://localhost:8080/api
+- **Health Check**: http://localhost:8080/api/health
 
 ## 🧪 Testing
 
-### Run All Tests
+### ⚡ **USE THE TEST SCRIPT!**
+
 ```bash
-# Backend tests
+# 🎯 Run ALL tests (backend + frontend + E2E)
+./test-app.sh
+```
+
+This script runs:
+- ✅ **Backend Tests**: Maven unit tests
+- ✅ **Frontend Tests**: Jest unit tests with coverage
+- ✅ **Playwright E2E Tests**: Full browser automation testing
+- ✅ **Scenario Loading Tests**: API endpoint validation
+
+### 🎭 **Playwright E2E Testing**
+
+The project includes comprehensive Playwright tests for:
+- Scenario selection and loading
+- Hero movement and combat
+- Turn management and multiplayer
+- UI interactions and game flow
+
+**Playwright Features:**
+- 📸 **Screenshots** on failure
+- 🎥 **Video recordings** of test runs
+- 🔍 **Detailed test reports**
+- 🌐 **Cross-browser testing**
+
+**Manual Playwright Commands:**
+```bash
+cd frontend
+
+# Run all E2E tests
+npx playwright test
+
+# Run with UI (interactive mode)
+npx playwright test --ui
+
+# Run specific test file
+npx playwright test tests/e2e/01-scenario-selection.spec.ts
+
+# Generate test report
+npx playwright show-report
+```
+
+### 📊 Individual Test Commands
+
+**Backend Tests:**
+```bash
 cd backend && mvn test
+```
 
-# Frontend tests  
+**Frontend Unit Tests:**
+```bash
 cd frontend && npm test
+```
 
-# E2E tests
-cd frontend && npx playwright test
+**Frontend with Coverage:**
+```bash
+cd frontend && npm test -- --coverage --watchAll=false
 ```
 
 ### Test Coverage
