@@ -174,7 +174,11 @@ const CastleManagementPanel: React.FC<CastleManagementPanelProps> = ({ gameId, p
     return iconMap[unitType.toLowerCase()] || '⚔️';
   };
 
-  const getBuildingIcon = (buildingType: string): string => {
+  const getBuildingIcon = (buildingType: string | undefined): string => {
+    if (!buildingType) {
+      return '🏢'; // Default building icon
+    }
+    
     const iconMap: Record<string, string> = {
       'castle': '🏰',
       'barracks': '🏚️',

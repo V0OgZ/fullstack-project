@@ -154,22 +154,31 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     offsetX: 50 + mapOffset.x,
     offsetY: 50 + mapOffset.y,
     colors: {
-      // Enhanced terrain colors
-      grass: '#4CAF50',        // Green
-      forest: '#2E7D32',       // Dark green
-      mountain: '#8D6E63',     // Brown
-      water: '#2196F3',        // Blue
-      desert: '#FF9800',       // Orange
-      swamp: '#795548',        // Dark brown
-      // Additional color variations
-      plains: '#8BC34A',       // Light green
-      hills: '#A1887F',        // Light brown
-      lake: '#03A9F4',         // Light blue
+      // Realistic terrain colors with gradients
+      grass: '#7CB342',        // Rich grass green
+      forest: '#2E7D32',       // Deep forest green
+      mountain: '#5D4037',     // Mountain brown
+      water: '#1976D2',        // Deep blue water
+      desert: '#FB8C00',       // Sandy orange
+      swamp: '#4E342E',        // Dark swamp brown
+      // Additional terrain variations
+      plains: '#8BC34A',       // Light green plains
+      hills: '#8D6E63',        // Hill brown
+      lake: '#42A5F5',         // Lake blue
       // UI colors
-      default: '#4CAF50',
-      hover: 'rgba(255, 255, 255, 0.3)',
+      default: '#7CB342',
+      hover: 'rgba(255, 255, 255, 0.2)',
       selected: '#FFD700',
-      movement: 'rgba(0, 255, 0, 0.3)'
+      movement: 'rgba(76, 175, 80, 0.4)'
+    },
+    // Terrain gradients for better visual appeal
+    gradients: {
+      grass: ['#7CB342', '#8BC34A'],
+      forest: ['#2E7D32', '#388E3C'],
+      mountain: ['#5D4037', '#6D4C41'],
+      water: ['#1976D2', '#2196F3'],
+      desert: ['#FB8C00', '#FFA726'],
+      swamp: ['#4E342E', '#5D4037']
     }
   }), [mapOffset]);
 
@@ -400,7 +409,7 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     ctx.fillRect(x - mpBarWidth/2, y + 35, mpBarWidth * mpRatio, mpBarHeight);
   }, [heroImages]);
 
-  // Render hexagonal tile with reliable colors
+  // Render hexagonal tile with enhanced visuals
   const drawHexTile = useCallback((
     ctx: CanvasRenderingContext2D,
     center: Position,
@@ -431,9 +440,9 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     }
     ctx.closePath();
 
-    // Use terrain colors - always reliable
-    let baseColor = config.colors.default;
+    // Use terrain colors with gradients for better visual appeal
     const terrainKey = tile.terrain;
+    let baseColor = config.colors.default;
     
     if (terrainKey && config.colors[terrainKey as keyof typeof config.colors]) {
       const colorValue = config.colors[terrainKey as keyof typeof config.colors];
@@ -441,10 +450,54 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
         baseColor = colorValue;
       }
     }
+
+    // Create gradient for terrain if available
+    if (terrainKey && config.gradients[terrainKey as keyof typeof config.gradients]) {
+      const gradientColors = config.gradients[terrainKey as keyof typeof config.gradients];
+      const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
+      gradient.addColorStop(0, gradientColors[0]);
+      gradient.addColorStop(1, gradientColors[1]);
+      ctx.fillStyle = gradient;
+    } else {
+      ctx.fillStyle = baseColor;
+    }
     
-    // Fill with terrain color
-    ctx.fillStyle = baseColor;
+    // Fill with terrain color/gradient
     ctx.fill();
+
+    // Add texture pattern for some terrains
+    if (terrainKey === 'mountain') {
+      // Add mountain texture
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+      for (let i = 0; i < 3; i++) {
+        const offsetX = (i - 1) * 3;
+        const offsetY = (i - 1) * 2;
+        ctx.fillRect(x + offsetX - 2, y + offsetY - 1, 4, 2);
+      }
+    } else if (terrainKey === 'forest') {
+      // Add forest texture with deterministic dots
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+      const seed = tile.x * 31 + tile.y * 17; // Deterministic seed
+      for (let i = 0; i < 5; i++) {
+        const offsetX = ((seed + i * 23) % 100 - 50) * radius * 0.02;
+        const offsetY = ((seed + i * 41) % 100 - 50) * radius * 0.02;
+        ctx.beginPath();
+        ctx.arc(x + offsetX, y + offsetY, 1, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    } else if (terrainKey === 'water') {
+      // Add water wave effect
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+      ctx.lineWidth = 1;
+      const time = Date.now() * 0.001;
+      for (let i = 0; i < 3; i++) {
+        const waveY = y + (i - 1) * 5 + Math.sin(time + i + tile.x * 0.1) * 2;
+        ctx.beginPath();
+        ctx.moveTo(x - radius * 0.5, waveY);
+        ctx.lineTo(x + radius * 0.5, waveY);
+        ctx.stroke();
+      }
+    }
 
     // Movement range highlight
     if (isInMovementRange && movementMode) {
@@ -458,17 +511,20 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
       ctx.fill();
     }
 
-    // Selection border
+    // Selection border with enhanced glow
     if (isSelected || hasSelectedHero) {
-      ctx.strokeStyle = hasSelectedHero ? config.colors.selected : config.colors.selected;
+      ctx.strokeStyle = config.colors.selected;
       ctx.lineWidth = hasSelectedHero ? 4 : 3;
+      ctx.shadowColor = config.colors.selected;
+      ctx.shadowBlur = 8;
       ctx.stroke();
+      ctx.shadowBlur = 0;
     } else if (isInMovementRange && movementMode) {
-      ctx.strokeStyle = 'rgba(0, 255, 0, 0.8)';
+      ctx.strokeStyle = 'rgba(76, 175, 80, 0.8)';
       ctx.lineWidth = 2;
       ctx.stroke();
     } else {
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
       ctx.lineWidth = 1;
       ctx.stroke();
     }
