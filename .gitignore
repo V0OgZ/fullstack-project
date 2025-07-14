@@ -214,3 +214,5 @@ server/
 # Uploaded files
 uploads/
 backend/uploads/ 
+frontend/test-results/
+.playwright-artifacts* 
