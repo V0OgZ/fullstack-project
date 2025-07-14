@@ -178,23 +178,22 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
               title={currentPlayer?.heroes && currentPlayer.heroes.length > 0 ? `Show ${selectedHero?.name || 'a hero'}` : 'No heroes available'}
             >
               <span className="btn-icon">⚔️</span>
-              <span className="btn-label">Heroes</span>
             </button>
             
             <button 
               className={`control-btn ${rightPanelContent === 'inventory' ? 'active' : ''}`}
               onClick={handleInventoryClick}
+              title="Show inventory"
             >
               <span className="btn-icon">🎒</span>
-              <span className="btn-label">Inventory</span>
             </button>
             
             <button 
               className={`control-btn ${rightPanelContent === 'castle' ? 'active' : ''}`}
               onClick={handleCastleClick}
+              title="Manage castles"
             >
               <span className="btn-icon">🏰</span>
-              <span className="btn-label">Castle</span>
             </button>
 
             <button 
@@ -203,7 +202,6 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
               title="AI features coming soon"
             >
               <span className="btn-icon">🤖</span>
-              <span className="btn-label">AI</span>
             </button>
 
             <button 
@@ -211,8 +209,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
               onClick={endTurn}
               title="End current turn"
             >
-              <span className="btn-icon">🔄</span>
-              <span className="btn-label">End Turn</span>
+              <span className="btn-icon">⏭️</span>
             </button>
           </div>
         </div>

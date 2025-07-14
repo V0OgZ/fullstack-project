@@ -124,15 +124,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  padding: 12px 16px;
+  justify-content: center;
+  gap: 0;
+  padding: 12px;
   background: rgba(255, 255, 255, 0.1);
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 10px;
   color: #ffffff;
   cursor: pointer;
   transition: all 0.3s ease;
-  min-width: 70px;
+  width: 50px;
+  height: 50px;
 }
 
 .end-turn-btn {
@@ -175,14 +177,7 @@
 }
 
 .btn-icon {
-  font-size: 20px;
-}
-
-.btn-label {
-  font-size: 11px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  font-size: 24px;
 }
 
 /* Main Game Area */
@@ -191,6 +186,8 @@
   flex: 1;
   gap: 0;
   overflow: hidden;
+  width: 100%;
+  max-width: 100vw;
 }
 
 .map-container {
@@ -199,21 +196,26 @@
   justify-content: center;
   align-items: center;
   background: #0a0a0a;
+  min-width: 0; /* Important pour flexbox */
+  overflow: hidden;
 }
 
 /* Right Panel */
 .right-panel {
-  width: 350px;
-  max-width: 350px;
-  min-width: 300px;
+  width: 320px !important;
+  max-width: 320px !important;
+  min-width: 320px !important;
+  flex-shrink: 0;
   background: rgba(0, 0, 0, 0.9);
   border-left: 2px solid rgba(255, 215, 0, 0.3);
   backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
+  transition: none;
   overflow-y: auto;
   overflow-x: hidden;
+  height: 100%;
   max-height: 100vh;
   box-sizing: border-box;
+  position: relative;
 }
 
 .panel-content {
@@ -755,7 +757,9 @@
 /* Responsive Design */
 @media (max-width: 1200px) {
   .right-panel {
-    width: 300px;
+    width: 280px !important;
+    max-width: 280px !important;
+    min-width: 280px !important;
   }
   
   .equipment-slots {
@@ -787,12 +791,22 @@
   
   .game-main {
     flex-direction: column;
+    height: calc(100vh - 120px);
+  }
+  
+  .map-container {
+    flex: 1;
+    min-height: 0;
   }
   
   .right-panel {
-    width: 100%;
-    height: 300px;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    height: 250px !important;
+    max-height: 250px !important;
     border-left: none;
     border-top: 2px solid rgba(255, 215, 0, 0.3);
+    flex-shrink: 0;
   }
 } 
