@@ -29,7 +29,6 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
   const [maxPlayers, setMaxPlayers] = useState(4);
   const [gameMode, setGameMode] = useState('multiplayer-arena');
   const [playerId, setPlayerId] = useState('');
-  const [websocketConnected, setWebsocketConnected] = useState(false);
   const [heroName, setHeroName] = useState('');
   const [waitingForPlayers, setWaitingForPlayers] = useState(false);
   const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
@@ -89,11 +88,8 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
   // WebSocket disabled - using polling mode only for better reliability
   useEffect(() => {
     console.log('🔄 Multiplayer mode: Polling every 5 seconds (WebSocket disabled)');
-    setWebsocketConnected(false);
-    
     // No WebSocket initialization - polling mode only
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [onError]);
+  }, []);
 
   useEffect(() => {
     loadSessions();
@@ -467,60 +463,79 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
       <h2 style={{ color: '#00d4ff', marginBottom: '20px' }}>🌐 Multiplayer Sessions</h2>
       
       {/* WebSocket Status */}
-      <div style={{ 
-        marginBottom: '20px', 
-        padding: '10px', 
-        background: websocketConnected ? '#1a4d1a' : '#4d1a1a',
-        borderRadius: '4px',
-        color: websocketConnected ? '#4ade80' : '#f87171'
-      }}>
-        {websocketConnected ? '✅ Real-time connection active' : '❌ Real-time connection failed'}
-      </div>
+      {/* WebSocket removed - using reliable 5-second polling */}
       
-      {/* Player Info */}
+      {/* Clean Header Section */}
       <div style={{ 
-        marginBottom: '20px', 
-        padding: '10px', 
-        background: '#1a1a1a',
-        borderRadius: '4px',
-        color: '#888'
+        marginBottom: '30px', 
+        padding: '15px', 
+        background: 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)',
+        borderRadius: '8px',
+        borderLeft: '4px solid #00d4ff'
       }}>
-        👤 Your Player ID: <strong style={{ color: '#00d4ff' }}>{playerId}</strong>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div>
+            <div style={{ color: '#00d4ff', fontSize: '16px', fontWeight: 'bold' }}>🔄 Polling Mode Active</div>
+            <div style={{ color: '#888', fontSize: '12px' }}>Auto-refresh every 5 seconds</div>
+          </div>
+          <div style={{ textAlign: 'right' }}>
+            <div style={{ color: '#fff', fontSize: '14px' }}>Player ID</div>
+            <div style={{ color: '#00d4ff', fontSize: '16px', fontWeight: 'bold' }}>{playerId}</div>
+          </div>
+        </div>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-        <div style={{ color: '#fff' }}>
-          Available Sessions ({sessions.length})
+      {/* Sessions Header with Actions */}
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center', 
+        marginBottom: '20px',
+        padding: '15px',
+        background: '#1a1a1a',
+        borderRadius: '8px'
+      }}>
+        <div>
+          <div style={{ color: '#fff', fontSize: '18px', fontWeight: 'bold' }}>
+            🌐 Available Sessions
+          </div>
+          <div style={{ color: '#888', fontSize: '14px' }}>
+            {sessions.length} {sessions.length === 1 ? 'session' : 'sessions'} found
+          </div>
         </div>
         <div style={{ display: 'flex', gap: '10px' }}>
           <button
             onClick={loadSessions}
             disabled={loading}
             style={{
-              padding: '8px 16px',
+              padding: '12px 20px',
               background: loading ? '#666' : '#4ade80',
               color: loading ? '#aaa' : '#000',
               border: 'none',
-              borderRadius: '4px',
-              cursor: loading ? 'not-allowed' : 'pointer'
+              borderRadius: '6px',
+              cursor: loading ? 'not-allowed' : 'pointer',
+              fontWeight: 'bold',
+              transition: 'all 0.2s ease'
             }}
           >
-            🔄 Refresh
+            🔄 {loading ? 'Loading...' : 'Refresh'}
           </button>
           <button
             onClick={() => setCreateSessionMode(true)}
             disabled={loading}
             data-testid="create-session-btn"
             style={{
-              padding: '8px 16px',
+              padding: '12px 20px',
               background: loading ? '#666' : '#00d4ff',
               color: loading ? '#aaa' : '#000',
               border: 'none',
-              borderRadius: '4px',
-              cursor: loading ? 'not-allowed' : 'pointer'
+              borderRadius: '6px',
+              cursor: loading ? 'not-allowed' : 'pointer',
+              fontWeight: 'bold',
+              transition: 'all 0.2s ease'
             }}
           >
-            🎮 Create New Session
+            ✨ Create New Session
           </button>
         </div>
       </div>
