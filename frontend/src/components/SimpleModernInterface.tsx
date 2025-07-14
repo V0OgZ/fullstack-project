@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useTranslation } from '../i18n';
 import { useGameStore } from '../store/useGameStore';
 import ModernGameRenderer from './ModernGameRenderer';
+import HeroDisplay from './HeroDisplay';
+import UnitDisplay from './UnitDisplay';
 import './SimpleModernInterface.css';
 import { Hero, Position } from '../types/game';
 import { ApiService } from '../services/api';
@@ -138,8 +140,17 @@ const SimpleModernInterface: React.FC = () => {
                   onClick={() => setSelectedHero(hero)}
                 >
                   <div className="hero-header">
-                    <span className="hero-name">{hero.name}</span>
-                    <span className="hero-level">Niv. {hero.level}</span>
+                    <HeroDisplay 
+                      heroType={hero.name.toLowerCase().includes('mage') ? 'mage' : 
+                               hero.name.toLowerCase().includes('archer') ? 'archer' : 
+                               hero.name.toLowerCase().includes('paladin') ? 'paladin' : 'warrior'} 
+                      size={48} 
+                      showName={false}
+                    />
+                    <div>
+                      <span className="hero-name">{hero.name}</span>
+                      <span className="hero-level">Niv. {hero.level}</span>
+                    </div>
                   </div>
                   <div className="hero-stats">
                     <div className="stat">
@@ -157,6 +168,31 @@ const SimpleModernInterface: React.FC = () => {
                   </div>
                 </div>
               ))}
+            </div>
+
+            {/* Graphics Showcase Section */}
+            <div className="graphics-showcase" style={{marginTop: '20px', padding: '10px', border: '1px solid #ccc', borderRadius: '8px'}}>
+              <h4 style={{margin: '0 0 10px 0', color: '#333'}}>🎨 LPC Graphics Showcase</h4>
+              
+              <div style={{marginBottom: '15px'}}>
+                <h5 style={{margin: '0 0 5px 0', fontSize: '12px', color: '#666'}}>Heroes:</h5>
+                <div style={{display: 'flex', flexWrap: 'wrap'}}>
+                  <HeroDisplay heroType="warrior" size={64} />
+                  <HeroDisplay heroType="mage" size={64} />
+                  <HeroDisplay heroType="archer" size={64} />
+                  <HeroDisplay heroType="paladin" size={64} />
+                </div>
+              </div>
+
+              <div>
+                <h5 style={{margin: '0 0 5px 0', fontSize: '12px', color: '#666'}}>Units:</h5>
+                <div style={{display: 'flex', flexWrap: 'wrap'}}>
+                  <UnitDisplay unitType="knight" />
+                  <UnitDisplay unitType="archer" />
+                  <UnitDisplay unitType="skeleton" />
+                  <UnitDisplay unitType="undead" />
+                </div>
+              </div>
             </div>
           </aside>
         )}

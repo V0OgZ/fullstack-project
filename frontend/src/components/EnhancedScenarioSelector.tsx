@@ -149,12 +149,13 @@ const EnhancedScenarioSelector: React.FC = () => {
   };
 
   const getDifficultyLabel = (difficulty: string) => {
-    switch (difficulty) {
+    switch (difficulty.toLowerCase()) {
       case 'easy': return t('easy');
-      case 'medium': return 'Medium';
+      case 'normal':
+      case 'medium': return t('intermediate');
       case 'hard': return t('advanced');
-      case 'expert': return 'Expert';
-      default: return 'Unknown';
+      case 'expert': return t('expert');
+      default: return t('intermediate'); // Par défaut "intermediate" au lieu de "unknown"
     }
   };
 
