@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from '../i18n';
 import { useGameStore } from '../store/useGameStore';
 import ModernGameRenderer, { ModernGameRendererRef } from './ModernGameRenderer';
+import CastleManagementPanel from './CastleManagementPanel';
 import { HERO_ASSETS } from '../constants/gameAssets';
 import './TrueHeroesInterface.css';
 
@@ -496,50 +497,11 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
           )}
 
           {rightPanelContent === 'castle' && (
-            <div className="panel-content castle-panel">
-              <div className="panel-header">
-                <h3>🏰 Your Castles</h3>
-                <button 
-                  className="close-panel-btn"
-                  onClick={() => setRightPanelContent('scenario')}
-                >
-                  ×
-                </button>
-              </div>
-              
-              <div className="castles-list">
-                <div className="castle-item">
-                  <div className="castle-icon">🏰</div>
-                  <div className="castle-info">
-                    <div className="castle-name">Main Castle</div>
-                    <div className="castle-details">
-                      <span>📍 (2, 3)</span>
-                      <span>🏗️ 5 Buildings</span>
-                    </div>
-                  </div>
-                  <button className="castle-manage-btn">Manage</button>
-                </div>
-                
-                <div className="castle-construction">
-                  <h4>🔨 Available Buildings</h4>
-                  <div className="building-item">
-                    <span className="building-icon">🏬</span>
-                    <span className="building-name">Marketplace</span>
-                    <span className="building-cost">💰 500</span>
-                  </div>
-                  <div className="building-item">
-                    <span className="building-icon">🏭</span>
-                    <span className="building-name">Barracks</span>
-                    <span className="building-cost">💰 750</span>
-                  </div>
-                  <div className="building-item">
-                    <span className="building-icon">🗼</span>
-                    <span className="building-name">Mage Tower</span>
-                    <span className="building-cost">💰 1000</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <CastleManagementPanel
+              gameId={currentGame.id}
+              playerId={currentPlayer.id}
+              onClose={() => setRightPanelContent('scenario')}
+            />
           )}
         </div>
       </div>

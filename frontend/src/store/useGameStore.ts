@@ -11,6 +11,11 @@ interface GameStore extends GameState {
   selectedTile: Position | null;
   currentPlayerNumber: number;
   
+  // Hero selection and movement
+  selectedHero: Hero | null;
+  movementRange: Position[];
+  movementMode: boolean;
+  
   // NEW: Magic Item State
   playerInventory: string[];
   equippedItems: { [heroId: string]: EquippedItems };
@@ -27,6 +32,13 @@ interface GameStore extends GameState {
   addCombatResult: (result: CombatResult) => void;
   setLoading: (loading: boolean) => void;
   setError: (error: string | null) => void;
+  
+  // Hero selection and movement actions
+  selectHero: (hero: Hero | null) => void;
+  setMovementRange: (range: Position[]) => void;
+  setMovementMode: (mode: boolean) => void;
+  calculateMovementRange: (hero: Hero) => Position[];
+  canMoveToPosition: (hero: Hero, position: Position) => boolean;
   
   // NEW: Magic Item Actions (now using backend)
   equipItem: (heroId: string, itemId: string, slot: string) => Promise<boolean>;
@@ -75,6 +87,12 @@ const initialState = {
   map: [],
   selectedTile: null,
   currentPlayerNumber: 1,
+  
+  // Hero selection and movement
+  selectedHero: null,
+  movementRange: [],
+  movementMode: false,
+  
   shadowActions: [],
   visibleZFCs: [],
   lockedZones: [],
@@ -254,6 +272,55 @@ export const useGameStore = create<GameStore>((set, get) => ({
   setMap: (map) => set({ map }),
   setSelectedTile: (position) => set({ selectedTile: position }),
   setCurrentPlayerNumber: (playerNumber) => set({ currentPlayerNumber: playerNumber }),
+  
+  // Hero selection and movement methods
+  selectHero: (hero) => {
+    set({ selectedHero: hero });
+    if (hero) {
+      const { calculateMovementRange, setMovementRange, setMovementMode } = get();
+      const range = calculateMovementRange(hero);
+      setMovementRange(range);
+      setMovementMode(true);
+    } else {
+      set({ movementRange: [], movementMode: false });
+    }
+  },
+  setMovementRange: (range) => set({ movementRange: range }),
+  setMovementMode: (mode) => set({ movementMode: mode }),
+  
+  calculateMovementRange: (hero) => {
+    const { map } = get();
+    if (!map || map.length === 0) return [];
+    
+    const range: Position[] = [];
+    const movementPoints = hero.movementPoints || 1000;
+    const maxDistance = Math.floor(movementPoints / 100); // Each tile costs 100 movement points
+    
+    for (let y = 0; y < map.length; y++) {
+      for (let x = 0; x < map[y].length; x++) {
+        const tile = map[y][x];
+        if (tile && tile.walkable) {
+          const distance = Math.abs(x - hero.position.x) + Math.abs(y - hero.position.y);
+          if (distance <= maxDistance) {
+            range.push({ x, y });
+          }
+        }
+      }
+    }
+    
+    return range;
+  },
+  
+  canMoveToPosition: (hero, position) => {
+    const { map, movementRange } = get();
+    if (!map || map.length === 0) return false;
+    
+    const tile = map[position.y]?.[position.x];
+    if (!tile || !tile.walkable) return false;
+    
+    return movementRange.some(pos => pos.x === position.x && pos.y === position.y);
+  },
+  
   addPendingAction: (action) => set((state) => ({
     pendingActions: [...state.pendingActions, action]
   })),
@@ -408,40 +475,42 @@ export const useGameStore = create<GameStore>((set, get) => ({
     }
   },
 
-  // Game actions (updated to use backend ZFC)
+  // Game actions (practical implementation)
   moveHero: async (heroId: string, targetPosition: Position) => {
-    const { setLoading, setError, addTimelineAction, calculateZFC, currentGame, currentPlayer } = get();
+    const { setLoading, setError, refreshGameState, currentGame, currentPlayer } = get();
     setLoading(true);
     setError(null);
 
     try {
       if (!currentGame || !currentPlayer) throw new Error('No active game or player');
 
-      const zfc = await calculateZFC(currentPlayer.id, heroId);
+      // Call backend API to move hero
+      const result = await ApiService.moveHero(heroId, targetPosition);
       
-      const timelineAction: TimelineAction = {
-        id: `action_${Date.now()}`,
-        turn: currentGame.currentTurn,
-        playerId: currentPlayer.id,
-        action: {
-          type: 'move',
-          heroId,
-          targetPosition
-        },
-        status: 'PENDING',
-        zfc,
-        originTimestamp: new Date().toISOString(),
-        shadowVisible: true
-      };
-
-      addTimelineAction(timelineAction);
-      
-      // Validation automatique si possible
-      const { validateAction } = get();
-      await validateAction(timelineAction.id);
+      if (result.success) {
+        // Refresh game state to reflect the move
+        await refreshGameState();
+        
+        // Update hero position in the current state immediately for UI feedback
+        const updatedGame = { ...currentGame };
+        const hero = updatedGame.players
+          .flatMap(p => p.heroes)
+          .find(h => h.id === heroId);
+        
+        if (hero) {
+          hero.position = targetPosition;
+          hero.movementPoints = Math.max(0, hero.movementPoints - (result.movementCost || 100));
+          set({ currentGame: updatedGame });
+        }
+        
+        console.log('Hero moved successfully:', result);
+      } else {
+        throw new Error(result.message || 'Failed to move hero');
+      }
       
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Failed to move hero');
+      console.error('Hero movement error:', error);
     } finally {
       setLoading(false);
     }
