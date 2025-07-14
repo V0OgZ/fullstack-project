@@ -3,8 +3,8 @@
   "name": "scenarios.temporal-rift.name",
   "description": "scenarios.temporal-rift.description",
   "difficulty": "hard",
-  "maxPlayers": 4,
-  "recommendedPlayers": 4,
+  "maxPlayers": 1,
+  "recommendedPlayers": 1,
   "mapSize": "medium",
   "mapWidth": 25,
   "mapHeight": 25,
@@ -44,31 +44,10 @@
   "startingPositions": [
     {
       "playerId": "player1",
-      "positionX": 2,
-      "positionY": 2,
+      "positionX": 12,
+      "positionY": 12,
       "castleType": "castle",
       "startingHero": "Arthur"
-    },
-    {
-      "playerId": "player2",
-      "positionX": 22,
-      "positionY": 2,
-      "castleType": "rampart",
-      "startingHero": "Elara"
-    },
-    {
-      "playerId": "player3",
-      "positionX": 2,
-      "positionY": 22,
-      "castleType": "tower",
-      "startingHero": "Zoltan"
-    },
-    {
-      "playerId": "player4",
-      "positionX": 22,
-      "positionY": 22,
-      "castleType": "inferno",
-      "startingHero": "Dagon"
     }
   ],
   "events": [

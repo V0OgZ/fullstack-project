@@ -141,7 +141,7 @@ public class ScenarioService {
         
         Scenario scenario = new Scenario("temporal-rift", "temporal-rift.name", 
                                        "temporal-rift.description",
-                                       "hard", 4, 25, 25, "custom");
+                                       "hard", 1, 25, 25, "custom");
         
         scenario.setTurnLimit(100);
         scenario.setTimeLimit(180); // 3 hours
@@ -156,11 +156,8 @@ public class ScenarioService {
         scenario.addObjective(new Scenario.ScenarioObjective("obj3", "eliminate", "objectives.temporal-rift.obj3.title", 
                                                            "objectives.temporal-rift.obj3.description", 1));
         
-        // Add starting pos
-        scenario.addStartingPosition(new Scenario.StartingPosition("player1", 2, 2, "castle", "Arthur"));
-        scenario.addStartingPosition(new Scenario.StartingPosition("player2", 22, 2, "rampart", "Elara"));
-        scenario.addStartingPosition(new Scenario.StartingPosition("player3", 2, 22, "tower", "Zoltan"));
-        scenario.addStartingPosition(new Scenario.StartingPosition("player4", 22, 22, "inferno", "Dagon"));
+        // Add starting position (single player scenario)
+        scenario.addStartingPosition(new Scenario.StartingPosition("player1", 12, 12, "castle", "Arthur"));
         
         // Add timed events
         scenario.addEvent(new Scenario.ScenarioEvent("event1", "timed", "events.temporal-rift.event1.title", 
@@ -182,7 +179,7 @@ public class ScenarioService {
         
         Scenario scenario = new Scenario("conquest-classic", "conquest-classic.name", 
                                        "conquest-classic.description",
-                                       "normal", 6, 30, 30, "conquest");
+                                       "easy", 1, 30, 30, "conquest");
         
         scenario.setTurnLimit(200);
         scenario.setVictoryRequirement("victory.conquest-classic");
@@ -194,13 +191,8 @@ public class ScenarioService {
         scenario.addObjective(new Scenario.ScenarioObjective("obj2", "capture", "objectives.conquest-classic.obj2.title", 
                                                            "objectives.conquest-classic.obj2.description", 5));
         
-        // Add starting positions in a circle
-        scenario.addStartingPosition(new Scenario.StartingPosition("player1", 5, 15, "castle", "Arthur"));
-        scenario.addStartingPosition(new Scenario.StartingPosition("player2", 15, 5, "rampart", "Elara"));
-        scenario.addStartingPosition(new Scenario.StartingPosition("player3", 25, 15, "tower", "Zoltan"));
-        scenario.addStartingPosition(new Scenario.StartingPosition("player4", 15, 25, "inferno", "Dagon"));
-        scenario.addStartingPosition(new Scenario.StartingPosition("player5", 5, 25, "necropolis", "Thant"));
-        scenario.addStartingPosition(new Scenario.StartingPosition("player6", 25, 5, "dungeon", "Gunnar"));
+        // Add starting position (single player scenario)
+        scenario.addStartingPosition(new Scenario.StartingPosition("player1", 15, 15, "castle", "Arthur"));
         
         return scenarioRepository.save(scenario);
     }

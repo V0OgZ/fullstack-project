@@ -3,8 +3,8 @@
   "name": "scenarios.conquest-classic.name",
   "description": "scenarios.conquest-classic.description",
   "difficulty": "normal",
-  "maxPlayers": 6,
-  "recommendedPlayers": 6,
+  "maxPlayers": 1,
+  "recommendedPlayers": 1,
   "mapSize": "medium",
   "mapWidth": 30,
   "mapHeight": 30,
@@ -36,45 +36,10 @@
   "startingPositions": [
     {
       "playerId": "player1",
-      "positionX": 5,
+      "positionX": 15,
       "positionY": 15,
       "castleType": "castle",
       "startingHero": "Arthur"
-    },
-    {
-      "playerId": "player2",
-      "positionX": 15,
-      "positionY": 5,
-      "castleType": "rampart",
-      "startingHero": "Elara"
-    },
-    {
-      "playerId": "player3",
-      "positionX": 25,
-      "positionY": 15,
-      "castleType": "tower",
-      "startingHero": "Zoltan"
-    },
-    {
-      "playerId": "player4",
-      "positionX": 15,
-      "positionY": 25,
-      "castleType": "inferno",
-      "startingHero": "Dagon"
-    },
-    {
-      "playerId": "player5",
-      "positionX": 5,
-      "positionY": 25,
-      "castleType": "necropolis",
-      "startingHero": "Thant"
-    },
-    {
-      "playerId": "player6",
-      "positionX": 25,
-      "positionY": 5,
-      "castleType": "dungeon",
-      "startingHero": "Gunnar"
     }
   ],
   "events": []
