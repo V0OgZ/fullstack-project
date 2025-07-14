@@ -6,7 +6,8 @@
 ## 🎮 Current Game State
 
 ### ✅ Working Features
-- **Scenario Selection**: Three epic scenarios with instant loading
+- **Scenario Selection**: Three epic scenarios with proper single/multiplayer configuration
+- **Hero Graphics**: Real PNG portraits with multiple rendering methods
 - **Multiplayer System**: Create/join sessions with epic auto-generated names
 - **Session Management**: Reliable polling-based updates (5-second intervals)
 - **Hero Movement**: Complete pathfinding system with terrain costs
@@ -45,9 +46,17 @@
 
 ## 🎯 Gameplay Features
 
+### Hero Graphics System
+- **Real PNG Assets**: warrior.png, mage.png, archer.png, paladin.png (13-19KB each)
+- **Multiple Renderers**: ModernGameRenderer, MatrixGameMap, IsometricRenderer, HoMM3Map
+- **Visual Features**: Golden avatars, sword symbols, names, levels, movement bars
+- **HeroDisplay Component**: Integrates real graphics with UI
+
 ### Scenario System
-- **Three Built-in Scenarios**: Conquest Classic, Temporal Rift, Multiplayer Arena
+- **Single Player Scenarios**: Conquest Classic (easy), Temporal Rift (hard)
+- **Multiplayer Scenarios**: Multiplayer Arena (4 players, fast-paced)
 - **JSON Configuration**: Easy scenario creation and modification
+- **Automatic Detection**: isMultiplayer field based on maxPlayers > 1
 - **Automatic Loading**: Scenarios load on server startup
 - **Multiplayer Support**: Proper isMultiplayer field handling
 - **Epic Names**: Resource-based session name generation
