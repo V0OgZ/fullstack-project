@@ -259,33 +259,41 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
                 <div 
                   key={hero.id} 
                   className={`hero-item ${selectedHeroId === hero.id ? 'selected' : ''}`}
-                  onClick={() => handleHeroSelect(hero.id)}
+                  onClick={() => setSelectedHeroId(hero.id)}
                 >
                   <div className="hero-avatar">
-                    {hero.name.includes('Arthur') ? '👑' : 
-                     hero.name.includes('Morgana') ? '🔮' : 
-                     hero.name.includes('Archer') ? '🏹' : 
-                     hero.name.includes('Paladin') ? '🛡️' : '⚔️'}
+                    {hero.name === 'Arthur' && '👑'}
+                    {hero.name === 'Merlin' && '🧙'}
+                    {hero.name === 'Lancelot' && '⚔️'}
+                    {hero.name.toLowerCase().includes('mage') && '🔮'}
+                    {hero.name.toLowerCase().includes('warrior') && '🛡️'}
+                    {hero.name.toLowerCase().includes('archer') && '🏹'}
+                    {!['Arthur', 'Merlin', 'Lancelot'].includes(hero.name) && 
+                     !hero.name.toLowerCase().includes('mage') && 
+                     !hero.name.toLowerCase().includes('warrior') && 
+                     !hero.name.toLowerCase().includes('archer') && '⚔️'}
                   </div>
-                  <div className="hero-details">
+                  <div className="hero-info">
                     <div className="hero-name">{hero.name}</div>
-                    <div className="hero-stats">
-                      <span className="hero-stat">
-                        📍 {hero.position?.x || 0},{hero.position?.y || 0}
-                      </span>
-                      <span className="hero-stat">
-                        ⭐ Lv.{hero.level || 1}
-                      </span>
-                      <span className="hero-stat">
-                        🦶 {hero.movementPoints || 0}/{hero.maxMovementPoints || 3}
-                      </span>
+                    <div className="hero-level">Level {hero.level}</div>
+                    <div className="hero-position">
+                      📍 Position: ({hero.position.x}, {hero.position.y})
+                    </div>
+                    <div className="hero-mp">
+                      🏃 MP: {hero.movementPoints}/{hero.maxMovementPoints}
+                    </div>
+                    <div className="hero-status">
+                      {selectedHeroId === hero.id ? 
+                        '🎯 Active Hero' : 
+                        '💤 Click to select'}
                     </div>
                   </div>
                 </div>
               ))
             ) : (
-              <div style={{ color: '#999', textAlign: 'center', padding: '20px' }}>
-                No heroes available
+              <div className="no-heroes">
+                <div className="no-heroes-icon">😴</div>
+                <div className="no-heroes-text">No heroes available</div>
               </div>
             )}
           </div>
