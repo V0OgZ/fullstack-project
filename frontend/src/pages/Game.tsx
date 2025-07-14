@@ -1,87 +1,60 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import TrueHeroesInterface from '../components/TrueHeroesInterface';
 import MultiplayerSessionManager from '../components/MultiplayerSessionManager';
+import { useGameStore } from '../store/useGameStore';
 import { useTranslation } from '../i18n';
 
 const Game: React.FC = () => {
   const { scenarioId } = useParams<{ scenarioId: string }>();
+  const navigate = useNavigate();
   const { t } = useTranslation();
-  const [scenarioType, setScenarioType] = useState<'classique' | 'mystique' | 'multiplayer'>('classique');
-  const [playerCount, setPlayerCount] = useState(2);
-  const [multiplayerSessionId, setMultiplayerSessionId] = useState<string | null>(null);
+  const { currentGame, isLoading, error, loadGame } = useGameStore();
 
   useEffect(() => {
-    // Determine scenario type
-    if (scenarioId === 'mystique-temporel') {
-      setScenarioType('mystique');
-      setPlayerCount(2);
-      console.log('🔮 Loading Mystique scenario with temporal objects...');
-    } else if (scenarioId === 'multiplayer-arena') {
-      setScenarioType('multiplayer');
-      setPlayerCount(4); // Default to 4 players for multiplayer
-      console.log('🌐 Loading Multiplayer Arena with 4 players...');
-    } else {
-      setScenarioType('classique');
-      setPlayerCount(2);
-      console.log('🏰 Loading Classic scenario...');
-    }
-  }, [scenarioId]);
-
-  if (!scenarioId) {
-    return (
-      <div style={{
-        height: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: '#1a1a1a',
-        color: 'white'
-      }}>
-        <h2>❌ {t('gameNotFound')}</h2>
-      </div>
-    );
-  }
-
-  // For multiplayer, show the proper multiplayer session manager
-  if (scenarioType === 'multiplayer') {
-    // If we have a session, start the game
-    if (multiplayerSessionId) {
-      return (
-        <div className="multiplayer-game">
-          <TrueHeroesInterface 
-            playerCount={playerCount} 
-            scenarioType="multiplayer"
-            scenarioId={multiplayerSessionId}
-          />
-        </div>
-      );
-    }
+    console.log(`[GAME PAGE] --- Component mounted for scenarioId: ${scenarioId} ---`);
+    console.log(`[GAME PAGE] Current URL: ${window.location.href}`);
+    console.log(`[GAME PAGE] Current pathname: ${window.location.pathname}`);
     
-    // Otherwise show the multiplayer lobby
-    return (
-      <div className="multiplayer-lobby">
-        <MultiplayerSessionManager 
-          onSessionJoined={(sessionId) => {
-            console.log(`🎮 Joined multiplayer session: ${sessionId}`);
-            setMultiplayerSessionId(sessionId);
-          }}
-          onError={(error) => {
-            console.error('Multiplayer error:', error);
-            alert(`Multiplayer Error: ${error}`);
-          }}
-        />
-      </div>
-    );
+    // If we have a scenarioId and no game loaded, load it.
+    if (scenarioId && !currentGame) {
+      console.log(`[GAME PAGE] Current game not found. Calling loadGame with scenarioId: ${scenarioId}`);
+      loadGame(scenarioId);
+    } else {
+      console.log(`[GAME PAGE] Game already loaded or no scenarioId provided.`);
+      console.log(`[GAME PAGE] scenarioId: ${scenarioId}, currentGame: ${currentGame ? currentGame.id : 'null'}`);
+    }
+  }, [scenarioId, currentGame, loadGame]);
+
+  // Remove the navigation logic that was causing issues
+  // The game should stay on the current URL
+
+  if (isLoading) {
+    console.log('[GAME PAGE] Status: Loading...');
+    return <div>Loading...</div>;
   }
 
+  if (error) {
+    console.error(`[GAME PAGE] Status: Error - ${error}`);
+    return <div>Error: {error}</div>;
+  }
+
+  if (window.location.pathname === '/multiplayer') {
+    return <MultiplayerSessionManager onSessionJoined={(id) => navigate(`/game/${id}`)} onError={(e) => console.error(e)} />;
+  }
+
+  if (!currentGame) {
+    console.log('[GAME PAGE] Status: No game data available. Waiting for data...');
+    return <div>{t('gameNotFound')}</div>;
+  }
+
+  console.log('[GAME PAGE] Status: Game data loaded successfully. Rendering game components.');
   return (
     <div className="game-page">
-      {/* Use the same Heroes interface for both scenarios */}
-      <TrueHeroesInterface 
-        playerCount={playerCount} 
-        scenarioType={scenarioType}
-        scenarioId={scenarioId}
+      <TrueHeroesInterface
+        playerCount={currentGame.players.length}
+        scenarioType={currentGame.name.toLowerCase().includes('mystique') ? 'mystique' : 'classique'}
+        scenarioId={currentGame.id}
       />
     </div>
   );

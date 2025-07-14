@@ -1,0 +1,36 @@
+# Cursor AI Assistant Rules for Heroes of Time Project
+
+## 🚨 IMPORTANT: Always read INSTRUCTIONS_POUR_TOI.md first!
+
+Before making any changes or debugging, ALWAYS:
+1. Read the file `INSTRUCTIONS_POUR_TOI.md` for current status and existing scripts
+2. Do NOT recreate existing scripts (start-dev.sh, stop-dev.sh, debug-scenario-loading.sh)
+3. Use existing debugging tools before creating new ones
+
+## Project Structure:
+- Backend: Spring Boot (Java) on port 8080
+- Frontend: React TypeScript on port 3000
+- Database: H2 in-memory
+- Current issue: Scenario loading from backend API
+
+## Existing Scripts:
+- `start-app.sh` - Start both servers (ALREADY EXISTS!)
+- `stop-app.sh` - Stop all servers (ALREADY EXISTS!)
+- `test-app.sh` - Run all tests (ALREADY EXISTS!)
+- `run-all-tests.sh` - Complete test suite (ALREADY EXISTS!)
+- `debug-scenario-loading.sh` - Debug scenario loading issues
+- `TEST_SCRIPTS_README.md` - Complete script documentation (ALREADY EXISTS!)
+- `INSTRUCTIONS_POUR_TOI.md` - Detailed instructions (READ THIS FIRST!)
+
+## Key Points:
+- ScenarioSelector.tsx should be used (not EnhancedScenarioSelector)
+- API endpoint: /api/scenarios/all
+- Backend logs show Hibernate queries working
+- Frontend compiled with warnings but runs
+
+## Debugging Process:
+1. Check if servers are running
+2. Test backend API directly: `curl http://localhost:8080/api/scenarios/all`
+3. Check browser console for errors
+4. Verify network requests in DevTools
+5. Use existing debug script: `./debug-scenario-loading.sh` 

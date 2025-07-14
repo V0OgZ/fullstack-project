@@ -7,7 +7,6 @@ import MagicInventory from './MagicInventory';
 import AIActionVisualizer from './AIActionVisualizer';
 import PerformanceDashboard from './PerformanceDashboard';
 import CastleManagement from './CastleManagement';
-import { GAME_ICONS } from '../constants/gameIcons';
 import './TrueHeroesInterface.css';
 
 interface TrueHeroesInterfaceProps {
@@ -24,7 +23,6 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
     loadGame, 
     isLoading, 
     error,
-    getEnhancedHero,
     endTurn,
     nextPlayer
   } = useGameStore();
@@ -81,13 +79,12 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
     );
   }
 
+  // Render the interface only when the game is fully loaded
   if (!currentGame || !currentPlayer) {
     return (
-      <div className="true-heroes-no-game">
+      <div className="true-heroes-loading">
+        <div className="loading-spinner"></div>
         <p>{t('loading')}</p>
-        <button onClick={() => loadGame(scenarioId)} className="load-game-button">
-          {t('startGame')}
-        </button>
       </div>
     );
   }

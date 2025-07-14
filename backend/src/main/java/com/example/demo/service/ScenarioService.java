@@ -111,6 +111,12 @@ public class ScenarioService {
     // ======================
     
     public Scenario createTemporalRiftScenario() {
+        // Vérifier si le scénario existe déjà
+        Optional<Scenario> existing = scenarioRepository.findByScenarioId("temporal-rift");
+        if (existing.isPresent()) {
+            return existing.get();
+        }
+        
         Scenario scenario = new Scenario("temporal-rift", "The Temporal Rift", 
                                        "A mysterious rift in time threatens to tear reality apart. Heroes must navigate through temporal zones to restore balance.",
                                        "hard", 4, 25, 25, "custom");
@@ -146,6 +152,12 @@ public class ScenarioService {
     }
     
     public Scenario createConquestClassicScenario() {
+        // Vérifier si le scénario existe déjà
+        Optional<Scenario> existing = scenarioRepository.findByScenarioId("conquest-classic");
+        if (existing.isPresent()) {
+            return existing.get();
+        }
+        
         Scenario scenario = new Scenario("conquest-classic", "Classic Conquest", 
                                        "A traditional conquest scenario where players must eliminate all enemies or capture their main towns.",
                                        "normal", 6, 30, 30, "conquest");

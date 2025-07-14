@@ -61,10 +61,6 @@ const OptimizedGameRenderer: React.FC<OptimizedGameRendererProps> = ({
   const { t } = useTranslation();
   
   // Performance optimization states
-  const [viewportBounds, setViewportBounds] = useState<ViewportBounds>({
-    minX: 0, maxX: 20, minY: 0, maxY: 20
-  });
-  const [renderObjects, setRenderObjects] = useState<Map<string, RenderObject>>(new Map());
   const [particlePool, setParticlePool] = useState<ParticlePool>({
     particles: [],
     activeCount: 0,
@@ -163,33 +159,6 @@ const OptimizedGameRenderer: React.FC<OptimizedGameRendererProps> = ({
     };
   }, [width, height, config, map]);
 
-  // Optimized tile rendering with batching
-  const drawTileBatch = useCallback((
-    ctx: CanvasRenderingContext2D,
-    tiles: Array<{ tile: Tile; position: Position; center: Position }>
-  ) => {
-    // Group tiles by terrain type for batch rendering
-    const tileGroups = new Map<string, Array<{ tile: Tile; center: Position }>>();
-    
-    tiles.forEach(({ tile, center }) => {
-      const terrain = tile.terrain || 'default';
-      if (!tileGroups.has(terrain)) {
-        tileGroups.set(terrain, []);
-      }
-      tileGroups.get(terrain)!.push({ tile, center });
-    });
-
-    // Render each terrain type in batch
-    tileGroups.forEach((tilesOfType, terrain) => {
-      const color = config.colors[terrain as keyof typeof config.colors] || config.colors.default;
-      ctx.fillStyle = typeof color === 'string' ? color : config.colors.default;
-      
-      tilesOfType.forEach(({ tile, center }) => {
-        drawOptimizedHexTile(ctx, center, tile);
-      });
-    });
-  }, [config.colors]);
-
   // Optimized hex tile drawing
   const drawOptimizedHexTile = useCallback((
     ctx: CanvasRenderingContext2D,
@@ -216,6 +185,33 @@ const OptimizedGameRenderer: React.FC<OptimizedGameRendererProps> = ({
     ctx.fill(hexPath);
     ctx.stroke(hexPath);
   }, [config.hexRadius]);
+
+  // Optimized tile rendering with batching
+  const drawTileBatch = useCallback((
+    ctx: CanvasRenderingContext2D,
+    tiles: Array<{ tile: Tile; position: Position; center: Position }>
+  ) => {
+    // Group tiles by terrain type for batch rendering
+    const tileGroups = new Map<string, Array<{ tile: Tile; center: Position }>>();
+    
+    tiles.forEach(({ tile, center }) => {
+      const terrain = tile.terrain || 'default';
+      if (!tileGroups.has(terrain)) {
+        tileGroups.set(terrain, []);
+      }
+      tileGroups.get(terrain)!.push({ tile, center });
+    });
+
+    // Render each terrain type in batch
+    tileGroups.forEach((tilesOfType, terrain) => {
+      const color = config.colors[terrain as keyof typeof config.colors] || config.colors.default;
+      ctx.fillStyle = typeof color === 'string' ? color : config.colors.default;
+      
+      tilesOfType.forEach(({ tile, center }) => {
+        drawOptimizedHexTile(ctx, center, tile);
+      });
+    });
+  }, [config.colors, drawOptimizedHexTile]);
 
   // Optimized hero rendering with instancing
   const drawHeroOptimized = useCallback((
@@ -421,9 +417,9 @@ const OptimizedGameRenderer: React.FC<OptimizedGameRendererProps> = ({
     setIsDirty(false);
     animationRef.current = requestAnimationFrame(render);
   }, [
-    map, currentGame, selectedHeroId, width, height, config, isDirty, particlePool,
+    map, currentGame, selectedHeroId, width, height, isDirty, particlePool,
     calculateViewportBounds, drawTileBatch, drawHeroOptimized, updateAndRenderParticles,
-    hexToPixel, updateFPS, showFPS, t
+    hexToPixel, updateFPS, showFPS, t, config
   ]);
 
   // Optimized mouse handling with throttling

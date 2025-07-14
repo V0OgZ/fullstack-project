@@ -1,0 +1,98 @@
+{
+  "scenarioId": "temporal-rift",
+  "name": "The Temporal Rift",
+  "description": "A mysterious rift in time threatens to tear reality apart. Heroes must navigate through temporal zones to restore balance.",
+  "difficulty": "hard",
+  "maxPlayers": 4,
+  "recommendedPlayers": 4,
+  "mapSize": "medium",
+  "mapWidth": 25,
+  "mapHeight": 25,
+  "turnLimit": 100,
+  "timeLimit": 180,
+  "victoryCondition": "custom",
+  "victoryRequirement": "Control the Temporal Nexus and close 3 time rifts",
+  "defeatCondition": "All heroes are lost or time runs out",
+  "isActive": true,
+  "isCampaign": false,
+  "objectives": [
+    {
+      "objectiveId": "obj1",
+      "objectiveType": "capture",
+      "objectiveTitle": "Control the Temporal Nexus",
+      "objectiveDescription": "Capture and hold the central Temporal Nexus",
+      "targetValue": 1,
+      "isRequired": true
+    },
+    {
+      "objectiveId": "obj2",
+      "objectiveType": "collect",
+      "objectiveTitle": "Close Time Rifts",
+      "objectiveDescription": "Find and close 3 unstable time rifts",
+      "targetValue": 3,
+      "isRequired": true
+    },
+    {
+      "objectiveId": "obj3",
+      "objectiveType": "eliminate",
+      "objectiveTitle": "Defeat the Temporal Guardian",
+      "objectiveDescription": "Eliminate the powerful Temporal Guardian",
+      "targetValue": 1,
+      "isRequired": true
+    }
+  ],
+  "startingPositions": [
+    {
+      "playerId": "player1",
+      "positionX": 2,
+      "positionY": 2,
+      "castleType": "castle",
+      "startingHero": "Arthur",
+      "handicap": 0
+    },
+    {
+      "playerId": "player2",
+      "positionX": 22,
+      "positionY": 2,
+      "castleType": "rampart",
+      "startingHero": "Elara",
+      "handicap": 0
+    },
+    {
+      "playerId": "player3",
+      "positionX": 2,
+      "positionY": 22,
+      "castleType": "tower",
+      "startingHero": "Zoltan",
+      "handicap": 0
+    },
+    {
+      "playerId": "player4",
+      "positionX": 22,
+      "positionY": 22,
+      "castleType": "inferno",
+      "startingHero": "Dagon",
+      "handicap": 0
+    }
+  ],
+  "events": [
+    {
+      "eventId": "event1",
+      "eventType": "timed",
+      "eventTitle": "Temporal Storm",
+      "eventDescription": "A temporal storm sweeps across the land, affecting all units",
+      "eventEffect": "{\"effect\": \"all_units_stunned\", \"duration\": 1}",
+      "isTriggered": false,
+      "isRepeatable": false
+    },
+    {
+      "eventId": "event2",
+      "eventType": "timed",
+      "eventTitle": "Ancient Artifact",
+      "eventDescription": "An ancient artifact appears in the center of the map",
+      "eventEffect": "{\"effect\": \"spawn_artifact\", \"location\": \"center\"}",
+      "isTriggered": false,
+      "isRepeatable": false
+    }
+  ]
+} 

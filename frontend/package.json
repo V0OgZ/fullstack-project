@@ -28,6 +28,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.34",
     "framer-motion": "^12.23.3",
+    "node-fetch": "^3.3.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^6.26.1",
@@ -40,15 +41,22 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom",
+    "e2e": "playwright test",
     "eject": "react-scripts eject",
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run",
-    "test:e2e": "start-server-and-test start http://localhost:3000 cypress:run",
-    "test:e2e:open": "start-server-and-test start http://localhost:3000 cypress:open",
+    "test:playwright": "playwright test",
+    "test:playwright:headed": "playwright test --headed",
+    "test:playwright:ui": "playwright test --ui",
+    "test:playwright:debug": "playwright test --debug",
+    "test:full": "./test-runner.sh",
+    "test:scenario": "playwright test tests/e2e/scenario-load.spec.ts",
+    "test:solo": "playwright test tests/e2e/01-solo-gameplay.spec.ts",
+    "test:multiplayer": "playwright test tests/e2e/02-multiplayer-dual-session.spec.ts",
+    "test:zfc": "playwright test tests/e2e/03-zfc-shadow-actions.spec.ts",
+    "test:performance": "playwright test tests/e2e/04-performance-stress-test.spec.ts",
+    "test:screens": "playwright test tests/e2e/05-comprehensive-screen-tests.spec.ts",
     "test:backend": "wait-on http://localhost:8080/api/units/health && echo 'Backend is ready'",
-    "test:full": "npm run test:backend && npm run test:e2e",
-    "test:dev": "concurrently \"npm start\" \"npm run test:backend\" \"npm run cypress:open\""
+    "test:dev": "concurrently \"npm start\" \"npm run test:backend\" \"npm run test:playwright:ui\""
   },
   "eslintConfig": {
     "extends": [
@@ -69,6 +77,8 @@
     ]
   },
   "devDependencies": {
+    "@playwright/test": "^1.43.1",
+    "@types/jest": "^30.0.0",
     "@types/node": "^24.0.13",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
