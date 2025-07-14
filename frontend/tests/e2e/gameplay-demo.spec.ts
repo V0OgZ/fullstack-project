@@ -117,63 +117,56 @@ test.describe('🎮 Heroes of Time - Gameplay Demo', () => {
      await page.waitForSelector('.game-page, .true-heroes-interface, .game-interface', { timeout: 15000 });
      await page.waitForTimeout(1000);
      
-     // 7. Sélection d'un héros
-     await showTooltip('🦸 Sélection de votre héros principal<br/>Ce brave guerrier mènera vos troupes !', 'center', 1500);
-    console.log('🦸 7. Sélection d\'un héros...');
-    const hero = page.locator('.hero-portrait-img, .hero-emoji-fallback, .hero-card, [data-testid="hero"]').first();
-    if (await hero.isVisible()) {
-      // Surligner le héros
-      await page.evaluate(() => {
-        const heroes = document.querySelectorAll('.hero, [data-testid="hero"], .hero-card');
-        if (heroes.length > 0) {
-          (heroes[0] as HTMLElement).style.boxShadow = '0 0 15px #00ff00, 0 0 30px #00ff00';
-          (heroes[0] as HTMLElement).style.border = '2px solid #00ff00';
-        }
-      });
-      
-      await hero.click();
-      await page.waitForTimeout(1000);
-      console.log('✅ Héros sélectionné !');
-    } else {
-      console.log('⚠️ Aucun héros trouvé, continue...');
+     // 7. Tester les boutons du panneau de droite
+    await showTooltip('🎮 Test des boutons de contrôle - Heroes, Inventory, Castle', 'center', 1500);
+    await page.waitForTimeout(1000);
+    
+    // Tester le bouton Heroes (avec icône seulement)
+    const heroesButton = page.locator('button[title*="hero"], .control-btn:has(.btn-icon:text("⚔️"))').first();
+    if (await heroesButton.isVisible()) {
+      await heroesButton.click();
+      await showTooltip('⚔️ Panneau Heroes ouvert ! Vous pouvez voir vos héros ici.', 'center', 1500);
+      await page.waitForTimeout(1500);
     }
     
-         // 8. Déplacement sur la carte
-     await showTooltip('🗺️ Déplacement sur la carte du royaume<br/>Explorons les terres environnantes !', 'center', 1500);
-     console.log('🗺️ 8. Tentative de déplacement sur la carte...');
-     const mapTile = page.locator('canvas, .map-tile, .hex-tile').first();
-     if (await mapTile.isVisible()) {
-       await mapTile.click();
-       await page.waitForTimeout(1000);
-       console.log('✅ Clic sur la carte effectué !');
-     } else {
-       console.log('⚠️ Carte non trouvée, continue...');
-     }
-     
-     // 9. Fin du tour
-     await showTooltip('⏭️ Fin du tour de jeu<br/>Passons au tour suivant pour voir l\'évolution !', 'center', 1500);
-     console.log('⏭️ 9. Recherche du bouton pour finir le tour...');
-     const nextTurnButton = page.locator('button:has-text("End Turn"), .end-turn-btn').first();
-     if (await nextTurnButton.isVisible({ timeout: 3000 })) {
-       // Surligner le bouton
-       await page.evaluate(() => {
-         const buttons = document.querySelectorAll('button');
-         buttons.forEach(btn => {
-           if (btn.textContent?.includes('Turn') || btn.textContent?.includes('tour')) {
-             btn.style.boxShadow = '0 0 15px #ff6600, 0 0 30px #ff6600';
-             btn.style.border = '2px solid #ff6600';
-           }
-         });
-       });
-       
-       await nextTurnButton.click();
-       await page.waitForTimeout(1000);
-       console.log('✅ Tour terminé !');
-     } else {
-       console.log('⚠️ Bouton de fin de tour non trouvé, simule avec une pause...');
-       await page.waitForTimeout(1500);
-     }
-     
+    // Tester le bouton Inventory (avec icône seulement)
+    const inventoryButton = page.locator('button[title*="inventory"], .control-btn:has(.btn-icon:text("🎒"))').first();
+    if (await inventoryButton.isVisible()) {
+      await inventoryButton.click();
+      await showTooltip('🎒 Panneau Inventory ouvert ! Gérez vos objets équipés.', 'center', 1500);
+      await page.waitForTimeout(1500);
+    }
+    
+    // Tester le bouton Castle (avec icône seulement)
+    const castleButton = page.locator('button[title*="castle"], .control-btn:has(.btn-icon:text("🏰"))').first();
+    if (await castleButton.isVisible()) {
+      await castleButton.click();
+      await showTooltip('🏰 Panneau Castle ouvert ! Construisez et gérez vos châteaux.', 'center', 1500);
+      await page.waitForTimeout(1500);
+    }
+
+    // 8. Terminer le tour
+    await showTooltip('🔄 Fin du tour - Cliquez sur "End Turn" pour terminer.', 'center', 1000);
+    await page.waitForTimeout(1000);
+    
+    // Utiliser les nouveaux sélecteurs pour le bouton End Turn (avec icône seulement)
+    const nextTurnButton = page.locator('button[title*="End"], .end-turn-btn, .control-btn:has(.btn-icon:text("⏭️"))').first();
+    
+    // Surligner le bouton
+    await page.evaluate(() => {
+      const buttons = document.querySelectorAll('button');
+      buttons.forEach(btn => {
+        if (btn.textContent?.includes('Turn') || btn.textContent?.includes('tour')) {
+          btn.style.boxShadow = '0 0 15px #ff6600, 0 0 30px #ff6600';
+          btn.style.border = '2px solid #ff6600';
+        }
+      });
+    });
+    
+    await nextTurnButton.click();
+    await page.waitForTimeout(1000);
+    console.log('✅ Tour terminé !');
+    
      // 10. Vérification du tour
      await showTooltip('🔄 Tour suivant en cours<br/>Votre royaume évolue et grandit !', 'center', 1500);
      console.log('🔄 10. Vérification du changement de tour...');
