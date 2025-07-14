@@ -2,11 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from '../i18n';
 import { useGameStore } from '../store/useGameStore';
 import ModernGameRenderer from './ModernGameRenderer';
-import OptimizedGameRenderer from './OptimizedGameRenderer';
-import MagicInventory from './MagicInventory';
-import AIActionVisualizer from './AIActionVisualizer';
-import PerformanceDashboard from './PerformanceDashboard';
-import CastleManagement from './CastleManagement';
 import './TrueHeroesInterface.css';
 
 interface TrueHeroesInterfaceProps {
@@ -26,115 +21,111 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
     nextPlayer
   } = useGameStore();
   
-  const [showMagicInventory, setShowMagicInventory] = useState(false);
-  const [showHeroesPanel, setShowHeroesPanel] = useState(false);
-  const [showCastleManagement, setShowCastleManagement] = useState(false);
   const [selectedHeroId, setSelectedHeroId] = useState<string | null>(null);
   const [selectedCastleId, setSelectedCastleId] = useState<string | null>(null);
+  const [rightPanelContent, setRightPanelContent] = useState<'empty' | 'hero' | 'inventory' | 'castle'>('empty');
 
-  // THIS useEffect was causing the infinite loop. It has been removed.
-  // The Game.tsx component is now solely responsible for loading the game.
-  /*
-  useEffect(() => {
-    if (scenarioId) {
-      loadGame(scenarioId);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [scenarioId]); // Only reload when scenarioId changes
-  */
-
-  const handleEndTurn = () => {
-    if (currentGame?.gameMode === 'hotseat') {
-      nextPlayer();
+  const handleHeroSelect = (heroId: string | null) => {
+    setSelectedHeroId(heroId);
+    if (heroId) {
+      setRightPanelContent('hero');
     } else {
-      endTurn();
+      setRightPanelContent('empty');
     }
   };
 
-  const handleHeroSelect = (heroId: string) => {
-    setSelectedHeroId(heroId);
+  const handleInventoryClick = () => {
+    setRightPanelContent('inventory');
+  };
+
+  const handleCastleClick = () => {
+    setRightPanelContent('castle');
   };
 
   const handleCastleSelect = (castleId: string) => {
     setSelectedCastleId(castleId);
-    setShowCastleManagement(true);
+    // Keep castle content but could show castle details
   };
+
+  const selectedHero = currentPlayer?.heroes?.find(hero => hero.id === selectedHeroId);
 
   if (isLoading) {
     return (
-      <div className="true-heroes-loading">
-        <div className="loading-spinner"></div>
-        <p>{t('loading')}</p>
+      <div className="true-heroes-interface loading">
+        <div className="loading-content">
+          <div className="loading-spinner"></div>
+          <p>Loading {scenarioType} scenario...</p>
+        </div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="true-heroes-error">
-        <h2>{t('error')}</h2>
-        <p>{error}</p>
-        {/* <button onClick={() => loadGame(scenarioId)} className="retry-button">
-          {t('back')}
-        </button> */}
+      <div className="true-heroes-interface error">
+        <div className="error-content">
+          <h2>Error Loading Game</h2>
+          <p>{error}</p>
+          <button onClick={() => window.location.reload()}>Retry</button>
+        </div>
       </div>
     );
   }
 
-  // Render the interface only when the game is fully loaded
   if (!currentGame || !currentPlayer) {
     return (
-      <div className="true-heroes-loading">
-        <div className="loading-spinner"></div>
-        <p>{t('loading')}</p>
+      <div className="true-heroes-interface error">
+        <div className="error-content">
+          <h2>No Game Data</h2>
+          <p>Unable to load game state.</p>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="true-heroes-interface">
-      {/* Header */}
+      {/* Header avec informations du jeu */}
       <div className="game-header">
-        <div className="game-info">
-          <h1 className="game-title">
-            <span className="scenario-badge" data-scenario={scenarioType}>
-              {scenarioType === 'classique' && '🏰 Classic'}
-              {scenarioType === 'mystique' && '🔮 Mystical'}
-              {scenarioType === 'multiplayer' && '🌐 Multiplayer'}
-            </span>
-            Heroes of Time
-          </h1>
-          <div className="turn-info">
-            <span className="turn-label">{t('turn')}</span>
-            <span className="turn-number">{currentGame.currentTurn}</span>
+        <div className="header-info">
+          <div className="game-title">
+            <h1>Heroes of Time</h1>
+            <span className="scenario-badge">{scenarioType}</span>
+          </div>
+          <div className="player-info">
+            <span className="player-name">{currentPlayer.username}</span>
+            <div className="resources">
+              <span className="gold">💰 {currentPlayer.resources?.gold || 0}</span>
+              <span className="wood">🪵 {currentPlayer.resources?.wood || 0}</span>
+              <span className="stone">🪨 {currentPlayer.resources?.stone || 0}</span>
+            </div>
           </div>
         </div>
-
+        
         <div className="header-controls">
-          {/* Simplified Control Panel */}
-          <div className="control-panel">
+          {/* Control buttons simplified */}
+          <div className="control-buttons">
             <button 
-              className={`control-btn ${showHeroesPanel ? 'active' : ''}`}
-              onClick={() => setShowHeroesPanel(!showHeroesPanel)}
-              title="Heroes Management"
+              className={`control-btn ${rightPanelContent === 'hero' ? 'active' : ''}`}
+              onClick={() => selectedHero ? setRightPanelContent('hero') : null}
+              disabled={!selectedHero}
+              title={selectedHero ? `Show ${selectedHero.name}` : 'Select a hero first'}
             >
               <span className="btn-icon">⚔️</span>
               <span className="btn-label">Heroes</span>
             </button>
-
+            
             <button 
-              className={`control-btn ${showMagicInventory ? 'active' : ''}`}
-              onClick={() => setShowMagicInventory(!showMagicInventory)}
-              title="Magic Inventory"
+              className={`control-btn ${rightPanelContent === 'inventory' ? 'active' : ''}`}
+              onClick={handleInventoryClick}
             >
               <span className="btn-icon">🎒</span>
               <span className="btn-label">Inventory</span>
             </button>
-
+            
             <button 
-              className="control-btn castle-btn"
-              onClick={() => handleCastleSelect('main-castle')}
-              title="Castle Management"
+              className={`control-btn ${rightPanelContent === 'castle' ? 'active' : ''}`}
+              onClick={handleCastleClick}
             >
               <span className="btn-icon">🏰</span>
               <span className="btn-label">Castle</span>
@@ -143,170 +134,221 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
             <button 
               className="control-btn disabled"
               disabled
-              title="AI Features - Coming Soon!"
+              title="AI features coming soon"
             >
               <span className="btn-icon">🤖</span>
               <span className="btn-label">AI</span>
             </button>
           </div>
-
-          <button className="end-turn-btn" onClick={handleEndTurn}>
-            <span className="btn-icon">➡️</span>
-            <span className="btn-label">{t('endTurn')}</span>
-          </button>
         </div>
       </div>
 
       {/* Main Game Area */}
       <div className="game-main">
-        {/* Game Renderer - Only ModernGameRenderer */}
-        <div className="game-renderer-container">
+        {/* Left side: Game Map */}
+        <div className="map-container">
           <ModernGameRenderer 
-            width={800} 
-            height={600} 
+            width={1200} 
+            height={800} 
+            onTileClick={(position) => {
+              // Handle tile clicks for hero selection and movement
+              console.log('Tile clicked:', position);
+              
+              // Check if there's a hero at this position
+              const heroAtPosition = currentPlayer?.heroes?.find(hero => 
+                hero.position.x === position.x && hero.position.y === position.y
+              );
+              
+              if (heroAtPosition) {
+                // Select the hero and show hero panel
+                handleHeroSelect(heroAtPosition.id);
+              } else if (selectedHero) {
+                // Move selected hero to this position (future implementation)
+                console.log(`Moving ${selectedHero.name} to`, position);
+              }
+            }}
           />
         </div>
 
-        {/* Side Panel */}
-        <div className="game-side-panel">
-          {/* Player Info */}
-          <div className="player-info-section">
-            <h3>{t('player')}</h3>
-            <div className="player-card">
-              <div className="player-name">{currentPlayer.username}</div>
-              <div className="player-resources">
-                <div className="resource-item">
-                  <span className="resource-icon">💰</span>
-                  <span className="resource-value">{currentPlayer.resources.gold}</span>
+        {/* Right side: Dynamic Panel */}
+        <div className={`right-panel ${rightPanelContent !== 'empty' ? 'visible' : 'hidden'}`}>
+          {rightPanelContent === 'hero' && selectedHero && (
+            <div className="panel-content hero-panel">
+              <div className="panel-header">
+                <h3>⚔️ {selectedHero.name}</h3>
+                <button 
+                  className="close-panel-btn"
+                  onClick={() => setRightPanelContent('empty')}
+                >
+                  ×
+                </button>
+              </div>
+              
+              <div className="hero-details">
+                <div className="hero-portrait">
+                  <div className="hero-image">
+                    {selectedHero.name === 'Arthur' && '👑'}
+                    {selectedHero.name === 'Merlin' && '🧙'}
+                    {selectedHero.name === 'Lancelot' && '⚔️'}
+                    {selectedHero.name.toLowerCase().includes('mage') && '🔮'}
+                    {selectedHero.name.toLowerCase().includes('warrior') && '🛡️'}
+                    {selectedHero.name.toLowerCase().includes('archer') && '🏹'}
+                    {!['Arthur', 'Merlin', 'Lancelot'].includes(selectedHero.name) && 
+                     !selectedHero.name.toLowerCase().includes('mage') && 
+                     !selectedHero.name.toLowerCase().includes('warrior') && 
+                     !selectedHero.name.toLowerCase().includes('archer') && '⚔️'}
+                  </div>
+                  <div className="hero-basic-info">
+                    <div className="hero-name">{selectedHero.name}</div>
+                    <div className="hero-level">Level {selectedHero.level}</div>
+                    <div className="hero-position">📍 ({selectedHero.position.x}, {selectedHero.position.y})</div>
+                  </div>
                 </div>
-                <div className="resource-item">
-                  <span className="resource-icon">🪵</span>
-                  <span className="resource-value">{currentPlayer.resources.wood}</span>
+
+                <div className="hero-stats">
+                  <div className="stat-item">
+                    <span className="stat-label">⚔️ Attack:</span>
+                    <span className="stat-value">{selectedHero.stats?.attack || 10}</span>
+                  </div>
+                  <div className="stat-item">
+                    <span className="stat-label">🛡️ Defense:</span>
+                    <span className="stat-value">{selectedHero.stats?.defense || 10}</span>
+                  </div>
+                  <div className="stat-item">
+                    <span className="stat-label">🏃 Movement:</span>
+                    <span className="stat-value">{selectedHero.movementPoints}/{selectedHero.maxMovementPoints}</span>
+                  </div>
+                  <div className="stat-item">
+                    <span className="stat-label">🔮 Spell Power:</span>
+                    <span className="stat-value">{selectedHero.stats?.spellPower || 5}</span>
+                  </div>
                 </div>
-                <div className="resource-item">
-                  <span className="resource-icon">🪨</span>
-                  <span className="resource-value">{currentPlayer.resources.stone}</span>
+
+                <div className="hero-troops">
+                  <h4>🏺 Army</h4>
+                  <div className="troops-list">
+                    {selectedHero.units && selectedHero.units.length > 0 ? (
+                      selectedHero.units.map((unit, index) => (
+                        <div key={index} className="troop-item">
+                          <span className="troop-icon">🏇</span>
+                          <span className="troop-name">{unit.name || 'Soldiers'}</span>
+                          <span className="troop-count">×{unit.quantity || 10}</span>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="no-troops">No army recruited</div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
 
-          {/* Heroes Section */}
-          <div className="heroes-section">
-            <h3>{t('heroes')}</h3>
-            <div className="heroes-list">
-              {currentPlayer.heroes.map(hero => (
-                <div 
-                  key={hero.id} 
-                  className={`hero-card ${selectedHeroId === hero.id ? 'selected' : ''}`}
-                  onClick={() => handleHeroSelect(hero.id)}
+          {rightPanelContent === 'inventory' && (
+            <div className="panel-content inventory-panel">
+              <div className="panel-header">
+                <h3>🎒 Equipped Items</h3>
+                <button 
+                  className="close-panel-btn"
+                  onClick={() => setRightPanelContent('empty')}
                 >
-                  <div className="hero-avatar">⚔️</div>
-                  <div className="hero-info">
-                    <div className="hero-name">{hero.name}</div>
-                    <div className="hero-level">Level {hero.level}</div>
-                    <div className="hero-mp">
-                      MP: {hero.movementPoints}/{hero.maxMovementPoints}
-                    </div>
+                  ×
+                </button>
+              </div>
+              
+              <div className="equipped-items">
+                <div className="equipment-slots">
+                  <div className="equipment-slot">
+                    <div className="slot-icon">⚔️</div>
+                    <div className="slot-label">Weapon</div>
+                    <div className="slot-item">Magic Sword</div>
+                  </div>
+                  <div className="equipment-slot">
+                    <div className="slot-icon">🛡️</div>
+                    <div className="slot-label">Armor</div>
+                    <div className="slot-item">Dragon Scale</div>
+                  </div>
+                  <div className="equipment-slot">
+                    <div className="slot-icon">💍</div>
+                    <div className="slot-label">Ring</div>
+                    <div className="slot-item">Power Ring</div>
+                  </div>
+                  <div className="equipment-slot">
+                    <div className="slot-icon">👑</div>
+                    <div className="slot-label">Helmet</div>
+                    <div className="slot-item">Crown of Wisdom</div>
                   </div>
                 </div>
-              ))}
+                
+                <div className="inventory-stats">
+                  <h4>📊 Bonuses</h4>
+                  <div className="bonus-item">+15 Attack</div>
+                  <div className="bonus-item">+12 Defense</div>
+                  <div className="bonus-item">+8 Spell Power</div>
+                  <div className="bonus-item">+200 Movement</div>
+                </div>
+              </div>
             </div>
-          </div>
+          )}
 
-          {/* Quick Actions */}
-          <div className="quick-actions">
-            <h3>Quick Actions</h3>
-            <div className="action-buttons">
-              <button 
-                className="action-btn"
-                onClick={() => setShowMagicInventory(true)}
-              >
-                <span className="action-icon">🎒</span>
-                <span className="action-label">Inventory</span>
-              </button>
-              <button 
-                className="action-btn"
-                onClick={() => handleCastleSelect('main-castle')}
-              >
-                <span className="action-icon">🏰</span>
-                <span className="action-label">Castle</span>
-              </button>
+          {rightPanelContent === 'castle' && (
+            <div className="panel-content castle-panel">
+              <div className="panel-header">
+                <h3>🏰 Your Castles</h3>
+                <button 
+                  className="close-panel-btn"
+                  onClick={() => setRightPanelContent('empty')}
+                >
+                  ×
+                </button>
+              </div>
+              
+              <div className="castles-list">
+                <div className="castle-item">
+                  <div className="castle-icon">🏰</div>
+                  <div className="castle-info">
+                    <div className="castle-name">Main Castle</div>
+                    <div className="castle-details">
+                      <span>📍 (2, 3)</span>
+                      <span>🏗️ 5 Buildings</span>
+                    </div>
+                  </div>
+                  <button className="castle-manage-btn">Manage</button>
+                </div>
+                
+                <div className="castle-construction">
+                  <h4>🔨 Available Buildings</h4>
+                  <div className="building-item">
+                    <span className="building-icon">🏬</span>
+                    <span className="building-name">Marketplace</span>
+                    <span className="building-cost">💰 500</span>
+                  </div>
+                  <div className="building-item">
+                    <span className="building-icon">🏭</span>
+                    <span className="building-name">Barracks</span>
+                    <span className="building-cost">💰 750</span>
+                  </div>
+                  <div className="building-item">
+                    <span className="building-icon">🗼</span>
+                    <span className="building-name">Mage Tower</span>
+                    <span className="building-cost">💰 1000</span>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
 
-      {/* Overlay Components */}
-      {showMagicInventory && (
-        <MagicInventory />
-      )}
-
-      {showHeroesPanel && currentPlayer && (
-        <div className="heroes-panel">
-          <div className="heroes-panel-header">
-            <h3 className="heroes-panel-title">⚔️ {t('myHeroes')}</h3>
-            <button 
-              className="close-panel-btn"
-              onClick={() => setShowHeroesPanel(false)}
-            >
-              ×
-            </button>
-          </div>
-          <div className="heroes-list">
-            {currentPlayer.heroes && currentPlayer.heroes.length > 0 ? (
-              currentPlayer.heroes.map(hero => (
-                <div 
-                  key={hero.id} 
-                  className={`hero-item ${selectedHeroId === hero.id ? 'selected' : ''}`}
-                  onClick={() => setSelectedHeroId(hero.id)}
-                >
-                  <div className="hero-avatar">
-                    {hero.name === 'Arthur' && '👑'}
-                    {hero.name === 'Merlin' && '🧙'}
-                    {hero.name === 'Lancelot' && '⚔️'}
-                    {hero.name.toLowerCase().includes('mage') && '🔮'}
-                    {hero.name.toLowerCase().includes('warrior') && '🛡️'}
-                    {hero.name.toLowerCase().includes('archer') && '🏹'}
-                    {!['Arthur', 'Merlin', 'Lancelot'].includes(hero.name) && 
-                     !hero.name.toLowerCase().includes('mage') && 
-                     !hero.name.toLowerCase().includes('warrior') && 
-                     !hero.name.toLowerCase().includes('archer') && '⚔️'}
-                  </div>
-                  <div className="hero-info">
-                    <div className="hero-name">{hero.name}</div>
-                    <div className="hero-level">Level {hero.level}</div>
-                    <div className="hero-position">
-                      📍 Position: ({hero.position.x}, {hero.position.y})
-                    </div>
-                    <div className="hero-mp">
-                      🏃 MP: {hero.movementPoints}/{hero.maxMovementPoints}
-                    </div>
-                    <div className="hero-status">
-                      {selectedHeroId === hero.id ? 
-                        '🎯 Active Hero' : 
-                        '💤 Click to select'}
-                    </div>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div className="no-heroes">
-                <div className="no-heroes-icon">😴</div>
-                <div className="no-heroes-text">No heroes available</div>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
-      {showCastleManagement && selectedCastleId && (
-        <CastleManagement 
-          castleId={selectedCastleId}
-          isVisible={showCastleManagement}
-          onClose={() => setShowCastleManagement(false)}
-        />
-      )}
+      {/* Turn End Button */}
+      <div className="game-footer">
+        <button 
+          className="end-turn-btn"
+          onClick={endTurn}
+        >
+          🔄 End Turn
+        </button>
+      </div>
     </div>
   );
 };
