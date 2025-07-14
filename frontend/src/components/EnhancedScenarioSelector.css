@@ -88,10 +88,11 @@
 
 .scenarios-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr) !important;
-  gap: 30px;
-  max-width: 1600px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  max-width: 1400px;
   width: 100%;
+  justify-items: center;
   /* Add scaling for small screens */
   transition: transform 0.2s;
 }
@@ -249,20 +250,34 @@ body, html, .enhanced-scenario-selector, .selector-main {
 }
 
 .scenario-title {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: bold;
-  margin: 0 0 15px 0;
+  margin: 0 0 12px 0;
   color: #ffd700;
   text-align: center;
+  line-height: 1.3;
+  word-wrap: break-word;
+  hyphens: auto;
+  min-height: 2.6rem; /* Reserve space for 2 lines */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .scenario-description {
-  font-size: 1rem;
+  font-size: 0.9rem;
   line-height: 1.4;
   margin: 0 0 15px 0;
   color: #e0e0e0;
   text-align: center;
   flex: 1;
+  word-wrap: break-word;
+  hyphens: auto;
+  min-height: 4.2rem; /* Reserve space for ~3 lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .scenario-meta-info {
@@ -270,24 +285,34 @@ body, html, .enhanced-scenario-selector, .selector-main {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
-  gap: 10px;
+  gap: 12px;
+  flex-wrap: wrap;
+  min-height: 32px;
 }
 
 .difficulty-badge {
-  padding: 4px 12px;
+  padding: 6px 14px;
   border-radius: 12px;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: bold;
   color: white;
   text-transform: uppercase;
+  white-space: nowrap;
+  min-width: 60px;
+  text-align: center;
+  flex-shrink: 0;
 }
 
 .scenario-time {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: #aaa;
   background: rgba(255, 255, 255, 0.1);
-  padding: 4px 8px;
+  padding: 6px 10px;
   border-radius: 8px;
+  white-space: nowrap;
+  min-width: 50px;
+  text-align: center;
+  flex-shrink: 0;
 }
 
 .scenario-features {
