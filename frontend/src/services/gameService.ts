@@ -99,41 +99,51 @@ export class GameService {
   }
 
   static async initializeGame(scenarioId: string): Promise<GameState> {
-    console.log(`Initializing game for scenario: ${scenarioId}`);
+    console.log(`%c🎮 [GameService] Initializing game for scenario: ${scenarioId}`, 'color: purple; font-weight: bold');
     
     try {
       let scenarioData: any;
       if (scenarioId === 'conquest-classic') {
+        console.log(`%c📡 [GameService] Calling createConquestClassicScenario()`, 'color: blue');
         scenarioData = await ApiService.createConquestClassicScenario();
       } else if (scenarioId === 'temporal-rift') {
+        console.log(`%c📡 [GameService] Calling createTemporalRiftScenario()`, 'color: blue');
         scenarioData = await ApiService.createTemporalRiftScenario();
       } else if (scenarioId === 'multiplayer-arena') {
         // For now, use conquest-classic as fallback for multiplayer-arena
+        console.log(`%c📡 [GameService] Using conquest-classic fallback for multiplayer-arena`, 'color: orange');
         scenarioData = await ApiService.createConquestClassicScenario();
         scenarioData.scenarioId = 'multiplayer-arena';
         scenarioData.name = 'Multiplayer Arena';
       } else if (scenarioId === 'epic-campaign') {
         // For now, use conquest-classic as fallback for epic-campaign
+        console.log(`%c📡 [GameService] Using conquest-classic fallback for epic-campaign`, 'color: orange');
         scenarioData = await ApiService.createConquestClassicScenario();
         scenarioData.scenarioId = 'epic-campaign';
         scenarioData.name = 'Epic Campaign';
       } else {
         // Default fallback - use conquest-classic for any unknown scenario
-        console.warn(`Unknown scenario ID: ${scenarioId}, falling back to conquest-classic`);
+        console.warn(`%c⚠️ [GameService] Unknown scenario ID: ${scenarioId}, falling back to conquest-classic`, 'color: orange');
         scenarioData = await ApiService.createConquestClassicScenario();
         scenarioData.scenarioId = scenarioId;
         scenarioData.name = `Scenario: ${scenarioId}`;
       }
       
+      console.log(`%c✅ [GameService] Backend response:`, 'color: green; font-weight: bold', scenarioData);
+      
       if (!scenarioData || !scenarioData.scenarioId) {
+        console.error(`%c💥 [GameService] Invalid scenario data:`, 'color: red; font-weight: bold', scenarioData);
         throw new Error('Failed to create game from the backend.');
       }
 
       // Transform scenario data to game data
+      console.log(`%c🔄 [GameService] Transforming scenario data to game data...`, 'color: blue');
       const gameData = this.transformScenarioToGame(scenarioData);
+      console.log(`%c✅ [GameService] Game data created:`, 'color: green; font-weight: bold', gameData);
 
       // Find the current player
       const currentPlayer = gameData.players.find(p => p.id === gameData.currentPlayerTurn);
+      console.log(`%c👤 [GameService] Current player:`, 'color: blue', currentPlayer);
 
       return {
         currentGame: gameData,
