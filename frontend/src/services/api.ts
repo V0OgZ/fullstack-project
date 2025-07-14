@@ -18,7 +18,17 @@ export class ApiService {
 
     try {
       console.log(`%c📡 Sending fetch request...`, 'color: orange');
-      const response = await fetch(url, config);
+      
+      // Add timeout to the fetch request
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+      
+      const response = await fetch(url, {
+        ...config,
+        signal: controller.signal
+      });
+      
+      clearTimeout(timeoutId);
       
       console.log(`%c📥 Response received:`, 'color: cyan');
       console.log(`%c   Status: ${response.status} ${response.statusText}`, 'color: cyan');
@@ -40,6 +50,11 @@ export class ApiService {
       console.error(`%c   URL: ${url}`, 'color: red');
       console.error(`%c   Method: ${options.method || 'GET'}`, 'color: red');
       console.error(`%c   Error:`, 'color: red', error);
+      
+      if (error instanceof Error && error.name === 'AbortError') {
+        throw new Error(`Request timeout for ${url}`);
+      }
+      
       throw error;
     }
   }

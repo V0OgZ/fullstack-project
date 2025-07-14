@@ -223,11 +223,16 @@ const EnhancedScenarioSelector: React.FC = () => {
                         className={`play-button ${!scenario.unlocked ? 'disabled' : ''}`}
                         onClick={(e) => {
                           console.log(`[SELECTOR] --- Play button clicked for scenario: ${scenario.id} ---`);
-                          if (!scenario.unlocked) {
-                            console.log(`[SELECTOR] Scenario is LOCKED. Preventing navigation.`);
-                            e.preventDefault();
-                          } else {
-                            console.log(`[SELECTOR] Scenario is UNLOCKED. Proceeding with navigation to /game/${scenario.id}`);
+                          console.log(`[SELECTOR] Button href: ${e.currentTarget.getAttribute('href')}`);
+                          try {
+                            if (!scenario.unlocked) {
+                              console.log(`[SELECTOR] Scenario is LOCKED. Preventing navigation.`);
+                              e.preventDefault();
+                            } else {
+                              console.log(`[SELECTOR] Scenario is UNLOCKED. Proceeding with navigation to /game/${scenario.id}`);
+                            }
+                          } catch (err) {
+                            console.error('[SELECTOR] Error in click handler:', err);
                           }
                         }}
                       >

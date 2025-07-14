@@ -17,7 +17,13 @@ public class GameService {
     private BuildingService buildingService;
     
     public Map<String, Object> getGame(String gameId) {
-        return games.getOrDefault(gameId, createNewGame(gameId));
+        Map<String, Object> game = games.get(gameId);
+        if (game == null) {
+            System.out.println("[DEBUG] Creating new game for ID: " + gameId);
+            game = createNewGame(gameId);
+            games.put(gameId, game);
+        }
+        return game;
     }
 
     public List<Map<String, Object>> getAvailableGames() {
@@ -384,33 +390,73 @@ public class GameService {
     // ======================
     
     public void endTurn(String gameId) {
-        // Process ZFC actions
-        processZFCActions(gameId);
-        
-        // Complete ready buildings
-        buildingService.checkAndCompleteReadyBuildings(gameId);
-        
-        // Apply daily bonuses from buildings
-        applyDailyBonuses(gameId);
-        
-        // Reset weekly growth if it's a new week
-        if (isNewWeek(gameId)) {
-            buildingService.resetWeeklyGrowth(gameId);
+        try {
+            System.out.println("[DEBUG] endTurn called for gameId: " + gameId);
+            // Process ZFC actions
+            processZFCActions(gameId);
+            System.out.println("[DEBUG] ZFC actions processed");
+            // Complete ready buildings
+            buildingService.checkAndCompleteReadyBuildings(gameId);
+            System.out.println("[DEBUG] Ready buildings checked");
+            // Apply daily bonuses from buildings
+            applyDailyBonuses(gameId);
+            System.out.println("[DEBUG] Daily bonuses applied");
+            // Reset weekly growth if it's a new week
+            if (isNewWeek(gameId)) {
+                buildingService.resetWeeklyGrowth(gameId);
+                System.out.println("[DEBUG] Weekly growth reset");
+            }
+        } catch (Exception e) {
+            System.err.println("[ERROR] Exception in endTurn for gameId: " + gameId);
+            e.printStackTrace();
+            throw new RuntimeException("Error in endTurn: " + e.getMessage(), e);
         }
     }
     
     private void applyDailyBonuses(String gameId) {
-        Map<String, Object> game = getGame(gameId);
-        List<Map<String, Object>> players = (List<Map<String, Object>>) game.get("players");
-        
-        for (Map<String, Object> player : players) {
-            String playerId = (String) player.get("id");
-            Map<String, Integer> bonuses = getCastleBonuses(gameId, playerId);
-            Map<String, Integer> resources = (Map<String, Integer>) player.get("resources");
+        try {
+            Map<String, Object> game = getGame(gameId);
+            if (game == null) {
+                System.out.println("[DEBUG] Game not found for ID: " + gameId);
+                return;
+            }
             
-            // Apply bonuses
-            resources.merge("gold", bonuses.getOrDefault("gold", 0), Integer::sum);
-            // Apply other resource bonuses here
+            List<Map<String, Object>> players = (List<Map<String, Object>>) game.get("players");
+            if (players == null) {
+                System.out.println("[DEBUG] No players found for game: " + gameId);
+                return;
+            }
+            
+            for (Map<String, Object> player : players) {
+                String playerId = (String) player.get("id");
+                if (playerId == null) continue;
+                
+                try {
+                    Map<String, Integer> bonuses = getCastleBonuses(gameId, playerId);
+                    @SuppressWarnings("unchecked")
+                    Map<String, Integer> resources = (Map<String, Integer>) player.get("resources");
+                    
+                    if (resources != null) {
+                        // Create a mutable copy of resources to avoid UnsupportedOperationException
+                        Map<String, Integer> mutableResources = new HashMap<>(resources);
+                        
+                        // Apply bonuses safely
+                        if (bonuses != null) {
+                            mutableResources.merge("gold", bonuses.getOrDefault("gold", 0), Integer::sum);
+                            // Apply other resource bonuses here
+                        }
+                        
+                        // Update the player's resources
+                        player.put("resources", mutableResources);
+                    }
+                } catch (Exception e) {
+                    System.err.println("[ERROR] Failed to apply bonuses for player " + playerId + ": " + e.getMessage());
+                    // Continue with other players
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("[ERROR] Failed to apply daily bonuses for game " + gameId + ": " + e.getMessage());
+            e.printStackTrace();
         }
     }
     

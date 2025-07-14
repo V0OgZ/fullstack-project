@@ -40,17 +40,22 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom",
+    "e2e": "playwright test",
     "eject": "react-scripts eject",
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run",
-    "test:e2e": "start-server-and-test start http://localhost:3000 cypress:run",
-    "test:e2e:open": "start-server-and-test start http://localhost:3000 cypress:open",
-    "cy:run:headed": "cypress run --headed",
-    "test:e2e:headed": "start-server-and-test start http://localhost:3000 cy:run:headed",
+    "test:playwright": "playwright test",
+    "test:playwright:headed": "playwright test --headed",
+    "test:playwright:ui": "playwright test --ui",
+    "test:playwright:debug": "playwright test --debug",
+    "test:full": "./test-runner.sh",
+    "test:scenario": "playwright test tests/e2e/scenario-load.spec.ts",
+    "test:solo": "playwright test tests/e2e/01-solo-gameplay.spec.ts",
+    "test:multiplayer": "playwright test tests/e2e/02-multiplayer-dual-session.spec.ts",
+    "test:zfc": "playwright test tests/e2e/03-zfc-shadow-actions.spec.ts",
+    "test:performance": "playwright test tests/e2e/04-performance-stress-test.spec.ts",
+    "test:screens": "playwright test tests/e2e/05-comprehensive-screen-tests.spec.ts",
     "test:backend": "wait-on http://localhost:8080/api/units/health && echo 'Backend is ready'",
-    "test:full": "npm run test:backend && npm run test:e2e",
-    "test:dev": "concurrently \"npm start\" \"npm run test:backend\" \"npm run cypress:open\""
+    "test:dev": "concurrently \"npm start\" \"npm run test:backend\" \"npm run test:playwright:ui\""
   },
   "eslintConfig": {
     "extends": [
@@ -80,6 +85,7 @@
     "cypress": "^14.5.1",
     "start-server-and-test": "^2.0.12",
     "typescript": "^4.9.5",
-    "wait-on": "^8.0.3"
+    "wait-on": "^8.0.3",
+    "@playwright/test": "^1.43.1"
   }
 }

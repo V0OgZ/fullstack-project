@@ -542,7 +542,6 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
   loadGame: async (scenarioId: string) => {
     console.log(`%c🎮 [GameStore] loadGame called with scenarioId: "${scenarioId}"`, 'color: purple; font-weight: bold');
-    
     get().resetGame(); // Reset state before loading
     const { setLoading, setError, setCurrentGame, setCurrentPlayer, setMap } = get();
     setLoading(true);
@@ -550,16 +549,13 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
     try {
       console.log(`%c📡 [GameStore] About to call API for scenario: ${scenarioId}`, 'color: blue');
-      
       // Use GameService to initialize the game
       const gameState = await GameService.initializeGame(scenarioId);
-      
-      console.log(`%c✅ [GameStore] Game state created:`, 'color: green', gameState);
-      
+      console.log('%c[DEBUG] Backend response from initializeGame:', 'color: orange; font-weight: bold', gameState);
       // Set the game state in the store
       if (gameState.currentGame) {
         setCurrentGame(gameState.currentGame);
-        
+        console.log('%c[DEBUG] setCurrentGame:', 'color: orange', gameState.currentGame);
         // Convert tiles to map format
         if (gameState.currentGame.map && gameState.currentGame.map.tiles) {
           const mapData = get().convertTilesToMap(
@@ -568,20 +564,31 @@ export const useGameStore = create<GameStore>((set, get) => ({
             gameState.currentGame.map.height
           );
           setMap(mapData);
+          console.log('%c[DEBUG] setMap:', 'color: orange', mapData);
+        } else {
+          console.warn('[DEBUG] No map or tiles in currentGame!');
         }
+      } else {
+        console.warn('[DEBUG] No currentGame in gameState!');
       }
-      
       if (gameState.currentPlayer) {
         setCurrentPlayer(gameState.currentPlayer);
+        console.log('%c[DEBUG] setCurrentPlayer:', 'color: orange', gameState.currentPlayer);
+      } else {
+        console.warn('[DEBUG] No currentPlayer in gameState!');
       }
-      
+      // Print final state
+      const state = get();
+      console.log('%c[DEBUG] Final store state after loadGame:', 'color: orange; font-weight: bold', {
+        currentGame: state.currentGame,
+        currentPlayer: state.currentPlayer,
+        map: state.map
+      });
       console.log(`%c🎉 [GameStore] loadGame completed successfully!`, 'color: green; font-weight: bold');
-
     } catch (error) {
       console.error(`%c💥 [GameStore] loadGame failed:`, 'color: red; font-weight: bold');
       console.error(`%c   Scenario ID: ${scenarioId}`, 'color: red');
       console.error(`%c   Error:`, 'color: red', error);
-      
       setError(error instanceof Error ? error.message : 'Failed to load game');
     } finally {
       setLoading(false);

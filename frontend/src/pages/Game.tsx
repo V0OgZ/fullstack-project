@@ -13,12 +13,16 @@ const Game: React.FC = () => {
 
   useEffect(() => {
     console.log(`[GAME PAGE] --- Component mounted for scenarioId: ${scenarioId} ---`);
+    console.log(`[GAME PAGE] Current URL: ${window.location.href}`);
+    console.log(`[GAME PAGE] Current pathname: ${window.location.pathname}`);
+    
     // If we have a scenarioId and no game loaded, load it.
     if (scenarioId && !currentGame) {
       console.log(`[GAME PAGE] Current game not found. Calling loadGame with scenarioId: ${scenarioId}`);
       loadGame(scenarioId);
     } else {
       console.log(`[GAME PAGE] Game already loaded or no scenarioId provided.`);
+      console.log(`[GAME PAGE] scenarioId: ${scenarioId}, currentGame: ${currentGame ? currentGame.id : 'null'}`);
     }
   }, [scenarioId, currentGame, loadGame]);
 
