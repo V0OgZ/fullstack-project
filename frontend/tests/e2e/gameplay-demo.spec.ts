@@ -121,7 +121,7 @@ test.describe('🎮 Heroes of Time - Gameplay Demo', () => {
      // 7. Sélection d'un héros
      await showTooltip('🦸 Sélection de votre héros principal<br/>Ce brave guerrier mènera vos troupes !', 'center', 1500);
     console.log('🦸 7. Sélection d\'un héros...');
-    const hero = page.locator('.hero, [data-testid="hero"], .hero-card').first();
+    const hero = page.locator('.hero-portrait-img, .hero-emoji-fallback, .hero-card, [data-testid="hero"]').first();
     if (await hero.isVisible()) {
       // Surligner le héros
       await page.evaluate(() => {
@@ -142,7 +142,7 @@ test.describe('🎮 Heroes of Time - Gameplay Demo', () => {
          // 8. Déplacement sur la carte
      await showTooltip('🗺️ Déplacement sur la carte du royaume<br/>Explorons les terres environnantes !', 'center', 1500);
      console.log('🗺️ 8. Tentative de déplacement sur la carte...');
-     const mapTile = page.locator('.hex-tile, .map-tile, .tile, .game-map div').nth(5);
+     const mapTile = page.locator('canvas, .map-tile, .hex-tile').first();
      if (await mapTile.isVisible()) {
        await mapTile.click();
        await page.waitForTimeout(1000);
@@ -154,7 +154,7 @@ test.describe('🎮 Heroes of Time - Gameplay Demo', () => {
      // 9. Fin du tour
      await showTooltip('⏭️ Fin du tour de jeu<br/>Passons au tour suivant pour voir l\'évolution !', 'center', 1500);
      console.log('⏭️ 9. Recherche du bouton pour finir le tour...');
-     const nextTurnButton = page.locator('button:has-text("Next Turn"), button:has-text("Fin du tour"), button:has-text("End Turn"), .next-turn-btn').first();
+     const nextTurnButton = page.locator('button:has-text("End Turn"), .end-turn-btn').first();
      if (await nextTurnButton.isVisible({ timeout: 3000 })) {
        // Surligner le bouton
        await page.evaluate(() => {

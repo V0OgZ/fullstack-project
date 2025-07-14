@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState, useCallback, useMemo } from 'react'
 import { useGameStore } from '../store/useGameStore';
 import { Position, Tile, Hero } from '../types/game';
 import { useTranslation } from '../i18n';
+import { HERO_ASSETS } from '../constants/gameAssets';
 import './ModernGameRenderer.css';
 
 interface ModernGameRendererProps {
@@ -29,6 +30,77 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height, 
   
   const [animatedElements, setAnimatedElements] = useState<AnimatedElement[]>([]);
   const [hoveredTile, setHoveredTile] = useState<Position | null>(null);
+  const [heroImages, setHeroImages] = useState<Map<string, HTMLImageElement>>(new Map());
+
+  // Fonction pour obtenir l'image du héros
+  const getHeroImage = useCallback((heroName: string): string => {
+    const name = heroName.toLowerCase();
+    if (name.includes('arthur') || name.includes('knight')) {
+      return HERO_ASSETS.KNIGHT;
+    } else if (name.includes('merlin') || name.includes('mage') || name.includes('wizard')) {
+      return HERO_ASSETS.MAGE;
+    } else if (name.includes('lancelot') || name.includes('warrior')) {
+      return HERO_ASSETS.WARRIOR;
+    } else if (name.includes('archer') || name.includes('bow')) {
+      return HERO_ASSETS.ARCHER;
+    } else if (name.includes('paladin')) {
+      return HERO_ASSETS.PALADIN;
+    } else if (name.includes('necromancer')) {
+      return HERO_ASSETS.NECROMANCER;
+    } else {
+      return HERO_ASSETS.WARRIOR;
+    }
+  }, []);
+
+  // Fonction pour précharger les images des héros
+  const preloadHeroImage = useCallback((heroName: string): Promise<HTMLImageElement> => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(new Error(`Failed to load hero image: ${heroName}`));
+      img.src = getHeroImage(heroName);
+    });
+  }, [getHeroImage]);
+
+  // Précharger les images des héros visibles
+  useEffect(() => {
+    const loadHeroImages = async () => {
+      const { currentGame, currentPlayer } = useGameStore.getState();
+      const newHeroImages = new Map<string, HTMLImageElement>();
+      
+      if (currentPlayer?.heroes) {
+        for (const hero of currentPlayer.heroes) {
+          try {
+            const img = await preloadHeroImage(hero.name);
+            newHeroImages.set(hero.name, img);
+          } catch (error) {
+            console.warn(`Failed to load image for hero ${hero.name}:`, error);
+          }
+        }
+      }
+      
+      if (currentGame?.players) {
+        for (const player of currentGame.players) {
+          if (player.heroes) {
+            for (const hero of player.heroes) {
+              if (!newHeroImages.has(hero.name)) {
+                try {
+                  const img = await preloadHeroImage(hero.name);
+                  newHeroImages.set(hero.name, img);
+                } catch (error) {
+                  console.warn(`Failed to load image for hero ${hero.name}:`, error);
+                }
+              }
+            }
+          }
+        }
+      }
+      
+      setHeroImages(newHeroImages);
+    };
+    
+    loadHeroImages();
+  }, [preloadHeroImage]);
 
   // Render configuration
   const config = useMemo(() => ({
@@ -225,18 +297,29 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height, 
     ctx.lineWidth = 2;
     ctx.stroke();
 
-    // Symbole héros avec formes géométriques
-    ctx.fillStyle = '#8B4513';
-    ctx.strokeStyle = 'white';
-    ctx.lineWidth = 1;
-    
-    // Épée stylisée
-    ctx.beginPath();
-    ctx.moveTo(x, y - 8);
-    ctx.lineTo(x, y + 8);
-    ctx.moveTo(x - 4, y - 4);
-    ctx.lineTo(x + 4, y - 4);
-    ctx.stroke();
+    // Dessiner l'image du héros si disponible
+    const heroImage = heroImages.get(hero.name);
+    if (heroImage) {
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(x, y, size - 2, 0, Math.PI * 2);
+      ctx.clip();
+      ctx.drawImage(heroImage, x - size + 2, y - size + 2, (size - 2) * 2, (size - 2) * 2);
+      ctx.restore();
+    } else {
+      // Fallback avec forme géométrique
+      ctx.fillStyle = '#8B4513';
+      ctx.strokeStyle = 'white';
+      ctx.lineWidth = 1;
+      
+      // Épée stylisée
+      ctx.beginPath();
+      ctx.moveTo(x, y - 8);
+      ctx.lineTo(x, y + 8);
+      ctx.moveTo(x - 4, y - 4);
+      ctx.lineTo(x + 4, y - 4);
+      ctx.stroke();
+    }
 
     // Niveau du héros
     ctx.beginPath();
@@ -271,7 +354,7 @@ const ModernGameRenderer: React.FC<ModernGameRendererProps> = ({ width, height, 
     
     ctx.fillStyle = mpRatio > 0.5 ? '#4CAF50' : mpRatio > 0.2 ? '#FF9800' : '#F44336';
     ctx.fillRect(x - mpBarWidth/2, y + 35, mpBarWidth * mpRatio, mpBarHeight);
-  }, []);
+  }, [heroImages]);
 
   // Render hexagonal tile
   const drawHexTile = useCallback((

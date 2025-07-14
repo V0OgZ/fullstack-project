@@ -307,7 +307,7 @@ test.describe('🎮 Heroes of Time - Démo Multijoueur', () => {
     // Joueur 1 sélectionne un héros
     await showDemoTooltip(player1, '🦸 Sélection d\'un héros pour jouer', 'JOUEUR 1', 1500);
     
-    const hero1 = player1.locator('.hero, [data-testid="hero"], .hero-card').first();
+    const hero1 = player1.locator('.hero-portrait-img, .hero-emoji-fallback, .hero-card, [data-testid="hero"]').first();
     if (await hero1.isVisible({ timeout: 5000 })) {
       await hero1.click();
       await player1.waitForTimeout(1000);
@@ -316,7 +316,7 @@ test.describe('🎮 Heroes of Time - Démo Multijoueur', () => {
     // Joueur 1 fait un mouvement
     await showDemoTooltip(player1, '🗺️ Déplacement du héros sur la carte', 'JOUEUR 1', 1500);
     
-    const mapTile1 = player1.locator('.hex-tile, .map-tile, .tile').nth(3);
+    const mapTile1 = player1.locator('canvas, .map-tile, .hex-tile').first();
     if (await mapTile1.isVisible({ timeout: 3000 })) {
       await mapTile1.click();
       await player1.waitForTimeout(1000);
@@ -325,7 +325,7 @@ test.describe('🎮 Heroes of Time - Démo Multijoueur', () => {
     // Joueur 1 termine son tour
     await showDemoTooltip(player1, '⏭️ Fin du tour - Passage au joueur 2', 'JOUEUR 1', 1500);
     
-    const endTurnButton1 = player1.locator('button:has-text("End Turn"), button:has-text("Fin"), button:has-text("Next")').first();
+    const endTurnButton1 = player1.locator('button:has-text("End Turn"), .end-turn-btn').first();
     if (await endTurnButton1.isVisible({ timeout: 3000 })) {
       await endTurnButton1.click();
     }
@@ -338,13 +338,13 @@ test.describe('🎮 Heroes of Time - Démo Multijoueur', () => {
     // 11. Tour du joueur 2
     await showDemoTooltip(player2, '🎯 C\'est maintenant votre tour !<br/>À vous de jouer', 'JOUEUR 2', 2000);
     
-    const hero2 = player2.locator('.hero, [data-testid="hero"], .hero-card').first();
+    const hero2 = player2.locator('.hero-portrait-img, .hero-emoji-fallback, .hero-card, [data-testid="hero"]').first();
     if (await hero2.isVisible({ timeout: 5000 })) {
       await hero2.click();
       await player2.waitForTimeout(1000);
     }
     
-    const mapTile2 = player2.locator('.hex-tile, .map-tile, .tile').nth(5);
+    const mapTile2 = player2.locator('canvas, .map-tile, .hex-tile').first();
     if (await mapTile2.isVisible({ timeout: 3000 })) {
       await mapTile2.click();
       await player2.waitForTimeout(1000);
