@@ -53,7 +53,7 @@ test.describe('🎮 Heroes of Time - Démo Multijoueur', () => {
   const showDemoTooltip = async (page: Page, text: string, playerName: string, duration: number = 2000) => {
     await page.evaluate(({ text, playerName, duration }) => {
       // Supprimer l'ancien tooltip s'il existe pour ce joueur
-      const oldTooltip = document.querySelector(`.demo-tooltip-${playerName.toLowerCase()}`);
+      const oldTooltip = document.querySelector(`.demo-tooltip-${playerName.toLowerCase().replace(/\s+/g, '-')}`);
       if (oldTooltip) {
         const contentDiv = oldTooltip.querySelector('.tooltip-content');
         if (contentDiv) {
@@ -64,7 +64,7 @@ test.describe('🎮 Heroes of Time - Démo Multijoueur', () => {
       
       // Créer le nouveau tooltip
       const tooltip = document.createElement('div');
-      tooltip.className = `demo-tooltip-${playerName.toLowerCase()}`;
+      tooltip.className = `demo-tooltip-${playerName.toLowerCase().replace(/\s+/g, '-')}`;
       tooltip.innerHTML = `
         <div style="
           position: fixed;

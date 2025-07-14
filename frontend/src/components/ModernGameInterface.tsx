@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { modernTheme } from '../styles/theme';
@@ -232,6 +232,18 @@ const ModernGameInterface: React.FC = () => {
     endTurn,
     nextPlayer 
   } = useGameStore();
+
+  // Mettre à jour le titre de la page
+  useEffect(() => {
+    if (currentGame?.id) {
+      const mapName = currentGame.id.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
+      document.title = `Heroes of Time - ${mapName}`;
+    }
+    
+    return () => {
+      document.title = 'Heroes of Time';
+    };
+  }, [currentGame?.id]);
 
   if (!currentGame || !currentPlayer) {
     return (

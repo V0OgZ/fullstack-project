@@ -36,6 +36,15 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
   // Use the session name translator
   const { translateSessionName } = useSessionNameTranslator();
 
+  // Mettre à jour le titre de la page pour le mode multijoueur
+  useEffect(() => {
+    document.title = 'Heroes of Time - Multiplayer';
+    
+    return () => {
+      document.title = 'Heroes of Time';
+    };
+  }, []);
+
   // Generate a new session name using game resources
   const generateNewSessionName = () => {
     try {
@@ -660,6 +669,9 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
                   👥 Players: {session.currentPlayers}/{session.maxPlayers} | 
                   🎯 Mode: {session.gameMode} | 
                   📊 Status: {session.status}
+                </div>
+                <div style={{ color: '#87CEEB', fontSize: '11px', marginTop: '2px', fontWeight: '500' }}>
+                  🗺️ Map: {session.gameMode.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
                 </div>
                 <div style={{ color: '#666', fontSize: '10px', marginTop: '2px' }}>
                   ID: {session.sessionId}

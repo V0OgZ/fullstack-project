@@ -234,7 +234,7 @@ const SimpleGameInterface: React.FC<SimpleGameInterfaceProps> = ({ scenarioId = 
             margin: 0, 
             color: '#00d4ff' 
           }}>
-            ⚔️ Heroes of Time
+            ⚔️ Legends of Conquest
           </h1>
           <div style={{ 
             display: 'flex', 
@@ -447,7 +447,7 @@ const SimpleGameInterface: React.FC<SimpleGameInterfaceProps> = ({ scenarioId = 
                     alignItems: 'center',
                     gap: '8px'
                   }}>
-                    ⚔️ Your Heroes ({mockHeroes.length})
+                    ⚔️ Heroes of Time ({mockHeroes.length})
                   </h3>
                   {mockHeroes.map(hero => (
                     <div key={hero.id} style={{
