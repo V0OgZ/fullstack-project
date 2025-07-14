@@ -82,7 +82,7 @@ const CastleManagement: React.FC<CastleManagementProps> = ({ castleId, isVisible
     );
   });
 
-  const handleBuildingConstruct = (building: Building) => {
+  const handleBuildingConstruct = async (building: Building) => {
     if (!castle || !currentPlayer) return;
     
     const cost = building.cost;
@@ -92,33 +92,81 @@ const CastleManagement: React.FC<CastleManagementProps> = ({ castleId, isVisible
       (currentPlayer.resources.stone || 0) >= (cost.stone || 0);
     
     if (canAfford) {
-      // In real app, this would call the backend
-      console.log(`Constructing ${building.name} for ${cost.gold || 0} gold`);
-      // Update local state for demo
-      setCastle(prev => prev ? {
-        ...prev,
-        buildings: {
-          ...prev.buildings,
-          [building.id]: (prev.buildings[building.id] || 0) + 1
+      try {
+        // Call backend API for construction
+        const response = await fetch('/api/games/demo-game/buildings/construct', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            playerId: currentPlayer.id,
+            castleId: castle.id,
+            buildingType: building.id,
+            positionX: Math.floor(Math.random() * 10) + 1, // Random position for demo
+            positionY: Math.floor(Math.random() * 10) + 1,
+          }),
+        });
+        
+        if (response.ok) {
+          const result = await response.json();
+          console.log('Construction started:', result);
+          
+          // Update local state for immediate feedback
+          setCastle(prev => prev ? {
+            ...prev,
+            buildings: {
+              ...prev.buildings,
+              [building.id]: (prev.buildings[building.id] || 0) + 1
+            }
+          } : null);
+        } else {
+          const error = await response.json();
+          console.error('Construction failed:', error.message);
         }
-      } : null);
+      } catch (error) {
+        console.error('Error constructing building:', error);
+      }
     }
   };
 
-  const handleBuildingUpgrade = (building: Building) => {
+  const handleBuildingUpgrade = async (building: Building) => {
     if (!castle) return;
     
     const currentLevel = castle.buildings[building.id] || 0;
     
-    console.log(`Upgrading ${building.name} to level ${currentLevel + 1}`);
-    // Update local state for demo
-    setCastle(prev => prev ? {
-      ...prev,
-      buildings: {
-        ...prev.buildings,
-        [building.id]: currentLevel + 1
+    try {
+      // Call backend API for upgrade
+      const response = await fetch(`/api/games/demo-game/buildings/${building.id}/upgrade`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          playerId: currentPlayer?.id,
+          targetLevel: currentLevel + 1,
+        }),
+      });
+      
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Upgrade started:', result);
+        
+        // Update local state for immediate feedback
+        setCastle(prev => prev ? {
+          ...prev,
+          buildings: {
+            ...prev.buildings,
+            [building.id]: currentLevel + 1
+          }
+        } : null);
+      } else {
+        const error = await response.json();
+        console.error('Upgrade failed:', error.message);
       }
-    } : null);
+    } catch (error) {
+      console.error('Error upgrading building:', error);
+    }
   };
 
   if (!isVisible || !castle) return null;
