@@ -27,10 +27,10 @@ test.describe('🎮 Heroes of Time - Gameplay Demo', () => {
     test.setTimeout(120000); // 2 minutes pour la démo complète
     console.log('🎬 === DÉBUT DE LA DÉMO GAMEPLAY AVEC TOOLTIPS ===');
     
-    // Fonction pour ajouter un tooltip visuel
+    // Fonction pour ajouter un tooltip visuel avec fade smooth
     const showTooltip = async (text: string, position: string = 'center', duration: number = 3000) => {
       await page.evaluate(({ text, position, duration }) => {
-        // Supprimer immédiatement l'ancien tooltip s'il existe
+        // Supprimer l'ancien tooltip s'il existe
         const oldTooltip = document.querySelector('.demo-tooltip');
         if (oldTooltip) {
           oldTooltip.remove();
@@ -76,7 +76,7 @@ test.describe('🎮 Heroes of Time - Gameplay Demo', () => {
         
         document.body.appendChild(tooltip);
         
-        // Supprimer après la durée spécifiée (simple et rapide)
+        // Supprimer après la durée spécifiée
         setTimeout(() => {
           if (tooltip.parentNode) {
             tooltip.remove();
@@ -84,8 +84,8 @@ test.describe('🎮 Heroes of Time - Gameplay Demo', () => {
         }, duration);
       }, { text, position, duration });
       
-      // Attendre moins longtemps pour fluidité
-      await page.waitForTimeout(Math.max(500, duration - 500));
+      // Attendre seulement la moitié de la durée pour être plus rapide
+      await page.waitForTimeout(Math.min(duration * 0.7, 2000));
     };
     
          // 1. Page principale

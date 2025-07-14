@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from '../i18n';
 import { useGameStore } from '../store/useGameStore';
 import ModernGameRenderer from './ModernGameRenderer';
@@ -16,9 +16,23 @@ const SimpleModernInterface: React.FC = () => {
   const { 
     currentGame, 
     currentPlayer, 
+    isLoading, 
+    error,
     endTurn,
-    nextPlayer 
+    nextPlayer
   } = useGameStore();
+
+  // Mettre à jour le titre de la page
+  useEffect(() => {
+    if (currentGame?.id) {
+      const mapName = currentGame.id.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
+      document.title = `Heroes of Time - ${mapName}`;
+    }
+    
+    return () => {
+      document.title = 'Heroes of Time';
+    };
+  }, [currentGame?.id]);
 
   if (!currentGame || !currentPlayer) {
     return (

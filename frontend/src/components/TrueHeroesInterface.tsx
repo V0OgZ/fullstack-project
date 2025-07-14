@@ -80,6 +80,19 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
 
   const selectedHero = currentPlayer?.heroes?.find(hero => hero.id === selectedHeroId);
 
+  // Mettre à jour le titre de la page avec le nom de la map
+  useEffect(() => {
+    if (scenarioId) {
+      const mapName = scenarioId.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
+      document.title = `Heroes of Time - ${mapName}`;
+    }
+    
+    // Restaurer le titre original quand on quitte le composant
+    return () => {
+      document.title = 'Heroes of Time';
+    };
+  }, [scenarioId]);
+
   // Fonction pour obtenir l'image du héros
   const getHeroImage = (heroName: string): string => {
     const name = heroName.toLowerCase();
@@ -157,6 +170,9 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
           <div className="game-title">
             <h1>Heroes of Time</h1>
             <span className="scenario-badge">{scenarioType}</span>
+            {scenarioId && (
+              <span className="map-name">🗺️ {scenarioId.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}</span>
+            )}
           </div>
           <div className="player-info">
             <span className="player-name">{currentPlayer.username}</span>
