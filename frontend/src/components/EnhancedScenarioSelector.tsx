@@ -44,10 +44,7 @@ const EnhancedScenarioSelector: React.FC = () => {
       setLoading(true);
       setError(null);
       
-      // Initialize default scenarios first
-      await ApiService.initializeDefaultScenarios();
-      
-      // Then load all scenarios from backend
+      // Load all scenarios from backend
       const backendScenarios = await ApiService.getAllScenarios();
       
       // Convert backend scenarios to EnhancedScenarioSelector format
