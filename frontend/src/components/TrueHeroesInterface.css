@@ -127,52 +127,79 @@
   justify-content: center;
   gap: 0;
   padding: 12px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  border-radius: 12px;
   color: #ffffff;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   width: 50px;
   height: 50px;
+  position: relative;
+  overflow: hidden;
+}
+
+.control-btn::before, .end-turn-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  border-radius: 12px;
 }
 
 .end-turn-btn {
-  background: linear-gradient(135deg, #4CAF50, #45a049);
-  border: 2px solid #4CAF50;
-  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.1));
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.15);
+}
+
+.end-turn-btn::before {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 215, 0, 0.1));
+}
+
+.control-btn:hover:not(.disabled) {
+  background: rgba(255, 215, 0, 0.15);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(255, 215, 0, 0.2);
+}
+
+.control-btn:hover:not(.disabled)::before {
+  opacity: 1;
 }
 
 .end-turn-btn:hover {
-  background: linear-gradient(135deg, #45a049, #4CAF50);
-  border-color: #45a049;
-  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.5);
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 215, 0, 0.15));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(255, 215, 0, 0.3);
 }
 
-.control-btn:hover:not(.disabled), .end-turn-btn:hover {
-  background: rgba(255, 215, 0, 0.2);
-  border-color: rgba(255, 215, 0, 0.5);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+.end-turn-btn:hover::before {
+  opacity: 1;
 }
 
 .control-btn.active {
-  background: rgba(255, 215, 0, 0.3);
-  border-color: rgba(255, 215, 0, 0.7);
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+  background: rgba(255, 215, 0, 0.25);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}
+
+.control-btn.active::before {
+  opacity: 1;
 }
 
 .control-btn.disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
-  background: rgba(128, 128, 128, 0.3);
-  color: #777;
-  border: 1px solid rgba(128, 128, 128, 0.2);
+  background: rgba(128, 128, 128, 0.1);
+  color: #666;
 }
 
 .control-btn.disabled:hover {
-  background: rgba(128, 128, 128, 0.3);
-  color: #777;
+  background: rgba(128, 128, 128, 0.1);
+  color: #666;
   transform: none;
   box-shadow: none;
 }

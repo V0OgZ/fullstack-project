@@ -15,33 +15,28 @@
 }
 
 .tile-tooltip {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: absolute;
   pointer-events: none;
   z-index: 1000;
-  opacity: 0.8;
-  transition: opacity 0.3s ease;
+  transform: translate(-50%, -100%);
+  margin-top: -10px;
 }
 
 .tooltip-content {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.9);
   color: #FFD700;
-  padding: 12px 16px;
-  border-radius: 8px;
-  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
   font-family: 'Cinzel', serif;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-  border: 2px solid rgba(255, 215, 0, 0.5);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
   white-space: nowrap;
-  text-align: center;
-  min-width: 200px;
   
-  /* Suppression de l'animation qui cause le vertige */
-  animation: none;
+  /* Animation d'apparition */
+  animation: tooltipFadeIn 0.2s ease-out;
 }
 
 @keyframes tooltipFadeIn {
@@ -85,7 +80,8 @@
   }
   
   .tooltip-content {
-    font-size: 10px;
-    padding: 6px 8px;
+    font-size: 14px;
+    padding: 12px 16px;
+    min-width: 200px;
   }
 } 

@@ -197,19 +197,17 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
             </button>
 
             <button 
-              className="control-btn disabled"
-              disabled
-              title="AI (coming soon)"
-            >
-              <span className="btn-icon">🤖</span>
-            </button>
-
-            <button 
               className="end-turn-btn"
-              onClick={endTurn}
+              onClick={() => {
+                try {
+                  endTurn();
+                } catch (error) {
+                  console.error('Error ending turn:', error);
+                }
+              }}
               title="End Turn"
             >
-              <span className="btn-icon">✅</span>
+              <span className="btn-icon">🌟</span>
             </button>
           </div>
         </div>
