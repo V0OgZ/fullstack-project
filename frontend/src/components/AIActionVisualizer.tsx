@@ -97,9 +97,10 @@ const AIActionVisualizer: React.FC<AIActionVisualizerProps> = ({
     if (!isVisible || !autoRefresh) return;
     
     fetchAIData();
-    const interval = setInterval(fetchAIData, 3000); // Refresh every 3 seconds
+    // DISABLED: Too many requests causing backend to crash
+    // const interval = setInterval(fetchAIData, 3000); // Refresh every 3 seconds
     
-    return () => clearInterval(interval);
+    // return () => clearInterval(interval);
   }, [isVisible, autoRefresh, fetchAIData]);
 
   // Initial load

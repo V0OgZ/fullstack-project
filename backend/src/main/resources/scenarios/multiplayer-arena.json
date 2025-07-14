@@ -1,7 +1,7 @@
 {
   "scenarioId": "multiplayer-arena",
-  "name": "Multiplayer Arena",
-  "description": "A fast-paced multiplayer battle where players compete in a smaller arena for quick matches.",
+  "name": "scenarios.multiplayer-arena.name",
+  "description": "scenarios.multiplayer-arena.description",
   "difficulty": "normal",
   "maxPlayers": 4,
   "recommendedPlayers": 4,
@@ -11,16 +11,16 @@
   "turnLimit": 50,
   "timeLimit": 60,
   "victoryCondition": "elimination",
-  "victoryRequirement": "Be the last player standing",
-  "defeatCondition": "All heroes eliminated",
+  "victoryRequirement": "victory.multiplayer-arena",
+  "defeatCondition": "defeat.multiplayer-arena",
   "isActive": true,
   "isCampaign": false,
   "objectives": [
     {
       "objectiveId": "obj1",
       "objectiveType": "eliminate",
-      "objectiveTitle": "Last Player Standing",
-      "objectiveDescription": "Eliminate all other players",
+      "objectiveTitle": "objectives.multiplayer-arena.obj1.title",
+      "objectiveDescription": "objectives.multiplayer-arena.obj1.description",
       "targetValue": 3,
       "isRequired": true
     }
@@ -31,43 +31,37 @@
       "positionX": 3,
       "positionY": 3,
       "castleType": "castle",
-      "startingHero": "Arthur",
-      "handicap": 0
+      "startingHero": "Arthur"
     },
     {
       "playerId": "player2",
       "positionX": 17,
       "positionY": 3,
       "castleType": "rampart",
-      "startingHero": "Elara",
-      "handicap": 0
+      "startingHero": "Elara"
     },
     {
       "playerId": "player3",
       "positionX": 3,
       "positionY": 17,
       "castleType": "tower",
-      "startingHero": "Zoltan",
-      "handicap": 0
+      "startingHero": "Zoltan"
     },
     {
       "playerId": "player4",
       "positionX": 17,
       "positionY": 17,
       "castleType": "inferno",
-      "startingHero": "Dagon",
-      "handicap": 0
+      "startingHero": "Dagon"
     }
   ],
   "events": [
     {
       "eventId": "event1",
       "eventType": "timed",
-      "eventTitle": "Resource Boost",
-      "eventDescription": "All players receive bonus resources",
-      "eventEffect": "{\"effect\": \"resource_boost\", \"gold\": 5000, \"turn\": 10}",
-      "isTriggered": false,
-      "isRepeatable": false
+      "eventTitle": "events.multiplayer-arena.event1.title",
+      "eventDescription": "events.multiplayer-arena.event1.description",
+      "eventEffect": "{\"effect\": \"resource_boost\", \"gold\": 5000, \"turn\": 10}"
     }
   ]
 } 

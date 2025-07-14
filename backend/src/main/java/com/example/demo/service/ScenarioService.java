@@ -117,35 +117,35 @@ public class ScenarioService {
             return existing.get();
         }
         
-        Scenario scenario = new Scenario("temporal-rift", "The Temporal Rift", 
-                                       "A mysterious rift in time threatens to tear reality apart. Heroes must navigate through temporal zones to restore balance.",
+        Scenario scenario = new Scenario("temporal-rift", "temporal-rift.name", 
+                                       "temporal-rift.description",
                                        "hard", 4, 25, 25, "custom");
         
         scenario.setTurnLimit(100);
         scenario.setTimeLimit(180); // 3 hours
-        scenario.setVictoryRequirement("Control the Temporal Nexus and close 3 time rifts");
-        scenario.setDefeatCondition("All heroes are lost or time runs out");
+        scenario.setVictoryRequirement("victory.temporal-rift");
+        scenario.setDefeatCondition("defeat.temporal-rift");
         
         // Add objectives
-        scenario.addObjective(new Scenario.ScenarioObjective("obj1", "capture", "Control the Temporal Nexus", 
-                                                           "Capture and hold the central Temporal Nexus", 1));
-        scenario.addObjective(new Scenario.ScenarioObjective("obj2", "collect", "Close Time Rifts", 
-                                                           "Find and close 3 unstable time rifts", 3));
-        scenario.addObjective(new Scenario.ScenarioObjective("obj3", "eliminate", "Defeat the Temporal Guardian", 
-                                                           "Eliminate the powerful Temporal Guardian", 1));
+        scenario.addObjective(new Scenario.ScenarioObjective("obj1", "capture", "objectives.temporal-rift.obj1.title", 
+                                                           "objectives.temporal-rift.obj1.description", 1));
+        scenario.addObjective(new Scenario.ScenarioObjective("obj2", "collect", "objectives.temporal-rift.obj2.title", 
+                                                           "objectives.temporal-rift.obj2.description", 3));
+        scenario.addObjective(new Scenario.ScenarioObjective("obj3", "eliminate", "objectives.temporal-rift.obj3.title", 
+                                                           "objectives.temporal-rift.obj3.description", 1));
         
-        // Add starting positions
+        // Add starting pos
         scenario.addStartingPosition(new Scenario.StartingPosition("player1", 2, 2, "castle", "Arthur"));
         scenario.addStartingPosition(new Scenario.StartingPosition("player2", 22, 2, "rampart", "Elara"));
         scenario.addStartingPosition(new Scenario.StartingPosition("player3", 2, 22, "tower", "Zoltan"));
         scenario.addStartingPosition(new Scenario.StartingPosition("player4", 22, 22, "inferno", "Dagon"));
         
         // Add timed events
-        scenario.addEvent(new Scenario.ScenarioEvent("event1", "timed", "Temporal Storm", 
-                                                   "A temporal storm sweeps across the land, affecting all units", 
+        scenario.addEvent(new Scenario.ScenarioEvent("event1", "timed", "events.temporal-rift.event1.title", 
+                                                   "events.temporal-rift.event1.description", 
                                                    "{\"effect\": \"all_units_stunned\", \"duration\": 1}"));
-        scenario.addEvent(new Scenario.ScenarioEvent("event2", "timed", "Ancient Artifact", 
-                                                   "An ancient artifact appears in the center of the map", 
+        scenario.addEvent(new Scenario.ScenarioEvent("event2", "timed", "events.temporal-rift.event2.title", 
+                                                   "events.temporal-rift.event2.description", 
                                                    "{\"effect\": \"spawn_artifact\", \"location\": \"center\"}"));
         
         return scenarioRepository.save(scenario);
@@ -158,19 +158,19 @@ public class ScenarioService {
             return existing.get();
         }
         
-        Scenario scenario = new Scenario("conquest-classic", "Classic Conquest", 
-                                       "A traditional conquest scenario where players must eliminate all enemies or capture their main towns.",
+        Scenario scenario = new Scenario("conquest-classic", "conquest-classic.name", 
+                                       "conquest-classic.description",
                                        "normal", 6, 30, 30, "conquest");
         
         scenario.setTurnLimit(200);
-        scenario.setVictoryRequirement("Eliminate all enemy players or capture all enemy towns");
-        scenario.setDefeatCondition("All towns are captured or all heroes are eliminated");
+        scenario.setVictoryRequirement("victory.conquest-classic");
+        scenario.setDefeatCondition("defeat.conquest-classic");
         
         // Add objectives
-        scenario.addObjective(new Scenario.ScenarioObjective("obj1", "eliminate", "Total Victory", 
-                                                           "Eliminate all enemy players", 5));
-        scenario.addObjective(new Scenario.ScenarioObjective("obj2", "capture", "Capture All Towns", 
-                                                           "Capture all enemy towns", 5));
+        scenario.addObjective(new Scenario.ScenarioObjective("obj1", "eliminate", "objectives.conquest-classic.obj1.title", 
+                                                           "objectives.conquest-classic.obj1.description", 5));
+        scenario.addObjective(new Scenario.ScenarioObjective("obj2", "capture", "objectives.conquest-classic.obj2.title", 
+                                                           "objectives.conquest-classic.obj2.description", 5));
         
         // Add starting positions in a circle
         scenario.addStartingPosition(new Scenario.StartingPosition("player1", 5, 15, "castle", "Arthur"));
