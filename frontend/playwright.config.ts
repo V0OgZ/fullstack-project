@@ -22,24 +22,50 @@ export default defineConfig({
   },
   projects: [
     {
-      name: 'chromium',
+      name: 'solo-fullscreen',
       use: { 
         ...devices['Desktop Chrome'],
+        viewport: { width: 1280, height: 800 },
         launchOptions: {
           slowMo: 100,
-          args: ['--no-default-browser-check'],
+          args: [
+            '--no-default-browser-check',
+            '--start-maximized',
+            '--disable-web-security'
+          ],
         },
       },
+      testMatch: ['**/*gameplay-demo.spec.ts', '**/*solo*.spec.ts'],
+    },
+        {
+      name: 'multiplayer',
+      use: { 
+        ...devices['Desktop Chrome'],
+        viewport: { width: 640, height: 800 },
+        launchOptions: {
+          slowMo: 50,
+          args: [
+            '--no-default-browser-check',
+            '--disable-web-security'
+          ],
+        },
+      },
+      testMatch: ['**/*multiplayer*.spec.ts'],
     },
     {
-      name: 'chromium-player2',
+      name: 'demo',
       use: { 
         ...devices['Desktop Chrome'],
+        viewport: { width: 1280, height: 800 },
         launchOptions: {
-          slowMo: 100,
-          args: ['--no-default-browser-check', '--window-position=800,0'],
+          slowMo: 50,
+          args: [
+            '--no-default-browser-check',
+            '--start-maximized'
+          ],
         },
       },
+      testMatch: ['**/*demo*.spec.ts'],
     },
   ],
 }); 

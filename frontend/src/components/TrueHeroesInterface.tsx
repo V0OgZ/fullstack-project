@@ -80,18 +80,29 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
 
   const selectedHero = currentPlayer?.heroes?.find(hero => hero.id === selectedHeroId);
 
-  // Mettre à jour le titre de la page avec le nom de la map
+  // Mettre à jour le titre de la page de façon dynamique selon le contexte
   useEffect(() => {
-    if (scenarioId) {
+    let title = 'Heroes of Time';
+    
+    // Titre basé sur le contexte du panneau actuel
+    if (rightPanelContent === 'castle') {
+      title = 'Heroes of Time - Castle';
+    } else if (rightPanelContent === 'inventory') {
+      title = 'Heroes of Time - Inventory';
+    } else if (rightPanelContent === 'hero' && selectedHero) {
+      title = `Heroes of Time - ${selectedHero.name}`;
+    } else if (scenarioId) {
       const mapName = scenarioId.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
-      document.title = `Heroes of Time - ${mapName}`;
+      title = `Heroes of Time - ${mapName}`;
     }
+    
+    document.title = title;
     
     // Restaurer le titre original quand on quitte le composant
     return () => {
       document.title = 'Heroes of Time';
     };
-  }, [scenarioId]);
+  }, [scenarioId, rightPanelContent, selectedHero]);
 
   // Fonction pour obtenir l'image du héros
   const getHeroImage = (heroName: string): string => {

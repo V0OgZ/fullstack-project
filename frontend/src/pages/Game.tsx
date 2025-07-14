@@ -16,6 +16,13 @@ const Game: React.FC = () => {
     console.log(`[GAME PAGE] Current URL: ${window.location.href}`);
     console.log(`[GAME PAGE] Current pathname: ${window.location.pathname}`);
     
+    // Handle demo route - automatically load conquest-classic
+    if (window.location.pathname === '/demo') {
+      console.log('[GAME PAGE] Demo route detected - loading conquest-classic');
+      loadGame('conquest-classic');
+      return;
+    }
+    
     // ALWAYS load the game when scenarioId is provided
     // This ensures fresh data from backend every time
     if (scenarioId) {
