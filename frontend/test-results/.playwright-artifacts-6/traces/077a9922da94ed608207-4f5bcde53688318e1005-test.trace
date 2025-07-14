@@ -1,0 +1,24 @@
+{"version":8,"type":"context-options","origin":"testRunner","browserName":"","options":{},"platform":"darwin","wallTime":1752460257492,"monotonicTime":18955.006,"sdkLanguage":"javascript"}
+{"type":"before","callId":"hook@1","stepId":"hook@1","startTime":18959.554,"class":"Test","method":"step","title":"Before Hooks","params":{},"stack":[]}
+{"type":"before","callId":"fixture@2","stepId":"fixture@2","parentId":"hook@1","startTime":18962.308,"class":"Test","method":"step","title":"Fixture \"browser\"","params":{},"stack":[]}
+{"type":"before","callId":"pw:api@3","stepId":"pw:api@3","parentId":"fixture@2","startTime":18964.248,"class":"Test","method":"step","title":"Launch browser","params":{"handleSIGINT":"false","tracesDir":"/Users/admin/fullstack-project/frontend/test-results/.playwright-artifacts-6/traces","headless":"true","ignoreDefaultArgs":"undefined","ignoreAllDefaultArgs":"false","env":"undefined","timeout":"180000"},"stack":[]}
+{"type":"after","callId":"pw:api@3","endTime":19083.46,"annotations":[]}
+{"type":"after","callId":"fixture@2","endTime":19083.583,"annotations":[]}
+{"type":"after","callId":"hook@1","endTime":19083.605,"annotations":[]}
+{"type":"before","callId":"pw:api@4","stepId":"pw:api@4","startTime":19085.081,"class":"Test","method":"step","title":"Create context","params":{"acceptDownloads":"accept","bypassCSP":"false","colorScheme":"light","hasTouch":"false","ignoreHTTPSErrors":"false","isMobile":"false","javaScriptEnabled":"true","locale":"en-US","offline":"false","viewport":"Object","baseURL":"http://localhost:3000","serviceWorkers":"allow","selectorEngines":"[]","testIdAttributeName":"data-testid","noDefaultViewport":"false","extraHTTPHeaders":"undefined","storageState":"undefined","reducedMotion":"undefined","forcedColors":"undefined","contrast":"undefined","clientCertificates":"undefined"},"stack":[{"file":"/Users/admin/fullstack-project/frontend/tests/e2e/04-performance-stress-test.spec.ts","line":11,"column":25}]}
+{"type":"after","callId":"pw:api@4","endTime":19092.185,"annotations":[]}
+{"type":"before","callId":"pw:api@5","stepId":"pw:api@5","startTime":19097.055,"class":"Test","method":"step","title":"Create page","params":{},"stack":[{"file":"/Users/admin/fullstack-project/frontend/tests/e2e/04-performance-stress-test.spec.ts","line":12,"column":36}]}
+{"type":"after","callId":"pw:api@5","endTime":19149.689,"annotations":[]}
+{"type":"before","callId":"pw:api@6","stepId":"pw:api@6","startTime":19151.072,"class":"Test","method":"step","title":"Navigate to \"/multiplayer\"","params":{"url":"/multiplayer","waitUntil":"load","timeout":"0"},"stack":[{"file":"/Users/admin/fullstack-project/frontend/tests/e2e/04-performance-stress-test.spec.ts","line":16,"column":20}]}
+{"type":"after","callId":"pw:api@6","endTime":19946.007,"annotations":[]}
+{"type":"before","callId":"pw:api@7","stepId":"pw:api@7","startTime":19957.467,"class":"Test","method":"step","title":"Fill \"Stress Session 1\" locator('input[placeholder*=\"session name\"]')","params":{"selector":"input[placeholder*=\"session name\"]","value":"Stress Session 1","strict":"true","timeout":"0"},"stack":[{"file":"/Users/admin/fullstack-project/frontend/tests/e2e/04-performance-stress-test.spec.ts","line":17,"column":66}]}
+{"type":"before","callId":"hook@8","stepId":"hook@8","startTime":27435.276,"class":"Test","method":"step","title":"After Hooks","params":{},"stack":[]}
+{"type":"error","message":"Error: Channel closed","stack":[]}
+{"type":"before","callId":"attach@acfa2342768f6d37783091050ed38753","stepId":"attach@acfa2342768f6d37783091050ed38753","startTime":27579.098,"class":"Test","method":"step","title":"Attach \"error-context\"","params":{},"stack":[]}
+{"type":"after","callId":"attach@acfa2342768f6d37783091050ed38753","endTime":27579.154,"attachments":[{"name":"error-context","contentType":"text/markdown","path":"/Users/admin/fullstack-project/frontend/test-results/04-performance-stress-test-0321a-ultiple-concurrent-sessions/error-context.md"}]}
+{"type":"after","callId":"hook@8","endTime":27579.471,"annotations":[]}
+{"type":"before","callId":"hook@9","stepId":"hook@9","startTime":27579.607,"class":"Test","method":"step","title":"Worker Cleanup","params":{},"stack":[]}
+{"type":"before","callId":"fixture@10","stepId":"fixture@10","parentId":"hook@9","startTime":27579.814,"class":"Test","method":"step","title":"Fixture \"browser\"","params":{},"stack":[]}
+{"type":"error","message":"Error: browserContext.close: Target page, context or browser has been closed","stack":[{"file":"/Users/admin/fullstack-project/frontend/tests/e2e/04-performance-stress-test.spec.ts","line":32,"column":9}]}
+{"type":"after","callId":"fixture@10","endTime":27612.641,"annotations":[]}
+{"type":"after","callId":"hook@9","endTime":27612.911,"annotations":[]}

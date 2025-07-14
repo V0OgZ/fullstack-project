@@ -1,0 +1,29 @@
+{"version":8,"type":"context-options","origin":"testRunner","browserName":"","options":{},"platform":"darwin","wallTime":1752460260178,"monotonicTime":21641.596,"sdkLanguage":"javascript"}
+{"type":"before","callId":"hook@1","stepId":"hook@1","startTime":21643.497,"class":"Test","method":"step","title":"Before Hooks","params":{},"stack":[]}
+{"type":"before","callId":"hook@2","stepId":"hook@2","parentId":"hook@1","startTime":21643.895,"class":"Test","method":"step","title":"beforeEach hook","params":{},"stack":[{"file":"/Users/admin/fullstack-project/frontend/tests/e2e/01-solo-gameplay.spec.ts","line":4,"column":8}]}
+{"type":"before","callId":"fixture@3","stepId":"fixture@3","parentId":"hook@2","startTime":21646.102,"class":"Test","method":"step","title":"Fixture \"browser\"","params":{},"stack":[]}
+{"type":"before","callId":"pw:api@4","stepId":"pw:api@4","parentId":"fixture@3","startTime":21647.878,"class":"Test","method":"step","title":"Launch browser","params":{"handleSIGINT":"false","tracesDir":"/Users/admin/fullstack-project/frontend/test-results/.playwright-artifacts-7/traces","headless":"true","ignoreDefaultArgs":"undefined","ignoreAllDefaultArgs":"false","env":"undefined","timeout":"180000"},"stack":[]}
+{"type":"after","callId":"pw:api@4","endTime":21746.614,"annotations":[]}
+{"type":"after","callId":"fixture@3","endTime":21746.72,"annotations":[]}
+{"type":"before","callId":"fixture@5","stepId":"fixture@5","parentId":"hook@2","startTime":21747.32,"class":"Test","method":"step","title":"Fixture \"context\"","params":{},"stack":[]}
+{"type":"before","callId":"pw:api@6","stepId":"pw:api@6","parentId":"fixture@5","startTime":21749.327,"class":"Test","method":"step","title":"Create context","params":{"acceptDownloads":"accept","bypassCSP":"false","colorScheme":"light","hasTouch":"false","ignoreHTTPSErrors":"false","isMobile":"false","javaScriptEnabled":"true","locale":"en-US","offline":"false","viewport":"Object","baseURL":"http://localhost:3000","serviceWorkers":"allow","selectorEngines":"[]","testIdAttributeName":"data-testid","noDefaultViewport":"false","extraHTTPHeaders":"undefined","storageState":"undefined","reducedMotion":"undefined","forcedColors":"undefined","contrast":"undefined","clientCertificates":"undefined"},"stack":[]}
+{"type":"after","callId":"pw:api@6","endTime":21756.875,"annotations":[]}
+{"type":"after","callId":"fixture@5","endTime":21760.603,"annotations":[]}
+{"type":"before","callId":"fixture@7","stepId":"fixture@7","parentId":"hook@2","startTime":21761.037,"class":"Test","method":"step","title":"Fixture \"page\"","params":{},"stack":[]}
+{"type":"before","callId":"pw:api@8","stepId":"pw:api@8","parentId":"fixture@7","startTime":21762.174,"class":"Test","method":"step","title":"Create page","params":{},"stack":[]}
+{"type":"after","callId":"pw:api@8","endTime":21807.475,"annotations":[]}
+{"type":"after","callId":"fixture@7","endTime":21807.583,"annotations":[]}
+{"type":"before","callId":"pw:api@9","stepId":"pw:api@9","parentId":"hook@2","startTime":21808.994,"class":"Test","method":"step","title":"Navigate to \"/\"","params":{"url":"/","waitUntil":"load","timeout":"0"},"stack":[{"file":"/Users/admin/fullstack-project/frontend/tests/e2e/01-solo-gameplay.spec.ts","line":5,"column":16}]}
+{"type":"after","callId":"pw:api@9","endTime":22103.989,"annotations":[]}
+{"type":"after","callId":"hook@2","endTime":22104.048,"annotations":[]}
+{"type":"after","callId":"hook@1","endTime":22104.154,"annotations":[]}
+{"type":"before","callId":"expect@10","stepId":"expect@10","startTime":22110.078,"class":"Test","method":"step","title":"Expect \"toBeVisible\"","params":{},"stack":[{"file":"/Users/admin/fullstack-project/frontend/tests/e2e/01-solo-gameplay.spec.ts","line":46,"column":59}]}
+{"type":"after","callId":"expect@10","endTime":22138.069,"annotations":[]}
+{"type":"before","callId":"hook@11","stepId":"hook@11","startTime":22138.33,"class":"Test","method":"step","title":"After Hooks","params":{},"stack":[]}
+{"type":"before","callId":"fixture@12","stepId":"fixture@12","parentId":"hook@11","startTime":22144.038,"class":"Test","method":"step","title":"Fixture \"page\"","params":{},"stack":[]}
+{"type":"after","callId":"fixture@12","endTime":22144.699,"annotations":[]}
+{"type":"before","callId":"fixture@13","stepId":"fixture@13","parentId":"hook@11","startTime":22145.564,"class":"Test","method":"step","title":"Fixture \"context\"","params":{},"stack":[]}
+{"type":"after","callId":"fixture@13","endTime":22145.668,"annotations":[]}
+{"type":"after","callId":"hook@11","endTime":22212.574,"annotations":[]}
+{"type":"before","callId":"attach@b7fd805ce871d52bea85331587d70f40","stepId":"attach@b7fd805ce871d52bea85331587d70f40","startTime":22274.309,"class":"Test","method":"step","title":"Attach \"trace\"","params":{},"stack":[]}
+{"type":"after","callId":"attach@b7fd805ce871d52bea85331587d70f40","endTime":22274.396,"attachments":[]}

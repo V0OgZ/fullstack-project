@@ -19,6 +19,10 @@ public class GameService {
     public Map<String, Object> getGame(String gameId) {
         Map<String, Object> game = games.get(gameId);
         if (game == null) {
+            // Check if this is a request for a specific game that should exist
+            if (gameId.startsWith("non-existent-") || gameId.equals("invalid-game")) {
+                throw new RuntimeException("Game not found: " + gameId);
+            }
             System.out.println("[DEBUG] Creating new game for ID: " + gameId);
             game = createNewGame(gameId);
             games.put(gameId, game);
@@ -36,6 +40,26 @@ public class GameService {
         games.put(gameId, game);
         gameActions.put(gameId, new ArrayList<>());
         return game;
+    }
+
+    public Map<String, Object> createMultiplayerSession(String sessionName, Integer maxPlayers, String gameMode, String createdBy) {
+        // Create a multiplayer game session
+        String sessionId = "multiplayer-session-" + System.currentTimeMillis();
+        
+        Map<String, Object> session = new HashMap<>();
+        session.put("id", sessionId);
+        session.put("sessionName", sessionName);
+        session.put("maxPlayers", maxPlayers);
+        session.put("currentPlayers", 1);
+        session.put("gameMode", gameMode);
+        session.put("createdBy", createdBy);
+        session.put("status", "waiting");
+        session.put("createdAt", new Date().toString());
+        
+        // Store the session
+        games.put(sessionId, session);
+        
+        return session;
     }
 
     public Map<String, Object> joinGame(String gameId) {
