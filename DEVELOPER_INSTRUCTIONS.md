@@ -59,8 +59,28 @@ const response = await ApiService.recruitUnitsFromGame(gameId, buildingId, data)
 # Tests rapides
 ./run-quick-tests.sh
 
-# Test spécifique
+# Tests spécifiques avec fenêtres positionnées
 cd frontend && npx playwright test 01-single-demo.spec.ts --project=solo-fullscreen --headed
+cd frontend && npx playwright test multiplayer-demo.spec.ts --project=multiplayer --headed
+```
+
+### 🖥️ **Configuration Fenêtres Playwright**
+```bash
+# Solo Demo - Fenêtre unique à gauche
+- Position: (0, 0) - À GAUCHE
+- Taille: 1280x800 (hauteur standard)
+- Projet: solo-fullscreen
+
+# Multiplayer Demo - 2 fenêtres côte à côte
+- Player 1: Position (0, 0) - À GAUCHE
+- Player 2: Position (640, 0) - À DROITE
+- Taille: 640x900 chacune (hauteur optimisée)
+- Projet: multiplayer
+
+# Configuration dans playwright.config.ts
+- 3 projets: solo-fullscreen, multiplayer, demo
+- Fenêtres automatiquement positionnées
+- Tests avec --headed pour voir les fenêtres
 ```
 
 ### 🎮 **Tests Manuels**
@@ -123,6 +143,21 @@ lsof -i :3000  # Frontend
 ./stop-app.sh && ./start-app.sh
 ```
 
+#### **4. Tests Playwright - Problèmes Fenêtres**
+```bash
+# Problème: Fenêtres mal positionnées
+# Solution: Configuration dans playwright.config.ts mise à jour
+
+# Problème: Tests multiplayer qui se lancent 2 fois
+# Solution: Suppression du doublon 02-multiplayer-demo.spec.ts
+
+# Problème: Viewport trop petit
+# Solution: Hauteur augmentée à 900px pour tous les tests
+
+# Vérification configuration
+cat frontend/playwright.config.ts | grep -A 10 "solo-fullscreen\|multiplayer"
+```
+
 #### **2. Erreurs de Connexion Frontend-Backend**
 ```javascript
 // Vérification dans la console navigateur
@@ -170,6 +205,24 @@ SELECT * FROM units;
 - **Connexions Fonctionnelles**: 40%
 - **Connexions Mockées**: 35%
 - **Tests E2E**: 26+ scenarios
+
+### 🎮 **Tests E2E Disponibles**
+```bash
+# Tests Actifs (frontend/tests/e2e/)
+- 01-single-demo.spec.ts          # Démo solo avec tooltips
+- multiplayer-demo.spec.ts        # Démo multiplayer 2 browsers
+- multiplayer-ui.spec.ts          # Test interface multiplayer
+- terrain-vision-demo.spec.ts     # Démo système de vision
+- terrain-vision.spec.ts          # Tests vision avancés
+- debug-scenarios.spec.ts         # Tests scénarios debug
+
+# Tests Archivés (frontend/tests/e2e/archived/)
+- 03-zfc-shadow-actions.spec.ts   # Actions temporelles ZFC
+- 04-performance-stress-test.spec.ts # Tests performance
+- 05-comprehensive-screen-tests.spec.ts # Tests écran complets
+- language-availability.spec.ts   # Tests langues
+- multilingual-scenarios.spec.ts  # Tests multilingues
+```
 
 ### 📈 **Objectifs de Performance**
 - **Temps de chargement**: < 3 secondes

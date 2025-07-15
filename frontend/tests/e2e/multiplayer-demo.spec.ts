@@ -1,17 +1,42 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, chromium } from '@playwright/test';
 
 test.describe('👥 Heroes of Time - Multiplayer Demo', () => {
-  test('Dual window multiplayer session', async ({ browser }) => {
+  test('Dual window multiplayer session', async () => {
     test.setTimeout(90000); // 1.5 minutes for multiplayer setup
     
     console.log('🚀 Starting multiplayer demo...');
     
-    // Create two browser contexts for two players
-    const context1 = await browser.newContext({
-      viewport: { width: 800, height: 800 }
+    // Launch two separate browsers for proper window positioning
+    const browser1 = await chromium.launch({
+      headless: false,
+      slowMo: 50,
+      args: [
+        '--no-default-browser-check',
+        '--disable-web-security',
+        '--window-position=0,0',        // Player 1 à gauche
+        '--window-size=640,900',
+        '--force-device-scale-factor=1'
+      ]
     });
-    const context2 = await browser.newContext({
-      viewport: { width: 800, height: 800 }
+    
+    const browser2 = await chromium.launch({
+      headless: false,
+      slowMo: 50,
+      args: [
+        '--no-default-browser-check',
+        '--disable-web-security',
+        '--window-position=640,0',      // Player 2 à droite
+        '--window-size=640,900',
+        '--force-device-scale-factor=1'
+      ]
+    });
+    
+    // Create contexts and pages
+    const context1 = await browser1.newContext({
+      viewport: { width: 640, height: 900 }
+    });
+    const context2 = await browser2.newContext({
+      viewport: { width: 640, height: 900 }
     });
     
     // Force English language for both contexts
@@ -152,8 +177,10 @@ test.describe('👥 Heroes of Time - Multiplayer Demo', () => {
       throw error;
     } finally {
       // Cleanup
-    await context1.close();
-    await context2.close();
+      await context1.close();
+      await context2.close();
+      await browser1.close();
+      await browser2.close();
     }
   });
 }); 
