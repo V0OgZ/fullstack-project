@@ -20,8 +20,9 @@ class AvatarService {
     const config: AvatarOptions = {
       seed: heroName,
       style: 'adventurer', // Style fantasy parfait pour heroes
-      size: 128,
+      size: 256, // Taille par défaut plus grande
       format: 'svg',
+      backgroundColor: 'transparent', // Fond transparent pour mieux s'intégrer
       ...options
     };
 
@@ -31,10 +32,15 @@ class AvatarService {
       return this.cache.get(cacheKey)!;
     }
 
+    // Paramètres améliorés pour de meilleurs avatars
     const params = new URLSearchParams({
       seed: config.seed,
       size: config.size.toString(),
       format: config.format,
+      backgroundColor: config.backgroundColor || 'transparent',
+      // Paramètres spécifiques pour améliorer la qualité
+      radius: '50', // Coins arrondis
+      backgroundType: 'gradientLinear', // Fond dégradé
       ...(config.backgroundColor && { backgroundColor: config.backgroundColor })
     });
 

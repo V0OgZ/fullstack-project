@@ -150,72 +150,84 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
         heroClass: heroClass,
         level: 1,
         displayType: 'portrait',
-        size: 'medium'
+        size: 'large' // Utiliser la grande taille pour les portraits
       });
       
       console.log('✅ Portrait data loaded:', portraitData);
       
       return (
         <div className="hero-portrait-container" style={{ width: '100%', height: '100%', position: 'relative' }}>
-          {/* SVG Local en priorité */}
-          <div 
-            className="hero-portrait-svg"
-            style={{
-              width: '100%',
-              height: '100%',
-              borderRadius: '8px',
-              overflow: 'hidden'
-            }}
-            dangerouslySetInnerHTML={{ __html: portraitData.localSvg }}
-          />
-          
-          {/* Fallback avec image externe */}
+          {/* Image externe en PRIORITÉ pour une meilleure qualité */}
           <img 
             src={portraitData.url}
             alt={heroName}
-            className="hero-portrait-fallback"
+            className="hero-portrait-primary"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              borderRadius: '8px',
+              zIndex: 2
+            }}
+            onLoad={(e) => {
+              console.log('📸 External portrait loaded successfully:', heroName);
+              // Masquer le fallback SVG si l'image externe fonctionne
+              const container = e.currentTarget.parentNode as HTMLElement;
+              const svgFallback = container.querySelector('.hero-portrait-svg') as HTMLElement;
+              if (svgFallback) {
+                svgFallback.style.display = 'none';
+              }
+            }}
+            onError={(e) => {
+              console.warn('⚠️ External portrait failed, showing SVG fallback');
+              // Afficher le SVG en fallback
+              const target = e.target as HTMLImageElement;
+              target.style.display = 'none';
+              const container = target.parentNode as HTMLElement;
+              const svgFallback = container.querySelector('.hero-portrait-svg') as HTMLElement;
+              if (svgFallback) {
+                svgFallback.style.display = 'block';
+              }
+            }}
+          />
+          
+          {/* SVG Local en fallback */}
+          <div 
+            className="hero-portrait-svg"
             style={{
               position: 'absolute',
               top: 0,
               left: 0,
               width: '100%',
               height: '100%',
-              objectFit: 'cover',
               borderRadius: '8px',
-              opacity: 0, // Masqué par défaut, visible si SVG échoue
-              transition: 'opacity 0.3s ease'
+              overflow: 'hidden',
+              zIndex: 1,
+              display: 'block' // Visible par défaut jusqu'à ce que l'image externe charge
             }}
-            onLoad={(e) => {
-              console.log('📸 External portrait loaded:', heroName);
-              // Garder l'image masquée si le SVG fonctionne
-            }}
-            onError={(e) => {
-              console.warn('⚠️ External portrait failed, showing emoji fallback');
-              // Afficher l'emoji si tout échoue
-              const target = e.target as HTMLImageElement;
-              const parent = target.parentNode as HTMLElement;
-              if (parent && !parent.querySelector('.hero-emoji-fallback')) {
-                const fallback = document.createElement('div');
-                fallback.className = 'hero-emoji-fallback';
-                fallback.textContent = portraitData.fallbackEmoji;
-                fallback.style.cssText = `
-                  position: absolute;
-                  top: 0;
-                  left: 0;
-                  width: 100%;
-                  height: 100%;
-                  font-size: 48px;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  background: rgba(255, 215, 0, 0.1);
-                  border-radius: 8px;
-                  z-index: 2;
-                `;
-                parent.appendChild(fallback);
-              }
-            }}
+            dangerouslySetInnerHTML={{ __html: portraitData.localSvg }}
           />
+          
+          {/* Emoji en dernier recours */}
+          <div 
+            className="hero-portrait-emoji"
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              fontSize: '64px',
+              display: 'none', // Masqué par défaut
+              alignItems: 'center',
+              justifyContent: 'center',
+              background: 'rgba(255, 215, 0, 0.1)',
+              borderRadius: '8px',
+              zIndex: 0
+            }}
+          >
+            {portraitData.fallbackEmoji}
+          </div>
         </div>
       );
     } catch (error) {

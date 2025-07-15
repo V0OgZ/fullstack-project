@@ -190,20 +190,20 @@ class HeroDisplayService {
    */
   private getPortraitSize(size: string): number {
     const sizeMap: Record<string, number> = {
-      'small': 64,
-      'medium': 128,
-      'large': 256
+      'small': 128,   // Plus grand pour les portraits
+      'medium': 256,  // Beaucoup plus grand
+      'large': 512    // Très grand pour les détails
     };
-    return sizeMap[size] || 128;
+    return sizeMap[size] || 256;
   }
 
   private getMapSpriteSize(size: string): number {
     const sizeMap: Record<string, number> = {
-      'small': 24,
-      'medium': 32,
-      'large': 48
+      'small': 32,
+      'medium': 48,
+      'large': 64
     };
-    return sizeMap[size] || 32;
+    return sizeMap[size] || 48;
   }
 
   /**
