@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 // Fonction pour créer des tooltips dynamiques basés sur l'état réel
-const createDynamicTooltip = async (page: any, message: string, position: 'top' | 'center' | 'bottom' = 'top') => {
+const createDynamicTooltip = async (page: any, message: string, position: 'top' | 'center' | 'bottom' = 'center') => {
   await page.evaluate(({ message, position }) => {
     // Supprimer les anciens tooltips
     const existingTooltips = document.querySelectorAll('.demo-tooltip');
