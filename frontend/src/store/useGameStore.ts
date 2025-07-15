@@ -138,7 +138,8 @@ export const useGameStore = create<GameStore>((set, get) => ({
             hero: tile.hero || null,
             creature: tile.creature || null,
             structure: tile.structure || null,
-            isVisible: tile.isVisible !== undefined ? tile.isVisible : true
+            isVisible: tile.isVisible !== undefined ? tile.isVisible : false,
+            isExplored: tile.isExplored !== undefined ? tile.isExplored : false
           });
         } else {
           // Default tile if missing
@@ -151,12 +152,23 @@ export const useGameStore = create<GameStore>((set, get) => ({
             hero: null,
             creature: null,
             structure: null,
-            isVisible: true
+            isVisible: false,
+            isExplored: false
           });
         }
       }
       map.push(row);
     }
+    
+    // After creating the map, update vision for the current player
+    const currentPlayer = get().currentPlayer;
+    if (currentPlayer && currentPlayer.id) {
+      // We'll call updateVision after map is set
+      setTimeout(() => {
+        get().updateVision(currentPlayer.id);
+      }, 100);
+    }
+    
     return map;
   },
 

@@ -275,6 +275,36 @@ export const TERRAIN_EDGE_SPRITES: Record<string, TerrainBitmaskMapping> = {
     0b001000: p('water', 'shore_w'),
     0b010000: p('water', 'shore_sw'),
     0b100000: p('water', 'shore_se')
+  },
+  mountain: {
+    0b111111: p('mountain', 'center'),
+    0b000000: p('mountain', 'isolated'),
+    0b000001: p('mountain', 'edge_e'),
+    0b000010: p('mountain', 'edge_ne'),
+    0b000100: p('mountain', 'edge_nw'),
+    0b001000: p('mountain', 'edge_w'),
+    0b010000: p('mountain', 'edge_sw'),
+    0b100000: p('mountain', 'edge_se')
+  },
+  desert: {
+    0b111111: p('desert', 'center'),
+    0b000000: p('desert', 'isolated'),
+    0b000001: p('desert', 'edge_e'),
+    0b000010: p('desert', 'edge_ne'),
+    0b000100: p('desert', 'edge_nw'),
+    0b001000: p('desert', 'edge_w'),
+    0b010000: p('desert', 'edge_sw'),
+    0b100000: p('desert', 'edge_se')
+  },
+  swamp: {
+    0b111111: p('swamp', 'center'),
+    0b000000: p('swamp', 'isolated'),
+    0b000001: p('swamp', 'edge_e'),
+    0b000010: p('swamp', 'edge_ne'),
+    0b000100: p('swamp', 'edge_nw'),
+    0b001000: p('swamp', 'edge_w'),
+    0b010000: p('swamp', 'edge_sw'),
+    0b100000: p('swamp', 'edge_se')
   }
   // Other terrains (mountain, desert, etc.) can be added following the same pattern.
 }; 

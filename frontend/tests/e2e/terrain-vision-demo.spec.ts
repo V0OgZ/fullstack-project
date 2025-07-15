@@ -6,20 +6,26 @@ test.describe('🌍 Terrain & Vision Demo', () => {
     
     console.log('🎮 Starting terrain & vision demo...');
     
+    // Force English language
+    await page.addInitScript(() => {
+      localStorage.setItem('heroes-reforged-i18n', JSON.stringify({
+        state: { language: 'en' },
+        version: 0
+      }));
+    });
+    
     // 1. Navigate to game
     await page.goto('http://localhost:3000');
     await page.waitForLoadState('networkidle');
     
     // 2. Select Conquest Classic
     console.log('📍 Selecting Conquest Classic scenario...');
-    await page.getByText('Conquest Classic').click();
+    await page.getByTestId('scenario-card-conquest-classic').click();
     await page.waitForTimeout(500);
     
     // 3. Start Game
     console.log('🚀 Starting game...');
-    const startButton = page.getByRole('button', { name: 'Start Game' }).or(
-      page.getByRole('button', { name: 'Start Solo Game' })
-    );
+    const startButton = page.getByTestId('play-button-conquest-classic');
     await startButton.click();
     
     // 4. Wait for canvas

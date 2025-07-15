@@ -2,11 +2,19 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Terrain & Vision System', () => {
   test.beforeEach(async ({ page }) => {
+    // Force English language
+    await page.addInitScript(() => {
+      localStorage.setItem('heroes-reforged-i18n', JSON.stringify({
+        state: { language: 'en' },
+        version: 0
+      }));
+    });
+    
     await page.goto('http://localhost:3000');
     
     // Select and start Conquest Classic scenario
-    await page.getByText('Conquest Classic').click();
-    await page.getByRole('button', { name: 'Start Game' }).click();
+    await page.getByTestId('scenario-card-conquest-classic').click();
+    await page.getByTestId('play-button-conquest-classic').click();
     
     // Wait for game to load
     await page.waitForSelector('canvas', { timeout: 10000 });
@@ -144,11 +152,19 @@ test.describe('Terrain Vision Demo', () => {
   test('complete terrain and vision demo', async ({ page }) => {
     test.setTimeout(60000); // 1 minute timeout
     
+    // Force English language
+    await page.addInitScript(() => {
+      localStorage.setItem('heroes-reforged-i18n', JSON.stringify({
+        state: { language: 'en' },
+        version: 0
+      }));
+    });
+    
     await page.goto('http://localhost:3000');
     
     // Start game
-    await page.getByText('Conquest Classic').click();
-    await page.getByRole('button', { name: 'Start Game' }).click();
+    await page.getByTestId('scenario-card-conquest-classic').click();
+    await page.getByTestId('play-button-conquest-classic').click();
     await page.waitForSelector('canvas', { timeout: 10000 });
     
     // Demo sequence
