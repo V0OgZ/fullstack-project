@@ -3,9 +3,10 @@ import { useTranslation } from '../i18n';
 import { useGameStore } from '../store/useGameStore';
 import ModernGameRenderer, { ModernGameRendererRef } from './ModernGameRenderer';
 import CastleManagementPanel from './CastleManagementPanel';
-import { getHeroSprite, getHeroFallbackImage, createSpriteStyle, getHeroEmoji, getHeroInfo } from '../utils/heroAssets';
+import { getHeroFallbackImage, getHeroInfo } from '../utils/heroAssets';
 import { Position } from '../types/game';
 import './TrueHeroesInterface.css';
+import heroDisplayService from '../services/heroDisplayService';
 
 interface TrueHeroesInterfaceProps {
   playerCount: number;
@@ -28,14 +29,15 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
   const [rightPanelContent, setRightPanelContent] = useState<'scenario' | 'hero' | 'castle'>('scenario');
   const mapRendererRef = useRef<ModernGameRendererRef>(null);
 
-  const handleHeroSelect = (heroId: string | null) => {
-    setSelectedHeroId(heroId);
-    if (heroId) {
-      setRightPanelContent('hero');
-    } else {
-      setRightPanelContent('scenario');
-    }
-  };
+  // Fonction pour sélectionner un héros (gardée pour compatibilité future)
+  // const handleHeroSelect = (heroId: string | null) => {
+  //   setSelectedHeroId(heroId);
+  //   if (heroId) {
+  //     setRightPanelContent('hero');
+  //   } else {
+  //     setRightPanelContent('scenario');
+  //   }
+  // };
 
   const handleHeroesClick = () => {
     if (!currentPlayer?.heroes || currentPlayer.heroes.length === 0) {
@@ -136,62 +138,104 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
       setSelectedHeroId(firstHero.id);
       console.log('🎯 Auto-selecting first hero on panel open:', firstHero.name);
     }
-  }, [rightPanelContent]); // FIXED: Removed selectedHeroId from deps to prevent loops
+  }, [rightPanelContent, currentPlayer?.heroes, selectedHeroId]); // Fixed dependencies
 
-  const getHeroSpriteComponent = (heroName: string) => {
-    const upperCaseHeroName = heroName.toUpperCase();
+  const getHeroPortraitComponent = (heroName: string, heroClass: string = 'Warrior') => {
+    console.log('🎨 Loading hero portrait for:', heroName, 'class:', heroClass);
     
-    console.log('Loading hero image for:', heroName);
-    
-    // Utiliser directement l'image PNG fallback qui est plus fiable
-    const heroImage = getHeroFallbackImage(upperCaseHeroName);
-    console.log('Using hero image:', heroImage);
-    
-    return (
-      <img 
-        src={heroImage}
-        alt={heroName}
-        className="hero-portrait-img"
-        style={{
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          borderRadius: '8px'
-        }}
-        onLoad={() => {
-          console.log('✅ Hero image loaded successfully:', heroName, 'from', heroImage);
-        }}
-        onError={(e) => {
-          console.error('❌ Failed to load hero image:', heroImage);
-          // Fallback vers une image par défaut
-          const target = e.target as HTMLImageElement;
-          target.src = '/assets/heroes/warrior.png'; // Image par défaut
+    try {
+      // Utiliser le nouveau service unifié pour les PORTRAITS
+      const portraitData = heroDisplayService.getHeroPortrait({
+        name: heroName,
+        heroClass: heroClass,
+        level: 1,
+        displayType: 'portrait',
+        size: 'medium'
+      });
+      
+      console.log('✅ Portrait data loaded:', portraitData);
+      
+      return (
+        <div className="hero-portrait-container" style={{ width: '100%', height: '100%', position: 'relative' }}>
+          {/* SVG Local en priorité */}
+          <div 
+            className="hero-portrait-svg"
+            style={{
+              width: '100%',
+              height: '100%',
+              borderRadius: '8px',
+              overflow: 'hidden'
+            }}
+            dangerouslySetInnerHTML={{ __html: portraitData.localSvg }}
+          />
           
-          // Si même l'image par défaut échoue, utiliser un emoji
-          target.onerror = () => {
-            console.error('❌ Fallback image also failed, using emoji');
-            const parent = target.parentNode as HTMLElement;
-            if (parent && !parent.querySelector('.hero-emoji-fallback')) {
-              target.style.display = 'none';
-              const fallback = document.createElement('div');
-              fallback.className = 'hero-emoji-fallback';
-              fallback.textContent = getHeroEmoji(upperCaseHeroName);
-              fallback.style.cssText = `
-                font-size: 48px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 100%;
-                height: 100%;
-                background: rgba(255, 215, 0, 0.1);
-                border-radius: 8px;
-              `;
-              parent.appendChild(fallback);
-            }
-          };
-        }}
-      />
-    );
+          {/* Fallback avec image externe */}
+          <img 
+            src={portraitData.url}
+            alt={heroName}
+            className="hero-portrait-fallback"
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              borderRadius: '8px',
+              opacity: 0, // Masqué par défaut, visible si SVG échoue
+              transition: 'opacity 0.3s ease'
+            }}
+            onLoad={(e) => {
+              console.log('📸 External portrait loaded:', heroName);
+              // Garder l'image masquée si le SVG fonctionne
+            }}
+            onError={(e) => {
+              console.warn('⚠️ External portrait failed, showing emoji fallback');
+              // Afficher l'emoji si tout échoue
+              const target = e.target as HTMLImageElement;
+              const parent = target.parentNode as HTMLElement;
+              if (parent && !parent.querySelector('.hero-emoji-fallback')) {
+                const fallback = document.createElement('div');
+                fallback.className = 'hero-emoji-fallback';
+                fallback.textContent = portraitData.fallbackEmoji;
+                fallback.style.cssText = `
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100%;
+                  font-size: 48px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  background: rgba(255, 215, 0, 0.1);
+                  border-radius: 8px;
+                  z-index: 2;
+                `;
+                parent.appendChild(fallback);
+              }
+            }}
+          />
+        </div>
+      );
+    } catch (error) {
+      console.error('❌ Error loading hero portrait:', error);
+      // Fallback ultime avec l'ancienne méthode
+      const heroImage = getHeroFallbackImage(heroName.toUpperCase());
+      return (
+        <img 
+          src={heroImage}
+          alt={heroName}
+          className="hero-portrait-img"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            borderRadius: '8px'
+          }}
+        />
+      );
+    }
   };
 
   if (isLoading) {
@@ -417,7 +461,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
               <div className="hero-details">
                 <div className="hero-portrait">
                   <div className="hero-image">
-                    {getHeroSpriteComponent(selectedHero.name)}
+                    {getHeroPortraitComponent(selectedHero.name, selectedHero.class || 'Warrior')}
                   </div>
                   <div className="hero-basic-info">
                     <h3 className="hero-name">{selectedHero.name}</h3>

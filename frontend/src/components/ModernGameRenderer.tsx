@@ -1,11 +1,12 @@
 import React, { useRef, useEffect, useState, useCallback, useMemo, forwardRef, useImperativeHandle } from 'react';
 import { useGameStore } from '../store/useGameStore';
-import { getHeroSprite, loadHeroImageWithFallback, getHeroEmoji } from '../utils/heroAssets';
+import { loadHeroImageWithFallback } from '../utils/heroAssets';
 import { Position, Tile, Hero } from '../types/game';
 import { useTranslation } from '../i18n';
 import './ModernGameRenderer.css';
 import { computeHexBitmask } from '../utils/hexBitmask';
 import { TERRAIN_EDGE_SPRITES } from '../constants/terrainSprites';
+import heroDisplayService from '../services/heroDisplayService';
 
 interface ModernGameRendererProps {
   width: number;
@@ -31,7 +32,7 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
   const animatedElementsRef = useRef<AnimatedElement[]>([]);
-  const { map, currentGame, currentPlayer, selectedTile, setSelectedTile, visibleZFCs, selectedHero, movementRange, movementMode, selectHero, moveHero, canMoveToPosition } = useGameStore();
+  const { map, currentGame, /* currentPlayer, */ selectedTile, setSelectedTile, visibleZFCs, selectedHero, movementRange, movementMode, selectHero, moveHero, canMoveToPosition } = useGameStore();
   const { t } = useTranslation();
   
   const [animatedElements, setAnimatedElements] = useState<AnimatedElement[]>([]);
@@ -71,20 +72,27 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     // If we have a selected hero and are in movement mode, try to move
     if (selectedHero && movementMode && canMoveToPosition(selectedHero, position)) {
       moveHero(selectedHero.id, position);
-      selectHero(null); // Deselect hero after movement
+      setSelectedTile(position);
       return;
     }
     
-    // Regular tile selection
+    // Otherwise, just select the tile
     setSelectedTile(position);
+    
+    // Call external handler if provided
     if (onTileClick) {
       onTileClick(position);
     }
-  }, [map, currentGame, selectedHero, movementMode, canMoveToPosition, moveHero, selectHero, setSelectedTile, onTileClick]);
+  }, [map, currentGame, selectedHero, movementMode, canMoveToPosition, selectHero, moveHero, setSelectedTile, onTileClick]);
 
-  // Fonction pour précharger les images des héros
-  const preloadHeroImage = useCallback((heroName: string): Promise<HTMLImageElement> => {
-    return loadHeroImageWithFallback(heroName);
+  // Preload hero images
+  const preloadHeroImage = useCallback(async (heroName: string) => {
+    try {
+      const image = await loadHeroImageWithFallback(heroName);
+      setHeroImages((prev: Map<string, HTMLImageElement>) => new Map(prev).set(heroName, image));
+    } catch (error) {
+      console.warn(`Failed to preload hero image: ${heroName}`, error);
+    }
   }, []);
 
   // Précharger les images des héros visibles - TEMPORAIREMENT DÉSACTIVÉ POUR DÉBUGGER
@@ -291,7 +299,7 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     ctx.stroke();
   }, []);
 
-  // Rendu d'un héros
+  // Rendu d'un héros avec le nouveau service
   const drawHero = useCallback((
     ctx: CanvasRenderingContext2D,
     center: Position,
@@ -301,51 +309,118 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     if (!hero || !hero.position) return;
     
     const { x, y } = center;
-    const size = 18;
+    const size = 24; // Taille légèrement plus grande pour les sprites
 
-    // Halo autour du héros
-    ctx.beginPath();
-    ctx.arc(x, y, size + 3, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(255, 215, 0, 0.4)';
-    ctx.fill();
+    try {
+      // Utiliser le nouveau service pour les MAP SPRITES
+      const spriteData = heroDisplayService.getHeroMapSprite({
+        name: hero.name,
+        heroClass: hero.class || 'Warrior',
+        level: hero.level || 1,
+        position: hero.position,
+        displayType: 'map-sprite',
+        size: 'medium'
+      });
 
-    // Cercle de base avec gradient
-    const gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
-    gradient.addColorStop(0, '#FFD700');
-    gradient.addColorStop(1, '#FFA500');
-    
-    ctx.beginPath();
-    ctx.arc(x, y, size, 0, Math.PI * 2);
-    ctx.fillStyle = gradient;
-    ctx.fill();
-    ctx.strokeStyle = '#B8860B';
-    ctx.lineWidth = 2;
-    ctx.stroke();
-
-    // Dessiner l'image du héros si disponible
-    const heroImage = heroImages.get(hero.name);
-    
-    if (heroImage) {
-      // Utiliser directement l'image PNG
-      ctx.save();
+      // Halo autour du héros (plus visible)
       ctx.beginPath();
-      ctx.arc(x, y, size - 2, 0, Math.PI * 2);
-      ctx.clip();
-      ctx.drawImage(heroImage, x - size + 2, y - size + 2, (size - 2) * 2, (size - 2) * 2);
-      ctx.restore();
-    } else {
-      // Fallback avec forme géométrique
-      ctx.fillStyle = '#8B4513';
-      ctx.strokeStyle = 'white';
-      ctx.lineWidth = 1;
+      ctx.arc(x, y, size + 4, 0, Math.PI * 2);
+      ctx.fillStyle = spriteData.isMoving ? 'rgba(0, 255, 0, 0.3)' : 'rgba(255, 215, 0, 0.4)';
+      ctx.fill();
+
+      // Cercle de base avec gradient
+      const gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+      gradient.addColorStop(0, '#FFD700');
+      gradient.addColorStop(1, '#FFA500');
       
-      // Épée stylisée
       ctx.beginPath();
-      ctx.moveTo(x, y - 8);
-      ctx.lineTo(x, y + 8);
-      ctx.moveTo(x - 4, y - 4);
-      ctx.lineTo(x + 4, y - 4);
+      ctx.arc(x, y, size, 0, Math.PI * 2);
+      ctx.fillStyle = gradient;
+      ctx.fill();
+      ctx.strokeStyle = spriteData.isMoving ? '#00FF00' : '#B8860B';
+      ctx.lineWidth = 2;
       ctx.stroke();
+
+      // Essayer d'afficher le SVG animé (simulé avec canvas)
+      if (spriteData.animatedSvg) {
+        // Pour l'instant, utiliser un rendu basique
+        // TODO: Implémenter le rendu SVG sur canvas
+        ctx.fillStyle = '#8B4513';
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 1;
+        
+        // Forme stylisée selon la classe
+        if (hero.class === 'Knight' || hero.class === 'Warrior') {
+          // Épée
+          ctx.beginPath();
+          ctx.moveTo(x, y - 10);
+          ctx.lineTo(x, y + 10);
+          ctx.moveTo(x - 5, y - 6);
+          ctx.lineTo(x + 5, y - 6);
+          ctx.stroke();
+        } else if (hero.class === 'Mage' || hero.class === 'Wizard') {
+          // Bâton magique
+          ctx.beginPath();
+          ctx.moveTo(x, y - 10);
+          ctx.lineTo(x, y + 8);
+          ctx.arc(x, y - 10, 3, 0, Math.PI * 2);
+          ctx.stroke();
+        } else if (hero.class === 'Archer') {
+          // Arc
+          ctx.beginPath();
+          ctx.arc(x, y, 8, Math.PI * 0.3, Math.PI * 0.7);
+          ctx.stroke();
+        }
+      }
+
+      // Dessiner les points de chemin si en mouvement
+      if (spriteData.pathDots && spriteData.pathDots.length > 0) {
+        ctx.fillStyle = '#00FF00';
+        spriteData.pathDots.forEach((dot, index) => {
+          const dotX = dot.x * 60 + 30; // Ajuster selon la taille des hexagones
+          const dotY = dot.y * 60 + 30;
+          ctx.beginPath();
+          ctx.arc(dotX, dotY, 2, 0, Math.PI * 2);
+          ctx.fill();
+        });
+      }
+
+    } catch (error) {
+      console.warn('⚠️ Error using hero display service, falling back to old method:', error);
+      
+      // Fallback avec l'ancienne méthode
+      ctx.beginPath();
+      ctx.arc(x, y, size, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255, 215, 0, 0.8)';
+      ctx.fill();
+      ctx.strokeStyle = '#B8860B';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      
+      // Dessiner l'image du héros si disponible
+      const heroImage = heroImages.get(hero.name);
+      
+      if (heroImage) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(x, y, size - 2, 0, Math.PI * 2);
+        ctx.clip();
+        ctx.drawImage(heroImage, x - size + 2, y - size + 2, (size - 2) * 2, (size - 2) * 2);
+        ctx.restore();
+      } else {
+        // Fallback avec forme géométrique
+        ctx.fillStyle = '#8B4513';
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 1;
+        
+        // Épée stylisée
+        ctx.beginPath();
+        ctx.moveTo(x, y - 8);
+        ctx.lineTo(x, y + 8);
+        ctx.moveTo(x - 4, y - 4);
+        ctx.lineTo(x + 4, y - 4);
+        ctx.stroke();
+      }
     }
 
     // Niveau du héros
