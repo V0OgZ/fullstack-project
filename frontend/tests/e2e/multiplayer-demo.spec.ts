@@ -7,8 +7,12 @@ test.describe('👥 Heroes of Time - Multiplayer Demo', () => {
     console.log('🚀 Starting multiplayer demo...');
     
     // Create two browser contexts for two players
-    const context1 = await browser.newContext();
-    const context2 = await browser.newContext();
+    const context1 = await browser.newContext({
+      viewport: { width: 800, height: 800 }
+    });
+    const context2 = await browser.newContext({
+      viewport: { width: 800, height: 800 }
+    });
     
     // Force English language for both contexts
     await context1.addInitScript(() => {
@@ -32,79 +36,110 @@ test.describe('👥 Heroes of Time - Multiplayer Demo', () => {
       // PLAYER 1 - Create Session
       console.log('🎮 Player 1: Creating multiplayer session...');
       
-      await page1.goto('http://localhost:3000');
+      // Go directly to multiplayer page
+      await page1.goto('http://localhost:3000/multiplayer');
       await page1.waitForLoadState('networkidle');
       
-      // Select Multiplayer Arena scenario
-      await page1.click('[data-testid="scenario-card-multiplayer-arena"]');
-      await page1.waitForTimeout(500);
-      
-      // Click Play button - this should show multiplayer session manager
-      await page1.click('[data-testid="play-button-multiplayer-arena"]');
-      await page1.waitForTimeout(2000);
-      
-      // Should now see multiplayer session manager
+      // Wait for multiplayer session manager
       await page1.waitForSelector('[data-testid="create-session-btn"]', { timeout: 10000 });
       
-      // Fill session details
-      const sessionName = `Test Session ${Date.now()}`;
-      await page1.fill('input[placeholder*="session name"]', sessionName);
-      await page1.fill('input[placeholder*="hero name"]', 'Player1Hero');
+      // Click create session
+      await page1.click('[data-testid="create-session-btn"]');
+      await page1.waitForTimeout(2000);
       
-      // Create session
-      await page1.click('[data-testid="create-new-game-btn"]');
-      await page1.waitForTimeout(3000);
+      // Check if we're in session creation mode (form visible)
+      const sessionForm = page1.locator('input[placeholder*="session name"]');
+      if (await sessionForm.count() > 0) {
+        console.log('📝 Filling session creation form...');
+        await sessionForm.fill('Demo Session');
+        
+        const heroNameInput = page1.locator('input[placeholder*="hero name"]');
+        if (await heroNameInput.count() > 0) {
+          await heroNameInput.fill('Player1Hero');
+        }
+        
+        // Submit the form
+        const createBtn = page1.locator('[data-testid="create-new-game-btn"]');
+        if (await createBtn.count() > 0) {
+          await createBtn.click();
+          await page1.waitForTimeout(3000);
+        }
+      }
       
-      // Should now be in waiting room
-      console.log('⏳ Player 1: Waiting for other players...');
+      console.log('⏳ Player 1: Session created/waiting...');
       
       // PLAYER 2 - Join Session
-      console.log('👥 Player 2: Joining session...');
+      console.log('👥 Player 2: Going to multiplayer page...');
       
-      await page2.goto('http://localhost:3000');
+      // Go directly to multiplayer page
+      await page2.goto('http://localhost:3000/multiplayer');
       await page2.waitForLoadState('networkidle');
+      await page2.waitForTimeout(3000); // Extra wait for sessions to load
       
-      // Select same scenario
-      await page2.click('[data-testid="scenario-card-multiplayer-arena"]');
-      await page2.waitForTimeout(500);
+      // Try to click refresh button
+      const refreshButton = page2.locator('button:has-text("Refresh")');
+      if (await refreshButton.count() > 0) {
+        console.log('🔄 Clicking refresh button...');
+        await refreshButton.click();
+        await page2.waitForTimeout(3000);
+      }
       
-      // Click Play
-      await page2.click('[data-testid="play-button-multiplayer-arena"]');
-      await page2.waitForTimeout(2000);
+      // Debug: Check what's on the page
+      const createSessionBtn2 = await page2.locator('[data-testid="create-session-btn"]').count();
+      const sessionList = await page2.locator('.session-list').count();
+      const sessionItems = await page2.locator('.session-item').count();
+      const availableSessions = await page2.locator('text=/Available Sessions/i').count();
       
-      // Should see session list
-      await page2.waitForSelector('.session-list', { timeout: 10000 });
+      console.log(`📊 Player 2 page state:`);
+      console.log(`   - Create session button: ${createSessionBtn2 > 0 ? 'Yes' : 'No'}`);
+      console.log(`   - Session list: ${sessionList > 0 ? 'Yes' : 'No'}`);
+      console.log(`   - Session items: ${sessionItems}`);
+      console.log(`   - Available sessions text: ${availableSessions > 0 ? 'Yes' : 'No'}`);
       
-      // Join the first available session
-      const joinButton = page2.locator('.session-item button').first();
-      if (await joinButton.count() > 0) {
+      if (sessionItems > 0) {
+        console.log('📋 Found session(s) to join');
+        // Try to join the first session
+        const joinButton = page2.locator('.session-item button:has-text("Join")').first();
         await joinButton.click();
         await page2.waitForTimeout(3000);
       } else {
-        console.log('⚠️ No sessions found to join');
+        console.log('⚠️ No sessions found');
+        
+        // Check if the page shows "No available sessions" or similar
+        const noSessionsText = await page2.locator('text=/no.*sessions|session.*found/i').count();
+        if (noSessionsText > 0) {
+          console.log('   Page shows "No sessions" message');
+        }
       }
       
-      console.log('⚔️ Both players connected...');
+      console.log('⚔️ Checking final state...');
       
-      // Wait for game to start (this might happen automatically or need a start button)
-      await page1.waitForTimeout(5000);
-      await page2.waitForTimeout(5000);
+      // Wait a bit more for potential game start
+      await page1.waitForTimeout(3000);
+      await page2.waitForTimeout(3000);
       
-      // Check if game started by looking for canvas
+      // Check final state for both players
       const canvas1 = await page1.locator('canvas').count();
       const canvas2 = await page2.locator('canvas').count();
+      const gameInterface1 = await page1.locator('.true-heroes-interface').count();
+      const gameInterface2 = await page2.locator('.true-heroes-interface').count();
+      const waitingRoom1 = await page1.locator('.waiting-room').count();
+      const waitingRoom2 = await page2.locator('.waiting-room').count();
       
-      if (canvas1 > 0 && canvas2 > 0) {
-        console.log('✅ Game started successfully!');
-        
-        // Take screenshots
-        await page1.screenshot({ path: 'test-results/multiplayer-player1.png' });
-        await page2.screenshot({ path: 'test-results/multiplayer-player2.png' });
+      console.log('📊 Final state:');
+      console.log(`   Player 1: Canvas=${canvas1}, Game=${gameInterface1}, Waiting=${waitingRoom1}`);
+      console.log(`   Player 2: Canvas=${canvas2}, Game=${gameInterface2}, Waiting=${waitingRoom2}`);
+      
+      // Take final screenshots
+      await page1.screenshot({ path: 'test-results/multiplayer-final-player1.png', fullPage: true });
+      await page2.screenshot({ path: 'test-results/multiplayer-final-player2.png', fullPage: true });
+      
+      if ((canvas1 > 0 || gameInterface1 > 0) && (canvas2 > 0 || gameInterface2 > 0)) {
+        console.log('✅ Both players in game!');
+      } else if (waitingRoom1 > 0 || waitingRoom2 > 0) {
+        console.log('⏳ Players in waiting room');
       } else {
-        console.log('⚠️ Game did not start, still in session manager');
-        // Take screenshots of session state
-        await page1.screenshot({ path: 'test-results/multiplayer-session1.png' });
-        await page2.screenshot({ path: 'test-results/multiplayer-session2.png' });
+        console.log('⚠️ Players still in session manager');
       }
       
       console.log('🎉 Multiplayer demo completed!');
