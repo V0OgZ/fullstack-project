@@ -6,11 +6,25 @@ test.describe('🎮 Heroes of Time - Enhanced Solo Gameplay Demo', () => {
     
     console.log('🚀 Starting enhanced gameplay demo...');
     
-    // Navigate to demo route
-    await page.goto('http://localhost:3000/demo');
+    // Navigate to home page
+    await page.goto('http://localhost:3000');
+    
+    // Wait for scenarios to load
+    console.log('⏳ Waiting for scenarios to load...');
+    await page.waitForSelector('.scenario-card', { timeout: 10000 });
+    
+    // Select conquest-classic scenario
+    console.log('🎮 Selecting Classic Conquest scenario...');
+    await page.click('[data-testid="scenario-card-conquest-classic"]');
+    await page.waitForTimeout(1000);
+    
+    // Click play button
+    console.log('▶️ Clicking play button...');
+    await page.click('[data-testid="play-button-conquest-classic"]');
+    await page.waitForTimeout(5000);
     
     // Wait for game to load
-    console.log('⏳ Waiting for game to load...');
+    console.log('⏳ Waiting for game interface to load...');
     await page.waitForSelector('.true-heroes-interface', { timeout: 30000 });
     
     console.log('🎮 Game loaded successfully!');
