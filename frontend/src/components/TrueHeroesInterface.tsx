@@ -25,7 +25,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
   } = useGameStore();
   
   const [selectedHeroId, setSelectedHeroId] = useState<string | null>(null);
-  const [rightPanelContent, setRightPanelContent] = useState<'scenario' | 'hero' | 'inventory' | 'castle'>('scenario');
+  const [rightPanelContent, setRightPanelContent] = useState<'scenario' | 'hero' | 'castle'>('scenario');
   const mapRendererRef = useRef<ModernGameRendererRef>(null);
 
   const handleHeroSelect = (heroId: string | null) => {
@@ -35,10 +35,6 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
     } else {
       setRightPanelContent('scenario');
     }
-  };
-
-  const handleInventoryClick = () => {
-    setRightPanelContent('inventory');
   };
 
   const handleHeroesClick = () => {
@@ -54,15 +50,19 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
     // Si aucun héros n'est sélectionné, sélectionner le premier
     if (!selectedHeroId) {
       targetHero = currentPlayer.heroes[0];
+      console.log('🎯 Auto-selecting first hero:', targetHero.name, 'ID:', targetHero.id);
     } else {
       // Sinon, cycler au héros suivant
       const currentIndex = currentPlayer.heroes.findIndex(hero => hero.id === selectedHeroId);
       const nextIndex = (currentIndex + 1) % currentPlayer.heroes.length;
       targetHero = currentPlayer.heroes[nextIndex];
+      console.log('🔄 Cycling to next hero:', targetHero.name, 'ID:', targetHero.id);
     }
 
     setSelectedHeroId(targetHero.id);
     setRightPanelContent('hero');
+
+    console.log('✅ Hero selected for movement:', targetHero.name, 'at position:', targetHero.position);
 
     // Centrer la carte sur le héros (sera implémenté dans ModernGameRenderer)
     if (mapRendererRef.current && mapRendererRef.current.centerOnPosition) {
@@ -77,8 +77,27 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
   const selectedHero = currentPlayer?.heroes?.find(hero => hero.id === selectedHeroId);
 
   const handleMapClick = (position: Position) => {
+    console.log('🗺️ Map clicked at position:', position);
+    console.log('👤 Current selectedHeroId:', selectedHeroId);
+    console.log('🎯 selectedHero object:', selectedHero);
+    
     if (selectedHero) {
+      console.log('✅ Moving hero:', selectedHero.name, 'from', selectedHero.position, 'to position:', position);
       useGameStore.getState().moveHero(selectedHero.id, position);
+    } else {
+      console.log('❌ No hero selected for movement - auto-selecting first hero');
+      
+      // Auto-sélectionner le premier héros si aucun n'est sélectionné
+      if (currentPlayer?.heroes && currentPlayer.heroes.length > 0) {
+        const firstHero = currentPlayer.heroes[0];
+        setSelectedHeroId(firstHero.id);
+        console.log('🎯 Auto-selected hero:', firstHero.name, 'trying to move to:', position);
+        
+        // Attendre que le state soit mis à jour avant de déplacer
+        setTimeout(() => {
+          useGameStore.getState().moveHero(firstHero.id, position);
+        }, 100);
+      }
     }
   };
 
@@ -94,15 +113,12 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
     let title = 'Heroes of Time';
     
     // Titre basé sur le contexte du panneau actuel
-    if (rightPanelContent === 'castle') {
-      title = 'Heroes of Time - Castle';
-    } else if (rightPanelContent === 'inventory') {
-      title = 'Heroes of Time - Inventory';
-    } else if (rightPanelContent === 'hero' && selectedHero) {
-      title = `Heroes of Time - ${selectedHero.name}`;
-    } else if (scenarioId) {
-      const mapName = scenarioId.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
-      title = `Heroes of Time - ${mapName}`;
+    if (rightPanelContent === 'scenario') {
+      title = 'Heroes of Time - Scenario';
+    } else if (rightPanelContent === 'hero') {
+      title = 'Heroes of Time - Hero Management';
+    } else if (rightPanelContent === 'castle') {
+      title = 'Heroes of Time - Castle Management';
     }
     
     document.title = title;
@@ -113,42 +129,69 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
     };
   }, [scenarioId, rightPanelContent, selectedHero]);
 
+  // Auto-sélectionner le premier héros quand on ouvre le panneau héros
+  useEffect(() => {
+    if (rightPanelContent === 'hero' && currentPlayer?.heroes && currentPlayer.heroes.length > 0 && !selectedHeroId) {
+      const firstHero = currentPlayer.heroes[0];
+      setSelectedHeroId(firstHero.id);
+      console.log('🎯 Auto-selecting first hero on panel open:', firstHero.name);
+    }
+  }, [rightPanelContent]); // FIXED: Removed selectedHeroId from deps to prevent loops
+
   const getHeroSpriteComponent = (heroName: string) => {
     const upperCaseHeroName = heroName.toUpperCase();
-    const spriteData = getHeroSprite(upperCaseHeroName);
     
-    if (spriteData) {
-      // Utiliser la spritesheet avec CSS background-position
-      const spriteStyle = createSpriteStyle(spriteData);
-      return (
-        <div 
-          className="hero-sprite"
-          style={spriteStyle}
-          title={heroName}
-        />
-      );
-    } else {
-      // Fallback vers image PNG simple
-      return (
-        <img 
-          src={getHeroFallbackImage(upperCaseHeroName)}
-          alt={heroName}
-          className="hero-portrait-img"
-          onError={(e) => {
-            // Fallback vers emoji si l'image ne charge pas
-            const target = e.target as HTMLImageElement;
-            target.style.display = 'none';
+    console.log('Loading hero image for:', heroName);
+    
+    // Utiliser directement l'image PNG fallback qui est plus fiable
+    const heroImage = getHeroFallbackImage(upperCaseHeroName);
+    console.log('Using hero image:', heroImage);
+    
+    return (
+      <img 
+        src={heroImage}
+        alt={heroName}
+        className="hero-portrait-img"
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          borderRadius: '8px'
+        }}
+        onLoad={() => {
+          console.log('✅ Hero image loaded successfully:', heroName, 'from', heroImage);
+        }}
+        onError={(e) => {
+          console.error('❌ Failed to load hero image:', heroImage);
+          // Fallback vers une image par défaut
+          const target = e.target as HTMLImageElement;
+          target.src = '/assets/heroes/warrior.png'; // Image par défaut
+          
+          // Si même l'image par défaut échoue, utiliser un emoji
+          target.onerror = () => {
+            console.error('❌ Fallback image also failed, using emoji');
             const parent = target.parentNode as HTMLElement;
             if (parent && !parent.querySelector('.hero-emoji-fallback')) {
+              target.style.display = 'none';
               const fallback = document.createElement('div');
               fallback.className = 'hero-emoji-fallback';
               fallback.textContent = getHeroEmoji(upperCaseHeroName);
+              fallback.style.cssText = `
+                font-size: 48px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+                background: rgba(255, 215, 0, 0.1);
+                border-radius: 8px;
+              `;
               parent.appendChild(fallback);
             }
-          }}
-        />
-      );
-    }
+          };
+        }}
+      />
+    );
   };
 
   if (isLoading) {
@@ -220,13 +263,14 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
               <span className="btn-icon">⚔️</span>
             </button>
             
-            <button 
+            {/* Remove Inventory button */}
+            {/* <button 
               className={`control-btn ${rightPanelContent === 'inventory' ? 'active' : ''}`}
               onClick={handleInventoryClick}
               title={t('tooltip.inventory')}
             >
               <span className="btn-icon">🎒</span>
-            </button>
+            </button> */}
             
             <button 
               className={`control-btn ${rightPanelContent === 'castle' ? 'active' : ''}`}
@@ -451,24 +495,6 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
                   <button 
                     className="action-button"
                     onClick={() => {
-                      // Action pour déplacer le héros
-                      console.log('Move hero:', selectedHero.name);
-                    }}
-                  >
-                    🚶 Move
-                  </button>
-                  <button 
-                    className="action-button"
-                    onClick={() => {
-                      // Action pour attaquer
-                      console.log('Attack with hero:', selectedHero.name);
-                    }}
-                  >
-                    ⚔️ Attack
-                  </button>
-                  <button 
-                    className="action-button"
-                    onClick={() => {
                       // Action pour lancer un sort
                       console.log('Cast spell with hero:', selectedHero.name);
                     }}
@@ -476,11 +502,44 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
                     🔮 Cast Spell
                   </button>
                 </div>
+
+                {/* Objets équipés directement dans le panneau héros */}
+                <div className="hero-equipped-items">
+                  <h4>🎒 Equipped Items:</h4>
+                  <div className="equipped-slots">
+                    <div className="equipment-slot">
+                      <span className="slot-icon">⚔️</span>
+                      <div className="slot-item">Magic Sword</div>
+                    </div>
+                    <div className="equipment-slot">
+                      <span className="slot-icon">🛡️</span>
+                      <div className="slot-item">Dragon Scale</div>
+                    </div>
+                    <div className="equipment-slot">
+                      <span className="slot-icon">💍</span>
+                      <div className="slot-item">Power Ring</div>
+                    </div>
+                    <div className="equipment-slot">
+                      <span className="slot-icon">👑</span>
+                      <div className="slot-item">Crown of Wisdom</div>
+                    </div>
+                  </div>
+                  <div className="equipment-bonuses">
+                    <h5>Bonuses:</h5>
+                    <div className="bonus-list">
+                      <span>+15 Attack</span>
+                      <span>+12 Defense</span>
+                      <span>+8 Spell Power</span>
+                      <span>+200 Movement</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           )}
 
-          {rightPanelContent === 'inventory' && (
+          {/* Remove inventory panel */}
+          {/* {rightPanelContent === 'inventory' && (
             <div className="panel-content inventory-panel">
               <div className="panel-header">
                 <h3>🎒 Equipped Items</h3>
@@ -525,7 +584,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
                 </div>
               </div>
             </div>
-          )}
+          )} */}
 
           {rightPanelContent === 'castle' && (
             <CastleManagementPanel

@@ -48,6 +48,40 @@ const response = await ApiService.recruitUnitsFromGame(gameId, buildingId, data)
 
 ## 🛠️ **Scripts de Développement**
 
+### 📜 **Scripts Principaux**
+```bash
+./start-app.sh     # Démarre Backend + Frontend
+./stop-app.sh      # Arrête tous les services
+./test-app.sh      # Tests rapides
+./run-all-tests.sh # Tests complets
+```
+
+### 🎮 **Mode Démo** (NOUVEAU!)
+```bash
+./frontend/start-demo.sh
+```
+- Lance une démo visuelle avec interface graphique
+- Montre le gameplay automatisé
+- Nécessite que les serveurs soient lancés
+
+### 🔍 **Mode Debug** (NOUVEAU!)
+```bash
+./frontend/start-debug.sh
+```
+- Tests headless avec capture complète des erreurs
+- Analyse les erreurs "Maximum update depth exceeded"
+- Sauvegarde les logs détaillés dans `frontend/debug-logs.json`
+- Fournit une analyse des erreurs et des snapshots d'état
+
+**Exemple de sortie du mode debug:**
+```
+📍 Test 1: Chargement de la page d'accueil
+📍 Test 2: Sélection du scénario classique
+❌ BOUCLE INFINIE DÉTECTÉE!
+   Fichier: http://localhost:3000/static/js/bundle.js
+   Ligne: 12345:67
+```
+
 ### 🧪 **Tests Automatisés**
 ```bash
 # Tests complets
