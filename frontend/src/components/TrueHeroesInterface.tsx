@@ -192,6 +192,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
 
   return (
     <div className="true-heroes-interface">
+      
       {/* Header avec informations du jeu */}
       <div className="game-header">
         <div className="header-info">

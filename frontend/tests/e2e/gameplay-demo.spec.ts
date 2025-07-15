@@ -184,7 +184,7 @@ test.describe('🎮 Heroes of Time - Demo Dynamique', () => {
 
     // Tooltip final de succès avec délai prolongé
     await createDynamicTooltip(page, 'Démonstration terminée avec succès !<br/>🎮 Le jeu est entièrement fonctionnel<br/>✨ Prêt pour votre aventure !');
-    await page.waitForTimeout(5000); // Délai prolongé pour le message final
+    await page.waitForTimeout(2000); // Reduced delay to avoid timeout
 
     console.log('✅ === DÉMO TERMINÉE AVEC SUCCÈS ===');
   });
