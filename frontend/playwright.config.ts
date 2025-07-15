@@ -25,7 +25,7 @@ export default defineConfig({
       name: 'solo-fullscreen',
       use: { 
         ...devices['Desktop Chrome'],
-        viewport: { width: 1280, height: 800 },
+        viewport: { width: 1920, height: 1080 },
         launchOptions: {
           slowMo: 100,
           args: [
@@ -35,9 +35,9 @@ export default defineConfig({
           ],
         },
       },
-      testMatch: ['**/*gameplay-demo.spec.ts', '**/*solo*.spec.ts'],
+      testMatch: ['**/*01-single-demo.spec.ts', '**/*terrain-vision*.spec.ts'],
     },
-        {
+    {
       name: 'multiplayer',
       use: { 
         ...devices['Desktop Chrome'],
@@ -50,7 +50,7 @@ export default defineConfig({
           ],
         },
       },
-      testMatch: ['**/*multiplayer*.spec.ts'],
+      testMatch: ['**/*multiplayer*.spec.ts', '**/*02-multiplayer-demo.spec.ts'],
     },
     {
       name: 'demo',
@@ -65,7 +65,7 @@ export default defineConfig({
           ],
         },
       },
-      testMatch: ['**/*demo*.spec.ts'],
+      testMatch: ['**/*demo*.spec.ts', '**/*debug*.spec.ts'],
     },
   ],
 }); 

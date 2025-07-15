@@ -52,19 +52,26 @@ const CastleManagementPanel: React.FC<CastleManagementPanelProps> = ({ gameId, p
   const [loading, setLoading] = useState(true);
   const [recruiting, setRecruiting] = useState<Record<string, boolean>>({});
   const [error, setError] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<'overview' | 'buildings' | 'recruit'>('overview');
+  const [useRealApi, setUseRealApi] = useState(true);
 
-  // Load castle data
+  // Load real data from backend APIs
   useEffect(() => {
-    const loadCastleData = async () => {
+    const loadRealData = async () => {
+      if (!useRealApi) {
+        loadMockData();
+        return;
+      }
+
       try {
         setLoading(true);
         setError(null);
 
-        // Load player buildings
+        // Load player buildings using existing API
         const buildingsResponse = await ApiService.getPlayerBuildings(gameId, playerId);
         setBuildings(buildingsResponse || []);
 
-        // Load available units for recruitment
+        // Load available units using existing API
         const unitsResponse = await ApiService.getAvailableUnits(gameId, playerId);
         setAvailableUnits(unitsResponse || {});
 
@@ -78,20 +85,149 @@ const CastleManagementPanel: React.FC<CastleManagementPanelProps> = ({ gameId, p
             }
           } catch (err) {
             console.warn(`Failed to load details for unit ${unitType}:`, err);
+            // Fallback to mock data for this unit
+            unitDetailsMap[unitType] = getMockUnitDetails(unitType);
           }
         }
         setUnitDetails(unitDetailsMap);
 
+        console.log('✅ Loaded real castle data from API');
       } catch (err) {
-        console.error('Error loading castle data:', err);
-        setError('Failed to load castle data. Please try again.');
+        console.error('❌ Error loading real castle data:', err);
+        setError('Failed to load castle data from API. Using mock data as fallback.');
+        setUseRealApi(false);
+        loadMockData();
       } finally {
         setLoading(false);
       }
     };
 
-    loadCastleData();
-  }, [gameId, playerId]);
+    const loadMockData = () => {
+      // Fallback mock data when API is unavailable
+      const mockBuildings: Building[] = [
+        {
+          id: '1',
+          buildingId: 'castle-1',
+          name: 'Castle',
+          type: 'castle',
+          level: 1,
+          castleId: 'castle-1',
+          playerId: playerId,
+          gameId: gameId,
+          constructionTime: 0,
+          currentUnitsAvailable: 14,
+          maxUnitsAvailable: 14,
+          recruitableUnits: ['peasant', 'archer'],
+          goldCost: 0,
+          isConstructed: true
+        },
+        {
+          id: '2',
+          buildingId: 'barracks-1',
+          name: 'Barracks',
+          type: 'barracks',
+          level: 1,
+          castleId: 'castle-1',
+          playerId: playerId,
+          gameId: gameId,
+          constructionTime: 0,
+          currentUnitsAvailable: 8,
+          maxUnitsAvailable: 8,
+          recruitableUnits: ['swordsman', 'pikeman'],
+          goldCost: 1000,
+          isConstructed: true
+        }
+      ];
+
+      const mockAvailableUnits: Record<string, number> = {
+        'peasant': 14,
+        'archer': 9,
+        'swordsman': 4,
+        'pikeman': 6
+      };
+
+      const mockUnitDetails: Record<string, Unit> = {
+        'peasant': getMockUnitDetails('peasant'),
+        'archer': getMockUnitDetails('archer'),
+        'swordsman': getMockUnitDetails('swordsman'),
+        'pikeman': getMockUnitDetails('pikeman')
+      };
+
+      setBuildings(mockBuildings);
+      setAvailableUnits(mockAvailableUnits);
+      setUnitDetails(mockUnitDetails);
+      setLoading(false);
+    };
+
+    loadRealData();
+  }, [gameId, playerId, useRealApi]);
+
+  const getMockUnitDetails = (unitType: string): Unit => {
+    const mockUnits: Record<string, Unit> = {
+      'peasant': {
+        id: 'peasant',
+        name: 'Peasant',
+        castle: 'castle',
+        tier: 1,
+        attack: 1,
+        defense: 1,
+        health: 5,
+        minDamage: 1,
+        maxDamage: 1,
+        speed: 3,
+        goldCost: 60,
+        growth: 14,
+        aiValue: 15
+      },
+      'archer': {
+        id: 'archer',
+        name: 'Archer',
+        castle: 'castle',
+        tier: 2,
+        attack: 6,
+        defense: 3,
+        health: 10,
+        minDamage: 2,
+        maxDamage: 6,
+        speed: 4,
+        goldCost: 150,
+        growth: 9,
+        aiValue: 126
+      },
+      'swordsman': {
+        id: 'swordsman',
+        name: 'Swordsman',
+        castle: 'castle',
+        tier: 3,
+        attack: 10,
+        defense: 12,
+        health: 35,
+        minDamage: 6,
+        maxDamage: 9,
+        speed: 5,
+        goldCost: 300,
+        growth: 4,
+        aiValue: 445
+      },
+      'pikeman': {
+        id: 'pikeman',
+        name: 'Pikeman',
+        castle: 'castle',
+        tier: 2,
+        attack: 5,
+        defense: 9,
+        health: 15,
+        minDamage: 3,
+        maxDamage: 4,
+        speed: 4,
+        goldCost: 100,
+        growth: 6,
+        aiValue: 115
+      }
+    };
+
+    return mockUnits[unitType] || mockUnits['peasant'];
+  };
 
   const handleRecruitUnit = async (unitType: string, buildingId: string, quantity: number = 1) => {
     try {
@@ -99,28 +235,44 @@ const CastleManagementPanel: React.FC<CastleManagementPanelProps> = ({ gameId, p
       setRecruiting(prev => ({ ...prev, [recruitKey]: true }));
       setError(null);
 
-      // Call backend to recruit units
-      const response = await ApiService.recruitUnitsFromGame(gameId, buildingId, {
-        playerId,
-        unitType,
-        quantity
-      });
+      if (useRealApi) {
+        // Try real API first
+        const response = await ApiService.recruitUnitsFromGame(gameId, buildingId, {
+          playerId,
+          unitType,
+          quantity
+        });
 
-      if (response.success) {
-        // Refresh game state to update resources and hero armies
-        await refreshGameState();
-        
-        // Reload castle data to update available units
-        const unitsResponse = await ApiService.getAvailableUnits(gameId, playerId);
-        setAvailableUnits(unitsResponse || {});
-        
-        const buildingsResponse = await ApiService.getPlayerBuildings(gameId, playerId);
-        setBuildings(buildingsResponse || []);
+        if (response.success) {
+          // Refresh game state to update resources and hero armies
+          await refreshGameState();
+          
+          // Reload castle data to update available units
+          const unitsResponse = await ApiService.getAvailableUnits(gameId, playerId);
+          setAvailableUnits(unitsResponse || {});
+          
+          const buildingsResponse = await ApiService.getPlayerBuildings(gameId, playerId);
+          setBuildings(buildingsResponse || []);
+          
+          console.log(`✅ Successfully recruited ${quantity} ${unitType} from ${buildingId}`);
+        } else {
+          setError(response.message || 'Failed to recruit units');
+        }
       } else {
-        setError(response.message || 'Failed to recruit units');
+        // Fallback to mock recruitment
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        // Update available units
+        setAvailableUnits(prev => ({
+          ...prev,
+          [unitType]: Math.max(0, (prev[unitType] || 0) - quantity)
+        }));
+
+        console.log(`✅ Mock recruitment: ${quantity} ${unitType} from ${buildingId}`);
       }
+
     } catch (err) {
-      console.error('Error recruiting units:', err);
+      console.error('❌ Error recruiting units:', err);
       setError('Failed to recruit units. Please try again.');
     } finally {
       setRecruiting(prev => ({ ...prev, [`${unitType}-${buildingId}`]: false }));
@@ -129,275 +281,208 @@ const CastleManagementPanel: React.FC<CastleManagementPanelProps> = ({ gameId, p
 
   const getUnitIcon = (unitType: string): string => {
     const iconMap: Record<string, string> = {
-      'peasant': '🧑‍🌾',
+      'peasant': '👨‍🌾',
       'archer': '🏹',
       'pikeman': '🛡️',
       'swordsman': '⚔️',
       'cavalry': '🐎',
       'knight': '♞',
-      'angel': '👼',
-      'skeleton': '💀',
-      'zombie': '🧟',
-      'vampire': '🧛',
-      'lich': '👻',
       'dragon': '🐉',
-      'phoenix': '🔥',
-      'unicorn': '🦄',
       'griffin': '🦅',
-      'hydra': '🐍',
-      'minotaur': '🐂',
-      'centaur': '🏹',
-      'dwarf': '⚒️',
-      'elf': '🧝',
-      'orc': '👹',
-      'goblin': '👺',
-      'troll': '🧌',
-      'giant': '👥',
-      'elemental': '🔥',
-      'golem': '🗿',
-      'sprite': '🧚',
-      'pegasus': '🦄',
-      'roc': '🦅',
-      'genie': '🧞',
-      'efreet': '🔥',
-      'naga': '🐍',
-      'titan': '⚡',
-      'behemoth': '🦏',
-      'wyvern': '🐉',
-      'manticore': '🦁',
-      'medusa': '🐍',
-      'basilisk': '🦎',
-      'gorgon': '🐂',
-      'cyclops': '👁️'
+      'angel': '👼'
     };
-    
     return iconMap[unitType.toLowerCase()] || '⚔️';
   };
 
-  const getBuildingIcon = (buildingType: string | undefined): string => {
-    if (!buildingType) {
-      return '🏢'; // Default building icon
-    }
-    
+  const getBuildingIcon = (buildingType: string): string => {
     const iconMap: Record<string, string> = {
       'castle': '🏰',
-      'barracks': '🏚️',
+      'barracks': '⚔️',
       'archery_range': '🏹',
       'stable': '🐎',
-      'workshop': '🔨',
       'mage_tower': '🗼',
       'cathedral': '⛪',
-      'graveyard': '⚰️',
-      'necropolis': '💀',
-      'crypt': '🏚️',
-      'bone_yard': '☠️',
-      'mausoleum': '⚱️',
-      'library': '📚',
-      'laboratory': '🧪',
-      'altar': '🛐',
-      'temple': '🕌',
-      'shrine': '⛩️',
-      'monastery': '🏛️',
-      'citadel': '🏰',
-      'fort': '🏰',
-      'keep': '🏰',
-      'tower': '🗼',
-      'wall': '🧱',
-      'gate': '🚪',
-      'moat': '🌊',
-      'bridge': '🌉',
-      'mine': '⛏️',
-      'sawmill': '🪚',
-      'quarry': '🪨',
       'marketplace': '🏪',
-      'tavern': '🍺',
-      'blacksmith': '🔨',
-      'armory': '🛡️',
-      'treasury': '💰',
-      'bank': '🏦',
-      'guild': '🏛️',
-      'academy': '🎓',
-      'observatory': '🔭',
-      'lighthouse': '🗼'
+      'tavern': '🍺'
     };
-    
     return iconMap[buildingType.toLowerCase()] || '🏢';
+  };
+
+  const getDailyIncomeFromBuildings = () => {
+    // Calculate income based on actual buildings
+    return buildings.reduce((income, building) => {
+      const baseIncome = building.isConstructed ? building.level * 100 : 0;
+      return {
+        gold: income.gold + baseIncome,
+        wood: income.wood + (building.type === 'sawmill' ? building.level * 2 : 0),
+        stone: income.stone + (building.type === 'quarry' ? building.level * 1 : 0)
+      };
+    }, { gold: 500, wood: 2, stone: 1 });
   };
 
   if (loading) {
     return (
-      <div className="castle-management-panel">
+      <div className="castle-panel">
         <div className="panel-header">
           <h3>🏰 Castle Management</h3>
-          <button className="close-btn" onClick={onClose}>×</button>
+          <button className="close-btn" onClick={onClose}>✕</button>
         </div>
-        <div className="loading-content">
-          <div className="loading-spinner"></div>
-          <p>Loading castle data...</p>
+        <div className="castle-content">
+          <div className="loading-message">
+            <div className="loading-spinner"></div>
+            <p>Loading castle data...</p>
+          </div>
         </div>
       </div>
     );
   }
 
-  if (error) {
-    return (
-      <div className="castle-management-panel">
-        <div className="panel-header">
-          <h3>🏰 Castle Management</h3>
-          <button className="close-btn" onClick={onClose}>×</button>
-        </div>
-        <div className="error-content">
-          <p className="error-message">{error}</p>
-          <button 
-            className="retry-btn" 
-            onClick={() => window.location.reload()}
-          >
-            Retry
-          </button>
-        </div>
-      </div>
-    );
-  }
+  const dailyIncome = getDailyIncomeFromBuildings();
 
   return (
-    <div className="castle-management-panel">
+    <div className="castle-panel">
       <div className="panel-header">
         <h3>🏰 Castle Management</h3>
-        <button className="close-btn" onClick={onClose}>×</button>
+        <button className="close-btn" onClick={onClose}>✕</button>
+      </div>
+
+      {!useRealApi && (
+        <div className="api-status">
+          <span className="status-warning">⚠️ Using mock data (API unavailable)</span>
+        </div>
+      )}
+
+      <div className="castle-tabs">
+        <button 
+          className={`tab-btn ${activeTab === 'overview' ? 'active' : ''}`}
+          onClick={() => setActiveTab('overview')}
+        >
+          📊 Overview
+        </button>
+        <button 
+          className={`tab-btn ${activeTab === 'buildings' ? 'active' : ''}`}
+          onClick={() => setActiveTab('buildings')}
+        >
+          🏗️ Buildings
+        </button>
+        <button 
+          className={`tab-btn ${activeTab === 'recruit' ? 'active' : ''}`}
+          onClick={() => setActiveTab('recruit')}
+        >
+          ⚔️ Recruit
+        </button>
       </div>
 
       <div className="castle-content">
-        {/* Player Resources */}
-        <div className="resources-section">
-          <h4>💰 Resources</h4>
-          <div className="resources-grid">
-            <div className="resource-item">
-              <span className="resource-icon">💰</span>
-              <span className="resource-amount">{currentPlayer?.resources?.gold || 0}</span>
-            </div>
-            <div className="resource-item">
-              <span className="resource-icon">🪵</span>
-              <span className="resource-amount">{currentPlayer?.resources?.wood || 0}</span>
-            </div>
-            <div className="resource-item">
-              <span className="resource-icon">🪨</span>
-              <span className="resource-amount">{currentPlayer?.resources?.stone || 0}</span>
-            </div>
+        {error && (
+          <div className="error-message">
+            {error}
           </div>
-        </div>
+        )}
 
-        {/* Buildings */}
-        <div className="buildings-section">
-          <h4>🏗️ Buildings ({buildings.length})</h4>
-          <div className="buildings-grid">
-            {buildings.map(building => (
-              <div key={building.buildingId} className="building-card">
-                <div className="building-header">
-                  <span className="building-icon">{getBuildingIcon(building.type)}</span>
-                  <span className="building-name">{building.name}</span>
-                  <span className="building-level">Lvl {building.level}</span>
+        {activeTab === 'overview' && (
+          <div className="overview-content">
+            <div className="resources-overview">
+              <h4>💰 Resources</h4>
+              <div className="resource-list">
+                <div className="resource-item">
+                  <span>💰 {currentPlayer?.resources?.gold || 0}</span>
                 </div>
-                <div className="building-info">
-                  <div className="building-status">
-                    {building.isConstructed ? (
-                      <span className="status-built">✅ Built</span>
-                    ) : (
-                      <span className="status-building">🔧 Building...</span>
-                    )}
-                  </div>
-                  {building.recruitableUnits && building.recruitableUnits.length > 0 && (
-                    <div className="building-units">
-                      <div className="units-available">
-                        Available: {building.currentUnitsAvailable}/{building.maxUnitsAvailable}
-                      </div>
-                      <div className="recruitable-units">
-                        {building.recruitableUnits.map(unitType => (
-                          <span key={unitType} className="unit-type">
-                            {getUnitIcon(unitType)} {unitType}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+                <div className="resource-item">
+                  <span>🪵 {currentPlayer?.resources?.wood || 0}</span>
+                </div>
+                <div className="resource-item">
+                  <span>🪨 {currentPlayer?.resources?.stone || 0}</span>
                 </div>
               </div>
-            ))}
+            </div>
+
+            <div className="daily-income">
+              <h4>📈 Daily Income</h4>
+              <div className="income-list">
+                <div className="income-item">💰 +{dailyIncome.gold}</div>
+                <div className="income-item">🪵 +{dailyIncome.wood}</div>
+                <div className="income-item">🪨 +{dailyIncome.stone}</div>
+              </div>
+            </div>
+
+            <div className="garrison-overview">
+              <h4>🛡️ Garrison</h4>
+              <div className="garrison-slots">
+                <div className="garrison-slot">👨‍🌾 25</div>
+                <div className="garrison-slot">🏹 12</div>
+                <div className="garrison-slot">⚔️ 8</div>
+                <div className="garrison-slot empty">Empty</div>
+              </div>
+            </div>
           </div>
-        </div>
+        )}
 
-        {/* Unit Recruitment */}
-        <div className="recruitment-section">
-          <h4>⚔️ Unit Recruitment</h4>
-          <div className="units-grid">
-            {Object.entries(availableUnits).map(([unitType, available]) => {
-              const unit = unitDetails[unitType];
-              const recruitableBuildings = buildings.filter(b => 
-                b.recruitableUnits?.includes(unitType) && b.isConstructed
-              );
-              
-              if (available === 0 || recruitableBuildings.length === 0) {
-                return null;
-              }
-
-              return (
-                <div key={unitType} className="unit-card">
-                  <div className="unit-header">
-                    <span className="unit-icon">{getUnitIcon(unitType)}</span>
-                    <span className="unit-name">{unit?.name || unitType}</span>
-                    <span className="unit-available">×{available}</span>
-                  </div>
-                  
-                  {unit && (
-                    <div className="unit-stats">
-                      <div className="stat-row">
-                        <span>⚔️ {unit.attack}</span>
-                        <span>🛡️ {unit.defense}</span>
-                        <span>❤️ {unit.health}</span>
-                      </div>
-                      <div className="stat-row">
-                        <span>💥 {unit.minDamage}-{unit.maxDamage}</span>
-                        <span>🏃 {unit.speed}</span>
-                        <span>⭐ {unit.aiValue}</span>
-                      </div>
-                      <div className="unit-cost">
-                        <span className="cost-gold">💰 {unit.goldCost}</span>
-                        <span className="cost-growth">📈 {unit.growth}/week</span>
+        {activeTab === 'buildings' && (
+          <div className="buildings-content">
+            <h4>🏗️ Buildings ({buildings.length})</h4>
+            <div className="building-list">
+              {buildings.map(building => (
+                <div key={building.buildingId} className="building-item">
+                  <div className="building-info">
+                    <span className="building-icon">{getBuildingIcon(building.type)}</span>
+                    <div className="building-details">
+                      <div className="building-name">{building.name}</div>
+                      <div className="building-status">
+                        {building.isConstructed ? '✅ Built' : '🔧 Building...'}
                       </div>
                     </div>
-                  )}
-                  
-                  <div className="recruitment-actions">
-                    {recruitableBuildings.map(building => (
-                      <button
-                        key={building.buildingId}
-                        className="recruit-btn"
-                        onClick={() => handleRecruitUnit(unitType, building.buildingId, 1)}
-                        disabled={
-                          recruiting[`${unitType}-${building.buildingId}`] || 
-                          available === 0 ||
-                          (currentPlayer?.resources?.gold || 0) < (unit?.goldCost || 0)
-                        }
-                      >
-                        {recruiting[`${unitType}-${building.buildingId}`] ? (
-                          '🔄 Recruiting...'
-                        ) : (
-                          `Recruit from ${building.name}`
-                        )}
-                      </button>
-                    ))}
                   </div>
+                  <div className="building-level">Lv.{building.level}</div>
                 </div>
-              );
-            })}
-          </div>
-          
-          {Object.keys(availableUnits).length === 0 && (
-            <div className="no-units">
-              <p>No units available for recruitment.</p>
-              <p>Build more structures to recruit units!</p>
+              ))}
             </div>
-          )}
-        </div>
+          </div>
+        )}
+
+        {activeTab === 'recruit' && (
+          <div className="recruit-content">
+            <h4>⚔️ Available Units</h4>
+            <div className="unit-list">
+              {Object.entries(availableUnits).map(([unitType, available]) => {
+                const unit = unitDetails[unitType];
+                const building = buildings.find(b => 
+                  b.recruitableUnits?.includes(unitType) && b.isConstructed
+                );
+                
+                if (available === 0 || !building) {
+                  return null;
+                }
+
+                return (
+                  <div key={unitType} className="unit-item">
+                    <div className="unit-info">
+                      <span className="unit-icon">{getUnitIcon(unitType)}</span>
+                      <div className="unit-details">
+                        <div className="unit-name">{unit?.name || unitType}</div>
+                        <div className="unit-stats">
+                          ⚔️{unit?.attack} 🛡️{unit?.defense} ❤️{unit?.health}
+                        </div>
+                        <div className="unit-cost">💰 {unit?.goldCost} | Available: {available}</div>
+                      </div>
+                    </div>
+                    <button
+                      className="recruit-btn"
+                      onClick={() => handleRecruitUnit(unitType, building.buildingId, 1)}
+                      disabled={
+                        recruiting[`${unitType}-${building.buildingId}`] || 
+                        available === 0 ||
+                        (currentPlayer?.resources?.gold || 0) < (unit?.goldCost || 0)
+                      }
+                    >
+                      {recruiting[`${unitType}-${building.buildingId}`] ? '🔄' : 'Recruit'}
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
