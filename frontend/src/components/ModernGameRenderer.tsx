@@ -309,7 +309,7 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     if (!hero || !hero.position) return;
     
     const { x, y } = center;
-    const size = 24; // Taille légèrement plus grande pour les sprites
+    const size = 20; // Taille optimisée pour les sprites sur carte
 
     try {
       // Utiliser le nouveau service pour les MAP SPRITES
@@ -319,68 +319,143 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
         level: hero.level || 1,
         position: hero.position,
         displayType: 'map-sprite',
-        size: 'medium'
+        size: 'small'
       });
 
-      // Halo autour du héros (plus visible)
-      ctx.beginPath();
-      ctx.arc(x, y, size + 4, 0, Math.PI * 2);
-      ctx.fillStyle = spriteData.isMoving ? 'rgba(0, 255, 0, 0.3)' : 'rgba(255, 215, 0, 0.4)';
-      ctx.fill();
-
-      // Cercle de base avec gradient
-      const gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
-      gradient.addColorStop(0, '#FFD700');
-      gradient.addColorStop(1, '#FFA500');
-      
+      // Base circulaire pour le héros (style Heroes 3)
       ctx.beginPath();
       ctx.arc(x, y, size, 0, Math.PI * 2);
-      ctx.fillStyle = gradient;
+      
+      // Couleur selon le mouvement
+      if (spriteData.isMoving) {
+        const gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+        gradient.addColorStop(0, '#00FF00');
+        gradient.addColorStop(1, '#008800');
+        ctx.fillStyle = gradient;
+      } else {
+        const gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+        gradient.addColorStop(0, '#FFD700');
+        gradient.addColorStop(1, '#B8860B');
+        ctx.fillStyle = gradient;
+      }
+      
       ctx.fill();
-      ctx.strokeStyle = spriteData.isMoving ? '#00FF00' : '#B8860B';
+      ctx.strokeStyle = spriteData.isMoving ? '#00FF00' : '#8B4513';
       ctx.lineWidth = 2;
       ctx.stroke();
 
-      // Essayer d'afficher le SVG animé (simulé avec canvas)
-      if (spriteData.animatedSvg) {
-        // Pour l'instant, utiliser un rendu basique
-        // TODO: Implémenter le rendu SVG sur canvas
-        ctx.fillStyle = '#8B4513';
-        ctx.strokeStyle = 'white';
-        ctx.lineWidth = 1;
+      // Dessiner le héros selon sa classe (style pixelisé Heroes 3)
+      ctx.fillStyle = '#FFFFFF';
+      ctx.strokeStyle = '#000000';
+      ctx.lineWidth = 1;
+      
+      const heroClass = hero.class || 'Warrior';
+      
+      if (heroClass === 'Knight' || heroClass === 'Warrior') {
+        // Chevalier avec épée et bouclier
+        // Corps
+        ctx.fillRect(x - 3, y - 8, 6, 12);
+        ctx.strokeRect(x - 3, y - 8, 6, 12);
         
-        // Forme stylisée selon la classe
-        if (hero.class === 'Knight' || hero.class === 'Warrior') {
-          // Épée
-          ctx.beginPath();
-          ctx.moveTo(x, y - 10);
-          ctx.lineTo(x, y + 10);
-          ctx.moveTo(x - 5, y - 6);
-          ctx.lineTo(x + 5, y - 6);
-          ctx.stroke();
-        } else if (hero.class === 'Mage' || hero.class === 'Wizard') {
-          // Bâton magique
-          ctx.beginPath();
-          ctx.moveTo(x, y - 10);
-          ctx.lineTo(x, y + 8);
-          ctx.arc(x, y - 10, 3, 0, Math.PI * 2);
-          ctx.stroke();
-        } else if (hero.class === 'Archer') {
-          // Arc
-          ctx.beginPath();
-          ctx.arc(x, y, 8, Math.PI * 0.3, Math.PI * 0.7);
-          ctx.stroke();
-        }
+        // Tête (casque)
+        ctx.fillRect(x - 4, y - 12, 8, 6);
+        ctx.strokeRect(x - 4, y - 12, 8, 6);
+        
+        // Épée
+        ctx.fillRect(x + 6, y - 10, 2, 8);
+        ctx.strokeRect(x + 6, y - 10, 2, 8);
+        
+        // Bouclier
+        ctx.fillRect(x - 8, y - 6, 3, 6);
+        ctx.strokeRect(x - 8, y - 6, 3, 6);
+        
+      } else if (heroClass === 'Mage' || heroClass === 'Wizard') {
+        // Mage avec bâton et robe
+        // Corps (robe)
+        ctx.fillRect(x - 4, y - 8, 8, 12);
+        ctx.strokeRect(x - 4, y - 8, 8, 12);
+        
+        // Tête (chapeau pointu)
+        ctx.beginPath();
+        ctx.moveTo(x, y - 16);
+        ctx.lineTo(x - 3, y - 8);
+        ctx.lineTo(x + 3, y - 8);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        
+        // Bâton magique
+        ctx.fillRect(x + 5, y - 14, 1, 12);
+        ctx.strokeRect(x + 5, y - 14, 1, 12);
+        
+        // Orbe magique
+        ctx.beginPath();
+        ctx.arc(x + 5, y - 16, 2, 0, Math.PI * 2);
+        ctx.fillStyle = '#00FFFF';
+        ctx.fill();
+        ctx.stroke();
+        
+      } else if (heroClass === 'Archer') {
+        // Archer avec arc
+        // Corps
+        ctx.fillRect(x - 3, y - 8, 6, 12);
+        ctx.strokeRect(x - 3, y - 8, 6, 12);
+        
+        // Tête
+        ctx.fillRect(x - 3, y - 12, 6, 6);
+        ctx.strokeRect(x - 3, y - 12, 6, 6);
+        
+        // Arc
+        ctx.beginPath();
+        ctx.arc(x - 6, y - 2, 6, Math.PI * 0.2, Math.PI * 0.8);
+        ctx.stroke();
+        
+        // Flèche
+        ctx.fillRect(x - 10, y - 3, 8, 1);
+        ctx.strokeRect(x - 10, y - 3, 8, 1);
+        
+      } else {
+        // Héros générique
+        // Corps
+        ctx.fillRect(x - 3, y - 8, 6, 12);
+        ctx.strokeRect(x - 3, y - 8, 6, 12);
+        
+        // Tête
+        ctx.fillRect(x - 3, y - 12, 6, 6);
+        ctx.strokeRect(x - 3, y - 12, 6, 6);
+        
+        // Arme générique
+        ctx.fillRect(x + 4, y - 8, 1, 8);
+        ctx.strokeRect(x + 4, y - 8, 1, 8);
       }
+
+      // Ajouter un petit indicateur de niveau
+      ctx.fillStyle = '#FFD700';
+      ctx.font = 'bold 8px Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText(hero.level?.toString() || '1', x, y + size + 12);
 
       // Dessiner les points de chemin si en mouvement
       if (spriteData.pathDots && spriteData.pathDots.length > 0) {
         ctx.fillStyle = '#00FF00';
+        ctx.strokeStyle = '#008800';
+        ctx.lineWidth = 1;
+        
         spriteData.pathDots.forEach((dot, index) => {
           const dotX = dot.x * 60 + 30; // Ajuster selon la taille des hexagones
           const dotY = dot.y * 60 + 30;
+          
+          // Points verts style Heroes 3
           ctx.beginPath();
-          ctx.arc(dotX, dotY, 2, 0, Math.PI * 2);
+          ctx.arc(dotX, dotY, 3, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+          
+          // Petit effet de pulsation
+          const pulse = Math.sin(Date.now() * 0.01 + index) * 0.5 + 0.5;
+          ctx.beginPath();
+          ctx.arc(dotX, dotY, 2 + pulse, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(0, 255, 0, ${0.3 + pulse * 0.3})`;
           ctx.fill();
         });
       }
@@ -388,74 +463,21 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     } catch (error) {
       console.warn('⚠️ Error using hero display service, falling back to old method:', error);
       
-      // Fallback avec l'ancienne méthode
+      // Fallback simple avec cercle coloré
       ctx.beginPath();
       ctx.arc(x, y, size, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(255, 215, 0, 0.8)';
+      ctx.fillStyle = '#FFD700';
       ctx.fill();
       ctx.strokeStyle = '#B8860B';
       ctx.lineWidth = 2;
       ctx.stroke();
       
-      // Dessiner l'image du héros si disponible
-      const heroImage = heroImages.get(hero.name);
-      
-      if (heroImage) {
-        ctx.save();
-        ctx.beginPath();
-        ctx.arc(x, y, size - 2, 0, Math.PI * 2);
-        ctx.clip();
-        ctx.drawImage(heroImage, x - size + 2, y - size + 2, (size - 2) * 2, (size - 2) * 2);
-        ctx.restore();
-      } else {
-        // Fallback avec forme géométrique
-        ctx.fillStyle = '#8B4513';
-        ctx.strokeStyle = 'white';
-        ctx.lineWidth = 1;
-        
-        // Épée stylisée
-        ctx.beginPath();
-        ctx.moveTo(x, y - 8);
-        ctx.lineTo(x, y + 8);
-        ctx.moveTo(x - 4, y - 4);
-        ctx.lineTo(x + 4, y - 4);
-        ctx.stroke();
-      }
+      // Nom du héros
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = 'bold 10px Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText(hero.name.charAt(0), x, y + 3);
     }
-
-    // Niveau du héros
-    ctx.beginPath();
-    ctx.arc(x + 12, y - 12, 8, 0, Math.PI * 2);
-    ctx.fillStyle = '#FF4444';
-    ctx.fill();
-    ctx.strokeStyle = '#CC0000';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-    
-    ctx.fillStyle = 'white';
-    ctx.font = 'bold 10px Arial';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(hero.level.toString(), x + 12, y - 12);
-
-    // Nom du héros avec contour
-    ctx.fillStyle = 'white';
-    ctx.font = 'bold 11px Arial';
-    ctx.strokeStyle = 'black';
-    ctx.lineWidth = 3;
-    ctx.strokeText(hero.name, x, y + 28);
-    ctx.fillText(hero.name, x, y + 28);
-
-    // Barre de mouvement
-    const mpBarWidth = 30;
-    const mpBarHeight = 4;
-    const mpRatio = hero.movementPoints / hero.maxMovementPoints;
-    
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
-    ctx.fillRect(x - mpBarWidth/2, y + 35, mpBarWidth, mpBarHeight);
-    
-    ctx.fillStyle = mpRatio > 0.5 ? '#4CAF50' : mpRatio > 0.2 ? '#FF9800' : '#F44336';
-    ctx.fillRect(x - mpBarWidth/2, y + 35, mpBarWidth * mpRatio, mpBarHeight);
   }, [heroImages]);
 
   // Render hexagonal tile with enhanced visuals
