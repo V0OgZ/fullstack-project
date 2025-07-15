@@ -6,10 +6,13 @@ test.describe('🎮 Heroes of Time - Single Player Demo', () => {
     
     console.log('🚀 Starting single player demo...');
     
-    // Navigate directly to demo route (faster and more reliable)
-    console.log('🎬 Using demo route for quick access...');
-    await page.goto('http://localhost:3000/demo');
-    await page.waitForTimeout(3000);
+    // Navigate to home page
+    await page.goto('http://localhost:3000');
+    await page.waitForTimeout(2000);
+    
+    // 📸 SCREENSHOT 1: Home page
+    await page.screenshot({ path: 'test-results/01-home-page.png' });
+    console.log('📸 Home page screenshot captured');
     
     // Show demo tooltip
     await page.evaluate(() => {
@@ -41,9 +44,10 @@ test.describe('🎮 Heroes of Time - Single Player Demo', () => {
     
     await page.waitForTimeout(4000);
     
-    // 📸 SCREENSHOT 1: Demo route loaded
-    await page.screenshot({ path: 'test-results/01-demo-route.png' });
-    console.log('📸 Demo route screenshot captured');
+    // Click demo button for quick access
+    console.log('🎬 Using demo button for quick access...');
+    await page.click('button:has-text("🎬 demo")');
+    await page.waitForTimeout(5000);
     
     // Verify game interface is loaded
     await expect(page.locator('.true-heroes-interface')).toBeVisible();
