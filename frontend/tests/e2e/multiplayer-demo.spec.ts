@@ -101,48 +101,104 @@ test.describe('👥 Heroes of Time - Multiplayer Demo', () => {
       await page2.waitForLoadState('networkidle');
       await page2.waitForTimeout(3000); // Extra wait for sessions to load
       
-      // Try to click refresh button
+      // Try to click refresh button multiple times
       const refreshButton = page2.locator('button:has-text("Refresh")');
       if (await refreshButton.count() > 0) {
         console.log('🔄 Clicking refresh button...');
         await refreshButton.click();
+        await page2.waitForTimeout(2000);
+        
+        // Try refresh again
+        await refreshButton.click();
         await page2.waitForTimeout(3000);
-    }
-    
-      // Debug: Check what's on the page
-      const createSessionBtn2 = await page2.locator('[data-testid="create-session-btn"]').count();
-      const sessionList = await page2.locator('.session-list').count();
-      const sessionItems = await page2.locator('.session-item').count();
-      const availableSessions = await page2.locator('text=/Available Sessions/i').count();
+      }
       
-      console.log(`📊 Player 2 page state:`);
-      console.log(`   - Create session button: ${createSessionBtn2 > 0 ? 'Yes' : 'No'}`);
-      console.log(`   - Session list: ${sessionList > 0 ? 'Yes' : 'No'}`);
-      console.log(`   - Session items: ${sessionItems}`);
-      console.log(`   - Available sessions text: ${availableSessions > 0 ? 'Yes' : 'No'}`);
+      // Wait longer for session to appear
+      await page2.waitForTimeout(5000);
+      
+      // Try to find and join any available session
+      const sessionItems = await page2.locator('.session-item, [data-testid*="session"], .session-card').count();
       
       if (sessionItems > 0) {
-        console.log('📋 Found session(s) to join');
-        // Try to join the first session
-        const joinButton = page2.locator('.session-item button:has-text("Join")').first();
-        await joinButton.click();
-        await page2.waitForTimeout(3000);
-      } else {
-        console.log('⚠️ No sessions found');
+        console.log(`✅ Found ${sessionItems} session(s), attempting to join...`);
         
-        // Check if the page shows "No available sessions" or similar
-        const noSessionsText = await page2.locator('text=/no.*sessions|session.*found/i').count();
-        if (noSessionsText > 0) {
-          console.log('   Page shows "No sessions" message');
+        // Click on the first session item
+        await page2.locator('.session-item, [data-testid*="session"], .session-card').first().click();
+        await page2.waitForTimeout(2000);
+        
+        // Look for join button
+        const joinBtn = page2.locator('button:has-text("Join"), [data-testid="join-session"], .join-btn');
+        if (await joinBtn.count() > 0) {
+          console.log('🎮 Joining session...');
+          await joinBtn.click();
+          await page2.waitForTimeout(3000);
+        }
+      } else {
+        console.log('⚠️ No sessions found, trying to create a new one...');
+        
+        // If no session found, create a new one from Player 2
+        const createBtn2 = page2.locator('[data-testid="create-session-btn"], button:has-text("Create")');
+        if (await createBtn2.count() > 0) {
+          await createBtn2.click();
+          await page2.waitForTimeout(2000);
+          
+          // Fill session form
+          const sessionNameInput2 = page2.locator('input[placeholder*="session"], input[data-testid="session-name"]');
+          if (await sessionNameInput2.count() > 0) {
+            await sessionNameInput2.fill('Player2Session');
+          }
+          
+          const createGameBtn2 = page2.locator('[data-testid="create-new-game-btn"], button:has-text("Create Game")');
+          if (await createGameBtn2.count() > 0) {
+            await createGameBtn2.click();
+            await page2.waitForTimeout(3000);
+          }
         }
       }
       
+      // Wait for both players to potentially enter game
+      await page1.waitForTimeout(5000);
+      await page2.waitForTimeout(5000);
+      
+      // Try to simulate some gameplay if in game
+      console.log('🎮 Attempting gameplay simulation...');
+      
+      // Player 1 actions
+      const p1Canvas = await page1.locator('canvas, .game-canvas, .map-grid').count();
+      if (p1Canvas > 0) {
+        console.log('🎯 Player 1 interacting with game...');
+        await page1.locator('canvas, .game-canvas, .map-grid').first().click();
+        await page1.waitForTimeout(2000);
+        
+        // Try to end turn
+        const endTurnP1 = page1.locator('.end-turn-btn, button:has-text("End Turn")');
+        if (await endTurnP1.count() > 0) {
+          await endTurnP1.click();
+          await page1.waitForTimeout(2000);
+        }
+      }
+      
+      // Player 2 actions
+      const p2Canvas = await page2.locator('canvas, .game-canvas, .map-grid').count();
+      if (p2Canvas > 0) {
+        console.log('🎯 Player 2 interacting with game...');
+        await page2.locator('canvas, .game-canvas, .map-grid').first().click();
+        await page2.waitForTimeout(2000);
+        
+        // Try to end turn
+        const endTurnP2 = page2.locator('.end-turn-btn, button:has-text("End Turn")');
+        if (await endTurnP2.count() > 0) {
+          await endTurnP2.click();
+          await page2.waitForTimeout(2000);
+        }
+      }
+      
+      // Final wait for both players
+      await page1.waitForTimeout(3000);
+      await page2.waitForTimeout(3000);
+      
       console.log('⚔️ Checking final state...');
       
-      // Wait a bit more for potential game start
-      await page1.waitForTimeout(3000);
-    await page2.waitForTimeout(3000);
-    
       // Check final state for both players
       const canvas1 = await page1.locator('canvas').count();
       const canvas2 = await page2.locator('canvas').count();

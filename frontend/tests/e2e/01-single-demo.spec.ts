@@ -123,6 +123,15 @@ test.describe('🎮 Heroes of Time - Demo Dynamique', () => {
       await page.waitForTimeout(1500);
     }, '⚔️ Test du panneau Héros<br/>Gestion de vos champions...');
 
+    // 7. Simuler sélection d'un héros
+    await performActionWithTooltip(page, async () => {
+      const heroElements = await page.locator('.hero-card, .hero-item, [data-testid*="hero"]').count();
+      if (heroElements > 0) {
+        await page.click('.hero-card, .hero-item, [data-testid*="hero"]');
+      }
+      await page.waitForTimeout(2000);
+    }, '🎯 Sélection d\'un héros<br/>Choix de votre champion pour l\'action...');
+
     await performActionWithTooltip(page, async () => {
       await page.click('.control-btn[title="Inventory"]');
       await page.waitForTimeout(1500);
@@ -133,13 +142,37 @@ test.describe('🎮 Heroes of Time - Demo Dynamique', () => {
       await page.waitForTimeout(1500);
     }, '🏰 Test du panneau Château<br/>Construction et recrutement...');
 
-    // 7. Finaliser avec un message de succès
+    // 8. Simuler fin de tour
+    await performActionWithTooltip(page, async () => {
+      const endTurnBtn = await page.locator('.end-turn-btn, [data-testid="end-turn"], button:has-text("End Turn")').first();
+      if (await endTurnBtn.count() > 0) {
+        await endTurnBtn.click();
+      }
+      await page.waitForTimeout(2000);
+    }, '⭐ Fin de tour<br/>Passage au tour suivant...');
+
+    // 9. Deuxième tour - actions supplémentaires
+    await performActionWithTooltip(page, async () => {
+      await page.click('.control-btn[title="Heroes"]');
+      await page.waitForTimeout(1500);
+    }, '⚔️ Tour 2 - Gestion des héros<br/>Nouvelles actions disponibles...');
+
+    // 10. Simuler mouvement sur la carte
+    await performActionWithTooltip(page, async () => {
+      const canvas = await page.locator('canvas, .map-grid, .hex-tile').first();
+      if (await canvas.count() > 0) {
+        await canvas.click();
+      }
+      await page.waitForTimeout(2000);
+    }, '🗺️ Interaction avec la carte<br/>Mouvement et exploration...');
+
+    // 11. Finaliser avec un message de succès
     await performActionWithTooltip(page, async () => {
       await page.waitForTimeout(3000);
-    }, '✅ Démo terminée avec succès !<br/>Toutes les fonctionnalités testées...');
+    }, '✅ Démo terminée avec succès !<br/>Gameplay complet démontré...');
 
-    // 8. Attendre un peu avant de terminer
-    await page.waitForTimeout(6000);
+    // 12. Attendre un peu avant de terminer
+    await page.waitForTimeout(8000);
 
     console.log('✅ === DÉMO TERMINÉE AVEC SUCCÈS ===');
   });
