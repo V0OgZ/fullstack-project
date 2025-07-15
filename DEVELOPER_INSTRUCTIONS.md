@@ -9,6 +9,7 @@
 ./start-app.sh     # Démarre Backend (8080) + Frontend (3000)
 ./stop-app.sh      # Arrête tous les services
 ./test-app.sh      # Tests rapides
+./run-epic-demo.sh # 🆕 Démo du système épique
 ```
 
 ### 🎯 **URLs Importantes**
@@ -23,6 +24,23 @@
 
 ### ✅ **Connexions API Fonctionnelles** (Janvier 2025)
 
+#### **🆕 Epic Content System - NOUVEAU**
+```typescript
+// ✅ NOUVEAU: Système de contenu épique complet
+const heroes = await fetchEpicHeroes();
+const creatures = await fetchEpicCreatures();
+const hero = await fetchHeroById('arthur_pendragon');
+const dragon = await fetchCreatureById('red_dragon');
+```
+
+**Endpoints Epic Content** (`/api/epic`):
+- `GET /api/epic/heroes` - Tous les héros épiques
+- `GET /api/epic/creatures` - Toutes les créatures épiques
+- `GET /api/epic/heroes/{id}` - Héros spécifique
+- `GET /api/epic/creatures/{id}` - Créature spécifique
+- `GET /api/epic/heroes/race/{race}` - Héros par race
+- `GET /api/epic/creatures/race/{race}` - Créatures par race
+
 #### **Castle Management - RÉCEMMENT CORRIGÉ**
 ```typescript
 // ✅ MAINTENANT: Connexion API réelle
@@ -31,11 +49,12 @@ const units = await ApiService.getAvailableUnits(gameId, playerId);
 const response = await ApiService.recruitUnitsFromGame(gameId, buildingId, data);
 ```
 
-#### **Endpoints Backend Disponibles** (70+ endpoints)
+#### **Endpoints Backend Disponibles** (80+ endpoints)
 - **GameController** (`/api/games`): 22 endpoints
 - **BuildingController** (`/api/buildings`): 25 endpoints  
 - **UnitController** (`/api/units`): 15 endpoints
 - **MultiplayerController** (`/api/multiplayer`): 8 endpoints
+- **🆕 EpicContentController** (`/api/epic`): 6 endpoints
 - **Contrôleurs spécialisés**: MagicItem, ZFC, AI, Scenario, Image
 
 #### **Endpoints Critiques Manquants**
@@ -43,6 +62,38 @@ const response = await ApiService.recruitUnitsFromGame(gameId, buildingId, data)
 - **Hero Management complet** (équipement, inventaire)
 - **Player Management** (ressources, statistiques)
 - **Spell System** (sorts, apprentissage)
+
+---
+
+## 🎮 **Nouveau Système Épique**
+
+### **🐉 Epic Content System**
+Interface accessible via le bouton 🐉 dans le jeu principal.
+
+**Fichiers Backend**:
+- `epic-heroes.json` - Données des héros légendaires
+- `epic-creatures.json` - Données des créatures fantastiques
+- `EpicContentController.java` - API REST pour le contenu épique
+
+**Fichiers Frontend**:
+- `epicContentAPI.ts` - Service API pour récupérer les données
+- `EpicContentViewer.tsx` - Interface utilisateur principale
+- `epic-content-demo.spec.ts` - Tests Playwright
+
+**Assets SVG**:
+- `/assets/creatures/` - Sprites des créatures
+- `/assets/heroes/` - Portraits des héros
+- `/assets/buildings/` - Images des bâtiments
+
+### **🧪 Tests du Système Épique**
+```bash
+# Test complet avec interface visuelle
+./run-epic-demo.sh
+
+# Test Playwright uniquement
+cd frontend
+npx playwright test tests/e2e/epic-content-demo.spec.ts --headed
+```
 
 ---
 

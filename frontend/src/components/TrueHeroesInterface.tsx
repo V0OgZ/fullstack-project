@@ -3,6 +3,7 @@ import { useTranslation } from '../i18n';
 import { useGameStore } from '../store/useGameStore';
 import ModernGameRenderer, { ModernGameRendererRef } from './ModernGameRenderer';
 import CastleManagementPanel from './CastleManagementPanel';
+import EpicContentViewer from './EpicContentViewer';
 import { getHeroFallbackImage, getHeroInfo } from '../utils/heroAssets';
 import { Position } from '../types/game';
 import './TrueHeroesInterface.css';
@@ -27,6 +28,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
   
   const [selectedHeroId, setSelectedHeroId] = useState<string | null>(null);
   const [rightPanelContent, setRightPanelContent] = useState<'scenario' | 'hero' | 'castle'>('scenario');
+  const [showEpicContent, setShowEpicContent] = useState(false);
   const mapRendererRef = useRef<ModernGameRendererRef>(null);
 
   // Fonction pour sélectionner un héros (gardée pour compatibilité future)
@@ -334,6 +336,14 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
               title={t('tooltip.castle')}
             >
               <span className="btn-icon">🏰</span>
+            </button>
+
+            <button 
+              className={`control-btn ${showEpicContent ? 'active' : ''}`}
+              onClick={() => setShowEpicContent(true)}
+              title="🎮 Contenu Épique - Créatures, Héros et Bâtiments"
+            >
+              <span className="btn-icon">🐉</span>
             </button>
 
             <button 
@@ -651,6 +661,12 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
           )}
         </div>
       </div>
+      
+      {/* Epic Content Viewer Modal */}
+      <EpicContentViewer 
+        isVisible={showEpicContent}
+        onClose={() => setShowEpicContent(false)}
+      />
     </div>
   );
 };

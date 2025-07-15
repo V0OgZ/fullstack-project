@@ -20,7 +20,7 @@ Heroes of Time is built with a **modern full-stack architecture** designed for s
 - **State Management:** Zustand
 - **Styling:** CSS Modules + Custom CSS
 - **WebSocket:** STOMP.js client
-- **Testing:** Jest, React Testing Library, Cypress
+- **Testing:** Jest, React Testing Library, Playwright
 - **Build Tool:** Create React App
 - **Port:** 3000
 
@@ -34,7 +34,8 @@ backend/
 │   │   ├── GameController.java
 │   │   ├── MultiplayerController.java
 │   │   ├── AIController.java
-│   │   └── BuildingController.java
+│   │   ├── BuildingController.java
+│   │   └── 🆕 EpicContentController.java
 │   ├── service/             # Business Logic Layer
 │   │   ├── GameService.java
 │   │   ├── BuildingService.java
@@ -48,13 +49,11 @@ backend/
 │   │   └── Scenario.java
 │   ├── repository/          # Data Access Layer
 │   │   ├── GameSessionRepository.java
-│   │   ├── BuildingRepository.java
-│   │   └── AIPlayerRepository.java
-│   ├── config/              # Configuration
-│   │   └── WebSocketConfig.java
-│   └── DemoApplication.java # Main Application
-├── src/test/java/           # Unit & Integration Tests
-└── pom.xml                  # Maven Configuration
+│   │   └── ...
+│   └── resources/           # Static Resources
+│       ├── 🆕 epic-heroes.json
+│       ├── 🆕 epic-creatures.json
+│       └── scenarios/
 ```
 
 ### Frontend Structure
@@ -62,35 +61,107 @@ backend/
 frontend/
 ├── src/
 │   ├── components/          # React Components
-│   │   ├── EnhancedScenarioSelector.tsx
 │   │   ├── TrueHeroesInterface.tsx
-│   │   ├── CastleManagement.tsx
-│   │   ├── MagicInventory.tsx
-│   │   └── LanguageSelector.tsx
-│   ├── pages/               # Main Pages
-│   │   └── Game.tsx
+│   │   ├── ModernGameRenderer.tsx
+│   │   ├── CastleManagementPanel.tsx
+│   │   └── 🆕 EpicContentViewer.tsx
 │   ├── services/            # API Services
 │   │   ├── api.ts
 │   │   ├── gameService.ts
-│   │   └── magicItemService.ts
+│   │   ├── 🆕 epicContentAPI.ts
+│   │   └── 🆕 buildingImageService.ts
 │   ├── store/               # State Management
 │   │   └── useGameStore.ts
-│   ├── types/               # TypeScript Types
-│   │   ├── game.ts
-│   │   ├── castle.ts
-│   │   └── temporal.ts
-│   ├── utils/               # Utility Functions
-│   │   └── hexMapGenerator.ts
-│   ├── i18n/                # Internationalization
-│   │   └── index.ts
-│   └── constants/           # Constants & Assets
-│       └── gameAssets.ts
-├── cypress/                 # E2E Tests
-│   ├── e2e/
-│   └── support/
-├── public/                  # Static Assets
-│   └── assets/
-└── package.json            # NPM Configuration
+│   ├── constants/           # Static Data
+│   │   ├── 🆕 epicCreatures.ts
+│   │   └── 🆕 epicHeroes.ts
+│   └── tests/e2e/           # End-to-End Tests
+│       ├── gameplay-demo.spec.ts
+│       └── 🆕 epic-content-demo.spec.ts
+├── public/
+│   └── assets/              # Static Assets
+│       ├── 🆕 creatures/    # SVG creature sprites
+│       ├── 🆕 heroes/       # SVG hero portraits
+│       └── 🆕 buildings/    # SVG building images
+```
+
+## 🆕 Epic Content System
+
+### Architecture
+The Epic Content System provides a rich library of heroes, creatures, and buildings with a clean separation between backend data and frontend presentation.
+
+#### Backend Components
+- **EpicContentController.java**: REST API endpoints for epic content
+- **epic-heroes.json**: Hero data with stats, abilities, and backstories
+- **epic-creatures.json**: Creature data with combat stats and special abilities
+
+#### Frontend Components
+- **epicContentAPI.ts**: TypeScript service for API communication
+- **EpicContentViewer.tsx**: React component for browsing epic content
+- **buildingImageService.ts**: Canvas-based image generation for buildings
+
+#### API Endpoints
+```typescript
+GET /api/epic/heroes              // All epic heroes
+GET /api/epic/creatures           // All epic creatures
+GET /api/epic/heroes/{id}         // Specific hero
+GET /api/epic/creatures/{id}      // Specific creature
+GET /api/epic/heroes/race/{race}  // Heroes by race
+GET /api/epic/creatures/race/{race} // Creatures by race
+```
+
+#### Data Models
+```typescript
+interface EpicHero {
+  id: string;
+  name: string;
+  race: string;
+  class: string;
+  level: number;
+  stats: {
+    attack: number;
+    defense: number;
+    spellPower: number;
+    knowledge: number;
+    morale: number;
+    luck: number;
+  };
+  specialAbility: string;
+  ultimateSkill: string;
+  backstory: string;
+  portraitUrl: string;
+}
+
+interface EpicCreature {
+  id: string;
+  name: string;
+  race: string;
+  tier: number;
+  health: number;
+  attack: number;
+  defense: number;
+  speed: number;
+  damage: [number, number];
+  special: string;
+  spriteUrl: string;
+}
+```
+
+### Integration
+The Epic Content System integrates seamlessly with the main game interface through:
+- **Button Integration**: 🐉 button in the main game header
+- **Modal Interface**: Full-screen overlay for browsing content
+- **Asset Loading**: Dynamic SVG loading with fallback generation
+- **API Integration**: Real-time data fetching from backend
+
+### Testing
+```bash
+# Run epic content demo
+./run-epic-demo.sh
+
+# Manual testing
+cd frontend
+npx playwright test tests/e2e/epic-content-demo.spec.ts --headed
 ```
 
 ## 🔌 API Documentation
