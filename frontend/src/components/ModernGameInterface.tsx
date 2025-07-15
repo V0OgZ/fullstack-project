@@ -186,8 +186,6 @@ const HeroCard = styled(motion.div)`
   
   &:hover {
     background: ${modernTheme.colors.surface.hover};
-    transform: translateY(-2px);
-    box-shadow: ${modernTheme.shadows.lg};
   }
 `;
 
