@@ -562,8 +562,8 @@
 }
 
 .hero-image {
-  width: 80px;
-  height: 80px;
+  width: 120px;  /* Plus grand qu'avant (était 80px) */
+  height: 120px; /* Plus grand qu'avant (était 80px) */
   border-radius: 8px;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.1);
@@ -572,17 +572,48 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  flex-shrink: 0; /* Empêche la compression */
 }
 
-.hero-portrait-img {
+.hero-portrait-img,
+.hero-portrait-primary {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 6px;
+  transition: transform 0.2s ease;
 }
 
-.hero-emoji-fallback {
-  font-size: 32px;
+.hero-portrait-img:hover,
+.hero-portrait-primary:hover {
+  transform: scale(1.02);
+}
+
+.hero-portrait-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.hero-portrait-svg {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-portrait-svg svg {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
+
+.hero-emoji-fallback,
+.hero-portrait-emoji {
+  font-size: 48px; /* Plus grand pour les emojis */
   display: flex;
   align-items: center;
   justify-content: center;
