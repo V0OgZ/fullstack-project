@@ -108,10 +108,10 @@ export class ApiService {
   }
 
   // Hero actions (ZFC calculations will be done server-side)
-  static async moveHero(heroId: string, targetPosition: any): Promise<any> {
-    return this.makeRequest(`/heroes/${heroId}/move`, {
+  static async moveHero(gameId: string, heroId: string, targetPosition: any): Promise<any> {
+    return this.makeRequest(`/games/${gameId}/move-hero`, {
       method: 'POST',
-      body: JSON.stringify({ targetPosition })
+      body: JSON.stringify({ heroId, position: targetPosition })
     });
   }
 

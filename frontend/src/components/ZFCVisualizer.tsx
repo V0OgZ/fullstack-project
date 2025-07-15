@@ -17,9 +17,9 @@ const ZFCVisualizer: React.FC<ZFCVisualizerProps> = ({ isVisible }) => {
   return (
     <div className="zfc-visualizer">
       {/* Zones de Causalité */}
-      {visibleZFCs.map((zfc, index) => (
+      {visibleZFCs.filter(zfc => zfc && zfc.reachableTiles && zfc.center).map((zfc, index) => (
         <div key={`zfc-${zfc.playerId}-${index}`} className="zfc-zone">
-          {zfc.reachableTiles.map((tile, tileIndex) => (
+          {zfc.reachableTiles.filter(tile => tile && typeof tile.x === 'number' && typeof tile.y === 'number').map((tile, tileIndex) => (
             <div
               key={`zfc-tile-${tile.x}-${tile.y}`}
               className="zfc-tile"
@@ -32,18 +32,20 @@ const ZFCVisualizer: React.FC<ZFCVisualizerProps> = ({ isVisible }) => {
               }}
             />
           ))}
-          <div className="zfc-center" style={{
-            left: `${zfc.center.x * 90 + (zfc.center.y % 2) * 45}px`,
-            top: `${zfc.center.y * 78}px`,
-            backgroundColor: getZFCColor(zfc.playerId),
-          }}>
-            <span className="zfc-radius">{zfc.radius}</span>
-          </div>
+          {zfc.center && typeof zfc.center.x === 'number' && typeof zfc.center.y === 'number' && (
+            <div className="zfc-center" style={{
+              left: `${zfc.center.x * 90 + (zfc.center.y % 2) * 45}px`,
+              top: `${zfc.center.y * 78}px`,
+              backgroundColor: getZFCColor(zfc.playerId),
+            }}>
+              <span className="zfc-radius">{zfc.radius}</span>
+            </div>
+          )}
         </div>
       ))}
 
       {/* Zones verrouillées */}
-      {lockedZones.map((zone, index) => (
+      {lockedZones.filter(zone => zone && typeof zone.x === 'number' && typeof zone.y === 'number').map((zone, index) => (
         <div
           key={`locked-${zone.x}-${zone.y}`}
           className="locked-zone"
@@ -57,14 +59,14 @@ const ZFCVisualizer: React.FC<ZFCVisualizerProps> = ({ isVisible }) => {
       ))}
 
       {/* Actions en ombre */}
-      {shadowActions.map((shadow) => (
+      {shadowActions.filter(shadow => shadow && shadow.actionId).map((shadow) => (
         <div
           key={shadow.actionId}
           className="shadow-action"
           style={{
-            left: shadow.position ? `${shadow.position.x * 90 + (shadow.position.y % 2) * 45}px` : '0px',
-            top: shadow.position ? `${shadow.position.y * 78}px` : '0px',
-            opacity: shadow.opacity,
+            left: shadow.position && typeof shadow.position.x === 'number' && typeof shadow.position.y === 'number' ? `${shadow.position.x * 90 + (shadow.position.y % 2) * 45}px` : '0px',
+            top: shadow.position && typeof shadow.position.x === 'number' && typeof shadow.position.y === 'number' ? `${shadow.position.y * 78}px` : '0px',
+            opacity: shadow.opacity || 0.5,
           }}
         >
           <div className="shadow-indicator">

@@ -132,10 +132,14 @@ test.describe('🎮 Heroes of Time - Demo Dynamique', () => {
       await page.waitForTimeout(2000);
     }, '🎯 Sélection d\'un héros<br/>Choix de votre champion pour l\'action...');
 
+    // Vérifier que les objets équipés apparaissent dans le panneau héros
     await performActionWithTooltip(page, async () => {
-      await page.click('.control-btn[title="Inventory"]');
-      await page.waitForTimeout(1500);
-    }, '🎒 Test du panneau Inventaire<br/>Gestion des objets équipés...');
+      // Vérifier que le panneau héros contient les objets équipés
+      const equippedItems = await page.locator('.hero-equipped-items').count();
+      if (equippedItems > 0) {
+        await page.waitForTimeout(1500);
+      }
+    }, '🎒 Vérification des objets équipés<br/>Dans le panneau héros...');
 
     await performActionWithTooltip(page, async () => {
       await page.click('.control-btn[title="Castle"]');

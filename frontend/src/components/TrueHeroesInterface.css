@@ -987,31 +987,105 @@
 }
 
 .hero-actions {
-  margin-top: 15px;
   display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .action-button {
-  background: rgba(255, 215, 0, 0.1);
+  flex: 1;
+  padding: 10px;
+  background: linear-gradient(135deg, #2a2a4a 0%, #1a1a3a 100%);
   color: #FFD700;
   border: 1px solid rgba(255, 215, 0, 0.3);
-  padding: 6px 12px;
-  border-radius: 4px;
-  font-size: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
   cursor: pointer;
-  transition: all 0.2s ease;
-  flex: 1;
-  min-width: 80px;
+  transition: all 0.3s ease;
 }
 
 .action-button:hover {
-  background: rgba(255, 215, 0, 0.2);
-  border-color: rgba(255, 215, 0, 0.5);
+  background: linear-gradient(135deg, #3a3a5a 0%, #2a2a4a 100%);
+  border-color: rgba(255, 215, 0, 0.6);
   transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(255, 215, 0, 0.2);
 }
 
-.action-button:active {
-  transform: translateY(0);
+/* Hero Equipped Items */
+.hero-equipped-items {
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero-equipped-items h4 {
+  color: #FFD700;
+  margin-bottom: 15px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.equipped-slots {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.equipment-slot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+}
+
+.equipment-slot:hover {
+  background: rgba(255, 215, 0, 0.1);
+  border-color: rgba(255, 215, 0, 0.3);
+}
+
+.slot-icon {
+  font-size: 18px;
+}
+
+.slot-item {
+  font-size: 13px;
+  color: #FFD700;
+  font-weight: 500;
+}
+
+.equipment-bonuses {
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.equipment-bonuses h5 {
+  color: #ccc;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.bonus-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.bonus-list span {
+  padding: 4px 10px;
+  background: rgba(50, 205, 50, 0.2);
+  border: 1px solid rgba(50, 205, 50, 0.4);
+  border-radius: 12px;
+  font-size: 12px;
+  color: #32CD32;
 } 
