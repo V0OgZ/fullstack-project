@@ -147,7 +147,7 @@ const AvatarTestPage: React.FC = () => {
                   <div 
                     className="fallback"
                     style={{ 
-                      display: hero.display?.url ? 'none' : 'block',
+                      display: hero.display?.url ? 'none' : 'flex',
                       width: '80px', 
                       height: '80px', 
                       backgroundColor: '#666',
@@ -155,7 +155,6 @@ const AvatarTestPage: React.FC = () => {
                       borderRadius: '50%',
                       margin: '0 auto',
                       fontSize: '40px',
-                      display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center'
                     }}

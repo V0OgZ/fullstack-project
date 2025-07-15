@@ -426,31 +426,6 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
       ctx.textAlign = 'center';
       ctx.fillText(hero.level?.toString() || '1', x, y + size + 12);
 
-      // Dessiner les points de chemin si en mouvement
-      if (spriteData.pathDots && spriteData.pathDots.length > 0) {
-        ctx.fillStyle = '#00FF00';
-        ctx.strokeStyle = '#008800';
-        ctx.lineWidth = 1;
-        
-        spriteData.pathDots.forEach((dot, index) => {
-          const dotX = dot.x * 60 + 30; // Ajuster selon la taille des hexagones
-          const dotY = dot.y * 60 + 30;
-          
-          // Points verts style Heroes 3
-          ctx.beginPath();
-          ctx.arc(dotX, dotY, 3, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.stroke();
-          
-          // Petit effet de pulsation
-          const pulse = Math.sin(Date.now() * 0.01 + index) * 0.5 + 0.5;
-          ctx.beginPath();
-          ctx.arc(dotX, dotY, 2 + pulse, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(0, 255, 0, ${0.3 + pulse * 0.3})`;
-          ctx.fill();
-        });
-      }
-
     } catch (error) {
       console.warn('⚠️ Error using hero display service, falling back to old method:', error);
       

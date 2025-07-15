@@ -26,7 +26,8 @@ class OfflineAvatarGenerator {
   private generatedAvatars = new Map<string, HeroAvatarData>();
 
   // ===== MAPPING HÉROS -> STYLES DICEBEAR =====
-  private readonly HERO_STYLE_MAPPING = {
+  // Use Record<string, string> so we can safely index with dynamic hero names
+  private readonly HERO_STYLE_MAPPING: Record<string, string> = {
     'ARTHUR': 'adventurer',
     'MORGANA': 'lorelei', 
     'TRISTAN': 'micah',
@@ -54,8 +55,10 @@ class OfflineAvatarGenerator {
         size: 128
       });
 
-      // Générer le SVG
-      const svgContent = await avatar.toDataUriSync();
+      // Générer le SVG – the Dicebear typings may miss the sync helper, so cast to any
+      const svgContent: string = (avatar as any).toDataUriSync
+        ? (avatar as any).toDataUriSync()
+        : await (avatar as any).toDataUri();
       
       // Créer le chemin local
       const localFileName = `${normalizedName.toLowerCase()}-${avatarStyle}.svg`;
@@ -140,6 +143,13 @@ class OfflineAvatarGenerator {
       generated: Array.from(this.generatedAvatars.values()).filter(a => a.isGenerated).length,
       fallback: Array.from(this.generatedAvatars.values()).filter(a => !a.isGenerated).length
     };
+  }
+
+  /**
+   * Obtient tous les avatars générés
+   */
+  getGeneratedAvatars(): Map<string, HeroAvatarData> {
+    return new Map(this.generatedAvatars);
   }
 
   /**

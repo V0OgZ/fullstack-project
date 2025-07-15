@@ -15,7 +15,7 @@ const OfflineAvatarTest: React.FC = () => {
       await offlineAvatarGenerator.generateAllHeroAvatars();
       const generatedAvatars = heroes.map(hero => ({
         name: hero,
-        avatar: offlineAvatarGenerator.generatedAvatars.get(hero)
+        avatar: offlineAvatarGenerator.getGeneratedAvatars().get(hero)
       }));
       setAvatars(generatedAvatars);
       setStats(offlineAvatarGenerator.getAvatarStats());

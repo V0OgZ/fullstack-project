@@ -322,10 +322,7 @@ public class MultiplayerService {
     }
     
     private Map<String, Object> processEndTurn(String sessionId, String playerId, Map<String, Object> actionData) {
-        // Process end turn for multiplayer
-        Map<String, Object> result = new HashMap<>();
-        result.put("success", true);
-        result.put("nextPlayer", "next_player_id");
-        return result;
+        // Delegate to GameService's multiplayer-aware implementation
+        return gameService.processEndTurnInSession(sessionId, playerId);
     }
 } 
