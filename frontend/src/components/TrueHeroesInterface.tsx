@@ -4,10 +4,10 @@ import { useGameStore } from '../store/useGameStore';
 import ModernGameRenderer, { ModernGameRendererRef } from './ModernGameRenderer';
 import CastleManagementPanel from './CastleManagementPanel';
 import EpicContentViewer from './EpicContentViewer';
-import { getHeroFallbackImage, getHeroInfo } from '../utils/heroAssets';
+import { getHeroAsset, getHeroInfo } from '../utils/heroAssets';
 import { Position } from '../types/game';
 import './TrueHeroesInterface.css';
-import heroDisplayService from '../services/heroDisplayService';
+import { assetService } from '../services/assetService';
 
 interface TrueHeroesInterfaceProps {
   playerCount: number;
@@ -142,18 +142,41 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
     }
   }, [rightPanelContent, currentPlayer?.heroes, selectedHeroId]); // Fixed dependencies
 
-  // Reusable component to display hero portrait with async loading
+  // Reusable component to display hero portrait with unified asset system
   const HeroPortrait: React.FC<{ heroName: string; heroClass: string }> = ({ heroName, heroClass }) => {
     const [portrait, setPortrait] = React.useState<any | null>(null);
 
     React.useEffect(() => {
       let isMounted = true;
-      heroDisplayService
-        .getHeroPortrait(heroName, heroClass)
-        .then((result) => {
-          if (isMounted) setPortrait(result);
-        })
-        .catch((err) => console.error('❌ Error loading hero portrait:', err));
+      
+      const loadHeroPortrait = async () => {
+        try {
+          // Utiliser le système unifié d'assets
+          const heroAsset = getHeroAsset(heroName);
+          const image = await assetService.loadHeroAsset(heroName);
+          
+          if (isMounted) {
+            setPortrait({
+              url: heroAsset.path,
+              fallback: heroAsset.fallback || '/assets/heroes/warrior.png',
+              type: 'local'
+            });
+          }
+        } catch (error) {
+          console.error('❌ Error loading hero portrait:', error);
+          // Fallback vers une image par défaut
+          if (isMounted) {
+            setPortrait({
+              url: '/assets/heroes/warrior.png',
+              fallback: '🛡️',
+              type: 'local'
+            });
+          }
+        }
+      };
+
+      loadHeroPortrait();
+      
       return () => {
         isMounted = false;
       };
