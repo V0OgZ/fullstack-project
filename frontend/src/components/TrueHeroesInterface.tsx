@@ -8,6 +8,7 @@ import { getHeroAsset, getHeroInfo } from '../utils/heroAssets';
 import { Position } from '../types/game';
 import './TrueHeroesInterface.css';
 import { assetService } from '../services/assetService';
+import { heroSpriteService } from '../services/heroSpriteService';
 
 interface TrueHeroesInterfaceProps {
   playerCount: number;
@@ -151,14 +152,14 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
       
       const loadHeroPortrait = async () => {
         try {
-          // Utiliser le système unifié d'assets
-          const heroAsset = getHeroAsset(heroName);
-          const image = await assetService.loadHeroAsset(heroName);
+          // Utiliser le nouveau service unifié
+          const portraitInfo = heroSpriteService.getHeroPortrait(heroName);
+          const image = await heroSpriteService.loadHeroPortrait(heroName);
           
           if (isMounted) {
             setPortrait({
-              url: heroAsset.path,
-              fallback: heroAsset.fallback || '/assets/heroes/warrior.png',
+              url: portraitInfo.path,
+              fallback: portraitInfo.fallback,
               type: 'local'
             });
           }
