@@ -225,16 +225,15 @@
   bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.9);
   color: #FFD700;
   padding: 8px 12px;
   border-radius: 6px;
   font-size: 12px;
   font-family: 'Cinzel', serif;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-  border: 1px solid rgba(255, 215, 0, 0.2);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(3px);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   white-space: nowrap;
   z-index: 1000;
   pointer-events: none;
@@ -246,7 +245,7 @@
 }
 
 .control-btn[title]:hover::after {
-  opacity: 0.8;
+  opacity: 0.9;
   transform: translateX(-50%) translateY(0);
 }
 
@@ -256,16 +255,15 @@
   bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.9);
   color: #FFD700;
   padding: 8px 12px;
   border-radius: 6px;
   font-size: 12px;
   font-family: 'Cinzel', serif;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-  border: 1px solid rgba(255, 215, 0, 0.2);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(3px);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   white-space: nowrap;
   z-index: 1000;
   pointer-events: none;
@@ -277,7 +275,7 @@
 }
 
 .end-turn-btn[title]:hover::after {
-  opacity: 0.8;
+  opacity: 0.9;
   transform: translateX(-50%) translateY(0);
 }
 
