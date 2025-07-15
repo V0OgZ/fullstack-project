@@ -73,7 +73,7 @@ export default defineConfig({
           ],
         },
       },
-      testMatch: ['**/debug*.spec.ts', '**/terrain-vision*.spec.ts'],
+      testMatch: ['**/debug*.spec.ts', '**/terrain-vision*.spec.ts', '**/turn-zfc-test.spec.ts', '**/simple-turn-test.spec.ts', '**/quick-verification.spec.ts'],
     },
   ],
 }); 
