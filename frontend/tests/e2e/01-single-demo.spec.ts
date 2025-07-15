@@ -1,182 +1,159 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('🎮 Heroes of Time - Single Player Demo', () => {
-  test('Complete solo gameplay demonstration', async ({ page }) => {
-    test.setTimeout(60000);
+// Fonction pour créer des tooltips dynamiques basés sur l'état réel
+const createDynamicTooltip = async (page: any, message: string, position: 'top' | 'center' | 'bottom' = 'center') => {
+  await page.evaluate(({ message, position }) => {
+    // Supprimer les anciens tooltips
+    const existingTooltips = document.querySelectorAll('.demo-tooltip');
+    existingTooltips.forEach(tooltip => tooltip.remove());
     
-    console.log('🚀 Starting single player demo...');
-    
-    // Navigate to home page
-    await page.goto('http://localhost:3000');
-    await page.waitForTimeout(2000);
-    
-    // 📸 SCREENSHOT 1: Home page
-    await page.screenshot({ path: 'test-results/01-home-page.png' });
-    console.log('📸 Home page screenshot captured');
-    
-    // Show demo tooltip
-    await page.evaluate(() => {
-      const tooltip = document.createElement('div');
-      tooltip.style.cssText = `
+    // Créer le nouveau tooltip
+    const tooltip = document.createElement('div');
+    tooltip.className = 'demo-tooltip';
+    tooltip.innerHTML = `
+      <div style="
         position: fixed;
-        top: 20px;
-        right: 20px;
+        top: ${position === 'top' ? '20px' : position === 'bottom' ? 'auto' : '50%'};
+        bottom: ${position === 'bottom' ? '20px' : 'auto'};
+        left: 50%;
+        transform: translateX(-50%) ${position === 'center' ? 'translateY(-50%)' : ''};
         background: linear-gradient(135deg, rgba(26,26,46,0.95) 0%, rgba(22,33,62,0.95) 50%, rgba(15,52,96,0.95) 100%);
         color: #ffd700;
-        padding: 15px 20px;
-        border-radius: 10px;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        font-family: 'Segoe UI', sans-serif;
+        padding: 20px 30px;
+        border-radius: 12px;
+        border: 2px solid rgba(255,215,0,0.8);
+        font-family: 'Georgia', serif;
         font-size: 16px;
-        font-weight: 600;
-        z-index: 9999;
-        border: 2px solid #ffd700;
+        font-weight: bold;
         text-align: center;
-        min-width: 300px;
-      `;
-      tooltip.innerHTML = '🎮 Solo Gameplay Demo<br/>✨ Complete Hero Experience';
-      document.body.appendChild(tooltip);
-      
-      setTimeout(() => {
-        tooltip.remove();
-      }, 4000);
-    });
-    
-    await page.waitForTimeout(4000);
-    
-    // Click demo button for quick access
-    console.log('🎬 Using demo button for quick access...');
-    await page.click('button:has-text("🎬 demo")');
-    await page.waitForTimeout(5000);
-    
-    // Verify game interface is loaded
-    await expect(page.locator('.true-heroes-interface')).toBeVisible();
-    console.log('✅ Game interface loaded successfully');
-    
-    // 📸 SCREENSHOT 2: Game interface
-    await page.screenshot({ path: 'test-results/02-game-interface.png' });
-    console.log('📸 Game interface screenshot captured');
-    
-    // Test panel buttons (using more robust selectors)
-    console.log('🎛️ Testing panel buttons...');
-    
-    // Look for buttons with various possible selectors
-    const heroesBtn = page.locator('button[title*="heroes"], button[title*="Heroes"], button:has-text("⚔️"), [data-testid="heroes-panel-btn"]').first();
-    if (await heroesBtn.isVisible()) {
-      await heroesBtn.click();
-      await page.waitForTimeout(2000);
-      console.log('✅ Heroes panel button clicked');
-      
-      // 📸 SCREENSHOT 3: Heroes panel
-      await page.screenshot({ path: 'test-results/03-heroes-panel.png' });
-      console.log('📸 Heroes panel screenshot captured');
-    }
-    
-    const castleBtn = page.locator('button[title*="castle"], button[title*="Castle"], button:has-text("🏰"), [data-testid="castle-panel-btn"]').first();
-    if (await castleBtn.isVisible()) {
-      await castleBtn.click();
-      await page.waitForTimeout(2000);
-      console.log('✅ Castle panel button clicked');
-      
-      // 📸 SCREENSHOT 4: Castle panel
-      await page.screenshot({ path: 'test-results/04-castle-panel.png' });
-      console.log('📸 Castle panel screenshot captured');
-    }
-    
-    const inventoryBtn = page.locator('button[title*="inventory"], button[title*="Inventory"], button:has-text("🎒"), [data-testid="inventory-panel-btn"]').first();
-    if (await inventoryBtn.isVisible()) {
-      await inventoryBtn.click();
-      await page.waitForTimeout(2000);
-      console.log('✅ Inventory panel button clicked');
-      
-      // 📸 SCREENSHOT 5: Inventory panel
-      await page.screenshot({ path: 'test-results/05-inventory-panel.png' });
-      console.log('📸 Inventory panel screenshot captured');
-    }
-    
-    // 📸 SCREENSHOT 6: Terrain map focus
-    const canvas = page.locator('canvas');
-    if (await canvas.isVisible()) {
-      await canvas.click({ position: { x: 200, y: 200 } });
-      await page.waitForTimeout(1000);
-      await page.screenshot({ 
-        path: 'test-results/06-terrain-map.png',
-        clip: { x: 0, y: 0, width: 800, height: 600 }
-      });
-      console.log('📸 Terrain map screenshot captured');
-    }
-    
-    // Test turn system
-    console.log('⭐ Testing turn system...');
-    const endTurnBtn = page.locator('button[title*="turn"], button[title*="Turn"], button:has-text("⭐"), [data-testid="end-turn-btn"]').first();
-    if (await endTurnBtn.isVisible()) {
-      await endTurnBtn.click();
-      await page.waitForTimeout(3000);
-      console.log('✅ Turn system button clicked');
-      
-      // 📸 SCREENSHOT 7: After turn
-      await page.screenshot({ path: 'test-results/07-after-turn.png' });
-      console.log('📸 After turn screenshot captured');
-    }
-    
-    // Test language switching
-    console.log('🌍 Testing language system...');
-    const languageBtn = page.locator('button:has-text("🇫🇷"), button:has-text("🇬🇧"), button:has-text("🇷🇺"), [data-testid="language-btn"]').first();
-    if (await languageBtn.isVisible()) {
-      await languageBtn.click();
-      await page.waitForTimeout(2000);
-      console.log('✅ Language button clicked');
-    }
-    
-    // 📸 SCREENSHOT 8: Final state
-    await page.screenshot({ path: 'test-results/08-final-state.png', fullPage: true });
-    console.log('📸 Final state screenshot captured');
-    
-    // Success message
-    await page.evaluate(() => {
-      const success = document.createElement('div');
-      success.style.cssText = `
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: linear-gradient(135deg, rgba(0,150,0,0.95) 0%, rgba(0,200,0,0.95) 100%);
-        color: white;
-        padding: 30px 40px;
-        border-radius: 15px;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-        font-family: 'Segoe UI', sans-serif;
-        font-size: 24px;
-        font-weight: 700;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,215,0,0.2);
         z-index: 10000;
-        text-align: center;
-        min-width: 400px;
-        border: 3px solid #00ff00;
-      `;
-      success.innerHTML = '🎉 SOLO DEMO COMPLETE! 🎉<br/>All features working perfectly!';
-      document.body.appendChild(success);
-      
-      setTimeout(() => {
-        success.remove();
-      }, 5000);
-    });
+        min-width: 320px;
+        max-width: 500px;
+        backdrop-filter: blur(5px);
+        opacity: 1;
+        animation: slideIn 0.3s ease-out;
+      ">
+        <div style="
+          background: linear-gradient(45deg, transparent 30%, rgba(255,215,0,0.1) 50%, transparent 70%);
+          margin: -25px -35px 15px -35px;
+          padding: 12px;
+          border-radius: 12px 12px 0 0;
+          font-size: 14px;
+          color: #ffed4e;
+          letter-spacing: 1px;
+        ">⚡ DÉMO DYNAMIQUE HEROES OF TIME ⚡</div>
+        ${message}
+      </div>
+    `;
     
-    await page.waitForTimeout(5000);
+    // Animation CSS
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideIn {
+        from { opacity: 0; transform: translateX(-50%) translateY(-20px) scale(0.9); }
+        to { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+      }
+    `;
+    document.head.appendChild(style);
     
-    console.log('🎉 Single player demo completed successfully!');
-    console.log('📸 Screenshots analysis ready:');
-    console.log('  01-home-page.png - Home page state');
-    console.log('  02-game-interface.png - Main game interface');
-    console.log('  03-heroes-panel.png - Heroes panel view');
-    console.log('  04-castle-panel.png - Castle panel view');
-    console.log('  05-inventory-panel.png - Inventory panel view');
-    console.log('  06-terrain-map.png - Terrain map closeup');
-    console.log('  07-after-turn.png - After turn state');
-    console.log('  08-final-state.png - Final game state');
-    console.log('✅ Demo button: Working');
-    console.log('✅ Game interface: Working');
-    console.log('✅ Panel buttons: Working');
-    console.log('✅ Turn system: Working');
-    console.log('✅ Language system: Working');
+    document.body.appendChild(tooltip);
+  }, { message, position });
+};
+
+// Fonction pour attendre qu'un élément soit vraiment chargé avec tooltip contextuel
+const waitForElementWithTooltip = async (page: any, selector: string, tooltipMessage: string, timeout = 10000) => {
+  await createDynamicTooltip(page, `⏳ ${tooltipMessage}...`);
+  
+  try {
+    await page.waitForSelector(selector, { state: 'visible', timeout });
+    await createDynamicTooltip(page, `✅ ${tooltipMessage} - Prêt !`);
+    await page.waitForTimeout(1000);
+  } catch (error) {
+    await createDynamicTooltip(page, `❌ ${tooltipMessage} - Échec !`);
+    await page.waitForTimeout(1000);
+    throw error;
+  }
+};
+
+// Fonction pour effectuer une action avec tooltip contextuel
+const performActionWithTooltip = async (page: any, action: () => Promise<void>, tooltipMessage: string) => {
+  await createDynamicTooltip(page, `🎯 ${tooltipMessage}...`);
+  await page.waitForTimeout(500);
+  
+  try {
+    await action();
+    await createDynamicTooltip(page, `✅ ${tooltipMessage} - Terminé !`);
+    await page.waitForTimeout(1000);
+  } catch (error) {
+    await createDynamicTooltip(page, `❌ ${tooltipMessage} - Erreur !`);
+    await page.waitForTimeout(1000);
+    throw error;
+  }
+};
+
+test.describe('🎮 Heroes of Time - Demo Dynamique', () => {
+  test('Demo avec tooltips dynamiques basés sur l\'état réel', async ({ page }) => {
+    test.setTimeout(120000);
+    console.log('🎬 === DÉBUT DE LA DÉMO DYNAMIQUE ===');
+
+    // 1. Navigation avec tooltip dynamique
+    await performActionWithTooltip(page, async () => {
+      await page.goto('/');
+    }, '🏠 Navigation vers la page d\'accueil<br/>Chargement de l\'interface principale...');
+
+    // 2. Attendre le chargement des scénarios avec tooltip contextuel
+    await waitForElementWithTooltip(
+      page, 
+      '[data-testid="scenario-card-conquest-classic"]', 
+      '📊 Chargement des scénarios disponibles<br/>Récupération des missions depuis le serveur...'
+    );
+
+    // 3. Sélection du scénario avec navigation automatique
+    await performActionWithTooltip(page, async () => {
+      await page.click('[data-testid="scenario-card-conquest-classic"]');
+    }, '🎯 Sélection du scénario "Conquête Classique"<br/>Navigation automatique vers le jeu...');
+
+    // 4. Attendre la navigation vers le jeu
+    await waitForElementWithTooltip(
+      page,
+      '.true-heroes-interface',
+      '🎮 Initialisation de l\'interface de jeu<br/>Chargement de la carte et des héros...'
+    );
+
+    // 5. Vérifier que l'interface est complètement chargée
+    await waitForElementWithTooltip(
+      page,
+      '.game-header',
+      '🖥️ Interface de jeu chargée !<br/>Votre royaume vous attend...'
+    );
+
+    // 6. Tester les boutons de contrôle
+    await performActionWithTooltip(page, async () => {
+      await page.click('.control-btn[title="Heroes"]');
+      await page.waitForTimeout(1000);
+    }, '⚔️ Test du panneau Héros<br/>Gestion de vos champions...');
+
+    await performActionWithTooltip(page, async () => {
+      await page.click('.control-btn[title="Inventory"]');
+      await page.waitForTimeout(1000);
+    }, '🎒 Test du panneau Inventaire<br/>Gestion des objets équipés...');
+
+    await performActionWithTooltip(page, async () => {
+      await page.click('.control-btn[title="Castle"]');
+      await page.waitForTimeout(1000);
+    }, '🏰 Test du panneau Château<br/>Construction et amélioration...');
+
+    // 7. Effectuer une action de fin de tour
+    await performActionWithTooltip(page, async () => {
+      await page.click('.end-turn-btn');
+      await page.waitForTimeout(2000);
+    }, '🌟 Fin du tour<br/>Passage au tour suivant...');
+
+    // Tooltip final de succès
+    await createDynamicTooltip(page, '🎉 Démonstration terminée avec succès !<br/>✨ Le jeu fonctionne parfaitement ! ✨<br/><br/>🎮 Vous pouvez maintenant jouer !');
+    await page.waitForTimeout(4000);
+
+    console.log('✅ === DÉMO TERMINÉE AVEC SUCCÈS ===');
   });
 }); 
