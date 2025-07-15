@@ -1,12 +1,12 @@
 import React, { useRef, useEffect, useState, useCallback, useMemo, forwardRef, useImperativeHandle } from 'react';
 import { useGameStore } from '../store/useGameStore';
-import { loadHeroImageWithFallback } from '../utils/heroAssets';
 import { Position, Tile, Hero } from '../types/game';
 import { useTranslation } from '../i18n';
 import './ModernGameRenderer.css';
 import { computeHexBitmask } from '../utils/hexBitmask';
 import { TERRAIN_EDGE_SPRITES } from '../constants/terrainSprites';
-import heroDisplayService from '../services/heroDisplayService';
+import { heroSpriteService } from '../services/heroSpriteService';
+import { getPlayerColorConfig } from '../constants/playerColors';
 
 interface ModernGameRendererProps {
   width: number;
@@ -43,6 +43,8 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
   }, [animatedElements]);
   const [hoveredTile, setHoveredTile] = useState<Position | null>(null);
   const [heroImages, setHeroImages] = useState<Map<string, HTMLImageElement>>(new Map());
+  const [mountImages, setMountImages] = useState<Map<string, HTMLImageElement>>(new Map());
+  const [flagImages, setFlagImages] = useState<Map<string, HTMLImageElement>>(new Map());
   const [mapOffset, setMapOffset] = useState<Position>({ x: 0, y: 0 });
   const [spriteCache] = useState<Map<string, HTMLImageElement>>(new Map());
 
@@ -88,18 +90,64 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
   // Preload hero images
   const preloadHeroImage = useCallback(async (heroName: string) => {
     try {
-      const image = await loadHeroImageWithFallback(heroName);
+      const image = await heroSpriteService.loadHeroSprite(heroName);
       setHeroImages((prev: Map<string, HTMLImageElement>) => new Map(prev).set(heroName, image));
     } catch (error) {
       console.warn(`Failed to preload hero image: ${heroName}`, error);
     }
   }, []);
 
-  // Précharger les images des héros visibles - TEMPORAIREMENT DÉSACTIVÉ POUR DÉBUGGER
-  useEffect(() => {
-    // Désactivé temporairement pour éviter les boucles infinies
-    console.log('🔧 Hero image preloading temporarily disabled for debugging');
+  // Preload mount images
+  const preloadMountImage = useCallback(async (mountType: string) => {
+    try {
+      const image = await heroSpriteService.loadMountSprite(mountType as any);
+      if (image) {
+        setMountImages((prev: Map<string, HTMLImageElement>) => new Map(prev).set(mountType, image));
+      }
+    } catch (error) {
+      console.warn(`Failed to preload mount image: ${mountType}`, error);
+    }
   }, []);
+
+  // Preload flag images
+  const preloadFlagImage = useCallback(async (playerColor: string) => {
+    try {
+      const image = await heroSpriteService.loadFlagSprite(playerColor as any);
+      setFlagImages((prev: Map<string, HTMLImageElement>) => new Map(prev).set(playerColor, image));
+    } catch (error) {
+      console.warn(`Failed to preload flag image: ${playerColor}`, error);
+    }
+  }, []);
+
+  // Précharger les images des héros visibles
+  useEffect(() => {
+    if (!map) return;
+    
+    const heroesToPreload = new Set<string>();
+    const mountsToPreload = new Set<string>();
+    const flagsToPreload = new Set<string>();
+    
+    // Collecter tous les héros visibles
+    map.forEach(row => {
+      row.forEach(tile => {
+        if (tile.hero) {
+          heroesToPreload.add(tile.hero.name);
+          if (tile.hero.mountType && tile.hero.mountType !== 'none') {
+            mountsToPreload.add(tile.hero.mountType);
+          }
+          if (tile.hero.playerColor) {
+            flagsToPreload.add(tile.hero.playerColor);
+          }
+        }
+      });
+    });
+    
+    // Précharger les images
+    heroesToPreload.forEach(heroName => preloadHeroImage(heroName));
+    mountsToPreload.forEach(mountType => preloadMountImage(mountType));
+    flagsToPreload.forEach(playerColor => preloadFlagImage(playerColor));
+    
+  }, [map, preloadHeroImage, preloadMountImage, preloadFlagImage]);
 
   // Précharger les images de terrain - TEMPORAIREMENT DÉSACTIVÉ
   useEffect(() => {
@@ -299,7 +347,7 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     ctx.stroke();
   }, []);
 
-  // Rendu d'un héros avec avatars Dicebear offline
+  // Rendu d'un héros avec système unifié (portrait + monture + drapeau)
   const drawHero = useCallback(async (
     ctx: CanvasRenderingContext2D,
     center: Position,
@@ -312,112 +360,135 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     const size = 20; // Taille optimisée pour les sprites sur carte
 
     try {
-      // Utiliser le service d'avatars offline
-      const { default: offlineAvatarGenerator } = await import('../services/offlineAvatarGenerator');
-      const avatarData = await offlineAvatarGenerator.getHeroAvatar(hero.name);
+      // Obtenir les informations de rendu du héros
+      const renderInfo = heroSpriteService.getHeroRenderInfo(hero);
+      const colorConfig = getPlayerColorConfig(hero.playerColor || 'blue');
       
+      // Charger les images nécessaires
+      const heroImage = heroImages.get(hero.name);
+      const mountImage = hero.mountType && hero.mountType !== 'none' ? mountImages.get(hero.mountType) : null;
+      const flagImage = hero.playerColor ? flagImages.get(hero.playerColor) : null;
+
       // Base circulaire pour le héros (style Heroes 3)
       ctx.beginPath();
       ctx.arc(x, y, size, 0, Math.PI * 2);
       
-      // Couleur selon l'avatar généré
+      // Couleur selon la couleur du joueur
       const gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
-      if (avatarData && avatarData.isGenerated) {
-        gradient.addColorStop(0, '#FFD700');
-        gradient.addColorStop(1, '#B8860B');
-      } else {
-        gradient.addColorStop(0, '#C0C0C0');
-        gradient.addColorStop(1, '#808080');
-      }
+      gradient.addColorStop(0, colorConfig.hex);
+      gradient.addColorStop(1, colorConfig.borderColor);
       ctx.fillStyle = gradient;
       ctx.fill();
-      ctx.strokeStyle = avatarData && avatarData.isGenerated ? '#8B4513' : '#666666';
+      ctx.strokeStyle = colorConfig.borderColor;
       ctx.lineWidth = 2;
       ctx.stroke();
 
-      // Dessiner le héros selon sa classe (style pixelisé Heroes 3)
-      ctx.fillStyle = '#FFFFFF';
-      ctx.strokeStyle = '#000000';
-      ctx.lineWidth = 1;
-      
-      const heroClass = hero.class || 'Warrior';
-      
-      if (heroClass === 'Knight' || heroClass === 'Warrior') {
-        // Chevalier avec épée et bouclier
-        // Corps
-        ctx.fillRect(x - 3, y - 8, 6, 12);
-        ctx.strokeRect(x - 3, y - 8, 6, 12);
-        
-        // Tête (casque)
-        ctx.fillRect(x - 4, y - 12, 8, 6);
-        ctx.strokeRect(x - 4, y - 12, 8, 6);
-        
-        // Épée
-        ctx.fillRect(x + 6, y - 10, 2, 8);
-        ctx.strokeRect(x + 6, y - 10, 2, 8);
-        
-        // Bouclier
-        ctx.fillRect(x - 8, y - 6, 3, 6);
-        ctx.strokeRect(x - 8, y - 6, 3, 6);
-        
-      } else if (heroClass === 'Mage' || heroClass === 'Wizard') {
-        // Mage avec bâton et robe
-        // Corps (robe)
-        ctx.fillRect(x - 4, y - 8, 8, 12);
-        ctx.strokeRect(x - 4, y - 8, 8, 12);
-        
-        // Tête (chapeau pointu)
+      // Dessiner le portrait du héros si disponible
+      if (heroImage) {
+        const portraitSize = 16;
+        ctx.save();
         ctx.beginPath();
-        ctx.moveTo(x, y - 16);
-        ctx.lineTo(x - 3, y - 8);
-        ctx.lineTo(x + 3, y - 8);
-        ctx.closePath();
-        ctx.fill();
-        ctx.stroke();
-        
-        // Bâton magique
-        ctx.fillRect(x + 5, y - 14, 1, 12);
-        ctx.strokeRect(x + 5, y - 14, 1, 12);
-        
-        // Orbe magique
-        ctx.beginPath();
-        ctx.arc(x + 5, y - 16, 2, 0, Math.PI * 2);
-        ctx.fillStyle = '#00FFFF';
-        ctx.fill();
-        ctx.stroke();
-        
-      } else if (heroClass === 'Archer') {
-        // Archer avec arc
-        // Corps
-        ctx.fillRect(x - 3, y - 8, 6, 12);
-        ctx.strokeRect(x - 3, y - 8, 6, 12);
-        
-        // Tête
-        ctx.fillRect(x - 3, y - 12, 6, 6);
-        ctx.strokeRect(x - 3, y - 12, 6, 6);
-        
-        // Arc
-        ctx.beginPath();
-        ctx.arc(x - 6, y - 2, 6, Math.PI * 0.2, Math.PI * 0.8);
-        ctx.stroke();
-        
-        // Flèche
-        ctx.fillRect(x - 10, y - 3, 8, 1);
-        ctx.strokeRect(x - 10, y - 3, 8, 1);
-        
+        ctx.arc(x, y, portraitSize, 0, Math.PI * 2);
+        ctx.clip();
+        ctx.drawImage(heroImage, x - portraitSize, y - portraitSize, portraitSize * 2, portraitSize * 2);
+        ctx.restore();
       } else {
-        // Héros générique
-        // Corps
-        ctx.fillRect(x - 3, y - 8, 6, 12);
-        ctx.strokeRect(x - 3, y - 8, 6, 12);
+        // Fallback : dessiner le héros selon sa classe (style pixelisé Heroes 3)
+        ctx.fillStyle = '#FFFFFF';
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 1;
         
-        // Tête
-        ctx.fillRect(x - 3, y - 12, 6, 6);
-        ctx.strokeRect(x - 3, y - 12, 6, 6);
+        const heroClass = hero.class || 'Warrior';
         
-        // Arme générique
-        ctx.fillRect(x + 4, y - 8, 1, 8);
-        ctx.strokeRect(x + 4, y - 8, 1, 8);
+        if (heroClass === 'Knight' || heroClass === 'Warrior') {
+          // Chevalier avec épée et bouclier
+          // Corps
+          ctx.fillRect(x - 3, y - 8, 6, 12);
+          ctx.strokeRect(x - 3, y - 8, 6, 12);
+          
+          // Tête (casque)
+          ctx.fillRect(x - 4, y - 12, 8, 6);
+          ctx.strokeRect(x - 4, y - 12, 8, 6);
+          
+          // Épée
+          ctx.fillRect(x + 6, y - 10, 2, 8);
+          ctx.strokeRect(x + 6, y - 10, 2, 8);
+          
+          // Bouclier
+          ctx.fillRect(x - 8, y - 6, 3, 6);
+          ctx.strokeRect(x - 8, y - 6, 3, 6);
+          
+        } else if (heroClass === 'Mage' || heroClass === 'Wizard') {
+          // Mage avec bâton et robe
+          // Corps (robe)
+          ctx.fillRect(x - 4, y - 8, 8, 12);
+          ctx.strokeRect(x - 4, y - 8, 8, 12);
+          
+          // Tête (chapeau pointu)
+          ctx.beginPath();
+          ctx.moveTo(x, y - 16);
+          ctx.lineTo(x - 3, y - 8);
+          ctx.lineTo(x + 3, y - 8);
+          ctx.closePath();
+          ctx.fill();
+          ctx.stroke();
+          
+          // Bâton magique
+          ctx.fillRect(x + 5, y - 14, 1, 12);
+          ctx.strokeRect(x + 5, y - 14, 1, 12);
+          
+          // Orbe magique
+          ctx.beginPath();
+          ctx.arc(x + 5, y - 16, 2, 0, Math.PI * 2);
+          ctx.fillStyle = '#00FFFF';
+          ctx.fill();
+          ctx.stroke();
+          
+        } else if (heroClass === 'Archer') {
+          // Archer avec arc
+          // Corps
+          ctx.fillRect(x - 3, y - 8, 6, 12);
+          ctx.strokeRect(x - 3, y - 8, 6, 12);
+          
+          // Tête
+          ctx.fillRect(x - 3, y - 12, 6, 6);
+          ctx.strokeRect(x - 3, y - 12, 6, 6);
+          
+          // Arc
+          ctx.beginPath();
+          ctx.arc(x - 6, y - 2, 6, Math.PI * 0.2, Math.PI * 0.8);
+          ctx.stroke();
+          
+          // Flèche
+          ctx.fillRect(x - 10, y - 3, 8, 1);
+          ctx.strokeRect(x - 10, y - 3, 8, 1);
+          
+        } else {
+          // Héros générique
+          // Corps
+          ctx.fillRect(x - 3, y - 8, 6, 12);
+          ctx.strokeRect(x - 3, y - 8, 6, 12);
+          
+          // Tête
+          ctx.fillRect(x - 3, y - 12, 6, 6);
+          ctx.strokeRect(x - 3, y - 12, 6, 6);
+          
+          // Arme générique
+          ctx.fillRect(x + 4, y - 8, 1, 8);
+          ctx.strokeRect(x + 4, y - 8, 1, 8);
+        }
+      }
+
+      // Dessiner la monture si présente
+      if (mountImage && hero.mountType && hero.mountType !== 'none') {
+        const mountSize = 24;
+        ctx.drawImage(mountImage, x - mountSize/2, y + size - 8, mountSize, mountSize * 0.75);
+      }
+
+      // Dessiner le drapeau si présent
+      if (flagImage && hero.playerColor) {
+        const flagSize = 12;
+        ctx.drawImage(flagImage, x + size - 2, y - flagSize/2, flagSize, flagSize);
       }
 
       // Ajouter un petit indicateur de niveau
@@ -426,8 +497,17 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
       ctx.textAlign = 'center';
       ctx.fillText(hero.level?.toString() || '1', x, y + size + 12);
 
+      // Ajouter un indicateur de sélection si c'est le héros sélectionné
+      if (selectedHero && selectedHero.id === hero.id) {
+        ctx.beginPath();
+        ctx.arc(x, y, size + 4, 0, Math.PI * 2);
+        ctx.strokeStyle = '#FFD700';
+        ctx.lineWidth = 3;
+        ctx.stroke();
+      }
+
     } catch (error) {
-      console.warn('⚠️ Error using hero display service, falling back to old method:', error);
+      console.warn('⚠️ Error drawing hero, falling back to simple method:', error);
       
       // Fallback simple avec cercle coloré
       ctx.beginPath();
@@ -444,7 +524,7 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
       ctx.textAlign = 'center';
       ctx.fillText(hero.name.charAt(0), x, y + 3);
     }
-  }, [heroImages]);
+  }, [heroImages, mountImages, flagImages, selectedHero]);
 
   // Render hexagonal tile with enhanced visuals
   const drawHexTile = useCallback((

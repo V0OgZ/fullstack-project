@@ -22,44 +22,89 @@ export interface SpriteInfo extends AssetInfo {
   size: { width: number; height: number };
 }
 
-// ===== SYSTÈME DE HÉROS UNIFIÉ =====
+// ===== SYSTÈME DE HÉROS UNIFIÉ - CORRIGÉ =====
+// Utilise les images SVG créées + PNG existantes
 export const HEROES_ASSETS = {
-  // Héros principaux avec images PNG locales
+  // Héros principaux - MAPPING CORRIGÉ vers les images SVG
   ARTHUR: {
-    path: '/assets/heroes/warrior.png',
+    path: '/assets/heroes/arthur.svg',
     type: 'png' as const,
-    fallback: '/assets/heroes/paladin.png',
+    fallback: '/assets/heroes/warrior.png',
     metadata: { width: 64, height: 64 }
   },
   MORGANA: {
-    path: '/assets/heroes/mage.png',
-    type: 'png' as const,
-    fallback: '/assets/heroes/warrior.png',
-    metadata: { width: 64, height: 64 }
-  },
-  TRISTAN: {
-    path: '/assets/heroes/archer.png',
-    type: 'png' as const,
-    fallback: '/assets/heroes/warrior.png',
-    metadata: { width: 64, height: 64 }
-  },
-  ELARA: {
-    path: '/assets/heroes/paladin.png',
+    path: '/assets/heroes/morgana.svg',
     type: 'png' as const,
     fallback: '/assets/heroes/mage.png',
     metadata: { width: 64, height: 64 }
   },
-  // Héros additionnels
+  TRISTAN: {
+    path: '/assets/heroes/tristan.svg',
+    type: 'png' as const,
+    fallback: '/assets/heroes/archer.png',
+    metadata: { width: 64, height: 64 }
+  },
+  ELARA: {
+    path: '/assets/heroes/elara.svg',
+    type: 'png' as const,
+    fallback: '/assets/heroes/paladin.png',
+    metadata: { width: 64, height: 64 }
+  },
+  // Héros additionnels - MAPPING CORRIGÉ
   GARETH: {
-    path: '/assets/heroes/warrior.png',
+    path: '/assets/heroes/warrior.png', // Dragon Slayer = Warrior
     type: 'png' as const,
     fallback: '/assets/heroes/paladin.png',
     metadata: { width: 64, height: 64 }
   },
   LYANNA: {
-    path: '/assets/heroes/archer.png',
+    path: '/assets/heroes/archer.png', // Elven Archer = Archer
     type: 'png' as const,
     fallback: '/assets/heroes/mage.png',
+    metadata: { width: 64, height: 64 }
+  },
+  // Classes génériques - MAPPING DIRECT
+  WARRIOR: {
+    path: '/assets/heroes/warrior.png',
+    type: 'png' as const,
+    fallback: '/assets/heroes/paladin.png',
+    metadata: { width: 64, height: 64 }
+  },
+  MAGE: {
+    path: '/assets/heroes/mage.png',
+    type: 'png' as const,
+    fallback: '/assets/heroes/warrior.png',
+    metadata: { width: 64, height: 64 }
+  },
+  ARCHER: {
+    path: '/assets/heroes/archer.png',
+    type: 'png' as const,
+    fallback: '/assets/heroes/warrior.png',
+    metadata: { width: 64, height: 64 }
+  },
+  PALADIN: {
+    path: '/assets/heroes/paladin.png',
+    type: 'png' as const,
+    fallback: '/assets/heroes/mage.png',
+    metadata: { width: 64, height: 64 }
+  },
+  // Héros additionnels avec mapping vers les classes existantes
+  CEDRIC: {
+    path: '/assets/heroes/paladin.png', // Paladin
+    type: 'png' as const,
+    fallback: '/assets/heroes/mage.png',
+    metadata: { width: 64, height: 64 }
+  },
+  SERAPHINA: {
+    path: '/assets/heroes/mage.png', // Sorceress = Mage
+    type: 'png' as const,
+    fallback: '/assets/heroes/warrior.png',
+    metadata: { width: 64, height: 64 }
+  },
+  VALEN: {
+    path: '/assets/heroes/mage.png', // Dark Mage = Mage
+    type: 'png' as const,
+    fallback: '/assets/heroes/warrior.png',
     metadata: { width: 64, height: 64 }
   }
 } as const;
@@ -140,6 +185,58 @@ export const TERRAIN_ASSETS = {
   }
 } as const;
 
+// ===== BÂTIMENTS - NOUVEAU SYSTÈME =====
+export const BUILDINGS_ASSETS = {
+  CASTLE: {
+    path: '/assets/buildings/castle.svg',
+    type: 'png' as const,
+    fallback: '🏰',
+    metadata: { width: 64, height: 64 }
+  },
+  BARRACKS: {
+    path: '/assets/buildings/barracks.svg',
+    type: 'png' as const,
+    fallback: '⚔️',
+    metadata: { width: 64, height: 64 }
+  },
+  MAGE_TOWER: {
+    path: '/assets/buildings/mage-tower.svg',
+    type: 'png' as const,
+    fallback: '🧙‍♀️',
+    metadata: { width: 64, height: 64 }
+  },
+  ARCHERY_RANGE: {
+    path: '/assets/buildings/archery-range.svg',
+    type: 'png' as const,
+    fallback: '🏹',
+    metadata: { width: 64, height: 64 }
+  },
+  TEMPLE: {
+    path: '/assets/buildings/temple.svg',
+    type: 'png' as const,
+    fallback: '⛪',
+    metadata: { width: 64, height: 64 }
+  },
+  FARM: {
+    path: '/assets/buildings/farm.svg',
+    type: 'png' as const,
+    fallback: '🌾',
+    metadata: { width: 64, height: 64 }
+  },
+  MINE: {
+    path: '/assets/buildings/mine.svg',
+    type: 'png' as const,
+    fallback: '⛏️',
+    metadata: { width: 64, height: 64 }
+  },
+  WORKSHOP: {
+    path: '/assets/buildings/workshop.svg',
+    type: 'png' as const,
+    fallback: '🔨',
+    metadata: { width: 64, height: 64 }
+  }
+} as const;
+
 // ===== EFFETS VISUELS LOCAUX =====
 export const EFFECTS_ASSETS = {
   // Remplace les URLs externes Giphy par des effets locaux
@@ -200,26 +297,37 @@ export const UI_ICONS = {
   GOLD: '💰',
   WOOD: '🪵',
   STONE: '🪨',
-  GEMS: '💎',
-  CRYSTAL: '🔮',
+  FOOD: '🍖',
+  MANA: '🔮',
   
-  // Bâtiments
-  CASTLE: '🏰',
-  TOWER: '🗼',
-  MARKET: '🏪',
-  MINE: '⛏️',
+  // Héros
+  HERO: '🦸',
+  KNIGHT: '🛡️',
+  MAGE: '🧙‍♀️',
+  ARCHER: '🏹',
+  PALADIN: '✨',
   
-  // Éléments décoratifs
-  STAR: '⭐',
-  CROWN: '👑',
-  FLAG: '🏁',
-  TORCH: '🔥'
+  // Créatures
+  DRAGON: '🐉',
+  GRIFFIN: '🦅',
+  UNICORN: '🦄',
+  PHOENIX: '🔥',
+  
+  // Interface
+  TURN: '⭐',
+  END_TURN: '⏭️',
+  SAVE: '💾',
+  LOAD: '📂',
+  NEW_GAME: '🎮',
+  SETTINGS: '⚙️',
+  HELP: '❓',
+  CLOSE: '✕'
 } as const;
 
-// ===== FONCTIONS UTILITAIRES =====
+// ===== FONCTIONS D'ACCÈS UNIFIÉES =====
 
 /**
- * Obtient les informations d'un asset héros avec fallback robuste
+ * Obtient l'asset d'un héros
  */
 export function getHeroAsset(heroName: string): AssetInfo {
   const normalizedName = heroName.toUpperCase() as keyof typeof HEROES_ASSETS;
@@ -227,7 +335,7 @@ export function getHeroAsset(heroName: string): AssetInfo {
 }
 
 /**
- * Obtient les informations d'un asset créature avec fallback
+ * Obtient l'asset d'une créature
  */
 export function getCreatureAsset(creatureName: string): AssetInfo {
   const normalizedName = creatureName.toUpperCase() as keyof typeof CREATURES_ASSETS;
@@ -235,47 +343,51 @@ export function getCreatureAsset(creatureName: string): AssetInfo {
 }
 
 /**
- * Obtient les informations d'un asset terrain
+ * Obtient l'asset d'un terrain
  */
 export function getTerrainAsset(terrainType: string): AssetInfo {
-  const normalizedType = terrainType.toUpperCase() as keyof typeof TERRAIN_ASSETS;
-  return TERRAIN_ASSETS[normalizedType] || TERRAIN_ASSETS.GRASS;
+  const normalizedName = terrainType.toUpperCase() as keyof typeof TERRAIN_ASSETS;
+  return TERRAIN_ASSETS[normalizedName] || TERRAIN_ASSETS.GRASS;
 }
 
 /**
- * Obtient les informations d'un effet visuel
+ * Obtient l'asset d'un bâtiment
+ */
+export function getBuildingAsset(buildingType: string): AssetInfo {
+  const normalizedName = buildingType.toUpperCase() as keyof typeof BUILDINGS_ASSETS;
+  return BUILDINGS_ASSETS[normalizedName] || BUILDINGS_ASSETS.CASTLE;
+}
+
+/**
+ * Obtient l'asset d'un effet
  */
 export function getEffectAsset(effectType: string): AssetInfo {
-  const normalizedType = effectType.toUpperCase() as keyof typeof EFFECTS_ASSETS;
-  return EFFECTS_ASSETS[normalizedType] || {
-    path: '',
-    type: 'png' as const,
-    fallback: '✨'
-  };
+  const normalizedName = effectType.toUpperCase() as keyof typeof EFFECTS_ASSETS;
+  return EFFECTS_ASSETS[normalizedName] || EFFECTS_ASSETS.FIRE;
 }
 
 /**
- * Charge une image avec fallback automatique
+ * Charge un asset avec fallback automatique
  */
 export async function loadAssetWithFallback(asset: AssetInfo): Promise<HTMLImageElement> {
-  const sources = [asset.path, asset.fallback].filter(Boolean) as string[];
-  
-  for (const src of sources) {
-    try {
-      const img = new Image();
-      await new Promise<void>((resolve, reject) => {
-        img.onload = () => resolve();
-        img.onerror = reject;
-        img.src = src;
-      });
-      return img;
-    } catch (error) {
-      console.warn(`Failed to load ${src}:`, error);
-    }
-  }
-  
-  // Fallback final : créer une image par défaut
-  throw new Error(`Failed to load asset: ${asset.path}`);
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    
+    img.onload = () => resolve(img);
+    img.onerror = () => {
+      // Essayer le fallback
+      if (asset.fallback && asset.fallback !== asset.path) {
+        const fallbackImg = new Image();
+        fallbackImg.onload = () => resolve(fallbackImg);
+        fallbackImg.onerror = () => reject(new Error(`Failed to load asset: ${asset.path} and fallback: ${asset.fallback}`));
+        fallbackImg.src = asset.fallback;
+      } else {
+        reject(new Error(`Failed to load asset: ${asset.path}`));
+      }
+    };
+    
+    img.src = asset.path;
+  });
 }
 
 /**
@@ -286,41 +398,44 @@ export function isAnimatedAsset(asset: AssetInfo): boolean {
 }
 
 /**
- * Obtient tous les assets disponibles par catégorie
+ * Obtient tous les assets par catégorie
  */
 export function getAssetsByCategory() {
   return {
     heroes: Object.keys(HEROES_ASSETS),
     creatures: Object.keys(CREATURES_ASSETS),
     terrain: Object.keys(TERRAIN_ASSETS),
-    effects: Object.keys(EFFECTS_ASSETS),
-    ui: Object.keys(UI_ICONS)
+    buildings: Object.keys(BUILDINGS_ASSETS),
+    effects: Object.keys(EFFECTS_ASSETS)
   };
 }
 
-// ===== MAPPINGS POUR COMPATIBILITÉ =====
+// ===== MAPPINGS RECOMMANDÉS =====
 
-// Mapping des héros par scénario
+// Héros recommandés par scénario
 export const HERO_BY_SCENARIO = {
   'conquest-classic': 'ARTHUR',
   'temporal-rift': 'MORGANA',
   'dragon-campaign': 'GARETH',
-  'multiplayer-arena': 'TRISTAN'
+  'multiplayer-arena': 'TRISTAN',
+  'mystic-quest': 'ELARA',
+  'paladin-crusade': 'CEDRIC'
 } as const;
 
-// Mapping des créatures par type de terrain
+// Créatures recommandées par terrain
 export const CREATURE_BY_TERRAIN = {
-  mountain: 'DRAGON_RED',
-  forest: 'UNICORN',
-  swamp: 'DRAGON_BLUE',
-  desert: 'PHOENIX',
-  grass: 'GRIFFIN',
-  water: 'KNIGHT'
+  'grass': 'GRIFFIN',
+  'forest': 'UNICORN',
+  'mountain': 'DRAGON_RED',
+  'water': 'PHOENIX',
+  'desert': 'DRAGON_RED',
+  'swamp': 'KNIGHT'
 } as const;
 
-// Export des types pour TypeScript
+// ===== TYPES EXPORTÉS =====
 export type HeroName = keyof typeof HEROES_ASSETS;
 export type CreatureName = keyof typeof CREATURES_ASSETS;
 export type TerrainType = keyof typeof TERRAIN_ASSETS;
+export type BuildingType = keyof typeof BUILDINGS_ASSETS;
 export type EffectType = keyof typeof EFFECTS_ASSETS;
 export type UIIcon = keyof typeof UI_ICONS; 
