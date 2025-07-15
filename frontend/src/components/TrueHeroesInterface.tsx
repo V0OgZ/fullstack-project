@@ -250,9 +250,11 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
                   console.error('Error ending turn:', error);
                 }
               }}
-              title="End Turn"
+              title={currentGame?.gameMode === 'hotseat' ? 'Next Player' : 'End Turn'}
             >
-              <span className="btn-icon">🌟</span>
+              <span className="btn-icon">
+                {currentGame?.gameMode === 'hotseat' ? '👤' : '⭐'}
+              </span>
             </button>
           </div>
         </div>

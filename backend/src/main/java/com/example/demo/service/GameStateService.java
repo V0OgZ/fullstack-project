@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Arrays;
 
 @Service
 public class GameStateService {
@@ -59,12 +60,32 @@ public class GameStateService {
         return updateGameState(state);
     }
     
-    public GameState endPlayerTurn(String gameId, String nextPlayerId) {
+    public GameState endPlayerTurn(String gameId, String currentPlayerId) {
         GameState state = getOrCreateGameState(gameId);
-        state.setCurrentTurn(state.getCurrentTurn() + 1);
+        
+        // Trouver le joueur suivant dans l'ordre
+        List<String> players = Arrays.asList("player1", "player2"); // Ordre fixe pour 2 joueurs
+        int currentIndex = players.indexOf(currentPlayerId);
+        
+        if (currentIndex == -1) {
+            throw new RuntimeException("Invalid player ID: " + currentPlayerId);
+        }
+        
+        int nextIndex = (currentIndex + 1) % players.size();
+        String nextPlayerId = players.get(nextIndex);
+        
+        // Mettre à jour l'état
         state.setCurrentPlayerId(nextPlayerId);
         state.setTurnStartTime(LocalDateTime.now());
-        state.markAction();
+        
+        // Incrémenter le tour si on revient au premier joueur
+        if (nextIndex == 0) {
+            state.setCurrentTurn(state.getCurrentTurn() + 1);
+            System.out.println("✅ Turn incremented to: " + state.getCurrentTurn());
+        }
+        
+        System.out.println("🔄 Player turn changed from " + currentPlayerId + " to " + nextPlayerId);
+        
         return updateGameState(state);
     }
     

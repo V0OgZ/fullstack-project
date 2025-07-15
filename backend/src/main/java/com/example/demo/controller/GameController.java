@@ -217,7 +217,6 @@ public class GameController {
     public ResponseEntity<Map<String, Object>> endTurn(@PathVariable String gameId, @RequestBody Map<String, String> request) {
         try {
             String playerId = request.get("playerId");
-            String nextPlayerId = request.get("nextPlayerId");
             
             if (!gameStateService.isPlayerTurn(gameId, playerId)) {
                 Map<String, Object> error = new HashMap<>();
@@ -225,15 +224,17 @@ public class GameController {
                 return ResponseEntity.badRequest().body(error);
             }
             
-            gameStateService.endPlayerTurn(gameId, nextPlayerId);
+            // Pass the current player ID to the service
+            gameStateService.endPlayerTurn(gameId, playerId);
             
             Map<String, Object> response = new HashMap<>();
             response.put("success", true);
             response.put("message", "Turn ended successfully");
             response.put("currentTurn", gameStateService.getOrCreateGameState(gameId).getCurrentTurn());
-            response.put("currentPlayerId", nextPlayerId);
+            response.put("currentPlayerId", gameStateService.getOrCreateGameState(gameId).getCurrentPlayerId());
             
             return ResponseEntity.ok(response);
+            
         } catch (Exception e) {
             Map<String, Object> error = new HashMap<>();
             error.put("error", "Failed to end turn: " + e.getMessage());
