@@ -131,9 +131,9 @@
 }
 
 .tab.active {
-  background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
-  border-color: #667eea;
-  box-shadow: 0 0 15px rgba(102, 126, 234, 0.4);
+  background: linear-gradient(45deg, #FFD700 0%, #FFA500 100%);
+  border-color: #FFD700;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
   transform: translateX(8px);
 }
 
@@ -163,8 +163,8 @@
 
 .inventory-filters select:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 8px rgba(102, 126, 234, 0.3);
+  border-color: #FFD700;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
 }
 
 .inventory-filters option {
@@ -235,9 +235,9 @@
 }
 
 .object-card.equipped {
-  background: rgba(102, 126, 234, 0.2);
-  border-color: #667eea;
-  box-shadow: 0 0 15px rgba(102, 126, 234, 0.4);
+  background: rgba(255, 215, 0, 0.2);
+  border-color: #FFD700;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
 }
 
 .object-card.unavailable {
@@ -271,7 +271,7 @@
 }
 
 .equipped-badge {
-  background: rgba(102, 126, 234, 0.3);
+  background: rgba(255, 215, 0, 0.3);
 }
 
 .temporal-badge {
@@ -325,9 +325,9 @@
 }
 
 .equip-btn, .unequip-btn, .use-btn {
-  background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(45deg, #FFD700 0%, #FFA500 100%);
   border: none;
-  color: white;
+  color: #1a1a2e;
   padding: 6px 10px;
   border-radius: 10px;
   cursor: pointer;
@@ -339,7 +339,7 @@
 }
 
 .equip-btn:hover, .use-btn:hover {
-  background: linear-gradient(45deg, #5a67d8 0%, #6b46c1 100%);
+  background: linear-gradient(45deg, #FFA500 0%, #FF8C00 100%);
   transform: translateY(-1px);
 }
 
