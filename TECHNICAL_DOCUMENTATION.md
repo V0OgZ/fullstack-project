@@ -396,3 +396,54 @@ Additionally, responsibility for loading game data was centralized into the top-
 ---
 
 For more detailed information, see the individual component documentation in the `docs/` directory. 
+
+## 8. WebSocket Communication
+
+WebSocket support for real-time multiplayer features is in development. The current implementation uses HTTP polling for stability.
+
+## 9. Terrain & Vision System
+
+### 9.1 Terrain Rendering
+
+The game uses a bitmask-based system for intelligent terrain sprite selection:
+
+- **Hex Bitmask Calculation** (`utils/hexBitmask.ts`): Computes a 6-bit mask representing which neighboring hexes share the same terrain type
+- **Sprite Mapping** (`constants/terrainSprites.ts`): Maps bitmask values to appropriate edge/center sprites
+- **Fallback System**: If sprites fail to load, falls back to gradient-based color rendering
+
+### 9.2 Movement Visualization
+
+Two types of movement ranges are displayed when a hero is selected:
+
+- **Immediate Range (Green)**: Tiles reachable within the current turn (based on movement points)
+- **Projection Range (Blue)**: Tiles reachable in future turns (ZFC projection, typically 2x movement points)
+
+### 9.3 Fog of War
+
+The vision system implements three visibility states:
+
+1. **Visible** (Clear): Currently within vision range of player's units
+2. **Explored** (55% opacity black): Previously seen but no longer in vision
+3. **Unknown** (85% opacity black): Never explored by the player
+
+Vision updates are triggered:
+- When the game loads
+- After hero movement
+- When switching players (hot-seat mode)
+
+### 9.4 Implementation Details
+
+```typescript
+// Vision calculation in useGameStore
+updateVision: (playerId: string) => {
+  // Marks tiles within radius 4 of each hero as visible
+  // Preserves explored state for previously seen tiles
+}
+
+// Rendering in ModernGameRenderer
+- Terrain sprites attempted first via createPattern()
+- Movement highlights rendered as overlay
+- Fog of war applied last to ensure it covers all content
+```
+
+## Appendix: Technology Stack 

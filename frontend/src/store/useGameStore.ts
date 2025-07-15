@@ -15,6 +15,8 @@ interface GameStore extends GameState {
   selectedHero: Hero | null;
   movementRange: Position[];
   movementMode: boolean;
+  // Vision
+  updateVision: (playerId: string) => void;
   
   // NEW: Magic Item State
   playerInventory: string[];
@@ -95,6 +97,7 @@ const initialState = {
   selectedHero: null,
   movementRange: [],
   movementMode: false,
+  // vision handled per tile flags
   
   shadowActions: [],
   visibleZFCs: [],
@@ -294,6 +297,38 @@ export const useGameStore = create<GameStore>((set, get) => ({
   },
   setMovementRange: (range) => set({ movementRange: range }),
   setMovementMode: (mode) => set({ movementMode: mode }),
+
+  // Simple vision update: mark tiles within radius 4 of each hero of the player as visible & explored, others remain previous explored.
+  updateVision: (playerId: string) => {
+    const { map, currentGame } = get();
+    if (!currentGame || !map.length) return;
+    const player = currentGame.players.find(p => p.id === playerId);
+    if (!player) return;
+
+    const visibilityRadius = 4;
+
+    // Clone map to avoid mutating directly
+    const newMap = map.map(row => row.map(tile => ({ ...tile, isVisible: false })));
+
+    player.heroes.forEach(hero => {
+      for (let y = -visibilityRadius; y <= visibilityRadius; y++) {
+        for (let x = -visibilityRadius; x <= visibilityRadius; x++) {
+          const tx = hero.position.x + x;
+          const ty = hero.position.y + y;
+          if (ty >= 0 && ty < newMap.length && tx >= 0 && tx < newMap[ty].length) {
+            const dist = Math.abs(x) + Math.abs(y);
+            if (dist <= visibilityRadius) {
+              const t = newMap[ty][tx];
+              t.isVisible = true;
+              t.isExplored = true;
+            }
+          }
+        }
+      }
+    });
+
+    set({ map: newMap });
+  },
   
   calculateMovementRange: (hero) => {
     const { map } = get();

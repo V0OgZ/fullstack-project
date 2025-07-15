@@ -39,6 +39,7 @@ export interface Tile {
   creature?: Creature | null;
   structure?: Structure | null;
   isVisible?: boolean;
+  isExplored?: boolean;
 }
 
 export interface MapObject {
