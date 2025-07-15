@@ -36,6 +36,7 @@ public class ScenarioLoaderService {
             loadScenarioFromFile("scenarios/conquest-classic.json");
             loadScenarioFromFile("scenarios/temporal-rift.json");
             loadScenarioFromFile("scenarios/multiplayer-arena.json");
+            loadScenarioFromFile("scenarios/dragon-campaign.json");
             
             System.out.println("✅ All scenarios loaded successfully from JSON files!");
             
@@ -162,6 +163,7 @@ public class ScenarioLoaderService {
         files.add("scenarios/conquest-classic.json");
         files.add("scenarios/temporal-rift.json");
         files.add("scenarios/multiplayer-arena.json");
+        files.add("scenarios/dragon-campaign.json");
         return files;
     }
 } 

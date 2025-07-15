@@ -34,35 +34,35 @@ test.describe('👥 Heroes of Time - Multiplayer Demo', () => {
     
     try {
       // PLAYER 1 - Create Session
-      console.log('🎮 Player 1: Creating multiplayer session...');
-      
+    console.log('🎮 Player 1: Creating multiplayer session...');
+    
       // Go directly to multiplayer page
       await page1.goto('http://localhost:3000/multiplayer');
       await page1.waitForLoadState('networkidle');
-      
+    
       // Wait for multiplayer session manager
       await page1.waitForSelector('[data-testid="create-session-btn"]', { timeout: 10000 });
-      
+    
       // Click create session
       await page1.click('[data-testid="create-session-btn"]');
-      await page1.waitForTimeout(2000);
-      
+    await page1.waitForTimeout(2000);
+    
       // Check if we're in session creation mode (form visible)
       const sessionForm = page1.locator('input[placeholder*="session name"]');
       if (await sessionForm.count() > 0) {
         console.log('📝 Filling session creation form...');
         await sessionForm.fill('Demo Session');
-        
+    
         const heroNameInput = page1.locator('input[placeholder*="hero name"]');
         if (await heroNameInput.count() > 0) {
           await heroNameInput.fill('Player1Hero');
-        }
-        
+    }
+    
         // Submit the form
         const createBtn = page1.locator('[data-testid="create-new-game-btn"]');
         if (await createBtn.count() > 0) {
           await createBtn.click();
-          await page1.waitForTimeout(3000);
+    await page1.waitForTimeout(3000);
         }
       }
       
@@ -82,8 +82,8 @@ test.describe('👥 Heroes of Time - Multiplayer Demo', () => {
         console.log('🔄 Clicking refresh button...');
         await refreshButton.click();
         await page2.waitForTimeout(3000);
-      }
-      
+    }
+    
       // Debug: Check what's on the page
       const createSessionBtn2 = await page2.locator('[data-testid="create-session-btn"]').count();
       const sessionList = await page2.locator('.session-list').count();
@@ -116,8 +116,8 @@ test.describe('👥 Heroes of Time - Multiplayer Demo', () => {
       
       // Wait a bit more for potential game start
       await page1.waitForTimeout(3000);
-      await page2.waitForTimeout(3000);
-      
+    await page2.waitForTimeout(3000);
+    
       // Check final state for both players
       const canvas1 = await page1.locator('canvas').count();
       const canvas2 = await page2.locator('canvas').count();
@@ -142,8 +142,8 @@ test.describe('👥 Heroes of Time - Multiplayer Demo', () => {
         console.log('⚠️ Players still in session manager');
       }
       
-      console.log('🎉 Multiplayer demo completed!');
-      
+    console.log('🎉 Multiplayer demo completed!');
+    
     } catch (error) {
       console.error('❌ Multiplayer demo failed:', error);
       // Take error screenshots
@@ -152,8 +152,8 @@ test.describe('👥 Heroes of Time - Multiplayer Demo', () => {
       throw error;
     } finally {
       // Cleanup
-      await context1.close();
-      await context2.close();
+    await context1.close();
+    await context2.close();
     }
   });
 }); 

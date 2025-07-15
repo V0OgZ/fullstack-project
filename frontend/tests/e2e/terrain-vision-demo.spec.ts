@@ -23,10 +23,14 @@ test.describe('🌍 Terrain & Vision Demo', () => {
     await page.getByTestId('scenario-card-conquest-classic').click();
     await page.waitForTimeout(500);
     
-    // 3. Start Game
-    console.log('🚀 Starting game...');
-    const startButton = page.getByTestId('play-button-conquest-classic');
-    await startButton.click();
+    // Wait for scenario selector to load completely
+    await page.waitForSelector('[data-testid="scenario-card-conquest-classic"]', { state: 'visible' });
+    
+    // Start the game by clicking the scenario card
+    const scenarioCard = page.getByTestId('scenario-card-conquest-classic');
+    await scenarioCard.click();
+    
+    console.log('✅ Clicked on Conquest Classic scenario card');
     
     // 4. Wait for canvas
     console.log('⏳ Waiting for game to load...');
@@ -40,8 +44,20 @@ test.describe('🌍 Terrain & Vision Demo', () => {
       fullPage: false
     });
     
-    // 6. Click on hero to show movement highlights
-    console.log('🦸 Selecting hero for movement highlights...');
+    // 6. Click on a hero to select
+    console.log('🦸 Selecting a hero...');
+    
+    // Check whose turn it is first
+    const currentTurnElement = await page.locator('.current-turn').textContent();
+    console.log('Current turn:', currentTurnElement);
+    
+    // If it's not Player 1's turn, end turn
+    if (!currentTurnElement?.includes('Player 1')) {
+      console.log('⏭️ Not Player 1 turn, ending turn first...');
+      await page.getByRole('button', { name: /End.*Turn/i }).click();
+      await page.waitForTimeout(1000);
+    }
+    
     const canvas = page.locator('canvas').first();
     await canvas.click({ position: { x: 300, y: 200 } });
     await page.waitForTimeout(1000);

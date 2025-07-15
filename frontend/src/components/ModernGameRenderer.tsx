@@ -526,20 +526,20 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     if (!spriteFilled) {
       // Fallback to gradient color fill
       let baseColor = config.colors.default;
-      if (terrainKey && config.colors[terrainKey as keyof typeof config.colors]) {
-        const colorValue = config.colors[terrainKey as keyof typeof config.colors];
-        if (typeof colorValue === 'string') {
-          baseColor = colorValue;
-        }
+    if (terrainKey && config.colors[terrainKey as keyof typeof config.colors]) {
+      const colorValue = config.colors[terrainKey as keyof typeof config.colors];
+      if (typeof colorValue === 'string') {
+        baseColor = colorValue;
       }
-      if (terrainKey && config.gradients[terrainKey as keyof typeof config.gradients]) {
-        const gradientColors = config.gradients[terrainKey as keyof typeof config.gradients];
-        const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
-        gradient.addColorStop(0, gradientColors[0]);
-        gradient.addColorStop(1, gradientColors[1]);
-        ctx.fillStyle = gradient;
-      } else {
-        ctx.fillStyle = baseColor;
+    }
+    if (terrainKey && config.gradients[terrainKey as keyof typeof config.gradients]) {
+      const gradientColors = config.gradients[terrainKey as keyof typeof config.gradients];
+      const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
+      gradient.addColorStop(0, gradientColors[0]);
+      gradient.addColorStop(1, gradientColors[1]);
+      ctx.fillStyle = gradient;
+    } else {
+      ctx.fillStyle = baseColor;
       }
     }
     
