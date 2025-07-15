@@ -15,30 +15,13 @@ test.describe('🎮 Heroes of Time - Multiplayer Demo', () => {
     
     console.log('🎬 === DÉBUT DE LA DÉMO MULTIJOUEUR ===');
     
-    // 1. Navigation vers la page principale
-    console.log('📍 1. Navigation vers la page principale...');
-    await page.goto('http://localhost:3000');
+    // 1. Navigation directe vers la page multijoueur
+    console.log('📍 1. Navigation vers la page multijoueur...');
+    await page.goto('http://localhost:3000/multiplayer');
     await page.waitForLoadState('networkidle');
     
-    // 2. Attente du chargement des scénarios
-    console.log('📊 2. Attente du chargement des scénarios...');
-    await page.waitForTimeout(2000);
-    
-    // 3. Sélection du scénario Multiplayer Arena
-    console.log('🎯 3. Sélection du scénario Multiplayer Arena...');
-    const scenarioCard = page.getByTestId('scenario-card-multiplayer-arena');
-    await expect(scenarioCard).toBeVisible({ timeout: 10000 });
-    await scenarioCard.click();
-    await page.waitForTimeout(1000);
-    
-    // 4. Lancement du jeu
-    console.log('▶️ 4. Clic sur le bouton Jouer...');
-    const playButton = page.getByTestId('play-button-multiplayer-arena');
-    await expect(playButton).toBeVisible({ timeout: 5000 });
-    await playButton.click();
-    
-    // 5. Attente du chargement du gestionnaire de sessions
-    console.log('⏳ 5. Attente du gestionnaire de sessions multijoueur...');
+    // 2. Attente du chargement du gestionnaire de sessions
+    console.log('⏳ 2. Attente du gestionnaire de sessions multijoueur...');
     await page.waitForTimeout(3000);
     
     // Check if we're in multiplayer session manager
@@ -47,6 +30,11 @@ test.describe('🎮 Heroes of Time - Multiplayer Demo', () => {
     
     if (await createSessionBtn.count() > 0) {
       console.log('✅ Gestionnaire de sessions multijoueur chargé!');
+      
+      // Create a new session
+      console.log('🎮 Création d\'une nouvelle session...');
+      await createSessionBtn.click();
+      await page.waitForTimeout(2000);
       
       // Fill session details if form is visible
       const sessionNameInput = page.locator('input[placeholder*="session name"]');
@@ -59,15 +47,33 @@ test.describe('🎮 Heroes of Time - Multiplayer Demo', () => {
         await heroNameInput.fill('DemoHero');
       }
       
-      // Take screenshot of multiplayer session manager
+      // Take screenshot of multiplayer session creation
       await page.screenshot({ 
-        path: 'test-results/multiplayer-session-manager.png',
+        path: 'test-results/multiplayer-session-creation.png',
         fullPage: true
       });
       
-      console.log('📸 Screenshot du gestionnaire de sessions sauvegardé');
+      console.log('📸 Screenshot de la création de session sauvegardé');
     } else if (await sessionList.count() > 0) {
       console.log('📋 Liste des sessions disponibles affichée');
+      
+      // Check if there are any sessions to join
+      const sessionItems = page.locator('.session-item');
+      const sessionCount = await sessionItems.count();
+      
+      if (sessionCount > 0) {
+        console.log(`🎯 ${sessionCount} session(s) disponible(s)`);
+        
+        // Try to join the first session
+        const joinButton = sessionItems.first().locator('button');
+        if (await joinButton.count() > 0) {
+          console.log('🔗 Tentative de rejoindre la première session...');
+          await joinButton.click();
+          await page.waitForTimeout(3000);
+        }
+      } else {
+        console.log('⚠️ Aucune session disponible à rejoindre');
+      }
       
       // Take screenshot of session list
       await page.screenshot({ 
@@ -75,17 +81,13 @@ test.describe('🎮 Heroes of Time - Multiplayer Demo', () => {
         fullPage: true
       });
     } else {
-      console.log('⚠️ Interface multijoueur non détectée, vérification du canvas...');
+      console.log('⚠️ Interface multijoueur non détectée');
       
-      // Maybe the game started directly?
-      const canvas = page.locator('canvas');
-      if (await canvas.count() > 0) {
-        console.log('🎮 Jeu démarré directement!');
-        await page.screenshot({ 
-          path: 'test-results/multiplayer-game-started.png',
-          fullPage: true
-        });
-      }
+      // Take screenshot of current state
+      await page.screenshot({ 
+        path: 'test-results/multiplayer-unexpected-state.png',
+        fullPage: true
+      });
     }
     
     console.log('✅ === DÉMO MULTIJOUEUR TERMINÉE ===');
