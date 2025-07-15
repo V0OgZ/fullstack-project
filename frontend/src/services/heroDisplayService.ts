@@ -1,275 +1,261 @@
-// 🎮 Service unifié pour l'affichage des héros - Portraits vs Sprites Map
-// Coordonne tous les services existants pour séparer les deux usages
+// 🎮 Service d'Affichage des Héros - VERSION 100% OFFLINE
+// Utilise UNIQUEMENT les images locales, aucune API externe !
 
-import { Position } from '../types/game';
-import avatarService from './avatarService';
-import localAvatarService, { LocalAvatarConfig } from './localAvatarService';
-import heroAnimationService from './heroAnimationService';
-import pathDotsService from './pathDotsService';
-
-export type HeroDisplayType = 'portrait' | 'map-sprite';
-
-export interface HeroDisplayConfig {
+export interface HeroDisplayRequest {
   name: string;
-  heroClass: string;
-  level: number;
-  position?: Position;
-  displayType: HeroDisplayType;
-  size?: 'small' | 'medium' | 'large';
-  animated?: boolean;
+  heroClass?: string;
+  level?: number;
+  displayType: 'portrait' | 'sprite' | 'icon';
+  size: 'small' | 'medium' | 'large';
 }
 
-export interface HeroPortraitData {
+export interface HeroDisplayResult {
   url: string;
-  localSvg: string;
-  fallbackEmoji: string;
-  displayName: string;
-  heroClass: string;
-}
-
-export interface HeroMapSpriteData {
-  spriteUrl: string;
-  animatedSvg: string;
-  position: Position;
-  size: number;
-  isMoving: boolean;
-  pathDots?: Position[];
+  fallback: string;
+  type: 'local' | 'emoji';
+  metadata?: {
+    width: number;
+    height: number;
+    animated?: boolean;
+  };
 }
 
 class HeroDisplayService {
-  private portraitCache = new Map<string, HeroPortraitData>();
-  private spriteCache = new Map<string, HeroMapSpriteData>();
+  // ===== IMAGES LOCALES DISPONIBLES =====
+  private readonly LOCAL_HERO_IMAGES = {
+    // Images SVG locales dans /public/assets/heroes/ (100% offline!)
+    'ARTHUR': '/assets/heroes/arthur.svg',
+    'MORGANA': '/assets/heroes/morgana.svg', 
+    'TRISTAN': '/assets/heroes/tristan.svg',
+    'ELARA': '/assets/heroes/elara.svg',
+    'GARETH': '/assets/heroes/gareth.svg',
+    'LYANNA': '/assets/heroes/lyanna.svg',
+    'CEDRIC': '/assets/heroes/cedric.svg',
+    'SERAPHINA': '/assets/heroes/seraphina.svg',
+    'VALEN': '/assets/heroes/valen.svg',
+    
+    // Classes génériques (utilisent les images PNG existantes en fallback)
+    'WARRIOR': '/assets/heroes/warrior.png',
+    'MAGE': '/assets/heroes/mage.png',
+    'ARCHER': '/assets/heroes/archer.png',
+    'PALADIN': '/assets/heroes/paladin.png',
+    'KNIGHT': '/assets/heroes/warrior.png',
+    'WIZARD': '/assets/heroes/mage.png',
+    'RANGER': '/assets/heroes/archer.png',
+    'HOLY_WARRIOR': '/assets/heroes/paladin.png',
+    'FIGHTER': '/assets/heroes/warrior.png',
+    'SORCERER': '/assets/heroes/mage.png',
+    'DRAGON_SLAYER': '/assets/heroes/warrior.png',
+    'ELVEN_ARCHER': '/assets/heroes/archer.png',
+    'TIME_MAGE': '/assets/heroes/mage.png',
+    'DARK_MAGE': '/assets/heroes/mage.png'
+  };
+
+  // ===== EMOJIS DE FALLBACK =====
+  private readonly HERO_EMOJIS = {
+    'ARTHUR': '🛡️',
+    'MORGANA': '🧙‍♀️',
+    'TRISTAN': '⚔️',
+    'ELARA': '✨',
+    'GARETH': '🐉',
+    'LYANNA': '🏹',
+    'CEDRIC': '✨',
+    'SERAPHINA': '🔮',
+    'VALEN': '💀',
+    
+    // Classes
+    'WARRIOR': '⚔️',
+    'MAGE': '🧙‍♀️',
+    'ARCHER': '🏹',
+    'PALADIN': '✨',
+    'KNIGHT': '🛡️',
+    'WIZARD': '🔮',
+    'RANGER': '🏹',
+    'HOLY_WARRIOR': '✨',
+    'FIGHTER': '⚔️',
+    'SORCERER': '🔮',
+    'DRAGON_SLAYER': '🐉',
+    'ELVEN_ARCHER': '🏹',
+    'TIME_MAGE': '⏰',
+    'DARK_MAGE': '💀'
+  };
+
+  // ===== MAPPING NOM -> CLASSE =====
+  private readonly HERO_CLASS_MAPPING = {
+    'ARTHUR': 'WARRIOR',
+    'MORGANA': 'MAGE',
+    'TRISTAN': 'ARCHER', 
+    'ELARA': 'PALADIN',
+    'GARETH': 'DRAGON_SLAYER',
+    'LYANNA': 'ELVEN_ARCHER',
+    'CEDRIC': 'PALADIN',
+    'SERAPHINA': 'MAGE',
+    'VALEN': 'DARK_MAGE'
+  };
 
   /**
-   * 🖼️ PORTRAITS - Pour les panneaux UI (détaillés)
+   * Obtient l'affichage d'un héros (hybride: Dicebear + local)
    */
-  getHeroPortrait(config: HeroDisplayConfig): HeroPortraitData {
-    const cacheKey = `portrait-${config.name}-${config.heroClass}`;
+  async getHeroDisplay(request: HeroDisplayRequest): Promise<HeroDisplayResult> {
+    const normalizedName = request.name.toUpperCase();
+    const heroClass = request.heroClass?.toUpperCase() || this.HERO_CLASS_MAPPING[normalizedName] || 'WARRIOR';
     
-    if (this.portraitCache.has(cacheKey)) {
-      return this.portraitCache.get(cacheKey)!;
+    // Essayer d'abord avec le nom exact
+    let imagePath = this.LOCAL_HERO_IMAGES[normalizedName];
+    
+    // Si pas trouvé, essayer avec la classe
+    if (!imagePath) {
+      imagePath = this.LOCAL_HERO_IMAGES[heroClass];
+    }
+    
+    // Si toujours pas trouvé, utiliser la classe par défaut
+    if (!imagePath) {
+      imagePath = this.LOCAL_HERO_IMAGES['WARRIOR'];
     }
 
-    const size = this.getPortraitSize(config.size || 'medium');
-    
-    // Générer avec le service externe (Dicebear)
-    const externalUrl = avatarService.generateHeroAvatar(config.name, {
-      style: this.getStyleByClass(config.heroClass),
-      size: size,
-      format: 'svg'
-    });
+    const emojiFallback = this.HERO_EMOJIS[normalizedName] || this.HERO_EMOJIS[heroClass] || '🦸';
 
-    // Générer avec le service local (SVG)
-    const localConfig: LocalAvatarConfig = {
-      name: config.name,
-      heroClass: config.heroClass,
-      size: size,
-      style: 'fantasy'
-    };
-    const localSvg = localAvatarService.generateLocalAvatar(localConfig);
-
-    const portraitData: HeroPortraitData = {
-      url: externalUrl,
-      localSvg: localSvg,
-      fallbackEmoji: this.getHeroEmoji(config.heroClass),
-      displayName: config.name,
-      heroClass: config.heroClass
-    };
-
-    this.portraitCache.set(cacheKey, portraitData);
-    return portraitData;
-  }
-
-  /**
-   * 🐎 MAP SPRITES - Pour les héros sur la carte (petits, animés)
-   */
-  getHeroMapSprite(config: HeroDisplayConfig): HeroMapSpriteData {
-    if (!config.position) {
-      throw new Error('Position is required for map sprites');
-    }
-
-    const cacheKey = `sprite-${config.name}-${config.position.x}-${config.position.y}`;
-    
-    if (this.spriteCache.has(cacheKey)) {
-      const cached = this.spriteCache.get(cacheKey)!;
-      // Mettre à jour la position si elle a changé
-      cached.position = config.position;
-      return cached;
-    }
-
-    const size = this.getMapSpriteSize(config.size || 'small');
-    
-    // Sprite plus petit pour la carte
-    const spriteUrl = avatarService.generateHeroAvatar(config.name, {
-      style: 'pixel-art', // Style pixelisé pour la carte
-      size: size,
-      format: 'svg'
-    });
-
-    // Version animée locale
-    const animatedConfig: LocalAvatarConfig = {
-      name: config.name,
-      heroClass: config.heroClass,
-      size: size,
-      style: 'pixel' // Style pixel pour la carte
-    };
-    const animatedSvg = localAvatarService.generateLocalAvatar(animatedConfig);
-
-    const spriteData: HeroMapSpriteData = {
-      spriteUrl: spriteUrl,
-      animatedSvg: animatedSvg,
-      position: config.position,
-      size: size,
-      isMoving: false,
-      pathDots: []
-    };
-
-    this.spriteCache.set(cacheKey, spriteData);
-    return spriteData;
-  }
-
-  /**
-   * 🎬 ANIMATION - Déplacer un héros sur la carte
-   */
-  animateHeroMovement(heroName: string, fromPosition: Position, toPosition: Position): Promise<void> {
-    return new Promise((resolve) => {
-      // Calculer le chemin avec le service d'animation
-      // const path = heroAnimationService.calculatePath(fromPosition, toPosition);
-      
-      // Créer les points de chemin avec pathDotsService
-      const pathDots = pathDotsService.createHeroes3Path(heroName, fromPosition, toPosition);
-      
-      // Mettre à jour le sprite avec animation
-      const spriteKey = `sprite-${heroName}-${toPosition.x}-${toPosition.y}`;
-      const spriteData = this.spriteCache.get(spriteKey);
-      
-      if (spriteData) {
-        spriteData.isMoving = true;
-        spriteData.pathDots = pathDots.map((dot: any) => dot.position);
-        spriteData.position = toPosition;
-        
-        // Simuler l'animation (durée basée sur la distance)
-        const distance = Math.sqrt(
-          Math.pow(toPosition.x - fromPosition.x, 2) + 
-          Math.pow(toPosition.y - fromPosition.y, 2)
-        );
-        const duration = Math.max(distance * 200, 500); // 200ms par case
-        
-        setTimeout(() => {
-          spriteData.isMoving = false;
-          spriteData.pathDots = [];
-          resolve();
-        }, duration);
-      } else {
-        resolve();
+    // Essayer Dicebear pour les héros principaux
+    if (this.isMainHero(normalizedName)) {
+      try {
+        const dicebearAvatar = await this.getDicebearAvatar(normalizedName);
+        if (dicebearAvatar) {
+          return {
+            url: dicebearAvatar.url,
+            fallback: imagePath,
+            type: 'dicebear',
+            metadata: {
+              width: 128,
+              height: 128,
+              animated: false
+            }
+          };
+        }
+      } catch (error) {
+        console.warn(`Dicebear failed for ${normalizedName}, using local fallback`);
       }
-    });
-  }
+    }
 
-  /**
-   * 🎨 STYLES - Mapping des classes de héros vers styles d'avatar
-   */
-  private getStyleByClass(heroClass: string): any {
-    const classMap: Record<string, string> = {
-      'Knight': 'adventurer',
-      'Mage': 'lorelei',
-      'Wizard': 'lorelei',
-      'Warrior': 'adventurer',
-      'Archer': 'micah',
-      'Paladin': 'adventurer',
-      'Necromancer': 'personas',
-      'Barbarian': 'big-ears',
-      'Sorceress': 'lorelei'
-    };
-    
-    return classMap[heroClass] || 'adventurer';
-  }
-
-  /**
-   * 📏 TAILLES - Différentes tailles pour portraits vs sprites
-   */
-  private getPortraitSize(size: string): number {
-    const sizeMap: Record<string, number> = {
-      'small': 128,   // Plus grand pour les portraits
-      'medium': 256,  // Beaucoup plus grand
-      'large': 512    // Très grand pour les détails
-    };
-    return sizeMap[size] || 256;
-  }
-
-  private getMapSpriteSize(size: string): number {
-    const sizeMap: Record<string, number> = {
-      'small': 32,
-      'medium': 48,
-      'large': 64
-    };
-    return sizeMap[size] || 48;
-  }
-
-  /**
-   * 😀 EMOJIS - Fallback pour chaque classe
-   */
-  private getHeroEmoji(heroClass: string): string {
-    const emojiMap: Record<string, string> = {
-      'Knight': '🛡️',
-      'Mage': '🧙‍♀️',
-      'Wizard': '🧙‍♂️',
-      'Warrior': '⚔️',
-      'Archer': '🏹',
-      'Paladin': '✨',
-      'Necromancer': '💀',
-      'Barbarian': '🪓',
-      'Sorceress': '🔮'
-    };
-    
-    return emojiMap[heroClass] || '🦸';
-  }
-
-  /**
-   * 🧹 CACHE - Gestion du cache
-   */
-  clearCache(): void {
-    this.portraitCache.clear();
-    this.spriteCache.clear();
-  }
-
-  getCacheStats(): { portraits: number; sprites: number } {
     return {
-      portraits: this.portraitCache.size,
-      sprites: this.spriteCache.size
+      url: imagePath,
+      fallback: emojiFallback,
+      type: 'local',
+      metadata: {
+        width: 64,
+        height: 64,
+        animated: false
+      }
     };
   }
 
   /**
-   * 🔄 PRELOAD - Précharger les assets pour un scénario
+   * Vérifie si c'est un héros principal (pour Dicebear)
    */
-  async preloadHeroesForScenario(heroes: Array<{ name: string; heroClass: string; position: Position }>): Promise<void> {
-    const promises = heroes.map(hero => {
-      // Précharger portrait
-      const portraitPromise = this.getHeroPortrait({
-        name: hero.name,
-        heroClass: hero.heroClass,
-        level: 1,
-        displayType: 'portrait'
-      });
+  private isMainHero(heroName: string): boolean {
+    return ['ARTHUR', 'MORGANA', 'TRISTAN', 'ELARA', 'GARETH', 'LYANNA', 'CEDRIC', 'SERAPHINA', 'VALEN'].includes(heroName);
+  }
 
-      // Précharger sprite
-      const spritePromise = this.getHeroMapSprite({
-        name: hero.name,
-        heroClass: hero.heroClass,
-        level: 1,
-        position: hero.position,
-        displayType: 'map-sprite'
-      });
+  /**
+   * Obtient un avatar Dicebear 100% offline (avec cache)
+   */
+  private async getDicebearAvatar(heroName: string): Promise<any> {
+    try {
+      // Import dynamique pour éviter les dépendances circulaires
+      const { default: offlineAvatarGenerator } = await import('./offlineAvatarGenerator');
+      return await offlineAvatarGenerator.getHeroAvatar(heroName);
+    } catch (error) {
+      console.error(`Erreur Dicebear offline pour ${heroName}:`, error);
+      return null;
+    }
+  }
 
-      return Promise.all([portraitPromise, spritePromise]);
+  /**
+   * Obtient un portrait de héros (grande taille)
+   */
+  getHeroPortrait(heroName: string, heroClass?: string): HeroDisplayResult {
+    return this.getHeroDisplay({
+      name: heroName,
+      heroClass,
+      level: 1,
+      displayType: 'portrait',
+      size: 'large'
     });
+  }
 
-    await Promise.all(promises);
-    console.log(`✅ Preloaded ${heroes.length} heroes for scenario`);
+  /**
+   * Obtient un sprite de héros (taille moyenne)
+   */
+  getHeroSprite(heroName: string, heroClass?: string): HeroDisplayResult {
+    return this.getHeroDisplay({
+      name: heroName,
+      heroClass,
+      level: 1,
+      displayType: 'sprite',
+      size: 'medium'
+    });
+  }
+
+  /**
+   * Obtient une icône de héros (petite taille)
+   */
+  getHeroIcon(heroName: string, heroClass?: string): HeroDisplayResult {
+    return this.getHeroDisplay({
+      name: heroName,
+      heroClass,
+      level: 1,
+      displayType: 'icon',
+      size: 'small'
+    });
+  }
+
+  /**
+   * Vérifie si une image locale existe
+   */
+  async checkLocalImageExists(imagePath: string): Promise<boolean> {
+    try {
+      const response = await fetch(imagePath, { method: 'HEAD' });
+      return response.ok;
+    } catch {
+      return false;
+    }
+  }
+
+  /**
+   * Obtient tous les héros disponibles (noms locaux)
+   */
+  getAvailableHeroes(): string[] {
+    return Object.keys(this.LOCAL_HERO_IMAGES).filter(key => 
+      !key.includes('_') || key === 'DRAGON_SLAYER' || key === 'HOLY_WARRIOR' || key === 'TIME_MAGE' || key === 'DARK_MAGE' || key === 'ELVEN_ARCHER'
+    );
+  }
+
+  /**
+   * Obtient les informations d'un héros
+   */
+  getHeroInfo(heroName: string): { name: string; class: string; description: string } {
+    const normalizedName = heroName.toUpperCase();
+    const heroClass = this.HERO_CLASS_MAPPING[normalizedName] || 'WARRIOR';
+    
+    const descriptions = {
+      'ARTHUR': 'Noble knight of the realm, skilled in combat and leadership',
+      'MORGANA': 'Powerful sorceress with mastery over arcane arts',
+      'TRISTAN': 'Brave knight from another time, skilled in temporal combat',
+      'ELARA': 'Mystical mage with power over time and space',
+      'GARETH': 'Legendary warrior specialized in fighting dragons',
+      'LYANNA': 'Elven archer with supernatural accuracy',
+      'CEDRIC': 'Righteous paladin devoted to justice and honor',
+      'SERAPHINA': 'Ancient sorceress with forbidden knowledge',
+      'VALEN': 'Dark mage who commands the forces of death'
+    };
+
+    return {
+      name: heroName,
+      class: heroClass,
+      description: descriptions[normalizedName] || 'A brave hero ready for adventure'
+    };
   }
 }
 
-// Export singleton
+// Instance singleton
 const heroDisplayService = new HeroDisplayService();
 export default heroDisplayService; 
