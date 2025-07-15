@@ -44,9 +44,18 @@ test.describe('🎮 Heroes of Time - Single Player Demo', () => {
     
     await page.waitForTimeout(4000);
     
-    // Click demo button for quick access
-    console.log('🎬 Using demo button for quick access...');
-    await page.click('button:has-text("🎬 demo")');
+    // Wait for scenarios to load
+    console.log('⏳ Waiting for scenarios to load...');
+    await page.waitForSelector('.scenario-card', { timeout: 10000 });
+    
+    // Select the first available scenario (conquest-classic)
+    console.log('🎮 Selecting Classic Conquest scenario...');
+    await page.click('[data-testid="scenario-card-conquest-classic"]');
+    await page.waitForTimeout(1000);
+    
+    // Click the start game button
+    console.log('🚀 Starting the game...');
+    await page.click('[data-testid="play-button-conquest-classic"]');
     await page.waitForTimeout(5000);
     
     // Verify game interface is loaded

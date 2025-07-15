@@ -75,6 +75,9 @@ interface GameStore extends GameState {
   // Hot Seat mode
   switchPlayer: (playerId: string) => void;
   nextPlayer: () => void;
+
+  // New function to reset a specific game session
+  resetGameSession: (scenarioId: string) => void;
 }
 
 const initialState = {
@@ -130,10 +133,12 @@ export const useGameStore = create<GameStore>((set, get) => ({
             walkable: tile.walkable !== undefined ? tile.walkable : true,
             movementCost: tile.movementCost || 1,
             hero: tile.hero || null,
-            creature: tile.creature || null
+            creature: tile.creature || null,
+            structure: tile.structure || null,
+            isVisible: tile.isVisible !== undefined ? tile.isVisible : true
           });
         } else {
-          // Fallback tile
+          // Default tile if missing
           row.push({
             x,
             y,
@@ -141,7 +146,9 @@ export const useGameStore = create<GameStore>((set, get) => ({
             walkable: true,
             movementCost: 1,
             hero: null,
-            creature: null
+            creature: null,
+            structure: null,
+            isVisible: true
           });
         }
       }
@@ -609,6 +616,14 @@ export const useGameStore = create<GameStore>((set, get) => ({
   // Game state management
   resetGame: () => set(initialState),
 
+  // New function to reset a specific game session
+  resetGameSession: (scenarioId: string) => {
+    const sessionKey = `heroesOfTime_session_${scenarioId}`;
+    localStorage.removeItem(sessionKey);
+    console.log(`%c🔄 [GameStore] Game session reset for scenario: ${scenarioId}`, 'color: orange');
+    set(initialState);
+  },
+
   loadGame: async (scenarioId: string) => {
     console.log(`%c🎮 [GameStore] loadGame called with scenarioId: "${scenarioId}"`, 'color: purple; font-weight: bold');
     
@@ -622,10 +637,66 @@ export const useGameStore = create<GameStore>((set, get) => ({
     setLoading(true);
 
     try {
-      console.log(`%c📡 [GameStore] About to call API for scenario: ${scenarioId}`, 'color: blue');
-      // Use GameService to initialize the game
-      const gameState = await GameService.initializeGame(scenarioId);
+      // Generate a persistent game ID based on scenario and session
+      // This allows the backend to reuse existing games
+      let persistentGameId = scenarioId;
+      
+      // For non-multiplayer scenarios, use a session-based ID
+      if (!scenarioId.includes('session-') && !scenarioId.includes('multiplayer-')) {
+        // Try to get existing session ID from localStorage
+        const sessionKey = `heroesOfTime_session_${scenarioId}`;
+        let sessionId = localStorage.getItem(sessionKey);
+        
+        if (!sessionId) {
+          // Create a new session ID
+          sessionId = `${scenarioId}_session_${Date.now()}`;
+          localStorage.setItem(sessionKey, sessionId);
+          console.log(`%c🆕 [GameStore] Created new session ID: ${sessionId}`, 'color: green');
+        } else {
+          console.log(`%c🔄 [GameStore] Using existing session ID: ${sessionId}`, 'color: blue');
+        }
+        
+        persistentGameId = sessionId;
+      }
+
+      // Check if this is a multiplayer session that already exists
+      if (scenarioId.includes('session-') || scenarioId.includes('multiplayer-')) {
+        console.log(`%c🔄 [GameStore] Checking for existing multiplayer session: ${scenarioId}`, 'color: blue');
+        try {
+          // Try to get existing session from backend
+          const existingSession = await ApiService.getMultiplayerSession(scenarioId);
+          if (existingSession && existingSession.status === 'ACTIVE') {
+            console.log(`%c🎮 [GameStore] Found existing active session, loading game state...`, 'color: green');
+            const gameState = await GameService.getGameState(scenarioId);
+            
+            if (gameState.currentGame) {
+              setCurrentGame(gameState.currentGame);
+              if (gameState.currentGame.map && gameState.currentGame.map.tiles) {
+                const mapData = get().convertTilesToMap(
+                  gameState.currentGame.map.tiles, 
+                  gameState.currentGame.map.width, 
+                  gameState.currentGame.map.height
+                );
+                setMap(mapData);
+              }
+            }
+            if (gameState.currentPlayer) {
+              setCurrentPlayer(gameState.currentPlayer);
+            }
+            
+            console.log(`%c🎉 [GameStore] loadGame completed from existing session!`, 'color: green; font-weight: bold');
+            return;
+          }
+        } catch (error) {
+          console.log(`%c⚠️ [GameStore] No existing session found, creating new game...`, 'color: orange');
+        }
+      }
+
+      console.log(`%c📡 [GameStore] About to call API for persistent game ID: ${persistentGameId}`, 'color: blue');
+      // Use GameService to initialize the game with persistent ID
+      const gameState = await GameService.initializeGame(persistentGameId);
       console.log('%c[DEBUG] Backend response from initializeGame:', 'color: orange; font-weight: bold', gameState);
+      
       // Set the game state in the store
       if (gameState.currentGame) {
         setCurrentGame(gameState.currentGame);
@@ -658,14 +729,15 @@ export const useGameStore = create<GameStore>((set, get) => ({
       } else {
         console.warn('[DEBUG] No currentPlayer in gameState!');
       }
+      
       // Print final state
-      const state = get();
+      const finalState = get();
       console.log('%c[DEBUG] Final store state after loadGame:', 'color: orange; font-weight: bold', {
-        currentGame: state.currentGame,
-        currentPlayer: state.currentPlayer,
-        map: state.map,
-        isLoading: state.isLoading,
-        error: state.error
+        currentGame: finalState.currentGame,
+        currentPlayer: finalState.currentPlayer,
+        map: finalState.map,
+        isLoading: finalState.isLoading,
+        error: finalState.error
       });
       console.log(`%c🎉 [GameStore] loadGame completed successfully!`, 'color: green; font-weight: bold');
     } catch (error) {
@@ -698,6 +770,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
       if (gameState.currentPlayer) {
         setCurrentPlayer(gameState.currentPlayer);
       }
+      
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Failed to refresh game state');
     } finally {

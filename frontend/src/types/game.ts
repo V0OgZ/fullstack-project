@@ -89,10 +89,16 @@ export interface Hero {
     defense: number;
     knowledge: number;
     spellPower: number;
+    health?: number;
+    mana?: number;
   };
   units: Unit[];
   inventory: InventoryItem[];
   playerId: string;
+  skills?: string[];
+  spells?: string[];
+  class?: string;
+  description?: string;
 }
 
 export interface InventoryItem {
