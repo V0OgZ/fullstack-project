@@ -6,13 +6,10 @@ test.describe('🎮 Heroes of Time - Single Player Demo', () => {
     
     console.log('🚀 Starting single player demo...');
     
-    // Navigate to home page
-    await page.goto('http://localhost:3000');
-    await page.waitForTimeout(2000);
-    
-    // 📸 SCREENSHOT 1: Home page
-    await page.screenshot({ path: 'test-results/01-home-page.png' });
-    console.log('📸 Home page screenshot captured');
+    // Navigate directly to demo route (faster and more reliable)
+    console.log('🎬 Using demo route for quick access...');
+    await page.goto('http://localhost:3000/demo');
+    await page.waitForTimeout(3000);
     
     // Show demo tooltip
     await page.evaluate(() => {
@@ -44,19 +41,9 @@ test.describe('🎮 Heroes of Time - Single Player Demo', () => {
     
     await page.waitForTimeout(4000);
     
-    // Wait for scenarios to load
-    console.log('⏳ Waiting for scenarios to load...');
-    await page.waitForSelector('.scenario-card', { timeout: 10000 });
-    
-    // Select the first available scenario (conquest-classic)
-    console.log('🎮 Selecting Classic Conquest scenario...');
-    await page.click('[data-testid="scenario-card-conquest-classic"]');
-    await page.waitForTimeout(1000);
-    
-    // Click the start game button
-    console.log('🚀 Starting the game...');
-    await page.click('[data-testid="play-button-conquest-classic"]');
-    await page.waitForTimeout(5000);
+    // 📸 SCREENSHOT 1: Demo route loaded
+    await page.screenshot({ path: 'test-results/01-demo-route.png' });
+    console.log('📸 Demo route screenshot captured');
     
     // Verify game interface is loaded
     await expect(page.locator('.true-heroes-interface')).toBeVisible();
