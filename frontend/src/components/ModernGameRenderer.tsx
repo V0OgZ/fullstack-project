@@ -813,15 +813,21 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-    
-    const hexCoord = pixelToHex({ x, y });
-    
-    if (map && hexCoord.y >= 0 && hexCoord.y < map.length && 
-        hexCoord.x >= 0 && hexCoord.x < map[0].length) {
-      handleTileClick(hexCoord);
+    try {
+      const rect = canvas.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      
+      const hexCoord = pixelToHex({ x, y });
+      
+      console.log('Click event:', event, 'Hex coordinates:', hexCoord);
+
+      if (map && hexCoord.y >= 0 && hexCoord.y < map.length && 
+          hexCoord.x >= 0 && hexCoord.x < map[0].length) {
+        handleTileClick(hexCoord);
+      }
+    } catch (error) {
+      console.error("Error in handleClick:", error)
     }
   }, [map, pixelToHex, handleTileClick]);
 
