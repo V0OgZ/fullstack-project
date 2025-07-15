@@ -19,18 +19,6 @@ interface Scenario {
   isMultiplayer: boolean;
 }
 
-interface BackendScenario {
-  id: number;
-  scenarioId: string;
-  name: string;
-  description: string;
-  difficulty: string;
-  maxPlayers: number;
-  estimatedDuration?: string;
-  isActive: boolean;
-  isMultiplayer: boolean;
-}
-
 const EnhancedScenarioSelector: React.FC = () => {
   const { t, language, setLanguage } = useTranslation();
   const navigate = useNavigate();
@@ -51,19 +39,28 @@ const EnhancedScenarioSelector: React.FC = () => {
       const backendScenarios = await ApiService.getAllScenarios(language);
       
       // Convert backend scenarios to EnhancedScenarioSelector format
-      const enhancedScenarios: Scenario[] = backendScenarios.map((scenario: BackendScenario) => ({
+      const enhancedScenarios: Scenario[] = backendScenarios.map((scenario: any) => ({
         id: scenario.scenarioId,
         name: scenario.name, // Now localized by backend
         description: scenario.description, // Now localized by backend
         longDescription: scenario.description, // Using same description for now
         difficulty: scenario.difficulty.toLowerCase() as 'easy' | 'medium' | 'hard' | 'expert',
-        features: [t('features.backend-loaded'), t('features.dynamic-content'), t('features.real-time-data')],
+        features: [
+          // Features plus intéressantes basées sur les vraies données
+          scenario.mapWidth && scenario.mapHeight 
+            ? `${scenario.mapWidth}x${scenario.mapHeight} tiles`
+            : `${scenario.mapSize || 'MEDIUM'} MAP`,
+          scenario.victoryCondition 
+            ? scenario.victoryCondition.charAt(0).toUpperCase() + scenario.victoryCondition.slice(1) + ' victory'
+            : scenario.maxPlayers > 1 ? `${scenario.maxPlayers} players` : 'Solo play',
+          scenario.turnLimit ? `${scenario.turnLimit} turns` : 'Unlimited turns'
+        ],
         icon: scenario.scenarioId === 'conquest-classic' ? '⚔️' : 
               scenario.scenarioId === 'temporal-rift' ? '🔮' : 
               scenario.isMultiplayer ? '🌐' : '🎮',
         backgroundImage: scenario.scenarioId === 'conquest-classic' ? 'linear-gradient(135deg, #2196F3 0%, #1976D2 100%)' :
                         scenario.scenarioId === 'temporal-rift' ? 'linear-gradient(135deg, #9C27B0 0%, #673AB7 100%)' :
-                        scenario.isMultiplayer ? 'linear-gradient(135deg, #FF5722 0%, #F44336 100%)' :
+                        scenario.isMultiplayer ? 'linear-gradient(135deg, #16a34a 0%, #15803d 100%)' : // Vert au lieu d'orange
                         'linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%)',
         estimatedTime: scenario.estimatedDuration || '1-2 hours',
         playerCount: `${scenario.maxPlayers} players`,
@@ -78,7 +75,7 @@ const EnhancedScenarioSelector: React.FC = () => {
         description: t('scenarios.dragon-campaign.description'),
         longDescription: t('scenarios.dragon-campaign.description'),
         difficulty: 'expert',
-        features: [t('features.epic-campaign'), t('features.dragon-lords'), t('features.ultimate-challenge')],
+        features: ['50x50 tiles', 'Epic bosses', '500 turns'],
         icon: '🐉',
         backgroundImage: 'linear-gradient(135deg, #FF6B35 0%, #F7931E 100%)',
         estimatedTime: '3-5 hours',
@@ -104,7 +101,7 @@ const EnhancedScenarioSelector: React.FC = () => {
           description: t('scenarios.conquest-classic.description'),
           longDescription: t('scenarios.conquest-classic.description'),
           difficulty: 'easy',
-          features: [t('features.balanced-gameplay'), t('features.all-castles'), t('features.standard-victory')],
+          features: ['30x30 tiles', 'Conquest victory', '200 turns'],
           icon: '⚔️',
           backgroundImage: 'linear-gradient(135deg, #2196F3 0%, #1976D2 100%)',
           estimatedTime: '1-2 hours',
@@ -118,7 +115,7 @@ const EnhancedScenarioSelector: React.FC = () => {
           description: t('scenarios.dragon-campaign.description'),
           longDescription: t('scenarios.dragon-campaign.description'),
           difficulty: 'expert',
-          features: [t('features.epic-campaign'), t('features.dragon-lords'), t('features.ultimate-challenge')],
+          features: ['50x50 tiles', 'Epic bosses', '500 turns'],
           icon: '🐉',
           backgroundImage: 'linear-gradient(135deg, #FF6B35 0%, #F7931E 100%)',
           estimatedTime: '3-5 hours',
@@ -264,8 +261,12 @@ const EnhancedScenarioSelector: React.FC = () => {
                   </div>
                   
                   <div className="scenario-body">
-                    <h3 className="scenario-title">{scenario.name}</h3>
-                    <p className="scenario-description">{scenario.description}</p>
+                    <h3 className="scenario-title">
+                      {scenario.name.startsWith('scenarios.') ? t(scenario.name as any) : scenario.name}
+                    </h3>
+                    <p className="scenario-description">
+                      {scenario.description.startsWith('scenarios.') ? t(scenario.description as any) : scenario.description}
+                    </p>
                     
                     <div className="scenario-meta-info">
                       <div 
