@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useTranslation } from '../i18n';
 import { useGameStore } from '../store/useGameStore';
 import { ApiService } from '../services/api';
 import './CastleManagementPanel.css';
@@ -44,7 +43,6 @@ interface Building {
 }
 
 const CastleManagementPanel: React.FC<CastleManagementPanelProps> = ({ gameId, playerId, onClose }) => {
-  const { t } = useTranslation();
   const { currentPlayer, refreshGameState } = useGameStore();
   const [buildings, setBuildings] = useState<Building[]>([]);
   const [availableUnits, setAvailableUnits] = useState<Record<string, number>>({});

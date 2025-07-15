@@ -77,18 +77,27 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
       console.warn('Failed to generate session name, using fallback:', error);
       setSessionName(`Epic Battle ${Math.floor(Math.random() * 1000)}`);
     }
-  }, []); // Empty dependency array to run only once on mount
+  }, [translateSessionName]); // Empty dependency array to run only once on mount
 
   // Connection mode settings
   const [connectionMode, setConnectionMode] = useState<'polling' | 'websocket'>('polling');
   const isWebSocketAvailable = false; // WebSocket is disabled for stability
 
   // Load available sessions
-  const loadSessions = useCallback(async () => {
+  const loadSessions = useCallback(async (isManualRefresh = false) => {
     try {
-      setLoading(true);
+      if (isManualRefresh) {
+        setLoading(true);
+      }
       const sessionsData = await ApiService.getJoinableSessions();
-      setSessions(sessionsData);
+      
+      // Prevent re-render if session data is the same to avoid flickering
+      setSessions(currentSessions => {
+        if (JSON.stringify(currentSessions) !== JSON.stringify(sessionsData)) {
+          return sessionsData;
+        }
+        return currentSessions;
+      });
       
       // Check if current session started and navigate to game
       if (currentSessionId && waitingForPlayers) {
@@ -105,7 +114,9 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
     } catch (error) {
       console.error('Failed to load sessions:', error);
     } finally {
-      setLoading(false);
+      if (isManualRefresh) {
+        setLoading(false);
+      }
     }
   }, [currentSessionId, waitingForPlayers, onSessionJoined]);
 
@@ -607,7 +618,7 @@ const MultiplayerSessionManager: React.FC<MultiplayerSessionManagerProps> = ({
         </div>
         <div style={{ display: 'flex', gap: '10px' }}>
           <button
-            onClick={loadSessions}
+            onClick={() => loadSessions(true)}
             disabled={loading}
             style={{
               padding: '12px 20px',

@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import TrueHeroesInterface from '../components/TrueHeroesInterface';
 import MultiplayerSessionManager from '../components/MultiplayerSessionManager';
-import DemoInterface from '../components/DemoInterface';
 import { useGameStore } from '../store/useGameStore';
 import { useTranslation } from '../i18n';
 
@@ -67,15 +66,7 @@ const Game: React.FC = () => {
     }
   }
   
-  // Special handling for demo route
-  if (window.location.pathname === '/demo') {
-    return (
-      <DemoInterface 
-        scenarioId='conquest-classic'
-        scenarioType='classique'
-      />
-    );
-  }
+ 
 
   return (
     <div className="game-page">
