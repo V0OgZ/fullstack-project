@@ -1,5 +1,8 @@
-// 🎮 Générateur d'Avatars Offline avec Dicebear
-// Génère les avatars une fois, puis les utilise localement
+// 🎮 Générateur d'Avatars Dicebear 100% OFFLINE
+// Utilise les packages Dicebear installés localement
+
+import { createAvatar } from '@dicebear/core';
+import { lorelei } from '@dicebear/collection';
 
 export interface AvatarConfig {
   name: string;
@@ -16,11 +19,10 @@ export interface HeroAvatarData {
   style: string;
   name: string;
   isGenerated: boolean;
+  svgContent?: string;
 }
 
 class OfflineAvatarGenerator {
-  private readonly DICEBEAR_BASE_URL = 'https://api.dicebear.com/7.x';
-  private readonly LOCAL_AVATAR_PATH = '/assets/heroes/avatars/';
   private generatedAvatars = new Map<string, HeroAvatarData>();
 
   // ===== MAPPING HÉROS -> STYLES DICEBEAR =====
@@ -37,68 +39,47 @@ class OfflineAvatarGenerator {
   };
 
   /**
-   * Génère un avatar Dicebear et le sauvegarde localement
+   * Génère un avatar Dicebear 100% offline
    */
-  async generateAndSaveAvatar(heroName: string, style?: string): Promise<HeroAvatarData> {
+  async generateOfflineAvatar(heroName: string, style?: string): Promise<HeroAvatarData> {
     const normalizedName = heroName.toUpperCase();
     const avatarStyle = style || this.HERO_STYLE_MAPPING[normalizedName] || 'adventurer';
     
-    const config: AvatarConfig = {
-      name: heroName,
-      style: avatarStyle as any,
-      size: 128,
-      format: 'svg',
-      backgroundColor: 'transparent'
-    };
-
     try {
-      // Générer l'URL Dicebear
-      const dicebearUrl = this.buildDicebearUrl(config);
-      
-      // Télécharger l'avatar
-      const response = await fetch(dicebearUrl);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch avatar: ${response.statusText}`);
-      }
-      
-      const svgContent = await response.text();
+      // Utiliser Dicebear en local
+      const avatar = createAvatar(lorelei, {
+        seed: heroName,
+        backgroundColor: ['transparent'],
+        radius: 50,
+        size: 128
+      });
+
+      // Générer le SVG
+      const svgContent = await avatar.toDataUriSync();
       
       // Créer le chemin local
       const localFileName = `${normalizedName.toLowerCase()}-${avatarStyle}.svg`;
-      const localPath = `${this.LOCAL_AVATAR_PATH}${localFileName}`;
+      const localPath = `/assets/heroes/avatars/${localFileName}`;
       
-      // Sauvegarder localement (simulation - en vrai on créerait le fichier)
       const avatarData: HeroAvatarData = {
-        url: dicebearUrl,
+        url: svgContent,
         localPath: localPath,
         style: avatarStyle,
         name: heroName,
-        isGenerated: true
+        isGenerated: true,
+        svgContent: svgContent
       };
       
       this.generatedAvatars.set(normalizedName, avatarData);
       
-      console.log(`✅ Avatar généré et sauvegardé: ${heroName} (${avatarStyle})`);
+      console.log(`✅ Avatar généré offline: ${heroName} (${avatarStyle})`);
       return avatarData;
       
     } catch (error) {
-      console.error(`❌ Erreur génération avatar ${heroName}:`, error);
+      console.error(`❌ Erreur génération avatar offline ${heroName}:`, error);
       // Fallback vers avatar local
       return this.getFallbackAvatar(heroName);
     }
-  }
-
-  /**
-   * Construit l'URL Dicebear
-   */
-  private buildDicebearUrl(config: AvatarConfig): string {
-    const params = new URLSearchParams({
-      seed: config.name,
-      backgroundColor: config.backgroundColor || 'transparent',
-      radius: config.radius?.toString() || '0'
-    });
-    
-    return `${this.DICEBEAR_BASE_URL}/${config.style}/svg?${params.toString()}`;
   }
 
   /**
@@ -113,7 +94,7 @@ class OfflineAvatarGenerator {
     }
     
     // Générer et sauvegarder
-    return await this.generateAndSaveAvatar(heroName);
+    return await this.generateOfflineAvatar(heroName);
   }
 
   /**
@@ -138,15 +119,15 @@ class OfflineAvatarGenerator {
   async generateAllHeroAvatars(): Promise<void> {
     const heroes = Object.keys(this.HERO_STYLE_MAPPING);
     
-    console.log('🚀 Génération de tous les avatars Dicebear...');
+    console.log('🚀 Génération de tous les avatars Dicebear offline...');
     
-    const promises = heroes.map(hero => this.generateAndSaveAvatar(hero));
+    const promises = heroes.map(hero => this.generateOfflineAvatar(hero));
     
     try {
       await Promise.all(promises);
-      console.log(`✅ ${heroes.length} avatars générés avec succès !`);
+      console.log(`✅ ${heroes.length} avatars générés offline avec succès !`);
     } catch (error) {
-      console.error('❌ Erreur lors de la génération des avatars:', error);
+      console.error('❌ Erreur lors de la génération des avatars offline:', error);
     }
   }
 
@@ -167,6 +148,26 @@ class OfflineAvatarGenerator {
   exportAvatarsForDownload(): string {
     const avatars = Array.from(this.generatedAvatars.values());
     return JSON.stringify(avatars, null, 2);
+  }
+
+  /**
+   * Crée un élément img avec l'avatar
+   */
+  createAvatarImage(heroName: string, size: number = 64): HTMLImageElement {
+    const img = new Image();
+    img.width = size;
+    img.height = size;
+    img.alt = heroName;
+    
+    // Utiliser l'avatar généré ou le fallback
+    const avatar = this.generatedAvatars.get(heroName.toUpperCase());
+    if (avatar && avatar.isGenerated) {
+      img.src = avatar.url;
+    } else {
+      img.src = `/assets/heroes/${heroName.toLowerCase()}.svg`;
+    }
+    
+    return img;
   }
 }
 

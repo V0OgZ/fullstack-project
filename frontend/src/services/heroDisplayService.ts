@@ -156,7 +156,7 @@ class HeroDisplayService {
   }
 
   /**
-   * Obtient un avatar Dicebear (avec cache)
+   * Obtient un avatar Dicebear 100% offline (avec cache)
    */
   private async getDicebearAvatar(heroName: string): Promise<any> {
     try {
@@ -164,7 +164,7 @@ class HeroDisplayService {
       const { default: offlineAvatarGenerator } = await import('./offlineAvatarGenerator');
       return await offlineAvatarGenerator.getHeroAvatar(heroName);
     } catch (error) {
-      console.error(`Erreur Dicebear pour ${heroName}:`, error);
+      console.error(`Erreur Dicebear offline pour ${heroName}:`, error);
       return null;
     }
   }
