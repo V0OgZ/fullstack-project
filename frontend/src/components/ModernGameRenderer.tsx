@@ -299,8 +299,8 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     ctx.stroke();
   }, []);
 
-  // Rendu d'un héros avec le nouveau service
-  const drawHero = useCallback((
+  // Rendu d'un héros avec avatars Dicebear offline
+  const drawHero = useCallback(async (
     ctx: CanvasRenderingContext2D,
     center: Position,
     hero: Hero
@@ -312,35 +312,26 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     const size = 20; // Taille optimisée pour les sprites sur carte
 
     try {
-      // Utiliser le nouveau service pour les MAP SPRITES
-      const spriteData = heroDisplayService.getHeroMapSprite({
-        name: hero.name,
-        heroClass: hero.class || 'Warrior',
-        level: hero.level || 1,
-        position: hero.position,
-        displayType: 'map-sprite',
-        size: 'small'
-      });
-
+      // Utiliser le service d'avatars offline
+      const { default: offlineAvatarGenerator } = await import('../services/offlineAvatarGenerator');
+      const avatarData = await offlineAvatarGenerator.getHeroAvatar(hero.name);
+      
       // Base circulaire pour le héros (style Heroes 3)
       ctx.beginPath();
       ctx.arc(x, y, size, 0, Math.PI * 2);
       
-      // Couleur selon le mouvement
-      if (spriteData.isMoving) {
-        const gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
-        gradient.addColorStop(0, '#00FF00');
-        gradient.addColorStop(1, '#008800');
-        ctx.fillStyle = gradient;
-      } else {
-        const gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+      // Couleur selon l'avatar généré
+      const gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+      if (avatarData && avatarData.isGenerated) {
         gradient.addColorStop(0, '#FFD700');
         gradient.addColorStop(1, '#B8860B');
-        ctx.fillStyle = gradient;
+      } else {
+        gradient.addColorStop(0, '#C0C0C0');
+        gradient.addColorStop(1, '#808080');
       }
-      
+      ctx.fillStyle = gradient;
       ctx.fill();
-      ctx.strokeStyle = spriteData.isMoving ? '#00FF00' : '#8B4513';
+      ctx.strokeStyle = avatarData && avatarData.isGenerated ? '#8B4513' : '#666666';
       ctx.lineWidth = 2;
       ctx.stroke();
 
