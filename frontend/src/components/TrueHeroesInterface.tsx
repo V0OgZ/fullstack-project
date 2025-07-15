@@ -4,6 +4,7 @@ import { useGameStore } from '../store/useGameStore';
 import ModernGameRenderer, { ModernGameRendererRef } from './ModernGameRenderer';
 import CastleManagementPanel from './CastleManagementPanel';
 import { getHeroSprite, getHeroFallbackImage, createSpriteStyle, getHeroEmoji, getHeroInfo } from '../utils/heroAssets';
+import { Position } from '../types/game';
 import './TrueHeroesInterface.css';
 
 interface TrueHeroesInterfaceProps {
@@ -74,6 +75,12 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
   };
 
   const selectedHero = currentPlayer?.heroes?.find(hero => hero.id === selectedHeroId);
+
+  const handleMapClick = (position: Position) => {
+    if (selectedHero) {
+      useGameStore.getState().moveHero(selectedHero.id, position);
+    }
+  };
 
   // Update vision when game loads or current player changes
   useEffect(() => {
@@ -255,24 +262,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
           <ModernGameRenderer 
             width={1200} 
             height={800} 
-            onTileClick={(position) => {
-              // Handle tile clicks for hero selection and movement
-              console.log('Tile clicked:', position);
-              
-              // Check if there's a hero at this position
-              const heroAtPosition = currentPlayer?.heroes?.find(hero => 
-                hero.position.x === position.x && hero.position.y === position.y
-              );
-              
-              if (heroAtPosition) {
-                // Select the hero and show hero panel
-                handleHeroSelect(heroAtPosition.id);
-              } else if (selectedHero) {
-                // Move selected hero to this position
-                console.log(`Moving ${selectedHero.name} to`, position);
-                useGameStore.getState().moveHero(selectedHero.id, position);
-              }
-            }}
+            onTileClick={handleMapClick}
             ref={mapRendererRef}
           />
         </div>
