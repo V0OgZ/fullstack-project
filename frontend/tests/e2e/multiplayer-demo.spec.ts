@@ -4,7 +4,8 @@ test.describe('👥 Heroes of Time - Multiplayer Demo', () => {
   test('Dual window multiplayer session', async () => {
     test.setTimeout(90000); // 1.5 minutes for multiplayer setup
     
-    console.log('🚀 Starting multiplayer demo...');
+    const uniqueSessionName = `Demo Session ${Date.now()}`;
+    console.log(`🚀 Starting multiplayer demo with unique session: ${uniqueSessionName}`);
     
     // Launch two separate browsers for proper window positioning
     const browser1 = await chromium.launch({
@@ -58,6 +59,14 @@ test.describe('👥 Heroes of Time - Multiplayer Demo', () => {
     const page2 = await context2.newPage();
     
     try {
+      // Close webpack overlay if it appears
+      await page1.evaluate(() => {
+        const overlay = document.querySelector('#webpack-dev-server-client-overlay');
+        if (overlay) {
+          overlay.remove();
+        }
+      }).catch(() => {});
+      
       // PLAYER 1 - Create Session
     console.log('🎮 Player 1: Creating multiplayer session...');
     
@@ -76,7 +85,7 @@ test.describe('👥 Heroes of Time - Multiplayer Demo', () => {
       const sessionForm = page1.locator('input[placeholder*="session name"]');
       if (await sessionForm.count() > 0) {
         console.log('📝 Filling session creation form...');
-        await sessionForm.fill('Demo Session');
+        await sessionForm.fill(uniqueSessionName);
     
         const heroNameInput = page1.locator('input[placeholder*="hero name"]');
         if (await heroNameInput.count() > 0) {
@@ -99,66 +108,42 @@ test.describe('👥 Heroes of Time - Multiplayer Demo', () => {
       // Go directly to multiplayer page
       await page2.goto('http://localhost:3000/multiplayer');
       await page2.waitForLoadState('networkidle');
-      await page2.waitForTimeout(3000); // Extra wait for sessions to load
-      
-      // Try to click refresh button multiple times
-      const refreshButton = page2.locator('button:has-text("Refresh")');
-      if (await refreshButton.count() > 0) {
-        console.log('🔄 Clicking refresh button...');
-        await refreshButton.click();
-        await page2.waitForTimeout(2000);
-        
-        // Try refresh again
-        await refreshButton.click();
-        await page2.waitForTimeout(3000);
-      }
-      
-      // Wait longer for session to appear
-      await page2.waitForTimeout(5000);
-      
-      // Try to find and join any available session
-      const sessionItems = await page2.locator('.session-item, [data-testid*="session"], .session-card').count();
-      
-      if (sessionItems > 0) {
-        console.log(`✅ Found ${sessionItems} session(s), attempting to join...`);
-        
-        // Click on the first session item
-        await page2.locator('.session-item, [data-testid*="session"], .session-card').first().click();
-        await page2.waitForTimeout(2000);
-        
-        // Look for join button
-        const joinBtn = page2.locator('button:has-text("Join"), [data-testid="join-session"], .join-btn');
-        if (await joinBtn.count() > 0) {
-          console.log('🎮 Joining session...');
-          await joinBtn.click();
-          await page2.waitForTimeout(3000);
+
+      // Poll for the session to appear, with a timeout
+      await expect(async () => {
+        const targetSession = page2.locator(`[data-testid="session-item"]:has-text("${uniqueSessionName}")`);
+        if (await targetSession.count() > 0) {
+          console.log(`✅ Found session: ${uniqueSessionName}`);
+          return; // Session found, exit polling
         }
-      } else {
-        console.log('⚠️ No sessions found, trying to create a new one...');
-        
-        // If no session found, create a new one from Player 2
-        const createBtn2 = page2.locator('[data-testid="create-session-btn"], button:has-text("Create")');
-        if (await createBtn2.count() > 0) {
-          await createBtn2.click();
-          await page2.waitForTimeout(2000);
-          
-          // Fill session form
-          const sessionNameInput2 = page2.locator('input[placeholder*="session"], input[data-testid="session-name"]');
-          if (await sessionNameInput2.count() > 0) {
-            await sessionNameInput2.fill('Player2Session');
-          }
-          
-          const createGameBtn2 = page2.locator('[data-testid="create-new-game-btn"], button:has-text("Create Game")');
-          if (await createGameBtn2.count() > 0) {
-            await createGameBtn2.click();
-            await page2.waitForTimeout(3000);
-          }
-        }
-      }
+        console.log(`🔄 Session not found, refreshing...`);
+        await page2.getByRole('button', { name: 'Refresh' }).click();
+        throw new Error('Session not found yet');
+      }).toPass({
+        intervals: [1_000, 2_000, 5_000],
+        timeout: 30_000
+      });
+
+      // Join the session now that it is visible
+      const targetSession = page2.locator(`[data-testid="session-item"]:has-text("${uniqueSessionName}")`);
+      await targetSession.locator('[data-testid="join-session-btn"]').click();
+      console.log(`🎮 Joining session: ${uniqueSessionName}`);
       
-      // Wait for both players to potentially enter game
-      await page1.waitForTimeout(5000);
-      await page2.waitForTimeout(5000);
+      // PLAYER 1 - Start the battle after Player 2 joins
+      console.log('👑 Player 1: Waiting for the battle to be ready to start...');
+      const startBattleBtn = page1.locator('[data-testid="start-battle-btn"]');
+      
+      // Wait for the button to be enabled (this means Player 2 has joined and the session is ready)
+      await expect(startBattleBtn).toBeEnabled({ timeout: 20000 });
+      
+      console.log('🚀 Player 1: Starting the battle!');
+      await startBattleBtn.click();
+      
+      // Wait for both players to enter the actual game interface
+      console.log('⏳ Waiting for game interface to load for both players...');
+      await expect(page1.locator('.true-heroes-interface')).toBeVisible({ timeout: 20000 });
+      await expect(page2.locator('.true-heroes-interface')).toBeVisible({ timeout: 20000 });
+      console.log('✅ Game interface loaded for both players!');
       
       // Try to simulate some gameplay if in game
       console.log('🎮 Attempting gameplay simulation...');

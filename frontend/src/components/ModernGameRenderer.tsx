@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState, useCallback, useMemo, forwardRef, useImperativeHandle } from 'react';
 import { useGameStore } from '../store/useGameStore';
-import { getHeroSprite, getHeroFallbackImage, drawHeroSprite, loadHeroImageWithFallback, getHeroEmoji } from '../utils/heroAssets';
+import { getHeroSprite, loadHeroImageWithFallback, getHeroEmoji } from '../utils/heroAssets';
 import { Position, Tile, Hero } from '../types/game';
 import { useTranslation } from '../i18n';
 import './ModernGameRenderer.css';
@@ -74,12 +74,6 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
       onTileClick(position);
     }
   }, [map, currentGame, selectedHero, movementMode, canMoveToPosition, moveHero, selectHero, setSelectedTile, onTileClick]);
-
-  // Fonction pour obtenir l'image du héros
-  const getHeroImage = useCallback((heroName: string): string => {
-    // Utiliser le nouveau système de fallback
-    return getHeroFallbackImage(heroName);
-  }, []);
 
   // Fonction pour précharger les images des héros
   const preloadHeroImage = useCallback((heroName: string): Promise<HTMLImageElement> => {
@@ -718,21 +712,6 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
       prev.filter(el => (currentTime - el.startTime) < el.duration)
     );
   }, [animatedElements, hexToPixel]);
-
-  // Ajouter un effet de particule
-  const addParticleEffect = useCallback((position: Position, color: string) => {
-    const newParticle: AnimatedElement = {
-      id: `particle_${Date.now()}_${Math.random()}`,
-      type: 'particle',
-      position,
-      startTime: Date.now(),
-      duration: 1000,
-      color,
-      size: 5
-    };
-    
-    setAnimatedElements(prev => [...prev, newParticle]);
-  }, []);
 
   // Main render loop
   const render = useCallback(() => {

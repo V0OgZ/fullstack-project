@@ -3,7 +3,7 @@ import { useTranslation } from '../i18n';
 import { useGameStore } from '../store/useGameStore';
 import ModernGameRenderer, { ModernGameRendererRef } from './ModernGameRenderer';
 import CastleManagementPanel from './CastleManagementPanel';
-import { getHeroSprite, getHeroFallbackImage, createSpriteStyle, getHeroEmoji, getDefaultHeroForScenario, getHeroInfo } from '../utils/heroAssets';
+import { getHeroSprite, getHeroFallbackImage, createSpriteStyle, getHeroEmoji, getHeroInfo } from '../utils/heroAssets';
 import './TrueHeroesInterface.css';
 
 interface TrueHeroesInterfaceProps {
@@ -20,12 +20,10 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
     isLoading, 
     error,
     endTurn,
-    nextPlayer,
     updateVision
   } = useGameStore();
   
   const [selectedHeroId, setSelectedHeroId] = useState<string | null>(null);
-  const [selectedCastleId, setSelectedCastleId] = useState<string | null>(null);
   const [rightPanelContent, setRightPanelContent] = useState<'scenario' | 'hero' | 'inventory' | 'castle'>('scenario');
   const mapRendererRef = useRef<ModernGameRendererRef>(null);
 
@@ -75,11 +73,6 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
     setRightPanelContent('castle');
   };
 
-  const handleCastleSelect = (castleId: string) => {
-    setSelectedCastleId(castleId);
-    // Keep castle content but could show castle details
-  };
-
   const selectedHero = currentPlayer?.heroes?.find(hero => hero.id === selectedHeroId);
 
   // Update vision when game loads or current player changes
@@ -113,14 +106,9 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
     };
   }, [scenarioId, rightPanelContent, selectedHero]);
 
-  // Fonction pour obtenir l'image du héros
-  const getHeroImage = (heroName: string): string => {
-    // Essayer d'abord d'obtenir l'image fallback
-    return getHeroFallbackImage(heroName);
-  };
-
   const getHeroSpriteComponent = (heroName: string) => {
-    const spriteData = getHeroSprite(heroName);
+    const upperCaseHeroName = heroName.toUpperCase();
+    const spriteData = getHeroSprite(upperCaseHeroName);
     
     if (spriteData) {
       // Utiliser la spritesheet avec CSS background-position
@@ -136,7 +124,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
       // Fallback vers image PNG simple
       return (
         <img 
-          src={getHeroFallbackImage(heroName)}
+          src={getHeroFallbackImage(upperCaseHeroName)}
           alt={heroName}
           className="hero-portrait-img"
           onError={(e) => {
@@ -147,7 +135,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
             if (parent && !parent.querySelector('.hero-emoji-fallback')) {
               const fallback = document.createElement('div');
               fallback.className = 'hero-emoji-fallback';
-              fallback.textContent = getHeroEmoji(heroName);
+              fallback.textContent = getHeroEmoji(upperCaseHeroName);
               parent.appendChild(fallback);
             }
           }}
@@ -280,8 +268,9 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
                 // Select the hero and show hero panel
                 handleHeroSelect(heroAtPosition.id);
               } else if (selectedHero) {
-                // Move selected hero to this position (future implementation)
+                // Move selected hero to this position
                 console.log(`Moving ${selectedHero.name} to`, position);
+                useGameStore.getState().moveHero(selectedHero.id, position);
               }
             }}
             ref={mapRendererRef}
@@ -400,13 +389,13 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
                     <h3 className="hero-name">{selectedHero.name}</h3>
                     <div className="hero-class">
                       {(() => {
-                        const heroInfo = getHeroInfo(selectedHero.name);
+                        const heroInfo = getHeroInfo(selectedHero.name.toUpperCase());
                         return heroInfo.class;
                       })()}
                     </div>
                     <div className="hero-description">
                       {(() => {
-                        const heroInfo = getHeroInfo(selectedHero.name);
+                        const heroInfo = getHeroInfo(selectedHero.name.toUpperCase());
                         return heroInfo.description;
                       })()}
                     </div>
