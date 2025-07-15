@@ -14,7 +14,7 @@ test.describe('🎮 Heroes of Time - Multiplayer Demo', () => {
     });
     
     console.log('🎬 === DÉBUT DE LA DÉMO MULTIJOUEUR ===');
-    
+        
     // 1. Navigation directe vers la page multijoueur
     console.log('📍 1. Navigation vers la page multijoueur...');
     await page.goto('http://localhost:3000/multiplayer');
@@ -35,7 +35,7 @@ test.describe('🎮 Heroes of Time - Multiplayer Demo', () => {
       console.log('🎮 Création d\'une nouvelle session...');
       await createSessionBtn.click();
       await page.waitForTimeout(2000);
-      
+    
       // Fill session details if form is visible
       const sessionNameInput = page.locator('input[placeholder*="session name"]');
       if (await sessionNameInput.count() > 0) {
@@ -45,8 +45,8 @@ test.describe('🎮 Heroes of Time - Multiplayer Demo', () => {
       const heroNameInput = page.locator('input[placeholder*="hero name"]');
       if (await heroNameInput.count() > 0) {
         await heroNameInput.fill('DemoHero');
-      }
-      
+    }
+    
       // Take screenshot of multiplayer session creation
       await page.screenshot({ 
         path: 'test-results/multiplayer-session-creation.png',
@@ -56,7 +56,7 @@ test.describe('🎮 Heroes of Time - Multiplayer Demo', () => {
       console.log('📸 Screenshot de la création de session sauvegardé');
     } else if (await sessionList.count() > 0) {
       console.log('📋 Liste des sessions disponibles affichée');
-      
+    
       // Check if there are any sessions to join
       const sessionItems = page.locator('.session-item');
       const sessionCount = await sessionItems.count();

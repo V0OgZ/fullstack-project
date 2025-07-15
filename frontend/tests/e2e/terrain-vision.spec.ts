@@ -163,8 +163,10 @@ test.describe('Terrain Vision Demo', () => {
     await page.goto('http://localhost:3000');
     
     // Start game
+    await page.waitForSelector('[data-testid="scenario-card-conquest-classic"]');
+    
+    // Click the scenario card to start the game
     await page.getByTestId('scenario-card-conquest-classic').click();
-    await page.getByTestId('play-button-conquest-classic').click();
     await page.waitForSelector('canvas', { timeout: 10000 });
     
     // Demo sequence
