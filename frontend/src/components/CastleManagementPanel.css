@@ -1,37 +1,67 @@
-.castle-management-panel {
-  background: rgba(26, 26, 46, 0.9);
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-  border: 2px solid rgba(0, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
-  max-height: 80vh;
-  overflow-y: auto;
+.castle-panel {
+  background: rgba(0, 0, 0, 0.95);
+  border: 1px solid #ffd700;
+  border-radius: 8px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .panel-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  border-bottom: 1px solid rgba(0, 255, 255, 0.3);
-  padding-bottom: 15px;
+  padding: 12px 16px;
+  background: rgba(255, 215, 0, 0.1);
+  border-bottom: 1px solid #ffd700;
+  flex-shrink: 0;
 }
 
 .panel-header h3 {
-  color: var(--neon-cyan);
-  font-size: 1.4rem;
   margin: 0;
-  text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+  color: #ffd700;
+  font-size: 16px;
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
 }
 
-.error-message {
-  background: rgba(239, 68, 68, 0.2);
-  color: #ff6b6b;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  margin-bottom: 15px;
+.close-btn {
+  background: none;
+  border: none;
+  color: #ffd700;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background: rgba(255, 215, 0, 0.2);
+  transform: scale(1.1);
+}
+
+.api-status {
+  padding: 8px 16px;
+  background: rgba(255, 193, 7, 0.1);
+  border-bottom: 1px solid rgba(255, 193, 7, 0.3);
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.status-warning {
+  color: #ffc107;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .loading-message {
@@ -40,17 +70,17 @@
   align-items: center;
   justify-content: center;
   padding: 40px;
-  color: #cccccc;
+  text-align: center;
 }
 
 .loading-spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid rgba(0, 255, 255, 0.3);
-  border-top: 3px solid var(--neon-cyan);
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(255, 215, 0, 0.3);
+  border-top: 3px solid #ffd700;
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
 }
 
 @keyframes spin {
@@ -58,250 +88,306 @@
   100% { transform: rotate(360deg); }
 }
 
-.castle-bonuses {
-  margin-bottom: 25px;
-}
-
-.castle-bonuses h4 {
-  color: var(--neon-cyan);
-  margin-bottom: 10px;
-  font-size: 1.1rem;
-}
-
-.bonuses-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 10px;
-}
-
-.bonus-item {
+.castle-tabs {
   display: flex;
-  justify-content: space-between;
-  background: rgba(22, 33, 62, 0.8);
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid rgba(0, 255, 255, 0.2);
-  color: #cccccc;
-  font-size: 0.9rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid #333;
+  flex-shrink: 0;
 }
 
-.existing-buildings,
-.available-buildings {
-  margin-bottom: 25px;
+.tab-btn {
+  flex: 1;
+  padding: 10px 8px;
+  background: none;
+  border: none;
+  color: #ccc;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.existing-buildings h4,
-.available-buildings h4 {
-  color: var(--neon-cyan);
-  margin-bottom: 15px;
-  font-size: 1.1rem;
+.tab-btn:hover {
+  background: rgba(255, 215, 0, 0.1);
+  color: #ffd700;
 }
 
-.buildings-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 15px;
+.tab-btn.active {
+  background: rgba(255, 215, 0, 0.2);
+  color: #ffd700;
+  border-bottom-color: #ffd700;
 }
 
-.building-card {
-  background: rgba(22, 33, 62, 0.8);
-  border-radius: 10px;
-  padding: 15px;
-  border: 1px solid rgba(0, 255, 255, 0.2);
-  transition: all 0.3s ease;
+.castle-content {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.2);
 }
 
-.building-card:hover {
-  border-color: var(--neon-cyan);
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+.error-message {
+  background: rgba(220, 53, 69, 0.2);
+  border: 1px solid #dc3545;
+  border-radius: 4px;
+  padding: 8px;
+  margin-bottom: 12px;
+  color: #ff6b6b;
+  font-size: 13px;
+  text-align: center;
 }
 
-.building-card.available {
-  border-color: rgba(255, 255, 0, 0.3);
-}
-
-.building-card.available:hover {
-  border-color: var(--neon-yellow);
-  box-shadow: 0 0 15px rgba(255, 255, 0, 0.3);
-}
-
-.building-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.building-header h5 {
-  color: var(--neon-cyan);
-  margin: 0;
-  font-size: 1rem;
-}
-
-.building-status {
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.building-status.constructed {
-  background: rgba(76, 175, 80, 0.3);
-  color: #4CAF50;
-  border: 1px solid rgba(76, 175, 80, 0.5);
-}
-
-.building-status.under-construction {
-  background: rgba(255, 193, 7, 0.3);
-  color: #FFC107;
-  border: 1px solid rgba(255, 193, 7, 0.5);
-}
-
-.building-status.available {
-  background: rgba(255, 255, 0, 0.3);
-  color: var(--neon-yellow);
-  border: 1px solid rgba(255, 255, 0, 0.5);
-}
-
-.building-details {
+/* Overview Tab */
+.overview-content {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 16px;
 }
 
-.building-info {
-  color: #cccccc;
-  font-size: 0.9rem;
+.resources-overview h4,
+.daily-income h4,
+.garrison-overview h4 {
+  color: #ffd700;
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  font-weight: 600;
 }
 
-.building-info p {
-  margin: 4px 0;
+.resource-list,
+.income-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.building-actions {
+.resource-item,
+.income-item {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 13px;
+  text-align: center;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.garrison-overview {
+  margin-top: 8px;
+}
+
+.garrison-slots {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+}
+
+.garrison-slot {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 4px;
+  padding: 8px;
+  text-align: center;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.garrison-slot:hover {
+  background: rgba(255, 215, 0, 0.1);
+  border-color: #ffd700;
+}
+
+.garrison-slot.empty {
+  color: #666;
+  font-style: italic;
+}
+
+/* Buildings Tab */
+.buildings-content h4 {
+  color: #ffd700;
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.building-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.upgrade-btn,
-.construct-btn,
-.complete-btn,
-.recruit-btn {
-  background: linear-gradient(45deg, var(--neon-cyan), var(--neon-magenta));
-  color: #000;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  font-size: 0.8rem;
-}
-
-.upgrade-btn:hover,
-.construct-btn:hover,
-.complete-btn:hover,
-.recruit-btn:hover {
-  background: linear-gradient(45deg, var(--neon-magenta), var(--neon-yellow));
-  box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
-}
-
-.upgrade-btn:disabled,
-.construct-btn:disabled,
-.complete-btn:disabled,
-.recruit-btn:disabled {
-  background: #666;
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
-.recruitment-section {
-  margin-top: 10px;
-  padding: 10px;
-  background: rgba(26, 26, 46, 0.5);
-  border-radius: 8px;
-  border: 1px solid rgba(0, 255, 255, 0.1);
-}
-
-.recruitment-section h6 {
-  color: var(--neon-cyan);
-  margin: 0 0 8px 0;
-  font-size: 0.9rem;
-}
-
-.unit-recruitment {
+.building-item {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 5px;
-  font-size: 0.8rem;
-  color: #cccccc;
+  justify-content: space-between;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 4px;
+  transition: all 0.2s ease;
 }
 
-.unit-recruitment span:first-child {
-  color: var(--neon-cyan);
-  font-weight: 600;
+.building-item:hover {
+  background: rgba(255, 215, 0, 0.1);
+  border-color: #ffd700;
 }
 
-.building-cost {
-  color: #cccccc;
-  font-size: 0.9rem;
-}
-
-.player-resources {
-  background: rgba(22, 33, 62, 0.8);
-  border-radius: 10px;
-  padding: 15px;
-  border: 1px solid rgba(0, 255, 255, 0.2);
-}
-
-.player-resources h4 {
-  color: var(--neon-cyan);
-  margin-bottom: 10px;
-  font-size: 1.1rem;
-}
-
-.resources-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+.building-info {
+  display: flex;
+  align-items: center;
   gap: 10px;
 }
 
-.resource-item {
-  display: flex;
-  justify-content: space-between;
-  background: rgba(26, 26, 46, 0.8);
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid rgba(0, 255, 255, 0.2);
-  color: #cccccc;
-  font-size: 0.9rem;
+.building-icon {
+  font-size: 16px;
 }
 
-.resource-item span:last-child {
-  color: var(--neon-cyan);
+.building-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.building-name {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.building-status {
+  color: #4caf50;
+  font-size: 11px;
+}
+
+.building-level {
+  background: rgba(255, 215, 0, 0.2);
+  color: #ffd700;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 10px;
   font-weight: 600;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .castle-management-panel {
-    padding: 15px;
+/* Recruit Tab */
+.recruit-content h4 {
+  color: #ffd700;
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.unit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.unit-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.unit-item:hover {
+  background: rgba(255, 215, 0, 0.1);
+  border-color: #ffd700;
+}
+
+.unit-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.unit-icon {
+  font-size: 18px;
+}
+
+.unit-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.unit-name {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: capitalize;
+}
+
+.unit-stats {
+  color: #ccc;
+  font-size: 11px;
+}
+
+.unit-cost {
+  color: #ffd700;
+  font-size: 10px;
+}
+
+.recruit-btn {
+  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+  color: #ffffff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  min-width: 60px;
+}
+
+.recruit-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+  transform: translateY(-1px);
+}
+
+.recruit-btn:disabled {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Scrollbar */
+.castle-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.castle-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.castle-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 215, 0, 0.3);
+  border-radius: 3px;
+}
+
+.castle-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 215, 0, 0.5);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .castle-panel {
+    font-size: 12px;
   }
   
-  .buildings-grid {
+  .tab-btn {
+    font-size: 10px;
+    padding: 8px 6px;
+  }
+  
+  .garrison-slots {
     grid-template-columns: 1fr;
-  }
-  
-  .bonuses-grid,
-  .resources-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .building-actions {
-    flex-direction: column;
   }
 } 

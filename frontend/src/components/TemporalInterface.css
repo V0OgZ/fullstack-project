@@ -188,10 +188,10 @@
 
 .zone-section {
   background: rgba(0, 0, 0, 0.8);
-  border: 2px solid #00ffff;
+  border: 2px solid #FFD700;
   border-radius: 10px;
   padding: 20px;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
 }
 
 .zone-header {
@@ -202,7 +202,7 @@
 }
 
 .zone-header h3 {
-  color: #00ffff;
+  color: #FFD700;
   margin: 0;
   font-size: 1.2rem;
 }
@@ -222,13 +222,13 @@
 }
 
 .zone-controls input[type="checkbox"] {
-  accent-color: #00ffff;
+  accent-color: #FFD700;
 }
 
 .zone-controls select {
   background: rgba(0, 0, 0, 0.7);
   color: #ffffff;
-  border: 1px solid #00ffff;
+  border: 1px solid #FFD700;
   padding: 5px 10px;
   border-radius: 5px;
 }
@@ -264,13 +264,13 @@
 .zone-cell:hover {
   transform: scale(1.1);
   z-index: 10;
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
 }
 
 .zone-cell.selected {
-  background: rgba(0, 255, 255, 0.3);
-  border: 2px solid #00ffff;
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+  background: rgba(255, 215, 0, 0.3);
+  border: 2px solid #FFD700;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
 }
 
 .zone-cell.center {
@@ -356,7 +356,7 @@
 .action-indicator {
   top: 2px;
   right: 2px;
-  color: #00ffff;
+  color: #FFD700;
 }
 
 .conflict-indicator {
@@ -398,7 +398,6 @@
 .zone-cell.has-hero:hover,
 .zone-cell.has-castle:hover,
 .zone-cell.has-object:hover {
-  transform: scale(1.15);
   z-index: 15;
 }
 
@@ -455,20 +454,20 @@
 }
 
 .action-btn.active {
-  background: linear-gradient(45deg, #00ffff, #0066cc);
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+  background: linear-gradient(45deg, #FFD700, #FFA500);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
 }
 
 .planning-instructions {
-  background: rgba(0, 255, 255, 0.1);
-  border: 1px solid #00ffff;
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid #FFD700;
   padding: 15px;
   border-radius: 5px;
   margin-bottom: 20px;
 }
 
 .planning-instructions strong {
-  color: #00ffff;
+  color: #FFD700;
   display: block;
   margin-bottom: 5px;
 }
@@ -503,7 +502,7 @@
 }
 
 .action-item.planned {
-  color: #00ffff;
+  color: #FFD700;
 }
 
 .action-item.executing {

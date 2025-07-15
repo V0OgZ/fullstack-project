@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from '../i18n';
 import { ApiService } from '../services/api';
 import './EnhancedScenarioSelector.css';
@@ -19,18 +19,6 @@ interface Scenario {
   isMultiplayer: boolean;
 }
 
-interface BackendScenario {
-  id: number;
-  scenarioId: string;
-  name: string;
-  description: string;
-  difficulty: string;
-  maxPlayers: number;
-  estimatedDuration?: string;
-  isActive: boolean;
-  isMultiplayer: boolean;
-}
-
 const EnhancedScenarioSelector: React.FC = () => {
   const { t, language, setLanguage } = useTranslation();
   const navigate = useNavigate();
@@ -38,6 +26,26 @@ const EnhancedScenarioSelector: React.FC = () => {
   const [scenarios, setScenarios] = useState<Scenario[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const getBackgroundForScenario = (id: string): string => {
+    switch(id) {
+      case 'conquest-classic': return 'linear-gradient(135deg, #2196F3 0%, #1976D2 100%)';
+      case 'temporal-rift': return 'linear-gradient(135deg, #9C27B0 0%, #673AB7 100%)';
+      case 'multiplayer-arena': return 'linear-gradient(135deg, #16a34a 0%, #15803d 100%)';
+      case 'dragon-campaign': return 'linear-gradient(135deg, #FF6B35 0%, #F7931E 100%)';
+      default: return 'linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%)';
+    }
+  };
+
+  const getIconForScenario = (id: string): string => {
+    switch(id) {
+      case 'conquest-classic': return '⚔️';
+      case 'temporal-rift': return '🔮';
+      case 'multiplayer-arena': return '🌐';
+      case 'dragon-campaign': return '🐉';
+      default: return '🎮';
+    }
+  };
 
   console.log('%c[EnhancedScenarioSelector] Component rendered', 'color: blue; font-weight: bold');
 
@@ -50,48 +58,39 @@ const EnhancedScenarioSelector: React.FC = () => {
       // Load all scenarios from backend with current language
       const backendScenarios = await ApiService.getAllScenarios(language);
       
-      // Convert backend scenarios to EnhancedScenarioSelector format
-      const enhancedScenarios: Scenario[] = backendScenarios.map((scenario: BackendScenario) => ({
-        id: scenario.scenarioId,
-        name: scenario.name, // Now localized by backend
-        description: scenario.description, // Now localized by backend
-        longDescription: scenario.description, // Using same description for now
-        difficulty: scenario.difficulty.toLowerCase() as 'easy' | 'medium' | 'hard' | 'expert',
-        features: [t('features.backend-loaded'), t('features.dynamic-content'), t('features.real-time-data')],
-        icon: scenario.scenarioId === 'conquest-classic' ? '⚔️' : 
-              scenario.scenarioId === 'temporal-rift' ? '🔮' : 
-              scenario.isMultiplayer ? '🌐' : '🎮',
-        backgroundImage: scenario.scenarioId === 'conquest-classic' ? 'linear-gradient(135deg, #2196F3 0%, #1976D2 100%)' :
-                        scenario.scenarioId === 'temporal-rift' ? 'linear-gradient(135deg, #9C27B0 0%, #673AB7 100%)' :
-                        scenario.isMultiplayer ? 'linear-gradient(135deg, #FF5722 0%, #F44336 100%)' :
-                        'linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%)',
+      // Transform backend scenarios and add missing translations
+      const scenarios: Scenario[] = backendScenarios.map((scenario: any) => ({
+        id: scenario.scenarioId || scenario.id,
+        name: scenario.name || scenario.scenarioId || scenario.id,
+        description: scenario.description || '',
+        longDescription: scenario.description || '',
+        difficulty: (scenario.difficulty?.toLowerCase() || 'medium') as 'easy' | 'medium' | 'hard' | 'expert',
+        features: [
+          scenario.mapWidth && scenario.mapHeight 
+            ? `📏 ${scenario.mapWidth}×${scenario.mapHeight}`
+            : `🗺️ ${scenario.mapSize || 'Standard'}`,
+          scenario.victoryCondition 
+            ? `�� ${scenario.victoryCondition}`
+            : '🏆 Elimination victory',
+          scenario.turnLimit 
+            ? `⏳ ${scenario.turnLimit} turns`
+            : '♾️ Unlimited turns',
+          scenario.maxPlayers > 1 
+            ? `👥 ${scenario.maxPlayers} players`
+            : '👤 Solo'
+        ],
+        icon: getIconForScenario(scenario.scenarioId || scenario.id),
+        backgroundImage: getBackgroundForScenario(scenario.scenarioId || scenario.id),
         estimatedTime: scenario.estimatedDuration || '1-2 hours',
-        playerCount: `${scenario.maxPlayers} players`,
-        unlocked: scenario.isActive,
-        isMultiplayer: scenario.isMultiplayer
+        playerCount: `${scenario.maxPlayers || 1} players`,
+        unlocked: scenario.isActive !== false && scenario.unlocked !== false,
+        isMultiplayer: scenario.playerMode === 'multiplayer' || scenario.isMultiplayer === true
       }));
 
-      // Add a locked scenario for demonstration
-      const lockedScenario: Scenario = {
-        id: 'dragon-campaign',
-        name: t('scenarios.dragon-campaign.name'),
-        description: t('scenarios.dragon-campaign.description'),
-        longDescription: t('scenarios.dragon-campaign.description'),
-        difficulty: 'expert',
-        features: [t('features.epic-campaign'), t('features.dragon-lords'), t('features.ultimate-challenge')],
-        icon: '🐉',
-        backgroundImage: 'linear-gradient(135deg, #FF6B35 0%, #F7931E 100%)',
-        estimatedTime: '3-5 hours',
-        playerCount: '1-2 players',
-        unlocked: false,
-        isMultiplayer: false
-      };
-
-      // Combine backend scenarios with locked scenario
-      const allScenarios = [...enhancedScenarios, lockedScenario];
+      console.log('%c[EnhancedScenarioSelector] Transformed scenarios:', 'color: blue', scenarios);
       
-      setScenarios(allScenarios);
-      console.log('%c[EnhancedScenarioSelector] Loaded scenarios:', 'color: green; font-weight: bold', allScenarios);
+      setScenarios(scenarios);
+      console.log('%c[EnhancedScenarioSelector] Loaded scenarios:', 'color: green; font-weight: bold', scenarios);
     } catch (err) {
       setError('Failed to load scenarios from backend');
       console.error('Error loading scenarios:', err);
@@ -104,7 +103,7 @@ const EnhancedScenarioSelector: React.FC = () => {
           description: t('scenarios.conquest-classic.description'),
           longDescription: t('scenarios.conquest-classic.description'),
           difficulty: 'easy',
-          features: [t('features.balanced-gameplay'), t('features.all-castles'), t('features.standard-victory')],
+          features: ['📏 30×30', '🏆 Conquest', '⏳ 200 turns'],
           icon: '⚔️',
           backgroundImage: 'linear-gradient(135deg, #2196F3 0%, #1976D2 100%)',
           estimatedTime: '1-2 hours',
@@ -118,7 +117,7 @@ const EnhancedScenarioSelector: React.FC = () => {
           description: t('scenarios.dragon-campaign.description'),
           longDescription: t('scenarios.dragon-campaign.description'),
           difficulty: 'expert',
-          features: [t('features.epic-campaign'), t('features.dragon-lords'), t('features.ultimate-challenge')],
+          features: ['📏 50×50', '🐲 Epic bosses', '⏳ 500 turns'],
           icon: '🐉',
           backgroundImage: 'linear-gradient(135deg, #FF6B35 0%, #F7931E 100%)',
           estimatedTime: '3-5 hours',
@@ -206,6 +205,7 @@ const EnhancedScenarioSelector: React.FC = () => {
       {/* Game Title */}
       <div className="game-title-header">
         <h1 className="main-game-title">🎮 Heroes of Time ⚔️</h1>
+        {/* Demo button removed per request */}
       </div>
 
       <main className="selector-main">
@@ -232,16 +232,8 @@ const EnhancedScenarioSelector: React.FC = () => {
               <div
                 key={scenario.id}
                 data-testid={`scenario-card-${scenario.id}`}
-                className={`scenario-card ${!scenario.unlocked ? 'locked' : ''} ${selectedScenario === scenario.id ? 'selected' : ''} ${scenario.isMultiplayer ? 'multiplayer' : ''}`}
+                className={`scenario-card ${scenario.id === selectedScenario ? 'selected' : ''} ${scenario.unlocked ? '' : 'locked'} ${scenario.isMultiplayer ? 'multiplayer' : ''}`}
                 style={{ background: scenario.backgroundImage }}
-                onMouseEnter={() => {
-                  console.log('%c[EnhancedScenarioSelector] Mouse enter scenario:', 'color: cyan', scenario.id);
-                  setSelectedScenario(scenario.id);
-                }}
-                onMouseLeave={() => {
-                  console.log('%c[EnhancedScenarioSelector] Mouse leave scenario:', 'color: cyan', scenario.id);
-                  setSelectedScenario(null);
-                }}
                 onClick={() => handleScenarioClick(scenario.id)}
               >
                 {!scenario.unlocked && (
@@ -251,20 +243,18 @@ const EnhancedScenarioSelector: React.FC = () => {
                   </div>
                 )}
                 
-                {scenario.isMultiplayer && scenario.unlocked && (
-                  <div className="multiplayer-badge">
-                    🌐 MULTIPLAYER
-                  </div>
-                )}
-                
                 <div className="scenario-content">
                   <div className="scenario-header">
                     <div className="scenario-icon-large game-icon">{scenario.icon}</div>
                   </div>
                   
                   <div className="scenario-body">
-                    <h3 className="scenario-title">{scenario.name}</h3>
-                    <p className="scenario-description">{scenario.description}</p>
+                    <h3 className="scenario-title">
+                      {scenario.name.startsWith('scenarios.') ? t(scenario.name as any) : scenario.name}
+                    </h3>
+                    <p className="scenario-description">
+                      {scenario.description.startsWith('scenarios.') ? t(scenario.description as any) : scenario.description}
+                    </p>
                     
                     <div className="scenario-meta-info">
                       <div 
@@ -281,38 +271,6 @@ const EnhancedScenarioSelector: React.FC = () => {
                         <span key={index} className="feature-tag">{feature}</span>
                       ))}
                     </div>
-                  </div>
-                  
-                  <div className="scenario-actions">
-                    {scenario.unlocked ? (
-                      <Link 
-                        to={`/game/${scenario.id}`}
-                        data-testid={`play-button-${scenario.id}`}
-                        className={`play-button ${!scenario.unlocked ? 'disabled' : ''}`}
-                        onClick={(e) => {
-                          console.log(`[SELECTOR] --- Play button clicked for scenario: ${scenario.id} ---`);
-                          console.log(`[SELECTOR] Button href: ${e.currentTarget.getAttribute('href')}`);
-                          try {
-                            if (!scenario.unlocked) {
-                              console.log(`[SELECTOR] Scenario is LOCKED. Preventing navigation.`);
-                              e.preventDefault();
-                            } else {
-                              console.log(`[SELECTOR] Scenario is UNLOCKED. Proceeding with navigation to /game/${scenario.id}`);
-                            }
-                          } catch (err) {
-                            console.error('[SELECTOR] Error in click handler:', err);
-                          }
-                        }}
-                      >
-                        <span className="button-icon">🎮</span>
-                        {t('startGame')}
-                      </Link>
-                    ) : (
-                      <button className="play-button disabled" disabled>
-                        <span className="button-icon">🔒</span>
-                        {t('scenarioLocked')}
-                      </button>
-                    )}
                   </div>
                 </div>
               </div>

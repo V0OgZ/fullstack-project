@@ -177,8 +177,8 @@
 
 .advisor-card:hover {
   transform: translateY(-5px);
-  border-color: #3498DB;
-  box-shadow: 0 15px 40px rgba(52, 152, 219, 0.3);
+  border-color: #FFD700;
+  box-shadow: 0 15px 40px rgba(255, 215, 0, 0.3);
 }
 
 .advisor-card.selected {
@@ -197,15 +197,15 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: linear-gradient(45deg, #3498DB, #2980B9);
+  background: linear-gradient(45deg, #FFD700, #FFA500);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.5em;
   font-weight: bold;
-  color: white;
+  color: #1a1a2e;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
 }
 
 .advisor-mood {

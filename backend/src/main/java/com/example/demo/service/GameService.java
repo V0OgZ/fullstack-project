@@ -3,8 +3,10 @@ package com.example.demo.service;
 import com.example.demo.model.Building;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.Random;
 
 @Service
 public class GameService {
@@ -15,6 +17,9 @@ public class GameService {
     
     @Autowired
     private BuildingService buildingService;
+    
+    @Autowired
+    private GameStateService gameStateService;
     
     public Map<String, Object> getGame(String gameId) {
         Map<String, Object> game = games.get(gameId);
@@ -27,6 +32,26 @@ public class GameService {
             game = createNewGame(gameId);
             games.put(gameId, game);
         }
+        
+        // Merge with persistent game state
+        com.example.demo.model.GameState gameState = gameStateService.getOrCreateGameState(gameId);
+        game.put("currentTurn", gameState.getCurrentTurn());
+        game.put("currentPlayerId", gameState.getCurrentPlayerId());
+        game.put("turnStartTime", gameState.getTurnStartTime());
+        game.put("gameStatus", gameState.getGameStatus());
+        game.put("selectedHeroes", gameState.getSelectedHeroes());
+        game.put("pendingActions", gameState.getPendingActions());
+        game.put("playerInventories", gameState.getPlayerInventories());
+        game.put("equippedItems", gameState.getEquippedItems());
+        
+        // Synchronize currentPlayer with currentPlayerId from GameState
+        if (gameState.getCurrentPlayerId() != null) {
+            Map<String, Object> currentPlayer = getPlayerById(game, gameState.getCurrentPlayerId());
+            if (currentPlayer != null) {
+                game.put("currentPlayer", currentPlayer);
+            }
+        }
+        
         return game;
     }
 
@@ -329,13 +354,13 @@ public class GameService {
         game.put("status", "active");
         game.put("scenario", "conquest-classique");
 
-        // Real hexagonal map
-        Map<String, Object> map = createHexagonalMap();
-        game.put("map", map);
-
         // Real players with resources and castles
         List<Map<String, Object>> players = createPlayersWithCastles(gameId);
         game.put("players", players);
+        
+        // Real hexagonal map with heroes placed on tiles
+        Map<String, Object> map = createHexagonalMapWithHeroes(players);
+        game.put("map", map);
         
         game.put("currentPlayer", players.get(0));
         game.put("actions", new ArrayList<>());
@@ -535,10 +560,31 @@ public class GameService {
     }
 
     private Map<String, Object> calculateResourceCollection(String objectId) {
-        // Real resource calculation
+        // HOMM3-style resource calculation
         Map<String, Object> resource = new HashMap<>();
-        resource.put("gold", (int)(Math.random() * 200) + 50);
-        resource.put("experience", (int)(Math.random() * 100) + 25);
+        
+        if (objectId.startsWith("gold_mine")) {
+            resource.put("gold", 1000);  // Gold mine produces 1000 gold/day
+            resource.put("type", "daily");
+        } else if (objectId.startsWith("sawmill")) {
+            resource.put("wood", 2);      // Sawmill produces 2 wood/day
+            resource.put("type", "daily");
+        } else if (objectId.startsWith("ore_mine")) {
+            resource.put("ore", 2);       // Ore mine produces 2 ore/day
+            resource.put("type", "daily");
+        } else if (objectId.startsWith("crystal")) {
+            resource.put("crystal", 1);   // Crystal cavern produces 1 crystal/day
+            resource.put("type", "daily");
+        } else if (objectId.startsWith("chest")) {
+            resource.put("gold", 1500 + (int)(Math.random() * 1000));  // 1500-2500 gold
+            resource.put("experience", (int)(Math.random() * 1500));    // 0-1500 exp
+            resource.put("type", "instant");
+        } else {
+            // Default resource pile
+            resource.put("gold", 500 + (int)(Math.random() * 500));
+            resource.put("type", "instant");
+        }
+        
         return resource;
     }
 
@@ -744,19 +790,32 @@ public class GameService {
     }
     
     private String getRandomTerrain() {
-        String[] terrains = {"grass", "forest", "mountain", "water", "desert", "swamp"};
-        return terrains[(int)(Math.random() * terrains.length)];
+        // HOMM3-style terrain distribution
+        double rand = Math.random();
+        if (rand < 0.30) return "grass";      // 30% - base terrain
+        if (rand < 0.45) return "dirt";       // 15% - roads and paths
+        if (rand < 0.60) return "forest";     // 15% - common
+        if (rand < 0.70) return "mountain";   // 10% - obstacles
+        if (rand < 0.78) return "water";      // 8% - rivers/lakes
+        if (rand < 0.85) return "sand";       // 7% - desert areas
+        if (rand < 0.92) return "snow";       // 7% - cold regions
+        if (rand < 0.96) return "swamp";      // 4% - difficult terrain
+        return "rough";                       // 4% - wasteland
     }
 
     private int getTerrainMovementCost(Object terrainType) {
+        // HOMM3 movement costs (in movement points * 100)
         switch (terrainType.toString()) {
-            case "grass": return 1;
-            case "forest": return 2;
-            case "mountain": return 3;
-            case "water": return 4;
-            case "desert": return 2;
-            case "swamp": return 3;
-            default: return 1;
+            case "grass": return 100;      // Normal movement
+            case "dirt": return 100;       // Roads - same as grass
+            case "forest": return 150;     // 50% slower
+            case "mountain": return 9999;  // Impassable without flying
+            case "water": return 9999;     // Impassable without boat
+            case "sand": return 150;       // Desert - 50% slower
+            case "snow": return 150;       // Snow - 50% slower
+            case "swamp": return 175;      // Swamp - 75% slower
+            case "rough": return 125;      // Rough - 25% slower
+            default: return 100;
         }
     }
     
@@ -773,9 +832,10 @@ public class GameService {
                 Map<String, Object> tile = new HashMap<>();
                 tile.put("x", x);
                 tile.put("y", y);
-                tile.put("type", getRandomTerrain());
+                String terrainType = getRandomTerrain();
+                tile.put("terrain", terrainType);  // Fixed: use "terrain" instead of "type"
                 tile.put("walkable", true);
-                tile.put("movementCost", getTerrainMovementCost(tile.get("type")));
+                tile.put("movementCost", getTerrainMovementCost(terrainType));
                 tiles.add(tile);
             }
         }
@@ -788,41 +848,355 @@ public class GameService {
         return map;
     }
     
+    private Map<String, Object> createHexagonalMapWithHeroes(List<Map<String, Object>> players) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", "hex-map-1");
+        map.put("type", "hexagonal");
+        map.put("width", 20);
+        map.put("height", 20);
+        
+        // Create terrain with logical patterns
+        String[][] terrainMap = generateRealisticTerrain(20, 20);
+        
+        List<Map<String, Object>> tiles = new ArrayList<>();
+        for (int y = 0; y < 20; y++) {
+            for (int x = 0; x < 20; x++) {
+                Map<String, Object> tile = new HashMap<>();
+                tile.put("x", x);
+                tile.put("y", y);
+                String terrainType = terrainMap[y][x];
+                tile.put("terrain", terrainType);
+                tile.put("walkable", true);
+                tile.put("movementCost", getTerrainMovementCost(terrainType));
+                
+                // Check if any hero should be placed on this tile
+                for (Map<String, Object> player : players) {
+                    List<Map<String, Object>> heroes = (List<Map<String, Object>>) player.get("heroes");
+                    if (heroes != null) {
+                        for (Map<String, Object> hero : heroes) {
+                            Map<String, Object> position = (Map<String, Object>) hero.get("position");
+                            if (position != null && 
+                                position.get("x").equals(x) && 
+                                position.get("y").equals(y)) {
+                                tile.put("hero", hero);
+                                break;
+                            }
+                        }
+                    }
+                }
+                
+                tiles.add(tile);
+            }
+        }
+        map.put("tiles", tiles);
+        
+        // Add real objects
+        List<Map<String, Object>> objects = createMapObjects();
+        map.put("objects", objects);
+        
+        return map;
+    }
+    
+    private String[][] generateRealisticTerrain(int width, int height) {
+        String[][] terrain = new String[height][width];
+        Random random = new Random();
+        
+        // Step 1: Generate base terrain with noise
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                // Use Perlin-like noise for realistic terrain
+                double noiseValue = generateNoise(x, y, width, height);
+                terrain[y][x] = getTerrainFromNoise(noiseValue);
+            }
+        }
+        
+        // Step 2: Add logical terrain clusters
+        addTerrainClusters(terrain, width, height, random);
+        
+        // Step 3: Add rivers and lakes
+        addWaterFeatures(terrain, width, height, random);
+        
+        // Step 4: Smooth and finalize terrain
+        smoothTerrain(terrain, width, height);
+        
+        return terrain;
+    }
+    
+    private double generateNoise(int x, int y, int width, int height) {
+        // Simple noise function for terrain generation
+        double scale = 0.1;
+        double noise = 0;
+        
+        // Add multiple octaves of noise
+        for (int i = 0; i < 4; i++) {
+            double frequency = Math.pow(2, i) * scale;
+            double amplitude = Math.pow(0.5, i);
+            noise += Math.sin(x * frequency) * Math.cos(y * frequency) * amplitude;
+        }
+        
+        return noise;
+    }
+    
+    private String getTerrainFromNoise(double noise) {
+        if (noise < -0.3) return "water";
+        if (noise < -0.1) return "swamp";
+        if (noise < 0.1) return "grass";
+        if (noise < 0.3) return "forest";
+        if (noise < 0.5) return "mountain";
+        return "desert";
+    }
+    
+    private void addTerrainClusters(String[][] terrain, int width, int height, Random random) {
+        // Add forest clusters
+        for (int i = 0; i < 3; i++) {
+            int centerX = random.nextInt(width);
+            int centerY = random.nextInt(height);
+            int radius = 2 + random.nextInt(3);
+            
+            for (int y = Math.max(0, centerY - radius); y < Math.min(height, centerY + radius); y++) {
+                for (int x = Math.max(0, centerX - radius); x < Math.min(width, centerX + radius); x++) {
+                    double distance = Math.sqrt((x - centerX) * (x - centerX) + (y - centerY) * (y - centerY));
+                    if (distance < radius && random.nextDouble() < 0.7) {
+                        terrain[y][x] = "forest";
+                    }
+                }
+            }
+        }
+        
+        // Add mountain ranges
+        for (int i = 0; i < 2; i++) {
+            int startX = random.nextInt(width);
+            int startY = random.nextInt(height);
+            int length = 5 + random.nextInt(8);
+            
+            for (int j = 0; j < length; j++) {
+                int x = startX + j;
+                int y = startY + (random.nextInt(3) - 1);
+                
+                if (x >= 0 && x < width && y >= 0 && y < height) {
+                    terrain[y][x] = "mountain";
+                    
+                    // Add surrounding hills
+                    for (int dy = -1; dy <= 1; dy++) {
+                        for (int dx = -1; dx <= 1; dx++) {
+                            int nx = x + dx;
+                            int ny = y + dy;
+                            if (nx >= 0 && nx < width && ny >= 0 && ny < height && 
+                                random.nextDouble() < 0.3) {
+                                terrain[ny][nx] = "mountain";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private void addWaterFeatures(String[][] terrain, int width, int height, Random random) {
+        // Add a river
+        int riverY = height / 2 + random.nextInt(3) - 1;
+        for (int x = 0; x < width; x++) {
+            if (riverY >= 0 && riverY < height) {
+                terrain[riverY][x] = "water";
+                
+                // Add riverbanks
+                if (riverY > 0 && random.nextDouble() < 0.3) {
+                    terrain[riverY - 1][x] = "grass";
+                }
+                if (riverY < height - 1 && random.nextDouble() < 0.3) {
+                    terrain[riverY + 1][x] = "grass";
+                }
+            }
+            
+            // River meanders
+            if (random.nextDouble() < 0.3) {
+                riverY += random.nextInt(3) - 1;
+                riverY = Math.max(0, Math.min(height - 1, riverY));
+            }
+        }
+        
+        // Add a lake
+        int lakeX = width / 4 + random.nextInt(width / 2);
+        int lakeY = height / 4 + random.nextInt(height / 2);
+        int lakeSize = 2 + random.nextInt(3);
+        
+        for (int y = Math.max(0, lakeY - lakeSize); y < Math.min(height, lakeY + lakeSize); y++) {
+            for (int x = Math.max(0, lakeX - lakeSize); x < Math.min(width, lakeX + lakeSize); x++) {
+                double distance = Math.sqrt((x - lakeX) * (x - lakeX) + (y - lakeY) * (y - lakeY));
+                if (distance < lakeSize) {
+                    terrain[y][x] = "water";
+                }
+            }
+        }
+    }
+    
+    private void smoothTerrain(String[][] terrain, int width, int height) {
+        // Smooth terrain to remove isolated tiles
+        String[][] smoothed = new String[height][width];
+        
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                smoothed[y][x] = terrain[y][x];
+                
+                // Count neighbors
+                Map<String, Integer> neighbors = new HashMap<>();
+                for (int dy = -1; dy <= 1; dy++) {
+                    for (int dx = -1; dx <= 1; dx++) {
+                        int nx = x + dx;
+                        int ny = y + dy;
+                        if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
+                            String neighborTerrain = terrain[ny][nx];
+                            neighbors.put(neighborTerrain, neighbors.getOrDefault(neighborTerrain, 0) + 1);
+                        }
+                    }
+                }
+                
+                // If current terrain is isolated, change to most common neighbor
+                if (neighbors.getOrDefault(terrain[y][x], 0) <= 2) {
+                    String mostCommon = terrain[y][x];
+                    int maxCount = 0;
+                    for (Map.Entry<String, Integer> entry : neighbors.entrySet()) {
+                        if (entry.getValue() > maxCount) {
+                            maxCount = entry.getValue();
+                            mostCommon = entry.getKey();
+                        }
+                    }
+                    smoothed[y][x] = mostCommon;
+                }
+            }
+        }
+        
+        // Copy smoothed terrain back
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                terrain[y][x] = smoothed[y][x];
+            }
+        }
+    }
+    
     private Map<String, Object> createHero(String id, String name, String heroClass, int x, int y, String playerId) {
+        return createHero(id, name, heroClass, x, y, playerId, null);
+    }
+    
+    private Map<String, Object> createHero(String id, String name, String heroClass, int x, int y, String playerId, Map<String, Object> heroConfig) {
         Map<String, Object> hero = new HashMap<>();
         hero.put("id", id);
         hero.put("name", name);
         hero.put("class", heroClass);
         hero.put("position", Map.of("x", x, "y", y));
-        hero.put("level", 1);
-        hero.put("experience", 0);
-        hero.put("movementPoints", 3);
-        hero.put("maxMovementPoints", 3);
-        hero.put("stats", Map.of(
-            "attack", 5,
-            "defense", 3,
-            "knowledge", 2,
-            "spellPower", 1
-        ));
         hero.put("playerId", playerId);
         hero.put("units", new ArrayList<>());
         hero.put("inventory", new ArrayList<>());
+        
+        // Use heroConfig if provided, otherwise use defaults
+        if (heroConfig != null) {
+            hero.put("level", heroConfig.getOrDefault("startingLevel", 1));
+            hero.put("experience", 0);
+            hero.put("movementPoints", 3);
+            hero.put("maxMovementPoints", 3);
+            
+            // Use starting stats from config
+            Map<String, Object> startingStats = (Map<String, Object>) heroConfig.get("startingStats");
+            if (startingStats != null) {
+                hero.put("stats", startingStats);
+            } else {
+                hero.put("stats", Map.of(
+                    "attack", 5,
+                    "defense", 3,
+                    "knowledge", 2,
+                    "spellPower", 1,
+                    "health", 100,
+                    "mana", 20
+                ));
+            }
+            
+            // Add starting skills
+            List<String> startingSkills = (List<String>) heroConfig.get("startingSkills");
+            hero.put("skills", startingSkills != null ? new ArrayList<>(startingSkills) : new ArrayList<>());
+            
+            // Add starting spells
+            List<String> startingSpells = (List<String>) heroConfig.get("startingSpells");
+            hero.put("spells", startingSpells != null ? new ArrayList<>(startingSpells) : new ArrayList<>());
+            
+            // Add hero description
+            String heroDescription = (String) heroConfig.get("heroDescription");
+            if (heroDescription != null) {
+                hero.put("description", heroDescription);
+            }
+        } else {
+            // Default values
+            hero.put("level", 1);
+            hero.put("experience", 0);
+            hero.put("movementPoints", 3);
+            hero.put("maxMovementPoints", 3);
+            hero.put("stats", Map.of(
+                "attack", 5,
+                "defense", 3,
+                "knowledge", 2,
+                "spellPower", 1,
+                "health", 100,
+                "mana", 20
+            ));
+            hero.put("skills", new ArrayList<>());
+            hero.put("spells", new ArrayList<>());
+        }
+        
         return hero;
     }
     
     private List<Map<String, Object>> createMapObjects() {
         List<Map<String, Object>> objects = new ArrayList<>();
         
-        // Treasure chests
-        for (int i = 0; i < 10; i++) {
+        // HOMM3-style resource generators
+        // Gold mines (1000 gold/day)
+        for (int i = 0; i < 3; i++) {
+            Map<String, Object> goldMine = new HashMap<>();
+            goldMine.put("id", "gold_mine_" + i);
+            goldMine.put("x", 5 + (int)(Math.random() * 10));
+            goldMine.put("y", 5 + (int)(Math.random() * 10));
+            goldMine.put("type", "mine");
+            goldMine.put("subtype", "gold");
+            goldMine.put("owner", null);
+            goldMine.put("production", 1000);
+            objects.add(goldMine);
+        }
+        
+        // Sawmills (2 wood/day)
+        for (int i = 0; i < 4; i++) {
+            Map<String, Object> sawmill = new HashMap<>();
+            sawmill.put("id", "sawmill_" + i);
+            sawmill.put("x", (int)(Math.random() * 20));
+            sawmill.put("y", (int)(Math.random() * 20));
+            sawmill.put("type", "mine");
+            sawmill.put("subtype", "wood");
+            sawmill.put("owner", null);
+            sawmill.put("production", 2);
+            objects.add(sawmill);
+        }
+        
+        // Ore mines (2 ore/day)
+        for (int i = 0; i < 2; i++) {
+            Map<String, Object> oreMine = new HashMap<>();
+            oreMine.put("id", "ore_mine_" + i);
+            oreMine.put("x", (int)(Math.random() * 20));
+            oreMine.put("y", (int)(Math.random() * 20));
+            oreMine.put("type", "mine");
+            oreMine.put("subtype", "ore");
+            oreMine.put("owner", null);
+            oreMine.put("production", 2);
+            objects.add(oreMine);
+        }
+        
+        // Treasure chests with HOMM3 values
+        for (int i = 0; i < 8; i++) {
             Map<String, Object> chest = new HashMap<>();
             chest.put("id", "chest-" + i);
             chest.put("x", (int)(Math.random() * 20));
             chest.put("y", (int)(Math.random() * 20));
             chest.put("type", "treasure");
             chest.put("content", Map.of(
-                "gold", (int)(Math.random() * 500) + 100,
-                "gems", (int)(Math.random() * 3) + 1
+                "gold", 1500 + (int)(Math.random() * 1000), // 1500-2500 gold
+                "experience", (int)(Math.random() * 1500)    // 0-1500 exp
             ));
             objects.add(chest);
         }
@@ -843,7 +1217,7 @@ public class GameService {
         castle2.put("y", 18);
         castle2.put("type", "castle");
         castle2.put("owner", "player2");
-        castle2.put("castleType", "castle");
+        castle2.put("castleType", "rampart");
         objects.add(castle2);
         
         return objects;

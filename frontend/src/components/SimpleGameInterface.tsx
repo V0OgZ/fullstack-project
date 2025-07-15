@@ -454,14 +454,14 @@ const SimpleGameInterface: React.FC<SimpleGameInterfaceProps> = ({ scenarioId = 
                       background: selectedHeroId === hero.id ? '#3a3a3a' : '#333333', 
                       borderRadius: '8px', padding: '12px',
                       marginBottom: '10px', 
-                      border: selectedHeroId === hero.id ? '2px solid #00d4ff' : '1px solid #404040',
+                      border: selectedHeroId === hero.id ? '2px solid #FFD700' : '1px solid #404040',
                       transition: 'all 0.2s ease', cursor: 'pointer'
                     }}
                       onClick={() => handleHeroSelect(hero.id)}
                       onMouseOver={(e) => {
                         if (selectedHeroId !== hero.id) {
                           e.currentTarget.style.background = '#3a3a3a';
-                          e.currentTarget.style.borderColor = '#00d4ff';
+                          e.currentTarget.style.borderColor = '#FFD700';
                           e.currentTarget.style.transform = 'translateY(-2px)';
                         }
                       }}

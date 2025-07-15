@@ -111,7 +111,7 @@ describe('API Integration Tests', () => {
     it('should move hero', async () => {
       const targetPosition = { x: 5, y: 5 };
       
-      const moveResult = await ApiService.moveHero(testHeroId, targetPosition);
+      const moveResult = await ApiService.moveHero(testGameId, testHeroId, targetPosition);
       
       expect(moveResult).toBeDefined();
       expect(moveResult.type).toBe('move');

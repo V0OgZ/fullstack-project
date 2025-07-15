@@ -94,9 +94,12 @@ export class ApiService {
     return this.makeRequest(`/games/${gameId}/current-player`);
   }
 
-  static async endTurn(gameId: string): Promise<any> {
+  static async endTurn(gameId: string, playerId: string = 'player1'): Promise<any> {
     return this.makeRequest(`/games/${gameId}/end-turn`, {
-      method: 'POST'
+      method: 'POST',
+      body: JSON.stringify({
+        playerId: playerId
+      })
     });
   }
 
@@ -105,10 +108,10 @@ export class ApiService {
   }
 
   // Hero actions (ZFC calculations will be done server-side)
-  static async moveHero(heroId: string, targetPosition: any): Promise<any> {
-    return this.makeRequest(`/heroes/${heroId}/move`, {
+  static async moveHero(gameId: string, heroId: string, targetPosition: any): Promise<any> {
+    return this.makeRequest(`/games/${gameId}/move-hero`, {
       method: 'POST',
-      body: JSON.stringify({ targetPosition })
+      body: JSON.stringify({ heroId, position: targetPosition })
     });
   }
 
@@ -258,6 +261,13 @@ export class ApiService {
     });
   }
 
+  static async recruitUnitsFromGame(gameId: string, buildingId: string, data: any): Promise<any> {
+    return this.makeRequest(`/games/${gameId}/buildings/${buildingId}/recruit`, {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+  }
+
   static async checkAndCompleteReadyBuildings(gameId: string): Promise<any> {
     return this.makeRequest(`/games/${gameId}/buildings/check-ready`, {
       method: 'POST'
@@ -292,6 +302,19 @@ export class ApiService {
     return this.makeRequest(`/multiplayer/sessions/${sessionId}/join`, {
       method: 'POST',
       body: JSON.stringify({ playerId })
+    });
+  }
+
+  static async startMultiplayerSession(sessionId: string, playerId: string): Promise<any> {
+    return this.makeRequest(`/multiplayer/sessions/${sessionId}/start`, {
+      method: 'POST',
+      body: JSON.stringify({ playerId })
+    });
+  }
+
+  static async getMultiplayerSession(sessionId: string): Promise<any> {
+    return this.makeRequest(`/multiplayer/sessions/${sessionId}`, {
+      method: 'GET'
     });
   }
 
@@ -351,10 +374,25 @@ export class ApiService {
 
   static async checkBackendStatus(): Promise<boolean> {
     try {
-      await this.makeRequest('/health');
-      return true;
+      const response = await this.makeRequest('/health');
+      return response.status === 'UP';
     } catch (error) {
+      console.error('Backend health check failed:', error);
       return false;
     }
   }
+
+  // New methods for castle management
+  static async getPlayerBuildings(gameId: string, playerId: string): Promise<any> {
+    return this.makeRequest(`/games/${gameId}/players/${playerId}/buildings`);
+  }
+
+  static async getAvailableUnits(gameId: string, playerId: string): Promise<any> {
+    return this.makeRequest(`/games/${gameId}/players/${playerId}/units/available`);
+  }
+
+  static async getUnitDetails(unitType: string): Promise<any> {
+    return this.makeRequest(`/units/${unitType}`);
+  }
+
 } 

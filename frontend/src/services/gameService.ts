@@ -86,12 +86,7 @@ export class GameService {
       actions: [],
       timeline: [],
       zfcMap: [],
-      gameSettings: {
-        maxPlayers: scenarioData.maxPlayers || 2,
-        turnTimeLimit: scenarioData.timeLimit ? scenarioData.timeLimit * 1000 : 300000,
-        victoryConditions: [scenarioData.victoryCondition || 'conquest']
-      },
-      gameMode: 'async',
+      gameMode: scenarioData.isMultiplayer ? 'multiplayer' : 'hotseat', // Set mode based on scenario
       currentPlayerTurn: players[0]?.id
     };
 
@@ -125,7 +120,7 @@ export class GameService {
         turnStartTime: fullGameState.turnStartTime || new Date().toISOString(),
         turnDuration: fullGameState.turnDuration || 30,
         status: fullGameState.status || 'active',
-        gameMode: 'hotseat',
+        gameMode: fullGameState.isMultiplayer ? 'multiplayer' : 'hotseat', // Set mode based on scenario
         players: fullGameState.players || [],
         map: {
           id: fullGameState.map?.id || 'default-map',
@@ -136,12 +131,7 @@ export class GameService {
         },
         actions: fullGameState.actions || [],
         timeline: [],
-        zfcMap: [],
-        gameSettings: {
-          maxPlayers: 2,
-          turnTimeLimit: 30,
-          victoryConditions: ['conquest']
-        }
+        zfcMap: []
       };
       
       console.log(`%c🎯 [GameService] Transformed game:`, 'color: green', transformedGame);
@@ -177,7 +167,7 @@ export class GameService {
     return this.initializeGame(gameId);
   }
 
-  static async endTurn(gameId: string): Promise<void> {
-    return ApiService.endTurn(gameId);
+  static async endTurn(gameId: string, playerId: string = 'player1'): Promise<void> {
+    return ApiService.endTurn(gameId, playerId);
   }
 } 

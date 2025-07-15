@@ -15,6 +15,24 @@
   "defeatCondition": "defeat.conquest-classic",
   "isActive": true,
   "isCampaign": false,
+  "defaultHero": "ARTHUR",
+  "heroConfig": {
+    "heroId": "ARTHUR",
+    "heroName": "Arthur",
+    "heroClass": "Knight",
+    "heroDescription": "Noble knight of the realm, skilled in combat and leadership",
+    "startingLevel": 1,
+    "startingStats": {
+      "attack": 10,
+      "defense": 8,
+      "spellPower": 2,
+      "knowledge": 3,
+      "health": 100,
+      "mana": 20
+    },
+    "startingSkills": ["Leadership", "Combat"],
+    "startingSpells": []
+  },
   "objectives": [
     {
       "objectiveId": "obj1",
@@ -39,7 +57,7 @@
       "positionX": 15,
       "positionY": 15,
       "castleType": "castle",
-      "startingHero": "Arthur"
+      "startingHero": "ARTHUR"
     }
   ],
   "events": []

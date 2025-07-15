@@ -195,6 +195,10 @@ typings/
 !public/**/*.jpg
 !public/**/*.jpeg
 !public/**/*.gif
+!frontend/public/index.html
+!frontend/public/manifest.json
+!frontend/public/*.md
+!frontend/public/favicon.ico
 !**/assets/**/*.png
 !**/assets/**/*.jpg
 !**/assets/**/*.jpeg

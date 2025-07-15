@@ -39,6 +39,7 @@ export interface Tile {
   creature?: Creature | null;
   structure?: Structure | null;
   isVisible?: boolean;
+  isExplored?: boolean;
 }
 
 export interface MapObject {
@@ -89,10 +90,16 @@ export interface Hero {
     defense: number;
     knowledge: number;
     spellPower: number;
+    health?: number;
+    mana?: number;
   };
   units: Unit[];
   inventory: InventoryItem[];
   playerId: string;
+  skills?: string[];
+  spells?: string[];
+  class?: string;
+  description?: string;
 }
 
 export interface InventoryItem {
@@ -185,16 +192,11 @@ export interface Game {
   turnStartTime: string;
   turnDuration: number; // en minutes
   status: 'waiting' | 'active' | 'finished';
+  gameMode: 'hotseat' | 'multiplayer'; // Mode de jeu
   actions: GameAction[];
   timeline: TimelineAction[]; // NOUVEAU: Timeline des actions
   zfcMap: ZoneOfCausality[]; // NOUVEAU: Carte des zones de causalité
-  gameSettings: {
-    maxPlayers: number;
-    turnTimeLimit: number;
-    victoryConditions: string[];
-  };
-  gameMode: 'async' | 'hotseat';
-  currentPlayerTurn?: string; // ID du joueur actuel pour le mode hotseat
+  currentPlayerTurn?: string; // Pour le mode multiplayer
 }
 
 export interface CombatResult {

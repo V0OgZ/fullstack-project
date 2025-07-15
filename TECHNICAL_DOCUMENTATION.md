@@ -20,7 +20,7 @@ Heroes of Time is built with a **modern full-stack architecture** designed for s
 - **State Management:** Zustand
 - **Styling:** CSS Modules + Custom CSS
 - **WebSocket:** STOMP.js client
-- **Testing:** Jest, React Testing Library, Cypress
+- **Testing:** Jest, React Testing Library, Playwright
 - **Build Tool:** Create React App
 - **Port:** 3000
 
@@ -34,7 +34,8 @@ backend/
 │   │   ├── GameController.java
 │   │   ├── MultiplayerController.java
 │   │   ├── AIController.java
-│   │   └── BuildingController.java
+│   │   ├── BuildingController.java
+│   │   └── 🆕 EpicContentController.java
 │   ├── service/             # Business Logic Layer
 │   │   ├── GameService.java
 │   │   ├── BuildingService.java
@@ -48,13 +49,11 @@ backend/
 │   │   └── Scenario.java
 │   ├── repository/          # Data Access Layer
 │   │   ├── GameSessionRepository.java
-│   │   ├── BuildingRepository.java
-│   │   └── AIPlayerRepository.java
-│   ├── config/              # Configuration
-│   │   └── WebSocketConfig.java
-│   └── DemoApplication.java # Main Application
-├── src/test/java/           # Unit & Integration Tests
-└── pom.xml                  # Maven Configuration
+│   │   └── ...
+│   └── resources/           # Static Resources
+│       ├── 🆕 epic-heroes.json
+│       ├── 🆕 epic-creatures.json
+│       └── scenarios/
 ```
 
 ### Frontend Structure
@@ -62,35 +61,107 @@ backend/
 frontend/
 ├── src/
 │   ├── components/          # React Components
-│   │   ├── EnhancedScenarioSelector.tsx
 │   │   ├── TrueHeroesInterface.tsx
-│   │   ├── CastleManagement.tsx
-│   │   ├── MagicInventory.tsx
-│   │   └── LanguageSelector.tsx
-│   ├── pages/               # Main Pages
-│   │   └── Game.tsx
+│   │   ├── ModernGameRenderer.tsx
+│   │   ├── CastleManagementPanel.tsx
+│   │   └── 🆕 EpicContentViewer.tsx
 │   ├── services/            # API Services
 │   │   ├── api.ts
 │   │   ├── gameService.ts
-│   │   └── magicItemService.ts
+│   │   ├── 🆕 epicContentAPI.ts
+│   │   └── 🆕 buildingImageService.ts
 │   ├── store/               # State Management
 │   │   └── useGameStore.ts
-│   ├── types/               # TypeScript Types
-│   │   ├── game.ts
-│   │   ├── castle.ts
-│   │   └── temporal.ts
-│   ├── utils/               # Utility Functions
-│   │   └── hexMapGenerator.ts
-│   ├── i18n/                # Internationalization
-│   │   └── index.ts
-│   └── constants/           # Constants & Assets
-│       └── gameAssets.ts
-├── cypress/                 # E2E Tests
-│   ├── e2e/
-│   └── support/
-├── public/                  # Static Assets
-│   └── assets/
-└── package.json            # NPM Configuration
+│   ├── constants/           # Static Data
+│   │   ├── 🆕 epicCreatures.ts
+│   │   └── 🆕 epicHeroes.ts
+│   └── tests/e2e/           # End-to-End Tests
+│       ├── gameplay-demo.spec.ts
+│       └── 🆕 epic-content-demo.spec.ts
+├── public/
+│   └── assets/              # Static Assets
+│       ├── 🆕 creatures/    # SVG creature sprites
+│       ├── 🆕 heroes/       # SVG hero portraits
+│       └── 🆕 buildings/    # SVG building images
+```
+
+## 🆕 Epic Content System
+
+### Architecture
+The Epic Content System provides a rich library of heroes, creatures, and buildings with a clean separation between backend data and frontend presentation.
+
+#### Backend Components
+- **EpicContentController.java**: REST API endpoints for epic content
+- **epic-heroes.json**: Hero data with stats, abilities, and backstories
+- **epic-creatures.json**: Creature data with combat stats and special abilities
+
+#### Frontend Components
+- **epicContentAPI.ts**: TypeScript service for API communication
+- **EpicContentViewer.tsx**: React component for browsing epic content
+- **buildingImageService.ts**: Canvas-based image generation for buildings
+
+#### API Endpoints
+```typescript
+GET /api/epic/heroes              // All epic heroes
+GET /api/epic/creatures           // All epic creatures
+GET /api/epic/heroes/{id}         // Specific hero
+GET /api/epic/creatures/{id}      // Specific creature
+GET /api/epic/heroes/race/{race}  // Heroes by race
+GET /api/epic/creatures/race/{race} // Creatures by race
+```
+
+#### Data Models
+```typescript
+interface EpicHero {
+  id: string;
+  name: string;
+  race: string;
+  class: string;
+  level: number;
+  stats: {
+    attack: number;
+    defense: number;
+    spellPower: number;
+    knowledge: number;
+    morale: number;
+    luck: number;
+  };
+  specialAbility: string;
+  ultimateSkill: string;
+  backstory: string;
+  portraitUrl: string;
+}
+
+interface EpicCreature {
+  id: string;
+  name: string;
+  race: string;
+  tier: number;
+  health: number;
+  attack: number;
+  defense: number;
+  speed: number;
+  damage: [number, number];
+  special: string;
+  spriteUrl: string;
+}
+```
+
+### Integration
+The Epic Content System integrates seamlessly with the main game interface through:
+- **Button Integration**: 🐉 button in the main game header
+- **Modal Interface**: Full-screen overlay for browsing content
+- **Asset Loading**: Dynamic SVG loading with fallback generation
+- **API Integration**: Real-time data fetching from backend
+
+### Testing
+```bash
+# Run epic content demo
+./run-epic-demo.sh
+
+# Manual testing
+cd frontend
+npx playwright test tests/e2e/epic-content-demo.spec.ts --headed
 ```
 
 ## 🔌 API Documentation
@@ -396,3 +467,54 @@ Additionally, responsibility for loading game data was centralized into the top-
 ---
 
 For more detailed information, see the individual component documentation in the `docs/` directory. 
+
+## 8. WebSocket Communication
+
+WebSocket support for real-time multiplayer features is in development. The current implementation uses HTTP polling for stability.
+
+## 9. Terrain & Vision System
+
+### 9.1 Terrain Rendering
+
+The game uses a bitmask-based system for intelligent terrain sprite selection:
+
+- **Hex Bitmask Calculation** (`utils/hexBitmask.ts`): Computes a 6-bit mask representing which neighboring hexes share the same terrain type
+- **Sprite Mapping** (`constants/terrainSprites.ts`): Maps bitmask values to appropriate edge/center sprites
+- **Fallback System**: If sprites fail to load, falls back to gradient-based color rendering
+
+### 9.2 Movement Visualization
+
+Two types of movement ranges are displayed when a hero is selected:
+
+- **Immediate Range (Green)**: Tiles reachable within the current turn (based on movement points)
+- **Projection Range (Blue)**: Tiles reachable in future turns (ZFC projection, typically 2x movement points)
+
+### 9.3 Fog of War
+
+The vision system implements three visibility states:
+
+1. **Visible** (Clear): Currently within vision range of player's units
+2. **Explored** (55% opacity black): Previously seen but no longer in vision
+3. **Unknown** (85% opacity black): Never explored by the player
+
+Vision updates are triggered:
+- When the game loads
+- After hero movement
+- When switching players (hot-seat mode)
+
+### 9.4 Implementation Details
+
+```typescript
+// Vision calculation in useGameStore
+updateVision: (playerId: string) => {
+  // Marks tiles within radius 4 of each hero as visible
+  // Preserves explored state for previously seen tiles
+}
+
+// Rendering in ModernGameRenderer
+- Terrain sprites attempted first via createPattern()
+- Movement highlights rendered as overlay
+- Fog of war applied last to ensure it covers all content
+```
+
+## Appendix: Technology Stack 

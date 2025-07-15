@@ -34,7 +34,7 @@ cleanup() {
     pkill -f "node.*react-scripts" 2>/dev/null || true
     
     # Nettoyer les logs
-    rm -f $BACKEND_LOG $FRONTEND_LOG
+    rm -f logs/$BACKEND_LOG logs/$FRONTEND_LOG
     
     echo -e "${GREEN}✅ Nettoyage terminé${NC}"
 }
@@ -70,7 +70,7 @@ wait_for_service() {
 start_backend() {
     echo -e "${BLUE}🚀 Démarrage du backend...${NC}"
     
-    cd backend
+    cd ./backend
     
     # Vérifier si le port 8080 est libre
     if lsof -i:8080 > /dev/null 2>&1; then
@@ -80,20 +80,17 @@ start_backend() {
     fi
     
     # Démarrer le backend en arrière-plan
-    nohup mvn spring-boot:run > ../$BACKEND_LOG 2>&1 &
+    nohup mvn spring-boot:run > ../logs/$BACKEND_LOG 2>&1 &
     BACKEND_PID=$!
     
     cd ..
-    
-    # Attendre que le backend soit prêt
-    wait_for_service "http://localhost:8080/actuator/health" "Backend"
 }
 
 # Fonction pour démarrer le frontend
 start_frontend() {
     echo -e "${BLUE}🚀 Démarrage du frontend...${NC}"
     
-    cd frontend
+    cd ./frontend
     
     # Vérifier si le port 3000 est libre
     if lsof -i:3000 > /dev/null 2>&1; then
@@ -103,7 +100,7 @@ start_frontend() {
     fi
     
     # Démarrer le frontend en arrière-plan
-    nohup npm start > ../$FRONTEND_LOG 2>&1 &
+    nohup npm start > ../logs/$FRONTEND_LOG 2>&1 &
     FRONTEND_PID=$!
     
     cd ..
@@ -116,7 +113,7 @@ start_frontend() {
 run_backend_tests() {
     echo -e "${BLUE}🧪 Lancement des tests backend...${NC}"
     
-    cd backend
+    cd ./backend
     
     # Tests unitaires
     echo -e "${YELLOW}📋 Tests unitaires backend...${NC}"
@@ -135,7 +132,7 @@ run_backend_tests() {
 run_frontend_tests() {
     echo -e "${BLUE}🧪 Lancement des tests frontend...${NC}"
     
-    cd frontend
+    cd ./frontend
     
     # Tests unitaires Jest
     echo -e "${YELLOW}📋 Tests unitaires frontend (Jest)...${NC}"
@@ -150,7 +147,7 @@ run_frontend_tests() {
 run_cypress_tests() {
     echo -e "${BLUE}🧪 Lancement des tests Cypress...${NC}"
     
-    cd frontend
+    cd ./frontend
     
     # Tests E2E Cypress
     echo -e "${YELLOW}📋 Tests E2E Cypress...${NC}"
@@ -210,7 +207,7 @@ main() {
     
     if [ -d "frontend" ] && [ ! -d "frontend/node_modules" ]; then
         echo -e "${YELLOW}📦 Installation des dépendances frontend...${NC}"
-        cd frontend && npm install && cd ..
+        cd ./frontend && npm install && cd ..
     fi
     
     # Démarrer les services
@@ -243,12 +240,12 @@ main() {
     echo -e "${GREEN}✅ APIs: Tests des endpoints${NC}"
     
     # Afficher les logs en cas d'erreur
-    if [ -f "$BACKEND_LOG" ]; then
-        echo -e "${YELLOW}📋 Logs backend disponibles dans: $BACKEND_LOG${NC}"
+    if [ -f "logs/$BACKEND_LOG" ]; then
+        echo -e "${YELLOW}📋 Logs backend disponibles dans: logs/$BACKEND_LOG${NC}"
     fi
     
-    if [ -f "$FRONTEND_LOG" ]; then
-        echo -e "${YELLOW}📋 Logs frontend disponibles dans: $FRONTEND_LOG${NC}"
+    if [ -f "logs/$FRONTEND_LOG" ]; then
+        echo -e "${YELLOW}📋 Logs frontend disponibles dans: logs/$FRONTEND_LOG${NC}"
     fi
 }
 

@@ -11,6 +11,13 @@ interface GameStore extends GameState {
   selectedTile: Position | null;
   currentPlayerNumber: number;
   
+  // Hero selection and movement
+  selectedHero: Hero | null;
+  movementRange: Position[];
+  movementMode: boolean;
+  // Vision
+  updateVision: (playerId: string) => void;
+  
   // NEW: Magic Item State
   playerInventory: string[];
   equippedItems: { [heroId: string]: EquippedItems };
@@ -27,6 +34,13 @@ interface GameStore extends GameState {
   addCombatResult: (result: CombatResult) => void;
   setLoading: (loading: boolean) => void;
   setError: (error: string | null) => void;
+  
+  // Hero selection and movement actions
+  selectHero: (hero: Hero | null) => void;
+  setMovementRange: (range: Position[]) => void;
+  setMovementMode: (mode: boolean) => void;
+  calculateMovementRange: (hero: Hero) => Position[];
+  canMoveToPosition: (hero: Hero, position: Position) => boolean;
   
   // NEW: Magic Item Actions (now using backend)
   equipItem: (heroId: string, itemId: string, slot: string) => Promise<boolean>;
@@ -63,6 +77,9 @@ interface GameStore extends GameState {
   // Hot Seat mode
   switchPlayer: (playerId: string) => void;
   nextPlayer: () => void;
+
+  // New function to reset a specific game session
+  resetGameSession: (scenarioId: string) => void;
 }
 
 const initialState = {
@@ -75,6 +92,13 @@ const initialState = {
   map: [],
   selectedTile: null,
   currentPlayerNumber: 1,
+  
+  // Hero selection and movement
+  selectedHero: null,
+  movementRange: [],
+  movementMode: false,
+  // vision handled per tile flags
+  
   shadowActions: [],
   visibleZFCs: [],
   lockedZones: [],
@@ -97,6 +121,8 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
   // Helper function to convert flat tiles array to 2D array
   convertTilesToMap: (tiles: any[], width: number, height: number): Tile[][] => {
+    console.log('🗺️ convertTilesToMap: Converting', tiles.length, 'tiles to', width, 'x', height, 'map');
+    
     const map: Tile[][] = [];
     for (let y = 0; y < height; y++) {
       const row: Tile[] = [];
@@ -112,10 +138,13 @@ export const useGameStore = create<GameStore>((set, get) => ({
             walkable: tile.walkable !== undefined ? tile.walkable : true,
             movementCost: tile.movementCost || 1,
             hero: tile.hero || null,
-            creature: tile.creature || null
+            creature: tile.creature || null,
+            structure: tile.structure || null,
+            isVisible: tile.isVisible !== undefined ? tile.isVisible : false,
+            isExplored: tile.isExplored !== undefined ? tile.isExplored : false
           });
         } else {
-          // Fallback tile
+          // Default tile if missing
           row.push({
             x,
             y,
@@ -123,12 +152,21 @@ export const useGameStore = create<GameStore>((set, get) => ({
             walkable: true,
             movementCost: 1,
             hero: null,
-            creature: null
+            creature: null,
+            structure: null,
+            isVisible: false,
+            isExplored: false
           });
         }
       }
       map.push(row);
     }
+    
+    console.log('🗺️ convertTilesToMap: Map created with', map.length, 'rows');
+    
+    // Vision update removed to prevent infinite re-renders
+    // Vision will be updated manually when needed
+    
     return map;
   },
 
@@ -251,9 +289,120 @@ export const useGameStore = create<GameStore>((set, get) => ({
   // State setters
   setCurrentGame: (game) => set({ currentGame: game }),
   setCurrentPlayer: (player) => set({ currentPlayer: player }),
-  setMap: (map) => set({ map }),
+  setMap: (map) => {
+    console.log('🗺️ setMap: Setting new map with', map.length, 'rows');
+    set({ map });
+    
+    // Update vision after setting map if we have a current player
+    const { currentPlayer } = get();
+    if (currentPlayer?.id) {
+      console.log('🗺️ setMap: Updating vision for current player after map set');
+      setTimeout(() => {
+        get().updateVision(currentPlayer.id);
+      }, 100); // Small delay to ensure map is set
+    }
+  },
   setSelectedTile: (position) => set({ selectedTile: position }),
   setCurrentPlayerNumber: (playerNumber) => set({ currentPlayerNumber: playerNumber }),
+  
+  // Hero selection and movement methods
+  selectHero: (hero) => {
+    set({ selectedHero: hero });
+    if (hero) {
+      const { calculateMovementRange, setMovementRange, setMovementMode } = get();
+      const range = calculateMovementRange(hero);
+      setMovementRange(range);
+      setMovementMode(true);
+    } else {
+      set({ movementRange: [], movementMode: false });
+    }
+  },
+  setMovementRange: (range) => set({ movementRange: range }),
+  setMovementMode: (mode) => set({ movementMode: mode }),
+
+  // Simple vision update: mark tiles within radius 4 of each hero of the player as visible & explored, others remain previous explored.
+  updateVision: (playerId: string) => {
+    const { map, currentGame } = get();
+    if (!currentGame || !map.length) {
+      console.log('🔍 updateVision: No game or map data');
+      return;
+    }
+    const player = currentGame.players.find(p => p.id === playerId);
+    if (!player) {
+      console.log('🔍 updateVision: Player not found:', playerId);
+      return;
+    }
+
+    console.log('🔍 updateVision: Updating vision for player:', playerId, 'with heroes:', player.heroes.length);
+
+    const visibilityRadius = 4;
+
+    // Clone map to avoid mutating directly
+    const newMap = map.map(row => row.map(tile => ({ ...tile, isVisible: false })));
+
+    let visibleTilesCount = 0;
+    player.heroes.forEach(hero => {
+      if (!hero.position) {
+        console.log('🔍 updateVision: Hero has no position:', hero.name);
+        return;
+      }
+      
+      console.log('🔍 updateVision: Processing hero:', hero.name, 'at position:', hero.position);
+      
+      for (let y = -visibilityRadius; y <= visibilityRadius; y++) {
+        for (let x = -visibilityRadius; x <= visibilityRadius; x++) {
+          const tx = hero.position.x + x;
+          const ty = hero.position.y + y;
+          if (ty >= 0 && ty < newMap.length && tx >= 0 && tx < newMap[ty].length) {
+            const dist = Math.abs(x) + Math.abs(y);
+            if (dist <= visibilityRadius) {
+              const t = newMap[ty][tx];
+              t.isVisible = true;
+              t.isExplored = true;
+              visibleTilesCount++;
+            }
+          }
+        }
+      }
+    });
+
+    console.log('🔍 updateVision: Made', visibleTilesCount, 'tiles visible');
+    set({ map: newMap });
+  },
+  
+  calculateMovementRange: (hero) => {
+    const { map } = get();
+    if (!map || map.length === 0) return [];
+    
+    const range: Position[] = [];
+    const movementPoints = hero.movementPoints || 1000;
+    const maxDistance = Math.floor(movementPoints / 100); // Each tile costs 100 movement points
+    
+    for (let y = 0; y < map.length; y++) {
+      for (let x = 0; x < map[y].length; x++) {
+        const tile = map[y][x];
+        if (tile && tile.walkable) {
+          const distance = Math.abs(x - hero.position.x) + Math.abs(y - hero.position.y);
+          if (distance <= maxDistance) {
+            range.push({ x, y });
+          }
+        }
+      }
+    }
+    
+    return range;
+  },
+  
+  canMoveToPosition: (hero, position) => {
+    const { map, movementRange } = get();
+    if (!map || map.length === 0) return false;
+    
+    const tile = map[position.y]?.[position.x];
+    if (!tile || !tile.walkable) return false;
+    
+    return movementRange.some(pos => pos.x === position.x && pos.y === position.y);
+  },
+  
   addPendingAction: (action) => set((state) => ({
     pendingActions: [...state.pendingActions, action]
   })),
@@ -408,40 +557,53 @@ export const useGameStore = create<GameStore>((set, get) => ({
     }
   },
 
-  // Game actions (updated to use backend ZFC)
+  // Game actions (practical implementation)
   moveHero: async (heroId: string, targetPosition: Position) => {
-    const { setLoading, setError, addTimelineAction, calculateZFC, currentGame, currentPlayer } = get();
+    const { setLoading, setError, refreshGameState, currentGame, currentPlayer } = get();
     setLoading(true);
     setError(null);
+
+    console.log('🎯 moveHero called:', { heroId, targetPosition });
 
     try {
       if (!currentGame || !currentPlayer) throw new Error('No active game or player');
 
-      const zfc = await calculateZFC(currentPlayer.id, heroId);
+      console.log('📡 Calling backend API to move hero...');
+      // Call backend API to move hero
+      const result = await ApiService.moveHero(currentGame.id, heroId, targetPosition);
       
-      const timelineAction: TimelineAction = {
-        id: `action_${Date.now()}`,
-        turn: currentGame.currentTurn,
-        playerId: currentPlayer.id,
-        action: {
-          type: 'move',
-          heroId,
-          targetPosition
-        },
-        status: 'PENDING',
-        zfc,
-        originTimestamp: new Date().toISOString(),
-        shadowVisible: true
-      };
-
-      addTimelineAction(timelineAction);
+      console.log('📨 Backend response:', result);
       
-      // Validation automatique si possible
-      const { validateAction } = get();
-      await validateAction(timelineAction.id);
+      if (result.success) {
+        // Refresh game state to reflect the move
+        await refreshGameState();
+        
+        // Update hero position in the current state immediately for UI feedback
+        const updatedGame = { ...currentGame };
+        const hero = updatedGame.players
+          .flatMap(p => p.heroes)
+          .find(h => h.id === heroId);
+        
+        if (hero) {
+          console.log('✅ Updating hero position locally:', {
+            oldPosition: hero.position,
+            newPosition: targetPosition,
+            movementPointsBefore: hero.movementPoints,
+            movementPointsAfter: Math.max(0, hero.movementPoints - (result.movementCost || 100))
+          });
+          hero.position = targetPosition;
+          hero.movementPoints = Math.max(0, hero.movementPoints - (result.movementCost || 100));
+          set({ currentGame: updatedGame });
+        }
+        
+        console.log('✅ Hero moved successfully:', result);
+      } else {
+        throw new Error(result.message || 'Failed to move hero');
+      }
       
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Failed to move hero');
+      console.error('Hero movement error:', error);
     } finally {
       setLoading(false);
     }
@@ -540,6 +702,14 @@ export const useGameStore = create<GameStore>((set, get) => ({
   // Game state management
   resetGame: () => set(initialState),
 
+  // New function to reset a specific game session
+  resetGameSession: (scenarioId: string) => {
+    const sessionKey = `heroesOfTime_session_${scenarioId}`;
+    localStorage.removeItem(sessionKey);
+    console.log(`%c🔄 [GameStore] Game session reset for scenario: ${scenarioId}`, 'color: orange');
+    set(initialState);
+  },
+
   loadGame: async (scenarioId: string) => {
     console.log(`%c🎮 [GameStore] loadGame called with scenarioId: "${scenarioId}"`, 'color: purple; font-weight: bold');
     
@@ -553,10 +723,66 @@ export const useGameStore = create<GameStore>((set, get) => ({
     setLoading(true);
 
     try {
-      console.log(`%c📡 [GameStore] About to call API for scenario: ${scenarioId}`, 'color: blue');
-      // Use GameService to initialize the game
-      const gameState = await GameService.initializeGame(scenarioId);
+      // Generate a persistent game ID based on scenario and session
+      // This allows the backend to reuse existing games
+      let persistentGameId = scenarioId;
+      
+      // For non-multiplayer scenarios, use a session-based ID
+      if (!scenarioId.includes('session-') && !scenarioId.includes('multiplayer-')) {
+        // Try to get existing session ID from localStorage
+        const sessionKey = `heroesOfTime_session_${scenarioId}`;
+        let sessionId = localStorage.getItem(sessionKey);
+        
+        if (!sessionId) {
+          // Create a new session ID
+          sessionId = `${scenarioId}_session_${Date.now()}`;
+          localStorage.setItem(sessionKey, sessionId);
+          console.log(`%c🆕 [GameStore] Created new session ID: ${sessionId}`, 'color: green');
+        } else {
+          console.log(`%c🔄 [GameStore] Using existing session ID: ${sessionId}`, 'color: blue');
+        }
+        
+        persistentGameId = sessionId;
+      }
+
+      // Check if this is a multiplayer session that already exists
+      if (scenarioId.includes('session-') || scenarioId.includes('multiplayer-')) {
+        console.log(`%c🔄 [GameStore] Checking for existing multiplayer session: ${scenarioId}`, 'color: blue');
+        try {
+          // Try to get existing session from backend
+          const existingSession = await ApiService.getMultiplayerSession(scenarioId);
+          if (existingSession && existingSession.status === 'ACTIVE') {
+            console.log(`%c🎮 [GameStore] Found existing active session, loading game state...`, 'color: green');
+            const gameState = await GameService.getGameState(scenarioId);
+            
+            if (gameState.currentGame) {
+              setCurrentGame(gameState.currentGame);
+              if (gameState.currentGame.map && gameState.currentGame.map.tiles) {
+                const mapData = get().convertTilesToMap(
+                  gameState.currentGame.map.tiles, 
+                  gameState.currentGame.map.width, 
+                  gameState.currentGame.map.height
+                );
+                setMap(mapData);
+              }
+            }
+            if (gameState.currentPlayer) {
+              setCurrentPlayer(gameState.currentPlayer);
+            }
+            
+            console.log(`%c🎉 [GameStore] loadGame completed from existing session!`, 'color: green; font-weight: bold');
+            return;
+          }
+        } catch (error) {
+          console.log(`%c⚠️ [GameStore] No existing session found, creating new game...`, 'color: orange');
+        }
+      }
+
+      console.log(`%c📡 [GameStore] About to call API for persistent game ID: ${persistentGameId}`, 'color: blue');
+      // Use GameService to initialize the game with persistent ID
+      const gameState = await GameService.initializeGame(persistentGameId);
       console.log('%c[DEBUG] Backend response from initializeGame:', 'color: orange; font-weight: bold', gameState);
+      
       // Set the game state in the store
       if (gameState.currentGame) {
         setCurrentGame(gameState.currentGame);
@@ -589,14 +815,15 @@ export const useGameStore = create<GameStore>((set, get) => ({
       } else {
         console.warn('[DEBUG] No currentPlayer in gameState!');
       }
+      
       // Print final state
-      const state = get();
+      const finalState = get();
       console.log('%c[DEBUG] Final store state after loadGame:', 'color: orange; font-weight: bold', {
-        currentGame: state.currentGame,
-        currentPlayer: state.currentPlayer,
-        map: state.map,
-        isLoading: state.isLoading,
-        error: state.error
+        currentGame: finalState.currentGame,
+        currentPlayer: finalState.currentPlayer,
+        map: finalState.map,
+        isLoading: finalState.isLoading,
+        error: finalState.error
       });
       console.log(`%c🎉 [GameStore] loadGame completed successfully!`, 'color: green; font-weight: bold');
     } catch (error) {
@@ -629,6 +856,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
       if (gameState.currentPlayer) {
         setCurrentPlayer(gameState.currentPlayer);
       }
+      
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Failed to refresh game state');
     } finally {
@@ -637,19 +865,26 @@ export const useGameStore = create<GameStore>((set, get) => ({
   },
 
   endTurn: async () => {
-    const { currentGame, setLoading, setError, refreshGameState } = get();
-    if (!currentGame) return;
+    const { currentGame, currentPlayer, setLoading, setError, refreshGameState } = get();
+    if (!currentGame || !currentPlayer) return;
 
-    setLoading(true);
-    setError(null);
+    // Check game mode and handle accordingly
+    if (currentGame.gameMode === 'hotseat') {
+      // Mode hotseat - gestion locale frontend
+      get().nextPlayer();
+    } else {
+      // Mode multiplayer - appel API backend
+      setLoading(true);
+      setError(null);
 
-    try {
-      await GameService.endTurn(currentGame.id);
-      await refreshGameState();
-    } catch (error) {
-      setError(error instanceof Error ? error.message : 'Failed to end turn');
-    } finally {
-      setLoading(false);
+      try {
+        await GameService.endTurn(currentGame.id, currentPlayer.id);
+        await refreshGameState();
+      } catch (error) {
+        setError(error instanceof Error ? error.message : 'Failed to end turn');
+      } finally {
+        setLoading(false);
+      }
     }
   },
 
@@ -665,7 +900,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   },
 
   nextPlayer: () => {
-    const { currentGame, currentPlayer, switchPlayer } = get();
+    const { currentGame, currentPlayer, switchPlayer, setCurrentGame } = get();
     if (!currentGame || !currentPlayer) return;
 
     const currentIndex = currentGame.players.findIndex(p => p.id === currentPlayer.id);
@@ -674,6 +909,16 @@ export const useGameStore = create<GameStore>((set, get) => ({
     
     if (nextPlayer) {
       switchPlayer(nextPlayer.id);
+      
+      // Incrémenter le tour si on revient au premier joueur
+      if (nextIndex === 0) {
+        const updatedGame = {
+          ...currentGame,
+          currentTurn: currentGame.currentTurn + 1
+        };
+        setCurrentGame(updatedGame);
+        console.log('✅ Turn incremented to:', updatedGame.currentTurn);
+      }
     }
   }
 })); 
