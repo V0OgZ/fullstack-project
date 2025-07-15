@@ -443,6 +443,12 @@ export interface Translation {
   'demo.nextTurn': string;
   'demo.finished': string;
 
+  // Control Button Tooltips
+  'tooltip.heroes': string;
+  'tooltip.inventory': string;
+  'tooltip.castle': string;
+  'tooltip.endTurn': string;
+
   // Hero movement
   clickHeroToSelect: string;
   clickTileToMove: string;
@@ -896,6 +902,12 @@ const frenchTranslations: Translation = {
   'demo.endTurn': '🔄 Fin du tour - Cliquez sur "End Turn" pour terminer.',
   'demo.nextTurn': '🔄 Tour suivant en cours<br/>Votre royaume évolue et grandit !',
   'demo.finished': '🎉 Démonstration terminée !<br/>Vous savez maintenant jouer à Heroes of Time<br/><br/>✨ Amusez-vous bien dans vos conquêtes ! ✨',
+
+  // Control Button Tooltips
+  'tooltip.heroes': 'Héros',
+  'tooltip.inventory': 'Inventaire',
+  'tooltip.castle': 'Château',
+  'tooltip.endTurn': 'Finir le tour',
 
   // Hero movement
   clickHeroToSelect: 'Cliquez sur un héros pour le sélectionner',
@@ -1351,6 +1363,12 @@ const englishTranslations: Translation = {
   'demo.nextTurn': '🔄 Next turn in progress<br/>Your kingdom evolves and grows!',
   'demo.finished': '🎉 Demonstration complete!<br/>You now know how to play Heroes of Time<br/><br/>✨ Have fun in your conquests! ✨',
 
+  // Control Button Tooltips
+  'tooltip.heroes': 'Heroes',
+  'tooltip.inventory': 'Inventory',
+  'tooltip.castle': 'Castle',
+  'tooltip.endTurn': 'End Turn',
+
   // Hero movement
   clickHeroToSelect: 'Click on a hero to select them',
   clickTileToMove: 'Click on a green tile to move your hero',
@@ -1804,6 +1822,12 @@ const russianTranslations: Translation = {
   'demo.endTurn': '🔄 Завершение хода - Нажмите "End Turn" для завершения.',
   'demo.nextTurn': '🔄 Следующий ход в процессе<br/>Ваше королевство развивается и растет!',
   'demo.finished': '🎉 Демонстрация завершена!<br/>Теперь вы знаете, как играть в Heroes of Time<br/><br/>✨ Удачи в ваших завоеваниях! ✨',
+
+  // Control Button Tooltips
+  'tooltip.heroes': 'Герои',
+  'tooltip.inventory': 'Инвентарь',
+  'tooltip.castle': 'Замок',
+  'tooltip.endTurn': 'Завершить ход',
 
   // Hero movement
   clickHeroToSelect: 'Нажмите на героя, чтобы выбрать его',

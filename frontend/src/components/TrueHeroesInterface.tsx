@@ -220,7 +220,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
               className={`control-btn ${rightPanelContent === 'hero' ? 'active' : ''}`}
               onClick={handleHeroesClick}
               disabled={!currentPlayer?.heroes || currentPlayer.heroes.length === 0}
-              title="Heroes"
+              title={t('tooltip.heroes')}
             >
               <span className="btn-icon">⚔️</span>
             </button>
@@ -228,7 +228,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
             <button 
               className={`control-btn ${rightPanelContent === 'inventory' ? 'active' : ''}`}
               onClick={handleInventoryClick}
-              title="Inventory"
+              title={t('tooltip.inventory')}
             >
               <span className="btn-icon">🎒</span>
             </button>
@@ -236,7 +236,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
             <button 
               className={`control-btn ${rightPanelContent === 'castle' ? 'active' : ''}`}
               onClick={handleCastleClick}
-              title="Castle"
+              title={t('tooltip.castle')}
             >
               <span className="btn-icon">🏰</span>
             </button>
@@ -250,7 +250,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
                   console.error('Error ending turn:', error);
                 }
               }}
-              title={currentGame?.gameMode === 'hotseat' ? 'Next Player' : 'End Turn'}
+              title={currentGame?.gameMode === 'hotseat' ? t('nextPlayer') : t('tooltip.endTurn')}
             >
               <span className="btn-icon">
                 {currentGame?.gameMode === 'hotseat' ? '👤' : '⭐'}
