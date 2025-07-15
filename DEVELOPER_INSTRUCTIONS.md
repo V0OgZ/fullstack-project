@@ -1,197 +1,271 @@
-# 🎮 Heroes of Time - Instructions pour Développeurs
+# 🧪 Heroes of Time - Instructions Développeur
 
-## 📋 État Actuel du Projet (Janvier 2025)
+*Guide technique complet pour le développement et le débogage*
 
-### ✅ **CORRECTIONS RÉCENTES APPLIQUÉES**
+## 🚀 **Démarrage Rapide**
 
-#### 🔧 **Correction de l'erreur "Not your turn"**
-- **Problème** : L'API `endTurn` retournait une erreur 400 avec `{"error":"Not your turn"}`
-- **Cause** : Le `GameState` n'initialisait pas correctement le `currentPlayerId`
-- **Solution** :
-  - Modifié `GameStateService.getOrCreateGameState()` pour initialiser `currentPlayerId` avec `"player1"`
-  - Ajouté la synchronisation du `currentPlayer` avec le `currentPlayerId` dans `GameService.getGame()`
-- **Statut** : ✅ **CORRIGÉ**
-
-#### 🌍 **Améliorations du Système Multilingue**
-- **Problème** : Les tests de démonstration n'utilisaient pas la langue sauvegardée
-- **Solution** :
-  - Créé un fichier utilitaire `frontend/tests/e2e/utils/translations.ts`
-  - Les tests lisent maintenant la langue depuis `localStorage` (clé: `'heroes-reforged-i18n'`)
-  - Ajouté les traductions EN/RU pour tous les tooltips de démonstration
-- **Fonctionnalités** :
-  - ✅ Persistance automatique de la langue choisie
-  - ✅ 3 langues supportées : FR, EN, RU
-  - ✅ Plus de 1800 lignes de traductions
-  - ✅ Tests de démonstration multilingues
-- **Statut** : ✅ **COMPLÈTEMENT FONCTIONNEL**
-
-### 🎯 **Statut Global du Projet**
-- **Backend** : Spring Boot (Java) sur port 8080 - ✅ STABLE
-- **Frontend** : React TypeScript sur port 3000 - ✅ INTERFACE MODERNE
-- **Base de données** : H2 en mémoire - ✅ FONCTIONNELLE
-- **Tests** : Playwright E2E - ✅ DÉMONSTRATIONS MULTILINGUES
-
-## 🚀 **Scripts Essentiels**
-
-### Démarrage Rapide
+### ⚡ **Lancement de l'Application**
 ```bash
-./start-app.sh    # Démarre backend + frontend
-./stop-app.sh     # Arrête tous les services
-./test-app.sh     # Tests rapides
+./start-app.sh     # Démarre Backend (8080) + Frontend (3000)
+./stop-app.sh      # Arrête tous les services
+./test-app.sh      # Tests rapides
 ```
 
-### Tests de Démonstration
-```bash
-cd frontend
-npx playwright test tests/e2e/01-single-demo.spec.ts --headed    # Démo solo
-npx playwright test tests/e2e/02-multiplayer-demo.spec.ts --headed  # Démo multijoueur
-```
-
-## 🌍 **Système Multilingue**
-
-### Configuration
-- **Store** : `useI18n` avec `zustand` + `persist`
-- **Clé localStorage** : `'heroes-reforged-i18n'`
-- **Langues** : FR (défaut), EN, RU
-- **Fichier** : `frontend/src/i18n/index.ts`
-
-### Utilisation
-```typescript
-import { useTranslation } from '../i18n';
-
-const { t, language, setLanguage } = useTranslation();
-return <button>{t('endTurn')}</button>;
-```
-
-### Tests Multilingues
-```typescript
-import { getTooltipText } from './utils/translations';
-
-// Lit automatiquement la langue depuis localStorage
-const tooltip = getTooltipText('demo.welcome');
-```
-
-## 🎮 **Interface Principale (TrueHeroesInterface.tsx)**
-
-### Système de Panneaux
-- **Panneau Droit** : Contenu dynamique (scenario/hero/inventory/castle)
-- **Boutons Header** : Design poli sans bordures, icônes fantasy
-- **Système de Héros** : Rotation, sélection, images réelles avec fallbacks
-- **Système de Tours** : Bouton "End Turn" avec icône ⭐ - STABLE
-
-### Fonctionnalités
-- ✅ Gameplay solo complètement fonctionnel
-- ✅ Gestion des héros avec images réelles
-- ✅ Panneaux dynamiques avec changement de contenu
-- ✅ Système de tooltips internationalisé
-- ✅ UI polie sans éléments inutiles
-- ✅ Système de tours stable et flux de jeu
-
-## 🔧 **Architecture Technique**
-
-### Backend (Port 8080)
-```
-Spring Boot + H2 Database
-├── Controllers: Scenario, Game, Multiplayer, AI
-├── Services: Couche logique métier
-├── Repository: Entités JPA
-└── GameStateService: Gestion de l'état critique
-```
-
-### Frontend (Port 3000)
-```
-React TypeScript
-├── TrueHeroesInterface.tsx (interface principale)
-├── ModernGameRenderer.tsx (rendu de carte)
-├── useGameStore.ts (gestion d'état)
-├── i18n/ (internationalisation)
-└── tests/e2e/ (tests de démonstration)
-```
-
-## 🧪 **Tests et Démonstrations**
-
-### Tests E2E Playwright
-- **01-single-demo.spec.ts** : Démonstration solo
-- **02-multiplayer-demo.spec.ts** : Démonstration multijoueur
-- **gameplay-demo.spec.ts** : Démonstration avec tooltips dynamiques
-
-### Tooltips Dynamiques
-- Basés sur l'état réel de l'interface
-- Attendent le chargement des éléments
-- Affichent les vrais états de chargement
-- Style adapté et animations fluides
-
-## 📝 **Workflow de Développement**
-
-### Démarrage
-1. `./start-app.sh` - Démarre l'environnement de développement
-2. Ouvrir http://localhost:3000 - Tester l'UI manuellement
-3. `cd frontend && npx playwright test --headed` - Tests visuels
-
-### Vérifications
-- Consulter `DEVELOPER_INSTRUCTIONS.md` pour l'état actuel
-- Utiliser les scripts existants (ne pas recréer)
-- Suivre les patterns établis
-- Tester avec les démonstrations Playwright
-
-## 🔍 **Débogage**
-
-### Erreurs Courantes
-- **"Not your turn"** : ✅ Corrigé - `currentPlayerId` initialisé correctement
-- **Tests qui échouent** : Vérifier que l'application est démarrée
-- **Langue non sauvegardée** : ✅ Corrigé - Persistance automatique
-
-### Logs
-```bash
-tail -f logs/backend.log    # Logs backend
-tail -f logs/frontend.log   # Logs frontend
-```
-
-## 🎯 **Capacités Actuelles**
-
-### ✅ Fonctionnalités Complètes
-- Gameplay solo entièrement fonctionnel
-- Gestion des héros avec images réelles
-- Panneaux dynamiques avec changement de contenu
-- Système de tooltips internationalisé
-- Système de tours stable
-- Démonstrations automatisées multilingues
-
-### 🚧 En Développement
-- Mode multijoueur (infrastructure présente)
-- Système de combat avancé
-- Gestion des châteaux étendue
-
-## 🚨 **Rappels Importants**
-
-### ⚠️ **À NE JAMAIS FAIRE**
-- Recréer les fonctionnalités existantes
-- Ignorer `DEVELOPER_INSTRUCTIONS.md`
-- Modifier sans tester avec Playwright
-- Casser les patterns UI/UX établis
-
-### ✅ **Toujours Faire**
-- Lire `DEVELOPER_INSTRUCTIONS.md` en premier
-- Utiliser les scripts existants
-- Suivre les patterns établis
-- Tester avec les démonstrations avant de committer
+### 🎯 **URLs Importantes**
+- **Frontend**: http://localhost:3000
+- **Backend**: http://localhost:8080
+- **API Health**: http://localhost:8080/actuator/health
+- **H2 Database**: http://localhost:8080/h2-console
 
 ---
 
-**Dernière mise à jour** : Janvier 2025
-**Statut** : ✅ ENTIÈREMENT FONCTIONNEL avec corrections appliquées 
+## 🔧 **Architecture Backend-Frontend**
 
-### 🎮 **Current Features (January 2025)**
+### ✅ **Connexions API Fonctionnelles** (Janvier 2025)
 
-- ✅ **Turn Management**: Complete turn system with resource collection
-- ✅ **Hero Movement**: Click-to-move with pathfinding
-- ✅ **Building System**: Castle construction with costs and timers
-- ✅ **Unit Recruitment**: Tier-based units with proper costs
-- ✅ **Scenario Loading**: Three working scenarios (Conquest, Temporal, Multiplayer)
-- ✅ **Modern UI**: Clean interface with hero/castle management panels
-- ✅ **Multiplayer**: Session creation and joining (HTTP polling mode)
-- ✅ **ZFC System**: Zone of Temporal Causality for advanced movement
-- ✅ **Terrain Rendering**: Bitmask-based edge detection with sprite mapping
-- ✅ **Movement Visualization**: Immediate (green) and projection (blue) ranges
-- ✅ **Fog of War**: Three-layer visibility system (visible/explored/unknown)
-- ✅ **Vision System**: Dynamic updates based on hero positions 
+#### **Castle Management - RÉCEMMENT CORRIGÉ**
+```typescript
+// ✅ MAINTENANT: Connexion API réelle
+const buildings = await ApiService.getPlayerBuildings(gameId, playerId);
+const units = await ApiService.getAvailableUnits(gameId, playerId);
+const response = await ApiService.recruitUnitsFromGame(gameId, buildingId, data);
+```
+
+#### **Endpoints Backend Disponibles** (70+ endpoints)
+- **GameController** (`/api/games`): 22 endpoints
+- **BuildingController** (`/api/buildings`): 25 endpoints  
+- **UnitController** (`/api/units`): 15 endpoints
+- **MultiplayerController** (`/api/multiplayer`): 8 endpoints
+- **Contrôleurs spécialisés**: MagicItem, ZFC, AI, Scenario, Image
+
+#### **Endpoints Critiques Manquants**
+- **Combat System** (priorité HAUTE)
+- **Hero Management complet** (équipement, inventaire)
+- **Player Management** (ressources, statistiques)
+- **Spell System** (sorts, apprentissage)
+
+---
+
+## 🛠️ **Scripts de Développement**
+
+### 🧪 **Tests Automatisés**
+```bash
+# Tests complets
+./run-all-tests.sh
+
+# Tests Playwright (E2E)
+./run-playwright-tests.sh
+
+# Tests rapides
+./run-quick-tests.sh
+
+# Test spécifique
+cd frontend && npx playwright test 01-single-demo.spec.ts --project=solo-fullscreen --headed
+```
+
+### 🎮 **Tests Manuels**
+```bash
+# Test de fonctionnalité spécifique
+./test-app.sh
+
+# Test de performance
+cd frontend && npm run test:performance
+
+# Test de responsivité
+cd frontend && npm run test:responsive
+```
+
+---
+
+## 🎯 **Composants Critiques**
+
+### 🏰 **Castle Management (Récemment Corrigé)**
+- **Fichier**: `frontend/src/components/CastleManagementPanel.tsx`
+- **État**: ✅ **Connexion API réelle**
+- **Fonctionnalités**: Construction, recrutement, gestion ressources
+- **Fallback**: Données mockées si API indisponible
+
+### ⚔️ **Game Interface**
+- **Fichier**: `frontend/src/components/TrueHeroesInterface.tsx`
+- **État**: ✅ **Fonctionnel**
+- **Fonctionnalités**: Gestion héros, tours, interface principale
+
+### 🎮 **Game State Management**
+- **Fichier**: `frontend/src/store/useGameStore.ts`
+- **État**: ✅ **Optimisé**
+- **Fonctionnalités**: État global, actions, API calls
+
+---
+
+## 🔍 **Débogage et Diagnostics**
+
+### 🕵️ **Diagnostic Rapide**
+```bash
+# Vérification santé Backend
+curl http://localhost:8080/actuator/health
+
+# Vérification connexion API
+curl http://localhost:8080/api/health
+
+# Vérification scénarios
+curl http://localhost:8080/api/scenarios/all
+```
+
+### 🐛 **Problèmes Fréquents**
+
+#### **1. API Non Disponible**
+```bash
+# Vérification processus
+lsof -i :8080  # Backend
+lsof -i :3000  # Frontend
+
+# Redémarrage
+./stop-app.sh && ./start-app.sh
+```
+
+#### **2. Erreurs de Connexion Frontend-Backend**
+```javascript
+// Vérification dans la console navigateur
+console.log('API Base URL:', process.env.REACT_APP_API_URL);
+console.log('Backend Health:', await ApiService.getHealth());
+```
+
+#### **3. Problèmes de Base de Données**
+```sql
+-- Accès H2 Console (http://localhost:8080/h2-console)
+-- URL: jdbc:h2:mem:testdb
+-- User: sa
+-- Password: (vide)
+
+SELECT * FROM scenarios;
+SELECT * FROM buildings;
+SELECT * FROM units;
+```
+
+---
+
+## 🎪 **Fonctionnalités Avancées**
+
+### 🌟 **Zone de Causalité Temporelle (ZFC)**
+- **Endpoint**: `/api/zfc/calculate`
+- **Calcul**: Coût temporel des mouvements
+- **Implémentation**: Backend Java + Frontend TypeScript
+
+### 🎭 **Système Multijoueur**
+- **Endpoints**: `/api/multiplayer/sessions`
+- **WebSocket**: Support temps réel
+- **État**: ✅ **Fonctionnel**
+
+### 🔮 **Système Magique**
+- **Endpoints**: `/api/magic-items`
+- **Inventaire**: Gestion objets magiques
+- **État**: ✅ **Complet**
+
+---
+
+## 📊 **Métriques et Performance**
+
+### 🎯 **Métriques Actuelles**
+- **Endpoints Backend**: 70+ (couverture 58%)
+- **Connexions Fonctionnelles**: 40%
+- **Connexions Mockées**: 35%
+- **Tests E2E**: 26+ scenarios
+
+### 📈 **Objectifs de Performance**
+- **Temps de chargement**: < 3 secondes
+- **Réponse API**: < 500ms
+- **Taille bundle**: < 2MB
+- **Tests coverage**: > 80%
+
+---
+
+## 🔧 **Configuration Développement**
+
+### 🛡️ **Variables d'Environnement**
+```bash
+# Backend
+SPRING_PROFILES_ACTIVE=dev
+SERVER_PORT=8080
+H2_CONSOLE_ENABLED=true
+
+# Frontend
+REACT_APP_API_URL=http://localhost:8080
+REACT_APP_WS_URL=ws://localhost:8080
+PORT=3000
+```
+
+### 📦 **Dépendances Critiques**
+```json
+{
+  "backend": {
+    "spring-boot": "2.7.18",
+    "h2": "2.1.214",
+    "hibernate": "5.6.15"
+  },
+  "frontend": {
+    "react": "^18.2.0",
+    "typescript": "^4.9.5",
+    "playwright": "^1.40.0"
+  }
+}
+```
+
+---
+
+## 🎯 **Prochaines Étapes (Roadmap)**
+
+### 🔥 **Priorité Immédiate**
+1. **Implémenter Combat System** (endpoints manquants)
+2. **Compléter Hero Management** (équipement, inventaire)
+3. **Ajouter Spell System** (sorts, apprentissage)
+4. **Améliorer Player Management** (ressources, stats)
+
+### 🚀 **Priorité Moyenne**
+1. **Système de Trade** (échange ressources)
+2. **Diplomacy** (alliances, négociations)
+3. **Notifications** (événements temps réel)
+4. **Analytics** (métriques avancées)
+
+### 🎪 **Priorité Basse**
+1. **Achievements** (système de récompenses)
+2. **Replay System** (sauvegarde parties)
+3. **Admin Tools** (gestion serveur)
+4. **Advanced Analytics** (business intelligence)
+
+---
+
+## 🎮 **Ressources Utiles**
+
+### 📚 **Documentation**
+- **GAMESTATUS.md**: État actuel complet
+- **GAMEPLAY.md**: Guide de jeu attractif
+- **ARCHITECTURE.md**: Design technique
+- **FRONTEND_BACKEND_CONNECTION_ANALYSIS.md**: Analyse des connexions
+
+### 🛠️ **Outils de Développement**
+- **VSCode**: Extensions TypeScript, Java, Playwright
+- **Postman**: Collection API Heroes of Time
+- **Chrome DevTools**: Debugging frontend
+- **IntelliJ IDEA**: Développement Java backend
+
+---
+
+## 🏆 **Conseils Pro**
+
+### 🎯 **Bonnes Pratiques**
+1. **Toujours vérifier la santé API** avant les tests
+2. **Utiliser les fallbacks** pour les connexions API
+3. **Tester sur différents navigateurs** (Chrome, Firefox, Safari)
+4. **Optimiser les images** pour de meilleures performances
+5. **Documenter les changements** dans le code
+
+### 🔍 **Debugging Efficace**
+1. **Console navigateur** pour les erreurs frontend
+2. **Logs Spring Boot** pour les erreurs backend
+3. **Network tab** pour les problèmes API
+4. **Playwright traces** pour les tests E2E
+5. **H2 Console** pour les problèmes de données
+
+---
+
+*🎮 Happy Coding! Le royaume a besoin de héros développeurs!* ⚔️✨ 
