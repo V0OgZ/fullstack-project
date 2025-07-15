@@ -4,6 +4,8 @@ import { getHeroSprite, getHeroFallbackImage, drawHeroSprite, loadHeroImageWithF
 import { Position, Tile, Hero } from '../types/game';
 import { useTranslation } from '../i18n';
 import './ModernGameRenderer.css';
+import { computeHexBitmask } from '../utils/hexBitmask';
+import { TERRAIN_EDGE_SPRITES } from '../constants/terrainSprites';
 
 interface ModernGameRendererProps {
   width: number;
@@ -35,6 +37,15 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
   const [hoveredTile, setHoveredTile] = useState<Position | null>(null);
   const [heroImages, setHeroImages] = useState<Map<string, HTMLImageElement>>(new Map());
   const [mapOffset, setMapOffset] = useState<Position>({ x: 0, y: 0 });
+  const [spriteCache] = useState<Map<string, HTMLImageElement>>(new Map());
+
+  // Pre-compute extended (projection) movement range when hero selected
+  const projectionRange: Position[] = useMemo(() => {
+    if (!selectedHero) return [];
+    // Clone hero with doubled movement points for projection calculation
+    const heroClone = { ...selectedHero, movementPoints: selectedHero.movementPoints * 2 } as Hero;
+    return useGameStore.getState().calculateMovementRange(heroClone);
+  }, [selectedHero]);
   
   // Handle tile clicks for hero selection and movement
   const handleTileClick = useCallback((position: Position) => {
@@ -462,6 +473,7 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     
     // Check if this tile is in movement range
     const isInMovementRange = movementRange.some(pos => pos.x === tile.x && pos.y === tile.y);
+    const isInProjectionRange = !isInMovementRange && projectionRange.some(pos => pos.x === tile.x && pos.y === tile.y);
     
     // Check if this tile has the selected hero
     const hasSelectedHero = selectedHero && tile.hero && tile.hero.id === selectedHero.id;
@@ -480,26 +492,55 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     }
     ctx.closePath();
 
-    // Use terrain colors with gradients for better visual appeal
     const terrainKey = tile.terrain;
-    let baseColor = config.colors.default;
-    
-    if (terrainKey && config.colors[terrainKey as keyof typeof config.colors]) {
-      const colorValue = config.colors[terrainKey as keyof typeof config.colors];
-      if (typeof colorValue === 'string') {
-        baseColor = colorValue;
+
+    // Attempt sprite-based fill
+    let spriteFilled = false;
+    if (terrainKey && TERRAIN_EDGE_SPRITES[terrainKey]) {
+      const bitmask = computeHexBitmask(map, { x: tile.x, y: tile.y });
+      const mapping = TERRAIN_EDGE_SPRITES[terrainKey];
+      const spritePath = mapping[bitmask] ?? mapping[0b000000]; // fallback isolated
+
+      if (spritePath) {
+        let img = spriteCache.get(spritePath);
+        if (!img) {
+          img = new Image();
+          img.src = spritePath;
+          spriteCache.set(spritePath, img);
+        }
+        if (img.complete && img.naturalWidth > 0) {
+          try {
+            const pattern = ctx.createPattern(img, 'repeat');
+            if (pattern) {
+              ctx.fillStyle = pattern;
+              spriteFilled = true;
+            }
+          } catch (e) {
+            // Image was broken; skip pattern rendering
+            console.warn('Pattern creation failed for', spritePath, e);
+          }
+        }
       }
     }
 
-    // Create gradient for terrain if available
-    if (terrainKey && config.gradients[terrainKey as keyof typeof config.gradients]) {
-      const gradientColors = config.gradients[terrainKey as keyof typeof config.gradients];
-      const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
-      gradient.addColorStop(0, gradientColors[0]);
-      gradient.addColorStop(1, gradientColors[1]);
-      ctx.fillStyle = gradient;
-    } else {
-      ctx.fillStyle = baseColor;
+    if (!spriteFilled) {
+      // Fallback to gradient color fill
+      let baseColor = config.colors.default;
+      if (terrainKey && config.colors[terrainKey as keyof typeof config.colors]) {
+        const colorValue = config.colors[terrainKey as keyof typeof config.colors];
+        if (typeof colorValue === 'string') {
+          baseColor = colorValue;
+        }
+      }
+      if (terrainKey && config.gradients[terrainKey as keyof typeof config.gradients]) {
+        const gradientColors = config.gradients[terrainKey as keyof typeof config.gradients];
+        const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
+        gradient.addColorStop(0, gradientColors[0]);
+        gradient.addColorStop(1, gradientColors[1]);
+        ctx.fillStyle = gradient;
+      } else {
+        ctx.fillStyle = baseColor;
+      }
     }
     
     // Fill with terrain color/gradient
@@ -569,6 +610,22 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
       ctx.stroke();
     }
 
+    // Outline for selected tile or hovered tile
+    if (isSelected || isHovered) {
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = isSelected ? 'yellow' : 'rgba(255,255,255,0.6)';
+      ctx.stroke();
+    }
+
+    // Render highlight overlays AFTER base fill so they appear on top but under content
+    if (isInMovementRange) {
+      ctx.fillStyle = 'rgba(76, 175, 80, 0.35)'; // greenish highlight
+      ctx.fill();
+    } else if (isInProjectionRange) {
+      ctx.fillStyle = 'rgba(33, 150, 243, 0.25)'; // bluish softer for ZFC projection
+      ctx.fill();
+    }
+
     // Draw structure if present
     if (tile.structure) {
       drawStructure(ctx, center, tile.structure);
@@ -583,7 +640,22 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     if (tile.hero) {
       drawHero(ctx, center, tile.hero);
     }
-  }, [config, drawStructure, drawCreature, drawHero, movementRange, movementMode, selectedHero]);
+
+    // ---- Fog of War overlay (after all tile content) ----
+    if (!tile.isVisible) {
+      ctx.beginPath();
+      for (let i = 0; i < 6; i++) {
+        const angle = (Math.PI / 3) * i - Math.PI / 2;
+        const hx = x + radius * Math.cos(angle);
+        const hy = y + radius * Math.sin(angle);
+        if (i === 0) ctx.moveTo(hx, hy); else ctx.lineTo(hx, hy);
+      }
+      ctx.closePath();
+
+      ctx.fillStyle = tile.isExplored ? 'rgba(0,0,0,0.55)' : 'rgba(0,0,0,0.85)';
+      ctx.fill();
+    }
+  }, [config, drawStructure, drawCreature, drawHero, movementRange, movementMode, selectedHero, map, spriteCache, projectionRange]);
 
   // Render ZFC zones
   const drawZFCZones = useCallback((ctx: CanvasRenderingContext2D) => {

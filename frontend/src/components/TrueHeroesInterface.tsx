@@ -20,7 +20,8 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
     isLoading, 
     error,
     endTurn,
-    nextPlayer
+    nextPlayer,
+    updateVision
   } = useGameStore();
   
   const [selectedHeroId, setSelectedHeroId] = useState<string | null>(null);
@@ -80,6 +81,13 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
   };
 
   const selectedHero = currentPlayer?.heroes?.find(hero => hero.id === selectedHeroId);
+
+  // Update vision when game loads or current player changes
+  useEffect(() => {
+    if (currentPlayer?.id) {
+      updateVision(currentPlayer.id);
+    }
+  }, [currentPlayer?.id, updateVision]);
 
   // Mettre à jour le titre de la page de façon dynamique selon le contexte
   useEffect(() => {

@@ -231,3 +231,50 @@ export class TerrainSpriteSelector {
 
 // Global instance
 export const terrainSpriteSelector = new TerrainSpriteSelector(); 
+
+// ---------------------------------------------------------------------------
+// Hex-bitmask based edge sprites (6-bit mask for pointy-top axial coordinates)
+// Bit order: 0=E,1=NE,2=NW,3=W,4=SW,5=SE (same order as utils/hexBitmask.ts)
+// The mapping below is **minimal viable**: center + simple edges + isolated.
+// More complex combinations (corners, triple edges) can be added later.
+// ---------------------------------------------------------------------------
+export interface TerrainBitmaskMapping {
+  [mask: number]: string; // sprite path
+}
+
+// Helper to shorten sprite path declaration
+const p = (terrain: string, name: string) => `/assets/terrain/${terrain}/${name}.png`;
+
+export const TERRAIN_EDGE_SPRITES: Record<string, TerrainBitmaskMapping> = {
+  grass: {
+    0b111111: p('grass', 'center'),   // fully surrounded by same terrain
+    0b000000: p('grass', 'isolated'), // no same-type neighbors
+    0b000001: p('grass', 'edge_e'),
+    0b000010: p('grass', 'edge_ne'),
+    0b000100: p('grass', 'edge_nw'),
+    0b001000: p('grass', 'edge_w'),
+    0b010000: p('grass', 'edge_sw'),
+    0b100000: p('grass', 'edge_se')
+  },
+  forest: {
+    0b111111: p('forest', 'center'),
+    0b000000: p('forest', 'isolated'),
+    0b000001: p('forest', 'edge_e'),
+    0b000010: p('forest', 'edge_ne'),
+    0b000100: p('forest', 'edge_nw'),
+    0b001000: p('forest', 'edge_w'),
+    0b010000: p('forest', 'edge_sw'),
+    0b100000: p('forest', 'edge_se')
+  },
+  water: {
+    0b111111: p('water', 'center'),
+    0b000000: p('water', 'isolated'),
+    0b000001: p('water', 'shore_e'),
+    0b000010: p('water', 'shore_ne'),
+    0b000100: p('water', 'shore_nw'),
+    0b001000: p('water', 'shore_w'),
+    0b010000: p('water', 'shore_sw'),
+    0b100000: p('water', 'shore_se')
+  }
+  // Other terrains (mountain, desert, etc.) can be added following the same pattern.
+}; 

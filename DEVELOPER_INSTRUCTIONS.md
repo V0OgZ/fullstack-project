@@ -180,3 +180,18 @@ tail -f logs/frontend.log   # Logs frontend
 
 **Dernière mise à jour** : Janvier 2025
 **Statut** : ✅ ENTIÈREMENT FONCTIONNEL avec corrections appliquées 
+
+### 🎮 **Current Features (January 2025)**
+
+- ✅ **Turn Management**: Complete turn system with resource collection
+- ✅ **Hero Movement**: Click-to-move with pathfinding
+- ✅ **Building System**: Castle construction with costs and timers
+- ✅ **Unit Recruitment**: Tier-based units with proper costs
+- ✅ **Scenario Loading**: Three working scenarios (Conquest, Temporal, Multiplayer)
+- ✅ **Modern UI**: Clean interface with hero/castle management panels
+- ✅ **Multiplayer**: Session creation and joining (HTTP polling mode)
+- ✅ **ZFC System**: Zone of Temporal Causality for advanced movement
+- ✅ **Terrain Rendering**: Bitmask-based edge detection with sprite mapping
+- ✅ **Movement Visualization**: Immediate (green) and projection (blue) ranges
+- ✅ **Fog of War**: Three-layer visibility system (visible/explored/unknown)
+- ✅ **Vision System**: Dynamic updates based on hero positions 
