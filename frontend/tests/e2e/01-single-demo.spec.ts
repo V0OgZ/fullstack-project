@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 // Fonction pour créer des tooltips dynamiques basés sur l'état réel
-const createDynamicTooltip = async (page: any, message: string, position: 'top' | 'center' | 'bottom' = 'center') => {
+const createDynamicTooltip = async (page: any, message: string, position: 'top' | 'center' | 'bottom' = 'top') => {
   await page.evaluate(({ message, position }) => {
     // Supprimer les anciens tooltips
     const existingTooltips = document.querySelectorAll('.demo-tooltip');
@@ -13,10 +13,8 @@ const createDynamicTooltip = async (page: any, message: string, position: 'top' 
     tooltip.innerHTML = `
       <div style="
         position: fixed;
-        top: ${position === 'top' ? '20px' : position === 'bottom' ? 'auto' : '50%'};
-        bottom: ${position === 'bottom' ? '20px' : 'auto'};
-        left: 50%;
-        transform: translateX(-50%) ${position === 'center' ? 'translateY(-50%)' : ''};
+        top: 20px;
+        right: 20px;
         background: linear-gradient(135deg, rgba(26,26,46,0.95) 0%, rgba(22,33,62,0.95) 50%, rgba(15,52,96,0.95) 100%);
         color: #ffd700;
         padding: 20px 30px;
@@ -32,7 +30,7 @@ const createDynamicTooltip = async (page: any, message: string, position: 'top' 
         max-width: 500px;
         backdrop-filter: blur(5px);
         opacity: 1;
-        animation: slideIn 0.3s ease-out;
+        animation: slideIn 0.8s ease-out;
       ">
         <div style="
           background: linear-gradient(45deg, transparent 30%, rgba(255,215,0,0.1) 50%, transparent 70%);
@@ -51,8 +49,8 @@ const createDynamicTooltip = async (page: any, message: string, position: 'top' 
     const style = document.createElement('style');
     style.textContent = `
       @keyframes slideIn {
-        from { opacity: 0; transform: translateX(-50%) scale(0.95); }
-        to { opacity: 1; transform: translateX(-50%) scale(1); }
+        from { opacity: 0; }
+        to { opacity: 1; }
       }
     `;
     document.head.appendChild(style);
