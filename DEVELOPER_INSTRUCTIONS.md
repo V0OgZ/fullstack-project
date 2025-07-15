@@ -60,9 +60,20 @@ const response = await ApiService.recruitUnitsFromGame(gameId, buildingId, data)
 ```bash
 ./frontend/start-demo.sh
 ```
-- Lance une démo visuelle avec interface graphique
+- Lance une démo visuelle avec menu de sélection :
+  - Mode normal : avec barres du navigateur
+  - Mode plein écran : interface immersive kiosque
 - Montre le gameplay automatisé
 - Nécessite que les serveurs soient lancés
+
+### 🎬 **Mode Démo Plein Écran** (NOUVEAU!)
+```bash
+./frontend/start-fullscreen-demo.sh
+```
+- Lance directement en mode kiosque plein écran
+- Masquage automatique du curseur
+- Parfait pour présentations et salons
+- Appuyez sur ESC pour quitter
 
 ### 🔍 **Mode Debug** (NOUVEAU!)
 ```bash
