@@ -121,6 +121,8 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
   // Helper function to convert flat tiles array to 2D array
   convertTilesToMap: (tiles: any[], width: number, height: number): Tile[][] => {
+    console.log('🗺️ convertTilesToMap: Converting', tiles.length, 'tiles to', width, 'x', height, 'map');
+    
     const map: Tile[][] = [];
     for (let y = 0; y < height; y++) {
       const row: Tile[] = [];
@@ -160,14 +162,10 @@ export const useGameStore = create<GameStore>((set, get) => ({
       map.push(row);
     }
     
-    // After creating the map, update vision for the current player
-    const currentPlayer = get().currentPlayer;
-    if (currentPlayer && currentPlayer.id) {
-      // We'll call updateVision after map is set
-      setTimeout(() => {
-        get().updateVision(currentPlayer.id);
-      }, 100);
-    }
+    console.log('🗺️ convertTilesToMap: Map created with', map.length, 'rows');
+    
+    // Vision update removed to prevent infinite re-renders
+    // Vision will be updated manually when needed
     
     return map;
   },
@@ -291,7 +289,19 @@ export const useGameStore = create<GameStore>((set, get) => ({
   // State setters
   setCurrentGame: (game) => set({ currentGame: game }),
   setCurrentPlayer: (player) => set({ currentPlayer: player }),
-  setMap: (map) => set({ map }),
+  setMap: (map) => {
+    console.log('🗺️ setMap: Setting new map with', map.length, 'rows');
+    set({ map });
+    
+    // Update vision after setting map if we have a current player
+    const { currentPlayer } = get();
+    if (currentPlayer?.id) {
+      console.log('🗺️ setMap: Updating vision for current player after map set');
+      setTimeout(() => {
+        get().updateVision(currentPlayer.id);
+      }, 100); // Small delay to ensure map is set
+    }
+  },
   setSelectedTile: (position) => set({ selectedTile: position }),
   setCurrentPlayerNumber: (playerNumber) => set({ currentPlayerNumber: playerNumber }),
   
@@ -313,16 +323,32 @@ export const useGameStore = create<GameStore>((set, get) => ({
   // Simple vision update: mark tiles within radius 4 of each hero of the player as visible & explored, others remain previous explored.
   updateVision: (playerId: string) => {
     const { map, currentGame } = get();
-    if (!currentGame || !map.length) return;
+    if (!currentGame || !map.length) {
+      console.log('🔍 updateVision: No game or map data');
+      return;
+    }
     const player = currentGame.players.find(p => p.id === playerId);
-    if (!player) return;
+    if (!player) {
+      console.log('🔍 updateVision: Player not found:', playerId);
+      return;
+    }
+
+    console.log('🔍 updateVision: Updating vision for player:', playerId, 'with heroes:', player.heroes.length);
 
     const visibilityRadius = 4;
 
     // Clone map to avoid mutating directly
     const newMap = map.map(row => row.map(tile => ({ ...tile, isVisible: false })));
 
+    let visibleTilesCount = 0;
     player.heroes.forEach(hero => {
+      if (!hero.position) {
+        console.log('🔍 updateVision: Hero has no position:', hero.name);
+        return;
+      }
+      
+      console.log('🔍 updateVision: Processing hero:', hero.name, 'at position:', hero.position);
+      
       for (let y = -visibilityRadius; y <= visibilityRadius; y++) {
         for (let x = -visibilityRadius; x <= visibilityRadius; x++) {
           const tx = hero.position.x + x;
@@ -333,12 +359,14 @@ export const useGameStore = create<GameStore>((set, get) => ({
               const t = newMap[ty][tx];
               t.isVisible = true;
               t.isExplored = true;
+              visibleTilesCount++;
             }
           }
         }
       }
     });
 
+    console.log('🔍 updateVision: Made', visibleTilesCount, 'tiles visible');
     set({ map: newMap });
   },
   
@@ -535,11 +563,16 @@ export const useGameStore = create<GameStore>((set, get) => ({
     setLoading(true);
     setError(null);
 
+    console.log('🎯 moveHero called:', { heroId, targetPosition });
+
     try {
       if (!currentGame || !currentPlayer) throw new Error('No active game or player');
 
+      console.log('📡 Calling backend API to move hero...');
       // Call backend API to move hero
-      const result = await ApiService.moveHero(heroId, targetPosition);
+      const result = await ApiService.moveHero(currentGame.id, heroId, targetPosition);
+      
+      console.log('📨 Backend response:', result);
       
       if (result.success) {
         // Refresh game state to reflect the move
@@ -552,12 +585,18 @@ export const useGameStore = create<GameStore>((set, get) => ({
           .find(h => h.id === heroId);
         
         if (hero) {
+          console.log('✅ Updating hero position locally:', {
+            oldPosition: hero.position,
+            newPosition: targetPosition,
+            movementPointsBefore: hero.movementPoints,
+            movementPointsAfter: Math.max(0, hero.movementPoints - (result.movementCost || 100))
+          });
           hero.position = targetPosition;
           hero.movementPoints = Math.max(0, hero.movementPoints - (result.movementCost || 100));
           set({ currentGame: updatedGame });
         }
         
-        console.log('Hero moved successfully:', result);
+        console.log('✅ Hero moved successfully:', result);
       } else {
         throw new Error(result.message || 'Failed to move hero');
       }

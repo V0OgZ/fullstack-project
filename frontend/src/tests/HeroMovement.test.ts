@@ -21,7 +21,7 @@ describe('Hero Movement Tests', () => {
     it('should move hero to valid position', async () => {
       const targetPosition = { x: 5, y: 3 };
       
-      const moveAction = await ApiService.moveHero(heroId, targetPosition);
+      const moveAction = await ApiService.moveHero(gameId, heroId, targetPosition);
 
       expect(moveAction).toBeDefined();
       expect(moveAction.type).toBe('move');
@@ -37,7 +37,7 @@ describe('Hero Movement Tests', () => {
       // Try to move too far (beyond movement points)
       const farPosition = { x: 50, y: 50 };
       
-      const moveAction = await ApiService.moveHero(heroId, farPosition);
+      const moveAction = await ApiService.moveHero(gameId, heroId, farPosition);
 
       // Should still create action but might have warnings or reduced range
       expect(moveAction).toBeDefined();
@@ -48,7 +48,7 @@ describe('Hero Movement Tests', () => {
     it('should handle adjacent movement', async () => {
       const adjacentPosition = { x: 1, y: 1 };
       
-      const moveAction = await ApiService.moveHero(heroId, adjacentPosition);
+      const moveAction = await ApiService.moveHero(gameId, heroId, adjacentPosition);
 
       expect(moveAction).toBeDefined();
       expect(moveAction.type).toBe('move');
@@ -63,7 +63,7 @@ describe('Hero Movement Tests', () => {
     it('should handle invalid coordinates', async () => {
       const invalidPosition = { x: -1, y: -1 };
       
-      const moveAction = await ApiService.moveHero(heroId, invalidPosition);
+      const moveAction = await ApiService.moveHero(gameId, heroId, invalidPosition);
 
       // Backend should handle this gracefully
       expect(moveAction).toBeDefined();
@@ -74,7 +74,7 @@ describe('Hero Movement Tests', () => {
       // Try to move to a position that might be occupied
       const occupiedPosition = { x: 0, y: 0 };
       
-      const moveAction = await ApiService.moveHero(heroId, occupiedPosition);
+      const moveAction = await ApiService.moveHero(gameId, heroId, occupiedPosition);
 
       expect(moveAction).toBeDefined();
       expect(moveAction.type).toBe('move');
@@ -85,7 +85,7 @@ describe('Hero Movement Tests', () => {
       const targetPosition = { x: 2, y: 2 };
       
       try {
-        await ApiService.moveHero(invalidHeroId, targetPosition);
+        await ApiService.moveHero(gameId, invalidHeroId, targetPosition);
         // If we get here, the API didn't validate properly, but that's ok for now
       } catch (error) {
         // Expected behavior - should throw error for invalid hero
@@ -102,7 +102,7 @@ describe('Hero Movement Tests', () => {
 
       const targetPosition = { x: 3, y: 2 };
       
-      const moveAction = await ApiService.moveHero(heroId, targetPosition);
+      const moveAction = await ApiService.moveHero(gameId, heroId, targetPosition);
 
       expect(moveAction).toBeDefined();
       expect(moveAction.type).toBe('move');
@@ -118,7 +118,7 @@ describe('Hero Movement Tests', () => {
       // Different terrain types should have different movement costs
       const forestPosition = { x: 4, y: 4 };
       
-      const moveAction = await ApiService.moveHero(heroId, forestPosition);
+      const moveAction = await ApiService.moveHero(gameId, heroId, forestPosition);
 
       expect(moveAction).toBeDefined();
       expect(moveAction.type).toBe('move');
@@ -134,7 +134,7 @@ describe('Hero Movement Tests', () => {
       ];
 
       for (const position of positions) {
-        const moveAction = await ApiService.moveHero(heroId, position);
+        const moveAction = await ApiService.moveHero(gameId, heroId, position);
 
         expect(moveAction).toBeDefined();
         expect(moveAction.type).toBe('move');
@@ -147,7 +147,7 @@ describe('Hero Movement Tests', () => {
       // Try to move to a position that requires pathfinding
       const destinationPosition = { x: 8, y: 8 };
       
-      const moveAction = await ApiService.moveHero(heroId, destinationPosition);
+      const moveAction = await ApiService.moveHero(gameId, heroId, destinationPosition);
 
       expect(moveAction).toBeDefined();
       expect(moveAction.type).toBe('move');
@@ -163,7 +163,7 @@ describe('Hero Movement Tests', () => {
       // Try to move to a completely unreachable position
       const unreachablePosition = { x: 100, y: 100 };
       
-      const moveAction = await ApiService.moveHero(heroId, unreachablePosition);
+      const moveAction = await ApiService.moveHero(gameId, heroId, unreachablePosition);
 
       expect(moveAction).toBeDefined();
       // Backend should handle this gracefully, possibly with modified target
@@ -174,7 +174,7 @@ describe('Hero Movement Tests', () => {
     it('should track movement in pending actions', async () => {
       const targetPosition = { x: 6, y: 5 };
       
-      const moveAction = await ApiService.moveHero(heroId, targetPosition);
+      const moveAction = await ApiService.moveHero(gameId, heroId, targetPosition);
 
       // Check if action appears in pending actions
       const pendingActions = await ApiService.getPendingActions(gameId);
@@ -194,7 +194,7 @@ describe('Hero Movement Tests', () => {
     it('should allow canceling movement actions', async () => {
       const targetPosition = { x: 7, y: 6 };
       
-      const moveAction = await ApiService.moveHero(heroId, targetPosition);
+      const moveAction = await ApiService.moveHero(gameId, heroId, targetPosition);
 
       expect(moveAction).toBeDefined();
       expect(moveAction.id).toBeDefined();
@@ -217,7 +217,7 @@ describe('Hero Movement Tests', () => {
       const targetPosition = { x: initialPosition.x + 1, y: initialPosition.y + 1 };
       
       // Create movement action
-      await ApiService.moveHero(heroId, targetPosition);
+      await ApiService.moveHero(gameId, heroId, targetPosition);
 
       // End turn to execute actions
       await ApiService.endTurn(gameId);

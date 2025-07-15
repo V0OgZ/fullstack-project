@@ -30,10 +30,16 @@ interface AnimatedElement {
 const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererProps>(({ width, height, onTileClick }, ref) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
-  const { map, currentGame, selectedTile, setSelectedTile, visibleZFCs, selectedHero, movementRange, movementMode, selectHero, moveHero, canMoveToPosition } = useGameStore();
+  const animatedElementsRef = useRef<AnimatedElement[]>([]);
+  const { map, currentGame, currentPlayer, selectedTile, setSelectedTile, visibleZFCs, selectedHero, movementRange, movementMode, selectHero, moveHero, canMoveToPosition } = useGameStore();
   const { t } = useTranslation();
   
   const [animatedElements, setAnimatedElements] = useState<AnimatedElement[]>([]);
+  
+  // Synchroniser la référence avec l'état
+  useEffect(() => {
+    animatedElementsRef.current = animatedElements;
+  }, [animatedElements]);
   const [hoveredTile, setHoveredTile] = useState<Position | null>(null);
   const [heroImages, setHeroImages] = useState<Map<string, HTMLImageElement>>(new Map());
   const [mapOffset, setMapOffset] = useState<Position>({ x: 0, y: 0 });
@@ -50,6 +56,7 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
   // Handle tile clicks for hero selection and movement
   const handleTileClick = useCallback((position: Position) => {
     if (!map || map.length === 0 || !currentGame) return;
+    if (!position || typeof position.x !== 'number' || typeof position.y !== 'number') return;
     
     const tile = map[position.y]?.[position.x];
     if (!tile) return;
@@ -80,93 +87,15 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     return loadHeroImageWithFallback(heroName);
   }, []);
 
-  // Précharger les images des héros visibles
+  // Précharger les images des héros visibles - TEMPORAIREMENT DÉSACTIVÉ POUR DÉBUGGER
   useEffect(() => {
-    const loadHeroImages = async () => {
-      const { currentGame, currentPlayer } = useGameStore.getState();
-      const newHeroImages = new Map<string, HTMLImageElement>();
-      
-      if (currentPlayer?.heroes) {
-        for (const hero of currentPlayer.heroes) {
-          try {
-            const img = await preloadHeroImage(hero.name);
-            newHeroImages.set(hero.name, img);
-          } catch (error) {
-            console.warn(`Failed to load image for hero ${hero.name}:`, error);
-            // Créer une image de fallback simple avec canvas
-            const canvas = document.createElement('canvas');
-            canvas.width = 64;
-            canvas.height = 64;
-            const ctx = canvas.getContext('2d');
-            if (ctx) {
-              // Dessiner un cercle simple avec l'emoji du héros
-              ctx.fillStyle = '#FFD700';
-              ctx.fillRect(0, 0, 64, 64);
-              ctx.font = '32px Arial';
-              ctx.textAlign = 'center';
-              ctx.textBaseline = 'middle';
-              ctx.fillText(getHeroEmoji(hero.name), 32, 32);
-              
-              // Convertir en image
-              const fallbackImg = new Image();
-              fallbackImg.src = canvas.toDataURL();
-              newHeroImages.set(hero.name, fallbackImg);
-            }
-          }
-        }
-      }
-      
-      if (currentGame?.players) {
-        for (const player of currentGame.players) {
-          if (player.heroes) {
-            for (const hero of player.heroes) {
-              if (!newHeroImages.has(hero.name)) {
-                try {
-                  const img = await preloadHeroImage(hero.name);
-                  newHeroImages.set(hero.name, img);
-                } catch (error) {
-                  console.warn(`Failed to load image for hero ${hero.name}:`, error);
-                  // Créer une image de fallback simple avec canvas
-                  const canvas = document.createElement('canvas');
-                  canvas.width = 64;
-                  canvas.height = 64;
-                  const ctx = canvas.getContext('2d');
-                  if (ctx) {
-                    // Dessiner un cercle simple avec l'emoji du héros
-                    ctx.fillStyle = '#FFD700';
-                    ctx.fillRect(0, 0, 64, 64);
-                    ctx.font = '32px Arial';
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    ctx.fillText(getHeroEmoji(hero.name), 32, 32);
-                    
-                    // Convertir en image
-                    const fallbackImg = new Image();
-                    fallbackImg.src = canvas.toDataURL();
-                    newHeroImages.set(hero.name, fallbackImg);
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-      
-      setHeroImages(newHeroImages);
-    };
-    
-    loadHeroImages();
-  }, [preloadHeroImage]);
+    // Désactivé temporairement pour éviter les boucles infinies
+    console.log('🔧 Hero image preloading temporarily disabled for debugging');
+  }, []);
 
-  // Précharger les images de terrain
+  // Précharger les images de terrain - TEMPORAIREMENT DÉSACTIVÉ
   useEffect(() => {
-    const loadTerrainImages = async () => {
-      console.log('🎨 Using colored terrain system for better reliability...');
-      // Skip image loading for now - use color system instead
-      // setTerrainImages(new Map()); // This line is removed
-    };
-    
-    loadTerrainImages();
+    console.log('🔧 Terrain image preloading temporarily disabled for debugging');
   }, []);
 
   // Render configuration
@@ -212,12 +141,18 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
 
   // Conversion coordonnées hexagonales (pointy-top hexagons)
   const hexToPixel = useCallback((hex: Position): Position => {
+    if (!hex || typeof hex.x !== 'number' || typeof hex.y !== 'number') {
+      return { x: 0, y: 0 };
+    }
     const x = config.hexWidth * (hex.x + hex.y * 0.5) + config.offsetX;
     const y = config.hexHeight * hex.y * 0.75 + config.offsetY;
     return { x, y };
   }, [config.hexWidth, config.hexHeight, config.offsetX, config.offsetY]);
 
   const pixelToHex = useCallback((pixel: Position): Position => {
+    if (!pixel || typeof pixel.x !== 'number' || typeof pixel.y !== 'number') {
+      return { x: 0, y: 0 };
+    }
     const adjustedX = (pixel.x - config.offsetX) / config.hexWidth;
     const adjustedY = (pixel.y - config.offsetY) / (config.hexHeight * 0.75);
     
@@ -233,6 +168,9 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     center: Position,
     structure: any
   ) => {
+    if (!center || typeof center.x !== 'number' || typeof center.y !== 'number') return;
+    if (!structure) return;
+    
     const { x, y } = center;
     const size = 22;
 
@@ -324,6 +262,9 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     center: Position,
     creature: any
   ) => {
+    if (!center || typeof center.x !== 'number' || typeof center.y !== 'number') return;
+    if (!creature) return;
+    
     const { x, y } = center;
     const size = 15;
 
@@ -356,6 +297,9 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     center: Position,
     hero: Hero
   ) => {
+    if (!center || typeof center.x !== 'number' || typeof center.y !== 'number') return;
+    if (!hero || !hero.position) return;
+    
     const { x, y } = center;
     const size = 18;
 
@@ -380,24 +324,9 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
 
     // Dessiner l'image du héros si disponible
     const heroImage = heroImages.get(hero.name);
-    const spriteData = getHeroSprite(hero.name);
     
-    if (heroImage && spriteData) {
-      // Utiliser la spritesheet avec découpage
-      ctx.save();
-      ctx.beginPath();
-      ctx.arc(x, y, size - 2, 0, Math.PI * 2);
-      ctx.clip();
-      
-      const { sprite } = spriteData;
-      ctx.drawImage(
-        heroImage,
-        sprite.x, sprite.y, sprite.width, sprite.height,  // Source dans la spritesheet
-        x - size + 2, y - size + 2, (size - 2) * 2, (size - 2) * 2  // Destination sur le canvas
-      );
-      ctx.restore();
-    } else if (heroImage) {
-      // Fallback vers image PNG simple
+    if (heroImage) {
+      // Utiliser directement l'image PNG
       ctx.save();
       ctx.beginPath();
       ctx.arc(x, y, size - 2, 0, Math.PI * 2);
@@ -459,15 +388,20 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     ctx: CanvasRenderingContext2D,
     center: Position,
     tile: Tile,
+    tilePosition: Position,
     isSelected: boolean,
     isHovered: boolean
   ) => {
+    if (!center || typeof center.x !== 'number' || typeof center.y !== 'number') return;
+    if (!tile) return;
+    if (!tilePosition || typeof tilePosition.x !== 'number' || typeof tilePosition.y !== 'number') return;
+    
     const { x, y } = center;
     const radius = config.hexRadius;
     
     // Check if this tile is in movement range
-    const isInMovementRange = movementRange.some(pos => pos.x === tile.x && pos.y === tile.y);
-    const isInProjectionRange = !isInMovementRange && projectionRange.some(pos => pos.x === tile.x && pos.y === tile.y);
+    const isInMovementRange = movementRange.some(pos => pos && pos.x === tilePosition.x && pos.y === tilePosition.y);
+    const isInProjectionRange = !isInMovementRange && projectionRange.some(pos => pos && pos.x === tilePosition.x && pos.y === tilePosition.y);
     
     // Check if this tile has the selected hero
     const hasSelectedHero = selectedHero && tile.hero && tile.hero.id === selectedHero.id;
@@ -654,7 +588,9 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
   // Render ZFC zones
   const drawZFCZones = useCallback((ctx: CanvasRenderingContext2D) => {
     visibleZFCs.forEach(zfc => {
+      if (!zfc || !zfc.reachableTiles) return;
       zfc.reachableTiles.forEach(tile => {
+        if (!tile || typeof tile.x !== 'number' || typeof tile.y !== 'number') return;
         const center = hexToPixel(tile);
         
         // Draw zone
@@ -690,7 +626,12 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
   const drawParticles = useCallback((ctx: CanvasRenderingContext2D) => {
     const currentTime = Date.now();
     
-    animatedElements.forEach(element => {
+    // Utiliser une référence pour éviter les re-rendus
+    const currentElements = animatedElementsRef.current;
+    
+    currentElements.forEach(element => {
+      if (!element || !element.position) return;
+      
       const progress = Math.min(1, (currentTime - element.startTime) / element.duration);
       
       if (element.type === 'particle') {
@@ -708,83 +649,14 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     });
 
     // Nettoyer les éléments expirés
-    setAnimatedElements(prev => 
-      prev.filter(el => (currentTime - el.startTime) < el.duration)
-    );
-  }, [animatedElements, hexToPixel]);
-
-  // Main render loop
-  const render = useCallback(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    // Clear canvas
-    ctx.clearRect(0, 0, width, height);
-
-    // Draw gradient background
-    const gradient = ctx.createLinearGradient(0, 0, width, height);
-    gradient.addColorStop(0, '#1a1a2e');
-    gradient.addColorStop(1, '#16213e');
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, width, height);
-
-    if (!map || map.length === 0) {
-      // Loading message
-      ctx.fillStyle = '#FFD700';
-      ctx.font = '24px Arial';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(t('loadingMap'), width / 2, height / 2);
-      return;
+    const filteredElements = currentElements.filter(el => (currentTime - el.startTime) < el.duration);
+    if (filteredElements.length !== currentElements.length) {
+      animatedElementsRef.current = filteredElements;
+      setAnimatedElements(filteredElements);
     }
+  }, [hexToPixel]);
 
-    // Draw ZFC zones in background
-    drawZFCZones(ctx);
 
-    // Draw tiles
-    map.forEach((row, y) => {
-      row.forEach((tile, x) => {
-        const center = hexToPixel({ x, y });
-        
-        const isSelected = selectedTile?.x === x && selectedTile?.y === y;
-        const isHovered = hoveredTile?.x === x && hoveredTile?.y === y;
-        
-        drawHexTile(ctx, center, tile, isSelected, isHovered);
-      });
-    });
-
-    // Draw heroes - CORRECTED: Use currentPlayer and currentGame properly
-    const { currentGame, currentPlayer } = useGameStore.getState();
-    
-    // Draw current player heroes
-    if (currentPlayer && currentPlayer.heroes && currentPlayer.heroes.length > 0) {
-      currentPlayer.heroes.forEach(hero => {
-        const center = hexToPixel(hero.position);
-        drawHero(ctx, center, hero);
-      });
-    }
-
-    // Draw other players' heroes if available
-    if (currentGame && currentGame.players) {
-      currentGame.players.forEach(player => {
-        if (player.id !== currentPlayer?.id && player.heroes) {
-          player.heroes.forEach(hero => {
-            const center = hexToPixel(hero.position);
-            drawHero(ctx, center, hero);
-          });
-        }
-      });
-    }
-
-    // Draw particle effects
-    drawParticles(ctx);
-
-    // Schedule next render
-    animationRef.current = requestAnimationFrame(render);
-  }, [map, selectedTile, hoveredTile, width, height, drawZFCZones, drawHexTile, drawParticles, hexToPixel, drawHero, t]);
 
   // Gestion des événements de souris
   const handleMouseMove = useCallback((event: React.MouseEvent) => {
@@ -833,14 +705,102 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
 
   // Initialiser le rendu
   useEffect(() => {
-    render();
+    const renderLoop = () => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      // Clear canvas
+      ctx.clearRect(0, 0, width, height);
+
+      // Draw gradient background
+      const gradient = ctx.createLinearGradient(0, 0, width, height);
+      gradient.addColorStop(0, '#1a1a2e');
+      gradient.addColorStop(1, '#16213e');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, width, height);
+
+      if (!map || map.length === 0) {
+        // Loading message
+        ctx.fillStyle = '#FFD700';
+        ctx.font = '24px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(t('loadingMap'), width / 2, height / 2);
+        animationRef.current = requestAnimationFrame(renderLoop);
+        return;
+      }
+
+      // Draw ZFC zones in background
+      if (typeof drawZFCZones === 'function') {
+        drawZFCZones(ctx);
+      }
+
+      // Draw tiles
+      map.forEach((row, y) => {
+        row.forEach((tile, x) => {
+          const center = hexToPixel({ x, y });
+          const tilePosition = { x, y };
+          
+          const isSelected = selectedTile?.x === x && selectedTile?.y === y;
+          const isHovered = hoveredTile?.x === x && hoveredTile?.y === y;
+          
+          if (typeof drawHexTile === 'function') {
+            drawHexTile(ctx, center, tile, tilePosition, isSelected, isHovered);
+          }
+        });
+      });
+
+      // Draw heroes - CORRECTED: Use currentPlayer and currentGame properly
+      const { currentGame, currentPlayer } = useGameStore.getState();
+      
+      // Draw current player heroes
+      if (currentPlayer && currentPlayer.heroes && currentPlayer.heroes.length > 0) {
+        currentPlayer.heroes.forEach(hero => {
+          if (hero && hero.position) {
+            const center = hexToPixel(hero.position);
+            if (typeof drawHero === 'function') {
+              drawHero(ctx, center, hero);
+            }
+          }
+        });
+      }
+
+      // Draw other players' heroes if available
+      if (currentGame && currentGame.players) {
+        currentGame.players.forEach(player => {
+          if (player.id !== currentPlayer?.id && player.heroes) {
+            player.heroes.forEach(hero => {
+              if (hero && hero.position) {
+                const center = hexToPixel(hero.position);
+                if (typeof drawHero === 'function') {
+                  drawHero(ctx, center, hero);
+                }
+              }
+            });
+          }
+        });
+      }
+
+      // Draw particle effects
+      if (typeof drawParticles === 'function') {
+        drawParticles(ctx);
+      }
+
+      // Schedule next render
+      animationRef.current = requestAnimationFrame(renderLoop);
+    };
+
+    renderLoop();
     
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [render]);
+  }, [map, selectedTile, hoveredTile, width, height, drawZFCZones, drawHexTile, drawParticles, hexToPixel, drawHero, t]);
 
   // Exposer la fonction centerOnPosition
   useImperativeHandle(ref, () => ({

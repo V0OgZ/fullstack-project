@@ -35,7 +35,7 @@ const BackendTester: React.FC<BackendTesterProps> = () => {
       // Test 4: Test ZFC movement
       results.push('🔍 Test 4: Testing ZFC movement...');
       const hero = game.players[0].heroes[0];
-      const moveAction = await ApiService.moveHero(hero.id, { x: 5, y: 5 });
+      const moveAction = await ApiService.moveHero(newGame.id, hero.id, { x: 5, y: 5 });
       results.push(`✅ ZFC Movement: Cost ${moveAction.zfcCost.toFixed(2)}s`);
       
       // Test 5: Test resource collection
