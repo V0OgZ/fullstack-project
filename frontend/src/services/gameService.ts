@@ -177,7 +177,7 @@ export class GameService {
     return this.initializeGame(gameId);
   }
 
-  static async endTurn(gameId: string): Promise<void> {
-    return ApiService.endTurn(gameId);
+  static async endTurn(gameId: string, playerId: string = 'player-1', nextPlayerId: string = 'player-2'): Promise<void> {
+    return ApiService.endTurn(gameId, playerId, nextPlayerId);
   }
 } 
