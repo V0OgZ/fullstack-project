@@ -826,19 +826,26 @@ export const useGameStore = create<GameStore>((set, get) => ({
   },
 
   endTurn: async () => {
-    const { currentGame, setLoading, setError, refreshGameState } = get();
-    if (!currentGame) return;
+    const { currentGame, currentPlayer, setLoading, setError, refreshGameState } = get();
+    if (!currentGame || !currentPlayer) return;
 
-    setLoading(true);
-    setError(null);
+    // Check game mode and handle accordingly
+    if (currentGame.gameMode === 'hotseat') {
+      // Mode hotseat - gestion locale frontend
+      get().nextPlayer();
+    } else {
+      // Mode multiplayer - appel API backend
+      setLoading(true);
+      setError(null);
 
-    try {
-      await GameService.endTurn(currentGame.id);
-      await refreshGameState();
-    } catch (error) {
-      setError(error instanceof Error ? error.message : 'Failed to end turn');
-    } finally {
-      setLoading(false);
+      try {
+        await GameService.endTurn(currentGame.id, currentPlayer.id);
+        await refreshGameState();
+      } catch (error) {
+        setError(error instanceof Error ? error.message : 'Failed to end turn');
+      } finally {
+        setLoading(false);
+      }
     }
   },
 
@@ -854,7 +861,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   },
 
   nextPlayer: () => {
-    const { currentGame, currentPlayer, switchPlayer } = get();
+    const { currentGame, currentPlayer, switchPlayer, setCurrentGame } = get();
     if (!currentGame || !currentPlayer) return;
 
     const currentIndex = currentGame.players.findIndex(p => p.id === currentPlayer.id);
@@ -863,6 +870,16 @@ export const useGameStore = create<GameStore>((set, get) => ({
     
     if (nextPlayer) {
       switchPlayer(nextPlayer.id);
+      
+      // Incrémenter le tour si on revient au premier joueur
+      if (nextIndex === 0) {
+        const updatedGame = {
+          ...currentGame,
+          currentTurn: currentGame.currentTurn + 1
+        };
+        setCurrentGame(updatedGame);
+        console.log('✅ Turn incremented to:', updatedGame.currentTurn);
+      }
     }
   }
 })); 

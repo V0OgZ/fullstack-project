@@ -94,12 +94,11 @@ export class ApiService {
     return this.makeRequest(`/games/${gameId}/current-player`);
   }
 
-  static async endTurn(gameId: string, playerId: string = 'player-1', nextPlayerId: string = 'player-2'): Promise<any> {
+  static async endTurn(gameId: string, playerId: string = 'player1'): Promise<any> {
     return this.makeRequest(`/games/${gameId}/end-turn`, {
       method: 'POST',
       body: JSON.stringify({
-        playerId: playerId,
-        nextPlayerId: nextPlayerId
+        playerId: playerId
       })
     });
   }
