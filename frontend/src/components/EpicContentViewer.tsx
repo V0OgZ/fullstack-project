@@ -164,21 +164,20 @@ const EpicContentViewer: React.FC<EpicContentViewerProps> = ({ isVisible, onClos
                         {creature.name} (Tier {creature.tier})
                       </h4>
                       <p style={{ color: '#ffcc00', fontSize: '14px', margin: '5px 0' }}>
-                        Race: {creature.race} | Taille: {creature.spriteSize}
+                        Race: {creature.race} | Tier: {creature.tier}
                       </p>
                       <p style={{ color: '#ffffff', fontSize: '12px', margin: '5px 0' }}>
                         ⚔️ ATK: {creature.attack} | 🛡️ DEF: {creature.defense} | 
-                        ❤️ HP: {creature.health} | ⚡ SPD: {creature.speed}
+                        💓 HP: {creature.health} | ⚡ Speed: {creature.speed}
                       </p>
                       <p style={{ color: '#ff6b6b', fontSize: '12px', margin: '5px 0' }}>
-                        💥 Dégâts: {creature.damage[0]}-{creature.damage[1]} | 
-                        💰 Coût: {creature.cost}
+                        💥 Dégâts: {creature.damage[0]}-{creature.damage[1]}
                       </p>
                       <p style={{ color: '#4ecdc4', fontSize: '12px', margin: '5px 0' }}>
                         ✨ Spécial: {creature.special}
                       </p>
                       <p style={{ color: '#cccccc', fontSize: '11px', fontStyle: 'italic' }}>
-                        {creature.description}
+                        Créature épique de tier {creature.tier}
                       </p>
                       {/* Image SVG */}
                       <div style={{ textAlign: 'center', marginTop: '10px' }}>
@@ -216,7 +215,7 @@ const EpicContentViewer: React.FC<EpicContentViewerProps> = ({ isVisible, onClos
                         {hero.name} (Niveau {hero.level})
                       </h4>
                       <p style={{ color: '#ffcc00', fontSize: '14px', margin: '5px 0' }}>
-                        {hero.race} {hero.class} | {hero.personality}
+                        {hero.race} {hero.class} | Niveau {hero.level}
                       </p>
                       <div style={{ display: 'flex', gap: '10px', fontSize: '12px', margin: '5px 0' }}>
                         <span style={{ color: '#ff6b6b' }}>⚔️ {hero.stats.attack}</span>
