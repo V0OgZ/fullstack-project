@@ -25,32 +25,37 @@ export default defineConfig({
       name: 'solo-fullscreen',
       use: { 
         ...devices['Desktop Chrome'],
-        viewport: { width: 1920, height: 1080 },
+        viewport: { width: 1280, height: 700 },
         launchOptions: {
           slowMo: 100,
           args: [
             '--no-default-browser-check',
-            '--start-maximized',
-            '--disable-web-security'
+            '--disable-web-security',
+            '--window-position=0,0', // Position 0,0 comme demandé
+            '--window-size=1280,700',
+            '--force-device-scale-factor=1'
           ],
         },
       },
-      testMatch: ['**/*01-single-demo.spec.ts', '**/*terrain-vision*.spec.ts'],
+      testMatch: ['**/01-single-demo.spec.ts'],
     },
     {
       name: 'multiplayer',
       use: { 
         ...devices['Desktop Chrome'],
-        viewport: { width: 640, height: 800 },
+        viewport: { width: 640, height: 700 },
         launchOptions: {
           slowMo: 50,
           args: [
             '--no-default-browser-check',
-            '--disable-web-security'
+            '--disable-web-security',
+            '--window-position=640,0', // Position 640,0 (écran divisé par 2)
+            '--window-size=640,700',
+            '--force-device-scale-factor=1'
           ],
         },
       },
-      testMatch: ['**/*multiplayer*.spec.ts', '**/*02-multiplayer-demo.spec.ts'],
+      testMatch: ['**/multiplayer-demo.spec.ts', '**/02-multiplayer-demo.spec.ts', '**/multiplayer-ui.spec.ts'],
     },
     {
       name: 'demo',
@@ -61,11 +66,14 @@ export default defineConfig({
           slowMo: 50,
           args: [
             '--no-default-browser-check',
-            '--start-maximized'
+            '--disable-web-security',
+            '--window-position=0,0', // Position 0,0
+            '--window-size=1280,800',
+            '--force-device-scale-factor=1'
           ],
         },
       },
-      testMatch: ['**/*demo*.spec.ts', '**/*debug*.spec.ts'],
+      testMatch: ['**/debug*.spec.ts', '**/terrain-vision*.spec.ts'],
     },
   ],
 }); 

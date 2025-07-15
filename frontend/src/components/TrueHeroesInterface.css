@@ -218,6 +218,69 @@
   font-size: 24px;
 }
 
+/* Enhanced Tooltips with Animation */
+.control-btn[title]::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: #FFD700;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: 'Cinzel', serif;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  white-space: nowrap;
+  z-index: 1000;
+  pointer-events: none;
+  
+  /* Animation douce */
+  opacity: 0;
+  transform: translateX(-50%) translateY(5px);
+  transition: all 0.3s ease-out;
+}
+
+.control-btn[title]:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.end-turn-btn[title]::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: #FFD700;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: 'Cinzel', serif;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  white-space: nowrap;
+  z-index: 1000;
+  pointer-events: none;
+  
+  /* Animation douce */
+  opacity: 0;
+  transform: translateX(-50%) translateY(5px);
+  transition: all 0.3s ease-out;
+}
+
+.end-turn-btn[title]:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 /* Main Game Area */
 .game-main {
   display: flex;

@@ -3,34 +3,9 @@ import { test, expect } from '@playwright/test';
 // Fonction pour créer des tooltips dynamiques basés sur l'état réel
 const createDynamicTooltip = async (page: any, message: string, position: 'top' | 'center' | 'bottom' = 'center') => {
   await page.evaluate(({ message, position }) => {
-    // Trouver ou créer le conteneur de tooltip
-    let tooltipContainer = document.querySelector('.demo-tooltip-container');
-    if (!tooltipContainer) {
-      tooltipContainer = document.createElement('div');
-      tooltipContainer.className = 'demo-tooltip-container';
-      document.body.appendChild(tooltipContainer);
-    }
-    
-    // Détecter le contexte actuel pour le titre dynamique
-    let contextTitle = 'Heroes of Time';
-    
-    // Si on est dans le jeu, récupérer le nom de la map
-    const mapName = document.querySelector('.map-name');
-    if (mapName) {
-      contextTitle = mapName.textContent || 'Heroes of Time';
-    }
-    
-    // Si on est dans un menu de héros, récupérer le nom du héros sélectionné
-    const selectedHero = document.querySelector('.hero-name.selected, .selected-hero .hero-name');
-    if (selectedHero) {
-      contextTitle = `Heroes of Time - ${selectedHero.textContent}`;
-    }
-    
-    // Si on est dans la sélection de scénario
-    const scenarioSelector = document.querySelector('.scenarios-grid');
-    if (scenarioSelector) {
-      contextTitle = 'Heroes of Time - Sélection de Mission';
-    }
+    // Supprimer les anciens tooltips
+    const existingTooltips = document.querySelectorAll('.demo-tooltip');
+    existingTooltips.forEach(tooltip => tooltip.remove());
     
     // Créer le nouveau tooltip
     const tooltip = document.createElement('div');
@@ -42,54 +17,47 @@ const createDynamicTooltip = async (page: any, message: string, position: 'top' 
         bottom: ${position === 'bottom' ? '20px' : 'auto'};
         left: 50%;
         transform: translateX(-50%) ${position === 'center' ? 'translateY(-50%)' : ''};
-        background: rgba(26,26,46,0.92);
+        background: linear-gradient(135deg, rgba(26,26,46,0.95) 0%, rgba(22,33,62,0.95) 50%, rgba(15,52,96,0.95) 100%);
         color: #ffd700;
-        padding: 18px 25px;
-        border-radius: 8px;
-        border: 1px solid rgba(255,215,0,0.6);
+        padding: 20px 30px;
+        border-radius: 12px;
+        border: 2px solid rgba(255,215,0,0.8);
         font-family: 'Georgia', serif;
-        font-size: 15px;
-        font-weight: normal;
+        font-size: 16px;
+        font-weight: bold;
         text-align: center;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,215,0,0.2);
         z-index: 10000;
-        min-width: 280px;
-        max-width: 450px;
-        backdrop-filter: blur(3px);
-        opacity: 0;
-        transition: opacity 0.8s ease-in-out;
+        min-width: 320px;
+        max-width: 500px;
+        backdrop-filter: blur(5px);
+        opacity: 1;
+        animation: slideIn 0.3s ease-out;
       ">
         <div style="
-          margin: -22px -30px 12px -30px;
-          padding: 8px;
-          border-radius: 8px 8px 0 0;
-          font-size: 13px;
+          background: linear-gradient(45deg, transparent 30%, rgba(255,215,0,0.1) 50%, transparent 70%);
+          margin: -25px -35px 15px -35px;
+          padding: 12px;
+          border-radius: 12px 12px 0 0;
+          font-size: 14px;
           color: #ffed4e;
-          background: rgba(255,215,0,0.1);
-          border-bottom: 1px solid rgba(255,215,0,0.2);
-        ">${contextTitle}</div>
+          letter-spacing: 1px;
+        ">⚡ DÉMO DYNAMIQUE HEROES OF TIME ⚡</div>
         ${message}
       </div>
     `;
     
-    // Fade out les anciens tooltips avant d'ajouter le nouveau
-    const existingTooltips = tooltipContainer.querySelectorAll('.demo-tooltip');
-    existingTooltips.forEach(oldTooltip => {
-      (oldTooltip as HTMLElement).style.opacity = '0';
-      setTimeout(() => {
-        if (oldTooltip.parentNode) {
-          oldTooltip.parentNode.removeChild(oldTooltip);
-        }
-      }, 300);
-    });
+    // Animation CSS
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideIn {
+        from { opacity: 0; transform: translateX(-50%) translateY(-20px) scale(0.9); }
+        to { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+      }
+    `;
+    document.head.appendChild(style);
     
-    tooltipContainer.appendChild(tooltip);
-    
-    // Fade in avec délai pour éviter les conflits
-    setTimeout(() => {
-      (tooltip as HTMLElement).style.opacity = '1';
-    }, 100);
-    
+    document.body.appendChild(tooltip);
   }, { message, position });
 };
 
@@ -127,10 +95,6 @@ const performActionWithTooltip = async (page: any, action: () => Promise<void>, 
 test.describe('🎮 Heroes of Time - Demo Dynamique', () => {
   test('Demo avec tooltips dynamiques basés sur l\'état réel', async ({ page }) => {
     test.setTimeout(120000);
-    
-    // Configuration plein écran pour single player
-    await page.setViewportSize({ width: 1920, height: 1080 });
-    
     console.log('🎬 === DÉBUT DE LA DÉMO DYNAMIQUE ===');
 
     // 1. Navigation avec tooltip dynamique
