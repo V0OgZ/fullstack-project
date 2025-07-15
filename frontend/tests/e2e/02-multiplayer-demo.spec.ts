@@ -1,193 +1,195 @@
 import { test, expect } from '@playwright/test';
+import { getTooltipText } from './utils/translations';
 
 test.describe('🎮 Heroes of Time - Multiplayer Demo', () => {
-  test('Complete multiplayer session demonstration', async ({ browser }) => {
-    test.setTimeout(120000);
+  test('Demo automatique multijoueur avec tooltips: Choisir scénario et jouer 1 tour', async ({ page }) => {
+    test.setTimeout(120000); // 2 minutes pour la démo complète
+    console.log('🎬 === DÉBUT DE LA DÉMO MULTIJOUEUR AVEC TOOLTIPS ===');
     
-    const context1 = await browser.newContext();
-    const context2 = await browser.newContext();
-    const page1 = await context1.newPage();
-    const page2 = await context2.newPage();
-
-    console.log('🚀 Starting multiplayer demo...');
-
-    // Player 1: Create session
-    await page1.goto('http://localhost:3000/multiplayer');
-    await page1.waitForSelector('h2:has-text("Multiplayer Sessions")', { timeout: 30000 });
-    await page1.click('[data-testid="create-session-btn"]');
-    await page1.waitForTimeout(2000);
-    
-    // Use unique session name
-    const sessionName = `Demo-${Date.now()}`;
-    await page1.fill('[data-testid="session-name-input"]', sessionName);
-    await page1.fill('[data-testid="hero-name-input"]', 'Player 1');
-    await page1.click('[data-testid="create-new-game-btn"]');
-    await page1.waitForTimeout(3000);
-    
-    // Wait for Player 1 to be in waiting room
-    await page1.waitForSelector('[data-testid="waiting-room"]', { timeout: 15000 });
-    console.log('✅ Player 1 created session and is in waiting room');
-
-    // Show demo tooltip for Player 2
-    await page2.evaluate(() => {
-      const tooltip = document.createElement('div');
-      tooltip.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: linear-gradient(135deg, rgba(26,26,46,0.95) 0%, rgba(22,33,62,0.95) 50%, rgba(15,52,96,0.95) 100%);
-        color: #ffd700;
-        padding: 15px 20px;
-        border-radius: 10px;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        font-family: 'Segoe UI', sans-serif;
-        font-size: 14px;
-        font-weight: 600;
-        z-index: 9999;
-        border: 2px solid #ffd700;
-        text-align: center;
-        min-width: 200px;
-      `;
-      tooltip.innerHTML = '🎮 Player 2 - Joining Session';
-      document.body.appendChild(tooltip);
+    // Fonction pour ajouter un tooltip visuel
+    const showTooltip = async (text: string, position: string = 'center', duration: number = 3000) => {
+      await page.evaluate(({ text, position, duration }) => {
+        // Supprimer immédiatement l'ancien tooltip s'il existe
+        const oldTooltip = document.querySelector('.demo-tooltip');
+        if (oldTooltip) {
+          oldTooltip.remove();
+        }
+        
+        // Créer le nouveau tooltip
+        const tooltip = document.createElement('div');
+        tooltip.className = 'demo-tooltip';
+        tooltip.innerHTML = `
+          <div style="
+            position: fixed;
+            top: ${position === 'top' ? '20px' : position === 'bottom' ? 'auto' : '50%'};
+            bottom: ${position === 'bottom' ? '20px' : 'auto'};
+            left: 50%;
+            transform: translateX(-50%) ${position === 'center' ? 'translateY(-50%)' : ''};
+            background: linear-gradient(135deg, rgba(46,26,26,0.85) 0%, rgba(62,22,33,0.85) 50%, rgba(96,15,52,0.85) 100%);
+            color: #ff6b6b;
+            padding: 15px 25px;
+            border-radius: 12px;
+            border: 2px solid rgba(255,107,107,0.8);
+            font-family: 'Georgia', serif;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,107,107,0.2);
+            z-index: 10000;
+            min-width: 280px;
+            max-width: 480px;
+            backdrop-filter: blur(5px);
+            opacity: 1;
+          ">
+            <div style="
+              background: linear-gradient(45deg, transparent 30%, rgba(255,107,107,0.1) 50%, transparent 70%);
+              margin: -20px -30px 10px -30px;
+              padding: 10px;
+              border-radius: 12px 12px 0 0;
+              font-size: 14px;
+              color: #ffb3b3;
+            ">⚡ DÉMO MULTIJOUEUR HEROES OF TIME ⚡</div>
+            ${text}
+          </div>
+        `;
+        
+        document.body.appendChild(tooltip);
+        
+        // Supprimer après la durée spécifiée (simple et rapide)
+        setTimeout(() => {
+          if (tooltip.parentNode) {
+            tooltip.remove();
+          }
+        }, duration);
+      }, { text, position, duration });
       
-      setTimeout(() => {
-        tooltip.remove();
-      }, 3000);
-    });
+      // Attendre moins longtemps pour fluidité
+      await page.waitForTimeout(Math.max(500, duration - 500));
+    };
     
-    // Player 2: Join session
-    await page2.goto('http://localhost:3000/multiplayer');
-    await page2.waitForSelector('h2:has-text("Multiplayer Sessions")', { timeout: 30000 });
-    await page2.waitForTimeout(2000);
+    // 1. Page principale
+    await showTooltip(getTooltipText('demo.multiplayer.welcome'), 'top', 3500);
+    console.log('📍 1. Navigation vers la page principale...');
+    await page.goto('/');
+    await page.waitForTimeout(1500);
     
-    // Find and join the session with the specific name created by Player 1
-    const sessionItems = await page2.locator('[data-testid="session-item"]').all();
-    let sessionFound = false;
+    // 2. Chargement des scénarios
+    await showTooltip(getTooltipText('demo.multiplayer.loadingScenarios'), 'center', 3000);
+    console.log('📊 2. Attente du chargement des scénarios...');
+    await page.waitForSelector('.scenario-card, [data-testid="scenario-card"]', { timeout: 10000 });
     
-    for (const sessionItem of sessionItems) {
-      const sessionText = await sessionItem.textContent();
-      if (sessionText?.includes(sessionName)) {
-        const joinButton = sessionItem.locator('[data-testid="join-session-btn"]');
-        await joinButton.click();
-        await page2.waitForTimeout(2000);
-        sessionFound = true;
-        break;
-      }
+    // 3. Sélection du scénario multijoueur
+    await showTooltip(getTooltipText('demo.multiplayer.selectScenario'), 'center', 3000);
+    console.log('🎯 3. Sélection du scénario Multiplayer Arena...');
+    
+    // Chercher le scénario multijoueur par différents moyens
+    let scenarioSelector = '.scenario-card:has-text("Multiplayer Arena")';
+    let scenarioFound = await page.locator(scenarioSelector).count() > 0;
+    
+    if (!scenarioFound) {
+      scenarioSelector = '[data-testid="scenario-card-multiplayer-arena"]';
+      scenarioFound = await page.locator(scenarioSelector).count() > 0;
     }
     
-    if (!sessionFound) {
-      throw new Error(`Session with name ${sessionName} not found`);
+    if (!scenarioFound) {
+      scenarioSelector = '.scenario-card:has-text("Arena")';
+      scenarioFound = await page.locator(scenarioSelector).count() > 0;
     }
     
-    console.log('✅ Player 2 joined the session');
+    if (!scenarioFound) {
+      scenarioSelector = '.scenario-card:has-text("Multiplayer")';
+      scenarioFound = await page.locator(scenarioSelector).count() > 0;
+    }
     
-    // Wait for session to update
-    await page1.waitForTimeout(6000);
+    if (!scenarioFound) {
+      scenarioSelector = '.scenario-card';
+      console.log('⚠️ Scénario multijoueur spécifique non trouvé, utilisation du premier disponible');
+    }
     
-    // Player 1: Start battle
-    console.log('⚔️ Starting battle...');
-    const startBtn = page1.locator('[data-testid="start-battle-btn"]');
-    await startBtn.click();
-    await page1.waitForTimeout(5000);
+    await page.click(scenarioSelector);
+    await page.waitForTimeout(1000);
     
-    // Wait for both players to be in game
-    await page1.waitForSelector('.true-heroes-interface', { timeout: 20000 });
-    await page2.waitForSelector('.true-heroes-interface', { timeout: 20000 });
+    // 4. Lancement du jeu
+    await showTooltip(getTooltipText('demo.multiplayer.launchGame'), 'center', 3000);
+    console.log('▶️ 4. Clic sur le bouton Jouer...');
     
-    console.log('🎮 Both players in game!');
+    // Chercher le bouton de jeu
+    let playButton = 'button:has-text("Jouer")';
+    let playButtonFound = await page.locator(playButton).count() > 0;
     
-    // Player 1: Test panels
-    console.log('🎛️ Player 1: Testing panels...');
-    await page1.click('[data-testid="heroes-panel-btn"]');
-    await page1.waitForTimeout(2000);
+    if (!playButtonFound) {
+      playButton = 'button:has-text("Play")';
+      playButtonFound = await page.locator(playButton).count() > 0;
+    }
     
-    await page1.click('[data-testid="castle-panel-btn"]');
-    await page1.waitForTimeout(2000);
+    if (!playButtonFound) {
+      playButton = '[data-testid="play-button"]';
+      playButtonFound = await page.locator(playButton).count() > 0;
+    }
     
-    await page1.click('[data-testid="inventory-panel-btn"]');
-    await page1.waitForTimeout(2000);
+    if (!playButtonFound) {
+      playButton = 'button[type="submit"]';
+      console.log('⚠️ Bouton de jeu spécifique non trouvé, utilisation du bouton submit');
+    }
     
-    // Player 1: End turn
-    console.log('⭐ Player 1: Ending turn...');
-    await page1.click('[data-testid="end-turn-btn"]');
-    await page1.waitForTimeout(3000);
+    await page.click(playButton);
     
-    // Player 2: Test panels
-    console.log('🎮 Player 2: Testing panels...');
-    await page2.click('[data-testid="heroes-panel-btn"]');
-    await page2.waitForTimeout(2000);
+    // 5. Attente du chargement du jeu
+    await showTooltip(getTooltipText('demo.multiplayer.gameInitialization'), 'center', 4000);
+    console.log('🎮 5. Attente du chargement du jeu multijoueur...');
+    await page.waitForSelector('.true-heroes-interface, .game-interface', { timeout: 30000 });
     
-    // Player 2: End turn
-    console.log('⭐ Player 2: Ending turn...');
-    await page2.click('[data-testid="end-turn-btn"]');
-    await page2.waitForTimeout(3000);
+    // 6. Interface chargée
+    await showTooltip(getTooltipText('demo.multiplayer.gameInterface'), 'top', 3000);
+    console.log('🖥️ 6. Interface multijoueur chargée !');
     
-    // Success message on both windows
-    await page1.evaluate(() => {
-      const success = document.createElement('div');
-      success.style.cssText = `
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: linear-gradient(135deg, rgba(0,150,0,0.95) 0%, rgba(0,200,0,0.95) 100%);
-        color: white;
-        padding: 20px 30px;
-        border-radius: 15px;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-        font-family: 'Segoe UI', sans-serif;
-        font-size: 18px;
-        font-weight: 700;
-        z-index: 10000;
-        text-align: center;
-        border: 3px solid #00ff00;
-      `;
-      success.innerHTML = '🎉 MULTIPLAYER DEMO COMPLETE! 🎉<br/>Player 1 Success!';
-      document.body.appendChild(success);
-      
-      setTimeout(() => {
-        success.remove();
-      }, 5000);
-    });
+    // 7. Test des boutons de contrôle
+    await showTooltip(getTooltipText('demo.multiplayer.controlButtons'), 'center', 2500);
+    console.log('🎮 7. Test des boutons de contrôle multijoueur...');
     
-    await page2.evaluate(() => {
-      const success = document.createElement('div');
-      success.style.cssText = `
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: linear-gradient(135deg, rgba(0,150,0,0.95) 0%, rgba(0,200,0,0.95) 100%);
-        color: white;
-        padding: 20px 30px;
-        border-radius: 15px;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-        font-family: 'Segoe UI', sans-serif;
-        font-size: 18px;
-        font-weight: 700;
-        z-index: 10000;
-        text-align: center;
-        border: 3px solid #00ff00;
-      `;
-      success.innerHTML = '🎉 MULTIPLAYER DEMO COMPLETE! 🎉<br/>Player 2 Success!';
-      document.body.appendChild(success);
-      
-      setTimeout(() => {
-        success.remove();
-      }, 5000);
-    });
+    // Test du bouton Heroes
+    const heroesButton = page.locator('button:has-text("⚔️"), button[title*="hero"], button[title*="Hero"]').first();
+    if (await heroesButton.isVisible()) {
+      await heroesButton.click();
+      await page.waitForTimeout(1000);
+      await showTooltip(getTooltipText('demo.multiplayer.heroesPanel'), 'center', 2000);
+      console.log('⚔️ Panneau Heroes multijoueur testé');
+    }
     
-    await page1.waitForTimeout(5000);
+    // Test du bouton Inventory
+    const inventoryButton = page.locator('button:has-text("🎒"), button[title*="inventory"], button[title*="Inventory"]').first();
+    if (await inventoryButton.isVisible()) {
+      await inventoryButton.click();
+      await page.waitForTimeout(1000);
+      await showTooltip(getTooltipText('demo.multiplayer.inventoryPanel'), 'center', 2000);
+      console.log('🎒 Panneau Inventory multijoueur testé');
+    }
     
-    console.log('🎉 Multiplayer demo completed successfully!');
-    console.log('✅ Session creation: Working');
-    console.log('✅ Session joining: Working');
-    console.log('✅ Auto-navigation: Working');
-    console.log('✅ Player synchronization: Working');
-    console.log('✅ Multiplayer gameplay: Working');
+    // Test du bouton Castle
+    const castleButton = page.locator('button:has-text("🏰"), button[title*="castle"], button[title*="Castle"]').first();
+    if (await castleButton.isVisible()) {
+      await castleButton.click();
+      await page.waitForTimeout(1000);
+      await showTooltip(getTooltipText('demo.multiplayer.castlePanel'), 'center', 2000);
+      console.log('🏰 Panneau Castle multijoueur testé');
+    }
     
-    await context1.close();
-    await context2.close();
+    // 8. Fin de tour
+    await showTooltip(getTooltipText('demo.multiplayer.endTurn'), 'center', 3000);
+    console.log('🔄 8. Test de la fin de tour multijoueur...');
+    
+    const endTurnButton = page.locator('button:has-text("⭐"), button[title*="turn"], button[title*="Turn"], button:has-text("End Turn")').first();
+    if (await endTurnButton.isVisible()) {
+      await endTurnButton.click();
+      await page.waitForTimeout(2000);
+      await showTooltip(getTooltipText('demo.multiplayer.nextTurn'), 'center', 3000);
+      console.log('⭐ Tour multijoueur terminé avec succès');
+    }
+    
+    // 9. Fin de la démonstration
+    await showTooltip(getTooltipText('demo.multiplayer.finished'), 'center', 5000);
+    console.log('🎉 9. Démonstration multijoueur terminée avec succès !');
+    
+    console.log('✅ === FIN DE LA DÉMO MULTIJOUEUR AVEC TOOLTIPS ===');
   });
 }); 

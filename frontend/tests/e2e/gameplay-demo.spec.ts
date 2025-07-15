@@ -1,391 +1,191 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('🎮 Heroes of Time - Enhanced Solo Gameplay Demo', () => {
-  test('Complete gameplay demonstration with new features', async ({ page }) => {
-    test.setTimeout(90000); // 1.5 minutes
+// Fonction pour créer des tooltips dynamiques basés sur l'état réel
+const createDynamicTooltip = async (page: any, message: string, position: 'top' | 'center' | 'bottom' = 'center') => {
+  await page.evaluate(({ message, position }) => {
+    // Supprimer les anciens tooltips
+    const existingTooltips = document.querySelectorAll('.demo-tooltip');
+    existingTooltips.forEach(tooltip => tooltip.remove());
     
-    console.log('🚀 Starting enhanced gameplay demo...');
+    // Détecter le contexte actuel pour le titre dynamique
+    let contextTitle = 'Heroes of Time';
     
-    // Navigate to home page
-    await page.goto('http://localhost:3000');
-    
-    // Wait for scenarios to load
-    console.log('⏳ Waiting for scenarios to load...');
-    await page.waitForSelector('.scenario-card', { timeout: 10000 });
-    
-    // Select conquest-classic scenario
-    console.log('🎮 Selecting Classic Conquest scenario...');
-    await page.click('[data-testid="scenario-card-conquest-classic"]');
-    await page.waitForTimeout(1000);
-    
-    // Click play button
-    console.log('▶️ Clicking play button...');
-    await page.click('[data-testid="play-button-conquest-classic"]');
-    await page.waitForTimeout(5000);
-    
-    // Wait for game to load
-    console.log('⏳ Waiting for game interface to load...');
-    await page.waitForSelector('.true-heroes-interface', { timeout: 30000 });
-    
-    console.log('🎮 Game loaded successfully!');
-    
-    // Show demo tooltip
-    await page.evaluate(() => {
-      const tooltip = document.createElement('div');
-      tooltip.id = 'demo-tooltip';
-      tooltip.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: linear-gradient(135deg, rgba(26,26,46,0.95) 0%, rgba(22,33,62,0.95) 50%, rgba(15,52,96,0.95) 100%);
-        color: #ffd700;
-        padding: 15px 20px;
-        border-radius: 10px;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        font-family: 'Segoe UI', sans-serif;
-        font-size: 14px;
-        font-weight: 600;
-        z-index: 9999;
-        border: 2px solid #ffd700;
-        text-align: center;
-        min-width: 200px;
-      `;
-      tooltip.innerHTML = '🎬 Enhanced Gameplay Demo';
-      document.body.appendChild(tooltip);
-      
-      setTimeout(() => {
-        tooltip.remove();
-      }, 2000);
-    });
-    
-    await page.waitForTimeout(2500);
-    
-    // Test interface elements visibility
-    console.log('🎯 Testing interface elements...');
-    
-    await page.evaluate(() => {
-      const tooltip = document.createElement('div');
-      tooltip.id = 'demo-tooltip';
-      tooltip.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: linear-gradient(135deg, rgba(26,26,46,0.95) 0%, rgba(22,33,62,0.95) 50%, rgba(15,52,96,0.95) 100%);
-        color: #ffd700;
-        padding: 15px 20px;
-        border-radius: 10px;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        font-family: 'Segoe UI', sans-serif;
-        font-size: 14px;
-        font-weight: 600;
-        z-index: 9999;
-        border: 2px solid #ffd700;
-        text-align: center;
-        min-width: 200px;
-      `;
-      tooltip.innerHTML = '🎯 Testing Interface Elements';
-      document.body.appendChild(tooltip);
-      
-      setTimeout(() => {
-        tooltip.remove();
-      }, 2000);
-    });
-    
-    // Check for main interface elements
-    const mainInterface = page.locator('.true-heroes-interface');
-    await expect(mainInterface).toBeVisible();
-    console.log('✅ Main interface visible');
-    
-    // Check for control buttons
-    const controlButtons = page.locator('.control-btn');
-    const buttonCount = await controlButtons.count();
-    console.log(`✅ Found ${buttonCount} control buttons`);
-    
-    // Check for canvas (map)
-    const mapCanvas = page.locator('canvas');
-    if (await mapCanvas.isVisible()) {
-      console.log('✅ Map canvas visible');
+    // Si on est dans le jeu, récupérer le nom de la map
+    const mapName = document.querySelector('.map-name');
+    if (mapName) {
+      contextTitle = mapName.textContent || 'Heroes of Time';
     }
     
-    await page.waitForTimeout(2500);
-    
-    // Test castle button visibility
-    console.log('🏰 Testing castle management elements...');
-    
-    await page.evaluate(() => {
-      const tooltip = document.createElement('div');
-      tooltip.id = 'demo-tooltip';
-      tooltip.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: linear-gradient(135deg, rgba(26,26,46,0.95) 0%, rgba(22,33,62,0.95) 50%, rgba(15,52,96,0.95) 100%);
-        color: #ffd700;
-        padding: 15px 20px;
-        border-radius: 10px;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        font-family: 'Segoe UI', sans-serif;
-        font-size: 14px;
-        font-weight: 600;
-        z-index: 9999;
-        border: 2px solid #ffd700;
-        text-align: center;
-        min-width: 200px;
-      `;
-      tooltip.innerHTML = '🏰 Castle Management Available';
-      document.body.appendChild(tooltip);
-      
-      setTimeout(() => {
-        tooltip.remove();
-      }, 2000);
-    });
-    
-    const castleButton = page.locator('button[title*="castle"], button[title*="Castle"]');
-    if (await castleButton.isVisible()) {
-      console.log('✅ Castle management button visible');
+    // Si on est dans un menu de héros, récupérer le nom du héros sélectionné
+    const selectedHero = document.querySelector('.hero-name.selected, .selected-hero .hero-name');
+    if (selectedHero) {
+      contextTitle = `Heroes of Time - ${selectedHero.textContent}`;
     }
     
-    await page.waitForTimeout(2500);
-    
-    // Test panel buttons
-    console.log('📋 Testing panel navigation buttons...');
-    
-    await page.evaluate(() => {
-      const tooltip = document.createElement('div');
-      tooltip.id = 'demo-tooltip';
-      tooltip.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: linear-gradient(135deg, rgba(26,26,46,0.95) 0%, rgba(22,33,62,0.95) 50%, rgba(15,52,96,0.95) 100%);
-        color: #ffd700;
-        padding: 15px 20px;
-        border-radius: 10px;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        font-family: 'Segoe UI', sans-serif;
-        font-size: 14px;
-        font-weight: 600;
-        z-index: 9999;
-        border: 2px solid #ffd700;
-        text-align: center;
-        min-width: 200px;
-      `;
-      tooltip.innerHTML = '📋 Panel Navigation Available';
-      document.body.appendChild(tooltip);
-      
-      setTimeout(() => {
-        tooltip.remove();
-      }, 2000);
-    });
-    
-    const heroesButton = page.locator('button[title*="heroes"], button[title*="Heroes"]');
-    if (await heroesButton.isVisible()) {
-      console.log('✅ Heroes panel button visible');
+    // Si on est dans la sélection de scénario
+    const scenarioSelector = document.querySelector('.scenarios-grid');
+    if (scenarioSelector) {
+      contextTitle = 'Heroes of Time - Sélection de Mission';
     }
     
-    const inventoryButton = page.locator('button[title*="inventory"], button[title*="Inventory"]');
-    if (await inventoryButton.isVisible()) {
-      console.log('✅ Inventory panel button visible');
-    }
-    
-    await page.waitForTimeout(2500);
-    
-    // Test turn system
-    console.log('⭐ Testing turn system button...');
-    
-    await page.evaluate(() => {
-      const tooltip = document.createElement('div');
-      tooltip.id = 'demo-tooltip';
-      tooltip.style.cssText = `
+    // Créer le nouveau tooltip
+    const tooltip = document.createElement('div');
+    tooltip.className = 'demo-tooltip';
+    tooltip.innerHTML = `
+      <div style="
         position: fixed;
-        top: 20px;
-        right: 20px;
-        background: linear-gradient(135deg, rgba(26,26,46,0.95) 0%, rgba(22,33,62,0.95) 50%, rgba(15,52,96,0.95) 100%);
-        color: #ffd700;
-        padding: 15px 20px;
-        border-radius: 10px;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        font-family: 'Segoe UI', sans-serif;
-        font-size: 14px;
-        font-weight: 600;
-        z-index: 9999;
-        border: 2px solid #ffd700;
-        text-align: center;
-        min-width: 200px;
-      `;
-      tooltip.innerHTML = '⭐ Turn System Available';
-      document.body.appendChild(tooltip);
-      
-      setTimeout(() => {
-        tooltip.remove();
-      }, 2000);
-    });
-    
-    const endTurnButton = page.locator('button[title*="turn"], button[title*="Turn"]');
-    if (await endTurnButton.isVisible()) {
-      console.log('✅ Turn system button visible');
-    }
-    
-    await page.waitForTimeout(2500);
-    
-    // Test multilingual support
-    console.log('🌍 Testing multilingual support...');
-    
-    await page.evaluate(() => {
-      const tooltip = document.createElement('div');
-      tooltip.id = 'demo-tooltip';
-      tooltip.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: linear-gradient(135deg, rgba(26,26,46,0.95) 0%, rgba(22,33,62,0.95) 50%, rgba(15,52,96,0.95) 100%);
-        color: #ffd700;
-        padding: 15px 20px;
-        border-radius: 10px;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        font-family: 'Segoe UI', sans-serif;
-        font-size: 14px;
-        font-weight: 600;
-        z-index: 9999;
-        border: 2px solid #ffd700;
-        text-align: center;
-        min-width: 200px;
-      `;
-      tooltip.innerHTML = '🌍 Multilingual Support Available';
-      document.body.appendChild(tooltip);
-      
-      setTimeout(() => {
-        tooltip.remove();
-      }, 2000);
-    });
-    
-    const languageButtons = page.locator('button:has-text("🇫🇷"), button:has-text("🇬🇧"), button:has-text("🇷🇺")');
-    const langButtonCount = await languageButtons.count();
-    console.log(`✅ Found ${langButtonCount} language buttons`);
-    
-    await page.waitForTimeout(2500);
-    
-    // Test hero movement system availability
-    console.log('🏃 Testing hero movement system...');
-    
-    await page.evaluate(() => {
-      const tooltip = document.createElement('div');
-      tooltip.id = 'demo-tooltip';
-      tooltip.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: linear-gradient(135deg, rgba(26,26,46,0.95) 0%, rgba(22,33,62,0.95) 50%, rgba(15,52,96,0.95) 100%);
-        color: #ffd700;
-        padding: 15px 20px;
-        border-radius: 10px;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        font-family: 'Segoe UI', sans-serif;
-        font-size: 14px;
-        font-weight: 600;
-        z-index: 9999;
-        border: 2px solid #ffd700;
-        text-align: center;
-        min-width: 200px;
-      `;
-      tooltip.innerHTML = '🏃 Hero Movement System Ready';
-      document.body.appendChild(tooltip);
-      
-      setTimeout(() => {
-        tooltip.remove();
-      }, 2000);
-    });
-    
-    // Check if heroes are potentially visible on the map
-    const mapContent = page.locator('canvas, .map-container').first();
-    if (await mapContent.isVisible()) {
-      console.log('✅ Map with potential heroes visible');
-    }
-    
-    await page.waitForTimeout(2500);
-    
-    // Final completion message
-    console.log('🎉 Enhanced gameplay demo completed successfully!');
-    
-    await page.evaluate(() => {
-      const tooltip = document.createElement('div');
-      tooltip.id = 'demo-tooltip';
-      tooltip.style.cssText = `
-        position: fixed;
-        top: 50%;
+        top: ${position === 'top' ? '20px' : position === 'bottom' ? 'auto' : '50%'};
+        bottom: ${position === 'bottom' ? '20px' : 'auto'};
         left: 50%;
-        transform: translate(-50%, -50%);
-        background: linear-gradient(135deg, rgba(26,26,46,0.95) 0%, rgba(22,33,62,0.95) 50%, rgba(15,52,96,0.95) 100%);
+        transform: translateX(-50%) ${position === 'center' ? 'translateY(-50%)' : ''};
+        background: rgba(26,26,46,0.85);
         color: #ffd700;
-        padding: 30px 40px;
-        border-radius: 15px;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        font-family: 'Segoe UI', sans-serif;
-        font-size: 18px;
-        font-weight: 600;
-        z-index: 9999;
-        border: 3px solid #ffd700;
+        padding: 18px 25px;
+        border-radius: 8px;
+        border: 1px solid rgba(255,215,0,0.6);
+        font-family: 'Georgia', serif;
+        font-size: 15px;
+        font-weight: normal;
         text-align: center;
-        min-width: 400px;
-      `;
-      tooltip.innerHTML = `
-        🎉 Enhanced Demo Complete!
-        <div style="font-size: 14px; margin-top: 15px; opacity: 0.9;">
-          ✅ Interface Elements Loaded<br/>
-          ✅ Castle Management Available<br/>
-          ✅ Panel Navigation Ready<br/>
-          ✅ Turn System Functional<br/>
-          ✅ Multilingual Support Active<br/>
-          ✅ Hero Movement System Ready
-        </div>
-        <div style="font-size: 12px; margin-top: 10px; opacity: 0.7;">
-          Heroes of Time - All Systems Operational
-        </div>
-      `;
-      document.body.appendChild(tooltip);
-      
-      setTimeout(() => {
-        tooltip.remove();
-      }, 4000);
-    });
+        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        z-index: 10000;
+        min-width: 280px;
+        max-width: 450px;
+        backdrop-filter: blur(3px);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      ">
+        <div style="
+          margin: -22px -30px 12px -30px;
+          padding: 8px;
+          border-radius: 8px 8px 0 0;
+          font-size: 13px;
+          color: #ffed4e;
+          background: rgba(255,215,0,0.1);
+          border-bottom: 1px solid rgba(255,215,0,0.2);
+        ">${contextTitle}</div>
+        ${message}
+      </div>
+    `;
     
-    await page.waitForTimeout(5000);
+    document.body.appendChild(tooltip);
     
-    // Final verification
-    await expect(page.locator('.true-heroes-interface')).toBeVisible();
-    console.log('✅ Enhanced gameplay demo finished successfully!');
+    // Fade in simple
+    setTimeout(() => {
+      tooltip.style.opacity = '1';
+    }, 10);
     
-    // Generate comprehensive demo report
-    const demoReport = {
-      timestamp: new Date().toISOString(),
-      test_type: 'Enhanced Solo Gameplay Demo',
-      features_validated: [
-        'Main Interface Loading',
-        'Castle Management System',
-        'Panel Navigation Buttons',
-        'Turn System Integration',
-        'Multilingual Support (FR/EN/RU)',
-        'Hero Movement System',
-        'Map Canvas Rendering'
-      ],
-      duration: '90 seconds',
-      status: 'SUCCESS',
-      improvements: [
-        'Functional castle management panel',
-        'Enhanced hero movement system',
-        'Improved multilingual support',
-        'Better panel navigation',
-        'Stable turn system'
-      ],
-      technical_notes: [
-        'All UI elements loaded successfully',
-        'Backend integration ready',
-        'Canvas rendering operational',
-        'Language switching available',
-        'Panel system responsive'
-      ]
-    };
-    
-    console.log('📊 DEMO REPORT:', JSON.stringify(demoReport, null, 2));
+  }, { message, position });
+};
+
+// Fonction pour attendre qu'un élément soit vraiment chargé avec tooltip contextuel
+const waitForElementWithTooltip = async (page: any, selector: string, tooltipMessage: string, timeout = 10000) => {
+  await createDynamicTooltip(page, `⏳ ${tooltipMessage}...`);
+  await page.waitForTimeout(1500); // Délai pour voir le tooltip "chargement"
+  
+  try {
+    await page.waitForSelector(selector, { state: 'visible', timeout });
+    await createDynamicTooltip(page, `✅ ${tooltipMessage} - Prêt !`);
+    await page.waitForTimeout(2000); // Délai pour voir le tooltip "prêt"
+  } catch (error) {
+    await createDynamicTooltip(page, `❌ ${tooltipMessage} - Échec !`);
+    await page.waitForTimeout(2000);
+    throw error;
+  }
+};
+
+// Fonction pour effectuer une action avec tooltip contextuel
+const performActionWithTooltip = async (page: any, action: () => Promise<void>, tooltipMessage: string) => {
+  await createDynamicTooltip(page, `🎯 ${tooltipMessage}...`);
+  await page.waitForTimeout(1200); // Délai pour voir le tooltip "action"
+  
+  try {
+    await action();
+    await createDynamicTooltip(page, `✅ ${tooltipMessage} - Terminé !`);
+    await page.waitForTimeout(2000); // Délai pour voir le tooltip "terminé"
+  } catch (error) {
+    await createDynamicTooltip(page, `❌ ${tooltipMessage} - Erreur !`);
+    await page.waitForTimeout(2000);
+    throw error;
+  }
+};
+
+test.describe('🎮 Heroes of Time - Demo Dynamique', () => {
+  test('Demo avec tooltips dynamiques basés sur l\'état réel', async ({ page }) => {
+    test.setTimeout(120000);
+    console.log('🎬 === DÉBUT DE LA DÉMO DYNAMIQUE ===');
+
+    // 1. Navigation avec tooltip dynamique
+    await performActionWithTooltip(page, async () => {
+      await page.goto('/');
+    }, 'Chargement de l\'interface principale<br/>Initialisation du système de jeu...');
+
+    // 2. Attendre le chargement des scénarios avec tooltip contextuel
+    await waitForElementWithTooltip(
+      page, 
+      '[data-testid="scenario-card-conquest-classic"]', 
+      'Récupération des missions disponibles<br/>Connexion au serveur de jeu...'
+    );
+
+    await page.waitForTimeout(1000); // Pause pour admirer les scénarios
+
+    // 3. Sélection du scénario avec navigation automatique
+    await performActionWithTooltip(page, async () => {
+      await page.click('[data-testid="scenario-card-conquest-classic"]');
+    }, 'Sélection de la mission "Conquête Classique"<br/>Chargement de la carte de jeu...');
+
+    await page.waitForTimeout(1500); // Pause pour la navigation
+
+    // 4. Attendre la navigation vers le jeu
+    await waitForElementWithTooltip(
+      page,
+      '.true-heroes-interface',
+      'Initialisation du monde de jeu<br/>Placement des héros et des ressources...'
+    );
+
+    await page.waitForTimeout(1000); // Pause pour admirer l'interface
+
+    // 5. Vérifier que l'interface est complètement chargée
+    await waitForElementWithTooltip(
+      page,
+      '.game-header',
+      'Interface de jeu prête<br/>Votre aventure peut commencer !'
+    );
+
+    await page.waitForTimeout(1500); // Pause avant de tester les boutons
+
+    // 6. Tester les boutons de contrôle
+    await performActionWithTooltip(page, async () => {
+      await page.click('.control-btn[title="Heroes"]');
+      await page.waitForTimeout(1500); // Délai pour voir le panneau changer
+    }, 'Ouverture du panneau Héros<br/>Gestion de vos champions et leurs équipements');
+
+    await page.waitForTimeout(1000); // Pause entre les actions
+
+    await performActionWithTooltip(page, async () => {
+      await page.click('.control-btn[title="Inventory"]');
+      await page.waitForTimeout(1500); // Délai pour voir le panneau changer
+    }, 'Ouverture du panneau Inventaire<br/>Gestion des objets magiques et artefacts');
+
+    await page.waitForTimeout(1000); // Pause entre les actions
+
+    await performActionWithTooltip(page, async () => {
+      await page.click('.control-btn[title="Castle"]');
+      await page.waitForTimeout(1500); // Délai pour voir le panneau changer
+    }, 'Ouverture du panneau Château<br/>Construction et amélioration des bâtiments');
+
+    await page.waitForTimeout(1500); // Pause avant l'action finale
+
+    // 7. Effectuer une action de fin de tour
+    await performActionWithTooltip(page, async () => {
+      await page.click('.end-turn-btn');
+      await page.waitForTimeout(3000); // Délai pour voir l'effet de fin de tour
+    }, 'Fin du tour de jeu<br/>Calcul des ressources et événements...');
+
+    // Tooltip final de succès avec délai prolongé
+    await createDynamicTooltip(page, 'Démonstration terminée avec succès !<br/>🎮 Le jeu est entièrement fonctionnel<br/>✨ Prêt pour votre aventure !');
+    await page.waitForTimeout(5000); // Délai prolongé pour le message final
+
+    console.log('✅ === DÉMO TERMINÉE AVEC SUCCÈS ===');
   });
 }); 

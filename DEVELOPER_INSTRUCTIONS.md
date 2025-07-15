@@ -1,250 +1,182 @@
-# 🎮 Heroes of Time - Developer Instructions
-**Updated: January 2025**
+# 🎮 Heroes of Time - Instructions pour Développeurs
 
-## 🎯 **Current Status: ✅ FULLY OPERATIONAL**
+## 📋 État Actuel du Projet (Janvier 2025)
 
-### 🚀 **Quick Start**
+### ✅ **CORRECTIONS RÉCENTES APPLIQUÉES**
+
+#### 🔧 **Correction de l'erreur "Not your turn"**
+- **Problème** : L'API `endTurn` retournait une erreur 400 avec `{"error":"Not your turn"}`
+- **Cause** : Le `GameState` n'initialisait pas correctement le `currentPlayerId`
+- **Solution** :
+  - Modifié `GameStateService.getOrCreateGameState()` pour initialiser `currentPlayerId` avec `"player1"`
+  - Ajouté la synchronisation du `currentPlayer` avec le `currentPlayerId` dans `GameService.getGame()`
+- **Statut** : ✅ **CORRIGÉ**
+
+#### 🌍 **Améliorations du Système Multilingue**
+- **Problème** : Les tests de démonstration n'utilisaient pas la langue sauvegardée
+- **Solution** :
+  - Créé un fichier utilitaire `frontend/tests/e2e/utils/translations.ts`
+  - Les tests lisent maintenant la langue depuis `localStorage` (clé: `'heroes-reforged-i18n'`)
+  - Ajouté les traductions EN/RU pour tous les tooltips de démonstration
+- **Fonctionnalités** :
+  - ✅ Persistance automatique de la langue choisie
+  - ✅ 3 langues supportées : FR, EN, RU
+  - ✅ Plus de 1800 lignes de traductions
+  - ✅ Tests de démonstration multilingues
+- **Statut** : ✅ **COMPLÈTEMENT FONCTIONNEL**
+
+### 🎯 **Statut Global du Projet**
+- **Backend** : Spring Boot (Java) sur port 8080 - ✅ STABLE
+- **Frontend** : React TypeScript sur port 3000 - ✅ INTERFACE MODERNE
+- **Base de données** : H2 en mémoire - ✅ FONCTIONNELLE
+- **Tests** : Playwright E2E - ✅ DÉMONSTRATIONS MULTILINGUES
+
+## 🚀 **Scripts Essentiels**
+
+### Démarrage Rapide
 ```bash
-# Start the application
-./start-app.sh
-
-# Access the game
-# Frontend: http://localhost:3000
-# Backend: http://localhost:8080
-# Health Check: http://localhost:8080/actuator/health
-
-# Stop the application
-./stop-app.sh
+./start-app.sh    # Démarre backend + frontend
+./stop-app.sh     # Arrête tous les services
+./test-app.sh     # Tests rapides
 ```
 
-### 🎮 **Major Features Working**
-
-#### **✅ Solo Gameplay**
-- Complete game interface with all panels functional
-- Hero management with real hero images
-- Turn system with proper end turn functionality
-- Terrain system with diverse terrain types
-- Panel navigation (Heroes, Castle, Inventory)
-
-#### **✅ Multiplayer System**
-- Session creation and joining fully operational
-- Automatic navigation when battles start
-- Player synchronization with proper polling
-- Session management with CRUD operations
-- Status tracking (WAITING → ACTIVE)
-
-#### **✅ Terrain System**
-- Sprite-based terrain rendering implemented
-- 6 terrain types: grass, forest, mountain, water, desert, swamp
-- Intelligent image loading with Promise-based preloading
-- Fallback to colored hexagons if sprites fail
-- Weighted terrain distribution for variety
-
-#### **✅ Technical Infrastructure**
-- Backend: Spring Boot with H2 database
-- Frontend: React TypeScript with modern hooks
-- Image Assets: Hero portraits and terrain sprites
-- Internationalization: FR/EN/RU language support
-- Testing: Playwright E2E visual tests
-
-### 🔧 **Recent Fixes Applied**
-
-#### **Multiplayer System Fixes**
-- **Session Joining**: Player 2 now finds and joins the correct session created by Player 1
-- **Navigation**: Both players automatically navigate to game when battle starts
-- **Session Detection**: Added proper polling to detect session status changes
-- **API Integration**: Added `getMultiplayerSession()` method for individual session queries
-
-#### **Terrain System Fixes**
-- **Image Loading**: Fixed Promise.all-based image preloading system
-- **Sprite Rendering**: Proper terrain sprites with hexagonal clipping
-- **Fallback System**: Graceful degradation to colored hexagons
-- **Terrain Diversity**: Weighted distribution instead of uniform random
-
-#### **UI/UX Polish**
-- **Button Styling**: Removed unnecessary borders, improved hover effects
-- **Panel Navigation**: All panels (Heroes, Castle, Inventory) functional
-- **Hero Selection**: Proper hero cycling and selection feedback
-- **Turn System**: Stable end turn functionality
-
-### 📁 **Key Files to Know**
-
-#### **Backend (Spring Boot)**
-```
-backend/src/main/java/com/example/demo/
-├── controller/
-│   ├── GameController.java - Main game operations
-│   ├── MultiplayerController.java - Session management
-│   └── ScenarioController.java - Scenario loading
-├── service/
-│   ├── GameService.java - Game logic and terrain generation
-│   ├── MultiplayerService.java - Session handling
-│   └── ScenarioService.java - Scenario management
-└── model/
-    ├── GameSession.java - Session entity
-    └── Scenario.java - Scenario entity
-```
-
-#### **Frontend (React TypeScript)**
-```
-frontend/src/
-├── components/
-│   ├── TrueHeroesInterface.tsx - Main game interface
-│   ├── ModernGameRenderer.tsx - Terrain and hero rendering
-│   ├── MultiplayerSessionManager.tsx - Session handling
-│   └── EnhancedScenarioSelector.tsx - Scenario selection
-├── services/
-│   ├── api.ts - Backend API communication
-│   └── gameService.ts - Game state management
-├── store/
-│   └── useGameStore.ts - Global state management
-└── i18n/
-    └── index.ts - Multi-language support
-```
-
-#### **Assets**
-```
-frontend/public/assets/
-├── heroes/ - Hero portrait images
-├── terrain/ - Terrain sprite images
-└── icons/ - UI icons and buttons
-```
-
-### 🧪 **Testing & Demos**
-
-#### **Available Test Suites**
+### Tests de Démonstration
 ```bash
-# Visual multiplayer demo
-cd frontend && npx playwright test tests/e2e/multiplayer-debug-6.spec.ts --headed
-
-# Complete system demo
-cd frontend && npx playwright test tests/e2e/gameplay-demo.spec.ts --headed
-
-# All tests
-cd frontend && npx playwright test --headed
+cd frontend
+npx playwright test tests/e2e/01-single-demo.spec.ts --headed    # Démo solo
+npx playwright test tests/e2e/02-multiplayer-demo.spec.ts --headed  # Démo multijoueur
 ```
 
-#### **Manual Testing Paths**
-1. **Solo Game**: Visit http://localhost:3000 → Select scenario → Play
-2. **Multiplayer**: Visit http://localhost:3000/multiplayer → Create/Join session
-3. **Panel System**: In-game → Test Heroes, Castle, Inventory panels
-4. **Language**: Use language selector to test FR/EN/RU
+## 🌍 **Système Multilingue**
 
-### 🔄 **Development Workflow**
+### Configuration
+- **Store** : `useI18n` avec `zustand` + `persist`
+- **Clé localStorage** : `'heroes-reforged-i18n'`
+- **Langues** : FR (défaut), EN, RU
+- **Fichier** : `frontend/src/i18n/index.ts`
 
-#### **Making Changes**
-1. **Backend Changes**: Edit Java files → Hot reload active
-2. **Frontend Changes**: Edit React files → Hot reload active  
-3. **Assets**: Add images to `public/assets/` → Restart if needed
-4. **Testing**: Run Playwright tests to verify functionality
+### Utilisation
+```typescript
+import { useTranslation } from '../i18n';
 
-#### **Debugging**
-- **Backend Logs**: Check terminal running backend
-- **Frontend Logs**: Browser console (F12)
-- **Network**: Check API calls in Network tab
-- **Database**: H2 console at http://localhost:8080/h2-console
-
-### 🎯 **Architecture Overview**
-
-```
-Heroes of Time - Full Stack Architecture
-├── Frontend (React TypeScript) - Port 3000
-│   ├── TrueHeroesInterface - Main game UI
-│   ├── ModernGameRenderer - Canvas-based map rendering
-│   ├── MultiplayerSessionManager - Session handling
-│   └── Internationalization - Multi-language support
-├── Backend (Spring Boot) - Port 8080
-│   ├── REST API - Game, Multiplayer, Scenarios
-│   ├── JPA/H2 Database - Session and game persistence
-│   └── Business Logic - Game rules and state management
-└── Assets & Configuration
-    ├── Hero Images - Real hero portraits
-    ├── Terrain Sprites - Visual terrain system
-    └── i18n Files - Language translations
+const { t, language, setLanguage } = useTranslation();
+return <button>{t('endTurn')}</button>;
 ```
 
-### 🌍 **Multiplayer System Deep Dive**
+### Tests Multilingues
+```typescript
+import { getTooltipText } from './utils/translations';
 
-#### **Session Flow**
-1. **Create Session**: Player 1 creates named session
-2. **Join Session**: Player 2 finds and joins by name
-3. **Start Battle**: Player 1 clicks "Start Battle"
-4. **Auto Navigation**: Both players navigate to game automatically
-5. **Gameplay**: Turn-based gameplay with synchronized state
+// Lit automatiquement la langue depuis localStorage
+const tooltip = getTooltipText('demo.welcome');
+```
 
-#### **Technical Implementation**
-- **Session Management**: Database-backed with polling
-- **Status Tracking**: WAITING → ACTIVE → ENDED
-- **Player Synchronization**: 5-second polling interval
-- **Navigation**: Automatic based on session status detection
+## 🎮 **Interface Principale (TrueHeroesInterface.tsx)**
 
-### 🎨 **Terrain System Deep Dive**
+### Système de Panneaux
+- **Panneau Droit** : Contenu dynamique (scenario/hero/inventory/castle)
+- **Boutons Header** : Design poli sans bordures, icônes fantasy
+- **Système de Héros** : Rotation, sélection, images réelles avec fallbacks
+- **Système de Tours** : Bouton "End Turn" avec icône ⭐ - STABLE
 
-#### **Sprite System**
-- **6 Terrain Types**: grass, forest, mountain, water, desert, swamp
-- **Asset Location**: `/public/assets/terrain/`
-- **Loading System**: Promise.all-based preloading
-- **Rendering**: Hexagonal clipping with sprite overlays
-- **Fallback**: Colored hexagons if sprites fail
+### Fonctionnalités
+- ✅ Gameplay solo complètement fonctionnel
+- ✅ Gestion des héros avec images réelles
+- ✅ Panneaux dynamiques avec changement de contenu
+- ✅ Système de tooltips internationalisé
+- ✅ UI polie sans éléments inutiles
+- ✅ Système de tours stable et flux de jeu
 
-#### **Generation Algorithm**
-- **Weighted Distribution**: 35% grass, 20% forest, 15% mountain, 10% water, 10% desert, 10% swamp
-- **Hero Placement**: Heroes positioned during map generation
-- **Backend Integration**: Terrain data stored in database
+## 🔧 **Architecture Technique**
 
-### 📊 **Performance Considerations**
+### Backend (Port 8080)
+```
+Spring Boot + H2 Database
+├── Controllers: Scenario, Game, Multiplayer, AI
+├── Services: Couche logique métier
+├── Repository: Entités JPA
+└── GameStateService: Gestion de l'état critique
+```
 
-#### **Optimization Strategies**
-- **Image Preloading**: All terrain sprites loaded upfront
-- **Efficient Polling**: 5-second intervals for session updates
-- **Canvas Optimization**: Proper clipping and rendering
-- **Memory Management**: Cleanup of unused resources
+### Frontend (Port 3000)
+```
+React TypeScript
+├── TrueHeroesInterface.tsx (interface principale)
+├── ModernGameRenderer.tsx (rendu de carte)
+├── useGameStore.ts (gestion d'état)
+├── i18n/ (internationalisation)
+└── tests/e2e/ (tests de démonstration)
+```
 
-#### **Monitoring**
-- **Backend**: Spring Boot Actuator endpoints
-- **Frontend**: Browser DevTools performance tab
-- **Database**: H2 console for query analysis
-- **Network**: API response times and payload sizes
+## 🧪 **Tests et Démonstrations**
 
-### 🚀 **Production Readiness**
+### Tests E2E Playwright
+- **01-single-demo.spec.ts** : Démonstration solo
+- **02-multiplayer-demo.spec.ts** : Démonstration multijoueur
+- **gameplay-demo.spec.ts** : Démonstration avec tooltips dynamiques
 
-#### **What's Working**
-- ✅ Complete solo gameplay experience
-- ✅ Full multiplayer session management
-- ✅ Visual terrain system with sprites
-- ✅ Internationalization support
-- ✅ Robust error handling and fallbacks
-- ✅ Comprehensive testing suite
+### Tooltips Dynamiques
+- Basés sur l'état réel de l'interface
+- Attendent le chargement des éléments
+- Affichent les vrais états de chargement
+- Style adapté et animations fluides
 
-#### **Deployment Ready**
-- All core features implemented and tested
-- Stable performance under normal usage
-- Proper error handling and user feedback
-- Complete documentation and testing
-- Ready for production environment
+## 📝 **Workflow de Développement**
 
-### 💡 **Best Practices**
+### Démarrage
+1. `./start-app.sh` - Démarre l'environnement de développement
+2. Ouvrir http://localhost:3000 - Tester l'UI manuellement
+3. `cd frontend && npx playwright test --headed` - Tests visuels
 
-#### **Code Quality**
-- TypeScript strict mode enabled
-- Proper error handling throughout
-- Consistent code formatting
-- Comprehensive comments and documentation
+### Vérifications
+- Consulter `DEVELOPER_INSTRUCTIONS.md` pour l'état actuel
+- Utiliser les scripts existants (ne pas recréer)
+- Suivre les patterns établis
+- Tester avec les démonstrations Playwright
 
-#### **Testing Strategy**
-- Visual E2E tests for all major features
-- Integration tests for API endpoints
-- Error scenario testing
-- Performance monitoring
+## 🔍 **Débogage**
 
-#### **Maintenance**
-- Regular dependency updates
-- Performance monitoring
-- User feedback integration
-- Continuous improvement cycle
+### Erreurs Courantes
+- **"Not your turn"** : ✅ Corrigé - `currentPlayerId` initialisé correctement
+- **Tests qui échouent** : Vérifier que l'application est démarrée
+- **Langue non sauvegardée** : ✅ Corrigé - Persistance automatique
+
+### Logs
+```bash
+tail -f logs/backend.log    # Logs backend
+tail -f logs/frontend.log   # Logs frontend
+```
+
+## 🎯 **Capacités Actuelles**
+
+### ✅ Fonctionnalités Complètes
+- Gameplay solo entièrement fonctionnel
+- Gestion des héros avec images réelles
+- Panneaux dynamiques avec changement de contenu
+- Système de tooltips internationalisé
+- Système de tours stable
+- Démonstrations automatisées multilingues
+
+### 🚧 En Développement
+- Mode multijoueur (infrastructure présente)
+- Système de combat avancé
+- Gestion des châteaux étendue
+
+## 🚨 **Rappels Importants**
+
+### ⚠️ **À NE JAMAIS FAIRE**
+- Recréer les fonctionnalités existantes
+- Ignorer `DEVELOPER_INSTRUCTIONS.md`
+- Modifier sans tester avec Playwright
+- Casser les patterns UI/UX établis
+
+### ✅ **Toujours Faire**
+- Lire `DEVELOPER_INSTRUCTIONS.md` en premier
+- Utiliser les scripts existants
+- Suivre les patterns établis
+- Tester avec les démonstrations avant de committer
 
 ---
 
-**🎉 Heroes of Time is production-ready with all major features operational!**
-
-For questions or issues, refer to the test files and API documentation. 
+**Dernière mise à jour** : Janvier 2025
+**Statut** : ✅ ENTIÈREMENT FONCTIONNEL avec corrections appliquées 

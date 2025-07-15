@@ -31,8 +31,10 @@ public class GameStateService {
             return existingState.get();
         }
         
-        // Create new game state
+        // Create new game state with proper initialization
         GameState newState = new GameState(gameId);
+        newState.setCurrentPlayerId("player1"); // Initialize with player1 as the starting player
+        newState.setTurnStartTime(LocalDateTime.now());
         return gameStateRepository.save(newState);
     }
     

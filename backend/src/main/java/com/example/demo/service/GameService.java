@@ -44,6 +44,14 @@ public class GameService {
         game.put("playerInventories", gameState.getPlayerInventories());
         game.put("equippedItems", gameState.getEquippedItems());
         
+        // Synchronize currentPlayer with currentPlayerId from GameState
+        if (gameState.getCurrentPlayerId() != null) {
+            Map<String, Object> currentPlayer = getPlayerById(game, gameState.getCurrentPlayerId());
+            if (currentPlayer != null) {
+                game.put("currentPlayer", currentPlayer);
+            }
+        }
+        
         return game;
     }
 
