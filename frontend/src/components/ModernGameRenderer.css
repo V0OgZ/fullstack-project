@@ -23,29 +23,29 @@
 }
 
 .tooltip-content {
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.7);
   color: #FFD700;
   padding: 8px 12px;
   border-radius: 6px;
   font-size: 12px;
   font-family: 'Cinzel', serif;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-  border: 1px solid rgba(255, 215, 0, 0.3);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(3px);
   white-space: nowrap;
   
-  /* Animation d'apparition plus douce */
-  animation: tooltipFadeIn 0.6s ease-out;
+  /* Animation d'apparition plus douce et lente */
+  animation: tooltipFadeIn 1.2s ease-out;
 }
 
 @keyframes tooltipFadeIn {
   from {
     opacity: 0;
-    transform: translateY(5px);
+    transform: translateY(2px);
   }
   to {
-    opacity: 1;
+    opacity: 0.8;
     transform: translateY(0);
   }
 }
