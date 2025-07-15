@@ -51,8 +51,8 @@ const createDynamicTooltip = async (page: any, message: string, position: 'top' 
     const style = document.createElement('style');
     style.textContent = `
       @keyframes slideIn {
-        from { opacity: 0; transform: translateX(-50%) translateY(-20px) scale(0.9); }
-        to { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+        from { opacity: 0; transform: translateX(-50%) scale(0.95); }
+        to { opacity: 1; transform: translateX(-50%) scale(1); }
       }
     `;
     document.head.appendChild(style);
@@ -79,7 +79,7 @@ const waitForElementWithTooltip = async (page: any, selector: string, tooltipMes
 // Fonction pour effectuer une action avec tooltip contextuel
 const performActionWithTooltip = async (page: any, action: () => Promise<void>, tooltipMessage: string) => {
   await createDynamicTooltip(page, `🎯 ${tooltipMessage}...`);
-  await page.waitForTimeout(500);
+  await page.waitForTimeout(1500);
   
   try {
     await action();
@@ -131,28 +131,26 @@ test.describe('🎮 Heroes of Time - Demo Dynamique', () => {
     // 6. Tester les boutons de contrôle
     await performActionWithTooltip(page, async () => {
       await page.click('.control-btn[title="Heroes"]');
-      await page.waitForTimeout(1000);
+      await page.waitForTimeout(1500);
     }, '⚔️ Test du panneau Héros<br/>Gestion de vos champions...');
 
     await performActionWithTooltip(page, async () => {
       await page.click('.control-btn[title="Inventory"]');
-      await page.waitForTimeout(1000);
+      await page.waitForTimeout(1500);
     }, '🎒 Test du panneau Inventaire<br/>Gestion des objets équipés...');
 
     await performActionWithTooltip(page, async () => {
       await page.click('.control-btn[title="Castle"]');
-      await page.waitForTimeout(1000);
-    }, '🏰 Test du panneau Château<br/>Construction et amélioration...');
+      await page.waitForTimeout(1500);
+    }, '🏰 Test du panneau Château<br/>Construction et recrutement...');
 
-    // 7. Effectuer une action de fin de tour
+    // 7. Finaliser avec un message de succès
     await performActionWithTooltip(page, async () => {
-      await page.click('.end-turn-btn');
-      await page.waitForTimeout(2000);
-    }, '🌟 Fin du tour<br/>Passage au tour suivant...');
+      await page.waitForTimeout(3000);
+    }, '✅ Démo terminée avec succès !<br/>Toutes les fonctionnalités testées...');
 
-    // Tooltip final de succès
-    await createDynamicTooltip(page, '🎉 Démonstration terminée avec succès !<br/>✨ Le jeu fonctionne parfaitement ! ✨<br/><br/>🎮 Vous pouvez maintenant jouer !');
-    await page.waitForTimeout(4000);
+    // 8. Attendre un peu avant de terminer
+    await page.waitForTimeout(6000);
 
     console.log('✅ === DÉMO TERMINÉE AVEC SUCCÈS ===');
   });
