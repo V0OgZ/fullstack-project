@@ -12,7 +12,7 @@ export interface HeroDisplayRequest {
 export interface HeroDisplayResult {
   url: string;
   fallback: string;
-  type: 'local' | 'emoji';
+  type: 'local' | 'emoji' | 'dicebear';
   metadata?: {
     width: number;
     height: number;
@@ -22,7 +22,7 @@ export interface HeroDisplayResult {
 
 class HeroDisplayService {
   // ===== IMAGES LOCALES DISPONIBLES =====
-  private readonly LOCAL_HERO_IMAGES = {
+  private readonly LOCAL_HERO_IMAGES: Record<string, string> = {
     // Images SVG locales dans /public/assets/heroes/ (100% offline!)
     'ARTHUR': '/assets/heroes/arthur.svg',
     'MORGANA': '/assets/heroes/morgana.svg', 
@@ -52,7 +52,7 @@ class HeroDisplayService {
   };
 
   // ===== EMOJIS DE FALLBACK =====
-  private readonly HERO_EMOJIS = {
+  private readonly HERO_EMOJIS: Record<string, string> = {
     'ARTHUR': '🛡️',
     'MORGANA': '🧙‍♀️',
     'TRISTAN': '⚔️',
@@ -81,7 +81,7 @@ class HeroDisplayService {
   };
 
   // ===== MAPPING NOM -> CLASSE =====
-  private readonly HERO_CLASS_MAPPING = {
+  private readonly HERO_CLASS_MAPPING: Record<string, string> = {
     'ARTHUR': 'WARRIOR',
     'MORGANA': 'MAGE',
     'TRISTAN': 'ARCHER', 
@@ -172,7 +172,7 @@ class HeroDisplayService {
   /**
    * Obtient un portrait de héros (grande taille)
    */
-  getHeroPortrait(heroName: string, heroClass?: string): HeroDisplayResult {
+  async getHeroPortrait(heroName: string, heroClass?: string): Promise<HeroDisplayResult> {
     return this.getHeroDisplay({
       name: heroName,
       heroClass,
@@ -185,7 +185,7 @@ class HeroDisplayService {
   /**
    * Obtient un sprite de héros (taille moyenne)
    */
-  getHeroSprite(heroName: string, heroClass?: string): HeroDisplayResult {
+  async getHeroSprite(heroName: string, heroClass?: string): Promise<HeroDisplayResult> {
     return this.getHeroDisplay({
       name: heroName,
       heroClass,
@@ -198,7 +198,7 @@ class HeroDisplayService {
   /**
    * Obtient une icône de héros (petite taille)
    */
-  getHeroIcon(heroName: string, heroClass?: string): HeroDisplayResult {
+  async getHeroIcon(heroName: string, heroClass?: string): Promise<HeroDisplayResult> {
     return this.getHeroDisplay({
       name: heroName,
       heroClass,
@@ -251,7 +251,7 @@ class HeroDisplayService {
     return {
       name: heroName,
       class: heroClass,
-      description: descriptions[normalizedName] || 'A brave hero ready for adventure'
+      description: descriptions[normalizedName as keyof typeof descriptions] || 'A brave hero ready for adventure'
     };
   }
 }

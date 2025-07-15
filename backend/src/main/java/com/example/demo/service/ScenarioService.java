@@ -15,6 +15,10 @@ public class ScenarioService {
     
     @Autowired
     private ScenarioRepository scenarioRepository;
+
+    // Inject Jackson ObjectMapper for JSON parsing of scenario files
+    @Autowired
+    private com.fasterxml.jackson.databind.ObjectMapper objectMapper;
     
     // ======================
     // SCENARIO MANAGEMENT
@@ -689,9 +693,15 @@ public class ScenarioService {
      */
     private Map<String, Object> parseScenarioJson(String jsonContent) {
         try {
-            // Simple JSON parsing - in a real implementation, use Jackson or Gson
-            // For now, return empty map as placeholder
-            return new HashMap<>();
+            if (jsonContent == null || jsonContent.isBlank()) {
+                return new HashMap<>();
+            }
+
+            // Use Jackson to convert JSON string to a generic Map structure
+            return objectMapper.readValue(
+                jsonContent,
+                new com.fasterxml.jackson.core.type.TypeReference<Map<String, Object>>() {}
+            );
         } catch (Exception e) {
             System.err.println("Error parsing scenario JSON: " + e.getMessage());
             return new HashMap<>();

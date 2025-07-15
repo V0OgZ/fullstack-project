@@ -142,114 +142,59 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
     }
   }, [rightPanelContent, currentPlayer?.heroes, selectedHeroId]); // Fixed dependencies
 
-  const getHeroPortraitComponent = (heroName: string, heroClass: string = 'Warrior') => {
-    console.log('🎨 Loading hero portrait for:', heroName, 'class:', heroClass);
-    
-    try {
-      // Utiliser le nouveau service unifié pour les PORTRAITS
-      const portraitData = heroDisplayService.getHeroPortrait({
-        name: heroName,
-        heroClass: heroClass,
-        level: 1,
-        displayType: 'portrait',
-        size: 'large' // Utiliser la grande taille pour les portraits
-      });
-      
-      console.log('✅ Portrait data loaded:', portraitData);
-      
-      return (
-        <div className="hero-portrait-container" style={{ width: '100%', height: '100%', position: 'relative' }}>
-          {/* Image externe en PRIORITÉ pour une meilleure qualité */}
-          <img 
-            src={portraitData.url}
-            alt={heroName}
-            className="hero-portrait-primary"
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              borderRadius: '8px',
-              zIndex: 2
-            }}
-            onLoad={(e) => {
-              console.log('📸 External portrait loaded successfully:', heroName);
-              // Masquer le fallback SVG si l'image externe fonctionne
-              const container = e.currentTarget.parentNode as HTMLElement;
-              const svgFallback = container.querySelector('.hero-portrait-svg') as HTMLElement;
-              if (svgFallback) {
-                svgFallback.style.display = 'none';
-              }
-            }}
-            onError={(e) => {
-              console.warn('⚠️ External portrait failed, showing SVG fallback');
-              // Afficher le SVG en fallback
-              const target = e.target as HTMLImageElement;
-              target.style.display = 'none';
-              const container = target.parentNode as HTMLElement;
-              const svgFallback = container.querySelector('.hero-portrait-svg') as HTMLElement;
-              if (svgFallback) {
-                svgFallback.style.display = 'block';
-              }
-            }}
-          />
-          
-          {/* SVG Local en fallback */}
-          <div 
-            className="hero-portrait-svg"
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              borderRadius: '8px',
-              overflow: 'hidden',
-              zIndex: 1,
-              display: 'block' // Visible par défaut jusqu'à ce que l'image externe charge
-            }}
-            dangerouslySetInnerHTML={{ __html: portraitData.localSvg }}
-          />
-          
-          {/* Emoji en dernier recours */}
-          <div 
-            className="hero-portrait-emoji"
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              fontSize: '64px',
-              display: 'none', // Masqué par défaut
-              alignItems: 'center',
-              justifyContent: 'center',
-              background: 'rgba(255, 215, 0, 0.1)',
-              borderRadius: '8px',
-              zIndex: 0
-            }}
-          >
-            {portraitData.fallbackEmoji}
-          </div>
-        </div>
-      );
-    } catch (error) {
-      console.error('❌ Error loading hero portrait:', error);
-      // Fallback ultime avec l'ancienne méthode
-      const heroImage = getHeroFallbackImage(heroName.toUpperCase());
-      return (
-        <img 
-          src={heroImage}
+  // Reusable component to display hero portrait with async loading
+  const HeroPortrait: React.FC<{ heroName: string; heroClass: string }> = ({ heroName, heroClass }) => {
+    const [portrait, setPortrait] = React.useState<any | null>(null);
+
+    React.useEffect(() => {
+      let isMounted = true;
+      heroDisplayService
+        .getHeroPortrait(heroName, heroClass)
+        .then((result) => {
+          if (isMounted) setPortrait(result);
+        })
+        .catch((err) => console.error('❌ Error loading hero portrait:', err));
+      return () => {
+        isMounted = false;
+      };
+    }, [heroName, heroClass]);
+
+    if (!portrait) {
+      return <div style={{ width: '100%', height: '120px', background: '#333', borderRadius: '8px' }} />;
+    }
+
+    return (
+      <div className="hero-portrait-container" style={{ width: '100%', height: '100%', position: 'relative' }}>
+        <img
+          src={portrait.url}
           alt={heroName}
-          className="hero-portrait-img"
+          style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px', zIndex: 2 }}
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.style.display = 'none';
+            const container = target.parentNode as HTMLElement;
+            const fallbackImg = container.querySelector('.hero-portrait-fallback') as HTMLElement;
+            if (fallbackImg) fallbackImg.style.display = 'block';
+          }}
+        />
+        <img
+          src={portrait.fallback}
+          alt={heroName}
+          className="hero-portrait-fallback"
           style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
             width: '100%',
             height: '100%',
             objectFit: 'cover',
-            borderRadius: '8px'
+            borderRadius: '8px',
+            zIndex: 1,
+            display: 'none',
           }}
         />
-      );
-    }
+      </div>
+    );
   };
 
   if (isLoading) {
@@ -483,7 +428,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
               <div className="hero-details">
                 <div className="hero-portrait">
                   <div className="hero-image">
-                    {getHeroPortraitComponent(selectedHero.name, selectedHero.class || 'Warrior')}
+                    <HeroPortrait heroName={selectedHero.name} heroClass={selectedHero.class || 'Warrior'} />
                   </div>
                   <div className="hero-basic-info">
                     <h3 className="hero-name">{selectedHero.name}</h3>
