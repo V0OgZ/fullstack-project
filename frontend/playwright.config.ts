@@ -30,27 +30,32 @@ export default defineConfig({
           slowMo: 100,
           args: [
             '--no-default-browser-check',
-            '--start-maximized',
-            '--disable-web-security'
+            '--disable-web-security',
+            '--window-position=0,0',
+            '--window-size=1280,800',
+            '--force-device-scale-factor=1'
           ],
         },
       },
-      testMatch: ['**/*gameplay-demo.spec.ts', '**/*solo*.spec.ts'],
+      testMatch: ['**/01-single-demo.spec.ts'],
     },
-        {
+    {
       name: 'multiplayer',
       use: { 
         ...devices['Desktop Chrome'],
-        viewport: { width: 640, height: 800 },
+        viewport: { width: 640, height: 700 },
         launchOptions: {
           slowMo: 50,
           args: [
             '--no-default-browser-check',
-            '--disable-web-security'
+            '--disable-web-security',
+            '--window-position=0,0',     // Premier browser à gauche
+            '--window-size=640,700',
+            '--force-device-scale-factor=1'
           ],
         },
       },
-      testMatch: ['**/*multiplayer*.spec.ts'],
+      testMatch: ['**/multiplayer-demo.spec.ts', '**/multiplayer-ui.spec.ts'],
     },
     {
       name: 'demo',
@@ -61,11 +66,14 @@ export default defineConfig({
           slowMo: 50,
           args: [
             '--no-default-browser-check',
-            '--start-maximized'
+            '--disable-web-security',
+            '--window-position=0,0', // Position 0,0
+            '--window-size=1280,800',
+            '--force-device-scale-factor=1'
           ],
         },
       },
-      testMatch: ['**/*demo*.spec.ts'],
+      testMatch: ['**/debug*.spec.ts', '**/terrain-vision*.spec.ts', '**/turn-zfc-test.spec.ts', '**/simple-turn-test.spec.ts', '**/quick-verification.spec.ts'],
     },
   ],
 }); 

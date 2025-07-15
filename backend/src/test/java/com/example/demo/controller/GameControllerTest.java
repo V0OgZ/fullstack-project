@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.service.GameService;
+import com.example.demo.service.GameStateService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,9 @@ class GameControllerTest {
 
     @Mock
     private GameService gameService;
+    
+    @Mock
+    private GameStateService gameStateService;
 
     @InjectMocks
     private GameController gameController;
@@ -129,23 +133,27 @@ class GameControllerTest {
     @Test
     void testMoveHero_Success() throws Exception {
         // Given
+        String gameId = "test-game-1";
         String heroId = "hero-1";
         Map<String, Object> request = Map.of(
-            "targetPosition", Map.of("x", 5, "y", 3)
+            "heroId", heroId,
+            "position", Map.of("x", 5, "y", 3)
         );
-        Map<String, Object> expectedAction = createTestAction("move", heroId);
-        when(gameService.moveHero(eq(heroId), any())).thenReturn(expectedAction);
+        
+        com.example.demo.model.GameState mockGameState = new com.example.demo.model.GameState();
+        when(gameStateService.updateHeroPosition(gameId, heroId, 5, 3)).thenReturn(mockGameState);
 
         // When & Then
-        mockMvc.perform(post("/api/heroes/{heroId}/move", heroId)
+        mockMvc.perform(post("/api/games/{gameId}/move-hero", gameId)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.type").value("move"))
+                .andExpect(jsonPath("$.success").value(true))
                 .andExpect(jsonPath("$.heroId").value(heroId))
-                .andExpect(jsonPath("$.status").value("pending"));
+                .andExpect(jsonPath("$.newPosition.x").value(5))
+                .andExpect(jsonPath("$.newPosition.y").value(3));
 
-        verify(gameService, times(1)).moveHero(eq(heroId), any());
+        verify(gameStateService, times(1)).updateHeroPosition(gameId, heroId, 5, 3);
     }
 
     @Test
@@ -223,13 +231,27 @@ class GameControllerTest {
     void testEndTurn_Success() throws Exception {
         // Given
         String gameId = "test-game-1";
-        doNothing().when(gameService).endTurn(gameId);
+        String playerId = "player-1";
+        String nextPlayerId = "player-2";
+        
+        when(gameStateService.isPlayerTurn(gameId, playerId)).thenReturn(true);
+        
+        // Mock GameState for the response
+        com.example.demo.model.GameState mockGameState = new com.example.demo.model.GameState();
+        mockGameState.setCurrentTurn(2);
+        when(gameStateService.endPlayerTurn(gameId, nextPlayerId)).thenReturn(mockGameState);
+        when(gameStateService.getOrCreateGameState(gameId)).thenReturn(mockGameState);
+        
+        Map<String, String> request = Map.of("playerId", playerId, "nextPlayerId", nextPlayerId);
 
         // When & Then
-        mockMvc.perform(post("/api/games/{gameId}/end-turn", gameId))
+        mockMvc.perform(post("/api/games/{gameId}/end-turn", gameId)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk());
 
-        verify(gameService, times(1)).endTurn(gameId);
+        verify(gameStateService, times(1)).isPlayerTurn(gameId, playerId);
+        verify(gameStateService, times(1)).endPlayerTurn(gameId, nextPlayerId);
     }
 
     @Test
@@ -256,16 +278,24 @@ class GameControllerTest {
     void testGetGameState_Success() throws Exception {
         // Given
         String gameId = "test-game-1";
+        String playerId = "player-1";
         Map<String, Object> expectedState = createTestGame(gameId);
-        when(gameService.getGameState(gameId)).thenReturn(expectedState);
+        when(gameService.getGame(gameId)).thenReturn(expectedState);
+        when(gameStateService.getSelectedHero(gameId, playerId)).thenReturn("hero-1");
+        when(gameStateService.getPlayerResources(gameId, playerId)).thenReturn(Map.of("gold", 1000));
+        when(gameStateService.isPlayerTurn(gameId, playerId)).thenReturn(true);
 
         // When & Then
-        mockMvc.perform(get("/api/games/{gameId}/state", gameId))
+        mockMvc.perform(get("/api/games/{gameId}/state", gameId)
+                .param("playerId", playerId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(gameId))
                 .andExpect(jsonPath("$.status").value("active"));
 
-        verify(gameService, times(1)).getGameState(gameId);
+        verify(gameService, times(1)).getGame(gameId);
+        verify(gameStateService, times(1)).getSelectedHero(gameId, playerId);
+        verify(gameStateService, times(1)).getPlayerResources(gameId, playerId);
+        verify(gameStateService, times(1)).isPlayerTurn(gameId, playerId);
     }
 
     @Test

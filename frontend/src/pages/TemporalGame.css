@@ -315,12 +315,12 @@
 .critical-warning {
   color: #ff0000;
   font-weight: bold;
-  animation: blink 1s infinite;
+  animation: smoothFade 2s ease-in-out infinite alternate;
 }
 
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
+@keyframes smoothFade {
+  from { opacity: 0.6; }
+  to { opacity: 1; }
 }
 
 /* ============================================================================

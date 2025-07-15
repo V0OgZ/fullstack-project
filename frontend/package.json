@@ -20,6 +20,8 @@
   },
   "private": true,
   "dependencies": {
+    "@dicebear/collection": "^9.2.3",
+    "@dicebear/core": "^9.2.3",
     "@stomp/stompjs": "^7.1.1",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -27,6 +29,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.34",
+    "@types/three": "^0.178.1",
     "framer-motion": "^12.23.3",
     "node-fetch": "^3.3.2",
     "react": "^19.1.0",
@@ -35,6 +38,7 @@
     "react-scripts": "5.0.1",
     "sockjs-client": "^1.6.1",
     "styled-components": "^6.1.19",
+    "three": "^0.178.0",
     "web-vitals": "^2.1.4",
     "zustand": "^5.0.6"
   },

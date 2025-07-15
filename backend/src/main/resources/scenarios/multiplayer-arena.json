@@ -2,66 +2,99 @@
   "scenarioId": "multiplayer-arena",
   "name": "scenarios.multiplayer-arena.name",
   "description": "scenarios.multiplayer-arena.description",
-  "difficulty": "normal",
+  "difficulty": "medium",
   "maxPlayers": 4,
-  "recommendedPlayers": 4,
-  "mapSize": "small",
-  "mapWidth": 20,
-  "mapHeight": 20,
-  "turnLimit": 50,
-  "timeLimit": 60,
+  "recommendedPlayers": 2,
+  "mapSize": "medium",
+  "mapWidth": 35,
+  "mapHeight": 35,
+  "turnLimit": 150,
+  "timeLimit": null,
   "victoryCondition": "elimination",
   "victoryRequirement": "victory.multiplayer-arena",
   "defeatCondition": "defeat.multiplayer-arena",
   "isActive": true,
   "isCampaign": false,
+  "isMultiplayer": true,
+  "defaultHero": "RANDOM",
+  "heroConfig": {
+    "heroSelection": "RANDOM",
+    "heroPool": ["ARTHUR", "MORGANA", "WARRIOR", "ARCHER", "PALADIN", "MAGE", "NECROMANCER", "TRISTAN", "ELARA", "GARETH", "LYANNA", "CEDRIC", "SERAPHINA", "VALEN"],
+    "allowDuplicates": false,
+    "startingLevel": 1,
+    "baseStats": {
+      "attack": 8,
+      "defense": 6,
+      "spellPower": 3,
+      "knowledge": 4,
+      "health": 80,
+      "mana": 30
+    },
+    "startingSkills": ["Combat"],
+    "startingSpells": []
+  },
   "objectives": [
     {
       "objectiveId": "obj1",
-      "objectiveType": "eliminate",
+      "objectiveType": "elimination",
       "objectiveTitle": "objectives.multiplayer-arena.obj1.title",
       "objectiveDescription": "objectives.multiplayer-arena.obj1.description",
-      "targetValue": 3,
+      "targetValue": 1,
       "isRequired": true
     }
   ],
   "startingPositions": [
     {
       "playerId": "player1",
-      "positionX": 3,
-      "positionY": 3,
-      "castleType": "castle",
-      "startingHero": "Arthur"
+      "positionX": 5,
+      "positionY": 5,
+      "castleType": "fortress",
+      "startingHero": "RANDOM"
     },
     {
       "playerId": "player2",
-      "positionX": 17,
-      "positionY": 3,
-      "castleType": "rampart",
-      "startingHero": "Elara"
+      "positionX": 30,
+      "positionY": 5,
+      "castleType": "fortress",
+      "startingHero": "RANDOM"
     },
     {
       "playerId": "player3",
-      "positionX": 3,
-      "positionY": 17,
-      "castleType": "tower",
-      "startingHero": "Zoltan"
+      "positionX": 5,
+      "positionY": 30,
+      "castleType": "fortress",
+      "startingHero": "RANDOM"
     },
     {
       "playerId": "player4",
-      "positionX": 17,
-      "positionY": 17,
-      "castleType": "inferno",
-      "startingHero": "Dagon"
+      "positionX": 30,
+      "positionY": 30,
+      "castleType": "fortress",
+      "startingHero": "RANDOM"
+    }
+  ],
+  "specialRules": [
+    {
+      "ruleId": "arena_combat",
+      "ruleName": "Arena Combat",
+      "ruleDescription": "Fast-paced combat with reduced movement costs",
+      "isActive": true
+    },
+    {
+      "ruleId": "resource_boost",
+      "ruleName": "Resource Boost",
+      "ruleDescription": "Increased resource generation for faster gameplay",
+      "isActive": true
     }
   ],
   "events": [
     {
-      "eventId": "event1",
-      "eventType": "timed",
-      "eventTitle": "events.multiplayer-arena.event1.title",
-      "eventDescription": "events.multiplayer-arena.event1.description",
-      "eventEffect": "{\"effect\": \"resource_boost\", \"gold\": 5000, \"turn\": 10}"
+      "eventId": "arena_bonus",
+      "eventName": "Arena Bonus",
+      "eventDescription": "Random bonuses appear on the battlefield",
+      "triggerTurn": 10,
+      "isRepeating": true,
+      "repeatInterval": 15
     }
   ]
 } 

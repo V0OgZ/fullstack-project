@@ -24,6 +24,72 @@
 
 ---
 
+## 🆕 Epic Content System
+
+### 🐉 Epic Creatures Library
+**Legendary creatures with unique abilities and stunning artwork**
+
+**Dragons** (Tier 7):
+- **🔥 Dragon Rouge** - Fire breath, area damage
+- **⚡ Dragon Bleu** - Lightning attacks, paralysis
+- **🌿 Dragon Vert** - Poison breath, toxic clouds
+- **✨ Dragon Doré** - Divine light, healing allies
+
+**Magical Creatures**:
+- **🦄 Licorne** - Purification magic, healing powers
+- **🔥 Phénix** - Rebirth ability, fire aura
+- **🪶 Pégase** - Flight, magical wind attacks
+
+**Celestial Beings**:
+- **😇 Archange** - Resurrection, divine protection
+- **🔥 Séraphin** - Holy fire, demon destruction
+
+### 🦸 Epic Heroes Collection
+**Legendary heroes with rich backstories and unique abilities**
+
+**Human Heroes**:
+- **⚔️ Arthur Pendragon** - Excalibur sword, Round Table ultimate
+- **🛡️ Jeanne d'Arc** - Divine inspiration, purifying flame
+- **🧙‍♂️ Merlin l'Enchanteur** - Primordial magic, dragon transformation
+
+**Elven Heroes**:
+- **🏹 Legolas Feuille-Verte** - Perfect aim, elven arrow rain
+- **✨ Galadriel Lumière-Étoilée** - Mirror of truth, star light
+
+**Dwarven Heroes**:
+- **⚒️ Gimli fils de Glóin** - Dwarven rage, runic axe
+- **👑 Thorin Écu-de-Chêne** - Orcrist blade, Erebor treasure
+
+**Angelic Heroes**:
+- **📯 Gabriel le Messager** - Divine trumpet, final judgment
+- **⚔️ Michel le Guerrier** - Flaming sword, celestial army
+
+### 🏰 Epic Buildings System
+**Architectural marvels with procedural generation**
+
+**Castle Styles by Race**:
+- **🏰 Human Castles** - Medieval fortresses with towers and battlements
+- **🌳 Elven Tree Castles** - Living tree fortresses with natural magic
+- **⛰️ Dwarven Mountain Halls** - Stone fortresses carved into mountains
+- **💀 Undead Necropolis** - Dark citadels of bone and shadow
+- **☁️ Celestial Temples** - Floating temples in the clouds
+
+**Features**:
+- **SVG Artwork** - Scalable vector graphics for crisp visuals
+- **Dynamic Generation** - Canvas-based fallback system
+- **Style Variants** - Unique architectural styles per race
+
+### 🎯 Epic Content Interface
+**Accessible via 🐉 button in main game interface**
+
+- **Tabbed Browser** - Creatures, Heroes, Buildings sections
+- **Detailed Stats** - Complete combat and ability information
+- **Rich Descriptions** - Lore and backstory for each character
+- **Visual Gallery** - High-quality artwork and animations
+- **Search & Filter** - Browse by race, tier, or abilities
+
+---
+
 ## 🏰 Castle & Building System
 
 ### 8 Unique Castle Types

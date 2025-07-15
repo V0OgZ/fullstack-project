@@ -52,8 +52,8 @@ const SimpleModernInterface: React.FC = () => {
   };
 
   const handleTileClick = (coord: Position) => {
-    if (selectedHero) {
-      ApiService.moveHero(selectedHero.id, coord)
+    if (selectedHero && currentGame) {
+      ApiService.moveHero(currentGame.id, selectedHero.id, coord)
         .then(() => {
           useGameStore.getState().refreshGameState();
           setSelectedHero(null);

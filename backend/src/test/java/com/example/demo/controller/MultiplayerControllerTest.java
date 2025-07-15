@@ -57,7 +57,7 @@ class MultiplayerControllerTest {
             .thenReturn(expectedSession);
 
         // When & Then
-        mockMvc.perform(post("/api/multiplayer/sessions")
+        mockMvc.perform(post("/api/games/multiplayer")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())

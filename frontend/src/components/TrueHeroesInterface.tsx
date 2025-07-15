@@ -2,8 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from '../i18n';
 import { useGameStore } from '../store/useGameStore';
 import ModernGameRenderer, { ModernGameRendererRef } from './ModernGameRenderer';
-import { HERO_ASSETS } from '../constants/gameAssets';
+import CastleManagementPanel from './CastleManagementPanel';
+import EpicContentViewer from './EpicContentViewer';
+import { getHeroFallbackImage, getHeroInfo } from '../utils/heroAssets';
+import { Position } from '../types/game';
 import './TrueHeroesInterface.css';
+import heroDisplayService from '../services/heroDisplayService';
 
 interface TrueHeroesInterfaceProps {
   playerCount: number;
@@ -19,26 +23,23 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
     isLoading, 
     error,
     endTurn,
-    nextPlayer
+    updateVision
   } = useGameStore();
   
   const [selectedHeroId, setSelectedHeroId] = useState<string | null>(null);
-  const [selectedCastleId, setSelectedCastleId] = useState<string | null>(null);
-  const [rightPanelContent, setRightPanelContent] = useState<'scenario' | 'hero' | 'inventory' | 'castle'>('scenario');
+  const [rightPanelContent, setRightPanelContent] = useState<'scenario' | 'hero' | 'castle'>('scenario');
+  const [showEpicContent, setShowEpicContent] = useState(false);
   const mapRendererRef = useRef<ModernGameRendererRef>(null);
 
-  const handleHeroSelect = (heroId: string | null) => {
-    setSelectedHeroId(heroId);
-    if (heroId) {
-      setRightPanelContent('hero');
-    } else {
-      setRightPanelContent('scenario');
-    }
-  };
-
-  const handleInventoryClick = () => {
-    setRightPanelContent('inventory');
-  };
+  // Fonction pour sélectionner un héros (gardée pour compatibilité future)
+  // const handleHeroSelect = (heroId: string | null) => {
+  //   setSelectedHeroId(heroId);
+  //   if (heroId) {
+  //     setRightPanelContent('hero');
+  //   } else {
+  //     setRightPanelContent('scenario');
+  //   }
+  // };
 
   const handleHeroesClick = () => {
     if (!currentPlayer?.heroes || currentPlayer.heroes.length === 0) {
@@ -53,15 +54,19 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
     // Si aucun héros n'est sélectionné, sélectionner le premier
     if (!selectedHeroId) {
       targetHero = currentPlayer.heroes[0];
+      console.log('🎯 Auto-selecting first hero:', targetHero.name, 'ID:', targetHero.id);
     } else {
       // Sinon, cycler au héros suivant
       const currentIndex = currentPlayer.heroes.findIndex(hero => hero.id === selectedHeroId);
       const nextIndex = (currentIndex + 1) % currentPlayer.heroes.length;
       targetHero = currentPlayer.heroes[nextIndex];
+      console.log('🔄 Cycling to next hero:', targetHero.name, 'ID:', targetHero.id);
     }
 
     setSelectedHeroId(targetHero.id);
     setRightPanelContent('hero');
+
+    console.log('✅ Hero selected for movement:', targetHero.name, 'at position:', targetHero.position);
 
     // Centrer la carte sur le héros (sera implémenté dans ModernGameRenderer)
     if (mapRendererRef.current && mapRendererRef.current.centerOnPosition) {
@@ -73,27 +78,51 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
     setRightPanelContent('castle');
   };
 
-  const handleCastleSelect = (castleId: string) => {
-    setSelectedCastleId(castleId);
-    // Keep castle content but could show castle details
+  const selectedHero = currentPlayer?.heroes?.find(hero => hero.id === selectedHeroId);
+
+  const handleMapClick = (position: Position) => {
+    console.log('🗺️ Map clicked at position:', position);
+    console.log('👤 Current selectedHeroId:', selectedHeroId);
+    console.log('🎯 selectedHero object:', selectedHero);
+    
+    if (selectedHero) {
+      console.log('✅ Moving hero:', selectedHero.name, 'from', selectedHero.position, 'to position:', position);
+      useGameStore.getState().moveHero(selectedHero.id, position);
+    } else {
+      console.log('❌ No hero selected for movement - auto-selecting first hero');
+      
+      // Auto-sélectionner le premier héros si aucun n'est sélectionné
+      if (currentPlayer?.heroes && currentPlayer.heroes.length > 0) {
+        const firstHero = currentPlayer.heroes[0];
+        setSelectedHeroId(firstHero.id);
+        console.log('🎯 Auto-selected hero:', firstHero.name, 'trying to move to:', position);
+        
+        // Attendre que le state soit mis à jour avant de déplacer
+        setTimeout(() => {
+          useGameStore.getState().moveHero(firstHero.id, position);
+        }, 100);
+      }
+    }
   };
 
-  const selectedHero = currentPlayer?.heroes?.find(hero => hero.id === selectedHeroId);
+  // Update vision when game loads or current player changes
+  useEffect(() => {
+    if (currentPlayer?.id) {
+      updateVision(currentPlayer.id);
+    }
+  }, [currentPlayer?.id, updateVision]);
 
   // Mettre à jour le titre de la page de façon dynamique selon le contexte
   useEffect(() => {
     let title = 'Heroes of Time';
     
     // Titre basé sur le contexte du panneau actuel
-    if (rightPanelContent === 'castle') {
-      title = 'Heroes of Time - Castle';
-    } else if (rightPanelContent === 'inventory') {
-      title = 'Heroes of Time - Inventory';
-    } else if (rightPanelContent === 'hero' && selectedHero) {
-      title = `Heroes of Time - ${selectedHero.name}`;
-    } else if (scenarioId) {
-      const mapName = scenarioId.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
-      title = `Heroes of Time - ${mapName}`;
+    if (rightPanelContent === 'scenario') {
+      title = 'Heroes of Time - Scenario';
+    } else if (rightPanelContent === 'hero') {
+      title = 'Heroes of Time - Hero Management';
+    } else if (rightPanelContent === 'castle') {
+      title = 'Heroes of Time - Castle Management';
     }
     
     document.title = title;
@@ -104,39 +133,123 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
     };
   }, [scenarioId, rightPanelContent, selectedHero]);
 
-  // Fonction pour obtenir l'image du héros
-  const getHeroImage = (heroName: string): string => {
-    const name = heroName.toLowerCase();
-    if (name.includes('arthur') || name.includes('knight')) {
-      return HERO_ASSETS.KNIGHT;
-    } else if (name.includes('merlin') || name.includes('mage') || name.includes('wizard')) {
-      return HERO_ASSETS.MAGE;
-    } else if (name.includes('lancelot') || name.includes('warrior')) {
-      return HERO_ASSETS.WARRIOR;
-    } else if (name.includes('archer') || name.includes('bow')) {
-      return HERO_ASSETS.ARCHER;
-    } else if (name.includes('paladin')) {
-      return HERO_ASSETS.PALADIN;
-    } else if (name.includes('necromancer')) {
-      return HERO_ASSETS.NECROMANCER;
-    } else {
-      // Défaut basé sur la classe du héros s'il en a une
-      return HERO_ASSETS.WARRIOR;
+  // Auto-sélectionner le premier héros quand on ouvre le panneau héros
+  useEffect(() => {
+    if (rightPanelContent === 'hero' && currentPlayer?.heroes && currentPlayer.heroes.length > 0 && !selectedHeroId) {
+      const firstHero = currentPlayer.heroes[0];
+      setSelectedHeroId(firstHero.id);
+      console.log('🎯 Auto-selecting first hero on panel open:', firstHero.name);
     }
-  };
+  }, [rightPanelContent, currentPlayer?.heroes, selectedHeroId]); // Fixed dependencies
 
-  // Fonction pour obtenir l'emoji de fallback
-  const getHeroEmoji = (heroName: string): string => {
-    const name = heroName.toLowerCase();
-    if (name.includes('arthur')) return '👑';
-    if (name.includes('merlin')) return '🧙';
-    if (name.includes('lancelot')) return '⚔️';
-    if (name.includes('mage')) return '🔮';
-    if (name.includes('warrior')) return '🛡️';
-    if (name.includes('archer')) return '🏹';
-    if (name.includes('paladin')) return '✨';
-    if (name.includes('necromancer')) return '💀';
-    return '⚔️';
+  const getHeroPortraitComponent = (heroName: string, heroClass: string = 'Warrior') => {
+    console.log('🎨 Loading hero portrait for:', heroName, 'class:', heroClass);
+    
+    try {
+      // Utiliser le nouveau service unifié pour les PORTRAITS
+      const portraitData = heroDisplayService.getHeroPortrait({
+        name: heroName,
+        heroClass: heroClass,
+        level: 1,
+        displayType: 'portrait',
+        size: 'large' // Utiliser la grande taille pour les portraits
+      });
+      
+      console.log('✅ Portrait data loaded:', portraitData);
+      
+      return (
+        <div className="hero-portrait-container" style={{ width: '100%', height: '100%', position: 'relative' }}>
+          {/* Image externe en PRIORITÉ pour une meilleure qualité */}
+          <img 
+            src={portraitData.url}
+            alt={heroName}
+            className="hero-portrait-primary"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              borderRadius: '8px',
+              zIndex: 2
+            }}
+            onLoad={(e) => {
+              console.log('📸 External portrait loaded successfully:', heroName);
+              // Masquer le fallback SVG si l'image externe fonctionne
+              const container = e.currentTarget.parentNode as HTMLElement;
+              const svgFallback = container.querySelector('.hero-portrait-svg') as HTMLElement;
+              if (svgFallback) {
+                svgFallback.style.display = 'none';
+              }
+            }}
+            onError={(e) => {
+              console.warn('⚠️ External portrait failed, showing SVG fallback');
+              // Afficher le SVG en fallback
+              const target = e.target as HTMLImageElement;
+              target.style.display = 'none';
+              const container = target.parentNode as HTMLElement;
+              const svgFallback = container.querySelector('.hero-portrait-svg') as HTMLElement;
+              if (svgFallback) {
+                svgFallback.style.display = 'block';
+              }
+            }}
+          />
+          
+          {/* SVG Local en fallback */}
+          <div 
+            className="hero-portrait-svg"
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              borderRadius: '8px',
+              overflow: 'hidden',
+              zIndex: 1,
+              display: 'block' // Visible par défaut jusqu'à ce que l'image externe charge
+            }}
+            dangerouslySetInnerHTML={{ __html: portraitData.localSvg }}
+          />
+          
+          {/* Emoji en dernier recours */}
+          <div 
+            className="hero-portrait-emoji"
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              fontSize: '64px',
+              display: 'none', // Masqué par défaut
+              alignItems: 'center',
+              justifyContent: 'center',
+              background: 'rgba(255, 215, 0, 0.1)',
+              borderRadius: '8px',
+              zIndex: 0
+            }}
+          >
+            {portraitData.fallbackEmoji}
+          </div>
+        </div>
+      );
+    } catch (error) {
+      console.error('❌ Error loading hero portrait:', error);
+      // Fallback ultime avec l'ancienne méthode
+      const heroImage = getHeroFallbackImage(heroName.toUpperCase());
+      return (
+        <img 
+          src={heroImage}
+          alt={heroName}
+          className="hero-portrait-img"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            borderRadius: '8px'
+          }}
+        />
+      );
+    }
   };
 
   if (isLoading) {
@@ -175,6 +288,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
 
   return (
     <div className="true-heroes-interface">
+      
       {/* Header avec informations du jeu */}
       <div className="game-header">
         <div className="header-info">
@@ -202,25 +316,34 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
               className={`control-btn ${rightPanelContent === 'hero' ? 'active' : ''}`}
               onClick={handleHeroesClick}
               disabled={!currentPlayer?.heroes || currentPlayer.heroes.length === 0}
-              title="Heroes"
+              title={t('tooltip.heroes')}
             >
               <span className="btn-icon">⚔️</span>
             </button>
             
-            <button 
+            {/* Remove Inventory button */}
+            {/* <button 
               className={`control-btn ${rightPanelContent === 'inventory' ? 'active' : ''}`}
               onClick={handleInventoryClick}
-              title="Inventory"
+              title={t('tooltip.inventory')}
             >
               <span className="btn-icon">🎒</span>
-            </button>
+            </button> */}
             
             <button 
               className={`control-btn ${rightPanelContent === 'castle' ? 'active' : ''}`}
               onClick={handleCastleClick}
-              title="Castle"
+              title={t('tooltip.castle')}
             >
               <span className="btn-icon">🏰</span>
+            </button>
+
+            <button 
+              className={`control-btn ${showEpicContent ? 'active' : ''}`}
+              onClick={() => setShowEpicContent(true)}
+              title="🎮 Contenu Épique - Créatures, Héros et Bâtiments"
+            >
+              <span className="btn-icon">🐉</span>
             </button>
 
             <button 
@@ -232,9 +355,11 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
                   console.error('Error ending turn:', error);
                 }
               }}
-              title="End Turn"
+              title={currentGame?.gameMode === 'hotseat' ? t('nextPlayer') : t('tooltip.endTurn')}
             >
-              <span className="btn-icon">🌟</span>
+              <span className="btn-icon">
+                {currentGame?.gameMode === 'hotseat' ? '👤' : '⭐'}
+              </span>
             </button>
           </div>
         </div>
@@ -247,23 +372,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
           <ModernGameRenderer 
             width={1200} 
             height={800} 
-            onTileClick={(position) => {
-              // Handle tile clicks for hero selection and movement
-              console.log('Tile clicked:', position);
-              
-              // Check if there's a hero at this position
-              const heroAtPosition = currentPlayer?.heroes?.find(hero => 
-                hero.position.x === position.x && hero.position.y === position.y
-              );
-              
-              if (heroAtPosition) {
-                // Select the hero and show hero panel
-                handleHeroSelect(heroAtPosition.id);
-              } else if (selectedHero) {
-                // Move selected hero to this position (future implementation)
-                console.log(`Moving ${selectedHero.name} to`, position);
-              }
-            }}
+            onTileClick={handleMapClick}
             ref={mapRendererRef}
           />
         </div>
@@ -280,7 +389,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
                 <div className="scenario-overview">
                   <div className="scenario-name">
                     <span className="scenario-icon">🏰</span>
-                    <span className="scenario-title">Conquest Classic</span>
+                    <span className="scenario-title">{scenarioId ? scenarioId.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase()) : 'Conquest Classic'}</span>
                   </div>
                   <div className="scenario-type">
                     <span className="type-badge">{scenarioType}</span>
@@ -298,7 +407,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
                   </div>
                   <div className="info-item">
                     <span className="info-label">🌍 Map Size:</span>
-                    <span className="info-value">20x20</span>
+                    <span className="info-value">{currentGame?.map?.width || 20}x{currentGame?.map?.height || 20}</span>
                   </div>
                   <div className="info-item">
                     <span className="info-label">⚔️ Game Mode:</span>
@@ -310,15 +419,15 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
                   <h4>🎯 Objectives</h4>
                   <div className="objective-item">
                     <span className="objective-icon">🏆</span>
-                    <span className="objective-text">Defeat all enemy heroes</span>
+                    <span className="objective-text">Control the Temporal Nexus</span>
                   </div>
                   <div className="objective-item">
-                    <span className="objective-icon">🏰</span>
-                    <span className="objective-text">Capture all enemy castles</span>
+                    <span className="objective-icon">🌀</span>
+                    <span className="objective-text">Close 3 temporal rifts</span>
                   </div>
                   <div className="objective-item">
-                    <span className="objective-icon">💎</span>
-                    <span className="objective-text">Collect rare artifacts</span>
+                    <span className="objective-icon">⚔️</span>
+                    <span className="objective-text">Defeat the Temporal Guardian</span>
                   </div>
                 </div>
 
@@ -335,15 +444,15 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
                     <div className="stat-card">
                       <div className="stat-icon">🏰</div>
                       <div className="stat-info">
-                        <div className="stat-number">1</div>
+                        <div className="stat-number">{currentGame?.map?.objects?.filter(obj => obj.type === 'city').length || 1}</div>
                         <div className="stat-label">Castles</div>
                       </div>
                     </div>
                     <div className="stat-card">
-                      <div className="stat-icon">🏗️</div>
+                      <div className="stat-icon">🗺️</div>
                       <div className="stat-info">
-                        <div className="stat-number">4</div>
-                        <div className="stat-label">Buildings</div>
+                        <div className="stat-number">{currentGame?.map?.tiles?.length || 400}</div>
+                        <div className="stat-label">Tiles</div>
                       </div>
                     </div>
                     <div className="stat-card">
@@ -374,81 +483,129 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
               <div className="hero-details">
                 <div className="hero-portrait">
                   <div className="hero-image">
-                    <img 
-                      src={getHeroImage(selectedHero.name)} 
-                      alt={selectedHero.name}
-                      className="hero-portrait-img"
-                      onError={(e) => {
-                        // Fallback simple avec emoji
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        const parent = target.parentNode as HTMLElement;
-                        if (parent && !parent.querySelector('.hero-emoji-fallback')) {
-                          const fallback = document.createElement('div');
-                          fallback.className = 'hero-emoji-fallback';
-                          fallback.textContent = getHeroEmoji(selectedHero.name);
-                          parent.appendChild(fallback);
-                        }
-                      }}
-                      onLoad={(e) => {
-                        // S'assurer que l'emoji fallback est retiré si l'image charge
-                        const target = e.target as HTMLImageElement;
-                        const parent = target.parentNode as HTMLElement;
-                        const fallback = parent?.querySelector('.hero-emoji-fallback');
-                        if (fallback) {
-                          fallback.remove();
-                        }
-                        target.style.display = 'block';
-                      }}
-                    />
+                    {getHeroPortraitComponent(selectedHero.name, selectedHero.class || 'Warrior')}
                   </div>
                   <div className="hero-basic-info">
-                    <div className="hero-name">{selectedHero.name}</div>
-                    <div className="hero-level">Level {selectedHero.level}</div>
-                    <div className="hero-position">📍 ({selectedHero.position.x}, {selectedHero.position.y})</div>
+                    <h3 className="hero-name">{selectedHero.name}</h3>
+                    <div className="hero-class">
+                      {(() => {
+                        const heroInfo = getHeroInfo(selectedHero.name.toUpperCase());
+                        return heroInfo.class;
+                      })()}
+                    </div>
+                    <div className="hero-description">
+                      {(() => {
+                        const heroInfo = getHeroInfo(selectedHero.name.toUpperCase());
+                        return heroInfo.description;
+                      })()}
+                    </div>
                   </div>
                 </div>
-
+                
                 <div className="hero-stats">
-                  <div className="stat-item">
-                    <span className="stat-label">⚔️ Attack:</span>
-                    <span className="stat-value">{selectedHero.stats?.attack || 10}</span>
+                  <div className="stat-row">
+                    <div className="stat-item">
+                      <span className="stat-label">⚔️ Attack:</span>
+                      <span className="stat-value">{selectedHero.stats?.attack || 0}</span>
+                    </div>
+                    <div className="stat-item">
+                      <span className="stat-label">🛡️ Defense:</span>
+                      <span className="stat-value">{selectedHero.stats?.defense || 0}</span>
+                    </div>
                   </div>
-                  <div className="stat-item">
-                    <span className="stat-label">🛡️ Defense:</span>
-                    <span className="stat-value">{selectedHero.stats?.defense || 10}</span>
+                  <div className="stat-row">
+                    <div className="stat-item">
+                      <span className="stat-label">🔮 Spell Power:</span>
+                      <span className="stat-value">{selectedHero.stats?.spellPower || 0}</span>
+                    </div>
+                    <div className="stat-item">
+                      <span className="stat-label">📚 Knowledge:</span>
+                      <span className="stat-value">{selectedHero.stats?.knowledge || 0}</span>
+                    </div>
                   </div>
-                  <div className="stat-item">
-                    <span className="stat-label">🏃 Movement:</span>
-                    <span className="stat-value">{selectedHero.movementPoints}/{selectedHero.maxMovementPoints}</span>
-                  </div>
-                  <div className="stat-item">
-                    <span className="stat-label">🔮 Spell Power:</span>
-                    <span className="stat-value">{selectedHero.stats?.spellPower || 5}</span>
+                  <div className="stat-row">
+                    <div className="stat-item">
+                      <span className="stat-label">❤️ Health:</span>
+                      <span className="stat-value">{selectedHero.stats?.health || 100}</span>
+                    </div>
+                    <div className="stat-item">
+                      <span className="stat-label">💙 Mana:</span>
+                      <span className="stat-value">{selectedHero.stats?.mana || 20}</span>
+                    </div>
                   </div>
                 </div>
+                
+                {selectedHero.skills && selectedHero.skills.length > 0 && (
+                  <div className="hero-skills">
+                    <h4>🎯 Skills:</h4>
+                    <div className="skills-list">
+                      {selectedHero.skills.map((skill, index) => (
+                        <span key={index} className="skill-badge">{skill}</span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                
+                {selectedHero.spells && selectedHero.spells.length > 0 && (
+                  <div className="hero-spells">
+                    <h4>✨ Spells:</h4>
+                    <div className="spells-list">
+                      {selectedHero.spells.map((spell, index) => (
+                        <span key={index} className="spell-badge">{spell}</span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                
+                <div className="hero-actions">
+                  <button 
+                    className="action-button"
+                    onClick={() => {
+                      // Action pour lancer un sort
+                      console.log('Cast spell with hero:', selectedHero.name);
+                    }}
+                  >
+                    🔮 Cast Spell
+                  </button>
+                </div>
 
-                <div className="hero-troops">
-                  <h4>🏺 Army</h4>
-                  <div className="troops-list">
-                    {selectedHero.units && selectedHero.units.length > 0 ? (
-                      selectedHero.units.map((unit, index) => (
-                        <div key={index} className="troop-item">
-                          <span className="troop-icon">🏇</span>
-                          <span className="troop-name">{unit.name || 'Soldiers'}</span>
-                          <span className="troop-count">×{unit.quantity || 10}</span>
-                        </div>
-                      ))
-                    ) : (
-                      <div className="no-troops">No army recruited</div>
-                    )}
+                {/* Objets équipés directement dans le panneau héros */}
+                <div className="hero-equipped-items">
+                  <h4>🎒 Equipped Items:</h4>
+                  <div className="equipped-slots">
+                    <div className="equipment-slot">
+                      <span className="slot-icon">⚔️</span>
+                      <div className="slot-item">Magic Sword</div>
+                    </div>
+                    <div className="equipment-slot">
+                      <span className="slot-icon">🛡️</span>
+                      <div className="slot-item">Dragon Scale</div>
+                    </div>
+                    <div className="equipment-slot">
+                      <span className="slot-icon">💍</span>
+                      <div className="slot-item">Power Ring</div>
+                    </div>
+                    <div className="equipment-slot">
+                      <span className="slot-icon">👑</span>
+                      <div className="slot-item">Crown of Wisdom</div>
+                    </div>
+                  </div>
+                  <div className="equipment-bonuses">
+                    <h5>Bonuses:</h5>
+                    <div className="bonus-list">
+                      <span>+15 Attack</span>
+                      <span>+12 Defense</span>
+                      <span>+8 Spell Power</span>
+                      <span>+200 Movement</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           )}
 
-          {rightPanelContent === 'inventory' && (
+          {/* Remove inventory panel */}
+          {/* {rightPanelContent === 'inventory' && (
             <div className="panel-content inventory-panel">
               <div className="panel-header">
                 <h3>🎒 Equipped Items</h3>
@@ -493,56 +650,23 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
                 </div>
               </div>
             </div>
-          )}
+          )} */}
 
           {rightPanelContent === 'castle' && (
-            <div className="panel-content castle-panel">
-              <div className="panel-header">
-                <h3>🏰 Your Castles</h3>
-                <button 
-                  className="close-panel-btn"
-                  onClick={() => setRightPanelContent('scenario')}
-                >
-                  ×
-                </button>
-              </div>
-              
-              <div className="castles-list">
-                <div className="castle-item">
-                  <div className="castle-icon">🏰</div>
-                  <div className="castle-info">
-                    <div className="castle-name">Main Castle</div>
-                    <div className="castle-details">
-                      <span>📍 (2, 3)</span>
-                      <span>🏗️ 5 Buildings</span>
-                    </div>
-                  </div>
-                  <button className="castle-manage-btn">Manage</button>
-                </div>
-                
-                <div className="castle-construction">
-                  <h4>🔨 Available Buildings</h4>
-                  <div className="building-item">
-                    <span className="building-icon">🏬</span>
-                    <span className="building-name">Marketplace</span>
-                    <span className="building-cost">💰 500</span>
-                  </div>
-                  <div className="building-item">
-                    <span className="building-icon">🏭</span>
-                    <span className="building-name">Barracks</span>
-                    <span className="building-cost">💰 750</span>
-                  </div>
-                  <div className="building-item">
-                    <span className="building-icon">🗼</span>
-                    <span className="building-name">Mage Tower</span>
-                    <span className="building-cost">💰 1000</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <CastleManagementPanel
+              gameId={currentGame.id}
+              playerId={currentPlayer.id}
+              onClose={() => setRightPanelContent('scenario')}
+            />
           )}
         </div>
       </div>
+      
+      {/* Epic Content Viewer Modal */}
+      <EpicContentViewer 
+        isVisible={showEpicContent}
+        onClose={() => setShowEpicContent(false)}
+      />
     </div>
   );
 };

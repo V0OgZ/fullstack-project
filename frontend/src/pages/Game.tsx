@@ -66,6 +66,8 @@ const Game: React.FC = () => {
     }
   }
   
+ 
+
   return (
     <div className="game-page">
       <TrueHeroesInterface

@@ -32,20 +32,19 @@
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
   border: 1px solid rgba(255, 215, 0, 0.3);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(5px);
   white-space: nowrap;
   
-  /* Animation d'apparition */
-  animation: tooltipFadeIn 0.2s ease-out;
+  /* Animation d'apparition plus douce et lente */
+  animation: tooltipFadeIn 1.2s ease-out;
 }
 
 @keyframes tooltipFadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(2px);
   }
   to {
-    opacity: 1;
+    opacity: 0.8;
     transform: translateY(0);
   }
 }

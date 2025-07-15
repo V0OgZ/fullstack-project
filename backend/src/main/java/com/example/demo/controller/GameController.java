@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.service.GameService;
+import com.example.demo.service.GameStateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,9 @@ public class GameController {
 
     @Autowired
     private GameService gameService;
+    
+    @Autowired
+    private GameStateService gameStateService;
 
     // Game management endpoints
     @GetMapping("/games/{gameId}")
@@ -76,14 +80,6 @@ public class GameController {
     }
 
     // Hero action endpoints
-    @PostMapping("/heroes/{heroId}/move")
-    public ResponseEntity<Map<String, Object>> moveHero(
-            @PathVariable String heroId,
-            @RequestBody Map<String, Object> request) {
-        Map<String, Object> action = gameService.moveHero(heroId, request.get("targetPosition"));
-        return ResponseEntity.ok(action);
-    }
-
     @PostMapping("/heroes/{heroId}/attack")
     public ResponseEntity<Map<String, Object>> attackTarget(
             @PathVariable String heroId,
@@ -218,12 +214,32 @@ public class GameController {
 
     // Turn management endpoints
     @PostMapping("/games/{gameId}/end-turn")
-    public ResponseEntity<Map<String, Object>> endTurn(@PathVariable String gameId) {
-        gameService.endTurn(gameId);
-        Map<String, Object> response = new HashMap<>();
-        response.put("success", true);
-        response.put("message", "Turn ended successfully");
-        return ResponseEntity.ok(response);
+    public ResponseEntity<Map<String, Object>> endTurn(@PathVariable String gameId, @RequestBody Map<String, String> request) {
+        try {
+            String playerId = request.get("playerId");
+            
+            if (!gameStateService.isPlayerTurn(gameId, playerId)) {
+                Map<String, Object> error = new HashMap<>();
+                error.put("error", "Not your turn");
+                return ResponseEntity.badRequest().body(error);
+            }
+            
+            // Pass the current player ID to the service
+            gameStateService.endPlayerTurn(gameId, playerId);
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", true);
+            response.put("message", "Turn ended successfully");
+            response.put("currentTurn", gameStateService.getOrCreateGameState(gameId).getCurrentTurn());
+            response.put("currentPlayerId", gameStateService.getOrCreateGameState(gameId).getCurrentPlayerId());
+            
+            return ResponseEntity.ok(response);
+            
+        } catch (Exception e) {
+            Map<String, Object> error = new HashMap<>();
+            error.put("error", "Failed to end turn: " + e.getMessage());
+            return ResponseEntity.badRequest().body(error);
+        }
     }
 
     // Combat results endpoints
@@ -233,11 +249,94 @@ public class GameController {
         return ResponseEntity.ok(results);
     }
 
-    // Game state polling
+    // Get complete game state
     @GetMapping("/games/{gameId}/state")
-    public ResponseEntity<Map<String, Object>> getGameState(@PathVariable String gameId) {
-        Map<String, Object> game = gameService.getGameState(gameId);
-        return ResponseEntity.ok(game);
+    public ResponseEntity<Map<String, Object>> getGameState(@PathVariable String gameId, @RequestParam String playerId) {
+        try {
+            Map<String, Object> game = gameService.getGame(gameId);
+            
+            // Add player-specific CRITICAL game state only
+            Map<String, Object> response = new HashMap<>(game);
+            response.put("selectedHero", gameStateService.getSelectedHero(gameId, playerId));
+            response.put("playerResources", gameStateService.getPlayerResources(gameId, playerId));
+            response.put("isPlayerTurn", gameStateService.isPlayerTurn(gameId, playerId));
+            
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            Map<String, Object> error = new HashMap<>();
+            error.put("error", "Failed to get game state: " + e.getMessage());
+            return ResponseEntity.badRequest().body(error);
+        }
+    }
+    
+    // ======================
+    // HERO MANAGEMENT - CRITICAL GAME STATE
+    // ======================
+    
+    @PostMapping("/games/{gameId}/select-hero")
+    public ResponseEntity<Map<String, Object>> selectHero(@PathVariable String gameId, @RequestBody Map<String, String> request) {
+        try {
+            String playerId = request.get("playerId");
+            String heroId = request.get("heroId");
+            
+            gameStateService.selectHero(gameId, playerId, heroId);
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", true);
+            response.put("selectedHero", heroId);
+            
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            Map<String, Object> error = new HashMap<>();
+            error.put("error", "Failed to select hero: " + e.getMessage());
+            return ResponseEntity.badRequest().body(error);
+        }
+    }
+    
+    @PostMapping("/games/{gameId}/move-hero")
+    public ResponseEntity<Map<String, Object>> moveHero(@PathVariable String gameId, @RequestBody Map<String, Object> request) {
+        try {
+            String heroId = (String) request.get("heroId");
+            Map<String, Integer> position = (Map<String, Integer>) request.get("position");
+            
+            gameStateService.updateHeroPosition(gameId, heroId, position.get("x"), position.get("y"));
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", true);
+            response.put("heroId", heroId);
+            response.put("newPosition", position);
+            
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            Map<String, Object> error = new HashMap<>();
+            error.put("error", "Failed to move hero: " + e.getMessage());
+            return ResponseEntity.badRequest().body(error);
+        }
+    }
+    
+    // ======================
+    // RESOURCE MANAGEMENT - CRITICAL GAME STATE
+    // ======================
+    
+    @PostMapping("/games/{gameId}/update-resources")
+    public ResponseEntity<Map<String, Object>> updatePlayerResources(@PathVariable String gameId, @RequestBody Map<String, Object> request) {
+        try {
+            String playerId = (String) request.get("playerId");
+            String resourceType = (String) request.get("resourceType");
+            Integer amount = (Integer) request.get("amount");
+            
+            gameStateService.updatePlayerResources(gameId, playerId, resourceType, amount);
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", true);
+            response.put("updatedResources", gameStateService.getPlayerResources(gameId, playerId));
+            
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            Map<String, Object> error = new HashMap<>();
+            error.put("error", "Failed to update resources: " + e.getMessage());
+            return ResponseEntity.badRequest().body(error);
+        }
     }
 
     // Utility endpoints

@@ -1,9 +1,12 @@
-import React, { useRef, useEffect, useState, useCallback, useMemo, useImperativeHandle, forwardRef } from 'react';
+import React, { useRef, useEffect, useState, useCallback, useMemo, forwardRef, useImperativeHandle } from 'react';
 import { useGameStore } from '../store/useGameStore';
+import { loadHeroImageWithFallback } from '../utils/heroAssets';
 import { Position, Tile, Hero } from '../types/game';
 import { useTranslation } from '../i18n';
-import { HERO_ASSETS } from '../constants/gameAssets';
 import './ModernGameRenderer.css';
+import { computeHexBitmask } from '../utils/hexBitmask';
+import { TERRAIN_EDGE_SPRITES } from '../constants/terrainSprites';
+import heroDisplayService from '../services/heroDisplayService';
 
 interface ModernGameRendererProps {
   width: number;
@@ -28,83 +31,80 @@ interface AnimatedElement {
 const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererProps>(({ width, height, onTileClick }, ref) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
-  const { map, currentGame, selectedTile, setSelectedTile, visibleZFCs } = useGameStore();
+  const animatedElementsRef = useRef<AnimatedElement[]>([]);
+  const { map, currentGame, /* currentPlayer, */ selectedTile, setSelectedTile, visibleZFCs, selectedHero, movementRange, movementMode, selectHero, moveHero, canMoveToPosition } = useGameStore();
   const { t } = useTranslation();
   
   const [animatedElements, setAnimatedElements] = useState<AnimatedElement[]>([]);
+  
+  // Synchroniser la référence avec l'état
+  useEffect(() => {
+    animatedElementsRef.current = animatedElements;
+  }, [animatedElements]);
   const [hoveredTile, setHoveredTile] = useState<Position | null>(null);
   const [heroImages, setHeroImages] = useState<Map<string, HTMLImageElement>>(new Map());
   const [mapOffset, setMapOffset] = useState<Position>({ x: 0, y: 0 });
+  const [spriteCache] = useState<Map<string, HTMLImageElement>>(new Map());
 
-  // Fonction pour obtenir l'image du héros
-  const getHeroImage = useCallback((heroName: string): string => {
-    const name = heroName.toLowerCase();
-    if (name.includes('arthur') || name.includes('knight')) {
-      return HERO_ASSETS.KNIGHT;
-    } else if (name.includes('merlin') || name.includes('mage') || name.includes('wizard')) {
-      return HERO_ASSETS.MAGE;
-    } else if (name.includes('lancelot') || name.includes('warrior')) {
-      return HERO_ASSETS.WARRIOR;
-    } else if (name.includes('archer') || name.includes('bow')) {
-      return HERO_ASSETS.ARCHER;
-    } else if (name.includes('paladin')) {
-      return HERO_ASSETS.PALADIN;
-    } else if (name.includes('necromancer')) {
-      return HERO_ASSETS.NECROMANCER;
-    } else {
-      return HERO_ASSETS.WARRIOR;
+  // Pre-compute extended (projection) movement range when hero selected
+  const projectionRange: Position[] = useMemo(() => {
+    if (!selectedHero) return [];
+    // Clone hero with doubled movement points for projection calculation
+    const heroClone = { ...selectedHero, movementPoints: selectedHero.movementPoints * 2 } as Hero;
+    return useGameStore.getState().calculateMovementRange(heroClone);
+  }, [selectedHero]);
+  
+  // Handle tile clicks for hero selection and movement
+  const handleTileClick = useCallback((position: Position) => {
+    if (!map || map.length === 0 || !currentGame) return;
+    if (!position || typeof position.x !== 'number' || typeof position.y !== 'number') return;
+    
+    const tile = map[position.y]?.[position.x];
+    if (!tile) return;
+    
+    // If there's a hero on this tile, select it
+    if (tile.hero) {
+      selectHero(tile.hero);
+      setSelectedTile(position);
+      return;
+    }
+    
+    // If we have a selected hero and are in movement mode, try to move
+    if (selectedHero && movementMode && canMoveToPosition(selectedHero, position)) {
+      moveHero(selectedHero.id, position);
+      setSelectedTile(position);
+      return;
+    }
+    
+    // Otherwise, just select the tile
+    setSelectedTile(position);
+    
+    // Call external handler if provided
+    if (onTileClick) {
+      onTileClick(position);
+    }
+  }, [map, currentGame, selectedHero, movementMode, canMoveToPosition, selectHero, moveHero, setSelectedTile, onTileClick]);
+
+  // Preload hero images
+  const preloadHeroImage = useCallback(async (heroName: string) => {
+    try {
+      const image = await loadHeroImageWithFallback(heroName);
+      setHeroImages((prev: Map<string, HTMLImageElement>) => new Map(prev).set(heroName, image));
+    } catch (error) {
+      console.warn(`Failed to preload hero image: ${heroName}`, error);
     }
   }, []);
 
-  // Fonction pour précharger les images des héros
-  const preloadHeroImage = useCallback((heroName: string): Promise<HTMLImageElement> => {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.onload = () => resolve(img);
-      img.onerror = () => reject(new Error(`Failed to load hero image: ${heroName}`));
-      img.src = getHeroImage(heroName);
-    });
-  }, [getHeroImage]);
-
-  // Précharger les images des héros visibles
+  // Précharger les images des héros visibles - TEMPORAIREMENT DÉSACTIVÉ POUR DÉBUGGER
   useEffect(() => {
-    const loadHeroImages = async () => {
-      const { currentGame, currentPlayer } = useGameStore.getState();
-      const newHeroImages = new Map<string, HTMLImageElement>();
-      
-      if (currentPlayer?.heroes) {
-        for (const hero of currentPlayer.heroes) {
-          try {
-            const img = await preloadHeroImage(hero.name);
-            newHeroImages.set(hero.name, img);
-          } catch (error) {
-            console.warn(`Failed to load image for hero ${hero.name}:`, error);
-          }
-        }
-      }
-      
-      if (currentGame?.players) {
-        for (const player of currentGame.players) {
-          if (player.heroes) {
-            for (const hero of player.heroes) {
-              if (!newHeroImages.has(hero.name)) {
-                try {
-                  const img = await preloadHeroImage(hero.name);
-                  newHeroImages.set(hero.name, img);
-                } catch (error) {
-                  console.warn(`Failed to load image for hero ${hero.name}:`, error);
-                }
-              }
-            }
-          }
-        }
-      }
-      
-      setHeroImages(newHeroImages);
-    };
-    
-    loadHeroImages();
-  }, [preloadHeroImage]);
+    // Désactivé temporairement pour éviter les boucles infinies
+    console.log('🔧 Hero image preloading temporarily disabled for debugging');
+  }, []);
+
+  // Précharger les images de terrain - TEMPORAIREMENT DÉSACTIVÉ
+  useEffect(() => {
+    console.log('🔧 Terrain image preloading temporarily disabled for debugging');
+  }, []);
 
   // Render configuration
   const config = useMemo(() => ({
@@ -115,32 +115,52 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     offsetX: 50 + mapOffset.x,
     offsetY: 50 + mapOffset.y,
     colors: {
-      grass: '#4CAF50',
-      forest: '#2E7D32',
-      mountain: '#795548',
-      water: '#2196F3',
-      desert: '#FFC107',
-      swamp: '#8BC34A',
-      default: '#4CAF50',
+      // HOMM3 terrain colors
+      grass: '#7fb069',        // HOMM3 grass green
+      dirt: '#a68a64',         // HOMM3 dirt road brown
+      forest: '#386641',       // HOMM3 forest green
+      mountain: '#8d5524',     // HOMM3 rocky brown
+      water: '#3a86ff',        // HOMM3 deep blue
+      sand: '#e9c46a',         // HOMM3 desert sand
+      snow: '#e0e1dd',         // HOMM3 snow white
+      swamp: '#52796f',        // HOMM3 swamp green
+      rough: '#936639',        // HOMM3 wasteland brown
+      lava: '#e63946',         // HOMM3 lava red
+      // UI colors
+      default: '#7fb069',
+      hover: 'rgba(255, 255, 255, 0.2)',
       selected: '#FFD700',
-      hover: '#FFA726',
-      zfc: {
-        friendly: 'rgba(76, 175, 80, 0.3)',
-        enemy: 'rgba(244, 67, 54, 0.3)',
-        neutral: 'rgba(255, 193, 7, 0.3)',
-        locked: 'rgba(156, 39, 176, 0.5)'
-      }
+      movement: 'rgba(76, 175, 80, 0.4)'
+    },
+    // HOMM3-style terrain gradients
+    gradients: {
+      grass: ['#7fb069', '#8fbf7a'],
+      dirt: ['#a68a64', '#b59a74'],
+      forest: ['#386641', '#487651'],
+      mountain: ['#8d5524', '#9d6534'],
+      water: ['#3a86ff', '#4a96ff'],
+      sand: ['#e9c46a', '#f9d47a'],
+      snow: ['#e0e1dd', '#f0f1ed'],
+      swamp: ['#52796f', '#62897f'],
+      rough: ['#936639', '#a37649'],
+      lava: ['#e63946', '#f64956']
     }
   }), [mapOffset]);
 
   // Conversion coordonnées hexagonales (pointy-top hexagons)
   const hexToPixel = useCallback((hex: Position): Position => {
+    if (!hex || typeof hex.x !== 'number' || typeof hex.y !== 'number') {
+      return { x: 0, y: 0 };
+    }
     const x = config.hexWidth * (hex.x + hex.y * 0.5) + config.offsetX;
     const y = config.hexHeight * hex.y * 0.75 + config.offsetY;
     return { x, y };
   }, [config.hexWidth, config.hexHeight, config.offsetX, config.offsetY]);
 
   const pixelToHex = useCallback((pixel: Position): Position => {
+    if (!pixel || typeof pixel.x !== 'number' || typeof pixel.y !== 'number') {
+      return { x: 0, y: 0 };
+    }
     const adjustedX = (pixel.x - config.offsetX) / config.hexWidth;
     const adjustedY = (pixel.y - config.offsetY) / (config.hexHeight * 0.75);
     
@@ -156,6 +176,9 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     center: Position,
     structure: any
   ) => {
+    if (!center || typeof center.x !== 'number' || typeof center.y !== 'number') return;
+    if (!structure) return;
+    
     const { x, y } = center;
     const size = 22;
 
@@ -247,6 +270,9 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     center: Position,
     creature: any
   ) => {
+    if (!center || typeof center.x !== 'number' || typeof center.y !== 'number') return;
+    if (!creature) return;
+    
     const { x, y } = center;
     const size = 15;
 
@@ -273,103 +299,200 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     ctx.stroke();
   }, []);
 
-  // Rendu d'un héros
-  const drawHero = useCallback((
+  // Rendu d'un héros avec avatars Dicebear offline
+  const drawHero = useCallback(async (
     ctx: CanvasRenderingContext2D,
     center: Position,
     hero: Hero
   ) => {
-    const { x, y } = center;
-    const size = 18;
-
-    // Halo autour du héros
-    ctx.beginPath();
-    ctx.arc(x, y, size + 3, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(255, 215, 0, 0.4)';
-    ctx.fill();
-
-    // Cercle de base avec gradient
-    const gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
-    gradient.addColorStop(0, '#FFD700');
-    gradient.addColorStop(1, '#FFA500');
+    if (!center || typeof center.x !== 'number' || typeof center.y !== 'number') return;
+    if (!hero || !hero.position) return;
     
-    ctx.beginPath();
-    ctx.arc(x, y, size, 0, Math.PI * 2);
-    ctx.fillStyle = gradient;
-    ctx.fill();
-    ctx.strokeStyle = '#B8860B';
-    ctx.lineWidth = 2;
-    ctx.stroke();
+    const { x, y } = center;
+    const size = 20; // Taille optimisée pour les sprites sur carte
 
-    // Dessiner l'image du héros si disponible
-    const heroImage = heroImages.get(hero.name);
-    if (heroImage) {
-      ctx.save();
+    try {
+      // Utiliser le service d'avatars offline
+      const { default: offlineAvatarGenerator } = await import('../services/offlineAvatarGenerator');
+      const avatarData = await offlineAvatarGenerator.getHeroAvatar(hero.name);
+      
+      // Base circulaire pour le héros (style Heroes 3)
       ctx.beginPath();
-      ctx.arc(x, y, size - 2, 0, Math.PI * 2);
-      ctx.clip();
-      ctx.drawImage(heroImage, x - size + 2, y - size + 2, (size - 2) * 2, (size - 2) * 2);
-      ctx.restore();
-    } else {
-      // Fallback avec forme géométrique
-      ctx.fillStyle = '#8B4513';
-      ctx.strokeStyle = 'white';
+      ctx.arc(x, y, size, 0, Math.PI * 2);
+      
+      // Couleur selon l'avatar généré
+      const gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+      if (avatarData && avatarData.isGenerated) {
+        gradient.addColorStop(0, '#FFD700');
+        gradient.addColorStop(1, '#B8860B');
+      } else {
+        gradient.addColorStop(0, '#C0C0C0');
+        gradient.addColorStop(1, '#808080');
+      }
+      ctx.fillStyle = gradient;
+      ctx.fill();
+      ctx.strokeStyle = avatarData && avatarData.isGenerated ? '#8B4513' : '#666666';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Dessiner le héros selon sa classe (style pixelisé Heroes 3)
+      ctx.fillStyle = '#FFFFFF';
+      ctx.strokeStyle = '#000000';
       ctx.lineWidth = 1;
       
-      // Épée stylisée
+      const heroClass = hero.class || 'Warrior';
+      
+      if (heroClass === 'Knight' || heroClass === 'Warrior') {
+        // Chevalier avec épée et bouclier
+        // Corps
+        ctx.fillRect(x - 3, y - 8, 6, 12);
+        ctx.strokeRect(x - 3, y - 8, 6, 12);
+        
+        // Tête (casque)
+        ctx.fillRect(x - 4, y - 12, 8, 6);
+        ctx.strokeRect(x - 4, y - 12, 8, 6);
+        
+        // Épée
+        ctx.fillRect(x + 6, y - 10, 2, 8);
+        ctx.strokeRect(x + 6, y - 10, 2, 8);
+        
+        // Bouclier
+        ctx.fillRect(x - 8, y - 6, 3, 6);
+        ctx.strokeRect(x - 8, y - 6, 3, 6);
+        
+      } else if (heroClass === 'Mage' || heroClass === 'Wizard') {
+        // Mage avec bâton et robe
+        // Corps (robe)
+        ctx.fillRect(x - 4, y - 8, 8, 12);
+        ctx.strokeRect(x - 4, y - 8, 8, 12);
+        
+        // Tête (chapeau pointu)
+        ctx.beginPath();
+        ctx.moveTo(x, y - 16);
+        ctx.lineTo(x - 3, y - 8);
+        ctx.lineTo(x + 3, y - 8);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        
+        // Bâton magique
+        ctx.fillRect(x + 5, y - 14, 1, 12);
+        ctx.strokeRect(x + 5, y - 14, 1, 12);
+        
+        // Orbe magique
+        ctx.beginPath();
+        ctx.arc(x + 5, y - 16, 2, 0, Math.PI * 2);
+        ctx.fillStyle = '#00FFFF';
+        ctx.fill();
+        ctx.stroke();
+        
+      } else if (heroClass === 'Archer') {
+        // Archer avec arc
+        // Corps
+        ctx.fillRect(x - 3, y - 8, 6, 12);
+        ctx.strokeRect(x - 3, y - 8, 6, 12);
+        
+        // Tête
+        ctx.fillRect(x - 3, y - 12, 6, 6);
+        ctx.strokeRect(x - 3, y - 12, 6, 6);
+        
+        // Arc
+        ctx.beginPath();
+        ctx.arc(x - 6, y - 2, 6, Math.PI * 0.2, Math.PI * 0.8);
+        ctx.stroke();
+        
+        // Flèche
+        ctx.fillRect(x - 10, y - 3, 8, 1);
+        ctx.strokeRect(x - 10, y - 3, 8, 1);
+        
+      } else {
+        // Héros générique
+        // Corps
+        ctx.fillRect(x - 3, y - 8, 6, 12);
+        ctx.strokeRect(x - 3, y - 8, 6, 12);
+        
+        // Tête
+        ctx.fillRect(x - 3, y - 12, 6, 6);
+        ctx.strokeRect(x - 3, y - 12, 6, 6);
+        
+        // Arme générique
+        ctx.fillRect(x + 4, y - 8, 1, 8);
+        ctx.strokeRect(x + 4, y - 8, 1, 8);
+      }
+
+      // Ajouter un petit indicateur de niveau
+      ctx.fillStyle = '#FFD700';
+      ctx.font = 'bold 8px Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText(hero.level?.toString() || '1', x, y + size + 12);
+
+      // Dessiner les points de chemin si en mouvement
+      if (spriteData.pathDots && spriteData.pathDots.length > 0) {
+        ctx.fillStyle = '#00FF00';
+        ctx.strokeStyle = '#008800';
+        ctx.lineWidth = 1;
+        
+        spriteData.pathDots.forEach((dot, index) => {
+          const dotX = dot.x * 60 + 30; // Ajuster selon la taille des hexagones
+          const dotY = dot.y * 60 + 30;
+          
+          // Points verts style Heroes 3
+          ctx.beginPath();
+          ctx.arc(dotX, dotY, 3, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+          
+          // Petit effet de pulsation
+          const pulse = Math.sin(Date.now() * 0.01 + index) * 0.5 + 0.5;
+          ctx.beginPath();
+          ctx.arc(dotX, dotY, 2 + pulse, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(0, 255, 0, ${0.3 + pulse * 0.3})`;
+          ctx.fill();
+        });
+      }
+
+    } catch (error) {
+      console.warn('⚠️ Error using hero display service, falling back to old method:', error);
+      
+      // Fallback simple avec cercle coloré
       ctx.beginPath();
-      ctx.moveTo(x, y - 8);
-      ctx.lineTo(x, y + 8);
-      ctx.moveTo(x - 4, y - 4);
-      ctx.lineTo(x + 4, y - 4);
+      ctx.arc(x, y, size, 0, Math.PI * 2);
+      ctx.fillStyle = '#FFD700';
+      ctx.fill();
+      ctx.strokeStyle = '#B8860B';
+      ctx.lineWidth = 2;
       ctx.stroke();
+      
+      // Nom du héros
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = 'bold 10px Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText(hero.name.charAt(0), x, y + 3);
     }
-
-    // Niveau du héros
-    ctx.beginPath();
-    ctx.arc(x + 12, y - 12, 8, 0, Math.PI * 2);
-    ctx.fillStyle = '#FF4444';
-    ctx.fill();
-    ctx.strokeStyle = '#CC0000';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-    
-    ctx.fillStyle = 'white';
-    ctx.font = 'bold 10px Arial';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(hero.level.toString(), x + 12, y - 12);
-
-    // Nom du héros avec contour
-    ctx.fillStyle = 'white';
-    ctx.font = 'bold 11px Arial';
-    ctx.strokeStyle = 'black';
-    ctx.lineWidth = 3;
-    ctx.strokeText(hero.name, x, y + 28);
-    ctx.fillText(hero.name, x, y + 28);
-
-    // Barre de mouvement
-    const mpBarWidth = 30;
-    const mpBarHeight = 4;
-    const mpRatio = hero.movementPoints / hero.maxMovementPoints;
-    
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
-    ctx.fillRect(x - mpBarWidth/2, y + 35, mpBarWidth, mpBarHeight);
-    
-    ctx.fillStyle = mpRatio > 0.5 ? '#4CAF50' : mpRatio > 0.2 ? '#FF9800' : '#F44336';
-    ctx.fillRect(x - mpBarWidth/2, y + 35, mpBarWidth * mpRatio, mpBarHeight);
   }, [heroImages]);
 
-  // Render hexagonal tile
+  // Render hexagonal tile with enhanced visuals
   const drawHexTile = useCallback((
     ctx: CanvasRenderingContext2D,
     center: Position,
     tile: Tile,
+    tilePosition: Position,
     isSelected: boolean,
     isHovered: boolean
   ) => {
+    if (!center || typeof center.x !== 'number' || typeof center.y !== 'number') return;
+    if (!tile) return;
+    if (!tilePosition || typeof tilePosition.x !== 'number' || typeof tilePosition.y !== 'number') return;
+    
     const { x, y } = center;
     const radius = config.hexRadius;
+    
+    // Check if this tile is in movement range
+    const isInMovementRange = movementRange.some(pos => pos && pos.x === tilePosition.x && pos.y === tilePosition.y);
+    const isInProjectionRange = !isInMovementRange && projectionRange.some(pos => pos && pos.x === tilePosition.x && pos.y === tilePosition.y);
+    
+    // Check if this tile has the selected hero
+    const hasSelectedHero = selectedHero && tile.hero && tile.hero.id === selectedHero.id;
 
     // Create hexagonal path
     ctx.beginPath();
@@ -385,37 +508,138 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     }
     ctx.closePath();
 
-    // Fill with terrain color - Fix the color mapping
-    let baseColor = config.colors.default;
     const terrainKey = tile.terrain;
-    
+
+    // Attempt sprite-based fill
+    let spriteFilled = false;
+    if (terrainKey && TERRAIN_EDGE_SPRITES[terrainKey]) {
+      const bitmask = computeHexBitmask(map, { x: tile.x, y: tile.y });
+      const mapping = TERRAIN_EDGE_SPRITES[terrainKey];
+      const spritePath = mapping[bitmask] ?? mapping[0b000000]; // fallback isolated
+
+      if (spritePath) {
+        let img = spriteCache.get(spritePath);
+        if (!img) {
+          img = new Image();
+          img.src = spritePath;
+          spriteCache.set(spritePath, img);
+        }
+        if (img.complete && img.naturalWidth > 0) {
+          try {
+            const pattern = ctx.createPattern(img, 'repeat');
+            if (pattern) {
+              ctx.fillStyle = pattern;
+              spriteFilled = true;
+            }
+          } catch (e) {
+            // Image was broken; skip pattern rendering
+            console.warn('Pattern creation failed for', spritePath, e);
+          }
+        }
+      }
+    }
+
+    if (!spriteFilled) {
+      // Fallback to gradient color fill
+      let baseColor = config.colors.default;
     if (terrainKey && config.colors[terrainKey as keyof typeof config.colors]) {
       const colorValue = config.colors[terrainKey as keyof typeof config.colors];
       if (typeof colorValue === 'string') {
         baseColor = colorValue;
       }
     }
+    if (terrainKey && config.gradients[terrainKey as keyof typeof config.gradients]) {
+      const gradientColors = config.gradients[terrainKey as keyof typeof config.gradients];
+      const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
+      gradient.addColorStop(0, gradientColors[0]);
+      gradient.addColorStop(1, gradientColors[1]);
+      ctx.fillStyle = gradient;
+    } else {
+      ctx.fillStyle = baseColor;
+      }
+    }
     
-    ctx.fillStyle = baseColor;
+    // Fill with terrain color/gradient
     ctx.fill();
+
+    // Add texture pattern for some terrains
+    if (terrainKey === 'mountain') {
+      // Add mountain texture
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+      for (let i = 0; i < 3; i++) {
+        const offsetX = (i - 1) * 3;
+        const offsetY = (i - 1) * 2;
+        ctx.fillRect(x + offsetX - 2, y + offsetY - 1, 4, 2);
+      }
+    } else if (terrainKey === 'forest') {
+      // Add forest texture with deterministic dots
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+      const seed = tile.x * 31 + tile.y * 17; // Deterministic seed
+      for (let i = 0; i < 5; i++) {
+        const offsetX = ((seed + i * 23) % 100 - 50) * radius * 0.02;
+        const offsetY = ((seed + i * 41) % 100 - 50) * radius * 0.02;
+        ctx.beginPath();
+        ctx.arc(x + offsetX, y + offsetY, 1, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    } else if (terrainKey === 'water') {
+      // Add water wave effect
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+      ctx.lineWidth = 1;
+      const time = Date.now() * 0.001;
+      for (let i = 0; i < 3; i++) {
+        const waveY = y + (i - 1) * 5 + Math.sin(time + i + tile.x * 0.1) * 2;
+        ctx.beginPath();
+        ctx.moveTo(x - radius * 0.5, waveY);
+        ctx.lineTo(x + radius * 0.5, waveY);
+        ctx.stroke();
+      }
+    }
+
+    // Movement range highlight
+    if (isInMovementRange && movementMode) {
+      ctx.fillStyle = config.colors.movement;
+      ctx.fill();
+    }
 
     // Hover effect
     if (isHovered) {
       ctx.fillStyle = config.colors.hover;
-      ctx.globalAlpha = 0.3;
       ctx.fill();
-      ctx.globalAlpha = 1;
     }
 
-    // Selection border
-    if (isSelected) {
+    // Selection border with enhanced glow
+    if (isSelected || hasSelectedHero) {
       ctx.strokeStyle = config.colors.selected;
-      ctx.lineWidth = 3;
+      ctx.lineWidth = hasSelectedHero ? 4 : 3;
+      ctx.shadowColor = config.colors.selected;
+      ctx.shadowBlur = 8;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+    } else if (isInMovementRange && movementMode) {
+      ctx.strokeStyle = 'rgba(76, 175, 80, 0.8)';
+      ctx.lineWidth = 2;
       ctx.stroke();
     } else {
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
       ctx.lineWidth = 1;
       ctx.stroke();
+    }
+
+    // Outline for selected tile or hovered tile
+    if (isSelected || isHovered) {
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = isSelected ? 'yellow' : 'rgba(255,255,255,0.6)';
+      ctx.stroke();
+    }
+
+    // Render highlight overlays AFTER base fill so they appear on top but under content
+    if (isInMovementRange) {
+      ctx.fillStyle = 'rgba(76, 175, 80, 0.35)'; // greenish highlight
+      ctx.fill();
+    } else if (isInProjectionRange) {
+      ctx.fillStyle = 'rgba(33, 150, 243, 0.25)'; // bluish softer for ZFC projection
+      ctx.fill();
     }
 
     // Draw structure if present
@@ -432,12 +656,29 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     if (tile.hero) {
       drawHero(ctx, center, tile.hero);
     }
-  }, [config, drawStructure, drawCreature, drawHero]);
+
+    // ---- Fog of War overlay (after all tile content) ----
+    if (!tile.isVisible) {
+      ctx.beginPath();
+      for (let i = 0; i < 6; i++) {
+        const angle = (Math.PI / 3) * i - Math.PI / 2;
+        const hx = x + radius * Math.cos(angle);
+        const hy = y + radius * Math.sin(angle);
+        if (i === 0) ctx.moveTo(hx, hy); else ctx.lineTo(hx, hy);
+      }
+      ctx.closePath();
+
+      ctx.fillStyle = tile.isExplored ? 'rgba(0,0,0,0.55)' : 'rgba(0,0,0,0.85)';
+      ctx.fill();
+    }
+  }, [config, drawStructure, drawCreature, drawHero, movementRange, movementMode, selectedHero, map, spriteCache, projectionRange]);
 
   // Render ZFC zones
   const drawZFCZones = useCallback((ctx: CanvasRenderingContext2D) => {
     visibleZFCs.forEach(zfc => {
+      if (!zfc || !zfc.reachableTiles) return;
       zfc.reachableTiles.forEach(tile => {
+        if (!tile || typeof tile.x !== 'number' || typeof tile.y !== 'number') return;
         const center = hexToPixel(tile);
         
         // Draw zone
@@ -456,7 +697,7 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
         ctx.closePath();
 
         // Color by zone type
-        ctx.fillStyle = config.colors.zfc.friendly;
+        ctx.fillStyle = config.colors.movement;
         ctx.fill();
         
         // Animated border
@@ -473,7 +714,12 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
   const drawParticles = useCallback((ctx: CanvasRenderingContext2D) => {
     const currentTime = Date.now();
     
-    animatedElements.forEach(element => {
+    // Utiliser une référence pour éviter les re-rendus
+    const currentElements = animatedElementsRef.current;
+    
+    currentElements.forEach(element => {
+      if (!element || !element.position) return;
+      
       const progress = Math.min(1, (currentTime - element.startTime) / element.duration);
       
       if (element.type === 'particle') {
@@ -491,98 +737,14 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     });
 
     // Nettoyer les éléments expirés
-    setAnimatedElements(prev => 
-      prev.filter(el => (currentTime - el.startTime) < el.duration)
-    );
-  }, [animatedElements, hexToPixel]);
-
-  // Ajouter un effet de particule
-  const addParticleEffect = useCallback((position: Position, color: string) => {
-    const newParticle: AnimatedElement = {
-      id: `particle_${Date.now()}_${Math.random()}`,
-      type: 'particle',
-      position,
-      startTime: Date.now(),
-      duration: 1000,
-      color,
-      size: 5
-    };
-    
-    setAnimatedElements(prev => [...prev, newParticle]);
-  }, []);
-
-  // Main render loop
-  const render = useCallback(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    // Clear canvas
-    ctx.clearRect(0, 0, width, height);
-
-    // Draw gradient background
-    const gradient = ctx.createLinearGradient(0, 0, width, height);
-    gradient.addColorStop(0, '#1a1a2e');
-    gradient.addColorStop(1, '#16213e');
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, width, height);
-
-    if (!map || map.length === 0) {
-      // Loading message
-      ctx.fillStyle = '#FFD700';
-      ctx.font = '24px Arial';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(t('loadingMap'), width / 2, height / 2);
-      return;
+    const filteredElements = currentElements.filter(el => (currentTime - el.startTime) < el.duration);
+    if (filteredElements.length !== currentElements.length) {
+      animatedElementsRef.current = filteredElements;
+      setAnimatedElements(filteredElements);
     }
+  }, [hexToPixel]);
 
-    // Draw ZFC zones in background
-    drawZFCZones(ctx);
 
-    // Draw tiles
-    map.forEach((row, y) => {
-      row.forEach((tile, x) => {
-        const center = hexToPixel({ x, y });
-        
-        const isSelected = selectedTile?.x === x && selectedTile?.y === y;
-        const isHovered = hoveredTile?.x === x && hoveredTile?.y === y;
-        
-        drawHexTile(ctx, center, tile, isSelected, isHovered);
-      });
-    });
-
-    // Draw heroes - CORRECTED: Use currentPlayer and currentGame properly
-    const { currentGame, currentPlayer } = useGameStore.getState();
-    
-    // Draw current player heroes
-    if (currentPlayer && currentPlayer.heroes && currentPlayer.heroes.length > 0) {
-      currentPlayer.heroes.forEach(hero => {
-        const center = hexToPixel(hero.position);
-        drawHero(ctx, center, hero);
-      });
-    }
-
-    // Draw other players' heroes if available
-    if (currentGame && currentGame.players) {
-      currentGame.players.forEach(player => {
-        if (player.id !== currentPlayer?.id && player.heroes) {
-          player.heroes.forEach(hero => {
-            const center = hexToPixel(hero.position);
-            drawHero(ctx, center, hero);
-          });
-        }
-      });
-    }
-
-    // Draw particle effects
-    drawParticles(ctx);
-
-    // Schedule next render
-    animationRef.current = requestAnimationFrame(render);
-  }, [map, selectedTile, hoveredTile, width, height, drawZFCZones, drawHexTile, drawParticles, hexToPixel, drawHero, t]);
 
   // Gestion des événements de souris
   const handleMouseMove = useCallback((event: React.MouseEvent) => {
@@ -611,32 +773,122 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-    
-    const hexCoord = pixelToHex({ x, y });
-    
-    if (map && hexCoord.y >= 0 && hexCoord.y < map.length && 
-        hexCoord.x >= 0 && hexCoord.x < map[0].length) {
-      setSelectedTile(hexCoord);
+    try {
+      const rect = canvas.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
       
-      // Ajouter un effet de particule au clic
-      addParticleEffect(hexCoord, '#FFD700');
-      if (onTileClick) onTileClick(hexCoord);
+      const hexCoord = pixelToHex({ x, y });
+      
+      console.log('Click event:', event, 'Hex coordinates:', hexCoord);
+
+      if (map && hexCoord.y >= 0 && hexCoord.y < map.length && 
+          hexCoord.x >= 0 && hexCoord.x < map[0].length) {
+        handleTileClick(hexCoord);
+      }
+    } catch (error) {
+      console.error("Error in handleClick:", error)
     }
-  }, [map, pixelToHex, setSelectedTile, addParticleEffect, onTileClick]);
+  }, [map, pixelToHex, handleTileClick]);
 
   // Initialiser le rendu
   useEffect(() => {
-    render();
+    const renderLoop = () => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      // Clear canvas
+      ctx.clearRect(0, 0, width, height);
+
+      // Draw gradient background
+      const gradient = ctx.createLinearGradient(0, 0, width, height);
+      gradient.addColorStop(0, '#1a1a2e');
+      gradient.addColorStop(1, '#16213e');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, width, height);
+
+      if (!map || map.length === 0) {
+        // Loading message
+        ctx.fillStyle = '#FFD700';
+        ctx.font = '24px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(t('loadingMap'), width / 2, height / 2);
+        animationRef.current = requestAnimationFrame(renderLoop);
+        return;
+      }
+
+      // Draw ZFC zones in background
+      if (typeof drawZFCZones === 'function') {
+        drawZFCZones(ctx);
+      }
+
+      // Draw tiles
+      map.forEach((row, y) => {
+        row.forEach((tile, x) => {
+          const center = hexToPixel({ x, y });
+          const tilePosition = { x, y };
+          
+          const isSelected = selectedTile?.x === x && selectedTile?.y === y;
+          const isHovered = hoveredTile?.x === x && hoveredTile?.y === y;
+          
+          if (typeof drawHexTile === 'function') {
+            drawHexTile(ctx, center, tile, tilePosition, isSelected, isHovered);
+          }
+        });
+      });
+
+      // Draw heroes - CORRECTED: Use currentPlayer and currentGame properly
+      const { currentGame, currentPlayer } = useGameStore.getState();
+      
+      // Draw current player heroes
+      if (currentPlayer && currentPlayer.heroes && currentPlayer.heroes.length > 0) {
+        currentPlayer.heroes.forEach(hero => {
+          if (hero && hero.position) {
+            const center = hexToPixel(hero.position);
+            if (typeof drawHero === 'function') {
+              drawHero(ctx, center, hero);
+            }
+          }
+        });
+      }
+
+      // Draw other players' heroes if available
+      if (currentGame && currentGame.players) {
+        currentGame.players.forEach(player => {
+          if (player.id !== currentPlayer?.id && player.heroes) {
+            player.heroes.forEach(hero => {
+              if (hero && hero.position) {
+                const center = hexToPixel(hero.position);
+                if (typeof drawHero === 'function') {
+                  drawHero(ctx, center, hero);
+                }
+              }
+            });
+          }
+        });
+      }
+
+      // Draw particle effects
+      if (typeof drawParticles === 'function') {
+        drawParticles(ctx);
+      }
+
+      // Schedule next render
+      animationRef.current = requestAnimationFrame(renderLoop);
+    };
+
+    renderLoop();
     
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [render]);
+  }, [map, selectedTile, hoveredTile, width, height, drawZFCZones, drawHexTile, drawParticles, hexToPixel, drawHero, t]);
 
   // Exposer la fonction centerOnPosition
   useImperativeHandle(ref, () => ({
