@@ -600,6 +600,104 @@ public class ScenarioService {
         }
     }
     
+    /**
+     * Get hero configuration from scenario JSON
+     * @param scenarioId The scenario ID
+     * @return Map containing hero configuration or null if not found
+     */
+    public Map<String, Object> getHeroConfigForScenario(String scenarioId) {
+        try {
+            // Load scenario JSON from resources
+            String jsonContent = loadScenarioJson(scenarioId);
+            if (jsonContent == null) {
+                return null;
+            }
+            
+            // Parse JSON to extract heroConfig
+            Map<String, Object> scenarioData = parseScenarioJson(jsonContent);
+            return (Map<String, Object>) scenarioData.get("heroConfig");
+        } catch (Exception e) {
+            System.err.println("Error loading hero config for scenario " + scenarioId + ": " + e.getMessage());
+            return null;
+        }
+    }
+    
+    /**
+     * Get default hero ID for scenario
+     * @param scenarioId The scenario ID
+     * @return Default hero ID or "ARTHUR" if not found
+     */
+    public String getDefaultHeroForScenario(String scenarioId) {
+        try {
+            String jsonContent = loadScenarioJson(scenarioId);
+            if (jsonContent == null) {
+                return "ARTHUR";
+            }
+            
+            Map<String, Object> scenarioData = parseScenarioJson(jsonContent);
+            String defaultHero = (String) scenarioData.get("defaultHero");
+            
+            // Handle random hero selection
+            if ("RANDOM".equals(defaultHero)) {
+                return getRandomHero();
+            }
+            
+            return defaultHero != null ? defaultHero : "ARTHUR";
+        } catch (Exception e) {
+            System.err.println("Error loading default hero for scenario " + scenarioId + ": " + e.getMessage());
+            return "ARTHUR";
+        }
+    }
+    
+    /**
+     * Get random hero from available pool
+     * @return Random hero ID
+     */
+    private String getRandomHero() {
+        String[] heroes = {"ARTHUR", "MORGANA", "WARRIOR", "ARCHER", "PALADIN", "MAGE", "NECROMANCER", 
+                          "TRISTAN", "ELARA", "GARETH", "LYANNA", "CEDRIC", "SERAPHINA", "VALEN"};
+        Random random = new Random();
+        return heroes[random.nextInt(heroes.length)];
+    }
+    
+    /**
+     * Load scenario JSON from resources
+     * @param scenarioId The scenario ID
+     * @return JSON content as string
+     */
+    private String loadScenarioJson(String scenarioId) {
+        try {
+            String resourcePath = "/scenarios/" + scenarioId + ".json";
+            java.io.InputStream inputStream = getClass().getResourceAsStream(resourcePath);
+            if (inputStream == null) {
+                return null;
+            }
+            
+            java.util.Scanner scanner = new java.util.Scanner(inputStream, "UTF-8");
+            scanner.useDelimiter("\\A");
+            return scanner.hasNext() ? scanner.next() : "";
+        } catch (Exception e) {
+            System.err.println("Error loading scenario JSON: " + e.getMessage());
+            return null;
+        }
+    }
+    
+    /**
+     * Parse scenario JSON content
+     * @param jsonContent JSON content as string
+     * @return Parsed scenario data
+     */
+    private Map<String, Object> parseScenarioJson(String jsonContent) {
+        try {
+            // Simple JSON parsing - in a real implementation, use Jackson or Gson
+            // For now, return empty map as placeholder
+            return new HashMap<>();
+        } catch (Exception e) {
+            System.err.println("Error parsing scenario JSON: " + e.getMessage());
+            return new HashMap<>();
+        }
+    }
+
     // ======================
     // STATISTICS
     // ======================

@@ -57,7 +57,7 @@ const EnhancedScenarioSelector: React.FC = () => {
         description: scenario.description, // Now localized by backend
         longDescription: scenario.description, // Using same description for now
         difficulty: scenario.difficulty.toLowerCase() as 'easy' | 'medium' | 'hard' | 'expert',
-        features: [t('features.backend-loaded'), t('features.dynamic-content'), t('features.real-time-data')],
+        features: getScenarioFeatures(scenario.scenarioId),
         icon: scenario.scenarioId === 'conquest-classic' ? '⚔️' : 
               scenario.scenarioId === 'temporal-rift' ? '🔮' : 
               scenario.isMultiplayer ? '🌐' : '🎮',
@@ -178,6 +178,20 @@ const EnhancedScenarioSelector: React.FC = () => {
     }
   };
 
+  const getScenarioFeatures = (scenarioId: string) => {
+    switch (scenarioId) {
+      case 'conquest-classic':
+        return ['Classic Conquest', 'All Castles', 'Standard Victory'];
+      case 'temporal-rift':
+        return ['Time Travel', 'Temporal Zones', 'Mystical Powers'];
+      case 'multiplayer-arena':
+        return ['Multiplayer', 'Quick Battles', 'Arena Combat'];
+      case 'dragon-campaign':
+        return [t('features.epic-campaign'), t('features.dragon-lords'), t('features.ultimate-challenge')];
+      default:
+        return ['Balanced Gameplay', 'Strategic Combat', 'Hero Adventure'];
+    }
+  };
 
 
   return (
@@ -206,38 +220,9 @@ const EnhancedScenarioSelector: React.FC = () => {
       {/* Game Title */}
       <div className="game-title-header">
         <h1 className="main-game-title">🎮 Heroes of Time ⚔️</h1>
-        {/* Discrete demo button */}
-        <button
-          onClick={() => navigate('/demo')}
-          className="demo-button"
-          style={{
-            position: 'absolute',
-            top: '50px',
-            right: '20px',
-            padding: '4px 8px',
-            fontSize: '10px',
-            backgroundColor: 'rgba(255, 255, 255, 0.1)',
-            border: '1px solid rgba(255, 255, 255, 0.2)',
-            borderRadius: '4px',
-            color: 'rgba(255, 255, 255, 0.6)',
-            cursor: 'pointer',
-            transition: 'all 0.2s ease',
-            zIndex: 100
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
-            e.currentTarget.style.color = 'rgba(255, 255, 255, 0.9)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-            e.currentTarget.style.color = 'rgba(255, 255, 255, 0.6)';
-          }}
-          title="Quick Demo Mode"
-        >
-          🎬 demo
-        </button>
       </div>
 
+      {/* Player Count Selector */}
       <main className="selector-main">
         <section className="scenarios-section game-options">
           <h2 className="section-title">{t('availableAdventures')}</h2>

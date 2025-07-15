@@ -3,7 +3,7 @@ import { useTranslation } from '../i18n';
 import { useGameStore } from '../store/useGameStore';
 import ModernGameRenderer, { ModernGameRendererRef } from './ModernGameRenderer';
 import CastleManagementPanel from './CastleManagementPanel';
-import { HERO_ASSETS } from '../constants/gameAssets';
+import { getHeroSprite, getHeroFallbackImage, createSpriteStyle, getHeroEmoji, getDefaultHeroForScenario, getHeroInfo } from '../utils/heroAssets';
 import './TrueHeroesInterface.css';
 
 interface TrueHeroesInterfaceProps {
@@ -107,37 +107,45 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
 
   // Fonction pour obtenir l'image du héros
   const getHeroImage = (heroName: string): string => {
-    const name = heroName.toLowerCase();
-    if (name.includes('arthur') || name.includes('knight')) {
-      return HERO_ASSETS.KNIGHT;
-    } else if (name.includes('merlin') || name.includes('mage') || name.includes('wizard')) {
-      return HERO_ASSETS.MAGE;
-    } else if (name.includes('lancelot') || name.includes('warrior')) {
-      return HERO_ASSETS.WARRIOR;
-    } else if (name.includes('archer') || name.includes('bow')) {
-      return HERO_ASSETS.ARCHER;
-    } else if (name.includes('paladin')) {
-      return HERO_ASSETS.PALADIN;
-    } else if (name.includes('necromancer')) {
-      return HERO_ASSETS.NECROMANCER;
-    } else {
-      // Défaut basé sur la classe du héros s'il en a une
-      return HERO_ASSETS.WARRIOR;
-    }
+    // Essayer d'abord d'obtenir l'image fallback
+    return getHeroFallbackImage(heroName);
   };
 
-  // Fonction pour obtenir l'emoji de fallback
-  const getHeroEmoji = (heroName: string): string => {
-    const name = heroName.toLowerCase();
-    if (name.includes('arthur')) return '👑';
-    if (name.includes('merlin')) return '🧙';
-    if (name.includes('lancelot')) return '⚔️';
-    if (name.includes('mage')) return '🔮';
-    if (name.includes('warrior')) return '🛡️';
-    if (name.includes('archer')) return '🏹';
-    if (name.includes('paladin')) return '✨';
-    if (name.includes('necromancer')) return '💀';
-    return '⚔️';
+  const getHeroSpriteComponent = (heroName: string) => {
+    const spriteData = getHeroSprite(heroName);
+    
+    if (spriteData) {
+      // Utiliser la spritesheet avec CSS background-position
+      const spriteStyle = createSpriteStyle(spriteData);
+      return (
+        <div 
+          className="hero-sprite"
+          style={spriteStyle}
+          title={heroName}
+        />
+      );
+    } else {
+      // Fallback vers image PNG simple
+      return (
+        <img 
+          src={getHeroFallbackImage(heroName)}
+          alt={heroName}
+          className="hero-portrait-img"
+          onError={(e) => {
+            // Fallback vers emoji si l'image ne charge pas
+            const target = e.target as HTMLImageElement;
+            target.style.display = 'none';
+            const parent = target.parentNode as HTMLElement;
+            if (parent && !parent.querySelector('.hero-emoji-fallback')) {
+              const fallback = document.createElement('div');
+              fallback.className = 'hero-emoji-fallback';
+              fallback.textContent = getHeroEmoji(heroName);
+              parent.appendChild(fallback);
+            }
+          }}
+        />
+      );
+    }
   };
 
   if (isLoading) {
@@ -281,7 +289,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
                 <div className="scenario-overview">
                   <div className="scenario-name">
                     <span className="scenario-icon">🏰</span>
-                    <span className="scenario-title">Conquest Classic</span>
+                    <span className="scenario-title">{scenarioId ? scenarioId.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase()) : 'Conquest Classic'}</span>
                   </div>
                   <div className="scenario-type">
                     <span className="type-badge">{scenarioType}</span>
@@ -299,7 +307,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
                   </div>
                   <div className="info-item">
                     <span className="info-label">🌍 Map Size:</span>
-                    <span className="info-value">20x20</span>
+                    <span className="info-value">{currentGame?.map?.width || 20}x{currentGame?.map?.height || 20}</span>
                   </div>
                   <div className="info-item">
                     <span className="info-label">⚔️ Game Mode:</span>
@@ -311,15 +319,15 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
                   <h4>🎯 Objectives</h4>
                   <div className="objective-item">
                     <span className="objective-icon">🏆</span>
-                    <span className="objective-text">Defeat all enemy heroes</span>
+                    <span className="objective-text">Control the Temporal Nexus</span>
                   </div>
                   <div className="objective-item">
-                    <span className="objective-icon">🏰</span>
-                    <span className="objective-text">Capture all enemy castles</span>
+                    <span className="objective-icon">🌀</span>
+                    <span className="objective-text">Close 3 temporal rifts</span>
                   </div>
                   <div className="objective-item">
-                    <span className="objective-icon">💎</span>
-                    <span className="objective-text">Collect rare artifacts</span>
+                    <span className="objective-icon">⚔️</span>
+                    <span className="objective-text">Defeat the Temporal Guardian</span>
                   </div>
                 </div>
 
@@ -336,15 +344,15 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
                     <div className="stat-card">
                       <div className="stat-icon">🏰</div>
                       <div className="stat-info">
-                        <div className="stat-number">1</div>
+                        <div className="stat-number">{currentGame?.map?.objects?.filter(obj => obj.type === 'city').length || 1}</div>
                         <div className="stat-label">Castles</div>
                       </div>
                     </div>
                     <div className="stat-card">
-                      <div className="stat-icon">🏗️</div>
+                      <div className="stat-icon">🗺️</div>
                       <div className="stat-info">
-                        <div className="stat-number">4</div>
-                        <div className="stat-label">Buildings</div>
+                        <div className="stat-number">{currentGame?.map?.tiles?.length || 400}</div>
+                        <div className="stat-label">Tiles</div>
                       </div>
                     </div>
                     <div className="stat-card">
@@ -375,75 +383,108 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
               <div className="hero-details">
                 <div className="hero-portrait">
                   <div className="hero-image">
-                    <img 
-                      src={getHeroImage(selectedHero.name)} 
-                      alt={selectedHero.name}
-                      className="hero-portrait-img"
-                      onError={(e) => {
-                        // Fallback simple avec emoji
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        const parent = target.parentNode as HTMLElement;
-                        if (parent && !parent.querySelector('.hero-emoji-fallback')) {
-                          const fallback = document.createElement('div');
-                          fallback.className = 'hero-emoji-fallback';
-                          fallback.textContent = getHeroEmoji(selectedHero.name);
-                          parent.appendChild(fallback);
-                        }
-                      }}
-                      onLoad={(e) => {
-                        // S'assurer que l'emoji fallback est retiré si l'image charge
-                        const target = e.target as HTMLImageElement;
-                        const parent = target.parentNode as HTMLElement;
-                        const fallback = parent?.querySelector('.hero-emoji-fallback');
-                        if (fallback) {
-                          fallback.remove();
-                        }
-                        target.style.display = 'block';
-                      }}
-                    />
+                    {getHeroSpriteComponent(selectedHero.name)}
                   </div>
                   <div className="hero-basic-info">
-                    <div className="hero-name">{selectedHero.name}</div>
-                    <div className="hero-level">Level {selectedHero.level}</div>
-                    <div className="hero-position">📍 ({selectedHero.position.x}, {selectedHero.position.y})</div>
+                    <h3 className="hero-name">{selectedHero.name}</h3>
+                    <div className="hero-class">
+                      {(() => {
+                        const heroInfo = getHeroInfo(selectedHero.name);
+                        return heroInfo.class;
+                      })()}
+                    </div>
+                    <div className="hero-description">
+                      {(() => {
+                        const heroInfo = getHeroInfo(selectedHero.name);
+                        return heroInfo.description;
+                      })()}
+                    </div>
                   </div>
                 </div>
-
+                
                 <div className="hero-stats">
-                  <div className="stat-item">
-                    <span className="stat-label">⚔️ Attack:</span>
-                    <span className="stat-value">{selectedHero.stats?.attack || 10}</span>
+                  <div className="stat-row">
+                    <div className="stat-item">
+                      <span className="stat-label">⚔️ Attack:</span>
+                      <span className="stat-value">{selectedHero.stats?.attack || 0}</span>
+                    </div>
+                    <div className="stat-item">
+                      <span className="stat-label">🛡️ Defense:</span>
+                      <span className="stat-value">{selectedHero.stats?.defense || 0}</span>
+                    </div>
                   </div>
-                  <div className="stat-item">
-                    <span className="stat-label">🛡️ Defense:</span>
-                    <span className="stat-value">{selectedHero.stats?.defense || 10}</span>
+                  <div className="stat-row">
+                    <div className="stat-item">
+                      <span className="stat-label">🔮 Spell Power:</span>
+                      <span className="stat-value">{selectedHero.stats?.spellPower || 0}</span>
+                    </div>
+                    <div className="stat-item">
+                      <span className="stat-label">📚 Knowledge:</span>
+                      <span className="stat-value">{selectedHero.stats?.knowledge || 0}</span>
+                    </div>
                   </div>
-                  <div className="stat-item">
-                    <span className="stat-label">🏃 Movement:</span>
-                    <span className="stat-value">{selectedHero.movementPoints}/{selectedHero.maxMovementPoints}</span>
-                  </div>
-                  <div className="stat-item">
-                    <span className="stat-label">🔮 Spell Power:</span>
-                    <span className="stat-value">{selectedHero.stats?.spellPower || 5}</span>
+                  <div className="stat-row">
+                    <div className="stat-item">
+                      <span className="stat-label">❤️ Health:</span>
+                      <span className="stat-value">{selectedHero.stats?.health || 100}</span>
+                    </div>
+                    <div className="stat-item">
+                      <span className="stat-label">💙 Mana:</span>
+                      <span className="stat-value">{selectedHero.stats?.mana || 20}</span>
+                    </div>
                   </div>
                 </div>
-
-                <div className="hero-troops">
-                  <h4>🏺 Army</h4>
-                  <div className="troops-list">
-                    {selectedHero.units && selectedHero.units.length > 0 ? (
-                      selectedHero.units.map((unit, index) => (
-                        <div key={index} className="troop-item">
-                          <span className="troop-icon">🏇</span>
-                          <span className="troop-name">{unit.name || 'Soldiers'}</span>
-                          <span className="troop-count">×{unit.quantity || 10}</span>
-                        </div>
-                      ))
-                    ) : (
-                      <div className="no-troops">No army recruited</div>
-                    )}
+                
+                {selectedHero.skills && selectedHero.skills.length > 0 && (
+                  <div className="hero-skills">
+                    <h4>🎯 Skills:</h4>
+                    <div className="skills-list">
+                      {selectedHero.skills.map((skill, index) => (
+                        <span key={index} className="skill-badge">{skill}</span>
+                      ))}
+                    </div>
                   </div>
+                )}
+                
+                {selectedHero.spells && selectedHero.spells.length > 0 && (
+                  <div className="hero-spells">
+                    <h4>✨ Spells:</h4>
+                    <div className="spells-list">
+                      {selectedHero.spells.map((spell, index) => (
+                        <span key={index} className="spell-badge">{spell}</span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                
+                <div className="hero-actions">
+                  <button 
+                    className="action-button"
+                    onClick={() => {
+                      // Action pour déplacer le héros
+                      console.log('Move hero:', selectedHero.name);
+                    }}
+                  >
+                    🚶 Move
+                  </button>
+                  <button 
+                    className="action-button"
+                    onClick={() => {
+                      // Action pour attaquer
+                      console.log('Attack with hero:', selectedHero.name);
+                    }}
+                  >
+                    ⚔️ Attack
+                  </button>
+                  <button 
+                    className="action-button"
+                    onClick={() => {
+                      // Action pour lancer un sort
+                      console.log('Cast spell with hero:', selectedHero.name);
+                    }}
+                  >
+                    🔮 Cast Spell
+                  </button>
                 </div>
               </div>
             </div>

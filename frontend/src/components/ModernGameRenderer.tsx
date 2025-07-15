@@ -1,8 +1,8 @@
-import React, { useRef, useEffect, useState, useCallback, useMemo, useImperativeHandle, forwardRef } from 'react';
+import React, { useRef, useEffect, useState, useCallback, useMemo, forwardRef, useImperativeHandle } from 'react';
 import { useGameStore } from '../store/useGameStore';
+import { getHeroSprite, getHeroFallbackImage, drawHeroSprite, loadHeroImageWithFallback, getHeroEmoji } from '../utils/heroAssets';
 import { Position, Tile, Hero } from '../types/game';
 import { useTranslation } from '../i18n';
-import { HERO_ASSETS } from '../constants/gameAssets';
 import './ModernGameRenderer.css';
 
 interface ModernGameRendererProps {
@@ -66,33 +66,14 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
 
   // Fonction pour obtenir l'image du héros
   const getHeroImage = useCallback((heroName: string): string => {
-    const name = heroName.toLowerCase();
-    if (name.includes('arthur') || name.includes('knight')) {
-      return HERO_ASSETS.KNIGHT;
-    } else if (name.includes('merlin') || name.includes('mage') || name.includes('wizard')) {
-      return HERO_ASSETS.MAGE;
-    } else if (name.includes('lancelot') || name.includes('warrior')) {
-      return HERO_ASSETS.WARRIOR;
-    } else if (name.includes('archer') || name.includes('bow')) {
-      return HERO_ASSETS.ARCHER;
-    } else if (name.includes('paladin')) {
-      return HERO_ASSETS.PALADIN;
-    } else if (name.includes('necromancer')) {
-      return HERO_ASSETS.NECROMANCER;
-    } else {
-      return HERO_ASSETS.WARRIOR;
-    }
+    // Utiliser le nouveau système de fallback
+    return getHeroFallbackImage(heroName);
   }, []);
 
   // Fonction pour précharger les images des héros
   const preloadHeroImage = useCallback((heroName: string): Promise<HTMLImageElement> => {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.onload = () => resolve(img);
-      img.onerror = () => reject(new Error(`Failed to load hero image: ${heroName}`));
-      img.src = getHeroImage(heroName);
-    });
-  }, [getHeroImage]);
+    return loadHeroImageWithFallback(heroName);
+  }, []);
 
   // Précharger les images des héros visibles
   useEffect(() => {
@@ -107,6 +88,25 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
             newHeroImages.set(hero.name, img);
           } catch (error) {
             console.warn(`Failed to load image for hero ${hero.name}:`, error);
+            // Créer une image de fallback simple avec canvas
+            const canvas = document.createElement('canvas');
+            canvas.width = 64;
+            canvas.height = 64;
+            const ctx = canvas.getContext('2d');
+            if (ctx) {
+              // Dessiner un cercle simple avec l'emoji du héros
+              ctx.fillStyle = '#FFD700';
+              ctx.fillRect(0, 0, 64, 64);
+              ctx.font = '32px Arial';
+              ctx.textAlign = 'center';
+              ctx.textBaseline = 'middle';
+              ctx.fillText(getHeroEmoji(hero.name), 32, 32);
+              
+              // Convertir en image
+              const fallbackImg = new Image();
+              fallbackImg.src = canvas.toDataURL();
+              newHeroImages.set(hero.name, fallbackImg);
+            }
           }
         }
       }
@@ -121,6 +121,25 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
                   newHeroImages.set(hero.name, img);
                 } catch (error) {
                   console.warn(`Failed to load image for hero ${hero.name}:`, error);
+                  // Créer une image de fallback simple avec canvas
+                  const canvas = document.createElement('canvas');
+                  canvas.width = 64;
+                  canvas.height = 64;
+                  const ctx = canvas.getContext('2d');
+                  if (ctx) {
+                    // Dessiner un cercle simple avec l'emoji du héros
+                    ctx.fillStyle = '#FFD700';
+                    ctx.fillRect(0, 0, 64, 64);
+                    ctx.font = '32px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(getHeroEmoji(hero.name), 32, 32);
+                    
+                    // Convertir en image
+                    const fallbackImg = new Image();
+                    fallbackImg.src = canvas.toDataURL();
+                    newHeroImages.set(hero.name, fallbackImg);
+                  }
                 }
               }
             }
@@ -154,31 +173,35 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     offsetX: 50 + mapOffset.x,
     offsetY: 50 + mapOffset.y,
     colors: {
-      // Realistic terrain colors with gradients
-      grass: '#7CB342',        // Rich grass green
-      forest: '#2E7D32',       // Deep forest green
-      mountain: '#5D4037',     // Mountain brown
-      water: '#1976D2',        // Deep blue water
-      desert: '#FB8C00',       // Sandy orange
-      swamp: '#4E342E',        // Dark swamp brown
-      // Additional terrain variations
-      plains: '#8BC34A',       // Light green plains
-      hills: '#8D6E63',        // Hill brown
-      lake: '#42A5F5',         // Lake blue
+      // HOMM3 terrain colors
+      grass: '#7fb069',        // HOMM3 grass green
+      dirt: '#a68a64',         // HOMM3 dirt road brown
+      forest: '#386641',       // HOMM3 forest green
+      mountain: '#8d5524',     // HOMM3 rocky brown
+      water: '#3a86ff',        // HOMM3 deep blue
+      sand: '#e9c46a',         // HOMM3 desert sand
+      snow: '#e0e1dd',         // HOMM3 snow white
+      swamp: '#52796f',        // HOMM3 swamp green
+      rough: '#936639',        // HOMM3 wasteland brown
+      lava: '#e63946',         // HOMM3 lava red
       // UI colors
-      default: '#7CB342',
+      default: '#7fb069',
       hover: 'rgba(255, 255, 255, 0.2)',
       selected: '#FFD700',
       movement: 'rgba(76, 175, 80, 0.4)'
     },
-    // Terrain gradients for better visual appeal
+    // HOMM3-style terrain gradients
     gradients: {
-      grass: ['#7CB342', '#8BC34A'],
-      forest: ['#2E7D32', '#388E3C'],
-      mountain: ['#5D4037', '#6D4C41'],
-      water: ['#1976D2', '#2196F3'],
-      desert: ['#FB8C00', '#FFA726'],
-      swamp: ['#4E342E', '#5D4037']
+      grass: ['#7fb069', '#8fbf7a'],
+      dirt: ['#a68a64', '#b59a74'],
+      forest: ['#386641', '#487651'],
+      mountain: ['#8d5524', '#9d6534'],
+      water: ['#3a86ff', '#4a96ff'],
+      sand: ['#e9c46a', '#f9d47a'],
+      snow: ['#e0e1dd', '#f0f1ed'],
+      swamp: ['#52796f', '#62897f'],
+      rough: ['#936639', '#a37649'],
+      lava: ['#e63946', '#f64956']
     }
   }), [mapOffset]);
 
@@ -352,7 +375,24 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
 
     // Dessiner l'image du héros si disponible
     const heroImage = heroImages.get(hero.name);
-    if (heroImage) {
+    const spriteData = getHeroSprite(hero.name);
+    
+    if (heroImage && spriteData) {
+      // Utiliser la spritesheet avec découpage
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(x, y, size - 2, 0, Math.PI * 2);
+      ctx.clip();
+      
+      const { sprite } = spriteData;
+      ctx.drawImage(
+        heroImage,
+        sprite.x, sprite.y, sprite.width, sprite.height,  // Source dans la spritesheet
+        x - size + 2, y - size + 2, (size - 2) * 2, (size - 2) * 2  // Destination sur le canvas
+      );
+      ctx.restore();
+    } else if (heroImage) {
+      // Fallback vers image PNG simple
       ctx.save();
       ctx.beginPath();
       ctx.arc(x, y, size - 2, 0, Math.PI * 2);

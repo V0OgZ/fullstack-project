@@ -18,6 +18,9 @@ public class GameService {
     @Autowired
     private BuildingService buildingService;
     
+    @Autowired
+    private GameStateService gameStateService;
+    
     public Map<String, Object> getGame(String gameId) {
         Map<String, Object> game = games.get(gameId);
         if (game == null) {
@@ -29,6 +32,18 @@ public class GameService {
             game = createNewGame(gameId);
             games.put(gameId, game);
         }
+        
+        // Merge with persistent game state
+        com.example.demo.model.GameState gameState = gameStateService.getOrCreateGameState(gameId);
+        game.put("currentTurn", gameState.getCurrentTurn());
+        game.put("currentPlayerId", gameState.getCurrentPlayerId());
+        game.put("turnStartTime", gameState.getTurnStartTime());
+        game.put("gameStatus", gameState.getGameStatus());
+        game.put("selectedHeroes", gameState.getSelectedHeroes());
+        game.put("pendingActions", gameState.getPendingActions());
+        game.put("playerInventories", gameState.getPlayerInventories());
+        game.put("equippedItems", gameState.getEquippedItems());
+        
         return game;
     }
 
@@ -537,10 +552,31 @@ public class GameService {
     }
 
     private Map<String, Object> calculateResourceCollection(String objectId) {
-        // Real resource calculation
+        // HOMM3-style resource calculation
         Map<String, Object> resource = new HashMap<>();
-        resource.put("gold", (int)(Math.random() * 200) + 50);
-        resource.put("experience", (int)(Math.random() * 100) + 25);
+        
+        if (objectId.startsWith("gold_mine")) {
+            resource.put("gold", 1000);  // Gold mine produces 1000 gold/day
+            resource.put("type", "daily");
+        } else if (objectId.startsWith("sawmill")) {
+            resource.put("wood", 2);      // Sawmill produces 2 wood/day
+            resource.put("type", "daily");
+        } else if (objectId.startsWith("ore_mine")) {
+            resource.put("ore", 2);       // Ore mine produces 2 ore/day
+            resource.put("type", "daily");
+        } else if (objectId.startsWith("crystal")) {
+            resource.put("crystal", 1);   // Crystal cavern produces 1 crystal/day
+            resource.put("type", "daily");
+        } else if (objectId.startsWith("chest")) {
+            resource.put("gold", 1500 + (int)(Math.random() * 1000));  // 1500-2500 gold
+            resource.put("experience", (int)(Math.random() * 1500));    // 0-1500 exp
+            resource.put("type", "instant");
+        } else {
+            // Default resource pile
+            resource.put("gold", 500 + (int)(Math.random() * 500));
+            resource.put("type", "instant");
+        }
+        
         return resource;
     }
 
@@ -746,25 +782,32 @@ public class GameService {
     }
     
     private String getRandomTerrain() {
-        // More balanced terrain distribution for better gameplay
+        // HOMM3-style terrain distribution
         double rand = Math.random();
-        if (rand < 0.35) return "grass";      // 35% - most common
-        if (rand < 0.55) return "forest";     // 20% - common
-        if (rand < 0.70) return "mountain";   // 15% - moderate
-        if (rand < 0.80) return "water";      // 10% - creates obstacles
-        if (rand < 0.90) return "desert";     // 10% - varied terrain
-        return "swamp";                       // 10% - challenging terrain
+        if (rand < 0.30) return "grass";      // 30% - base terrain
+        if (rand < 0.45) return "dirt";       // 15% - roads and paths
+        if (rand < 0.60) return "forest";     // 15% - common
+        if (rand < 0.70) return "mountain";   // 10% - obstacles
+        if (rand < 0.78) return "water";      // 8% - rivers/lakes
+        if (rand < 0.85) return "sand";       // 7% - desert areas
+        if (rand < 0.92) return "snow";       // 7% - cold regions
+        if (rand < 0.96) return "swamp";      // 4% - difficult terrain
+        return "rough";                       // 4% - wasteland
     }
 
     private int getTerrainMovementCost(Object terrainType) {
+        // HOMM3 movement costs (in movement points * 100)
         switch (terrainType.toString()) {
-            case "grass": return 1;
-            case "forest": return 2;
-            case "mountain": return 3;
-            case "water": return 4;
-            case "desert": return 2;
-            case "swamp": return 3;
-            default: return 1;
+            case "grass": return 100;      // Normal movement
+            case "dirt": return 100;       // Roads - same as grass
+            case "forest": return 150;     // 50% slower
+            case "mountain": return 9999;  // Impassable without flying
+            case "water": return 9999;     // Impassable without boat
+            case "sand": return 150;       // Desert - 50% slower
+            case "snow": return 150;       // Snow - 50% slower
+            case "swamp": return 175;      // Swamp - 75% slower
+            case "rough": return 125;      // Rough - 25% slower
+            default: return 100;
         }
     }
     
@@ -1024,40 +1067,128 @@ public class GameService {
     }
     
     private Map<String, Object> createHero(String id, String name, String heroClass, int x, int y, String playerId) {
+        return createHero(id, name, heroClass, x, y, playerId, null);
+    }
+    
+    private Map<String, Object> createHero(String id, String name, String heroClass, int x, int y, String playerId, Map<String, Object> heroConfig) {
         Map<String, Object> hero = new HashMap<>();
         hero.put("id", id);
         hero.put("name", name);
         hero.put("class", heroClass);
         hero.put("position", Map.of("x", x, "y", y));
-        hero.put("level", 1);
-        hero.put("experience", 0);
-        hero.put("movementPoints", 3);
-        hero.put("maxMovementPoints", 3);
-        hero.put("stats", Map.of(
-            "attack", 5,
-            "defense", 3,
-            "knowledge", 2,
-            "spellPower", 1
-        ));
         hero.put("playerId", playerId);
         hero.put("units", new ArrayList<>());
         hero.put("inventory", new ArrayList<>());
+        
+        // Use heroConfig if provided, otherwise use defaults
+        if (heroConfig != null) {
+            hero.put("level", heroConfig.getOrDefault("startingLevel", 1));
+            hero.put("experience", 0);
+            hero.put("movementPoints", 3);
+            hero.put("maxMovementPoints", 3);
+            
+            // Use starting stats from config
+            Map<String, Object> startingStats = (Map<String, Object>) heroConfig.get("startingStats");
+            if (startingStats != null) {
+                hero.put("stats", startingStats);
+            } else {
+                hero.put("stats", Map.of(
+                    "attack", 5,
+                    "defense", 3,
+                    "knowledge", 2,
+                    "spellPower", 1,
+                    "health", 100,
+                    "mana", 20
+                ));
+            }
+            
+            // Add starting skills
+            List<String> startingSkills = (List<String>) heroConfig.get("startingSkills");
+            hero.put("skills", startingSkills != null ? new ArrayList<>(startingSkills) : new ArrayList<>());
+            
+            // Add starting spells
+            List<String> startingSpells = (List<String>) heroConfig.get("startingSpells");
+            hero.put("spells", startingSpells != null ? new ArrayList<>(startingSpells) : new ArrayList<>());
+            
+            // Add hero description
+            String heroDescription = (String) heroConfig.get("heroDescription");
+            if (heroDescription != null) {
+                hero.put("description", heroDescription);
+            }
+        } else {
+            // Default values
+            hero.put("level", 1);
+            hero.put("experience", 0);
+            hero.put("movementPoints", 3);
+            hero.put("maxMovementPoints", 3);
+            hero.put("stats", Map.of(
+                "attack", 5,
+                "defense", 3,
+                "knowledge", 2,
+                "spellPower", 1,
+                "health", 100,
+                "mana", 20
+            ));
+            hero.put("skills", new ArrayList<>());
+            hero.put("spells", new ArrayList<>());
+        }
+        
         return hero;
     }
     
     private List<Map<String, Object>> createMapObjects() {
         List<Map<String, Object>> objects = new ArrayList<>();
         
-        // Treasure chests
-        for (int i = 0; i < 10; i++) {
+        // HOMM3-style resource generators
+        // Gold mines (1000 gold/day)
+        for (int i = 0; i < 3; i++) {
+            Map<String, Object> goldMine = new HashMap<>();
+            goldMine.put("id", "gold_mine_" + i);
+            goldMine.put("x", 5 + (int)(Math.random() * 10));
+            goldMine.put("y", 5 + (int)(Math.random() * 10));
+            goldMine.put("type", "mine");
+            goldMine.put("subtype", "gold");
+            goldMine.put("owner", null);
+            goldMine.put("production", 1000);
+            objects.add(goldMine);
+        }
+        
+        // Sawmills (2 wood/day)
+        for (int i = 0; i < 4; i++) {
+            Map<String, Object> sawmill = new HashMap<>();
+            sawmill.put("id", "sawmill_" + i);
+            sawmill.put("x", (int)(Math.random() * 20));
+            sawmill.put("y", (int)(Math.random() * 20));
+            sawmill.put("type", "mine");
+            sawmill.put("subtype", "wood");
+            sawmill.put("owner", null);
+            sawmill.put("production", 2);
+            objects.add(sawmill);
+        }
+        
+        // Ore mines (2 ore/day)
+        for (int i = 0; i < 2; i++) {
+            Map<String, Object> oreMine = new HashMap<>();
+            oreMine.put("id", "ore_mine_" + i);
+            oreMine.put("x", (int)(Math.random() * 20));
+            oreMine.put("y", (int)(Math.random() * 20));
+            oreMine.put("type", "mine");
+            oreMine.put("subtype", "ore");
+            oreMine.put("owner", null);
+            oreMine.put("production", 2);
+            objects.add(oreMine);
+        }
+        
+        // Treasure chests with HOMM3 values
+        for (int i = 0; i < 8; i++) {
             Map<String, Object> chest = new HashMap<>();
             chest.put("id", "chest-" + i);
             chest.put("x", (int)(Math.random() * 20));
             chest.put("y", (int)(Math.random() * 20));
             chest.put("type", "treasure");
             chest.put("content", Map.of(
-                "gold", (int)(Math.random() * 500) + 100,
-                "gems", (int)(Math.random() * 3) + 1
+                "gold", 1500 + (int)(Math.random() * 1000), // 1500-2500 gold
+                "experience", (int)(Math.random() * 1500)    // 0-1500 exp
             ));
             objects.add(chest);
         }
@@ -1078,7 +1209,7 @@ public class GameService {
         castle2.put("y", 18);
         castle2.put("type", "castle");
         castle2.put("owner", "player2");
-        castle2.put("castleType", "castle");
+        castle2.put("castleType", "rampart");
         objects.add(castle2);
         
         return objects;
