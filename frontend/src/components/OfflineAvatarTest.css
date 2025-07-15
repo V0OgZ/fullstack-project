@@ -104,6 +104,46 @@
   color: #ccc;
 }
 
+.download-buttons {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.download-btn {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+.download-btn.svg {
+  background: linear-gradient(45deg, #4CAF50, #45a049);
+  color: white;
+}
+
+.download-btn.png {
+  background: linear-gradient(45deg, #2196F3, #1976D2);
+  color: white;
+}
+
+.download-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.download-btn.svg:hover {
+  background: linear-gradient(45deg, #45a049, #4CAF50);
+}
+
+.download-btn.png:hover {
+  background: linear-gradient(45deg, #1976D2, #2196F3);
+}
+
 .info {
   background: rgba(0, 255, 0, 0.1);
   padding: 15px;

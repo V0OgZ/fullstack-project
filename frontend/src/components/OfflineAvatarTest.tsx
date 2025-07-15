@@ -37,6 +37,22 @@ const OfflineAvatarTest: React.FC = () => {
     URL.revokeObjectURL(url);
   };
 
+  const downloadAllAsSVG = () => {
+    offlineAvatarGenerator.downloadAllAvatarsAsSVG();
+  };
+
+  const downloadAllAsPNG = async () => {
+    await offlineAvatarGenerator.downloadAllAvatarsAsPNG();
+  };
+
+  const downloadSingleAvatar = (heroName: string, format: 'svg' | 'png') => {
+    if (format === 'svg') {
+      offlineAvatarGenerator.downloadAvatarAsSVG(heroName);
+    } else {
+      offlineAvatarGenerator.downloadAvatarAsPNG(heroName);
+    }
+  };
+
   useEffect(() => {
     generateAllAvatars();
   }, []);
@@ -51,6 +67,12 @@ const OfflineAvatarTest: React.FC = () => {
         </button>
         <button onClick={downloadAvatars}>
           💾 Télécharger JSON
+        </button>
+        <button onClick={downloadAllAsSVG}>
+          📁 Télécharger Tous (SVG)
+        </button>
+        <button onClick={downloadAllAsPNG}>
+          🖼️ Télécharger Tous (PNG)
         </button>
       </div>
 
@@ -80,6 +102,22 @@ const OfflineAvatarTest: React.FC = () => {
                 />
                 <p>Style: {avatar.style}</p>
                 <p>Généré: {avatar.isGenerated ? '✅' : '❌'}</p>
+                {avatar.isGenerated && (
+                  <div className="download-buttons">
+                    <button 
+                      onClick={() => downloadSingleAvatar(name, 'svg')}
+                      className="download-btn svg"
+                    >
+                      📁 SVG
+                    </button>
+                    <button 
+                      onClick={() => downloadSingleAvatar(name, 'png')}
+                      className="download-btn png"
+                    >
+                      🖼️ PNG
+                    </button>
+                  </div>
+                )}
               </>
             ) : (
               <p>❌ Avatar non trouvé</p>

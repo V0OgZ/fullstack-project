@@ -151,6 +151,130 @@ class OfflineAvatarGenerator {
   }
 
   /**
+   * Télécharge un avatar spécifique en fichier SVG
+   */
+  downloadAvatarAsSVG(heroName: string): void {
+    const normalizedName = heroName.toUpperCase();
+    const avatar = this.generatedAvatars.get(normalizedName);
+    
+    if (!avatar || !avatar.svgContent) {
+      console.error(`❌ Avatar ${heroName} non trouvé ou pas de contenu SVG`);
+      return;
+    }
+
+    try {
+      // Créer le blob avec le contenu SVG
+      const blob = new Blob([avatar.svgContent], { type: 'image/svg+xml' });
+      const url = URL.createObjectURL(blob);
+      
+      // Créer le lien de téléchargement
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${normalizedName.toLowerCase()}-${avatar.style}.svg`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      
+      // Nettoyer l'URL
+      URL.revokeObjectURL(url);
+      
+      console.log(`✅ Avatar ${heroName} téléchargé en SVG`);
+    } catch (error) {
+      console.error(`❌ Erreur téléchargement SVG ${heroName}:`, error);
+    }
+  }
+
+  /**
+   * Télécharge tous les avatars en fichiers SVG
+   */
+  downloadAllAvatarsAsSVG(): void {
+    const avatars = Array.from(this.generatedAvatars.values());
+    
+    if (avatars.length === 0) {
+      console.warn('⚠️ Aucun avatar à télécharger');
+      return;
+    }
+
+    console.log(`🚀 Téléchargement de ${avatars.length} avatars en SVG...`);
+    
+    avatars.forEach(avatar => {
+      if (avatar.isGenerated && avatar.svgContent) {
+        this.downloadAvatarAsSVG(avatar.name);
+      }
+    });
+  }
+
+  /**
+   * Télécharge un avatar en PNG (conversion SVG vers PNG)
+   */
+  async downloadAvatarAsPNG(heroName: string, size: number = 256): Promise<void> {
+    const normalizedName = heroName.toUpperCase();
+    const avatar = this.generatedAvatars.get(normalizedName);
+    
+    if (!avatar || !avatar.svgContent) {
+      console.error(`❌ Avatar ${heroName} non trouvé ou pas de contenu SVG`);
+      return;
+    }
+
+    try {
+      // Créer un canvas pour convertir SVG vers PNG
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = size;
+      canvas.height = size;
+      
+      // Créer une image à partir du SVG
+      const img = new Image();
+      img.onload = () => {
+        // Dessiner l'image sur le canvas
+        ctx?.drawImage(img, 0, 0, size, size);
+        
+        // Convertir en PNG et télécharger
+        canvas.toBlob((blob) => {
+          if (blob) {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${normalizedName.toLowerCase()}-${avatar.style}.png`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            console.log(`✅ Avatar ${heroName} téléchargé en PNG`);
+          }
+        }, 'image/png');
+      };
+      
+      img.src = avatar.svgContent;
+    } catch (error) {
+      console.error(`❌ Erreur téléchargement PNG ${heroName}:`, error);
+    }
+  }
+
+  /**
+   * Télécharge tous les avatars en PNG
+   */
+  async downloadAllAvatarsAsPNG(size: number = 256): Promise<void> {
+    const avatars = Array.from(this.generatedAvatars.values());
+    
+    if (avatars.length === 0) {
+      console.warn('⚠️ Aucun avatar à télécharger');
+      return;
+    }
+
+    console.log(`🚀 Téléchargement de ${avatars.length} avatars en PNG...`);
+    
+    for (const avatar of avatars) {
+      if (avatar.isGenerated) {
+        await this.downloadAvatarAsPNG(avatar.name, size);
+        // Petit délai pour éviter de surcharger le navigateur
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+    }
+  }
+
+  /**
    * Crée un élément img avec l'avatar
    */
   createAvatarImage(heroName: string, size: number = 64): HTMLImageElement {
