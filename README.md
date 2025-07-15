@@ -42,13 +42,34 @@ Visit **http://localhost:3000** - Your epic journey begins! ⚔️
 - ✅ **Modern Interface** - Clean, responsive, intuitive design
 - ✅ **Multiplayer** - Real-time sessions with WebSocket support
 - ✅ **ZFC System** - Zone of Temporal Causality for advanced movement
+- ✅ **🆕 Epic Content System** - Legendary heroes, creatures, and buildings
 
 ### 🛠️ **Technical Stack**
 - **Backend**: Spring Boot (Java) - Port 8080
 - **Frontend**: React TypeScript - Port 3000  
 - **Database**: H2 in-memory with full persistence
-- **APIs**: 70+ RESTful endpoints
+- **APIs**: 80+ RESTful endpoints
 - **Testing**: Comprehensive E2E test suite
+
+---
+
+## 🆕 **Epic Content System**
+
+### 🐉 **Legendary Creatures & Heroes**
+*Discover a rich library of epic content*
+
+**Access via 🐉 button in game interface**
+
+- **🦸 7 Epic Heroes** - Arthur, Jeanne d'Arc, Merlin, Legolas, Galadriel, Gimli, Gabriel
+- **🐉 8 Epic Creatures** - Dragons, Unicorns, Phoenixes, Archangels, and more
+- **🏰 Epic Buildings** - Castles, towers, and fortresses with unique architectural styles
+- **📊 Complete Stats** - Detailed abilities, backstories, and combat information
+- **🎨 SVG Artwork** - High-quality scalable vector graphics
+
+### 🧪 **Demo the Epic System**
+```bash
+./run-epic-demo.sh  # Automated demo with visual testing
+```
 
 ---
 
@@ -86,6 +107,11 @@ Visit **http://localhost:3000** - Your epic journey begins! ⚔️
 ./run-all-tests.sh        # Complete test suite
 ./run-playwright-tests.sh # E2E visual tests
 ./run-quick-tests.sh      # Fast verification
+./run-epic-demo.sh        # 🆕 Demo epic content system
+
+# Development
+./start-safe.sh           # Safe restart with cleanup
+./start-demo.sh           # Demo mode with sample data
 ```
 
 ---
