@@ -6,11 +6,13 @@ import {
   HEROES_ASSETS, 
   CREATURES_ASSETS, 
   TERRAIN_ASSETS, 
+  BUILDINGS_ASSETS,
   EFFECTS_ASSETS, 
   UI_ICONS,
   getHeroAsset,
   getCreatureAsset,
   getTerrainAsset,
+  getBuildingAsset,
   getEffectAsset,
   loadAssetWithFallback,
   isAnimatedAsset,
@@ -20,6 +22,7 @@ import {
   type HeroName,
   type CreatureName,
   type TerrainType,
+  type BuildingType,
   type EffectType
 } from '../constants/unifiedAssets';
 
@@ -48,6 +51,14 @@ class AssetService {
    */
   async loadTerrainAsset(terrainType: string): Promise<HTMLImageElement> {
     const asset = getTerrainAsset(terrainType);
+    return this.loadAssetWithCache(asset);
+  }
+
+  /**
+   * Charge un asset bâtiment avec cache
+   */
+  async loadBuildingAsset(buildingType: string): Promise<HTMLImageElement> {
+    const asset = getBuildingAsset(buildingType);
     return this.loadAssetWithCache(asset);
   }
 
@@ -102,7 +113,9 @@ class AssetService {
       // Créatures communes
       'DRAGON_RED', 'GRIFFIN', 'KNIGHT',
       // Terrains de base
-      'GRASS', 'FOREST', 'MOUNTAIN', 'WATER'
+      'GRASS', 'FOREST', 'MOUNTAIN', 'WATER',
+      // Bâtiments essentiels
+      'CASTLE', 'BARRACKS', 'MAGE_TOWER'
     ];
 
     console.log('🚀 Préchargement des assets essentiels...');
@@ -115,6 +128,8 @@ class AssetService {
           await this.loadCreatureAsset(assetName);
         } else if (assetName in TERRAIN_ASSETS) {
           await this.loadTerrainAsset(assetName);
+        } else if (assetName in BUILDINGS_ASSETS) {
+          await this.loadBuildingAsset(assetName);
         }
       } catch (error) {
         console.warn(`⚠️ Failed to preload ${assetName}:`, error);
@@ -128,7 +143,7 @@ class AssetService {
   /**
    * Obtient l'URL d'un asset sans le charger
    */
-  getAssetUrl(category: 'hero' | 'creature' | 'terrain' | 'effect', name: string): string {
+  getAssetUrl(category: 'hero' | 'creature' | 'terrain' | 'building' | 'effect', name: string): string {
     switch (category) {
       case 'hero':
         return getHeroAsset(name).path;
@@ -136,6 +151,8 @@ class AssetService {
         return getCreatureAsset(name).path;
       case 'terrain':
         return getTerrainAsset(name).path;
+      case 'building':
+        return getBuildingAsset(name).path;
       case 'effect':
         return getEffectAsset(name).path;
       default:
@@ -154,7 +171,7 @@ class AssetService {
   /**
    * Vérifie si un asset est animé
    */
-  isAssetAnimated(category: 'hero' | 'creature' | 'terrain' | 'effect', name: string): boolean {
+  isAssetAnimated(category: 'hero' | 'creature' | 'terrain' | 'building' | 'effect', name: string): boolean {
     let asset: AssetInfo;
     switch (category) {
       case 'hero':
@@ -165,6 +182,9 @@ class AssetService {
         break;
       case 'terrain':
         asset = getTerrainAsset(name);
+        break;
+      case 'building':
+        asset = getBuildingAsset(name);
         break;
       case 'effect':
         asset = getEffectAsset(name);
@@ -198,7 +218,7 @@ class AssetService {
     return {
       cached: this.imageCache.size,
       loading: this.loadingPromises.size,
-      available: getAssetsByCategory()
+      total: this.imageCache.size + this.loadingPromises.size
     };
   }
 
@@ -208,7 +228,7 @@ class AssetService {
   clearCache(): void {
     this.imageCache.clear();
     this.loadingPromises.clear();
-    console.log('🧹 Cache d\'assets vidé');
+    console.log('🗑️ Asset cache cleared');
   }
 
   /**
@@ -222,57 +242,52 @@ class AssetService {
    * Précharge les assets pour un scénario spécifique
    */
   async preloadScenarioAssets(scenarioId: string): Promise<void> {
-    const heroName = this.getRecommendedHeroForScenario(scenarioId);
+    const recommendedHero = this.getRecommendedHeroForScenario(scenarioId);
     
-    console.log(`🎮 Préchargement assets pour scénario: ${scenarioId}`);
+    console.log(`🎮 Préchargement des assets pour le scénario: ${scenarioId}`);
+    console.log(`👤 Héros recommandé: ${recommendedHero}`);
     
-    try {
-      // Précharger le héros principal
-      await this.loadHeroAsset(heroName);
-      
-      // Précharger quelques créatures communes
-      await Promise.all([
-        this.loadCreatureAsset('DRAGON_RED'),
-        this.loadCreatureAsset('GRIFFIN'),
-        this.loadCreatureAsset('KNIGHT')
-      ]);
-      
-      // Précharger tous les terrains
-      await Promise.all([
-        this.loadTerrainAsset('GRASS'),
-        this.loadTerrainAsset('FOREST'),
-        this.loadTerrainAsset('MOUNTAIN'),
-        this.loadTerrainAsset('WATER'),
-        this.loadTerrainAsset('DESERT'),
-        this.loadTerrainAsset('SWAMP')
-      ]);
-      
-      console.log(`✅ Assets préchargés pour ${scenarioId}`);
-    } catch (error) {
-      console.error(`❌ Erreur lors du préchargement pour ${scenarioId}:`, error);
-    }
+    const assetsToPreload = [
+      // Héros recommandé
+      recommendedHero,
+      // Héros de fallback
+      'ARTHUR', 'MORGANA',
+      // Créatures communes
+      'DRAGON_RED', 'GRIFFIN', 'KNIGHT',
+      // Terrains de base
+      'GRASS', 'FOREST', 'MOUNTAIN',
+      // Bâtiments essentiels
+      'CASTLE', 'BARRACKS'
+    ];
+
+    const loadPromises = assetsToPreload.map(async (assetName) => {
+      try {
+        if (assetName in HEROES_ASSETS) {
+          await this.loadHeroAsset(assetName);
+        } else if (assetName in CREATURES_ASSETS) {
+          await this.loadCreatureAsset(assetName);
+        } else if (assetName in TERRAIN_ASSETS) {
+          await this.loadTerrainAsset(assetName);
+        } else if (assetName in BUILDINGS_ASSETS) {
+          await this.loadBuildingAsset(assetName);
+        }
+      } catch (error) {
+        console.warn(`⚠️ Failed to preload ${assetName}:`, error);
+      }
+    });
+
+    await Promise.all(loadPromises);
+    console.log(`✅ Préchargement terminé pour le scénario: ${scenarioId}`);
   }
 }
 
 // Instance singleton
 export const assetService = new AssetService();
 
-// Hooks React pour utiliser le service
+// Hook React pour utiliser le service
 export function useAssetService() {
   return assetService;
 }
 
-// Fonctions utilitaires exportées
-export {
-  getHeroAsset,
-  getCreatureAsset,
-  getTerrainAsset,
-  getEffectAsset,
-  isAnimatedAsset,
-  getAssetsByCategory,
-  type HeroName,
-  type CreatureName,
-  type TerrainType,
-  type EffectType,
-  type AssetInfo
-}; 
+// Export par défaut pour compatibilité
+export default assetService; 
