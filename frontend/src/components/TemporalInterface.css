@@ -398,7 +398,6 @@
 .zone-cell.has-hero:hover,
 .zone-cell.has-castle:hover,
 .zone-cell.has-object:hover {
-  transform: scale(1.15);
   z-index: 15;
 }
 
