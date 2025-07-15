@@ -25,14 +25,14 @@ export default defineConfig({
       name: 'solo-fullscreen',
       use: { 
         ...devices['Desktop Chrome'],
-        viewport: { width: 1280, height: 700 },
+        viewport: { width: 1280, height: 800 },
         launchOptions: {
           slowMo: 100,
           args: [
             '--no-default-browser-check',
             '--disable-web-security',
-            '--window-position=0,0', // Position 0,0 comme demandé
-            '--window-size=1280,700',
+            '--window-position=0,0',
+            '--window-size=1280,800',
             '--force-device-scale-factor=1'
           ],
         },
@@ -49,13 +49,13 @@ export default defineConfig({
           args: [
             '--no-default-browser-check',
             '--disable-web-security',
-            '--window-position=640,0', // Position 640,0 (écran divisé par 2)
+            '--window-position=0,0',     // Premier browser à gauche
             '--window-size=640,700',
             '--force-device-scale-factor=1'
           ],
         },
       },
-      testMatch: ['**/multiplayer-demo.spec.ts', '**/02-multiplayer-demo.spec.ts', '**/multiplayer-ui.spec.ts'],
+      testMatch: ['**/multiplayer-demo.spec.ts', '**/multiplayer-ui.spec.ts'],
     },
     {
       name: 'demo',
