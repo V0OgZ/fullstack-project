@@ -94,9 +94,9 @@ class HeroDisplayService {
   };
 
   /**
-   * Obtient l'affichage d'un héros (100% offline)
+   * Obtient l'affichage d'un héros (hybride: Dicebear + local)
    */
-  getHeroDisplay(request: HeroDisplayRequest): HeroDisplayResult {
+  async getHeroDisplay(request: HeroDisplayRequest): Promise<HeroDisplayResult> {
     const normalizedName = request.name.toUpperCase();
     const heroClass = request.heroClass?.toUpperCase() || this.HERO_CLASS_MAPPING[normalizedName] || 'WARRIOR';
     
@@ -115,6 +115,27 @@ class HeroDisplayService {
 
     const emojiFallback = this.HERO_EMOJIS[normalizedName] || this.HERO_EMOJIS[heroClass] || '🦸';
 
+    // Essayer Dicebear pour les héros principaux
+    if (this.isMainHero(normalizedName)) {
+      try {
+        const dicebearAvatar = await this.getDicebearAvatar(normalizedName);
+        if (dicebearAvatar) {
+          return {
+            url: dicebearAvatar.url,
+            fallback: imagePath,
+            type: 'dicebear',
+            metadata: {
+              width: 128,
+              height: 128,
+              animated: false
+            }
+          };
+        }
+      } catch (error) {
+        console.warn(`Dicebear failed for ${normalizedName}, using local fallback`);
+      }
+    }
+
     return {
       url: imagePath,
       fallback: emojiFallback,
@@ -125,6 +146,27 @@ class HeroDisplayService {
         animated: false
       }
     };
+  }
+
+  /**
+   * Vérifie si c'est un héros principal (pour Dicebear)
+   */
+  private isMainHero(heroName: string): boolean {
+    return ['ARTHUR', 'MORGANA', 'TRISTAN', 'ELARA', 'GARETH', 'LYANNA', 'CEDRIC', 'SERAPHINA', 'VALEN'].includes(heroName);
+  }
+
+  /**
+   * Obtient un avatar Dicebear (avec cache)
+   */
+  private async getDicebearAvatar(heroName: string): Promise<any> {
+    try {
+      // Import dynamique pour éviter les dépendances circulaires
+      const { default: offlineAvatarGenerator } = await import('./offlineAvatarGenerator');
+      return await offlineAvatarGenerator.getHeroAvatar(heroName);
+    } catch (error) {
+      console.error(`Erreur Dicebear pour ${heroName}:`, error);
+      return null;
+    }
   }
 
   /**
