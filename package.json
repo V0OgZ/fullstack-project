@@ -17,6 +17,11 @@
   "author": "Heroes of Time Team",
   "license": "MIT",
   "devDependencies": {
-    "@types/lodash": "^4.17.20"
+    "@types/lodash": "^4.17.20",
+    "@types/seedrandom": "^3.0.8"
+  },
+  "dependencies": {
+    "seedrandom": "^3.0.5",
+    "simplex-noise": "^4.0.3"
   }
 }
