@@ -27,6 +27,13 @@
 - **Beautiful hexagonal terrain** with perfect tessellation
 - **Real-time visual feedback** for all game actions
 
+### 🧪 **Game Script Engine**
+*Automation meets strategy*
+- **Command-based scripting** - Automate complex game actions
+- **Visual script editor** - Test and debug commands in real-time
+- **API integration** - Full access to game backend capabilities
+- **Developer-friendly** - Perfect for testing and prototyping
+
 ---
 
 ## 🚀 **Quick Start**

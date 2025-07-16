@@ -269,6 +269,179 @@ cd frontend && npm run test:responsive
 
 ---
 
+## 🧪 **Game Script Engine System** (NOUVEAU - Janvier 2025)
+
+### 🎯 **Vue d'Ensemble**
+Le **Game Script Engine** est un système avancé de scripting intégré dans Heroes of Time qui permet d'automatiser les actions de jeu via des commandes textuelles. Il utilise l'API backend et offre une interface de test complète.
+
+### 🔧 **Architecture**
+```
+GameScriptEngine (frontend/src/services/gameScriptEngine.ts)
+    ├── Command Parser (analyse des commandes)
+    ├── API Integration (appels backend via ApiService)
+    ├── Error Handling (gestion des erreurs)
+    └── Result Formatting (formatage des résultats)
+
+GameScriptTester (frontend/src/components/GameScriptTester.tsx)
+    ├── Three-Panel Interface (exemples, éditeur, résultats)
+    ├── Golden Theme Design (thème cohérent avec le jeu)
+    └── Real-time Testing (test en temps réel)
+```
+
+### 🎮 **Commandes Disponibles**
+```bash
+# Déplacement de héros
+MOVE heroId TO x,y
+
+# Construction de bâtiments
+BUILD buildingType AT x,y
+
+# Recrutement d'unités
+RECRUIT unitType QUANTITY amount FROM buildingId
+
+# Lancement de sorts
+CAST spellId ON targetId
+
+# Sélection de héros
+SELECT_HERO heroId
+
+# Fin de tour
+END_TURN
+
+# Attente
+WAIT duration
+
+# Logging
+LOG message
+```
+
+### 🛠️ **Utilisation**
+```typescript
+// Import du service
+import { GameScriptEngine } from '../services/gameScriptEngine';
+
+// Initialisation
+const scriptEngine = new GameScriptEngine();
+
+// Exécution d'une commande
+const result = await scriptEngine.executeCommand('MOVE hero1 TO 5,3');
+
+// Exécution d'un script complet
+const script = `
+  SELECT_HERO hero1
+  MOVE hero1 TO 5,3
+  BUILD castle AT 5,3
+  END_TURN
+`;
+const results = await scriptEngine.executeScript(script);
+```
+
+### 🎯 **Interface de Test**
+Accessible via le bouton **🧪** dans `TrueHeroesInterface` :
+
+#### **Panneau 1 - Exemples**
+```
+📚 COMMANDES DISPONIBLES
+- MOVE hero1 TO 5,3
+- BUILD castle AT 2,4
+- RECRUIT archer QUANTITY 10 FROM building1
+- CAST fireball ON enemy1
+- SELECT_HERO hero2
+- END_TURN
+- WAIT 1000
+- LOG "Action completed"
+```
+
+#### **Panneau 2 - Éditeur**
+- Éditeur de code avec coloration syntaxique
+- Boutons d'exécution pour commandes individuelles ou scripts
+- Historique des commandes exécutées
+
+#### **Panneau 3 - Résultats**
+- Affichage en temps réel des résultats
+- Gestion des erreurs avec détails
+- Formatage JSON des réponses API
+
+### 🔍 **Intégration API**
+```typescript
+// Exemple d'intégration avec ApiService
+async executeCommand(command: string): Promise<ScriptResult> {
+  const parsed = this.parseCommand(command);
+  
+  switch (parsed.action) {
+    case 'MOVE':
+      return await this.apiService.makeGenericRequest(
+        'POST', 
+        `/api/games/${gameId}/heroes/${heroId}/move`,
+        { targetPosition: parsed.params }
+      );
+    
+    case 'BUILD':
+      return await this.apiService.makeGenericRequest(
+        'POST',
+        `/api/games/${gameId}/buildings`,
+        { buildingType: parsed.params.type, position: parsed.params.position }
+      );
+    
+    // ... autres commandes
+  }
+}
+```
+
+### 🎨 **Thème Visuel**
+```css
+/* Thème Golden cohérent avec le jeu */
+.script-tester {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: #ffd700;
+  border: 2px solid #ffd700;
+}
+
+.script-examples {
+  background: rgba(255, 215, 0, 0.1);
+  border-left: 4px solid #ffd700;
+}
+
+.script-editor {
+  background: #2a2a3e;
+  color: #ffffff;
+  font-family: 'Courier New', monospace;
+}
+```
+
+### 🧪 **Tests**
+```bash
+# Test du système de scripting
+cd frontend
+npx playwright test tests/e2e/script-tester-demo.spec.ts --headed
+
+# Test d'intégration API
+npm test -- gameScriptEngine.test.ts
+```
+
+### 🚀 **Avantages**
+- ✅ **Automatisation**: Scripts de test automatiques
+- ✅ **Débogage**: Interface visuelle pour tester l'API
+- ✅ **Développement**: Prototypage rapide de nouvelles fonctionnalités
+- ✅ **Formation**: Apprentissage des commandes de jeu
+- ✅ **QA**: Tests de régression automatisés
+
+### 📝 **Exemple de Script Complet**
+```
+// Script de test complet
+LOG "Début du test automatisé"
+SELECT_HERO hero1
+MOVE hero1 TO 10,5
+BUILD castle AT 10,5
+WAIT 1000
+RECRUIT archer QUANTITY 5 FROM castle1
+LOG "Recrutement terminé"
+END_TURN
+LOG "Test terminé avec succès"
+```
+
+---
+
 ## 🔍 **Débogage et Diagnostics**
 
 ### 🕵️ **Diagnostic Rapide**
