@@ -3,6 +3,7 @@ import { useGameStore } from '../store/useGameStore';
 import ModernGameRenderer from './ModernGameRenderer';
 import CastleManagementPanel from './CastleManagementPanel';
 import GoldorakEasterEgg from './GoldorakEasterEgg';
+import EpicContentViewer from './EpicContentViewer';
 import { useRetroKonami } from '../utils/retro-konami';
 import { HexTile, BiomeType } from '../types/terrain';
 import { Position } from '../types/game';
@@ -32,6 +33,7 @@ const TrueHeroesInterface: React.FC = () => {
   
   const [activePanel, setActivePanel] = useState<'scenario' | 'hero' | 'inventory' | 'castle'>('scenario');
   const [showGoldorakEasterEgg, setShowGoldorakEasterEgg] = useState(false);
+  const [showEpicContentViewer, setShowEpicContentViewer] = useState(false);
   const { startListening, stopListening } = useRetroKonami();
 
   // Load default game on component mount
@@ -183,6 +185,13 @@ const TrueHeroesInterface: React.FC = () => {
         
         <div className="header-right">
           <button 
+            className="control-btn"
+            onClick={() => setShowEpicContentViewer(true)}
+            title="Epic Content - Heroes & Creatures"
+          >
+            🧟
+          </button>
+          <button 
             className="end-turn-btn"
             onClick={handleEndTurn}
             title="End Turn"
@@ -285,6 +294,12 @@ const TrueHeroesInterface: React.FC = () => {
           )}
         </div>
       </div>
+
+      {/* Epic Content Viewer */}
+      <EpicContentViewer 
+        isVisible={showEpicContentViewer} 
+        onClose={() => setShowEpicContentViewer(false)} 
+      />
 
       {/* 🚀 GOLDORAK EASTER EGG - Tapez G-O-L-D-O-R-A-K pour l'activer! */}
       <GoldorakEasterEgg 
