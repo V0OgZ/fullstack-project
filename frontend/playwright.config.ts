@@ -52,7 +52,9 @@ export default defineConfig({
         '**/script-driven-tests.spec.ts',
         '**/hero-movement-fog-test.spec.ts',
         '**/debug-console-errors.spec.ts',
-        '**/debug-scenarios.spec.ts'
+        '**/debug-scenarios.spec.ts',
+        '**/debug-ui-state.spec.ts',
+        '**/debug-map-data.spec.ts'
       ],
     },
     
