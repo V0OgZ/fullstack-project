@@ -12,8 +12,8 @@ const DebugTerrainVision: React.FC = () => {
   if (map && map.length > 0) {
     map.forEach(row => {
       row.forEach(tile => {
-        if (tile.isVisible) visibleCount++;
-        else if (tile.isExplored) exploredCount++;
+        if (tile.visible) visibleCount++;
+        else if (tile.explored) exploredCount++;
         else unknownCount++;
       });
     });
@@ -39,7 +39,7 @@ const DebugTerrainVision: React.FC = () => {
       
       <hr style={{ margin: '10px 0' }} />
       
-      <div>Current player: {currentPlayer?.username || 'None'}</div>
+      <div>Current player: {currentPlayer?.name || 'None'}</div>
       <div>Heroes: {currentPlayer?.heroes?.length || 0}</div>
       
       <hr style={{ margin: '10px 0' }} />

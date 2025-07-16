@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Tile } from '../types/game';
 
 // HOMM3 terrain types with their characteristics

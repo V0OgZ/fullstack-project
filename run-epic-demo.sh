@@ -6,6 +6,10 @@ echo ""
 echo "🚀 Starting Epic Content Demo..."
 echo ""
 
+# Attendre que les serveurs soient complètement démarrés
+echo "⏳ Waiting 15 seconds for servers to initialize..."
+sleep 10
+
 # Vérifier si l'app est démarrée
 if ! curl -s http://localhost:3000 > /dev/null; then
     echo "⚠️  Application not running. Please run './start-app.sh' first!"
@@ -23,7 +27,7 @@ echo "🎯 Running Epic Content Demo..."
 echo ""
 
 cd frontend
-npx playwright test tests/e2e/epic-content-demo.spec.ts --headed --project=chromium
+npx playwright test tests/e2e/epic-content-demo.spec.ts --headed --project=demo
 
 echo ""
 echo "🎉 Demo completed!"

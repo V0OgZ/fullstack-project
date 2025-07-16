@@ -93,12 +93,14 @@ public class GameService {
 
     public Map<String, Object> getCurrentPlayer(String gameId) {
         Map<String, Object> game = getGame(gameId);
+        @SuppressWarnings("unchecked")
         List<Map<String, Object>> players = (List<Map<String, Object>>) game.get("players");
         return players.isEmpty() ? null : players.get(0);
     }
 
     public Map<String, Object> moveHero(String heroId, Object targetPosition) {
         // Real ZFC calculation for hero movement
+        @SuppressWarnings("unchecked")
         Map<String, Object> position = (Map<String, Object>) targetPosition;
         int x = (Integer) position.get("x");
         int y = (Integer) position.get("y");
@@ -177,6 +179,7 @@ public class GameService {
         }
         
         // Get player resources
+        @SuppressWarnings("unchecked")
         Map<String, Integer> playerResources = (Map<String, Integer>) player.get("resources");
         
         try {
@@ -230,6 +233,7 @@ public class GameService {
         }
         
         // Get player resources
+        @SuppressWarnings("unchecked")
         Map<String, Integer> playerResources = (Map<String, Integer>) player.get("resources");
         
         try {
@@ -275,9 +279,11 @@ public class GameService {
             Building building = buildingService.recruitUnits(buildingId, unitType, quantity);
             
             // Add units to player's army
+            @SuppressWarnings("unchecked")
             List<Map<String, Object>> heroes = (List<Map<String, Object>>) player.get("heroes");
             if (!heroes.isEmpty()) {
                 Map<String, Object> hero = heroes.get(0); // Add to first hero for now
+                @SuppressWarnings("unchecked")
                 List<Map<String, Object>> units = (List<Map<String, Object>>) hero.get("units");
                 if (units == null) {
                     units = new ArrayList<>();
@@ -348,18 +354,22 @@ public class GameService {
         Map<String, Object> game = new HashMap<>();
         game.put("id", gameId);
         game.put("name", "Heroes of Time - " + gameId);
-        game.put("currentTurn", 1);
-        game.put("turnStartTime", new Date());
-        game.put("turnDuration", 30);
-        game.put("status", "active");
         game.put("scenario", "conquest-classique");
-
+        game.put("turn", 1);  // Frontend expects 'turn', not 'currentTurn'
+        game.put("maxTurns", 200);
+        game.put("date", new Date().toString());
+        game.put("status", "active");
+        game.put("gameMode", "multiplayer");  // Add gameMode property
+        
         // Real players with resources and castles
         List<Map<String, Object>> players = createPlayersWithCastles(gameId);
         game.put("players", players);
         
-        // Real hexagonal map with heroes placed on tiles
-        Map<String, Object> map = createHexagonalMapWithHeroes(players);
+        // Set current player ID instead of full player object
+        game.put("currentPlayerId", players.get(0).get("id"));
+        
+        // Real hexagonal map with heroes placed on tiles - return 2D array directly
+        List<List<Map<String, Object>>> map = createHexagonalMapWithHeroes(players);
         game.put("map", map);
         
         game.put("currentPlayer", players.get(0));
@@ -462,6 +472,7 @@ public class GameService {
         }
     }
     
+    @SuppressWarnings("unchecked")
     private void applyDailyBonuses(String gameId) {
         try {
             Map<String, Object> game = getGame(gameId);
@@ -511,7 +522,7 @@ public class GameService {
     
     private boolean isNewWeek(String gameId) {
         Map<String, Object> game = getGame(gameId);
-        Integer currentTurn = (Integer) game.get("currentTurn");
+        Integer currentTurn = (Integer) game.get("turn");
         return currentTurn % 7 == 0; // Reset every 7 turns
     }
     
@@ -519,6 +530,7 @@ public class GameService {
     // UTILITY METHODS
     // ======================
     
+    @SuppressWarnings("unchecked")
     private Map<String, Object> getPlayerById(Map<String, Object> game, String playerId) {
         List<Map<String, Object>> players = (List<Map<String, Object>>) game.get("players");
         return players.stream()
@@ -605,6 +617,7 @@ public class GameService {
     // MULTIPLAYER SESSION METHODS
     // ======================
     
+    @SuppressWarnings("unchecked")
     public Map<String, Object> createMultiplayerGame(Map<String, Object> gameConfig) {
         String sessionId = (String) gameConfig.get("sessionId");
         String gameMode = (String) gameConfig.get("gameMode");
@@ -774,6 +787,7 @@ public class GameService {
         return player;
     }
     
+    @SuppressWarnings("unchecked")
     private boolean validatePlayerOwnsHero(Map<String, Object> game, String playerId, String heroId) {
         List<Map<String, Object>> players = (List<Map<String, Object>>) game.get("players");
         for (Map<String, Object> player : players) {
@@ -848,18 +862,16 @@ public class GameService {
         return map;
     }
     
-    private Map<String, Object> createHexagonalMapWithHeroes(List<Map<String, Object>> players) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("id", "hex-map-1");
-        map.put("type", "hexagonal");
-        map.put("width", 20);
-        map.put("height", 20);
-        
+    @SuppressWarnings("unchecked")
+    private List<List<Map<String, Object>>> createHexagonalMapWithHeroes(List<Map<String, Object>> players) {
         // Create terrain with logical patterns
         String[][] terrainMap = generateRealisticTerrain(20, 20);
         
-        List<Map<String, Object>> tiles = new ArrayList<>();
+        // Create 2D array structure to match frontend expectations
+        List<List<Map<String, Object>>> tiles2D = new ArrayList<>();
+        
         for (int y = 0; y < 20; y++) {
+            List<Map<String, Object>> row = new ArrayList<>();
             for (int x = 0; x < 20; x++) {
                 Map<String, Object> tile = new HashMap<>();
                 tile.put("x", x);
@@ -868,6 +880,10 @@ public class GameService {
                 tile.put("terrain", terrainType);
                 tile.put("walkable", true);
                 tile.put("movementCost", getTerrainMovementCost(terrainType));
+                
+                // Add fog of war properties
+                tile.put("visible", false);
+                tile.put("explored", false);
                 
                 // Check if any hero should be placed on this tile
                 for (Map<String, Object> player : players) {
@@ -879,22 +895,22 @@ public class GameService {
                                 position.get("x").equals(x) && 
                                 position.get("y").equals(y)) {
                                 tile.put("hero", hero);
+                                // Make hero tile visible and explored
+                                tile.put("visible", true);
+                                tile.put("explored", true);
                                 break;
                             }
                         }
                     }
                 }
                 
-                tiles.add(tile);
+                row.add(tile);
             }
+            tiles2D.add(row);
         }
-        map.put("tiles", tiles);
         
-        // Add real objects
-        List<Map<String, Object>> objects = createMapObjects();
-        map.put("objects", objects);
-        
-        return map;
+        // Return the 2D array directly instead of wrapping in an object
+        return tiles2D;
     }
     
     private String[][] generateRealisticTerrain(int width, int height) {
@@ -1078,36 +1094,55 @@ public class GameService {
         return createHero(id, name, heroClass, x, y, playerId, null);
     }
     
+    @SuppressWarnings("unchecked")
     private Map<String, Object> createHero(String id, String name, String heroClass, int x, int y, String playerId, Map<String, Object> heroConfig) {
         Map<String, Object> hero = new HashMap<>();
         hero.put("id", id);
         hero.put("name", name);
         hero.put("class", heroClass);
+        hero.put("level", 1);
+        hero.put("experience", 0);
         hero.put("position", Map.of("x", x, "y", y));
+        hero.put("movementPoints", 3);
+        hero.put("maxMovementPoints", 3);
         hero.put("playerId", playerId);
-        hero.put("units", new ArrayList<>());
-        hero.put("inventory", new ArrayList<>());
+        hero.put("army", new ArrayList<>());  // Frontend expects 'army' instead of 'units'
+        hero.put("artifacts", new ArrayList<>());  // Frontend expects 'artifacts' instead of 'inventory'
         
-        // Use heroConfig if provided, otherwise use defaults
+        // Flatten stats structure to match frontend Hero interface
+        hero.put("health", 100);
+        hero.put("maxHealth", 100);
+        hero.put("mana", 20);
+        hero.put("maxMana", 20);
+        hero.put("attack", 5);
+        hero.put("defense", 3);
+        hero.put("spellPower", 1);
+        hero.put("knowledge", 2);
+        hero.put("morale", 0);
+        hero.put("luck", 0);
+        
+        // Frontend expects these as arrays of objects, not strings
+        hero.put("skills", new ArrayList<>());
+        hero.put("spells", new ArrayList<>());
+        
+        // Add required frontend properties
+        hero.put("playerColor", playerId.equals("player1") ? "#3b82f6" : "#ef4444");
+        hero.put("portraitId", "default");
+        hero.put("mountType", "HORSE");
+        
+        // Use heroConfig if provided to override defaults
         if (heroConfig != null) {
             hero.put("level", heroConfig.getOrDefault("startingLevel", 1));
-            hero.put("experience", 0);
-            hero.put("movementPoints", 3);
-            hero.put("maxMovementPoints", 3);
             
-            // Use starting stats from config
+            // Use starting stats from config if available
             Map<String, Object> startingStats = (Map<String, Object>) heroConfig.get("startingStats");
             if (startingStats != null) {
-                hero.put("stats", startingStats);
-            } else {
-                hero.put("stats", Map.of(
-                    "attack", 5,
-                    "defense", 3,
-                    "knowledge", 2,
-                    "spellPower", 1,
-                    "health", 100,
-                    "mana", 20
-                ));
+                hero.put("attack", startingStats.getOrDefault("attack", 5));
+                hero.put("defense", startingStats.getOrDefault("defense", 3));
+                hero.put("knowledge", startingStats.getOrDefault("knowledge", 2));
+                hero.put("spellPower", startingStats.getOrDefault("spellPower", 1));
+                hero.put("health", startingStats.getOrDefault("health", 100));
+                hero.put("mana", startingStats.getOrDefault("mana", 20));
             }
             
             // Add starting skills
@@ -1117,26 +1152,8 @@ public class GameService {
             // Add starting spells
             List<String> startingSpells = (List<String>) heroConfig.get("startingSpells");
             hero.put("spells", startingSpells != null ? new ArrayList<>(startingSpells) : new ArrayList<>());
-            
-            // Add hero description
-            String heroDescription = (String) heroConfig.get("heroDescription");
-            if (heroDescription != null) {
-                hero.put("description", heroDescription);
-            }
         } else {
-            // Default values
-            hero.put("level", 1);
-            hero.put("experience", 0);
-            hero.put("movementPoints", 3);
-            hero.put("maxMovementPoints", 3);
-            hero.put("stats", Map.of(
-                "attack", 5,
-                "defense", 3,
-                "knowledge", 2,
-                "spellPower", 1,
-                "health", 100,
-                "mana", 20
-            ));
+            // Default hero without config
             hero.put("skills", new ArrayList<>());
             hero.put("spells", new ArrayList<>());
         }

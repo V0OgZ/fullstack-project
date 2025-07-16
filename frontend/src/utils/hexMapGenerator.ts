@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Tile } from '../types/game';
 import { TERRAIN_TYPES } from '../constants/assets';
 

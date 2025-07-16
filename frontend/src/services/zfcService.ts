@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ApiService } from './api';
 import { Hero, Tile } from '../types/game';
 

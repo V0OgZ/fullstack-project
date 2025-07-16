@@ -1,5 +1,5 @@
 import { ApiService } from './api';
-import { GameState, Player, Game } from '../types/game';
+import { Game, Player, GameState } from '../types/game';
 
 export class GameService {
   
@@ -41,19 +41,23 @@ export class GameService {
     // Create a basic map structure
     const mapWidth = scenarioData.mapWidth || 20;
     const mapHeight = scenarioData.mapHeight || 20;
-    const tiles = [];
+    const tiles: any[][] = [];
     
     for (let y = 0; y < mapHeight; y++) {
+      const row = [];
       for (let x = 0; x < mapWidth; x++) {
-        tiles.push({
+        row.push({
           x,
           y,
           terrain: 'grass' as const,
           walkable: true,
           movementCost: 1,
-          isVisible: true
+          isVisible: true,
+          visible: true,
+          explored: true
         });
       }
+      tiles.push(row);
     }
 
     // Create map objects from starting positions
@@ -71,23 +75,26 @@ export class GameService {
     const game: Game = {
       id: scenarioData.scenarioId,
       name: scenarioData.name,
-      status: 'active',
-      currentTurn: 1,
-      turnStartTime: new Date().toISOString(),
-      turnDuration: 300000, // 5 minutes
+      scenario: scenarioData.scenarioId,
       players: players,
-      map: {
-        id: `map_${scenarioData.scenarioId}`,
-        width: mapWidth,
-        height: mapHeight,
-        tiles: tiles,
-        objects: objects
+      currentPlayerId: players[0]?.id || 'player1',
+      turn: 1,
+      maxTurns: scenarioData.maxTurns || 200,
+      map: tiles,
+      date: new Date().toISOString(),
+      status: 'active',
+      settings: {
+        mapSize: 'medium',
+        playerCount: players.length,
+        aiCount: 0,
+        startingResources: 'normal',
+        startingHeroes: 1,
+        startingLevel: 1,
+        victoryConditions: [],
+        defeatConditions: []
       },
-      actions: [],
-      timeline: [],
-      zfcMap: [],
-      gameMode: scenarioData.isMultiplayer ? 'multiplayer' : 'hotseat', // Set mode based on scenario
-      currentPlayerTurn: players[0]?.id
+      gameMode: players.length > 1 ? 'multiplayer' : 'standard',
+      timeline: []
     };
 
     return game;
@@ -114,57 +121,71 @@ export class GameService {
       // Step 2: Transform to frontend format
       const transformedGame: Game = {
         id: fullGameState.id,
-        name: fullGameState.name || `Game ${scenarioId}`,
-        currentTurn: fullGameState.currentTurn || 1,
-        currentPlayerTurn: fullGameState.currentPlayer?.id || 'player1',
-        turnStartTime: fullGameState.turnStartTime || new Date().toISOString(),
-        turnDuration: fullGameState.turnDuration || 30,
+        name: fullGameState.name,
+        scenario: fullGameState.scenario,
+        players: fullGameState.players,
+        currentPlayerId: fullGameState.currentPlayer?.id || 'player1',
+        turn: fullGameState.currentTurn || 1,
+        maxTurns: fullGameState.maxTurns || 200,
+        map: fullGameState.map || [],
+        date: fullGameState.date || new Date().toISOString(),
         status: fullGameState.status || 'active',
-        gameMode: fullGameState.isMultiplayer ? 'multiplayer' : 'hotseat', // Set mode based on scenario
-        players: fullGameState.players || [],
-        map: {
-          id: fullGameState.map?.id || 'default-map',
-          width: fullGameState.map?.width || 20,
-          height: fullGameState.map?.height || 20,
-          tiles: fullGameState.map?.tiles || [],
-          objects: fullGameState.map?.objects || []
-        },
-        actions: fullGameState.actions || [],
-        timeline: [],
-        zfcMap: []
+        settings: fullGameState.settings || {},
+        // Fix game mode logic: if 2+ players, it's always multiplayer (backend-managed)
+        gameMode: fullGameState.players?.length > 1 ? 'multiplayer' : 'standard',
+        timeline: fullGameState.timeline || []
       };
-      
-      console.log(`%c🎯 [GameService] Transformed game:`, 'color: green', transformedGame);
-      
-      const gameState: GameState = {
+
+      return {
         currentGame: transformedGame,
-        currentPlayer: transformedGame.players[0] || null,
-        isLoading: false,
-        error: null,
+        currentPlayer: fullGameState.currentPlayer || fullGameState.players?.[0],
         pendingActions: [],
         combatResults: [],
-        shadowActions: [],
-        visibleZFCs: [],
-        lockedZones: [],
-        politicalAdvisors: [],
-        currentPoliticalEvent: null,
-        reputation: { international: 0, domestic: 0, military: 0, economic: 0, diplomatic: 0 },
-        activeEvents: []
+        isLoading: false,
+        error: null
       };
       
-      console.log(`%c🎉 [GameService] Game initialization complete!`, 'color: green; font-weight: bold', gameState);
-      return gameState;
-      
     } catch (error) {
-      console.error(`%c💥 [GameService] Failed to initialize game:`, 'color: red; font-weight: bold', error);
+      console.error(`%c💥 [GameService] Error initializing game:`, 'color: red; font-weight: bold', error);
       throw error;
     }
   }
 
   static async getGameState(gameId: string): Promise<GameState> {
-    // For now, we'll reinitialize the game since the backend doesn't store game state
-    // This is a temporary solution - in a real app, we'd have proper game state storage
-    return this.initializeGame(gameId);
+    console.log(`%c🔄 [GameService] Getting game state for: ${gameId}`, 'color: blue');
+    
+    try {
+      const fullGameState = await ApiService.getGame(gameId);
+      console.log(`%c📊 [GameService] Game state retrieved:`, 'color: green', fullGameState);
+      
+      return {
+        currentGame: {
+          id: fullGameState.id,
+          name: fullGameState.name,
+          scenario: fullGameState.scenario,
+          players: fullGameState.players,
+          currentPlayerId: fullGameState.currentPlayer?.id || 'player1',
+          turn: fullGameState.currentTurn || 1,
+          maxTurns: fullGameState.maxTurns || 200,
+          map: fullGameState.map || [],
+          date: fullGameState.date || new Date().toISOString(),
+          status: fullGameState.status || 'active',
+          settings: fullGameState.settings || {},
+          // Fix game mode logic: if 2+ players, it's always multiplayer (backend-managed)
+          gameMode: fullGameState.players?.length > 1 ? 'multiplayer' : 'standard',
+          timeline: fullGameState.timeline || []
+        },
+        currentPlayer: fullGameState.currentPlayer || fullGameState.players?.[0],
+        pendingActions: [],
+        combatResults: [],
+        isLoading: false,
+        error: null
+      };
+      
+    } catch (error) {
+      console.error(`%c💥 [GameService] Error getting game state:`, 'color: red; font-weight: bold', error);
+      throw error;
+    }
   }
 
   static async endTurn(gameId: string, playerId: string = 'player1'): Promise<void> {

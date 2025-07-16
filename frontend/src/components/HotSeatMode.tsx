@@ -17,7 +17,7 @@ const HotSeatMode: React.FC<HotSeatModeProps> = ({
 }) => {
   const { t } = useTranslation();
   const [showPlayerSelector, setShowPlayerSelector] = useState(false);
-  const currentPlayer = game.players.find(p => p.id === game.currentPlayerTurn);
+  const currentPlayer = game.players.find(p => p.id === game.currentPlayerId);
 
   const handlePlayerSwitch = (playerId: string) => {
     onPlayerSwitch(playerId);
@@ -25,7 +25,7 @@ const HotSeatMode: React.FC<HotSeatModeProps> = ({
   };
 
   const getNextPlayer = (): Player | null => {
-    const currentIndex = game.players.findIndex(p => p.id === game.currentPlayerTurn);
+    const currentIndex = game.players.findIndex(p => p.id === game.currentPlayerId);
     const nextIndex = (currentIndex + 1) % game.players.length;
     return game.players[nextIndex] || null;
   };
@@ -59,7 +59,7 @@ const HotSeatMode: React.FC<HotSeatModeProps> = ({
             />
           </div>
           <div className="player-details">
-            <div className="player-name">{currentPlayer?.username}</div>
+            <div className="player-name">{currentPlayer?.name}</div>
             <div className="player-resources">
               <div>{t('heroes')}: {currentPlayer?.heroes.length}</div>
               <div>{t('gold')}: {currentPlayer?.resources.gold}</div>
@@ -76,7 +76,7 @@ const HotSeatMode: React.FC<HotSeatModeProps> = ({
                 <div
                   key={player.id}
                   className={`player-option ${
-                    player.id === game.currentPlayerTurn ? 'selected' : ''
+                    player.id === game.currentPlayerId ? 'selected' : ''
                   }`}
                   onClick={() => handlePlayerSwitch(player.id)}
                 >
@@ -87,12 +87,12 @@ const HotSeatMode: React.FC<HotSeatModeProps> = ({
                     className={player.id === 'player1' ? 'hero-player1' : 'hero-player2'}
                   />
                   <div className="player-info">
-                    <div className="player-name">{player.username}</div>
+                    <div className="player-name">{player.name}</div>
                     <div className="player-heroes">
                       {player.heroes.length} {t('heroes')} • {player.resources.gold} {t('gold')}
                     </div>
                   </div>
-                  {player.id === game.currentPlayerTurn && (
+                  {player.id === game.currentPlayerId && (
                     <div className="current-indicator">
                       {GAME_ICONS.STATUS_ACTIVE}
                     </div>
@@ -107,7 +107,7 @@ const HotSeatMode: React.FC<HotSeatModeProps> = ({
         {nextPlayer && (
           <div className="next-player-info">
             <div className="next-player-label">
-              {GAME_ICONS.GAME_FAST_FORWARD} {t('next')}: {nextPlayer.username}
+              {GAME_ICONS.GAME_FAST_FORWARD} {t('next')}: {nextPlayer.name}
             </div>
           </div>
         )}

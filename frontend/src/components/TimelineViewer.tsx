@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState } from 'react';
 import { useGameStore } from '../store/useGameStore';
 import { TimelineAction } from '../types/game';

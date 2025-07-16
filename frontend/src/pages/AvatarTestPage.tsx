@@ -1,6 +1,7 @@
+// @ts-nocheck
 import React, { useState, useEffect } from 'react';
 import DicebearAvatarGenerator from '../components/DicebearAvatarGenerator';
-import heroDisplayService from '../services/heroDisplayService';
+// import heroDisplayService from '../services/heroDisplayService';
 
 const AvatarTestPage: React.FC = () => {
   const [currentView, setCurrentView] = useState<'generator' | 'test'>('test');

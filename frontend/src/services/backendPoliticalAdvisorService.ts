@@ -84,7 +84,7 @@ export class BackendPoliticalAdvisorService {
     } catch (error) {
       console.error('Error calculating political stability:', error);
       // Fallback calculation if backend is not available
-      const avgOpinion = advisors.reduce((sum, advisor) => sum + advisor.opinion, 0) / advisors.length;
+      const avgOpinion = advisors.reduce((sum, advisor) => sum + (advisor.opinion || 0), 0) / advisors.length;
       const stability = (avgOpinion + 100) / 2; // Convert -100/100 to 0-100
       
       let riskLevel: 'low' | 'medium' | 'high' | 'critical' = 'low';
@@ -94,9 +94,10 @@ export class BackendPoliticalAdvisorService {
 
       const concerns: string[] = [];
       advisors.forEach(advisor => {
-        if (advisor.opinion < -50) {
+        const opinion = advisor.opinion || 0;
+        if (opinion < -50) {
           concerns.push(`${advisor.name} (${advisor.role}) is very dissatisfied`);
-        } else if (advisor.opinion < 0) {
+        } else if (opinion < 0) {
           concerns.push(`${advisor.name} (${advisor.role}) has concerns`);
         }
       });

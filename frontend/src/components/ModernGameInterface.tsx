@@ -278,9 +278,9 @@ const ModernGameInterface: React.FC = () => {
         <div style={{ display: 'flex', alignItems: 'center', gap: modernTheme.spacing.lg }}>
           <GameTitle>Heroes of Time</GameTitle>
           <GameInfo>
-            <span>{t('turn')} {currentGame.currentTurn}</span>
+                          <span>{t('turn')} {currentGame.turn}</span>
             <span>•</span>
-            <span>{currentPlayer.username}</span>
+                            <span>{currentPlayer.name}</span>
           </GameInfo>
         </div>
 
@@ -412,7 +412,7 @@ const ModernGameInterface: React.FC = () => {
                             <div>Lvl {hero.level}</div>
                             <div>MP: {hero.movementPoints}/{hero.maxMovementPoints}</div>
                             <div>Pos: ({hero.position.x}, {hero.position.y})</div>
-                            <div>Units: {hero.units.length}</div>
+                            <div>Units: {hero.army.length}</div>
                           </HeroStats>
                         </HeroCard>
                       ))}

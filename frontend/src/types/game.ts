@@ -18,6 +18,7 @@ export interface Tile {
   explored: boolean;
   visible: boolean;
   movementCost: number;
+  walkable?: boolean;
 }
 
 export interface Hero {
@@ -103,6 +104,7 @@ export interface Structure {
   maxLevel: number;
   effects: string[];
   requirements: string[];
+  owner?: string;
   playerId?: string;
   playerColor?: PlayerColor; // NOUVEAU: Couleur du joueur si contrôlé
 }
@@ -178,6 +180,7 @@ export interface ResourceCost {
   mercury: number;
   sulfur: number;
   crystal: number;
+  mana?: number;
 }
 
 export interface Game {
@@ -192,6 +195,8 @@ export interface Game {
   date: string;
   status: GameStatus;
   settings: GameSettings;
+  gameMode?: 'standard' | 'hotseat' | 'multiplayer' | 'ai';
+  timeline?: TimelineAction[];
 }
 
 export interface Player {
@@ -209,6 +214,64 @@ export interface Player {
   status: PlayerStatus;
   ai: boolean;
   difficulty?: AIDifficulty;
+}
+
+export interface GameAction {
+  type: 'move' | 'attack' | 'collect' | 'cast' | 'recruit' | 'build';
+  heroId?: string;
+  targetPosition?: Position;
+  targetId?: string;
+  spellId?: string;
+  unitType?: string;
+  buildingType?: string;
+  id?: string;
+  status?: 'pending' | 'executing' | 'completed' | 'failed';
+}
+
+export interface CombatResult {
+  id: string;
+  attackerId: string;
+  defenderId: string;
+  damage: number;
+  defenderHealth: number;
+  attackerHealth: number;
+  timestamp: number;
+  result: 'victory' | 'defeat' | 'draw';
+}
+
+export interface GameState {
+  currentGame: Game | null;
+  currentPlayer: Player | null;
+  pendingActions: GameAction[];
+  combatResults: CombatResult[];
+  isLoading: boolean;
+  error: string | null;
+}
+
+// ZFC-related types
+export interface TimelineAction {
+  id: string;
+  type: string;
+  heroId: string;
+  targetPosition?: Position;
+  timestamp: number;
+  status: 'pending' | 'executing' | 'completed' | 'failed' | 'PENDING' | 'CONFIRMED' | 'LOCKED' | 'DISCARDED';
+}
+
+export interface ShadowAction {
+  id: string;
+  originalActionId: string;
+  alternateTimeline: string;
+  probability: number;
+  consequences: string[];
+}
+
+export interface ZoneOfCausality {
+  id: string;
+  center: Position;
+  radius: number;
+  temporalStrength: number;
+  affectedTiles: Position[];
 }
 
 // NOUVEAUX TYPES POUR LE SYSTÈME DE COULEURS ET MONTURES
@@ -295,4 +358,33 @@ export interface GameSettings {
   defeatConditions: string[];
   timeLimit?: number;
   turnLimit?: number;
+}
+
+// Political types for compatibility
+export interface PoliticalAdvisor {
+  id: string;
+  name: string;
+  role?: string;
+  avatar?: string;
+  opinion?: number;
+  personality?: any;
+}
+
+export interface PoliticalChoice {
+  id: string;
+  text: string;
+  consequences?: string[];
+}
+
+export interface PoliticalEvent {
+  id: string;
+  title: string;
+  description: string;
+  choices: PoliticalChoice[];
+}
+
+export interface Reputation {
+  value: number;
+  trend: 'increasing' | 'decreasing' | 'stable';
+  type?: string;
 } 
