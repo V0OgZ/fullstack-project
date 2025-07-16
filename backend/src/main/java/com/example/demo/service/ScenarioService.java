@@ -454,26 +454,224 @@ public class ScenarioService {
         List<Map<String, Object>> tiles = new ArrayList<>();
         String[] terrainTypes = {"grass", "forest", "mountain", "water", "desert", "swamp"};
         
+        // Generate elevation map first using Perlin noise-like algorithm
+        double[][] elevationMap = generateElevationMap(scenario.getMapWidth(), scenario.getMapHeight());
+        
         for (int y = 0; y < scenario.getMapHeight(); y++) {
             for (int x = 0; x < scenario.getMapWidth(); x++) {
                 Map<String, Object> tile = new HashMap<>();
                 tile.put("x", x);
                 tile.put("y", y);
                 
-                // Special terrain based on scenario
+                // Get elevation for this tile
+                double elevation = elevationMap[y][x];
+                tile.put("elevation", elevation);
+                
+                // Determine terrain type based on elevation and scenario
+                String terrainType;
                 if (scenario.getScenarioId().equals("temporal-rift")) {
-                    tile.put("type", getTemporalTerrain(x, y, scenario.getMapWidth(), scenario.getMapHeight()));
+                    terrainType = getTemporalTerrain(x, y, scenario.getMapWidth(), scenario.getMapHeight());
                 } else {
-                    tile.put("type", terrainTypes[(int)(Math.random() * terrainTypes.length)]);
+                    terrainType = getTerrainFromElevation(elevation, x, y, scenario.getMapWidth(), scenario.getMapHeight());
                 }
                 
-                tile.put("walkable", true);
-                tile.put("movementCost", getTerrainMovementCost(tile.get("type")));
+                tile.put("type", terrainType);
+                tile.put("walkable", isTerrainWalkable(terrainType));
+                tile.put("movementCost", getTerrainMovementCost(terrainType));
+                
+                // Add David Gervais tileset information
+                tile.put("tilesetVariant", getTilesetVariant(terrainType, elevation));
+                tile.put("transitions", calculateTransitions(x, y, terrainType, tiles, scenario.getMapWidth()));
+                
+                // Add biome information for zone detection
+                tile.put("biome", getBiomeFromTerrain(terrainType));
+                tile.put("moistureLevel", calculateMoistureLevel(x, y, elevation, scenario.getMapWidth(), scenario.getMapHeight()));
+                tile.put("temperature", calculateTemperature(x, y, elevation, scenario.getMapWidth(), scenario.getMapHeight()));
+                
                 tiles.add(tile);
             }
         }
         
         return tiles;
+    }
+    
+    private double[][] generateElevationMap(int width, int height) {
+        double[][] elevationMap = new double[height][width];
+        
+        // Generate base elevation using multiple octaves of noise
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                double elevation = 0.0;
+                
+                // Multiple octaves for realistic terrain
+                elevation += generateNoise(x * 0.01, y * 0.01) * 0.5;      // Base terrain
+                elevation += generateNoise(x * 0.05, y * 0.05) * 0.3;      // Hills
+                elevation += generateNoise(x * 0.1, y * 0.1) * 0.2;        // Details
+                
+                // Normalize to 0-1 range
+                elevation = Math.max(0.0, Math.min(1.0, elevation));
+                elevationMap[y][x] = elevation;
+            }
+        }
+        
+        return elevationMap;
+    }
+    
+    private double generateNoise(double x, double y) {
+        // Simple pseudo-Perlin noise implementation
+        int intX = (int) Math.floor(x);
+        int intY = (int) Math.floor(y);
+        
+        double fracX = x - intX;
+        double fracY = y - intY;
+        
+        // Get random values for corners
+        double a = random(intX, intY);
+        double b = random(intX + 1, intY);
+        double c = random(intX, intY + 1);
+        double d = random(intX + 1, intY + 1);
+        
+        // Smooth interpolation
+        double i1 = smoothInterpolate(a, b, fracX);
+        double i2 = smoothInterpolate(c, d, fracX);
+        
+        return smoothInterpolate(i1, i2, fracY);
+    }
+    
+    private double random(int x, int y) {
+        // Pseudo-random function based on coordinates
+        int n = (x * 57 + y * 113) % 233280;
+        n = (n ^ (n >> 13)) * 15731;
+        return (1.0 - ((n * (n * n * 15731 + 789221) + 1376312589) & 0x7fffffff) / 1073741824.0);
+    }
+    
+    private double smoothInterpolate(double a, double b, double x) {
+        double f = x * x * (3.0 - 2.0 * x);
+        return a * (1.0 - f) + b * f;
+    }
+    
+    private String getTerrainFromElevation(double elevation, int x, int y, int width, int height) {
+        // Water at low elevations
+        if (elevation < 0.2) {
+            return "water";
+        }
+        
+        // Mountains at high elevations
+        if (elevation > 0.8) {
+            return "mountain";
+        }
+        
+        // Desert in certain areas with medium-high elevation
+        if (elevation > 0.6 && (x < width * 0.3 || x > width * 0.7)) {
+            return "desert";
+        }
+        
+        // Swamp in low-lying areas near water
+        if (elevation < 0.35 && elevation > 0.2) {
+            return "swamp";
+        }
+        
+        // Forest in medium elevations
+        if (elevation > 0.4 && elevation < 0.7) {
+            return "forest";
+        }
+        
+        // Default to grass
+        return "grass";
+    }
+    
+    private String getTilesetVariant(String terrainType, double elevation) {
+        // David Gervais tileset variants based on elevation
+        if (elevation < 0.3) {
+            return "low";
+        } else if (elevation < 0.7) {
+            return "medium";
+        } else {
+            return "high";
+        }
+    }
+    
+    private Map<String, String> calculateTransitions(int x, int y, String terrainType, List<Map<String, Object>> existingTiles, int width) {
+        Map<String, String> transitions = new HashMap<>();
+        
+        // Check neighboring tiles for transitions (only check already processed tiles)
+        int[][] neighbors = {
+            {-1, -1}, {0, -1}, {1, -1},  // Top row
+            {-1, 0}                      // Left (right will be processed later)
+        };
+        
+        for (int[] neighbor : neighbors) {
+            int nx = x + neighbor[0];
+            int ny = y + neighbor[1];
+            
+            if (nx >= 0 && ny >= 0 && nx < width) {
+                // Find the tile at this position
+                Map<String, Object> neighborTile = existingTiles.stream()
+                    .filter(tile -> ((Integer) tile.get("x")).equals(nx) && ((Integer) tile.get("y")).equals(ny))
+                    .findFirst()
+                    .orElse(null);
+                
+                if (neighborTile != null) {
+                    String neighborTerrain = (String) neighborTile.get("type");
+                    if (!neighborTerrain.equals(terrainType)) {
+                        String direction = getDirection(neighbor[0], neighbor[1]);
+                        transitions.put(direction, neighborTerrain);
+                    }
+                }
+            }
+        }
+        
+        return transitions;
+    }
+    
+    private String getDirection(int dx, int dy) {
+        if (dx == -1 && dy == -1) return "northwest";
+        if (dx == 0 && dy == -1) return "north";
+        if (dx == 1 && dy == -1) return "northeast";
+        if (dx == -1 && dy == 0) return "west";
+        if (dx == 1 && dy == 0) return "east";
+        if (dx == -1 && dy == 1) return "southwest";
+        if (dx == 0 && dy == 1) return "south";
+        if (dx == 1 && dy == 1) return "southeast";
+        return "unknown";
+    }
+    
+    private String getBiomeFromTerrain(String terrainType) {
+        switch (terrainType) {
+            case "grass": return "temperate";
+            case "forest": return "temperate";
+            case "mountain": return "alpine";
+            case "water": return "aquatic";
+            case "desert": return "arid";
+            case "swamp": return "wetland";
+            default: return "temperate";
+        }
+    }
+    
+    private double calculateMoistureLevel(int x, int y, double elevation, int width, int height) {
+        // Higher moisture near water and in swamps
+        double moisture = 0.5;
+        
+        // Distance from edges affects moisture
+        double edgeDistance = Math.min(Math.min(x, width - x), Math.min(y, height - y));
+        moisture += (edgeDistance / Math.max(width, height)) * 0.3;
+        
+        // Elevation affects moisture (higher = drier)
+        moisture -= elevation * 0.4;
+        
+        return Math.max(0.0, Math.min(1.0, moisture));
+    }
+    
+    private double calculateTemperature(int x, int y, double elevation, int width, int height) {
+        // Temperature based on latitude (y position) and elevation
+        double temperature = 0.8 - (y / (double) height) * 0.6;  // Colder toward top
+        temperature -= elevation * 0.3;  // Colder at higher elevations
+        
+        return Math.max(0.0, Math.min(1.0, temperature));
+    }
+    
+    private boolean isTerrainWalkable(String terrainType) {
+        return !terrainType.equals("water");
     }
     
     private List<Map<String, Object>> generateObjects(Scenario scenario) {

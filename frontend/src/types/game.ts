@@ -9,6 +9,13 @@ export interface Tile {
   x: number;
   y: number;
   terrain: string;
+  type: string; // Alias for terrain for compatibility
+  elevation?: number;
+  tilesetVariant?: string;
+  transitions?: Record<string, string>;
+  biome?: string;
+  moistureLevel?: number;
+  temperature?: number;
   hero?: Hero;
   creature?: Creature;
   building?: Building;

@@ -1,12 +1,13 @@
 # Cursor AI Assistant Rules for Heroes of Time Project
 
-## 🚨 IMPORTANT: Always read DEVELOPER_INSTRUCTIONS.md first!
+## 🚨 IMPORTANT: Always read documentation first!
 
 Before making any changes or debugging, ALWAYS:
-1. Read the file `DEVELOPER_INSTRUCTIONS.md` for current status and existing scripts
-2. Do NOT recreate existing scripts (start-app.sh, stop-app.sh, test-app.sh)
-3. Use existing debugging tools and follow established patterns
-4. Check existing components before creating new ones
+1. Check `DOCS_INDEX.md` for complete documentation navigation
+2. Read `DEVELOPER_INSTRUCTIONS.md` for current status and existing scripts
+3. Do NOT recreate existing scripts (start-app.sh, stop-app.sh, test-app.sh)
+4. Use existing debugging tools and follow established patterns
+5. Check existing components before creating new ones
 
 ## 🎯 Current Project State (January 2025):
 - **Status**: ✅ FULLY FUNCTIONAL with polished UI
