@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useGameStore } from '../store/useGameStore';
 import OrganicTerrainRenderer from './OrganicTerrainRenderer';
 import CastleManagementPanel from './CastleManagementPanel';
+import GoldorakEasterEgg from './GoldorakEasterEgg';
+import { useRetroKonami } from '../utils/retro-konami';
 import { HexTile, BiomeType } from '../types/terrain';
 import './TrueHeroesInterface.css';
 
@@ -28,13 +30,37 @@ const TrueHeroesInterface: React.FC = () => {
   } = useGameStore();
   
   const [activePanel, setActivePanel] = useState<'scenario' | 'hero' | 'inventory' | 'castle'>('scenario');
+  const [showGoldorakEasterEgg, setShowGoldorakEasterEgg] = useState(false);
+  const { startListening, stopListening } = useRetroKonami();
 
   // Load default game on component mount
   useEffect(() => {
     if (!currentGame) {
       loadGame('conquest-classic');
     }
+    
+    // Easter egg hint
+    console.log('🚀 [RETRO CODEUR] Tapez G-O-L-D-O-R-A-K pour activer le FULGOROCURSOR!');
   }, [currentGame, loadGame]);
+
+  // Système de codes rétro - Écouter les événements custom
+  useEffect(() => {
+    // Démarrer l'écoute des codes rétro
+    startListening();
+    
+    // Écouter l'événement Goldorak
+    const handleGoldorakActivated = (event: CustomEvent) => {
+      console.log('🚀 GOLDORAK EVENT RECEIVED:', event.detail.message);
+      setShowGoldorakEasterEgg(true);
+    };
+
+    window.addEventListener('goldorak-activated', handleGoldorakActivated as EventListener);
+    
+    return () => {
+      stopListening();
+      window.removeEventListener('goldorak-activated', handleGoldorakActivated as EventListener);
+    };
+  }, [startListening, stopListening]);
 
   // Convert backend map data to HexTile format
   const convertToHexTiles = (backendMap: any[][]): HexTile[] => {
@@ -256,6 +282,12 @@ const TrueHeroesInterface: React.FC = () => {
           )}
         </div>
       </div>
+
+      {/* 🚀 GOLDORAK EASTER EGG - Tapez G-O-L-D-O-R-A-K pour l'activer! */}
+      <GoldorakEasterEgg 
+        isActive={showGoldorakEasterEgg} 
+        onClose={() => setShowGoldorakEasterEgg(false)} 
+      />
     </div>
   );
 };
