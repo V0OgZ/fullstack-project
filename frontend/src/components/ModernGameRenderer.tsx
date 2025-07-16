@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useCallback, useMemo, forwardRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useRef, useCallback, useEffect, useImperativeHandle, useState, useMemo } from 'react';
 import { useGameStore } from '../store/useGameStore';
 import { Position, Tile, Hero } from '../types/game';
 import { useTranslation } from '../i18n';
@@ -220,295 +220,50 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     return { x: x + mapOffset.x + 100, y: y + mapOffset.y + 100 }; // Ajout d'offset pour centrer
   }, [mapOffset, hexHorizontalSpacing, hexVerticalSpacing]);
 
-  // Rendu contextuel par biome
-  const renderBiomeTile = useCallback((
-    ctx: CanvasRenderingContext2D,
-    tile: EnrichedTile,
-    pixelPos: Position
-  ) => {
-    const { x: px, y: py } = pixelPos;
-    const rng = seededRandom(`${tile.zoneId}-${tile.x}-${tile.y}`);
-    
-    // Dessine l'hexagone de base avec un rayon légèrement réduit pour éviter les chevauchements
-    ctx.save();
+  // Hexagonal rendering with proper tile coverage
+  const renderTileContent = useCallback((ctx: CanvasRenderingContext2D, tile: any, x: number, y: number, radius: number) => {
+    if (!tile) return;
+
+    // Draw perfect hexagon
     ctx.beginPath();
-    const effectiveRadius = hexRadius * 0.95; // Réduit de 5% pour éviter les chevauchements
     for (let i = 0; i < 6; i++) {
-      const angle = (i * Math.PI) / 3 - Math.PI / 2; // Rotation pour orientation pointy-top
-      const x = px + effectiveRadius * Math.cos(angle);
-      const y = py + effectiveRadius * Math.sin(angle);
-      if (i === 0) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
+      const angle = (i * Math.PI) / 3;
+      const px = x + Math.cos(angle) * radius;
+      const py = y + Math.sin(angle) * radius;
+      if (i === 0) {
+        ctx.moveTo(px, py);
+      } else {
+        ctx.lineTo(px, py);
+      }
     }
     ctx.closePath();
-    ctx.clip();
 
-    switch (tile.terrain) {
-      case 'water':
-        renderWater(ctx, tile, px, py, rng);
-        break;
-      case 'desert':
-        renderDesert(ctx, tile, px, py, rng);
-        break;
-      case 'forest':
-        renderForest(ctx, tile, px, py, rng);
-        break;
-      case 'mountain':
-        renderMountain(ctx, tile, px, py, rng);
-        break;
-      case 'swamp':
-        renderSwamp(ctx, tile, px, py, rng);
-        break;
-      default: // grass
-        renderGrass(ctx, tile, px, py, rng);
-        break;
-    }
+    // Get terrain color
+    const terrainColors: { [key: string]: string } = {
+      'WATER': '#4A90E2',
+      'GRASS': '#7ED321',
+      'FOREST': '#417505',
+      'MOUNTAIN': '#8E8E93',
+      'DESERT': '#F5A623',
+      'SWAMP': '#5A6B3C'
+    };
     
-    ctx.restore();
-  }, [hexRadius]);
-
-  // Rendu de l'eau avec profondeur
-  const renderWater = useCallback((
-    ctx: CanvasRenderingContext2D,
-    tile: EnrichedTile,
-    px: number,
-    py: number,
-    rng: () => number
-  ) => {
-    const depth = Math.min(tile.distanceToBorder / 3, 1);
-    const baseColor = `hsl(200, 80%, ${Math.max(20, 50 - depth * 30)}%)`;
+    const terrainColor = terrainColors[tile.terrain] || '#7ED321';
     
-    // Fond de base
-    ctx.fillStyle = baseColor;
-    ctx.fillRect(px - hexRadius, py - hexRadius, hexRadius * 2, hexRadius * 2);
+    // Fill hexagon
+    ctx.fillStyle = terrainColor;
+    ctx.fill();
     
-    // Effet de brillance
-    if (rng() > 0.7) {
-      ctx.fillStyle = `hsla(200, 60%, 70%, 0.3)`;
-      const sparkleX = px + (rng() - 0.5) * hexRadius;
-      const sparkleY = py + (rng() - 0.5) * hexRadius;
-      ctx.beginPath();
-      ctx.arc(sparkleX, sparkleY, 2, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    
-    // Vagues subtiles
-    ctx.strokeStyle = `hsla(200, 60%, 80%, 0.2)`;
+    // Draw hexagon border
+    ctx.strokeStyle = '#333';
     ctx.lineWidth = 1;
-    for (let i = 0; i < 3; i++) {
-      const waveY = py + (rng() - 0.5) * hexRadius;
-      ctx.beginPath();
-      ctx.moveTo(px - hexRadius, waveY);
-      ctx.lineTo(px + hexRadius, waveY);
-      ctx.stroke();
-    }
-  }, [hexRadius]);
-
-  // Rendu du désert avec dunes
-  const renderDesert = useCallback((
-    ctx: CanvasRenderingContext2D,
-    tile: EnrichedTile,
-    px: number,
-    py: number,
-    rng: () => number
-  ) => {
-    const sandColor = `hsl(45, 70%, ${60 + rng() * 20}%)`;
-    ctx.fillStyle = sandColor;
-    ctx.fillRect(px - hexRadius, py - hexRadius, hexRadius * 2, hexRadius * 2);
-    
-    // Dunes pour les grandes zones
-    if (tile.zoneSize > 10) {
-      const duneIntensity = Math.min(tile.distanceToBorder / 2, 1);
-      const duneAngle = rng() * Math.PI * 2;
-      
-      ctx.fillStyle = `hsla(45, 60%, 40%, ${duneIntensity * 0.3})`;
-      ctx.beginPath();
-      ctx.ellipse(
-        px + Math.cos(duneAngle) * hexRadius * 0.3,
-        py + Math.sin(duneAngle) * hexRadius * 0.3,
-        hexRadius * 0.6,
-        hexRadius * 0.3,
-        duneAngle,
-        0,
-        Math.PI * 2
-      );
-      ctx.fill();
-    }
-    
-    // Texture sable
-    ctx.fillStyle = `hsla(45, 50%, 80%, 0.1)`;
-    for (let i = 0; i < 5; i++) {
-      const grainX = px + (rng() - 0.5) * hexRadius * 1.5;
-      const grainY = py + (rng() - 0.5) * hexRadius * 1.5;
-      ctx.fillRect(grainX, grainY, 1, 1);
-    }
-  }, [hexRadius]);
-
-  // Rendu de la forêt avec densité
-  const renderForest = useCallback((
-    ctx: CanvasRenderingContext2D,
-    tile: EnrichedTile,
-    px: number,
-    py: number,
-    rng: () => number
-  ) => {
-    const density = Math.min(tile.distanceToBorder / 3, 1);
-    const baseGreen = `hsl(120, 60%, ${30 + density * 20}%)`;
-    
-    ctx.fillStyle = baseGreen;
-    ctx.fillRect(px - hexRadius, py - hexRadius, hexRadius * 2, hexRadius * 2);
-    
-    // Arbres selon la densité
-    const treeCount = Math.floor(density * 8 + 3);
-    for (let i = 0; i < treeCount; i++) {
-      const treeX = px + (rng() - 0.5) * hexRadius * 1.4;
-      const treeY = py + (rng() - 0.5) * hexRadius * 1.4;
-      const treeSize = 3 + rng() * 4;
-      
-      // Tronc
-      ctx.fillStyle = '#8B4513';
-      ctx.fillRect(treeX - 1, treeY, 2, treeSize);
-      
-      // Feuillage
-      ctx.fillStyle = `hsl(120, 70%, ${25 + rng() * 15}%)`;
-      ctx.beginPath();
-      ctx.arc(treeX, treeY - treeSize/2, treeSize, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    
-    // Clairière au centre des grandes zones
-    if (tile.zoneSize > 20 && tile.distanceToBorder > 3) {
-      const clearingSize = Math.min(tile.distanceToBorder - 2, 5);
-      ctx.fillStyle = `hsla(120, 40%, 70%, 0.4)`;
-      ctx.beginPath();
-      ctx.arc(px, py, clearingSize * 3, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }, [hexRadius]);
-
-  // Rendu des montagnes
-  const renderMountain = useCallback((
-    ctx: CanvasRenderingContext2D,
-    tile: EnrichedTile,
-    px: number,
-    py: number,
-    rng: () => number
-  ) => {
-    const altitude = Math.min(tile.distanceToBorder / 2, 1);
-    const rockColor = `hsl(30, 30%, ${40 + altitude * 20}%)`;
-    
-    ctx.fillStyle = rockColor;
-    ctx.fillRect(px - hexRadius, py - hexRadius, hexRadius * 2, hexRadius * 2);
-    
-    // Pics rocheux
-    const peakCount = Math.floor(altitude * 3 + 1);
-    for (let i = 0; i < peakCount; i++) {
-      const peakX = px + (rng() - 0.5) * hexRadius;
-      const peakY = py + (rng() - 0.5) * hexRadius;
-      const peakHeight = 5 + altitude * 10;
-      
-      ctx.fillStyle = `hsl(30, 20%, ${30 + rng() * 20}%)`;
-      ctx.beginPath();
-      ctx.moveTo(peakX, peakY);
-      ctx.lineTo(peakX - 4, peakY + peakHeight);
-      ctx.lineTo(peakX + 4, peakY + peakHeight);
-      ctx.closePath();
-      ctx.fill();
-      
-      // Ombre
-      ctx.fillStyle = `hsla(30, 20%, 20%, 0.5)`;
-      ctx.beginPath();
-      ctx.moveTo(peakX, peakY);
-      ctx.lineTo(peakX + 4, peakY + peakHeight);
-      ctx.lineTo(peakX + 6, peakY + peakHeight);
-      ctx.closePath();
-      ctx.fill();
-    }
-  }, [hexRadius]);
-
-  // Rendu du marais
-  const renderSwamp = useCallback((
-    ctx: CanvasRenderingContext2D,
-    tile: EnrichedTile,
-    px: number,
-    py: number,
-    rng: () => number
-  ) => {
-    const murkiness = Math.min(tile.distanceToBorder / 2, 1);
-    const swampColor = `hsl(90, 40%, ${20 + murkiness * 15}%)`;
-    
-    ctx.fillStyle = swampColor;
-    ctx.fillRect(px - hexRadius, py - hexRadius, hexRadius * 2, hexRadius * 2);
-    
-    // Flaques d'eau
-    for (let i = 0; i < 3; i++) {
-      const puddleX = px + (rng() - 0.5) * hexRadius;
-      const puddleY = py + (rng() - 0.5) * hexRadius;
-      const puddleSize = 2 + rng() * 4;
-      
-      ctx.fillStyle = `hsla(200, 50%, 25%, 0.7)`;
-      ctx.beginPath();
-      ctx.arc(puddleX, puddleY, puddleSize, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    
-    // Végétation clairsemée
-    if (rng() > 0.5) {
-      const grassX = px + (rng() - 0.5) * hexRadius;
-      const grassY = py + (rng() - 0.5) * hexRadius;
-      
-      ctx.strokeStyle = `hsl(90, 60%, 40%)`;
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(grassX, grassY);
-      ctx.lineTo(grassX, grassY - 6);
-      ctx.stroke();
-    }
-  }, [hexRadius]);
-
-  // Rendu de l'herbe
-  const renderGrass = useCallback((
-    ctx: CanvasRenderingContext2D,
-    tile: EnrichedTile,
-    px: number,
-    py: number,
-    rng: () => number
-  ) => {
-    const fertility = Math.min(tile.distanceToBorder / 4, 1);
-    const grassColor = `hsl(100, 50%, ${40 + fertility * 20}%)`;
-    
-    ctx.fillStyle = grassColor;
-    ctx.fillRect(px - hexRadius, py - hexRadius, hexRadius * 2, hexRadius * 2);
-    
-    // Brins d'herbe
-    ctx.strokeStyle = `hsl(100, 60%, ${50 + rng() * 20}%)`;
-    ctx.lineWidth = 1;
-    for (let i = 0; i < 8; i++) {
-      const bladX = px + (rng() - 0.5) * hexRadius * 1.5;
-      const bladY = py + (rng() - 0.5) * hexRadius * 1.5;
-      
-      ctx.beginPath();
-      ctx.moveTo(bladX, bladY);
-      ctx.lineTo(bladX + (rng() - 0.5) * 2, bladY - 3 - rng() * 3);
-      ctx.stroke();
-    }
-    
-    // Fleurs occasionnelles
-    if (rng() > 0.8) {
-      const flowerX = px + (rng() - 0.5) * hexRadius;
-      const flowerY = py + (rng() - 0.5) * hexRadius;
-      
-      ctx.fillStyle = `hsl(${rng() * 360}, 80%, 60%)`;
-      ctx.beginPath();
-      ctx.arc(flowerX, flowerY, 2, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }, [hexRadius]);
+    ctx.stroke();
+  }, []);
 
   // Rendu des héros
   const renderHero = useCallback((
     ctx: CanvasRenderingContext2D,
-    hero: Hero,
+    hero: Hero, // Hero type is not fully defined in imports, so using 'any' for now
     pixelPos: Position
   ) => {
     const { x: px, y: py } = pixelPos;
@@ -532,102 +287,92 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     ctx.fillText('⚔️', px, py);
   }, [selectedHero]);
 
-  // Rendu des overlays (sélection, mouvement, etc.)
-  const renderOverlays = useCallback((
-    ctx: CanvasRenderingContext2D,
-    tile: EnrichedTile,
-    pixelPos: Position
-  ) => {
-    const { x: px, y: py } = pixelPos;
-    const effectiveRadius = hexRadius * 0.95;
-    
-    // Tuile sélectionnée
-    if (selectedTile && selectedTile.x === tile.x && selectedTile.y === tile.y) {
+  // Hexagonal overlays with proper hexagonal shapes
+  const renderOverlays = useCallback((ctx: CanvasRenderingContext2D) => {
+    if (!map || map.length === 0) return;
+
+    const selectedTile = selectedHero ? { x: selectedHero.position?.x || 0, y: selectedHero.position?.y || 0 } : null;
+
+    // Selected tile overlay (hexagonal)
+    if (selectedTile) {
+      const coords = hexToPixel(selectedTile.x, selectedTile.y);
+      const x = coords.x + mapOffset.x;
+      const y = coords.y + mapOffset.y;
+      
+      const pulseIntensity = 0.5 + 0.3 * Math.sin(Date.now() * 0.003);
+      
+      ctx.save();
+      ctx.globalAlpha = pulseIntensity;
+      
+      // Draw hexagonal selection
+      ctx.beginPath();
+      for (let i = 0; i < 6; i++) {
+        const angle = (i * Math.PI) / 3;
+        const px = x + Math.cos(angle) * (hexRadius + 3);
+        const py = y + Math.sin(angle) * (hexRadius + 3);
+        if (i === 0) {
+          ctx.moveTo(px, py);
+        } else {
+          ctx.lineTo(px, py);
+        }
+      }
+      ctx.closePath();
+      
       ctx.strokeStyle = '#FFD700';
       ctx.lineWidth = 3;
-      ctx.setLineDash([5, 5]);
-      ctx.beginPath();
-      for (let i = 0; i < 6; i++) {
-        const angle = (i * Math.PI) / 3 - Math.PI / 2;
-        const x = px + effectiveRadius * Math.cos(angle);
-        const y = py + effectiveRadius * Math.sin(angle);
-        if (i === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-      }
-      ctx.closePath();
       ctx.stroke();
-      ctx.setLineDash([]);
+      
+      ctx.restore();
     }
-    
-    // Zone de mouvement
-    if (movementMode && movementRange.some(pos => pos.x === tile.x && pos.y === tile.y)) {
-      ctx.fillStyle = 'rgba(76, 175, 80, 0.3)';
-      ctx.beginPath();
-      for (let i = 0; i < 6; i++) {
-        const angle = (i * Math.PI) / 3 - Math.PI / 2;
-        const x = px + effectiveRadius * Math.cos(angle);
-        const y = py + effectiveRadius * Math.sin(angle);
-        if (i === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-      }
-      ctx.closePath();
-      ctx.fill();
-    }
-    
-    // Tuile survolée
-    if (hoveredTile && hoveredTile.x === tile.x && hoveredTile.y === tile.y) {
-      ctx.strokeStyle = '#FFFFFF';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      for (let i = 0; i < 6; i++) {
-        const angle = (i * Math.PI) / 3 - Math.PI / 2;
-        const x = px + effectiveRadius * Math.cos(angle);
-        const y = py + effectiveRadius * Math.sin(angle);
-        if (i === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-      }
-      ctx.closePath();
-      ctx.stroke();
-    }
-  }, [selectedTile, movementMode, movementRange, hoveredTile, hexRadius]);
+  }, [map, hexRadius, mapOffset, hexToPixel, selectedHero]);
 
-  // Rendu principal
+  // Rendu principal avec hexagones parfaits
   const render = useCallback(() => {
+    if (!canvasRef.current || !map || map.length === 0) return;
+
     const canvas = canvasRef.current;
-    if (!canvas || !enrichedTiles.length) return;
-    
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
-    
+
     // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw background
     ctx.fillStyle = '#1a1a2e';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Draw hexagonal tiles
+    const mapWidth = map[0].length;
+    const mapHeight = map.length;
     
-    // Rendu des tuiles
-    enrichedTiles.forEach((row, y) => {
-      row.forEach((tile, x) => {
+    for (let y = 0; y < mapHeight; y++) {
+      for (let x = 0; x < mapWidth; x++) {
+        const tile = map[y][x];
+        if (!tile) continue;
+
         const pixelPos = hexToPixel(x, y);
+        const adjustedX = pixelPos.x + mapOffset.x;
+        const adjustedY = pixelPos.y + mapOffset.y;
         
-        // Skip si hors écran
-        if (pixelPos.x < -hexRadius || pixelPos.x > canvas.width + hexRadius ||
-            pixelPos.y < -hexRadius || pixelPos.y > canvas.height + hexRadius) {
-          return;
+        // Skip if outside visible area
+        if (adjustedX < -hexRadius || adjustedX > canvas.width + hexRadius ||
+            adjustedY < -hexRadius || adjustedY > canvas.height + hexRadius) {
+          continue;
         }
-        
-        // Rendu du terrain
-        renderBiomeTile(ctx, tile, pixelPos);
-        
-        // Rendu du héros s'il y en a un
+
+        // Render hexagonal tile
+        renderTileContent(ctx, tile, adjustedX, adjustedY, hexRadius);
+
+        // Render hero if present
         if (tile.hero) {
-          renderHero(ctx, tile.hero, pixelPos);
+          renderHero(ctx, tile.hero, { x: adjustedX, y: adjustedY });
         }
-        
-        // Overlays
-        renderOverlays(ctx, tile, pixelPos);
-      });
-    });
-  }, [enrichedTiles, hexToPixel, renderBiomeTile, renderHero, renderOverlays]);
+      }
+    }
+
+    // Render overlays
+    renderOverlays(ctx);
+  }, [map, hexToPixel, mapOffset, renderTileContent, renderHero, renderOverlays]);
 
   // Gestion des clics
   const handleCanvasClick = useCallback((event: React.MouseEvent<HTMLCanvasElement>) => {
