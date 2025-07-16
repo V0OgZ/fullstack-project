@@ -1309,3 +1309,248 @@
 .script-tester-container .results-panel {
   max-height: 300px;
 } 
+
+/* 🎒 INVENTORY & EQUIPMENT STYLES */
+.hero-inventory {
+  margin-top: 15px;
+  padding: 15px;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 165, 0, 0.1) 100%);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 10px;
+}
+
+.inventory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.inventory-item {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.inventory-item:hover {
+  background: rgba(255, 215, 0, 0.1);
+  border-color: rgba(255, 215, 0, 0.5);
+}
+
+.item-emoji {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.item-details {
+  flex: 1;
+}
+
+.item-name {
+  font-weight: bold;
+  color: #FFD700;
+  font-size: 12px;
+}
+
+.item-count {
+  color: #DDD;
+  font-size: 10px;
+}
+
+.item-bonus {
+  color: #90EE90;
+  font-size: 10px;
+  font-style: italic;
+}
+
+.equipment-slot {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 6px;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+}
+
+.equipment-slot:hover {
+  background: rgba(255, 215, 0, 0.1);
+  border-color: rgba(255, 215, 0, 0.5);
+}
+
+.slot-icon {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.slot-item {
+  flex: 1;
+}
+
+/* 🏰 CASTLE PANEL STYLES */
+.castle-overview {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 165, 0, 0.1) 100%);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 10px;
+}
+
+.castle-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.castle-stat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stat-icon {
+  font-size: 16px;
+}
+
+.stat-label {
+  color: #DDD;
+  font-size: 12px;
+}
+
+.stat-value {
+  color: #FFD700;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.castle-creatures {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: linear-gradient(135deg, rgba(255, 69, 0, 0.1) 0%, rgba(255, 140, 0, 0.1) 100%);
+  border: 2px solid rgba(255, 69, 0, 0.3);
+  border-radius: 10px;
+}
+
+.creatures-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.creature-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 69, 0, 0.3);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.creature-item:hover {
+  background: rgba(255, 69, 0, 0.1);
+  border-color: rgba(255, 69, 0, 0.5);
+  transform: translateY(-2px);
+}
+
+.creature-emoji {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.creature-info {
+  flex: 1;
+}
+
+.creature-name {
+  font-weight: bold;
+  color: #FFD700;
+  font-size: 12px;
+}
+
+.creature-cost {
+  color: #FFA500;
+  font-size: 11px;
+}
+
+.creature-available {
+  color: #90EE90;
+  font-size: 10px;
+}
+
+.castle-buildings {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: linear-gradient(135deg, rgba(139, 69, 19, 0.2) 0%, rgba(160, 82, 45, 0.2) 100%);
+  border: 2px solid rgba(139, 69, 19, 0.5);
+  border-radius: 10px;
+}
+
+.buildings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.building-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(139, 69, 19, 0.3);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.building-item:hover {
+  background: rgba(139, 69, 19, 0.1);
+  border-color: rgba(139, 69, 19, 0.5);
+  transform: translateY(-2px);
+}
+
+.building-emoji {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.building-info {
+  flex: 1;
+}
+
+.building-name {
+  font-weight: bold;
+  color: #FFD700;
+  font-size: 12px;
+}
+
+.building-level {
+  color: #DDD;
+  font-size: 10px;
+}
+
+/* 🎨 RESPONSIVE IMPROVEMENTS */
+@media (max-width: 768px) {
+  .inventory-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .creatures-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .buildings-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .castle-info {
+    flex-direction: column;
+  }
+} 

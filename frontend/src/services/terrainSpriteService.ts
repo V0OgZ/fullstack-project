@@ -1,12 +1,18 @@
-// TerrainSpriteService for David Gervais Hex Tileset
-// Source: https://opengameart.org/content/hexagon-tileset
-// Author: David E. Gervais
-// License: CC-BY 3.0
+// 🗺️ TerrainSpriteService - David Gervais Tileset with Elevations
+// ================================================================
+// Service pour gérer les sprites de terrain hexagonaux avec élévations
+// Utilise le système David Gervais avec transitions et variantes
 
 export interface TerrainSpriteData {
   core: string;
   edge?: string;
   transitions?: Record<string, string>;
+  elevation?: {
+    low: string;
+    medium: string;
+    high: string;
+  };
+  variants?: string[];
 }
 
 export interface TerrainZone {
@@ -15,6 +21,23 @@ export interface TerrainZone {
   centerX: number;
   centerY: number;
   distanceToEdge: number;
+  elevation: number;
+  moistureLevel: number;
+  temperature: number;
+}
+
+export interface TerrainTile {
+  x: number;
+  y: number;
+  type: string;
+  elevation: number;
+  tilesetVariant: string;
+  transitions: Record<string, string>;
+  biome: string;
+  moistureLevel: number;
+  temperature: number;
+  walkable: boolean;
+  movementCost: number;
 }
 
 export class TerrainSpriteService {
@@ -22,74 +45,171 @@ export class TerrainSpriteService {
   private spriteCache = new Map<string, HTMLImageElement>();
   private loadingPromises = new Map<string, Promise<HTMLImageElement>>();
 
-  // David Gervais Hex Tileset - Organized structure
+  // David Gervais Hex Tileset avec élévations
   private readonly TERRAIN_SPRITES: Record<string, TerrainSpriteData> = {
     grass: {
       core: '/assets/terrain/grass/grass_core.png',
       edge: '/assets/terrain/grass/grass_edge.png',
+      elevation: {
+        low: '/assets/terrain/grass/grass_low.png',
+        medium: '/assets/terrain/grass/grass_medium.png',
+        high: '/assets/terrain/grass/grass_high.png'
+      },
       transitions: {
-        forest: '/assets/terrain/grass/grass_to_forest.png',
-        water: '/assets/terrain/grass/grass_to_water.png',
-        desert: '/assets/terrain/grass/grass_to_desert.png',
-        mountain: '/assets/terrain/grass/grass_to_mountain.png'
-      }
+        'forest': '/assets/terrain/transitions/grass_to_forest.png',
+        'water': '/assets/terrain/transitions/grass_to_water.png',
+        'mountain': '/assets/terrain/transitions/grass_to_mountain.png',
+        'desert': '/assets/terrain/transitions/grass_to_desert.png',
+        'swamp': '/assets/terrain/transitions/grass_to_swamp.png'
+      },
+      variants: [
+        '/assets/terrain/grass/grass_variant1.png',
+        '/assets/terrain/grass/grass_variant2.png',
+        '/assets/terrain/grass/grass_variant3.png'
+      ]
     },
     forest: {
       core: '/assets/terrain/forest/forest_core.png',
       edge: '/assets/terrain/forest/forest_edge.png',
+      elevation: {
+        low: '/assets/terrain/forest/forest_low.png',
+        medium: '/assets/terrain/forest/forest_medium.png',
+        high: '/assets/terrain/forest/forest_high.png'
+      },
       transitions: {
-        grass: '/assets/terrain/forest/forest_to_grass.png',
-        water: '/assets/terrain/forest/forest_to_water.png',
-        mountain: '/assets/terrain/forest/forest_to_mountain.png'
-      }
+        'grass': '/assets/terrain/transitions/forest_to_grass.png',
+        'water': '/assets/terrain/transitions/forest_to_water.png',
+        'mountain': '/assets/terrain/transitions/forest_to_mountain.png',
+        'desert': '/assets/terrain/transitions/forest_to_desert.png',
+        'swamp': '/assets/terrain/transitions/forest_to_swamp.png'
+      },
+      variants: [
+        '/assets/terrain/forest/forest_dense.png',
+        '/assets/terrain/forest/forest_sparse.png',
+        '/assets/terrain/forest/forest_mixed.png'
+      ]
     },
     water: {
-      core: '/assets/terrain/water/water_deep.png',
-      edge: '/assets/terrain/water/water_shore.png',
+      core: '/assets/terrain/water/water_core.png',
+      edge: '/assets/terrain/water/water_edge.png',
+      elevation: {
+        low: '/assets/terrain/water/water_shallow.png',
+        medium: '/assets/terrain/water/water_medium.png',
+        high: '/assets/terrain/water/water_deep.png'
+      },
       transitions: {
-        grass: '/assets/terrain/water/water_to_grass.png',
-        forest: '/assets/terrain/water/water_to_forest.png',
-        desert: '/assets/terrain/water/water_to_desert.png'
-      }
+        'grass': '/assets/terrain/transitions/water_to_grass.png',
+        'forest': '/assets/terrain/transitions/water_to_forest.png',
+        'mountain': '/assets/terrain/transitions/water_to_mountain.png',
+        'desert': '/assets/terrain/transitions/water_to_desert.png',
+        'swamp': '/assets/terrain/transitions/water_to_swamp.png'
+      },
+      variants: [
+        '/assets/terrain/water/water_clear.png',
+        '/assets/terrain/water/water_murky.png',
+        '/assets/terrain/water/water_frozen.png'
+      ]
+    },
+    mountain: {
+      core: '/assets/terrain/mountain/mountain_core.png',
+      edge: '/assets/terrain/mountain/mountain_edge.png',
+      elevation: {
+        low: '/assets/terrain/mountain/mountain_hills.png',
+        medium: '/assets/terrain/mountain/mountain_peaks.png',
+        high: '/assets/terrain/mountain/mountain_alpine.png'
+      },
+      transitions: {
+        'grass': '/assets/terrain/transitions/mountain_to_grass.png',
+        'forest': '/assets/terrain/transitions/mountain_to_forest.png',
+        'water': '/assets/terrain/transitions/mountain_to_water.png',
+        'desert': '/assets/terrain/transitions/mountain_to_desert.png',
+        'swamp': '/assets/terrain/transitions/mountain_to_swamp.png'
+      },
+      variants: [
+        '/assets/terrain/mountain/mountain_rocky.png',
+        '/assets/terrain/mountain/mountain_snowy.png',
+        '/assets/terrain/mountain/mountain_volcanic.png'
+      ]
     },
     desert: {
       core: '/assets/terrain/desert/desert_core.png',
-      edge: '/assets/terrain/desert/desert_dune.png',
+      edge: '/assets/terrain/desert/desert_edge.png',
+      elevation: {
+        low: '/assets/terrain/desert/desert_oasis.png',
+        medium: '/assets/terrain/desert/desert_sand.png',
+        high: '/assets/terrain/desert/desert_dunes.png'
+      },
       transitions: {
-        grass: '/assets/terrain/desert/desert_to_grass.png',
-        water: '/assets/terrain/desert/desert_to_water.png',
-        mountain: '/assets/terrain/desert/desert_to_mountain.png'
-      }
-    },
-    mountain: {
-      core: '/assets/terrain/mountain/mountain_peak.png',
-      edge: '/assets/terrain/mountain/mountain_slope.png',
-      transitions: {
-        grass: '/assets/terrain/mountain/mountain_to_grass.png',
-        forest: '/assets/terrain/mountain/mountain_to_forest.png',
-        desert: '/assets/terrain/mountain/mountain_to_desert.png'
-      }
+        'grass': '/assets/terrain/transitions/desert_to_grass.png',
+        'forest': '/assets/terrain/transitions/desert_to_forest.png',
+        'water': '/assets/terrain/transitions/desert_to_water.png',
+        'mountain': '/assets/terrain/transitions/desert_to_mountain.png',
+        'swamp': '/assets/terrain/transitions/desert_to_swamp.png'
+      },
+      variants: [
+        '/assets/terrain/desert/desert_red.png',
+        '/assets/terrain/desert/desert_yellow.png',
+        '/assets/terrain/desert/desert_rocky.png'
+      ]
     },
     swamp: {
       core: '/assets/terrain/swamp/swamp_core.png',
       edge: '/assets/terrain/swamp/swamp_edge.png',
+      elevation: {
+        low: '/assets/terrain/swamp/swamp_bog.png',
+        medium: '/assets/terrain/swamp/swamp_marsh.png',
+        high: '/assets/terrain/swamp/swamp_mire.png'
+      },
       transitions: {
-        grass: '/assets/terrain/swamp/swamp_to_grass.png',
-        water: '/assets/terrain/swamp/swamp_to_water.png',
-        forest: '/assets/terrain/swamp/swamp_to_forest.png'
-      }
+        'grass': '/assets/terrain/transitions/swamp_to_grass.png',
+        'forest': '/assets/terrain/transitions/swamp_to_forest.png',
+        'water': '/assets/terrain/transitions/swamp_to_water.png',
+        'mountain': '/assets/terrain/transitions/swamp_to_mountain.png',
+        'desert': '/assets/terrain/transitions/swamp_to_desert.png'
+      },
+      variants: [
+        '/assets/terrain/swamp/swamp_dark.png',
+        '/assets/terrain/swamp/swamp_misty.png',
+        '/assets/terrain/swamp/swamp_toxic.png'
+      ]
     }
   };
 
-  // Color fallbacks for when sprites fail to load
-  private readonly TERRAIN_COLORS: Record<string, string> = {
-    grass: '#4CAF50',
-    forest: '#2E7D32',
-    water: '#2196F3',
-    desert: '#FFC107',
-    mountain: '#795548',
-    swamp: '#8BC34A'
+  // Couleurs de fallback pour les élévations
+  private readonly ELEVATION_COLORS: Record<string, Record<string, string>> = {
+    grass: {
+      low: '#7CB342',
+      medium: '#8BC34A',
+      high: '#9CCC65'
+    },
+    forest: {
+      low: '#2E7D32',
+      medium: '#388E3C',
+      high: '#43A047'
+    },
+    water: {
+      low: '#0277BD',
+      medium: '#0288D1',
+      high: '#039BE5'
+    },
+    mountain: {
+      low: '#5D4037',
+      medium: '#6D4C41',
+      high: '#795548'
+    },
+    desert: {
+      low: '#F57C00',
+      medium: '#FB8C00',
+      high: '#FF9800'
+    },
+    swamp: {
+      low: '#33691E',
+      medium: '#689F38',
+      high: '#7CB342'
+    }
   };
+
+  private constructor() {}
 
   static getInstance(): TerrainSpriteService {
     if (!TerrainSpriteService.instance) {
@@ -98,141 +218,203 @@ export class TerrainSpriteService {
     return TerrainSpriteService.instance;
   }
 
-  /**
-   * Get the appropriate sprite for a terrain tile based on zone data
-   */
-  async getTerrainSprite(
-    terrain: string, 
-    zoneData: TerrainZone, 
-    neighboringTerrain?: string[]
-  ): Promise<HTMLImageElement | null> {
-    const spriteData = this.TERRAIN_SPRITES[terrain];
+  async getTerrainSprite(tile: TerrainTile): Promise<HTMLImageElement | null> {
+    const spriteData = this.TERRAIN_SPRITES[tile.type];
     if (!spriteData) return null;
 
-    // Determine which sprite to use based on zone position
-    let spritePath: string;
-
-    if (zoneData.distanceToEdge === 0) {
-      // At zone edge - use edge sprite
-      spritePath = spriteData.edge || spriteData.core;
-    } else if (zoneData.distanceToEdge === 1 && neighboringTerrain) {
-      // Near edge with different terrain - use transition sprite
-      const neighborTerrain = this.getMostCommonNeighbor(neighboringTerrain);
-      spritePath = spriteData.transitions?.[neighborTerrain] || spriteData.core;
-    } else {
-      // Core of zone - use core sprite
-      spritePath = spriteData.core;
-    }
-
-    return await this.loadSprite(spritePath);
-  }
-
-  /**
-   * Get fallback color for terrain when sprite fails
-   */
-  getTerrainColor(terrain: string): string {
-    return this.TERRAIN_COLORS[terrain] || '#666666';
-  }
-
-  /**
-   * Load and cache a sprite
-   */
-  private async loadSprite(spritePath: string): Promise<HTMLImageElement | null> {
-    // Check cache first
-    if (this.spriteCache.has(spritePath)) {
-      return this.spriteCache.get(spritePath)!;
-    }
-
-    // Check if already loading
-    if (this.loadingPromises.has(spritePath)) {
-      return await this.loadingPromises.get(spritePath)!;
-    }
-
-    // Start loading
-    const loadPromise = new Promise<HTMLImageElement>((resolve, reject) => {
-      const img = new Image();
-      
-      img.onload = () => {
-        this.spriteCache.set(spritePath, img);
-        this.loadingPromises.delete(spritePath);
-        resolve(img);
-      };
-      
-      img.onerror = () => {
-        this.loadingPromises.delete(spritePath);
-        console.warn(`Failed to load terrain sprite: ${spritePath}`);
-        reject(new Error(`Failed to load sprite: ${spritePath}`));
-      };
-      
-      img.src = spritePath;
-    });
-
-    this.loadingPromises.set(spritePath, loadPromise);
+    // Choisir le sprite basé sur l'élévation et les variantes
+    const spriteUrl = this.selectSpriteUrl(tile, spriteData);
     
+    if (this.spriteCache.has(spriteUrl)) {
+      return this.spriteCache.get(spriteUrl)!;
+    }
+
+    if (this.loadingPromises.has(spriteUrl)) {
+      return this.loadingPromises.get(spriteUrl)!;
+    }
+
+    const loadPromise = this.loadSprite(spriteUrl);
+    this.loadingPromises.set(spriteUrl, loadPromise);
+
     try {
-      return await loadPromise;
+      const sprite = await loadPromise;
+      this.spriteCache.set(spriteUrl, sprite);
+      this.loadingPromises.delete(spriteUrl);
+      return sprite;
     } catch (error) {
-      return null; // Return null on error, caller will use color fallback
+      this.loadingPromises.delete(spriteUrl);
+      console.warn(`Failed to load terrain sprite: ${spriteUrl}`, error);
+      return null;
     }
   }
 
-  /**
-   * Get the most common neighboring terrain for transition selection
-   */
-  private getMostCommonNeighbor(neighboringTerrain: string[]): string {
-    const counts: Record<string, number> = {};
-    
-    neighboringTerrain.forEach(terrain => {
-      counts[terrain] = (counts[terrain] || 0) + 1;
+  private selectSpriteUrl(tile: TerrainTile, spriteData: TerrainSpriteData): string {
+    // Prioriser les sprites d'élévation
+    if (spriteData.elevation) {
+      const elevationSprite = spriteData.elevation[tile.tilesetVariant as keyof typeof spriteData.elevation];
+      if (elevationSprite) return elevationSprite;
+    }
+
+    // Utiliser les variantes si disponibles
+    if (spriteData.variants && spriteData.variants.length > 0) {
+      const variantIndex = this.getVariantIndex(tile);
+      return spriteData.variants[variantIndex];
+    }
+
+    // Fallback sur le sprite de base
+    return spriteData.core;
+  }
+
+  private getVariantIndex(tile: TerrainTile): number {
+    // Utiliser les coordonnées et les propriétés du tile pour déterminer la variante
+    const hash = (tile.x * 31 + tile.y * 17 + tile.elevation * 13 + tile.moistureLevel * 7 + tile.temperature * 3) % 1000;
+    const spriteData = this.TERRAIN_SPRITES[tile.type];
+    if (!spriteData.variants) return 0;
+    return Math.floor(hash / 1000 * spriteData.variants.length);
+  }
+
+  async getTransitionSprite(tile: TerrainTile, direction: string): Promise<HTMLImageElement | null> {
+    const spriteData = this.TERRAIN_SPRITES[tile.type];
+    if (!spriteData?.transitions) return null;
+
+    const neighborTerrain = tile.transitions[direction];
+    if (!neighborTerrain) return null;
+
+    const transitionUrl = spriteData.transitions[neighborTerrain];
+    if (!transitionUrl) return null;
+
+    try {
+      return await this.loadSprite(transitionUrl);
+    } catch (error) {
+      console.warn(`Failed to load transition sprite: ${transitionUrl}`, error);
+      return null;
+    }
+  }
+
+  private async loadSprite(url: string): Promise<HTMLImageElement> {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(new Error(`Failed to load sprite: ${url}`));
+      img.src = url;
     });
-
-    return Object.entries(counts)
-      .sort(([,a], [,b]) => b - a)[0]?.[0] || 'grass';
   }
 
-  /**
-   * Preload all core sprites for better performance
-   */
-  async preloadCoreSprites(): Promise<void> {
-    const coreSprites = Object.values(this.TERRAIN_SPRITES)
-      .map(spriteData => spriteData.core);
-
-    const loadPromises = coreSprites.map(spritePath => 
-      this.loadSprite(spritePath).catch(() => null)
-    );
-
-    await Promise.all(loadPromises);
-    console.log('Core terrain sprites preloaded');
+  getTerrainColor(tile: TerrainTile): string {
+    const elevationColors = this.ELEVATION_COLORS[tile.type];
+    if (elevationColors) {
+      return elevationColors[tile.tilesetVariant] || elevationColors.medium;
+    }
+    
+    // Fallback colors
+    const fallbackColors: Record<string, string> = {
+      grass: '#7CB342',
+      forest: '#2E7D32',
+      water: '#0277BD',
+      mountain: '#5D4037',
+      desert: '#F57C00',
+      swamp: '#33691E'
+    };
+    
+    return fallbackColors[tile.type] || '#888888';
   }
 
-  /**
-   * Get all available terrain types
-   */
-  getAvailableTerrains(): string[] {
-    return Object.keys(this.TERRAIN_SPRITES);
+  // Méthodes utilitaires pour les zones de terrain
+  detectTerrainZones(tiles: TerrainTile[]): TerrainZone[] {
+    const zones: TerrainZone[] = [];
+    const processedTiles = new Set<string>();
+
+    for (const tile of tiles) {
+      const tileKey = `${tile.x},${tile.y}`;
+      if (processedTiles.has(tileKey)) continue;
+
+      const zone = this.expandZone(tile, tiles, processedTiles);
+      if (zone.size > 1) {
+        zones.push(zone);
+      }
+    }
+
+    return zones;
   }
 
-  /**
-   * Check if a terrain type is supported
-   */
-  isTerrainSupported(terrain: string): boolean {
-    return terrain in this.TERRAIN_SPRITES;
+  private expandZone(startTile: TerrainTile, allTiles: TerrainTile[], processedTiles: Set<string>): TerrainZone {
+    const zone: TerrainZone = {
+      biome: startTile.biome,
+      size: 0,
+      centerX: 0,
+      centerY: 0,
+      distanceToEdge: 0,
+      elevation: startTile.elevation,
+      moistureLevel: startTile.moistureLevel,
+      temperature: startTile.temperature
+    };
+
+    const queue: TerrainTile[] = [startTile];
+    const zoneTiles: TerrainTile[] = [];
+
+    while (queue.length > 0) {
+      const tile = queue.shift()!;
+      const tileKey = `${tile.x},${tile.y}`;
+      
+      if (processedTiles.has(tileKey)) continue;
+      processedTiles.add(tileKey);
+      
+      zoneTiles.push(tile);
+      
+      // Chercher les voisins du même biome
+      const neighbors = this.getNeighbors(tile, allTiles);
+      for (const neighbor of neighbors) {
+        const neighborKey = `${neighbor.x},${neighbor.y}`;
+        if (!processedTiles.has(neighborKey) && neighbor.biome === startTile.biome) {
+          queue.push(neighbor);
+        }
+      }
+    }
+
+    // Calculer les propriétés de la zone
+    zone.size = zoneTiles.length;
+    zone.centerX = zoneTiles.reduce((sum, t) => sum + t.x, 0) / zoneTiles.length;
+    zone.centerY = zoneTiles.reduce((sum, t) => sum + t.y, 0) / zoneTiles.length;
+    zone.elevation = zoneTiles.reduce((sum, t) => sum + t.elevation, 0) / zoneTiles.length;
+    zone.moistureLevel = zoneTiles.reduce((sum, t) => sum + t.moistureLevel, 0) / zoneTiles.length;
+    zone.temperature = zoneTiles.reduce((sum, t) => sum + t.temperature, 0) / zoneTiles.length;
+
+    return zone;
   }
 
-  /**
-   * Get sprite dimensions (David Gervais tiles are ~64x56)
-   */
-  getSpriteSize(): { width: number; height: number } {
-    return { width: 64, height: 56 };
+  private getNeighbors(tile: TerrainTile, allTiles: TerrainTile[]): TerrainTile[] {
+    const neighbors: TerrainTile[] = [];
+    const directions = [
+      {dx: -1, dy: 0}, {dx: 1, dy: 0},
+      {dx: 0, dy: -1}, {dx: 0, dy: 1},
+      {dx: -1, dy: -1}, {dx: 1, dy: -1}
+    ];
+
+    for (const dir of directions) {
+      const neighbor = allTiles.find(t => t.x === tile.x + dir.dx && t.y === tile.y + dir.dy);
+      if (neighbor) {
+        neighbors.push(neighbor);
+      }
+    }
+
+    return neighbors;
   }
 
-  /**
-   * Clear sprite cache (useful for memory management)
-   */
+  // Nettoyage du cache
   clearCache(): void {
     this.spriteCache.clear();
     this.loadingPromises.clear();
   }
-}
 
-export const terrainSpriteService = TerrainSpriteService.getInstance(); 
+  // Statistiques du cache
+  getCacheStats(): { size: number; loaded: number; loading: number } {
+    return {
+      size: this.spriteCache.size,
+      loaded: this.spriteCache.size,
+      loading: this.loadingPromises.size
+    };
+  }
+}
+ 
+ // Export singleton instance
+ export const terrainSpriteService = TerrainSpriteService.getInstance(); 

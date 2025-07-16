@@ -3,8 +3,9 @@ import { useGameStore } from '../store/useGameStore';
 import { useTranslation } from '../i18n';
 import ModernGameRenderer, { ModernGameRendererRef } from './ModernGameRenderer';
 import CastleManagementPanel from './CastleManagementPanel';
-import EpicContentViewer from './EpicContentViewer';
 import GameScriptTester from './GameScriptTester';
+import HeroPortrait from './HeroPortrait';
+import EpicView from './EpicView';
 import './TrueHeroesInterface.css';
 
 interface TrueHeroesInterfaceProps {
@@ -34,7 +35,8 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
   } = useGameStore();
   
   const [selectedHeroId, setSelectedHeroId] = useState<string | null>(null);
-  const [rightPanelContent, setRightPanelContent] = useState<'scenario' | 'hero' | 'castle' | 'script'>('scenario');
+  const [rightPanelContent, setRightPanelContent] = useState<'scenario' | 'hero' | 'castle' | 'script' | 'epic'>('scenario');
+  const [showEpicView, setShowEpicView] = useState(false);
   const [showEpicContent, setShowEpicContent] = useState(false);
   const rendererRef = useRef<ModernGameRendererRef>(null);
   const [movementMode, setMovementMode] = useState(false);
@@ -58,6 +60,10 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
 
   const handleScriptClick = () => {
     setRightPanelContent('script');
+  };
+
+  const handleEpicViewClick = () => {
+    setShowEpicView(true);
   };
 
   const handleTileClick = (position: { x: number; y: number }) => {
@@ -391,6 +397,14 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
             </button>
 
             <button 
+              className={`control-btn ${showEpicView ? 'active' : ''}`}
+              onClick={handleEpicViewClick}
+              title="🎨 Epic Asset Viewer - Browse all game content"
+            >
+              <span className="btn-icon">🎮</span>
+            </button>
+
+            <button 
               className="end-turn-btn"
               onClick={handleEndTurn}
               title={currentGame?.gameMode === 'hotseat' ? t('nextPlayer') : t('tooltip.endTurn')}
@@ -465,7 +479,12 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
                         onClick={() => handleHeroSelect(hero.id)}
                       >
                         <div className="hero-portrait">
-                          <div className="hero-avatar">👤</div>
+                          <HeroPortrait 
+                            heroName={hero.class || 'WARRIOR'} 
+                            size="medium"
+                            showTooltip={true}
+                            onClick={() => handleHeroSelect(hero.id)}
+                          />
                         </div>
                         <div className="hero-info">
                           <h5>{hero.name}</h5>
@@ -515,15 +534,79 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
                             <div className="equipped-slots">
                               <div className="equipment-slot">
                                 <span className="slot-icon">⚔️</span>
-                                <div className="slot-item">Magic Sword</div>
+                                <div className="slot-item">
+                                  <div className="item-name">Excalibur</div>
+                                  <div className="item-bonus">+5 ATK, +2 CHA</div>
+                                </div>
                               </div>
                               <div className="equipment-slot">
                                 <span className="slot-icon">🛡️</span>
-                                <div className="slot-item">Dragon Scale</div>
+                                <div className="slot-item">
+                                  <div className="item-name">Bouclier du Dragon</div>
+                                  <div className="item-bonus">+3 DEF, Résistance Feu</div>
+                                </div>
                               </div>
                               <div className="equipment-slot">
                                 <span className="slot-icon">💍</span>
-                                <div className="slot-item">Power Ring</div>
+                                <div className="slot-item">
+                                  <div className="item-name">Anneau de Pouvoir</div>
+                                  <div className="item-bonus">+2 Toutes Stats</div>
+                                </div>
+                              </div>
+                              <div className="equipment-slot">
+                                <span className="slot-icon">👢</span>
+                                <div className="slot-item">
+                                  <div className="item-name">Bottes de Vitesse</div>
+                                  <div className="item-bonus">+2 VIT</div>
+                                </div>
+                              </div>
+                              <div className="equipment-slot">
+                                <span className="slot-icon">🔮</span>
+                                <div className="slot-item">
+                                  <div className="item-name">Orbe de Sagesse</div>
+                                  <div className="item-bonus">+10 MANA, +3 CON</div>
+                                </div>
+                              </div>
+                              <div className="equipment-slot">
+                                <span className="slot-icon">👑</span>
+                                <div className="slot-item">
+                                  <div className="item-name">Couronne des Rois</div>
+                                  <div className="item-bonus">+5 LEAD</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div className="hero-inventory">
+                            <h5>🎒 Inventory</h5>
+                            <div className="inventory-grid">
+                              <div className="inventory-item">
+                                <span className="item-emoji">🧪</span>
+                                <div className="item-details">
+                                  <div className="item-name">Potion de Vie</div>
+                                  <div className="item-count">x3</div>
+                                </div>
+                              </div>
+                              <div className="inventory-item">
+                                <span className="item-emoji">📜</span>
+                                <div className="item-details">
+                                  <div className="item-name">Parchemin Boule de Feu</div>
+                                  <div className="item-count">x1</div>
+                                </div>
+                              </div>
+                              <div className="inventory-item">
+                                <span className="item-emoji">📚</span>
+                                <div className="item-details">
+                                  <div className="item-name">Tome de Connaissance</div>
+                                  <div className="item-count">x1</div>
+                                </div>
+                              </div>
+                              <div className="inventory-item">
+                                <span className="item-emoji">💎</span>
+                                <div className="item-details">
+                                  <div className="item-name">Gemme du Dragon</div>
+                                  <div className="item-count">x1</div>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -597,6 +680,99 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
               </div>
               
               <div className="castle-actions">
+                <div className="castle-overview">
+                  <h4>🏰 Castle Overview</h4>
+                  <div className="castle-info">
+                    <div className="castle-stat">
+                      <span className="stat-icon">👑</span>
+                      <span className="stat-label">Castle Level:</span>
+                      <span className="stat-value">3</span>
+                    </div>
+                    <div className="castle-stat">
+                      <span className="stat-icon">💰</span>
+                      <span className="stat-label">Daily Income:</span>
+                      <span className="stat-value">2000 Gold</span>
+                    </div>
+                    <div className="castle-stat">
+                      <span className="stat-icon">⚔️</span>
+                      <span className="stat-label">Garrison:</span>
+                      <span className="stat-value">Strong</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="castle-creatures">
+                  <h4>👹 Available Creatures</h4>
+                  <div className="creatures-grid">
+                    <div className="creature-item">
+                      <span className="creature-emoji">🐉</span>
+                      <div className="creature-info">
+                        <div className="creature-name">Dragon Rouge</div>
+                        <div className="creature-cost">30,000 Gold</div>
+                        <div className="creature-available">Available: 1</div>
+                      </div>
+                    </div>
+                    <div className="creature-item">
+                      <span className="creature-emoji">🔥</span>
+                      <div className="creature-info">
+                        <div className="creature-name">Phoenix</div>
+                        <div className="creature-cost">25,000 Gold</div>
+                        <div className="creature-available">Available: 1</div>
+                      </div>
+                    </div>
+                    <div className="creature-item">
+                      <span className="creature-emoji">🦄</span>
+                      <div className="creature-info">
+                        <div className="creature-name">Unicorn</div>
+                        <div className="creature-cost">15,000 Gold</div>
+                        <div className="creature-available">Available: 2</div>
+                      </div>
+                    </div>
+                    <div className="creature-item">
+                      <span className="creature-emoji">👹</span>
+                      <div className="creature-info">
+                        <div className="creature-name">Minotaur</div>
+                        <div className="creature-cost">8,000 Gold</div>
+                        <div className="creature-available">Available: 3</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="castle-buildings">
+                  <h4>🏗️ Buildings</h4>
+                  <div className="buildings-grid">
+                    <div className="building-item">
+                      <span className="building-emoji">🏰</span>
+                      <div className="building-info">
+                        <div className="building-name">Castle</div>
+                        <div className="building-level">Level 3</div>
+                      </div>
+                    </div>
+                    <div className="building-item">
+                      <span className="building-emoji">🏛️</span>
+                      <div className="building-info">
+                        <div className="building-name">Barracks</div>
+                        <div className="building-level">Level 2</div>
+                      </div>
+                    </div>
+                    <div className="building-item">
+                      <span className="building-emoji">🔮</span>
+                      <div className="building-info">
+                        <div className="building-name">Mage Tower</div>
+                        <div className="building-level">Level 2</div>
+                      </div>
+                    </div>
+                    <div className="building-item">
+                      <span className="building-emoji">🛒</span>
+                      <div className="building-info">
+                        <div className="building-name">Market</div>
+                        <div className="building-level">Level 1</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
                 <div className="action-buttons">
                   <button 
                     className="action-button" 
@@ -661,9 +837,17 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
 
       {/* Epic Content Viewer Modal */}
       {showEpicContent && (
-        <EpicContentViewer 
-          isVisible={showEpicContent}
+        <EpicView 
+          isOpen={showEpicContent}
           onClose={() => setShowEpicContent(false)}
+        />
+      )}
+
+      {/* Epic Asset Viewer Modal */}
+      {showEpicView && (
+        <EpicView 
+          isOpen={showEpicView}
+          onClose={() => setShowEpicView(false)}
         />
       )}
     </div>
