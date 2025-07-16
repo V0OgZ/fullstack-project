@@ -549,7 +549,7 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     }
   }, [heroImages, mountImages, flagImages, selectedHero]);
 
-  // Render hexagonal tile with enhanced visuals
+  // Render hexagonal tile with enhanced visuals and ZFC vision levels
   const drawHexTile = useCallback((
     ctx: CanvasRenderingContext2D,
     center: Position,
@@ -575,149 +575,84 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     // Create hexagonal path
     ctx.beginPath();
     for (let i = 0; i < 6; i++) {
-      const angle = (Math.PI / 3) * i - Math.PI / 2;
-      const hexX = x + radius * Math.cos(angle);
-      const hexY = y + radius * Math.sin(angle);
+      const angle = (i * Math.PI) / 3;
+      const hx = x + radius * Math.cos(angle);
+      const hy = y + radius * Math.sin(angle);
       if (i === 0) {
-        ctx.moveTo(hexX, hexY);
+        ctx.moveTo(hx, hy);
       } else {
-        ctx.lineTo(hexX, hexY);
+        ctx.lineTo(hx, hy);
       }
     }
     ctx.closePath();
 
-    const terrainKey = tile.terrain;
-
-    // Attempt sprite-based fill
-    let spriteFilled = false;
-    if (terrainKey && TERRAIN_EDGE_SPRITES[terrainKey]) {
-      const bitmask = computeHexBitmask(map, { x: tile.x, y: tile.y });
-      const mapping = TERRAIN_EDGE_SPRITES[terrainKey];
-      const spritePath = mapping[bitmask] ?? mapping[0b000000]; // fallback isolated
-
-      if (spritePath) {
-        let img = spriteCache.get(spritePath);
-        if (!img) {
-          img = new Image();
-          img.src = spritePath;
-          spriteCache.set(spritePath, img);
-        }
-        if (img.complete && img.naturalWidth > 0) {
-          try {
-            const pattern = ctx.createPattern(img, 'repeat');
-            if (pattern) {
-              ctx.fillStyle = pattern;
-              spriteFilled = true;
-            }
-          } catch (e) {
-            // Image was broken; skip pattern rendering
-            console.warn('Pattern creation failed for', spritePath, e);
-          }
-        }
-      }
-    }
-
-    if (!spriteFilled) {
-      // Fallback to gradient color fill
-      let baseColor = config.colors.default;
-    if (terrainKey && config.colors[terrainKey as keyof typeof config.colors]) {
-      const colorValue = config.colors[terrainKey as keyof typeof config.colors];
-      if (typeof colorValue === 'string') {
-        baseColor = colorValue;
-      }
-    }
-    if (terrainKey && config.gradients[terrainKey as keyof typeof config.gradients]) {
-      const gradientColors = config.gradients[terrainKey as keyof typeof config.gradients];
-      const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
-      gradient.addColorStop(0, gradientColors[0]);
-      gradient.addColorStop(1, gradientColors[1]);
-      ctx.fillStyle = gradient;
-    } else {
-      ctx.fillStyle = baseColor;
-      }
-    }
+    // Apply vision-based rendering with ZFC levels
+    let tileOpacity = 1.0;
+    let overlayColor = 'rgba(0, 0, 0, 0)';
     
-    // Fill with terrain color/gradient
+    if (!tile.visible && !tile.explored) {
+      // Level 4: Hidden - completely black
+      tileOpacity = 0.1;
+      overlayColor = 'rgba(0, 0, 0, 0.9)';
+    } else if (tile.visionLevel === 'explored') {
+      // Level 3: Explored but not visible - very dark
+      tileOpacity = 0.3;
+      overlayColor = 'rgba(0, 0, 0, 0.7)';
+    } else if (tile.visionLevel === 'zfc') {
+      // Level 2: ZFC zone - dimmed visibility
+      tileOpacity = 0.6;
+      overlayColor = 'rgba(0, 0, 0, 0.4)';
+    } else if (tile.visionLevel === 'clear') {
+      // Level 1: Clear zone - full visibility
+      tileOpacity = 1.0;
+      overlayColor = 'rgba(0, 0, 0, 0)';
+    }
+
+    // Get terrain color with variety
+    const terrainColor = getTerrainColor(tile.terrain);
+    
+    // Apply opacity to terrain color
+    ctx.globalAlpha = tileOpacity;
+    ctx.fillStyle = terrainColor;
     ctx.fill();
+    ctx.globalAlpha = 1.0;
 
-    // Add texture pattern for some terrains
-    if (terrainKey === 'mountain') {
-      // Add mountain texture
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-      for (let i = 0; i < 3; i++) {
-        const offsetX = (i - 1) * 3;
-        const offsetY = (i - 1) * 2;
-        ctx.fillRect(x + offsetX - 2, y + offsetY - 1, 4, 2);
-      }
-    } else if (terrainKey === 'forest') {
-      // Add forest texture with deterministic dots
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
-      const seed = tile.x * 31 + tile.y * 17; // Deterministic seed
-      for (let i = 0; i < 5; i++) {
-        const offsetX = ((seed + i * 23) % 100 - 50) * radius * 0.02;
-        const offsetY = ((seed + i * 41) % 100 - 50) * radius * 0.02;
-        ctx.beginPath();
-        ctx.arc(x + offsetX, y + offsetY, 1, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    } else if (terrainKey === 'water') {
-      // Add water wave effect
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
-      ctx.lineWidth = 1;
-      const time = Date.now() * 0.001;
-      for (let i = 0; i < 3; i++) {
-        const waveY = y + (i - 1) * 5 + Math.sin(time + i + tile.x * 0.1) * 2;
-        ctx.beginPath();
-        ctx.moveTo(x - radius * 0.5, waveY);
-        ctx.lineTo(x + radius * 0.5, waveY);
-        ctx.stroke();
-      }
-    }
-
-    // Movement range highlight
-    if (isInMovementRange && movementMode) {
-      ctx.fillStyle = config.colors.movement;
+    // Add fog overlay
+    if (overlayColor !== 'rgba(0, 0, 0, 0)') {
+      ctx.fillStyle = overlayColor;
       ctx.fill();
     }
 
-    // Hover effect
-    if (isHovered) {
-      ctx.fillStyle = config.colors.hover;
-      ctx.fill();
-    }
-
-    // Selection border with enhanced glow
-    if (isSelected || hasSelectedHero) {
-      ctx.strokeStyle = config.colors.selected;
-      ctx.lineWidth = hasSelectedHero ? 4 : 3;
-      ctx.shadowColor = config.colors.selected;
-      ctx.shadowBlur = 8;
+    // Enhanced borders and selection
+    if (isSelected) {
+      ctx.strokeStyle = '#FFD700';
+      ctx.lineWidth = 4;
       ctx.stroke();
-      ctx.shadowBlur = 0;
-    } else if (isInMovementRange && movementMode) {
-      ctx.strokeStyle = 'rgba(76, 175, 80, 0.8)';
+    } else if (isHovered) {
+      ctx.strokeStyle = 'rgba(255, 215, 0, 0.6)';
       ctx.lineWidth = 2;
       ctx.stroke();
+    } else if (isInMovementRange) {
+      ctx.strokeStyle = 'rgba(0, 255, 0, 0.8)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    } else if (isInProjectionRange) {
+      ctx.strokeStyle = 'rgba(0, 255, 0, 0.4)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
     } else {
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
       ctx.lineWidth = 1;
       ctx.stroke();
     }
 
-    // Outline for selected tile or hovered tile
-    if (isSelected || isHovered) {
-      ctx.lineWidth = 3;
-      ctx.strokeStyle = isSelected ? 'yellow' : 'rgba(255,255,255,0.6)';
+    // Special ZFC zone indicator
+    if (tile.visionLevel === 'zfc') {
+      ctx.beginPath();
+      ctx.arc(x, y, radius * 0.8, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(255, 215, 0, 0.3)';
+      ctx.lineWidth = 1;
       ctx.stroke();
-    }
-
-    // Render highlight overlays AFTER base fill so they appear on top but under content
-    if (isInMovementRange) {
-      ctx.fillStyle = 'rgba(76, 175, 80, 0.35)'; // greenish highlight
-      ctx.fill();
-    } else if (isInProjectionRange) {
-      ctx.fillStyle = 'rgba(33, 150, 243, 0.25)'; // bluish softer for ZFC projection
-      ctx.fill();
     }
 
     // Draw structure if present
@@ -734,22 +669,20 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     if (tile.hero) {
       drawHero(ctx, center, tile.hero);
     }
+  }, [config.hexRadius, movementRange, projectionRange, selectedHero, drawStructure, drawCreature, drawHero]);
 
-    // ---- Fog of War overlay (after all tile content) ----
-    if (!tile.visible) {
-      ctx.beginPath();
-      for (let i = 0; i < 6; i++) {
-        const angle = (Math.PI / 3) * i - Math.PI / 2;
-        const hx = x + radius * Math.cos(angle);
-        const hy = y + radius * Math.sin(angle);
-        if (i === 0) ctx.moveTo(hx, hy); else ctx.lineTo(hx, hy);
-      }
-      ctx.closePath();
-
-      ctx.fillStyle = tile.explored ? 'rgba(0,0,0,0.55)' : 'rgba(0,0,0,0.85)';
-      ctx.fill();
+  // Get terrain color based on terrain type
+  const getTerrainColor = (terrain: string): string => {
+    switch (terrain) {
+      case 'grass': return '#4CAF50';
+      case 'forest': return '#2E7D32';
+      case 'mountain': return '#795548';
+      case 'water': return '#2196F3';
+      case 'desert': return '#FFC107';
+      case 'swamp': return '#8BC34A';
+      default: return '#4CAF50';
     }
-  }, [config, drawStructure, drawCreature, drawHero, movementRange, movementMode, selectedHero, map, spriteCache, projectionRange]);
+  };
 
   // Render ZFC zones
   const drawZFCZones = useCallback((ctx: CanvasRenderingContext2D) => {

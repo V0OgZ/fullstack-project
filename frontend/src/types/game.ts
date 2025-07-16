@@ -19,6 +19,7 @@ export interface Tile {
   visible: boolean;
   movementCost: number;
   walkable?: boolean;
+  visionLevel?: 'clear' | 'zfc' | 'explored' | 'hidden'; // NOUVEAU: Niveau de vision pour ZFC
 }
 
 export interface Hero {

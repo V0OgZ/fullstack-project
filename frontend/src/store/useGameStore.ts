@@ -123,12 +123,25 @@ const initialState = {
   equippedItems: {},
 };
 
+// Helper function to get movement cost for terrain types
+const getTerrainMovementCost = (terrainType: string): number => {
+  switch (terrainType) {
+    case 'grass': return 1;
+    case 'forest': return 2;
+    case 'mountain': return 3;
+    case 'water': return 4;
+    case 'desert': return 2;
+    case 'swamp': return 3;
+    default: return 1;
+  }
+};
+
 export const useGameStore = create<GameStore>((set, get) => ({
   ...initialState,
 
   // Helper function to convert flat tiles array to 2D array
   convertTilesToMap: (tiles: any[], width: number, height: number): Tile[][] => {
-    
+    console.log('🗺️ convertTilesToMap: Converting tiles to map, input tiles:', tiles.length, 'expected:', width * height);
     
     const map: Tile[][] = [];
     for (let y = 0; y < height; y++) {
@@ -136,28 +149,35 @@ export const useGameStore = create<GameStore>((set, get) => ({
       for (let x = 0; x < width; x++) {
         const tileIndex = y * width + x;
         const tile = tiles[tileIndex];
+        
         if (tile) {
-          // Convert from flat tile format to game store tile format
+          // Use the terrain from backend, DON'T force to grass
+          const terrainType = tile.terrain || tile.type || 'grass';
+          console.log(`🌍 Tile [${x},${y}]: terrain=${terrainType}, walkable=${tile.walkable}, visible=${tile.visible}, explored=${tile.explored}`);
+          
           row.push({
             x: tile.x || x,
             y: tile.y || y,
-            terrain: tile.terrain || 'grass',
-            walkable: tile.walkable !== undefined ? tile.walkable : true,
-            movementCost: tile.movementCost || 1,
+            terrain: terrainType as 'grass' | 'forest' | 'mountain' | 'water' | 'desert' | 'swamp',
+            walkable: tile.walkable !== false, // Default to true unless explicitly false
+            movementCost: tile.movementCost || getTerrainMovementCost(terrainType),
             hero: tile.hero || undefined,
             creature: tile.creature || undefined,
             structure: tile.structure || undefined,
-            visible: tile.visible !== undefined ? tile.visible : false,
-            explored: tile.explored !== undefined ? tile.explored : false
+            visible: tile.visible || false,
+            explored: tile.explored || false
           });
         } else {
-          // Default tile if missing
+          // Default tile if missing - use random terrain for variety
+          const randomTerrains = ['grass', 'forest', 'mountain', 'desert', 'swamp'];
+          const randomTerrain = randomTerrains[Math.floor(Math.random() * randomTerrains.length)] as 'grass' | 'forest' | 'mountain' | 'water' | 'desert' | 'swamp';
+          
           row.push({
             x,
             y,
-            terrain: 'grass',
-            walkable: true,
-            movementCost: 1,
+            terrain: randomTerrain,
+            walkable: randomTerrain !== 'water',
+            movementCost: getTerrainMovementCost(randomTerrain),
             hero: undefined,
             creature: undefined,
             structure: undefined,
@@ -169,11 +189,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
       map.push(row);
     }
     
-    console.log('🗺️ convertTilesToMap: Map created with', map.length, 'rows');
-    
-    // Vision update removed to prevent infinite re-renders
-    // Vision will be updated manually when needed
-    
+    console.log('🗺️ convertTilesToMap: Map created with', map.length, 'rows, terrain variety preserved');
     return map;
   },
 
@@ -338,7 +354,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   setMovementRange: (range) => set({ movementRange: range }),
   setMovementMode: (mode) => set({ movementMode: mode }),
 
-  // Simple vision update: mark tiles within radius 4 of each hero of the player as visible & explored, others remain previous explored.
+  // Enhanced vision system with 3 levels: clear zone, ZFC zone, and blocked zone
   updateVision: (playerId: string) => {
     const { map, currentGame } = get();
     if (!currentGame || !map.length) {
@@ -359,18 +375,21 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
     console.log('🔍 updateVision: Updating vision for player:', playerId, 'with heroes:', player.heroes.length);
 
-    // Increased vision radius for better gameplay
-    const visibilityRadius = 6;
-    const explorationRadius = 8;
+    // 3-level vision system
+    const clearVisionRadius = 3;      // Zone claire (déplacement normal)
+    const zfcVisionRadius = 6;        // Zone ZFC (sombre mais visible)
+    const explorationRadius = 10;     // Zone d'exploration maximale
 
-    // Clone map to avoid mutating directly, preserving previously explored tiles
-    const newMap = map.map(row => row.map(tile => ({ 
-      ...tile, 
-      visible: tile.explored || false // Keep explored tiles visible
+    // Clone map to avoid mutating directly
+    const newMap = map.map(row => row.map(tile => ({
+      ...tile,
+      visible: tile.explored || false,  // Keep previously explored tiles dimly visible
+      visionLevel: tile.explored ? 'explored' : 'hidden'  // Default vision level
     })));
 
-    let visibleTilesCount = 0;
-    let exploredTilesCount = 0;
+    let clearTiles = 0;
+    let zfcTiles = 0;
+    let exploredTiles = 0;
     let processedHeroes = 0;
     
     player.heroes.forEach(hero => {
@@ -389,32 +408,41 @@ export const useGameStore = create<GameStore>((set, get) => ({
         return;
       }
       
-      // Larger exploration radius for discovered areas
+      // Calculate vision in 3 levels
       for (let y = -explorationRadius; y <= explorationRadius; y++) {
         for (let x = -explorationRadius; x <= explorationRadius; x++) {
           const tx = hero.position.x + x;
           const ty = hero.position.y + y;
     
           if (ty >= 0 && ty < newMap.length && tx >= 0 && tx < newMap[ty].length) {
-            const dist = Math.abs(x) + Math.abs(y);
+            const distance = Math.abs(x) + Math.abs(y); // Manhattan distance
             const tile = newMap[ty][tx];
             
-            if (dist <= visibilityRadius) {
-              // Close tiles are fully visible
+            if (distance <= clearVisionRadius) {
+              // Level 1: Clear zone - full visibility (movement range)
               tile.visible = true;
               tile.explored = true;
-              visibleTilesCount++;
-            } else if (dist <= explorationRadius) {
-              // Farther tiles are explored but not currently visible
+              tile.visionLevel = 'clear';
+              clearTiles++;
+            } else if (distance <= zfcVisionRadius) {
+              // Level 2: ZFC zone - dimmed visibility (temporal influence)
+              tile.visible = true;
               tile.explored = true;
-              exploredTilesCount++;
+              tile.visionLevel = 'zfc';
+              zfcTiles++;
+            } else if (distance <= explorationRadius) {
+              // Level 3: Exploration zone - discovered but not currently visible
+              tile.explored = true;
+              tile.visionLevel = 'explored';
+              exploredTiles++;
             }
           }
         }
       }
     });
 
-    console.log('🔍 updateVision: Processed', processedHeroes, 'heroes, made', visibleTilesCount, 'tiles visible,', exploredTilesCount, 'tiles explored');
+    console.log('🔍 updateVision: Processed', processedHeroes, 'heroes');
+    console.log('🔍 Clear tiles:', clearTiles, 'ZFC tiles:', zfcTiles, 'Explored tiles:', exploredTiles);
     
     // Only update the map if we processed at least one hero
     if (processedHeroes > 0) {
