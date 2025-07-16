@@ -21,7 +21,8 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
   const { map, selectedHero, setSelectedTile, moveHero, canMoveToPosition } = useGameStore();
   const { t } = useTranslation();
   
-  const [hoveredTile, setHoveredTile] = useState<Position | null>(null);
+  const [hoveredTile, setHoveredTile] = useState<{x:number, y:number}|null>(null);
+  const [svgSelectedTile, setSvgSelectedTile] = useState<{x:number, y:number}|null>(null);
   const [mapOffset, setMapOffset] = useState<Position>({ x: 0, y: 0 });
 
   // Configuration du rendu hexagonal - PLUS COMPACT
@@ -146,6 +147,16 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
   const mapId = 'main-map'; // TODO: utiliser un vrai id si dispo
   const enrichedMap: EnrichedTile[][] = useMemo(() => map ? enrichMapWithZones(map, mapId) : [], [map, mapId]);
 
+  // Handle click on tile
+  const handleTileClick = (x: number, y: number) => {
+    setSvgSelectedTile({x, y});
+    if (onTileClick) onTileClick({x, y});
+  };
+  // Handle hover on tile
+  const handleTileHover = (x: number, y: number) => {
+    setHoveredTile({x, y});
+  };
+
   // --- Rendu SVG organique ---
   const renderTiles = () => {
     if (!enrichedMap || enrichedMap.length === 0) return null;
@@ -154,6 +165,8 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
       for (let x = 0; x < enrichedMap[y].length; x++) {
         const tile = enrichedMap[y][x];
         if (!tile) continue;
+        // Merge hero info from original map
+        const hero = map?.[y]?.[x]?.hero;
         // Position pixel
         const px = x * 0.6 * 2 * 15 + (y % 2) * 0.6 * 15 + 50;
         const py = y * 0.7 * Math.sqrt(3) * 15 + 50;
@@ -184,11 +197,44 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
           fill = '#f5e6b2';
           extra = dune;
         } else if (tile.biome === 'FOREST') {
-          // TODO: forêt organique (densité, clairière)
-          fill = '#3a5c1a';
+          // Forêt : densité au centre, clairière possible
+          const { noise2D } = createSeededNoise(`${mapId}-forest-${tile.zone_id}`);
+          // Densité : plus sombre au centre, plus clair au bord
+          const density = Math.max(0, 1 - tile.distance_to_border / Math.max(3, tile.zone_size/4));
+          let base = Math.round(60 - 20 * density); // teinte verte
+          let light = Math.round(30 + 30 * (1-density));
+          fill = `hsl(${base}, 60%, ${light}%)`;
+          // Clairière : bruit + centre de zone
+          let clearing = null;
+          if (tile.zone_size > 10 && tile.distance_to_border < 2) {
+            const distToCenter = Math.sqrt(Math.pow(tile.x-tile.zone_center.x,2)+Math.pow(tile.y-tile.zone_center.y,2));
+            if (distToCenter < 2.5 + 1.5*noise2D(tile.x, tile.y)) {
+              clearing = <circle cx={px} cy={py} r={6+2*noise2D(tile.x, tile.y)} fill="#e6e6b2" opacity={0.18} />;
+            }
+          }
+          extra = clearing;
         } else if (tile.biome === 'MOUNTAIN') {
-          // TODO: crevasses, cailloux
+          // Montagne : crevasses, cailloux
           fill = '#b0b0b0';
+          const { noise2D } = createSeededNoise(`${mapId}-mountain-${tile.zone_id}`);
+          let cracks = null;
+          if (tile.zone_size > 6 && tile.distance_to_border > 0) {
+            // Crevasse : ligne sombre, orientée bruit
+            const angle = noise2D(tile.x, tile.y) * Math.PI * 2;
+            const dx = Math.cos(angle) * 7;
+            const dy = Math.sin(angle) * 7;
+            cracks = <line x1={px-dx} y1={py-dy} x2={px+dx} y2={py+dy} stroke="#444" strokeWidth={1.2} opacity={0.22+0.18*Math.abs(noise2D(tile.x, tile.y))} />;
+          }
+          // Cailloux : petits cercles bruités
+          let rocks = [];
+          if (tile.zone_size > 3 && tile.distance_to_border > 0.5) {
+            for (let i=0; i<2; i++) {
+              const rx = px + 6*Math.cos(i+noise2D(tile.x,i));
+              const ry = py + 6*Math.sin(i+noise2D(tile.y,i));
+              rocks.push(<circle key={i} cx={rx} cy={ry} r={1.5+1.2*Math.abs(noise2D(tile.x,i))} fill="#888" opacity={0.32} />);
+            }
+          }
+          extra = <>{cracks}{rocks}</>;
         } else {
           fill = '#bada55';
         }
@@ -200,9 +246,27 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
           return `${hx},${hy}`;
         }).join(' ');
         tiles.push(
-          <g key={`tile-${x}-${y}`}> 
+          <g key={`tile-${x}-${y}`}
+            onClick={() => handleTileClick(x, y)}
+            onMouseMove={() => handleTileHover(x, y)}
+            style={{cursor:'pointer'}}
+          >
             <polygon points={hexPoints} fill={fill} stroke="none" />
             {extra}
+            {/* Hero rendering */}
+            {hero && (
+              <g>
+                <circle cx={px} cy={py} r={8} fill={svgSelectedTile && svgSelectedTile.x===x && svgSelectedTile.y===y ? '#FFD700' : '#4A90E2'} stroke="#2C3E50" strokeWidth={2} />
+                <text x={px} y={py+2} textAnchor="middle" fontSize="12" fill="#fff">⚔️</text>
+              </g>
+            )}
+            {/* Overlay selection/hover */}
+            {svgSelectedTile && svgSelectedTile.x===x && svgSelectedTile.y===y && (
+              <polygon points={hexPoints} fill="none" stroke="#FFD700" strokeWidth={3} />
+            )}
+            {hoveredTile && hoveredTile.x===x && hoveredTile.y===y && (
+              <polygon points={hexPoints} fill="none" stroke="#fff" strokeWidth={2} opacity={0.5} />
+            )}
           </g>
         );
       }
@@ -219,6 +283,16 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
       {/* Debug info conservée */}
       <div className="debug-info">
         <div>Carte: {map?.length || 0}x{map?.[0]?.length || 0}</div>
+        {hoveredTile && (
+          <div>
+            Tuile: {hoveredTile.x},{hoveredTile.y} - {enrichedMap?.[hoveredTile.y]?.[hoveredTile.x]?.biome}
+          </div>
+        )}
+        {svgSelectedTile && (
+          <div>
+            Sélection: {svgSelectedTile.x},{svgSelectedTile.y} - {enrichedMap?.[svgSelectedTile.y]?.[svgSelectedTile.x]?.biome}
+          </div>
+        )}
       </div>
     </div>
   );
