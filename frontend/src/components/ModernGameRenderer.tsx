@@ -585,15 +585,16 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
         ctx.fillStyle = gradient;
         ctx.fill();
         
-        // Add grass texture
-        for (let i = 0; i < 15; i++) {
-          const grassX = x + (Math.random() - 0.5) * radius * 1.5;
-          const grassY = y + (Math.random() - 0.5) * radius * 1.5;
-          ctx.strokeStyle = `rgba(95, 144, 68, ${0.3 + Math.random() * 0.4})`;
+        // Add grass texture (positions fixes basées sur coordonnées)
+        const grassSeed = x * 7 + y * 13; // Seed basé sur position
+        for (let i = 0; i < 12; i++) {
+          const grassX = x + (Math.sin(grassSeed + i * 0.7) * 0.5) * radius * 1.2;
+          const grassY = y + (Math.cos(grassSeed + i * 0.7) * 0.5) * radius * 1.2;
+          ctx.strokeStyle = `rgba(95, 144, 68, ${0.4 + (Math.sin(grassSeed + i) * 0.2)})`;
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(grassX, grassY);
-          ctx.lineTo(grassX + (Math.random() - 0.5) * 4, grassY - Math.random() * 8);
+          ctx.lineTo(grassX + Math.sin(grassSeed + i) * 3, grassY - Math.abs(Math.cos(grassSeed + i)) * 6);
           ctx.stroke();
         }
         break;
@@ -605,13 +606,15 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
         ctx.fillStyle = gradient;
         ctx.fill();
         
-        // Add tree texture
-        for (let i = 0; i < 8; i++) {
-          const treeX = x + (Math.random() - 0.5) * radius * 1.2;
-          const treeY = y + (Math.random() - 0.5) * radius * 1.2;
-          ctx.fillStyle = `rgba(26, 48, 9, ${0.4 + Math.random() * 0.3})`;
+        // Add tree texture (positions fixes)
+        const treeSeed = x * 11 + y * 17;
+        for (let i = 0; i < 6; i++) {
+          const treeX = x + Math.sin(treeSeed + i * 1.1) * 0.4 * radius;
+          const treeY = y + Math.cos(treeSeed + i * 1.1) * 0.4 * radius;
+          const treeSize = 2 + Math.abs(Math.sin(treeSeed + i)) * 2.5;
+          ctx.fillStyle = `rgba(26, 48, 9, ${0.5 + Math.sin(treeSeed + i * 0.5) * 0.2})`;
           ctx.beginPath();
-          ctx.arc(treeX, treeY, 2 + Math.random() * 3, 0, Math.PI * 2);
+          ctx.arc(treeX, treeY, treeSize, 0, Math.PI * 2);
           ctx.fill();
         }
         break;
@@ -643,32 +646,33 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
         ctx.fillStyle = gradient;
         ctx.fill();
         
-        // Effets de brillance scintillante
-        const time = Date.now() / 1000;
-        for (let i = 0; i < 12; i++) {
-          const sparkleX = x + (Math.random() - 0.5) * radius * 1.6;
-          const sparkleY = y + (Math.random() - 0.5) * radius * 1.6;
-          const sparkleIntensity = Math.sin(time * 3 + i * 0.5) * 0.5 + 0.5;
-          const sparkleSize = 0.5 + Math.random() * 1.5;
+        // Effets de brillance scintillante (plus lents et fixes)
+        const waterSeed = x * 5 + y * 9;
+        const time = Date.now() / 2500; // Plus lent
+        for (let i = 0; i < 8; i++) {
+          const sparkleX = x + Math.sin(waterSeed + i * 0.8) * 0.6 * radius;
+          const sparkleY = y + Math.cos(waterSeed + i * 0.8) * 0.6 * radius;
+          const sparkleIntensity = Math.sin(time * 1.5 + waterSeed + i * 0.7) * 0.4 + 0.6;
+          const sparkleSize = 0.8 + Math.abs(Math.sin(waterSeed + i * 0.4)) * 1.2;
           
           // Pixels brillants
-          ctx.fillStyle = `rgba(255, 255, 255, ${sparkleIntensity * 0.8})`;
+          ctx.fillStyle = `rgba(255, 255, 255, ${sparkleIntensity * 0.7})`;
           ctx.fillRect(sparkleX - sparkleSize/2, sparkleY - sparkleSize/2, sparkleSize, sparkleSize);
           
           // Reflets bleus
-          ctx.fillStyle = `rgba(173, 216, 230, ${sparkleIntensity * 0.4})`;
-          ctx.fillRect(sparkleX - sparkleSize, sparkleY - sparkleSize, sparkleSize * 2, sparkleSize * 2);
+          ctx.fillStyle = `rgba(173, 216, 230, ${sparkleIntensity * 0.3})`;
+          ctx.fillRect(sparkleX - sparkleSize, sparkleY - sparkleSize, sparkleSize * 1.5, sparkleSize * 1.5);
         }
         
-        // Vagues ondulantes
-        for (let i = 0; i < 4; i++) {
-          const waveX = x + (Math.random() - 0.5) * radius * 1.2;
-          const waveY = y + (Math.random() - 0.5) * radius * 1.2;
-          const waveOffset = Math.sin(time * 1.5 + i * 1.2) * 2;
-          ctx.strokeStyle = `rgba(100, 149, 237, ${0.4 + Math.sin(time + i) * 0.2})`;
+        // Vagues ondulantes (plus lentes)
+        for (let i = 0; i < 3; i++) {
+          const waveX = x + Math.sin(waterSeed + i * 1.5) * 0.4 * radius;
+          const waveY = y + Math.cos(waterSeed + i * 1.5) * 0.4 * radius;
+          const waveOffset = Math.sin(time * 0.8 + waterSeed + i * 1.2) * 1.5;
+          ctx.strokeStyle = `rgba(100, 149, 237, ${0.5 + Math.sin(time * 0.6 + waterSeed + i) * 0.2})`;
           ctx.lineWidth = 1;
           ctx.beginPath();
-          ctx.ellipse(waveX + waveOffset, waveY, 4 + Math.sin(time + i) * 2, 2, 0, 0, Math.PI * 2);
+          ctx.ellipse(waveX + waveOffset, waveY, 3 + Math.sin(time * 0.7 + waterSeed + i) * 1.5, 1.5, 0, 0, Math.PI * 2);
           ctx.stroke();
         }
         break;
@@ -682,39 +686,37 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
         ctx.fillStyle = gradient;
         ctx.fill();
         
-        // Dunes ondulantes (vue du dessus)
+        // Dunes ondulantes fixes (vue du dessus)
+        const desertSeed = x * 6 + y * 8;
         for (let i = 0; i < 3; i++) {
-          const duneX = x + (Math.random() - 0.5) * radius * 1.2;
-          const duneY = y + (Math.random() - 0.5) * radius * 1.2;
-          const duneWidth = 8 + Math.random() * 12;
-          const duneHeight = 4 + Math.random() * 6;
+          const duneX = x + Math.sin(desertSeed + i * 1.3) * 0.5 * radius;
+          const duneY = y + Math.cos(desertSeed + i * 1.3) * 0.5 * radius;
+          const duneWidth = 8 + Math.abs(Math.sin(desertSeed + i * 0.7)) * 10;
+          const duneHeight = 4 + Math.abs(Math.cos(desertSeed + i * 0.5)) * 5;
+          const duneAngle = Math.sin(desertSeed + i) * Math.PI;
           
           // Ombre de la dune
-          ctx.fillStyle = `rgba(169, 132, 58, ${0.3 + Math.random() * 0.2})`;
+          ctx.fillStyle = `rgba(169, 132, 58, ${0.4 + Math.sin(desertSeed + i * 0.3) * 0.2})`;
           ctx.beginPath();
-          ctx.ellipse(duneX + 1, duneY + 1, duneWidth, duneHeight, Math.random() * Math.PI, 0, Math.PI * 2);
+          ctx.ellipse(duneX + 1, duneY + 1, duneWidth, duneHeight, duneAngle, 0, Math.PI * 2);
           ctx.fill();
           
           // Dune principale
-          ctx.fillStyle = `rgba(244, 208, 63, ${0.4 + Math.random() * 0.3})`;
+          ctx.fillStyle = `rgba(244, 208, 63, ${0.5 + Math.sin(desertSeed + i * 0.4) * 0.2})`;
           ctx.beginPath();
-          ctx.ellipse(duneX, duneY, duneWidth, duneHeight, Math.random() * Math.PI, 0, Math.PI * 2);
+          ctx.ellipse(duneX, duneY, duneWidth, duneHeight, duneAngle, 0, Math.PI * 2);
           ctx.fill();
         }
         
-        // Grains de sable détaillés
-        for (let i = 0; i < 25; i++) {
-          const grainX = x + (Math.random() - 0.5) * radius * 1.4;
-          const grainY = y + (Math.random() - 0.5) * radius * 1.4;
-          const grainSize = 0.3 + Math.random() * 0.8;
+        // Grains de sable fixes (sans brillance excessive)
+        for (let i = 0; i < 15; i++) {
+          const grainX = x + Math.sin(desertSeed + i * 0.9) * 0.6 * radius;
+          const grainY = y + Math.cos(desertSeed + i * 0.9) * 0.6 * radius;
+          const grainSize = 0.4 + Math.abs(Math.sin(desertSeed + i * 0.6)) * 0.6;
           
           // Grain principal
-          ctx.fillStyle = `rgba(233, 196, 106, ${0.4 + Math.random() * 0.4})`;
+          ctx.fillStyle = `rgba(233, 196, 106, ${0.5 + Math.sin(desertSeed + i * 0.2) * 0.3})`;
           ctx.fillRect(grainX - grainSize/2, grainY - grainSize/2, grainSize, grainSize);
-          
-          // Reflet sur le grain
-          ctx.fillStyle = `rgba(255, 235, 156, ${0.2 + Math.random() * 0.3})`;
-          ctx.fillRect(grainX - grainSize/4, grainY - grainSize/4, grainSize/2, grainSize/2);
         }
         break;
         
@@ -877,12 +879,13 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     // Check if this tile has the selected hero
     const hasSelectedHero = selectedHero && tile.hero && tile.hero.id === selectedHero.id;
 
-    // Create hexagonal path
+    // Create hexagonal path with slight overlap to avoid black lines
+    const expandedRadius = radius + 0.5; // Slight expansion to cover gaps
     ctx.beginPath();
     for (let i = 0; i < 6; i++) {
       const angle = (i * Math.PI) / 3;
-      const hx = x + radius * Math.cos(angle);
-      const hy = y + radius * Math.sin(angle);
+      const hx = x + expandedRadius * Math.cos(angle);
+      const hy = y + expandedRadius * Math.sin(angle);
       if (i === 0) {
         ctx.moveTo(hx, hy);
       } else {
