@@ -221,6 +221,11 @@ export class ApiService {
     });
   }
 
+  // Generic API method for game script engine
+  static async makeGenericRequest(endpoint: string, options: RequestInit = {}): Promise<any> {
+    return this.makeRequest(endpoint, options);
+  }
+
   static async calculateTemporalInterference(activeZFCs: any): Promise<any> {
     return this.makeRequest('/zfc/temporal-interference', {
       method: 'POST',

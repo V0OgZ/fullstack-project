@@ -280,6 +280,29 @@ const CastleManagementPanel: React.FC<CastleManagementPanelProps> = ({ gameId, p
     }
   };
 
+  const handleUpgradeBuilding = async (buildingId: string) => {
+    if (!currentPlayer) return;
+    
+    try {
+      const response = await fetch(`/api/games/${gameId}/buildings/${buildingId}/upgrade`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ playerId: currentPlayer.id })
+      });
+      
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Building upgrade started:', result);
+        // TODO: Rafraîchir les données après l'upgrade
+      } else {
+        const error = await response.json();
+        console.error('Failed to upgrade building:', error);
+      }
+    } catch (error) {
+      console.error('Error upgrading building:', error);
+    }
+  };
+
   const getUnitIcon = (unitType: string): string => {
     const iconMap: Record<string, string> = {
       'peasant': '👨‍🌾',
