@@ -2,85 +2,200 @@
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: hidden;
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-.game-canvas {
+.modern-game-renderer canvas {
   display: block;
+  width: 100%;
+  height: 100%;
   cursor: crosshair;
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
+  transition: filter 0.3s ease;
 }
 
-.tile-tooltip {
+.modern-game-renderer canvas:hover {
+  filter: brightness(1.05);
+}
+
+/* Info de débogage */
+.debug-info {
   position: absolute;
-  pointer-events: none;
-  z-index: 1000;
-  transform: translate(-50%, -100%);
-  margin-top: -10px;
-}
-
-.tooltip-content {
-  background: rgba(0, 0, 0, 0.9);
+  top: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.8);
   color: #FFD700;
   padding: 8px 12px;
   border-radius: 6px;
+  font-family: 'Courier New', monospace;
   font-size: 12px;
-  font-family: 'Cinzel', serif;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  line-height: 1.4;
+  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 215, 0, 0.3);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  white-space: nowrap;
-  
-  /* Animation d'apparition plus douce et lente */
-  animation: tooltipFadeIn 1.2s ease-out;
+  z-index: 10;
 }
 
-@keyframes tooltipFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(2px);
-  }
-  to {
-    opacity: 0.8;
-    transform: translateY(0);
-  }
+.debug-info div {
+  margin: 2px 0;
 }
 
-/* Styles pour les effets visuels */
-.particle-effect {
-  position: absolute;
-  pointer-events: none;
-  border-radius: 50%;
-  animation: particleFloat 1s ease-out forwards;
+/* Styles pour les différents biomes (utilisés pour les tooltips potentiels) */
+.biome-water {
+  color: #3a86ff;
 }
 
-@keyframes particleFloat {
+.biome-desert {
+  color: #e9c46a;
+}
+
+.biome-forest {
+  color: #386641;
+}
+
+.biome-mountain {
+  color: #8d5524;
+}
+
+.biome-swamp {
+  color: #52796f;
+}
+
+.biome-grass {
+  color: #7fb069;
+}
+
+/* Animation pour les zones ZFC */
+@keyframes zfc-pulse {
   0% {
-    opacity: 1;
-    transform: scale(0.5);
+    opacity: 0.3;
+    transform: scale(1);
   }
   50% {
-    opacity: 0.8;
-    transform: scale(1.2);
+    opacity: 0.7;
+    transform: scale(1.05);
   }
   100% {
-    opacity: 0;
-    transform: scale(1.5) translateY(-20px);
+    opacity: 0.3;
+    transform: scale(1);
   }
+}
+
+.zfc-zone {
+  animation: zfc-pulse 2s infinite ease-in-out;
+}
+
+/* Styles pour les overlays de sélection */
+.tile-selected {
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+}
+
+.tile-hovered {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+}
+
+.tile-movement-range {
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.8);
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
-  .game-canvas {
-    cursor: pointer;
+  .debug-info {
+    font-size: 10px;
+    padding: 6px 8px;
   }
-  
-  .tooltip-content {
-    font-size: 14px;
-    padding: 12px 16px;
-    min-width: 200px;
+}
+
+/* Styles pour les effets de particules */
+.particle-effect {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.particle-sparkle {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
+  animation: sparkle 1s ease-out forwards;
+}
+
+@keyframes sparkle {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+/* Styles pour les différents types de zones */
+.zone-large {
+  filter: brightness(1.1);
+}
+
+.zone-small {
+  filter: brightness(0.95);
+}
+
+.zone-center {
+  filter: saturate(1.2);
+}
+
+.zone-border {
+  filter: contrast(1.1);
+}
+
+/* Amélioration de la lisibilité */
+.modern-game-renderer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.1) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Styles pour les transitions fluides */
+.terrain-transition {
+  transition: all 0.3s ease;
+}
+
+/* Optimisations de performance */
+.modern-game-renderer canvas {
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Styles pour les indicateurs de profondeur */
+.depth-indicator {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: depth-pulse 2s infinite ease-in-out;
+}
+
+@keyframes depth-pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.5);
   }
 } 
