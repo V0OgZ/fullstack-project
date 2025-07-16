@@ -39,6 +39,7 @@
     "react-dom": "^19.1.0",
     "react-router-dom": "^6.26.1",
     "react-scripts": "5.0.1",
+    "simplex-noise": "^4.0.3",
     "sockjs-client": "^1.6.1",
     "styled-components": "^6.1.19",
     "three": "^0.178.0",
