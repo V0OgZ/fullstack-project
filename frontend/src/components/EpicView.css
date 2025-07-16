@@ -195,6 +195,20 @@
   opacity: 0.6;
 }
 
+.epic-view-hero-portrait {
+  width: 100px;
+  height: 100px;
+  margin: 10px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.epic-view-hero-portrait .hero-portrait {
+  width: 100%;
+  height: 100%;
+}
+
 /* Scrollbar personnalisée */
 .epic-view-content::-webkit-scrollbar {
   width: 8px;

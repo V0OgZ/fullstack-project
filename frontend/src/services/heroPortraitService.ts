@@ -22,52 +22,52 @@ class HeroPortraitService {
     style: 'flare-semi-realistic'
   };
 
-  // Mapping héros -> portraits Flare (vrais noms de fichiers)
+  // Mapping héros -> portraits Flare (OPTIMISÉ - portraits de qualité uniquement)
   private heroPortraitMapping: HeroPortraitMapping = {
     // Guerriers & Combattants masculins
-    'WARRIOR': 'flaremalehero1.png',
-    'KNIGHT': 'branko.png',
-    'PALADIN': 'jonas.png',
-    'BARBARIAN': 'kain.png',
-    'BERSERKER': 'branko2.png',
+    'WARRIOR': 'branko.png',        // Portrait guerrier robuste
+    'KNIGHT': 'jonas.png',          // Portrait chevalier noble
+    'PALADIN': 'marcos.png',        // Portrait paladin imposant
+    'BARBARIAN': 'kain.png',        // Portrait barbare sauvage
+    'BERSERKER': 'branko2.png',     // Portrait berserker furieux
     
     // Mages & Casters masculins
-    'MAGE': 'flaremalehero2.png',
-    'WIZARD': 'lessig.png',
-    'SORCERER': 'fredg.png',
-    'NECROMANCER': 'flaremalehero3.png',
-    'WARLOCK': 'maxime.png',
-    'DRUID': 'alec.png',
-    'CLERIC': 'florent.png',
-    'PRIEST': 'marcos.png',
+    'MAGE': 'lessig.png',           // Portrait mage sage
+    'WIZARD': 'maxime.png',         // Portrait sorcier mystérieux
+    'SORCERER': 'fredg.png',        // Portrait sorcier sombre
+    'NECROMANCER': 'florent.png',   // Portrait nécromancien sinistre
+    'WARLOCK': 'alec.png',          // Portrait démoniste
+    'DRUID': 'jordan.png',          // Portrait druide naturel
+    'CLERIC': 'brendanportrait.png', // Portrait clerc bienveillant
+    'PRIEST': 'jordanportrait.png', // Portrait prêtre dévoué
     
     // Archers & Scouts masculins
-    'ARCHER': 'jordan.png',
-    'RANGER': 'jonas2.png',
-    'HUNTER': 'brendanportrait.png',
-    'SCOUT': 'jordanportrait.png',
+    'ARCHER': 'bjin.png',           // Portrait archer précis
+    'RANGER': 'jonas2.png',         // Portrait rôdeur agile
+    'HUNTER': 'florent.png',        // Portrait chasseur expérimenté (réutilisé)
+    'SCOUT': 'alec.png',            // Portrait éclaireur furtif (réutilisé)
     
     // Rogues & Assassins masculins
-    'ROGUE': 'bjin.png',
-    'ASSASSIN': 'kain.png',
-    'THIEF': 'branko2.png',
+    'ROGUE': 'bjin.png',            // Portrait voleur agile (réutilisé)
+    'ASSASSIN': 'kain.png',         // Portrait assassin mortel (réutilisé)
+    'THIEF': 'branko2.png',         // Portrait voleur discret (réutilisé)
     
-    // Héroïnes féminines
-    'WARRIOR_F': 'flarefemalehero1.png',
-    'MAGE_F': 'flarefemalehero2.png',
-    'ARCHER_F': 'flarefemalehero3.png',
-    'ROGUE_F': 'aileen.png',
-    'PALADIN_F': 'ashita.png',
-    'NECROMANCER_F': 'frieda.png',
+    // Héroïnes féminines (seulement 3 portraits féminins disponibles)
+    'WARRIOR_F': 'ashita.png',      // Portrait guerrière courageuse
+    'MAGE_F': 'frieda.png',         // Portrait mage féminine
+    'ARCHER_F': 'aileen.png',       // Portrait archère élégante
+    'ROGUE_F': 'aileen.png',        // Portrait voleuse habile (réutilisé)
+    'PALADIN_F': 'ashita.png',      // Portrait paladin féminine (réutilisé)
+    'NECROMANCER_F': 'frieda.png',  // Portrait nécromancienne (réutilisé)
     
-    // Héros spéciaux (nommés)
-    'ARTHUR': 'jonas.png',      // Noble knight
-    'MORGANA': 'frieda.png',    // Dark sorceress
-    'MERLIN': 'lessig.png',     // Wise wizard
-    'TRISTAN': 'branko.png',    // Valiant paladin
-    'ELENA': 'ashita.png',      // Wise mage
-    'GARETH': 'flaremalehero1.png', // Strong warrior
-    'THORIN': 'kain.png'        // Dwarven barbarian
+    // Héros spéciaux (nommés) - portraits uniques
+    'ARTHUR': 'jonas.png',          // Portrait noble pour Arthur
+    'MORGANA': 'frieda.png',        // Portrait mystérieux pour Morgana
+    'MERLIN': 'lessig.png',         // Portrait sage pour Merlin
+    'TRISTAN': 'branko.png',        // Portrait valeureux pour Tristan
+    'ELENA': 'ashita.png',          // Portrait élégant pour Elena
+    'GARETH': 'marcos.png',         // Portrait fort pour Gareth
+    'THORIN': 'kain.png'            // Portrait robuste pour Thorin
   };
 
   /**

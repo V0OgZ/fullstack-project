@@ -2,6 +2,8 @@
   position: relative;
   width: 100%;
   height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   border-radius: 8px;
   overflow: hidden;
@@ -12,11 +14,14 @@
   display: block;
   width: 100%;
   height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   cursor: crosshair;
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
   transition: filter 0.3s ease;
+  object-fit: contain;
 }
 
 .modern-game-renderer canvas:hover {

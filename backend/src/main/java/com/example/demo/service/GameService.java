@@ -408,7 +408,8 @@ public class GameService {
         
         // Heroes with castle position
         List<Map<String, Object>> heroes1 = new ArrayList<>();
-        Map<String, Object> hero1 = createHero("hero-1", "Arthur", "Knight", 2, 2, "player1");
+        Map<String, Object> hero1 = createHero("hero-1", "Arthur", "KNIGHT", 2, 2, "player1");
+        hero1.put("portraitId", "ARTHUR"); // Portrait spécifique pour Arthur
         heroes1.add(hero1);
         player1.put("heroes", heroes1);
         
@@ -438,7 +439,8 @@ public class GameService {
         
         // Heroes with castle position
         List<Map<String, Object>> heroes2 = new ArrayList<>();
-        Map<String, Object> hero2 = createHero("hero-2", "Morgana", "Sorceress", 18, 18, "player2");
+        Map<String, Object> hero2 = createHero("hero-2", "Morgana", "MAGE", 18, 18, "player2");
+        hero2.put("portraitId", "MORGANA"); // Portrait spécifique pour Morgana
         heroes2.add(hero2);
         player2.put("heroes", heroes2);
         

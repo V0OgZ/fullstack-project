@@ -286,7 +286,9 @@
   gap: 0;
   overflow: hidden;
   width: 100%;
-  max-width: 100vw;
+  height: 100%;
+  min-height: 0;
+  min-width: 1024px; /* Largeur minimale pour que les deux panneaux soient visibles */
 }
 
 .map-container {
@@ -295,15 +297,17 @@
   justify-content: center;
   align-items: center;
   background: #0a0a0a;
-  min-width: 0; /* Important pour flexbox */
+  min-width: 600px; /* Largeur minimale pour la map */
+  min-height: 0;
   overflow: hidden;
+  position: relative;
 }
 
 /* Right Panel */
 .right-panel {
-  width: 320px !important;
-  max-width: 320px !important;
-  min-width: 320px !important;
+  width: 280px !important;
+  max-width: 280px !important;
+  min-width: 280px !important;
   flex-shrink: 0;
   background: rgba(0, 0, 0, 0.9);
   border-left: 2px solid rgba(255, 215, 0, 0.3);
@@ -315,6 +319,7 @@
   max-height: 100vh;
   box-sizing: border-box;
   position: relative;
+  display: block; /* Force l'affichage */
 }
 
 .panel-content {
@@ -900,10 +905,14 @@
 
 /* Responsive Design */
 @media (max-width: 1200px) {
+  .game-main {
+    min-width: 900px; /* Réduire la largeur minimale */
+  }
+  
   .right-panel {
-    width: 280px !important;
-    max-width: 280px !important;
-    min-width: 280px !important;
+    width: 250px !important;
+    max-width: 250px !important;
+    min-width: 250px !important;
   }
   
   .equipment-slots {
@@ -934,13 +943,28 @@
   }
   
   .game-main {
+    min-width: 800px; /* Assurer une largeur minimale */
+  }
+  
+  .right-panel {
+    width: 220px !important;
+    max-width: 220px !important;
+    min-width: 220px !important;
+  }
+}
+
+/* Media query pour très petits écrans seulement */
+@media (max-width: 480px) {
+  .game-main {
     flex-direction: column;
     height: calc(100vh - 120px);
+    min-width: auto; /* Permettre une largeur plus petite */
   }
   
   .map-container {
     flex: 1;
     min-height: 0;
+    min-width: auto;
   }
   
   .right-panel {
@@ -953,7 +977,7 @@
     border-top: 2px solid rgba(255, 215, 0, 0.3);
     flex-shrink: 0;
   }
-} 
+}
 
 /* Styles pour les nouvelles propriétés de héros */
 .hero-class {
