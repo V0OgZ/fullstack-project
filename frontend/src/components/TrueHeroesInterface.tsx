@@ -307,13 +307,51 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
               <span className="map-name">🗺️ {scenarioId.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}</span>
             )}
           </div>
+          
+          {/* NOUVEAU: Informations de tour et statut du jeu */}
+          <div className="game-status">
+            <span className="turn-info">
+              🎯 {t('turn')}: {currentGame?.turn || 1}
+              {currentGame?.maxTurns && (
+                <span className="max-turns">/{currentGame.maxTurns}</span>
+              )}
+            </span>
+            <span className="game-mode">
+              🎮 {currentGame?.gameMode === 'multiplayer' ? 'Multiplayer' : 'Solo'}
+            </span>
+            <span className="map-size">
+              📏 {currentGame?.map?.length || 0}x{currentGame?.map?.[0]?.length || 0}
+            </span>
+            <span className="game-status-info">
+              📊 {currentGame?.status || 'active'}
+            </span>
+          </div>
+
           <div className="player-info">
-            <span className="player-name">{currentPlayer.name}</span>
+            <span className="player-name">
+              👑 {currentPlayer.name}
+              {currentGame?.gameMode === 'multiplayer' && (
+                <span className="player-status">
+                  {currentGame.currentPlayerId === currentPlayer.id ? ' (🔄 Active)' : ' (⏳ Waiting)'}
+                </span>
+              )}
+            </span>
             <div className="resources">
               <span className="gold">💰 {currentPlayer.resources?.gold || 0}</span>
               <span className="wood">🪵 {currentPlayer.resources?.wood || 0}</span>
               <span className="stone">🪨 {currentPlayer.resources?.stone || 0}</span>
+              <span className="mana">🔮 {currentPlayer.resources?.mana || 0}</span>
             </div>
+            
+            {/* NOUVEAU: Informations du héros sélectionné */}
+            {selectedHero && (
+              <div className="selected-hero-info">
+                <span className="hero-name">⚔️ {selectedHero.name}</span>
+                <span className="hero-level">🏆 Level {selectedHero.level}</span>
+                <span className="hero-exp">⭐ {selectedHero.experience || 0} XP</span>
+                <span className="hero-health">❤️ {selectedHero.health || 100}/{selectedHero.maxHealth || 100}</span>
+              </div>
+            )}
           </div>
         </div>
         
@@ -339,7 +377,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
             <button 
               className={`control-btn ${rightPanelContent === 'script' ? 'active' : ''}`}
               onClick={handleScriptClick}
-              title="🧪 Testeur de Scripts - Automatiser les actions de jeu"
+              title={t('tooltip.scriptTester')}
             >
               <span className="btn-icon">🧪</span>
             </button>
@@ -604,7 +642,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
           {rightPanelContent === 'script' && (
             <div className="panel-content script-panel">
               <div className="panel-header">
-                <h3>🧪 Script Tester</h3>
+                <h3>🧪 {t('tooltip.scriptTester')}</h3>
                 <button 
                   className="close-panel-btn"
                   onClick={() => setRightPanelContent('scenario')}
