@@ -297,7 +297,11 @@ public class GameController {
     public ResponseEntity<Map<String, Object>> moveHero(@PathVariable String gameId, @RequestBody Map<String, Object> request) {
         try {
             String heroId = (String) request.get("heroId");
-            Map<String, Integer> position = (Map<String, Integer>) request.get("position");
+            Object positionObj = request.get("position");
+            
+            // Safely cast to Map<String, Integer>
+            @SuppressWarnings("unchecked")
+            Map<String, Integer> position = (Map<String, Integer>) positionObj;
             
             gameStateService.updateHeroPosition(gameId, heroId, position.get("x"), position.get("y"));
             

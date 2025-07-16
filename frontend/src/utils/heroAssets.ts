@@ -2,12 +2,12 @@
 // Désormais utilise le système d'assets unifié
 // Migration depuis le système fragmenté vers unifiedAssets.ts
 
+import { assetService } from '../services/assetService';
 import { 
-  assetService, 
-  getHeroAsset, 
-  type HeroName, 
-  type AssetInfo 
-} from '../services/assetService';
+  getHeroAsset,
+  type HeroName,
+  type AssetInfo
+} from '../constants/unifiedAssets';
 
 // ===== SYSTÈME MIGRÉ - UTILISE UNIFIED ASSETS =====
 
@@ -120,8 +120,11 @@ export function clearHeroCache(): void {
 // Export du service pour utilisation avancée
 export { assetService } from '../services/assetService';
 
+// Export getHeroAsset for components that need it
+export { getHeroAsset } from '../constants/unifiedAssets';
+
 // Export des types
-export type { HeroName, AssetInfo } from '../services/assetService';
+export type { HeroName, AssetInfo } from '../constants/unifiedAssets';
 
 // ===== ANCIENNE INTERFACE (DÉPRÉCIÉE) =====
 // Conservée pour compatibilité, mais redirige vers le nouveau système

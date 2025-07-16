@@ -3,7 +3,7 @@ import { GameState, Game, Player, Tile, Position, Hero, GameAction, CombatResult
 import { MagicItemService, EquippedItems } from '../services/magicItemService';
 import { ZFCService } from '../services/zfcService';
 import { GameService } from '../services/gameService';
-import { ApiService } from '../services/api'; // Corrected import path
+import { ApiService } from '../services/api';
 
 interface GameStore extends GameState {
   // Map state
@@ -21,6 +21,12 @@ interface GameStore extends GameState {
   // NEW: Magic Item State
   playerInventory: string[];
   equippedItems: { [heroId: string]: EquippedItems };
+  
+  // ZFC State
+  visibleZFCs: ZoneOfCausality[];
+  shadowActions: ShadowAction[];
+  timelineActions: TimelineAction[];
+  lockedZones: Position[];
   
   // Actions
   setCurrentGame: (game: Game) => void;
@@ -100,6 +106,7 @@ const initialState = {
   // vision handled per tile flags
   
   shadowActions: [],
+  timelineActions: [],
   visibleZFCs: [],
   lockedZones: [],
   politicalAdvisors: [],
@@ -121,7 +128,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
   // Helper function to convert flat tiles array to 2D array
   convertTilesToMap: (tiles: any[], width: number, height: number): Tile[][] => {
-    console.log('🗺️ convertTilesToMap: Converting', tiles.length, 'tiles to', width, 'x', height, 'map');
+    
     
     const map: Tile[][] = [];
     for (let y = 0; y < height; y++) {
@@ -137,11 +144,11 @@ export const useGameStore = create<GameStore>((set, get) => ({
             terrain: tile.terrain || 'grass',
             walkable: tile.walkable !== undefined ? tile.walkable : true,
             movementCost: tile.movementCost || 1,
-            hero: tile.hero || null,
-            creature: tile.creature || null,
-            structure: tile.structure || null,
-            isVisible: tile.isVisible !== undefined ? tile.isVisible : false,
-            isExplored: tile.isExplored !== undefined ? tile.isExplored : false
+            hero: tile.hero || undefined,
+            creature: tile.creature || undefined,
+            structure: tile.structure || undefined,
+            visible: tile.visible !== undefined ? tile.visible : false,
+            explored: tile.explored !== undefined ? tile.explored : false
           });
         } else {
           // Default tile if missing
@@ -151,11 +158,11 @@ export const useGameStore = create<GameStore>((set, get) => ({
             terrain: 'grass',
             walkable: true,
             movementCost: 1,
-            hero: null,
-            creature: null,
-            structure: null,
-            isVisible: false,
-            isExplored: false
+            hero: undefined,
+            creature: undefined,
+            structure: undefined,
+            visible: false,
+            explored: false
           });
         }
       }
@@ -288,7 +295,18 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
   // State setters
   setCurrentGame: (game) => set({ currentGame: game }),
-  setCurrentPlayer: (player) => set({ currentPlayer: player }),
+  setCurrentPlayer: (player) => {
+    console.log('🔄 setCurrentPlayer: Setting new current player:', player?.id);
+    set({ currentPlayer: player });
+    
+    // Update vision for the new current player
+    if (player?.id) {
+      console.log('🔄 setCurrentPlayer: Updating vision for new current player:', player.id);
+      setTimeout(() => {
+        get().updateVision(player.id);
+      }, 50); // Small delay to ensure state is updated
+    }
+  },
   setMap: (map) => {
     console.log('🗺️ setMap: Setting new map with', map.length, 'rows');
     set({ map });
@@ -327,47 +345,83 @@ export const useGameStore = create<GameStore>((set, get) => ({
       console.log('🔍 updateVision: No game or map data');
       return;
     }
+    
     const player = currentGame.players.find(p => p.id === playerId);
     if (!player) {
       console.log('🔍 updateVision: Player not found:', playerId);
       return;
     }
 
+    if (!player.heroes || player.heroes.length === 0) {
+      console.log('🔍 updateVision: No heroes found for player:', playerId);
+      return;
+    }
+
     console.log('🔍 updateVision: Updating vision for player:', playerId, 'with heroes:', player.heroes.length);
 
-    const visibilityRadius = 4;
+    // Increased vision radius for better gameplay
+    const visibilityRadius = 6;
+    const explorationRadius = 8;
 
-    // Clone map to avoid mutating directly
-    const newMap = map.map(row => row.map(tile => ({ ...tile, isVisible: false })));
+    // Clone map to avoid mutating directly, preserving previously explored tiles
+    const newMap = map.map(row => row.map(tile => ({ 
+      ...tile, 
+      visible: tile.explored || false // Keep explored tiles visible
+    })));
 
     let visibleTilesCount = 0;
+    let exploredTilesCount = 0;
+    let processedHeroes = 0;
+    
     player.heroes.forEach(hero => {
       if (!hero.position) {
         console.log('🔍 updateVision: Hero has no position:', hero.name);
         return;
       }
       
+      processedHeroes++;
       console.log('🔍 updateVision: Processing hero:', hero.name, 'at position:', hero.position);
       
-      for (let y = -visibilityRadius; y <= visibilityRadius; y++) {
-        for (let x = -visibilityRadius; x <= visibilityRadius; x++) {
+      // Check if hero position is within map bounds
+      if (hero.position.y < 0 || hero.position.y >= newMap.length || 
+          hero.position.x < 0 || hero.position.x >= newMap[0].length) {
+        console.warn('🔍 updateVision: Hero position out of bounds:', hero.position);
+        return;
+      }
+      
+      // Larger exploration radius for discovered areas
+      for (let y = -explorationRadius; y <= explorationRadius; y++) {
+        for (let x = -explorationRadius; x <= explorationRadius; x++) {
           const tx = hero.position.x + x;
           const ty = hero.position.y + y;
+    
           if (ty >= 0 && ty < newMap.length && tx >= 0 && tx < newMap[ty].length) {
             const dist = Math.abs(x) + Math.abs(y);
+            const tile = newMap[ty][tx];
+            
             if (dist <= visibilityRadius) {
-              const t = newMap[ty][tx];
-              t.isVisible = true;
-              t.isExplored = true;
+              // Close tiles are fully visible
+              tile.visible = true;
+              tile.explored = true;
               visibleTilesCount++;
+            } else if (dist <= explorationRadius) {
+              // Farther tiles are explored but not currently visible
+              tile.explored = true;
+              exploredTilesCount++;
             }
           }
         }
       }
     });
 
-    console.log('🔍 updateVision: Made', visibleTilesCount, 'tiles visible');
-    set({ map: newMap });
+    console.log('🔍 updateVision: Processed', processedHeroes, 'heroes, made', visibleTilesCount, 'tiles visible,', exploredTilesCount, 'tiles explored');
+    
+    // Only update the map if we processed at least one hero
+    if (processedHeroes > 0) {
+      set({ map: newMap });
+    } else {
+      console.warn('🔍 updateVision: No heroes processed, keeping existing map');
+    }
   },
   
   calculateMovementRange: (hero) => {
@@ -421,17 +475,17 @@ export const useGameStore = create<GameStore>((set, get) => ({
   setError: (error) => set({ error }),
 
   // NOUVEAU: Actions ZFC (now using backend)
-  addTimelineAction: (action) => set((state) => ({
+  addTimelineAction: (action: TimelineAction) => set((state) => ({
     currentGame: state.currentGame ? {
       ...state.currentGame,
-      timeline: [...state.currentGame.timeline, action]
+      timeline: [...(state.currentGame.timeline || []), action]
     } : null
   })),
   
   updateTimelineAction: (actionId, status) => set((state) => ({
     currentGame: state.currentGame ? {
       ...state.currentGame,
-      timeline: state.currentGame.timeline.map(action =>
+      timeline: (state.currentGame.timeline || []).map(action =>
         action.id === actionId ? { ...action, status } : action
       )
     } : null
@@ -442,7 +496,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   setLockedZones: (zones) => set({ lockedZones: zones }),
 
   // NOUVEAU: Calcul de Zone de Causalité (now using backend)
-  calculateZFC: async (playerId: string, heroId: string) => {
+  calculateZFC: async (playerId: string, heroId: string): Promise<ZoneOfCausality> => {
     const { map, currentGame } = get();
     const hero = currentGame?.players
       .find(p => p.id === playerId)
@@ -450,15 +504,11 @@ export const useGameStore = create<GameStore>((set, get) => ({
     
     if (!hero || !map.length) {
       return {
-        playerId,
-        radius: 0,
+        id: `zfc-${playerId}-${heroId}`,
         center: { x: 0, y: 0 },
-        includesTeleport: false,
-        validUntil: 0,
-        reachableTiles: [],
-        conflictZones: [],
-        temporalStability: 0.5,
-        metadata: {}
+        radius: 0,
+        temporalStrength: 0.5,
+        affectedTiles: []
       };
     }
 
@@ -473,28 +523,25 @@ export const useGameStore = create<GameStore>((set, get) => ({
           terrain: tile.terrain,
           walkable: tile.walkable !== false,
           movementCost: tile.movementCost,
-          hero: tile.hero || null,
-          creature: tile.creature || null,
-          structure: tile.structure || null,
-          isVisible: tile.isVisible
+          hero: tile.hero || undefined,
+          creature: tile.creature || undefined,
+          structure: tile.structure || undefined,
+          visible: tile.visible,
+          explored: tile.explored
         })))
       };
 
-      const result = await ZFCService.calculateZFC(playerId, heroId, hero, gameMap, currentGame?.currentTurn || 1);
+      const result = await ZFCService.calculateZFC(playerId, heroId, hero, gameMap, currentGame?.turn || 1);
       
       // Extract the first ZFC zone from the result, or return a default one
       const zfcZone = result.zfc[0];
       if (zfcZone) {
         return {
-          playerId: zfcZone.playerId,
-          radius: zfcZone.radius,
+          id: `zfc-${zfcZone.playerId}-${zfcZone.heroId}`,
           center: zfcZone.center,
-          includesTeleport: false,
-          validUntil: zfcZone.validUntil,
-          reachableTiles: zfcZone.reachableTiles,
-          conflictZones: zfcZone.conflictZones,
-          temporalStability: zfcZone.temporalStability,
-          metadata: zfcZone.metadata
+          radius: zfcZone.radius,
+          temporalStrength: zfcZone.temporalStability || 0.5,
+          affectedTiles: zfcZone.reachableTiles || []
         };
       }
     } catch (error) {
@@ -502,37 +549,29 @@ export const useGameStore = create<GameStore>((set, get) => ({
     }
 
     return {
-      playerId,
-      radius: 0,
+      id: `zfc-${playerId}-${heroId}`,
       center: { x: 0, y: 0 },
-      includesTeleport: false,
-      validUntil: 0,
-      reachableTiles: [],
-      conflictZones: [],
-      temporalStability: 0.5,
-      metadata: {}
+      radius: 0,
+      temporalStrength: 0.5,
+      affectedTiles: []
     };
   },
 
   validateAction: async (actionId: string) => {
     const { currentGame } = get();
-    if (!currentGame) return false;
+    if (!currentGame || !currentGame.timeline) return false;
 
     const action = currentGame.timeline.find(a => a.id === actionId);
     if (!action) return false;
 
     try {
-      const actionData = action.action;
       const zfcMap = ZFCService.convertGameTilesToZFCTiles(get().map);
       
       // Extract target position from action
-      let targetPosition = { x: 0, y: 0 };
-      if (actionData.targetPosition) {
-        targetPosition = actionData.targetPosition;
-      }
+      const targetPosition = action.targetPosition || { x: 0, y: 0 };
       
       // Validate using backend
-      if (!actionData.heroId) {
+      if (!action.heroId) {
         return false;
       }
       
@@ -543,8 +582,8 @@ export const useGameStore = create<GameStore>((set, get) => ({
       };
       
       const isValid = await ZFCService.validateZFCAction(
-        actionData.type,
-        actionData.heroId,
+        action.type,
+        action.heroId,
         targetPosition,
         [], // ZFC zones - we'll need to convert or get from backend
         gameMapForValidation
@@ -621,17 +660,11 @@ export const useGameStore = create<GameStore>((set, get) => ({
       
       const timelineAction: TimelineAction = {
         id: `action_${Date.now()}`,
-        turn: currentGame.currentTurn,
-        playerId: currentPlayer.id,
-        action: {
-          type: 'attack',
-          heroId,
-          targetId
-        },
-        status: 'PENDING',
-        zfc,
-        originTimestamp: new Date().toISOString(),
-        shadowVisible: true
+        type: 'attack',
+        heroId,
+        targetPosition: undefined,
+        timestamp: Date.now(),
+        status: 'PENDING'
       };
 
       addTimelineAction(timelineAction);
@@ -659,17 +692,11 @@ export const useGameStore = create<GameStore>((set, get) => ({
       
       const timelineAction: TimelineAction = {
         id: `action_${Date.now()}`,
-        turn: currentGame.currentTurn,
-        playerId: currentPlayer.id,
-        action: {
-          type: 'collect',
-          heroId,
-          targetId: objectId
-        },
-        status: 'PENDING',
-        zfc,
-        originTimestamp: new Date().toISOString(),
-        shadowVisible: true
+        type: 'collect',
+        heroId,
+        targetPosition: undefined,
+        timestamp: Date.now(),
+        status: 'PENDING'
       };
 
       addTimelineAction(timelineAction);
@@ -701,6 +728,164 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
   // Game state management
   resetGame: () => set(initialState),
+  
+  loadGame: async (gameId: string) => {
+    const { setLoading, setError, setCurrentGame, setCurrentPlayer, setMap, convertTilesToMap } = get();
+    setLoading(true);
+    setError(null);
+
+    try {
+      const gameData = await GameService.initializeGame(gameId);
+      console.log('🎮 loadGame: Game data loaded:', gameData);
+      
+      if (gameData.currentGame) {
+        setCurrentGame(gameData.currentGame);
+        
+        // Set current player (should be the first player initially)
+        const currentPlayer = gameData.currentGame.players.find(p => p.id === gameData.currentGame?.currentPlayerId) || gameData.currentGame.players[0];
+        setCurrentPlayer(currentPlayer);
+        
+        // Convert and set map - use fixed map size for now
+        const mapWidth = 20;
+        const mapHeight = 20;
+        const map = convertTilesToMap(gameData.currentGame.map, mapWidth, mapHeight);
+        setMap(map);
+        
+        // Initialize magic item system with demo items
+        get().addItemToInventory('sword_of_might');
+        get().addItemToInventory('shield_of_protection');
+        get().addItemToInventory('ring_of_wisdom');
+        get().addItemToInventory('healing_potion');
+        get().addItemToInventory('mana_crystal');
+        
+        console.log('✅ loadGame: Game loaded successfully');
+      } else {
+        throw new Error('Failed to load game data');
+      }
+    } catch (error) {
+      console.error('❌ loadGame: Error loading game:', error);
+      setError(error instanceof Error ? error.message : 'Failed to load game');
+    } finally {
+      setLoading(false);
+    }
+  },
+  
+  refreshGameState: async () => {
+    const { currentGame, setCurrentGame, setCurrentPlayer, setMap, convertTilesToMap } = get();
+    if (!currentGame) return;
+
+    try {
+      const gameData = await GameService.getGameState(currentGame.id);
+      console.log('🔄 refreshGameState: Game state refreshed:', gameData);
+      
+      if (gameData.currentGame) {
+        setCurrentGame(gameData.currentGame);
+        
+        // Update current player
+        const currentPlayer = gameData.currentGame.players.find(p => p.id === gameData.currentGame?.currentPlayerId) || gameData.currentGame.players[0];
+        setCurrentPlayer(currentPlayer);
+        
+        // Update map - use fixed map size for now
+        const mapWidth = 20;
+        const mapHeight = 20;
+        const map = convertTilesToMap(gameData.currentGame.map, mapWidth, mapHeight);
+        setMap(map);
+      }
+    } catch (error) {
+      console.error('❌ refreshGameState: Error refreshing game state:', error);
+    }
+  },
+  
+  endTurn: async () => {
+    const { currentGame, currentPlayer, setLoading, setError, refreshGameState } = get();
+    if (!currentGame || !currentPlayer) return;
+
+    console.log('⭐ endTurn: Ending turn for player:', currentPlayer.id);
+    setLoading(true);
+    setError(null);
+
+    try {
+      // Clear any selected hero and movement state
+      get().selectHero(null);
+      
+      if (currentGame.gameMode === 'hotseat') {
+        // In hotseat mode, switch to next player locally
+        console.log('🔄 endTurn: Hotseat mode - switching to next player');
+        get().nextPlayer();
+      } else {
+        // In multiplayer mode, call backend API
+        console.log('📡 endTurn: Multiplayer mode - calling backend API');
+        const result = await ApiService.endTurn(currentGame.id, currentPlayer.id);
+        
+        if (result.success) {
+          console.log('✅ endTurn: Turn ended successfully');
+          // Refresh game state to get updated turn info
+          await refreshGameState();
+        } else {
+          throw new Error(result.message || 'Failed to end turn');
+        }
+      }
+    } catch (error) {
+      console.error('❌ endTurn: Error ending turn:', error);
+      setError(error instanceof Error ? error.message : 'Failed to end turn');
+    } finally {
+      setLoading(false);
+    }
+  },
+  
+  // Enhanced Hot Seat mode with proper player switching
+  switchPlayer: (playerId: string) => {
+    const { currentGame, setCurrentPlayer, updateVision } = get();
+    if (!currentGame) return;
+
+    console.log('🔄 switchPlayer: Switching to player:', playerId);
+    
+    const newPlayer = currentGame.players.find(p => p.id === playerId);
+    if (!newPlayer) {
+      console.error('❌ switchPlayer: Player not found:', playerId);
+      return;
+    }
+
+    // Clear any selected hero and movement state
+    get().selectHero(null);
+    
+    // Update current player
+    setCurrentPlayer(newPlayer);
+    
+    // Update game's current player ID
+    const updatedGame = { ...currentGame, currentPlayerId: playerId };
+    get().setCurrentGame(updatedGame);
+    
+    // Update vision for the new player
+    setTimeout(() => {
+      updateVision(playerId);
+    }, 50);
+    
+    console.log('✅ switchPlayer: Player switched successfully to:', newPlayer.name);
+  },
+  
+  nextPlayer: () => {
+    const { currentGame, currentPlayer } = get();
+    if (!currentGame || !currentPlayer) return;
+
+    console.log('➡️ nextPlayer: Finding next player after:', currentPlayer.id);
+    
+    const currentIndex = currentGame.players.findIndex(p => p.id === currentPlayer.id);
+    const nextIndex = (currentIndex + 1) % currentGame.players.length;
+    const nextPlayer = currentGame.players[nextIndex];
+    
+    console.log('➡️ nextPlayer: Next player will be:', nextPlayer.id, 'at index:', nextIndex);
+    
+    // Switch to the next player
+    get().switchPlayer(nextPlayer.id);
+    
+    // Update the game's turn number if we've completed a full cycle
+    if (nextIndex === 0) {
+      const updatedGame = { ...currentGame, turn: currentGame.turn + 1 };
+      get().setCurrentGame(updatedGame);
+      console.log('🔄 nextPlayer: Turn incremented to:', updatedGame.turn);
+    }
+  },
 
   // New function to reset a specific game session
   resetGameSession: (scenarioId: string) => {
@@ -708,217 +893,5 @@ export const useGameStore = create<GameStore>((set, get) => ({
     localStorage.removeItem(sessionKey);
     console.log(`%c🔄 [GameStore] Game session reset for scenario: ${scenarioId}`, 'color: orange');
     set(initialState);
-  },
-
-  loadGame: async (scenarioId: string) => {
-    console.log(`%c🎮 [GameStore] loadGame called with scenarioId: "${scenarioId}"`, 'color: purple; font-weight: bold');
-    
-    // IMPORTANT: Always reset state completely before loading a new game
-    const { setLoading, setError, setCurrentGame, setCurrentPlayer, setMap } = get();
-    
-    // Reset everything to initial state
-    set(initialState);
-    
-    // Now set loading true after reset
-    setLoading(true);
-
-    try {
-      // Generate a persistent game ID based on scenario and session
-      // This allows the backend to reuse existing games
-      let persistentGameId = scenarioId;
-      
-      // For non-multiplayer scenarios, use a session-based ID
-      if (!scenarioId.includes('session-') && !scenarioId.includes('multiplayer-')) {
-        // Try to get existing session ID from localStorage
-        const sessionKey = `heroesOfTime_session_${scenarioId}`;
-        let sessionId = localStorage.getItem(sessionKey);
-        
-        if (!sessionId) {
-          // Create a new session ID
-          sessionId = `${scenarioId}_session_${Date.now()}`;
-          localStorage.setItem(sessionKey, sessionId);
-          console.log(`%c🆕 [GameStore] Created new session ID: ${sessionId}`, 'color: green');
-        } else {
-          console.log(`%c🔄 [GameStore] Using existing session ID: ${sessionId}`, 'color: blue');
-        }
-        
-        persistentGameId = sessionId;
-      }
-
-      // Check if this is a multiplayer session that already exists
-      if (scenarioId.includes('session-') || scenarioId.includes('multiplayer-')) {
-        console.log(`%c🔄 [GameStore] Checking for existing multiplayer session: ${scenarioId}`, 'color: blue');
-        try {
-          // Try to get existing session from backend
-          const existingSession = await ApiService.getMultiplayerSession(scenarioId);
-          if (existingSession && existingSession.status === 'ACTIVE') {
-            console.log(`%c🎮 [GameStore] Found existing active session, loading game state...`, 'color: green');
-            const gameState = await GameService.getGameState(scenarioId);
-            
-            if (gameState.currentGame) {
-              setCurrentGame(gameState.currentGame);
-              if (gameState.currentGame.map && gameState.currentGame.map.tiles) {
-                const mapData = get().convertTilesToMap(
-                  gameState.currentGame.map.tiles, 
-                  gameState.currentGame.map.width, 
-                  gameState.currentGame.map.height
-                );
-                setMap(mapData);
-              }
-            }
-            if (gameState.currentPlayer) {
-              setCurrentPlayer(gameState.currentPlayer);
-            }
-            
-            console.log(`%c🎉 [GameStore] loadGame completed from existing session!`, 'color: green; font-weight: bold');
-            return;
-          }
-        } catch (error) {
-          console.log(`%c⚠️ [GameStore] No existing session found, creating new game...`, 'color: orange');
-        }
-      }
-
-      console.log(`%c📡 [GameStore] About to call API for persistent game ID: ${persistentGameId}`, 'color: blue');
-      // Use GameService to initialize the game with persistent ID
-      const gameState = await GameService.initializeGame(persistentGameId);
-      console.log('%c[DEBUG] Backend response from initializeGame:', 'color: orange; font-weight: bold', gameState);
-      
-      // Set the game state in the store
-      if (gameState.currentGame) {
-        setCurrentGame(gameState.currentGame);
-        console.log('%c[DEBUG] setCurrentGame:', 'color: orange', gameState.currentGame);
-        // Convert tiles to map format
-        if (gameState.currentGame.map && gameState.currentGame.map.tiles) {
-          const mapData = get().convertTilesToMap(
-            gameState.currentGame.map.tiles, 
-            gameState.currentGame.map.width, 
-            gameState.currentGame.map.height
-          );
-          setMap(mapData);
-          console.log('%c[DEBUG] setMap:', 'color: orange', mapData);
-          console.log('%c[DEBUG] Map dimensions:', 'color: orange', {
-            width: gameState.currentGame.map.width,
-            height: gameState.currentGame.map.height,
-            tilesLength: gameState.currentGame.map.tiles.length,
-            mapRows: mapData.length,
-            mapCols: mapData[0]?.length || 0
-          });
-        } else {
-          console.warn('[DEBUG] No map or tiles in currentGame!');
-        }
-      } else {
-        console.warn('[DEBUG] No currentGame in gameState!');
-      }
-      if (gameState.currentPlayer) {
-        setCurrentPlayer(gameState.currentPlayer);
-        console.log('%c[DEBUG] setCurrentPlayer:', 'color: orange', gameState.currentPlayer);
-      } else {
-        console.warn('[DEBUG] No currentPlayer in gameState!');
-      }
-      
-      // Print final state
-      const finalState = get();
-      console.log('%c[DEBUG] Final store state after loadGame:', 'color: orange; font-weight: bold', {
-        currentGame: finalState.currentGame,
-        currentPlayer: finalState.currentPlayer,
-        map: finalState.map,
-        isLoading: finalState.isLoading,
-        error: finalState.error
-      });
-      console.log(`%c🎉 [GameStore] loadGame completed successfully!`, 'color: green; font-weight: bold');
-    } catch (error) {
-      console.error(`%c💥 [GameStore] loadGame failed:`, 'color: red; font-weight: bold');
-      console.error(`%c   Scenario ID: ${scenarioId}`, 'color: red');
-      console.error(`%c   Error:`, 'color: red', error);
-      setError(error instanceof Error ? error.message : 'Failed to load game');
-    } finally {
-      setLoading(false);
-    }
-  },
-
-  refreshGameState: async () => {
-    const { currentGame, setLoading, setError, setCurrentGame, setCurrentPlayer, setMap } = get();
-    if (!currentGame) return;
-
-    setLoading(true);
-    setError(null);
-
-    try {
-      const gameState = await GameService.getGameState(currentGame.id);
-      
-      if (gameState.currentGame) {
-        setCurrentGame(gameState.currentGame);
-        // Update the map state when refreshing
-        if (gameState.currentGame.map && gameState.currentGame.map.tiles) {
-          setMap(get().convertTilesToMap(gameState.currentGame.map.tiles, gameState.currentGame.map.width, gameState.currentGame.map.height));
-        }
-      }
-      if (gameState.currentPlayer) {
-        setCurrentPlayer(gameState.currentPlayer);
-      }
-      
-    } catch (error) {
-      setError(error instanceof Error ? error.message : 'Failed to refresh game state');
-    } finally {
-      setLoading(false);
-    }
-  },
-
-  endTurn: async () => {
-    const { currentGame, currentPlayer, setLoading, setError, refreshGameState } = get();
-    if (!currentGame || !currentPlayer) return;
-
-    // Check game mode and handle accordingly
-    if (currentGame.gameMode === 'hotseat') {
-      // Mode hotseat - gestion locale frontend
-      get().nextPlayer();
-    } else {
-      // Mode multiplayer - appel API backend
-      setLoading(true);
-      setError(null);
-
-      try {
-        await GameService.endTurn(currentGame.id, currentPlayer.id);
-        await refreshGameState();
-      } catch (error) {
-        setError(error instanceof Error ? error.message : 'Failed to end turn');
-      } finally {
-        setLoading(false);
-      }
-    }
-  },
-
-  // Hot Seat mode
-  switchPlayer: (playerId: string) => {
-    const { currentGame, setCurrentPlayer } = get();
-    if (!currentGame) return;
-
-    const player = currentGame.players.find(p => p.id === playerId);
-    if (player) {
-      setCurrentPlayer(player);
-    }
-  },
-
-  nextPlayer: () => {
-    const { currentGame, currentPlayer, switchPlayer, setCurrentGame } = get();
-    if (!currentGame || !currentPlayer) return;
-
-    const currentIndex = currentGame.players.findIndex(p => p.id === currentPlayer.id);
-    const nextIndex = (currentIndex + 1) % currentGame.players.length;
-    const nextPlayer = currentGame.players[nextIndex];
-    
-    if (nextPlayer) {
-      switchPlayer(nextPlayer.id);
-      
-      // Incrémenter le tour si on revient au premier joueur
-      if (nextIndex === 0) {
-        const updatedGame = {
-          ...currentGame,
-          currentTurn: currentGame.currentTurn + 1
-        };
-        setCurrentGame(updatedGame);
-        console.log('✅ Turn incremented to:', updatedGame.currentTurn);
-      }
-    }
   }
 })); 

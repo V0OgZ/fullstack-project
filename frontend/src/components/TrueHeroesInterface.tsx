@@ -1,14 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useTranslation } from '../i18n';
 import { useGameStore } from '../store/useGameStore';
+import { useTranslation } from '../i18n';
 import ModernGameRenderer, { ModernGameRendererRef } from './ModernGameRenderer';
 import CastleManagementPanel from './CastleManagementPanel';
+import UnitRecruitment from './UnitRecruitment';
+import MagicInventory from './MagicInventory';
+import PerformanceDashboard from './PerformanceDashboard';
+import PoliticalAdvisorPanel from './PoliticalAdvisorPanel';
+import ZFCVisualizer from './ZFCVisualizer';
+import ActionPlanner from './ActionPlanner';
+import TimelineViewer from './TimelineViewer';
+import LanguageSelector from './LanguageSelector';
+import HeroDisplay from './HeroDisplay';
+import UnitDisplay from './UnitDisplay';
+import CreditsModal from './CreditsModal';
 import EpicContentViewer from './EpicContentViewer';
+import { Hero, Unit, Player, Position, Tile, Game } from '../types/game';
+import { GAME_ICONS } from '../constants/gameIcons';
 import { getHeroAsset, getHeroInfo } from '../utils/heroAssets';
-import { Position } from '../types/game';
-import './TrueHeroesInterface.css';
 import { assetService } from '../services/assetService';
 import { heroSpriteService } from '../services/heroSpriteService';
+import './TrueHeroesInterface.css';
 
 interface TrueHeroesInterfaceProps {
   playerCount: number;
@@ -30,7 +42,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
   const [selectedHeroId, setSelectedHeroId] = useState<string | null>(null);
   const [rightPanelContent, setRightPanelContent] = useState<'scenario' | 'hero' | 'castle'>('scenario');
   const [showEpicContent, setShowEpicContent] = useState(false);
-  const mapRendererRef = useRef<ModernGameRendererRef>(null);
+  const mapRendererRef = React.useRef<any>(null); // Changed to any as ModernGameRendererRef is removed
 
   // Fonction pour sélectionner un héros (gardée pour compatibilité future)
   // const handleHeroSelect = (heroId: string | null) => {
@@ -154,14 +166,10 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
         try {
           // Utiliser le nouveau service unifié
           const portraitInfo = heroSpriteService.getHeroPortrait(heroName);
-          const image = await heroSpriteService.loadHeroPortrait(heroName);
+          await heroSpriteService.loadHeroPortrait(heroName);
           
           if (isMounted) {
-            setPortrait({
-              url: portraitInfo.path,
-              fallback: portraitInfo.fallback,
-              type: 'local'
-            });
+            setPortrait(portraitInfo);
           }
         } catch (error) {
           console.error('❌ Error loading hero portrait:', error);
@@ -269,7 +277,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
             )}
           </div>
           <div className="player-info">
-            <span className="player-name">{currentPlayer.username}</span>
+            <span className="player-name">{currentPlayer.name}</span>
             <div className="resources">
               <span className="gold">💰 {currentPlayer.resources?.gold || 0}</span>
               <span className="wood">🪵 {currentPlayer.resources?.wood || 0}</span>
@@ -368,15 +376,15 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
                 <div className="game-info">
                   <div className="info-item">
                     <span className="info-label">🎯 Turn:</span>
-                    <span className="info-value">{currentGame?.currentTurn || 1}</span>
+                    <span className="info-value">{currentGame?.turn || 1}</span>
                   </div>
                   <div className="info-item">
                     <span className="info-label">👑 Current Player:</span>
-                    <span className="info-value">{currentPlayer?.username}</span>
+                    <span className="info-value">{currentPlayer?.name}</span>
                   </div>
                   <div className="info-item">
                     <span className="info-label">🌍 Map Size:</span>
-                    <span className="info-value">{currentGame?.map?.width || 20}x{currentGame?.map?.height || 20}</span>
+                    <span className="info-value">{currentGame?.map?.[0]?.length || 20}x{currentGame?.map?.length || 20}</span>
                   </div>
                   <div className="info-item">
                     <span className="info-label">⚔️ Game Mode:</span>
@@ -413,14 +421,14 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
                     <div className="stat-card">
                       <div className="stat-icon">🏰</div>
                       <div className="stat-info">
-                        <div className="stat-number">{currentGame?.map?.objects?.filter(obj => obj.type === 'city').length || 1}</div>
+                        <div className="stat-number">{currentGame?.players?.reduce((acc, p) => acc + (p.castles?.length || 0), 0) || 1}</div>
                         <div className="stat-label">Castles</div>
                       </div>
                     </div>
                     <div className="stat-card">
                       <div className="stat-icon">🗺️</div>
                       <div className="stat-info">
-                        <div className="stat-number">{currentGame?.map?.tiles?.length || 400}</div>
+                        <div className="stat-number">{currentGame?.map ? currentGame.map.length * (currentGame.map[0]?.length || 0) : 400}</div>
                         <div className="stat-label">Tiles</div>
                       </div>
                     </div>
@@ -471,57 +479,58 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ scenarioId, s
                   </div>
                 </div>
                 
-                <div className="hero-stats">
-                  <div className="stat-row">
-                    <div className="stat-item">
-                      <span className="stat-label">⚔️ Attack:</span>
-                      <span className="stat-value">{selectedHero.stats?.attack || 0}</span>
+                {selectedHero && (
+                  <div className="hero-details">
+                    <div className="hero-info">
+                      <h4>{selectedHero.name}</h4>
+                      <p>Class: {selectedHero.class}</p>
+                      <p>Level: {selectedHero.level}</p>
+                      <p>Experience: {selectedHero.experience}</p>
+                      <p>Movement: {selectedHero.movementPoints}/{selectedHero.maxMovementPoints}</p>
+                      <p>Health: {selectedHero.health}/{selectedHero.maxHealth}</p>
+                      <p>Mana: {selectedHero.mana}/{selectedHero.maxMana}</p>
                     </div>
-                    <div className="stat-item">
-                      <span className="stat-label">🛡️ Defense:</span>
-                      <span className="stat-value">{selectedHero.stats?.defense || 0}</span>
+                    <div className="hero-stats">
+                      <div className="stat-item">
+                        <span className="stat-label">Attack:</span>
+                        <span className="stat-value">{selectedHero.attack}</span>
+                      </div>
+                      <div className="stat-item">
+                        <span className="stat-label">Defense:</span>
+                        <span className="stat-value">{selectedHero.defense}</span>
+                      </div>
+                      <div className="stat-item">
+                        <span className="stat-label">Spell Power:</span>
+                        <span className="stat-value">{selectedHero.spellPower}</span>
+                      </div>
+                      <div className="stat-item">
+                        <span className="stat-label">Knowledge:</span>
+                        <span className="stat-value">{selectedHero.knowledge}</span>
+                      </div>
+                      <div className="stat-item">
+                        <span className="stat-label">Morale:</span>
+                        <span className="stat-value">{selectedHero.morale}</span>
+                      </div>
+                      <div className="stat-item">
+                        <span className="stat-label">Luck:</span>
+                        <span className="stat-value">{selectedHero.luck}</span>
+                      </div>
                     </div>
-                  </div>
-                  <div className="stat-row">
-                    <div className="stat-item">
-                      <span className="stat-label">🔮 Spell Power:</span>
-                      <span className="stat-value">{selectedHero.stats?.spellPower || 0}</span>
+                    <div className="hero-skills">
+                      <h5>Skills</h5>
+                      <div className="skills-list">
+                        {selectedHero.skills.map((skill, index) => (
+                          <span key={index} className="skill-item">{skill.name}</span>
+                        ))}
+                      </div>
                     </div>
-                    <div className="stat-item">
-                      <span className="stat-label">📚 Knowledge:</span>
-                      <span className="stat-value">{selectedHero.stats?.knowledge || 0}</span>
-                    </div>
-                  </div>
-                  <div className="stat-row">
-                    <div className="stat-item">
-                      <span className="stat-label">❤️ Health:</span>
-                      <span className="stat-value">{selectedHero.stats?.health || 100}</span>
-                    </div>
-                    <div className="stat-item">
-                      <span className="stat-label">💙 Mana:</span>
-                      <span className="stat-value">{selectedHero.stats?.mana || 20}</span>
-                    </div>
-                  </div>
-                </div>
-                
-                {selectedHero.skills && selectedHero.skills.length > 0 && (
-                  <div className="hero-skills">
-                    <h4>🎯 Skills:</h4>
-                    <div className="skills-list">
-                      {selectedHero.skills.map((skill, index) => (
-                        <span key={index} className="skill-badge">{skill}</span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-                
-                {selectedHero.spells && selectedHero.spells.length > 0 && (
-                  <div className="hero-spells">
-                    <h4>✨ Spells:</h4>
-                    <div className="spells-list">
-                      {selectedHero.spells.map((spell, index) => (
-                        <span key={index} className="spell-badge">{spell}</span>
-                      ))}
+                    <div className="hero-spells">
+                      <h5>Spells</h5>
+                      <div className="spells-list">
+                        {selectedHero.spells.map((spell, index) => (
+                          <span key={index} className="spell-item">{spell.name}</span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 )}

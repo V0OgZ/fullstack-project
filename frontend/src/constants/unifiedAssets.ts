@@ -318,10 +318,7 @@ export const UI_ICONS = {
   END_TURN: '⏭️',
   SAVE: '💾',
   LOAD: '📂',
-  NEW_GAME: '🎮',
-  SETTINGS: '⚙️',
-  HELP: '❓',
-  CLOSE: '✕'
+  NEW_GAME: '🎮'
 } as const;
 
 // ===== FONCTIONS D'ACCÈS UNIFIÉES =====

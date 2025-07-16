@@ -51,13 +51,13 @@ const SimpleGameInterface: React.FC<SimpleGameInterfaceProps> = ({ scenarioId = 
         class: 'Warrior', // Default class since it's not in Hero type
         level: hero.level || 1,
         position: hero.position || { x: 0, y: 0 },
-        stats: hero.stats || { attack: 10, defense: 10, spellPower: 5, knowledge: 5 },
+        stats: { attack: hero.attack || 10, defense: hero.defense || 10, spellPower: hero.spellPower || 5, knowledge: hero.knowledge || 5 },
         movementPoints: hero.movementPoints || 1000,
         maxMovementPoints: hero.maxMovementPoints || 1000,
-        attack: hero.stats?.attack || 10,
-        defense: hero.stats?.defense || 10,
-        spellPower: hero.stats?.spellPower || 5,
-        knowledge: hero.stats?.knowledge || 5
+        attack: hero.attack || 10,
+        defense: hero.defense || 10,
+        spellPower: hero.spellPower || 5,
+        knowledge: hero.knowledge || 5
       }));
     }
     
@@ -243,9 +243,9 @@ const SimpleGameInterface: React.FC<SimpleGameInterfaceProps> = ({ scenarioId = 
             color: '#b0b0b0', 
             fontSize: '14px' 
           }}>
-            <span>🎯 {t('turn')} {currentGame.currentTurn}</span>
+                          <span>🎯 {t('turn')} {currentGame.turn}</span>
             <span style={{ color: '#606060' }}>•</span>
-            <span>👤 {currentPlayer.username}</span>
+                            <span>👤 {currentPlayer.name}</span>
           </div>
         </div>
 

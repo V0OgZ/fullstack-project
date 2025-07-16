@@ -69,9 +69,9 @@ const SimpleModernInterface: React.FC = () => {
         <div className="header-left">
           <h1 className="game-title">Heroes of Time</h1>
           <div className="game-info">
-            <span>{t('turn')} {currentGame.currentTurn}</span>
+                          <span>{t('turn')} {currentGame.turn}</span>
             <span className="separator">•</span>
-            <span>{currentPlayer.username}</span>
+                          <span>{currentPlayer.name}</span>
           </div>
         </div>
 
@@ -177,7 +177,7 @@ const SimpleModernInterface: React.FC = () => {
                     </div>
                     <div className="stat">
                       <span className="stat-label">Unités:</span>
-                      <span className="stat-value">{hero.units.length}</span>
+                      <span className="stat-value">{hero.army.length}</span>
                     </div>
                   </div>
                 </div>

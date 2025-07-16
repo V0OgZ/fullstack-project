@@ -7,6 +7,7 @@ import { computeHexBitmask } from '../utils/hexBitmask';
 import { TERRAIN_EDGE_SPRITES } from '../constants/terrainSprites';
 import { heroSpriteService } from '../services/heroSpriteService';
 import { getPlayerColorConfig } from '../constants/playerColors';
+import { pathDotsService } from '../services/pathDotsService';
 
 interface ModernGameRendererProps {
   width: number;
@@ -56,6 +57,24 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     return useGameStore.getState().calculateMovementRange(heroClone);
   }, [selectedHero]);
   
+  // Initialize pathDotsService when canvas is ready
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (canvas) {
+      pathDotsService.initialize(canvas);
+    }
+  }, []);
+
+  // Show path dots when hero is selected and movement mode is active
+  useEffect(() => {
+    if (selectedHero && movementMode && selectedTile) {
+      pathDotsService.createHeroes3Path(selectedHero.id, selectedHero.position, selectedTile);
+      pathDotsService.animatePathDots(selectedHero.id);
+    } else if (selectedHero) {
+      pathDotsService.clearPathDots(selectedHero.id);
+    }
+  }, [selectedHero, selectedTile, movementMode]);
+
   // Handle tile clicks for hero selection and movement
   const handleTileClick = useCallback((position: Position) => {
     if (!map || map.length === 0 || !currentGame) return;
@@ -73,6 +92,10 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     
     // If we have a selected hero and are in movement mode, try to move
     if (selectedHero && movementMode && canMoveToPosition(selectedHero, position)) {
+      // Clear path dots before moving
+      pathDotsService.clearPathDots(selectedHero.id);
+      
+      // Move the hero
       moveHero(selectedHero.id, position);
       setSelectedTile(position);
       return;
@@ -713,7 +736,7 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     }
 
     // ---- Fog of War overlay (after all tile content) ----
-    if (!tile.isVisible) {
+    if (!tile.visible) {
       ctx.beginPath();
       for (let i = 0; i < 6; i++) {
         const angle = (Math.PI / 3) * i - Math.PI / 2;
@@ -723,7 +746,7 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
       }
       ctx.closePath();
 
-      ctx.fillStyle = tile.isExplored ? 'rgba(0,0,0,0.55)' : 'rgba(0,0,0,0.85)';
+      ctx.fillStyle = tile.explored ? 'rgba(0,0,0,0.55)' : 'rgba(0,0,0,0.85)';
       ctx.fill();
     }
   }, [config, drawStructure, drawCreature, drawHero, movementRange, movementMode, selectedHero, map, spriteCache, projectionRange]);
@@ -731,8 +754,8 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
   // Render ZFC zones
   const drawZFCZones = useCallback((ctx: CanvasRenderingContext2D) => {
     visibleZFCs.forEach(zfc => {
-      if (!zfc || !zfc.reachableTiles) return;
-      zfc.reachableTiles.forEach(tile => {
+      if (!zfc || !zfc.affectedTiles) return;
+      zfc.affectedTiles.forEach(tile => {
         if (!tile || typeof tile.x !== 'number' || typeof tile.y !== 'number') return;
         const center = hexToPixel(tile);
         

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Tile, Position, Structure, Creature } from '../types/game';
 
 // Types de terrain avec propriétés

@@ -1,124 +1,49 @@
 package com.example.demo.controller;
 
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.JsonNode;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.MediaType;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.util.StreamUtils;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 @RestController
 @RequestMapping("/api/epic")
 @CrossOrigin(origins = "*")
 public class EpicContentController {
-
-    private final ObjectMapper objectMapper = new ObjectMapper();
-
-    @GetMapping("/heroes")
-    public ResponseEntity<JsonNode> getEpicHeroes() {
+    
+    @GetMapping(value = "/heroes", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getAllHeroes() {
         try {
             ClassPathResource resource = new ClassPathResource("epic-heroes.json");
-            InputStream inputStream = resource.getInputStream();
-            JsonNode heroesData = objectMapper.readTree(inputStream);
-            return ResponseEntity.ok(heroesData);
+            String content = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
+            return ResponseEntity.ok(content);
         } catch (IOException e) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.internalServerError().body("{\"error\":\"Failed to load heroes: " + e.getMessage() + "\"}");
         }
     }
-
-    @GetMapping("/creatures")
-    public ResponseEntity<JsonNode> getEpicCreatures() {
+    
+    @GetMapping(value = "/creatures", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getAllCreatures() {
         try {
             ClassPathResource resource = new ClassPathResource("epic-creatures.json");
-            InputStream inputStream = resource.getInputStream();
-            JsonNode creaturesData = objectMapper.readTree(inputStream);
-            return ResponseEntity.ok(creaturesData);
+            String content = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
+            return ResponseEntity.ok(content);
         } catch (IOException e) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.internalServerError().body("{\"error\":\"Failed to load creatures: " + e.getMessage() + "\"}");
         }
     }
-
-    @GetMapping("/heroes/{id}")
-    public ResponseEntity<JsonNode> getHeroById(@PathVariable String id) {
-        try {
-            ClassPathResource resource = new ClassPathResource("epic-heroes.json");
-            InputStream inputStream = resource.getInputStream();
-            JsonNode heroesData = objectMapper.readTree(inputStream);
-            
-            for (JsonNode hero : heroesData.get("epic_heroes")) {
-                if (hero.get("id").asText().equals(id)) {
-                    return ResponseEntity.ok(hero);
-                }
-            }
-            
-            return ResponseEntity.notFound().build();
-        } catch (IOException e) {
-            return ResponseEntity.notFound().build();
-        }
+    
+    // TODO: Add individual hero/creature endpoints when needed
+    @GetMapping("/heroes/{heroId}")
+    public ResponseEntity<String> getHeroById(@PathVariable String heroId) {
+        return ResponseEntity.status(404).body("{\"error\":\"Individual hero endpoint not implemented yet\"}");
     }
-
-    @GetMapping("/creatures/{id}")
-    public ResponseEntity<JsonNode> getCreatureById(@PathVariable String id) {
-        try {
-            ClassPathResource resource = new ClassPathResource("epic-creatures.json");
-            InputStream inputStream = resource.getInputStream();
-            JsonNode creaturesData = objectMapper.readTree(inputStream);
-            
-            for (JsonNode creature : creaturesData.get("epic_creatures")) {
-                if (creature.get("id").asText().equals(id)) {
-                    return ResponseEntity.ok(creature);
-                }
-            }
-            
-            return ResponseEntity.notFound().build();
-        } catch (IOException e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @GetMapping("/heroes/race/{race}")
-    public ResponseEntity<JsonNode> getHeroesByRace(@PathVariable String race) {
-        try {
-            ClassPathResource resource = new ClassPathResource("epic-heroes.json");
-            InputStream inputStream = resource.getInputStream();
-            JsonNode heroesData = objectMapper.readTree(inputStream);
-            
-            JsonNode heroesArray = heroesData.get("epic_heroes");
-            JsonNode filteredHeroes = objectMapper.createArrayNode();
-            
-            for (JsonNode hero : heroesArray) {
-                if (hero.get("race").asText().equalsIgnoreCase(race)) {
-                    ((com.fasterxml.jackson.databind.node.ArrayNode) filteredHeroes).add(hero);
-                }
-            }
-            
-            return ResponseEntity.ok(filteredHeroes);
-        } catch (IOException e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @GetMapping("/creatures/race/{race}")
-    public ResponseEntity<JsonNode> getCreaturesByRace(@PathVariable String race) {
-        try {
-            ClassPathResource resource = new ClassPathResource("epic-creatures.json");
-            InputStream inputStream = resource.getInputStream();
-            JsonNode creaturesData = objectMapper.readTree(inputStream);
-            
-            JsonNode creaturesArray = creaturesData.get("epic_creatures");
-            JsonNode filteredCreatures = objectMapper.createArrayNode();
-            
-            for (JsonNode creature : creaturesArray) {
-                if (creature.get("race").asText().equalsIgnoreCase(race)) {
-                    ((com.fasterxml.jackson.databind.node.ArrayNode) filteredCreatures).add(creature);
-                }
-            }
-            
-            return ResponseEntity.ok(filteredCreatures);
-        } catch (IOException e) {
-            return ResponseEntity.notFound().build();
-        }
+    
+    @GetMapping("/creatures/{creatureId}")
+    public ResponseEntity<String> getCreatureById(@PathVariable String creatureId) {
+        return ResponseEntity.status(404).body("{\"error\":\"Individual creature endpoint not implemented yet\"}");
     }
 } 
