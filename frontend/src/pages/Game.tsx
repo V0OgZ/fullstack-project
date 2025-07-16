@@ -70,11 +70,7 @@ const Game: React.FC = () => {
 
   return (
     <div className="game-page">
-      <TrueHeroesInterface
-        playerCount={currentGame.players.length}
-        scenarioType={scenarioType}
-        scenarioId={scenarioId || currentGame.id}
-      />
+      <TrueHeroesInterface />
     </div>
   );
 };
