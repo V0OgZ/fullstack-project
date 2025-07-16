@@ -1,8 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useGameStore } from '../store/useGameStore';
-import ModernGameRenderer, { ModernGameRendererRef } from './ModernGameRenderer';
+import HexTerrainRenderer from './HexTerrainRenderer';
 import CastleManagementPanel from './CastleManagementPanel';
+import { HexTile, BiomeType } from '../types/terrain';
 import './TrueHeroesInterface.css';
+
+// Simple hash function for string
+const hashCode = (str: string): number => {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash; // Convert to 32-bit integer
+  }
+  return Math.abs(hash);
+};
 
 const TrueHeroesInterface: React.FC = () => {
   const { 
@@ -11,11 +23,11 @@ const TrueHeroesInterface: React.FC = () => {
     loadGame, 
     endTurn, 
     selectHero, 
-    selectedHero 
+    selectedHero,
+    map
   } = useGameStore();
   
   const [activePanel, setActivePanel] = useState<'scenario' | 'hero' | 'inventory' | 'castle'>('scenario');
-  const rendererRef = useRef<ModernGameRendererRef>(null);
 
   // Load default game on component mount
   useEffect(() => {
@@ -24,9 +36,59 @@ const TrueHeroesInterface: React.FC = () => {
     }
   }, [currentGame, loadGame]);
 
-  const handleTileClick = (position: { x: number; y: number }) => {
-    console.log('Tile clicked:', position);
+  // Convert backend map data to HexTile format
+  const convertToHexTiles = (backendMap: any[][]): HexTile[] => {
+    const hexTiles: HexTile[] = [];
+    
+    if (!backendMap || !Array.isArray(backendMap)) return hexTiles;
+    
+    for (let row = 0; row < backendMap.length; row++) {
+      for (let col = 0; col < backendMap[row].length; col++) {
+        const tile = backendMap[row][col];
+        if (tile) {
+          // Convert backend terrain types to BiomeType
+          let biome: BiomeType = 'grass';
+          switch (tile.terrain?.toLowerCase()) {
+            case 'water': biome = 'water'; break;
+            case 'forest': biome = 'forest'; break;
+            case 'mountain': biome = 'mountain'; break;
+            case 'desert': biome = 'desert'; break;
+            case 'swamp': biome = 'swamp'; break;
+            case 'snow': biome = 'snow'; break;
+            default: biome = 'grass'; break;
+          }
+          
+          // Convert row/col to hex coordinates (odd-q vertical layout)
+          const q = col;
+          const r = row - Math.floor(col / 2);
+          
+          hexTiles.push({
+            q,
+            r,
+            biome,
+            elevation: tile.elevation || Math.random() * 100,
+            humidity: tile.humidity || Math.random() * 100,
+            riverFlowDir: tile.riverFlowDir,
+            naturalBarrier: tile.naturalBarrier || false
+          });
+        }
+      }
+    }
+    
+    console.log('🗺️ [TrueHeroesInterface] Converted', hexTiles.length, 'tiles to hex format');
+    return hexTiles;
+  };
+
+  const hexTiles = convertToHexTiles(map);
+
+  const handleTileClick = (tile: HexTile) => {
+    console.log('🎯 Hex tile clicked:', tile);
     // Handle tile selection logic here
+  };
+
+  const handleTileHover = (tile: HexTile | null) => {
+    console.log('🖱️ Hex tile hovered:', tile);
+    // Handle tile hover logic here
   };
 
   const handleEndTurn = async () => {
@@ -45,12 +107,13 @@ const TrueHeroesInterface: React.FC = () => {
   return (
     <div className="true-heroes-interface">
       {/* Header */}
-      <div className="interface-header">
+      <div className="interface-header game-header">
         <div className="header-left">
-          <h1>Heroes of Time</h1>
+          <h1>🎮 Heroes of Time ⚔️</h1>
           <div className="game-info">
             <span>Turn: {currentGame?.turn || 1}</span>
             <span>Player: {currentPlayer?.name || 'Unknown'}</span>
+            <span>Map: {hexTiles.length} tiles</span>
           </div>
         </div>
         
@@ -102,11 +165,13 @@ const TrueHeroesInterface: React.FC = () => {
       <div className="interface-content">
         {/* Left Panel - Game Map */}
         <div className="left-panel">
-          <ModernGameRenderer
-            ref={rendererRef}
-            width={800}
-            height={600}
+          <HexTerrainRenderer
+            width={900}
+            height={700}
+            tiles={hexTiles}
+            seed={currentGame?.id ? hashCode(currentGame.id) : 12345}
             onTileClick={handleTileClick}
+            onTileHover={handleTileHover}
           />
         </div>
 
@@ -114,14 +179,32 @@ const TrueHeroesInterface: React.FC = () => {
         <div className="right-panel">
           {activePanel === 'scenario' && (
             <div className="panel-content">
-              <h2>Scenario Information</h2>
+              <h2>🏔️ Terrain System</h2>
               <div className="scenario-info">
                 <h3>{currentGame?.scenario || 'Conquest Classic'}</h3>
-                <p>A classic strategy scenario.</p>
+                <p>🎯 <strong>Nouveau système de terrain hexagonal avancé</strong></p>
                 <div className="scenario-stats">
-                  <div>Map Size: Medium</div>
-                  <div>Players: {currentGame?.players?.length || 4}</div>
-                  <div>Difficulty: Normal</div>
+                  <div>🗺️ Tiles: {hexTiles.length}</div>
+                                      <div>🎲 Seed: {currentGame?.id ? hashCode(currentGame.id) : 12345}</div>
+                  <div>🌍 Biomes: {new Set(hexTiles.map(t => t.biome)).size}</div>
+                  <div>🏰 Players: {currentGame?.players?.length || 4}</div>
+                </div>
+                <div className="terrain-legend">
+                  <h4>🌈 Biomes disponibles:</h4>
+                  <div className="biome-list">
+                    {Array.from(new Set(hexTiles.map(t => t.biome))).map(biome => (
+                      <div key={biome} className="biome-item">
+                        {biome === 'forest' && '🌲'} 
+                        {biome === 'water' && '🌊'} 
+                        {biome === 'mountain' && '⛰️'} 
+                        {biome === 'desert' && '🏜️'} 
+                        {biome === 'grass' && '🌱'} 
+                        {biome === 'swamp' && '🐸'} 
+                        {biome === 'snow' && '❄️'} 
+                        {biome}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
