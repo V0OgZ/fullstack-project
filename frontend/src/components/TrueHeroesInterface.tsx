@@ -425,7 +425,19 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
             ref={rendererRef}
             width={1200} 
             height={700}
-            onTileClick={handleTileClick}
+            map={currentGame?.map || []}
+            heroes={currentPlayer?.heroes || []}
+            creatures={[]}
+            structures={[]}
+            selectedHero={selectedHero}
+            validMoves={[]}
+            validTargets={[]}
+            onTileClick={(x, y) => handleTileClick({x, y})}
+            currentPlayer={currentPlayer?.id}
+            showFog={false}
+            showGrid={true}
+            showElevation={true}
+            showTransitions={true}
           />
         </div>
 
