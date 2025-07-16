@@ -6,10 +6,11 @@
 
 ### ⚡ **Lancement de l'Application**
 ```bash
-./start-app.sh     # Démarre Backend (8080) + Frontend (3000)
-./stop-app.sh      # Arrête tous les services
-./test-app.sh      # Tests rapides
-./run-epic-demo.sh # 🆕 Démo du système épique
+./start-app.sh              # Démarre Backend (8080) + Frontend (3000)
+./stop-app.sh               # Arrête tous les services
+./test-app.sh               # Tests rapides
+./run-epic-demo.sh          # 🆕 Démo du système épique
+./test-backend-gameplay.sh  # 🆕 Test complet des actions backend
 ```
 
 ### 🎯 **URLs Importantes**
@@ -17,6 +18,61 @@
 - **Backend**: http://localhost:8080
 - **API Health**: http://localhost:8080/actuator/health
 - **H2 Database**: http://localhost:8080/h2-console
+
+---
+
+## 🎮 **Tests de Gameplay - NOUVEAU (Janvier 2025)**
+
+### 🧪 **Test Backend Complet**
+```bash
+# Script de test complet des actions backend
+./test-backend-gameplay.sh
+```
+
+**Actions testées** :
+- ✅ Récupération du jeu et des bâtiments
+- ✅ Bonus de château et unités disponibles
+- ✅ Upgrade de bâtiments et reset croissance
+- ✅ Déplacement, attaque, collecte de héros
+- ✅ Fin de tour et actions en attente
+- **Résultat**: 78% de réussite (11/14 tests)
+
+### 🎭 **Test Playwright Interface**
+```bash
+# Test complet de l'interface TrueHeroesInterface
+cd frontend
+npx playwright test tests/e2e/gameplay-complete.spec.ts --headed
+```
+
+**Tests inclus** :
+- ✅ Test complet des actions de gameplay
+- ✅ Test du cycle de jeu complet
+- ✅ Test de gestion des erreurs
+- ✅ Vérification des panneaux (heroes, castle, epic)
+- ✅ Test des boutons et interactions
+
+### 🎯 **Actions de Gameplay Disponibles**
+
+#### **Interface TrueHeroesInterface**
+```typescript
+// Panneaux disponibles
+- Panneau Scénario: Informations sur le jeu
+- Panneau Héros: Gestion des héros + actions
+- Panneau Château: Gestion des bâtiments + actions
+- Panneau Epic Content: Contenu épique
+
+// Actions de héros
+- 🚶 Déplacement interactif (mode clic)
+- ⚔️ Attaque d'ennemis
+- 💎 Collecte de ressources
+- 🔮 Lancement de sorts
+
+// Actions de château
+- 🔄 Reset croissance hebdomadaire
+- ⬆️ Upgrade de bâtiments
+- 👥 Recrutement d'unités
+- ⭐ Visualisation des bonus
+```
 
 ---
 

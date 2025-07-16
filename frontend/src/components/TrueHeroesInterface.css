@@ -1120,3 +1120,192 @@
   font-size: 12px;
   color: #32CD32;
 } 
+
+/* Castle actions section */
+.castle-actions {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.castle-actions .action-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.castle-actions .action-button {
+  padding: 10px 15px;
+  background: linear-gradient(45deg, #8B4513, #A0522D);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+.castle-actions .action-button:hover {
+  background: linear-gradient(45deg, #A0522D, #CD853F);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.castle-actions .action-button:active {
+  transform: translateY(0);
+}
+
+/* Upgrade buttons in castle management */
+.upgrade-btn {
+  padding: 8px 12px;
+  background: linear-gradient(45deg, #228B22, #32CD32);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-right: 10px;
+}
+
+.upgrade-btn:hover {
+  background: linear-gradient(45deg, #32CD32, #7CFC00);
+  transform: translateY(-1px);
+}
+
+.upgrade-btn:disabled {
+  background: #666;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Movement mode indicator */
+.movement-mode-indicator {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 215, 0, 0.9);
+  color: #000;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: bold;
+  z-index: 1000;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Hero action buttons disabled state */
+.hero-actions .action-button:disabled {
+  background: #666;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.hero-actions .action-button:disabled:hover {
+  background: #666;
+  transform: none;
+}
+
+/* Building actions section */
+.building-actions {
+  margin-top: 15px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+.recruitment-section {
+  margin-top: 10px;
+}
+
+.recruitment-section h5 {
+  color: #FFD700;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+
+.unit-recruitment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.unit-recruitment:last-child {
+  border-bottom: none;
+}
+
+.recruit-btn {
+  padding: 4px 8px;
+  background: linear-gradient(45deg, #4169E1, #6495ED);
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.recruit-btn:hover {
+  background: linear-gradient(45deg, #6495ED, #87CEEB);
+}
+
+.recruit-btn:disabled {
+  background: #666;
+  cursor: not-allowed;
+}
+
+/* Script Panel */
+.script-panel {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.script-tester-container {
+  flex: 1;
+  overflow: hidden;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin: 10px;
+}
+
+.script-tester-container .game-script-tester {
+  height: 100%;
+  background: transparent;
+  border: none;
+}
+
+.script-tester-container .script-tester-header {
+  display: none; /* Masquer le header du composant car on a déjà un header */
+}
+
+.script-tester-container .script-tester-content {
+  height: 100%;
+  padding: 10px;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  gap: 10px;
+}
+
+.script-tester-container .examples-panel {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.script-tester-container .results-panel {
+  max-height: 300px;
+} 
