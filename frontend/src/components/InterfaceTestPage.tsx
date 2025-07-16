@@ -9,14 +9,35 @@ const InterfaceTestPage: React.FC = () => {
     {
       id: 'true-heroes',
       name: '🎮 TrueHeroesInterface',
-      description: 'Version principale avec boutons de contrôle',
+      description: 'Version ACTUELLE avec boutons de contrôle',
       route: '/test/true-heroes',
       color: '#4CAF50'
     },
     {
+      id: 'true-heroes-v1',
+      name: '🕐 TrueHeroesInterface v1',
+      description: 'Version HIER (avec Goldorak) - afdeae9',
+      route: '/test/true-heroes-v1',
+      color: '#8BC34A'
+    },
+    {
+      id: 'true-heroes-v2',
+      name: '🕑 TrueHeroesInterface v2',
+      description: 'Version AVANT-HIER (système retro) - 741ff81',
+      route: '/test/true-heroes-v2',
+      color: '#CDDC39'
+    },
+    {
+      id: 'true-heroes-v3',
+      name: '🕒 TrueHeroesInterface v3',
+      description: 'Version REFACTORÉE (interface game) - dd0100d',
+      route: '/test/true-heroes-v3',
+      color: '#FFC107'
+    },
+    {
       id: 'simple-game',
       name: '🎯 SimpleGameInterface',
-      description: 'Interface simple avec sidebar',
+      description: 'Interface simple avec sidebar (bonne disposition)',
       route: '/test/simple-game',
       color: '#2196F3'
     },
@@ -78,15 +99,23 @@ const InterfaceTestPage: React.FC = () => {
       <div className="test-info">
         <h2>🔍 Instructions de test</h2>
         <ol>
-          <li>Cliquez sur chaque bouton pour tester l'interface</li>
-          <li>Vérifiez si vous voyez :</li>
+          <li><strong>Testez d'abord les 4 versions historiques</strong> de TrueHeroesInterface :</li>
+          <ul>
+            <li>🕐 <strong>v1 (HIER)</strong> - Version avec Goldorak</li>
+            <li>🕑 <strong>v2 (AVANT-HIER)</strong> - Version avec système retro</li>
+            <li>🕒 <strong>v3 (REFACTORÉE)</strong> - Version interface game</li>
+            <li>🎮 <strong>ACTUELLE</strong> - Version avec nos derniers changements</li>
+          </ul>
+          <li><strong>Comparez avec SimpleGameInterface</strong> (bonne disposition)</li>
+          <li><strong>Vérifiez si vous voyez :</strong></li>
           <ul>
             <li>✅ Boutons de contrôle au centre (📋 ⚔️ 🎒 🏰)</li>
-            <li>✅ Bouton Epic Content (🧟)</li>
+            <li>✅ Bouton Epic Content (🧟) - <em>l'ancienne version du "grunt"</em></li>
             <li>✅ Bouton End Turn (⭐)</li>
             <li>✅ Panel droit fonctionnel</li>
+            <li>✅ Bonne disposition comme SimpleGameInterface</li>
           </ul>
-          <li>Notez quelle version fonctionne correctement</li>
+          <li><strong>Notez quelle version historique était la bonne !</strong></li>
         </ol>
       </div>
 

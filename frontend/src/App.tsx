@@ -12,6 +12,11 @@ import {
   TestModernGameInterface, 
   TestSimpleModernInterface 
 } from './pages/TestPages';
+import { 
+  TestTrueHeroesInterface_v1, 
+  TestTrueHeroesInterface_v2, 
+  TestTrueHeroesInterface_v3 
+} from './pages/HistoricalTestPages';
 
 const App: React.FC = () => {
   return (
@@ -28,6 +33,9 @@ const App: React.FC = () => {
           
           {/* Routes de test pour les interfaces */}
           <Route path="/test/true-heroes" element={<TestTrueHeroesInterface />} />
+          <Route path="/test/true-heroes-v1" element={<TestTrueHeroesInterface_v1 />} />
+          <Route path="/test/true-heroes-v2" element={<TestTrueHeroesInterface_v2 />} />
+          <Route path="/test/true-heroes-v3" element={<TestTrueHeroesInterface_v3 />} />
           <Route path="/test/simple-game" element={<TestSimpleGameInterface />} />
           <Route path="/test/modern-game" element={<TestModernGameInterface />} />
           <Route path="/test/simple-modern" element={<TestSimpleModernInterface />} />
