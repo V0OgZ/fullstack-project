@@ -549,6 +549,159 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     }
   }, [heroImages, mountImages, flagImages, selectedHero]);
 
+  // Enhanced terrain rendering with procedural textures
+  const drawTerrainWithTexture = useCallback((
+    ctx: CanvasRenderingContext2D,
+    center: Position,
+    terrain: string,
+    radius: number
+  ) => {
+    const { x, y } = center;
+    
+    // Create hexagonal clipping path
+    ctx.save();
+    ctx.beginPath();
+    for (let i = 0; i < 6; i++) {
+      const angle = (i * Math.PI) / 3;
+      const hx = x + radius * Math.cos(angle);
+      const hy = y + radius * Math.sin(angle);
+      if (i === 0) {
+        ctx.moveTo(hx, hy);
+      } else {
+        ctx.lineTo(hx, hy);
+      }
+    }
+    ctx.closePath();
+    ctx.clip();
+
+    // Draw base terrain with gradient
+    const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
+    
+    switch (terrain) {
+      case 'grass':
+        gradient.addColorStop(0, '#7fb069');
+        gradient.addColorStop(0.6, '#6fa054');
+        gradient.addColorStop(1, '#5f9044');
+        ctx.fillStyle = gradient;
+        ctx.fill();
+        
+        // Add grass texture
+        for (let i = 0; i < 15; i++) {
+          const grassX = x + (Math.random() - 0.5) * radius * 1.5;
+          const grassY = y + (Math.random() - 0.5) * radius * 1.5;
+          ctx.strokeStyle = `rgba(95, 144, 68, ${0.3 + Math.random() * 0.4})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(grassX, grassY);
+          ctx.lineTo(grassX + (Math.random() - 0.5) * 4, grassY - Math.random() * 8);
+          ctx.stroke();
+        }
+        break;
+        
+      case 'forest':
+        gradient.addColorStop(0, '#386641');
+        gradient.addColorStop(0.6, '#2d5016');
+        gradient.addColorStop(1, '#1a3009');
+        ctx.fillStyle = gradient;
+        ctx.fill();
+        
+        // Add tree texture
+        for (let i = 0; i < 8; i++) {
+          const treeX = x + (Math.random() - 0.5) * radius * 1.2;
+          const treeY = y + (Math.random() - 0.5) * radius * 1.2;
+          ctx.fillStyle = `rgba(26, 48, 9, ${0.4 + Math.random() * 0.3})`;
+          ctx.beginPath();
+          ctx.arc(treeX, treeY, 2 + Math.random() * 3, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        break;
+        
+      case 'mountain':
+        gradient.addColorStop(0, '#8d5524');
+        gradient.addColorStop(0.6, '#7d4514');
+        gradient.addColorStop(1, '#6d3504');
+        ctx.fillStyle = gradient;
+        ctx.fill();
+        
+        // Add rock texture
+        for (let i = 0; i < 12; i++) {
+          const rockX = x + (Math.random() - 0.5) * radius * 1.4;
+          const rockY = y + (Math.random() - 0.5) * radius * 1.4;
+          ctx.fillStyle = `rgba(109, 53, 4, ${0.3 + Math.random() * 0.4})`;
+          ctx.beginPath();
+          ctx.arc(rockX, rockY, 1 + Math.random() * 2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        break;
+        
+      case 'water':
+        gradient.addColorStop(0, '#3a86ff');
+        gradient.addColorStop(0.6, '#2a76ef');
+        gradient.addColorStop(1, '#1a66df');
+        ctx.fillStyle = gradient;
+        ctx.fill();
+        
+        // Add wave texture
+        const time = Date.now() / 1000;
+        for (let i = 0; i < 6; i++) {
+          const waveX = x + (Math.random() - 0.5) * radius * 1.3;
+          const waveY = y + (Math.random() - 0.5) * radius * 1.3;
+          const waveOffset = Math.sin(time * 2 + i) * 3;
+          ctx.strokeStyle = `rgba(26, 102, 223, ${0.3 + Math.random() * 0.2})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.arc(waveX + waveOffset, waveY, 3 + Math.random() * 2, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+        break;
+        
+      case 'desert':
+        gradient.addColorStop(0, '#e9c46a');
+        gradient.addColorStop(0.6, '#d9b45a');
+        gradient.addColorStop(1, '#c9a44a');
+        ctx.fillStyle = gradient;
+        ctx.fill();
+        
+        // Add sand texture
+        for (let i = 0; i < 20; i++) {
+          const sandX = x + (Math.random() - 0.5) * radius * 1.5;
+          const sandY = y + (Math.random() - 0.5) * radius * 1.5;
+          ctx.fillStyle = `rgba(201, 164, 74, ${0.2 + Math.random() * 0.3})`;
+          ctx.beginPath();
+          ctx.arc(sandX, sandY, 0.5 + Math.random() * 1, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        break;
+        
+      case 'swamp':
+        gradient.addColorStop(0, '#52796f');
+        gradient.addColorStop(0.6, '#42695f');
+        gradient.addColorStop(1, '#32594f');
+        ctx.fillStyle = gradient;
+        ctx.fill();
+        
+        // Add bubble texture
+        for (let i = 0; i < 10; i++) {
+          const bubbleX = x + (Math.random() - 0.5) * radius * 1.2;
+          const bubbleY = y + (Math.random() - 0.5) * radius * 1.2;
+          ctx.strokeStyle = `rgba(50, 89, 79, ${0.3 + Math.random() * 0.3})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.arc(bubbleX, bubbleY, 1 + Math.random() * 2, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+        break;
+        
+      default:
+        gradient.addColorStop(0, '#7fb069');
+        gradient.addColorStop(1, '#5f9044');
+        ctx.fillStyle = gradient;
+        ctx.fill();
+    }
+    
+    ctx.restore();
+  }, []);
+
   // Render hexagonal tile with enhanced visuals and ZFC vision levels
   const drawHexTile = useCallback((
     ctx: CanvasRenderingContext2D,
@@ -608,13 +761,9 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
       overlayColor = 'rgba(0, 0, 0, 0)';
     }
 
-    // Get terrain color with variety
-    const terrainColor = getTerrainColor(tile.terrain);
-    
-    // Apply opacity to terrain color
+    // Draw terrain with procedural textures
     ctx.globalAlpha = tileOpacity;
-    ctx.fillStyle = terrainColor;
-    ctx.fill();
+    drawTerrainWithTexture(ctx, center, tile.terrain, radius);
     ctx.globalAlpha = 1.0;
 
     // Add fog overlay
@@ -669,18 +818,18 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     if (tile.hero) {
       drawHero(ctx, center, tile.hero);
     }
-  }, [config.hexRadius, movementRange, projectionRange, selectedHero, drawStructure, drawCreature, drawHero]);
+  }, [config.hexRadius, movementRange, projectionRange, selectedHero, drawStructure, drawCreature, drawHero, drawTerrainWithTexture]);
 
-  // Get terrain color based on terrain type
+  // Get terrain color based on terrain type (fallback)
   const getTerrainColor = (terrain: string): string => {
     switch (terrain) {
-      case 'grass': return '#4CAF50';
-      case 'forest': return '#2E7D32';
-      case 'mountain': return '#795548';
-      case 'water': return '#2196F3';
-      case 'desert': return '#FFC107';
-      case 'swamp': return '#8BC34A';
-      default: return '#4CAF50';
+      case 'grass': return '#7fb069';
+      case 'forest': return '#386641';
+      case 'mountain': return '#8d5524';
+      case 'water': return '#3a86ff';
+      case 'desert': return '#e9c46a';
+      case 'swamp': return '#52796f';
+      default: return '#7fb069';
     }
   };
 
