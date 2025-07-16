@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useGameStore } from '../store/useGameStore';
-import HexTerrainRenderer from './HexTerrainRenderer';
+import OrganicTerrainRenderer from './OrganicTerrainRenderer';
 import CastleManagementPanel from './CastleManagementPanel';
 import { HexTile, BiomeType } from '../types/terrain';
 import './TrueHeroesInterface.css';
@@ -165,11 +165,10 @@ const TrueHeroesInterface: React.FC = () => {
       <div className="interface-content">
         {/* Left Panel - Game Map */}
         <div className="left-panel">
-          <HexTerrainRenderer
+          <OrganicTerrainRenderer
             width={900}
             height={700}
             tiles={hexTiles}
-            seed={currentGame?.id ? hashCode(currentGame.id) : 12345}
             onTileClick={handleTileClick}
             onTileHover={handleTileHover}
           />
