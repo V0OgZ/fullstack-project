@@ -922,4 +922,14 @@ export const useGameStore = create<GameStore>((set, get) => ({
     console.log(`%c🔄 [GameStore] Game session reset for scenario: ${scenarioId}`, 'color: orange');
     set(initialState);
   }
-})); 
+}));
+
+// Expose store to window for debugging
+if (typeof window !== 'undefined') {
+  (window as any).gameStore = useGameStore.getState();
+  
+  // Update window.gameStore whenever store changes
+  useGameStore.subscribe((state) => {
+    (window as any).gameStore = state;
+  });
+}

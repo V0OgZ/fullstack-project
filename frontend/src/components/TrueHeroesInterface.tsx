@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useGameStore } from '../store/useGameStore';
-import OrganicTerrainRenderer from './OrganicTerrainRenderer';
+import ModernGameRenderer from './ModernGameRenderer';
 import CastleManagementPanel from './CastleManagementPanel';
 import GoldorakEasterEgg from './GoldorakEasterEgg';
 import { useRetroKonami } from '../utils/retro-konami';
 import { HexTile, BiomeType } from '../types/terrain';
+import { Position } from '../types/game';
 import './TrueHeroesInterface.css';
 
 // Simple hash function for string
@@ -35,8 +36,12 @@ const TrueHeroesInterface: React.FC = () => {
 
   // Load default game on component mount
   useEffect(() => {
+    console.log('🎮 [TrueHeroesInterface] useEffect called - currentGame:', currentGame);
     if (!currentGame) {
+      console.log('🎮 [TrueHeroesInterface] No current game, loading conquest-classic...');
       loadGame('conquest-classic');
+    } else {
+      console.log('🎮 [TrueHeroesInterface] Current game exists:', currentGame.id);
     }
     
     // Easter egg hint
@@ -107,8 +112,8 @@ const TrueHeroesInterface: React.FC = () => {
 
   const hexTiles = convertToHexTiles(map);
 
-  const handleTileClick = (tile: HexTile) => {
-    console.log('🎯 Hex tile clicked:', tile);
+  const handleTileClick = (position: Position) => {
+    console.log('🎯 Tile clicked:', position);
     // Handle tile selection logic here
   };
 
@@ -191,12 +196,10 @@ const TrueHeroesInterface: React.FC = () => {
       <div className="interface-content">
         {/* Left Panel - Game Map */}
         <div className="left-panel">
-          <OrganicTerrainRenderer
+          <ModernGameRenderer
             width={900}
             height={700}
-            tiles={hexTiles}
             onTileClick={handleTileClick}
-            onTileHover={handleTileHover}
           />
         </div>
 
