@@ -142,166 +142,83 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     }
   }, [map, hexRadius, hexToPixel, selectedHero]);
 
-  // Rendu principal
-  const render = useCallback(() => {
-    if (!canvasRef.current || !map || map.length === 0) return;
+  // --- Nouvelle map enrichie ---
+  const mapId = 'main-map'; // TODO: utiliser un vrai id si dispo
+  const enrichedMap: EnrichedTile[][] = useMemo(() => map ? enrichMapWithZones(map, mapId) : [], [map, mapId]);
 
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    // Clear canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Fond
-    ctx.fillStyle = '#1a1a2e';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    // Dessiner les tuiles hexagonales
-    const mapWidth = map[0].length;
-    const mapHeight = map.length;
-    
-    for (let y = 0; y < mapHeight; y++) {
-      for (let x = 0; x < mapWidth; x++) {
-        const tile = map[y][x];
+  // --- Rendu SVG organique ---
+  const renderTiles = () => {
+    if (!enrichedMap || enrichedMap.length === 0) return null;
+    const tiles: React.ReactNode[] = [];
+    for (let y = 0; y < enrichedMap.length; y++) {
+      for (let x = 0; x < enrichedMap[y].length; x++) {
+        const tile = enrichedMap[y][x];
         if (!tile) continue;
-
-        const pixelPos = hexToPixel(x, y);
-        
-        // Vérifier si la tuile est visible
-        if (pixelPos.x < -hexRadius || pixelPos.x > canvas.width + hexRadius ||
-            pixelPos.y < -hexRadius || pixelPos.y > canvas.height + hexRadius) {
-          continue;
-        }
-
-        // Dessiner la tuile
-        renderTileContent(ctx, tile, pixelPos.x, pixelPos.y, hexRadius);
-
-        // Dessiner le héros s'il y en a un
-        if (tile.hero) {
-          renderHero(ctx, tile.hero, pixelPos);
-        }
-      }
-    }
-
-    // Dessiner les overlays
-    renderOverlays(ctx);
-  }, [map, hexToPixel, renderTileContent, renderHero, renderOverlays]);
-
-  // Gestion des clics
-  const handleCanvasClick = useCallback((event: React.MouseEvent<HTMLCanvasElement>) => {
-    const canvas = canvasRef.current;
-    if (!canvas || !map || map.length === 0) return;
-    
-    const rect = canvas.getBoundingClientRect();
-    const mouseX = event.clientX - rect.left;
-    const mouseY = event.clientY - rect.top;
-    
-    // Trouver la tuile cliquée
-    for (let y = 0; y < map.length; y++) {
-      for (let x = 0; x < map[y].length; x++) {
-        const pixelPos = hexToPixel(x, y);
-        const distance = Math.sqrt(
-          Math.pow(mouseX - pixelPos.x, 2) + Math.pow(mouseY - pixelPos.y, 2)
-        );
-        
-        if (distance <= hexRadius) {
-          setSelectedTile({ x, y });
-          if (onTileClick) {
-            onTileClick({ x, y });
+        // Position pixel
+        const px = x * 0.6 * 2 * 15 + (y % 2) * 0.6 * 15 + 50;
+        const py = y * 0.7 * Math.sqrt(3) * 15 + 50;
+        // Motif contextuel par biome
+        let fill = '';
+        let extra: React.ReactNode = null;
+        if (tile.biome === 'WATER') {
+          // Dégradé de profondeur + brillance
+          const depth = Math.min(tile.distance_to_border / 6, 1);
+          const base = 180 - 60 * depth;
+          const color = `hsl(${base},70%,${45-15*depth}%)`;
+          fill = color;
+          // Brillance subtile (effet vague)
+          const { noise2D } = createSeededNoise(`${mapId}-water-${tile.zone_id}`);
+          const shine = 0.5 + 0.5 * noise2D(x/3, y/3);
+          extra = <ellipse cx={px} cy={py+6} rx={10} ry={2} fill="white" opacity={0.08+0.08*shine} />;
+        } else if (tile.biome === 'DESERT') {
+          // Dune multi-tuiles si zone grande
+          const { noise2D } = createSeededNoise(`${mapId}-desert-${tile.zone_id}`);
+          let dune = null;
+          if (tile.zone_size > 12 && tile.distance_to_border > 1) {
+            // Dune = vague jaune pâle, orientée par bruit
+            const angle = noise2D(tile.x/2, tile.y/2) * Math.PI * 2;
+            const dx = Math.cos(angle) * 7;
+            const dy = Math.sin(angle) * 3;
+            dune = <ellipse cx={px+dx} cy={py+dy} rx={8} ry={2.5} fill="#fff7c2" opacity={0.22} />;
           }
-          return;
+          fill = '#f5e6b2';
+          extra = dune;
+        } else if (tile.biome === 'FOREST') {
+          // TODO: forêt organique (densité, clairière)
+          fill = '#3a5c1a';
+        } else if (tile.biome === 'MOUNTAIN') {
+          // TODO: crevasses, cailloux
+          fill = '#b0b0b0';
+        } else {
+          fill = '#bada55';
         }
-      }
-    }
-  }, [map, hexToPixel, hexRadius, setSelectedTile, onTileClick]);
-
-  // Gestion du survol
-  const handleCanvasMouseMove = useCallback((event: React.MouseEvent<HTMLCanvasElement>) => {
-    const canvas = canvasRef.current;
-    if (!canvas || !map || map.length === 0) return;
-    
-    const rect = canvas.getBoundingClientRect();
-    const mouseX = event.clientX - rect.left;
-    const mouseY = event.clientY - rect.top;
-    
-    let foundTile: Position | null = null;
-    
-    for (let y = 0; y < map.length; y++) {
-      for (let x = 0; x < map[y].length; x++) {
-        const pixelPos = hexToPixel(x, y);
-        const distance = Math.sqrt(
-          Math.pow(mouseX - pixelPos.x, 2) + Math.pow(mouseY - pixelPos.y, 2)
+        // Hexagone SVG
+        const hexPoints = Array.from({length: 6}).map((_, i) => {
+          const angle = Math.PI/3 * i;
+          const hx = px + Math.cos(angle) * 15;
+          const hy = py + Math.sin(angle) * 15;
+          return `${hx},${hy}`;
+        }).join(' ');
+        tiles.push(
+          <g key={`tile-${x}-${y}`}> 
+            <polygon points={hexPoints} fill={fill} stroke="none" />
+            {extra}
+          </g>
         );
-        
-        if (distance <= hexRadius) {
-          foundTile = { x, y };
-          break;
-        }
       }
-      if (foundTile) break;
     }
-    
-    setHoveredTile(foundTile);
-  }, [map, hexToPixel, hexRadius]);
+    return tiles;
+  };
 
-  // Centrage sur une position
-  useImperativeHandle(ref, () => ({
-    centerOnPosition: (position: Position) => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-      
-      const targetPixel = hexToPixel(position.x, position.y);
-      const centerX = canvas.width / 2;
-      const centerY = canvas.height / 2;
-      
-      setMapOffset({
-        x: centerX - targetPixel.x + mapOffset.x,
-        y: centerY - targetPixel.y + mapOffset.y
-      });
-    }
-  }));
-
-  // Effect pour le rendu
-  useEffect(() => {
-    render();
-  }, [render]);
-
-  // Effect pour redimensionner le canvas
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    
-    canvas.width = width;
-    canvas.height = height;
-    render();
-  }, [width, height, render]);
-
+  // --- Rendu principal ---
   return (
     <div className="modern-game-renderer">
-      <canvas
-        ref={canvasRef}
-        width={width}
-        height={height}
-        onClick={handleCanvasClick}
-        onMouseMove={handleCanvasMouseMove}
-        style={{ cursor: 'pointer' }}
-      />
-      
-      {/* Info de débogage */}
+      <svg width={width} height={height} style={{background:'#1a1a2e', display:'block'}}>
+        {renderTiles()}
+      </svg>
+      {/* Debug info conservée */}
       <div className="debug-info">
         <div>Carte: {map?.length || 0}x{map?.[0]?.length || 0}</div>
-        {hoveredTile && (
-          <div>
-            Tuile: {hoveredTile.x},{hoveredTile.y} - 
-            {map?.[hoveredTile.y]?.[hoveredTile.x]?.terrain}
-          </div>
-        )}
-        {selectedHero && (
-          <div>
-            Héros: {selectedHero.name} - Pos: ({selectedHero.position?.x},{selectedHero.position?.y})
-          </div>
-        )}
       </div>
     </div>
   );

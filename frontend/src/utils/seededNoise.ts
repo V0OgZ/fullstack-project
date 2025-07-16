@@ -1,12 +1,10 @@
-// @ts-ignore
-const SimplexNoise = require('simplex-noise');
+import * as SimplexNoise from 'simplex-noise';
 import seedrandom from 'seedrandom';
 
 export function createSeededNoise(seed: string) {
-  // Use seedrandom to seed SimplexNoise
   const rng = seedrandom(seed);
-  // SimplexNoise can take a random function
-  const simplex = new SimplexNoise(rng);
+  // ESM/CJS interop: SimplexNoise is a function/class on the default export
+  const simplex = new (SimplexNoise as any)(rng);
   return {
     noise2D: (x: number, y: number) => simplex.noise2D(x, y),
     noise3D: (x: number, y: number, z: number) => simplex.noise3D(x, y, z)
