@@ -384,7 +384,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
     const newMap = map.map(row => row.map(tile => ({
       ...tile,
       visible: tile.explored || false,  // Keep previously explored tiles dimly visible
-      visionLevel: tile.explored ? 'explored' : 'hidden'  // Default vision level
+      visionLevel: (tile.explored ? 'explored' : 'hidden') as 'clear' | 'zfc' | 'explored' | 'hidden'  // Default vision level
     })));
 
     let clearTiles = 0;
@@ -422,18 +422,18 @@ export const useGameStore = create<GameStore>((set, get) => ({
               // Level 1: Clear zone - full visibility (movement range)
               tile.visible = true;
               tile.explored = true;
-              tile.visionLevel = 'clear';
+              tile.visionLevel = 'clear' as const;
               clearTiles++;
             } else if (distance <= zfcVisionRadius) {
               // Level 2: ZFC zone - dimmed visibility (temporal influence)
               tile.visible = true;
               tile.explored = true;
-              tile.visionLevel = 'zfc';
+              tile.visionLevel = 'zfc' as const;
               zfcTiles++;
             } else if (distance <= explorationRadius) {
               // Level 3: Exploration zone - discovered but not currently visible
               tile.explored = true;
-              tile.visionLevel = 'explored';
+              tile.visionLevel = 'explored' as const;
               exploredTiles++;
             }
           }
