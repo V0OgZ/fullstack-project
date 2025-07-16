@@ -21,6 +21,9 @@ public class GameService {
     @Autowired
     private GameStateService gameStateService;
     
+    @Autowired
+    private TerrainZoneService terrainZoneService;
+    
     public Map<String, Object> getGame(String gameId) {
         Map<String, Object> game = games.get(gameId);
         if (game == null) {
@@ -864,52 +867,37 @@ public class GameService {
     
     @SuppressWarnings("unchecked")
     private List<List<Map<String, Object>>> createHexagonalMapWithHeroes(List<Map<String, Object>> players) {
-        // Create terrain with logical patterns
-        String[][] terrainMap = generateRealisticTerrain(20, 20);
+        // Generate contiguous terrain zones using the new service
+        long seed = System.currentTimeMillis();
+        List<List<Map<String, Object>>> tiles2D = terrainZoneService.generateTerrainZones(20, 20, seed);
         
-        // Create 2D array structure to match frontend expectations
-        List<List<Map<String, Object>>> tiles2D = new ArrayList<>();
-        
-        for (int y = 0; y < 20; y++) {
-            List<Map<String, Object>> row = new ArrayList<>();
-            for (int x = 0; x < 20; x++) {
-                Map<String, Object> tile = new HashMap<>();
-                tile.put("x", x);
-                tile.put("y", y);
-                String terrainType = terrainMap[y][x];
-                tile.put("terrain", terrainType);
-                tile.put("walkable", true);
-                tile.put("movementCost", getTerrainMovementCost(terrainType));
-                
-                // Add fog of war properties
-                tile.put("visible", false);
-                tile.put("explored", false);
-                
-                // Check if any hero should be placed on this tile
-                for (Map<String, Object> player : players) {
-                    List<Map<String, Object>> heroes = (List<Map<String, Object>>) player.get("heroes");
-                    if (heroes != null) {
-                        for (Map<String, Object> hero : heroes) {
-                            Map<String, Object> position = (Map<String, Object>) hero.get("position");
-                            if (position != null && 
-                                position.get("x").equals(x) && 
-                                position.get("y").equals(y)) {
-                                tile.put("hero", hero);
-                                // Make hero tile visible and explored
-                                tile.put("visible", true);
-                                tile.put("explored", true);
-                                break;
-                            }
+        // Add heroes to their positions
+        for (Map<String, Object> player : players) {
+            List<Map<String, Object>> heroes = (List<Map<String, Object>>) player.get("heroes");
+            if (heroes != null) {
+                for (Map<String, Object> hero : heroes) {
+                    Map<String, Object> position = (Map<String, Object>) hero.get("position");
+                    if (position != null) {
+                        int x = (Integer) position.get("x");
+                        int y = (Integer) position.get("y");
+                        
+                        // Ensure position is within bounds
+                        if (x >= 0 && x < 20 && y >= 0 && y < 20) {
+                            Map<String, Object> tile = tiles2D.get(y).get(x);
+                            tile.put("hero", hero);
+                            // Make hero tile visible and explored
+                            tile.put("visible", true);
+                            tile.put("explored", true);
                         }
                     }
                 }
-                
-                row.add(tile);
             }
-            tiles2D.add(row);
         }
         
-        // Return the 2D array directly instead of wrapping in an object
+        System.out.println("[DEBUG] Generated contiguous terrain zones with " + 
+                           tiles2D.size() + "x" + tiles2D.get(0).size() + " tiles");
+        
+        // Return the 2D array directly
         return tiles2D;
     }
     

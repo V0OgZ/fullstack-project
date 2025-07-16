@@ -1,6 +1,7 @@
 import React, { forwardRef, useRef, useCallback, useEffect, useImperativeHandle, useState, useMemo } from 'react';
 import { useGameStore } from '../store/useGameStore';
 import { Position, Tile, Hero } from '../types/game';
+import { terrainSpriteService, TerrainZone } from '../services/terrainSpriteService';
 import './ModernGameRenderer.css';
 
 interface ModernGameRendererProps {
@@ -102,8 +103,32 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     }
   }, [onTileClick, map, hexVerticalSpacing, hexHorizontalSpacing]);
 
-  // Render the game map
-  const renderMap = useCallback(() => {
+  // Get neighboring terrain types for sprite selection
+  const getNeighboringTerrain = useCallback((x: number, y: number): string[] => {
+    const neighbors: string[] = [];
+    
+    // Hexagonal neighbors (odd-q vertical layout)
+    const offsets = (x % 2 === 0) ? 
+      [[-1, -1], [0, -1], [1, -1], [-1, 0], [1, 0], [0, 1]] :
+      [[0, -1], [-1, 0], [1, 0], [-1, 1], [0, 1], [1, 1]];
+    
+    offsets.forEach(([dx, dy]) => {
+      const nx = x + dx;
+      const ny = y + dy;
+      
+      if (nx >= 0 && nx < map[0]?.length && ny >= 0 && ny < map.length) {
+        const neighborTile = map[ny][nx];
+        if (neighborTile) {
+          neighbors.push(neighborTile.terrain);
+        }
+      }
+    });
+    
+    return neighbors;
+  }, [map]);
+
+  // Render the game map with David Gervais sprites
+  const renderMap = useCallback(async () => {
     if (!canvasRef.current) return;
     
     const canvas = canvasRef.current;
@@ -113,13 +138,47 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     // Clear canvas
     ctx.clearRect(0, 0, width, height);
     
-    // Draw tiles
-    visibleTiles.forEach(tile => {
+    // Draw tiles with sprites
+    const renderPromises = visibleTiles.map(async (tile) => {
       const pixelPos = tileToPixel(tile.x, tile.y);
-      const terrainColor = getTerrainColor(tile.terrain);
       
-      // Draw hexagon
-      drawHexagon(ctx, pixelPos.x, pixelPos.y, hexSize, terrainColor);
+      // Get zone data from tile (added by backend TerrainZoneService)
+      const zoneData = (tile as any).zoneData as TerrainZone;
+      
+      let spriteDrawn = false;
+      
+      if (zoneData) {
+        // Try to get terrain sprite first
+        try {
+          const sprite = await terrainSpriteService.getTerrainSprite(
+            tile.terrain, 
+            zoneData,
+            getNeighboringTerrain(tile.x, tile.y)
+          );
+          
+          if (sprite) {
+            // Draw sprite centered on hex position
+            const spriteSize = terrainSpriteService.getSpriteSize();
+            ctx.drawImage(
+              sprite,
+              pixelPos.x - spriteSize.width / 2,
+              pixelPos.y - spriteSize.height / 2,
+              spriteSize.width,
+              spriteSize.height
+            );
+            spriteDrawn = true;
+          }
+        } catch (error) {
+          // Sprite loading failed, will fallback to color
+          console.warn(`Failed to load sprite for ${tile.terrain} at ${tile.x},${tile.y}:`, error);
+        }
+      }
+      
+      // Fallback to colored hexagon if sprite not available
+      if (!spriteDrawn) {
+        const terrainColor = terrainSpriteService.getTerrainColor(tile.terrain);
+        drawHexagon(ctx, pixelPos.x, pixelPos.y, hexSize, terrainColor);
+      }
       
       // Draw hero if present
       if (tile.hero) {
@@ -128,11 +187,11 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
         ctx.arc(pixelPos.x, pixelPos.y, hexSize * 0.3, 0, 2 * Math.PI);
         ctx.fill();
         
-        // Hero name
+        // Hero label
         ctx.fillStyle = '#000';
         ctx.font = '10px Arial';
         ctx.textAlign = 'center';
-        ctx.fillText(tile.hero.name, pixelPos.x, pixelPos.y + hexSize + 12);
+        ctx.fillText('H', pixelPos.x, pixelPos.y + 3);
       }
       
       // Draw creature if present
@@ -150,10 +209,11 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
       }
     });
     
+    // Wait for all sprites to be processed
+    await Promise.all(renderPromises);
+    
     // Draw movement range if hero is selected
     if (selectedHero) {
-      // This would be implemented with pathfinding logic
-      // For now, just highlight the selected hero
       const heroTile = visibleTiles.find(tile => tile.hero?.id === selectedHero.id);
       if (heroTile) {
         const pixelPos = tileToPixel(heroTile.x, heroTile.y);
@@ -174,7 +234,7 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
         ctx.stroke();
       }
     }
-  }, [visibleTiles, tileToPixel, getTerrainColor, drawHexagon, hexSize, selectedHero]);
+  }, [visibleTiles, tileToPixel, getNeighboringTerrain, drawHexagon, hexSize, selectedHero, width, height]);
 
   // Expose methods via ref
   useImperativeHandle(ref, () => ({
@@ -183,6 +243,20 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
       console.log('Center on position:', position);
     }
   }));
+
+  // Initialize terrain sprites on component mount
+  useEffect(() => {
+    const initializeSprites = async () => {
+      try {
+        await terrainSpriteService.preloadCoreSprites();
+        console.log('🎨 Terrain sprites preloaded successfully');
+      } catch (error) {
+        console.warn('⚠️ Failed to preload terrain sprites, will use color fallbacks:', error);
+      }
+    };
+    
+    initializeSprites();
+  }, []);
 
   // Render when dependencies change
   useEffect(() => {
