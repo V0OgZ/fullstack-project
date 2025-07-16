@@ -635,41 +635,86 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
         break;
         
       case 'water':
-        gradient.addColorStop(0, '#3a86ff');
-        gradient.addColorStop(0.6, '#2a76ef');
+        // Eau avec gradient profond
+        gradient.addColorStop(0, '#4a9eff');
+        gradient.addColorStop(0.3, '#3a86ff');
+        gradient.addColorStop(0.7, '#2a76ef');
         gradient.addColorStop(1, '#1a66df');
         ctx.fillStyle = gradient;
         ctx.fill();
         
-        // Add wave texture
+        // Effets de brillance scintillante
         const time = Date.now() / 1000;
-        for (let i = 0; i < 6; i++) {
-          const waveX = x + (Math.random() - 0.5) * radius * 1.3;
-          const waveY = y + (Math.random() - 0.5) * radius * 1.3;
-          const waveOffset = Math.sin(time * 2 + i) * 3;
-          ctx.strokeStyle = `rgba(26, 102, 223, ${0.3 + Math.random() * 0.2})`;
+        for (let i = 0; i < 12; i++) {
+          const sparkleX = x + (Math.random() - 0.5) * radius * 1.6;
+          const sparkleY = y + (Math.random() - 0.5) * radius * 1.6;
+          const sparkleIntensity = Math.sin(time * 3 + i * 0.5) * 0.5 + 0.5;
+          const sparkleSize = 0.5 + Math.random() * 1.5;
+          
+          // Pixels brillants
+          ctx.fillStyle = `rgba(255, 255, 255, ${sparkleIntensity * 0.8})`;
+          ctx.fillRect(sparkleX - sparkleSize/2, sparkleY - sparkleSize/2, sparkleSize, sparkleSize);
+          
+          // Reflets bleus
+          ctx.fillStyle = `rgba(173, 216, 230, ${sparkleIntensity * 0.4})`;
+          ctx.fillRect(sparkleX - sparkleSize, sparkleY - sparkleSize, sparkleSize * 2, sparkleSize * 2);
+        }
+        
+        // Vagues ondulantes
+        for (let i = 0; i < 4; i++) {
+          const waveX = x + (Math.random() - 0.5) * radius * 1.2;
+          const waveY = y + (Math.random() - 0.5) * radius * 1.2;
+          const waveOffset = Math.sin(time * 1.5 + i * 1.2) * 2;
+          ctx.strokeStyle = `rgba(100, 149, 237, ${0.4 + Math.sin(time + i) * 0.2})`;
           ctx.lineWidth = 1;
           ctx.beginPath();
-          ctx.arc(waveX + waveOffset, waveY, 3 + Math.random() * 2, 0, Math.PI * 2);
+          ctx.ellipse(waveX + waveOffset, waveY, 4 + Math.sin(time + i) * 2, 2, 0, 0, Math.PI * 2);
           ctx.stroke();
         }
         break;
         
       case 'desert':
-        gradient.addColorStop(0, '#e9c46a');
-        gradient.addColorStop(0.6, '#d9b45a');
+        // Sable avec dunes émergentes
+        gradient.addColorStop(0, '#f4d03f');
+        gradient.addColorStop(0.3, '#e9c46a');
+        gradient.addColorStop(0.7, '#d9b45a');
         gradient.addColorStop(1, '#c9a44a');
         ctx.fillStyle = gradient;
         ctx.fill();
         
-        // Add sand texture
-        for (let i = 0; i < 20; i++) {
-          const sandX = x + (Math.random() - 0.5) * radius * 1.5;
-          const sandY = y + (Math.random() - 0.5) * radius * 1.5;
-          ctx.fillStyle = `rgba(201, 164, 74, ${0.2 + Math.random() * 0.3})`;
+        // Dunes ondulantes (vue du dessus)
+        for (let i = 0; i < 3; i++) {
+          const duneX = x + (Math.random() - 0.5) * radius * 1.2;
+          const duneY = y + (Math.random() - 0.5) * radius * 1.2;
+          const duneWidth = 8 + Math.random() * 12;
+          const duneHeight = 4 + Math.random() * 6;
+          
+          // Ombre de la dune
+          ctx.fillStyle = `rgba(169, 132, 58, ${0.3 + Math.random() * 0.2})`;
           ctx.beginPath();
-          ctx.arc(sandX, sandY, 0.5 + Math.random() * 1, 0, Math.PI * 2);
+          ctx.ellipse(duneX + 1, duneY + 1, duneWidth, duneHeight, Math.random() * Math.PI, 0, Math.PI * 2);
           ctx.fill();
+          
+          // Dune principale
+          ctx.fillStyle = `rgba(244, 208, 63, ${0.4 + Math.random() * 0.3})`;
+          ctx.beginPath();
+          ctx.ellipse(duneX, duneY, duneWidth, duneHeight, Math.random() * Math.PI, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        
+        // Grains de sable détaillés
+        for (let i = 0; i < 25; i++) {
+          const grainX = x + (Math.random() - 0.5) * radius * 1.4;
+          const grainY = y + (Math.random() - 0.5) * radius * 1.4;
+          const grainSize = 0.3 + Math.random() * 0.8;
+          
+          // Grain principal
+          ctx.fillStyle = `rgba(233, 196, 106, ${0.4 + Math.random() * 0.4})`;
+          ctx.fillRect(grainX - grainSize/2, grainY - grainSize/2, grainSize, grainSize);
+          
+          // Reflet sur le grain
+          ctx.fillStyle = `rgba(255, 235, 156, ${0.2 + Math.random() * 0.3})`;
+          ctx.fillRect(grainX - grainSize/4, grainY - grainSize/4, grainSize/2, grainSize/2);
         }
         break;
         
@@ -699,8 +744,115 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
         ctx.fill();
     }
     
+    // Transitions entre terrains
+    drawTerrainTransitions(ctx, center, terrain, radius);
+    
     ctx.restore();
   }, []);
+
+  // Système de transitions fluides entre terrains
+  const drawTerrainTransitions = useCallback((
+    ctx: CanvasRenderingContext2D,
+    center: Position,
+    terrain: string,
+    radius: number
+  ) => {
+    const { x, y } = center;
+    
+    // Simuler les terrains adjacents (en production, cela viendrait de la map)
+    const adjacentTerrains = ['grass', 'forest', 'water', 'desert', 'mountain', 'swamp'];
+    const randomAdjacent = adjacentTerrains[Math.floor(Math.random() * adjacentTerrains.length)];
+    
+    if (randomAdjacent !== terrain && Math.random() < 0.3) {
+      // Créer une transition sur un bord
+      const transitionSide = Math.floor(Math.random() * 6); // 6 côtés hexagonaux
+      const angle = (transitionSide * Math.PI) / 3;
+      
+      // Position du bord de transition
+      const edgeX = x + radius * 0.7 * Math.cos(angle);
+      const edgeY = y + radius * 0.7 * Math.sin(angle);
+      
+      // Gradient de transition
+      const transitionGradient = ctx.createRadialGradient(
+        edgeX, edgeY, 0,
+        edgeX, edgeY, radius * 0.4
+      );
+      
+      // Couleurs de transition selon les terrains
+      const transitionColor = getTransitionColor(terrain, randomAdjacent);
+      transitionGradient.addColorStop(0, transitionColor.from);
+      transitionGradient.addColorStop(0.5, transitionColor.middle);
+      transitionGradient.addColorStop(1, transitionColor.to);
+      
+      ctx.fillStyle = transitionGradient;
+      ctx.beginPath();
+      ctx.arc(edgeX, edgeY, radius * 0.3, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Effets spéciaux pour certaines transitions
+      if (terrain === 'water' && randomAdjacent === 'desert') {
+        // Oasis - eau dans le désert
+        ctx.fillStyle = 'rgba(0, 191, 255, 0.3)';
+        ctx.beginPath();
+        ctx.arc(edgeX, edgeY, radius * 0.2, 0, Math.PI * 2);
+        ctx.fill();
+      } else if (terrain === 'grass' && randomAdjacent === 'forest') {
+        // Lisière de forêt - herbe vers arbres
+        for (let i = 0; i < 3; i++) {
+          const treeX = edgeX + (Math.random() - 0.5) * radius * 0.4;
+          const treeY = edgeY + (Math.random() - 0.5) * radius * 0.4;
+          ctx.fillStyle = `rgba(46, 80, 51, ${0.4 + Math.random() * 0.3})`;
+          ctx.beginPath();
+          ctx.arc(treeX, treeY, 1 + Math.random() * 2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+    }
+  }, []);
+
+  // Couleurs de transition entre terrains
+  const getTransitionColor = (terrain1: string, terrain2: string) => {
+    const colors: Record<string, string> = {
+      grass: '#7fb069',
+      forest: '#386641',
+      mountain: '#8d5524',
+      water: '#3a86ff',
+      desert: '#e9c46a',
+      swamp: '#52796f'
+    };
+    
+    const color1 = colors[terrain1] || '#7fb069';
+    const color2 = colors[terrain2] || '#7fb069';
+    
+    // Couleur de mélange
+    const middleColor = blendColors(color1, color2);
+    
+    return {
+      from: color1,
+      middle: middleColor,
+      to: color2
+    };
+  };
+
+  // Fonction pour mélanger deux couleurs hexadécimales
+  const blendColors = (color1: string, color2: string) => {
+    const hex1 = color1.replace('#', '');
+    const hex2 = color2.replace('#', '');
+    
+    const r1 = parseInt(hex1.substr(0, 2), 16);
+    const g1 = parseInt(hex1.substr(2, 2), 16);
+    const b1 = parseInt(hex1.substr(4, 2), 16);
+    
+    const r2 = parseInt(hex2.substr(0, 2), 16);
+    const g2 = parseInt(hex2.substr(2, 2), 16);
+    const b2 = parseInt(hex2.substr(4, 2), 16);
+    
+    const r = Math.round((r1 + r2) / 2);
+    const g = Math.round((g1 + g2) / 2);
+    const b = Math.round((b1 + b2) / 2);
+    
+    return `rgb(${r}, ${g}, ${b})`;
+  }
 
   // Render hexagonal tile with enhanced visuals and ZFC vision levels
   const drawHexTile = useCallback((
