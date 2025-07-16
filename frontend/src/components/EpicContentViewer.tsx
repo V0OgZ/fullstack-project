@@ -4,6 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchEpicCreatures, fetchEpicHeroes, EpicCreature, EpicHero } from '../services/epicContentAPI';
 import { BUILDING_IMAGES, generateBuildingImage } from '../services/buildingImageService';
+import GoldorakEasterEgg from './GoldorakEasterEgg';
 
 interface EpicContentViewerProps {
   isVisible: boolean;
@@ -16,6 +17,7 @@ const EpicContentViewer: React.FC<EpicContentViewerProps> = ({ isVisible, onClos
   const [heroes, setHeroes] = useState<EpicHero[]>([]);
   const [buildingImages, setBuildingImages] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
+  const [showGoldorakEasterEgg, setShowGoldorakEasterEgg] = useState(false);
 
   // Charge les données depuis le backend
   useEffect(() => {
@@ -90,19 +92,36 @@ const EpicContentViewer: React.FC<EpicContentViewerProps> = ({ isVisible, onClos
           marginBottom: '20px'
         }}>
           <h2 style={{ margin: 0, color: '#d4af37' }}>🎮 CONTENU ÉPIQUE DE HEROES OF TIME</h2>
-          <button 
-            onClick={onClose}
-            style={{
-              backgroundColor: '#8b0000',
-              color: 'white',
-              border: 'none',
-              padding: '10px 20px',
-              borderRadius: '5px',
-              cursor: 'pointer'
-            }}
-          >
-            ✕ Fermer
-          </button>
+          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+            <button 
+              onClick={() => setShowGoldorakEasterEgg(true)}
+              style={{
+                backgroundColor: '#4a3728',
+                color: '#d4af37',
+                border: '2px solid #d4af37',
+                padding: '8px 16px',
+                borderRadius: '5px',
+                cursor: 'pointer',
+                fontSize: '12px',
+                fontWeight: 'bold'
+              }}
+            >
+              🚀 GOLDORAK
+            </button>
+            <button 
+              onClick={onClose}
+              style={{
+                backgroundColor: '#8b0000',
+                color: 'white',
+                border: 'none',
+                padding: '10px 20px',
+                borderRadius: '5px',
+                cursor: 'pointer'
+              }}
+            >
+              ✕ Fermer
+            </button>
+          </div>
         </div>
 
         {/* Tabs */}
@@ -305,6 +324,14 @@ const EpicContentViewer: React.FC<EpicContentViewerProps> = ({ isVisible, onClos
           </div>
         )}
       </div>
+      
+      {/* Goldorak Easter Egg */}
+      {showGoldorakEasterEgg && (
+        <GoldorakEasterEgg 
+          isActive={showGoldorakEasterEgg} 
+          onClose={() => setShowGoldorakEasterEgg(false)} 
+        />
+      )}
     </div>
   );
 };
