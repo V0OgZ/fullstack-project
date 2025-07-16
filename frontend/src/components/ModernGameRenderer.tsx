@@ -238,6 +238,54 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
         } else {
           fill = '#bada55';
         }
+        // Compute neighbor biomes for edge blending
+        const neighbors = [
+          [x+1, y], [x-1, y],
+          [x, y+1], [x, y-1],
+          [x + (y%2 ? 1 : -1), y-1],
+          [x + (y%2 ? 1 : -1), y+1]
+        ];
+        let edgeBlend = false;
+        for (const [nx, ny] of neighbors) {
+          if (
+            ny >= 0 && ny < enrichedMap.length &&
+            nx >= 0 && nx < enrichedMap[0].length &&
+            enrichedMap[ny][nx] && enrichedMap[ny][nx].biome !== tile.biome
+          ) {
+            edgeBlend = true;
+            break;
+          }
+        }
+        // Biome color palettes
+        const biomeColors: Record<string, string> = {
+          WATER: '#4a90e2',
+          DESERT: '#f5e6b2',
+          FOREST: '#3a5c1a',
+          MOUNTAIN: '#b0b0b0',
+          GRASS: '#bada55',
+          SWAMP: '#5A6B3C',
+        };
+        // Soft edge blending: interpolate color with neighbor biome if at edge
+        let fillColor = fill;
+        if (edgeBlend) {
+          // Find the most common neighbor biome
+          const biomeCounts: Record<string, number> = {};
+          for (const [nx, ny] of neighbors) {
+            if (
+              ny >= 0 && ny < enrichedMap.length &&
+              nx >= 0 && nx < enrichedMap[0].length &&
+              enrichedMap[ny][nx]
+            ) {
+              const b = enrichedMap[ny][nx].biome;
+              if (b !== tile.biome) biomeCounts[b] = (biomeCounts[b]||0)+1;
+            }
+          }
+          const edgeBiome = Object.entries(biomeCounts).sort((a,b)=>b[1]-a[1])[0]?.[0];
+          if (edgeBiome && biomeColors[edgeBiome]) {
+            // Blend 60% main, 40% neighbor
+            fillColor = `url(#blend-${tile.biome}-${edgeBiome})`;
+          }
+        }
         // Hexagone SVG
         const hexPoints = Array.from({length: 6}).map((_, i) => {
           const angle = Math.PI/3 * i;
@@ -251,7 +299,7 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
             onMouseMove={() => handleTileHover(x, y)}
             style={{cursor:'pointer'}}
           >
-            <polygon points={hexPoints} fill={fill} stroke="none" />
+            <polygon points={hexPoints} fill={fillColor} stroke="none" />
             {extra}
             {/* Hero rendering */}
             {hero && (
@@ -278,6 +326,76 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
   return (
     <div className="modern-game-renderer">
       <svg width={width} height={height} style={{background:'#1a1a2e', display:'block'}}>
+        <defs>
+          <linearGradient id="blend-WATER-DESERT" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#4a90e2" />
+            <stop offset="100%" stopColor="#f5e6b2" />
+          </linearGradient>
+          <linearGradient id="blend-WATER-FOREST" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#4a90e2" />
+            <stop offset="100%" stopColor="#3a5c1a" />
+          </linearGradient>
+          <linearGradient id="blend-DESERT-WATER" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#f5e6b2" />
+            <stop offset="100%" stopColor="#4a90e2" />
+          </linearGradient>
+          <linearGradient id="blend-DESERT-FOREST" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#f5e6b2" />
+            <stop offset="100%" stopColor="#3a5c1a" />
+          </linearGradient>
+          <linearGradient id="blend-FOREST-WATER" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#3a5c1a" />
+            <stop offset="100%" stopColor="#4a90e2" />
+          </linearGradient>
+          <linearGradient id="blend-FOREST-DESERT" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#3a5c1a" />
+            <stop offset="100%" stopColor="#f5e6b2" />
+          </linearGradient>
+          <linearGradient id="blend-FOREST-MOUNTAIN" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#3a5c1a" />
+            <stop offset="100%" stopColor="#b0b0b0" />
+          </linearGradient>
+          <linearGradient id="blend-MOUNTAIN-WATER" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#b0b0b0" />
+            <stop offset="100%" stopColor="#4a90e2" />
+          </linearGradient>
+          <linearGradient id="blend-MOUNTAIN-DESERT" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#b0b0b0" />
+            <stop offset="100%" stopColor="#f5e6b2" />
+          </linearGradient>
+          <linearGradient id="blend-MOUNTAIN-FOREST" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#b0b0b0" />
+            <stop offset="100%" stopColor="#3a5c1a" />
+          </linearGradient>
+          <linearGradient id="blend-GRASS-WATER" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#bada55" />
+            <stop offset="100%" stopColor="#4a90e2" />
+          </linearGradient>
+          <linearGradient id="blend-GRASS-DESERT" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#bada55" />
+            <stop offset="100%" stopColor="#f5e6b2" />
+          </linearGradient>
+          <linearGradient id="blend-GRASS-FOREST" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#bada55" />
+            <stop offset="100%" stopColor="#3a5c1a" />
+          </linearGradient>
+          <linearGradient id="blend-SWAMP-WATER" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#5A6B3C" />
+            <stop offset="100%" stopColor="#4a90e2" />
+          </linearGradient>
+          <linearGradient id="blend-SWAMP-DESERT" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#5A6B3C" />
+            <stop offset="100%" stopColor="#f5e6b2" />
+          </linearGradient>
+          <linearGradient id="blend-SWAMP-FOREST" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#5A6B3C" />
+            <stop offset="100%" stopColor="#3a5c1a" />
+          </linearGradient>
+          <linearGradient id="blend-SWAMP-MOUNTAIN" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#5A6B3C" />
+            <stop offset="100%" stopColor="#b0b0b0" />
+          </linearGradient>
+        </defs>
         {renderTiles()}
       </svg>
       {/* Debug info conservée */}
