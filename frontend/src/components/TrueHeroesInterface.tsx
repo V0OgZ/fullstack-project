@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useGameStore } from '../store/useGameStore';
 import ModernGameRenderer, { ModernGameRendererRef } from './ModernGameRenderer';
 import CastleManagementPanel from './CastleManagementPanel';
@@ -15,7 +15,7 @@ const TrueHeroesInterface: React.FC = () => {
   } = useGameStore();
   
   const [activePanel, setActivePanel] = useState<'scenario' | 'hero' | 'inventory' | 'castle'>('scenario');
-  const [rendererRef] = useState<React.RefObject<ModernGameRendererRef>>(React.createRef());
+  const rendererRef = useRef<ModernGameRendererRef>(null);
 
   // Load default game on component mount
   useEffect(() => {
@@ -49,7 +49,7 @@ const TrueHeroesInterface: React.FC = () => {
         <div className="header-left">
           <h1>Heroes of Time</h1>
           <div className="game-info">
-            <span>Turn: {currentGame?.turnNumber || 1}</span>
+            <span>Turn: {currentGame?.turn || 1}</span>
             <span>Player: {currentPlayer?.name || 'Unknown'}</span>
           </div>
         </div>
@@ -116,12 +116,12 @@ const TrueHeroesInterface: React.FC = () => {
             <div className="panel-content">
               <h2>Scenario Information</h2>
               <div className="scenario-info">
-                <h3>{currentGame?.scenario?.name || 'Conquest Classic'}</h3>
-                <p>{currentGame?.scenario?.description || 'A classic strategy scenario.'}</p>
+                <h3>{currentGame?.scenario || 'Conquest Classic'}</h3>
+                <p>A classic strategy scenario.</p>
                 <div className="scenario-stats">
-                  <div>Map Size: {currentGame?.scenario?.mapSize || 'Medium'}</div>
-                  <div>Players: {currentGame?.scenario?.maxPlayers || 4}</div>
-                  <div>Difficulty: {currentGame?.scenario?.difficulty || 'Normal'}</div>
+                  <div>Map Size: Medium</div>
+                  <div>Players: {currentGame?.players?.length || 4}</div>
+                  <div>Difficulty: Normal</div>
                 </div>
               </div>
             </div>
@@ -163,9 +163,13 @@ const TrueHeroesInterface: React.FC = () => {
             </div>
           )}
 
-          {activePanel === 'castle' && (
+          {activePanel === 'castle' && currentGame && currentPlayer && (
             <div className="panel-content">
-              <CastleManagementPanel />
+              <CastleManagementPanel 
+                gameId={currentGame.id}
+                playerId={currentPlayer.id}
+                onClose={() => setActivePanel('scenario')}
+              />
             </div>
           )}
         </div>

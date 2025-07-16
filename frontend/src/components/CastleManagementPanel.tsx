@@ -65,12 +65,15 @@ const CastleManagementPanel: React.FC<CastleManagementPanelProps> = ({ gameId, p
         setLoading(true);
         setError(null);
 
-        // Load player buildings using existing API
+        // Load player buildings using backend endpoint
         const buildingsResponse = await ApiService.getPlayerBuildings(gameId, playerId);
         setBuildings(buildingsResponse || []);
 
-        // Load available units using existing API
-        const unitsResponse = await ApiService.getAvailableUnits(gameId, playerId);
+        // Get castleId from the first building (assuming all buildings belong to the same castle)
+        const castleId = buildingsResponse?.[0]?.castleId;
+
+        // Load available units using backend endpoint with castleId if available
+        const unitsResponse = await ApiService.getAvailableUnits(gameId, playerId, castleId);
         setAvailableUnits(unitsResponse || {});
 
         // Load unit details for all available units
