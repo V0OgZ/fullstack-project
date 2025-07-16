@@ -5,18 +5,32 @@ import Game from './pages/Game';
 import EnhancedScenarioSelector from './components/EnhancedScenarioSelector';
 import OfflineAvatarTest from './components/OfflineAvatarTest';
 import HexagonalTestPage from './components/HexagonalTestPage';
+import InterfaceTestPage from './components/InterfaceTestPage';
+import { 
+  TestTrueHeroesInterface, 
+  TestSimpleGameInterface, 
+  TestModernGameInterface, 
+  TestSimpleModernInterface 
+} from './pages/TestPages';
 
 const App: React.FC = () => {
   return (
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<EnhancedScenarioSelector />} />
+          <Route path="/" element={<InterfaceTestPage />} />
+          <Route path="/old-home" element={<EnhancedScenarioSelector />} />
           <Route path="/game/:scenarioId" element={<Game />} />
           <Route path="/multiplayer" element={<Game />} />
           <Route path="/demo" element={<Game />} />
           <Route path="/offline-avatar-test" element={<OfflineAvatarTest />} />
           <Route path="/hexagon-test" element={<HexagonalTestPage />} />
+          
+          {/* Routes de test pour les interfaces */}
+          <Route path="/test/true-heroes" element={<TestTrueHeroesInterface />} />
+          <Route path="/test/simple-game" element={<TestSimpleGameInterface />} />
+          <Route path="/test/modern-game" element={<TestModernGameInterface />} />
+          <Route path="/test/simple-modern" element={<TestSimpleModernInterface />} />
         </Routes>
       </div>
     </Router>
