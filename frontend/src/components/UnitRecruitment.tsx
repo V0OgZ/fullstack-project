@@ -195,11 +195,7 @@ const UnitRecruitment: React.FC<UnitRecruitmentProps> = ({
 
     try {
       for (const [unitId, quantity] of unitsToRecruit) {
-        await ApiService.recruitUnits(selectedBuilding.buildingId, {
-          playerId: currentPlayer.id,
-          unitType: unitId,
-          quantity
-        });
+        await ApiService.recruitUnits(selectedBuilding.buildingId, unitId, quantity);
       }
 
       // Refresh game state
