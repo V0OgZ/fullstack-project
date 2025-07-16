@@ -8,6 +8,7 @@ import { heroPortraitService } from '../services/heroPortraitService';
 
 interface HeroPortraitProps {
   heroName: string;
+  portraitId?: string; // Nouveau champ pour spécifier le portrait indépendamment de la classe
   gender?: 'm' | 'f';
   size?: 'small' | 'medium' | 'large';
   showTooltip?: boolean;
@@ -18,6 +19,7 @@ interface HeroPortraitProps {
 
 const HeroPortrait: React.FC<HeroPortraitProps> = ({
   heroName,
+  portraitId,
   gender,
   size = 'medium',
   showTooltip = false,
@@ -44,23 +46,25 @@ const HeroPortrait: React.FC<HeroPortraitProps> = ({
   useEffect(() => {
     const loadPortrait = async () => {
       try {
-        const url = heroPortraitService.getHeroPortrait(heroName, gender);
-        const meta = heroPortraitService.getPortraitMetadata(heroName);
+        // Utiliser portraitId si fourni, sinon utiliser heroName
+        const portraitKey = portraitId || heroName;
+        const url = heroPortraitService.getHeroPortrait(portraitKey, gender);
+        const meta = heroPortraitService.getPortraitMetadata(portraitKey);
         
         setPortraitUrl(url);
         setMetadata(meta);
         
         // Précharger l'image
-        await heroPortraitService.preloadPortrait(heroName);
+        await heroPortraitService.preloadPortrait(portraitKey);
         setIsLoaded(true);
       } catch (error) {
-        console.warn(`Failed to load portrait for ${heroName}:`, error);
+        console.warn(`Failed to load portrait for ${portraitId || heroName}:`, error);
         setHasError(true);
       }
     };
 
     loadPortrait();
-  }, [heroName, gender]);
+  }, [heroName, portraitId, gender]);
 
   // Gestion du clic
   const handleClick = () => {

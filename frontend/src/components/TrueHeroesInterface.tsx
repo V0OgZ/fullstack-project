@@ -5,7 +5,7 @@ import ModernGameRenderer, { ModernGameRendererRef } from './ModernGameRenderer'
 import CastleManagementPanel from './CastleManagementPanel';
 import GameScriptTester from './GameScriptTester';
 import HeroPortrait from './HeroPortrait';
-import EpicView from './EpicView';
+import EpicContentViewer from './EpicContentViewer';
 import './TrueHeroesInterface.css';
 
 interface TrueHeroesInterfaceProps {
@@ -36,7 +36,6 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
   
   const [selectedHeroId, setSelectedHeroId] = useState<string | null>(null);
   const [rightPanelContent, setRightPanelContent] = useState<'scenario' | 'hero' | 'castle' | 'script' | 'epic'>('scenario');
-  const [showEpicView, setShowEpicView] = useState(false);
   const [showEpicContent, setShowEpicContent] = useState(false);
   const rendererRef = useRef<ModernGameRendererRef>(null);
   const [movementMode, setMovementMode] = useState(false);
@@ -60,10 +59,6 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
 
   const handleScriptClick = () => {
     setRightPanelContent('script');
-  };
-
-  const handleEpicViewClick = () => {
-    setShowEpicView(true);
   };
 
   const handleTileClick = (position: { x: number; y: number }) => {
@@ -397,14 +392,6 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
             </button>
 
             <button 
-              className={`control-btn ${showEpicView ? 'active' : ''}`}
-              onClick={handleEpicViewClick}
-              title="🎨 Epic Asset Viewer - Browse all game content"
-            >
-              <span className="btn-icon">🎮</span>
-            </button>
-
-            <button 
               className="end-turn-btn"
               onClick={handleEndTurn}
               title={currentGame?.gameMode === 'hotseat' ? t('nextPlayer') : t('tooltip.endTurn')}
@@ -423,8 +410,8 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
         <div className="map-container">
           <ModernGameRenderer 
             ref={rendererRef}
-            width={1200} 
-            height={700}
+            width={1000} 
+            height={600}
             map={currentGame?.map || []}
             heroes={currentPlayer?.heroes || []}
             creatures={[]}
@@ -493,6 +480,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
                         <div className="hero-portrait">
                           <HeroPortrait 
                             heroName={hero.class || 'WARRIOR'} 
+                            portraitId={hero.portraitId || hero.class}
                             size="medium"
                             showTooltip={true}
                             onClick={() => handleHeroSelect(hero.id)}
@@ -849,17 +837,9 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({
 
       {/* Epic Content Viewer Modal */}
       {showEpicContent && (
-        <EpicView 
-          isOpen={showEpicContent}
+        <EpicContentViewer 
+          isVisible={showEpicContent}
           onClose={() => setShowEpicContent(false)}
-        />
-      )}
-
-      {/* Epic Asset Viewer Modal */}
-      {showEpicView && (
-        <EpicView 
-          isOpen={showEpicView}
-          onClose={() => setShowEpicView(false)}
         />
       )}
     </div>
