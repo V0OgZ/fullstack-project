@@ -9,6 +9,18 @@ Before making any changes or debugging, ALWAYS:
 4. Use existing debugging tools and follow established patterns
 5. Check existing components before creating new ones
 
+## 🔥 CRITICAL: ALWAYS BUILD FIRST!
+
+**MANDATORY WORKFLOW - NEVER SKIP:**
+1. **FIRST COMMAND**: `cd frontend && yarn build` - ALWAYS verify build works
+2. **IF BUILD FAILS**: Fix TypeScript/React errors before proceeding
+3. **THEN**: Run demos, tests, or start servers
+4. **NEVER**: Run tests or demos without successful build first
+
+**Build Status Required:**
+- ✅ Build successful with warnings = OK to proceed
+- ❌ Build failed with errors = STOP, fix compilation errors first
+
 ## 🎯 Current Project State (January 2025):
 - **Status**: ✅ FULLY FUNCTIONAL with polished UI
 - **Backend**: Spring Boot (Java) on port 8080 - STABLE
