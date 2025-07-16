@@ -1,0 +1,185 @@
+.interface-test-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: white;
+}
+
+.test-header {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.test-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.test-header p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.test-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.test-button {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid transparent;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.test-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, var(--button-color), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.test-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  border-color: var(--button-color);
+}
+
+.test-button:hover::before {
+  opacity: 0.1;
+}
+
+.test-button-icon {
+  font-size: 2rem;
+  margin-right: 15px;
+  z-index: 2;
+  position: relative;
+}
+
+.test-button-content {
+  flex: 1;
+  z-index: 2;
+  position: relative;
+}
+
+.test-button-content h3 {
+  margin: 0 0 5px 0;
+  font-size: 1.3rem;
+  color: var(--button-color);
+  font-weight: 600;
+}
+
+.test-button-content p {
+  margin: 0;
+  opacity: 0.8;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.test-button-arrow {
+  font-size: 1.5rem;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+  z-index: 2;
+  position: relative;
+}
+
+.test-button:hover .test-button-arrow {
+  opacity: 1;
+  transform: translateX(5px);
+}
+
+.test-info {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 25px;
+  margin-bottom: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.test-info h2 {
+  margin-top: 0;
+  color: #FFD700;
+  font-size: 1.5rem;
+}
+
+.test-info ol {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.test-info li {
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.test-info ul {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.test-info ul li {
+  margin-bottom: 5px;
+  list-style-type: none;
+  position: relative;
+}
+
+.test-debug {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 15px;
+  font-family: 'Monaco', 'Courier New', monospace;
+  font-size: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.test-debug h3 {
+  margin-top: 0;
+  color: #00FF00;
+  font-size: 1.1rem;
+}
+
+.test-debug p {
+  margin: 5px 0;
+  color: #CCCCCC;
+}
+
+@media (max-width: 768px) {
+  .test-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .test-header h1 {
+    font-size: 2rem;
+  }
+  
+  .test-button {
+    padding: 15px;
+  }
+  
+  .test-button-content h3 {
+    font-size: 1.1rem;
+  }
+} 
