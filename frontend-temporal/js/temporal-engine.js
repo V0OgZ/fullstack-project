@@ -10,16 +10,85 @@ class TemporalEngine {
         this.gameState = null;
         this.isConnected = false;
         this.updateInterval = null;
+        this.loadingScreen = null;
+        this.loadingStatus = null;
+        this.mainInterface = null;
         
+        this.initializeLoadingScreen();
         this.init();
     }
 
-    async init() {
-        console.log('🚀 Initializing Temporal Engine Interface...');
-        this.createGameBoard();
-        await this.checkConnection();
-        this.startPeriodicUpdates();
-        this.log('✅ Temporal Engine Interface Ready', 'success');
+    // ============================================
+    // LOADING SCREEN MANAGEMENT
+    // ============================================
+
+    initializeLoadingScreen() {
+        this.loadingScreen = document.getElementById('loadingScreen');
+        this.loadingStatus = document.querySelector('.loading-status');
+        this.mainInterface = document.getElementById('mainInterface');
+        
+        // Create particle effects
+        this.createParticles();
+        
+        this.updateLoadingStatus('Initializing temporal matrix...');
+    }
+
+    createParticles() {
+        const particlesContainer = document.getElementById('particles');
+        if (!particlesContainer) return;
+
+        // Create 20 particles
+        for (let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            // Random position and delay
+            const leftPosition = Math.random() * 100;
+            const delay = Math.random() * 8;
+            
+            particle.style.left = `${leftPosition}%`;
+            particle.style.animationDelay = `${delay}s`;
+            
+            // Random color variation
+            const colors = [
+                'rgba(233, 69, 96, 0.7)',
+                'rgba(0, 188, 212, 0.7)',
+                'rgba(243, 156, 18, 0.7)'
+            ];
+            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+            
+            particlesContainer.appendChild(particle);
+        }
+    }
+
+    updateLoadingStatus(message) {
+        if (this.loadingStatus) {
+            this.loadingStatus.textContent = message;
+            console.log(`🕰️ Loading: ${message}`);
+            
+            // Add a brief glow effect when status updates
+            this.loadingStatus.style.animation = 'none';
+            setTimeout(() => {
+                this.loadingStatus.style.animation = 'statusFade 1s ease-in-out infinite alternate';
+            }, 50);
+        }
+    }
+
+    async hideLoadingScreen() {
+        return new Promise((resolve) => {
+            if (this.loadingScreen) {
+                this.loadingScreen.classList.add('hidden');
+                this.mainInterface.classList.add('visible');
+                
+                // Wait for transition to complete
+                setTimeout(() => {
+                    this.loadingScreen.style.display = 'none';
+                    resolve();
+                }, 1000);
+            } else {
+                resolve();
+            }
+        });
     }
 
     // ============================================
@@ -353,6 +422,46 @@ class TemporalEngine {
                 this.refreshGameState();
             }
         }, 5000);
+    }
+
+    async init() {
+        console.log('🚀 Initializing Temporal Engine Interface...');
+        
+        // Step 1: Initialize UI components
+        this.updateLoadingStatus('⚡ Activating quantum interface...');
+        await this.delay(800);
+        this.createGameBoard();
+        
+        // Step 2: Check backend connection
+        this.updateLoadingStatus('🌀 Establishing temporal link...');
+        await this.delay(600);
+        const connected = await this.checkConnection();
+        
+        if (!connected) {
+            this.updateLoadingStatus('⚠️ Temporal rift detected - Running offline mode');
+            await this.delay(1200);
+        } else {
+            this.updateLoadingStatus('✅ Temporal engine synchronized');
+            await this.delay(400);
+        }
+        
+        // Step 3: Initialize periodic updates
+        this.updateLoadingStatus('🔮 Calibrating ψ-state monitors...');
+        await this.delay(500);
+        this.startPeriodicUpdates();
+        
+        // Step 4: Final initialization
+        this.updateLoadingStatus('⚡ Charging temporal capacitors...');
+        await this.delay(600);
+        
+        // Step 5: Ready to launch
+        this.updateLoadingStatus('🕰️ Temporal engine ready - Entering quantum realm...');
+        await this.delay(800);
+        
+        // Step 6: Hide loading screen and show main interface
+        await this.hideLoadingScreen();
+        
+        this.log('✅ Heroes of Time - Temporal Engine Interface Ready', 'success');
     }
 }
 
