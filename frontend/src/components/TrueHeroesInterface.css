@@ -149,6 +149,77 @@
   overflow: hidden;
 }
 
+/* NOUVEAUX STYLES POUR LA BARRE DU HAUT */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 8px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  width: 40px;
+  height: 40px;
+}
+
+.header-btn:hover {
+  background: rgba(255, 215, 0, 0.2);
+  border-color: rgba(255, 215, 0, 0.5);
+  transform: translateY(-2px);
+}
+
+.header-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.end-turn-btn {
+  background: linear-gradient(45deg, #FFD700, #FFA500) !important;
+  color: #000000 !important;
+  font-weight: bold;
+  border: 2px solid #FFD700;
+}
+
+.end-turn-btn:hover {
+  background: linear-gradient(45deg, #FFA500, #FFD700) !important;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+}
+
+.game-stats {
+  display: flex;
+  gap: 15px;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.game-stats span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  color: #ffffff;
+}
+
+.turn-counter {
+  color: #87CEEB !important;
+}
+
+.heroes-count {
+  color: #FFB347 !important;
+}
+
 .control-btn::before, .end-turn-btn::before {
   content: '';
   position: absolute;
