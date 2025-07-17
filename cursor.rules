@@ -2,7 +2,7 @@
   "project_name": "Heroes of Time - Temporal Engine",
   "version": "POC Alpha V0.1",
   "project_type": "Quantum Temporal Strategy Game Engine",
-  "last_update": "2025-07-17T12:42:09Z",
+  "last_update": "2025-07-17T12:43:45Z",
   "core_concepts": [
     "Jeu de stratégie temporelle quantique",
     "Timeline locale par joueur avec branches multiples",
@@ -99,7 +99,7 @@
       "Validation des mécaniques temporelles"
     ]
   },
-  "current_focus": "Système de persistance Cursor COMPLET et OPÉRATIONNEL - Prêt pour développement frontend",
+  "current_focus": "Scripts de simulation de partie COMPLETS - Prêt pour tests et démonstrations",
   "api_endpoints": {
     "games": "/api/games - Gestion des parties",
     "heroes": "/api/heroes - Actions des héros",
@@ -233,6 +233,10 @@
     {
       "timestamp": "2025-07-17T12:42:09Z",
       "change": "Scripts de simulation de partie créés - simulate-game.sh, simulate-quick.sh, simulate-performance.sh"
+    },
+    {
+      "timestamp": "2025-07-17T12:43:23Z",
+      "change": "Documentation mise à jour: 🎮 Scripts de Simulation de Partie COMPLETS - Heroes of Time"
     }
   ],
   "next_steps": [
