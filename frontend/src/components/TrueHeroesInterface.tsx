@@ -36,7 +36,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ onNavigate })
   // États existants
   const [showGameScriptTester, setShowGameScriptTester] = useState(false);
   const [showEpicContentViewer, setShowEpicContentViewer] = useState(false);
-  const [activePanel, setActivePanel] = useState<'scenario' | 'hero' | 'castle' | 'inventory'>('scenario');
+  const [activePanel, setActivePanel] = useState<'scenario' | 'hero' | 'castle' | 'inventory' | 'script' | 'epic'>('scenario');
   const [testMode, setTestMode] = useState(false);
   
   // NOUVEAU: État pour le mode terrain hybride
@@ -216,77 +216,100 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ onNavigate })
                 className={`sidebar-tab ${activePanel === 'scenario' ? 'active' : ''}`}
                 onClick={() => setActivePanel('scenario')}
                 title="Scenario"
-          >
-            🏔️
-          </button>
-          <button 
-            className={`sidebar-tab ${activePanel === 'hero' ? 'active' : ''}`}
-            onClick={() => setActivePanel('hero')}
-            title="Hero"
-          >
-            ⚔️
-          </button>
-          <button 
-            className={`sidebar-tab ${activePanel === 'castle' ? 'active' : ''}`}
-            onClick={() => setActivePanel('castle')}
-            title="Castle"
-          >
-            🏰
-          </button>
-          <button 
-            className={`sidebar-tab ${activePanel === 'inventory' ? 'active' : ''}`}
-            onClick={() => setActivePanel('inventory')}
-            title="Inventory"
-          >
-            🎒
-          </button>
-        </div>
-      </div>
-
-      <div className="sidebar-content">
-        {activePanel === 'scenario' && (
-          <div className="panel-content">
-            <h2>🏔️ Scenario</h2>
-            <div className="scenario-info">
-              <h3>{currentGame?.scenario || 'Conquest Classic'}</h3>
-              <p>Welcome to Heroes of Time!</p>
-            </div>
-            
-            {/* NOUVEAU: Sélecteur de mode terrain */}
-            <TerrainModeSelector 
-              currentMode={terrainMode}
-              onModeChange={setTerrainMode}
-              disabled={isLoading}
-            />
-            
-            <div className="scenario-stats">
-              <div>Turn: {currentGame?.turn || 1}</div>
-              <div>Player: {currentPlayer?.name || 'Player 1'}</div>
-              <div>Heroes: {currentPlayer?.heroes?.length || 0}</div>
-              <div>Gold: {currentPlayer?.resources?.gold || 0}</div>
-            </div>
-            
-            {/* NOUVEAU: Bouton Goldorak Easter Egg */}
-            <div className="easter-egg-section">
-              <button
-                className="goldorak-btn"
-                onClick={() => setShowGoldorakEasterEgg(true)}
-                style={{
-                  background: 'linear-gradient(45deg, #ff6b6b, #ff4757)',
-                  color: 'white',
-                  border: 'none',
-                  padding: '8px 16px',
-                  borderRadius: '6px',
-                  cursor: 'pointer',
-                  fontSize: '12px',
-                  marginTop: '10px'
-                }}
               >
-                🚀 Goldorak Easter Egg
+                🏔️
+              </button>
+              <button 
+                className={`sidebar-tab ${activePanel === 'hero' ? 'active' : ''}`}
+                onClick={() => setActivePanel('hero')}
+                title="Hero"
+              >
+                ⚔️
+              </button>
+              <button 
+                className={`sidebar-tab ${activePanel === 'castle' ? 'active' : ''}`}
+                onClick={() => setActivePanel('castle')}
+                title="Castle"
+              >
+                🏰
+              </button>
+              <button 
+                className={`sidebar-tab ${activePanel === 'inventory' ? 'active' : ''}`}
+                onClick={() => setActivePanel('inventory')}
+                title="Inventory"
+              >
+                🎒
+              </button>
+              <button 
+                className={`sidebar-tab ${activePanel === 'script' ? 'active' : ''}`}
+                onClick={() => setActivePanel('script')}
+                title="Script Editor"
+              >
+                🧪
+              </button>
+              <button 
+                className={`sidebar-tab ${activePanel === 'epic' ? 'active' : ''}`}
+                onClick={() => setActivePanel('epic')}
+                title="Epic Content"
+              >
+                🌟
               </button>
             </div>
           </div>
-        )}
+
+          <div className="sidebar-content">
+            {activePanel === 'scenario' && (
+              <div className="panel-content scenario-panel">
+                <div className="panel-header">
+                  <h3>🏔️ Scenario</h3>
+                </div>
+                <div className="scenario-info">
+                  <h4>{currentGame?.scenario || 'Conquest Classic'}</h4>
+                  <p>Welcome to Heroes of Time!</p>
+                  
+                  {/* Sélecteur de mode terrain */}
+                  <TerrainModeSelector 
+                    currentMode={terrainMode}
+                    onModeChange={setTerrainMode}
+                    disabled={isLoading}
+                  />
+                  
+                  <div className="scenario-stats">
+                    <div>Turn: {currentGame?.turn || 1}</div>
+                    <div>Player: {currentPlayer?.name || 'Player 1'}</div>
+                    <div>Heroes: {currentPlayer?.heroes?.length || 0}</div>
+                    <div>Gold: {currentPlayer?.resources?.gold || 0}</div>
+                  </div>
+                  
+                  {/* Contrôles du jeu */}
+                  <div className="game-controls">
+                    <button 
+                      className="end-turn-btn"
+                      onClick={handleEndTurn}
+                      disabled={isLoading}
+                    >
+                      ⭐ End Turn
+                    </button>
+                    <button 
+                      className="test-mode-btn"
+                      onClick={() => setTestMode(!testMode)}
+                    >
+                      🔧 Test Mode
+                    </button>
+                  </div>
+
+                  {/* Goldorak Easter Egg */}
+                  <div className="easter-egg-section">
+                    <button
+                      className="goldorak-btn"
+                      onClick={() => setShowGoldorakEasterEgg(true)}
+                    >
+                      🚀 Goldorak Easter Egg
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
             
             {activePanel === 'hero' && (
               <EnhancedHeroPanel 
@@ -311,70 +334,43 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ onNavigate })
                 onItemUse={handleInventoryAction}
               />
             )}
+
+            {/* SCRIPT EDITOR INTÉGRÉ */}
+            {activePanel === 'script' && (
+              <div className="panel-content script-panel">
+                <div className="panel-header">
+                  <h3>🧪 Script Editor</h3>
+                </div>
+                <div className="script-editor-container">
+                  <GameScriptTester />
+                </div>
+              </div>
+            )}
+
+            {/* EPIC CONTENT INTÉGRÉ */}
+            {activePanel === 'epic' && (
+              <div className="panel-content epic-panel">
+                <div className="panel-header">
+                  <h3>🌟 Epic Content</h3>
+                </div>
+                <div className="epic-content-container">
+                  <EpicContentViewer
+                    isVisible={true}
+                    onClose={() => setActivePanel('scenario')}
+                  />
+                </div>
+              </div>
+            )}
           </div>
-
-          {/* Script Panel */}
-          {showGameScriptTester && (
-            <div className="panel-content script-panel">
-              <div className="panel-header">
-                <h3>🧪 {t('tooltip.scriptTester')}</h3>
-                <button 
-                  className="close-panel-btn"
-                  onClick={() => setShowGameScriptTester(false)}
-                >
-                  ×
-                </button>
-              </div>
-              
-              <div className="script-tester-container">
-                <GameScriptTester />
-              </div>
-            </div>
-          )}
-
-          {/* Scenario Panel (fallback) */}
-          {activePanel === 'scenario' && (
-            <div className="panel-content scenario-panel">
-              <div className="panel-header">
-                <h3>🎮 Game Scenario</h3>
-              </div>
-              <div className="scenario-content">
-                <p>Game scenario information will be displayed here.</p>
-              </div>
-            </div>
-          )}
         </div>
       </div>
 
       {/* Goldorak Easter Egg */}
       {showGoldorakEasterEgg && (
-        <div className="goldorak-overlay">
-          <div className="goldorak-content">
-            <h2>🚀 GOLDORAK EASTER EGG ACTIVATED!</h2>
-            <p>Fulgorocursor mode enabled!</p>
-            <button onClick={() => setShowGoldorakEasterEgg(false)}>
-              Close
-            </button>
-          </div>
-        </div>
-      )}
-      
-      {/* Epic Content Viewer */}
-      {showEpicContentViewer && (
-        <EpicContentViewer
-          isVisible={showEpicContentViewer}
-          onClose={() => setShowEpicContentViewer(false)}
+        <GoldorakEasterEgg
+          isActive={showGoldorakEasterEgg}
+          onClose={() => setShowGoldorakEasterEgg(false)}
         />
-      )}
-      
-      {/* Game Script Tester */}
-      {showGameScriptTester && (
-        <div className="game-script-overlay">
-          <GameScriptTester />
-          <button onClick={() => setShowGameScriptTester(false)}>
-            Close
-          </button>
-        </div>
       )}
     </div>
   );
