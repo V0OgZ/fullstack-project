@@ -16,7 +16,7 @@
             background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
             color: #ffffff;
             height: 100vh;
-            overflow-x: hidden;
+            overflow: hidden;
             position: relative;
             margin: 0;
             padding: 0;
@@ -30,7 +30,7 @@
             width: 100%;
             height: 100%;
             background: url('assets/images/dimensions-paralleles.png') center / cover;
-            opacity: 0.03;
+            opacity: 0.02;
             z-index: -1;
             pointer-events: none;
         }
@@ -119,9 +119,11 @@
         ================= */
         .main-interface {
             display: flex;
-            height: calc(100vh - 140px);
+            height: calc(100vh - 120px);
             position: relative;
             overflow: hidden;
+            padding: 0;
+            margin: 0;
         }
 
         .main-interface::after {
@@ -132,9 +134,9 @@
             width: 100%;
             height: 100%;
             background: url('assets/images/epee-temporelle.png') center / contain no-repeat;
-            background-size: 60%;
+            background-size: 40%;
             transform: rotate(-90deg);
-            opacity: 0.08;
+            opacity: 0.15;
             z-index: 0;
             pointer-events: none;
         }
@@ -392,21 +394,21 @@
             bottom: 125%;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.1);
             color: white;
-            padding: 6px 10px;
-            border-radius: 4px;
-            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 10px;
             white-space: nowrap;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s;
             z-index: 1000;
-            border: 1px solid rgba(0, 191, 255, 0.2);
+            border: 1px solid rgba(0, 191, 255, 0.1);
             font-weight: normal;
             max-width: 200px;
             white-space: normal;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
         }
 
         .scenario-btn.tooltip::after {
@@ -506,18 +508,20 @@
         }
 
         .scenario-btn:hover {
-            background: rgba(0, 191, 255, 0.08);
-            border-color: rgba(0, 191, 255, 0.4);
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(0, 191, 255, 0.3);
             color: white;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
         }
 
-        .scenario-btn.active {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(0, 191, 255, 0.6);
+        .scenario-btn.active,
+        .scenario-btn:focus {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(0, 191, 255, 0.8);
             color: white;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 1);
-            backdrop-filter: blur(40px);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 1);
+            backdrop-filter: blur(60px);
+            box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.1);
         }
 
         .menu-actions {
@@ -568,11 +572,14 @@
             cursor: pointer;
             backdrop-filter: blur(25px);
             transition: all 0.3s ease;
+            font-weight: 500;
+            text-shadow: 0 0 10px rgba(0, 191, 255, 0.3);
         }
 
         .start-btn:hover {
             background: rgba(0, 191, 255, 0.2);
             border-color: rgba(0, 191, 255, 0.5);
+            text-shadow: 0 0 15px rgba(0, 191, 255, 0.5);
         }
 
         /* =================
@@ -592,9 +599,10 @@
         }
 
         input[type="checkbox"]:checked {
-            background: rgba(0, 191, 255, 0.15);
-            border-color: rgba(0, 191, 255, 0.6);
-            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(0, 191, 255, 0.8);
+            backdrop-filter: blur(30px);
+            box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.1);
         }
 
         input[type="checkbox"]:checked::after {
@@ -606,7 +614,17 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            text-shadow: 0 0 5px rgba(0, 191, 255, 0.8);
+            text-shadow: 0 0 10px rgba(0, 191, 255, 1);
+        }
+
+        /* Effet de transparence pour les options activées */
+        .setting-item:has(input[type="checkbox"]:checked) {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 8px;
+            margin: 4px 0;
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(0, 191, 255, 0.2);
         }
 
         input[type="checkbox"]:hover {
@@ -625,12 +643,50 @@
             border-radius: 6px;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
+            -webkit-appearance: none;
+            -moz-appearance: textfield;
+        }
+
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
         }
 
         input[type="number"]:focus {
             outline: none;
             border-color: rgba(0, 191, 255, 0.5);
             box-shadow: 0 0 10px rgba(0, 191, 255, 0.3);
+        }
+
+        /* Conteneur pour input avec boutons +/- */
+        .number-input-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .number-btn {
+            background: rgba(0, 191, 255, 0.1);
+            border: 1px solid rgba(0, 191, 255, 0.3);
+            color: #00bfff;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(15px);
+        }
+
+        .number-btn:hover {
+            background: rgba(0, 191, 255, 0.2);
+            border-color: rgba(0, 191, 255, 0.5);
+            transform: scale(1.05);
         }
 
         select {
@@ -969,15 +1025,27 @@
                     <h3>🔮 Paramètres Quantiques</h3>
                     <div class="setting-item">
                         <label class="tooltip" data-tooltip="Nombre maximum d'états quantiques superposés par joueur">Max ψ-States:</label>
-                        <input type="number" id="maxPsiStates" value="10" min="5" max="50">
+                        <div class="number-input-container">
+                            <button class="number-btn" onclick="adjustNumber('maxPsiStates', -1)">−</button>
+                            <input type="number" id="maxPsiStates" value="10" min="5" max="50" readonly>
+                            <button class="number-btn" onclick="adjustNumber('maxPsiStates', 1)">+</button>
+                        </div>
                     </div>
                     <div class="setting-item">
                         <label class="tooltip" data-tooltip="Nombre de timelines parallèles simultanées">Max Timelines:</label>
-                        <input type="number" id="maxTimelines" value="3" min="1" max="10">
+                        <div class="number-input-container">
+                            <button class="number-btn" onclick="adjustNumber('maxTimelines', -1)">−</button>
+                            <input type="number" id="maxTimelines" value="3" min="1" max="10" readonly>
+                            <button class="number-btn" onclick="adjustNumber('maxTimelines', 1)">+</button>
+                        </div>
                     </div>
                     <div class="setting-item">
                         <label class="tooltip" data-tooltip="Durée maximum par tour de jeu">Temps/Tour (sec):</label>
-                        <input type="number" id="turnTime" value="60" min="30" max="300">
+                        <div class="number-input-container">
+                            <button class="number-btn" onclick="adjustNumber('turnTime', -1)">−</button>
+                            <input type="number" id="turnTime" value="60" min="30" max="300" readonly>
+                            <button class="number-btn" onclick="adjustNumber('turnTime', 1)">+</button>
+                        </div>
                     </div>
                     <div class="setting-item">
                         <label class="tooltip" data-tooltip="Taille de la carte de jeu">Taille Carte:</label>
@@ -1059,6 +1127,18 @@
             });
             
             // Initialisation automatique
+            
+            // Fonction pour ajuster les valeurs numériques
+            window.adjustNumber = function(inputId, delta) {
+                const input = document.getElementById(inputId);
+                if (input) {
+                    const currentValue = parseInt(input.value) || 0;
+                    const min = parseInt(input.min) || 0;
+                    const max = parseInt(input.max) || 100;
+                    const newValue = Math.max(min, Math.min(max, currentValue + delta));
+                    input.value = newValue;
+                }
+            };
             if (typeof initializeTemporalEngine === 'function') {
                 initializeTemporalEngine();
                 loadDemoGame();
