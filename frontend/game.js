@@ -292,26 +292,52 @@ class GameRenderer {
         if (!this.gameState.heroes) return;
         
         this.gameState.heroes.forEach(hero => {
-            const { x, y } = this.hexToPixel(hero.position.x, hero.position.y);
+            // Smooth movement animation
+            if (!hero.displayPos) {
+                hero.displayPos = { x: hero.position.x, y: hero.position.y };
+            }
+            
+            // Lerp towards target position
+            const lerpSpeed = 0.15;
+            hero.displayPos.x += (hero.position.x - hero.displayPos.x) * lerpSpeed;
+            hero.displayPos.y += (hero.position.y - hero.displayPos.y) * lerpSpeed;
+            
+            const { x, y } = this.hexToPixel(hero.displayPos.x, hero.displayPos.y);
             
             // Hero glow based on health
             const healthRatio = hero.health / (hero.maxHealth || 100);
             const glowColor = `rgba(${255 * (1 - healthRatio)}, ${255 * healthRatio}, 0, 0.5)`;
             
+            // Animated pulse effect
+            const pulseSize = 15 + Math.sin(this.animationFrame * 0.1 + hero.id) * 3;
+            
             this.ctx.beginPath();
-            this.ctx.arc(x, y, 15, 0, Math.PI * 2);
+            this.ctx.arc(x, y, pulseSize, 0, Math.PI * 2);
             this.ctx.fillStyle = glowColor;
             this.ctx.fill();
             
-            // Hero icon
+            // Hero icon with bounce animation
+            const bounceY = y + Math.sin(this.animationFrame * 0.05 + hero.id * 2) * 2;
             this.ctx.fillStyle = '#FFD700';
             this.ctx.font = '20px Arial';
             this.ctx.textAlign = 'center';
             this.ctx.textBaseline = 'middle';
-            this.ctx.fillText('🦸', x, y);
             
-            // Hero name
-            this.ctx.font = '12px Arial';
+            // Different icons for different heroes
+            const heroIcons = {
+                'Arthur': '⚔️',
+                'Morgana': '🧙‍♀️',
+                'Ragnar': '🛡️',
+                'Merlin': '🔮',
+                'default': '🦸'
+            };
+            const icon = heroIcons[hero.name] || heroIcons.default;
+            this.ctx.fillText(icon, x, bounceY);
+            
+            // Hero name with shadow
+            this.ctx.font = 'bold 12px Arial';
+            this.ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+            this.ctx.fillText(hero.name, x + 1, y - 24);
             this.ctx.fillStyle = '#FFFFFF';
             this.ctx.fillText(hero.name, x, y - 25);
             
@@ -329,6 +355,24 @@ class GameRenderer {
                 this.ctx.font = '10px Arial';
                 this.ctx.fillStyle = '#00D4FF';
                 this.ctx.fillText(hero.timeline, x + 20, y - 10);
+            }
+            
+            // Movement trail effect
+            if (Math.abs(hero.position.x - hero.displayPos.x) > 0.1 || 
+                Math.abs(hero.position.y - hero.displayPos.y) > 0.1) {
+                const trailX = x - (hero.position.x - hero.displayPos.x) * 20;
+                const trailY = y - (hero.position.y - hero.displayPos.y) * 20;
+                
+                const gradient = this.ctx.createLinearGradient(trailX, trailY, x, y);
+                gradient.addColorStop(0, 'rgba(255, 215, 0, 0)');
+                gradient.addColorStop(1, 'rgba(255, 215, 0, 0.3)');
+                
+                this.ctx.strokeStyle = gradient;
+                this.ctx.lineWidth = 3;
+                this.ctx.beginPath();
+                this.ctx.moveTo(trailX, trailY);
+                this.ctx.lineTo(x, y);
+                this.ctx.stroke();
             }
         });
     }

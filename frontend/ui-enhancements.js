@@ -105,9 +105,17 @@
         try {
             this.scriptConsole.addToOutput('✨ Running enhanced temporal demo...', 'info');
             
-            // Create demo game
-            await this.gameAPI.createGame('Demo Game');
-            this.currentGameId = this.gameAPI.gameId;
+            // Try to create real game first
+            try {
+                await this.gameAPI.createGame('Demo Game');
+                this.currentGameId = this.gameAPI.gameId;
+            } catch (error) {
+                // Fallback to demo mode
+                this.scriptConsole.addToOutput('🎮 Backend not available - Running in DEMO MODE', 'warning');
+                this.currentGameId = 'DEMO-' + Date.now();
+                this.demoMode = true;
+                this.initDemoState();
+            }
             
             // Execute demo scripts with artifacts
             const demoScripts = [
@@ -127,7 +135,7 @@
             ];
             
             for (const script of demoScripts) {
-                await this.executeScriptLine(script);
+                await this.executeScript(script);
                 await new Promise(resolve => setTimeout(resolve, 500));
                 
                 // Add timeline events for important actions
@@ -145,6 +153,101 @@
             
         } catch (error) {
             this.scriptConsole.addToOutput(`❌ Demo failed: ${error.message}`, 'error');
+        }
+    }
+    
+    initDemoState() {
+        // Initialize demo game state
+        this.demoGameState = {
+            gameId: this.currentGameId,
+            currentTurn: 1,
+            currentTimeline: 'ℬ1',
+            players: ['Player 1', 'Player 2'],
+            heroes: [],
+            psiStates: [],
+            artifacts: [],
+            tiles: []
+        };
+        
+        // Update UI
+        document.getElementById('game-id').textContent = this.currentGameId;
+        document.getElementById('turn-count').textContent = '1';
+        document.getElementById('timeline-branch').textContent = 'ℬ1';
+        document.getElementById('player-count').textContent = '2';
+    }
+    
+    async executeScript(script) {
+        try {
+            if (this.demoMode) {
+                // Execute in demo mode
+                this.executeDemoScript(script);
+                this.scriptConsole.addToOutput(`✅ ${script}`, 'success');
+                return { success: true };
+            } else {
+                const result = await this.gameAPI.executeScript(script);
+                this.scriptConsole.addToOutput(`✅ ${script}`, 'success');
+                await this.refreshGameState();
+                return result;
+            }
+        } catch (error) {
+            this.scriptConsole.addToOutput(`❌ Error: ${error.message}`, 'error');
+            throw error;
+        }
+    }
+    
+    executeDemoScript(script) {
+        if (!this.demoGameState) {
+            this.initDemoState();
+        }
+        
+        // Parse and execute different script types
+        if (script.startsWith('HERO(')) {
+            const name = script.match(/HERO\(([^)]+)\)/)[1];
+            const hero = {
+                id: Date.now(),
+                name: name,
+                position: { x: 5 + this.demoGameState.heroes.length * 2, y: 5 },
+                health: 100,
+                maxHealth: 100,
+                timeline: 'ℬ1'
+            };
+            this.demoGameState.heroes.push(hero);
+            this.updateHeroesList(this.demoGameState.heroes);
+            
+        } else if (script.startsWith('MOV(')) {
+            const match = script.match(/MOV\(([^,]+),\s*@(\d+),(\d+)\)/);
+            if (match) {
+                const [_, heroName, x, y] = match;
+                const hero = this.demoGameState.heroes.find(h => h.name === heroName);
+                if (hero) {
+                    hero.position = { x: parseInt(x), y: parseInt(y) };
+                }
+            }
+            
+        } else if (script.includes('ψ')) {
+            const psiMatch = script.match(/ψ(\d+):/);
+            if (psiMatch) {
+                const psiState = {
+                    id: 'ψ' + psiMatch[1],
+                    expression: script,
+                    status: 'ACTIVE',
+                    targetX: 10,
+                    targetY: 10
+                };
+                this.demoGameState.psiStates.push(psiState);
+                this.updatePsiStatesList(this.demoGameState.psiStates);
+            }
+            
+        } else if (script.startsWith('†')) {
+            const psiId = script.substring(1);
+            this.demoGameState.psiStates = this.demoGameState.psiStates.filter(p => p.id !== psiId);
+            this.updatePsiStatesList(this.demoGameState.psiStates);
+            this.addTimelineEvent('Collapse: ' + psiId);
+        }
+        
+        // Update game renderer
+        if (this.gameRenderer) {
+            this.gameRenderer.updateState(this.demoGameState);
         }
     }
 
