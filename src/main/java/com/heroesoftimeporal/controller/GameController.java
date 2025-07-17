@@ -4,6 +4,7 @@ import com.heroesoftimeporal.model.*;
 import com.heroesoftimeporal.engine.TimelineManager;
 import com.heroesoftimeporal.engine.CausalCollapseHandler;
 import com.heroesoftimeporal.script.TemporalScriptParser;
+import com.heroesoftimeporal.script.ScriptCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -221,7 +222,7 @@ public class GameController {
             
             // Convert commands to ψ-states
             for (ScriptCommand command : commands) {
-                if (command.getType() == ScriptCommand.CommandType.PSI_STATE_CREATION) {
+                if (command.getType() == ScriptCommand.CommandType.CREATE_PSI_STATE) {
                     PsiState psiState = convertCommandToPsiState(command);
                     psiStates.add(psiState);
                     game.getPsiStates().add(psiState);
@@ -346,17 +347,22 @@ public class GameController {
     // Helper method to convert ScriptCommand to PsiState
     private PsiState convertCommandToPsiState(ScriptCommand command) {
         PsiState psiState = new PsiState();
-        psiState.setId(command.getId());
-        psiState.setExpression(command.getExpression());
-        psiState.setBranch(command.getBranch());
-        psiState.setDeltaTime(command.getDeltaTime());
-        psiState.setTargetX(command.getTargetX());
-        psiState.setTargetY(command.getTargetY());
+        psiState.setId(command.getStringParam("psiId") != null ? command.getStringParam("psiId") : "ψ001");
+        psiState.setExpression(command.getOriginalLine() != null ? command.getOriginalLine() : "");
+        psiState.setBranch("ℬ1");
+        psiState.setDeltaTime(command.getIntParam("deltaTime") != null ? command.getIntParam("deltaTime") : 1);
+        
+        int[] coords = command.getCoordinates();
+        if (coords != null) {
+            psiState.setTargetX(coords[0]);
+            psiState.setTargetY(coords[1]);
+        }
+        
         psiState.setAction(command.getAction());
-        psiState.setParameters(command.getParameters());
-        psiState.setProbability(command.getProbability());
+        psiState.setParameters(command.getParameters().toString());
+        psiState.setProbability(0.8f); // Default probability
         psiState.setStatus(PsiState.PsiStatus.ACTIVE);
-        psiState.setTriggerTurn(command.getTriggerTurn());
+        psiState.setTriggerTurn(1); // Default trigger turn
         return psiState;
     }
     
