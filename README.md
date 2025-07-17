@@ -2,7 +2,16 @@
 
 ## Quick Start
 
-### 1. Run the Game
+### 1. Run the Game (Easy Way)
+```bash
+# Start everything at once
+./start-all.sh
+
+# Stop everything
+./stop-all.sh
+```
+
+### 2. Run the Game (Manual Way)
 ```bash
 # Start backend
 cd backend && mvn spring-boot:run
@@ -14,13 +23,13 @@ cd frontend && python3 -m http.server 8000
 cd frontend-temporal && python3 -m http.server 5173
 ```
 
-### 2. Test Everything
+### 3. Test Everything
 ```bash
 cd scripts-test
 ./demo-heroes-of-might-magic-complete.sh
 ```
 
-### 3. Access Interfaces
+### 4. Access Interfaces
 - **Backend API**: http://localhost:8080/api/temporal/health
 - **Frontend Classic**: http://localhost:8000
 - **Temporal Console**: http://localhost:5173
