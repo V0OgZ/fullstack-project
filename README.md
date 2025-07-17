@@ -1,4 +1,25 @@
-# Heroes of Time - Quantum Temporal Strategy Game
+# 🕰️ Heroes of Time - Temporal Engine
+
+<img width="1024" height="1536" alt="Heroes of Time - Temporal Sword" src="https://github.com/user-attachments/assets/746f871d-b70c-4df7-992e-0c84fe819c8d" />
+
+---
+
+## 🎮 **The Ultimate Temporal Strategy Experience**
+
+**Heroes of Time** revolutionizes strategy gaming by merging **Heroes of Might & Magic 3** with **quantum temporal mechanics**. Master time itself, manipulate causality, and conquer across multiple timelines in this groundbreaking game engine.
+
+### 🏆 **Game Features**
+- **⚔️ Classic H3 Combat**: Heroes, armies, castles, and epic battles
+- **🌀 Quantum Mechanics**: ψ-states, temporal collapse, timeline branching  
+- **🔮 Temporal Artifacts**: Time manipulation items with unique effects
+- **📜 Script Language**: Complete temporal scripting system with Unicode symbols
+- **🎯 Strategic Depth**: Plan moves across past, present, and future
+- **🌌 5D Coordinates**: Navigate through space-time dimensions
+
+### 💫 **What Makes It Special**
+*"Imagine commanding armies not just across battlefields, but across time itself. Create quantum superpositions of your moves, collapse enemy timelines, and rewrite history with temporal artifacts. This isn't just strategy - it's temporal warfare."*
+
+---
 
 ## Quick Start
 
