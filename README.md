@@ -8,13 +8,72 @@
 
 **Heroes of Time** combines Heroes of Might & Magic 3 gameplay with quantum temporal mechanics. Players can create quantum superpositions (ψ-states), manage multiple timelines, and trigger causal collapses through temporal artifacts.
 
-### 🏆 **Core Features**
-- **H3 Combat System**: Heroes, armies, castles, and turn-based battles
-- **Quantum Mechanics**: ψ-states, temporal collapse, timeline branching  
-- **Temporal Artifacts**: Time manipulation items with scripted effects
-- **Script Language**: Complete temporal scripting with Unicode symbols (ψ, †, ⊙, Π)
-- **5D Coordinates**: Space-time navigation system (x, y, z, t, ψ)
-- **REST API**: Backend with temporal endpoints and game state management
+### �� **Core Features**
+
+**🏰 Heroes of Might & Magic 3 Base System:**
+- **Turn-based Combat**: Classic H3 battle system with heroes, armies, and spells
+- **City Building**: Construct castles, recruit troops, gather resources
+- **Hero Development**: Level progression, skill trees, and equipment
+- **Magic System**: Spell casting, mana management, and magical artifacts
+
+**🌀 Quantum Temporal Mechanics:**
+- **ψ-states (Psi States)**: Create quantum superpositions of actions that exist until observed
+- **Timeline Branching**: Multiple parallel realities (ℬ1, ℬ2, ℬ3...) with different outcomes
+- **Causal Collapse**: When two players' actions conflict, reality collapses to one outcome
+- **Observation Triggers**: Enemy movement can trigger collapse of your planned actions
+
+**🔮 Temporal Artifacts System:**
+- **5 Tiers**: Common (60%), Rare (25%), Legendary (12%), Paradox (2.5%), Singularity (0.5%)
+- **Unique Effects**: Time reversal, probability manipulation, timeline anchoring
+- **Limited Uses**: Each artifact has finite uses per game for balance
+- **Synergy Combos**: Artifacts can be combined for powerful effects
+
+**📜 Advanced Script Language:**
+- **Unicode Symbols**: ψ (psi-state), † (collapse), ⊙ (superposition), Π (observation)
+- **5D Coordinates**: Navigate space (x,y,z) and time (timeline, temporal layer)
+- **Probability System**: Actions have success chances affected by artifacts and positioning
+
+### 🎯 **Gameplay Example: Temporal Warfare**
+
+<img width="800" height="600" alt="Temporal Battle Scene" src="https://github.com/user-attachments/assets/temporal-battle-quantum-mechanics.png" />
+
+**Turn 1: Setup with Legendary Artifact**
+```javascript
+// Player 1 uses Horloge du Dernier Instant (Legendary)
+USE(ITEM, ReverseClock, HERO:Arthur)
+// Arthur can now rollback 1-3 turns if needed
+```
+
+**Turn 2: Create Quantum Dragon**
+```javascript
+// Player 1 creates a ψ-state: dragon will appear in 2 turns
+ψ001: ⊙(Δt+2 @126,65 ⟶ CREATE(CREATURE, Dragon))
+// Probability: 0.6 (60% chance dragon appears)
+```
+
+**Turn 3: Paradox Artifact Activation**
+```javascript
+// Player 1 uses Lame d'Avant-Monde (Paradox tier)
+USE(ITEM, AvantWorldBlade, HERO:Arthur)
+// Dragon probability boosted: 0.6 + 0.5 = 1.0 (100% guaranteed!)
+// Battle score bonus: +0.5 for phantom battles
+```
+
+**Turn 4: Enemy Counter-Strategy**
+```javascript
+// Player 2 moves hero toward dragon location
+MOV(Ragnar, @126,65)
+// Triggers observation: Π(Ragnar enters @126,65) ⇒ †ψ001
+// Dragon collapses into reality!
+```
+
+**Turn 5: Time Reversal Escape**
+```javascript
+// Player 2 realizes mistake - dragon is too strong
+USE(ITEM, ReverseClock, HERO:Ragnar)
+// Ragnar returns to position from Turn 3
+// Creates temporal gel zone for 1 turn
+```
 
 ### 💫 **Technical Implementation**
 - **Backend**: Spring Boot 3.2.0 with Java 17
