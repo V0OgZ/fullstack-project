@@ -1,0 +1,4 @@
+# Compiled class files - ignore agent changes
+*.class
+backend/target/
+.vscode/
