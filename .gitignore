@@ -2,3 +2,6 @@
 *.class
 backend/target/
 .vscode/
+test-screenshots/
+test-references/
+test-report.json
