@@ -2,7 +2,7 @@
   "project_name": "Heroes of Time - Temporal Engine",
   "version": "POC Alpha V0.1",
   "project_type": "Quantum Temporal Strategy Game Engine",
-  "last_update": "2025-07-17T20:07:30Z",
+  "last_update": "2025-07-17T20:11:48Z",
   "core_concepts": [
     "Jeu de stratégie temporelle quantique",
     "Timeline locale par joueur avec branches multiples",
@@ -461,6 +461,10 @@
     {
       "timestamp": "2025-07-17T20:07:30Z",
       "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T20:11:48Z",
+      "change": "Commit: Unify UI with animated heroes and integrated demo mode"
     }
   ],
   "next_steps": [
