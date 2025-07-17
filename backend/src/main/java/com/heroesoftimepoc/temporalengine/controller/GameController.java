@@ -82,7 +82,7 @@ public class GameController {
             response.put("players", game.getPlayers());
             response.put("status", game.getStatus());
             response.put("currentPlayer", game.getCurrentPlayer());
-            response.put("turnCount", game.getTurnCount());
+            response.put("turnCount", game.getCurrentTurn());
             
             return ResponseEntity.ok(response);
             
