@@ -1,0 +1,27 @@
+{
+  "name": "heroes-of-time-test-suite",
+  "version": "1.0.0",
+  "description": "Suite de tests pour les interfaces Heroes of Time",
+  "main": "test-dual-interface.js",
+  "scripts": {
+    "test": "node test-dual-interface.js",
+    "test-screenshots": "node test-dual-interface.js",
+    "install-test-deps": "npm install playwright",
+    "setup-playwright": "npx playwright install"
+  },
+  "keywords": [
+    "heroes-of-time",
+    "temporal-engine",
+    "testing",
+    "screenshots",
+    "playwright"
+  ],
+  "author": "Heroes of Time Team",
+  "license": "MIT",
+  "dependencies": {
+    "playwright": "^1.40.0"
+  },
+  "devDependencies": {
+    "playwright": "^1.40.0"
+  }
+} 
