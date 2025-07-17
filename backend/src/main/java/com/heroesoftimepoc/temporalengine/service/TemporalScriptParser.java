@@ -27,6 +27,18 @@ public class TemporalScriptParser {
     private static final Pattern USE_PATTERN = Pattern.compile("USE\\(([^,]+),\\s*([^,]+)(?:,\\s*([^)]+))?\\)");
     private static final Pattern BATTLE_PATTERN = Pattern.compile("BATTLE\\(([^,]+),\\s*([^)]+)\\)");
     
+    // Heroes of Might & Magic 3 patterns
+    private static final Pattern BUILD_PATTERN = Pattern.compile("BUILD\\(([^,]+),\\s*@(\\d+),(\\d+),\\s*PLAYER:([^)]+)\\)");
+    private static final Pattern COLLECT_PATTERN = Pattern.compile("COLLECT\\(RESOURCE,\\s*([^,]+),\\s*(\\d+),\\s*PLAYER:([^)]+)\\)");
+    private static final Pattern RECRUIT_PATTERN = Pattern.compile("RECRUIT\\(UNIT,\\s*([^,]+),\\s*(\\d+),\\s*HERO:([^)]+)\\)");
+    private static final Pattern CAST_PATTERN = Pattern.compile("CAST\\(SPELL,\\s*([^,]+),\\s*TARGET:([^,]+),\\s*HERO:([^)]+)\\)");
+    private static final Pattern LEARN_PATTERN = Pattern.compile("LEARN\\(SPELL,\\s*([^,]+),\\s*HERO:([^)]+)\\)");
+    private static final Pattern LEVELUP_PATTERN = Pattern.compile("LEVELUP\\(([^,]+),\\s*SKILL:([^)]+)\\)");
+    private static final Pattern EXPLORE_PATTERN = Pattern.compile("EXPLORE\\(([^,]+),\\s*@(\\d+),(\\d+),\\s*HERO:([^)]+)\\)");
+    private static final Pattern EQUIP_PATTERN = Pattern.compile("EQUIP\\(ARTIFACT,\\s*([^,]+),\\s*HERO:([^)]+)\\)");
+    private static final Pattern SIEGE_PATTERN = Pattern.compile("SIEGE\\(([^,]+),\\s*@(\\d+),(\\d+),\\s*HERO:([^)]+)\\)");
+    private static final Pattern CAPTURE_PATTERN = Pattern.compile("CAPTURE\\(OBJECTIVE,\\s*([^,]+),\\s*HERO:([^)]+)\\)");
+    
     /**
      * Parse a temporal script line and create a PsiState if it's a temporal action
      */
@@ -164,6 +176,105 @@ public class TemporalScriptParser {
             params.put("attacker", battleMatcher.group(1));
             params.put("defender", battleMatcher.group(2));
             return new ScriptCommand("BATTLE", params);
+        }
+        
+        // BUILD command
+        Matcher buildMatcher = BUILD_PATTERN.matcher(scriptLine);
+        if (buildMatcher.find()) {
+            Map<String, String> params = new HashMap<>();
+            params.put("type", buildMatcher.group(1));
+            params.put("x", buildMatcher.group(2));
+            params.put("y", buildMatcher.group(3));
+            params.put("player", buildMatcher.group(4));
+            return new ScriptCommand("BUILD", params);
+        }
+        
+        // COLLECT command
+        Matcher collectMatcher = COLLECT_PATTERN.matcher(scriptLine);
+        if (collectMatcher.find()) {
+            Map<String, String> params = new HashMap<>();
+            params.put("resource", collectMatcher.group(1));
+            params.put("amount", collectMatcher.group(2));
+            params.put("player", collectMatcher.group(3));
+            return new ScriptCommand("COLLECT", params);
+        }
+        
+        // RECRUIT command
+        Matcher recruitMatcher = RECRUIT_PATTERN.matcher(scriptLine);
+        if (recruitMatcher.find()) {
+            Map<String, String> params = new HashMap<>();
+            params.put("unit", recruitMatcher.group(1));
+            params.put("amount", recruitMatcher.group(2));
+            params.put("hero", recruitMatcher.group(3));
+            return new ScriptCommand("RECRUIT", params);
+        }
+        
+        // CAST command
+        Matcher castMatcher = CAST_PATTERN.matcher(scriptLine);
+        if (castMatcher.find()) {
+            Map<String, String> params = new HashMap<>();
+            params.put("spell", castMatcher.group(1));
+            params.put("target", castMatcher.group(2));
+            params.put("hero", castMatcher.group(3));
+            return new ScriptCommand("CAST", params);
+        }
+        
+        // LEARN command
+        Matcher learnMatcher = LEARN_PATTERN.matcher(scriptLine);
+        if (learnMatcher.find()) {
+            Map<String, String> params = new HashMap<>();
+            params.put("spell", learnMatcher.group(1));
+            params.put("hero", learnMatcher.group(2));
+            return new ScriptCommand("LEARN", params);
+        }
+        
+        // LEVELUP command
+        Matcher levelupMatcher = LEVELUP_PATTERN.matcher(scriptLine);
+        if (levelupMatcher.find()) {
+            Map<String, String> params = new HashMap<>();
+            params.put("hero", levelupMatcher.group(1));
+            params.put("skill", levelupMatcher.group(2));
+            return new ScriptCommand("LEVELUP", params);
+        }
+        
+        // EXPLORE command
+        Matcher exploreMatcher = EXPLORE_PATTERN.matcher(scriptLine);
+        if (exploreMatcher.find()) {
+            Map<String, String> params = new HashMap<>();
+            params.put("terrain", exploreMatcher.group(1));
+            params.put("x", exploreMatcher.group(2));
+            params.put("y", exploreMatcher.group(3));
+            params.put("hero", exploreMatcher.group(4));
+            return new ScriptCommand("EXPLORE", params);
+        }
+        
+        // EQUIP command
+        Matcher equipMatcher = EQUIP_PATTERN.matcher(scriptLine);
+        if (equipMatcher.find()) {
+            Map<String, String> params = new HashMap<>();
+            params.put("artifact", equipMatcher.group(1));
+            params.put("hero", equipMatcher.group(2));
+            return new ScriptCommand("EQUIP", params);
+        }
+        
+        // SIEGE command
+        Matcher siegeMatcher = SIEGE_PATTERN.matcher(scriptLine);
+        if (siegeMatcher.find()) {
+            Map<String, String> params = new HashMap<>();
+            params.put("target", siegeMatcher.group(1));
+            params.put("x", siegeMatcher.group(2));
+            params.put("y", siegeMatcher.group(3));
+            params.put("hero", siegeMatcher.group(4));
+            return new ScriptCommand("SIEGE", params);
+        }
+        
+        // CAPTURE command
+        Matcher captureMatcher = CAPTURE_PATTERN.matcher(scriptLine);
+        if (captureMatcher.find()) {
+            Map<String, String> params = new HashMap<>();
+            params.put("objective", captureMatcher.group(1));
+            params.put("hero", captureMatcher.group(2));
+            return new ScriptCommand("CAPTURE", params);
         }
         
         return null;
