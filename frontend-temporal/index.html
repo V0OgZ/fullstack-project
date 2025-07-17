@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🕰️ Heroes of Time - Temporal Engine Interface</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: #e94560;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 300px 1fr 350px;
+            grid-template-rows: 80px 1fr;
+            height: 100vh;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .header {
+            grid-column: 1 / -1;
+            background: rgba(233, 69, 96, 0.1);
+            border: 2px solid #e94560;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-size: 2em;
+            background: linear-gradient(45deg, #e94560, #f39c12);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(233, 69, 96, 0.5);
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #27ae60;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .sidebar-left {
+            background: rgba(233, 69, 96, 0.05);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .main-area {
+            background: rgba(233, 69, 96, 0.05);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .sidebar-right {
+            background: rgba(233, 69, 96, 0.05);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .section-title {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: #f39c12;
+            border-bottom: 2px solid rgba(243, 156, 18, 0.3);
+            padding-bottom: 5px;
+        }
+
+        .game-board {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(233, 69, 96, 0.3);
+            border-radius: 10px;
+            position: relative;
+            min-height: 400px;
+            display: grid;
+            grid-template-columns: repeat(20, 1fr);
+            grid-template-rows: repeat(15, 1fr);
+            gap: 1px;
+            padding: 10px;
+        }
+
+        .tile {
+            background: rgba(233, 69, 96, 0.1);
+            border: 1px solid rgba(233, 69, 96, 0.2);
+            border-radius: 3px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tile:hover {
+            background: rgba(233, 69, 96, 0.3);
+            transform: scale(1.1);
+            z-index: 10;
+        }
+
+        .tile.has-hero {
+            background: rgba(243, 156, 18, 0.5);
+            border-color: #f39c12;
+        }
+
+        .tile.has-psi-state {
+            background: rgba(155, 89, 182, 0.5);
+            border-color: #9b59b6;
+            animation: psi-glow 2s infinite alternate;
+        }
+
+        @keyframes psi-glow {
+            0% { box-shadow: 0 0 5px rgba(155, 89, 182, 0.5); }
+            100% { box-shadow: 0 0 15px rgba(155, 89, 182, 0.8); }
+        }
+
+        .script-panel {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .script-input {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(233, 69, 96, 0.5);
+            border-radius: 5px;
+            color: #e94560;
+            padding: 10px;
+            font-family: 'Courier New', monospace;
+            resize: none;
+            flex: 1;
+        }
+
+        .script-input::placeholder {
+            color: rgba(233, 69, 96, 0.5);
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #e94560, #f39c12);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(233, 69, 96, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .game-info {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(233, 69, 96, 0.1);
+        }
+
+        .psi-state-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .psi-state-item {
+            background: rgba(155, 89, 182, 0.1);
+            border: 1px solid rgba(155, 89, 182, 0.3);
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .psi-state-item .psi-id {
+            color: #9b59b6;
+            font-weight: bold;
+        }
+
+        .psi-state-item .psi-action {
+            color: #27ae60;
+            margin-top: 5px;
+        }
+
+        .timeline-indicator {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .timeline-branch {
+            background: rgba(52, 152, 219, 0.2);
+            border: 1px solid #3498db;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 0.9em;
+            color: #3498db;
+        }
+
+        .timeline-branch.active {
+            background: rgba(52, 152, 219, 0.5);
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+        }
+
+        .log-area {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            height: 200px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+        }
+
+        .log-entry {
+            margin-bottom: 5px;
+            padding: 2px 0;
+        }
+
+        .log-entry.success {
+            color: #27ae60;
+        }
+
+        .log-entry.error {
+            color: #e74c3c;
+        }
+
+        .log-entry.info {
+            color: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🕰️ Heroes of Time - Temporal Engine</h1>
+            <div class="status-indicator">
+                <span>Engine Status:</span>
+                <div class="status-dot" id="statusDot"></div>
+                <span id="statusText">Connecting...</span>
+            </div>
+        </header>
+
+        <aside class="sidebar-left">
+            <h3 class="section-title">🎮 Game Control</h3>
+            
+            <div class="game-info">
+                <div class="info-item">
+                    <span>Game ID:</span>
+                    <span id="gameId">-</span>
+                </div>
+                <div class="info-item">
+                    <span>Current Turn:</span>
+                    <span id="currentTurn">0</span>
+                </div>
+                <div class="info-item">
+                    <span>Active ψ-states:</span>
+                    <span id="activePsiStates">0</span>
+                </div>
+                <div class="info-item">
+                    <span>Heroes:</span>
+                    <span id="heroCount">0</span>
+                </div>
+            </div>
+
+            <button class="btn" onclick="createNewGame()">🎲 New Game</button>
+            <button class="btn" onclick="runDemo()" style="margin-top: 10px;">🎬 Run Demo</button>
+
+            <h3 class="section-title" style="margin-top: 30px;">🌀 Timelines</h3>
+            <div class="timeline-indicator" id="timelineIndicator">
+                <div class="timeline-branch active">ℬ1</div>
+            </div>
+        </aside>
+
+        <main class="main-area">
+            <h3 class="section-title">🗺️ Temporal Game Board</h3>
+            <div class="game-board" id="gameBoard">
+                <!-- Tiles will be generated by JavaScript -->
+            </div>
+
+            <h3 class="section-title">📝 Temporal Script Console</h3>
+            <div class="script-panel">
+                <textarea 
+                    class="script-input" 
+                    id="scriptInput" 
+                    placeholder="Enter temporal script commands:
+HERO(Arthur)
+MOV(Arthur, @10,10)
+ψ001: ⊙(Δt+1 @11,11 ⟶ MOV(Arthur, @11,11))
+†ψ001"
+                ></textarea>
+                <button class="btn" onclick="executeScript()">⚡ Execute Script</button>
+            </div>
+        </main>
+
+        <aside class="sidebar-right">
+            <h3 class="section-title">🌀 Active ψ-states</h3>
+            <div class="psi-state-list" id="psiStateList">
+                <p style="color: rgba(233, 69, 96, 0.5); text-align: center; margin-top: 50px;">
+                    No active ψ-states
+                </p>
+            </div>
+
+            <h3 class="section-title" style="margin-top: 30px;">📋 Event Log</h3>
+            <div class="log-area" id="logArea">
+                <div class="log-entry info">🚀 Temporal Engine Interface Loaded</div>
+                <div class="log-entry info">🔌 Connecting to backend...</div>
+            </div>
+        </aside>
+    </div>
+
+    <script src="js/temporal-engine.js"></script>
+</body>
+</html>
