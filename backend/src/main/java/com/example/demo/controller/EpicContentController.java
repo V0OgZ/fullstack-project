@@ -36,6 +36,17 @@ public class EpicContentController {
         }
     }
     
+    @GetMapping(value = "/buildings", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getAllBuildings() {
+        try {
+            ClassPathResource resource = new ClassPathResource("epic-buildings.json");
+            String content = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
+            return ResponseEntity.ok(content);
+        } catch (IOException e) {
+            return ResponseEntity.internalServerError().body("{\"error\":\"Failed to load buildings: " + e.getMessage() + "\"}");
+        }
+    }
+    
     // TODO: Add individual hero/creature endpoints when needed
     @GetMapping("/heroes/{heroId}")
     public ResponseEntity<String> getHeroById(@PathVariable String heroId) {
