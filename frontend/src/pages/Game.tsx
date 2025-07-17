@@ -70,7 +70,7 @@ const Game: React.FC = () => {
 
   return (
     <div className="game-page">
-      <TrueHeroesInterface />
+      <TrueHeroesInterface onNavigate={(page) => console.log('Navigate to:', page)} />
     </div>
   );
 };
