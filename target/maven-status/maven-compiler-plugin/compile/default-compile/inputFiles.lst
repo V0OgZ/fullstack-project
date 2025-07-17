@@ -1,0 +1,13 @@
+/workspace/src/main/java/com/heroesoftimeporal/model/Artifact.java
+/workspace/src/main/java/com/heroesoftimeporal/script/TemporalScriptParser.java
+/workspace/src/main/java/com/heroesoftimeporal/model/ConflictZone.java
+/workspace/src/main/java/com/heroesoftimeporal/controller/GameController.java
+/workspace/src/main/java/com/heroesoftimeporal/model/TemporalEvent.java
+/workspace/src/main/java/com/heroesoftimeporal/model/Game.java
+/workspace/src/main/java/com/heroesoftimeporal/model/Hero.java
+/workspace/src/main/java/com/heroesoftimeporal/engine/CausalCollapseHandler.java
+/workspace/src/main/java/com/heroesoftimeporal/model/Timeline.java
+/workspace/src/main/java/com/heroesoftimeporal/model/PsiState.java
+/workspace/src/main/java/com/heroesoftimeporal/script/ScriptCommand.java
+/workspace/src/main/java/com/heroesoftimeporal/model/GameMap.java
+/workspace/src/main/java/com/heroesoftimeporal/engine/TimelineManager.java
