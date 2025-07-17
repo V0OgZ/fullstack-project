@@ -4,20 +4,24 @@
 
 ---
 
-## 🎮 **The Ultimate Temporal Strategy Experience**
+## 🎮 **Strategy Game with Temporal Mechanics**
 
-**Heroes of Time** revolutionizes strategy gaming by merging **Heroes of Might & Magic 3** with **quantum temporal mechanics**. Master time itself, manipulate causality, and conquer across multiple timelines in this groundbreaking game engine.
+**Heroes of Time** combines Heroes of Might & Magic 3 gameplay with quantum temporal mechanics. Players can create quantum superpositions (ψ-states), manage multiple timelines, and trigger causal collapses through temporal artifacts.
 
-### 🏆 **Game Features**
-- **⚔️ Classic H3 Combat**: Heroes, armies, castles, and epic battles
-- **🌀 Quantum Mechanics**: ψ-states, temporal collapse, timeline branching  
-- **🔮 Temporal Artifacts**: Time manipulation items with unique effects
-- **📜 Script Language**: Complete temporal scripting system with Unicode symbols
-- **🎯 Strategic Depth**: Plan moves across past, present, and future
-- **🌌 5D Coordinates**: Navigate through space-time dimensions
+### 🏆 **Core Features**
+- **H3 Combat System**: Heroes, armies, castles, and turn-based battles
+- **Quantum Mechanics**: ψ-states, temporal collapse, timeline branching  
+- **Temporal Artifacts**: Time manipulation items with scripted effects
+- **Script Language**: Complete temporal scripting with Unicode symbols (ψ, †, ⊙, Π)
+- **5D Coordinates**: Space-time navigation system (x, y, z, t, ψ)
+- **REST API**: Backend with temporal endpoints and game state management
 
-### 💫 **What Makes It Special**
-*"Imagine commanding armies not just across battlefields, but across time itself. Create quantum superpositions of your moves, collapse enemy timelines, and rewrite history with temporal artifacts. This isn't just strategy - it's temporal warfare."*
+### 💫 **Technical Implementation**
+- **Backend**: Spring Boot 3.2.0 with Java 17
+- **Frontend**: TypeScript React with hexagonal rendering
+- **Database**: JPA/Hibernate for persistence
+- **Script Parser**: Custom language parser for temporal commands
+- **Test Suite**: Automated testing with demo scenarios
 
 ---
 
