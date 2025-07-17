@@ -1,306 +1,551 @@
-// game.js - Rendu du jeu avec canvas hexagonal
+// game.js - Rendu du jeu avec grille hexagonale
 class GameRenderer {
     constructor(canvasId) {
         this.canvas = document.getElementById(canvasId);
         this.ctx = this.canvas.getContext('2d');
         this.gameState = null;
         this.hexSize = 25;
+        this.selectedTile = null;
+        this.hoveredTile = null;
+        this.zoom = 1;
         this.offsetX = 0;
         this.offsetY = 0;
+        
+        // Animation properties
+        this.animationFrame = 0;
+        this.particles = [];
+        this.psiAnimations = new Map();
+        
         this.setupCanvas();
+        this.setupEventListeners();
+        this.startAnimationLoop();
     }
     
     setupCanvas() {
         this.resizeCanvas();
-        this.canvas.addEventListener('click', (e) => this.handleClick(e));
         window.addEventListener('resize', () => this.resizeCanvas());
     }
     
     resizeCanvas() {
+        const container = this.canvas.parentElement;
+        this.canvas.width = container.clientWidth;
+        this.canvas.height = container.clientHeight;
+        this.refresh();
+    }
+    
+    setupEventListeners() {
+        this.canvas.addEventListener('click', (e) => this.handleClick(e));
+        this.canvas.addEventListener('mousemove', (e) => this.handleMouseMove(e));
+        this.canvas.addEventListener('wheel', (e) => this.handleWheel(e));
+        
+        // Drag to pan
+        let isDragging = false;
+        let dragStartX = 0;
+        let dragStartY = 0;
+        
+        this.canvas.addEventListener('mousedown', (e) => {
+            if (e.button === 1 || (e.button === 0 && e.shiftKey)) {
+                isDragging = true;
+                dragStartX = e.clientX - this.offsetX;
+                dragStartY = e.clientY - this.offsetY;
+                e.preventDefault();
+            }
+        });
+        
+        this.canvas.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                this.offsetX = e.clientX - dragStartX;
+                this.offsetY = e.clientY - dragStartY;
+                this.refresh();
+            }
+        });
+        
+        this.canvas.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+    }
+    
+    handleClick(e) {
         const rect = this.canvas.getBoundingClientRect();
-        this.canvas.width = rect.width;
-        this.canvas.height = rect.height;
-        this.offsetX = rect.width / 2;
-        this.offsetY = rect.height / 2;
-        this.render();
+        const x = (e.clientX - rect.left - this.canvas.width / 2 - this.offsetX) / this.zoom;
+        const y = (e.clientY - rect.top - this.canvas.height / 2 - this.offsetY) / this.zoom;
+        
+        const hex = this.pixelToHex(x, y);
+        this.selectedTile = hex;
+        
+        // Add particle effect at click location
+        this.addParticle(x + this.canvas.width / 2, y + this.canvas.height / 2, 'click');
+        
+        // Auto-generate movement command
+        if (window.scriptConsole) {
+            window.scriptConsole.addToOutput(`Clicked on @${hex.q},${hex.r}`, 'info');
+        }
+        
+        this.refresh();
     }
     
-    async refresh() {
-        try {
-            this.gameState = await window.gameAPI.getGameState();
-            this.render();
-            this.updateStatusBar();
-        } catch (error) {
-            console.error('Failed to refresh game state:', error);
-            // Show a placeholder message
-            this.renderPlaceholder();
-        }
+    handleMouseMove(e) {
+        const rect = this.canvas.getBoundingClientRect();
+        const x = (e.clientX - rect.left - this.canvas.width / 2 - this.offsetX) / this.zoom;
+        const y = (e.clientY - rect.top - this.canvas.height / 2 - this.offsetY) / this.zoom;
+        
+        const hex = this.pixelToHex(x, y);
+        this.hoveredTile = hex;
+        this.refresh();
     }
     
-    render() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    handleWheel(e) {
+        e.preventDefault();
+        const zoomSpeed = 0.1;
+        const delta = e.deltaY > 0 ? -zoomSpeed : zoomSpeed;
         
-        if (!this.gameState) {
-            this.renderPlaceholder();
-            return;
-        }
-        
-        // Render grid background
-        this.renderGrid();
-        
-        // Render tiles
-        if (this.gameState.tiles) {
-            this.gameState.tiles.forEach(tile => {
-                this.renderTile(tile);
-            });
-        }
-        
-        // Render ψ-states
-        if (this.gameState.psiStates) {
-            this.gameState.psiStates.forEach(psiState => {
-                this.renderPsiState(psiState);
-            });
-        }
-        
-        // Render heroes
-        if (this.gameState.heroes) {
-            this.gameState.heroes.forEach(hero => {
-                this.renderHero(hero);
-            });
-        }
-        
-        // Render UI elements
-        this.renderUI();
-    }
-    
-    renderPlaceholder() {
-        this.ctx.fillStyle = '#666';
-        this.ctx.font = '24px Arial';
-        this.ctx.textAlign = 'center';
-        this.ctx.fillText('Click "New Game" to start', this.canvas.width / 2, this.canvas.height / 2);
-        
-        this.ctx.font = '16px Arial';
-        this.ctx.fillText('Heroes of Time - Temporal Engine', this.canvas.width / 2, this.canvas.height / 2 + 40);
-    }
-    
-    renderGrid() {
-        this.ctx.strokeStyle = '#333';
-        this.ctx.lineWidth = 1;
-        
-        // Render hexagonal grid
-        for (let q = -10; q <= 10; q++) {
-            for (let r = -10; r <= 10; r++) {
-                const pos = this.hexToPixel(q, r);
-                this.drawHexagon(pos.x, pos.y, this.hexSize, '#2a2a3e', '#333');
-            }
-        }
-    }
-    
-    renderTile(tile) {
-        const pos = this.hexToPixel(tile.x, tile.y);
-        const color = this.getTileColor(tile.type);
-        this.drawHexagon(pos.x, pos.y, this.hexSize, color, '#333');
-        
-        // Add tile type indicator
-        if (tile.type !== 'GRASS') {
-            this.ctx.fillStyle = '#FFF';
-            this.ctx.font = '10px Arial';
-            this.ctx.textAlign = 'center';
-            this.ctx.fillText(tile.type.charAt(0), pos.x, pos.y + 3);
-        }
-    }
-    
-    renderPsiState(psiState) {
-        const pos = this.hexToPixel(psiState.targetX, psiState.targetY);
-        
-        // Animated glow effect
-        const time = Date.now() * 0.003;
-        const opacity = 0.5 + 0.3 * Math.sin(time);
-        
-        // Outer glow
-        const gradient = this.ctx.createRadialGradient(
-            pos.x, pos.y, 0,
-            pos.x, pos.y, this.hexSize * 1.5
-        );
-        gradient.addColorStop(0, `rgba(147, 112, 219, ${opacity})`);
-        gradient.addColorStop(1, 'rgba(147, 112, 219, 0)');
-        
-        this.ctx.fillStyle = gradient;
-        this.ctx.beginPath();
-        this.ctx.arc(pos.x, pos.y, this.hexSize * 1.5, 0, 2 * Math.PI);
-        this.ctx.fill();
-        
-        // Inner core
-        this.ctx.fillStyle = '#9370DB';
-        this.ctx.beginPath();
-        this.ctx.arc(pos.x, pos.y, this.hexSize * 0.3, 0, 2 * Math.PI);
-        this.ctx.fill();
-        
-        // ψ symbol
-        this.ctx.fillStyle = '#FFF';
-        this.ctx.font = '14px Arial';
-        this.ctx.textAlign = 'center';
-        this.ctx.fillText(`ψ${psiState.id}`, pos.x, pos.y - this.hexSize - 5);
-        
-        // Status indicator
-        if (psiState.status) {
-            this.ctx.fillStyle = psiState.status === 'ACTIVE' ? '#00FF00' : '#FF0000';
-            this.ctx.font = '10px Arial';
-            this.ctx.fillText(psiState.status, pos.x, pos.y + this.hexSize + 15);
-        }
-    }
-    
-    renderHero(hero) {
-        const pos = this.hexToPixel(hero.x, hero.y);
-        
-        // Hero body
-        this.ctx.fillStyle = this.getHeroColor(hero.name);
-        this.ctx.fillRect(pos.x - 12, pos.y - 12, 24, 24);
-        
-        // Hero border
-        this.ctx.strokeStyle = '#FFD700';
-        this.ctx.lineWidth = 2;
-        this.ctx.strokeRect(pos.x - 12, pos.y - 12, 24, 24);
-        
-        // Hero name
-        this.ctx.fillStyle = '#FFF';
-        this.ctx.font = '12px Arial';
-        this.ctx.textAlign = 'center';
-        this.ctx.fillText(hero.name, pos.x, pos.y - 20);
-        
-        // Health bar
-        if (hero.hp !== undefined) {
-            const hpPercent = hero.hp / 100;
-            this.ctx.fillStyle = '#FF0000';
-            this.ctx.fillRect(pos.x - 12, pos.y + 15, 24, 3);
-            this.ctx.fillStyle = '#00FF00';
-            this.ctx.fillRect(pos.x - 12, pos.y + 15, 24 * hpPercent, 3);
-        }
-        
-        // Artifacts indicator
-        if (hero.artifacts && hero.artifacts.length > 0) {
-            this.ctx.fillStyle = '#FFD700';
-            this.ctx.beginPath();
-            this.ctx.arc(pos.x + 15, pos.y - 15, 5, 0, 2 * Math.PI);
-            this.ctx.fill();
-            
-            this.ctx.fillStyle = '#000';
-            this.ctx.font = '8px Arial';
-            this.ctx.textAlign = 'center';
-            this.ctx.fillText(hero.artifacts.length, pos.x + 15, pos.y - 12);
-        }
-    }
-    
-    renderUI() {
-        // Render turn indicator
-        if (this.gameState && this.gameState.currentTurn) {
-            this.ctx.fillStyle = '#FFD700';
-            this.ctx.font = '16px Arial';
-            this.ctx.textAlign = 'left';
-            this.ctx.fillText(`Turn: ${this.gameState.currentTurn}`, 10, 30);
-        }
-        
-        // Render coordinates on hover (if implemented)
-        // This would require mouse tracking
-    }
-    
-    drawHexagon(x, y, size, fillColor, strokeColor) {
-        this.ctx.beginPath();
-        
-        for (let i = 0; i < 6; i++) {
-            const angle = 2 * Math.PI / 6 * i;
-            const hexX = x + size * Math.cos(angle);
-            const hexY = y + size * Math.sin(angle);
-            
-            if (i === 0) {
-                this.ctx.moveTo(hexX, hexY);
-            } else {
-                this.ctx.lineTo(hexX, hexY);
-            }
-        }
-        
-        this.ctx.closePath();
-        
-        if (fillColor) {
-            this.ctx.fillStyle = fillColor;
-            this.ctx.fill();
-        }
-        
-        if (strokeColor) {
-            this.ctx.strokeStyle = strokeColor;
-            this.ctx.lineWidth = 1;
-            this.ctx.stroke();
-        }
+        this.zoom = Math.max(0.5, Math.min(3, this.zoom + delta));
+        this.refresh();
     }
     
     hexToPixel(q, r) {
-        const x = this.hexSize * (3/2 * q) + this.offsetX;
-        const y = this.hexSize * (Math.sqrt(3)/2 * q + Math.sqrt(3) * r) + this.offsetY;
+        const x = this.hexSize * (Math.sqrt(3) * q + Math.sqrt(3) / 2 * r);
+        const y = this.hexSize * (3 / 2 * r);
         return { x, y };
     }
     
     pixelToHex(x, y) {
-        const q = (2/3 * (x - this.offsetX)) / this.hexSize;
-        const r = (-1/3 * (x - this.offsetX) + Math.sqrt(3)/3 * (y - this.offsetY)) / this.hexSize;
-        return { q: Math.round(q), r: Math.round(r) };
+        const q = (Math.sqrt(3) / 3 * x - 1 / 3 * y) / this.hexSize;
+        const r = (2 / 3 * y) / this.hexSize;
+        return this.roundHex(q, r);
     }
     
-    getTileColor(type) {
-        switch (type) {
-            case 'GRASS': return '#90EE90';
-            case 'STONE': return '#A0A0A0';
-            case 'WATER': return '#4169E1';
-            case 'MOUNTAIN': return '#8B4513';
-            case 'FOREST': return '#228B22';
-            default: return '#DDD';
-        }
-    }
-    
-    getHeroColor(name) {
-        switch (name) {
-            case 'Arthur': return '#4169E1';
-            case 'Ragnar': return '#DC143C';
-            case 'Merlin': return '#9370DB';
-            default: return '#FFD700';
-        }
-    }
-    
-    handleClick(event) {
-        const rect = this.canvas.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
+    roundHex(q, r) {
+        const s = -q - r;
+        let rq = Math.round(q);
+        let rr = Math.round(r);
+        let rs = Math.round(s);
         
-        const hex = this.pixelToHex(x, y);
-        console.log(`Clicked hex: ${hex.q}, ${hex.r}`);
+        const q_diff = Math.abs(rq - q);
+        const r_diff = Math.abs(rr - r);
+        const s_diff = Math.abs(rs - s);
         
-        // Add click feedback to console
-        if (window.scriptConsole) {
-            window.scriptConsole.addToOutput(`Clicked tile @${hex.q},${hex.r}`, 'normal');
+        if (q_diff > r_diff && q_diff > s_diff) {
+            rq = -rr - rs;
+        } else if (r_diff > s_diff) {
+            rr = -rq - rs;
+        }
+        
+        return { q: rq, r: rr };
+    }
+    
+    updateState(state) {
+        this.gameState = state;
+        this.refresh();
+    }
+    
+    refresh() {
+        if (!this.ctx) return;
+        
+        // Clear canvas
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        // Draw background gradient
+        const gradient = this.ctx.createRadialGradient(
+            this.canvas.width / 2, this.canvas.height / 2, 0,
+            this.canvas.width / 2, this.canvas.height / 2, Math.max(this.canvas.width, this.canvas.height)
+        );
+        gradient.addColorStop(0, 'rgba(0, 212, 255, 0.05)');
+        gradient.addColorStop(1, 'rgba(10, 10, 15, 1)');
+        this.ctx.fillStyle = gradient;
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        // Save context for transformations
+        this.ctx.save();
+        
+        // Apply zoom and pan
+        this.ctx.translate(this.canvas.width / 2 + this.offsetX, this.canvas.height / 2 + this.offsetY);
+        this.ctx.scale(this.zoom, this.zoom);
+        
+        // Draw hex grid
+        this.drawHexGrid();
+        
+        // Draw game elements
+        if (this.gameState) {
+            this.drawTiles();
+            this.drawPsiStates();
+            this.drawHeroes();
+            this.drawArtifacts();
+            this.drawTemporalEffects();
+        }
+        
+        // Draw particles
+        this.drawParticles();
+        
+        // Restore context
+        this.ctx.restore();
+        
+        // Draw UI overlay
+        this.drawUIOverlay();
+    }
+    
+    drawHexGrid() {
+        const gridSize = 15;
+        this.ctx.strokeStyle = 'rgba(0, 212, 255, 0.1)';
+        this.ctx.lineWidth = 1;
+        
+        for (let q = -gridSize; q <= gridSize; q++) {
+            for (let r = -gridSize; r <= gridSize; r++) {
+                if (Math.abs(q + r) <= gridSize) {
+                    this.drawHex(q, r);
+                }
+            }
         }
     }
     
-    updateStatusBar() {
-        const statusBar = document.getElementById('status-bar');
-        if (statusBar && this.gameState) {
-            const heroCount = this.gameState.heroes ? this.gameState.heroes.length : 0;
-            const psiCount = this.gameState.psiStates ? this.gameState.psiStates.filter(ps => ps.status === 'ACTIVE').length : 0;
-            const turn = this.gameState.currentTurn || 1;
-            
-            let heroInfo = '';
-            if (this.gameState.heroes) {
-                heroInfo = this.gameState.heroes.map(h => `${h.name}(${h.x},${h.y})`).join(', ');
+    drawHex(q, r, fillStyle = null, strokeStyle = null) {
+        const { x, y } = this.hexToPixel(q, r);
+        const angles = [];
+        
+        for (let i = 0; i < 6; i++) {
+            angles.push((Math.PI / 3) * i + Math.PI / 6);
+        }
+        
+        this.ctx.beginPath();
+        angles.forEach((angle, i) => {
+            const hx = x + this.hexSize * Math.cos(angle);
+            const hy = y + this.hexSize * Math.sin(angle);
+            if (i === 0) {
+                this.ctx.moveTo(hx, hy);
+            } else {
+                this.ctx.lineTo(hx, hy);
+            }
+        });
+        this.ctx.closePath();
+        
+        if (fillStyle) {
+            this.ctx.fillStyle = fillStyle;
+            this.ctx.fill();
+        }
+        
+        if (strokeStyle) {
+            this.ctx.strokeStyle = strokeStyle;
+            this.ctx.stroke();
+        } else {
+            this.ctx.stroke();
+        }
+        
+        // Highlight selected/hovered tiles
+        if (this.selectedTile && this.selectedTile.q === q && this.selectedTile.r === r) {
+            this.ctx.fillStyle = 'rgba(255, 215, 0, 0.3)';
+            this.ctx.fill();
+        }
+        
+        if (this.hoveredTile && this.hoveredTile.q === q && this.hoveredTile.r === r) {
+            this.ctx.fillStyle = 'rgba(0, 212, 255, 0.2)';
+            this.ctx.fill();
+        }
+    }
+    
+    drawTiles() {
+        if (!this.gameState.tiles) return;
+        
+        this.gameState.tiles.forEach(tile => {
+            if (tile.hasPsiState) {
+                this.drawHex(tile.x, tile.y, 'rgba(255, 0, 255, 0.2)', 'rgba(255, 0, 255, 0.5)');
             }
             
-            statusBar.textContent = `Turn: ${turn} | Heroes: ${heroInfo} | ψ-states: ${psiCount} active`;
+            if (tile.hasConflict) {
+                this.drawHex(tile.x, tile.y, 'rgba(255, 0, 0, 0.2)', 'rgba(255, 0, 0, 0.5)');
+            }
+        });
+    }
+    
+    drawPsiStates() {
+        if (!this.gameState.psiStates) return;
+        
+        this.gameState.psiStates.forEach(psi => {
+            if (psi.status === 'ACTIVE') {
+                const { x, y } = this.hexToPixel(psi.targetX || 0, psi.targetY || 0);
+                
+                // Animated glow effect
+                const glowSize = 20 + Math.sin(this.animationFrame * 0.05) * 10;
+                const gradient = this.ctx.createRadialGradient(x, y, 0, x, y, glowSize);
+                gradient.addColorStop(0, 'rgba(255, 0, 255, 0.8)');
+                gradient.addColorStop(0.5, 'rgba(255, 0, 255, 0.4)');
+                gradient.addColorStop(1, 'rgba(255, 0, 255, 0)');
+                
+                this.ctx.fillStyle = gradient;
+                this.ctx.fillRect(x - glowSize, y - glowSize, glowSize * 2, glowSize * 2);
+                
+                // Draw psi symbol
+                this.ctx.fillStyle = '#FF00FF';
+                this.ctx.font = 'bold 24px Arial';
+                this.ctx.textAlign = 'center';
+                this.ctx.textBaseline = 'middle';
+                this.ctx.fillText('ψ', x, y);
+                
+                // Draw psi ID
+                this.ctx.font = '12px Arial';
+                this.ctx.fillStyle = '#FFFFFF';
+                this.ctx.fillText(psi.id, x, y + 20);
+            }
+        });
+    }
+    
+    drawHeroes() {
+        if (!this.gameState.heroes) return;
+        
+        this.gameState.heroes.forEach(hero => {
+            const { x, y } = this.hexToPixel(hero.position.x, hero.position.y);
+            
+            // Hero glow based on health
+            const healthRatio = hero.health / (hero.maxHealth || 100);
+            const glowColor = `rgba(${255 * (1 - healthRatio)}, ${255 * healthRatio}, 0, 0.5)`;
+            
+            this.ctx.beginPath();
+            this.ctx.arc(x, y, 15, 0, Math.PI * 2);
+            this.ctx.fillStyle = glowColor;
+            this.ctx.fill();
+            
+            // Hero icon
+            this.ctx.fillStyle = '#FFD700';
+            this.ctx.font = '20px Arial';
+            this.ctx.textAlign = 'center';
+            this.ctx.textBaseline = 'middle';
+            this.ctx.fillText('🦸', x, y);
+            
+            // Hero name
+            this.ctx.font = '12px Arial';
+            this.ctx.fillStyle = '#FFFFFF';
+            this.ctx.fillText(hero.name, x, y - 25);
+            
+            // Health bar
+            const barWidth = 30;
+            const barHeight = 4;
+            this.ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+            this.ctx.fillRect(x - barWidth / 2, y + 15, barWidth, barHeight);
+            
+            this.ctx.fillStyle = `rgb(${255 * (1 - healthRatio)}, ${255 * healthRatio}, 0)`;
+            this.ctx.fillRect(x - barWidth / 2, y + 15, barWidth * healthRatio, barHeight);
+            
+            // Timeline indicator
+            if (hero.timeline) {
+                this.ctx.font = '10px Arial';
+                this.ctx.fillStyle = '#00D4FF';
+                this.ctx.fillText(hero.timeline, x + 20, y - 10);
+            }
+        });
+    }
+    
+    drawArtifacts() {
+        if (!this.gameState.artifacts) return;
+        
+        // Draw artifacts on the map or in hero inventories
+        this.gameState.artifacts.forEach(artifact => {
+            if (artifact.position) {
+                const { x, y } = this.hexToPixel(artifact.position.x, artifact.position.y);
+                
+                // Artifact glow effect
+                const glowSize = 15 + Math.sin(this.animationFrame * 0.1) * 5;
+                const gradient = this.ctx.createRadialGradient(x, y, 0, x, y, glowSize);
+                
+                // Color based on rarity
+                const colors = {
+                    'Common': 'rgba(128, 128, 128, 0.6)',
+                    'Rare': 'rgba(0, 112, 255, 0.6)',
+                    'Legendary': 'rgba(255, 128, 0, 0.6)',
+                    'Paradox': 'rgba(255, 0, 255, 0.6)',
+                    'Singularity': 'rgba(255, 255, 0, 0.6)'
+                };
+                
+                gradient.addColorStop(0, colors[artifact.rarity] || 'rgba(255, 255, 255, 0.6)');
+                gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+                
+                this.ctx.fillStyle = gradient;
+                this.ctx.fillRect(x - glowSize, y - glowSize, glowSize * 2, glowSize * 2);
+                
+                // Artifact icon
+                const icons = {
+                    'AvantWorldBlade': '⚔️',
+                    'ReverseClock': '🕰️',
+                    'IgnoreBeacon': '🚫',
+                    'AnchorTower': '🏰',
+                    'ApocalypseHorn': '📯'
+                };
+                
+                this.ctx.font = '20px Arial';
+                this.ctx.textAlign = 'center';
+                this.ctx.textBaseline = 'middle';
+                this.ctx.fillText(icons[artifact.type] || '🏺', x, y);
+                
+                // Artifact name
+                this.ctx.font = '10px Arial';
+                this.ctx.fillStyle = '#FFFFFF';
+                this.ctx.fillText(artifact.name, x, y + 20);
+            }
+        });
+    }
+    
+    drawTemporalEffects() {
+        // Draw timeline connections
+        if (this.gameState.timelines && this.gameState.timelines.length > 1) {
+            this.ctx.strokeStyle = 'rgba(0, 212, 255, 0.3)';
+            this.ctx.lineWidth = 2;
+            this.ctx.setLineDash([5, 5]);
+            
+            // Draw connections between timeline branches
+            this.gameState.timelines.forEach((timeline, index) => {
+                if (timeline.parentTimeline) {
+                    // Draw connection to parent
+                    // This is a simplified visualization
+                    const y = -100 + index * 30;
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(-50, y);
+                    this.ctx.lineTo(50, y);
+                    this.ctx.stroke();
+                }
+            });
+            
+            this.ctx.setLineDash([]);
+        }
+        
+        // Draw temporal anchors
+        if (this.gameState.temporalAnchors) {
+            this.gameState.temporalAnchors.forEach(anchor => {
+                const { x, y } = this.hexToPixel(anchor.x, anchor.y);
+                
+                // Anchor field effect
+                this.ctx.beginPath();
+                this.ctx.arc(x, y, anchor.radius * this.hexSize, 0, Math.PI * 2);
+                this.ctx.strokeStyle = 'rgba(255, 215, 0, 0.5)';
+                this.ctx.lineWidth = 2;
+                this.ctx.stroke();
+                
+                // Rotating effect
+                this.ctx.save();
+                this.ctx.translate(x, y);
+                this.ctx.rotate(this.animationFrame * 0.02);
+                
+                for (let i = 0; i < 6; i++) {
+                    const angle = (Math.PI / 3) * i;
+                    const lineX = Math.cos(angle) * anchor.radius * this.hexSize;
+                    const lineY = Math.sin(angle) * anchor.radius * this.hexSize;
+                    
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(0, 0);
+                    this.ctx.lineTo(lineX, lineY);
+                    this.ctx.strokeStyle = `rgba(255, 215, 0, ${0.3 - i * 0.05})`;
+                    this.ctx.stroke();
+                }
+                
+                this.ctx.restore();
+            });
         }
     }
     
-    // Animation loop for smooth effects
-    startAnimation() {
+    addParticle(x, y, type = 'default') {
+        const particle = {
+            x,
+            y,
+            vx: (Math.random() - 0.5) * 2,
+            vy: (Math.random() - 0.5) * 2,
+            life: 1,
+            type,
+            size: Math.random() * 3 + 1
+        };
+        
+        this.particles.push(particle);
+    }
+    
+    drawParticles() {
+        this.particles = this.particles.filter(particle => {
+            particle.x += particle.vx;
+            particle.y += particle.vy;
+            particle.life -= 0.02;
+            particle.vy += 0.1; // Gravity
+            
+            if (particle.life <= 0) return false;
+            
+            this.ctx.save();
+            this.ctx.globalAlpha = particle.life;
+            
+            const colors = {
+                'click': '#FFD700',
+                'psi': '#FF00FF',
+                'collapse': '#00D4FF',
+                'default': '#FFFFFF'
+            };
+            
+            this.ctx.fillStyle = colors[particle.type] || colors.default;
+            this.ctx.beginPath();
+            this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+            this.ctx.fill();
+            
+            this.ctx.restore();
+            
+            return true;
+        });
+    }
+    
+    drawUIOverlay() {
+        // Draw zoom level
+        this.ctx.fillStyle = '#FFFFFF';
+        this.ctx.font = '12px Arial';
+        this.ctx.textAlign = 'left';
+        this.ctx.fillText(`Zoom: ${(this.zoom * 100).toFixed(0)}%`, 10, this.canvas.height - 10);
+        
+        // Draw coordinates if hovering
+        if (this.hoveredTile) {
+            this.ctx.fillText(`Hex: @${this.hoveredTile.q},${this.hoveredTile.r}`, 10, this.canvas.height - 30);
+        }
+        
+        // Draw turn counter
+        if (this.gameState && this.gameState.currentTurn !== undefined) {
+            this.ctx.textAlign = 'right';
+            this.ctx.fillText(`Turn: ${this.gameState.currentTurn}`, this.canvas.width - 10, 20);
+        }
+    }
+    
+    startAnimationLoop() {
         const animate = () => {
-            this.render();
+            this.animationFrame++;
+            
+            // Update psi animations
+            if (this.gameState && this.gameState.psiStates) {
+                this.gameState.psiStates.forEach(psi => {
+                    if (psi.status === 'ACTIVE' && !this.psiAnimations.has(psi.id)) {
+                        this.psiAnimations.set(psi.id, {
+                            startFrame: this.animationFrame,
+                            intensity: Math.random() * 0.5 + 0.5
+                        });
+                    }
+                });
+            }
+            
+            // Refresh every few frames for animations
+            if (this.animationFrame % 3 === 0) {
+                this.refresh();
+            }
+            
             requestAnimationFrame(animate);
         };
+        
         animate();
+    }
+    
+    // Public methods for external control
+    resetView() {
+        this.zoom = 1;
+        this.offsetX = 0;
+        this.offsetY = 0;
+        this.refresh();
+    }
+    
+    centerOnHero(heroName) {
+        if (!this.gameState || !this.gameState.heroes) return;
+        
+        const hero = this.gameState.heroes.find(h => h.name === heroName);
+        if (hero) {
+            const { x, y } = this.hexToPixel(hero.position.x, hero.position.y);
+            this.offsetX = -x;
+            this.offsetY = -y;
+            this.refresh();
+        }
     }
 }
