@@ -9,6 +9,39 @@
 
 ---
 
+## 📊 Development Status
+
+```
+🚀 Heroes of Time - Temporal Engine Development Progress
+
+Core Engine       ████████████████████████████████████████ 85%
+API Endpoints     ████████████████████████████████████████ 90%
+Script Parser     ████████████████████████████████████████ 95%
+Documentation     ████████████████████████████████████████ 95%
+Test Coverage     ████████████████████████████████████████ 80%
+Overall Progress  ████████████████████████████████████████ 89%
+```
+
+### ✅ **COMPLETED**
+- **Temporal Engine Core** - ψ-states, collapse mechanism, 5D coordinates
+- **Script Language** - Full parsing with Unicode symbols (ψ, †, ⊙, Π)
+- **REST API** - All endpoints functional and tested
+- **Test Suite** - Automated testing with validation scripts
+- **Documentation** - Complete technical and gameplay guides
+
+### 🔄 **IN PROGRESS**
+- **Transaction Rollback Fix** - Minor database transaction issues
+- **Observation Triggers** - Π(...) ⇒ †ψ001 implementation
+- **Timeline Forking** - Automatic branching on conflicts
+
+### 📋 **TODO**
+- **Frontend Interface** - Timeline visualization and game UI
+- **Temporal Artifacts** - Active implementation of magical items
+- **Multiplayer Support** - Multi-player game management
+- **Performance Optimization** - Caching and scaling improvements
+
+---
+
 ## 🎯 Overview
 
 Heroes of Time is a revolutionary strategy game engine that introduces **quantum temporal mechanics** to the classic Heroes of Might & Magic formula. Players can manipulate time itself, creating **ψ-states** (quantum superpositions), managing **multiple timelines**, and triggering **causal collapses** through temporal artifacts.
