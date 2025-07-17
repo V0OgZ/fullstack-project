@@ -528,6 +528,147 @@
         }
 
         /* =================
+           TIMELINES PARALLÈLES
+        ================= */
+        .timeline-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        .timeline-branch {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(0, 191, 255, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+            position: relative;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .timeline-branch.active {
+            border-color: rgba(0, 191, 255, 0.6);
+            background: rgba(0, 191, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.3);
+        }
+
+        .timeline-branch[data-branch="ℬ1"] { border-left: 4px solid #00bfff; }
+        .timeline-branch[data-branch="ℬ2"] { border-left: 4px solid #ff6b85; }
+        .timeline-branch[data-branch="ℬ3"] { border-left: 4px solid #4ecdc4; }
+        .timeline-branch[data-branch="ℬ4"] { border-left: 4px solid #ffd93d; }
+        .timeline-branch[data-branch="ℬ5"] { border-left: 4px solid #6c5ce7; }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .timeline-symbol {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #00bfff;
+        }
+
+        .timeline-branch[data-branch="ℬ1"] .timeline-symbol { color: #00bfff; }
+        .timeline-branch[data-branch="ℬ2"] .timeline-symbol { color: #ff6b85; }
+        .timeline-branch[data-branch="ℬ3"] .timeline-symbol { color: #4ecdc4; }
+        .timeline-branch[data-branch="ℬ4"] .timeline-symbol { color: #ffd93d; }
+        .timeline-branch[data-branch="ℬ5"] .timeline-symbol { color: #6c5ce7; }
+
+        .timeline-status {
+            font-size: 0.8em;
+            color: #a0a0a0;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: bold;
+        }
+
+        .timeline-events {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .timeline-event {
+            font-size: 0.9em;
+            color: #ffffff;
+            padding: 4px 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            border-left: 2px solid rgba(0, 191, 255, 0.5);
+        }
+
+        .timeline-event.new {
+            animation: timelineEventAppear 0.5s ease-in-out;
+        }
+
+        @keyframes timelineEventAppear {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .timeline-branch.new {
+            animation: timelineBranchAppear 0.8s ease-in-out;
+        }
+
+        @keyframes timelineBranchAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .timeline-branch::before {
+            content: '';
+            position: absolute;
+            left: -2px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, rgba(0, 191, 255, 0.5), transparent);
+            border-radius: 2px;
+        }
+
+        .timeline-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: center;
+        }
+
+        .timeline-btn {
+            background: rgba(0, 191, 255, 0.15);
+            color: #00bfff;
+            border: 1px solid rgba(0, 191, 255, 0.5);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .timeline-btn:hover {
+            background: rgba(0, 191, 255, 0.25);
+            border-color: rgba(0, 191, 255, 0.8);
+        }
+
+        /* =================
            RESPONSIVE
         ================= */
         @media (max-width: 768px) {
@@ -612,6 +753,26 @@
                     <p style="color: #a0a0a0; font-style: italic;">Aucun état ψ actif</p>
                 </div>
             </div>
+
+            <div class="section">
+                <h2>🌀 Timelines Parallèles</h2>
+                <div id="timelineVisualizer" class="timeline-container">
+                    <div class="timeline-branch active" data-branch="ℬ1">
+                        <div class="timeline-header">
+                            <span class="timeline-symbol">ℬ1</span>
+                            <span class="timeline-status">PRINCIPALE</span>
+                        </div>
+                        <div class="timeline-events">
+                            <div class="timeline-event">Tour 1 - Création</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-controls">
+                    <button class="timeline-btn tooltip" data-tooltip="Créer une nouvelle timeline parallèle" onclick="createTimeline()">⏸️ Nouvelle Timeline</button>
+                    <button class="timeline-btn tooltip" data-tooltip="Fusionner les timelines actives" onclick="mergeTimelines()">🔄 Fusionner</button>
+                    <button class="timeline-btn tooltip" data-tooltip="Simuler un événement temporel" onclick="simulateTemporalEvent()">⚡ Événement</button>
+                </div>
+            </div>
         </div>
 
         <!-- Panel droite - Console et actions -->
@@ -639,6 +800,8 @@
                     <button class="scenario-btn tooltip" data-tooltip="Créer la héroïne Morgana dans le jeu" onclick="executeQuickCommand('HERO(Morgana)')">Créer Morgana</button>
                     <button class="scenario-btn tooltip" data-tooltip="Créer un état quantique superposé" onclick="executeQuickCommand('ψ001: ⊙(Δt+2 @10,10 ⟶ HERO(Test))')">Créer ψ-State</button>
                     <button class="scenario-btn tooltip" data-tooltip="Effondrer l'état quantique ψ001" onclick="executeQuickCommand('†ψ001')">Effondrer ψ001</button>
+                    <button class="scenario-btn tooltip" data-tooltip="Créer une nouvelle timeline parallèle" onclick="createTimeline()">🌀 Nouvelle Timeline</button>
+                    <button class="scenario-btn tooltip" data-tooltip="Basculer vers timeline ℬ2" onclick="switchToTimeline('ℬ2')">🔄 Basculer ℬ2</button>
                 </div>
             </div>
 
@@ -769,6 +932,9 @@
             if (command) {
                 addToConsole('> ' + command);
                 
+                // Intégrer avec les timelines
+                executeTemporalCommand(command);
+                
                 // Exécuter la commande
                 if (typeof executeScript === 'function') {
                     executeScript(command);
@@ -783,6 +949,33 @@
         function executeQuickCommand(command) {
             document.getElementById('commandInput').value = command;
             executeCommand();
+        }
+
+        // Intégrer les commandes avec les timelines
+        function executeTemporalCommand(command) {
+            const activeTimeline = Object.keys(timelines).find(key => timelines[key].active) || 'ℬ1';
+            
+            if (command.includes('ψ')) {
+                const psiId = command.match(/ψ(\d+)/)?.[1] || '001';
+                eventCounter++;
+                timelines[activeTimeline].events.push(`Tour ${eventCounter} - Création ψ-state ${psiId}`);
+                updateTimelineVisualizer();
+            } else if (command.includes('†')) {
+                const psiId = command.match(/†ψ(\d+)/)?.[1] || '001';
+                eventCounter++;
+                timelines[activeTimeline].events.push(`Tour ${eventCounter} - Collapse ψ-state ${psiId}`);
+                updateTimelineVisualizer();
+            } else if (command.includes('HERO')) {
+                const heroName = command.match(/HERO\(([^)]+)\)/)?.[1] || 'Héros';
+                eventCounter++;
+                timelines[activeTimeline].events.push(`Tour ${eventCounter} - Héros ${heroName} créé`);
+                updateTimelineVisualizer();
+            } else if (command.includes('MOV')) {
+                const heroName = command.match(/MOV\(([^,]+)/)?.[1] || 'Héros';
+                eventCounter++;
+                timelines[activeTimeline].events.push(`Tour ${eventCounter} - ${heroName} déplacé`);
+                updateTimelineVisualizer();
+            }
         }
 
         function addToConsole(message) {
@@ -889,6 +1082,171 @@
                 closeTemporalMenu();
             }
         });
+
+        // ============================================
+        // SYSTÈME DE TIMELINES PARALLÈLES
+        // ============================================
+        let timelines = {
+            'ℬ1': {
+                symbol: 'ℬ1',
+                status: 'PRINCIPALE',
+                events: ['Tour 1 - Création'],
+                active: true,
+                color: '#00bfff'
+            }
+        };
+
+        let timelineCounter = 1;
+        let eventCounter = 1;
+
+        function createTimeline() {
+            timelineCounter++;
+            const symbols = ['ℬ1', 'ℬ2', 'ℬ3', 'ℬ4', 'ℬ5'];
+            const colors = ['#00bfff', '#ff6b85', '#4ecdc4', '#ffd93d', '#6c5ce7'];
+            
+            if (timelineCounter > 5) {
+                addToConsole('⚠️ Limite maximum de timelines atteinte (5)');
+                return;
+            }
+
+            const symbol = symbols[timelineCounter - 1];
+            const color = colors[timelineCounter - 1];
+            
+            // Créer la nouvelle timeline
+            timelines[symbol] = {
+                symbol: symbol,
+                status: 'PARALLÈLE',
+                events: [`Tour ${eventCounter} - Branchement depuis ℬ1`],
+                active: false,
+                color: color
+            };
+
+            // Ajouter l'événement de branchement à la timeline principale
+            timelines['ℬ1'].events.push(`Tour ${eventCounter} - Branchement vers ${symbol}`);
+            
+            updateTimelineVisualizer();
+            addToConsole(`🌀 Timeline ${symbol} créée par branchement quantique`);
+        }
+
+        function mergeTimelines() {
+            const activeTimelines = Object.keys(timelines).filter(key => timelines[key].active);
+            
+            if (activeTimelines.length < 2) {
+                addToConsole('⚠️ Sélectionnez au moins 2 timelines pour fusionner');
+                return;
+            }
+
+            // Fusionner vers la timeline principale
+            const mainTimeline = activeTimelines[0];
+            const mergedTimelines = activeTimelines.slice(1);
+            
+            mergedTimelines.forEach(timeline => {
+                timelines[mainTimeline].events.push(`Tour ${eventCounter} - Fusion avec ${timeline}`);
+                delete timelines[timeline];
+            });
+
+            eventCounter++;
+            updateTimelineVisualizer();
+            addToConsole(`🔄 Fusion quantique : ${mergedTimelines.join(', ')} → ${mainTimeline}`);
+        }
+
+        function simulateTemporalEvent() {
+            const events = [
+                'Création de ψ-state',
+                'Collapse quantique',
+                'Paradoxe temporel résolu',
+                'Héros déplacé',
+                'Artefact temporel activé',
+                'Zone de causalité modifiée'
+            ];
+
+            const randomEvent = events[Math.floor(Math.random() * events.length)];
+            const activeTimeline = Object.keys(timelines).find(key => timelines[key].active) || 'ℬ1';
+            
+            eventCounter++;
+            timelines[activeTimeline].events.push(`Tour ${eventCounter} - ${randomEvent}`);
+            
+            updateTimelineVisualizer();
+            addToConsole(`⚡ Événement temporel sur ${activeTimeline} : ${randomEvent}`);
+        }
+
+        function updateTimelineVisualizer() {
+            const container = document.getElementById('timelineVisualizer');
+            container.innerHTML = '';
+
+            Object.keys(timelines).forEach(key => {
+                const timeline = timelines[key];
+                const branch = document.createElement('div');
+                branch.className = `timeline-branch ${timeline.active ? 'active' : ''}`;
+                branch.setAttribute('data-branch', timeline.symbol);
+                
+                // Ajouter animation si nouvelle
+                if (timeline.isNew) {
+                    branch.classList.add('new');
+                    timeline.isNew = false;
+                }
+
+                branch.innerHTML = `
+                    <div class="timeline-header">
+                        <span class="timeline-symbol">${timeline.symbol}</span>
+                        <span class="timeline-status">${timeline.status}</span>
+                    </div>
+                    <div class="timeline-events">
+                        ${timeline.events.map((event, index) => `
+                            <div class="timeline-event ${index === timeline.events.length - 1 ? 'new' : ''}">${event}</div>
+                        `).join('')}
+                    </div>
+                `;
+
+                // Ajouter clic pour activer/désactiver
+                branch.addEventListener('click', () => {
+                    timeline.active = !timeline.active;
+                    updateTimelineVisualizer();
+                    addToConsole(`${timeline.active ? '✅' : '❌'} Timeline ${timeline.symbol} ${timeline.active ? 'activée' : 'désactivée'}`);
+                });
+
+                container.appendChild(branch);
+            });
+
+            // Mettre à jour le compteur de timelines
+            document.getElementById('activeTimelines').textContent = Object.keys(timelines).length;
+        }
+
+        function switchToTimeline(symbol) {
+            Object.keys(timelines).forEach(key => {
+                timelines[key].active = (key === symbol);
+            });
+            updateTimelineVisualizer();
+            addToConsole(`🔄 Basculement vers timeline ${symbol}`);
+        }
+
+        // Simulation d'événements temporels automatiques
+        function startTemporalSimulation() {
+            setInterval(() => {
+                if (Math.random() < 0.3) { // 30% de chance toutes les 10 secondes
+                    const events = [
+                        'Fluctuation quantique détectée',
+                        'Stabilisation temporelle',
+                        'Résonance interdimensionnelle',
+                        'Correction paradoxale automatique'
+                    ];
+                    
+                    const randomEvent = events[Math.floor(Math.random() * events.length)];
+                    const randomTimeline = Object.keys(timelines)[Math.floor(Math.random() * Object.keys(timelines).length)];
+                    
+                    eventCounter++;
+                    timelines[randomTimeline].events.push(`Tour ${eventCounter} - ${randomEvent}`);
+                    updateTimelineVisualizer();
+                    addToConsole(`🌀 Auto-événement sur ${randomTimeline} : ${randomEvent}`);
+                }
+            }, 10000); // Toutes les 10 secondes
+        }
+
+        // Initialiser la simulation temporelle
+        setTimeout(() => {
+            startTemporalSimulation();
+            addToConsole('🚀 Simulation temporelle automatique activée');
+        }, 5000);
     </script>
 </body>
 </html>
