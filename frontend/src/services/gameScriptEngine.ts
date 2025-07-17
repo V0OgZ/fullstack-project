@@ -1,430 +1,558 @@
-// 🎮 Game Script Engine - Langage de Script pour Heroes of Time
-// Convertit les actions en langage naturel vers des appels API
+/**
+ * 🎮 HEROES OF TIME - Game Script Engine
+ * 
+ * Langage de script custom pour décrire les actions de jeu
+ * Utilisé pour les tests, l'IA et la simulation de parties
+ */
 
 import { ApiService } from './api';
 
 // Types pour le langage de script
+export interface GameScript {
+  name: string;
+  description?: string;
+  variables?: Record<string, any>;
+  actions: ScriptAction[];
+}
+
 export interface ScriptAction {
-  type: 'MOVE' | 'ATTACK' | 'COLLECT' | 'BUILD' | 'RECRUIT' | 'CAST' | 'END_TURN' | 'SELECT_HERO';
-  params: Record<string, any>;
-  description: string;
+  type: 'move' | 'attack' | 'build' | 'recruit' | 'end_turn' | 'collect' | 'cast_spell' | 'if' | 'loop' | 'assert' | 'wait' | 'log';
+  params?: Record<string, any>;
+  condition?: ScriptCondition;
+  actions?: ScriptAction[]; // Pour les blocs if/loop
+  else?: ScriptAction[];   // Pour les blocs if
+}
+
+export interface ScriptCondition {
+  type: 'equals' | 'greater' | 'less' | 'has' | 'contains' | 'and' | 'or' | 'not';
+  left?: any;
+  right?: any;
+  conditions?: ScriptCondition[];
 }
 
 export interface ScriptContext {
   gameId: string;
   playerId: string;
-  currentHero?: any;
-  map?: any;
-  resources?: any;
+  heroId?: string;
+  variables: Record<string, any>;
+  gameState: any;
 }
 
-export interface ScriptResult {
+export interface ExecutionResult {
   success: boolean;
+  message: string;
   data?: any;
-  error?: string;
-  logs: string[];
+  context: ScriptContext;
 }
 
+// Moteur d'exécution des scripts
 export class GameScriptEngine {
-  private context: ScriptContext;
-  private logs: string[] = [];
-
-  constructor(context: ScriptContext) {
-    this.context = context;
+  private apiService: typeof ApiService;
+  
+  constructor(apiService: typeof ApiService = ApiService) {
+    this.apiService = apiService;
   }
 
-  // 🎯 Méthode principale pour exécuter une action
-  async executeAction(action: ScriptAction): Promise<ScriptResult> {
-    this.logs = [];
-    this.log(`🎮 Executing: ${action.description}`);
+  // Exécute un script complet
+  async executeScript(script: GameScript, initialContext: Partial<ScriptContext>): Promise<ExecutionResult[]> {
+    const context: ScriptContext = {
+      gameId: initialContext.gameId || '',
+      playerId: initialContext.playerId || '',
+      heroId: initialContext.heroId,
+      variables: { ...script.variables, ...initialContext.variables },
+      gameState: initialContext.gameState || {}
+    };
 
+    const results: ExecutionResult[] = [];
+    
+    for (const action of script.actions) {
+      const result = await this.executeAction(action, context);
+      results.push(result);
+      
+      if (!result.success) {
+        break; // Arrêter en cas d'erreur
+      }
+    }
+    
+    return results;
+  }
+
+  // Exécute une action individuelle
+  private async executeAction(action: ScriptAction, context: ScriptContext): Promise<ExecutionResult> {
     try {
-      let result: any;
-
-      switch (action.type) {
-        case 'MOVE':
-          result = await this.executeMove(action.params);
-          break;
-        case 'ATTACK':
-          result = await this.executeAttack(action.params);
-          break;
-        case 'COLLECT':
-          result = await this.executeCollect(action.params);
-          break;
-        case 'BUILD':
-          result = await this.executeBuild(action.params);
-          break;
-        case 'RECRUIT':
-          result = await this.executeRecruit(action.params);
-          break;
-        case 'CAST':
-          result = await this.executeCast(action.params);
-          break;
-        case 'END_TURN':
-          result = await this.executeEndTurn(action.params);
-          break;
-        case 'SELECT_HERO':
-          result = await this.executeSelectHero(action.params);
-          break;
-        default:
-          throw new Error(`Action type not supported: ${action.type}`);
+      // Vérifier la condition si présente
+      if (action.condition && !this.evaluateCondition(action.condition, context)) {
+        return {
+          success: true,
+          message: `Condition not met, skipping ${action.type}`,
+          context
+        };
       }
 
-      this.log(`✅ Action completed successfully`);
+      // Exécuter l'action selon son type
+      switch (action.type) {
+        case 'move':
+          return await this.executeMove(action, context);
+        case 'attack':
+          return await this.executeAttack(action, context);
+        case 'build':
+          return await this.executeBuild(action, context);
+        case 'recruit':
+          return await this.executeRecruit(action, context);
+        case 'end_turn':
+          return await this.executeEndTurn(action, context);
+        case 'collect':
+          return await this.executeCollect(action, context);
+        case 'cast_spell':
+          return await this.executeCastSpell(action, context);
+        case 'if':
+          return await this.executeIf(action, context);
+        case 'loop':
+          return await this.executeLoop(action, context);
+        case 'assert':
+          return await this.executeAssert(action, context);
+        case 'wait':
+          return await this.executeWait(action, context);
+        case 'log':
+          return await this.executeLog(action, context);
+        default:
+          throw new Error(`Unknown action type: ${action.type}`);
+      }
+    } catch (error) {
       return {
-        success: true,
-        data: result,
-        logs: this.logs
+        success: false,
+        message: `Error executing ${action.type}: ${error instanceof Error ? error.message : String(error)}`,
+        context
       };
-
-         } catch (error) {
-       this.log(`❌ Action failed: ${error instanceof Error ? error.message : String(error)}`);
-       return {
-         success: false,
-         error: error instanceof Error ? error.message : String(error),
-         logs: this.logs
-       };
-     }
-  }
-
-  // 🏃 Déplacer un héros
-  private async executeMove(params: any): Promise<any> {
-    const { heroId, position, targetX, targetY } = params;
-    
-    const targetPosition = position || { x: targetX, y: targetY };
-    
-    if (!targetPosition) {
-      throw new Error('Target position is required for MOVE action');
     }
-
-    this.log(`🏃 Moving hero ${heroId} to position (${targetPosition.x}, ${targetPosition.y})`);
-    
-    return await ApiService.moveHero(this.context.gameId, heroId, targetPosition);
   }
 
-  // ⚔️ Attaquer une cible
-  private async executeAttack(params: any): Promise<any> {
-    const { heroId, targetId } = params;
-    
-    if (!heroId || !targetId) {
-      throw new Error('Hero ID and target ID are required for ATTACK action');
-    }
-
-    this.log(`⚔️ Hero ${heroId} attacking target ${targetId}`);
-    
-    return await ApiService.attackTarget(heroId, targetId);
-  }
-
-  // 📦 Collecter une ressource
-  private async executeCollect(params: any): Promise<any> {
-    const { heroId, objectId } = params;
-    
-    if (!heroId || !objectId) {
-      throw new Error('Hero ID and object ID are required for COLLECT action');
-    }
-
-    this.log(`📦 Hero ${heroId} collecting object ${objectId}`);
-    
-    return await ApiService.collectResource(heroId, objectId);
-  }
-
-  // 🏗️ Construire un bâtiment
-  private async executeBuild(params: any): Promise<any> {
-    const { buildingType, position } = params;
-    
-    if (!buildingType) {
-      throw new Error('Building type is required for BUILD action');
-    }
-
-    this.log(`🏗️ Building ${buildingType} at position ${JSON.stringify(position)}`);
-    
-         // Utiliser l'API de construction (à adapter selon l'API backend)
-     // Pour l'instant, on utilise une API générique
-     return await ApiService.makeGenericRequest(`/games/${this.context.gameId}/build`, {
-       method: 'POST',
-       body: JSON.stringify({ buildingType, position })
-     });
-  }
-
-  // 👥 Recruter des unités
-  private async executeRecruit(params: any): Promise<any> {
-    const { unitType, quantity, buildingId } = params;
-    
-    if (!unitType || !quantity) {
-      throw new Error('Unit type and quantity are required for RECRUIT action');
-    }
-
-    this.log(`👥 Recruiting ${quantity} ${unitType} units`);
-    
-         return await ApiService.makeGenericRequest(`/games/${this.context.gameId}/recruit`, {
-       method: 'POST',
-       body: JSON.stringify({ 
-         playerId: this.context.playerId,
-         unitType,
-         quantity,
-         buildingId 
-       })
-     });
-  }
-
-  // 🔮 Lancer un sort
-  private async executeCast(params: any): Promise<any> {
-    const { spellId, targetId, position } = params;
-    
-    if (!spellId) {
-      throw new Error('Spell ID is required for CAST action');
-    }
-
-    this.log(`🔮 Casting spell ${spellId} on target ${targetId || 'position'}`);
-    
-         return await ApiService.makeGenericRequest(`/games/${this.context.gameId}/cast-spell`, {
-       method: 'POST',
-       body: JSON.stringify({ 
-         playerId: this.context.playerId,
-         spellId,
-         targetId,
-         position 
-       })
-     });
-  }
-
-  // ⏰ Terminer le tour
-  private async executeEndTurn(params: any): Promise<any> {
-    this.log(`⏰ Ending turn for player ${this.context.playerId}`);
-    
-    return await ApiService.endTurn(this.context.gameId, this.context.playerId);
-  }
-
-  // 🎯 Sélectionner un héros
-  private async executeSelectHero(params: any): Promise<any> {
-    const { heroId } = params;
-    
-    if (!heroId) {
-      throw new Error('Hero ID is required for SELECT_HERO action');
-    }
-
-    this.log(`🎯 Selecting hero ${heroId}`);
-    
-    // Mise à jour du contexte
-    this.context.currentHero = heroId;
-    
-         return await ApiService.makeGenericRequest(`/games/${this.context.gameId}/select-hero`, {
-       method: 'POST',
-       body: JSON.stringify({ heroId })
-     });
-  }
-
-  // 📝 Logger interne
-  private log(message: string): void {
-    const timestamp = new Date().toISOString().split('T')[1].split('.')[0];
-    const logMessage = `[${timestamp}] ${message}`;
-    this.logs.push(logMessage);
-    console.log(`🎮 [GameScript] ${logMessage}`);
-  }
-
-  // 🔄 Mettre à jour le contexte
-  updateContext(updates: Partial<ScriptContext>): void {
-    this.context = { ...this.context, ...updates };
-    this.log(`🔄 Context updated: ${JSON.stringify(updates)}`);
-  }
-
-  // 📊 Obtenir le contexte actuel
-  getContext(): ScriptContext {
-    return { ...this.context };
-  }
-}
-
-// 🎯 Factory pour créer des actions de script
-export class ScriptActionFactory {
+  // Actions de base du jeu
   
-  // Créer une action de déplacement
-  static move(heroId: string, x: number, y: number): ScriptAction {
+  private async executeMove(action: ScriptAction, context: ScriptContext): Promise<ExecutionResult> {
+    const { heroId, targetPosition, relative } = action.params || {};
+    
+    // Résoudre l'ID du héros
+    const resolvedHeroId = this.resolveValue(heroId || context.heroId, context);
+    if (!resolvedHeroId) {
+      throw new Error('Hero ID not specified');
+    }
+    
+    // Résoudre la position cible
+    let resolvedPosition;
+    if (relative) {
+      const currentPosition = await this.getHeroPosition(resolvedHeroId, context);
+      resolvedPosition = {
+        x: currentPosition.x + (targetPosition.x || 0),
+        y: currentPosition.y + (targetPosition.y || 0)
+      };
+    } else {
+      resolvedPosition = this.resolveValue(targetPosition, context);
+    }
+    
+    // Exécuter le mouvement
+    const result = await this.apiService.moveHero(context.gameId, resolvedHeroId, resolvedPosition);
+    
+    // Mettre à jour le contexte
+    context.gameState = await this.apiService.getGame(context.gameId);
+    
     return {
-      type: 'MOVE',
-      params: { heroId, targetX: x, targetY: y },
-      description: `Move hero ${heroId} to (${x}, ${y})`
+      success: true,
+      message: `Hero ${resolvedHeroId} moved to (${resolvedPosition.x}, ${resolvedPosition.y})`,
+      data: result,
+      context
     };
   }
 
-  // Créer une action d'attaque
-  static attack(heroId: string, targetId: string): ScriptAction {
+  private async executeAttack(action: ScriptAction, context: ScriptContext): Promise<ExecutionResult> {
+    const { heroId, targetId } = action.params || {};
+    
+    const resolvedHeroId = this.resolveValue(heroId || context.heroId, context);
+    const resolvedTargetId = this.resolveValue(targetId, context);
+    
+    if (!resolvedHeroId || !resolvedTargetId) {
+      throw new Error('Hero ID or target ID not specified');
+    }
+    
+    const result = await this.apiService.attackTarget(resolvedHeroId, resolvedTargetId);
+    
+    context.gameState = await this.apiService.getGame(context.gameId);
+    
     return {
-      type: 'ATTACK',
-      params: { heroId, targetId },
-      description: `Hero ${heroId} attacks ${targetId}`
+      success: true,
+      message: `Hero ${resolvedHeroId} attacked ${resolvedTargetId}`,
+      data: result,
+      context
     };
   }
 
-  // Créer une action de collecte
-  static collect(heroId: string, objectId: string): ScriptAction {
+  private async executeBuild(action: ScriptAction, context: ScriptContext): Promise<ExecutionResult> {
+    const { buildingType, position } = action.params || {};
+    
+    const resolvedBuildingType = this.resolveValue(buildingType, context);
+    const resolvedPosition = this.resolveValue(position, context);
+    
+    const buildData = {
+      gameId: context.gameId,
+      playerId: context.playerId,
+      buildingType: resolvedBuildingType,
+      position: resolvedPosition
+    };
+    
+    const result = await this.apiService.startConstructionWithResources(buildData);
+    
+    context.gameState = await this.apiService.getGame(context.gameId);
+    
     return {
-      type: 'COLLECT',
-      params: { heroId, objectId },
-      description: `Hero ${heroId} collects ${objectId}`
+      success: true,
+      message: `Built ${resolvedBuildingType} at (${resolvedPosition.x}, ${resolvedPosition.y})`,
+      data: result,
+      context
     };
   }
 
-  // Créer une action de construction
-  static build(buildingType: string, position?: { x: number; y: number }): ScriptAction {
+  private async executeRecruit(action: ScriptAction, context: ScriptContext): Promise<ExecutionResult> {
+    const { buildingId, unitType, quantity } = action.params || {};
+    
+    const resolvedBuildingId = this.resolveValue(buildingId, context);
+    const resolvedUnitType = this.resolveValue(unitType, context);
+    const resolvedQuantity = this.resolveValue(quantity, context);
+    
+    const recruitData = {
+      unitType: resolvedUnitType,
+      quantity: resolvedQuantity
+    };
+    
+    const result = await this.apiService.recruitUnitsFromGame(context.gameId, resolvedBuildingId, recruitData);
+    
+    context.gameState = await this.apiService.getGame(context.gameId);
+    
     return {
-      type: 'BUILD',
-      params: { buildingType, position },
-      description: `Build ${buildingType}${position ? ` at (${position.x}, ${position.y})` : ''}`
+      success: true,
+      message: `Recruited ${resolvedQuantity} ${resolvedUnitType} from building ${resolvedBuildingId}`,
+      data: result,
+      context
     };
   }
 
-  // Créer une action de recrutement
-  static recruit(unitType: string, quantity: number, buildingId?: string): ScriptAction {
+  private async executeEndTurn(action: ScriptAction, context: ScriptContext): Promise<ExecutionResult> {
+    const result = await this.apiService.endTurn(context.gameId, context.playerId);
+    
+    context.gameState = await this.apiService.getGame(context.gameId);
+    
     return {
-      type: 'RECRUIT',
-      params: { unitType, quantity, buildingId },
-      description: `Recruit ${quantity} ${unitType}`
+      success: true,
+      message: `Turn ended for player ${context.playerId}`,
+      data: result,
+      context
     };
   }
 
-  // Créer une action de sort
-  static cast(spellId: string, targetId?: string, position?: { x: number; y: number }): ScriptAction {
+  private async executeCollect(action: ScriptAction, context: ScriptContext): Promise<ExecutionResult> {
+    const { heroId, objectId } = action.params || {};
+    
+    const resolvedHeroId = this.resolveValue(heroId || context.heroId, context);
+    const resolvedObjectId = this.resolveValue(objectId, context);
+    
+    const result = await this.apiService.collectResource(resolvedHeroId, resolvedObjectId);
+    
+    context.gameState = await this.apiService.getGame(context.gameId);
+    
     return {
-      type: 'CAST',
-      params: { spellId, targetId, position },
-      description: `Cast spell ${spellId}`
+      success: true,
+      message: `Hero ${resolvedHeroId} collected object ${resolvedObjectId}`,
+      data: result,
+      context
     };
   }
 
-  // Créer une action de fin de tour
-  static endTurn(): ScriptAction {
+  private async executeCastSpell(action: ScriptAction, context: ScriptContext): Promise<ExecutionResult> {
+    const { heroId, spellId, targetPosition } = action.params || {};
+    
+    const resolvedHeroId = this.resolveValue(heroId || context.heroId, context);
+    const resolvedSpellId = this.resolveValue(spellId, context);
+    const resolvedTargetPosition = this.resolveValue(targetPosition, context);
+    
+    // TODO: Implémenter l'API pour lancer des sorts
+    
     return {
-      type: 'END_TURN',
-      params: {},
-      description: 'End current turn'
+      success: true,
+      message: `Hero ${resolvedHeroId} cast spell ${resolvedSpellId}`,
+      data: null,
+      context
     };
   }
 
-  // Créer une action de sélection de héros
-  static selectHero(heroId: string): ScriptAction {
-    return {
-      type: 'SELECT_HERO',
-      params: { heroId },
-      description: `Select hero ${heroId}`
-    };
-  }
-}
-
-// 📜 Parser pour convertir du texte en actions
-export class ScriptParser {
+  // Actions de contrôle de flux
   
-  // Parser simple pour convertir du texte en actions
-  static parseText(text: string): ScriptAction[] {
-    const actions: ScriptAction[] = [];
-    const lines = text.split('\n').map(line => line.trim()).filter(line => line);
-
-    for (const line of lines) {
-      try {
-        const action = this.parseLine(line);
-        if (action) {
-          actions.push(action);
+  private async executeIf(action: ScriptAction, context: ScriptContext): Promise<ExecutionResult> {
+    const conditionResult = this.evaluateCondition(action.condition!, context);
+    
+    const actionsToExecute = conditionResult ? action.actions : action.else;
+    
+    if (actionsToExecute) {
+      for (const subAction of actionsToExecute) {
+        const result = await this.executeAction(subAction, context);
+        if (!result.success) {
+          return result;
         }
-             } catch (error) {
-         console.warn(`Failed to parse line: "${line}" - ${error instanceof Error ? error.message : String(error)}`);
-       }
+      }
     }
-
-    return actions;
+    
+    return {
+      success: true,
+      message: `If condition ${conditionResult ? 'met' : 'not met'}`,
+      context
+    };
   }
 
-  // Parser une ligne individuelle
-  private static parseLine(line: string): ScriptAction | null {
-    const words = line.toLowerCase().split(/\s+/);
-    const firstWord = words[0];
+  private async executeLoop(action: ScriptAction, context: ScriptContext): Promise<ExecutionResult> {
+    const { times, while: whileCondition } = action.params || {};
+    
+    let iterations = 0;
+    const maxIterations = times || 100; // Limite de sécurité
+    
+    while (iterations < maxIterations) {
+      // Vérifier la condition de boucle
+      if (whileCondition && !this.evaluateCondition(whileCondition, context)) {
+        break;
+      }
+      
+      // Exécuter les actions de la boucle
+      if (action.actions) {
+        for (const subAction of action.actions) {
+          const result = await this.executeAction(subAction, context);
+          if (!result.success) {
+            return result;
+          }
+        }
+      }
+      
+      iterations++;
+      
+      // Si pas de condition while, faire exactement 'times' itérations
+      if (!whileCondition && times) {
+        if (iterations >= times) break;
+      }
+    }
+    
+    return {
+      success: true,
+      message: `Loop executed ${iterations} times`,
+      context
+    };
+  }
 
-    switch (firstWord) {
-      case 'move':
-        return this.parseMove(words, line);
-      case 'attack':
-        return this.parseAttack(words, line);
-      case 'collect':
-        return this.parseCollect(words, line);
-      case 'build':
-        return this.parseBuild(words, line);
-      case 'recruit':
-        return this.parseRecruit(words, line);
-      case 'cast':
-        return this.parseCast(words, line);
-      case 'end':
-        return ScriptActionFactory.endTurn();
-      case 'select':
-        return this.parseSelect(words, line);
+  private async executeAssert(action: ScriptAction, context: ScriptContext): Promise<ExecutionResult> {
+    const { condition, message } = action.params || {};
+    
+    const conditionResult = this.evaluateCondition(condition, context);
+    
+    if (!conditionResult) {
+      throw new Error(message || 'Assertion failed');
+    }
+    
+    return {
+      success: true,
+      message: `Assertion passed: ${message || 'condition met'}`,
+      context
+    };
+  }
+
+  private async executeWait(action: ScriptAction, context: ScriptContext): Promise<ExecutionResult> {
+    const { duration } = action.params || {};
+    const resolvedDuration = this.resolveValue(duration, context) || 1000;
+    
+    await new Promise(resolve => setTimeout(resolve, resolvedDuration));
+    
+    return {
+      success: true,
+      message: `Waited ${resolvedDuration}ms`,
+      context
+    };
+  }
+
+  private async executeLog(action: ScriptAction, context: ScriptContext): Promise<ExecutionResult> {
+    const { message, data } = action.params || {};
+    
+    const resolvedMessage = this.resolveValue(message, context);
+    const resolvedData = this.resolveValue(data, context);
+    
+    console.log(`[GameScript] ${resolvedMessage}`, resolvedData);
+    
+    return {
+      success: true,
+      message: `Logged: ${resolvedMessage}`,
+      context
+    };
+  }
+
+  // Utilitaires
+  
+  private evaluateCondition(condition: ScriptCondition, context: ScriptContext): boolean {
+    const { type, left, right, conditions } = condition;
+    
+    switch (type) {
+      case 'equals':
+        return this.resolveValue(left, context) === this.resolveValue(right, context);
+      case 'greater':
+        return this.resolveValue(left, context) > this.resolveValue(right, context);
+      case 'less':
+        return this.resolveValue(left, context) < this.resolveValue(right, context);
+      case 'has':
+        return this.resolveValue(left, context) !== undefined;
+      case 'contains':
+        const leftArray = this.resolveValue(left, context);
+        const rightValue = this.resolveValue(right, context);
+        return Array.isArray(leftArray) && leftArray.includes(rightValue);
+      case 'and':
+        return conditions!.every(cond => this.evaluateCondition(cond, context));
+      case 'or':
+        return conditions!.some(cond => this.evaluateCondition(cond, context));
+      case 'not':
+        return !this.evaluateCondition(conditions![0], context);
       default:
-        return null;
+        return false;
     }
   }
 
-  // Parsers spécifiques
-  private static parseMove(words: string[], line: string): ScriptAction {
-    // Format: "move hero1 to 5 7" ou "move hero1 5 7"
-    const heroId = words[1];
-    const xIndex = words.includes('to') ? words.indexOf('to') + 1 : 2;
-    const x = parseInt(words[xIndex]);
-    const y = parseInt(words[xIndex + 1]);
-    
-    return ScriptActionFactory.move(heroId, x, y);
-  }
-
-  private static parseAttack(words: string[], line: string): ScriptAction {
-    // Format: "attack hero1 enemy2"
-    const heroId = words[1];
-    const targetId = words[2];
-    
-    return ScriptActionFactory.attack(heroId, targetId);
-  }
-
-  private static parseCollect(words: string[], line: string): ScriptAction {
-    // Format: "collect hero1 gold_mine"
-    const heroId = words[1];
-    const objectId = words[2];
-    
-    return ScriptActionFactory.collect(heroId, objectId);
-  }
-
-  private static parseBuild(words: string[], line: string): ScriptAction {
-    // Format: "build castle" ou "build castle at 3 4"
-    const buildingType = words[1];
-    const atIndex = words.indexOf('at');
-    let position;
-    
-    if (atIndex !== -1) {
-      position = {
-        x: parseInt(words[atIndex + 1]),
-        y: parseInt(words[atIndex + 2])
-      };
+  private resolveValue(value: any, context: ScriptContext): any {
+    if (typeof value === 'string' && value.startsWith('$')) {
+      // Variable reference
+      const varName = value.substring(1);
+      return context.variables[varName];
     }
     
-    return ScriptActionFactory.build(buildingType, position);
+    if (typeof value === 'string' && value.startsWith('@')) {
+      // Game state reference
+      const path = value.substring(1);
+      return this.getNestedValue(context.gameState, path);
+    }
+    
+    return value;
   }
 
-  private static parseRecruit(words: string[], line: string): ScriptAction {
-    // Format: "recruit 5 archers" ou "recruit 5 archers from barracks1"
-    const quantity = parseInt(words[1]);
-    const unitType = words[2];
-    const fromIndex = words.indexOf('from');
-    const buildingId = fromIndex !== -1 ? words[fromIndex + 1] : undefined;
-    
-    return ScriptActionFactory.recruit(unitType, quantity, buildingId);
+  private getNestedValue(obj: any, path: string): any {
+    return path.split('.').reduce((current, key) => current?.[key], obj);
   }
 
-  private static parseCast(words: string[], line: string): ScriptAction {
-    // Format: "cast fireball on enemy1" ou "cast heal on hero1"
-    const spellId = words[1];
-    const onIndex = words.indexOf('on');
-    const targetId = onIndex !== -1 ? words[onIndex + 1] : undefined;
-    
-    return ScriptActionFactory.cast(spellId, targetId);
+  private async getHeroPosition(heroId: string, context: ScriptContext): Promise<{x: number, y: number}> {
+    // Trouver le héros dans l'état du jeu
+    for (const player of context.gameState.players || []) {
+      const hero = player.heroes?.find((h: any) => h.id === heroId);
+      if (hero) {
+        return hero.position;
+      }
+    }
+    throw new Error(`Hero ${heroId} not found`);
   }
+}
 
-  private static parseSelect(words: string[], line: string): ScriptAction {
-    // Format: "select hero1"
-    const heroId = words[1];
-    
-    return ScriptActionFactory.selectHero(heroId);
-  }
-} 
+// Exemples de scripts
+export const EXAMPLE_SCRIPTS = {
+  // Script simple : mouvement et attaque
+  basicCombat: {
+    name: 'Basic Combat',
+    description: 'Move hero and attack enemy',
+    variables: {
+      heroId: 'hero1',
+      enemyId: 'enemy1'
+    },
+    actions: [
+      {
+        type: 'move',
+        params: {
+          heroId: '$heroId',
+          targetPosition: { x: 10, y: 10 }
+        }
+      },
+      {
+        type: 'attack',
+        params: {
+          heroId: '$heroId',
+          targetId: '$enemyId'
+        }
+      }
+    ]
+  } as GameScript,
+
+  // Script avec conditions
+  conditionalActions: {
+    name: 'Conditional Actions',
+    description: 'Attack if enemy is close, otherwise move closer',
+    variables: {
+      heroId: 'hero1'
+    },
+    actions: [
+      {
+        type: 'if',
+        condition: {
+          type: 'less',
+          left: '@players.0.heroes.0.position.x',
+          right: 5
+        },
+        actions: [
+          {
+            type: 'attack',
+            params: {
+              heroId: '$heroId',
+              targetId: 'enemy1'
+            }
+          }
+        ],
+        else: [
+          {
+            type: 'move',
+            params: {
+              heroId: '$heroId',
+              targetPosition: { x: 4, y: 4 }
+            }
+          }
+        ]
+      }
+    ]
+  } as GameScript,
+
+  // Script de jeu complet
+  fullGameTurn: {
+    name: 'Full Game Turn',
+    description: 'Complete turn with building, recruiting, and combat',
+    variables: {
+      playerId: 'player1',
+      heroId: 'hero1'
+    },
+    actions: [
+      {
+        type: 'log',
+        params: {
+          message: 'Starting turn for player $playerId'
+        }
+      },
+      {
+        type: 'build',
+        params: {
+          buildingType: 'barracks',
+          position: { x: 5, y: 5 }
+        }
+      },
+      {
+        type: 'recruit',
+        params: {
+          buildingId: '@buildings.0.id',
+          unitType: 'warrior',
+          quantity: 2
+        }
+      },
+      {
+        type: 'move',
+        params: {
+          heroId: '$heroId',
+          targetPosition: { x: 8, y: 8 }
+        }
+      },
+      {
+        type: 'end_turn'
+      }
+    ]
+  } as GameScript
+}; 

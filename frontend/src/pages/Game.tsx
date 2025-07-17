@@ -23,6 +23,13 @@ const Game: React.FC = () => {
       return;
     }
     
+    // Handle root route - load conquest-classic by default
+    if (window.location.pathname === '/') {
+      console.log('[GAME PAGE] Root route detected - loading conquest-classic by default');
+      loadGame('conquest-classic');
+      return;
+    }
+    
     // ALWAYS load the game when scenarioId is provided
     // This ensures fresh data from backend every time
     if (scenarioId) {
@@ -49,29 +56,21 @@ const Game: React.FC = () => {
     return <MultiplayerSessionManager onSessionJoined={(id) => navigate(`/game/${id}`)} onError={(e) => console.error(e)} />;
   }
 
-  if (!currentGame) {
-    console.log('[GAME PAGE] Status: No game data available. Waiting for data...');
-    return <div>{t('gameNotFound')}</div>;
-  }
-
-  console.log('[GAME PAGE] Status: Game data loaded successfully. Rendering game components.');
+  console.log('[GAME PAGE] Status: Rendering TrueHeroesInterface');
   
-  // Determine scenario type based on the URL parameter, not the game name
-  let scenarioType: 'classique' | 'mystique' | 'multiplayer' = 'classique';
-  if (scenarioId) {
-    if (scenarioId.includes('mystique')) {
-      scenarioType = 'mystique';
-    } else if (scenarioId.includes('multiplayer') || scenarioId.includes('arena')) {
-      scenarioType = 'multiplayer';
-    }
-  }
-  
- 
-
   return (
-    <div className="game-page">
-      <TrueHeroesInterface onNavigate={(page) => console.log('Navigate to:', page)} />
-    </div>
+    <TrueHeroesInterface 
+      onNavigate={(page) => {
+        console.log(`[GAME PAGE] Navigation requested to: ${page}`);
+        if (page === 'scenarios') {
+          navigate('/scenarios');
+        } else if (page === 'multiplayer') {
+          navigate('/multiplayer');
+        } else if (page === 'demo') {
+          navigate('/demo');
+        }
+      }}
+    />
   );
 };
 
