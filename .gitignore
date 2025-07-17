@@ -31,3 +31,10 @@ Thumbs.db
 *.swp
 *.swo
 *~
+
+# Maven
+target/
+*.jar
+*.war
+*.ear
+*.class
