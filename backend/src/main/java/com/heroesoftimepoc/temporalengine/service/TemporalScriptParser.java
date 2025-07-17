@@ -90,12 +90,22 @@ public class TemporalScriptParser {
             
             psiState.setActionType(actionType);
             
-            // Extract owner hero if present
-            if (actionParams.contains("HERO")) {
+            // Extract owner hero based on action type
+            if ("MOV".equals(actionType)) {
+                // For MOV(Arthur, @11,11), extract Arthur as first parameter
+                String[] params = actionParams.split(",");
+                if (params.length > 0) {
+                    psiState.setOwnerHero(params[0].trim());
+                }
+            } else if (actionParams.contains("HERO")) {
+                // For actions with explicit HERO keyword
                 Matcher heroMatcher = HERO_PATTERN.matcher(actionParams);
                 if (heroMatcher.find()) {
                     psiState.setOwnerHero(heroMatcher.group(1));
                 }
+            } else if ("CREATE".equals(actionType)) {
+                // For CREATE(CREATURE, Dragon, @13,13), no specific hero
+                psiState.setOwnerHero(null);
             }
         }
     }

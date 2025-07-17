@@ -1,3 +1,9 @@
+// @module: Temporal Engine Core
+// @exposed-to: Frontend (TemporalInterface.tsx), Advanced Scripts
+// @related-models: Game, Timeline, PsiState, TemporalEvent
+// @endpoints: POST /api/temporal/games, POST /api/temporal/scripts, GET /api/temporal/health
+// @description: Moteur temporel principal - gestion des ψ-states, timelines, collapse causal
+
 package com.heroesoftimepoc.temporalengine.controller;
 
 import com.heroesoftimepoc.temporalengine.model.Game;

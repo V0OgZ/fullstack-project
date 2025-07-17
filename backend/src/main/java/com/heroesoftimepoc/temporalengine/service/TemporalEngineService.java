@@ -207,6 +207,11 @@ public class TemporalEngineService {
     private String executeCollapsedAction(Game game, PsiState psiState) {
         String actionType = psiState.getActionType();
         
+        // Handle null actionType for backward compatibility
+        if (actionType == null) {
+            actionType = "MOV"; // Default to movement
+        }
+        
         switch (actionType) {
             case "MOV":
                 return executeCollapsedMovement(game, psiState);

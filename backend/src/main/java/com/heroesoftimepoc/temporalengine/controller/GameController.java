@@ -1,3 +1,9 @@
+// @module: Game Management API
+// @exposed-to: Frontend (GameInterface.tsx), Test Scripts
+// @related-models: Game, Hero, PsiState, Timeline
+// @endpoints: GET /api/game/status, POST /api/game/create, GET /api/game/{id}
+// @description: Gère les opérations de jeu de base (création, statut, exécution de scripts)
+
 package com.heroesoftimepoc.temporalengine.controller;
 
 import com.heroesoftimepoc.temporalengine.model.Game;

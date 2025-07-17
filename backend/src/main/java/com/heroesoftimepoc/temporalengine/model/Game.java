@@ -1,3 +1,8 @@
+// @module: Core Game Model
+// @exposed-to: GameController, TemporalEngineController
+// @related-models: Hero, PsiState, Timeline, GameTile
+// @description: Modèle principal du jeu avec coordonnées 5D (x,y,z,timeline,temporalLayer)
+
 package com.heroesoftimepoc.temporalengine.model;
 
 import jakarta.persistence.*;
