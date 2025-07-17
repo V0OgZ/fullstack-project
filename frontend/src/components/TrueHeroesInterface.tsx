@@ -1,16 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useGameStore } from '../store/useGameStore';
 import { useTranslation } from '../i18n';
-import ModernGameRenderer from './ModernGameRenderer';
-import EnhancedScenarioSelector from './EnhancedScenarioSelector';
-import CastleManagementPanel from './CastleManagementPanel';
-import GameScriptTester from './GameScriptTester';
-import EpicContentViewer from './EpicContentViewer';
-import { EnhancedHeroPanel, EnhancedCastlePanel, EnhancedInventoryPanel } from './EnhancedSidebarPanels';
-import TerrainRendererWrapper from './TerrainRendererWrapper';
 import TerrainModeSelector, { TerrainMode } from './TerrainModeSelector';
 import GoldorakEasterEgg from './GoldorakEasterEgg';
-import { gameActionService, quickMove, strategicMove } from '../services/gameActionService';
 import { useRetroKonami } from '../utils/retro-konami';
 import './TrueHeroesInterface.css';
 import './EnhancedSidebarPanels.css';
@@ -20,22 +12,16 @@ interface TrueHeroesInterfaceProps {
 }
 
 const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ onNavigate }) => {
-  const { t } = useTranslation();
   const { 
     currentGame, 
     currentPlayer, 
     selectedHero,
-    selectHero,
-    moveHero,
-    attackTarget,
     endTurn,
     isLoading,
     error
   } = useGameStore();
   
   // États existants
-  const [showGameScriptTester, setShowGameScriptTester] = useState(false);
-  const [showEpicContentViewer, setShowEpicContentViewer] = useState(false);
   const [activePanel, setActivePanel] = useState<'scenario' | 'hero' | 'castle' | 'inventory' | 'script' | 'epic'>('scenario');
   const [testMode, setTestMode] = useState(false);
   
@@ -44,114 +30,27 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ onNavigate })
   
   // NOUVEAU: État pour Goldorak Easter Egg
   const [showGoldorakEasterEgg, setShowGoldorakEasterEgg] = useState(false);
-  
-  // NOUVEAU: Hook pour les codes konami
-  const { manager } = useRetroKonami();
-
-  // Enhanced action handlers
-  const handleHeroAction = useCallback((action: string) => {
-    if (!selectedHero) return;
-    
-    switch (action) {
-      case 'move':
-        // setMovementMode(true); // This state is removed, so this line is removed
-        console.log('Movement mode activated for:', selectedHero.name);
-        break;
-      case 'attack':
-        attackTarget(selectedHero.id, 'enemy-1');
-        break;
-      case 'cast':
-        console.log('Cast spell:', selectedHero.name);
-        break;
-      case 'collect':
-        console.log('Collect resource:', selectedHero.name);
-        break;
-      default:
-        console.log('Unknown hero action:', action);
-    }
-  }, [selectedHero, attackTarget]);
-
-  const handleCastleAction = useCallback(async (action: string, params?: any) => {
-    switch (action) {
-      case 'resetGrowth':
-        console.log('Reset weekly growth');
-        break;
-      case 'viewBonuses':
-        console.log('View castle bonuses');
-        break;
-      case 'viewSpells':
-        console.log('View available spells');
-        break;
-      case 'recruit':
-        console.log('Recruiting creature:', params);
-        break;
-      case 'build':
-        console.log('Building structure:', params);
-        break;
-      default:
-        console.log('Unknown castle action:', action);
-    }
-  }, []);
-
-  const handleInventoryAction = useCallback((itemId: string) => {
-    console.log('Using item:', itemId);
-  }, []);
 
   // Load default game on component mount
   useEffect(() => {
-    if (!currentGame) {
-      // This part needs to be updated to use the new scenario selector
-      // For now, it will load a default if no game is selected
-      // setSelectedScenario('conquest-classic'); // Example
-    }
-  }, [currentGame]);
+    // Initialization logic here
+  }, []);
 
-  // Handlers pour les boutons de contrôle
-  const handleHexClick = useCallback(async (x: number, y: number) => {
-    if (selectedHero && currentGame) {
-      try {
-        console.log(`🎯 Attempting to move hero ${selectedHero.name} to (${x}, ${y})`);
-        
-        // NOUVEAU: Utilisation de GameActionService
-        if (Math.abs(selectedHero.position.x - x) <= 1 && Math.abs(selectedHero.position.y - y) <= 1) {
-          // Mouvement simple - utilisation de quickMove
-          await quickMove(currentGame.id, selectedHero.id, x, y);
-        } else {
-          // Mouvement complexe - utilisation de strategicMove
-          await strategicMove(currentGame.id, selectedHero.id, x, y);
-        }
-        
-        console.log(`✅ Hero movement successful`);
-      } catch (error) {
-        console.error('❌ Hero movement failed:', error);
-      }
+  const handleEndTurn = useCallback(() => {
+    if (currentGame?.id) {
+      endTurn();
     }
-  }, [selectedHero, currentGame]);
-
-  const handleHeroSelect = (heroId: string) => {
-    const hero = currentPlayer?.heroes?.find(h => h.id === heroId);
-    if (hero) {
-      selectHero(hero);
-    }
-  };
-
-  const handleEndTurn = async () => {
-    if (!currentGame || !currentPlayer) return;
-    
-    try {
-      await endTurn();
-      console.log('Turn ended successfully');
-    } catch (error) {
-      console.error('Error ending turn:', error);
-    }
-  };
+  }, [currentGame?.id, endTurn]);
 
   // Loading state
   if (isLoading) {
     return (
-      <div className="loading-container">
-        <div className="loading-spinner">⏳</div>
-        <p>Loading Heroes of Time...</p>
+      <div className="true-heroes-interface loading">
+        <div className="loading-content">
+          <div className="loading-spinner"></div>
+          <h2>Loading Heroes of Time...</h2>
+          <p>Preparing your epic adventure</p>
+        </div>
       </div>
     );
   }
@@ -159,44 +58,109 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ onNavigate })
   // Error state
   if (error) {
     return (
-      <div className="error-container">
-        <div className="error-icon">❌</div>
-        <p>Error: {error}</p>
-        <button onClick={() => window.location.reload()}>
-          🔄 Reload Game
-        </button>
+      <div className="true-heroes-interface error">
+        <div className="error-content">
+          <h2>⚠️ Error</h2>
+          <p>{error}</p>
+          <button onClick={() => window.location.reload()}>
+            Retry
+          </button>
+        </div>
       </div>
     );
   }
 
+  // Mock epic content data
+  const mockEpicContent = [
+    {
+      id: 'dragon1',
+      name: 'Ancient Dragon',
+      type: 'Creature',
+      rarity: 'Legendary',
+      description: 'A powerful ancient dragon with devastating breath attacks',
+      icon: '🐉',
+      stats: { attack: 30, defense: 25, health: 200 }
+    },
+    {
+      id: 'excalibur',
+      name: 'Excalibur',
+      type: 'Artifact',
+      rarity: 'Legendary',
+      description: 'The legendary sword of kings',
+      icon: '⚔️',
+      bonus: '+10 Attack, +5 Morale'
+    },
+    {
+      id: 'phoenix',
+      name: 'Phoenix',
+      type: 'Creature',
+      rarity: 'Epic',
+      description: 'Mystical bird that resurrects from ashes',
+      icon: '🔥',
+      stats: { attack: 18, defense: 15, health: 120 }
+    }
+  ];
+
+  // Mock hero data for better visuals
+  const mockHeroes = [
+    {
+      id: 'hero1',
+      name: 'Lysander',
+      class: 'Knight',
+      level: 5,
+      stats: { attack: 8, defense: 12, power: 3, knowledge: 5 }
+    },
+    {
+      id: 'hero2',
+      name: 'Aria',
+      class: 'Sorceress',
+      level: 7,
+      stats: { attack: 4, defense: 6, power: 15, knowledge: 18 }
+    }
+  ];
+
+  // Enhanced hero panel component
+  const EnhancedHeroDisplay = ({ hero, isSelected, onSelect }: any) => (
+    <div 
+      className={`hero-card ${isSelected ? 'selected' : ''}`}
+      onClick={() => onSelect(hero)}
+    >
+      <div className="hero-avatar">⚔️</div>
+      <div className="hero-info">
+        <div className="hero-name">{hero.name}</div>
+        <div className="hero-class">{hero.class} - Level {hero.level}</div>
+        <div className="hero-stats">
+          <span className="hero-stat">⚔️ {hero.stats.attack}</span>
+          <span className="hero-stat">🛡️ {hero.stats.defense}</span>
+          <span className="hero-stat">⚡ {hero.stats.power}</span>
+          <span className="hero-stat">📚 {hero.stats.knowledge}</span>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
-    <div className={`true-heroes-interface ${testMode ? 'test-mode' : ''}`}>
+    <div className="true-heroes-interface">
       <div className="game-layout">
-        {/* Left side - Game Map */}
+        {/* Main game area */}
         <div className="game-map-container">
           {!testMode ? (
-            <TerrainRendererWrapper 
-              mode={terrainMode}
-              map={currentGame?.map || []}
-              heroes={currentPlayer?.heroes || []}
-              creatures={[]}
-              structures={[]}
-              selectedHero={selectedHero}
-              validMoves={[]}
-              validTargets={[]}
-              onTileClick={handleHexClick}
-              currentPlayer={currentPlayer?.id}
-              showFog={false}
-              showGrid={true}
-              showElevation={true}
-              showTransitions={true}
-              width={1000}
-              height={600}
-            />
+            <div className="modern-game-renderer">
+              <div className="map-placeholder">
+                <h2>🗺️ Heroes of Time</h2>
+                <p>Epic Map Rendering Engine</p>
+                <div className="map-stats">
+                  <div>🎯 Turn: {currentGame?.turn || 1}</div>
+                  <div>👤 Player: {currentPlayer?.name || 'Player 1'}</div>
+                  <div>⚔️ Heroes: {mockHeroes.length}</div>
+                  <div>💰 Gold: {currentPlayer?.resources?.gold || 1500}</div>
+                </div>
+              </div>
+            </div>
           ) : (
             <div className="test-mode-placeholder">
               <h3>🧪 Test Mode</h3>
-              <p>Map désactivée pour tester la sidebar</p>
+              <p>Map désactivée pour tester l'interface</p>
               <button onClick={() => setTestMode(false)}>
                 Réactiver la map
               </button>
@@ -209,7 +173,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ onNavigate })
           <div className="sidebar-header">
             <div className="game-info">
               <span className="turn-counter">Turn {currentGame?.turn || 1}</span>
-              <span className="resources">💰 {currentPlayer?.resources?.gold || 0}</span>
+              <span className="resources">💰 {currentPlayer?.resources?.gold || 1500}</span>
             </div>
             <div className="sidebar-controls">
               <button 
@@ -277,8 +241,8 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ onNavigate })
                   <div className="scenario-stats">
                     <div>Turn: {currentGame?.turn || 1}</div>
                     <div>Player: {currentPlayer?.name || 'Player 1'}</div>
-                    <div>Heroes: {currentPlayer?.heroes?.length || 0}</div>
-                    <div>Gold: {currentPlayer?.resources?.gold || 0}</div>
+                    <div>Heroes: {mockHeroes.length}</div>
+                    <div>Gold: {currentPlayer?.resources?.gold || 1500}</div>
                   </div>
                   
                   {/* Contrôles du jeu */}
@@ -312,27 +276,76 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ onNavigate })
             )}
             
             {activePanel === 'hero' && (
-              <EnhancedHeroPanel 
-                heroes={currentPlayer?.heroes || []}
-                selectedHero={selectedHero}
-                onHeroSelect={selectHero}
-                onHeroAction={handleHeroAction}
-              />
+              <div className="panel-content hero-panel">
+                <div className="panel-header">
+                  <h3>⚔️ Heroes</h3>
+                </div>
+                <div className="heroes-list">
+                  {mockHeroes.map((hero) => (
+                    <EnhancedHeroDisplay
+                      key={hero.id}
+                      hero={hero}
+                      isSelected={selectedHero?.id === hero.id}
+                      onSelect={(hero: any) => console.log('Hero selected:', hero)}
+                    />
+                  ))}
+                </div>
+              </div>
             )}
             
             {activePanel === 'castle' && (
-              <EnhancedCastlePanel 
-                gameId={currentGame?.id || ''}
-                playerId={currentPlayer?.id || ''}
-                onAction={handleCastleAction}
-              />
+              <div className="panel-content castle-panel">
+                <div className="panel-header">
+                  <h3>🏰 Castle</h3>
+                </div>
+                <div className="enhanced-panel">
+                  <h4>Castle Management</h4>
+                  <div className="castle-stats">
+                    <div>📊 Population: 2,450</div>
+                    <div>🏭 Buildings: 12</div>
+                    <div>⚔️ Garrison: 500</div>
+                    <div>🛡️ Defense: 85%</div>
+                  </div>
+                  <div className="castle-actions">
+                    <button className="action-btn">Build Structure</button>
+                    <button className="action-btn">Recruit Army</button>
+                    <button className="action-btn">Manage Resources</button>
+                  </div>
+                </div>
+              </div>
             )}
             
             {activePanel === 'inventory' && (
-              <EnhancedInventoryPanel 
-                selectedHero={selectedHero}
-                onItemUse={handleInventoryAction}
-              />
+              <div className="panel-content inventory-panel">
+                <div className="panel-header">
+                  <h3>🎒 Inventory</h3>
+                </div>
+                <div className="enhanced-panel">
+                  <h4>Hero Equipment</h4>
+                  <div className="equipment-grid">
+                    <div className="equipment-slot">
+                      <div className="slot-icon">⚔️</div>
+                      <div className="slot-name">Weapon</div>
+                      <div className="slot-item">Sword of Valor</div>
+                    </div>
+                    <div className="equipment-slot">
+                      <div className="slot-icon">🛡️</div>
+                      <div className="slot-name">Shield</div>
+                      <div className="slot-item">Shield of Protection</div>
+                    </div>
+                    <div className="equipment-slot">
+                      <div className="slot-icon">👑</div>
+                      <div className="slot-name">Helmet</div>
+                      <div className="slot-item">Crown of Wisdom</div>
+                    </div>
+                    <div className="equipment-slot">
+                      <div className="slot-icon">💍</div>
+                      <div className="slot-name">Ring</div>
+                      <div className="slot-item">Ring of Power</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             )}
 
             {/* SCRIPT EDITOR INTÉGRÉ */}
@@ -342,7 +355,31 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ onNavigate })
                   <h3>🧪 Script Editor</h3>
                 </div>
                 <div className="script-editor-container">
-                  <GameScriptTester />
+                  <div className="script-editor-toolbar">
+                    <button className="script-btn">New Script</button>
+                    <button className="script-btn">Load</button>
+                    <button className="script-btn">Save</button>
+                    <button className="script-btn">Run</button>
+                    <button className="script-btn">Debug</button>
+                  </div>
+                  <textarea 
+                    className="script-textarea"
+                    placeholder="Enter your game script here..."
+                    defaultValue={`// Welcome to Heroes of Time Script Editor
+// Create your own scenarios and modifications
+
+function createHero(name, heroClass) {
+  return {
+    name: name,
+    class: heroClass,
+    level: 1,
+    stats: { attack: 5, defense: 5 }
+  };
+}
+
+const myHero = createHero("Lysander", "Knight");
+console.log(myHero);`}
+                  />
                 </div>
               </div>
             )}
@@ -353,11 +390,14 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ onNavigate })
                 <div className="panel-header">
                   <h3>🌟 Epic Content</h3>
                 </div>
-                <div className="epic-content-container">
-                  <EpicContentViewer
-                    isVisible={true}
-                    onClose={() => setActivePanel('scenario')}
-                  />
+                <div className="epic-content-grid">
+                  {mockEpicContent.map((item) => (
+                    <div key={item.id} className="epic-item">
+                      <div className="epic-item-icon">{item.icon}</div>
+                      <div className="epic-item-name">{item.name}</div>
+                      <div className="epic-item-description">{item.description}</div>
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
