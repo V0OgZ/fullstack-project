@@ -1,0 +1,66 @@
+[
+    {
+        "id": "avantworld_blade",
+        "name": "Lame de l'Avant-Monde",
+        "rarity": "Paradoxe",
+        "description": "Permet d'écrire un événement futur incertain. Déclenche une bataille fantôme si un autre joueur entre en conflit temporel avec l'action prévue.",
+        "temporal_formula": "ψ_battle: ⊙(Δt+3 @128,66 ⟶ BATTLE(HERO Arthur, HERO Ragnar))",
+        "trigger": "Π(Ragnar enters zone @128,66 at Δt+3) ⇒ †ψ_battle"
+    },
+    {
+        "id": "reverse_clock",
+        "name": "Horloge du Dernier Instant",
+        "rarity": "Légendaire",
+        "description": "Permet de revenir en arrière de 1 à 3 tours pour un héros ou bâtiment. Crée une zone gélifiée temporaire.",
+        "temporal_formula": "ψ_rewind: ⊙(Δt-2 @127,68 ⟶ ROLLBACK(HERO, Arthur))",
+        "trigger": "†ψ_rewind if ¬⨉"
+    },
+    {
+        "id": "ignorance_beacon",
+        "name": "Balise d'Ignorance Temporelle",
+        "rarity": "Légendaire",
+        "description": "Ignore les héros faibles ou inactifs pour permettre la progression. Crée une micro-anomalie si l'entité redevient active.",
+        "temporal_formula": "ψ_ghost: ⊙(Δt+1 @130,65 ⟶ MOV(HERO, Peon, @132,66)) tagged `silent`",
+        "trigger": "TAG(HERO, Peon, 'silent')"
+    },
+    {
+        "id": "anchor_tower",
+        "name": "Tour de l'Ancrage",
+        "rarity": "Légendaire",
+        "description": "Gèle une zone de 3 tuiles pour la rendre immunisée aux altérations temporelles pendant X tours.",
+        "temporal_formula": "LOCK_ZONE(@128,64, radius=3)\n∀ψ ∈ zone → hold",
+        "trigger": "CREATE(STRUCTURE, AnchorTower, @128,64)"
+    },
+    {
+        "id": "apocalypse_horn",
+        "name": "Trompette de l'Apocalypse",
+        "rarity": "Singularité",
+        "description": "Supprime tous les futurs et passés possibles dans une zone, imposant une seule timeline canonique.",
+        "temporal_formula": "Π(TrumpetBlow @x,y) ⇒ ∀ψ ∈ radius → †ψ (random collapse)",
+        "trigger": "USE(ITEM, ApocalypseHorn, HERO:Arthur)"
+    },
+    {
+        "id": "varnak_grimoire",
+        "name": "Chrono-Grimoire de Varnak",
+        "rarity": "Paradoxe",
+        "description": "Crée une bifurcation temporelle où deux versions d'un héros coexistent durant 3 tours.",
+        "temporal_formula": "ψ_fork: ⊙(Δt+1…3 ⟶ FORK(HERO, Arthur))",
+        "trigger": "PLAYER_CHOICE after Δt+3"
+    },
+    {
+        "id": "inverted_soul",
+        "name": "Fragment d'Âme Inversée",
+        "rarity": "Légendaire",
+        "description": "Permet de rejouer le dernier tour d'un adversaire depuis son point de vue.",
+        "temporal_formula": "ψ_spy: ⊙(Δt-1 HERO Ragnar ⟶ OBSERVE_TURN(HERO:Arthur))",
+        "trigger": "USE(ITEM, InvertedSoul, HERO:Arthur)"
+    },
+    {
+        "id": "eternal_loop",
+        "name": "Noyau de Boucle Éternelle",
+        "rarity": "Singularité",
+        "description": "Fige une zone dans une boucle tant qu'aucune convergence n'est atteinte.",
+        "temporal_formula": "LOOP_ZONE(@x,y, UNTIL_CONVERGENCE)",
+        "trigger": "USE(ITEM, EternalLoopCore, ZONE:@x,y)"
+    }
+]
