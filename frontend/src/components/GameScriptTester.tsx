@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { GameScriptEngine, ScriptActionFactory } from '../services/gameScriptEngine';
+import React, { useState, useEffect, useRef } from 'react';
+import { GameScriptEngine, GameScript, ScriptAction, ExecutionResult } from '../services/gameScriptEngine';
 import { useGameStore } from '../store/useGameStore';
 import './GameScriptTester.css';
 
@@ -327,11 +327,7 @@ LOG "Système opérationnel à 100%"`
   // Initialiser le script engine
   useEffect(() => {
     if (gameStore.currentGame?.id) {
-      const engine = new GameScriptEngine({
-        gameId: gameStore.currentGame.id,
-        playerId: gameStore.currentPlayer?.id || 'player1',
-        currentHero: gameStore.selectedHero?.id || 'hero1'
-      });
+      const engine = new GameScriptEngine();
       setScriptEngine(engine);
     }
   }, [gameStore.currentGame?.id, gameStore.currentPlayer?.id]);
@@ -377,7 +373,7 @@ LOG "Système opérationnel à 100%"`
 
       // Exécuter le script ligne par ligne
       const lines = currentScript.split('\n').filter(line => line.trim() && !line.trim().startsWith('//'));
-      const results = [];
+      const results: ExecutionResult[] = [];
       
       for (const line of lines) {
         const trimmedLine = line.trim();
@@ -393,46 +389,57 @@ LOG "Système opérationnel à 100%"`
           continue;
         }
         
-        // Parser et exécuter l'action (simplifié)
-        try {
-          const words = trimmedLine.split(' ');
-          const command = words[0].toLowerCase();
+        // Créer un script complet
+        const script: GameScript = {
+          name: 'Generated Script',
+          description: 'Script généré automatiquement',
+          actions: []
+        };
+
+        // Traiter chaque ligne
+        lines.forEach((line, index) => {
+          const trimmedLine = line.trim();
+          if (!trimmedLine || trimmedLine.startsWith('//')) return;
+
+          const words = trimmedLine.split(/\s+/);
+          const command = words[0];
           
-          let action = null;
+          let action: ScriptAction | null = null;
+
           if (command === 'move') {
             const heroId = words[1];
             const coordsMatch = trimmedLine.match(/\((\d+),\s*(\d+)\)/);
             const x = coordsMatch ? parseInt(coordsMatch[1], 10) : 0;
             const y = coordsMatch ? parseInt(coordsMatch[2], 10) : 0;
-            action = ScriptActionFactory.move(heroId, x, y);
+            action = { type: 'move', params: { heroId, x, y } };
           } else if (command === 'build') {
             const building = words[1];
             const coordsMatch = trimmedLine.match(/\((\d+),\s*(\d+)\)/);
-            const position = coordsMatch ? { x: parseInt(coordsMatch[1], 10), y: parseInt(coordsMatch[2], 10) } : undefined;
-            action = ScriptActionFactory.build(building, position);
+            const x = coordsMatch ? parseInt(coordsMatch[1], 10) : 0;
+            const y = coordsMatch ? parseInt(coordsMatch[2], 10) : 0;
+            action = { type: 'build', params: { building, position: { x, y } } };
           } else if (command === 'recruit') {
-            const count = parseInt(words[1], 10) || 1;
-            const unitType = words[2];
-            const building = words[4];
-            action = ScriptActionFactory.recruit(unitType, count, building);
+            const unitType = words[1];
+            const count = parseInt(words[2], 10) || 1;
+            const building = words[3];
+            action = { type: 'recruit', params: { unitType, count, building } };
           } else if (command === 'cast') {
             const spell = words[1];
-            const target = words[3];
-            action = ScriptActionFactory.cast(spell, target);
-          } else if (command === 'select_hero') {
+            const target = words[2];
+            action = { type: 'cast_spell', params: { spell, target } };
+          } else if (command === 'hero') {
             const heroId = words[1];
-            action = ScriptActionFactory.selectHero(heroId);
+            action = { type: 'move', params: { heroId } };
           } else if (command === 'end_turn') {
-            action = ScriptActionFactory.endTurn();
+            action = { type: 'end_turn', params: {} };
           }
-          
-          if (action && scriptEngine.executeAction) {
-            const result = await scriptEngine.executeAction(action);
-            results.push(result);
+
+          if (action) {
+            script.actions.push(action);
           }
-        } catch (error) {
-          logs.push(`❌ Erreur: ${error}`);
-        }
+        });
+
+        return script;
       }
       
       // Restaurer console.log

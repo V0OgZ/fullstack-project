@@ -11,7 +11,8 @@ const App: React.FC = () => {
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<EnhancedScenarioSelector />} />
+          <Route path="/" element={<Game />} />
+          <Route path="/scenarios" element={<EnhancedScenarioSelector />} />
           <Route path="/game/:scenarioId" element={<Game />} />
           <Route path="/multiplayer" element={<Game />} />
           <Route path="/demo" element={<Game />} />

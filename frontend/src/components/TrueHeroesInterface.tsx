@@ -7,6 +7,11 @@ import CastleManagementPanel from './CastleManagementPanel';
 import GameScriptTester from './GameScriptTester';
 import EpicContentViewer from './EpicContentViewer';
 import { EnhancedHeroPanel, EnhancedCastlePanel, EnhancedInventoryPanel } from './EnhancedSidebarPanels';
+import TerrainRendererWrapper from './TerrainRendererWrapper';
+import TerrainModeSelector, { TerrainMode } from './TerrainModeSelector';
+import GoldorakEasterEgg from './GoldorakEasterEgg';
+import { gameActionService, quickMove, strategicMove } from '../services/gameActionService';
+import { useRetroKonami } from '../utils/retro-konami';
 import './TrueHeroesInterface.css';
 import './EnhancedSidebarPanels.css';
 
@@ -28,13 +33,20 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ onNavigate })
     error
   } = useGameStore();
   
-  const [rightPanelContent, setRightPanelContent] = useState<'scenario' | 'hero' | 'castle' | 'inventory' | 'script' | 'epic'>('scenario');
-  const [showEpicContent, setShowEpicContent] = useState(false);
-  const [movementMode, setMovementMode] = useState(false);
-  const [gameStarted, setGameStarted] = useState(false);
-  const [selectedScenario, setSelectedScenario] = useState<string | null>(null);
-  const [isFullscreen, setIsFullscreen] = useState(false);
+  // États existants
+  const [showGameScriptTester, setShowGameScriptTester] = useState(false);
+  const [showEpicContentViewer, setShowEpicContentViewer] = useState(false);
+  const [activePanel, setActivePanel] = useState<'scenario' | 'hero' | 'castle' | 'inventory'>('scenario');
   const [testMode, setTestMode] = useState(false);
+  
+  // NOUVEAU: État pour le mode terrain hybride
+  const [terrainMode, setTerrainMode] = useState<TerrainMode>('canvas2d');
+  
+  // NOUVEAU: État pour Goldorak Easter Egg
+  const [showGoldorakEasterEgg, setShowGoldorakEasterEgg] = useState(false);
+  
+  // NOUVEAU: Hook pour les codes konami
+  const { manager } = useRetroKonami();
 
   // Enhanced action handlers
   const handleHeroAction = useCallback((action: string) => {
@@ -42,7 +54,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ onNavigate })
     
     switch (action) {
       case 'move':
-        setMovementMode(true);
+        // setMovementMode(true); // This state is removed, so this line is removed
         console.log('Movement mode activated for:', selectedHero.name);
         break;
       case 'attack':
@@ -95,18 +107,26 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ onNavigate })
   }, [currentGame]);
 
   // Handlers pour les boutons de contrôle
-  const handleHexClick = (x: number, y: number) => {
-    const position = { x, y };
-    console.log('Hex clicked:', position);
-    if (movementMode && selectedHero) {
-      // Try to move hero to the clicked position
-      moveHero(selectedHero.id, position);
-      setMovementMode(false);
-    } else {
-      // Handle tile selection logic here
-      console.log('Tile selected:', position);
+  const handleHexClick = useCallback(async (x: number, y: number) => {
+    if (selectedHero && currentGame) {
+      try {
+        console.log(`🎯 Attempting to move hero ${selectedHero.name} to (${x}, ${y})`);
+        
+        // NOUVEAU: Utilisation de GameActionService
+        if (Math.abs(selectedHero.position.x - x) <= 1 && Math.abs(selectedHero.position.y - y) <= 1) {
+          // Mouvement simple - utilisation de quickMove
+          await quickMove(currentGame.id, selectedHero.id, x, y);
+        } else {
+          // Mouvement complexe - utilisation de strategicMove
+          await strategicMove(currentGame.id, selectedHero.id, x, y);
+        }
+        
+        console.log(`✅ Hero movement successful`);
+      } catch (error) {
+        console.error('❌ Hero movement failed:', error);
+      }
     }
-  };
+  }, [selectedHero, currentGame]);
 
   const handleHeroSelect = (heroId: string) => {
     const hero = currentPlayer?.heroes?.find(h => h.id === heroId);
@@ -155,7 +175,8 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ onNavigate })
         {/* Left side - Game Map */}
         <div className="game-map-container">
           {!testMode ? (
-            <ModernGameRenderer 
+            <TerrainRendererWrapper 
+              mode={terrainMode}
               map={currentGame?.map || []}
               heroes={currentPlayer?.heroes || []}
               creatures={[]}
@@ -174,23 +195,10 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ onNavigate })
             />
           ) : (
             <div className="test-mode-placeholder">
-              <div>🗺️ MAP DISABLED FOR TESTING</div>
-              <div>🎮 Testing Enhanced Sidebar</div>
-              <button 
-                className="btn"
-                onClick={() => setTestMode(false)}
-                style={{
-                  marginTop: '20px',
-                  padding: '10px 20px',
-                  background: 'linear-gradient(45deg, #d4af37, #ffd700)',
-                  color: '#2a1810',
-                  border: 'none',
-                  borderRadius: '6px',
-                  cursor: 'pointer',
-                  fontWeight: 'bold'
-                }}
-              >
-                🗺️ Enable Map
+              <h3>🧪 Test Mode</h3>
+              <p>Map désactivée pour tester la sidebar</p>
+              <button onClick={() => setTestMode(false)}>
+                Réactiver la map
               </button>
             </div>
           )}
@@ -200,146 +208,173 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ onNavigate })
         <div className="right-sidebar">
           <div className="sidebar-header">
             <div className="game-info">
-              <div className="turn-info">
-                🎯 Turn: {currentGame?.turn || 1}/{currentGame?.maxTurns || 200}
-              </div>
-              <div className="player-resources">
-                <span className="resource">💰 {currentPlayer?.resources?.gold || 10000}</span>
-                <span className="resource">🪵 {currentPlayer?.resources?.wood || 500}</span>
-                <span className="resource">🪨 {currentPlayer?.resources?.stone || 300}</span>
-              </div>
+              <span className="turn-counter">Turn {currentGame?.turn || 1}</span>
+              <span className="resources">💰 {currentPlayer?.resources?.gold || 0}</span>
+            </div>
+            <div className="sidebar-controls">
+              <button 
+                className={`sidebar-tab ${activePanel === 'scenario' ? 'active' : ''}`}
+                onClick={() => setActivePanel('scenario')}
+                title="Scenario"
+          >
+            🏔️
+          </button>
+          <button 
+            className={`sidebar-tab ${activePanel === 'hero' ? 'active' : ''}`}
+            onClick={() => setActivePanel('hero')}
+            title="Hero"
+          >
+            ⚔️
+          </button>
+          <button 
+            className={`sidebar-tab ${activePanel === 'castle' ? 'active' : ''}`}
+            onClick={() => setActivePanel('castle')}
+            title="Castle"
+          >
+            🏰
+          </button>
+          <button 
+            className={`sidebar-tab ${activePanel === 'inventory' ? 'active' : ''}`}
+            onClick={() => setActivePanel('inventory')}
+            title="Inventory"
+          >
+            🎒
+          </button>
+        </div>
+      </div>
+
+      <div className="sidebar-content">
+        {activePanel === 'scenario' && (
+          <div className="panel-content">
+            <h2>🏔️ Scenario</h2>
+            <div className="scenario-info">
+              <h3>{currentGame?.scenario || 'Conquest Classic'}</h3>
+              <p>Welcome to Heroes of Time!</p>
+            </div>
+            
+            {/* NOUVEAU: Sélecteur de mode terrain */}
+            <TerrainModeSelector 
+              currentMode={terrainMode}
+              onModeChange={setTerrainMode}
+              disabled={isLoading}
+            />
+            
+            <div className="scenario-stats">
+              <div>Turn: {currentGame?.turn || 1}</div>
+              <div>Player: {currentPlayer?.name || 'Player 1'}</div>
+              <div>Heroes: {currentPlayer?.heroes?.length || 0}</div>
+              <div>Gold: {currentPlayer?.resources?.gold || 0}</div>
+            </div>
+            
+            {/* NOUVEAU: Bouton Goldorak Easter Egg */}
+            <div className="easter-egg-section">
+              <button
+                className="goldorak-btn"
+                onClick={() => setShowGoldorakEasterEgg(true)}
+                style={{
+                  background: 'linear-gradient(45deg, #ff6b6b, #ff4757)',
+                  color: 'white',
+                  border: 'none',
+                  padding: '8px 16px',
+                  borderRadius: '6px',
+                  cursor: 'pointer',
+                  fontSize: '12px',
+                  marginTop: '10px'
+                }}
+              >
+                🚀 Goldorak Easter Egg
+              </button>
             </div>
           </div>
-
-          <div className="sidebar-controls">
-            <button 
-              className={`control-btn ${rightPanelContent === 'hero' ? 'active' : ''}`}
-              onClick={() => setRightPanelContent('hero')}
-              title={t('tooltip.heroes')}
-            >
-              <span className="btn-icon">⚔️</span>
-            </button>
-
-            <button 
-              className={`control-btn ${rightPanelContent === 'castle' ? 'active' : ''}`}
-              onClick={() => setRightPanelContent('castle')}
-              title={t('tooltip.castle')}
-            >
-              <span className="btn-icon">🏰</span>
-            </button>
-
-            <button 
-              className={`control-btn ${rightPanelContent === 'inventory' ? 'active' : ''}`}
-              onClick={() => setRightPanelContent('inventory')}
-              title="Inventory"
-            >
-              <span className="btn-icon">🎒</span>
-            </button>
-
-            <button 
-              className={`control-btn ${rightPanelContent === 'script' ? 'active' : ''}`}
-              onClick={() => setRightPanelContent('script')}
-              title={t('tooltip.scriptTester')}
-            >
-              <span className="btn-icon">🧪</span>
-            </button>
-
-            <button 
-              className={`control-btn ${showEpicContent ? 'active' : ''}`}
-              onClick={() => setShowEpicContent(true)}
-              title="🎮 Contenu Épique - Créatures, Héros et Bâtiments"
-            >
-              <span className="btn-icon">🐉</span>
-            </button>
-
-            {!testMode && (
-              <button 
-                className="control-btn"
-                onClick={() => setTestMode(true)}
-                title="Test Mode - Disable Map"
-                style={{ background: 'linear-gradient(45deg, #FFA500, #FF8C00)' }}
-              >
-                <span className="btn-icon">🧪</span>
-              </button>
-            )}
-
-            <button 
-              className="end-turn-btn"
-              onClick={handleEndTurn}
-              title="End Turn"
-            >
-              <span className="btn-icon">⭐</span>
-            </button>
-          </div>
-
-          <div className="sidebar-content">
-            {/* Hero Panel */}
-            {rightPanelContent === 'hero' && (
-              <EnhancedHeroPanel
-                selectedHero={selectedHero}
+        )}
+            
+            {activePanel === 'hero' && (
+              <EnhancedHeroPanel 
                 heroes={currentPlayer?.heroes || []}
+                selectedHero={selectedHero}
                 onHeroSelect={selectHero}
                 onHeroAction={handleHeroAction}
               />
             )}
-
-            {/* Castle Panel */}
-            {rightPanelContent === 'castle' && currentGame && currentPlayer && (
-              <EnhancedCastlePanel
-                gameId={currentGame.id}
-                playerId={currentPlayer.id}
+            
+            {activePanel === 'castle' && (
+              <EnhancedCastlePanel 
+                gameId={currentGame?.id || ''}
+                playerId={currentPlayer?.id || ''}
                 onAction={handleCastleAction}
               />
             )}
-
-            {/* Inventory Panel */}
-            {rightPanelContent === 'inventory' && (
-              <EnhancedInventoryPanel
+            
+            {activePanel === 'inventory' && (
+              <EnhancedInventoryPanel 
                 selectedHero={selectedHero}
                 onItemUse={handleInventoryAction}
               />
             )}
-
-            {/* Script Panel */}
-            {rightPanelContent === 'script' && (
-              <div className="panel-content script-panel">
-                <div className="panel-header">
-                  <h3>🧪 {t('tooltip.scriptTester')}</h3>
-                  <button 
-                    className="close-panel-btn"
-                    onClick={() => setRightPanelContent('hero')}
-                  >
-                    ×
-                  </button>
-                </div>
-                
-                <div className="script-tester-container">
-                  <GameScriptTester />
-                </div>
-              </div>
-            )}
-
-            {/* Scenario Panel (fallback) */}
-            {rightPanelContent === 'scenario' && (
-              <div className="panel-content scenario-panel">
-                <div className="panel-header">
-                  <h3>🎮 Game Scenario</h3>
-                </div>
-                <div className="scenario-content">
-                  <p>Game scenario information will be displayed here.</p>
-                </div>
-              </div>
-            )}
           </div>
+
+          {/* Script Panel */}
+          {showGameScriptTester && (
+            <div className="panel-content script-panel">
+              <div className="panel-header">
+                <h3>🧪 {t('tooltip.scriptTester')}</h3>
+                <button 
+                  className="close-panel-btn"
+                  onClick={() => setShowGameScriptTester(false)}
+                >
+                  ×
+                </button>
+              </div>
+              
+              <div className="script-tester-container">
+                <GameScriptTester />
+              </div>
+            </div>
+          )}
+
+          {/* Scenario Panel (fallback) */}
+          {activePanel === 'scenario' && (
+            <div className="panel-content scenario-panel">
+              <div className="panel-header">
+                <h3>🎮 Game Scenario</h3>
+              </div>
+              <div className="scenario-content">
+                <p>Game scenario information will be displayed here.</p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Epic Content Viewer Modal */}
-      {showEpicContent && (
-        <EpicContentViewer 
-          isVisible={showEpicContent}
-          onClose={() => setShowEpicContent(false)}
+      {/* Goldorak Easter Egg */}
+      {showGoldorakEasterEgg && (
+        <div className="goldorak-overlay">
+          <div className="goldorak-content">
+            <h2>🚀 GOLDORAK EASTER EGG ACTIVATED!</h2>
+            <p>Fulgorocursor mode enabled!</p>
+            <button onClick={() => setShowGoldorakEasterEgg(false)}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+      
+      {/* Epic Content Viewer */}
+      {showEpicContentViewer && (
+        <EpicContentViewer
+          isVisible={showEpicContentViewer}
+          onClose={() => setShowEpicContentViewer(false)}
         />
+      )}
+      
+      {/* Game Script Tester */}
+      {showGameScriptTester && (
+        <div className="game-script-overlay">
+          <GameScriptTester />
+          <button onClick={() => setShowGameScriptTester(false)}>
+            Close
+          </button>
+        </div>
       )}
     </div>
   );
