@@ -31,9 +31,91 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ onNavigate })
   // NOUVEAU: État pour Goldorak Easter Egg
   const [showGoldorakEasterEgg, setShowGoldorakEasterEgg] = useState(false);
 
+  // NOUVEAU: États pour le script editor
+  const [scriptContent, setScriptContent] = useState<string>('');
+  const [scriptResults, setScriptResults] = useState<string>('');
+
+  // Templates de script
+  const SCRIPT_TEMPLATES = {
+    hero: `// 🧙 Create and manage heroes
+const newHero = createHero("Lysander", "Knight", 5);
+console.log("Created hero:", newHero);
+
+// Move hero to position
+moveHero(newHero.id, 10, 15);
+console.log("Hero moved to (10, 15)");`,
+    
+    castle: `// 🏰 Castle management
+buildCastle(5, 5, "human");
+console.log("Castle built at (5, 5)");
+
+// Recruit units
+recruitUnit("castle1", "peasant", 50);
+recruitUnit("castle1", "archer", 25);
+console.log("Units recruited");`,
+    
+    combat: `// ⚔️ Combat simulation
+const hero1 = createHero("Arthur", "Knight", 10);
+const hero2 = createHero("Morgana", "Sorceress", 8);
+
+console.log("Combat between:", hero1.name, "vs", hero2.name);
+console.log("Winner: TBD");`
+  };
+
+  // Fonction d'exécution de script
+  const executeScript = useCallback(() => {
+    try {
+      setScriptResults('🔄 Executing script...\n');
+      
+      // Mock execution context
+      const scriptContext = {
+        createHero: (name: string, heroClass: string, level: number) => ({
+          id: `hero_${Date.now()}`,
+          name,
+          class: heroClass,
+          level,
+          stats: { attack: level * 2, defense: level * 2 }
+        }),
+        moveHero: (heroId: string, x: number, y: number) => {
+          return `Hero ${heroId} moved to (${x}, ${y})`;
+        },
+        buildCastle: (x: number, y: number, type: string) => {
+          return `${type} castle built at (${x}, ${y})`;
+        },
+        recruitUnit: (castleId: string, unitType: string, count: number) => {
+          return `Recruited ${count} ${unitType}s at ${castleId}`;
+        },
+        endTurn: () => {
+          if (currentGame?.id) {
+            endTurn();
+          }
+          return 'Turn ended';
+        },
+        getGameState: () => ({
+          turn: currentGame?.turn || 1,
+          player: currentPlayer?.name || 'Player 1',
+          heroes: mockHeroes.length
+        })
+      };
+
+      // Execute script in context
+      const func = new Function(...Object.keys(scriptContext), `
+        ${scriptContent}
+        return "✅ Script executed successfully";
+      `);
+      
+      const result = func(...Object.values(scriptContext));
+      setScriptResults(prev => prev + result + '\n');
+      
+    } catch (error) {
+      setScriptResults(prev => prev + `❌ Error: ${error}\n`);
+    }
+  }, [scriptContent, currentGame?.id, currentPlayer?.name, endTurn, mockHeroes.length]);
+
   // Load default game on component mount
   useEffect(() => {
     // Initialization logic here
+    setScriptContent(SCRIPT_TEMPLATES.hero);
   }, []);
 
   const handleEndTurn = useCallback(() => {
@@ -356,30 +438,47 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ onNavigate })
                 </div>
                 <div className="script-editor-container">
                   <div className="script-editor-toolbar">
-                    <button className="script-btn">New Script</button>
-                    <button className="script-btn">Load</button>
-                    <button className="script-btn">Save</button>
-                    <button className="script-btn">Run</button>
-                    <button className="script-btn">Debug</button>
+                    <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.hero)}>New Hero</button>
+                    <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.castle)}>New Castle</button>
+                    <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.combat)}>Combat</button>
+                    <button className="script-btn" onClick={() => executeScript()}>▶️ Run</button>
+                    <button className="script-btn" onClick={() => setScriptResults('')}>🗑️ Clear</button>
                   </div>
                   <textarea 
                     className="script-textarea"
-                    placeholder="Enter your game script here..."
-                    defaultValue={`// Welcome to Heroes of Time Script Editor
-// Create your own scenarios and modifications
-
-function createHero(name, heroClass) {
-  return {
-    name: name,
-    class: heroClass,
-    level: 1,
-    stats: { attack: 5, defense: 5 }
-  };
-}
-
-const myHero = createHero("Lysander", "Knight");
-console.log(myHero);`}
+                    placeholder="Enter your Heroes of Time script here..."
+                    value={scriptContent}
+                    onChange={(e) => setScriptContent(e.target.value)}
                   />
+                  {scriptResults && (
+                    <div className="script-results">
+                      <h4>📋 Results:</h4>
+                      <pre>{scriptResults}</pre>
+                    </div>
+                  )}
+                  <div className="script-help">
+                    <h4>⚡ Available Commands:</h4>
+                    <div className="command-list">
+                      <div className="command-item">
+                        <strong>createHero(name, class, level)</strong> - Create a new hero
+                      </div>
+                      <div className="command-item">
+                        <strong>moveHero(heroId, x, y)</strong> - Move hero to position
+                      </div>
+                      <div className="command-item">
+                        <strong>buildCastle(x, y, type)</strong> - Build castle at position
+                      </div>
+                      <div className="command-item">
+                        <strong>recruitUnit(castleId, unitType, count)</strong> - Recruit units
+                      </div>
+                      <div className="command-item">
+                        <strong>endTurn()</strong> - End current player turn
+                      </div>
+                      <div className="command-item">
+                        <strong>getGameState()</strong> - Get current game state
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
