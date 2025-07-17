@@ -9,6 +9,8 @@ package com.heroesoftimepoc.temporalengine.controller;
 import com.heroesoftimepoc.temporalengine.model.Game;
 import com.heroesoftimepoc.temporalengine.repository.GameRepository;
 import com.heroesoftimepoc.temporalengine.service.TemporalEngineService;
+import com.heroesoftimepoc.temporalengine.service.TemporalCacheService;
+import com.heroesoftimepoc.temporalengine.service.ObservationTriggerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/temporal")
@@ -27,6 +30,12 @@ public class TemporalEngineController {
     
     @Autowired
     private GameRepository gameRepository;
+    
+    @Autowired
+    private TemporalCacheService cacheService;
+    
+    @Autowired
+    private ObservationTriggerService observationTriggerService;
     
     /**
      * Create a new game
@@ -337,5 +346,226 @@ public class TemporalEngineController {
         response.put("timestamp", System.currentTimeMillis());
         
         return ResponseEntity.ok(response);
+    }
+    
+    // ========================================================================
+    // 🚀 ENHANCED TEMPORAL ENGINE ENDPOINTS
+    // ========================================================================
+    
+    /**
+     * Cache management and statistics
+     */
+    @GetMapping("/cache/stats")
+    public ResponseEntity<Map<String, Object>> getCacheStatistics() {
+        try {
+            Map<String, Object> stats = cacheService.getCacheStatistics();
+            return ResponseEntity.ok(stats);
+            
+        } catch (Exception e) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", false);
+            response.put("error", e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+    
+    /**
+     * Clear cache for a specific game
+     */
+    @DeleteMapping("/cache/games/{gameId}")
+    public ResponseEntity<Map<String, Object>> clearGameCache(@PathVariable Long gameId) {
+        Map<String, Object> response = new HashMap<>();
+        
+        try {
+            cacheService.invalidateGameCache(gameId);
+            
+            response.put("success", true);
+            response.put("message", "Cache cleared for game " + gameId);
+            
+            return ResponseEntity.ok(response);
+            
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("error", e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+    
+    /**
+     * Preload cache for a game
+     */
+    @PostMapping("/cache/games/{gameId}/preload")
+    public ResponseEntity<Map<String, Object>> preloadGameCache(@PathVariable Long gameId) {
+        Map<String, Object> response = new HashMap<>();
+        
+        try {
+            Game game = gameRepository.findById(gameId).orElseThrow();
+            cacheService.preloadGameCache(game);
+            
+            response.put("success", true);
+            response.put("message", "Cache preloaded for game " + gameId);
+            
+            return ResponseEntity.ok(response);
+            
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("error", e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+    
+    /**
+     * Register observation trigger Π(condition) ⇒ †ψ001
+     */
+    @PostMapping("/games/{gameId}/observation-trigger")
+    public ResponseEntity<Map<String, Object>> registerObservationTrigger(
+            @PathVariable Long gameId, 
+            @RequestBody Map<String, String> request) {
+        
+        Map<String, Object> response = new HashMap<>();
+        
+        try {
+            String observationScript = request.get("trigger");
+            
+            observationTriggerService.registerObservationTrigger(gameId, observationScript);
+            
+            response.put("success", true);
+            response.put("message", "Observation trigger registered");
+            response.put("trigger", observationScript);
+            
+            return ResponseEntity.ok(response);
+            
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("error", e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+    
+    /**
+     * Get observation trigger statistics
+     */
+    @GetMapping("/games/{gameId}/observation-triggers")
+    public ResponseEntity<Map<String, Object>> getObservationTriggers(@PathVariable Long gameId) {
+        try {
+            Map<String, Object> stats = observationTriggerService.getObservationStatistics(gameId);
+            List<ObservationTriggerService.ObservationTrigger> triggers = 
+                observationTriggerService.getActiveTriggers(gameId);
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", true);
+            response.put("statistics", stats);
+            response.put("activeTriggers", triggers);
+            
+            return ResponseEntity.ok(response);
+            
+        } catch (Exception e) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", false);
+            response.put("error", e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+    
+    /**
+     * Force check observation triggers
+     */
+    @PostMapping("/games/{gameId}/check-triggers")
+    public ResponseEntity<Map<String, Object>> checkObservationTriggers(@PathVariable Long gameId) {
+        Map<String, Object> response = new HashMap<>();
+        
+        try {
+            Game game = gameRepository.findById(gameId).orElseThrow();
+            List<String> collapsesToTrigger = observationTriggerService.checkTriggersAndGetCollapses(game);
+            
+            // Execute collapses
+            List<Map<String, Object>> collapseResults = new ArrayList<>();
+            for (String psiId : collapsesToTrigger) {
+                Map<String, Object> collapseResult = temporalEngineService.executeScript(gameId, "†" + psiId);
+                collapseResults.add(collapseResult);
+            }
+            
+            response.put("success", true);
+            response.put("triggeredCollapses", collapsesToTrigger.size());
+            response.put("collapseResults", collapseResults);
+            
+            return ResponseEntity.ok(response);
+            
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("error", e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+    
+    /**
+     * Advanced game state with performance metrics
+     */
+    @GetMapping("/games/{gameId}/enhanced-state")
+    public ResponseEntity<Map<String, Object>> getEnhancedGameState(@PathVariable Long gameId) {
+        try {
+            long startTime = System.currentTimeMillis();
+            
+            // Get game state (potentially from cache)
+            Object cachedGame = cacheService.getCachedGameState(gameId);
+            Game game = cachedGame instanceof Game ? (Game) cachedGame : gameRepository.findById(gameId).orElseThrow();
+            
+            Map<String, Object> gameState = temporalEngineService.getGameState(gameId);
+            
+            // Add cache statistics
+            Map<String, Object> cacheStats = cacheService.getCacheStatistics();
+            
+            // Add observation trigger statistics
+            Map<String, Object> observationStats = observationTriggerService.getObservationStatistics(gameId);
+            
+            // Performance metrics
+            long executionTime = System.currentTimeMillis() - startTime;
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", true);
+            response.put("gameState", gameState);
+            response.put("cacheStatistics", cacheStats);
+            response.put("observationStatistics", observationStats);
+            response.put("performanceMetrics", Map.of(
+                "executionTimeMs", executionTime,
+                "cacheUsed", cacheService.getCachedGameState(gameId) != null
+            ));
+            
+            return ResponseEntity.ok(response);
+            
+        } catch (Exception e) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", false);
+            response.put("error", e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+    
+    /**
+     * Temporal engine performance optimization
+     */
+    @PostMapping("/optimize")
+    public ResponseEntity<Map<String, Object>> optimizeEngine() {
+        Map<String, Object> response = new HashMap<>();
+        
+        try {
+            // Clean expired cache entries
+            cacheService.cleanExpiredEntries();
+            
+            // Get performance metrics
+            Map<String, Object> cacheStats = cacheService.getCacheStatistics();
+            
+            response.put("success", true);
+            response.put("message", "Temporal engine optimized");
+            response.put("cacheStatistics", cacheStats);
+            response.put("timestamp", System.currentTimeMillis());
+            
+            return ResponseEntity.ok(response);
+            
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("error", e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
     }
 }
