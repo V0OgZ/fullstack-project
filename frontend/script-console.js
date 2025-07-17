@@ -80,8 +80,13 @@ class ScriptConsole {
         this.historyIndex = this.history.length;
         
         try {
-            const result = await window.gameAPI.executeScript(script);
-            this.addToOutput(`✅ Script executed successfully`, 'success');
+            // Use UI enhancements controller if available
+            if (window.uiEnhancements && window.uiEnhancements.executeScript) {
+                await window.uiEnhancements.executeScript(script);
+            } else {
+                const result = await window.gameAPI.executeScript(script);
+                this.addToOutput(`✅ Script executed successfully`, 'success');
+            }
             
             // Refresh the game state
             if (window.gameRenderer) {
