@@ -427,7 +427,7 @@ public class Game {
     private void processePsiStateCollapse(PsiState psiState) {
         // Implementation for ψ-state collapse logic
         TemporalEvent event = new TemporalEvent(
-            TemporalEvent.EventType.TIMELINE_FORK,
+            TemporalEvent.EventType.TIMELINE_FORKED,
             "ψ-state " + psiState.getId() + " collapsed",
             psiState.getTargetX(),
             psiState.getTargetY()
