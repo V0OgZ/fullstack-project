@@ -8,7 +8,7 @@
 
 **Heroes of Time** combines Heroes of Might & Magic 3 gameplay with quantum temporal mechanics. Players can create quantum superpositions (ψ-states), manage multiple timelines, and trigger causal collapses through temporal artifacts.
 
-### �� **Core Features**
+### 🏆 **Core Features**
 
 **🏰 Heroes of Might & Magic 3 Base System:**
 - **Turn-based Combat**: Classic H3 battle system with heroes, armies, and spells
@@ -33,46 +33,21 @@
 - **5D Coordinates**: Navigate space (x,y,z) and time (timeline, temporal layer)
 - **Probability System**: Actions have success chances affected by artifacts and positioning
 
-### 🎯 **Gameplay Example: Temporal Warfare**
+### 🎯 **Gameplay Example**
 
-<img width="800" height="600" alt="Temporal Battle Scene" src="https://github.com/user-attachments/assets/temporal-battle-quantum-mechanics.png" />
-
-**Turn 1: Setup with Legendary Artifact**
 ```javascript
-// Player 1 uses Horloge du Dernier Instant (Legendary)
-USE(ITEM, ReverseClock, HERO:Arthur)
-// Arthur can now rollback 1-3 turns if needed
-```
+// Create a hero and position him
+HERO(Arthur)
+MOV(Arthur, @10,10)
 
-**Turn 2: Create Quantum Dragon**
-```javascript
-// Player 1 creates a ψ-state: dragon will appear in 2 turns
+// Create quantum superposition - dragon will appear in 2 turns
 ψ001: ⊙(Δt+2 @126,65 ⟶ CREATE(CREATURE, Dragon))
-// Probability: 0.6 (60% chance dragon appears)
-```
 
-**Turn 3: Paradox Artifact Activation**
-```javascript
-// Player 1 uses Lame d'Avant-Monde (Paradox tier)
+// Use temporal artifact to boost probability
 USE(ITEM, AvantWorldBlade, HERO:Arthur)
-// Dragon probability boosted: 0.6 + 0.5 = 1.0 (100% guaranteed!)
-// Battle score bonus: +0.5 for phantom battles
-```
 
-**Turn 4: Enemy Counter-Strategy**
-```javascript
-// Player 2 moves hero toward dragon location
-MOV(Ragnar, @126,65)
-// Triggers observation: Π(Ragnar enters @126,65) ⇒ †ψ001
-// Dragon collapses into reality!
-```
-
-**Turn 5: Time Reversal Escape**
-```javascript
-// Player 2 realizes mistake - dragon is too strong
-USE(ITEM, ReverseClock, HERO:Ragnar)
-// Ragnar returns to position from Turn 3
-// Creates temporal gel zone for 1 turn
+// Collapse the ψ-state to make it real
+†ψ001
 ```
 
 ### 💫 **Technical Implementation**
