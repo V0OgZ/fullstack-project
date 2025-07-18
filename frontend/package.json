@@ -1,0 +1,15 @@
+{
+  "name": "heroes-of-time-frontend-classic",
+  "version": "1.0.0",
+  "description": "Frontend Classic HTML5/CSS3/JS - Heroes of Time",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "author": "Heroes of Time Team",
+  "license": "MIT"
+} 

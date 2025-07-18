@@ -21,13 +21,15 @@ sleep 10
 
 # Start frontend classic
 echo "Starting frontend classic (port 8000)..."
-cd frontend && python3 -m http.server 8000 > ../frontend-classic.log 2>&1 &
+cd frontend
+npm start > ../frontend-classic.log 2>&1 &
 FRONTEND_PID=$!
 cd ..
 
 # Start frontend temporal
 echo "Starting frontend temporal (port 5173)..."
-cd frontend-temporal && python3 -m http.server 5173 > ../frontend-temporal.log 2>&1 &
+cd frontend-temporal
+npm run dev > ../frontend-temporal.log 2>&1 &
 TEMPORAL_PID=$!
 cd ..
 
