@@ -1,375 +1,696 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌀 Heroes of Time - Console Temporelle</title>
-    <link rel="stylesheet" href="css/temporal-console.css">
+    <title>🕰️ Heroes of Time - Temporal Engine Interface</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: #e94560;
             min-height: 100vh;
+            overflow-x: hidden;
         }
-        
-        .header {
-            background: linear-gradient(90deg, #4a6cf7 0%, #667eea 100%);
-            color: white;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(74, 108, 247, 0.3);
-        }
-        
-        .header h1 {
-            margin: 0;
-            font-size: 2.5em;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-        
-        .header p {
-            margin: 10px 0 0 0;
-            font-size: 1.2em;
-            opacity: 0.9;
-        }
-        
-        .main-content {
+
+        /* ============================================
+           LOADING SCREEN STYLES
+           ============================================ */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e);
             display: flex;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-            gap: 20px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 1s ease-out, transform 1s ease-out;
         }
-        
-        .console-container {
-            flex: 2;
+
+        .loading-screen.hidden {
+            opacity: 0;
+            transform: scale(1.1);
+            pointer-events: none;
         }
-        
-        .sidebar {
-            flex: 1;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            padding: 20px;
-            color: white;
+
+        .temporal-sword {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDMwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImJsYWRlIiB4MT0iMTUwIiB5MT0iNTAiIHgyPSIxNTAiIHkyPSIzNTAiPgo8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMDBiY2Q0O3N0b3Atb3BhY2l0eToxIiAvPgo8c3RvcCBvZmZzZXQ9IjMwJSIgc3R5bGU9InN0b3AtY29sb3I6IzAwN2ZmZjtzdG9wLW9wYWNpdHk6MSIgLz4KPHN0b3Agb2Zmc2V0PSI3MCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNmZjgwNDA7c3RvcC1vcGFjaXR5OjEiIC8+CjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6I2U5NDU2MDtzdG9wLW9wYWNpdHk6MSIgLz4KPC9saW5lYXJHcmFkaWVudD4KPGxpbmVhckdyYWRpZW50IGlkPSJoaWx0IiB4MT0iMTMwIiB5MT0iMzUwIiB4Mj0iMTcwIiB5Mj0iMzUwIj4KPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzMzMzMzMztzdG9wLW9wYWNpdHk6MSIgLz4KPHN0b3Agb2Zmc2V0PSI1MCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM2NjY2NjY7c3RvcC1vcGFjaXR5OjEiIC8+CjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzMzMzMzMztzdG9wLW9wYWNpdHk6MSIgLz4KPC9saW5lYXJHcmFkaWVudD4KPGZpbHRlciBpZD0iZ2xvdyI+CjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjMiIHJlc3VsdD0iY29sb3JlZGJsdXIiLz4KPGZlTWVyZ2U+CjxmZU1lcmdlTm9kZSBpbj0iY29sb3JlZGJsdXIiLz4KPGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+CjwvZmVNZXJnZT4KPC9maWx0ZXI+CjwvZGVmcz4KPCEtLSBCbGFkZSAtLT4KPHBhdGggZD0iTTE1MCA0MEwxMjAgMTAwTDE0NSAxMDBMMTUwIDM1MEwxNTUgMTAwTDE4MCA1MFoiIGZpbGw9InVybCgjYmxhZGUpIiBmaWx0ZXI9InVybCgjZ2xvdykiLz4KPCEtLSBDcm9zc2d1YXJkIC0tPgo8cGF0aCBkPSJNMTEwIDEwMEwxOTAgMTAwTDE4NSAxMTBMMTE1IDExMFoiIGZpbGw9InVybCgjaGlsdCkiLz4KPCEtLSBIaWx0IC0tPgo8cGF0aCBkPSJNMTMwIDM1MEwxNzAgMzUwTDE3MCAzODBMMTMwIDM4MFoiIGZpbGw9InVybCgjaGlsdCkiLz4KPCEtLSBQb21tZWwgLS0+CjxjaXJjbGUgY3g9IjE1MCIgY3k9IjM5MCIgcj0iMTAiIGZpbGw9IiNlOTQ1NjAiIGZpbHRlcj0idXJsKCNnbG93KSIvPgo8IS0tIEdlbSBpbiBndWFyZCAtLT4KPGNpcmNsZSBjeD0iMTUwIiBjeT0iMTA1IiByPSI0IiBmaWxsPSIjZjM5YzEyIiBmaWx0ZXI9InVybCgjZ2xvdykiLz4KPCEtLSBSdW5lcyBvbiBibGFkZSAtLT4KPHRleHQgeD0iMTU1IiB5PSIyMDAiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTAiIGZpbGw9IiMwMGJjZDQiIG9wYWNpdHk9IjAuNyI+ψ</dGV4dD4KPHRleHQgeD0iMTU1IiB5PSIyNTAiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTAiIGZpbGw9IiNmMzljMTIiIG9wYWNpdHk9IjAuNyI+Δt</dGV4dD4KPHRleHQgeD0iMTU1IiB5PSIzMDAiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTAiIGZpbGw9IiNlOTQ1NjAiIG9wYWNpdHk9IjAuNyI+†</dGV4dD4KPC9zdmc+') center/contain no-repeat;
+            animation: temporalPulse 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 30px rgba(233, 69, 96, 0.3));
+        }
+
+        .temporal-sword::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 188, 212, 0.2) 0%, transparent 70%);
+            animation: energyField 2s ease-in-out infinite alternate;
+        }
+
+        .temporal-sword::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150%;
+            height: 150%;
+            transform: translate(-50%, -50%);
+            background: conic-gradient(from 0deg, rgba(233, 69, 96, 0.1), rgba(0, 188, 212, 0.1), rgba(243, 156, 18, 0.1), rgba(233, 69, 96, 0.1));
+            border-radius: 50%;
+            animation: temporalAura 8s linear infinite;
+        }
+
+        @keyframes energyField {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
+        }
+
+        @keyframes temporalAura {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @keyframes temporalPulse {
+            0% { 
+                filter: drop-shadow(0 0 20px rgba(0, 188, 212, 0.5));
+                transform: scale(1);
+            }
+            50% { 
+                filter: drop-shadow(0 0 40px rgba(233, 69, 96, 0.8));
+                transform: scale(1.05);
+            }
+            100% { 
+                filter: drop-shadow(0 0 20px rgba(0, 188, 212, 0.5));
+                transform: scale(1);
+            }
+        }
+
+        .temporal-energy {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 400px;
+            height: 400px;
+            transform: translate(-50%, -50%);
+            border: 2px solid rgba(233, 69, 96, 0.3);
+            border-radius: 50%;
+            animation: energyRing 4s linear infinite;
+        }
+
+        .temporal-energy::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            transform: translate(-50%, -50%);
+            border: 1px solid rgba(0, 188, 212, 0.3);
+            border-radius: 50%;
+            animation: energyRing 3s linear infinite reverse;
+        }
+
+        @keyframes energyRing {
+            0% { 
+                transform: translate(-50%, -50%) rotate(0deg);
+                opacity: 1;
+            }
+            100% { 
+                transform: translate(-50%, -50%) rotate(360deg);
+                opacity: 0.3;
+            }
+        }
+
+        .loading-title {
+            margin-top: 60px;
+            font-size: 2.5em;
+            font-weight: bold;
+            background: linear-gradient(45deg, #e94560, #f39c12, #00bcd4);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            animation: titleGlow 2s ease-in-out infinite, gradientShift 3s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { 
+                text-shadow: 0 0 20px rgba(233, 69, 96, 0.5);
+            }
+            50% { 
+                text-shadow: 0 0 30px rgba(233, 69, 96, 0.8);
+            }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .loading-subtitle {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            animation: subtitlePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes subtitlePulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .loading-progress {
+            margin-top: 40px;
+            width: 300px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 10px rgba(233, 69, 96, 0.3);
+        }
+
+        .loading-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #e94560, #f39c12, #00bcd4);
+            background-size: 200% 100%;
+            border-radius: 2px;
+            animation: progressFill 3s ease-out, progressGlow 1.5s ease-in-out infinite;
+            position: relative;
+        }
+
+        .loading-progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: progressShine 1.5s ease-in-out infinite;
+        }
+
+        @keyframes progressFill {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes progressGlow {
+            0% { 
+                background-position: 0% 50%;
+                box-shadow: 0 0 5px rgba(233, 69, 96, 0.5);
+            }
+            50% { 
+                background-position: 100% 50%;
+                box-shadow: 0 0 15px rgba(0, 188, 212, 0.8);
+            }
+            100% { 
+                background-position: 0% 50%;
+                box-shadow: 0 0 5px rgba(233, 69, 96, 0.5);
+            }
+        }
+
+        @keyframes progressShine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .loading-status {
+            margin-top: 20px;
+            font-size: 1em;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            min-height: 20px;
+            animation: statusFade 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes statusFade {
+            0% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+
+        .runes {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 3em;
+            opacity: 0.3;
+            animation: runesFloat 6s ease-in-out infinite;
+        }
+
+        .runes::before {
+            content: 'ψ';
+            position: absolute;
+            top: 100px;
+            left: 50px;
+            font-size: 0.8em;
+            animation: runesFloat 4s ease-in-out infinite reverse;
+        }
+
+        .runes::after {
+            content: 'Δt';
+            position: absolute;
+            top: 200px;
+            left: -20px;
+            font-size: 0.6em;
+            animation: runesFloat 5s ease-in-out infinite;
+        }
+
+        @keyframes runesFloat {
+            0%, 100% { 
+                transform: translateY(0px);
+                opacity: 0.3;
+            }
+            50% { 
+                transform: translateY(-20px);
+                opacity: 0.6;
+            }
+        }
+
+        /* Particle effects */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(233, 69, 96, 0.7);
+            border-radius: 50%;
+            animation: particleFloat 8s linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* ============================================
+           MAIN INTERFACE STYLES
+           ============================================ */
+        .main-interface {
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+
+        .main-interface.visible {
+            opacity: 1;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 300px 1fr 350px;
+            grid-template-rows: 80px 1fr;
+            height: 100vh;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .header {
+            grid-column: 1 / -1;
+            background: rgba(233, 69, 96, 0.1);
+            border: 2px solid #e94560;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
-        .sidebar h3 {
-            color: #4a6cf7;
-            margin-top: 0;
+
+        .header h1 {
+            font-size: 2em;
+            background: linear-gradient(45deg, #e94560, #f39c12);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(233, 69, 96, 0.5);
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #27ae60;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .sidebar-left {
+            background: rgba(233, 69, 96, 0.05);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .main-area {
+            background: rgba(233, 69, 96, 0.05);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .sidebar-right {
+            background: rgba(233, 69, 96, 0.05);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .section-title {
             font-size: 1.3em;
+            margin-bottom: 15px;
+            color: #f39c12;
+            border-bottom: 2px solid rgba(243, 156, 18, 0.3);
+            padding-bottom: 5px;
         }
-        
-        .command-category {
-            margin-bottom: 20px;
+
+        .game-board {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(233, 69, 96, 0.3);
+            border-radius: 10px;
+            position: relative;
+            min-height: 400px;
+            display: grid;
+            grid-template-columns: repeat(20, 1fr);
+            grid-template-rows: repeat(15, 1fr);
+            gap: 1px;
+            padding: 10px;
         }
-        
-        .command-category h4 {
-            color: #a8c8f0;
-            margin-bottom: 10px;
-            font-size: 1.1em;
-        }
-        
-        .command-list {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .command-list li {
-            padding: 5px 0;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
-            color: #cbd5e1;
+
+        .tile {
+            background: rgba(233, 69, 96, 0.1);
+            border: 1px solid rgba(233, 69, 96, 0.2);
+            border-radius: 3px;
+            position: relative;
             cursor: pointer;
-            transition: color 0.2s;
+            transition: all 0.3s ease;
         }
-        
-        .command-list li:hover {
-            color: #4a6cf7;
+
+        .tile:hover {
+            background: rgba(233, 69, 96, 0.3);
+            transform: scale(1.1);
+            z-index: 10;
         }
-        
-        .status-panel {
-            background: rgba(74, 108, 247, 0.1);
-            border: 1px solid rgba(74, 108, 247, 0.3);
-            border-radius: 6px;
+
+        .tile.has-hero {
+            background: rgba(243, 156, 18, 0.5);
+            border-color: #f39c12;
+        }
+
+        .tile.has-psi-state {
+            background: rgba(155, 89, 182, 0.5);
+            border-color: #9b59b6;
+            animation: psi-glow 2s infinite alternate;
+        }
+
+        @keyframes psi-glow {
+            0% { box-shadow: 0 0 5px rgba(155, 89, 182, 0.5); }
+            100% { box-shadow: 0 0 15px rgba(155, 89, 182, 0.8); }
+        }
+
+        .script-panel {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .script-input {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(233, 69, 96, 0.5);
+            border-radius: 5px;
+            color: #e94560;
+            padding: 10px;
+            font-family: 'Courier New', monospace;
+            resize: none;
+            flex: 1;
+        }
+
+        .script-input::placeholder {
+            color: rgba(233, 69, 96, 0.5);
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #e94560, #f39c12);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(233, 69, 96, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .game-info {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            border-radius: 10px;
             padding: 15px;
             margin-bottom: 20px;
         }
-        
-        .status-panel h4 {
-            margin: 0 0 10px 0;
-            color: #4a6cf7;
-        }
-        
-        .status-item {
+
+        .info-item {
             display: flex;
             justify-content: space-between;
-            margin: 5px 0;
+            margin-bottom: 8px;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(233, 69, 96, 0.1);
+        }
+
+        .psi-state-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .psi-state-item {
+            background: rgba(155, 89, 182, 0.1);
+            border: 1px solid rgba(155, 89, 182, 0.3);
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-family: 'Courier New', monospace;
             font-size: 0.9em;
         }
-        
-        .status-value {
+
+        .psi-state-item .psi-id {
+            color: #9b59b6;
             font-weight: bold;
-            color: #22c55e;
         }
-        
-        .footer {
-            text-align: center;
-            padding: 20px;
-            color: #64748b;
-            font-size: 0.9em;
+
+        .psi-state-item .psi-action {
+            color: #27ae60;
+            margin-top: 5px;
         }
-        
-        .quick-actions {
+
+        .timeline-indicator {
             display: flex;
             gap: 10px;
             margin-bottom: 20px;
-            flex-wrap: wrap;
         }
-        
-        .quick-btn {
-            padding: 8px 16px;
-            background: rgba(74, 108, 247, 0.2);
-            border: 1px solid rgba(74, 108, 247, 0.3);
-            border-radius: 4px;
-            color: #a8c8f0;
-            cursor: pointer;
-            font-size: 0.8em;
-            transition: all 0.2s;
+
+        .timeline-branch {
+            background: rgba(52, 152, 219, 0.2);
+            border: 1px solid #3498db;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 0.9em;
+            color: #3498db;
         }
-        
-        .quick-btn:hover {
-            background: rgba(74, 108, 247, 0.3);
-            color: white;
+
+        .timeline-branch.active {
+            background: rgba(52, 152, 219, 0.5);
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
         }
-        
-        @media (max-width: 768px) {
-            .main-content {
-                flex-direction: column;
-                padding: 10px;
-            }
-            
-            .header h1 {
-                font-size: 2em;
-            }
-            
-            .sidebar {
-                order: 2;
-            }
+
+        .log-area {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            height: 200px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+        }
+
+        .log-entry {
+            margin-bottom: 5px;
+            padding: 2px 0;
+        }
+
+        .log-entry.success {
+            color: #27ae60;
+        }
+
+        .log-entry.error {
+            color: #e74c3c;
+        }
+
+        .log-entry.info {
+            color: #3498db;
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>🌀 Heroes of Time</h1>
-        <p>Console Temporelle - Heroes of Might & Magic 3 + Quantique</p>
-    </div>
-    
-    <div class="main-content">
-        <div class="console-container">
-            <div id="temporal-console" class="temporal-console"></div>
+    <div class="loading-screen" id="loadingScreen">
+        <div class="temporal-energy"></div>
+        <div class="temporal-sword"></div>
+        <div class="particles" id="particles"></div>
+        <div class="loading-title">Heroes of Time</div>
+        <div class="loading-subtitle">⚡ Quantum Temporal Engine ⚡</div>
+        <div class="loading-progress">
+            <div class="loading-progress-bar"></div>
         </div>
-        
-        <div class="sidebar">
-            <div class="status-panel">
-                <h4>🎮 Statut du Système</h4>
-                <div class="status-item">
-                    <span>Backend:</span>
-                    <span class="status-value" id="backend-status">Vérification...</span>
-                </div>
-                <div class="status-item">
-                    <span>Jeu Actuel:</span>
-                    <span class="status-value" id="current-game">Aucun</span>
-                </div>
-                <div class="status-item">
-                    <span>Commandes:</span>
-                    <span class="status-value" id="command-count">0</span>
-                </div>
-                <div class="status-item">
-                    <span>ψ-states:</span>
-                    <span class="status-value" id="psi-count">0</span>
-                </div>
-            </div>
-            
-            <div class="quick-actions">
-                <button class="quick-btn" onclick="insertCommand('HERO(Arthur)')">Créer Arthur</button>
-                <button class="quick-btn" onclick="insertCommand('HERO(Morgana)')">Créer Morgana</button>
-                <button class="quick-btn" onclick="insertCommand('BUILD(CASTLE, @20,20, PLAYER:player1)')">Construire Château</button>
-                <button class="quick-btn" onclick="insertCommand('ψ001: ⊙(Δt+2 @15,15 ⟶ MOV(Arthur, @15,15))')">ψ-state Simple</button>
-                <button class="quick-btn" onclick="clearConsole()">Effacer Console</button>
-            </div>
-            
-            <div class="command-category">
-                <h3>🏰 Commandes Disponibles</h3>
-                
-                <div class="command-category">
-                    <h4>🌀 Temporel</h4>
-                    <ul class="command-list">
-                        <li onclick="insertCommand('ψ001: ⊙(Δt+2 @x,y ⟶ ACTION)')">ψ001: ⊙(Δt+2 @x,y ⟶ ACTION)</li>
-                        <li onclick="insertCommand('†ψ001')">†ψ001</li>
-                        <li onclick="insertCommand('Π(condition) ⇒ †ψ001')">Π(condition) ⇒ †ψ001</li>
-                    </ul>
-                </div>
-                
-                <div class="command-category">
-                    <h4>🦸 Héros</h4>
-                    <ul class="command-list">
-                        <li onclick="insertCommand('HERO(Arthur)')">HERO(Arthur)</li>
-                        <li onclick="insertCommand('MOV(Arthur, @10,10)')">MOV(Arthur, @10,10)</li>
-                        <li onclick="insertCommand('LEVELUP(Arthur, SKILL:LEADERSHIP)')">LEVELUP(Arthur, SKILL:LEADERSHIP)</li>
-                    </ul>
-                </div>
-                
-                <div class="command-category">
-                    <h4>🏰 Construction</h4>
-                    <ul class="command-list">
-                        <li onclick="insertCommand('BUILD(CASTLE, @20,20, PLAYER:player1)')">BUILD(CASTLE, @20,20, PLAYER:player1)</li>
-                        <li onclick="insertCommand('BUILD(GOLD_MINE, @18,18, PLAYER:player1)')">BUILD(GOLD_MINE, @18,18, PLAYER:player1)</li>
-                        <li onclick="insertCommand('BUILD(TEMPLE, @16,16, PLAYER:player1)')">BUILD(TEMPLE, @16,16, PLAYER:player1)</li>
-                    </ul>
-                </div>
-                
-                <div class="command-category">
-                    <h4>💰 Ressources</h4>
-                    <ul class="command-list">
-                        <li onclick="insertCommand('COLLECT(RESOURCE, GOLD, 1000, PLAYER:player1)')">COLLECT(RESOURCE, GOLD, 1000, PLAYER:player1)</li>
-                        <li onclick="insertCommand('COLLECT(RESOURCE, WOOD, 500, PLAYER:player1)')">COLLECT(RESOURCE, WOOD, 500, PLAYER:player1)</li>
-                        <li onclick="insertCommand('COLLECT(RESOURCE, STONE, 300, PLAYER:player1)')">COLLECT(RESOURCE, STONE, 300, PLAYER:player1)</li>
-                    </ul>
-                </div>
-                
-                <div class="command-category">
-                    <h4>⚔️ Armées</h4>
-                    <ul class="command-list">
-                        <li onclick="insertCommand('RECRUIT(UNIT, SWORDSMEN, 20, HERO:Arthur)')">RECRUIT(UNIT, SWORDSMEN, 20, HERO:Arthur)</li>
-                        <li onclick="insertCommand('RECRUIT(UNIT, ARCHERS, 15, HERO:Arthur)')">RECRUIT(UNIT, ARCHERS, 15, HERO:Arthur)</li>
-                        <li onclick="insertCommand('RECRUIT(UNIT, DRAGON, 1, HERO:Arthur)')">RECRUIT(UNIT, DRAGON, 1, HERO:Arthur)</li>
-                    </ul>
-                </div>
-                
-                <div class="command-category">
-                    <h4>⚡ Magie</h4>
-                    <ul class="command-list">
-                        <li onclick="insertCommand('LEARN(SPELL, FIREBALL, HERO:Morgana)')">LEARN(SPELL, FIREBALL, HERO:Morgana)</li>
-                        <li onclick="insertCommand('CAST(SPELL, FIREBALL, TARGET:@25,25, HERO:Morgana)')">CAST(SPELL, FIREBALL, TARGET:@25,25, HERO:Morgana)</li>
-                        <li onclick="insertCommand('CAST(SPELL, HEAL, TARGET:HERO:Arthur, HERO:Morgana)')">CAST(SPELL, HEAL, TARGET:HERO:Arthur, HERO:Morgana)</li>
-                    </ul>
-                </div>
-                
-                <div class="command-category">
-                    <h4>⚔️ Combat</h4>
-                    <ul class="command-list">
-                        <li onclick="insertCommand('BATTLE(Arthur, Enemy)')">BATTLE(Arthur, Enemy)</li>
-                        <li onclick="insertCommand('BATTLE(ARMY:Arthur, ARMY:Enemy, LOCATION:@40,40)')">BATTLE(ARMY:Arthur, ARMY:Enemy, LOCATION:@40,40)</li>
-                        <li onclick="insertCommand('SIEGE(CASTLE, @50,50, HERO:Arthur)')">SIEGE(CASTLE, @50,50, HERO:Arthur)</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        <div class="loading-status">Initializing temporal matrix...</div>
+        <div class="runes">†</div>
     </div>
-    
-    <div class="footer">
-        <p>🚀 Heroes of Time - Version POC Alpha V0.1 | Port Backend: 8080 | Moteur Temporel Quantique</p>
+
+    <div class="container main-interface" id="mainInterface">
+        <header class="header">
+            <h1>🕰️ Heroes of Time - Temporal Engine</h1>
+            <div class="status-indicator">
+                <span>Engine Status:</span>
+                <div class="status-dot" id="statusDot"></div>
+                <span id="statusText">Connecting...</span>
+            </div>
+        </header>
+
+        <aside class="sidebar-left">
+            <h3 class="section-title">🎮 Game Control</h3>
+            
+            <div class="game-info">
+                <div class="info-item">
+                    <span>Game ID:</span>
+                    <span id="gameId">-</span>
+                </div>
+                <div class="info-item">
+                    <span>Current Turn:</span>
+                    <span id="currentTurn">0</span>
+                </div>
+                <div class="info-item">
+                    <span>Active ψ-states:</span>
+                    <span id="activePsiStates">0</span>
+                </div>
+                <div class="info-item">
+                    <span>Heroes:</span>
+                    <span id="heroCount">0</span>
+                </div>
+            </div>
+
+            <button class="btn" onclick="createNewGame()">🎲 New Game</button>
+            <button class="btn" onclick="runDemo()" style="margin-top: 10px;">🎬 Run Demo</button>
+
+            <h3 class="section-title" style="margin-top: 30px;">🌀 Timelines</h3>
+            <div class="timeline-indicator" id="timelineIndicator">
+                <div class="timeline-branch active">ℬ1</div>
+            </div>
+        </aside>
+
+        <main class="main-area">
+            <h3 class="section-title">🗺️ Temporal Game Board</h3>
+            <div class="game-board" id="gameBoard">
+                <!-- Tiles will be generated by JavaScript -->
+            </div>
+
+            <h3 class="section-title">📝 Temporal Script Console</h3>
+            <div class="script-panel">
+                <textarea 
+                    class="script-input" 
+                    id="scriptInput" 
+                    placeholder="Enter temporal script commands:
+HERO(Arthur)
+MOV(Arthur, @10,10)
+ψ001: ⊙(Δt+1 @11,11 ⟶ MOV(Arthur, @11,11))
+†ψ001"
+                ></textarea>
+                <button class="btn" onclick="executeScript()">⚡ Execute Script</button>
+            </div>
+        </main>
+
+        <aside class="sidebar-right">
+            <h3 class="section-title">🌀 Active ψ-states</h3>
+            <div class="psi-state-list" id="psiStateList">
+                <p style="color: rgba(233, 69, 96, 0.5); text-align: center; margin-top: 50px;">
+                    No active ψ-states
+                </p>
+            </div>
+
+            <h3 class="section-title" style="margin-top: 30px;">📋 Event Log</h3>
+            <div class="log-area" id="logArea">
+                <div class="log-entry info">🚀 Temporal Engine Interface Loaded</div>
+                <div class="log-entry info">🔌 Connecting to backend...</div>
+            </div>
+        </aside>
     </div>
-    
+
     <script src="js/temporal-engine.js"></script>
-    <script>
-        // Utility functions
-        function insertCommand(command) {
-            const input = document.getElementById('consoleInput');
-            if (input) {
-                input.value = command;
-                input.focus();
-            }
-        }
-        
-        function clearConsole() {
-            const output = document.getElementById('consoleOutput');
-            if (output) {
-                output.innerHTML = '';
-            }
-        }
-        
-        // Status monitoring
-        async function checkBackendStatus() {
-            try {
-                const response = await fetch('http://localhost:8080/api/temporal/health');
-                const data = await response.json();
-                document.getElementById('backend-status').textContent = data.status === 'healthy' ? 'En ligne' : 'Hors ligne';
-                document.getElementById('backend-status').style.color = data.status === 'healthy' ? '#22c55e' : '#ef4444';
-            } catch (error) {
-                document.getElementById('backend-status').textContent = 'Hors ligne';
-                document.getElementById('backend-status').style.color = '#ef4444';
-            }
-        }
-        
-        // Update status every 30 seconds
-        setInterval(checkBackendStatus, 30000);
-        
-        // Initial status check
-        document.addEventListener('DOMContentLoaded', () => {
-            checkBackendStatus();
-        });
-        
-        // Command examples for quick testing
-        const EXAMPLE_SCENARIOS = {
-            basic: [
-                'HERO(Arthur)',
-                'HERO(Morgana)',
-                'MOV(Arthur, @10,10)',
-                'BATTLE(Arthur, Enemy)'
-            ],
-            
-            temporal: [
-                'ψ001: ⊙(Δt+2 @15,15 ⟶ MOV(Arthur, @15,15))',
-                'ψ002: ⊙(Δt+3 @20,20 ⟶ CREATE(CREATURE, Dragon, @20,20))',
-                'Π(Player enters @15,15) ⇒ †ψ001',
-                '†ψ001',
-                '†ψ002'
-            ],
-            
-            hmm3: [
-                'BUILD(CASTLE, @20,20, PLAYER:player1)',
-                'BUILD(GOLD_MINE, @18,18, PLAYER:player1)',
-                'COLLECT(RESOURCE, GOLD, 5000, PLAYER:player1)',
-                'RECRUIT(UNIT, SWORDSMEN, 50, HERO:Arthur)',
-                'LEARN(SPELL, FIREBALL, HERO:Morgana)',
-                'CAST(SPELL, FIREBALL, TARGET:@25,25, HERO:Morgana)',
-                'EXPLORE(TERRAIN, @30,30, HERO:Arthur)',
-                'BATTLE(ARMY:Arthur, ARMY:Enemy, LOCATION:@40,40)'
-            ]
-        };
-        
-        // Fonction pour lancer un scénario complet
-        function runScenario(type) {
-            const scenario = EXAMPLE_SCENARIOS[type];
-            if (!scenario) return;
-            
-            const input = document.getElementById('consoleInput');
-            let index = 0;
-            
-            function executeNext() {
-                if (index >= scenario.length) return;
-                
-                input.value = scenario[index];
-                window.temporalConsole.executeCurrentCommand();
-                index++;
-                
-                setTimeout(executeNext, 1000); // Délai entre commandes
-            }
-            
-            executeNext();
-        }
-        
-        // Raccourcis clavier globaux
-        document.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.key === 'l') {
-                e.preventDefault();
-                clearConsole();
-            }
-        });
-    </script>
 </body>
 </html>
