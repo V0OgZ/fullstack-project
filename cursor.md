@@ -1,5 +1,64 @@
 # Règles pour l'Agent Heroes of Time
 
+## ⚠️ PROBLÈME CRITIQUE - DQUOTE> BLOQUANT
+
+### 🚨 **LE PROBLÈME QUI ARRIVE TOUT LE TEMPS**
+Le terminal se bloque avec `dquote>` quand :
+- **Echo avec guillemets** : `echo "Message avec des "guillemets" internes"`
+- **Gros messages** : Messages multi-lignes avec guillemets mal fermés
+- **Caractères spéciaux** : Emojis, Unicode, apostrophes dans echo
+- **Git commit** : Messages complexes avec guillemets imbriqués
+
+### 💥 **SYMPTÔMES**
+```bash
+admin@vincents-MacBook-Pro Heroes-of-Time % echo "Message avec des "guillemets" internes"
+dquote> 
+dquote> 
+dquote> # BLOQUÉ ICI - IMPOSSIBLE DE SORTIR
+```
+
+### ✅ **SOLUTIONS IMMÉDIATES**
+1. **Tapez `Ctrl+C`** pour annuler la commande bloquée
+2. **Recommencez** avec une commande simple
+3. **Utilisez guillemets simples** : `echo 'Message simple'`
+4. **Évitez les emojis** dans echo complètement
+
+### 🛡️ **RÈGLES DE PRÉVENTION**
+
+#### **ECHO - TOUJOURS SIMPLE**
+```bash
+# ❌ INTERDIT - Cause dquote>
+echo "Message avec des "guillemets" internes"
+echo "🚀 Message avec emoji"
+echo "Message multi-ligne
+avec retour à la ligne"
+
+# ✅ AUTORISÉ - Sécurisé
+echo 'Message simple'
+echo "Message sans guillemets internes"
+echo "Message simple sur une ligne"
+```
+
+#### **GIT COMMIT - GUILLEMETS SIMPLES**
+```bash
+# ❌ INTERDIT - Cause dquote>
+git commit -m "Message avec des "guillemets" internes"
+git commit -m "Message multi-ligne
+avec retour à la ligne"
+
+# ✅ AUTORISÉ - Sécurisé
+git commit -m 'Message simple'
+git commit -m "Message sans guillemets internes"
+```
+
+#### **MESSAGES LONGS - FICHIER TEMPORAIRE**
+```bash
+# Pour les gros messages, utilisez un fichier
+echo 'Message long et complexe' > /tmp/msg.txt
+git commit -F /tmp/msg.txt
+rm /tmp/msg.txt
+```
+
 ## RÈGLES CRITIQUES
 
 ### 1. GIT - PAS DE RESET HARD
@@ -55,8 +114,13 @@
 
 ### Git
 ```bash
-# Commit simple
+# Commit simple - TOUJOURS MARCHE
 git commit -m 'Message simple sans guillemets internes'
+
+# Commit avec fichier pour messages longs
+echo 'Message long et complexe' > /tmp/msg.txt
+git commit -F /tmp/msg.txt
+rm /tmp/msg.txt
 
 # Restaurer fichier
 git checkout <commit> -- <fichier>
@@ -67,8 +131,9 @@ git revert <commit>
 
 ### Serveurs
 ```bash
-# Nettoyer port
-lsof -ti:5174 | xargs kill -9
+# Nettoyer TOUS les ports avant démarrage
+lsof -ti:5174 | xargs kill -9 2>/dev/null
+lsof -ti:8080 | xargs kill -9 2>/dev/null
 
 # Démarrer frontend
 cd frontend-temporal && python3 -m http.server 5174
@@ -83,6 +148,30 @@ cd backend && mvn spring-boot:run
 curl -s http://localhost:5174 | head -n 5
 curl -s http://localhost:8080/api/temporal/health
 ```
+
+### Echo sécurisé
+```bash
+# TOUJOURS utiliser guillemets simples
+echo 'Message simple'
+echo 'Message sans emojis'
+
+# Ou guillemets doubles SANS guillemets internes
+echo "Message simple sans guillemets internes"
+```
+
+## PROCÉDURE D'URGENCE DQUOTE>
+
+### Si bloqué dans dquote>
+1. **Tapez `Ctrl+C`** immédiatement
+2. **Attendez** que le prompt revienne
+3. **Recommencez** avec commande simple
+4. **Évitez** les guillemets complexes
+
+### Prévention
+- **Jamais** de guillemets dans guillemets
+- **Jamais** d'emojis dans echo
+- **Toujours** tester avec des commandes simples
+- **Utiliser** des fichiers temporaires pour les gros messages
 
 ## DERNIÈRES AMÉLIORATIONS
 
