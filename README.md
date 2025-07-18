@@ -139,6 +139,19 @@ RECRUIT(UNIT, SWORDSMEN, 20, HERO:Arthur)
 
 ---
 
+## 📚 **Complete Documentation**
+
+### 🚀 **NEW: Temporal Script Language Documentation**
+- **[📚 Documentation Index](./TEMPORAL_DOCUMENTATION_INDEX.md)** - Complete navigation guide
+- **[⚡ Quick Reference](./TEMPORAL_SCRIPT_QUICK_GUIDE.md)** - Essential commands and patterns  
+- **[🔧 Technical Specification](./TEMPORAL_SCRIPT_LANGUAGE_REFERENCE.md)** - Complete grammar and API reference
+
+The temporal script language now supports **dual syntax**:
+- **Lisp Format**: `(PSI psi1 (MOV Arthur @10,15) (DELTA_T 3))`
+- **Greek Format**: `ψ1: ⊙(MOV(Arthur, @10,15)) Δt=3`
+
+### 📋 Project Documentation
+
 ## Development Status
 
 **✅ Working (85%)**
