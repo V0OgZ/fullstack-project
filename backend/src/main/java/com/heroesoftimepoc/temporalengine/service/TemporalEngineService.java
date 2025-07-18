@@ -840,7 +840,18 @@ public class TemporalEngineService {
         String artifact = params.get("artifact");
         String hero = params.get("hero");
         
-        // Simple implementation - just log the equipment
+        // Find the hero
+        Hero targetHero = game.getHeroByName(hero);
+        if (targetHero == null) {
+            result.put("success", false);
+            result.put("error", "Hero not found: " + hero);
+            return result;
+        }
+        
+        // Actually equip the artifact by adding it to inventory
+        targetHero.addItem(artifact);
+        heroRepository.save(targetHero);
+        
         result.put("success", true);
         result.put("message", "Hero " + hero + " equipped " + artifact);
         return result;
