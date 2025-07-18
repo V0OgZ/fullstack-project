@@ -388,5 +388,93 @@
             "wisdom": 80,
             "magic_power": 60
         }
+    },
+    {
+        "id": "temporal_sword",
+        "name": "Épée Temporelle",
+        "rarity": "Rare",
+        "tier": 2,
+        "charges": 5,
+        "slot": "WEAPON",
+        "description": "Épée de base avec capacités temporelles. Frappe qui ignore l'armure temporelle.",
+        "temporal_formula": "ψ_strike: TEMPORAL_STRIKE(target, ignore_armor=true)",
+        "effects": {
+            "type": "ATTACK",
+            "damage": 15,
+            "temporal_damage": 10,
+            "precision": 5,
+            "special": "ignore_temporal_armor"
+        },
+        "stats": {
+            "attack": 15,
+            "temporal_damage": 10,
+            "precision": 5,
+            "temporal_energy": 30
+        }
+    },
+    {
+        "id": "mystic_orb",
+        "name": "Orbe Mystique",
+        "rarity": "Épique",
+        "tier": 3,
+        "charges": 4,
+        "slot": "MAGIC",
+        "description": "Orbe qui altère la réalité localement. Permet la manipulation de l'environnement de combat.",
+        "temporal_formula": "ψ_distortion: REALITY_DISTORTION(@x,y, radius=3)",
+        "effects": {
+            "type": "MAGIC",
+            "magic_power": 25,
+            "temporal_energy": 20,
+            "ability": "reality_distortion",
+            "radius": 3
+        },
+        "stats": {
+            "magic": 25,
+            "temporal_energy": 20,
+            "spell_power": 15
+        }
+    },
+    {
+        "id": "reversed_clock",
+        "name": "Horloge Inversée",
+        "rarity": "Épique",
+        "tier": 3,
+        "charges": 3,
+        "slot": "TEMPORAL",
+        "description": "Manipulation temporelle pure. Inverse l'ordre des actions dans le combat.",
+        "temporal_formula": "ψ_reverse: TEMPORAL_REVERSAL(action_queue)",
+        "effects": {
+            "type": "TEMPORAL",
+            "manipulation": "reverse_actions",
+            "temporal_energy": 60,
+            "duration": 2
+        },
+        "stats": {
+            "temporal_manipulation": 15,
+            "temporal_energy": 25,
+            "initiative": 10
+        }
+    },
+    {
+        "id": "chrono_staff",
+        "name": "Bâton Chrono",
+        "rarity": "Épique",
+        "tier": 4,
+        "charges": 2,
+        "slot": "WEAPON",
+        "description": "Bâton avec contrôle temporel avancé. Peut annuler les 2 derniers tours.",
+        "temporal_formula": "ψ_rewind: TIME_REWIND(Δt-2, target=HERO)",
+        "effects": {
+            "type": "TEMPORAL",
+            "rewind_turns": 2,
+            "temporal_energy": 80,
+            "target": "HERO"
+        },
+        "stats": {
+            "magic": 18,
+            "temporal_control": 20,
+            "temporal_energy": 30,
+            "wisdom": 12
+        }
     }
 ]
