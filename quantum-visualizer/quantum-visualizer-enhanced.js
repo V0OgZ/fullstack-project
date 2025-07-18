@@ -9,6 +9,17 @@ class QuantumVisualizer {
         this.initializeScenarioLoader();
     }
 
+    initializeScenarioLoader() {
+        this.scenarioLoader = new ScenarioLoader(this);
+        this.addScenarioPanel();
+    }
+
+    addScenarioPanel() {
+        const leftPanel = document.querySelector('.left-panel');
+        const scenarioPanel = this.scenarioLoader.createScenarioUI();
+        leftPanel.insertBefore(scenarioPanel, leftPanel.firstChild);
+    }
+
     initializeEventListeners() {
         document.getElementById('createGame').addEventListener('click', () => this.createGame());
         document.getElementById('loadGame').addEventListener('click', () => this.loadGame());
@@ -92,6 +103,7 @@ class QuantumVisualizer {
             this.updateQuantumMetrics(gameState.quantumAnalysis || {});
             this.updateInterferenceZones(gameState.quantumAnalysis?.interferenceZones || []);
             this.updateAmplitudeChart(gameState.psiStates || []);
+            this.updateScenarioStatus(gameState);
             
             this.logSuccess('État du jeu mis à jour');
         } catch (error) {
@@ -128,14 +140,33 @@ class QuantumVisualizer {
         }
 
         heroList.innerHTML = heroes.map(hero => `
-            <div class="hero-card">
+            <div class="hero-card ${this.getHeroClass(hero.name)}">
                 <div class="hero-name">${hero.name}</div>
+                <div class="hero-title">${this.getHeroTitle(hero.name)}</div>
                 <div class="hero-position">Position: (${hero.position.x}, ${hero.position.y})</div>
                 <div class="hero-timeline">Timeline: ${hero.timeline}</div>
-                <div class="hero-health">Santé: ${hero.health}/${hero.maxHealth}</div>
-                <div class="hero-energy">Énergie Temporelle: ${hero.temporalEnergy}</div>
+                <div class="hero-health">Santé: ${hero.health}/${hero.maxHealth || hero.health}</div>
+                <div class="hero-energy">Énergie: ${hero.temporalEnergy}</div>
+                <div class="hero-equipment">
+                    <strong>Équipement:</strong>
+                    ${hero.inventory && hero.inventory.length > 0 ? 
+                        hero.inventory.map(item => `<span class="item-badge">${item}</span>`).join(' ') : 
+                        'Aucun'}
+                </div>
             </div>
         `).join('');
+    }
+
+    getHeroClass(heroName) {
+        if (heroName.includes('Lysandrel')) return 'hero-lysandrel';
+        if (heroName.includes('Nyx')) return 'hero-nyx';
+        return 'hero-default';
+    }
+
+    getHeroTitle(heroName) {
+        if (heroName.includes('Lysandrel')) return 'Le Forgeron de Réalité';
+        if (heroName.includes('Nyx')) return 'Tisseuse de Mondes Latents';
+        return '';
     }
 
     updatePsiStates(psiStates) {
@@ -171,6 +202,7 @@ class QuantumVisualizer {
                     <div>Action: ${psi.actionType}</div>
                     <div>ΔT: ${psi.deltaT}</div>
                     <div>Branche: ${psi.branch}</div>
+                    <div>Héros: ${psi.ownerHero}</div>
                 </div>
             </div>
         `).join('');
@@ -194,10 +226,23 @@ class QuantumVisualizer {
                 <div class="interference-type ${zone.type.toLowerCase()}">${zone.type}</div>
                 <div>Position: (${zone.position.x}, ${zone.position.y})</div>
                 <div>États: ${zone.stateCount}</div>
-                <div>Probabilité Combinée: ${zone.combinedProbability.toFixed(4)}</div>
+                <div>Probabilité: ${zone.combinedProbability.toFixed(4)}</div>
                 <div>Contraste: ${zone.contrast.toFixed(4)}</div>
+                <div class="interference-description">
+                    ${this.getInterferenceDescription(zone.type, zone.combinedProbability)}
+                </div>
             </div>
         `).join('');
+    }
+
+    getInterferenceDescription(type, probability) {
+        if (type === 'CONSTRUCTIVE') {
+            return `⚡ Amplification ${(probability * 100).toFixed(1)}%`;
+        } else if (type === 'DESTRUCTIVE') {
+            return `💥 Annulation ${(100 - probability * 100).toFixed(1)}%`;
+        } else {
+            return '⚖️ Équilibre quantique';
+        }
     }
 
     updateAmplitudeChart(psiStates) {
@@ -247,9 +292,17 @@ class QuantumVisualizer {
             const x = centerX + realPart * radius;
             const y = centerY - imagPart * radius;
             
+            // Hero-specific colors
+            let color = `hsl(${index * 60}, 70%, 60%)`;
+            if (psi.ownerHero && psi.ownerHero.includes('Lysandrel')) {
+                color = '#ffd93d';
+            } else if (psi.ownerHero && psi.ownerHero.includes('Nyx')) {
+                color = '#9d4edd';
+            }
+            
             // Draw vector
-            ctx.strokeStyle = `hsl(${index * 60}, 70%, 60%)`;
-            ctx.fillStyle = `hsl(${index * 60}, 70%, 60%)`;
+            ctx.strokeStyle = color;
+            ctx.fillStyle = color;
             ctx.lineWidth = 2;
             
             ctx.beginPath();
@@ -276,6 +329,18 @@ class QuantumVisualizer {
         ctx.fillText('Im', centerX + 5, 15);
     }
 
+    updateScenarioStatus(gameState) {
+        const scenario = this.scenarioLoader?.getCurrentScenario();
+        if (!scenario) return;
+
+        const currentTurn = gameState.currentTurn || 0;
+        const scenarioTurn = scenario.turns.find(t => t.turn === currentTurn);
+        
+        if (scenarioTurn) {
+            this.logSuccess(`📖 Tour ${currentTurn}: ${scenarioTurn.description}`);
+        }
+    }
+
     async executeCommand() {
         const input = document.getElementById('commandInput');
         const command = input.value.trim();
@@ -299,19 +364,25 @@ class QuantumVisualizer {
             const result = await response.json();
             
             if (result.success) {
-                this.logSuccess(`Succès: ${result.message || 'Commande exécutée'}`);
+                this.logSuccess(`✓ ${result.message || 'Commande exécutée'}`);
+                
+                // Afficher les informations quantiques
                 if (result.psiId) {
-                    this.logSuccess(`État créé: ${result.psiId}`);
+                    this.logSuccess(`🌀 État créé: ${result.psiId}`);
                 }
                 if (result.complexAmplitude) {
-                    this.logSuccess(`Amplitude: ${result.complexAmplitude}`);
+                    this.logSuccess(`📊 Amplitude: ${result.complexAmplitude}`);
                 }
                 if (result.interferenceType) {
-                    this.logSuccess(`Interférence: ${result.interferenceType}`);
+                    this.logSuccess(`⚡ Interférence: ${result.interferenceType}`);
                 }
+                if (result.successModifier) {
+                    this.logSuccess(`🎯 Modificateur: ${result.successModifier}x`);
+                }
+                
                 this.loadGameState(); // Refresh state after command
             } else {
-                this.logError(`Erreur: ${result.error || 'Commande échouée'}`);
+                this.logError(`✗ ${result.error || 'Commande échouée'}`);
             }
         } catch (error) {
             this.logError('Erreur réseau: ' + error.message);
@@ -345,6 +416,11 @@ class QuantumVisualizer {
         div.textContent = prefix + message;
         output.appendChild(div);
         output.scrollTop = output.scrollHeight;
+
+        // Limiter le nombre de messages
+        if (output.children.length > 100) {
+            output.removeChild(output.firstChild);
+        }
     }
 }
 

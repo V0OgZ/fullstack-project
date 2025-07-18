@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heroes of Time - Quantum Visualizer Enhanced</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Styles spécifiques pour les scénarios */
+        .scenario-panel {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 2px solid rgba(0,255,136,0.3);
+        }
+
+        .hero-lysandrel {
+            border-left-color: #ffd93d !important;
+        }
+
+        .hero-nyx {
+            border-left-color: #9d4edd !important;
+        }
+
+        .hero-title {
+            font-size: 0.9em;
+            color: #4ecdc4;
+            font-style: italic;
+            margin-bottom: 5px;
+        }
+
+        .item-badge {
+            display: inline-block;
+            background: rgba(0,255,136,0.2);
+            border: 1px solid rgba(0,255,136,0.5);
+            border-radius: 10px;
+            padding: 2px 6px;
+            font-size: 0.8em;
+            margin: 2px;
+        }
+
+        .interference-description {
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-top: 5px;
+            padding: 3px 6px;
+            border-radius: 5px;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .turn-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            z-index: 1000;
+        }
+
+        .phase-indicator {
+            position: fixed;
+            top: 60px;
+            right: 20px;
+            background: rgba(0,255,136,0.2);
+            border: 1px solid rgba(0,255,136,0.5);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            z-index: 1000;
+        }
+
+        .scenario-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .scenario-button {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .scenario-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .scenario-button:active {
+            transform: translateY(0);
+        }
+
+        .quantum-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .quantum-stat {
+            background: rgba(0,0,0,0.3);
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .quantum-stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #00ff88;
+        }
+
+        .quantum-stat-label {
+            font-size: 0.8em;
+            opacity: 0.8;
+            margin-top: 3px;
+        }
+
+        .glitch-effect {
+            animation: glitch 0.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        .reality-anchor {
+            position: relative;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 215, 61, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 215, 61, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 215, 61, 0); }
+        }
+
+        .narrative-panel {
+            background: linear-gradient(135deg, rgba(30,60,114,0.8) 0%, rgba(42,82,152,0.8) 100%);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .narrative-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #ffd93d;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .narrative-content {
+            font-size: 0.95em;
+            line-height: 1.4;
+            color: rgba(255,255,255,0.9);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌟 Heroes of Time - Quantum Visualizer Enhanced</h1>
+            <p>Visualisation quantique avancée avec support des scénarios</p>
+        </header>
+
+        <div class="turn-indicator" id="turnIndicator" style="display: none;">
+            Tour: 1
+        </div>
+
+        <div class="phase-indicator" id="phaseIndicator" style="display: none;">
+            Phase: SETUP
+        </div>
+
+        <div class="controls">
+            <button id="createGame">Créer Partie</button>
+            <button id="loadGame">Charger Partie</button>
+            <button id="refreshState">Actualiser</button>
+            <select id="gameSelect">
+                <option value="">Sélectionner une partie...</option>
+            </select>
+        </div>
+
+        <div class="main-content">
+            <div class="left-panel">
+                <div class="narrative-panel">
+                    <div class="narrative-title">🎭 Narration Interactive</div>
+                    <div class="narrative-content" id="narrativeContent">
+                        Bienvenue dans l'univers quantique de Heroes of Time. Chargez un scénario pour commencer votre aventure temporelle.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>🎮 État du Jeu</h2>
+                    <div id="gameInfo">
+                        <p>Aucune partie chargée</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>🦸 Héros</h2>
+                    <div id="heroList"></div>
+                </div>
+
+                <div class="section">
+                    <h2>📊 Métriques Quantiques</h2>
+                    <div class="quantum-stats">
+                        <div class="quantum-stat">
+                            <div class="quantum-stat-value" id="complexStates">0</div>
+                            <div class="quantum-stat-label">États Complexes</div>
+                        </div>
+                        <div class="quantum-stat">
+                            <div class="quantum-stat-value" id="classicStates">0</div>
+                            <div class="quantum-stat-label">États Classiques</div>
+                        </div>
+                        <div class="quantum-stat">
+                            <div class="quantum-stat-value" id="interferenceZones">0</div>
+                            <div class="quantum-stat-label">Interférences</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="center-panel">
+                <div class="section">
+                    <h2>🌀 États Quantiques (ψ-states)</h2>
+                    <div id="psiStates"></div>
+                </div>
+
+                <div class="section">
+                    <h2>🎯 Zones d'Interférence</h2>
+                    <div id="interferenceDisplay"></div>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <div class="section">
+                    <h2>🎮 Console de Commandes</h2>
+                    <div class="command-input">
+                        <input type="text" id="commandInput" placeholder="Entrez une commande quantique...">
+                        <button id="executeCommand">Exécuter</button>
+                    </div>
+                    <div id="commandOutput"></div>
+                </div>
+
+                <div class="section">
+                    <h2>📈 Visualisation Amplitudes</h2>
+                    <canvas id="amplitudeChart" width="300" height="200"></canvas>
+                </div>
+
+                <div class="section">
+                    <h2>🎲 Commandes Rapides</h2>
+                    <div class="scenario-controls">
+                        <button class="scenario-button" onclick="quickCommand('HERO(Arthur)')">Créer Arthur</button>
+                        <button class="scenario-button" onclick="quickCommand('HERO(Nyx-Lua)')">Créer Nyx-Lua</button>
+                        <button class="scenario-button" onclick="quickCommand('ψ001: (0.8+0.6i) ⊙(Δt+2 @10,10 ⟶ MOV(Arthur, @10,10))')">État Quantique</button>
+                        <button class="scenario-button" onclick="quickCommand('†ψ001')">Collapse</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scenario-loader.js"></script>
+    <script src="quantum-visualizer-enhanced.js"></script>
+    <script>
+        // Fonctions utilitaires
+        function quickCommand(command) {
+            document.getElementById('commandInput').value = command;
+            document.getElementById('executeCommand').click();
+        }
+
+        // Mise à jour des indicateurs de tour et phase
+        function updateTurnIndicators(gameState) {
+            const turnIndicator = document.getElementById('turnIndicator');
+            const phaseIndicator = document.getElementById('phaseIndicator');
+            
+            if (gameState.currentTurn) {
+                turnIndicator.style.display = 'block';
+                turnIndicator.textContent = `Tour: ${gameState.currentTurn}`;
+                
+                // Déterminer la phase actuelle
+                const turn = gameState.currentTurn;
+                let phase = 'SETUP';
+                if (turn >= 6 && turn <= 10) phase = 'PREMIERS_ECLATS';
+                else if (turn >= 11 && turn <= 15) phase = 'BASCULE_POUVOIR';
+                else if (turn >= 16 && turn <= 20) phase = 'GUERRE_MONDES';
+                else if (turn >= 21 && turn <= 24) phase = 'PRE_EFFONDREMENT';
+                else if (turn >= 25) phase = 'COLLAPSE_FINAL';
+                
+                phaseIndicator.style.display = 'block';
+                phaseIndicator.textContent = `Phase: ${phase}`;
+            }
+        }
+
+        // Mise à jour narrative
+        function updateNarrative(gameState) {
+            const narrativeContent = document.getElementById('narrativeContent');
+            const turn = gameState.currentTurn || 0;
+            
+            let narrative = '';
+            if (turn === 0) {
+                narrative = 'Bienvenue dans l\'univers quantique de Heroes of Time. Chargez un scénario pour commencer votre aventure temporelle.';
+            } else if (turn <= 5) {
+                narrative = '🎭 Phase d\'Installation : Les maîtres du temps prennent position. Chaque mouvement est calculé, chaque timeline préparée.';
+            } else if (turn <= 10) {
+                narrative = '⚔️ Premiers Éclats : Les timelines entrent en conflit. L\'Œil de Wigner révèle ses terribles pouvoirs.';
+            } else if (turn <= 15) {
+                narrative = '🌀 Bascule du Pouvoir : L\'Ancre de Réalité change la donne. Les stratégies s\'adaptent à cette nouvelle contrainte.';
+            } else if (turn <= 20) {
+                narrative = '💥 Guerre des Mondes : Les timelines se fracassent les unes contre les autres. La réalité elle-même vacille.';
+            } else if (turn <= 24) {
+                narrative = '⚡ Pré-Effondrement : Le moteur quantique prépare la résolution finale. Qui imposera sa vision du réel ?';
+            } else {
+                narrative = '🏆 Collapse Final : Une seule timeline survivra. Une seule réalité émergera de ce chaos quantique.';
+            }
+            
+            narrativeContent.innerHTML = narrative;
+        }
+
+        // Effets visuels pour les interférences
+        function addVisualEffects(gameState) {
+            const interferenceZones = gameState.quantumAnalysis?.interferenceZones || [];
+            
+            interferenceZones.forEach(zone => {
+                if (zone.type === 'DESTRUCTIVE') {
+                    // Ajouter effet de glitch
+                    const elements = document.querySelectorAll('.interference-zone');
+                    elements.forEach(el => {
+                        if (el.textContent.includes(zone.position.x + ',' + zone.position.y)) {
+                            el.classList.add('glitch-effect');
+                        }
+                    });
+                }
+            });
+        }
+
+        // Écouteur pour les mises à jour de l'état du jeu
+        document.addEventListener('gameStateUpdated', (event) => {
+            const gameState = event.detail;
+            updateTurnIndicators(gameState);
+            updateNarrative(gameState);
+            addVisualEffects(gameState);
+        });
+    </script>
+</body>
+</html> 
