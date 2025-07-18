@@ -1,0 +1,12 @@
+::1 - - [18/Jul/2025 17:43:49] "GET / HTTP/1.1" 200 -
+::1 - - [18/Jul/2025 17:43:57] "GET / HTTP/1.1" 200 -
+::1 - - [18/Jul/2025 18:09:55] "GET / HTTP/1.1" 304 -
+::1 - - [18/Jul/2025 18:09:55] "GET /scenario-loader.js HTTP/1.1" 304 -
+::1 - - [18/Jul/2025 18:09:55] "GET /scenario-selector.css HTTP/1.1" 304 -
+::1 - - [18/Jul/2025 18:09:55] "GET /style.css HTTP/1.1" 304 -
+::1 - - [18/Jul/2025 18:09:55] "GET /quantum-visualizer-enhanced.js HTTP/1.1" 304 -
+::1 - - [18/Jul/2025 18:09:55] "GET /scenarios/SCENARIOS_INDEX.json HTTP/1.1" 200 -
+::1 - - [18/Jul/2025 18:09:55] code 404, message File not found
+::1 - - [18/Jul/2025 18:09:55] "GET /favicon.ico HTTP/1.1" 404 -
+::1 - - [18/Jul/2025 18:10:08] "GET /scenarios/SOUFFLE_DU_DRAGON.json HTTP/1.1" 200 -
+::1 - - [18/Jul/2025 18:10:31] "GET /scenarios/ECLAT_MONDES_DISSOLUS.json HTTP/1.1" 200 -

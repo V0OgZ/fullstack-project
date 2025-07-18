@@ -61,13 +61,18 @@ public class TemporalEngineService {
         Map<String, Object> result = new HashMap<>();
         
         try {
-            // Utiliser uniquement le parser REGEX
+            // HOTS Engine - Simple et efficace !
             boolean isTemporalScript = temporalParser.isTemporalScript(scriptLine);
                 
             if (isTemporalScript) {
                 result = executeTemporalScript(game, scriptLine);
             } else {
                 result = executeBasicScript(game, scriptLine);
+            }
+            
+            // Ne pas continuer si il y a une erreur
+            if (result.containsKey("success") && !(Boolean) result.get("success")) {
+                return result;
             }
             
             // Process any triggered observations
