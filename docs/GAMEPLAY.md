@@ -56,23 +56,31 @@
 ## 🔮 **Temporal Artifacts System**
 
 ### **Artifact Tiers**
-✅ **Common (60%)** - Basic temporal effects  
-✅ **Rare (25%)** - Moderate time manipulation  
-✅ **Legendary (12%)** - Powerful temporal control  
-✅ **Paradox (2.5%)** - Reality-bending abilities  
-✅ **Singularity (0.5%)** - Universe-altering power  
+✅ **Common (60%)** - Basic temporal effects (10-20 charges)  
+✅ **Rare (25%)** - Moderate time manipulation (5-10 charges)  
+✅ **Epic (10%)** - Advanced reading/tactical powers (3-5 charges)  
+✅ **Legendary (4%)** - Powerful temporal control (2-3 charges)  
+✅ **Paradox (0.9%)** - Reality-bending abilities (1-2 charges)  
+✅ **Singularity (0.1%)** - Universe-altering power (1 charge)  
 
-### **Temporal Effects**
-✅ **Time Reversal** - Undo recent actions  
-✅ **Probability Manipulation** - Change success chances  
-✅ **Timeline Anchoring** - Stabilize specific realities  
-✅ **Temporal Acceleration** - Speed up processes  
-✅ **Causal Immunity** - Resist timeline changes  
+### **Temporal Powers**
+✅ **Read** - Observe futures, analyze timelines  
+✅ **Write** - Create futures, anchor zones  
+✅ **Rewrite** - Modify past/future, fork timelines  
+✅ **Delete** - Erase possibilities, force collapses  
+
+### **Artifact Examples**
+✅ **Lame de l'Avant-Monde** - Write unstable futures, trigger phantom battles  
+✅ **Horloge du Dernier Instant** - Rollback 1-3 turns with frozen zones  
+✅ **Trompette de l'Apocalypse** - Force single timeline on area  
+✅ **Chrono-Grimoire de Varnak** - Fork hero into parallel versions  
+
+📖 **[See TEMPORAL_CODEX.md for complete artifact list and mechanics](TEMPORAL_CODEX.md)**
 
 ### **Artifact Mechanics**
-✅ **Limited Uses** - Each artifact has finite charges  
-✅ **Synergy System** - Combine artifacts for enhanced effects  
-✅ **Degradation** - Artifacts lose power over time  
+✅ **Limited Charges** - Each artifact has finite uses based on tier  
+✅ **Phantom Battles** - Resolve timeline conflicts through projected combat  
+✅ **Causal Conflicts** - Automatic detection and resolution systems  
 ✅ **Discovery System** - Find artifacts through exploration  
 🔄 **Artifact Crafting** - Create custom temporal items (planned)  
 

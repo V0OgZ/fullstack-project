@@ -69,6 +69,9 @@ public class TimelineForkManager {
         // Fork si observation contradictoire
         if (detectsObservationConflict(action, timeline)) return true;
         
+        // Fork si utilisation d'artefact de type REWRITE ou PARADOX
+        if (hasParadoxArtifact(action)) return true;
+        
         return false;
     }
 }

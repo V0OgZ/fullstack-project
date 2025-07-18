@@ -326,10 +326,80 @@ Content-Type: application/json
 
 {
   "gameId": 123,
-  "artifactName": "TemporalSword",
+  "artifactId": "avantworld_blade",
   "heroName": "Arthur",
-  "targetX": 20,
-  "targetY": 20
+  "targetPosition": {"x": 25, "y": 25},
+  "parameters": {
+    "futureEvent": "CAPTURE_CASTLE",
+    "deltaTime": 3
+  }
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Artifact 'Lame de l'Avant-Monde' activated",
+  "psiStateCreated": "ψ_blade_001",
+  "effects": {
+    "type": "WRITE_FUTURE",
+    "location": "@25,25",
+    "triggerTime": "Δt+3",
+    "phantomBattleRisk": true
+  },
+  "chargesRemaining": 1
+}
+```
+
+### **Get Active Artifact Effects**
+```http
+GET /artifacts/effects/{gameId}
+```
+
+**Response:**
+```json
+{
+  "activeEffects": [
+    {
+      "artifactId": "anchor_tower",
+      "zone": {"center": {"x": 15, "y": 15}, "radius": 3},
+      "effect": "TEMPORAL_IMMUNITY",
+      "remainingTurns": 5
+    },
+    {
+      "artifactId": "varnak_grimoire",
+      "heroName": "Arthur",
+      "effect": "HERO_FORK",
+      "versions": ["Arthur_A", "Arthur_B"],
+      "resolutionTurn": 12
+    }
+  ]
+}
+```
+
+### **Resolve Phantom Battle**
+```http
+POST /artifacts/phantom-battle
+Content-Type: application/json
+
+{
+  "gameId": 123,
+  "conflictId": "conflict_001",
+  "psiState1": "ψ_blade_001",
+  "psiState2": "ψ_defense_002"
+}
+```
+
+**Response:**
+```json
+{
+  "battleResult": {
+    "winner": "ψ_blade_001",
+    "loser": "ψ_defense_002",
+    "combatLog": [...],
+    "realityRewritten": true
+  }
 }
 ```
 
