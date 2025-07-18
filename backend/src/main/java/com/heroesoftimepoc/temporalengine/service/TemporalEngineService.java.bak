@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
  * - findConflictingQuantumStates : trouver les états en conflit
  * - calculateQuantumInterferenceEffects : calculer les effets d'interférence
  */
-@Service("improvedTemporalEngineService")
+@Service
 @Transactional
 public class ImprovedTemporalEngineService {
     
