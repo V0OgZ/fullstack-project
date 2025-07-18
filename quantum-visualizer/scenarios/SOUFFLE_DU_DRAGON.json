@@ -1,0 +1,271 @@
+{
+  "scenario_info": {
+    "id": "souffle_du_dragon",
+    "name": "Le Souffle du Dragon",
+    "type": "PVE_BOSS",
+    "version": "1.0.0",
+    "description": "Un seul tour possible dans le futur. Vaincre le Dragon Rouge d'un seul élan temporel avec un artefact à usage unique.",
+    "max_turns": 5,
+    "players": 1,
+    "difficulty": "ULTIMATE",
+    "duration_estimate": "8-12 minutes",
+    "tags": ["boss", "single_shot", "perfect_execution", "temporal_precision"]
+  },
+  
+  "game_settings": {
+    "map": {
+      "width": 20,
+      "height": 20,
+      "terrain": "dragon_colosseum",
+      "special_zones": [
+        {"type": "dragon_perch", "x": 10, "y": 18, "effect": "dragon_stronghold"},
+        {"type": "player_start", "x": 10, "y": 2, "effect": "safe_zone"},
+        {"type": "temporal_rift", "x": 5, "y": 10, "effect": "timeline_access"},
+        {"type": "temporal_rift", "x": 15, "y": 10, "effect": "timeline_access"},
+        {"type": "breath_zone", "x": 10, "y": 12, "effect": "dragon_breath_path", "radius": 8},
+        {"type": "collapse_nexus", "x": 10, "y": 10, "effect": "reality_anchor_point"}
+      ]
+    },
+    "turn_limits": {
+      "time_per_turn": 60,
+      "total_turns": 5,
+      "future_turns_visible": 1
+    },
+    "victory_conditions": [
+      "Dragon mort avec artefact utilisé",
+      "Exécution parfaite en un seul coup"
+    ]
+  },
+
+  "heroes": [
+    {
+      "id": "dragon_slayer",
+      "name": "Thane le Tueur de Dragons",
+      "player": "player1",
+      "start_position": {"x": 10, "y": 2},
+      "level": 25,
+      "stats": {
+        "health": 200,
+        "max_health": 200,
+        "temporal_energy": 500,
+        "max_temporal_energy": 500,
+        "attack": 30,
+        "defense": 20,
+        "dragon_lore": 0.9,
+        "temporal_precision": 0.8,
+        "one_shot_mastery": 0.95
+      },
+      "equipment": ["collapse_orb", "dragon_slayer_blade", "temporal_focus_ring"],
+      "abilities": ["perfect_timing", "dragon_weakness_sight", "temporal_strike", "reality_collapse", "future_sight"]
+    }
+  ],
+
+  "artifacts": [
+    {
+      "id": "collapse_orb",
+      "scenario_override": {
+        "max_uses": 1,
+        "cooldown": 0,
+        "power_multiplier": 5.0,
+        "dragon_effectiveness": 0.8,
+        "temporal_precision_required": 0.9,
+        "failure_consequences": "catastrophic"
+      }
+    }
+  ],
+
+  "creatures": [
+    {
+      "id": "dragon_rouge_boss",
+      "count": 1,
+      "spawn_locations": [{"x": 10, "y": 18}],
+      "behavior": "ultimate_boss",
+      "spawn_turn": 1,
+      "stats": {
+        "health": 500,
+        "max_health": 500,
+        "attack": 50,
+        "defense": 30,
+        "breath_damage": 100,
+        "breath_range": 8,
+        "temporal_resistance": 0.7,
+        "collapse_vulnerability": 0.8,
+        "rage_threshold": 0.5
+      },
+      "phases": [
+        {
+          "name": "dormant",
+          "health_range": [100, 100],
+          "behavior": "sleeping",
+          "duration": 1
+        },
+        {
+          "name": "awakening",
+          "health_range": [80, 100],
+          "behavior": "slow_attacks",
+          "duration": 1
+        },
+        {
+          "name": "aggressive",
+          "health_range": [50, 80],
+          "behavior": "full_combat",
+          "duration": 1
+        },
+        {
+          "name": "enraged",
+          "health_range": [20, 50],
+          "behavior": "berserker",
+          "duration": 1
+        },
+        {
+          "name": "death_throes",
+          "health_range": [0, 20],
+          "behavior": "final_breath",
+          "duration": 1
+        }
+      ]
+    }
+  ],
+
+  "turn_sequence": [
+    {
+      "turn": 1,
+      "phase": "preparation",
+      "events": [
+        {"type": "message", "text": "Le Dragon Rouge dort... C'est votre SEULE chance ! Préparez-vous."},
+        {"type": "dragon_analysis", "reveal_weaknesses": true},
+        {"type": "temporal_rift_activation", "future_sight": 1},
+        {"type": "collapse_orb_charging", "charge_time": 1}
+      ]
+    },
+    {
+      "turn": 2,
+      "phase": "approach",
+      "events": [
+        {"type": "message", "text": "Approchez-vous. Le Dragon remue... Il va se réveiller !"},
+        {"type": "dragon_stir", "wake_probability": 0.2},
+        {"type": "position_calculation", "optimal_angle": true},
+        {"type": "temporal_window_opening"}
+      ]
+    },
+    {
+      "turn": 3,
+      "phase": "awakening",
+      "events": [
+        {"type": "message", "text": "Le Dragon ouvre un œil ! Maintenant ou jamais !"},
+        {"type": "dragon_wake", "phase": "awakening"},
+        {"type": "collapse_orb_ready", "single_use_warning": true},
+        {"type": "temporal_precision_check"}
+      ]
+    },
+    {
+      "turn": 4,
+      "phase": "critical_moment",
+      "events": [
+        {"type": "message", "text": "MAINTENANT ! Utilisez l'Orbe de Collapse ! Tout dépend de ce moment !"},
+        {"type": "dragon_full_wake", "phase": "aggressive"},
+        {"type": "breath_preparation", "damage": 100},
+        {"type": "collapse_orb_activation", "precision_required": 0.9}
+      ]
+    },
+    {
+      "turn": 5,
+      "phase": "resolution",
+      "events": [
+        {"type": "message", "text": "Résolution ! Avez-vous réussi votre coup parfait ?"},
+        {"type": "collapse_resolution", "success_check": true},
+        {"type": "dragon_fate_determination"},
+        {"type": "temporal_feedback", "consequences": true}
+      ]
+    }
+  ],
+
+  "win_conditions": {
+    "perfect_execution": {
+      "type": "single_shot_victory",
+      "condition": "dragon_dead AND collapse_orb_used AND temporal_precision >= 0.9",
+      "description": "Exécution parfaite avec l'Orbe de Collapse"
+    },
+    "dragon_slain": {
+      "type": "boss_victory",
+      "condition": "dragon_rouge_boss_health <= 0",
+      "description": "Dragon Rouge vaincu"
+    }
+  },
+
+  "lose_conditions": {
+    "orb_wasted": {
+      "type": "resource_failure",
+      "condition": "collapse_orb_used AND dragon_alive",
+      "description": "Orbe de Collapse gaspillé sans tuer le Dragon"
+    },
+    "dragon_breath": {
+      "type": "instant_death",
+      "condition": "hit_by_dragon_breath",
+      "description": "Incinéré par le souffle du Dragon"
+    },
+    "time_expired": {
+      "type": "time_failure",
+      "condition": "turn >= 5 AND dragon_alive",
+      "description": "Temps écoulé, le Dragon s'échappe"
+    }
+  },
+
+  "temporal_mechanics": {
+    "future_sight": {
+      "turns_visible": 1,
+      "accuracy": 0.9,
+      "dragon_behavior_prediction": true,
+      "optimal_timing_calculation": true
+    },
+    "collapse_orb": {
+      "power_level": 5.0,
+      "temporal_precision_required": 0.9,
+      "dragon_weakness_exploitation": 0.8,
+      "reality_collapse_radius": 5,
+      "single_use_only": true
+    },
+    "dragon_vulnerability": {
+      "temporal_weakness": 0.8,
+      "collapse_susceptibility": 0.9,
+      "perfect_timing_multiplier": 2.0,
+      "phase_dependent_defense": true
+    }
+  },
+
+  "precision_mechanics": {
+    "timing_windows": [
+      {"turn": 3, "window": 0.3, "difficulty": "hard"},
+      {"turn": 4, "window": 0.1, "difficulty": "perfect"},
+      {"turn": 5, "window": 0.0, "difficulty": "impossible"}
+    ],
+    "execution_factors": [
+      {"factor": "position", "weight": 0.3},
+      {"factor": "timing", "weight": 0.4},
+      {"factor": "dragon_phase", "weight": 0.2},
+      {"factor": "temporal_energy", "weight": 0.1}
+    ],
+    "success_calculation": "weighted_average >= 0.9"
+  },
+
+  "testing_scenarios": [
+    {
+      "name": "Perfect Timing Test",
+      "description": "Test de l'exécution parfaite au tour 4",
+      "setup": "Optimal position, full temporal energy, dragon awakening",
+      "expected": "Dragon dies in one shot with 90% precision"
+    },
+    {
+      "name": "Orb Waste Test",
+      "description": "Test de l'échec avec Orbe gaspillé",
+      "setup": "Poor timing, suboptimal position",
+      "expected": "Dragon survives, orb wasted, instant defeat"
+    },
+    {
+      "name": "Future Sight Test",
+      "description": "Test de la vision du futur",
+      "setup": "Activate future sight at turn 2",
+      "expected": "Turn 3 actions and dragon behavior predicted"
+    }
+  ]
+} 

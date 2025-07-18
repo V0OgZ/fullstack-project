@@ -1,0 +1,11 @@
+::1 - - [18/Jul/2025 16:13:13] "GET / HTTP/1.1" 200 -
+::1 - - [18/Jul/2025 16:14:47] "GET / HTTP/1.1" 200 -
+::1 - - [18/Jul/2025 16:14:48] "GET /style.css HTTP/1.1" 200 -
+::1 - - [18/Jul/2025 16:14:48] "GET /scenario-selector.css HTTP/1.1" 200 -
+::1 - - [18/Jul/2025 16:14:48] "GET /scenario-loader.js HTTP/1.1" 200 -
+::1 - - [18/Jul/2025 16:14:48] "GET /quantum-visualizer-enhanced.js HTTP/1.1" 200 -
+::1 - - [18/Jul/2025 16:14:48] code 404, message File not found
+::1 - - [18/Jul/2025 16:14:48] "GET /scenarios/SCENARIOS_INDEX.json HTTP/1.1" 404 -
+::1 - - [18/Jul/2025 16:14:48] code 404, message File not found
+::1 - - [18/Jul/2025 16:14:48] "GET /favicon.ico HTTP/1.1" 404 -
+::1 - - [18/Jul/2025 16:15:31] "GET /scenarios/SCENARIOS_INDEX.json HTTP/1.1" 200 -

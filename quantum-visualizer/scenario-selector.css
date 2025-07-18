@@ -1,0 +1,485 @@
+/**
+ * 🎨 Scenario Selector CSS - Heroes of Time
+ * 
+ * Modern, responsive design for the scenario selection interface
+ */
+
+/* ==================== MAIN CONTAINER ==================== */
+#scenario-selector {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.scenario-selector-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+}
+
+/* ==================== FILTERS ==================== */
+.scenario-filters {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.scenario-filters select {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: #e0e0e0;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    min-width: 200px;
+}
+
+.scenario-filters select:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.scenario-filters select:focus {
+    outline: none;
+    border-color: #4ecdc4;
+    box-shadow: 0 0 15px rgba(78, 205, 196, 0.3);
+}
+
+.scenario-filters select option {
+    background: #1a1a2e;
+    color: #e0e0e0;
+}
+
+/* ==================== SCENARIO GRID ==================== */
+.scenario-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* ==================== SCENARIO CARDS ==================== */
+.scenario-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.scenario-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.scenario-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.scenario-card:hover::before {
+    opacity: 1;
+}
+
+/* Difficulty-based styling */
+.scenario-card.intermediate {
+    border-color: rgba(33, 150, 243, 0.3);
+}
+
+.scenario-card.hard {
+    border-color: rgba(255, 152, 0, 0.3);
+}
+
+.scenario-card.expert {
+    border-color: rgba(244, 67, 54, 0.3);
+}
+
+.scenario-card.master {
+    border-color: rgba(156, 39, 176, 0.3);
+}
+
+.scenario-card.ultimate {
+    border-color: rgba(255, 87, 34, 0.5);
+    box-shadow: 0 0 15px rgba(255, 87, 34, 0.3);
+}
+
+/* ==================== CARD HEADER ==================== */
+.scenario-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.scenario-type-icon {
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scenario-difficulty {
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 0.25rem 0.75rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ==================== CARD CONTENT ==================== */
+.scenario-card-content {
+    margin-bottom: 1.5rem;
+}
+
+.scenario-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.scenario-description {
+    color: #b0b0b0;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.scenario-metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.scenario-meta-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.meta-label {
+    font-size: 0.8rem;
+    color: #888;
+    margin-bottom: 0.25rem;
+}
+
+.meta-value {
+    font-weight: bold;
+    color: #4ecdc4;
+    font-size: 0.9rem;
+}
+
+/* ==================== TAGS ==================== */
+.scenario-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.scenario-tag {
+    background: rgba(78, 205, 196, 0.2);
+    color: #4ecdc4;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid rgba(78, 205, 196, 0.3);
+}
+
+/* ==================== CARD ACTIONS ==================== */
+.scenario-card-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+}
+
+.scenario-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.scenario-btn-preview {
+    background: rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.scenario-btn-preview:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.scenario-btn-play {
+    background: linear-gradient(45deg, #4ecdc4, #45b7d1);
+    color: white;
+    border: 2px solid transparent;
+    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+}
+
+.scenario-btn-play:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.4);
+}
+
+/* ==================== MODAL STYLES ==================== */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    margin: 5% auto;
+    padding: 0;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.modal-close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: #fff;
+}
+
+.modal-body {
+    padding: 2rem;
+    color: #e0e0e0;
+}
+
+.modal-footer {
+    padding: 1.5rem 2rem;
+    border-top: 2px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.preview-section {
+    margin-bottom: 2rem;
+}
+
+.preview-section h3 {
+    color: #4ecdc4;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.preview-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.preview-section li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.preview-section li:last-child {
+    border-bottom: none;
+}
+
+.artifact-list, .creature-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.artifact-tag {
+    background: rgba(255, 193, 7, 0.2);
+    color: #ffc107;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.creature-tag {
+    background: rgba(233, 30, 99, 0.2);
+    color: #e91e63;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    border: 1px solid rgba(233, 30, 99, 0.3);
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 768px) {
+    .scenario-selector-title {
+        font-size: 2rem;
+    }
+    
+    .scenario-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .scenario-filters {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .scenario-filters select {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .scenario-card {
+        padding: 1rem;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 2% auto;
+    }
+    
+    .modal-body {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #scenario-selector {
+        padding: 1rem;
+    }
+    
+    .scenario-card-actions {
+        flex-direction: column;
+    }
+    
+    .scenario-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.scenario-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.scenario-card:nth-child(even) {
+    animation-delay: 0.1s;
+}
+
+.scenario-card:nth-child(odd) {
+    animation-delay: 0.2s;
+}
+
+/* ==================== LOADING STATES ==================== */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #4ecdc4;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ==================== SPECIAL EFFECTS ==================== */
+.scenario-card.ultimate::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #ff5722, #ff9800, #ff5722);
+    z-index: -1;
+    border-radius: 12px;
+    opacity: 0.7;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+} 
