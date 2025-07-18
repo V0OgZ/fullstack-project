@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Interface Temporelle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a1a2e;
+            color: #e94560;
+            padding: 20px;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(233, 69, 96, 0.3);
+        }
+        .test-result {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 3px solid;
+        }
+        .success {
+            background: rgba(39, 174, 96, 0.1);
+            border-left-color: #27ae60;
+            color: #27ae60;
+        }
+        .error {
+            background: rgba(233, 69, 96, 0.1);
+            border-left-color: #e94560;
+            color: #e94560;
+        }
+        .loading {
+            background: rgba(243, 156, 18, 0.1);
+            border-left-color: #f39c12;
+            color: #f39c12;
+        }
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🕰️ Test Interface Temporelle</h1>
+        
+        <div class="test-result loading">
+            <strong>Status:</strong> Test en cours...
+        </div>
+        
+        <div id="testResults"></div>
+        
+        <h2>Interface Temporelle (iframe)</h2>
+        <iframe src="index.html" id="temporalInterface"></iframe>
+        
+        <div style="margin-top: 20px;">
+            <button onclick="testBackend()" style="background: #e94560; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+                🚀 Test Backend
+            </button>
+            <button onclick="testInterface()" style="background: #f39c12; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-left: 10px;">
+                🔍 Test Interface
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let testResults = document.getElementById('testResults');
+        
+        function addTestResult(type, message) {
+            const div = document.createElement('div');
+            div.className = `test-result ${type}`;
+            div.innerHTML = `<strong>${new Date().toLocaleTimeString()}:</strong> ${message}`;
+            testResults.appendChild(div);
+        }
+        
+        async function testBackend() {
+            try {
+                addTestResult('loading', 'Testing backend connection...');
+                const response = await fetch('http://localhost:8080/api/temporal/health');
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    addTestResult('success', `Backend OK: ${data.service} v${data.version}`);
+                } else {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+            } catch (error) {
+                addTestResult('error', `Backend Error: ${error.message}`);
+            }
+        }
+        
+        function testInterface() {
+            addTestResult('loading', 'Testing interface loading...');
+            
+            const iframe = document.getElementById('temporalInterface');
+            
+            iframe.onload = function() {
+                try {
+                    // Vérifier si l'iframe a chargé le contenu
+                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    const loadingScreen = iframeDoc.getElementById('loadingScreen');
+                    const mainInterface = iframeDoc.getElementById('mainInterface');
+                    
+                    if (loadingScreen && mainInterface) {
+                        addTestResult('success', 'Interface elements found');
+                        
+                        // Vérifier le status de l'écran de chargement
+                        setTimeout(() => {
+                            const isHidden = loadingScreen.classList.contains('hidden');
+                            const isVisible = mainInterface.classList.contains('visible');
+                            
+                            if (isHidden && isVisible) {
+                                addTestResult('success', 'Interface loaded successfully - transition complete');
+                            } else {
+                                addTestResult('error', `Interface stuck - Loading hidden: ${isHidden}, Main visible: ${isVisible}`);
+                            }
+                        }, 5000);
+                        
+                    } else {
+                        addTestResult('error', 'Interface elements not found');
+                    }
+                } catch (error) {
+                    addTestResult('error', `Interface test failed: ${error.message}`);
+                }
+            };
+            
+            // Recharger l'iframe
+            iframe.src = iframe.src;
+        }
+        
+        // Test automatique au chargement
+        window.onload = function() {
+            testBackend();
+            setTimeout(testInterface, 1000);
+        };
+    </script>
+</body>
+</html> 

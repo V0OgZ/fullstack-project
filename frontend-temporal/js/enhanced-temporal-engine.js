@@ -96,7 +96,11 @@ class EnhancedTemporalEngine {
     updateLoadingStatus(message) {
         if (this.loadingStatus) {
             this.loadingStatus.textContent = message;
-            this.addToSessionLog('info', message);
+            
+            // Only log if sessionLog is initialized
+            if (this.sessionLog) {
+                this.addToSessionLog('info', message);
+            }
             
             // Add a brief glow effect when status updates
             this.loadingStatus.style.animation = 'none';
@@ -128,7 +132,10 @@ class EnhancedTemporalEngine {
             this.startPerformanceMonitoring();
             
         } catch (error) {
-            this.addToSessionLog('error', `Initialization failed: ${error.message}`);
+            if (this.sessionLog) {
+                this.addToSessionLog('error', `Initialization failed: ${error.message}`);
+            }
+            console.error('Initialization failed:', error);
         }
     }
 
@@ -138,14 +145,18 @@ class EnhancedTemporalEngine {
             if (response.ok) {
                 this.isConnected = true;
                 this.updateConnectionStatus(true);
-                this.addToSessionLog('success', 'Successfully connected to temporal backend');
+                if (this.sessionLog) {
+                    this.addToSessionLog('success', 'Successfully connected to temporal backend');
+                }
             } else {
                 throw new Error('Backend not responding');
             }
         } catch (error) {
             this.isConnected = false;
             this.updateConnectionStatus(false);
-            this.addToSessionLog('warning', 'Backend connection failed - using offline mode');
+            if (this.sessionLog) {
+                this.addToSessionLog('warning', 'Backend connection failed - using offline mode');
+            }
         }
     }
 
