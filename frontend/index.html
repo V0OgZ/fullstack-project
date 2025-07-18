@@ -13,6 +13,7 @@
             <div class="title">🕰️ Heroes of Time</div>
             <div class="controls">
                 <button id="new-game-btn">New Game</button>
+                <button id="add-ragnar-btn">🛡️ Add Ragnar</button>
                 <button id="settings-btn">⚙️</button>
             </div>
         </header>
@@ -41,28 +42,121 @@
         window.gameRenderer = new GameRenderer('game-canvas');
         window.scriptConsole = new ScriptConsole('script-console');
         
+        // Fonction pour mettre à jour la barre de statut
+        window.updateStatusBar = function(message) {
+            const statusBar = document.getElementById('status-bar');
+            if (statusBar) {
+                statusBar.textContent = message;
+            }
+        };
+        
+        // Fonction pour créer des héros de démonstration
+        window.createMockHeroes = function() {
+            const mockGameState = {
+                gameId: 1,
+                currentTurn: 0,
+                status: 'ACTIVE',
+                heroes: [
+                    {
+                        name: 'Ragnar',
+                        position: { x: 5, y: 5 },
+                        health: 100,
+                        maxHealth: 100,
+                        timeline: 'ℬ1',
+                        status: 'ACTIVE',
+                        temporalEnergy: 100,
+                        movementPoints: 3,
+                        inventory: ['Shield', 'Sword'],
+                        playerId: 'player1'
+                    },
+                    {
+                        name: 'Arthur',
+                        position: { x: 8, y: 3 },
+                        health: 90,
+                        maxHealth: 100,
+                        timeline: 'ℬ1',
+                        status: 'ACTIVE',
+                        temporalEnergy: 85,
+                        movementPoints: 2,
+                        inventory: ['Excalibur'],
+                        playerId: 'player1'
+                    }
+                ],
+                psiStates: [
+                    {
+                        id: 'ψ001',
+                        status: 'ACTIVE',
+                        targetX: 10,
+                        targetY: 10,
+                        probability: 0.8,
+                        expression: '⊙(Δt+2 @10,10 ⟶ MOV(Ragnar, @10,10))'
+                    }
+                ],
+                tiles: []
+            };
+            
+            window.gameRenderer.updateState(mockGameState);
+            window.updateStatusBar('Demo Heroes: Ragnar 🛡️ and Arthur ⚔️ ready!');
+        };
+        
         // Événements
         document.getElementById('new-game-btn').addEventListener('click', async () => {
             try {
-                await window.gameAPI.createGame('Frontend Game');
-                window.scriptConsole.addToOutput('🎮 New game created!', 'success');
+                const game = await window.gameAPI.createGame('Frontend Game');
+                window.scriptConsole.addToOutput('🎮 New game created! ID: ' + game.gameId, 'success');
+                window.updateStatusBar('Game created - Ready for commands');
+                
+                // Créer automatiquement Ragnar
+                setTimeout(async () => {
+                    try {
+                        const result = await window.gameAPI.executeScript('HERO(Ragnar)');
+                        window.scriptConsole.addToOutput('🛡️ Hero Ragnar created via temporal script!', 'success');
+                        window.gameRenderer.refresh();
+                    } catch (error) {
+                        window.scriptConsole.addToOutput(`❌ Backend error: ${error.message}`, 'error');
+                        window.scriptConsole.addToOutput('🎭 Loading demo heroes instead...', 'info');
+                        window.createMockHeroes();
+                    }
+                }, 1000);
+                
                 window.gameRenderer.refresh();
             } catch (error) {
                 window.scriptConsole.addToOutput(`❌ Failed to create game: ${error.message}`, 'error');
+                window.scriptConsole.addToOutput('🎭 Loading demo heroes for testing...', 'info');
+                window.createMockHeroes();
             }
         });
         
-        // Auto-refresh toutes les 5 secondes
+        // Bouton pour ajouter Ragnar directement
+        document.getElementById('add-ragnar-btn').addEventListener('click', () => {
+            window.scriptConsole.addToOutput('🛡️ Adding Ragnar directly...', 'info');
+            window.createMockHeroes();
+        });
+        
+        // Auto-refresh toutes les 3 secondes
         setInterval(() => {
             if (window.gameAPI.gameId) {
                 window.gameRenderer.refresh();
             }
-        }, 5000);
+        }, 3000);
         
         // Message de bienvenue
         window.scriptConsole.addToOutput('🕰️ Heroes of Time - Temporal Engine', 'success');
-        window.scriptConsole.addToOutput('Click "New Game" to start, then use script commands:', 'normal');
-        window.scriptConsole.addToOutput('Examples: HERO(Arthur), MOV(Arthur, @10,10), ψ001: ⊙(Δt+2 @15,15 ⟶ MOV(HERO, Arthur, @15,15))', 'normal');
+        window.scriptConsole.addToOutput('🎮 Click "New Game" or "Add Ragnar" to start!', 'normal');
+        window.scriptConsole.addToOutput('📜 Temporal Grammar Examples:', 'normal');
+        window.scriptConsole.addToOutput('  • HERO(Ragnar) - Create hero', 'normal');
+        window.scriptConsole.addToOutput('  • MOV(Ragnar, @5,3) - Move hero', 'normal');
+        window.scriptConsole.addToOutput('  • ψ001: ⊙(Δt+2 @10,10 ⟶ MOV(Ragnar, @10,10)) - Temporal script', 'normal');
+        window.scriptConsole.addToOutput('  • †ψ001 - Collapse quantum state', 'normal');
+        
+        // Initialiser la barre de statut
+        window.updateStatusBar('Ready to start... Click "New Game" or "Add Ragnar"');
+        
+        // Charger Ragnar automatiquement pour démonstration
+        setTimeout(() => {
+            window.scriptConsole.addToOutput('🎭 Loading Ragnar for immediate testing...', 'info');
+            window.createMockHeroes();
+        }, 2000);
     </script>
 </body>
 </html>

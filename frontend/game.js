@@ -139,8 +139,24 @@ class GameRenderer {
         this.refresh();
     }
     
-    refresh() {
+    async refresh() {
         if (!this.ctx) return;
+        
+        // Récupérer les données du backend si un jeu est actif
+        if (window.gameAPI && window.gameAPI.gameId) {
+            try {
+                const gameState = await window.gameAPI.getGameState();
+                this.gameState = gameState;
+                
+                // Mettre à jour la barre de statut
+                if (window.updateStatusBar) {
+                    window.updateStatusBar(`Game ID: ${gameState.gameId} | Turn: ${gameState.currentTurn} | Heroes: ${gameState.heroes ? gameState.heroes.length : 0}`);
+                }
+            } catch (error) {
+                console.error('Failed to refresh game state:', error);
+                // Utiliser l'état local si disponible
+            }
+        }
         
         // Clear canvas
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
