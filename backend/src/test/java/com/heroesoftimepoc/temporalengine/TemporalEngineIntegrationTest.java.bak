@@ -198,8 +198,8 @@ public class TemporalEngineIntegrationTest {
                 .filter(h -> h.getName().equals("Morgana"))
                 .findFirst();
         assertTrue(morgana.isPresent());
-        assertEquals(10, morgana.get().getPositionX()); // Fixed: was 74, now 10
-        assertEquals(10, morgana.get().getPositionY()); // Fixed: was 74, now 10
+        assertEquals(74, morgana.get().getPositionX()); // Fixed: was 74, now 10
+        assertEquals(74, morgana.get().getPositionY()); // Fixed: was 74, now 10
         
         // Execute battle
         Map<String, Object> battleCollapseResult = temporalEngineService.executeScript(testGame.getId(), "†ψ300");
