@@ -6,10 +6,9 @@ Traceback (most recent call last):
   File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/http/server.py", line 1297, in <module>
     test(
   File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/http/server.py", line 1248, in test
-    with ServerClass(addr, HandlerClass) as::1 - - [18/Jul/2025 01:04:11] "GET / HTTP/1.1" 200 -
-::1 - - [18/Jul/2025 01:04:38] "GET / HTTP/1.1" 200 -
-on3.10/socketserver.py", line 452, in __init__
-    self.server_bind()
+    with ServerClass(addr, HandlerClass) as httpd:
+  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/pyth::1 - - [18/Jul/2025 06:28:14] "HEAD / HTTP/1.1" 200 -
+.server_bind()
   File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/http/server.py", line 1291, in server_bind
     return super().server_bind()
   File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/http/server.py", line 136, in server_bind
