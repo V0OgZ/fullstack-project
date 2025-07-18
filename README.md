@@ -34,16 +34,17 @@ Heroes of Time est un jeu de stratégie où vous contrôlez des héros capables 
 
 ### 🎮 **Gameplay Simple à Comprendre**
 
-```
-Tour 1 : Vous programmez "Arthur va en (5,3) dans 2 tours"
-Tour 2 : Vous programmez "Arthur attaque le dragon dans 1 tour"  
-Tour 3 : Les deux actions se déclenchent → Arthur est en (5,3) ET attaque le dragon !
+```hots
+Tour 1 : ψ001: ⊙(Δt+2 @15,15 ⟶ MOV(Arthur, @15,15))
+Tour 2 : ψ002: ⊙(Δt+1 @20,20 ⟶ CREATE(CREATURE, Dragon, @20,20))  
+Tour 3 : †ψ001 → Arthur arrive en (15,15) ET le Dragon apparaît !
 ```
 
 **🔗 Pensez à ça comme :**
-- **Calendrier intelligent** - Vos actions sont programmées à l'avance
-- **Multitâche temporel** - Plusieurs stratégies tournent en background
-- **Synchronisation** - Quand vos plans se croisent, la magie opère
+- **ψ (Psi-state)** - Votre action programmée dans le futur
+- **⊙ (Superposition)** - L'action existe mais n'est pas encore réelle
+- **† (Collapse)** - L'action se déclenche et devient réelle
+- **Δt+X** - Dans X tours, l'action se déclenchera
 
 ### 🎲 **Pourquoi c'est révolutionnaire ?**
 
@@ -57,6 +58,89 @@ Au lieu de jouer "action par action" comme les jeux classiques, vous jouez **"st
 **💡 En résumé :** C'est comme jouer aux échecs, mais où vous pouvez programmer vos coups à l'avance et les voir s'exécuter de manière asynchrone !
 
 *📚 Pour les détails techniques et mécaniques avancées, consultez la [documentation complète](docs/GAMEPLAY.md)*
+
+## 🎭 Scénarios Épiques
+
+### 🌟 **7 Aventures Temporelles Vous Attendent**
+
+#### 👑 **L'Éclat des Mondes Dissolus** `[LÉGENDAIRE]`
+*Duel épique de 25 tours entre Lysandrel le Forgeur de Réalité et Nyx-Lua la Tisseuse de Mondes*
+
+> Dans les fragments éclatés du multivers, deux forces s'affrontent pour le contrôle de la réalité elle-même. Lysandrel maîtrise les amplitudes quantiques tandis que Nyx-Lua tisse les probabilités alternatives. Qui écrira l'histoire finale ?
+
+**⚡ Mécaniques :** Amplitudes complexes, interférences quantiques, 6 artefacts légendaires  
+**⏱️ Durée :** 60-90 minutes • **🎯 Difficulté :** LÉGENDAIRE
+
+---
+
+#### ⚔️ **Duel du Collapse** `[EXPERT]`
+*Affrontement intense avec collapse de timeline en 8 tours*
+
+> Deux maîtres temporels se défient dans un combat où chaque action peut effondrer la réalité. L'Œil de Wigner révèle les futurs possibles, mais seul le plus rapide survivra au collapse final.
+
+**⚡ Mécaniques :** Collapse de timeline, artefacts quantiques, phantom warriors  
+**⏱️ Durée :** 10-15 minutes • **🎯 Difficulté :** EXPERT
+
+---
+
+#### 🌀 **Fracture Binaire** `[MASTER]`
+*Chaque joueur contrôle deux timelines parallèles*
+
+> La réalité se scinde en deux. Chaque joueur doit gérer simultanément deux versions de lui-même dans des timelines parallèles. L'Infinity Codex pourrait être la clé pour réunifier les mondes... ou les détruire.
+
+**⚡ Mécaniques :** Timelines multiples, gameplay asynchrone, void fragments  
+**⏱️ Durée :** 25-35 minutes • **🎯 Difficulté :** MASTER
+
+---
+
+#### 👤 **Danse Illusoire** `[EXPERT]`
+*Duel asymétrique entre joueur invisible et visible*
+
+> L'un se bat dans l'ombre, l'autre dans la lumière. L'Encre Noire masque les intentions tandis que les Phantom Warriors dansent entre réalité et illusion. Qui trouvera son adversaire en premier ?
+
+**⚡ Mécaniques :** Invisibilité, asymétrie, mind games, shadow minions  
+**⏱️ Durée :** 15-20 minutes • **🎯 Difficulté :** EXPERT
+
+---
+
+#### 🏰 **La Garde du Nexus** `[HARD]`
+*Défendre le Nexus Temporel contre des vagues d'ennemis*
+
+> Le Nexus Temporel est attaqué ! Vagues après vagues, les Phantom Warriors déferlent. Seule l'Ancre de Réalité peut stabiliser le cœur du temps. Tiendrez-vous 6 tours ?
+
+**⚡ Mécaniques :** Défense par vagues, survival, phantom champions  
+**⏱️ Durée :** 15-20 minutes • **🎯 Difficulté :** HARD
+
+---
+
+#### 🗡️ **Vol de la Lame d'Avant-Monde** `[EXPERT]`
+*Mission d'infiltration pour voler un artefact légendaire*
+
+> La Lame d'Avant-Monde repose dans le repaire du Dragon Rouge. Une mission de stealth parfaite : infiltrez, volez, échappez-vous. Mais le dragon dort d'un œil seulement...
+
+**⚡ Mécaniques :** Infiltration, stealth, dragon boss, theft  
+**⏱️ Durée :** 12-18 minutes • **�� Difficulté :** EXPERT
+
+---
+
+#### 🐉 **Le Souffle du Dragon** `[ULTIMATE]`
+*Affrontement épique contre un Dragon Rouge - une seule chance*
+
+> Le Dragon Rouge s'éveille ! Vous n'avez que 5 tours et une seule chance de le vaincre. L'Orbe du Collapse pourrait être votre salut... ou votre perte. Perfection requise.
+
+**⚡ Mécaniques :** Boss fight, one-shot, perfection absolue requise  
+**⏱️ Durée :** 8-12 minutes • **🎯 Difficulté :** ULTIMATE
+
+---
+
+### 🎯 **Recommandations**
+
+- **🔰 Premiers pas :** Commencez par *La Garde du Nexus* puis *Duel du Collapse*
+- **⚔️ Fans de PvP :** *Duel du Collapse* → *Danse Illusoire* → *L'Éclat des Mondes Dissolus*
+- **🤖 Amateurs de PvE :** *La Garde du Nexus* → *Vol de la Lame* → *Le Souffle du Dragon*
+- **🧠 Maîtres quantiques :** *Fracture Binaire* et *L'Éclat des Mondes Dissolus*
+
+*🎮 Tous les scénarios incluent des mécaniques temporelles uniques et des artefacts légendaires !*
 
 ## 📚 Documentation Complète
 
