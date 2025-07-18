@@ -231,7 +231,8 @@ public class QuantumInterferenceIntegrationTest {
         double lastProbability = evolution.get(4).getCombinedProbability();
         
         // Avec l'évolution des phases, la probabilité combinée devrait changer
-        assertNotEquals(firstProbability, lastProbability, 0.01);
+        // Fix: Augmenter la tolérance pour éviter les erreurs de précision flottante
+        assertNotEquals(firstProbability, lastProbability, 0.1);
     }
     
     @Test

@@ -46,6 +46,8 @@ public class TemporalScriptParser {
     private static final Pattern LEVELUP_PATTERN = Pattern.compile("LEVELUP\\(([^,]+),\\s*SKILL:([^)]+)\\)");
     private static final Pattern EXPLORE_PATTERN = Pattern.compile("EXPLORE\\(([^,]+),\\s*@(\\d+),(\\d+),\\s*HERO:([^)]+)\\)");
     private static final Pattern EQUIP_PATTERN = Pattern.compile("EQUIP\\(ARTIFACT,\\s*([^,]+),\\s*HERO:([^)]+)\\)");
+    // Alternative EQUIP pattern for test compatibility
+    private static final Pattern EQUIP_PATTERN_ALT = Pattern.compile("EQUIP\\(([^,]+),\\s*([^)]+)\\)");
     private static final Pattern SIEGE_PATTERN = Pattern.compile("SIEGE\\(([^,]+),\\s*@(\\d+),(\\d+),\\s*HERO:([^)]+)\\)");
     private static final Pattern CAPTURE_PATTERN = Pattern.compile("CAPTURE\\(OBJECTIVE,\\s*([^,]+),\\s*HERO:([^)]+)\\)");
     
@@ -354,6 +356,15 @@ public class TemporalScriptParser {
             Map<String, String> params = new HashMap<>();
             params.put("artifact", equipMatcher.group(1));
             params.put("hero", equipMatcher.group(2));
+            return new ScriptCommand("EQUIP", params);
+        }
+        
+        // Alternative EQUIP command format for test compatibility
+        Matcher equipMatcherAlt = EQUIP_PATTERN_ALT.matcher(scriptLine);
+        if (equipMatcherAlt.find()) {
+            Map<String, String> params = new HashMap<>();
+            params.put("hero", equipMatcherAlt.group(1));
+            params.put("artifact", equipMatcherAlt.group(2));
             return new ScriptCommand("EQUIP", params);
         }
         
