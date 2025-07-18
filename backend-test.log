@@ -152,3 +152,16 @@ Hibernate: select ps1_0.game_id,ps1_0.id,ps1_0.action_type,ps1_0.branch_id,ps1_0
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=1, totalStates=1, collapseRate=1.0, collapsesByType={}}
 Hibernate: select t1_0.game_id,t1_0.id,t1_0.building_owner,t1_0.building_type,t1_0.defense_bonus,t1_0.has_psi_states,t1_0.is_locked,t1_0.is_temporal_zone,t1_0.lock_duration,t1_0.movement_cost,t1_0.temporal_energy_bonus,t1_0.temporal_zone_type,t1_0.terrain,t1_0.x,t1_0.y from game_tiles t1_0 where t1_0.game_id=?
 Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0 where g1_0.id=?
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  20:15 min
+[INFO] Finished at: 2025-07-18T22:40:28+02:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:3.2.0:run (default-cli) on project temporal-engine: Process terminated with exit code: 137 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
