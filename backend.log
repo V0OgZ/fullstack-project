@@ -231,3 +231,16 @@ Hibernate: alter table if exists tile_occupants add constraint FKia56skupqk3qxyp
 2025-07-18T16:27:34.350+02:00  INFO 9052 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
 2025-07-18T16:27:34.352+02:00  INFO 9052 --- [  restartedMain] c.h.t.TemporalEngineApplication          : Started TemporalEngineApplication in 0.435 seconds (process running for 893.072)
 2025-07-18T16:27:34.353+02:00  INFO 9052 --- [  restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  33:22 min
+[INFO] Finished at: 2025-07-18T16:46:02+02:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:3.2.0:run (default-cli) on project temporal-engine: Process terminated with exit code: 137 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
