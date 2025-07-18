@@ -1,0 +1,86 @@
+[
+    {
+        "id": "wigner_eye",
+        "name": "🔮 Œil de Wigner",
+        "rarity": "Paradoxe",
+        "tier": 6,
+        "charges": 3,
+        "type": "TALISMAN",
+        "description": "Observe et collapse une timeline ennemie en forçant l'effondrement quantique. Permet de voir les superpositions cachées et d'en éliminer une au choix.",
+        "temporal_formula": "OBSERVE(ψ_enemy) ⇒ COLLAPSE(selected_branch)",
+        "trigger": "TARGET_TIMELINE(enemy) ⇒ FORCE_COLLAPSE()",
+        "effects": {
+            "type": "OBSERVATION",
+            "range": "infinite",
+            "collapse_target": "enemy_timeline",
+            "reveal_hidden": true,
+            "special": "selective_collapse"
+        },
+        "quantum_properties": {
+            "observation_strength": 0.95,
+            "collapse_probability": 1.0,
+            "measurement_type": "DESTRUCTIVE"
+        },
+        "usage_conditions": {
+            "requires_target": true,
+            "target_type": "ENEMY_TIMELINE",
+            "cooldown": 5
+        }
+    },
+    {
+        "id": "schrodinger_grimoire",
+        "name": "📜 Grimoire de Schrödinger",
+        "rarity": "Légendaire",
+        "tier": 5,
+        "charges": 4,
+        "type": "BOOK",
+        "description": "Crée une timeline alternative 'non encore jouée' qui reste en superposition jusqu'à observation. Permet de préparer des actions dans l'ombre.",
+        "temporal_formula": "ψ_hidden: ⊙(Δt+n @x,y ⟶ ACTION) with VISIBILITY=false",
+        "trigger": "REVEAL_TIMELINE() when needed",
+        "effects": {
+            "type": "WRITE",
+            "visibility": "hidden",
+            "superposition_duration": "until_observed",
+            "branches_max": 3,
+            "special": "shadow_preparation"
+        },
+        "quantum_properties": {
+            "coherence_maintenance": 0.8,
+            "entanglement_strength": 0.7,
+            "decoherence_resistance": 0.9
+        },
+        "usage_conditions": {
+            "requires_preparation": true,
+            "preparation_time": 1,
+            "max_concurrent": 2
+        }
+    },
+    {
+        "id": "causality_flame",
+        "name": "🔥 Flamme de Causalité",
+        "rarity": "Paradoxe",
+        "tier": 7,
+        "charges": 1,
+        "type": "SEAL",
+        "description": "Impose une réalité définitive au tour 25 si elle est stable. Scelle le destin d'une timeline en la rendant immuable et prioritaire.",
+        "temporal_formula": "AT_TURN(25) ⇒ SEAL_REALITY(dominant_timeline)",
+        "trigger": "TURN_25_REACHED AND STABILITY > 0.8",
+        "effects": {
+            "type": "SEAL",
+            "activation_turn": 25,
+            "stability_required": 0.8,
+            "priority": "ABSOLUTE",
+            "special": "destiny_lock"
+        },
+        "quantum_properties": {
+            "reality_strength": 1.0,
+            "causal_immunity": true,
+            "temporal_lock": true
+        },
+        "usage_conditions": {
+            "single_use": true,
+            "turn_requirement": 25,
+            "stability_threshold": 0.8
+        }
+    }
+] 

@@ -1,0 +1,412 @@
+{
+    "scenario_info": {
+        "id": "eclat_mondes_dissolus",
+        "name": "L'Éclat des Mondes Dissolus",
+        "version": "1.0",
+        "type": "ASYMMETRIC_DUEL",
+        "max_turns": 25,
+        "players": 2,
+        "difficulty": "LEGENDARY",
+        "estimated_duration": "60-90 minutes",
+        "tags": ["temporal", "quantum", "asymmetric", "narrative", "pvp"]
+    },
+    "narrative": {
+        "intro": "Deux maîtres du temps s'affrontent à travers 25 tours de manipulation quantique. Ils ne cherchent pas juste à conquérir des territoires… mais à décider quelle réalité existera. Chaque action est une prière au moteur. Chaque objet, une arme métaphysique.",
+        "setting": "La Crypte des Mondes Fracturés",
+        "theme": "Affrontement métaphysique entre deux philosophies temporelles",
+        "victory_condition": "Imposer sa réalité au tour 25 par dominance quantique ou effondrement ennemi"
+    },
+    "players": [
+        {
+            "id": "player_a",
+            "name": "Lysandrel",
+            "title": "Le Forgeron de Réalité",
+            "hero_id": "lysandrel",
+            "style": "DIRECT_DOMINANT",
+            "philosophy": "Une seule réalité doit survivre",
+            "gameplay_focus": "Contrôle linéaire, actions directes, dominance temporelle",
+            "average_turn_time": "2 minutes",
+            "starting_position": {"x": 2, "y": 3},
+            "starting_equipment": [
+                "avantworld_blade",
+                "wigner_eye",
+                "reality_anchor"
+            ],
+            "starting_creatures": [
+                "quantum_phoenix",
+                "quantum_knight"
+            ]
+        },
+        {
+            "id": "player_b",
+            "name": "Nyx-Lua",
+            "title": "Tisseuse de Mondes Latents",
+            "hero_id": "nyx_lua",
+            "style": "SUBTLE_MANIPULATIVE",
+            "philosophy": "Tous les mondes possibles ont le droit d'exister",
+            "gameplay_focus": "Branches multiples, actions furtives, spéculation divergente",
+            "average_turn_time": "4-5 minutes",
+            "starting_position": {"x": 12, "y": 10},
+            "starting_equipment": [
+                "schrodinger_grimoire",
+                "infinity_codex",
+                "causality_flame"
+            ],
+            "starting_creatures": [
+                "quantum_lich",
+                "probability_spider"
+            ]
+        }
+    ],
+    "map": {
+        "id": "crypte_mondes_fractures",
+        "name": "La Crypte des Mondes Fracturés",
+        "size": {"width": 15, "height": 13},
+        "special_zones": [
+            {
+                "id": "nexus_central",
+                "name": "Nexus Temporel",
+                "position": {"x": 7, "y": 6},
+                "radius": 1,
+                "type": "TEMPORAL_NEXUS",
+                "effects": {
+                    "temporal_energy_bonus": 50,
+                    "timeline_amplification": 1.5,
+                    "anchor_point": true
+                }
+            },
+            {
+                "id": "zone_est",
+                "name": "Territoire de l'Est",
+                "positions": [
+                    {"x": 11, "y": 3}, {"x": 12, "y": 3}, {"x": 13, "y": 3},
+                    {"x": 11, "y": 4}, {"x": 12, "y": 4}, {"x": 13, "y": 4}
+                ],
+                "type": "CONTESTED_ZONE",
+                "superposition_visible": false
+            },
+            {
+                "id": "zone_ouest",
+                "name": "Territoire de l'Ouest",
+                "positions": [
+                    {"x": 1, "y": 8}, {"x": 2, "y": 8}, {"x": 3, "y": 8},
+                    {"x": 1, "y": 9}, {"x": 2, "y": 9}, {"x": 3, "y": 9}
+                ],
+                "type": "CONTESTED_ZONE",
+                "superposition_visible": false
+            },
+            {
+                "id": "zone_superposee_1",
+                "name": "Zone Fracturée Alpha",
+                "positions": [{"x": 5, "y": 2}, {"x": 6, "y": 2}],
+                "type": "SUPERPOSITION_ZONE",
+                "superposition_visible": true,
+                "glitch_effects": true
+            },
+            {
+                "id": "zone_superposee_2",
+                "name": "Zone Fracturée Beta",
+                "positions": [{"x": 8, "y": 10}, {"x": 9, "y": 10}],
+                "type": "SUPERPOSITION_ZONE",
+                "superposition_visible": true,
+                "glitch_effects": true
+            }
+        ]
+    },
+    "turn_sequence": [
+        {
+            "phase": "SETUP",
+            "turns": [1, 2, 3, 4, 5],
+            "description": "Mise en place des positions et premières actions temporelles",
+            "key_events": [
+                {
+                    "turn": 1,
+                    "player": "lysandrel",
+                    "action": "Déploie le Phénix Quantique vers l'est",
+                    "timeline_impact": "Établit une timeline dominante"
+                },
+                {
+                    "turn": 2,
+                    "player": "nyx_lua",
+                    "action": "Observe les futurs possibles avec le Codex",
+                    "timeline_impact": "Détecte 3 futurs où Lysandrel échoue"
+                },
+                {
+                    "turn": 3,
+                    "player": "nyx_lua",
+                    "action": "Active une timeline Schrödinger cachée",
+                    "timeline_impact": "Crée une branche non-visible"
+                },
+                {
+                    "turn": 4,
+                    "player": "lysandrel",
+                    "action": "Avance vers le Nexus central",
+                    "timeline_impact": "Établit une présence au centre"
+                },
+                {
+                    "turn": 5,
+                    "player": "nyx_lua",
+                    "action": "Commence à stabiliser les futurs alternatifs",
+                    "timeline_impact": "Renforce ses branches cachées"
+                }
+            ]
+        },
+        {
+            "phase": "PREMIERS_ECLATS",
+            "turns": [6, 7, 8, 9, 10],
+            "description": "Premiers conflits temporels et révélations",
+            "key_events": [
+                {
+                    "turn": 6,
+                    "player": "lysandrel",
+                    "action": "Utilise la Lame d'Avant-Monde sur zone non-jouée",
+                    "timeline_impact": "Prend de vitesse une timeline Schrödinger"
+                },
+                {
+                    "turn": 7,
+                    "player": "nyx_lua",
+                    "action": "Forcée de répondre, crée une nouvelle branche",
+                    "timeline_impact": "Révèle partiellement sa stratégie"
+                },
+                {
+                    "turn": 8,
+                    "player": "lysandrel",
+                    "action": "Détecte un conflit entre deux versions d'une zone",
+                    "timeline_impact": "Comprend la stratégie multi-branches"
+                },
+                {
+                    "turn": 9,
+                    "player": "lysandrel",
+                    "action": "Active l'Œil de Wigner, cible une timeline",
+                    "timeline_impact": "COLLAPSE FORCÉ - Timeline effondrée"
+                },
+                {
+                    "turn": 10,
+                    "player": "nyx_lua",
+                    "action": "Perd une branche, réorganise ses timelines",
+                    "timeline_impact": "Carte partiellement stabilisée"
+                }
+            ]
+        },
+        {
+            "phase": "BASCULE_POUVOIR",
+            "turns": [11, 12, 13, 14, 15],
+            "description": "Récupération d'artefacts et établissement des positions",
+            "key_events": [
+                {
+                    "turn": 11,
+                    "player": "nyx_lua",
+                    "action": "Récupère un artefact dans timeline secondaire",
+                    "timeline_impact": "Obtient la Flamme de Causalité"
+                },
+                {
+                    "turn": 12,
+                    "player": "nyx_lua",
+                    "action": "Prépare la stabilisation sans activer la Flamme",
+                    "timeline_impact": "Timelines renforcées secrètement"
+                },
+                {
+                    "turn": 13,
+                    "player": "lysandrel",
+                    "action": "Installe une Ancre de Réalité au Nexus central",
+                    "timeline_impact": "Zone figée, impossible à réécrire"
+                },
+                {
+                    "turn": 14,
+                    "player": "nyx_lua",
+                    "action": "Tente de contourner l'Ancre, échoue",
+                    "timeline_impact": "Comprend la menace de l'Ancre"
+                },
+                {
+                    "turn": 15,
+                    "player": "lysandrel",
+                    "action": "Consolide sa position centrale",
+                    "timeline_impact": "Dominance territoriale établie"
+                }
+            ]
+        },
+        {
+            "phase": "GUERRE_MONDES",
+            "turns": [16, 17, 18, 19, 20],
+            "description": "Conflit ouvert entre les timelines",
+            "key_events": [
+                {
+                    "turn": 16,
+                    "player": "lysandrel",
+                    "action": "Avance dans timeline unique protégée",
+                    "timeline_impact": "Progression sécurisée"
+                },
+                {
+                    "turn": 17,
+                    "player": "nyx_lua",
+                    "action": "Joue deux timelines simultanément",
+                    "timeline_impact": "Surcharge énergétique"
+                },
+                {
+                    "turn": 18,
+                    "player": "nyx_lua",
+                    "action": "Timelines commencent à se détruire mutuellement",
+                    "timeline_impact": "Manque de cohérence énergétique"
+                },
+                {
+                    "turn": 19,
+                    "player": "nyx_lua",
+                    "action": "Sacrifie une branche pour nourrir l'autre",
+                    "timeline_impact": "Consolidation forcée"
+                },
+                {
+                    "turn": 20,
+                    "player": "both",
+                    "action": "Zones en conflit visuel apparaissent",
+                    "timeline_impact": "Effets de superposition, UI glitch"
+                }
+            ]
+        },
+        {
+            "phase": "PRE_EFFONDREMENT",
+            "turns": [21, 22, 23, 24],
+            "description": "Préparation du collapse final",
+            "key_events": [
+                {
+                    "turn": 21,
+                    "player": "system",
+                    "action": "Moteur prépare résolution finale",
+                    "timeline_impact": "Calculs d'amplitude activés"
+                },
+                {
+                    "turn": 22,
+                    "player": "both",
+                    "action": "Reçoivent scores d'amplitude en prévisualisation",
+                    "timeline_impact": "Nyx avantage numérique, Lysandrel contrôle"
+                },
+                {
+                    "turn": 23,
+                    "player": "nyx_lua",
+                    "action": "Prépare l'activation de la Flamme",
+                    "timeline_impact": "Stabilité maximale requise"
+                },
+                {
+                    "turn": 24,
+                    "player": "lysandrel",
+                    "action": "Renforce l'Ancre de Réalité",
+                    "timeline_impact": "Immunité causale absolue"
+                }
+            ]
+        },
+        {
+            "phase": "COLLAPSE_FINAL",
+            "turns": [25],
+            "description": "Résolution quantique finale",
+            "key_events": [
+                {
+                    "turn": 25,
+                    "player": "system",
+                    "action": "Analyse finale des timelines",
+                    "timeline_impact": "Calcul de dominance quantique",
+                    "analysis": {
+                        "lysandrel": {
+                            "coherence": 0.95,
+                            "amplitude": 310,
+                            "active_objects": ["reality_anchor", "avantworld_blade"]
+                        },
+                        "nyx_lua": {
+                            "coherence": 0.72,
+                            "amplitude": 350,
+                            "active_objects": ["infinity_codex", "causality_flame"]
+                        }
+                    },
+                    "resolution": "L'Ancre bloque la branche dominante de Nyx. Violation de causalité détectée. Disqualification de la timeline principale de Nyx-Lua.",
+                    "winner": "lysandrel",
+                    "final_reality": "Timeline unique de Lysandrel - tranchée, observée, figée"
+                }
+            ]
+        }
+    ],
+    "victory_conditions": {
+        "primary": {
+            "type": "QUANTUM_DOMINANCE",
+            "description": "Au tour 25, la timeline la plus cohérente et stable devient réalité",
+            "calculation": "coherence * amplitude * object_synergy"
+        },
+        "secondary": {
+            "type": "TIMELINE_COLLAPSE",
+            "description": "Effondrement total des timelines adverses",
+            "trigger": "all_enemy_timelines_collapsed"
+        },
+        "special": {
+            "type": "CAUSALITY_VIOLATION",
+            "description": "Violation des lois causales par l'adversaire",
+            "trigger": "immutable_zone_conflict"
+        }
+    },
+    "gameplay_mechanics": {
+        "timeline_registry": {
+            "max_concurrent_timelines": 4,
+            "coherence_decay_rate": 0.05,
+            "entanglement_strength": 0.7
+        },
+        "collapse_manager": {
+            "automatic_collapse_threshold": 0.1,
+            "forced_collapse_objects": ["wigner_eye"],
+            "collapse_cascade_probability": 0.3
+        },
+        "zone_lock_system": {
+            "anchor_objects": ["reality_anchor"],
+            "lock_duration": "permanent",
+            "immunity_types": ["rewrite", "temporal_shift"]
+        },
+        "observation_triggers": {
+            "wigner_eye": {
+                "type": "SELECTIVE_COLLAPSE",
+                "range": "infinite",
+                "target": "enemy_timeline"
+            },
+            "infinity_codex": {
+                "type": "PROBABILITY_VISION",
+                "range": "future_states",
+                "duration": 5
+            }
+        }
+    },
+    "balancing": {
+        "lysandrel_advantages": [
+            "Contrôle direct des timelines",
+            "Objets de dominance temporelle",
+            "Résistance aux réécritures",
+            "Gameplay plus rapide"
+        ],
+        "nyx_lua_advantages": [
+            "Branches multiples",
+            "Vision probabiliste",
+            "Existence furtive",
+            "Amplitude numérique supérieure"
+        ],
+        "balance_mechanisms": [
+            "Ancre bloque les réécritures massives",
+            "Flamme nécessite stabilité très élevée",
+            "Timelines multiples ont coût énergétique",
+            "Collapse cascade punir la surextension"
+        ]
+    },
+    "technical_requirements": {
+        "systems_needed": [
+            "TimelineRegistry",
+            "CollapseManager", 
+            "ZoneLockSystem",
+            "ObservationTrigger",
+            "QuantumCoherenceCalculator"
+        ],
+        "ui_features": [
+            "Timeline visualization",
+            "Superposition glitch effects",
+            "Amplitude preview",
+            "Collapse cascade animation"
+        ],
+        "testing_scenarios": [
+            "Basic timeline creation",
+            "Collapse cascade",
+            "Zone lock conflicts",
+            "Turn 25 resolution"
+        ]
+    }
+} 
