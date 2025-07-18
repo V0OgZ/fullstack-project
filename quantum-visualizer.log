@@ -1,0 +1,13 @@
+::1 - - [19/Jul/2025 00:10:12] "GET / HTTP/1.1" 200 -
+::1 - - [19/Jul/2025 00:10:14] "GET / HTTP/1.1" 304 -
+::1 - - [19/Jul/2025 00:10:14] "GET /style.css HTTP/1.1" 304 -
+::1 - - [19/Jul/2025 00:10:14] "GET /scenario-selector.css HTTP/1.1" 304 -
+::1 - - [19/Jul/2025 00:10:14] "GET /scenario-loader.js HTTP/1.1" 304 -
+::1 - - [19/Jul/2025 00:10:14] "GET /quantum-visualizer-enhanced.js HTTP/1.1" 304 -
+::1 - - [19/Jul/2025 00:10:14] "GET /button-fixes.js HTTP/1.1" 304 -
+::1 - - [19/Jul/2025 00:10:14] "GET /scenarios/SCENARIOS_INDEX.json HTTP/1.1" 304 -
+::1 - - [19/Jul/2025 00:10:14] code 404, message File not found
+::1 - - [19/Jul/2025 00:10:14] "GET /favicon.ico HTTP/1.1" 404 -
+::1 - - [19/Jul/2025 00:10:34] "GET /scenarios/ECLAT_MONDES_DISSOLUS.json HTTP/1.1" 304 -
+::1 - - [19/Jul/2025 00:26:15] code 404, message File not found
+::1 - - [19/Jul/2025 00:26:15] "GET /favicon.ico HTTP/1.1" 404 -
