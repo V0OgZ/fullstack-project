@@ -1,0 +1,218 @@
+{
+  "scenarios_index": {
+    "version": "1.0.0",
+    "last_updated": "2025-07-18",
+    "total_scenarios": 7,
+    "categories": {
+      "PVP": 3,
+      "PVE": 3,
+      "SPECIAL": 1
+    }
+  },
+  
+  "scenarios": [
+    {
+      "id": "eclat_mondes_dissolus",
+      "name": "L'Éclat des Mondes Dissolus",
+      "type": "PVP_EPIC",
+      "file": "ECLAT_MONDES_DISSOLUS.json",
+      "status": "complete",
+      "difficulty": "LEGENDARY",
+      "duration": "60-90 minutes",
+      "players": 2,
+      "max_turns": 25,
+      "featured_artifacts": ["avantworld_blade", "wigner_eye", "schrodinger_grimoire", "reality_anchor", "infinity_codex", "causality_flame"],
+      "featured_creatures": ["quantum_phoenix", "quantum_knight", "quantum_lich", "probability_spider"],
+      "description": "Duel épique asymétrique entre Lysandrel et Nyx-Lua avec mécaniques quantiques avancées",
+      "tags": ["épique", "asymétrique", "quantique", "25_tours", "légendaire"]
+    },
+    {
+      "id": "duel_collapse",
+      "name": "Duel du Collapse",
+      "type": "PVP_SHORT",
+      "file": "DUEL_COLLAPSE.json",
+      "status": "complete",
+      "difficulty": "EXPERT",
+      "duration": "10-15 minutes",
+      "players": 2,
+      "max_turns": 8,
+      "featured_artifacts": ["wigner_eye", "schrodinger_grimoire"],
+      "featured_creatures": ["phantom_warriors", "temporal_elemental"],
+      "description": "Duel intense avec artefacts quantiques et collapse de timeline",
+      "tags": ["duel", "court", "collapse", "intense"]
+    },
+    {
+      "id": "fracture_binaire",
+      "name": "Fracture Binaire",
+      "type": "PVP_ASYNC",
+      "file": "FRACTURE_BINAIRE.json",
+      "status": "complete",
+      "difficulty": "MASTER",
+      "duration": "25-35 minutes",
+      "players": 2,
+      "max_turns": 10,
+      "featured_artifacts": ["infinity_codex"],
+      "featured_creatures": ["temporal_elemental", "void_fragments"],
+      "description": "Chaque joueur contrôle deux timelines parallèles",
+      "tags": ["timelines_multiples", "asynchrone", "complexe"]
+    },
+    {
+      "id": "danse_illusoire",
+      "name": "Danse Illusoire",
+      "type": "DUEL_FURTIF",
+      "file": "DANSE_ILLUSOIRE.json",
+      "status": "complete",
+      "difficulty": "EXPERT",
+      "duration": "15-20 minutes",
+      "players": 2,
+      "max_turns": 6,
+      "featured_artifacts": ["dark_ink"],
+      "featured_creatures": ["phantom_warriors", "shadow_minions"],
+      "description": "Duel asymétrique entre joueur invisible et visible",
+      "tags": ["furtif", "asymétrique", "visibilité", "mind_games"]
+    },
+    {
+      "id": "garde_du_nexus",
+      "name": "La Garde du Nexus",
+      "type": "PVE_DEFENSE",
+      "file": "GARDE_DU_NEXUS.json",
+      "status": "complete",
+      "difficulty": "HARD",
+      "duration": "15-20 minutes",
+      "players": 1,
+      "max_turns": 6,
+      "featured_artifacts": ["reality_anchor"],
+      "featured_creatures": ["phantom_warriors", "phantom_elite", "phantom_champion"],
+      "description": "Défendre le Nexus Temporel contre des vagues d'ennemis",
+      "tags": ["défense", "vagues", "survival", "PVE"]
+    },
+    {
+      "id": "vol_de_lame",
+      "name": "Vol de la Lame d'Avant-Monde",
+      "type": "INFILTRATION",
+      "file": "VOL_DE_LAME.json",
+      "status": "complete",
+      "difficulty": "EXPERT",
+      "duration": "12-18 minutes",
+      "players": 1,
+      "max_turns": 7,
+      "featured_artifacts": ["avantworld_blade"],
+      "featured_creatures": ["dragon_rouge", "phantom_guards"],
+      "description": "Mission d'infiltration pour voler un artefact légendaire",
+      "tags": ["infiltration", "stealth", "dragon", "theft"]
+    },
+    {
+      "id": "souffle_du_dragon",
+      "name": "Le Souffle du Dragon",
+      "type": "PVE_BOSS",
+      "file": "SOUFFLE_DU_DRAGON.json",
+      "status": "complete",
+      "difficulty": "ULTIMATE",
+      "duration": "8-12 minutes",
+      "players": 1,
+      "max_turns": 5,
+      "featured_artifacts": ["collapse_orb"],
+      "featured_creatures": ["dragon_rouge_boss"],
+      "description": "Affrontement épique contre un Dragon Rouge avec un seul coup possible",
+      "tags": ["boss", "one_shot", "perfectible", "ultimate"]
+    }
+  ],
+  
+  "difficulty_levels": {
+    "BEGINNER": {
+      "description": "Parfait pour découvrir les mécaniques de base",
+      "scenarios": []
+    },
+    "INTERMEDIATE": {
+      "description": "Mécaniques temporelles standard",
+      "scenarios": []
+    },
+    "HARD": {
+      "description": "Défis tactiques avancés",
+      "scenarios": ["garde_du_nexus"]
+    },
+    "EXPERT": {
+      "description": "Maîtrise des mécaniques quantiques requise",
+      "scenarios": ["duel_collapse", "danse_illusoire", "vol_de_lame"]
+    },
+    "MASTER": {
+      "description": "Stratégies complexes et timeline multiples",
+      "scenarios": ["fracture_binaire"]
+    },
+    "LEGENDARY": {
+      "description": "Scénarios épiques légendaires",
+      "scenarios": ["eclat_mondes_dissolus"]
+    },
+    "ULTIMATE": {
+      "description": "Perfection absolue requise",
+      "scenarios": ["souffle_du_dragon"]
+    }
+  },
+  
+  "scenario_types": {
+    "PVP_EPIC": {
+      "description": "Duels épiques de longue durée",
+      "scenarios": ["eclat_mondes_dissolus"]
+    },
+    "PVP_SHORT": {
+      "description": "Duels rapides et intenses",
+      "scenarios": ["duel_collapse"]
+    },
+    "PVP_ASYNC": {
+      "description": "Gameplay asynchrone complexe",
+      "scenarios": ["fracture_binaire"]
+    },
+    "DUEL_FURTIF": {
+      "description": "Duels avec mécaniques de furtivité",
+      "scenarios": ["danse_illusoire"]
+    },
+    "PVE_DEFENSE": {
+      "description": "Défense contre vagues d'ennemis",
+      "scenarios": ["garde_du_nexus"]
+    },
+    "INFILTRATION": {
+      "description": "Missions de stealth et vol",
+      "scenarios": ["vol_de_lame"]
+    },
+    "PVE_BOSS": {
+      "description": "Affrontements contre boss uniques",
+      "scenarios": ["souffle_du_dragon"]
+    }
+  },
+  
+  "recommendations": {
+    "first_time_players": ["garde_du_nexus", "duel_collapse"],
+    "pvp_enthusiasts": ["duel_collapse", "danse_illusoire", "eclat_mondes_dissolus"],
+    "pve_lovers": ["garde_du_nexus", "vol_de_lame", "souffle_du_dragon"],
+    "quantum_masters": ["eclat_mondes_dissolus", "fracture_binaire"],
+    "quick_sessions": ["duel_collapse", "souffle_du_dragon", "danse_illusoire"],
+    "epic_campaigns": ["eclat_mondes_dissolus", "fracture_binaire"]
+  },
+  
+  "artifact_index": {
+    "avantworld_blade": ["eclat_mondes_dissolus", "vol_de_lame"],
+    "wigner_eye": ["eclat_mondes_dissolus", "duel_collapse"],
+    "schrodinger_grimoire": ["eclat_mondes_dissolus", "duel_collapse"],
+    "reality_anchor": ["eclat_mondes_dissolus", "garde_du_nexus"],
+    "infinity_codex": ["eclat_mondes_dissolus", "fracture_binaire"],
+    "causality_flame": ["eclat_mondes_dissolus"],
+    "dark_ink": ["danse_illusoire"],
+    "collapse_orb": ["souffle_du_dragon"]
+  },
+  
+  "creature_index": {
+    "quantum_phoenix": ["eclat_mondes_dissolus"],
+    "quantum_knight": ["eclat_mondes_dissolus"],
+    "quantum_lich": ["eclat_mondes_dissolus"],
+    "probability_spider": ["eclat_mondes_dissolus"],
+    "dragon_rouge": ["vol_de_lame"],
+    "dragon_rouge_boss": ["souffle_du_dragon"],
+    "phantom_warriors": ["duel_collapse", "garde_du_nexus", "danse_illusoire"],
+    "temporal_elemental": ["duel_collapse", "fracture_binaire"],
+    "void_fragments": ["fracture_binaire"],
+    "shadow_minions": ["danse_illusoire"],
+    "phantom_guards": ["vol_de_lame"],
+    "phantom_elite": ["garde_du_nexus"],
+    "phantom_champion": ["garde_du_nexus"]
+  }
+} 

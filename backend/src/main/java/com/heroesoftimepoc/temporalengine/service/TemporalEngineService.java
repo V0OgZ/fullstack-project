@@ -39,18 +39,10 @@ public class TemporalEngineService {
     private TemporalScriptParser temporalParser;
     
     @Autowired
-    private AntlrTemporalScriptParser antlrParser;
-    
-    @Autowired
     private QuantumInterferenceService quantumInterferenceService;
     
     @Autowired
     private QuantumMigrationService quantumMigrationService;
-    
-    // Configuration pour choisir le parser
-    private final boolean useAntlrParser = Boolean.parseBoolean(
-        System.getProperty("heroes.parser.use.antlr", "false")
-    );
     
     private final Random random = new Random();
     
@@ -69,10 +61,8 @@ public class TemporalEngineService {
         Map<String, Object> result = new HashMap<>();
         
         try {
-            // Choisir le parser selon la configuration
-            boolean isTemporalScript = useAntlrParser ? 
-                antlrParser.isTemporalScript(scriptLine) : 
-                temporalParser.isTemporalScript(scriptLine);
+            // Utiliser uniquement le parser REGEX
+            boolean isTemporalScript = temporalParser.isTemporalScript(scriptLine);
                 
             if (isTemporalScript) {
                 result = executeTemporalScript(game, scriptLine);
@@ -104,33 +94,21 @@ public class TemporalEngineService {
         Map<String, Object> result = new HashMap<>();
         
         // Parse collapse command
-        String collapseTarget = useAntlrParser ? 
-            antlrParser.parseCollapseCommand(scriptLine) : 
-            temporalParser.parseCollapseCommand(scriptLine);
+        String collapseTarget = temporalParser.parseCollapseCommand(scriptLine);
         if (collapseTarget != null) {
             result = executeCollapse(game, collapseTarget);
             return result;
         }
         
         // Parse observation trigger
-        if (useAntlrParser) {
-            AntlrTemporalScriptParser.ObservationTrigger observationTrigger = antlrParser.parseObservationTrigger(scriptLine);
-            if (observationTrigger != null) {
-                result = setupObservationTrigger(game, observationTrigger.getTargetPsi(), observationTrigger.getCondition());
-                return result;
-            }
-        } else {
-            TemporalScriptParser.ObservationTrigger observationTrigger = temporalParser.parseObservationTrigger(scriptLine);
-            if (observationTrigger != null) {
-                result = setupObservationTrigger(game, observationTrigger.getTargetPsi(), observationTrigger.getCondition());
-                return result;
-            }
+        TemporalScriptParser.ObservationTrigger observationTrigger = temporalParser.parseObservationTrigger(scriptLine);
+        if (observationTrigger != null) {
+            result = setupObservationTrigger(game, observationTrigger.getTargetPsi(), observationTrigger.getCondition());
+            return result;
         }
         
         // Parse ψ state
-        PsiState psiState = useAntlrParser ? 
-            antlrParser.parseTemporalScript(scriptLine) : 
-            temporalParser.parseTemporalScript(scriptLine);
+        PsiState psiState = temporalParser.parseTemporalScript(scriptLine);
         if (psiState != null) {
             result = createPsiState(game, psiState);
             return result;
@@ -148,15 +126,7 @@ public class TemporalEngineService {
         Map<String, Object> result = new HashMap<>();
         
         // Parse basic command
-        ScriptCommand command = null;
-        if (useAntlrParser) {
-            AntlrTemporalScriptParser.ScriptCommand antlrCommand = antlrParser.parseBasicScript(scriptLine);
-            if (antlrCommand != null) {
-                command = new ScriptCommand(antlrCommand.getType(), antlrCommand.getParameters());
-            }
-        } else {
-            command = temporalParser.parseBasicScript(scriptLine);
-        }
+        ScriptCommand command = temporalParser.parseBasicScript(scriptLine);
         
         if (command == null) {
             result.put("error", "Invalid script command");
