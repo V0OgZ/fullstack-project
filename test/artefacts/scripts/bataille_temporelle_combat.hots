@@ -1,0 +1,62 @@
+# ===============================================
+# BATAILLE TEMPORELLE - COMBAT
+# Script de combat avec mécaniques temporelles
+# ===============================================
+
+# Phase 1: Mouvement avec superposition
+ψ003: ⊙(Δt+1 @6,6 ⟶ MOV(Arthur, @6,6))
+ψ004: ⊙(Δt+1 @6,4 ⟶ MOV(Arthur, @6,4))
+ψ005: ⊙(Δt+1 @7,5 ⟶ MOV(Arthur, @7,5))
+
+# Phase 2: Observation et collapse
+⟨ψ003 ∧ ψ004 ∧ ψ005 | OBSERVE(Morgana) ⟩ → †ψ003
+
+# Phase 3: Utilisation d'artefact temporel
+USE(ARTIFACT, temporal_sword, HERO:Arthur)
+ψ006: ⊙(Δt+1 @9,9 ⟶ BATTLE(Arthur, DragonRouge))
+
+# Phase 4: Branching temporel
+BRANCH(TimeLine_A): ψ007: ⊙(Δt+2 @10,8 ⟶ CAST(Arthur, quantum_leap))
+BRANCH(TimeLine_B): ψ008: ⊙(Δt+2 @10,12 ⟶ CAST(Arthur, time_anchor))
+
+# Phase 5: Contre-attaque de Morgana
+ψ009: ⊙(Δt+1 @14,14 ⟶ MOV(Morgana, @14,14))
+USE(ARTIFACT, chrono_staff, HERO:Morgana)
+ψ010: ⊙(Δt+2 @11,11 ⟶ CAST(Morgana, temporal_shield))
+
+# Phase 6: Conflit temporel
+ψ011: ⊙(Δt+3 @10,10 ⟶ COLLECT(Arthur, LameAvantMonde))
+ψ012: ⊙(Δt+3 @10,10 ⟶ COLLECT(Morgana, LameAvantMonde))
+
+# Phase 7: Résolution du conflit
+⟨ψ011 ∧ ψ012 | QUANTUM_CONFLICT(@10,10) ⟩ → RESOLVE(probability_wave)
+
+# Phase 8: Bataille fantôme
+ψ013: ⊙(Δt+1 @8,12 ⟶ BATTLE(Arthur, PhantomWarriors))
+†ψ013  # Collapse immédiat pour battle fantôme
+
+# Phase 9: Effet de l'Horloge Inversée
+USE(ARTIFACT, HorlogeInversee, HERO:Morgana)
+REWIND(2)  # Retour 2 tours en arrière
+
+# Phase 10: Nouvelle timeline après rewind
+ψ014: ⊙(Δt+1 @16,16 ⟶ MOV(Morgana, @16,16))
+ψ015: ⊙(Δt+2 @12,6 ⟶ COLLECT(Morgana, OrbeProbabilite))
+
+# Phase 11: Manipulation de probabilités
+USE(ARTIFACT, OrbeProbabilite, HERO:Morgana)
+BOOST(probability, 0.25)
+ψ016: ⊙(Δt+1 P=0.85 @11,10 ⟶ BATTLE(Morgana, DragonRouge))
+
+# Phase 12: Observation multiple
+⟨ψ014 | OBSERVE(Arthur) ⟩ → †ψ014
+⟨ψ015 | OBSERVE(DragonRouge) ⟩ → †ψ015
+⟨ψ016 | OBSERVE(PhantomWarriors) ⟩ → †ψ016
+
+# Phase 13: Logging des résultats
+LOG("Combat Phase - Mécaniques temporelles testées")
+LOG("Superpositions créées: 7 états ψ")
+LOG("Collapse déclenchés: 6 observations")
+LOG("Artefacts utilisés: 3 objets temporels")
+LOG("Conflits temporels: 1 résolution quantique")
+LOG("Rewind effectué: 2 tours") 
