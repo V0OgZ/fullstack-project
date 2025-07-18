@@ -13,7 +13,7 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.11.0:compile (default-compile) @ temporal-engine ---
 [INFO] Changes detected - recompiling the module! :source
-[INFO] Compiling 27 source files with javac [debug release 17] to target/classes
+[INFO] Compiling 28 source files with javac [debug release 17] to target/classes
 [INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/AntlrTemporalScriptParser.java: /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/AntlrTemporalScriptParser.java uses or overrides a deprecated API.
 [INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/AntlrTemporalScriptParser.java: Recompile with -Xlint:deprecation for details.
 [INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalEngineService.java: Some input files use unchecked or unsafe operations.
@@ -21,6 +21,6 @@
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  1.915 s
-[INFO] Finished at: 2025-07-18T16:46:05+02:00
+[INFO] Total time:  1.927 s
+[INFO] Finished at: 2025-07-18T17:13:29+02:00
 [INFO] ------------------------------------------------------------------------
