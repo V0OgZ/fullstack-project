@@ -61,6 +61,25 @@ public class Hero {
     @Column(name = "vision_radius")
     private Integer visionRadius = 3; // Rayon de vision par défaut
     
+    // ============================
+    // SYSTÈME UTMD - UNIFIED TEMPORAL MOVEMENT DESIGN
+    // ============================
+    
+    @Column(name = "current_day")
+    private Integer currentDay = 0; // Jour actuel du héros
+    
+    @Column(name = "movement_points_per_day")
+    private Integer movementPointsPerDay = 4; // Points de mouvement par jour
+    
+    @Column(name = "days_traveled")
+    private Integer daysTraveled = 0; // Jours voyagés total
+    
+    @Column(name = "has_observation_ability")
+    private Boolean hasObservationAbility = false; // Capacité d'observation quantique
+    
+    @Column(name = "observation_range")
+    private Integer observationRange = 2; // Portée d'observation
+    
     public enum HeroStatus {
         ACTIVE,
         TEMPORAL_SHIFT,
@@ -197,9 +216,97 @@ public class Hero {
         }
     }
     
+    // ============================
+    // GETTERS/SETTERS UTMD
+    // ============================
+    
+    public Integer getCurrentDay() { return currentDay; }
+    public void setCurrentDay(Integer currentDay) { this.currentDay = currentDay; }
+    
+    public Integer getMovementPointsPerDay() { return movementPointsPerDay; }
+    public void setMovementPointsPerDay(Integer movementPointsPerDay) { this.movementPointsPerDay = movementPointsPerDay; }
+    
+    public Integer getDaysTraveled() { return daysTraveled; }
+    public void setDaysTraveled(Integer daysTraveled) { this.daysTraveled = daysTraveled; }
+    
+    public Boolean getHasObservationAbility() { return hasObservationAbility; }
+    public void setHasObservationAbility(Boolean hasObservationAbility) { this.hasObservationAbility = hasObservationAbility; }
+    
+    public Integer getObservationRange() { return observationRange; }
+    public void setObservationRange(Integer observationRange) { this.observationRange = observationRange; }
+    
+    // ============================
+    // MÉTHODES UTILITAIRES UTMD
+    // ============================
+    
+    /**
+     * Avancer d'un jour dans le système UTMD
+     */
+    public void advanceDay() {
+        currentDay++;
+        daysTraveled++;
+        // Restaurer les points de mouvement pour le nouveau jour
+        this.movementPoints = movementPointsPerDay;
+    }
+    
+    /**
+     * Calculer le nombre de jours nécessaires pour parcourir une distance
+     */
+    public int calculateDaysToReach(int distance) {
+        if (movementPointsPerDay <= 0) return distance; // Fallback
+        return (int) Math.ceil((double) distance / movementPointsPerDay);
+    }
+    
+    /**
+     * Calculer le coût temporel pour un mouvement
+     */
+    public int calculateTemporalCost(int distance) {
+        return calculateDaysToReach(distance);
+    }
+    
+    /**
+     * Vérifier si le héros peut atteindre une position en X jours
+     */
+    public boolean canReachInDays(int distance, int days) {
+        return calculateDaysToReach(distance) <= days;
+    }
+    
+    /**
+     * Obtenir la portée maximale pour un nombre de jours donné
+     */
+    public int getMaxRangeForDays(int days) {
+        return movementPointsPerDay * days;
+    }
+    
+    /**
+     * Activer la capacité d'observation quantique
+     */
+    public void enableObservationAbility(int range) {
+        this.hasObservationAbility = true;
+        this.observationRange = range;
+    }
+    
+    /**
+     * Désactiver la capacité d'observation quantique
+     */
+    public void disableObservationAbility() {
+        this.hasObservationAbility = false;
+        this.observationRange = 0;
+    }
+    
+    /**
+     * Vérifier si le héros peut observer une position
+     */
+    public boolean canObserve(int targetX, int targetY) {
+        if (!hasObservationAbility) return false;
+        
+        int distance = Math.abs(positionX - targetX) + Math.abs(positionY - targetY);
+        return distance <= observationRange;
+    }
+
     @Override
     public String toString() {
-        return String.format("Hero{name='%s', position=(%d,%d), timeline='%s', status=%s}", 
-                           name, positionX, positionY, timelineBranch, status);
+        return String.format("Hero{name='%s', position=(%d,%d), timeline='%s', status=%s, day=%d}", 
+                           name, positionX, positionY, timelineBranch, status, currentDay);
     }
 }

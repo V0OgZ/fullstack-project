@@ -144,7 +144,7 @@ public class PerformanceMetricsService {
     }
     
     /**
-     * Reset des métriques
+     * Réinitialiser les métriques
      */
     public void resetMetrics() {
         counters.clear();
@@ -152,6 +152,128 @@ public class PerformanceMetricsService {
         operationTimes.clear();
     }
     
+    // ============================
+    // MÉTHODES AJOUTÉES POUR METRICCONTROLLER
+    // ============================
+    
+    /**
+     * Obtenir la valeur d'un compteur
+     */
+    public long getCounter(String counterName) {
+        AtomicLong counter = counters.get(counterName);
+        return counter != null ? counter.get() : 0L;
+    }
+    
+    /**
+     * Obtenir les statistiques d'une opération
+     */
+    public Map<String, Object> getOperationStats(String operation) {
+        Map<String, Object> stats = new HashMap<>();
+        
+        // Temps total
+        AtomicLong totalTime = timers.get(operation);
+        long totalTimeNs = totalTime != null ? totalTime.get() : 0L;
+        
+        // Nombre d'appels
+        AtomicLong count = counters.get(operation + "_count");
+        long callCount = count != null ? count.get() : 0L;
+        
+        // Calculs
+        double totalTimeMs = totalTimeNs / 1_000_000.0;
+        double averageTimeMs = callCount > 0 ? totalTimeMs / callCount : 0.0;
+        
+        stats.put("totalTimeMs", totalTimeMs);
+        stats.put("averageTimeMs", averageTimeMs);
+        stats.put("count", callCount);
+        
+        // Temps récents
+        List<Long> times = operationTimes.get(operation);
+        if (times != null && !times.isEmpty()) {
+            stats.put("lastExecutionMs", times.get(times.size() - 1) / 1_000_000.0);
+            
+            // Calculer les percentiles
+            List<Long> sortedTimes = new ArrayList<>(times);
+            Collections.sort(sortedTimes);
+            
+            int size = sortedTimes.size();
+            if (size > 0) {
+                stats.put("minTimeMs", sortedTimes.get(0) / 1_000_000.0);
+                stats.put("maxTimeMs", sortedTimes.get(size - 1) / 1_000_000.0);
+                stats.put("medianTimeMs", sortedTimes.get(size / 2) / 1_000_000.0);
+            }
+        }
+        
+        return stats;
+    }
+    
+    /**
+     * Réinitialiser les compteurs
+     */
+    public void resetCounters() {
+        counters.clear();
+    }
+    
+    /**
+     * Réinitialiser les timers
+     */
+    public void resetTimers() {
+        timers.clear();
+        operationTimes.clear();
+    }
+    
+    /**
+     * Obtenir tous les compteurs
+     */
+    public Map<String, Long> getAllCounters() {
+        Map<String, Long> result = new HashMap<>();
+        for (Map.Entry<String, AtomicLong> entry : counters.entrySet()) {
+            result.put(entry.getKey(), entry.getValue().get());
+        }
+        return result;
+    }
+    
+    /**
+     * Obtenir tous les timers
+     */
+    public Map<String, Long> getAllTimers() {
+        Map<String, Long> result = new HashMap<>();
+        for (Map.Entry<String, AtomicLong> entry : timers.entrySet()) {
+            result.put(entry.getKey(), entry.getValue().get());
+        }
+        return result;
+    }
+    
+    /**
+     * Vérifier si un compteur existe
+     */
+    public boolean hasCounter(String counterName) {
+        return counters.containsKey(counterName);
+    }
+    
+    /**
+     * Vérifier si un timer existe
+     */
+    public boolean hasTimer(String timerName) {
+        return timers.containsKey(timerName);
+    }
+    
+    /**
+     * Obtenir le nombre d'opérations suivies
+     */
+    public int getTrackedOperationCount() {
+        return operationTimes.size();
+    }
+    
+    /**
+     * Obtenir le nombre total d'appels
+     */
+    public long getTotalCallCount() {
+        return counters.values().stream()
+            .filter(counter -> counter != null)
+            .mapToLong(AtomicLong::get)
+            .sum();
+    }
+
     /**
      * Obtenir un résumé des performances
      */

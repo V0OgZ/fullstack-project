@@ -62,9 +62,30 @@ public interface GameTileRepository extends JpaRepository<GameTile, Long> {
     @Query("SELECT t FROM GameTile t WHERE t.temporalZoneType = :zoneType")
     List<GameTile> findByTemporalZoneType(@Param("zoneType") String zoneType);
     
+    @Query("SELECT t FROM GameTile t WHERE t.game.id = :gameId AND t.temporalZoneType = :zoneType")
+    List<GameTile> findByGameIdAndTemporalZoneType(@Param("gameId") Long gameId, @Param("zoneType") String zoneType);
+    
     @Query("SELECT t FROM GameTile t WHERE SIZE(t.occupants) > 0")
     List<GameTile> findOccupiedTiles();
     
     @Query("SELECT t FROM GameTile t WHERE t.game.id = :gameId AND SIZE(t.occupants) > 0")
     List<GameTile> findOccupiedTilesByGameId(@Param("gameId") Long gameId);
+    
+    // ============================
+    // MÉTHODES AJOUTÉES POUR ARTIFACTSERVICE
+    // ============================
+    
+    /**
+     * Trouver les tuiles dans une zone rectangulaire
+     */
+    @Query("SELECT t FROM GameTile t WHERE t.x BETWEEN :minX AND :maxX AND t.y BETWEEN :minY AND :maxY")
+    List<GameTile> findInArea(@Param("minX") Integer minX, @Param("maxX") Integer maxX, 
+                             @Param("minY") Integer minY, @Param("maxY") Integer maxY);
+    
+    /**
+     * Trouver les tuiles dans une zone rectangulaire pour un jeu spécifique
+     */
+    @Query("SELECT t FROM GameTile t WHERE t.game.id = :gameId AND t.x BETWEEN :minX AND :maxX AND t.y BETWEEN :minY AND :maxY")
+    List<GameTile> findInAreaByGameId(@Param("gameId") Long gameId, @Param("minX") Integer minX, @Param("maxX") Integer maxX, 
+                                     @Param("minY") Integer minY, @Param("maxY") Integer maxY);
 }

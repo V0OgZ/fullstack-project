@@ -48,5 +48,50 @@ public interface PsiStateRepository extends JpaRepository<PsiState, Long> {
     List<PsiState> findActiveByGameIdAndOwnerHero(@Param("gameId") Long gameId, @Param("ownerHero") String ownerHero);
     
     @Query("SELECT p FROM PsiState p WHERE p.collapseTrigger IS NOT NULL")
-    List<PsiState> findWithCollapseTriggers();
+    List<PsiState> findWithCollapseTrigger();
+    
+    // ============================
+    // MÉTHODES AJOUTÉES POUR METRICCONTROLLER
+    // ============================
+    
+    /**
+     * Compter les PsiState par statut (String)
+     */
+    @Query("SELECT COUNT(p) FROM PsiState p WHERE p.status = :status")
+    long countByStatus(@Param("status") String status);
+    
+    /**
+     * Compter les PsiState par statut (Enum)
+     */
+    long countByStatus(PsiState.PsiStatus status);
+    
+    /**
+     * Compter les PsiState actifs
+     */
+    @Query("SELECT COUNT(p) FROM PsiState p WHERE p.status = 'ACTIVE'")
+    long countActive();
+    
+    /**
+     * Compter les PsiState effondrés
+     */
+    @Query("SELECT COUNT(p) FROM PsiState p WHERE p.status = 'COLLAPSED'")
+    long countCollapsed();
+    
+    /**
+     * Compter les PsiState déclenchés
+     */
+    @Query("SELECT COUNT(p) FROM PsiState p WHERE p.status = 'TRIGGERED'")
+    long countTriggered();
+    
+    /**
+     * Compter les PsiState par jeu
+     */
+    @Query("SELECT COUNT(p) FROM PsiState p WHERE p.game.id = :gameId")
+    long countByGameId(@Param("gameId") Long gameId);
+    
+    /**
+     * Compter les PsiState actifs par jeu
+     */
+    @Query("SELECT COUNT(p) FROM PsiState p WHERE p.game.id = :gameId AND p.status = 'ACTIVE'")
+    long countActiveByGameId(@Param("gameId") Long gameId);
 }
