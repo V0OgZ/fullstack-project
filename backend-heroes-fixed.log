@@ -6696,3 +6696,16 @@ Hibernate: select i1_0.hero_id,i1_0.item from hero_inventory i1_0 where i1_0.her
 Hibernate: select i1_0.hero_id,i1_0.item from hero_inventory i1_0 where i1_0.hero_id=?
 Hibernate: select i1_0.hero_id,i1_0.item from hero_inventory i1_0 where i1_0.hero_id=?
 Hibernate: select i1_0.hero_id,i1_0.item from hero_inventory i1_0 where i1_0.hero_id=?
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  06:45 min
+[INFO] Finished at: 2025-07-19T00:27:33+02:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:3.2.0:run (default-cli) on project temporal-engine: Process terminated with exit code: 137 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

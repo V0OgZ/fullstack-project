@@ -11,13 +11,21 @@
 [INFO] Copying 4 resources from src/main/resources to target/classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.11.0:compile (default-compile) @ temporal-engine ---
-[INFO] Nothing to compile - all classes are up to date
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 56 source files with javac [debug release 17] to target/classes
+[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/AntlrTemporalScriptParser.java: /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/AntlrTemporalScriptParser.java uses or overrides a deprecated API.
+[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/AntlrTemporalScriptParser.java: Recompile with -Xlint:deprecation for details.
+[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalEngineService.java: Some input files use unchecked or unsafe operations.
+[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalEngineService.java: Recompile with -Xlint:unchecked for details.
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ temporal-engine ---
 [INFO] Copying 1 resource from src/test/resources to target/test-classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.11.0:testCompile (default-testCompile) @ temporal-engine ---
-[INFO] Nothing to compile - all classes are up to date
+[INFO] Changes detected - recompiling the module! :dependency
+[INFO] Compiling 11 source files with javac [debug release 17] to target/test-classes
+[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java: Some input files use unchecked or unsafe operations.
+[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java: Recompile with -Xlint:unchecked for details.
 [INFO] 
 [INFO] <<< spring-boot-maven-plugin:3.2.0:run (default-cli) < test-compile @ temporal-engine <<<
 [INFO] 
@@ -33,29 +41,29 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.0)
 
-2025-07-18T23:41:48.415+02:00  INFO 67050 --- [  restartedMain] c.h.t.TemporalEngineApplication          : Starting TemporalEngineApplication using Java 17.0.15 with PID 67050 (/Users/admin/HOT/Heroes-of-Time/backend/target/classes started by admin in /Users/admin/HOT/Heroes-of-Time/backend)
-2025-07-18T23:41:48.417+02:00  INFO 67050 --- [  restartedMain] c.h.t.TemporalEngineApplication          : No active profile set, falling back to 1 default profile: "default"
-2025-07-18T23:41:48.442+02:00  INFO 67050 --- [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2025-07-18T23:41:48.442+02:00  INFO 67050 --- [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2025-07-18T23:41:48.713+02:00  INFO 67050 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-07-18T23:41:48.746+02:00  INFO 67050 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 29 ms. Found 5 JPA repository interfaces.
-2025-07-18T23:41:48.996+02:00  INFO 67050 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-07-18T23:41:49.000+02:00  INFO 67050 --- [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-07-18T23:41:49.000+02:00  INFO 67050 --- [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
-2025-07-18T23:41:49.018+02:00  INFO 67050 --- [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-07-18T23:41:49.018+02:00  INFO 67050 --- [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 575 ms
-2025-07-18T23:41:49.024+02:00  INFO 67050 --- [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Starting...
-2025-07-18T23:41:49.104+02:00  INFO 67050 --- [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HeroesOfTimePool - Added connection conn0: url=jdbc:h2:mem:heroesdb user=SA
-2025-07-18T23:41:49.122+02:00  INFO 67050 --- [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Start completed.
-2025-07-18T23:41:49.135+02:00  INFO 67050 --- [  restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:heroesdb'
-2025-07-18T23:41:49.191+02:00  INFO 67050 --- [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-07-18T23:41:49.214+02:00  INFO 67050 --- [  restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
-2025-07-18T23:41:49.226+02:00  INFO 67050 --- [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-07-18T23:41:49.323+02:00  INFO 67050 --- [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-07-18T23:41:49.341+02:00  WARN 67050 --- [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-07-18T23:41:49.778+02:00  INFO 67050 --- [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-19T00:28:35.467+02:00  INFO 87730 --- [  restartedMain] c.h.t.TemporalEngineApplication          : Starting TemporalEngineApplication using Java 17.0.15 with PID 87730 (/Users/admin/HOT/Heroes-of-Time/backend/target/classes started by admin in /Users/admin/HOT/Heroes-of-Time/backend)
+2025-07-19T00:28:35.469+02:00  INFO 87730 --- [  restartedMain] c.h.t.TemporalEngineApplication          : No active profile set, falling back to 1 default profile: "default"
+2025-07-19T00:28:35.490+02:00  INFO 87730 --- [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-07-19T00:28:35.490+02:00  INFO 87730 --- [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-07-19T00:28:35.766+02:00  INFO 87730 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-19T00:28:35.800+02:00  INFO 87730 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 30 ms. Found 5 JPA repository interfaces.
+2025-07-19T00:28:36.054+02:00  INFO 87730 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-07-19T00:28:36.058+02:00  INFO 87730 --- [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-07-19T00:28:36.058+02:00  INFO 87730 --- [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-07-19T00:28:36.080+02:00  INFO 87730 --- [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-07-19T00:28:36.081+02:00  INFO 87730 --- [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 590 ms
+2025-07-19T00:28:36.086+02:00  INFO 87730 --- [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Starting...
+2025-07-19T00:28:36.170+02:00  INFO 87730 --- [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HeroesOfTimePool - Added connection conn0: url=jdbc:h2:mem:heroesdb user=SA
+2025-07-19T00:28:36.194+02:00  INFO 87730 --- [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Start completed.
+2025-07-19T00:28:36.217+02:00  INFO 87730 --- [  restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:heroesdb'
+2025-07-19T00:28:36.276+02:00  INFO 87730 --- [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-19T00:28:36.299+02:00  INFO 87730 --- [  restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2025-07-19T00:28:36.313+02:00  INFO 87730 --- [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-07-19T00:28:36.410+02:00  INFO 87730 --- [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-19T00:28:36.429+02:00  WARN 87730 --- [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-19T00:28:36.875+02:00  INFO 87730 --- [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 Hibernate: drop table if exists game_players cascade 
-2025-07-18T23:41:49.784+02:00  INFO 67050 --- [  restartedMain] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@49428c36] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-07-19T00:28:36.882+02:00  INFO 87730 --- [  restartedMain] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@73d61edf] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
 Hibernate: drop table if exists game_tiles cascade 
 Hibernate: drop table if exists games cascade 
 Hibernate: drop table if exists hero_inventory cascade 
@@ -64,7 +72,7 @@ Hibernate: drop table if exists psi_states cascade
 Hibernate: drop table if exists temporal_artifacts cascade 
 Hibernate: drop table if exists tile_occupants cascade 
 Hibernate: create table game_players (game_id bigint not null, player_id varchar(255))
-2025-07-18T23:41:49.788+02:00  INFO 67050 --- [  restartedMain] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7cbbca69] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-07-19T00:28:36.885+02:00  INFO 87730 --- [  restartedMain] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@69a860a8] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
 Hibernate: create table game_tiles (defense_bonus integer, has_psi_states boolean, is_locked boolean, is_temporal_zone boolean, lock_duration integer, movement_cost integer, temporal_energy_bonus integer, x integer not null, y integer not null, game_id bigint, id bigint generated by default as identity, building_owner varchar(255), building_type varchar(255), temporal_zone_type varchar(255), terrain varchar(255), primary key (id))
 Hibernate: create table games (current_turn integer, map_height integer, map_width integer, max_players integer, created_at timestamp(6), ended_at timestamp(6), id bigint generated by default as identity, started_at timestamp(6), current_player varchar(255), current_timeline varchar(255), game_name varchar(255) not null, status varchar(255) check (status in ('WAITING','ACTIVE','PAUSED','FINISHED','CANCELLED')), winner varchar(255), primary key (id))
 Hibernate: create table hero_inventory (hero_id bigint not null, item varchar(255))
@@ -79,24 +87,16 @@ Hibernate: alter table if exists heroes add constraint FKb88jgdc3dfmmhbnrpl6u5sj
 Hibernate: alter table if exists psi_states add constraint FK9kbp67wo94i0jk9w4v3ja4meq foreign key (game_id) references games
 Hibernate: alter table if exists temporal_artifacts add constraint FK4gwvr3vnipo301cwl6hnvtyn1 foreign key (game_id) references games
 Hibernate: alter table if exists tile_occupants add constraint FKia56skupqk3qxypotqpovr3gb foreign key (tile_id) references game_tiles
-2025-07-18T23:41:49.808+02:00  INFO 67050 --- [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-07-18T23:41:49.981+02:00  INFO 67050 --- [  restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-07-18T23:41:50.360+02:00  WARN 67050 --- [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-07-18T23:41:50.539+02:00  INFO 67050 --- [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2025-07-18T23:41:50.557+02:00  INFO 67050 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
-2025-07-18T23:41:50.562+02:00  INFO 67050 --- [  restartedMain] c.h.t.TemporalEngineApplication          : Started TemporalEngineApplication in 2.282 seconds (process running for 2.447)
-2025-07-18T23:42:07.043+02:00  INFO 67050 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-07-18T23:42:07.043+02:00  INFO 67050 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-07-18T23:42:07.044+02:00  INFO 67050 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2025-07-18T23:42:07.233+02:00  INFO 67050 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-Hibernate: drop table if exists game_players cascade 
-2025-07-18T23:42:07.234+02:00  INFO 67050 --- [ionShutdownHook] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@216c85cc] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-Hibernate: drop table if exists game_tiles cascade 
-Hibernate: drop table if exists games cascade 
-Hibernate: drop table if exists hero_inventory cascade 
-Hibernate: drop table if exists heroes cascade 
-Hibernate: drop table if exists psi_states cascade 
-Hibernate: drop table if exists temporal_artifacts cascade 
-Hibernate: drop table if exists tile_occupants cascade 
-2025-07-18T23:42:07.238+02:00  INFO 67050 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Shutdown initiated...
-2025-07-18T23:42:07.240+02:00  INFO 67050 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Shutdown completed.
+2025-07-19T00:28:36.905+02:00  INFO 87730 --- [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-19T00:28:37.085+02:00  INFO 87730 --- [  restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-07-19T00:28:37.479+02:00  WARN 87730 --- [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-19T00:28:37.654+02:00  INFO 87730 --- [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-07-19T00:28:37.672+02:00  INFO 87730 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2025-07-19T00:28:37.677+02:00  INFO 87730 --- [  restartedMain] c.h.t.TemporalEngineApplication          : Started TemporalEngineApplication in 2.345 seconds (process running for 2.508)
+2025-07-19T00:31:28.405+02:00  INFO 87730 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-07-19T00:31:28.405+02:00  INFO 87730 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-07-19T00:31:28.410+02:00  INFO 87730 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+Hibernate: select count(*) from games g1_0
+Hibernate: select count(*) from games g1_0
+Hibernate: select count(*) from psi_states ps1_0
+Hibernate: select count(*) from heroes h1_0
