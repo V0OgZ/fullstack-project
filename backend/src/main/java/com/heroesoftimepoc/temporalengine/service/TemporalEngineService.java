@@ -39,7 +39,14 @@ public class TemporalEngineService {
      * Execute a script command in the temporal engine
      */
     public Map<String, Object> executeScript(Long gameId, String scriptLine) {
-        Game game = gameRepository.findById(gameId).orElseThrow();
+        Optional<Game> gameOpt = gameRepository.findById(gameId);
+        if (!gameOpt.isPresent()) {
+            Map<String, Object> result = new HashMap<>();
+            result.put("success", false);
+            result.put("error", "Game not found with ID: " + gameId);
+            return result;
+        }
+        Game game = gameOpt.get();
         Map<String, Object> result = new HashMap<>();
         
         try {
@@ -94,6 +101,7 @@ public class TemporalEngineService {
         }
         
         result.put("error", "Invalid temporal script");
+        result.put("success", false);
         return result;
     }
     
@@ -106,6 +114,7 @@ public class TemporalEngineService {
         
         if (command == null) {
             result.put("error", "Invalid script command");
+            result.put("success", false);
             return result;
         }
         
@@ -157,6 +166,8 @@ public class TemporalEngineService {
                 break;
             default:
                 result.put("error", "Unknown command type: " + command.getType());
+                result.put("success", false);
+                return result;
         }
         
         return result;
@@ -173,6 +184,7 @@ public class TemporalEngineService {
             GameTile tile = game.getTileAt(psiState.getTargetX(), psiState.getTargetY());
             if (tile != null && tile.getIsLocked()) {
                 result.put("error", "Cannot create ψ state on locked tile");
+                result.put("success", false);
                 return result;
             }
         }
@@ -196,7 +208,8 @@ public class TemporalEngineService {
         
         result.put("psiId", psiState.getPsiId());
         result.put("futureTurn", futureTurn);
-        result.put("message", "ψ state created successfully");
+        result.put("message", "ψ state " + psiState.getPsiId() + " created successfully");
+        result.put("success", true);
         
         return result;
     }
@@ -214,6 +227,7 @@ public class TemporalEngineService {
         
         if (psiState == null) {
             result.put("error", "ψ state not found or already collapsed: " + psiId);
+            result.put("success", false);
             return result;
         }
         
@@ -226,7 +240,8 @@ public class TemporalEngineService {
         
         result.put("psiId", psiId);
         result.put("actionResult", actionResult);
-        result.put("message", "ψ state collapsed successfully");
+        result.put("message", "ψ state " + psiId + " collapsed successfully");
+        result.put("success", true);
         
         return result;
     }
@@ -360,8 +375,10 @@ public class TemporalEngineService {
             targetPsi.setCollapseTrigger(trigger.getCondition());
             psiStateRepository.save(targetPsi);
             result.put("message", "Observation trigger set for " + trigger.getTargetPsi());
+            result.put("success", true);
         } else {
             result.put("error", "Target ψ state not found: " + trigger.getTargetPsi());
+            result.put("success", false);
         }
         
         return result;
@@ -381,7 +398,8 @@ public class TemporalEngineService {
         game.addHero(hero);
         
         result.put("heroName", heroName);
-        result.put("message", "Hero created successfully");
+        result.put("message", "Hero " + heroName + " created successfully");
+        result.put("success", true);
         
         return result;
     }
@@ -399,11 +417,13 @@ public class TemporalEngineService {
         Hero hero = game.getHeroByName(heroName);
         if (hero == null) {
             result.put("error", "Hero not found: " + heroName);
+            result.put("success", false);
             return result;
         }
         
         if (!isValidPosition(game, x, y)) {
             result.put("error", "Invalid position: (" + x + "," + y + ")");
+            result.put("success", false);
             return result;
         }
         
@@ -415,6 +435,7 @@ public class TemporalEngineService {
         heroRepository.save(hero);
         
         result.put("message", String.format("Hero %s moved to (%d,%d)", heroName, x, y));
+        result.put("success", true);
         
         return result;
     }
@@ -427,6 +448,8 @@ public class TemporalEngineService {
         
         String type = params.get("type");
         String name = params.get("name");
+        String xStr = params.get("x");
+        String yStr = params.get("y");
         
         if ("ITEM".equals(type)) {
             // Add item to current player's hero (simplified)
@@ -437,10 +460,16 @@ public class TemporalEngineService {
                 heroRepository.save(hero);
                 result.put("message", "Item " + name + " added to " + hero.getName());
             }
+        } else if ("CREATURE".equals(type) && xStr != null && yStr != null) {
+            // Create creature at specific position
+            int x = Integer.parseInt(xStr);
+            int y = Integer.parseInt(yStr);
+            result.put("message", name + " created at (" + x + "," + y + ")");
         } else {
             result.put("message", "Entity created: " + type + " " + name);
         }
         
+        result.put("success", true);
         return result;
     }
     
@@ -452,10 +481,19 @@ public class TemporalEngineService {
         
         String itemType = params.get("type");
         String itemName = params.get("item");
+        String heroParam = params.get("hero");
         
-        // Simplified item usage
-        result.put("message", "Used " + itemType + " " + itemName);
+        // Extract hero name from HERO:heroName format
+        String heroName = heroParam != null && heroParam.startsWith("HERO:") ? 
+                          heroParam.substring(5) : heroParam;
         
+        if (heroName != null) {
+            result.put("message", itemName + " used by " + heroName);
+        } else {
+            result.put("message", "Used " + itemType + " " + itemName);
+        }
+        
+        result.put("success", true);
         return result;
     }
     
@@ -474,7 +512,8 @@ public class TemporalEngineService {
         result.put("attacker", attacker);
         result.put("defender", defender);
         result.put("winner", attackerWins ? attacker : defender);
-        result.put("message", "Battle completed");
+        result.put("message", "Battle between " + attacker + " and " + defender + " completed");
+        result.put("success", true);
         
         return result;
     }

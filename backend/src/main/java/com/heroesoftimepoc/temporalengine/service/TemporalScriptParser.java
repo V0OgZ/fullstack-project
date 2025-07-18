@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class TemporalScriptParser {
     
     // Regex patterns for parsing temporal script language
-    private static final Pattern PSI_PATTERN = Pattern.compile("ψ(\\d+):\\s*⊙\\((.*?)\\)");
+    private static final Pattern PSI_PATTERN = Pattern.compile("ψ(\\d+):\\s*⊙\\((.*)\\)");
     private static final Pattern DELTA_T_PATTERN = Pattern.compile("Δt([+-]\\d+)");
     private static final Pattern POSITION_PATTERN = Pattern.compile("@(\\d+),(\\d+)");
     private static final Pattern ACTION_PATTERN = Pattern.compile("(\\w+)\\(([^)]+)\\)");
@@ -104,10 +104,17 @@ public class TemporalScriptParser {
             
             // Extract owner hero based on action type
             if ("MOV".equals(actionType)) {
-                // For MOV(Arthur, @11,11), extract Arthur as first parameter
+                // For MOV(HERO, Arthur, @11,11) or MOV(Arthur, @11,11), extract hero name
                 String[] params = actionParams.split(",");
                 if (params.length > 0) {
-                    psiState.setOwnerHero(params[0].trim());
+                    String firstParam = params[0].trim();
+                    if ("HERO".equals(firstParam) && params.length > 1) {
+                        // Format: MOV(HERO, Arthur, @x,y)
+                        psiState.setOwnerHero(params[1].trim());
+                    } else {
+                        // Format: MOV(Arthur, @x,y)
+                        psiState.setOwnerHero(firstParam);
+                    }
                 }
             } else if (actionParams.contains("HERO")) {
                 // For actions with explicit HERO keyword

@@ -151,7 +151,7 @@ public class Game {
     }
     
     public boolean canStart() {
-        return status == GameStatus.WAITING && players.size() >= 2;
+        return status == GameStatus.WAITING && players.size() >= 1;
     }
     
     public void start() {
