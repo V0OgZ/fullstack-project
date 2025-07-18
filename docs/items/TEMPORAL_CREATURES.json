@@ -1,0 +1,367 @@
+[
+    {
+        "id": "quantum_wisp",
+        "name": "🧚‍♀️ Luciole Quantique",
+        "type": "CREATURE",
+        "tier": 1,
+        "level": 3,
+        "rarity": "COMMON",
+        "icon": "🧚‍♀️",
+        "stats": {
+            "health": 25,
+            "attack": 4,
+            "defense": 2,
+            "speed": 8,
+            "temporal_energy": 50
+        },
+        "quantum_abilities": {
+            "coherence_field": {
+                "name": "✨ Champ de Cohérence",
+                "description": "Stabilise les amplitudes dans un rayon de 1 case",
+                "cost": 10,
+                "range": 1,
+                "duration": 3,
+                "amplitude_modifier": {
+                    "real_part": 0.1,
+                    "imaginary_part": 0.0
+                }
+            },
+            "phase_shift": {
+                "name": "🌀 Changement de Phase",
+                "description": "Modifie la phase des attaques de 0.785 radians",
+                "cost": 15,
+                "phase_shift": 0.785,
+                "duration": 3
+            }
+        },
+        "interference_capabilities": {
+            "constructive_bonus": 0.15,
+            "destructive_resistance": 0.1,
+            "phase_control": "BASIC"
+        },
+        "description": "Une luciole éthérée qui manipule les phases quantiques pour confondre ses ennemis."
+    },
+    {
+        "id": "probability_spider",
+        "name": "🕷️ Araignée des Probabilités",
+        "type": "CREATURE",
+        "tier": 1,
+        "level": 4,
+        "rarity": "COMMON",
+        "icon": "🕷️",
+        "stats": {
+            "health": 35,
+            "attack": 6,
+            "defense": 3,
+            "speed": 6,
+            "temporal_energy": 60
+        },
+        "quantum_abilities": {
+            "probability_web": {
+                "name": "🕸️ Toile Probabiliste",
+                "description": "Modifie les probabilités dans un rayon de 2 cases",
+                "cost": 15,
+                "range": 2,
+                "duration": 5,
+                "probability_modifier": 0.2
+            },
+            "quantum_bite": {
+                "name": "🦷 Morsure Quantique",
+                "description": "Superpose plusieurs états de dégâts",
+                "cost": 20,
+                "amplitudes": [
+                    {"real": 0.8, "imaginary": 0.0},
+                    {"real": 0.0, "imaginary": 0.6}
+                ]
+            }
+        },
+        "interference_capabilities": {
+            "constructive_bonus": 0.1,
+            "destructive_resistance": 0.2,
+            "phase_control": "BASIC"
+        },
+        "description": "Une araignée qui tisse des toiles dans l'espace des probabilités."
+    },
+    {
+        "id": "quantum_knight",
+        "name": "⚔️ Chevalier Quantique",
+        "type": "CREATURE",
+        "tier": 2,
+        "level": 6,
+        "rarity": "RARE",
+        "icon": "⚔️",
+        "stats": {
+            "health": 80,
+            "attack": 12,
+            "defense": 10,
+            "speed": 4,
+            "temporal_energy": 100
+        },
+        "quantum_abilities": {
+            "superposition_charge": {
+                "name": "🗡️ Charge Superposée",
+                "description": "Charge simultanée dans 3 directions",
+                "cost": 25,
+                "amplitudes": [
+                    {"real": 0.707, "imaginary": 0.0},
+                    {"real": 0.0, "imaginary": 0.707}
+                ],
+                "positions": ["FRONT", "LEFT", "RIGHT"]
+            },
+            "quantum_armor": {
+                "name": "🛡️ Armure Quantique",
+                "description": "Défense dans plusieurs états simultanément",
+                "cost": 30,
+                "amplitudes": [
+                    {"real": 0.8, "imaginary": 0.6},
+                    {"real": 0.6, "imaginary": 0.8}
+                ],
+                "defense_multiplier": 1.5
+            }
+        },
+        "interference_capabilities": {
+            "constructive_bonus": 0.25,
+            "destructive_resistance": 0.3,
+            "phase_control": "ADVANCED"
+        },
+        "description": "Un chevalier dont l'armure et les attaques existent dans plusieurs états quantiques."
+    },
+    {
+        "id": "phase_dragon",
+        "name": "🐲 Dragon de Phase",
+        "type": "CREATURE",
+        "tier": 2,
+        "level": 8,
+        "rarity": "RARE",
+        "icon": "🐲",
+        "stats": {
+            "health": 150,
+            "attack": 20,
+            "defense": 15,
+            "speed": 6,
+            "temporal_energy": 200
+        },
+        "quantum_abilities": {
+            "phase_breath": {
+                "name": "🔥 Souffle de Phase",
+                "description": "Alterne entre 3 phases différentes",
+                "cost": 40,
+                "amplitudes": [
+                    {"real": 1.0, "imaginary": 0.0},
+                    {"real": 0.707, "imaginary": 0.707},
+                    {"real": 0.0, "imaginary": 1.0}
+                ],
+                "damage": 30
+            },
+            "interference_wings": {
+                "name": "🦅 Ailes d'Interférence",
+                "description": "Crée des patterns d'interférence constructive",
+                "cost": 35,
+                "range": 3,
+                "interference_type": "CONSTRUCTIVE",
+                "amplification": 1.5
+            }
+        },
+        "interference_capabilities": {
+            "constructive_bonus": 0.4,
+            "destructive_resistance": 0.25,
+            "phase_control": "MASTER"
+        },
+        "description": "Un dragon ancien qui a appris à contrôler les phases quantiques."
+    },
+    {
+        "id": "quantum_lich",
+        "name": "💀 Liche Quantique",
+        "type": "CREATURE",
+        "tier": 3,
+        "level": 12,
+        "rarity": "EPIC",
+        "icon": "💀",
+        "stats": {
+            "health": 200,
+            "attack": 25,
+            "defense": 20,
+            "speed": 5,
+            "temporal_energy": 300
+        },
+        "quantum_abilities": {
+            "death_superposition": {
+                "name": "☠️ Superposition Vie/Mort",
+                "description": "Existe simultanément entre la vie et la mort",
+                "cost": 50,
+                "amplitudes": [
+                    {"real": 0.6, "imaginary": 0.8},
+                    {"real": 0.8, "imaginary": -0.6}
+                ],
+                "revive_chance": 0.5
+            },
+            "quantum_necromancy": {
+                "name": "🧟 Nécromancie Quantique",
+                "description": "Invoque 3 créatures dans états multiples",
+                "cost": 75,
+                "summon_count": 3,
+                "amplitudes": [
+                    {"real": 0.577, "imaginary": 0.577},
+                    {"real": 0.577, "imaginary": 0.577},
+                    {"real": 0.577, "imaginary": 0.577}
+                ]
+            },
+            "interference_nova": {
+                "name": "💥 Nova d'Interférence",
+                "description": "Explosion d'interférences destructives",
+                "cost": 60,
+                "range": 4,
+                "amplitudes": [
+                    {"real": 1.0, "imaginary": 0.0},
+                    {"real": -1.0, "imaginary": 0.0}
+                ],
+                "damage": 50
+            }
+        },
+        "interference_capabilities": {
+            "constructive_bonus": 0.5,
+            "destructive_resistance": 0.6,
+            "phase_control": "GRANDMASTER"
+        },
+        "description": "Une liche qui a transcendé la mort en embrassant la superposition quantique."
+    },
+    {
+        "id": "amplitude_elemental",
+        "name": "⚡ Élémentaire d'Amplitude",
+        "type": "CREATURE",
+        "tier": 3,
+        "level": 10,
+        "rarity": "EPIC",
+        "icon": "⚡",
+        "stats": {
+            "health": 120,
+            "attack": 18,
+            "defense": 12,
+            "speed": 8,
+            "temporal_energy": 250
+        },
+        "quantum_abilities": {
+            "amplitude_shift": {
+                "name": "🔄 Changement d'Amplitude",
+                "description": "Adaptation dynamique aux amplitudes ennemies",
+                "cost": 30,
+                "adaptive_amplitudes": true
+            },
+            "resonance_attack": {
+                "name": "🎵 Attaque Résonante",
+                "description": "Résonne avec les amplitudes ennemies",
+                "cost": 35,
+                "resonance_factor": 2.0
+            },
+            "coherence_shield": {
+                "name": "🛡️ Bouclier de Cohérence",
+                "description": "Maintient la cohérence quantique",
+                "cost": 25,
+                "coherence_bonus": 0.3,
+                "range": 2
+            }
+        },
+        "interference_capabilities": {
+            "constructive_bonus": 0.6,
+            "destructive_resistance": 0.4,
+            "phase_control": "MASTER"
+        },
+        "description": "Un être d'énergie pure qui manipule les amplitudes comme des armes."
+    },
+    {
+        "id": "quantum_phoenix",
+        "name": "🔥 Phénix Quantique",
+        "type": "CREATURE",
+        "tier": 4,
+        "level": 15,
+        "rarity": "LEGENDARY",
+        "icon": "🔥",
+        "stats": {
+            "health": 300,
+            "attack": 35,
+            "defense": 25,
+            "speed": 10,
+            "temporal_energy": 400
+        },
+        "quantum_abilities": {
+            "quantum_rebirth": {
+                "name": "🔄 Renaissance Quantique",
+                "description": "Renaissance dans état quantique supérieur",
+                "cost": 100,
+                "amplitudes": [
+                    {"real": 0.8, "imaginary": 0.6},
+                    {"real": 0.6, "imaginary": 0.8}
+                ],
+                "rebirth_bonus": 1.5
+            },
+            "interference_flames": {
+                "name": "🔥 Flammes d'Interférence",
+                "description": "Flammes créant interférences constructives",
+                "cost": 80,
+                "range": 5,
+                "amplification": 2.0,
+                "damage": 40
+            },
+            "phase_flight": {
+                "name": "🌀 Vol de Phase",
+                "description": "Téléportation à travers les phases",
+                "cost": 50,
+                "range": 8,
+                "phase_shift": 1.57
+            }
+        },
+        "interference_capabilities": {
+            "constructive_bonus": 0.8,
+            "destructive_resistance": 0.7,
+            "phase_control": "TRANSCENDENT"
+        },
+        "description": "Un phénix légendaire qui maîtrise les cycles quantiques de mort et renaissance."
+    },
+    {
+        "id": "probability_archon",
+        "name": "👑 Archonte des Probabilités",
+        "type": "CREATURE",
+        "tier": 4,
+        "level": 18,
+        "rarity": "LEGENDARY",
+        "icon": "👑",
+        "stats": {
+            "health": 400,
+            "attack": 30,
+            "defense": 30,
+            "speed": 7,
+            "temporal_energy": 500
+        },
+        "quantum_abilities": {
+            "probability_control": {
+                "name": "🎲 Contrôle Probabiliste",
+                "description": "Contrôle direct des probabilités quantiques",
+                "cost": 75,
+                "probability_range": [0.0, 2.0]
+            },
+            "certainty_field": {
+                "name": "🎯 Champ de Certitude",
+                "description": "Force des amplitudes spécifiques",
+                "cost": 90,
+                "forced_amplitudes": [
+                    {"real": 1.0, "imaginary": 0.0},
+                    {"real": 0.0, "imaginary": 1.0}
+                ],
+                "range": 6
+            },
+            "quantum_judgment": {
+                "name": "⚖️ Jugement Quantique",
+                "description": "Collapse tous les états quantiques",
+                "cost": 120,
+                "range": 10,
+                "damage": 60
+            }
+        },
+        "interference_capabilities": {
+            "constructive_bonus": 1.0,
+            "destructive_resistance": 0.9,
+            "phase_control": "ABSOLUTE"
+        },
+        "description": "Un être cosmique qui gouverne les lois de la probabilité quantique."
+    }
+] 
