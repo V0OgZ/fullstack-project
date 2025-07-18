@@ -21,17 +21,17 @@ sleep 10
 
 # Start frontend classic
 echo "Starting frontend classic (port 8000)..."
-cd frontend
-npm start > ../frontend-classic.log 2>&1 &
+# Kill any process on port 8000
+lsof -ti:8000 | xargs kill -9 2>/dev/null || true
+(cd frontend && npm start) > frontend-classic.log 2>&1 &
 FRONTEND_PID=$!
-cd ..
 
 # Start frontend temporal
 echo "Starting frontend temporal (port 5173)..."
-cd frontend-temporal
-npm run dev > ../frontend-temporal.log 2>&1 &
+# Kill any process on port 5173
+lsof -ti:5173 | xargs kill -9 2>/dev/null || true
+(cd frontend-temporal && python3 -m http.server 5173) > frontend-temporal.log 2>&1 &
 TEMPORAL_PID=$!
-cd ..
 
 echo ""
 echo "All services started!"
