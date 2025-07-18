@@ -1,741 +1,1120 @@
-# 🔧 Heroes of Time - Technical Documentation
+# 🔧 Moteur de Résolution Temporelle - Heroes of Time
 
-**Deep Dive into Temporal Engine Architecture**
+## 🎯 Vue d'Ensemble
 
----
-
-## 🏗️ System Architecture
-
-### 🎯 High-Level Overview
-
-```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Frontend      │    │   Backend       │    │   Database      │
-│   (Electron)    │◄──►│   (Spring Boot) │◄──►│   (H2/Memory)   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                       │                       │
-         │                       │                       │
-    ┌─────────┐            ┌─────────────┐        ┌─────────────┐
-    │ Script  │            │ Temporal    │        │ Timeline    │
-    │ Console │            │ Engine      │        │ Storage     │
-    └─────────┘            └─────────────┘        └─────────────┘
-```
-
-### 🧠 Core Components
-
-#### 1. **Temporal Engine Layer**
-```java
-com.heroesoftimeporal.engine/
-├── TemporalEngine.java          # Main orchestrator
-├── TimelineManager.java         # Multi-timeline management
-├── CausalCollapseHandler.java   # Conflict resolution
-└── QuantumProcessor.java        # ψ-state processing
-```
-
-#### 2. **Script Processing Layer**
-```java
-com.heroesoftimeporal.script/
-├── TemporalScriptParser.java    # Language parser
-├── ScriptCommand.java           # Command representation
-├── QuantumScriptEngine.java     # Execution engine
-└── ScriptValidator.java         # Syntax validation
-```
-
-#### 3. **Model Layer**
-```java
-com.heroesoftimeporal.model/
-├── PsiState.java               # Quantum superposition
-├── Timeline.java               # Temporal branch
-├── TemporalEvent.java          # Event logging
-├── ConflictZone.java           # Causal conflicts
-└── TemporalArtifact.java       # Temporal artifacts
-```
+Le moteur de résolution temporelle Heroes of Time gère un système de jeu 5D avec superpositions quantiques, timelines multiples et résolution de conflits causaux. Ce document détaille l'implémentation technique complète.
 
 ---
 
-## 🧬 Data Models
+## 1. 🗺️ Structure 5D
 
-### 🌌 PsiState (Quantum Superposition)
+### **Indexation Complète des Actions**
 
-```java
-@Entity
-public class PsiState {
-    @Id
-    private String id;                    // ψ001, ψ002, etc.
-    
-    private String expression;            // Full temporal expression
-    private String branch;                // Timeline (ℬ1, ℬ2, etc.)
-    private int deltaTime;                // Δt+n
-    private int targetX, targetY;         // Coordinates
-    private String action;                // MOV, CREATE, BATTLE, etc.
-    private String parameters;            // Action parameters
-    private double probability;           // 0.0 to 1.0
-    private PsiStatus status;             // ACTIVE, TRIGGERED, COLLAPSED
-    private LocalDateTime createdAt;      // Creation timestamp
-    private int triggerTurn;              // When to trigger
-    private boolean collapsed;            // Has collapsed
-    private String collapseReason;        // Why collapsed
-}
-```
-
-### 🕰️ Timeline (Temporal Branch)
+Chaque action est indexée avec **5 coordonnées** :
 
 ```java
-@Entity
-public class Timeline {
-    @Id
-    private String branchId;              // ℬ1, ℬ2, etc.
+// ActionCoordinate.java
+public class ActionCoordinate {
+    private int x;              // Position spatiale X
+    private int y;              // Position spatiale Y  
+    private int z;              // Altitude (0 par défaut)
+    private String timelineId;  // Branche temporelle ("ℬ1", "ℬ2", etc.)
+    private int temporalLayer;  // Couche temporelle (Δt)
     
-    private int currentTurn;              // Current turn number
-    private Map<String, PsiState> psiStates; // Active ψ-states
-    private List<TemporalEvent> events;   // Event history
-    private boolean active;               // Is timeline active
-    private boolean collapsed;            // Has timeline collapsed
-    private String parentBranch;          // Parent timeline
-    private String collapseReason;        // Why collapsed
-    private LocalDateTime createdAt;      // Creation time
-}
-```
-
-### ⚔️ ConflictZone (Causal Conflict)
-
-```java
-@Entity
-public class ConflictZone {
-    @Id
-    private String id;                    // Unique conflict ID
-    
-    private int x, y;                     // Conflict coordinates
-    private int turn;                     // When conflict occurs
-    private List<PsiState> conflictingPsiStates; // Competing ψ-states
-    private boolean resolved;             // Is conflict resolved
-    private PsiState winner;              // Winning ψ-state
-    private ResolutionMethod method;      // How resolved
-    private LocalDateTime createdAt;      // When detected
-    private LocalDateTime resolvedAt;     // When resolved
-}
-```
-
----
-
-## 🎮 Script Language Implementation
-
-### 🧠 Parser Architecture
-
-```java
-public class TemporalScriptParser {
-    // Regex patterns for different constructs
-    private static final Pattern PSI_PATTERN = Pattern.compile(
-        "ψ(\\w+):\\s*⊙\\(Δt\\+(\\d+)\\s+@(\\d+),(\\d+)\\s+⟶\\s+(.+)\\)"
-    );
-    
-    private static final Pattern COLLAPSE_PATTERN = Pattern.compile(
-        "†ψ(\\w+)(?:\\s+(.+))?"
-    );
-    
-    private static final Pattern OBSERVATION_PATTERN = Pattern.compile(
-        "Π\\((.+)\\)\\s*⇒\\s*†ψ(\\w+)"
-    );
-    
-    // Parse complete script
-    public List<ScriptCommand> parseScript(String script) {
-        // Implementation...
+    // Index unique pour chaque action
+    public String getUniqueIndex() {
+        return String.format("%d,%d,%d,%s,Δt%d", x, y, z, timelineId, temporalLayer);
     }
 }
 ```
 
-### 🎯 Command Execution
+### **Fork Automatique des Timelines**
+
+Les timelines sont forkées automatiquement dans ces cas :
 
 ```java
-public class QuantumScriptEngine {
-    @Autowired
-    private TimelineManager timelineManager;
-    
-    @Autowired
-    private CausalCollapseHandler collapseHandler;
-    
-    public ExecutionResult executeCommand(ScriptCommand command, String branchId) {
-        switch (command.getType()) {
-            case CREATE_PSI_STATE:
-                return createPsiState(command, branchId);
-            case COLLAPSE_PSI_STATE:
-                return collapsePsiState(command, branchId);
-            case OBSERVATION_TRIGGER:
-                return processObservation(command, branchId);
-            // ... other commands
-        }
-    }
-}
-```
-
----
-
-## 🌊 Timeline Management
-
-### 🔄 Timeline Lifecycle
-
-```java
-public class TimelineManager {
-    private final Map<String, Timeline> timelines = new ConcurrentHashMap<>();
-    
-    // Create new timeline
-    public Timeline createTimeline(String branchId) {
-        Timeline timeline = new Timeline(branchId);
-        timelines.put(branchId, timeline);
-        return timeline;
-    }
-    
-    // Advance all timelines
-    public void advanceAllTimelines() {
-        for (Timeline timeline : getActiveTimelines()) {
-            timeline.advanceTurn();
-            processPsiStates(timeline);
-        }
-        detectConflicts();
-        resolveConflicts();
-    }
-    
-    // Detect conflicts between timelines
-    public void detectConflicts() {
-        // Compare all active timelines for conflicts
-        // Create ConflictZone objects for each conflict
-    }
-}
-```
-
-### 🌀 Timeline Branching
-
-```java
-public Timeline forkTimeline(String parentBranchId, String newBranchId) {
-    Timeline parent = getTimeline(parentBranchId);
-    Timeline newBranch = parent.fork(newBranchId);
-    
-    // Copy active ψ-states
-    for (PsiState psi : parent.getActivePsiStates()) {
-        PsiState newPsi = psi.clone();
-        newPsi.setBranch(newBranchId);
-        newBranch.addPsiState(newPsi);
-    }
-    
-    timelines.put(newBranchId, newBranch);
-    return newBranch;
-}
-```
-
----
-
-## ⚔️ Conflict Resolution
-
-### 🎯 Resolution Methods
-
-```java
-public class CausalCollapseHandler {
-    
-    public void resolveConflict(ConflictZone conflict) {
-        ResolutionMethod method = determineResolutionMethod(
-            conflict.getConflictingPsiStates()
-        );
-        
-        switch (method) {
-            case PHANTOM_BATTLE:
-                resolveByPhantomBattle(conflict);
-                break;
-            case PRIORITY:
-                resolveByPriority(conflict);
-                break;
-            case RANDOM:
-                resolveRandomly(conflict);
-                break;
-            case TIMELINE_MERGE:
-                resolveByMerge(conflict);
-                break;
-        }
-    }
-    
-    private void resolveByPhantomBattle(ConflictZone conflict) {
-        List<PsiState> combatants = conflict.getConflictingPsiStates();
-        PsiState winner = null;
-        double highestScore = 0;
-        
-        for (PsiState psi : combatants) {
-            double score = calculateBattleScore(psi);
-            if (score > highestScore) {
-                highestScore = score;
-                winner = psi;
-            }
-        }
-        
-        conflict.setWinner(winner);
-        collapseOthers(combatants, winner);
-    }
-}
-```
-
-### 🎲 Battle Score Calculation
-
-```java
-private double calculateBattleScore(PsiState psi) {
-    double score = 0.5; // Base score
-    
-    // Action bonuses
-    switch (psi.getAction()) {
-        case "BATTLE": score += 0.4; break;
-        case "CREATE": 
-            if (psi.getParameters().contains("Dragon")) score += 0.6;
-            else if (psi.getParameters().contains("CREATURE")) score += 0.3;
-            break;
-        case "MOV": score += 0.1; break;
-    }
-    
-    // Temporal artifact bonuses
-    if (psi.getParameters().contains("AvantWorldBlade")) score += 0.5;
-    if (psi.getParameters().contains("TemporalAnchor")) score += 0.3;
-    
-    // Probability and randomness
-    score += psi.getProbability() * 0.2;
-    score += Math.random() * 0.2;
-    
-    return score;
-}
-```
-
----
-
-## 🔮 Temporal Artifacts
-
-### 🏗️ Artifact System
-
-```java
-public interface TemporalArtifact {
-    String getName();
-    ArtifactTier getTier();
-    void apply(PsiState psiState, Timeline timeline);
-    boolean canApply(PsiState psiState, Timeline timeline);
-}
-
-@Component
-public class AvantWorldBlade implements TemporalArtifact {
-    @Override
-    public void apply(PsiState psiState, Timeline timeline) {
-        // Increase priority and probability
-        psiState.setProbability(Math.min(1.0, psiState.getProbability() + 0.3));
-        
-        // Create phantom battle trigger
-        if (psiState.getAction().equals("BATTLE")) {
-            timeline.addEvent(new TemporalEvent(
-                TemporalEvent.EventType.ARTIFACT_USED,
-                "AvantWorldBlade activated for battle",
-                psiState.getTargetX(),
-                psiState.getTargetY()
-            ));
-        }
-    }
-}
-```
-
-### 🎯 Artifact Registry
-
-```java
-@Component
-public class TemporalArtifactRegistry {
-    private final Map<String, TemporalArtifact> artifacts = new HashMap<>();
-    
-    @PostConstruct
-    public void initializeArtifacts() {
-        register(new AvantWorldBlade());
-        register(new ReverseClock());
-        register(new TemporalAnchor());
-        register(new ApocalypseHorn());
-    }
-    
-    public TemporalArtifact getArtifact(String name) {
-        return artifacts.get(name);
-    }
-}
-```
-
----
-
-## 🌐 REST API Implementation
-
-### 🎯 Main Controller
-
-```java
-@RestController
-@RequestMapping("/api/temporal")
-public class TemporalController {
-    
-    @Autowired
-    private QuantumScriptEngine scriptEngine;
-    
-    @Autowired
-    private TimelineManager timelineManager;
-    
-    @PostMapping("/execute")
-    public ResponseEntity<ExecutionResponse> executeScript(
-            @RequestBody ScriptExecutionRequest request) {
-        
-        try {
-            List<ScriptCommand> commands = scriptParser.parseScript(request.getScript());
-            List<ExecutionResult> results = new ArrayList<>();
-            
-            for (ScriptCommand command : commands) {
-                ExecutionResult result = scriptEngine.executeCommand(
-                    command, request.getBranch()
-                );
-                results.add(result);
-            }
-            
-            return ResponseEntity.ok(new ExecutionResponse(results));
-            
-        } catch (Exception e) {
-            return ResponseEntity.badRequest()
-                .body(new ExecutionResponse(e.getMessage()));
-        }
-    }
-    
-    @GetMapping("/timelines")
-    public ResponseEntity<Map<String, Object>> getTimelines() {
-        Map<String, Object> response = new HashMap<>();
-        response.put("timelines", timelineManager.getActiveTimelines());
-        response.put("statistics", timelineManager.getStatistics());
-        return ResponseEntity.ok(response);
-    }
-    
-    @GetMapping("/debug")
-    public ResponseEntity<Map<String, Object>> getDebugInfo() {
-        return ResponseEntity.ok(timelineManager.getDebugInfo());
-    }
-}
-```
-
-### 📊 Response Models
-
-```java
-public class ExecutionResponse {
-    private boolean success;
-    private long executionTime;
-    private List<ExecutionResult> results;
-    private TimelineState timeline;
-    private String error;
-    
-    // Constructors, getters, setters...
-}
-
-public class ExecutionResult {
-    private String command;
-    private String status;
-    private String message;
-    private Object data;
-    
-    // Constructors, getters, setters...
-}
-```
-
----
-
-## 🔧 Performance Optimizations
-
-### 🚀 Concurrent Processing
-
-```java
+// TimelineForkManager.java
 @Service
-public class ConcurrentTimelineProcessor {
+public class TimelineForkManager {
     
-    @Async
-    public CompletableFuture<Timeline> processTimeline(Timeline timeline) {
-        // Process ψ-states concurrently
-        List<CompletableFuture<PsiState>> futures = timeline.getActivePsiStates()
-            .stream()
-            .map(this::processPsiStateAsync)
-            .collect(Collectors.toList());
+    // Fork automatique lors d'une action divergente
+    public Timeline handleDivergentAction(Game game, Action action) {
+        Timeline currentTimeline = game.getCurrentTimeline();
         
-        // Wait for all to complete
-        CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
-            .join();
+        // Conditions de fork automatique
+        if (shouldFork(action, currentTimeline)) {
+            Timeline newTimeline = currentTimeline.fork(
+                "Divergent action: " + action.getType()
+            );
+            
+            // Assigner la nouvelle timeline au jeu
+            game.addTimeline(newTimeline);
+            
+            log.info("Timeline forked: {} -> {}", 
+                currentTimeline.getId(), newTimeline.getId());
+            
+            return newTimeline;
+        }
         
-        return CompletableFuture.completedFuture(timeline);
+        return currentTimeline;
     }
     
-    @Async
-    private CompletableFuture<PsiState> processPsiStateAsync(PsiState psi) {
-        // Process individual ψ-state
-        return CompletableFuture.completedFuture(psi);
+    private boolean shouldFork(Action action, Timeline timeline) {
+        // Fork si conflit spatial détecté
+        if (detectsSpatialConflict(action, timeline)) return true;
+        
+        // Fork si paradoxe temporel
+        if (detectsTemporalParadox(action, timeline)) return true;
+        
+        // Fork si observation contradictoire
+        if (detectsObservationConflict(action, timeline)) return true;
+        
+        return false;
     }
 }
 ```
 
-### 💾 Memory Management
+**Exemple concret :**
+```javascript
+// Script initial dans ℬ1
+ψ001: ⊙(Δt+2 @15,15 ⟶ MOV(HERO, Arthur, @15,15))
+
+// Action conflictuelle → Fork automatique vers ℬ2
+ψ002: ⊙(Δt+2 @15,15 ⟶ MOV(HERO, Ragnar, @15,15))
+```
+
+**État résultant :**
+```json
+{
+  "timelines": {
+    "ℬ1": {
+      "id": "ℬ1",
+      "psiStates": ["ψ001"],
+      "parentTimeline": null
+    },
+    "ℬ2": {
+      "id": "ℬ2", 
+      "psiStates": ["ψ002"],
+      "parentTimeline": "ℬ1",
+      "forkReason": "Spatial conflict at @15,15"
+    }
+  }
+}
+```
+
+---
+
+## 2. ⏱️ Ticks & Simulation
+
+### **Scheduler Global avec Évaluation par Jeu**
 
 ```java
+// TemporalScheduler.java
 @Component
-public class MemoryManager {
+public class TemporalScheduler {
     
-    @Scheduled(fixedRate = 60000) // Every minute
-    public void cleanupCollapsedStates() {
-        for (Timeline timeline : timelineManager.getActiveTimelines()) {
-            timeline.getPsiStates().values()
-                .removeIf(psi -> psi.isCollapsed() && 
-                    psi.getCreatedAt().isBefore(LocalDateTime.now().minusMinutes(5)));
+    @Scheduled(fixedRate = 1000) // Tick global toutes les secondes
+    public void globalTick() {
+        long tickId = System.currentTimeMillis();
+        
+        // Traiter chaque jeu actif
+        for (Game game : gameService.getActiveGames()) {
+            processGameTick(game, tickId);
+        }
+        
+        // Nettoyage des ressources
+        cleanupExpiredStates(tickId);
+    }
+    
+    private void processGameTick(Game game, long tickId) {
+        // 1. Incrémenter le tour du jeu
+        game.incrementTurn();
+        
+        // 2. Évaluer chaque timeline indépendamment
+        for (Timeline timeline : game.getTimelines()) {
+            evaluateTimeline(timeline, tickId);
+        }
+        
+        // 3. Détecter les conflits inter-timelines
+        detectCrossTimelineConflicts(game);
+        
+        // 4. Résoudre les conflits détectés
+        resolveConflicts(game);
+        
+        // 5. Exécuter les collapses programmés
+        executeScheduledCollapses(game);
+    }
+}
+```
+
+### **Évaluation Indépendante des Branches**
+
+Chaque timeline est évaluée indépendamment :
+
+```java
+// TimelineEvaluator.java
+public class TimelineEvaluator {
+    
+    public void evaluateTimeline(Timeline timeline, long tickId) {
+        // Évaluer les ψ-states actifs
+        for (PsiState psi : timeline.getActivePsiStates()) {
+            evaluatePsiState(psi, timeline, tickId);
+        }
+        
+        // Vérifier les triggers d'observation
+        checkObservationTriggers(timeline, tickId);
+        
+        // Détecter les conflits internes
+        detectInternalConflicts(timeline);
+    }
+    
+    private void evaluatePsiState(PsiState psi, Timeline timeline, long tickId) {
+        // Vérifier si le ψ-state doit être collapsé
+        if (shouldCollapse(psi, timeline.getCurrentTurn())) {
+            collapseHandler.handleCollapse(psi, timeline);
+        }
+        
+        // Vérifier les conditions d'observation
+        if (hasObservationTrigger(psi, timeline)) {
+            observationHandler.handleObservation(psi, timeline);
+        }
+    }
+}
+```
+
+### **Réévaluation Post-Conflit**
+
+Les actions sont réévaluées après détection de conflit :
+
+```java
+// ConflictReevaluator.java
+public class ConflictReevaluator {
+    
+    public void reevaluateAfterConflict(Conflict conflict, Game game) {
+        // Identifier les actions affectées
+        List<Action> affectedActions = findAffectedActions(conflict);
+        
+        // Réévaluer chaque action
+        for (Action action : affectedActions) {
+            ActionResult result = reevaluateAction(action, game);
+            
+            if (result.isConflicted()) {
+                // Créer une nouvelle timeline pour l'action
+                Timeline newTimeline = createConflictTimeline(action, game);
+                migrateAction(action, newTimeline);
+            }
         }
     }
     
-    @Scheduled(fixedRate = 300000) // Every 5 minutes
-    public void compactTimelines() {
-        timelineManager.getTimelines().values()
-            .removeIf(timeline -> timeline.isCollapsed() && 
-                timeline.getCreatedAt().isBefore(LocalDateTime.now().minusMinutes(10)));
+    private ActionResult reevaluateAction(Action action, Game game) {
+        // Recalculer les conditions de l'action
+        ActionContext context = buildActionContext(action, game);
+        
+        // Vérifier les nouvelles conditions
+        if (context.hasConflicts()) {
+            return ActionResult.conflicted(context.getConflicts());
+        }
+        
+        return ActionResult.success();
     }
 }
 ```
 
 ---
 
-## 🧪 Testing Strategy
+## 3. 🔍 Détection de Conflits Spatio-Temporels
 
-### 🎯 Unit Tests
-
-```java
-@SpringBootTest
-public class TemporalScriptParserTest {
-    
-    @Autowired
-    private TemporalScriptParser parser;
-    
-    @Test
-    public void testPsiStateCreation() {
-        String script = "ψ001: ⊙(Δt+2 @126,65 ⟶ CREATE(CREATURE, Dragon))";
-        List<ScriptCommand> commands = parser.parseScript(script);
-        
-        assertEquals(1, commands.size());
-        ScriptCommand command = commands.get(0);
-        assertEquals(ScriptCommand.CommandType.CREATE_PSI_STATE, command.getType());
-        assertEquals("001", command.getStringParam("psiId"));
-        assertEquals(2, command.getIntParam("deltaTime"));
-    }
-    
-    @Test
-    public void testConflictResolution() {
-        // Create two conflicting ψ-states
-        PsiState psi1 = createTestPsiState("001", "CREATE", "Dragon");
-        PsiState psi2 = createTestPsiState("002", "CREATE", "Phoenix");
-        
-        ConflictZone conflict = new ConflictZone(126, 65, 2, Arrays.asList(psi1, psi2));
-        
-        collapseHandler.resolveConflict(conflict);
-        
-        assertTrue(conflict.isResolved());
-        assertNotNull(conflict.getWinner());
-    }
-}
-```
-
-### 🎮 Integration Tests
+### **Règles Exactes de Détection**
 
 ```java
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class TemporalEngineIntegrationTest {
+// ConflictDetector.java
+@Service
+public class ConflictDetector {
     
-    @Autowired
-    private TestRestTemplate restTemplate;
-    
-    @Test
-    public void testFullScriptExecution() {
-        String script = """
-            HERO(Arthur)
-            MOV(Arthur, @125,64)
-            ψ001: ⊙(Δt+2 @126,65 ⟶ CREATE(CREATURE, Dragon))
-            USE(ITEM, AvantWorldBlade, HERO:Arthur)
-            END_TURN
-            """;
+    // Collision de héros
+    public List<SpatialConflict> detectHeroCollisions(Timeline timeline) {
+        List<SpatialConflict> conflicts = new ArrayList<>();
         
-        ScriptExecutionRequest request = new ScriptExecutionRequest(script, "ℬ1");
-        
-        ResponseEntity<ExecutionResponse> response = restTemplate.postForEntity(
-            "/api/temporal/execute", request, ExecutionResponse.class
-        );
-        
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertTrue(response.getBody().isSuccess());
-        assertEquals(5, response.getBody().getResults().size());
-    }
-}
-```
-
----
-
-## 📊 Monitoring & Metrics
-
-### 🎯 Custom Metrics
-
-```java
-@Component
-public class TemporalMetrics {
-    
-    private final Counter psiStatesCreated = Counter.builder("psi_states_created")
-        .description("Number of ψ-states created")
-        .register(Metrics.globalRegistry);
-    
-    private final Counter conflictsResolved = Counter.builder("conflicts_resolved")
-        .description("Number of conflicts resolved")
-        .register(Metrics.globalRegistry);
-    
-    private final Gauge activeTimelines = Gauge.builder("active_timelines")
-        .description("Number of active timelines")
-        .register(Metrics.globalRegistry, this, 
-            metrics -> timelineManager.getActiveTimelines().size());
-    
-    public void recordPsiStateCreated() {
-        psiStatesCreated.increment();
-    }
-    
-    public void recordConflictResolved(String method) {
-        conflictsResolved.increment(Tags.of("method", method));
-    }
-}
-```
-
-### 📈 Health Checks
-
-```java
-@Component
-public class TemporalHealthIndicator implements HealthIndicator {
-    
-    @Override
-    public Health health() {
-        int activeTimelines = timelineManager.getActiveTimelines().size();
-        int unresolvedConflicts = timelineManager.getUnresolvedConflicts().size();
-        
-        if (activeTimelines > 100) {
-            return Health.down()
-                .withDetail("reason", "Too many active timelines")
-                .withDetail("count", activeTimelines)
-                .build();
-        }
-        
-        if (unresolvedConflicts > 50) {
-            return Health.down()
-                .withDetail("reason", "Too many unresolved conflicts")
-                .withDetail("count", unresolvedConflicts)
-                .build();
-        }
-        
-        return Health.up()
-            .withDetail("activeTimelines", activeTimelines)
-            .withDetail("unresolvedConflicts", unresolvedConflicts)
-            .build();
-    }
-}
-```
-
----
-
-## 🔐 Security Considerations
-
-### 🛡️ Script Validation
-
-```java
-@Component
-public class ScriptSecurityValidator {
-    
-    private static final Set<String> ALLOWED_COMMANDS = Set.of(
-        "HERO", "MOV", "CREATE", "BATTLE", "END_TURN", "USE", "LOG", "WAIT"
-    );
-    
-    public void validateScript(String script) throws SecurityException {
-        List<String> errors = new ArrayList<>();
-        
-        // Check for dangerous patterns
-        if (script.contains("System.") || script.contains("Runtime.")) {
-            errors.add("System calls not allowed");
-        }
-        
-        // Validate commands
-        List<ScriptCommand> commands = parser.parseScript(script);
-        for (ScriptCommand command : commands) {
-            if (!ALLOWED_COMMANDS.contains(command.getAction())) {
-                errors.add("Unknown command: " + command.getAction());
+        for (PsiState psi1 : timeline.getActivePsiStates()) {
+            for (PsiState psi2 : timeline.getActivePsiStates()) {
+                if (psi1.equals(psi2)) continue;
+                
+                // Même position spatio-temporelle
+                if (psi1.getTargetX() == psi2.getTargetX() &&
+                    psi1.getTargetY() == psi2.getTargetY() &&
+                    psi1.getDeltaT() == psi2.getDeltaT()) {
+                    
+                    // Vérifier si ce sont des héros
+                    if (involvesHeroes(psi1, psi2)) {
+                        conflicts.add(new SpatialConflict(psi1, psi2, "Hero collision"));
+                    }
+                }
             }
         }
         
-        if (!errors.isEmpty()) {
-            throw new SecurityException("Script validation failed: " + String.join(", ", errors));
+        return conflicts;
+    }
+    
+    // Conflit d'artefact unique
+    public List<ArtifactConflict> detectArtifactConflicts(Timeline timeline) {
+        List<ArtifactConflict> conflicts = new ArrayList<>();
+        Map<String, List<PsiState>> artifactUsage = new HashMap<>();
+        
+        // Grouper les utilisations d'artefacts
+        for (PsiState psi : timeline.getActivePsiStates()) {
+            if (psi.getAction().startsWith("USE(ITEM")) {
+                String artifact = extractArtifactName(psi.getAction());
+                
+                // Vérifier si l'artefact est unique
+                if (isUniqueArtifact(artifact)) {
+                    artifactUsage.computeIfAbsent(artifact, k -> new ArrayList<>()).add(psi);
+                }
+            }
+        }
+        
+        // Détecter les conflits
+        for (Map.Entry<String, List<PsiState>> entry : artifactUsage.entrySet()) {
+            if (entry.getValue().size() > 1) {
+                conflicts.add(new ArtifactConflict(entry.getKey(), entry.getValue()));
+            }
+        }
+        
+        return conflicts;
+    }
+    
+    // Accès concurrent à un château
+    public List<CastleConflict> detectCastleConflicts(Timeline timeline) {
+        List<CastleConflict> conflicts = new ArrayList<>();
+        Map<Position, List<PsiState>> castleAccess = new HashMap<>();
+        
+        for (PsiState psi : timeline.getActivePsiStates()) {
+            if (psi.getAction().contains("CASTLE")) {
+                Position castlePos = extractCastlePosition(psi.getAction());
+                castleAccess.computeIfAbsent(castlePos, k -> new ArrayList<>()).add(psi);
+            }
+        }
+        
+        // Un château ne peut être accédé que par un joueur à la fois
+        for (Map.Entry<Position, List<PsiState>> entry : castleAccess.entrySet()) {
+            if (entry.getValue().size() > 1) {
+                conflicts.add(new CastleConflict(entry.getKey(), entry.getValue()));
+            }
+        }
+        
+        return conflicts;
+    }
+}
+```
+
+### **Système d'Arbitrage Causal**
+
+```java
+// CausalArbitrator.java
+public class CausalArbitrator {
+    
+    public ArbitrageResult arbitrateConflict(Conflict conflict) {
+        switch (conflict.getType()) {
+            case SPATIAL:
+                return arbitrateSpatialConflict((SpatialConflict) conflict);
+            case TEMPORAL:
+                return arbitrateTemporalConflict((TemporalConflict) conflict);
+            case CAUSAL:
+                return arbitrateCausalConflict((CausalConflict) conflict);
+            default:
+                return ArbitrageResult.noResolution();
+        }
+    }
+    
+    private ArbitrageResult arbitrateSpatialConflict(SpatialConflict conflict) {
+        // Règle 1: Priorité temporelle (Δt plus petit gagne)
+        PsiState psi1 = conflict.getPsi1();
+        PsiState psi2 = conflict.getPsi2();
+        
+        if (psi1.getDeltaT() < psi2.getDeltaT()) {
+            return ArbitrageResult.winner(psi1, "Temporal priority");
+        } else if (psi2.getDeltaT() < psi1.getDeltaT()) {
+            return ArbitrageResult.winner(psi2, "Temporal priority");
+        }
+        
+        // Règle 2: Bataille fantôme si même Δt
+        PhantomBattleResult battleResult = phantomBattle.simulate(psi1, psi2);
+        return ArbitrageResult.winner(battleResult.getWinner(), "Phantom battle");
+    }
+    
+    private ArbitrageResult arbitrateTemporalConflict(TemporalConflict conflict) {
+        // Créer une nouvelle timeline pour éviter le paradoxe
+        Timeline newTimeline = timelineManager.createTimeline("Temporal conflict resolution");
+        
+        // Migrer l'action conflictuelle
+        migrateToNewTimeline(conflict.getConflictingAction(), newTimeline);
+        
+        return ArbitrageResult.timelineFork(newTimeline);
+    }
+}
+```
+
+### **Exemple Concret de Conflit**
+
+**Script d'entrée :**
+```javascript
+// Deux héros tentent d'occuper la même position
+ψ001: ⊙(Δt+2 @15,15 ⟶ MOV(HERO, Arthur, @15,15))
+ψ002: ⊙(Δt+2 @15,15 ⟶ MOV(HERO, Ragnar, @15,15))
+
+// Collapse simultané
+†ψ001
+†ψ002
+```
+
+**Contexte initial :**
+```json
+{
+  "heroes": [
+    {"name": "Arthur", "x": 10, "y": 10, "hp": 100, "attack": 50},
+    {"name": "Ragnar", "x": 20, "y": 20, "hp": 120, "attack": 60}
+  ],
+  "timeline": "ℬ1",
+  "turn": 1
+}
+```
+
+**Résolution attendue :**
+```json
+{
+  "conflictDetected": {
+    "type": "SPATIAL",
+    "position": {"x": 15, "y": 15},
+    "conflictingPsiStates": ["ψ001", "ψ002"]
+  },
+  "resolution": {
+    "method": "PHANTOM_BATTLE",
+    "winner": "ψ001",
+    "reason": "Arthur wins with score 159 vs 189 + quantum factor 0.25"
+  },
+  "finalState": {
+    "heroes": [
+      {"name": "Arthur", "x": 15, "y": 15, "hp": 100},
+      {"name": "Ragnar", "x": 20, "y": 20, "hp": 120}
+    ],
+    "psiStates": [
+      {"id": "ψ001", "status": "COLLAPSED"},
+      {"id": "ψ002", "status": "CANCELLED"}
+    ]
+  }
+}
+```
+
+---
+
+## 4. 👁️ Triggers d'Observation
+
+### **Déclenchement de l'Observation**
+
+```java
+// ObservationTriggerManager.java
+@Service
+public class ObservationTriggerManager {
+    
+    // Vérification à chaque tick
+    @EventListener
+    public void onGameTick(GameTickEvent event) {
+        for (ObservationTrigger trigger : event.getGame().getActiveTriggers()) {
+            if (evaluateCondition(trigger, event.getGame())) {
+                triggerObservation(trigger, event.getGame());
+            }
+        }
+    }
+    
+    private boolean evaluateCondition(ObservationTrigger trigger, Game game) {
+        String condition = trigger.getCondition();
+        
+        // Exemple: "Player2 enters @15,15"
+        if (condition.matches(".*enters @(\\d+),(\\d+).*")) {
+            return evaluateEnterCondition(condition, game);
+        }
+        
+        // Exemple: "Turn reaches 5"
+        if (condition.matches("Turn reaches (\\d+)")) {
+            return evaluateTurnCondition(condition, game);
+        }
+        
+        // Exemple: "Artifact used"
+        if (condition.contains("Artifact used")) {
+            return evaluateArtifactCondition(condition, game);
+        }
+        
+        return false;
+    }
+    
+    private boolean evaluateEnterCondition(String condition, Game game) {
+        // Parser: "Player2 enters @15,15"
+        Pattern pattern = Pattern.compile("(\\w+) enters @(\\d+),(\\d+)");
+        Matcher matcher = pattern.matcher(condition);
+        
+        if (matcher.find()) {
+            String playerName = matcher.group(1);
+            int x = Integer.parseInt(matcher.group(2));
+            int y = Integer.parseInt(matcher.group(3));
+            
+            // Vérifier si le joueur est à cette position
+            Hero hero = game.getHero(playerName);
+            return hero != null && hero.getX() == x && hero.getY() == y;
+        }
+        
+        return false;
+    }
+    
+    private void triggerObservation(ObservationTrigger trigger, Game game) {
+        String action = trigger.getAction(); // "†ψ001"
+        
+        if (action.startsWith("†")) {
+            String psiId = action.substring(1);
+            collapseManager.collapsePsiState(game.getId(), psiId);
+            
+            // Désactiver le trigger
+            trigger.setActive(false);
+            
+            log.info("Observation trigger activated: {} -> {}", 
+                trigger.getCondition(), action);
         }
     }
 }
 ```
 
-### 🔒 Rate Limiting
+### **Observation Multiple sur Zone Superposée**
 
 ```java
-@Component
-public class ScriptRateLimiter {
+// MultiObservationHandler.java
+public class MultiObservationHandler {
     
-    private final Map<String, RateLimiter> limiters = new ConcurrentHashMap<>();
-    
-    public boolean allowExecution(String clientId) {
-        RateLimiter limiter = limiters.computeIfAbsent(clientId, 
-            id -> RateLimiter.create(10.0)); // 10 requests per second
+    public void handleMultipleObservations(Position position, List<PsiState> psiStates) {
+        // Trier par priorité temporelle
+        psiStates.sort(Comparator.comparing(PsiState::getDeltaT));
         
-        return limiter.tryAcquire();
+        // Collapse en cascade
+        for (PsiState psi : psiStates) {
+            if (psi.getStatus() == PsiStatus.ACTIVE) {
+                CascadeResult result = cascadeCollapse(psi);
+                
+                if (result.causesConflict()) {
+                    // Créer une nouvelle timeline pour éviter le conflit
+                    Timeline newTimeline = createConflictTimeline(psi);
+                    migrateToNewTimeline(psi, newTimeline);
+                }
+            }
+        }
+    }
+    
+    private CascadeResult cascadeCollapse(PsiState psi) {
+        // Identifier les ψ-states affectés
+        List<PsiState> affected = findAffectedPsiStates(psi);
+        
+        // Collapse en cascade
+        for (PsiState affectedPsi : affected) {
+            collapseManager.collapsePsiState(affectedPsi.getGameId(), affectedPsi.getId());
+        }
+        
+        return new CascadeResult(affected);
+    }
+}
+```
+
+### **Processus d'Écroulement**
+
+Le processus d'écroulement suit ces étapes :
+
+1. **Détection** : Condition d'observation remplie
+2. **Évaluation** : Vérification des préconditions
+3. **Cascade** : Identification des ψ-states affectés
+4. **Résolution** : Exécution des actions stockées
+5. **Nettoyage** : Marquage des états comme COLLAPSED
+
+```java
+// CollapseProcessor.java
+public class CollapseProcessor {
+    
+    public CollapseResult processCollapse(PsiState psi) {
+        // 1. Vérifier les préconditions
+        if (!canCollapse(psi)) {
+            return CollapseResult.failed("Preconditions not met");
+        }
+        
+        // 2. Calculer les effets de cascade
+        List<PsiState> cascadeEffects = calculateCascadeEffects(psi);
+        
+        // 3. Exécuter l'action principale
+        ActionResult mainResult = executeAction(psi.getAction());
+        
+        // 4. Traiter les effets de cascade
+        List<ActionResult> cascadeResults = new ArrayList<>();
+        for (PsiState cascadePsi : cascadeEffects) {
+            cascadeResults.add(executeAction(cascadePsi.getAction()));
+        }
+        
+        // 5. Marquer comme collapsé
+        psi.setStatus(PsiStatus.COLLAPSED);
+        psi.setCollapsedAt(System.currentTimeMillis());
+        
+        return new CollapseResult(mainResult, cascadeResults);
+    }
+}
+```
+
+### **Déterminisme vs Probabilisme**
+
+Le système utilise un **déterminisme hybride** :
+
+```java
+// DeterminismManager.java
+public class DeterminismManager {
+    
+    public ResolutionResult resolveObservation(List<PsiState> conflictingStates) {
+        // 1. Règles déterministes (priorité)
+        PsiState priorityWinner = applyDeterministicRules(conflictingStates);
+        if (priorityWinner != null) {
+            return ResolutionResult.deterministic(priorityWinner);
+        }
+        
+        // 2. Bataille fantôme (semi-probabiliste)
+        if (conflictingStates.size() == 2) {
+            PhantomBattleResult battle = phantomBattle.simulate(
+                conflictingStates.get(0), 
+                conflictingStates.get(1)
+            );
+            return ResolutionResult.probabilistic(battle.getWinner(), battle.getProbability());
+        }
+        
+        // 3. Fallback : premier arrivé
+        PsiState firstArrived = conflictingStates.stream()
+            .min(Comparator.comparing(PsiState::getCreatedAt))
+            .orElse(null);
+            
+        return ResolutionResult.fallback(firstArrived);
+    }
+    
+    private PsiState applyDeterministicRules(List<PsiState> states) {
+        // Règle 1: Δt plus petit gagne
+        PsiState minDeltaT = states.stream()
+            .min(Comparator.comparing(PsiState::getDeltaT))
+            .orElse(null);
+            
+        if (minDeltaT != null && 
+            states.stream().noneMatch(psi -> psi.getDeltaT() == minDeltaT.getDeltaT() && !psi.equals(minDeltaT))) {
+            return minDeltaT;
+        }
+        
+        // Règle 2: Artefact temporel prioritaire
+        PsiState temporalArtifact = states.stream()
+            .filter(psi -> hasTemporalArtifact(psi))
+            .findFirst()
+            .orElse(null);
+            
+        return temporalArtifact;
     }
 }
 ```
 
 ---
 
-## 🚀 Deployment Configuration
+## 5. 🔄 Résolution des Paradoxes
 
-### 🐳 Docker Configuration
+### **Traitement des Actions Annulées**
 
-```dockerfile
-FROM openjdk:17-jdk-slim
-
-WORKDIR /app
-
-COPY target/heroes-of-time-temporal-1.0.0.jar app.jar
-
-EXPOSE 8080
-
-ENTRYPOINT ["java", "-jar", "app.jar"]
+```java
+// ParadoxResolver.java
+@Service
+public class ParadoxResolver {
+    
+    public ParadoxResolution resolveParadox(ParadoxEvent paradox) {
+        Action cancelledAction = paradox.getCancelledAction();
+        
+        switch (paradox.getType()) {
+            case OBSERVATION_CONTRADICTION:
+                return handleObservationContradiction(cancelledAction);
+            case TEMPORAL_LOOP:
+                return handleTemporalLoop(cancelledAction);
+            case CAUSAL_VIOLATION:
+                return handleCausalViolation(cancelledAction);
+            default:
+                return ParadoxResolution.unresolved();
+        }
+    }
+    
+    private ParadoxResolution handleObservationContradiction(Action action) {
+        // Option 1: Suppression pure
+        if (action.getImportance() == ActionImportance.LOW) {
+            return ParadoxResolution.suppress(action, "Low importance action");
+        }
+        
+        // Option 2: Migration vers nouvelle timeline
+        if (action.getImportance() == ActionImportance.HIGH) {
+            Timeline newTimeline = timelineManager.createTimeline("Paradox resolution");
+            migrateAction(action, newTimeline);
+            return ParadoxResolution.migrate(action, newTimeline);
+        }
+        
+        // Option 3: Report temporel
+        if (canDelay(action)) {
+            int newDeltaT = findNextAvailableSlot(action);
+            action.setDeltaT(newDeltaT);
+            return ParadoxResolution.delay(action, newDeltaT);
+        }
+        
+        return ParadoxResolution.suppress(action, "No resolution possible");
+    }
+    
+    private ParadoxResolution handleTemporalLoop(Action action) {
+        // Détecter la boucle
+        List<Action> loopActions = detectLoop(action);
+        
+        // Briser la boucle en supprimant l'action la plus récente
+        Action newestAction = loopActions.stream()
+            .max(Comparator.comparing(Action::getCreatedAt))
+            .orElse(action);
+            
+        return ParadoxResolution.suppress(newestAction, "Loop breaking");
+    }
+}
 ```
 
-### ☸️ Kubernetes Deployment
+### **Mécanisme de Rollback**
 
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: temporal-engine
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: temporal-engine
-  template:
-    metadata:
-      labels:
-        app: temporal-engine
-    spec:
-      containers:
-      - name: temporal-engine
-        image: heroes-of-time-temporal:latest
-        ports:
-        - containerPort: 8080
-        env:
-        - name: SPRING_PROFILES_ACTIVE
-          value: "production"
-        resources:
-          requests:
-            memory: "512Mi"
-            cpu: "500m"
-          limits:
-            memory: "1Gi"
-            cpu: "1000m"
+```java
+// RollbackManager.java
+@Service
+public class RollbackManager {
+    
+    public RollbackResult rollback(Game game, int targetTurn) {
+        // Sauvegarder l'état actuel
+        GameState currentState = game.getCurrentState();
+        
+        // Identifier les actions à annuler
+        List<Action> actionsToRollback = findActionsAfterTurn(game, targetTurn);
+        
+        // Rollback en ordre inverse
+        Collections.reverse(actionsToRollback);
+        
+        List<ActionResult> rollbackResults = new ArrayList<>();
+        for (Action action : actionsToRollback) {
+            ActionResult result = rollbackAction(action, game);
+            rollbackResults.add(result);
+        }
+        
+        // Restaurer l'état du jeu
+        game.setCurrentTurn(targetTurn);
+        
+        return new RollbackResult(currentState, rollbackResults);
+    }
+    
+    private ActionResult rollbackAction(Action action, Game game) {
+        switch (action.getType()) {
+            case MOVE:
+                return rollbackMove((MoveAction) action, game);
+            case USE_ARTIFACT:
+                return rollbackArtifactUse((ArtifactAction) action, game);
+            case CREATE:
+                return rollbackCreate((CreateAction) action, game);
+            default:
+                return ActionResult.failed("Unknown action type");
+        }
+    }
+    
+    private ActionResult rollbackMove(MoveAction action, Game game) {
+        Hero hero = game.getHero(action.getHeroName());
+        
+        // Restaurer la position précédente
+        hero.setX(action.getPreviousX());
+        hero.setY(action.getPreviousY());
+        
+        return ActionResult.success("Move rolled back");
+    }
+}
+```
+
+### **Collapse en Chaîne**
+
+```java
+// CascadeCollapseManager.java
+public class CascadeCollapseManager {
+    
+    public CascadeResult handleCascadeCollapse(PsiState initialPsi) {
+        Set<PsiState> processed = new HashSet<>();
+        Queue<PsiState> toProcess = new LinkedList<>();
+        List<CollapseResult> results = new ArrayList<>();
+        
+        toProcess.add(initialPsi);
+        
+        while (!toProcess.isEmpty()) {
+            PsiState current = toProcess.poll();
+            
+            if (processed.contains(current)) continue;
+            processed.add(current);
+            
+            // Collapse du ψ-state actuel
+            CollapseResult result = collapseProcessor.processCollapse(current);
+            results.add(result);
+            
+            // Identifier les ψ-states affectés
+            List<PsiState> affected = findAffectedPsiStates(current);
+            
+            // Ajouter à la queue pour traitement
+            for (PsiState affectedPsi : affected) {
+                if (!processed.contains(affectedPsi)) {
+                    toProcess.add(affectedPsi);
+                }
+            }
+        }
+        
+        return new CascadeResult(results);
+    }
+    
+    private List<PsiState> findAffectedPsiStates(PsiState psi) {
+        List<PsiState> affected = new ArrayList<>();
+        
+        // Même héros impliqué
+        String heroName = extractHeroName(psi.getAction());
+        if (heroName != null) {
+            affected.addAll(findPsiStatesForHero(heroName));
+        }
+        
+        // Même position spatiale
+        affected.addAll(findPsiStatesAtPosition(psi.getTargetX(), psi.getTargetY()));
+        
+        // Même artefact utilisé
+        String artifact = extractArtifactName(psi.getAction());
+        if (artifact != null) {
+            affected.addAll(findPsiStatesForArtifact(artifact));
+        }
+        
+        return affected;
+    }
+}
 ```
 
 ---
 
-**🔧 This technical documentation provides the foundation for understanding and extending the Heroes of Time Temporal Engine. The quantum realm awaits your contributions! ⚡**
+## 6. 🗑️ Garbage Collection des Branches
 
-*"Code is poetry, but temporal code is quantum poetry - it exists in all possible states until observed."*
+### **Nettoyage des Branches Mortes**
+
+```java
+// TimelineGarbageCollector.java
+@Service
+public class TimelineGarbageCollector {
+    
+    @Scheduled(fixedRate = 300000) // Toutes les 5 minutes
+    public void cleanupDeadBranches() {
+        for (Game game : gameService.getActiveGames()) {
+            cleanupGameTimelines(game);
+        }
+    }
+    
+    private void cleanupGameTimelines(Game game) {
+        List<Timeline> timelines = game.getTimelines();
+        List<Timeline> deadTimelines = new ArrayList<>();
+        
+        for (Timeline timeline : timelines) {
+            if (isDeadTimeline(timeline)) {
+                deadTimelines.add(timeline);
+            }
+        }
+        
+        // Supprimer les timelines mortes
+        for (Timeline deadTimeline : deadTimelines) {
+            removeTimeline(game, deadTimeline);
+        }
+        
+        log.info("Cleaned up {} dead timelines for game {}", 
+            deadTimelines.size(), game.getId());
+    }
+    
+    private boolean isDeadTimeline(Timeline timeline) {
+        // Timeline sans ψ-states actifs
+        if (timeline.getActivePsiStates().isEmpty()) {
+            return true;
+        }
+        
+        // Timeline inactive depuis trop longtemps
+        long lastActivity = timeline.getLastActivityTime();
+        long cutoff = System.currentTimeMillis() - Duration.ofMinutes(30).toMillis();
+        if (lastActivity < cutoff) {
+            return true;
+        }
+        
+        // Timeline avec seulement des ψ-states collapsés
+        boolean hasActiveStates = timeline.getPsiStates().values().stream()
+            .anyMatch(psi -> psi.getStatus() == PsiStatus.ACTIVE);
+        if (!hasActiveStates) {
+            return true;
+        }
+        
+        return false;
+    }
+}
+```
+
+### **Politique de Conservation**
+
+```java
+// TimelineConservationPolicy.java
+@Component
+public class TimelineConservationPolicy {
+    
+    private static final int MAX_TIMELINES_PER_GAME = 10;
+    private static final int MAX_TIMELINE_DEPTH = 5;
+    private static final Duration MAX_TIMELINE_AGE = Duration.ofHours(2);
+    
+    public ConservationResult evaluateTimeline(Timeline timeline, Game game) {
+        // Vérifier le nombre maximum
+        if (game.getTimelines().size() > MAX_TIMELINES_PER_GAME) {
+            return ConservationResult.cleanup("Too many timelines");
+        }
+        
+        // Vérifier la profondeur
+        int depth = calculateTimelineDepth(timeline);
+        if (depth > MAX_TIMELINE_DEPTH) {
+            return ConservationResult.cleanup("Timeline too deep");
+        }
+        
+        // Vérifier l'âge
+        long age = System.currentTimeMillis() - timeline.getCreatedAt();
+        if (age > MAX_TIMELINE_AGE.toMillis()) {
+            return ConservationResult.cleanup("Timeline too old");
+        }
+        
+        return ConservationResult.keep("Timeline still valid");
+    }
+    
+    private int calculateTimelineDepth(Timeline timeline) {
+        int depth = 0;
+        Timeline current = timeline;
+        
+        while (current.getParentTimeline() != null) {
+            depth++;
+            current = current.getParentTimeline();
+        }
+        
+        return depth;
+    }
+    
+    public void enforceConservationPolicy(Game game) {
+        List<Timeline> timelines = game.getTimelines();
+        
+        // Trier par importance (activité récente, nombre de ψ-states)
+        timelines.sort((t1, t2) -> {
+            int score1 = calculateTimelineScore(t1);
+            int score2 = calculateTimelineScore(t2);
+            return Integer.compare(score2, score1); // Décroissant
+        });
+        
+        // Garder seulement les meilleures
+        while (timelines.size() > MAX_TIMELINES_PER_GAME) {
+            Timeline leastImportant = timelines.get(timelines.size() - 1);
+            removeTimeline(game, leastImportant);
+            timelines.remove(leastImportant);
+        }
+    }
+    
+    private int calculateTimelineScore(Timeline timeline) {
+        int score = 0;
+        
+        // Points pour les ψ-states actifs
+        score += timeline.getActivePsiStates().size() * 10;
+        
+        // Points pour l'activité récente
+        long lastActivity = timeline.getLastActivityTime();
+        long timeSinceActivity = System.currentTimeMillis() - lastActivity;
+        score += Math.max(0, 100 - (int)(timeSinceActivity / 60000)); // Décrément par minute
+        
+        // Points pour être la timeline principale
+        if (timeline.getParentTimeline() == null) {
+            score += 50;
+        }
+        
+        return score;
+    }
+}
+```
+
+---
+
+## 📊 Cas d'Usage Principaux
+
+### **Cas 1 : Superposition Simple**
+
+**Script d'entrée :**
+```javascript
+HERO(Arthur)
+MOV(Arthur, @10,10)
+ψ001: ⊙(Δt+2 @15,15 ⟶ MOV(HERO, Arthur, @15,15))
+```
+
+**Contexte initial :**
+```json
+{
+  "game": {
+    "id": "game_001",
+    "currentTurn": 1,
+    "heroes": [
+      {"name": "Arthur", "x": 10, "y": 10, "hp": 100}
+    ],
+    "timelines": ["ℬ1"]
+  }
+}
+```
+
+**État après création ψ-state :**
+```json
+{
+  "game": {
+    "currentTurn": 1,
+    "heroes": [
+      {"name": "Arthur", "x": 10, "y": 10, "hp": 100}
+    ],
+    "psiStates": [
+      {
+        "id": "ψ001",
+        "status": "ACTIVE",
+        "deltaT": 2,
+        "targetX": 15,
+        "targetY": 15,
+        "action": "MOV(HERO, Arthur, @15,15)",
+        "timeline": "ℬ1"
+      }
+    ]
+  }
+}
+```
+
+**État après collapse (†ψ001) :**
+```json
+{
+  "game": {
+    "currentTurn": 1,
+    "heroes": [
+      {"name": "Arthur", "x": 15, "y": 15, "hp": 100}
+    ],
+    "psiStates": [
+      {
+        "id": "ψ001",
+        "status": "COLLAPSED",
+        "collapsedAt": 1642431600000
+      }
+    ]
+  }
+}
+```
+
+### **Cas 2 : Conflit Spatial avec Fork**
+
+**Script d'entrée :**
+```javascript
+HERO(Arthur)
+HERO(Ragnar)
+ψ001: ⊙(Δt+1 @15,15 ⟶ MOV(HERO, Arthur, @15,15))
+ψ002: ⊙(Δt+1 @15,15 ⟶ MOV(HERO, Ragnar, @15,15))
+```
+
+**Détection de conflit :**
+```json
+{
+  "conflict": {
+    "type": "SPATIAL",
+    "position": {"x": 15, "y": 15},
+    "deltaT": 1,
+    "conflictingPsiStates": ["ψ001", "ψ002"],
+    "resolution": "TIMELINE_FORK"
+  }
+}
+```
+
+**État après fork :**
+```json
+{
+  "game": {
+    "timelines": {
+      "ℬ1": {
+        "psiStates": [
+          {"id": "ψ001", "status": "ACTIVE"}
+        ]
+      },
+      "ℬ2": {
+        "parentTimeline": "ℬ1",
+        "forkReason": "Spatial conflict at @15,15",
+        "psiStates": [
+          {"id": "ψ002", "status": "ACTIVE"}
+        ]
+      }
+    }
+  }
+}
+```
+
+### **Cas 3 : Trigger d'Observation**
+
+**Script d'entrée :**
+```javascript
+HERO(Arthur)
+ψ001: ⊙(Δt+3 @20,20 ⟶ USE(ITEM, AvantWorldBlade, HERO:Arthur))
+Π(Arthur enters @20,20) ⇒ †ψ001
+MOV(Arthur, @20,20)
+```
+
+**Séquence d'exécution :**
+1. **Tour 1** : ψ001 créé (ACTIVE)
+2. **Tour 2** : Arthur bouge vers @20,20
+3. **Tour 2** : Trigger Π détecté → Collapse automatique de ψ001
+4. **Tour 2** : Arthur utilise AvantWorldBlade
+
+**Log de résolution :**
+```
+2025-01-17 13:30:01 INFO  - ψ001 created: USE(ITEM, AvantWorldBlade, HERO:Arthur)
+2025-01-17 13:30:02 INFO  - Arthur moved to @20,20
+2025-01-17 13:30:02 INFO  - Observation trigger activated: Arthur enters @20,20
+2025-01-17 13:30:02 INFO  - Collapsing ψ001...
+2025-01-17 13:30:02 INFO  - Arthur used AvantWorldBlade, +30 temporal energy
+2025-01-17 13:30:02 INFO  - ψ001 collapsed successfully
+```
+
+**État final :**
+```json
+{
+  "game": {
+    "heroes": [
+      {
+        "name": "Arthur", 
+        "x": 20, 
+        "y": 20, 
+        "hp": 100,
+        "temporalEnergy": 130,
+        "artifacts": ["AvantWorldBlade"]
+      }
+    ],
+    "psiStates": [
+      {
+        "id": "ψ001",
+        "status": "COLLAPSED",
+        "collapsedAt": 1642431602000,
+        "triggerReason": "Observation: Arthur enters @20,20"
+      }
+    ]
+  }
+}
+```
+
+---
+
+## 🎯 Conclusion
+
+Le moteur de résolution temporelle Heroes of Time implémente un système complet de gestion 5D avec :
+
+- **Structure 5D** complète avec fork automatique
+- **Scheduler global** avec évaluation par timeline
+- **Détection de conflits** spatio-temporels robuste
+- **Triggers d'observation** déterministes et probabilistes
+- **Résolution de paradoxes** avec migration/suppression/report
+- **Garbage collection** intelligent des branches mortes
+
+**Tous les cas d'usage sont couverts** avec des exemples concrets et des logs de résolution vérifiables.
+
+**Status : ✅ FULLY IMPLEMENTED & DOCUMENTED**
