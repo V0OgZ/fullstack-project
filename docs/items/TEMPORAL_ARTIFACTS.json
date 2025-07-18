@@ -1,0 +1,392 @@
+[
+    {
+        "id": "avantworld_blade",
+        "name": "Lame de l'Avant-Monde",
+        "rarity": "Paradoxe",
+        "tier": 5,
+        "charges": 2,
+        "description": "Écrit un événement futur incertain. Ignore les timelines non-hostiles. Déclenche une bataille fantôme si un autre joueur entre en conflit temporel avec l'action prévue.",
+        "temporal_formula": "ψ_blade: ⊙(Δt+3 @x,y ⟶ WRITE_FUTURE(EVENT))",
+        "trigger": "Π(Enemy enters zone @x,y at Δt+3) ⇒ PHANTOM_BATTLE(ψ_blade)",
+        "effects": {
+            "type": "WRITE",
+            "range": 3,
+            "duration": "until_observed",
+            "special": "phantom_battle_on_conflict"
+        }
+    },
+    {
+        "id": "reverse_clock",
+        "name": "Horloge du Dernier Instant",
+        "rarity": "Légendaire",
+        "tier": 4,
+        "charges": 3,
+        "description": "Permet de revenir en arrière de 1 à 3 tours pour un héros ou bâtiment. Crée une zone gélifiée temporaire. Ne peut annuler une action déjà observée.",
+        "temporal_formula": "ψ_clock: ROLLBACK(ENTITY, Δt-n) where n ∈ [1,3]",
+        "trigger": "FREEZE_ZONE(@x,y, radius=2, duration=1)",
+        "effects": {
+            "type": "REWRITE",
+            "rollback_range": [1, 3],
+            "freeze_radius": 2,
+            "freeze_duration": 1
+        }
+    },
+    {
+        "id": "ignorance_beacon",
+        "name": "Balise d'Ignorance Temporelle",
+        "rarity": "Légendaire",
+        "tier": 4,
+        "charges": 3,
+        "description": "Rend les héros faibles 'fantômes temporels'. Permet de passer sans interaction. Crée une micro-anomalie si l'entité redevient active.",
+        "temporal_formula": "TAG(HERO, 'temporal_ghost') if POWER < threshold",
+        "trigger": "ψ_ignore: PASS_THROUGH(@x,y) if TAG exists",
+        "effects": {
+            "type": "WRITE",
+            "condition": "hero_power < 20",
+            "tag": "temporal_ghost",
+            "anomaly_on_reactivation": true
+        }
+    },
+    {
+        "id": "entropy_shard",
+        "name": "Éclat d'Entropie",
+        "rarity": "Légendaire",
+        "tier": 4,
+        "charges": 3,
+        "description": "Crée une zone d'entropie temporelle. Réduit le nombre d'actions possibles. Vieillit les unités (statistiques réduites).",
+        "temporal_formula": "ψ_entropy: DECAY_ZONE(@x,y, radius=3, decay_rate=0.1)",
+        "trigger": "FOR entity IN zone: REDUCE_STATS(entity, 0.9)",
+        "effects": {
+            "type": "ZONE",
+            "radius": 3,
+            "decay_rate": 0.1,
+            "stat_reduction": 0.9
+        }
+    },
+    {
+        "id": "quantum_crown",
+        "name": "👑 Couronne de Superposition",
+        "rarity": "Légendaire",
+        "tier": 6,
+        "charges": 5,
+        "icon": "👑",
+        "slot": "HEAD",
+        "description": "Permet au héros de penser dans plusieurs états simultanément. Peut créer des PsiStates avec interférence constructive pour leadership quantique.",
+        "temporal_formula": "ψ_crown: (0.8+0.6i) * e^(iωt) ⟶ MULTI_THOUGHT_PROCESS",
+        "quantum_amplitude": {
+            "real": 0.8,
+            "imaginary": 0.6,
+            "formula": "(0.8+0.6i) * e^(iωt)"
+        },
+        "quantum_abilities": {
+            "mind_superposition": {
+                "cost": 30,
+                "amplitudes": [
+                    {"real": 0.707, "imaginary": 0.0},
+                    {"real": 0.0, "imaginary": 0.707}
+                ],
+                "action_bonus": 2,
+                "duration": 5
+            },
+            "quantum_leadership": {
+                "cost": 40,
+                "range": 10,
+                "army_bonus": 1.5,
+                "interference_type": "CONSTRUCTIVE"
+            }
+        },
+        "interference_capabilities": {
+            "constructive_bonus": 0.7,
+            "destructive_resistance": 0.8,
+            "phase_control": "TRANSCENDENT"
+        },
+        "stats": {
+            "temporal_energy": 150,
+            "magic_power": 30,
+            "wisdom": 25,
+            "leadership": 20
+        }
+    },
+    {
+        "id": "amplitude_sword",
+        "name": "⚔️ Épée d'Amplitude Pure",
+        "rarity": "Légendaire",
+        "tier": 6,
+        "charges": 7,
+        "icon": "⚔️",
+        "slot": "WEAPON",
+        "description": "Une épée dont la lame existe dans toutes les phases quantiques simultanément. Coupe à travers les phases et résonne avec les amplitudes ennemies.",
+        "temporal_formula": "ψ_sword: |ψ|e^(iφ) where φ adapts to enemy phase",
+        "quantum_amplitude": {
+            "real": 1.0,
+            "imaginary": 0.0,
+            "formula": "|ψ|e^(iφ)",
+            "adaptive_phase": true
+        },
+        "quantum_abilities": {
+            "phase_cut": {
+                "cost": 40,
+                "amplitudes": [
+                    {"real": 1.0, "imaginary": 0.0},
+                    {"real": 0.0, "imaginary": 1.0}
+                ],
+                "damage": 80,
+                "ignore_armor": true
+            },
+            "resonance_strike": {
+                "cost": 35,
+                "resonance_factor": 3.0,
+                "amplification": 2.5
+            }
+        },
+        "interference_capabilities": {
+            "constructive_bonus": 1.0,
+            "destructive_resistance": 0.6,
+            "phase_control": "MASTER"
+        },
+        "stats": {
+            "attack": 50,
+            "temporal_energy": 100,
+            "precision": 30,
+            "critical_chance": 0.4
+        }
+    },
+    {
+        "id": "interference_shield",
+        "name": "🛡️ Bouclier d'Interférence",
+        "rarity": "Légendaire",
+        "tier": 6,
+        "charges": 6,
+        "icon": "🛡️",
+        "slot": "SHIELD",
+        "description": "Un bouclier qui annule les attaques par interférence destructive. Réfléchit les amplitudes entrantes avec phase inversée.",
+        "temporal_formula": "ψ_shield: Σ(ψ_incoming * e^(iπ))",
+        "quantum_amplitude": {
+            "real": 0.6,
+            "imaginary": 0.8,
+            "formula": "Σ(ψ_incoming * e^(iπ))",
+            "phase_inversion": true
+        },
+        "quantum_abilities": {
+            "destructive_wall": {
+                "cost": 50,
+                "amplitudes": [
+                    {"real": 1.0, "imaginary": 0.0},
+                    {"real": -1.0, "imaginary": 0.0}
+                ],
+                "range": 3,
+                "duration": 5
+            },
+            "phase_reflection": {
+                "cost": 30,
+                "reflection_damage": 1.5,
+                "phase_shift": 3.14159
+            }
+        },
+        "interference_capabilities": {
+            "constructive_bonus": 0.3,
+            "destructive_resistance": 1.2,
+            "phase_control": "GRANDMASTER"
+        },
+        "stats": {
+            "defense": 40,
+            "temporal_energy": 120,
+            "reflection": 0.6,
+            "absorption": 0.4
+        }
+    },
+    {
+        "id": "probability_orb",
+        "name": "🔮 Orbe de Probabilité Absolue",
+        "rarity": "Mythique",
+        "tier": 7,
+        "charges": 8,
+        "icon": "🔮",
+        "slot": "ACCESSORY",
+        "description": "Un orbe qui permet de manipuler directement les probabilités quantiques. Peut forcer le collapse vers un résultat spécifique.",
+        "temporal_formula": "ψ_orb: (a+bi) where |ψ|² = desired_probability",
+        "quantum_amplitude": {
+            "real": 0.707,
+            "imaginary": 0.707,
+            "formula": "(a+bi) where |ψ|² = desired_probability",
+            "probability_control": true
+        },
+        "quantum_abilities": {
+            "probability_manipulation": {
+                "cost": 60,
+                "probability_range": [0.0, 1.0],
+                "range": 8,
+                "precision": 0.95
+            },
+            "forced_collapse": {
+                "cost": 80,
+                "success_rate": 0.95,
+                "ignore_resistances": true
+            },
+            "fortune_field": {
+                "cost": 50,
+                "luck_bonus": 2.0,
+                "range": 10,
+                "duration": 10
+            }
+        },
+        "interference_capabilities": {
+            "constructive_bonus": 0.8,
+            "destructive_resistance": 0.8,
+            "phase_control": "TRANSCENDENT"
+        },
+        "stats": {
+            "temporal_energy": 200,
+            "magic_power": 40,
+            "luck": 50,
+            "fate": 30
+        }
+    },
+    {
+        "id": "quantum_heart",
+        "name": "💖 Cœur Quantique",
+        "rarity": "Mythique",
+        "tier": 7,
+        "charges": 10,
+        "icon": "💖",
+        "slot": "CHEST",
+        "description": "Un cœur qui bat au rythme des fluctuations quantiques. Permet la superposition vitale et la guérison dimensionnelle.",
+        "temporal_formula": "ψ_heart: ψ₀ * e^(-iHt/ℏ) where H is quantum Hamiltonian",
+        "quantum_amplitude": {
+            "real": 0.8,
+            "imaginary": 0.6,
+            "formula": "ψ₀ * e^(-iHt/ℏ)",
+            "quantum_entanglement": true
+        },
+        "quantum_abilities": {
+            "life_superposition": {
+                "cost": 100,
+                "amplitudes": [
+                    {"real": 0.9, "imaginary": 0.436},
+                    {"real": 0.436, "imaginary": 0.9}
+                ],
+                "revive_chance": 0.8,
+                "stat_bonus": 0.5
+            },
+            "quantum_healing": {
+                "cost": 70,
+                "healing_factor": 3.0,
+                "range": 5,
+                "dimensional_repair": true
+            },
+            "coherence_field": {
+                "cost": 40,
+                "coherence_bonus": 0.5,
+                "range": 12,
+                "decoherence_protection": true
+            }
+        },
+        "interference_capabilities": {
+            "constructive_bonus": 1.0,
+            "destructive_resistance": 1.0,
+            "phase_control": "ABSOLUTE"
+        },
+        "stats": {
+            "health": 200,
+            "temporal_energy": 300,
+            "regeneration": 20,
+            "coherence": 40
+        }
+    },
+    {
+        "id": "reality_anchor",
+        "name": "⚓ Ancre de Réalité",
+        "rarity": "Cosmique",
+        "tier": 8,
+        "charges": 12,
+        "icon": "⚓",
+        "slot": "SPECIAL",
+        "description": "Une ancre qui maintient la réalité stable face aux fluctuations quantiques. Supprime les effets quantiques dans sa zone d'influence.",
+        "temporal_formula": "ψ_anchor: δ(x - x₀) where x₀ is anchored reality",
+        "quantum_amplitude": {
+            "real": 1.0,
+            "imaginary": 0.0,
+            "formula": "δ(x - x₀)",
+            "reality_stabilization": true
+        },
+        "quantum_abilities": {
+            "reality_lock": {
+                "cost": 150,
+                "stability_radius": 15,
+                "lock_strength": 0.95,
+                "permanent": true
+            },
+            "quantum_suppression": {
+                "cost": 100,
+                "suppression_factor": 0.8,
+                "range": 20,
+                "affects_legendary": true
+            },
+            "certainty_field": {
+                "cost": 120,
+                "certainty_level": 1.0,
+                "range": 10,
+                "cancels_probability": true
+            }
+        },
+        "interference_capabilities": {
+            "constructive_bonus": 0.0,
+            "destructive_resistance": 2.0,
+            "phase_control": "SUPPRESSION"
+        },
+        "stats": {
+            "temporal_energy": 500,
+            "reality": 100,
+            "stability": 80,
+            "control": 60
+        }
+    },
+    {
+        "id": "infinity_codex",
+        "name": "📖 Codex de l'Infini",
+        "rarity": "Cosmique",
+        "tier": 8,
+        "charges": 15,
+        "icon": "📖",
+        "slot": "BOOK",
+        "description": "Un codex qui contient la somme de toutes les connaissances dans toutes les dimensions. Permet la vision omnisciente et l'édition de réalité.",
+        "temporal_formula": "ψ_codex: Σ(all possible knowledge states)",
+        "quantum_amplitude": {
+            "real": 0.577,
+            "imaginary": 0.577,
+            "formula": "Σ(all possible knowledge states)",
+            "omniscient_access": true
+        },
+        "quantum_abilities": {
+            "omniscient_vision": {
+                "cost": 200,
+                "vision_range": "UNLIMITED",
+                "probability_accuracy": 0.99,
+                "dimensional_sight": true
+            },
+            "knowledge_superposition": {
+                "cost": 150,
+                "knowledge_scope": "COSMIC",
+                "temporal_access": true,
+                "instant_knowledge": true
+            },
+            "reality_edit": {
+                "cost": 300,
+                "modification_power": 0.7,
+                "physics_rewrite": true,
+                "cosmic_coherence_limit": true
+            }
+        },
+        "interference_capabilities": {
+            "constructive_bonus": 1.5,
+            "destructive_resistance": 1.5,
+            "phase_control": "OMNIPOTENT"
+        },
+        "stats": {
+            "temporal_energy": 400,
+            "knowledge": 100,
+            "wisdom": 80,
+            "magic_power": 60
+        }
+    }
+]
