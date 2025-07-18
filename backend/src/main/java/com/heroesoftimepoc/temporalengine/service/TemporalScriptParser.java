@@ -38,7 +38,7 @@ public class TemporalScriptParser {
     private static final Pattern BATTLE_PATTERN = Pattern.compile("BATTLE\\(([^,]+),\\s*([^)]+)\\)");
     
     // Heroes of Might & Magic 3 patterns
-    private static final Pattern BUILD_PATTERN = Pattern.compile("BUILD\\(([^,]+),\\s*@(\\d+),(\\d+),\\s*PLAYER:([^)]+)\\)");
+    private static final Pattern BUILD_PATTERN = Pattern.compile("BUILD\\(([^,]+),\\s*([^,]+),\\s*@(\\d+),(\\d+),\\s*([^)]+)\\)");
     private static final Pattern COLLECT_PATTERN = Pattern.compile("COLLECT\\(([^,]+),\\s*(\\d+),\\s*PLAYER:([^)]+)\\)");
     private static final Pattern RECRUIT_PATTERN = Pattern.compile("RECRUIT\\(UNIT,\\s*([^,]+),\\s*(\\d+),\\s*HERO:([^)]+)\\)");
     private static final Pattern CAST_PATTERN = Pattern.compile("CAST\\(SPELL,\\s*([^,]+),\\s*TARGET:([^,]+),\\s*HERO:([^)]+)\\)");
@@ -276,10 +276,16 @@ public class TemporalScriptParser {
         Matcher buildMatcher = BUILD_PATTERN.matcher(scriptLine);
         if (buildMatcher.find()) {
             Map<String, String> params = new HashMap<>();
-            params.put("type", buildMatcher.group(1));
-            params.put("x", buildMatcher.group(2));
-            params.put("y", buildMatcher.group(3));
-            params.put("player", buildMatcher.group(4));
+            // Nouveau format: BUILD(ANCHOR, RealityAnchor, @7,6, lysandrel)
+            // buildMatcher.group(1) = ANCHOR (category)
+            // buildMatcher.group(2) = RealityAnchor (type)
+            // buildMatcher.group(3) = 7 (x)
+            // buildMatcher.group(4) = 6 (y)
+            // buildMatcher.group(5) = lysandrel (player)
+            params.put("type", buildMatcher.group(2)); // Use RealityAnchor as type
+            params.put("x", buildMatcher.group(3));
+            params.put("y", buildMatcher.group(4));
+            params.put("player", buildMatcher.group(5));
             return new ScriptCommand("BUILD", params);
         }
         
