@@ -5,8 +5,8 @@ import com.heroesoftimepoc.temporalengine.repository.GameRepository;
 import com.heroesoftimepoc.temporalengine.repository.HeroRepository;
 import com.heroesoftimepoc.temporalengine.repository.PsiStateRepository;
 import com.heroesoftimepoc.temporalengine.repository.GameTileRepository;
-import com.heroesoftimepoc.temporalengine.service.RegexTemporalScriptParser.ScriptCommand;
-import com.heroesoftimepoc.temporalengine.service.RegexTemporalScriptParser.ObservationTrigger;
+import com.heroesoftimepoc.temporalengine.service.TemporalScriptParser.ScriptCommand;
+import com.heroesoftimepoc.temporalengine.service.TemporalScriptParser.ObservationTrigger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,21 +18,7 @@ import java.util.stream.Collectors;
 @Transactional
 public class TemporalEngineService {
     
-    /**
-     * Generic script command wrapper
-     */
-    private static class ScriptCommand {
-        private final String type;
-        private final Object parameters;
-        
-        public ScriptCommand(String type, Object parameters) {
-            this.type = type;
-            this.parameters = parameters;
-        }
-        
-        public String getType() { return type; }
-        public Object getParameters() { return parameters; }
-    }
+
     
     @Autowired
     private GameRepository gameRepository;
@@ -47,13 +33,15 @@ public class TemporalEngineService {
     private GameTileRepository gameTileRepository;
     
     @Autowired
-    private LispTemporalScriptParser lispParser;
+    private TemporalScriptParser temporalParser;
     
     @Autowired
-    private RegexTemporalScriptParser regexParser;
+    private AntlrTemporalScriptParser antlrParser;
     
-    @Autowired
-    private ParserAdapter parserAdapter;
+    // Configuration pour choisir le parser
+    private final boolean useAntlrParser = Boolean.parseBoolean(
+        System.getProperty("heroes.parser.use.antlr", "false")
+    );
     
     private final Random random = new Random();
     
@@ -72,7 +60,12 @@ public class TemporalEngineService {
         Map<String, Object> result = new HashMap<>();
         
         try {
-            if (lispParser.isTemporalScript(scriptLine) || regexParser.isTemporalScript(scriptLine)) {
+            // Choisir le parser selon la configuration
+            boolean isTemporalScript = useAntlrParser ? 
+                antlrParser.isTemporalScript(scriptLine) : 
+                temporalParser.isTemporalScript(scriptLine);
+                
+            if (isTemporalScript) {
                 result = executeTemporalScript(game, scriptLine);
             } else {
                 result = executeBasicScript(game, scriptLine);
@@ -101,44 +94,34 @@ public class TemporalEngineService {
     private Map<String, Object> executeTemporalScript(Game game, String scriptLine) {
         Map<String, Object> result = new HashMap<>();
         
-        // Try Lisp parser first (preferred), then fallback to regex parser
-        String collapseTarget = lispParser.parseCollapseCommand(scriptLine);
-        if (collapseTarget == null) {
-            collapseTarget = regexParser.parseCollapseCommand(scriptLine);
-            if (collapseTarget != null) {
-                // Normalize from Greek to text format
-                collapseTarget = parserAdapter.normalizeGreekPsiId(collapseTarget);
-            }
-        }
-        
+        // Parse collapse command
+        String collapseTarget = useAntlrParser ? 
+            antlrParser.parseCollapseCommand(scriptLine) : 
+            temporalParser.parseCollapseCommand(scriptLine);
         if (collapseTarget != null) {
             result = executeCollapse(game, collapseTarget);
             return result;
         }
         
         // Parse observation trigger
-        LispTemporalScriptParser.ObservationTrigger lispObservationTrigger = lispParser.parseObservationTrigger(scriptLine);
-        RegexTemporalScriptParser.ObservationTrigger regexObservationTrigger = regexParser.parseObservationTrigger(scriptLine);
-        
-        if (lispObservationTrigger != null) {
-            result = setupObservationTrigger(game, lispObservationTrigger.getTargetPsi(), lispObservationTrigger.getCondition());
-            return result;
-        } else if (regexObservationTrigger != null) {
-            String normalizedPsiId = parserAdapter.normalizeGreekPsiId(regexObservationTrigger.getTargetPsi());
-            result = setupObservationTrigger(game, normalizedPsiId, regexObservationTrigger.getCondition());
-            return result;
-        }
-        
-        // Parse ψ state
-        PsiState psiState = lispParser.parseTemporalScript(scriptLine);
-        if (psiState == null) {
-            psiState = regexParser.parseTemporalScript(scriptLine);
-            if (psiState != null) {
-                // Normalize the PSI state from regex parser
-                psiState = parserAdapter.normalizePsiStateFromRegex(psiState);
+        if (useAntlrParser) {
+            AntlrTemporalScriptParser.ObservationTrigger observationTrigger = antlrParser.parseObservationTrigger(scriptLine);
+            if (observationTrigger != null) {
+                result = setupObservationTrigger(game, observationTrigger.getTargetPsi(), observationTrigger.getCondition());
+                return result;
+            }
+        } else {
+            TemporalScriptParser.ObservationTrigger observationTrigger = temporalParser.parseObservationTrigger(scriptLine);
+            if (observationTrigger != null) {
+                result = setupObservationTrigger(game, observationTrigger.getTargetPsi(), observationTrigger.getCondition());
+                return result;
             }
         }
         
+        // Parse ψ state
+        PsiState psiState = useAntlrParser ? 
+            antlrParser.parseTemporalScript(scriptLine) : 
+            temporalParser.parseTemporalScript(scriptLine);
         if (psiState != null) {
             result = createPsiState(game, psiState);
             return result;
@@ -155,17 +138,15 @@ public class TemporalEngineService {
     private Map<String, Object> executeBasicScript(Game game, String scriptLine) {
         Map<String, Object> result = new HashMap<>();
         
-        // Try Lisp parser first, then fallback to regex parser
-        LispTemporalScriptParser.ScriptCommand lispCommand = lispParser.parseBasicScript(scriptLine);
-        RegexTemporalScriptParser.ScriptCommand regexCommand = regexParser.parseBasicScript(scriptLine);
-        
+        // Parse basic command
         ScriptCommand command = null;
-        if (lispCommand != null) {
-            // Use Lisp parser result
-            command = new ScriptCommand(lispCommand.getType(), lispCommand.getParameters());
-        } else if (regexCommand != null) {
-            // Use regex parser result
-            command = new ScriptCommand(regexCommand.getType(), regexCommand.getParameters());
+        if (useAntlrParser) {
+            AntlrTemporalScriptParser.ScriptCommand antlrCommand = antlrParser.parseBasicScript(scriptLine);
+            if (antlrCommand != null) {
+                command = new ScriptCommand(antlrCommand.getType(), antlrCommand.getParameters());
+            }
+        } else {
+            command = temporalParser.parseBasicScript(scriptLine);
         }
         
         if (command == null) {
