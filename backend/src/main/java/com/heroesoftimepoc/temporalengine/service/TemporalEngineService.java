@@ -5,8 +5,8 @@ import com.heroesoftimepoc.temporalengine.repository.GameRepository;
 import com.heroesoftimepoc.temporalengine.repository.HeroRepository;
 import com.heroesoftimepoc.temporalengine.repository.PsiStateRepository;
 import com.heroesoftimepoc.temporalengine.repository.GameTileRepository;
-import com.heroesoftimepoc.temporalengine.service.TemporalScriptParser.ScriptCommand;
-import com.heroesoftimepoc.temporalengine.service.TemporalScriptParser.ObservationTrigger;
+import com.heroesoftimepoc.temporalengine.service.RegexTemporalScriptParser.ScriptCommand;
+import com.heroesoftimepoc.temporalengine.service.RegexTemporalScriptParser.ObservationTrigger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +17,22 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class TemporalEngineService {
+    
+    /**
+     * Generic script command wrapper
+     */
+    private static class ScriptCommand {
+        private final String type;
+        private final Object parameters;
+        
+        public ScriptCommand(String type, Object parameters) {
+            this.type = type;
+            this.parameters = parameters;
+        }
+        
+        public String getType() { return type; }
+        public Object getParameters() { return parameters; }
+    }
     
     @Autowired
     private GameRepository gameRepository;
@@ -31,7 +47,13 @@ public class TemporalEngineService {
     private GameTileRepository gameTileRepository;
     
     @Autowired
-    private TemporalScriptParser scriptParser;
+    private LispTemporalScriptParser lispParser;
+    
+    @Autowired
+    private RegexTemporalScriptParser regexParser;
+    
+    @Autowired
+    private ParserAdapter parserAdapter;
     
     private final Random random = new Random();
     
@@ -50,7 +72,7 @@ public class TemporalEngineService {
         Map<String, Object> result = new HashMap<>();
         
         try {
-            if (scriptParser.isTemporalScript(scriptLine)) {
+            if (lispParser.isTemporalScript(scriptLine) || regexParser.isTemporalScript(scriptLine)) {
                 result = executeTemporalScript(game, scriptLine);
             } else {
                 result = executeBasicScript(game, scriptLine);
@@ -79,22 +101,44 @@ public class TemporalEngineService {
     private Map<String, Object> executeTemporalScript(Game game, String scriptLine) {
         Map<String, Object> result = new HashMap<>();
         
-        // Parse collapse command
-        String collapseTarget = scriptParser.parseCollapseCommand(scriptLine);
+        // Try Lisp parser first (preferred), then fallback to regex parser
+        String collapseTarget = lispParser.parseCollapseCommand(scriptLine);
+        if (collapseTarget == null) {
+            collapseTarget = regexParser.parseCollapseCommand(scriptLine);
+            if (collapseTarget != null) {
+                // Normalize from Greek to text format
+                collapseTarget = parserAdapter.normalizeGreekPsiId(collapseTarget);
+            }
+        }
+        
         if (collapseTarget != null) {
             result = executeCollapse(game, collapseTarget);
             return result;
         }
         
         // Parse observation trigger
-        ObservationTrigger observationTrigger = scriptParser.parseObservationTrigger(scriptLine);
-        if (observationTrigger != null) {
-            result = setupObservationTrigger(game, observationTrigger);
+        LispTemporalScriptParser.ObservationTrigger lispObservationTrigger = lispParser.parseObservationTrigger(scriptLine);
+        RegexTemporalScriptParser.ObservationTrigger regexObservationTrigger = regexParser.parseObservationTrigger(scriptLine);
+        
+        if (lispObservationTrigger != null) {
+            result = setupObservationTrigger(game, lispObservationTrigger.getTargetPsi(), lispObservationTrigger.getCondition());
+            return result;
+        } else if (regexObservationTrigger != null) {
+            String normalizedPsiId = parserAdapter.normalizeGreekPsiId(regexObservationTrigger.getTargetPsi());
+            result = setupObservationTrigger(game, normalizedPsiId, regexObservationTrigger.getCondition());
             return result;
         }
         
         // Parse ψ state
-        PsiState psiState = scriptParser.parseTemporalScript(scriptLine);
+        PsiState psiState = lispParser.parseTemporalScript(scriptLine);
+        if (psiState == null) {
+            psiState = regexParser.parseTemporalScript(scriptLine);
+            if (psiState != null) {
+                // Normalize the PSI state from regex parser
+                psiState = parserAdapter.normalizePsiStateFromRegex(psiState);
+            }
+        }
+        
         if (psiState != null) {
             result = createPsiState(game, psiState);
             return result;
@@ -110,7 +154,19 @@ public class TemporalEngineService {
      */
     private Map<String, Object> executeBasicScript(Game game, String scriptLine) {
         Map<String, Object> result = new HashMap<>();
-        ScriptCommand command = scriptParser.parseBasicScript(scriptLine);
+        
+        // Try Lisp parser first, then fallback to regex parser
+        LispTemporalScriptParser.ScriptCommand lispCommand = lispParser.parseBasicScript(scriptLine);
+        RegexTemporalScriptParser.ScriptCommand regexCommand = regexParser.parseBasicScript(scriptLine);
+        
+        ScriptCommand command = null;
+        if (lispCommand != null) {
+            // Use Lisp parser result
+            command = new ScriptCommand(lispCommand.getType(), lispCommand.getParameters());
+        } else if (regexCommand != null) {
+            // Use regex parser result
+            command = new ScriptCommand(regexCommand.getType(), regexCommand.getParameters());
+        }
         
         if (command == null) {
             result.put("error", "Invalid script command");
@@ -362,22 +418,22 @@ public class TemporalEngineService {
     /**
      * Setup an observation trigger
      */
-    private Map<String, Object> setupObservationTrigger(Game game, ObservationTrigger trigger) {
+    private Map<String, Object> setupObservationTrigger(Game game, String targetPsiId, String condition) {
         Map<String, Object> result = new HashMap<>();
         
         // Store the trigger logic (simplified implementation)
         PsiState targetPsi = game.getPsiStates().stream()
-                .filter(psi -> psi.getPsiId().equals(trigger.getTargetPsi()))
+                .filter(psi -> psi.getPsiId().equals(targetPsiId))
                 .findFirst()
                 .orElse(null);
         
         if (targetPsi != null) {
-            targetPsi.setCollapseTrigger(trigger.getCondition());
+            targetPsi.setCollapseTrigger(condition);
             psiStateRepository.save(targetPsi);
-            result.put("message", "Observation trigger set for " + trigger.getTargetPsi());
+            result.put("message", "Observation trigger set for " + targetPsiId);
             result.put("success", true);
         } else {
-            result.put("error", "Target ψ state not found: " + trigger.getTargetPsi());
+            result.put("error", "Target ψ state not found: " + targetPsiId);
             result.put("success", false);
         }
         
