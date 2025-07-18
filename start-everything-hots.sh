@@ -122,11 +122,9 @@ echo "• Frontend Temporel: tail -f frontend-temporal-master.log"
 echo "• Quantum Visualizer: tail -f quantum-visualizer-master.log"
 echo ""
 echo "🛑 Pour arrêter tout:"
-echo "• Ctrl+C puis: pkill -f 'spring-boot\\|http.server'"
+echo "• ./stop-everything.sh"
 echo "• Ou: lsof -ti:8080,8000,5173,8001 | xargs -r kill -9"
 echo ""
-echo "🎯 Système prêt! Appuyez sur Ctrl+C pour arrêter tous les services."
+echo "🎯 Système prêt! Console libre pour travailler."
 
-# Attendre l'interruption
-trap cleanup EXIT
-wait 
+# Pas de wait - laisser la console libre 

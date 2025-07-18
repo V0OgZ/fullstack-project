@@ -4,23 +4,55 @@ class QuantumVisualizer {
         this.currentGameId = null;
         this.refreshInterval = null;
         this.scenarioLoader = null;
+        this.isAutoPlay = false;
+        this.currentTurn = 1;
         this.initializeEventListeners();
         this.loadGames();
         this.initializeScenarioLoader();
+        
+        // Rendre les fonctions globales pour onclick
+        window.toggleAutoPlay = () => this.toggleAutoPlay();
+        window.pauseVisualization = () => this.pauseVisualization();
+        window.nextTurn = () => this.nextTurn();
+        window.resetVisualization = () => this.resetVisualization();
     }
 
     initializeEventListeners() {
-        document.getElementById('createGame').addEventListener('click', () => this.createGame());
-        document.getElementById('loadGame').addEventListener('click', () => this.loadGame());
-        document.getElementById('refreshState').addEventListener('click', () => this.refreshGameState());
-        document.getElementById('executeCommand').addEventListener('click', () => this.executeCommand());
-        document.getElementById('commandInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') this.executeCommand();
-        });
-        document.getElementById('gameSelect').addEventListener('change', (e) => {
-            this.currentGameId = e.target.value;
-            if (this.currentGameId) this.loadGameState();
-        });
+        // Vérifier si les éléments existent avant d'ajouter les listeners
+        const createGameBtn = document.getElementById('createGame');
+        if (createGameBtn) {
+            createGameBtn.addEventListener('click', () => this.createGame());
+        }
+        
+        const loadGameBtn = document.getElementById('loadGame');
+        if (loadGameBtn) {
+            loadGameBtn.addEventListener('click', () => this.loadGame());
+        }
+        
+        const refreshStateBtn = document.getElementById('refreshState');
+        if (refreshStateBtn) {
+            refreshStateBtn.addEventListener('click', () => this.refreshGameState());
+        }
+        
+        const executeCommandBtn = document.getElementById('executeCommand');
+        if (executeCommandBtn) {
+            executeCommandBtn.addEventListener('click', () => this.executeCommand());
+        }
+        
+        const commandInput = document.getElementById('commandInput');
+        if (commandInput) {
+            commandInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') this.executeCommand();
+            });
+        }
+        
+        const gameSelect = document.getElementById('gameSelect');
+        if (gameSelect) {
+            gameSelect.addEventListener('change', (e) => {
+                this.currentGameId = e.target.value;
+                if (this.currentGameId) this.loadGameState();
+            });
+        }
     }
 
     async loadGames() {
@@ -345,6 +377,83 @@ class QuantumVisualizer {
         div.textContent = prefix + message;
         output.appendChild(div);
         output.scrollTop = output.scrollHeight;
+    }
+
+    toggleAutoPlay() {
+        this.isAutoPlay = !this.isAutoPlay;
+        const playBtn = document.getElementById('play-btn');
+        const pauseBtn = document.getElementById('pause-btn');
+        
+        if (this.isAutoPlay) {
+            if (playBtn) playBtn.textContent = '⏸️ Pause';
+            console.log('🎮 Auto-play activé');
+            this.startAutoPlay();
+        } else {
+            if (playBtn) playBtn.textContent = '▶️ Lecture';
+            console.log('🎮 Auto-play désactivé');
+            this.stopAutoPlay();
+        }
+    }
+
+    pauseVisualization() {
+        this.isAutoPlay = false;
+        const playBtn = document.getElementById('play-btn');
+        if (playBtn) playBtn.textContent = '▶️ Lecture';
+        console.log('⏸️ Visualisation en pause');
+        this.stopAutoPlay();
+    }
+
+    nextTurn() {
+        this.currentTurn++;
+        const turnElement = document.getElementById('turn-number');
+        if (turnElement) turnElement.textContent = this.currentTurn;
+        console.log(`⏭️ Tour suivant: ${this.currentTurn}`);
+        this.processNextTurn();
+    }
+
+    resetVisualization() {
+        this.currentTurn = 1;
+        this.isAutoPlay = false;
+        const turnElement = document.getElementById('turn-number');
+        if (turnElement) turnElement.textContent = this.currentTurn;
+        const playBtn = document.getElementById('play-btn');
+        if (playBtn) playBtn.textContent = '▶️ Lecture';
+        console.log('🔄 Visualisation réinitialisée');
+        this.resetGameState();
+    }
+
+    startAutoPlay() {
+        if (this.refreshInterval) return;
+        this.refreshInterval = setInterval(() => {
+            if (this.isAutoPlay) {
+                this.nextTurn();
+            }
+        }, 2000);
+    }
+
+    stopAutoPlay() {
+        if (this.refreshInterval) {
+            clearInterval(this.refreshInterval);
+            this.refreshInterval = null;
+        }
+    }
+
+    processNextTurn() {
+        // Logique pour traiter le tour suivant
+        this.updateGameState();
+    }
+
+    resetGameState() {
+        // Logique pour réinitialiser l'état du jeu
+        this.updateGameState();
+    }
+
+    updateGameState() {
+        // Mettre à jour l'interface avec l'état actuel
+        const phaseElement = document.getElementById('phase-indicator');
+        if (phaseElement) {
+            phaseElement.textContent = `Tour ${this.currentTurn} - Phase active`;
+        }
     }
 }
 
