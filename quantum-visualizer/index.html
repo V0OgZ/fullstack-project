@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heroes of Time - Quantum Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌟 Heroes of Time - Quantum Visualizer</h1>
+            <p>Visualisation en temps réel du système quantique</p>
+        </header>
+
+        <div class="controls">
+            <button id="createGame">Créer Partie</button>
+            <button id="loadGame">Charger Partie</button>
+            <button id="refreshState">Actualiser</button>
+            <select id="gameSelect">
+                <option value="">Sélectionner une partie...</option>
+            </select>
+        </div>
+
+        <div class="main-content">
+            <div class="left-panel">
+                <div class="section">
+                    <h2>🎮 État du Jeu</h2>
+                    <div id="gameInfo">
+                        <p>Aucune partie chargée</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>🦸 Héros</h2>
+                    <div id="heroList"></div>
+                </div>
+
+                <div class="section">
+                    <h2>📊 Métriques Quantiques</h2>
+                    <div id="quantumMetrics">
+                        <div class="metric">
+                            <span class="label">États Complexes:</span>
+                            <span id="complexStates">0</span>
+                        </div>
+                        <div class="metric">
+                            <span class="label">États Classiques:</span>
+                            <span id="classicStates">0</span>
+                        </div>
+                        <div class="metric">
+                            <span class="label">Zones d'Interférence:</span>
+                            <span id="interferenceZones">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="center-panel">
+                <div class="section">
+                    <h2>🌀 États Quantiques (ψ-states)</h2>
+                    <div id="psiStates"></div>
+                </div>
+
+                <div class="section">
+                    <h2>🎯 Zones d'Interférence</h2>
+                    <div id="interferenceDisplay"></div>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <div class="section">
+                    <h2>🎮 Console de Commandes</h2>
+                    <div class="command-input">
+                        <input type="text" id="commandInput" placeholder="Entrez une commande quantique...">
+                        <button id="executeCommand">Exécuter</button>
+                    </div>
+                    <div id="commandOutput"></div>
+                </div>
+
+                <div class="section">
+                    <h2>📈 Visualisation Amplitudes</h2>
+                    <canvas id="amplitudeChart" width="300" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="quantum-visualizer.js"></script>
+</body>
+</html> 
