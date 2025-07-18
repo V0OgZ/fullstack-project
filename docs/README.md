@@ -14,6 +14,7 @@ Heroes of Time est un jeu de stratégie **asynchrone** qui combine les mécaniqu
 - [**API.md**](API.md) - Documentation de l'API REST
 - [**TECHNICAL.md**](TECHNICAL.md) - Détails techniques du moteur temporel
 - [**SCRIPT_REFERENCE.md**](SCRIPT_REFERENCE.md) - Référence des scripts .hots
+- [**TEMPORAL_CODEX.md**](TEMPORAL_CODEX.md) - 🆕 Codex complet des artefacts temporels et mécaniques avancées
 
 ## 🎮 Concept du jeu
 
