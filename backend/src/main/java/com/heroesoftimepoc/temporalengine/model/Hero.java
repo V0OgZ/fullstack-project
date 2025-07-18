@@ -58,6 +58,9 @@ public class Hero {
     @Column(name = "player_id")
     private String playerId;
     
+    @Column(name = "vision_radius")
+    private Integer visionRadius = 3; // Rayon de vision par défaut
+    
     public enum HeroStatus {
         ACTIVE,
         TEMPORAL_SHIFT,
@@ -120,6 +123,9 @@ public class Hero {
     
     public String getPlayerId() { return playerId; }
     public void setPlayerId(String playerId) { this.playerId = playerId; }
+    
+    public Integer getVisionRadius() { return visionRadius; }
+    public void setVisionRadius(Integer visionRadius) { this.visionRadius = visionRadius; }
     
     // Helper methods
     public void moveTo(int x, int y) {
