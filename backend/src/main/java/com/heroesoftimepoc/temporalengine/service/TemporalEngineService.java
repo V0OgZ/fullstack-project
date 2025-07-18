@@ -7,6 +7,9 @@ import com.heroesoftimepoc.temporalengine.repository.PsiStateRepository;
 import com.heroesoftimepoc.temporalengine.repository.GameTileRepository;
 import com.heroesoftimepoc.temporalengine.service.TemporalScriptParser.ScriptCommand;
 import com.heroesoftimepoc.temporalengine.service.TemporalScriptParser.ObservationTrigger;
+import com.heroesoftimepoc.temporalengine.service.QuantumInterferenceService;
+import com.heroesoftimepoc.temporalengine.service.QuantumMigrationService;
+import com.heroesoftimepoc.temporalengine.model.ComplexAmplitude;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,6 +40,12 @@ public class TemporalEngineService {
     
     @Autowired
     private AntlrTemporalScriptParser antlrParser;
+    
+    @Autowired
+    private QuantumInterferenceService quantumInterferenceService;
+    
+    @Autowired
+    private QuantumMigrationService quantumMigrationService;
     
     // Configuration pour choisir le parser
     private final boolean useAntlrParser = Boolean.parseBoolean(
@@ -237,6 +246,25 @@ public class TemporalEngineService {
         if (!conflicts.isEmpty()) {
             result.put("warning", "Potential conflicts detected with existing ψ states");
             result.put("conflicts", conflicts.stream().map(PsiState::getPsiId).collect(Collectors.toList()));
+            
+            // Calcul des interférences quantiques si applicable
+            if (psiState.isUsingComplexAmplitude()) {
+                List<PsiState> interferingStates = quantumInterferenceService.findInterferingStates(game, psiState);
+                if (!interferingStates.isEmpty()) {
+                    QuantumInterferenceService.InterferenceResult interference = 
+                        quantumInterferenceService.calculateInterferenceAtPosition(game, 
+                            psiState.getTargetX(), psiState.getTargetY());
+                    
+                    result.put("quantumInterference", interference.toString());
+                    result.put("interferenceType", interference.getType().toString());
+                    result.put("combinedProbability", interference.getCombinedProbability());
+                    
+                    // Calculer les effets sur le jeu
+                    Map<String, Object> interferenceEffects = 
+                        quantumInterferenceService.calculateInterferenceEffects(game, interference);
+                    result.put("interferenceEffects", interferenceEffects);
+                }
+            }
         }
         
         // Save the ψ state
@@ -245,6 +273,15 @@ public class TemporalEngineService {
         
         result.put("psiId", psiState.getPsiId());
         result.put("futureTurn", futureTurn);
+        result.put("usingComplexAmplitude", psiState.isUsingComplexAmplitude());
+        
+        if (psiState.isUsingComplexAmplitude()) {
+            result.put("complexAmplitude", psiState.getComplexAmplitude().toString());
+            result.put("probability", psiState.getComplexAmplitude().getProbability());
+        } else {
+            result.put("probability", psiState.getProbability());
+        }
+        
         result.put("message", "ψ state " + psiState.getPsiId() + " created successfully");
         result.put("success", true);
         
@@ -252,7 +289,7 @@ public class TemporalEngineService {
     }
     
     /**
-     * Execute a collapse command
+     * Execute a collapse command with quantum interference support
      */
     private Map<String, Object> executeCollapse(Game game, String psiId) {
         Map<String, Object> result = new HashMap<>();
@@ -266,6 +303,27 @@ public class TemporalEngineService {
             result.put("error", "ψ state not found or already collapsed: " + psiId);
             result.put("success", false);
             return result;
+        }
+        
+        // Calcul des interférences avant collapse si applicable
+        if (psiState.isUsingComplexAmplitude() && psiState.getTargetX() != null && psiState.getTargetY() != null) {
+            List<PsiState> interferingStates = quantumInterferenceService.findInterferingStates(game, psiState);
+            if (!interferingStates.isEmpty()) {
+                QuantumInterferenceService.InterferenceResult interference = 
+                    quantumInterferenceService.calculateInterferenceAtPosition(game, 
+                        psiState.getTargetX(), psiState.getTargetY());
+                
+                result.put("preCollapseInterference", interference.toString());
+                
+                // Appliquer les effets d'interférence
+                Map<String, Object> interferenceEffects = 
+                    quantumInterferenceService.calculateInterferenceEffects(game, interference);
+                result.put("interferenceEffects", interferenceEffects);
+                
+                // Modifier la probabilité de succès en fonction de l'interférence
+                double successModifier = (Double) interferenceEffects.get("successModifier");
+                result.put("successModifier", successModifier);
+            }
         }
         
         // Execute the action in the ψ state
@@ -849,6 +907,9 @@ public class TemporalEngineService {
     // END HEROES OF MIGHT & MAGIC 3 FUNCTIONS
     // =========================================
     
+    /**
+     * Get game state with quantum temporal information
+     */
     public Map<String, Object> getGameState(Long gameId) {
         Game game = gameRepository.findById(gameId).orElseThrow();
         Map<String, Object> result = new HashMap<>();
@@ -866,11 +927,15 @@ public class TemporalEngineService {
                 .collect(Collectors.toList());
         result.put("heroes", heroes);
         
-        // Add active ψ states
+        // Add active ψ states with quantum information
         List<Map<String, Object>> psiStates = game.getActivePsiStates().stream()
                 .map(this::serializePsiState)
                 .collect(Collectors.toList());
         result.put("psiStates", psiStates);
+        
+        // Add quantum interference analysis
+        Map<String, Object> quantumAnalysis = analyzeQuantumInterferences(game);
+        result.put("quantumAnalysis", quantumAnalysis);
         
         // Add tiles with temporal information
         List<Map<String, Object>> tiles = game.getTiles().stream()
@@ -879,6 +944,53 @@ public class TemporalEngineService {
         result.put("tiles", tiles);
         
         return result;
+    }
+    
+    /**
+     * Analyze quantum interferences in the game
+     */
+    private Map<String, Object> analyzeQuantumInterferences(Game game) {
+        Map<String, Object> analysis = new HashMap<>();
+        
+        List<PsiState> complexStates = game.getActivePsiStates().stream()
+                .filter(PsiState::isUsingComplexAmplitude)
+                .collect(Collectors.toList());
+        
+        analysis.put("totalComplexStates", complexStates.size());
+        analysis.put("totalClassicStates", game.getActivePsiStates().size() - complexStates.size());
+        
+        // Trouver les positions avec interférences
+        Map<String, List<PsiState>> statesByPosition = complexStates.stream()
+                .filter(psi -> psi.getTargetX() != null && psi.getTargetY() != null)
+                .collect(Collectors.groupingBy(psi -> psi.getTargetX() + "," + psi.getTargetY()));
+        
+        List<Map<String, Object>> interferenceZones = new ArrayList<>();
+        for (Map.Entry<String, List<PsiState>> entry : statesByPosition.entrySet()) {
+            List<PsiState> statesAtPosition = entry.getValue();
+            if (statesAtPosition.size() > 1) {
+                String[] coords = entry.getKey().split(",");
+                int x = Integer.parseInt(coords[0]);
+                int y = Integer.parseInt(coords[1]);
+                
+                QuantumInterferenceService.InterferenceResult interference = 
+                    quantumInterferenceService.calculateInterferenceAtPosition(game, x, y);
+                
+                Map<String, Object> zone = new HashMap<>();
+                zone.put("position", Map.of("x", x, "y", y));
+                zone.put("stateCount", statesAtPosition.size());
+                zone.put("interference", interference.toString());
+                zone.put("type", interference.getType().toString());
+                zone.put("combinedProbability", interference.getCombinedProbability());
+                zone.put("contrast", interference.getContrast());
+                
+                interferenceZones.add(zone);
+            }
+        }
+        
+        analysis.put("interferenceZones", interferenceZones);
+        analysis.put("totalInterferenceZones", interferenceZones.size());
+        
+        return analysis;
     }
     
     private Map<String, Object> serializeHero(Hero hero) {
@@ -906,7 +1018,21 @@ public class TemporalEngineService {
         psiData.put("deltaT", psiState.getDeltaT());
         psiData.put("actionType", psiState.getActionType());
         psiData.put("ownerHero", psiState.getOwnerHero());
-        psiData.put("probability", psiState.getProbability());
+        
+        // Quantum information
+        psiData.put("usingComplexAmplitude", psiState.isUsingComplexAmplitude());
+        if (psiState.isUsingComplexAmplitude()) {
+            ComplexAmplitude amplitude = psiState.getComplexAmplitude();
+            psiData.put("complexAmplitude", amplitude.toString());
+            psiData.put("realPart", amplitude.getRealPart());
+            psiData.put("imaginaryPart", amplitude.getImaginaryPart());
+            psiData.put("magnitude", amplitude.getMagnitude());
+            psiData.put("phase", amplitude.getPhase());
+            psiData.put("probability", amplitude.getProbability());
+        } else {
+            psiData.put("probability", psiState.getProbability());
+        }
+        
         return psiData;
     }
     
@@ -921,4 +1047,75 @@ public class TemporalEngineService {
         tileData.put("buildingOwner", tile.getBuildingOwner());
         return tileData;
     }
+    
+    /**
+     * Create quantum interference scenario
+     */
+    public Map<String, Object> createQuantumInterferenceScenario(Long gameId, int x, int y, 
+                                                                List<ComplexAmplitude> amplitudes) {
+        Game game = gameRepository.findById(gameId).orElseThrow();
+        Map<String, Object> result = new HashMap<>();
+        
+        List<PsiState> createdStates = new ArrayList<>();
+        
+        for (int i = 0; i < amplitudes.size(); i++) {
+            ComplexAmplitude amplitude = amplitudes.get(i);
+            
+            PsiState psiState = new PsiState();
+            psiState.setPsiId("ψ" + String.format("%03d", game.getPsiStates().size() + i + 1));
+            psiState.setExpression("Quantum interference scenario");
+            psiState.setBranchId("ℬ1");
+            psiState.setTargetX(x);
+            psiState.setTargetY(y);
+            psiState.setComplexAmplitude(amplitude);
+            psiState.setUseComplexAmplitude(true);
+            psiState.setGame(game);
+            
+            psiStateRepository.save(psiState);
+            game.addPsiState(psiState);
+            createdStates.add(psiState);
+        }
+        
+        // Calculer l'interférence résultante
+        QuantumInterferenceService.InterferenceResult interference = 
+            quantumInterferenceService.calculateInterference(createdStates);
+        
+        result.put("createdStates", createdStates.stream()
+                .map(PsiState::getPsiId)
+                .collect(Collectors.toList()));
+        result.put("interference", interference.toString());
+        result.put("combinedProbability", interference.getCombinedProbability());
+        result.put("type", interference.getType().toString());
+        
+        return result;
+    }
+    
+    /**
+     * Migrate game to quantum amplitudes
+     */
+    public Map<String, Object> migrateToQuantumAmplitudes(Long gameId) {
+        QuantumMigrationService.MigrationResult migration = 
+            quantumMigrationService.migrateGameToComplexAmplitudes(gameId);
+        
+        Map<String, Object> result = new HashMap<>();
+        result.put("migrationResult", migration.toString());
+        result.put("migratedStates", migration.getMigratedStates());
+        result.put("skippedStates", migration.getSkippedStates());
+        result.put("errors", migration.getErrors());
+        result.put("messages", migration.getMessages());
+        result.put("success", migration.isSuccess());
+        
+        return result;
+    }
+    
+    /**
+     * Get quantum migration analysis
+     */
+    public Map<String, Object> getQuantumMigrationAnalysis(Long gameId) {
+        return quantumMigrationService.generateMigrationReport(gameId);
+    }
+    
+    // =========================================
+    // END HEROES OF MIGHT & MAGIC 3 FUNCTIONS
+    // =========================================
 }

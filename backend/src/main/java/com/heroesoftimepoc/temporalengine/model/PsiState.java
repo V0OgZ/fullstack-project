@@ -23,6 +23,17 @@ public class PsiState {
     @Column(name = "probability")
     private Double probability = 1.0;
     
+    // Amplitude complexe pour les calculs quantiques avancés
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "realPart", column = @Column(name = "amplitude_real")),
+        @AttributeOverride(name = "imaginaryPart", column = @Column(name = "amplitude_imaginary"))
+    })
+    private ComplexAmplitude complexAmplitude;
+    
+    @Column(name = "use_complex_amplitude")
+    private Boolean useComplexAmplitude = false;
+    
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private PsiStatus status = PsiStatus.ACTIVE;
@@ -62,6 +73,7 @@ public class PsiState {
     // Constructors
     public PsiState() {
         this.createdAt = LocalDateTime.now();
+        this.complexAmplitude = new ComplexAmplitude(1.0, 0.0);
     }
     
     public PsiState(String psiId, String expression, String branchId) {
@@ -84,8 +96,32 @@ public class PsiState {
     public String getBranchId() { return branchId; }
     public void setBranchId(String branchId) { this.branchId = branchId; }
     
-    public Double getProbability() { return probability; }
-    public void setProbability(Double probability) { this.probability = probability; }
+    public Double getProbability() { 
+        if (useComplexAmplitude != null && useComplexAmplitude && complexAmplitude != null) {
+            return complexAmplitude.getProbability();
+        }
+        return probability; 
+    }
+    
+    public void setProbability(Double probability) { 
+        this.probability = probability; 
+        // Synchroniser avec l'amplitude complexe si elle est utilisée
+        if (useComplexAmplitude != null && useComplexAmplitude && probability != null) {
+            this.complexAmplitude = ComplexAmplitude.fromProbability(probability);
+        }
+    }
+    
+    public ComplexAmplitude getComplexAmplitude() { return complexAmplitude; }
+    public void setComplexAmplitude(ComplexAmplitude complexAmplitude) { 
+        this.complexAmplitude = complexAmplitude; 
+        // Synchroniser avec la probabilité classique
+        if (complexAmplitude != null) {
+            this.probability = complexAmplitude.getProbability();
+        }
+    }
+    
+    public Boolean getUseComplexAmplitude() { return useComplexAmplitude; }
+    public void setUseComplexAmplitude(Boolean useComplexAmplitude) { this.useComplexAmplitude = useComplexAmplitude; }
     
     public PsiStatus getStatus() { return status; }
     public void setStatus(PsiStatus status) { this.status = status; }
@@ -114,6 +150,96 @@ public class PsiState {
     public Game getGame() { return game; }
     public void setGame(Game game) { this.game = game; }
     
+    // Quantum amplitude methods
+    
+    /**
+     * Active le mode amplitude complexe
+     */
+    public void enableComplexAmplitude() {
+        this.useComplexAmplitude = true;
+        if (this.complexAmplitude == null) {
+            this.complexAmplitude = ComplexAmplitude.fromProbability(this.probability != null ? this.probability : 1.0);
+        }
+    }
+    
+    /**
+     * Désactive le mode amplitude complexe et revient aux probabilités classiques
+     */
+    public void disableComplexAmplitude() {
+        this.useComplexAmplitude = false;
+        if (this.complexAmplitude != null) {
+            this.probability = this.complexAmplitude.getProbability();
+        }
+    }
+    
+    /**
+     * Définit l'amplitude complexe à partir de composantes réelles et imaginaires
+     */
+    public void setComplexAmplitude(double realPart, double imaginaryPart) {
+        this.complexAmplitude = new ComplexAmplitude(realPart, imaginaryPart);
+        this.useComplexAmplitude = true;
+        this.probability = this.complexAmplitude.getProbability();
+    }
+    
+    /**
+     * Définit l'amplitude complexe à partir de magnitude et phase
+     */
+    public void setComplexAmplitudeFromPolar(double magnitude, double phase) {
+        this.complexAmplitude = ComplexAmplitude.fromPolar(magnitude, phase);
+        this.useComplexAmplitude = true;
+        this.probability = this.complexAmplitude.getProbability();
+    }
+    
+    /**
+     * Obtient la probabilité effective (compatible avec l'ancien système)
+     */
+    public double getEffectiveProbability() {
+        if (useComplexAmplitude != null && useComplexAmplitude && complexAmplitude != null) {
+            return complexAmplitude.getProbability();
+        }
+        return probability != null ? probability : 1.0;
+    }
+    
+    /**
+     * Vérifie si cette PsiState utilise les amplitudes complexes
+     */
+    public boolean isUsingComplexAmplitude() {
+        return useComplexAmplitude != null && useComplexAmplitude;
+    }
+    
+    /**
+     * Calcule l'interférence avec une autre PsiState
+     */
+    public ComplexAmplitude calculateInterference(PsiState other) {
+        if (!this.isUsingComplexAmplitude() || !other.isUsingComplexAmplitude()) {
+            throw new IllegalStateException("Les deux PsiState doivent utiliser les amplitudes complexes");
+        }
+        
+        return this.complexAmplitude.add(other.complexAmplitude);
+    }
+    
+    /**
+     * Calcule l'interférence constructive avec une autre PsiState
+     */
+    public ComplexAmplitude calculateConstructiveInterference(PsiState other) {
+        if (!this.isUsingComplexAmplitude() || !other.isUsingComplexAmplitude()) {
+            throw new IllegalStateException("Les deux PsiState doivent utiliser les amplitudes complexes");
+        }
+        
+        return ComplexAmplitude.constructiveInterference(this.complexAmplitude, other.complexAmplitude);
+    }
+    
+    /**
+     * Calcule l'interférence destructive avec une autre PsiState
+     */
+    public ComplexAmplitude calculateDestructiveInterference(PsiState other) {
+        if (!this.isUsingComplexAmplitude() || !other.isUsingComplexAmplitude()) {
+            throw new IllegalStateException("Les deux PsiState doivent utiliser les amplitudes complexes");
+        }
+        
+        return ComplexAmplitude.destructiveInterference(this.complexAmplitude, other.complexAmplitude);
+    }
+    
     // Helper methods
     public boolean isActive() {
         return status == PsiStatus.ACTIVE;
@@ -130,7 +256,12 @@ public class PsiState {
     
     @Override
     public String toString() {
-        return String.format("PsiState{id='%s', expression='%s', status=%s, branch='%s'}", 
-                           psiId, expression, status, branchId);
+        if (isUsingComplexAmplitude()) {
+            return String.format("PsiState{id='%s', expression='%s', status=%s, branch='%s', amplitude=%s}", 
+                               psiId, expression, status, branchId, complexAmplitude.toString());
+        } else {
+            return String.format("PsiState{id='%s', expression='%s', status=%s, branch='%s', probability=%.4f}", 
+                               psiId, expression, status, branchId, probability);
+        }
     }
 }
