@@ -1,0 +1,102 @@
+# 🌀 GROS SCÉNARIO DE STRESS TEST TEMPOREL
+# Test intensif avec 20 ψ-states parallèles sur 10 tours
+# Simulation de mémoire et performance sur longue durée
+
+# === SETUP DU STRESS TEST ===
+GAME: "Temporal Stress Test - 20 PsiStates"
+
+# === HÉROS POUR LE STRESS TEST ===
+HERO: StressHero1
+HERO: StressHero2
+HERO: StressHero3
+HERO: StressHero4
+HERO: StressHero5
+
+# === POSITIONNEMENT INITIAL ===
+MOV(StressHero1, @10,10)
+MOV(StressHero2, @20,20)
+MOV(StressHero3, @30,30)
+MOV(StressHero4, @40,40)
+MOV(StressHero5, @50,50)
+
+# === PHASE 1: CRÉATION DE 20 Ψ-STATES PARALLÈLES ===
+ψ101: ⊙(Δt+1 @11,11 ⟶ MOV(StressHero1, @11,11))
+ψ102: ⊙(Δt+1 @12,12 ⟶ MOV(StressHero1, @12,12))
+ψ103: ⊙(Δt+1 @13,13 ⟶ MOV(StressHero1, @13,13))
+ψ104: ⊙(Δt+1 @14,14 ⟶ MOV(StressHero1, @14,14))
+
+ψ201: ⊙(Δt+2 @21,21 ⟶ MOV(StressHero2, @21,21))
+ψ202: ⊙(Δt+2 @22,22 ⟶ MOV(StressHero2, @22,22))
+ψ203: ⊙(Δt+2 @23,23 ⟶ MOV(StressHero2, @23,23))
+ψ204: ⊙(Δt+2 @24,24 ⟶ MOV(StressHero2, @24,24))
+
+ψ301: ⊙(Δt+3 @31,31 ⟶ CREATE(CREATURE, Dragon1, @31,31))
+ψ302: ⊙(Δt+3 @32,32 ⟶ CREATE(CREATURE, Dragon2, @32,32))
+ψ303: ⊙(Δt+3 @33,33 ⟶ CREATE(CREATURE, Dragon3, @33,33))
+ψ304: ⊙(Δt+3 @34,34 ⟶ CREATE(CREATURE, Dragon4, @34,34))
+
+ψ401: ⊙(Δt+4 @41,41 ⟶ BATTLE(StressHero3, Dragon1))
+ψ402: ⊙(Δt+4 @42,42 ⟶ BATTLE(StressHero3, Dragon2))
+ψ403: ⊙(Δt+4 @43,43 ⟶ BATTLE(StressHero3, Dragon3))
+ψ404: ⊙(Δt+4 @44,44 ⟶ BATTLE(StressHero3, Dragon4))
+
+ψ501: ⊙(Δt+5 @51,51 ⟶ CREATE(ITEM, StressSword1, StressHero4))
+ψ502: ⊙(Δt+5 @52,52 ⟶ CREATE(ITEM, StressSword2, StressHero4))
+ψ503: ⊙(Δt+5 @53,53 ⟶ CREATE(ITEM, StressSword3, StressHero5))
+ψ504: ⊙(Δt+5 @54,54 ⟶ CREATE(ITEM, StressSword4, StressHero5))
+
+# === PHASE 2: SIMULATION DE 10 TOURS ===
+NEXT_TURN
+NEXT_TURN
+NEXT_TURN
+NEXT_TURN
+NEXT_TURN
+NEXT_TURN
+NEXT_TURN
+NEXT_TURN
+NEXT_TURN
+NEXT_TURN
+
+# === PHASE 3: EFFONDREMENT PARTIEL ===
+†ψ101
+†ψ102
+†ψ201
+†ψ202
+†ψ301
+†ψ302
+†ψ401
+†ψ402
+†ψ501
+†ψ502
+
+# === PHASE 4: PLUS DE TOURS POUR TESTER LA PERSISTANCE ===
+NEXT_TURN
+NEXT_TURN
+NEXT_TURN
+NEXT_TURN
+NEXT_TURN
+
+# === PHASE 5: EFFONDREMENT FINAL ===
+†ψ103
+†ψ104
+†ψ203
+†ψ204
+†ψ303
+†ψ304
+†ψ403
+†ψ404
+†ψ503
+†ψ504
+
+# === BATAILLE FINALE ===
+BATTLE(StressHero1, StressHero2)
+BATTLE(StressHero3, StressHero4)
+BATTLE(StressHero5, StressHero1)
+
+# === METADATA ===
+# Expected duration: 15-30 seconds
+# Expected ψ-states: 20 total
+# Expected turns: 15
+# Expected battles: 7
+# Expected memory test: Heavy
+# Expected performance: Intensive 
