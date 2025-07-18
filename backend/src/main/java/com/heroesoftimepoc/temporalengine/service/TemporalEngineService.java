@@ -49,7 +49,7 @@ public class TemporalEngineService {
     /**
      * Execute a script command in the temporal engine
      */
-    public Map<String, Object> executeScript(Long gameId, String scriptLine) {
+    public Map<String, Object> executeTemporalGameScript(Long gameId, String scriptLine) {
         Optional<Game> gameOpt = gameRepository.findById(gameId);
         if (!gameOpt.isPresent()) {
             Map<String, Object> result = new HashMap<>();
@@ -65,9 +65,9 @@ public class TemporalEngineService {
             boolean isTemporalScript = temporalParser.isTemporalScript(scriptLine);
                 
             if (isTemporalScript) {
-                result = executeTemporalScript(game, scriptLine);
+                result = executeQuantumTemporalScript(game, scriptLine);
             } else {
-                result = executeBasicScript(game, scriptLine);
+                result = executeClassicGameScript(game, scriptLine);
             }
             
             // Ne pas continuer si il y a une erreur
@@ -76,10 +76,10 @@ public class TemporalEngineService {
             }
             
             // Process any triggered observations
-            processObservationTriggers(game);
+            processQuantumObservationTriggers(game);
             
             // Update tile states
-            updateTileStates(game);
+            updateQuantumTileStates(game);
             
             gameRepository.save(game);
             result.put("success", true);
@@ -93,29 +93,29 @@ public class TemporalEngineService {
     }
     
     /**
-     * Execute a temporal script command
+     * Execute a quantum temporal script command
      */
-    private Map<String, Object> executeTemporalScript(Game game, String scriptLine) {
+    private Map<String, Object> executeQuantumTemporalScript(Game game, String scriptLine) {
         Map<String, Object> result = new HashMap<>();
         
         // Parse collapse command
         String collapseTarget = temporalParser.parseCollapseCommand(scriptLine);
         if (collapseTarget != null) {
-            result = executeCollapse(game, collapseTarget);
+            result = executeQuantumStateCollapse(game, collapseTarget);
             return result;
         }
         
         // Parse observation trigger
         TemporalScriptParser.ObservationTrigger observationTrigger = temporalParser.parseObservationTrigger(scriptLine);
         if (observationTrigger != null) {
-            result = setupObservationTrigger(game, observationTrigger.getTargetPsi(), observationTrigger.getCondition());
+            result = setupQuantumObservationTrigger(game, observationTrigger.getTargetPsi(), observationTrigger.getCondition());
             return result;
         }
         
         // Parse ψ state
-        PsiState psiState = temporalParser.parseTemporalScript(scriptLine);
-        if (psiState != null) {
-            result = createPsiState(game, psiState);
+        PsiState quantumState = temporalParser.parseTemporalScript(scriptLine);
+        if (quantumState != null) {
+            result = createQuantumTemporalState(game, quantumState);
             return result;
         }
         
@@ -125,9 +125,9 @@ public class TemporalEngineService {
     }
     
     /**
-     * Execute a basic script command
+     * Execute a classic game script command
      */
-    private Map<String, Object> executeBasicScript(Game game, String scriptLine) {
+    private Map<String, Object> executeClassicGameScript(Game game, String scriptLine) {
         Map<String, Object> result = new HashMap<>();
         
         // Parse basic command
@@ -141,49 +141,49 @@ public class TemporalEngineService {
         
         switch (command.getType()) {
             case "HERO":
-                result = createHero(game, (String) command.getParameters());
+                result = createGameHero(game, (String) command.getParameters());
                 break;
             case "MOV":
-                result = moveHero(game, (Map<String, String>) command.getParameters());
+                result = moveGameHero(game, (Map<String, String>) command.getParameters());
                 break;
             case "CREATE":
-                result = createEntity(game, (Map<String, String>) command.getParameters());
+                result = createGameEntity(game, (Map<String, String>) command.getParameters());
                 break;
             case "USE":
-                result = useItem(game, (Map<String, String>) command.getParameters());
+                result = useGameItem(game, (Map<String, String>) command.getParameters());
                 break;
             case "BATTLE":
-                result = executeBattle(game, (Map<String, String>) command.getParameters());
+                result = executeGameBattle(game, (Map<String, String>) command.getParameters());
                 break;
             case "BUILD":
-                result = buildStructure(game, (Map<String, String>) command.getParameters());
+                result = buildGameStructure(game, (Map<String, String>) command.getParameters());
                 break;
             case "COLLECT":
-                result = collectResource(game, (Map<String, String>) command.getParameters());
+                result = collectGameResource(game, (Map<String, String>) command.getParameters());
                 break;
             case "RECRUIT":
-                result = recruitUnit(game, (Map<String, String>) command.getParameters());
+                result = recruitGameUnit(game, (Map<String, String>) command.getParameters());
                 break;
             case "CAST":
-                result = castSpell(game, (Map<String, String>) command.getParameters());
+                result = castGameSpell(game, (Map<String, String>) command.getParameters());
                 break;
             case "LEARN":
-                result = learnSpell(game, (Map<String, String>) command.getParameters());
+                result = learnGameSpell(game, (Map<String, String>) command.getParameters());
                 break;
             case "LEVELUP":
-                result = levelUpHero(game, (Map<String, String>) command.getParameters());
+                result = levelUpGameHero(game, (Map<String, String>) command.getParameters());
                 break;
             case "EXPLORE":
-                result = exploreTerritory(game, (Map<String, String>) command.getParameters());
+                result = exploreGameTerritory(game, (Map<String, String>) command.getParameters());
                 break;
             case "EQUIP":
-                result = equipArtifact(game, (Map<String, String>) command.getParameters());
+                result = equipGameArtifact(game, (Map<String, String>) command.getParameters());
                 break;
             case "SIEGE":
-                result = siegeTarget(game, (Map<String, String>) command.getParameters());
+                result = siegeGameTarget(game, (Map<String, String>) command.getParameters());
                 break;
             case "CAPTURE":
-                result = captureObjective(game, (Map<String, String>) command.getParameters());
+                result = captureGameObjective(game, (Map<String, String>) command.getParameters());
                 break;
             default:
                 result.put("error", "Unknown command type: " + command.getType());
@@ -195,40 +195,40 @@ public class TemporalEngineService {
     }
     
     /**
-     * Create a new ψ state (superposition)
+     * Create a new quantum temporal state (superposition)
      */
-    private Map<String, Object> createPsiState(Game game, PsiState psiState) {
+    private Map<String, Object> createQuantumTemporalState(Game game, PsiState quantumState) {
         Map<String, Object> result = new HashMap<>();
         
         // Check if position is locked
-        if (psiState.getTargetX() != null && psiState.getTargetY() != null) {
-            GameTile tile = game.getTileAt(psiState.getTargetX(), psiState.getTargetY());
+        if (quantumState.getTargetX() != null && quantumState.getTargetY() != null) {
+            GameTile tile = game.getTileAt(quantumState.getTargetX(), quantumState.getTargetY());
             if (tile != null && tile.getIsLocked()) {
-                result.put("error", "Cannot create ψ state on locked tile");
+                result.put("error", "Cannot create quantum state on locked tile");
                 result.put("success", false);
                 return result;
             }
         }
         
         // Set game reference
-        psiState.setGame(game);
+        quantumState.setGame(game);
         
         // Calculate future turn when this will trigger
-        int futureTurn = game.getCurrentTurn() + (psiState.getDeltaT() != null ? psiState.getDeltaT() : 1);
+        int futureTurn = game.getCurrentTurn() + (quantumState.getDeltaT() != null ? quantumState.getDeltaT() : 1);
         
-        // Check for conflicts with existing ψ states
-        List<PsiState> conflicts = findConflictingPsiStates(game, psiState);
+        // Check for conflicts with existing quantum states
+        List<PsiState> conflicts = findConflictingQuantumStates(game, quantumState);
         if (!conflicts.isEmpty()) {
-            result.put("warning", "Potential conflicts detected with existing ψ states");
+            result.put("warning", "Potential conflicts detected with existing quantum states");
             result.put("conflicts", conflicts.stream().map(PsiState::getPsiId).collect(Collectors.toList()));
             
             // Calcul des interférences quantiques si applicable
-            if (psiState.isUsingComplexAmplitude()) {
-                List<PsiState> interferingStates = quantumInterferenceService.findInterferingStates(game, psiState);
+            if (quantumState.isUsingComplexAmplitude()) {
+                List<PsiState> interferingStates = quantumInterferenceService.findInterferingStates(game, quantumState);
                 if (!interferingStates.isEmpty()) {
                     QuantumInterferenceService.InterferenceResult interference = 
                         quantumInterferenceService.calculateInterferenceAtPosition(game, 
-                            psiState.getTargetX(), psiState.getTargetY());
+                            quantumState.getTargetX(), quantumState.getTargetY());
                     
                     result.put("quantumInterference", interference.toString());
                     result.put("interferenceType", interference.getType().toString());
@@ -242,51 +242,51 @@ public class TemporalEngineService {
             }
         }
         
-        // Save the ψ state
-        psiStateRepository.save(psiState);
-        game.addPsiState(psiState);
+        // Save the quantum state
+        psiStateRepository.save(quantumState);
+        game.addPsiState(quantumState);
         
-        result.put("psiId", psiState.getPsiId());
+        result.put("quantumStateId", quantumState.getPsiId());
         result.put("futureTurn", futureTurn);
-        result.put("usingComplexAmplitude", psiState.isUsingComplexAmplitude());
+        result.put("usingComplexAmplitude", quantumState.isUsingComplexAmplitude());
         
-        if (psiState.isUsingComplexAmplitude()) {
-            result.put("complexAmplitude", psiState.getComplexAmplitude().toString());
-            result.put("probability", psiState.getComplexAmplitude().getProbability());
+        if (quantumState.isUsingComplexAmplitude()) {
+            result.put("complexAmplitude", quantumState.getComplexAmplitude().toString());
+            result.put("probability", quantumState.getComplexAmplitude().getProbability());
         } else {
-            result.put("probability", psiState.getProbability());
+            result.put("probability", quantumState.getProbability());
         }
         
-        result.put("message", "ψ state " + psiState.getPsiId() + " created successfully");
+        result.put("message", "Quantum state " + quantumState.getPsiId() + " created successfully");
         result.put("success", true);
         
         return result;
     }
     
     /**
-     * Execute a collapse command with quantum interference support
+     * Execute a quantum state collapse command with quantum interference support
      */
-    private Map<String, Object> executeCollapse(Game game, String psiId) {
+    private Map<String, Object> executeQuantumStateCollapse(Game game, String quantumStateId) {
         Map<String, Object> result = new HashMap<>();
         
-        PsiState psiState = game.getPsiStates().stream()
-                .filter(psi -> psi.getPsiId().equals(psiId) && psi.isActive())
+        PsiState quantumState = game.getPsiStates().stream()
+                .filter(psi -> psi.getPsiId().equals(quantumStateId) && psi.isActive())
                 .findFirst()
                 .orElse(null);
         
-        if (psiState == null) {
-            result.put("error", "ψ state not found or already collapsed: " + psiId);
+        if (quantumState == null) {
+            result.put("error", "Quantum state not found or already collapsed: " + quantumStateId);
             result.put("success", false);
             return result;
         }
         
         // Calcul des interférences avant collapse si applicable
-        if (psiState.isUsingComplexAmplitude() && psiState.getTargetX() != null && psiState.getTargetY() != null) {
-            List<PsiState> interferingStates = quantumInterferenceService.findInterferingStates(game, psiState);
+        if (quantumState.isUsingComplexAmplitude() && quantumState.getTargetX() != null && quantumState.getTargetY() != null) {
+            List<PsiState> interferingStates = quantumInterferenceService.findInterferingStates(game, quantumState);
             if (!interferingStates.isEmpty()) {
                 QuantumInterferenceService.InterferenceResult interference = 
                     quantumInterferenceService.calculateInterferenceAtPosition(game, 
-                        psiState.getTargetX(), psiState.getTargetY());
+                        quantumState.getTargetX(), quantumState.getTargetY());
                 
                 result.put("preCollapseInterference", interference.toString());
                 
@@ -301,26 +301,26 @@ public class TemporalEngineService {
             }
         }
         
-        // Execute the action in the ψ state
-        String actionResult = executeCollapsedAction(game, psiState);
+        // Execute the action in the quantum state
+        String actionResult = executeQuantumCollapsedAction(game, quantumState);
         
         // Mark as collapsed
-        psiState.collapse();
-        psiStateRepository.save(psiState);
+        quantumState.collapse();
+        psiStateRepository.save(quantumState);
         
-        result.put("psiId", psiId);
+        result.put("quantumStateId", quantumStateId);
         result.put("actionResult", actionResult);
-        result.put("message", "ψ state " + psiId + " collapsed successfully");
+        result.put("message", "Quantum state " + quantumStateId + " collapsed successfully");
         result.put("success", true);
         
         return result;
     }
     
     /**
-     * Execute the action contained in a collapsed ψ state
+     * Execute the action contained in a collapsed quantum state
      */
-    private String executeCollapsedAction(Game game, PsiState psiState) {
-        String actionType = psiState.getActionType();
+    private String executeQuantumCollapsedAction(Game game, PsiState quantumState) {
+        String actionType = quantumState.getActionType();
         
         // Handle null actionType for backward compatibility
         if (actionType == null) {
@@ -329,27 +329,27 @@ public class TemporalEngineService {
         
         switch (actionType) {
             case "MOV":
-                return executeCollapsedMovement(game, psiState);
+                return executeQuantumCollapsedMovement(game, quantumState);
             case "CREATE":
-                return executeCollapsedCreation(game, psiState);
+                return executeQuantumCollapsedCreation(game, quantumState);
             case "BATTLE":
-                return executeCollapsedBattle(game, psiState);
+                return executeQuantumCollapsedBattle(game, quantumState);
             default:
                 return "Unknown action type: " + actionType;
         }
     }
     
     /**
-     * Execute a movement from a collapsed ψ state
+     * Execute a movement from a collapsed quantum state
      */
-    private String executeCollapsedMovement(Game game, PsiState psiState) {
-        Hero hero = game.getHeroByName(psiState.getOwnerHero());
+    private String executeQuantumCollapsedMovement(Game game, PsiState quantumState) {
+        Hero hero = game.getHeroByName(quantumState.getOwnerHero());
         if (hero == null) {
-            return "Hero not found: " + psiState.getOwnerHero();
+            return "Hero not found: " + quantumState.getOwnerHero();
         }
         
-        int targetX = psiState.getTargetX();
-        int targetY = psiState.getTargetY();
+        int targetX = quantumState.getTargetX();
+        int targetY = quantumState.getTargetY();
         
         // Check if movement is valid
         if (!isValidPosition(game, targetX, targetY)) {
@@ -367,33 +367,33 @@ public class TemporalEngineService {
     }
     
     /**
-     * Execute a creation from a collapsed ψ state
+     * Execute a creation from a collapsed quantum state
      */
-    private String executeCollapsedCreation(Game game, PsiState psiState) {
+    private String executeQuantumCollapsedCreation(Game game, PsiState quantumState) {
         // Parse the creation details from the expression
         // This is a simplified implementation
-        return "Entity created at (" + psiState.getTargetX() + "," + psiState.getTargetY() + ")";
+        return "Entity created at (" + quantumState.getTargetX() + "," + quantumState.getTargetY() + ")";
     }
     
     /**
-     * Execute a battle from a collapsed ψ state
+     * Execute a battle from a collapsed quantum state
      */
-    private String executeCollapsedBattle(Game game, PsiState psiState) {
+    private String executeQuantumCollapsedBattle(Game game, PsiState quantumState) {
         // This would implement the battle logic
-        return "Battle executed (phantom battle from ψ state)";
+        return "Battle executed (phantom battle from quantum state)";
     }
     
     /**
-     * Find conflicting ψ states
+     * Find conflicting quantum states
      */
-    private List<PsiState> findConflictingPsiStates(Game game, PsiState newPsiState) {
+    private List<PsiState> findConflictingQuantumStates(Game game, PsiState newQuantumState) {
         return game.getActivePsiStates().stream()
                 .filter(existing -> 
                     existing.getTargetX() != null && 
                     existing.getTargetY() != null &&
-                    existing.getTargetX().equals(newPsiState.getTargetX()) &&
-                    existing.getTargetY().equals(newPsiState.getTargetY()) &&
-                    Objects.equals(existing.getDeltaT(), newPsiState.getDeltaT())
+                    existing.getTargetX().equals(newQuantumState.getTargetX()) &&
+                    existing.getTargetY().equals(newQuantumState.getTargetY()) &&
+                    Objects.equals(existing.getDeltaT(), newQuantumState.getDeltaT())
                 )
                 .collect(Collectors.toList());
     }
