@@ -1,6 +1,7 @@
 package com.heroesoftimepoc.temporalengine.service;
 
 import com.heroesoftimepoc.temporalengine.model.PsiState;
+import com.heroesoftimepoc.temporalengine.model.ComplexAmplitude;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -20,6 +21,15 @@ public class TemporalScriptParser {
     private static final Pattern OBSERVATION_PATTERN = Pattern.compile("Π\\(([^)]+)\\)\\s*⇒\\s*†ψ(\\d+)");
     private static final Pattern BRANCH_PATTERN = Pattern.compile("ℬ(\\d+)");
     
+    // Patterns pour amplitudes complexes
+    private static final Pattern COMPLEX_AMPLITUDE_PATTERN = Pattern.compile("([-+]?\\d*\\.?\\d+)\\s*([+-])\\s*(\\d*\\.?\\d+)i");
+    private static final Pattern REAL_AMPLITUDE_PATTERN = Pattern.compile("([-+]?\\d*\\.?\\d+)(?!i)");
+    private static final Pattern IMAGINARY_AMPLITUDE_PATTERN = Pattern.compile("([-+]?\\d*\\.?\\d+)i");
+    private static final Pattern POLAR_AMPLITUDE_PATTERN = Pattern.compile("(\\d*\\.?\\d+)∠([-+]?\\d*\\.?\\d+)");
+    
+    // Pattern pour ψ avec amplitude complexe: ψ001: (0.8+0.6i) ⊙(...)
+    private static final Pattern PSI_COMPLEX_PATTERN = Pattern.compile("ψ(\\d+):\\s*\\(([^)]+)\\)\\s*⊙\\((.*)\\)");
+    
     // Basic script patterns
     private static final Pattern HERO_PATTERN = Pattern.compile("HERO\\(([^)]+)\\)");
     private static final Pattern MOV_PATTERN = Pattern.compile("MOV\\(([^,]+),\\s*@(\\d+),(\\d+)\\)");
@@ -29,7 +39,7 @@ public class TemporalScriptParser {
     
     // Heroes of Might & Magic 3 patterns
     private static final Pattern BUILD_PATTERN = Pattern.compile("BUILD\\(([^,]+),\\s*@(\\d+),(\\d+),\\s*PLAYER:([^)]+)\\)");
-    private static final Pattern COLLECT_PATTERN = Pattern.compile("COLLECT\\(RESOURCE,\\s*([^,]+),\\s*(\\d+),\\s*PLAYER:([^)]+)\\)");
+    private static final Pattern COLLECT_PATTERN = Pattern.compile("COLLECT\\(([^,]+),\\s*(\\d+),\\s*PLAYER:([^)]+)\\)");
     private static final Pattern RECRUIT_PATTERN = Pattern.compile("RECRUIT\\(UNIT,\\s*([^,]+),\\s*(\\d+),\\s*HERO:([^)]+)\\)");
     private static final Pattern CAST_PATTERN = Pattern.compile("CAST\\(SPELL,\\s*([^,]+),\\s*TARGET:([^,]+),\\s*HERO:([^)]+)\\)");
     private static final Pattern LEARN_PATTERN = Pattern.compile("LEARN\\(SPELL,\\s*([^,]+),\\s*HERO:([^)]+)\\)");
@@ -43,6 +53,33 @@ public class TemporalScriptParser {
      * Parse a temporal script line and create a PsiState if it's a temporal action
      */
     public PsiState parseTemporalScript(String scriptLine) {
+        // Essayer d'abord avec amplitude complexe
+        Matcher complexPsiMatcher = PSI_COMPLEX_PATTERN.matcher(scriptLine);
+        
+        if (complexPsiMatcher.find()) {
+            String psiId = "ψ" + complexPsiMatcher.group(1);
+            String amplitudeStr = complexPsiMatcher.group(2);
+            String innerExpression = complexPsiMatcher.group(3);
+            
+            PsiState psiState = new PsiState();
+            psiState.setPsiId(psiId);
+            psiState.setExpression(scriptLine);
+            psiState.setBranchId("ℬ1"); // Default branch
+            
+            // Parser l'amplitude complexe
+            ComplexAmplitude amplitude = parseComplexAmplitude(amplitudeStr);
+            if (amplitude != null) {
+                psiState.setComplexAmplitude(amplitude);
+                psiState.setUseComplexAmplitude(true);
+            }
+            
+            // Parse the inner expression
+            parseInnerExpression(psiState, innerExpression);
+            
+            return psiState;
+        }
+        
+        // Fallback vers le pattern classique
         Matcher psiMatcher = PSI_PATTERN.matcher(scriptLine);
         
         if (psiMatcher.find()) {
@@ -60,6 +97,56 @@ public class TemporalScriptParser {
             return psiState;
         }
         
+        return null;
+    }
+    
+    /**
+     * Parse une amplitude complexe à partir d'une chaîne
+     */
+    public ComplexAmplitude parseComplexAmplitude(String amplitudeStr) {
+        if (amplitudeStr == null || amplitudeStr.trim().isEmpty()) {
+            return null;
+        }
+        
+        amplitudeStr = amplitudeStr.trim();
+        
+        // Essayer le format polaire: 1.0∠0.5
+        Matcher polarMatcher = POLAR_AMPLITUDE_PATTERN.matcher(amplitudeStr);
+        if (polarMatcher.find()) {
+            double magnitude = Double.parseDouble(polarMatcher.group(1));
+            double phase = Double.parseDouble(polarMatcher.group(2));
+            return ComplexAmplitude.fromPolar(magnitude, phase);
+        }
+        
+        // Essayer le format complexe: 0.8+0.6i ou 0.8-0.6i
+        Matcher complexMatcher = COMPLEX_AMPLITUDE_PATTERN.matcher(amplitudeStr);
+        if (complexMatcher.find()) {
+            double realPart = Double.parseDouble(complexMatcher.group(1));
+            String sign = complexMatcher.group(2);
+            double imaginaryPart = Double.parseDouble(complexMatcher.group(3));
+            
+            if ("-".equals(sign)) {
+                imaginaryPart = -imaginaryPart;
+            }
+            
+            return new ComplexAmplitude(realPart, imaginaryPart);
+        }
+        
+        // Essayer le format imaginaire pur: 0.6i
+        Matcher imaginaryMatcher = IMAGINARY_AMPLITUDE_PATTERN.matcher(amplitudeStr);
+        if (imaginaryMatcher.find()) {
+            double imaginaryPart = Double.parseDouble(imaginaryMatcher.group(1));
+            return new ComplexAmplitude(0.0, imaginaryPart);
+        }
+        
+        // Essayer le format réel: 0.8
+        Matcher realMatcher = REAL_AMPLITUDE_PATTERN.matcher(amplitudeStr);
+        if (realMatcher.find()) {
+            double realPart = Double.parseDouble(realMatcher.group(1));
+            return new ComplexAmplitude(realPart, 0.0);
+        }
+        
+        // Format non reconnu
         return null;
     }
     
@@ -337,6 +424,7 @@ public class TemporalScriptParser {
         try {
             if (isTemporalScript(scriptLine)) {
                 return PSI_PATTERN.matcher(scriptLine).find() || 
+                       PSI_COMPLEX_PATTERN.matcher(scriptLine).find() ||
                        COLLAPSE_PATTERN.matcher(scriptLine).find() || 
                        OBSERVATION_PATTERN.matcher(scriptLine).find();
             }
@@ -344,6 +432,25 @@ public class TemporalScriptParser {
         } catch (Exception e) {
             return false;
         }
+    }
+    
+    /**
+     * Teste si une chaîne contient une amplitude complexe
+     */
+    public boolean hasComplexAmplitude(String scriptLine) {
+        return PSI_COMPLEX_PATTERN.matcher(scriptLine).find();
+    }
+    
+    /**
+     * Extrait l'amplitude complexe d'une ligne de script
+     */
+    public ComplexAmplitude extractComplexAmplitude(String scriptLine) {
+        Matcher complexPsiMatcher = PSI_COMPLEX_PATTERN.matcher(scriptLine);
+        if (complexPsiMatcher.find()) {
+            String amplitudeStr = complexPsiMatcher.group(2);
+            return parseComplexAmplitude(amplitudeStr);
+        }
+        return null;
     }
     
     // Helper classes
