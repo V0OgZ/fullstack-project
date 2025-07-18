@@ -25,46 +25,44 @@ lsof -ti:3000 | xargs -r kill -9  # Frontend principal
 lsof -ti:8000 | xargs -r kill -9  # Serveur de test
 
 echo "Nettoyage des logs précédents..."
-rm -f *.log
-rm -f backend/*.log
-rm -f frontend/*.log
-rm -f quantum-visualizer/*.log
+cd ..
+rm -f backend-*.log
+rm -f frontend-*.log
+rm -f scenarios-*.log
+rm -f visualizer-*.log
+rm -f playwright-*.log
 
 echo -e "${GREEN}✅ Nettoyage terminé${NC}"
 
-# 🔧 PHASE 2: VÉRIFICATION DE L'ENVIRONNEMENT
-echo -e "${YELLOW}🔧 Phase 2: Vérification de l'environnement...${NC}"
+# 🔍 PHASE 2: VÉRIFICATIONS
+echo -e "${YELLOW}🔍 Phase 2: Vérifications...${NC}"
 
-# Vérifier Java
-if command -v java &> /dev/null; then
-    echo -e "${GREEN}✅ Java trouvé: $(java -version 2>&1 | head -n1)${NC}"
-else
-    echo -e "${RED}❌ Java non trouvé!${NC}"
+# Vérifier que Java est installé
+if ! command -v java &> /dev/null; then
+    echo -e "${RED}❌ Java n'est pas installé${NC}"
     exit 1
 fi
 
-# Vérifier Maven
-if command -v mvn &> /dev/null; then
-    echo -e "${GREEN}✅ Maven trouvé: $(mvn -version | head -n1)${NC}"
-else
-    echo -e "${RED}❌ Maven non trouvé!${NC}"
+# Vérifier que Maven est installé
+if ! command -v mvn &> /dev/null; then
+    echo -e "${RED}❌ Maven n'est pas installé${NC}"
     exit 1
 fi
 
-# Vérifier Python
-if command -v python3 &> /dev/null; then
-    echo -e "${GREEN}✅ Python trouvé: $(python3 --version)${NC}"
-else
-    echo -e "${RED}❌ Python non trouvé!${NC}"
+# Vérifier que Python est installé
+if ! command -v python3 &> /dev/null; then
+    echo -e "${RED}❌ Python3 n'est pas installé${NC}"
     exit 1
 fi
 
-# Vérifier Node.js
+# Vérifier que Node.js est installé (optionnel)
 if command -v node &> /dev/null; then
-    echo -e "${GREEN}✅ Node.js trouvé: $(node --version)${NC}"
+    echo -e "${GREEN}✅ Node.js disponible${NC}"
 else
-    echo -e "${YELLOW}⚠️ Node.js non trouvé (optionnel)${NC}"
+    echo -e "${YELLOW}⚠️ Node.js non disponible (tests frontend limités)${NC}"
 fi
+
+echo -e "${GREEN}✅ Vérifications terminées${NC}"
 
 # 🧪 PHASE 3: TESTS BACKEND
 echo -e "${YELLOW}🧪 Phase 3: Tests backend...${NC}"
@@ -131,7 +129,7 @@ cd ..
 echo "Attente du visualizer..."
 for i in {1..10}; do
     if curl -s http://localhost:8001 > /dev/null 2>&1; then
-        echo -e "${GREEN}✅ Visualizer prêt (PID: $VISUALIZER_PID)${NC}"
+        echo -e "${GREEN}✅ Quantum visualizer prêt (PID: $VISUALIZER_PID)${NC}"
         break
     fi
     if [ $i -eq 10 ]; then
@@ -199,7 +197,7 @@ echo -e "${YELLOW}🧪 Phase 6: Tests spécifiques...${NC}"
 if [ -f "test-scenarios.sh" ]; then
     echo "Test des scénarios récents..."
     chmod +x test-scenarios.sh
-    ./test-scenarios.sh > scenarios-test.log 2>&1
+    ./test-scenarios.sh > ../scenarios-test.log 2>&1
     if [ $? -eq 0 ]; then
         echo -e "${GREEN}✅ Tests de scénarios réussis${NC}"
     else
@@ -208,12 +206,12 @@ if [ -f "test-scenarios.sh" ]; then
 fi
 
 # Test des 7 scénarios complets
-if [ -d "scenarios" ]; then
+if [ -d "../scenarios" ]; then
     echo "Test des 7 scénarios complets..."
-    SCENARIO_COUNT=$(ls -1 scenarios/*.json | wc -l)
+    SCENARIO_COUNT=$(ls -1 ../scenarios/*.json | wc -l)
     echo "Nombre de scénarios trouvés: $SCENARIO_COUNT"
     
-    for scenario_file in scenarios/*.json; do
+    for scenario_file in ../scenarios/*.json; do
         scenario_name=$(basename "$scenario_file" .json)
         echo "Validation du scénario: $scenario_name"
         
@@ -226,9 +224,9 @@ if [ -d "scenarios" ]; then
     done
     
     # Test de l'index des scénarios
-    if [ -f "scenarios/SCENARIOS_INDEX.json" ]; then
+    if [ -f "../scenarios/SCENARIOS_INDEX.json" ]; then
         echo "Test de l'index des scénarios..."
-        if python3 -m json.tool scenarios/SCENARIOS_INDEX.json > /dev/null 2>&1; then
+        if python3 -m json.tool ../scenarios/SCENARIOS_INDEX.json > /dev/null 2>&1; then
             echo -e "${GREEN}✅ Index des scénarios valide${NC}"
         else
             echo -e "${RED}❌ Index des scénarios invalide${NC}"
@@ -237,9 +235,9 @@ if [ -d "scenarios" ]; then
 fi
 
 # Test du quantum visualizer avec scénarios
-if [ -d "quantum-visualizer" ]; then
+if [ -d "../quantum-visualizer" ]; then
     echo "Test du quantum visualizer avec scénarios..."
-    cd quantum-visualizer
+    cd ../quantum-visualizer
     
     # Vérifier la présence des fichiers de scénarios
     if [ -f "scenarios/SCENARIOS_INDEX.json" ]; then
@@ -257,9 +255,9 @@ if [ -d "quantum-visualizer" ]; then
 fi
 
 # Test du frontend
-if [ -f "frontend/test-frontend.js" ]; then
+if [ -f "../frontend/test-frontend.js" ]; then
     echo "Test du frontend..."
-    cd frontend
+    cd ../frontend
     node test-frontend.js > ../frontend-test.log 2>&1
     if [ $? -eq 0 ]; then
         echo -e "${GREEN}✅ Tests frontend réussis${NC}"
@@ -270,9 +268,9 @@ if [ -f "frontend/test-frontend.js" ]; then
 fi
 
 # Test Playwright (si disponible)
-if [ -f "frontend/playwright.config.ts" ]; then
+if [ -f "../frontend/playwright.config.ts" ]; then
     echo "Test Playwright..."
-    cd frontend
+    cd ../frontend
     if command -v npx &> /dev/null; then
         npx playwright test --headed=false > ../playwright-test.log 2>&1
         if [ $? -eq 0 ]; then
