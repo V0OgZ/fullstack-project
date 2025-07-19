@@ -2552,3 +2552,15 @@ Hibernate: select i1_0.hero_id,i1_0.item from hero_inventory i1_0 where i1_0.her
 2025-07-19T08:48:04.387+02:00 DEBUG 46193 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
 2025-07-19T08:48:04.387+02:00 DEBUG 46193 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{isGrofiHero=true, immunities={OBS=false, SRTI=true, ROLLBACK=true}, success=true, grofiData={title= (truncated)...]
 2025-07-19T08:48:04.387+02:00 DEBUG 46193 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T09:07:43.718+02:00  INFO 46193 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+Hibernate: drop table if exists game_players cascade 
+2025-07-19T09:07:43.719+02:00  INFO 46193 --- [ionShutdownHook] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@42f2ca7d] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+Hibernate: drop table if exists game_tiles cascade 
+Hibernate: drop table if exists games cascade 
+Hibernate: drop table if exists hero_inventory cascade 
+Hibernate: drop table if exists heroes cascade 
+Hibernate: drop table if exists psi_states cascade 
+Hibernate: drop table if exists temporal_artifacts cascade 
+Hibernate: drop table if exists tile_occupants cascade 
+2025-07-19T09:07:43.721+02:00  INFO 46193 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Shutdown initiated...
+2025-07-19T09:07:43.721+02:00  INFO 46193 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Shutdown completed.
