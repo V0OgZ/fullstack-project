@@ -1,0 +1,80 @@
+127.0.0.1 - - [19/Jul/2025 11:18:46] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:18:49] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:18:49] code 403, message Accès refusé - Fichier non autorisé
+127.0.0.1 - - [19/Jul/2025 11:18:49] "GET /favicon.ico HTTP/1.1" 403 -
+127.0.0.1 - - [19/Jul/2025 11:18:49] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:19:00] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:19:00] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:19:09] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:19:09] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:19:19] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:19:19] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:19:29] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:19:29] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:19:39] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:19:39] "GET / HTTP/1.1" 200 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 63281)
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/socketserver.py", line 316, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/socketserver.py", line 347, in process_request
+    self.finish_request(request, client_address)
+  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/socketserver.py", line 360, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/http/server.py", line 658, in __init__
+    super().__init__(*args, **kwargs)
+  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/socketserver.py", line 747, in __init__
+    self.handle()
+  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/http/server.py", line 432, in handle
+    self.handle_one_request()
+  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/http/server.py", line 420, in handle_one_request
+    method()
+  File "/Users/admin/HOT/Heroes-of-Time/dashboard-server.py", line 87, in do_GET
+    self.send_error(403, "Accès refusé - Fichier non autorisé")
+  File "/Users/admin/HOT/Heroes-of-Time/dashboard-server.py", line 99, in send_dashboard
+  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/socketserver.py", line 826, in write
+    self._sock.sendall(b)
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
+127.0.0.1 - - [19/Jul/2025 11:19:49] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:19:49] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:19:59] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:19:59] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:19:59] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:20:03] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:20:03] code 403, message Accès refusé - Fichier non autorisé
+127.0.0.1 - - [19/Jul/2025 11:20:03] "GET /favicon.ico HTTP/1.1" 403 -
+127.0.0.1 - - [19/Jul/2025 11:20:03] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:20:13] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:20:13] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:20:23] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:20:23] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:20:27] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:20:27] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:20:33] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:20:33] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:20:44] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:20:44] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:20:53] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:20:53] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:21:03] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:21:03] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:21:13] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:21:13] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:21:26] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:21:26] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:21:30] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:21:30] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:22:27] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:22:27] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:22:30] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:22:30] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:23:26] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:23:26] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:23:30] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:23:30] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:24:26] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:24:26] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:24:30] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 11:24:30] "GET / HTTP/1.1" 200 -
