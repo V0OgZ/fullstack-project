@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔮 HOTS Visualizer - Heroes of Time</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a0a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            border: 2px solid rgba(138, 43, 226, 0.3);
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            color: #8a2be2;
+            text-shadow: 0 0 30px rgba(138, 43, 226, 0.8);
+            margin-bottom: 15px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #b19cd9;
+        }
+
+        .controls {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .input-group {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .formula-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(138, 43, 226, 0.3);
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            color: #e0e0e0;
+            font-size: 16px;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s ease;
+        }
+
+        .formula-input:focus {
+            outline: none;
+            border-color: #8a2be2;
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.4);
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #8a2be2, #9370db);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #4a90e2, #357abd);
+            color: #fff;
+        }
+
+        .btn-examples {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            color: #fff;
+        }
+
+        .examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .example-card {
+            background: rgba(138, 43, 226, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .example-card:hover {
+            background: rgba(138, 43, 226, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .example-title {
+            font-weight: bold;
+            color: #8a2be2;
+            margin-bottom: 8px;
+        }
+
+        .example-formula {
+            font-family: 'Courier New', monospace;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #b19cd9;
+        }
+
+        .result-container {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid rgba(138, 43, 226, 0.2);
+            min-height: 400px;
+        }
+
+        .interpretation {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border-left: 4px solid #8a2be2;
+        }
+
+        .interpretation-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .formula-type {
+            background: linear-gradient(45deg, #8a2be2, #9370db);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .description {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #e0e0e0;
+            margin-bottom: 15px;
+        }
+
+        .details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .detail-item {
+            background: rgba(138, 43, 226, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(138, 43, 226, 0.2);
+        }
+
+        .detail-label {
+            font-weight: bold;
+            color: #8a2be2;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            color: #b19cd9;
+            font-family: 'Courier New', monospace;
+        }
+
+        .symbols-legend {
+            background: rgba(138, 43, 226, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .symbols-title {
+            color: #8a2be2;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .symbol-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(138, 43, 226, 0.1);
+        }
+
+        .symbol {
+            font-family: 'Courier New', monospace;
+            color: #8a2be2;
+            font-weight: bold;
+        }
+
+        .symbol-meaning {
+            color: #b19cd9;
+        }
+
+        .loading {
+            text-align: center;
+            color: #8a2be2;
+            font-size: 1.5em;
+            margin: 50px 0;
+        }
+
+        .error {
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            color: #ff6b6b;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .quantum-symbols {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .quantum-symbol {
+            background: linear-gradient(45deg, #8a2be2, #9370db);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+
+        .quantum-symbol:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+        }
+
+        .amplitude-details {
+            background: rgba(138, 43, 226, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .amplitude-title {
+            color: #8a2be2;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .amplitude-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .amplitude-item {
+            text-align: center;
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+        }
+
+        .amplitude-label {
+            font-size: 12px;
+            color: #8a2be2;
+            text-transform: uppercase;
+        }
+
+        .amplitude-value {
+            font-family: 'Courier New', monospace;
+            color: #e0e0e0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔮 HOTS Visualizer</h1>
+        <p>Heroes of Time Script Language Interpreter</p>
+        <p>Décrypte la grammaire quantique en langage naturel</p>
+    </div>
+
+    <div class="controls">
+        <div class="input-group">
+            <input type="text" class="formula-input" id="formulaInput" 
+                   placeholder="Entrez une formule HOTS... ex: ψ001: ⊙(Δt+2 @15,15 ⟶ MOV(Arthur, @15,15))">
+        </div>
+        <button class="btn btn-primary" onclick="interpretFormula()">🔮 Interpréter</button>
+        <button class="btn btn-secondary" onclick="loadSymbols()">📚 Symboles</button>
+        <button class="btn btn-examples" onclick="toggleExamples()">💡 Exemples</button>
+    </div>
+
+    <div class="quantum-symbols" id="quantumSymbols">
+        <span class="quantum-symbol" onclick="insertSymbol('ψ')">ψ</span>
+        <span class="quantum-symbol" onclick="insertSymbol('⊙')">⊙</span>
+        <span class="quantum-symbol" onclick="insertSymbol('Δt')">Δt</span>
+        <span class="quantum-symbol" onclick="insertSymbol('@')">@</span>
+        <span class="quantum-symbol" onclick="insertSymbol('⟶')">⟶</span>
+        <span class="quantum-symbol" onclick="insertSymbol('†')">†</span>
+        <span class="quantum-symbol" onclick="insertSymbol('Π')">Π</span>
+        <span class="quantum-symbol" onclick="insertSymbol('⇒')">⇒</span>
+        <span class="quantum-symbol" onclick="insertSymbol('ℬ')">ℬ</span>
+    </div>
+
+    <div class="examples" id="examples" style="display: none;">
+        <div class="example-card" onclick="useExample('ψ001: ⊙(Δt+2 @15,15 ⟶ MOV(Arthur, @15,15))')">
+            <div class="example-title">🚶 Mouvement Temporel</div>
+            <div class="example-formula">ψ001: ⊙(Δt+2 @15,15 ⟶ MOV(Arthur, @15,15))</div>
+        </div>
+        <div class="example-card" onclick="useExample('ψ002: (0.8+0.6i) ⊙(Δt+1 @10,10 ⟶ CREATE(CREATURE, Dragon))')">
+            <div class="example-title">🐉 Création avec Amplitude</div>
+            <div class="example-formula">ψ002: (0.8+0.6i) ⊙(Δt+1 @10,10 ⟶ CREATE(CREATURE, Dragon))</div>
+        </div>
+        <div class="example-card" onclick="useExample('†ψ001')">
+            <div class="example-title">💥 Collapse Quantique</div>
+            <div class="example-formula">†ψ001</div>
+        </div>
+        <div class="example-card" onclick="useExample('Π(Arthur.health > 50) ⇒ †ψ003')">
+            <div class="example-title">👁️ Observation Conditionnelle</div>
+            <div class="example-formula">Π(Arthur.health > 50) ⇒ †ψ003</div>
+        </div>
+        <div class="example-card" onclick="useExample('BATTLE(Arthur, Dragon)')">
+            <div class="example-title">⚔️ Combat Classique</div>
+            <div class="example-formula">BATTLE(Arthur, Dragon)</div>
+        </div>
+        <div class="example-card" onclick="useExample('USE(ARTIFACT, temporal_sword, HERO:Arthur)')">
+            <div class="example-title">🗡️ Utilisation d\\'Artefact</div>
+            <div class="example-formula">USE(ARTIFACT, temporal_sword, HERO:Arthur)</div>
+        </div>
+    </div>
+
+    <div class="result-container" id="resultContainer">
+        <div class="loading">Entrez une formule HOTS pour commencer l'interprétation...</div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8080/api';
+        let symbolsData = null;
+
+        // Insérer un symbole dans l'input
+        function insertSymbol(symbol) {
+            const input = document.getElementById('formulaInput');
+            const start = input.selectionStart;
+            const end = input.selectionEnd;
+            const text = input.value;
+            
+            input.value = text.substring(0, start) + symbol + text.substring(end);
+            input.focus();
+            input.setSelectionRange(start + symbol.length, start + symbol.length);
+        }
+
+        // Utiliser un exemple
+        function useExample(formula) {
+            document.getElementById('formulaInput').value = formula;
+            interpretFormula();
+        }
+
+        // Toggle des exemples
+        function toggleExamples() {
+            const examples = document.getElementById('examples');
+            examples.style.display = examples.style.display === 'none' ? 'grid' : 'none';
+        }
+
+        // Interpréter une formule
+        async function interpretFormula() {
+            const formula = document.getElementById('formulaInput').value.trim();
+            const container = document.getElementById('resultContainer');
+            
+            if (!formula) {
+                container.innerHTML = '<div class="error">Veuillez entrer une formule HOTS</div>';
+                return;
+            }
+            
+            container.innerHTML = '<div class="loading">🔮 Interprétation en cours...</div>';
+            
+            try {
+                const response = await fetch(`${API_BASE}/formula/interpret`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ formula })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const result = await response.json();
+                displayInterpretation(result, formula);
+                
+            } catch (error) {
+                console.error('Erreur lors de l\\'interprétation:', error);
+                container.innerHTML = `
+                    <div class="error">
+                        <strong>Erreur de connexion au backend:</strong><br>
+                        ${error.message}<br><br>
+                        <em>Vérifiez que le backend est démarré sur le port 8080</em>
+                    </div>
+                `;
+            }
+        }
+
+        // Afficher l'interprétation
+        function displayInterpretation(result, originalFormula) {
+            const container = document.getElementById('resultContainer');
+            
+            if (!result.success) {
+                container.innerHTML = `
+                    <div class="error">
+                        <strong>Erreur d'interprétation:</strong><br>
+                        ${result.error}
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = `
+                <div class="interpretation">
+                    <div class="interpretation-header">
+                        <h3>🔮 Interprétation de la Formule</h3>
+                        <span class="formula-type">${result.type || 'unknown'}</span>
+                    </div>
+                    
+                    <div class="description">
+                        ${result.description || 'Description non disponible'}
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-label">Formule Originale</div>
+                        <div class="detail-value">${originalFormula}</div>
+                    </div>
+            `;
+            
+            // Détails spécifiques selon le type
+            if (result.type === 'quantum_state') {
+                html += generateQuantumStateDetails(result);
+            } else if (result.type === 'collapse') {
+                html += generateCollapseDetails(result);
+            } else if (result.type === 'observation') {
+                html += generateObservationDetails(result);
+            } else if (result.type === 'classic_action') {
+                html += generateClassicActionDetails(result);
+            }
+            
+            // Symboles utilisés
+            if (result.symbols) {
+                html += generateSymbolsLegend(result.symbols);
+            }
+            
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        // Générer les détails d'un état quantique
+        function generateQuantumStateDetails(result) {
+            let html = '<div class="details">';
+            
+            if (result.psi_id) {
+                html += `
+                    <div class="detail-item">
+                        <div class="detail-label">État Quantique</div>
+                        <div class="detail-value">${result.psi_id}</div>
+                    </div>
+                `;
+            }
+            
+            if (result.delta_t !== undefined) {
+                html += `
+                    <div class="detail-item">
+                        <div class="detail-label">Délai Temporel</div>
+                        <div class="detail-value">${result.delta_t > 0 ? '+' : ''}${result.delta_t} tours</div>
+                    </div>
+                `;
+            }
+            
+            if (result.position) {
+                html += `
+                    <div class="detail-item">
+                        <div class="detail-label">Position Cible</div>
+                        <div class="detail-value">(${result.position.x}, ${result.position.y})</div>
+                    </div>
+                `;
+            }
+            
+            if (result.action_type) {
+                html += `
+                    <div class="detail-item">
+                        <div class="detail-label">Type d'Action</div>
+                        <div class="detail-value">${result.action_type}</div>
+                    </div>
+                `;
+            }
+            
+            if (result.owner_hero) {
+                html += `
+                    <div class="detail-item">
+                        <div class="detail-label">Héros Propriétaire</div>
+                        <div class="detail-value">${result.owner_hero}</div>
+                    </div>
+                `;
+            }
+            
+            html += '</div>';
+            
+            // Détails de l'amplitude complexe
+            if (result.amplitude) {
+                html += generateAmplitudeDetails(result.amplitude);
+            }
+            
+            return html;
+        }
+
+        // Générer les détails d'amplitude complexe
+        function generateAmplitudeDetails(amplitude) {
+            return `
+                <div class="amplitude-details">
+                    <div class="amplitude-title">📊 Détails de l'Amplitude Complexe</div>
+                    <div class="amplitude-grid">
+                        <div class="amplitude-item">
+                            <div class="amplitude-label">Partie Réelle</div>
+                            <div class="amplitude-value">${amplitude.real.toFixed(3)}</div>
+                        </div>
+                        <div class="amplitude-item">
+                            <div class="amplitude-label">Partie Imaginaire</div>
+                            <div class="amplitude-value">${amplitude.imaginary.toFixed(3)}i</div>
+                        </div>
+                        <div class="amplitude-item">
+                            <div class="amplitude-label">Magnitude</div>
+                            <div class="amplitude-value">${amplitude.magnitude.toFixed(3)}</div>
+                        </div>
+                        <div class="amplitude-item">
+                            <div class="amplitude-label">Phase</div>
+                            <div class="amplitude-value">${amplitude.phase.toFixed(3)} rad</div>
+                        </div>
+                        <div class="amplitude-item">
+                            <div class="amplitude-label">Probabilité</div>
+                            <div class="amplitude-value">${(amplitude.probability * 100).toFixed(1)}%</div>
+                        </div>
+                        <div class="amplitude-item">
+                            <div class="amplitude-label">Format</div>
+                            <div class="amplitude-value">${amplitude.formatted}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Générer les détails d'un collapse
+        function generateCollapseDetails(result) {
+            let html = '<div class="details">';
+            
+            if (result.psi_id) {
+                html += `
+                    <div class="detail-item">
+                        <div class="detail-label">État Cible</div>
+                        <div class="detail-value">${result.psi_id}</div>
+                    </div>
+                `;
+            }
+            
+            if (result.effect) {
+                html += `
+                    <div class="detail-item">
+                        <div class="detail-label">Effet</div>
+                        <div class="detail-value">${result.effect}</div>
+                    </div>
+                `;
+            }
+            
+            html += '</div>';
+            return html;
+        }
+
+        // Générer les détails d'une observation
+        function generateObservationDetails(result) {
+            let html = '<div class="details">';
+            
+            if (result.condition) {
+                html += `
+                    <div class="detail-item">
+                        <div class="detail-label">Condition</div>
+                        <div class="detail-value">${result.condition}</div>
+                    </div>
+                `;
+            }
+            
+            if (result.condition_interpreted) {
+                html += `
+                    <div class="detail-item">
+                        <div class="detail-label">Condition Interprétée</div>
+                        <div class="detail-value">${result.condition_interpreted}</div>
+                    </div>
+                `;
+            }
+            
+            if (result.target_psi_id) {
+                html += `
+                    <div class="detail-item">
+                        <div class="detail-label">État Cible</div>
+                        <div class="detail-value">${result.target_psi_id}</div>
+                    </div>
+                `;
+            }
+            
+            html += '</div>';
+            return html;
+        }
+
+        // Générer les détails d'une action classique
+        function generateClassicActionDetails(result) {
+            let html = '<div class="details">';
+            
+            if (result.action_type) {
+                html += `
+                    <div class="detail-item">
+                        <div class="detail-label">Type d'Action</div>
+                        <div class="detail-value">${result.action_type}</div>
+                    </div>
+                `;
+            }
+            
+            if (result.parameters) {
+                html += `
+                    <div class="detail-item">
+                        <div class="detail-label">Paramètres</div>
+                        <div class="detail-value">${result.parameters}</div>
+                    </div>
+                `;
+            }
+            
+            if (result.effect) {
+                html += `
+                    <div class="detail-item">
+                        <div class="detail-label">Effet</div>
+                        <div class="detail-value">${result.effect}</div>
+                    </div>
+                `;
+            }
+            
+            html += '</div>';
+            return html;
+        }
+
+        // Générer la légende des symboles
+        function generateSymbolsLegend(symbols) {
+            let html = `
+                <div class="symbols-legend">
+                    <div class="symbols-title">🔤 Symboles Utilisés</div>
+            `;
+            
+            for (const [symbol, meaning] of Object.entries(symbols)) {
+                html += `
+                    <div class="symbol-item">
+                        <span class="symbol">${symbol}</span>
+                        <span class="symbol-meaning">${meaning}</span>
+                    </div>
+                `;
+            }
+            
+            html += '</div>';
+            return html;
+        }
+
+        // Charger les symboles depuis l'API
+        async function loadSymbols() {
+            const container = document.getElementById('resultContainer');
+            container.innerHTML = '<div class="loading">📚 Chargement des symboles...</div>';
+            
+            try {
+                const response = await fetch(`${API_BASE}/formula/symbols`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const symbols = await response.json();
+                displaySymbols(symbols);
+                
+            } catch (error) {
+                console.error('Erreur lors du chargement des symboles:', error);
+                container.innerHTML = `
+                    <div class="error">
+                        <strong>Erreur de connexion au backend:</strong><br>
+                        ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        // Afficher les symboles
+        function displaySymbols(symbols) {
+            const container = document.getElementById('resultContainer');
+            
+            let html = `
+                <div class="interpretation">
+                    <h3>📚 Guide des Symboles HOTS</h3>
+                    
+                    <div class="symbols-legend">
+                        <div class="symbols-title">⚛️ Symboles Quantiques</div>
+            `;
+            
+            for (const [symbol, meaning] of Object.entries(symbols.quantum_symbols)) {
+                html += `
+                    <div class="symbol-item">
+                        <span class="symbol">${symbol}</span>
+                        <span class="symbol-meaning">${meaning}</span>
+                    </div>
+                `;
+            }
+            
+            html += `
+                    </div>
+                    
+                    <div class="symbols-legend">
+                        <div class="symbols-title">🎮 Types d'Actions</div>
+            `;
+            
+            for (const [action, meaning] of Object.entries(symbols.action_types)) {
+                html += `
+                    <div class="symbol-item">
+                        <span class="symbol">${action}</span>
+                        <span class="symbol-meaning">${meaning}</span>
+                    </div>
+                `;
+            }
+            
+            html += `
+                    </div>
+                    
+                    <div class="symbols-legend">
+                        <div class="symbols-title">💡 Exemples</div>
+            `;
+            
+            for (const [type, example] of Object.entries(symbols.examples)) {
+                html += `
+                    <div class="symbol-item">
+                        <span class="symbol">${type}</span>
+                        <span class="symbol-meaning">${example}</span>
+                    </div>
+                `;
+            }
+            
+            html += '</div></div>';
+            container.innerHTML = html;
+        }
+
+        // Événement Enter sur l'input
+        document.getElementById('formulaInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                interpretFormula();
+            }
+        });
+
+        // Charger les symboles au démarrage
+        document.addEventListener('DOMContentLoaded', function() {
+            // Exemple par défaut
+            setTimeout(() => {
+                document.getElementById('formulaInput').value = 'ψ001: ⊙(Δt+2 @15,15 ⟶ MOV(Arthur, @15,15))';
+            }, 500);
+        });
+    </script>
+</body>
+</html> 

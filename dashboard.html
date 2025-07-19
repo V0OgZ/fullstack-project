@@ -378,56 +378,71 @@
     </div>
 
     <script>
-        const services = {
-            backend: { url: 'http://localhost:8080/api/games', port: 8080, name: 'Backend API' },
-            frontend: { url: 'http://localhost:8000', port: 8000, name: 'Frontend Principal' },
-            temporal: { url: 'http://localhost:5173', port: 5173, name: 'Frontend Temporal' },
-            temporalWorking: { url: 'http://localhost:5174', port: 5174, name: '⚔️ Temporal UI (WORKING)' },
-            visualizer: { url: 'http://localhost:8001', port: 8001, name: 'Quantum Visualizer' },
-            legendary: { url: 'http://localhost:5190', port: 5190, name: 'UI Légendaire' },
-            testrunner: { url: 'http://localhost:8888', port: 8888, name: 'Test Runner' }
-        };
+        const services = [
+            { url: 'http://localhost:8080', port: 8080, name: '🔧 Backend API' },
+            { url: 'http://localhost:8000', port: 8000, name: '🎮 Frontend Principal' },
+            { url: 'http://localhost:5190', port: 5190, name: '🏛️ UI Légendaire' },
+            { url: 'http://localhost:5174', port: 5174, name: '⚔️ Temporal UI (WORKING)' },
+            { url: 'http://localhost:5172', port: 5172, name: '🌌 Quantum Visualizer' },
+            { url: 'http://localhost:5170', port: 5170, name: '📊 JSON Visualizer' },
+            { url: 'http://localhost:5171', port: 5171, name: '🔮 HOTS Visualizer' },
+            { url: 'http://localhost:3000', port: 3000, name: '🧪 Test Runner' }
+        ];
 
-        async function checkService(serviceKey) {
-            const service = services[serviceKey];
-            const statusDot = document.getElementById(`${serviceKey}-status`);
-            const panel = document.getElementById(`${serviceKey}-panel`);
-            const button = document.getElementById(`${serviceKey}-button`);
-
+        async function checkService(service) {
+            const statusElement = document.getElementById(`status-${service.port}`);
+            const linkElement = document.getElementById(`link-${service.port}`);
+            
             try {
                 const response = await fetch(service.url, { 
                     method: 'GET',
-                    mode: 'no-cors',
-                    timeout: 5000
+                    mode: 'no-cors'
                 });
                 
-                // Pour no-cors, on considère que si pas d'erreur = service up
-                statusDot.className = 'status-dot status-up';
-                panel.classList.add('active');
-                panel.classList.remove('disabled');
-                button.disabled = false;
+                // En mode no-cors, on considère que le service répond
+                statusElement.textContent = '🟢 Actif';
+                statusElement.className = 'status active';
+                linkElement.href = service.url;
+                linkElement.onclick = null;
                 
             } catch (error) {
-                statusDot.className = 'status-dot status-down';
-                panel.classList.add('disabled');
-                panel.classList.remove('active');
-                button.disabled = true;
+                statusElement.textContent = '🔴 Inactif';
+                statusElement.className = 'status inactive';
+                linkElement.href = '#';
+                linkElement.onclick = (e) => {
+                    e.preventDefault();
+                    alert(`Service ${service.name} non disponible`);
+                };
             }
         }
 
         async function checkAllServices() {
-            console.log('🔄 Vérification des services...');
+            document.getElementById('last-check').textContent = new Date().toLocaleTimeString();
             
-            // Mettre tous en loading
-            Object.keys(services).forEach(key => {
-                document.getElementById(`${key}-status`).className = 'status-dot status-loading';
-            });
+            for (const service of services) {
+                await checkService(service);
+            }
+        }
 
-            // Vérifier chaque service
-            const checks = Object.keys(services).map(key => checkService(key));
-            await Promise.all(checks);
+        function generateServiceCards() {
+            const container = document.getElementById('services-container');
+            container.innerHTML = '';
             
-            console.log('✅ Vérification terminée');
+            services.forEach(service => {
+                const card = document.createElement('div');
+                card.className = 'service-card';
+                card.innerHTML = `
+                    <div class="service-header">
+                        <h3>${service.name}</h3>
+                        <span id="status-${service.port}" class="status checking">🟡 Vérification...</span>
+                    </div>
+                    <div class="service-info">
+                        <p><strong>Port:</strong> ${service.port}</p>
+                        <p><strong>URL:</strong> <a id="link-${service.port}" href="${service.url}" target="_blank">${service.url}</a></p>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
         }
 
         // Vérification initiale
