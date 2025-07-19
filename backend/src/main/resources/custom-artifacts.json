@@ -1,0 +1,76 @@
+{
+  "custom_artifacts": [
+    {
+      "id": "custom_mirror",
+      "name": "Miroir Quantique Personnalisé",
+      "description": "Un miroir créé par un joueur qui combine interférence constructive et amplification",
+      "formula": "CONSTRUCTIVE(ψ1, ψ2) + AMPLIFY(result, 1.5)",
+      "energy_cost": 30,
+      "rarity": "épique",
+      "author": "Player123",
+      "created": "2024-01-15"
+    },
+    {
+      "id": "teleport_crystal",
+      "name": "Cristal de Téléportation",
+      "description": "Cristal magique qui téléporte le héros à une position fixe",
+      "formula": "TELEPORT_HERO(hero, 10, 10) + MODIFY_ENERGY(hero, -20)",
+      "energy_cost": 40,
+      "rarity": "légendaire",
+      "author": "MagicUser456",
+      "created": "2024-01-16"
+    },
+    {
+      "id": "energy_amplifier",
+      "name": "Amplificateur d'Énergie",
+      "description": "Restaure l'énergie du héros et amplifie les ψ-states proches",
+      "formula": "MODIFY_ENERGY(hero, 50) + AMPLIFY(ψ1, 2.0)",
+      "energy_cost": 20,
+      "rarity": "rare",
+      "author": "EnergyMaster",
+      "created": "2024-01-17"
+    },
+    {
+      "id": "quantum_destroyer",
+      "name": "Destructeur Quantique",
+      "description": "Artefact puissant qui crée des interférences destructives",
+      "formula": "DESTRUCTIVE(ψ1, ψ2) + AMPLIFY(result, 2.5)",
+      "energy_cost": 60,
+      "rarity": "mythique",
+      "author": "QuantumWarrior",
+      "created": "2024-01-18"
+    },
+    {
+      "id": "healing_orb",
+      "name": "Orbe de Guérison",
+      "description": "Orbe simple qui restaure l'énergie du héros",
+      "formula": "MODIFY_ENERGY(hero, 100)",
+      "energy_cost": 10,
+      "rarity": "commune",
+      "author": "HealBot",
+      "created": "2024-01-19"
+    },
+    {
+      "id": "position_swapper",
+      "name": "Échangeur de Position",
+      "description": "Artefact expérimental qui téléporte à des coordonnées variables",
+      "formula": "TELEPORT_HERO(hero, 5, 15) + MODIFY_ENERGY(hero, -10)",
+      "energy_cost": 25,
+      "rarity": "rare",
+      "author": "ExperimentalCrafter",
+      "created": "2024-01-20"
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "total_artifacts": 6,
+    "supported_operations": [
+      "CONSTRUCTIVE(ψ1, ψ2) - Interférence constructive",
+      "DESTRUCTIVE(ψ1, ψ2) - Interférence destructive", 
+      "AMPLIFY(ψ, factor) - Amplification",
+      "MODIFY_ENERGY(hero, amount) - Modifier l'énergie",
+      "TELEPORT_HERO(hero, x, y) - Téléportation"
+    ],
+    "formula_syntax": "Les formules peuvent être combinées avec + pour des effets multiples"
+  }
+} 
