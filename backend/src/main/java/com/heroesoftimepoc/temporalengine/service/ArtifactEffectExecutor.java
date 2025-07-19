@@ -8,6 +8,11 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collectors;
 
+// Ajouter imports pour JSON
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.JsonNode;
+import java.io.InputStream;
+
 /**
  * 🔥 ARTIFACT EFFECT EXECUTOR - SYSTÈME D'ID SIMPLE
  * 
@@ -34,6 +39,11 @@ public class ArtifactEffectExecutor {
     /**
      * 🎯 POINT D'ENTRÉE PRINCIPAL
      * Exécute l'effet d'un artefact basé sur son ID
+     * 
+     * 🔄 SYSTÈME HYBRIDE :
+     * 1. D'abord essayer JSON formulas (dynamique)
+     * 2. Ensuite essayer code Java hardcodé (performance)
+     * 3. Fallback vers effet générique
      */
     public Map<String, Object> executeArtifactEffect(String artifactId, Hero hero, Game game) {
         
@@ -51,7 +61,45 @@ public class ArtifactEffectExecutor {
         //     return createError("Héros ne possède pas l'artefact: " + artifactId);
         // }
         
-        // 🎮 SWITCH PRINCIPAL - MAPPING ID → EFFET
+        // 🔄 ÉTAPE 1: ESSAYER FORMULE JSON DYNAMIQUE
+        Map<String, Object> dynamicResult = tryDynamicFormulaExecution(artifactId, hero, game);
+        if (dynamicResult != null) {
+            return dynamicResult;
+        }
+        
+        // 🔄 ÉTAPE 2: ESSAYER CODE JAVA HARDCODÉ
+        Map<String, Object> hardcodedResult = tryHardcodedExecution(artifactId, hero, game);
+        if (hardcodedResult != null) {
+            return hardcodedResult;
+        }
+        
+        // 🔄 ÉTAPE 3: FALLBACK VERS EFFET GÉNÉRIQUE
+        return executeGenericArtifact(artifactId, hero, game);
+    }
+    
+    /**
+     * 🌟 ÉTAPE 1 : Essayer d'exécuter une formule JSON
+     */
+    private Map<String, Object> tryDynamicFormulaExecution(String artifactId, Hero hero, Game game) {
+        try {
+            // Chercher l'artefact dans les JSON (custom-artifacts.json, temporal-artifacts-advanced.json, etc.)
+            String formula = findArtifactFormula(artifactId);
+            
+            if (formula != null && !formula.isEmpty()) {
+                // Exécuter via DynamicFormulaParser  
+                return dynamicFormulaParser.executeFormula(formula, hero, game);
+            }
+        } catch (Exception e) {
+            System.err.println("⚠️ Erreur exécution formule dynamique pour " + artifactId + ": " + e.getMessage());
+        }
+        return null; // Pas trouvé ou erreur
+    }
+    
+    /**
+     * 🏭 ÉTAPE 2 : Essayer le code Java hardcodé
+     */  
+    private Map<String, Object> tryHardcodedExecution(String artifactId, Hero hero, Game game) {
+        // 🎮 SWITCH PRINCIPAL - MAPPING ID → EFFET JAVA HARDCODÉ
         switch (artifactId.toLowerCase()) {
             
             // === ARTEFACTS QUANTIQUES ===
@@ -89,10 +137,103 @@ public class ArtifactEffectExecutor {
             case "wigner_eye":
                 return executeWignerEye(hero, game);
                 
-            // === FALLBACK ===
+            // === ARTEFACTS HARDCODÉS SPÉCIAUX === 
             default:
-                return executeGenericArtifact(artifactId, hero, game);
+                return null; // Pas trouvé en hardcodé
         }
+    }
+    
+    /**
+     * 🔍 CHERCHER FORMULE DANS LES JSON
+     * Charge les artefacts depuis les différents fichiers JSON
+     */
+    private String findArtifactFormula(String artifactId) {
+        try {
+            // 1. Chercher dans custom-artifacts.json
+            String customFormula = findFormulaInJsonFile("custom-artifacts.json", artifactId);
+            if (customFormula != null) return customFormula;
+            
+            // 2. Chercher dans temporal-artifacts-advanced.json  
+            String temporalFormula = findFormulaInJsonFile("temporal-artifacts-advanced.json", artifactId);
+            if (temporalFormula != null) return temporalFormula;
+            
+            // 3. Chercher dans les templates de jeu
+            String templateFormula = findFormulaInGameTemplates(artifactId);
+            if (templateFormula != null) return templateFormula;
+            
+            // 4. Ajouter d'autres sources JSON selon le besoin...
+            
+        } catch (Exception e) {
+            System.err.println("⚠️ Erreur lecture JSON artifacts: " + e.getMessage());
+        }
+        
+        return null; // Pas trouvé
+    }
+    
+    /**
+     * 🔍 CHERCHER DANS UN FICHIER JSON SPÉCIFIQUE
+     */
+    private String findFormulaInJsonFile(String jsonFileName, String artifactId) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            InputStream is = getClass().getClassLoader().getResourceAsStream(jsonFileName);
+            
+            if (is == null) {
+                return null; // Fichier non trouvé
+            }
+            
+            JsonNode root = mapper.readTree(is);
+            JsonNode artifacts = null;
+            
+            // Chercher dans différents formats JSON
+            if (root.has("custom_artifacts")) {
+                artifacts = root.get("custom_artifacts");
+            } else if (root.has("temporal_advanced_artifacts")) {
+                artifacts = root.get("temporal_advanced_artifacts");  
+            } else if (root.has("artifacts")) {
+                artifacts = root.get("artifacts");
+            } else if (root.isArray()) {
+                artifacts = root; // Le root est directement un array
+            }
+            
+            if (artifacts != null && artifacts.isArray()) {
+                for (JsonNode artifact : artifacts) {
+                    if (artifact.has("id") && artifact.get("id").asText().equals(artifactId)) {
+                        if (artifact.has("formula")) {
+                            String formula = artifact.get("formula").asText();
+                            System.out.println("🌟 Formule trouvée pour " + artifactId + ": " + formula);
+                            return formula;
+                        }
+                    }
+                }
+            }
+            
+        } catch (Exception e) {
+            System.err.println("⚠️ Erreur parsing JSON " + jsonFileName + ": " + e.getMessage());
+        }
+        return null;
+    }
+    
+    /**
+     * 🔍 CHERCHER DANS LES TEMPLATES DE JEUX
+     */
+    private String findFormulaInGameTemplates(String artifactId) {
+        try {
+            // Chercher dans les templates de jeux
+            String[] templates = {"classic_rpg", "quantum_puzzle"};
+            
+            for (String template : templates) {
+                String templateFile = "game_templates/" + template + "/artifacts.json";
+                String formula = findFormulaInJsonFile(templateFile, artifactId);
+                if (formula != null) {
+                    return formula;
+                }
+            }
+            
+        } catch (Exception e) {
+            System.err.println("⚠️ Erreur recherche dans templates: " + e.getMessage());
+        }
+        return null;
     }
     
     // =========================================================================
