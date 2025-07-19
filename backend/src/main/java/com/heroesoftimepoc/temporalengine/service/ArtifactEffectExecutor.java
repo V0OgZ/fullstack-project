@@ -87,7 +87,7 @@ public class ArtifactEffectExecutor {
             
             if (formula != null && !formula.isEmpty()) {
                 // Exécuter via DynamicFormulaParser  
-                return dynamicFormulaParser.executeFormula(formula, hero, game);
+                return dynamicFormulaParser.executeFormulaEffect(formula, hero, game, 0);
             }
         } catch (Exception e) {
             System.err.println("⚠️ Erreur exécution formule dynamique pour " + artifactId + ": " + e.getMessage());
