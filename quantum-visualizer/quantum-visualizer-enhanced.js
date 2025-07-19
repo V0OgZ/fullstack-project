@@ -237,9 +237,9 @@ class QuantumVisualizer {
 
     getInterferenceDescription(type, probability) {
         if (type === 'CONSTRUCTIVE') {
-            return `⚡ Amplification ${(probability * 100).toFixed(1)}%`;
+            return `⚡ CONSTRUCT ${(probability * 100).toFixed(1)}%`;
         } else if (type === 'DESTRUCTIVE') {
-            return `💥 Annulation ${(100 - probability * 100).toFixed(1)}%`;
+            return `💥 INFERENCE ${(100 - probability * 100).toFixed(1)}%`;
         } else {
             return '⚖️ Équilibre quantique';
         }
