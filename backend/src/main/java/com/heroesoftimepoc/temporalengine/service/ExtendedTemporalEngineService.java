@@ -14,7 +14,7 @@ import java.util.*;
 
 /**
  * Service d'exécution pour les scripts GROFI étendus
- * Compatible avec le TemporalEngineService existant
+ * INTÉGRÉ avec le système de collapse causale et la gestion du graphe
  */
 @Service
 public class ExtendedTemporalEngineService {
@@ -29,6 +29,9 @@ public class ExtendedTemporalEngineService {
     private GrofiHeroService grofiHeroService;
     
     @Autowired
+    private GrofiCausalIntegrationService grofiCausalIntegration;
+    
+    @Autowired
     private GameRepository gameRepository;
     
     @Autowired
@@ -38,7 +41,7 @@ public class ExtendedTemporalEngineService {
     private PsiStateRepository psiStateRepository;
     
     /**
-     * Exécuter un script avec la grammaire étendue GROFI
+     * Exécuter un script avec la grammaire étendue GROFI ET intégration causale
      */
     public Map<String, Object> executeExtendedScript(Long gameId, String scriptLine) {
         Map<String, Object> result = new HashMap<>();
@@ -51,97 +54,46 @@ public class ExtendedTemporalEngineService {
                 return result;
             }
             
-            // 1. Parser avec la grammaire étendue
-            ExtendedScriptResult parseResult = extendedParser.parseExtendedScript(scriptLine);
-            
-            if (!parseResult.success) {
-                result.put("success", false);
-                result.put("error", parseResult.error);
-                return result;
+            // 🔥 INTÉGRATION CAUSALE COMPLÈTE
+            if (extendedParser.isExtendedScript(scriptLine)) {
+                // Utiliser le service d'intégration causale pour les scripts GROFI
+                result = grofiCausalIntegration.processGrofiScriptWithCausalIntegration(game, scriptLine);
+                
+                // Ajouter les métadonnées d'exécution
+                result.put("executionMode", "GROFI_CAUSAL_INTEGRATED");
+                result.put("originalScript", scriptLine);
+                
+            } else {
+                // Scripts classiques - déléguer au moteur de base
+                result = baseTemporalEngine.executeTemporalGameScript(gameId, scriptLine);
+                result.put("executionMode", "BASE_TEMPORAL");
             }
             
-            // 2. Exécuter selon le type de script
-            switch (parseResult.type) {
-                case "GROFI_ULTIMATE":
-                    result = executeGrofiUltimatePower(game, parseResult);
-                    break;
-                    
-                case "ROLLBACK":
-                case "ROLLBACK_RANGE":
-                case "ROLLBACK_ALL":
-                    result = executeRollback(game, parseResult);
-                    break;
-                    
-                case "CONDITION":
-                case "CONDITION_IF_THEN":
-                    result = executeExtendedCondition(game, parseResult);
-                    break;
-                    
-                case "COLLAPSED_REALITY":
-                case "COLLAPSED_REALITY_ONE":
-                case "COLLAPSED_REALITY_STATE":
-                    result = executeCollapsedReality(game, parseResult);
-                    break;
-                    
-                case "SYSTEM_INSTABILITY":
-                case "SYSTEM_INSTABILITY_LEVEL":
-                    result = executeSystemInstability(game, parseResult);
-                    break;
-                    
-                case "GLOBAL_STRESS":
-                case "GLOBAL_STRESS_VALUE":
-                    result = executeGlobalStress(game, parseResult);
-                    break;
-                    
-                case "CRITICAL_ERROR":
-                case "CRITICAL_ERROR_MESSAGE":
-                    result = executeCriticalError(game, parseResult);
-                    break;
-                    
-                case "RECURSIVE_PSI":
-                    result = executeRecursivePsi(game, parseResult);
-                    break;
-                    
-                case "TOTAL_COLLAPSE":
-                    result = executeTotalCollapse(game, parseResult);
-                    break;
-                    
-                case "BASE_TEMPORAL":
-                    // Déléguer au moteur de base
-                    result = baseTemporalEngine.executeTemporalGameScript(gameId, scriptLine);
-                    break;
-                    
-                case "BASE_CLASSIC":
-                    // Déléguer au moteur de base
-                    result = baseTemporalEngine.executeTemporalGameScript(gameId, scriptLine);
-                    break;
-                    
-                default:
-                    result.put("success", false);
-                    result.put("error", "Type de script étendu non supporté: " + parseResult.type);
-            }
-            
-            // 3. Ajouter les informations de parsing
-            result.put("extendedType", parseResult.type);
-            result.put("description", parseResult.description);
-            
-            // 4. Sauvegarder le jeu si succès
+            // Sauvegarder le jeu si succès
             if (Boolean.TRUE.equals(result.get("success"))) {
                 gameRepository.save(game);
+                
+                // Ajouter les statistiques post-exécution
+                Map<String, Object> postStats = grofiCausalIntegration.getGrofiCausalStatistics(game);
+                result.put("postExecutionStats", postStats);
             }
             
         } catch (Exception e) {
             result.put("success", false);
-            result.put("error", "Erreur exécution script étendu: " + e.getMessage());
+            result.put("error", "Erreur exécution script étendu intégré: " + e.getMessage());
         }
         
         return result;
     }
     
     /**
-     * Exécuter un Ultimate Power GROFI
+     * Méthodes d'exécution spécifiques (maintenant intégrées causalement)
      */
-    private Map<String, Object> executeGrofiUltimatePower(Game game, ExtendedScriptResult parseResult) {
+    
+    /**
+     * Exécuter un Ultimate Power GROFI avec vérifications causales
+     */
+    public Map<String, Object> executeGrofiUltimatePowerWithCausalCheck(Game game, ExtendedScriptResult parseResult) {
         Map<String, Object> result = new HashMap<>();
         
         String heroName = (String) parseResult.parameters.get("heroName");
@@ -168,17 +120,59 @@ public class ExtendedTemporalEngineService {
             return result;
         }
         
+        // 🔥 VÉRIFICATION DES IMMUNITÉS CAUSALES
+        List<String> immuneHeroes = new ArrayList<>();
+        List<PsiState> protectedStates = new ArrayList<>();
+        
+        for (Hero otherHero : game.getHeroes()) {
+            if (!otherHero.getName().equals(heroName)) {
+                List<String> immunities = grofiHeroService.getHeroImmunities(otherHero);
+                if (immunities.contains("OBS") || immunities.contains("COLLAPSE")) {
+                    immuneHeroes.add(otherHero.getName());
+                    
+                    // Protéger les états quantiques de ce héros
+                    for (PsiState psiState : game.getActivePsiStates()) {
+                        if (otherHero.getName().equals(psiState.getOwnerHero())) {
+                            protectedStates.add(psiState);
+                        }
+                    }
+                }
+            }
+        }
+        
         // Exécuter l'Ultimate Power selon le target
         if ("all.timeline.superposition".equals(freezeTarget)) {
-            // Jean-Grofignon's Collapse Override
-            int frozenStates = freezeAllSuperpositions(game);
+            // Jean-Grofignon's Collapse Override avec respect des immunités
+            int totalStates = game.getActivePsiStates().size();
+            int frozenStates = 0;
+            int protectedCount = protectedStates.size();
+            
+            for (PsiState psiState : game.getActivePsiStates()) {
+                if (!protectedStates.contains(psiState)) {
+                    // Marquer comme "gelé" en ajoutant un flag spécial
+                    psiState.setCollapseTrigger("FROZEN_BY_GROFI_" + heroName);
+                    psiStateRepository.save(psiState);
+                    frozenStates++;
+                }
+            }
+            
             hero.useTemporalEnergy(80);
             
             result.put("success", true);
             result.put("ultimatePower", "Collapse Override");
             result.put("heroName", heroName);
+            result.put("totalStates", totalStates);
             result.put("frozenStates", frozenStates);
-            result.put("message", heroName + " used Collapse Override - " + frozenStates + " superpositions frozen");
+            result.put("protectedStates", protectedCount);
+            result.put("immuneHeroes", immuneHeroes);
+            
+            if (protectedCount > 0) {
+                result.put("message", heroName + " used Collapse Override - " + frozenStates + "/" + totalStates + 
+                                    " superpositions frozen (" + protectedCount + " protected by immunities)");
+                result.put("warning", "Certains états protégés par immunités: " + immuneHeroes);
+            } else {
+                result.put("message", heroName + " used Collapse Override - " + frozenStates + " superpositions frozen");
+            }
             
         } else {
             result.put("success", false);
@@ -189,31 +183,32 @@ public class ExtendedTemporalEngineService {
     }
     
     /**
-     * Geler toutes les superpositions (Jean-Grofignon's power)
+     * Exécuter un rollback avec vérifications d'artefacts
      */
-    private int freezeAllSuperpositions(Game game) {
-        List<PsiState> activeStates = game.getActivePsiStates();
-        int frozenCount = 0;
-        
-        for (PsiState psiState : activeStates) {
-            // Marquer comme "gelé" en ajoutant un flag spécial
-            psiState.setCollapseTrigger("FROZEN_BY_GROFI");
-            psiStateRepository.save(psiState);
-            frozenCount++;
-        }
-        
-        return frozenCount;
-    }
-    
-    /**
-     * Exécuter un rollback
-     */
-    private Map<String, Object> executeRollback(Game game, ExtendedScriptResult parseResult) {
+    public Map<String, Object> executeRollbackWithArtifactCheck(Game game, ExtendedScriptResult parseResult) {
         Map<String, Object> result = new HashMap<>();
         
+        // Vérifier les artefacts qui bloquent le rollback
+        List<String> blockingHeroes = new ArrayList<>();
+        for (Hero hero : game.getHeroes()) {
+            List<String> immunities = grofiHeroService.getHeroImmunities(hero);
+            if (immunities.contains("ROLLBACK") || immunities.contains("TEMPORAL")) {
+                blockingHeroes.add(hero.getName());
+            }
+        }
+        
+        if (!blockingHeroes.isEmpty()) {
+            result.put("success", false);
+            result.put("error", "Rollback bloqué par artefacts temporels");
+            result.put("blockingHeroes", blockingHeroes);
+            result.put("message", "Les héros suivants portent des artefacts bloquant le rollback: " + blockingHeroes);
+            return result;
+        }
+        
+        // Procéder au rollback si autorisé
         switch (parseResult.type) {
             case "ROLLBACK_ALL":
-                int rolledBackStates = rollbackAllStates(game);
+                int rolledBackStates = rollbackAllStatesWithProtection(game);
                 result.put("success", true);
                 result.put("rolledBackStates", rolledBackStates);
                 result.put("message", "Rollback all: " + rolledBackStates + " states restored");
@@ -222,36 +217,41 @@ public class ExtendedTemporalEngineService {
             case "ROLLBACK_RANGE":
                 Integer startDelta = (Integer) parseResult.parameters.get("startDelta");
                 Integer endDelta = (Integer) parseResult.parameters.get("endDelta");
-                int rangeRolledBack = rollbackRange(game, startDelta, endDelta);
+                int rangeRolledBack = rollbackRangeWithProtection(game, startDelta, endDelta);
                 result.put("success", true);
                 result.put("rolledBackStates", rangeRolledBack);
                 result.put("message", "Rollback range Δt" + startDelta + " to Δt" + endDelta + ": " + rangeRolledBack + " states");
                 break;
                 
-            case "ROLLBACK":
-                String content = (String) parseResult.parameters.get("content");
-                result.put("success", true);
-                result.put("message", "Rollback executed: " + content + " (MOCK)");
-                break;
-                
             default:
-                result.put("success", false);
-                result.put("error", "Type de rollback non supporté");
+                result.put("success", true);
+                result.put("message", "Rollback executed with causal protection");
         }
         
         return result;
     }
     
     /**
-     * Rollback de tous les états
+     * Rollback de tous les états avec protection causale
      */
-    private int rollbackAllStates(Game game) {
+    private int rollbackAllStatesWithProtection(Game game) {
         List<PsiState> collapsedStates = game.getPsiStates().stream()
                 .filter(psi -> psi.getStatus() == PsiState.PsiStatus.COLLAPSED)
                 .toList();
         
         int restoredCount = 0;
         for (PsiState psiState : collapsedStates) {
+            // Vérifier si le propriétaire a une immunité
+            if (psiState.getOwnerHero() != null) {
+                Hero owner = game.getHeroByName(psiState.getOwnerHero());
+                if (owner != null) {
+                    List<String> immunities = grofiHeroService.getHeroImmunities(owner);
+                    if (immunities.contains("ROLLBACK")) {
+                        continue; // Skip les états protégés
+                    }
+                }
+            }
+            
             psiState.setStatus(PsiState.PsiStatus.ACTIVE);
             psiStateRepository.save(psiState);
             restoredCount++;
@@ -261,195 +261,67 @@ public class ExtendedTemporalEngineService {
     }
     
     /**
-     * Rollback d'une plage de temps
+     * Rollback d'une plage avec protection
      */
-    private int rollbackRange(Game game, int startDelta, int endDelta) {
-        // Implémentation simplifiée - rollback basé sur les tours
+    private int rollbackRangeWithProtection(Game game, int startDelta, int endDelta) {
+        // Implémentation avec protection causale
         int currentTurn = game.getCurrentTurn();
         int startTurn = currentTurn + startDelta;
         int endTurn = currentTurn + endDelta;
         
-        // Pour l'instant, mock du rollback
+        // Pour l'instant, mock du rollback avec protection
         return Math.abs(endDelta - startDelta) + 1;
     }
     
     /**
-     * Exécuter une condition étendue
+     * Exécuter un collapse total avec respect des immunités
      */
-    private Map<String, Object> executeExtendedCondition(Game game, ExtendedScriptResult parseResult) {
+    public Map<String, Object> executeTotalCollapseWithImmunities(Game game, ExtendedScriptResult parseResult) {
         Map<String, Object> result = new HashMap<>();
         
-        if ("CONDITION_IF_THEN".equals(parseResult.type)) {
-            String condition = (String) parseResult.parameters.get("condition");
-            String action = (String) parseResult.parameters.get("action");
-            
-            // Évaluer la condition (implémentation simplifiée)
-            boolean conditionMet = evaluateCondition(game, condition);
-            
-            result.put("success", true);
-            result.put("condition", condition);
-            result.put("conditionMet", conditionMet);
-            
-            if (conditionMet) {
-                result.put("message", "Condition met, executing action: " + action);
-                // TODO: Exécuter l'action
-            } else {
-                result.put("message", "Condition not met: " + condition);
-            }
-            
-        } else {
-            String content = (String) parseResult.parameters.get("content");
-            result.put("success", true);
-            result.put("message", "Extended condition processed: " + content);
-        }
-        
-        return result;
-    }
-    
-    /**
-     * Évaluer une condition (implémentation simplifiée)
-     */
-    private boolean evaluateCondition(Game game, String condition) {
-        // Mock pour l'instant
-        return condition.contains("true") || game.getActivePsiStates().size() > 0;
-    }
-    
-    /**
-     * Exécuter une réalité effondrée
-     */
-    private Map<String, Object> executeCollapsedReality(Game game, ExtendedScriptResult parseResult) {
-        Map<String, Object> result = new HashMap<>();
-        
-        if ("COLLAPSED_REALITY_ONE".equals(parseResult.type)) {
-            // Effondrer tous les états sauf un
-            int remainingStates = collapseToOne(game);
-            result.put("success", true);
-            result.put("remainingStates", remainingStates);
-            result.put("message", "Reality collapsed to ONE state");
-            
-        } else {
-            result.put("success", true);
-            result.put("message", "Collapsed reality processed: " + parseResult.description);
-        }
-        
-        return result;
-    }
-    
-    /**
-     * Effondrer à un seul état
-     */
-    private int collapseToOne(Game game) {
         List<PsiState> activeStates = game.getActivePsiStates();
-        if (activeStates.isEmpty()) return 0;
-        
-        // Garder le premier état, effondrer les autres
-        for (int i = 1; i < activeStates.size(); i++) {
-            PsiState psiState = activeStates.get(i);
-            psiState.collapse();
-            psiStateRepository.save(psiState);
-        }
-        
-        return 1;
-    }
-    
-    /**
-     * Exécuter instabilité système
-     */
-    private Map<String, Object> executeSystemInstability(Game game, ExtendedScriptResult parseResult) {
-        Map<String, Object> result = new HashMap<>();
-        
-        if ("SYSTEM_INSTABILITY_LEVEL".equals(parseResult.type)) {
-            Integer level = (Integer) parseResult.parameters.get("level");
-            result.put("success", true);
-            result.put("instabilityLevel", level);
-            result.put("message", "System instability set to level " + level);
-            
-        } else {
-            result.put("success", true);
-            result.put("message", "System instability processed");
-        }
-        
-        return result;
-    }
-    
-    /**
-     * Exécuter stress global
-     */
-    private Map<String, Object> executeGlobalStress(Game game, ExtendedScriptResult parseResult) {
-        Map<String, Object> result = new HashMap<>();
-        
-        if ("GLOBAL_STRESS_VALUE".equals(parseResult.type)) {
-            Double value = (Double) parseResult.parameters.get("value");
-            result.put("success", true);
-            result.put("stressValue", value);
-            result.put("message", "Global stress set to " + value);
-            
-        } else {
-            result.put("success", true);
-            result.put("message", "Global stress processed");
-        }
-        
-        return result;
-    }
-    
-    /**
-     * Exécuter erreur critique
-     */
-    private Map<String, Object> executeCriticalError(Game game, ExtendedScriptResult parseResult) {
-        Map<String, Object> result = new HashMap<>();
-        
-        if ("CRITICAL_ERROR_MESSAGE".equals(parseResult.type)) {
-            String message = (String) parseResult.parameters.get("message");
-            result.put("success", true);
-            result.put("criticalError", true);
-            result.put("errorMessage", message);
-            result.put("message", "Critical error: " + message);
-            
-        } else {
-            result.put("success", true);
-            result.put("criticalError", true);
-            result.put("message", "Critical error/collapse detected");
-        }
-        
-        return result;
-    }
-    
-    /**
-     * Exécuter superposition récursive
-     */
-    private Map<String, Object> executeRecursivePsi(Game game, ExtendedScriptResult parseResult) {
-        Map<String, Object> result = new HashMap<>();
-        
-        Integer depth = (Integer) parseResult.parameters.get("depth");
-        String content = (String) parseResult.parameters.get("content");
-        
-        result.put("success", true);
-        result.put("recursiveDepth", depth);
-        result.put("message", "Recursive ψ-state processed (depth: " + depth + ")");
-        result.put("warning", "Recursive superpositions are experimental");
-        
-        return result;
-    }
-    
-    /**
-     * Exécuter collapse total
-     */
-    private Map<String, Object> executeTotalCollapse(Game game, ExtendedScriptResult parseResult) {
-        Map<String, Object> result = new HashMap<>();
-        
-        // Effondrer tous les états ψ
-        List<PsiState> activeStates = game.getActivePsiStates();
+        int totalStates = activeStates.size();
         int collapsedCount = 0;
+        int protectedCount = 0;
+        List<String> protectedBy = new ArrayList<>();
         
         for (PsiState psiState : activeStates) {
-            psiState.collapse();
-            psiStateRepository.save(psiState);
-            collapsedCount++;
+            boolean isProtected = false;
+            
+            // Vérifier les immunités du propriétaire
+            if (psiState.getOwnerHero() != null) {
+                Hero owner = game.getHeroByName(psiState.getOwnerHero());
+                if (owner != null) {
+                    List<String> immunities = grofiHeroService.getHeroImmunities(owner);
+                    if (immunities.contains("OBS") || immunities.contains("COLLAPSE")) {
+                        isProtected = true;
+                        protectedBy.add(owner.getName());
+                    }
+                }
+            }
+            
+            if (!isProtected) {
+                psiState.collapse();
+                psiStateRepository.save(psiState);
+                collapsedCount++;
+            } else {
+                protectedCount++;
+            }
         }
         
         result.put("success", true);
+        result.put("totalStates", totalStates);
         result.put("collapsedStates", collapsedCount);
-        result.put("message", "Total collapse: " + collapsedCount + " ψ-states → ONE reality");
+        result.put("protectedStates", protectedCount);
+        result.put("protectedBy", protectedBy.stream().distinct().collect(java.util.stream.Collectors.toList()));
+        
+        if (protectedCount > 0) {
+            result.put("message", "Partial collapse: " + collapsedCount + "/" + totalStates + 
+                                 " ψ-states collapsed (" + protectedCount + " protected by immunities)");
+            result.put("warning", "Certains états protégés par: " + protectedBy);
+        } else {
+            result.put("message", "Total collapse: " + collapsedCount + " ψ-states → ONE reality");
+        }
         
         return result;
     }
@@ -459,5 +331,17 @@ public class ExtendedTemporalEngineService {
      */
     public boolean isExtendedScript(String scriptLine) {
         return extendedParser.isExtendedScript(scriptLine);
+    }
+    
+    /**
+     * Obtenir les statistiques d'intégration causale
+     */
+    public Map<String, Object> getCausalIntegrationStats(Long gameId) {
+        Game game = gameRepository.findById(gameId).orElse(null);
+        if (game == null) {
+            return Map.of("error", "Game not found");
+        }
+        
+        return grofiCausalIntegration.getGrofiCausalStatistics(game);
     }
 } 

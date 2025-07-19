@@ -206,12 +206,80 @@ public class GrofiHeroService {
     }
     
     /**
+     * Vérifier si un héros est un héros GROFI
+     */
+    public boolean isGrofiHero(Hero hero) {
+        return grofiHeroes.values().stream()
+                .anyMatch(data -> data.name.equals(hero.getName()));
+    }
+    
+    /**
+     * Obtenir les immunités d'un héros (basées sur son inventaire et ses capacités GROFI)
+     */
+    public List<String> getHeroImmunities(Hero hero) {
+        List<String> immunities = new ArrayList<>();
+        
+        // Vérifier si c'est un héros GROFI avec des immunités spéciales
+        Optional<GrofiHeroData> grofiData = getGrofiData(hero.getName());
+        if (grofiData.isPresent()) {
+            GrofiHeroData data = grofiData.get();
+            
+            // Jean-Grofignon a des immunités spéciales
+            if ("Jean-Grofignon".equals(data.name)) {
+                immunities.add("COLLAPSE"); // Immunité aux collapses forcés
+            }
+            
+            // Autres héros GROFI avec immunités spécifiques
+            if ("The Dude".equals(data.name)) {
+                immunities.add("STRESS"); // Immunité au stress causale
+            }
+        }
+        
+        // Vérifier les artefacts dans l'inventaire
+        List<String> inventory = hero.getInventory();
+        if (inventory != null) {
+            for (String item : inventory) {
+                // Artefacts qui donnent des immunités
+                switch (item.toLowerCase()) {
+                    case "temporal_anchor":
+                    case "anchor_temporal":
+                        immunities.add("ROLLBACK");
+                        immunities.add("TEMPORAL");
+                        break;
+                        
+                    case "quantum_shield":
+                    case "bouclier_quantique":
+                        immunities.add("OBS");
+                        immunities.add("COLLAPSE");
+                        break;
+                        
+                    case "immunity_ring":
+                    case "anneau_immunite":
+                        immunities.add("OBS");
+                        break;
+                        
+                    case "time_crystal":
+                    case "cristal_temporel":
+                        immunities.add("ROLLBACK");
+                        break;
+                        
+                    case "void_essence":
+                    case "essence_neant":
+                        immunities.add("COLLAPSE");
+                        immunities.add("STRESS");
+                        break;
+                }
+            }
+        }
+        
+        return immunities;
+    }
+    
+    /**
      * Vérifier si un héros a une immunité spécifique
      */
     public boolean hasImmunity(Hero hero, String immunityType) {
-        // Vérifier dans l'inventaire (système compatible)
-        return hero.getInventory().stream()
-                .anyMatch(item -> item.equals("IMMUNE:" + immunityType));
+        return getHeroImmunities(hero).contains(immunityType);
     }
     
     /**
@@ -228,13 +296,5 @@ public class GrofiHeroService {
      */
     public List<GrofiHeroData> getAllGrofiHeroes() {
         return new ArrayList<>(grofiHeroes.values());
-    }
-    
-    /**
-     * Vérifier si un héros est un héros GROFI
-     */
-    public boolean isGrofiHero(Hero hero) {
-        return grofiHeroes.values().stream()
-                .anyMatch(data -> data.name.equals(hero.getName()));
     }
 } 
