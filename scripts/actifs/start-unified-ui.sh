@@ -14,6 +14,7 @@ lsof -ti:8000 | xargs kill -9 2>/dev/null || true  # Frontend Principal
 lsof -ti:8001 | xargs kill -9 2>/dev/null || true  # Quantum Visualizer
 lsof -ti:8888 | xargs kill -9 2>/dev/null || true  # Test Runner
 lsof -ti:5173 | xargs kill -9 2>/dev/null || true  # Temporaire (à nettoyer)
+lsof -ti:5174 | xargs kill -9 2>/dev/null || true  # Temporal UI (WORKING)
 lsof -ti:9000 | xargs kill -9 2>/dev/null || true  # Dashboard
 
 echo ""
@@ -74,6 +75,14 @@ echo "   ✅ Frontend Temporal PID: $TEMPORAL_PID"
 echo $TEMPORAL_PID > ../.temporal.pid
 cd ..
 
+echo "⚔️  [WORKING] Temporal UI Fonctionnelle (port 5174)..."
+cd frontend-temporal
+nohup python3 -m http.server 5174 > ../temporal-working.log 2>&1 &
+TEMPORAL_WORKING_PID=$!
+echo "   ✅ Temporal Working PID: $TEMPORAL_WORKING_PID"
+echo $TEMPORAL_WORKING_PID > ../.temporal-working.pid
+cd ..
+
 echo ""
 echo "✨ TOUS LES SERVICES SONT DÉMARRÉS !"
 echo "======================================="
@@ -103,6 +112,12 @@ echo "      http://localhost:5173"
 echo "      → Interface temporelle avancée"
 echo "      → Système UTMD et animations"
 echo "      → Visualisation collapse causale"
+echo ""
+echo "   ⚔️  Temporal UI (WORKING VERSION)"
+echo "      http://localhost:5174"
+echo "      → Interface temporelle FONCTIONNELLE"
+echo "      → Épée temporelle + Dimensions parallèles"
+echo "      → Console temporelle restaurée"
 echo ""
 echo "   🧪 Test Runner Interface"
 echo "      http://localhost:8888"
