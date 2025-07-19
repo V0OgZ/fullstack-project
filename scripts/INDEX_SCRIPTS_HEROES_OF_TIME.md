@@ -14,6 +14,7 @@
 ### 📁 **SCRIPTS PRINCIPAUX**
 
 #### 🎮 **Scripts de Test**
+- **`test-dashboard.sh`** - 🎯 **Dashboard interactif** pour gérer et visualiser tous les tests
 - **`test-everything.sh`** - Test complet de tout le système
 - **`test-services.sh`** - Test des services
 - **`test-all-scenarios-hots.sh`** - Test tous scénarios HOTS
