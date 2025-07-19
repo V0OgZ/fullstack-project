@@ -68,6 +68,9 @@ public class TemporalEngineService {
     @Autowired
     private QuantumLookupTables quantumLookups;
     
+    @Autowired
+    private ArtifactEffectExecutor artifactEffectExecutor;
+    
     private final Random random = new Random();
     
     /**
@@ -193,7 +196,22 @@ public class TemporalEngineService {
                 result = createGameEntity(game, (Map<String, String>) command.getParameters());
                 break;
             case "USE":
-                result = useGameItem(game, (Map<String, String>) command.getParameters());
+                Map<String, String> useParams = (Map<String, String>) command.getParameters();
+                String itemType = useParams.get("type");      // "ARTIFACT"
+                String itemName = useParams.get("item");      // "quantum_mirror" 
+                String target = useParams.get("target");      // "HERO:Tesla"
+                
+                // 🔥 NOUVEAU : Si c'est un artefact, utiliser l'exécuteur d'effets !
+                if ("ARTIFACT".equals(itemType) || "ITEM".equals(itemType)) {
+                    Hero hero = findHeroByName(game, extractHeroName(target));
+                    if (hero != null) {
+                        result = artifactEffectExecutor.executeArtifactEffect(itemName, hero, game);
+                        break;
+                    }
+                }
+                
+                // Fallback vers l'ancienne logique pour les autres items
+                result = useGameItem(game, useParams);
                 break;
             case "BATTLE":
                 result = executeGameBattle(game, (Map<String, String>) command.getParameters());
@@ -1309,5 +1327,38 @@ public class TemporalEngineService {
         result.put("statistics", stats);
         
         return result;
+    }
+    
+    // =========================================================================
+    // 🔧 MÉTHODES HELPER POUR ARTEFACTS
+    // =========================================================================
+    
+    /**
+     * Trouve un héros dans le jeu par son nom
+     */
+    private Hero findHeroByName(Game game, String heroName) {
+        if (heroName == null || heroName.trim().isEmpty()) {
+            return null;
+        }
+        
+        return game.getHeroes().stream()
+            .filter(hero -> heroName.equals(hero.getName()))
+            .findFirst()
+            .orElse(null);
+    }
+    
+    /**
+     * Extrait le nom du héros depuis une chaîne "HERO:nom"
+     */
+    private String extractHeroName(String target) {
+        if (target == null) {
+            return null;
+        }
+        
+        if (target.startsWith("HERO:")) {
+            return target.substring(5);
+        }
+        
+        return target; // Fallback au cas où c'est juste le nom
     }
 }
