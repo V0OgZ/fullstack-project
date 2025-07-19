@@ -1,992 +1,375 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🕰️ Heroes of Time - Enhanced Temporal Console</title>
+    <title>🌀 Heroes of Time - Console Temporelle</title>
+    <link rel="stylesheet" href="css/temporal-console.css">
     <style>
-        * {
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
-            color: #e94560;
             min-height: 100vh;
-            overflow-x: hidden;
         }
-
-        /* ============================================
-           LOADING SCREEN STYLES (CONSERVÉES)
-           ============================================ */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 1s ease-out, transform 1s ease-out;
-        }
-
-        .loading-screen.hidden {
-            opacity: 0;
-            transform: scale(1.1);
-            pointer-events: none;
-        }
-
-        .temporal-sword {
-            position: relative;
-            width: 300px;
-            height: 400px;
-            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDMwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImJsYWRlIiB4MT0iMTUwIiB5MT0iNTAiIHgyPSIxNTAiIHkyPSIzNTAiPgo8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMDBiY2Q0O3N0b3Atb3BhY2l0eToxIiAvPgo8c3RvcCBvZmZzZXQ9IjMwJSIgc3R5bGU9InN0b3AtY29sb3I6IzAwN2ZmZjtzdG9wLW9wYWNpdHk6MSIgLz4KPHN0b3Agb2Zmc2V0PSI3MCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNmZjgwNDA7c3RvcC1vcGFjaXR5OjEiIC8+CjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6I2U5NDU2MDtzdG9wLW9wYWNpdHk6MSIgLz4KPC9saW5lYXJHcmFkaWVudD4KPGxpbmVhckdyYWRpZW50IGlkPSJoaWx0IiB4MT0iMTMwIiB5MT0iMzUwIiB4Mj0iMTcwIiB5Mj0iMzUwIj4KPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzMzMzMzMztzdG9wLW9wYWNpdHk6MSIgLz4KPHN0b3Agb2Zmc2V0PSI1MCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM2NjY2NjY7c3RvcC1vcGFjaXR5OjEiIC8+CjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzMzMzMzMztzdG9wLW9wYWNpdHk6MSIgLz4KPC9saW5lYXJHcmFkaWVudD4KPGZpbHRlciBpZD0iZ2xvdyI+CjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjMiIHJlc3VsdD0iY29sb3JlZGJsdXIiLz4KPGZlTWVyZ2U+CjxmZU1lcmdlTm9kZSBpbj0iY29sb3JlZGJsdXIiLz4KPGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+CjwvZmVNZXJnZT4KPC9maWx0ZXI+CjwvZGVmcz4KPCEtLSBCbGFkZSAtLT4KPHBhdGggZD0iTTE1MCA0MEwxMjAgMTAwTDE0NSAxMDBMMTUwIDM1MEwxNTUgMTAwTDE4MCA1MFoiIGZpbGw9InVybCgjYmxhZGUpIiBmaWx0ZXI9InVybCgjZ2xvdykiLz4KPCEtLSBDcm9zc2d1YXJkIC0tPgo8cGF0aCBkPSJNMTEwIDEwMEwxOTAgMTAwTDE4NSAxMTBMMTE1IDExMFoiIGZpbGw9InVybCgjaGlsdCkiLz4KPCEtLSBIaWx0IC0tPgo8cGF0aCBkPSJNMTMwIDM1MEwxNzAgMzUwTDE3MCAzODBMMTMwIDM4MFoiIGZpbGw9InVybCgjaGlsdCkiLz4KPCEtLSBQb21tZWwgLS0+CjxjaXJjbGUgY3g9IjE1MCIgY3k9IjM5MCIgcj0iMTAiIGZpbGw9IiNlOTQ1NjAiIGZpbHRlcj0idXJsKCNnbG93KSIvPgo8IS0tIEdlbSBpbiBndWFyZCAtLT4KPGNpcmNsZSBjeD0iMTUwIiBjeT0iMTA1IiByPSI0IiBmaWxsPSIjZjM5YzEyIiBmaWx0ZXI9InVybCgjZ2xvdykiLz4KPCEtLSBSdW5lcyBvbiBibGFkZSAtLT4KPHRleHQgeD0iMTU1IiB5PSIyMDAiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTAiIGZpbGw9IiMwMGJjZDQiIG9wYWNpdHk9IjAuNyI+ψ</dGV4dD4KPHRleHQgeD0iMTU1IiB5PSIyNTAiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTAiIGZpbGw9IiNmMzljMTIiIG9wYWNpdHk9IjAuNyI+Δt</dGV4dD4KPHRleHQgeD0iMTU1IiB5PSIzMDAiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTAiIGZpbGw9IiNlOTQ1NjAiIG9wYWNpdHk9IjAuNyI+†</dGV4dD4KPC9zdmc+') center/contain no-repeat;
-            animation: temporalPulse 3s ease-in-out infinite;
-            filter: drop-shadow(0 0 30px rgba(233, 69, 96, 0.3));
-        }
-
-        .temporal-sword::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(0, 188, 212, 0.2) 0%, transparent 70%);
-            animation: energyField 2s ease-in-out infinite alternate;
-        }
-
-        .temporal-sword::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 150%;
-            height: 150%;
-            transform: translate(-50%, -50%);
-            background: conic-gradient(from 0deg, rgba(233, 69, 96, 0.1), rgba(0, 188, 212, 0.1), rgba(243, 156, 18, 0.1), rgba(233, 69, 96, 0.1));
-            border-radius: 50%;
-            animation: temporalAura 8s linear infinite;
-        }
-
-        @keyframes energyField {
-            0% { opacity: 0.3; }
-            100% { opacity: 0.7; }
-        }
-
-        @keyframes temporalAura {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        @keyframes temporalPulse {
-            0% { 
-                filter: drop-shadow(0 0 20px rgba(0, 188, 212, 0.5));
-                transform: scale(1);
-            }
-            50% { 
-                filter: drop-shadow(0 0 40px rgba(233, 69, 96, 0.8));
-                transform: scale(1.05);
-            }
-            100% { 
-                filter: drop-shadow(0 0 20px rgba(0, 188, 212, 0.5));
-                transform: scale(1);
-            }
-        }
-
-        .temporal-energy {
-            position: absolute;
-            top: 20%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(0, 188, 212, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: energyPulse 4s ease-in-out infinite;
-        }
-
-        @keyframes energyPulse {
-            0% { transform: translateX(-50%) scale(1); opacity: 0.3; }
-            50% { transform: translateX(-50%) scale(1.2); opacity: 0.7; }
-            100% { transform: translateX(-50%) scale(1); opacity: 0.3; }
-        }
-
-        .particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(233, 69, 96, 0.7);
-            border-radius: 50%;
-            animation: particleFloat 8s linear infinite;
-        }
-
-        @keyframes particleFloat {
-            0% { 
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0; 
-            }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { 
-                transform: translateY(-10vh) rotate(360deg);
-                opacity: 0; 
-            }
-        }
-
-        .loading-title {
-            font-size: 2.5em;
-            font-weight: bold;
-            margin-top: 40px;
-            text-align: center;
-            background: linear-gradient(45deg, #e94560, #f39c12, #00bcd4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: titleGlow 2s ease-in-out infinite alternate;
-        }
-
-        .loading-subtitle {
-            font-size: 1.2em;
-            margin-top: 10px;
-            text-align: center;
-            color: #00bcd4;
-            animation: subtitlePulse 3s ease-in-out infinite;
-        }
-
-        @keyframes titleGlow {
-            0% { filter: drop-shadow(0 0 10px rgba(233, 69, 96, 0.5)); }
-            100% { filter: drop-shadow(0 0 20px rgba(0, 188, 212, 0.8)); }
-        }
-
-        @keyframes subtitlePulse {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
-        }
-
-        .loading-progress {
-            width: 300px;
-            height: 6px;
-            background: rgba(233, 69, 96, 0.2);
-            border-radius: 3px;
-            margin: 30px auto;
-            overflow: hidden;
-        }
-
-        .loading-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #e94560, #f39c12, #00bcd4);
-            border-radius: 3px;
-            animation: loadingProgress 3s ease-in-out infinite;
-        }
-
-        @keyframes loadingProgress {
-            0% { width: 0%; }
-            100% { width: 100%; }
-        }
-
-        .loading-status {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 1.1em;
-            color: #f39c12;
-            animation: statusFade 1s ease-in-out infinite alternate;
-        }
-
-        @keyframes statusFade {
-            0% { opacity: 0.6; }
-            100% { opacity: 1; }
-        }
-
-        .runes {
-            position: absolute;
-            bottom: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 3em;
-            color: #e94560;
-            animation: runeRotation 6s linear infinite;
-        }
-
-        @keyframes runeRotation {
-            0% { transform: translateX(-50%) rotate(0deg); }
-            100% { transform: translateX(-50%) rotate(360deg); }
-        }
-
-        /* ============================================
-           INTERFACE PRINCIPALE 
-           ============================================ */
-        .container {
-            display: grid;
-            grid-template-columns: 300px 1fr 350px;
-            grid-template-rows: 60px 1fr;
-            grid-template-areas: 
-                "header header header"
-                "sidebar-left main-area sidebar-right";
-            height: 100vh;
-            gap: 10px;
-            padding: 10px;
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        .main-interface {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .main-interface.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
+        
         .header {
-            grid-area: header;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(233, 69, 96, 0.3);
-            border-radius: 10px;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(10px);
+            background: linear-gradient(90deg, #4a6cf7 0%, #667eea 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(74, 108, 247, 0.3);
         }
-
+        
         .header h1 {
-            font-size: 1.8em;
-            background: linear-gradient(45deg, #e94560, #f39c12);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin: 0;
+            font-size: 2.5em;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
-
-        .status-indicator {
+        
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .main-content {
             display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .status-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #e94560;
-            animation: statusPulse 2s ease-in-out infinite;
-        }
-
-        .status-dot.connected {
-            background: #27ae60;
-        }
-
-        @keyframes statusPulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-        .sidebar-left {
-            grid-area: sidebar-left;
-            background: rgba(0, 188, 212, 0.05);
-            border: 1px solid rgba(0, 188, 212, 0.3);
-            border-radius: 15px;
+            max-width: 1400px;
+            margin: 0 auto;
             padding: 20px;
-            backdrop-filter: blur(10px);
-            overflow-y: auto;
+            gap: 20px;
         }
-
-        .main-area {
-            grid-area: main-area;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            overflow-y: auto;
+        
+        .console-container {
+            flex: 2;
         }
-
-        .sidebar-right {
-            grid-area: sidebar-right;
-            background: rgba(233, 69, 96, 0.05);
-            border: 1px solid rgba(233, 69, 96, 0.3);
-            border-radius: 15px;
+        
+        .sidebar {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
             padding: 20px;
+            color: white;
             backdrop-filter: blur(10px);
-            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-
-        .section-title {
+        
+        .sidebar h3 {
+            color: #4a6cf7;
+            margin-top: 0;
             font-size: 1.3em;
-            margin-bottom: 15px;
-            color: #f39c12;
-            border-bottom: 2px solid rgba(243, 156, 18, 0.3);
-            padding-bottom: 5px;
         }
-
-        .game-info {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+        
+        .command-category {
             margin-bottom: 20px;
         }
-
-        .info-item {
+        
+        .command-category h4 {
+            color: #a8c8f0;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .command-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .command-list li {
+            padding: 5px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #cbd5e1;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        
+        .command-list li:hover {
+            color: #4a6cf7;
+        }
+        
+        .status-panel {
+            background: rgba(74, 108, 247, 0.1);
+            border: 1px solid rgba(74, 108, 247, 0.3);
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .status-panel h4 {
+            margin: 0 0 10px 0;
+            color: #4a6cf7;
+        }
+        
+        .status-item {
             display: flex;
             justify-content: space-between;
-            padding: 8px 12px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 5px;
-            border: 1px solid rgba(0, 188, 212, 0.2);
+            margin: 5px 0;
+            font-size: 0.9em;
         }
-
-        .timeline-indicator {
+        
+        .status-value {
+            font-weight: bold;
+            color: #22c55e;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #64748b;
+            font-size: 0.9em;
+        }
+        
+        .quick-actions {
             display: flex;
             gap: 10px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
         }
-
-        .timeline-branch {
-            padding: 5px 10px;
-            background: rgba(233, 69, 96, 0.2);
-            border: 1px solid rgba(233, 69, 96, 0.4);
-            border-radius: 5px;
-            font-size: 0.9em;
+        
+        .quick-btn {
+            padding: 8px 16px;
+            background: rgba(74, 108, 247, 0.2);
+            border: 1px solid rgba(74, 108, 247, 0.3);
+            border-radius: 4px;
+            color: #a8c8f0;
             cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .timeline-branch.active {
-            background: rgba(233, 69, 96, 0.5);
-            box-shadow: 0 0 10px rgba(233, 69, 96, 0.3);
-        }
-
-        .game-board {
-            flex: 1;
-            background: rgba(0, 0, 0, 0.3);
-            border: 2px solid rgba(233, 69, 96, 0.3);
-            border-radius: 10px;
-            position: relative;
-            min-height: 300px;
-            display: grid;
-            grid-template-columns: repeat(20, 1fr);
-            grid-template-rows: repeat(15, 1fr);
-            gap: 1px;
-            padding: 10px;
-        }
-
-        .tile {
-            background: rgba(233, 69, 96, 0.1);
-            border: 1px solid rgba(233, 69, 96, 0.2);
-            border-radius: 3px;
-            position: relative;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .tile:hover {
-            background: rgba(233, 69, 96, 0.3);
-            transform: scale(1.1);
-            z-index: 10;
-        }
-
-        .tile.has-hero {
-            background: rgba(243, 156, 18, 0.5);
-            border-color: #f39c12;
-        }
-
-        .tile.has-psi-state {
-            background: rgba(155, 89, 182, 0.5);
-            border-color: #9b59b6;
-            animation: psi-glow 2s infinite alternate;
-        }
-
-        @keyframes psi-glow {
-            0% { box-shadow: 0 0 5px rgba(155, 89, 182, 0.5); }
-            100% { box-shadow: 0 0 15px rgba(155, 89, 182, 0.8); }
-        }
-
-        /* ============================================
-           CONSOLE AVANCÉE - NOUVELLES FONCTIONNALITÉS
-           ============================================ */
-        .enhanced-console {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(233, 69, 96, 0.3);
-            border-radius: 10px;
-            padding: 0;
-            height: 400px;
-            display: flex;
-            flex-direction: column;
-            backdrop-filter: blur(10px);
-        }
-
-        .console-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 15px;
-            background: rgba(233, 69, 96, 0.1);
-            border-bottom: 1px solid rgba(233, 69, 96, 0.3);
-            border-radius: 10px 10px 0 0;
-        }
-
-        .console-tabs {
-            display: flex;
-            gap: 10px;
-        }
-
-        .console-tab {
-            padding: 5px 12px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(233, 69, 96, 0.2);
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9em;
-        }
-
-        .console-tab.active {
-            background: rgba(233, 69, 96, 0.3);
-            border-color: rgba(233, 69, 96, 0.5);
-        }
-
-        .console-controls {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .parser-selector {
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(233, 69, 96, 0.3);
-            border-radius: 5px;
-            color: #e94560;
-            padding: 5px 10px;
-            font-size: 0.9em;
-        }
-
-        .metrics-display {
             font-size: 0.8em;
-            color: #f39c12;
+            transition: all 0.2s;
         }
-
-        .console-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .console-output {
-            flex: 1;
-            padding: 15px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
-            overflow-y: auto;
-            background: rgba(0, 0, 0, 0.2);
-            border-bottom: 1px solid rgba(233, 69, 96, 0.2);
-        }
-
-        .console-input-area {
-            padding: 10px 15px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 0 0 10px 10px;
-        }
-
-        .console-input-container {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .console-prompt {
-            color: #f39c12;
-            margin-right: 10px;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-        }
-
-        .console-input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            color: #e94560;
-            font-family: 'Courier New', monospace;
-            font-size: 1em;
-            outline: none;
-            padding: 5px;
-        }
-
-        .console-input::placeholder {
-            color: rgba(233, 69, 96, 0.5);
-        }
-
-        .autocomplete-suggestions {
-            position: absolute;
-            bottom: 100%;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.9);
-            border: 1px solid rgba(233, 69, 96, 0.3);
-            border-radius: 5px;
-            max-height: 200px;
-            overflow-y: auto;
-            z-index: 1000;
-            display: none;
-        }
-
-        .autocomplete-item {
-            padding: 8px 12px;
-            cursor: pointer;
-            border-bottom: 1px solid rgba(233, 69, 96, 0.1);
-            transition: background 0.2s ease;
-        }
-
-        .autocomplete-item:hover,
-        .autocomplete-item.selected {
-            background: rgba(233, 69, 96, 0.2);
-        }
-
-        .autocomplete-item .command {
-            color: #f39c12;
-            font-weight: bold;
-        }
-
-        .autocomplete-item .description {
-            color: #00bcd4;
-            font-size: 0.9em;
-            margin-top: 2px;
-        }
-
-        .log-entry {
-            margin-bottom: 8px;
-            padding: 8px 12px;
-            border-radius: 5px;
-            font-size: 0.9em;
-            border-left: 3px solid;
-        }
-
-        .log-entry.success {
-            background: rgba(39, 174, 96, 0.1);
-            border-left-color: #27ae60;
-            color: #27ae60;
-        }
-
-        .log-entry.error {
-            background: rgba(233, 69, 96, 0.1);
-            border-left-color: #e94560;
-            color: #e94560;
-        }
-
-        .log-entry.warning {
-            background: rgba(243, 156, 18, 0.1);
-            border-left-color: #f39c12;
-            color: #f39c12;
-        }
-
-        .log-entry.info {
-            background: rgba(0, 188, 212, 0.1);
-            border-left-color: #00bcd4;
-            color: #00bcd4;
-        }
-
-        .log-entry.command {
-            background: rgba(155, 89, 182, 0.1);
-            border-left-color: #9b59b6;
-            color: #9b59b6;
-        }
-
-        .log-entry .timestamp {
-            font-size: 0.8em;
-            opacity: 0.7;
-            margin-right: 10px;
-        }
-
-        .log-entry .metrics {
-            font-size: 0.8em;
-            color: #f39c12;
-            margin-left: 10px;
-        }
-
-        .psi-state-item {
-            background: rgba(155, 89, 182, 0.1);
-            border: 1px solid rgba(155, 89, 182, 0.3);
-            border-radius: 8px;
-            padding: 12px;
-            margin-bottom: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .psi-state-item:hover {
-            background: rgba(155, 89, 182, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .psi-state-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .psi-state-id {
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            color: #9b59b6;
-        }
-
-        .psi-state-status {
-            font-size: 0.8em;
-            padding: 2px 6px;
-            border-radius: 3px;
-            background: rgba(155, 89, 182, 0.2);
-            color: #9b59b6;
-        }
-
-        .psi-state-expression {
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
-            color: #e94560;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 8px;
-            border-radius: 5px;
-            border: 1px solid rgba(233, 69, 96, 0.2);
-        }
-
-        .btn {
-            background: linear-gradient(45deg, #e94560, #f39c12);
-            border: none;
-            border-radius: 8px;
+        
+        .quick-btn:hover {
+            background: rgba(74, 108, 247, 0.3);
             color: white;
-            padding: 10px 20px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.9em;
         }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(233, 69, 96, 0.3);
-        }
-
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        .btn.secondary {
-            background: linear-gradient(45deg, #00bcd4, #9b59b6);
-        }
-
-        .btn.small {
-            padding: 5px 10px;
-            font-size: 0.8em;
-        }
-
-        /* ============================================
-           VISUALISATIONS AVANCÉES
-           ============================================ */
-        .performance-chart {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(233, 69, 96, 0.3);
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            height: 150px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .chart-title {
-            font-size: 1.1em;
-            color: #f39c12;
-            margin-bottom: 10px;
-        }
-
-        .chart-container {
-            width: 100%;
-            height: 100px;
-            position: relative;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 5px;
-            overflow: hidden;
-        }
-
-        .chart-bar {
-            position: absolute;
-            bottom: 0;
-            width: 8px;
-            background: linear-gradient(to top, #e94560, #f39c12);
-            border-radius: 2px 2px 0 0;
-            transition: height 0.5s ease;
-        }
-
-        .chart-legend {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-            font-size: 0.8em;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .legend-color {
-            width: 12px;
-            height: 12px;
-            border-radius: 2px;
-        }
-
-        .performance-metrics {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .metric-card {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(233, 69, 96, 0.3);
-            border-radius: 8px;
-            padding: 12px;
-            text-align: center;
-        }
-
-        .metric-value {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #f39c12;
-        }
-
-        .metric-label {
-            font-size: 0.9em;
-            color: #00bcd4;
-            margin-top: 5px;
-        }
-
-        /* ============================================
-           RESPONSIVE DESIGN
-           ============================================ */
-        @media (max-width: 1400px) {
-            .container {
-                grid-template-columns: 250px 1fr 300px;
-            }
-        }
-
-        @media (max-width: 1200px) {
-            .container {
-                grid-template-columns: 1fr;
-                grid-template-rows: 60px auto auto auto;
-                grid-template-areas: 
-                    "header"
-                    "main-area"
-                    "sidebar-left"
-                    "sidebar-right";
+        
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+                padding: 10px;
             }
             
-            .sidebar-left,
-            .sidebar-right {
-                height: auto;
-                max-height: 400px;
+            .header h1 {
+                font-size: 2em;
             }
-        }
-
-        /* ============================================
-           ANIMATIONS SUPPLÉMENTAIRES
-           ============================================ */
-        .fade-in {
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .glow {
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-            from { box-shadow: 0 0 5px rgba(233, 69, 96, 0.5); }
-            to { box-shadow: 0 0 20px rgba(233, 69, 96, 0.8); }
+            
+            .sidebar {
+                order: 2;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- ÉCRAN DE CHARGEMENT ÉPIQUE (CONSERVÉ) -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="temporal-energy"></div>
-        <div class="temporal-sword"></div>
-        <div class="particles" id="particles"></div>
-        <div class="loading-title">Heroes of Time</div>
-        <div class="loading-subtitle">⚡ Enhanced Temporal Console ⚡</div>
-        <div class="loading-progress">
-            <div class="loading-progress-bar"></div>
-        </div>
-        <div class="loading-status">Initializing advanced temporal matrix...</div>
-        <div class="runes">†</div>
+    <div class="header">
+        <h1>🌀 Heroes of Time</h1>
+        <p>Console Temporelle - Heroes of Might & Magic 3 + Quantique</p>
     </div>
-
-    <!-- INTERFACE PRINCIPALE AMÉLIORÉE -->
-    <div class="container main-interface" id="mainInterface">
-        <header class="header">
-            <h1>🕰️ Heroes of Time - Enhanced Temporal Console</h1>
-            <div class="status-indicator">
-                <span>Engine Status:</span>
-                <div class="status-dot" id="statusDot"></div>
-                <span id="statusText">Connecting...</span>
+    
+    <div class="main-content">
+        <div class="console-container">
+            <div id="temporal-console" class="temporal-console"></div>
+        </div>
+        
+        <div class="sidebar">
+            <div class="status-panel">
+                <h4>🎮 Statut du Système</h4>
+                <div class="status-item">
+                    <span>Backend:</span>
+                    <span class="status-value" id="backend-status">Vérification...</span>
+                </div>
+                <div class="status-item">
+                    <span>Jeu Actuel:</span>
+                    <span class="status-value" id="current-game">Aucun</span>
+                </div>
+                <div class="status-item">
+                    <span>Commandes:</span>
+                    <span class="status-value" id="command-count">0</span>
+                </div>
+                <div class="status-item">
+                    <span>ψ-states:</span>
+                    <span class="status-value" id="psi-count">0</span>
+                </div>
             </div>
-        </header>
-
-        <aside class="sidebar-left">
-            <h3 class="section-title">🎮 Game Control</h3>
             
-            <div class="game-info">
-                <div class="info-item">
-                    <span>Game ID:</span>
-                    <span id="gameId">-</span>
-                </div>
-                <div class="info-item">
-                    <span>Current Turn:</span>
-                    <span id="currentTurn">0</span>
-                </div>
-                <div class="info-item">
-                    <span>Active ψ-states:</span>
-                    <span id="activePsiStates">0</span>
-                </div>
-                <div class="info-item">
-                    <span>Heroes:</span>
-                    <span id="heroCount">0</span>
-                </div>
+            <div class="quick-actions">
+                <button class="quick-btn" onclick="insertCommand('HERO(Arthur)')">Créer Arthur</button>
+                <button class="quick-btn" onclick="insertCommand('HERO(Morgana)')">Créer Morgana</button>
+                <button class="quick-btn" onclick="insertCommand('BUILD(CASTLE, @20,20, PLAYER:player1)')">Construire Château</button>
+                <button class="quick-btn" onclick="insertCommand('ψ001: ⊙(Δt+2 @15,15 ⟶ MOV(Arthur, @15,15))')">ψ-state Simple</button>
+                <button class="quick-btn" onclick="clearConsole()">Effacer Console</button>
             </div>
-
-            <button class="btn" onclick="createNewGame()">🎲 New Game</button>
-            <button class="btn secondary" onclick="runDemo()" style="margin-top: 10px;">🎬 Run Demo</button>
-            <button class="btn small" onclick="runPerformanceTest()" style="margin-top: 10px;">⚡ Performance Test</button>
-
-            <h3 class="section-title" style="margin-top: 30px;">📊 Performance Metrics</h3>
-            <div class="performance-metrics">
-                <div class="metric-card">
-                    <div class="metric-value" id="avgLatency">-</div>
-                    <div class="metric-label">Avg Latency (ms)</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value" id="parseTime">-</div>
-                    <div class="metric-label">Parse Time (ms)</div>
-                </div>
-            </div>
-
-            <div class="performance-chart">
-                <div class="chart-title">⚡ Performance History</div>
-                <div class="chart-container" id="performanceChart"></div>
-                <div class="chart-legend">
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: #e94560;"></div>
-                        <span>REGEX</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: #f39c12;"></div>
-                        <span>ANTLR</span>
-                    </div>
-                </div>
-            </div>
-
-            <h3 class="section-title" style="margin-top: 30px;">🌀 Timelines</h3>
-            <div class="timeline-indicator" id="timelineIndicator">
-                <div class="timeline-branch active">ℬ1</div>
-            </div>
-        </aside>
-
-        <main class="main-area">
-            <h3 class="section-title">🗺️ Temporal Game Board</h3>
-            <div class="game-board" id="gameBoard">
-                <!-- Tiles will be generated by JavaScript -->
-            </div>
-
-            <h3 class="section-title">🚀 Enhanced Temporal Console</h3>
-            <div class="enhanced-console">
-                <div class="console-header">
-                    <div class="console-tabs">
-                        <div class="console-tab active" onclick="switchConsoleTab('script')">Script</div>
-                        <div class="console-tab" onclick="switchConsoleTab('debug')">Debug</div>
-                        <div class="console-tab" onclick="switchConsoleTab('performance')">Performance</div>
-                    </div>
-                    <div class="console-controls">
-                        <select class="parser-selector" id="parserSelector">
-                            <option value="regex">REGEX Parser</option>
-                            <option value="antlr">ANTLR Parser</option>
-                            <option value="both">Both Parsers</option>
-                        </select>
-                        <div class="metrics-display" id="metricsDisplay">
-                            Ready
-                        </div>
-                    </div>
+            
+            <div class="command-category">
+                <h3>🏰 Commandes Disponibles</h3>
+                
+                <div class="command-category">
+                    <h4>🌀 Temporel</h4>
+                    <ul class="command-list">
+                        <li onclick="insertCommand('ψ001: ⊙(Δt+2 @x,y ⟶ ACTION)')">ψ001: ⊙(Δt+2 @x,y ⟶ ACTION)</li>
+                        <li onclick="insertCommand('†ψ001')">†ψ001</li>
+                        <li onclick="insertCommand('Π(condition) ⇒ †ψ001')">Π(condition) ⇒ †ψ001</li>
+                    </ul>
                 </div>
                 
-                <div class="console-content">
-                    <div class="console-output" id="consoleOutput"></div>
-                    <div class="console-input-area">
-                        <div class="console-input-container">
-                            <span class="console-prompt">Heroes⚡</span>
-                            <input type="text" class="console-input" id="consoleInput" 
-                                   placeholder="Enter temporal script commands... (Use Tab for autocomplete, ↑↓ for history)"
-                                   onkeydown="handleConsoleKeyDown(event)">
-                            <div class="autocomplete-suggestions" id="autocompleteSuggestions"></div>
-                        </div>
-                    </div>
+                <div class="command-category">
+                    <h4>🦸 Héros</h4>
+                    <ul class="command-list">
+                        <li onclick="insertCommand('HERO(Arthur)')">HERO(Arthur)</li>
+                        <li onclick="insertCommand('MOV(Arthur, @10,10)')">MOV(Arthur, @10,10)</li>
+                        <li onclick="insertCommand('LEVELUP(Arthur, SKILL:LEADERSHIP)')">LEVELUP(Arthur, SKILL:LEADERSHIP)</li>
+                    </ul>
+                </div>
+                
+                <div class="command-category">
+                    <h4>🏰 Construction</h4>
+                    <ul class="command-list">
+                        <li onclick="insertCommand('BUILD(CASTLE, @20,20, PLAYER:player1)')">BUILD(CASTLE, @20,20, PLAYER:player1)</li>
+                        <li onclick="insertCommand('BUILD(GOLD_MINE, @18,18, PLAYER:player1)')">BUILD(GOLD_MINE, @18,18, PLAYER:player1)</li>
+                        <li onclick="insertCommand('BUILD(TEMPLE, @16,16, PLAYER:player1)')">BUILD(TEMPLE, @16,16, PLAYER:player1)</li>
+                    </ul>
+                </div>
+                
+                <div class="command-category">
+                    <h4>💰 Ressources</h4>
+                    <ul class="command-list">
+                        <li onclick="insertCommand('COLLECT(RESOURCE, GOLD, 1000, PLAYER:player1)')">COLLECT(RESOURCE, GOLD, 1000, PLAYER:player1)</li>
+                        <li onclick="insertCommand('COLLECT(RESOURCE, WOOD, 500, PLAYER:player1)')">COLLECT(RESOURCE, WOOD, 500, PLAYER:player1)</li>
+                        <li onclick="insertCommand('COLLECT(RESOURCE, STONE, 300, PLAYER:player1)')">COLLECT(RESOURCE, STONE, 300, PLAYER:player1)</li>
+                    </ul>
+                </div>
+                
+                <div class="command-category">
+                    <h4>⚔️ Armées</h4>
+                    <ul class="command-list">
+                        <li onclick="insertCommand('RECRUIT(UNIT, SWORDSMEN, 20, HERO:Arthur)')">RECRUIT(UNIT, SWORDSMEN, 20, HERO:Arthur)</li>
+                        <li onclick="insertCommand('RECRUIT(UNIT, ARCHERS, 15, HERO:Arthur)')">RECRUIT(UNIT, ARCHERS, 15, HERO:Arthur)</li>
+                        <li onclick="insertCommand('RECRUIT(UNIT, DRAGON, 1, HERO:Arthur)')">RECRUIT(UNIT, DRAGON, 1, HERO:Arthur)</li>
+                    </ul>
+                </div>
+                
+                <div class="command-category">
+                    <h4>⚡ Magie</h4>
+                    <ul class="command-list">
+                        <li onclick="insertCommand('LEARN(SPELL, FIREBALL, HERO:Morgana)')">LEARN(SPELL, FIREBALL, HERO:Morgana)</li>
+                        <li onclick="insertCommand('CAST(SPELL, FIREBALL, TARGET:@25,25, HERO:Morgana)')">CAST(SPELL, FIREBALL, TARGET:@25,25, HERO:Morgana)</li>
+                        <li onclick="insertCommand('CAST(SPELL, HEAL, TARGET:HERO:Arthur, HERO:Morgana)')">CAST(SPELL, HEAL, TARGET:HERO:Arthur, HERO:Morgana)</li>
+                    </ul>
+                </div>
+                
+                <div class="command-category">
+                    <h4>⚔️ Combat</h4>
+                    <ul class="command-list">
+                        <li onclick="insertCommand('BATTLE(Arthur, Enemy)')">BATTLE(Arthur, Enemy)</li>
+                        <li onclick="insertCommand('BATTLE(ARMY:Arthur, ARMY:Enemy, LOCATION:@40,40)')">BATTLE(ARMY:Arthur, ARMY:Enemy, LOCATION:@40,40)</li>
+                        <li onclick="insertCommand('SIEGE(CASTLE, @50,50, HERO:Arthur)')">SIEGE(CASTLE, @50,50, HERO:Arthur)</li>
+                    </ul>
                 </div>
             </div>
-        </main>
-
-        <aside class="sidebar-right">
-            <h3 class="section-title">🌀 Active ψ-states</h3>
-            <div class="psi-state-list" id="psiStateList">
-                <p style="color: rgba(233, 69, 96, 0.5); text-align: center; margin-top: 50px;">
-                    No active ψ-states
-                </p>
-            </div>
-
-            <h3 class="section-title" style="margin-top: 30px;">📋 Advanced Event Log</h3>
-            <div class="log-area" id="logArea">
-                <div class="log-entry info">
-                    <span class="timestamp">00:00:00</span>
-                    🚀 Enhanced Temporal Console Loaded
-                </div>
-                <div class="log-entry info">
-                    <span class="timestamp">00:00:01</span>
-                    🔌 Connecting to backend...
-                </div>
-            </div>
-
-            <h3 class="section-title" style="margin-top: 30px;">🛠️ Debug Tools</h3>
-            <button class="btn small" onclick="clearConsole()">🧹 Clear Console</button>
-            <button class="btn small" onclick="exportSession()" style="margin-top: 5px;">💾 Export Session</button>
-            <button class="btn small" onclick="toggleDebugMode()" style="margin-top: 5px;">🔍 Toggle Debug</button>
-        </aside>
+        </div>
     </div>
-
-    <script src="js/enhanced-temporal-engine.js"></script>
+    
+    <div class="footer">
+        <p>🚀 Heroes of Time - Version POC Alpha V0.1 | Port Backend: 8080 | Moteur Temporel Quantique</p>
+    </div>
+    
+    <script src="js/temporal-engine.js"></script>
+    <script>
+        // Utility functions
+        function insertCommand(command) {
+            const input = document.getElementById('consoleInput');
+            if (input) {
+                input.value = command;
+                input.focus();
+            }
+        }
+        
+        function clearConsole() {
+            const output = document.getElementById('consoleOutput');
+            if (output) {
+                output.innerHTML = '';
+            }
+        }
+        
+        // Status monitoring
+        async function checkBackendStatus() {
+            try {
+                const response = await fetch('http://localhost:8080/api/temporal/health');
+                const data = await response.json();
+                document.getElementById('backend-status').textContent = data.status === 'healthy' ? 'En ligne' : 'Hors ligne';
+                document.getElementById('backend-status').style.color = data.status === 'healthy' ? '#22c55e' : '#ef4444';
+            } catch (error) {
+                document.getElementById('backend-status').textContent = 'Hors ligne';
+                document.getElementById('backend-status').style.color = '#ef4444';
+            }
+        }
+        
+        // Update status every 30 seconds
+        setInterval(checkBackendStatus, 30000);
+        
+        // Initial status check
+        document.addEventListener('DOMContentLoaded', () => {
+            checkBackendStatus();
+        });
+        
+        // Command examples for quick testing
+        const EXAMPLE_SCENARIOS = {
+            basic: [
+                'HERO(Arthur)',
+                'HERO(Morgana)',
+                'MOV(Arthur, @10,10)',
+                'BATTLE(Arthur, Enemy)'
+            ],
+            
+            temporal: [
+                'ψ001: ⊙(Δt+2 @15,15 ⟶ MOV(Arthur, @15,15))',
+                'ψ002: ⊙(Δt+3 @20,20 ⟶ CREATE(CREATURE, Dragon, @20,20))',
+                'Π(Player enters @15,15) ⇒ †ψ001',
+                '†ψ001',
+                '†ψ002'
+            ],
+            
+            hmm3: [
+                'BUILD(CASTLE, @20,20, PLAYER:player1)',
+                'BUILD(GOLD_MINE, @18,18, PLAYER:player1)',
+                'COLLECT(RESOURCE, GOLD, 5000, PLAYER:player1)',
+                'RECRUIT(UNIT, SWORDSMEN, 50, HERO:Arthur)',
+                'LEARN(SPELL, FIREBALL, HERO:Morgana)',
+                'CAST(SPELL, FIREBALL, TARGET:@25,25, HERO:Morgana)',
+                'EXPLORE(TERRAIN, @30,30, HERO:Arthur)',
+                'BATTLE(ARMY:Arthur, ARMY:Enemy, LOCATION:@40,40)'
+            ]
+        };
+        
+        // Fonction pour lancer un scénario complet
+        function runScenario(type) {
+            const scenario = EXAMPLE_SCENARIOS[type];
+            if (!scenario) return;
+            
+            const input = document.getElementById('consoleInput');
+            let index = 0;
+            
+            function executeNext() {
+                if (index >= scenario.length) return;
+                
+                input.value = scenario[index];
+                window.temporalConsole.executeCurrentCommand();
+                index++;
+                
+                setTimeout(executeNext, 1000); // Délai entre commandes
+            }
+            
+            executeNext();
+        }
+        
+        // Raccourcis clavier globaux
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'l') {
+                e.preventDefault();
+                clearConsole();
+            }
+        });
+    </script>
 </body>
 </html>
