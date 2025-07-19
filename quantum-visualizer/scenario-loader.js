@@ -9,10 +9,11 @@
 
 class ScenarioLoader {
     constructor() {
-        this.scenarios = new Map();
+        this.baseUrl = '../game_assets/scenarios/visualizer/';
+        this.scenarios = [];
+        this.currentIndex = 0;
         this.currentScenario = null;
         this.scenarioIndex = null;
-        this.baseUrl = '../scenarios/';
         this.isInitialized = false;
     }
 
