@@ -48,7 +48,7 @@ find: frontend/src: No such file or directory
 [0;32m✅ Documentation temporelle[0m
 [0;34m   →        8 fichiers trouvés[0m
 [0;32m✅ README complet[0m
-[0;34m   → 15 sections trouvées[0m
+[0;34m   → 16 sections trouvées[0m
 [0;34m📋 PHASE 8: VALIDATION DE LA COHÉRENCE GLOBALE[0m
 ================================================================
 [0;32m✅ Cohérence parser-causalité[0m
@@ -59,6 +59,7 @@ backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/BenchmarkCon
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/CausalIntegrationController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/CausalPerformanceController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/ExtendedQuantumController.java:0
+backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/FormulaInterpreterController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/GameController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/GrofiController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/MetricsController.java:1
