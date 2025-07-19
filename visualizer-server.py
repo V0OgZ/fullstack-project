@@ -29,9 +29,9 @@ class VisualizerHandler(http.server.SimpleHTTPRequestHandler):
         if path == '/':
             self.serve_dashboard()
         elif path == '/collection':
-            self.serve_file('game-collection-visualizer.html')
+            self.serve_file('hots-visualizer.html')
         elif path == '/grammar':
-            self.serve_file('hots-grammar-translator.html')
+            self.serve_file('hots-visualizer.html')
         elif path == '/json':
             self.serve_file('json-visualizer.html')
         elif path == '/hots':
@@ -130,21 +130,12 @@ class VisualizerHandler(http.server.SimpleHTTPRequestHandler):
         </div>
         
         <div class="visualizers">
-            <a href="/collection" class="visualizer-card collection-card">
+            <a href="/hots" class="visualizer-card collection-card">
                 <div class="card-icon">🏛️</div>
-                <div class="card-title">Collection du Jeu</div>
+                <div class="card-title">Collection & Grammar</div>
                 <div class="card-description">
-                    Visualiseur de la collection complète - Héros, Artefacts, Créatures.
-                    Interface moderne avec filtres et recherche.
-                </div>
-            </a>
-            
-            <a href="/grammar" class="visualizer-card grammar-card">
-                <div class="card-icon">🔮</div>
-                <div class="card-title">Grammar Translator</div>
-                <div class="card-description">
-                    Traducteur de grammaire HOTS avec symboles temporels.
-                    Conversion automatique en langage naturel.
+                    Interface unifiée : Collection du jeu + Scénarios HOTS + Grammar Translator.
+                    Tout en un avec onglets !
                 </div>
             </a>
             
@@ -157,14 +148,7 @@ class VisualizerHandler(http.server.SimpleHTTPRequestHandler):
                 </div>
             </a>
             
-            <a href="/hots" class="visualizer-card hots-card">
-                <div class="card-icon">🎮</div>
-                <div class="card-title">HOTS Visualizer</div>
-                <div class="card-description">
-                    Décryptage de la grammaire Heroes of Time Script en langage naturel.
-                    Utilise le backend pour traduire les symboles temporels.
-                </div>
-            </a>
+
             
             <a href="/dashboard" class="visualizer-card dashboard-card">
                 <div class="card-icon">🎯</div>
@@ -216,10 +200,9 @@ def start_server(port=5175):
     try:
         with socketserver.TCPServer(("", port), VisualizerHandler) as httpd:
             print(f"🚀 Serveur visualiseurs démarré sur http://localhost:{port}")
-            print(f"🏛️ Collection du Jeu: http://localhost:{port}/collection")
-            print(f"🔮 Grammar Translator: http://localhost:{port}/grammar")
+            print(f"🏛️ Collection & Grammar: http://localhost:{port}/hots")
             print(f"📊 JSON Visualizer: http://localhost:{port}/json")
-            print(f"🎮 HOTS Visualizer: http://localhost:{port}/hots")
+
             print(f"🎯 Dashboard: http://localhost:{port}/dashboard")
             print(f"🛑 Ctrl+C pour arrêter")
             httpd.serve_forever()
