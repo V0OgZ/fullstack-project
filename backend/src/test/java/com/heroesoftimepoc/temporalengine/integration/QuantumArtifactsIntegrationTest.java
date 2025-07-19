@@ -37,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestPropertySource(properties = {
     "spring.datasource.url=jdbc:h2:mem:quantumtestdb",
     "spring.jpa.hibernate.ddl-auto=create-drop",
-    "heroes.parser.use.antlr=false"
+
 })
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @Transactional

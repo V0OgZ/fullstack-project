@@ -6,11 +6,11 @@
 GAME: "Temporal Stress Test - 20 PsiStates"
 
 # === HÉROS POUR LE STRESS TEST ===
-HERO: StressHero1
-HERO: StressHero2
-HERO: StressHero3
-HERO: StressHero4
-HERO: StressHero5
+HERO(StressHero1)
+HERO(StressHero2)
+HERO(StressHero3)
+HERO(StressHero4)
+HERO(StressHero5)
 
 # === POSITIONNEMENT INITIAL ===
 MOV(StressHero1, @10,10)
@@ -45,21 +45,15 @@ MOV(StressHero5, @50,50)
 ψ503: ⊙(Δt+5 @53,53 ⟶ CREATE(ITEM, StressSword3, StressHero5))
 ψ504: ⊙(Δt+5 @54,54 ⟶ CREATE(ITEM, StressSword4, StressHero5))
 
-# === PHASE 2: SIMULATION DE 10 TOURS ===
-NEXT_TURN
-NEXT_TURN
-NEXT_TURN
-NEXT_TURN
-NEXT_TURN
-NEXT_TURN
-NEXT_TURN
-NEXT_TURN
-NEXT_TURN
-NEXT_TURN
+# === PHASE 2: AMPLITUDES COMPLEXES POUR STRESS TEST ===
+ψ601: (0.8+0.6i) ⊙(Δt+6 @61,61 ⟶ MOV(StressHero1, @61,61))
+ψ602: (0.6+0.8i) ⊙(Δt+6 @62,62 ⟶ MOV(StressHero2, @62,62))
+ψ603: (0.7+0.7i) ⊙(Δt+6 @63,63 ⟶ MOV(StressHero3, @63,63))
+ψ604: (0.9+0.4i) ⊙(Δt+6 @64,64 ⟶ MOV(StressHero4, @64,64))
 
-# === PHASE 3: EFFONDREMENT PARTIEL ===
+# === PHASE 3: TESTS DE COLLAPSE MASSIF ===
 †ψ101
-†ψ102
+†ψ102  
 †ψ201
 †ψ202
 †ψ301
@@ -69,14 +63,34 @@ NEXT_TURN
 †ψ501
 †ψ502
 
-# === PHASE 4: PLUS DE TOURS POUR TESTER LA PERSISTANCE ===
-NEXT_TURN
-NEXT_TURN
-NEXT_TURN
-NEXT_TURN
-NEXT_TURN
+# === PHASE 4: BATAILLE MASSIVE AVEC TOUTES LES CRÉATURES ===
+ψ701: ⊙(Δt+7 @50,50 ⟶ BATTLE(StressHero1, Dragon1))
+ψ702: ⊙(Δt+7 @50,50 ⟶ BATTLE(StressHero2, Dragon2))
+ψ703: ⊙(Δt+7 @50,50 ⟶ BATTLE(StressHero3, Dragon3))
+ψ704: ⊙(Δt+7 @50,50 ⟶ BATTLE(StressHero4, Dragon4))
+ψ705: ⊙(Δt+7 @50,50 ⟶ BATTLE(StressHero5, Dragon1))
 
-# === PHASE 5: EFFONDREMENT FINAL ===
+# === PHASE 5: OBSERVATIONS CONDITIONNELLES ===
+Π(BATTLE_STARTS(@50,50)) ⇒ †ψ701
+Π(HERO_MOVES(StressHero1, @61,61)) ⇒ †ψ601
+Π(HERO_MOVES(StressHero2, @62,62)) ⇒ †ψ602
+
+# === PHASE 6: CRÉATION D'ARTEFACTS DE STRESS ===
+ψ801: ⊙(Δt+8 @80,80 ⟶ CREATE(ARTIFACT, StressOrb1, @80,80))
+ψ802: ⊙(Δt+8 @81,81 ⟶ CREATE(ARTIFACT, StressOrb2, @81,81))
+ψ803: ⊙(Δt+8 @82,82 ⟶ CREATE(ARTIFACT, StressOrb3, @82,82))
+
+# === PHASE 7: UTILISATION MASSIVE D'ARTEFACTS ===
+USE(ARTIFACT, StressOrb1, HERO:StressHero1)
+USE(ARTIFACT, StressOrb2, HERO:StressHero2)
+USE(ARTIFACT, StressOrb3, HERO:StressHero3)
+
+# === PHASE 8: ÉTATS QUANTIQUES FINAUX ===
+ψ901: (0.95+0.31i) ⊙(Δt+9 @90,90 ⟶ BATTLE(StressHero1, StressHero5))
+ψ902: (0.31+0.95i) ⊙(Δt+9 @90,90 ⟶ BATTLE(StressHero2, StressHero4))
+ψ903: (1.0+0.0i) ⊙(Δt+9 @90,90 ⟶ BATTLE(StressHero3, Dragon4))
+
+# === PHASE 9: COLLAPSE FINAL MASSIF ===
 †ψ103
 †ψ104
 †ψ203
@@ -87,16 +101,24 @@ NEXT_TURN
 †ψ404
 †ψ503
 †ψ504
+†ψ603
+†ψ604
+†ψ702
+†ψ703
+†ψ704
+†ψ705
+†ψ801
+†ψ802
+†ψ803
+†ψ901
+†ψ902
+†ψ903
 
-# === BATAILLE FINALE ===
-BATTLE(StressHero1, StressHero2)
-BATTLE(StressHero3, StressHero4)
-BATTLE(StressHero5, StressHero1)
-
-# === METADATA ===
-# Expected duration: 15-30 seconds
-# Expected ψ-states: 20 total
-# Expected turns: 15
-# Expected battles: 7
-# Expected memory test: Heavy
-# Expected performance: Intensive 
+# ===============================================
+# METADATA DU STRESS TEST
+# Total états ψ créés: 35 (inclut amplitudes complexes)
+# Total collapses: 32 (test de performance)
+# Types d'actions testés: MOV, CREATE, BATTLE, USE
+# Durée simulation: 9 tours
+# Performance attendue: <5 secondes pour 35 états ψ
+# =============================================== 

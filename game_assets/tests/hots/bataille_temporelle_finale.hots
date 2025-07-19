@@ -1,95 +1,85 @@
 # ===============================================
 # BATAILLE TEMPORELLE - FINALE
-# Script de résolution et conditions de victoire
+# Script final de résolution avec collapse causale
 # ===============================================
 
-# Phase 1: Positionnement final
-ψ017: ⊙(Δt+1 @9,9 ⟶ MOV(Arthur, @9,9))  # Zone temporelle
-ψ018: ⊙(Δt+1 @10,9 ⟶ MOV(Morgana, @10,9))  # Zone temporelle
+# Phase 1: Configuration finale des héros
+HERO(Arthur)
+HERO(Morgana)
 
-# Phase 2: Bataille finale pour la Lame d'Avant-Monde
-ψ019: ⊙(Δt+2 @10,10 ⟶ BATTLE(Arthur, DragonRouge))
-ψ020: ⊙(Δt+2 @10,10 ⟶ BATTLE(Morgana, DragonRouge))
+# Position initiale des héros
+MOV(Arthur, @8,8)
+MOV(Morgana, @16,16)
 
-# Phase 3: Résolution quantique finale
-⟨ψ019 ∧ ψ020 | QUANTUM_ENTANGLEMENT(@10,10) ⟩ → SUPERPOSITION(dual_victory)
+# Phase 2: États ψ complexes pour bataille finale
+ψ100: (0.8+0.6i) ⊙(Δt+1 @12,12 ⟶ MOV(Arthur, @12,12))
+ψ101: (0.6+0.8i) ⊙(Δt+1 @12,12 ⟶ MOV(Morgana, @12,12))
 
-# Phase 4: Utilisation des artefacts collectés
+# Phase 3: Artefacts légendaires
 USE(ARTIFACT, LameAvantMonde, HERO:Arthur)
-QUANTUM_STRIKE(Arthur, DragonRouge, P=0.95)
+USE(ARTIFACT, BatonDuTemps, HERO:Morgana)
 
-# Phase 5: Contrôle des zones temporelles
-CAPTURE(Arthur, TemporalZone)
-HOLD(TemporalZone, 1)  # Tour 1 de contrôle
+# Phase 4: Création des créatures finales
+ψ102: (0.9+0.3i) ⊙(Δt+2 @10,10 ⟶ CREATE(CREATURE, DragonTemporel, @10,10))
+ψ103: (0.7+0.7i) ⊙(Δt+2 @14,14 ⟶ CREATE(CREATURE, PhoenixQuantique, @14,14))
 
-# Phase 6: Paradoxe temporel
-ψ021: ⊙(Δt+1 @11,11 ⟶ CREATE(PARADOX, temporal_loop))
-RESOLVE(PARADOX, temporal_loop, METHOD:quantum_decoherence)
+# Phase 5: Combat des titans
+ψ104: (0.95+0.25i) ⊙(Δt+3 @12,12 ⟶ BATTLE(Arthur, Morgana))
 
-# Phase 7: Bataille fantôme massive
-ψ022: ⊙(Δt+1 @8,12 ⟶ BATTLE(Arthur, PhantomWarriors))
-ψ023: ⊙(Δt+1 @8,12 ⟶ BATTLE(Morgana, PhantomWarriors))
-†ψ022  # Arthur battle fantôme
-†ψ023  # Morgana battle fantôme
+# Phase 6: Intervention des créatures
+ψ105: ⊙(Δt+3 @12,12 ⟶ BATTLE(DragonTemporel, PhoenixQuantique))
 
-# Phase 8: Effets de zone temporelle
-TEMPORAL_BOOST(Arthur, energy=25)
-TEMPORAL_BOOST(Morgana, energy=25)
+# Phase 7: Utilisation des pouvoirs ultimes
+ψ106: (0.85+0.5i) ⊙(Δt+4 @12,12 ⟶ CAST(SPELL, Apocalypse_Temporelle, TARGET:@12,12, HERO:Arthur))
+ψ107: (0.8+0.55i) ⊙(Δt+4 @12,12 ⟶ CAST(SPELL, Reset_Causal, TARGET:@12,12, HERO:Morgana))
 
-# Phase 9: Collecte finale d'artefacts
-ψ024: ⊙(Δt+1 @12,6 ⟶ COLLECT(Arthur, OrbeProbabilite))
-†ψ024
+# Phase 8: Observations critiques pour déclencher la finale
+Π(BATTLE_ENDS(Arthur, Morgana)) ⇒ †ψ104
+Π(SPELL_CAST(Apocalypse_Temporelle)) ⇒ †ψ106
+Π(SPELL_CAST(Reset_Causal)) ⇒ †ψ107
 
-# Phase 10: Vérification des conditions de victoire
-CHECK(VICTORY_CONDITION, ELIMINATE_ENEMY_HEROES)
-CHECK(VICTORY_CONDITION, COLLECT_TEMPORAL_ARTIFACTS)
-CHECK(VICTORY_CONDITION, CONTROL_TEMPORAL_ZONES)
+# Phase 9: Zones temporelles instables
+ψ108: (0.6+0.8i) ⊙(Δt+5 @10,10 ⟶ CREATE(BUILDING, ZoneTemporelle, @10,10))
+ψ109: (0.8+0.6i) ⊙(Δt+5 @14,14 ⟶ CREATE(BUILDING, ZoneTemporelle, @14,14))
 
-# Phase 11: Timeline finale
-BRANCH(Victory_Timeline): ψ025: ⊙(Δt+1 @10,10 ⟶ VICTORY(Arthur))
-BRANCH(Defeat_Timeline): ψ026: ⊙(Δt+1 @10,10 ⟶ DEFEAT(Arthur))
+# Phase 10: Collecte des fragments temporels
+ψ110: ⊙(Δt+6 @8,12 ⟶ COLLECT(FragmentTemporel, 3, PLAYER:Arthur))
+ψ111: ⊙(Δt+6 @16,12 ⟶ COLLECT(FragmentTemporel, 3, PLAYER:Morgana))
 
-# Phase 12: Observation finale
-⟨ψ025 ∧ ψ026 | OBSERVE(universal_witness) ⟩ → COLLAPSE(final_state)
+# Phase 11: Construction des monuments de victoire
+ψ112: ⊙(Δt+7 @6,6 ⟶ BUILD(BUILDING, MonumentVictoire, @6,6, PLAYER:Arthur))
+ψ113: ⊙(Δt+7 @18,18 ⟶ BUILD(BUILDING, MonumentVictoire, @18,18, PLAYER:Morgana))
 
-# Phase 13: Nettoyage temporel
-CLEANUP(expired_psi_states)
-RESTORE(timeline_coherence)
+# Phase 12: États de superposition finale
+ψ114: (0.707+0.707i) ⊙(Δt+8 @12,12 ⟶ BATTLE(Arthur, ZoneTemporelle))
+ψ115: (0.707-0.707i) ⊙(Δt+8 @12,12 ⟶ BATTLE(Morgana, ZoneTemporelle))
 
-# Phase 14: Logging des résultats finaux
-LOG("Bataille Temporelle - Finale terminée")
-LOG("États ψ totaux créés: 26 superpositions")
-LOG("Collapses effectués: 15 observations")
-LOG("Artefacts temporels utilisés: 5 objets")
-LOG("Paradoxes résolus: 1 boucle temporelle")
-LOG("Zones temporelles contrôlées: 1 zone")
-LOG("Batailles fantômes: 4 combats")
-LOG("Branching temporels: 3 timelines")
-LOG("Résolution quantique: 2 entanglements")
+# Phase 13: Résolution finale - collapse de tous les états
+†ψ100
+†ψ101  
+†ψ102
+†ψ103
+†ψ105
+†ψ108
+†ψ109
+†ψ110
+†ψ111
+†ψ112
+†ψ113
+†ψ114
+†ψ115
 
-# Phase 15: Statistiques finales
-STATS("Arthur", {
-  "movements": 8,
-  "battles": 5,
-  "artifacts_used": 3,
-  "psi_states_created": 12,
-  "quantum_actions": 6,
-  "temporal_energy_used": 180,
-  "victory_probability": 0.73
-})
+# Phase 14: Détermination du vainqueur
+ψ116: (1.0+0.0i) ⊙(Δt+9 @12,12 ⟶ BATTLE(Arthur, Morgana))
+Π(HERO_HEALTH(Arthur) > HERO_HEALTH(Morgana)) ⇒ †ψ116
 
-STATS("Morgana", {
-  "movements": 7,
-  "battles": 4,
-  "artifacts_used": 2,
-  "psi_states_created": 10,
-  "quantum_actions": 5,
-  "temporal_energy_used": 165,
-  "victory_probability": 0.68
-})
+# Phase 15: Création du monde unifié
+ψ117: (0.9+0.4i) ⊙(Δt+10 @12,12 ⟶ CREATE(BUILDING, MondeUnifie, @12,12))
 
-# Phase 16: Conclusion
-LOG("=== BATAILLE TEMPORELLE COMPLETE ===")
-LOG("Toutes les mécaniques temporelles ont été testées avec succès")
-LOG("Le moteur quantique fonctionne correctement")
-LOG("Scénario de test validé pour intégration continue") 
+# ===============================================
+# METADATA FINALE
+# Total états ψ: 18
+# Total collapses: 16
+# Durée totale: 10 tours
+# Résultat: Unification temporelle
+# =============================================== 
