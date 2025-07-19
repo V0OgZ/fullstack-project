@@ -19,7 +19,6 @@
 - Port 5175 : Object Viewer (`visualizer-server.py`) - JSON/HOTS/Dashboard
 - Port 5170 : JSON Visualizer (DÉPRÉCIÉ - remplacé par 5175)
 - Port 5171 : HOTS Visualizer (DÉPRÉCIÉ - remplacé par 5175)
-- Port 5190 : Interface Légendaire (`frontend-legendary-ui/`) - **OPTIONNEL**
 - Port 8888 : Test Runner - **RÉCUPÉRÉ et FONCTIONNEL**
 
 ### 📋 COMMANDES STANDARDISÉES - OBLIGATOIRES
@@ -55,17 +54,7 @@
    - Features : Épée temporelle animée + Configuration Temporelle
    - Commande : `cd frontend-temporal && python3 -m http.server 5174 > /dev/null 2>&1 &`
 
-3. **`frontend-legendary-ui/`** - UI Légendaire (port 5190) - OPTIONNEL
-   - Fichier : `index.html`
-   - Features : Animated heroes + Particles + Smooth movement
-   - Commande : `cd frontend-legendary-ui && python3 server.py`
-
-4. **`frontend-temporal-legendary/`** - Interface Temporelle Légendaire
-   - Fichier : `index.html`
-   - Features : Enhanced Temporal Console
-   - Statut : DISPONIBLE mais pas utilisé actuellement
-
-5. **`quantum-visualizer/`** - Visualiseur Quantique (port 8001)
+3. **`quantum-visualizer/`** - Visualiseur Quantique (port 8001)
    - Fichier : `index.html`
    - Features : Scénarios GROFI + Visualisation
    - Commande : `python3 -m http.server 8001 > /dev/null 2>&1 &` (depuis RACINE)
@@ -89,7 +78,6 @@
 - ✅ Quantum Visualizer (8001) : http://localhost:8001/quantum-visualizer/
 - ✅ Object Viewer (5175) : http://localhost:5175
 - ✅ Test Runner (8888) : http://localhost:8888
-- 🔧 UI Légendaire (5190) : Optionnelle
 
 ### Backend - Problèmes Connus
 - 🔴 **Erreur JPA** : "Not a managed type: class Game"
