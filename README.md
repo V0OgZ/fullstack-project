@@ -45,6 +45,9 @@ Heroes of Time combine la magie de **Heroes of Might & Magic 3** avec des mécan
 **🗼 Tour de l'Ancrage** - *Fige la réalité dans une zone*
 **🌫️ Le Voile** - *Permet de voir les futurs possibles*
 **⏰ Totem de Rembobinage** - *Annule les 3 derniers tours*
+**🧭 Chronocompass Linéaire** - *Navigation libre sur l'axe temporel (Axis uniquement)*
+
+⚠️ **Artefacts Interdits à Axis** : Miroir Quantique, Portail Multivers, Dés de Probabilité
 
 ---
 
@@ -81,6 +84,10 @@ Heroes of Time combine la magie de **Heroes of Might & Magic 3** avec des mécan
 
 ### **🏹 Morgana la Tisseuse**
 *Tisse les fils du destin et manipule les probabilités*
+
+### **⚡ Axis le Voyageur Linéaire**
+*Maître absolu du voyage temporel - parcourt le passé et le futur sans paradoxes*
+*Mais cantonné à une seule timeline, et certains artefacts lui sont interdits*
 
 ---
 
