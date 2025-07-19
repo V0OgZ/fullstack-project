@@ -1,0 +1,115 @@
+{
+  "heroes_registry": {
+    "version": "1.0",
+    "last_updated": "2025-01-27T10:00:00",
+    "description": "Index officiel des héros disponibles dans Heroes of Time",
+    
+    "legendary_heroes": [
+      {
+        "id": "arthur_pendragon_official",
+        "name": "Arthur Pendragon",
+        "title": "⚔️ Le Roi Temporel",
+        "file": "backend/src/main/resources/heroes/legendary/Arthur.json",
+        "test_data": "sample_data.json (hero_arthur)",
+        "scenarios": ["epic-arthur-vs-ragnar.hots", "oeil_de_wigner_scenario.hots"],
+        "status": "ACTIVE_COMPLETE"
+      },
+      {
+        "id": "ragnar_official", 
+        "name": "Ragnar",
+        "title": "🏹 Le Chef de Guerre Temporel",
+        "file": "backend/src/main/resources/heroes/legendary/Ragnar.json",
+        "scenarios": ["epic-arthur-vs-ragnar.hots", "bataille_temporelle_combat.hots"],
+        "status": "ACTIVE_COMPLETE"
+      },
+      {
+        "id": "lysandrel",
+        "name": "Lysandrel",
+        "title": "🔮 Le Forgeron de Réalité",
+        "file": "docs/items/ECLAT_MONDES_DISSOLUS_HEROES.json",
+        "backup": "backend/src/main/resources/heroes/legendary/Lysandrel-source.json",
+        "scenarios": ["oeil_de_wigner_scenario.hots"],
+        "status": "DOCUMENTED_COMPLETE"
+      },
+      {
+        "id": "morgana_official",
+        "name": "Morgana", 
+        "title": "🌙 La Conseillère des Ombres Temporelles",
+        "file": "backend/src/main/resources/heroes/legendary/Morgana.json",
+        "scenarios": ["oeil_de_wigner_scenario.hots", "bataille_temporelle_setup.hots"],
+        "status": "ACTIVE_COMPLETE"
+      }
+    ],
+    
+    "grofi_heroes": [
+      {
+        "id": "axis",
+        "name": "Axis",
+        "title": "⚡ Le Voyageur Linéaire",
+        "file": "backend/src/main/resources/heroes/grofi/Axis.json",
+        "status": "RECENTLY_ADDED"
+      },
+      {
+        "id": "jean_grofignon",
+        "name": "Jean Grofignon",
+        "file": "backend/src/main/resources/heroes/grofi/JeanGrofignon.json",
+        "status": "GROFI_COLLECTION"
+      },
+      {
+        "id": "the_dude",
+        "name": "The Dude",
+        "file": "backend/src/main/resources/heroes/grofi/TheDude.json",
+        "status": "GROFI_COLLECTION"
+      },
+      {
+        "id": "vince_vega",
+        "name": "Vince Vega", 
+        "file": "backend/src/main/resources/heroes/grofi/VinceVega.json",
+        "status": "GROFI_COLLECTION"
+      }
+    ],
+    
+    "console_suggestions": [
+      {
+        "name": "Arthur",
+        "command": "HERO(Arthur)",
+        "file": "frontend/script-console.js"
+      },
+      {
+        "name": "Ragnar",
+        "command": "HERO(Ragnar)",
+        "file": "frontend/script-console.js"
+      },
+      {
+        "name": "Merlin",
+        "command": "HERO(Merlin)", 
+        "file": "frontend/script-console.js"
+      }
+    ],
+    
+    "scenario_heroes": {
+      "epic-arthur-vs-ragnar.hots": [
+        "Arthur", "Ragnar", "Merlin", "Loki", "Guinevere"
+      ],
+      "oeil_de_wigner_scenario.hots": [
+        "Arthur", "Lysandrel", "Ragnar", "Morgana"
+      ]
+    },
+    
+    "usage_notes": {
+      "do_not_modify": [
+        "sample_data.json - Used by Java tests and scripts",
+        "frontend/script-console.js - Used by UI suggestions"
+      ],
+      "can_reorganize": [
+        "docs/items/ECLAT_MONDES_DISSOLUS_HEROES.json - Documentation only",
+        "backend/src/main/resources/heroes/legendary/ - New official definitions"
+      ],
+      "active_usage": [
+        "Tests use hero_arthur from sample_data.json",
+        "Scripts use HERO(Arthur), HERO(Ragnar), HERO(Merlin)",
+        "HOTS scenarios use all listed heroes"
+      ]
+    }
+  }
+} 
