@@ -1,125 +1,72 @@
 #!/bin/bash
 
-# 🎯 SCRIPT HEROES OF TIME - Start Services Background CORRIGÉ
-# ============================================================
-# Démarre TOUS les services Heroes of Time en arrière-plan permanent
-# Version CORRIGÉE selon les ports documentés dans .cursorrules
+echo "🚀 DÉMARRAGE DES SERVICES HEROES OF TIME"
+echo "========================================"
 
-echo "🚀 ============================================================"
-echo "🎯 LANCEMENT SERVICES HEROES OF TIME - VERSION CORRIGÉE"
-echo "🚀 ============================================================"
-
-# Fonction pour tuer les processus sur un port
-kill_port() {
-    local port=$1
-    echo "🔧 Nettoyage port $port..."
-    lsof -ti :$port | xargs kill -9 2>/dev/null || true
-}
-
-# Nettoyage des ports SELON .cursorrules
+# Nettoyer les ports si nécessaire
 echo "🧹 Nettoyage des ports..."
-kill_port 9000
-kill_port 8000
-kill_port 8080
-kill_port 5174
-kill_port 8001
-kill_port 5175
-kill_port 8888
+lsof -ti:9000 | xargs kill -9 2>/dev/null || true
+lsof -ti:8000 | xargs kill -9 2>/dev/null || true
+lsof -ti:8080 | xargs kill -9 2>/dev/null || true
+lsof -ti:5174 | xargs kill -9 2>/dev/null || true
+lsof -ti:8001 | xargs kill -9 2>/dev/null || true
+lsof -ti:5175 | xargs kill -9 2>/dev/null || true
+lsof -ti:8888 | xargs kill -9 2>/dev/null || true
 
 sleep 2
 
-# 1. Dashboard Unifié (Port 9000) - FICHIER CORRECT
-echo "🎯 Démarrage Dashboard Unifié..."
-cd /Users/admin/HOT/Heroes-of-Time
-python3 -c "
-import http.server
-import socketserver
-import os
+# Démarrer le Dashboard (port 9000)
+echo "📊 Démarrage Dashboard (port 9000)..."
+python3 -m http.server 9000 > /dev/null 2>&1 &
+echo "✅ Dashboard démarré: http://localhost:9000/dashboard.html"
 
-class DashboardHandler(http.server.SimpleHTTPRequestHandler):
-    def do_GET(self):
-        if self.path == '/' or self.path == '/dashboard':
-            try:
-                with open('dashboard.html', 'r', encoding='utf-8') as f:
-                    content = f.read()
-                self.send_response(200)
-                self.send_header('Content-type', 'text/html; charset=utf-8')
-                self.end_headers()
-                self.wfile.write(content.encode('utf-8'))
-            except FileNotFoundError:
-                self.send_error(404, 'Dashboard not found')
-        else:
-            super().do_GET()
+# Démarrer le Frontend Principal (port 8000)
+echo "🎮 Démarrage Frontend Principal (port 8000)..."
+cd frontend && python3 -m http.server 8000 > /dev/null 2>&1 &
+cd ..
+echo "✅ Frontend Principal démarré: http://localhost:8000"
 
-with socketserver.TCPServer(('', 9000), DashboardHandler) as httpd:
-    print('🎯 Dashboard Unifié démarré sur port 9000')
-    httpd.serve_forever()
-" > /dev/null 2>&1 &
+# Démarrer le Backend Spring Boot (port 8080)
+echo "🔧 Démarrage Backend API (port 8080)..."
+cd backend && mvn spring-boot:run > /dev/null 2>&1 &
+cd ..
+echo "✅ Backend API démarré: http://localhost:8080/api"
 
-# 2. Frontend Principal (Port 8000)
-echo "🎮 Démarrage Frontend Principal..."
-cd /Users/admin/HOT/Heroes-of-Time/frontend
-python3 -m http.server 8000 > /dev/null 2>&1 &
+# Démarrer l'Interface Temporelle (port 5174)
+echo "⚡ Démarrage Interface Temporelle (port 5174)..."
+cd frontend-temporal && python3 -m http.server 5174 > /dev/null 2>&1 &
+cd ..
+echo "✅ Interface Temporelle démarrée: http://localhost:5174"
 
-# 3. Interface Temporelle (Port 5174)
-echo "⚔️ Démarrage Interface Temporelle..."
-cd /Users/admin/HOT/Heroes-of-Time/frontend-temporal
-python3 -m http.server 5174 > /dev/null 2>&1 &
-
-# 4. Quantum Visualizer (Port 8001)
-echo "🌌 Démarrage Quantum Visualizer..."
-cd /Users/admin/HOT/Heroes-of-Time/quantum-visualizer
+# Démarrer le Quantum Visualizer (port 8001)
+echo "🔬 Démarrage Quantum Visualizer (port 8001)..."
 python3 -m http.server 8001 > /dev/null 2>&1 &
+echo "✅ Quantum Visualizer démarré: http://localhost:8001/quantum-visualizer/"
 
-# 5. Object Viewer (Port 5175) - SERVEUR UNIFIÉ
-echo "🔮 Démarrage Object Viewer..."
-cd /Users/admin/HOT/Heroes-of-Time
-python3 visualizer-server.py 5175 > /dev/null 2>&1 &
+# Démarrer l'Object Viewer (port 5175)
+echo "🏛️ Démarrage Collection & Grammar (port 5175)..."
+python3 visualizer-server.py > /dev/null 2>&1 &
+echo "✅ Collection & Grammar démarré: http://localhost:5175/hots"
 
-# 6. Test Runner (Port 8888) - RÉCUPÉRÉ de 872e0d7
-echo "🧪 Démarrage Test Runner..."
-cd /Users/admin/HOT/Heroes-of-Time
-python3 test-runner-server.py 8888 > /dev/null 2>&1 &
+# Démarrer le Test Runner (port 8888)
+echo "🧪 Démarrage Test Runner (port 8888)..."
+python3 test-runner-server.py > /dev/null 2>&1 &
+echo "✅ Test Runner démarré: http://localhost:8888"
 
-# 7. Backend Spring Boot (Port 8080) - AJOUTÉ !
-echo "⚙️ Démarrage Backend Spring Boot..."
-cd /Users/admin/HOT/Heroes-of-Time/backend
-mvn spring-boot:run > /dev/null 2>&1 &
-
-sleep 12
-
-# Vérification des services SELON .cursorrules
-echo ""
-echo "✅ VÉRIFICATION DES SERVICES:"
-echo "================================"
-
-check_service() {
-    local port=$1
-    local name=$2
-    if lsof -i :$port > /dev/null 2>&1; then
-        echo "✅ $name (Port $port): ACTIF"
-    else
-        echo "❌ $name (Port $port): ERREUR"
-    fi
-}
-
-check_service 9000 "Dashboard Unifié"
-check_service 8000 "Frontend Principal"
-check_service 8080 "Backend Spring Boot"
-check_service 5174 "Interface Temporelle"
-check_service 8001 "Quantum Visualizer"
-check_service 5175 "Object Viewer"
-check_service 8888 "Test Runner"
+sleep 5
 
 echo ""
-echo "🎯 DASHBOARD PRINCIPAL: http://localhost:9000/dashboard.html"
-echo "🎮 FRONTEND: http://localhost:8000"
-echo "⚙️ BACKEND API: http://localhost:8080/api/games"
-echo "⚔️ TEMPOREL: http://localhost:5174"
-echo "🌌 QUANTUM: http://localhost:8001"
-echo "🔮 OBJECT VIEWER: http://localhost:5175"
-echo "🧪 TEST RUNNER: http://localhost:8888"
+echo "🎯 TOUS LES SERVICES SONT DÉMARRÉS !"
+echo "====================================="
+echo "📊 Dashboard: http://localhost:9000/dashboard.html"
+echo "🎮 Frontend Principal: http://localhost:8000"
+echo "🔧 Backend API: http://localhost:8080/api"
+echo "⚡ Interface Temporelle: http://localhost:5174"
+echo "🔬 Quantum Visualizer: http://localhost:8001/quantum-visualizer/"
+echo "🏛️ Collection & Grammar: http://localhost:5175/hots"
+echo "🧪 Test Runner: http://localhost:8888"
 echo ""
-echo "🚀 SERVICES LANCÉS SELON .cursorrules !"
-echo "🎯 Ports FIXES - Ne JAMAIS changer sans concertation !"
-echo "============================================================" 
+echo "🔄 Vérification des ports..."
+lsof -i :9000,8000,8080,5174,8001,5175,8888 | grep LISTEN
+echo ""
+echo "✅ Services prêts !" 
