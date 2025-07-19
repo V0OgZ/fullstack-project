@@ -254,10 +254,6 @@
                 <span>Quantum Visualizer (8001)</span>
             </div>
             <div class="status-indicator">
-                <div class="status-dot status-loading" id="temporallegendary-status"></div>
-                <span>Interface Temporelle (5174)</span>
-            </div>
-            <div class="status-indicator">
                 <div class="status-dot status-loading" id="legendary-status"></div>
                 <span>UI Légendaire (5190)</span>
             </div>
@@ -317,23 +313,6 @@
             </ul>
             <a href="http://localhost:8001" target="_blank" class="launch-button" id="visualizer-button">
                 🔬 Scénarios & Replay
-            </a>
-        </div>
-
-        <!-- Interface Temporelle Légendaire -->
-        <div class="ui-panel" id="temporal-legendary-panel">
-            <div class="panel-icon">⚔️</div>
-            <h2 class="panel-title">Interface Temporelle Légendaire</h2>
-            <p class="panel-description">🔥 LA vraie interface temporelle retrouvée ! Configuration Temporelle + Épée animée !</p>
-            <div class="panel-url">http://localhost:5174</div>
-            <ul class="panel-features">
-                <li>⚔️ Épée temporelle avec runes ψ, Δt, † animées</li>
-                <li>🎨 Effets temporalPulse + energyField + aura</li>
-                <li>🔮 Configuration Temporelle complète</li>
-                <li>🌟 Images PNG originales (2.7MB épée !)</li>
-            </ul>
-            <a href="http://localhost:5174" target="_blank" class="launch-button" id="temporal-legendary-button">
-                ⚔️ CONFIGURATION TEMPORELLE !
             </a>
         </div>
 
@@ -404,7 +383,6 @@
             frontend: { url: 'http://localhost:8000', port: 8000, name: 'Frontend Principal' },
             temporal: { url: 'http://localhost:5173', port: 5173, name: 'Frontend Temporal' },
             visualizer: { url: 'http://localhost:8001', port: 8001, name: 'Quantum Visualizer' },
-            temporallegendary: { url: 'http://localhost:5174', port: 5174, name: 'Interface Temporelle Légendaire' },
             legendary: { url: 'http://localhost:5190', port: 5190, name: 'UI Légendaire' },
             testrunner: { url: 'http://localhost:8888', port: 8888, name: 'Test Runner' }
         };

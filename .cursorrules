@@ -1,0 +1,59 @@
+# CURSOR RULES - Heroes of Time Project
+
+## 🚨 RÈGLES CRITIQUES APPRISES AUJOURD'HUI
+
+### Git - Commandes INTERDITES sur Agent Partagé
+- ❌ **JAMAIS** `git reset --hard` - Agent partagé, plusieurs développeurs
+- ❌ **JAMAIS** `git push --force` - Destructif pour l'équipe  
+- ❌ **JAMAIS** suppression de branches sans concertation
+- ✅ **UTILISER** : `git checkout <commit> -- <fichier>` pour restaurer
+- ✅ **UTILISER** : `git revert` pour annuler des commits
+- ✅ **UTILISER** : `git stash` pour sauvegarder
+
+### Interface Temporelle - Versions Fonctionnelles
+- ✅ **Interface Légendaire** : `frontend-legendary-ui/` (port 5190)
+  - Commit source : 08353dc99341a197203656dc37140b8afba73b01
+  - Features : Animated heroes + Particles + Smooth movement
+  - Serveur : `python3 server.py` avec CORS
+- ✅ **Interface Temporelle** : `frontend-temporal/` (port 5174)  
+  - Commit sauvegardé : 5ef2203
+  - Features : Épée temporelle animée + Configuration Temporelle
+
+### Backend - Problèmes Connus
+- 🔴 **Erreur JPA** : "Not a managed type: class Game"
+- 🔴 **ComplexAmplitude** : Existe mais problème de dépendances Maven
+- 🔴 **DynamicFormulaParser** : Méthode `executeFormula` manquante
+- ✅ **Correction** : Utiliser `executeFormulaEffect(formula, hero, game, 0)`
+
+### Commandes - Bonnes Pratiques
+- ✅ **Frontend** : `cd frontend-temporal && python3 -m http.server 5174`
+- ✅ **Backend** : `cd backend && mvn spring-boot:run`
+- ✅ **UI Légendaire** : `cd frontend-legendary-ui && python3 server.py`
+- ✅ **Ports libres** : `pkill -f "http.server"` avant relancement
+
+### Récupération Sécurisée
+- ✅ **Fichiers spécifiques** : `git checkout <commit> -- <path>` 
+- ✅ **Vérifier avant** : `git show <commit> --name-only`
+- ❌ **Éviter** : Récupération complète qui écrase tout
+
+### Cache Cursor - Problèmes Connus  
+- 🔴 **Problème** : `git checkout` et `git reset` corrompus par cache
+- ✅ **Solution** : Extraction manuelle avec `git show <commit>:<file>`
+- ✅ **Alternative** : Utiliser les checkpoints Cursor pour restaurer
+
+## 📝 NOTES IMPORTANTES
+
+### Visualiseur JSON - À Préserver
+- 🛡️ **Ne PAS écraser** les corrections du visualiseur JSON
+- 🛡️ **Récupération sélective** uniquement pour UI
+
+### Serveurs Multiples - Gestion Ports
+- Port 5174 : Interface temporelle (`frontend-temporal`)
+- Port 5190 : Interface légendaire (`frontend-legendary-ui`) 
+- Port 8080 : Backend Spring Boot
+- Port 5172 : Quantum visualizer
+
+### Commit Messages - Format Appris
+- ✅ **Bon format** : "🎯 MISSION UI LÉGENDAIRE ACCOMPLIE - Description détaillée"
+- ✅ **Inclure** : Features, ports, sources git
+- ✅ **Structurer** : Émojis + titre + détails techniques 
