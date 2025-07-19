@@ -33,26 +33,6 @@ class TemporalEngine {
         this.updateLoadingStatus('Initializing temporal matrix...');
     }
 
-    init() {
-        // Initialize the temporal engine
-        this.updateLoadingStatus('Connecting to backend...');
-        this.checkConnection();
-    }
-
-    updateLoadingStatus(status) {
-        if (this.loadingStatus) {
-            this.loadingStatus.textContent = status;
-        }
-    }
-
-    checkConnection() {
-        // Try to connect to the backend
-        setTimeout(() => {
-            this.updateLoadingStatus('Temporal matrix initialized');
-            this.isConnected = true;
-        }, 2000);
-    }
-
     createParticles() {
         const particlesContainer = document.getElementById('particles');
         if (!particlesContainer) return;
@@ -525,29 +505,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Export for debugging
 window.TemporalEngine = TemporalEngine;
-
-// Initialize engine automatically
-let engine;
-document.addEventListener('DOMContentLoaded', () => {
-    engine = new TemporalEngine();
-    
-    // Hide loading screen after 3 seconds
-    setTimeout(() => {
-        hideLoadingScreen();
-    }, 3000);
-});
-
-function hideLoadingScreen() {
-    const loadingScreen = document.getElementById('loadingScreen');
-    const mainInterface = document.getElementById('mainInterface');
-    
-    if (loadingScreen && mainInterface) {
-        loadingScreen.classList.add('hidden');
-        mainInterface.classList.add('visible');
-        
-        // Remove loading screen from DOM after transition
-        setTimeout(() => {
-            loadingScreen.style.display = 'none';
-        }, 1000);
-    }
-}

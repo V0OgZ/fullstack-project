@@ -4,10 +4,10 @@
   "description": "Frontend interface for Heroes of Time Temporal Engine",
   "main": "index.html",
   "scripts": {
-    "dev": "vite --port 5173",
+    "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "vite --port 5173",
+    "serve": "python3 -m http.server 3000",
     "test": "echo 'Frontend tests coming soon'"
   },
   "dependencies": {
