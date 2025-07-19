@@ -424,6 +424,14 @@ public class FormulaInterpreterService {
             case "BUILD": return "Constructs building or structure";
             case "CAST": return "Casts magical spell";
             case "EQUIP": return "Equips artifact to hero";
+            case "HERO": return "Creates or modifies hero";
+            case "COLLECT": return "Collects resources";
+            case "RECRUIT": return "Recruits units";
+            case "LEARN": return "Learns new abilities";
+            case "LEVELUP": return "Increases hero level";
+            case "EXPLORE": return "Explores territory";
+            case "SIEGE": return "Sieges target";
+            case "CAPTURE": return "Captures objective";
             default: return "Executes game action";
         }
     }
