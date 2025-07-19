@@ -254,6 +254,10 @@
                 <span>Quantum Visualizer (8001)</span>
             </div>
             <div class="status-indicator">
+                <div class="status-dot status-loading" id="legendary-status"></div>
+                <span>UI Légendaire (5190)</span>
+            </div>
+            <div class="status-indicator">
                 <div class="status-dot status-loading" id="testrunner-status"></div>
                 <span>Test Runner (8888)</span>
             </div>
@@ -312,6 +316,23 @@
             </a>
         </div>
 
+        <!-- UI Légendaire Retrouvée -->
+        <div class="ui-panel" id="legendary-panel">
+            <div class="panel-icon">🏛️</div>
+            <h2 class="panel-title">UI Légendaire Retrouvée</h2>
+            <p class="panel-description">🔥 L'ancienne interface légendaire avec animations héros, particles et smooth movement !</p>
+            <div class="panel-url">http://localhost:5190</div>
+            <ul class="panel-features">
+                <li>🎨 Animated heroes with lerping</li>
+                <li>✨ Particle effects & trails</li>
+                <li>⚔️ Hero icons (Arthur ⚔️, Morgana 🧙‍♀️)</li>
+                <li>🌟 Bounce & pulse animations</li>
+            </ul>
+            <a href="http://localhost:5190" target="_blank" class="launch-button" id="legendary-button">
+                🏛️ REVIVRE LA LÉGENDE !
+            </a>
+        </div>
+
         <!-- Test Runner -->
         <div class="ui-panel" id="testrunner-panel">
             <div class="panel-icon">🧪</div>
@@ -345,6 +366,7 @@
             frontend: { url: 'http://localhost:8000', port: 8000, name: 'Frontend Principal' },
             temporal: { url: 'http://localhost:5173', port: 5173, name: 'Frontend Temporal' },
             visualizer: { url: 'http://localhost:8001', port: 8001, name: 'Quantum Visualizer' },
+            legendary: { url: 'http://localhost:5190', port: 5190, name: 'UI Légendaire' },
             testrunner: { url: 'http://localhost:8888', port: 8888, name: 'Test Runner' }
         };
 

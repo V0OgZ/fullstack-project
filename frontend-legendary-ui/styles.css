@@ -1,0 +1,248 @@
+/* styles.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: #fff;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.header {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #FFD700;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #FFD700;
+}
+
+.controls button {
+    background: linear-gradient(45deg, #8B5A2B, #FFD700);
+    border: none;
+    padding: 8px 16px;
+    margin-left: 10px;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.controls button:hover {
+    transform: scale(1.05);
+}
+
+.game-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.game-board {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.2);
+    border: 2px solid #444;
+    margin: 10px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#game-canvas {
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, #2a2a3e, #1a1a2e);
+}
+
+.script-console {
+    height: 200px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid #444;
+    margin: 0 10px 10px 10px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.console-output {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.console-line {
+    margin-bottom: 5px;
+}
+
+.console-line.command {
+    color: #FFD700;
+}
+
+.console-line.success {
+    color: #00FF00;
+}
+
+.console-line.error {
+    color: #FF4444;
+}
+
+.console-input {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid #444;
+}
+
+.prompt {
+    color: #FFD700;
+    font-weight: bold;
+    margin-right: 10px;
+    font-family: 'Courier New', monospace;
+}
+
+#script-input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #666;
+    padding: 8px;
+    color: #fff;
+    font-family: 'Courier New', monospace;
+    border-radius: 4px;
+}
+
+#script-input:focus {
+    outline: none;
+    border-color: #FFD700;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+}
+
+#execute-btn {
+    background: linear-gradient(45deg, #4A90E2, #9370DB);
+    border: none;
+    padding: 8px 16px;
+    margin-left: 10px;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+#execute-btn:hover {
+    transform: scale(1.05);
+}
+
+.status-bar {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 8px 20px;
+    border-top: 1px solid #444;
+    font-size: 14px;
+    color: #ccc;
+}
+
+/* Animations pour les effets temporels */
+@keyframes psiGlow {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+.psi-effect {
+    animation: psiGlow 2s ease-in-out infinite;
+}
+
+@keyframes conflictFlash {
+    0%, 100% { background-color: transparent; }
+    50% { background-color: rgba(255, 0, 0, 0.3); }
+}
+
+.conflict-zone {
+    animation: conflictFlash 1s ease-in-out infinite;
+}
+
+/* Suggestions dropdown */
+.suggestions {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid #666;
+    border-radius: 4px;
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.suggestion-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: #ccc;
+    border-bottom: 1px solid #333;
+}
+
+.suggestion-item:hover {
+    background: rgba(255, 215, 0, 0.2);
+    color: #FFD700;
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.console-input {
+    position: relative;
+}
+
+/* Loading indicator */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #333;
+    border-radius: 50%;
+    border-top-color: #FFD700;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        font-size: 14px;
+    }
+    
+    .script-console {
+        height: 150px;
+    }
+    
+    .title {
+        font-size: 20px;
+    }
+    
+    .suggestions {
+        max-height: 100px;
+    }
+}
