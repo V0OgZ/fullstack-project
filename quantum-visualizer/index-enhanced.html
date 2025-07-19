@@ -3,453 +3,545 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔬 Heroes of Time - Quantum Visualizer Enhanced</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="scenario-selector.css">
+    <title>🌀 Heroes of Time - Quantum Visualizer</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
-        /* Styles pour le graphe causal */
-        .causal-graph-container {
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-            border: 2px solid rgba(78, 205, 196, 0.3);
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            overflow-x: hidden;
         }
-        
-        .graph-controls {
+
+        .container {
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
+            height: 100vh;
         }
-        
-        .graph-control-btn {
-            background: rgba(78, 205, 196, 0.2);
-            border: 1px solid rgba(78, 205, 196, 0.5);
-            color: #4ecdc4;
-            padding: 8px 16px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-size: 12px;
-            transition: all 0.3s ease;
-        }
-        
-        .graph-control-btn:hover {
-            background: rgba(78, 205, 196, 0.3);
-            transform: translateY(-1px);
-        }
-        
-        .graph-control-btn.active {
-            background: rgba(78, 205, 196, 0.4);
-            border-color: #4ecdc4;
-        }
-        
-        .timeline-selector {
-            display: flex;
-            gap: 5px;
-            align-items: center;
-        }
-        
-        .timeline-btn {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            border: 2px solid;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 12px;
-            transition: all 0.3s ease;
-        }
-        
-        .timeline-btn.b1 { border-color: #e94560; color: #e94560; }
-        .timeline-btn.b2 { border-color: #00bcd4; color: #00bcd4; }
-        .timeline-btn.b3 { border-color: #f39c12; color: #f39c12; }
-        .timeline-btn.b4 { border-color: #9b59b6; color: #9b59b6; }
-        .timeline-btn.b5 { border-color: #2ecc71; color: #2ecc71; }
-        
-        .timeline-btn:hover, .timeline-btn.active {
-            transform: scale(1.1);
-            box-shadow: 0 0 10px currentColor;
-        }
-        
-        .reports-panel {
+
+        .sidebar {
+            width: 300px;
             background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
             padding: 20px;
-            margin: 20px 0;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
         }
-        
-        .report-item {
-            background: rgba(255, 255, 255, 0.05);
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .graph-container {
+            flex: 1;
+            position: relative;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 24px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .controls {
+            background: rgba(0, 0, 0, 0.2);
             padding: 15px;
             margin: 10px 0;
             border-radius: 8px;
-            border-left: 4px solid #4ecdc4;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
-        .report-item h4 {
+
+        .control-group {
+            margin-bottom: 15px;
+        }
+
+        .control-group:last-child {
+            margin-bottom: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
             color: #4ecdc4;
-            margin: 0 0 10px 0;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
             font-size: 14px;
         }
-        
-        .report-item .report-data {
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            color: #e0e0e0;
-            line-height: 1.4;
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
         }
-        
-        .metric-badge {
-            display: inline-block;
-            background: rgba(233, 69, 96, 0.2);
-            color: #e94560;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 11px;
-            margin: 2px;
+
+        button {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 5px;
+            transition: transform 0.2s;
         }
-        
-        .graph-legend {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-            flex-wrap: wrap;
-            font-size: 12px;
+
+        button:hover {
+            transform: translateY(-2px);
         }
-        
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .legend-symbol {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            border: 2px solid #fff;
-        }
-        
-        .legend-symbol.initial { background: #2ecc71; }
-        .legend-symbol.action { background: #3498db; }
-        .legend-symbol.quantum { background: #e94560; }
-        .legend-symbol.collapse { background: #e74c3c; }
-        
-        #causal-graph {
-            width: 100%;
-            height: 500px;
-            border: 1px solid rgba(78, 205, 196, 0.3);
-            border-radius: 8px;
-        }
-        
+
         .status-indicator {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(0, 255, 0, 0.2);
-            color: #00ff00;
-            padding: 5px 10px;
-            border-radius: 15px;
+            padding: 10px;
+            border-radius: 6px;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .status-ok { background: rgba(76, 175, 80, 0.3); }
+        .status-warning { background: rgba(255, 152, 0, 0.3); }
+        .status-error { background: rgba(244, 67, 54, 0.3); }
+
+        .reports-panel {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .report-item {
+            padding: 8px;
+            margin: 5px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            border-left: 3px solid #4ecdc4;
+        }
+
+        .graph-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .node {
+            cursor: pointer;
+        }
+
+        .node circle {
+            stroke: #fff;
+            stroke-width: 2px;
+        }
+
+        .link {
+            stroke: #999;
+            stroke-opacity: 0.6;
+            stroke-width: 2px;
+        }
+
+        .node text {
             font-size: 12px;
-            border: 1px solid rgba(0, 255, 0, 0.5);
+            fill: white;
+            text-anchor: middle;
+        }
+
+        .timeline-selector {
+            display: flex;
+            gap: 5px;
+            margin: 10px 0;
+        }
+
+        .timeline-btn {
+            padding: 5px 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .timeline-btn.active {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        }
+
+        /* 🚀 STYLES POUR LE MONITORING DE PERFORMANCE */
+        .performance-panel {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .performance-metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .performance-metric:last-child {
+            border-bottom: none;
+        }
+
+        .metric-label {
+            font-size: 12px;
+            color: #4ecdc4;
+        }
+
+        .metric-value {
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .performance-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin: 5px 0;
+            overflow: hidden;
+        }
+
+        .performance-bar-fill {
+            height: 100%;
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .performance-controls {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .performance-controls button {
+            flex: 1;
+            padding: 5px;
+            font-size: 11px;
         }
     </style>
 </head>
 <body>
-    <!-- Interface de sélection de scénario -->
-    <div id="scenario-selection" class="scenario-selection">
-        <div class="scenario-header">
-            <h1>🔬 Heroes of Time - Quantum Visualizer Enhanced</h1>
-            <div class="status-indicator">🟢 OPÉRATIONNEL</div>
-            <p class="scenario-subtitle">Visualisation avancée des graphes causaux et timelines</p>
-        </div>
-        
-        <div class="scenario-grid">
-            <div class="scenario-card" onclick="loadReplayInterface()">
-                <div class="scenario-icon">🌀</div>
-                <h3>Causal Graph Replay</h3>
-                <p>Visualisation interactive des graphes causaux avec D3.js</p>
-                <div class="scenario-features">
-                    <span class="feature-tag">D3.js</span>
-                    <span class="feature-tag">Interactif</span>
-                    <span class="feature-tag">Timeline</span>
-                </div>
-            </div>
+    <div class="container">
+        <!-- Sidebar avec contrôles -->
+        <div class="sidebar">
+            <h2>🌀 Quantum Visualizer</h2>
             
-            <div class="scenario-card" onclick="loadQuantumAnalysis()">
-                <div class="scenario-icon">📊</div>
-                <h3>Quantum Analysis</h3>
-                <p>Analyse des états quantiques et interférences</p>
-                <div class="scenario-features">
-                    <span class="feature-tag">ψ-states</span>
-                    <span class="feature-tag">Rapports</span>
-                    <span class="feature-tag">Métriques</span>
-                </div>
-            </div>
-            
-            <div class="scenario-card" onclick="loadGameReplay()">
-                <div class="scenario-icon">🎮</div>
-                <h3>Game Replay</h3>
-                <p>Replay complet des parties avec timeline</p>
-                <div class="scenario-features">
-                    <span class="feature-tag">Replay</span>
-                    <span class="feature-tag">Histoire</span>
-                    <span class="feature-tag">Actions</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Interface principale avec graphe causal -->
-    <div id="game-interface" style="display: none;">
-        <button class="back-button" onclick="backToScenarios()">← Retour</button>
-        
-        <div class="main-container">
-            <h2>🌀 Visualisation Graphe Causal</h2>
-            
-            <!-- Contrôles du graphe -->
-            <div class="causal-graph-container">
-                <div class="graph-controls">
-                    <button class="graph-control-btn active" onclick="causalGraph.resetFilter()">
-                        🔄 Tout Afficher
-                    </button>
-                    <button class="graph-control-btn" onclick="causalGraph.centerGraph()">
-                        🎯 Centrer
-                    </button>
-                    <button class="graph-control-btn" onclick="loadGameData()">
-                        📡 Actualiser
-                    </button>
-                    <button class="graph-control-btn" onclick="exportGraph()">
-                        💾 Exporter
-                    </button>
-                    
-                    <div class="timeline-selector">
-                        <span style="color: #e0e0e0; margin-right: 10px;">Timeline:</span>
-                        <div class="timeline-btn b1 active" onclick="filterTimeline('ℬ1')">ℬ1</div>
-                        <div class="timeline-btn b2" onclick="filterTimeline('ℬ2')">ℬ2</div>
-                        <div class="timeline-btn b3" onclick="filterTimeline('ℬ3')">ℬ3</div>
-                        <div class="timeline-btn b4" onclick="filterTimeline('ℬ4')">ℬ4</div>
-                        <div class="timeline-btn b5" onclick="filterTimeline('ℬ5')">ℬ5</div>
-                    </div>
+            <!-- Contrôles de timeline -->
+            <div class="controls">
+                <h3>📅 Timeline</h3>
+                <div class="timeline-selector">
+                    <div class="timeline-btn active" data-timeline="ℬ1">ℬ1</div>
+                    <div class="timeline-btn" data-timeline="ℬ2">ℬ2</div>
+                    <div class="timeline-btn" data-timeline="ℬ3">ℬ3</div>
                 </div>
                 
-                <!-- Conteneur du graphe D3.js -->
-                <div id="causal-graph"></div>
-                
-                <!-- Légende -->
-                <div class="graph-legend">
-                    <div class="legend-item">
-                        <div class="legend-symbol initial"></div>
-                        <span>État Initial</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-symbol action"></div>
-                        <span>Action</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-symbol quantum"></div>
-                        <span>État Quantique ψ</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-symbol collapse"></div>
-                        <span>Collapse †</span>
-                    </div>
+                <div class="control-group">
+                    <label>Filtre temporel (jours)</label>
+                    <input type="range" id="temporal-range" min="1" max="10" value="5">
+                    <span id="temporal-range-value">±5 jours</span>
                 </div>
             </div>
-            
-            <!-- Panel des rapports -->
+
+            <!-- 🚀 NOUVEAU PANNEAU DE PERFORMANCE -->
+            <div class="performance-panel">
+                <h3>🚀 Performance Causale</h3>
+                <div id="performance-status" class="status-indicator status-ok">
+                    🟢 Chargement...
+                </div>
+                
+                <div class="performance-metric">
+                    <span class="metric-label">États ψ actifs</span>
+                    <span class="metric-value" id="psi-states-count">0/100</span>
+                </div>
+                <div class="performance-bar">
+                    <div class="performance-bar-fill" id="psi-states-bar" style="width: 0%; background: #4ecdc4;"></div>
+                </div>
+                
+                <div class="performance-metric">
+                    <span class="metric-label">Portée temporelle</span>
+                    <span class="metric-value" id="temporal-range-metric">±0/5 jours</span>
+                </div>
+                <div class="performance-bar">
+                    <div class="performance-bar-fill" id="temporal-range-bar" style="width: 0%; background: #ff6b6b;"></div>
+                </div>
+                
+                <div class="performance-metric">
+                    <span class="metric-label">Charge système</span>
+                    <span class="metric-value" id="system-load">0%</span>
+                </div>
+                <div class="performance-bar">
+                    <div class="performance-bar-fill" id="system-load-bar" style="width: 0%; background: #ffaa00;"></div>
+                </div>
+                
+                <div class="performance-controls">
+                    <button id="cleanup-btn" title="Nettoyer les états expirés">🧹</button>
+                    <button id="optimize-btn" title="Optimiser les performances">⚡</button>
+                    <button id="refresh-btn" title="Actualiser les métriques">🔄</button>
+                </div>
+            </div>
+
+            <!-- Contrôles de visualisation -->
+            <div class="controls">
+                <h3>🎨 Visualisation</h3>
+                <div class="control-group">
+                    <label>Type de graphe</label>
+                    <select id="graph-type">
+                        <option value="force">Force dirigée</option>
+                        <option value="hierarchical">Hiérarchique</option>
+                        <option value="circular">Circulaire</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label>Filtre d'états</label>
+                    <select id="state-filter">
+                        <option value="all">Tous les états</option>
+                        <option value="active">États actifs</option>
+                        <option value="collapsed">États effondrés</option>
+                        <option value="interference">Avec interférences</option>
+                    </select>
+                </div>
+                
+                <button id="refresh-graph">🔄 Actualiser le graphe</button>
+            </div>
+
+            <!-- Panneau de rapports -->
             <div class="reports-panel">
-                <h3>📊 Rapports d'Analyse</h3>
-                
-                <div class="report-item">
-                    <h4>🎯 État du Jeu</h4>
-                    <div class="report-data" id="game-status-report">
-                        <div>Game ID: <span class="metric-badge" id="current-game-id">-</span></div>
-                        <div>Tour Actuel: <span class="metric-badge" id="current-turn">-</span></div>
-                        <div>Joueur Actif: <span class="metric-badge" id="current-player">-</span></div>
-                        <div>Timeline: <span class="metric-badge" id="current-timeline">-</span></div>
-                    </div>
-                </div>
-                
-                <div class="report-item">
-                    <h4>🌀 États Quantiques</h4>
-                    <div class="report-data" id="quantum-states-report">
-                        <div>États Actifs: <span class="metric-badge" id="active-psi-count">0</span></div>
-                        <div>États Collapsés: <span class="metric-badge" id="collapsed-psi-count">0</span></div>
-                        <div>Interférences: <span class="metric-badge" id="interference-zones">0</span></div>
-                        <div>Probabilité Totale: <span class="metric-badge" id="total-probability">-</span></div>
-                    </div>
-                </div>
-                
-                <div class="report-item">
-                    <h4>🛡️ Héros</h4>
-                    <div class="report-data" id="heroes-report">
-                        <div>Héros Actifs: <span class="metric-badge" id="active-heroes-count">0</span></div>
-                        <div id="heroes-list"></div>
-                    </div>
-                </div>
-                
-                <div class="report-item">
-                    <h4>⚡ Performance</h4>
-                    <div class="report-data" id="performance-report">
-                        <div>Dernière Mise à Jour: <span class="metric-badge" id="last-update">-</span></div>
-                        <div>Temps de Réponse: <span class="metric-badge" id="response-time">-</span></div>
-                        <div>Nœuds Graphe: <span class="metric-badge" id="graph-nodes-count">0</span></div>
-                    </div>
+                <h3>📊 Rapports en temps réel</h3>
+                <div id="reports-content">
+                    <div class="report-item">🌀 Initialisation du Quantum Visualizer...</div>
                 </div>
             </div>
         </div>
+
+        <!-- Contenu principal -->
+        <div class="main-content">
+            <div class="header">
+                <h1>🌀 Heroes of Time - Visualisation Causale</h1>
+                <div id="connection-status" class="status-indicator status-ok">
+                    🟢 Connecté au moteur temporal
+                </div>
+            </div>
+            
+            <div class="graph-container">
+                <svg class="graph-svg" id="causal-graph"></svg>
+            </div>
+        </div>
     </div>
-    
+
+    <!-- Scripts -->
+    <script src="performance-monitor.js"></script>
     <script src="causal-graph-d3.js"></script>
     <script>
-        // Variables globales
-        let causalGraph = null;
-        let currentGameId = null;
-        let updateInterval = null;
-        
-        // Initialisation
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🔬 Quantum Visualizer Enhanced chargé');
-        });
-        
-        // Navigation
-        function loadReplayInterface() {
-            document.getElementById('scenario-selection').style.display = 'none';
-            document.getElementById('game-interface').style.display = 'block';
-            
-            // Initialiser le graphe D3.js
-            setTimeout(() => {
-                causalGraph = window.initCausalGraph('causal-graph');
-                startDataPolling();
-            }, 100);
-        }
-        
-        function backToScenarios() {
-            document.getElementById('game-interface').style.display = 'none';
-            document.getElementById('scenario-selection').style.display = 'block';
-            
-            if (updateInterval) {
-                clearInterval(updateInterval);
-                updateInterval = null;
-            }
-        }
-        
-        function loadQuantumAnalysis() {
-            alert('🌀 Analyse Quantique - Fonctionnalité en développement');
-        }
-        
-        function loadGameReplay() {
-            alert('🎮 Game Replay - Fonctionnalité en développement');
-        }
-        
-        // Contrôles du graphe
-        function filterTimeline(timeline) {
-            // Mettre à jour l'interface
-            document.querySelectorAll('.timeline-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.querySelector(`.timeline-btn.${timeline.toLowerCase()}`).classList.add('active');
-            
-            // Filtrer le graphe
-            if (causalGraph) {
-                causalGraph.filterByTimeline(timeline);
-            }
-        }
-        
-        function exportGraph() {
-            // TODO: Implémenter l'export du graphe
-            alert('💾 Export du graphe - Fonctionnalité en développement');
-        }
-        
-        // Chargement des données depuis le backend
-        async function loadGameData() {
+        // 🚀 INITIALISATION DU MONITORING DE PERFORMANCE
+        let performanceMonitor;
+        let causalGraph;
+        let currentGameId = 1; // ID de jeu par défaut
+
+        // Initialiser le système
+        async function initializeSystem() {
             try {
-                const startTime = Date.now();
+                // Initialiser le moniteur de performance
+                performanceMonitor = new CausalPerformanceMonitor('http://localhost:8080');
                 
-                // Récupérer les données du jeu
-                const response = await fetch('http://localhost:8080/api/game/1/state');
-                const gameData = await response.json();
+                // Configurer les callbacks
+                performanceMonitor.on('onMetricsUpdate', updatePerformanceUI);
+                performanceMonitor.on('onPerformanceWarning', handlePerformanceWarning);
+                performanceMonitor.on('onPerformanceCritical', handlePerformanceCritical);
                 
-                const responseTime = Date.now() - startTime;
+                // Démarrer la surveillance
+                await performanceMonitor.startMonitoring(currentGameId, 5000); // Check toutes les 5s
                 
-                console.log('📊 Données de jeu reçues:', gameData);
+                // Initialiser le graphe causale
+                causalGraph = new CausalGraphD3('causal-graph');
+                await causalGraph.initialize(currentGameId);
                 
-                // Mettre à jour les rapports
-                updateReports(gameData, responseTime);
+                // Configurer les contrôles
+                setupControls();
                 
-                // Mettre à jour le graphe
-                if (causalGraph && gameData) {
-                    causalGraph.loadGameData(gameData);
-                }
+                addReport('🚀 Système initialisé avec surveillance performance');
                 
             } catch (error) {
-                console.error('❌ Erreur lors du chargement des données:', error);
-                updateErrorReports(error);
+                console.error('❌ Erreur initialisation:', error);
+                addReport('❌ Erreur initialisation: ' + error.message);
+            }
+        }
+
+        // 📊 Mettre à jour l'interface de performance
+        function updatePerformanceUI(data) {
+            const metrics = data.metrics;
+            const status = data.status;
+            
+            // Mettre à jour le statut global
+            const statusElement = document.getElementById('performance-status');
+            statusElement.className = `status-indicator ${getStatusClass(status)}`;
+            statusElement.textContent = getStatusText(status);
+            
+            // Mettre à jour les métriques
+            document.getElementById('psi-states-count').textContent = 
+                `${metrics.activePsiStates}/${performanceMonitor.limits.maxPsiStatesPerGame}`;
+            document.getElementById('psi-states-bar').style.width = 
+                `${(metrics.activePsiStates / performanceMonitor.limits.maxPsiStatesPerGame * 100)}%`;
+                
+            document.getElementById('temporal-range-metric').textContent = 
+                `±${metrics.maxTemporalRange}/${performanceMonitor.limits.maxTemporalDaysRange} jours`;
+            document.getElementById('temporal-range-bar').style.width = 
+                `${(metrics.maxTemporalRange / performanceMonitor.limits.maxTemporalDaysRange * 100)}%`;
+                
+            document.getElementById('system-load').textContent = 
+                `${(metrics.systemLoad * 100).toFixed(1)}%`;
+            document.getElementById('system-load-bar').style.width = 
+                `${(metrics.systemLoad * 100)}%`;
+            
+            // Changer la couleur de la barre de charge selon le niveau
+            const loadBar = document.getElementById('system-load-bar');
+            if (metrics.systemLoad >= 1.0) {
+                loadBar.style.background = '#ff4444';
+            } else if (metrics.systemLoad >= 0.8) {
+                loadBar.style.background = '#ffaa00';
+            } else {
+                loadBar.style.background = '#44ff44';
+            }
+        }
+
+        // ⚠️ Gérer les avertissements de performance
+        function handlePerformanceWarning(data) {
+            addReport(`🟡 ATTENTION: ${data.data.warnings.join(', ')}`);
+            
+            // Suggérer des actions
+            if (data.metrics.activePsiStates > 70) {
+                addReport('💡 Suggestion: Envisager un nettoyage des états expirés');
+            }
+        }
+
+        // 🔴 Gérer les alertes critiques
+        function handlePerformanceCritical(data) {
+            addReport(`🔴 CRITIQUE: ${data.data.violations.join(', ')}`);
+            
+            // Proposer une optimisation automatique
+            addReport('⚡ Optimisation automatique recommandée');
+            
+            // Optionnel: optimisation automatique
+            if (confirm('Performance critique détectée. Lancer l\'optimisation automatique ?')) {
+                performanceMonitor.optimizePerformance();
+            }
+        }
+
+        // 🎮 Configurer les contrôles
+        function setupControls() {
+            // Boutons de performance
+            document.getElementById('cleanup-btn').onclick = async () => {
+                const result = await performanceMonitor.cleanupExpiredStates();
+                if (result) {
+                    addReport(`🧹 Nettoyage: ${result.cleanedCount} états supprimés`);
+                }
+            };
+            
+            document.getElementById('optimize-btn').onclick = async () => {
+                const result = await performanceMonitor.optimizePerformance();
+                if (result) {
+                    addReport(`⚡ Optimisation: ${result.actions.length} actions effectuées`);
+                }
+            };
+            
+            document.getElementById('refresh-btn').onclick = () => {
+                performanceMonitor.checkPerformance();
+                addReport('🔄 Métriques actualisées');
+            };
+            
+            // Contrôles de graphe existants
+            document.getElementById('refresh-graph').onclick = () => {
+                if (causalGraph) {
+                    causalGraph.refresh();
+                    addReport('🔄 Graphe causale actualisé');
+                }
+            };
+            
+            // Filtre temporel
+            const temporalRange = document.getElementById('temporal-range');
+            const temporalValue = document.getElementById('temporal-range-value');
+            
+            temporalRange.oninput = (e) => {
+                const value = e.target.value;
+                temporalValue.textContent = `±${value} jours`;
+                
+                if (causalGraph) {
+                    causalGraph.setTemporalFilter(parseInt(value));
+                }
+            };
+            
+            // Sélecteurs de timeline
+            document.querySelectorAll('.timeline-btn').forEach(btn => {
+                btn.onclick = (e) => {
+                    document.querySelectorAll('.timeline-btn').forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                    
+                    const timeline = e.target.dataset.timeline;
+                    if (causalGraph) {
+                        causalGraph.setTimeline(timeline);
+                    }
+                    addReport(`📅 Timeline changée: ${timeline}`);
+                };
+            });
+        }
+
+        // 🎨 Utilitaires UI
+        function getStatusClass(status) {
+            switch (status) {
+                case 'CRITICAL': return 'status-error';
+                case 'WARNING': return 'status-warning';
+                default: return 'status-ok';
             }
         }
         
-        function updateReports(gameData, responseTime) {
-            // État du jeu
-            document.getElementById('current-game-id').textContent = gameData.gameId || '-';
-            document.getElementById('current-turn').textContent = gameData.currentTurn || '-';
-            document.getElementById('current-player').textContent = gameData.currentPlayer || '-';
-            document.getElementById('current-timeline').textContent = gameData.currentTimeline || 'ℬ1';
-            
-            // États quantiques
-            const psiStates = gameData.psiStates || [];
-            const activePsi = psiStates.filter(p => p.status !== 'COLLAPSED');
-            const collapsedPsi = psiStates.filter(p => p.status === 'COLLAPSED');
-            
-            document.getElementById('active-psi-count').textContent = activePsi.length;
-            document.getElementById('collapsed-psi-count').textContent = collapsedPsi.length;
-            
-            // Interférences
-            const quantumAnalysis = gameData.quantumAnalysis || {};
-            document.getElementById('interference-zones').textContent = quantumAnalysis.totalInterferenceZones || 0;
-            
-            // Héros
-            const heroes = gameData.heroes || [];
-            document.getElementById('active-heroes-count').textContent = heroes.length;
-            
-            const heroesList = document.getElementById('heroes-list');
-            heroesList.innerHTML = heroes.map(hero => 
-                `<div>${hero.name} (@${hero.position?.x || 0},${hero.position?.y || 0}) 🛡️</div>`
-            ).join('');
-            
-            // Performance
-            document.getElementById('last-update').textContent = new Date().toLocaleTimeString();
-            document.getElementById('response-time').textContent = responseTime + 'ms';
-            document.getElementById('graph-nodes-count').textContent = causalGraph?.nodes?.length || 0;
+        function getStatusText(status) {
+            switch (status) {
+                case 'CRITICAL': return '🔴 Critique';
+                case 'WARNING': return '🟡 Attention';
+                default: return '🟢 Normal';
+            }
         }
-        
-        function updateErrorReports(error) {
-            document.getElementById('current-game-id').textContent = 'ERREUR';
-            document.getElementById('last-update').textContent = 'Échec: ' + new Date().toLocaleTimeString();
-            document.getElementById('response-time').textContent = 'N/A';
-        }
-        
-        function startDataPolling() {
-            // Charger les données initiales
-            loadGameData();
+
+        // 📝 Ajouter un rapport
+        function addReport(message) {
+            const reportsContent = document.getElementById('reports-content');
+            const reportItem = document.createElement('div');
+            reportItem.className = 'report-item';
+            reportItem.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
             
-            // Mettre à jour toutes les 5 secondes
-            updateInterval = setInterval(loadGameData, 5000);
-        }
-        
-        // Écouter les événements du graphe
-        document.addEventListener('causal-node-clicked', function(event) {
-            const node = event.detail.node;
-            console.log('🎯 Nœud sélectionné dans le graphe:', node);
+            reportsContent.insertBefore(reportItem, reportsContent.firstChild);
             
-            // TODO: Afficher les détails du nœud dans un panel
-            alert(`Nœud: ${node.description}\nTimeline: ${node.timeline}\nTour: ${node.turn}`);
+            // Limiter à 20 rapports
+            while (reportsContent.children.length > 20) {
+                reportsContent.removeChild(reportsContent.lastChild);
+            }
+        }
+
+        // 🚀 Démarrer l'application
+        window.addEventListener('load', initializeSystem);
+        
+        // 🛑 Nettoyage à la fermeture
+        window.addEventListener('beforeunload', () => {
+            if (performanceMonitor) {
+                performanceMonitor.stopMonitoring();
+            }
         });
     </script>
 </body>
