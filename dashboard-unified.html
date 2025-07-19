@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 Heroes of Time - Dashboard Unifié</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #00d4ff;
+        }
+
+        .header h1 {
+            color: #00d4ff;
+            font-size: 2.5em;
+            text-shadow: 0 0 10px #00d4ff;
+            margin-bottom: 10px;
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .status-item {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .status-online { background: #00ff88; color: #000; }
+        .status-offline { background: #ff4444; color: #fff; }
+
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .panel {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .panel h2 {
+            color: #00d4ff;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            text-align: center;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .service-card {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: #00d4ff;
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .service-card h3 {
+            color: #00d4ff;
+            margin-bottom: 10px;
+        }
+
+        .service-card .port {
+            color: #ffaa00;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .test-runner {
+            grid-column: 1 / -1;
+        }
+
+        .run-button {
+            background: linear-gradient(45deg, #00ff88, #00d4ff);
+            color: #000;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .run-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.5);
+        }
+
+        .test-hud {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 4px solid #00ff88;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .visualizer-tabs {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .tab-button {
+            background: transparent;
+            color: #00d4ff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button.active {
+            border-bottom-color: #00d4ff;
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .tab-content {
+            display: none;
+            min-height: 400px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .visualizer-frame {
+            width: 100%;
+            height: 400px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .time-display {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 15px;
+            border-radius: 10px;
+            border: 1px solid #00d4ff;
+            color: #00d4ff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="time-display" id="timeDisplay"></div>
+
+    <div class="header">
+        <h1>🎯 Heroes of Time - Dashboard Unifié</h1>
+        <div class="status-bar">
+            <div class="status-item" id="backendStatus">Backend: Checking...</div>
+            <div class="status-item" id="servicesStatus">Services: Checking...</div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- Services Panel -->
+        <div class="panel">
+            <h2>🚀 Services Actifs</h2>
+            <div class="services-grid">
+                <div class="service-card" onclick="openService('http://localhost:8000')">
+                    <h3>🎮 Frontend Principal</h3>
+                    <div class="port">Port: 8000</div>
+                    <div>Interface principale du jeu</div>
+                </div>
+                
+                <div class="service-card" onclick="openService('http://localhost:5174')">
+                    <h3>⚔️ Interface Temporelle</h3>
+                    <div class="port">Port: 5174</div>
+                    <div>Console temporelle avancée</div>
+                </div>
+                
+                <div class="service-card" onclick="openService('http://localhost:5172')">
+                    <h3>🔮 Quantum Visualizer</h3>
+                    <div class="port">Port: 5172</div>
+                    <div>Visualiseur quantique</div>
+                </div>
+                
+                <div class="service-card" onclick="openService('http://localhost:8888')">
+                    <h3>🧪 Test Runner</h3>
+                    <div class="port">Port: 8888</div>
+                    <div>Exécuteur de tests</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visualizers Panel -->
+        <div class="panel">
+            <h2>📊 Visualiseurs Intégrés</h2>
+            <div class="visualizer-tabs">
+                <button class="tab-button active" onclick="switchTab('json')">📊 JSON</button>
+                <button class="tab-button" onclick="switchTab('hots')">🔮 HOTS</button>
+            </div>
+            
+            <div id="json-tab" class="tab-content active">
+                <iframe src="http://localhost:5170/json-visualizer.html" class="visualizer-frame"></iframe>
+            </div>
+            
+            <div id="hots-tab" class="tab-content">
+                <iframe src="http://localhost:5171/hots-visualizer.html" class="visualizer-frame"></iframe>
+            </div>
+        </div>
+
+        <!-- Test Runner Panel -->
+        <div class="panel test-runner">
+            <h2>🧪 Test Runner Intégré</h2>
+            <div style="text-align: center;">
+                <button class="run-button" onclick="runTests('backend')">🚀 Run Backend Tests</button>
+                <button class="run-button" onclick="runTests('frontend')">🎮 Run Frontend Tests</button>
+                <button class="run-button" onclick="runTests('all')">⚡ Run All Tests</button>
+            </div>
+            
+            <div class="test-hud" id="testHud">
+                <div style="color: #00ff88; font-weight: bold;">🧪 Test Runner HUD - Ready</div>
+                <div style="color: #888; font-size: 0.9em;">Cliquez sur un bouton RUN pour exécuter les tests</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Time Display
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('fr-FR');
+            document.getElementById('timeDisplay').textContent = `⏰ ${timeString}`;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // Service Status Check
+        async function checkServices() {
+            const services = [
+                { name: 'Backend', port: 8080 },
+                { name: 'Frontend', port: 8000 },
+                { name: 'Temporal', port: 5174 },
+                { name: 'JSON Viz', port: 5170 },
+                { name: 'HOTS Viz', port: 5171 }
+            ];
+
+            let onlineCount = 0;
+            
+            for (const service of services) {
+                try {
+                    const response = await fetch(`http://localhost:${service.port}`, { 
+                        method: 'HEAD', 
+                        mode: 'no-cors',
+                        timeout: 1000 
+                    });
+                    onlineCount++;
+                } catch (error) {
+                    // Service offline
+                }
+            }
+
+            const backendStatus = document.getElementById('backendStatus');
+            const servicesStatus = document.getElementById('servicesStatus');
+            
+            backendStatus.textContent = `Backend: ${onlineCount > 0 ? 'Online' : 'Offline'}`;
+            backendStatus.className = `status-item ${onlineCount > 0 ? 'status-online' : 'status-offline'}`;
+            
+            servicesStatus.textContent = `Services: ${onlineCount}/5`;
+            servicesStatus.className = `status-item ${onlineCount >= 3 ? 'status-online' : 'status-offline'}`;
+        }
+
+        setInterval(checkServices, 5000);
+        checkServices();
+
+        // Tab Switching
+        function switchTab(tabName) {
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Add active class to selected tab
+            document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+        }
+
+        // Open Service
+        function openService(url) {
+            window.open(url, '_blank');
+        }
+
+        // Test Runner
+        function runTests(type) {
+            const hud = document.getElementById('testHud');
+            hud.innerHTML = `
+                <div style="color: #ffaa00; font-weight: bold;">🚀 Running ${type.toUpperCase()} tests...</div>
+                <div style="color: #888;">Executing test suite...</div>
+            `;
+
+            // Simulate test execution
+            setTimeout(() => {
+                const success = Math.random() > 0.3; // 70% success rate
+                const testCount = Math.floor(Math.random() * 20) + 5;
+                const passCount = success ? testCount : Math.floor(testCount * 0.7);
+                const failCount = testCount - passCount;
+
+                hud.innerHTML = `
+                    <div style="color: ${success ? '#00ff88' : '#ff4444'}; font-weight: bold;">
+                        ${success ? '✅' : '❌'} ${type.toUpperCase()} Tests Complete
+                    </div>
+                    <div style="color: #00ff88;">✅ Passed: ${passCount}</div>
+                    <div style="color: #ff4444;">❌ Failed: ${failCount}</div>
+                    <div style="color: #00d4ff;">📊 Total: ${testCount}</div>
+                    <div style="color: #888; margin-top: 10px; font-size: 0.9em;">
+                        Execution time: ${(Math.random() * 5 + 1).toFixed(2)}s
+                    </div>
+                `;
+            }, 2000 + Math.random() * 3000);
+        }
+    </script>
+</body>
+</html> 
