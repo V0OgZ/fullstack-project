@@ -89,9 +89,34 @@ run_performance_benchmark() {
     fi
 }
 
-# Test 3: Stress test
+# Test 3: Benchmark cohérent (nouveau)
+run_coherent_benchmark() {
+    echo -e "\n${PURPLE}🎯 TEST 3: Benchmark Cohérent JSON vs HOTS${NC}"
+    echo "🧠 Distinction claire : Définitions vs Scénarios"
+    
+    if [ -f "scripts/benchmark-coherent-comparison.sh" ]; then
+        echo "▶️  Lancement benchmark cohérent..."
+        ./scripts/benchmark-coherent-comparison.sh > "$RESULTS_DIR/coherent_benchmark.log" 2>&1
+        
+        if [ $? -eq 0 ]; then
+            echo -e "${PURPLE}✅ Benchmark cohérent terminé${NC}"
+        else
+            echo -e "${YELLOW}⚠️ Benchmark cohérent avec avertissements${NC}"
+        fi
+        
+        # Copier le fichier JSON de résultats s'il existe
+        if ls coherent_benchmark_*.json 1> /dev/null 2>&1; then
+            cp coherent_benchmark_*.json "$RESULTS_DIR/"
+            echo "📊 Résultats JSON cohérents copiés dans $RESULTS_DIR"
+        fi
+    else
+        echo -e "${RED}❌ Script benchmark cohérent non trouvé${NC}"
+    fi
+}
+
+# Test 4: Stress test
 run_stress_test() {
-    echo -e "\n${CYAN}💥 TEST 3: Stress Test Moteur${NC}"
+    echo -e "\n${CYAN}💥 TEST 4: Stress Test Moteur${NC}"
     
     if [ -f "scripts/stress-test-moteur.sh" ]; then
         echo "▶️  Lancement stress test..."
@@ -184,6 +209,14 @@ EOF
         echo "\`\`\`" >> "$report_file"
     fi
     
+    if [ -f "$RESULTS_DIR/coherent_benchmark.log" ]; then
+        echo -e "\n### 🎯 Benchmark Cohérent JSON vs HOTS\n" >> "$report_file"
+        echo "**Distinction conceptuelle : Définitions vs Scénarios**" >> "$report_file"
+        echo "\`\`\`" >> "$report_file"
+        tail -30 "$RESULTS_DIR/coherent_benchmark.log" >> "$report_file"
+        echo "\`\`\`" >> "$report_file"
+    fi
+    
     if [ -f "$RESULTS_DIR/stress_test.log" ]; then
         echo -e "\n### 💥 Stress Test\n" >> "$report_file"
         echo "\`\`\`" >> "$report_file"
@@ -234,7 +267,8 @@ main() {
     
     # Exécuter tous les tests
     run_hybrid_test
-    run_performance_benchmark
+    run_performance_benchmark  
+    run_coherent_benchmark
     run_stress_test
     run_advanced_temporal_test
     
