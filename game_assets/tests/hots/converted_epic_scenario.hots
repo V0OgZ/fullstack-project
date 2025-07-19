@@ -1,0 +1,31 @@
+# 🎬 Scénario de test : Bataille Temporelle Épique
+# ===================================================
+# Ce scénario valide l'enchaînement de commandes complexes
+# incluant la création de héros, les mouvements, les ψ-états,
+# l'utilisation d'objets et les commandes de type HMM3.
+# ===================================================
+
+# 🎭 ACTE I : PRÉPARATION DES HÉROS
+HERO(Arthur)
+HERO(Ragnar)
+MOV(Arthur, @15,15)
+MOV(Ragnar, @25,25)
+
+# 🌀 ACTE II : MAGIE TEMPORELLE
+ψ001: ⊙(Δt+2 @20,20 ⟶ CREATE(CREATURE, Dragon, @20,20))
+ψ002: ⊙(Δt+1 @22,22 ⟶ CREATE(CREATURE, Phoenix, @22,22))
+ψ003: ⊙(Δt+3 @25,25 ⟶ BATTLE(Arthur, Ragnar))
+
+# 🔮 ACTE III : ARTEFACTS TEMPORELS
+USE(ITEM, AvantWorldBlade, HERO:Arthur)
+USE(ITEM, ReverseClock, HERO:Ragnar)
+
+# 🏰 ACTE IV : STRATÉGIE HMM3
+BUILD(STRUCTURE, Castle, @10,10, PLAYER:player1)
+RECRUIT(UNIT, Archers, 15, HERO:Ragnar)
+CAST(SPELL, Fireball, TARGET:Ragnar, HERO:Arthur)
+
+# ⚔️ ACTE V : BATAILLE FINALE
+†ψ001
+†ψ002
+BATTLE(Dragon, Phoenix) 

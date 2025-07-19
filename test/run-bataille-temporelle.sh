@@ -102,6 +102,9 @@ fi
 
 log $GREEN "✅ Prérequis vérifiés"
 
+# Aller à la racine du projet
+cd "$(dirname "$0")/.."
+
 # Vérifier la structure des fichiers de test
 echo "📁 Vérification des fichiers de test..."
 MISSING_FILES=()

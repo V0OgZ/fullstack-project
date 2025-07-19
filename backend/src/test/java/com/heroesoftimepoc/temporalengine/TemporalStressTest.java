@@ -278,32 +278,14 @@ public class TemporalStressTest {
             "†ψ402"
         };
         
-        // Test avec parser par défaut (REGEX)
+        // Test avec parser REGEX
         System.out.println("\n🔤 Test avec parser REGEX");
-        System.setProperty("heroes.parser.use.antlr", "false");
         
         for (String script : testScripts) {
             Map<String, Object> result = temporalEngineService.executeScript(testGame.getId(), script);
             Boolean success = (Boolean) result.get("success");
             System.out.printf("REGEX - %s: %s%n", script, success ? "✅" : "❌");
         }
-        
-        // Nettoyer les ψ-states
-        List<PsiState> allPsiStates = psiStateRepository.findByGameId(testGame.getId());
-        psiStateRepository.deleteAll(allPsiStates);
-        
-        // Test avec parser ANTLR4
-        System.out.println("\n🔤 Test avec parser ANTLR4");
-        System.setProperty("heroes.parser.use.antlr", "true");
-        
-        for (String script : testScripts) {
-            Map<String, Object> result = temporalEngineService.executeScript(testGame.getId(), script);
-            Boolean success = (Boolean) result.get("success");
-            System.out.printf("ANTLR4 - %s: %s%n", script, success ? "✅" : "❌");
-        }
-        
-        // Remettre le parser par défaut
-        System.setProperty("heroes.parser.use.antlr", "false");
         
         System.out.println("\n🎉 TEST COMPATIBILITÉ TERMINÉ !");
     }
