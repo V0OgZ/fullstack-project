@@ -188,8 +188,8 @@ public class GrofiController {
                 "heroLoading", true,
                 "immunitySystem", true,
                 "ultimatePowers", false, // Simplifié pour l'instant
-                "quantumGrammarExtended", false, // TODO
-                "worldStateGraph", false // TODO
+                "quantumGrammarExtended", true, // IMPLÉMENTÉ - Grammaire quantique étendue active
+                "worldStateGraph", true // IMPLÉMENTÉ - World State Graph avec fog of causality
             ));
             
             // Test de chargement des héros

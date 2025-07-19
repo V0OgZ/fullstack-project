@@ -40,6 +40,13 @@ class TestRunnerHandler(BaseHTTPRequestHandler):
             # Logs d'un test spécifique
             test_id = path.split('/')[-1]
             self.send_json_response(self.get_test_logs(test_id))
+        elif path == '/reports':
+            # Liste des rapports MD
+            self.send_json_response(self.get_reports_list())
+        elif path.startswith('/reports/'):
+            # Contenu d'un rapport spécifique
+            report_name = path.split('/')[-1]
+            self.serve_report_content(report_name)
         else:
             self.send_error(404)
     
@@ -63,15 +70,29 @@ class TestRunnerHandler(BaseHTTPRequestHandler):
     def serve_html(self):
         """Servir l'interface HTML"""
         try:
-            with open('test-runner-interface.html', 'r', encoding='utf-8') as f:
-                content = f.read()
+            # Essayer d'abord la version améliorée
+            html_files = ['test-runner-enhanced.html', 'test-runner-interface.html']
+            content = None
+            
+            for html_file in html_files:
+                try:
+                    with open(html_file, 'r', encoding='utf-8') as f:
+                        content = f.read()
+                        break
+                except FileNotFoundError:
+                    continue
+            
+            if content is None:
+                self.send_error(404, "Interface HTML non trouvée")
+                return
             
             self.send_response(200)
             self.send_header('Content-Type', 'text/html; charset=utf-8')
             self.end_headers()
             self.wfile.write(content.encode('utf-8'))
-        except FileNotFoundError:
-            self.send_error(404, "Interface HTML non trouvée")
+            
+        except Exception as e:
+            self.send_error(500, f"Erreur lors du chargement de l'interface: {str(e)}")
     
     def run_test(self):
         """Lancer un test"""
@@ -249,6 +270,62 @@ class TestRunnerHandler(BaseHTTPRequestHandler):
             }
         else:
             return {'error': 'Test non trouvé'}
+    
+    def get_reports_list(self):
+        """Obtenir la liste des rapports MD disponibles"""
+        reports = []
+        reports_dir = os.path.join(SCRIPTS_DIR, 'rapports')
+        
+        try:
+            if os.path.exists(reports_dir):
+                for filename in os.listdir(reports_dir):
+                    if filename.endswith('.md'):
+                        filepath = os.path.join(reports_dir, filename)
+                        stats = os.stat(filepath)
+                        
+                        reports.append({
+                            'name': filename,
+                            'display_name': filename.replace('_', ' ').replace('.md', ''),
+                            'size': stats.st_size,
+                            'modified': datetime.fromtimestamp(stats.st_mtime).isoformat(),
+                            'path': f'/reports/{filename}'
+                        })
+                
+                # Trier par date de modification (plus récent en premier)
+                reports.sort(key=lambda x: x['modified'], reverse=True)
+            
+            return {'reports': reports}
+            
+        except Exception as e:
+            return {'error': f'Erreur lors de la lecture des rapports: {str(e)}'}
+    
+    def serve_report_content(self, report_name):
+        """Servir le contenu d'un rapport MD"""
+        try:
+            # Sécurité : vérifier que le nom ne contient pas de chemins relatifs
+            if '..' in report_name or '/' in report_name:
+                self.send_error(403, "Accès interdit")
+                return
+            
+            reports_dir = os.path.join(SCRIPTS_DIR, 'rapports')
+            report_path = os.path.join(reports_dir, report_name)
+            
+            if not os.path.exists(report_path) or not report_name.endswith('.md'):
+                self.send_error(404, "Rapport non trouvé")
+                return
+            
+            with open(report_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+            
+            self.send_json_response({
+                'name': report_name,
+                'content': content,
+                'size': len(content),
+                'lines': len(content.split('\n'))
+            })
+            
+        except Exception as e:
+            self.send_json_response({'error': f'Erreur lors de la lecture du rapport: {str(e)}'}, 500)
     
     def send_json_response(self, data, status_code=200):
         """Envoyer une réponse JSON"""

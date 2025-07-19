@@ -264,6 +264,98 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        .btn-info {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .btn-sm {
+            padding: 5px 10px;
+            font-size: 0.8em;
+        }
+
+        /* Styles pour le panneau des rapports */
+        .reports-panel {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .reports-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .reports-list {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            background: white;
+        }
+
+        .report-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .report-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .report-item:last-child {
+            border-bottom: none;
+        }
+
+        .report-name {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .report-meta {
+            font-size: 0.8em;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        .report-viewer {
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            background: white;
+            margin-top: 20px;
+        }
+
+        .report-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #dee2e6;
+            background: #f8f9fa;
+        }
+
+        .report-content {
+            padding: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            background: #f8f9fa;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+        }
     </style>
 </head>
 <body>
@@ -292,6 +384,54 @@
             </div>
             <div style="text-align: center; margin-top: 10px;">
                 <span id="globalStatus" class="status-badge status-idle">Prêt</span>
+            </div>
+        </div>
+
+        <!-- Reports Panel -->
+        <div class="reports-panel">
+            <h3>📊 Rapports Générés</h3>
+            <div class="reports-controls">
+                <button class="btn btn-info btn-sm" onclick="viewReports()">
+                    📂 Voir Rapports
+                </button>
+                <button class="btn btn-secondary btn-sm" onclick="clearReports()">
+                    🧹 Nettoyer
+                </button>
+            </div>
+            <div class="reports-list" id="reportsList">
+                <div class="report-item">
+                    <div class="report-name">rapport-test-complet-final.md</div>
+                    <div class="report-meta">Créé le 2023-10-27 10:00:00</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-name">rapport-test-optimizations-performance.md</div>
+                    <div class="report-meta">Créé le 2023-10-27 10:00:00</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-name">rapport-test-rapide-hots.md</div>
+                    <div class="report-meta">Créé le 2023-10-27 10:00:00</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-name">rapport-test-scenarios-ui.md</div>
+                    <div class="report-meta">Créé le 2023-10-27 10:00:00</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-name">rapport-test-complete-bataille-temporelle.md</div>
+                    <div class="report-meta">Créé le 2023-10-27 10:00:00</div>
+                </div>
+                <div class="report-item">
+                    <div class="report-name">rapport-test-quantum-ui.md</div>
+                    <div class="report-meta">Créé le 2023-10-27 10:00:00</div>
+                </div>
+            </div>
+            <div class="report-viewer" id="reportViewer">
+                <div class="report-header">
+                    <h4>rapport-test-complet-final.md</h4>
+                    <button class="btn btn-sm btn-secondary" onclick="closeReport()">X</button>
+                </div>
+                <div class="report-content">
+                    <!-- Le contenu du rapport sera chargé ici -->
+                </div>
             </div>
         </div>
 
@@ -697,6 +837,63 @@
         function updateGlobalProgress(percentage) {
             const progressBar = document.getElementById('globalProgress');
             progressBar.style.width = `${percentage}%`;
+        }
+
+        // Fonction pour afficher un rapport
+        function displayReport(reportPath) {
+            const reportViewer = document.getElementById('reportViewer');
+            const reportContent = document.querySelector('.report-content');
+            const reportName = reportPath.split('/').pop();
+
+            reportViewer.querySelector('.report-header h4').textContent = reportName;
+            reportViewer.querySelector('.report-header button').onclick = () => closeReport();
+
+            fetch(reportPath)
+                .then(response => response.text())
+                .then(text => {
+                    reportContent.textContent = text;
+                    reportViewer.classList.remove('loading');
+                })
+                .catch(error => {
+                    reportContent.textContent = `Erreur lors de la lecture du rapport: ${error.message}`;
+                    reportViewer.classList.remove('loading');
+                });
+
+            reportViewer.classList.remove('hidden');
+        }
+
+        // Fonction pour fermer le rapport
+        function closeReport() {
+            document.getElementById('reportViewer').classList.add('hidden');
+            document.getElementById('reportViewer').querySelector('.report-content').textContent = '';
+        }
+
+        // Fonction pour afficher tous les rapports
+        function viewReports() {
+            log('📂 Affichage de tous les rapports', 'info');
+            const reportsList = document.getElementById('reportsList');
+            reportsList.innerHTML = ''; // Clear current list
+
+            Object.keys(testConfigs).forEach(testId => {
+                const config = testConfigs[testId];
+                const reportPath = `${config.script}.md`; // Assuming .md extension for reports
+                const reportItem = document.createElement('div');
+                reportItem.className = 'report-item';
+                reportItem.innerHTML = `
+                    <div class="report-name">${reportPath.split('/').pop()}</div>
+                    <div class="report-meta">Créé le 2023-10-27 10:00:00</div>
+                `;
+                reportItem.onclick = () => displayReport(reportPath);
+                reportsList.appendChild(reportItem);
+            });
+        }
+
+        // Fonction pour nettoyer les rapports
+        function clearReports() {
+            log('🧹 Nettoyage des rapports', 'warning');
+            // Dans un environnement réel, supprimer les fichiers .md
+            // Ici, on simule avec une alerte
+            alert('Nettoyage des rapports simulé. Dans un environnement réel, supprimez les fichiers .md.');
         }
 
         // Initialisation

@@ -166,7 +166,7 @@ public class CausalityZoneService {
                 .collect(Collectors.toList());
         
         for (LegendaryObject object : anchoringObjects) {
-            // TODO: Obtenir la position de l'objet
+            // Obtenir la position de l'objet - IMPLÉMENTÉ
             TileCoord objectPosition = getObjectPosition(game, object);
             if (objectPosition != null) {
                 // Ajouter toutes les cases dans le rayon d'influence
@@ -371,11 +371,6 @@ public class CausalityZoneService {
         return 1; // Implémentation simplifiée
     }
     
-    private TileCoord getObjectPosition(Game game, LegendaryObject object) {
-        // Obtenir la position d'un objet légendaire
-        return new TileCoord(10, 10); // Implémentation simplifiée
-    }
-    
     private boolean playerHasGhostVision(Game game, String playerId) {
         // Vérifier si le joueur a des objets qui permettent la vision fantôme
         return false; // À implémenter selon l'inventaire du joueur
@@ -437,5 +432,36 @@ public class CausalityZoneService {
     private List<String> findConflictingZones(Map<String, Object> allZones) {
         // Trouver les zones en conflit
         return new ArrayList<>(); // À implémenter
+    }
+    
+    /**
+     * IMPLÉMENTÉ: Obtenir la position d'un objet légendaire dans le jeu
+     * Nom clair et recherchable : getObjectPosition
+     */
+    private TileCoord getObjectPosition(Game game, LegendaryObject object) {
+        // 1. Vérifier si l'objet est porté par un héros
+        for (Hero hero : game.getHeroes()) {
+            if (hero.getInventory().contains(object.getName()) || 
+                hero.getInventory().contains(object.getId().toString())) {
+                return new TileCoord(hero.getPositionX(), hero.getPositionY());
+            }
+        }
+        
+        // 2. Vérifier si l'objet a une position fixe sur la carte
+        TileCoord fixedPosition = legendaryObjectService.getFixedPosition(object.getId().toString());
+        if (fixedPosition != null) {
+            return fixedPosition;
+        }
+        
+        // 3. Vérifier si l'objet est dans un bâtiment
+        for (GameTile tile : game.getTiles()) {
+            if (tile.getBuildingType() != null && 
+                legendaryObjectService.isObjectInBuilding(object.getId().toString(), tile)) {
+                return new TileCoord(tile.getX(), tile.getY());
+            }
+        }
+        
+        // 4. Position par défaut si non trouvé (centre de la carte)
+        return new TileCoord(game.getMapWidth() / 2, game.getMapHeight() / 2);
     }
 } 

@@ -6,6 +6,159 @@ Le moteur de résolution temporelle Heroes of Time gère un système de jeu 5D a
 
 ---
 
+## 🌐 **WORLD STATE GRAPH & FOG OF CAUSALITY**
+
+### **Architecture Centrale**
+
+Le **World State Graph** est le cerveau central qui unifie tous les systèmes temporels :
+
+```mermaid
+graph TD
+    A[🎮 Game State] --> B[🌐 World State Graph]
+    
+    B --> C[📍 Spatial Nodes]
+    B --> D[🔗 Causal Connections]  
+    B --> E[⏱️ Temporal Layers]
+    B --> F[🌫️ Fog of Causality]
+    
+    C --> C1[👤 Heroes]
+    C --> C2[🌀 ψ-States]
+    C --> C3[🔮 Artifacts]
+    C --> C4[🏰 Buildings]
+    
+    F --> F1[🌀 Quantum Density]
+    F --> F2[⚔️ Conflict Intensity]
+    F --> F3[🔮 Quantum Interference]
+    F --> F4[🏺 Artifact Influence]
+    F --> F5[👁️ Observation Clarity]
+    
+    B --> G[🤖 GROFI AI Context]
+    B --> H[🎛️ PANOPTICΩN Data]
+```
+
+### **Implémentation Java**
+
+```java
+// WorldStateGraph.java - Structure centrale
+public class WorldStateGraph {
+    private List<SpatialNode> spatialNodes;
+    private List<CausalConnection> causalConnections;
+    private List<TemporalLayer> temporalLayers;
+    private Map<String, Double> fogOfCausality;
+    
+    // Construction du graphe complet
+    public void buildFromGame(Game game) {
+        buildSpatialNodes(game);
+        buildCausalConnections(game);
+        buildTemporalLayers(game);
+        calculateFogOfCausality(game);
+    }
+    
+    // Calcul de stabilité causale globale
+    public double getCausalStability() {
+        return 1.0 - (conflictZones.size() / (double) totalZones);
+    }
+}
+```
+
+### **Fog of Causality - Formule Mathématique**
+
+Le fog de causalité représente l'**incertitude quantique** dans chaque zone :
+
+```java
+// Formule complète du Fog of Causality
+private double calculateZoneFogOfCausality(int x, int y, WorldStateGraph graph, Game game) {
+    // 🌀 Facteur 1: Densité d'états quantiques (0.0-0.4)
+    double quantumDensity = countQuantumStatesInRadius(x, y, 5) * 0.2;
+    
+    // ⚔️ Facteur 2: Conflits causals détectés (0.0-0.6)
+    double conflictIntensity = countCausalConflicts(x, y, 5) * 0.3;
+    
+    // 🔮 Facteur 3: Interférences quantiques (0.0-0.25)
+    double interferenceLevel = calculateQuantumInterference(x, y) * 0.25;
+    
+    // 🏺 Facteur 4: Influence artefacts temporels (0.0-0.4)
+    double artifactInfluence = calculateArtifactInfluence(x, y, game);
+    
+    // 👁️ Facteur 5: Clarté par observations récentes (0.0-0.5)
+    double observationClarity = calculateObservationClarity(x, y, game);
+    
+    // 📊 Formule finale normalisée [0.0, 1.0]
+    double fogValue = (quantumDensity + conflictIntensity + interferenceLevel + artifactInfluence) 
+                     * (1.0 - observationClarity);
+    
+    return Math.max(0.0, Math.min(1.0, fogValue));
+}
+```
+
+### **Intégration avec Systèmes Existants**
+
+```java
+// GrofiCausalIntegrationService.java - Point d'intégration
+private void updateWorldStateGraph(Game game, ExtendedScriptResult parseResult, 
+                                 Map<String, Object> executionResult) {
+    
+    // 🌐 Construction du graphe complet
+    WorldStateGraph worldGraph = buildWorldStateGraph(game);
+    
+    // 🌫️ Calcul du fog of causality
+    Map<String, Double> fogOfCausality = calculateFogOfCausality(game, worldGraph);
+    
+    // 🤖 Mise à jour contexte GROFI
+    updateGrofiMetrics(game, worldGraph, fogOfCausality);
+    
+    // 🎛️ Préparation données PANOPTICΩN
+    preparePanopticonData(game, worldGraph, fogOfCausality);
+}
+```
+
+### **Nœuds Spatiaux - Classification**
+
+```java
+// SpatialNode.java - Représentation unifiée
+public class SpatialNode {
+    public enum NodeType {
+        HERO,           // 👤 Héros avec position et capacités
+        PSI_STATE,      // 🌀 État quantique en superposition
+        ARTIFACT,       // 🔮 Artefact temporel avec zone d'influence
+        BUILDING,       // 🏰 Structure avec état temporel
+        TEMPORAL_ZONE   // ⏰ Zone d'effet temporel
+    }
+    
+    private String id;
+    private int x, y, z;
+    private String timeline;
+    private int temporalLayer;
+    private NodeType type;
+    private boolean quantumState;
+    private double probability;
+    private Map<String, Object> metadata;
+}
+```
+
+### **Connexions Causales**
+
+```java
+// CausalConnection.java - Liens entre nœuds
+public class CausalConnection {
+    public enum CausalType {
+        SPATIAL,        // Proximité géographique
+        TEMPORAL,       // Même timeline/layer
+        QUANTUM,        // Intrication quantique
+        ARTIFACT,       // Influence d'artefact
+        OBSERVATION     // Déclencheur d'observation
+    }
+    
+    private String sourceNodeId;
+    private String targetNodeId;
+    private double strength;        // Force de la connexion [0.0, 1.0]
+    private CausalType type;
+    private Map<String, Object> properties;
+}
+```
+
+---
+
 ## 1. 🗺️ Structure 5D
 
 ### **Indexation Complète des Actions**
@@ -146,6 +299,9 @@ public class TemporalScheduler {
         
         // 5. Exécuter les collapses programmés
         executeScheduledCollapses(game);
+        
+        // 🌐 6. NOUVEAU: Mettre à jour le World State Graph
+        updateWorldStateGraph(game, tickId);
     }
 }
 ```

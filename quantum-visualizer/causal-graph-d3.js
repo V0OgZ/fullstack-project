@@ -429,10 +429,152 @@ class CausalGraphD3 {
     convertGameDataToLinks(gameData) {
         const links = [];
         
-        // Liens temporels simples pour l'instant
-        // TODO: Implémenter la logique de liens basée sur les dépendances causales
+        // IMPLÉMENTÉ: Logique complète des liens causals pour PANOPTICΩN
+        if (!gameData.psiStates) return links;
+        
+        const psiStates = gameData.psiStates;
+        const heroes = gameData.heroes || [];
+        
+        // 1. Liens causals entre ψ-states
+        for (let i = 0; i < psiStates.length; i++) {
+            for (let j = i + 1; j < psiStates.length; j++) {
+                const psi1 = psiStates[i];
+                const psi2 = psiStates[j];
+                
+                // Lien spatial : même position ou positions adjacentes
+                if (this.arePositionsRelated(psi1.targetPosition, psi2.targetPosition)) {
+                    links.push({
+                        source: `psi_${psi1.psiId}`,
+                        target: `psi_${psi2.psiId}`,
+                        type: 'spatial',
+                        strength: this.calculateSpatialStrength(psi1.targetPosition, psi2.targetPosition),
+                        timeline: psi1.branch,
+                        deltaT: Math.abs((psi1.deltaT || 0) - (psi2.deltaT || 0))
+                    });
+                }
+                
+                // Lien temporel : même Δt ou Δt consécutifs
+                if (this.areTemporallyRelated(psi1.deltaT, psi2.deltaT)) {
+                    links.push({
+                        source: `psi_${psi1.psiId}`,
+                        target: `psi_${psi2.psiId}`,
+                        type: 'temporal',
+                        strength: this.calculateTemporalStrength(psi1.deltaT, psi2.deltaT),
+                        timeline: psi1.branch,
+                        causality: 'forward'
+                    });
+                }
+                
+                // Lien causal : même héros propriétaire
+                if (psi1.ownerHero && psi2.ownerHero && psi1.ownerHero === psi2.ownerHero) {
+                    links.push({
+                        source: `psi_${psi1.psiId}`,
+                        target: `psi_${psi2.psiId}`,
+                        type: 'causal',
+                        strength: 0.9,
+                        timeline: psi1.branch,
+                        heroOwner: psi1.ownerHero
+                    });
+                }
+            }
+        }
+        
+        // 2. Liens entre héros et leurs ψ-states
+        for (const hero of heroes) {
+            for (const psi of psiStates) {
+                if (psi.ownerHero === hero.name) {
+                    links.push({
+                        source: `hero_${hero.name}`,
+                        target: `psi_${psi.psiId}`,
+                        type: 'ownership',
+                        strength: 1.0,
+                        timeline: psi.branch
+                    });
+                }
+            }
+        }
+        
+        // 3. Liens de proximité entre héros
+        for (let i = 0; i < heroes.length; i++) {
+            for (let j = i + 1; j < heroes.length; j++) {
+                const hero1 = heroes[i];
+                const hero2 = heroes[j];
+                
+                const distance = this.calculateDistance(hero1.position, hero2.position);
+                if (distance <= 5) { // Proximité dans un rayon de 5
+                    links.push({
+                        source: `hero_${hero1.name}`,
+                        target: `hero_${hero2.name}`,
+                        type: 'proximity',
+                        strength: Math.max(0.1, 1.0 - (distance / 5)),
+                        distance: distance
+                    });
+                }
+            }
+        }
+        
+        // 4. Liens de conflit (ψ-states sur même position)
+        const conflictGroups = this.groupPsiStatesByPosition(psiStates);
+        for (const [position, psiGroup] of Object.entries(conflictGroups)) {
+            if (psiGroup.length > 1) {
+                // Créer des liens de conflit entre tous les ψ-states du groupe
+                for (let i = 0; i < psiGroup.length; i++) {
+                    for (let j = i + 1; j < psiGroup.length; j++) {
+                        links.push({
+                            source: `psi_${psiGroup[i].psiId}`,
+                            target: `psi_${psiGroup[j].psiId}`,
+                            type: 'conflict',
+                            strength: 0.8,
+                            position: position,
+                            conflictType: 'spatial_overlap'
+                        });
+                    }
+                }
+            }
+        }
         
         return links;
+    }
+    
+    // Méthodes helper pour les calculs de liens causals
+    arePositionsRelated(pos1, pos2) {
+        if (!pos1 || !pos2) return false;
+        const distance = Math.abs(pos1.x - pos2.x) + Math.abs(pos1.y - pos2.y);
+        return distance <= 3; // Manhattan distance <= 3
+    }
+    
+    calculateSpatialStrength(pos1, pos2) {
+        if (!pos1 || !pos2) return 0;
+        const distance = Math.abs(pos1.x - pos2.x) + Math.abs(pos1.y - pos2.y);
+        return Math.max(0.1, 1.0 - (distance / 3));
+    }
+    
+    areTemporallyRelated(deltaT1, deltaT2) {
+        if (deltaT1 == null || deltaT2 == null) return false;
+        return Math.abs(deltaT1 - deltaT2) <= 2; // Δt dans un intervalle de 2
+    }
+    
+    calculateTemporalStrength(deltaT1, deltaT2) {
+        if (deltaT1 == null || deltaT2 == null) return 0;
+        const diff = Math.abs(deltaT1 - deltaT2);
+        return Math.max(0.2, 1.0 - (diff / 2));
+    }
+    
+    calculateDistance(pos1, pos2) {
+        if (!pos1 || !pos2) return Infinity;
+        return Math.sqrt(Math.pow(pos1.x - pos2.x, 2) + Math.pow(pos1.y - pos2.y, 2));
+    }
+    
+    groupPsiStatesByPosition(psiStates) {
+        const groups = {};
+        for (const psi of psiStates) {
+            if (psi.targetPosition) {
+                const key = `${psi.targetPosition.x},${psi.targetPosition.y}`;
+                if (!groups[key]) groups[key] = [];
+                groups[key].push(psi);
+            }
+        }
+        return groups;
     }
     
     // Méthodes pour contrôler la visualisation
