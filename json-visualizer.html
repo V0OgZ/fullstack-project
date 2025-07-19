@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📊 Heroes of Time - JSON Visualizer</title>
+    <title>📊 JSON Visualizer - Heroes of Time</title>
     <style>
         * {
             margin: 0;
@@ -12,8 +12,8 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 50%, #16213e 100%);
             color: #e0e0e0;
             min-height: 100vh;
             padding: 20px;
@@ -21,522 +21,421 @@
 
         .header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            border: 2px solid rgba(100, 255, 218, 0.3);
         }
 
-        .main-title {
-            font-size: 3em;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gradientShift 3s ease-in-out infinite;
+        .header h1 {
+            font-size: 2.5em;
+            color: #64ffda;
+            text-shadow: 0 0 20px rgba(100, 255, 218, 0.5);
             margin-bottom: 10px;
         }
 
-        .subtitle {
-            font-size: 1.2em;
-            color: #a0a0a0;
-            margin-bottom: 20px;
-        }
-
-        .filters {
+        .controls {
             display: flex;
-            justify-content: center;
             gap: 15px;
             margin-bottom: 30px;
             flex-wrap: wrap;
+            justify-content: center;
         }
 
-        .filter-btn {
-            padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid transparent;
-            border-radius: 25px;
-            color: #e0e0e0;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9em;
-        }
-
-        .filter-btn.active {
-            border-color: #4ecdc4;
-            background: rgba(78, 205, 196, 0.2);
-        }
-
-        .filter-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .json-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .json-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 20px;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .json-card:hover {
-            transform: translateY(-5px);
-            border-color: #4ecdc4;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 15px;
-        }
-
-        .card-icon {
-            font-size: 2em;
-            min-width: 50px;
-            text-align: center;
-        }
-
-        .card-title {
-            font-size: 1.3em;
-            font-weight: bold;
-            flex-grow: 1;
-        }
-
-        .card-type {
-            background: rgba(78, 205, 196, 0.3);
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 0.8em;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        .card-path {
-            font-size: 0.85em;
-            color: #888;
-            margin-bottom: 15px;
-            font-family: 'Courier New', monospace;
-        }
-
-        .card-preview {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
+        .btn {
+            padding: 12px 24px;
+            border: none;
             border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.85em;
-            max-height: 200px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #64ffda, #4fc3f7);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: #000;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 500px;
+            padding: 12px;
+            border: 2px solid rgba(100, 255, 218, 0.3);
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            color: #e0e0e0;
+            font-size: 16px;
+        }
+
+        .json-container {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid rgba(100, 255, 218, 0.2);
+            max-height: 70vh;
             overflow-y: auto;
         }
 
+        .json-object {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border-left: 4px solid #64ffda;
+        }
+
         .json-key {
-            color: #4ecdc4;
+            color: #64ffda;
+            font-weight: bold;
         }
 
         .json-string {
-            color: #96ceb4;
+            color: #a8e6cf;
         }
 
         .json-number {
-            color: #ffa726;
+            color: #ffd93d;
         }
 
         .json-boolean {
             color: #ff6b6b;
         }
 
-        .loading {
-            text-align: center;
-            padding: 40px;
-            font-size: 1.2em;
-            color: #888;
+        .json-null {
+            color: #95a5a6;
+        }
+
+        .collapsible {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .collapsible::before {
+            content: "▼ ";
+            color: #64ffda;
+            transition: transform 0.3s ease;
+        }
+
+        .collapsible.collapsed::before {
+            transform: rotate(-90deg);
+            content: "▶ ";
+        }
+
+        .collapsed-content {
+            display: none;
         }
 
         .stats {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
         }
 
-        .stat-item {
+        .stat-card {
+            background: rgba(100, 255, 218, 0.1);
+            padding: 15px;
+            border-radius: 10px;
             text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px 20px;
-            border-radius: 12px;
+            border: 1px solid rgba(100, 255, 218, 0.3);
         }
 
-        .stat-number {
+        .stat-value {
             font-size: 2em;
+            color: #64ffda;
             font-weight: bold;
-            color: #4ecdc4;
         }
 
-        .stat-label {
-            font-size: 0.9em;
-            color: #888;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .search-box {
-            max-width: 500px;
-            margin: 0 auto 30px;
-            position: relative;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 15px 50px 15px 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid transparent;
-            border-radius: 25px;
-            color: #e0e0e0;
-            font-size: 1em;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: #4ecdc4;
-        }
-
-        .search-icon {
-            position: absolute;
-            right: 18px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #888;
+        .loading {
+            text-align: center;
+            color: #64ffda;
+            font-size: 1.5em;
+            margin: 50px 0;
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1 class="main-title">📊 JSON Visualizer</h1>
-        <p class="subtitle">Tous les JSON du projet Heroes of Time visualisés intelligemment</p>
-        
-        <div class="search-box">
-            <input type="text" class="search-input" id="searchInput" placeholder="Rechercher dans les JSON...">
-            <div class="search-icon">🔍</div>
-        </div>
-
-        <div class="stats" id="stats">
-            <div class="stat-item">
-                <div class="stat-number" id="totalFiles">-</div>
-                <div class="stat-label">Fichiers JSON</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" id="totalHeroes">-</div>
-                <div class="stat-label">Héros</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" id="totalCreatures">-</div>
-                <div class="stat-label">Créatures</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" id="totalArtifacts">-</div>
-                <div class="stat-label">Artefacts</div>
-            </div>
-        </div>
-
-        <div class="filters">
-            <button class="filter-btn active" data-type="all">🌟 Tous</button>
-            <button class="filter-btn" data-type="heroes">⚔️ Héros</button>
-            <button class="filter-btn" data-type="creatures">🐉 Créatures</button>
-            <button class="filter-btn" data-type="artifacts">💎 Artefacts</button>
-            <button class="filter-btn" data-type="scenarios">📜 Scénarios</button>
-            <button class="filter-btn" data-type="quantum">⚛️ Quantum</button>
-            <button class="filter-btn" data-type="config">⚙️ Config</button>
-        </div>
+        <h1>📊 JSON Visualizer</h1>
+        <p>Visualisation propre des objets Heroes of Time</p>
     </div>
 
-    <div class="loading" id="loading">
-        🔄 Chargement des JSON...
+    <div class="controls">
+        <button class="btn btn-primary" onclick="loadHeroes()">🦸 Héros</button>
+        <button class="btn btn-primary" onclick="loadArtifacts()">⚡ Artefacts</button>
+        <button class="btn btn-primary" onclick="loadScenarios()">🎭 Scénarios</button>
+        <button class="btn btn-secondary" onclick="loadCustom()">📁 Fichier Custom</button>
+        <input type="text" class="search-box" placeholder="🔍 Rechercher dans les objets..." oninput="filterObjects(this.value)">
     </div>
 
-    <div class="json-grid" id="jsonGrid" style="display: none;">
-        <!-- Les cartes JSON seront ajoutées ici -->
+    <div class="stats" id="stats"></div>
+
+    <div class="json-container" id="jsonContainer">
+        <div class="loading">Sélectionnez une catégorie pour commencer...</div>
     </div>
 
     <script>
-        // Configuration des types de JSON avec icônes
-        const jsonTypes = {
-            heroes: {
-                icon: '⚔️',
-                color: '#ff6b6b',
-                patterns: ['heroes', 'hero', 'Arthur', 'Ragnar', 'Lysandrel', 'Morgana', 'GROFI']
-            },
-            creatures: {
-                icon: '🐉',
-                color: '#4ecdc4',
-                patterns: ['creatures', 'creature', 'quantum_wisp', 'dragon', 'phoenix']
-            },
-            artifacts: {
-                icon: '💎',
-                color: '#ffa726',
-                patterns: ['artifacts', 'artifact', 'blade', 'mirror', 'clock', 'temporal']
-            },
-            scenarios: {
-                icon: '📜',
-                color: '#96ceb4',
-                patterns: ['scenario', 'battle', 'GROFI', 'DUEL', 'ECLAT']
-            },
-            quantum: {
-                icon: '⚛️',
-                color: '#9c27b0',
-                patterns: ['quantum', 'temporal', 'psi', 'amplitude']
-            },
-            config: {
-                icon: '⚙️',
-                color: '#607d8b',
-                patterns: ['config', 'settings', 'manifest', 'package']
-            }
-        };
+        let currentData = null;
 
-        // Liste des JSON du projet (sera mise à jour dynamiquement sur GitHub)
-        const jsonFiles = [
-            {
-                path: 'backend/src/main/resources/heroes/INDEX.json',
-                url: 'https://raw.githubusercontent.com/V0OgZ/Heroes-of-Time/poc-heroes-of-time/backend/src/main/resources/heroes/INDEX.json'
-            },
-            {
-                path: 'backend/src/main/resources/heroes/legendary/Arthur.json',
-                url: 'https://raw.githubusercontent.com/V0OgZ/Heroes-of-Time/poc-heroes-of-time/backend/src/main/resources/heroes/legendary/Arthur.json'
-            },
-            {
-                path: 'backend/src/main/resources/heroes/legendary/Ragnar.json',
-                url: 'https://raw.githubusercontent.com/V0OgZ/Heroes-of-Time/poc-heroes-of-time/backend/src/main/resources/heroes/legendary/Ragnar.json'
-            },
-            {
-                path: 'backend/src/main/resources/heroes/legendary/Morgana.json',
-                url: 'https://raw.githubusercontent.com/V0OgZ/Heroes-of-Time/poc-heroes-of-time/backend/src/main/resources/heroes/legendary/Morgana.json'
-            },
-            {
-                path: 'backend/src/main/resources/heroes/grofi/Axis.json',
-                url: 'https://raw.githubusercontent.com/V0OgZ/Heroes-of-Time/poc-heroes-of-time/backend/src/main/resources/heroes/grofi/Axis.json'
-            },
-            {
-                path: 'backend/src/main/resources/quantum-creatures.json',
-                url: 'https://raw.githubusercontent.com/V0OgZ/Heroes-of-Time/poc-heroes-of-time/backend/src/main/resources/quantum-creatures.json'
-            },
-            {
-                path: 'backend/src/main/resources/quantum-artifacts.json',
-                url: 'https://raw.githubusercontent.com/V0OgZ/Heroes-of-Time/poc-heroes-of-time/backend/src/main/resources/quantum-artifacts.json'
-            },
-            {
-                path: 'sample_data.json',
-                url: 'https://raw.githubusercontent.com/V0OgZ/Heroes-of-Time/poc-heroes-of-time/sample_data.json'
-            },
-            {
-                path: 'docs/items/ECLAT_MONDES_DISSOLUS_HEROES.json',
-                url: 'https://raw.githubusercontent.com/V0OgZ/Heroes-of-Time/poc-heroes-of-time/docs/items/ECLAT_MONDES_DISSOLUS_HEROES.json'
-            },
-            {
-                path: 'game_assets/scenarios/visualizer/OEIL_DE_WIGNER.json',
-                url: 'https://raw.githubusercontent.com/V0OgZ/Heroes-of-Time/poc-heroes-of-time/game_assets/scenarios/visualizer/OEIL_DE_WIGNER.json'
-            }
-        ];
-
-        let allJsonData = [];
-        let filteredData = [];
-
-        // Déterminer le type d'un JSON
-        function detectJsonType(filename, data) {
-            const content = JSON.stringify(data).toLowerCase();
-            const path = filename.toLowerCase();
-            
-            for (const [type, config] of Object.entries(jsonTypes)) {
-                for (const pattern of config.patterns) {
-                    if (path.includes(pattern.toLowerCase()) || content.includes(pattern.toLowerCase())) {
-                        return type;
+        async function loadHeroes() {
+            showLoading();
+            try {
+                const response = await fetch('/backend/src/main/resources/heroes/grofi/');
+                const heroes = [];
+                
+                // Charger les héros individuellement
+                const heroFiles = ['JeanGrofignon.json', 'TheDude.json', 'VinceVega.json'];
+                
+                for (const file of heroFiles) {
+                    try {
+                        const heroResponse = await fetch(`/backend/src/main/resources/heroes/grofi/${file}`);
+                        if (heroResponse.ok) {
+                            const hero = await heroResponse.json();
+                            hero._filename = file;
+                            heroes.push(hero);
+                        }
+                    } catch (e) {
+                        console.warn(`Impossible de charger ${file}:`, e);
                     }
                 }
+                
+                if (heroes.length > 0) {
+                    displayData(heroes, 'Héros');
+                } else {
+                    displayError('Aucun héros trouvé');
+                }
+            } catch (error) {
+                displayError('Erreur lors du chargement des héros: ' + error.message);
             }
-            return 'config';
         }
 
-        // Extraire un aperçu du JSON
-        function getJsonPreview(data, maxLines = 8) {
-            const jsonStr = JSON.stringify(data, null, 2);
-            const lines = jsonStr.split('\n').slice(0, maxLines);
+        async function loadArtifacts() {
+            showLoading();
+            try {
+                const response = await fetch('/backend/src/main/resources/quantum-artifacts.json');
+                if (response.ok) {
+                    const data = await response.json();
+                    displayData(data, 'Artefacts Quantiques');
+                } else {
+                    displayError('Impossible de charger les artefacts');
+                }
+            } catch (error) {
+                displayError('Erreur lors du chargement des artefacts: ' + error.message);
+            }
+        }
+
+        async function loadScenarios() {
+            showLoading();
+            try {
+                const scenarios = [];
+                const scenarioFiles = [
+                    '/game_assets/scenarios/visualizer/bataille_temporelle.json',
+                    '/game_assets/scenarios/visualizer/DANSE_ILLUSOIRE.json',
+                    '/game_assets/scenarios/visualizer/DUEL_COLLAPSE.json'
+                ];
+                
+                for (const file of scenarioFiles) {
+                    try {
+                        const response = await fetch(file);
+                        if (response.ok) {
+                            const scenario = await response.json();
+                            scenario._filename = file.split('/').pop();
+                            scenarios.push(scenario);
+                        }
+                    } catch (e) {
+                        console.warn(`Impossible de charger ${file}:`, e);
+                    }
+                }
+                
+                if (scenarios.length > 0) {
+                    displayData(scenarios, 'Scénarios');
+                } else {
+                    displayError('Aucun scénario trouvé');
+                }
+            } catch (error) {
+                displayError('Erreur lors du chargement des scénarios: ' + error.message);
+            }
+        }
+
+        function loadCustom() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        try {
+                            const data = JSON.parse(event.target.result);
+                            displayData(data, file.name);
+                        } catch (error) {
+                            displayError('Fichier JSON invalide: ' + error.message);
+                        }
+                    };
+                    reader.readAsText(file);
+                }
+            };
+            input.click();
+        }
+
+        function showLoading() {
+            document.getElementById('jsonContainer').innerHTML = '<div class="loading">⏳ Chargement...</div>';
+            document.getElementById('stats').innerHTML = '';
+        }
+
+        function displayError(message) {
+            document.getElementById('jsonContainer').innerHTML = `<div class="loading" style="color: #ff6b6b;">❌ ${message}</div>`;
+        }
+
+        function displayData(data, title) {
+            currentData = data;
             
-            return lines.map(line => {
-                // Coloration syntaxique simple
-                return line
-                    .replace(/"([^"]+)":/g, '<span class="json-key">"$1":</span>')
-                    .replace(/: "([^"]+)"/g, ': <span class="json-string">"$1"</span>')
-                    .replace(/: (\d+)/g, ': <span class="json-number">$1</span>')
-                    .replace(/: (true|false)/g, ': <span class="json-boolean">$1</span>');
-            }).join('\n') + (jsonStr.split('\n').length > maxLines ? '\n...' : '');
+            // Afficher les statistiques
+            displayStats(data, title);
+            
+            // Afficher les données
+            const container = document.getElementById('jsonContainer');
+            container.innerHTML = `<h2 style="color: #64ffda; margin-bottom: 20px;">${title}</h2>`;
+            
+            if (Array.isArray(data)) {
+                data.forEach((item, index) => {
+                    const objectDiv = document.createElement('div');
+                    objectDiv.className = 'json-object';
+                    objectDiv.innerHTML = formatObject(item, `${title}[${index}]`);
+                    container.appendChild(objectDiv);
+                });
+            } else {
+                const objectDiv = document.createElement('div');
+                objectDiv.className = 'json-object';
+                objectDiv.innerHTML = formatObject(data, title);
+                container.appendChild(objectDiv);
+            }
+            
+            // Ajouter les événements de collapse
+            addCollapseEvents();
         }
 
-        // Créer une carte JSON
-        function createJsonCard(jsonItem) {
-            const type = detectJsonType(jsonItem.path, jsonItem.data);
-            const typeConfig = jsonTypes[type];
-            const filename = jsonItem.path.split('/').pop();
-
-            return `
-                <div class="json-card" data-type="${type}" onclick="openJsonDetails('${jsonItem.path}')">
-                    <div class="card-header">
-                        <div class="card-icon" style="color: ${typeConfig.color}">
-                            ${typeConfig.icon}
-                        </div>
-                        <div class="card-title">${filename}</div>
-                        <div class="card-type" style="background-color: ${typeConfig.color}33">
-                            ${type}
-                        </div>
-                    </div>
-                    <div class="card-path">${jsonItem.path}</div>
-                    <div class="card-preview">
-                        <pre>${getJsonPreview(jsonItem.data)}</pre>
-                    </div>
+        function displayStats(data, title) {
+            const stats = document.getElementById('stats');
+            let objectCount = 0;
+            let propertyCount = 0;
+            let totalSize = 0;
+            
+            if (Array.isArray(data)) {
+                objectCount = data.length;
+                data.forEach(item => {
+                    propertyCount += Object.keys(item).length;
+                });
+            } else {
+                objectCount = 1;
+                propertyCount = Object.keys(data).length;
+            }
+            
+            totalSize = JSON.stringify(data).length;
+            
+            stats.innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-value">${objectCount}</div>
+                    <div>Objets</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${propertyCount}</div>
+                    <div>Propriétés</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${(totalSize / 1024).toFixed(1)}K</div>
+                    <div>Taille</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${title}</div>
+                    <div>Catégorie</div>
                 </div>
             `;
         }
 
-        // Charger et afficher les JSON
-        async function loadJsonFiles() {
-            console.log('🔄 Chargement des fichiers JSON...');
+        function formatObject(obj, name) {
+            if (obj === null) return `<span class="json-null">null</span>`;
+            if (typeof obj === 'string') return `<span class="json-string">"${escapeHtml(obj)}"</span>`;
+            if (typeof obj === 'number') return `<span class="json-number">${obj}</span>`;
+            if (typeof obj === 'boolean') return `<span class="json-boolean">${obj}</span>`;
             
-            for (const file of jsonFiles) {
-                try {
-                    const response = await fetch(file.url);
-                    if (response.ok) {
-                        const data = await response.json();
-                        allJsonData.push({
-                            path: file.path,
-                            url: file.url,
-                            data: data
-                        });
-                    } else {
-                        console.warn(`❌ Impossible de charger ${file.path}: ${response.status}`);
+            if (Array.isArray(obj)) {
+                if (obj.length === 0) return '[]';
+                const content = obj.map((item, index) => 
+                    `<div style="margin-left: 20px;">[${index}]: ${formatObject(item, `${name}[${index}]`)}</div>`
+                ).join('');
+                return `<div class="collapsible">${name} [${obj.length} éléments]</div><div class="collapsed-content">${content}</div>`;
+            }
+            
+            if (typeof obj === 'object') {
+                const keys = Object.keys(obj);
+                if (keys.length === 0) return '{}';
+                
+                const content = keys.map(key => 
+                    `<div style="margin-left: 20px;"><span class="json-key">${escapeHtml(key)}</span>: ${formatObject(obj[key], `${name}.${key}`)}</div>`
+                ).join('');
+                
+                return `<div class="collapsible">${name} {${keys.length} propriétés}</div><div class="collapsed-content">${content}</div>`;
+            }
+            
+            return String(obj);
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function addCollapseEvents() {
+            document.querySelectorAll('.collapsible').forEach(element => {
+                element.addEventListener('click', function() {
+                    this.classList.toggle('collapsed');
+                    const content = this.nextElementSibling;
+                    if (content && content.classList.contains('collapsed-content')) {
+                        content.style.display = content.style.display === 'none' ? 'block' : 'none';
                     }
-                } catch (error) {
-                    console.warn(`❌ Erreur lors du chargement de ${file.path}:`, error);
-                }
-            }
-
-            filteredData = [...allJsonData];
-            displayJsonCards();
-            updateStats();
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('jsonGrid').style.display = 'grid';
-            
-            console.log(`✅ ${allJsonData.length} fichiers JSON chargés !`);
-        }
-
-        // Afficher les cartes JSON
-        function displayJsonCards() {
-            const grid = document.getElementById('jsonGrid');
-            grid.innerHTML = filteredData.map(createJsonCard).join('');
-        }
-
-        // Mettre à jour les statistiques
-        function updateStats() {
-            document.getElementById('totalFiles').textContent = allJsonData.length;
-            
-            let heroesCount = 0;
-            let creaturesCount = 0;
-            let artifactsCount = 0;
-            
-            allJsonData.forEach(item => {
-                const type = detectJsonType(item.path, item.data);
-                if (type === 'heroes') heroesCount++;
-                else if (type === 'creatures') creaturesCount++;
-                else if (type === 'artifacts') artifactsCount++;
-            });
-            
-            document.getElementById('totalHeroes').textContent = heroesCount;
-            document.getElementById('totalCreatures').textContent = creaturesCount;
-            document.getElementById('totalArtifacts').textContent = artifactsCount;
-        }
-
-        // Filtrage par type
-        function filterByType(type) {
-            if (type === 'all') {
-                filteredData = [...allJsonData];
-            } else {
-                filteredData = allJsonData.filter(item => 
-                    detectJsonType(item.path, item.data) === type
-                );
-            }
-            displayJsonCards();
-            
-            // Mettre à jour les boutons de filtre
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.type === type);
-            });
-        }
-
-        // Recherche
-        function searchJson(query) {
-            if (!query.trim()) {
-                filteredData = [...allJsonData];
-            } else {
-                const lowerQuery = query.toLowerCase();
-                filteredData = allJsonData.filter(item => {
-                    const content = JSON.stringify(item.data).toLowerCase();
-                    const path = item.path.toLowerCase();
-                    return path.includes(lowerQuery) || content.includes(lowerQuery);
                 });
-            }
-            displayJsonCards();
+            });
         }
 
-        // Ouvrir les détails d'un JSON
-        function openJsonDetails(path) {
-            const item = allJsonData.find(item => item.path === path);
-            if (item) {
-                const newWindow = window.open('', '_blank');
-                newWindow.document.write(`
-                    <html>
-                        <head>
-                            <title>JSON: ${path}</title>
-                            <style>
-                                body { font-family: monospace; padding: 20px; background: #1a1a1a; color: #e0e0e0; }
-                                pre { background: #2a2a2a; padding: 20px; border-radius: 8px; overflow: auto; }
-                            </style>
-                        </head>
-                        <body>
-                            <h1>📄 ${path}</h1>
-                            <a href="${item.url}" target="_blank">🔗 Voir sur GitHub</a>
-                            <pre>${JSON.stringify(item.data, null, 2)}</pre>
-                        </body>
-                    </html>
-                `);
-            }
+        function filterObjects(searchTerm) {
+            if (!currentData) return;
+            
+            const container = document.getElementById('jsonContainer');
+            const objects = container.querySelectorAll('.json-object');
+            
+            objects.forEach(obj => {
+                const text = obj.textContent.toLowerCase();
+                if (text.includes(searchTerm.toLowerCase())) {
+                    obj.style.display = 'block';
+                } else {
+                    obj.style.display = 'none';
+                }
+            });
         }
 
-        // Initialisation
-        document.addEventListener('DOMContentLoaded', () => {
-            // Event listeners
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.addEventListener('click', () => filterByType(btn.dataset.type));
-            });
-
-            document.getElementById('searchInput').addEventListener('input', (e) => {
-                searchJson(e.target.value);
-            });
-
-            // Charger les JSON
-            loadJsonFiles();
+        // Auto-charger les héros au démarrage
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                loadHeroes();
+            }, 500);
         });
-
-        console.log('📊 JSON Visualizer Heroes of Time initialisé !');
     </script>
 </body>
 </html> 
