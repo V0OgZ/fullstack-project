@@ -1,8 +1,8 @@
 package com.heroesoftimepoc.temporalengine;
 
 import com.heroesoftimepoc.temporalengine.model.*;
-import com.heroesoftimepoc.temporalengine.service.ArtifactEffectExecutor;
 import com.heroesoftimepoc.temporalengine.repository.*;
+import com.heroesoftimepoc.temporalengine.service.ArtifactEffectExecutor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,17 +10,17 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 /**
- * 🧪 TESTS UNITAIRES - ARTIFACT EFFECT EXECUTOR
- * 
- * Tests du système d'exécution d'effets d'artefacts.
- * Vérification que les formules JSON sont bien exécutées en code Java.
+ * Tests pour ArtifactEffectExecutor
+ * Vérifie l'exécution des effets d'artefacts temporels et quantiques
  */
 @ExtendWith(MockitoExtension.class)
 class ArtifactEffectExecutorTest {
@@ -37,26 +37,22 @@ class ArtifactEffectExecutorTest {
     @InjectMocks
     private ArtifactEffectExecutor artifactEffectExecutor;
     
+    @Mock
     private Game testGame;
+    
+    @Mock 
     private Hero testHero;
+    
     private List<PsiState> mockPsiStates;
     
     @BeforeEach
     void setUp() {
-        // Créer un jeu de test
-        testGame = new Game();
-        testGame.setId(1L);
-        testGame.setGameName("TestArtefacts");
-        
-        // Créer un héros de test
-        testHero = new Hero("Tesla", 10, 10);
-        testHero.setId(1L);
-        testHero.setTemporalEnergy(100);
-        testHero.setMaxTemporalEnergy(200);
-        testGame.addHero(testHero);
-        
         // Créer des ψ-states de test avec amplitudes complexes
         mockPsiStates = Arrays.asList(
+            createPsiState("ψ001", "(1.0+0.0i)", 10, 10),
+            createPsiState("ψ002", "(0.7+0.7i)", 10, 10),
+            createPsiState("ψ003", "(0.8+0.6i)", 12, 12),
+            createPsiState("ψ100", "(0.9+0.4i)", 15, 15),
             createPsiState("ψ101", "(0.6+0.8i)", 15, 15),
             createPsiState("ψ102", "(0.8+0.6i)", 15, 15),
             createPsiState("ψ201", "(0.7+0.7i)", 20, 20)
@@ -64,6 +60,13 @@ class ArtifactEffectExecutorTest {
         
         // Configurer le mock game pour retourner nos ψ-states
         when(testGame.getActivePsiStates()).thenReturn(mockPsiStates);
+        
+        // Configurer le mock hero
+        when(testHero.getId()).thenReturn(1L);
+        when(testHero.getName()).thenReturn("Test Hero");
+        when(testHero.getTemporalEnergy()).thenReturn(100);
+        when(testHero.getPositionX()).thenReturn(10);
+        when(testHero.getPositionY()).thenReturn(10);
     }
     
     private PsiState createPsiState(String psiId, String amplitude, int x, int y) {
