@@ -16,16 +16,14 @@ kill_port() {
 }
 
 # Nettoyage des ports
-echo ""
-echo "🧹 NETTOYAGE DES PORTS..."
-kill_port 8080
+echo "🧹 Nettoyage des anciens processus..."
+kill_port 9000
 kill_port 8000
-kill_port 5190
 kill_port 5174
 kill_port 5172
-kill_port 5170
-kill_port 5171
-kill_port 3000
+kill_port 5175
+kill_port 5190
+kill_port 8001
 
 echo ""
 echo "⏳ Attente 2 secondes..."
@@ -55,8 +53,9 @@ cd frontend-temporal && python3 -m http.server 5174 > ../logs/temporal-ui-unifie
 cd ..
 
 # Quantum Visualizer
-echo "🌌 Démarrage Quantum Visualizer (port 5172)..."
-cd quantum-visualizer && python3 -m http.server 5172 > ../logs/quantum-visualizer-unified.log 2>&1 &
+echo "🌌 Démarrage Quantum Visualizer (port 8001)..."
+cd quantum-visualizer
+python3 -m http.server 8001 --directory . > ../logs/quantum-visualizer-unified.log 2>&1 &
 cd ..
 
 # JSON Visualizer
@@ -71,6 +70,9 @@ python3 -m http.server 5171 --directory . > logs/hots-visualizer-unified.log 2>&
 echo "🧪 Démarrage Test Runner (port 3000)..."
 python3 -m http.server 3000 --directory . > logs/test-runner-unified.log 2>&1 &
 
+echo "🔮 Démarrage Object Viewer (port 5175)..."
+python3 visualizer-server.py 5175 > logs/object-viewer-unified.log 2>&1 &
+
 echo ""
 echo "⏳ Attente de démarrage des services..."
 sleep 5
@@ -81,10 +83,11 @@ echo "🔧 Backend API         : http://localhost:8080"
 echo "🎮 Frontend Principal  : http://localhost:8000"
 echo "🏛️ UI Légendaire       : http://localhost:5190"
 echo "⚔️ Temporal UI         : http://localhost:5174"
-echo "🌌 Quantum Visualizer  : http://localhost:5172"
+echo "🌌 Quantum Visualizer  : http://localhost:8001"
 echo "📊 JSON Visualizer     : http://localhost:5170"
 echo "🔮 HOTS Visualizer     : http://localhost:5171"
 echo "🧪 Test Runner         : http://localhost:3000"
+echo "🔮 Object Viewer       : http://localhost:5175"
 
 echo ""
 echo "🎮 DASHBOARD PRINCIPAL : http://localhost:9000/dashboard.html"
@@ -93,4 +96,4 @@ echo "📋 Logs disponibles dans le dossier 'logs/'"
 echo "🛑 Pour arrêter tous les services : ./scripts/actifs/stop-all-services.sh"
 echo ""
 echo "✅ SYSTÈME UNIFIÉ OPÉRATIONNEL !"
-echo "🔥 =🔥 =🔥 =🔥 =🔥 =🔥 =🔥 =🔥 =🔥 =🔥 =🔥 =🔥 =🔥 =🔥 =🔥 =�� =🔥 =🔥 =🔥 =🔥 =" 
+echo "🔥 =🔥 =🔥 =🔥 =🔥 =🔥 =🔥 =🔥 =🔥 =🔥 =🔥 =🔥 =🔥 =🔥 =🔥 =🔥 =🔥 =🔥 =🔥 =🔥 =" 

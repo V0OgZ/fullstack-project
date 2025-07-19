@@ -47,14 +47,28 @@
 - 🛡️ **Ne PAS écraser** les corrections du visualiseur JSON
 - 🛡️ **Récupération sélective** uniquement pour UI
 
-### Serveurs Multiples - Gestion Ports
-- Port 5174 : Interface temporelle (`frontend-temporal`)
-- Port 5190 : Interface légendaire (`frontend-legendary-ui`) 
-- Port 8080 : Backend Spring Boot
-- Port 5172 : Quantum visualizer
-- Port 9000 : Dashboard principal
-- Port 5170 : JSON Visualizer
-- Port 5171 : HOTS Visualizer
+### Serveurs Multiples - Gestion Ports DÉFINITIVE
+- Port 9000 : Dashboard Unifié (`dashboard.html`) - **PRINCIPAL**
+- Port 8000 : Frontend Principal (`frontend/`) - Console temporelle + carte hex
+- Port 8080 : Backend Spring Boot API (`backend/`) - **APIs REST**
+- Port 5174 : Interface Temporelle (`frontend-temporal/`) - Configuration Temporelle
+- Port 8001 : Quantum Visualizer (`quantum-visualizer/`) - Scénarios GROFI
+- Port 5175 : Object Viewer (`visualizer-server.py`) - JSON/HOTS/Dashboard
+- Port 5170 : JSON Visualizer (DÉPRÉCIÉ - remplacé par 5175)
+- Port 5171 : HOTS Visualizer (DÉPRÉCIÉ - remplacé par 5175)
+- Port 5190 : Interface Légendaire (`frontend-legendary-ui/`) - **OPTIONNEL**
+- Port 8888 : Test Runner - **RÉCUPÉRÉ de 872e0d7**
+
+### 📋 COMMANDES STANDARDISÉES - OBLIGATOIRES
+- ✅ **START ALL** : `./scripts/actifs/start-services-background.sh` - **PRINCIPAL**
+- ✅ **STOP ALL** : `./scripts/actifs/stop-all-services.sh`
+- ✅ **STATUS** : `lsof -i :9000,8000,8080,5174,8001,5175,8888 | grep LISTEN`
+- ✅ **BACKEND START** : `cd backend && mvn spring-boot:run > /dev/null 2>&1 &`
+- ✅ **QUICK TEST** : `./scripts/actifs/test-ui-quick.sh`
+- ❌ **INTERDICTION** : Recréer des scripts ou commandes manuelles
+- ❌ **INTERDICTION** : Changer les ports définis ci-dessus
+- 🎯 **RÈGLE** : TOUJOURS utiliser les scripts existants dans `/scripts/actifs/`
+- 🚨 **PORTS FIXES** : Ne JAMAIS changer les ports sans concertation
 
 ### 🚨 RÈGLE CRITIQUE : SERVICES EN ARRIÈRE-PLAN PERMANENT
 - ❌ **JAMAIS** tuer les serveurs pendant le codage
@@ -65,23 +79,15 @@
 - ✅ **COMMANDE TYPE** : `python3 -m http.server PORT > /dev/null 2>&1 &`
 - 🎯 **OBJECTIF** : L'utilisateur peut tester et jouer pendant que l'agent code
 
-### 📋 COMMANDES STANDARDISÉES - À UTILISER OBLIGATOIREMENT
-- ✅ **START ALL** : `./scripts/actifs/start-services-background.sh`
-- ✅ **STOP ALL** : `./scripts/actifs/stop-all-services.sh`
-- ✅ **STATUS** : `lsof -i :9000,5170,5171,5174,5190,8000,8080 | grep LISTEN`
-- ✅ **BACKEND START** : `cd backend && mvn spring-boot:run > /dev/null 2>&1 &`
-- ✅ **QUICK TEST** : `./scripts/actifs/test-ui-quick.sh`
-- ❌ **INTERDICTION** : Recréer des scripts ou commandes manuelles
-- 🎯 **RÈGLE** : TOUJOURS utiliser les scripts existants dans `/scripts/actifs/`
-
 ### 🎮 SERVICES ACTUELLEMENT ACTIFS (PERMANENT BACKGROUND)
-- ✅ Dashboard (9000) : http://localhost:9000
-- ✅ JSON Visualizer (5170) : http://localhost:5170/json-visualizer.html  
-- ✅ HOTS Visualizer (5171) : http://localhost:5171/hots-visualizer.html
-- ✅ Temporal UI (5174) : http://localhost:5174
-- ✅ Legendary UI (5190) : http://localhost:5190
+- ✅ Dashboard (9000) : http://localhost:9000/dashboard.html
 - ✅ Frontend (8000) : http://localhost:8000
-- 🔧 Backend (8080) : À démarrer si nécessaire pour les API
+- ✅ Backend API (8080) : http://localhost:8080/api/games
+- ✅ Temporal UI (5174) : http://localhost:5174
+- ✅ Quantum Visualizer (8001) : http://localhost:8001
+- ✅ Object Viewer (5175) : http://localhost:5175
+- 🔧 Test Runner (8888) : À récupérer si nécessaire
+- 🔧 UI Légendaire (5190) : Optionnelle
 
 ### Commit Messages - Format Appris
 - ✅ **Bon format** : "🎯 MISSION UI LÉGENDAIRE ACCOMPLIE - Description détaillée"

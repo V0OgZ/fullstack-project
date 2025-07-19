@@ -6,21 +6,27 @@ echo ''
 
 echo '⏹️  Arrêt des services en cours...'
 
-# Arrêter tous les processus Java (Backend Spring Boot)
-echo '   Arrêt Backend (port 8080)...'
-lsof -ti:8080 | xargs kill -9 2>/dev/null && echo '   ✅ Backend arrêté' || echo '   ⚠️  Backend déjà arrêté'
+# Arrêter tous les processus selon .cursorrules
+echo '   Arrêt Dashboard (port 9000)...'
+lsof -ti:9000 | xargs kill -9 2>/dev/null && echo '   ✅ Dashboard arrêté' || echo '   ⚠️  Dashboard déjà arrêté'
 
-# Arrêter Frontend Classique (port 8000) 
-echo '   Arrêt Frontend Classique (port 8000)...'
-lsof -ti:8000 | xargs kill -9 2>/dev/null && echo '   ✅ Frontend Classique arrêté' || echo '   ⚠️  Frontend Classique déjà arrêté'
+echo '   Arrêt Frontend Principal (port 8000)...'
+lsof -ti:8000 | xargs kill -9 2>/dev/null && echo '   ✅ Frontend Principal arrêté' || echo '   ⚠️  Frontend Principal déjà arrêté'
 
-# Arrêter Frontend Temporal (port 5173)
-echo '   Arrêt Frontend Temporal (port 5173)...'
-lsof -ti:5173 | xargs kill -9 2>/dev/null && echo '   ✅ Frontend Temporal arrêté' || echo '   ⚠️  Frontend Temporal déjà arrêté'
+echo '   Arrêt Backend API (port 8080)...'
+lsof -ti:8080 | xargs kill -9 2>/dev/null && echo '   ✅ Backend API arrêté' || echo '   ⚠️  Backend API déjà arrêté'
 
-# Arrêter Quantum Visualizer (port 8001)
+echo '   Arrêt Interface Temporelle (port 5174)...'
+lsof -ti:5174 | xargs kill -9 2>/dev/null && echo '   ✅ Interface Temporelle arrêtée' || echo '   ⚠️  Interface Temporelle déjà arrêtée'
+
 echo '   Arrêt Quantum Visualizer (port 8001)...'
 lsof -ti:8001 | xargs kill -9 2>/dev/null && echo '   ✅ Quantum Visualizer arrêté' || echo '   ⚠️  Quantum Visualizer déjà arrêté'
+
+echo '   Arrêt Object Viewer (port 5175)...'
+lsof -ti:5175 | xargs kill -9 2>/dev/null && echo '   ✅ Object Viewer arrêté' || echo '   ⚠️  Object Viewer déjà arrêté'
+
+echo '   Arrêt Test Runner (port 8888)...'
+lsof -ti:8888 | xargs kill -9 2>/dev/null && echo '   ✅ Test Runner arrêté' || echo '   ⚠️  Test Runner déjà arrêté'
 
 # Arrêter tous les serveurs HTTP Python
 echo '   Arrêt serveurs Python...'
@@ -39,38 +45,29 @@ echo ''
 echo '⏳ Attente de la fermeture complète...'
 sleep 5
 
-# Vérifier que tous les ports sont libres
+# Vérifier que tous les ports sont libres SELON .cursorrules
 echo ''
-echo '🔍 VÉRIFICATION DES PORTS :'
+echo '🔍 VÉRIFICATION DES PORTS SELON .cursorrules :'
 ports_used=0
 
-if lsof -i :8080 >/dev/null 2>&1; then
-    echo '   ❌ Port 8080 encore utilisé'
-    ports_used=1
-else
-    echo '   ✅ Port 8080 libre'
-fi
+check_port() {
+    local port=$1
+    local name=$2
+    if lsof -i :$port >/dev/null 2>&1; then
+        echo "   ❌ Port $port ($name) encore utilisé"
+        ports_used=1
+    else
+        echo "   ✅ Port $port ($name) libre"
+    fi
+}
 
-if lsof -i :8000 >/dev/null 2>&1; then
-    echo '   ❌ Port 8000 encore utilisé'
-    ports_used=1
-else
-    echo '   ✅ Port 8000 libre'
-fi
-
-if lsof -i :5173 >/dev/null 2>&1; then
-    echo '   ❌ Port 5173 encore utilisé'  
-    ports_used=1
-else
-    echo '   ✅ Port 5173 libre'
-fi
-
-if lsof -i :8001 >/dev/null 2>&1; then
-    echo '   ❌ Port 8001 encore utilisé'
-    ports_used=1  
-else
-    echo '   ✅ Port 8001 libre'
-fi
+check_port 9000 "Dashboard"
+check_port 8000 "Frontend Principal"  
+check_port 8080 "Backend API"
+check_port 5174 "Interface Temporelle"
+check_port 8001 "Quantum Visualizer"
+check_port 5175 "Object Viewer"
+check_port 8888 "Test Runner"
 
 echo ''
 if [ $ports_used -eq 0 ]; then

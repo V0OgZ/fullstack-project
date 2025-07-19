@@ -45,13 +45,11 @@ total=0
 active=0
 
 # Test tous les services
-if test_service "Dashboard" "9000" "http://localhost:9000" "🎮"; then ((active++)); fi; ((total++))
-if test_service "JSON Visualizer" "5170" "http://localhost:5170" "📊"; then ((active++)); fi; ((total++))
-if test_service "HOTS Visualizer" "5171" "http://localhost:5171" "🔮"; then ((active++)); fi; ((total++))
-if test_service "Temporal UI" "5174" "http://localhost:5174" "⚔️"; then ((active++)); fi; ((total++))
-if test_service "Legendary UI" "5190" "http://localhost:5190" "🏛️"; then ((active++)); fi; ((total++))
+if test_service "Dashboard" "9000" "http://localhost:9000" "🎯"; then ((active++)); fi; ((total++))
 if test_service "Frontend" "8000" "http://localhost:8000" "🎮"; then ((active++)); fi; ((total++))
-if test_service "Multi-Visualizer" "5175" "http://localhost:5175" "🔮"; then ((active++)); fi; ((total++))
+if test_service "Temporal UI" "5174" "http://localhost:5174" "⚔️"; then ((active++)); fi; ((total++))
+if test_service "Quantum Visualizer" "8001" "http://localhost:8001" "🌌"; then ((active++)); fi; ((total++))
+if test_service "Object Viewer" "5175" "http://localhost:5175" "🔮"; then ((active++)); fi; ((total++))
 
 echo ""
 echo "📊 RAPPORT FINAL LÉGENDAIRE"

@@ -1,0 +1,563 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------< com.heroesoftimepoc:temporal-engine >-----------------
+[INFO] Building Heroes of Time POC - Temporal Engine 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot-maven-plugin:3.2.0:run (default-cli) > test-compile @ temporal-engine >>>
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ temporal-engine ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 18 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.11.0:compile (default-compile) @ temporal-engine ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ temporal-engine ---
+[INFO] Copying 3 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.11.0:testCompile (default-testCompile) @ temporal-engine ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 12 source files with javac [debug release 17] to target/test-classes
+[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java: Some input files use unchecked or unsafe operations.
+[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] <<< spring-boot-maven-plugin:3.2.0:run (default-cli) < test-compile @ temporal-engine <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot-maven-plugin:3.2.0:run (default-cli) @ temporal-engine ---
+[INFO] Attaching agents: []
+ ██╗  ██╗███████╗██████╗  ██████╗ ███████╗███████╗    ██████╗ ███████╗    ████████╗██╗███╗   ███╗███████╗
+ ██║  ██║██╔════╝██╔══██╗██╔═══██╗██╔════╝██╔════╝   ██╔═══██╗██╔════╝    ╚══██╔══╝██║████╗ ████║██╔════╝
+ ███████║█████╗  ██████╔╝██║   ██║█████╗  ███████╗   ██║   ██║█████╗         ██║   ██║██╔████╔██║█████╗  
+ ██╔══██║██╔══╝  ██╔══██╗██║   ██║██╔══╝  ╚════██║   ██║   ██║██╔══╝         ██║   ██║██║╚██╔╝██║██╔══╝  
+ ██║  ██║███████╗██║  ██║╚██████╔╝███████╗███████║   ╚██████╔╝██║            ██║   ██║██║ ╚═╝ ██║███████╗
+ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚══════╝    ╚═════╝ ╚═╝            ╚═╝   ╚═╝╚═╝     ╚═╝╚══════╝
+                                                                                                           
+ ⚔️  TEMPORAL ENGINE BACKEND  ⚔️                    🕰️  Quantum Mechanics & Causal Collapse  🕰️
+ ══════════════════════════════════════════════════════════════════════════════════════════════════════════
+ 
+ 🌟 Maîtrisez le temps, dominez l'espace, conquérez l'éternité
+ 
+ ⚡ Fonctionnalités Actives:
+    • Moteur Temporel Quantique    ✅
+    • États ψ (Psi) Superposés     ✅  
+    • Collapse Causal Automatique  ✅
+    • Artefacts Légendaires        ✅
+    • API REST Complète            ✅
+    
+ 🎯 Port: 8080 | 🔧 Profile: default | 📊 Version: 1.0.0 
+2025-07-19T22:24:35.707+02:00  INFO 83548 --- [  restartedMain] c.h.t.TemporalEngineApplication          : Starting TemporalEngineApplication using Java 17.0.15 with PID 83548 (/Users/admin/HOT/Heroes-of-Time/backend/target/classes started by admin in /Users/admin/HOT/Heroes-of-Time/backend)
+2025-07-19T22:24:35.709+02:00  INFO 83548 --- [  restartedMain] c.h.t.TemporalEngineApplication          : No active profile set, falling back to 1 default profile: "default"
+2025-07-19T22:24:35.729+02:00  INFO 83548 --- [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-07-19T22:24:35.729+02:00  INFO 83548 --- [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-07-19T22:24:35.953+02:00  INFO 83548 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-19T22:24:35.979+02:00  INFO 83548 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 22 ms. Found 5 JPA repository interfaces.
+2025-07-19T22:24:36.307+02:00  INFO 83548 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-07-19T22:24:36.312+02:00  INFO 83548 --- [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-07-19T22:24:36.313+02:00  INFO 83548 --- [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-07-19T22:24:36.331+02:00  INFO 83548 --- [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-07-19T22:24:36.332+02:00  INFO 83548 --- [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 601 ms
+2025-07-19T22:24:36.338+02:00  INFO 83548 --- [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Starting...
+2025-07-19T22:24:36.428+02:00  INFO 83548 --- [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HeroesOfTimePool - Added connection conn0: url=jdbc:h2:mem:heroesdb user=SA
+2025-07-19T22:24:36.445+02:00  INFO 83548 --- [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Start completed.
+2025-07-19T22:24:36.452+02:00  INFO 83548 --- [  restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:heroesdb'
+2025-07-19T22:24:36.524+02:00  INFO 83548 --- [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-19T22:24:36.553+02:00  INFO 83548 --- [  restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2025-07-19T22:24:36.569+02:00  INFO 83548 --- [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-07-19T22:24:36.676+02:00  INFO 83548 --- [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-19T22:24:36.698+02:00  WARN 83548 --- [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-19T22:24:37.151+02:00  INFO 83548 --- [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: drop table if exists game_players cascade 
+2025-07-19T22:24:37.157+02:00  INFO 83548 --- [  restartedMain] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@282f2966] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+Hibernate: drop table if exists game_tiles cascade 
+Hibernate: drop table if exists games cascade 
+Hibernate: drop table if exists hero_inventory cascade 
+Hibernate: drop table if exists heroes cascade 
+Hibernate: drop table if exists psi_states cascade 
+Hibernate: drop table if exists temporal_artifacts cascade 
+Hibernate: drop table if exists tile_occupants cascade 
+Hibernate: create table game_players (game_id bigint not null, player_id varchar(255))
+2025-07-19T22:24:37.161+02:00  INFO 83548 --- [  restartedMain] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@5846966f] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+Hibernate: create table game_tiles (defense_bonus integer, has_psi_states boolean, is_locked boolean, is_temporal_zone boolean, lock_duration integer, movement_cost integer, temporal_energy_bonus integer, x integer not null, y integer not null, game_id bigint, id bigint generated by default as identity, building_owner varchar(255), building_type varchar(255), temporal_zone_type varchar(255), terrain varchar(255), primary key (id))
+Hibernate: create table games (current_turn integer, map_height integer, map_width integer, max_players integer, created_at timestamp(6), ended_at timestamp(6), id bigint generated by default as identity, started_at timestamp(6), current_player varchar(255), current_timeline varchar(255), game_name varchar(255) not null, status varchar(255) check (status in ('WAITING','ACTIVE','PAUSED','FINISHED','CANCELLED')), winner varchar(255), primary key (id))
+Hibernate: create table hero_inventory (hero_id bigint not null, item varchar(255))
+Hibernate: create table heroes (current_day integer, days_traveled integer, has_observation_ability boolean, health integer, max_health integer, max_movement_points integer, max_temporal_energy integer, movement_points integer, movement_points_per_day integer, observation_range integer, position_x integer, position_y integer, temporal_energy integer, vision_radius integer, game_id bigint, id bigint generated by default as identity, name varchar(255) not null, player_id varchar(255), status varchar(255) check (status in ('ACTIVE','TEMPORAL_SHIFT','QUANTUM_SUPERPOSITION','COLLAPSED','DEAD')), timeline_branch varchar(255), primary key (id))
+Hibernate: create table psi_states (amplitude_imaginary float(53), amplitude_real float(53), delta_t integer, probability float(53), target_x integer, target_y integer, use_complex_amplitude boolean, created_at timestamp(6), game_id bigint, id bigint generated by default as identity, action_type varchar(255), branch_id varchar(255), collapse_trigger varchar(255), expression TEXT, owner_hero varchar(255), psi_id varchar(255) not null unique, status varchar(255) check (status in ('ACTIVE','COLLAPSED','TRIGGERED','EXPIRED')), primary key (id))
+Hibernate: create table temporal_artifacts (effect_duration integer, effect_power integer, effect_radius integer, position_x integer, position_y integer, remaining_duration integer, temporal_energy_cost integer, activated_at timestamp(6), created_at timestamp(6), game_id bigint, id bigint generated by default as identity, artifact_id varchar(255) not null unique, description TEXT, name varchar(255) not null, owner_id varchar(255), status varchar(255) check (status in ('INACTIVE','ACTIVE','EXHAUSTED','DESTROYED','CHARGING')), type varchar(255) not null check (type in ('VEIL','ANCHOR_TOWER','WIGNER_EYE','TEMPORAL_SWORD','CHRONOS_SHIELD','QUANTUM_MIRROR','TEMPORAL_COMPASS','CAUSAL_DISRUPTOR')), primary key (id))
+Hibernate: create table tile_occupants (tile_id bigint not null, occupant varchar(255))
+Hibernate: alter table if exists game_players add constraint FKrbr2flqdav5ovyjas7q92u64r foreign key (game_id) references games
+Hibernate: alter table if exists game_tiles add constraint FK9jnp7yfteauo45smvmxa8710m foreign key (game_id) references games
+Hibernate: alter table if exists hero_inventory add constraint FKox21x0dd4fg7w81h3a8o6chu foreign key (hero_id) references heroes
+Hibernate: alter table if exists heroes add constraint FKb88jgdc3dfmmhbnrpl6u5sjdn foreign key (game_id) references games
+Hibernate: alter table if exists psi_states add constraint FK9kbp67wo94i0jk9w4v3ja4meq foreign key (game_id) references games
+Hibernate: alter table if exists temporal_artifacts add constraint FK4gwvr3vnipo301cwl6hnvtyn1 foreign key (game_id) references games
+Hibernate: alter table if exists tile_occupants add constraint FKia56skupqk3qxypotqpovr3gb foreign key (tile_id) references game_tiles
+2025-07-19T22:24:37.180+02:00  INFO 83548 --- [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-19T22:24:37.352+02:00  INFO 83548 --- [  restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+✅ Héros GROFI chargé: Jean-Grofignon (LEGENDARY)
+✅ Héros GROFI chargé: The Dude (compagnon)
+✅ Héros GROFI chargé: Vince Vega (compagnon)
+✅ Héros GROFI chargé: Walter (compagnon)
+🦸 4 héros GROFI chargés avec succès
+2025-07-19T22:24:37.745+02:00  WARN 83548 --- [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-19T22:24:37.807+02:00 DEBUG 83548 --- [  restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 93 mappings in 'requestMappingHandlerMapping'
+2025-07-19T22:24:37.850+02:00 DEBUG 83548 --- [  restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2025-07-19T22:24:37.861+02:00 DEBUG 83548 --- [  restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-07-19T22:24:37.875+02:00 DEBUG 83548 --- [  restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-07-19T22:24:37.924+02:00  INFO 83548 --- [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-07-19T22:24:37.940+02:00  INFO 83548 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2025-07-19T22:24:37.945+02:00  INFO 83548 --- [  restartedMain] c.h.t.TemporalEngineApplication          : Started TemporalEngineApplication in 2.398 seconds (process running for 2.581)
+2025-07-19T22:24:54.821+02:00  INFO 83548 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-07-19T22:24:54.822+02:00  INFO 83548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-07-19T22:24:54.822+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2025-07-19T22:24:54.822+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2025-07-19T22:24:54.822+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2025-07-19T22:24:54.822+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@330b1cf8
+2025-07-19T22:24:54.822+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@2774c1b7
+2025-07-19T22:24:54.823+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2025-07-19T22:24:54.823+02:00  INFO 83548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-07-19T22:24:54.826+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:24:54.831+02:00 DEBUG 83548 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:24:54.889+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:24:54.889+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:24:54.897+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:25:00.193+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/api/game/status", parameters={}
+2025-07-19T22:25:00.193+02:00 DEBUG 83548 --- [nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.GameController#getStatus()
+Hibernate: select count(*) from games g1_0
+2025-07-19T22:25:00.199+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:25:00.199+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{activeGames=0, engine=Heroes of Time Temporal Engine, version=POC-0.1, status=running, timestamp=17 (truncated)...]
+2025-07-19T22:25:00.200+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:25:00.305+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:25:00.305+02:00 DEBUG 83548 --- [nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:25:00.307+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:25:00.307+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:25:00.307+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:25:09.965+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:25:09.966+02:00 DEBUG 83548 --- [nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:25:09.969+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:25:09.969+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:25:09.970+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:25:24.796+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:25:24.796+02:00 DEBUG 83548 --- [nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:25:24.800+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:25:24.800+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:25:24.801+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:25:30.307+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:25:30.308+02:00 DEBUG 83548 --- [nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:25:30.311+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:25:30.311+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:25:30.313+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:25:30.971+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:25:30.972+02:00 DEBUG 83548 --- [nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:25:30.974+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:25:30.975+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:25:30.975+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:25:54.793+02:00 DEBUG 83548 --- [io-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:25:54.794+02:00 DEBUG 83548 --- [io-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:25:54.795+02:00 DEBUG 83548 --- [io-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:25:54.795+02:00 DEBUG 83548 --- [io-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:25:54.796+02:00 DEBUG 83548 --- [io-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:26:00.307+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:26:00.307+02:00 DEBUG 83548 --- [nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:26:00.309+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:26:00.309+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:26:00.309+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:26:03.436+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:26:03.436+02:00 DEBUG 83548 --- [nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:26:03.442+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:26:03.443+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:26:03.443+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:26:05.551+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/game/status", parameters={}
+2025-07-19T22:26:05.551+02:00 DEBUG 83548 --- [nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.GameController#getStatus()
+Hibernate: select count(*) from games g1_0
+2025-07-19T22:26:05.556+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:26:05.556+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{activeGames=0, engine=Heroes of Time Temporal Engine, version=POC-0.1, status=running, timestamp=17 (truncated)...]
+2025-07-19T22:26:05.558+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:26:08.952+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/api/game/status", parameters={}
+2025-07-19T22:26:08.953+02:00 DEBUG 83548 --- [nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.GameController#getStatus()
+Hibernate: select count(*) from games g1_0
+2025-07-19T22:26:08.954+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:26:08.955+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{activeGames=0, engine=Heroes of Time Temporal Engine, version=POC-0.1, status=running, timestamp=17 (truncated)...]
+2025-07-19T22:26:08.958+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:26:10.094+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/game/status", parameters={}
+2025-07-19T22:26:10.095+02:00 DEBUG 83548 --- [nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.GameController#getStatus()
+Hibernate: select count(*) from games g1_0
+2025-07-19T22:26:10.096+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:26:10.096+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{activeGames=0, engine=Heroes of Time Temporal Engine, version=POC-0.1, status=running, timestamp=17 (truncated)...]
+2025-07-19T22:26:10.096+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:26:10.969+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:26:10.969+02:00 DEBUG 83548 --- [nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:26:10.971+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:26:10.971+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:26:10.971+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:26:16.667+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/game/status", parameters={}
+2025-07-19T22:26:16.667+02:00 DEBUG 83548 --- [nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.GameController#getStatus()
+Hibernate: select count(*) from games g1_0
+2025-07-19T22:26:16.669+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:26:16.669+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{activeGames=0, engine=Heroes of Time Temporal Engine, version=POC-0.1, status=running, timestamp=17 (truncated)...]
+2025-07-19T22:26:16.670+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:26:24.796+02:00 DEBUG 83548 --- [io-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:26:24.797+02:00 DEBUG 83548 --- [io-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:26:24.802+02:00 DEBUG 83548 --- [io-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:26:24.803+02:00 DEBUG 83548 --- [io-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:26:24.804+02:00 DEBUG 83548 --- [io-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:26:30.310+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:26:30.311+02:00 DEBUG 83548 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:26:30.314+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:26:30.315+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:26:30.316+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:26:54.796+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:26:54.796+02:00 DEBUG 83548 --- [nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:26:54.799+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:26:54.799+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:26:54.800+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:27:00.310+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:27:00.310+02:00 DEBUG 83548 --- [nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:27:00.312+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:27:00.313+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:27:00.313+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:27:11.968+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:27:11.969+02:00 DEBUG 83548 --- [nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:27:11.970+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:27:11.970+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:27:11.970+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:27:24.797+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:27:24.797+02:00 DEBUG 83548 --- [nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:27:24.800+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:27:24.800+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:27:24.801+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:27:30.311+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:27:30.312+02:00 DEBUG 83548 --- [nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:27:30.315+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:27:30.315+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:27:30.316+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:27:54.796+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:27:54.796+02:00 DEBUG 83548 --- [nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:27:54.798+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:27:54.798+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:27:54.798+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:28:00.311+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:28:00.312+02:00 DEBUG 83548 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:28:00.314+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:28:00.314+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:28:00.315+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:28:12.970+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:28:12.970+02:00 DEBUG 83548 --- [nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:28:12.972+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:28:12.973+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:28:12.974+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:28:24.805+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:28:24.807+02:00 DEBUG 83548 --- [nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:28:24.813+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:28:24.814+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:28:24.815+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:28:30.311+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:28:30.312+02:00 DEBUG 83548 --- [nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:28:30.314+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:28:30.314+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:28:30.315+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:28:54.800+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:28:54.800+02:00 DEBUG 83548 --- [nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:28:54.802+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:28:54.802+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:28:54.802+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:29:00.312+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:29:00.312+02:00 DEBUG 83548 --- [nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:29:00.315+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:29:00.315+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:29:00.316+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:29:13.971+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:29:13.972+02:00 DEBUG 83548 --- [nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:29:13.973+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:29:13.973+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:29:13.973+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:29:24.801+02:00 DEBUG 83548 --- [io-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:29:24.801+02:00 DEBUG 83548 --- [io-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:29:24.803+02:00 DEBUG 83548 --- [io-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:29:24.803+02:00 DEBUG 83548 --- [io-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:29:24.803+02:00 DEBUG 83548 --- [io-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:29:30.314+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:29:30.314+02:00 DEBUG 83548 --- [nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:29:30.315+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:29:30.315+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:29:30.315+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:29:54.802+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:29:54.802+02:00 DEBUG 83548 --- [nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:29:54.803+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:29:54.804+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:29:54.804+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:30:00.314+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:30:00.314+02:00 DEBUG 83548 --- [nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:30:00.315+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:30:00.315+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:30:00.315+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:30:14.974+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:30:14.974+02:00 DEBUG 83548 --- [nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:30:14.976+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:30:14.977+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:30:14.977+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:30:24.802+02:00 DEBUG 83548 --- [io-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:30:24.802+02:00 DEBUG 83548 --- [io-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:30:24.803+02:00 DEBUG 83548 --- [io-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:30:24.803+02:00 DEBUG 83548 --- [io-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:30:24.804+02:00 DEBUG 83548 --- [io-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:30:30.315+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:30:30.315+02:00 DEBUG 83548 --- [nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:30:30.316+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:30:30.316+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:30:30.316+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:30:54.804+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:30:54.805+02:00 DEBUG 83548 --- [nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:30:54.807+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:30:54.807+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:30:54.808+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:31:00.316+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:31:00.316+02:00 DEBUG 83548 --- [nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:31:00.318+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:31:00.318+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:31:00.318+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:31:15.964+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:31:15.966+02:00 DEBUG 83548 --- [nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:31:15.970+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:31:15.970+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:31:15.971+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:31:24.787+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:31:24.787+02:00 DEBUG 83548 --- [nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:31:24.789+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:31:24.789+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:31:24.789+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:31:30.298+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:31:30.298+02:00 DEBUG 83548 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:31:30.299+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:31:30.299+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:31:30.300+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:31:54.782+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:31:54.783+02:00 DEBUG 83548 --- [nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:31:54.784+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:31:54.785+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:31:54.785+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:32:00.294+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:32:00.294+02:00 DEBUG 83548 --- [nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:32:00.295+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:32:00.295+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:32:00.296+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:32:16.958+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:32:16.960+02:00 DEBUG 83548 --- [nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:32:16.970+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:32:16.970+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:32:16.972+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:32:24.783+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:32:24.783+02:00 DEBUG 83548 --- [nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:32:24.785+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:32:24.785+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:32:24.786+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:32:30.295+02:00 DEBUG 83548 --- [io-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:32:30.296+02:00 DEBUG 83548 --- [io-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:32:30.299+02:00 DEBUG 83548 --- [io-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:32:30.300+02:00 DEBUG 83548 --- [io-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:32:30.300+02:00 DEBUG 83548 --- [io-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:32:54.783+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:32:54.783+02:00 DEBUG 83548 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:32:54.786+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:32:54.786+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:32:54.786+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:33:00.296+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:33:00.297+02:00 DEBUG 83548 --- [nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:33:00.302+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:33:00.302+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:33:00.303+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:33:17.954+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:33:17.955+02:00 DEBUG 83548 --- [nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:33:17.956+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:33:17.957+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:33:17.957+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:33:24.782+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:33:24.782+02:00 DEBUG 83548 --- [nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:33:24.783+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:33:24.783+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:33:24.783+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:33:30.297+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:33:30.297+02:00 DEBUG 83548 --- [nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:33:30.299+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:33:30.299+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:33:30.300+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:33:48.488+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/game/status", parameters={}
+2025-07-19T22:33:48.489+02:00 DEBUG 83548 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.GameController#getStatus()
+Hibernate: select count(*) from games g1_0
+2025-07-19T22:33:48.491+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:33:48.491+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{activeGames=0, engine=Heroes of Time Temporal Engine, version=POC-0.1, status=running, timestamp=17 (truncated)...]
+2025-07-19T22:33:48.492+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:33:54.786+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:33:54.787+02:00 DEBUG 83548 --- [nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:33:54.790+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:33:54.790+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:33:54.791+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:34:00.296+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:34:00.298+02:00 DEBUG 83548 --- [nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:34:00.301+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:34:00.301+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:34:00.302+02:00 DEBUG 83548 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:34:18.962+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:34:18.964+02:00 DEBUG 83548 --- [nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:34:18.977+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:34:18.978+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:34:18.981+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:34:21.982+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/api/game/status", parameters={}
+2025-07-19T22:34:21.983+02:00 DEBUG 83548 --- [nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.GameController#getStatus()
+Hibernate: select count(*) from games g1_0
+2025-07-19T22:34:21.986+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:34:21.986+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{activeGames=0, engine=Heroes of Time Temporal Engine, version=POC-0.1, status=running, timestamp=17 (truncated)...]
+2025-07-19T22:34:21.987+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:34:24.789+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:34:24.789+02:00 DEBUG 83548 --- [nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:34:24.792+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:34:24.792+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:34:24.793+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:34:28.645+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/api/game/status", parameters={}
+2025-07-19T22:34:28.645+02:00 DEBUG 83548 --- [nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.GameController#getStatus()
+Hibernate: select count(*) from games g1_0
+2025-07-19T22:34:28.649+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:34:28.649+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{activeGames=0, engine=Heroes of Time Temporal Engine, version=POC-0.1, status=running, timestamp=17 (truncated)...]
+2025-07-19T22:34:28.650+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:34:30.298+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:34:30.300+02:00 DEBUG 83548 --- [nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:34:30.304+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:34:30.305+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:34:30.306+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:34:54.787+02:00 DEBUG 83548 --- [io-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:34:54.788+02:00 DEBUG 83548 --- [io-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:34:54.792+02:00 DEBUG 83548 --- [io-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:34:54.792+02:00 DEBUG 83548 --- [io-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:34:54.793+02:00 DEBUG 83548 --- [io-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:34:58.961+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/game/status", parameters={}
+2025-07-19T22:34:58.962+02:00 DEBUG 83548 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.GameController#getStatus()
+Hibernate: select count(*) from games g1_0
+2025-07-19T22:34:58.964+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:34:58.964+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{activeGames=0, engine=Heroes of Time Temporal Engine, version=POC-0.1, status=running, timestamp=17 (truncated)...]
+2025-07-19T22:34:58.965+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:35:00.298+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:35:00.299+02:00 DEBUG 83548 --- [nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:35:00.302+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:35:00.302+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:35:00.303+02:00 DEBUG 83548 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:35:19.957+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:35:19.957+02:00 DEBUG 83548 --- [nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:35:19.958+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:35:19.958+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:35:19.959+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:35:24.789+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:35:24.790+02:00 DEBUG 83548 --- [nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:35:24.793+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:35:24.794+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:35:24.794+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:35:28.959+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/api/game/status", parameters={}
+2025-07-19T22:35:28.959+02:00 DEBUG 83548 --- [nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.GameController#getStatus()
+Hibernate: select count(*) from games g1_0
+2025-07-19T22:35:28.961+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:35:28.961+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{activeGames=0, engine=Heroes of Time Temporal Engine, version=POC-0.1, status=running, timestamp=17 (truncated)...]
+2025-07-19T22:35:28.961+02:00 DEBUG 83548 --- [nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:35:30.300+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:35:30.301+02:00 DEBUG 83548 --- [nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:35:30.305+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:35:30.305+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:35:30.306+02:00 DEBUG 83548 --- [nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:35:54.788+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:35:54.789+02:00 DEBUG 83548 --- [nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:35:54.791+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:35:54.791+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:35:54.791+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:35:58.958+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/game/status", parameters={}
+2025-07-19T22:35:58.958+02:00 DEBUG 83548 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.GameController#getStatus()
+Hibernate: select count(*) from games g1_0
+2025-07-19T22:35:58.959+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:35:58.959+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{activeGames=0, engine=Heroes of Time Temporal Engine, version=POC-0.1, status=running, timestamp=17 (truncated)...]
+2025-07-19T22:35:58.960+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:36:00.299+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:36:00.299+02:00 DEBUG 83548 --- [nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:36:00.301+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:36:00.301+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:36:00.302+02:00 DEBUG 83548 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:36:20.960+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:36:20.961+02:00 DEBUG 83548 --- [nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:36:20.964+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:36:20.964+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:36:20.964+02:00 DEBUG 83548 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:36:24.787+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:36:24.787+02:00 DEBUG 83548 --- [nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:36:24.788+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:36:24.788+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:36:24.789+02:00 DEBUG 83548 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:36:28.961+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/game/status", parameters={}
+2025-07-19T22:36:28.961+02:00 DEBUG 83548 --- [nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.GameController#getStatus()
+Hibernate: select count(*) from games g1_0
+2025-07-19T22:36:28.962+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:36:28.962+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{activeGames=0, engine=Heroes of Time Temporal Engine, version=POC-0.1, status=running, timestamp=17 (truncated)...]
+2025-07-19T22:36:28.963+02:00 DEBUG 83548 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T22:36:30.300+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T22:36:30.300+02:00 DEBUG 83548 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T22:36:30.301+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T22:36:30.301+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T22:36:30.301+02:00 DEBUG 83548 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
