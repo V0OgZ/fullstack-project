@@ -22,20 +22,17 @@ echo "✅ Dashboard démarré: http://localhost:9000/dashboard.html"
 
 # Démarrer le Frontend Principal (port 8000)
 echo "🎮 Démarrage Frontend Principal (port 8000)..."
-cd frontend && python3 -m http.server 8000 > /dev/null 2>&1 &
-cd ..
+(cd frontend && python3 -m http.server 8000 > /dev/null 2>&1) &
 echo "✅ Frontend Principal démarré: http://localhost:8000"
 
 # Démarrer le Backend Spring Boot (port 8080)
 echo "🔧 Démarrage Backend API (port 8080)..."
-cd backend && mvn spring-boot:run > /dev/null 2>&1 &
-cd ..
+(cd backend && mvn spring-boot:run > /dev/null 2>&1) &
 echo "✅ Backend API démarré: http://localhost:8080/api"
 
 # Démarrer l'Interface Temporelle (port 5174)
 echo "⚡ Démarrage Interface Temporelle (port 5174)..."
-cd frontend-temporal && python3 -m http.server 5174 > /dev/null 2>&1 &
-cd ..
+(cd frontend-temporal && python3 -m http.server 5174 > /dev/null 2>&1) &
 echo "✅ Interface Temporelle démarrée: http://localhost:5174"
 
 # Démarrer le Quantum Visualizer (port 8001)
