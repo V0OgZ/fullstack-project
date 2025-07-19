@@ -1,12 +1,13 @@
 {
   "scenarios_index": {
-    "version": "1.0.0",
-    "last_updated": "2025-07-18",
-    "total_scenarios": 7,
+    "version": "2.0.0",
+    "last_updated": "2025-07-19",
+    "total_scenarios": 10,
     "categories": {
       "PVP": 3,
       "PVE": 3,
-      "SPECIAL": 1
+      "SPECIAL": 1,
+      "GROFI": 3
     }
   },
   
@@ -48,48 +49,18 @@
       "file": "FRACTURE_BINAIRE.json",
       "status": "complete",
       "difficulty": "MASTER",
-      "duration": "25-35 minutes",
+      "duration": "30-45 minutes",
       "players": 2,
-      "max_turns": 10,
-      "featured_artifacts": ["infinity_codex"],
+      "max_turns": 15,
+      "featured_artifacts": ["quantum_mirror", "temporal_anchor"],
       "featured_creatures": ["temporal_elemental", "void_fragments"],
-      "description": "Chaque joueur contrôle deux timelines parallèles",
-      "tags": ["timelines_multiples", "asynchrone", "complexe"]
-    },
-    {
-      "id": "danse_illusoire",
-      "name": "Danse Illusoire",
-      "type": "DUEL_FURTIF",
-      "file": "DANSE_ILLUSOIRE.json",
-      "status": "complete",
-      "difficulty": "EXPERT",
-      "duration": "15-20 minutes",
-      "players": 2,
-      "max_turns": 6,
-      "featured_artifacts": ["dark_ink"],
-      "featured_creatures": ["phantom_warriors", "shadow_minions"],
-      "description": "Duel asymétrique entre joueur invisible et visible",
-      "tags": ["furtif", "asymétrique", "visibilité", "mind_games"]
-    },
-    {
-      "id": "garde_du_nexus",
-      "name": "La Garde du Nexus",
-      "type": "PVE_DEFENSE",
-      "file": "GARDE_DU_NEXUS.json",
-      "status": "complete",
-      "difficulty": "HARD",
-      "duration": "15-20 minutes",
-      "players": 1,
-      "max_turns": 6,
-      "featured_artifacts": ["reality_anchor"],
-      "featured_creatures": ["phantom_warriors", "phantom_elite", "phantom_champion"],
-      "description": "Défendre le Nexus Temporel contre des vagues d'ennemis",
-      "tags": ["défense", "vagues", "survival", "PVE"]
+      "description": "Combat asymétrique avec mécaniques de timeline alternées",
+      "tags": ["asymétrique", "timeline", "stratégique", "master"]
     },
     {
       "id": "vol_de_lame",
       "name": "Vol de la Lame d'Avant-Monde",
-      "type": "INFILTRATION",
+      "type": "PVE_STEALTH",
       "file": "VOL_DE_LAME.json",
       "status": "complete",
       "difficulty": "EXPERT",
@@ -98,106 +69,207 @@
       "max_turns": 7,
       "featured_artifacts": ["avantworld_blade"],
       "featured_creatures": ["dragon_rouge", "phantom_guards"],
-      "description": "Mission d'infiltration pour voler un artefact légendaire",
-      "tags": ["infiltration", "stealth", "dragon", "theft"]
+      "description": "Infiltration furtive pour voler un artefact légendaire gardé par un dragon",
+      "tags": ["infiltration", "stealth", "dragon", "theft", "time_pressure"]
+    },
+    {
+      "id": "garde_du_nexus",
+      "name": "La Garde du Nexus",
+      "type": "PVE_DEFENSE",
+      "file": "GARDE_DU_NEXUS.json",
+      "status": "complete",
+      "difficulty": "HARD",
+      "duration": "20-30 minutes",
+      "players": 1,
+      "max_turns": 12,
+      "featured_artifacts": ["nexus_core", "guardian_shield"],
+      "featured_creatures": ["phantom_warriors", "phantom_elite", "phantom_champion"],
+      "description": "Défendre un nexus temporel contre des vagues d'ennemis phantomiques",
+      "tags": ["defense", "waves", "nexus", "endurance", "tactical"]
     },
     {
       "id": "souffle_du_dragon",
-      "name": "Le Souffle du Dragon",
+      "name": "Le Souffle du Dragon Rouge",
       "type": "PVE_BOSS",
       "file": "SOUFFLE_DU_DRAGON.json",
       "status": "complete",
-      "difficulty": "ULTIMATE",
-      "duration": "8-12 minutes",
+      "difficulty": "NIGHTMARE",
+      "duration": "45-60 minutes",
+      "players": 1,
+      "max_turns": 20,
+      "featured_artifacts": ["flame_shield", "dragon_bane", "collapse_orb"],
+      "featured_creatures": ["dragon_rouge_boss"],
+      "description": "Combat épique contre un Dragon Rouge légendaire avec mécaniques de phases",
+      "tags": ["boss", "dragon", "phases", "nightmare", "épique"]
+    },
+    {
+      "id": "danse_illusoire",
+      "name": "La Danse Illusoire",
+      "type": "SPECIAL_PUZZLE",
+      "file": "DANSE_ILLUSOIRE.json",
+      "status": "complete",
+      "difficulty": "GENIUS",
+      "duration": "40-60 minutes",
+      "players": 1,
+      "max_turns": 18,
+      "featured_artifacts": ["dark_ink", "reality_brush", "illusion_veil"],
+      "featured_creatures": ["shadow_minions", "phantom_warriors"],
+      "description": "Scénario puzzle complexe avec mécaniques d'illusion et de réalité altérée",
+      "tags": ["puzzle", "illusion", "genius", "reality", "creative"]
+    },
+    {
+      "id": "grofi_legends_duel",
+      "name": "🦸 GROFI Legends: Le Duel des Immunités",
+      "type": "GROFI_EPIC",
+      "file": "GROFI_LEGENDS_DUEL.json",
+      "status": "complete",
+      "difficulty": "LEGENDARY",
+      "duration": "25-35 minutes",
+      "players": 2,
+      "max_turns": 15,
+      "featured_artifacts": ["grofi_codex", "immunity_crown"],
+      "featured_creatures": ["quantum_guardians"],
+      "description": "Duel épique entre Jean-Grofignon et TheDude utilisant les nouvelles immunités GROFI et la grammaire quantique étendue",
+      "tags": ["grofi", "immunités", "grammaire_étendue", "collapse_causale", "ultimate_powers"]
+    },
+    {
+      "id": "grofi_causal_demo", 
+      "name": "🌊 GROFI Causal Integration Demo",
+      "type": "GROFI_DEMO",
+      "file": "GROFI_CAUSAL_DEMO.json",
+      "status": "complete",
+      "difficulty": "TUTORIAL",
+      "duration": "10-15 minutes",
+      "players": 1,
+      "max_turns": 10,
+      "featured_artifacts": [],
+      "featured_creatures": [],
+      "description": "Démonstration interactive des fonctionnalités GROFI avec intégration causale",
+      "tags": ["demo", "grofi", "causal", "tutorial", "interactive"]
+    },
+    {
+      "id": "grofi_quick_test",
+      "name": "🚀 GROFI Quick Test",
+      "type": "GROFI_QUICK",
+      "file": "GROFI_QUICK_TEST.json", 
+      "status": "complete",
+      "difficulty": "BEGINNER",
+      "duration": "5-10 minutes",
       "players": 1,
       "max_turns": 5,
-      "featured_artifacts": ["collapse_orb"],
-      "featured_creatures": ["dragon_rouge_boss"],
-      "description": "Affrontement épique contre un Dragon Rouge avec un seul coup possible",
-      "tags": ["boss", "one_shot", "perfectible", "ultimate"]
+      "featured_artifacts": [],
+      "featured_creatures": ["dragon"],
+      "description": "Test rapide des fonctionnalités GROFI pour l'UI 8001",
+      "tags": ["quick", "grofi", "test", "beginner", "demo"]
     }
   ],
-  
+
   "difficulty_levels": {
     "BEGINNER": {
-      "description": "Parfait pour découvrir les mécaniques de base",
-      "scenarios": []
+      "scenarios": ["grofi_quick_test"],
+      "description": "Idéal pour découvrir les mécaniques de base",
+      "estimated_time": "5-10 minutes"
     },
-    "INTERMEDIATE": {
-      "description": "Mécaniques temporelles standard",
-      "scenarios": []
+    "TUTORIAL": {
+      "scenarios": ["grofi_causal_demo"],
+      "description": "Apprentissage guidé des fonctionnalités avancées",
+      "estimated_time": "10-15 minutes"
     },
     "HARD": {
-      "description": "Défis tactiques avancés",
-      "scenarios": ["garde_du_nexus"]
+      "scenarios": ["garde_du_nexus"],
+      "description": "Défis tactiques et gestion de ressources",
+      "estimated_time": "20-30 minutes"
     },
     "EXPERT": {
-      "description": "Maîtrise des mécaniques quantiques requise",
-      "scenarios": ["duel_collapse", "danse_illusoire", "vol_de_lame"]
+      "scenarios": ["duel_collapse", "vol_de_lame"],
+      "description": "Maîtrise des mécaniques temporelles requise",
+      "estimated_time": "10-18 minutes"
     },
     "MASTER": {
-      "description": "Stratégies complexes et timeline multiples",
-      "scenarios": ["fracture_binaire"]
+      "scenarios": ["fracture_binaire"],
+      "description": "Stratégies avancées et timing parfait",
+      "estimated_time": "30-45 minutes"
+    },
+    "GENIUS": {
+      "scenarios": ["danse_illusoire"],
+      "description": "Puzzles complexes et créativité requise",
+      "estimated_time": "40-60 minutes"
     },
     "LEGENDARY": {
-      "description": "Scénarios épiques légendaires",
-      "scenarios": ["eclat_mondes_dissolus"]
+      "scenarios": ["eclat_mondes_dissolus", "grofi_legends_duel"],
+      "description": "Maîtrise complète du système quantique",
+      "estimated_time": "25-90 minutes"
     },
-    "ULTIMATE": {
-      "description": "Perfection absolue requise",
-      "scenarios": ["souffle_du_dragon"]
+    "NIGHTMARE": {
+      "scenarios": ["souffle_du_dragon"],
+      "description": "Défi ultime pour experts confirmés",
+      "estimated_time": "45-60 minutes"
     }
   },
-  
-  "scenario_types": {
-    "PVP_EPIC": {
-      "description": "Duels épiques de longue durée",
-      "scenarios": ["eclat_mondes_dissolus"]
-    },
-    "PVP_SHORT": {
-      "description": "Duels rapides et intenses",
-      "scenarios": ["duel_collapse"]
-    },
-    "PVP_ASYNC": {
-      "description": "Gameplay asynchrone complexe",
-      "scenarios": ["fracture_binaire"]
-    },
-    "DUEL_FURTIF": {
-      "description": "Duels avec mécaniques de furtivité",
-      "scenarios": ["danse_illusoire"]
-    },
-    "PVE_DEFENSE": {
-      "description": "Défense contre vagues d'ennemis",
-      "scenarios": ["garde_du_nexus"]
-    },
-    "INFILTRATION": {
-      "description": "Missions de stealth et vol",
-      "scenarios": ["vol_de_lame"]
-    },
-    "PVE_BOSS": {
-      "description": "Affrontements contre boss uniques",
-      "scenarios": ["souffle_du_dragon"]
-    }
+
+  "tags_index": {
+    "grofi": ["grofi_legends_duel", "grofi_causal_demo", "grofi_quick_test"],
+    "immunités": ["grofi_legends_duel"],
+    "grammaire_étendue": ["grofi_legends_duel"],
+    "collapse_causale": ["grofi_legends_duel"],
+    "ultimate_powers": ["grofi_legends_duel"],
+    "demo": ["grofi_causal_demo", "grofi_quick_test"],
+    "tutorial": ["grofi_causal_demo"],
+    "interactive": ["grofi_causal_demo"],
+    "quick": ["grofi_quick_test"],
+    "test": ["grofi_quick_test"],
+    "beginner": ["grofi_quick_test"],
+    "épique": ["eclat_mondes_dissolus", "souffle_du_dragon"],
+    "asymétrique": ["eclat_mondes_dissolus", "fracture_binaire"],
+    "quantique": ["eclat_mondes_dissolus"],
+    "25_tours": ["eclat_mondes_dissolus"],
+    "légendaire": ["eclat_mondes_dissolus"],
+    "duel": ["duel_collapse"],
+    "court": ["duel_collapse"],
+    "collapse": ["duel_collapse"],
+    "intense": ["duel_collapse"],
+    "timeline": ["fracture_binaire"],
+    "stratégique": ["fracture_binaire"],
+    "master": ["fracture_binaire"],
+    "infiltration": ["vol_de_lame"],
+    "stealth": ["vol_de_lame"],
+    "dragon": ["vol_de_lame", "souffle_du_dragon"],
+    "theft": ["vol_de_lame"],
+    "time_pressure": ["vol_de_lame"],
+    "defense": ["garde_du_nexus"],
+    "waves": ["garde_du_nexus"],
+    "nexus": ["garde_du_nexus"],
+    "endurance": ["garde_du_nexus"],
+    "tactical": ["garde_du_nexus"],
+    "boss": ["souffle_du_dragon"],
+    "phases": ["souffle_du_dragon"],
+    "nightmare": ["souffle_du_dragon"],
+    "puzzle": ["danse_illusoire"],
+    "illusion": ["danse_illusoire"],
+    "genius": ["danse_illusoire"],
+    "reality": ["danse_illusoire"],
+    "creative": ["danse_illusoire"]
   },
-  
-  "recommendations": {
-    "first_time_players": ["garde_du_nexus", "duel_collapse"],
-    "pvp_enthusiasts": ["duel_collapse", "danse_illusoire", "eclat_mondes_dissolus"],
-    "pve_lovers": ["garde_du_nexus", "vol_de_lame", "souffle_du_dragon"],
-    "quantum_masters": ["eclat_mondes_dissolus", "fracture_binaire"],
-    "quick_sessions": ["duel_collapse", "souffle_du_dragon", "danse_illusoire"],
-    "epic_campaigns": ["eclat_mondes_dissolus", "fracture_binaire"]
-  },
-  
+
   "artifact_index": {
     "avantworld_blade": ["eclat_mondes_dissolus", "vol_de_lame"],
     "wigner_eye": ["eclat_mondes_dissolus", "duel_collapse"],
     "schrodinger_grimoire": ["eclat_mondes_dissolus", "duel_collapse"],
-    "reality_anchor": ["eclat_mondes_dissolus", "garde_du_nexus"],
-    "infinity_codex": ["eclat_mondes_dissolus", "fracture_binaire"],
+    "reality_anchor": ["eclat_mondes_dissolus"],
+    "infinity_codex": ["eclat_mondes_dissolus"],
     "causality_flame": ["eclat_mondes_dissolus"],
+    "quantum_mirror": ["fracture_binaire"],
+    "temporal_anchor": ["fracture_binaire"],
+    "nexus_core": ["garde_du_nexus"],
+    "guardian_shield": ["garde_du_nexus"],
+    "flame_shield": ["souffle_du_dragon"],
+    "dragon_bane": ["souffle_du_dragon"],
+    "reality_brush": ["danse_illusoire"],
+    "illusion_veil": ["danse_illusoire"],
     "dark_ink": ["danse_illusoire"],
-    "collapse_orb": ["souffle_du_dragon"]
+    "collapse_orb": ["souffle_du_dragon"],
+    "grofi_codex": ["grofi_legends_duel"],
+    "immunity_crown": ["grofi_legends_duel"]
   },
   
   "creature_index": {
@@ -213,6 +285,30 @@
     "shadow_minions": ["danse_illusoire"],
     "phantom_guards": ["vol_de_lame"],
     "phantom_elite": ["garde_du_nexus"],
-    "phantom_champion": ["garde_du_nexus"]
+    "phantom_champion": ["garde_du_nexus"],
+    "quantum_guardians": ["grofi_legends_duel"],
+    "dragon": ["grofi_quick_test"]
+  },
+
+  "grofi_features": {
+    "extended_grammar": {
+      "symbols": ["†[...]", "Π[...]", "Ω[...]", "Λ[...]", "Σ[...]", "↯"],
+      "recursive_psi": "ψ[ψ[ψ[...]]]",
+      "scenarios": ["grofi_legends_duel"]
+    },
+    "immunity_system": {
+      "available_immunities": ["SRTI", "ROLLBACK", "OBS", "STRESS", "PARADOX", "COLLAPSE"],
+      "scenarios": ["grofi_legends_duel", "grofi_causal_demo"]
+    },
+    "ultimate_powers": {
+      "jean_grofignon": "Collapse Override",
+      "the_dude": "Zen Collapse",
+      "scenarios": ["grofi_legends_duel"]
+    },
+    "causal_integration": {
+      "stress_monitoring": ["NORMAL", "HIGH", "CRITICAL"],
+      "auto_collapse": true,
+      "scenarios": ["grofi_legends_duel", "grofi_causal_demo"]
+    }
   }
 } 
