@@ -277,6 +277,43 @@ ls . | grep benchmark
 
 ---
 
+## ⚡ **BENCHMARKS ET PERFORMANCE**
+
+### 🚀 **Suite Complète Performance**
+- **run-all-performance-tests.sh** → **🏆 MASTER SUITE** - Lance tous les benchmarks et génère rapport consolidé
+
+### 📊 **Benchmarks Spécifiques** 
+- **benchmark-performance-comparison.sh** → Compare Java hardcodé vs JSON formulas vs HOTS scripts (100 itérations)
+- **stress-test-moteur.sh** → Tests de stress : charge massive, requêtes concurrentes, limites système
+
+### 🔄 **Tests Système Hybride**
+- **test-hybrid-artifacts-system.sh** → Valide le système hybride : JSON → Java → Templates → Fallback
+
+### 🌀 **Tests Avancés**  
+- **test-chrono-collapse.sh** → Artefacts temporels avancés avec collapse et voyages dans le temps
+
+### 📈 **Résultats et Rapports**
+```bash
+# Lancer la suite complète (recommandé)
+./scripts/run-all-performance-tests.sh
+
+# Tests rapides
+./scripts/run-all-performance-tests.sh --quick
+
+# Benchmark seul
+./scripts/benchmark-performance-comparison.sh
+
+# Stress test seul  
+./scripts/stress-test-moteur.sh
+```
+
+**🎯 Output:** Dossiers `performance_results_YYYYMMDD_HHMMSS/` avec :
+- Logs détaillés de chaque test
+- Rapport consolidé en Markdown
+- Métriques JSON pour analyse
+
+---
+
 ## 📊 **STATISTIQUES SCRIPTS**
 
 ### 📈 **Métriques**
