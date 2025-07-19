@@ -79,9 +79,14 @@ python3 visualizer-server.py 5175 > /dev/null 2>&1 &
 # 6. Test Runner (Port 8888) - RÉCUPÉRÉ de 872e0d7
 echo "🧪 Démarrage Test Runner..."
 cd /Users/admin/HOT/Heroes-of-Time
-python3 -m http.server 8888 > /dev/null 2>&1 &
+python3 test-runner-server.py 8888 > /dev/null 2>&1 &
 
-sleep 3
+# 7. Backend Spring Boot (Port 8080) - AJOUTÉ !
+echo "⚙️ Démarrage Backend Spring Boot..."
+cd /Users/admin/HOT/Heroes-of-Time/backend
+mvn spring-boot:run > /dev/null 2>&1 &
+
+sleep 12
 
 # Vérification des services SELON .cursorrules
 echo ""
@@ -100,6 +105,7 @@ check_service() {
 
 check_service 9000 "Dashboard Unifié"
 check_service 8000 "Frontend Principal"
+check_service 8080 "Backend Spring Boot"
 check_service 5174 "Interface Temporelle"
 check_service 8001 "Quantum Visualizer"
 check_service 5175 "Object Viewer"
@@ -108,6 +114,7 @@ check_service 8888 "Test Runner"
 echo ""
 echo "🎯 DASHBOARD PRINCIPAL: http://localhost:9000/dashboard.html"
 echo "🎮 FRONTEND: http://localhost:8000"
+echo "⚙️ BACKEND API: http://localhost:8080/api/games"
 echo "⚔️ TEMPOREL: http://localhost:5174"
 echo "🌌 QUANTUM: http://localhost:8001"
 echo "🔮 OBJECT VIEWER: http://localhost:5175"
