@@ -1,174 +1,113 @@
-# ⚡ Heroes of Time
-### *Le premier jeu de stratégie avec mécanique quantique réelle*
+# 🕰️ Heroes of Time
+
+*Maîtrisez le temps, dominez l'espace, conquérez l'éternité*
 
 ---
 
-## 🎮 Qu'est-ce que Heroes of Time ?
+## ⚡ **La Rencontre Épique**
 
-**Heroes of Time** est un jeu de stratégie révolutionnaire qui introduit la **mécanique quantique réelle** dans le gameplay. Imaginez pouvoir créer des **états de superposition** pour vos héros, manipuler le **temps et l'espace**, et déclencher des **collapses causales** pour changer le cours de la bataille !
+**L'Œil de Wigner** scintille au sommet de la tour en ruines. Arthur s'approche prudemment - cet artefact légendaire peut forcer l'effondrement de la réalité elle-même.
 
-### ✨ **Ce qui rend Heroes of Time unique :**
+*"Sire, ne le touchez pas !"* crie Lysandrel depuis la vallée. *"Si vous l'activez maintenant, toutes nos actions futures deviendront réelles instantanément !"*
 
-- 🌀 **Mécanique Quantique Réelle** - Vos héros peuvent exister dans plusieurs états simultanément
-- ⚡ **Manipulation Temporelle** - Voyagez dans le temps, créez des boucles causales  
-- 🛡️ **Héros Légendaires** - Ragnar, Arthur, Lysandrel avec pouvoirs uniques
-- 🔬 **Grammaire Temporelle** - Langage de script pour contrôler l'espace-temps
-- 🎯 **Stratégie Profonde** - Chaque décision peut créer des branches temporelles
+Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront submergés. Il n'a qu'un choix : saisir l'Œil et **forcer l'observation**. 
+
+Soudain, toutes les possibilités quantiques s'effondrent. Le dragon qu'il avait prévu d'invoquer dans 3 tours apparaît **maintenant**. La bataille qui devait avoir lieu demain éclate **immédiatement**.
+
+La réalité tremble. Le temps se plie. L'histoire se réécrit.
+
+**Bienvenue dans Heroes of Time.**
 
 ---
 
-## 🚀 Démarrage Immédiat
+## 🎮 **Un Jeu de Stratégie Révolutionnaire**
 
+Heroes of Time combine la magie de **Heroes of Might & Magic 3** avec des mécaniques temporelles inédites. Créez des **superpositions quantiques** de vos actions, manipulez les **timelines parallèles**, et déclenchez des **effondrements causals** grâce aux artefacts temporels.
+
+### 🏆 **Fonctionnalités Épiques**
+
+**🏰 Base Heroes of Might & Magic 3 :**
+- Combat au tour par tour avec héros, armées et sorts
+- Construction de châteaux et recrutement de troupes  
+- Développement de héros et arbres de compétences
+- Système de magie et artefacts enchantés
+
+**🌀 Mécaniques Temporelles Quantiques :**
+- **États Quantiques** : Vos actions existent dans plusieurs réalités simultanément
+- **Branches Temporelles** : Explorez des futurs parallèles
+- **Effondrement Causal** : Quand deux joueurs se battent pour la même réalité
+- **Artefacts Légendaires** : Objets qui manipulent le temps lui-même
+
+### 🔮 **Artefacts de Pouvoir**
+
+**⚔️ La Lame d'Avant-Monde** - *Force l'effondrement des timelines ennemies*
+**👁️ L'Œil de Wigner** - *Révèle et matérialise toutes les possibilités*  
+**🗼 Tour de l'Ancrage** - *Fige la réalité dans une zone*
+**🌫️ Le Voile** - *Permet de voir les futurs possibles*
+**⏰ Totem de Rembobinage** - *Annule les 3 derniers tours*
+
+---
+
+## 🚀 **Démarrage Rapide**
+
+### 1. Lancer le Jeu
 ```bash
-# 🏰 Lancer le jeu complet (1 seule commande)
-./start-all-correct.sh
-
-# 🎮 Jouer maintenant !
-open http://localhost:8000
+./start-app.sh
 ```
 
-**En 30 secondes, vous êtes dans le jeu !**
+### 2. Accéder aux Interfaces
+- **🎮 Jeu Principal** : http://localhost:8000
+- **⚡ Interface Temporelle** : http://localhost:5173  
+- **🔬 Visualiseur Quantique** : http://localhost:8001
+- **🔲 Vue Mosaïque** : http://localhost:9002/mosaic-dashboard.html
 
----
-
-## 🎯 Gameplay Révolutionnaire
-
-### 🌀 États Quantiques
-Créez des **superpositions** pour vos héros :
+### 3. Tester les Scénarios
+```bash
+./run-epic-demo.sh
 ```
-ψ(Arthur) = 0.7|@castle⟩ + 0.3|@battlefield⟩
-```
-Arthur peut être à deux endroits à la fois jusqu'à l'observation !
-
-### ⚡ Scripts Temporels  
-Programmez le futur avec la grammaire temporelle :
-```
-⊙(Δt+3 @15,15 ⟶ MOV(Ragnar, @15,15))
-```
-Ragnar se téléportera dans 3 tours !
-
-### 🔥 Collapses Causales
-Quand deux héros tentent d'occuper la même position quantique, le système calcule automatiquement qui "gagne" selon les probabilités quantiques !
 
 ---
 
-## 🌐 Interfaces Multiples
+## 🌟 **Héros Légendaires**
 
-Heroes of Time offre **4 interfaces spécialisées** :
+### **⚔️ Arthur le Roi Temporel**
+*Maître d'Excalibur Quantique - l'épée qui existe dans toutes les dimensions*
 
-| Interface | URL | Usage |
-|-----------|-----|-------|
-| 🎮 **Jeu Principal** | `localhost:8000` | Interface de jeu complète |
-| ⚡ **Temporal** | `localhost:5173` | Mécaniques temporelles avancées |
-| 🔬 **Quantum Visualizer** | `localhost:8001` | Visualisation des états quantiques |
-| 🔲 **Vue Mosaïque** | `localhost:9002/mosaic-dashboard.html` | Tout voir simultanément |
+### **🔮 Lysandrel l'Archimage**  
+*Contrôle absolu du temps et maître des paradoxes temporels*
 
----
+### **🛡️ Ragnar le Berserker**
+*Sa rage transcende le temps - peut attaquer dans le passé*
 
-## 🛡️ Héros Légendaires
-
-### **Ragnar le Berserker** 🛡️
-- **Pouvoir :** Rage Temporelle - Peut attaquer dans le passé
-- **Spécialité :** Combat rapproché et manipulation causale
-
-### **Arthur le Roi** 👑  
-- **Pouvoir :** Excalibur Quantique - Épée qui existe dans toutes les dimensions
-- **Spécialité :** Leadership et états de superposition
-
-### **Lysandrel l'Archimage** 🔮
-- **Pouvoir :** Maîtrise Temporelle - Contrôle total du temps
-- **Spécialité :** Magie et voyages temporels
+### **🏹 Morgana la Tisseuse**
+*Tisse les fils du destin et manipule les probabilités*
 
 ---
 
-## �� Captures d'Écran
+## 📚 **Documentation**
 
-*Interface hexagonale avec héros quantiques, visualisations temporelles en temps réel, et effets de particules pour les collapses causales.*
-
----
-
-## 🔧 Architecture Technique
-
-Heroes of Time utilise des technologies de pointe :
-
-- **Backend :** Java Spring Boot avec moteur quantique
-- **Frontend :** React + TypeScript avec rendu hexagonal
-- **Base de Données :** H2 avec support des états quantiques  
-- **API :** REST avec endpoints temporels spécialisés
-- **Visualisation :** Canvas HTML5 + WebGL pour les effets quantiques
+- **[Guide Complet](docs/technical/FRONTENDS_DOCUMENTATION.md)** - Toutes les interfaces
+- **[Mécaniques de Jeu](GAMEPLAY.md)** - Comment jouer  
+- **[Architecture](ARCHITECTURE.md)** - Comment ça marche
+- **[Tests](TEST_STATUS_SUMMARY.md)** - État des tests
 
 ---
 
-## 📚 Documentation
+## 🎯 **Statut du Projet**
 
-- 📖 **[Guide de Jeu](docs/GAMEPLAY.md)** - Apprenez les mécaniques de base
-- 🔬 **[API Documentation](docs/API.md)** - Référence complète de l'API
-- ⚡ **[Scripts Temporels](docs/SCRIPT_REFERENCE.md)** - Maîtrisez la grammaire temporelle
-- 🌐 **[Frontends](docs/technical/FRONTENDS_DOCUMENTATION.md)** - Guide des interfaces
-- 🛠️ **[Installation](docs/INSTALLATION.md)** - Setup détaillé
+**✅ Fonctionnel (91%)**
+- Moteur temporel quantique complet
+- Interfaces multiples opérationnelles  
+- Système d'artefacts légendaires
+- Mécaniques de collapse causal
 
----
-
-## 🎯 Pourquoi Heroes of Time ?
-
-### Pour les Joueurs :
-- **Stratégie Unique** - Aucun autre jeu n'offre de vraie mécanique quantique
-- **Rejouabilité Infinie** - Chaque partie crée de nouvelles branches temporelles  
-- **Profondeur Tactique** - Maîtrisez l'espace-temps pour dominer
-
-### Pour les Développeurs :
-- **Code Open Source** - Architecture moderne et bien documentée
-- **API Complète** - Créez vos propres interfaces et extensions
-- **Moteur Extensible** - Ajoutez facilement de nouveaux héros et mécaniques
+**🔄 En Développement (9%)**
+- Optimisations performance
+- Fonctionnalités avancées
+- Nouvelles campagnes
 
 ---
 
-## 🚀 Commencer Maintenant
+**Heroes of Time** - *Où chaque décision forge l'éternité*
 
-1. **Clonez le projet**
-   ```bash
-   git clone https://github.com/votre-username/heroes-of-time.git
-   cd heroes-of-time
-   ```
-
-2. **Lancez tout d'un coup**
-   ```bash
-   ./start-all-correct.sh
-   ```
-
-3. **Jouez !**
-   - Ouvrez `http://localhost:8000`
-   - Créez votre premier héros : `HERO(MonHéros)`
-   - Explorez les mécaniques quantiques !
-
----
-
-## 🤝 Contribuer
-
-Heroes of Time est un projet open source ! Nous accueillons :
-
-- 🐛 **Bug Reports** - Aidez-nous à améliorer le jeu
-- ✨ **Nouvelles Fonctionnalités** - Proposez vos idées quantiques  
-- 🎨 **Assets** - Créez de nouveaux héros et environnements
-- 📖 **Documentation** - Améliorez les guides et tutoriels
-
----
-
-## 📞 Contact & Communauté
-
-- 🌟 **Star ce projet** si vous aimez l'idée !
-- 🐛 **Issues** pour les bugs et suggestions
-- 💬 **Discussions** pour les questions générales
-- 📧 **Email** pour les contributions importantes
-
----
-
-## ⚖️ Licence
-
-Heroes of Time est distribué sous licence MIT. Voir [LICENSE](LICENSE) pour plus de détails.
-
----
-
-**🎮 Prêt à maîtriser l'espace-temps ? Lancez Heroes of Time dès maintenant !**
-
-*"Dans Heroes of Time, vous ne jouez pas seulement avec l'espace... vous jouez avec le temps lui-même."* 
+🔗 **[Voir sur GitHub](https://github.com/V0OgZ/Heroes-of-Time)** 
