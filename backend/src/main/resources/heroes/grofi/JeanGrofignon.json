@@ -2,25 +2,58 @@
   "id": "hero_jean_grofignon",
   "name": "Jean-Grofignon",
   "title": "L'Éveillé Ontologique",
-  "description": "Il n’a pas inventé le jeu. Il l’a inhalé. Jean-Grofignon ne joue pas à Heroes of Time — il exécute le moteur du monde en tongs.",
-  "rarity": "légendaire",
-  "role": "Admin-Architecte",
-  "faction": "Anomalie",
-  "companions": ["hero_vince_vega", "hero_the_dude"],
+  "description": "Il n'a pas inventé le jeu. Il l'a inhalé. Jean-Grofignon ne joue pas à Heroes of Time — il exécute le moteur du monde en tongs.",
+  "rarity": "LEGENDARY",
+  "role": "TEMPORAL_MASTER",
+  "faction": "ANOMALIE",
+  "companions": ["hero_vince_vega", "hero_the_dude", "hero_walter_sobchak"],
   "quotes": [
     "Certains vivent dans le port-genre. Lui, il le fume.",
-    "Chaque rollback est une œuvre d’art… si t’es bien calé.",
+    "Chaque rollback est une œuvre d'art… si t'es bien calé.",
     "J'ai pas hacké le jeu. J'ai juste compris où était le bouton pause cosmique."
   ],
+  "immunityTags": ["SRTI", "ROLLBACK", "COLLAPSE"],
   "ultimate_power": {
     "name": "Collapse Override",
     "description": "Annule tout collapse de timeline en cours. Empêche toute résolution de superposition spatio-temporelle sur le champ de bataille.",
-    "quantum_script": "ψ†[FREEZE {all.timeline.superposition}] ⊙ HERO(Jean-Grofignon)"
+    "quantum_script": "ψ†[FREEZE {all.timeline.superposition}] ⊙ HERO(Jean-Grofignon)",
+    "cooldown": 3,
+    "cost": 50
   },
   "passives": [
     {
       "name": "Inertie du Canapé",
-      "description": "Ralentit toutes les opérations serveur autour de lui, empêchant les resets de boucle en zone adjacente."
+      "description": "Ralentit toutes les opérations serveur autour de lui, empêchant les resets de boucle en zone adjacente.",
+      "formula": "Σ[REDUCE:0.2] ⊙ ZONE(radius=3, center=Jean-Grofignon)"
     }
-  ]
+  ],
+  "starting_artifacts": [
+    {
+      "name": "Télécommande Cosmique",
+      "type": "TEMPORAL_CONTROL",
+      "formula": "†[ALL] ⊙ IF(stress < 0.5)",
+      "description": "Permet un rollback global si le stress causale est faible",
+      "charges": 1
+    },
+    {
+      "name": "Console de Debug Réalité",
+      "type": "SYSTEM_ACCESS",
+      "formula": "Λ[LEVEL:0] ⊙ HERO(Jean-Grofignon)",
+      "description": "Maintient l'instabilité système à zéro autour de Jean-Grofignon",
+      "charges": -1
+    }
+  ],
+  "temporal_affinities": {
+    "collapse_resistance": 0.9,
+    "rollback_immunity": true,
+    "stress_generation": -0.3,
+    "ultimate_power_efficiency": 1.5
+  },
+  "stats": {
+    "base_health": 120,
+    "base_temporal_energy": 200,
+    "movement_points": 4,
+    "vision_radius": 5,
+    "level": 10
+  }
 }
