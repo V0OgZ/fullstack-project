@@ -71,6 +71,16 @@ class SecureDashboardHandler(http.server.SimpleHTTPRequestHandler):
         if path == '/api/tests':
             self.send_api_tests()
             return
+            
+        # API Start Tests - Lancer les tests
+        if path == '/api/run-tests':
+            self.run_tests_background()
+            return
+            
+        # API Tests Status - Statut des tests en cours
+        if path == '/api/tests-status':
+            self.send_tests_status()
+            return
         
         # Fichiers autorisés uniquement
         if path not in self.ALLOWED_FILES:
@@ -664,7 +674,7 @@ class SecureDashboardHandler(http.server.SimpleHTTPRequestHandler):
         let globalStatus = {};
         
         const services = {
-            backend: { name: 'Backend', icon: '⚙️', port: 8080 },
+            backend: { name: 'Backend', icon: '⚙️', port: 8080, url: '/api/temporal/health' },
             frontend: { name: 'Frontend', icon: '🎮', port: 8000 },
             temporal: { name: 'Temporal', icon: '⚡', port: 5173 },
             visualizer: { name: 'Visualizer', icon: '🔬', port: 8001 },
@@ -808,10 +818,126 @@ class SecureDashboardHandler(http.server.SimpleHTTPRequestHandler):
         // Actualisation automatique
         setInterval(loadGlobalStatus, 10000); // Toutes les 10 secondes
         
+        // Fonctions pour les tests et la mosaïque
+        function runTests() {
+            fetch('/api/run-tests', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('✅ Tests lancés en arrière-plan !');
+                    } else {
+                        alert('❌ Erreur: ' + data.error);
+                    }
+                });
+        }
+        
+        function toggleMosaicView() {
+            const mosaicDiv = document.getElementById('mosaic-view');
+            if (!mosaicDiv) {
+                createMosaicView();
+            } else {
+                mosaicDiv.style.display = mosaicDiv.style.display === 'none' ? 'block' : 'none';
+            }
+        }
+        
+        function createMosaicView() {
+            const mosaicHTML = `
+                <div id="mosaic-view" style="
+                    position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                    background: rgba(0,0,0,0.9); z-index: 1000; display: block;
+                    padding: 20px; box-sizing: border-box;
+                ">
+                    <div style="
+                        display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
+                        gap: 10px; width: 100%; height: 100%;
+                    ">
+                        <div style="background: white; border-radius: 10px; overflow: hidden;">
+                            <div style="background: #007bff; color: white; padding: 10px; font-weight: bold;">🎮 Frontend (8000)</div>
+                            <iframe src="http://localhost:8000" style="width: 100%; height: calc(100% - 50px); border: none;"></iframe>
+                        </div>
+                        <div style="background: white; border-radius: 10px; overflow: hidden;">
+                            <div style="background: #28a745; color: white; padding: 10px; font-weight: bold;">⚡ Temporal (5173)</div>
+                            <iframe src="http://localhost:5173" style="width: 100%; height: calc(100% - 50px); border: none;"></iframe>
+                        </div>
+                        <div style="background: white; border-radius: 10px; overflow: hidden;">
+                            <div style="background: #17a2b8; color: white; padding: 10px; font-weight: bold;">🔬 Visualizer (8001)</div>
+                            <iframe src="http://localhost:8001" style="width: 100%; height: calc(100% - 50px); border: none;"></iframe>
+                        </div>
+                        <div style="background: white; border-radius: 10px; overflow: hidden;">
+                            <div style="background: #ffc107; color: black; padding: 10px; font-weight: bold;">📄 Rapports (8888)</div>
+                            <iframe src="http://localhost:8888" style="width: 100%; height: calc(100% - 50px); border: none;"></iframe>
+                        </div>
+                    </div>
+                    <button onclick="toggleMosaicView()" style="
+                        position: absolute; top: 30px; right: 30px; 
+                        background: #dc3545; color: white; border: none; 
+                        padding: 10px 20px; border-radius: 5px; cursor: pointer;
+                        font-size: 16px; font-weight: bold;
+                    ">✕ Fermer</button>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', mosaicHTML);
+        }
+
         console.log('🎯 HUD Global chargé !');
     </script>
 </body>
 </html>'''
+
+    def run_tests_background(self):
+        """Lancer les tests en arrière-plan"""
+        try:
+            import subprocess
+            import threading
+            
+            def run_test():
+                # Lancer le test rapide HOTS
+                process = subprocess.Popen([
+                    'bash', './scripts/test-rapide-hots.sh'
+                ], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+                
+                # Stocker le processus
+                self.running_test = {
+                    'pid': process.pid,
+                    'start_time': datetime.now().isoformat(),
+                    'status': 'running',
+                    'script': 'test-rapide-hots.sh'
+                }
+                
+                stdout, stderr = process.communicate()
+                
+                # Mettre à jour le statut
+                self.running_test.update({
+                    'status': 'completed' if process.returncode == 0 else 'failed',
+                    'end_time': datetime.now().isoformat(),
+                    'return_code': process.returncode,
+                    'output': stdout,
+                    'error': stderr
+                })
+            
+            # Lancer dans un thread séparé
+            thread = threading.Thread(target=run_test)
+            thread.daemon = True
+            thread.start()
+            
+            self.send_json_response({
+                'success': True,
+                'message': 'Tests lancés en arrière-plan',
+                'test_type': 'test-rapide-hots'
+            })
+            
+        except Exception as e:
+            self.send_json_response({'error': str(e)}, 500)
+    
+    def send_tests_status(self):
+        """Envoyer le statut des tests"""
+        try:
+            if hasattr(self, 'running_test'):
+                self.send_json_response(self.running_test)
+            else:
+                self.send_json_response({'status': 'idle', 'message': 'Aucun test en cours'})
+        except Exception as e:
+            self.send_json_response({'error': str(e)}, 500)
 
 def main():
     """Démarrer le serveur dashboard sécurisé avec HUD global"""
