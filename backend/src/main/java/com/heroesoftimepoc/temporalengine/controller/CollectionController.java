@@ -1,0 +1,388 @@
+package com.heroesoftimepoc.temporalengine.controller;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.heroesoftimepoc.temporalengine.service.TemporalScriptParser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.stream.Collectors;
+
+@RestController
+@RequestMapping("/api/collection")
+@CrossOrigin(origins = "*")
+public class CollectionController {
+
+    @Autowired
+    private TemporalScriptParser temporalParser;
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
+    /**
+     * Récupérer toute la collection du jeu
+     */
+    @GetMapping("/all")
+    public ResponseEntity<List<Map<String, Object>>> getAllCollection() {
+        try {
+            List<Map<String, Object>> collection = new ArrayList<>();
+            
+            // Ajouter les héros
+            collection.addAll(loadHeroes());
+            
+            // Ajouter les artefacts
+            collection.addAll(loadArtifacts());
+            
+            // Ajouter les créatures
+            collection.addAll(loadCreatures());
+            
+            return ResponseEntity.ok(collection);
+        } catch (Exception e) {
+            Map<String, Object> error = new HashMap<>();
+            error.put("error", "Erreur lors du chargement de la collection: " + e.getMessage());
+            return ResponseEntity.badRequest().body(Arrays.asList(error));
+        }
+    }
+
+    /**
+     * Récupérer les héros
+     */
+    @GetMapping("/heroes")
+    public ResponseEntity<List<Map<String, Object>>> getHeroes() {
+        try {
+            return ResponseEntity.ok(loadHeroes());
+        } catch (Exception e) {
+            Map<String, Object> error = new HashMap<>();
+            error.put("error", "Erreur lors du chargement des héros: " + e.getMessage());
+            return ResponseEntity.badRequest().body(Arrays.asList(error));
+        }
+    }
+
+    /**
+     * Récupérer les artefacts
+     */
+    @GetMapping("/artifacts")
+    public ResponseEntity<List<Map<String, Object>>> getArtifacts() {
+        try {
+            return ResponseEntity.ok(loadArtifacts());
+        } catch (Exception e) {
+            Map<String, Object> error = new HashMap<>();
+            error.put("error", "Erreur lors du chargement des artefacts: " + e.getMessage());
+            return ResponseEntity.badRequest().body(Arrays.asList(error));
+        }
+    }
+
+    /**
+     * Récupérer les créatures
+     */
+    @GetMapping("/creatures")
+    public ResponseEntity<List<Map<String, Object>>> getCreatures() {
+        try {
+            return ResponseEntity.ok(loadCreatures());
+        } catch (Exception e) {
+            Map<String, Object> error = new HashMap<>();
+            error.put("error", "Erreur lors du chargement des créatures: " + e.getMessage());
+            return ResponseEntity.badRequest().body(Arrays.asList(error));
+        }
+    }
+
+    /**
+     * Traduire un script HOTS en langage naturel
+     */
+    @PostMapping("/translate")
+    public ResponseEntity<Map<String, Object>> translateScript(@RequestBody Map<String, String> request) {
+        try {
+            String script = request.get("script");
+            if (script == null || script.trim().isEmpty()) {
+                return ResponseEntity.badRequest().body(Map.of("error", "Script requis"));
+            }
+
+            Map<String, Object> translation = translateHOTSScript(script);
+            return ResponseEntity.ok(translation);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Erreur de traduction: " + e.getMessage()));
+        }
+    }
+
+    /**
+     * Charger les héros depuis les fichiers JSON
+     */
+    private List<Map<String, Object>> loadHeroes() throws IOException {
+        List<Map<String, Object>> heroes = new ArrayList<>();
+        
+        // Charger les héros légendaires
+        String legendaryPath = "heroes/legendary";
+        heroes.addAll(loadHeroesFromDirectory(legendaryPath, "LEGENDARY"));
+        
+        // Charger les héros GROFI
+        String grofiPath = "heroes/grofi";
+        heroes.addAll(loadHeroesFromDirectory(grofiPath, "EPIC"));
+        
+        return heroes;
+    }
+
+    /**
+     * Charger les héros d'un répertoire
+     */
+    private List<Map<String, Object>> loadHeroesFromDirectory(String directory, String defaultRarity) throws IOException {
+        List<Map<String, Object>> heroes = new ArrayList<>();
+        
+        try {
+            ClassPathResource resource = new ClassPathResource(directory);
+            if (resource.exists()) {
+                Path dirPath = Paths.get(resource.getURI());
+                if (Files.isDirectory(dirPath)) {
+                    Files.list(dirPath)
+                        .filter(path -> path.toString().endsWith(".json"))
+                        .forEach(path -> {
+                            try {
+                                String content = Files.readString(path);
+                                Map<String, Object> hero = objectMapper.readValue(content, Map.class);
+                                
+                                // Ajouter les métadonnées
+                                hero.put("category", "heroes");
+                                hero.put("file", path.getFileName().toString());
+                                
+                                // S'assurer que la rareté est définie
+                                if (!hero.containsKey("rarity")) {
+                                    hero.put("rarity", defaultRarity);
+                                }
+                                
+                                heroes.add(hero);
+                            } catch (IOException e) {
+                                System.err.println("Erreur lors du chargement du héros " + path + ": " + e.getMessage());
+                            }
+                        });
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Erreur lors du chargement du répertoire " + directory + ": " + e.getMessage());
+        }
+        
+        return heroes;
+    }
+
+    /**
+     * Charger les artefacts
+     */
+    private List<Map<String, Object>> loadArtifacts() throws IOException {
+        List<Map<String, Object>> artifacts = new ArrayList<>();
+        
+        // Charger les artefacts quantiques
+        try {
+            ClassPathResource resource = new ClassPathResource("quantum-artifacts.json");
+            if (resource.exists()) {
+                String content = Files.readString(Paths.get(resource.getURI()));
+                Map<String, Object> data = objectMapper.readValue(content, Map.class);
+                
+                if (data.containsKey("quantumArtifacts")) {
+                    Map<String, Object> quantumArtifacts = (Map<String, Object>) data.get("quantumArtifacts");
+                    
+                    // Traiter chaque tier
+                    for (Map.Entry<String, Object> entry : quantumArtifacts.entrySet()) {
+                        if (entry.getValue() instanceof List) {
+                            List<Map<String, Object>> tierArtifacts = (List<Map<String, Object>>) entry.getValue();
+                            for (Map<String, Object> artifact : tierArtifacts) {
+                                artifact.put("category", "artifacts");
+                                artifact.put("tier", entry.getKey());
+                                artifacts.add(artifact);
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Erreur lors du chargement des artefacts quantiques: " + e.getMessage());
+        }
+        
+        // Charger les artefacts temporels avancés
+        try {
+            ClassPathResource resource = new ClassPathResource("temporal-artifacts-advanced.json");
+            if (resource.exists()) {
+                String content = Files.readString(Paths.get(resource.getURI()));
+                Map<String, Object> data = objectMapper.readValue(content, Map.class);
+                
+                if (data.containsKey("temporalArtifacts")) {
+                    List<Map<String, Object>> temporalArtifacts = (List<Map<String, Object>>) data.get("temporalArtifacts");
+                    for (Map<String, Object> artifact : temporalArtifacts) {
+                        artifact.put("category", "artifacts");
+                        artifact.put("tier", "TEMPORAL");
+                        artifacts.add(artifact);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Erreur lors du chargement des artefacts temporels: " + e.getMessage());
+        }
+        
+        return artifacts;
+    }
+
+    /**
+     * Charger les créatures
+     */
+    private List<Map<String, Object>> loadCreatures() throws IOException {
+        List<Map<String, Object>> creatures = new ArrayList<>();
+        
+        try {
+            ClassPathResource resource = new ClassPathResource("quantum-creatures.json");
+            if (resource.exists()) {
+                String content = Files.readString(Paths.get(resource.getURI()));
+                Map<String, Object> data = objectMapper.readValue(content, Map.class);
+                
+                if (data.containsKey("quantumCreatures")) {
+                    List<Map<String, Object>> quantumCreatures = (List<Map<String, Object>>) data.get("quantumCreatures");
+                    for (Map<String, Object> creature : quantumCreatures) {
+                        creature.put("category", "creatures");
+                        creatures.add(creature);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Erreur lors du chargement des créatures: " + e.getMessage());
+        }
+        
+        return creatures;
+    }
+
+    /**
+     * Traduire un script HOTS en langage naturel
+     */
+    private Map<String, Object> translateHOTSScript(String script) {
+        Map<String, Object> translation = new HashMap<>();
+        translation.put("original", script);
+        translation.put("translation", "");
+        translation.put("type", "unknown");
+        translation.put("details", new HashMap<>());
+        
+        try {
+            // Détecter le type de script
+            if (script.contains("ψ") && script.contains("⊙")) {
+                // Script temporel avec ψ-state
+                translation.put("type", "temporal_psi_state");
+                translation.put("translation", translatePsiState(script));
+                translation.put("details", extractPsiStateDetails(script));
+            } else if (script.contains("†")) {
+                // Collapse d'état
+                translation.put("type", "collapse");
+                translation.put("translation", translateCollapse(script));
+                translation.put("details", extractCollapseDetails(script));
+            } else if (script.contains("Π") && script.contains("⇒")) {
+                // Trigger d'observation
+                translation.put("type", "observation_trigger");
+                translation.put("translation", translateObservationTrigger(script));
+                translation.put("details", extractObservationTriggerDetails(script));
+            } else if (script.startsWith("HERO(")) {
+                // Création de héros
+                translation.put("type", "hero_creation");
+                translation.put("translation", translateHeroCreation(script));
+                translation.put("details", extractHeroCreationDetails(script));
+            } else if (script.startsWith("MOV(")) {
+                // Mouvement
+                translation.put("type", "movement");
+                translation.put("translation", translateMovement(script));
+                translation.put("details", extractMovementDetails(script));
+            } else if (script.startsWith("CREATE(")) {
+                // Création d'objet
+                translation.put("type", "creation");
+                translation.put("translation", translateCreation(script));
+                translation.put("details", extractCreationDetails(script));
+            } else if (script.startsWith("USE(")) {
+                // Utilisation d'objet
+                translation.put("type", "usage");
+                translation.put("translation", translateUsage(script));
+                translation.put("details", extractUsageDetails(script));
+            } else {
+                translation.put("translation", "Script non reconnu");
+            }
+        } catch (Exception e) {
+            translation.put("translation", "Erreur de traduction: " + e.getMessage());
+        }
+        
+        return translation;
+    }
+
+    // Méthodes de traduction spécifiques
+    private String translatePsiState(String script) {
+        // ψ001: ⊙(Δt+2 @10,10 ⟶ MOV(HERO, Arthur, @10,10))
+        return script.replaceAll("ψ(\\d+):\\s*⊙\\((.*)\\)", "État quantique ψ$1: Superposition temporelle - $2");
+    }
+
+    private String translateCollapse(String script) {
+        // †ψ001
+        return script.replaceAll("†ψ(\\d+)", "Effondrement de l'état quantique ψ$1");
+    }
+
+    private String translateObservationTrigger(String script) {
+        // Π(condition) ⇒ †ψ001
+        return script.replaceAll("Π\\(([^)]+)\\)\\s*⇒\\s*†ψ(\\d+)", "Observation: Si $1, alors effondrement de ψ$2");
+    }
+
+    private String translateHeroCreation(String script) {
+        // HERO(Arthur)
+        return script.replaceAll("HERO\\(([^)]+)\\)", "Création du héros $1");
+    }
+
+    private String translateMovement(String script) {
+        // MOV(HERO, Arthur, @10,10)
+        return script.replaceAll("MOV\\(([^,]+),\\s*([^,]+),\\s*@(\\d+),(\\d+)\\)", "Déplacement de $2 vers la position ($3, $4)");
+    }
+
+    private String translateCreation(String script) {
+        // CREATE(CREATURE, Dragon, @10,10)
+        return script.replaceAll("CREATE\\(([^,]+),\\s*([^,]+)(?:,\\s*@(\\d+),(\\d+))?\\)", "Création d'un $1: $2" + (script.contains("@") ? " à la position ($3, $4)" : ""));
+    }
+
+    private String translateUsage(String script) {
+        // USE(ITEM, AvantWorldBlade, HERO:Arthur)
+        return script.replaceAll("USE\\(([^,]+),\\s*([^,]+)(?:,\\s*([^)]+))?\\)", "Utilisation de $2 par $3");
+    }
+
+    // Méthodes d'extraction de détails
+    private Map<String, Object> extractPsiStateDetails(String script) {
+        Map<String, Object> details = new HashMap<>();
+        // Extraction des détails du ψ-state
+        return details;
+    }
+
+    private Map<String, Object> extractCollapseDetails(String script) {
+        Map<String, Object> details = new HashMap<>();
+        // Extraction des détails du collapse
+        return details;
+    }
+
+    private Map<String, Object> extractObservationTriggerDetails(String script) {
+        Map<String, Object> details = new HashMap<>();
+        // Extraction des détails du trigger
+        return details;
+    }
+
+    private Map<String, Object> extractHeroCreationDetails(String script) {
+        Map<String, Object> details = new HashMap<>();
+        // Extraction des détails de création de héros
+        return details;
+    }
+
+    private Map<String, Object> extractMovementDetails(String script) {
+        Map<String, Object> details = new HashMap<>();
+        // Extraction des détails de mouvement
+        return details;
+    }
+
+    private Map<String, Object> extractCreationDetails(String script) {
+        Map<String, Object> details = new HashMap<>();
+        // Extraction des détails de création
+        return details;
+    }
+
+    private Map<String, Object> extractUsageDetails(String script) {
+        Map<String, Object> details = new HashMap<>();
+        // Extraction des détails d'utilisation
+        return details;
+    }
+} 

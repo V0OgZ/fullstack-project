@@ -28,6 +28,10 @@ class VisualizerHandler(http.server.SimpleHTTPRequestHandler):
         # Routage pour les visualiseurs
         if path == '/':
             self.serve_dashboard()
+        elif path == '/collection':
+            self.serve_file('game-collection-visualizer.html')
+        elif path == '/grammar':
+            self.serve_file('hots-grammar-translator.html')
         elif path == '/json':
             self.serve_file('json-visualizer.html')
         elif path == '/hots':
@@ -106,6 +110,10 @@ class VisualizerHandler(http.server.SimpleHTTPRequestHandler):
             line-height: 1.6;
             text-align: center;
         }
+        .collection-card { border-color: rgba(255, 193, 7, 0.3); }
+        .collection-card:hover { border-color: #ffc107; box-shadow: 0 15px 35px rgba(255, 193, 7, 0.2); }
+        .grammar-card { border-color: rgba(138, 43, 226, 0.3); }
+        .grammar-card:hover { border-color: #8a2be2; box-shadow: 0 15px 35px rgba(138, 43, 226, 0.2); }
         .json-card { border-color: rgba(52, 152, 219, 0.3); }
         .json-card:hover { border-color: #3498db; box-shadow: 0 15px 35px rgba(52, 152, 219, 0.2); }
         .hots-card { border-color: rgba(142, 68, 173, 0.3); }
@@ -122,6 +130,24 @@ class VisualizerHandler(http.server.SimpleHTTPRequestHandler):
         </div>
         
         <div class="visualizers">
+            <a href="/collection" class="visualizer-card collection-card">
+                <div class="card-icon">🏛️</div>
+                <div class="card-title">Collection du Jeu</div>
+                <div class="card-description">
+                    Visualiseur de la collection complète - Héros, Artefacts, Créatures.
+                    Interface moderne avec filtres et recherche.
+                </div>
+            </a>
+            
+            <a href="/grammar" class="visualizer-card grammar-card">
+                <div class="card-icon">🔮</div>
+                <div class="card-title">Grammar Translator</div>
+                <div class="card-description">
+                    Traducteur de grammaire HOTS avec symboles temporels.
+                    Conversion automatique en langage naturel.
+                </div>
+            </a>
+            
             <a href="/json" class="visualizer-card json-card">
                 <div class="card-icon">📊</div>
                 <div class="card-title">JSON Visualizer</div>
@@ -132,7 +158,7 @@ class VisualizerHandler(http.server.SimpleHTTPRequestHandler):
             </a>
             
             <a href="/hots" class="visualizer-card hots-card">
-                <div class="card-icon">🔮</div>
+                <div class="card-icon">🎮</div>
                 <div class="card-title">HOTS Visualizer</div>
                 <div class="card-description">
                     Décryptage de la grammaire Heroes of Time Script en langage naturel.
@@ -141,7 +167,7 @@ class VisualizerHandler(http.server.SimpleHTTPRequestHandler):
             </a>
             
             <a href="/dashboard" class="visualizer-card dashboard-card">
-                <div class="card-icon">🎮</div>
+                <div class="card-icon">🎯</div>
                 <div class="card-title">Dashboard Principal</div>
                 <div class="card-description">
                     Tableau de bord central avec statut des services.
@@ -190,9 +216,11 @@ def start_server(port=5175):
     try:
         with socketserver.TCPServer(("", port), VisualizerHandler) as httpd:
             print(f"🚀 Serveur visualiseurs démarré sur http://localhost:{port}")
+            print(f"🏛️ Collection du Jeu: http://localhost:{port}/collection")
+            print(f"🔮 Grammar Translator: http://localhost:{port}/grammar")
             print(f"📊 JSON Visualizer: http://localhost:{port}/json")
-            print(f"🔮 HOTS Visualizer: http://localhost:{port}/hots")
-            print(f"🎮 Dashboard: http://localhost:{port}/dashboard")
+            print(f"🎮 HOTS Visualizer: http://localhost:{port}/hots")
+            print(f"🎯 Dashboard: http://localhost:{port}/dashboard")
             print(f"🛑 Ctrl+C pour arrêter")
             httpd.serve_forever()
     except KeyboardInterrupt:
