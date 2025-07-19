@@ -1,5 +1,7 @@
 # 🕰️ Heroes of Time
 
+<img width="1024" height="1536" alt="Heroes of Time - Temporal Sword" src="https://github.com/user-attachments/assets/746f871d-b70c-4df7-992e-0c84fe819c8d" />
+
 *Maîtrisez le temps, dominez l'espace, conquérez l'éternité*
 
 ---
