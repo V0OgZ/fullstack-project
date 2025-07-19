@@ -10,43 +10,6 @@
 - ✅ **UTILISER** : `git revert` pour annuler des commits
 - ✅ **UTILISER** : `git stash` pour sauvegarder
 
-### Interface Temporelle - Versions Fonctionnelles
-- ✅ **Interface Légendaire** : `frontend-legendary-ui/` (port 5190)
-  - Commit source : 08353dc99341a197203656dc37140b8afba73b01
-  - Features : Animated heroes + Particles + Smooth movement
-  - Serveur : `python3 server.py` avec CORS
-- ✅ **Interface Temporelle** : `frontend-temporal/` (port 5174)  
-  - Commit sauvegardé : 5ef2203
-  - Features : Épée temporelle animée + Configuration Temporelle
-
-### Backend - Problèmes Connus
-- 🔴 **Erreur JPA** : "Not a managed type: class Game"
-- 🔴 **ComplexAmplitude** : Existe mais problème de dépendances Maven
-- 🔴 **DynamicFormulaParser** : Méthode `executeFormula` manquante
-- ✅ **Correction** : Utiliser `executeFormulaEffect(formula, hero, game, 0)`
-
-### Commandes - Bonnes Pratiques
-- ✅ **Frontend** : `cd frontend-temporal && python3 -m http.server 5174`
-- ✅ **Backend** : `cd backend && mvn spring-boot:run`
-- ✅ **UI Légendaire** : `cd frontend-legendary-ui && python3 server.py`
-- ✅ **Ports libres** : `pkill -f "http.server"` avant relancement
-
-### Récupération Sécurisée
-- ✅ **Fichiers spécifiques** : `git checkout <commit> -- <path>` 
-- ✅ **Vérifier avant** : `git show <commit> --name-only`
-- ❌ **Éviter** : Récupération complète qui écrase tout
-
-### Cache Cursor - Problèmes Connus  
-- 🔴 **Problème** : `git checkout` et `git reset` corrompus par cache
-- ✅ **Solution** : Extraction manuelle avec `git show <commit>:<file>`
-- ✅ **Alternative** : Utiliser les checkpoints Cursor pour restaurer
-
-## 📝 NOTES IMPORTANTES
-
-### Visualiseur JSON - À Préserver
-- 🛡️ **Ne PAS écraser** les corrections du visualiseur JSON
-- 🛡️ **Récupération sélective** uniquement pour UI
-
 ### Serveurs Multiples - Gestion Ports DÉFINITIVE
 - Port 9000 : Dashboard Unifié (`dashboard.html`) - **PRINCIPAL**
 - Port 8000 : Frontend Principal (`frontend/`) - Console temporelle + carte hex
@@ -57,7 +20,7 @@
 - Port 5170 : JSON Visualizer (DÉPRÉCIÉ - remplacé par 5175)
 - Port 5171 : HOTS Visualizer (DÉPRÉCIÉ - remplacé par 5175)
 - Port 5190 : Interface Légendaire (`frontend-legendary-ui/`) - **OPTIONNEL**
-- Port 8888 : Test Runner - **RÉCUPÉRÉ de 872e0d7**
+- Port 8888 : Test Runner - **RÉCUPÉRÉ et FONCTIONNEL**
 
 ### 📋 COMMANDES STANDARDISÉES - OBLIGATOIRES
 - ✅ **START ALL** : `./scripts/actifs/start-services-background.sh` - **PRINCIPAL**
@@ -79,15 +42,70 @@
 - ✅ **COMMANDE TYPE** : `python3 -m http.server PORT > /dev/null 2>&1 &`
 - 🎯 **OBJECTIF** : L'utilisateur peut tester et jouer pendant que l'agent code
 
-### 🎮 SERVICES ACTUELLEMENT ACTIFS (PERMANENT BACKGROUND)
+## 📁 ORGANISATION COMPLÈTE DES FRONTENDS
+
+### 🎮 FRONTENDS ACTIFS VÉRIFIÉS
+1. **`frontend/`** - Frontend Principal (port 8000)
+   - Fichier : `index.html`
+   - Features : Console temporelle + carte hexagonale
+   - Commande : `cd frontend && python3 -m http.server 8000 > /dev/null 2>&1 &`
+
+2. **`frontend-temporal/`** - Interface Temporelle (port 5174)
+   - Fichier : `index.html` 
+   - Features : Épée temporelle animée + Configuration Temporelle
+   - Commande : `cd frontend-temporal && python3 -m http.server 5174 > /dev/null 2>&1 &`
+
+3. **`frontend-legendary-ui/`** - UI Légendaire (port 5190) - OPTIONNEL
+   - Fichier : `index.html`
+   - Features : Animated heroes + Particles + Smooth movement
+   - Commande : `cd frontend-legendary-ui && python3 server.py`
+
+4. **`frontend-temporal-legendary/`** - Interface Temporelle Légendaire
+   - Fichier : `index.html`
+   - Features : Enhanced Temporal Console
+   - Statut : DISPONIBLE mais pas utilisé actuellement
+
+5. **`quantum-visualizer/`** - Visualiseur Quantique (port 8001)
+   - Fichier : `index.html`
+   - Features : Scénarios GROFI + Visualisation
+   - Commande : `python3 -m http.server 8001 > /dev/null 2>&1 &` (depuis RACINE)
+   - URL : http://localhost:8001/quantum-visualizer/
+
+### 📊 FICHIERS DASHBOARD ET VISUALISEURS (RACINE)
+- **`dashboard.html`** - Dashboard principal (port 9000) ✅ CORRIGÉ
+- **`dashboard-unified.html`** - Version unifiée alternative
+- **`dashboard-with-tests.html`** - Version avec tests
+- **`json-visualizer.html`** - Visualiseur JSON standalone
+- **`hots-visualizer.html`** - Visualiseur HOTS standalone  
+- **`visualizer-server.py`** - Serveur multi-visualiseurs (port 5175)
+- **`test-runner-interface.html`** - Interface Test Runner (port 8888)
+- **`test-runner-server.py`** - Serveur Test Runner
+
+### 🎯 SERVICES ACTUELLEMENT ACTIFS (PERMANENT BACKGROUND)
 - ✅ Dashboard (9000) : http://localhost:9000/dashboard.html
 - ✅ Frontend (8000) : http://localhost:8000
 - ✅ Backend API (8080) : http://localhost:8080/api/games
 - ✅ Temporal UI (5174) : http://localhost:5174
-- ✅ Quantum Visualizer (8001) : http://localhost:8001
+- ✅ Quantum Visualizer (8001) : http://localhost:8001/quantum-visualizer/
 - ✅ Object Viewer (5175) : http://localhost:5175
-- 🔧 Test Runner (8888) : À récupérer si nécessaire
+- ✅ Test Runner (8888) : http://localhost:8888
 - 🔧 UI Légendaire (5190) : Optionnelle
+
+### Backend - Problèmes Connus
+- 🔴 **Erreur JPA** : "Not a managed type: class Game"
+- 🔴 **ComplexAmplitude** : Existe mais problème de dépendances Maven
+- 🔴 **DynamicFormulaParser** : Méthode `executeFormula` manquante
+- ✅ **Correction** : Utiliser `executeFormulaEffect(formula, hero, game, 0)`
+
+### PROBLÈME CRITIQUE dquote> - SOLUTIONS
+- 🔴 **Problème** : Se produit avec echo + guillemets imbriqués, emojis, messages multi-lignes
+- ✅ **SOLUTIONS** : 
+  1. Ctrl+C pour sortir
+  2. Toujours guillemets simples `echo 'message'`
+  3. Git commit avec guillemets simples
+  4. Fichiers temporaires pour longs messages
+  5. Jamais d'emojis dans echo
+- ✅ **PROCÉDURE** : Nettoyer ports avec `lsof -ti:PORT | xargs kill -9` avant démarrage
 
 ### Commit Messages - Format Appris
 - ✅ **Bon format** : "🎯 MISSION UI LÉGENDAIRE ACCOMPLIE - Description détaillée"
