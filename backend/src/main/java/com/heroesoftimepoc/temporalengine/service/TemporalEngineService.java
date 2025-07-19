@@ -1284,37 +1284,7 @@ public class TemporalEngineService {
         return executeTemporalGameScript(gameId, scriptLine);
     }
 
-    public Map<String, Object> getGameState(Long gameId) {
-        Game game = gameRepository.findById(gameId).orElseThrow();
-        Map<String, Object> result = new HashMap<>();
-        
-        result.put("gameId", game.getId());
-        result.put("gameName", game.getGameName());
-        result.put("currentTurn", game.getCurrentTurn());
-        result.put("currentPlayer", game.getCurrentPlayer());
-        result.put("status", game.getStatus());
-        result.put("currentTimeline", game.getCurrentTimeline());
-        
-        // Add heroes with complete information
-        List<Map<String, Object>> heroes = game.getHeroes().stream()
-                .map(this::serializeHeroWithTemporalInfo)
-                .collect(Collectors.toList());
-        result.put("heroes", heroes);
-        
-        // Add active ψ states
-        List<Map<String, Object>> psiStates = game.getActivePsiStates().stream()
-                .map(this::serializeQuantumStateWithInfo)
-                .collect(Collectors.toList());
-        result.put("psiStates", psiStates);
-        
-        // Add tiles with temporal information
-        List<Map<String, Object>> tiles = game.getTiles().stream()
-                .map(this::serializeTileWithTemporalInfo)
-                .collect(Collectors.toList());
-        result.put("tiles", tiles);
-        
-        return result;
-    }
+
 
     public Map<String, Object> nextTurn(Long gameId) {
         Game game = gameRepository.findById(gameId).orElseThrow();

@@ -34,7 +34,7 @@ public class QuantumController {
     @GetMapping("/analysis/{gameId}")
     public ResponseEntity<Map<String, Object>> analyzeQuantumState(@PathVariable Long gameId) {
         try {
-            Map<String, Object> gameState = temporalEngineService.getGameState(gameId);
+            Map<String, Object> gameState = temporalEngineService.getQuantumGameStateWithTemporalInfo(gameId);
             if (gameState.containsKey("quantumAnalysis")) {
                 return ResponseEntity.ok(gameState);
             } else {
@@ -57,7 +57,7 @@ public class QuantumController {
             @PathVariable int y) {
         try {
             // Récupérer le jeu (simplifié pour l'exemple)
-            Map<String, Object> gameState = temporalEngineService.getGameState(gameId);
+            Map<String, Object> gameState = temporalEngineService.getQuantumGameStateWithTemporalInfo(gameId);
             
             // Calculer l'interférence (nécessiterait une méthode publique dans TemporalEngineService)
             Map<String, Object> result = new HashMap<>();
@@ -316,7 +316,7 @@ public class QuantumController {
     @GetMapping("/statistics/{gameId}")
     public ResponseEntity<Map<String, Object>> getQuantumStatistics(@PathVariable Long gameId) {
         try {
-            Map<String, Object> gameState = temporalEngineService.getGameState(gameId);
+            Map<String, Object> gameState = temporalEngineService.getQuantumGameStateWithTemporalInfo(gameId);
             Map<String, Object> statistics = new HashMap<>();
             
             if (gameState.containsKey("quantumAnalysis")) {

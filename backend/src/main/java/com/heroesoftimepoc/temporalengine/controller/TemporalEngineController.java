@@ -195,7 +195,7 @@ public class TemporalEngineController {
     @GetMapping("/games/{gameId}/state")
     public ResponseEntity<Map<String, Object>> getGameState(@PathVariable Long gameId) {
         try {
-            Map<String, Object> gameState = temporalEngineService.getGameState(gameId);
+            Map<String, Object> gameState = temporalEngineService.getQuantumGameStateWithTemporalInfo(gameId);
             return ResponseEntity.ok(gameState);
             
         } catch (Exception e) {
@@ -510,7 +510,7 @@ public class TemporalEngineController {
             Object cachedGame = cacheService.getCachedGameState(gameId);
             Game game = cachedGame instanceof Game ? (Game) cachedGame : gameRepository.findById(gameId).orElseThrow();
             
-            Map<String, Object> gameState = temporalEngineService.getGameState(gameId);
+            Map<String, Object> gameState = temporalEngineService.getQuantumGameStateWithTemporalInfo(gameId);
             
             // Add cache statistics
             Map<String, Object> cacheStats = cacheService.getCacheStatistics();
