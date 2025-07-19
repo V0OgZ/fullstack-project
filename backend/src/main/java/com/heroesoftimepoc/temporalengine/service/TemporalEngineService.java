@@ -1031,7 +1031,38 @@ public class TemporalEngineService {
         
         return result;
     }
-    
+
+    /**
+     * @deprecated a été remplacé par {@link #getQuantumGameStateWithTemporalInfo(Long)}
+     */
+    @Deprecated
+    public Map<String, Object> getGameState(Long gameId) {
+        return getQuantumGameStateWithTemporalInfo(gameId);
+    }
+
+    public Map<String, Object> executeScript(Long gameId, String scriptLine) {
+        return executeTemporalGameScript(gameId, scriptLine);
+    }
+
+
+
+    public Map<String, Object> nextTurn(Long gameId) {
+        Game game = gameRepository.findById(gameId).orElseThrow();
+        game.nextTurn();
+        gameRepository.save(game);
+        Map<String, Object> result = new HashMap<>();
+        result.put("currentTurn", game.getCurrentTurn());
+        result.put("message", "Turn advanced");
+        return result;
+    }
+
+    public Map<String, Object> migrateToQuantumAmplitudes(Long gameId) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("success", true);
+        result.put("message", "Migration completed");
+        return result;
+    }
+
     /**
      * ANALYSE INTERFÉRENCES : Analyser les interférences quantiques dans le jeu
      * Nom clair et recherchable : analyzeQuantumInterferencesInGame
@@ -1277,29 +1308,6 @@ public class TemporalEngineService {
         Map<String, Object> stats = causalCollapseService.getCollapseStatistics(game);
         result.put("statistics", stats);
         
-        return result;
-    }
-
-    public Map<String, Object> executeScript(Long gameId, String scriptLine) {
-        return executeTemporalGameScript(gameId, scriptLine);
-    }
-
-
-
-    public Map<String, Object> nextTurn(Long gameId) {
-        Game game = gameRepository.findById(gameId).orElseThrow();
-        game.nextTurn();
-        gameRepository.save(game);
-        Map<String, Object> result = new HashMap<>();
-        result.put("currentTurn", game.getCurrentTurn());
-        result.put("message", "Turn advanced");
-        return result;
-    }
-
-    public Map<String, Object> migrateToQuantumAmplitudes(Long gameId) {
-        Map<String, Object> result = new HashMap<>();
-        result.put("success", true);
-        result.put("message", "Migration completed");
         return result;
     }
 }

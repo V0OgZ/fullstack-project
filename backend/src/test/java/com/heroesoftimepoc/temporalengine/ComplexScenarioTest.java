@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -150,7 +151,7 @@ public class ComplexScenarioTest {
         
         // Arthur construit un château
         Map<String, Object> result10 = temporalEngineService.executeScript(testGame.getId(), 
-            "BUILD(Castle, @10,10, PLAYER:player1)");
+            "BUILD(STRUCTURE, Castle, @10,10, PLAYER:player1)");
         assertTrue((Boolean) result10.get("success"), "Château doit être construit");
         System.out.println("✅ Arthur érige un château en @10,10");
         
@@ -195,7 +196,7 @@ public class ComplexScenarioTest {
         System.out.println("\n🎯 VÉRIFICATIONS FINALES");
         
         // Vérifier l'état final du jeu
-        Map<String, Object> gameState = temporalEngineService.getGameState(testGame.getId());
+        Map<String, Object> gameState = temporalEngineService.getQuantumGameStateWithTemporalInfo(testGame.getId());
         assertNotNull(gameState, "État du jeu doit être accessible");
         System.out.println("✅ État du jeu validé");
         
@@ -204,7 +205,7 @@ public class ComplexScenarioTest {
         System.out.println("✅ Héros validés");
         
         // Vérifier les ψ-états
-        assertNotNull(gameState.get("psiStates"), "ψ-états doivent être présents");
+        assertNotNull(gameState.get("quantumStates"), "ψ-états doivent être présents");
         System.out.println("✅ ψ-états validés");
         
         System.out.println("\n🎉 === SCÉNARIO ÉPIQUE TERMINÉ AVEC SUCCÈS ===");
@@ -246,7 +247,7 @@ public class ComplexScenarioTest {
         System.out.println("✅ 5 ψ-états effondrés");
         
         // Vérifier l'état final
-        Map<String, Object> gameState = temporalEngineService.getGameState(testGame.getId());
+        Map<String, Object> gameState = temporalEngineService.getQuantumGameStateWithTemporalInfo(testGame.getId());
         assertNotNull(gameState, "État du jeu doit être stable");
         System.out.println("✅ Test de stress réussi");
     }

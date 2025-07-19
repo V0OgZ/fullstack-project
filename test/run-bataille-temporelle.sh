@@ -103,28 +103,25 @@ fi
 log $GREEN "✅ Prérequis vérifiés"
 
 # Vérifier la structure des fichiers de test
-log $BLUE "📁 Vérification des fichiers de test..."
+echo "📁 Vérification des fichiers de test..."
+MISSING_FILES=()
+# Mise à jour des chemins vers les fichiers de test
+if [ ! -f "game_assets/scenarios/visualizer/bataille_temporelle.json" ]; then
+    MISSING_FILES+=("game_assets/scenarios/visualizer/bataille_temporelle.json")
+fi
+if [ ! -f "game_assets/tests/hots/bataille_temporelle_setup.hots" ]; then
+    MISSING_FILES+=("game_assets/tests/hots/bataille_temporelle_setup.hots")
+fi
+if [ ! -f "game_assets/tests/hots/bataille_temporelle_combat.hots" ]; then
+    MISSING_FILES+=("game_assets/tests/hots/bataille_temporelle_combat.hots")
+fi
+if [ ! -f "game_assets/tests/hots/bataille_temporelle_finale.hots" ]; then
+    MISSING_FILES+=("game_assets/tests/hots/bataille_temporelle_finale.hots")
+fi
 
-required_files=(
-    "test/artefacts/scenarios/bataille_temporelle.json"
-    "test/artefacts/objects/temporal_artifacts.json"
-    "test/artefacts/objects/creatures.json"
-    "test/artefacts/scripts/bataille_temporelle_setup.hots"
-    "test/artefacts/scripts/bataille_temporelle_combat.hots"
-    "test/artefacts/scripts/bataille_temporelle_finale.hots"
-    "backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java"
-)
-
-missing_files=()
-for file in "${required_files[@]}"; do
-    if [ ! -f "$file" ]; then
-        missing_files+=("$file")
-    fi
-done
-
-if [ ${#missing_files[@]} -gt 0 ]; then
+if [ ${#MISSING_FILES[@]} -gt 0 ]; then
     log $RED "❌ Fichiers manquants:"
-    for file in "${missing_files[@]}"; do
+    for file in "${MISSING_FILES[@]}"; do
         log $RED "   - $file"
     done
     exit 1
@@ -134,12 +131,10 @@ fi
 
 # Afficher les statistiques des fichiers
 log $BLUE "📊 Statistiques des fichiers de test:"
-echo "   - Scénario JSON: $(wc -l < test/artefacts/scenarios/bataille_temporelle.json) lignes"
-echo "   - Artefacts JSON: $(wc -l < test/artefacts/objects/temporal_artifacts.json) lignes"
-echo "   - Créatures JSON: $(wc -l < test/artefacts/objects/creatures.json) lignes"
-echo "   - Setup .hots: $(grep -v '^#' test/artefacts/scripts/bataille_temporelle_setup.hots | grep -v '^$' | wc -l) commandes"
-echo "   - Combat .hots: $(grep -v '^#' test/artefacts/scripts/bataille_temporelle_combat.hots | grep -v '^$' | wc -l) commandes"
-echo "   - Finale .hots: $(grep -v '^#' test/artefacts/scripts/bataille_temporelle_finale.hots | grep -v '^$' | wc -l) commandes"
+echo "   - Scénario JSON: $(wc -l < game_assets/scenarios/visualizer/bataille_temporelle.json) lignes"
+echo "   - Setup .hots: $(grep -v '^#' game_assets/tests/hots/bataille_temporelle_setup.hots | grep -v '^$' | wc -l) commandes"
+echo "   - Combat .hots: $(grep -v '^#' game_assets/tests/hots/bataille_temporelle_combat.hots | grep -v '^$' | wc -l) commandes"
+echo "   - Finale .hots: $(grep -v '^#' game_assets/tests/hots/bataille_temporelle_finale.hots | grep -v '^$' | wc -l) commandes"
 echo "   - Test Java: $(wc -l < backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java) lignes"
 echo ""
 

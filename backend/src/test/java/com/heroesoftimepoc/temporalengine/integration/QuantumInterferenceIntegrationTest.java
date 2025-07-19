@@ -320,7 +320,7 @@ public class QuantumInterferenceIntegrationTest {
             "ψ062: ⊙(Δt+1 @70,70 ⟶ MOV(Arthur, @70,70))");
         
         // Phase 2: Analyser l'état du jeu
-        Map<String, Object> gameState = temporalEngineService.getGameState(testGame.getId());
+        Map<String, Object> gameState = temporalEngineService.getQuantumGameStateWithTemporalInfo(testGame.getId());
         
         assertNotNull(gameState);
         assertTrue(gameState.containsKey("quantumAnalysis"));
@@ -390,7 +390,7 @@ public class QuantumInterferenceIntegrationTest {
         }
         
         // Phase 6: Vérifier l'état final du jeu
-        Map<String, Object> finalGameState = temporalEngineService.getGameState(testGame.getId());
+        Map<String, Object> finalGameState = temporalEngineService.getQuantumGameStateWithTemporalInfo(testGame.getId());
         assertNotNull(finalGameState);
         
         // Le héros devrait avoir évolué avec les effets quantiques
