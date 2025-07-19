@@ -1014,3 +1014,148 @@ Hibernate: alter table if exists tile_occupants add constraint FKia56skupqk3qxyp
 2025-07-19T09:37:19.502+02:00  INFO 80233 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
 2025-07-19T09:37:19.504+02:00  INFO 80233 --- [  restartedMain] c.h.t.TemporalEngineApplication          : Started TemporalEngineApplication in 0.521 seconds (process running for 1516.023)
 2025-07-19T09:37:19.505+02:00  INFO 80233 --- [  restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-07-19T09:41:31.926+02:00  INFO 80233 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-07-19T09:41:31.926+02:00  INFO 80233 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-07-19T09:41:31.926+02:00 DEBUG 80233 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2025-07-19T09:41:31.926+02:00 DEBUG 80233 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2025-07-19T09:41:31.926+02:00 DEBUG 80233 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2025-07-19T09:41:31.927+02:00 DEBUG 80233 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@7ccb425f
+2025-07-19T09:41:31.927+02:00 DEBUG 80233 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@26371ca6
+2025-07-19T09:41:31.927+02:00 DEBUG 80233 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2025-07-19T09:41:31.927+02:00  INFO 80233 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-07-19T09:41:31.927+02:00 DEBUG 80233 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/games", parameters={}
+2025-07-19T09:41:31.927+02:00 DEBUG 80233 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getAllGames()
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0
+2025-07-19T09:41:31.962+02:00 DEBUG 80233 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T09:41:31.962+02:00 DEBUG 80233 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, games=[], count=0}]
+2025-07-19T09:41:31.963+02:00 DEBUG 80233 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T09:41:31.974+02:00 DEBUG 80233 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/api/games", parameters={}
+2025-07-19T09:41:31.974+02:00 DEBUG 80233 --- [nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#createGame(Map)
+2025-07-19T09:41:31.975+02:00 DEBUG 80233 --- [nio-8080-exec-3] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [{gameName=GROFI-Causal-Test, mapWidth=50, mapHeight=50}]
+Hibernate: insert into games (created_at,current_player,current_timeline,current_turn,ended_at,game_name,map_height,map_width,max_players,started_at,status,winner,id) values (?,?,?,?,?,?,?,?,?,?,?,?,default)
+Hibernate: insert into game_players (game_id,player_id) values (?,?)
+2025-07-19T09:41:31.977+02:00 DEBUG 80233 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T09:41:31.977+02:00 DEBUG 80233 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{gameId=1, gameName=GROFI-Causal-Test, success=true, message=Game created successfully}]
+2025-07-19T09:41:31.977+02:00 DEBUG 80233 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T09:46:41.466+02:00 DEBUG 80233 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : POST "/api/games", parameters={}
+2025-07-19T09:46:41.467+02:00 DEBUG 80233 --- [nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#createGame(Map)
+2025-07-19T09:46:41.467+02:00 DEBUG 80233 --- [nio-8080-exec-5] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [{gameName=GROFI-Test, mapWidth=50, mapHeight=50}]
+Hibernate: insert into games (created_at,current_player,current_timeline,current_turn,ended_at,game_name,map_height,map_width,max_players,started_at,status,winner,id) values (?,?,?,?,?,?,?,?,?,?,?,?,default)
+Hibernate: insert into game_players (game_id,player_id) values (?,?)
+2025-07-19T09:46:41.469+02:00 DEBUG 80233 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T09:46:41.469+02:00 DEBUG 80233 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{gameId=2, gameName=GROFI-Test, success=true, message=Game created successfully}]
+2025-07-19T09:46:41.469+02:00 DEBUG 80233 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T09:46:46.791+02:00 DEBUG 80233 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : POST "/api/grofi/heroes/2/create", parameters={}
+2025-07-19T09:46:46.793+02:00 DEBUG 80233 --- [nio-8080-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-19T09:46:46.795+02:00 DEBUG 80233 --- [nio-8080-exec-7] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-19T09:46:46.798+02:00 DEBUG 80233 --- [nio-8080-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/grofi/heroes/2/create.]
+2025-07-19T09:46:46.798+02:00 DEBUG 80233 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-19T09:46:46.802+02:00 DEBUG 80233 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-19T09:46:46.803+02:00 DEBUG 80233 --- [nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-19T09:46:46.805+02:00 DEBUG 80233 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T09:46:46.805+02:00 DEBUG 80233 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sat Jul 19 09:46:46 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-19T09:46:46.815+02:00 DEBUG 80233 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-19T09:47:46.662+02:00 DEBUG 80233 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : POST "/api/games/2/script", parameters={}
+2025-07-19T09:47:46.662+02:00 DEBUG 80233 --- [nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#executeScript(Long, Map)
+2025-07-19T09:47:46.663+02:00 DEBUG 80233 --- [nio-8080-exec-9] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [{scriptLine=HERO(Jean-Grofignon)}]
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0 where g1_0.id=?
+2025-07-19T09:47:46.670+02:00 DEBUG 80233 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T09:47:46.670+02:00 DEBUG 80233 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{result={success=false, error=Cannot invoke "String.contains(java.lang.CharSequence)" because "scrip (truncated)...]
+2025-07-19T09:47:46.671+02:00 DEBUG 80233 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T09:47:51.135+02:00 DEBUG 80233 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/api/games/2/script?scriptLine=HERO(Jean-Grofignon)", parameters={masked}
+2025-07-19T09:47:51.135+02:00 DEBUG 80233 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#executeScript(Long, Map)
+2025-07-19T09:47:51.136+02:00 DEBUG 80233 --- [nio-8080-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Read "application/octet-stream" to []
+2025-07-19T09:47:51.137+02:00  WARN 80233 --- [nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: Required request body is missing: public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> com.heroesoftimepoc.temporalengine.controller.ApiGamesController.executeScript(java.lang.Long,java.util.Map<java.lang.String, java.lang.String>)]
+2025-07-19T09:47:51.138+02:00 DEBUG 80233 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 400 BAD_REQUEST
+2025-07-19T09:47:51.138+02:00 DEBUG 80233 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error?scriptLine=HERO(Jean-Grofignon)", parameters={masked}
+2025-07-19T09:47:51.138+02:00 DEBUG 80233 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-19T09:47:51.138+02:00 DEBUG 80233 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T09:47:51.138+02:00 DEBUG 80233 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sat Jul 19 09:47:51 CEST 2025, status=400, error=Bad Request, trace=org.springframework.h (truncated)...]
+2025-07-19T09:47:51.139+02:00 DEBUG 80233 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 400
+2025-07-19T09:49:05.174+02:00 DEBUG 80233 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/games/2", parameters={}
+2025-07-19T09:49:05.174+02:00 DEBUG 80233 --- [nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#getGame(Long)
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0 where g1_0.id=?
+2025-07-19T09:49:05.176+02:00 DEBUG 80233 --- [nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+Hibernate: select p1_0.game_id,p1_0.player_id from game_players p1_0 where p1_0.game_id=?
+2025-07-19T09:49:05.179+02:00 DEBUG 80233 --- [nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{gameId=2, gameName=GROFI-Test, currentPlayer=null, success=true, players=[player1], turnCount=0, st (truncated)...]
+2025-07-19T09:49:05.186+02:00 DEBUG 80233 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T09:49:32.159+02:00 DEBUG 80233 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : POST "/api/games", parameters={}
+2025-07-19T09:49:32.160+02:00 DEBUG 80233 --- [nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#createGame(Map)
+2025-07-19T09:49:32.160+02:00 DEBUG 80233 --- [nio-8080-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [{gameName=AutoTest-1, mapWidth=30, mapHeight=30}]
+Hibernate: insert into games (created_at,current_player,current_timeline,current_turn,ended_at,game_name,map_height,map_width,max_players,started_at,status,winner,id) values (?,?,?,?,?,?,?,?,?,?,?,?,default)
+Hibernate: insert into game_players (game_id,player_id) values (?,?)
+2025-07-19T09:49:32.162+02:00 DEBUG 80233 --- [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T09:49:32.162+02:00 DEBUG 80233 --- [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{gameId=3, gameName=AutoTest-1, success=true, message=Game created successfully}]
+2025-07-19T09:49:32.162+02:00 DEBUG 80233 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T09:49:33.179+02:00 DEBUG 80233 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : POST "/api/games", parameters={}
+2025-07-19T09:49:33.180+02:00 DEBUG 80233 --- [nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#createGame(Map)
+2025-07-19T09:49:33.180+02:00 DEBUG 80233 --- [nio-8080-exec-5] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [{gameName=AutoTest-2, mapWidth=30, mapHeight=30}]
+Hibernate: insert into games (created_at,current_player,current_timeline,current_turn,ended_at,game_name,map_height,map_width,max_players,started_at,status,winner,id) values (?,?,?,?,?,?,?,?,?,?,?,?,default)
+Hibernate: insert into game_players (game_id,player_id) values (?,?)
+2025-07-19T09:49:33.181+02:00 DEBUG 80233 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T09:49:33.181+02:00 DEBUG 80233 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{gameId=4, gameName=AutoTest-2, success=true, message=Game created successfully}]
+2025-07-19T09:49:33.182+02:00 DEBUG 80233 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T09:49:34.200+02:00 DEBUG 80233 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : POST "/api/games", parameters={}
+2025-07-19T09:49:34.200+02:00 DEBUG 80233 --- [nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#createGame(Map)
+2025-07-19T09:49:34.201+02:00 DEBUG 80233 --- [nio-8080-exec-7] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [{gameName=AutoTest-3, mapWidth=30, mapHeight=30}]
+Hibernate: insert into games (created_at,current_player,current_timeline,current_turn,ended_at,game_name,map_height,map_width,max_players,started_at,status,winner,id) values (?,?,?,?,?,?,?,?,?,?,?,?,default)
+Hibernate: insert into game_players (game_id,player_id) values (?,?)
+2025-07-19T09:49:34.202+02:00 DEBUG 80233 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T09:49:34.202+02:00 DEBUG 80233 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{gameId=5, gameName=AutoTest-3, success=true, message=Game created successfully}]
+2025-07-19T09:49:34.203+02:00 DEBUG 80233 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T09:49:35.221+02:00 DEBUG 80233 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : POST "/api/games", parameters={}
+2025-07-19T09:49:35.221+02:00 DEBUG 80233 --- [nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#createGame(Map)
+2025-07-19T09:49:35.221+02:00 DEBUG 80233 --- [nio-8080-exec-9] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [{gameName=AutoTest-4, mapWidth=30, mapHeight=30}]
+Hibernate: insert into games (created_at,current_player,current_timeline,current_turn,ended_at,game_name,map_height,map_width,max_players,started_at,status,winner,id) values (?,?,?,?,?,?,?,?,?,?,?,?,default)
+Hibernate: insert into game_players (game_id,player_id) values (?,?)
+2025-07-19T09:49:35.222+02:00 DEBUG 80233 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T09:49:35.222+02:00 DEBUG 80233 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{gameId=6, gameName=AutoTest-4, success=true, message=Game created successfully}]
+2025-07-19T09:49:35.222+02:00 DEBUG 80233 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T09:49:36.239+02:00 DEBUG 80233 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/api/games", parameters={}
+2025-07-19T09:49:36.239+02:00 DEBUG 80233 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#createGame(Map)
+2025-07-19T09:49:36.239+02:00 DEBUG 80233 --- [nio-8080-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [{gameName=AutoTest-5, mapWidth=30, mapHeight=30}]
+Hibernate: insert into games (created_at,current_player,current_timeline,current_turn,ended_at,game_name,map_height,map_width,max_players,started_at,status,winner,id) values (?,?,?,?,?,?,?,?,?,?,?,?,default)
+Hibernate: insert into game_players (game_id,player_id) values (?,?)
+2025-07-19T09:49:36.240+02:00 DEBUG 80233 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T09:49:36.241+02:00 DEBUG 80233 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{gameId=7, gameName=AutoTest-5, success=true, message=Game created successfully}]
+2025-07-19T09:49:36.241+02:00 DEBUG 80233 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T09:49:52.191+02:00 DEBUG 80233 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/api/games/7/execute-script", parameters={}
+2025-07-19T09:49:52.191+02:00 DEBUG 80233 --- [nio-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-19T09:49:52.192+02:00 DEBUG 80233 --- [nio-8080-exec-3] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-19T09:49:52.192+02:00 DEBUG 80233 --- [nio-8080-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/games/7/execute-script.]
+2025-07-19T09:49:52.192+02:00 DEBUG 80233 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-19T09:49:52.192+02:00 DEBUG 80233 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-19T09:49:52.192+02:00 DEBUG 80233 --- [nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-19T09:49:52.193+02:00 DEBUG 80233 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T09:49:52.193+02:00 DEBUG 80233 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sat Jul 19 09:49:52 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-19T09:49:52.193+02:00 DEBUG 80233 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-19T09:49:52.205+02:00 DEBUG 80233 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : POST "/api/games/7/execute-script", parameters={}
+2025-07-19T09:49:52.206+02:00 DEBUG 80233 --- [nio-8080-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-19T09:49:52.206+02:00 DEBUG 80233 --- [nio-8080-exec-5] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-19T09:49:52.206+02:00 DEBUG 80233 --- [nio-8080-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/games/7/execute-script.]
+2025-07-19T09:49:52.206+02:00 DEBUG 80233 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-19T09:49:52.206+02:00 DEBUG 80233 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-19T09:49:52.206+02:00 DEBUG 80233 --- [nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-19T09:49:52.207+02:00 DEBUG 80233 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T09:49:52.207+02:00 DEBUG 80233 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sat Jul 19 09:49:52 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-19T09:49:52.207+02:00 DEBUG 80233 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-19T09:49:57.431+02:00 DEBUG 80233 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : POST "/api/games/7/script", parameters={}
+2025-07-19T09:49:57.431+02:00 DEBUG 80233 --- [nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#executeScript(Long, Map)
+2025-07-19T09:49:57.432+02:00 DEBUG 80233 --- [nio-8080-exec-7] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [{scriptLine=HERO(Jean-Grofignon)}]
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0 where g1_0.id=?
+2025-07-19T09:49:57.434+02:00 DEBUG 80233 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-19T09:49:57.434+02:00 DEBUG 80233 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{result={success=false, error=Cannot invoke "String.contains(java.lang.CharSequence)" because "scrip (truncated)...]
+2025-07-19T09:49:57.436+02:00 DEBUG 80233 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  53:56 min
+[INFO] Finished at: 2025-07-19T10:05:24+02:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:3.2.0:run (default-cli) on project temporal-engine: Process terminated with exit code: 137 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
