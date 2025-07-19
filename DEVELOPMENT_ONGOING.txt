@@ -1,0 +1,96 @@
+🚧 DEVELOPMENT ONGOING - Heroes of Time
+==========================================
+
+📅 Date: 2025-07-19
+🔄 Branche: poc-heroes-of-time
+👤 Agent: Assistant
+
+## 🎯 INSTRUCTIONS PRINCIPALES
+
+### 🚫 RÈGLES DE DÉVELOPPEMENT
+- ❌ PAS de code en dur sauf si vraiment nécessaire
+- ❌ PAS de Docker pour le moment (raisons à venir dans specs)
+- ✅ MOCK des messages backend pour le moment
+- ✅ Extension de grammaire temporelle PRIORITAIRE sur code dur
+- ✅ Vérifier que les JSON de héros sont bien loadés et interprétés
+- ✅ Formules quantiques utilisées selon système existant
+
+### 📚 SYSTÈME ACTUEL - MÉMOIRE
+**Grammaire quantique:**
+- ⊙ : Action en superposition temporelle
+- † : État effondré (collapse)
+- ψ : Instance d'un état superposé
+- Π : Observation externe (déclencheur de collapse)
+- Δt : Délai temporel
+- @ : Coordonnées spatiales
+- ℬ : Branche temporelle
+- ⟶ : Projection d'effet
+
+**Héros actuels:**
+- Modèle basique: name, position, health, temporalEnergy
+- Timeline: timelineBranch (ℬ1 par défaut)
+- Statuts: ACTIVE, TEMPORAL_SHIFT, QUANTUM_SUPERPOSITION, COLLAPSED, DEAD
+- Inventaire: Liste String simple
+- UTMD: currentDay, movementPointsPerDay
+- Capacités: hasObservationAbility, observationRange
+
+**Collapse/Résolution:**
+- CausalCollapseService: Collapses causales
+- QuantumInterferenceService: Calculs d'interférence
+- CausalPerformanceLimitsService: Limites (1000 ψ-states max)
+- Auto-collapse: observation, position, temporel, manuel
+
+## 🔄 ATTENTE NOUVELLES SPECS GITHUB
+
+### 📋 À ANALYSER QUAND DISPONIBLE
+1. **SYSTÈME DE RÉSOLUTION** (nouveau nom pour collapse)
+   - Mécanismes plus sophistiqués
+   - Probabilités quantiques avancées
+   - Items influençant les résolutions
+
+2. **HÉROS SPÉCIAUX**
+   - Pouvoirs uniques par héros
+   - Capacités temporelles avancées
+   - États du monde surchargés
+
+3. **GRAMMAIRE QUANTIQUE ÉTENDUE**
+   - Nouveaux symboles et syntaxes
+   - Expressions plus complexes
+   - Meilleure intégration
+
+4. **JSON HÉROS & ARTEFACTS**
+   - Vérifier parsing et interprétation
+   - Formules quantiques intégrées
+   - Conformité avec système existant
+
+### 🔧 APPROCHE D'IMPLÉMENTATION
+1. **Analyser les specs** sans merger avec main
+2. **Étendre la grammaire** avant tout code dur
+3. **Mock les messages** backend temporairement
+4. **Adapter progressivement** notre système existant
+5. **Tester la compatibilité** avec les JSONs fournis
+
+## 🚨 PROBLÈMES ACTUELS À RÉSOUDRE
+- ❌ Erreurs de compilation dans TemporalEngineService.java
+- ❌ Cases dupliquées dans switch statement (BUILD, COLLECT, etc.)
+- ❌ Conflits de merge non résolus (HEAD/merge markers)
+- ❌ Méthodes getGameState() dupliquées
+- ❌ Syntaxe invalide avec tokens à supprimer
+
+## 📝 NOTES DE SESSION
+- Merge avec main annulé pour éviter conflits
+- Système actuel stable sur poc-heroes-of-time
+- Prêt pour adaptation aux nouvelles specs
+- Todo liste gardée au chaud
+- Recherche GitHub specs: pas trouvé nouvelles spécifications spécifiques
+
+## 🎯 PROCHAINES ÉTAPES
+1. ✅ Consulter specs GitHub via web/API (pas trouvé nouvelles specs spécifiques)
+2. 🔧 URGENT: Fixer erreurs compilation backend (duplications switch, merge conflicts)
+3. 📚 Analyser nouveaux héros et capacités quand specs disponibles
+4. 🔤 Identifier extensions grammaire nécessaires
+5. 🛠️ Planifier implémentation sans code dur
+6. ⚙️ Adapter système de résolution existant
+
+==========================================
+📌 Ce fichier sera mis à jour au fur et à mesure 
