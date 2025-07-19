@@ -1,6 +1,6 @@
-17:22:20.112 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.heroesoftimepoc.temporalengine.TemporalScriptParserTest]: TemporalScriptParserTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-17:22:20.168 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.heroesoftimepoc.temporalengine.TemporalEngineApplication for test class com.heroesoftimepoc.temporalengine.TemporalScriptParserTest
-17:22:20.234 [main] INFO org.springframework.boot.devtools.restart.RestartApplicationListener -- Restart disabled due to context in which it is running
+21:32:45.054 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.heroesoftimepoc.temporalengine.TemporalScriptParserTest]: TemporalScriptParserTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:32:45.115 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.heroesoftimepoc.temporalengine.TemporalEngineApplication for test class com.heroesoftimepoc.temporalengine.TemporalScriptParserTest
+21:32:45.207 [main] INFO org.springframework.boot.devtools.restart.RestartApplicationListener -- Restart disabled due to context in which it is running
  ██╗  ██╗███████╗██████╗  ██████╗ ███████╗███████╗    ██████╗ ███████╗    ████████╗██╗███╗   ███╗███████╗
  ██║  ██║██╔════╝██╔══██╗██╔═══██╗██╔════╝██╔════╝   ██╔═══██╗██╔════╝    ╚══██╔══╝██║████╗ ████║██╔════╝
  ███████║█████╗  ██████╔╝██║   ██║█████╗  ███████╗   ██║   ██║█████╗         ██║   ██║██╔████╔██║█████╗  
@@ -21,22 +21,22 @@
     • API REST Complète            ✅
     
  🎯 Port: 8080 | 🔧 Profile: default | 📊 Version: 1.0.0 
-2025-07-19T17:22:20.360+02:00  INFO 19655 --- [           main] c.h.t.TemporalScriptParserTest           : Starting TemporalScriptParserTest using Java 17.0.15 with PID 19655 (started by admin in /Users/admin/HOT/Heroes-of-Time/backend)
-2025-07-19T17:22:20.361+02:00  INFO 19655 --- [           main] c.h.t.TemporalScriptParserTest           : No active profile set, falling back to 1 default profile: "default"
-2025-07-19T17:22:20.375+02:00 DEBUG 19655 --- [           main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@5cbf9e9f
-2025-07-19T17:22:20.740+02:00  INFO 19655 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-07-19T17:22:20.778+02:00  INFO 19655 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 34 ms. Found 5 JPA repository interfaces.
-2025-07-19T17:22:20.951+02:00  INFO 19655 --- [           main] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Starting...
-2025-07-19T17:22:21.038+02:00  INFO 19655 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HeroesOfTimePool - Added connection conn0: url=jdbc:h2:mem:heroesdb user=SA
-2025-07-19T17:22:21.061+02:00  INFO 19655 --- [           main] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Start completed.
-2025-07-19T17:22:21.129+02:00  INFO 19655 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-07-19T17:22:21.156+02:00  INFO 19655 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
-2025-07-19T17:22:21.171+02:00  INFO 19655 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-07-19T17:22:21.272+02:00  INFO 19655 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-07-19T17:22:21.296+02:00  WARN 19655 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-07-19T17:22:21.825+02:00  INFO 19655 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-19T21:32:45.351+02:00  INFO 64910 --- [           main] c.h.t.TemporalScriptParserTest           : Starting TemporalScriptParserTest using Java 17.0.15 with PID 64910 (started by admin in /Users/admin/HOT/Heroes-of-Time/backend)
+2025-07-19T21:32:45.352+02:00  INFO 64910 --- [           main] c.h.t.TemporalScriptParserTest           : No active profile set, falling back to 1 default profile: "default"
+2025-07-19T21:32:45.374+02:00 DEBUG 64910 --- [           main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@5cbf9e9f
+2025-07-19T21:32:45.637+02:00  INFO 64910 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-19T21:32:45.665+02:00  INFO 64910 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 23 ms. Found 5 JPA repository interfaces.
+2025-07-19T21:32:45.982+02:00  INFO 64910 --- [           main] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Starting...
+2025-07-19T21:32:46.078+02:00  INFO 64910 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HeroesOfTimePool - Added connection conn0: url=jdbc:h2:mem:heroesdb user=SA
+2025-07-19T21:32:46.107+02:00  INFO 64910 --- [           main] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Start completed.
+2025-07-19T21:32:46.183+02:00  INFO 64910 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-19T21:32:46.227+02:00  INFO 64910 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2025-07-19T21:32:46.246+02:00  INFO 64910 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-07-19T21:32:46.373+02:00  INFO 64910 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-19T21:32:46.401+02:00  WARN 64910 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-19T21:32:47.000+02:00  INFO 64910 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 Hibernate: drop table if exists game_players cascade 
-2025-07-19T17:22:21.831+02:00  INFO 19655 --- [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@5c41f6a0] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-07-19T21:32:47.008+02:00  INFO 64910 --- [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@c7a1db6] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
 Hibernate: drop table if exists game_tiles cascade 
 Hibernate: drop table if exists games cascade 
 Hibernate: drop table if exists hero_inventory cascade 
@@ -45,7 +45,7 @@ Hibernate: drop table if exists psi_states cascade
 Hibernate: drop table if exists temporal_artifacts cascade 
 Hibernate: drop table if exists tile_occupants cascade 
 Hibernate: create table game_players (game_id bigint not null, player_id varchar(255))
-2025-07-19T17:22:21.836+02:00  INFO 19655 --- [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@37d8562f] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-07-19T21:32:47.013+02:00  INFO 64910 --- [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@69ae7632] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
 Hibernate: create table game_tiles (defense_bonus integer, has_psi_states boolean, is_locked boolean, is_temporal_zone boolean, lock_duration integer, movement_cost integer, temporal_energy_bonus integer, x integer not null, y integer not null, game_id bigint, id bigint generated by default as identity, building_owner varchar(255), building_type varchar(255), temporal_zone_type varchar(255), terrain varchar(255), primary key (id))
 Hibernate: create table games (current_turn integer, map_height integer, map_width integer, max_players integer, created_at timestamp(6), ended_at timestamp(6), id bigint generated by default as identity, started_at timestamp(6), current_player varchar(255), current_timeline varchar(255), game_name varchar(255) not null, status varchar(255) check (status in ('WAITING','ACTIVE','PAUSED','FINISHED','CANCELLED')), winner varchar(255), primary key (id))
 Hibernate: create table hero_inventory (hero_id bigint not null, item varchar(255))
@@ -60,23 +60,23 @@ Hibernate: alter table if exists heroes add constraint FKb88jgdc3dfmmhbnrpl6u5sj
 Hibernate: alter table if exists psi_states add constraint FK9kbp67wo94i0jk9w4v3ja4meq foreign key (game_id) references games
 Hibernate: alter table if exists temporal_artifacts add constraint FK4gwvr3vnipo301cwl6hnvtyn1 foreign key (game_id) references games
 Hibernate: alter table if exists tile_occupants add constraint FKia56skupqk3qxypotqpovr3gb foreign key (tile_id) references game_tiles
-2025-07-19T17:22:21.861+02:00  INFO 19655 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-07-19T17:22:22.066+02:00  INFO 19655 --- [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-07-19T21:32:47.040+02:00  INFO 64910 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-19T21:32:47.296+02:00  INFO 64910 --- [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
 ✅ Héros GROFI chargé: Jean-Grofignon (LEGENDARY)
 ✅ Héros GROFI chargé: The Dude (compagnon)
 ✅ Héros GROFI chargé: Vince Vega (compagnon)
 ✅ Héros GROFI chargé: Walter (compagnon)
 🦸 4 héros GROFI chargés avec succès
-2025-07-19T17:22:22.639+02:00  WARN 19655 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-07-19T17:22:22.709+02:00 DEBUG 19655 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 85 mappings in 'requestMappingHandlerMapping'
-2025-07-19T17:22:22.786+02:00 DEBUG 19655 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-2025-07-19T17:22:22.805+02:00 DEBUG 19655 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2025-07-19T17:22:22.822+02:00 DEBUG 19655 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
-2025-07-19T17:22:22.851+02:00  INFO 19655 --- [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:heroesdb'
-2025-07-19T17:22:22.886+02:00  INFO 19655 --- [           main] c.h.t.TemporalScriptParserTest           : Started TemporalScriptParserTest in 2.657 seconds (process running for 3.197)
+2025-07-19T21:32:48.012+02:00  WARN 64910 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-19T21:32:48.458+02:00 DEBUG 64910 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 89 mappings in 'requestMappingHandlerMapping'
+2025-07-19T21:32:48.704+02:00 DEBUG 64910 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2025-07-19T21:32:48.730+02:00 DEBUG 64910 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-07-19T21:32:48.765+02:00 DEBUG 64910 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-07-19T21:32:48.813+02:00  INFO 64910 --- [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:heroesdb'
+2025-07-19T21:32:48.871+02:00  INFO 64910 --- [           main] c.h.t.TemporalScriptParserTest           : Started TemporalScriptParserTest in 3.672 seconds (process running for 4.255)
 OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
-2025-07-19T17:22:23.234+02:00  INFO 19655 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest]: EclatMondesDissolusTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2025-07-19T17:22:23.235+02:00  INFO 19655 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.heroesoftimepoc.temporalengine.TemporalEngineApplication for test class com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
+2025-07-19T21:32:49.399+02:00  INFO 64910 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest]: EclatMondesDissolusTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-07-19T21:32:49.400+02:00  INFO 64910 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.heroesoftimepoc.temporalengine.TemporalEngineApplication for test class com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
 Hibernate: insert into games (created_at,current_player,current_timeline,current_turn,ended_at,game_name,map_height,map_width,max_players,started_at,status,winner,id) values (?,?,?,?,?,?,?,?,?,?,?,?,default)
 Hibernate: insert into heroes (current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 Hibernate: insert into heroes (current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
@@ -126,6 +126,9 @@ Hibernate: insert into games (created_at,current_player,current_timeline,current
 Hibernate: insert into heroes (current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 Hibernate: insert into heroes (current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: infinity_codex
+❌ Artefact infinity_codex non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: infinity_codex
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
 Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 📊 Statistiques collapse causale: {activeStates=1, collapsedStates=0, totalStates=1, collapseRate=0.0, collapsesByType={}}
@@ -150,24 +153,24 @@ Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplit
 📊 Statistiques collapse causale: {activeStates=1, collapsedStates=0, totalStates=1, collapseRate=0.0, collapsesByType={}}
 Hibernate: insert into game_tiles (building_owner,building_type,defense_bonus,game_id,has_psi_states,is_locked,is_temporal_zone,lock_duration,movement_cost,temporal_energy_bonus,temporal_zone_type,terrain,x,y,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=1, totalStates=1, collapseRate=1.0, collapsesByType={}}
-[ERROR] Tests run: 11, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.160 s <<< FAILURE! -- in com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
-[ERROR] com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest.testCompleteScenarioFlow -- Time elapsed: 0.012 s <<< ERROR!
+[ERROR] Tests run: 11, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.260 s <<< FAILURE! -- in com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
+[ERROR] com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest.testCompleteScenarioFlow -- Time elapsed: 0.021 s <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" because the return value of "java.util.Map.get(Object)" is null
 	at com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest.testCompleteScenarioFlow(EclatMondesDissolusTest.java:313)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 
-[ERROR] com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest.testTour25_ResolutionFinale -- Time elapsed: 0.006 s <<< ERROR!
+[ERROR] com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest.testTour25_ResolutionFinale -- Time elapsed: 0.009 s <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" because the return value of "java.util.Map.get(Object)" is null
 	at com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest.testTour25_ResolutionFinale(EclatMondesDissolusTest.java:227)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 
-2025-07-19T17:22:23.397+02:00  INFO 19655 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.heroesoftimepoc.temporalengine.integration.QuantumInterferenceIntegrationTest]: QuantumInterferenceIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2025-07-19T17:22:23.405+02:00  INFO 19655 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.heroesoftimepoc.temporalengine.TemporalEngineApplication for test class com.heroesoftimepoc.temporalengine.integration.QuantumInterferenceIntegrationTest
-2025-07-19T17:22:23.410+02:00  INFO 19655 --- [           main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
+2025-07-19T21:32:49.663+02:00  INFO 64910 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.heroesoftimepoc.temporalengine.integration.QuantumInterferenceIntegrationTest]: QuantumInterferenceIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-07-19T21:32:49.676+02:00  INFO 64910 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.heroesoftimepoc.temporalengine.TemporalEngineApplication for test class com.heroesoftimepoc.temporalengine.integration.QuantumInterferenceIntegrationTest
+2025-07-19T21:32:49.680+02:00  INFO 64910 --- [           main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
  ██╗  ██╗███████╗██████╗  ██████╗ ███████╗███████╗    ██████╗ ███████╗    ████████╗██╗███╗   ███╗███████╗
  ██║  ██║██╔════╝██╔══██╗██╔═══██╗██╔════╝██╔════╝   ██╔═══██╗██╔════╝    ╚══██╔══╝██║████╗ ████║██╔════╝
  ███████║█████╗  ██████╔╝██║   ██║█████╗  ███████╗   ██║   ██║█████╗         ██║   ██║██╔████╔██║█████╗  
@@ -188,22 +191,22 @@ java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" bec
     • API REST Complète            ✅
     
  🎯 Port: 8080 | 🔧 Profile: default | 📊 Version: 1.0.0 
-2025-07-19T17:22:23.424+02:00  INFO 19655 --- [           main] h.t.i.QuantumInterferenceIntegrationTest : Starting QuantumInterferenceIntegrationTest using Java 17.0.15 with PID 19655 (started by admin in /Users/admin/HOT/Heroes-of-Time/backend)
-2025-07-19T17:22:23.424+02:00  INFO 19655 --- [           main] h.t.i.QuantumInterferenceIntegrationTest : No active profile set, falling back to 1 default profile: "default"
-2025-07-19T17:22:23.425+02:00 DEBUG 19655 --- [           main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@58bf45ca
-2025-07-19T17:22:23.498+02:00  INFO 19655 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-07-19T17:22:23.505+02:00  INFO 19655 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 5 JPA repository interfaces.
-2025-07-19T17:22:23.533+02:00  INFO 19655 --- [           main] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Starting...
-2025-07-19T17:22:23.534+02:00  INFO 19655 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HeroesOfTimePool - Added connection conn5: url=jdbc:h2:mem:heroesdb user=SA
-2025-07-19T17:22:23.534+02:00 ERROR 19655 --- [           main] com.zaxxer.hikari.pool.PoolBase          : HeroesOfTimePool - JMX name (HeroesOfTimePool) is already registered.
-2025-07-19T17:22:23.534+02:00  INFO 19655 --- [           main] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Start completed.
-2025-07-19T17:22:23.547+02:00  INFO 19655 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-07-19T17:22:23.548+02:00  INFO 19655 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-07-19T17:22:23.549+02:00  INFO 19655 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-07-19T17:22:23.550+02:00  WARN 19655 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-07-19T17:22:23.626+02:00  INFO 19655 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-19T21:32:49.696+02:00  INFO 64910 --- [           main] h.t.i.QuantumInterferenceIntegrationTest : Starting QuantumInterferenceIntegrationTest using Java 17.0.15 with PID 64910 (started by admin in /Users/admin/HOT/Heroes-of-Time/backend)
+2025-07-19T21:32:49.696+02:00  INFO 64910 --- [           main] h.t.i.QuantumInterferenceIntegrationTest : No active profile set, falling back to 1 default profile: "default"
+2025-07-19T21:32:49.697+02:00 DEBUG 64910 --- [           main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@2fcc32ae
+2025-07-19T21:32:49.793+02:00  INFO 64910 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-19T21:32:49.797+02:00  INFO 64910 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 4 ms. Found 5 JPA repository interfaces.
+2025-07-19T21:32:49.851+02:00  INFO 64910 --- [           main] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Starting...
+2025-07-19T21:32:49.852+02:00  INFO 64910 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HeroesOfTimePool - Added connection conn5: url=jdbc:h2:mem:heroesdb user=SA
+2025-07-19T21:32:49.852+02:00 ERROR 64910 --- [           main] com.zaxxer.hikari.pool.PoolBase          : HeroesOfTimePool - JMX name (HeroesOfTimePool) is already registered.
+2025-07-19T21:32:49.852+02:00  INFO 64910 --- [           main] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Start completed.
+2025-07-19T21:32:49.867+02:00  INFO 64910 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-19T21:32:49.868+02:00  INFO 64910 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-07-19T21:32:49.870+02:00  INFO 64910 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-19T21:32:49.871+02:00  WARN 64910 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-19T21:32:49.970+02:00  INFO 64910 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 Hibernate: drop table if exists game_players cascade 
-2025-07-19T17:22:23.626+02:00  INFO 19655 --- [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6cdadc3] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-07-19T21:32:49.971+02:00  INFO 64910 --- [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@229e9280] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
 Hibernate: drop table if exists game_tiles cascade 
 Hibernate: drop table if exists games cascade 
 Hibernate: drop table if exists hero_inventory cascade 
@@ -212,7 +215,7 @@ Hibernate: drop table if exists psi_states cascade
 Hibernate: drop table if exists temporal_artifacts cascade 
 Hibernate: drop table if exists tile_occupants cascade 
 Hibernate: create table game_players (game_id bigint not null, player_id varchar(255))
-2025-07-19T17:22:23.629+02:00  INFO 19655 --- [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@15769719] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-07-19T21:32:49.975+02:00  INFO 64910 --- [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@713f5a17] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
 Hibernate: create table game_tiles (defense_bonus integer, has_psi_states boolean, is_locked boolean, is_temporal_zone boolean, lock_duration integer, movement_cost integer, temporal_energy_bonus integer, x integer not null, y integer not null, game_id bigint, id bigint generated by default as identity, building_owner varchar(255), building_type varchar(255), temporal_zone_type varchar(255), terrain varchar(255), primary key (id))
 Hibernate: create table games (current_turn integer, map_height integer, map_width integer, max_players integer, created_at timestamp(6), ended_at timestamp(6), id bigint generated by default as identity, started_at timestamp(6), current_player varchar(255), current_timeline varchar(255), game_name varchar(255) not null, status varchar(255) check (status in ('WAITING','ACTIVE','PAUSED','FINISHED','CANCELLED')), winner varchar(255), primary key (id))
 Hibernate: create table hero_inventory (hero_id bigint not null, item varchar(255))
@@ -227,19 +230,19 @@ Hibernate: alter table if exists heroes add constraint FKb88jgdc3dfmmhbnrpl6u5sj
 Hibernate: alter table if exists psi_states add constraint FK9kbp67wo94i0jk9w4v3ja4meq foreign key (game_id) references games
 Hibernate: alter table if exists temporal_artifacts add constraint FK4gwvr3vnipo301cwl6hnvtyn1 foreign key (game_id) references games
 Hibernate: alter table if exists tile_occupants add constraint FKia56skupqk3qxypotqpovr3gb foreign key (tile_id) references game_tiles
-2025-07-19T17:22:23.637+02:00  INFO 19655 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-19T21:32:49.988+02:00  INFO 64910 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
 ✅ Héros GROFI chargé: Jean-Grofignon (LEGENDARY)
 ✅ Héros GROFI chargé: The Dude (compagnon)
 ✅ Héros GROFI chargé: Vince Vega (compagnon)
 ✅ Héros GROFI chargé: Walter (compagnon)
 🦸 4 héros GROFI chargés avec succès
-2025-07-19T17:22:23.827+02:00  WARN 19655 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-07-19T17:22:23.849+02:00 DEBUG 19655 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 85 mappings in 'requestMappingHandlerMapping'
-2025-07-19T17:22:23.872+02:00 DEBUG 19655 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-2025-07-19T17:22:23.876+02:00 DEBUG 19655 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2025-07-19T17:22:23.878+02:00 DEBUG 19655 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
-2025-07-19T17:22:23.889+02:00  INFO 19655 --- [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:heroesdb'
-2025-07-19T17:22:23.902+02:00  INFO 19655 --- [           main] h.t.i.QuantumInterferenceIntegrationTest : Started QuantumInterferenceIntegrationTest in 0.493 seconds (process running for 4.213)
+2025-07-19T21:32:50.242+02:00  WARN 64910 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-19T21:32:50.271+02:00 DEBUG 64910 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 89 mappings in 'requestMappingHandlerMapping'
+2025-07-19T21:32:50.299+02:00 DEBUG 64910 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2025-07-19T21:32:50.303+02:00 DEBUG 64910 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-07-19T21:32:50.305+02:00 DEBUG 64910 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-07-19T21:32:50.317+02:00  INFO 64910 --- [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:heroesdb'
+2025-07-19T21:32:50.336+02:00  INFO 64910 --- [           main] h.t.i.QuantumInterferenceIntegrationTest : Started QuantumInterferenceIntegrationTest in 0.656 seconds (process running for 5.72)
 🌀 Initialisation des tests d'interférence quantique
 ========================================================
 Hibernate: select ps1_0.id,ps1_0.action_type,ps1_0.branch_id,ps1_0.collapse_trigger,ps1_0.amplitude_imaginary,ps1_0.amplitude_real,ps1_0.created_at,ps1_0.delta_t,ps1_0.expression,ps1_0.game_id,ps1_0.owner_hero,ps1_0.probability,ps1_0.psi_id,ps1_0.status,ps1_0.target_x,ps1_0.target_y,ps1_0.use_complex_amplitude from psi_states ps1_0
@@ -726,8 +729,8 @@ Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timel
    - Commandes exécutées: 45
    - Commandes réussies: 22
    - Taux de réussite: 48,9%
-[ERROR] Tests run: 7, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.800 s <<< FAILURE! -- in com.heroesoftimepoc.temporalengine.integration.QuantumInterferenceIntegrationTest
-[ERROR] com.heroesoftimepoc.temporalengine.integration.QuantumInterferenceIntegrationTest.testInterferenceScriptExecution -- Time elapsed: 0.123 s <<< FAILURE!
+[ERROR] Tests run: 7, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 1.108 s <<< FAILURE! -- in com.heroesoftimepoc.temporalengine.integration.QuantumInterferenceIntegrationTest
+[ERROR] com.heroesoftimepoc.temporalengine.integration.QuantumInterferenceIntegrationTest.testInterferenceScriptExecution -- Time elapsed: 0.172 s <<< FAILURE!
 org.opentest4j.AssertionFailedError: Au moins 50% des commandes d'interférence doivent être prises en charge ==> expected: <true> but was: <false>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
@@ -739,9 +742,9 @@ org.opentest4j.AssertionFailedError: Au moins 50% des commandes d'interférence 
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 
-2025-07-19T17:22:24.198+02:00  INFO 19655 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest]: QuantumArtifactsIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2025-07-19T17:22:24.199+02:00  INFO 19655 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.heroesoftimepoc.temporalengine.TemporalEngineApplication for test class com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest
-2025-07-19T17:22:24.201+02:00  INFO 19655 --- [           main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
+2025-07-19T21:32:50.773+02:00  INFO 64910 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest]: QuantumArtifactsIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-07-19T21:32:50.774+02:00  INFO 64910 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.heroesoftimepoc.temporalengine.TemporalEngineApplication for test class com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest
+2025-07-19T21:32:50.775+02:00  INFO 64910 --- [           main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
  ██╗  ██╗███████╗██████╗  ██████╗ ███████╗███████╗    ██████╗ ███████╗    ████████╗██╗███╗   ███╗███████╗
  ██║  ██║██╔════╝██╔══██╗██╔═══██╗██╔════╝██╔════╝   ██╔═══██╗██╔════╝    ╚══██╔══╝██║████╗ ████║██╔════╝
  ███████║█████╗  ██████╔╝██║   ██║█████╗  ███████╗   ██║   ██║█████╗         ██║   ██║██╔████╔██║█████╗  
@@ -762,22 +765,22 @@ org.opentest4j.AssertionFailedError: Au moins 50% des commandes d'interférence 
     • API REST Complète            ✅
     
  🎯 Port: 8080 | 🔧 Profile: default | 📊 Version: 1.0.0 
-2025-07-19T17:22:24.213+02:00  INFO 19655 --- [           main] c.h.t.i.QuantumArtifactsIntegrationTest  : Starting QuantumArtifactsIntegrationTest using Java 17.0.15 with PID 19655 (started by admin in /Users/admin/HOT/Heroes-of-Time/backend)
-2025-07-19T17:22:24.213+02:00  INFO 19655 --- [           main] c.h.t.i.QuantumArtifactsIntegrationTest  : No active profile set, falling back to 1 default profile: "default"
-2025-07-19T17:22:24.214+02:00 DEBUG 19655 --- [           main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@150ba838
-2025-07-19T17:22:24.281+02:00  INFO 19655 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-07-19T17:22:24.287+02:00  INFO 19655 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 5 JPA repository interfaces.
-2025-07-19T17:22:24.312+02:00  INFO 19655 --- [           main] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Starting...
-2025-07-19T17:22:24.313+02:00  INFO 19655 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HeroesOfTimePool - Added connection conn10: url=jdbc:h2:mem:heroesdb user=SA
-2025-07-19T17:22:24.313+02:00 ERROR 19655 --- [           main] com.zaxxer.hikari.pool.PoolBase          : HeroesOfTimePool - JMX name (HeroesOfTimePool) is already registered.
-2025-07-19T17:22:24.313+02:00  INFO 19655 --- [           main] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Start completed.
-2025-07-19T17:22:24.321+02:00  INFO 19655 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-07-19T17:22:24.322+02:00  INFO 19655 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-07-19T17:22:24.324+02:00  INFO 19655 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-07-19T17:22:24.325+02:00  WARN 19655 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-07-19T17:22:24.392+02:00  INFO 19655 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-19T21:32:50.789+02:00  INFO 64910 --- [           main] c.h.t.i.QuantumArtifactsIntegrationTest  : Starting QuantumArtifactsIntegrationTest using Java 17.0.15 with PID 64910 (started by admin in /Users/admin/HOT/Heroes-of-Time/backend)
+2025-07-19T21:32:50.789+02:00  INFO 64910 --- [           main] c.h.t.i.QuantumArtifactsIntegrationTest  : No active profile set, falling back to 1 default profile: "default"
+2025-07-19T21:32:50.790+02:00 DEBUG 64910 --- [           main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@c079185
+2025-07-19T21:32:50.924+02:00  INFO 64910 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-19T21:32:50.935+02:00  INFO 64910 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 10 ms. Found 5 JPA repository interfaces.
+2025-07-19T21:32:50.974+02:00  INFO 64910 --- [           main] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Starting...
+2025-07-19T21:32:50.974+02:00  INFO 64910 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HeroesOfTimePool - Added connection conn10: url=jdbc:h2:mem:heroesdb user=SA
+2025-07-19T21:32:50.974+02:00 ERROR 64910 --- [           main] com.zaxxer.hikari.pool.PoolBase          : HeroesOfTimePool - JMX name (HeroesOfTimePool) is already registered.
+2025-07-19T21:32:50.975+02:00  INFO 64910 --- [           main] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Start completed.
+2025-07-19T21:32:50.984+02:00  INFO 64910 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-19T21:32:50.985+02:00  INFO 64910 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-07-19T21:32:50.986+02:00  INFO 64910 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-19T21:32:50.987+02:00  WARN 64910 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-19T21:32:51.062+02:00  INFO 64910 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 Hibernate: drop table if exists game_players cascade 
-2025-07-19T17:22:24.392+02:00  INFO 19655 --- [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@12ce5274] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-07-19T21:32:51.062+02:00  INFO 64910 --- [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@4caca1] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
 Hibernate: drop table if exists game_tiles cascade 
 Hibernate: drop table if exists games cascade 
 Hibernate: drop table if exists hero_inventory cascade 
@@ -786,7 +789,7 @@ Hibernate: drop table if exists psi_states cascade
 Hibernate: drop table if exists temporal_artifacts cascade 
 Hibernate: drop table if exists tile_occupants cascade 
 Hibernate: create table game_players (game_id bigint not null, player_id varchar(255))
-2025-07-19T17:22:24.394+02:00  INFO 19655 --- [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@8e2961] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-07-19T21:32:51.064+02:00  INFO 64910 --- [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6071132e] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
 Hibernate: create table game_tiles (defense_bonus integer, has_psi_states boolean, is_locked boolean, is_temporal_zone boolean, lock_duration integer, movement_cost integer, temporal_energy_bonus integer, x integer not null, y integer not null, game_id bigint, id bigint generated by default as identity, building_owner varchar(255), building_type varchar(255), temporal_zone_type varchar(255), terrain varchar(255), primary key (id))
 Hibernate: create table games (current_turn integer, map_height integer, map_width integer, max_players integer, created_at timestamp(6), ended_at timestamp(6), id bigint generated by default as identity, started_at timestamp(6), current_player varchar(255), current_timeline varchar(255), game_name varchar(255) not null, status varchar(255) check (status in ('WAITING','ACTIVE','PAUSED','FINISHED','CANCELLED')), winner varchar(255), primary key (id))
 Hibernate: create table hero_inventory (hero_id bigint not null, item varchar(255))
@@ -801,19 +804,19 @@ Hibernate: alter table if exists heroes add constraint FKb88jgdc3dfmmhbnrpl6u5sj
 Hibernate: alter table if exists psi_states add constraint FK9kbp67wo94i0jk9w4v3ja4meq foreign key (game_id) references games
 Hibernate: alter table if exists temporal_artifacts add constraint FK4gwvr3vnipo301cwl6hnvtyn1 foreign key (game_id) references games
 Hibernate: alter table if exists tile_occupants add constraint FKia56skupqk3qxypotqpovr3gb foreign key (tile_id) references game_tiles
-2025-07-19T17:22:24.400+02:00  INFO 19655 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-19T21:32:51.074+02:00  INFO 64910 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
 ✅ Héros GROFI chargé: Jean-Grofignon (LEGENDARY)
 ✅ Héros GROFI chargé: The Dude (compagnon)
 ✅ Héros GROFI chargé: Vince Vega (compagnon)
 ✅ Héros GROFI chargé: Walter (compagnon)
 🦸 4 héros GROFI chargés avec succès
-2025-07-19T17:22:24.563+02:00  WARN 19655 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-07-19T17:22:24.582+02:00 DEBUG 19655 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 85 mappings in 'requestMappingHandlerMapping'
-2025-07-19T17:22:24.599+02:00 DEBUG 19655 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-2025-07-19T17:22:24.601+02:00 DEBUG 19655 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2025-07-19T17:22:24.604+02:00 DEBUG 19655 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
-2025-07-19T17:22:24.615+02:00  INFO 19655 --- [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:heroesdb'
-2025-07-19T17:22:24.626+02:00  INFO 19655 --- [           main] c.h.t.i.QuantumArtifactsIntegrationTest  : Started QuantumArtifactsIntegrationTest in 0.426 seconds (process running for 4.937)
+2025-07-19T21:32:51.265+02:00  WARN 64910 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-19T21:32:51.287+02:00 DEBUG 64910 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 89 mappings in 'requestMappingHandlerMapping'
+2025-07-19T21:32:51.308+02:00 DEBUG 64910 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2025-07-19T21:32:51.311+02:00 DEBUG 64910 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-07-19T21:32:51.312+02:00 DEBUG 64910 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-07-19T21:32:51.321+02:00  INFO 64910 --- [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:heroesdb'
+2025-07-19T21:32:51.333+02:00  INFO 64910 --- [           main] c.h.t.i.QuantumArtifactsIntegrationTest  : Started QuantumArtifactsIntegrationTest in 0.558 seconds (process running for 6.717)
 🌟 Initialisation des tests d'artefacts quantiques Tier 6
 ==========================================================
 🔮 Artefacts quantiques chargés: 5
@@ -945,7 +948,7 @@ Hibernate: insert into games (created_at,current_player,current_timeline,current
 
 🔧 TEST 7: Validation Mathématique des Formules
 ===============================================
-🧮 Formule: CHAIN_PROBABILITY = 1 - (1-p)^n où p=0.7
+🧮 Formule: QUANTUM_REFLECT = duplicate(attack) * reflection_coefficient
 🧹 Nettoyage du test...
 ✅ Nettoyage terminé
 
@@ -962,8 +965,8 @@ Hibernate: insert into games (created_at,current_player,current_timeline,current
 🌟 TOUS LES ARTEFACTS QUANTIQUES TIER 6 OPÉRATIONNELS !
 🚀 Système quantique avancé prêt pour la production !
 
-[ERROR] Tests run: 7, Failures: 6, Errors: 0, Skipped: 0, Time elapsed: 0.492 s <<< FAILURE! -- in com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest
-[ERROR] com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest.testTemporalPortalGauntlet -- Time elapsed: 0.012 s <<< FAILURE!
+[ERROR] Tests run: 7, Failures: 6, Errors: 0, Skipped: 0, Time elapsed: 0.628 s <<< FAILURE! -- in com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest
+[ERROR] com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest.testTemporalPortalGauntlet -- Time elapsed: 0.008 s <<< FAILURE!
 org.opentest4j.AssertionFailedError: Armée doit être recrutée ==> expected: <true> but was: <false>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
@@ -987,7 +990,7 @@ org.opentest4j.AssertionFailedError: Champ d'incertitude doit être activé ==> 
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 
-[ERROR] com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest.testFateChains -- Time elapsed: 0.005 s <<< FAILURE!
+[ERROR] com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest.testFateChains -- Time elapsed: 0.006 s <<< FAILURE!
 org.opentest4j.AssertionFailedError: Lien karmique doit être créé ==> expected: <true> but was: <false>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
@@ -999,7 +1002,7 @@ org.opentest4j.AssertionFailedError: Lien karmique doit être créé ==> expecte
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 
-[ERROR] com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest.testQuantumMirrorShield -- Time elapsed: 0.006 s <<< FAILURE!
+[ERROR] com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest.testQuantumMirrorShield -- Time elapsed: 0.005 s <<< FAILURE!
 org.opentest4j.AssertionFailedError: Attaque de volée doit être simulée ==> expected: <true> but was: <false>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
@@ -1011,7 +1014,7 @@ org.opentest4j.AssertionFailedError: Attaque de volée doit être simulée ==> e
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 
-[ERROR] com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest.testQuantumSynergy -- Time elapsed: 0.006 s <<< FAILURE!
+[ERROR] com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest.testQuantumSynergy -- Time elapsed: 0.008 s <<< FAILURE!
 org.opentest4j.AssertionFailedError: Champ d'incertitude doit être activé ==> expected: <true> but was: <false>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
@@ -1023,8 +1026,8 @@ org.opentest4j.AssertionFailedError: Champ d'incertitude doit être activé ==> 
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 
-[ERROR] com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest.testMathematicalFormulas -- Time elapsed: 0.004 s <<< FAILURE!
-org.opentest4j.AssertionFailedError: Formule CHAIN_PROBABILITY doit être valide ==> expected: <true> but was: <false>
+[ERROR] com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest.testMathematicalFormulas -- Time elapsed: 0.005 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Formule QUANTUM_REFLECT doit être valide ==> expected: <true> but was: <false>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
 	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
@@ -1035,11 +1038,11 @@ org.opentest4j.AssertionFailedError: Formule CHAIN_PROBABILITY doit être valide
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 
-2025-07-19T17:22:24.691+02:00  INFO 19655 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.heroesoftimepoc.temporalengine.integration.BatailleTemporelleIntegrationTest]: BatailleTemporelleIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2025-07-19T17:22:24.692+02:00  INFO 19655 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.heroesoftimepoc.temporalengine.TemporalEngineApplication for test class com.heroesoftimepoc.temporalengine.integration.BatailleTemporelleIntegrationTest
+2025-07-19T21:32:51.402+02:00  INFO 64910 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.heroesoftimepoc.temporalengine.integration.BatailleTemporelleIntegrationTest]: BatailleTemporelleIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-07-19T21:32:51.403+02:00  INFO 64910 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.heroesoftimepoc.temporalengine.TemporalEngineApplication for test class com.heroesoftimepoc.temporalengine.integration.BatailleTemporelleIntegrationTest
 🚀 Initialisation des tests de Bataille Temporelle
 ======================================================
-2025-07-19T17:22:24.697+02:00  INFO 19655 --- [           main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
+2025-07-19T21:32:51.408+02:00  INFO 64910 --- [           main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
  ██╗  ██╗███████╗██████╗  ██████╗ ███████╗███████╗    ██████╗ ███████╗    ████████╗██╗███╗   ███╗███████╗
  ██║  ██║██╔════╝██╔══██╗██╔═══██╗██╔════╝██╔════╝   ██╔═══██╗██╔════╝    ╚══██╔══╝██║████╗ ████║██╔════╝
  ███████║█████╗  ██████╔╝██║   ██║█████╗  ███████╗   ██║   ██║█████╗         ██║   ██║██╔████╔██║█████╗  
@@ -1060,23 +1063,23 @@ org.opentest4j.AssertionFailedError: Formule CHAIN_PROBABILITY doit être valide
     • API REST Complète            ✅
     
  🎯 Port: 8080 | 🔧 Profile: default | 📊 Version: 1.0.0 
-2025-07-19T17:22:24.715+02:00  INFO 19655 --- [           main] .h.t.i.BatailleTemporelleIntegrationTest : Starting BatailleTemporelleIntegrationTest using Java 17.0.15 with PID 19655 (started by admin in /Users/admin/HOT/Heroes-of-Time/backend)
-2025-07-19T17:22:24.715+02:00 DEBUG 19655 --- [           main] .h.t.i.BatailleTemporelleIntegrationTest : Running with Spring Boot v3.2.0, Spring v6.1.1
-2025-07-19T17:22:24.715+02:00  INFO 19655 --- [           main] .h.t.i.BatailleTemporelleIntegrationTest : No active profile set, falling back to 1 default profile: "default"
-2025-07-19T17:22:24.716+02:00 DEBUG 19655 --- [           main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@5a95c52d
-2025-07-19T17:22:24.786+02:00  INFO 19655 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-07-19T17:22:24.793+02:00  INFO 19655 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 5 JPA repository interfaces.
-2025-07-19T17:22:24.816+02:00  INFO 19655 --- [           main] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Starting...
-2025-07-19T17:22:24.817+02:00  INFO 19655 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HeroesOfTimePool - Added connection conn15: url=jdbc:h2:mem:heroesdb user=SA
-2025-07-19T17:22:24.817+02:00 ERROR 19655 --- [           main] com.zaxxer.hikari.pool.PoolBase          : HeroesOfTimePool - JMX name (HeroesOfTimePool) is already registered.
-2025-07-19T17:22:24.817+02:00  INFO 19655 --- [           main] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Start completed.
-2025-07-19T17:22:24.827+02:00  INFO 19655 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-07-19T17:22:24.828+02:00  INFO 19655 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-07-19T17:22:24.829+02:00  INFO 19655 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-07-19T17:22:24.830+02:00  WARN 19655 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-07-19T17:22:24.890+02:00  INFO 19655 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-19T21:32:51.424+02:00  INFO 64910 --- [           main] .h.t.i.BatailleTemporelleIntegrationTest : Starting BatailleTemporelleIntegrationTest using Java 17.0.15 with PID 64910 (started by admin in /Users/admin/HOT/Heroes-of-Time/backend)
+2025-07-19T21:32:51.425+02:00 DEBUG 64910 --- [           main] .h.t.i.BatailleTemporelleIntegrationTest : Running with Spring Boot v3.2.0, Spring v6.1.1
+2025-07-19T21:32:51.425+02:00  INFO 64910 --- [           main] .h.t.i.BatailleTemporelleIntegrationTest : No active profile set, falling back to 1 default profile: "default"
+2025-07-19T21:32:51.426+02:00 DEBUG 64910 --- [           main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@7b61b614
+2025-07-19T21:32:51.485+02:00  INFO 64910 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-19T21:32:51.490+02:00  INFO 64910 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 4 ms. Found 5 JPA repository interfaces.
+2025-07-19T21:32:51.527+02:00  INFO 64910 --- [           main] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Starting...
+2025-07-19T21:32:51.527+02:00  INFO 64910 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HeroesOfTimePool - Added connection conn15: url=jdbc:h2:mem:heroesdb user=SA
+2025-07-19T21:32:51.528+02:00 ERROR 64910 --- [           main] com.zaxxer.hikari.pool.PoolBase          : HeroesOfTimePool - JMX name (HeroesOfTimePool) is already registered.
+2025-07-19T21:32:51.528+02:00  INFO 64910 --- [           main] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Start completed.
+2025-07-19T21:32:51.536+02:00  INFO 64910 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-19T21:32:51.537+02:00  INFO 64910 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-07-19T21:32:51.538+02:00  INFO 64910 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-19T21:32:51.539+02:00  WARN 64910 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-19T21:32:51.602+02:00  INFO 64910 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 Hibernate: drop table if exists game_players cascade 
-2025-07-19T17:22:24.890+02:00  INFO 19655 --- [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@372f005a] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-07-19T21:32:51.602+02:00  INFO 64910 --- [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@4aecb548] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
 Hibernate: drop table if exists game_tiles cascade 
 Hibernate: drop table if exists games cascade 
 Hibernate: drop table if exists hero_inventory cascade 
@@ -1085,7 +1088,7 @@ Hibernate: drop table if exists psi_states cascade
 Hibernate: drop table if exists temporal_artifacts cascade 
 Hibernate: drop table if exists tile_occupants cascade 
 Hibernate: create table game_players (game_id bigint not null, player_id varchar(255))
-2025-07-19T17:22:24.892+02:00  INFO 19655 --- [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@722dd1df] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-07-19T21:32:51.604+02:00  INFO 64910 --- [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@79c26be5] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
 Hibernate: create table game_tiles (defense_bonus integer, has_psi_states boolean, is_locked boolean, is_temporal_zone boolean, lock_duration integer, movement_cost integer, temporal_energy_bonus integer, x integer not null, y integer not null, game_id bigint, id bigint generated by default as identity, building_owner varchar(255), building_type varchar(255), temporal_zone_type varchar(255), terrain varchar(255), primary key (id))
 Hibernate: create table games (current_turn integer, map_height integer, map_width integer, max_players integer, created_at timestamp(6), ended_at timestamp(6), id bigint generated by default as identity, started_at timestamp(6), current_player varchar(255), current_timeline varchar(255), game_name varchar(255) not null, status varchar(255) check (status in ('WAITING','ACTIVE','PAUSED','FINISHED','CANCELLED')), winner varchar(255), primary key (id))
 Hibernate: create table hero_inventory (hero_id bigint not null, item varchar(255))
@@ -1100,19 +1103,19 @@ Hibernate: alter table if exists heroes add constraint FKb88jgdc3dfmmhbnrpl6u5sj
 Hibernate: alter table if exists psi_states add constraint FK9kbp67wo94i0jk9w4v3ja4meq foreign key (game_id) references games
 Hibernate: alter table if exists temporal_artifacts add constraint FK4gwvr3vnipo301cwl6hnvtyn1 foreign key (game_id) references games
 Hibernate: alter table if exists tile_occupants add constraint FKia56skupqk3qxypotqpovr3gb foreign key (tile_id) references game_tiles
-2025-07-19T17:22:24.898+02:00  INFO 19655 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-19T21:32:51.611+02:00  INFO 64910 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
 ✅ Héros GROFI chargé: Jean-Grofignon (LEGENDARY)
 ✅ Héros GROFI chargé: The Dude (compagnon)
 ✅ Héros GROFI chargé: Vince Vega (compagnon)
 ✅ Héros GROFI chargé: Walter (compagnon)
 🦸 4 héros GROFI chargés avec succès
-2025-07-19T17:22:25.055+02:00  WARN 19655 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-07-19T17:22:25.080+02:00 DEBUG 19655 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 85 mappings in 'requestMappingHandlerMapping'
-2025-07-19T17:22:25.097+02:00 DEBUG 19655 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-2025-07-19T17:22:25.099+02:00 DEBUG 19655 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2025-07-19T17:22:25.101+02:00 DEBUG 19655 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
-2025-07-19T17:22:25.110+02:00  INFO 19655 --- [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:heroesdb'
-2025-07-19T17:22:25.120+02:00  INFO 19655 --- [           main] .h.t.i.BatailleTemporelleIntegrationTest : Started BatailleTemporelleIntegrationTest in 0.423 seconds (process running for 5.431)
+2025-07-19T21:32:51.788+02:00  WARN 64910 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-19T21:32:51.816+02:00 DEBUG 64910 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 89 mappings in 'requestMappingHandlerMapping'
+2025-07-19T21:32:51.837+02:00 DEBUG 64910 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2025-07-19T21:32:51.839+02:00 DEBUG 64910 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-07-19T21:32:51.841+02:00 DEBUG 64910 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-07-19T21:32:51.859+02:00  INFO 64910 --- [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:heroesdb'
+2025-07-19T21:32:51.869+02:00  INFO 64910 --- [           main] .h.t.i.BatailleTemporelleIntegrationTest : Started BatailleTemporelleIntegrationTest in 0.462 seconds (process running for 7.253)
 🔧 Setup du test...
 📊 Scénario chargé: Bataille Temporelle
 ⚔️  Artefacts temporels chargés: 7
@@ -1315,8 +1318,11 @@ Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplit
 📊 Statistiques collapse causale: {activeStates=8, collapsedStates=5, totalStates=13, collapseRate=0.38461538461538464, collapsesByType={}}
 ✅ Succès: Quantum temporal state ψ013 collapsed successfully
 📜 Exécution: USE(ARTIFACT, HorlogeInversee, HERO:Morgana)
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: HorlogeInversee
+❌ Artefact HorlogeInversee non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: HorlogeInversee
 📊 Statistiques collapse causale: {activeStates=8, collapsedStates=5, totalStates=13, collapseRate=0.38461538461538464, collapsesByType={}}
-✅ Succès: 🎲 Artefact HorlogeInversee activé
+✅ Succès: 🎲 Artefact HorlogeInversee activé (mode générique)
 📜 Exécution: ψ014: ⊙(Δt+1 @12,14 ⟶ MOV(Morgana, @12,14))
 Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 📊 Statistiques collapse causale: {activeStates=9, collapsedStates=5, totalStates=14, collapseRate=0.35714285714285715, collapsesByType={}}
@@ -1334,8 +1340,11 @@ Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplit
 📊 Statistiques collapse causale: {activeStates=12, collapsedStates=5, totalStates=17, collapseRate=0.29411764705882354, collapsesByType={}}
 ✅ Succès: Quantum temporal state ψ017 created successfully
 📜 Exécution: USE(ARTIFACT, OrbeProbabilite, HERO:Morgana)
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: OrbeProbabilite
+❌ Artefact OrbeProbabilite non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: OrbeProbabilite
 📊 Statistiques collapse causale: {activeStates=12, collapsedStates=5, totalStates=17, collapseRate=0.29411764705882354, collapsesByType={}}
-✅ Succès: 🎲 Artefact OrbeProbabilite activé
+✅ Succès: 🎲 Artefact OrbeProbabilite activé (mode générique)
 📜 Exécution: ψ018: (0.9+0.3i) ⊙(Δt+1 @11,10 ⟶ BATTLE(Morgana, DragonRouge))
 Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 📊 Statistiques collapse causale: {activeStates=13, collapsedStates=5, totalStates=18, collapseRate=0.2777777777777778, collapsesByType={}}
@@ -1437,6 +1446,9 @@ Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplit
 Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 📊 Statistiques collapse causale: {activeStates=9, collapsedStates=4, totalStates=13, collapseRate=0.3076923076923077, collapsesByType={}}
 📊 Statistiques collapse causale: {activeStates=8, collapsedStates=5, totalStates=13, collapseRate=0.38461538461538464, collapsesByType={}}
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: HorlogeInversee
+❌ Artefact HorlogeInversee non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: HorlogeInversee
 📊 Statistiques collapse causale: {activeStates=8, collapsedStates=5, totalStates=13, collapseRate=0.38461538461538464, collapsesByType={}}
 Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 📊 Statistiques collapse causale: {activeStates=9, collapsedStates=5, totalStates=14, collapseRate=0.35714285714285715, collapsesByType={}}
@@ -1446,6 +1458,9 @@ Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplit
 📊 Statistiques collapse causale: {activeStates=11, collapsedStates=5, totalStates=16, collapseRate=0.3125, collapsesByType={}}
 Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 📊 Statistiques collapse causale: {activeStates=12, collapsedStates=5, totalStates=17, collapseRate=0.29411764705882354, collapsesByType={}}
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: OrbeProbabilite
+❌ Artefact OrbeProbabilite non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: OrbeProbabilite
 📊 Statistiques collapse causale: {activeStates=12, collapsedStates=5, totalStates=17, collapseRate=0.29411764705882354, collapsesByType={}}
 Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 📊 Statistiques collapse causale: {activeStates=13, collapsedStates=5, totalStates=18, collapseRate=0.2777777777777778, collapsesByType={}}
@@ -1479,11 +1494,17 @@ Hibernate: insert into game_tiles (building_owner,building_type,defense_bonus,ga
   - CollapseResult[INTERACTION] ψ101: Héros Morgana déplacé vers (12,12) via collapse causale (success=true)
 ✅ Succès: Quantum temporal state ψ101 created successfully
 📜 Exécution: USE(ARTIFACT, LameAvantMonde, HERO:Arthur)
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: LameAvantMonde
+❌ Artefact LameAvantMonde non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: LameAvantMonde
 📊 Statistiques collapse causale: {activeStates=14, collapsedStates=7, totalStates=21, collapseRate=0.3333333333333333, collapsesByType={}}
-✅ Succès: 🎲 Artefact LameAvantMonde activé
+✅ Succès: 🎲 Artefact LameAvantMonde activé (mode générique)
 📜 Exécution: USE(ARTIFACT, BatonDuTemps, HERO:Morgana)
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: BatonDuTemps
+❌ Artefact BatonDuTemps non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: BatonDuTemps
 📊 Statistiques collapse causale: {activeStates=14, collapsedStates=7, totalStates=21, collapseRate=0.3333333333333333, collapsesByType={}}
-✅ Succès: 🎲 Artefact BatonDuTemps activé
+✅ Succès: 🎲 Artefact BatonDuTemps activé (mode générique)
 📜 Exécution: ψ102: (0.9+0.3i) ⊙(Δt+2 @10,10 ⟶ CREATE(CREATURE, DragonTemporel, @10,10))
 Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 📊 Statistiques collapse causale: {activeStates=15, collapsedStates=7, totalStates=22, collapseRate=0.3181818181818182, collapsesByType={}}
@@ -1723,6 +1744,9 @@ Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplit
 Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 📊 Statistiques collapse causale: {activeStates=9, collapsedStates=4, totalStates=13, collapseRate=0.3076923076923077, collapsesByType={}}
 📊 Statistiques collapse causale: {activeStates=8, collapsedStates=5, totalStates=13, collapseRate=0.38461538461538464, collapsesByType={}}
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: HorlogeInversee
+❌ Artefact HorlogeInversee non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: HorlogeInversee
 📊 Statistiques collapse causale: {activeStates=8, collapsedStates=5, totalStates=13, collapseRate=0.38461538461538464, collapsesByType={}}
 Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 📊 Statistiques collapse causale: {activeStates=9, collapsedStates=5, totalStates=14, collapseRate=0.35714285714285715, collapsesByType={}}
@@ -1732,6 +1756,9 @@ Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplit
 📊 Statistiques collapse causale: {activeStates=11, collapsedStates=5, totalStates=16, collapseRate=0.3125, collapsesByType={}}
 Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 📊 Statistiques collapse causale: {activeStates=12, collapsedStates=5, totalStates=17, collapseRate=0.29411764705882354, collapsesByType={}}
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: OrbeProbabilite
+❌ Artefact OrbeProbabilite non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: OrbeProbabilite
 📊 Statistiques collapse causale: {activeStates=12, collapsedStates=5, totalStates=17, collapseRate=0.29411764705882354, collapsesByType={}}
 Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 📊 Statistiques collapse causale: {activeStates=13, collapsedStates=5, totalStates=18, collapseRate=0.2777777777777778, collapsesByType={}}
@@ -1752,7 +1779,13 @@ Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplit
 Hibernate: insert into game_tiles (building_owner,building_type,defense_bonus,game_id,has_psi_states,is_locked,is_temporal_zone,lock_duration,movement_cost,temporal_energy_bonus,temporal_zone_type,terrain,x,y,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 🌀 Collapses causales détectés:
   - CollapseResult[INTERACTION] ψ101: Héros Morgana déplacé vers (12,12) via collapse causale (success=true)
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: LameAvantMonde
+❌ Artefact LameAvantMonde non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: LameAvantMonde
 📊 Statistiques collapse causale: {activeStates=14, collapsedStates=7, totalStates=21, collapseRate=0.3333333333333333, collapsesByType={}}
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: BatonDuTemps
+❌ Artefact BatonDuTemps non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: BatonDuTemps
 📊 Statistiques collapse causale: {activeStates=14, collapsedStates=7, totalStates=21, collapseRate=0.3333333333333333, collapsesByType={}}
 Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 📊 Statistiques collapse causale: {activeStates=15, collapsedStates=7, totalStates=22, collapseRate=0.3181818181818182, collapsesByType={}}
@@ -1871,9 +1904,9 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
 ✅ Le moteur quantique est stable
 🧹 Nettoyage du test...
 ✅ Nettoyage terminé
-2025-07-19T17:22:25.295+02:00  INFO 19655 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest]: TemporalEngineIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2025-07-19T17:22:25.297+02:00  INFO 19655 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.heroesoftimepoc.temporalengine.TemporalEngineApplication for test class com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest
-2025-07-19T17:22:25.299+02:00  INFO 19655 --- [           main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
+2025-07-19T21:32:52.067+02:00  INFO 64910 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest]: TemporalEngineIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-07-19T21:32:52.068+02:00  INFO 64910 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.heroesoftimepoc.temporalengine.TemporalEngineApplication for test class com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest
+2025-07-19T21:32:52.069+02:00  INFO 64910 --- [           main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
  ██╗  ██╗███████╗██████╗  ██████╗ ███████╗███████╗    ██████╗ ███████╗    ████████╗██╗███╗   ███╗███████╗
  ██║  ██║██╔════╝██╔══██╗██╔═══██╗██╔════╝██╔════╝   ██╔═══██╗██╔════╝    ╚══██╔══╝██║████╗ ████║██╔════╝
  ███████║█████╗  ██████╔╝██║   ██║█████╗  ███████╗   ██║   ██║█████╗         ██║   ██║██╔████╔██║█████╗  
@@ -1894,45 +1927,45 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
     • API REST Complète            ✅
     
  🎯 Port: 8081 | 🔧 Profile: default | 📊 Version: 1.0.0 
-2025-07-19T17:22:25.313+02:00  INFO 19655 --- [           main] c.h.t.TemporalEngineIntegrationTest      : Starting TemporalEngineIntegrationTest using Java 17.0.15 with PID 19655 (started by admin in /Users/admin/HOT/Heroes-of-Time/backend)
-2025-07-19T17:22:25.314+02:00 DEBUG 19655 --- [           main] c.h.t.TemporalEngineIntegrationTest      : Running with Spring Boot v3.2.0, Spring v6.1.1
-2025-07-19T17:22:25.314+02:00  INFO 19655 --- [           main] c.h.t.TemporalEngineIntegrationTest      : The following 1 profile is active: "test"
-2025-07-19T17:22:25.314+02:00 DEBUG 19655 --- [           main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@ac61487
-2025-07-19T17:22:25.371+02:00  INFO 19655 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-07-19T17:22:25.379+02:00  INFO 19655 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 5 JPA repository interfaces.
-2025-07-19T17:22:25.397+02:00  INFO 19655 --- [           main] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Starting...
-2025-07-19T17:22:25.398+02:00  INFO 19655 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HeroesOfTimePool - Added connection conn20: url=jdbc:h2:mem:heroesdb user=SA
-2025-07-19T17:22:25.398+02:00 ERROR 19655 --- [           main] com.zaxxer.hikari.pool.PoolBase          : HeroesOfTimePool - JMX name (HeroesOfTimePool) is already registered.
-2025-07-19T17:22:25.398+02:00  INFO 19655 --- [           main] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Start completed.
-2025-07-19T17:22:25.407+02:00  INFO 19655 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-07-19T17:22:25.408+02:00  INFO 19655 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-07-19T17:22:25.409+02:00  INFO 19655 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-07-19T17:22:25.409+02:00  WARN 19655 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-07-19T17:22:25.463+02:00  INFO 19655 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-07-19T17:22:25.463+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.082+02:00  INFO 64910 --- [           main] c.h.t.TemporalEngineIntegrationTest      : Starting TemporalEngineIntegrationTest using Java 17.0.15 with PID 64910 (started by admin in /Users/admin/HOT/Heroes-of-Time/backend)
+2025-07-19T21:32:52.082+02:00 DEBUG 64910 --- [           main] c.h.t.TemporalEngineIntegrationTest      : Running with Spring Boot v3.2.0, Spring v6.1.1
+2025-07-19T21:32:52.083+02:00  INFO 64910 --- [           main] c.h.t.TemporalEngineIntegrationTest      : The following 1 profile is active: "test"
+2025-07-19T21:32:52.083+02:00 DEBUG 64910 --- [           main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@36f2bb92
+2025-07-19T21:32:52.133+02:00  INFO 64910 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-19T21:32:52.138+02:00  INFO 64910 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 4 ms. Found 5 JPA repository interfaces.
+2025-07-19T21:32:52.169+02:00  INFO 64910 --- [           main] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Starting...
+2025-07-19T21:32:52.169+02:00  INFO 64910 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HeroesOfTimePool - Added connection conn20: url=jdbc:h2:mem:heroesdb user=SA
+2025-07-19T21:32:52.169+02:00 ERROR 64910 --- [           main] com.zaxxer.hikari.pool.PoolBase          : HeroesOfTimePool - JMX name (HeroesOfTimePool) is already registered.
+2025-07-19T21:32:52.170+02:00  INFO 64910 --- [           main] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Start completed.
+2025-07-19T21:32:52.178+02:00  INFO 64910 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-19T21:32:52.179+02:00  INFO 64910 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-07-19T21:32:52.181+02:00  INFO 64910 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-19T21:32:52.181+02:00  WARN 64910 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-19T21:32:52.242+02:00  INFO 64910 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-19T21:32:52.242+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     drop table if exists game_players cascade 
-2025-07-19T17:22:25.464+02:00  INFO 19655 --- [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6cda3fba] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-2025-07-19T17:22:25.464+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.242+02:00  INFO 64910 --- [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@75a5fe82] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-07-19T21:32:52.243+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     drop table if exists game_tiles cascade 
-2025-07-19T17:22:25.464+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.243+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     drop table if exists games cascade 
-2025-07-19T17:22:25.465+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.243+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     drop table if exists hero_inventory cascade 
-2025-07-19T17:22:25.465+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.243+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     drop table if exists heroes cascade 
-2025-07-19T17:22:25.465+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.243+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     drop table if exists psi_states cascade 
-2025-07-19T17:22:25.465+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.243+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     drop table if exists temporal_artifacts cascade 
-2025-07-19T17:22:25.465+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.243+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     drop table if exists tile_occupants cascade 
-2025-07-19T17:22:25.465+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.244+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     create table game_players (
         game_id bigint not null,
         player_id varchar(255)
     )
-2025-07-19T17:22:25.465+02:00  INFO 19655 --- [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@23a7f0db] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-2025-07-19T17:22:25.466+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.244+02:00  INFO 64910 --- [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6ecbf948] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-07-19T21:32:52.244+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     create table game_tiles (
         defense_bonus integer,
         has_psi_states boolean,
@@ -1951,7 +1984,7 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
         terrain varchar(255),
         primary key (id)
     )
-2025-07-19T17:22:25.466+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.245+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     create table games (
         current_turn integer,
         map_height integer,
@@ -1968,12 +2001,12 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
         winner varchar(255),
         primary key (id)
     )
-2025-07-19T17:22:25.466+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.245+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     create table hero_inventory (
         hero_id bigint not null,
         item varchar(255)
     )
-2025-07-19T17:22:25.467+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.246+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     create table heroes (
         current_day integer,
         days_traveled integer,
@@ -1997,7 +2030,7 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
         timeline_branch varchar(255),
         primary key (id)
     )
-2025-07-19T17:22:25.467+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.246+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     create table psi_states (
         amplitude_imaginary float(53),
         amplitude_real float(53),
@@ -2018,7 +2051,7 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
         status varchar(255) check (status in ('ACTIVE','COLLAPSED','TRIGGERED','EXPIRED')),
         primary key (id)
     )
-2025-07-19T17:22:25.468+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.247+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     create table temporal_artifacts (
         effect_duration integer,
         effect_power integer,
@@ -2039,66 +2072,66 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
         type varchar(255) not null check (type in ('VEIL','ANCHOR_TOWER','WIGNER_EYE','TEMPORAL_SWORD','CHRONOS_SHIELD','QUANTUM_MIRROR','TEMPORAL_COMPASS','CAUSAL_DISRUPTOR')),
         primary key (id)
     )
-2025-07-19T17:22:25.468+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.247+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     create table tile_occupants (
         tile_id bigint not null,
         occupant varchar(255)
     )
-2025-07-19T17:22:25.469+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.247+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     alter table if exists game_players 
        add constraint FKrbr2flqdav5ovyjas7q92u64r 
        foreign key (game_id) 
        references games
-2025-07-19T17:22:25.470+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.248+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     alter table if exists game_tiles 
        add constraint FK9jnp7yfteauo45smvmxa8710m 
        foreign key (game_id) 
        references games
-2025-07-19T17:22:25.470+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.248+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     alter table if exists hero_inventory 
        add constraint FKox21x0dd4fg7w81h3a8o6chu 
        foreign key (hero_id) 
        references heroes
-2025-07-19T17:22:25.471+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.249+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     alter table if exists heroes 
        add constraint FKb88jgdc3dfmmhbnrpl6u5sjdn 
        foreign key (game_id) 
        references games
-2025-07-19T17:22:25.471+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.249+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     alter table if exists psi_states 
        add constraint FK9kbp67wo94i0jk9w4v3ja4meq 
        foreign key (game_id) 
        references games
-2025-07-19T17:22:25.472+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.250+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     alter table if exists temporal_artifacts 
        add constraint FK4gwvr3vnipo301cwl6hnvtyn1 
        foreign key (game_id) 
        references games
-2025-07-19T17:22:25.472+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.251+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     alter table if exists tile_occupants 
        add constraint FKia56skupqk3qxypotqpovr3gb 
        foreign key (tile_id) 
        references game_tiles
-2025-07-19T17:22:25.473+02:00  INFO 19655 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-19T21:32:52.251+02:00  INFO 64910 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
 ✅ Héros GROFI chargé: Jean-Grofignon (LEGENDARY)
 ✅ Héros GROFI chargé: The Dude (compagnon)
 ✅ Héros GROFI chargé: Vince Vega (compagnon)
 ✅ Héros GROFI chargé: Walter (compagnon)
 🦸 4 héros GROFI chargés avec succès
-2025-07-19T17:22:25.594+02:00  WARN 19655 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-07-19T17:22:25.609+02:00 DEBUG 19655 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 85 mappings in 'requestMappingHandlerMapping'
-2025-07-19T17:22:25.625+02:00 DEBUG 19655 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-2025-07-19T17:22:25.627+02:00 DEBUG 19655 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2025-07-19T17:22:25.628+02:00 DEBUG 19655 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
-2025-07-19T17:22:25.645+02:00  INFO 19655 --- [           main] c.h.t.TemporalEngineIntegrationTest      : Started TemporalEngineIntegrationTest in 0.346 seconds (process running for 5.956)
-2025-07-19T17:22:25.649+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.399+02:00  WARN 64910 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-19T21:32:52.417+02:00 DEBUG 64910 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 89 mappings in 'requestMappingHandlerMapping'
+2025-07-19T21:32:52.437+02:00 DEBUG 64910 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2025-07-19T21:32:52.439+02:00 DEBUG 64910 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-07-19T21:32:52.441+02:00 DEBUG 64910 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-07-19T21:32:52.467+02:00  INFO 64910 --- [           main] c.h.t.TemporalEngineIntegrationTest      : Started TemporalEngineIntegrationTest in 0.398 seconds (process running for 7.851)
+2025-07-19T21:32:52.471+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.Game */insert 
     into
         games (created_at, current_player, current_timeline, current_turn, ended_at, game_name, map_height, map_width, max_players, started_at, status, winner, id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
-2025-07-19T17:22:25.651+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.473+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.Hero */insert 
     into
@@ -2106,7 +2139,7 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
-2025-07-19T17:22:25.652+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.474+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.PsiState */insert 
     into
@@ -2114,7 +2147,7 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
 📊 Statistiques collapse causale: {activeStates=1, collapsedStates=0, totalStates=1, collapseRate=0.0, collapsesByType={}}
-2025-07-19T17:22:25.654+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.474+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.GameTile */insert 
     into
@@ -2122,7 +2155,7 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=1, totalStates=1, collapseRate=1.0, collapsesByType={}}
-2025-07-19T17:22:25.658+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.477+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* update
         for com.heroesoftimepoc.temporalengine.model.Hero */update heroes 
     set
@@ -2147,7 +2180,7 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
         vision_radius=? 
     where
         id=?
-2025-07-19T17:22:25.659+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.482+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* update
         for com.heroesoftimepoc.temporalengine.model.PsiState */update psi_states 
     set
@@ -2169,21 +2202,21 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
         use_complex_amplitude=? 
     where
         id=?
-2025-07-19T17:22:25.660+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.482+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.Game.players */insert 
     into
         game_players (game_id, player_id) 
     values
         (?, ?)
-2025-07-19T17:22:25.660+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.482+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.GameTile.occupants */insert 
     into
         tile_occupants (tile_id, occupant) 
     values
         (?, ?)
-2025-07-19T17:22:25.660+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.483+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* SELECT
         h 
     FROM
@@ -2214,14 +2247,14 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
             heroes h1_0 
         where
             h1_0.game_id=?
-2025-07-19T17:22:25.663+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.486+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.Game */insert 
     into
         games (created_at, current_player, current_timeline, current_turn, ended_at, game_name, map_height, map_width, max_players, started_at, status, winner, id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
-2025-07-19T17:22:25.664+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.487+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.Hero */insert 
     into
@@ -2229,7 +2262,7 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
-2025-07-19T17:22:25.665+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.487+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.PsiState */insert 
     into
@@ -2237,7 +2270,7 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
 📊 Statistiques collapse causale: {activeStates=1, collapsedStates=0, totalStates=1, collapseRate=0.0, collapsesByType={}}
-2025-07-19T17:22:25.665+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.489+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.PsiState */insert 
     into
@@ -2245,7 +2278,7 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
 📊 Statistiques collapse causale: {activeStates=2, collapsedStates=0, totalStates=2, collapseRate=0.0, collapsesByType={}}
-2025-07-19T17:22:25.666+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.490+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.GameTile */insert 
     into
@@ -2254,7 +2287,7 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
 🌀 Collapses causales détectés:
   - CollapseResult[INTERACTION] ψ401: Héros Arthur déplacé vers (40,40) via collapse causale (success=true)
-2025-07-19T17:22:25.668+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.492+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* update
         for com.heroesoftimepoc.temporalengine.model.Hero */update heroes 
     set
@@ -2279,7 +2312,7 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
         vision_radius=? 
     where
         id=?
-2025-07-19T17:22:25.668+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.493+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* update
         for com.heroesoftimepoc.temporalengine.model.PsiState */update psi_states 
     set
@@ -2301,7 +2334,7 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
         use_complex_amplitude=? 
     where
         id=?
-2025-07-19T17:22:25.669+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.493+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* update
         for com.heroesoftimepoc.temporalengine.model.PsiState */update psi_states 
     set
@@ -2323,21 +2356,21 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
         use_complex_amplitude=? 
     where
         id=?
-2025-07-19T17:22:25.669+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.493+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.Game.players */insert 
     into
         game_players (game_id, player_id) 
     values
         (?, ?)
-2025-07-19T17:22:25.670+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.494+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.GameTile.occupants */insert 
     into
         tile_occupants (tile_id, occupant) 
     values
         (?, ?)
-2025-07-19T17:22:25.670+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.494+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* SELECT
         p 
     FROM
@@ -2365,14 +2398,14 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
             psi_states ps1_0 
         where
             ps1_0.game_id=?
-2025-07-19T17:22:25.673+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.497+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.Game */insert 
     into
         games (created_at, current_player, current_timeline, current_turn, ended_at, game_name, map_height, map_width, max_players, started_at, status, winner, id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
-2025-07-19T17:22:25.674+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.498+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.Hero */insert 
     into
@@ -2380,7 +2413,7 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
-2025-07-19T17:22:25.675+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.498+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.Hero */insert 
     into
@@ -2388,7 +2421,7 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
-2025-07-19T17:22:25.676+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.499+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.Hero */insert 
     into
@@ -2396,14 +2429,14 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
-2025-07-19T17:22:25.678+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.501+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.Game */insert 
     into
         games (created_at, current_player, current_timeline, current_turn, ended_at, game_name, map_height, map_width, max_players, started_at, status, winner, id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
-2025-07-19T17:22:25.680+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.502+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.Hero */insert 
     into
@@ -2411,7 +2444,7 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
-2025-07-19T17:22:25.681+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.502+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.Hero */insert 
     into
@@ -2419,14 +2452,14 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
-2025-07-19T17:22:25.692+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.512+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.Game */insert 
     into
         games (created_at, current_player, current_timeline, current_turn, ended_at, game_name, map_height, map_width, max_players, started_at, status, winner, id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
-2025-07-19T17:22:25.693+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.513+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.Hero */insert 
     into
@@ -2434,7 +2467,7 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
-2025-07-19T17:22:25.693+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.513+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.Hero */insert 
     into
@@ -2442,7 +2475,7 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
-2025-07-19T17:22:25.694+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.514+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.PsiState */insert 
     into
@@ -2450,7 +2483,7 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
 📊 Statistiques collapse causale: {activeStates=1, collapsedStates=0, totalStates=1, collapseRate=0.0, collapsesByType={}}
-2025-07-19T17:22:25.694+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.514+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.PsiState */insert 
     into
@@ -2458,14 +2491,14 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
 📊 Statistiques collapse causale: {activeStates=2, collapsedStates=0, totalStates=2, collapseRate=0.0, collapsesByType={}}
-2025-07-19T17:22:25.695+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.515+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.Game.players */insert 
     into
         game_players (game_id, player_id) 
     values
         (?, ?)
-2025-07-19T17:22:25.696+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.516+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* SELECT
         p 
     FROM
@@ -2493,7 +2526,7 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
             psi_states ps1_0 
         where
             ps1_0.game_id=?
-2025-07-19T17:22:25.696+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.516+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.GameTile */insert 
     into
@@ -2501,7 +2534,7 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
 📊 Statistiques collapse causale: {activeStates=1, collapsedStates=1, totalStates=2, collapseRate=0.5, collapsesByType={}}
-2025-07-19T17:22:25.697+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.517+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.GameTile */insert 
     into
@@ -2509,14 +2542,14 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=2, totalStates=2, collapseRate=1.0, collapsesByType={}}
-2025-07-19T17:22:25.700+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.519+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.Game */insert 
     into
         games (created_at, current_player, current_timeline, current_turn, ended_at, game_name, map_height, map_width, max_players, started_at, status, winner, id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
-2025-07-19T17:22:25.701+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.520+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.Hero */insert 
     into
@@ -2524,14 +2557,14 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
-2025-07-19T17:22:25.706+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.524+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.Game */insert 
     into
         games (created_at, current_player, current_timeline, current_turn, ended_at, game_name, map_height, map_width, max_players, started_at, status, winner, id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
-2025-07-19T17:22:25.707+02:00 DEBUG 19655 --- [           main] org.hibernate.SQL                        : 
+2025-07-19T21:32:52.526+02:00 DEBUG 64910 --- [           main] org.hibernate.SQL                        : 
     /* insert for
         com.heroesoftimepoc.temporalengine.model.Hero */insert 
     into
@@ -2539,8 +2572,8 @@ Hibernate: select h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
-[ERROR] Tests run: 7, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 0.414 s <<< FAILURE! -- in com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest
-[ERROR] com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest.testQuantumInterference -- Time elapsed: 0.010 s <<< FAILURE!
+[ERROR] Tests run: 7, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 0.461 s <<< FAILURE! -- in com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest
+[ERROR] com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest.testQuantumInterference -- Time elapsed: 0.011 s <<< FAILURE!
 org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
@@ -2566,7 +2599,7 @@ org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 
-[ERROR] com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest.testComplexBattleScenario -- Time elapsed: 0.013 s <<< FAILURE!
+[ERROR] com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest.testComplexBattleScenario -- Time elapsed: 0.003 s <<< FAILURE!
 org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
@@ -2579,7 +2612,7 @@ org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 
-[ERROR] com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest.testErrorRecovery -- Time elapsed: 0.004 s <<< FAILURE!
+[ERROR] com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest.testErrorRecovery -- Time elapsed: 0.003 s <<< FAILURE!
 org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
@@ -2592,9 +2625,9 @@ org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 
-2025-07-19T17:22:25.712+02:00  INFO 19655 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.heroesoftimepoc.temporalengine.TemporalStressTest]: TemporalStressTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2025-07-19T17:22:25.713+02:00  INFO 19655 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.heroesoftimepoc.temporalengine.TemporalEngineApplication for test class com.heroesoftimepoc.temporalengine.TemporalStressTest
-2025-07-19T17:22:25.747+02:00  INFO 19655 --- [           main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
+2025-07-19T21:32:52.531+02:00  INFO 64910 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.heroesoftimepoc.temporalengine.TemporalStressTest]: TemporalStressTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-07-19T21:32:52.564+02:00  INFO 64910 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.heroesoftimepoc.temporalengine.TemporalEngineApplication for test class com.heroesoftimepoc.temporalengine.TemporalStressTest
+2025-07-19T21:32:52.566+02:00  INFO 64910 --- [           main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
  ██╗  ██╗███████╗██████╗  ██████╗ ███████╗███████╗    ██████╗ ███████╗    ████████╗██╗███╗   ███╗███████╗
  ██║  ██║██╔════╝██╔══██╗██╔═══██╗██╔════╝██╔════╝   ██╔═══██╗██╔════╝    ╚══██╔══╝██║████╗ ████║██╔════╝
  ███████║█████╗  ██████╔╝██║   ██║█████╗  ███████╗   ██║   ██║█████╗         ██║   ██║██╔████╔██║█████╗  
@@ -2615,23 +2648,23 @@ org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
     • API REST Complète            ✅
     
  🎯 Port: 8080 | 🔧 Profile: default | 📊 Version: 1.0.0 
-2025-07-19T17:22:25.757+02:00  INFO 19655 --- [           main] c.h.temporalengine.TemporalStressTest    : Starting TemporalStressTest using Java 17.0.15 with PID 19655 (started by admin in /Users/admin/HOT/Heroes-of-Time/backend)
-2025-07-19T17:22:25.757+02:00 DEBUG 19655 --- [           main] c.h.temporalengine.TemporalStressTest    : Running with Spring Boot v3.2.0, Spring v6.1.1
-2025-07-19T17:22:25.757+02:00  INFO 19655 --- [           main] c.h.temporalengine.TemporalStressTest    : No active profile set, falling back to 1 default profile: "default"
-2025-07-19T17:22:25.758+02:00 DEBUG 19655 --- [           main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@123c878
-2025-07-19T17:22:25.822+02:00  INFO 19655 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-07-19T17:22:25.828+02:00  INFO 19655 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 5 ms. Found 5 JPA repository interfaces.
-2025-07-19T17:22:25.844+02:00  INFO 19655 --- [           main] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Starting...
-2025-07-19T17:22:25.845+02:00  INFO 19655 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HeroesOfTimePool - Added connection conn25: url=jdbc:h2:mem:heroesdb user=SA
-2025-07-19T17:22:25.845+02:00 ERROR 19655 --- [           main] com.zaxxer.hikari.pool.PoolBase          : HeroesOfTimePool - JMX name (HeroesOfTimePool) is already registered.
-2025-07-19T17:22:25.845+02:00  INFO 19655 --- [           main] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Start completed.
-2025-07-19T17:22:25.851+02:00  INFO 19655 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-07-19T17:22:25.852+02:00  INFO 19655 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-07-19T17:22:25.855+02:00  INFO 19655 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-07-19T17:22:25.855+02:00  WARN 19655 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-07-19T17:22:25.913+02:00  INFO 19655 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-19T21:32:52.580+02:00  INFO 64910 --- [           main] c.h.temporalengine.TemporalStressTest    : Starting TemporalStressTest using Java 17.0.15 with PID 64910 (started by admin in /Users/admin/HOT/Heroes-of-Time/backend)
+2025-07-19T21:32:52.580+02:00 DEBUG 64910 --- [           main] c.h.temporalengine.TemporalStressTest    : Running with Spring Boot v3.2.0, Spring v6.1.1
+2025-07-19T21:32:52.580+02:00  INFO 64910 --- [           main] c.h.temporalengine.TemporalStressTest    : No active profile set, falling back to 1 default profile: "default"
+2025-07-19T21:32:52.580+02:00 DEBUG 64910 --- [           main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@324c615d
+2025-07-19T21:32:52.635+02:00  INFO 64910 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-19T21:32:52.637+02:00  INFO 64910 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 2 ms. Found 5 JPA repository interfaces.
+2025-07-19T21:32:52.668+02:00  INFO 64910 --- [           main] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Starting...
+2025-07-19T21:32:52.668+02:00  INFO 64910 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HeroesOfTimePool - Added connection conn25: url=jdbc:h2:mem:heroesdb user=SA
+2025-07-19T21:32:52.668+02:00 ERROR 64910 --- [           main] com.zaxxer.hikari.pool.PoolBase          : HeroesOfTimePool - JMX name (HeroesOfTimePool) is already registered.
+2025-07-19T21:32:52.669+02:00  INFO 64910 --- [           main] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Start completed.
+2025-07-19T21:32:52.676+02:00  INFO 64910 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-19T21:32:52.676+02:00  INFO 64910 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-07-19T21:32:52.678+02:00  INFO 64910 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-19T21:32:52.679+02:00  WARN 64910 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-19T21:32:52.737+02:00  INFO 64910 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 Hibernate: drop table if exists game_players cascade 
-2025-07-19T17:22:25.913+02:00  INFO 19655 --- [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7dd8713e] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-07-19T21:32:52.738+02:00  INFO 64910 --- [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@2ba66d0] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
 Hibernate: drop table if exists game_tiles cascade 
 Hibernate: drop table if exists games cascade 
 Hibernate: drop table if exists hero_inventory cascade 
@@ -2640,7 +2673,7 @@ Hibernate: drop table if exists psi_states cascade
 Hibernate: drop table if exists temporal_artifacts cascade 
 Hibernate: drop table if exists tile_occupants cascade 
 Hibernate: create table game_players (game_id bigint not null, player_id varchar(255))
-2025-07-19T17:22:25.914+02:00  INFO 19655 --- [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@199fe1dc] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-07-19T21:32:52.739+02:00  INFO 64910 --- [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@79d55957] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
 Hibernate: create table game_tiles (defense_bonus integer, has_psi_states boolean, is_locked boolean, is_temporal_zone boolean, lock_duration integer, movement_cost integer, temporal_energy_bonus integer, x integer not null, y integer not null, game_id bigint, id bigint generated by default as identity, building_owner varchar(255), building_type varchar(255), temporal_zone_type varchar(255), terrain varchar(255), primary key (id))
 Hibernate: create table games (current_turn integer, map_height integer, map_width integer, max_players integer, created_at timestamp(6), ended_at timestamp(6), id bigint generated by default as identity, started_at timestamp(6), current_player varchar(255), current_timeline varchar(255), game_name varchar(255) not null, status varchar(255) check (status in ('WAITING','ACTIVE','PAUSED','FINISHED','CANCELLED')), winner varchar(255), primary key (id))
 Hibernate: create table hero_inventory (hero_id bigint not null, item varchar(255))
@@ -2655,19 +2688,19 @@ Hibernate: alter table if exists heroes add constraint FKb88jgdc3dfmmhbnrpl6u5sj
 Hibernate: alter table if exists psi_states add constraint FK9kbp67wo94i0jk9w4v3ja4meq foreign key (game_id) references games
 Hibernate: alter table if exists temporal_artifacts add constraint FK4gwvr3vnipo301cwl6hnvtyn1 foreign key (game_id) references games
 Hibernate: alter table if exists tile_occupants add constraint FKia56skupqk3qxypotqpovr3gb foreign key (tile_id) references game_tiles
-2025-07-19T17:22:25.921+02:00  INFO 19655 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-19T21:32:52.745+02:00  INFO 64910 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
 ✅ Héros GROFI chargé: Jean-Grofignon (LEGENDARY)
 ✅ Héros GROFI chargé: The Dude (compagnon)
 ✅ Héros GROFI chargé: Vince Vega (compagnon)
 ✅ Héros GROFI chargé: Walter (compagnon)
 🦸 4 héros GROFI chargés avec succès
-2025-07-19T17:22:26.033+02:00  WARN 19655 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-07-19T17:22:26.051+02:00 DEBUG 19655 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 85 mappings in 'requestMappingHandlerMapping'
-2025-07-19T17:22:26.066+02:00 DEBUG 19655 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-2025-07-19T17:22:26.068+02:00 DEBUG 19655 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2025-07-19T17:22:26.071+02:00 DEBUG 19655 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
-2025-07-19T17:22:26.079+02:00  INFO 19655 --- [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:heroesdb'
-2025-07-19T17:22:26.090+02:00  INFO 19655 --- [           main] c.h.temporalengine.TemporalStressTest    : Started TemporalStressTest in 0.343 seconds (process running for 6.401)
+2025-07-19T21:32:52.866+02:00  WARN 64910 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-19T21:32:52.882+02:00 DEBUG 64910 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 89 mappings in 'requestMappingHandlerMapping'
+2025-07-19T21:32:52.899+02:00 DEBUG 64910 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2025-07-19T21:32:52.902+02:00 DEBUG 64910 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-07-19T21:32:52.903+02:00 DEBUG 64910 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-07-19T21:32:52.911+02:00  INFO 64910 --- [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:heroesdb'
+2025-07-19T21:32:52.922+02:00  INFO 64910 --- [           main] c.h.temporalengine.TemporalStressTest    : Started TemporalStressTest in 0.355 seconds (process running for 8.306)
 Hibernate: insert into games (created_at,current_player,current_timeline,current_turn,ended_at,game_name,map_height,map_width,max_players,started_at,status,winner,id) values (?,?,?,?,?,?,?,?,?,?,?,?,default)
 Hibernate: insert into heroes (current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 Hibernate: insert into heroes (current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
@@ -2745,7 +2778,7 @@ Hibernate: insert into heroes (current_day,days_traveled,game_id,has_observation
 Hibernate: insert into heroes (current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 
 🧠 === TEST MÉMOIRE AVEC NOMBREUX ψ-STATES ===
-📊 Mémoire avant: 120,30 MB
+📊 Mémoire avant: 237,65 MB
 
 ⚡ Création de 50 ψ-states aléatoires
 Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
@@ -2853,8 +2886,8 @@ Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplit
 Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 📊 Statistiques collapse causale: {activeStates=50, collapsedStates=0, totalStates=50, collapseRate=0.0, collapsesByType={}}
 ✅ 50 ψ-states créés
-📊 Mémoire après création: 66,46 MB
-📈 Augmentation: -53,84 MB
+📊 Mémoire après création: 66,97 MB
+📈 Augmentation: -170,68 MB
 Hibernate: insert into game_players (game_id,player_id) values (?,?)
 Hibernate: insert into game_players (game_id,player_id) values (?,?)
 Hibernate: select ps1_0.id,ps1_0.action_type,ps1_0.branch_id,ps1_0.collapse_trigger,ps1_0.amplitude_imaginary,ps1_0.amplitude_real,ps1_0.created_at,ps1_0.delta_t,ps1_0.expression,ps1_0.game_id,ps1_0.owner_hero,ps1_0.probability,ps1_0.psi_id,ps1_0.status,ps1_0.target_x,ps1_0.target_y,ps1_0.use_complex_amplitude from psi_states ps1_0 where ps1_0.game_id=?
@@ -2890,7 +2923,7 @@ Hibernate: select ps1_0.id,ps1_0.action_type,ps1_0.branch_id,ps1_0.collapse_trig
 Hibernate: select ps1_0.id,ps1_0.action_type,ps1_0.branch_id,ps1_0.collapse_trigger,ps1_0.amplitude_imaginary,ps1_0.amplitude_real,ps1_0.created_at,ps1_0.delta_t,ps1_0.expression,ps1_0.game_id,ps1_0.owner_hero,ps1_0.probability,ps1_0.psi_id,ps1_0.status,ps1_0.target_x,ps1_0.target_y,ps1_0.use_complex_amplitude from psi_states ps1_0 where ps1_0.game_id=? and ps1_0.status=?
 Hibernate: select ps1_0.id,ps1_0.action_type,ps1_0.branch_id,ps1_0.collapse_trigger,ps1_0.amplitude_imaginary,ps1_0.amplitude_real,ps1_0.created_at,ps1_0.delta_t,ps1_0.expression,ps1_0.game_id,ps1_0.owner_hero,ps1_0.probability,ps1_0.psi_id,ps1_0.status,ps1_0.target_x,ps1_0.target_y,ps1_0.use_complex_amplitude from psi_states ps1_0 where ps1_0.game_id=? and ps1_0.status=?
 🎯 Tour 10: 50 actifs, 0 effondrés
-📊 Mémoire après simulation: 66,49 MB
+📊 Mémoire après simulation: 67,01 MB
 
 🎉 TEST MÉMOIRE RÉUSSI !
 Hibernate: insert into games (created_at,current_player,current_timeline,current_turn,ended_at,game_name,map_height,map_width,max_players,started_at,status,winner,id) values (?,?,?,?,?,?,?,?,?,?,?,?,default)
@@ -2940,7 +2973,7 @@ Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplit
 📊 Statistiques collapse causale: {activeStates=19, collapsedStates=0, totalStates=19, collapseRate=0.0, collapsesByType={}}
 Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 📊 Statistiques collapse causale: {activeStates=20, collapsedStates=0, totalStates=20, collapseRate=0.0, collapsesByType={}}
-⚡ Création de 20 ψ-states: 8 ms
+⚡ Création de 20 ψ-states: 7 ms
 ⏰ Simulation de 5 tours: 0 ms
 Hibernate: insert into game_players (game_id,player_id) values (?,?)
 Hibernate: insert into game_players (game_id,player_id) values (?,?)
@@ -2989,8 +3022,8 @@ REGEX - †ψ401: ✅
 REGEX - †ψ402: ✅
 
 🎉 TEST COMPATIBILITÉ TERMINÉ !
-[ERROR] Tests run: 11, Failures: 0, Errors: 11, Skipped: 0, Time elapsed: 0.361 s <<< FAILURE! -- in com.heroesoftimepoc.temporalengine.ArtifactEffectExecutorTest
-[ERROR] com.heroesoftimepoc.temporalengine.ArtifactEffectExecutorTest.testGenericArtifact_Fallback -- Time elapsed: 0.317 s <<< ERROR!
+[ERROR] Tests run: 11, Failures: 0, Errors: 11, Skipped: 0, Time elapsed: 0.381 s <<< FAILURE! -- in com.heroesoftimepoc.temporalengine.ArtifactEffectExecutorTest
+[ERROR] com.heroesoftimepoc.temporalengine.ArtifactEffectExecutorTest.testGenericArtifact_Fallback -- Time elapsed: 0.337 s <<< ERROR!
 org.mockito.exceptions.misusing.MissingMethodInvocationException: 
 
 when() requires an argument which has to be 'a method call on a mock'.
@@ -3008,7 +3041,7 @@ Also, this error might show up because:
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 
-[ERROR] com.heroesoftimepoc.temporalengine.ArtifactEffectExecutorTest.testQuantumMirror_Success -- Time elapsed: 0.005 s <<< ERROR!
+[ERROR] com.heroesoftimepoc.temporalengine.ArtifactEffectExecutorTest.testQuantumMirror_Success -- Time elapsed: 0.004 s <<< ERROR!
 org.mockito.exceptions.misusing.MissingMethodInvocationException: 
 
 when() requires an argument which has to be 'a method call on a mock'.
@@ -3026,7 +3059,7 @@ Also, this error might show up because:
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 
-[ERROR] com.heroesoftimepoc.temporalengine.ArtifactEffectExecutorTest.testArtifactEffect_NullGame -- Time elapsed: 0.002 s <<< ERROR!
+[ERROR] com.heroesoftimepoc.temporalengine.ArtifactEffectExecutorTest.testArtifactEffect_NullGame -- Time elapsed: 0.003 s <<< ERROR!
 org.mockito.exceptions.misusing.MissingMethodInvocationException: 
 
 when() requires an argument which has to be 'a method call on a mock'.
@@ -3062,7 +3095,7 @@ Also, this error might show up because:
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 
-[ERROR] com.heroesoftimepoc.temporalengine.ArtifactEffectExecutorTest.testAllTemporalArtifacts_MethodsExist -- Time elapsed: 0.003 s <<< ERROR!
+[ERROR] com.heroesoftimepoc.temporalengine.ArtifactEffectExecutorTest.testAllTemporalArtifacts_MethodsExist -- Time elapsed: 0.004 s <<< ERROR!
 org.mockito.exceptions.misusing.MissingMethodInvocationException: 
 
 when() requires an argument which has to be 'a method call on a mock'.
@@ -3080,7 +3113,7 @@ Also, this error might show up because:
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 
-[ERROR] com.heroesoftimepoc.temporalengine.ArtifactEffectExecutorTest.testAllLegendaryArtifacts_MethodsExist -- Time elapsed: 0.003 s <<< ERROR!
+[ERROR] com.heroesoftimepoc.temporalengine.ArtifactEffectExecutorTest.testAllLegendaryArtifacts_MethodsExist -- Time elapsed: 0.004 s <<< ERROR!
 org.mockito.exceptions.misusing.MissingMethodInvocationException: 
 
 when() requires an argument which has to be 'a method call on a mock'.
@@ -3116,7 +3149,7 @@ Also, this error might show up because:
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 
-[ERROR] com.heroesoftimepoc.temporalengine.ArtifactEffectExecutorTest.testTemporalSword_Success -- Time elapsed: 0.002 s <<< ERROR!
+[ERROR] com.heroesoftimepoc.temporalengine.ArtifactEffectExecutorTest.testTemporalSword_Success -- Time elapsed: 0.003 s <<< ERROR!
 org.mockito.exceptions.misusing.MissingMethodInvocationException: 
 
 when() requires an argument which has to be 'a method call on a mock'.
@@ -3134,7 +3167,7 @@ Also, this error might show up because:
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 
-[ERROR] com.heroesoftimepoc.temporalengine.ArtifactEffectExecutorTest.testQuantumMirror_InsufficientPsiStates -- Time elapsed: 0.004 s <<< ERROR!
+[ERROR] com.heroesoftimepoc.temporalengine.ArtifactEffectExecutorTest.testQuantumMirror_InsufficientPsiStates -- Time elapsed: 0.002 s <<< ERROR!
 org.mockito.exceptions.misusing.MissingMethodInvocationException: 
 
 when() requires an argument which has to be 'a method call on a mock'.
@@ -3152,7 +3185,7 @@ Also, this error might show up because:
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 
-[ERROR] com.heroesoftimepoc.temporalengine.ArtifactEffectExecutorTest.testCoherenceDetector_Success -- Time elapsed: 0.003 s <<< ERROR!
+[ERROR] com.heroesoftimepoc.temporalengine.ArtifactEffectExecutorTest.testCoherenceDetector_Success -- Time elapsed: 0.002 s <<< ERROR!
 org.mockito.exceptions.misusing.MissingMethodInvocationException: 
 
 when() requires an argument which has to be 'a method call on a mock'.
@@ -3188,8 +3221,8 @@ Also, this error might show up because:
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 
-2025-07-19T17:22:26.633+02:00  INFO 19655 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.heroesoftimepoc.temporalengine.TemporalEngineServiceTest]: TemporalEngineServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2025-07-19T17:22:26.636+02:00  INFO 19655 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.heroesoftimepoc.temporalengine.TemporalEngineApplication for test class com.heroesoftimepoc.temporalengine.TemporalEngineServiceTest
+2025-07-19T21:32:53.517+02:00  INFO 64910 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.heroesoftimepoc.temporalengine.TemporalEngineServiceTest]: TemporalEngineServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-07-19T21:32:53.519+02:00  INFO 64910 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.heroesoftimepoc.temporalengine.TemporalEngineApplication for test class com.heroesoftimepoc.temporalengine.TemporalEngineServiceTest
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
@@ -3204,6 +3237,9 @@ Also, this error might show up because:
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=1, totalStates=1, collapseRate=1.0, collapsesByType={}}
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: AvantWorldBlade
+❌ Artefact AvantWorldBlade non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: AvantWorldBlade
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
@@ -3211,6 +3247,9 @@ Also, this error might show up because:
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: AvantWorldBlade
+❌ Artefact AvantWorldBlade non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: AvantWorldBlade
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
 📊 Statistiques collapse causale: {activeStates=1, collapsedStates=0, totalStates=1, collapseRate=0.0, collapsesByType={}}
 📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
@@ -3225,8 +3264,8 @@ Also, this error might show up because:
 📊 Statistiques collapse causale: {activeStates=2, collapsedStates=0, totalStates=2, collapseRate=0.0, collapsesByType={}}
 🌀 Collapses causales détectés:
   - CollapseResult[INTERACTION] ψ004: Héros Ragnar déplacé vers (40,40) via collapse causale (success=true)
-2025-07-19T17:22:26.782+02:00  INFO 19655 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.heroesoftimepoc.temporalengine.ComplexScenarioTest]: ComplexScenarioTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2025-07-19T17:22:26.783+02:00  INFO 19655 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.heroesoftimepoc.temporalengine.TemporalEngineApplication for test class com.heroesoftimepoc.temporalengine.ComplexScenarioTest
+2025-07-19T21:32:53.710+02:00  INFO 64910 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.heroesoftimepoc.temporalengine.ComplexScenarioTest]: ComplexScenarioTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-07-19T21:32:53.711+02:00  INFO 64910 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.heroesoftimepoc.temporalengine.TemporalEngineApplication for test class com.heroesoftimepoc.temporalengine.ComplexScenarioTest
 Hibernate: insert into games (created_at,current_player,current_timeline,current_turn,ended_at,game_name,map_height,map_width,max_players,started_at,status,winner,id) values (?,?,?,?,?,?,?,?,?,?,?,?,default)
 
 🔬 === TEST DE STRESS TEMPOREL ===
@@ -3301,8 +3340,14 @@ Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplit
 ✅ Arthur prépare ψ003: Bataille épique dans 3 tours
 
 🔮 ACTE III : Utilisation des artefacts légendaires
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: AvantWorldBlade
+❌ Artefact AvantWorldBlade non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: AvantWorldBlade
 📊 Statistiques collapse causale: {activeStates=2, collapsedStates=1, totalStates=3, collapseRate=0.3333333333333333, collapsesByType={}}
 ✅ Arthur brandit la Lame d'Avant-Monde
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: ReverseClock
+❌ Artefact ReverseClock non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: ReverseClock
 📊 Statistiques collapse causale: {activeStates=2, collapsedStates=1, totalStates=3, collapseRate=0.3333333333333333, collapsesByType={}}
 ✅ Ragnar active l'Horloge du Dernier Instant
 
@@ -3340,6 +3385,9 @@ Hibernate: insert into game_tiles (building_owner,building_type,defense_bonus,ga
 Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 📊 Statistiques collapse causale: {activeStates=1, collapsedStates=0, totalStates=1, collapseRate=0.0, collapsesByType={}}
 📊 Statistiques collapse causale: {activeStates=1, collapsedStates=0, totalStates=1, collapseRate=0.0, collapsesByType={}}
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: AvantWorldBlade
+❌ Artefact AvantWorldBlade non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: AvantWorldBlade
 📊 Statistiques collapse causale: {activeStates=1, collapsedStates=0, totalStates=1, collapseRate=0.0, collapsesByType={}}
 Hibernate: insert into heroes (current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 📊 Statistiques collapse causale: {activeStates=1, collapsedStates=0, totalStates=1, collapseRate=0.0, collapsesByType={}}
@@ -3382,6 +3430,9 @@ Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplit
 🌀 Collapses causales détectés:
   - CollapseResult[INTERACTION] ψ032: Entité créée en (2,2) via collapse causale (success=true)
 📊 Statistiques collapse causale: {activeStates=4, collapsedStates=2, totalStates=6, collapseRate=0.3333333333333333, collapsesByType={}}
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: AvantWorldBlade
+❌ Artefact AvantWorldBlade non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: AvantWorldBlade
 📊 Statistiques collapse causale: {activeStates=4, collapsedStates=2, totalStates=6, collapseRate=0.3333333333333333, collapsesByType={}}
 Hibernate: insert into heroes (current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 📊 Statistiques collapse causale: {activeStates=4, collapsedStates=2, totalStates=6, collapseRate=0.3333333333333333, collapsesByType={}}
@@ -3429,6 +3480,9 @@ Hibernate: insert into heroes (current_day,days_traveled,game_id,has_observation
 Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 📊 Statistiques collapse causale: {activeStates=1, collapsedStates=10, totalStates=11, collapseRate=0.9090909090909091, collapsesByType={}}
 📊 Statistiques collapse causale: {activeStates=1, collapsedStates=10, totalStates=11, collapseRate=0.9090909090909091, collapsesByType={}}
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: AvantWorldBlade
+❌ Artefact AvantWorldBlade non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: AvantWorldBlade
 📊 Statistiques collapse causale: {activeStates=1, collapsedStates=10, totalStates=11, collapseRate=0.9090909090909091, collapsesByType={}}
 Hibernate: insert into heroes (current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 📊 Statistiques collapse causale: {activeStates=1, collapsedStates=10, totalStates=11, collapseRate=0.9090909090909091, collapsesByType={}}
@@ -3466,6 +3520,9 @@ Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplit
 🌀 Collapses causales détectés:
   - CollapseResult[INTERACTION] ψ092: Entité créée en (2,2) via collapse causale (success=true)
 📊 Statistiques collapse causale: {activeStates=4, collapsedStates=12, totalStates=16, collapseRate=0.75, collapsesByType={}}
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: AvantWorldBlade
+❌ Artefact AvantWorldBlade non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: AvantWorldBlade
 📊 Statistiques collapse causale: {activeStates=4, collapsedStates=12, totalStates=16, collapseRate=0.75, collapsesByType={}}
 Hibernate: insert into heroes (current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
 📊 Statistiques collapse causale: {activeStates=4, collapsedStates=12, totalStates=16, collapseRate=0.75, collapsesByType={}}
@@ -3479,19 +3536,19 @@ Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplit
 Commandes totales : 100
 Commandes réussies : 83
 Taux de succès : 83,0%
-Temps total : 74 ms
-Temps moyen/commande : 0,74 ms
-Commandes/seconde : 1351
+Temps total : 94 ms
+Temps moyen/commande : 0,94 ms
+Commandes/seconde : 1064
 ✅ Métriques de performance validées
-2025-07-19T17:22:26.917+02:00  INFO 19655 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.heroesoftimepoc.temporalengine.PsiStateTest]: PsiStateTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2025-07-19T17:22:26.919+02:00  INFO 19655 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.heroesoftimepoc.temporalengine.TemporalEngineApplication for test class com.heroesoftimepoc.temporalengine.PsiStateTest
+2025-07-19T21:32:53.898+02:00  INFO 64910 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.heroesoftimepoc.temporalengine.PsiStateTest]: PsiStateTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-07-19T21:32:53.900+02:00  INFO 64910 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.heroesoftimepoc.temporalengine.TemporalEngineApplication for test class com.heroesoftimepoc.temporalengine.PsiStateTest
 [ERROR] Failures: 
 [ERROR]   TemporalEngineIntegrationTest.testCompleteTemporalScenario:73 expected: <true> but was: <false>
 [ERROR]   TemporalEngineIntegrationTest.testComplexBattleScenario:175 expected: <true> but was: <false>
 [ERROR]   TemporalEngineIntegrationTest.testErrorRecovery:221 expected: <true> but was: <false>
 [ERROR]   TemporalEngineIntegrationTest.testQuantumInterference:256 expected: <true> but was: <false>
 [ERROR]   QuantumArtifactsIntegrationTest.testFateChains:290 Lien karmique doit être créé ==> expected: <true> but was: <false>
-[ERROR]   QuantumArtifactsIntegrationTest.testMathematicalFormulas:431 Formule CHAIN_PROBABILITY doit être valide ==> expected: <true> but was: <false>
+[ERROR]   QuantumArtifactsIntegrationTest.testMathematicalFormulas:431 Formule QUANTUM_REFLECT doit être valide ==> expected: <true> but was: <false>
 [ERROR]   QuantumArtifactsIntegrationTest.testProbabilityMask:251 Champ d'incertitude doit être activé ==> expected: <true> but was: <false>
 [ERROR]   QuantumArtifactsIntegrationTest.testQuantumMirrorShield:333 Attaque de volée doit être simulée ==> expected: <true> but was: <false>
 [ERROR]   QuantumArtifactsIntegrationTest.testQuantumSynergy:372 Champ d'incertitude doit être activé ==> expected: <true> but was: <false>
