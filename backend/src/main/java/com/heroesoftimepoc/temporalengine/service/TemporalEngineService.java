@@ -246,6 +246,36 @@ public class TemporalEngineService {
             case "CAPTURE":
                 result = captureGameObjective(game, (Map<String, String>) command.getParameters());
                 break;
+            case "BUILD":
+                result = buildStructure(game, (Map<String, String>) command.getParameters());
+                break;
+            case "COLLECT":
+                result = collectResource(game, (Map<String, String>) command.getParameters());
+                break;
+            case "RECRUIT":
+                result = recruitUnit(game, (Map<String, String>) command.getParameters());
+                break;
+            case "CAST":
+                result = castSpell(game, (Map<String, String>) command.getParameters());
+                break;
+            case "LEARN":
+                result = learnSpell(game, (Map<String, String>) command.getParameters());
+                break;
+            case "LEVELUP":
+                result = levelUpHero(game, (Map<String, String>) command.getParameters());
+                break;
+            case "EXPLORE":
+                result = exploreTerritory(game, (Map<String, String>) command.getParameters());
+                break;
+            case "EQUIP":
+                result = equipArtifact(game, (Map<String, String>) command.getParameters());
+                break;
+            case "SIEGE":
+                result = siegeTarget(game, (Map<String, String>) command.getParameters());
+                break;
+            case "CAPTURE":
+                result = captureObjective(game, (Map<String, String>) command.getParameters());
+                break;
             default:
                 result.put("error", "Unknown command type: " + command.getType());
                 result.put("success", false);

@@ -14,7 +14,10 @@
 
 Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront submergés. Il n'a qu'un choix : saisir l'Œil et **forcer le collapse causal**.
 
----
+**📜 Advanced Script Language:**
+- **Unicode Symbols**: ψ (psi-state), † (collapse), ⊙ (superposition), Π (observation)
+- **5D Coordinates**: Navigate space (x,y,z) and time (timeline, temporal layer)
+- **Probability System**: Actions have success chances affected by artifacts and positioning
 
 ## 🎮 **Le Jeu**
 
