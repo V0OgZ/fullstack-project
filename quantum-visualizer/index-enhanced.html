@@ -1,366 +1,455 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heroes of Time - Quantum Visualizer Enhanced</title>
+    <title>🔬 Heroes of Time - Quantum Visualizer Enhanced</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="scenario-selector.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
-        /* Styles spécifiques pour les scénarios */
-        .scenario-panel {
-            background: rgba(255,255,255,0.1);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border: 2px solid rgba(0,255,136,0.3);
-        }
-
-        .hero-lysandrel {
-            border-left-color: #ffd93d !important;
-        }
-
-        .hero-nyx {
-            border-left-color: #9d4edd !important;
-        }
-
-        .hero-title {
-            font-size: 0.9em;
-            color: #4ecdc4;
-            font-style: italic;
-            margin-bottom: 5px;
-        }
-
-        .item-badge {
-            display: inline-block;
-            background: rgba(0,255,136,0.2);
-            border: 1px solid rgba(0,255,136,0.5);
+        /* Styles pour le graphe causal */
+        .causal-graph-container {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
             border-radius: 10px;
-            padding: 2px 6px;
-            font-size: 0.8em;
-            margin: 2px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid rgba(78, 205, 196, 0.3);
         }
-
-        .interference-description {
-            font-size: 0.9em;
-            font-weight: bold;
-            margin-top: 5px;
-            padding: 3px 6px;
-            border-radius: 5px;
-            background: rgba(0,0,0,0.2);
-        }
-
-        .turn-indicator {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(0,0,0,0.8);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-            z-index: 1000;
-        }
-
-        .phase-indicator {
-            position: fixed;
-            top: 60px;
-            right: 20px;
-            background: rgba(0,255,136,0.2);
-            border: 1px solid rgba(0,255,136,0.5);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 15px;
-            font-size: 0.9em;
-            z-index: 1000;
-        }
-
-        .scenario-controls {
+        
+        .graph-controls {
             display: flex;
             gap: 10px;
-            margin-top: 15px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
         }
-
-        .scenario-button {
+        
+        .graph-control-btn {
+            background: rgba(78, 205, 196, 0.2);
+            border: 1px solid rgba(78, 205, 196, 0.5);
+            color: #4ecdc4;
             padding: 8px 16px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            border-radius: 20px;
-            color: white;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            font-size: 0.9em;
-        }
-
-        .scenario-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-
-        .scenario-button:active {
-            transform: translateY(0);
-        }
-
-        .quantum-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .quantum-stat {
-            background: rgba(0,0,0,0.3);
-            padding: 10px;
-            border-radius: 10px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .quantum-stat-value {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #00ff88;
-        }
-
-        .quantum-stat-label {
-            font-size: 0.8em;
-            opacity: 0.8;
-            margin-top: 3px;
-        }
-
-        .glitch-effect {
-            animation: glitch 0.5s ease-in-out infinite alternate;
-        }
-
-        @keyframes glitch {
-            0% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
-            100% { transform: translate(0); }
-        }
-
-        .reality-anchor {
-            position: relative;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 215, 61, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(255, 215, 61, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 215, 61, 0); }
-        }
-
-        .narrative-panel {
-            background: linear-gradient(135deg, rgba(30,60,114,0.8) 0%, rgba(42,82,152,0.8) 100%);
-            border: 2px solid rgba(255,255,255,0.3);
             border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            backdrop-filter: blur(10px);
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
         }
-
-        .narrative-title {
-            font-size: 1.2em;
+        
+        .graph-control-btn:hover {
+            background: rgba(78, 205, 196, 0.3);
+            transform: translateY(-1px);
+        }
+        
+        .graph-control-btn.active {
+            background: rgba(78, 205, 196, 0.4);
+            border-color: #4ecdc4;
+        }
+        
+        .timeline-selector {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+        
+        .timeline-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: bold;
-            color: #ffd93d;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-size: 12px;
+            transition: all 0.3s ease;
         }
-
-        .narrative-content {
-            font-size: 0.95em;
+        
+        .timeline-btn.b1 { border-color: #e94560; color: #e94560; }
+        .timeline-btn.b2 { border-color: #00bcd4; color: #00bcd4; }
+        .timeline-btn.b3 { border-color: #f39c12; color: #f39c12; }
+        .timeline-btn.b4 { border-color: #9b59b6; color: #9b59b6; }
+        .timeline-btn.b5 { border-color: #2ecc71; color: #2ecc71; }
+        
+        .timeline-btn:hover, .timeline-btn.active {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px currentColor;
+        }
+        
+        .reports-panel {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .report-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #4ecdc4;
+        }
+        
+        .report-item h4 {
+            color: #4ecdc4;
+            margin: 0 0 10px 0;
+            font-size: 14px;
+        }
+        
+        .report-item .report-data {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #e0e0e0;
             line-height: 1.4;
-            color: rgba(255,255,255,0.9);
+        }
+        
+        .metric-badge {
+            display: inline-block;
+            background: rgba(233, 69, 96, 0.2);
+            color: #e94560;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            margin: 2px;
+        }
+        
+        .graph-legend {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+            font-size: 12px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .legend-symbol {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+        
+        .legend-symbol.initial { background: #2ecc71; }
+        .legend-symbol.action { background: #3498db; }
+        .legend-symbol.quantum { background: #e94560; }
+        .legend-symbol.collapse { background: #e74c3c; }
+        
+        #causal-graph {
+            width: 100%;
+            height: 500px;
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            border-radius: 8px;
+        }
+        
+        .status-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff00;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            border: 1px solid rgba(0, 255, 0, 0.5);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🌟 Heroes of Time - Quantum Visualizer Enhanced</h1>
-            <p>Visualisation quantique avancée avec support des scénarios</p>
-        </header>
-
-        <div class="turn-indicator" id="turnIndicator" style="display: none;">
-            Tour: 1
+    <!-- Interface de sélection de scénario -->
+    <div id="scenario-selection" class="scenario-selection">
+        <div class="scenario-header">
+            <h1>🔬 Heroes of Time - Quantum Visualizer Enhanced</h1>
+            <div class="status-indicator">🟢 OPÉRATIONNEL</div>
+            <p class="scenario-subtitle">Visualisation avancée des graphes causaux et timelines</p>
         </div>
-
-        <div class="phase-indicator" id="phaseIndicator" style="display: none;">
-            Phase: SETUP
+        
+        <div class="scenario-grid">
+            <div class="scenario-card" onclick="loadReplayInterface()">
+                <div class="scenario-icon">🌀</div>
+                <h3>Causal Graph Replay</h3>
+                <p>Visualisation interactive des graphes causaux avec D3.js</p>
+                <div class="scenario-features">
+                    <span class="feature-tag">D3.js</span>
+                    <span class="feature-tag">Interactif</span>
+                    <span class="feature-tag">Timeline</span>
+                </div>
+            </div>
+            
+            <div class="scenario-card" onclick="loadQuantumAnalysis()">
+                <div class="scenario-icon">📊</div>
+                <h3>Quantum Analysis</h3>
+                <p>Analyse des états quantiques et interférences</p>
+                <div class="scenario-features">
+                    <span class="feature-tag">ψ-states</span>
+                    <span class="feature-tag">Rapports</span>
+                    <span class="feature-tag">Métriques</span>
+                </div>
+            </div>
+            
+            <div class="scenario-card" onclick="loadGameReplay()">
+                <div class="scenario-icon">🎮</div>
+                <h3>Game Replay</h3>
+                <p>Replay complet des parties avec timeline</p>
+                <div class="scenario-features">
+                    <span class="feature-tag">Replay</span>
+                    <span class="feature-tag">Histoire</span>
+                    <span class="feature-tag">Actions</span>
+                </div>
+            </div>
         </div>
-
-        <div class="controls">
-            <button id="createGame">Créer Partie</button>
-            <button id="loadGame">Charger Partie</button>
-            <button id="refreshState">Actualiser</button>
-            <select id="gameSelect">
-                <option value="">Sélectionner une partie...</option>
-            </select>
-        </div>
-
-        <div class="main-content">
-            <div class="left-panel">
-                <div class="narrative-panel">
-                    <div class="narrative-title">🎭 Narration Interactive</div>
-                    <div class="narrative-content" id="narrativeContent">
-                        Bienvenue dans l'univers quantique de Heroes of Time. Chargez un scénario pour commencer votre aventure temporelle.
+    </div>
+    
+    <!-- Interface principale avec graphe causal -->
+    <div id="game-interface" style="display: none;">
+        <button class="back-button" onclick="backToScenarios()">← Retour</button>
+        
+        <div class="main-container">
+            <h2>🌀 Visualisation Graphe Causal</h2>
+            
+            <!-- Contrôles du graphe -->
+            <div class="causal-graph-container">
+                <div class="graph-controls">
+                    <button class="graph-control-btn active" onclick="causalGraph.resetFilter()">
+                        🔄 Tout Afficher
+                    </button>
+                    <button class="graph-control-btn" onclick="causalGraph.centerGraph()">
+                        🎯 Centrer
+                    </button>
+                    <button class="graph-control-btn" onclick="loadGameData()">
+                        📡 Actualiser
+                    </button>
+                    <button class="graph-control-btn" onclick="exportGraph()">
+                        💾 Exporter
+                    </button>
+                    
+                    <div class="timeline-selector">
+                        <span style="color: #e0e0e0; margin-right: 10px;">Timeline:</span>
+                        <div class="timeline-btn b1 active" onclick="filterTimeline('ℬ1')">ℬ1</div>
+                        <div class="timeline-btn b2" onclick="filterTimeline('ℬ2')">ℬ2</div>
+                        <div class="timeline-btn b3" onclick="filterTimeline('ℬ3')">ℬ3</div>
+                        <div class="timeline-btn b4" onclick="filterTimeline('ℬ4')">ℬ4</div>
+                        <div class="timeline-btn b5" onclick="filterTimeline('ℬ5')">ℬ5</div>
                     </div>
                 </div>
-
-                <div class="section">
-                    <h2>🎮 État du Jeu</h2>
-                    <div id="gameInfo">
-                        <p>Aucune partie chargée</p>
+                
+                <!-- Conteneur du graphe D3.js -->
+                <div id="causal-graph"></div>
+                
+                <!-- Légende -->
+                <div class="graph-legend">
+                    <div class="legend-item">
+                        <div class="legend-symbol initial"></div>
+                        <span>État Initial</span>
                     </div>
-                </div>
-
-                <div class="section">
-                    <h2>🦸 Héros</h2>
-                    <div id="heroList"></div>
-                </div>
-
-                <div class="section">
-                    <h2>📊 Métriques Quantiques</h2>
-                    <div class="quantum-stats">
-                        <div class="quantum-stat">
-                            <div class="quantum-stat-value" id="complexStates">0</div>
-                            <div class="quantum-stat-label">États Complexes</div>
-                        </div>
-                        <div class="quantum-stat">
-                            <div class="quantum-stat-value" id="classicStates">0</div>
-                            <div class="quantum-stat-label">États Classiques</div>
-                        </div>
-                        <div class="quantum-stat">
-                            <div class="quantum-stat-value" id="interferenceZones">0</div>
-                            <div class="quantum-stat-label">Interférences</div>
-                        </div>
+                    <div class="legend-item">
+                        <div class="legend-symbol action"></div>
+                        <span>Action</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-symbol quantum"></div>
+                        <span>État Quantique ψ</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-symbol collapse"></div>
+                        <span>Collapse †</span>
                     </div>
                 </div>
             </div>
-
-            <div class="center-panel">
-                <div class="section">
-                    <h2>🌀 États Quantiques (ψ-states)</h2>
-                    <div id="psiStates"></div>
-                </div>
-
-                <div class="section">
-                    <h2>🎯 Zones d'Interférence</h2>
-                    <div id="interferenceDisplay"></div>
-                </div>
-            </div>
-
-            <div class="right-panel">
-                <div class="section">
-                    <h2>🎮 Console de Commandes</h2>
-                    <div class="command-input">
-                        <input type="text" id="commandInput" placeholder="Entrez une commande quantique...">
-                        <button id="executeCommand">Exécuter</button>
+            
+            <!-- Panel des rapports -->
+            <div class="reports-panel">
+                <h3>📊 Rapports d'Analyse</h3>
+                
+                <div class="report-item">
+                    <h4>🎯 État du Jeu</h4>
+                    <div class="report-data" id="game-status-report">
+                        <div>Game ID: <span class="metric-badge" id="current-game-id">-</span></div>
+                        <div>Tour Actuel: <span class="metric-badge" id="current-turn">-</span></div>
+                        <div>Joueur Actif: <span class="metric-badge" id="current-player">-</span></div>
+                        <div>Timeline: <span class="metric-badge" id="current-timeline">-</span></div>
                     </div>
-                    <div id="commandOutput"></div>
                 </div>
-
-                <div class="section">
-                    <h2>📈 Visualisation Amplitudes</h2>
-                    <canvas id="amplitudeChart" width="300" height="200"></canvas>
+                
+                <div class="report-item">
+                    <h4>🌀 États Quantiques</h4>
+                    <div class="report-data" id="quantum-states-report">
+                        <div>États Actifs: <span class="metric-badge" id="active-psi-count">0</span></div>
+                        <div>États Collapsés: <span class="metric-badge" id="collapsed-psi-count">0</span></div>
+                        <div>Interférences: <span class="metric-badge" id="interference-zones">0</span></div>
+                        <div>Probabilité Totale: <span class="metric-badge" id="total-probability">-</span></div>
+                    </div>
                 </div>
-
-                <div class="section">
-                    <h2>🎲 Commandes Rapides</h2>
-                    <div class="scenario-controls">
-                        <button class="scenario-button" onclick="quickCommand('HERO(Arthur)')">Créer Arthur</button>
-                        <button class="scenario-button" onclick="quickCommand('HERO(Nyx-Lua)')">Créer Nyx-Lua</button>
-                        <button class="scenario-button" onclick="quickCommand('ψ001: (0.8+0.6i) ⊙(Δt+2 @10,10 ⟶ MOV(Arthur, @10,10))')">État Quantique</button>
-                        <button class="scenario-button" onclick="quickCommand('†ψ001')">Collapse</button>
+                
+                <div class="report-item">
+                    <h4>🛡️ Héros</h4>
+                    <div class="report-data" id="heroes-report">
+                        <div>Héros Actifs: <span class="metric-badge" id="active-heroes-count">0</span></div>
+                        <div id="heroes-list"></div>
+                    </div>
+                </div>
+                
+                <div class="report-item">
+                    <h4>⚡ Performance</h4>
+                    <div class="report-data" id="performance-report">
+                        <div>Dernière Mise à Jour: <span class="metric-badge" id="last-update">-</span></div>
+                        <div>Temps de Réponse: <span class="metric-badge" id="response-time">-</span></div>
+                        <div>Nœuds Graphe: <span class="metric-badge" id="graph-nodes-count">0</span></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <script src="scenario-loader.js"></script>
-    <script src="quantum-visualizer-enhanced.js"></script>
+    
+    <script src="causal-graph-d3.js"></script>
     <script>
-        // Fonctions utilitaires
-        function quickCommand(command) {
-            document.getElementById('commandInput').value = command;
-            document.getElementById('executeCommand').click();
-        }
-
-        // Mise à jour des indicateurs de tour et phase
-        function updateTurnIndicators(gameState) {
-            const turnIndicator = document.getElementById('turnIndicator');
-            const phaseIndicator = document.getElementById('phaseIndicator');
+        // Variables globales
+        let causalGraph = null;
+        let currentGameId = null;
+        let updateInterval = null;
+        
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔬 Quantum Visualizer Enhanced chargé');
+        });
+        
+        // Navigation
+        function loadReplayInterface() {
+            document.getElementById('scenario-selection').style.display = 'none';
+            document.getElementById('game-interface').style.display = 'block';
             
-            if (gameState.currentTurn) {
-                turnIndicator.style.display = 'block';
-                turnIndicator.textContent = `Tour: ${gameState.currentTurn}`;
-                
-                // Déterminer la phase actuelle
-                const turn = gameState.currentTurn;
-                let phase = 'SETUP';
-                if (turn >= 6 && turn <= 10) phase = 'PREMIERS_ECLATS';
-                else if (turn >= 11 && turn <= 15) phase = 'BASCULE_POUVOIR';
-                else if (turn >= 16 && turn <= 20) phase = 'GUERRE_MONDES';
-                else if (turn >= 21 && turn <= 24) phase = 'PRE_EFFONDREMENT';
-                else if (turn >= 25) phase = 'COLLAPSE_FINAL';
-                
-                phaseIndicator.style.display = 'block';
-                phaseIndicator.textContent = `Phase: ${phase}`;
+            // Initialiser le graphe D3.js
+            setTimeout(() => {
+                causalGraph = window.initCausalGraph('causal-graph');
+                startDataPolling();
+            }, 100);
+        }
+        
+        function backToScenarios() {
+            document.getElementById('game-interface').style.display = 'none';
+            document.getElementById('scenario-selection').style.display = 'block';
+            
+            if (updateInterval) {
+                clearInterval(updateInterval);
+                updateInterval = null;
             }
         }
-
-        // Mise à jour narrative
-        function updateNarrative(gameState) {
-            const narrativeContent = document.getElementById('narrativeContent');
-            const turn = gameState.currentTurn || 0;
-            
-            let narrative = '';
-            if (turn === 0) {
-                narrative = 'Bienvenue dans l\'univers quantique de Heroes of Time. Chargez un scénario pour commencer votre aventure temporelle.';
-            } else if (turn <= 5) {
-                narrative = '🎭 Phase d\'Installation : Les maîtres du temps prennent position. Chaque mouvement est calculé, chaque timeline préparée.';
-            } else if (turn <= 10) {
-                narrative = '⚔️ Premiers Éclats : Les timelines entrent en conflit. L\'Œil de Wigner révèle ses terribles pouvoirs.';
-            } else if (turn <= 15) {
-                narrative = '🌀 Bascule du Pouvoir : L\'Ancre de Réalité change la donne. Les stratégies s\'adaptent à cette nouvelle contrainte.';
-            } else if (turn <= 20) {
-                narrative = '💥 Guerre des Mondes : Les timelines se fracassent les unes contre les autres. La réalité elle-même vacille.';
-            } else if (turn <= 24) {
-                narrative = '⚡ Pré-Effondrement : Le moteur quantique prépare la résolution finale. Qui imposera sa vision du réel ?';
-            } else {
-                narrative = '🏆 Collapse Final : Une seule timeline survivra. Une seule réalité émergera de ce chaos quantique.';
-            }
-            
-            narrativeContent.innerHTML = narrative;
+        
+        function loadQuantumAnalysis() {
+            alert('🌀 Analyse Quantique - Fonctionnalité en développement');
         }
-
-        // Effets visuels pour les interférences
-        function addVisualEffects(gameState) {
-            const interferenceZones = gameState.quantumAnalysis?.interferenceZones || [];
-            
-            interferenceZones.forEach(zone => {
-                if (zone.type === 'DESTRUCTIVE') {
-                    // Ajouter effet de glitch
-                    const elements = document.querySelectorAll('.interference-zone');
-                    elements.forEach(el => {
-                        if (el.textContent.includes(zone.position.x + ',' + zone.position.y)) {
-                            el.classList.add('glitch-effect');
-                        }
-                    });
-                }
+        
+        function loadGameReplay() {
+            alert('🎮 Game Replay - Fonctionnalité en développement');
+        }
+        
+        // Contrôles du graphe
+        function filterTimeline(timeline) {
+            // Mettre à jour l'interface
+            document.querySelectorAll('.timeline-btn').forEach(btn => {
+                btn.classList.remove('active');
             });
+            document.querySelector(`.timeline-btn.${timeline.toLowerCase()}`).classList.add('active');
+            
+            // Filtrer le graphe
+            if (causalGraph) {
+                causalGraph.filterByTimeline(timeline);
+            }
         }
-
-        // Écouteur pour les mises à jour de l'état du jeu
-        document.addEventListener('gameStateUpdated', (event) => {
-            const gameState = event.detail;
-            updateTurnIndicators(gameState);
-            updateNarrative(gameState);
-            addVisualEffects(gameState);
+        
+        function exportGraph() {
+            // TODO: Implémenter l'export du graphe
+            alert('💾 Export du graphe - Fonctionnalité en développement');
+        }
+        
+        // Chargement des données depuis le backend
+        async function loadGameData() {
+            try {
+                const startTime = Date.now();
+                
+                // Récupérer les données du jeu
+                const response = await fetch('http://localhost:8080/api/game/1/state');
+                const gameData = await response.json();
+                
+                const responseTime = Date.now() - startTime;
+                
+                console.log('📊 Données de jeu reçues:', gameData);
+                
+                // Mettre à jour les rapports
+                updateReports(gameData, responseTime);
+                
+                // Mettre à jour le graphe
+                if (causalGraph && gameData) {
+                    causalGraph.loadGameData(gameData);
+                }
+                
+            } catch (error) {
+                console.error('❌ Erreur lors du chargement des données:', error);
+                updateErrorReports(error);
+            }
+        }
+        
+        function updateReports(gameData, responseTime) {
+            // État du jeu
+            document.getElementById('current-game-id').textContent = gameData.gameId || '-';
+            document.getElementById('current-turn').textContent = gameData.currentTurn || '-';
+            document.getElementById('current-player').textContent = gameData.currentPlayer || '-';
+            document.getElementById('current-timeline').textContent = gameData.currentTimeline || 'ℬ1';
+            
+            // États quantiques
+            const psiStates = gameData.psiStates || [];
+            const activePsi = psiStates.filter(p => p.status !== 'COLLAPSED');
+            const collapsedPsi = psiStates.filter(p => p.status === 'COLLAPSED');
+            
+            document.getElementById('active-psi-count').textContent = activePsi.length;
+            document.getElementById('collapsed-psi-count').textContent = collapsedPsi.length;
+            
+            // Interférences
+            const quantumAnalysis = gameData.quantumAnalysis || {};
+            document.getElementById('interference-zones').textContent = quantumAnalysis.totalInterferenceZones || 0;
+            
+            // Héros
+            const heroes = gameData.heroes || [];
+            document.getElementById('active-heroes-count').textContent = heroes.length;
+            
+            const heroesList = document.getElementById('heroes-list');
+            heroesList.innerHTML = heroes.map(hero => 
+                `<div>${hero.name} (@${hero.position?.x || 0},${hero.position?.y || 0}) 🛡️</div>`
+            ).join('');
+            
+            // Performance
+            document.getElementById('last-update').textContent = new Date().toLocaleTimeString();
+            document.getElementById('response-time').textContent = responseTime + 'ms';
+            document.getElementById('graph-nodes-count').textContent = causalGraph?.nodes?.length || 0;
+        }
+        
+        function updateErrorReports(error) {
+            document.getElementById('current-game-id').textContent = 'ERREUR';
+            document.getElementById('last-update').textContent = 'Échec: ' + new Date().toLocaleTimeString();
+            document.getElementById('response-time').textContent = 'N/A';
+        }
+        
+        function startDataPolling() {
+            // Charger les données initiales
+            loadGameData();
+            
+            // Mettre à jour toutes les 5 secondes
+            updateInterval = setInterval(loadGameData, 5000);
+        }
+        
+        // Écouter les événements du graphe
+        document.addEventListener('causal-node-clicked', function(event) {
+            const node = event.detail.node;
+            console.log('🎯 Nœud sélectionné dans le graphe:', node);
+            
+            // TODO: Afficher les détails du nœud dans un panel
+            alert(`Nœud: ${node.description}\nTimeline: ${node.timeline}\nTour: ${node.turn}`);
         });
     </script>
 </body>

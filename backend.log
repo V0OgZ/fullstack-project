@@ -11,13 +11,21 @@
 [INFO] Copying 4 resources from src/main/resources to target/classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.11.0:compile (default-compile) @ temporal-engine ---
-[INFO] Nothing to compile - all classes are up to date
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 56 source files with javac [debug release 17] to target/classes
+[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/AntlrTemporalScriptParser.java: /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/AntlrTemporalScriptParser.java uses or overrides a deprecated API.
+[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/AntlrTemporalScriptParser.java: Recompile with -Xlint:deprecation for details.
+[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalEngineService.java: Some input files use unchecked or unsafe operations.
+[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalEngineService.java: Recompile with -Xlint:unchecked for details.
 [INFO] 
 [INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ temporal-engine ---
 [INFO] Copying 1 resource from src/test/resources to target/test-classes
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.11.0:testCompile (default-testCompile) @ temporal-engine ---
-[INFO] Nothing to compile - all classes are up to date
+[INFO] Changes detected - recompiling the module! :dependency
+[INFO] Compiling 11 source files with javac [debug release 17] to target/test-classes
+[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java: Some input files use unchecked or unsafe operations.
+[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java: Recompile with -Xlint:unchecked for details.
 [INFO] 
 [INFO] <<< spring-boot-maven-plugin:3.2.0:run (default-cli) < test-compile @ temporal-engine <<<
 [INFO] 
@@ -33,63 +41,120 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.0)
 
-2025-07-18T22:19:39.021+02:00  INFO 31630 --- [  restartedMain] c.h.t.TemporalEngineApplication          : Starting TemporalEngineApplication using Java 17.0.15 with PID 31630 (/Users/admin/HOT/Heroes-of-Time/backend/target/classes started by admin in /Users/admin/HOT/Heroes-of-Time/backend)
-2025-07-18T22:19:39.022+02:00  INFO 31630 --- [  restartedMain] c.h.t.TemporalEngineApplication          : No active profile set, falling back to 1 default profile: "default"
-2025-07-18T22:19:39.053+02:00  INFO 31630 --- [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2025-07-18T22:19:39.053+02:00  INFO 31630 --- [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2025-07-18T22:19:39.394+02:00  INFO 31630 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-07-18T22:19:39.426+02:00  INFO 31630 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 28 ms. Found 4 JPA repository interfaces.
-2025-07-18T22:19:39.688+02:00  INFO 31630 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-07-18T22:19:39.694+02:00  INFO 31630 --- [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-07-18T22:19:39.694+02:00  INFO 31630 --- [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
-2025-07-18T22:19:39.712+02:00  INFO 31630 --- [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-07-18T22:19:39.712+02:00  INFO 31630 --- [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 659 ms
-2025-07-18T22:19:39.718+02:00  INFO 31630 --- [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Starting...
-2025-07-18T22:19:39.802+02:00  INFO 31630 --- [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HeroesOfTimePool - Added connection conn0: url=jdbc:h2:mem:heroesdb user=SA
-2025-07-18T22:19:39.824+02:00  INFO 31630 --- [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Start completed.
-2025-07-18T22:19:39.832+02:00  INFO 31630 --- [  restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:heroesdb'
-2025-07-18T22:19:39.905+02:00  INFO 31630 --- [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-07-18T22:19:39.938+02:00  INFO 31630 --- [  restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
-2025-07-18T22:19:39.953+02:00  INFO 31630 --- [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-07-18T22:19:40.057+02:00  INFO 31630 --- [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-07-18T22:19:40.081+02:00  WARN 31630 --- [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-07-18T22:19:40.519+02:00  INFO 31630 --- [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-19T06:35:06.661+02:00  INFO 44926 --- [  restartedMain] c.h.t.TemporalEngineApplication          : Starting TemporalEngineApplication using Java 17.0.15 with PID 44926 (/Users/admin/HOT/Heroes-of-Time/backend/target/classes started by admin in /Users/admin/HOT/Heroes-of-Time/backend)
+2025-07-19T06:35:06.662+02:00  INFO 44926 --- [  restartedMain] c.h.t.TemporalEngineApplication          : No active profile set, falling back to 1 default profile: "default"
+2025-07-19T06:35:06.685+02:00  INFO 44926 --- [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-07-19T06:35:06.685+02:00  INFO 44926 --- [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-07-19T06:35:06.951+02:00  INFO 44926 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-19T06:35:06.985+02:00  INFO 44926 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 31 ms. Found 5 JPA repository interfaces.
+2025-07-19T06:35:07.477+02:00  INFO 44926 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-07-19T06:35:07.481+02:00  INFO 44926 --- [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-07-19T06:35:07.481+02:00  INFO 44926 --- [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-07-19T06:35:07.498+02:00  INFO 44926 --- [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-07-19T06:35:07.499+02:00  INFO 44926 --- [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 813 ms
+2025-07-19T06:35:07.504+02:00  INFO 44926 --- [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Starting...
+2025-07-19T06:35:07.586+02:00  INFO 44926 --- [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HeroesOfTimePool - Added connection conn0: url=jdbc:h2:mem:heroesdb user=SA
+2025-07-19T06:35:07.605+02:00  INFO 44926 --- [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Start completed.
+2025-07-19T06:35:07.613+02:00  INFO 44926 --- [  restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:heroesdb'
+2025-07-19T06:35:07.667+02:00  INFO 44926 --- [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-19T06:35:07.687+02:00  INFO 44926 --- [  restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2025-07-19T06:35:07.699+02:00  INFO 44926 --- [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-07-19T06:35:07.792+02:00  INFO 44926 --- [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-19T06:35:07.807+02:00  WARN 44926 --- [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-19T06:35:08.244+02:00  INFO 44926 --- [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 Hibernate: drop table if exists game_players cascade 
-2025-07-18T22:19:40.525+02:00  INFO 31630 --- [  restartedMain] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@34e639f5] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-07-19T06:35:08.251+02:00  INFO 44926 --- [  restartedMain] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@16c3eae6] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
 Hibernate: drop table if exists game_tiles cascade 
 Hibernate: drop table if exists games cascade 
 Hibernate: drop table if exists hero_inventory cascade 
 Hibernate: drop table if exists heroes cascade 
 Hibernate: drop table if exists psi_states cascade 
+Hibernate: drop table if exists temporal_artifacts cascade 
 Hibernate: drop table if exists tile_occupants cascade 
 Hibernate: create table game_players (game_id bigint not null, player_id varchar(255))
-2025-07-18T22:19:40.530+02:00  INFO 31630 --- [  restartedMain] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6d6a977] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-07-19T06:35:08.255+02:00  INFO 44926 --- [  restartedMain] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@710a775a] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
 Hibernate: create table game_tiles (defense_bonus integer, has_psi_states boolean, is_locked boolean, is_temporal_zone boolean, lock_duration integer, movement_cost integer, temporal_energy_bonus integer, x integer not null, y integer not null, game_id bigint, id bigint generated by default as identity, building_owner varchar(255), building_type varchar(255), temporal_zone_type varchar(255), terrain varchar(255), primary key (id))
 Hibernate: create table games (current_turn integer, map_height integer, map_width integer, max_players integer, created_at timestamp(6), ended_at timestamp(6), id bigint generated by default as identity, started_at timestamp(6), current_player varchar(255), current_timeline varchar(255), game_name varchar(255) not null, status varchar(255) check (status in ('WAITING','ACTIVE','PAUSED','FINISHED','CANCELLED')), winner varchar(255), primary key (id))
 Hibernate: create table hero_inventory (hero_id bigint not null, item varchar(255))
-Hibernate: create table heroes (health integer, max_health integer, max_movement_points integer, max_temporal_energy integer, movement_points integer, position_x integer, position_y integer, temporal_energy integer, vision_radius integer, game_id bigint, id bigint generated by default as identity, name varchar(255) not null, player_id varchar(255), status varchar(255) check (status in ('ACTIVE','TEMPORAL_SHIFT','QUANTUM_SUPERPOSITION','COLLAPSED','DEAD')), timeline_branch varchar(255), primary key (id))
+Hibernate: create table heroes (current_day integer, days_traveled integer, has_observation_ability boolean, health integer, max_health integer, max_movement_points integer, max_temporal_energy integer, movement_points integer, movement_points_per_day integer, observation_range integer, position_x integer, position_y integer, temporal_energy integer, vision_radius integer, game_id bigint, id bigint generated by default as identity, name varchar(255) not null, player_id varchar(255), status varchar(255) check (status in ('ACTIVE','TEMPORAL_SHIFT','QUANTUM_SUPERPOSITION','COLLAPSED','DEAD')), timeline_branch varchar(255), primary key (id))
 Hibernate: create table psi_states (amplitude_imaginary float(53), amplitude_real float(53), delta_t integer, probability float(53), target_x integer, target_y integer, use_complex_amplitude boolean, created_at timestamp(6), game_id bigint, id bigint generated by default as identity, action_type varchar(255), branch_id varchar(255), collapse_trigger varchar(255), expression TEXT, owner_hero varchar(255), psi_id varchar(255) not null unique, status varchar(255) check (status in ('ACTIVE','COLLAPSED','TRIGGERED','EXPIRED')), primary key (id))
+Hibernate: create table temporal_artifacts (effect_duration integer, effect_power integer, effect_radius integer, position_x integer, position_y integer, remaining_duration integer, temporal_energy_cost integer, activated_at timestamp(6), created_at timestamp(6), game_id bigint, id bigint generated by default as identity, artifact_id varchar(255) not null unique, description TEXT, name varchar(255) not null, owner_id varchar(255), status varchar(255) check (status in ('INACTIVE','ACTIVE','EXHAUSTED','DESTROYED','CHARGING')), type varchar(255) not null check (type in ('VEIL','ANCHOR_TOWER','WIGNER_EYE','TEMPORAL_SWORD','CHRONOS_SHIELD','QUANTUM_MIRROR','TEMPORAL_COMPASS','CAUSAL_DISRUPTOR')), primary key (id))
 Hibernate: create table tile_occupants (tile_id bigint not null, occupant varchar(255))
 Hibernate: alter table if exists game_players add constraint FKrbr2flqdav5ovyjas7q92u64r foreign key (game_id) references games
 Hibernate: alter table if exists game_tiles add constraint FK9jnp7yfteauo45smvmxa8710m foreign key (game_id) references games
 Hibernate: alter table if exists hero_inventory add constraint FKox21x0dd4fg7w81h3a8o6chu foreign key (hero_id) references heroes
 Hibernate: alter table if exists heroes add constraint FKb88jgdc3dfmmhbnrpl6u5sjdn foreign key (game_id) references games
 Hibernate: alter table if exists psi_states add constraint FK9kbp67wo94i0jk9w4v3ja4meq foreign key (game_id) references games
+Hibernate: alter table if exists temporal_artifacts add constraint FK4gwvr3vnipo301cwl6hnvtyn1 foreign key (game_id) references games
 Hibernate: alter table if exists tile_occupants add constraint FKia56skupqk3qxypotqpovr3gb foreign key (tile_id) references game_tiles
-2025-07-18T22:19:40.548+02:00  INFO 31630 --- [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-07-18T22:19:40.732+02:00  INFO 31630 --- [  restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-07-18T22:19:41.037+02:00  WARN 31630 --- [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-07-18T22:19:41.794+02:00  INFO 31630 --- [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2025-07-18T22:19:41.818+02:00  INFO 31630 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
-2025-07-18T22:19:41.823+02:00  INFO 31630 --- [  restartedMain] c.h.t.TemporalEngineApplication          : Started TemporalEngineApplication in 2.956 seconds (process running for 3.167)
-2025-07-18T22:20:00.681+02:00  INFO 31630 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-07-18T22:20:00.682+02:00  INFO 31630 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-07-18T22:20:00.686+02:00  INFO 31630 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2025-07-19T06:35:08.279+02:00  INFO 44926 --- [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-19T06:35:08.461+02:00  INFO 44926 --- [  restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-07-19T06:35:08.856+02:00  WARN 44926 --- [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-19T06:35:09.035+02:00  INFO 44926 --- [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-07-19T06:35:09.051+02:00  INFO 44926 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2025-07-19T06:35:09.056+02:00  INFO 44926 --- [  restartedMain] c.h.t.TemporalEngineApplication          : Started TemporalEngineApplication in 2.532 seconds (process running for 2.745)
+2025-07-19T06:35:40.332+02:00  INFO 44926 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-07-19T06:35:40.333+02:00  INFO 44926 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-07-19T06:35:40.334+02:00  INFO 44926 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+Hibernate: select count(*) from games g1_0
+Hibernate: insert into games (created_at,current_player,current_timeline,current_turn,ended_at,game_name,map_height,map_width,max_players,started_at,status,winner,id) values (?,?,?,?,?,?,?,?,?,?,?,?,default)
+Hibernate: insert into game_players (game_id,player_id) values (?,?)
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0 where g1_0.id=?
+Hibernate: insert into heroes (current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+Hibernate: select ps1_0.game_id,ps1_0.id,ps1_0.action_type,ps1_0.branch_id,ps1_0.collapse_trigger,ps1_0.amplitude_imaginary,ps1_0.amplitude_real,ps1_0.created_at,ps1_0.delta_t,ps1_0.expression,ps1_0.owner_hero,ps1_0.probability,ps1_0.psi_id,ps1_0.status,ps1_0.target_x,ps1_0.target_y,ps1_0.use_complex_amplitude from psi_states ps1_0 where ps1_0.game_id=?
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+Hibernate: select t1_0.game_id,t1_0.id,t1_0.building_owner,t1_0.building_type,t1_0.defense_bonus,t1_0.has_psi_states,t1_0.is_locked,t1_0.is_temporal_zone,t1_0.lock_duration,t1_0.movement_cost,t1_0.temporal_energy_bonus,t1_0.temporal_zone_type,t1_0.terrain,t1_0.x,t1_0.y from game_tiles t1_0 where t1_0.game_id=?
+Hibernate: select count(*) from games g1_0
+Hibernate: select count(*) from games g1_0
+Hibernate: select count(*) from games g1_0
+Hibernate: insert into games (created_at,current_player,current_timeline,current_turn,ended_at,game_name,map_height,map_width,max_players,started_at,status,winner,id) values (?,?,?,?,?,?,?,?,?,?,?,?,default)
+Hibernate: insert into game_players (game_id,player_id) values (?,?)
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0 where g1_0.id=?
+Hibernate: insert into heroes (current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+Hibernate: select ps1_0.game_id,ps1_0.id,ps1_0.action_type,ps1_0.branch_id,ps1_0.collapse_trigger,ps1_0.amplitude_imaginary,ps1_0.amplitude_real,ps1_0.created_at,ps1_0.delta_t,ps1_0.expression,ps1_0.owner_hero,ps1_0.probability,ps1_0.psi_id,ps1_0.status,ps1_0.target_x,ps1_0.target_y,ps1_0.use_complex_amplitude from psi_states ps1_0 where ps1_0.game_id=?
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+Hibernate: select t1_0.game_id,t1_0.id,t1_0.building_owner,t1_0.building_type,t1_0.defense_bonus,t1_0.has_psi_states,t1_0.is_locked,t1_0.is_temporal_zone,t1_0.lock_duration,t1_0.movement_cost,t1_0.temporal_energy_bonus,t1_0.temporal_zone_type,t1_0.terrain,t1_0.x,t1_0.y from game_tiles t1_0 where t1_0.game_id=?
+Hibernate: select count(*) from games g1_0
+Hibernate: select count(*) from games g1_0
+Hibernate: insert into games (created_at,current_player,current_timeline,current_turn,ended_at,game_name,map_height,map_width,max_players,started_at,status,winner,id) values (?,?,?,?,?,?,?,?,?,?,?,?,default)
+Hibernate: insert into game_players (game_id,player_id) values (?,?)
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0 where g1_0.id=?
+Hibernate: insert into heroes (current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+Hibernate: select ps1_0.game_id,ps1_0.id,ps1_0.action_type,ps1_0.branch_id,ps1_0.collapse_trigger,ps1_0.amplitude_imaginary,ps1_0.amplitude_real,ps1_0.created_at,ps1_0.delta_t,ps1_0.expression,ps1_0.owner_hero,ps1_0.probability,ps1_0.psi_id,ps1_0.status,ps1_0.target_x,ps1_0.target_y,ps1_0.use_complex_amplitude from psi_states ps1_0 where ps1_0.game_id=?
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+Hibernate: select t1_0.game_id,t1_0.id,t1_0.building_owner,t1_0.building_type,t1_0.defense_bonus,t1_0.has_psi_states,t1_0.is_locked,t1_0.is_temporal_zone,t1_0.lock_duration,t1_0.movement_cost,t1_0.temporal_energy_bonus,t1_0.temporal_zone_type,t1_0.terrain,t1_0.x,t1_0.y from game_tiles t1_0 where t1_0.game_id=?
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0 where g1_0.id=?
+Hibernate: select h1_0.game_id,h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.has_observation_ability,h1_0.health,h1_0.max_health,h1_0.max_movement_points,h1_0.max_temporal_energy,h1_0.movement_points,h1_0.movement_points_per_day,h1_0.name,h1_0.observation_range,h1_0.player_id,h1_0.position_x,h1_0.position_y,h1_0.status,h1_0.temporal_energy,h1_0.timeline_branch,h1_0.vision_radius from heroes h1_0 where h1_0.game_id=?
+Hibernate: select t1_0.game_id,t1_0.id,t1_0.building_owner,t1_0.building_type,t1_0.defense_bonus,t1_0.has_psi_states,t1_0.is_locked,t1_0.is_temporal_zone,t1_0.lock_duration,t1_0.movement_cost,t1_0.temporal_energy_bonus,t1_0.temporal_zone_type,t1_0.terrain,t1_0.x,t1_0.y from game_tiles t1_0 where t1_0.game_id=?
+Hibernate: insert into game_tiles (building_owner,building_type,defense_bonus,game_id,has_psi_states,is_locked,is_temporal_zone,lock_duration,movement_cost,temporal_energy_bonus,temporal_zone_type,terrain,x,y,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+Hibernate: select ps1_0.game_id,ps1_0.id,ps1_0.action_type,ps1_0.branch_id,ps1_0.collapse_trigger,ps1_0.amplitude_imaginary,ps1_0.amplitude_real,ps1_0.created_at,ps1_0.delta_t,ps1_0.expression,ps1_0.owner_hero,ps1_0.probability,ps1_0.psi_id,ps1_0.status,ps1_0.target_x,ps1_0.target_y,ps1_0.use_complex_amplitude from psi_states ps1_0 where ps1_0.game_id=?
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+Hibernate: update heroes set current_day=?,days_traveled=?,game_id=?,has_observation_ability=?,health=?,max_health=?,max_movement_points=?,max_temporal_energy=?,movement_points=?,movement_points_per_day=?,name=?,observation_range=?,player_id=?,position_x=?,position_y=?,status=?,temporal_energy=?,timeline_branch=?,vision_radius=? where id=?
+Hibernate: insert into tile_occupants (tile_id,occupant) values (?,?)
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0 where g1_0.id=?
+Hibernate: select t1_0.game_id,t1_0.id,t1_0.building_owner,t1_0.building_type,t1_0.defense_bonus,t1_0.has_psi_states,t1_0.is_locked,t1_0.is_temporal_zone,t1_0.lock_duration,t1_0.movement_cost,t1_0.temporal_energy_bonus,t1_0.temporal_zone_type,t1_0.terrain,t1_0.x,t1_0.y from game_tiles t1_0 where t1_0.game_id=?
+Hibernate: select ps1_0.game_id,ps1_0.id,ps1_0.action_type,ps1_0.branch_id,ps1_0.collapse_trigger,ps1_0.amplitude_imaginary,ps1_0.amplitude_real,ps1_0.created_at,ps1_0.delta_t,ps1_0.expression,ps1_0.owner_hero,ps1_0.probability,ps1_0.psi_id,ps1_0.status,ps1_0.target_x,ps1_0.target_y,ps1_0.use_complex_amplitude from psi_states ps1_0 where ps1_0.game_id=?
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=1, collapsedStates=0, totalStates=1, collapseRate=0.0, collapsesByType={}}
+Hibernate: select h1_0.game_id,h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.has_observation_ability,h1_0.health,h1_0.max_health,h1_0.max_movement_points,h1_0.max_temporal_energy,h1_0.movement_points,h1_0.movement_points_per_day,h1_0.name,h1_0.observation_range,h1_0.player_id,h1_0.position_x,h1_0.position_y,h1_0.status,h1_0.temporal_energy,h1_0.timeline_branch,h1_0.vision_radius from heroes h1_0 where h1_0.game_id=?
+Hibernate: select i1_0.hero_id,i1_0.item from hero_inventory i1_0 where i1_0.hero_id=?
+Hibernate: select i1_0.hero_id,i1_0.item from hero_inventory i1_0 where i1_0.hero_id=?
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0 where g1_0.id=?
+Hibernate: select ps1_0.game_id,ps1_0.id,ps1_0.action_type,ps1_0.branch_id,ps1_0.collapse_trigger,ps1_0.amplitude_imaginary,ps1_0.amplitude_real,ps1_0.created_at,ps1_0.delta_t,ps1_0.expression,ps1_0.owner_hero,ps1_0.probability,ps1_0.psi_id,ps1_0.status,ps1_0.target_x,ps1_0.target_y,ps1_0.use_complex_amplitude from psi_states ps1_0 where ps1_0.game_id=?
+Hibernate: select h1_0.game_id,h1_0.id,h1_0.current_day,h1_0.days_traveled,h1_0.has_observation_ability,h1_0.health,h1_0.max_health,h1_0.max_movement_points,h1_0.max_temporal_energy,h1_0.movement_points,h1_0.movement_points_per_day,h1_0.name,h1_0.observation_range,h1_0.player_id,h1_0.position_x,h1_0.position_y,h1_0.status,h1_0.temporal_energy,h1_0.timeline_branch,h1_0.vision_radius from heroes h1_0 where h1_0.game_id=?
+Hibernate: select t1_0.game_id,t1_0.id,t1_0.building_owner,t1_0.building_type,t1_0.defense_bonus,t1_0.has_psi_states,t1_0.is_locked,t1_0.is_temporal_zone,t1_0.lock_duration,t1_0.movement_cost,t1_0.temporal_energy_bonus,t1_0.temporal_zone_type,t1_0.terrain,t1_0.x,t1_0.y from game_tiles t1_0 where t1_0.game_id=?
+Hibernate: select o1_0.tile_id,o1_0.occupant from tile_occupants o1_0 where o1_0.tile_id=?
+Hibernate: insert into game_tiles (building_owner,building_type,defense_bonus,game_id,has_psi_states,is_locked,is_temporal_zone,lock_duration,movement_cost,temporal_energy_bonus,temporal_zone_type,terrain,x,y,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=1, totalStates=1, collapseRate=1.0, collapsesByType={}}
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update heroes set current_day=?,days_traveled=?,game_id=?,has_observation_ability=?,health=?,max_health=?,max_movement_points=?,max_temporal_energy=?,movement_points=?,movement_points_per_day=?,name=?,observation_range=?,player_id=?,position_x=?,position_y=?,status=?,temporal_energy=?,timeline_branch=?,vision_radius=? where id=?
+Hibernate: delete from tile_occupants where tile_id=?
+Hibernate: insert into tile_occupants (tile_id,occupant) values (?,?)
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  32.894 s
-[INFO] Finished at: 2025-07-18T22:20:10+02:00
+[INFO] Total time:  56.141 s
+[INFO] Finished at: 2025-07-19T06:35:58+02:00
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:3.2.0:run (default-cli) on project temporal-engine: Process terminated with exit code: 137 -> [Help 1]
 [ERROR] 
