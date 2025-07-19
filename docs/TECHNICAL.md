@@ -1121,3 +1121,213 @@ Le moteur de résolution temporelle Heroes of Time implémente un système compl
 **Tous les cas d'usage sont couverts** avec des exemples concrets et des logs de résolution vérifiables.
 
 **Status : ✅ FULLY IMPLEMENTED & DOCUMENTED**
+
+---
+
+## 🔥 **EXTENSIONS GROFI (2025)**
+
+### **🌀 Grammaire Quantique Étendue**
+
+Les extensions GROFI ajoutent de nouveaux symboles compatibles avec la syntaxe de base :
+
+```javascript
+// Symboles étendus GROFI
+†[ALL]                    // Rollback global de tous les états
+†[Δt-5 TO Δt-1]          // Rollback par plage temporelle
+Π[IF condition THEN action] // Conditions logiques étendues
+Ω[ONE]                    // Réalité effondrée unique
+Λ[LEVEL:n]               // Instabilité système (n=0-10)
+Σ[VALUE:n]               // Stress global causale (n=0.0-1.0)
+↯                        // Erreur critique système
+
+// Superposition récursive
+ψ[ψ[ψ[action]]]          // États quantiques imbriqués
+
+// Ultimate Powers GROFI
+ψ†[FREEZE {action}]       // Jean-Grofignon Collapse Override
+```
+
+### **🛡️ Système d'Immunités**
+
+**Artefacts d'immunité implémentés :**
+
+```java
+// GrofiHeroService.getHeroImmunities()
+IMMUNE[OBS]      // Bloque observations forcées
+IMMUNE[ROLLBACK] // Bloque rollbacks temporels  
+IMMUNE[COLLAPSE] // Protection Ultimate Powers
+IMMUNE[STRESS]   // Immunité stress causale
+IMMUNE[TEMPORAL] // Protection effets temporels
+```
+
+**Artefacts supportés :**
+- `temporal_anchor` : IMMUNE[ROLLBACK] + IMMUNE[TEMPORAL]
+- `quantum_shield` : IMMUNE[OBS] + IMMUNE[COLLAPSE]
+- `immunity_ring` : IMMUNE[STRESS]
+- `stabilization_totem` : Réduit stress causale
+- `collapse_immunity` : IMMUNE[COLLAPSE]
+
+### **🌊 Intégration Causale GROFI**
+
+**Service GrofiCausalIntegrationService :**
+
+```java
+// Vérification immunités avant exécution
+public boolean checkGrofiImmunities(Hero hero, String actionType)
+
+// Calcul impact sur graphe causale
+public double calculateCausalGraphImpact(Game game, String script)
+
+// Exécution protégée avec immunités
+public Map<String, Object> executeWithCausalProtection(
+    Game game, String script, Set<String> immunities)
+
+// Vérification cohérence post-exécution
+public boolean verifyCausalCoherence(Game game, String actionResult)
+
+// Correction automatique si incohérence
+public void applyCausalCorrection(Game game, String correctionType)
+```
+
+### **📊 Monitoring Stress Causale**
+
+**Calcul automatique du stress :**
+
+```java
+// Niveaux de stress
+NORMAL:   Σ < 0.3  // Système stable
+HIGH:     Σ < 0.7  // Attention requise  
+CRITICAL: Σ ≥ 0.7  // Risque effondrement
+
+// Facteurs de stress
+- Nombre d'états quantiques actifs
+- Conflits spatio-temporels
+- Rollbacks récents
+- Ultimate Powers utilisés
+- Incohérences détectées
+```
+
+### **🦸 Héros GROFI Spéciaux**
+
+**Jean-Grofignon (Héros Légendaire) :**
+
+```json
+{
+  "name": "Jean-Grofignon",
+  "title": "Le Maître du Temps",
+  "rarity": "LEGENDARY",
+  "role": "TEMPORAL_MASTER",
+  "immunityTags": ["SRTI", "ROLLBACK"],
+  "ultimatePower": {
+    "name": "Collapse Override",
+    "syntax": "ψ†[FREEZE {action}]",
+    "effect": "Force collapse avec immunités",
+    "cooldown": 3
+  }
+}
+```
+
+**Autres héros GROFI :**
+- `TheDude` : IMMUNE[STRESS], capacité "Chill Mode"
+- `VinceVega` : IMMUNE[OBS], capacité "Stealth Time"  
+- `WalterSobchak` : IMMUNE[COLLAPSE], capacité "Rage Mode"
+
+### **🔮 Artefacts Quantiques GROFI**
+
+**Catalogue étendu (docs/GROFI/QUANTUM_ARTIFACTS_CATALOG.md) :**
+
+```yaml
+Stabilisation:
+  - Totem de Dissipation: Réduit Σ de 15%
+  - Boussole de Re-Sync: Force resynchronisation
+
+Collapse:
+  - Trompette de l'Apocalypse: Collapse toutes timelines
+  - Œil de Vorkum: IMMUNE[COLLAPSE] temporaire
+
+Propagation:
+  - Fleur de l'Épure: Supprime ψ-states aléatoires
+  - Talisman de Dérive: Décale actions Δt
+
+Immunité:
+  - Cœur de Vorkum: IMMUNE[SRTI] conditionnel
+  - Cape de Négation: IMMUNE[OBS] temporaire
+
+Ultimes:
+  - Grimoire de Gödel: IMMUNE[ROLLBACK] global
+  - Cristal de Trame: Réorganise liens causaux
+```
+
+### **🌐 World State Graph (Futur)**
+
+**Structure prévue (docs/GROFI/WORLD_STATE_GRAPH.md) :**
+
+```java
+// Implémentation future
+- Nœuds: états du monde (PsiState)
+- Arcs: transitions causales (ACTION, ⊙, †)
+- Branches: timelines alternatives
+- Visualisation: arbre principal + branches grises
+- Optimisation: garbage collect + compression
+```
+
+---
+
+## ✅ **COMPATIBILITÉ & COHÉRENCE GROFI**
+
+### **🎯 Intégration Réussie**
+
+- ✅ **Grammaire étendue** : 100% compatible avec syntaxe de base
+- ✅ **Système immunités** : Intégré au collapse causale existant  
+- ✅ **Ultimate Powers** : Respectent toutes les règles temporelles
+- ✅ **Monitoring stress** : Améliore la stabilité système
+- ✅ **API REST** : Endpoints complets pour tests et démonstrations
+
+### **🚀 Extensions Production-Ready**
+
+- 🔧 **GrofiCausalIntegrationService** : Service d'intégration robuste
+- 🛡️ **Système immunités** : Protection artefacts fonctionnelle
+- 📊 **Stress monitoring** : Calcul temps réel implémenté
+- 🦸 **Héros spéciaux** : Jean-Grofignon et équipe opérationnels
+- 🧪 **Tests intégrés** : Validation complète des extensions
+
+**Status GROFI : ✅ FULLY INTEGRATED & OPERATIONAL**
+---
+
+## 🔥 **EXTENSIONS GROFI (2025)**
+
+### **🌀 Grammaire Quantique Étendue**
+
+Les extensions GROFI ajoutent de nouveaux symboles compatibles avec la syntaxe de base :
+
+```javascript
+// Symboles étendus GROFI
+†[ALL]                    // Rollback global de tous les états
+†[Δt-5 TO Δt-1]          // Rollback par plage temporelle
+Π[IF condition THEN action] // Conditions logiques étendues
+Ω[ONE]                    // Réalité effondrée unique
+Λ[LEVEL:n]               // Instabilité système (n=0-10)
+Σ[VALUE:n]               // Stress global causale (n=0.0-1.0)
+↯                        // Erreur critique système
+
+// Superposition récursive
+ψ[ψ[ψ[action]]]          // États quantiques imbriqués
+
+// Ultimate Powers GROFI
+ψ†[FREEZE {action}]       // Jean-Grofignon Collapse Override
+```
+
+### **🛡️ Système d'Immunités**
+
+**Artefacts d'immunité implémentés :**
+
+```java
+// GrofiHeroService.getHeroImmunities()
+IMMUNE[OBS]      // Bloque observations forcées
+IMMUNE[ROLLBACK] // Bloque rollbacks temporels  
+IMMUNE[COLLAPSE] // Protection Ultimate Powers
+IMMUNE[STRESS]   // Immunité stress causale
+IMMUNE[TEMPORAL] // Protection effets temporels
+```
+
+**Status GROFI : ✅ FULLY INTEGRATED & OPERATIONAL**

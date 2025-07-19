@@ -788,3 +788,4 @@ Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timel
 2025-07-19T09:20:36.428+02:00 DEBUG 80233 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
 2025-07-19T09:20:36.429+02:00 DEBUG 80233 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{causalIntegration=true, success=false, error=Game not found: 1, systemVersion=GROFI-Causal-Integrat (truncated)...]
 2025-07-19T09:20:36.429+02:00 DEBUG 80233 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-19T09:32:02.788+02:00  WARN 80233 --- [ool housekeeper] com.zaxxer.hikari.pool.HikariPool        : HeroesOfTimePool - Thread starvation or clock leap detected (housekeeper delta=1m5s144ms).
