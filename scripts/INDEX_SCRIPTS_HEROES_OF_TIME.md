@@ -283,8 +283,20 @@ ls . | grep benchmark
 - **run-all-performance-tests.sh** → **🏆 MASTER SUITE** - Lance tous les benchmarks et génère rapport consolidé
 
 ### 📊 **Benchmarks Spécifiques** 
-- **benchmark-performance-comparison.sh** → Compare Java hardcodé vs JSON formulas vs HOTS scripts (100 itérations)
+- **benchmark-performance-comparison.sh** → Benchmark original (garde pour compatibilité)
+- **benchmark-coherent-comparison.sh** → 🎯 **NOUVEAU** - Benchmark avec distinction claire JSON vs HOTS
 - **stress-test-moteur.sh** → Tests de stress : charge massive, requêtes concurrentes, limites système
+
+### 🧠 **Distinction Conceptuelle Importante**
+```
+📋 JSON = DÉFINITIONS (Qu'est-ce que c'est ?)
+   └─ Comment les objets/artefacts sont DÉFINIS
+   
+📜 HOTS = SCÉNARIOS (Que se passe-t-il ?)  
+   └─ Comment les histoires/scripts AVANCENT
+```
+
+**🔄 Ce sont DEUX AXES ORTHOGONAUX, pas concurrents !**
 
 ### 🔄 **Tests Système Hybride**
 - **test-hybrid-artifacts-system.sh** → Valide le système hybride : JSON → Java → Templates → Fallback
