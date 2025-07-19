@@ -1,0 +1,5 @@
+::1 - - [19/Jul/2025 10:34:30] "GET / HTTP/1.1" 200 -
+::1 - - [19/Jul/2025 10:34:42] "GET / HTTP/1.1" 200 -
+::1 - - [19/Jul/2025 10:36:18] "GET /dashboard.html HTTP/1.1" 200 -
+::1 - - [19/Jul/2025 10:36:18] code 404, message File not found
+::1 - - [19/Jul/2025 10:36:18] "GET /favicon.ico HTTP/1.1" 404 -

@@ -1,0 +1,19 @@
+127.0.0.1 - - [19/Jul/2025 10:56:34] "GET /dashboard.html HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 10:56:37] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 10:56:37] code 403, message Accès refusé - Fichier non autorisé
+127.0.0.1 - - [19/Jul/2025 10:56:37] "GET /favicon.ico HTTP/1.1" 403 -
+127.0.0.1 - - [19/Jul/2025 10:56:37] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 10:56:47] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 10:56:47] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 10:56:57] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 10:56:57] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 10:57:07] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 10:57:07] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 10:57:07] "GET /dashboard.html HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 10:57:10] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 10:57:10] code 403, message Accès refusé - Fichier non autorisé
+127.0.0.1 - - [19/Jul/2025 10:57:10] "GET /favicon.ico HTTP/1.1" 403 -
+127.0.0.1 - - [19/Jul/2025 10:57:10] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 10:57:21] "GET /api/global-status HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 10:57:21] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/Jul/2025 10:57:25] "GET / HTTP/1.1" 200 -
