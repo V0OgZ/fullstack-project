@@ -28,6 +28,9 @@ public class ArtifactEffectExecutor {
     @Autowired
     private GameTileRepository gameTileRepository;
     
+    @Autowired
+    private DynamicFormulaParser dynamicFormulaParser;
+    
     /**
      * 🎯 POINT D'ENTRÉE PRINCIPAL
      * Exécute l'effet d'un artefact basé sur son ID
@@ -473,12 +476,48 @@ public class ArtifactEffectExecutor {
     // =========================================================================
     
     /**
-     * Effet générique pour les artefacts non spécifiés
+     * 🚀 SYSTÈME HYBRIDE - PARSER DYNAMIQUE + FALLBACK
+     * 
+     * 1. Essaie de trouver un artefact JSON avec formule
+     * 2. Si trouvé : utilise DynamicFormulaParser
+     * 3. Sinon : effet générique
      */
     private Map<String, Object> executeGenericArtifact(String artifactId, Hero hero, Game game) {
-        // Effet générique : bonus d'énergie temporelle
+        System.out.println("🔍 RECHERCHE ARTEFACT DYNAMIQUE: " + artifactId);
+        
+        // 📊 ÉTAPE 1: Essayer de charger l'artefact depuis JSON
+        Map<String, Object> artifactData = loadArtifactFromJson(artifactId);
+        
+        if (artifactData != null && artifactData.containsKey("formula")) {
+            System.out.println("🎯 ARTEFACT DYNAMIQUE TROUVÉ ! Formula: " + artifactData.get("formula"));
+            
+            String formula = (String) artifactData.get("formula");
+            int energyCost = artifactData.containsKey("energy_cost") ? 
+                           ((Number) artifactData.get("energy_cost")).intValue() : 25;
+            
+            // Valider la formule avant l'exécution
+            if (!dynamicFormulaParser.isValidFormula(formula)) {
+                return createError("🚨 Formule invalide pour l'artefact " + artifactId + ": " + formula);
+            }
+            
+            // 🔥 EXÉCUTER LA FORMULE DYNAMIQUE !
+            return dynamicFormulaParser.executeFormulaEffect(formula, hero, game, energyCost);
+        }
+        
+        // 📊 ÉTAPE 2: Fallback vers effet générique
+        System.out.println("🎲 FALLBACK GÉNÉRIQUE pour: " + artifactId);
+        
+        // Vérifier l'énergie pour l'effet générique
+        if (hero.getTemporalEnergy() < 15) {
+            return createError("Énergie insuffisante pour l'effet générique. Requis: 15, Disponible: " + hero.getTemporalEnergy());
+        }
+        
+        // Effet générique : bonus d'énergie temporelle  
         hero.setTemporalEnergy(Math.min(hero.getMaxTemporalEnergy(),
                                        hero.getTemporalEnergy() + 10));
+        
+        // Déduire le coût
+        hero.setTemporalEnergy(hero.getTemporalEnergy() - 15);
         
         // Ajouter un marqueur d'utilisation
         hero.addItem("USED_" + artifactId.toUpperCase() + "_" + System.currentTimeMillis());
@@ -486,10 +525,82 @@ public class ArtifactEffectExecutor {
         heroRepository.save(hero);
         
         return createSuccess(
-            "🎲 Artefact " + artifactId + " activé",
-            "Effet générique: +10 énergie temporelle",
+            "🎲 Artefact " + artifactId + " activé (mode générique)",
+            "Effet générique: +10 énergie temporelle, -15 énergie",
             1.0
         );
+    }
+    
+    /**
+     * 📂 Charger un artefact depuis les fichiers JSON
+     */
+    private Map<String, Object> loadArtifactFromJson(String artifactId) {
+        try {
+            // Essayer plusieurs emplacements
+            String[] possiblePaths = {
+                "/custom-artifacts/" + artifactId + ".json",
+                "/artefacts-custom/" + artifactId + ".json", 
+                "/quantum-artifacts.json", // Fichier global
+                "/artifacts/" + artifactId + ".json"
+            };
+            
+            for (String path : possiblePaths) {
+                Map<String, Object> artifact = tryLoadArtifactFromPath(path, artifactId);
+                if (artifact != null) {
+                    System.out.println("✅ Artefact trouvé dans: " + path);
+                    return artifact;
+                }
+            }
+            
+            System.out.println("❌ Artefact " + artifactId + " non trouvé dans les JSON");
+            return null;
+            
+        } catch (Exception e) {
+            System.err.println("🚨 Erreur chargement artefact " + artifactId + ": " + e.getMessage());
+            return null;
+        }
+    }
+    
+    /**
+     * 🔍 Essayer de charger depuis un chemin spécifique
+     */
+    private Map<String, Object> tryLoadArtifactFromPath(String resourcePath, String artifactId) {
+        try {
+            // TODO: Implémenter le chargement JSON réel
+            // Pour l'instant, retourner des exemples hardcodés
+            
+            if ("custom_mirror".equals(artifactId)) {
+                Map<String, Object> customMirror = new HashMap<>();
+                customMirror.put("id", "custom_mirror");
+                customMirror.put("name", "Miroir Personnalisé");
+                customMirror.put("formula", "CONSTRUCTIVE(ψ1, ψ2) + AMPLIFY(result, 1.5)");
+                customMirror.put("energy_cost", 30);
+                return customMirror;
+            }
+            
+            if ("teleport_crystal".equals(artifactId)) {
+                Map<String, Object> teleportCrystal = new HashMap<>();
+                teleportCrystal.put("id", "teleport_crystal");
+                teleportCrystal.put("name", "Cristal de Téléportation");
+                teleportCrystal.put("formula", "TELEPORT_HERO(hero, 10, 10) + MODIFY_ENERGY(hero, -20)");
+                teleportCrystal.put("energy_cost", 40);
+                return teleportCrystal;
+            }
+            
+            if ("energy_amplifier".equals(artifactId)) {
+                Map<String, Object> energyAmp = new HashMap<>();
+                energyAmp.put("id", "energy_amplifier");
+                energyAmp.put("name", "Amplificateur d'Énergie");
+                energyAmp.put("formula", "MODIFY_ENERGY(hero, 50) + AMPLIFY(ψ1, 2.0)");
+                energyAmp.put("energy_cost", 20);
+                return energyAmp;
+            }
+            
+            return null;
+            
+        } catch (Exception e) {
+            return null;
+        }
     }
     
     // =========================================================================
