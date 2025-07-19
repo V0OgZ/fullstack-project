@@ -256,7 +256,7 @@
             </div>
             <div class="status-indicator">
                 <div class="status-dot status-loading" id="object-viewer-status"></div>
-                <span>Object Viewer (5175)</span>
+                <span>Collection & Grammar (5175)</span>
             </div>
             <div class="status-indicator">
                 <div class="status-dot status-loading" id="testrunner-status"></div>
@@ -317,20 +317,20 @@
             </a>
         </div>
 
-        <!-- Object Viewer Placeholder -->
+        <!-- Collection & Grammar Visualizer -->
         <div class="ui-panel" id="object-viewer-panel">
-            <div class="panel-icon">📋</div>
-            <h2 class="panel-title">Object Viewer</h2>
-            <p class="panel-description">Visualiseur d'objets JSON et données GROFI (placeholder pour développement futur)</p>
-            <div class="panel-url">http://localhost:5175</div>
+            <div class="panel-icon">🏛️</div>
+            <h2 class="panel-title">Collection & Grammar</h2>
+            <p class="panel-description">Interface unifiée : Collection du jeu, Scénarios HOTS et Grammar Translator</p>
+            <div class="panel-url">http://localhost:5175/hots</div>
             <ul class="panel-features">
-                <li>Visualisation JSON GROFI</li>
-                <li>Données héros et artefacts</li>
-                <li>Interface de développement</li>
-                <li>Placeholder temporaire</li>
+                <li>Collection complète du jeu</li>
+                <li>Scénarios HOTS intégrés</li>
+                <li>Grammar Translator avancé</li>
+                <li>Interface par onglets moderne</li>
             </ul>
-            <a href="http://localhost:5175" target="_blank" class="launch-button" id="object-viewer-button">
-                📋 Object Viewer
+            <a href="http://localhost:5175/hots" target="_blank" class="launch-button" id="object-viewer-button">
+                🏛️ Collection & Grammar
             </a>
         </div>
 
@@ -367,7 +367,7 @@
             frontend: { url: 'http://localhost:8000', port: 8000, name: 'Frontend Principal' },
             temporal: { url: 'http://localhost:5174', port: 5174, name: 'Frontend Temporal' },
             visualizer: { url: 'http://localhost:8001', port: 8001, name: 'Quantum Visualizer' },
-            'object-viewer': { url: 'http://localhost:5175', port: 5175, name: 'Object Viewer' },
+            'object-viewer': { url: 'http://localhost:5175/hots', port: 5175, name: 'Collection & Grammar' },
             testrunner: { url: 'http://localhost:8888', port: 8888, name: 'Test Runner' }
         };
 
