@@ -1,0 +1,1 @@
+scripts/test/test-temporal-artifacts-advanced.sh

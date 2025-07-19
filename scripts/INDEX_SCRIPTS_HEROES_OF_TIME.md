@@ -21,6 +21,7 @@
 - **`test-manual.sh`** - Test manuel
 - **`test-complete-bataille-temporelle.sh`** - Test bataille temporelle
 - **`test-complete-comparison.sh`** - Test comparaison
+- **`test/test-temporal-artifacts-advanced.sh`** 🚀 - **NOUVEAU** Test artefacts temporels avec collapse et voyage dans le temps
 
 #### 🎭 **Scripts de Démonstration**
 - **`autoplay-demo.sh`** - Démo automatique

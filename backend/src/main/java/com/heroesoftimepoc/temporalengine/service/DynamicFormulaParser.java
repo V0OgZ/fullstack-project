@@ -54,6 +54,14 @@ public class DynamicFormulaParser {
     private static final Pattern TELEPORT_PATTERN = Pattern.compile("TELEPORT_HERO\\((\\w+),\\s*(\\d+),\\s*(\\d+)\\)");
     private static final Pattern CREATE_SUPERPOSITION_PATTERN = Pattern.compile("CREATE_SUPERPOSITION\\((\\d+),\\s*(\\d+),\\s*(\\d+),\\s*(\\d+),\\s*(\\d*\\.?\\d+),\\s*(\\d*\\.?\\d+)\\)");
     
+    // 🚀 NOUVELLES OPÉRATIONS TEMPORELLES AVANCÉES
+    private static final Pattern COLLAPSE_TEMPORAL_PATTERN = Pattern.compile("COLLAPSE_TEMPORAL_STATES\\(\\)");
+    private static final Pattern REVERSE_TIME_PATTERN = Pattern.compile("REVERSE_TIME_IF_AHEAD\\((\\w+),\\s*(\\d+)\\)");
+    private static final Pattern TELEPORT_BY_PROBABILITY_PATTERN = Pattern.compile("TELEPORT_BY_PROBABILITY\\((\\w+),\\s*(\\w+|result)\\)");
+    private static final Pattern CREATE_ECHO_PATTERN = Pattern.compile("CREATE_TEMPORAL_ECHO\\((\\w+)\\)");
+    private static final Pattern FORCE_COLLAPSE_PATTERN = Pattern.compile("FORCE_COLLAPSE_ALL\\((\\w+),\\s*(\\d+)\\)");
+    private static final Pattern CONDITIONAL_INTERFERENCE_PATTERN = Pattern.compile("CONDITIONAL_INTERFERENCE\\(([^,]+),\\s*(\\w+\\([^)]+\\)),\\s*(\\w+\\([^)]+\\))\\)");
+    
     /**
      * 🎯 MÉTHODE PRINCIPALE : Exécuter une formule d'artefact dynamique
      */
@@ -308,6 +316,61 @@ public class DynamicFormulaParser {
             }
         }
         
+        // 🚀 NOUVELLES OPÉRATIONS TEMPORELLES AVANCÉES
+        
+        // COLLAPSE_TEMPORAL_STATES()
+        Matcher collapseTemporalMatcher = COLLAPSE_TEMPORAL_PATTERN.matcher(operation);
+        if (collapseTemporalMatcher.find()) {
+            return executeCollapseTemporalStates(hero, game, variables);
+        }
+        
+        // REVERSE_TIME_IF_AHEAD(hero, days)
+        Matcher reverseTimeMatcher = REVERSE_TIME_PATTERN.matcher(operation);
+        if (reverseTimeMatcher.find()) {
+            String heroName = reverseTimeMatcher.group(1);
+            int days = Integer.parseInt(reverseTimeMatcher.group(2));
+            
+            if (heroName.equals(hero.getName()) || heroName.equals("hero")) {
+                return executeReverseTimeIfAhead(hero, game, days);
+            }
+        }
+        
+        // TELEPORT_BY_PROBABILITY(hero, result)
+        Matcher teleportProbMatcher = TELEPORT_BY_PROBABILITY_PATTERN.matcher(operation);
+        if (teleportProbMatcher.find()) {
+            String heroName = teleportProbMatcher.group(1);
+            String amplitudeVar = teleportProbMatcher.group(2);
+            
+            if (heroName.equals(hero.getName()) || heroName.equals("hero")) {
+                ComplexAmplitude amplitude = null;
+                if ("result".equals(amplitudeVar) && variables.containsKey("result")) {
+                    amplitude = (ComplexAmplitude) variables.get("result");
+                }
+                return executeTeleportByProbability(hero, game, amplitude);
+            }
+        }
+        
+        // CREATE_TEMPORAL_ECHO(hero)
+        Matcher echoMatcher = CREATE_ECHO_PATTERN.matcher(operation);
+        if (echoMatcher.find()) {
+            String heroName = echoMatcher.group(1);
+            
+            if (heroName.equals(hero.getName()) || heroName.equals("hero")) {
+                return executeCreateTemporalEcho(hero, game);
+            }
+        }
+        
+        // FORCE_COLLAPSE_ALL(hero, radius)
+        Matcher forceCollapseMatcher = FORCE_COLLAPSE_PATTERN.matcher(operation);
+        if (forceCollapseMatcher.find()) {
+            String heroName = forceCollapseMatcher.group(1);
+            int radius = Integer.parseInt(forceCollapseMatcher.group(2));
+            
+            if (heroName.equals(hero.getName()) || heroName.equals("hero")) {
+                return executeForceCollapseAll(hero, game, radius);
+            }
+        }
+        
         // Si aucun pattern ne match
         result.put("error", "Opération non reconnue: " + operation);
         return result;
@@ -339,6 +402,183 @@ public class DynamicFormulaParser {
         return nearbyStates;
     }
     
+    // =========================================================================
+    // 🚀 NOUVELLES OPÉRATIONS TEMPORELLES AVANCÉES
+    // =========================================================================
+    
+    /**
+     * 🌀 COLLAPSE_TEMPORAL_STATES() - Force le collapse de tous les ψ-states proches
+     */
+    private Map<String, Object> executeCollapseTemporalStates(Hero hero, Game game, Map<String, Object> variables) {
+        Map<String, Object> result = new HashMap<>();
+        
+        List<PsiState> nearbyStates = findNearbyPsiStates(hero, game, 5);
+        int collapsedCount = 0;
+        
+        for (PsiState psi : nearbyStates) {
+            if (psi.isActive()) {
+                psi.collapse();
+                psiStateRepository.save(psi);
+                collapsedCount++;
+            }
+        }
+        
+        result.put("operation", "COLLAPSE_TEMPORAL_STATES");
+        result.put("psiStatesCollapsed", collapsedCount);
+        result.put("radius", 5);
+        result.put("message", "Effondrement forcé de " + collapsedCount + " ψ-states");
+        
+        return result;
+    }
+    
+    /**
+     * ⏰ REVERSE_TIME_IF_AHEAD(hero, days) - Voyage dans le temps si en avance
+     */
+    private Map<String, Object> executeReverseTimeIfAhead(Hero hero, Game game, int days) {
+        Map<String, Object> result = new HashMap<>();
+        
+        // Simuler la vérification temporelle (le héros est-il "en avance" ?)
+        int currentTurn = game.getCurrentTurn();
+        boolean isAhead = currentTurn > 10; // Logique simple : si > 10 tours, il est "en avance"
+        
+        if (isAhead) {
+            // Effet de voyage dans le temps - ramener le héros quelques cases en arrière
+            int newX = Math.max(0, hero.getPositionX() - days * 2);  // 2 cases par jour
+            int newY = Math.max(0, hero.getPositionY() - days * 2);
+            
+            hero.setPositionX(newX);
+            hero.setPositionY(newY);
+            
+            // Restaurer un peu d'énergie temporelle (effet du voyage dans le temps)
+            int energyRestored = days * 25;
+            hero.setTemporalEnergy(Math.min(hero.getMaxTemporalEnergy(), 
+                                          hero.getTemporalEnergy() + energyRestored));
+            
+            heroRepository.save(hero);
+            
+            result.put("operation", "REVERSE_TIME_IF_AHEAD");
+            result.put("timeReversed", true);
+            result.put("daysReversed", days);
+            result.put("newPosition", newX + "," + newY);
+            result.put("energyRestored", energyRestored);
+            result.put("message", "Voyage dans le temps ! Retour de " + days + " jour(s)");
+            
+        } else {
+            result.put("operation", "REVERSE_TIME_IF_AHEAD");
+            result.put("timeReversed", false);
+            result.put("message", "Héros pas en avance temporelle, pas de voyage dans le temps");
+        }
+        
+        return result;
+    }
+    
+    /**
+     * 🎲 TELEPORT_BY_PROBABILITY(hero, amplitude) - Téléportation basée sur probabilité
+     */
+    private Map<String, Object> executeTeleportByProbability(Hero hero, Game game, ComplexAmplitude amplitude) {
+        Map<String, Object> result = new HashMap<>();
+        
+        if (amplitude == null) {
+            result.put("error", "Amplitude non disponible pour téléportation probabiliste");
+            return result;
+        }
+        
+        double probability = amplitude.getProbability();
+        
+        // Plus la probabilité est élevée, plus on téléporte loin
+        int maxDistance = (int) Math.ceil(probability * 15); // Maximum 15 cases
+        int actualDistance = Math.max(1, maxDistance);
+        
+        // Direction aléatoire
+        double angle = Math.random() * 2 * Math.PI;
+        int deltaX = (int) (actualDistance * Math.cos(angle));
+        int deltaY = (int) (actualDistance * Math.sin(angle));
+        
+        int newX = Math.max(0, Math.min(game.getMapWidth() - 1, hero.getPositionX() + deltaX));
+        int newY = Math.max(0, Math.min(game.getMapHeight() - 1, hero.getPositionY() + deltaY));
+        
+        hero.setPositionX(newX);
+        hero.setPositionY(newY);
+        heroRepository.save(hero);
+        
+        result.put("operation", "TELEPORT_BY_PROBABILITY");
+        result.put("probability", probability);
+        result.put("distance", actualDistance);
+        result.put("newPosition", newX + "," + newY);
+        result.put("message", "Téléportation probabiliste sur " + actualDistance + " cases");
+        
+        return result;
+    }
+    
+    /**
+     * 👻 CREATE_TEMPORAL_ECHO(hero) - Créer un écho temporel du héros
+     */
+    private Map<String, Object> executeCreateTemporalEcho(Hero hero, Game game) {
+        Map<String, Object> result = new HashMap<>();
+        
+        // Créer un ψ-state spécial représentant l'écho temporel
+        PsiState echo = new PsiState();
+        echo.setPsiId("ψECHO_" + hero.getName() + "_" + System.currentTimeMillis());
+        echo.setExpression("⊙(Δt+3 @" + hero.getPositionX() + "," + hero.getPositionY() + " ⟶ TEMPORAL_ECHO)");
+        echo.setBranchId("ℬECHO");
+        echo.setTargetX(hero.getPositionX());
+        echo.setTargetY(hero.getPositionY());
+        echo.setDeltaT(3); // L'écho apparaîtra dans 3 tours
+        echo.setActionType("ECHO");
+        echo.setOwnerHero(hero.getName());
+        echo.setGame(game);
+        
+        // Amplitude complexe spéciale pour l'écho
+        echo.setComplexAmplitude(0.7, 0.7); // |ψ|² = 0.98
+        
+        psiStateRepository.save(echo);
+        
+        // Coût en énergie pour créer l'écho
+        int echoCost = 30;
+        hero.setTemporalEnergy(hero.getTemporalEnergy() - echoCost);
+        heroRepository.save(hero);
+        
+        result.put("operation", "CREATE_TEMPORAL_ECHO");
+        result.put("echoId", echo.getPsiId());
+        result.put("echoPosition", hero.getPositionX() + "," + hero.getPositionY());
+        result.put("echoDelay", 3);
+        result.put("energyCost", echoCost);
+        result.put("message", "Écho temporel créé ! Apparaîtra dans 3 tours");
+        
+        return result;
+    }
+    
+    /**
+     * 💥 FORCE_COLLAPSE_ALL(hero, radius) - Force collapse dans un rayon
+     */
+    private Map<String, Object> executeForceCollapseAll(Hero hero, Game game, int radius) {
+        Map<String, Object> result = new HashMap<>();
+        
+        List<PsiState> statesInRadius = findNearbyPsiStates(hero, game, radius);
+        int collapsedCount = 0;
+        double totalEnergyReleased = 0.0;
+        
+        for (PsiState psi : statesInRadius) {
+            if (psi.isActive()) {
+                // Calculer l'énergie libérée par le collapse
+                double energy = psi.getEffectiveProbability() * 20; // 20 énergie max par ψ-state
+                totalEnergyReleased += energy;
+                
+                psi.collapse();
+                psiStateRepository.save(psi);
+                collapsedCount++;
+            }
+        }
+        
+        result.put("operation", "FORCE_COLLAPSE_ALL");
+        result.put("radius", radius);
+        result.put("psiStatesCollapsed", collapsedCount);
+        result.put("energyReleased", totalEnergyReleased);
+        result.put("message", "Collapse forcé de " + collapsedCount + " ψ-states, énergie libérée: " + totalEnergyReleased);
+        
+        return result;
+    }
+    
     /**
      * ✅ Vérifier si une formule est valide (sans l'exécuter)
      */
@@ -356,7 +596,13 @@ public class DynamicFormulaParser {
                    PHASE_SHIFT_PATTERN.matcher(formula).find() ||
                    MODIFY_ENERGY_PATTERN.matcher(formula).find() ||
                    TELEPORT_PATTERN.matcher(formula).find() ||
-                   CREATE_SUPERPOSITION_PATTERN.matcher(formula).find();
+                   CREATE_SUPERPOSITION_PATTERN.matcher(formula).find() ||
+                   // 🚀 Nouvelles opérations temporelles avancées
+                   COLLAPSE_TEMPORAL_PATTERN.matcher(formula).find() ||
+                   REVERSE_TIME_PATTERN.matcher(formula).find() ||
+                   TELEPORT_BY_PROBABILITY_PATTERN.matcher(formula).find() ||
+                   CREATE_ECHO_PATTERN.matcher(formula).find() ||
+                   FORCE_COLLAPSE_PATTERN.matcher(formula).find();
                    
         } catch (Exception e) {
             return false;
@@ -368,13 +614,20 @@ public class DynamicFormulaParser {
      */
     public List<String> getSupportedOperations() {
         return Arrays.asList(
+            // Opérations de base
             "CONSTRUCTIVE(ψ1, ψ2) - Interférence constructive",
             "DESTRUCTIVE(ψ1, ψ2) - Interférence destructive", 
             "AMPLIFY(ψ, factor) - Amplification",
             "PHASE_SHIFT(ψ, angle) - Déphasage",
             "MODIFY_ENERGY(hero, amount) - Modifier l'énergie",
             "TELEPORT_HERO(hero, x, y) - Téléportation",
-            "CREATE_SUPERPOSITION(x1, y1, x2, y2, p1, p2) - Créer superposition"
+            "CREATE_SUPERPOSITION(x1, y1, x2, y2, p1, p2) - Créer superposition",
+            // 🚀 Opérations temporelles avancées
+            "COLLAPSE_TEMPORAL_STATES() - Force collapse de tous les ψ-states proches",
+            "REVERSE_TIME_IF_AHEAD(hero, days) - Voyage dans le temps si en avance",
+            "TELEPORT_BY_PROBABILITY(hero, amplitude) - Téléportation basée sur probabilité", 
+            "CREATE_TEMPORAL_ECHO(hero) - Créer un écho temporel du héros",
+            "FORCE_COLLAPSE_ALL(hero, radius) - Force collapse dans un rayon donné"
         );
     }
 } 

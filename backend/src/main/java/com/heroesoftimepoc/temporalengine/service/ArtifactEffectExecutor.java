@@ -541,6 +541,7 @@ public class ArtifactEffectExecutor {
                 "/custom-artifacts/" + artifactId + ".json",
                 "/artefacts-custom/" + artifactId + ".json", 
                 "/quantum-artifacts.json", // Fichier global
+                "/temporal-artifacts-advanced.json", // Nouveaux artefacts temporels
                 "/artifacts/" + artifactId + ".json"
             };
             
@@ -594,6 +595,43 @@ public class ArtifactEffectExecutor {
                 energyAmp.put("formula", "MODIFY_ENERGY(hero, 50) + AMPLIFY(ψ1, 2.0)");
                 energyAmp.put("energy_cost", 20);
                 return energyAmp;
+            }
+            
+            // 🚀 NOUVEAUX ARTEFACTS TEMPORELS AVANCÉS
+            if ("chrono_collapser".equals(artifactId)) {
+                Map<String, Object> chronoCollapser = new HashMap<>();
+                chronoCollapser.put("id", "chrono_collapser");
+                chronoCollapser.put("name", "Effondreur Chronologique");
+                chronoCollapser.put("formula", "DESTRUCTIVE(ψ1, ψ2) + COLLAPSE_TEMPORAL_STATES() + REVERSE_TIME_IF_AHEAD(hero, 1)");
+                chronoCollapser.put("energy_cost", 80);
+                return chronoCollapser;
+            }
+            
+            if ("quantum_interference_crystal".equals(artifactId)) {
+                Map<String, Object> crystal = new HashMap<>();
+                crystal.put("id", "quantum_interference_crystal");
+                crystal.put("name", "Cristal d'Interférence Quantique");
+                crystal.put("formula", "CONSTRUCTIVE(ψ1, ψ2) + CONSTRUCTIVE(ψ2, ψ3) + TELEPORT_BY_PROBABILITY(hero, result)");
+                crystal.put("energy_cost", 60);
+                return crystal;
+            }
+            
+            if ("temporal_paradox_engine".equals(artifactId)) {
+                Map<String, Object> engine = new HashMap<>();
+                engine.put("id", "temporal_paradox_engine");
+                engine.put("name", "Moteur de Paradoxe Temporel");
+                engine.put("formula", "AMPLIFY(ψ1, 3.0) + DESTRUCTIVE(ψ1, ψ2) + AMPLIFY(result, 0.5) + MODIFY_ENERGY(hero, -50) + CREATE_TEMPORAL_ECHO(hero)");
+                engine.put("energy_cost", 120);
+                return engine;
+            }
+            
+            if ("collapse_accelerator".equals(artifactId)) {
+                Map<String, Object> accelerator = new HashMap<>();
+                accelerator.put("id", "collapse_accelerator");
+                accelerator.put("name", "Accélérateur de Collapse");
+                accelerator.put("formula", "FORCE_COLLAPSE_ALL(hero, 4) + AMPLIFY(energy_released, 2.0) + MODIFY_ENERGY(hero, energy_released)");
+                accelerator.put("energy_cost", 45);
+                return accelerator;
             }
             
             return null;
