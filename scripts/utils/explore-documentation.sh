@@ -263,6 +263,6 @@ while true; do
     esac
     
     echo ""
-    echo -e "${PURPLE}Appuyez sur Entrée pour continuer...${NC}"
-    read
+    echo -e "${PURPLE}⏳ Pause de 3 secondes avant de continuer...${NC}"
+    sleep 3
 done 

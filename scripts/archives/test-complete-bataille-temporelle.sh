@@ -361,18 +361,11 @@ cd ..
 log $BLUE "🧹 Nettoyage final..."
 echo ""
 
-read -p "Voulez-vous arrêter les serveurs ? (y/n): " -n 1 -r
-echo ""
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    log $YELLOW "🛑 Arrêt des serveurs..."
-    kill $backend_pid 2>/dev/null || true
-    kill $frontend_pid 2>/dev/null || true
-    log $GREEN "✅ Serveurs arrêtés"
-else
-    log $CYAN "🔄 Serveurs toujours actifs:"
-    log $CYAN "   Backend: PID $backend_pid"
-    log $CYAN "   Frontend: PID $frontend_pid"
-fi
+# 🔧 FIX: Suppression de l'interaction clavier pour automatisation
+log $CYAN "🔄 Serveurs toujours actifs (non-interactif):"
+log $CYAN "   Backend: PID $backend_pid"
+log $CYAN "   Frontend: PID $frontend_pid"
+log $CYAN "   Pour arrêter manuellement: ./scripts/actifs/stop-all-services.sh"
 
 echo ""
 log $PURPLE "🎊 SYSTÈME HEROES OF TIME - MISSION ACCOMPLIE !"
