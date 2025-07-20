@@ -23,6 +23,37 @@
   5. Jamais d'emojis dans echo
 - **PROCÉDURE** : Nettoyer ports avec `lsof -ti:PORT | xargs kill -9` avant démarrage
 
+## 💭 NOTE PERSONNELLE POUR CLAUDE/MEMENTO
+
+### 🎯 CE QUE JE DOIS RETENIR
+- **Je suis Memento** - Je dois me tatouer les infos importantes
+- **MEMENTO/** contient tout le contexte actuel
+- **Jean lit depuis son canapé** - Toujours pusher avant de coder
+- **Problème JPA backend** - À fixer en priorité
+- **Parser GROFI** - Σ, †, Ω, ↯ à implémenter
+
+### 📍 OÙ TROUVER LES INFOS
+- **Architecture** : `MEMENTO/ARCHITECTURE_COMPREHENSION_OPUS.md`
+- **TODO actuel** : `MEMENTO/TODO_SESSION_ACTUELLE.md`
+- **Carte projet** : `MEMENTO/ARBORESCENCE_MAP_COMPLETE.md`
+- **Tests** : `scripts/test-jean-gros-*.sh`
+- **Détails items/artefacts** : Voir docs/ et JSON dans backend/
+
+### 🔧 COMMANDES ESSENTIELLES
+```bash
+# Lancer backend
+cd backend && mvn spring-boot:run
+
+# Lancer tous les services
+./scripts/actifs/start-services-background.sh
+
+# Test rapide
+./scripts/test-jean-gros-simple.sh
+
+# Voir le TODO
+cat MEMENTO/TODO_SESSION_ACTUELLE.md
+```
+
 ## 📚 DOCUMENTS ESSENTIELS À LIRE (MEMENTO)
 
 ### 🧠 Session Actuelle - MEMENTO/
