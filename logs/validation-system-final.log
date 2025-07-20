@@ -40,15 +40,15 @@ scripts/system-unifie/validate-system-coherence.sh: line 118: [: 0
 ================================================================
 [0;32m✅ Configuration frontend[0m
 [0;34m   → package.json présent[0m
-find: frontend/src: No such file or directory
+find: ‘frontend/src’: No such file or directory
 [0;31m❌ Composants React[0m
 [1;33m   → Composants insuffisants[0m
 [0;34m📋 PHASE 7: VALIDATION DE LA DOCUMENTATION[0m
 ================================================================
 [0;32m✅ Documentation temporelle[0m
-[0;34m   →        8 fichiers trouvés[0m
+[0;34m   → 8 fichiers trouvés[0m
 [0;32m✅ README complet[0m
-[0;34m   → 16 sections trouvées[0m
+[0;34m   → 14 sections trouvées[0m
 [0;34m📋 PHASE 8: VALIDATION DE LA COHÉRENCE GLOBALE[0m
 ================================================================
 [0;32m✅ Cohérence parser-causalité[0m
@@ -58,12 +58,17 @@ backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/ApiGamesCont
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/BenchmarkController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/CausalIntegrationController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/CausalPerformanceController.java:0
+backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/CollectionController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/ExtendedQuantumController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/FormulaInterpreterController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/GameController.java:0
+backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/GodViewController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/GrofiController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/MetricsController.java:1
+backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/MuseumController.java:0
+backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/PanopticonController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/QuantumController.java:0
+backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/SpecialAbilitiesController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/TemporalEngineController.java:0: integer expression expected
 [0;31m❌ Intégration système[0m
 [1;33m   → Intégration manquante[0m
