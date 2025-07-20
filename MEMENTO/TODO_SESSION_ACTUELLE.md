@@ -55,6 +55,10 @@
 - [x] Créer test-panopticon.sh 🆕
 - [x] Créer test-panopticon-axis-scenario.sh 🆕
 - [x] Corriger erreurs de compilation backend 🆕
+- [x] Vérifier histoire README (Œil de Wigner) 🆕
+- [x] Créer ReadmeStoryTest.java 🆕
+- [x] Créer oeil_de_wigner_readme.hots 🆕
+- [x] Créer HISTOIRE_README_COHERENCE.md 🆕
 - [ ] Fixer problème timeout macOS
 - [ ] Automatiser lancement backend
 
