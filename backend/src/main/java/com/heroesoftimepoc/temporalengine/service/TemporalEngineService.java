@@ -80,6 +80,9 @@ public class TemporalEngineService {
     @Autowired
     private CausalityZoneService causalityZoneService;
     
+    @Autowired
+    private TemporalDecayService temporalDecayService;
+    
     private final Random random = new Random();
     
     /**
@@ -1541,4 +1544,86 @@ public class TemporalEngineService {
         
         return target; // Fallback au cas où c'est juste le nom
     }
+    
+    /**
+     * DÉCROISSANCE TEMPORELLE : Appliquer la décroissance temporelle d'Anna the Martopicker
+     */
+    public Map<String, Object> applyTemporalDecay(Long gameId) {
+        Optional<Game> gameOpt = gameRepository.findById(gameId);
+        if (!gameOpt.isPresent()) {
+            Map<String, Object> result = new HashMap<>();
+            result.put("success", false);
+            result.put("error", "Game not found");
+            return result;
+        }
+        
+        Game game = gameOpt.get();
+        List<TemporalDecayService.DecayResult> decayResults = temporalDecayService.applyTemporalDecay(game);
+        
+        Map<String, Object> result = new HashMap<>();
+        result.put("success", true);
+        result.put("decayResults", decayResults);
+        result.put("totalHeroesAffected", decayResults.size());
+        result.put("totalBuildingsAffected", decayResults.stream()
+            .mapToInt(r -> r.getAffectedBuildings().size())
+            .sum());
+        result.put("totalBuildingsDestroyed", decayResults.stream()
+            .mapToInt(r -> r.getDestroyedBuildings().size())
+            .sum());
+        
+        // Sauvegarder le jeu après les modifications
+        gameRepository.save(game);
+        
+        return result;
+    }
+    
+    /**
+     * RÉPARATION : Réparer un bâtiment endommagé par la décroissance temporelle
+     */
+    public Map<String, Object> repairDecayedBuilding(Long gameId, String heroName, int x, int y) {
+        Optional<Game> gameOpt = gameRepository.findById(gameId);
+        if (!gameOpt.isPresent()) {
+            Map<String, Object> result = new HashMap<>();
+            result.put("success", false);
+            result.put("error", "Game not found");
+            return result;
+        }
+        
+        Game game = gameOpt.get();
+        boolean repaired = temporalDecayService.repairBuilding(game, heroName, x, y);
+        
+        Map<String, Object> result = new HashMap<>();
+        result.put("success", repaired);
+        if (repaired) {
+            result.put("message", "Building repaired successfully");
+            gameRepository.save(game);
+        } else {
+            result.put("error", "Cannot repair building - insufficient temporal energy or invalid target");
+        }
+        
+        return result;
+    }
+    
+    /**
+     * STATISTIQUES : Obtenir les statistiques de décroissance temporelle
+     */
+    public Map<String, Object> getTemporalDecayStatistics(Long gameId) {
+        Optional<Game> gameOpt = gameRepository.findById(gameId);
+        if (!gameOpt.isPresent()) {
+            Map<String, Object> result = new HashMap<>();
+            result.put("success", false);
+            result.put("error", "Game not found");
+            return result;
+        }
+        
+        Game game = gameOpt.get();
+        Map<String, Object> stats = temporalDecayService.getDecayStatistics(game);
+        stats.put("success", true);
+        
+        return stats;
+    }
+    
+    // =========================================================================
+    // 🔧 MÉTHODES HELPER POUR ARTEFACTS
+    // =========================================================================
 }
