@@ -67,6 +67,9 @@ run_test_suite "Tests PANOPTICΩN" \
 run_test_suite "Tests Vol du Trésor (Axis)" \
     "mvn test -Dtest=TreasureTheftTest 2>&1 | grep -E 'Tests run:|BUILD'"
 
+run_test_suite "Tests Quantum Maze (Puzzle)" \
+    "mvn test -Dtest=QuantumMazeTest 2>&1 | grep -E 'Tests run:|BUILD'"
+
 run_test_suite "Tests Amplitudes Complexes" \
     "mvn test -Dtest=ComplexAmplitudeTest 2>&1 | grep -E 'Tests run:|BUILD'"
 
@@ -142,6 +145,9 @@ if [ "$BACKEND_RUNNING" = true ]; then
     
     run_test_suite "Scénario Bataille Temporelle Complète (HOTS)" \
         "./$SCRIPTS_DIR/execute-hots-file.sh $SCENARIOS_DIR/bataille_temporelle_complete.hots 2>&1 | grep -E 'Succès:|Échecs:|RÉSUMÉ'"
+    
+    run_test_suite "Scénario Quantum Maze (HOTS)" \
+        "./$SCRIPTS_DIR/test-quantum-maze-complete.sh 2>&1 | grep -E 'Passés:|Échoués:|RÉSUMÉ'"
 fi
 
 # 7. BENCHMARK JAVA vs HOTS
