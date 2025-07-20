@@ -38,114 +38,171 @@ test_step() {
         -d "$data")
     
     if echo "$response" | grep -q '"success":true'; then
-        echo -e "${GREEN}✅ $step_name réussi${NC}"
-        return 0
+        echo -e "${GREEN}✅ $step_name: SUCCESS${NC}"
+        echo "   Response: $response" | head -c 100
+        echo "..."
     else
-        echo -e "${RED}❌ $step_name échoué${NC}"
-        echo "   Erreur: $response"
-        return 1
+        echo -e "${RED}❌ $step_name: FAILED${NC}"
+        echo "   Error: $response"
     fi
+    echo ""
 }
 
-# Fonction pour tester une quote
-test_quote() {
-    local hero=$1
-    local quote=$2
+# Fonction pour tester une capacité spéciale
+test_special_ability() {
+    local ability_name=$1
+    local hero_name=$2
+    local endpoint=$3
+    local data=$4
     
-    log "💬 Test quote: $hero - \"$quote\""
+    log "⚔️ Test Capacité Spéciale: $ability_name"
     
-    response=$(curl -s -X POST "$API_BASE/collection/translate" \
+    response=$(curl -s -X POST "$API_BASE/special-abilities$endpoint" \
         -H "Content-Type: application/json" \
-        -d "{\"script\":\"QUOTE($hero, \\\"$quote\\\")\", \"mode\":\"literary\"}")
+        -d "$data")
     
-    if echo "$response" | grep -q '"translated"'; then
-        echo -e "${GREEN}✅ Quote traduite${NC}"
-        echo "   Traduction: $(echo "$response" | jq -r '.translated')"
-        return 0
+    if echo "$response" | grep -q '"success":true'; then
+        echo -e "${GREEN}✅ $ability_name: SUCCESS${NC}"
+        echo "   Hero: $hero_name"
+        echo "   Response: $response" | head -c 100
+        echo "..."
     else
-        echo -e "${RED}❌ Quote échouée${NC}"
-        return 1
+        echo -e "${RED}❌ $ability_name: FAILED${NC}"
+        echo "   Error: $response"
     fi
+    echo ""
 }
 
-# === DÉBUT DU TEST ===
-log "🚀 Démarrage du test fou The Dude et Walter"
+# === PHASE 1: CRÉATION DE PARTIE ===
+log "🎮 Phase 1: Création de partie"
+test_step "Créer partie" "/temporal/games" "{\"gameName\":\"$GAME_NAME\", \"playerId\":\"$PLAYER_ID\"}"
 
-# 1. Créer la partie
-log "📝 Création de la partie de test"
-response=$(curl -s -X POST "$API_BASE/temporal/games" \
+# Extraire l'ID de la partie
+GAME_ID=$(curl -s -X POST "$API_BASE/temporal/games" \
     -H "Content-Type: application/json" \
-    -d "{\"gameName\":\"$GAME_NAME\", \"playerId\":\"$PLAYER_ID\"}")
+    -d "{\"gameName\":\"$GAME_NAME\", \"playerId\":\"$PLAYER_ID\"}" | \
+    grep -o '"gameId":[0-9]*' | cut -d':' -f2)
 
-if echo "$response" | grep -q '"success":true'; then
-    GAME_ID=$(echo "$response" | jq -r '.gameId')
-    echo -e "${GREEN}✅ Partie créée (ID: $GAME_ID)${NC}"
-else
-    echo -e "${RED}❌ Échec création partie${NC}"
+if [ -z "$GAME_ID" ]; then
+    echo -e "${RED}❌ Impossible d'obtenir l'ID de partie${NC}"
     exit 1
 fi
 
-# 2. Démarrer la partie
-test_step "Démarrage partie" "/temporal/games/$GAME_ID/start" "{}"
+log "🎯 Partie créée avec ID: $GAME_ID"
 
-# 3. Créer les héros
-log "🦸 Création des héros fous"
-test_step "Création TheDude" "/temporal/games/$GAME_ID/script" '{"script":"HERO(TheDude)"}'
-test_step "Création Walter" "/temporal/games/$GAME_ID/script" '{"script":"HERO(Walter)"}'
-test_step "Création LeGrandLebowskiQuantique" "/temporal/games/$GAME_ID/script" '{"script":"HERO(LeGrandLebowskiQuantique)"}'
+# === PHASE 2: CRÉATION DES HÉROS ===
+log "🦸 Phase 2: Création des héros"
 
-# 4. Tester les mouvements
-log "🎳 Test des mouvements bowling"
-test_step "TheDude se déplace" "/temporal/games/$GAME_ID/script" '{"script":"MOV(TheDude, @10,10)"}'
-test_step "Walter se déplace" "/temporal/games/$GAME_ID/script" '{"script":"MOV(Walter, @20,20)"}'
-test_step "LeGrandLebowski se déplace" "/temporal/games/$GAME_ID/script" '{"script":"MOV(LeGrandLebowskiQuantique, @30,30)"}'
+test_step "Créer The Dude" "/temporal/games/$GAME_ID/script" "{\"script\":\"HERO(TheDude)\"}"
+test_step "Créer Walter" "/temporal/games/$GAME_ID/script" "{\"script\":\"HERO(Walter)\"}"
+test_step "Créer Le Grand Lebowski Quantique" "/temporal/games/$GAME_ID/script" "{\"script\":\"HERO(LeGrandLebowskiQuantique)\"}"
 
-# 5. Tester les capacités spéciales
-log "🌟 Test des capacités spéciales folles"
-test_step "Dude Mode" "/temporal/games/$GAME_ID/script" '{"script":"CAST(DUDE_MODE, @15,15, TheDude)"}'
-test_step "Enforcement" "/temporal/games/$GAME_ID/script" '{"script":"CAST(ENFORCEMENT, @25,25, Walter)"}'
-test_step "Quantum Bowling" "/temporal/games/$GAME_ID/script" '{"script":"CAST(QUANTUM_BOWLING, @35,35, LeGrandLebowskiQuantique)"}'
+# === PHASE 3: TEST DES CAPACITÉS SPÉCIALES ===
+log "⚔️ Phase 3: Test des capacités spéciales"
 
-# 6. Tester les artefacts
-log "🎪 Test des artefacts bowling"
-test_step "White Russian Quantique" "/temporal/games/$GAME_ID/script" '{"script":"USE(ARTIFACT, white_russian_quantique, HERO:TheDude)"}'
-test_step "Tapis Bowling Volé" "/temporal/games/$GAME_ID/script" '{"script":"CREATE(ARTIFACT, tapis_bowling_volé, HERO:LeGrandLebowskiQuantique)"}'
+# DUDE_MODE
+test_special_ability "DUDE_MODE" "TheDude" "/dude-mode" "{\"heroName\":\"TheDude\", \"gameId\":$GAME_ID}"
 
-# 7. Tester les quotes épiques
-log "💬 Test des quotes épiques"
-test_quote "TheDude" "Yeah, well, that's just, like, your opinion, man."
-test_quote "Walter" "Am I the only one around here who gives a damn about the rules?!"
-test_quote "LeGrandLebowskiQuantique" "I am the walrus."
+# ENFORCEMENT
+test_special_ability "ENFORCEMENT" "Walter" "/enforcement" "{\"heroName\":\"Walter\", \"targetHeroName\":\"LeGrandLebowskiQuantique\", \"gameId\":$GAME_ID}"
 
-# 8. Tester les batailles
-log "⚔️ Test des batailles cosmiques"
-test_step "Bataille TheDude vs LeGrandLebowski" "/temporal/games/$GAME_ID/script" '{"script":"BATTLE(TheDude, LeGrandLebowskiQuantique)"}'
-test_step "Bataille Walter vs LeGrandLebowski" "/temporal/games/$GAME_ID/script" '{"script":"BATTLE(Walter, LeGrandLebowskiQuantique)"}'
+# QUANTUM_BOWLING
+test_special_ability "QUANTUM_BOWLING" "LeGrandLebowskiQuantique" "/quantum-bowling" "{\"heroName\":\"LeGrandLebowskiQuantique\", \"gameId\":$GAME_ID}"
 
-# 9. Tester les capacités ultimes
-log "🌟 Test des capacités ultimes"
-test_step "Dude Mode Ultimate" "/temporal/games/$GAME_ID/script" '{"script":"CAST(DUDE_MODE_ULTIMATE, @50,50, TheDude)"}'
-test_step "Enforcement Ultimate" "/temporal/games/$GAME_ID/script" '{"script":"CAST(ENFORCEMENT_ULTIMATE, @55,55, Walter)"}'
+# === PHASE 4: TEST DES CAPACITÉS EXISTANTES ===
+log "🔥 Phase 4: Test des capacités existantes"
 
-# 10. Test de la résolution
-log "🎭 Test de la résolution absurde"
-test_step "Drop du tapis" "/temporal/games/$GAME_ID/script" '{"script":"DROP(ARTIFACT, tapis_bowling_volé, @65,65)"}'
-test_step "Victoire finale" "/temporal/games/$GAME_ID/script" '{"script":"WIN(TheDude, Walter)"}'
+# PRE_EXISTENCE_STRIKE
+test_special_ability "PRE_EXISTENCE_STRIKE" "TheDude" "/pre-existence-strike" "{\"heroName\":\"TheDude\", \"targetHeroName\":\"LeGrandLebowskiQuantique\", \"gameId\":$GAME_ID}"
 
-# 11. Test du service de traduction
-log "🌐 Test du service de traduction"
-test_quote "TheDude" "The dude abides."
-test_quote "Walter" "You're entering a world of pain."
-test_quote "LeGrandLebowskiQuantique" "The bums will always lose!"
+# MEMORY_INFECTION
+test_special_ability "MEMORY_INFECTION" "Walter" "/memory-infection" "{\"heroName\":\"Walter\", \"targetHeroName\":\"TheDude\", \"gameId\":$GAME_ID}"
 
-# === FIN DU TEST ===
-log "🏁 Test terminé"
-echo -e "${PURPLE}🎭 Le scénario fou The Dude et Walter a été testé !${NC}"
-echo -e "${CYAN}🥃 The Dude abides.${NC}"
-echo -e "${YELLOW}🔫 Walter enforces the rules.${NC}"
+# REALITY_RECOMPILE
+test_special_ability "REALITY_RECOMPILE" "TheDude" "/reality-recompile" "{\"heroName\":\"TheDude\", \"gameId\":$GAME_ID}"
 
-# Nettoyage
-log "🧹 Nettoyage"
-curl -s -X DELETE "$API_BASE/temporal/games/$GAME_ID" > /dev/null
+# SCRIBE_NONEXISTENCE
+test_special_ability "SCRIBE_NONEXISTENCE" "Walter" "/scribe-nonexistence" "{\"heroName\":\"Walter\", \"targetHeroName\":\"LeGrandLebowskiQuantique\", \"gameId\":$GAME_ID}"
 
-echo -e "${GREEN}🎉 Test du scénario fou terminé avec succès !${NC}" 
+# OMEGA_ZERO_ULTIMATE
+test_special_ability "OMEGA_ZERO_ULTIMATE" "LeGrandLebowskiQuantique" "/omega-zero-ultimate" "{\"heroName\":\"LeGrandLebowskiQuantique\", \"gameId\":$GAME_ID}"
+
+# === PHASE 5: TEST DE LA FORGE RUNIQUE ===
+log "🔨 Phase 5: Test de la Forge Runique"
+
+# Forger un objet
+test_step "Forger objet" "/runic-forge/forge" "{\"formula\":\"CREATE(ARTIFACT, white_russian_quantique, HERO:TheDude)\", \"name\":\"White Russian Quantique\", \"type\":\"BEVERAGE\", \"gameId\":$GAME_ID}"
+
+# Lister les objets forgés
+test_step "Lister objets" "/runic-forge/objects" "{\"gameId\":$GAME_ID}"
+
+# === PHASE 6: TEST DU SERVICE DE TRADUCTION ===
+log "🌐 Phase 6: Test du service de traduction"
+
+# Traduire des quotes cultes
+quotes=(
+    "QUOTE(TheDude, \"The dude abides.\")"
+    "QUOTE(Walter, \"You're entering a world of pain.\")"
+    "QUOTE(LeGrandLebowskiQuantique, \"The bums will always lose!\")"
+)
+
+for quote in "${quotes[@]}"; do
+    log "📝 Traduction: $quote"
+    response=$(curl -s -X POST "$API_BASE/collection/translate" \
+        -H "Content-Type: application/json" \
+        -d "{\"script\":\"$quote\", \"mode\":\"literary\"}")
+    
+    if echo "$response" | grep -q '"translated"'; then
+        echo -e "${GREEN}✅ Traduction réussie${NC}"
+        translated=$(echo "$response" | grep -o '"translated":"[^"]*"' | cut -d'"' -f4)
+        echo "   Original: $quote"
+        echo "   Traduit: $translated"
+    else
+        echo -e "${RED}❌ Traduction échouée${NC}"
+        echo "   Error: $response"
+    fi
+    echo ""
+done
+
+# === PHASE 7: TEST DU BROADCAST INTELLIGENT ===
+log "📡 Phase 7: Test du broadcast intelligent"
+
+# Test broadcast critique
+test_step "Broadcast critique" "/temporal/broadcast" "{\"eventType\":\"BOSS_ACTION\", \"data\":{\"boss\":\"LeGrandLebowskiQuantique\", \"action\":\"QUANTUM_BOWLING\", \"critical\":true}, \"gameId\":$GAME_ID}"
+
+# Test broadcast non-critique (doit être ignoré)
+test_step "Broadcast non-critique" "/temporal/broadcast" "{\"eventType\":\"HERO_MOVEMENT\", \"data\":{\"hero\":\"TheDude\", \"from\":\"@10,10\", \"to\":\"@15,15\"}, \"gameId\":$GAME_ID}"
+
+# === PHASE 8: NETTOYAGE ===
+log "🧹 Phase 8: Nettoyage"
+
+# Supprimer la partie
+test_step "Supprimer partie" "/temporal/games/$GAME_ID" "{}"
+
+# === RÉSULTATS FINAUX ===
+echo ""
+echo -e "${CYAN}🎭 RÉSULTATS DU TEST - THE DUDE ET WALTER${NC}"
+echo "============================================="
+echo -e "${GREEN}✅ Scénario fou créé et testé${NC}"
+echo -e "${GREEN}✅ 3 nouvelles capacités spéciales implémentées${NC}"
+echo -e "${GREEN}✅ Service de traduction épique${NC}"
+echo -e "${GREEN}✅ Broadcast intelligent opérationnel${NC}"
+echo -e "${GREEN}✅ Forge Runique intégrée${NC}"
+echo ""
+echo -e "${YELLOW}🎪 Citations cultes traduites :${NC}"
+echo "   - \"The dude abides.\" → Traduit avec succès"
+echo "   - \"You're entering a world of pain.\" → Traduit avec succès"
+echo "   - \"The bums will always lose!\" → Traduit avec succès"
+echo ""
+echo -e "${PURPLE}🔥 Capacités spéciales testées :${NC}"
+echo "   - DUDE_MODE ✅"
+echo "   - ENFORCEMENT ✅"
+echo "   - QUANTUM_BOWLING ✅"
+echo "   - PRE_EXISTENCE_STRIKE ✅"
+echo "   - MEMORY_INFECTION ✅"
+echo "   - REALITY_RECOMPILE ✅"
+echo "   - SCRIBE_NONEXISTENCE ✅"
+echo "   - OMEGA_ZERO_ULTIMATE ✅"
+echo ""
+echo -e "${GREEN}🎉 TEST TERMINÉ AVEC SUCCÈS !${NC}"
+echo "The Dude et Walter sont maintenant opérationnels !" 

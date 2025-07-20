@@ -22,41 +22,52 @@ public class RunicForgeController {
      * Forger un objet via grammaire runique
      */
     @PostMapping("/forge")
-    public ResponseEntity<Map<String, Object>> forgeObject(@RequestBody Map<String, String> request) {
+    public ResponseEntity<Map<String, Object>> forgeObject(@RequestBody Map<String, Object> request) {
+        Map<String, Object> response = new HashMap<>();
+        
         try {
-            String grammar = request.get("grammar");
-            String heroName = request.get("heroName");
-            Long gameId = Long.parseLong(request.getOrDefault("gameId", "1"));
-
-            if (grammar == null || grammar.trim().isEmpty()) {
-                return ResponseEntity.badRequest().body(Map.of(
-                    "success", false,
-                    "error", "Grammaire runique requise"
-                ));
-            }
-
-            ForgedObject forgedObject = runicForgeService.forgeObject(grammar, heroName, gameId);
+            String formula = (String) request.get("formula");
+            String name = (String) request.get("name");
+            String type = (String) request.get("type");
+            Long gameId = Long.valueOf(request.get("gameId").toString());
             
-            return ResponseEntity.ok(Map.of(
-                "success", true,
-                "message", "Objet forgé avec succès",
-                "forgedObject", Map.of(
-                    "id", forgedObject.getId(),
-                    "name", forgedObject.getName(),
-                    "type", forgedObject.getType(),
-                    "power", forgedObject.getPower(),
-                    "description", forgedObject.getDescription(),
-                    "risks", forgedObject.getRisks(),
-                    "createdAt", forgedObject.getCreatedAt()
-                )
-            ));
-
+            if (formula == null || name == null || gameId == null) {
+                response.put("success", false);
+                response.put("error", "Formula, name et gameId requis");
+                return ResponseEntity.badRequest().body(response);
+            }
+            
+            // Utiliser la méthode simplifiée
+            RunicForgeService.ForgeResult result = runicForgeService.forgeObject(formula, name, gameId);
+            
+            if (result.isSuccess()) {
+                response.put("success", true);
+                response.put("message", result.getMessage());
+                response.put("objectName", name);
+                response.put("objectType", type);
+                response.put("gameId", gameId);
+                
+                // Ajouter les détails de l'objet forgé si disponible
+                if (result.getForgedObject() != null) {
+                    response.put("objectDetails", Map.of(
+                        "power", result.getForgedObject().getPower(),
+                        "description", result.getForgedObject().getDescription(),
+                        "risks", result.getForgedObject().getRisks(),
+                        "createdAt", result.getForgedObject().getCreatedAt()
+                    ));
+                }
+            } else {
+                response.put("success", false);
+                response.put("error", result.getMessage());
+                response.put("damageToHero", result.getDamageToHero());
+            }
+            
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Map.of(
-                "success", false,
-                "error", "Erreur de forge: " + e.getMessage()
-            ));
+            response.put("success", false);
+            response.put("error", "Erreur lors de la forge: " + e.getMessage());
         }
+        
+        return ResponseEntity.ok(response);
     }
 
     /**

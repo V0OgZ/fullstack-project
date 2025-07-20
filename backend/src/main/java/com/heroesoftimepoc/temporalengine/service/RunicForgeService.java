@@ -230,6 +230,31 @@ public class RunicForgeService {
     }
     
     /**
+     * Forge un objet avec la grammaire runique
+     * Version simplifiée pour l'API
+     */
+    public ForgeResult forgeObject(String formula, String name, Long gameId) {
+        try {
+            Game game = gameRepository.findById(gameId)
+                .orElseThrow(() -> new RuntimeException("Game not found"));
+            
+            // Trouver un héros dans la partie (pour l'exemple)
+            List<Hero> heroes = heroRepository.findByGameId(gameId);
+            if (heroes.isEmpty()) {
+                return ForgeResult.explosion(null, "Aucun héros dans la partie");
+            }
+            
+            Hero forger = heroes.get(0); // Premier héros trouvé
+            
+            return executeForge(formula, forger, game);
+            
+        } catch (Exception e) {
+            log.error("Erreur lors de la forge: " + e.getMessage(), e);
+            return ForgeResult.explosion(null, "Erreur: " + e.getMessage());
+        }
+    }
+
+    /**
      * Vérification de sécurité basique
      */
     private SecurityCheckResult checkBasicSecurity(String script) {
@@ -364,6 +389,94 @@ public class RunicForgeService {
         }
     }
     
+    /**
+     * Obtenir tous les objets forgés pour une partie
+     */
+    public List<ForgedObject> getForgedObjects(Long gameId) {
+        // Pour l'instant, retourner une liste vide
+        // TODO: Implémenter avec repository
+        return new ArrayList<>();
+    }
+    
+    /**
+     * Obtenir un objet forgé spécifique
+     */
+    public ForgedObject getForgedObject(Long objectId) {
+        // Pour l'instant, retourner null
+        // TODO: Implémenter avec repository
+        return null;
+    }
+    
+    /**
+     * Utiliser un objet forgé
+     */
+    public Map<String, Object> useForgedObject(Long objectId, String heroName, Long gameId) {
+        Map<String, Object> result = new HashMap<>();
+        
+        try {
+            ForgedObject obj = getForgedObject(objectId);
+            if (obj == null) {
+                result.put("success", false);
+                result.put("error", "Objet forgé non trouvé");
+                return result;
+            }
+            
+            obj.use();
+            result.put("success", true);
+            result.put("message", "Objet " + obj.getName() + " utilisé avec succès");
+            result.put("stability", obj.getStabilityRating());
+            
+        } catch (Exception e) {
+            result.put("success", false);
+            result.put("error", "Erreur lors de l'utilisation: " + e.getMessage());
+        }
+        
+        return result;
+    }
+    
+    /**
+     * Valider une grammaire runique
+     */
+    public Map<String, Object> validateGrammar(String grammar) {
+        Map<String, Object> result = new HashMap<>();
+        
+        try {
+            SecurityCheckResult security = checkBasicSecurity(grammar);
+            
+            if (!security.isSafe) {
+                result.put("valid", false);
+                result.put("error", security.reason);
+                result.put("dangerous", true);
+            } else {
+                result.put("valid", true);
+                result.put("message", "Grammaire valide");
+                result.put("dangerous", false);
+            }
+            
+        } catch (Exception e) {
+            result.put("valid", false);
+            result.put("error", "Erreur de validation: " + e.getMessage());
+        }
+        
+        return result;
+    }
+    
+    /**
+     * Obtenir les statistiques de forge
+     */
+    public Map<String, Object> getForgeStats(Long gameId) {
+        Map<String, Object> stats = new HashMap<>();
+        
+        // Statistiques simulées
+        stats.put("totalForged", 0);
+        stats.put("successfulForges", 0);
+        stats.put("failedForges", 0);
+        stats.put("dangerousObjects", 0);
+        stats.put("averageStability", 1.0);
+        
+        return stats;
+    }
+
     /**
      * Résultat de vérification de sécurité
      */

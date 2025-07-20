@@ -183,6 +183,30 @@ public class ForgedObject {
         this.stabilityRating = stabilityRating;
     }
     
+    // Méthodes pour compatibilité API
+    public int getPower() {
+        // Calculer la puissance basée sur la stabilité et les utilisations
+        return (int) (stabilityRating * 100) + (timesUsed * 10);
+    }
+    
+    public String getDescription() {
+        return effect != null ? effect : "Objet forgé par " + forgedBy;
+    }
+    
+    public String getRisks() {
+        if (isDangerous) {
+            return "HAUT - Peut causer des dommages au serveur";
+        } else if (isUnstable()) {
+            return "MOYEN - Instable, peut exploser";
+        } else {
+            return "FAIBLE - Stable et sûr";
+        }
+    }
+    
+    public LocalDateTime getCreatedAt() {
+        return forgeTime;
+    }
+    
     @Override
     public String toString() {
         return String.format("ForgedObject{name='%s', type='%s', forgedBy='%s', stability=%.2f}",

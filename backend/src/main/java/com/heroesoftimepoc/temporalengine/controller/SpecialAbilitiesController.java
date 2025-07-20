@@ -154,6 +154,146 @@ public class SpecialAbilitiesController {
     }
 
     /**
+     * ENFORCEMENT - Capacité spéciale de Walter
+     * Force l'application des règles même quand il n'y en a pas
+     */
+    @PostMapping("/enforcement")
+    public ResponseEntity<Map<String, Object>> executeEnforcement(@RequestBody Map<String, Object> request) {
+        String heroName = (String) request.get("heroName");
+        String targetHeroName = (String) request.get("targetHeroName");
+        Long gameId = Long.valueOf(request.get("gameId").toString());
+        
+        Map<String, Object> result = specialAbilitiesService.executeEnforcement(heroName, targetHeroName, gameId);
+        
+        if ((Boolean) result.get("success")) {
+            return ResponseEntity.ok(result);
+        } else {
+            return ResponseEntity.badRequest().body(result);
+        }
+    }
+
+    /**
+     * DUDE_MODE - Capacité spéciale de The Dude
+     * Transforme tout en partie de bowling cosmique
+     */
+    @PostMapping("/dude-mode")
+    public ResponseEntity<Map<String, Object>> executeDudeMode(@RequestBody Map<String, Object> request) {
+        String heroName = (String) request.get("heroName");
+        Long gameId = Long.valueOf(request.get("gameId").toString());
+        
+        Map<String, Object> result = specialAbilitiesService.executeDudeMode(heroName, gameId);
+        
+        if ((Boolean) result.get("success")) {
+            return ResponseEntity.ok(result);
+        } else {
+            return ResponseEntity.badRequest().body(result);
+        }
+    }
+
+    /**
+     * QUANTUM_BOWLING - Capacité spéciale du Grand Lebowski Quantique
+     * Bowling cosmique qui perturbe la réalité
+     */
+    @PostMapping("/quantum-bowling")
+    public ResponseEntity<Map<String, Object>> executeQuantumBowling(@RequestBody Map<String, Object> request) {
+        String heroName = (String) request.get("heroName");
+        Long gameId = Long.valueOf(request.get("gameId").toString());
+        
+        Map<String, Object> result = specialAbilitiesService.executeQuantumBowling(heroName, gameId);
+        
+        if ((Boolean) result.get("success")) {
+            return ResponseEntity.ok(result);
+        } else {
+            return ResponseEntity.badRequest().body(result);
+        }
+    }
+
+    /**
+     * PLAN_FOIREUX - Capacité spéciale de Ribouldingue
+     */
+    @PostMapping("/plan-foireux")
+    public ResponseEntity<Map<String, Object>> executePlanFoireux(@RequestBody Map<String, Object> request) {
+        String heroName = (String) request.get("heroName");
+        Long gameId = Long.valueOf(request.get("gameId").toString());
+        
+        Map<String, Object> result = specialAbilitiesService.executePlanFoireux(heroName, gameId);
+        
+        if ((Boolean) result.get("success")) {
+            return ResponseEntity.ok(result);
+        } else {
+            return ResponseEntity.badRequest().body(result);
+        }
+    }
+
+    /**
+     * PLAN_TROP_COMPLIQUE - Capacité spéciale de Croquignol
+     */
+    @PostMapping("/plan-trop-complique")
+    public ResponseEntity<Map<String, Object>> executePlanTropComplique(@RequestBody Map<String, Object> request) {
+        String heroName = (String) request.get("heroName");
+        Long gameId = Long.valueOf(request.get("gameId").toString());
+        
+        Map<String, Object> result = specialAbilitiesService.executePlanTropComplique(heroName, gameId);
+        
+        if ((Boolean) result.get("success")) {
+            return ResponseEntity.ok(result);
+        } else {
+            return ResponseEntity.badRequest().body(result);
+        }
+    }
+
+    /**
+     * ESQUIVE_TOTALE - Capacité spéciale de Filochard
+     */
+    @PostMapping("/esquive-totale")
+    public ResponseEntity<Map<String, Object>> executeEsquiveTotale(@RequestBody Map<String, Object> request) {
+        String heroName = (String) request.get("heroName");
+        Long gameId = Long.valueOf(request.get("gameId").toString());
+        
+        Map<String, Object> result = specialAbilitiesService.executeEsquiveTotale(heroName, gameId);
+        
+        if ((Boolean) result.get("success")) {
+            return ResponseEntity.ok(result);
+        } else {
+            return ResponseEntity.badRequest().body(result);
+        }
+    }
+
+    /**
+     * INTERVENTION_RATE - Capacité spéciale de Bibendum
+     */
+    @PostMapping("/intervention-rate")
+    public ResponseEntity<Map<String, Object>> executeInterventionRate(@RequestBody Map<String, Object> request) {
+        String heroName = (String) request.get("heroName");
+        Long gameId = Long.valueOf(request.get("gameId").toString());
+        
+        Map<String, Object> result = specialAbilitiesService.executeInterventionRate(heroName, gameId);
+        
+        if ((Boolean) result.get("success")) {
+            return ResponseEntity.ok(result);
+        } else {
+            return ResponseEntity.badRequest().body(result);
+        }
+    }
+
+    /**
+     * MAUVAISE_PISTE - Capacité spéciale de PiedsPlats
+     */
+    @PostMapping("/mauvaise-piste")
+    public ResponseEntity<Map<String, Object>> executeMauvaisePiste(@RequestBody Map<String, Object> request) {
+        String heroName = (String) request.get("heroName");
+        Long gameId = Long.valueOf(request.get("gameId").toString());
+        
+        Map<String, Object> result = specialAbilitiesService.executeMauvaisePiste(heroName, gameId);
+        
+        if ((Boolean) result.get("success")) {
+            return ResponseEntity.ok(result);
+        } else {
+            return ResponseEntity.badRequest().body(result);
+        }
+    }
+
+    /**
      * Obtenir la liste des capacités spéciales disponibles
      */
     @GetMapping("/list")
