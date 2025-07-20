@@ -75,10 +75,11 @@ fi
 echo -e "${GREEN}✅ Backend accessible${NC}"
 
 echo -e "\n${GREEN}=== 2. CRÉATION DE LA PARTIE ===${NC}"
-response=$(curl -s -X POST "http://$HOST/api/games" \
+response=$(curl -s -X POST "http://$HOST/api/game/create" \
     -H "Content-Type: application/json" \
     -d '{"gameName":"Test Moteur PANOPTICΩN","players":["Jean","Claude"]}')
 echo "$response" | jq '.'
+GAME_ID=$(echo "$response" | jq -r '.gameId')
 
 echo -e "\n${GREEN}=== 3. TEST PARSER HOTS ===${NC}"
 parse_hots_file "game_assets/scenarios/hots/panopticon_axis_test.hots"

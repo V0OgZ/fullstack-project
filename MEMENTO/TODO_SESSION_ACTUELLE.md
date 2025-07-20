@@ -3,12 +3,13 @@
 
 ## 🎯 SUPER TODO - OBJECTIFS MAJEURS
 
-### 1️⃣ FIXER LE BACKEND JPA
+### 1️⃣ FIXER LE BACKEND JPA ✅
 **Problème** : "Not a managed type: class Game"
-- [ ] Analyser l'erreur complète
-- [ ] Vérifier les annotations @Entity
-- [ ] Tester avec SimpleStartupTest.java
-- [ ] Documenter la solution dans MEMENTO
+- [x] Analyser l'erreur complète
+- [x] Vérifier les annotations @Entity
+- [x] Tester avec SimpleStartupTest.java
+- [x] Documenter la solution dans MEMENTO/FIX_JPA_BACKEND_SOLUTION.md
+- **SOLUTION** : Supprimé duplication @EntityScan dans TemporalEngineApplication.java
 
 ### 2️⃣ IMPLÉMENTER PARSER GROFI ✅
 **Symboles** : Σ, †, Ω, ↯
