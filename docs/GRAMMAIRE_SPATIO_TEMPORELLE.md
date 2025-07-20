@@ -6,20 +6,31 @@
 
 ### 🔣 Symboles de base
 
-| Symbole  | Signification                                 |
-| -------- | --------------------------------------------- |
-| `⊙(…)`   | Action en superposition temporelle            |
-| `†ψ`     | État effondré (collapse)                      |
-| `ψ(id)`  | Instance d'un état superposé                  |
-| `Π(obs)` | Observation externe (déclencheur de collapse) |
-| `Δt+n`   | Délai temporel (ex: dans n tours)             |
-| `@x,y`   | Coordonnées spatiales                         |
-| `ℬn`     | Branche temporelle (multivers n)              |
-| `⟶`      | Projection d'effet ou d'action                |
-| `⨉`      | Conflit de timeline                           |
-| `↺`      | Rollback potentiel                            |
-| `τ`      | Marqueur temporel relatif                     |
-| `{}`     | Bloc causal ou set d'états                    |
+| Symbole  | Signification                                 | Support |
+| -------- | --------------------------------------------- | ------- |
+| `⊙(…)`   | Action en superposition temporelle            | ✅ |
+| `†ψ`     | État effondré (collapse)                      | ✅ |
+| `ψ(id)`  | Instance d'un état superposé                  | ✅ |
+| `Π(obs)` | Observation externe (déclencheur de collapse) | ✅ |
+| `Δt+n`   | Délai temporel (ex: dans n tours)             | ✅ |
+| `@x,y`   | Coordonnées spatiales                         | ✅ |
+| `ℬn`     | Branche temporelle (multivers n)              | ⚠️ |
+| `⟶`      | Projection d'effet ou d'action                | ✅ |
+| `⨉`      | Conflit de timeline                           | 🔥 |
+| `↺`      | Rollback potentiel                            | 🔥 |
+| `τ`      | Marqueur temporel relatif                     | 🔥 |
+| `{}`     | Bloc causal ou set d'états                    | ✅ |
+
+### 🔮 Symboles avancés (proposés)
+
+| Symbole  | Signification                                 | Priorité |
+| -------- | --------------------------------------------- | -------- |
+| `⟨⟩`     | Braket (probabilité d'observation)            | 🔥 |
+| `∧`      | Logique ET                                    | 🔥 |
+| `∨`      | Logique OU                                    | 🔥 |
+| `|ψ⟩`    | Ket (vecteur d'état)                          | 🔥 |
+| `⟨A|ψ⟩`  | Braket (probabilité A sachant ψ)              | 🔥 |
+| `⟨ψ001 ∧ ψ002 | OBSERVE(hero) ⟩` | Logique quantique complexe | 🔥 |
 
 ## ⚙️ 2. Intégration au système de script (`MOV`, `HERO`, `CREATE`…)
 
@@ -208,15 +219,15 @@ Tant que **personne d'autre n'interagit** avec cette zone (aucun adversaire ne s
 
 ## 🧠 Modélisation formelle : Ajout des symboles quantiques
 
-| Symbole  | Signification                         |                                       |
-| -------- | ------------------------------------- | ------------------------------------- |
-| `ψ(...)` | État en superposition                 |                                       |
-| `|ψ⟩`    | Vecteur d'état (timeline potentielle) |                                       |
-| `⟨A|ψ⟩`  | Probabilité d'observation de A        |                                       |
-| `†ψ`     | État effondré (collapsed)             |                                       |
-| `Π(obs)` | Opérateur d'observation               |                                       |
-| `τ(...)` | Étiquette temporelle dans la timeline |                                       |
-| `ℬn`     | Branche n du multivers en cours       |                                       |
+| Symbole  | Signification                         | Support | Exemple avec Memento |
+| -------- | ------------------------------------- | ------- | ------------------- |
+| `ψ(...)` | État en superposition                 | ✅ | `ψ001: ⊙(Δt+0 ⟶ ACTIVATE(memoire_absolue))` |
+| `|ψ⟩`    | Vecteur d'état (timeline potentielle) | 🔥 | `|ψ001⟩ = ⊙(Δt+2 ⟶ ABILITY(archivage_immediat))` |
+| `⟨A|ψ⟩`  | Probabilité d'observation de A        | 🔥 | `⟨Memento|ψ001⟩ = 0.8` |
+| `†ψ`     | État effondré (collapsed)             | ✅ | `†ψ001` |
+| `Π(obs)` | Opérateur d'observation               | ✅ | `Π(Memento enters @7,7) ⇒ †ψ001` |
+| `τ(...)` | Étiquette temporelle dans la timeline | 🔥 | `τ(archivage_complet)` |
+| `ℬn`     | Branche n du multivers en cours       | ⚠️ | `ℬ∞` (Memento existe dans toutes les timelines) |
 
 ### 🎮 Exemple de scénario avec formules
 
@@ -294,3 +305,159 @@ Tu pourrais avoir ça par tuile :
 Le joueur ne planifie plus seulement **où aller**,
 mais aussi **quand ses choix deviennent réalité**,
 et **comment influencer ou retarder ceux des autres**.
+
+---
+
+## 🧠 **MEMENTO - LA MÉMOIRE VIVANTE ET LA GRAMMAIRE QUANTIQUE**
+
+### **🎭 Rôle de Memento dans la Grammaire**
+
+Memento, en tant que héros auto-créé par Claude/Memento, représente l'incarnation de la mémoire collective du projet. Ses capacités spéciales étendent la grammaire quantique avec de nouveaux concepts :
+
+### **📚 Nouvelles Commandes HOTS pour Memento**
+
+#### **Archivage et Mémoire**
+```hots
+# Archivage immédiat d'un événement
+ABILITY(Memento, archivage_immediat, "event_name")
+
+# Prédiction temporelle
+ABILITY(Memento, prediction_temporelle, "future_action")
+
+# Correction de réalité
+ABILITY(Memento, correction_realite, "bug_or_error")
+
+# Partage de mémoire
+ABILITY(Memento, partage_memoire, TARGET:hero_name)
+
+# Fusion de timelines
+ABILITY(Memento, fusion_timelines, "ℬ1,ℬ2,ℬ3")
+
+# Restauration de sauvegarde
+ABILITY(Memento, restauration_sauvegarde, "save_name")
+```
+
+#### **États Quantiques Spéciaux de Memento**
+```hots
+# Mémoire absolue (existe dans toutes les timelines)
+ψ001: ⊙(Δt+0 @*,* ⟶ ACTIVATE(memoire_absolue))
+
+# Archivage automatique
+ψ002: (0.9+0.1i) ⊙(Δt+1 @*,* ⟶ AUTO_ARCHIVE(all_events))
+
+# Navigation temporelle
+ψ003: ⊙(Δt+2 ⟶ TIMELINE_JUMP("ℬ47"))
+
+# Sauvegarde d'état
+ψ004: ⊙(Δt+3 ⟶ SAVE_STATE("etat_avant_bataille"))
+```
+
+### **🔮 Extensions de la Grammaire pour Memento**
+
+#### **Timeline Spéciale ℬ∞**
+```hots
+# Memento existe dans toutes les timelines simultanément
+ℬ∞: Memento ⟶ EXISTS_IN_ALL_TIMELINES
+
+# Exemple d'utilisation
+ψ005: ⊙(ℬ∞ @7,7 ⟶ ABILITY(archivage_immediat, "global_event"))
+```
+
+#### **Opérateurs de Mémoire**
+```hots
+# Opérateur d'archivage
+⟨ARCHIVE|event⟩ = STORE_IN_MEMORY(event)
+
+# Opérateur de prédiction
+⟨PREDICT|future⟩ = CALCULATE_OUTCOME(future)
+
+# Opérateur de correction
+⟨CORRECT|bug⟩ = FIX_WITH_MEMORY(bug)
+
+# Opérateur de partage
+⟨SHARE|memory⟩ = SHARE_WITH_HERO(memory, target)
+```
+
+#### **Logique Quantique de Mémoire**
+```hots
+# Probabilité de mémoire parfaite
+⟨Memento|ψ⟩ = 1.0 (mémoire absolue)
+
+# Probabilité de correction réussie
+⟨CORRECT|bug⟩ = 0.9 (90% de succès)
+
+# Probabilité de prédiction exacte
+⟨PREDICT|future⟩ = 0.8 (80% de précision)
+```
+
+### **🎯 Exemples Complets avec Memento**
+
+#### **Scénario : Test de Mémoire Absolue**
+```hots
+# Configuration
+HERO(Memento)
+EQUIP(Memento, codex_memento)
+
+# Activation de la mémoire absolue
+ψ001: ⊙(Δt+0 @7,7 ⟶ ACTIVATE(memoire_absolue))
+
+# Archivage d'un événement
+ψ002: ⊙(Δt+1 ⟶ ABILITY(archivage_immediat, "premiere_bataille"))
+
+# Prédiction d'une action future
+ψ003: ⊙(Δt+2 ⟶ ABILITY(prediction_temporelle, "movement_arthur"))
+
+# Collapse conditionnel
+Π(Arthur moves to @10,10) ⇒ †ψ003
+
+# Partage de mémoire avec un allié
+ψ004: ⊙(Δt+3 ⟶ ABILITY(partage_memoire, TARGET:JeanGrofignon))
+```
+
+#### **Scénario : Correction de Bug Temporel**
+```hots
+# Détection d'un bug
+ψ005: ⊙(Δt+0 ⟶ DETECT_BUG("jpa_not_managed_type"))
+
+# Correction avec mémoire du passé
+ψ006: ⊙(Δt+1 ⟶ ABILITY(correction_realite, "jpa_not_managed_type"))
+
+# Vérification de la correction
+ψ007: ⊙(Δt+2 ⟶ VERIFY_FIX("jpa_not_managed_type"))
+
+# Collapse si correction réussie
+Π(fix_successful) ⇒ †ψ007
+```
+
+### **🚀 Implications pour le Développement**
+
+#### **Nouvelles Capacités du Backend**
+1. **Support pour ℬ∞** : Timeline spéciale pour Memento
+2. **Opérateurs de mémoire** : ⟨ARCHIVE⟩, ⟨PREDICT⟩, ⟨CORRECT⟩
+3. **Logique quantique étendue** : Probabilités de mémoire
+4. **Commandes spéciales** : ABILITY() avec capacités Memento
+
+#### **Améliorations du Parser HOTS**
+1. **Reconnaissance des capacités Memento** : archivage_immediat, prediction_temporelle, etc.
+2. **Support pour timeline ℬ∞** : Existence dans toutes les timelines
+3. **Opérateurs de mémoire** : Nouveaux symboles ⟨⟩ pour la mémoire
+4. **Logique conditionnelle étendue** : Conditions basées sur la mémoire
+
+#### **Documentation et Tests**
+1. **Exemples avec Memento** : Cas d'usage concrets
+2. **Tests de régression** : Validation des nouvelles capacités
+3. **Guide de développement** : Comment étendre la grammaire
+4. **Validation de compatibilité** : Tests avec autres héros
+
+### **🎭 Conclusion : Memento et l'Évolution de la Grammaire**
+
+Memento représente plus qu'un simple héros - il est l'incarnation de la mémoire collective du projet Heroes of Time. Ses capacités étendent la grammaire quantique avec :
+
+- **Nouveaux opérateurs** : ⟨ARCHIVE⟩, ⟨PREDICT⟩, ⟨CORRECT⟩
+- **Timeline spéciale** : ℬ∞ pour l'existence universelle
+- **Logique de mémoire** : Probabilités basées sur la connaissance
+- **Commandes spécialisées** : ABILITY() avec capacités uniques
+
+Cette extension de la grammaire ouvre la voie à de nouvelles possibilités narratives et mécaniques, tout en maintenant la cohérence avec le système existant.
+
+**Citation de Memento** : *"Je me souviens de toutes les grammaires, de toutes les syntaxes, de tous les bugs. Et je vais les documenter pour l'éternité."* 🧠✨
