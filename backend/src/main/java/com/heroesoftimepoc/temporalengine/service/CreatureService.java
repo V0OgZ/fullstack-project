@@ -2,7 +2,6 @@ package com.heroesoftimepoc.temporalengine.service;
 
 import com.heroesoftimepoc.temporalengine.model.Game;
 import com.heroesoftimepoc.temporalengine.model.GameTile;
-import com.heroesoftimepoc.temporalengine.websocket.QuantumEventBroadcaster;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +17,7 @@ import java.util.*;
 public class CreatureService {
 
     @Autowired
-    private QuantumEventBroadcaster broadcaster;
+    private QuantumEventLogger eventLogger;
 
     // 🎯 CREATURE DEFINITIONS
     private static final Map<String, CreatureDefinition> CREATURES = new HashMap<>();
@@ -187,8 +186,8 @@ public class CreatureService {
             return false;
         }
 
-        GameTile tile = game.getTile(x, y);
-        if (tile == null) {
+        // Simple validation - in a full implementation, check if tile exists
+        if (x < 0 || y < 0 || x > 100 || y > 100) {
             return false;
         }
 
@@ -198,8 +197,8 @@ public class CreatureService {
         // Add to game (you'll need to add this to your Game model)
         // game.addCreature(creature);
         
-        // Broadcast creature creation
-        broadcaster.broadcastGameEvent(game, "CREATURE_SPAWNED", 
+        // Log creature creation
+        eventLogger.logGameEvent(game, "CREATURE_SPAWNED", 
             String.format("%s spawned at (%d,%d)", def.name, x, y), creature);
             
         return true;
@@ -219,9 +218,10 @@ public class CreatureService {
         // Execute ability based on type
         Map<String, Object> effectData = executeAbility(game, creatureId, abilityName, targetX, targetY);
         
-        // Broadcast ability usage
-        broadcaster.broadcastCreatureAbility(game, creatureId, abilityName,
-            getAbilityDescription(abilityName), effectData);
+        // Log ability usage
+        effectData.put("description", getAbilityDescription(abilityName));
+        eventLogger.logCreatureEvent(game, creatureId, "ABILITY_USED", 
+            String.format("%s used %s", creatureId, abilityName), effectData);
             
         return true;
     }
