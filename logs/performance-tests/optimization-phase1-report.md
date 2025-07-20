@@ -3,31 +3,31 @@
 ## 📊 Résultats des Tests
 
 ### 🔍 Parser Regex
-- **Baseline**: 127 ops/sec
-- **Optimisé**: 128 ops/sec
-- **Gain**: +0%
+- **Baseline**: 139 ops/sec
+- **Optimisé**: 132 ops/sec
+- **Gain**: +-6%
 
 ### 🧮 Calculs Quantiques
-- **Baseline**: 128 ops/sec
-- **Optimisé**: 128 ops/sec
-- **Gain**: +0%
+- **Baseline**: 137 ops/sec
+- **Optimisé**: 110 ops/sec
+- **Gain**: +-20%
 
 ### 🌐 API Throughput
-- **Baseline**: 129 req/sec
-- **Optimisé**: 130 req/sec
-- **Gain**: +0%
+- **Baseline**: 143 req/sec
+- **Optimisé**: 122 req/sec
+- **Gain**: +-15%
 
 ### 🚀 Performance Globale
-- **Gain Global**: +0%
+- **Gain Global**: +-14%
 
 ## 🎯 Validation des Objectifs
 
 | Métrique | Objectif | Résultat | Status |
 |----------|----------|----------|--------|
-| Parser Regex | +150% | +0% | ⚠️ PARTIEL |
-| Calculs Quantiques | +150% | +0% | ⚠️ PARTIEL |
-| API Throughput | +200% | +0% | ⚠️ PARTIEL |
-| Global | +300% | +0% | ⚠️ PARTIEL |
+| Parser Regex | +150% | +-6% | ⚠️ PARTIEL |
+| Calculs Quantiques | +150% | +-20% | ⚠️ PARTIEL |
+| API Throughput | +200% | +-15% | ⚠️ PARTIEL |
+| Global | +300% | +-14% | ⚠️ PARTIEL |
 
 ## 🔧 Optimisations Implémentées
 
@@ -43,6 +43,6 @@
 
 ---
 
-**Date**: 2025-07-20 09:37:29
+**Date**: 2025-07-20 14:13:35
 **Status**: Optimisations Phase 1 testées
-**Gain Global**: +0%
+**Gain Global**: +-14%

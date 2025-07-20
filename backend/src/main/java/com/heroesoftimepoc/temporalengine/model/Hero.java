@@ -3,6 +3,8 @@ package com.heroesoftimepoc.temporalengine.model;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 @Entity
 @Table(name = "heroes")
