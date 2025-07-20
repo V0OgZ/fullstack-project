@@ -14,7 +14,7 @@
 📋 Test calculs de probabilités...
 ✅ Calculs probabilités: 167 calculs quantiques/seconde
 📋 Test interférences quantiques...
-✅ Interférences quantiques: 113 calculs complexes/seconde
+✅ Interférences quantiques: 120 calculs complexes/seconde
 
 🌐 Phase 3: Benchmark API
 ========================
@@ -23,16 +23,21 @@
 💾 Phase 4: Benchmark Mémoire
 ============================
 📋 Test consommation mémoire...
-✅ Mémoire utilisée: 11360 KB pour 100k ψ-states
+/seconde
+
+💾 Phase 4: Benchmark Mémoire
+============================
+📋 Test consommation mémoire...
+✅ Mémoire utilisée: 8400 KB pour 100k ψ-states
 
 🔍 Phase 5: Analyse des Goulots d'Étranglement
 ==============================================
 📊 RÉSULTATS DÉTAILLÉS:
 ========================
-⚠️ GOULOT DÉTECTÉ: Parser simple (439 ops/sec < 10k)
-⚠️ GOULOT DÉTECTÉ: Parser quantique (483 ops/sec < 5k)
-⚠️ GOULOT DÉTECTÉ: Calculs quantiques (186 calc/sec < 50k)
-⚠️ GOULOT DÉTECTÉ: Interférences (113 calc/sec < 25k)
+⚠️ GOULOT DÉTECTÉ: Parser simple (425 ops/sec < 10k)
+⚠️ GOULOT DÉTECTÉ: Parser quantique (335 ops/sec < 5k)
+⚠️ GOULOT DÉTECTÉ: Calculs quantiques (163 calc/sec < 50k)
+⚠️ GOULOT DÉTECTÉ: Interférences (114 calc/sec < 25k)
 
 🎯 RECOMMANDATIONS:
 ===================
@@ -43,11 +48,13 @@
 
 📈 RÉSUMÉ FINAL DES PERFORMANCES
 ===============================
-🔍 Parser Simple: 439 ops/sec
-🌀 Parser Quantique: 483 ops/sec
-🧮 Calculs Quantiques: 186 calc/sec
-🔬 Interférences: 113 calc/sec
-💾 Mémoire: 11360 KB/100k états
+🔍 Parser Simple: 425 ops/sec
+🌀 Parser Quantique: 335 ops/sec
+🧮 Calculs Quantiques: 163 calc/sec
+🔬 Interférences: 114 calc/sec
+💾 Mémoire: 8400 KB/100k états
+🌐 Latence API: 11 ms
+📡 Throughput API: 330 req/sec
 
 🎉 BENCHMARK TERMINÉ
 ====================

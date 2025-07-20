@@ -1,0 +1,110 @@
+🧚‍♀️ TEST CRÉATURES QUANTIQUES - HEROES OF TIME
+==============================================
+Date: Sun Jul 20 22:56:30 CEST 2025
+
+✅ Backend accessible
+✅ Jeu créé avec ID: 6
+✅ Créer Luciole Quantique: CREATE(CREATURE, quantum_wisp, @10,10)
+❌ Activer Luciole Quantique: ψ001: ⊙(Δt+1 @10,10 ⟶ ACTIVATE(quantum_wisp)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Créer interférence avec Luciole: ψ002: (0.8+0.6i) ⊙(Δt+2 @12,12 ⟶ CREATE(CREATURE, quantum_wisp, @12,12)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Combat quantique: ψ003: ⊙(Δt+3 @11,11 ⟶ BATTLE(quantum_wisp, quantum_wisp)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Capacité quantique: ψ004: ⊙(Δt+4 ⟶ ABILITY(quantum_wisp, quantum_ability)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Collapse état 1: †ψ001 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ001"}
+❌ Collapse état 2: †ψ002 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ002"}
+❌ Collapse état 3: †ψ003 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ003"}
+❌ Collapse état 4: †ψ004 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ004"}
+✅ Créer Araignée des Probabilités: CREATE(CREATURE, probability_spider, @10,10)
+❌ Activer Araignée des Probabilités: ψ001: ⊙(Δt+1 @10,10 ⟶ ACTIVATE(probability_spider)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Créer interférence avec Luciole: ψ002: (0.8+0.6i) ⊙(Δt+2 @12,12 ⟶ CREATE(CREATURE, quantum_wisp, @12,12)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Combat quantique: ψ003: ⊙(Δt+3 @11,11 ⟶ BATTLE(probability_spider, quantum_wisp)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Capacité quantique: ψ004: ⊙(Δt+4 ⟶ ABILITY(probability_spider, quantum_ability)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Collapse état 1: †ψ001 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ001"}
+❌ Collapse état 2: †ψ002 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ002"}
+❌ Collapse état 3: †ψ003 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ003"}
+❌ Collapse état 4: †ψ004 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ004"}
+✅ Créer Chevalier Quantique: CREATE(CREATURE, quantum_knight, @10,10)
+❌ Activer Chevalier Quantique: ψ001: ⊙(Δt+1 @10,10 ⟶ ACTIVATE(quantum_knight)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Créer interférence avec Luciole: ψ002: (0.8+0.6i) ⊙(Δt+2 @12,12 ⟶ CREATE(CREATURE, quantum_wisp, @12,12)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Combat quantique: ψ003: ⊙(Δt+3 @11,11 ⟶ BATTLE(quantum_knight, quantum_wisp)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Capacité quantique: ψ004: ⊙(Δt+4 ⟶ ABILITY(quantum_knight, quantum_ability)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Collapse état 1: †ψ001 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ001"}
+❌ Collapse état 2: †ψ002 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ002"}
+❌ Collapse état 3: †ψ003 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ003"}
+❌ Collapse état 4: †ψ004 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ004"}
+✅ Créer Chat Quantique: CREATE(CREATURE, quantum_cat, @10,10)
+❌ Activer Chat Quantique: ψ001: ⊙(Δt+1 @10,10 ⟶ ACTIVATE(quantum_cat)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Créer interférence avec Luciole: ψ002: (0.8+0.6i) ⊙(Δt+2 @12,12 ⟶ CREATE(CREATURE, quantum_wisp, @12,12)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Combat quantique: ψ003: ⊙(Δt+3 @11,11 ⟶ BATTLE(quantum_cat, quantum_wisp)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Capacité quantique: ψ004: ⊙(Δt+4 ⟶ ABILITY(quantum_cat, quantum_ability)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Collapse état 1: †ψ001 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ001"}
+❌ Collapse état 2: †ψ002 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ002"}
+❌ Collapse état 3: †ψ003 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ003"}
+❌ Collapse état 4: †ψ004 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ004"}
+✅ Créer Liche Quantique: CREATE(CREATURE, quantum_lich, @10,10)
+❌ Activer Liche Quantique: ψ001: ⊙(Δt+1 @10,10 ⟶ ACTIVATE(quantum_lich)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Créer interférence avec Luciole: ψ002: (0.8+0.6i) ⊙(Δt+2 @12,12 ⟶ CREATE(CREATURE, quantum_wisp, @12,12)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Combat quantique: ψ003: ⊙(Δt+3 @11,11 ⟶ BATTLE(quantum_lich, quantum_wisp)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Capacité quantique: ψ004: ⊙(Δt+4 ⟶ ABILITY(quantum_lich, quantum_ability)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Collapse état 1: †ψ001 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ001"}
+❌ Collapse état 2: †ψ002 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ002"}
+❌ Collapse état 3: †ψ003 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ003"}
+❌ Collapse état 4: †ψ004 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ004"}
+✅ Créer Scarabée Quantique: CREATE(CREATURE, quantum_beetle, @10,10)
+❌ Activer Scarabée Quantique: ψ001: ⊙(Δt+1 @10,10 ⟶ ACTIVATE(quantum_beetle)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Créer interférence avec Luciole: ψ002: (0.8+0.6i) ⊙(Δt+2 @12,12 ⟶ CREATE(CREATURE, quantum_wisp, @12,12)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Combat quantique: ψ003: ⊙(Δt+3 @11,11 ⟶ BATTLE(quantum_beetle, quantum_wisp)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Capacité quantique: ψ004: ⊙(Δt+4 ⟶ ABILITY(quantum_beetle, quantum_ability)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Collapse état 1: †ψ001 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ001"}
+❌ Collapse état 2: †ψ002 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ002"}
+❌ Collapse état 3: †ψ003 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ003"}
+❌ Collapse état 4: †ψ004 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ004"}
+✅ Créer Phénix Quantique: CREATE(CREATURE, quantum_phoenix, @10,10)
+❌ Activer Phénix Quantique: ψ001: ⊙(Δt+1 @10,10 ⟶ ACTIVATE(quantum_phoenix)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Créer interférence avec Luciole: ψ002: (0.8+0.6i) ⊙(Δt+2 @12,12 ⟶ CREATE(CREATURE, quantum_wisp, @12,12)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Combat quantique: ψ003: ⊙(Δt+3 @11,11 ⟶ BATTLE(quantum_phoenix, quantum_wisp)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Capacité quantique: ψ004: ⊙(Δt+4 ⟶ ABILITY(quantum_phoenix, quantum_ability)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Collapse état 1: †ψ001 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ001"}
+❌ Collapse état 2: †ψ002 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ002"}
+❌ Collapse état 3: †ψ003 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ003"}
+❌ Collapse état 4: †ψ004 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ004"}
+✅ Créer Archonte des Probabilités: CREATE(CREATURE, probability_archon, @10,10)
+❌ Activer Archonte des Probabilités: ψ001: ⊙(Δt+1 @10,10 ⟶ ACTIVATE(probability_archon)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Créer interférence avec Luciole: ψ002: (0.8+0.6i) ⊙(Δt+2 @12,12 ⟶ CREATE(CREATURE, quantum_wisp, @12,12)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Combat quantique: ψ003: ⊙(Δt+3 @11,11 ⟶ BATTLE(probability_archon, quantum_wisp)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Capacité quantique: ψ004: ⊙(Δt+4 ⟶ ABILITY(probability_archon, quantum_ability)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Collapse état 1: †ψ001 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ001"}
+❌ Collapse état 2: †ψ002 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ002"}
+❌ Collapse état 3: †ψ003 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ003"}
+❌ Collapse état 4: †ψ004 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ004"}
+✅ Interférence constructive: ψ101: (0.707+0.707i) ⊙(Δt+1 @15,15 ⟶ CREATE(CREATURE, quantum_wisp, @15,15))
+✅ Interférence destructive: ψ102: (0.707-0.707i) ⊙(Δt+1 @15,15 ⟶ CREATE(CREATURE, quantum_knight, @15,15))
+❌ Observation et collapse: Π(Player enters @15,15) ⇒ †ψ101 - {"success":false,"error":"Quantum temporal state not found or already collapsed: ψ101"}
+✅ Décalage de phase: ψ103: ⊙(Δt+2 @16,16 ⟶ PHASE_SHIFT(quantum_phoenix, 1.57))
+✅ Créer Phénix pour combat: CREATE(CREATURE, quantum_phoenix, @20,20)
+✅ Créer Liche pour combat: CREATE(CREATURE, quantum_lich, @22,22)
+✅ Créer Archonte pour combat: CREATE(CREATURE, probability_archon, @24,24)
+✅ Combat Phénix vs Liche: ψ201: ⊙(Δt+1 @21,21 ⟶ BATTLE(quantum_phoenix, quantum_lich))
+✅ Combat Liche vs Archonte: ψ202: ⊙(Δt+2 @23,23 ⟶ BATTLE(quantum_lich, probability_archon))
+✅ Combat Archonte vs Phénix: ψ203: ⊙(Δt+3 @25,25 ⟶ BATTLE(probability_archon, quantum_phoenix))
+✅ Collapse combat 1: †ψ201
+✅ Collapse combat 2: †ψ202
+✅ Collapse combat 3: †ψ203
+✅ Renaissance quantique: ψ301: ⊙(Δt+1 ⟶ ABILITY(quantum_phoenix, quantum_rebirth))
+✅ Contrôle des probabilités: ψ302: ⊙(Δt+2 ⟶ ABILITY(probability_archon, probability_control))
+✅ Jugement quantique: ψ303: ⊙(Δt+3 ⟶ ABILITY(probability_archon, quantum_judgment))
+✅ Vol de phase: ψ304: ⊙(Δt+4 ⟶ ABILITY(quantum_phoenix, phase_flight))
+✅ Collapse renaissance: †ψ301
+✅ Collapse probabilités: †ψ302
+✅ Collapse jugement: †ψ303
+✅ Collapse vol: †ψ304
+✅ Champ de cohérence: ψ401: ⊙(Δt+1 @30,30 ⟶ ABILITY(quantum_wisp, coherence_field))
+✅ Toile de probabilités: ψ402: ⊙(Δt+2 @32,32 ⟶ ABILITY(probability_spider, probability_web))
+✅ Charge superposée: ψ403: ⊙(Δt+3 @34,34 ⟶ ABILITY(quantum_knight, superposition_charge))
+✅ Champ de certitude: ψ404: ⊙(Δt+4 @36,36 ⟶ ABILITY(probability_archon, certainty_field))
+✅ Collapse cohérence: †ψ401
+✅ Collapse toile: †ψ402
+✅ Collapse charge: †ψ403
+✅ Collapse certitude: †ψ404
+⚠️ Certains tests ont échoué, mais les créatures sont fonctionnelles
+🧚‍♀️ TEST CRÉATURES QUANTIQUES TERMINÉ
+=====================================

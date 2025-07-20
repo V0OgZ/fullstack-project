@@ -34,6 +34,18 @@ public class ScriptTranslationService {
         LITERARY_TRANSLATIONS.put("SPELL", "arcane incantation");
         LITERARY_TRANSLATIONS.put("TARGET", "chosen adversary");
         LITERARY_TRANSLATIONS.put("UNIT", "loyal companion");
+        LITERARY_TRANSLATIONS.put("BATTLE", "engages in quantum combat with");
+        LITERARY_TRANSLATIONS.put("ABILITY", "unleashes the mystical power of");
+        LITERARY_TRANSLATIONS.put("ACTIVATE", "awakens the quantum essence of");
+        LITERARY_TRANSLATIONS.put("PHASE_SHIFT", "shifts through quantum phases");
+        LITERARY_TRANSLATIONS.put("quantum_wisp", "ethereal quantum wisp");
+        LITERARY_TRANSLATIONS.put("probability_spider", "probability-weaving spider");
+        LITERARY_TRANSLATIONS.put("quantum_knight", "quantum-armored knight");
+        LITERARY_TRANSLATIONS.put("quantum_cat", "phase-shifting quantum cat");
+        LITERARY_TRANSLATIONS.put("quantum_lich", "death-superposed quantum lich");
+        LITERARY_TRANSLATIONS.put("quantum_beetle", "resonance-amplifying beetle");
+        LITERARY_TRANSLATIONS.put("quantum_phoenix", "legendary quantum phoenix");
+        LITERARY_TRANSLATIONS.put("probability_archon", "probability-governing archon");
 
         // === TRADUCTIONS ICÔNES/EMOJIS ===
         ICON_TRANSLATIONS.put("HERO", "🧍");
@@ -58,6 +70,18 @@ public class ScriptTranslationService {
         ICON_TRANSLATIONS.put("COORDINATES", "🗺️");
         ICON_TRANSLATIONS.put("ENERGY", "⚡");
         ICON_TRANSLATIONS.put("TIME", "⌛");
+        ICON_TRANSLATIONS.put("BATTLE", "⚔️");
+        ICON_TRANSLATIONS.put("ABILITY", "🔮");
+        ICON_TRANSLATIONS.put("ACTIVATE", "✨");
+        ICON_TRANSLATIONS.put("PHASE_SHIFT", "🌀");
+        ICON_TRANSLATIONS.put("quantum_wisp", "🧚‍♀️");
+        ICON_TRANSLATIONS.put("probability_spider", "🕷️");
+        ICON_TRANSLATIONS.put("quantum_knight", "⚔️");
+        ICON_TRANSLATIONS.put("quantum_cat", "🐱");
+        ICON_TRANSLATIONS.put("quantum_lich", "💀");
+        ICON_TRANSLATIONS.put("quantum_beetle", "🪲");
+        ICON_TRANSLATIONS.put("quantum_phoenix", "🔥");
+        ICON_TRANSLATIONS.put("probability_archon", "👑");
 
         // === TRADUCTIONS RUNES MYSTIQUES ===
         RUNE_TRANSLATIONS.put("HERO", "ᚺ");
@@ -82,6 +106,18 @@ public class ScriptTranslationService {
         RUNE_TRANSLATIONS.put("COORDINATES", "⌖");
         RUNE_TRANSLATIONS.put("ENERGY", "⚛");
         RUNE_TRANSLATIONS.put("TIME", "⏜");
+        RUNE_TRANSLATIONS.put("BATTLE", "ᛒ");
+        RUNE_TRANSLATIONS.put("ABILITY", "ᚨ");
+        RUNE_TRANSLATIONS.put("ACTIVATE", "ᚫ");
+        RUNE_TRANSLATIONS.put("PHASE_SHIFT", "ᛟ");
+        RUNE_TRANSLATIONS.put("quantum_wisp", "ᚹ");
+        RUNE_TRANSLATIONS.put("probability_spider", "ᛊ");
+        RUNE_TRANSLATIONS.put("quantum_knight", "ᚲ");
+        RUNE_TRANSLATIONS.put("quantum_cat", "ᚲᚨᛏ");
+        RUNE_TRANSLATIONS.put("quantum_lich", "ᛚ");
+        RUNE_TRANSLATIONS.put("quantum_beetle", "ᛒ");
+        RUNE_TRANSLATIONS.put("quantum_phoenix", "ᚠ");
+        RUNE_TRANSLATIONS.put("probability_archon", "ᚨ");
     }
 
     // ===== MÉTHODES PRINCIPALES =====
@@ -152,6 +188,14 @@ public class ScriptTranslationService {
             (result.contains("HERO:") ? " through the chosen vessel $3" : ""));
         result = result.replaceAll("CAST\\(SPELL,\\s*([^,]+),\\s*TARGET:([^,]+),\\s*HERO:([^)]+)\\)", 
             "weaves the threads of reality, unleashing the arcane incantation $1 upon the chosen adversary $2 through the mystical conduit $3");
+        result = result.replaceAll("BATTLE\\(([^,]+),\\s*([^)]+)\\)", 
+            "engages in quantum combat with the $1 against the $2");
+        result = result.replaceAll("ABILITY\\(([^,]+),\\s*([^)]+)\\)", 
+            "unleashes the mystical power of $2 through the quantum essence of $1");
+        result = result.replaceAll("ACTIVATE\\(([^)]+)\\)", 
+            "awakens the quantum essence of the $1");
+        result = result.replaceAll("PHASE_SHIFT\\(([^,]+),\\s*([^)]+)\\)", 
+            "shifts through quantum phases with the $1 by $2 radians");
 
         return result;
     }
@@ -249,6 +293,14 @@ public class ScriptTranslationService {
             "🧙‍♂️💎($2)" + (result.contains("HERO:") ? "🧍($3)" : ""));
         result = result.replaceAll("CAST\\(SPELL,\\s*([^,]+),\\s*TARGET:([^,]+),\\s*HERO:([^)]+)\\)", 
             "🔮✨($1)🎯($2)🧍($3)");
+        result = result.replaceAll("BATTLE\\(([^,]+),\\s*([^)]+)\\)", 
+            "⚔️($1)vs($2)");
+        result = result.replaceAll("ABILITY\\(([^,]+),\\s*([^)]+)\\)", 
+            "🔮($1)✨($2)");
+        result = result.replaceAll("ACTIVATE\\(([^)]+)\\)", 
+            "✨($1)");
+        result = result.replaceAll("PHASE_SHIFT\\(([^,]+),\\s*([^)]+)\\)", 
+            "🌀($1)⏰($2)");
 
         return result;
     }
@@ -316,6 +368,14 @@ public class ScriptTranslationService {
             "ᚢᛃ($2)" + (result.contains("HERO:") ? "ᚺ($3)" : ""));
         result = result.replaceAll("CAST\\(SPELL,\\s*([^,]+),\\s*TARGET:([^,]+),\\s*HERO:([^)]+)\\)", 
             "ᛊᛏ($1)ᚦ($2)ᚺ($3)");
+        result = result.replaceAll("BATTLE\\(([^,]+),\\s*([^)]+)\\)", 
+            "ᛒ($1)vs($2)");
+        result = result.replaceAll("ABILITY\\(([^,]+),\\s*([^)]+)\\)", 
+            "ᚨ($1)ᚫ($2)");
+        result = result.replaceAll("ACTIVATE\\(([^)]+)\\)", 
+            "ᚫ($1)");
+        result = result.replaceAll("PHASE_SHIFT\\(([^,]+),\\s*([^)]+)\\)", 
+            "ᛟ($1)⏣($2)");
 
         return result;
     }
@@ -363,6 +423,12 @@ public class ScriptTranslationService {
             "the hero Arthur extends his hand into the void, projecting a mirrored echo to the coordinates (10, 10) | 🧍➡️🗺️(10,10) | ᚺᛗ⌖(10,10)");
         examples.put("ψ001: ⊙(Δt+1 @10,10 ⟶ MOV(HERO, Arthur, @10,10))", 
             "quantum essence 001 manifests through temporal projection: temporal displacement of 1 cycles @10,10 ⟶ the hero Arthur extends his hand into the void, projecting a mirrored echo to the coordinates (10, 10) | 🧠001:⏳(⏰+1 @10,10 ⟶ 🧍➡️🗺️(10,10)) | ☥001:⟡(⏣+1 @10,10 ⟶ ᚺᛗ⌖(10,10))");
+        examples.put("CREATE(CREATURE, quantum_phoenix, @15,15)", 
+            "summons from the depths of possibility a CREATURE named quantum_phoenix at the mystical coordinates (15, 15) | ✨🐉(quantum_phoenix)🗺️(15,15) | ᚲᛞ(quantum_phoenix)⌖(15,15)");
+        examples.put("BATTLE(quantum_phoenix, quantum_lich)", 
+            "engages in quantum combat with the quantum_phoenix against the quantum_lich | ⚔️(quantum_phoenix)vs(quantum_lich) | ᛒ(quantum_phoenix)vs(quantum_lich)");
+        examples.put("ABILITY(quantum_phoenix, quantum_rebirth)", 
+            "unleashes the mystical power of quantum_rebirth through the quantum essence of quantum_phoenix | 🔮(quantum_phoenix)✨(quantum_rebirth) | ᚨ(quantum_phoenix)ᚫ(quantum_rebirth)");
         
         return examples;
     }
