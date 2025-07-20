@@ -37,4 +37,14 @@ public interface HeroRepository extends JpaRepository<Hero, Long> {
     
     @Query("SELECT h FROM Hero h WHERE h.game.id = :gameId AND h.status = :status")
     List<Hero> findByGameIdAndStatus(@Param("gameId") Long gameId, @Param("status") Hero.HeroStatus status);
+
+    /**
+     * Trouve un héros par son nom et l'ID de la partie
+     */
+    Optional<Hero> findByGameIdAndName(Long gameId, String name);
+
+    /**
+     * Trouve un héros par son nom et l'ID de la partie (alias)
+     */
+    Optional<Hero> findByNameAndGameId(String name, Long gameId);
 }
