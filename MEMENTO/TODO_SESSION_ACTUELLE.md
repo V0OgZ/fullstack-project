@@ -70,7 +70,9 @@
 - [x] Créer IMPLEMENTATION_GOD_VIEW_5D.md
 - [x] Créer BACKEND_UNIFIE_VUE_JOUEUR.md
 - [x] Créer PANOPTICON_VS_GODVIEW_INTEGRATION.md 🆕
-- [ ] Créer guide quantum_maze.hots
+- [x] Créer guide quantum_maze.hots
+- [x] Créer QuantumMazeTest.java 🆕
+- [x] Créer test-quantum-maze-complete.sh 🆕
 
 ### 🎮 Gameplay & Features
 - [x] Connecter mur de causalité
