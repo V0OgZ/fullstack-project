@@ -337,5 +337,137 @@ AMPLITUDE_FROM_FORMULA("(0.8+0.6i)")  // Supporte tous les formats
 ./scripts/test-jean-gros-v2.sh
 ```
 
+## 🆕 AMPLITUDE & GROFI INTEGRATION (20 juillet 2025)
+
+### Architecture du Parsing d'Amplitude
+```
+Scripts HOTS → TemporalScriptParser ─┐
+                                     ├→ parseComplexAmplitude()
+Formules JSON → DynamicFormulaParser ┘         ↓
+                     ↓                   ComplexAmplitude
+              executeFormulaEffect()            ↓
+                     ↓                    Calculs quantiques
+            Symboles GROFI (Σ,†,Ω,↯)
+```
+
+### Nouvelles Opérations de Formule
+- **CREATE_AMPLITUDE(real, imag)** - Créer une amplitude complexe
+- **SET_AMPLITUDE(ψ, real, imag)** - Définir l'amplitude d'un état ψ
+- **AMPLITUDE_FROM_FORMULA(formula)** - Parser une amplitude depuis texte
+
+### Symboles GROFI Implémentés
+- **Σ[expression]** - Somme/Réduction des amplitudes
+- **†[expression]** - Mort/Renaissance quantique  
+- **Ω[expression]** - Finalité ultime (collapse total)
+- **↯[expression]** - Chaos contrôlé (4 effets aléatoires)
+
+### Artefacts JSON Exemples
+```json
+{
+  "id": "grofi_sigma",
+  "formula": "Σ[REDUCE:0.2] + MODIFY_ENERGY(hero, 10)"
+},
+{
+  "id": "jean_ultimate",
+  "formula": "Σ[REDUCE:0.3] + †[] + ↯[] + Ω[] + MODIFY_ENERGY(hero, 50)"
+}
+```
+
+### Tests Recommandés
+1. `./scripts/test-amplitude-grofi.sh` - Test complet des nouvelles fonctionnalités
+2. Créer artefact avec formule complexe dans custom-artifacts.json
+3. Utiliser via API : `USE(ARTIFACT, grofi_sigma, HERO:Jean)`
+
+## 🕐 SYSTÈME TEMPOREL MULTIJOUEUR (20 juillet 2025)
+
+### Graphe 5D du Jeu
+```
+Dimensions:
+1. X - Position horizontale
+2. Y - Position verticale  
+3. Z - Altitude (non implémenté)
+4. Timeline - Branche temporelle (ℬ1, ℬ2...)
+5. Temporal Layer - Jour actuel du héros
+
+Exemple:
+- Héros A : Position (10,10), Timeline ℬ1, Jour 18
+- Héros B : Position (15,15), Timeline ℬ1, Jour 23
+- Héros C : Position (12,12), Timeline ℬ2, Jour 20
+```
+
+### Calcul du Temps lors du Mouvement
+```java
+// Dans moveGameHero()
+int distance = heroPosition.distanceTo(targetPosition);
+int normalMovementPerDay = hero.getMovementPointsPerDay();
+int daysRequired = Math.ceil(distance / normalMovementPerDay);
+
+if (distance > hero.getMovementPoints()) {
+    hero.setCurrentDay(hero.getCurrentDay() + daysRequired);
+    // Le héros avance dans le temps !
+}
+```
+
+### Mur de Causalité - Implémentation Actuelle
+```java
+// SPATIAL : OK ✅
+List<TileCoord> movementZone = causalityZoneService.calculateMovementZone(
+    game, heroPosition, effectiveMovementPoints
+);
+
+// TEMPOREL : À FAIRE ❌
+// Devrait vérifier que le héros ne remonte pas avant
+// le héros le plus en retard dans le temps
+```
+
+### Héros Spécial : Axis
+```json
+{
+  "name": "Axis",
+  "ultimate_power": {
+    "name": "Traversée Temporelle Absolue",
+    "quantum_script": "ψ∞: |t±∞⟩ ⊙ MOV(HERO, Axis, @TIMELINE[ANY_MOMENT])"
+  },
+  "immunityTags": ["TEMPORAL_PARADOX", "CAUSALITY_VIOLATION"],
+  "restrictionTags": ["QUANTUM_ARTIFACTS", "MULTIVERSE_ITEMS"],
+  "blocked_artifacts": ["quantum_mirror", "multiverse_gate"]
+}
+```
+
+### Scénario : Vol du Trésor du Futur
+```
+SITUATION:
+- Héros A (Jour 19) va prendre trésor jour 20
+- Héros B (Jour 22) avec Axis remonte au jour 19
+- Héros B traverse le mur causal et prend le trésor jour 20
+
+RÉSOLUTION ACTUELLE : ❌ Non implémenté
+RÉSOLUTION SOUHAITÉE :
+if (treasure.isTaken() && treasure.takenDay < hero.getCurrentDay()) {
+    result.put("message", "Le trésor a déjà été pris!");
+}
+```
+
+### Objets Modificateurs du Temps
+- **temporal_sword** : +10 points de mouvement
+- **avant_world_blade** : Ignore le mur de causalité
+- **chrono_staff** : Ignore le mur de causalité
+- **bowling_ball** : +2 points (The Dude abides)
+
+### Collision Temporelle
+```java
+// Deux héros au même endroit ET même temps
+if (Math.abs(hero.getCurrentDay() - otherHero.getCurrentDay()) <= 1) {
+    // Déclencher collapse causal
+    new CollapseTrigger(INTERACTION, "Collision temporelle");
+}
+```
+
+### À Implémenter
+1. **Mur temporel complet** - Empêcher remontée avant autres joueurs
+2. **Verrouillage d'événements** - Trésor pris reste pris
+3. **Résolution de paradoxes** - Qui gagne si conflit temporel ?
+4. **Interface visuelle** - Afficher jour actuel de chaque héros
+
 ---
 *Dernière mise à jour : Maintenant* 
