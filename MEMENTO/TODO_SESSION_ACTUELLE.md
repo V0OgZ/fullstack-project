@@ -63,6 +63,16 @@
 - [ ] Implémenter capacités spéciales manquantes
 - [ ] Créer cinématiques in-game
 
+### 7️⃣ SERVICE DE TRADUCTION LITTÉRAIRE 🆕🆕🆕
+**Objectif** : Améliorer la qualité poétique des traductions HOTS
+- [x] Supprimer suffixes numériques (ψ001 → ψ)
+- [x] Mapping ID vers descriptions poétiques
+- [x] Coordonnées mystiques (@15,15 → coordonnées mystiques (15, 15))
+- [x] Style littéraire enrichi
+- [x] Tests complets validés
+- [x] Florilège créé
+- [x] Documentation mise à jour
+
 ## 📊 SUB-TODOS PAR CATÉGORIE
 
 ### Backend
