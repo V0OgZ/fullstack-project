@@ -63,6 +63,9 @@ public class TemporalEngineService {
     private CreatureService creatureService;
     
     @Autowired
+    private QuantumEventLogger eventLogger;
+    
+    @Autowired
     private PerformanceMetricsService performanceMetrics;
     
     @Autowired
@@ -781,10 +784,19 @@ public class TemporalEngineService {
                 result.put("message", "Game item " + name + " added to " + hero.getName());
             }
         } else if ("CREATURE".equals(type) && xStr != null && yStr != null) {
-            // Créer une créature à une position spécifique
+            // 🐉 NOUVEAU : Créer une créature avec le CreatureService
             int x = Integer.parseInt(xStr);
             int y = Integer.parseInt(yStr);
-            result.put("message", "Game creature " + name + " created at (" + x + "," + y + ")");
+            
+            boolean creatureCreated = creatureService.createCreature(game, name, x, y);
+            if (creatureCreated) {
+                result.put("message", "🐉 Creature " + name + " spawned at (" + x + "," + y + ")");
+                result.put("success", true);
+                return result;
+            } else {
+                // Fallback vers l'ancien système
+                result.put("message", "Game creature " + name + " created at (" + x + "," + y + ")");
+            }
         } else {
             result.put("message", "Game entity created: " + type + " " + name);
         }

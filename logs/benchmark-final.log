@@ -5,9 +5,9 @@
 🔍 Phase 1: Benchmark Parser Regex
 ==================================
 📋 Test scripts simples...
-✅ Scripts simples: 346 operations regex/seconde
+✅ Scripts simples: 347 operations regex/seconde
 📋 Test scripts quantiques...
-✅ Scripts quantiques: 760 operations regex/seconde
+✅ Scripts quantiques: 805 operations regex/seconde
 
 🧮 Phase 2: Benchmark Calculs Quantiques
 ========================================
