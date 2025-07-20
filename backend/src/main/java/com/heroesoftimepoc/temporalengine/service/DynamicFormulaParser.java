@@ -45,6 +45,9 @@ public class DynamicFormulaParser {
     @Autowired
     private GameTileRepository gameTileRepository;
     
+    @Autowired
+    private TemporalScriptParser temporalScriptParser;
+    
     // Patterns pour parser les formules
     private static final Pattern CONSTRUCTIVE_PATTERN = Pattern.compile("CONSTRUCTIVE\\((ψ\\d+|\\w+),\\s*(ψ\\d+|\\w+)\\)");
     private static final Pattern DESTRUCTIVE_PATTERN = Pattern.compile("DESTRUCTIVE\\((ψ\\d+|\\w+),\\s*(ψ\\d+|\\w+)\\)");
@@ -763,56 +766,8 @@ public class DynamicFormulaParser {
      * 🌀 Parser une formule d'amplitude (utilise TemporalScriptParser)
      */
     private ComplexAmplitude parseAmplitudeFormula(String formula) {
-        // Réutiliser la logique du TemporalScriptParser
-        // Formats supportés: "(0.8+0.6i)", "1.0∠0.5", "0.6i", "0.8"
-        
-        // Format complexe: (real+imagi)
-        Pattern complexPattern = Pattern.compile("\\(([^+]+)\\+([^i]+)i\\)");
-        Matcher complexMatcher = complexPattern.matcher(formula);
-        if (complexMatcher.find()) {
-            try {
-                double real = Double.parseDouble(complexMatcher.group(1).trim());
-                double imag = Double.parseDouble(complexMatcher.group(2).trim());
-                return new ComplexAmplitude(real, imag);
-            } catch (NumberFormatException e) {
-                // Ignorer et essayer d'autres formats
-            }
-        }
-        
-        // Format polaire: magnitude∠phase
-        Pattern polarPattern = Pattern.compile("(\\d*\\.?\\d+)∠([^°]+)");
-        Matcher polarMatcher = polarPattern.matcher(formula);
-        if (polarMatcher.find()) {
-            try {
-                double magnitude = Double.parseDouble(polarMatcher.group(1));
-                double phase = Double.parseDouble(polarMatcher.group(2));
-                return ComplexAmplitude.fromPolar(magnitude, phase);
-            } catch (NumberFormatException e) {
-                // Ignorer
-            }
-        }
-        
-        // Format imaginaire pur: Xi
-        Pattern imagPattern = Pattern.compile("([^i]+)i");
-        Matcher imagMatcher = imagPattern.matcher(formula);
-        if (imagMatcher.find()) {
-            try {
-                double imag = Double.parseDouble(imagMatcher.group(1).trim());
-                return new ComplexAmplitude(0.0, imag);
-            } catch (NumberFormatException e) {
-                // Ignorer
-            }
-        }
-        
-        // Format réel pur
-        try {
-            double real = Double.parseDouble(formula.trim());
-            return new ComplexAmplitude(real, 0.0);
-        } catch (NumberFormatException e) {
-            // Ignorer
-        }
-        
-        return null;
+        // RÉUTILISER la logique existante du TemporalScriptParser !
+        return temporalScriptParser.parseComplexAmplitude(formula);
     }
     
     /**
