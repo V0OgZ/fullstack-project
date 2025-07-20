@@ -12,40 +12,71 @@ public class ScriptTranslationService {
     private static final Map<String, String> LITERARY_TRANSLATIONS = new HashMap<>();
     private static final Map<String, String> ICON_TRANSLATIONS = new HashMap<>();
     private static final Map<String, String> RUNE_TRANSLATIONS = new HashMap<>();
+    
+    // Mapping des IDs vers descriptions littéraires
+    private static final Map<String, String> ID_TO_DESCRIPTION = new HashMap<>();
 
     static {
+        // === MAPPING ID -> DESCRIPTIONS LITTÉRAIRES ===
+        ID_TO_DESCRIPTION.put("grofi_omega", "l'Artéfact Ultime de Jean-Grofignon");
+        ID_TO_DESCRIPTION.put("custom_mirror", "le Miroir des Possibilités");
+        ID_TO_DESCRIPTION.put("avant_world_blade", "la Lame de l'Avant-Monde");
+        ID_TO_DESCRIPTION.put("reverse_clock", "l'Horloge du Dernier Instant");
+        ID_TO_DESCRIPTION.put("ignorance_beacon", "la Balise d'Ignorance Temporelle");
+        ID_TO_DESCRIPTION.put("anchor_tower", "la Tour de l'Ancrage");
+        ID_TO_DESCRIPTION.put("temporal_echo", "l'Écho Temporel");
+        ID_TO_DESCRIPTION.put("wigner_eye", "l'Œil de Wigner");
+        ID_TO_DESCRIPTION.put("chronos_shield", "le Bouclier de Chronos");
+        ID_TO_DESCRIPTION.put("quantum_mirror", "le Miroir Quantique");
+        ID_TO_DESCRIPTION.put("temporal_compass", "la Boussole Temporelle");
+        ID_TO_DESCRIPTION.put("causal_disruptor", "le Perturbateur Causal");
+        
+        // Créatures avec descriptions littéraires
+        ID_TO_DESCRIPTION.put("quantum_phoenix", "le phénix quantique légendaire");
+        ID_TO_DESCRIPTION.put("quantum_wisp", "la lueur quantique éthérée");
+        ID_TO_DESCRIPTION.put("probability_spider", "l'araignée tisseuse de probabilités");
+        ID_TO_DESCRIPTION.put("quantum_knight", "le chevalier en armure quantique");
+        ID_TO_DESCRIPTION.put("quantum_cat", "le chat quantique changeur de phase");
+        ID_TO_DESCRIPTION.put("quantum_lich", "le liche quantique superposé à la mort");
+        ID_TO_DESCRIPTION.put("quantum_beetle", "le scarabée amplificateur de résonance");
+        ID_TO_DESCRIPTION.put("probability_archon", "l'archonte gouvernant les probabilités");
+        
+        // Héros avec descriptions littéraires
+        ID_TO_DESCRIPTION.put("JeanGrofignon", "Jean-Grofignon, l'Éveillé Ontologique");
+        ID_TO_DESCRIPTION.put("Claudius", "Claudius, l'Architecte du Multivers");
+        ID_TO_DESCRIPTION.put("Arthur", "Arthur, le Roi Temporel");
+        ID_TO_DESCRIPTION.put("Ragnar", "Ragnar, le Berserker Quantique");
+        ID_TO_DESCRIPTION.put("Merlin", "Merlin, le Sage des Temps");
+        ID_TO_DESCRIPTION.put("Morgana", "Morgana, la Tisseuse du Destin");
+        ID_TO_DESCRIPTION.put("Axis", "Axis, le Voyageur Linéaire");
+        ID_TO_DESCRIPTION.put("Chlamydius", "Chlamydius, le Scribe Non Né");
+        ID_TO_DESCRIPTION.put("Omega-Zero", "Omega-Zéro, l'Entité Ultime");
+
         // === TRADUCTIONS LITTÉRAIRES ANGLAISES ===
-        LITERARY_TRANSLATIONS.put("HERO", "the valiant hero");
-        LITERARY_TRANSLATIONS.put("MOV", "extends his hand into the void, projecting a mirrored echo");
-        LITERARY_TRANSLATIONS.put("CREATE", "summons from the depths of possibility");
-        LITERARY_TRANSLATIONS.put("USE", "channels the ancient power of");
-        LITERARY_TRANSLATIONS.put("CAST", "weaves the threads of reality, unleashing");
-        LITERARY_TRANSLATIONS.put("ψ", "quantum essence");
-        LITERARY_TRANSLATIONS.put("⊙", "temporal projection");
-        LITERARY_TRANSLATIONS.put("†", "collapse of probability");
-        LITERARY_TRANSLATIONS.put("Π", "observer's gaze");
-        LITERARY_TRANSLATIONS.put("Δt", "temporal displacement");
-        LITERARY_TRANSLATIONS.put("CONSTRUCTIVE", "constructive interference");
-        LITERARY_TRANSLATIONS.put("DESTRUCTIVE", "destructive interference");
-        LITERARY_TRANSLATIONS.put("NEUTRAL", "neutral interference");
-        LITERARY_TRANSLATIONS.put("COMPLEX", "complex interference");
-        LITERARY_TRANSLATIONS.put("CREATURE", "otherworldly entity");
-        LITERARY_TRANSLATIONS.put("ITEM", "artifact of power");
-        LITERARY_TRANSLATIONS.put("SPELL", "arcane incantation");
-        LITERARY_TRANSLATIONS.put("TARGET", "chosen adversary");
-        LITERARY_TRANSLATIONS.put("UNIT", "loyal companion");
-        LITERARY_TRANSLATIONS.put("BATTLE", "engages in quantum combat with");
-        LITERARY_TRANSLATIONS.put("ABILITY", "unleashes the mystical power of");
-        LITERARY_TRANSLATIONS.put("ACTIVATE", "awakens the quantum essence of");
-        LITERARY_TRANSLATIONS.put("PHASE_SHIFT", "shifts through quantum phases");
-        LITERARY_TRANSLATIONS.put("quantum_wisp", "ethereal quantum wisp");
-        LITERARY_TRANSLATIONS.put("probability_spider", "probability-weaving spider");
-        LITERARY_TRANSLATIONS.put("quantum_knight", "quantum-armored knight");
-        LITERARY_TRANSLATIONS.put("quantum_cat", "phase-shifting quantum cat");
-        LITERARY_TRANSLATIONS.put("quantum_lich", "death-superposed quantum lich");
-        LITERARY_TRANSLATIONS.put("quantum_beetle", "resonance-amplifying beetle");
-        LITERARY_TRANSLATIONS.put("quantum_phoenix", "legendary quantum phoenix");
-        LITERARY_TRANSLATIONS.put("probability_archon", "probability-governing archon");
+        LITERARY_TRANSLATIONS.put("HERO", "le héros valeureux");
+        LITERARY_TRANSLATIONS.put("MOV", "étend sa main dans le vide, projetant un écho miroir");
+        LITERARY_TRANSLATIONS.put("CREATE", "invoque depuis les profondeurs de la possibilité");
+        LITERARY_TRANSLATIONS.put("USE", "canalise l'ancien pouvoir de");
+        LITERARY_TRANSLATIONS.put("CAST", "tisse les fils de la réalité, libérant");
+        LITERARY_TRANSLATIONS.put("ψ", "l'essence quantique");
+        LITERARY_TRANSLATIONS.put("⊙", "la projection temporelle");
+        LITERARY_TRANSLATIONS.put("†", "l'effondrement de la probabilité");
+        LITERARY_TRANSLATIONS.put("Π", "le regard de l'observateur");
+        LITERARY_TRANSLATIONS.put("Δt", "le déplacement temporel");
+        LITERARY_TRANSLATIONS.put("CONSTRUCTIVE", "l'interférence constructive");
+        LITERARY_TRANSLATIONS.put("DESTRUCTIVE", "l'interférence destructive");
+        LITERARY_TRANSLATIONS.put("NEUTRAL", "l'interférence neutre");
+        LITERARY_TRANSLATIONS.put("COMPLEX", "l'interférence complexe");
+        LITERARY_TRANSLATIONS.put("CREATURE", "l'entité d'un autre monde");
+        LITERARY_TRANSLATIONS.put("ITEM", "l'artéfact de pouvoir");
+        LITERARY_TRANSLATIONS.put("SPELL", "l'incantation arcanique");
+        LITERARY_TRANSLATIONS.put("TARGET", "l'adversaire choisi");
+        LITERARY_TRANSLATIONS.put("UNIT", "le compagnon loyal");
+        LITERARY_TRANSLATIONS.put("BATTLE", "s'engage dans un combat quantique avec");
+        LITERARY_TRANSLATIONS.put("ABILITY", "libère le pouvoir mystique de");
+        LITERARY_TRANSLATIONS.put("ACTIVATE", "éveille l'essence quantique de");
+        LITERARY_TRANSLATIONS.put("PHASE_SHIFT", "traverse les phases quantiques");
+
 
         // === TRADUCTIONS ICÔNES/EMOJIS ===
         ICON_TRANSLATIONS.put("HERO", "🧍");
@@ -99,61 +130,63 @@ public class ScriptTranslationService {
         RUNE_TRANSLATIONS.put("NEUTRAL", "⊗");
         RUNE_TRANSLATIONS.put("COMPLEX", "⊘");
         RUNE_TRANSLATIONS.put("CREATURE", "ᛞ");
-        RUNE_TRANSLATIONS.put("ITEM", "ᛃ");
-        RUNE_TRANSLATIONS.put("SPELL", "ᛏ");
-        RUNE_TRANSLATIONS.put("TARGET", "ᚦ");
+        RUNE_TRANSLATIONS.put("ITEM", "ᛏ");
+        RUNE_TRANSLATIONS.put("SPELL", "ᛋ");
+        RUNE_TRANSLATIONS.put("TARGET", "ᛟ");
         RUNE_TRANSLATIONS.put("UNIT", "ᚹ");
-        RUNE_TRANSLATIONS.put("COORDINATES", "⌖");
-        RUNE_TRANSLATIONS.put("ENERGY", "⚛");
-        RUNE_TRANSLATIONS.put("TIME", "⏜");
         RUNE_TRANSLATIONS.put("BATTLE", "ᛒ");
         RUNE_TRANSLATIONS.put("ABILITY", "ᚨ");
-        RUNE_TRANSLATIONS.put("ACTIVATE", "ᚫ");
-        RUNE_TRANSLATIONS.put("PHASE_SHIFT", "ᛟ");
-        RUNE_TRANSLATIONS.put("quantum_wisp", "ᚹ");
-        RUNE_TRANSLATIONS.put("probability_spider", "ᛊ");
-        RUNE_TRANSLATIONS.put("quantum_knight", "ᚲ");
-        RUNE_TRANSLATIONS.put("quantum_cat", "ᚲᚨᛏ");
-        RUNE_TRANSLATIONS.put("quantum_lich", "ᛚ");
-        RUNE_TRANSLATIONS.put("quantum_beetle", "ᛒ");
-        RUNE_TRANSLATIONS.put("quantum_phoenix", "ᚠ");
-        RUNE_TRANSLATIONS.put("probability_archon", "ᚨ");
+        RUNE_TRANSLATIONS.put("ACTIVATE", "ᚱ");
+        RUNE_TRANSLATIONS.put("PHASE_SHIFT", "ᛇ");
+        RUNE_TRANSLATIONS.put("quantum_wisp", "ᛜ");
+        RUNE_TRANSLATIONS.put("probability_spider", "ᛝ");
+        RUNE_TRANSLATIONS.put("quantum_knight", "ᛞ");
+        RUNE_TRANSLATIONS.put("quantum_cat", "ᛟ");
+        RUNE_TRANSLATIONS.put("quantum_lich", "ᛠ");
+        RUNE_TRANSLATIONS.put("quantum_beetle", "ᛡ");
+        RUNE_TRANSLATIONS.put("quantum_phoenix", "ᛢ");
+        RUNE_TRANSLATIONS.put("probability_archon", "ᛣ");
     }
 
     // ===== MÉTHODES PRINCIPALES =====
 
     public Map<String, Object> translateScript(String script, String mode) {
         Map<String, Object> result = new HashMap<>();
-        result.put("original", script);
-        result.put("mode", mode);
-
-        switch (mode.toLowerCase()) {
-            case "literary":
-                result.put("translated", translateToLiterary(script));
-                break;
-            case "icons":
-                result.put("translated", translateToIcons(script));
-                break;
-            case "runes":
-                result.put("translated", translateToRunes(script));
-                break;
-            case "all":
-                result.put("literary", translateToLiterary(script));
-                result.put("icons", translateToIcons(script));
-                result.put("runes", translateToRunes(script));
-                break;
-            default:
-                result.put("error", "Mode de traduction non reconnu: " + mode);
+        
+        if (script == null || script.trim().isEmpty()) {
+            result.put("original", "");
+            result.put("translated", "");
+            result.put("mode", mode);
+            return result;
         }
 
+        String translated = "";
+        switch (mode.toLowerCase()) {
+            case "literary":
+                translated = translateToLiterary(script);
+                break;
+            case "icons":
+                translated = translateToIcons(script);
+                break;
+            case "runes":
+                translated = translateToRunes(script);
+                break;
+            default:
+                translated = script;
+        }
+
+        result.put("original", script);
+        result.put("translated", translated);
+        result.put("mode", mode);
+        
         return result;
     }
 
-    // ===== TRADUCTION LITTÉRAIRE ANGLAISE =====
+    // ===== TRADUCTION LITTÉRAIRE =====
 
     private String translateToLiterary(String script) {
         if (script == null || script.trim().isEmpty()) {
-            return "The void whispers of forgotten possibilities...";
+            return "Dans le silence de l'éternité, rien ne se manifeste.";
         }
 
         String translated = script;
@@ -161,13 +194,16 @@ public class ScriptTranslationService {
         // Traduire les commandes de base
         translated = translateBasicCommands(translated, LITERARY_TRANSLATIONS);
         
-        // Traduire les états quantiques
-        translated = translateQuantumStates(translated);
+        // Remplacer les IDs par des descriptions littéraires
+        translated = replaceIdsWithDescriptions(translated);
         
         // Traduire les formules d'artefacts
         translated = translateArtifactFormulas(translated);
         
-        // Ajouter du style littéraire
+        // Traduire les états quantiques (en dernier pour traiter les commandes à l'intérieur)
+        translated = translateQuantumStates(translated);
+        
+        // Améliorer le style littéraire
         translated = addLiteraryStyle(translated);
 
         return translated;
@@ -176,25 +212,17 @@ public class ScriptTranslationService {
     private String translateBasicCommands(String script, Map<String, String> translations) {
         String result = script;
         
-        // Patterns pour les commandes - Version plus littéraire et poétique
-        result = result.replaceAll("HERO\\(([^)]+)\\)", "the valiant hero $1 emerges from the depths of forgotten memories");
-        result = result.replaceAll("MOV\\(([^,]+),\\s*([^,]+),\\s*@(\\d+),(\\d+)\\)", 
-            "the valiant hero $2 glides through the fabric of reality, his essence flowing like liquid starlight across the quantum landscape");
-        result = result.replaceAll("CREATE\\(([^,]+),\\s*([^,]+)(?:,\\s*@(\\d+),(\\d+))?\\)", 
-            "summons from the depths of possibility a $1 named $2, its form shimmering with the essence of quantum uncertainty");
-        result = result.replaceAll("USE\\(([^,]+),\\s*([^,]+)(?:,\\s*([^)]+))?\\)", 
-            "channels the ancient power of the $1 $2" + 
-            (result.contains("HERO:") ? " through the chosen vessel $3, absorbing the very essence of creation" : ""));
-        result = result.replaceAll("CAST\\(SPELL,\\s*([^,]+),\\s*TARGET:([^,]+),\\s*HERO:([^)]+)\\)", 
-            "weaves the threads of reality, unleashing the arcane incantation $1 upon the chosen adversary $2 through the mystical conduit $3");
+        // Commandes de base avec style littéraire
+        result = result.replaceAll("HERO\\(([^)]+)\\)", "le héros valeureux $1 émerge de l'éther");
+                        result = result.replaceAll("MOV\\(([^,]+),\\s*@(\\d+),(\\d+)\\)", 
+            "$1 étend sa main dans le vide, projetant un écho miroir vers les coordonnées mystiques ($2, $3)");
+
+        result = result.replaceAll("USE\\(([^,]+),\\s*([^,]+)(?:,\\s*HERO:([^)]+))?\\)", 
+            "canalise l'ancien pouvoir de $2" + (result.contains("HERO:") ? " par l'intermédiaire de $3" : ""));
         result = result.replaceAll("BATTLE\\(([^,]+),\\s*([^)]+)\\)", 
-            "engages in quantum combat with the $1 against the $2, their essences intertwining in a dance of probability and uncertainty");
+            "$1 s'engage dans un combat quantique avec $2");
         result = result.replaceAll("ABILITY\\(([^,]+),\\s*([^)]+)\\)", 
-            "unleashes the mystical power of $2 through the quantum essence of $1, causing reality itself to shimmer and shift");
-        result = result.replaceAll("ACTIVATE\\(([^)]+)\\)", 
-            "awakens the quantum essence of the $1, its ancient power pulsing with the rhythm of creation");
-        result = result.replaceAll("PHASE_SHIFT\\(([^,]+),\\s*([^)]+)\\)", 
-            "shifts through quantum phases with the $1 by $2 radians, transcending the boundaries of conventional reality");
+            "$1 libère le pouvoir mystique de $2");
 
         return result;
     }
@@ -202,15 +230,23 @@ public class ScriptTranslationService {
     private String translateQuantumStates(String script) {
         String result = script;
         
-        // États quantiques - Version plus poétique
+        // États quantiques - Version plus poétique (sans numéros)
         result = result.replaceAll("ψ(\\d+):\\s*⊙\\((.*)\\)", 
-            "quantum essence $1 manifests through temporal projection, its ethereal form dancing between the threads of reality: $2");
+            "l'essence quantique manifeste sa projection temporelle, sa forme éthérée dansant entre les fils de la réalité: $2");
         result = result.replaceAll("†ψ(\\d+)", 
-            "the collapse of probability shatters quantum essence $1, as reality solidifies from the quantum foam of possibilities");
+            "l'effondrement de la probabilité brise l'essence quantique, alors que la réalité se solidifie depuis l'écume quantique des possibilités");
         result = result.replaceAll("Π\\(([^)]+)\\)\\s*⇒\\s*†ψ(\\d+)", 
-            "the observer's gaze upon $1 triggers the collapse of quantum essence $2, as consciousness shapes the fabric of existence");
+            "le regard de l'observateur sur $1 déclenche l'effondrement de l'essence quantique, alors que la conscience façonne le tissu de l'existence");
         result = result.replaceAll("Δt\\+(\\d+)", 
-            "temporal displacement of $1 cycles, as time itself bends to the will of quantum uncertainty");
+            "le déplacement temporel de $1 cycles, alors que le temps lui-même se courbe sous la volonté de l'incertitude quantique");
+        
+        // Traduire les commandes MOV à l'intérieur des états quantiques
+        result = result.replaceAll("MOV\\(([^,]+),\\s*@(\\d+),(\\d+)\\)", 
+            "$1 étend sa main dans le vide, projetant un écho miroir vers les coordonnées mystiques ($2, $3)");
+        
+        // Traduire les commandes MOV avec héros déjà traduits
+        result = result.replaceAll("MOV\\(([^,]+),\\s*le Roi Temporel,\\s*@(\\d+),(\\d+)\\)", 
+            "$1 étend sa main dans le vide, projetant un écho miroir vers les coordonnées mystiques ($2, $3)");
 
         return result;
     }
@@ -220,14 +256,47 @@ public class ScriptTranslationService {
         
         // Formules d'artefacts - Version plus mystique
         result = result.replaceAll("CONSTRUCTIVE\\(([^)]+)\\)", 
-            "constructive interference between $1 creates a wave of amplified probability, where all possibilities exist in perfect harmony");
+            "l'interférence constructive entre $1 crée une vague de probabilité amplifiée, où toutes les possibilités existent en parfaite harmonie");
         result = result.replaceAll("DESTRUCTIVE\\(([^)]+)\\)", 
-            "destructive interference annihilating $1, as opposing forces tear at the very fabric of reality");
+            "l'interférence destructive annihilant $1, alors que les forces opposées déchirent le très tissu de la réalité");
         result = result.replaceAll("AMPLIFY\\(([^,]+),\\s*([^)]+)\\)", 
-            "amplification of $1 by the factor of $2, creating a resonance that shakes the very foundations of existence");
+            "l'amplification de $1 par le facteur de $2, créant une résonance qui ébranle les très fondations de l'existence");
         result = result.replaceAll("MODIFY_ENERGY\\(([^,]+),\\s*([^)]+)\\)", 
-            "modification of the hero's essence by $2 units, as the quantum field responds to the call of destiny");
+            "la modification de l'essence du héros par $2 unités, alors que le champ quantique répond à l'appel du destin");
 
+        return result;
+    }
+
+    private String replaceIdsWithDescriptions(String script) {
+        String result = script;
+        
+        // Remplacer les IDs par leurs descriptions littéraires
+        for (Map.Entry<String, String> entry : ID_TO_DESCRIPTION.entrySet()) {
+            String id = entry.getKey();
+            String description = entry.getValue();
+            
+            // Remplacer dans les commandes USE
+            result = result.replaceAll("USE\\([^,]+,\\s*" + id + "(?:,\\s*HERO:([^)]+))?\\)", 
+                "canalise l'ancien pouvoir de " + description + (result.contains("HERO:") ? " par l'intermédiaire de $1" : ""));
+            
+            // Remplacer dans les commandes CREATE
+            result = result.replaceAll("CREATE\\([^,]+,\\s*" + id + "(?:,\\s*@([^)]+))?\\)", 
+                "invoque depuis les profondeurs de la possibilité " + description + (result.contains("@") ? " aux coordonnées mystiques ($1)" : ""));
+            
+            // Remplacer les références directes restantes
+            result = result.replaceAll("\\b" + id + "\\b", description);
+        }
+        
+        // Nettoyer les duplications
+        result = result.replaceAll("invoque depuis les profondeurs de la possibilité depuis les profondeurs de la possibilité", 
+            "invoque depuis les profondeurs de la possibilité");
+        
+        // Remplacer les commandes CREATE non traitées (éviter les IDs déjà traités)
+        for (String id : ID_TO_DESCRIPTION.keySet()) {
+            result = result.replaceAll("CREATE\\(([^,]+),\\s*" + id + "(?:,\\s*@([^)]+))?\\)", 
+                "invoque depuis les profondeurs de la possibilité " + ID_TO_DESCRIPTION.get(id) + (result.contains("@") ? " aux coordonnées mystiques ($2)" : ""));
+        }
+        
         return result;
     }
 
@@ -241,15 +310,20 @@ public class ScriptTranslationService {
             
             String enhanced = sentence.trim();
             
+            // Améliorer les descriptions de héros
+            if (enhanced.contains("HERO:")) {
+                enhanced = enhanced.replaceAll("HERO:([^,\\s]+)", "le héros valeureux $1");
+            }
+            
             // Ajouter des adjectifs mystiques
-            if (enhanced.contains("hero")) {
-                enhanced = enhanced.replace("hero", "valiant hero");
+            if (enhanced.contains("héros")) {
+                enhanced = enhanced.replace("héros", "héros valeureux");
             }
-            if (enhanced.contains("moves")) {
-                enhanced = enhanced.replace("moves", "glides through the fabric of reality");
+            if (enhanced.contains("étend")) {
+                enhanced = enhanced.replace("étend", "glisse à travers le tissu de la réalité");
             }
-            if (enhanced.contains("creates")) {
-                enhanced = enhanced.replace("creates", "summons from the depths of possibility");
+            if (enhanced.contains("invoque")) {
+                enhanced = enhanced.replace("invoque", "invoque depuis les profondeurs de la possibilité");
             }
             
             enhancedSentences.add(enhanced);
@@ -284,9 +358,9 @@ public class ScriptTranslationService {
         
         // Commandes avec icônes
         result = result.replaceAll("HERO\\(([^)]+)\\)", "🧍($1)");
-        result = result.replaceAll("MOV\\(([^,]+),\\s*([^,]+),\\s*@(\\d+),(\\d+)\\)", 
-            "🧍➡️🗺️($3,$4)");
-        result = result.replaceAll("CREATE\\(([^,]+),\\s*([^,]+)(?:,\\s*@(\\d+),(\\d+))?\\)", 
+        result = result.replaceAll("MOV\\(([^,]+),\\s*@(\\d+),(\\d+)\\)", 
+            "🧍➡️🗺️($2,$3)");
+        result = result.replaceAll("CREATE\\(([^,]+),\\s*([^)]+)(?:,\\s*@(\\d+),(\\d+))?\\)", 
             "✨🐉($2)" + (result.contains("@") ? "🗺️($3,$4)" : ""));
         result = result.replaceAll("USE\\(([^,]+),\\s*([^,]+)(?:,\\s*([^)]+))?\\)", 
             "🧙‍♂️💎($2)" + (result.contains("HERO:") ? "🧍($3)" : ""));
@@ -359,9 +433,9 @@ public class ScriptTranslationService {
         String result = script;
         
         result = result.replaceAll("HERO\\(([^)]+)\\)", "ᚺ($1)");
-        result = result.replaceAll("MOV\\(([^,]+),\\s*([^,]+),\\s*@(\\d+),(\\d+)\\)", 
-            "ᚺᛗ⌖($3,$4)");
-        result = result.replaceAll("CREATE\\(([^,]+),\\s*([^,]+)(?:,\\s*@(\\d+),(\\d+))?\\)", 
+        result = result.replaceAll("MOV\\(([^,]+),\\s*@(\\d+),(\\d+)\\)", 
+            "ᚺᛗ⌖($2,$3)");
+        result = result.replaceAll("CREATE\\(([^,]+),\\s*([^)]+)(?:,\\s*@(\\d+),(\\d+))?\\)", 
             "ᚲᛞ($2)" + (result.contains("@") ? "⌖($3,$4)" : ""));
         result = result.replaceAll("USE\\(([^,]+),\\s*([^,]+)(?:,\\s*([^)]+))?\\)", 
             "ᚢᛃ($2)" + (result.contains("HERO:") ? "ᚺ($3)" : ""));
@@ -417,17 +491,17 @@ public class ScriptTranslationService {
 
     public Map<String, String> getTranslationExamples() {
         Map<String, String> examples = new HashMap<>();
-        examples.put("HERO(Arthur)", "the valiant hero Arthur | 🧍(Arthur) | ᚺ(Arthur)");
+        examples.put("HERO(Arthur)", "le héros valeureux Arthur | 🧍(Arthur) | ᚺ(Arthur)");
         examples.put("MOV(HERO, Arthur, @10,10)", 
-            "the hero Arthur extends his hand into the void, projecting a mirrored echo to the coordinates (10, 10) | 🧍➡️🗺️(10,10) | ᚺᛗ⌖(10,10)");
+            "le héros Arthur étend sa main dans le vide, projetant un écho miroir vers les coordonnées mystiques (10, 10) | 🧍➡️🗺️(10,10) | ᚺᛗ⌖(10,10)");
         examples.put("ψ001: ⊙(Δt+1 @10,10 ⟶ MOV(HERO, Arthur, @10,10))", 
-            "quantum essence 001 manifests through temporal projection: temporal displacement of 1 cycles @10,10 ⟶ the hero Arthur extends his hand into the void, projecting a mirrored echo to the coordinates (10, 10) | 🧠001:⏳(⏰+1 @10,10 ⟶ 🧍➡️🗺️(10,10)) | ☥001:⟡(⏣+1 @10,10 ⟶ ᚺᛗ⌖(10,10))");
+            "l'essence quantique 001 manifeste sa projection temporelle: le déplacement temporel de 1 cycles @10,10 ⟶ le héros Arthur étend sa main dans le vide, projetant un écho miroir vers les coordonnées mystiques (10, 10) | 🧠001:⏳(⏰+1 @10,10 ⟶ 🧍➡️🗺️(10,10)) | ☥001:⟡(⏣+1 @10,10 ⟶ ᚺᛗ⌖(10,10))");
         examples.put("CREATE(CREATURE, quantum_phoenix, @15,15)", 
-            "summons from the depths of possibility a CREATURE named quantum_phoenix at the mystical coordinates (15, 15) | ✨🐉(quantum_phoenix)🗺️(15,15) | ᚲᛞ(quantum_phoenix)⌖(15,15)");
+            "invoque depuis les profondeurs de la possibilité un CREATURE nommé quantum_phoenix aux coordonnées mystiques (15, 15) | ✨🐉(quantum_phoenix)🗺️(15,15) | ᚲᛞ(quantum_phoenix)⌖(15,15)");
         examples.put("BATTLE(quantum_phoenix, quantum_lich)", 
-            "engages in quantum combat with the quantum_phoenix against the quantum_lich | ⚔️(quantum_phoenix)vs(quantum_lich) | ᛒ(quantum_phoenix)vs(quantum_lich)");
+            "s'engage dans un combat quantique avec le quantum_phoenix contre le quantum_lich | ⚔️(quantum_phoenix)vs(quantum_lich) | ᛒ(quantum_phoenix)vs(quantum_lich)");
         examples.put("ABILITY(quantum_phoenix, quantum_rebirth)", 
-            "unleashes the mystical power of quantum_rebirth through the quantum essence of quantum_phoenix | 🔮(quantum_phoenix)✨(quantum_rebirth) | ᚨ(quantum_phoenix)ᚫ(quantum_rebirth)");
+            "libère le pouvoir mystique de quantum_rebirth par l'essence quantique de quantum_phoenix | 🔮(quantum_phoenix)✨(quantum_rebirth) | ᚨ(quantum_phoenix)ᚫ(quantum_rebirth)");
         
         return examples;
     }
