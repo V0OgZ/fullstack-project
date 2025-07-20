@@ -1,9 +1,32 @@
 # CURSOR RULES - Heroes of Time Project
 
+## 🧠 RÈGLES MEMENTO - À LIRE RÉGULIÈREMENT
+
+### 📚 LECTURE OBLIGATOIRE
+- **LIRE .cursorrules** - Au début de chaque session
+- **LIRE MEMENTO/** - Tous les documents, surtout TODO_SESSION_ACTUELLE.md
+- **METTRE À JOUR TODO** - Maintenir un SUPER TODO avec SUB-TODOS organisés
+
+### 🛋️ RÈGLE DU CANAPÉ DE JEAN
+- **TOUJOURS PUSHER LES ANALYSES AVANT DE DEV** - Jean lit depuis son canapé sur GitHub
+- **NE PAS DEMANDER DE CLIQUER** - Jean n'aime pas se lever pour cliquer
+- **TOUT DOCUMENTER DANS MEMENTO/** - Pour que Jean puisse suivre à distance
+- **COMMIT & PUSH FRÉQUENTS** - Après chaque analyse ou découverte importante
+
+### 🚨 PROBLÈME CRITIQUE dquote>
+- **PROBLÈME** : Se produit avec echo + guillemets imbriqués, emojis, messages multi-lignes
+- **SOLUTIONS** : 
+  1. Ctrl+C pour sortir
+  2. Toujours guillemets simples `echo 'message'`
+  3. Git commit avec guillemets simples
+  4. Fichiers temporaires pour longs messages
+  5. Jamais d'emojis dans echo
+- **PROCÉDURE** : Nettoyer ports avec `lsof -ti:PORT | xargs kill -9` avant démarrage
+
 ## 📚 DOCUMENTS ESSENTIELS À LIRE (MEMENTO)
 
 ### 🧠 Session Actuelle - MEMENTO/
-- **TODO_SESSION_ACTUELLE.md** - État actuel et objectifs
+- **TODO_SESSION_ACTUELLE.md** - État actuel et objectifs (SUPER TODO + SUB-TODOS)
 - **ARBORESCENCE_MAP_COMPLETE.md** - Carte complète v2.0 du projet
 - **JEAN_MESSAGES_BEST_OF.md** - Vision et philosophie du projet
 
