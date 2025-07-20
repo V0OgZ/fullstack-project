@@ -559,7 +559,7 @@ class TemporalHexagonalRenderer extends GameRenderer {
         
         positions.forEach((ghosts, key) => {
             if (ghosts.length > 1) {
-                const [q, r] = key.split(',').map(n => parseInt(n));
+                const [q, r] = key.split(',').map(n => parseInt(n, 10));
                 this.causalCollisions.set(key, { q, r, ghosts });
             }
         });
