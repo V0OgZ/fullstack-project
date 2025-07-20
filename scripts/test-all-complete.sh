@@ -153,13 +153,31 @@ echo -e "\n${BLUE}=== 4. VALIDATION SCÉNARIOS HOTS ===${NC}"
 # Vérifier l'existence des scénarios
 echo -e "\n${PURPLE}=== Vérification des fichiers HOTS ===${NC}"
 SCENARIOS=(
-    "game_assets/scenarios/hots/oeil_de_wigner_scenario.hots"
+    # === MAIN SCENARIOS ===
+    "game_assets/scenarios/hots/bataille_temporelle_complete.hots"
+    "game_assets/scenarios/hots/claudius_vs_jeangro_epic.hots"
+    "game_assets/scenarios/hots/codex_final.hots"
     "game_assets/scenarios/hots/epic-arthur-vs-ragnar.hots"
+    "game_assets/scenarios/hots/oeil_de_wigner_readme.hots"
+    "game_assets/scenarios/hots/oeil_de_wigner_scenario.hots"
+    "game_assets/scenarios/hots/panopticon_axis_test.hots"
     "game_assets/scenarios/hots/quantum_interference_example.hots"
     "game_assets/scenarios/hots/quantum_maze.hots"
+    "game_assets/scenarios/hots/simple-game.hots"
+    "game_assets/scenarios/hots/splintered_worlds.hots"
     "game_assets/scenarios/hots/treasure_theft_test.hots"
-    "game_assets/scenarios/hots/oeil_de_wigner_readme.hots"
-    "game_assets/scenarios/hots/claudius_vs_jeangro_epic.hots"
+    # === TEST SCENARIOS ===
+    "game_assets/tests/hots/bataille_temporelle_finale.hots"
+    "game_assets/tests/hots/bataille_temporelle_combat.hots"
+    "game_assets/tests/hots/bataille_temporelle_setup.hots"
+    "game_assets/tests/hots/converted_epic_scenario.hots"
+    "game_assets/tests/hots/parser-comparison.hots"
+    "game_assets/tests/hots/quantum_artifacts_test.hots"
+    "game_assets/tests/hots/quantum_interference_test.hots"
+    "game_assets/tests/hots/temporal-stress-test.hots"
+    # === TEMPLATE SCENARIOS ===
+    "game_templates/classic_rpg/scenarios/dungeon_crawler.hots"
+    "game_templates/quantum_puzzle/scenarios/quantum_maze.hots"
 )
 
 for scenario in "${SCENARIOS[@]}"; do
