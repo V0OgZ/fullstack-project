@@ -51,6 +51,12 @@ public class TemporalScriptParser {
     private static final Pattern SIEGE_PATTERN = Pattern.compile("SIEGE\\(([^,]+),\\s*@(\\d+),(\\d+),\\s*HERO:([^)]+)\\)");
     private static final Pattern CAPTURE_PATTERN = Pattern.compile("CAPTURE\\(OBJECTIVE,\\s*([^,]+),\\s*HERO:([^)]+)\\)");
     
+    // 🔧 FIX: Add alternative patterns for test compatibility
+    private static final Pattern CAST_PATTERN_ALT = Pattern.compile("CAST\\(([^,]+),\\s*([^,]+),\\s*@(\\d+),(\\d+)\\)");
+    private static final Pattern RECRUIT_PATTERN_ALT = Pattern.compile("RECRUIT\\(([^,]+),\\s*(\\d+),\\s*([^)]+)\\)");
+    private static final Pattern COLLECT_PATTERN_ALT = Pattern.compile("COLLECT\\(([^,]+),\\s*(\\d+),\\s*([^)]+)\\)");
+    private static final Pattern SIEGE_PATTERN_ALT = Pattern.compile("SIEGE\\(([^,]+),\\s*@(\\d+),(\\d+),\\s*([^)]+)\\)");
+    
     /**
      * Parse a temporal script line and create a PsiState if it's a temporal action
      */
@@ -329,6 +335,17 @@ public class TemporalScriptParser {
             return new ScriptCommand("CAST", params);
         }
         
+        // CAST alternative pattern for CAST(spell, hero, @x,y) format
+        Matcher castAltMatcher = CAST_PATTERN_ALT.matcher(scriptLine);
+        if (castAltMatcher.find()) {
+            Map<String, String> params = new HashMap<>();
+            params.put("spell", castAltMatcher.group(1));
+            params.put("hero", castAltMatcher.group(2));
+            params.put("x", castAltMatcher.group(3));
+            params.put("y", castAltMatcher.group(4));
+            return new ScriptCommand("CAST", params);
+        }
+        
         // LEARN command
         Matcher learnMatcher = LEARN_PATTERN.matcher(scriptLine);
         if (learnMatcher.find()) {
@@ -358,7 +375,7 @@ public class TemporalScriptParser {
             return new ScriptCommand("EXPLORE", params);
         }
         
-        // EQUIP command
+        // EQUIP command - try both patterns
         Matcher equipMatcher = EQUIP_PATTERN.matcher(scriptLine);
         if (equipMatcher.find()) {
             Map<String, String> params = new HashMap<>();
@@ -367,12 +384,12 @@ public class TemporalScriptParser {
             return new ScriptCommand("EQUIP", params);
         }
         
-        // Alternative EQUIP command format for test compatibility
-        Matcher equipMatcherAlt = EQUIP_PATTERN_ALT.matcher(scriptLine);
-        if (equipMatcherAlt.find()) {
+        // EQUIP alternative pattern for EQUIP(artifact, hero) format
+        Matcher equipAltMatcher = EQUIP_PATTERN_ALT.matcher(scriptLine);
+        if (equipAltMatcher.find()) {
             Map<String, String> params = new HashMap<>();
-            params.put("hero", equipMatcherAlt.group(1));
-            params.put("artifact", equipMatcherAlt.group(2));
+            params.put("artifact", equipAltMatcher.group(1));
+            params.put("hero", equipAltMatcher.group(2));
             return new ScriptCommand("EQUIP", params);
         }
         
@@ -385,6 +402,37 @@ public class TemporalScriptParser {
             params.put("y", siegeMatcher.group(3));
             params.put("hero", siegeMatcher.group(4));
             return new ScriptCommand("SIEGE", params);
+        }
+        
+        // SIEGE alternative pattern for SIEGE(target, @x,y, hero) format
+        Matcher siegeAltMatcher = SIEGE_PATTERN_ALT.matcher(scriptLine);
+        if (siegeAltMatcher.find()) {
+            Map<String, String> params = new HashMap<>();
+            params.put("target", siegeAltMatcher.group(1));
+            params.put("x", siegeAltMatcher.group(2));
+            params.put("y", siegeAltMatcher.group(3));
+            params.put("hero", siegeAltMatcher.group(4));
+            return new ScriptCommand("SIEGE", params);
+        }
+        
+        // RECRUIT alternative pattern for RECRUIT(unit, amount, hero) format
+        Matcher recruitAltMatcher = RECRUIT_PATTERN_ALT.matcher(scriptLine);
+        if (recruitAltMatcher.find()) {
+            Map<String, String> params = new HashMap<>();
+            params.put("unit", recruitAltMatcher.group(1));
+            params.put("amount", recruitAltMatcher.group(2));
+            params.put("hero", recruitAltMatcher.group(3));
+            return new ScriptCommand("RECRUIT", params);
+        }
+        
+        // COLLECT alternative pattern for COLLECT(resource, amount, player) format
+        Matcher collectAltMatcher = COLLECT_PATTERN_ALT.matcher(scriptLine);
+        if (collectAltMatcher.find()) {
+            Map<String, String> params = new HashMap<>();
+            params.put("resource", collectAltMatcher.group(1));
+            params.put("amount", collectAltMatcher.group(2));
+            params.put("player", collectAltMatcher.group(3));
+            return new ScriptCommand("COLLECT", params);
         }
         
         // CAPTURE command

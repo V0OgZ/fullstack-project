@@ -1,28 +1,28 @@
 [0;34m🎯 Heroes of Time - Test Complet Final[0m
 =====================================
-2025-07-20 17:31:13 - Démarrage des tests
+2025-07-20 22:38:21 - Démarrage des tests
 
 [0;36m🧹 Phase 1: Nettoyage initial...[0m
 [0;32m✅ Nettoyage des ports[0m
    Ports 8080, 8001, 5173, 3000, 8000 libérés
 [0;36m🔍 Phase 2: Vérifications système...[0m
 [0;32m✅ Installation Java[0m
-   Version: 21.0.7
+   Version: 17.0.15
 [0;32m✅ Installation Maven[0m
-   Version: 3.9.9[m
+   Version: 3.8.2
 [0;32m✅ Installation Python[0m
-   Version: 3.13.3
+   Version: 3.10.6
 [0;32m✅ Installation Node.js[0m
-   Version: v22.16.0
+   Version: v24.4.0
 [0;36m🏗️ Phase 3: Compilation backend...[0m
 [0;36m🚀 Phase 5: Démarrage backend...[0m
 Attente démarrage backend...
-[0;32m✅ Démarrage backend[0m
-   Backend accessible sur port 8080
+[0;31m❌ Démarrage backend[0m
+   Backend inaccessible
 [0;36m🎮 Phase 6: Tests API HOTS...[0m
 [0;36m🌀 Phase 7: Tests Collapse Causale...[0m
-[0;32m✅ Service CausalCollapseService[0m
-   Endpoint collapse causale accessible
+[0;31m❌ Service CausalCollapseService[0m
+   Endpoint collapse causale inaccessible
 [0;32m✅ Collapse type INTERACTION[0m
    Type de collapse INTERACTION implémenté
 [0;32m✅ Collapse type OBSERVATION[0m
@@ -57,20 +57,8 @@ Attente démarrage backend...
    Script de démonstration présent
 [0;36m📊 Phase 10: Tests Performance...[0m
 Test des métriques de performance...
-[0;32m✅ Endpoint métriques test[0m
-   Métriques de test générées
-[0;32m✅ Endpoint métriques performance[0m
-   Métriques détaillées récupérées
-[0;32m✅ Métriques opérations rapides[0m
-    ops/sec
-[0;32m✅ Métriques opérations lentes[0m
-    ops/sec
-[0;32m✅ Métriques mémoire[0m
-    MB utilisés
-[0;32m✅ Sauvegarde métriques détaillées[0m
-   Fichier logs/performance-metrics-detailed.json
-[0;32m✅ Résumé performances[0m
-   Résumé sauvegardé
+[0;31m❌ Endpoint métriques test[0m
+   Endpoint métriques inaccessible
 Test benchmark regex parser...
 [0;32m✅ Benchmark regex parser[0m
-   165 ops/sec, durée: 6028ms
+   106 ops/sec, durée: 9387ms

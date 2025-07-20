@@ -388,14 +388,6 @@ echo "• 🚀 API Backend: $BACKEND_URL"
 echo ""
 echo -e "${GREEN}🎉 SYSTÈME HEROES OF TIME BENCHMARK - PRÊT À L'EMPLOI!${NC}"
 
-# Proposer d'ouvrir le dashboard
-read -p "Voulez-vous ouvrir le dashboard intégré ? (y/N): " open_dashboard
-if [[ $open_dashboard == "y" || $open_dashboard == "Y" ]]; then
-    if command -v open >/dev/null 2>&1; then
-        open "http://localhost:$DASHBOARD_PORT"
-    elif command -v xdg-open >/dev/null 2>&1; then
-        xdg-open "http://localhost:$DASHBOARD_PORT"
-    else
-        echo "Ouvrez manuellement: http://localhost:$DASHBOARD_PORT"
-    fi
-fi 
+# 🔧 FIX: Suppression de l'interaction clavier pour automatisation
+echo -e "${CYAN}🌐 Dashboard disponible: http://localhost:$DASHBOARD_PORT${NC}"
+echo -e "${CYAN}   Ouvrez manuellement si nécessaire${NC}" 

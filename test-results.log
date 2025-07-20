@@ -1,0 +1,883 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------< com.heroesoftimepoc:temporal-engine >-----------------
+[INFO] Building Heroes of Time POC - Temporal Engine 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ temporal-engine ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 21 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.11.0:compile (default-compile) @ temporal-engine ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ temporal-engine ---
+[INFO] Copying 3 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.11.0:testCompile (default-testCompile) @ temporal-engine ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 18 source files with javac [debug release 17] to target/test-classes
+[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java: Some input files use unchecked or unsafe operations.
+[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- maven-surefire-plugin:3.1.2:test (default-test) @ temporal-engine ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.heroesoftimepoc.temporalengine.integration.BatailleTemporelleIntegrationTest
+22:32:53.647 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.heroesoftimepoc.temporalengine.integration.BatailleTemporelleIntegrationTest]: BatailleTemporelleIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:32:53.722 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.heroesoftimepoc.temporalengine.TemporalEngineApplication for test class com.heroesoftimepoc.temporalengine.integration.BatailleTemporelleIntegrationTest
+🚀 Initialisation des tests de Bataille Temporelle
+======================================================
+22:32:53.884 [main] INFO org.springframework.boot.devtools.restart.RestartApplicationListener -- Restart disabled due to context in which it is running
+ ██╗  ██╗███████╗██████╗  ██████╗ ███████╗███████╗    ██████╗ ███████╗    ████████╗██╗███╗   ███╗███████╗
+ ██║  ██║██╔════╝██╔══██╗██╔═══██╗██╔════╝██╔════╝   ██╔═══██╗██╔════╝    ╚══██╔══╝██║████╗ ████║██╔════╝
+ ███████║█████╗  ██████╔╝██║   ██║█████╗  ███████╗   ██║   ██║█████╗         ██║   ██║██╔████╔██║█████╗  
+ ██╔══██║██╔══╝  ██╔══██╗██║   ██║██╔══╝  ╚════██║   ██║   ██║██╔══╝         ██║   ██║██║╚██╔╝██║██╔══╝  
+ ██║  ██║███████╗██║  ██║╚██████╔╝███████╗███████║   ╚██████╔╝██║            ██║   ██║██║ ╚═╝ ██║███████╗
+ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚══════╝    ╚═════╝ ╚═╝            ╚═╝   ╚═╝╚═╝     ╚═╝╚══════╝
+                                                                                                           
+ ⚔️  TEMPORAL ENGINE BACKEND  ⚔️                    🕰️  Quantum Mechanics & Causal Collapse  🕰️
+ ══════════════════════════════════════════════════════════════════════════════════════════════════════════
+ 
+ 🌟 Maîtrisez le temps, dominez l'espace, conquérez l'éternité
+ 
+ ⚡ Fonctionnalités Actives:
+    • Moteur Temporel Quantique    ✅
+    • États ψ (Psi) Superposés     ✅  
+    • Collapse Causal Automatique  ✅
+    • Artefacts Légendaires        ✅
+    • API REST Complète            ✅
+    
+ 🎯 Port: 8080 | 🔧 Profile: default | 📊 Version: 1.0.0 
+2025-07-20T22:32:54.027+02:00  INFO 14313 --- [           main] .h.t.i.BatailleTemporelleIntegrationTest : Starting BatailleTemporelleIntegrationTest using Java 17.0.15 with PID 14313 (started by admin in /Users/admin/HOT/Heroes-of-Time/backend)
+2025-07-20T22:32:54.028+02:00 DEBUG 14313 --- [           main] .h.t.i.BatailleTemporelleIntegrationTest : Running with Spring Boot v3.2.0, Spring v6.1.1
+2025-07-20T22:32:54.028+02:00  INFO 14313 --- [           main] .h.t.i.BatailleTemporelleIntegrationTest : No active profile set, falling back to 1 default profile: "default"
+2025-07-20T22:32:54.047+02:00 DEBUG 14313 --- [           main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@6f8d7714
+2025-07-20T22:32:54.321+02:00  INFO 14313 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-20T22:32:54.345+02:00  INFO 14313 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 20 ms. Found 5 JPA repository interfaces.
+2025-07-20T22:32:54.638+02:00  INFO 14313 --- [           main] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Starting...
+2025-07-20T22:32:54.729+02:00  INFO 14313 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HeroesOfTimePool - Added connection conn0: url=jdbc:h2:mem:heroesdb user=SA
+2025-07-20T22:32:54.760+02:00  INFO 14313 --- [           main] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Start completed.
+2025-07-20T22:32:54.837+02:00  INFO 14313 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-20T22:32:54.869+02:00  INFO 14313 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2025-07-20T22:32:54.887+02:00  INFO 14313 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-07-20T22:32:55.400+02:00  INFO 14313 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-20T22:32:55.425+02:00  WARN 14313 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-20T22:32:56.077+02:00  INFO 14313 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: drop table if exists forged_objects cascade 
+2025-07-20T22:32:56.088+02:00  INFO 14313 --- [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@5ba4735c] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+Hibernate: drop table if exists game_history cascade 
+Hibernate: drop table if exists game_players cascade 
+Hibernate: drop table if exists game_tiles cascade 
+Hibernate: drop table if exists games cascade 
+Hibernate: drop table if exists hero_abilities cascade 
+Hibernate: drop table if exists hero_inventory cascade 
+Hibernate: drop table if exists hero_status_effects cascade 
+Hibernate: drop table if exists hero_titles cascade 
+Hibernate: drop table if exists heroes cascade 
+Hibernate: drop table if exists psi_states cascade 
+Hibernate: drop table if exists temporal_artifacts cascade 
+Hibernate: drop table if exists tile_effects cascade 
+Hibernate: drop table if exists tile_items cascade 
+Hibernate: drop table if exists tile_occupants cascade 
+Hibernate: create table forged_objects (is_dangerous boolean, stability_rating float(53), times_used integer, forge_time timestamp(6), game_id bigint, id bigint generated by default as identity, effect varchar(500), formula varchar(1000), cost varchar(255), forged_by varchar(255), name varchar(255) not null, type varchar(255) not null, primary key (id))
+2025-07-20T22:32:56.096+02:00  INFO 14313 --- [           main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@2787abe4] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+Hibernate: create table game_history (game_id bigint not null, event varchar(255))
+Hibernate: create table game_players (game_id bigint not null, player_id varchar(255))
+Hibernate: create table game_tiles (defense_bonus integer, has_psi_states boolean, is_locked boolean, is_temporal_zone boolean, lock_duration integer, movement_cost integer, temporal_energy_bonus integer, x integer not null, y integer not null, game_id bigint, id bigint generated by default as identity, building_owner varchar(255), building_type varchar(255), temporal_zone_type varchar(255), terrain varchar(255), primary key (id))
+Hibernate: create table games (current_turn integer, map_height integer, map_width integer, max_players integer, created_at timestamp(6), ended_at timestamp(6), id bigint generated by default as identity, started_at timestamp(6), current_player varchar(255), current_timeline varchar(255), game_name varchar(255) not null, status varchar(255) check (status in ('WAITING','ACTIVE','PAUSED','FINISHED','CANCELLED')), winner varchar(255), primary key (id))
+Hibernate: create table hero_abilities (hero_id bigint not null, ability varchar(255))
+Hibernate: create table hero_inventory (hero_id bigint not null, item varchar(255))
+Hibernate: create table hero_status_effects (duration integer, hero_id bigint not null, effect_name varchar(255) not null, primary key (hero_id, effect_name))
+Hibernate: create table hero_titles (hero_id bigint not null, title varchar(255))
+Hibernate: create table heroes (causality_awareness integer, current_day integer, days_traveled integer, has_observation_ability boolean, health integer, max_health integer, max_movement_points integer, max_temporal_energy integer, movement_points integer, movement_points_per_day integer, observation_range integer, position_x integer, position_y integer, temporal_energy integer, temporal_immunity boolean, temporal_vision_range integer, vision_radius integer, game_id bigint, id bigint generated by default as identity, name varchar(255) not null, player_id varchar(255), status varchar(255) check (status in ('ACTIVE','TEMPORAL_SHIFT','QUANTUM_SUPERPOSITION','COLLAPSED','DEAD','PARADOX_DEATH','SEALED')), timeline_branch varchar(255), primary key (id))
+Hibernate: create table psi_states (amplitude_imaginary float(53), amplitude_real float(53), delta_t integer, probability float(53), target_x integer, target_y integer, use_complex_amplitude boolean, created_at timestamp(6), game_id bigint, id bigint generated by default as identity, action_type varchar(255), branch_id varchar(255), collapse_trigger varchar(255), expression TEXT, owner_hero varchar(255), psi_id varchar(255) not null unique, status varchar(255) check (status in ('ACTIVE','COLLAPSED','TRIGGERED','EXPIRED')), primary key (id))
+Hibernate: create table temporal_artifacts (effect_duration integer, effect_power integer, effect_radius integer, position_x integer, position_y integer, remaining_duration integer, temporal_energy_cost integer, activated_at timestamp(6), created_at timestamp(6), game_id bigint, id bigint generated by default as identity, artifact_id varchar(255) not null unique, description TEXT, name varchar(255) not null, owner_id varchar(255), status varchar(255) check (status in ('INACTIVE','ACTIVE','EXHAUSTED','DESTROYED','CHARGING')), type varchar(255) not null check (type in ('VEIL','ANCHOR_TOWER','WIGNER_EYE','TEMPORAL_SWORD','CHRONOS_SHIELD','QUANTUM_MIRROR','TEMPORAL_COMPASS','CAUSAL_DISRUPTOR')), primary key (id))
+Hibernate: create table tile_effects (tile_id bigint not null, effect varchar(255))
+Hibernate: create table tile_items (tile_id bigint not null, item varchar(255))
+Hibernate: create table tile_occupants (tile_id bigint not null, occupant varchar(255))
+Hibernate: alter table if exists forged_objects add constraint FKhdsqckahlo2lb6j4klgulaffn foreign key (game_id) references games
+Hibernate: alter table if exists game_history add constraint FK1aab4jlhfgjg0ui3p4o23uqdp foreign key (game_id) references games
+Hibernate: alter table if exists game_players add constraint FKrbr2flqdav5ovyjas7q92u64r foreign key (game_id) references games
+Hibernate: alter table if exists game_tiles add constraint FK9jnp7yfteauo45smvmxa8710m foreign key (game_id) references games
+Hibernate: alter table if exists hero_abilities add constraint FK4wk3wflmkij7kl93hmbg29y9j foreign key (hero_id) references heroes
+Hibernate: alter table if exists hero_inventory add constraint FKox21x0dd4fg7w81h3a8o6chu foreign key (hero_id) references heroes
+Hibernate: alter table if exists hero_status_effects add constraint FKhwhtej8yql47i6ubjqd6gmj1j foreign key (hero_id) references heroes
+Hibernate: alter table if exists hero_titles add constraint FKc69wtssobfnv2dhrvnspasx9t foreign key (hero_id) references heroes
+Hibernate: alter table if exists heroes add constraint FKb88jgdc3dfmmhbnrpl6u5sjdn foreign key (game_id) references games
+Hibernate: alter table if exists psi_states add constraint FK9kbp67wo94i0jk9w4v3ja4meq foreign key (game_id) references games
+Hibernate: alter table if exists temporal_artifacts add constraint FK4gwvr3vnipo301cwl6hnvtyn1 foreign key (game_id) references games
+Hibernate: alter table if exists tile_effects add constraint FK3s6ndlrmj9lbvuqiew9vp9s98 foreign key (tile_id) references game_tiles
+Hibernate: alter table if exists tile_items add constraint FK1b41902nqng8okqb0g1q3dqj6 foreign key (tile_id) references game_tiles
+Hibernate: alter table if exists tile_occupants add constraint FKia56skupqk3qxypotqpovr3gb foreign key (tile_id) references game_tiles
+2025-07-20T22:32:56.135+02:00  INFO 14313 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-20T22:32:56.398+02:00  INFO 14313 --- [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+✅ Héros GROFI chargé: Jean-Grofignon (LEGENDARY)
+✅ Héros GROFI chargé: The Dude (compagnon)
+✅ Héros GROFI chargé: Vince Vega (compagnon)
+✅ Héros GROFI chargé: Walter (compagnon)
+🦸 4 héros GROFI chargés avec succès
+2025-07-20T22:32:57.047+02:00  WARN 14313 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-20T22:32:57.128+02:00 DEBUG 14313 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 127 mappings in 'requestMappingHandlerMapping'
+2025-07-20T22:32:57.205+02:00 DEBUG 14313 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2025-07-20T22:32:57.225+02:00 DEBUG 14313 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-07-20T22:32:57.244+02:00 DEBUG 14313 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-07-20T22:32:57.274+02:00  INFO 14313 --- [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:heroesdb'
+2025-07-20T22:32:57.313+02:00  INFO 14313 --- [           main] .h.t.i.BatailleTemporelleIntegrationTest : Started BatailleTemporelleIntegrationTest in 3.436 seconds (process running for 4.14)
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+🔧 Setup du test...
+📊 Scénario chargé: Bataille Temporelle
+⚔️  Artefacts temporels chargés: 7
+🐉 Créatures chargées: 4
+📜 Scripts .hots chargés:
+   - Setup: 23 commandes
+   - Combat: 25 commandes
+   - Finale: 41 commandes
+Hibernate: insert into games (created_at,current_player,current_timeline,current_turn,ended_at,game_name,map_height,map_width,max_players,started_at,status,winner,id) values (?,?,?,?,?,?,?,?,?,?,?,?,default)
+🎮 Partie créée: Bataille Temporelle Test (ID: 1)
+✅ Setup terminé
+
+🔧 TEST 1: Phase de Setup
+=========================
+📜 Exécution: HERO(Arthur)
+Hibernate: insert into heroes (causality_awareness,current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,temporal_immunity,temporal_vision_range,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+✅ Succès: Game hero Arthur created successfully
+📜 Exécution: HERO(Morgana)
+Hibernate: insert into heroes (causality_awareness,current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,temporal_immunity,temporal_vision_range,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+✅ Succès: Game hero Morgana created successfully
+📜 Exécution: MOV(Arthur, @5,5)
+Hibernate: insert into game_tiles (building_owner,building_type,defense_bonus,game_id,has_psi_states,is_locked,is_temporal_zone,lock_duration,movement_cost,temporal_energy_bonus,temporal_zone_type,terrain,x,y,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+✅ Succès: Game hero Arthur moved to (5,5)
+📜 Exécution: MOV(Morgana, @15,15)
+Hibernate: insert into game_tiles (building_owner,building_type,defense_bonus,game_id,has_psi_states,is_locked,is_temporal_zone,lock_duration,movement_cost,temporal_energy_bonus,temporal_zone_type,terrain,x,y,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+✅ Succès: Game hero Morgana moved to (15,15)
+📜 Exécution: EQUIP(Arthur, temporal_sword)
+❌ Échec: Game hero not found: temporal_sword
+📜 Exécution: EQUIP(Arthur, mystic_orb)
+❌ Échec: Game hero not found: mystic_orb
+📜 Exécution: EQUIP(Morgana, chrono_staff)
+❌ Échec: Game hero not found: chrono_staff
+📜 Exécution: EQUIP(Morgana, reality_gem)
+❌ Échec: Game hero not found: reality_gem
+📜 Exécution: CREATE(CREATURE, DragonRouge, @10,10)
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+✅ Succès: Game creature DragonRouge created at (10,10)
+📜 Exécution: CREATE(CREATURE, PhantomWarriors, @8,12)
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+✅ Succès: Game creature PhantomWarriors created at (8,12)
+📜 Exécution: CREATE(ARTIFACT, LameAvantMonde, @10,10)
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+✅ Succès: Game entity created: ARTIFACT LameAvantMonde
+📜 Exécution: CREATE(ARTIFACT, HorlogeInversee, @3,17)
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+✅ Succès: Game entity created: ARTIFACT HorlogeInversee
+📜 Exécution: CREATE(ARTIFACT, OrbeProbabilite, @12,6)
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+✅ Succès: Game entity created: ARTIFACT OrbeProbabilite
+📜 Exécution: CREATE(ZONE, TemporalZone, @9,9, 3x3)
+❌ Échec: Invalid classic game script command
+📜 Exécution: CREATE(ZONE, QuantumField, @1,1, 2x2)
+❌ Échec: Invalid classic game script command
+📜 Exécution: ψ001: ⊙(Δt+1 @6,5 ⟶ MOV(Arthur, @6,5))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=1, collapsedStates=0, totalStates=1, collapseRate=0.0, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ001 created successfully
+📜 Exécution: ψ002: ⊙(Δt+2 @14,15 ⟶ MOV(Morgana, @14,15))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=2, collapsedStates=0, totalStates=2, collapseRate=0.0, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ002 created successfully
+📜 Exécution: ⟨ψ001 | OBSERVE(DragonRouge) ⟩ → †ψ001
+Hibernate: insert into game_tiles (building_owner,building_type,defense_bonus,game_id,has_psi_states,is_locked,is_temporal_zone,lock_duration,movement_cost,temporal_energy_bonus,temporal_zone_type,terrain,x,y,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=1, collapsedStates=1, totalStates=2, collapseRate=0.5, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ001 collapsed successfully
+📜 Exécution: LOG("Bataille Temporelle - Setup terminé")
+❌ Échec: Invalid classic game script command
+📜 Exécution: LOG("Héros créés: Arthur, Morgana")
+❌ Échec: Invalid classic game script command
+📜 Exécution: LOG("Créatures placées: Dragon Rouge, Guerriers Fantômes")
+❌ Échec: Invalid classic game script command
+📜 Exécution: LOG("Artefacts temporels: 3 objets placés")
+❌ Échec: Invalid classic game script command
+📜 Exécution: LOG("États ψ actifs: 2 superpositions")
+❌ Échec: Invalid quantum temporal script
+
+📊 Résultats Setup:
+   - Commandes exécutées: 12/23
+   - Taux de réussite: 52.17391304347826%
+Hibernate: update heroes set causality_awareness=?,current_day=?,days_traveled=?,game_id=?,has_observation_ability=?,health=?,max_health=?,max_movement_points=?,max_temporal_energy=?,movement_points=?,movement_points_per_day=?,name=?,observation_range=?,player_id=?,position_x=?,position_y=?,status=?,temporal_energy=?,temporal_immunity=?,temporal_vision_range=?,timeline_branch=?,vision_radius=? where id=?
+Hibernate: update heroes set causality_awareness=?,current_day=?,days_traveled=?,game_id=?,has_observation_ability=?,health=?,max_health=?,max_movement_points=?,max_temporal_energy=?,movement_points=?,movement_points_per_day=?,name=?,observation_range=?,player_id=?,position_x=?,position_y=?,status=?,temporal_energy=?,temporal_immunity=?,temporal_vision_range=?,timeline_branch=?,vision_radius=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: insert into tile_occupants (tile_id,occupant) values (?,?)
+Hibernate: insert into tile_occupants (tile_id,occupant) values (?,?)
+Hibernate: select h1_0.id,h1_0.causality_awareness,h1_0.current_day,h1_0.days_traveled,h1_0.game_id,h1_0.has_observation_ability,h1_0.health,h1_0.max_health,h1_0.max_movement_points,h1_0.max_temporal_energy,h1_0.movement_points,h1_0.movement_points_per_day,h1_0.name,h1_0.observation_range,h1_0.player_id,h1_0.position_x,h1_0.position_y,h1_0.status,h1_0.temporal_energy,h1_0.temporal_immunity,h1_0.temporal_vision_range,h1_0.timeline_branch,h1_0.vision_radius from heroes h1_0 where h1_0.game_id=?
+Hibernate: select ps1_0.id,ps1_0.action_type,ps1_0.branch_id,ps1_0.collapse_trigger,ps1_0.amplitude_imaginary,ps1_0.amplitude_real,ps1_0.created_at,ps1_0.delta_t,ps1_0.expression,ps1_0.game_id,ps1_0.owner_hero,ps1_0.probability,ps1_0.psi_id,ps1_0.status,ps1_0.target_x,ps1_0.target_y,ps1_0.use_complex_amplitude from psi_states ps1_0 where ps1_0.game_id=?
+✅ Phase de Setup validée
+🧹 Nettoyage du test...
+✅ Nettoyage terminé
+🔧 Setup du test...
+📊 Scénario chargé: Bataille Temporelle
+⚔️  Artefacts temporels chargés: 7
+🐉 Créatures chargées: 4
+📜 Scripts .hots chargés:
+   - Setup: 23 commandes
+   - Combat: 25 commandes
+   - Finale: 41 commandes
+Hibernate: insert into games (created_at,current_player,current_timeline,current_turn,ended_at,game_name,map_height,map_width,max_players,started_at,status,winner,id) values (?,?,?,?,?,?,?,?,?,?,?,?,default)
+🎮 Partie créée: Bataille Temporelle Test (ID: 2)
+✅ Setup terminé
+
+⚔️  TEST 2: Phase de Combat
+===========================
+Hibernate: insert into heroes (causality_awareness,current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,temporal_immunity,temporal_vision_range,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+Hibernate: insert into heroes (causality_awareness,current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,temporal_immunity,temporal_vision_range,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+Hibernate: insert into game_tiles (building_owner,building_type,defense_bonus,game_id,has_psi_states,is_locked,is_temporal_zone,lock_duration,movement_cost,temporal_energy_bonus,temporal_zone_type,terrain,x,y,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+Hibernate: insert into game_tiles (building_owner,building_type,defense_bonus,game_id,has_psi_states,is_locked,is_temporal_zone,lock_duration,movement_cost,temporal_energy_bonus,temporal_zone_type,terrain,x,y,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=1, collapsedStates=0, totalStates=1, collapseRate=0.0, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=2, collapsedStates=0, totalStates=2, collapseRate=0.0, collapsesByType={}}
+Hibernate: insert into game_tiles (building_owner,building_type,defense_bonus,game_id,has_psi_states,is_locked,is_temporal_zone,lock_duration,movement_cost,temporal_energy_bonus,temporal_zone_type,terrain,x,y,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=1, collapsedStates=1, totalStates=2, collapseRate=0.5, collapsesByType={}}
+📜 Exécution: ψ003: ⊙(Δt+1 @6,6 ⟶ MOV(Arthur, @6,6))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=2, collapsedStates=1, totalStates=3, collapseRate=0.3333333333333333, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ003 created successfully
+📜 Exécution: ψ004: ⊙(Δt+1 @6,4 ⟶ MOV(Arthur, @6,4))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=3, collapsedStates=1, totalStates=4, collapseRate=0.25, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ004 created successfully
+📜 Exécution: ψ005: ⊙(Δt+1 @7,5 ⟶ MOV(Arthur, @7,5))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=4, collapsedStates=1, totalStates=5, collapseRate=0.2, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ005 created successfully
+📜 Exécution: Π(HERO_OBSERVES(Morgana, @6,6)) ⇒ †ψ003
+Hibernate: insert into game_tiles (building_owner,building_type,defense_bonus,game_id,has_psi_states,is_locked,is_temporal_zone,lock_duration,movement_cost,temporal_energy_bonus,temporal_zone_type,terrain,x,y,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=3, collapsedStates=2, totalStates=5, collapseRate=0.4, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ003 collapsed successfully
+📜 Exécution: USE(ARTIFACT, temporal_sword, HERO:Arthur)
+📊 Statistiques collapse causale: {activeStates=3, collapsedStates=2, totalStates=5, collapseRate=0.4, collapsesByType={}}
+✅ Succès: ⚔️ Épée Temporelle activée
+📜 Exécution: ψ006: ⊙(Δt+1 @9,9 ⟶ BATTLE(Arthur, DragonRouge))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=4, collapsedStates=2, totalStates=6, collapseRate=0.3333333333333333, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ006 created successfully
+📜 Exécution: ψ007: ⊙(Δt+2 @10,8 ⟶ CAST(SPELL, quantum_leap, TARGET:@10,8, HERO:Arthur))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=5, collapsedStates=2, totalStates=7, collapseRate=0.2857142857142857, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ007 created successfully
+📜 Exécution: ψ008: ⊙(Δt+2 @10,12 ⟶ CAST(SPELL, time_anchor, TARGET:@10,12, HERO:Arthur))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=6, collapsedStates=2, totalStates=8, collapseRate=0.25, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ008 created successfully
+📜 Exécution: ψ009: ⊙(Δt+1 @14,14 ⟶ MOV(Morgana, @14,14))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=7, collapsedStates=2, totalStates=9, collapseRate=0.2222222222222222, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ009 created successfully
+📜 Exécution: USE(ARTIFACT, chrono_staff, HERO:Morgana)
+📊 Statistiques collapse causale: {activeStates=7, collapsedStates=2, totalStates=9, collapseRate=0.2222222222222222, collapsesByType={}}
+✅ Succès: 🪄 Bâton Chrono activé
+📜 Exécution: ψ010: ⊙(Δt+2 @11,11 ⟶ CAST(SPELL, temporal_shield, TARGET:Morgana, HERO:Morgana))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=8, collapsedStates=2, totalStates=10, collapseRate=0.2, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ010 created successfully
+📜 Exécution: ψ011: ⊙(Δt+3 @10,10 ⟶ COLLECT(LameAvantMonde, 1, PLAYER:Arthur))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=9, collapsedStates=2, totalStates=11, collapseRate=0.18181818181818182, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ011 created successfully
+📜 Exécution: ψ012: ⊙(Δt+3 @10,10 ⟶ COLLECT(LameAvantMonde, 1, PLAYER:Morgana))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=10, collapsedStates=2, totalStates=12, collapseRate=0.16666666666666666, collapsesByType={}}
+🌀 Collapses causales détectés:
+  - CollapseResult[INTERACTION] ψ012: Unknown action: COLLECT (success=true)
+✅ Succès: Quantum temporal state ψ012 created successfully
+📜 Exécution: †ψ011
+❌ Échec: Quantum temporal state not found or already collapsed: ψ011
+📜 Exécution: †ψ012
+❌ Échec: Quantum temporal state not found or already collapsed: ψ012
+📜 Exécution: ψ013: ⊙(Δt+1 @8,12 ⟶ BATTLE(Arthur, PhantomWarriors))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=9, collapsedStates=4, totalStates=13, collapseRate=0.3076923076923077, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ013 created successfully
+📜 Exécution: †ψ013  # Collapse immédiat pour battle fantôme
+📊 Statistiques collapse causale: {activeStates=8, collapsedStates=5, totalStates=13, collapseRate=0.38461538461538464, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ013 collapsed successfully
+📜 Exécution: USE(ARTIFACT, HorlogeInversee, HERO:Morgana)
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: HorlogeInversee
+❌ Artefact HorlogeInversee non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: HorlogeInversee
+📊 Statistiques collapse causale: {activeStates=8, collapsedStates=5, totalStates=13, collapseRate=0.38461538461538464, collapsesByType={}}
+✅ Succès: 🎲 Artefact HorlogeInversee activé (mode générique)
+📜 Exécution: ψ014: ⊙(Δt+1 @12,14 ⟶ MOV(Morgana, @12,14))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=9, collapsedStates=5, totalStates=14, collapseRate=0.35714285714285715, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ014 created successfully
+📜 Exécution: ψ015: ⊙(Δt+1 @11,13 ⟶ MOV(Arthur, @11,13))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=10, collapsedStates=5, totalStates=15, collapseRate=0.3333333333333333, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ015 created successfully
+📜 Exécution: ψ016: ⊙(Δt+1 @16,16 ⟶ MOV(Morgana, @16,16))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=11, collapsedStates=5, totalStates=16, collapseRate=0.3125, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ016 created successfully
+📜 Exécution: ψ017: ⊙(Δt+2 @12,6 ⟶ COLLECT(OrbeProbabilite, 1, PLAYER:Morgana))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=12, collapsedStates=5, totalStates=17, collapseRate=0.29411764705882354, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ017 created successfully
+📜 Exécution: USE(ARTIFACT, OrbeProbabilite, HERO:Morgana)
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: OrbeProbabilite
+❌ Artefact OrbeProbabilite non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: OrbeProbabilite
+📊 Statistiques collapse causale: {activeStates=12, collapsedStates=5, totalStates=17, collapseRate=0.29411764705882354, collapsesByType={}}
+✅ Succès: 🎲 Artefact OrbeProbabilite activé (mode générique)
+📜 Exécution: ψ018: (0.9+0.3i) ⊙(Δt+1 @11,10 ⟶ BATTLE(Morgana, DragonRouge))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=13, collapsedStates=5, totalStates=18, collapseRate=0.2777777777777778, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ018 created successfully
+📜 Exécution: ψ019: (0.8+0.6i) ⊙(Δt+2 @10,10 ⟶ BATTLE(Arthur, Morgana))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=14, collapsedStates=5, totalStates=19, collapseRate=0.2631578947368421, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ019 created successfully
+
+📊 Résultats Combat:
+   - Commandes exécutées: 23/25
+   - États ψ créés: 0
+   - Collapses déclenchés: 2
+   - Taux de réussite: 92.0%
+Hibernate: update heroes set causality_awareness=?,current_day=?,days_traveled=?,game_id=?,has_observation_ability=?,health=?,max_health=?,max_movement_points=?,max_temporal_energy=?,movement_points=?,movement_points_per_day=?,name=?,observation_range=?,player_id=?,position_x=?,position_y=?,status=?,temporal_energy=?,temporal_immunity=?,temporal_vision_range=?,timeline_branch=?,vision_radius=? where id=?
+Hibernate: update heroes set causality_awareness=?,current_day=?,days_traveled=?,game_id=?,has_observation_ability=?,health=?,max_health=?,max_movement_points=?,max_temporal_energy=?,movement_points=?,movement_points_per_day=?,name=?,observation_range=?,player_id=?,position_x=?,position_y=?,status=?,temporal_energy=?,temporal_immunity=?,temporal_vision_range=?,timeline_branch=?,vision_radius=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: insert into hero_inventory (hero_id,item) values (?,?)
+Hibernate: insert into hero_inventory (hero_id,item) values (?,?)
+Hibernate: insert into hero_inventory (hero_id,item) values (?,?)
+Hibernate: insert into hero_inventory (hero_id,item) values (?,?)
+Hibernate: insert into hero_inventory (hero_id,item) values (?,?)
+Hibernate: insert into hero_inventory (hero_id,item) values (?,?)
+Hibernate: insert into tile_occupants (tile_id,occupant) values (?,?)
+Hibernate: insert into tile_occupants (tile_id,occupant) values (?,?)
+Hibernate: select ps1_0.id,ps1_0.action_type,ps1_0.branch_id,ps1_0.collapse_trigger,ps1_0.amplitude_imaginary,ps1_0.amplitude_real,ps1_0.created_at,ps1_0.delta_t,ps1_0.expression,ps1_0.game_id,ps1_0.owner_hero,ps1_0.probability,ps1_0.psi_id,ps1_0.status,ps1_0.target_x,ps1_0.target_y,ps1_0.use_complex_amplitude from psi_states ps1_0 where ps1_0.game_id=?
+🧹 Nettoyage du test...
+✅ Nettoyage terminé
+🔧 Setup du test...
+📊 Scénario chargé: Bataille Temporelle
+⚔️  Artefacts temporels chargés: 7
+🐉 Créatures chargées: 4
+📜 Scripts .hots chargés:
+   - Setup: 23 commandes
+   - Combat: 25 commandes
+   - Finale: 41 commandes
+Hibernate: insert into games (created_at,current_player,current_timeline,current_turn,ended_at,game_name,map_height,map_width,max_players,started_at,status,winner,id) values (?,?,?,?,?,?,?,?,?,?,?,?,default)
+🎮 Partie créée: Bataille Temporelle Test (ID: 3)
+✅ Setup terminé
+
+🏁 TEST 3: Phase Finale
+========================
+Hibernate: insert into heroes (causality_awareness,current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,temporal_immunity,temporal_vision_range,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+Hibernate: insert into heroes (causality_awareness,current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,temporal_immunity,temporal_vision_range,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+Hibernate: insert into game_tiles (building_owner,building_type,defense_bonus,game_id,has_psi_states,is_locked,is_temporal_zone,lock_duration,movement_cost,temporal_energy_bonus,temporal_zone_type,terrain,x,y,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+Hibernate: insert into game_tiles (building_owner,building_type,defense_bonus,game_id,has_psi_states,is_locked,is_temporal_zone,lock_duration,movement_cost,temporal_energy_bonus,temporal_zone_type,terrain,x,y,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=1, collapsedStates=0, totalStates=1, collapseRate=0.0, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=2, collapsedStates=0, totalStates=2, collapseRate=0.0, collapsesByType={}}
+Hibernate: insert into game_tiles (building_owner,building_type,defense_bonus,game_id,has_psi_states,is_locked,is_temporal_zone,lock_duration,movement_cost,temporal_energy_bonus,temporal_zone_type,terrain,x,y,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=1, collapsedStates=1, totalStates=2, collapseRate=0.5, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=2, collapsedStates=1, totalStates=3, collapseRate=0.3333333333333333, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=3, collapsedStates=1, totalStates=4, collapseRate=0.25, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=4, collapsedStates=1, totalStates=5, collapseRate=0.2, collapsesByType={}}
+Hibernate: insert into game_tiles (building_owner,building_type,defense_bonus,game_id,has_psi_states,is_locked,is_temporal_zone,lock_duration,movement_cost,temporal_energy_bonus,temporal_zone_type,terrain,x,y,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=3, collapsedStates=2, totalStates=5, collapseRate=0.4, collapsesByType={}}
+📊 Statistiques collapse causale: {activeStates=3, collapsedStates=2, totalStates=5, collapseRate=0.4, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=4, collapsedStates=2, totalStates=6, collapseRate=0.3333333333333333, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=5, collapsedStates=2, totalStates=7, collapseRate=0.2857142857142857, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=6, collapsedStates=2, totalStates=8, collapseRate=0.25, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=7, collapsedStates=2, totalStates=9, collapseRate=0.2222222222222222, collapsesByType={}}
+📊 Statistiques collapse causale: {activeStates=7, collapsedStates=2, totalStates=9, collapseRate=0.2222222222222222, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=8, collapsedStates=2, totalStates=10, collapseRate=0.2, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=9, collapsedStates=2, totalStates=11, collapseRate=0.18181818181818182, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=10, collapsedStates=2, totalStates=12, collapseRate=0.16666666666666666, collapsesByType={}}
+🌀 Collapses causales détectés:
+  - CollapseResult[INTERACTION] ψ012: Unknown action: COLLECT (success=true)
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=9, collapsedStates=4, totalStates=13, collapseRate=0.3076923076923077, collapsesByType={}}
+📊 Statistiques collapse causale: {activeStates=8, collapsedStates=5, totalStates=13, collapseRate=0.38461538461538464, collapsesByType={}}
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: HorlogeInversee
+❌ Artefact HorlogeInversee non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: HorlogeInversee
+📊 Statistiques collapse causale: {activeStates=8, collapsedStates=5, totalStates=13, collapseRate=0.38461538461538464, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=9, collapsedStates=5, totalStates=14, collapseRate=0.35714285714285715, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=10, collapsedStates=5, totalStates=15, collapseRate=0.3333333333333333, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=11, collapsedStates=5, totalStates=16, collapseRate=0.3125, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=12, collapsedStates=5, totalStates=17, collapseRate=0.29411764705882354, collapsesByType={}}
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: OrbeProbabilite
+❌ Artefact OrbeProbabilite non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: OrbeProbabilite
+📊 Statistiques collapse causale: {activeStates=12, collapsedStates=5, totalStates=17, collapseRate=0.29411764705882354, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=13, collapsedStates=5, totalStates=18, collapseRate=0.2777777777777778, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=14, collapsedStates=5, totalStates=19, collapseRate=0.2631578947368421, collapsesByType={}}
+📜 Exécution: HERO(Arthur)
+Hibernate: insert into heroes (causality_awareness,current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,temporal_immunity,temporal_vision_range,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=14, collapsedStates=5, totalStates=19, collapseRate=0.2631578947368421, collapsesByType={}}
+✅ Succès: Game hero Arthur created successfully
+📜 Exécution: HERO(Morgana)
+Hibernate: insert into heroes (causality_awareness,current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,temporal_immunity,temporal_vision_range,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=14, collapsedStates=5, totalStates=19, collapseRate=0.2631578947368421, collapsesByType={}}
+✅ Succès: Game hero Morgana created successfully
+📜 Exécution: MOV(Arthur, @8,8)
+🗡️ Épée temporelle détectée! Movement +10 (Jean approuve)
+Hibernate: insert into game_tiles (building_owner,building_type,defense_bonus,game_id,has_psi_states,is_locked,is_temporal_zone,lock_duration,movement_cost,temporal_energy_bonus,temporal_zone_type,terrain,x,y,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=14, collapsedStates=5, totalStates=19, collapseRate=0.2631578947368421, collapsesByType={}}
+✅ Succès: Game hero Arthur moved to (8,8)
+📜 Exécution: MOV(Morgana, @16,16)
+Hibernate: insert into game_tiles (building_owner,building_type,defense_bonus,game_id,has_psi_states,is_locked,is_temporal_zone,lock_duration,movement_cost,temporal_energy_bonus,temporal_zone_type,terrain,x,y,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=14, collapsedStates=5, totalStates=19, collapseRate=0.2631578947368421, collapsesByType={}}
+✅ Succès: Game hero Morgana moved to (16,16)
+📜 Exécution: ψ100: (0.8+0.6i) ⊙(Δt+1 @12,12 ⟶ MOV(Arthur, @12,12))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=15, collapsedStates=5, totalStates=20, collapseRate=0.25, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ100 created successfully
+📜 Exécution: ψ101: (0.6+0.8i) ⊙(Δt+1 @12,12 ⟶ MOV(Morgana, @12,12))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=16, collapsedStates=5, totalStates=21, collapseRate=0.23809523809523808, collapsesByType={}}
+Hibernate: insert into game_tiles (building_owner,building_type,defense_bonus,game_id,has_psi_states,is_locked,is_temporal_zone,lock_duration,movement_cost,temporal_energy_bonus,temporal_zone_type,terrain,x,y,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+🌀 Collapses causales détectés:
+  - CollapseResult[INTERACTION] ψ101: Héros Morgana déplacé vers (12,12) via collapse causale (success=true)
+✅ Succès: Quantum temporal state ψ101 created successfully
+📜 Exécution: USE(ARTIFACT, LameAvantMonde, HERO:Arthur)
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: LameAvantMonde
+❌ Artefact LameAvantMonde non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: LameAvantMonde
+📊 Statistiques collapse causale: {activeStates=14, collapsedStates=7, totalStates=21, collapseRate=0.3333333333333333, collapsesByType={}}
+✅ Succès: 🎲 Artefact LameAvantMonde activé (mode générique)
+📜 Exécution: USE(ARTIFACT, BatonDuTemps, HERO:Morgana)
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: BatonDuTemps
+❌ Artefact BatonDuTemps non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: BatonDuTemps
+📊 Statistiques collapse causale: {activeStates=14, collapsedStates=7, totalStates=21, collapseRate=0.3333333333333333, collapsesByType={}}
+✅ Succès: 🎲 Artefact BatonDuTemps activé (mode générique)
+📜 Exécution: ψ102: (0.9+0.3i) ⊙(Δt+2 @10,10 ⟶ CREATE(CREATURE, DragonTemporel, @10,10))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=15, collapsedStates=7, totalStates=22, collapseRate=0.3181818181818182, collapsesByType={}}
+🌀 Collapses causales détectés:
+  - CollapseResult[INTERACTION] ψ019: Bataille exécutée en (10,10) via collapse causale (success=true)
+✅ Succès: Quantum temporal state ψ102 created successfully
+📜 Exécution: ψ103: (0.7+0.7i) ⊙(Δt+2 @14,14 ⟶ CREATE(CREATURE, PhoenixQuantique, @14,14))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=14, collapsedStates=9, totalStates=23, collapseRate=0.391304347826087, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ103 created successfully
+📜 Exécution: ψ104: (0.95+0.25i) ⊙(Δt+3 @12,12 ⟶ BATTLE(Arthur, Morgana))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=15, collapsedStates=9, totalStates=24, collapseRate=0.375, collapsesByType={}}
+🌀 Collapses causales détectés:
+  - CollapseResult[OBSERVATION] ψ104: Bataille exécutée en (12,12) via collapse causale (success=true)
+✅ Succès: Quantum temporal state ψ104 created successfully
+📜 Exécution: ψ105: ⊙(Δt+3 @12,12 ⟶ BATTLE(DragonTemporel, PhoenixQuantique))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=15, collapsedStates=10, totalStates=25, collapseRate=0.4, collapsesByType={}}
+🌀 Collapses causales détectés:
+  - CollapseResult[OBSERVATION] ψ105: Bataille exécutée en (12,12) via collapse causale (success=true)
+✅ Succès: Quantum temporal state ψ105 created successfully
+📜 Exécution: ψ106: (0.85+0.5i) ⊙(Δt+4 @12,12 ⟶ CAST(SPELL, Apocalypse_Temporelle, TARGET:@12,12, HERO:Arthur))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=15, collapsedStates=11, totalStates=26, collapseRate=0.4230769230769231, collapsesByType={}}
+🌀 Collapses causales détectés:
+  - CollapseResult[OBSERVATION] ψ106: Unknown action: CAST (success=true)
+✅ Succès: Quantum temporal state ψ106 created successfully
+📜 Exécution: ψ107: (0.8+0.55i) ⊙(Δt+4 @12,12 ⟶ CAST(SPELL, Reset_Causal, TARGET:@12,12, HERO:Morgana))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=15, collapsedStates=12, totalStates=27, collapseRate=0.4444444444444444, collapsesByType={}}
+🌀 Collapses causales détectés:
+  - CollapseResult[OBSERVATION] ψ107: Unknown action: CAST (success=true)
+✅ Succès: Quantum temporal state ψ107 created successfully
+📜 Exécution: Π(BATTLE_ENDS(Arthur, Morgana)) ⇒ †ψ104
+❌ Échec: Quantum temporal state not found or already collapsed: ψ104
+📜 Exécution: Π(SPELL_CAST(Apocalypse_Temporelle)) ⇒ †ψ106
+❌ Échec: Quantum temporal state not found or already collapsed: ψ106
+📜 Exécution: Π(SPELL_CAST(Reset_Causal)) ⇒ †ψ107
+❌ Échec: Quantum temporal state not found or already collapsed: ψ107
+📜 Exécution: ψ108: (0.6+0.8i) ⊙(Δt+5 @10,10 ⟶ CREATE(BUILDING, ZoneTemporelle, @10,10))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=15, collapsedStates=13, totalStates=28, collapseRate=0.4642857142857143, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ108 created successfully
+📜 Exécution: ψ109: (0.8+0.6i) ⊙(Δt+5 @14,14 ⟶ CREATE(BUILDING, ZoneTemporelle, @14,14))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=16, collapsedStates=13, totalStates=29, collapseRate=0.4482758620689655, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ109 created successfully
+📜 Exécution: ψ110: ⊙(Δt+6 @8,12 ⟶ COLLECT(FragmentTemporel, 3, PLAYER:Arthur))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=17, collapsedStates=13, totalStates=30, collapseRate=0.43333333333333335, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ110 created successfully
+📜 Exécution: ψ111: ⊙(Δt+6 @16,12 ⟶ COLLECT(FragmentTemporel, 3, PLAYER:Morgana))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=18, collapsedStates=13, totalStates=31, collapseRate=0.41935483870967744, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ111 created successfully
+📜 Exécution: ψ112: ⊙(Δt+7 @6,6 ⟶ BUILD(BUILDING, MonumentVictoire, @6,6, PLAYER:Arthur))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=19, collapsedStates=13, totalStates=32, collapseRate=0.40625, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ112 created successfully
+📜 Exécution: ψ113: ⊙(Δt+7 @18,18 ⟶ BUILD(BUILDING, MonumentVictoire, @18,18, PLAYER:Morgana))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=20, collapsedStates=13, totalStates=33, collapseRate=0.3939393939393939, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ113 created successfully
+📜 Exécution: ψ114: (0.707+0.707i) ⊙(Δt+8 @12,12 ⟶ BATTLE(Arthur, ZoneTemporelle))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=21, collapsedStates=13, totalStates=34, collapseRate=0.38235294117647056, collapsesByType={}}
+🌀 Collapses causales détectés:
+  - CollapseResult[OBSERVATION] ψ114: Bataille exécutée en (12,12) via collapse causale (success=true)
+✅ Succès: Quantum temporal state ψ114 created successfully
+📜 Exécution: ψ115: (0.707-0.707i) ⊙(Δt+8 @12,12 ⟶ BATTLE(Morgana, ZoneTemporelle))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=21, collapsedStates=14, totalStates=35, collapseRate=0.4, collapsesByType={}}
+🌀 Collapses causales détectés:
+  - CollapseResult[OBSERVATION] ψ115: Bataille exécutée en (12,12) via collapse causale (success=true)
+✅ Succès: Quantum temporal state ψ115 created successfully
+📜 Exécution: †ψ100
+❌ Échec: Quantum temporal state not found or already collapsed: ψ100
+📜 Exécution: †ψ101
+❌ Échec: Quantum temporal state not found or already collapsed: ψ101
+📜 Exécution: †ψ102
+❌ Échec: Quantum temporal state not found or already collapsed: ψ102
+📜 Exécution: †ψ103
+📊 Statistiques collapse causale: {activeStates=19, collapsedStates=16, totalStates=35, collapseRate=0.45714285714285713, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ103 collapsed successfully
+📜 Exécution: †ψ105
+❌ Échec: Quantum temporal state not found or already collapsed: ψ105
+📜 Exécution: †ψ108
+📊 Statistiques collapse causale: {activeStates=18, collapsedStates=17, totalStates=35, collapseRate=0.4857142857142857, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ108 collapsed successfully
+📜 Exécution: †ψ109
+📊 Statistiques collapse causale: {activeStates=17, collapsedStates=18, totalStates=35, collapseRate=0.5142857142857142, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ109 collapsed successfully
+📜 Exécution: †ψ110
+📊 Statistiques collapse causale: {activeStates=16, collapsedStates=19, totalStates=35, collapseRate=0.5428571428571428, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ110 collapsed successfully
+📜 Exécution: †ψ111
+📊 Statistiques collapse causale: {activeStates=15, collapsedStates=20, totalStates=35, collapseRate=0.5714285714285714, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ111 collapsed successfully
+📜 Exécution: †ψ112
+📊 Statistiques collapse causale: {activeStates=14, collapsedStates=21, totalStates=35, collapseRate=0.6, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ112 collapsed successfully
+📜 Exécution: †ψ113
+📊 Statistiques collapse causale: {activeStates=13, collapsedStates=22, totalStates=35, collapseRate=0.6285714285714286, collapsesByType={}}
+✅ Succès: Quantum temporal state ψ113 collapsed successfully
+📜 Exécution: †ψ114
+❌ Échec: Quantum temporal state not found or already collapsed: ψ114
+📜 Exécution: †ψ115
+❌ Échec: Quantum temporal state not found or already collapsed: ψ115
+📜 Exécution: ψ116: (1.0+0.0i) ⊙(Δt+9 @12,12 ⟶ BATTLE(Arthur, Morgana))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=14, collapsedStates=22, totalStates=36, collapseRate=0.6111111111111112, collapsesByType={}}
+🌀 Collapses causales détectés:
+  - CollapseResult[OBSERVATION] ψ116: Bataille exécutée en (12,12) via collapse causale (success=true)
+✅ Succès: Quantum temporal state ψ116 created successfully
+📜 Exécution: Π(HERO_HEALTH(Arthur) > HERO_HEALTH(Morgana)) ⇒ †ψ116
+❌ Échec: Quantum temporal state not found or already collapsed: ψ116
+📜 Exécution: ψ117: (0.9+0.4i) ⊙(Δt+10 @12,12 ⟶ CREATE(BUILDING, MondeUnifie, @12,12))
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=14, collapsedStates=23, totalStates=37, collapseRate=0.6216216216216216, collapsesByType={}}
+🌀 Collapses causales détectés:
+  - CollapseResult[OBSERVATION] ψ117: Entité créée en (12,12) via collapse causale (success=true)
+✅ Succès: Quantum temporal state ψ117 created successfully
+
+📊 Résultats Finale:
+   - Commandes exécutées: 31/41
+   - Taux de réussite: 75.60975609756098%
+Hibernate: update heroes set causality_awareness=?,current_day=?,days_traveled=?,game_id=?,has_observation_ability=?,health=?,max_health=?,max_movement_points=?,max_temporal_energy=?,movement_points=?,movement_points_per_day=?,name=?,observation_range=?,player_id=?,position_x=?,position_y=?,status=?,temporal_energy=?,temporal_immunity=?,temporal_vision_range=?,timeline_branch=?,vision_radius=? where id=?
+Hibernate: update heroes set causality_awareness=?,current_day=?,days_traveled=?,game_id=?,has_observation_ability=?,health=?,max_health=?,max_movement_points=?,max_temporal_energy=?,movement_points=?,movement_points_per_day=?,name=?,observation_range=?,player_id=?,position_x=?,position_y=?,status=?,temporal_energy=?,temporal_immunity=?,temporal_vision_range=?,timeline_branch=?,vision_radius=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update game_tiles set building_owner=?,building_type=?,defense_bonus=?,game_id=?,has_psi_states=?,is_locked=?,is_temporal_zone=?,lock_duration=?,movement_cost=?,temporal_energy_bonus=?,temporal_zone_type=?,terrain=?,x=?,y=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: update psi_states set action_type=?,branch_id=?,collapse_trigger=?,amplitude_imaginary=?,amplitude_real=?,created_at=?,delta_t=?,expression=?,game_id=?,owner_hero=?,probability=?,psi_id=?,status=?,target_x=?,target_y=?,use_complex_amplitude=? where id=?
+Hibernate: insert into hero_inventory (hero_id,item) values (?,?)
+Hibernate: insert into hero_inventory (hero_id,item) values (?,?)
+Hibernate: insert into hero_inventory (hero_id,item) values (?,?)
+Hibernate: insert into hero_inventory (hero_id,item) values (?,?)
+Hibernate: insert into hero_inventory (hero_id,item) values (?,?)
+Hibernate: insert into hero_inventory (hero_id,item) values (?,?)
+Hibernate: insert into hero_inventory (hero_id,item) values (?,?)
+Hibernate: insert into hero_inventory (hero_id,item) values (?,?)
+Hibernate: insert into tile_occupants (tile_id,occupant) values (?,?)
+Hibernate: insert into tile_occupants (tile_id,occupant) values (?,?)
+Hibernate: insert into tile_occupants (tile_id,occupant) values (?,?)
+Hibernate: select ps1_0.id,ps1_0.action_type,ps1_0.branch_id,ps1_0.collapse_trigger,ps1_0.amplitude_imaginary,ps1_0.amplitude_real,ps1_0.created_at,ps1_0.delta_t,ps1_0.expression,ps1_0.game_id,ps1_0.owner_hero,ps1_0.probability,ps1_0.psi_id,ps1_0.status,ps1_0.target_x,ps1_0.target_y,ps1_0.use_complex_amplitude from psi_states ps1_0 where ps1_0.game_id=?
+   - États ψ finaux: 37
+✅ Phase Finale validée
+🧹 Nettoyage du test...
+✅ Nettoyage terminé
+🔧 Setup du test...
+📊 Scénario chargé: Bataille Temporelle
+⚔️  Artefacts temporels chargés: 7
+🐉 Créatures chargées: 4
+📜 Scripts .hots chargés:
+   - Setup: 23 commandes
+   - Combat: 25 commandes
+   - Finale: 41 commandes
+Hibernate: insert into games (created_at,current_player,current_timeline,current_turn,ended_at,game_name,map_height,map_width,max_players,started_at,status,winner,id) values (?,?,?,?,?,?,?,?,?,?,?,?,default)
+🎮 Partie créée: Bataille Temporelle Test (ID: 4)
+✅ Setup terminé
+
+🎯 TEST 4: Validation Système Complet
+=====================================
+Hibernate: insert into heroes (causality_awareness,current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,temporal_immunity,temporal_vision_range,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+Hibernate: insert into heroes (causality_awareness,current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,temporal_immunity,temporal_vision_range,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+Hibernate: insert into game_tiles (building_owner,building_type,defense_bonus,game_id,has_psi_states,is_locked,is_temporal_zone,lock_duration,movement_cost,temporal_energy_bonus,temporal_zone_type,terrain,x,y,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+Hibernate: insert into game_tiles (building_owner,building_type,defense_bonus,game_id,has_psi_states,is_locked,is_temporal_zone,lock_duration,movement_cost,temporal_energy_bonus,temporal_zone_type,terrain,x,y,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=1, collapsedStates=0, totalStates=1, collapseRate=0.0, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=2, collapsedStates=0, totalStates=2, collapseRate=0.0, collapsesByType={}}
+Hibernate: insert into game_tiles (building_owner,building_type,defense_bonus,game_id,has_psi_states,is_locked,is_temporal_zone,lock_duration,movement_cost,temporal_energy_bonus,temporal_zone_type,terrain,x,y,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=1, collapsedStates=1, totalStates=2, collapseRate=0.5, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=2, collapsedStates=1, totalStates=3, collapseRate=0.3333333333333333, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=3, collapsedStates=1, totalStates=4, collapseRate=0.25, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=4, collapsedStates=1, totalStates=5, collapseRate=0.2, collapsesByType={}}
+Hibernate: insert into game_tiles (building_owner,building_type,defense_bonus,game_id,has_psi_states,is_locked,is_temporal_zone,lock_duration,movement_cost,temporal_energy_bonus,temporal_zone_type,terrain,x,y,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=3, collapsedStates=2, totalStates=5, collapseRate=0.4, collapsesByType={}}
+📊 Statistiques collapse causale: {activeStates=3, collapsedStates=2, totalStates=5, collapseRate=0.4, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=4, collapsedStates=2, totalStates=6, collapseRate=0.3333333333333333, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=5, collapsedStates=2, totalStates=7, collapseRate=0.2857142857142857, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=6, collapsedStates=2, totalStates=8, collapseRate=0.25, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=7, collapsedStates=2, totalStates=9, collapseRate=0.2222222222222222, collapsesByType={}}
+📊 Statistiques collapse causale: {activeStates=7, collapsedStates=2, totalStates=9, collapseRate=0.2222222222222222, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=8, collapsedStates=2, totalStates=10, collapseRate=0.2, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=9, collapsedStates=2, totalStates=11, collapseRate=0.18181818181818182, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=10, collapsedStates=2, totalStates=12, collapseRate=0.16666666666666666, collapsesByType={}}
+🌀 Collapses causales détectés:
+  - CollapseResult[INTERACTION] ψ012: Unknown action: COLLECT (success=true)
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=9, collapsedStates=4, totalStates=13, collapseRate=0.3076923076923077, collapsesByType={}}
+📊 Statistiques collapse causale: {activeStates=8, collapsedStates=5, totalStates=13, collapseRate=0.38461538461538464, collapsesByType={}}
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: HorlogeInversee
+❌ Artefact HorlogeInversee non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: HorlogeInversee
+📊 Statistiques collapse causale: {activeStates=8, collapsedStates=5, totalStates=13, collapseRate=0.38461538461538464, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=9, collapsedStates=5, totalStates=14, collapseRate=0.35714285714285715, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=10, collapsedStates=5, totalStates=15, collapseRate=0.3333333333333333, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=11, collapsedStates=5, totalStates=16, collapseRate=0.3125, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=12, collapsedStates=5, totalStates=17, collapseRate=0.29411764705882354, collapsesByType={}}
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: OrbeProbabilite
+❌ Artefact OrbeProbabilite non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: OrbeProbabilite
+📊 Statistiques collapse causale: {activeStates=12, collapsedStates=5, totalStates=17, collapseRate=0.29411764705882354, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=13, collapsedStates=5, totalStates=18, collapseRate=0.2777777777777778, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=14, collapsedStates=5, totalStates=19, collapseRate=0.2631578947368421, collapsesByType={}}
+Hibernate: insert into heroes (causality_awareness,current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,temporal_immunity,temporal_vision_range,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=14, collapsedStates=5, totalStates=19, collapseRate=0.2631578947368421, collapsesByType={}}
+Hibernate: insert into heroes (causality_awareness,current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,temporal_immunity,temporal_vision_range,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=14, collapsedStates=5, totalStates=19, collapseRate=0.2631578947368421, collapsesByType={}}
+🗡️ Épée temporelle détectée! Movement +10 (Jean approuve)
+Hibernate: insert into game_tiles (building_owner,building_type,defense_bonus,game_id,has_psi_states,is_locked,is_temporal_zone,lock_duration,movement_cost,temporal_energy_bonus,temporal_zone_type,terrain,x,y,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=14, collapsedStates=5, totalStates=19, collapseRate=0.2631578947368421, collapsesByType={}}
+Hibernate: insert into game_tiles (building_owner,building_type,defense_bonus,game_id,has_psi_states,is_locked,is_temporal_zone,lock_duration,movement_cost,temporal_energy_bonus,temporal_zone_type,terrain,x,y,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=14, collapsedStates=5, totalStates=19, collapseRate=0.2631578947368421, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=15, collapsedStates=5, totalStates=20, collapseRate=0.25, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=16, collapsedStates=5, totalStates=21, collapseRate=0.23809523809523808, collapsesByType={}}
+Hibernate: insert into game_tiles (building_owner,building_type,defense_bonus,game_id,has_psi_states,is_locked,is_temporal_zone,lock_duration,movement_cost,temporal_energy_bonus,temporal_zone_type,terrain,x,y,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+🌀 Collapses causales détectés:
+  - CollapseResult[INTERACTION] ψ101: Héros Morgana déplacé vers (12,12) via collapse causale (success=true)
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: LameAvantMonde
+❌ Artefact LameAvantMonde non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: LameAvantMonde
+📊 Statistiques collapse causale: {activeStates=14, collapsedStates=7, totalStates=21, collapseRate=0.3333333333333333, collapsesByType={}}
+🔍 RECHERCHE ARTEFACT DYNAMIQUE: BatonDuTemps
+❌ Artefact BatonDuTemps non trouvé dans les JSON
+🎲 FALLBACK GÉNÉRIQUE pour: BatonDuTemps
+📊 Statistiques collapse causale: {activeStates=14, collapsedStates=7, totalStates=21, collapseRate=0.3333333333333333, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=15, collapsedStates=7, totalStates=22, collapseRate=0.3181818181818182, collapsesByType={}}
+🌀 Collapses causales détectés:
+  - CollapseResult[INTERACTION] ψ019: Bataille exécutée en (10,10) via collapse causale (success=true)
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=14, collapsedStates=9, totalStates=23, collapseRate=0.391304347826087, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=15, collapsedStates=9, totalStates=24, collapseRate=0.375, collapsesByType={}}
+🌀 Collapses causales détectés:
+  - CollapseResult[OBSERVATION] ψ104: Bataille exécutée en (12,12) via collapse causale (success=true)
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=15, collapsedStates=10, totalStates=25, collapseRate=0.4, collapsesByType={}}
+🌀 Collapses causales détectés:
+  - CollapseResult[OBSERVATION] ψ105: Bataille exécutée en (12,12) via collapse causale (success=true)
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=15, collapsedStates=11, totalStates=26, collapseRate=0.4230769230769231, collapsesByType={}}
+🌀 Collapses causales détectés:
+  - CollapseResult[OBSERVATION] ψ106: Unknown action: CAST (success=true)
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=15, collapsedStates=12, totalStates=27, collapseRate=0.4444444444444444, collapsesByType={}}
+🌀 Collapses causales détectés:
+  - CollapseResult[OBSERVATION] ψ107: Unknown action: CAST (success=true)
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=15, collapsedStates=13, totalStates=28, collapseRate=0.4642857142857143, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=16, collapsedStates=13, totalStates=29, collapseRate=0.4482758620689655, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=17, collapsedStates=13, totalStates=30, collapseRate=0.43333333333333335, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=18, collapsedStates=13, totalStates=31, collapseRate=0.41935483870967744, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=19, collapsedStates=13, totalStates=32, collapseRate=0.40625, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=20, collapsedStates=13, totalStates=33, collapseRate=0.3939393939393939, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=21, collapsedStates=13, totalStates=34, collapseRate=0.38235294117647056, collapsesByType={}}
+🌀 Collapses causales détectés:
+  - CollapseResult[OBSERVATION] ψ114: Bataille exécutée en (12,12) via collapse causale (success=true)
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=21, collapsedStates=14, totalStates=35, collapseRate=0.4, collapsesByType={}}
+🌀 Collapses causales détectés:
+  - CollapseResult[OBSERVATION] ψ115: Bataille exécutée en (12,12) via collapse causale (success=true)
+📊 Statistiques collapse causale: {activeStates=19, collapsedStates=16, totalStates=35, collapseRate=0.45714285714285713, collapsesByType={}}
+📊 Statistiques collapse causale: {activeStates=18, collapsedStates=17, totalStates=35, collapseRate=0.4857142857142857, collapsesByType={}}
+📊 Statistiques collapse causale: {activeStates=17, collapsedStates=18, totalStates=35, collapseRate=0.5142857142857142, collapsesByType={}}
+📊 Statistiques collapse causale: {activeStates=16, collapsedStates=19, totalStates=35, collapseRate=0.5428571428571428, collapsesByType={}}
+📊 Statistiques collapse causale: {activeStates=15, collapsedStates=20, totalStates=35, collapseRate=0.5714285714285714, collapsesByType={}}
+📊 Statistiques collapse causale: {activeStates=14, collapsedStates=21, totalStates=35, collapseRate=0.6, collapsesByType={}}
+📊 Statistiques collapse causale: {activeStates=13, collapsedStates=22, totalStates=35, collapseRate=0.6285714285714286, collapsesByType={}}
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=14, collapsedStates=22, totalStates=36, collapseRate=0.6111111111111112, collapsesByType={}}
+🌀 Collapses causales détectés:
+  - CollapseResult[OBSERVATION] ψ116: Bataille exécutée en (12,12) via collapse causale (success=true)
+Hibernate: insert into psi_states (action_type,branch_id,collapse_trigger,amplitude_imaginary,amplitude_real,created_at,delta_t,expression,game_id,owner_hero,probability,psi_id,status,target_x,target_y,use_complex_amplitude,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+📊 Statistiques collapse causale: {activeStates=14, collapsedStates=23, totalStates=37, collapseRate=0.6216216216216216, collapsesByType={}}
+🌀 Collapses causales détectés:
+  - CollapseResult[OBSERVATION] ψ117: Entité créée en (12,12) via collapse causale (success=true)
+
+📊 STATISTIQUES FINALES:
+==========================
+   - Commandes totales: 89
+   - Commandes réussies: 66
+   - Taux de réussite global: 74.15730337078652%
+   - Héros finaux: 4
+   - États ψ finaux: 0
+   - Tuiles finales: 7
+🧹 Nettoyage du test...
+✅ Nettoyage terminé
+[ERROR] Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 4.529 s <<< FAILURE! -- in com.heroesoftimepoc.temporalengine.integration.BatailleTemporelleIntegrationTest
+[ERROR] com.heroesoftimepoc.temporalengine.integration.BatailleTemporelleIntegrationTest.testCompleteSystem -- Time elapsed: 0.067 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Au moins 75% des commandes doivent réussir (système quantique instable) ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at com.heroesoftimepoc.temporalengine.integration.BatailleTemporelleIntegrationTest.testCompleteSystem(BatailleTemporelleIntegrationTest.java:449)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   BatailleTemporelleIntegrationTest.testCompleteSystem:449 Au moins 75% des commandes doivent réussir (système quantique instable) ==> expected: <true> but was: <false>
+[INFO] 
+[ERROR] Tests run: 4, Failures: 1, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  7.197 s
+[INFO] Finished at: 2025-07-20T22:32:58+02:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.1.2:test (default-test) on project temporal-engine: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /Users/admin/HOT/Heroes-of-Time/backend/target/surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
