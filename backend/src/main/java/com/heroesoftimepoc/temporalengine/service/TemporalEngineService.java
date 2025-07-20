@@ -228,6 +228,26 @@ public class TemporalEngineService {
             case "CAST":
                 result = castGameSpell(game, (Map<String, String>) command.getParameters());
                 break;
+            case "LEARN":
+                result = learnGameSpell(game, (Map<String, String>) command.getParameters());
+                break;
+            case "LEVELUP":
+                result = levelUpGameHero(game, (Map<String, String>) command.getParameters());
+                break;
+            case "EXPLORE":
+                result = exploreGameTerritory(game, (Map<String, String>) command.getParameters());
+                break;
+            case "EQUIP":
+                result = equipGameArtifact(game, (Map<String, String>) command.getParameters());
+                break;
+            case "SIEGE":
+                result = siegeGameTarget(game, (Map<String, String>) command.getParameters());
+                break;
+            case "CAPTURE":
+                result = captureGameObjective(game, (Map<String, String>) command.getParameters());
+                break;
+            // Removed duplicate case labels - the methods without "Game" prefix appear to be legacy/deprecated
+            // If needed, these can be called as fallbacks within the existing cases above
             default:
                 result.put("error", "Unknown command type: " + command.getType());
                 result.put("success", false);
@@ -384,6 +404,11 @@ public class TemporalEngineService {
      * Nom clair et recherchable : findConflictingQuantumStates
      */
     private List<PsiState> findConflictingQuantumStates(Game game, PsiState newQuantumState) {
+        // Add null safety check for newQuantumState coordinates
+        if (newQuantumState.getTargetX() == null || newQuantumState.getTargetY() == null) {
+            return Collections.emptyList();
+        }
+        
         return game.getActivePsiStates().stream()
                 .filter(existing -> 
                     existing.getTargetX() != null && 

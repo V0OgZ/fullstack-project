@@ -172,7 +172,7 @@ class TemporalIntegration {
         
         positions.forEach((psiStates, key) => {
             if (psiStates.length > 1) {
-                const [x, y] = key.split(',').map(n => parseInt(n));
+                const [x, y] = key.split(',').map(n => parseInt(n, 10));
                 this.reportCausalCollision(x, y, psiStates);
             }
         });

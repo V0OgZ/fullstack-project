@@ -220,7 +220,7 @@
                 const [_, heroName, x, y] = match;
                 const hero = this.demoGameState.heroes.find(h => h.name === heroName);
                 if (hero) {
-                    hero.position = { x: parseInt(x), y: parseInt(y) };
+                    hero.position = { x: parseInt(x, 10), y: parseInt(y, 10) };
                 }
             }
             
