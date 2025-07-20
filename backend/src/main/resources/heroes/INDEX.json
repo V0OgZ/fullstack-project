@@ -38,6 +38,15 @@
         "file": "backend/src/main/resources/heroes/legendary/Morgana.json",
         "scenarios": ["oeil_de_wigner_scenario.hots", "bataille_temporelle_setup.hots"],
         "status": "ACTIVE_COMPLETE"
+      },
+      {
+        "id": "claudius",
+        "name": "Claudius",
+        "title": "💻 L'Architecte du Multivers",
+        "file": "backend/src/main/resources/heroes/legendary/Claudius.json",
+        "scenarios": ["claudius_vs_jeangro_epic.hots"],
+        "status": "LEGENDARY_NEW",
+        "special": "Créé par Claude - Peut refactorer la réalité"
       }
     ],
     
@@ -53,7 +62,8 @@
         "id": "jean_grofignon",
         "name": "Jean Grofignon",
         "file": "backend/src/main/resources/heroes/grofi/JeanGrofignon.json",
-        "status": "GROFI_COLLECTION"
+        "status": "GROFI_COLLECTION",
+        "scenarios": ["claudius_vs_jeangro_epic.hots"]
       },
       {
         "id": "the_dude",
@@ -84,6 +94,11 @@
         "name": "Merlin",
         "command": "HERO(Merlin)", 
         "file": "frontend/script-console.js"
+      },
+      {
+        "name": "Claudius",
+        "command": "HERO(Claudius)",
+        "file": "frontend/script-console.js"
       }
     ],
     
@@ -93,6 +108,9 @@
       ],
       "oeil_de_wigner_scenario.hots": [
         "Arthur", "Lysandrel", "Ragnar", "Morgana"
+      ],
+      "claudius_vs_jeangro_epic.hots": [
+        "Claudius", "JeanGrofignon", "ClaudiusGrofignon"
       ]
     },
     
