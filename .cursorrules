@@ -1,101 +1,78 @@
 # CURSOR RULES - Heroes of Time Project
 
-## 🚨 RÈGLES CRITIQUES APPRISES AUJOURD'HUI
+## 📚 DOCUMENTS ESSENTIELS À LIRE (MEMENTO)
 
-### Git - Commandes INTERDITES sur Agent Partagé
-- ❌ **JAMAIS** `git reset --hard` - Agent partagé, plusieurs développeurs
-- ❌ **JAMAIS** `git push --force` - Destructif pour l'équipe  
-- ❌ **JAMAIS** suppression de branches sans concertation
+### 🧠 Session Actuelle - MEMENTO/
+- **TODO_SESSION_ACTUELLE.md** - État actuel et objectifs
+- **ARBORESCENCE_MAP_COMPLETE.md** - Carte complète v2.0 du projet
+- **JEAN_MESSAGES_BEST_OF.md** - Vision et philosophie du projet
+
+### 📋 Scripts Principaux
+- **./scripts/test-jean-gros-v2.sh** - Test complet optimisé (Dude & Vega)
+- **./scripts/actifs/start-services-background.sh** - Démarre tous les services
+- **./scripts/actifs/stop-all-services.sh** - Arrête tout proprement
+
+### 🎮 Format HOTS (Heroes Of Time Script)
+```hots
+# Commandes classiques
+HERO(name)                          # Créer un héros
+MOV(hero, x, y)                    # Déplacer
+CREATE(ITEM, name, HERO:hero)      # Donner item à héros
+USE(ARTIFACT, name, HERO:hero)     # Utiliser artefact
+
+# États quantiques
+ψ001: ⊙(Δt+2 @15,15 ⟶ MOV(Arthur, @15,15))
+ψ002: (0.6+0.8i) ⊙(Δt+0 @7,4 ⟶ CREATE(ITEM, key, @7,4))
+
+# Symboles GROFI (à implémenter)
+Σ - Somme des possibles
+† - Mort/renaissance quantique  
+Ω - Finalité ultime
+↯ - Chaos contrôlé
+```
+
+## 🚨 RÈGLES CRITIQUES
+
+### Git - Agent Partagé
+- ❌ **JAMAIS** `git reset --hard` ou `git push --force`
 - ✅ **UTILISER** : `git checkout <commit> -- <fichier>` pour restaurer
-- ✅ **UTILISER** : `git revert` pour annuler des commits
-- ✅ **UTILISER** : `git stash` pour sauvegarder
 
-### Serveurs Multiples - Gestion Ports DÉFINITIVE
-- Port 9000 : Dashboard Unifié (`dashboard.html`) - **PRINCIPAL**
-- Port 8000 : Frontend Principal (`frontend/`) - Console temporelle + carte hex
-- Port 8080 : Backend Spring Boot API (`backend/`) - **APIs REST**
-- Port 5174 : Interface Temporelle (`frontend-temporal/`) - Configuration Temporelle
-- Port 8001 : Quantum Visualizer (`quantum-visualizer/`) - Scénarios GROFI
-- Port 5175 : Object Viewer (`visualizer-server.py`) - JSON/HOTS/Dashboard
-- Port 5170 : JSON Visualizer (DÉPRÉCIÉ - remplacé par 5175)
-- Port 5171 : HOTS Visualizer (DÉPRÉCIÉ - remplacé par 5175)
-- Port 8888 : Test Runner - **RÉCUPÉRÉ et FONCTIONNEL**
+### Backend - Lancement
+- ✅ **COMMANDE** : `cd backend && mvn spring-boot:run`
+- ⚠️ **PROBLÈME CONNU** : Erreur JPA "Not a managed type: class Game"
 
-### 📋 COMMANDES STANDARDISÉES - OBLIGATOIRES
-- ✅ **START ALL** : `./scripts/actifs/start-services-background.sh` - **PRINCIPAL**
-- ✅ **STOP ALL** : `./scripts/actifs/stop-all-services.sh`
-- ✅ **STATUS** : `lsof -i :9000,8000,8080,5174,8001,5175,8888 | grep LISTEN`
-- ✅ **BACKEND START** : `cd backend && mvn spring-boot:run > /dev/null 2>&1 &`
-- ✅ **QUICK TEST** : `./scripts/actifs/test-ui-quick.sh`
-- ❌ **INTERDICTION** : Recréer des scripts ou commandes manuelles
-- ❌ **INTERDICTION** : Changer les ports définis ci-dessus
-- 🎯 **RÈGLE** : TOUJOURS utiliser les scripts existants dans `/scripts/actifs/`
-- 🚨 **PORTS FIXES** : Ne JAMAIS changer les ports sans concertation
+### Ports Fixes (Ne PAS changer)
+- 9000 : Dashboard principal
+- 8000 : Frontend principal  
+- 8080 : Backend API
+- 5174 : Interface temporelle
+- 8001 : Quantum visualizer
+- 5175 : Object viewer
+- 8888 : Test runner
 
-### 🚨 RÈGLE CRITIQUE : SERVICES EN ARRIÈRE-PLAN PERMANENT
-- ❌ **JAMAIS** tuer les serveurs pendant le codage
-- ❌ **JAMAIS** arrêter les UIs quand l'utilisateur teste
-- ✅ **TOUJOURS** lancer avec `> /dev/null 2>&1 &` pour background permanent
-- ✅ **LAISSER** les services actifs pour que l'utilisateur puisse tester
-- ✅ **MAINTENIR** dashboard, JSON visualizer, HOTS visualizer actifs
-- ✅ **COMMANDE TYPE** : `python3 -m http.server PORT > /dev/null 2>&1 &`
-- 🎯 **OBJECTIF** : L'utilisateur peut tester et jouer pendant que l'agent code
+## 🎯 SYSTÈMES IMPLÉMENTÉS
 
-## 📁 ORGANISATION COMPLÈTE DES FRONTENDS
+### Mur de Causalité (Causality Wall)
+- Limite le mouvement des héros selon leur énergie temporelle
+- Implémenté dans `TemporalEngineService.moveGameHero()`
+- Test : `./scripts/test-causality-wall.sh`
 
-### 🎮 FRONTENDS ACTIFS VÉRIFIÉS
-1. **`frontend/`** - Frontend Principal (port 8000)
-   - Fichier : `index.html`
-   - Features : Console temporelle + carte hexagonale
-   - Commande : `cd frontend && python3 -m http.server 8000 > /dev/null 2>&1 &`
+### Vision Temporelle (Magic Spyglass)
+- Permet de voir 3 jours dans le futur
+- Implémenté dans `ArtifactEffectExecutor.executeMagicSpyglass()`
+- Test : `./scripts/test-vision-temporelle.sh`
 
-2. **`frontend-temporal/`** - Interface Temporelle (port 5174)
-   - Fichier : `index.html` 
-   - Features : Épée temporelle animée + Configuration Temporelle
-   - Commande : `cd frontend-temporal && python3 -m http.server 5174 > /dev/null 2>&1 &`
+### Système GROFI
+- Graph of Reality Organized by Fog and Immunities
+- Collapse causal : INTERACTION, OBSERVATION, ANCHORING, TEMPORAL_LIMIT
+- Service : `CausalCollapseService.java`
 
-3. **`quantum-visualizer/`** - Visualiseur Quantique (port 8001)
-   - Fichier : `index.html`
-   - Features : Scénarios GROFI + Visualisation
-   - Commande : `python3 -m http.server 8001 > /dev/null 2>&1 &` (depuis RACINE)
-   - URL : http://localhost:8001/quantum-visualizer/
+## 📁 STRUCTURE DU PROJET
 
-### 📊 FICHIERS DASHBOARD ET VISUALISEURS (RACINE)
-- **`dashboard.html`** - Dashboard principal (port 9000) ✅ CORRIGÉ
-- **`dashboard-unified.html`** - Version unifiée alternative
-- **`dashboard-with-tests.html`** - Version avec tests
-- **`json-visualizer.html`** - Visualiseur JSON standalone
-- **`hots-visualizer.html`** - Visualiseur HOTS standalone  
-- **`visualizer-server.py`** - Serveur multi-visualiseurs (port 5175)
-- **`test-runner-interface.html`** - Interface Test Runner (port 8888)
-- **`test-runner-server.py`** - Serveur Test Runner
+Voir `MEMENTO/ARBORESCENCE_MAP_COMPLETE.md` pour la carte complète incluant :
+- 62 fichiers .hots
+- 89 scripts de test
+- Pépites dans archives/ et MUSEUM/
 
-### 🎯 SERVICES ACTUELLEMENT ACTIFS (PERMANENT BACKGROUND)
-- ✅ Dashboard (9000) : http://localhost:9000/dashboard.html
-- ✅ Frontend (8000) : http://localhost:8000
-- ✅ Backend API (8080) : http://localhost:8080/api/games
-- ✅ Temporal UI (5174) : http://localhost:5174
-- ✅ Quantum Visualizer (8001) : http://localhost:8001/quantum-visualizer/
-- ✅ Object Viewer (5175) : http://localhost:5175
-- ✅ Test Runner (8888) : http://localhost:8888
-
-### Backend - Problèmes Connus
-- 🔴 **Erreur JPA** : "Not a managed type: class Game"
-- 🔴 **ComplexAmplitude** : Existe mais problème de dépendances Maven
-- 🔴 **DynamicFormulaParser** : Méthode `executeFormula` manquante
-- ✅ **Correction** : Utiliser `executeFormulaEffect(formula, hero, game, 0)`
-
-### PROBLÈME CRITIQUE dquote> - SOLUTIONS
-- 🔴 **Problème** : Se produit avec echo + guillemets imbriqués, emojis, messages multi-lignes
-- ✅ **SOLUTIONS** : 
-  1. Ctrl+C pour sortir
-  2. Toujours guillemets simples `echo 'message'`
-  3. Git commit avec guillemets simples
-  4. Fichiers temporaires pour longs messages
-  5. Jamais d'emojis dans echo
-- ✅ **PROCÉDURE** : Nettoyer ports avec `lsof -ti:PORT | xargs kill -9` avant démarrage
-
-### Commit Messages - Format Appris
-- ✅ **Bon format** : "🎯 MISSION UI LÉGENDAIRE ACCOMPLIE - Description détaillée"
-- ✅ **Inclure** : Features, ports, sources git
-- ✅ **Structurer** : Émojis + titre + détails techniques 
+---
+*Utiliser MEMENTO/ pour tous les nouveaux documents de travail* 
