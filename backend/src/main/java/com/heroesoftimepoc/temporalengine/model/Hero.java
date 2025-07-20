@@ -98,7 +98,8 @@ public class Hero {
         QUANTUM_SUPERPOSITION,
         COLLAPSED,
         DEAD,
-        PARADOX_DEATH  // Mort par paradoxe temporel (Forge Runique)
+        PARADOX_DEATH,  // Mort par paradoxe temporel (Forge Runique)
+        SEALED         // Scellé éternellement (Treizième Codex)
     }
     
     // Constructors
@@ -180,8 +181,8 @@ public class Hero {
         return inventory.contains(item);
     }
     
-    public void removeItem(String item) {
-        inventory.remove(item);
+    public boolean removeItem(String item) {
+        return inventory.remove(item);
     }
     
     public boolean canMove() {
@@ -267,6 +268,17 @@ public class Hero {
     @Column(name = "title")
     private List<String> titles = new ArrayList<>();
     
+    @ElementCollection
+    @CollectionTable(name = "hero_status_effects", joinColumns = @JoinColumn(name = "hero_id"))
+    @MapKeyColumn(name = "effect_name")
+    @Column(name = "duration")
+    private Map<String, Integer> statusEffects = new HashMap<>();
+    
+    @ElementCollection
+    @CollectionTable(name = "hero_abilities", joinColumns = @JoinColumn(name = "hero_id"))
+    @Column(name = "ability")
+    private List<String> abilities = new ArrayList<>();
+    
     /**
      * Ajoute un titre/achievement au héros
      */
@@ -347,6 +359,42 @@ public class Hero {
         
         int distance = Math.abs(positionX - targetX) + Math.abs(positionY - targetY);
         return distance <= observationRange;
+    }
+    
+    /**
+     * Ajouter un effet de statut temporaire
+     */
+    public void addStatusEffect(String effect, int duration) {
+        if (statusEffects == null) {
+            statusEffects = new HashMap<>();
+        }
+        statusEffects.put(effect, duration);
+    }
+    
+    /**
+     * Retirer tous les effets de statut
+     */
+    public void removeAllStatusEffects() {
+        if (statusEffects != null) {
+            statusEffects.clear();
+        }
+    }
+    
+    /**
+     * Définir les capacités du héros
+     */
+    public void setAbilities(List<String> abilities) {
+        this.abilities = new ArrayList<>(abilities);
+    }
+    
+    /**
+     * Obtenir les capacités du héros
+     */
+    public List<String> getAbilities() {
+        if (abilities == null) {
+            abilities = new ArrayList<>();
+        }
+        return new ArrayList<>(abilities);
     }
 
     @Override

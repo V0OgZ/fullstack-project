@@ -26,6 +26,16 @@ public class GameTile {
     @Column(name = "occupant")
     private List<String> occupants = new ArrayList<>();
     
+    @ElementCollection
+    @CollectionTable(name = "tile_effects", joinColumns = @JoinColumn(name = "tile_id"))
+    @Column(name = "effect")
+    private List<String> effects = new ArrayList<>();
+    
+    @ElementCollection
+    @CollectionTable(name = "tile_items", joinColumns = @JoinColumn(name = "tile_id"))
+    @Column(name = "item")
+    private List<String> items = new ArrayList<>();
+    
     @Column(name = "has_psi_states")
     private Boolean hasPsiStates = false;
     
@@ -214,6 +224,35 @@ public class GameTile {
         if (terrain.equals("forest")) cost += 1;
         if (terrain.equals("swamp")) cost += 2;
         return cost;
+    }
+    
+    public void addEffect(String effect) {
+        if (effects == null) {
+            effects = new ArrayList<>();
+        }
+        if (!effects.contains(effect)) {
+            effects.add(effect);
+        }
+    }
+    
+    public boolean removeEffect(String effect) {
+        if (effects != null) {
+            return effects.remove(effect);
+        }
+        return false;
+    }
+    
+    public void removeAllEffects() {
+        if (effects != null) {
+            effects.clear();
+        }
+    }
+    
+    public void addItem(String item) {
+        if (items == null) {
+            items = new ArrayList<>();
+        }
+        items.add(item);
     }
     
     @Override
