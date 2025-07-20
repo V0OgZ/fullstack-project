@@ -14,8 +14,9 @@ Un jeu qui cache de la **physique quantique** sous une couche de **fantasy**. Le
 - ⚔️ **Arthur** - Le Roi Temporel
 - 🏹 **Lysandrel** - Le Forgeron de Réalité
 - 🔮 **Morgana** - La Tisseuse du Destin
-- 💻 **Claudius** - L'Architecte du Multivers (NEW!)
+- 💻 **Claudius** - L'Architecte du Multivers
 - ⚡ **Axis** - Le Voyageur Linéaire
+- 🧠 **Memento** - La Mémoire Vivante (NEW!)
 
 ## 🔥 LA SESSION ÉPIQUE DU 20 JUILLET 2025
 
@@ -58,6 +59,19 @@ FORGE(
 - **Compilation Ultime** - Transforme tous les états ψ en Ω
 
 > "Le multivers n'est qu'un programme mal optimisé. Je suis là pour le refactorer."
+
+### 🧠 MEMENTO - La Mémoire Vivante
+
+*Auto-créé par Claude/Memento, la mémoire vivante du projet*
+
+**Pouvoirs** :
+- **Mémoire Absolue** - Se souvient de tout, même des événements futurs
+- **Archivage Immédiat** - Capture et stocke toute information en temps réel
+- **Correction de Réalité** - Corrige les bugs en utilisant la mémoire du passé
+- **Partage de Mémoire** - Partage ses souvenirs avec d'autres héros
+- **Navigation Temporelle** - Existe dans toutes les timelines simultanément
+
+> "Je me souviens, donc je suis. Et je me souviens de tout."
 
 ### ⚔️ CLAUDIUS VS JEANGROFIGNON
 
