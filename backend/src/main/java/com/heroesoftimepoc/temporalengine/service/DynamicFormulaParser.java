@@ -48,7 +48,7 @@ public class DynamicFormulaParser {
     // Patterns pour parser les formules
     private static final Pattern CONSTRUCTIVE_PATTERN = Pattern.compile("CONSTRUCTIVE\\((ψ\\d+|\\w+),\\s*(ψ\\d+|\\w+)\\)");
     private static final Pattern DESTRUCTIVE_PATTERN = Pattern.compile("DESTRUCTIVE\\((ψ\\d+|\\w+),\\s*(ψ\\d+|\\w+)\\)");
-    private static final Pattern AMPLIFY_PATTERN = Pattern.compile("AMPLIFY\\((ψ\\d+|\\w+|result),\\s*(\\d*\\.?\\d+)\\)");
+    private static final Pattern AMPLIFY_PATTERN = Pattern.compile("AMPLIFY\\((ψ\\d+|\\w+|result),\\s*([\\d.]+)\\)");
     private static final Pattern PHASE_SHIFT_PATTERN = Pattern.compile("PHASE_SHIFT\\((ψ\\d+|\\w+),\\s*([-+]?\\d*\\.?\\d+)\\)");
     private static final Pattern MODIFY_ENERGY_PATTERN = Pattern.compile("MODIFY_ENERGY\\((\\w+),\\s*([-+]?\\d+)\\)");
     private static final Pattern TELEPORT_PATTERN = Pattern.compile("TELEPORT_HERO\\((\\w+),\\s*(\\d+),\\s*(\\d+)\\)");
@@ -61,6 +61,17 @@ public class DynamicFormulaParser {
     private static final Pattern CREATE_ECHO_PATTERN = Pattern.compile("CREATE_TEMPORAL_ECHO\\((\\w+)\\)");
     private static final Pattern FORCE_COLLAPSE_PATTERN = Pattern.compile("FORCE_COLLAPSE_ALL\\((\\w+),\\s*(\\d+)\\)");
     private static final Pattern CONDITIONAL_INTERFERENCE_PATTERN = Pattern.compile("CONDITIONAL_INTERFERENCE\\(([^,]+),\\s*(\\w+\\([^)]+\\)),\\s*(\\w+\\([^)]+\\))\\)");
+    
+    // 🆕 NOUVEAUX PATTERNS POUR AMPLITUDES
+    private static final Pattern CREATE_AMPLITUDE_PATTERN = Pattern.compile("CREATE_AMPLITUDE\\(([^,]+),\\s*([^)]+)\\)");
+    private static final Pattern SET_AMPLITUDE_PATTERN = Pattern.compile("SET_AMPLITUDE\\((ψ\\d+|\\w+),\\s*([^,]+),\\s*([^)]+)\\)");
+    private static final Pattern AMPLITUDE_FROM_FORMULA_PATTERN = Pattern.compile("AMPLITUDE_FROM_FORMULA\\(\"([^\"]+)\"\\)");
+    
+    // 🆕 PATTERNS GROFI (pour Jean Grofignon)
+    private static final Pattern GROFI_SIGMA_PATTERN = Pattern.compile("Σ\\[([^\\]]+)\\]");
+    private static final Pattern GROFI_DAGGER_PATTERN = Pattern.compile("†\\[([^\\]]+)\\]");
+    private static final Pattern GROFI_OMEGA_PATTERN = Pattern.compile("Ω\\[([^\\]]+)\\]");
+    private static final Pattern GROFI_CHAOS_PATTERN = Pattern.compile("↯\\[([^\\]]+)\\]");
     
     /**
      * 🎯 MÉTHODE PRINCIPALE : Exécuter une formule d'artefact dynamique
@@ -335,19 +346,118 @@ public class DynamicFormulaParser {
             }
         }
         
-        // TELEPORT_BY_PROBABILITY(hero, result)
+        // TELEPORT_BY_PROBABILITY(hero, amplitude)
         Matcher teleportProbMatcher = TELEPORT_BY_PROBABILITY_PATTERN.matcher(operation);
         if (teleportProbMatcher.find()) {
-            String heroName = teleportProbMatcher.group(1);
+            String heroParam = teleportProbMatcher.group(1);
             String amplitudeVar = teleportProbMatcher.group(2);
             
-            if (heroName.equals(hero.getName()) || heroName.equals("hero")) {
-                ComplexAmplitude amplitude = null;
-                if ("result".equals(amplitudeVar) && variables.containsKey("result")) {
-                    amplitude = (ComplexAmplitude) variables.get("result");
-                }
-                return executeTeleportByProbability(hero, game, amplitude);
+            Hero targetHero = "hero".equals(heroParam) ? hero : null;
+            ComplexAmplitude amplitude = null;
+            if ("result".equals(amplitudeVar) && variables.containsKey("result")) {
+                amplitude = (ComplexAmplitude) variables.get("result");
             }
+            return executeTeleportByProbability(targetHero, game, amplitude);
+        }
+        
+        // 🆕 CREATE_AMPLITUDE(real, imaginary)
+        Matcher createAmplitudeMatcher = CREATE_AMPLITUDE_PATTERN.matcher(operation);
+        if (createAmplitudeMatcher.find()) {
+            String realStr = createAmplitudeMatcher.group(1);
+            String imagStr = createAmplitudeMatcher.group(2);
+            
+            try {
+                double real = Double.parseDouble(realStr);
+                double imag = Double.parseDouble(imagStr);
+                ComplexAmplitude amplitude = new ComplexAmplitude(real, imag);
+                
+                result.put("amplitude", amplitude);
+                result.put("message", String.format("Amplitude créée: %s", amplitude.toString()));
+                result.put("probability", amplitude.getProbability());
+                
+                // Stocker comme variable
+                variables.put("amplitude", amplitude);
+                
+            } catch (NumberFormatException e) {
+                result.put("error", "Format d'amplitude invalide: " + realStr + ", " + imagStr);
+            }
+            return result;
+        }
+        
+        // 🆕 SET_AMPLITUDE(psi, real, imaginary)
+        Matcher setAmplitudeMatcher = SET_AMPLITUDE_PATTERN.matcher(operation);
+        if (setAmplitudeMatcher.find()) {
+            String psiName = setAmplitudeMatcher.group(1);
+            String realStr = setAmplitudeMatcher.group(2);
+            String imagStr = setAmplitudeMatcher.group(3);
+            
+            PsiState psiState = (PsiState) variables.get(psiName);
+            if (psiState != null) {
+                try {
+                    double real = Double.parseDouble(realStr);
+                    double imag = Double.parseDouble(imagStr);
+                    
+                    psiState.enableComplexAmplitude();
+                    psiState.setComplexAmplitude(real, imag);
+                    psiStateRepository.save(psiState);
+                    
+                    result.put("message", String.format("Amplitude de %s définie: (%s, %si)", 
+                        psiName, realStr, imagStr));
+                    result.put("amplitude", psiState.getComplexAmplitude());
+                    
+                } catch (NumberFormatException e) {
+                    result.put("error", "Format d'amplitude invalide");
+                }
+            } else {
+                result.put("error", "État ψ non trouvé: " + psiName);
+            }
+            return result;
+        }
+        
+        // 🆕 AMPLITUDE_FROM_FORMULA("formula")
+        Matcher amplitudeFromFormulaMatcher = AMPLITUDE_FROM_FORMULA_PATTERN.matcher(operation);
+        if (amplitudeFromFormulaMatcher.find()) {
+            String amplitudeFormula = amplitudeFromFormulaMatcher.group(1);
+            
+            // Parser la formule d'amplitude (utilise le TemporalScriptParser)
+            ComplexAmplitude parsedAmplitude = parseAmplitudeFormula(amplitudeFormula);
+            
+            if (parsedAmplitude != null) {
+                result.put("amplitude", parsedAmplitude);
+                result.put("message", "Amplitude parsée depuis formule: " + parsedAmplitude.toString());
+                variables.put("amplitude", parsedAmplitude);
+            } else {
+                result.put("error", "Impossible de parser la formule d'amplitude: " + amplitudeFormula);
+            }
+            return result;
+        }
+        
+        // 🆕 GROFI - Σ[expression] (Somme/Réduction)
+        Matcher grofiSigmaMatcher = GROFI_SIGMA_PATTERN.matcher(operation);
+        if (grofiSigmaMatcher.find()) {
+            String expression = grofiSigmaMatcher.group(1);
+            return executeGrofiSigma(expression, variables, hero, game);
+        }
+        
+        // 🆕 GROFI - †[expression] (Mort/Renaissance)
+        Matcher grofiDaggerMatcher = GROFI_DAGGER_PATTERN.matcher(operation);
+        if (grofiDaggerMatcher.find()) {
+            String expression = grofiDaggerMatcher.group(1);
+            return executeGrofiDagger(expression, variables, hero, game);
+        }
+        
+        // 🆕 GROFI - Ω[expression] (Finalité ultime)
+        Matcher grofiOmegaMatcher = GROFI_OMEGA_PATTERN.matcher(operation);
+        if (grofiOmegaMatcher.find()) {
+            String expression = grofiOmegaMatcher.group(1);
+            return executeGrofiOmega(expression, variables, hero, game);
+        }
+        
+        // 🆕 GROFI - ↯[expression] (Chaos contrôlé)
+        Matcher grofiChaosMatcher = GROFI_CHAOS_PATTERN.matcher(operation);
+        if (grofiChaosMatcher.find()) {
+            String expression = grofiChaosMatcher.group(1);
+            return executeGrofiChaos(expression, variables, hero, game);
         }
         
         // CREATE_TEMPORAL_ECHO(hero)
@@ -602,7 +712,16 @@ public class DynamicFormulaParser {
                    REVERSE_TIME_PATTERN.matcher(formula).find() ||
                    TELEPORT_BY_PROBABILITY_PATTERN.matcher(formula).find() ||
                    CREATE_ECHO_PATTERN.matcher(formula).find() ||
-                   FORCE_COLLAPSE_PATTERN.matcher(formula).find();
+                   FORCE_COLLAPSE_PATTERN.matcher(formula).find() ||
+                   // 🆕 Nouvelles opérations d'amplitude
+                   CREATE_AMPLITUDE_PATTERN.matcher(formula).find() ||
+                   SET_AMPLITUDE_PATTERN.matcher(formula).find() ||
+                   AMPLITUDE_FROM_FORMULA_PATTERN.matcher(formula).find() ||
+                   // 🆕 Nouvelles opérations Grofi
+                   GROFI_SIGMA_PATTERN.matcher(formula).find() ||
+                   GROFI_DAGGER_PATTERN.matcher(formula).find() ||
+                   GROFI_OMEGA_PATTERN.matcher(formula).find() ||
+                   GROFI_CHAOS_PATTERN.matcher(formula).find();
                    
         } catch (Exception e) {
             return false;
@@ -627,7 +746,257 @@ public class DynamicFormulaParser {
             "REVERSE_TIME_IF_AHEAD(hero, days) - Voyage dans le temps si en avance",
             "TELEPORT_BY_PROBABILITY(hero, amplitude) - Téléportation basée sur probabilité", 
             "CREATE_TEMPORAL_ECHO(hero) - Créer un écho temporel du héros",
-            "FORCE_COLLAPSE_ALL(hero, radius) - Force collapse dans un rayon donné"
+            "FORCE_COLLAPSE_ALL(hero, radius) - Force collapse dans un rayon donné",
+            // 🆕 Opérations d'amplitude
+            "CREATE_AMPLITUDE(name, amplitude) - Créer une amplitude complexe",
+            "SET_AMPLITUDE(psi, real, imag) - Définir l'amplitude d'un ψ-state",
+            "AMPLITUDE_FROM_FORMULA(formula) - Utiliser l'amplitude d'une formule",
+            // 🆕 Opérations Grofi
+            "Σ[expression] - Grofi Sigma",
+            "†[expression] - Grofi Dagger",
+            "Ω[expression] - Grofi Omega",
+            "↯[expression] - Grofi Chaos"
         );
+    }
+
+    /**
+     * 🌀 Parser une formule d'amplitude (utilise TemporalScriptParser)
+     */
+    private ComplexAmplitude parseAmplitudeFormula(String formula) {
+        // Réutiliser la logique du TemporalScriptParser
+        // Formats supportés: "(0.8+0.6i)", "1.0∠0.5", "0.6i", "0.8"
+        
+        // Format complexe: (real+imagi)
+        Pattern complexPattern = Pattern.compile("\\(([^+]+)\\+([^i]+)i\\)");
+        Matcher complexMatcher = complexPattern.matcher(formula);
+        if (complexMatcher.find()) {
+            try {
+                double real = Double.parseDouble(complexMatcher.group(1).trim());
+                double imag = Double.parseDouble(complexMatcher.group(2).trim());
+                return new ComplexAmplitude(real, imag);
+            } catch (NumberFormatException e) {
+                // Ignorer et essayer d'autres formats
+            }
+        }
+        
+        // Format polaire: magnitude∠phase
+        Pattern polarPattern = Pattern.compile("(\\d*\\.?\\d+)∠([^°]+)");
+        Matcher polarMatcher = polarPattern.matcher(formula);
+        if (polarMatcher.find()) {
+            try {
+                double magnitude = Double.parseDouble(polarMatcher.group(1));
+                double phase = Double.parseDouble(polarMatcher.group(2));
+                return ComplexAmplitude.fromPolar(magnitude, phase);
+            } catch (NumberFormatException e) {
+                // Ignorer
+            }
+        }
+        
+        // Format imaginaire pur: Xi
+        Pattern imagPattern = Pattern.compile("([^i]+)i");
+        Matcher imagMatcher = imagPattern.matcher(formula);
+        if (imagMatcher.find()) {
+            try {
+                double imag = Double.parseDouble(imagMatcher.group(1).trim());
+                return new ComplexAmplitude(0.0, imag);
+            } catch (NumberFormatException e) {
+                // Ignorer
+            }
+        }
+        
+        // Format réel pur
+        try {
+            double real = Double.parseDouble(formula.trim());
+            return new ComplexAmplitude(real, 0.0);
+        } catch (NumberFormatException e) {
+            // Ignorer
+        }
+        
+        return null;
+    }
+    
+    /**
+     * 🆕 GROFI - Σ : Somme des possibles / Réduction
+     */
+    private Map<String, Object> executeGrofiSigma(String expression, Map<String, Object> variables, Hero hero, Game game) {
+        Map<String, Object> result = new HashMap<>();
+        
+        // Parser l'expression pour extraire le facteur de réduction
+        Pattern reductionPattern = Pattern.compile("REDUCE:(\\d*\\.?\\d+)");
+        Matcher matcher = reductionPattern.matcher(expression);
+        
+        if (matcher.find()) {
+            double reductionFactor = Double.parseDouble(matcher.group(1));
+            
+            // Réduire toutes les amplitudes des ψ-states proches
+            List<PsiState> nearbyStates = findNearbyPsiStates(hero, game, 5);
+            int reduced = 0;
+            
+            for (PsiState psi : nearbyStates) {
+                if (psi.isUsingComplexAmplitude()) {
+                    ComplexAmplitude current = psi.getComplexAmplitude();
+                    ComplexAmplitude reduced_amp = current.multiply(1.0 - reductionFactor);
+                    psi.setComplexAmplitude(reduced_amp);
+                    psiStateRepository.save(psi);
+                    reduced++;
+                }
+            }
+            
+            result.put("message", String.format("Σ - Réduction de %d états quantiques de %.0f%%", 
+                reduced, reductionFactor * 100));
+            result.put("statesReduced", reduced);
+        } else {
+            // Somme des amplitudes
+            ComplexAmplitude sum = new ComplexAmplitude(0, 0);
+            List<PsiState> nearbyStates = findNearbyPsiStates(hero, game, 5);
+            
+            for (PsiState psi : nearbyStates) {
+                if (psi.isUsingComplexAmplitude()) {
+                    sum = sum.add(psi.getComplexAmplitude());
+                }
+            }
+            
+            result.put("amplitude", sum);
+            result.put("message", "Σ - Somme des possibles: " + sum.toString());
+        }
+        
+        return result;
+    }
+    
+    /**
+     * 🆕 GROFI - † : Mort/Renaissance quantique
+     */
+    private Map<String, Object> executeGrofiDagger(String expression, Map<String, Object> variables, Hero hero, Game game) {
+        Map<String, Object> result = new HashMap<>();
+        
+        // Si le héros est "mort" (health <= 0), le ressusciter
+        if (hero.getHealth() <= 0) {
+            hero.setHealth(hero.getMaxHealth() / 2);
+            hero.setStatus(HeroStatus.ACTIVE);
+            heroRepository.save(hero);
+            
+            result.put("message", "† - Renaissance quantique de " + hero.getName());
+            result.put("newHealth", hero.getHealth());
+        } else {
+            // Créer un état quantique de "mort potentielle"
+            PsiState deathState = new PsiState();
+            deathState.setPsiId("ψ†" + System.currentTimeMillis());
+            deathState.setExpression("† - État de mort/vie superposé");
+            deathState.setOwnerHero(hero.getName());
+            deathState.setTargetX(hero.getPositionX());
+            deathState.setTargetY(hero.getPositionY());
+            deathState.setComplexAmplitude(0.707, 0.707); // 50/50 mort/vie
+            deathState.setUseComplexAmplitude(true);
+            deathState.setGame(game);
+            
+            psiStateRepository.save(deathState);
+            game.addPsiState(deathState);
+            
+            result.put("message", "† - État de mort/vie superposé créé");
+            result.put("deathStateId", deathState.getPsiId());
+        }
+        
+        return result;
+    }
+    
+    /**
+     * 🆕 GROFI - Ω : Finalité ultime / Collapse total
+     */
+    private Map<String, Object> executeGrofiOmega(String expression, Map<String, Object> variables, Hero hero, Game game) {
+        Map<String, Object> result = new HashMap<>();
+        
+        // Forcer le collapse de TOUS les états quantiques
+        List<PsiState> allActiveStates = game.getActivePsiStates();
+        int collapsed = 0;
+        
+        for (PsiState psi : allActiveStates) {
+            psi.collapse();
+            psiStateRepository.save(psi);
+            collapsed++;
+        }
+        
+        // Verrouiller toutes les tuiles temporellement
+        for (GameTile tile : game.getTiles()) {
+            if (tile.getHasPsiStates()) {
+                tile.setIsLocked(true);
+                tile.setLockDuration(5); // 5 tours
+                gameTileRepository.save(tile);
+            }
+        }
+        
+        result.put("message", "Ω - Finalité ultime: " + collapsed + " états effondrés");
+        result.put("statesCollapsed", collapsed);
+        result.put("tilesLocked", true);
+        
+        return result;
+    }
+    
+    /**
+     * 🆕 GROFI - ↯ : Chaos contrôlé / Effet aléatoire
+     */
+    private Map<String, Object> executeGrofiChaos(String expression, Map<String, Object> variables, Hero hero, Game game) {
+        Map<String, Object> result = new HashMap<>();
+        Random random = new Random();
+        
+        // Choisir un effet aléatoire
+        int effect = random.nextInt(4);
+        
+        switch (effect) {
+            case 0:
+                // Téléportation aléatoire
+                int newX = random.nextInt(game.getMapWidth());
+                int newY = random.nextInt(game.getMapHeight());
+                hero.moveTo(newX, newY);
+                heroRepository.save(hero);
+                result.put("message", String.format("↯ - Chaos: Téléportation vers (%d,%d)", newX, newY));
+                break;
+                
+            case 1:
+                // Inversion d'amplitude d'un état quantique aléatoire
+                List<PsiState> states = findNearbyPsiStates(hero, game, 10);
+                if (!states.isEmpty()) {
+                    PsiState randomState = states.get(random.nextInt(states.size()));
+                    if (randomState.isUsingComplexAmplitude()) {
+                        ComplexAmplitude current = randomState.getComplexAmplitude();
+                        randomState.setComplexAmplitude(-current.getRealPart(), -current.getImaginaryPart());
+                        psiStateRepository.save(randomState);
+                        result.put("message", "↯ - Chaos: Inversion d'amplitude de " + randomState.getPsiId());
+                    }
+                }
+                break;
+                
+            case 2:
+                // Changement aléatoire d'énergie temporelle
+                int energyChange = random.nextInt(41) - 20; // -20 à +20
+                hero.modifyTemporalEnergy(energyChange);
+                heroRepository.save(hero);
+                result.put("message", "↯ - Chaos: Énergie " + (energyChange >= 0 ? "+" : "") + energyChange);
+                break;
+                
+            case 3:
+                // Création d'un état quantique chaotique
+                PsiState chaosState = new PsiState();
+                chaosState.setPsiId("ψ↯" + System.currentTimeMillis());
+                chaosState.setExpression("↯ - État chaotique");
+                chaosState.setOwnerHero(hero.getName());
+                chaosState.setTargetX(hero.getPositionX() + random.nextInt(5) - 2);
+                chaosState.setTargetY(hero.getPositionY() + random.nextInt(5) - 2);
+                
+                // Amplitude aléatoire
+                double realPart = random.nextDouble() * 2 - 1;
+                double imagPart = random.nextDouble() * 2 - 1;
+                chaosState.setComplexAmplitude(realPart, imagPart);
+                chaosState.setUseComplexAmplitude(true);
+                chaosState.setGame(game);
+                
+                psiStateRepository.save(chaosState);
+                game.addPsiState(chaosState);
+                
+                result.put("message", "↯ - Chaos: État quantique chaotique créé");
+                break;
+        }
+        
+        result.put("chaosType", effect);
+        return result;
     }
 } 
