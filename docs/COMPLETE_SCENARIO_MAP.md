@@ -1,6 +1,6 @@
 # 🗺️ **COMPLETE HEROES OF TIME SCENARIO & CREATURE MAP**
 
-*Version 2.0 - Updated with ALL discovered scenarios and creatures*
+*Version 3.0 - Updated with ALL discovered scenarios, creatures, and BEGINNER scenarios*
 
 ---
 
@@ -10,7 +10,7 @@
 - **Purpose:** Primary game logic scripting
 - **Parser:** `TemporalScriptParser.java` → `ExtendedTemporalScriptParser.java`
 - **Syntax:** Quantum states (ψ), GROFI symbols (†, Π, Ω, ↯), basic commands
-- **Total:** 22 files
+- **Total:** 25 files
 
 ### **📱 2. JSON SCENARIOS - UI/Visualizer Format**
 - **Purpose:** Rich metadata for frontend interfaces
@@ -22,7 +22,7 @@
 - **Purpose:** Execute scenarios line-by-line via API
 - **Parser:** Bash + curl to backend API
 - **Features:** Real-time execution, validation, logging
-- **Total:** 15+ files
+- **Total:** 16+ files
 
 ### **🎮 4. TEMPLATE SYSTEM - Game Templates**
 - **Purpose:** Reusable game configurations
@@ -33,15 +33,40 @@
 
 ## 🎯 **COMPLETE SCENARIO INVENTORY**
 
-### **📁 MAIN HOTS SCENARIOS (12 files)**
+### **🌟 BEGINNER SCENARIOS (3 files) - NEW!**
+```
+🌟 decouverte_brouillard.hots           - 🌫️ Découverte du Brouillard
+   ├─ Hero: Arthur - Le Roi Débutant
+   ├─ Objective: Comprendre le brouillard et mécaniques de base
+   ├─ Duration: 10-15 minutes
+   └─ Difficulty: Très facile
+
+🌟 premiers_artefacts.hots              - 🔮 Premiers Artefacts
+   ├─ Hero: Merlin - L'Apprenti Magicien
+   ├─ Objective: Découvrir et utiliser les premiers artefacts
+   ├─ Duration: 15-20 minutes
+   └─ Difficulty: Facile
+
+🌟 initiation_combat.hots               - ⚔️ Initiation au Combat
+   ├─ Hero: Guenièvre - La Guerrière Novice
+   ├─ Objective: Apprendre les bases du combat
+   ├─ Duration: 20-25 minutes
+   └─ Difficulty: Facile à moyen
+```
+
+### **📁 MAIN HOTS SCENARIOS (15 files)**
 ```
 ✅ bataille_temporelle_complete.hots     - Epic temporal battle
 ✅ claudius_vs_jeangro_epic.hots        - Epic duel scenario  
 ✅ codex_final.hots                     - The 13th Codex scenario
+✅ decouverte_brouillard.hots           - 🌫️ Scénario débutant: Découverte
 ✅ epic-arthur-vs-ragnar.hots           - Classic hero duel
+✅ initiation_combat.hots               - ⚔️ Scénario débutant: Combat
+✅ la_tour_sombre.hots                  - 🏰 Scénario épique: La Tour Sombre
 ✅ oeil_de_wigner_readme.hots           - Wigner's Eye documentation
 ✅ oeil_de_wigner_scenario.hots         - Wigner's Eye gameplay
 ✅ panopticon_axis_test.hots            - PANOPTICΩN with Axis
+✅ premiers_artefacts.hots              - 🔮 Scénario débutant: Artefacts
 ✅ quantum_interference_example.hots     - Interference tutorial
 ✅ quantum_maze.hots                    - Quantum maze puzzle
 ❌ simple-game.hots                     - MISSING FROM TESTS!
@@ -80,9 +105,11 @@
 ❌ VOL_DE_LAME.json                    - NO HOTS VERSION!
 ```
 
-### **📁 SHELL EXECUTION SCRIPTS (15+ files)**
+### **📁 SHELL EXECUTION SCRIPTS (16+ files)**
 ```
 ✅ test-panopticon-axis-scenario.sh     - PANOPTICΩN executor
+✅ test-scenarios-debutants.sh          - 🌟 Test scénarios débutants
+✅ test-tour-sombre.sh                  - 🏰 Test La Tour Sombre
 ✅ run_converted_epic_scenario.sh       - Epic scenario runner
 ✅ execute-hots-file.sh                 - Generic HOTS executor
 ✅ test-quantum-maze-complete.sh        - Quantum maze runner
@@ -95,6 +122,29 @@
 ---
 
 ## 🐉 **COMPLETE CREATURE INVENTORY**
+
+### **🌟 BEGINNER CREATURES (4 creatures) - NEW!**
+```
+🌟 Loup Temporel (Temporal Wolf)
+   ├─ Level: 2 | Rarity: COMMON
+   ├─ Abilities: Basic attack, Temporal howl
+   └─ Special: First encounter creature
+
+🌟 Gobelin d'Entraînement (Training Goblin)
+   ├─ Level: 1 | Rarity: COMMON
+   ├─ Abilities: Basic attack
+   └─ Special: Perfect for beginners
+
+🌟 Orc d'Entraînement (Training Orc)
+   ├─ Level: 3 | Rarity: COMMON
+   ├─ Abilities: Basic attack, Defensive stance
+   └─ Special: Intermediate beginner challenge
+
+🌟 Esprit de Livre (Book Spirit)
+   ├─ Level: 2 | Rarity: COMMON
+   ├─ Abilities: Knowledge attack, Mystical presence
+   └─ Special: Non-hostile, educational
+```
 
 ### **🧚‍♀️ TIER 1: Basic Quantum (4 creatures)**
 ```
@@ -182,7 +232,8 @@
 ## 🧪 **TEST COVERAGE ANALYSIS**
 
 ### **✅ WELL TESTED**
-- Main HOTS scenarios (10/12 tested)
+- Main HOTS scenarios (12/15 tested)
+- **NEW!** Beginner scenarios (3/3 tested)
 - Core quantum mechanics
 - Temporal interference system
 - GROFI symbols and immunities
@@ -228,16 +279,17 @@
 
 ## 🌟 **SYSTEM COMPLETENESS**
 
-**Scenarios:** 35+ total (HOTS + JSON + Templates)
-**Creatures:** 15+ unique creatures across 4 tiers
-**Test Scripts:** 15+ execution and validation scripts
+**Scenarios:** 38+ total (HOTS + JSON + Templates + **Beginner**)
+**Creatures:** 19+ unique creatures across 5 tiers (**+4 Beginner**)
+**Test Scripts:** 16+ execution and validation scripts
 **Formats:** 4 different scenario formats working together
 
-**Jean's Heroes of Time is a MASSIVE quantum gaming universe!** 🌟⚡🎮
+**Jean's Heroes of Time is a MASSIVE quantum gaming universe with PROGRESSIVE LEARNING!** 🌟⚡🎮
 
 ---
 
-*Last Updated: $(date)*
-*Total Scenarios Mapped: 35+*
-*Total Creatures Catalogued: 15+*
-*Test Coverage: ~75%*
+*Last Updated: 21 Juillet 2025 - 01:00*
+*Total Scenarios Mapped: 38+*
+*Total Creatures Catalogued: 19+*
+*Test Coverage: ~80%*
+*Beginner-Friendly: ✅ COMPLETE*
