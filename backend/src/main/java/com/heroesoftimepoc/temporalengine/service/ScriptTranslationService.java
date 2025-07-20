@@ -176,26 +176,25 @@ public class ScriptTranslationService {
     private String translateBasicCommands(String script, Map<String, String> translations) {
         String result = script;
         
-        // Patterns pour les commandes
-        result = result.replaceAll("HERO\\(([^)]+)\\)", "the valiant hero $1");
+        // Patterns pour les commandes - Version plus littéraire et poétique
+        result = result.replaceAll("HERO\\(([^)]+)\\)", "the valiant hero $1 emerges from the depths of forgotten memories");
         result = result.replaceAll("MOV\\(([^,]+),\\s*([^,]+),\\s*@(\\d+),(\\d+)\\)", 
-            "the hero $2 extends his hand into the void, projecting a mirrored echo to the coordinates ($3, $4)");
+            "the valiant hero $2 glides through the fabric of reality, his essence flowing like liquid starlight across the quantum landscape");
         result = result.replaceAll("CREATE\\(([^,]+),\\s*([^,]+)(?:,\\s*@(\\d+),(\\d+))?\\)", 
-            "summons from the depths of possibility a $1 named $2" + 
-            (result.contains("@") ? " at the mystical coordinates ($3, $4)" : ""));
+            "summons from the depths of possibility a $1 named $2, its form shimmering with the essence of quantum uncertainty");
         result = result.replaceAll("USE\\(([^,]+),\\s*([^,]+)(?:,\\s*([^)]+))?\\)", 
             "channels the ancient power of the $1 $2" + 
-            (result.contains("HERO:") ? " through the chosen vessel $3" : ""));
+            (result.contains("HERO:") ? " through the chosen vessel $3, absorbing the very essence of creation" : ""));
         result = result.replaceAll("CAST\\(SPELL,\\s*([^,]+),\\s*TARGET:([^,]+),\\s*HERO:([^)]+)\\)", 
             "weaves the threads of reality, unleashing the arcane incantation $1 upon the chosen adversary $2 through the mystical conduit $3");
         result = result.replaceAll("BATTLE\\(([^,]+),\\s*([^)]+)\\)", 
-            "engages in quantum combat with the $1 against the $2");
+            "engages in quantum combat with the $1 against the $2, their essences intertwining in a dance of probability and uncertainty");
         result = result.replaceAll("ABILITY\\(([^,]+),\\s*([^)]+)\\)", 
-            "unleashes the mystical power of $2 through the quantum essence of $1");
+            "unleashes the mystical power of $2 through the quantum essence of $1, causing reality itself to shimmer and shift");
         result = result.replaceAll("ACTIVATE\\(([^)]+)\\)", 
-            "awakens the quantum essence of the $1");
+            "awakens the quantum essence of the $1, its ancient power pulsing with the rhythm of creation");
         result = result.replaceAll("PHASE_SHIFT\\(([^,]+),\\s*([^)]+)\\)", 
-            "shifts through quantum phases with the $1 by $2 radians");
+            "shifts through quantum phases with the $1 by $2 radians, transcending the boundaries of conventional reality");
 
         return result;
     }
@@ -203,15 +202,15 @@ public class ScriptTranslationService {
     private String translateQuantumStates(String script) {
         String result = script;
         
-        // États quantiques
+        // États quantiques - Version plus poétique
         result = result.replaceAll("ψ(\\d+):\\s*⊙\\((.*)\\)", 
-            "quantum essence $1 manifests through temporal projection: $2");
+            "quantum essence $1 manifests through temporal projection, its ethereal form dancing between the threads of reality: $2");
         result = result.replaceAll("†ψ(\\d+)", 
-            "the collapse of probability shatters quantum essence $1");
+            "the collapse of probability shatters quantum essence $1, as reality solidifies from the quantum foam of possibilities");
         result = result.replaceAll("Π\\(([^)]+)\\)\\s*⇒\\s*†ψ(\\d+)", 
-            "the observer's gaze upon $1 triggers the collapse of quantum essence $2");
+            "the observer's gaze upon $1 triggers the collapse of quantum essence $2, as consciousness shapes the fabric of existence");
         result = result.replaceAll("Δt\\+(\\d+)", 
-            "temporal displacement of $1 cycles");
+            "temporal displacement of $1 cycles, as time itself bends to the will of quantum uncertainty");
 
         return result;
     }
@@ -219,15 +218,15 @@ public class ScriptTranslationService {
     private String translateArtifactFormulas(String script) {
         String result = script;
         
-        // Formules d'artefacts
+        // Formules d'artefacts - Version plus mystique
         result = result.replaceAll("CONSTRUCTIVE\\(([^)]+)\\)", 
-            "constructive interference between $1");
+            "constructive interference between $1 creates a wave of amplified probability, where all possibilities exist in perfect harmony");
         result = result.replaceAll("DESTRUCTIVE\\(([^)]+)\\)", 
-            "destructive interference annihilating $1");
+            "destructive interference annihilating $1, as opposing forces tear at the very fabric of reality");
         result = result.replaceAll("AMPLIFY\\(([^,]+),\\s*([^)]+)\\)", 
-            "amplification of $1 by the factor of $2");
+            "amplification of $1 by the factor of $2, creating a resonance that shakes the very foundations of existence");
         result = result.replaceAll("MODIFY_ENERGY\\(([^,]+),\\s*([^)]+)\\)", 
-            "modification of the hero's essence by $2 units");
+            "modification of the hero's essence by $2 units, as the quantum field responds to the call of destiny");
 
         return result;
     }
