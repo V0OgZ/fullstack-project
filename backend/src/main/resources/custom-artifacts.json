@@ -59,18 +59,98 @@
       "rarity": "rare",
       "author": "ExperimentalCrafter",
       "created": "2024-01-20"
+    },
+    {
+      "id": "quantum_amplifier",
+      "name": "Amplificateur Quantique",
+      "description": "Crée une amplitude complexe et l'amplifie pour des effets puissants",
+      "formula": "CREATE_AMPLITUDE(0.8, 0.6) + AMPLIFY(result, 2.0) + MODIFY_ENERGY(hero, 20)",
+      "energy_cost": 25,
+      "rarity": "épique",
+      "author": "JeanGrofignon",
+      "created": "2025-07-20"
+    },
+    {
+      "id": "grofi_sigma",
+      "name": "Sigma de Jean",
+      "description": "Réduit le chaos quantique et restaure l'énergie",
+      "formula": "Σ[REDUCE:0.2] + MODIFY_ENERGY(hero, 10)",
+      "energy_cost": 15,
+      "rarity": "rare",
+      "author": "JeanGrofignon",
+      "created": "2025-07-20"
+    },
+    {
+      "id": "grofi_dagger",
+      "name": "Dague de Renaissance",
+      "description": "Permet la mort et renaissance quantique, crée un écho temporel",
+      "formula": "†[] + CREATE_TEMPORAL_ECHO(hero)",
+      "energy_cost": 30,
+      "rarity": "légendaire",
+      "author": "JeanGrofignon",
+      "created": "2025-07-20"
+    },
+    {
+      "id": "grofi_omega",
+      "name": "Omega Final",
+      "description": "Force le collapse de tous les états quantiques dans un rayon",
+      "formula": "Ω[] + FORCE_COLLAPSE_ALL(hero, 10)",
+      "energy_cost": 50,
+      "rarity": "mythique",
+      "author": "JeanGrofignon",
+      "created": "2025-07-20"
+    },
+    {
+      "id": "grofi_chaos",
+      "name": "Chaos de Vince",
+      "description": "Double chaos suivi d'une téléportation probabiliste",
+      "formula": "↯[] + ↯[] + TELEPORT_BY_PROBABILITY(hero, result)",
+      "energy_cost": 25,
+      "rarity": "épique",
+      "author": "VinceVega",
+      "created": "2025-07-20"
+    },
+    {
+      "id": "jean_ultimate",
+      "name": "Arme Ultime de Jean",
+      "description": "Combine tous les pouvoirs GROFI pour un effet dévastateur",
+      "formula": "Σ[REDUCE:0.3] + †[] + ↯[] + Ω[] + MODIFY_ENERGY(hero, 50)",
+      "energy_cost": 100,
+      "rarity": "mythique",
+      "author": "JeanGrofignon",
+      "created": "2025-07-20"
+    },
+    {
+      "id": "amplitude_resonator",
+      "name": "Résonateur d'Amplitude",
+      "description": "Crée une résonance quantique à partir d'une formule textuelle",
+      "formula": "AMPLITUDE_FROM_FORMULA(\"(0.707+0.707i)\") + CONSTRUCTIVE(ψ1, ψ2)",
+      "energy_cost": 35,
+      "rarity": "épique",
+      "author": "TheDude",
+      "created": "2025-07-20"
     }
   ],
   "metadata": {
-    "version": "1.0",
-    "total_artifacts": 6,
+    "version": "2.0",
+    "total_artifacts": 13,
     "supported_operations": [
       "CONSTRUCTIVE(ψ1, ψ2) - Interférence constructive",
       "DESTRUCTIVE(ψ1, ψ2) - Interférence destructive", 
       "AMPLIFY(ψ, factor) - Amplification",
       "MODIFY_ENERGY(hero, amount) - Modifier l'énergie",
-      "TELEPORT_HERO(hero, x, y) - Téléportation"
+      "TELEPORT_HERO(hero, x, y) - Téléportation",
+      "CREATE_AMPLITUDE(real, imag) - Créer amplitude complexe",
+      "SET_AMPLITUDE(ψ, real, imag) - Définir amplitude d'un état",
+      "AMPLITUDE_FROM_FORMULA(formula) - Parser amplitude depuis texte",
+      "Σ[expression] - Somme/Réduction GROFI",
+      "†[expression] - Mort/Renaissance GROFI",
+      "Ω[expression] - Finalité ultime GROFI",
+      "↯[expression] - Chaos contrôlé GROFI",
+      "CREATE_TEMPORAL_ECHO(hero) - Créer écho temporel",
+      "FORCE_COLLAPSE_ALL(hero, radius) - Forcer collapse dans rayon",
+      "TELEPORT_BY_PROBABILITY(hero, amplitude) - Téléportation probabiliste"
     ],
-    "formula_syntax": "Les formules peuvent être combinées avec + pour des effets multiples"
+    "formula_syntax": "Les formules peuvent être combinées avec + pour des effets multiples. Les symboles GROFI supportent des expressions entre []."
   }
 } 
