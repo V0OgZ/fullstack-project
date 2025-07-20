@@ -327,9 +327,10 @@ public class RunicForgeService {
             }
         }
         
-        // Tuer le héros
+        // Mort par paradoxe
         forger.setHealth(0);
-        forger.setStatus("COLLAPSED");
+        forger.setStatus(Hero.HeroStatus.PARADOX_DEATH);
+        heroRepository.save(forger);
         
         // Créer un paradoxe temporel
         game.createParadox(x, y, "FORGE_COLLAPSE");

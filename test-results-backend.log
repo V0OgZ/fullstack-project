@@ -1,0 +1,149 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------< com.heroesoftimepoc:temporal-engine >-----------------
+[INFO] Building Heroes of Time POC - Temporal Engine 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ temporal-engine ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 20 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.11.0:compile (default-compile) @ temporal-engine ---
+[INFO] Changes detected - recompiling the module! :input tree
+[INFO] Compiling 78 source files with javac [debug release 17] to target/classes
+[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/CausalityZoneService.java: Some input files use unchecked or unsafe operations.
+[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/CausalityZoneService.java: Recompile with -Xlint:unchecked for details.
+[INFO] Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[10,2] cannot find symbol
+  symbol: class Entity
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[11,2] cannot find symbol
+  symbol: class Table
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[3,1] package javax.persistence does not exist
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[14,6] cannot find symbol
+  symbol:   class Id
+  location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[15,6] cannot find symbol
+  symbol:   class GeneratedValue
+  location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[15,32] cannot find symbol
+  symbol:   variable GenerationType
+  location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[18,6] cannot find symbol
+  symbol:   class Column
+  location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[21,6] cannot find symbol
+  symbol:   class Column
+  location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[24,6] cannot find symbol
+  symbol:   class Column
+  location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[27,6] cannot find symbol
+  symbol:   class Column
+  location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[32,6] cannot find symbol
+  symbol:   class Column
+  location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[35,6] cannot find symbol
+  symbol:   class Column
+  location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[38,6] cannot find symbol
+  symbol:   class ManyToOne
+  location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[39,6] cannot find symbol
+  symbol:   class JoinColumn
+  location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[42,6] cannot find symbol
+  symbol:   class Column
+  location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[45,6] cannot find symbol
+  symbol:   class Column
+  location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[48,6] cannot find symbol
+  symbol:   class Column
+  location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/RunicForgeService.java:[326,21] cannot find symbol
+  symbol:   method lockTile(int,int,int)
+  location: variable game of type com.heroesoftimepoc.temporalengine.model.Game
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/RunicForgeService.java:[332,26] incompatible types: java.lang.String cannot be converted to com.heroesoftimepoc.temporalengine.model.Hero.HeroStatus
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/RunicForgeService.java:[335,13] cannot find symbol
+  symbol:   method createParadox(int,int,java.lang.String)
+  location: variable game of type com.heroesoftimepoc.temporalengine.model.Game
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/RunicForgeService.java:[360,19] cannot find symbol
+  symbol:   method addTitle(java.lang.String)
+  location: variable forger of type com.heroesoftimepoc.temporalengine.model.Hero
+[INFO] 21 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.135 s
+[INFO] Finished at: 2025-07-20T12:48:19+02:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile (default-compile) on project temporal-engine: Compilation failure: Compilation failure: 
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[10,2] cannot find symbol
+[ERROR]   symbol: class Entity
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[11,2] cannot find symbol
+[ERROR]   symbol: class Table
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[3,1] package javax.persistence does not exist
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[14,6] cannot find symbol
+[ERROR]   symbol:   class Id
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[15,6] cannot find symbol
+[ERROR]   symbol:   class GeneratedValue
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[15,32] cannot find symbol
+[ERROR]   symbol:   variable GenerationType
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[18,6] cannot find symbol
+[ERROR]   symbol:   class Column
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[21,6] cannot find symbol
+[ERROR]   symbol:   class Column
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[24,6] cannot find symbol
+[ERROR]   symbol:   class Column
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[27,6] cannot find symbol
+[ERROR]   symbol:   class Column
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[32,6] cannot find symbol
+[ERROR]   symbol:   class Column
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[35,6] cannot find symbol
+[ERROR]   symbol:   class Column
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[38,6] cannot find symbol
+[ERROR]   symbol:   class ManyToOne
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[39,6] cannot find symbol
+[ERROR]   symbol:   class JoinColumn
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[42,6] cannot find symbol
+[ERROR]   symbol:   class Column
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[45,6] cannot find symbol
+[ERROR]   symbol:   class Column
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java:[48,6] cannot find symbol
+[ERROR]   symbol:   class Column
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.model.ForgedObject
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/RunicForgeService.java:[326,21] cannot find symbol
+[ERROR]   symbol:   method lockTile(int,int,int)
+[ERROR]   location: variable game of type com.heroesoftimepoc.temporalengine.model.Game
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/RunicForgeService.java:[332,26] incompatible types: java.lang.String cannot be converted to com.heroesoftimepoc.temporalengine.model.Hero.HeroStatus
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/RunicForgeService.java:[335,13] cannot find symbol
+[ERROR]   symbol:   method createParadox(int,int,java.lang.String)
+[ERROR]   location: variable game of type com.heroesoftimepoc.temporalengine.model.Game
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/RunicForgeService.java:[360,19] cannot find symbol
+[ERROR]   symbol:   method addTitle(java.lang.String)
+[ERROR]   location: variable forger of type com.heroesoftimepoc.temporalengine.model.Hero
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
