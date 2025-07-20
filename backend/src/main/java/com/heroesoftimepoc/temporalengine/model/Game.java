@@ -60,6 +60,11 @@ public class Game {
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<GameTile> tiles = new ArrayList<>();
     
+    @ElementCollection
+    @CollectionTable(name = "game_history", joinColumns = @JoinColumn(name = "game_id"))
+    @Column(name = "event")
+    private List<String> gameHistory = new ArrayList<>();
+    
     @Column(name = "winner")
     private String winner;
     
@@ -272,5 +277,26 @@ public class Game {
         
         // Verrouiller la tuile
         lockTile(x, y, 99); // Verrouillage long
+    }
+    
+    /**
+     * Ajoute un événement à l'historique du jeu
+     */
+    public void addToHistory(int turn, String event) {
+        if (gameHistory == null) {
+            gameHistory = new ArrayList<>();
+        }
+        String entry = String.format("[Tour %d] %s", turn >= 0 ? turn : currentTurn, event);
+        gameHistory.add(entry);
+    }
+    
+    /**
+     * Retire un événement de l'historique (pour SCRIBE_NONEXISTENCE)
+     */
+    public boolean removeFromHistory(String eventPattern) {
+        if (gameHistory == null) {
+            return false;
+        }
+        return gameHistory.removeIf(entry -> entry.contains(eventPattern));
     }
 }
