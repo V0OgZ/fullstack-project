@@ -2,6 +2,7 @@ package com.heroesoftimepoc.temporalengine.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.heroesoftimepoc.temporalengine.service.TemporalScriptParser;
+import com.heroesoftimepoc.temporalengine.service.ScriptTranslationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,9 @@ public class CollectionController {
 
     @Autowired
     private TemporalScriptParser temporalParser;
+    
+    @Autowired
+    private ScriptTranslationService scriptTranslationService;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -98,11 +102,13 @@ public class CollectionController {
     public ResponseEntity<Map<String, Object>> translateScript(@RequestBody Map<String, String> request) {
         try {
             String script = request.get("script");
+            String mode = request.getOrDefault("mode", "all");
+            
             if (script == null || script.trim().isEmpty()) {
                 return ResponseEntity.badRequest().body(Map.of("error", "Script requis"));
             }
 
-            Map<String, Object> translation = translateHOTSScript(script);
+            Map<String, Object> translation = scriptTranslationService.translateScript(script, mode);
             return ResponseEntity.ok(translation);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(Map.of("error", "Erreur de traduction: " + e.getMessage()));
@@ -133,6 +139,18 @@ public class CollectionController {
             return ResponseEntity.ok(result);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(Map.of("error", "Erreur de traduction: " + e.getMessage()));
+        }
+    }
+
+    @GetMapping("/translation-modes")
+    public ResponseEntity<Map<String, Object>> getTranslationModes() {
+        try {
+            Map<String, Object> result = new HashMap<>();
+            result.put("modes", scriptTranslationService.getAvailableModes());
+            result.put("examples", scriptTranslationService.getTranslationExamples());
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Erreur: " + e.getMessage()));
         }
     }
 
