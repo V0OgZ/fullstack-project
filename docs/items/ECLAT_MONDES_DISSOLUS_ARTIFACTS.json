@@ -1,86 +1,155 @@
-[
+{
+  "scenario": "L'Éclat des Mondes Dissolus",
+  "artifacts": [
     {
-        "id": "wigner_eye",
-        "name": "🔮 Œil de Wigner",
-        "rarity": "Paradoxe",
-        "tier": 6,
-        "charges": 3,
-        "type": "TALISMAN",
-        "description": "Observe et collapse une timeline ennemie en forçant l'effondrement quantique. Permet de voir les superpositions cachées et d'en éliminer une au choix.",
-        "temporal_formula": "OBSERVE(ψ_enemy) ⇒ COLLAPSE(selected_branch)",
-        "trigger": "TARGET_TIMELINE(enemy) ⇒ FORCE_COLLAPSE()",
-        "effects": {
-            "type": "OBSERVATION",
-            "range": "infinite",
-            "collapse_target": "enemy_timeline",
-            "reveal_hidden": true,
-            "special": "selective_collapse"
-        },
-        "quantum_properties": {
-            "observation_strength": 0.95,
-            "collapse_probability": 1.0,
-            "measurement_type": "DESTRUCTIVE"
-        },
-        "usage_conditions": {
-            "requires_target": true,
-            "target_type": "ENEMY_TIMELINE",
-            "cooldown": 5
-        }
+      "id": "totem_silencium",
+      "name": "Totem de Silencium",
+      "type": "ULTIMATE",
+      "description": "Contient TOUS les artefacts fusionnés. Porté uniquement par Abyme-le-Rassemblé.",
+      "effects": [
+        "ALL_ARTIFACTS_POWER",
+        "CANNOT_BE_STOLEN",
+        "REALITY_CONTROL"
+      ],
+      "lore": "999 fragments de pouvoir unis dans un silence assourdissant"
     },
     {
-        "id": "schrodinger_grimoire",
-        "name": "📜 Grimoire de Schrödinger",
-        "rarity": "Légendaire",
-        "tier": 5,
-        "charges": 4,
-        "type": "BOOK",
-        "description": "Crée une timeline alternative 'non encore jouée' qui reste en superposition jusqu'à observation. Permet de préparer des actions dans l'ombre.",
-        "temporal_formula": "ψ_hidden: ⊙(Δt+n @x,y ⟶ ACTION) with VISIBILITY=false",
-        "trigger": "REVEAL_TIMELINE() when needed",
-        "effects": {
-            "type": "WRITE",
-            "visibility": "hidden",
-            "superposition_duration": "until_observed",
-            "branches_max": 3,
-            "special": "shadow_preparation"
-        },
-        "quantum_properties": {
-            "coherence_maintenance": 0.8,
-            "entanglement_strength": 0.7,
-            "decoherence_resistance": 0.9
-        },
-        "usage_conditions": {
-            "requires_preparation": true,
-            "preparation_time": 1,
-            "max_concurrent": 2
-        }
+      "id": "parchemin_sale",
+      "name": "Parchemin Sale de Chlamydius",
+      "type": "PERSONAL",
+      "description": "Les mots s'y écrivent avant d'être pensés",
+      "effects": [
+        "SCRIBE_REALITY",
+        "READ_UNWRITTEN",
+        "MEMORY_LEAK"
+      ],
+      "special": "Peut créer des événements qui se produiront ailleurs et plus tard"
     },
     {
-        "id": "causality_flame",
-        "name": "🔥 Flamme de Causalité",
-        "rarity": "Paradoxe",
-        "tier": 7,
-        "charges": 1,
-        "type": "SEAL",
-        "description": "Impose une réalité définitive au tour 25 si elle est stable. Scelle le destin d'une timeline en la rendant immuable et prioritaire.",
-        "temporal_formula": "AT_TURN(25) ⇒ SEAL_REALITY(dominant_timeline)",
-        "trigger": "TURN_25_REACHED AND STABILITY > 0.8",
-        "effects": {
-            "type": "SEAL",
-            "activation_turn": 25,
-            "stability_required": 0.8,
-            "priority": "ABSOLUTE",
-            "special": "destiny_lock"
-        },
-        "quantum_properties": {
-            "reality_strength": 1.0,
-            "causal_immunity": true,
-            "temporal_lock": true
-        },
-        "usage_conditions": {
-            "single_use": true,
-            "turn_requirement": 25,
-            "stability_threshold": 0.8
-        }
+      "id": "encre_vivante",
+      "name": "Encre Vivante",
+      "type": "CONSUMABLE",
+      "description": "Coule vers le haut et écrit ce qui devrait être tu",
+      "effects": [
+        "WRITE_FORBIDDEN",
+        "REALITY_STAIN",
+        "TEMPORAL_INK"
+      ],
+      "uses": 3
+    },
+    {
+      "id": "plume_trouble",
+      "name": "Plume de l'Instant Trouble",
+      "type": "WEAPON",
+      "description": "Écrit dans plusieurs timelines simultanément",
+      "damage": "1d4 + PARADOX",
+      "effects": [
+        "DELTA_SCRIBE",
+        "TIMELINE_SPLIT",
+        "CAUSAL_CONFUSION"
+      ]
+    },
+    {
+      "id": "parchemin_fer",
+      "name": "Parchemin de Fer",
+      "type": "ULTIMATE_CONSUMABLE",
+      "description": "Ce qui y est écrit devient réalité absolue pour 1 tour",
+      "effects": [
+        "ABSOLUTE_REALITY_WRITE",
+        "ONE_TURN_TRUTH",
+        "CANNOT_BE_CONTESTED"
+      ],
+      "cost": "50% MAX_TEMPORAL_ENERGY",
+      "cooldown": "ONCE_PER_GAME"
+    },
+    {
+      "id": "eclat_blanc",
+      "name": "L'Éclat Blanc",
+      "type": "RITUAL",
+      "description": "Incantation triple qui transforme le chaos en silence",
+      "requirements": [
+        "3_HEROES_AT_PILLARS",
+        "TURN_30",
+        "SYNCHRONIZED_CAST"
+      ],
+      "incantation": "À l'encre du chaos, au code du rêve, au parchemin sans temps – que s'écrive le silence.",
+      "effect": "SEAL_ABYME_FOREVER"
+    },
+    {
+      "id": "eclat_memoire",
+      "name": "Éclat de Mémoire Oubliée",
+      "type": "ARTIFACT",
+      "description": "Fragment d'une histoire qui n'a jamais été racontée",
+      "effects": [
+        "REVEAL_HIDDEN_PATH",
+        "MEMORY_RESTORATION",
+        "ANTI_ARCHIVAL"
+      ],
+      "special": "Peut contrer l'Archivage d'Abyme une fois"
+    },
+    {
+      "id": "container_paradoxal",
+      "name": "Container Paradoxal de Jean",
+      "type": "TRAP",
+      "description": "Piège les créatures dans une boucle de logs infinie",
+      "effects": [
+        "CREATURE_CONTAINMENT",
+        "LOG_OVERFLOW",
+        "TEMPORAL_PRISON"
+      ],
+      "quote": "while(true) { console.log('Tu es piégé, connard'); }"
+    },
+    {
+      "id": "compilateur_quantique",
+      "name": "Compilateur Quantique de Claudius",
+      "type": "TOOL",
+      "description": "Compile la réalité en code exécutable",
+      "effects": [
+        "REALITY_COMPILATION",
+        "BUG_DETECTION",
+        "QUANTUM_OPTIMIZATION"
+      ],
+      "warning": "Peut causer des segfaults dans le tissu de l'espace-temps"
+    },
+    {
+      "id": "livre_vide_sans_nom",
+      "name": "Le Livre Vide Sans Nom",
+      "type": "PRISON",
+      "description": "Prison ultime pour celui qui archive tout",
+      "effects": [
+        "ETERNAL_BLANK_PAGE",
+        "STORY_NEGATION",
+        "EXISTENCE_ERASURE"
+      ],
+      "lore": "La pire punition pour un archiviste : devenir une page blanche"
     }
-] 
+  ],
+  "creatures": [
+    {
+      "id": "lame_reversible",
+      "name": "Lame Réversible",
+      "type": "PARADOX_ENTITY",
+      "hp": "0/50",
+      "description": "N'existe que si elle est tuée",
+      "abilities": [
+        "EXIST_ONLY_IF_KILLED",
+        "DEATH_SPAWN",
+        "TEMPORAL_PARADOX"
+      ],
+      "special": "Tuer cette créature la fait apparaître avec tous ses HP"
+    },
+    {
+      "id": "echo_fige",
+      "name": "Écho Figé",
+      "type": "MEMORY_FRAGMENT",
+      "hp": 10,
+      "description": "Souvenir d'une bataille qui n'a jamais eu lieu",
+      "abilities": [
+        "INTANGIBLE",
+        "MEMORY_LEAK",
+        "PAST_REVELATION"
+      ],
+      "drops": "fragment_histoire"
+    }
+  ]
+} 
