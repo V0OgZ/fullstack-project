@@ -133,8 +133,33 @@ if [ "$BACKEND_RUNNING" = true ]; then
         "./$SCRIPTS_DIR/test-amplitude-grofi.sh 2>&1 | grep -E 'PASS|FAIL|succès'"
 fi
 
-# 6. ANALYSE DES FICHIERS
-echo -e "\n${BLUE}=== 6. ANALYSE DU PROJET ===${NC}"
+# 6. TESTS SCÉNARIOS HOTS ADDITIONNELS
+echo -e "\n${BLUE}=== 6. TESTS SCÉNARIOS HOTS ADDITIONNELS ===${NC}"
+
+if [ "$BACKEND_RUNNING" = true ]; then
+    run_test_suite "Scénario Vol du Trésor (HOTS)" \
+        "./$SCRIPTS_DIR/execute-hots-file.sh $SCENARIOS_DIR/treasure_theft_test.hots 2>&1 | grep -E 'Succès:|Échecs:|RÉSUMÉ'"
+    
+    run_test_suite "Scénario Bataille Temporelle Complète (HOTS)" \
+        "./$SCRIPTS_DIR/execute-hots-file.sh $SCENARIOS_DIR/bataille_temporelle_complete.hots 2>&1 | grep -E 'Succès:|Échecs:|RÉSUMÉ'"
+fi
+
+# 7. BENCHMARK JAVA vs HOTS
+echo -e "\n${BLUE}=== 7. BENCHMARK JAVA vs HOTS ===${NC}"
+
+if [ "$BACKEND_RUNNING" = true ]; then
+    run_test_suite "Benchmark Performance Java vs HOTS" \
+        "./$SCRIPTS_DIR/benchmark-java-vs-hots-with-metrics.sh 2>&1 | grep -E 'Ratio moyen|Performance|ms'"
+    
+    # Ancien benchmark si disponible
+    if [ -f "$SCRIPTS_DIR/test/benchmark-native-vs-script.sh" ]; then
+        run_test_suite "Benchmark Legacy Native vs Script" \
+            "./$SCRIPTS_DIR/test/benchmark-native-vs-script.sh 2>&1 | grep -E 'NATIVE|SCRIPT|Performance'"
+    fi
+fi
+
+# 8. ANALYSE DES FICHIERS
+echo -e "\n${BLUE}=== 8. ANALYSE DU PROJET ===${NC}"
 
 echo "📊 Statistiques du projet :"
 echo "- Fichiers Java : $(find backend/src -name "*.java" | wc -l)"
@@ -146,7 +171,7 @@ echo "- Fichiers JSON : $(find . -name "*.json" | wc -l)"
 TODO_COUNT=$(grep -r "TODO" backend/src --include="*.java" | wc -l)
 echo "- TODOs dans le code : $TODO_COUNT"
 
-# 7. RÉSUMÉ FINAL
+# 9. RÉSUMÉ FINAL
 echo -e "\n${PURPLE}=== RÉSUMÉ FINAL ===${NC}"
 echo "Total suites de tests : $TOTAL_SUITES"
 echo -e "${GREEN}Passées : $PASSED_SUITES${NC}"
