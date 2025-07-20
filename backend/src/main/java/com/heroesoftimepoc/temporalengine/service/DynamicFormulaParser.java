@@ -446,7 +446,7 @@ public class DynamicFormulaParser {
         Matcher grofiDaggerMatcher = GROFI_DAGGER_PATTERN.matcher(operation);
         if (grofiDaggerMatcher.find()) {
             String expression = grofiDaggerMatcher.group(1);
-            return executeGrofiDagger(expression, variables, hero, game);
+            return executeGrofiDagger(expression, hero, game);
         }
         
         // 🆕 GROFI - Ω[expression] (Finalité ultime)
@@ -821,37 +821,36 @@ public class DynamicFormulaParser {
     /**
      * 🆕 GROFI - † : Mort/Renaissance quantique
      */
-    private Map<String, Object> executeGrofiDagger(String expression, Map<String, Object> variables, Hero hero, Game game) {
-        Map<String, Object> result = new HashMap<>();
+    private Map<String, Object> executeGrofiDagger(String params, Hero hero, Game game) {
+        Map<String, Object> effects = new HashMap<>();
         
-        // Si le héros est "mort" (health <= 0), le ressusciter
+        // † - Mort/Renaissance quantique
         if (hero.getHealth() <= 0) {
+            // Ressusciter avec 50% de vie
             hero.setHealth(hero.getMaxHealth() / 2);
-            hero.setStatus(HeroStatus.ACTIVE);
-            heroRepository.save(hero);
-            
-            result.put("message", "† - Renaissance quantique de " + hero.getName());
-            result.put("newHealth", hero.getHealth());
+            hero.setStatus(Hero.HeroStatus.ACTIVE);
+            effects.put("resurrected", true);
+            effects.put("message", "Hero resurrected from quantum death!");
         } else {
-            // Créer un état quantique de "mort potentielle"
-            PsiState deathState = new PsiState();
-            deathState.setPsiId("ψ†" + System.currentTimeMillis());
-            deathState.setExpression("† - État de mort/vie superposé");
-            deathState.setOwnerHero(hero.getName());
-            deathState.setTargetX(hero.getPositionX());
-            deathState.setTargetY(hero.getPositionY());
-            deathState.setComplexAmplitude(0.707, 0.707); // 50/50 mort/vie
-            deathState.setUseComplexAmplitude(true);
-            deathState.setGame(game);
+            // Créer un écho temporel (état quantique du héros)
+            PsiState echo = new PsiState();
+            echo.setPsiId("ψ†" + System.currentTimeMillis());
+            echo.setExpression("† - État de mort/vie superposé");
+            echo.setOwnerHero(hero.getName());
+            echo.setTargetX(hero.getPositionX());
+            echo.setTargetY(hero.getPositionY());
+            echo.setComplexAmplitude(0.707, 0.707); // 50/50 mort/vie
+            echo.setUseComplexAmplitude(true);
+            echo.setGame(game);
             
-            psiStateRepository.save(deathState);
-            game.addPsiState(deathState);
+            psiStateRepository.save(echo);
+            game.addPsiState(echo);
             
-            result.put("message", "† - État de mort/vie superposé créé");
-            result.put("deathStateId", deathState.getPsiId());
+            effects.put("message", "† - État de mort/vie superposé créé");
+            effects.put("deathStateId", echo.getPsiId());
         }
         
-        return result;
+        return effects;
     }
     
     /**
@@ -923,7 +922,7 @@ public class DynamicFormulaParser {
             case 2:
                 // Changement aléatoire d'énergie temporelle
                 int energyChange = random.nextInt(41) - 20; // -20 à +20
-                hero.modifyTemporalEnergy(energyChange);
+                modifyHeroTemporalEnergy(hero, energyChange);
                 heroRepository.save(hero);
                 result.put("message", "↯ - Chaos: Énergie " + (energyChange >= 0 ? "+" : "") + energyChange);
                 break;
@@ -953,5 +952,13 @@ public class DynamicFormulaParser {
         
         result.put("chaosType", effect);
         return result;
+    }
+
+    private void modifyHeroTemporalEnergy(Hero hero, int amount) {
+        if (amount > 0) {
+            hero.restoreTemporalEnergy(amount);
+        } else {
+            hero.useTemporalEnergy(-amount);
+        }
     }
 } 
