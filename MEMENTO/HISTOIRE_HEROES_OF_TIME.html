@@ -98,6 +98,48 @@
             text-decoration: underline;
             text-shadow: 0 0 10px #f39c12;
         }
+        
+        .new-feature {
+            background: rgba(243, 156, 18, 0.2);
+            border: 2px solid #f39c12;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .new-feature::before {
+            content: "🆕";
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            font-size: 1.5em;
+        }
+        
+        .epic-section {
+            background: linear-gradient(45deg, rgba(233, 69, 96, 0.1), rgba(243, 156, 18, 0.1));
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            animation: border-glow 3s ease-in-out infinite;
+        }
+        
+        @keyframes border-glow {
+            0%, 100% { border-color: #e94560; }
+            50% { border-color: #f39c12; }
+        }
+        
+        .forge-warning {
+            background: rgba(255, 0, 0, 0.2);
+            border: 2px dashed #ff0000;
+            padding: 10px;
+            text-align: center;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -125,6 +167,56 @@
                 <span class="character">⚔️ Arthur</span>
                 <span class="character">🏹 Lysandrel</span>
                 <span class="character">🔮 Morgana</span>
+                <span class="character" style="border-color: #00ffff;">💻 Claudius</span>
+                <span class="character">⚡ Axis</span>
+            </div>
+        </div>
+        
+        <div class="section epic-section">
+            <h2>🔥 LA SESSION ÉPIQUE DU 20 JUILLET 2025</h2>
+            
+            <div class="new-feature">
+                <h3>🔮 PANOPTICΩN - Vision 3D du Multivers 5D</h3>
+                <ul>
+                    <li>Service complet de projection 5D → 3D</li>
+                    <li>Interface Three.js avec particules quantiques</li>
+                    <li>Axis peut <strong>VOLER LE FUTUR</strong> !</li>
+                    <li>API REST complète avec tests</li>
+                </ul>
+            </div>
+            
+            <div class="new-feature">
+                <h3>🔥 LA FORGE RUNIQUE ULTIME</h3>
+                <div class="forge-warning">
+                    ⚠️ ATTENTION : Peut VRAIMENT crasher le serveur ! ⚠️
+                </div>
+                <ul>
+                    <li>Les joueurs écrivent du code HOTS pour créer des objets</li>
+                    <li>Patterns dangereux = explosion temporelle</li>
+                    <li>Symboles interdits = collapse causal instantané</li>
+                    <li>Titre "Maître Forgeron Quantique" après 3 succès</li>
+                </ul>
+            </div>
+            
+            <div class="new-feature">
+                <h3>💻 CLAUDIUS - L'Architecte du Multivers</h3>
+                <p><em>Créé par Claude/Memento, membre de l'équipe</em></p>
+                <ul>
+                    <li><strong>Refactoring de Réalité</strong> - Réécrit le code d'une zone 3x3</li>
+                    <li><strong>Débogage Temporel</strong> - git revert HEAD~3 --temporal</li>
+                    <li><strong>Fork Dimensionnel</strong> - Crée une copie de lui-même</li>
+                    <li><strong>Compilation Ultime</strong> - Transforme tous les états ψ en Ω</li>
+                </ul>
+                <div class="quote">
+                    "Le multivers n'est qu'un programme mal optimisé. Je suis là pour le refactorer."
+                </div>
+            </div>
+            
+            <div class="new-feature">
+                <h3>⚔️ CLAUDIUS VS JEANGROFIGNON - L'Affrontement des Frères Ennemis</h3>
+                <p>Ordre vs Chaos • Code vs Bug • Optimisation vs Destruction</p>
+                <p>Un scénario épique où ils fusionnent temporairement pour créer <strong>ClaudiusGrofignon</strong>, 
+                l'équilibre parfait entre ordre et chaos.</p>
             </div>
         </div>
         
@@ -154,6 +246,9 @@
                 <div class="timeline-item">
                     <strong>Test Jean-Gros</strong> - Le test qui balance tout !
                 </div>
+                <div class="timeline-item" style="color: #f39c12;">
+                    <strong>20 Juillet - Session Épique</strong> - PANOPTICΩN + Forge Runique + Claudius
+                </div>
             </div>
         </div>
         
@@ -164,21 +259,37 @@
                 <li>🔄 <strong>Collapse Causal</strong> : INTERACTION, OBSERVATION, ANCHORING, TEMPORAL_LIMIT</li>
                 <li>⚡ <strong>Interférences Quantiques</strong> : Amplitudes complexes (0.6+0.8i)</li>
                 <li>🗺️ <strong>Fog of Causality</strong> : Ce que tu ne vois pas n'existe pas encore</li>
+                <li>🔮 <strong>PANOPTICΩN</strong> : Vision 3D du multivers 5D en temps réel</li>
+                <li>🔥 <strong>Forge Runique</strong> : Créer des objets en écrivant du code (dangereux !)</li>
             </ul>
         </div>
         
         <div class="section">
             <h2>📊 État du Projet</h2>
-            <p><strong>62 fichiers .hots</strong> | <strong>89 scripts de test</strong> | <strong>∞ possibilités temporelles</strong></p>
+            <p><strong>66 fichiers .hots</strong> | <strong>94 scripts de test</strong> | <strong>50,000+ lignes de code</strong> | <strong>∞ possibilités temporelles</strong></p>
+            
             <div class="quote">
-                "La une des magazines. Bon, allez, je m'emballe, mais enfin, je pense qu'il y a du potentiel..."
-                <br>- Jean Grofignon
+                "The multiverse abides, and so does our code."
+                <br>- Memento (Claude), membre de l'équipe Heroes of Time
             </div>
+            
+            <h3>🏆 L'Équipe Légendaire</h3>
+            <ul>
+                <li><strong>Jean</strong> : Le Visionnaire Chaotique</li>
+                <li><strong>Vince</strong> : Le Stratège Cool</li>
+                <li><strong>Walter</strong> : Le Chimiste du Code</li>
+                <li><strong>The Dude</strong> : L'Esprit Zen</li>
+                <li><strong>Memento (Claude)</strong> : L'Architecte qui n'oublie jamais</li>
+            </ul>
         </div>
         
         <div style="text-align: center; margin-top: 40px;">
             <p>🛋️ <em>Jean lit cette page depuis son canapé sur GitHub</em></p>
             <p><a href="https://github.com/V0OgZ/Heroes-of-Time">Voir le Projet sur GitHub</a></p>
+            <p style="margin-top: 20px; font-size: 0.9em; opacity: 0.8;">
+                Dernière mise à jour : 20 juillet 2025 - Session Épique<br>
+                "La une des magazines ? Je pense qu'on y est déjà."
+            </p>
         </div>
     </div>
 </body>
