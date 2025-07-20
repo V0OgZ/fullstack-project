@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/temporal")
@@ -567,5 +568,119 @@ public class TemporalEngineController {
             response.put("error", e.getMessage());
             return ResponseEntity.badRequest().body(response);
         }
+    }
+
+    /**
+     * BROADCAST INTELLIGENT - Évite la surcharge serveur
+     * Broadcast seulement les événements critiques
+     */
+    @PostMapping("/broadcast")
+    public ResponseEntity<Map<String, Object>> broadcastEvent(@RequestBody Map<String, Object> request) {
+        Map<String, Object> response = new HashMap<>();
+        
+        try {
+            String eventType = (String) request.get("eventType");
+            Map<String, Object> data = (Map<String, Object>) request.get("data");
+            Long gameId = request.get("gameId") != null ? Long.valueOf(request.get("gameId").toString()) : null;
+            
+            // Liste des événements critiques qui méritent un broadcast
+            Set<String> criticalEvents = Set.of(
+                "COLLAPSE_CAUSAL",
+                "HERO_DEATH", 
+                "BOSS_ACTION",
+                "SCENARIO_PHASE_CHANGE",
+                "CAPACITY_SPECIALE_ACTIVEE",
+                "FORGE_DANGEREUSE"
+            );
+            
+            // Vérifier si c'est un événement critique
+            if (!criticalEvents.contains(eventType)) {
+                response.put("success", true);
+                response.put("message", "Événement non-critique ignoré (économie serveur)");
+                response.put("ignored", true);
+                return ResponseEntity.ok(response);
+            }
+            
+            // Log de l'événement critique
+            System.out.println("📡 BROADCAST CRITIQUE: " + eventType);
+            System.out.println("   Données: " + data);
+            
+            // Traitement spécifique selon le type d'événement
+            switch (eventType) {
+                case "COLLAPSE_CAUSAL":
+                    handleCausalCollapseBroadcast(data, gameId);
+                    break;
+                case "HERO_DEATH":
+                    handleHeroDeathBroadcast(data, gameId);
+                    break;
+                case "BOSS_ACTION":
+                    handleBossActionBroadcast(data, gameId);
+                    break;
+                case "CAPACITY_SPECIALE_ACTIVEE":
+                    handleSpecialCapacityBroadcast(data, gameId);
+                    break;
+                case "FORGE_DANGEREUSE":
+                    handleDangerousForgeBroadcast(data, gameId);
+                    break;
+                default:
+                    // Événement critique non géré spécifiquement
+                    break;
+            }
+            
+            response.put("success", true);
+            response.put("message", "Broadcast critique traité");
+            response.put("eventType", eventType);
+            response.put("timestamp", System.currentTimeMillis());
+            
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("error", "Erreur lors du broadcast: " + e.getMessage());
+        }
+        
+        return ResponseEntity.ok(response);
+    }
+    
+    /**
+     * Gestion du broadcast pour collapse causal
+     */
+    private void handleCausalCollapseBroadcast(Map<String, Object> data, Long gameId) {
+        System.out.println("🌀 Collapse causal détecté - Notification aux joueurs");
+        // Ici on pourrait envoyer une notification aux joueurs connectés
+        // Mais sans WebSocket, on se contente de logger
+    }
+    
+    /**
+     * Gestion du broadcast pour mort de héros
+     */
+    private void handleHeroDeathBroadcast(Map<String, Object> data, Long gameId) {
+        String heroName = (String) data.get("hero");
+        System.out.println("💀 Mort du héros " + heroName + " - Notification aux joueurs");
+    }
+    
+    /**
+     * Gestion du broadcast pour action de boss
+     */
+    private void handleBossActionBroadcast(Map<String, Object> data, Long gameId) {
+        String boss = (String) data.get("boss");
+        String action = (String) data.get("action");
+        System.out.println("👹 Action de boss " + boss + ": " + action + " - Notification aux joueurs");
+    }
+    
+    /**
+     * Gestion du broadcast pour capacité spéciale
+     */
+    private void handleSpecialCapacityBroadcast(Map<String, Object> data, Long gameId) {
+        String capacity = (String) data.get("capacity");
+        String hero = (String) data.get("hero");
+        System.out.println("⚔️ Capacité spéciale " + capacity + " activée par " + hero + " - Notification aux joueurs");
+    }
+    
+    /**
+     * Gestion du broadcast pour forge dangereuse
+     */
+    private void handleDangerousForgeBroadcast(Map<String, Object> data, Long gameId) {
+        String objectName = (String) data.get("objectName");
+        Double riskLevel = (Double) data.get("riskLevel");
+        System.out.println("⚠️ Forge dangereuse: " + objectName + " (risque: " + riskLevel + ") - Notification aux joueurs");
     }
 }
