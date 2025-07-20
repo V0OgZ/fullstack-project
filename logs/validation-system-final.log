@@ -59,6 +59,7 @@ backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/BenchmarkCon
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/CausalIntegrationController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/CausalPerformanceController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/CollectionController.java:0
+backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/CreatureController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/ExtendedQuantumController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/FormulaInterpreterController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/GameController.java:0
