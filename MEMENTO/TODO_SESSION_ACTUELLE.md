@@ -1,5 +1,5 @@
 # 📋 TODO SESSION ACTUELLE - HEROES OF TIME
-## Mise à jour : 21 Juillet 2025 - 00:30
+## Mise à jour : 21 Juillet 2025 - 00:50
 
 ---
 
@@ -33,6 +33,14 @@
 - ✅ **Script de test automatisé** avec validation complète
 - ✅ **Documentation exhaustive** avec statistiques détaillées
 
+### 🏰 **LA TOUR SOMBRE - SCÉNARIO ÉPIQUE COMPLET**
+- ✅ **Scénario HOTS épique** avec Roland, le Gardien de la Tour
+- ✅ **10 phases narratives** : Arrivée → Équipement → 8 niveaux → Victoire
+- ✅ **20 artefacts testés** (10 légendaires + 10 mineurs)
+- ✅ **Script de test automatisé** complet avec validation
+- ✅ **Documentation épique** avec synopsis narratif détaillé
+- ✅ **Intégration système** avec tous les services (traduction, broadcast, forge)
+
 ### 🚀 **SYSTÈMES PRÉCÉDENTS**
 - ✅ **Capacités spéciales** (PRE_EXISTENCE_STRIKE, MEMORY_INFECTION, etc.)
 - ✅ **Forge Runique complète** (API Controller, UI port 8000)
@@ -65,6 +73,7 @@
 - ⏳ **"Le Treizième Codex"** - Vérifier présence et tests
 - ⏳ **"L'Éclat des Mondes Dissolus"** - Vérifier présence et tests
 - ⏳ **Nouveaux scénarios** avec Les Pieds Nickelés
+- ⏳ **Scénarios dérivés** de La Tour Sombre
 
 ### 🔧 **SYSTÈMES TECHNIQUES**
 - ⏳ **Interface graphique** pour capacités spéciales
@@ -85,11 +94,13 @@
 - 💡 **"Les Pieds Nickelés vs The Dude"** - Match de maladresses
 - 💡 **"Le Grand Chaos"** - Tous les héros absurdes ensemble
 - 💡 **"La Bataille des Plans Foireux"** - Ribouldingue vs Croquignol
+- 💡 **"Roland vs Les Pieds Nickelés"** - Gardien vs Chaos
 
 ### 🔧 **FONCTIONNALITÉS**
 - 💡 **Mode "Maladresse"** - Tous les héros deviennent maladroits
 - 💡 **Système de "Plans Foireux"** - Génération automatique de plans ratés
 - 💡 **Interface "Chaos"** - UI spéciale pour les scénarios fous
+- 💡 **Système de Tours** - Autres tours avec d'autres héros
 
 ---
 
@@ -98,31 +109,32 @@
 ### **Fichiers Créés**
 - 1 fichier JSON (héros Pieds Nickelés)
 - 1 fichier HOTS (scénario complet)
-- 1 script de test automatisé
-- 2 fichiers de documentation
-- 2 fichiers Java (service + controller)
+- 1 fichier HOTS (La Tour Sombre)
+- 1 script de test (La Tour Sombre)
+- 1 documentation épique (La Tour Sombre)
 
-### **Capacités Implémentées**
-- 5 capacités spéciales Pieds Nickelés
-- 5 capacités spéciales existantes
-- 1 système broadcast intelligent
-- 1 service de traduction
+### **Tests Réalisés**
+- ✅ Test complet des Pieds Nickelés
+- ✅ Test complet des artefacts mineurs
+- ✅ Test complet de La Tour Sombre
+- ✅ Validation de tous les services
 
-### **Héros Créés**
-- 10 héros Pieds Nickelés
-- 3 héros GROFI existants
-- **Total : 13 héros opérationnels**
-
----
-
-## 🎯 **PROCHAINES ÉTAPES PRIORITAIRES**
-
-1. **Tester le scénario complet** des Pieds Nickelés
-2. **Implémenter les 5 capacités restantes**
-3. **Vérifier les scénarios épiques** existants
-4. **Optimiser les performances** du système
+### **Documentation**
+- ✅ Rapport Pieds Nickelés complet
+- ✅ Rapport artefacts mineurs détaillé
+- ✅ Documentation épique La Tour Sombre
+- ✅ Mise à jour TODO session
 
 ---
 
-**🎭 SESSION TRÈS PRODUCTIVE - LES PIEDS NICKELÉS INTÉGRÉS !**  
-*L'humour et la maladresse sont maintenant des éléments de gameplay !* 
+## 🎯 **PROCHAINES PRIORITÉS**
+
+1. **Finaliser les 5 capacités restantes** des Pieds Nickelés
+2. **Tester La Tour Sombre** en conditions réelles
+3. **Créer des scénarios dérivés** basés sur les succès
+4. **Optimiser les performances** des nouveaux systèmes
+5. **Préparer la prochaine session** avec de nouveaux défis
+
+---
+
+*Dernière mise à jour: 21 Juillet 2025 - 00:50* 
