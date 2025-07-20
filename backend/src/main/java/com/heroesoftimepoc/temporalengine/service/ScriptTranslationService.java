@@ -31,6 +31,12 @@ public class ScriptTranslationService {
         ID_TO_DESCRIPTION.put("temporal_compass", "la Boussole Temporelle");
         ID_TO_DESCRIPTION.put("causal_disruptor", "le Perturbateur Causal");
         
+        // Artefacts du Codex Final
+        ID_TO_DESCRIPTION.put("parchemin_sale", "le Parchemin Sale, manuscrit des vérités interdites");
+        ID_TO_DESCRIPTION.put("encre_vivante", "l'Encre Vivante, fluide des réalités oubliées");
+        ID_TO_DESCRIPTION.put("livre_vide_sans_nom", "le Livre Vide Sans Nom, grimoire de l'inexistence");
+        ID_TO_DESCRIPTION.put("grofi_omega", "l'Oméga de Grofi, cet artefact ultime qui transcende les lois de la réalité");
+        
         // Créatures avec descriptions littéraires
         ID_TO_DESCRIPTION.put("quantum_phoenix", "le phénix quantique légendaire");
         ID_TO_DESCRIPTION.put("quantum_wisp", "la lueur quantique éthérée");
@@ -51,6 +57,7 @@ public class ScriptTranslationService {
         ID_TO_DESCRIPTION.put("Axis", "Axis, le Voyageur Linéaire");
         ID_TO_DESCRIPTION.put("Chlamydius", "Chlamydius, le Scribe Non Né");
         ID_TO_DESCRIPTION.put("Omega-Zero", "Omega-Zéro, l'Entité Ultime");
+        ID_TO_DESCRIPTION.put("Omega-Zero", "Omega-Zéro, l'Entité Ultime"); // Avec tiret
 
         // === TRADUCTIONS LITTÉRAIRES ANGLAISES ===
         LITERARY_TRANSLATIONS.put("HERO", "le héros valeureux");
@@ -315,8 +322,8 @@ public class ScriptTranslationService {
                 enhanced = enhanced.replaceAll("HERO:([^,\\s]+)", "le héros valeureux $1");
             }
             
-            // Ajouter des adjectifs mystiques
-            if (enhanced.contains("héros")) {
+            // Ajouter des adjectifs mystiques (éviter les duplications)
+            if (enhanced.contains("héros") && !enhanced.contains("héros valeureux")) {
                 enhanced = enhanced.replace("héros", "héros valeureux");
             }
             if (enhanced.contains("étend")) {

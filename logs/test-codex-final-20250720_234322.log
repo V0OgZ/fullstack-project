@@ -1,0 +1,97 @@
+[1;33m🔍 Vérification des prérequis...[0m
+[0;32m✅ Prérequis validés[0m
+[0;35m🚀 TESTS DES APIs DE BASE[0m
+[0;34m🧪 Test: Health Check[0m
+[0;32m✅ Succès (200)[0m
+[0;36m📄 Réponse: {"activeGames":0,"service":"Heroes of Time API","version":"POC-0.1","status":"healthy","timestamp":1753047802590}...[0m
+[0;34m🧪 Test: Liste des parties[0m
+[0;32m✅ Succès (200)[0m
+[0;36m📄 Réponse: []...[0m
+[0;35m⚔️ TESTS DES HÉROS ÉPIQUES[0m
+[0;34m🎮 Test HOTS: Création d'Omega-Zéro, le Boss Final[0m
+[0;36m📜 Script: HERO(Omega-Zero)[0m
+[0;32m✅ Partie créée (ID: 1)[0m
+[0;32m✅ Script exécuté avec succès[0m
+[0;36m📄 Résultat: {"success":true,"movementPoints":8,"heroName":"Omega-Zero","message":"Game hero Omega-Zero created successfully","playerId":"test-codex"}...[0m
+[0;34m🎮 Test HOTS: Création de Chlamydius, le Scribe Non Né[0m
+[0;36m📜 Script: HERO(Chlamydius)[0m
+[0;32m✅ Partie créée (ID: 2)[0m
+[0;32m✅ Script exécuté avec succès[0m
+[0;36m📄 Résultat: {"success":true,"movementPoints":8,"heroName":"Chlamydius","message":"Game hero Chlamydius created successfully","playerId":"test-codex"}...[0m
+[0;34m🎮 Test HOTS: Création de Jean-Grofignon, l'Éveillé Ontologique[0m
+[0;36m📜 Script: HERO(Jean-Grofignon)[0m
+[0;32m✅ Partie créée (ID: 3)[0m
+[0;32m✅ Script exécuté avec succès[0m
+[0;36m📄 Résultat: {"success":true,"movementPoints":8,"heroName":"Jean-Grofignon","message":"Game hero Jean-Grofignon created successfully","playerId":"test-codex"}...[0m
+[0;35m🏺 TESTS DES ARTEFACTS LÉGENDAIRES[0m
+[0;34m🎮 Test HOTS: Création du Parchemin Sale[0m
+[0;36m📜 Script: CREATE(ARTIFACT, parchemin_sale, HERO:Chlamydius)[0m
+[0;32m✅ Partie créée (ID: 4)[0m
+[0;32m✅ Script exécuté avec succès[0m
+[0;36m📄 Résultat: {"success":true,"message":"Game entity created: ARTIFACT parchemin_sale"}...[0m
+[0;34m🎮 Test HOTS: Création de l'Encre Vivante[0m
+[0;36m📜 Script: CREATE(ARTIFACT, encre_vivante, HERO:Chlamydius)[0m
+[0;32m✅ Partie créée (ID: 5)[0m
+[0;32m✅ Script exécuté avec succès[0m
+[0;36m📄 Résultat: {"success":true,"message":"Game entity created: ARTIFACT encre_vivante"}...[0m
+[0;34m🎮 Test HOTS: Création du Livre Vide Sans Nom[0m
+[0;36m📜 Script: CREATE(ARTIFACT, livre_vide_sans_nom, HERO:Chlamydius)[0m
+[0;32m✅ Partie créée (ID: 6)[0m
+[0;32m✅ Script exécuté avec succès[0m
+[0;36m📄 Résultat: {"success":true,"message":"Game entity created: ARTIFACT livre_vide_sans_nom"}...[0m
+[0;35m🌟 TESTS DES CAPACITÉS SPÉCIALES[0m
+[0;34m🎮 Test HOTS: Utilisation du Parchemin Sale[0m
+[0;36m📜 Script: USE(ARTIFACT, parchemin_sale, HERO:Chlamydius)[0m
+[0;32m✅ Partie créée (ID: 7)[0m
+[0;32m✅ Script exécuté avec succès[0m
+[0;36m📄 Résultat: {"success":true,"message":"Game item used: ARTIFACT parchemin_sale"}...[0m
+[0;34m🎮 Test HOTS: Utilisation de l'Encre Vivante[0m
+[0;36m📜 Script: USE(ARTIFACT, encre_vivante, HERO:Chlamydius)[0m
+[0;32m✅ Partie créée (ID: 8)[0m
+[0;32m✅ Script exécuté avec succès[0m
+[0;36m📄 Résultat: {"success":true,"message":"Game item used: ARTIFACT encre_vivante"}...[0m
+[0;35m📖 TEST DU SCÉNARIO COMPLET[0m
+[0;34m📜 Lecture du scénario: game_assets/scenarios/hots/codex_final.hots[0m
+[0;36m📄 Contenu du scénario (premières lignes):[0m
+[0;36m   # LE TREIZIÈME CODEX[0m
+[0;36m   # Scénario final canonique - 30 tours[0m
+[0;36m   # Coalition des Trois vs Omega-Zéro[0m
+[0;36m   # "Ce qui est écrit peut être effacé. Ce qui est vécu... peut-il être oublié ?"[0m
+[0;36m   [0m
+[0;36m   ## CONFIGURATION INITIALE[0m
+[0;36m   WORLD_SIZE(21, 21)[0m
+[0;36m   SET_TURN_LIMIT(30)[0m
+[0;36m   SET_DIFFICULTY(NIGHTMARE)[0m
+[0;36m   SET_SCENARIO_TYPE(BOSS_FINAL)[0m
+[0;32m✅ Partie scénario créée (ID: 9)[0m
+[0;34m🎮 Exécution des premières commandes du scénario...[0m
+[0;36m📜 Exécution: CREATE(ZONE, nexus_central, @10,10, TYPE:REALITY_CORE)[0m
+[1;33m⚠️ Échec ou commande non supportée[0m
+[0;36m📜 Exécution: CREATE(ZONE, fracture_ouest, @3,10, TYPE:TIMELINE_BREACH)[0m
+[1;33m⚠️ Échec ou commande non supportée[0m
+[0;36m📜 Exécution: CREATE(ZONE, fracture_est, @17,10, TYPE:TIMELINE_BREACH)[0m
+[1;33m⚠️ Échec ou commande non supportée[0m
+[0;36m📜 Exécution: CREATE(ZONE, vide_nord, @10,3, TYPE:VOID_ZONE)[0m
+[1;33m⚠️ Échec ou commande non supportée[0m
+[0;36m📜 Exécution: CREATE(ZONE, archive_sud, @10,17, TYPE:MEMORY_ARCHIVE)[0m
+[1;33m⚠️ Échec ou commande non supportée[0m
+[0;35m🎭 TEST DU SERVICE DE TRADUCTION LITTÉRAIRE[0m
+[0;34m🎨 Test traduction: Création d'Omega-Zéro en mode littéraire[0m
+[0;31m❌ Échec de la traduction[0m
+[0;31m📄 Erreur: {"mode":"literary","original":"HERO(Omega-Zero)","translated":"le héros valeureux Omega-Zéro, l'Entité Ultime émerge de l'éther."}[0m
+[0;34m🎨 Test traduction: Création d'artefact en mode littéraire[0m
+[0;31m❌ Échec de la traduction[0m
+[0;31m📄 Erreur: {"mode":"literary","original":"CREATE(ARTIFACT, parchemin_sale, HERO:Chlamydius)","translated":"CREATE(ARTIFACT, le Parchemin Sale, manuscrit des vérités interdites, le héros valeureux Chlamydius, le Scribe Non Né)."}[0m
+[0;34m🎨 Test traduction: État quantique en mode littéraire[0m
+[0;31m❌ Échec de la traduction[0m
+[0;31m📄 Erreur: {"mode":"literary","original":"ψ: ⊙(Δt+2 @15,15 ⟶ USE(ARTIFACT, grofi_omega, HERO:Jean-Grofignon))","translated":"ψ: ⊙(le déplacement temporel de 2 cycles, alors que le temps lui-même se courbe sous la volonté de l'incertitude quantique @15,15 ⟶ canalise l'ancien pouvoir de l'Oméga de Grofi, cet artefact ultime qui transcende les lois de la réalité par l'intermédiaire de Jean-Grofignon)."}[0m
+[0;35m🏁 BILAN FINAL[0m
+[0;32m✅ Tests du Codex Final terminés[0m
+[0;36m📊 Logs sauvegardés dans: logs/test-codex-final-20250720_234322.log[0m
+[1;33m💡 Prochaines étapes:[0m
+[1;33m   - Implémenter les capacités spéciales manquantes[0m
+[1;33m   - Créer l'interface UI pour la Forge Runique[0m
+[1;33m   - Ajouter les cinématiques in-game[0m
+[0;35m🌟 'Le Treizième Codex est scellé, mais l'épopée continue...'[0m
+[0;35m   - Memento, Scribe du Multivers[0m
+[0;32m🎉 Test Codex Final terminé avec succès ![0m
