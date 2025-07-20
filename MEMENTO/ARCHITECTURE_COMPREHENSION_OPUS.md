@@ -217,5 +217,125 @@ Dans Hero.java :
 3. **Privilégier formules JSON**
    - Modifier ArtifactEffectExecutor pour JSON first
 
+## 🎮 SYSTÈME DE GAMEPLAY
+
+### Mur de Causalité (Causality Wall)
+- **Implémenté** : `TemporalEngineService.moveGameHero()`
+- **Calcul** : `CausalityZoneService.calculateMovementZone()`
+- **Limite** : Distance = Points de mouvement du héros
+- **Objets spéciaux** : 
+  - `temporal_sword` : +10 mouvement
+  - `avant_world_blade` : Ignore le mur
+
+### Vision Temporelle
+- **Implémenté** : `ArtifactEffectExecutor.executeMagicSpyglass()`
+- **Effet** : Voir 3 jours dans le futur
+- **Mécanisme** : Avance le temps du héros individuellement
+
+## 🆕 INTÉGRATION AMPLITUDES & GROFI
+
+### Support des Amplitudes Complexes
+Le système supporte maintenant les amplitudes complexes dans les formules JSON :
+
+#### Nouvelles Opérations
+```java
+// Créer une amplitude
+CREATE_AMPLITUDE(0.8, 0.6)  // Crée (0.8+0.6i)
+
+// Définir l'amplitude d'un état ψ
+SET_AMPLITUDE(ψ001, 0.707, 0.707)  // |ψ|² = 0.98
+
+// Parser depuis une formule textuelle
+AMPLITUDE_FROM_FORMULA("(0.8+0.6i)")  // Supporte tous les formats
+```
+
+#### Formats d'Amplitude Supportés
+- **Complexe** : `(0.8+0.6i)` ou `(0.8-0.6i)`
+- **Polaire** : `1.0∠0.5` (magnitude∠phase)
+- **Imaginaire pur** : `0.6i`
+- **Réel pur** : `0.8`
+
+### Système GROFI (Graph of Reality Organized by Fog and Immunities)
+
+#### Symboles Implémentés
+1. **Σ (Sigma)** - Somme des possibles / Réduction
+   ```java
+   Σ[REDUCE:0.2]  // Réduit toutes les amplitudes de 20%
+   Σ[]            // Somme toutes les amplitudes proches
+   ```
+
+2. **† (Dagger)** - Mort/Renaissance quantique
+   ```java
+   †[]  // Si mort → ressuscite à 50% HP
+        // Si vivant → crée état mort/vie superposé
+   ```
+
+3. **Ω (Omega)** - Finalité ultime
+   ```java
+   Ω[]  // Force le collapse de TOUS les états ψ
+        // Verrouille les tuiles temporellement
+   ```
+
+4. **↯ (Chaos)** - Chaos contrôlé
+   ```java
+   ↯[]  // Effet aléatoire parmi :
+        // - Téléportation aléatoire
+        // - Inversion d'amplitude
+        // - Changement d'énergie ±20
+        // - Création état chaotique
+   ```
+
+### Exemples de Formules Complètes
+
+#### Artefact avec Amplitude
+```json
+{
+  "id": "quantum_resonator",
+  "name": "Résonateur Quantique",
+  "formula": "CREATE_AMPLITUDE(0.8, 0.6) + CONSTRUCTIVE(ψ1, ψ2) + AMPLIFY(result, 1.5)",
+  "description": "Crée une résonance quantique amplifiée"
+}
+```
+
+#### Artefact GROFI
+```json
+{
+  "id": "jean_grofignon_special",
+  "name": "Épée de Jean Grofignon",
+  "formula": "Σ[REDUCE:0.3] + †[] + MODIFY_ENERGY(hero, 20)",
+  "description": "Réduit le chaos, ressuscite et restaure l'énergie"
+}
+```
+
+#### Artefact Chaotique
+```json
+{
+  "id": "vince_vega_gun",
+  "name": "Pistolet de Vince Vega",
+  "formula": "↯[] + ↯[] + Ω[]",
+  "description": "Double chaos suivi d'un collapse total"
+}
+```
+
+### Flux d'Exécution
+
+1. **Parser** : `DynamicFormulaParser` détecte les nouvelles opérations
+2. **Variables** : Les amplitudes sont stockées comme variables (`result`, `amplitude`)
+3. **Combinaison** : Les opérations s'enchaînent et se combinent
+4. **Persistance** : Les états ψ modifiés sont sauvegardés
+
+### Tests Recommandés
+
+```bash
+# Tester les amplitudes
+./scripts/test-amplitude-formulas.sh
+
+# Tester GROFI
+./scripts/test-grofi-symbols.sh
+
+# Test intégration complète
+./scripts/test-jean-gros-v2.sh
+```
+
 ---
 *Dernière mise à jour : Maintenant* 
