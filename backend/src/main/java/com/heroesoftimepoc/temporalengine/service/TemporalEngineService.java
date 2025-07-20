@@ -60,6 +60,9 @@ public class TemporalEngineService {
     private CausalCollapseService causalCollapseService;
     
     @Autowired
+    private CreatureService creatureService;
+    
+    @Autowired
     private PerformanceMetricsService performanceMetrics;
     
     @Autowired
