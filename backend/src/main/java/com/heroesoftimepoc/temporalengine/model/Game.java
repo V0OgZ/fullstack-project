@@ -269,7 +269,7 @@ public class Game {
         paradox.setTargetX(x);
         paradox.setTargetY(y);
         paradox.setProbability(1.0); // Paradoxe certain
-        paradox.setStatus("PARADOX");
+        paradox.setStatus(PsiState.PsiStatus.ACTIVE); // Paradoxe actif
         paradox.setGame(this);
         
         // Ajouter le paradoxe aux états quantiques

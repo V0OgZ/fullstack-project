@@ -356,7 +356,7 @@ public class SpecialAbilitiesService {
         }
         
         // Sceller la cible
-        target.setStatus(HeroStatus.SEALED);
+        target.setStatus(Hero.HeroStatus.SEALED);
         target.addStatusEffect("ETERNAL_SEAL", -1);
         target.setMovementPoints(0);
         
