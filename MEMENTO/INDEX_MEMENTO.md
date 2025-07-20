@@ -16,6 +16,7 @@
 - **[FIX_JPA_PSISTATE_PROBLEM.md](FIX_JPA_PSISTATE_PROBLEM.md)** - Problème actuel JPA
 - **[FIX_FORMULA_EXECUTION_PROBLEM.md](FIX_FORMULA_EXECUTION_PROBLEM.md)** - Clarification 2 parsers
 - **[ANALYSE_COMPLETE_ERREURS_TESTS.md](ANALYSE_COMPLETE_ERREURS_TESTS.md)** - Analyse erreurs tests
+- **[ANALYSE_MOTEUR_MANQUANT.md](ANALYSE_MOTEUR_MANQUANT.md)** - **NOUVEAU** Éléments manquants moteur
 
 ## 🎮 MÉCANIQUES & FEATURES
 - **[FORGE_RUNIQUE_ULTIME.md](FORGE_RUNIQUE_ULTIME.md)** - Système de création par code
