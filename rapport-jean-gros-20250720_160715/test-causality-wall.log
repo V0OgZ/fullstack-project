@@ -1,0 +1,59 @@
+🌀 TEST DU MUR DE CAUSALITÉ - EXEMPLE DE JEAN
+============================================
+🔍 Vérification du backend...
+🎮 Création du jeu de test...
+✅ Jeu créé avec ID: 1
+
+🎯 SCÉNARIO: Héros avec épée temporelle traverse le mur de causalité
+================================================================
+📝 Exécution: HERO(Arthur)
+   Réponse: {"success":true,"heroName":"Arthur","message":"Game hero Arthur created successfully"}
+
+📝 Exécution: HERO(Morgana)
+   Réponse: {"success":true,"heroName":"Morgana","message":"Game hero Morgana created successfully"}
+
+📝 Exécution: CREATE(ITEM, temporal_sword, HERO:Arthur)
+   Réponse: {"success":true,"message":"\uD83C\uDF81 temporal_sword donné à Arthur (The Dude approuve)"}
+
+📝 Exécution: CREATE(ITEM, magic_spyglass, HERO:Morgana)
+   Réponse: {"success":true,"message":"\uD83C\uDF81 magic_spyglass donné à Morgana (The Dude approuve)"}
+
+📝 Exécution: MOV(Arthur, @5,5)
+   Réponse: {"currentDay":2,"success":true,"movementPointsRemaining":2,"timeAdvanced":"2 jours","message":"Game hero Arthur moved to (5,5)"}
+
+📝 Exécution: MOV(Morgana, @25,25)
+   Réponse: {"success":false,"error":"Invalid game position: (25,25)"}
+
+
+⚔️ TEST 1: Mouvement normal (sans épée)
+=======================================
+📝 Exécution: MOV(Arthur, @15,15)
+   Réponse: {"currentDay":6,"success":true,"movementPointsRemaining":1,"timeAdvanced":"4 jours","message":"Game hero Arthur moved to (15,15)"}
+
+
+⚔️ TEST 2: Mouvement avec épée temporelle
+=========================================
+📝 Exécution: USE(ITEM, temporal_sword, HERO:Arthur)
+   Réponse: {"success":true,"details":"Dégâts +50 et Mouvement +10 ! (Jean-Grofignon approuve)","message":"⚔️ Épée Temporelle activée","value":1.0,"timestamp":1753027653779}
+
+📝 Exécution: MOV(Arthur, @15,15)
+   Réponse: {"success":false,"maxDistance":21,"requestedDistance":0.0,"error":"Destination hors de la zone de mouvement causale!"}
+
+
+🔮 TEST 3: Vision du futur avec longue-vue
+==========================================
+📝 Exécution: USE(ITEM, magic_spyglass, HERO:Morgana)
+   Réponse: {"success":true,"details":"Vous voyez 0 événements dans les 3 prochains jours","message":"\uD83D\uDD2E Longue-vue Magique - Vision du futur activée","value":1.0,"timestamp":1753027653799,"futureEvents":[]}
+
+
+💥 TEST 4: Collision causale
+============================
+📝 Exécution: MOV(Morgana, @15,15)
+   Réponse: {"success":false,"maxDistance":3,"requestedDistance":7.0710678118654755,"error":"Destination hors de la zone de mouvement causale!"}
+
+
+📊 État final du jeu
+===================
+./scripts/test-causality-wall.sh: line 89: jq: command not found
+
+✅ Test terminé!
