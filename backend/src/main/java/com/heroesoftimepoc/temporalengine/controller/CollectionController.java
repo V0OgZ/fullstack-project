@@ -109,6 +109,33 @@ public class CollectionController {
         }
     }
 
+    @PostMapping("/translate-formula")
+    public ResponseEntity<Map<String, Object>> translateFormula(@RequestBody Map<String, String> request) {
+        try {
+            String formula = request.get("formula");
+            String mode = request.getOrDefault("mode", "symbols"); // "symbols" ou "text"
+            
+            if (formula == null || formula.trim().isEmpty()) {
+                return ResponseEntity.badRequest().body(Map.of("error", "Formule requise"));
+            }
+
+            Map<String, Object> result = new HashMap<>();
+            result.put("original", formula);
+            
+            if ("symbols".equals(mode)) {
+                result.put("translated", translateArtifactFormula(formula));
+                result.put("mode", "symbols");
+            } else {
+                result.put("translated", translateArtifactFormulaWithText(formula));
+                result.put("mode", "text");
+            }
+            
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Erreur de traduction: " + e.getMessage()));
+        }
+    }
+
     /**
      * Charger les héros depuis les fichiers JSON
      */
@@ -251,12 +278,13 @@ public class CollectionController {
     }
 
     /**
-     * Traduire un script HOTS en langage naturel
+     * Traduire un script HOTS en langage naturel avec support icônes
      */
     private Map<String, Object> translateHOTSScript(String script) {
         Map<String, Object> translation = new HashMap<>();
         translation.put("original", script);
         translation.put("translation", "");
+        translation.put("translation_icons", "");
         translation.put("type", "unknown");
         translation.put("details", new HashMap<>());
         
@@ -266,42 +294,57 @@ public class CollectionController {
                 // Script temporel avec ψ-state
                 translation.put("type", "temporal_psi_state");
                 translation.put("translation", translatePsiState(script));
+                translation.put("translation_icons", translatePsiStateWithIcons(script));
                 translation.put("details", extractPsiStateDetails(script));
             } else if (script.contains("†")) {
                 // Collapse d'état
                 translation.put("type", "collapse");
                 translation.put("translation", translateCollapse(script));
+                translation.put("translation_icons", translateCollapseWithIcons(script));
                 translation.put("details", extractCollapseDetails(script));
             } else if (script.contains("Π") && script.contains("⇒")) {
                 // Trigger d'observation
                 translation.put("type", "observation_trigger");
                 translation.put("translation", translateObservationTrigger(script));
+                translation.put("translation_icons", translateObservationTriggerWithIcons(script));
                 translation.put("details", extractObservationTriggerDetails(script));
             } else if (script.startsWith("HERO(")) {
                 // Création de héros
                 translation.put("type", "hero_creation");
                 translation.put("translation", translateHeroCreation(script));
+                translation.put("translation_icons", translateHeroCreationWithIcons(script));
                 translation.put("details", extractHeroCreationDetails(script));
             } else if (script.startsWith("MOV(")) {
                 // Mouvement
                 translation.put("type", "movement");
                 translation.put("translation", translateMovement(script));
+                translation.put("translation_icons", translateMovementWithIcons(script));
                 translation.put("details", extractMovementDetails(script));
             } else if (script.startsWith("CREATE(")) {
                 // Création d'objet
                 translation.put("type", "creation");
                 translation.put("translation", translateCreation(script));
+                translation.put("translation_icons", translateCreationWithIcons(script));
                 translation.put("details", extractCreationDetails(script));
             } else if (script.startsWith("USE(")) {
                 // Utilisation d'objet
                 translation.put("type", "usage");
                 translation.put("translation", translateUsage(script));
+                translation.put("translation_icons", translateUsageWithIcons(script));
                 translation.put("details", extractUsageDetails(script));
+            } else if (script.startsWith("CAST(")) {
+                // Sort avec @
+                translation.put("type", "spell_cast");
+                translation.put("translation", translateCast(script));
+                translation.put("translation_icons", translateCastWithIcons(script));
+                translation.put("details", extractCastDetails(script));
             } else {
                 translation.put("translation", "Script non reconnu");
+                translation.put("translation_icons", "❓ Script non reconnu");
             }
         } catch (Exception e) {
             translation.put("translation", "Erreur de traduction: " + e.getMessage());
+            translation.put("translation_icons", "❌ Erreur de traduction");
         }
         
         return translation;
@@ -384,5 +427,84 @@ public class CollectionController {
         Map<String, Object> details = new HashMap<>();
         // Extraction des détails d'utilisation
         return details;
+    }
+
+    // Méthodes de traduction avec symboles grecs
+    private String translatePsiStateWithIcons(String script) {
+        // ψ001: ⊙(Δt+1 @10,10 ⟶ MOV(HERO, Arthur, @10,10))
+        return script.replaceAll("ψ(\\d+):\\s*⊙\\((.*)\\)", "ψ$1: ⊙($2)");
+    }
+
+    private String translateCollapseWithIcons(String script) {
+        // †ψ001
+        return script.replaceAll("†ψ(\\d+)", "†ψ$1");
+    }
+
+    private String translateObservationTriggerWithIcons(String script) {
+        // Π(condition) ⇒ †ψ001
+        return script.replaceAll("Π\\(([^)]+)\\)\\s*⇒\\s*†ψ(\\d+)", "Π($1) ⇒ †ψ$2");
+    }
+
+    private String translateHeroCreationWithIcons(String script) {
+        // HERO(Arthur)
+        return script.replaceAll("HERO\\(([^)]+)\\)", "HERO($1)");
+    }
+
+    private String translateMovementWithIcons(String script) {
+        // MOV(HERO, Arthur, @10,10)
+        return script.replaceAll("MOV\\(([^,]+),\\s*([^,]+),\\s*@(\\d+),(\\d+)\\)", "MOV($1, $2, @$3,$4)");
+    }
+
+    private String translateCreationWithIcons(String script) {
+        // CREATE(CREATURE, Dragon, @10,10)
+        return script.replaceAll("CREATE\\(([^,]+),\\s*([^,]+)(?:,\\s*@(\\d+),(\\d+))?\\)", "CREATE($1, $2" + (script.contains("@") ? ", @$3,$4" : "") + ")");
+    }
+
+    private String translateUsageWithIcons(String script) {
+        // USE(ITEM, AvantWorldBlade, HERO:Arthur)
+        return script.replaceAll("USE\\(([^,]+),\\s*([^,]+)(?:,\\s*([^)]+))?\\)", "USE($1, $2" + (script.contains("HERO:") ? ", $3" : "") + ")");
+    }
+
+    private String translateCast(String script) {
+        // CAST(SPELL, Fireball, TARGET:Ragnar, HERO:Arthur)
+        return script.replaceAll("CAST\\(SPELL,\\s*([^,]+),\\s*TARGET:([^,]+),\\s*HERO:([^)]+)\\)", "Lancement du sort $1 sur $2 par $3");
+    }
+
+    private String translateCastWithIcons(String script) {
+        // CAST(SPELL, Fireball, TARGET:Ragnar, HERO:Arthur)
+        return script.replaceAll("CAST\\(SPELL,\\s*([^,]+),\\s*TARGET:([^,]+),\\s*HERO:([^)]+)\\)", "@($1, TARGET:$2, HERO:$3)");
+    }
+
+    private Map<String, Object> extractCastDetails(String script) {
+        Map<String, Object> details = new HashMap<>();
+        // Extraction des détails du sort
+        return details;
+    }
+
+    // Méthodes pour traduire les formules d'artefacts avec symboles grecs
+    private String translateArtifactFormula(String formula) {
+        if (formula == null) return "";
+        
+        // Remplacer les termes d'interférence par des symboles grecs
+        String translated = formula
+            .replaceAll("CONSTRUCTIVE\\(([^)]+)\\)", "⊕($1)")
+            .replaceAll("DESTRUCTIVE\\(([^)]+)\\)", "⊖($1)")
+            .replaceAll("NEUTRAL", "⊗")
+            .replaceAll("COMPLEX", "⊘");
+        
+        return translated;
+    }
+
+    private String translateArtifactFormulaWithText(String formula) {
+        if (formula == null) return "";
+        
+        // Remplacer les symboles grecs par du texte explicatif
+        String translated = formula
+            .replaceAll("⊕\\(([^)]+)\\)", "CONSTRUCTIVE($1)")
+            .replaceAll("⊖\\(([^)]+)\\)", "DESTRUCTIVE($1)")
+            .replaceAll("⊗", "NEUTRAL")
+            .replaceAll("⊘", "COMPLEX");
+        
+        return translated;
     }
 } 
