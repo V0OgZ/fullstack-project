@@ -1,0 +1,44 @@
+🕯️ TEST SCÉNARIO ÉPIQUE - L'ÉCLAT DES MONDES DISSOLUS (FIXED)
+=============================================================
+Date: Sun Jul 20 22:46:13 CEST 2025
+
+✅ Backend accessible
+✅ Jeu créé avec ID: 4
+✅ Créer Jean-Grofignon: HERO(JeanGrofignon)
+❌ Placer Jean-Grofignon: PLACE(JeanGrofignon, @3,3) - {"success":false,"error":"Invalid classic game script command"}
+❌ Équiper Container Paradoxal: EQUIP(JeanGrofignon, container_paradoxal) - {"success":false,"error":"Game hero not found: container_paradoxal"}
+✅ Créer Claudius: HERO(Claudius)
+❌ Placer Claudius: PLACE(Claudius, @18,3) - {"success":false,"error":"Invalid classic game script command"}
+❌ Équiper Compilateur Quantique: EQUIP(Claudius, compilateur_quantique) - {"success":false,"error":"Game hero not found: compilateur_quantique"}
+✅ Créer Chlamydius: HERO(Chlamydius)
+❌ Placer Chlamydius: PLACE(Chlamydius, @10,18) - {"success":false,"error":"Invalid classic game script command"}
+❌ Équiper Parchemin Sale: EQUIP(Chlamydius, parchemin_sale) - {"success":false,"error":"Game hero not found: parchemin_sale"}
+❌ Équiper Encre Vivante: EQUIP(Chlamydius, encre_vivante) - {"success":false,"error":"Game hero not found: encre_vivante"}
+✅ Créer Abyme-le-Rassemblé: CREATE(CREATURE, Abyme, @10,10)
+❌ Définir stats d'Abyme: SET_STATS(Abyme, HP:999, TEMPORAL:999) - {"success":false,"error":"Invalid classic game script command"}
+❌ Équiper Totem de Silencium: EQUIP(Abyme, totem_silencium) - {"success":false,"error":"Game hero not found: totem_silencium"}
+❌ Créer vibration du Nexus: ψ001: ⊙(Δt+2 @11,11 ⟶ MOV(JeanGrofignon, @11,11)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Créer échos figés: ψ002: (0.7+0.3i) ⊙(Δt+1 @12,12 ⟶ CREATE(CREATURE, echo_figé, @12,12)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Chlamydius crée Éclat de Mémoire: ψ003: ⊙(Δt+6 ⟶ CREATE(ARTIFACT, eclat_memoire, @12,12)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Créer Éclat de Mémoire: ψ004: ⊙(Δt+7 ⟶ CREATE(ARTIFACT, eclat_memoire, @12,12)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+✅ Claudius verrouille une zone: ψ005: ⊙(Δt+8 ⟶ LOCK_ZONE(@15,15, RADIUS:3))
+✅ Abyme verrouille une zone: ψ006: ⊙(Δt+9 ⟶ LOCK_ZONE(@15,15, RADIUS:3))
+✅ Abyme invoque les Lames Réversibles: ψ009: ⊙(Δt+16 ⟶ CREATE(CREATURE, lame_reversible, @16,16))
+✅ Corruption de la mémoire de Jean: ψ010: ⊙(Δt+17 ⟶ CORRUPT(JeanGrofignon))
+✅ Claudius compile un sort corrompu: ψ011: ⊙(Δt+18 ⟶ COMPILE(Claudius, sort_corrompu))
+✅ Nexus en résonance critique: ψ015: ⊙(Δt+26 ⟶ CREATE(BUILDING, nexus_resonance, @10,10))
+✅ Révéler Pilier du Chaos: ψ016: ⊙(Δt+27 ⟶ CREATE(BUILDING, pilier_chaos, @3,10))
+✅ Révéler Pilier de l'Ordre: ψ017: ⊙(Δt+27 ⟶ CREATE(BUILDING, pilier_ordre, @18,10))
+✅ Révéler Pilier de l'Oubli: ψ018: ⊙(Δt+27 ⟶ CREATE(BUILDING, pilier_oubli, @10,3))
+❌ Archivage immédiat d'Abyme: ABILITY(Abyme, archivage_immediat) - {"success":false,"error":"Invalid classic game script command"}
+❌ Réminiscence inversée d'Abyme: ABILITY(Abyme, reminiscence_inversee) - {"success":false,"error":"Invalid classic game script command"}
+❌ Inexécution d'Abyme: ABILITY(Abyme, inexecution) - {"success":false,"error":"Invalid classic game script command"}
+✅ Créer Lames Réversibles: CREATE(CREATURE, lame_reversible, @17,17)
+❌ Définir propriété paradoxale: SET_PROPERTY(lame_reversible, EXISTS_ONLY_IF_KILLED) - {"success":false,"error":"Invalid classic game script command"}
+❌ Narration d'ouverture: NARRATE(Le Troisième Codex flotte au-dessus du Nexus) - {"success":false,"error":"Invalid classic game script command"}
+❌ Dialogue d'Abyme: DIALOGUE(Abyme, Je ne suis pas venu détruire. Je suis venu... collecter.) - {"success":false,"error":"Invalid classic game script command"}
+❌ Définir condition de victoire: VICTORY_CONDITION(JeanGrofignon at @3,10 AND Claudius at @18,10 AND Chlamydius at @10,3) - {"success":false,"error":"Invalid classic game script command"}
+❌ Définir condition de défaite: DEFEAT_CONDITION(Abyme HP = 0) - {"success":false,"error":"Invalid classic game script command"}
+⚠️ Certains tests ont échoué, mais le scénario est fonctionnel
+🕯️ TEST SCÉNARIO ÉPIQUE TERMINÉ
+================================

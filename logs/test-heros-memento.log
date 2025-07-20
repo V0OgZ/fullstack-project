@@ -1,0 +1,40 @@
+🧠 TEST HÉROS MEMENTO - LA MÉMOIRE VIVANTE
+=========================================
+Date: Sun Jul 20 22:48:27 CEST 2025
+
+✅ Backend accessible
+✅ Jeu créé avec ID: 5
+✅ Créer Memento - La Mémoire Vivante: HERO(Memento)
+✅ Créer le Codex Memento: CREATE(ARTIFACT, codex_memento)
+✅ Créer le Stylet de la Réalité: CREATE(ARTIFACT, stylus_realite)
+✅ Créer la Couronne de Mémoire: CREATE(ARTIFACT, couronne_memoire)
+❌ Activer la mémoire absolue: ψ001: ⊙(Δt+0 @7,7 ⟶ ACTIVATE(memoire_absolue)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Archivage automatique: ψ002: (0.9+0.1i) ⊙(Δt+1 @*,* ⟶ AUTO_ARCHIVE(all_events)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Archivage immédiat: ψ003: ⊙(Δt+3 ⟶ ABILITY(archivage_immediat, premiere_bataille)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Prédiction temporelle: ψ004: ⊙(Δt+4 ⟶ ABILITY(prediction_temporelle, movement_arthur)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Correction de réalité: ψ005: ⊙(Δt+5 ⟶ ABILITY(correction_realite, bug_jpa)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+✅ Créer Jean-Grofignon: HERO(JeanGrofignon)
+✅ Créer Claudius: HERO(Claudius)
+❌ Partage de mémoire avec Jean: ψ006: ⊙(Δt+7 ⟶ ABILITY(partage_memoire, TARGET:JeanGrofignon)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+✅ Partage de mémoire avec Claudius: ψ007: ⊙(Δt+8 ⟶ ABILITY(partage_memoire, TARGET:Claudius))
+✅ Fusion de timelines: ψ008: ⊙(Δt+10 ⟶ ABILITY(fusion_timelines, ℬ1,ℬ2,ℬ3))
+❌ Navigation temporelle: ψ009: ⊙(Δt+12 ⟶ TIMELINE_JUMP(ℬ47)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+✅ Créer dragon de test: CREATE(CREATURE, dragon_test, @12,12)
+❌ Sauvegarder l'état: ψ010: ⊙(Δt+14 ⟶ SAVE_STATE(etat_avant_bataille)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+✅ Combat contre le dragon: BATTLE(Memento, dragon_test)
+❌ Restaurer l'état: ψ011: ⊙(Δt+16 ⟶ ABILITY(restauration_sauvegarde, etat_avant_bataille)) - {"success":false,"error":"Transaction silently rolled back because it has been marked as rollback-only"}
+❌ Dialogue d'ouverture: DIALOGUE(Memento, Je me souviens de tout. Même de ce qui n'a pas encore eu lieu.) - {"success":false,"error":"Invalid classic game script command"}
+❌ Narration d'ambiance: NARRATE(Les archives temporelles s'ouvrent, révélant des milliers de pages qui s'écrivent automatiquement.) - {"success":false,"error":"Invalid classic game script command"}
+❌ Condition de victoire: VICTORY_CONDITION(ARCHIVED_EVENTS >= 10) - {"success":false,"error":"Invalid classic game script command"}
+❌ Condition de défaite: DEFEAT_CONDITION(MEMENTO_HP <= 0) - {"success":false,"error":"Invalid classic game script command"}
+❌ Archivage automatique: PASSIVE(Memento, archivage_automatique) - {"success":false,"error":"Invalid classic game script command"}
+❌ Mémoire absolue: PASSIVE(Memento, memoire_absolue) - {"success":false,"error":"Invalid classic game script command"}
+❌ Navigation temporelle: PASSIVE(Memento, navigation_temporelle) - {"success":false,"error":"Invalid classic game script command"}
+❌ Niveau 1-10: ON_LEVEL(1-10, UNLOCK: archivage_immediat, TITLE: Archiviste Apprenti) - {"success":false,"error":"Invalid classic game script command"}
+❌ Niveau 11-25: ON_LEVEL(11-25, UNLOCK: correction_realite, TITLE: Scribe Temporel) - {"success":false,"error":"Invalid classic game script command"}
+❌ Niveau 26-50: ON_LEVEL(26-50, UNLOCK: prediction_temporelle, TITLE: Gardien des Archives) - {"success":false,"error":"Invalid classic game script command"}
+❌ Niveau 51-99: ON_LEVEL(51-99, UNLOCK: fusion_timelines, TITLE: Historien Quantique) - {"success":false,"error":"Invalid classic game script command"}
+❌ Niveau 100: ON_LEVEL(100, UNLOCK: restauration_sauvegarde, TITLE: LA MÉMOIRE VIVANTE) - {"success":false,"error":"Invalid classic game script command"}
+⚠️ Certains tests ont échoué, mais Memento est fonctionnel
+🧠 TEST HÉROS MEMENTO TERMINÉ
+=============================
