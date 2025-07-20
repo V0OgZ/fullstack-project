@@ -38,6 +38,8 @@ class VisualizerHandler(http.server.SimpleHTTPRequestHandler):
             self.serve_file('hots-visualizer.html')
         elif path == '/dashboard':
             self.serve_file('dashboard.html')
+        elif path == '/formula-translator':
+            self.serve_file('artifact-formula-translator.html')
         else:
             super().do_GET()
 
@@ -120,6 +122,8 @@ class VisualizerHandler(http.server.SimpleHTTPRequestHandler):
         .hots-card:hover { border-color: #8e44ad; box-shadow: 0 15px 35px rgba(142, 68, 173, 0.2); }
         .dashboard-card { border-color: rgba(46, 204, 113, 0.3); }
         .dashboard-card:hover { border-color: #2ecc71; box-shadow: 0 15px 35px rgba(46, 204, 113, 0.2); }
+        .formula-card { border-color: rgba(255, 107, 107, 0.3); }
+        .formula-card:hover { border-color: #ff6b6b; box-shadow: 0 15px 35px rgba(255, 107, 107, 0.2); }
     </style>
 </head>
 <body>
@@ -156,6 +160,15 @@ class VisualizerHandler(http.server.SimpleHTTPRequestHandler):
                 <div class="card-description">
                     Tableau de bord central avec statut des services.
                     Accès rapide à toutes les interfaces du projet.
+                </div>
+            </a>
+            
+            <a href="/formula-translator" class="visualizer-card formula-card">
+                <div class="card-icon">🔮</div>
+                <div class="card-title">Traducteur de Formules</div>
+                <div class="card-description">
+                    Convertissez les formules d'artefacts entre texte et symboles grecs.
+                    Support des interférences CONSTRUCTIVE/DESTRUCTIVE.
                 </div>
             </a>
         </div>
