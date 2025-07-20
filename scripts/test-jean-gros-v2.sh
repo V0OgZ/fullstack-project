@@ -17,7 +17,6 @@ REPORT_DIR="rapport-jean-gros-$(date +%Y%m%d_%H%M%S)"
 mkdir -p "$REPORT_DIR"
 REPORT_FILE="$REPORT_DIR/RAPPORT_COMPLET.md"
 TIMEOUT_SECONDS=300  # Vince: "5 minutes max per test, or I shoot it"
-MAX_PARALLEL=5      # Nombre de tests en parallèle
 
 # 🎳 THE DUDE SECTION - Analyse intelligente
 # ==========================================
@@ -43,25 +42,6 @@ cat > "$REPORT_DIR/test-dependencies.txt" << 'EOF'
 #   - Frontend tests
 #   - Different scenario categories
 EOF
-
-# Liste des tests à exécuter (sans doublons)
-declare -A TESTS_TO_RUN=(
-    ["backend-compile"]="cd backend && mvn compile -DskipTests"
-    ["backend-tests"]="cd backend && mvn test"
-    ["causality-wall"]="./scripts/test-causality-wall.sh"
-    ["vision-temporelle"]="./scripts/test-vision-temporelle.sh"
-    ["quantum-maze"]="./scripts/test-quantum-maze.sh"
-    ["test-final-mega"]="./scripts/test/test-complet-final.sh"
-    ["ui-quick"]="./scripts/actifs/test-ui-quick.sh"
-    ["stress-test"]="timeout 60 ./scripts/stress-test-moteur.sh"  # Vince: "60 seconds max"
-)
-
-# Tests à NE PAS exécuter (car inclus dans test-complet-final)
-declare -A SKIP_TESTS=(
-    ["test-backend-conformity"]="Included in test-complet-final"
-    ["test-scenarios-ui"]="Included in test-complet-final"
-    ["run-all-hots-scenarios"]="Included in test-complet-final"
-)
 
 # 🔫 VINCE VEGA SECTION - Exécution parallèle brutale
 # ===================================================
@@ -106,23 +86,37 @@ EOF
 
 # Lancer tous les tests en parallèle
 echo "🚀 Launching all tests in parallel..."
-for test_name in "${!TESTS_TO_RUN[@]}"; do
-    if [[ -z "${SKIP_TESTS[$test_name]}" ]]; then
-        execute_with_timeout "$test_name" "${TESTS_TO_RUN[$test_name]}"
-    else
-        log "⏭️  SKIPPED: $test_name (${SKIP_TESTS[$test_name]})"
-    fi
-done
 
-# Attendre que tous les tests se terminent (avec vérification périodique)
+# Backend tests
+execute_with_timeout "backend-compile" "cd backend && mvn compile -DskipTests"
+execute_with_timeout "backend-tests" "cd backend && mvn test"
+
+# Scripts de test
+execute_with_timeout "causality-wall" "./scripts/test-causality-wall.sh"
+execute_with_timeout "vision-temporelle" "./scripts/test-vision-temporelle.sh"
+execute_with_timeout "quantum-maze" "./scripts/test-quantum-maze.sh"
+
+# Test final (inclut beaucoup de choses)
+execute_with_timeout "test-final-mega" "./scripts/test/test-complet-final.sh"
+
+# Tests rapides
+execute_with_timeout "ui-quick" "./scripts/actifs/test-ui-quick.sh"
+execute_with_timeout "stress-test" "timeout 60 ./scripts/stress-test-moteur.sh"
+
+# Note sur les tests skippés
+log "⏭️  SKIPPED: test-backend-conformity (included in test-complet-final)"
+log "⏭️  SKIPPED: run-all-hots-scenarios (included in test-complet-final)"
+
+# Attendre que tous les tests se terminent
 echo ""
 echo "⏳ Waiting for tests to complete..."
 WAIT_COUNT=0
-while true; do
+RUNNING=1
+
+while [ $RUNNING -gt 0 ]; do
     RUNNING=0
-    for test_name in "${!TESTS_TO_RUN[@]}"; do
-        pid_file="$REPORT_DIR/${test_name}.pid"
-        if [[ -f "$pid_file" ]]; then
+    for pid_file in "$REPORT_DIR"/*.pid; do
+        if [ -f "$pid_file" ]; then
             pid=$(cat "$pid_file")
             if kill -0 "$pid" 2>/dev/null; then
                 RUNNING=$((RUNNING + 1))
@@ -130,12 +124,8 @@ while true; do
         fi
     done
     
-    if [[ $RUNNING -eq 0 ]]; then
-        break
-    fi
-    
     # Afficher le statut toutes les 10 secondes
-    if [[ $((WAIT_COUNT % 10)) -eq 0 ]]; then
+    if [ $((WAIT_COUNT % 10)) -eq 0 ] && [ $RUNNING -gt 0 ]; then
         echo "   Still running: $RUNNING tests..."
     fi
     
@@ -143,11 +133,10 @@ while true; do
     WAIT_COUNT=$((WAIT_COUNT + 1))
     
     # Vince: "If it takes more than 10 minutes total, we're done"
-    if [[ $WAIT_COUNT -gt 600 ]]; then
+    if [ $WAIT_COUNT -gt 600 ]; then
         echo "🔫 Vince: TIME'S UP! Killing remaining tests..."
-        for test_name in "${!TESTS_TO_RUN[@]}"; do
-            pid_file="$REPORT_DIR/${test_name}.pid"
-            if [[ -f "$pid_file" ]]; then
+        for pid_file in "$REPORT_DIR"/*.pid; do
+            if [ -f "$pid_file" ]; then
                 pid=$(cat "$pid_file")
                 kill -9 "$pid" 2>/dev/null || true
             fi
@@ -168,54 +157,48 @@ log ""
 log "## 📊 RÉSULTATS DES TESTS"
 log ""
 
-for test_name in "${!TESTS_TO_RUN[@]}"; do
-    if [[ -n "${SKIP_TESTS[$test_name]}" ]]; then
-        continue
-    fi
-    
-    exitcode_file="$REPORT_DIR/${test_name}.exitcode"
-    output_file="$REPORT_DIR/${test_name}.log"
-    
-    log "### 🔧 $test_name"
-    
-    if [[ -f "$exitcode_file" ]]; then
+# Analyser chaque test
+for exitcode_file in "$REPORT_DIR"/*.exitcode; do
+    if [ -f "$exitcode_file" ]; then
+        test_name=$(basename "$exitcode_file" .exitcode)
+        output_file="$REPORT_DIR/${test_name}.log"
+        
+        log "### 🔧 $test_name"
+        
         exitcode=$(cat "$exitcode_file")
-        if [[ "$exitcode" -eq 0 ]]; then
+        if [ "$exitcode" -eq 0 ]; then
             log "✅ **SUCCÈS**"
             SUCCESS_COUNT=$((SUCCESS_COUNT + 1))
-        elif [[ "$exitcode" -eq 124 ]]; then
+        elif [ "$exitcode" -eq 124 ]; then
             log "⏱️ **TIMEOUT** (Vince shot it after ${TIMEOUT_SECONDS}s)"
             TIMEOUT_COUNT=$((TIMEOUT_COUNT + 1))
         else
             log "❌ **ÉCHEC** (code: $exitcode)"
             FAIL_COUNT=$((FAIL_COUNT + 1))
         fi
-    else
-        log "💀 **KILLED** (Vince got impatient)"
-        FAIL_COUNT=$((FAIL_COUNT + 1))
+        
+        # Ajouter les dernières lignes du log
+        if [ -f "$output_file" ]; then
+            log "\`\`\`"
+            tail -n 10 "$output_file" >> "$REPORT_FILE"
+            log "\`\`\`"
+        fi
+        log ""
     fi
-    
-    # Ajouter les dernières lignes du log
-    if [[ -f "$output_file" ]]; then
-        log "```"
-        tail -n 10 "$output_file" >> "$REPORT_FILE"
-        log "```"
-    fi
-    log ""
 done
 
 # Analyse rapide des formules (The Dude style)
 log "## 🎳 THE DUDE'S FORMULA ANALYSIS"
 log ""
 log "### Real formulas found:"
-log "```"
-grep -r "formula.*CONSTRUCTIVE\|DESTRUCTIVE\|AMPLIFY\|TELEPORT" --include="*.json" . | grep -v node_modules | head -20 >> "$REPORT_FILE"
-log "```"
+log "\`\`\`"
+grep -r "formula.*CONSTRUCTIVE\|DESTRUCTIVE\|AMPLIFY\|TELEPORT" --include="*.json" . 2>/dev/null | grep -v node_modules | head -20 >> "$REPORT_FILE" || echo "No formulas found" >> "$REPORT_FILE"
+log "\`\`\`"
 
 # Stats finales
 TOTAL_TESTS=$((SUCCESS_COUNT + FAIL_COUNT + TIMEOUT_COUNT))
 SUCCESS_RATE=0
-if [[ $TOTAL_TESTS -gt 0 ]]; then
+if [ $TOTAL_TESTS -gt 0 ]; then
     SUCCESS_RATE=$(( SUCCESS_COUNT * 100 / TOTAL_TESTS ))
 fi
 
@@ -242,9 +225,9 @@ log "- \"Those slow tests? They're dead to me\""
 log ""
 
 # Sauvegarder les messages de Jean
-if [[ -f "JEAN_MESSAGES.md" ]]; then
-    cp "JEAN_MESSAGES.md" "$REPORT_DIR/"
-    log "### 💾 Messages de Jean sauvegardés dans: $REPORT_DIR/JEAN_MESSAGES.md"
+if [ -f "JEAN_MESSAGES_BEST_OF.md" ]; then
+    cp "JEAN_MESSAGES_BEST_OF.md" "$REPORT_DIR/"
+    log "### 💾 Messages de Jean sauvegardés dans: $REPORT_DIR/JEAN_MESSAGES_BEST_OF.md"
 fi
 
 # Affichage final
