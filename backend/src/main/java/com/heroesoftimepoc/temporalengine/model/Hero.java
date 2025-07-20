@@ -97,7 +97,8 @@ public class Hero {
         TEMPORAL_SHIFT,
         QUANTUM_SUPERPOSITION,
         COLLAPSED,
-        DEAD
+        DEAD,
+        PARADOX_DEATH  // Mort par paradoxe temporel (Forge Runique)
     }
     
     // Constructors
@@ -256,6 +257,28 @@ public class Hero {
     
     public int getCausalityAwareness() { return causalityAwareness; }
     public void setCausalityAwareness(int causalityAwareness) { this.causalityAwareness = causalityAwareness; }
+    
+    // ============================
+    // TITRES ET ACHIEVEMENTS
+    // ============================
+    
+    @ElementCollection
+    @CollectionTable(name = "hero_titles", joinColumns = @JoinColumn(name = "hero_id"))
+    @Column(name = "title")
+    private List<String> titles = new ArrayList<>();
+    
+    /**
+     * Ajoute un titre/achievement au héros
+     */
+    public void addTitle(String title) {
+        if (!titles.contains(title)) {
+            titles.add(title);
+        }
+    }
+    
+    public List<String> getTitles() {
+        return new ArrayList<>(titles);
+    }
     
     // ============================
     // MÉTHODES UTILITAIRES UTMD

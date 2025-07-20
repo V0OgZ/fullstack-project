@@ -1,11 +1,12 @@
 package com.heroesoftimepoc.temporalengine.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * Objet forgé par la Forge Runique
- * Représente un objet créé dynamiquement par un joueur via la grammaire HOTS
+ * Objet forgé par la Forge Runique via grammaire HOTS
  */
 @Entity
 @Table(name = "forged_objects")

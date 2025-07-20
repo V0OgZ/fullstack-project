@@ -237,4 +237,40 @@ public class Game {
         return String.format("Game{id=%d, name='%s', turn=%d, status=%s, players=%d}", 
                            id, gameName, currentTurn, status, players.size());
     }
+
+    // ============================
+    // FORGE RUNIQUE - SUPPORT METHODS
+    // ============================
+    
+    /**
+     * Verrouille une tuile temporellement suite à un événement de forge
+     */
+    public void lockTile(int x, int y, int duration) {
+        GameTile tile = getTileAt(x, y);
+        if (tile != null) {
+            tile.setIsLocked(true);
+            tile.setLockDuration(duration);
+        }
+    }
+    
+    /**
+     * Crée un paradoxe temporel à une position donnée
+     */
+    public void createParadox(int x, int y, String message) {
+        // Créer un état quantique paradoxal
+        PsiState paradox = new PsiState();
+        paradox.setPsiId("PARADOX_" + System.currentTimeMillis());
+        paradox.setExpression("PARADOX: " + message);
+        paradox.setTargetX(x);
+        paradox.setTargetY(y);
+        paradox.setProbability(1.0); // Paradoxe certain
+        paradox.setStatus("PARADOX");
+        paradox.setGame(this);
+        
+        // Ajouter le paradoxe aux états quantiques
+        addPsiState(paradox);
+        
+        // Verrouiller la tuile
+        lockTile(x, y, 99); // Verrouillage long
+    }
 }
