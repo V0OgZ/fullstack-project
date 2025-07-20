@@ -1,6 +1,92 @@
 // Heroes of Time - UI Enhancements
 // Enhanced interface functionalities for the temporal engine
 
+// Système de broadcast intelligent pour éviter la surcharge serveur
+class SmartBroadcastSystem {
+    constructor() {
+        this.broadcastQueue = [];
+        this.lastBroadcast = 0;
+        this.broadcastInterval = 2000; // 2 secondes entre broadcasts
+        this.criticalEvents = new Set([
+            'COLLAPSE_CAUSAL',
+            'HERO_DEATH', 
+            'BOSS_ACTION',
+            'SCENARIO_PHASE_CHANGE',
+            'CAPACITY_SPECIALE_ACTIVEE'
+        ]);
+    }
+
+    // Broadcast seulement les événements critiques
+    async broadcastCriticalEvent(eventType, data) {
+        if (!this.criticalEvents.has(eventType)) {
+            console.log(`📡 Événement non-critique ignoré: ${eventType}`);
+            return;
+        }
+
+        const now = Date.now();
+        if (now - this.lastBroadcast < this.broadcastInterval) {
+            // Ajouter à la queue si trop fréquent
+            this.broadcastQueue.push({ eventType, data, timestamp: now });
+            console.log(`📡 Événement en queue: ${eventType}`);
+            return;
+        }
+
+        try {
+            // Broadcast via API REST au lieu de WebSocket
+            await this.sendViaAPI(eventType, data);
+            this.lastBroadcast = now;
+            console.log(`📡 Broadcast critique envoyé: ${eventType}`);
+        } catch (error) {
+            console.error(`❌ Erreur broadcast: ${error.message}`);
+        }
+    }
+
+    // Envoyer via API REST (plus léger que WebSocket)
+    async sendViaAPI(eventType, data) {
+        const response = await fetch('/api/temporal/broadcast', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                eventType,
+                data,
+                timestamp: Date.now(),
+                gameId: window.gameAPI?.gameId
+            })
+        });
+        
+        if (!response.ok) {
+            throw new Error(`API broadcast failed: ${response.status}`);
+        }
+    }
+
+    // Traiter la queue de broadcast
+    processQueue() {
+        if (this.broadcastQueue.length === 0) return;
+        
+        const now = Date.now();
+        const readyEvents = this.broadcastQueue.filter(
+            event => now - event.timestamp >= this.broadcastInterval
+        );
+        
+        readyEvents.forEach(event => {
+            this.broadcastCriticalEvent(event.eventType, event.data);
+        });
+        
+        // Nettoyer la queue
+        this.broadcastQueue = this.broadcastQueue.filter(
+            event => now - event.timestamp < this.broadcastInterval
+        );
+    }
+}
+
+// Instance globale du système de broadcast
+window.smartBroadcast = new SmartBroadcastSystem();
+
+// Traitement périodique de la queue
+setInterval(() => {
+    window.smartBroadcast.processQueue();
+}, 1000);
+
     updateArtifactsList() {
         const artifacts = [
             { name: "Lame d'Avant-Monde", rarity: "Paradox", icon: "⚔️" },

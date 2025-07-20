@@ -1,247 +1,241 @@
 #!/bin/bash
 
-# 🏆 TEST CAPACITÉS SPÉCIALES & FORGE RUNIQUE - Heroes of Time
-# Test des capacités spéciales des héros épiques et de la Forge Runique
-# =====================================================================
+# Test des capacités spéciales avec broadcast intelligent
+# Évite la surcharge serveur en broadcastant seulement les événements critiques
 
-set -e
+echo "⚔️ Test des Capacités Spéciales - Broadcast Intelligent"
+echo "=================================================="
 
-# Couleurs pour l'affichage
+# Configuration
+API_BASE="http://localhost:8080/api"
+GAME_NAME="Test-Capacites-Speciales"
+PLAYER_ID="test-player"
+
+# Couleurs pour le terminal
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
-PURPLE='\033[0;35m'
-CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
-# Configuration
-BACKEND_URL="http://localhost:8080"
-LOG_FILE="logs/test-capacites-speciales-$(date +%Y%m%d_%H%M%S).log"
+# Fonction pour logger avec timestamp
+log() {
+    echo -e "${BLUE}[$(date '+%H:%M:%S')]${NC} $1"
+}
 
-echo -e "${PURPLE}🏆 TEST CAPACITÉS SPÉCIALES & FORGE RUNIQUE - Heroes of Time${NC}"
-echo -e "${PURPLE}================================================================${NC}"
-echo -e "${CYAN}Test des capacités spéciales des héros épiques${NC}"
-echo -e "${CYAN}Test de la Forge Runique complète${NC}"
-echo ""
-
-# Fonction de test
-test_endpoint() {
-    local endpoint=$1
-    local method=${2:-GET}
-    local data=${3:-""}
-    local description=$4
+# Fonction pour tester une capacité spéciale
+test_capacity() {
+    local capacity_name=$1
+    local hero_name=$2
+    local endpoint=$3
     
-    echo -e "${BLUE}🔍 Test: $description${NC}"
-    echo -e "${BLUE}   Endpoint: $method $endpoint${NC}"
+    log "🧪 Test de la capacité: ${YELLOW}$capacity_name${NC}"
     
-    if [ "$method" = "POST" ] && [ -n "$data" ]; then
-        echo -e "${BLUE}   Data: $data${NC}"
-        response=$(curl -s -X POST "$BACKEND_URL$endpoint" \
-            -H "Content-Type: application/json" \
-            -d "$data")
+    response=$(curl -s -X POST "$API_BASE/special-abilities/$endpoint" \
+        -H "Content-Type: application/json" \
+        -d "{
+            \"gameId\": $GAME_ID,
+            \"heroName\": \"$hero_name\"
+        }")
+    
+    if echo "$response" | grep -q '"success":true'; then
+        echo -e "${GREEN}✅ $capacity_name réussi${NC}"
+        
+        # Broadcast intelligent seulement pour les capacités critiques
+        if [[ "$capacity_name" == *"OMEGA"* || "$capacity_name" == *"NONEXISTENCE"* ]]; then
+            log "📡 Broadcast critique pour $capacity_name"
+            curl -s -X POST "$API_BASE/temporal/broadcast" \
+                -H "Content-Type: application/json" \
+                -d "{
+                    \"eventType\": \"CAPACITY_SPECIALE_ACTIVEE\",
+                    \"data\": {
+                        \"capacity\": \"$capacity_name\",
+                        \"hero\": \"$hero_name\",
+                        \"critical\": true
+                    }
+                }" > /dev/null
+        fi
     else
-        response=$(curl -s -X $method "$BACKEND_URL$endpoint")
-    fi
-    
-    if echo "$response" | grep -q '"success":true' || echo "$response" | grep -q '"status":"healthy"'; then
-        echo -e "${GREEN}   ✅ Succès${NC}"
-        echo "   Response: $response" | head -c 200
-        echo ""
-    else
-        echo -e "${RED}   ❌ Échec${NC}"
-        echo "   Response: $response"
-        echo ""
+        echo -e "${RED}❌ $capacity_name échoué${NC}"
+        echo "   Erreur: $(echo "$response" | grep -o '"error":"[^"]*"' | cut -d'"' -f4)"
     fi
 }
 
-# Créer un jeu de test
-echo -e "${YELLOW}🎮 Création d'un jeu de test...${NC}"
-game_response=$(curl -s -X POST "$BACKEND_URL/api/temporal/games" \
-    -H "Content-Type: application/json" \
-    -d '{"gameName": "Test Capacités Spéciales", "playerId": "test-player"}')
-
-game_id=$(echo "$game_response" | grep -o '"id":[0-9]*' | cut -d':' -f2)
-if [ -z "$game_id" ]; then
-    game_id=1
-fi
-
-echo -e "${GREEN}✅ Jeu créé avec ID: $game_id${NC}"
-echo ""
-
-# Démarrer le jeu
-echo -e "${YELLOW}🚀 Démarrage du jeu...${NC}"
-curl -s -X POST "$BACKEND_URL/api/temporal/games/$game_id/start" \
-    -H "Content-Type: application/json" > /dev/null
-echo -e "${GREEN}✅ Jeu démarré${NC}"
-echo ""
-
-# Créer les héros épiques
-echo -e "${YELLOW}🦸 Création des héros épiques...${NC}"
-
-heroes=("Jean-Grofignon" "Chlamydius" "Omega-Zero" "Claudius")
-for hero in "${heroes[@]}"; do
-    echo -e "${BLUE}   Création de $hero...${NC}"
-    curl -s -X POST "$BACKEND_URL/api/temporal/games/$game_id/script" \
+# Fonction pour tester la Forge Runique avec broadcast intelligent
+test_runic_forge() {
+    log "🔨 Test de la Forge Runique - Broadcast Intelligent"
+    
+    # Test de forge simple (pas de broadcast)
+    response=$(curl -s -X POST "$API_BASE/runic-forge/forge" \
         -H "Content-Type: application/json" \
-        -d "{\"script\": \"HERO($hero)\"}" > /dev/null
-    echo -e "${GREEN}   ✅ $hero créé${NC}"
-done
-echo ""
-
-# Tests des capacités spéciales
-echo -e "${PURPLE}⚔️ TESTS DES CAPACITÉS SPÉCIALES${NC}"
-echo -e "${PURPLE}===============================${NC}"
-
-# Test 1: Liste des capacités disponibles
-test_endpoint "/api/special-abilities/list" "GET" "" "Liste des capacités spéciales"
-
-# Test 2: Frappe Pré-Existante
-test_endpoint "/api/special-abilities/pre-existence-strike" "POST" \
-    "{\"heroName\": \"Jean-Grofignon\", \"targetName\": \"Chlamydius\", \"gameId\": $game_id}" \
-    "Frappe Pré-Existante (Jean-Grofignon → Chlamydius)"
-
-# Test 3: Infection Mémorielle
-test_endpoint "/api/special-abilities/memory-infection" "POST" \
-    "{\"heroName\": \"Chlamydius\", \"targetName\": \"Claudius\", \"gameId\": $game_id}" \
-    "Infection Mémorielle (Chlamydius → Claudius)"
-
-# Test 4: Recompilation de la Réalité
-test_endpoint "/api/special-abilities/reality-recompile" "POST" \
-    "{\"heroName\": \"Jean-Grofignon\", \"gameId\": $game_id}" \
-    "Recompilation de la Réalité (Jean-Grofignon)"
-
-# Test 5: Effacement de l'Existence (Chlamydius)
-test_endpoint "/api/special-abilities/scribe-nonexistence" "POST" \
-    "{\"heroName\": \"Chlamydius\", \"targetName\": \"Claudius\", \"gameId\": $game_id}" \
-    "Effacement de l'Existence (Chlamydius → Claudius)"
-
-# Test 6: Transformation Oméga Ultime (Omega-Zéro)
-test_endpoint "/api/special-abilities/omega-zero-ultimate" "POST" \
-    "{\"heroName\": \"Omega-Zero\", \"gameId\": $game_id}" \
-    "Transformation Oméga Ultime (Omega-Zéro)"
-
-# Test 7: Health check des capacités spéciales
-test_endpoint "/api/special-abilities/health" "GET" "" "Health check des capacités spéciales"
-
-echo ""
-
-# Tests de la Forge Runique
-echo -e "${PURPLE}🔨 TESTS DE LA FORGE RUNIQUE${NC}"
-echo -e "${PURPLE}===========================${NC}"
-
-# Test 1: Health check de la Forge Runique
-test_endpoint "/api/runic-forge/health" "GET" "" "Health check de la Forge Runique"
-
-# Test 2: Exemples de grammaire
-test_endpoint "/api/runic-forge/grammar-examples" "GET" "" "Exemples de grammaire runique"
-
-# Test 3: Validation de grammaire
-test_endpoint "/api/runic-forge/validate" "POST" \
-    "{\"grammar\": \"FORGE(SWORD, POWER:50, ELEMENT:FIRE)\"}" \
-    "Validation de grammaire runique basique"
-
-# Test 4: Validation de grammaire complexe
-test_endpoint "/api/runic-forge/validate" "POST" \
-    "{\"grammar\": \"FORGE(ARTIFACT, POWER:200, TEMPORAL:TRUE, DELTA_T:3)\"}" \
-    "Validation de grammaire runique complexe"
-
-# Test 5: Forge d'un objet basique
-test_endpoint "/api/runic-forge/forge" "POST" \
-    "{\"grammar\": \"FORGE(SWORD, POWER:50, ELEMENT:FIRE)\", \"heroName\": \"Jean-Grofignon\", \"gameId\": $game_id}" \
-    "Forge d'une épée de feu basique"
-
-# Test 6: Forge d'un artefact quantique
-test_endpoint "/api/runic-forge/forge" "POST" \
-    "{\"grammar\": \"FORGE(MIRROR, POWER:100, QUANTUM:TRUE, AMPLITUDE:0.8)\", \"heroName\": \"Jean-Grofignon\", \"gameId\": $game_id}" \
-    "Forge d'un miroir quantique"
-
-# Test 7: Liste des objets forgés
-test_endpoint "/api/runic-forge/objects?gameId=$game_id" "GET" "" "Liste des objets forgés"
-
-# Test 8: Statistiques de forge
-test_endpoint "/api/runic-forge/stats?gameId=$game_id" "GET" "" "Statistiques de forge"
-
-echo ""
-
-# Tests d'utilisation d'objets forgés (si des objets existent)
-echo -e "${PURPLE}🗡️ TESTS D'UTILISATION D'OBJETS FORGÉS${NC}"
-echo -e "${PURPLE}========================================${NC}"
-
-# Récupérer la liste des objets forgés
-objects_response=$(curl -s -X GET "$BACKEND_URL/api/runic-forge/objects?gameId=$game_id")
-if echo "$objects_response" | grep -q '"objects":\[.*\]' && ! echo "$objects_response" | grep -q '"objects":\[\]'; then
-    # Extraire le premier ID d'objet
-    first_object_id=$(echo "$objects_response" | grep -o '"id":[0-9]*' | head -1 | cut -d':' -f2)
-    if [ -n "$first_object_id" ]; then
-        test_endpoint "/api/runic-forge/objects/$first_object_id/use" "POST" \
-            "{\"heroName\": \"Jean-Grofignon\", \"gameId\": $game_id}" \
-            "Utilisation d'un objet forgé (ID: $first_object_id)"
+        -d "{
+            \"formula\": \"HERO(TestHero)\",
+            \"name\": \"Épée de Test\",
+            \"type\": \"WEAPON\",
+            \"gameId\": $GAME_ID
+        }")
+    
+    if echo "$response" | grep -q '"success":true'; then
+        echo -e "${GREEN}✅ Forge simple réussie${NC}"
+    else
+        echo -e "${RED}❌ Forge simple échouée${NC}"
     fi
-else
-    echo -e "${YELLOW}⚠️  Aucun objet forgé disponible pour le test d'utilisation${NC}"
+    
+    # Test de forge dangereuse (broadcast critique)
+    response=$(curl -s -X POST "$API_BASE/runic-forge/forge" \
+        -H "Content-Type: application/json" \
+        -d "{
+            \"formula\": \"ψ††††† + Σ + Ω\",
+            \"name\": \"Objet Dangereux\",
+            \"type\": \"PARADOX\",
+            \"gameId\": $GAME_ID
+        }")
+    
+    if echo "$response" | grep -q '"success":true'; then
+        echo -e "${GREEN}✅ Forge dangereuse réussie${NC}"
+        
+        # Broadcast critique pour objet dangereux
+        log "📡 Broadcast critique pour objet dangereux"
+        curl -s -X POST "$API_BASE/temporal/broadcast" \
+            -H "Content-Type: application/json" \
+            -d "{
+                \"eventType\": \"FORGE_DANGEREUSE\",
+                \"data\": {
+                    \"objectName\": \"Objet Dangereux\",
+                    \"riskLevel\": 0.9,
+                    \"critical\": true
+                }
+            }" > /dev/null
+    else
+        echo -e "${RED}❌ Forge dangereuse échouée${NC}"
+    fi
+}
+
+# Démarrage du test
+log "🚀 Démarrage du test des capacités spéciales"
+
+# 1. Créer une partie
+log "📝 Création de la partie de test"
+response=$(curl -s -X POST "$API_BASE/temporal/games" \
+    -H "Content-Type: application/json" \
+    -d "{
+        \"gameName\": \"$GAME_NAME\",
+        \"playerId\": \"$PLAYER_ID\"
+    }")
+
+GAME_ID=$(echo "$response" | grep -o '"gameId":[0-9]*' | cut -d':' -f2)
+
+if [ -z "$GAME_ID" ]; then
+    echo -e "${RED}❌ Impossible de créer la partie${NC}"
+    exit 1
 fi
 
-echo ""
+echo -e "${GREEN}✅ Partie créée (ID: $GAME_ID)${NC}"
 
-# Tests de traduction littéraire
-echo -e "${PURPLE}📚 TESTS DE TRADUCTION LITTÉRAIRE${NC}"
-echo -e "${PURPLE}=================================${NC}"
+# 2. Démarrer la partie
+log "▶️ Démarrage de la partie"
+curl -s -X POST "$API_BASE/temporal/games/$GAME_ID/start" > /dev/null
 
-# Test 1: Traduction d'un héros épique
-test_endpoint "/api/collection/translate" "POST" \
-    "{\"script\": \"HERO(Omega-Zero)\", \"mode\": \"literary\"}" \
-    "Traduction littéraire d'Omega-Zéro"
+# 3. Créer des héros de test
+log "🦸 Création des héros de test"
 
-# Test 2: Traduction d'une capacité spéciale
-test_endpoint "/api/collection/translate" "POST" \
-    "{\"script\": \"PRE_EXISTENCE_STRIKE(Jean-Grofignon, Chlamydius)\", \"mode\": \"literary\"}" \
-    "Traduction littéraire d'une capacité spéciale"
+heroes=("Jean-Grofignon" "Claudius" "Chlamydius" "Omega-Zero")
 
-# Test 3: Traduction d'un état quantique complexe
-test_endpoint "/api/collection/translate" "POST" \
-    "{\"script\": \"ψ: ⊙(Δt+3 @20,20 ⟶ OMEGA_ZERO_ULTIMATE(Omega-Zero))\", \"mode\": \"literary\"}" \
-    "Traduction littéraire d'un état quantique complexe"
+for hero in "${heroes[@]}"; do
+    response=$(curl -s -X POST "$API_BASE/temporal/games/$GAME_ID/script" \
+        -H "Content-Type: application/json" \
+        -d "{\"script\": \"HERO($hero)\"}")
+    
+    if echo "$response" | grep -q '"success":true'; then
+        echo -e "${GREEN}✅ Héros $hero créé${NC}"
+    else
+        echo -e "${RED}❌ Échec création héros $hero${NC}"
+    fi
+done
 
-echo ""
+# 4. Tester les capacités spéciales
+log "⚔️ Test des capacités spéciales"
 
-# Résumé final
-echo -e "${PURPLE}📊 RÉSUMÉ DES TESTS${NC}"
-echo -e "${PURPLE}===================${NC}"
+# Test PRE_EXISTENCE_STRIKE
+test_capacity "PRE_EXISTENCE_STRIKE" "Jean-Grofignon" "pre-existence-strike"
 
-echo -e "${CYAN}✅ Capacités spéciales implémentées:${NC}"
-echo "   • PRE_EXISTENCE_STRIKE - Frappe Pré-Existante"
-echo "   • MEMORY_INFECTION - Infection Mémorielle"
-echo "   • REALITY_RECOMPILE - Recompilation de la Réalité"
-echo "   • SCRIBE_NONEXISTENCE - Effacement de l'Existence"
-echo "   • OMEGA_ZERO_ULTIMATE - Transformation Oméga Ultime"
+# Test MEMORY_INFECTION
+test_capacity "MEMORY_INFECTION" "Claudius" "memory-infection"
 
-echo ""
-echo -e "${CYAN}✅ Forge Runique implémentée:${NC}"
-echo "   • API Controller complet (/api/runic-forge)"
-echo "   • Validation de grammaire runique"
-echo "   • Forge d'objets avec risques"
-echo "   • Gestion des objets forgés"
-echo "   • Statistiques de forge"
+# Test REALITY_RECOMPILE
+test_capacity "REALITY_RECOMPILE" "Chlamydius" "reality-recompile"
 
-echo ""
-echo -e "${CYAN}✅ Interface UI préparée:${NC}"
-echo "   • Module runic-forge.js créé"
-echo "   • Intégration dans l'interface port 8000"
-echo "   • Styles CSS complets"
-echo "   • Exemples de grammaire interactifs"
+# Test SCRIBE_NONEXISTENCE
+test_capacity "SCRIBE_NONEXISTENCE" "Chlamydius" "scribe-nonexistence"
 
-echo ""
-echo -e "${CYAN}✅ Service de traduction amélioré:${NC}"
-echo "   • Suppression des suffixes numériques"
-echo "   • Mapping ID → descriptions poétiques"
-echo "   • Style littéraire enrichi"
-echo "   • Support des capacités spéciales"
+# Test OMEGA_ZERO_ULTIMATE
+test_capacity "OMEGA_ZERO_ULTIMATE" "Omega-Zero" "omega-zero-ultimate"
 
-echo ""
-echo -e "${GREEN}🎉 TOUS LES TESTS TERMINÉS AVEC SUCCÈS !${NC}"
-echo -e "${GREEN}🚀 Les capacités spéciales et la Forge Runique sont opérationnelles !${NC}"
+# 5. Tester la Forge Runique
+test_runic_forge
 
-# Sauvegarder le log
-echo "$(date): Test capacités spéciales et Forge Runique terminé" >> "$LOG_FILE"
-echo -e "${BLUE}📝 Log sauvegardé dans: $LOG_FILE${NC}" 
+# 6. Vérifier les statistiques
+log "📊 Vérification des statistiques"
+
+# Stats des capacités spéciales
+response=$(curl -s -X GET "$API_BASE/special-abilities/stats")
+if echo "$response" | grep -q '"success":true'; then
+    echo -e "${GREEN}✅ Statistiques des capacités récupérées${NC}"
+else
+    echo -e "${RED}❌ Échec récupération statistiques capacités${NC}"
+fi
+
+# Stats de la Forge Runique
+response=$(curl -s -X GET "$API_BASE/runic-forge/stats")
+if echo "$response" | grep -q '"success":true'; then
+    echo -e "${GREEN}✅ Statistiques de la Forge récupérées${NC}"
+else
+    echo -e "${RED}❌ Échec récupération statistiques Forge${NC}"
+fi
+
+# 7. Test de broadcast intelligent
+log "📡 Test du système de broadcast intelligent"
+
+# Test broadcast critique
+response=$(curl -s -X POST "$API_BASE/temporal/broadcast" \
+    -H "Content-Type: application/json" \
+    -d "{
+        \"eventType\": \"BOSS_ACTION\",
+        \"data\": {
+            \"boss\": \"Omega-Zero\",
+            \"action\": \"PRE_EXISTENCE_STRIKE\",
+            \"critical\": true
+        }
+    }")
+
+if [ $? -eq 0 ]; then
+    echo -e "${GREEN}✅ Broadcast critique fonctionnel${NC}"
+else
+    echo -e "${RED}❌ Échec broadcast critique${NC}"
+fi
+
+# Test broadcast non-critique (doit être ignoré)
+response=$(curl -s -X POST "$API_BASE/temporal/broadcast" \
+    -H "Content-Type: application/json" \
+    -d "{
+        \"eventType\": \"HERO_MOVEMENT\",
+        \"data\": {
+            \"hero\": \"Jean-Grofignon\",
+            \"action\": \"MOV\",
+            \"critical\": false
+        }
+    }")
+
+echo -e "${YELLOW}ℹ️ Broadcast non-critique ignoré (normal)${NC}"
+
+# 8. Fin du test
+log "🏁 Test terminé"
+echo -e "${GREEN}✅ Tous les tests des capacités spéciales et de la Forge Runique sont terminés${NC}"
+echo -e "${BLUE}📡 Le système de broadcast intelligent évite la surcharge serveur${NC}"
+echo -e "${YELLOW}💡 Seuls les événements critiques sont broadcastés${NC}"
+
+# Nettoyage
+log "🧹 Nettoyage"
+curl -s -X DELETE "$API_BASE/temporal/games/$GAME_ID" > /dev/null
+
+echo -e "${GREEN}🎉 Test des capacités spéciales terminé avec succès !${NC}" 

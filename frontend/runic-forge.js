@@ -379,36 +379,82 @@ class RunicForgeUI {
         }
     }
     
-    async forgeObject() {
-        const grammar = document.getElementById('grammar-input').value.trim();
-        
-        if (!grammar) {
-            alert('Veuillez entrer une grammaire runique');
-            return;
-        }
-        
+    // Méthode pour forger un objet avec broadcast intelligent
+    async forgeObject(formula, name, type) {
         try {
-            const response = await fetch(`${this.baseUrl}/forge`, {
+            this.updateStatus('🔨 Forge en cours...', 'info');
+            
+            const response = await fetch('/api/runic-forge/forge', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    grammar: grammar,
-                    heroName: 'Jean-Grofignon',
-                    gameId: this.currentGameId
+                    formula: formula,
+                    name: name,
+                    type: type,
+                    gameId: window.gameAPI?.gameId
                 })
             });
+
+            const result = await response.json();
             
-            const data = await response.json();
-            
-            if (data.success) {
-                alert(`✅ Objet forgé avec succès!\nNom: ${data.forgedObject.name}\nPuissance: ${data.forgedObject.power}`);
-                this.loadForgedObjects();
-                this.loadStats();
+            if (result.success) {
+                this.updateStatus('✅ Objet forgé avec succès !', 'success');
+                this.addForgedObject(result.forgedObject);
+                
+                // Broadcast intelligent seulement si c'est un objet dangereux
+                if (result.forgedObject.isDangerous) {
+                    await window.smartBroadcast.broadcastCriticalEvent('FORGE_DANGEREUSE', {
+                        objectName: name,
+                        riskLevel: result.forgedObject.stabilityRating
+                    });
+                }
+                
+                this.showNotification('🔨 Forge réussie !', 'success');
             } else {
-                alert(`❌ Erreur de forge: ${data.error}`);
+                this.updateStatus(`❌ Erreur: ${result.error}`, 'error');
+                this.showNotification('❌ Échec de la forge', 'error');
             }
         } catch (error) {
-            alert(`Erreur de connexion: ${error.message}`);
+            this.updateStatus(`❌ Erreur réseau: ${error.message}`, 'error');
+            this.showNotification('❌ Erreur de connexion', 'error');
+        }
+    }
+
+    // Méthode pour utiliser un objet forgé avec broadcast intelligent
+    async useForgedObject(objectId) {
+        try {
+            this.updateStatus('⚡ Activation de l\'objet...', 'info');
+            
+            const response = await fetch(`/api/runic-forge/use/${objectId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    gameId: window.gameAPI?.gameId
+                })
+            });
+
+            const result = await response.json();
+            
+            if (result.success) {
+                this.updateStatus('✅ Objet utilisé avec succès !', 'success');
+                
+                // Broadcast intelligent pour les effets spéciaux
+                if (result.effect && result.effect.includes('SPECIAL')) {
+                    await window.smartBroadcast.broadcastCriticalEvent('CAPACITY_SPECIALE_ACTIVEE', {
+                        objectId: objectId,
+                        effect: result.effect
+                    });
+                }
+                
+                this.showNotification('⚡ Objet activé !', 'success');
+                this.refreshForgedObjects();
+            } else {
+                this.updateStatus(`❌ Erreur: ${result.error}`, 'error');
+                this.showNotification('❌ Échec d\'activation', 'error');
+            }
+        } catch (error) {
+            this.updateStatus(`❌ Erreur réseau: ${error.message}`, 'error');
+            this.showNotification('❌ Erreur de connexion', 'error');
         }
     }
     
