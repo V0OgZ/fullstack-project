@@ -429,9 +429,14 @@ public class ArtifactEffectExecutor {
      * Augmente les dégâts du prochain combat
      */
     private Map<String, Object> executeTemporalSword(Hero hero, Game game) {
-        // Ajouter un bonus de dégâts temporaire
+        // 🎯 STYLE JEAN-GROFIGNON : L'épée donne +10 mouvement ET +50 dégâts !
         hero.addItem("TEMPORAL_DAMAGE_BONUS_+50");
+        hero.addItem("TEMPORAL_MOVEMENT_BONUS_+10");
         hero.addItem("TEMPORAL_SWORD_ACTIVE_" + System.currentTimeMillis());
+        
+        // Augmenter temporairement les points de mouvement
+        int currentMovement = hero.getMovementPoints();
+        hero.setMovementPoints(Math.min(currentMovement + 10, 20)); // Max 20
         
         // Coût en énergie
         if (hero.getTemporalEnergy() >= 30) {
@@ -441,8 +446,8 @@ public class ArtifactEffectExecutor {
         heroRepository.save(hero);
         
         return createSuccess(
-            "⚔️ Épée Temporelle activée",
-            "Dégâts +50 pour le prochain combat",
+            "⚔️ Épée Temporelle activée", 
+            "Dégâts +50 et Mouvement +10 ! (Jean-Grofignon approuve)",
             1.0
         );
     }

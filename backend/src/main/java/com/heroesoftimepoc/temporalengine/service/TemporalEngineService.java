@@ -9,6 +9,7 @@ import com.heroesoftimepoc.temporalengine.service.TemporalScriptParser.ScriptCom
 import com.heroesoftimepoc.temporalengine.service.QuantumInterferenceService;
 import com.heroesoftimepoc.temporalengine.service.QuantumMigrationService;
 import com.heroesoftimepoc.temporalengine.model.ComplexAmplitude;
+import com.heroesoftimepoc.temporalengine.model.TileCoord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -69,6 +70,9 @@ public class TemporalEngineService {
     
     @Autowired
     private ArtifactEffectExecutor artifactEffectExecutor;
+    
+    @Autowired
+    private CausalityZoneService causalityZoneService;
     
     private final Random random = new Random();
     
@@ -613,8 +617,8 @@ public class TemporalEngineService {
         Map<String, Object> result = new HashMap<>();
         
         String heroName = params.get("hero");
-        int x = Integer.parseInt(params.get("x"));
-        int y = Integer.parseInt(params.get("y"));
+        int targetX = Integer.parseInt(params.get("x"));
+        int targetY = Integer.parseInt(params.get("y"));
         
         Hero hero = game.getHeroByName(heroName);
         if (hero == null) {
@@ -623,21 +627,113 @@ public class TemporalEngineService {
             return result;
         }
         
-        if (!isValidGamePosition(game, x, y)) {
-            result.put("error", "Invalid game position: (" + x + "," + y + ")");
+        if (!isValidGamePosition(game, targetX, targetY)) {
+            result.put("error", "Invalid game position: (" + targetX + "," + targetY + ")");
             result.put("success", false);
             return result;
         }
         
+        // 🌀 NOUVEAU : VÉRIFICATION MUR DE CAUSALITÉ
+        TileCoord heroPosition = new TileCoord(hero.getPositionX(), hero.getPositionY());
+        TileCoord targetPosition = new TileCoord(targetX, targetY);
+        
+        // Calculer les points de mouvement disponibles
+        int effectiveMovementPoints = hero.getMovementPoints();
+        
+        // 🎯 STYLE JEAN-GROFIGNON : Vérifier les objets spéciaux de manière cool
+        // L'épée temporelle peut être active même sans être dans l'inventaire (c'est méta!)
+        boolean hasTemporalSword = hero.hasItem("temporal_sword") || 
+                                  hero.hasItem("epee_temporelle") ||
+                                  hero.hasItem("TEMPORAL_SWORD_ACTIVE") ||
+                                  hero.getInventory().stream().anyMatch(item -> 
+                                      item.contains("TEMPORAL_SWORD_ACTIVE") || 
+                                      item.contains("TEMPORAL_DAMAGE_BONUS"));
+        
+        if (hasTemporalSword) {
+            effectiveMovementPoints += 10; // Épée temporelle donne +10 mouvement
+            System.out.println("🗡️ Épée temporelle détectée! Movement +10 (Jean approuve)");
+        }
+        
+        // The Dude Style : Vérifier d'autres objets chill
+        if (hero.hasItem("bowling_ball") || hero.hasItem("white_russian")) {
+            effectiveMovementPoints += 2; // The Dude abides, +2 movement
+            System.out.println("🎳 The Dude abides... +2 movement points");
+        }
+        
+        // Calculer la zone de mouvement autorisée
+        List<TileCoord> movementZone = causalityZoneService.calculateMovementZone(
+            game, heroPosition, effectiveMovementPoints
+        );
+        
+        // Vérifier si la destination est dans la zone autorisée
+        if (!movementZone.contains(targetPosition)) {
+            // Vérifier si le héros a un objet qui ignore le mur de causalité
+            if (hero.hasItem("avant_world_blade") || hero.hasItem("chrono_staff")) {
+                // Ces objets permettent d'ignorer le mur de causalité
+                result.put("warning", "Traversée du mur de causalité avec objet spécial!");
+            } else {
+                result.put("error", "Destination hors de la zone de mouvement causale!");
+                result.put("success", false);
+                result.put("maxDistance", effectiveMovementPoints);
+                result.put("requestedDistance", heroPosition.distanceTo(targetPosition));
+                return result;
+            }
+        }
+        
+        // 📅 CALCUL DU TEMPS ÉCOULÉ
+        int distance = (int) heroPosition.distanceTo(targetPosition);
+        int normalMovementPerDay = hero.getMovementPointsPerDay();
+        int daysRequired = (int) Math.ceil((double) distance / normalMovementPerDay);
+        
+        // Si le héros voyage plus loin que normal, il avance dans le temps
+        if (distance > hero.getMovementPoints()) {
+            hero.setCurrentDay(hero.getCurrentDay() + daysRequired);
+            hero.setDaysTraveled(hero.getDaysTraveled() + daysRequired);
+            result.put("timeAdvanced", daysRequired + " jours");
+            result.put("currentDay", hero.getCurrentDay());
+        }
+        
         // Mettre à jour l'occupation des tuiles
-        updateTileOccupancyForHero(game, hero, x, y);
+        updateTileOccupancyForHero(game, hero, targetX, targetY);
         
         // Déplacer le héros
-        hero.moveTo(x, y);
+        hero.moveTo(targetX, targetY);
+        hero.useMovementPoint(); // Utiliser un point de mouvement
         heroRepository.save(hero);
         
-        result.put("message", String.format("Game hero %s moved to (%d,%d)", heroName, x, y));
+        // 🌀 VÉRIFIER LES COLLISIONS CAUSALES
+        List<Hero> heroesAtPosition = game.getHeroes().stream()
+            .filter(h -> !h.equals(hero) && h.isAt(targetX, targetY))
+            .collect(Collectors.toList());
+        
+        for (Hero otherHero : heroesAtPosition) {
+            // Si deux héros sont au même endroit au même moment temporel
+            if (Math.abs(hero.getCurrentDay() - otherHero.getCurrentDay()) <= 1) {
+                result.put("causalCollision", true);
+                result.put("collisionWith", otherHero.getName());
+                
+                // Déclencher un collapse causal
+                Map<String, Object> collapseContext = new HashMap<>();
+                collapseContext.put("hero1", hero.getName());
+                collapseContext.put("hero2", otherHero.getName());
+                collapseContext.put("position", targetPosition);
+                
+                CausalCollapseService.CollapseTrigger trigger = new CausalCollapseService.CollapseTrigger(
+                    CausalCollapseService.CollapseTriggerType.INTERACTION,
+                    "Collision temporelle entre héros",
+                    collapseContext
+                );
+                
+                // Le collapse sera traité au prochain tick
+            }
+        }
+        
+        // 🌫️ METTRE À JOUR LE FOG OF CAUSALITY
+        causalityZoneService.updateCausalityZones(game, hero.getPlayerId(), "HERO_MOVE", targetPosition);
+        
+        result.put("message", String.format("Game hero %s moved to (%d,%d)", heroName, targetX, targetY));
         result.put("success", true);
+        result.put("movementPointsRemaining", hero.getMovementPoints());
         
         return result;
     }
@@ -653,7 +749,25 @@ public class TemporalEngineService {
         String name = params.get("name");
         String xStr = params.get("x");
         String yStr = params.get("y");
+        String heroName = params.get("hero");
         
+        // 🎯 STYLE JEAN-GROFIGNON : Support direct pour donner des items aux héros
+        if ("ITEM".equals(type) && heroName != null) {
+            Hero targetHero = game.getHeroByName(heroName);
+            if (targetHero != null) {
+                targetHero.addItem(name);
+                heroRepository.save(targetHero);
+                result.put("message", "🎁 " + name + " donné à " + heroName + " (The Dude approuve)");
+                result.put("success", true);
+                return result;
+            } else {
+                result.put("error", "Héros non trouvé: " + heroName + " (Vince Vega n'est pas content)");
+                result.put("success", false);
+                return result;
+            }
+        }
+        
+        // Ancien code pour la compatibilité
         if ("ITEM".equals(type)) {
             // Ajouter un objet au héros du joueur actuel (simplifié)
             List<Hero> playerHeroes = game.getHeroesByPlayer(game.getCurrentPlayer());

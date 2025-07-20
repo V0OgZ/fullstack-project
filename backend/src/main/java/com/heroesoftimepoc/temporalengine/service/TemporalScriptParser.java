@@ -33,7 +33,7 @@ public class TemporalScriptParser {
     // Basic script patterns
     private static final Pattern HERO_PATTERN = Pattern.compile("HERO\\(([^)]+)\\)");
     private static final Pattern MOV_PATTERN = Pattern.compile("MOV\\(([^,]+),\\s*@(\\d+),(\\d+)\\)");
-    private static final Pattern CREATE_PATTERN = Pattern.compile("CREATE\\(([^,]+),\\s*([^,]+)(?:,\\s*@(\\d+),(\\d+))?\\)");
+    private static final Pattern CREATE_PATTERN = Pattern.compile("CREATE\\(([^,]+),\\s*([^,]+)(?:,\\s*(?:@(\\d+),(\\d+)|HERO:([^)]+)))?\\)");
     private static final Pattern USE_PATTERN = Pattern.compile("USE\\(([^,]+),\\s*([^,]+)(?:,\\s*([^)]+))?\\)");
     private static final Pattern BATTLE_PATTERN = Pattern.compile("BATTLE\\(([^,]+),\\s*([^)]+)\\)");
     
@@ -246,10 +246,18 @@ public class TemporalScriptParser {
             Map<String, String> params = new HashMap<>();
             params.put("type", createMatcher.group(1));
             params.put("name", createMatcher.group(2));
+            
+            // Support pour les coordonnées @x,y
             if (createMatcher.group(3) != null) {
                 params.put("x", createMatcher.group(3));
                 params.put("y", createMatcher.group(4));
             }
+            
+            // Support pour HERO:name (style Jean-Grofignon)
+            if (createMatcher.group(5) != null) {
+                params.put("hero", createMatcher.group(5));
+            }
+            
             return new ScriptCommand("CREATE", params);
         }
         

@@ -70,19 +70,19 @@ public class TemporalEngineServiceTest {
         // First create a hero
         temporalEngineService.executeScript(testGame.getId(), "HERO(Arthur)");
         
-        // Test hero movement
-        Map<String, Object> result = temporalEngineService.executeScript(testGame.getId(), "MOV(Arthur, @10,15)");
+        // Test hero movement - Limité à 3 cases avec le mur de causalité
+        Map<String, Object> result = temporalEngineService.executeScript(testGame.getId(), "MOV(Arthur, @10,13)");
         
         // Verify response
         assertTrue((Boolean) result.get("success"));
-        assertTrue(result.get("message").toString().contains("Arthur moved to (10,15)"));
+        assertTrue(result.get("message").toString().contains("Arthur moved to (10,13)"));
         
         // Verify hero position was updated
         List<Hero> heroes = heroRepository.findByGameId(testGame.getId());
         assertEquals(1, heroes.size());
         Hero arthur = heroes.get(0);
         assertEquals(10, arthur.getPositionX());
-        assertEquals(15, arthur.getPositionY());
+        assertEquals(13, arthur.getPositionY());
     }
     
     @Test
