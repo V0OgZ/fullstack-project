@@ -2,6 +2,7 @@ package com.heroesoftimepoc.temporalengine.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "psi_states")
@@ -61,6 +62,7 @@ public class PsiState {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "game_id")
+    @JsonIgnore
     private Game game;
     
     public enum PsiStatus {
