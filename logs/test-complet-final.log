@@ -1,6 +1,6 @@
 [0;34m🎯 Heroes of Time - Test Complet Final[0m
 =====================================
-2025-07-20 16:02:35 - Démarrage des tests
+2025-07-20 17:31:13 - Démarrage des tests
 
 [0;36m🧹 Phase 1: Nettoyage initial...[0m
 [0;32m✅ Nettoyage des ports[0m
@@ -73,4 +73,4 @@ Test des métriques de performance...
    Résumé sauvegardé
 Test benchmark regex parser...
 [0;32m✅ Benchmark regex parser[0m
-   165 ops/sec, durée: 6057ms
+   165 ops/sec, durée: 6028ms
