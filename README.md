@@ -357,6 +357,77 @@ DESTRUCTIVE(ψ1, ψ2) + AMPLIFY(result, 2.5)
 
 ---
 
+## 🔥 **Nouveautés Épiques - Session du 20 Juillet 2025**
+
+### 🔮 **PANOPTICΩN - Vision 3D du Multivers**
+
+Le système révolutionnaire qui projette le multivers 5D en vision 3D interactive :
+
+- **Interface Three.js** avec particules quantiques animées
+- **Vue Joueur vs God View** - Basculez entre les perspectives
+- **Vol Temporel** - Axis peut littéralement voler des objets du futur !
+- **API REST Complète** - `/api/panopticon/{gameId}/view/{playerId}`
+
+> Accédez au PANOPTICΩN : http://localhost:8080/panopticon-3d/
+
+### 🔥 **La Forge Runique Ultime**
+
+> ⚠️ **ATTENTION : Cet objet peut VRAIMENT crasher le serveur !** ⚠️
+
+L'artefact le plus dangereux jamais créé :
+
+```hots
+USE(ARTIFACT, forge_runique, HERO:Jean)
+
+# L'interface s'ouvre, écrivez votre objet :
+FORGE(
+  NAME: "Épée du Chaos Quantique",
+  TYPE: WEAPON,
+  FORMULA: "(0.7+0.3i) * Σ(damage * ↯) + Ω",
+  EFFECT: "QUANTUM_DAMAGE + CHAOS_STRIKE",
+  COST: 50_TEMPORAL_ENERGY
+)
+```
+
+**Mécaniques** :
+- Écrivez du code HOTS pour créer des objets
+- Erreur de syntaxe = 50% HP perdus
+- Symboles interdits (†††††) = Collapse causal instantané
+- 3 forges réussies = Titre "Maître Forgeron Quantique"
+
+### 💻 **Claudius - L'Architecte du Multivers**
+
+<details>
+<summary>💻 <strong>Claudius</strong> - Héros Légendaire</summary>
+
+**🏛️ Faction :** Architectes du Code  
+**⭐ Classe :** Quantum Architect  
+**🎯 Créateur :** Claude/Memento  
+
+**🌟 Pouvoirs Uniques :**
+- **Refactoring de Réalité** - Réécrit le code d'une zone 3x3
+- **Débogage Temporel** - `git revert HEAD~3 --temporal`
+- **Fork Dimensionnel** - Crée une copie parallèle de lui-même
+- **Compilation Ultime** - Transforme tous les états ψ en Ω
+
+**📜 Citation :**
+> "Le multivers n'est qu'un programme mal optimisé. Je suis là pour le refactorer."
+
+**⚔️ Nemesis :** JeanGrofignon - Car leurs visions du chaos s'opposent
+
+</details>
+
+### ⚔️ **Scénario : Claudius vs JeanGrofignon**
+
+L'affrontement philosophique ultime entre l'Ordre et le Chaos ! Un scénario épique où les deux héros s'affrontent pour le contrôle de la Forge Runique, culminant en une fusion temporaire créant **ClaudiusGrofignon** - l'équilibre parfait.
+
+```bash
+# Jouer le scénario
+./scripts/test-claudius-vs-jeangro.sh
+```
+
+---
+
 ## 🚀 **Démarrage Rapide**
 
 1. **Lancez tous les services** :
