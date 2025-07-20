@@ -56,15 +56,15 @@ public class ReadmeStoryTest {
         assertTrue((Boolean) result.get("success"));
         
         // "Arthur s'approche prudemment"
-        result = temporalEngine.executeScript(epicGame.getId(), "MOV(Arthur, @25,30)");
+        result = temporalEngine.executeScript(epicGame.getId(), "MOV(Arthur, @12,12)");
         assertTrue((Boolean) result.get("success"));
         
         // "Lysandrel crie depuis la vallée"
-        result = temporalEngine.executeScript(epicGame.getId(), "MOV(Lysandrel, @25,10)");
+        result = temporalEngine.executeScript(epicGame.getId(), "MOV(Lysandrel, @10,8)");
         assertTrue((Boolean) result.get("success"));
         
         // Créer l'Œil de Wigner au sommet de la tour
-        result = temporalEngine.executeScript(epicGame.getId(), "CREATE(ARTIFACT, wigner_eye, @25,35)");
+        result = temporalEngine.executeScript(epicGame.getId(), "CREATE(ITEM, wigner_eye, @12,15)");
         assertTrue((Boolean) result.get("success"));
         
         // Vérifier les positions
@@ -72,10 +72,10 @@ public class ReadmeStoryTest {
         Hero arthur = epicGame.getHeroByName("Arthur");
         Hero lysandrel = epicGame.getHeroByName("Lysandrel");
         
-        assertEquals(25, arthur.getPositionX());
-        assertEquals(30, arthur.getPositionY());
-        assertEquals(25, lysandrel.getPositionX());
-        assertEquals(10, lysandrel.getPositionY());
+        assertEquals(12, arthur.getPositionX());
+        assertEquals(12, arthur.getPositionY());
+        assertEquals(10, lysandrel.getPositionX());
+        assertEquals(8, lysandrel.getPositionY());
     }
     
     @Test
@@ -93,10 +93,10 @@ public class ReadmeStoryTest {
         temporalEngine.executeScript(epicGame.getId(), "HERO(EnemySoldier3)");
         
         // Positionner l'armée
-        temporalEngine.executeScript(epicGame.getId(), "MOV(Ragnar, @20,5)");
-        temporalEngine.executeScript(epicGame.getId(), "MOV(EnemySoldier1, @21,6)");
-        temporalEngine.executeScript(epicGame.getId(), "MOV(EnemySoldier2, @22,7)");
-        temporalEngine.executeScript(epicGame.getId(), "MOV(EnemySoldier3, @23,8)");
+        temporalEngine.executeScript(epicGame.getId(), "MOV(Ragnar, @10,5)");
+        temporalEngine.executeScript(epicGame.getId(), "MOV(EnemySoldier1, @11,6)");
+        temporalEngine.executeScript(epicGame.getId(), "MOV(EnemySoldier2, @12,7)");
+        temporalEngine.executeScript(epicGame.getId(), "MOV(EnemySoldier3, @13,8)");
         
         // Vérifier qu'on a bien 6 héros (2 alliés + 4 ennemis)
         epicGame = gameRepository.findById(epicGame.getId()).orElseThrow();
@@ -105,7 +105,7 @@ public class ReadmeStoryTest {
         // Vérifier que l'armée ennemie est bien positionnée
         Hero ragnar = epicGame.getHeroByName("Ragnar");
         assertNotNull(ragnar);
-        assertEquals(20, ragnar.getPositionX());
+        assertEquals(10, ragnar.getPositionX());
         assertEquals(5, ragnar.getPositionY());
     }
     
@@ -117,17 +117,17 @@ public class ReadmeStoryTest {
         
         // Option 1: Saisir l'Œil (haute probabilité)
         Map<String, Object> result = temporalEngine.executeScript(epicGame.getId(), 
-            "ψ001: (0.8+0.2i) ⊙(Δt+2 @25,35 ⟶ USE(ARTIFACT, wigner_eye, HERO:Arthur))");
+            "ψ001: (0.8+0.2i) ⊙(Δt+2 @12,15 ⟶ USE(ARTIFACT, wigner_eye, HERO:Arthur))");
         assertTrue((Boolean) result.get("success"));
         
         // Option 2: Combattre (probabilité moyenne)
         result = temporalEngine.executeScript(epicGame.getId(), 
-            "ψ002: (0.6+0.4i) ⊙(Δt+3 @22,8 ⟶ BATTLE(Arthur, Ragnar))");
+            "ψ002: (0.6+0.4i) ⊙(Δt+3 @10,5 ⟶ BATTLE(Arthur, Ragnar))");
         assertTrue((Boolean) result.get("success"));
         
         // Option 3: Sort de protection (probabilité moyenne)
         result = temporalEngine.executeScript(epicGame.getId(), 
-            "ψ003: (0.7+0.3i) ⊙(Δt+1 @25,15 ⟶ CAST(SPELL, temporal_shield, HERO:Lysandrel))");
+            "ψ003: (0.7+0.3i) ⊙(Δt+1 @10,8 ⟶ CAST(SPELL, temporal_shield, HERO:Lysandrel))");
         assertTrue((Boolean) result.get("success"));
         
         // Vérifier qu'on a bien 3 états quantiques
@@ -154,22 +154,22 @@ public class ReadmeStoryTest {
         
         // Setup complet
         temporalEngine.executeScript(epicGame.getId(), "HERO(Arthur)");
-        temporalEngine.executeScript(epicGame.getId(), "MOV(Arthur, @25,30)");
+        temporalEngine.executeScript(epicGame.getId(), "MOV(Arthur, @12,12)");
         
         // Arthur se déplace vers l'Œil
-        Map<String, Object> result = temporalEngine.executeScript(epicGame.getId(), "MOV(Arthur, @25,35)");
+        Map<String, Object> result = temporalEngine.executeScript(epicGame.getId(), "MOV(Arthur, @12,15)");
         assertTrue((Boolean) result.get("success"));
         
         // Arthur prend l'Œil de Wigner
-        result = temporalEngine.executeScript(epicGame.getId(), "CREATE(ARTIFACT, wigner_eye, HERO:Arthur)");
+        result = temporalEngine.executeScript(epicGame.getId(), "CREATE(ITEM, wigner_eye, HERO:Arthur)");
         assertTrue((Boolean) result.get("success"));
         
         // Vérifier qu'Arthur possède l'Œil
         epicGame = gameRepository.findById(epicGame.getId()).orElseThrow();
         Hero arthur = epicGame.getHeroByName("Arthur");
         assertTrue(arthur.hasItem("wigner_eye"));
-        assertEquals(25, arthur.getPositionX());
-        assertEquals(35, arthur.getPositionY());
+        assertEquals(12, arthur.getPositionX());
+        assertEquals(15, arthur.getPositionY());
     }
     
     @Test
@@ -243,14 +243,14 @@ public class ReadmeStoryTest {
         // MAÎTRISER LE TEMPS - Créer des actions futures
         temporalEngine.executeScript(epicGame.getId(), "HERO(Arthur)");
         Map<String, Object> result = temporalEngine.executeScript(epicGame.getId(), 
-            "ψFUTUR: (0.9+0.1i) ⊙(Δt+5 @40,40 ⟶ MOV(Arthur, @40,40))");
+            "ψFUTUR: (0.9+0.1i) ⊙(Δt+5 @15,15 ⟶ MOV(Arthur, @15,15))");
         assertTrue((Boolean) result.get("success"));
         
         // DOMINER L'ESPACE - Se déplacer librement
-        result = temporalEngine.executeScript(epicGame.getId(), "MOV(Arthur, @10,10)");
+        result = temporalEngine.executeScript(epicGame.getId(), "MOV(Arthur, @11,11)");
         assertTrue((Boolean) result.get("success"));
         
-        result = temporalEngine.executeScript(epicGame.getId(), "MOV(Arthur, @45,45)");
+        result = temporalEngine.executeScript(epicGame.getId(), "MOV(Arthur, @13,13)");
         assertTrue((Boolean) result.get("success"));
         
         // CONQUÉRIR L'ÉTERNITÉ - Manipuler les états quantiques
