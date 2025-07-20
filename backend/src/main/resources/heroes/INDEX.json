@@ -47,6 +47,13 @@
         "scenarios": ["claudius_vs_jeangro_epic.hots"],
         "status": "LEGENDARY_NEW",
         "special": "Créé par Claude - Peut refactorer la réalité"
+      },
+      {
+        "id": "hero_chlamydius",
+        "name": "Chlamydius",
+        "path": "legendary/Chlamydius.json",
+        "faction": "Les Pèlerins de l'Oubli",
+        "rarity": "Anomalie"
       }
     ],
     
