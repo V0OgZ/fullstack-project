@@ -1,7 +1,0 @@
-[[1;31mERROR[m] Failed to execute goal [32morg.apache.maven.plugins:maven-clean-plugin:3.3.2:clean[m [1m(default-clean)[m on project [36mtemporal-engine[m: [1;31mFailed to clean project: Failed to delete /workspace/backend/target/classes/com/heroesoftimepoc/temporalengine/service[m -> [1m[Help 1][m
-[[1;31mERROR[m] 
-[[1;31mERROR[m] To see the full stack trace of the errors, re-run Maven with the [1m-e[m switch.
-[[1;31mERROR[m] Re-run Maven using the [1m-X[m switch to enable full debug logging.
-[[1;31mERROR[m] 
-[[1;31mERROR[m] For more information about the errors and possible solutions, please read the following articles:
-[[1;31mERROR[m] [1m[Help 1][m http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
