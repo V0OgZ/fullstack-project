@@ -9162,3 +9162,645 @@ Hibernate: insert into game_players (game_id,player_id) values (?,?)
 2025-07-20T11:43:53.346+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
 2025-07-20T11:43:53.346+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:43:53 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
 2025-07-20T11:43:53.346+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:50:36.345+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/game/status", parameters={}
+2025-07-20T11:50:36.346+02:00 DEBUG 68544 --- [nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.GameController#getStatus()
+Hibernate: select count(*) from games g1_0
+2025-07-20T11:50:36.348+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:50:36.348+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{activeGames=10, engine=Heroes of Time Temporal Engine, version=POC-0.1, status=running, timestamp=1 (truncated)...]
+2025-07-20T11:50:36.348+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-20T11:50:36.362+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/api/game/create", parameters={}
+2025-07-20T11:50:36.362+02:00 DEBUG 68544 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.GameController#createGame(Map)
+2025-07-20T11:50:36.362+02:00 DEBUG 68544 --- [nio-8080-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [{gameName=La Rencontre Épique - Œil de Wigner, players=Arthur,Ennemi}]
+Hibernate: insert into games (created_at,current_player,current_timeline,current_turn,ended_at,game_name,map_height,map_width,max_players,started_at,status,winner,id) values (?,?,?,?,?,?,?,?,?,?,?,?,default)
+Hibernate: insert into game_players (game_id,player_id) values (?,?)
+2025-07-20T11:50:36.364+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:50:36.364+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{gameId=11, gameName=La Rencontre Épique - Œil de Wigner, success=true, message=Game created success (truncated)...]
+2025-07-20T11:50:36.364+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-20T11:50:36.386+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/api/game/11/execute", parameters={}
+2025-07-20T11:50:36.386+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:50:36.387+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:50:36.387+02:00 DEBUG 68544 --- [nio-8080-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/game/11/execute.]
+2025-07-20T11:50:36.387+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:50:36.387+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:50:36.387+02:00 DEBUG 68544 --- [nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:50:36.387+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:50:36.387+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:50:36 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:50:36.388+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:50:36.397+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : POST "/api/game/11/execute", parameters={}
+2025-07-20T11:50:36.397+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:50:36.398+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:50:36.398+02:00 DEBUG 68544 --- [nio-8080-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/game/11/execute.]
+2025-07-20T11:50:36.398+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:50:36.398+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:50:36.398+02:00 DEBUG 68544 --- [nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:50:36.398+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:50:36.398+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:50:36 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:50:36.398+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:50:36.408+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : POST "/api/game/11/execute", parameters={}
+2025-07-20T11:50:36.408+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:50:36.408+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:50:36.408+02:00 DEBUG 68544 --- [nio-8080-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/game/11/execute.]
+2025-07-20T11:50:36.408+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:50:36.408+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:50:36.409+02:00 DEBUG 68544 --- [nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:50:36.409+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:50:36.409+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:50:36 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:50:36.409+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:50:36.417+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : POST "/api/game/11/execute", parameters={}
+2025-07-20T11:50:36.417+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:50:36.417+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:50:36.417+02:00 DEBUG 68544 --- [nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/game/11/execute.]
+2025-07-20T11:50:36.417+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:50:36.418+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:50:36.418+02:00 DEBUG 68544 --- [nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:50:36.418+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:50:36.418+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:50:36 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:50:36.418+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:50:36.426+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/api/game/11/execute", parameters={}
+2025-07-20T11:50:36.426+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:50:36.427+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:50:36.427+02:00 DEBUG 68544 --- [nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/game/11/execute.]
+2025-07-20T11:50:36.427+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:50:36.427+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:50:36.427+02:00 DEBUG 68544 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:50:36.427+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:50:36.427+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:50:36 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:50:36.427+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:50:36.435+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/api/game/11/execute", parameters={}
+2025-07-20T11:50:36.436+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:50:36.436+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:50:36.436+02:00 DEBUG 68544 --- [nio-8080-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/game/11/execute.]
+2025-07-20T11:50:36.436+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:50:36.436+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:50:36.436+02:00 DEBUG 68544 --- [nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:50:36.436+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:50:36.436+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:50:36 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:50:36.436+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:50:36.446+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : POST "/api/game/11/execute", parameters={}
+2025-07-20T11:50:36.446+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:50:36.446+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:50:36.446+02:00 DEBUG 68544 --- [nio-8080-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/game/11/execute.]
+2025-07-20T11:50:36.446+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:50:36.446+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:50:36.446+02:00 DEBUG 68544 --- [nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:50:36.446+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:50:36.446+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:50:36 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:50:36.446+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:50:36.454+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : POST "/api/game/11/execute", parameters={}
+2025-07-20T11:50:36.454+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:50:36.455+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:50:36.455+02:00 DEBUG 68544 --- [nio-8080-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/game/11/execute.]
+2025-07-20T11:50:36.455+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:50:36.455+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:50:36.455+02:00 DEBUG 68544 --- [nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:50:36.455+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:50:36.455+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:50:36 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:50:36.455+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:50:36.463+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : POST "/api/game/11/execute", parameters={}
+2025-07-20T11:50:36.463+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:50:36.463+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:50:36.463+02:00 DEBUG 68544 --- [nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/game/11/execute.]
+2025-07-20T11:50:36.463+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:50:36.463+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:50:36.463+02:00 DEBUG 68544 --- [nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:50:36.463+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:50:36.463+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:50:36 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:50:36.463+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:50:36.472+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/api/game/11/execute", parameters={}
+2025-07-20T11:50:36.472+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:50:36.472+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:50:36.472+02:00 DEBUG 68544 --- [nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/game/11/execute.]
+2025-07-20T11:50:36.472+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:50:36.472+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:50:36.472+02:00 DEBUG 68544 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:50:36.473+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:50:36.473+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:50:36 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:50:36.473+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:50:36.481+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/api/game/11/execute", parameters={}
+2025-07-20T11:50:36.481+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:50:36.481+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:50:36.481+02:00 DEBUG 68544 --- [nio-8080-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/game/11/execute.]
+2025-07-20T11:50:36.481+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:50:36.481+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:50:36.481+02:00 DEBUG 68544 --- [nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:50:36.481+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:50:36.481+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:50:36 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:50:36.481+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:50:36.490+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : POST "/api/game/11/execute", parameters={}
+2025-07-20T11:50:36.490+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:50:36.490+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:50:36.490+02:00 DEBUG 68544 --- [nio-8080-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/game/11/execute.]
+2025-07-20T11:50:36.490+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:50:36.490+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:50:36.490+02:00 DEBUG 68544 --- [nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:50:36.490+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:50:36.490+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:50:36 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:50:36.490+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:50:36.499+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : POST "/api/game/11/execute", parameters={}
+2025-07-20T11:50:36.499+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:50:36.499+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:50:36.499+02:00 DEBUG 68544 --- [nio-8080-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/game/11/execute.]
+2025-07-20T11:50:36.499+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:50:36.499+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:50:36.499+02:00 DEBUG 68544 --- [nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:50:36.499+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:50:36.499+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:50:36 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:50:36.499+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:50:36.509+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : POST "/api/game/11/execute", parameters={}
+2025-07-20T11:50:36.509+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:50:36.509+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:50:36.510+02:00 DEBUG 68544 --- [nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/game/11/execute.]
+2025-07-20T11:50:36.510+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:50:36.510+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:50:36.510+02:00 DEBUG 68544 --- [nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:50:36.510+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:50:36.510+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:50:36 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:50:36.510+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:50:36.519+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/api/game/11/execute", parameters={}
+2025-07-20T11:50:36.519+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:50:36.520+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:50:36.520+02:00 DEBUG 68544 --- [nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/game/11/execute.]
+2025-07-20T11:50:36.520+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:50:36.520+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:50:36.520+02:00 DEBUG 68544 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:50:36.520+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:50:36.520+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:50:36 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:50:36.520+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:50:36.528+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/api/game/11/execute", parameters={}
+2025-07-20T11:50:36.528+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:50:36.528+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:50:36.528+02:00 DEBUG 68544 --- [nio-8080-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/game/11/execute.]
+2025-07-20T11:50:36.528+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:50:36.528+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:50:36.528+02:00 DEBUG 68544 --- [nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:50:36.529+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:50:36.529+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:50:36 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:50:36.529+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:50:36.538+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : POST "/api/game/11/execute", parameters={}
+2025-07-20T11:50:36.538+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:50:36.538+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:50:36.538+02:00 DEBUG 68544 --- [nio-8080-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/game/11/execute.]
+2025-07-20T11:50:36.538+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:50:36.538+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:50:36.538+02:00 DEBUG 68544 --- [nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:50:36.539+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:50:36.539+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:50:36 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:50:36.539+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:50:36.547+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : POST "/api/game/11/execute", parameters={}
+2025-07-20T11:50:36.548+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:50:36.548+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:50:36.548+02:00 DEBUG 68544 --- [nio-8080-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/game/11/execute.]
+2025-07-20T11:50:36.548+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:50:36.548+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:50:36.548+02:00 DEBUG 68544 --- [nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:50:36.548+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:50:36.548+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:50:36 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:50:36.548+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:50:36.556+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : POST "/api/game/11/execute", parameters={}
+2025-07-20T11:50:36.557+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:50:36.557+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:50:36.557+02:00 DEBUG 68544 --- [nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/game/11/execute.]
+2025-07-20T11:50:36.557+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:50:36.557+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:50:36.557+02:00 DEBUG 68544 --- [nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:50:36.557+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:50:36.557+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:50:36 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:50:36.557+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:50:36.565+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/game/11/state", parameters={}
+2025-07-20T11:50:36.565+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:50:36.566+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:50:36.566+02:00 DEBUG 68544 --- [nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/game/11/state.]
+2025-07-20T11:50:36.566+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:50:36.566+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for GET "/error", parameters={}
+2025-07-20T11:50:36.566+02:00 DEBUG 68544 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:50:36.566+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:50:36.566+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:50:36 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:50:36.566+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:51:11.783+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/api/game/status", parameters={}
+2025-07-20T11:51:11.783+02:00 DEBUG 68544 --- [nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.GameController#getStatus()
+Hibernate: select count(*) from games g1_0
+2025-07-20T11:51:11.784+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:51:11.784+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{activeGames=11, engine=Heroes of Time Temporal Engine, version=POC-0.1, status=running, timestamp=1 (truncated)...]
+2025-07-20T11:51:11.785+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-20T11:51:11.796+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : POST "/api/game/create", parameters={}
+2025-07-20T11:51:11.796+02:00 DEBUG 68544 --- [nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.GameController#createGame(Map)
+2025-07-20T11:51:11.796+02:00 DEBUG 68544 --- [nio-8080-exec-5] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [{gameName=La Rencontre Épique - Œil de Wigner, players=Arthur,Ennemi}]
+Hibernate: insert into games (created_at,current_player,current_timeline,current_turn,ended_at,game_name,map_height,map_width,max_players,started_at,status,winner,id) values (?,?,?,?,?,?,?,?,?,?,?,?,default)
+Hibernate: insert into game_players (game_id,player_id) values (?,?)
+2025-07-20T11:51:11.798+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:51:11.798+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{gameId=12, gameName=La Rencontre Épique - Œil de Wigner, success=true, message=Game created success (truncated)...]
+2025-07-20T11:51:11.798+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-20T11:51:11.818+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : POST "/api/temporal/execute/12", parameters={}
+2025-07-20T11:51:11.818+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:51:11.818+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:51:11.818+02:00 DEBUG 68544 --- [nio-8080-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/temporal/execute/12.]
+2025-07-20T11:51:11.818+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:51:11.818+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:51:11.818+02:00 DEBUG 68544 --- [nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:51:11.819+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:51:11.819+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:51:11 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:51:11.819+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:51:11.828+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : POST "/api/temporal/execute/12", parameters={}
+2025-07-20T11:51:11.828+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:51:11.829+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:51:11.829+02:00 DEBUG 68544 --- [nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/temporal/execute/12.]
+2025-07-20T11:51:11.829+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:51:11.829+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:51:11.829+02:00 DEBUG 68544 --- [nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:51:11.829+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:51:11.829+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:51:11 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:51:11.829+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:51:11.839+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/api/temporal/execute/12", parameters={}
+2025-07-20T11:51:11.839+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:51:11.839+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:51:11.839+02:00 DEBUG 68544 --- [nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/temporal/execute/12.]
+2025-07-20T11:51:11.839+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:51:11.839+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:51:11.839+02:00 DEBUG 68544 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:51:11.839+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:51:11.839+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:51:11 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:51:11.840+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:51:11.849+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/api/temporal/execute/12", parameters={}
+2025-07-20T11:51:11.849+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:51:11.849+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:51:11.849+02:00 DEBUG 68544 --- [nio-8080-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/temporal/execute/12.]
+2025-07-20T11:51:11.850+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:51:11.850+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:51:11.850+02:00 DEBUG 68544 --- [nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:51:11.850+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:51:11.850+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:51:11 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:51:11.850+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:51:11.858+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : POST "/api/temporal/execute/12", parameters={}
+2025-07-20T11:51:11.858+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:51:11.859+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:51:11.859+02:00 DEBUG 68544 --- [nio-8080-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/temporal/execute/12.]
+2025-07-20T11:51:11.859+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:51:11.859+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:51:11.859+02:00 DEBUG 68544 --- [nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:51:11.859+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:51:11.859+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:51:11 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:51:11.859+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:51:11.867+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : POST "/api/temporal/execute/12", parameters={}
+2025-07-20T11:51:11.867+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:51:11.868+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:51:11.868+02:00 DEBUG 68544 --- [nio-8080-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/temporal/execute/12.]
+2025-07-20T11:51:11.868+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:51:11.868+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:51:11.868+02:00 DEBUG 68544 --- [nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:51:11.868+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:51:11.868+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:51:11 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:51:11.868+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:51:11.878+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : POST "/api/temporal/execute/12", parameters={}
+2025-07-20T11:51:11.878+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:51:11.878+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:51:11.878+02:00 DEBUG 68544 --- [nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/temporal/execute/12.]
+2025-07-20T11:51:11.878+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:51:11.878+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:51:11.878+02:00 DEBUG 68544 --- [nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:51:11.879+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:51:11.879+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:51:11 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:51:11.879+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:51:11.887+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/api/temporal/execute/12", parameters={}
+2025-07-20T11:51:11.887+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:51:11.887+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:51:11.887+02:00 DEBUG 68544 --- [nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/temporal/execute/12.]
+2025-07-20T11:51:11.887+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:51:11.887+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:51:11.887+02:00 DEBUG 68544 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:51:11.887+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:51:11.887+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:51:11 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:51:11.887+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:51:11.895+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/api/temporal/execute/12", parameters={}
+2025-07-20T11:51:11.895+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:51:11.896+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:51:11.896+02:00 DEBUG 68544 --- [nio-8080-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/temporal/execute/12.]
+2025-07-20T11:51:11.896+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:51:11.896+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:51:11.896+02:00 DEBUG 68544 --- [nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:51:11.896+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:51:11.896+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:51:11 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:51:11.896+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:51:11.905+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : POST "/api/temporal/execute/12", parameters={}
+2025-07-20T11:51:11.905+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:51:11.905+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:51:11.905+02:00 DEBUG 68544 --- [nio-8080-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/temporal/execute/12.]
+2025-07-20T11:51:11.905+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:51:11.905+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:51:11.905+02:00 DEBUG 68544 --- [nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:51:11.905+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:51:11.906+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:51:11 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:51:11.906+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:51:11.914+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : POST "/api/temporal/execute/12", parameters={}
+2025-07-20T11:51:11.914+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:51:11.914+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:51:11.914+02:00 DEBUG 68544 --- [nio-8080-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/temporal/execute/12.]
+2025-07-20T11:51:11.914+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:51:11.914+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:51:11.914+02:00 DEBUG 68544 --- [nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:51:11.915+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:51:11.915+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:51:11 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:51:11.915+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:51:11.923+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : POST "/api/temporal/execute/12", parameters={}
+2025-07-20T11:51:11.923+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:51:11.923+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:51:11.923+02:00 DEBUG 68544 --- [nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/temporal/execute/12.]
+2025-07-20T11:51:11.923+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:51:11.924+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:51:11.924+02:00 DEBUG 68544 --- [nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:51:11.924+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:51:11.924+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:51:11 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:51:11.924+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:51:11.932+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/api/temporal/execute/12", parameters={}
+2025-07-20T11:51:11.932+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:51:11.932+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:51:11.933+02:00 DEBUG 68544 --- [nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/temporal/execute/12.]
+2025-07-20T11:51:11.933+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:51:11.933+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:51:11.933+02:00 DEBUG 68544 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:51:11.933+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:51:11.933+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:51:11 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:51:11.933+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:51:11.943+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/api/temporal/execute/12", parameters={}
+2025-07-20T11:51:11.943+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:51:11.943+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:51:11.944+02:00 DEBUG 68544 --- [nio-8080-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/temporal/execute/12.]
+2025-07-20T11:51:11.944+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:51:11.944+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:51:11.944+02:00 DEBUG 68544 --- [nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:51:11.944+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:51:11.944+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:51:11 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:51:11.944+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:51:11.953+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : POST "/api/temporal/execute/12", parameters={}
+2025-07-20T11:51:11.953+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:51:11.953+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:51:11.954+02:00 DEBUG 68544 --- [nio-8080-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/temporal/execute/12.]
+2025-07-20T11:51:11.954+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:51:11.954+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:51:11.954+02:00 DEBUG 68544 --- [nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:51:11.954+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:51:11.954+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:51:11 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:51:11.954+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:51:11.962+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : POST "/api/temporal/execute/12", parameters={}
+2025-07-20T11:51:11.962+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:51:11.962+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:51:11.962+02:00 DEBUG 68544 --- [nio-8080-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/temporal/execute/12.]
+2025-07-20T11:51:11.962+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:51:11.963+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:51:11.963+02:00 DEBUG 68544 --- [nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:51:11.963+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:51:11.963+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:51:11 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:51:11.963+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:51:11.973+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : POST "/api/temporal/execute/12", parameters={}
+2025-07-20T11:51:11.973+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:51:11.973+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:51:11.973+02:00 DEBUG 68544 --- [nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/temporal/execute/12.]
+2025-07-20T11:51:11.973+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:51:11.973+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:51:11.973+02:00 DEBUG 68544 --- [nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:51:11.974+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:51:11.974+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:51:11 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:51:11.974+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:51:11.983+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/api/temporal/execute/12", parameters={}
+2025-07-20T11:51:11.983+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:51:11.983+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:51:11.983+02:00 DEBUG 68544 --- [nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/temporal/execute/12.]
+2025-07-20T11:51:11.983+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:51:11.983+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:51:11.983+02:00 DEBUG 68544 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:51:11.984+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:51:11.984+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:51:11 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:51:11.984+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:51:11.992+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/api/temporal/execute/12", parameters={}
+2025-07-20T11:51:11.993+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:51:11.993+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:51:11.993+02:00 DEBUG 68544 --- [nio-8080-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/temporal/execute/12.]
+2025-07-20T11:51:11.993+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:51:11.993+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:51:11.993+02:00 DEBUG 68544 --- [nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:51:11.993+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:51:11.993+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:51:11 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:51:11.993+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:51:12.001+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/game/12/state", parameters={}
+2025-07-20T11:51:12.002+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:51:12.002+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:51:12.002+02:00 DEBUG 68544 --- [nio-8080-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/game/12/state.]
+2025-07-20T11:51:12.002+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:51:12.002+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for GET "/error", parameters={}
+2025-07-20T11:51:12.002+02:00 DEBUG 68544 --- [nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:51:12.003+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:51:12.003+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:51:12 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:51:12.003+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:52:09.615+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/game/status", parameters={}
+2025-07-20T11:52:09.615+02:00 DEBUG 68544 --- [nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.GameController#getStatus()
+Hibernate: select count(*) from games g1_0
+2025-07-20T11:52:09.616+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:52:09.616+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{activeGames=12, engine=Heroes of Time Temporal Engine, version=POC-0.1, status=running, timestamp=1 (truncated)...]
+2025-07-20T11:52:09.616+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-20T11:52:09.624+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : POST "/api/game/create", parameters={}
+2025-07-20T11:52:09.624+02:00 DEBUG 68544 --- [nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.GameController#createGame(Map)
+2025-07-20T11:52:09.624+02:00 DEBUG 68544 --- [nio-8080-exec-9] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [{gameName=La Rencontre Épique - Œil de Wigner, players=Arthur,Ennemi}]
+Hibernate: insert into games (created_at,current_player,current_timeline,current_turn,ended_at,game_name,map_height,map_width,max_players,started_at,status,winner,id) values (?,?,?,?,?,?,?,?,?,?,?,?,default)
+Hibernate: insert into game_players (game_id,player_id) values (?,?)
+2025-07-20T11:52:09.625+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:52:09.625+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{gameId=13, gameName=La Rencontre Épique - Œil de Wigner, success=true, message=Game created success (truncated)...]
+2025-07-20T11:52:09.626+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-20T11:52:09.643+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/api/extended-quantum/games/13/execute", parameters={}
+2025-07-20T11:52:09.644+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:52:09.644+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:52:09.644+02:00 DEBUG 68544 --- [nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/extended-quantum/games/13/execute.]
+2025-07-20T11:52:09.644+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:52:09.644+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:52:09.644+02:00 DEBUG 68544 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:52:09.644+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:52:09.644+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:52:09 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:52:09.645+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:52:09.654+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/api/extended-quantum/games/13/execute", parameters={}
+2025-07-20T11:52:09.654+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:52:09.654+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:52:09.654+02:00 DEBUG 68544 --- [nio-8080-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/extended-quantum/games/13/execute.]
+2025-07-20T11:52:09.654+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:52:09.654+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:52:09.654+02:00 DEBUG 68544 --- [nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:52:09.654+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:52:09.654+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:52:09 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:52:09.655+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:52:09.663+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : POST "/api/extended-quantum/games/13/execute", parameters={}
+2025-07-20T11:52:09.663+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:52:09.663+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:52:09.663+02:00 DEBUG 68544 --- [nio-8080-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/extended-quantum/games/13/execute.]
+2025-07-20T11:52:09.663+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:52:09.663+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:52:09.663+02:00 DEBUG 68544 --- [nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:52:09.664+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:52:09.664+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:52:09 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:52:09.664+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:52:09.674+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : POST "/api/extended-quantum/games/13/execute", parameters={}
+2025-07-20T11:52:09.674+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:52:09.674+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:52:09.674+02:00 DEBUG 68544 --- [nio-8080-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/extended-quantum/games/13/execute.]
+2025-07-20T11:52:09.674+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:52:09.674+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:52:09.674+02:00 DEBUG 68544 --- [nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:52:09.674+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:52:09.674+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:52:09 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:52:09.674+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:52:09.683+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : POST "/api/extended-quantum/games/13/execute", parameters={}
+2025-07-20T11:52:09.683+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:52:09.683+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:52:09.683+02:00 DEBUG 68544 --- [nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/extended-quantum/games/13/execute.]
+2025-07-20T11:52:09.683+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:52:09.683+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:52:09.683+02:00 DEBUG 68544 --- [nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:52:09.683+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:52:09.683+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:52:09 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:52:09.684+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:52:09.692+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/api/extended-quantum/games/13/execute", parameters={}
+2025-07-20T11:52:09.692+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:52:09.693+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:52:09.693+02:00 DEBUG 68544 --- [nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/extended-quantum/games/13/execute.]
+2025-07-20T11:52:09.693+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:52:09.693+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:52:09.693+02:00 DEBUG 68544 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:52:09.693+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:52:09.693+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:52:09 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:52:09.693+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:52:09.701+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/api/extended-quantum/games/13/execute", parameters={}
+2025-07-20T11:52:09.701+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:52:09.701+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:52:09.701+02:00 DEBUG 68544 --- [nio-8080-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/extended-quantum/games/13/execute.]
+2025-07-20T11:52:09.702+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:52:09.702+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:52:09.702+02:00 DEBUG 68544 --- [nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:52:09.702+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:52:09.702+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:52:09 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:52:09.702+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:52:09.711+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : POST "/api/extended-quantum/games/13/execute", parameters={}
+2025-07-20T11:52:09.711+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:52:09.712+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:52:09.712+02:00 DEBUG 68544 --- [nio-8080-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/extended-quantum/games/13/execute.]
+2025-07-20T11:52:09.712+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:52:09.712+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:52:09.712+02:00 DEBUG 68544 --- [nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:52:09.712+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:52:09.712+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:52:09 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:52:09.712+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:52:09.720+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : POST "/api/extended-quantum/games/13/execute", parameters={}
+2025-07-20T11:52:09.720+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:52:09.720+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:52:09.720+02:00 DEBUG 68544 --- [nio-8080-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/extended-quantum/games/13/execute.]
+2025-07-20T11:52:09.720+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:52:09.720+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:52:09.720+02:00 DEBUG 68544 --- [nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:52:09.720+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:52:09.720+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:52:09 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:52:09.720+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:52:09.728+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : POST "/api/extended-quantum/games/13/execute", parameters={}
+2025-07-20T11:52:09.728+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:52:09.728+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:52:09.728+02:00 DEBUG 68544 --- [nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/extended-quantum/games/13/execute.]
+2025-07-20T11:52:09.728+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:52:09.728+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:52:09.728+02:00 DEBUG 68544 --- [nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:52:09.729+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:52:09.729+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:52:09 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:52:09.729+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:52:09.738+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/api/extended-quantum/games/13/execute", parameters={}
+2025-07-20T11:52:09.738+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:52:09.738+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:52:09.738+02:00 DEBUG 68544 --- [nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/extended-quantum/games/13/execute.]
+2025-07-20T11:52:09.738+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:52:09.738+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:52:09.738+02:00 DEBUG 68544 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:52:09.738+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:52:09.738+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:52:09 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:52:09.738+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:52:09.747+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/api/extended-quantum/games/13/execute", parameters={}
+2025-07-20T11:52:09.747+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:52:09.747+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:52:09.747+02:00 DEBUG 68544 --- [nio-8080-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/extended-quantum/games/13/execute.]
+2025-07-20T11:52:09.747+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:52:09.747+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:52:09.747+02:00 DEBUG 68544 --- [nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:52:09.747+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:52:09.747+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:52:09 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:52:09.747+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:52:09.756+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : POST "/api/extended-quantum/games/13/execute", parameters={}
+2025-07-20T11:52:09.756+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:52:09.756+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:52:09.756+02:00 DEBUG 68544 --- [nio-8080-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/extended-quantum/games/13/execute.]
+2025-07-20T11:52:09.756+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:52:09.756+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:52:09.756+02:00 DEBUG 68544 --- [nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:52:09.756+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:52:09.756+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:52:09 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:52:09.756+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:52:09.765+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : POST "/api/extended-quantum/games/13/execute", parameters={}
+2025-07-20T11:52:09.765+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:52:09.765+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:52:09.765+02:00 DEBUG 68544 --- [nio-8080-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/extended-quantum/games/13/execute.]
+2025-07-20T11:52:09.765+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:52:09.765+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:52:09.765+02:00 DEBUG 68544 --- [nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:52:09.765+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:52:09.765+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:52:09 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:52:09.765+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:52:09.775+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : POST "/api/extended-quantum/games/13/execute", parameters={}
+2025-07-20T11:52:09.776+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:52:09.776+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:52:09.776+02:00 DEBUG 68544 --- [nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/extended-quantum/games/13/execute.]
+2025-07-20T11:52:09.776+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:52:09.776+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:52:09.776+02:00 DEBUG 68544 --- [nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:52:09.776+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:52:09.776+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:52:09 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:52:09.776+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:52:09.785+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/api/extended-quantum/games/13/execute", parameters={}
+2025-07-20T11:52:09.785+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:52:09.785+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:52:09.785+02:00 DEBUG 68544 --- [nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/extended-quantum/games/13/execute.]
+2025-07-20T11:52:09.785+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:52:09.785+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:52:09.785+02:00 DEBUG 68544 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:52:09.786+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:52:09.786+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:52:09 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:52:09.786+02:00 DEBUG 68544 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:52:09.794+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/api/extended-quantum/games/13/execute", parameters={}
+2025-07-20T11:52:09.794+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:52:09.794+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:52:09.795+02:00 DEBUG 68544 --- [nio-8080-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/extended-quantum/games/13/execute.]
+2025-07-20T11:52:09.795+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:52:09.795+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:52:09.795+02:00 DEBUG 68544 --- [nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:52:09.795+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:52:09.795+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:52:09 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:52:09.795+02:00 DEBUG 68544 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:52:09.805+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : POST "/api/extended-quantum/games/13/execute", parameters={}
+2025-07-20T11:52:09.806+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:52:09.806+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:52:09.806+02:00 DEBUG 68544 --- [nio-8080-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/extended-quantum/games/13/execute.]
+2025-07-20T11:52:09.806+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:52:09.806+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:52:09.806+02:00 DEBUG 68544 --- [nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:52:09.806+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:52:09.806+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:52:09 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:52:09.806+02:00 DEBUG 68544 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:52:09.816+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : POST "/api/extended-quantum/games/13/execute", parameters={}
+2025-07-20T11:52:09.816+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:52:09.816+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:52:09.816+02:00 DEBUG 68544 --- [nio-8080-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/extended-quantum/games/13/execute.]
+2025-07-20T11:52:09.816+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:52:09.816+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-20T11:52:09.816+02:00 DEBUG 68544 --- [nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:52:09.816+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:52:09.816+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:52:09 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:52:09.816+02:00 DEBUG 68544 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404
+2025-07-20T11:52:09.825+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/extended-quantum/games/13/state", parameters={}
+2025-07-20T11:52:09.825+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-07-20T11:52:09.826+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.r.ResourceHttpRequestHandler     : Resource not found
+2025-07-20T11:52:09.826+02:00 DEBUG 68544 --- [nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/extended-quantum/games/13/state.]
+2025-07-20T11:52:09.826+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2025-07-20T11:52:09.826+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for GET "/error", parameters={}
+2025-07-20T11:52:09.826+02:00 DEBUG 68544 --- [nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-20T11:52:09.826+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-20T11:52:09.826+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jul 20 11:52:09 CEST 2025, status=404, error=Not Found, trace=org.springframework.web (truncated)...]
+2025-07-20T11:52:09.826+02:00 DEBUG 68544 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 404

@@ -70,6 +70,9 @@ run_test_suite "Tests Vol du Trésor (Axis)" \
 run_test_suite "Tests Quantum Maze (Puzzle)" \
     "mvn test -Dtest=QuantumMazeTest 2>&1 | grep -E 'Tests run:|BUILD'"
 
+run_test_suite "Tests Histoire README (Œil de Wigner)" \
+    "mvn test -Dtest=ReadmeStoryTest 2>&1 | grep -E 'Tests run:|BUILD'"
+
 run_test_suite "Tests Amplitudes Complexes" \
     "mvn test -Dtest=ComplexAmplitudeTest 2>&1 | grep -E 'Tests run:|BUILD'"
 
