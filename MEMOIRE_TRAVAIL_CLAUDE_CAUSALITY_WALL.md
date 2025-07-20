@@ -121,4 +121,34 @@ Dans `ArtifactEffectExecutor`:
 - Le CausalityZoneService EXISTE mais n'est utilisé que dans AdvancedTemporalController
 - On l'a connecté dans moveGameHero() mais c'est basique
 - Il faut gérer le temps différent pour chaque joueur
-- Les objets magiques doivent vraiment casser les règles 
+- Les objets magiques doivent vraiment casser les règles
+
+## 🎯 CE QU'ON A IMPLÉMENTÉ (20 JUILLET)
+
+### 1. ✅ Mur de Causalité Connecté
+- `CausalityZoneService` → `TemporalEngineService.moveGameHero()`
+- Limite de mouvement basée sur les points (3 par défaut)
+- Épée temporelle donne +10 mouvement
+
+### 2. ✅ Temps Individuel par Héros
+- `currentDay` - Jour actuel du héros
+- `daysTraveled` - Total des jours voyagés
+- Le temps avance quand on voyage loin (distance → jours)
+
+### 3. ✅ Vision Temporelle
+- `magic_spyglass` → `executeMagicSpyglass()`
+- Voir 3 jours dans le futur
+- Montre les héros et ψ-states futurs
+
+### 4. ✅ Rapport Vince Vega
+- Identifié les vraies formules vs fakes
+- `DynamicFormulaParser` parse les formules
+- Formules GROFI non gérées (Σ, †, Ω, etc.)
+
+## 🔧 CE QUI RESTE À FAIRE
+
+1. **Parser GROFI** - Gérer les symboles spéciaux
+2. **Immunités** - Implémenter les immunités aux collapses
+3. **Server Load** - Collapse selon la charge serveur
+4. **WebSocket** - Events temps réel
+5. **Nettoyer JSON** - Supprimer les formules inutiles 

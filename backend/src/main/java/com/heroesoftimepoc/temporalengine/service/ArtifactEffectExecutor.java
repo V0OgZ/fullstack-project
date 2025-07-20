@@ -137,6 +137,9 @@ public class ArtifactEffectExecutor {
             case "wigner_eye":
                 return executeWignerEye(hero, game);
                 
+            case "magic_spyglass":
+                return executeMagicSpyglass(hero, game);
+                
             // === ARTEFACTS HARDCODÉS SPÉCIAUX === 
             default:
                 return null; // Pas trouvé en hardcodé
@@ -615,6 +618,63 @@ public class ArtifactEffectExecutor {
             String.format("État %s effondré par observation", targetState.getPsiId()),
             1.0
         );
+    }
+    
+    /**
+     * 🔮 LONGUE-VUE MAGIQUE
+     * Permet de voir 3 jours dans le futur
+     */
+    private Map<String, Object> executeMagicSpyglass(Hero hero, Game game) {
+        // Activer la vision temporelle
+        hero.setTemporalVisionRange(3); // Voir 3 jours dans le futur
+        hero.addItem("TEMPORAL_VISION_ACTIVE_" + System.currentTimeMillis());
+        
+        // Trouver ce qui se passe dans le futur
+        List<Map<String, Object>> futureEvents = new ArrayList<>();
+        int heroDay = hero.getCurrentDay();
+        
+        // Chercher les héros qui sont dans le futur
+        for (Hero otherHero : game.getHeroes()) {
+            if (!otherHero.equals(hero) && otherHero.getCurrentDay() > heroDay) {
+                int dayDiff = otherHero.getCurrentDay() - heroDay;
+                if (dayDiff <= 3) {
+                    Map<String, Object> event = new HashMap<>();
+                    event.put("hero", otherHero.getName());
+                    event.put("position", Map.of("x", otherHero.getPositionX(), "y", otherHero.getPositionY()));
+                    event.put("day", otherHero.getCurrentDay());
+                    event.put("daysInFuture", dayDiff);
+                    futureEvents.add(event);
+                }
+            }
+        }
+        
+        // Chercher les ψ-states qui vont se déclencher
+        for (PsiState psi : game.getActivePsiStates()) {
+            if (psi.getDeltaT() != null && psi.getDeltaT() <= 3) {
+                Map<String, Object> event = new HashMap<>();
+                event.put("type", "quantum_event");
+                event.put("psiId", psi.getPsiId());
+                event.put("willTriggerIn", psi.getDeltaT() + " jours");
+                event.put("position", Map.of("x", psi.getTargetX(), "y", psi.getTargetY()));
+                futureEvents.add(event);
+            }
+        }
+        
+        // Coût en énergie
+        if (hero.getTemporalEnergy() >= 25) {
+            hero.setTemporalEnergy(hero.getTemporalEnergy() - 25);
+        }
+        
+        heroRepository.save(hero);
+        
+        Map<String, Object> result = createSuccess(
+            "🔮 Longue-vue Magique - Vision du futur activée",
+            String.format("Vous voyez %d événements dans les 3 prochains jours", futureEvents.size()),
+            1.0
+        );
+        result.put("futureEvents", futureEvents);
+        
+        return result;
     }
     
     // =========================================================================

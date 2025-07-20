@@ -80,6 +80,18 @@ public class Hero {
     @Column(name = "observation_range")
     private Integer observationRange = 2; // Portée d'observation
     
+    // Immunité temporelle (GROFI)
+    @Column(name = "temporal_immunity")
+    private boolean temporalImmunity = false;
+    
+    // Vision temporelle (objets magiques)
+    @Column(name = "temporal_vision_range")
+    private int temporalVisionRange = 0; // Jours dans le futur/passé visibles
+    
+    // 🌫️ Fog of causality
+    @Column(name = "causality_awareness")
+    private int causalityAwareness = 1; // Niveau de conscience causale
+    
     public enum HeroStatus {
         ACTIVE,
         TEMPORAL_SHIFT,
@@ -234,6 +246,16 @@ public class Hero {
     
     public Integer getObservationRange() { return observationRange; }
     public void setObservationRange(Integer observationRange) { this.observationRange = observationRange; }
+    
+    // Getters/Setters pour les nouveaux champs temporels
+    public boolean isTemporalImmunity() { return temporalImmunity; }
+    public void setTemporalImmunity(boolean temporalImmunity) { this.temporalImmunity = temporalImmunity; }
+    
+    public int getTemporalVisionRange() { return temporalVisionRange; }
+    public void setTemporalVisionRange(int temporalVisionRange) { this.temporalVisionRange = temporalVisionRange; }
+    
+    public int getCausalityAwareness() { return causalityAwareness; }
+    public void setCausalityAwareness(int causalityAwareness) { this.causalityAwareness = causalityAwareness; }
     
     // ============================
     // MÉTHODES UTILITAIRES UTMD
