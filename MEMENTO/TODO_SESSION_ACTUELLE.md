@@ -1,5 +1,5 @@
 # 📋 TODO SESSION ACTUELLE - HEROES OF TIME
-## Mise à jour : 21 Juillet 2025 - 00:22
+## Mise à jour : 21 Juillet 2025 - 00:30
 
 ---
 
@@ -16,6 +16,22 @@
 - ✅ **Scénario complet** avec 10 phases et quotes cultes
 - ✅ **Script de test automatisé** fonctionnel
 - ✅ **Documentation complète** avec rapport final
+
+### 🎯 **ARTEFACTS MINEURS - IMPLÉMENTATION COMPLÈTE**
+- ✅ **10 artefacts mineurs créés** avec des effets simples mais utiles :
+  - Lanterne de Brouillard - Dissipe le brouillard
+  - Bottes du Vent - Augmente le mouvement
+  - Pierre d'Ancrage - Protection contre déplacements
+  - Cristal de Vision - Améliore la vision
+  - Amulette de Protection - Réduit les dégâts
+  - Sifflet d'Appel - Révèle les héros
+  - Potion d'Énergie Mineure - Restaure l'énergie
+  - Bague de Téléportation - Téléportation adjacente
+  - Torche Éternelle - Éclaire la zone
+  - Médaillon de Santé - Restaure la vie
+- ✅ **Scénario de test complet** avec 11 phases
+- ✅ **Script de test automatisé** avec validation complète
+- ✅ **Documentation exhaustive** avec statistiques détaillées
 
 ### 🚀 **SYSTÈMES PRÉCÉDENTS**
 - ✅ **Capacités spéciales** (PRE_EXISTENCE_STRIKE, MEMORY_INFECTION, etc.)
