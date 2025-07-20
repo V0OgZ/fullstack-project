@@ -1,0 +1,21 @@
+INSTRUCTIONS POUR CRÉER LA PR SUR GITHUB:
+
+1. Ouvre https://github.com/V0OgZ/Heroes-of-Time/compare/main...dev
+
+2. Clique sur Create pull request
+
+3. Titre:
+   🚀 Session Épique: PANOPTICΩN + Forge Runique + Claudius + Tests Complets
+
+4. Dans le body, colle le contenu de MEMENTO/PR_VERS_MAIN_CLAUDE.md
+
+5. Clique sur Create pull request
+
+Tu as 20+ commits épiques à merger dans main !
+
+Les highlights:
+- PANOPTICΩN Three.js interface
+- Forge Runique (peut crasher le serveur!)
+- Héros Claudius
+- Tests complets
+- Histoire README vérifiée 
