@@ -246,7 +246,7 @@ public class PanopticonService {
                     psi.getComplexAmplitude().getProbability() : psi.getProbability());
                 
                 String status = psi.isActive() ? "quantum" : "expired";
-                if (psi.getStatus() == PsiState.Status.COLLAPSED) {
+                if (psi.getStatus() == PsiState.PsiStatus.COLLAPSED) {
                     status = "confirmed";
                 }
                 
