@@ -181,6 +181,18 @@ backend/src/main/java/com/heroesoftimepoc/temporalengine/
 - **Exemple** : jean_vs_claudius_epic.hsp (Jean vs Claudius - 25 min)
 - **Fonctions** : Chargement, exécution, lecture automatique
 
+### **Mode Éthéré - UIs Cachées** ⭐ TOUT NOUVEAU
+- **Localisation** : Intégré dans Dashboard (port 9000)
+- **Accès** : Bouton "🌟 Mode Éthéré" → Nouvelle fenêtre mystique
+- **UIs Récupérées** : 6 interfaces cachées depuis Git history
+- **🃏 Heroes Cards Visualizer** : 16 cartes interactives (commit 789f239)
+- **⚡ Epoch Visualizer** : Timeline officielle Heroes of Time
+- **🎯 Panopticon 3D** : Interface 3D pour visualisation totale
+- **🔮 Quantum Runic Forge** : Forge runique quantique
+- **📊 Mosaic Dashboard** : Dashboard alternatif en mosaïque
+- **🧮 Formula Translator** : Traducteur de formules d'artefacts
+- **Style** : Thème éthéré violet, effets de lueur, cartes flottantes
+
 ## 📁 **PROJECT INVENTORY**
 
 ### **HOTS Files** (26 total) ⭐ ACTUALISÉ
@@ -256,4 +268,4 @@ backend/src/main/java/com/heroesoftimepoc/temporalengine/
 - ❌ Suppression de fonctionnalités existantes
 - ❌ Modifications des scripts de démarrage critiques
 
-*Last updated: Après récupération complète des vraies interfaces depuis git commits + Centre de Replay opérationnel - Jean se lève du canapé pour vérifier* 
+*Last updated: Mode Éthéré intégré avec 6 UIs cachées récupérées + documentation rangée pendant que Jean teste depuis son canapé* 
