@@ -35,6 +35,9 @@ show_help() {
     echo -e "  ${GREEN}editor${NC}      🎨 Éditeur visuel script spatio-temporel"
     echo -e "  ${GREEN}admin${NC}       🎮 Interface d'administration multijoueur"
     echo -e "  ${GREEN}test-uis${NC}    🧪 Test complet de toutes les UIs"
+    echo -e "  ${GREEN}debug${NC}       🐛 Mode debug complet (compilation + logs)"
+    echo -e "  ${GREEN}compile${NC}     🔧 Compilation backend avec debug info"
+    echo -e "  ${GREEN}logs${NC}        📋 Affiche les logs en temps réel"
     echo -e "  ${GREEN}help${NC}        Affiche cette aide"
     echo ""
     echo -e "${YELLOW}Options de test:${NC}"
@@ -66,6 +69,9 @@ show_help() {
     echo -e "  ${CYAN}./hots test maven${NC}        # Test compilation backend"
     echo -e "  ${CYAN}./hots test final${NC}        # 🏆 TEST COMPLET FINAL"
     echo -e "  ${CYAN}./hots test report${NC}       # Rapport détaillé"
+    echo -e "  ${CYAN}./hots debug${NC}             # 🐛 Mode debug complet"
+    echo -e "  ${CYAN}./hots compile${NC}           # 🔧 Compilation avec debug"
+    echo -e "  ${CYAN}./hots logs${NC}              # 📋 Logs en temps réel"
     echo -e "  ${CYAN}./hots generate${NC}          # 🧠 Génère tous les MD depuis JSON"
     echo -e "  ${CYAN}./hots map list${NC}          # 🗺️  Liste les maps disponibles"
     echo -e "  ${CYAN}./hots replay center${NC}     # 🎬 Centre de Replay complet"
@@ -1084,6 +1090,65 @@ case "${1:-help}" in
         ;;
     "test-uis")
         run_test_suite "ui"
+        ;;
+    "debug")
+        echo -e "${BLUE}🐛 Mode debug actif - Lancement de la compilation avec debug info...${NC}"
+        if [ -d "backend" ]; then
+            cd backend
+            echo -e "${YELLOW}🔧 Compilation avec debug info...${NC}"
+            mvn clean compile -e -X > ../debug-compile.log 2>&1
+            if [ $? -eq 0 ]; then
+                echo -e "${GREEN}✅ Compilation réussie avec debug info${NC}"
+                echo -e "${CYAN}📋 Logs sauvegardés dans: debug-compile.log${NC}"
+            else
+                echo -e "${RED}❌ Erreurs de compilation détectées${NC}"
+                echo -e "${YELLOW}📋 Vérifiez debug-compile.log pour les détails${NC}"
+                tail -20 ../debug-compile.log
+            fi
+            cd ..
+        else
+            echo -e "${RED}❌ Dossier backend non trouvé${NC}"
+        fi
+        ;;
+    "compile")
+        echo -e "${BLUE}🔧 Compilation backend avec debug info...${NC}"
+        if [ -d "backend" ]; then
+            cd backend
+            echo -e "${YELLOW}🧹 Nettoyage...${NC}"
+            mvn clean
+            echo -e "${YELLOW}🔧 Compilation avec debug...${NC}"
+            mvn compile -e -X -Dorg.slf4j.simpleLogger.defaultLogLevel=debug
+            if [ $? -eq 0 ]; then
+                echo -e "${GREEN}✅ Compilation réussie${NC}"
+                echo -e "${CYAN}📋 Prêt pour le démarrage en mode debug${NC}"
+            else
+                echo -e "${RED}❌ Erreurs de compilation${NC}"
+                echo -e "${YELLOW}💡 Utilisez './hots debug' pour plus de détails${NC}"
+            fi
+            cd ..
+        else
+            echo -e "${RED}❌ Dossier backend non trouvé${NC}"
+        fi
+        ;;
+    "logs")
+        echo -e "${BLUE}📋 Affichage des logs en temps réel...${NC}"
+        echo -e "${YELLOW}💡 Appuyez sur Ctrl+C pour arrêter${NC}"
+        echo ""
+        
+        # Logs backend
+        if [ -f "backend.log" ]; then
+            echo -e "${CYAN}🔧 Logs Backend:${NC}"
+            tail -f backend.log &
+        fi
+        
+        # Logs debug
+        if [ -f "debug-compile.log" ]; then
+            echo -e "${CYAN}🐛 Logs Debug:${NC}"
+            tail -f debug-compile.log &
+        fi
+        
+        # Attendre l'interruption
+        wait
         ;;
     "help"|*)
         show_help

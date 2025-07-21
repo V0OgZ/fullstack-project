@@ -1,6 +1,6 @@
 package com.heroesoftimepoc.temporalengine.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 /**

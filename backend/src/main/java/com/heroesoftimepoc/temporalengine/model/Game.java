@@ -5,7 +5,7 @@
 
 package com.heroesoftimepoc.temporalengine.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
