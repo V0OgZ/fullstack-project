@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎭 Heroes of Time - Dicebear Graphics Showcase</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        
+        .showcase-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .showcase-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .showcase-header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .showcase-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .controls-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .control-btn {
+            background: linear-gradient(135deg, #3498DB, #2980B9);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            margin: 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+        }
+        
+        .control-btn:hover {
+            background: linear-gradient(135deg, #2980B9, #1f5f99);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(52, 152, 219, 0.4);
+        }
+        
+        .control-btn.active {
+            background: linear-gradient(135deg, #E74C3C, #C0392B);
+        }
+        
+        .showcase-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .section-title {
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 3px solid #3498DB;
+            padding-bottom: 10px;
+        }
+        
+        .elements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .element-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .element-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-color: #3498DB;
+        }
+        
+        .element-name {
+            font-weight: bold;
+            margin-top: 10px;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .element-description {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .demo-actions {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .demo-btn {
+            background: linear-gradient(135deg, #27AE60, #16A085);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            margin: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(39, 174, 96, 0.3);
+        }
+        
+        .demo-btn:hover {
+            background: linear-gradient(135deg, #16A085, #138D75);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(39, 174, 96, 0.4);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .elements-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                gap: 15px;
+            }
+            
+            .showcase-header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="showcase-container">
+        <div class="showcase-header">
+            <h1>🎭 Heroes of Time - Dicebear Graphics Showcase</h1>
+            <p>Comprehensive visual system for all game elements using Dicebear avatars with fallback emojis</p>
+        </div>
+        
+        <div class="stats-section">
+            <div class="stat-card">
+                <div class="stat-number" id="heroes-count">9</div>
+                <div class="stat-label">Heroes</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="creatures-count">7</div>
+                <div class="stat-label">Creatures</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="artifacts-count">11</div>
+                <div class="stat-label">Artifacts</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="spells-count">13</div>
+                <div class="stat-label">Spells</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="environment-count">6</div>
+                <div class="stat-label">Environment</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="ui-count">5</div>
+                <div class="stat-label">UI Elements</div>
+            </div>
+        </div>
+        
+        <div class="controls-section">
+            <button class="control-btn active" onclick="showAll()">Show All</button>
+            <button class="control-btn" onclick="showSection('heroes')">Heroes Only</button>
+            <button class="control-btn" onclick="showSection('creatures')">Creatures Only</button>
+            <button class="control-btn" onclick="showSection('artifacts')">Artifacts Only</button>
+            <button class="control-btn" onclick="showSection('spells')">Spells Only</button>
+            <button class="control-btn" onclick="showSection('environment')">Environment Only</button>
+            <button class="control-btn" onclick="showSection('ui')">UI Elements Only</button>
+        </div>
+        
+        <div id="heroes-section" class="showcase-section">
+            <h2 class="section-title">🦸 Heroes</h2>
+            <div class="elements-grid" id="heroes-grid"></div>
+        </div>
+        
+        <div id="creatures-section" class="showcase-section">
+            <h2 class="section-title">🐉 Creatures</h2>
+            <div class="elements-grid" id="creatures-grid"></div>
+        </div>
+        
+        <div id="artifacts-section" class="showcase-section">
+            <h2 class="section-title">⚔️ Artifacts</h2>
+            <div class="elements-grid" id="artifacts-grid"></div>
+        </div>
+        
+        <div id="spells-section" class="showcase-section">
+            <h2 class="section-title">✨ Spells & Abilities</h2>
+            <div class="elements-grid" id="spells-grid"></div>
+        </div>
+        
+        <div id="environment-section" class="showcase-section">
+            <h2 class="section-title">🌍 Environment</h2>
+            <div class="elements-grid" id="environment-grid"></div>
+        </div>
+        
+        <div id="ui-section" class="showcase-section">
+            <h2 class="section-title">🎮 UI Elements</h2>
+            <div class="elements-grid" id="ui-grid"></div>
+        </div>
+        
+        <div class="demo-actions">
+            <button class="demo-btn" onclick="regenerateAll()">🔄 Regenerate All Graphics</button>
+            <button class="demo-btn" onclick="testInteractions()">🎯 Test Interactions</button>
+            <button class="demo-btn" onclick="downloadGallery()">💾 Export Gallery</button>
+            <button class="demo-btn" onclick="goToGame()">🎮 Go to Game</button>
+        </div>
+    </div>
+    
+    <script src="dicebar-graphics-system.js"></script>
+    <script>
+        // Initialize the comprehensive dicebar graphics system
+        const dicebarSystem = new DicebarGraphicsSystem();
+        
+        // Populate grids
+        function populateGrid(containerId, elementType, collection) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            
+            Object.keys(collection).forEach(elementName => {
+                const elementCard = document.createElement('div');
+                elementCard.className = 'element-card';
+                
+                const avatarElement = dicebarSystem.createAvatarElement(elementType, elementName, 80);
+                
+                const nameElement = document.createElement('div');
+                nameElement.className = 'element-name';
+                nameElement.textContent = elementName;
+                
+                const descElement = document.createElement('div');
+                descElement.className = 'element-description';
+                descElement.textContent = collection[elementName].description || '';
+                
+                elementCard.appendChild(avatarElement);
+                elementCard.appendChild(nameElement);
+                elementCard.appendChild(descElement);
+                
+                // Add click interaction
+                elementCard.addEventListener('click', () => {
+                    showElementDetails(elementType, elementName, collection[elementName]);
+                });
+                
+                container.appendChild(elementCard);
+            });
+        }
+        
+        // Show element details
+        function showElementDetails(type, name, data) {
+            const message = `
+${type.toUpperCase()}: ${name}
+Description: ${data.description || 'No description'}
+Style: ${data.style}
+Color: ${data.color}
+Icon: ${data.icon}
+            `;
+            alert(message);
+        }
+        
+        // Control functions
+        function showAll() {
+            document.querySelectorAll('.showcase-section').forEach(section => {
+                section.classList.remove('hidden');
+            });
+            updateActiveButton(0);
+        }
+        
+        function showSection(sectionName) {
+            document.querySelectorAll('.showcase-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(`${sectionName}-section`).classList.remove('hidden');
+            
+            const buttons = document.querySelectorAll('.control-btn');
+            const sectionMap = ['all', 'heroes', 'creatures', 'artifacts', 'spells', 'environment', 'ui'];
+            updateActiveButton(sectionMap.indexOf(sectionName));
+        }
+        
+        function updateActiveButton(index) {
+            document.querySelectorAll('.control-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', i === index);
+            });
+        }
+        
+        // Demo functions
+        function regenerateAll() {
+            console.log('🔄 Regenerating all graphics...');
+            
+            // Re-populate all grids
+            populateGrid('heroes-grid', 'hero', dicebarSystem.heroes);
+            populateGrid('creatures-grid', 'creature', dicebarSystem.creatures);
+            populateGrid('artifacts-grid', 'artifact', dicebarSystem.artifacts);
+            populateGrid('spells-grid', 'spell', dicebarSystem.spells);
+            populateGrid('environment-grid', 'environment', dicebarSystem.environment);
+            populateGrid('ui-grid', 'ui', dicebarSystem.ui_elements);
+            
+            alert('🎭 All graphics regenerated successfully!');
+        }
+        
+        function testInteractions() {
+            console.log('🎯 Testing interactions...');
+            
+            // Simulate clicking on random elements
+            const allCards = document.querySelectorAll('.element-card');
+            let count = 0;
+            
+            const interval = setInterval(() => {
+                if (count >= 5) {
+                    clearInterval(interval);
+                    alert('🎯 Interaction test completed!');
+                    return;
+                }
+                
+                const randomCard = allCards[Math.floor(Math.random() * allCards.length)];
+                randomCard.style.border = '3px solid #E74C3C';
+                randomCard.style.transform = 'scale(1.1)';
+                
+                setTimeout(() => {
+                    randomCard.style.border = '2px solid transparent';
+                    randomCard.style.transform = 'scale(1)';
+                }, 1000);
+                
+                count++;
+            }, 500);
+        }
+        
+        function downloadGallery() {
+            console.log('💾 Preparing gallery export...');
+            
+            // Create export data
+            const exportData = {
+                heroes: Object.keys(dicebarSystem.heroes).length,
+                creatures: Object.keys(dicebarSystem.creatures).length,
+                artifacts: Object.keys(dicebarSystem.artifacts).length,
+                spells: Object.keys(dicebarSystem.spells).length,
+                environment: Object.keys(dicebarSystem.environment).length,
+                ui_elements: Object.keys(dicebarSystem.ui_elements).length,
+                total: Object.keys(dicebarSystem.heroes).length + 
+                       Object.keys(dicebarSystem.creatures).length + 
+                       Object.keys(dicebarSystem.artifacts).length + 
+                       Object.keys(dicebarSystem.spells).length + 
+                       Object.keys(dicebarSystem.environment).length + 
+                       Object.keys(dicebarSystem.ui_elements).length,
+                timestamp: new Date().toISOString()
+            };
+            
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'heroes-of-time-dicebear-gallery.json';
+            link.click();
+            
+            alert('💾 Gallery data exported successfully!');
+        }
+        
+        function goToGame() {
+            window.location.href = 'index.html';
+        }
+        
+        // Initialize the showcase
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎭 Initializing Dicebear Graphics Showcase...');
+            
+            // Populate all grids
+            populateGrid('heroes-grid', 'hero', dicebarSystem.heroes);
+            populateGrid('creatures-grid', 'creature', dicebarSystem.creatures);
+            populateGrid('artifacts-grid', 'artifact', dicebarSystem.artifacts);
+            populateGrid('spells-grid', 'spell', dicebarSystem.spells);
+            populateGrid('environment-grid', 'environment', dicebarSystem.environment);
+            populateGrid('ui-grid', 'ui', dicebarSystem.ui_elements);
+            
+            // Update stats
+            document.getElementById('heroes-count').textContent = Object.keys(dicebarSystem.heroes).length;
+            document.getElementById('creatures-count').textContent = Object.keys(dicebarSystem.creatures).length;
+            document.getElementById('artifacts-count').textContent = Object.keys(dicebarSystem.artifacts).length;
+            document.getElementById('spells-count').textContent = Object.keys(dicebarSystem.spells).length;
+            document.getElementById('environment-count').textContent = Object.keys(dicebarSystem.environment).length;
+            document.getElementById('ui-count').textContent = Object.keys(dicebarSystem.ui_elements).length;
+            
+            console.log('🎭 Showcase initialized with', 
+                Object.keys(dicebarSystem.heroes).length + 
+                Object.keys(dicebarSystem.creatures).length + 
+                Object.keys(dicebarSystem.artifacts).length + 
+                Object.keys(dicebarSystem.spells).length + 
+                Object.keys(dicebarSystem.environment).length + 
+                Object.keys(dicebarSystem.ui_elements).length, 
+                'total elements');
+        });
+        
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key >= '1' && e.key <= '7') {
+                const index = parseInt(e.key) - 1;
+                const sections = ['all', 'heroes', 'creatures', 'artifacts', 'spells', 'environment', 'ui'];
+                if (index === 0) showAll();
+                else showSection(sections[index]);
+            }
+            
+            if (e.key === 'r' && e.ctrlKey) {
+                e.preventDefault();
+                regenerateAll();
+            }
+            
+            if (e.key === 't' && e.ctrlKey) {
+                e.preventDefault();
+                testInteractions();
+            }
+        });
+    </script>
+</body>
+</html>
