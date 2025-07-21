@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "psi_states")
+@org.hibernate.annotations.DynamicUpdate
+@org.hibernate.annotations.DynamicInsert
 public class PsiState {
     
     @Id
@@ -27,8 +29,8 @@ public class PsiState {
     // Amplitude complexe pour les calculs quantiques avancés
     @Embedded
     @AttributeOverrides({
-        @AttributeOverride(name = "realPart", column = @Column(name = "amplitude_real")),
-        @AttributeOverride(name = "imaginaryPart", column = @Column(name = "amplitude_imaginary"))
+        @AttributeOverride(name = "realPart", column = @Column(name = "amplitude_real", nullable = true)),
+        @AttributeOverride(name = "imaginaryPart", column = @Column(name = "amplitude_imaginary", nullable = true))
     })
     private ComplexAmplitude complexAmplitude;
     
@@ -75,7 +77,7 @@ public class PsiState {
     // Constructors
     public PsiState() {
         this.createdAt = LocalDateTime.now();
-        this.complexAmplitude = new ComplexAmplitude(1.0, 0.0);
+        // Ne pas initialiser complexAmplitude ici - laissons JPA le gérer
     }
     
     public PsiState(String psiId, String expression, String branchId) {
