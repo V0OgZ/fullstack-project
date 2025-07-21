@@ -1,4 +1,30 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------< com.heroesoftimepoc:temporal-engine >-----------------
+[INFO] Building Heroes of Time POC - Temporal Engine 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ temporal-engine ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 23 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.11.0:compile (default-compile) @ temporal-engine ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 92 source files with javac [debug release 17] to target/classes
+[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalEngineService.java: Some input files use or override a deprecated API.
+[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalEngineService.java: Recompile with -Xlint:deprecation for details.
+[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/CausalityZoneService.java: Some input files use unchecked or unsafe operations.
+[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/CausalityZoneService.java: Recompile with -Xlint:unchecked for details.
+[INFO] Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+[INFO] -------------------------------------------------------------
+[WARNING] COMPILATION WARNING : 
+[INFO] -------------------------------------------------------------
+[WARNING] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalDecayServiceLegacy.java:[30,8] deprecated item is not annotated with @Deprecated
+[INFO] 1 warning
+[INFO] -------------------------------------------------------------
+[INFO] -------------------------------------------------------------
 [ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
 [ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/GameInitializationService.java:[23,13] cannot find symbol
   symbol:   method setName(java.lang.String)
   location: variable game of type com.heroesoftimepoc.temporalengine.model.Game
@@ -18,6 +44,14 @@
 [ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/TemporalEngineController.java:[62,38] cannot find symbol
   symbol:   method initializePlayerEconomy(com.heroesoftimepoc.temporalengine.model.Game,java.lang.String)
   location: variable gameInitializationService of type com.heroesoftimepoc.temporalengine.service.GameInitializationService
+[INFO] 9 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  7.704 s
+[INFO] Finished at: 2025-07-21T18:20:23+02:00
+[INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile (default-compile) on project temporal-engine: Compilation failure: Compilation failure: 
 [ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/GameInitializationService.java:[23,13] cannot find symbol
 [ERROR]   symbol:   method setName(java.lang.String)
