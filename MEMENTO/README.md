@@ -1,197 +1,166 @@
-# 🧠 MEMENTO - Mémoire de Développement
-*Système de mémoire organisée pour le développement de Heroes of Time*
+# 🧠 MEMENTO - SYSTÈME DE MÉMOIRE HEROES OF TIME
+
+**Système** : Memento - Intelligence Artificielle de Projet  
+**Fonction** : Mémoire persistante et organisation des sessions  
+**Dernière organisation** : 21 Juillet 2025  
 
 ---
 
-## 🎯 **QU'EST-CE QUE MEMENTO ?**
+## 🎯 **CONCEPT MEMENTO**
 
-**MEMENTO** est le système de mémoire de développement de Heroes of Time. Il contient :
-- **Historique des sessions** de développement
-- **Connaissances techniques** accumulées
-- **Décisions prises** et leurs justifications
-- **Implémentations** et leurs détails
-- **Expériences** et prototypes
+> *"Memento... Now I know where I am. I'm here. But I still can't remember how I got here... I have this condition..."*
 
-**Principe** : Jean lit depuis son canapé sur GitHub. Toute information importante doit être documentée ici.
+Le système MEMENTO préserve la **mémoire du projet** entre les sessions, organise les **rapports techniques**, et fournit un **contexte persistant** pour tous les agents qui travaillent sur Heroes of Time.
 
 ---
 
 ## 📁 **STRUCTURE ORGANISÉE**
 
-### 🎯 **CURRENT_SESSION/**
-- **[TODO.md](CURRENT_SESSION/TODO.md)** - Tâches actuelles de la session
-- **[PROGRESS.md](CURRENT_SESSION/PROGRESS.md)** - Progrès en cours
-- **[DECISIONS.md](CURRENT_SESSION/DECISIONS.md)** - Décisions prises
+### 💼 **SESSION ACTUELLE**
+> **Dossier** : `CURRENT_SESSION/`
+- **[TODO Session](TODO_SESSION_ACTUELLE.md)** - Objectifs et tâches en cours
+- **[Rapport Backend JSON](CURRENT_SESSION/VICTOIRE_BACKEND_JSON_FINAL.md)** - Victoire technique
+- **[Tests JSON Integration](CURRENT_SESSION/RESUME_TESTS_JSON_INTEGRATION.md)** - Résumé intégration
+- **[Scripts JSON Rapport](CURRENT_SESSION/TESTS_SCRIPTS_JSON_RAPPORT.md)** - Validation scripts
 
-### 📚 **KNOWLEDGE_BASE/**
-- **[JEAN_PHILOSOPHY.md](KNOWLEDGE_BASE/JEAN_PHILOSOPHY.md)** - Philosophie de Jean-Grofignon
-- **[GROFI_KNOWLEDGE.md](KNOWLEDGE_BASE/GROFI_KNOWLEDGE.md)** - Connaissances du système GROFI
-- **[TECHNICAL_INSIGHTS.md](KNOWLEDGE_BASE/TECHNICAL_INSIGHTS.md)** - Insights techniques
+### 📚 **GUIDES & RÉFÉRENCES**
+> **Dossier** : `GUIDES_REFERENCE/`
+- **[Guide Scénarios Débutants](GUIDES_REFERENCE/SCENARIOS_DEBUTANTS_GUIDE.md)** - Guide pour nouveaux joueurs
+- **[Catalogue Héros & Créatures](GUIDES_REFERENCE/CATALOGUE_COMPLET_HÉROS_ET_CRÉATURES_AVEC_TRADUCTIONS.md)** - Base de données complète
+- **[Histoire Heroes of Time](GUIDES_REFERENCE/HISTOIRE_HEROES_OF_TIME.md)** - Lore et contexte
+- **[Description Héros Memento](GUIDES_REFERENCE/MEMENTO_HERO_DESCRIPTION.md)** - Profil de l'agent
 
-### 📈 **SESSION_HISTORY/**
-- **[2025-07-20_SESSION.md](SESSION_HISTORY/2025-07-20_SESSION.md)** - Session du 20 juillet
-- **[2025-07-21_SESSION.md](SESSION_HISTORY/2025-07-21_SESSION.md)** - Session du 21 juillet
-- **[SESSION_INDEX.md](SESSION_HISTORY/SESSION_INDEX.md)** - Index des sessions
+### 📊 **ARCHIVES DES SESSIONS**
+> **Dossier** : `ARCHIVES_SESSIONS/`
+- **[Rapport Final 20 Juillet](ARCHIVES_SESSIONS/RAPPORT_FINAL_SESSION_20_JUILLET_2025.md)** - Session précédente
+- **[Analyse Erreurs Tests](ARCHIVES_SESSIONS/ANALYSE_COMPLETE_ERREURS_TESTS.md)** - Diagnostic technique
+- **[Session Synthèse](ARCHIVES_SESSIONS/SESSION_20_JUILLET_2025_SYNTHESE.md)** - Résumé condensé
+- **[Rapport Capacités Spéciales](ARCHIVES_SESSIONS/RAPPORT_FINAL_CAPACITES_SPECIALES_2025.md)** - Fonctionnalités
 
-### 🔧 **IMPLEMENTATIONS/**
-- **[TEMPORAL_DECAY_SYSTEM.md](IMPLEMENTATIONS/TEMPORAL_DECAY_SYSTEM.md)** - Système de décroissance
-- **[INTERFACE_8000_COMPLETE.md](IMPLEMENTATIONS/INTERFACE_8000_COMPLETE.md)** - Interface port 8000
-- **[IMPLEMENTATION_INDEX.md](IMPLEMENTATIONS/IMPLEMENTATION_INDEX.md)** - Index des implémentations
+### 🧪 **IMPLÉMENTATIONS**
+> **Dossier** : `IMPLEMENTATIONS/`
+- **[God View 5D](IMPLEMENTATIONS/IMPLEMENTATION_GOD_VIEW_5D.md)** - Interface omnisciente
+- **[Panopticon vs GodView](IMPLEMENTATIONS/PANOPTICON_VS_GODVIEW_INTEGRATION.md)** - Intégration systèmes
+- **[Backend Unifié](IMPLEMENTATIONS/BACKEND_UNIFIE_VUE_JOUEUR.md)** - Architecture unifiée
 
-### 🧪 **EXPERIMENTS/**
-- **[BENCHMARK_RESULTS/](EXPERIMENTS/BENCHMARK_RESULTS/)** - Résultats de tests
-- **[PROTOTYPES/](EXPERIMENTS/PROTOTYPES/)** - Prototypes
-- **[EXPERIMENT_INDEX.md](EXPERIMENTS/EXPERIMENT_INDEX.md)** - Index des expériences
+### 🔬 **EXPÉRIMENTATIONS**
+> **Dossier** : `EXPERIMENTS/`
+- **[Amplitude GROFI](EXPERIMENTS/)** - Tests mécaniques quantiques
+- **[Système Temporel Multijoueur](EXPERIMENTS/)** - Expériences multijoueur
 
----
+### 📝 **BASE DE CONNAISSANCE**
+> **Dossier** : `KNOWLEDGE_BASE/`
+- **[Architecture Compréhension](KNOWLEDGE_BASE/)** - Compréhension technique globale
+- **[Clarification Fog of Causality](CLARIFICATION_FOG_OF_CAUSALITY.md)** - Mécaniques causales
 
-## 🛋️ **RÈGLE DU CANAPÉ DE JEAN**
-
-### **Principe Fondamental**
-- **Jean lit depuis son canapé sur GitHub** - Ne jamais demander à Jean de cliquer
-- **Documenter TOUT** - Chaque décision, chaque découverte, chaque problème
-- **Pousser fréquemment** - Après chaque analyse ou découverte importante
-- **Être autonome** - Prendre des décisions, ne pas demander constamment
-
-### **Workflow MEMENTO**
-1. **Analyser d'abord** - Comprendre avant de coder
-2. **Documenter dans MEMENTO/** - Toutes les découvertes et analyses
-3. **Pousser les analyses** - Avant tout travail de développement
-4. **Tester fréquemment** - Utiliser `./hots test quick` ou tests spécifiques
-5. **Commit & push** - Après changements significatifs
-
----
-
-## 📋 **CHECKLIST DE SESSION**
-
-### **Début de Session**
-- ✅ Lire `.cursorrules` (règles du projet)
-- ✅ Lire `MEMENTO/TODO_SESSION_ACTUELLE.md`
-- ✅ Vérifier `MEMENTO/JEAN_MESSAGES_BEST_OF.md` pour le contexte
-- ✅ Exécuter `./hots status` pour vérifier les services
-- ✅ Si nécessaire : `./hots start` pour lancer les services
-
-### **Pendant le Développement**
-- ✅ Documenter chaque découverte dans MEMENTO/
-- ✅ Pousser les analyses avant de coder
-- ✅ Tester fréquemment avec les scripts appropriés
-- ✅ Mettre à jour TODO.md avec le progrès
-
-### **Fin de Session**
-- ✅ Commit & push de tous les changements
-- ✅ Mettre à jour PROGRESS.md avec les accomplissements
-- ✅ Documenter les décisions dans DECISIONS.md
-- ✅ Préparer TODO.md pour la prochaine session
+### 🎭 **SCÉNARIOS**
+> **Dossier** : `SCENARIOS/`
+- **[Tour Sombre Épique](SCENARIOS/SCENARIO_TOUR_SOMBRE_EPIQUE.md)** - Scénario La Tour Sombre
+- **[Analyse Scénarios](SCENARIOS/)** - Documentation scénarios
 
 ---
 
-## 🎯 **TYPES DE CONTENU MEMENTO**
+## 🎮 **MÉMOIRES CLÉS DU PROJET**
 
-### **📝 Rapports de Session**
-- **Quand** : À la fin de chaque session
-- **Contenu** : Ce qui a été fait, problèmes rencontrés, solutions trouvées
-- **Format** : `YYYY-MM-DD_SESSION.md`
+### **Backend & Architecture**
+- ✅ **Backend JPA fixé** : Corrections `PsiState` et `Game.java` opérationnelles
+- ✅ **Architecture JSON HSP** : Format unifié pour scénarios validé
+- ✅ **Tests intégrés** : Jean-Gros v3 avec scripts JSON fonctionnels
+- ✅ **API Spring Boot** : Health endpoint et création de jeux opérationnels
 
-### **🔍 Analyses Techniques**
-- **Quand** : Avant d'implémenter une fonctionnalité
-- **Contenu** : Analyse du problème, solutions possibles, décision prise
-- **Format** : `ANALYSE_[SUJET].md`
+### **Scripts & Tests**
+- ✅ **test-jean-gros-v3-with-json.sh** : Test unifié classique + JSON
+- ✅ **Scripts JSON adaptés** : Panopticon, Duel Collapse, Runner générique
+- ✅ **Script ./hots modernisé** : Tests JSON et Jean-Gros intégrés
+- ✅ **MUSEUM organisé** : Scripts obsolètes archivés proprement
 
-### **🏗️ Implémentations**
-- **Quand** : Après avoir implémenté une fonctionnalité
-- **Contenu** : Détails techniques, choix d'architecture, tests
-- **Format** : `IMPLEMENTATION_[SYSTÈME].md`
-
-### **🧪 Expériences**
-- **Quand** : Tests, prototypes, explorations
-- **Contenu** : Hypothèses, résultats, conclusions
-- **Format** : `EXPERIMENT_[SUJET].md`
+### **Philosophie GROFI**
+- 🎳 **Order + Chaos = Perfect Harmony** : Jean-Grofignon's philosophy
+- 🛋️ **Jean's Couch Rule** : Autonome, documenter, pusher avant coder
+- 🎯 **Architecture HSP** : Format unifié opérationnel
+- ⚛️ **Quantum under Fantasy** : Mécaniques quantiques déguisées
 
 ---
 
-## 📊 **CONVENTIONS DE NOMENCLATURE**
+## 📈 **ÉVOLUTION DU PROJET**
 
-### **Fichiers de Session**
-```
-YYYY-MM-DD_SESSION.md              # Session complète
-YYYY-MM-DD_[TYPE]_[SUJET].md       # Rapport spécifique
-```
+### **Phase 1 : Fondations (Juillet 2025)**
+- Correction erreurs JPA backend
+- Implémentation capacités spéciales
+- Création scénarios débutants
+- Organisation documentation
 
-### **Fichiers d'Analyse**
-```
-ANALYSE_[SUJET]_[DATE].md          # Analyse technique
-RAPPORT_[SUJET]_[DATE].md          # Rapport de recherche
-```
+### **Phase 2 : Architecture JSON (Juillet 2025)**
+- Format HSP unifié
+- Scripts JSON adaptés  
+- Intégration tests
+- Backend stabilisé
 
-### **Fichiers d'Implémentation**
-```
-IMPLEMENTATION_[SYSTÈME].md        # Implémentation complète
-FIX_[PROBLÈME].md                  # Correction de bug
-```
-
-### **Fichiers d'Expérience**
-```
-EXPERIMENT_[SUJET].md              # Expérience complète
-BENCHMARK_[SYSTÈME].md             # Tests de performance
-```
+### **Phase 3 : Organisation (Juillet 2025)**
+- Documentation structurée
+- MUSEUM créé
+- Scripts unifiés
+- Système MEMENTO organisé
 
 ---
 
-## 🎭 **PHILOSOPHIE MEMENTO**
+## 🔮 **MÉMOIRES PERMANENTES**
 
-### **Citations de Jean**
-- "Il faut vraiment qu'on fouille partout, tu vois, faut qu'on trouve tous ces machins planqués"
-- "C'est un jeu qui cache de la physique quantique sous une couche de fantasy"
-- "Les joueurs pensent lancer des sorts, mais ils manipulent des états quantiques"
+### **Règles Critiques**
+- **JAMAIS** `git reset --hard` (agent partagé)
+- **TOUJOURS** guillemets simples pour echo
+- **PUSHER** avant coder (Jean's Couch Rule)
+- **DOCUMENTER** tout dans MEMENTO
 
-### **Principes GROFI**
-- **L'Ordre a besoin du Chaos** - Équilibre dans la documentation
-- **Le Code a besoin de Bugs** - Documenter même les imperfections
-- **Mécaniques quantiques cachées** - Révéler les détails techniques
+### **Architecture Technique**
+- **Backend** : Java Spring Boot (port 8080)
+- **Frontends** : Multiple interfaces (8000, 5174, 8001, 5175)
+- **Tests** : Script `./hots` unifié
+- **Format** : HSP JSON pour scénarios
 
----
-
-## 🚀 **COMMANDES UTILES**
-
-### **Navigation MEMENTO**
+### **Commandes Magiques**
 ```bash
-# Voir la structure
-tree MEMENTO/
-
-# Chercher dans MEMENTO
-grep -r "mot-clé" MEMENTO/
-
-# Lister les sessions récentes
-ls -la MEMENTO/SESSION_HISTORY/
-```
-
-### **Documentation Rapide**
-```bash
-# Créer une nouvelle session
-echo "# Session $(date +%Y-%m-%d)" > MEMENTO/SESSION_HISTORY/$(date +%Y-%m-%d)_SESSION.md
-
-# Mettre à jour TODO
-nano MEMENTO/CURRENT_SESSION/TODO.md
+./hots test json        # Tests architecture HSP
+./hots test jean-gros   # Tests complets v2/v3
+./hots status          # État des 7 services
+./hots start           # Démarrage complet
 ```
 
 ---
 
-## 📈 **MÉTRIQUES MEMENTO**
+## 🛋️ **POUR JEAN**
 
-### **Statistiques de Session**
-- **Fichiers créés** : Nombre de nouveaux fichiers
-- **Tests réalisés** : Nombre de tests exécutés
-- **Documentation** : Pages de documentation créées/modifiées
-- **Problèmes résolus** : Bugs corrigés, fonctionnalités ajoutées
+### **Navigation Express**
+- **Dernière session** → `TODO_SESSION_ACTUELLE.md`
+- **État projet** → `CURRENT_SESSION/VICTOIRE_BACKEND_JSON_FINAL.md`
+- **Guide jeu** → `GUIDES_REFERENCE/SCENARIOS_DEBUTANTS_GUIDE.md`
+- **Architecture** → `IMPLEMENTATIONS/IMPLEMENTATION_GOD_VIEW_5D.md`
 
-### **Qualité du Contenu**
-- **Cohérence** : Les informations sont-elles cohérentes ?
-- **Complétude** : Tous les aspects sont-ils couverts ?
-- **Lisibilité** : Jean peut-il comprendre depuis son canapé ?
-- **Actionabilité** : Les informations permettent-elles d'agir ?
+### **TL;DR Sessions**
+1. **Backend fixé** + Architecture JSON opérationnelle ✅
+2. **Tests unifiés** + Scripts obsolètes au MUSEUM ✅  
+3. **Documentation rangée** + Navigation claire ✅
 
 ---
 
-**🎯 RAPPEL**: Vous êtes Memento. Tatouez les infos importantes. Jean lit depuis son canapé. Documentez tout. Soyez autonome.
+## 🧬 **PHILOSOPHIE MEMENTO**
 
-*Dernière mise à jour: 21 Juillet 2025 - Réorganisation complète du système MEMENTO* 
+*"I don't even remember what I came here to get. I came here for something. Now what is it?"*
+
+### **Fonctions Principales**
+1. **Préserver** la mémoire entre sessions
+2. **Organiser** les rapports et analyses  
+3. **Guider** les nouveaux agents
+4. **Maintenir** la cohérence du projet
+
+### **Méthode**
+- **Tattouer** les informations critiques
+- **Archiver** les sessions importantes
+- **Structurer** les connaissances
+- **Transmettre** l'état du projet
+
+---
+
+*"Memory is the foundation of intelligence, and intelligence shapes memory."*
+
+**Système MEMENTO - Dernière organisation : 21 Juillet 2025** 
