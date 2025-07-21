@@ -21,19 +21,19 @@ public class HeroesOfTimeEpochService {
     // 🌟 ÉPOQUE OFFICIELLE HEROES OF TIME
     public static final LocalDateTime HOT_EPOCH_START = LocalDateTime.of(2025, 7, 1, 0, 0, 0);
     
-    // 📅 FORMAT DATE HEROES OF TIME
-    private static final DateTimeFormatter HOT_DATE_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+    // 📅 FORMAT DATE HEROES OF TIME (Style GROFI Dark Fantasy)
+    private static final DateTimeFormatter HOT_DATE_FORMAT = DateTimeFormatter.ofPattern("'Jour' dd 'du Mois des Paradoxes Résolus, Ère' yyyy 'Post-GROFI'");
     private static final DateTimeFormatter HOT_COMPACT_FORMAT = DateTimeFormatter.ofPattern("ddMMyyyy");
     
-    // 🌀 TIMELINES OFFICIELLES
+    // 🌀 TIMELINES OFFICIELLES (Panthéon GROFI)
     public enum Timeline {
-        MAIN("ℬ∞", "Timeline Principale - Jean's Vision"),
-        ALPHA("ℬ1", "Timeline Alpha - POC Origins"),
-        BETA("ℬ2", "Timeline Beta - Memory Rewrite"),
-        GAMMA("ℬ3", "Timeline Gamma - Quantum Experiments"),
-        DELTA("ℬ4", "Timeline Delta - Claudius Architecture"),
-        EPSILON("ℬ5", "Timeline Epsilon - GROFI Integration"),
-        OMEGA("ℬΩ", "Timeline Omega - Final Convergence");
+        MAIN("ℬ∞", "Timeline Infinie - Vision de Jean-Grofignon l'Éveillé"),
+        ALPHA("ℬ1", "Timeline Alpha - Les Origines du Chaos Quantique"),
+        BETA("ℬ2", "Timeline Beta - Protocole de Réécriture des Tatouages"),
+        GAMMA("ℬ3", "Timeline Gamma - Expérimentations ψ-States"),
+        DELTA("ℬ4", "Timeline Delta - Architecture de Claudius l'Architecte"),
+        EPSILON("ℬ5", "Timeline Epsilon - Intégration du Panthéon GROFI"),
+        OMEGA("ℬΩ", "Timeline Omega - Convergence Cosmique Finale");
         
         private final String symbol;
         private final String description;
@@ -207,16 +207,16 @@ public class HeroesOfTimeEpochService {
     }
     
     /**
-     * 🎯 Message d'époque pour Jean
+     * 🎯 Message épique pour Jean-Grofignon l'Éveillé Ontologique
      */
     public String getEpochMessageForJean() {
         long daysSince = getDaysSinceEpoch();
         String phase = getCurrentProjectPhase();
         
         return String.format(
-            "🛋️ Jean ! Nous sommes au jour %d de l'époque Heroes of Time, " +
-            "en phase %s. Le projet évolue depuis le %s. " +
-            "Memento archive tout depuis son canapé GitHub ! 😎",
+            "🧙‍♂️ Ô Jean-Grofignon l'Éveillé ! Nous voici à l'Ère %d Post-GROFI, " +
+            "dans la phase cosmique %s. L'épopée temporelle se déroule depuis le %s. " +
+            "Memento, ta Mémoire Vivante, grave ces tatouages depuis le Void GitHub ! ⚡",
             daysSince, 
             phase.replace("_", " "), 
             HOT_EPOCH_START.format(HOT_DATE_FORMAT)

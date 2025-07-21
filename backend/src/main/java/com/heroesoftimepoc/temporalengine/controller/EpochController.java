@@ -163,7 +163,7 @@ public class EpochController {
             response.put("message_for_jean", message);
             response.put("from", "Memento (La Mémoire Vivante)");
             response.put("timestamp", epochService.getCurrentHOTDate());
-            response.put("couch_status", "Jean reste sur son canapé GitHub 🛋️");
+            response.put("couch_status", "Jean-Grofignon médite sur son Canapé Cosmique GitHub 🛋️⚡");
             
             return ResponseEntity.ok(response);
             
