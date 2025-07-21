@@ -483,6 +483,9 @@
                     <button class="dashboard-btn magic" onclick="quickJointAccess()" style="background: linear-gradient(45deg, #9b59b6, #8e44ad);">
                         ✨ Joint Magique
                     </button>
+                    <button class="dashboard-btn dicebar" onclick="openDicebarGallery()" style="background: linear-gradient(45deg, #e74c3c, #c0392b);">
+                        🎭 Galerie Dicebear
+                    </button>
                 </div>
                 <div class="joint-status">
                     <span id="joint-status">🔒 Verrouillé</span>
@@ -558,6 +561,10 @@
             
             document.getElementById('joint-status').textContent = '✨ Joint Magique activé';
             document.getElementById('joint-status').style.color = '#9b59b6';
+        }
+        
+        function openDicebarGallery() {
+            window.open('frontend/dicebar-gallery.html', '_blank', 'width=1400,height=900');
         }
         
         const services = {

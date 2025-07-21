@@ -98,29 +98,144 @@ class DicebarGraphicsSystem {
                 style: 'bottts',
                 seed: 'spider-probability-rare',
                 icon: '🕷️',
-                color: '#8E44AD',
+                color: '#8B4513',
                 description: 'Probability Spider'
-            },
-            'Dragon Rouge Temporel': {
+            }
+        };
+
+        // Buildings and Structures with dicebar graphics
+        this.buildings = {
+            'Château': {
                 style: 'bottts',
-                seed: 'dragon-rouge-temporal-ultimate',
-                icon: '🐉',
-                color: '#E74C3C',
-                description: 'Temporal Red Dragon'
+                seed: 'castle-fortress-medieval',
+                icon: '🏰',
+                color: '#8B4513',
+                description: 'Medieval Castle',
+                type: 'fortress'
             },
-            'Guerriers Fantômes': {
-                style: 'adventurer-neutral',
-                seed: 'phantom-warriors-swarm',
-                icon: '👻',
-                color: '#95A5A6',
-                description: 'Phantom Warriors'
-            },
-            'Élémentaire Temporel': {
+            'Tour de Défense': {
                 style: 'bottts',
-                seed: 'elemental-temporal-time',
-                icon: '⏰',
-                color: '#3498DB',
-                description: 'Temporal Elemental'
+                seed: 'tower-defense-watch',
+                icon: '🗼',
+                color: '#696969',
+                description: 'Defense Tower',
+                type: 'tower'
+            },
+            'Hôtel de Ville': {
+                style: 'bottts',
+                seed: 'town-hall-government',
+                icon: '🏛️',
+                color: '#DAA520',
+                description: 'Town Hall',
+                type: 'government'
+            },
+            'Caserne': {
+                style: 'bottts',
+                seed: 'barracks-military-training',
+                icon: '⚔️',
+                color: '#8B0000',
+                description: 'Military Barracks',
+                type: 'military'
+            },
+            'Tour des Mages': {
+                style: 'bottts',
+                seed: 'mage-tower-magic',
+                icon: '🧙‍♂️',
+                color: '#9370DB',
+                description: 'Mage Tower',
+                type: 'magic'
+            },
+            'Forge': {
+                style: 'bottts',
+                seed: 'forge-blacksmith-weapons',
+                icon: '⚒️',
+                color: '#CD853F',
+                description: 'Blacksmith Forge',
+                type: 'crafting'
+            },
+            'Temple': {
+                style: 'bottts',
+                seed: 'temple-religion-worship',
+                icon: '⛪',
+                color: '#FFD700',
+                description: 'Religious Temple',
+                type: 'religious'
+            },
+            'Port': {
+                style: 'bottts',
+                seed: 'port-harbor-trade',
+                icon: '⚓',
+                color: '#4169E1',
+                description: 'Trading Port',
+                type: 'trade'
+            }
+        };
+
+        // Natural Elements with dicebar graphics
+        this.nature = {
+            'Forêt': {
+                style: 'bottts',
+                seed: 'forest-trees-nature',
+                icon: '🌲',
+                color: '#228B22',
+                description: 'Dense Forest',
+                type: 'vegetation'
+            },
+            'Montagne': {
+                style: 'bottts',
+                seed: 'mountain-peak-rock',
+                icon: '⛰️',
+                color: '#696969',
+                description: 'Rocky Mountain',
+                type: 'terrain'
+            },
+            'Rivière': {
+                style: 'bottts',
+                seed: 'river-water-flow',
+                icon: '🌊',
+                color: '#4169E1',
+                description: 'Flowing River',
+                type: 'water'
+            },
+            'Lac': {
+                style: 'bottts',
+                seed: 'lake-water-still',
+                icon: '🏞️',
+                color: '#87CEEB',
+                description: 'Peaceful Lake',
+                type: 'water'
+            },
+            'Désert': {
+                style: 'bottts',
+                seed: 'desert-sand-dunes',
+                icon: '🏜️',
+                color: '#F4A460',
+                description: 'Sandy Desert',
+                type: 'terrain'
+            },
+            'Marais': {
+                style: 'bottts',
+                seed: 'swamp-mud-wetland',
+                icon: '🌿',
+                color: '#556B2F',
+                description: 'Mysterious Swamp',
+                type: 'wetland'
+            },
+            'Grotte': {
+                style: 'bottts',
+                seed: 'cave-underground-dark',
+                icon: '🕳️',
+                color: '#2F4F4F',
+                description: 'Dark Cave',
+                type: 'underground'
+            },
+            'Arbre Ancien': {
+                style: 'bottts',
+                seed: 'ancient-tree-wisdom',
+                icon: '🌳',
+                color: '#8FBC8F',
+                description: 'Ancient Tree',
+                type: 'vegetation'
             }
         };
 
@@ -388,40 +503,42 @@ class DicebarGraphicsSystem {
 
     // Generate dicebar avatar for any element
     generateAvatar(elementType, elementName) {
-        const collections = {
-            'hero': this.heroes,
-            'creature': this.creatures,
-            'artifact': this.artifacts,
-            'spell': this.spells,
-            'environment': this.environment,
-            'ui': this.ui_elements
-        };
-
-        const collection = collections[elementType];
-        if (!collection) {
-            return this.getFallbackAvatar(elementName);
+        let element = null;
+        
+        switch(elementType) {
+            case 'hero':
+                element = this.heroes[elementName];
+                break;
+            case 'creature':
+                element = this.creatures[elementName];
+                break;
+            case 'building':
+                element = this.buildings[elementName];
+                break;
+            case 'nature':
+                element = this.nature[elementName];
+                break;
         }
-
-        const element = collection[elementName];
-        if (!element) {
-            return this.getFallbackAvatar(elementName);
-        }
-
-        try {
+        
+        if (element && element.style && element.seed) {
             const url = `${this.baseUrl}/${element.style}/svg?seed=${element.seed}&backgroundColor=${this.backgroundColors}`;
-            
             return {
-                type: 'dicebear',
                 url: url,
                 icon: element.icon,
                 color: element.color,
-                style: element.style,
                 description: element.description
             };
-        } catch (error) {
-            console.warn(`Error generating dicebear avatar for ${elementName}:`, error);
-            return this.getFallbackAvatar(elementName);
         }
+        
+        return this.getFallbackAvatar(elementName);
+    }
+
+    generateBuildingAvatar(buildingName) {
+        return this.generateAvatar('building', buildingName);
+    }
+
+    generateNatureAvatar(natureName) {
+        return this.generateAvatar('nature', natureName);
     }
 
     // Fallback avatar with emoji
@@ -505,25 +622,19 @@ class DicebarGraphicsSystem {
     createAvatarElement(elementType, elementName, size = 40) {
         const avatar = this.generateAvatar(elementType, elementName);
         const container = document.createElement('div');
-        container.className = `dicebear-avatar ${elementType}-avatar`;
+        container.className = 'avatar-container';
         container.style.cssText = `
             width: ${size}px;
             height: ${size}px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: ${avatar.color};
-            border: 2px solid #fff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            font-size: ${size * 0.6}px;
-            position: relative;
             overflow: hidden;
-            cursor: pointer;
-            transition: transform 0.2s ease;
+            display: inline-block;
+            position: relative;
+            border: 2px solid ${avatar.color};
+            background: ${avatar.color}20;
         `;
 
-        if (avatar.type === 'dicebear') {
+        if (avatar.url) {
             const img = document.createElement('img');
             img.src = avatar.url;
             img.style.cssText = `
@@ -531,27 +642,37 @@ class DicebarGraphicsSystem {
                 height: 100%;
                 object-fit: cover;
             `;
-            img.onerror = () => {
-                container.innerHTML = avatar.icon;
-            };
+            img.alt = elementName;
             container.appendChild(img);
         } else {
-            container.innerHTML = avatar.icon;
+            // Fallback avec icône
+            container.innerHTML = `
+                <div style="
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: ${size * 0.6}px;
+                    background: ${avatar.color}40;
+                ">
+                    ${avatar.icon}
+                </div>
+            `;
         }
 
-        // Tooltip with element description
-        container.title = `${avatar.description || elementName} (${elementType})`;
+        // Tooltip avec description
+        container.title = `${elementName}: ${avatar.description}`;
         
-        // Hover effect
-        container.addEventListener('mouseenter', () => {
-            container.style.transform = 'scale(1.1)';
-        });
-        
-        container.addEventListener('mouseleave', () => {
-            container.style.transform = 'scale(1)';
-        });
-
         return container;
+    }
+
+    createBuildingElement(buildingName, size = 40) {
+        return this.createAvatarElement('building', buildingName, size);
+    }
+
+    createNatureElement(natureName, size = 40) {
+        return this.createAvatarElement('nature', natureName, size);
     }
 
     // Create avatar grid for all elements
@@ -621,16 +742,38 @@ class DicebarGraphicsSystem {
 
     // Get all available elements by type
     getElementsOfType(elementType) {
-        const collections = {
-            'hero': this.heroes,
-            'creature': this.creatures,
-            'artifact': this.artifacts,
-            'spell': this.spells,
-            'environment': this.environment,
-            'ui': this.ui_elements
-        };
-        
-        return Object.keys(collections[elementType] || {});
+        switch(elementType) {
+            case 'hero':
+                return Object.keys(this.heroes);
+            case 'creature':
+                return Object.keys(this.creatures);
+            case 'building':
+                return Object.keys(this.buildings);
+            case 'nature':
+                return Object.keys(this.nature);
+            default:
+                return [];
+        }
+    }
+
+    getAllBuildings() {
+        return Object.keys(this.buildings);
+    }
+
+    getAllNatureElements() {
+        return Object.keys(this.nature);
+    }
+
+    getBuildingsByType(type) {
+        return Object.keys(this.buildings).filter(name => 
+            this.buildings[name].type === type
+        );
+    }
+
+    getNatureByType(type) {
+        return Object.keys(this.nature).filter(name => 
+            this.nature[name].type === type
+        );
     }
 
     // Add new element to system
@@ -654,6 +797,64 @@ class DicebarGraphicsSystem {
                 description: description
             };
         }
+    }
+
+    createCompleteGallery(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        container.innerHTML = `
+            <div class="dicebar-gallery">
+                <h2>🎭 Galerie Dicebear Complète - Heroes of Time</h2>
+                
+                <div class="gallery-section">
+                    <h3>👑 Héros</h3>
+                    <div class="gallery-grid" id="heroes-gallery"></div>
+                </div>
+                
+                <div class="gallery-section">
+                    <h3>🐉 Créatures</h3>
+                    <div class="gallery-grid" id="creatures-gallery"></div>
+                </div>
+                
+                <div class="gallery-section">
+                    <h3>🏰 Bâtiments</h3>
+                    <div class="gallery-grid" id="buildings-gallery"></div>
+                </div>
+                
+                <div class="gallery-section">
+                    <h3>🌲 Éléments Naturels</h3>
+                    <div class="gallery-grid" id="nature-gallery"></div>
+                </div>
+            </div>
+        `;
+
+        // Remplir les galeries
+        this.fillGallery('heroes-gallery', 'hero');
+        this.fillGallery('creatures-gallery', 'creature');
+        this.fillGallery('buildings-gallery', 'building');
+        this.fillGallery('nature-gallery', 'nature');
+    }
+
+    fillGallery(galleryId, elementType) {
+        const gallery = document.getElementById(galleryId);
+        if (!gallery) return;
+
+        const elements = this.getElementsOfType(elementType);
+        
+        elements.forEach(elementName => {
+            const elementDiv = document.createElement('div');
+            elementDiv.className = 'gallery-item';
+            
+            const avatar = this.createAvatarElement(elementType, elementName, 60);
+            const nameDiv = document.createElement('div');
+            nameDiv.className = 'element-name';
+            nameDiv.textContent = elementName;
+            
+            elementDiv.appendChild(avatar);
+            elementDiv.appendChild(nameDiv);
+            gallery.appendChild(elementDiv);
+        });
     }
 }
 
