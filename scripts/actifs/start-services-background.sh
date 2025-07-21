@@ -42,13 +42,14 @@ echo "✅ Quantum Visualizer démarré: http://localhost:8001/quantum-visualizer
 
 # Démarrer l'Object Viewer (port 5175)
 echo "🏛️ Démarrage Collection & Grammar (port 5175)..."
-python3 visualizer-server.py > /dev/null 2>&1 &
+python3 visualizer-server-original.py > /dev/null 2>&1 &
 echo "✅ Collection & Grammar démarré: http://localhost:5175"
 
 # Démarrer le Test Runner (port 8888)
 echo "🧪 Démarrage Test Runner (port 8888)..."
 python3 test-runner-server.py > /dev/null 2>&1 &
 echo "✅ Test Runner démarré: http://localhost:8888"
+
 
 sleep 5
 

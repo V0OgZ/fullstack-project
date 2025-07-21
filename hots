@@ -64,7 +64,7 @@ show_help() {
     echo -e "  ${CYAN}./hots test report${NC}       # Rapport détaillé"
     echo -e "  ${CYAN}./hots generate${NC}          # 🧠 Génère tous les MD depuis JSON"
     echo -e "  ${CYAN}./hots map list${NC}          # 🗺️  Liste les maps disponibles"
-    echo -e "  ${CYAN}./hots replay view battle${NC} # 📹 Voir un replay de bataille"
+    echo -e "  ${CYAN}./hots replay center${NC}     # 🎬 Centre de Replay complet"
 }
 
 check_services() {
@@ -131,13 +131,15 @@ show_status() {
     
     echo ""
     echo "URLs d'accès:"
-    echo -e "  🎯 Dashboard: ${CYAN}http://localhost:9000/dashboard.html${NC}"
-    echo -e "  📊 Frontend: ${CYAN}http://localhost:8000${NC}"
+    echo -e "  🎯 Dashboard + 🎬 Replay: ${CYAN}http://localhost:9000/dashboard.html${NC}"
+    echo -e "  📊 Frontend Principal: ${CYAN}http://localhost:8000${NC}"
     echo -e "  ⚙️ Backend API: ${CYAN}http://localhost:8080/api/health${NC}"
-    echo -e "  ⚔️ Temporal: ${CYAN}http://localhost:5174${NC}"
-    echo -e "  🌌 Quantum: ${CYAN}http://localhost:8001${NC}"
-    echo -e "  🔮 Visualizer: ${CYAN}http://localhost:5175${NC}"
+    echo -e "  ⚔️ Interface Temporelle: ${CYAN}http://localhost:5174${NC}"
+    echo -e "  🌌 Quantum Visualizer: ${CYAN}http://localhost:8001${NC}"
+    echo -e "  🔮 Collection & Grammar: ${CYAN}http://localhost:5175${NC}"
     echo -e "  🧪 Test Runner: ${CYAN}http://localhost:8888${NC}"
+    echo ""
+    echo -e "  ${YELLOW}💡 Centre de Replay:${NC} ${CYAN}./hots replay center${NC} ou clic sur 🎬 dans Dashboard"
     
     echo ""
     # 🎳 WALTER'S ANTI-SCHRÖDINGER FIX - LOGIC BINAIRE PURE !
@@ -777,10 +779,11 @@ manage_replays() {
             
             echo ""
             echo -e "${YELLOW}🎮 Commandes disponibles :${NC}"
-            echo -e "  ${GREEN}./hots replay list${NC}           # Liste les replays"
-            echo -e "  ${GREEN}./hots replay view <name>${NC}     # Voir un replay"
-            echo -e "  ${GREEN}./hots replay analyze <name>${NC}  # Analyser un replay"
-            echo -e "  ${GREEN}./hots replay save <name>${NC}     # Sauvegarder partie actuelle"
+                echo -e "  ${GREEN}./hots replay list${NC}           # Liste les replays"
+    echo -e "  ${GREEN}./hots replay center${NC}         # 🎬 Ouvre le Centre de Replay (dashboard)"
+    echo -e "  ${GREEN}./hots replay view <name>${NC}     # Voir un replay spécifique"
+    echo -e "  ${GREEN}./hots replay analyze <name>${NC}  # Analyser un replay (infos détaillées)"
+    echo -e "  ${GREEN}./hots replay save <name>${NC}     # Sauvegarder partie actuelle"
             ;;
         "view")
             local replay_name="$2"
@@ -790,17 +793,85 @@ manage_replays() {
             fi
             
             echo -e "${YELLOW}🎬 Visualisation du replay: $replay_name${NC}"
-            echo -e "${GREEN}✅ Replay viewer (fonctionnalité à implémenter)${NC}"
+            echo -e "${GREEN}✅ Ouverture du Centre de Replay...${NC}"
+            
+            # Vérifier que le dashboard est actif
+            if ! curl -s http://localhost:9000/dashboard.html > /dev/null; then
+                echo -e "${RED}❌ Dashboard non accessible sur le port 9000${NC}"
+                echo -e "${YELLOW}💡 Lancez d'abord: ./hots start${NC}"
+                return 1
+            fi
+            
+            echo -e "${CYAN}🎬 Ouverture du Centre de Replay dans le navigateur...${NC}"
+            if command -v open > /dev/null; then
+                # macOS
+                open "http://localhost:9000/dashboard.html"
+            elif command -v xdg-open > /dev/null; then
+                # Linux
+                xdg-open "http://localhost:9000/dashboard.html"
+            else
+                echo -e "${YELLOW}📋 Accédez manuellement à: http://localhost:9000/dashboard.html${NC}"
+                echo -e "${YELLOW}   Puis cliquez sur '🎬 Centre de Replay'${NC}"
+            fi
+            ;;
+        "center"|"centre")
+            echo -e "${CYAN}🎬 Ouverture du Centre de Replay Heroes of Time${NC}"
+            
+            # Vérifier que le dashboard est actif
+            if ! curl -s http://localhost:9000/dashboard.html > /dev/null; then
+                echo -e "${RED}❌ Dashboard non accessible sur le port 9000${NC}"
+                echo -e "${YELLOW}💡 Lancez d'abord: ./hots start${NC}"
+                return 1
+            fi
+            
+            echo -e "${GREEN}✅ Dashboard actif - Ouverture du navigateur...${NC}"
+            if command -v open > /dev/null; then
+                # macOS
+                open "http://localhost:9000/dashboard.html"
+            elif command -v xdg-open > /dev/null; then
+                # Linux  
+                xdg-open "http://localhost:9000/dashboard.html"
+            else
+                echo -e "${YELLOW}📋 Accédez manuellement à: http://localhost:9000/dashboard.html${NC}"
+                echo -e "${YELLOW}   Puis cliquez sur '🎬 Centre de Replay'${NC}"
+            fi
             ;;
         "analyze")
             local replay_name="$2"
             echo -e "${YELLOW}📊 Analyse du replay: $replay_name${NC}"
-            echo -e "${GREEN}✅ Analyse replay (fonctionnalité à implémenter)${NC}"
+            
+            # Chercher le fichier de replay
+            local replay_file=""
+            if [ -f "game_assets/scenarios/maps/replays/20250721_session_jean/$replay_name.hsp" ]; then
+                replay_file="game_assets/scenarios/maps/replays/20250721_session_jean/$replay_name.hsp"
+            elif [ -f "game_assets/scenarios/visualizer/$replay_name.hsp" ]; then
+                replay_file="game_assets/scenarios/visualizer/$replay_name.hsp"
+            fi
+            
+            if [ -n "$replay_file" ]; then
+                echo -e "${GREEN}📄 Fichier trouvé: $replay_file${NC}"
+                echo -e "${CYAN}📊 Informations du replay:${NC}"
+                
+                # Extraire les infos JSON
+                if command -v jq > /dev/null; then
+                    echo -e "${YELLOW}🎮 Nom du jeu:${NC} $(jq -r '.replayInfo.gameName // "N/A"' "$replay_file" 2>/dev/null)"
+                    echo -e "${YELLOW}📅 Date:${NC} $(jq -r '.replayInfo.date // "N/A"' "$replay_file" 2>/dev/null)"
+                    echo -e "${YELLOW}⏱️ Durée:${NC} $(jq -r '.replayInfo.duration // "N/A"' "$replay_file" 2>/dev/null)"
+                    echo -e "${YELLOW}🏆 Gagnant:${NC} $(jq -r '.replayInfo.winner // "N/A"' "$replay_file" 2>/dev/null)"
+                    echo -e "${YELLOW}👥 Joueurs:${NC} $(jq -r '.replayInfo.players | join(", ") // "N/A"' "$replay_file" 2>/dev/null)"
+                    echo -e "${YELLOW}🔄 Tours:${NC} $(jq -r '.replayInfo.totalTurns // "N/A"' "$replay_file" 2>/dev/null)"
+                else
+                    head -20 "$replay_file"
+                fi
+            else
+                echo -e "${RED}❌ Replay '$replay_name' non trouvé${NC}"
+                echo -e "${YELLOW}💡 Utilisez: ./hots replay list${NC}"
+            fi
             ;;
         "save")
             local replay_name="$2"
             echo -e "${YELLOW}💾 Sauvegarde de la partie actuelle: $replay_name${NC}"
-            echo -e "${GREEN}✅ Sauvegarde replay (fonctionnalité à implémenter)${NC}"
+            echo -e "${GREEN}✅ Fonctionnalité de sauvegarde (à connecter au backend)${NC}"
             ;;
         *)
             echo -e "${RED}❌ Action inconnue: $action${NC}"
