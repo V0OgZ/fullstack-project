@@ -10,7 +10,7 @@ echo "🥊 Chargement du scénario de duel PVP..."
 
 # Configuration
 HOST="localhost:8080"
-SCENARIO_JSON="../game_assets/scenarios/visualizer/DUEL_COLLAPSE.json"
+SCENARIO_JSON="game_assets/scenarios/visualizer/DUEL_COLLAPSE.json"
 
 # Couleurs
 GREEN='\033[0;32m'

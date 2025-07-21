@@ -10,7 +10,7 @@ echo "📋 Chargement du scénario JSON complet..."
 
 # Configuration
 HOST="localhost:8080"
-SCENARIO_JSON="../game_assets/scenarios/visualizer/panopticon_axis_test.json"
+SCENARIO_JSON="game_assets/scenarios/visualizer/panopticon_axis_test.json"
 
 # Couleurs
 GREEN='\033[0;32m'
