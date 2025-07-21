@@ -41,6 +41,9 @@ class GameplayEnhancement {
         
         // Créer le panneau d'inventaire
         this.createInventoryPanel();
+        
+        // Créer le panneau de ressources
+        this.createResourcePanel();
     }
     
     createHeroSelectionPanel() {
@@ -102,6 +105,30 @@ class GameplayEnhancement {
         `;
         
         container.appendChild(inventoryPanel);
+    }
+    
+    createResourcePanel() {
+        const container = document.querySelector('.side-panel');
+        if (!container) return;
+        
+        const resourcePanel = document.createElement('div');
+        resourcePanel.className = 'resource-panel';
+        resourcePanel.innerHTML = `
+            <h3>💰 Ressources</h3>
+            <div class="resource-display">
+                <span>💰 500</span>
+                <span>⚡ 200</span>
+                <span>🪵 100</span>
+                <span>🪨 50</span>
+                <span>✨ 10</span>
+            </div>
+            <div class="resource-actions">
+                <button class="resource-btn" onclick="window.gameplayConstruction.showBuildingMenu(10, 10)">🏗️ Construire</button>
+                <button class="resource-btn" onclick="window.gameplayConstruction.showRecruitmentMenu('BARRACKS')">⚔️ Recruter</button>
+            </div>
+        `;
+        
+        container.appendChild(resourcePanel);
     }
     
     getAvailableHeroes() {
