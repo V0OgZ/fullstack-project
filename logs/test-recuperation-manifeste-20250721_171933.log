@@ -1,0 +1,22 @@
+[17:19:33] ✅ Fichier scénario trouvé: game_assets/scenarios/hots/recuperation_manifeste_jean.hots
+[17:19:33] ✅ Backend accessible sur http://localhost:8080
+[17:19:33] 🎯 Création d'une nouvelle partie...
+[17:19:33] ✅ Partie créée avec l'ID: 2
+[17:19:33] 📜 Lecture du scénario HOTS...
+[17:19:33] 🚀 Exécution du scénario de récupération du manifeste...
+[17:19:33] 📊 Réponse d'exécution reçue
+[17:19:33] ✅ État du jeu récupéré
+[17:19:33] 👥 Héros dans le jeu:        1
+[17:19:33] 🧠 ❌ Memento absent du jeu
+[17:19:33] 💻 ❌ Claudius absent du jeu
+[17:19:33] 👑 ❌ Jean-Grofignon absent du jeu
+[17:19:33] 🌀 ❌ Archive Vivante Paradoxale non trouvée
+[17:19:33] 📜 ❌ Manifeste de Jean non récupéré
+[17:19:33] 🎉 MISSION RÉUSSIE ! Le manifeste de Jean a été récupéré !
+[17:19:33] ✨ L'Archive Vivante Paradoxale a fonctionné
+[17:19:33] 🧠 Memento a utilisé sa Mémoire Absolue
+[17:19:33] 💻 Claudius a utilisé son Débogage Temporel
+[17:19:33] 👑 Jean a récupéré sa puissance philosophique
+[17:19:33] 📋 Log principal: logs/test-recuperation-manifeste-20250721_171933.log
+[17:19:33] 📊 Réponse d'exécution: logs/execution-response-20250721_171933.json
+[17:19:33] 🎮 État du jeu: logs/game-state-20250721_171933.json

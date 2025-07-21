@@ -1,0 +1,5 @@
+[17:19:25] ✅ Fichier scénario trouvé: game_assets/scenarios/hots/recuperation_manifeste_jean.hots
+[17:19:25] ✅ Backend accessible sur http://localhost:8080
+[17:19:25] 🎯 Création d'une nouvelle partie...
+[17:19:25] ❌ ERREUR: ID de partie non récupéré
+[17:19:25] Réponse serveur: {"gameId":1,"gameName":"Recuperation Manifeste Jean","success":true,"message":"Game created successfully"}
