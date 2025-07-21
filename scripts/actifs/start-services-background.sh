@@ -43,7 +43,7 @@ echo "✅ Quantum Visualizer démarré: http://localhost:8001/quantum-visualizer
 # Démarrer l'Object Viewer (port 5175)
 echo "🏛️ Démarrage Collection & Grammar (port 5175)..."
 python3 visualizer-server.py > /dev/null 2>&1 &
-echo "✅ Collection & Grammar démarré: http://localhost:5175/hots"
+echo "✅ Collection & Grammar démarré: http://localhost:5175"
 
 # Démarrer le Test Runner (port 8888)
 echo "🧪 Démarrage Test Runner (port 8888)..."
@@ -60,7 +60,7 @@ echo "🎮 Frontend Principal: http://localhost:8000"
 echo "🔧 Backend API: http://localhost:8080/api"
 echo "⚡ Interface Temporelle: http://localhost:5174"
 echo "🔬 Quantum Visualizer: http://localhost:8001/quantum-visualizer/"
-echo "🏛️ Collection & Grammar: http://localhost:5175/hots"
+echo "🏛️ Collection & Grammar: http://localhost:5175"
 echo "🧪 Test Runner: http://localhost:8888"
 echo ""
 echo "🔄 Vérification des ports..."
