@@ -27,4 +27,11 @@ public interface GameRepository extends JpaRepository<Game, Long> {
     
     @Query("SELECT g FROM Game g WHERE g.currentTimeline = :timeline")
     List<Game> findByCurrentTimeline(@Param("timeline") String timeline);
+    
+    // Méthodes pour l'administration multijoueur
+    @Query("SELECT COUNT(g) FROM Game g WHERE g.status = :status")
+    long countByStatus(@Param("status") Game.GameStatus status);
+    
+    @Query("SELECT g FROM Game g ORDER BY g.id DESC")
+    Optional<Game> findFirstByOrderByIdDesc();
 }

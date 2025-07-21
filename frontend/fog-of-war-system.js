@@ -1,69 +1,65 @@
-// 🌀 SYSTÈME DE BROUILLARD DE GUERRE - 7 TYPES + TIMELINES ψ
-// =========================================================
+// 🌫️ SYSTÈME DE BROUILLARD DE CAUSALITÉ - 7 ÉTATS + TIMELINES ψ
+// =============================================================
+// Basé sur CONCEPTS_AVANCES_TEMPORELLES.md
 
 class FogOfWarSystem {
     constructor() {
-        this.fogTypes = {
-            // 1. Brouillard classique (HOMM3)
-            CLASSIC: {
-                name: 'Classic Fog',
-                color: 'rgba(0, 0, 0, 0.8)',
-                pattern: 'solid',
-                visibility: 0.2
+        // Les 7 états du Brouillard de Causalité selon la documentation
+        this.fogStates = {
+            // 0. Unexplored - Brouillard total, jamais vu
+            UNEXPLORED: {
+                name: 'Unexplored',
+                color: 'rgba(50, 50, 50, 0.9)',
+                interaction: 'none',
+                description: 'Brouillard total, jamais vu'
             },
             
-            // 2. Brouillard temporel (Heroes of Time)
-            TEMPORAL: {
-                name: 'Temporal Fog',
-                color: 'rgba(0, 212, 255, 0.6)',
-                pattern: 'temporal',
-                visibility: 0.4,
-                animation: 'pulse'
+            // 1. Collapsed Past - Exploré dans le passé résolu
+            COLLAPSED_PAST: {
+                name: 'Collapsed Past',
+                color: 'rgba(100, 100, 100, 0.7)',
+                interaction: 'vision_only',
+                description: 'Exploré dans le passé résolu'
             },
             
-            // 3. Brouillard quantique (ψ-states)
-            QUANTUM: {
-                name: 'Quantum Fog',
-                color: 'rgba(255, 0, 255, 0.7)',
-                pattern: 'quantum',
-                visibility: 0.3,
-                animation: 'wave'
+            // 2. Reachable - Accessible mais pas observé
+            REACHABLE: {
+                name: 'Reachable',
+                color: 'rgba(255, 255, 0, 0.3)',
+                interaction: 'planning',
+                description: 'Accessible mais pas observé'
             },
             
-            // 4. Brouillard de paradoxe
-            PARADOX: {
-                name: 'Paradox Fog',
-                color: 'rgba(255, 0, 0, 0.5)',
-                pattern: 'paradox',
-                visibility: 0.1,
-                animation: 'distort'
+            // 3. Vision - Vision directe d'unité/château
+            VISION: {
+                name: 'Vision',
+                color: 'rgba(0, 255, 0, 0.1)',
+                interaction: 'full',
+                description: 'Vision directe d\'unité/château'
             },
             
-            // 5. Brouillard d'interférence
-            INTERFERENCE: {
-                name: 'Interference Fog',
-                color: 'rgba(255, 255, 0, 0.6)',
-                pattern: 'interference',
-                visibility: 0.5,
-                animation: 'ripple'
+            // 4. Ghost - Vu avec objet spectral (Voile)
+            GHOST: {
+                name: 'Ghost',
+                color: 'rgba(255, 255, 255, 0.2)',
+                interaction: 'observation_only',
+                description: 'Vu avec objet spectral (Voile)'
             },
             
-            // 6. Brouillard d'ancrage temporel
-            ANCHOR: {
-                name: 'Anchor Fog',
-                color: 'rgba(255, 215, 0, 0.4)',
-                pattern: 'anchor',
-                visibility: 0.6,
-                animation: 'rotate'
+            // 5. Superposed - Entité en flux quantique
+            SUPERPOSED: {
+                name: 'Superposed',
+                color: 'rgba(128, 0, 255, 0.4)',
+                interaction: 'conditional',
+                description: 'Entité en flux quantique'
             },
             
-            // 7. Brouillard de réalité
-            REALITY: {
-                name: 'Reality Fog',
-                color: 'rgba(128, 128, 128, 0.7)',
-                pattern: 'reality',
-                visibility: 0.2,
-                animation: 'static'
+            // 6. Anchored - Zone qui bloque le branchement temporel
+            ANCHORED: {
+                name: 'Anchored',
+                color: 'rgba(0, 0, 255, 0.3)',
+                interaction: 'force_collapse',
+                description: 'Zone qui bloque le branchement temporel'
             }
         };
         
@@ -456,48 +452,64 @@ class FogOfWarSystem {
         return { x, y };
     }
     
-    // 🎛️ CONTRÔLES DE L'INTERFACE
+    // 🎛️ CONTRÔLES DE L'INTERFACE SIMPLIFIÉS
     createFogControls() {
         const controls = document.createElement('div');
         controls.className = 'fog-controls';
         controls.innerHTML = `
             <div class="fog-panel">
-                <h3>🌫️ Brouillard de Guerre</h3>
+                <h3>🌫️ Brouillard de Causalité</h3>
+                
+                <div class="fog-info">
+                    <p>Le brouillard représente l'incertitude quantique du futur</p>
+                </div>
                 
                 <div class="timeline-selector">
-                    <label>Timeline sélectionnée:</label>
+                    <label>Timeline active:</label>
                     <select id="timeline-select">
-                        <option value="ℬ1">ℬ1 - Timeline Principale</option>
-                        <option value="ℬ2">ℬ2 - Timeline Alternative</option>
-                        <option value="ℬ3">ℬ3 - Timeline Quantique</option>
+                        <option value="ℬ1">ℬ1 - Principale</option>
+                        <option value="ℬ2">ℬ2 - Alternative</option>
+                        <option value="ℬ3">ℬ3 - Quantique</option>
                     </select>
                 </div>
                 
-                <div class="timeline-visibility">
-                    <label>Timelines visibles:</label>
-                    <div class="timeline-toggles">
-                        <label><input type="checkbox" value="ℬ1" checked> ℬ1</label>
-                        <label><input type="checkbox" value="ℬ2"> ℬ2</label>
-                        <label><input type="checkbox" value="ℬ3"> ℬ3</label>
+                <div class="fog-states-info">
+                    <h4>États du Brouillard:</h4>
+                    <div class="fog-states-list">
+                        <div class="fog-state-item">
+                            <span class="fog-color" style="background: rgba(50, 50, 50, 0.9)"></span>
+                            <span>Unexplored - Jamais vu</span>
+                        </div>
+                        <div class="fog-state-item">
+                            <span class="fog-color" style="background: rgba(100, 100, 100, 0.7)"></span>
+                            <span>Collapsed Past - Passé résolu</span>
+                        </div>
+                        <div class="fog-state-item">
+                            <span class="fog-color" style="background: rgba(255, 255, 0, 0.3)"></span>
+                            <span>Reachable - Accessible</span>
+                        </div>
+                        <div class="fog-state-item">
+                            <span class="fog-color" style="background: rgba(0, 255, 0, 0.1)"></span>
+                            <span>Vision - Vu directement</span>
+                        </div>
+                        <div class="fog-state-item">
+                            <span class="fog-color" style="background: rgba(255, 255, 255, 0.2)"></span>
+                            <span>Ghost - Vu avec Voile</span>
+                        </div>
+                        <div class="fog-state-item">
+                            <span class="fog-color" style="background: rgba(128, 0, 255, 0.4)"></span>
+                            <span>Superposed - Flux quantique</span>
+                        </div>
+                        <div class="fog-state-item">
+                            <span class="fog-color" style="background: rgba(0, 0, 255, 0.3)"></span>
+                            <span>Anchored - Bloque branchement</span>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="fog-opacity">
-                    <label>Opacité du brouillard: <span id="opacity-value">80%</span></label>
+                    <label>Opacité: <span id="opacity-value">80%</span></label>
                     <input type="range" id="fog-opacity-slider" min="10" max="100" value="80">
-                </div>
-                
-                <div class="fog-types">
-                    <label>Types de brouillard:</label>
-                    <div class="fog-type-toggles">
-                        <label><input type="checkbox" value="CLASSIC" checked> Classic</label>
-                        <label><input type="checkbox" value="TEMPORAL" checked> Temporal</label>
-                        <label><input type="checkbox" value="QUANTUM" checked> Quantum</label>
-                        <label><input type="checkbox" value="PARADOX"> Paradox</label>
-                        <label><input type="checkbox" value="INTERFERENCE"> Interference</label>
-                        <label><input type="checkbox" value="ANCHOR"> Anchor</label>
-                        <label><input type="checkbox" value="REALITY"> Reality</label>
-                    </div>
                 </div>
             </div>
         `;

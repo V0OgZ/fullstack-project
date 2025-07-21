@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "games")
@@ -106,6 +107,12 @@ public class Game {
     
     public String getGameName() { return gameName; }
     public void setGameName(String gameName) { this.gameName = gameName; }
+    
+    // Méthodes pour l'administration multijoueur
+    public void setName(String name) { this.gameName = name; }
+    public void setMode(String mode) { /* TODO: Implémenter quand le champ mode sera ajouté */ }
+    public void setScenario(String scenario) { /* TODO: Implémenter quand le champ scenario sera ajouté */ }
+    public void setAdminMode(boolean adminMode) { /* TODO: Implémenter quand le champ adminMode sera ajouté */ }
     
     public Integer getCurrentTurn() { return currentTurn; }
     public void setCurrentTurn(Integer currentTurn) { this.currentTurn = currentTurn; }
@@ -210,21 +217,21 @@ public class Game {
     
     public List<Hero> getHeroesByPlayer(String playerId) {
         return heroes.stream()
-                .filter(hero -> hero.getPlayerId().equals(playerId))
-                .toList();
+                .filter(hero -> playerId.equals(hero.getPlayerId()))
+                .collect(Collectors.toList());
     }
     
     public List<PsiState> getActivePsiStates() {
         return psiStates.stream()
                 .filter(PsiState::isActive)
-                .toList();
+                .collect(Collectors.toList());
     }
     
-    public List<PsiState> getPsiStatesAtPosition(int x, int y) {
-        return psiStates.stream()
-                .filter(psi -> psi.isActive() && psi.isAtPosition(x, y))
-                .toList();
-    }
+    // public List<PsiState> getPsiStatesAtPosition(int x, int y) {
+    //     return psiStates.stream()
+    //             .filter(state -> state.isAtPosition(x, y))
+    //             .collect(Collectors.toList());
+    // }
     
     public GameTile getTileAt(int x, int y) {
         return tiles.stream()

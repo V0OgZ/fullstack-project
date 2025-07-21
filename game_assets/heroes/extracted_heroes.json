@@ -79,6 +79,46 @@
         },
         "equipment": ["collapse_orb", "dragon_slayer_blade", "temporal_focus_ring"],
         "abilities": ["perfect_timing", "dragon_weakness_sight", "temporal_strike", "reality_collapse", "future_sight"]
+      },
+      {
+        "id": "peekill",
+        "name": "Pee & Kill",
+        "title": "Les Apôtres de l'Incohérence",
+        "class": "Anomalie Bipersonnelle",
+        "source_file": "hero_peekill.json",
+        "description": "Entités doubles issues d'une timeline instable, réécrivant la causalité comme un sketch mal calibré",
+        "philosophy": "L'humour comme force de collapse quantique",
+        "stats": {
+          "health": 120,
+          "temporal_energy": 250,
+          "attack": 15,
+          "defense": 10,
+          "contradiction_stress": 0.8,
+          "quantum_instability": 0.95
+        },
+        "equipment": ["impro_script", "silence_mask"],
+        "abilities": ["routine_infernale", "impro_quantique", "silence_scénique"],
+        "collapse_effect": "Transformation en Ki & Pi lors d'observation comique"
+      },
+      {
+        "id": "kiandpi",
+        "name": "Ki & Pi",
+        "title": "Messagers du LOL Primordial",
+        "class": "Duo Comique Restauré",
+        "source_file": "hero_kiandpi.json",
+        "description": "Deux esprits farceurs réinjectés dans la causalité stable après collapse de Pee & Kill",
+        "philosophy": "La blague parfaite comme onde d'effondrement",
+        "stats": {
+          "health": 140,
+          "temporal_energy": 300,
+          "attack": 18,
+          "defense": 12,
+          "humour_coherence": 0.9,
+          "punchline_power": 0.85
+        },
+        "equipment": ["cosmic_microphone", "universal_recall"],
+        "abilities": ["punchline_cosmique", "rappel_universel"],
+        "trigger_source": "Collapse de Pee & Kill"
       }
     ]
   },
@@ -91,6 +131,7 @@
       "Extraire les artefacts cachés", 
       "Organiser dans game_assets",
       "Créer les fichiers individuels"
-    ]
+    ],
+    "latest_addition": "Pee & Kill et Ki & Pi - Héros de la transformation comique (22 juillet 2025)"
   }
 }

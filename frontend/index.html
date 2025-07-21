@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heroes of Time - Temporal Engine</title>
-            <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" href="temporal-styles.css">
-        <link rel="stylesheet" href="translation-styles.css">
-        <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="temporal-styles.css">
+    <link rel="stylesheet" href="translation-styles.css">
+    <link rel="stylesheet" href="styles/city.css">
+    <link rel="stylesheet" href="styles/combat.css">
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
     <div class="container">
@@ -15,6 +17,8 @@
             <div class="title">🕰️ Heroes of Time - Temporal Engine</div>
             <div class="controls">
                 <button id="new-game-btn" class="btn-primary">🎮 New Game</button>
+                <button id="city-btn" class="btn-primary">🏛️ Ville</button>
+                <button id="combat-btn" class="btn-primary">⚔️ Combat</button>
                 <button id="add-ragnar-btn" class="btn-secondary">🛡️ Add Ragnar</button>
                 <button id="test-decay-btn" class="btn-warning">⏰ Test Decay</button>
                 <button id="settings-btn" class="btn-icon">⚙️</button>
@@ -37,8 +41,30 @@
             </div>
             
             <div class="side-panel">
-                <!-- 🌫️ Contrôles de Brouillard de Guerre -->
+                <!-- 🌫️ Brouillard de Causalité -->
                 <div id="fog-controls-container"></div>
+                
+                <!-- 🎮 Contrôles Principaux -->
+                <div class="main-controls">
+                    <div class="control-section">
+                        <h3>🎮 Contrôles Principaux</h3>
+                        <div class="control-buttons">
+                            <button id="hero-select-btn" class="btn-control">👁️ Sélectionner Héros</button>
+                            <button id="move-btn" class="btn-control">🚶 Déplacer</button>
+                            <button id="attack-btn" class="btn-control">⚔️ Attaquer</button>
+                            <button id="explore-btn" class="btn-control">🗺️ Explorer</button>
+                        </div>
+                    </div>
+                    
+                    <div class="control-section">
+                        <h3>🔮 Actions Temporelles</h3>
+                        <div class="control-buttons">
+                            <button id="psi-create-btn" class="btn-control">ψ Créer État</button>
+                            <button id="psi-collapse-btn" class="btn-control">† Effondrer</button>
+                            <button id="timeline-switch-btn" class="btn-control">🔄 Changer Timeline</button>
+                        </div>
+                    </div>
+                </div>
                 
                 <div class="script-console" id="script-console">
                     <!-- Console will be populated by JavaScript -->
@@ -47,6 +73,11 @@
                 <div class="hero-panel" id="hero-panel">
                     <h3>🦸 Heroes</h3>
                     <div id="heroes-list"></div>
+                </div>
+                
+                <div class="psi-panel" id="psi-panel">
+                    <h3>🔮 États ψ</h3>
+                    <div id="psi-states-list"></div>
                 </div>
                 
                 <div class="decay-panel" id="decay-panel">
@@ -72,16 +103,18 @@
     
     <script src="api.js"></script>
     <script src="translation-service.js"></script>
+    <script src="components/CityInterface.js"></script>
+    <script src="components/CombatInterface.js"></script>
     <script src="script-console.js"></script>
     <script src="game.js"></script>
     <script src="runic-forge.js"></script>
     <script src="temporal-integration.js"></script>
     <script src="hero-avatars.js"></script>
-    <script src="fog-of-war-system.js"></script>
     <script src="scenario-selector.js"></script>
     <script src="gameplay-enhancement.js"></script>
     <script src="missing-assets-loader.js"></script>
     <script src="gameplay-construction.js"></script>
+    <script src="fog-of-war-system.js"></script>
     <script>
         // Initialisation de l'application
         window.gameAPI = new GameAPI();
@@ -92,15 +125,31 @@
         window.missingAssetsLoader = new MissingAssetsLoader();
         window.gameplayConstruction = new GameplayConstruction();
         
-        // 🌫️ Initialiser le système de brouillard de guerre
+        // 🌫️ Initialiser le système de brouillard de causalité
         window.fogOfWarSystem = new FogOfWarSystem();
         const fogControlsContainer = document.getElementById('fog-controls-container');
         if (fogControlsContainer) {
             fogControlsContainer.appendChild(window.fogOfWarSystem.createFogControls());
         }
         
+        // 🏛️ Événements pour l'interface de ville
+        document.getElementById('city-btn').addEventListener('click', () => {
+            window.cityInterface.toggle();
+        });
+        
+        // ⚔️ Événements pour l'interface de combat
+        document.getElementById('combat-btn').addEventListener('click', () => {
+            window.combatInterface.toggle();
+        });
+        
         // 🌐 Initialiser le service de traduction
         window.translationService = new TranslationService();
+        
+        // 🏛️ Initialiser l'interface de ville
+        window.cityInterface = new CityInterface();
+        
+        // ⚔️ Initialiser l'interface de combat
+        window.combatInterface = new CombatInterface();
         
         // 🎮 Initialiser le sélecteur de scénarios
         window.scenarioSelector = new ScenarioSelector();
@@ -120,239 +169,11 @@
             }
         };
         
-        // Fonction pour créer des héros de démonstration
-        window.createMockHeroes = function() {
-            const mockGameState = {
-                gameId: 1,
-                currentTurn: 0,
-                status: 'ACTIVE',
-                heroes: [
-                    {
-                        name: 'Ragnar',
-                        position: { x: 5, y: 5 },
-                        health: 100,
-                        maxHealth: 100,
-                        timeline: 'ℬ1',
-                        status: 'ACTIVE',
-                        temporalEnergy: 100,
-                        movementPoints: 3,
-                        inventory: ['Shield', 'Sword'],
-                        playerId: 'player1'
-                    },
-                    {
-                        name: 'Arthur',
-                        position: { x: 8, y: 3 },
-                        health: 90,
-                        maxHealth: 100,
-                        timeline: 'ℬ1',
-                        status: 'ACTIVE',
-                        temporalEnergy: 85,
-                        movementPoints: 2,
-                        inventory: ['Excalibur'],
-                        playerId: 'player1'
-                    },
-                    {
-                        name: 'Jean-Grofignon',
-                        position: { x: 3, y: 8 },
-                        health: 120,
-                        maxHealth: 120,
-                        timeline: 'ℬ1',
-                        status: 'ACTIVE',
-                        temporalEnergy: 150,
-                        movementPoints: 4,
-                        inventory: ['GROFI_Omega', 'Temporal_Compass'],
-                        playerId: 'player1'
-                    }
-                ],
-                psiStates: [
-                    {
-                        id: 'ψ001',
-                        status: 'ACTIVE',
-                        targetX: 10,
-                        targetY: 10,
-                        probability: 0.8,
-                        expression: '⊙(Δt+2 @10,10 ⟶ MOV(Ragnar, @10,10))'
-                    }
-                ],
-                tiles: []
-            };
-            
-            window.gameRenderer.updateState(mockGameState);
-            window.updateHeroesList(mockGameState.heroes);
-            window.updateStatusBar('Demo Heroes: Ragnar 🛡️, Arthur ⚔️, and Jean-Grofignon 🧠 ready!');
-        };
-        
-        // Fonction pour mettre à jour la liste des héros
-        window.updateHeroesList = function(heroes) {
-            const heroesList = document.getElementById('heroes-list');
-            if (!heroesList) return;
-            
-            heroesList.innerHTML = '';
-            heroes.forEach(hero => {
-                const heroElement = document.createElement('div');
-                heroElement.className = 'hero-item';
-                heroElement.innerHTML = `
-                    <div class="hero-name">${hero.name}</div>
-                    <div class="hero-stats">
-                        <span class="health">❤️ ${hero.health}/${hero.maxHealth}</span>
-                        <span class="energy">⚡ ${hero.temporalEnergy}</span>
-                        <span class="movement">👟 ${hero.movementPoints}</span>
-                    </div>
-                    <div class="hero-timeline">⏰ ${hero.timeline}</div>
-                `;
-                heroesList.appendChild(heroElement);
-            });
-        };
-        
-        // Fonction pour tester le système de décroissance
-        window.testTemporalDecay = async function() {
-            if (!window.gameAPI.gameId) {
-                window.scriptConsole.addToOutput('❌ No game active. Create a game first.', 'error');
-                return;
-            }
-            
-            try {
-                window.scriptConsole.addToOutput('🎭 Anna the Martopicker applies temporal decay...', 'warning');
-                
-                const response = await fetch(`http://localhost:8080/api/temporal/games/${window.gameAPI.gameId}/decay/apply`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' }
-                });
-                
-                if (response.ok) {
-                    const result = await response.json();
-                    window.scriptConsole.addToOutput(`⏰ Decay applied! ${result.message}`, 'success');
-                    window.scriptConsole.addToOutput(`🏗️ Affected buildings: ${result.affectedBuildings}`, 'info');
-                    window.scriptConsole.addToOutput(`💥 Destroyed buildings: ${result.destroyedBuildings}`, 'warning');
-                    
-                    // Mettre à jour les stats de décroissance
-                    window.updateDecayStats(result);
-                } else {
-                    const error = await response.text();
-                    window.scriptConsole.addToOutput(`❌ Decay failed: ${error}`, 'error');
-                }
-            } catch (error) {
-                window.scriptConsole.addToOutput(`❌ Decay test failed: ${error.message}`, 'error');
-            }
-        };
-        
-        // Fonction pour mettre à jour les stats de décroissance
-        window.updateDecayStats = function(decayResult) {
-            const decayStats = document.getElementById('decay-stats');
-            if (!decayStats) return;
-            
-            decayStats.innerHTML = `
-                <div class="decay-stat">
-                    <span class="label">Affected:</span>
-                    <span class="value">${decayResult.affectedBuildings}</span>
-                </div>
-                <div class="decay-stat">
-                    <span class="label">Destroyed:</span>
-                    <span class="value">${decayResult.destroyedBuildings}</span>
-                </div>
-                <div class="decay-stat">
-                    <span class="label">Quote:</span>
-                    <span class="value">"${decayResult.quote}"</span>
-                </div>
-            `;
-        };
-        
-        // Événements
-        document.getElementById('new-game-btn').addEventListener('click', async () => {
-            try {
-                const game = await window.gameAPI.createGame('Frontend Game');
-                window.scriptConsole.addToOutput('🎮 New game created! ID: ' + game.gameId, 'success');
-                window.updateStatusBar('Game created - Ready for commands');
-                
-                // Créer automatiquement Ragnar
-                setTimeout(async () => {
-                    try {
-                        const result = await window.gameAPI.executeScript('HERO(Ragnar)');
-                        window.scriptConsole.addToOutput('🛡️ Hero Ragnar created via temporal script!', 'success');
-                        window.gameRenderer.refresh();
-                    } catch (error) {
-                        window.scriptConsole.addToOutput(`❌ Backend error: ${error.message}`, 'error');
-                        window.scriptConsole.addToOutput('🎭 Loading demo heroes instead...', 'info');
-                        window.createMockHeroes();
-                    }
-                }, 1000);
-                
-                window.gameRenderer.refresh();
-            } catch (error) {
-                window.scriptConsole.addToOutput(`❌ Failed to create game: ${error.message}`, 'error');
-                window.scriptConsole.addToOutput('🎭 Loading demo heroes for testing...', 'info');
-                window.createMockHeroes();
-            }
+        // Initialisation au chargement
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎮 Heroes of Time - Interface principale chargée');
+            window.updateStatusBar('Interface prête - Cliquez "New Game" pour commencer');
         });
-        
-        // Bouton pour ajouter Ragnar directement
-        document.getElementById('add-ragnar-btn').addEventListener('click', () => {
-            window.scriptConsole.addToOutput('🛡️ Adding Ragnar directly...', 'info');
-            window.createMockHeroes();
-        });
-        
-        // Bouton pour tester la décroissance temporelle
-        document.getElementById('test-decay-btn').addEventListener('click', () => {
-            window.testTemporalDecay();
-        });
-        
-        // Bouton pour appliquer la décroissance
-        document.getElementById('apply-decay-btn').addEventListener('click', () => {
-            window.testTemporalDecay();
-        });
-        
-        // Bouton pour réparer les bâtiments
-        document.getElementById('repair-buildings-btn').addEventListener('click', async () => {
-            if (!window.gameAPI.gameId) {
-                window.scriptConsole.addToOutput('❌ No game active.', 'error');
-                return;
-            }
-            
-            try {
-                const response = await fetch(`http://localhost:8080/api/temporal/games/${window.gameAPI.gameId}/decay/repair`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ buildingType: 'castle', x: 5, y: 5, repairAmount: 50 })
-                });
-                
-                if (response.ok) {
-                    const result = await response.json();
-                    window.scriptConsole.addToOutput(`🔧 Building repaired! ${result.message}`, 'success');
-                } else {
-                    const error = await response.text();
-                    window.scriptConsole.addToOutput(`❌ Repair failed: ${error}`, 'error');
-                }
-            } catch (error) {
-                window.scriptConsole.addToOutput(`❌ Repair failed: ${error.message}`, 'error');
-            }
-        });
-        
-        // Auto-refresh toutes les 3 secondes
-        setInterval(() => {
-            if (window.gameAPI.gameId) {
-                window.gameRenderer.refresh();
-            }
-        }, 3000);
-        
-        // Message de bienvenue
-        window.scriptConsole.addToOutput('🕰️ Heroes of Time - Temporal Engine', 'success');
-        window.scriptConsole.addToOutput('🎭 Anna the Martopicker watches from the shadows...', 'warning');
-        window.scriptConsole.addToOutput('🎮 Click "New Game" or "Add Ragnar" to start!', 'normal');
-        window.scriptConsole.addToOutput('📜 Temporal Grammar Examples:', 'normal');
-        window.scriptConsole.addToOutput('  • HERO(Ragnar) - Create hero', 'normal');
-        window.scriptConsole.addToOutput('  • MOV(Ragnar, @5,3) - Move hero', 'normal');
-        window.scriptConsole.addToOutput('  • ψ001: ⊙(Δt+2 @10,10 ⟶ MOV(Ragnar, @10,10)) - Temporal script', 'normal');
-        window.scriptConsole.addToOutput('  • †ψ001 - Collapse quantum state', 'normal');
-        window.scriptConsole.addToOutput('  • ⏰ Test Decay - Anna punishes time travelers', 'warning');
-        
-        // Initialiser la barre de statut
-        window.updateStatusBar('Ready to start... Anna the Martopicker watches from the shadows ⏰');
-        
-        // Charger Ragnar automatiquement pour démonstration
-        setTimeout(() => {
-            window.scriptConsole.addToOutput('🎭 Loading heroes for immediate testing...', 'info');
-            window.createMockHeroes();
-        }, 2000);
     </script>
 </body>
 </html>
