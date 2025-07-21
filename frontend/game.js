@@ -262,12 +262,76 @@ class GameRenderer {
         if (!this.gameState.tiles) return;
         
         this.gameState.tiles.forEach(tile => {
+            // Tuiles avec états ψ (superposition quantique)
             if (tile.hasPsiState) {
                 this.drawHex(tile.x, tile.y, 'rgba(255, 0, 255, 0.2)', 'rgba(255, 0, 255, 0.5)');
             }
             
+            // Tuiles avec conflits temporels
             if (tile.hasConflict) {
                 this.drawHex(tile.x, tile.y, 'rgba(255, 0, 0, 0.2)', 'rgba(255, 0, 0, 0.5)');
+            }
+            
+            // Tuiles parallèles (timelines multiples)
+            if (tile.parallelTimelines && tile.parallelTimelines.length > 1) {
+                const transparency = 0.1 + (tile.parallelTimelines.length * 0.05);
+                this.drawHex(tile.x, tile.y, `rgba(0, 212, 255, ${transparency})`, 'rgba(0, 212, 255, 0.6)');
+                
+                // Dessiner les connexions entre timelines
+                tile.parallelTimelines.forEach((timeline, index) => {
+                    if (timeline.parentTimeline) {
+                        const { x, y } = this.hexToPixel(tile.x, tile.y);
+                        this.ctx.strokeStyle = `rgba(0, 212, 255, ${0.3 - index * 0.1})`;
+                        this.ctx.lineWidth = 1;
+                        this.ctx.setLineDash([3, 3]);
+                        this.ctx.beginPath();
+                        this.ctx.moveTo(x - 10, y - 10 + index * 5);
+                        this.ctx.lineTo(x + 10, y + 10 - index * 5);
+                        this.ctx.stroke();
+                        this.ctx.setLineDash([]);
+                    }
+                });
+            }
+            
+            // Tuiles avec ancres temporelles
+            if (tile.temporalAnchor) {
+                this.drawHex(tile.x, tile.y, 'rgba(255, 215, 0, 0.15)', 'rgba(255, 215, 0, 0.7)');
+                
+                // Effet de rotation pour les ancres
+                const { x, y } = this.hexToPixel(tile.x, tile.y);
+                this.ctx.save();
+                this.ctx.translate(x, y);
+                this.ctx.rotate(this.animationFrame * 0.01);
+                
+                for (let i = 0; i < 8; i++) {
+                    const angle = (Math.PI / 4) * i;
+                    const lineX = Math.cos(angle) * 15;
+                    const lineY = Math.sin(angle) * 15;
+                    
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(0, 0);
+                    this.ctx.lineTo(lineX, lineY);
+                    this.ctx.strokeStyle = `rgba(255, 215, 0, ${0.4 - i * 0.05})`;
+                    this.ctx.lineWidth = 2;
+                    this.ctx.stroke();
+                }
+                
+                this.ctx.restore();
+            }
+            
+            // Tuiles avec zones d'interférence quantique
+            if (tile.quantumInterference) {
+                const intensity = tile.quantumInterference.intensity || 0.5;
+                this.drawHex(tile.x, tile.y, `rgba(255, 0, 255, ${intensity * 0.3})`, `rgba(255, 0, 255, ${intensity * 0.8})`);
+                
+                // Effet de pulsation pour l'interférence
+                const { x, y } = this.hexToPixel(tile.x, tile.y);
+                const pulseSize = 20 + Math.sin(this.animationFrame * 0.08) * 8;
+                this.ctx.beginPath();
+                this.ctx.arc(x, y, pulseSize, 0, Math.PI * 2);
+                this.ctx.strokeStyle = `rgba(255, 0, 255, ${intensity * 0.4})`;
+                this.ctx.lineWidth = 2;
+                this.ctx.stroke();
             }
         });
     }
@@ -444,7 +508,7 @@ class GameRenderer {
     }
     
     drawTemporalEffects() {
-        // Draw timeline connections
+        // Draw timeline connections with improved transparency
         if (this.gameState.timelines && this.gameState.timelines.length > 1) {
             this.ctx.strokeStyle = 'rgba(0, 212, 255, 0.3)';
             this.ctx.lineWidth = 2;
@@ -453,9 +517,10 @@ class GameRenderer {
             // Draw connections between timeline branches
             this.gameState.timelines.forEach((timeline, index) => {
                 if (timeline.parentTimeline) {
-                    // Draw connection to parent
-                    // This is a simplified visualization
+                    // Draw connection to parent with transparency based on distance
                     const y = -100 + index * 30;
+                    const transparency = 0.3 - (index * 0.05);
+                    this.ctx.strokeStyle = `rgba(0, 212, 255, ${transparency})`;
                     this.ctx.beginPath();
                     this.ctx.moveTo(-50, y);
                     this.ctx.lineTo(50, y);
@@ -465,6 +530,46 @@ class GameRenderer {
             
             this.ctx.setLineDash([]);
         }
+        
+        // Draw parallel timeline effects
+        if (this.gameState.parallelTimelines) {
+            this.gameState.parallelTimelines.forEach((parallel, index) => {
+                // Effet de transparence pour les timelines parallèles
+                const transparency = 0.1 + (index * 0.02);
+                this.ctx.fillStyle = `rgba(0, 212, 255, ${transparency})`;
+                
+                // Dessiner une zone d'effet pour chaque timeline parallèle
+                parallel.tiles.forEach(tile => {
+                    const { x, y } = this.hexToPixel(tile.x, tile.y);
+                    const radius = 25 + Math.sin(this.animationFrame * 0.05 + index) * 5;
+                    
+                    this.ctx.beginPath();
+                    this.ctx.arc(x, y, radius, 0, Math.PI * 2);
+                    this.ctx.fill();
+                });
+            });
+        }
+        
+        // Draw quantum interference zones
+        if (this.gameState.quantumInterferenceZones) {
+            this.gameState.quantumInterferenceZones.forEach(zone => {
+                const { x, y } = this.hexToPixel(zone.x, zone.y);
+                const intensity = zone.intensity || 0.5;
+                
+                // Effet de pulsation pour les zones d'interférence
+                const pulseSize = 30 + Math.sin(this.animationFrame * 0.06) * 10;
+                const gradient = this.ctx.createRadialGradient(x, y, 0, x, y, pulseSize);
+                gradient.addColorStop(0, `rgba(255, 0, 255, ${intensity * 0.6})`);
+                gradient.addColorStop(0.5, `rgba(255, 0, 255, ${intensity * 0.3})`);
+                gradient.addColorStop(1, `rgba(255, 0, 255, 0)`);
+                
+                this.ctx.fillStyle = gradient;
+                this.ctx.fillRect(x - pulseSize, y - pulseSize, pulseSize * 2, pulseSize * 2);
+            });
+        }
+        
+        // Draw parallel tiles with special transparency
+        this.drawParallelTiles();
         
         // Draw temporal anchors
         if (this.gameState.temporalAnchors) {
@@ -588,6 +693,54 @@ class GameRenderer {
         };
         
         animate();
+    }
+    
+    drawParallelTiles() {
+        // Méthode spéciale pour les tuiles parallèles avec transparence
+        if (!this.gameState.tiles) return;
+        
+        this.gameState.tiles.forEach(tile => {
+            if (tile.parallelTimelines && tile.parallelTimelines.length > 1) {
+                const { x, y } = this.hexToPixel(tile.x, tile.y);
+                
+                // Transparence basée sur le nombre de timelines parallèles
+                const baseTransparency = 0.05;
+                const timelineTransparency = tile.parallelTimelines.length * 0.03;
+                const totalTransparency = Math.min(baseTransparency + timelineTransparency, 0.4);
+                
+                // Dessiner l'hexagone avec transparence
+                this.drawHex(tile.x, tile.y, `rgba(0, 212, 255, ${totalTransparency})`, 'rgba(0, 212, 255, 0.6)');
+                
+                // Effet de connexion entre timelines
+                tile.parallelTimelines.forEach((timeline, index) => {
+                    const connectionTransparency = 0.2 - (index * 0.05);
+                    if (connectionTransparency > 0) {
+                        this.ctx.strokeStyle = `rgba(0, 212, 255, ${connectionTransparency})`;
+                        this.ctx.lineWidth = 1;
+                        this.ctx.setLineDash([2, 2]);
+                        
+                        // Dessiner des lignes de connexion
+                        const angle = (Math.PI / 3) * index;
+                        const endX = x + Math.cos(angle) * 20;
+                        const endY = y + Math.sin(angle) * 20;
+                        
+                        this.ctx.beginPath();
+                        this.ctx.moveTo(x, y);
+                        this.ctx.lineTo(endX, endY);
+                        this.ctx.stroke();
+                    }
+                });
+                
+                this.ctx.setLineDash([]);
+                
+                // Texte indiquant le nombre de timelines
+                this.ctx.fillStyle = 'rgba(0, 212, 255, 0.8)';
+                this.ctx.font = 'bold 10px Arial';
+                this.ctx.textAlign = 'center';
+                this.ctx.textBaseline = 'middle';
+                this.ctx.fillText(`${tile.parallelTimelines.length}`, x, y);
+            }
+        });
     }
     
     // Public methods for external control
