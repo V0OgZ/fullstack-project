@@ -11,6 +11,7 @@ import com.heroesoftimepoc.temporalengine.repository.GameRepository;
 import com.heroesoftimepoc.temporalengine.service.TemporalEngineService;
 import com.heroesoftimepoc.temporalengine.service.TemporalCacheService;
 import com.heroesoftimepoc.temporalengine.service.ObservationTriggerService;
+import com.heroesoftimepoc.temporalengine.service.GameInitializationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +39,9 @@ public class TemporalEngineController {
     @Autowired
     private ObservationTriggerService observationTriggerService;
     
+    @Autowired
+    private GameInitializationService gameInitializationService;
+    
     /**
      * Create a new game
      */
@@ -53,10 +57,15 @@ public class TemporalEngineController {
             game.addPlayer(playerId);
             gameRepository.save(game);
             
+            // Initialiser le jeu avec tuiles et économie
+            gameInitializationService.initializeGame(game);
+            gameInitializationService.initializePlayerEconomy(game, playerId);
+            
             response.put("success", true);
             response.put("gameId", game.getId());
             response.put("gameName", game.getGameName());
-            response.put("message", "Game created successfully");
+            response.put("tilesInitialized", game.getTiles().size());
+            response.put("message", "Game created and initialized successfully");
             
             return ResponseEntity.ok(response);
             
