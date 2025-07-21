@@ -32,6 +32,9 @@ show_help() {
     echo -e "  ${GREEN}generate${NC}    🧠 Génère la documentation MD depuis JSON (Memento)"
     echo -e "  ${GREEN}map${NC}         🗺️  Gestion des maps et terrains"
     echo -e "  ${GREEN}replay${NC}      📹 Système de replay des parties"
+    echo -e "  ${GREEN}editor${NC}      🎨 Éditeur visuel script spatio-temporel"
+    echo -e "  ${GREEN}admin${NC}       🎮 Interface d'administration multijoueur"
+    echo -e "  ${GREEN}test-uis${NC}    🧪 Test complet de toutes les UIs"
     echo -e "  ${GREEN}help${NC}        Affiche cette aide"
     echo ""
     echo -e "${YELLOW}Options de test:${NC}"
@@ -66,6 +69,7 @@ show_help() {
     echo -e "  ${CYAN}./hots generate${NC}          # 🧠 Génère tous les MD depuis JSON"
     echo -e "  ${CYAN}./hots map list${NC}          # 🗺️  Liste les maps disponibles"
     echo -e "  ${CYAN}./hots replay center${NC}     # 🎬 Centre de Replay complet"
+    echo -e "  ${CYAN}./hots editor${NC}            # 🎨 Lance l'éditeur visuel"
 }
 
 check_services() {
@@ -954,6 +958,94 @@ manage_replays() {
     esac
 }
 
+# 🎨 Fonction ÉDITEUR VISUEL
+launch_visual_editor() {
+    echo -e "${CYAN}🎨 ÉDITEUR VISUEL SCRIPT SPATIO-TEMPOREL - Heroes of Time${NC}"
+    echo -e "${CYAN}========================================================${NC}"
+    echo ""
+    
+    # Vérifier que le frontend est actif
+    if ! curl -s http://localhost:8000 > /dev/null; then
+        echo -e "${RED}❌ Frontend non accessible sur le port 8000${NC}"
+        echo -e "${YELLOW}💡 Lancez d'abord: ./hots start essential${NC}"
+        return 1
+    fi
+    
+    echo -e "${GREEN}✅ Frontend actif - Ouverture de l'éditeur visuel...${NC}"
+    if command -v open > /dev/null; then
+        # macOS
+        open "http://localhost:8000/visual-script-editor.html"
+    elif command -v xdg-open > /dev/null; then
+        # Linux  
+        xdg-open "http://localhost:8000/visual-script-editor.html"
+    else
+        echo -e "${YELLOW}📋 Accédez manuellement à: http://localhost:8000/visual-script-editor.html${NC}"
+    fi
+    
+    echo -e "${CYAN}🎨 Fonctionnalités de l'éditeur:${NC}"
+    echo -e "  🚶 Actions de base (MOV, USE, CREATE, HERO, BATTLE)"
+    echo -e "  ψ Actions temporelles (PSI, TRIGGER, COLLAPSE)"
+    echo -e "  ⏰ Timeline Editor avec branches multiples"
+    echo -e "  🎮 Game Board interactif"
+    echo -e "  🔧 Système de macros personnalisées"
+    echo -e "  📜 Génération automatique de scripts"
+    echo -e "  💾 Sauvegarde/chargement de configurations"
+    echo ""
+    echo -e "${YELLOW}💡 Révolution du game design:${NC}"
+    echo -e "  • Premier IDE visuel de scripting quantico-temporel au monde"
+    echo -e "  • Point-and-click → Scripts complexes automatiques"
+    echo -e "  • Visualisation des superpositions et causalités"
+    echo -e "  • Macros personnalisées pour actions rapides"
+}
+
+# 🎮 Fonction INTERFACE ADMIN MULTIJOUEUR
+launch_admin_interface() {
+    echo -e "${CYAN}🎮 INTERFACE D'ADMINISTRATION MULTIJOUEUR - Heroes of Time${NC}"
+    echo -e "${CYAN}========================================================${NC}"
+    echo ""
+    
+    # Vérifier que les services sont actifs
+    if ! curl -s http://localhost:8080 > /dev/null; then
+        echo -e "${RED}❌ Backend non accessible sur le port 8080${NC}"
+        echo -e "${YELLOW}💡 Lancez d'abord: ./hots start essential${NC}"
+        return 1
+    fi
+    
+    if ! curl -s http://localhost:8000 > /dev/null; then
+        echo -e "${RED}❌ Frontend non accessible sur le port 8000${NC}"
+        echo -e "${YELLOW}💡 Lancez d'abord: ./hots start essential${NC}"
+        return 1
+    fi
+    
+    echo -e "${GREEN}✅ Services vérifiés${NC}"
+    echo ""
+    echo -e "${YELLOW}🎮 Lancement de l'interface d'administration multijoueur...${NC}"
+    echo ""
+    
+    # Ouvrir l'interface dans le navigateur
+    if command -v open > /dev/null; then
+        open "http://localhost:8000/admin-multiplayer.html"
+    elif command -v xdg-open > /dev/null; then
+        xdg-open "http://localhost:8000/admin-multiplayer.html"
+    else
+        echo -e "${YELLOW}🌐 Ouvrez manuellement: http://localhost:8000/admin-multiplayer.html${NC}"
+    fi
+    
+    echo -e "${GREEN}🎮 Interface d'administration lancée !${NC}"
+    echo ""
+    echo -e "${CYAN}📋 Fonctionnalités disponibles:${NC}"
+    echo -e "  🏗️  Gestion des jeux (créer, lister, supprimer)"
+    echo -e "  👥 Gestion des joueurs (ajouter, expulser)"
+    echo -e "  🦸 Gestion des héros (apparaître, téléporter, supprimer)"
+    echo -e "  🎯 Contrôle du jeu (pause, tour suivant, reset, fin)"
+    echo -e "  🚀 Démarrage rapide multijoueur"
+    echo -e "  🧪 Tests complets du système"
+    echo -e "  🎬 Démo multijoueur"
+    echo ""
+    echo -e "${YELLOW}💡 Mode Administrateur - Jean sur le canapé${NC}"
+    echo -e "${YELLOW}💡 Protocole Memento - Fusion Claudius activée${NC}"
+}
+
 # Fonction principale
 case "${1:-help}" in
     "start")
@@ -983,6 +1075,15 @@ case "${1:-help}" in
         ;;
     "replay")
         manage_replays "$2" "$3"
+        ;;
+    "editor")
+        launch_visual_editor
+        ;;
+    "admin")
+        launch_admin_interface
+        ;;
+    "test-uis")
+        run_test_suite "ui"
         ;;
     "help"|*)
         show_help

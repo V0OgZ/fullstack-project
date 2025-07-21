@@ -47,4 +47,8 @@ public interface HeroRepository extends JpaRepository<Hero, Long> {
      * Trouve un héros par son nom et l'ID de la partie (alias)
      */
     Optional<Hero> findByNameAndGameId(String name, Long gameId);
+    
+    // Méthode pour l'administration multijoueur
+    @Query("DELETE FROM Hero h WHERE h.game.id = :gameId")
+    void deleteByGameId(@Param("gameId") Long gameId);
 }

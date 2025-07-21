@@ -126,6 +126,10 @@ public class Hero {
     public Integer getPositionY() { return positionY; }
     public void setPositionY(Integer positionY) { this.positionY = positionY; }
     
+    // Méthodes pour l'administration multijoueur
+    public void setX(Integer x) { this.positionX = x; }
+    public void setY(Integer y) { this.positionY = y; }
+    
     public String getTimelineBranch() { return timelineBranch; }
     public void setTimelineBranch(String timelineBranch) { this.timelineBranch = timelineBranch; }
     

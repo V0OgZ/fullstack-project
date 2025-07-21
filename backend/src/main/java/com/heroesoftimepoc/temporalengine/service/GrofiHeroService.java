@@ -320,19 +320,39 @@ public class GrofiHeroService {
      * Extraire les tags d'immunité depuis le JSON
      */
     private void extractImmunityTags(JsonNode heroNode, GrofiHeroData heroData) {
-        // Mock des immunités pour l'instant
+        // Implémentation réelle : lire les immunités depuis le JSON
+        JsonNode immunityNode = heroNode.get("immunityTags");
+        if (immunityNode != null && immunityNode.isArray()) {
+            for (JsonNode immunity : immunityNode) {
+                if (immunity.isTextual()) {
+                    heroData.immunityTags.add(immunity.asText());
+                }
+            }
+        }
+        
+        // Immunités spéciales basées sur le nom (fallback)
         if (heroData.name.contains("Jean-Grofignon")) {
-            heroData.immunityTags.add("SRTI");
-            heroData.immunityTags.add("ROLLBACK");
+            if (!heroData.immunityTags.contains("SRTI")) {
+                heroData.immunityTags.add("SRTI");
+            }
+            if (!heroData.immunityTags.contains("ROLLBACK")) {
+                heroData.immunityTags.add("ROLLBACK");
+            }
         }
         if (heroData.name.contains("TheDude")) {
-            heroData.immunityTags.add("OBS");
+            if (!heroData.immunityTags.contains("OBS")) {
+                heroData.immunityTags.add("OBS");
+            }
         }
         if (heroData.name.contains("VinceVega")) {
-            heroData.immunityTags.add("SRTI");
+            if (!heroData.immunityTags.contains("SRTI")) {
+                heroData.immunityTags.add("SRTI");
+            }
         }
         if (heroData.name.contains("WalterSobchak")) {
-            heroData.immunityTags.add("ROLLBACK");
+            if (!heroData.immunityTags.contains("ROLLBACK")) {
+                heroData.immunityTags.add("ROLLBACK");
+            }
         }
     }
     
