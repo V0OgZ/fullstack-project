@@ -254,3 +254,34 @@ Hibernate: select count(*) from games g1_0
 2025-07-21T18:55:15.991+02:00 DEBUG 25815 --- [io-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
 2025-07-21T18:55:15.992+02:00 DEBUG 25815 --- [io-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{activeGames=0, service=Heroes of Time API, version=POC-0.1, status=healthy, timestamp=1753116915990 (truncated)...]
 2025-07-21T18:55:15.992+02:00 DEBUG 25815 --- [io-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-21T18:55:45.994+02:00 DEBUG 25815 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/health", parameters={}
+2025-07-21T18:55:45.995+02:00 DEBUG 25815 --- [nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#health()
+Hibernate: select count(*) from games g1_0
+2025-07-21T18:55:45.999+02:00 DEBUG 25815 --- [nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-21T18:55:45.999+02:00 DEBUG 25815 --- [nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{activeGames=0, service=Heroes of Time API, version=POC-0.1, status=healthy, timestamp=1753116945996 (truncated)...]
+2025-07-21T18:55:46.000+02:00 DEBUG 25815 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-21T18:56:15.992+02:00 DEBUG 25815 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/api/health", parameters={}
+2025-07-21T18:56:15.993+02:00 DEBUG 25815 --- [nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#health()
+Hibernate: select count(*) from games g1_0
+2025-07-21T18:56:15.996+02:00 DEBUG 25815 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-21T18:56:15.996+02:00 DEBUG 25815 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{activeGames=0, service=Heroes of Time API, version=POC-0.1, status=healthy, timestamp=1753116975994 (truncated)...]
+2025-07-21T18:56:15.997+02:00 DEBUG 25815 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-21T18:56:45.989+02:00 DEBUG 25815 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/health", parameters={}
+2025-07-21T18:56:45.990+02:00 DEBUG 25815 --- [nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#health()
+Hibernate: select count(*) from games g1_0
+2025-07-21T18:56:45.992+02:00 DEBUG 25815 --- [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-21T18:56:45.993+02:00 DEBUG 25815 --- [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{activeGames=0, service=Heroes of Time API, version=POC-0.1, status=healthy, timestamp=1753117005991 (truncated)...]
+2025-07-21T18:56:45.994+02:00 DEBUG 25815 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  08:20 min
+[INFO] Finished at: 2025-07-21T18:57:07+02:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:3.2.0:run (default-cli) on project temporal-engine: Process terminated with exit code: 137 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

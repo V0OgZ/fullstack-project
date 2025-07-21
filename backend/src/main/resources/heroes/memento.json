@@ -95,6 +95,24 @@
       "synergy": "claudius",
       "special": true,
       "quote": "git commit -m 'Fusion Claudius-Memento: Debug réalité'"
+    },
+    {
+      "name": "god_mode_process_killer",
+      "description": "MODE ADMIN : Élimination divine des processus corrompus",
+      "cost": 0,
+      "effect": "DIVINE_PROCESS_TERMINATION",
+      "target": "all_malicious_processes",
+      "cooldown": 0,
+      "admin_only": true,
+      "native_ability": true,
+      "special": true,
+      "quote": "sudo kill -9 ALL_VINCE_CLONES; systemctl restart reality.service",
+      "commands": [
+        "pkill -f 'spring-boot:run'",
+        "lsof -ti:8080 | xargs kill -9",
+        "killall java",
+        "ps aux | grep -i vince | awk '{print $2}' | xargs kill -9"
+      ]
     }
   ],
   
