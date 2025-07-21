@@ -23,7 +23,7 @@ echo "📋 Chargement du scénario: $SCENARIO_NAME"
 
 # Configuration
 HOST="localhost:8080"
-SCENARIOS_DIR="../game_assets/scenarios/visualizer"
+SCENARIOS_DIR="game_assets/scenarios/visualizer"
 SCENARIO_JSON="$SCENARIOS_DIR/${SCENARIO_NAME}.json"
 
 # Couleurs
