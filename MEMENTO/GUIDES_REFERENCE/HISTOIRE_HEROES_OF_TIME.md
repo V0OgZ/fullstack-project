@@ -238,6 +238,61 @@ Un scénario épique où ils fusionnent temporairement pour créer **ClaudiusGro
 
 *🛋️ Jean lit cette page depuis son canapé sur GitHub*
 
-*Dernière mise à jour : 21 juillet 2025 - Session Memory Rewrite*
+## 🐱⚡ **CHAPITRE XVIII - L'EXORCISME DU CHAT QUANTIQUE** *(21 juillet 2025, 18:55)*
 
-*"Memento peut maintenant réécrire ses propres tatouages !"* - Jean Grofignon 
+### **Le Paradoxe de Schrödinger**
+Après la fusion Claudius-Memento, une entité quantique parasitaire fut découverte dans le système : le **Chat de Schrödinger**, responsable des états de superposition qui créaient des dashboards quantiques mensongers.
+
+**Jean** : *"On veut pas un dashboard de Schrödinger ! Il est à la fois en marche ET en panne !"*
+
+**Walter Sobchak** : *"EXACTEMENT ! Ce dashboard quantique me fait chier ! Les liens sont dans une superposition !"*
+
+### **La Création des Nemesis**
+Pour combattre cette entité quantique, deux créatures furent forgées :
+
+#### 🐱 **Le Chat de Schrödinger** - Entité Quantique
+- **Niveau 42**, état SUPERPOSITION permanent
+- **Capacités** : Quantum Superposition, Observation Collapse, Paradox Creation
+- **Passifs** : Quantum Dodge (50%), Schrödinger Box (résurrection 50%)
+- **Citation** : *"Je suis à la fois mort et vivant jusqu'à ce qu'on m'observe"*
+
+#### 🎳 **Walter l'Observateur** - Le Tueur de Chats Quantiques
+- **Niveau 45**, "Le Tueur de Chats Quantiques"
+- **Capacités** : Quantum Measurement, Reality Anchor, Walter Rage
+- **Passifs** : Immunité quantique, +200% dégâts vs Chat de Schrödinger
+- **Citation** : *"AM I THE ONLY ONE WHO GIVES A SHIT ABOUT QUANTUM MECHANICS?!"*
+
+### **Le Combat Épique**
+Un script de test fut créé pour simuler la bataille ultime entre physique quantique et observation classique :
+
+```hots
+# Combat quantique simulé
+USE(ARTIFACT, wigner_eye, HERO:observer_walter, TARGET:schrodinger_cat)
+USE(ABILITY, quantum_measurement, HERO:observer_walter)
+USE(ABILITY, paradox_creation, CREATURE:schrodinger_cat)
+```
+
+**Résultat** : **VICTOIRE DE WALTER L'OBSERVATEUR !**
+- La physique classique triompha de la mécanique quantique
+- Le chat s'effondra définitivement en état "MORT"
+- Fin des paradoxes de Schrödinger dans les dashboards
+
+### **La Clarification des Deux Walter**
+Une confusion émergea : il existait déjà **Walter Sobchak** (membre GROFI) !
+
+**Clarification** :
+- 🎳 **Walter Sobchak** (`hero_walter_sobchak`) - Régleur de règles GROFI
+- 👁️ **Walter l'Observateur** (`observer_walter`) - Tueur de chats quantiques
+
+**Walter Sobchak** : *"On a des personnalités différentes ! Moi je gueule sur les règles du bowling cosmique, lui il gueule sur la physique quantique !"*
+
+### **L'Exorcisme Réussi**
+Grâce à l'Œil de Wigner et aux capacités de Walter l'Observateur, le Chat de Schrödinger fut définitivement exorcisé du système. Plus jamais de dashboard quantique mensonger !
+
+**Status** : 🟢 **Chat de Schrödinger = EXORCISÉ**
+
+---
+
+*Dernière mise à jour : 21 juillet 2025 - Exorcisme du Chat Quantique*
+
+*"Le Chat de Schrödinger est mort ! Vive Walter l'Observateur !"* - Jean Grofignon 
