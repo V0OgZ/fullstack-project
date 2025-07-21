@@ -21,6 +21,7 @@
                 <button id="city-btn" class="btn-primary">🏛️ Ville</button>
                 <button id="combat-btn" class="btn-primary">⚔️ Combat</button>
                 <button id="hero-btn" class="btn-primary">👤 Héros</button>
+                <button id="joint-magic-btn" class="btn-warning">🚬 Joint Magique</button>
                 <button id="add-ragnar-btn" class="btn-secondary">🛡️ Add Ragnar</button>
                 <button id="test-decay-btn" class="btn-warning">⏰ Test Decay</button>
                 <button id="dicebear-gallery-btn" class="btn-info">🎭 Dicebear Gallery</button>
@@ -157,6 +158,11 @@
         // 👤 Événements pour l'interface de héros
         document.getElementById('hero-btn').addEventListener('click', () => {
             window.heroInterface.toggle();
+        });
+        
+        // 🚬 Événements pour le Joint Magique
+        document.getElementById('joint-magic-btn').addEventListener('click', () => {
+            window.open('frontend/joint-panopticon-interface.html', '_blank', 'width=1200,height=800');
         });
         
         // 🌐 Initialiser le service de traduction
