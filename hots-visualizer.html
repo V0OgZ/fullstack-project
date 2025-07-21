@@ -1421,11 +1421,18 @@
             }
             
         // Utilitaires
-        function getItemIcon(category) {
+        function getItemIcon(category, type) {
+            // Icônes spéciales pour les objets de Domburg
+            if (type === 'ANCHOR_LOCATION') return '🌑';
+            if (type === 'MINOR_ANCHOR_POINT') return '🌬️';
+            
+            // Icônes par catégorie
             const icons = {
                 heroes: '⚔️',
                 artifacts: '🔮',
-                creatures: '🐉'
+                creatures: '🐉',
+                locations: '🏛️',
+                anchors: '⚓'
             };
             return icons[category] || '📦';
         }
@@ -1434,7 +1441,9 @@
             const names = {
                 heroes: 'Héros',
                 artifacts: 'Artefact',
-                creatures: 'Créature'
+                creatures: 'Créature',
+                locations: 'Lieu',
+                anchors: 'Point d\'Ancrage'
             };
             return names[category] || category;
         }
@@ -1442,8 +1451,12 @@
         function getRarityClass(rarity) {
             const classes = {
                 LEGENDARY: 'rarity-legendary',
+                LEGENDARY_FIXED: 'rarity-unique',
                 MYTHIC: 'rarity-mythic',
-                EPIC: 'rarity-epic'
+                EPIC: 'rarity-epic',
+                RARE: 'rarity-rare',
+                'Unique': 'rarity-unique',
+                'Rare': 'rarity-rare'
             };
             return classes[rarity] || '';
         }
