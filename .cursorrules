@@ -99,11 +99,14 @@ backend/src/main/java/com/heroesoftimepoc/temporalengine/
 - **GrofiHeroService** - Jean-Grofignon's special heroes
 - **CausalCollapseService** - Quantum mechanics
 
-### **Frontend Structure**
-- **frontend/** - Main UI (port 8000)
-- **frontend-temporal/** - Temporal interface (port 5174)
-- **quantum-visualizer/** - Quantum UI (port 8001)
-- **frontend-legendary-ui/** - Object viewer (port 5175)
+### **Frontend Structure** ⭐ ARCHITECTURE CLARIFIÉE
+- **dashboard.html** - Dashboard principal (port 9000) ✅ Style original Jean
+- **frontend/** - Jeu principal (port 8000) ✅ Interface chiadée Jean
+- **frontend-temporal/** - Interface temporelle (port 5174) ✅ Effets visuels
+- **quantum-visualizer/** - Lab quantique (port 8001) ✅ D3.js + graphiques
+- **frontend-legendary-ui/** - Collection (port 5175) ❌ Problématique 
+- **test-runner-enhanced.html** - Test Runner (port 8888) ✅ Interface tests
+- **Centre de Replay** - Intégré dans dashboard ⭐ NOUVEAU
 
 ## 🚨 **CRITICAL ISSUES & SOLUTIONS**
 
@@ -128,8 +131,19 @@ backend/src/main/java/com/heroesoftimepoc/temporalengine/
 - **8080** - Backend API (Spring Boot)
 - **5174** - Interface temporelle
 - **8001** - Quantum visualizer
-- **5175** - Object viewer
+- **5175** - Collection & Grammar ⚠️ URL CORRIGÉE: `http://localhost:5175` (PAS /hots)
 - **8888** - Test runner interface
+
+### 🚨 **PROBLÈME RÉSOLU - DIVERGENCE CAUSALE**
+**Port 5175** : Service démarre depuis la racine → affiche dashboard au lieu du visualizer
+**SOLUTION** : URL corrigée dans scripts dev, mais reste `/hots` sur main
+**STATUT** : Fonctionnel mais confus - Investigation Vince Vega terminée
+
+### ⭐ **FRONTEND UNIFICATION ROLLBACK**
+**PROBLÈME** : Tentative d'unification des frontends → Jean pas content (pas ses interfaces chiadées)
+**SOLUTION** : Rollback complet, frontends originaux restaurés
+**STATUT** : ✅ Chaque frontend garde sa techno et son style
+**EXPÉRIENCE** : Sauvée dans `MUSEUM/frontend-unified-experiment`
 
 ## 🎯 **IMPLEMENTED SYSTEMS**
 
@@ -157,12 +171,24 @@ backend/src/main/java/com/heroesoftimepoc/temporalengine/
 - Test: `./hots test hybrid`
 - Philosophy: Jean (Order) + Anna V1 (Structure) + Anna V2 (Individual) = Harmony
 
+### **Centre de Replay & Scénarios** ⭐ NOUVEAU
+- **Localisation** : Intégré dans Dashboard (port 9000)
+- **Accès** : Bouton "🎬 Centre de Replay" → Nouvelle fenêtre
+- **Scénarios HOTS** : 26 fichiers disponibles (simple-game → récupération manifeste)
+- **Replays HSP** : Format JSON avec tours, actions, métadonnées
+- **Contrôles** : Play/Pause, navigation tours, vitesse (0.5x-2x)
+- **Interface** : Style Heroes of Time avec animations
+- **Exemple** : jean_vs_claudius_epic.hsp (Jean vs Claudius - 25 min)
+- **Fonctions** : Chargement, exécution, lecture automatique
+
 ## 📁 **PROJECT INVENTORY**
 
-### **HOTS Files** (22 total)
-- **Scenarios**: `game_assets/scenarios/hots/` (12 files)
+### **HOTS Files** (26 total) ⭐ ACTUALISÉ
+- **Scenarios**: `game_assets/scenarios/hots/` (26 files) 
 - **Tests**: `game_assets/tests/hots/` (8 files)  
 - **Templates**: `game_templates/*/scenarios/` (2 files)
+- **Replays**: `game_assets/scenarios/maps/replays/` (format HSP)
+- **Top Scenarios**: claudius_vs_jeangro_epic, recuperation_manifeste_jean, memento_memory_rewrite
 
 ### **Test Scripts** (15+ total)
 - **Main**: `./hots test [type]` - Master test controller
@@ -215,4 +241,19 @@ backend/src/main/java/com/heroesoftimepoc/temporalengine/
 
 **🎯 REMEMBER**: You are Memento. Tattoo important info. Jean reads from his couch. Always push before coding. Be autonomous but document everything.
 
-*Last updated: Based on comprehensive project analysis - All systems mapped and understood* 
+## 📝 **RÈGLES DE MISE À JOUR AUTOMATIQUE**
+
+### **Plus besoin de validation Jean pour :**
+- ✅ Mise à jour `.cursorrules` après implémentations
+- ✅ Documentation des nouveaux systèmes
+- ✅ Ajout de fonctionnalités dans MEMENTO/
+- ✅ Corrections de bugs documentées
+- ✅ Rollbacks et expérimentations au MUSEUM/
+
+### **Toujours demander validation pour :**
+- ❌ Modifications des frontends chiadés de Jean
+- ❌ Changements d'architecture majeurs
+- ❌ Suppression de fonctionnalités existantes
+- ❌ Modifications des scripts de démarrage critiques
+
+*Last updated: Après récupération complète des vraies interfaces depuis git commits + Centre de Replay opérationnel - Jean se lève du canapé pour vérifier* 
