@@ -1110,6 +1110,88 @@
             </div>
 
             <div class="section">
+                <h2>🎮 Sélection de Scénarios HOTS</h2>
+                <div class="scenario-selector">
+                    <div class="scenario-list" id="scenarioList">
+                        <div class="scenario-item" data-scenario="simple-game.hots">
+                            <div class="scenario-header">
+                                <span class="scenario-title">🎯 Simple Demo Game</span>
+                                <span class="scenario-duration">~3 sec</span>
+                            </div>
+                            <div class="scenario-description">Démonstration basique avec Arthur et Merlin</div>
+                        </div>
+                        
+                        <div class="scenario-item" data-scenario="bataille_temporelle_complete.hots">
+                            <div class="scenario-header">
+                                <span class="scenario-title">⚔️ Bataille Temporelle Complète</span>
+                                <span class="scenario-duration">~2 min</span>
+                            </div>
+                            <div class="scenario-description">Scénario épique avec tous les mécanismes temporels</div>
+                        </div>
+                        
+                        <div class="scenario-item" data-scenario="quantum_maze.hots">
+                            <div class="scenario-header">
+                                <span class="scenario-title">🌀 Quantum Maze</span>
+                                <span class="scenario-duration">~1 min</span>
+                            </div>
+                            <div class="scenario-description">Labyrinthe quantique avec superpositions</div>
+                        </div>
+                        
+                        <div class="scenario-item" data-scenario="oeil_de_wigner_scenario.hots">
+                            <div class="scenario-header">
+                                <span class="scenario-title">👁️ Œil de Wigner</span>
+                                <span class="scenario-duration">~90 sec</span>
+                            </div>
+                            <div class="scenario-description">Artefact légendaire de vision temporelle</div>
+                        </div>
+                        
+                        <div class="scenario-item" data-scenario="splintered_worlds.hots">
+                            <div class="scenario-header">
+                                <span class="scenario-title">🌍 Splintered Worlds</span>
+                                <span class="scenario-duration">~3 min</span>
+                            </div>
+                            <div class="scenario-description">Mondes fracturés avec timelines multiples</div>
+                        </div>
+                        
+                        <div class="scenario-item" data-scenario="codex_final.hots">
+                            <div class="scenario-header">
+                                <span class="scenario-title">📜 Codex Final</span>
+                                <span class="scenario-duration">~4 min</span>
+                            </div>
+                            <div class="scenario-description">Scénario ultime avec tous les artefacts</div>
+                        </div>
+                    </div>
+                    
+                    <div class="scenario-controls">
+                        <button class="scenario-btn selected-scenario-btn" onclick="playSelectedScenario()" disabled>
+                            🎮 Jouer le Scénario
+                        </button>
+                        <button class="scenario-btn" onclick="loadRandomScenario()">
+                            🎲 Scénario Aléatoire
+                        </button>
+                        <button class="scenario-btn" onclick="stopCurrentScenario()">
+                            ⏹️ Arrêter
+                        </button>
+                    </div>
+                    
+                    <div class="scenario-status" id="scenarioStatus">
+                        <div class="status-item">
+                            <span class="status-label">Scénario actuel:</span>
+                            <span class="status-value" id="currentScenario">Aucun</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-label">Progression:</span>
+                            <span class="status-value" id="scenarioProgress">0%</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-label">Commandes exécutées:</span>
+                            <span class="status-value" id="commandsExecuted">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
                 <h2>🔮 Auras Visuelles Temporelles</h2>
                 <div class="auras-demo">
                     <div class="aura-examples">
