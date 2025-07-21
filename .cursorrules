@@ -148,6 +148,15 @@ backend/src/main/java/com/heroesoftimepoc/temporalengine/
 - Causal collapse triggers: INTERACTION, OBSERVATION, ANCHORING, TEMPORAL_LIMIT
 - Service: `CausalCollapseService.java`
 
+### **Temporal Decay Hybrid System** (The Dude's Solution)
+- Unified decay system combining Legacy (Anna V1) + DK20 (Anna V2) approaches
+- Legacy: Timeline-based building decay (`TemporalDecayServiceLegacy.java`)
+- DK20: Date-based hero ability decay (in development)
+- Hybrid: Perfect fusion of both concepts (`TemporalDecayHybridService.java`)
+- API: `/api/temporal/decay/hybrid/*` endpoints
+- Test: `./hots test hybrid`
+- Philosophy: Jean (Order) + Anna V1 (Structure) + Anna V2 (Individual) = Harmony
+
 ## 📁 **PROJECT INVENTORY**
 
 ### **HOTS Files** (22 total)

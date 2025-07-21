@@ -47,29 +47,29 @@
     • API REST Complète            ✅
     
  🎯 Port: 8080 | 🔧 Profile: default | 📊 Version: 1.0.0 
-2025-07-21T10:30:18.282+02:00  INFO 11147 --- [  restartedMain] c.h.t.TemporalEngineApplication          : Starting TemporalEngineApplication using Java 17.0.15 with PID 11147 (/Users/admin/HOT/Heroes-of-Time/backend/target/classes started by admin in /Users/admin/HOT/Heroes-of-Time/backend)
-2025-07-21T10:30:18.284+02:00  INFO 11147 --- [  restartedMain] c.h.t.TemporalEngineApplication          : No active profile set, falling back to 1 default profile: "default"
-2025-07-21T10:30:18.305+02:00  INFO 11147 --- [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2025-07-21T10:30:18.306+02:00  INFO 11147 --- [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2025-07-21T10:30:18.543+02:00  INFO 11147 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-07-21T10:30:18.567+02:00  INFO 11147 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 18 ms. Found 5 JPA repository interfaces.
-2025-07-21T10:30:18.911+02:00  INFO 11147 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-07-21T10:30:18.915+02:00  INFO 11147 --- [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-07-21T10:30:18.916+02:00  INFO 11147 --- [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
-2025-07-21T10:30:18.934+02:00  INFO 11147 --- [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-07-21T10:30:18.934+02:00  INFO 11147 --- [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 628 ms
-2025-07-21T10:30:18.941+02:00  INFO 11147 --- [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Starting...
-2025-07-21T10:30:19.037+02:00  INFO 11147 --- [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HeroesOfTimePool - Added connection conn0: url=jdbc:h2:mem:heroesdb user=SA
-2025-07-21T10:30:19.057+02:00  INFO 11147 --- [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Start completed.
-2025-07-21T10:30:19.065+02:00  INFO 11147 --- [  restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:heroesdb'
-2025-07-21T10:30:19.126+02:00  INFO 11147 --- [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-07-21T10:30:19.155+02:00  INFO 11147 --- [  restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
-2025-07-21T10:30:19.170+02:00  INFO 11147 --- [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-07-21T10:30:19.541+02:00  INFO 11147 --- [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-07-21T10:30:19.561+02:00  WARN 11147 --- [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-07-21T10:30:20.056+02:00  INFO 11147 --- [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-21T10:36:16.677+02:00  INFO 12881 --- [  restartedMain] c.h.t.TemporalEngineApplication          : Starting TemporalEngineApplication using Java 17.0.15 with PID 12881 (/Users/admin/HOT/Heroes-of-Time/backend/target/classes started by admin in /Users/admin/HOT/Heroes-of-Time/backend)
+2025-07-21T10:36:16.678+02:00  INFO 12881 --- [  restartedMain] c.h.t.TemporalEngineApplication          : No active profile set, falling back to 1 default profile: "default"
+2025-07-21T10:36:16.698+02:00  INFO 12881 --- [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-07-21T10:36:16.698+02:00  INFO 12881 --- [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-07-21T10:36:16.915+02:00  INFO 12881 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-21T10:36:16.938+02:00  INFO 12881 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 18 ms. Found 5 JPA repository interfaces.
+2025-07-21T10:36:17.277+02:00  INFO 12881 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-07-21T10:36:17.282+02:00  INFO 12881 --- [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-07-21T10:36:17.282+02:00  INFO 12881 --- [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-07-21T10:36:17.301+02:00  INFO 12881 --- [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-07-21T10:36:17.302+02:00  INFO 12881 --- [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 603 ms
+2025-07-21T10:36:17.308+02:00  INFO 12881 --- [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Starting...
+2025-07-21T10:36:17.402+02:00  INFO 12881 --- [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HeroesOfTimePool - Added connection conn0: url=jdbc:h2:mem:heroesdb user=SA
+2025-07-21T10:36:17.421+02:00  INFO 12881 --- [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Start completed.
+2025-07-21T10:36:17.428+02:00  INFO 12881 --- [  restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:heroesdb'
+2025-07-21T10:36:17.483+02:00  INFO 12881 --- [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-21T10:36:17.507+02:00  INFO 12881 --- [  restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2025-07-21T10:36:17.522+02:00  INFO 12881 --- [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-07-21T10:36:17.872+02:00  INFO 12881 --- [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-21T10:36:17.888+02:00  WARN 12881 --- [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-21T10:36:18.344+02:00  INFO 12881 --- [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 Hibernate: drop table if exists forged_objects cascade 
-2025-07-21T10:30:20.063+02:00  INFO 11147 --- [  restartedMain] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@5bb19574] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-07-21T10:36:18.350+02:00  INFO 12881 --- [  restartedMain] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7d1859b3] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
 Hibernate: drop table if exists game_history cascade 
 Hibernate: drop table if exists game_players cascade 
 Hibernate: drop table if exists game_tiles cascade 
@@ -85,7 +85,7 @@ Hibernate: drop table if exists tile_effects cascade
 Hibernate: drop table if exists tile_items cascade 
 Hibernate: drop table if exists tile_occupants cascade 
 Hibernate: create table forged_objects (is_dangerous boolean, stability_rating float(53), times_used integer, forge_time timestamp(6), game_id bigint, id bigint generated by default as identity, effect varchar(500), formula varchar(1000), cost varchar(255), forged_by varchar(255), name varchar(255) not null, type varchar(255) not null, primary key (id))
-2025-07-21T10:30:20.067+02:00  INFO 11147 --- [  restartedMain] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@71f67eb2] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-07-21T10:36:18.354+02:00  INFO 12881 --- [  restartedMain] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@46504851] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
 Hibernate: create table game_history (game_id bigint not null, event varchar(255))
 Hibernate: create table game_players (game_id bigint not null, player_id varchar(255))
 Hibernate: create table game_tiles (defense_bonus integer, has_psi_states boolean, is_locked boolean, is_temporal_zone boolean, lock_duration integer, movement_cost integer, temporal_energy_bonus integer, x integer not null, y integer not null, game_id bigint, id bigint generated by default as identity, building_owner varchar(255), building_type varchar(255), temporal_zone_type varchar(255), terrain varchar(255), primary key (id))
@@ -114,57 +114,57 @@ Hibernate: alter table if exists temporal_artifacts add constraint FK4gwvr3vnipo
 Hibernate: alter table if exists tile_effects add constraint FK3s6ndlrmj9lbvuqiew9vp9s98 foreign key (tile_id) references game_tiles
 Hibernate: alter table if exists tile_items add constraint FK1b41902nqng8okqb0g1q3dqj6 foreign key (tile_id) references game_tiles
 Hibernate: alter table if exists tile_occupants add constraint FKia56skupqk3qxypotqpovr3gb foreign key (tile_id) references game_tiles
-2025-07-21T10:30:20.092+02:00  INFO 11147 --- [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-07-21T10:30:20.284+02:00  INFO 11147 --- [  restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-07-21T10:36:18.377+02:00  INFO 12881 --- [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-21T10:36:18.550+02:00  INFO 12881 --- [  restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
 ✅ Héros GROFI chargé: Jean-Grofignon (LEGENDARY)
 ✅ Héros GROFI chargé: The Dude (compagnon)
 ✅ Héros GROFI chargé: Vince Vega (compagnon)
 ✅ Héros GROFI chargé: Walter (compagnon)
 🦸 4 héros GROFI chargés avec succès
-2025-07-21T10:30:20.717+02:00  WARN 11147 --- [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-07-21T10:30:20.788+02:00 DEBUG 11147 --- [  restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 152 mappings in 'requestMappingHandlerMapping'
-2025-07-21T10:30:20.835+02:00 DEBUG 11147 --- [  restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-2025-07-21T10:30:20.849+02:00 DEBUG 11147 --- [  restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2025-07-21T10:30:20.867+02:00 DEBUG 11147 --- [  restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
-2025-07-21T10:30:20.916+02:00  INFO 11147 --- [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2025-07-21T10:30:20.935+02:00  INFO 11147 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
-2025-07-21T10:30:20.940+02:00  INFO 11147 --- [  restartedMain] c.h.t.TemporalEngineApplication          : Started TemporalEngineApplication in 2.831 seconds (process running for 3.01)
-2025-07-21T10:30:21.389+02:00  INFO 11147 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-07-21T10:30:21.389+02:00  INFO 11147 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-07-21T10:30:21.389+02:00 DEBUG 11147 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
-2025-07-21T10:30:21.390+02:00 DEBUG 11147 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
-2025-07-21T10:30:21.390+02:00 DEBUG 11147 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
-2025-07-21T10:30:21.390+02:00 DEBUG 11147 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@66b49b24
-2025-07-21T10:30:21.391+02:00 DEBUG 11147 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@685ae11b
-2025-07-21T10:30:21.391+02:00 DEBUG 11147 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
-2025-07-21T10:30:21.391+02:00  INFO 11147 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2025-07-21T10:30:21.394+02:00 DEBUG 11147 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/health", parameters={}
-2025-07-21T10:30:21.398+02:00 DEBUG 11147 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#health()
+2025-07-21T10:36:18.957+02:00  WARN 12881 --- [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-21T10:36:19.025+02:00 DEBUG 12881 --- [  restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 152 mappings in 'requestMappingHandlerMapping'
+2025-07-21T10:36:19.067+02:00 DEBUG 12881 --- [  restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2025-07-21T10:36:19.079+02:00 DEBUG 12881 --- [  restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-07-21T10:36:19.093+02:00 DEBUG 12881 --- [  restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-07-21T10:36:19.140+02:00  INFO 12881 --- [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-07-21T10:36:19.154+02:00  INFO 12881 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2025-07-21T10:36:19.158+02:00  INFO 12881 --- [  restartedMain] c.h.t.TemporalEngineApplication          : Started TemporalEngineApplication in 2.638 seconds (process running for 2.807)
+2025-07-21T10:36:20.079+02:00  INFO 12881 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-07-21T10:36:20.079+02:00  INFO 12881 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-07-21T10:36:20.079+02:00 DEBUG 12881 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2025-07-21T10:36:20.079+02:00 DEBUG 12881 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2025-07-21T10:36:20.079+02:00 DEBUG 12881 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2025-07-21T10:36:20.080+02:00 DEBUG 12881 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@50ec0c1f
+2025-07-21T10:36:20.080+02:00 DEBUG 12881 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@9605816
+2025-07-21T10:36:20.080+02:00 DEBUG 12881 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2025-07-21T10:36:20.080+02:00  INFO 12881 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-07-21T10:36:20.083+02:00 DEBUG 12881 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/health", parameters={}
+2025-07-21T10:36:20.088+02:00 DEBUG 12881 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.ApiGamesController#health()
 Hibernate: select count(*) from games g1_0
-2025-07-21T10:30:21.449+02:00 DEBUG 11147 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2025-07-21T10:30:21.449+02:00 DEBUG 11147 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{activeGames=0, service=Heroes of Time API, version=POC-0.1, status=healthy, timestamp=1753086621404 (truncated)...]
-2025-07-21T10:30:21.456+02:00 DEBUG 11147 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
-2025-07-21T10:30:21.465+02:00 DEBUG 11147 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/temporal/decay/hybrid/info", parameters={}
-2025-07-21T10:30:21.466+02:00 DEBUG 11147 --- [nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.TemporalDecayHybridController#getHybridSystemInfo()
-2025-07-21T10:30:21.466+02:00 DEBUG 11147 --- [nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2025-07-21T10:30:21.466+02:00 DEBUG 11147 --- [nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{systems={personal={targets=Vision temporelle, interactions NPCs, stabilité artefacts, logic=Hero ca (truncated)...]
-2025-07-21T10:30:21.467+02:00 DEBUG 11147 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
-2025-07-21T10:30:21.493+02:00 DEBUG 11147 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : POST "/api/games/create", parameters={}
-2025-07-21T10:30:21.495+02:00  WARN 11147 --- [nio-8080-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
-2025-07-21T10:30:21.495+02:00 DEBUG 11147 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 405 METHOD_NOT_ALLOWED
-2025-07-21T10:30:21.497+02:00 DEBUG 11147 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
-2025-07-21T10:30:21.497+02:00 DEBUG 11147 --- [nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
-2025-07-21T10:30:21.499+02:00 DEBUG 11147 --- [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2025-07-21T10:30:21.499+02:00 DEBUG 11147 --- [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Mon Jul 21 10:30:21 CEST 2025, status=405, error=Method Not Allowed, trace=org.springfram (truncated)...]
-2025-07-21T10:30:21.508+02:00 DEBUG 11147 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 405
-2025-07-21T10:30:21.521+02:00 DEBUG 11147 --- [nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/api/temporal/decay/info", parameters={}
-2025-07-21T10:30:21.522+02:00 DEBUG 11147 --- [nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.TemporalDecayController#getDecaySystemInfo()
-2025-07-21T10:30:21.522+02:00 DEBUG 11147 --- [nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2025-07-21T10:30:21.523+02:00 DEBUG 11147 --- [nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{protection={protectionEffect=50% reduction in decay rate, futureVisionItems=Lunettes de Wigner, Spy (truncated)...]
-2025-07-21T10:30:21.524+02:00 DEBUG 11147 --- [nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
-2025-07-21T10:30:21.541+02:00  INFO 11147 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-21T10:36:20.139+02:00 DEBUG 12881 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-21T10:36:20.140+02:00 DEBUG 12881 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{activeGames=0, service=Heroes of Time API, version=POC-0.1, status=healthy, timestamp=1753086980093 (truncated)...]
+2025-07-21T10:36:20.146+02:00 DEBUG 12881 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-21T10:36:20.155+02:00 DEBUG 12881 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/temporal/decay/hybrid/info", parameters={}
+2025-07-21T10:36:20.155+02:00 DEBUG 12881 --- [nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.TemporalDecayHybridController#getHybridSystemInfo()
+2025-07-21T10:36:20.156+02:00 DEBUG 12881 --- [nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-21T10:36:20.156+02:00 DEBUG 12881 --- [nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{author=The Dude (Vince Vega Temporal Consultant), description=Combines the best of both Anna the Ma (truncated)...]
+2025-07-21T10:36:20.157+02:00 DEBUG 12881 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-21T10:36:20.184+02:00 DEBUG 12881 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : POST "/api/games/create", parameters={}
+2025-07-21T10:36:20.187+02:00  WARN 12881 --- [nio-8080-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2025-07-21T10:36:20.187+02:00 DEBUG 12881 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 405 METHOD_NOT_ALLOWED
+2025-07-21T10:36:20.190+02:00 DEBUG 12881 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-21T10:36:20.191+02:00 DEBUG 12881 --- [nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-21T10:36:20.193+02:00 DEBUG 12881 --- [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-21T10:36:20.193+02:00 DEBUG 12881 --- [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Mon Jul 21 10:36:20 CEST 2025, status=405, error=Method Not Allowed, trace=org.springfram (truncated)...]
+2025-07-21T10:36:20.202+02:00 DEBUG 12881 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 405
+2025-07-21T10:36:20.216+02:00 DEBUG 12881 --- [nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/api/temporal/decay/info", parameters={}
+2025-07-21T10:36:20.217+02:00 DEBUG 12881 --- [nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.TemporalDecayController#getDecaySystemInfo()
+2025-07-21T10:36:20.217+02:00 DEBUG 12881 --- [nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-21T10:36:20.217+02:00 DEBUG 12881 --- [nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{system=Temporal Decay System by Anna the Martopicker, author=Anna the Martopicker, Architecte du Te (truncated)...]
+2025-07-21T10:36:20.219+02:00 DEBUG 12881 --- [nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-21T10:36:20.235+02:00  INFO 12881 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 Hibernate: drop table if exists forged_objects cascade 
-2025-07-21T10:30:21.542+02:00  INFO 11147 --- [ionShutdownHook] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6fe654ca] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2025-07-21T10:36:20.236+02:00  INFO 12881 --- [ionShutdownHook] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@23c1b401] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
 Hibernate: drop table if exists game_history cascade 
 Hibernate: drop table if exists game_players cascade 
 Hibernate: drop table if exists game_tiles cascade 
@@ -179,5 +179,5 @@ Hibernate: drop table if exists temporal_artifacts cascade
 Hibernate: drop table if exists tile_effects cascade 
 Hibernate: drop table if exists tile_items cascade 
 Hibernate: drop table if exists tile_occupants cascade 
-2025-07-21T10:30:21.547+02:00  INFO 11147 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Shutdown initiated...
-2025-07-21T10:30:21.548+02:00  INFO 11147 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Shutdown completed.
+2025-07-21T10:36:20.243+02:00  INFO 12881 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Shutdown initiated...
+2025-07-21T10:36:20.244+02:00  INFO 12881 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HeroesOfTimePool - Shutdown completed.
