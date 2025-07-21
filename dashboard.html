@@ -80,6 +80,19 @@
             margin: 0 auto;
         }
 
+        /* Panel Admin Multijoueur - Taille de 2 fiches */
+        #admin-multiplayer-panel {
+            grid-column: span 2;
+            min-height: 400px;
+        }
+
+        /* Responsive pour le panel admin */
+        @media (max-width: 1200px) {
+            #admin-multiplayer-panel {
+                grid-column: span 1;
+            }
+        }
+
         .ui-panel {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
@@ -443,56 +456,71 @@
                         </a>
                     </div>
 
-            <!-- 🎮 PANEL ADMIN MULTIJOUEUR -->
-            <div class="dashboard-panel admin-panel">
-                <h3>🎮 Admin Multijouueur</h3>
-                <p>Mode Administrateur - Jean sur le canapé</p>
-                <div class="panel-buttons">
-                    <button class="dashboard-btn primary" onclick="openAdminMultiplayer()">
-                        🎮 Interface Admin
-                    </button>
-                    <button class="dashboard-btn secondary" onclick="quickStartMultiplayer()">
-                        🚀 Démarrage Rapide
-                    </button>
-                    <button class="dashboard-btn warning" onclick="testMultiplayer()">
-                        🧪 Test Complet
-                    </button>
-                </div>
-                            <div class="admin-status">
-                <span id="admin-connection-status">🔴 Déconnecté</span>
-                <span id="admin-game-status">Aucun jeu actif</span>
+        <!-- Admin Multijoueur -->
+        <div class="ui-panel" id="admin-multiplayer-panel" style="grid-column: span 2; border: 3px solid #ff6b6b; background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 255, 255, 0.05)); box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);">
+            <div class="panel-icon" style="text-shadow: 0 0 10px #ff6b6b;">🎮</div>
+            <h2 class="panel-title" style="color: #ff6b6b;">Admin Multijoueur</h2>
+            <p class="panel-description">Mode Administrateur - Jean sur le canapé - Gestion des parties multijoueur</p>
+            <div class="panel-url">Interface Admin Intégrée</div>
+            <ul class="panel-features">
+                <li>🎮 Interface Admin complète</li>
+                <li>🚀 Démarrage rapide multijoueur</li>
+                <li>🧪 Tests complets automatisés</li>
+                <li>📊 Monitoring des parties actives</li>
+                <li>👥 Gestion des joueurs</li>
+                <li>⚙️ Configuration avancée</li>
+            </ul>
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 15px;">
+                <button class="launch-button" onclick="openAdminMultiplayer()" style="background: linear-gradient(45deg, #ff6b6b, #ee5a52);">
+                    🎮 Interface Admin
+                </button>
+                <button class="launch-button" onclick="quickStartMultiplayer()" style="background: linear-gradient(45deg, #4ecdc4, #45b7d1);">
+                    🚀 Démarrage Rapide
+                </button>
+                <button class="launch-button" onclick="testMultiplayer()" style="background: linear-gradient(45deg, #ffa726, #ff9800);">
+                    🧪 Test Complet
+                </button>
             </div>
-            
-            <!-- 🚬 JOINT OUBLIÉ PANEL -->
-            <div class="dashboard-panel joint-panel" style="border: 2px solid #4ecdc4; background: rgba(78, 205, 196, 0.1);">
-                <h3>🚬 Le Joint Oublié de Jean-Grofignon</h3>
-                <p>Artefact légendaire - Accès Panopticon halluciné</p>
-                <div class="panel-buttons">
-                    <button class="dashboard-btn primary" onclick="openJointInterface()" style="background: linear-gradient(45deg, #4ecdc4, #44a08d);">
-                        🚬 Utiliser le Joint
-                    </button>
-                    <button class="dashboard-btn secondary" onclick="openPanopticon3D()">
-                        🔮 Panopticon 3D
-                    </button>
-                    <button class="dashboard-btn warning" onclick="testJointAccess()">
-                        🧪 Test Accès
-                    </button>
-                    <button class="dashboard-btn info" onclick="testJointInterface()" style="background: linear-gradient(45deg, #17a2b8, #138496);">
-                        🎭 Test Interface
-                    </button>
-                    <button class="dashboard-btn magic" onclick="quickJointAccess()" style="background: linear-gradient(45deg, #9b59b6, #8e44ad);">
-                        ✨ Joint Magique
-                    </button>
-                    <button class="dashboard-btn dicebar" onclick="openDicebarGallery()" style="background: linear-gradient(45deg, #e74c3c, #c0392b);">
-                        🎭 Galerie Dicebear
-                    </button>
-                </div>
-                <div class="joint-status">
-                    <span id="joint-status">🔒 Verrouillé</span>
-                    <span id="joint-warning">Lecture seule - Effet halluciné</span>
+            <div style="margin-top: 15px; padding: 10px; background: rgba(255, 255, 255, 0.1); border-radius: 8px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span id="admin-connection-status" style="color: #ff6b6b;">🔴 Déconnecté</span>
+                    <span id="admin-game-status" style="color: #a0a0a0;">Aucun jeu actif</span>
                 </div>
             </div>
+        </div>
+
+        <!-- Le Joint Oublié de Jean-Grofignon -->
+        <div class="ui-panel" id="joint-panel" style="border: 3px solid #4ecdc4; background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(255, 255, 255, 0.05)); box-shadow: 0 0 20px rgba(78, 205, 196, 0.3);">
+            <div class="panel-icon" style="text-shadow: 0 0 10px #4ecdc4;">🚬</div>
+            <h2 class="panel-title" style="color: #4ecdc4;">Le Joint Oublié</h2>
+            <p class="panel-description">Artefact légendaire de Jean-Grofignon - Accès Panopticon halluciné</p>
+            <div class="panel-url">Interface Hallucinée</div>
+            <ul class="panel-features">
+                <li>🚬 Utiliser le Joint Magique</li>
+                <li>🔮 Panopticon 3D Vision</li>
+                <li>🧪 Tests d'accès spéciaux</li>
+                <li>🎭 Galerie Dicebear</li>
+                <li>✨ Effets hallucinés</li>
+                <li>🌟 Mode lecture seule</li>
+            </ul>
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 15px;">
+                <button class="launch-button" onclick="openJointInterface()" style="background: linear-gradient(45deg, #4ecdc4, #44a08d);">
+                    🚬 Utiliser le Joint
+                </button>
+                <button class="launch-button" onclick="openPanopticon3D()" style="background: linear-gradient(45deg, #9b59b6, #8e44ad);">
+                    🔮 Panopticon 3D
+                </button>
+                <button class="launch-button" onclick="openDicebarGallery()" style="background: linear-gradient(45deg, #e74c3c, #c0392b);">
+                    🎭 Galerie Dicebear
+                </button>
             </div>
+            <div style="margin-top: 15px; padding: 10px; background: rgba(255, 255, 255, 0.1); border-radius: 8px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span id="joint-status" style="color: #4ecdc4;">🔒 Verrouillé</span>
+                    <span id="joint-warning" style="color: #ffa726;">Lecture seule - Effet halluciné</span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <button class="refresh-button" onclick="checkAllServices()" title="Actualiser les statuts">
