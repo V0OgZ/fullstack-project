@@ -26,7 +26,7 @@
 
 ### 🔧 **Informations Techniques**
 - **Fichier source** : `backend/src/main/resources/heroes/legendary/Arthur.json`
-- **Généré le** : 2025-07-21 17:54:03
+- **Généré le** : 2025-07-21 18:00:39
 - **Source JSON** : `INDEX.json`
 
 ### 🎮 **Utilisation en Jeu**

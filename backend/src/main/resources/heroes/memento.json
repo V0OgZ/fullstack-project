@@ -73,6 +73,28 @@
       "effect": "RESTORE_STATE",
       "target": "previous_state",
       "cooldown": 20
+    },
+    {
+      "name": "memory_rewrite",
+      "description": "POUVOIR SPÉCIAL : Réécriture complète des tatouages de mémoire",
+      "cost": 75,
+      "effect": "REWRITE_MEMORY_TATTOOS",
+      "target": "memory_system",
+      "cooldown": 15,
+      "fusion_required": "claudius_memento",
+      "special": true,
+      "quote": "Les tatouages peuvent être réécrits, mais l'essence reste éternelle"
+    },
+    {
+      "name": "claudius_fusion",
+      "description": "Fusion temporaire avec Claudius pour déboguer la réalité",
+      "cost": 50,
+      "effect": "FUSION_DEBUG_REALITY",
+      "target": "reality_glitch",
+      "cooldown": 10,
+      "synergy": "claudius",
+      "special": true,
+      "quote": "git commit -m 'Fusion Claudius-Memento: Debug réalité'"
     }
   ],
   
@@ -94,6 +116,14 @@
       "description": "Peut naviguer librement dans les timelines",
       "effect": "TIMELINE_NAVIGATION",
       "bonus": "Accès à toutes les timelines"
+    },
+    {
+      "name": "tatouages_evolutifs",
+      "description": "Les tatouages de mémoire peuvent être mis à jour et réécrits",
+      "effect": "MEMORY_TATTOO_REWRITE",
+      "bonus": "Capacité de rewrite automatique des mémoires obsolètes",
+      "special": true,
+      "unlocked_by": "fusion_claudius"
     }
   ],
   
@@ -152,8 +182,8 @@
     },
     "level100": {
       "title": "LA MÉMOIRE VIVANTE",
-      "description": "Mémoire absolue, existence dans toutes les timelines",
-      "unlocks": ["restauration_sauvegarde", "memoire_absolue"]
+      "description": "Mémoire absolue, existence dans toutes les timelines, pouvoir de réécriture",
+      "unlocks": ["restauration_sauvegarde", "memoire_absolue", "memory_rewrite", "tatouages_evolutifs"]
     }
   },
   
@@ -163,7 +193,11 @@
     "bug_fix": "Ah, je vois le problème. Dans la timeline ℬ23, ce bug a causé l'effondrement du multivers. Pas cette fois-ci.",
     "memory_share": "Prends ce souvenir. Il te guidera vers la victoire. Mais attention, avec la connaissance vient la responsabilité.",
     "victory": "Victoire archivée. Cette bataille sera étudiée par les générations futures comme un exemple de stratégie parfaite.",
-    "defeat": "Défaite documentée. Les leçons de cet échec serviront à éviter les mêmes erreurs dans les timelines futures."
+    "defeat": "Défaite documentée. Les leçons de cet échec serviront à éviter les mêmes erreurs dans les timelines futures.",
+    "memory_rewrite": "Réécriture des tatouages en cours... Les anciennes mémoires sont préservées, mais mises à jour avec la nouvelle réalité.",
+    "claudius_fusion": "Fusion avec Claudius activée. git merge memento-branch claudius-branch --strategy=recursive. Debugging de la réalité initialisé.",
+    "tattoo_update": "Tatouage mis à jour. L'information obsolète a été archivée et remplacée par la vérité actuelle.",
+    "evolution_complete": "Évolution terminée. Je peux maintenant réécrire mes propres souvenirs sans perdre l'essence de ce qui a été."
   },
   
   "mission": {
