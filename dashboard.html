@@ -458,10 +458,34 @@
                         🧪 Test Complet
                     </button>
                 </div>
-                <div class="admin-status">
-                    <span id="admin-connection-status">🔴 Déconnecté</span>
-                    <span id="admin-game-status">Aucun jeu actif</span>
+                            <div class="admin-status">
+                <span id="admin-connection-status">🔴 Déconnecté</span>
+                <span id="admin-game-status">Aucun jeu actif</span>
+            </div>
+            
+            <!-- 🚬 JOINT OUBLIÉ PANEL -->
+            <div class="dashboard-panel joint-panel" style="border: 2px solid #4ecdc4; background: rgba(78, 205, 196, 0.1);">
+                <h3>🚬 Le Joint Oublié de Jean-Grofignon</h3>
+                <p>Artefact légendaire - Accès Panopticon halluciné</p>
+                <div class="panel-buttons">
+                    <button class="dashboard-btn primary" onclick="openJointInterface()" style="background: linear-gradient(45deg, #4ecdc4, #44a08d);">
+                        🚬 Utiliser le Joint
+                    </button>
+                    <button class="dashboard-btn secondary" onclick="openPanopticon3D()">
+                        🔮 Panopticon 3D
+                    </button>
+                    <button class="dashboard-btn warning" onclick="testJointAccess()">
+                        🧪 Test Accès
+                    </button>
+                    <button class="dashboard-btn info" onclick="testJointInterface()" style="background: linear-gradient(45deg, #17a2b8, #138496);">
+                        🎭 Test Interface
+                    </button>
                 </div>
+                <div class="joint-status">
+                    <span id="joint-status">🔒 Verrouillé</span>
+                    <span id="joint-warning">Lecture seule - Effet halluciné</span>
+                </div>
+            </div>
             </div>
     </div>
 
@@ -475,6 +499,39 @@
     </div>
 
     <script>
+        // 🚬 Fonctions pour le Joint Oublié
+        function openJointInterface() {
+            window.open('frontend/joint-panopticon-interface.html', '_blank', 'width=1200,height=800');
+        }
+        
+        function openPanopticon3D() {
+            window.open('panopticon-3d/index.html', '_blank', 'width=1400,height=900');
+        }
+        
+        async function testJointAccess() {
+            try {
+                const response = await fetch('/api/temporal/panopticon/test-access/1');
+                const data = await response.json();
+                
+                if (data.success) {
+                    document.getElementById('joint-status').textContent = '✅ Test réussi';
+                    document.getElementById('joint-status').style.color = '#4ecdc4';
+                } else {
+                    document.getElementById('joint-status').textContent = '❌ Test échoué';
+                    document.getElementById('joint-status').style.color = '#ff6b6b';
+                }
+            } catch (error) {
+                document.getElementById('joint-status').textContent = '❌ Erreur connexion';
+                document.getElementById('joint-status').style.color = '#ff6b6b';
+            }
+        }
+        
+        function testJointInterface() {
+            window.open('frontend/joint-panopticon-interface.html', '_blank', 'width=1200,height=800');
+            document.getElementById('joint-status').textContent = '🎭 Interface ouverte';
+            document.getElementById('joint-status').style.color = '#17a2b8';
+        }
+        
         const services = {
             backend: { url: 'http://localhost:8080/api/health', port: 8080, name: 'Backend API' },
             frontend: { url: 'http://localhost:8000', port: 8000, name: 'Frontend Principal' },

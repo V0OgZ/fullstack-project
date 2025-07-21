@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="translation-styles.css">
     <link rel="stylesheet" href="styles/city.css">
     <link rel="stylesheet" href="styles/combat.css">
+    <link rel="stylesheet" href="styles/hero.css">
     <link rel="manifest" href="manifest.json">
 </head>
 <body>
@@ -19,6 +20,7 @@
                 <button id="new-game-btn" class="btn-primary">🎮 New Game</button>
                 <button id="city-btn" class="btn-primary">🏛️ Ville</button>
                 <button id="combat-btn" class="btn-primary">⚔️ Combat</button>
+                <button id="hero-btn" class="btn-primary">👤 Héros</button>
                 <button id="add-ragnar-btn" class="btn-secondary">🛡️ Add Ragnar</button>
                 <button id="test-decay-btn" class="btn-warning">⏰ Test Decay</button>
                 <button id="dicebear-gallery-btn" class="btn-info">🎭 Dicebear Gallery</button>
@@ -119,6 +121,7 @@
     <script src="translation-service.js"></script>
     <script src="components/CityInterface.js"></script>
     <script src="components/CombatInterface.js"></script>
+    <script src="components/HeroInterface.js"></script>
     <script src="script-console.js"></script>
     <script src="game.js"></script>
     <script src="runic-forge.js"></script>
@@ -151,6 +154,11 @@
             window.combatInterface.toggle();
         });
         
+        // 👤 Événements pour l'interface de héros
+        document.getElementById('hero-btn').addEventListener('click', () => {
+            window.heroInterface.toggle();
+        });
+        
         // 🌐 Initialiser le service de traduction
         window.translationService = new TranslationService();
         
@@ -159,6 +167,9 @@
         
         // ⚔️ Initialiser l'interface de combat
         window.combatInterface = new CombatInterface();
+        
+        // 👤 Initialiser l'interface de héros
+        window.heroInterface = new HeroInterface();
         
         // 🎮 Initialiser le sélecteur de scénarios
         window.scenarioSelector = new ScenarioSelector();
