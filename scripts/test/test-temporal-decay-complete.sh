@@ -183,7 +183,7 @@ echo "=================================================="
 
 # Appliquer la décroissance temporelle
 echo -e "${YELLOW}⏰ Application de la décroissance temporelle...${NC}"
-DECAY_RESPONSE=$(curl -s -X POST "$BACKEND_URL/api/temporal/decay/apply/$GAME_ID" \
+DECAY_RESPONSE=$(curl -s -X POST "$BACKEND_URL/api/temporal/decay/$GAME_ID/apply" \
     -H "Content-Type: application/json")
 
 echo -e "${GREEN}✅ Décroissance appliquée${NC}"
@@ -192,7 +192,7 @@ echo "$DECAY_RESPONSE" | jq '.' 2>/dev/null || echo "$DECAY_RESPONSE"
 
 # Obtenir les statistiques de décroissance
 echo -e "${YELLOW}📈 Statistiques de décroissance...${NC}"
-STATS_RESPONSE=$(curl -s -X GET "$BACKEND_URL/api/temporal/decay/stats/$GAME_ID" \
+STATS_RESPONSE=$(curl -s -X GET "$BACKEND_URL/api/temporal/decay/$GAME_ID/statistics" \
     -H "Content-Type: application/json")
 
 echo -e "${CYAN}📊 Statistiques:${NC}"
@@ -208,7 +208,7 @@ echo "=================================="
 
 # Tenter de réparer un bâtiment
 echo -e "${YELLOW}🔧 Tentative de réparation du château...${NC}"
-REPAIR_RESPONSE=$(curl -s -X POST "$BACKEND_URL/api/temporal/decay/repair/$GAME_ID" \
+REPAIR_RESPONSE=$(curl -s -X POST "$BACKEND_URL/api/temporal/decay/$GAME_ID/repair" \
     -H "Content-Type: application/json" \
     -d "{\"heroName\":\"Arthur\",\"x\":10,\"y\":10}")
 
