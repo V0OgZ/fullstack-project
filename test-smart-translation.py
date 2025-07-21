@@ -138,7 +138,7 @@ class SmartTranslator:
     def translate_psi_states(self, script):
         """Traduit les états ψ avec variété"""
         def replace_psi(match):
-            content = match.group(2)
+            content = match.group(1)  # Changé de group(2) à group(1)
             variation = random.choice(self.psi_variations)
             return f"{variation} : {content}"
         
