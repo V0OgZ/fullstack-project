@@ -1,0 +1,37 @@
+::1 - - [21/Jul/2025 20:06:55] code 404, message File not found
+::1 - - [21/Jul/2025 20:06:55] "GET /hots HTTP/1.1" 404 -
+::1 - - [21/Jul/2025 20:07:25] code 404, message File not found
+::1 - - [21/Jul/2025 20:07:25] "GET /hots HTTP/1.1" 404 -
+::1 - - [21/Jul/2025 20:07:55] code 404, message File not found
+::1 - - [21/Jul/2025 20:07:55] "GET /hots HTTP/1.1" 404 -
+::1 - - [21/Jul/2025 20:07:57] code 404, message File not found
+::1 - - [21/Jul/2025 20:07:57] "GET /hots HTTP/1.1" 404 -
+::1 - - [21/Jul/2025 20:07:57] code 404, message File not found
+::1 - - [21/Jul/2025 20:07:57] "GET /favicon.ico HTTP/1.1" 404 -
+::1 - - [21/Jul/2025 20:08:18] "GET / HTTP/1.1" 200 -
+::1 - - [21/Jul/2025 20:08:25] code 404, message File not found
+::1 - - [21/Jul/2025 20:08:25] "GET /hots HTTP/1.1" 404 -
+::1 - - [21/Jul/2025 20:08:55] code 404, message File not found
+::1 - - [21/Jul/2025 20:08:55] "GET /hots HTTP/1.1" 404 -
+::1 - - [21/Jul/2025 20:09:25] code 404, message File not found
+::1 - - [21/Jul/2025 20:09:25] "GET /hots HTTP/1.1" 404 -
+::1 - - [21/Jul/2025 20:09:43] "GET / HTTP/1.1" 200 -
+::1 - - [21/Jul/2025 20:09:43] "GET /styles.css HTTP/1.1" 200 -
+::1 - - [21/Jul/2025 20:09:43] "GET /script-console.js HTTP/1.1" 200 -
+::1 - - [21/Jul/2025 20:09:43] "GET /api.js HTTP/1.1" 200 -
+::1 - - [21/Jul/2025 20:09:43] "GET /game.js HTTP/1.1" 200 -
+::1 - - [21/Jul/2025 20:09:43] "GET /manifest.json HTTP/1.1" 200 -
+::1 - - [21/Jul/2025 20:09:52] code 404, message File not found
+::1 - - [21/Jul/2025 20:09:52] "GET /hots HTTP/1.1" 404 -
+::1 - - [21/Jul/2025 20:09:55] code 404, message File not found
+::1 - - [21/Jul/2025 20:09:55] "GET /hots HTTP/1.1" 404 -
+::1 - - [21/Jul/2025 20:10:25] code 404, message File not found
+::1 - - [21/Jul/2025 20:10:25] "GET /hots HTTP/1.1" 404 -
+::1 - - [21/Jul/2025 20:10:55] code 404, message File not found
+::1 - - [21/Jul/2025 20:10:55] "GET /hots HTTP/1.1" 404 -
+::1 - - [21/Jul/2025 20:11:25] code 404, message File not found
+::1 - - [21/Jul/2025 20:11:25] "GET /hots HTTP/1.1" 404 -
+::1 - - [21/Jul/2025 20:11:55] code 404, message File not found
+::1 - - [21/Jul/2025 20:11:55] "GET /hots HTTP/1.1" 404 -
+::1 - - [21/Jul/2025 20:12:25] code 404, message File not found
+::1 - - [21/Jul/2025 20:12:25] "GET /hots HTTP/1.1" 404 -
