@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🎯 Heroes of Time - Dashboard Central</title>
+    <link rel="stylesheet" href="translation-styles.css">
     <style>
         * {
             margin: 0;
@@ -502,6 +503,12 @@
         console.log('🎯 Heroes of Time Dashboard chargé !');
         console.log('📊 Services surveillés:', Object.keys(services));
 
+        // 🌐 Initialiser le service de traduction
+        if (typeof TranslationService !== 'undefined') {
+            window.translationService = new TranslationService();
+            console.log('🌐 Service de traduction initialisé');
+        }
+
         // ===== CENTRE DE REPLAY =====
         function openReplayCenter() {
             window.open('http://localhost:9000/dashboard.html', 'ReplayCenter', 'width=1200,height=800');
@@ -511,3 +518,7 @@
         function openEtherealMode() {
             window.open('http://localhost:9000/dashboard.html', 'EtherealMode', 'width=1400,height=900');
         }
+    </script>
+    <script src="translation-service.js"></script>
+</body>
+</html>

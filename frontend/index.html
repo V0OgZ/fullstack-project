@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heroes of Time - Temporal Engine</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="temporal-styles.css">
-    <link rel="manifest" href="manifest.json">
+            <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="temporal-styles.css">
+        <link rel="stylesheet" href="translation-styles.css">
+        <link rel="manifest" href="manifest.json">
 </head>
 <body>
     <div class="container">
@@ -70,6 +71,7 @@
     </div>
     
     <script src="api.js"></script>
+    <script src="translation-service.js"></script>
     <script src="script-console.js"></script>
     <script src="game.js"></script>
     <script src="runic-forge.js"></script>
@@ -96,6 +98,9 @@
         if (fogControlsContainer) {
             fogControlsContainer.appendChild(window.fogOfWarSystem.createFogControls());
         }
+        
+        // 🌐 Initialiser le service de traduction
+        window.translationService = new TranslationService();
         
         // 🎮 Initialiser le sélecteur de scénarios
         window.scenarioSelector = new ScenarioSelector();

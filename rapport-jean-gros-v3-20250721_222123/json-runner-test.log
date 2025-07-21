@@ -1,0 +1,51 @@
+🎮 HEROES OF TIME - JSON SCENARIO RUNNER
+========================================
+📋 Chargement du scénario: GROFI_QUICK_TEST
+[0;36m[22:21:25][0m 🚀 Démarrage du runner de scénario JSON
+[0;36m[22:21:25][0m 📄 Scénario trouvé: GROFI_QUICK_TEST.json
+
+[0;35m📋 Chargement et analyse du scénario...[0m
+[0;36m📖 Nom: 🚀 GROFI Quick Test[0m
+[0;36m🎯 Type: QUICK_DEMO[0m
+[0;36m⭐ Difficulté: Non spécifié[0m
+[0;36m⏱️ Durée: Non spécifié[0m
+[0;36m👥 Joueurs: 0[0m
+jq: error (at <stdin>:17): Cannot check whether boolean has a string key
+jq: error (at <stdin>:17): Cannot check whether boolean has a string key
+
+[0;36m📊 Structure du scénario:[0m
+[0;33m  ⚠️ Pas de héros[0m
+[0;33m  ⚠️ Pas de carte[0m
+[0;33m  ⚠️ Pas de ψ-States[0m
+[0;33m  ⚠️ Pas de conditions[0m
+[0;36m🦸 Héros: 0[0m
+[0;36m⚡ ψ-States: 0[0m
+
+[0;34m🔍 Vérification du backend...[0m
+[0;32m✅ Backend accessible sur localhost:8080[0m
+
+[0;34m🎮 Création du jeu...[0m
+[0;32m✅ Jeu créé avec ID: 7[0m
+[0;33m⚠️ Aucun héros défini dans le scénario[0m
+[0;33m⚠️ Aucun ψ-state défini dans le scénario[0m
+
+[0;35m🏆 Conditions de victoire...[0m
+[0;33m  ℹ️ Aucune condition de victoire spécifiée[0m
+
+[0;35m📊 RÉSUMÉ DU SCÉNARIO[0m
+=========================
+[0;36m📖 Scénario: 🚀 GROFI Quick Test[0m
+[0;36m🎮 ID du jeu: 7[0m
+
+[0;36m🎯 État du jeu:[0m
+{
+  "timestamp": "2025-07-21T20:21:25.375+00:00",
+  "status": 404,
+  "error": "Not Found",
+  "trace": "org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/games/7/state.\n\tat org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)\n\tat org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)\n\tat org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)\n\tat org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)\n\tat org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)\n\tat org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)\n\tat jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)\n\tat org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)\n\tat jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)\n\tat org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)\n\tat org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)\n\tat org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)\n\tat org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)\n\tat org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)\n\tat org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)\n\tat org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)\n\tat org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)\n\tat org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)\n\tat org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)\n\tat org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)\n\tat org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)\n\tat org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)\n\tat org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)\n\tat org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)\n\tat org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)\n\tat org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)\n\tat org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)\n\tat org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)\n\tat java.base/java.lang.Thread.run(Thread.java:840)\n",
+  "message": "No static resource api/games/7/state.",
+  "path": "/api/games/7/state"
+}
+
+[0;32m✅ Exécution du scénario terminée[0m
+[0;36m[22:21:25][0m 🏁 Runner terminé
