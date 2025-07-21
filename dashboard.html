@@ -480,6 +480,9 @@
                     <button class="dashboard-btn info" onclick="testJointInterface()" style="background: linear-gradient(45deg, #17a2b8, #138496);">
                         🎭 Test Interface
                     </button>
+                    <button class="dashboard-btn magic" onclick="quickJointAccess()" style="background: linear-gradient(45deg, #9b59b6, #8e44ad);">
+                        ✨ Joint Magique
+                    </button>
                 </div>
                 <div class="joint-status">
                     <span id="joint-status">🔒 Verrouillé</span>
@@ -530,6 +533,31 @@
             window.open('frontend/joint-panopticon-interface.html', '_blank', 'width=1200,height=800');
             document.getElementById('joint-status').textContent = '🎭 Interface ouverte';
             document.getElementById('joint-status').style.color = '#17a2b8';
+        }
+        
+        function quickJointAccess() {
+            // Accès rapide avec données pré-remplies
+            const jointWindow = window.open('frontend/joint-panopticon-interface.html', '_blank', 'width=1200,height=800');
+            
+            // Pré-remplir les champs après chargement
+            jointWindow.onload = function() {
+                setTimeout(() => {
+                    const gameIdField = jointWindow.document.getElementById('gameId');
+                    const heroNameField = jointWindow.document.getElementById('heroName');
+                    
+                    if (gameIdField) gameIdField.value = '1';
+                    if (heroNameField) heroNameField.value = 'Jean-Grofignon';
+                    
+                    // Activer automatiquement le Joint
+                    setTimeout(() => {
+                        const activateBtn = jointWindow.document.querySelector('.activate-btn');
+                        if (activateBtn) activateBtn.click();
+                    }, 500);
+                }, 1000);
+            };
+            
+            document.getElementById('joint-status').textContent = '✨ Joint Magique activé';
+            document.getElementById('joint-status').style.color = '#9b59b6';
         }
         
         const services = {
