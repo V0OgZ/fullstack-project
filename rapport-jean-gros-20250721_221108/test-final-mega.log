@@ -17,6 +17,16 @@ Nettoyage port 8000...
 [0;32m✅ Installation Node.js[0m
    Version: v24.4.0
 [0;36m🏗️ Phase 3: Compilation backend...[0m
+tee: logs/test-complet-final.log: No such file or directory
+[0;32m✅ Compilation backend[0m
+tee: logs/test-complet-final.log: No such file or directory
+   Maven compile réussi
+tee: logs/test-complet-final.log: No such file or directory
+[0;36m🧪 Phase 4: Tests unitaires backend...[0m
+tee: logs/test-complet-final.log: No such file or directory
+[0;31m❌ Tests unitaires backend[0m
+tee: logs/test-complet-final.log: No such file or directory
+   Erreur tests unitaires - voir logs/backend-unit-final.log
 [0;36m🚀 Phase 5: Démarrage backend...[0m
 Attente démarrage backend...
 [0;31m❌ Démarrage backend[0m
