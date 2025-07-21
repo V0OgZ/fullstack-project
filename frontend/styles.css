@@ -386,3 +386,154 @@ body {
 .script-console::-webkit-scrollbar-thumb:hover {
     background: #357abd;
 }
+
+/* Styles pour le système d'avatars et gameplay */
+.hero-selection-panel {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.hero-select-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid transparent;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.hero-select-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #FFD700;
+}
+
+.hero-select-btn.selected {
+    background: rgba(255, 215, 0, 0.3);
+    border-color: #FFD700;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.hero-name {
+    margin-top: 5px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.action-panel {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.hero-action-btn {
+    padding: 8px 12px;
+    background: linear-gradient(45deg, #4a90e2, #357abd);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.3s ease;
+}
+
+.hero-action-btn:hover {
+    background: linear-gradient(45deg, #357abd, #2c5aa0);
+    transform: translateY(-2px);
+}
+
+.hero-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.hero-stats {
+    flex: 1;
+}
+
+.hero-stats h4 {
+    margin: 0 0 8px 0;
+    color: #FFD700;
+}
+
+.hero-stats p {
+    margin: 2px 0;
+    font-size: 12px;
+}
+
+.inventory-panel {
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.inventory-items {
+    margin-top: 10px;
+}
+
+.inventory-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.item-icon {
+    font-size: 16px;
+}
+
+.item-name {
+    flex: 1;
+    font-size: 12px;
+}
+
+.use-item-btn {
+    padding: 4px 8px;
+    background: #28a745;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.use-item-btn:hover {
+    background: #218838;
+}
+
+.hero-avatar {
+    transition: all 0.3s ease;
+}
+
+.hero-avatar:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}

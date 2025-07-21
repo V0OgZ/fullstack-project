@@ -66,12 +66,15 @@
     <script src="game.js"></script>
     <script src="runic-forge.js"></script>
     <script src="temporal-integration.js"></script>
+    <script src="hero-avatars.js"></script>
+    <script src="gameplay-enhancement.js"></script>
     <script>
         // Initialisation de l'application
         window.gameAPI = new GameAPI();
         window.gameRenderer = new GameRenderer('game-canvas');
         window.scriptConsole = new ScriptConsole('script-console');
         window.temporalIntegration = new TemporalIntegration();
+        window.gameplayEnhancement = new GameplayEnhancement();
         
         // Fonction pour mettre à jour la barre de statut
         window.updateStatusBar = function(message) {
