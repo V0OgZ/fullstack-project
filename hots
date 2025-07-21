@@ -43,6 +43,7 @@ show_help() {
     echo -e "  ${GREEN}./hots test json${NC}         🚀 Tests nouveaux scripts JSON (HSP)"
     echo -e "  ${GREEN}./hots test jean-gros${NC}    🎳 Tests Jean-Gros v2/v3 complets"
     echo -e "  ${GREEN}./hots test decay${NC}        🌀 Tests système DK20 Temporal Decay (Anna)"
+    echo -e "  ${GREEN}./hots test hybrid${NC}       🎳 Tests système Hybrid Decay (The Dude)"
     echo -e "  ${GREEN}./hots test missing${NC}      🎯 Tests scénarios manquants et créatures"
     echo -e "  ${GREEN}./hots test creatures${NC}    🐉 Tests spécifiques des créatures quantiques"
     echo -e "  ${GREEN}./hots test performance${NC}  Tests de performance"
@@ -198,6 +199,7 @@ list_available_tests() {
     echo -e "  ${GREEN}json${NC}          - Tests nouveaux scripts JSON (architecture HSP)"
     echo -e "  ${GREEN}jean-gros${NC}     - Tests Jean-Gros v2/v3 complets"
     echo -e "  ${GREEN}decay${NC}         - Tests système DK20 Temporal Decay (Anna the Martopicker)"
+    echo -e "  ${GREEN}hybrid${NC}        - Tests système Hybrid Decay (The Dude's fusion)"
     echo -e "  ${GREEN}performance${NC}   - Tests de performance et optimisation"
     echo -e "  ${GREEN}integration${NC}   - Tests d'intégration complète"
     echo ""
@@ -363,6 +365,16 @@ run_test_suite() {
                 bash scripts/test-temporal-decay-dk20.sh
             else
                 echo -e "${RED}❌ Script DK20 Temporal Decay non trouvé${NC}"
+                return 1
+            fi
+            ;;
+        "hybrid")
+            echo -e "${GREEN}🎳 Tests système Hybrid Decay...${NC}"
+            echo -e "${PURPLE}💫 Testing The Dude's unified temporal decay system${NC}"
+            if [ -f "scripts/test-temporal-decay-hybrid-dude.sh" ]; then
+                bash scripts/test-temporal-decay-hybrid-dude.sh
+            else
+                echo -e "${RED}❌ Script Hybrid Decay non trouvé${NC}"
                 return 1
             fi
             ;;
