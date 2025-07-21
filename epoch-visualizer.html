@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🕰️ Heroes of Time - Epoch Visualizer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e0e6ed;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #64b5f6, #42a5f5, #2196f3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2em;
+            color: #b0bec5;
+            margin-bottom: 20px;
+        }
+        
+        .epoch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .epoch-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .epoch-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(100, 181, 246, 0.5);
+            box-shadow: 0 10px 30px rgba(100, 181, 246, 0.15);
+        }
+        
+        .epoch-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #64b5f6, #42a5f5, #2196f3);
+            border-radius: 16px 16px 0 0;
+        }
+        
+        .card-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #64b5f6;
+        }
+        
+        .card-content {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+        }
+        
+        .info-label {
+            color: #b0bec5;
+            font-weight: 500;
+        }
+        
+        .info-value {
+            color: #e0e6ed;
+            font-weight: 600;
+        }
+        
+        .timeline-list {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+        
+        .timeline-symbol {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #64b5f6;
+        }
+        
+        .timeline-desc {
+            color: #b0bec5;
+            flex: 1;
+            margin-left: 15px;
+        }
+        
+        .history-timeline {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .history-event {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-left: 3px solid #64b5f6;
+            padding-left: 20px;
+            margin-left: 10px;
+            position: relative;
+        }
+        
+        .history-event::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 14px;
+            height: 14px;
+            background: #64b5f6;
+            border-radius: 50%;
+            border: 3px solid #1a1a2e;
+        }
+        
+        .event-date {
+            font-weight: 600;
+            color: #64b5f6;
+            min-width: 180px;
+        }
+        
+        .event-desc {
+            color: #e0e6ed;
+            margin-left: 20px;
+        }
+        
+        .jean-message {
+            background: linear-gradient(135deg, rgba(100, 181, 246, 0.1), rgba(66, 165, 245, 0.1));
+            border: 2px solid rgba(100, 181, 246, 0.3);
+            border-radius: 16px;
+            padding: 25px;
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .jean-message .couch-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        
+        .jean-message .message-text {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #e0e6ed;
+        }
+        
+        .refresh-btn {
+            background: linear-gradient(45deg, #64b5f6, #42a5f5);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 20px auto;
+            display: block;
+        }
+        
+        .refresh-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(100, 181, 246, 0.4);
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #b0bec5;
+        }
+        
+        .error {
+            background: rgba(244, 67, 54, 0.1);
+            border: 1px solid rgba(244, 67, 54, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            color: #ffcdd2;
+            text-align: center;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🕰️ Heroes of Time Epoch System</h1>
+            <p class="subtitle">Système d'époque officiel - Pour Jean depuis son canapé 🛋️</p>
+            <button class="refresh-btn" onclick="loadEpochData()">🔄 Actualiser les données</button>
+        </div>
+        
+        <div id="loading" class="loading">
+            <p class="pulse">⏰ Chargement des données d'époque...</p>
+        </div>
+        
+        <div id="error" class="error" style="display: none;">
+            <p>❌ Erreur lors du chargement des données d'époque</p>
+            <p id="error-message"></p>
+        </div>
+        
+        <div id="content" style="display: none;">
+            <!-- Current Epoch Info -->
+            <div class="epoch-grid">
+                <div class="epoch-card">
+                    <h3 class="card-title">📅 Informations Actuelles</h3>
+                    <div class="card-content" id="current-info">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+                
+                <div class="epoch-card">
+                    <h3 class="card-title">📊 Statistiques d'Époque</h3>
+                    <div class="card-content" id="epoch-stats">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Jean's Message -->
+            <div class="jean-message" id="jean-message">
+                <div class="couch-icon">🛋️</div>
+                <div class="message-text" id="jean-message-text">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+            
+            <!-- Timelines -->
+            <div class="epoch-card">
+                <h3 class="card-title">🌀 Timelines Officielles</h3>
+                <div class="timeline-list" id="timelines">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+            
+            <!-- History -->
+            <div class="epoch-card">
+                <h3 class="card-title">📜 Historique des Événements</h3>
+                <div class="history-timeline" id="history">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const API_BASE = 'http://localhost:8080/api/epoch';
+        
+        async function loadEpochData() {
+            try {
+                document.getElementById('loading').style.display = 'block';
+                document.getElementById('error').style.display = 'none';
+                document.getElementById('content').style.display = 'none';
+                
+                // Load all epoch data in parallel
+                const [currentData, statsData, jeanMessage, timelines, history] = await Promise.all([
+                    fetch(`${API_BASE}/current`).then(r => r.json()),
+                    fetch(`${API_BASE}/stats`).then(r => r.json()),
+                    fetch(`${API_BASE}/jean-message`).then(r => r.json()),
+                    fetch(`${API_BASE}/timelines`).then(r => r.json()),
+                    fetch(`${API_BASE}/history`).then(r => r.json())
+                ]);
+                
+                // Populate current info
+                populateCurrentInfo(currentData);
+                
+                // Populate stats
+                populateStats(statsData);
+                
+                // Populate Jean's message
+                populateJeanMessage(jeanMessage);
+                
+                // Populate timelines
+                populateTimelines(timelines);
+                
+                // Populate history
+                populateHistory(history);
+                
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+                
+            } catch (error) {
+                console.error('Error loading epoch data:', error);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('error-message').textContent = error.message;
+            }
+        }
+        
+        function populateCurrentInfo(data) {
+            const container = document.getElementById('current-info');
+            container.innerHTML = `
+                <div class="info-row">
+                    <span class="info-label">📅 Date actuelle:</span>
+                    <span class="info-value">${data.current_date}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">⏰ Jours depuis époque:</span>
+                    <span class="info-value">${data.days_since_epoch}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">🕐 Heures depuis époque:</span>
+                    <span class="info-value">${data.hours_since_epoch}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">🎯 Phase actuelle:</span>
+                    <span class="info-value">${data.project_phase.replace(/_/g, ' ')}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">🌟 Événement:</span>
+                    <span class="info-value">${data.current_event}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">🌀 Timeline spéciale:</span>
+                    <span class="info-value">${data.special_timeline_active ? '✅ Active' : '❌ Inactive'}</span>
+                </div>
+            `;
+        }
+        
+        function populateStats(data) {
+            const container = document.getElementById('epoch-stats');
+            const stats = data.epoch_stats;
+            container.innerHTML = `
+                <div class="info-row">
+                    <span class="info-label">🌟 Début époque:</span>
+                    <span class="info-value">${stats.epoch_start}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">🌀 Timeline active:</span>
+                    <span class="info-value">${stats.active_timeline}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">📊 Jours écoulés:</span>
+                    <span class="info-value">${stats.days_since_epoch}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">⚡ Heures écoulées:</span>
+                    <span class="info-value">${stats.hours_since_epoch}</span>
+                </div>
+            `;
+        }
+        
+        function populateJeanMessage(data) {
+            const container = document.getElementById('jean-message-text');
+            container.innerHTML = `
+                <p><strong>Message de Memento pour Jean :</strong></p>
+                <p>${data.message_for_jean}</p>
+                <p style="margin-top: 15px; color: #64b5f6;"><em>Status : ${data.couch_status}</em></p>
+            `;
+        }
+        
+        function populateTimelines(data) {
+            const container = document.getElementById('timelines');
+            const timelines = data.timelines;
+            
+            let html = '';
+            for (const [symbol, description] of Object.entries(timelines)) {
+                const isActive = symbol === data.active_timeline;
+                html += `
+                    <div class="timeline-item">
+                        <span class="timeline-symbol">${symbol}</span>
+                        <span class="timeline-desc">${description}</span>
+                        ${isActive ? '<span style="color: #64b5f6;">🌟 Active</span>' : ''}
+                    </div>
+                `;
+            }
+            
+            container.innerHTML = html;
+        }
+        
+        function populateHistory(data) {
+            const container = document.getElementById('history');
+            const history = data.epoch_history;
+            
+            let html = '';
+            for (const [date, description] of Object.entries(history)) {
+                html += `
+                    <div class="history-event">
+                        <span class="event-date">${date}</span>
+                        <span class="event-desc">${description}</span>
+                    </div>
+                `;
+            }
+            
+            container.innerHTML = html;
+        }
+        
+        // Auto-refresh every 5 minutes
+        setInterval(loadEpochData, 5 * 60 * 1000);
+        
+        // Load data on page load
+        window.addEventListener('DOMContentLoaded', loadEpochData);
+    </script>
+</body>
+</html> 
