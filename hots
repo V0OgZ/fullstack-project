@@ -42,6 +42,7 @@ show_help() {
     echo -e "  ${GREEN}./hots test scenarios${NC}    Tests scénarios HOTS complets"
     echo -e "  ${GREEN}./hots test json${NC}         🚀 Tests nouveaux scripts JSON (HSP)"
     echo -e "  ${GREEN}./hots test jean-gros${NC}    🎳 Tests Jean-Gros v2/v3 complets"
+    echo -e "  ${GREEN}./hots test decay${NC}        🌀 Tests système DK20 Temporal Decay (Anna)"
     echo -e "  ${GREEN}./hots test missing${NC}      🎯 Tests scénarios manquants et créatures"
     echo -e "  ${GREEN}./hots test creatures${NC}    🐉 Tests spécifiques des créatures quantiques"
     echo -e "  ${GREEN}./hots test performance${NC}  Tests de performance"
@@ -196,6 +197,7 @@ list_available_tests() {
     echo -e "  ${GREEN}scenarios${NC}     - Tests scénarios HOTS complets"
     echo -e "  ${GREEN}json${NC}          - Tests nouveaux scripts JSON (architecture HSP)"
     echo -e "  ${GREEN}jean-gros${NC}     - Tests Jean-Gros v2/v3 complets"
+    echo -e "  ${GREEN}decay${NC}         - Tests système DK20 Temporal Decay (Anna the Martopicker)"
     echo -e "  ${GREEN}performance${NC}   - Tests de performance et optimisation"
     echo -e "  ${GREEN}integration${NC}   - Tests d'intégration complète"
     echo ""
@@ -354,6 +356,16 @@ run_test_suite() {
                 echo -e "${RED}❌ Script Jean-Gros v3 non trouvé${NC}"
             fi
             ;;
+        "decay")
+            echo -e "${GREEN}🌀 Tests système DK20 Temporal Decay...${NC}"
+            echo -e "${PURPLE}💫 Testing Anna the Martopicker's temporal mechanics${NC}"
+            if [ -f "scripts/test-temporal-decay-dk20.sh" ]; then
+                bash scripts/test-temporal-decay-dk20.sh
+            else
+                echo -e "${RED}❌ Script DK20 Temporal Decay non trouvé${NC}"
+                return 1
+            fi
+            ;;
         "performance")
             echo -e "${GREEN}⚡ Tests de performance...${NC}"
             if [ -f "scripts/test/test-optimizations-performance.sh" ]; then
@@ -432,13 +444,16 @@ run_test_suite() {
             echo -e "${YELLOW}🎳 Phase 10: Tests Jean-Gros complets${NC}"
             run_test_suite "jean-gros"
             
-            echo -e "${YELLOW}⚡ Phase 11: Tests performance${NC}"
+            echo -e "${YELLOW}🌀 Phase 11: Tests DK20 Temporal Decay${NC}"
+            run_test_suite "decay"
+            
+            echo -e "${YELLOW}⚡ Phase 12: Tests performance${NC}"
             run_test_suite "performance"
             
-            echo -e "${YELLOW}🔗 Phase 12: Tests intégration${NC}"
+            echo -e "${YELLOW}🔗 Phase 13: Tests intégration${NC}"
             run_test_suite "integration"
             
-            echo -e "${YELLOW}🎯 Phase 13: Tests scénarios manquants${NC}"
+            echo -e "${YELLOW}🎯 Phase 14: Tests scénarios manquants${NC}"
             run_test_suite "missing"
             
             echo ""

@@ -11,6 +11,7 @@ import com.heroesoftimepoc.temporalengine.service.QuantumMigrationService;
 import com.heroesoftimepoc.temporalengine.model.ComplexAmplitude;
 import com.heroesoftimepoc.temporalengine.model.TileCoord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -81,7 +82,8 @@ public class TemporalEngineService {
     private CausalityZoneService causalityZoneService;
     
     @Autowired
-    private TemporalDecayService temporalDecayService;
+    @Qualifier("temporalDecayServiceLegacy")
+    private TemporalDecayServiceLegacy temporalDecayService;
     
     private final Random random = new Random();
     
@@ -1558,7 +1560,7 @@ public class TemporalEngineService {
         }
         
         Game game = gameOpt.get();
-        List<TemporalDecayService.DecayResult> decayResults = temporalDecayService.applyTemporalDecay(game);
+        List<TemporalDecayServiceLegacy.DecayResult> decayResults = temporalDecayService.applyTemporalDecay(game);
         
         Map<String, Object> result = new HashMap<>();
         result.put("success", true);

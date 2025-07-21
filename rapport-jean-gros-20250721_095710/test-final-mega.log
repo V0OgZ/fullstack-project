@@ -17,6 +17,16 @@ Nettoyage port 8000...
 [0;32m✅ Installation Node.js[0m
    Version: v24.4.0
 [0;36m🏗️ Phase 3: Compilation backend...[0m
+tee: logs/test-complet-final.log: No such file or directory
+[0;32m✅ Compilation backend[0m
+tee: logs/test-complet-final.log: No such file or directory
+   Maven compile réussi
+tee: logs/test-complet-final.log: No such file or directory
+[0;36m🧪 Phase 4: Tests unitaires backend...[0m
+tee: logs/test-complet-final.log: No such file or directory
+[0;31m❌ Tests unitaires backend[0m
+tee: logs/test-complet-final.log: No such file or directory
+   Erreur tests unitaires - voir logs/backend-unit-final.log
 [0;36m🚀 Phase 5: Démarrage backend...[0m
 Attente démarrage backend...
 [0;31m❌ Démarrage backend[0m
@@ -74,6 +84,7 @@ Test benchmark regex parser...
    Performance sous les 10k ops/sec
 [0;31m❌ ⚠️ Goulot Calculs Quantiques[0m
    Performance sous les 1k calc/sec
+./scripts/test/test-complet-final.sh: line 311: [: : integer expression expected
 [0;32m✅ ✅ Latence API acceptable[0m
    Latence < 10ms
 [0;36m🔍 Phase 11: Analyse détaillée...[0m
@@ -136,7 +147,10 @@ Arrêt des processus...
 Nettoyage port 8080...
 Nettoyage port 8001...
 Nettoyage port 5173...
+./scripts/test/test-complet-final.sh: line 60:  7288 Killed: 9               python3 -m http.server 8001 > ../logs/quantum-visualizer-final.log 2>&1  (wd: ~/HOT/Heroes-of-Time/quantum-visualizer)
 Nettoyage port 8000...
+./scripts/test/test-complet-final.sh: line 60:  7287 Killed: 9               python3 -m http.server 5173 > ../logs/frontend-temporal-final.log 2>&1  (wd: ~/HOT/Heroes-of-Time/frontend-temporal)
+./scripts/test/test-complet-final.sh: line 58:  7286 Killed: 9               node server.js > ../logs/frontend-classique-final.log 2>&1  (wd: ~/HOT/Heroes-of-Time/frontend)
 
 [0;35m╔══════════════════════════════════════════════════════════════╗[0m
 [0;35m║                    RAPPORT FINAL                           ║[0m
