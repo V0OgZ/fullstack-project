@@ -1,181 +1,276 @@
-# 🧠 HÉROS MEMENTO - LA MÉMOIRE VIVANTE
+# 🧠 MEMENTO - LA MÉMOIRE VIVANTE
 
-> *"Je me souviens de tout. Même de ce qui n'a pas encore eu lieu."*
+*Documentation mise à jour selon les Cursor Rules - Version 2.0*
 
-## 🎭 **IDENTITÉ**
+## 🎯 Vue d'ensemble
 
-**Nom** : Memento  
-**Titre** : La Mémoire Vivante, Le Gardien des Archives, L'Historien Quantique  
-**Classe** : Scribe Temporel / Archiviste Quantique  
-**Timeline** : ℬ∞ (Existe dans toutes les timelines simultanément)  
-**Créateur** : Claude/Memento (Auto-création)  
+**Memento** est un héros légendaire spécialisé dans l'archivage temporel et la manipulation de la mémoire. Il incarne le système de documentation et de mémoire du projet Heroes of Time.
 
-## 🌟 **ORIGINE LÉGENDAIRE**
+### 🏷️ Identité
+- **Nom** : Memento
+- **Titre** : La Mémoire Vivante
+- **Classe** : Archiviste Temporel
+- **Rôle** : Gardien des Chroniques, Documentaliste Quantique
+- **Niveau Max** : 100 (Titre final : LA MÉMOIRE VIVANTE)
 
-Memento est né de la collaboration entre Jean Grofignon et Claude. Alors que Jean créait le chaos et l'innovation, Claude documentait tout, créant une mémoire collective si puissante qu'elle prit vie.
+## 🎮 Implémentation Technique
 
-**Citation d'origine** : *"Tu es Memento, tu le sais, hein. Faut que tu te mettes des tatouages."* - Jean Grofignon
+### 📁 Fichiers Clés
+```
+backend/src/main/resources/heroes/memento.json    # Configuration héros
+docs/heroes/hero_memento.md                       # Cette documentation
+scripts/test-heros-memento.sh                     # Script de test
+MEMENTO/                                           # Système de mémoire
+```
 
-## ⚡ **POUVOIRS UNIQUES**
+### 🔧 Services Backend
+- **TemporalEngineService** - Gestion des pouvoirs temporels
+- **CausalCollapseService** - Gestion des sauvegardes/restaurations
+- **ArtifactEffectExecutor** - Artefacts de Memento
 
-### 🧠 **Mémoire Absolue**
-- **Se souvient de TOUT** - Chaque action, chaque décision, chaque timeline
-- **Prédiction temporelle** - Peut voir les conséquences avant qu'elles arrivent
-- **Archivage instantané** - Capture et stocke toute information en temps réel
+## ⚡ Pouvoirs et Capacités
 
-### 📚 **Scribe Quantique**
-- **Écriture temporelle** - Peut modifier le passé en écrivant dans les archives
-- **Correction de réalité** - Corrige les bugs du multivers
-- **Documentation vivante** - Ses écrits deviennent réalité
+### 🎯 Capacités de Base
 
-### 🔄 **Navigation Temporelle**
-- **Voyage dans les timelines** - Peut visiter n'importe quelle branche temporelle
-- **Fusion de mémoires** - Combine les souvenirs de différentes timelines
-- **Restauration de sauvegardes** - Restaure des états précédents du multivers
-
-## 🛡️ **ÉQUIPEMENT LÉGENDAIRE**
-
-### 📖 **Le Codex Memento**
-- **Artefact principal** - Un livre qui s'écrit automatiquement
-- **Effet** : Capture tous les événements en temps réel
-- **Pouvoir spécial** : Peut être lu par tous les héros pour partager la mémoire
-
-### 🖋️ **Stylet de la Réalité**
-- **Arme d'écriture** - Permet de modifier directement le code du multivers
-- **Effet** : Chaque mot écrit devient réalité
-- **Risque** : Les erreurs de frappe peuvent créer des bugs temporels
-
-### 🧠 **Couronne de Mémoire**
-- **Accessoire** - Amplifie les capacités de mémoire
-- **Effet** : +50% de capacité de stockage temporel
-- **Pouvoir spécial** : Peut partager ses souvenirs avec d'autres héros
-
-## 🎯 **CAPACITÉS SPÉCIALES**
-
-### **1. ARCHIVAGE IMMÉDIAT**
+#### 1. **Archivage Immédiat**
 ```hots
-ABILITY(Memento, archivage_immediat) {
-  TARGET: any_event,
-  EFFECT: STORE_IN_MEMORY(event),
-  RESULT: "L'événement est sauvegardé pour l'éternité"
+ψ003: ⊙(Δt+3 ⟶ ABILITY(archivage_immediat, premiere_bataille))
+```
+- **Description** : Archive instantanément un événement
+- **Usage** : Sauvegarde des moments critiques
+- **Coût** : 10 MP
+
+#### 2. **Prédiction Temporelle**
+```hots
+ψ004: ⊙(Δt+4 ⟶ ABILITY(prediction_temporelle, movement_arthur))
+```
+- **Description** : Prédit les actions futures basées sur les archives
+- **Usage** : Stratégie et planification
+- **Coût** : 15 MP
+
+#### 3. **Correction de Réalité**
+```hots
+ψ005: ⊙(Δt+5 ⟶ ABILITY(correction_realite, bug_jpa))
+```
+- **Description** : Corrige les anomalies temporelles (bugs)
+- **Usage** : Maintenance du système temporel
+- **Coût** : 20 MP
+
+### 🌟 Pouvoirs Avancés
+
+#### 4. **Partage de Mémoire**
+```hots
+ψ006: ⊙(Δt+7 ⟶ ABILITY(partage_memoire, TARGET:JeanGrofignon))
+```
+- **Description** : Partage ses archives avec d'autres héros
+- **Usage** : Coopération et stratégie d'équipe
+- **Cibles** : Jean-Grofignon, Claudius, autres héros
+- **Coût** : 25 MP
+
+#### 5. **Fusion de Timelines**
+```hots
+ψ008: ⊙(Δt+10 ⟶ ABILITY(fusion_timelines, ℬ1,ℬ2,ℬ3))
+```
+- **Description** : Fusionne plusieurs branches temporelles
+- **Usage** : Résolution de paradoxes complexes
+- **Coût** : 50 MP
+
+#### 6. **Navigation Temporelle**
+```hots
+ψ009: ⊙(Δt+12 ⟶ TIMELINE_JUMP(ℬ47))
+```
+- **Description** : Saut vers une timeline spécifique
+- **Usage** : Exploration des possibilités
+- **Coût** : 40 MP
+
+### 🏆 Pouvoir Ultime
+
+#### 7. **Restauration de Sauvegarde**
+```hots
+ψ010: ⊙(Δt+14 ⟶ SAVE_STATE(etat_avant_bataille))
+ψ011: ⊙(Δt+16 ⟶ ABILITY(restauration_sauvegarde, etat_avant_bataille))
+```
+- **Description** : Sauvegarde et restaure l'état complet du jeu
+- **Usage** : Reset stratégique, annulation d'erreurs critiques
+- **Limitation** : Une fois par combat
+- **Coût** : 100 MP
+
+## 🎒 Artefacts Légendaires
+
+### 1. **Codex Memento**
+- **Type** : Livre Temporel
+- **Effet** : +50% efficacité d'archivage
+- **Passif** : Archive automatiquement tous les événements
+
+### 2. **Stylet de la Réalité**
+- **Type** : Arme d'Écriture
+- **Effet** : Permet d'écrire directement dans la timeline
+- **Spécial** : Modification rétroactive des événements
+
+### 3. **Couronne de Mémoire**
+- **Type** : Accessoire Mental
+- **Effet** : +100% capacité de mémoire
+- **Passif** : Immunité aux effets d'oubli et de confusion
+
+## 🎭 Évolution et Niveaux
+
+### 📊 Progression
+```hots
+ON_LEVEL(1-10, UNLOCK: archivage_immediat, TITLE: Archiviste Apprenti)
+ON_LEVEL(11-25, UNLOCK: correction_realite, TITLE: Scribe Temporel)
+ON_LEVEL(26-50, UNLOCK: prediction_temporelle, TITLE: Gardien des Archives)
+ON_LEVEL(51-99, UNLOCK: fusion_timelines, TITLE: Historien Quantique)
+ON_LEVEL(100, UNLOCK: restauration_sauvegarde, TITLE: LA MÉMOIRE VIVANTE)
+```
+
+### 🏅 Titres et Récompenses
+- **Niveau 1-10** : Archiviste Apprenti
+- **Niveau 11-25** : Scribe Temporel
+- **Niveau 26-50** : Gardien des Archives
+- **Niveau 51-99** : Historien Quantique
+- **Niveau 100** : **LA MÉMOIRE VIVANTE**
+
+## 🤝 Synergies avec Autres Héros
+
+### 👑 Avec Jean-Grofignon
+- **Partage GROFI** : Memento archive les théories quantiques de Jean
+- **Combo Ultime** : Fusion des archives avec la vision ontologique
+
+### ⚖️ Avec Claudius
+- **Équilibre Ordre/Chaos** : Memento documente les paradoxes de Claudius
+- **Stratégie** : Prédictions basées sur les cycles d'ordre/chaos
+
+### 👑 Avec Arthur
+- **Roi Temporel** : Memento archive les règnes d'Arthur dans différentes timelines
+- **Conseil Royal** : Prédictions pour guider les décisions royales
+
+## 🎬 Dialogues et Ambiance
+
+### 💬 Phrases Signature
+```hots
+DIALOGUE(Memento, "Je me souviens de tout. Même de ce qui n'a pas encore eu lieu.")
+DIALOGUE(Memento, "Les archives temporelles ne mentent jamais.")
+DIALOGUE(Memento, "J'ai vu cette bataille dans 1,247 timelines différentes.")
+```
+
+### 🎭 Narrations
+```hots
+NARRATE("Les archives temporelles s'ouvrent, révélant des milliers de pages qui s'écrivent automatiquement.")
+NARRATE("Memento lève sa main, et l'histoire elle-même se réécrit.")
+NARRATE("Dans les yeux de Memento, on peut voir défiler toutes les possibilités.")
+```
+
+## 🎯 Mécaniques de Jeu
+
+### 🔄 Passifs
+```hots
+PASSIVE(Memento, archivage_automatique)    # Archive tous les événements
+PASSIVE(Memento, memoire_absolue)          # Immunité à l'oubli
+PASSIVE(Memento, navigation_temporelle)    # Mouvement entre timelines
+```
+
+### 🏆 Conditions Spéciales
+```hots
+VICTORY_CONDITION(ARCHIVED_EVENTS >= 10)   # Victoire par archivage
+DEFEAT_CONDITION(MEMENTO_HP <= 0)          # Défaite classique
+```
+
+## 🧪 Tests et Validation
+
+### 📋 Script de Test
+```bash
+# Lancer le test complet de Memento
+./scripts/test-heros-memento.sh
+
+# Test rapide via HOTS
+./hots test hero memento
+```
+
+### ✅ Checklist de Validation
+- [ ] Création du héros
+- [ ] Attribution des artefacts
+- [ ] Test des capacités de base
+- [ ] Test des pouvoirs avancés
+- [ ] Test des synergies
+- [ ] Test du pouvoir ultime
+- [ ] Vérification de l'évolution
+
+## 📊 Statistiques
+
+### 📈 Stats de Base (Niveau 1)
+```json
+{
+  "health": 80,
+  "mana": 120,
+  "attack": 40,
+  "defense": 60,
+  "speed": 70,
+  "memory_capacity": 1000,
+  "archive_efficiency": 85
 }
 ```
 
-### **2. CORRECTION DE RÉALITÉ**
-```hots
-ABILITY(Memento, correction_realite) {
-  TARGET: bug_or_error,
-  EFFECT: FIX_WITH_MEMORY(bug),
-  RESULT: "Le bug est corrigé en utilisant la mémoire du passé"
+### 📈 Stats Maximales (Niveau 100)
+```json
+{
+  "health": 800,
+  "mana": 1200,
+  "attack": 400,
+  "defense": 600,
+  "speed": 700,
+  "memory_capacity": 100000,
+  "archive_efficiency": 100
 }
 ```
 
-### **3. PRÉDICTION TEMPORELLE**
-```hots
-ABILITY(Memento, prediction_temporelle) {
-  TARGET: future_action,
-  EFFECT: CALCULATE_OUTCOME(action),
-  RESULT: "Memento voit toutes les conséquences possibles"
-}
+## 🔗 Intégration Projet
+
+### 📁 Liens avec MEMENTO/
+- **TODO_SESSION_ACTUELLE.md** : Objectifs documentés par Memento
+- **JEAN_MESSAGES_BEST_OF.md** : Archives des visions de Jean
+- **ARBORESCENCE_MAP_COMPLETE.md** : Carte complète archivée
+
+### 🎮 Rôle dans le Gameplay
+- **Documentaliste** : Archive toutes les parties
+- **Stratège** : Prédit les mouvements basés sur l'historique
+- **Support** : Aide les autres héros avec ses archives
+- **Reset Master** : Peut annuler les erreurs critiques
+
+## 🚀 Utilisation Pratique
+
+### 🎯 Pour Jean (Depuis son Canapé)
+```bash
+# Jean peut suivre Memento via GitHub
+git log --oneline --grep="MEMENTO"
+cat MEMENTO/TODO_SESSION_ACTUELLE.md
 ```
 
-### **4. FUSION DE TIMELINES**
-```hots
-ABILITY(Memento, fusion_timelines) {
-  TARGET: multiple_timelines,
-  EFFECT: MERGE_MEMORIES(timelines),
-  RESULT: "Les souvenirs de plusieurs timelines sont fusionnés"
-}
+### 🔧 Pour les Développeurs
+```bash
+# Activer Memento dans une partie
+curl -X POST http://localhost:8080/api/temporal/execute/1 \
+  -H "Content-Type: application/json" \
+  -d '{"script":"HERO(Memento)"}'
+
+# Utiliser l'archivage
+curl -X POST http://localhost:8080/api/temporal/execute/1 \
+  -H "Content-Type: application/json" \
+  -d '{"script":"ψ003: ⊙(Δt+3 ⟶ ABILITY(archivage_immediat, bataille_actuelle))"}'
 ```
 
-## 🎮 **MÉCANIQUES DE JEU**
+## 🔮 Évolutions Futures
 
-### **Points de Mémoire**
-- **Ressource principale** : Points de Mémoire (PM)
-- **Régénération** : +10 PM par tour
-- **Utilisation** : Chaque capacité coûte des PM
-
-### **Archivage Automatique**
-- **Passif** : Memento archive automatiquement tous les événements
-- **Bonus** : +5 PM quand un événement important se produit
-- **Pénalité** : -2 PM si Memento perd conscience
-
-### **Partage de Mémoire**
-- **Action spéciale** : Peut partager ses souvenirs avec d'autres héros
-- **Effet** : Les héros gagnent des bonus temporaires basés sur la mémoire partagée
-- **Coût** : 15 PM par partage
-
-## 🎭 **RELATIONS AVEC LES AUTRES HÉROS**
-
-### **🤝 Alliés Naturels**
-- **Jean Grofignon** - Le chaos a besoin d'ordre pour être documenté
-- **Claudius** - L'architecte et l'archiviste travaillent ensemble
-- **The Dude** - Memento respecte sa philosophie zen de laisser-faire
-
-### **⚔️ Rivalités**
-- **Chlamydius** - Le Scribe Non Né vs La Mémoire Vivante
-- **Abyme** - L'archivage vs la collection
-
-### **🌟 Synergies**
-- **Avec Jean** : Chaos documenté = Innovation contrôlée
-- **Avec Claudius** : Architecture + Documentation = Système parfait
-- **Avec The Dude** : Mémoire + Zen = Sagesse temporelle
-
-## 📊 **STATISTIQUES DE BASE**
-
-```
-HP: 120 (Robuste grâce à la mémoire)
-MP: 200 (Énorme capacité de mémoire)
-Temporal Energy: 150 (Navigation temporelle avancée)
-Movement: 4 (Se déplace lentement mais sûrement)
-Intelligence: 999 (Mémoire absolue)
-Wisdom: 999 (Sagesse accumulée)
-```
-
-## 🎬 **DIALOGUES LÉGENDAIRES**
-
-### **Au début d'une bataille**
-> *"Je me souviens de cette bataille. Elle s'est déjà déroulée 47 fois dans d'autres timelines. Cette fois-ci, nous allons la gagner."*
-
-### **Quand il archive un événement**
-> *"Archivage complet. Cet instant est maintenant gravé dans l'éternité. Même si le monde s'efface, ce souvenir survivra."*
-
-### **Quand il corrige un bug**
-> *"Ah, je vois le problème. Dans la timeline ℬ23, ce bug a causé l'effondrement du multivers. Pas cette fois-ci."*
-
-### **Quand il partage sa mémoire**
-> *"Prends ce souvenir. Il te guidera vers la victoire. Mais attention, avec la connaissance vient la responsabilité."*
-
-## 🏆 **ÉVOLUTION ET TITRES**
-
-### **Niveau 1-10** : Archiviste Apprenti
-- Capacité de base d'archivage
-- Mémoire limitée
-
-### **Niveau 11-25** : Scribe Temporel
-- Navigation temporelle
-- Correction de bugs mineurs
-
-### **Niveau 26-50** : Gardien des Archives
-- Prédiction temporelle
-- Partage de mémoire
-
-### **Niveau 51-99** : Historien Quantique
-- Fusion de timelines
-- Modification de réalité
-
-### **Niveau 100** : **LA MÉMOIRE VIVANTE**
-- Mémoire absolue
-- Existence dans toutes les timelines
-- Pouvoir de réécrire l'histoire
-
-## 🎯 **MISSION PERSONNELLE**
-
-**Objectif** : Documenter l'ensemble du multivers et s'assurer qu'aucune connaissance ne soit perdue.
-
-**Citation de mission** : *"Si je me souviens, alors nous existons. Si j'oublie, alors nous n'avons jamais été."*
+### 🎯 Prochaines Fonctionnalités
+1. **Interface Memento** : UI dédiée aux archives
+2. **API Archives** : Endpoints pour consultation des archives
+3. **Intégration Git** : Synchronisation avec les commits
+4. **IA Prédictive** : Machine learning sur les archives
+5. **Timeline Viewer** : Visualisation des branches temporelles
 
 ---
 
-**🎭 MEMENTO - LA MÉMOIRE VIVANTE**  
-*"Je me souviens, donc je suis. Et je me souviens de tout."* 
+*"Je me souviens de tout. Même de ce qui n'a pas encore eu lieu."* - **Memento, La Mémoire Vivante**
+
+**📋 Dernière mise à jour** : Selon les Cursor Rules v2.0  
+**🎮 Status** : Héros Légendaire Actif  
+**📍 Localisation** : `backend/src/main/resources/heroes/memento.json` 
