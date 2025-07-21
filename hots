@@ -28,6 +28,9 @@ show_help() {
     echo -e "  ${GREEN}restart${NC}     Redémarre tous les services"
     echo -e "  ${GREEN}status${NC}      Affiche le statut des services"
     echo -e "  ${GREEN}test${NC}        Lance les tests (voir options ci-dessous)"
+    echo -e "  ${GREEN}generate${NC}    🧠 Génère la documentation MD depuis JSON (Memento)"
+    echo -e "  ${GREEN}map${NC}         🗺️  Gestion des maps et terrains"
+    echo -e "  ${GREEN}replay${NC}      📹 Système de replay des parties"
     echo -e "  ${GREEN}help${NC}        Affiche cette aide"
     echo ""
     echo -e "${YELLOW}Options de test:${NC}"
@@ -59,6 +62,9 @@ show_help() {
     echo -e "  ${CYAN}./hots test maven${NC}        # Test compilation backend"
     echo -e "  ${CYAN}./hots test final${NC}        # 🏆 TEST COMPLET FINAL"
     echo -e "  ${CYAN}./hots test report${NC}       # Rapport détaillé"
+    echo -e "  ${CYAN}./hots generate${NC}          # 🧠 Génère tous les MD depuis JSON"
+    echo -e "  ${CYAN}./hots map list${NC}          # 🗺️  Liste les maps disponibles"
+    echo -e "  ${CYAN}./hots replay view battle${NC} # 📹 Voir un replay de bataille"
 }
 
 check_services() {
@@ -669,6 +675,140 @@ generate_test_report() {
     echo -e "${CYAN}📈 Pour un diagnostic complet, utilisez: ${GREEN}./hots test final${NC}"
 }
 
+# 🧠 Fonction de génération MD - Memento
+generate_md_docs() {
+    echo -e "${CYAN}🧠 MEMENTO - Générateur de Documentation MD${NC}"
+    echo -e "${CYAN}============================================${NC}"
+    echo ""
+    
+    if [ ! -f "scripts/generate-md-from-json.py" ]; then
+        echo -e "${RED}❌ Générateur MD non trouvé: scripts/generate-md-from-json.py${NC}"
+        return 1
+    fi
+    
+    echo -e "${YELLOW}🔄 Génération automatique des fichiers Markdown...${NC}"
+    python3 scripts/generate-md-from-json.py
+    
+    if [ $? -eq 0 ]; then
+        echo ""
+        echo -e "${GREEN}✅ Génération terminée avec succès !${NC}"
+        echo -e "${YELLOW}📁 Fichiers générés dans :${NC}"
+        echo -e "  - ${CYAN}docs/artifacts/generated/${NC}"
+        echo -e "  - ${CYAN}docs/heroes/generated/${NC}"
+        echo -e "  - ${CYAN}docs/creatures/generated/${NC}"
+    else
+        echo -e "${RED}❌ Erreur lors de la génération${NC}"
+        return 1
+    fi
+}
+
+# 🗺️ Fonctions MAP
+manage_maps() {
+    local action="$1"
+    
+    case "$action" in
+        "list"|"")
+            echo -e "${CYAN}🗺️  SYSTÈME MAP - Heroes of Time${NC}"
+            echo -e "${CYAN}================================${NC}"
+            echo ""
+            echo -e "${YELLOW}📁 Maps disponibles :${NC}"
+            
+            if [ -d "game_assets/scenarios/maps/templates" ]; then
+                find game_assets/scenarios/maps/templates -name "*.hsp" -o -name "*.json" | while read map; do
+                    local name=$(basename "$map")
+                    local size=$(du -sh "$map" 2>/dev/null | cut -f1)
+                    echo -e "  📄 ${GREEN}$name${NC} (${size})"
+                done
+            else
+                echo -e "  ❌ Dossier templates non trouvé"
+            fi
+            
+            echo ""
+            echo -e "${YELLOW}🎮 Commandes disponibles :${NC}"
+            echo -e "  ${GREEN}./hots map list${NC}          # Liste les maps"
+            echo -e "  ${GREEN}./hots map create <name>${NC}  # Créer une nouvelle map"
+            echo -e "  ${GREEN}./hots map info <name>${NC}    # Infos sur une map"
+            ;;
+        "create")
+            local map_name="$2"
+            if [ -z "$map_name" ]; then
+                echo -e "${RED}❌ Usage: ./hots map create <nom_de_la_map>${NC}"
+                return 1
+            fi
+            
+            echo -e "${YELLOW}🔧 Création de la map: $map_name${NC}"
+            echo -e "${GREEN}✅ Map créée (fonctionnalité à implémenter)${NC}"
+            ;;
+        "info")
+            local map_name="$2"
+            echo -e "${YELLOW}📊 Informations sur la map: $map_name${NC}"
+            echo -e "${GREEN}✅ Infos map (fonctionnalité à implémenter)${NC}"
+            ;;
+        *)
+            echo -e "${RED}❌ Action inconnue: $action${NC}"
+            echo -e "${YELLOW}Actions disponibles: list, create, info${NC}"
+            return 1
+            ;;
+    esac
+}
+
+# 📹 Fonctions REPLAY
+manage_replays() {
+    local action="$1"
+    
+    case "$action" in
+        "list"|"")
+            echo -e "${CYAN}📹 SYSTÈME REPLAY - Heroes of Time${NC}"
+            echo -e "${CYAN}==================================${NC}"
+            echo ""
+            echo -e "${YELLOW}🎬 Replays disponibles :${NC}"
+            
+            if [ -d "game_assets/scenarios/maps/replays" ]; then
+                find game_assets/scenarios/maps/replays -name "*.hsp" -o -name "*.json" | while read replay; do
+                    local name=$(basename "$replay" | sed 's/\.[^.]*$//')
+                    local size=$(du -sh "$replay" 2>/dev/null | cut -f1)
+                    local date=$(stat -f "%Sm" -t "%Y-%m-%d %H:%M" "$replay" 2>/dev/null)
+                    echo -e "  🎬 ${GREEN}$name${NC} (${size}) - $date"
+                done
+            else
+                echo -e "  ❌ Aucun replay trouvé"
+            fi
+            
+            echo ""
+            echo -e "${YELLOW}🎮 Commandes disponibles :${NC}"
+            echo -e "  ${GREEN}./hots replay list${NC}           # Liste les replays"
+            echo -e "  ${GREEN}./hots replay view <name>${NC}     # Voir un replay"
+            echo -e "  ${GREEN}./hots replay analyze <name>${NC}  # Analyser un replay"
+            echo -e "  ${GREEN}./hots replay save <name>${NC}     # Sauvegarder partie actuelle"
+            ;;
+        "view")
+            local replay_name="$2"
+            if [ -z "$replay_name" ]; then
+                echo -e "${RED}❌ Usage: ./hots replay view <nom_du_replay>${NC}"
+                return 1
+            fi
+            
+            echo -e "${YELLOW}🎬 Visualisation du replay: $replay_name${NC}"
+            echo -e "${GREEN}✅ Replay viewer (fonctionnalité à implémenter)${NC}"
+            ;;
+        "analyze")
+            local replay_name="$2"
+            echo -e "${YELLOW}📊 Analyse du replay: $replay_name${NC}"
+            echo -e "${GREEN}✅ Analyse replay (fonctionnalité à implémenter)${NC}"
+            ;;
+        "save")
+            local replay_name="$2"
+            echo -e "${YELLOW}💾 Sauvegarde de la partie actuelle: $replay_name${NC}"
+            echo -e "${GREEN}✅ Sauvegarde replay (fonctionnalité à implémenter)${NC}"
+            ;;
+        *)
+            echo -e "${RED}❌ Action inconnue: $action${NC}"
+            echo -e "${YELLOW}Actions disponibles: list, view, analyze, save${NC}"
+            return 1
+            ;;
+    esac
+}
+
 # Fonction principale
 case "${1:-help}" in
     "start")
@@ -685,6 +825,15 @@ case "${1:-help}" in
         ;;
     "test")
         run_test_suite "$2"
+        ;;
+    "generate")
+        generate_md_docs
+        ;;
+    "map")
+        manage_maps "$2" "$3"
+        ;;
+    "replay")
+        manage_replays "$2" "$3"
         ;;
     "help"|*)
         show_help

@@ -28,7 +28,7 @@ Double chaos suivi d'une téléportation probabiliste
 ### 🔧 **Informations Techniques**
 - **Créé par** : VinceVega
 - **Date de création** : 2025-07-20
-- **Généré le** : 2025-07-21 17:49:32
+- **Généré le** : 2025-07-21 17:54:03
 - **Source JSON** : `custom-artifacts.json`
 
 ### 🎮 **Utilisation en Jeu**

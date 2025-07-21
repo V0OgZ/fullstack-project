@@ -28,7 +28,7 @@ MODIFY_ENERGY(hero, 50) + AMPLIFY(ψ1, 2.0)
 ### 🔧 **Informations Techniques**
 - **Créé par** : EnergyMaster
 - **Date de création** : 2024-01-17
-- **Généré le** : 2025-07-21 17:49:32
+- **Généré le** : 2025-07-21 17:54:03
 - **Source JSON** : `custom-artifacts.json`
 
 ### 🎮 **Utilisation en Jeu**

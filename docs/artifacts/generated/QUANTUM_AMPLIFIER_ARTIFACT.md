@@ -28,7 +28,7 @@ CREATE_AMPLITUDE(0.8, 0.6) + AMPLIFY(result, 2.0) + MODIFY_ENERGY(hero, 20)
 ### 🔧 **Informations Techniques**
 - **Créé par** : JeanGrofignon
 - **Date de création** : 2025-07-20
-- **Généré le** : 2025-07-21 17:49:32
+- **Généré le** : 2025-07-21 17:54:03
 - **Source JSON** : `custom-artifacts.json`
 
 ### 🎮 **Utilisation en Jeu**

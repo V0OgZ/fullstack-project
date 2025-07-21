@@ -25,7 +25,7 @@
 
 ### 🔧 **Informations Techniques**
 - **Fichier source** : `backend/src/main/resources/heroes/legendary/Claudius.json`
-- **Généré le** : 2025-07-21 17:49:32
+- **Généré le** : 2025-07-21 17:54:03
 - **Source JSON** : `INDEX.json`
 
 ### 🎮 **Utilisation en Jeu**

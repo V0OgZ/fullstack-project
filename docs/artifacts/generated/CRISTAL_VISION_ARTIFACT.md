@@ -28,7 +28,7 @@ MODIFY_VISION(hero, +1, 3)
 ### 🔧 **Informations Techniques**
 - **Créé par** : Voyant
 - **Date de création** : 2025-07-21
-- **Généré le** : 2025-07-21 17:49:32
+- **Généré le** : 2025-07-21 17:54:03
 - **Source JSON** : `custom-artifacts.json`
 
 ### 🎮 **Utilisation en Jeu**
