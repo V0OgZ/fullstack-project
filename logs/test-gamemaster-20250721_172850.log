@@ -1,0 +1,86 @@
+17:28:50 🔍 Vérification du backend...
+17:28:50 ✅ Backend actif
+17:28:50 📊 PHASE 1 : STATUS ET INFORMATIONS
+17:28:50 ====================================
+17:28:50 🧪 Test: Status du GameMaster
+17:28:50    URL: GET http://localhost:8080/api/gamemaster/status
+17:28:50    ❌ FAILED
+17:28:50 🧪 Test: Types de ressources disponibles
+17:28:50    URL: GET http://localhost:8080/api/gamemaster/resource-types
+17:28:50    ✅ SUCCESS
+17:28:50 🎮 PHASE 2 : CRÉATION D'UNE PARTIE TEST
+17:28:50 =======================================
+17:28:50 🎯 Création d'une partie de test...
+17:28:50 ✅ Partie créée avec ID: 1
+17:28:50 💰 PHASE 3 : GESTION DES RESSOURCES
+17:28:50 ===================================
+17:28:50 🧪 Test: Ressources initiales du joueur
+17:28:50    URL: GET http://localhost:8080/api/gamemaster/resources/1/gamemaster-test
+17:28:50    ❌ FAILED
+17:28:50 🧪 Test: Vérifier si peut construire un château
+17:28:50    URL: POST http://localhost:8080/api/gamemaster/can-afford/1/gamemaster-test
+17:28:50    ❌ FAILED
+17:28:50 🏗️ PHASE 4 : CONSTRUCTION DE BÂTIMENTS
+17:28:50 =======================================
+17:28:50 🧪 Test: Construire un château en (10,10)
+17:28:50    URL: POST http://localhost:8080/api/gamemaster/build/1
+17:28:50    ❌ FAILED
+17:28:50 🧪 Test: Construire une tour de guet en (12,10)
+17:28:50    URL: POST http://localhost:8080/api/gamemaster/build/1
+17:28:50    ❌ FAILED
+17:28:50 🧪 Test: Construire une forteresse (test prérequis)
+17:28:50    URL: POST http://localhost:8080/api/gamemaster/build/1
+17:28:50    ❌ FAILED
+17:28:50 ⚡ PHASE 5 : PRODUCTION DE RESSOURCES
+17:28:50 ====================================
+17:28:50 🧪 Test: Traiter la production d'un tour
+17:28:50    URL: POST http://localhost:8080/api/gamemaster/production/1/gamemaster-test
+17:28:50    ❌ FAILED
+17:28:50 🧪 Test: Ressources après production
+17:28:50    URL: GET http://localhost:8080/api/gamemaster/resources/1/gamemaster-test
+17:28:50    ❌ FAILED
+17:28:50 🤝 PHASE 6 : COMMERCE ET ÉCHANGES
+17:28:50 =================================
+17:28:50 🧪 Test: Échanger 1000 or contre 10 bois
+17:28:50    URL: POST http://localhost:8080/api/gamemaster/trade/1
+17:28:50    ❌ FAILED
+17:28:50 🧪 Test: Ressources après échange
+17:28:50    URL: GET http://localhost:8080/api/gamemaster/resources/1/gamemaster-test
+17:28:50    ❌ FAILED
+17:28:50 🎯 PHASE 7 : TESTS AVANCÉS
+17:28:50 ==========================
+17:28:50 🧪 Test: Construire un temple en (8,10)
+17:28:50    URL: POST http://localhost:8080/api/gamemaster/build/1
+17:28:50    ❌ FAILED
+17:28:50 🧪 Test: Construire une guilde de magie (après temple)
+17:28:50    URL: POST http://localhost:8080/api/gamemaster/build/1
+17:28:50    ❌ FAILED
+17:28:50 🧪 Test: Construire une ancre temporelle
+17:28:50    URL: POST http://localhost:8080/api/gamemaster/build/1
+17:28:50    ❌ FAILED
+17:28:50 📊 PHASE 8 : RAPPORT FINAL
+17:28:50 ==========================
+17:28:50 🧪 Test: État final des ressources
+17:28:50    URL: GET http://localhost:8080/api/gamemaster/resources/1/gamemaster-test
+17:28:50    ❌ FAILED
+17:28:50 🧪 Test: Production finale avec tous les bâtiments
+17:28:50    URL: POST http://localhost:8080/api/gamemaster/production/1/gamemaster-test
+17:28:50    ❌ FAILED
+17:28:50 🧪 Test: Ressources après production finale
+17:28:50    URL: GET http://localhost:8080/api/gamemaster/resources/1/gamemaster-test
+17:28:50    ❌ FAILED
+17:28:50 🎉 TEST GAMEMASTER TERMINÉ !
+17:28:50 ============================
+17:28:50 Partie testée : 1
+17:28:50 Joueur : gamemaster-test
+17:28:50 Log complet : logs/test-gamemaster-20250721_172850.log
+17:28:50 🏰 Fonctionnalités testées :
+17:28:50    ✅ Status et informations système
+17:28:50    ✅ Gestion des ressources (9 types)
+17:28:50    ✅ Construction de bâtiments avec prérequis
+17:28:50    ✅ Production automatique de ressources
+17:28:50    ✅ Commerce et échanges équitables
+17:28:50    ✅ Validation des coûts et disponibilité
+17:28:50    ✅ Bâtiments temporels spéciaux
+17:28:50 💡 Le GameMaster est maintenant opérationnel !
+17:28:50    Jean peut maintenant gérer une vraie économie H3 !

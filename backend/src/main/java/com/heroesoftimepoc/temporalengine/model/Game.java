@@ -8,7 +8,9 @@ package com.heroesoftimepoc.temporalengine.model;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Table(name = "games")
@@ -64,6 +66,12 @@ public class Game {
     @CollectionTable(name = "game_history", joinColumns = @JoinColumn(name = "game_id"))
     @Column(name = "event")
     private List<String> gameHistory = new ArrayList<>();
+    
+    @ElementCollection
+    @CollectionTable(name = "game_metadata", joinColumns = @JoinColumn(name = "game_id"))
+    @MapKeyColumn(name = "metadata_key")
+    @Column(name = "metadata_value")
+    private Map<String, Integer> metadata = new HashMap<>();
     
     @Column(name = "winner")
     private String winner;
@@ -134,6 +142,9 @@ public class Game {
     
     public List<GameTile> getTiles() { return tiles; }
     public void setTiles(List<GameTile> tiles) { this.tiles = tiles; }
+    
+    public Map<String, Integer> getMetadata() { return metadata; }
+    public void setMetadata(Map<String, Integer> metadata) { this.metadata = metadata; }
     
     public String getWinner() { return winner; }
     public void setWinner(String winner) { this.winner = winner; }
