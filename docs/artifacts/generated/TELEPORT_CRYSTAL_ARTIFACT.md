@@ -28,7 +28,7 @@ TELEPORT_HERO(hero, 10, 10) + MODIFY_ENERGY(hero, -20)
 ### 🔧 **Informations Techniques**
 - **Créé par** : MagicUser456
 - **Date de création** : 2024-01-16
-- **Généré le** : 2025-07-21 17:49:32
+- **Généré le** : 2025-07-21 17:54:03
 - **Source JSON** : `custom-artifacts.json`
 
 ### 🎮 **Utilisation en Jeu**

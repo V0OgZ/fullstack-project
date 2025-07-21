@@ -28,7 +28,7 @@ DESTRUCTIVE(ψ1, ψ2) + AMPLIFY(result, 2.5)
 ### 🔧 **Informations Techniques**
 - **Créé par** : QuantumWarrior
 - **Date de création** : 2024-01-18
-- **Généré le** : 2025-07-21 17:49:32
+- **Généré le** : 2025-07-21 17:54:03
 - **Source JSON** : `custom-artifacts.json`
 
 ### 🎮 **Utilisation en Jeu**

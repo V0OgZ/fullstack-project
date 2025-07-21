@@ -54,7 +54,7 @@ Un être d'énergie pure qui manipule les amplitudes comme des armes.
 ## 📊 **MÉTADONNÉES**
 
 ### 🔧 **Informations Techniques**
-- **Généré le** : 2025-07-21 17:49:32
+- **Généré le** : 2025-07-21 17:54:03
 - **Source JSON** : `quantum-creatures.json`
 
 ### 🎮 **Utilisation en Jeu**

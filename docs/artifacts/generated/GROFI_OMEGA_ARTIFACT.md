@@ -28,7 +28,7 @@ Force le collapse de tous les états quantiques dans un rayon
 ### 🔧 **Informations Techniques**
 - **Créé par** : JeanGrofignon
 - **Date de création** : 2025-07-20
-- **Généré le** : 2025-07-21 17:49:32
+- **Généré le** : 2025-07-21 17:54:03
 - **Source JSON** : `custom-artifacts.json`
 
 ### 🎮 **Utilisation en Jeu**
