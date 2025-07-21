@@ -24,6 +24,7 @@ show_help() {
     echo ""
     echo -e "${YELLOW}Commandes disponibles:${NC}"
     echo -e "  ${GREEN}start${NC}       Démarre tous les services en arrière-plan"
+    echo -e "  ${GREEN}start essential${NC} 🎯 Démarre services essentiels seulement (Backend + Frontend + Dashboard)"
     echo -e "  ${GREEN}stop${NC}        Arrête tous les services"
     echo -e "  ${GREEN}restart${NC}     Redémarre tous les services"
     echo -e "  ${GREEN}status${NC}      Affiche le statut des services"
@@ -165,6 +166,78 @@ start_services() {
         echo -e "${RED}❌ Script de démarrage non trouvé: $SERVICES_SCRIPT${NC}"
         return 1
     fi
+}
+
+start_essential_services() {
+    echo -e "${BLUE}🎯 Démarrage des services essentiels Heroes of Time${NC}"
+    echo "=================================================="
+    echo -e "${YELLOW}Services essentiels : Backend + Frontend + Dashboard${NC}"
+    echo ""
+    
+    # Démarrer le backend
+    echo -e "${CYAN}⚙️  Démarrage du Backend (port 8080)...${NC}"
+    if [ -d "backend" ]; then
+        cd backend
+        if mvn spring-boot:run -q > backend.log 2>&1 &
+        then
+            echo -e "${GREEN}✅ Backend démarré${NC}"
+            cd ..
+        else
+            echo -e "${RED}❌ Erreur démarrage backend${NC}"
+            cd ..
+            return 1
+        fi
+    else
+        echo -e "${RED}❌ Dossier backend non trouvé${NC}"
+        return 1
+    fi
+    
+    # Attendre que le backend soit prêt
+    echo -e "${YELLOW}⏳ Attente du démarrage backend...${NC}"
+    sleep 10
+    
+    # Démarrer le frontend
+    echo -e "${CYAN}🎮 Démarrage du Frontend (port 8000)...${NC}"
+    if [ -d "frontend" ]; then
+        cd frontend
+        if python3 -m http.server 8000 > frontend.log 2>&1 &
+        then
+            echo -e "${GREEN}✅ Frontend démarré${NC}"
+            cd ..
+        else
+            echo -e "${RED}❌ Erreur démarrage frontend${NC}"
+            cd ..
+            return 1
+        fi
+    else
+        echo -e "${RED}❌ Dossier frontend non trouvé${NC}"
+        return 1
+    fi
+    
+    # Démarrer le dashboard
+    echo -e "${CYAN}🎯 Démarrage du Dashboard (port 9000)...${NC}"
+    if [ -f "dashboard.html" ]; then
+        if python3 -m http.server 9000 > dashboard.log 2>&1 &
+        then
+            echo -e "${GREEN}✅ Dashboard démarré${NC}"
+        else
+            echo -e "${RED}❌ Erreur démarrage dashboard${NC}"
+            return 1
+        fi
+    else
+        echo -e "${RED}❌ Fichier dashboard.html non trouvé${NC}"
+        return 1
+    fi
+    
+    echo ""
+    echo -e "${GREEN}✅ Services essentiels démarrés !${NC}"
+    echo -e "${YELLOW}🌐 URLs d'accès :${NC}"
+    echo -e "  🎯 Dashboard : ${CYAN}http://localhost:9000/dashboard.html${NC}"
+    echo -e "  🎮 Frontend : ${CYAN}http://localhost:8000${NC}"
+    echo -e "  ⚙️  Backend API : ${CYAN}http://localhost:8080/api/health${NC}"
+    echo ""
+    echo -e "${YELLOW}💡 Pour démarrer tous les services : ${CYAN}./hots start${NC}"
+    echo -e "${YELLOW}💡 Pour vérifier l'état : ${CYAN}./hots status${NC}"
 }
 
 stop_services() {
@@ -884,7 +957,11 @@ manage_replays() {
 # Fonction principale
 case "${1:-help}" in
     "start")
-        start_services
+        if [ "$2" = "essential" ]; then
+            start_essential_services
+        else
+            start_services
+        fi
         ;;
     "stop")
         stop_services

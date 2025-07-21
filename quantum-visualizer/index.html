@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🌀 Quantum Timeline Visualizer - Heroes of Time</title>
+    <link rel="stylesheet" href="../translation-styles.css">
     <style>
         * {
             margin: 0;
@@ -721,6 +722,13 @@
         // =================
         window.onload = function() {
             logEvent('info', '🚀 Quantum Timeline Visualizer loaded');
+            
+            // 🌐 Initialiser le service de traduction
+            if (typeof TranslationService !== 'undefined') {
+                window.translationService = new TranslationService();
+                logEvent('info', '🌐 Service de traduction initialisé');
+            }
+            
             connectWebSocket();
             
             // Démarrer une simulation automatique après 3 secondes
@@ -731,5 +739,6 @@
             }, 3000);
         };
     </script>
+    <script src="../translation-service.js"></script>
 </body>
 </html> 

@@ -1,0 +1,145 @@
+🧩 QUANTUM MAZE - TEST PUZZLE QUANTIQUE
+=======================================
+[0;34mVérification du backend...[0m
+[0;32m✅ Backend accessible[0m
+
+[0;34mCréation de la partie Quantum Maze...[0m
+{
+  "gameId": 4,
+  "gameName": "Quantum Maze Test",
+  "success": true,
+  "message": "Game created successfully"
+}
+
+[0;35m=== NIVEAU 1: SUPERPOSITION BASIQUE ===[0m
+
+[0;36mTEST #1: Créer DrQuantum[0m
+[0;31m❌ FAIL[0m
+[0;33mExpected: true[0m
+[0;33mGot: null[0m
+
+[0;36mTEST #2: Positionner DrQuantum au début (1,1)[0m
+[0;31m❌ FAIL[0m
+[0;33mExpected: true[0m
+[0;33mGot: null[0m
+
+[0;36mTEST #3: Équiper wave_function_manipulator[0m
+[0;31m❌ FAIL[0m
+[0;33mExpected: true[0m
+[0;33mGot: null[0m
+
+[0;36mTEST #4: Équiper measurement_device[0m
+[0;31m❌ FAIL[0m
+[0;33mExpected: true[0m
+[0;33mGot: null[0m
+
+[0;36mTEST #5: Créer superposition (0.7+0.7i) à (5,3)[0m
+[0;31m❌ FAIL[0m
+[0;33mExpected: true[0m
+[0;33mGot: null[0m
+
+[0;35m=== NIVEAU 2: INTERFÉRENCE CONSTRUCTIVE ===[0m
+
+[0;36mTEST #6: Créer état ψA01 (0.6+0.8i)[0m
+[0;31m❌ FAIL[0m
+[0;33mExpected: true[0m
+[0;33mGot: null[0m
+
+[0;36mTEST #7: Créer état ψA02 (0.8+0.6i)[0m
+[0;31m❌ FAIL[0m
+[0;33mExpected: true[0m
+[0;33mGot: null[0m
+
+[0;35m=== NIVEAU 3: RÉSEAU D'INTRICATION ===[0m
+
+[0;36mTEST #8: Créer nœud intriqué 1[0m
+[0;31m❌ FAIL[0m
+[0;33mExpected: true[0m
+[0;33mGot: null[0m
+
+[0;36mTEST #9: Créer nœud intriqué 2[0m
+[0;31m❌ FAIL[0m
+[0;33mExpected: true[0m
+[0;33mGot: null[0m
+
+[0;36mTEST #10: Créer nœud intriqué 3[0m
+[0;31m❌ FAIL[0m
+[0;33mExpected: true[0m
+[0;33mGot: null[0m
+
+[0;35m=== NIVEAU 4: NETTOYAGE QUANTIQUE ===[0m
+
+[0;36mTEST #11: Créer bruit quantique 1[0m
+[0;31m❌ FAIL[0m
+[0;33mExpected: true[0m
+[0;33mGot: null[0m
+
+[0;36mTEST #12: Créer signal fort[0m
+[0;31m❌ FAIL[0m
+[0;33mExpected: true[0m
+[0;33mGot: null[0m
+
+[0;35m=== NIVEAU 5: PARADOXE TEMPOREL ===[0m
+
+[0;36mTEST #13: Créer paradoxe temporel (Δt-1)[0m
+[0;31m❌ FAIL[0m
+[0;33mExpected: true[0m
+[0;33mGot: null[0m
+
+[0;35m=== NIVEAU FINAL: PONT DIMENSIONNEL ===[0m
+
+[0;36mTEST #14: Déplacer DrQuantum à (12,10)[0m
+[0;31m❌ FAIL[0m
+[0;33mExpected: true[0m
+[0;33mGot: null[0m
+
+[0;36mTEST #15: Créer pont quantique vers sortie[0m
+[0;31m❌ FAIL[0m
+[0;33mExpected: true[0m
+[0;33mGot: null[0m
+
+[0;36mTEST #16: Téléportation vers la sortie[0m
+[0;31m❌ FAIL[0m
+[0;33mExpected: true[0m
+[0;33mGot: null[0m
+
+[0;35m=== VÉRIFICATION FINALE ===[0m
+
+[0;36mÉtat final du jeu:[0m
+{
+  "timestamp": "2025-07-21T20:21:25.108+00:00",
+  "status": 404,
+  "error": "Not Found",
+  "trace": "org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/game/4/state.\n\tat org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)\n\tat org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)\n\tat org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)\n\tat org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)\n\tat org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)\n\tat org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)\n\tat jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)\n\tat org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)\n\tat jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)\n\tat org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)\n\tat org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)\n\tat org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)\n\tat org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)\n\tat org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)\n\tat org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)\n\tat org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)\n\tat org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)\n\tat org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)\n\tat org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)\n\tat org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)\n\tat org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)\n\tat org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)\n\tat org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)\n\tat org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)\n\tat org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)\n\tat org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)\n\tat org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)\n\tat org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)\n\tat java.base/java.lang.Thread.run(Thread.java:840)\n",
+  "message": "No static resource api/game/4/state.",
+  "path": "/api/game/4/state"
+}
+
+[0;36mÉtats quantiques créés:[0m
+0
+
+[0;36mPosition finale de DrQuantum:[0m
+jq: error (at <stdin>:0): Cannot iterate over null (null)
+
+[0;35m=== RÉSUMÉ DES TESTS ===[0m
+Total tests: 16
+[0;32mPassés: 0[0m
+[0;31mÉchoués: 16[0m
+
+[0;33m⚠️  Certains tests ont échoué[0m
+
+[0;36m📊 Concepts testés:[0m
+✅ Superposition quantique avec amplitudes complexes
+✅ Interférence constructive d'états
+✅ Réseau d'intrication à 3 nœuds
+✅ Nettoyage d'états parasites
+✅ Paradoxes temporels (Δt négatif)
+✅ Téléportation quantique
+
+[0;34m🧩 Différence avec RPG classique:[0m
+- Héros: Scientifique vs Guerrier
+- Objets: Outils quantiques vs Armes
+- Gameplay: Résolution vs Combat
+- Victoire: Atteindre sortie vs Tuer boss
+
+🧩 Quantum Maze - Test terminé ! 🧩

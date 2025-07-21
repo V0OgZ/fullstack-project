@@ -1,0 +1,82 @@
+⚔️ TEST DUEL DU COLLAPSE - JSON VERSION
+=======================================
+🥊 Chargement du scénario de duel PVP...
+[0;36m[22:21:24][0m 📄 Scénario trouvé: DUEL_COLLAPSE.json
+[0;36m[22:21:24][0m 🚀 Démarrage du test DUEL COLLAPSE JSON
+
+[0;35m📋 Analyse du scénario...[0m
+[0;36m📖 Nom: Duel du Collapse[0m
+[0;36m🎯 Type: PVP_SHORT[0m
+[0;36m🔄 Tours max: 8[0m
+[0;36m⭐ Difficulté: EXPERT[0m
+[0;36m⏱️ Durée estimée: 10-15 minutes[0m
+[0;36m🗺️ Carte: 15x15 (quantum_arena)[0m
+[0;36m🦸 Héros: 2[0m
+[0;36m- Lysander (Niveau 12, 120 HP)[0m
+[0;36m- Morwyn (Niveau 12, 100 HP)[0m
+[0;36m🏆 Conditions de victoire:[0m
+[0;36m  - Collapse de la timeline ennemie[0m
+[0;36m  - Survie au tour 8 avec HP > 0[0m
+[0;36m  - Contrôle du Nexus Central[0m
+
+[0;34m🔍 Vérification du backend...[0m
+[0;32m✅ Backend accessible[0m
+
+[0;34m🎮 Configuration du jeu selon le scénario...[0m
+[0;32m✅ Jeu créé avec ID: 6[0m
+[0;34m🗺️ Configuration de la carte...[0m
+[0;33m⚠️ Configuration carte: endpoint peut ne pas exister[0m
+
+[0;35m👥 Création des héros du scénario...[0m
+
+[0;34m→ Création de Lysander (Niveau 12)[0m
+[0;31m  ❌ Erreur création Lysander[0m
+[0;33m  ⚠️ Placement Lysander: commande peut ne pas exister[0m
+[0;33m    ⚠️ Équipement wigner_eye: commande peut ne pas exister[0m
+[0;33m    ⚠️ Équipement quantum_blade: commande peut ne pas exister[0m
+
+[0;34m→ Création de Morwyn (Niveau 12)[0m
+[0;31m  ❌ Erreur création Morwyn[0m
+[0;33m  ⚠️ Placement Morwyn: commande peut ne pas exister[0m
+[0;33m    ⚠️ Équipement schrodinger_grimoire: commande peut ne pas exister[0m
+[0;33m    ⚠️ Équipement phase_armor: commande peut ne pas exister[0m
+
+[0;35m⚔️ Simulation du duel...[0m
+[0;36m🥊 Lysander VS Morwyn[0m
+[0;31m❌ Erreur lors du combat[0m
+{
+  "timestamp": "2025-07-21T20:21:27.578+00:00",
+  "status": 404,
+  "error": "Not Found",
+  "trace": "org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/temporal/execute/6.\n\tat org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)\n\tat org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)\n\tat org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)\n\tat org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)\n\tat org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)\n\tat org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)\n\tat jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)\n\tat org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)\n\tat jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)\n\tat org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)\n\tat org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)\n\tat org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)\n\tat org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)\n\tat org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)\n\tat org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)\n\tat org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)\n\tat org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)\n\tat org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)\n\tat org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)\n\tat org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)\n\tat org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)\n\tat org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)\n\tat org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)\n\tat org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)\n\tat org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)\n\tat org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)\n\tat org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)\n\tat org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)\n\tat java.base/java.lang.Thread.run(Thread.java:840)\n",
+  "message": "No static resource api/temporal/execute/6.",
+  "path": "/api/temporal/execute/6"
+}
+
+[0;35m🏆 Vérification des conditions de victoire...[0m
+[0;36m  📋 Collapse de la timeline ennemie[0m
+[0;36m  📋 Survie au tour 8 avec HP > 0[0m
+[0;36m  📋 Contrôle du Nexus Central[0m
+
+[0;36m🎮 État actuel du jeu:[0m
+{
+  "timestamp": "2025-07-21T20:21:27.619+00:00",
+  "status": 404,
+  "error": "Not Found",
+  "trace": "org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/games/6/state.\n\tat org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)\n\tat org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)\n\tat org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)\n\tat org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)\n\tat org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)\n\tat org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)\n\tat jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)\n\tat org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)\n\tat jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)\n\tat org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)\n\tat org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)\n\tat org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)\n\tat org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)\n\tat org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)\n\tat org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)\n\tat org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)\n\tat org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)\n\tat org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)\n\tat org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)\n\tat org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)\n\tat org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)\n\tat org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)\n\tat org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)\n\tat org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)\n\tat org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)\n\tat org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)\n\tat org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)\n\tat org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)\n\tat java.base/java.lang.Thread.run(Thread.java:840)\n",
+  "message": "No static resource api/games/6/state.",
+  "path": "/api/games/6/state"
+}
+
+[0;35m📊 RÉSUMÉ DU DUEL[0m
+====================
+[0;36m📖 Scénario: Duel du Collapse[0m
+[0;36m⭐ Difficulté: EXPERT[0m
+[0;36m⏱️ Durée: 10-15 minutes[0m
+
+[0;36m👥 Participants:[0m
+[0;36m- Lysander (null, Niveau 12)[0m
+[0;36m- Morwyn (null, Niveau 12)[0m
+
+[0;32m✅ Test du duel terminé[0m
+[0;36m[22:21:27][0m 🏁 Test terminé
