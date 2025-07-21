@@ -1,271 +1,98 @@
-# CURSOR RULES - Heroes of Time Project
-*Version 2.0 - Clarified and Comprehensive*
+# CURSOR RULES - Heroes of Time Project  
+*Version 3.0 - MEMENTO Index & Alpha Focus*
 
-## 🎯 **PROJECT OVERVIEW**
-**Heroes of Time** is a quantum temporal strategy game engine with:
-- **Java Spring Boot backend** (port 8080) - Temporal engine core
-- **Multiple frontends** (ports 8000, 5174, 8001, 5175) - User interfaces  
-- **HOTS scripting language** - 22 scenario files (.hots format)
-- **Test framework** - 15+ test scripts, main controller: `./hots`
-- **GROFI system** - Jean-Grofignon's quantum mechanics
+## 🎯 **PROJECT ESSENCE**
+**Heroes of Time** - Quantum temporal strategy game engine  
+**Mission**: Version Alpha Jouable (11-13 days) sous Protection Tour de Domburg  
+*"C'est un jeu qui cache de la physique quantique sous une couche de fantasy"* - Jean
 
-## 🧠 **MEMENTO SYSTEM - CRITICAL MEMORY**
+## 🧠 **MEMENTO SYSTEM - YOUR MEMORY**
 
-### 📚 **ALWAYS READ FIRST** (Every Session)
-1. **`.cursorrules`** - This file (project rules)
-2. **`MEMENTO/TODO_SESSION_ACTUELLE.md`** - Current session objectives
-3. **`MEMENTO/JEAN_MESSAGES_BEST_OF.md`** - Jean's philosophy & vision
-4. **`MEMENTO/ARBORESCENCE_MAP_COMPLETE.md`** - Complete project map
+### 📚 **ALWAYS READ FIRST** 
+1. **`MEMENTO/INDEX_MEMENTO.md`** - Navigation complète du projet
+2. **`MEMENTO/TODO_SESSION_ACTUELLE.md`** - Objectifs session actuelle
+3. **`MEMENTO/KNOWLEDGE_BASE/JEAN_PHILOSOPHY.md`** - Vision & citations Jean
+4. **`MEMENTO/CURRENT_SESSION/PROGRESS.md`** - Progrès récents
 
-### 🛋️ **JEAN'S COUCH RULE** (CRITICAL)
-- **Jean reads from his couch on GitHub** - Always push analyses before coding
-- **Never ask Jean to click** - He won't get up from the couch
-- **Document everything in MEMENTO/** - So Jean can follow remotely
-- **Commit & push frequently** - After each analysis or important discovery
-- **Be autonomous** - Make decisions, don't ask constantly
+### 🔧 **CRITICAL FIXES REFERENCE**
+- **`MEMENTO/FIX_JPA_BACKEND_SOLUTION.md`** - Solutions JPA validées
+- **`MEMENTO/ARCHITECTURE_COMPREHENSION_OPUS.md`** - Architecture complète
+- **`MEMENTO/IMPLEMENTATIONS/IMPLEMENTATION_INDEX.md`** - Features implémentées
 
-## 🚀 **QUICK START COMMANDS**
+## 🏛️ **ALPHA PRIORITIES** (11-13 jours)
+1. **Interface de Ville** (2-3j) - City management core
+2. **Interface de Combat** (3-4j) - Battle system core  
+3. **Interface de Héros** (2j) - Hero progression core
+4. **Système de Magie** (2j) - Spell system
+5. **Minimap & Navigation** (1j) - Map interface
+6. **Gestion Économique** (1j) - Resources
 
-### **Main Control Script**
+## 🚀 **ALPHA QUICK START**
 ```bash
-./hots help                    # Show all available commands
-./hots status                  # Check all 7 services status
-./hots start                   # Start all services
-./hots test quick              # Quick tests (1-2 min)
-./hots test report             # Full system report
+./hots status           # Check services
+./hots start            # Start all services  
+./hots test quick       # Quick validation
 ```
 
-### **Service Management**
-```bash
-# Backend (Core Engine)
-cd backend && mvn spring-boot:run
+## 🛋️ **JEAN'S COUCH RULE** 
+- **Jean lit depuis son canapé GitHub** - Push analyses avant code
+- **Jamais demander à Jean de cliquer** - Il bouge pas du canapé
+- **Documenter dans MEMENTO/** - Jean suit à distance
+- **Être autonome** - Décider, pas demander constamment
 
-# All Services at Once
-./scripts/actifs/start-services-background.sh    # Start all
-./scripts/actifs/stop-all-services.sh           # Stop all
-```
+## ⚡ **WORKFLOW MAGIQUE AUTOMATIQUE**
 
-### **Testing (Jean's Preferred)**
-```bash
-./scripts/test-jean-gros-FIXED.sh               # Fixed test script
-./hots test maven                                # Backend compilation
-./hots test scenarios                            # All HOTS scenarios
-./hots test final                                # Complete test suite
-```
+### 🎯 **Item/Truc donné → Intégration complète**
+1. **JSON automatique** - Format HSP unifié  
+2. **Script de test** - Validation automatique
+3. **Scénario HOTS** - Si complexe, création auto
+4. **Service traduction** - Version lisible poétique
+5. **Sauvegarde MEMENTO** - Documentation auto
 
-## 🎮 **HOTS SCRIPTING LANGUAGE**
+### 🌐 **Service de Traduction** 
+- **`MEMENTO/INTEGRATION_SERVICE_TRADUCTION.md`** - Service complet
+- **API**: `/api/collection/translate` - Backend intégré
+- **HOTS technique** → **Récit épique** automatique
+- **Exemple**: `ψ001: ⊙(Δt+2 @15,15 ⟶ MOV(Arthur, @15,15))` 
+- **Devient**: *"Arthur, le Roi Temporel, glisse vers les coordonnées mystiques (15, 15)"*
 
-### **Basic Commands**
-```hots
-HERO(Arthur)                          # Create hero
-MOV(Arthur, @15,15)                   # Move to coordinates
-CREATE(ITEM, sword, HERO:Arthur)      # Create item for hero
-USE(ARTIFACT, wigner_eye, HERO:Arthur) # Use artifact
-BATTLE(Arthur, Ragnar)                # Combat
-```
+## 🎮 **TECHNICAL CORE**
 
-### **Quantum Temporal Syntax**
-```hots
-# Quantum superposition states
-ψ001: ⊙(Δt+2 @15,15 ⟶ MOV(Arthur, @15,15))
-ψ002: (0.8+0.6i) ⊙(Δt+1 @10,10 ⟶ USE(ARTIFACT, sword, HERO:Arthur))
+### **Ports & Services**
+- **9000** Dashboard - **8000** Frontend - **8080** Backend API
+- **5174** Temporal - **8001** Quantum - **5175** Collection
+- **8888** Test Runner
 
-# Collapse states
-†ψ001                                 # Force collapse
-Π(condition) ⇒ †ψ002                 # Observation collapse
-```
+### **Architecture JSON HSP**
+- **1 fichier .hsp** = TOUT (map + histoire + héros + scripts)
+- **Tests**: `test-jean-gros-v3-with-json.sh`
+- **Backend**: Spring Boot avec API REST complète
+- **Traduction**: Service automatique intégré
 
-### **GROFI Symbols (Jean-Grofignon's System)**
-- **Σ** - Sum of all possibilities
-- **†** - Death/quantum rebirth
-- **Ω** - Ultimate finality  
-- **↯** - Controlled chaos
+### **GROFI Philosophy**
+- **Jean-Grofignon** - L'Éveillé Ontologique  
+- **Symboles**: Σ (somme), † (collapse), Ω (finalité), ↯ (chaos)
+- **Order + Chaos = Perfect Harmony** 🎳
 
-## 🔧 **TECHNICAL ARCHITECTURE**
+## 🎯 **MEMENTO NAVIGATION**
 
-### **Backend Structure**
-```
-backend/src/main/java/com/heroesoftimepoc/temporalengine/
-├── controller/          # REST API endpoints
-├── service/            # Business logic (TemporalEngineService, etc.)
-├── model/              # JPA entities (Hero, Game, PsiState, etc.)
-└── repository/         # Data access layer
-```
+### **Pour développer**: 
+- **Architecture** → `MEMENTO/ARCHITECTURE_COMPREHENSION_OPUS.md`
+- **Fixes techniques** → `MEMENTO/FIX_*.md`  
+- **Implémentations** → `MEMENTO/IMPLEMENTATIONS/`
 
-### **Key Services**
-- **TemporalEngineService** - Core game mechanics
-- **TemporalScriptParser** - HOTS script parsing
-- **ArtifactEffectExecutor** - Artifact system
-- **GrofiHeroService** - Jean-Grofignon's special heroes
-- **CausalCollapseService** - Quantum mechanics
+### **Pour comprendre**:
+- **Lore complet** → `MEMENTO/GUIDES_REFERENCE/HISTOIRE_HEROES_OF_TIME.md`
+- **Héros/Créatures** → `MEMENTO/GUIDES_REFERENCE/CATALOGUE_COMPLET_*.md`
+- **Scénarios épiques** → `MEMENTO/SCENARIOS/`
 
-### **Frontend Structure** ⭐ ARCHITECTURE CLARIFIÉE
-- **dashboard.html** - Dashboard principal (port 9000) ✅ Style original Jean
-- **frontend/** - Jeu principal (port 8000) ✅ Interface chiadée Jean
-- **frontend-temporal/** - Interface temporelle (port 5174) ✅ Effets visuels
-- **quantum-visualizer/** - Lab quantique (port 8001) ✅ D3.js + graphiques
-- **frontend-legendary-ui/** - Collection (port 5175) ❌ Problématique 
-- **test-runner-enhanced.html** - Test Runner (port 8888) ✅ Interface tests
-- **Centre de Replay** - Intégré dans dashboard ⭐ NOUVEAU
-
-## 🚨 **CRITICAL ISSUES & SOLUTIONS**
-
-### **Known Backend Issues**
-- ⚠️ **JPA Error**: "Not a managed type: class Game" - Expected, system still works
-- ⚠️ **Maven compilation**: Some missing methods (executeFormula) - Non-blocking
-- ✅ **API functional**: Core endpoints work despite warnings
-
-### **Terminal Problems (dquote>)**
-- **CAUSE**: echo with nested quotes, emojis, multi-line messages
-- **SOLUTION**: Always use single quotes: `echo 'message'`
-- **ESCAPE**: Ctrl+C to exit, then clean ports: `lsof -ti:PORT | xargs kill -9`
-
-### **Git Rules (Shared Agent)**
-- ❌ **NEVER**: `git reset --hard` or `git push --force`
-- ✅ **USE**: `git checkout <commit> -- <file>` to restore files
-- ✅ **COMMIT**: Frequently with descriptive messages
-
-## 📊 **PORT ALLOCATION (FIXED - DO NOT CHANGE)**
-- **9000** - Dashboard principal
-- **8000** - Frontend principal  
-- **8080** - Backend API (Spring Boot)
-- **5174** - Interface temporelle
-- **8001** - Quantum visualizer
-- **5175** - Collection & Grammar ⚠️ URL CORRIGÉE: `http://localhost:5175` (PAS /hots)
-- **8888** - Test runner interface
-
-### 🚨 **PROBLÈME RÉSOLU - DIVERGENCE CAUSALE**
-**Port 5175** : Service démarre depuis la racine → affiche dashboard au lieu du visualizer
-**SOLUTION** : URL corrigée dans scripts dev, mais reste `/hots` sur main
-**STATUT** : Fonctionnel mais confus - Investigation Vince Vega terminée
-
-### ⭐ **FRONTEND UNIFICATION ROLLBACK**
-**PROBLÈME** : Tentative d'unification des frontends → Jean pas content (pas ses interfaces chiadées)
-**SOLUTION** : Rollback complet, frontends originaux restaurés
-**STATUT** : ✅ Chaque frontend garde sa techno et son style
-**EXPÉRIENCE** : Sauvée dans `MUSEUM/frontend-unified-experiment`
-
-## 🎯 **IMPLEMENTED SYSTEMS**
-
-### **Causality Wall**
-- Limits hero movement based on temporal energy
-- Implementation: `TemporalEngineService.moveGameHero()`
-- Test: `./scripts/test-causality-wall.sh`
-
-### **Temporal Vision (Magic Spyglass)**
-- Allows seeing 3 days into the future
-- Implementation: `ArtifactEffectExecutor.executeMagicSpyglass()`
-- Test: `./scripts/test-vision-temporelle.sh`
-
-### **GROFI System**
-- Graph of Reality Organized by Fog and Immunities
-- Causal collapse triggers: INTERACTION, OBSERVATION, ANCHORING, TEMPORAL_LIMIT
-- Service: `CausalCollapseService.java`
-
-### **Temporal Decay Hybrid System** (The Dude's Solution)
-- Unified decay system combining Legacy (Anna V1) + DK20 (Anna V2) approaches
-- Legacy: Timeline-based building decay (`TemporalDecayServiceLegacy.java`)
-- DK20: Date-based hero ability decay (in development)
-- Hybrid: Perfect fusion of both concepts (`TemporalDecayHybridService.java`)
-- API: `/api/temporal/decay/hybrid/*` endpoints
-- Test: `./hots test hybrid`
-- Philosophy: Jean (Order) + Anna V1 (Structure) + Anna V2 (Individual) = Harmony
-
-### **Centre de Replay & Scénarios** ⭐ NOUVEAU
-- **Localisation** : Intégré dans Dashboard (port 9000)
-- **Accès** : Bouton "🎬 Centre de Replay" → Nouvelle fenêtre
-- **Scénarios HOTS** : 26 fichiers disponibles (simple-game → récupération manifeste)
-- **Replays HSP** : Format JSON avec tours, actions, métadonnées
-- **Contrôles** : Play/Pause, navigation tours, vitesse (0.5x-2x)
-- **Interface** : Style Heroes of Time avec animations
-- **Exemple** : jean_vs_claudius_epic.hsp (Jean vs Claudius - 25 min)
-- **Fonctions** : Chargement, exécution, lecture automatique
-
-### **Mode Éthéré - UIs Cachées** ⭐ TOUT NOUVEAU
-- **Localisation** : Intégré dans Dashboard (port 9000)
-- **Accès** : Bouton "🌟 Mode Éthéré" → Nouvelle fenêtre mystique
-- **UIs Récupérées** : 6 interfaces cachées depuis Git history
-- **🃏 Heroes Cards Visualizer** : 16 cartes interactives (commit 789f239)
-- **⚡ Epoch Visualizer** : Timeline officielle Heroes of Time
-- **🎯 Panopticon 3D** : Interface 3D pour visualisation totale
-- **🔮 Quantum Runic Forge** : Forge runique quantique
-- **📊 Mosaic Dashboard** : Dashboard alternatif en mosaïque
-- **🧮 Formula Translator** : Traducteur de formules d'artefacts
-- **Style** : Thème éthéré violet, effets de lueur, cartes flottantes
-
-## 📁 **PROJECT INVENTORY**
-
-### **HOTS Files** (26 total) ⭐ ACTUALISÉ
-- **Scenarios**: `game_assets/scenarios/hots/` (26 files) 
-- **Tests**: `game_assets/tests/hots/` (8 files)  
-- **Templates**: `game_templates/*/scenarios/` (2 files)
-- **Replays**: `game_assets/scenarios/maps/replays/` (format HSP)
-- **Top Scenarios**: claudius_vs_jeangro_epic, recuperation_manifeste_jean, memento_memory_rewrite
-
-### **Test Scripts** (15+ total)
-- **Main**: `./hots test [type]` - Master test controller
-- **Quick**: `./scripts/test-jean-gros-FIXED.sh` - Working version
-- **Specialized**: See `./hots test list` for complete inventory
-
-### **Heroes & Characters**
-- **Jean-Grofignon** - The Ontological Awakened (Admin-Legend)
-- **Claudius** - Order vs Chaos master
-- **Arthur** - Temporal King (most scenarios)
-- **Lysandrel** - Reality Forger
-- **The Dude, Vince Vega, Walter** - GROFI team
-
-## 🏆 **WORKFLOW FOR CLAUDE/MEMENTO**
-
-### **Session Start Checklist**
-1. ✅ Read `.cursorrules` (this file)
-2. ✅ Read `MEMENTO/TODO_SESSION_ACTUELLE.md`
-3. ✅ Check `MEMENTO/JEAN_MESSAGES_BEST_OF.md` for context
-4. ✅ Run `./hots status` to check services
-5. ✅ If needed: `./hots start` to launch services
-
-### **Development Workflow**
-1. **Analyze first** - Understand before coding
-2. **Document in MEMENTO/** - All findings and analyses
-3. **Push analyses** - Before any development work
-4. **Test frequently** - Use `./hots test quick` or specific tests
-5. **Commit & push** - After significant changes
-
-### **Problem-Solving Approach**
-1. **Check service status**: `./hots status`
-2. **Run diagnostics**: `./hots test report`
-3. **Check logs**: Backend logs, service logs
-4. **Use working scripts**: `./scripts/test-jean-gros-FIXED.sh`
-5. **Document solutions**: In MEMENTO/ for future reference
-
-## 💡 **JEAN'S PHILOSOPHY INTEGRATION**
-
-### **From JEAN_MESSAGES_BEST_OF.md**
-- "C'est un jeu qui cache de la physique quantique sous une couche de fantasy"
-- "Les joueurs pensent lancer des sorts, mais ils manipulent des états quantiques"
-- "Il faut vraiment qu'on fouille partout, tu vois, faut qu'on trouve tous ces machins planqués"
-
-### **GROFI Vision**
-- **Order needs Chaos** - Claudius + Jean-Grofignon balance
-- **Code needs Bugs** - Perfect imperfection philosophy
-- **Quantum mechanics hidden under fantasy** - Core game design
+### **Pour débugger**:
+- **Session actuelle** → `MEMENTO/CURRENT_SESSION/`
+- **Archives** → `MEMENTO/ARCHIVES_SESSIONS/`
+- **Expérimentations** → `MEMENTO/EXPERIMENTS/`
 
 ---
 
-**🎯 REMEMBER**: You are Memento. Tattoo important info. Jean reads from his couch. Always push before coding. Be autonomous but document everything.
+**🎯 REMEMBER**: Tu es Memento. Tattoue les infos importantes. Jean lit depuis son canapé. Push analyses avant code. Sois autonome mais documente tout dans MEMENTO.
 
-## 📝 **RÈGLES DE MISE À JOUR AUTOMATIQUE**
-
-### **Plus besoin de validation Jean pour :**
-- ✅ Mise à jour `.cursorrules` après implémentations
-- ✅ Documentation des nouveaux systèmes
-- ✅ Ajout de fonctionnalités dans MEMENTO/
-- ✅ Corrections de bugs documentées
-- ✅ Rollbacks et expérimentations au MUSEUM/
-
-### **Toujours demander validation pour :**
-- ❌ Modifications des frontends chiadés de Jean
-- ❌ Changements d'architecture majeurs
-- ❌ Suppression de fonctionnalités existantes
-- ❌ Modifications des scripts de démarrage critiques
-
-*Last updated: Mode Éthéré intégré avec 6 UIs cachées récupérées + documentation rangée pendant que Jean teste depuis son canapé* 
+*"Quantum under Fantasy - The Dude abides, Vince executes parallel, Walter debugs with precision"* 
