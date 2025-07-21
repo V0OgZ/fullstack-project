@@ -537,3 +537,145 @@ body {
     transform: scale(1.1);
     box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
 }
+
+/* Styles pour les nouveaux assets */
+.artifact-panel, .creature-panel {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.artifact-grid, .creature-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.artifact-card, .creature-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.artifact-card:hover, .creature-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #4a90e2;
+    transform: translateY(-2px);
+}
+
+.artifact-icon, .creature-icon {
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+.artifact-info, .creature-info {
+    flex: 1;
+}
+
+.artifact-info h4, .creature-info h4 {
+    margin: 0 0 5px 0;
+    color: #FFD700;
+    font-size: 14px;
+}
+
+.artifact-tier, .creature-type {
+    margin: 0 0 5px 0;
+    font-size: 12px;
+    color: #ccc;
+}
+
+.artifact-effects, .creature-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+.effect, .creature-stats span {
+    font-size: 10px;
+    padding: 2px 6px;
+    background: rgba(74, 144, 226, 0.2);
+    border-radius: 3px;
+    color: #87CEEB;
+}
+
+.creature-abilities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+}
+
+.ability {
+    font-size: 9px;
+    padding: 1px 4px;
+    background: rgba(255, 193, 7, 0.2);
+    border-radius: 2px;
+    color: #FFD700;
+}
+
+.hero-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.hero-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #FFD700;
+    transform: translateY(-2px);
+}
+
+.hero-card .hero-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.hero-card .hero-info {
+    flex: 1;
+}
+
+.hero-card h4 {
+    margin: 0 0 2px 0;
+    color: #FFD700;
+    font-size: 14px;
+}
+
+.hero-title, .hero-class {
+    margin: 0 0 2px 0;
+    font-size: 11px;
+    color: #ccc;
+}
+
+.hero-stats {
+    display: flex;
+    gap: 8px;
+}
+
+.hero-stats span {
+    font-size: 10px;
+    color: #87CEEB;
+}
