@@ -131,30 +131,20 @@ echo -e "${CYAN}====================================${NC}"
 
 # Appliquer la décroissance temporelle
 echo -e "${YELLOW}⏰ Application de la décroissance temporelle...${NC}"
-DECAY_RESPONSE=$(curl -s -X POST "$BACKEND_URL/api/temporal/decay/apply/$GAME_ID" \
+DECAY_RESPONSE=$(curl -s -X POST "$BACKEND_URL/api/temporal/decay/$GAME_ID/apply" \
     -H "Content-Type: application/json")
 
 echo -e "${GREEN}✅ Décroissance appliquée${NC}"
-
-# Afficher les résultats de la décroissance
 echo -e "${CYAN}📊 Résultats de la décroissance:${NC}"
-if command -v jq >/dev/null 2>&1; then
-    echo "$DECAY_RESPONSE" | jq '.'
-else
-    echo "$DECAY_RESPONSE"
-fi
+echo "$DECAY_RESPONSE" | jq '.' 2>/dev/null || echo "$DECAY_RESPONSE"
 
 # Obtenir les statistiques détaillées
 echo -e "${YELLOW}📈 Statistiques détaillées...${NC}"
-STATS_RESPONSE=$(curl -s -X GET "$BACKEND_URL/api/temporal/decay/stats/$GAME_ID" \
+STATS_RESPONSE=$(curl -s -X GET "$BACKEND_URL/api/temporal/decay/$GAME_ID/statistics" \
     -H "Content-Type: application/json")
 
 echo -e "${CYAN}📊 Statistiques détaillées:${NC}"
-if command -v jq >/dev/null 2>&1; then
-    echo "$STATS_RESPONSE" | jq '.'
-else
-    echo "$STATS_RESPONSE"
-fi
+echo "$STATS_RESPONSE" | jq '.' 2>/dev/null || echo "$STATS_RESPONSE"
 
 # ============================================================================
 # VÉRIFICATION DE L'ÉTAT FINAL

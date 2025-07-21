@@ -143,9 +143,35 @@ public class TemporalDecayService {
      * Calculer le nombre de jours de retard d'un héros
      */
     private int calculateDaysBehind(Game game, Hero hero) {
-        int currentTimeline = game.getCurrentTimeline() != null ? Integer.parseInt(game.getCurrentTimeline()) : 0;
-        int heroTimeline = hero.getTimelineBranch() != null ? Integer.parseInt(hero.getTimelineBranch()) : 0;
-        return Math.max(0, currentTimeline - heroTimeline);
+        try {
+            // Extraire le numéro de la timeline en supprimant les symboles spéciaux
+            String currentTimelineStr = game.getCurrentTimeline();
+            String heroTimelineStr = hero.getTimelineBranch();
+            
+            int currentTimeline = 0;
+            int heroTimeline = 0;
+            
+            if (currentTimelineStr != null) {
+                // Extraire le numéro après ℬ ou tout autre symbole
+                String currentNumber = currentTimelineStr.replaceAll("[^0-9-]", "");
+                if (!currentNumber.isEmpty()) {
+                    currentTimeline = Integer.parseInt(currentNumber);
+                }
+            }
+            
+            if (heroTimelineStr != null) {
+                // Extraire le numéro après ℬ ou tout autre symbole
+                String heroNumber = heroTimelineStr.replaceAll("[^0-9-]", "");
+                if (!heroNumber.isEmpty()) {
+                    heroTimeline = Integer.parseInt(heroNumber);
+                }
+            }
+            
+            return Math.max(0, currentTimeline - heroTimeline);
+        } catch (NumberFormatException e) {
+            // En cas d'erreur de parsing, retourner 0 (pas de décroissance)
+            return 0;
+        }
     }
     
     /**

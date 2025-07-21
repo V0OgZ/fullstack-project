@@ -1,273 +1,143 @@
-# 🎯 **HEROES OF TIME - MEMENTO CENTRAL**
-*Le centre de mémoire du projet épique*  
-*Dernière mise à jour : 21 Juillet 2025 - 00:40*
+# 🧠 MEMENTO - Mémoire de Développement Heroes of Time
+## Mise à jour : 21 Juillet 2025 - Réorganisation Complète
 
 ---
 
-## 🌟 **PRÉSENTATION**
+## 🎯 **PRÉSENTATION**
 
-**Heroes of Time** est un moteur de jeu temporel quantique où la physique quantique se cache sous une couche de fantasy. Les joueurs pensent lancer des sorts, mais ils manipulent des états quantiques.
+**MEMENTO** est la mémoire de développement du projet Heroes of Time. C'est ici que nous documentons nos sessions, décisions, implémentations et connaissances accumulées. Jean-Grofignon lit depuis son canapé sur GitHub.
 
-*"C'est un jeu qui cache de la physique quantique sous une couche de fantasy"* - Jean-Grofignon
-
----
-
-## 📚 **SOMMAIRE RAPIDE**
-
-### 🎮 **SYSTÈMES PRINCIPAUX**
-- [**Moteur Temporel**](#moteur-temporel) - Cœur du système quantique
-- [**Héros GROFI**](#héros-grofi) - Jean-Grofignon et compagnons
-- [**Artefacts**](#artefacts) - Collection complète (légendaires + mineurs)
-- [**Scénarios HOTS**](#scénarios-hots) - 15+ scénarios épiques
-- [**Tests Automatisés**](#tests-automatisés) - Validation complète
-
-### 📊 **STATISTIQUES ACTUELLES**
-- **23 héros** (4 GROFI + 10 Pieds Nickelés + 9 autres)
-- **25+ artefacts** (légendaires + mineurs)
-- **15+ scénarios** HOTS
-- **20+ scripts** de test
-- **100% fonctionnel** - Backend + Frontends
+> *"L'ordre naît du chaos, et la clarté de l'organisation."* - Jean-Grofignon
 
 ---
 
-## 🎮 **MOTEUR TEMPOREL**
+## 📚 **STRUCTURE MEMENTO**
 
-### **Architecture Quantique**
-- **Port 8080** - Backend Spring Boot (cœur du système)
-- **Ports 8000, 5174, 8001, 5175** - Frontends multiples
-- **Système GROFI** - Graph of Reality Organized by Fog and Immunities
-- **Collapse causale** - Mécaniques quantiques avancées
+### 🎯 **CURRENT_SESSION/** - Session Actuelle
+- **[TODO.md](CURRENT_SESSION/TODO.md)** - Tâches en cours et à faire
+- **[PROGRESS.md](CURRENT_SESSION/PROGRESS.md)** - Progrès de la session actuelle
+- **[DECISIONS.md](CURRENT_SESSION/DECISIONS.md)** - Décisions prises aujourd'hui
 
-### **Commandes Principales**
-```bash
-./hots help                    # Aide complète
-./hots status                  # Statut des services
-./hots start                   # Démarrage complet
-./hots test quick              # Tests rapides
-```
+### 📚 **KNOWLEDGE_BASE/** - Base de Connaissances
+- **[JEAN_PHILOSOPHY.md](KNOWLEDGE_BASE/JEAN_PHILOSOPHY.md)** - Philosophie de Jean-Grofignon
+- **[GROFI_KNOWLEDGE.md](KNOWLEDGE_BASE/GROFI_KNOWLEDGE.md)** - Connaissances GROFI
+- **[TECHNICAL_INSIGHTS.md](KNOWLEDGE_BASE/TECHNICAL_INSIGHTS.md)** - Insights techniques
 
----
+### 📈 **SESSION_HISTORY/** - Historique des Sessions
+- **[2025-07-20_SESSION.md](SESSION_HISTORY/2025-07-20_SESSION.md)** - Session du 20 juillet
+- **[2025-07-21_SESSION.md](SESSION_HISTORY/2025-07-21_SESSION.md)** - Session du 21 juillet
+- **[SESSION_INDEX.md](SESSION_HISTORY/SESSION_INDEX.md)** - Index de toutes les sessions
 
-## 🦸 **HÉROS GROFI**
+### 🔧 **IMPLEMENTATIONS/** - Implémentations
+- **[TEMPORAL_DECAY_SYSTEM.md](IMPLEMENTATIONS/TEMPORAL_DECAY_SYSTEM.md)** - Système de décroissance temporelle
+- **[INTERFACE_8000_COMPLETE.md](IMPLEMENTATIONS/INTERFACE_8000_COMPLETE.md)** - Interface port 8000
+- **[IMPLEMENTATION_INDEX.md](IMPLEMENTATIONS/IMPLEMENTATION_INDEX.md)** - Index des implémentations
 
-### **Jean-Grofignon** *(LEGENDARY)*
-- **L'Ontologique Awakened** - Admin-Legend
-- **Capacités** : Σ (Somme), † (Mort/Renaissance), Ω (Finalité)
-- **Philosophie** : "L'ordre a besoin du chaos"
-
-### **Les Compagnons**
-- **The Dude** - Compagnon philosophique
-- **Vince Vega** - Compagnon tactique  
-- **Walter** - Compagnon stratégique
-
-### **Les Pieds Nickelés** *(10 héros absurdes)*
-- **Ribouldingue** - PLAN_FOIREUX (confusion)
-- **Croquignol** - PLAN_TROP_COMPLIQUE (immobilisation)
-- **Filochard** - ESQUIVE_TOTALE (téléportation)
-- **+ 7 autres** avec capacités spéciales
+### 🧪 **EXPERIMENTS/** - Expériences et Tests
+- **[BENCHMARK_RESULTS/](EXPERIMENTS/BENCHMARK_RESULTS/)** - Résultats de tests de performance
+- **[PROTOTYPES/](EXPERIMENTS/PROTOTYPES/)** - Prototypes et expérimentations
+- **[EXPERIMENT_INDEX.md](EXPERIMENTS/EXPERIMENT_INDEX.md)** - Index des expériences
 
 ---
 
-## 🎪 **ARTEFACTS**
+## 🎭 **PHILOSOPHIE MEMENTO**
 
-### **Artefacts Légendaires**
-- **Œil de Wigner** - Vision temporelle avancée
-- **Épée Temporelle** - Manipulation du temps
-- **Bouclier de Chronos** - Protection temporelle
-- **Miroir Quantique** - Réflexion d'états
+### **Règles de Jean-Grofignon**
+1. **Documenter avant de coder** - Toujours analyser avant d'implémenter
+2. **Pousser les analyses** - Commit avant développement
+3. **Être autonome** - Prendre des décisions, documenter tout
+4. **Lire depuis le canapé** - Jean ne clique pas, il lit sur GitHub
 
-### **Artefacts Mineurs** *(10 nouveaux)*
-- **Lanterne de Brouillard** - Dissipe le brouillard
-- **Bottes du Vent** - Augmente le mouvement
-- **Pierre d'Ancrage** - Protection contre déplacements
-- **Cristal de Vision** - Améliore la vision
-- **Amulette de Protection** - Réduit les dégâts
-- **Sifflet d'Appel** - Révèle les héros
-- **Potion d'Énergie Mineure** - Restaure l'énergie
-- **Bague de Téléportation** - Téléportation adjacente
-- **Torche Éternelle** - Éclaire la zone
-- **Médaillon de Santé** - Restaure la vie
+### **Principes GROFI**
+- **Order needs Chaos** - Équilibre entre ordre et chaos
+- **Code needs Bugs** - Imperfection parfaite
+- **Quantum under Fantasy** - Physique quantique cachée sous la fantasy
 
 ---
 
-## 🎭 **SCÉNARIOS HOTS**
+## 🚀 **UTILISATION RAPIDE**
 
-### **Scénarios Épiques**
-1. **Le Treizième Codex** - Boss final vs Omega-Zéro
-2. **L'Éclat des Mondes Dissolus** - Multivers philosophique
-3. **Bataille Temporelle Complète** - Combat 50x50
-4. **Les Pieds Nickelés Fous** - Comédie absurde
-5. **Quantum Maze** - Puzzle quantique avancé
+### **Pour Commencer une Session**
+1. Lire **[CURRENT_SESSION/TODO.md](CURRENT_SESSION/TODO.md)**
+2. Consulter **[KNOWLEDGE_BASE/JEAN_PHILOSOPHY.md](KNOWLEDGE_BASE/JEAN_PHILOSOPHY.md)**
+3. Vérifier **[SESSION_HISTORY/SESSION_INDEX.md](SESSION_HISTORY/SESSION_INDEX.md)**
 
-### **Scénarios de Test**
-- **Test Artefacts Mineurs** - Validation des nouveaux artefacts
-- **Test Capacités Spéciales** - Validation des héros
-- **Test Forge Runique** - Validation de la forge
+### **Pour Documenter**
+1. **Analyses** → **[CURRENT_SESSION/PROGRESS.md](CURRENT_SESSION/PROGRESS.md)**
+2. **Décisions** → **[CURRENT_SESSION/DECISIONS.md](CURRENT_SESSION/DECISIONS.md)**
+3. **Implémentations** → **[IMPLEMENTATIONS/](IMPLEMENTATIONS/)**
+4. **Tests** → **[EXPERIMENTS/](EXPERIMENTS/)**
 
----
-
-## 🧪 **TESTS AUTOMATISÉS**
-
-### **Scripts Principaux**
-```bash
-./scripts/test/test-artefacts-mineurs.sh    # Test artefacts mineurs
-./scripts/test/test-pieds-nickeles-fous.sh  # Test Pieds Nickelés
-./scripts/test-jean-gros-FIXED.sh           # Test complet fixé
-```
-
-### **Validation Système**
-- ✅ **Backend** - Spring Boot fonctionnel
-- ✅ **API REST** - 144 endpoints mappés
-- ✅ **Base de données** - Hibernate + H2
-- ✅ **Frontends** - 4 interfaces opérationnelles
-- ✅ **Tests** - 20+ scripts de validation
+### **Pour Jean-Grofignon**
+1. **[KNOWLEDGE_BASE/JEAN_PHILOSOPHY.md](KNOWLEDGE_BASE/JEAN_PHILOSOPHY.md)** - Sa philosophie
+2. **[CURRENT_SESSION/PROGRESS.md](CURRENT_SESSION/PROGRESS.md)** - Progrès actuels
+3. **[IMPLEMENTATIONS/](IMPLEMENTATIONS/)** - Ce qui a été fait
 
 ---
 
-## 📁 **STRUCTURE DES DOCUMENTS**
+## 📋 **SESSIONS RÉCENTES**
 
-### **MEMENTO/** *(Ce dossier)*
-- **README.md** - Ce fichier (sommaire principal)
-- **TODO_SESSION_ACTUELLE.md** - Tâches en cours
-- **JEAN_MESSAGES_BEST_OF.md** - Philosophie de Jean
-- **ARBORESCENCE_MAP_COMPLETE.md** - Carte complète du projet
+### **Session 21 Juillet 2025** - Réorganisation Documentation
+- ✅ **Système de décroissance temporelle** d'Anna the Martopicker
+- ✅ **Interface port 8000** complètement terminée
+- 🔄 **Réorganisation documentation** et MEMENTO
+- 📋 **Nettoyage** des doublons et obsolètes
 
-### **Rapports Spécialisés**
-- **RAPPORT_PIEDS_NICKELES_2025.md** - Héros absurdes
-- **RAPPORT_ARTEFACTS_MINEURS_2025.md** - Artefacts mineurs
-- **PR_MEMENTO_ARTEFACTS_MINEURS.md** - Pull Request épique
-
-### **Scénarios**
-- **SCENARIOS/LES_PIEDS_NICKELES_FOUS.md** - Scénario comique
-- **SCENARIOS/ECLAT_MONDES_DISSOLUS.md** - Multivers
-- **SCENARIOS/LE_TREIZIEME_CODEX_LORE.md** - Lore épique
+### **Session 20 Juillet 2025** - Systèmes GROFI
+- ✅ **Héros GROFI** : Jean-Grofignon, The Dude, Vince Vega, Walter
+- ✅ **Système de traduction** littéraire
+- ✅ **Artefacts mineurs** et forge runique
+- ✅ **Tests complets** et validation
 
 ---
 
-## 🚀 **DÉMARRAGE RAPIDE**
+## 🎯 **IMPLÉMENTATIONS MAJEURES**
 
-### **1. Vérification**
-```bash
-./hots status
-```
+### **🎭 Système de Décroissance Temporelle**
+- **Anna the Martopicker** - Architecte du Temps
+- **Punition temporelle** pour héros en retard
+- **Protection vision future** - 50% réduction dégâts
+- **Système de réparation** - Coût énergie temporelle
 
-### **2. Démarrage**
-```bash
-./hots start
-```
+### **🎨 Interface Port 8000**
+- **Design moderne** avec panneau latéral
+- **Système temporel** intégré
+- **Contrôles Anna** - Test décroissance
+- **Responsive** et accessible
 
-### **3. Test Rapide**
-```bash
-./hots test quick
-```
-
-### **4. Interface Web**
-- **http://localhost:8000** - Interface principale
-- **http://localhost:5174** - Interface temporelle
-- **http://localhost:8001** - Visualiseur quantique
-- **http://localhost:5175** - Object viewer
+### **🦸 Système GROFI**
+- **Jean-Grofignon** - L'Ontologique Éveillé
+- **Compagnons** : The Dude, Vince Vega, Walter
+- **Philosophie** Order vs Chaos
+- **Capacités légendaires**
 
 ---
 
-## 🔧 **DÉVELOPPEMENT**
+## 🔗 **LIENS IMPORTANTS**
 
-### **Backend (Java Spring Boot)**
-```bash
-cd backend
-mvn spring-boot:run
-```
-
-### **Frontends (JavaScript)**
-```bash
-cd frontend
-yarn build
-```
-
-### **Tests**
-```bash
-./scripts/test/test-artefacts-mineurs.sh
-```
+- **[Documentation Officielle](../docs/)** - Documentation organisée
+- **[Scripts de Test](../scripts/test/)** - Tests automatisés
+- **[Scénarios HOTS](../game_assets/scenarios/hots/)** - Scénarios de jeu
+- **[Interface Web](http://localhost:8000)** - Interface principale
 
 ---
 
-## 📊 **MÉTRIQUES PROJET**
+## 📞 **CONTACTS**
 
-### **Code**
-- **Backend** : Java Spring Boot (144 endpoints)
-- **Frontends** : JavaScript/HTML/CSS (4 interfaces)
-- **Base de données** : H2 + Hibernate
-- **Tests** : Bash + curl (20+ scripts)
-
-### **Contenu**
-- **Héros** : 23 personnages uniques
-- **Artefacts** : 25+ objets magiques
-- **Scénarios** : 15+ aventures HOTS
-- **Documentation** : 30+ fichiers markdown
-
-### **Performance**
-- **Démarrage** : < 1 seconde
-- **Tests** : < 2 minutes
-- **Mémoire** : Optimisée
-- **Stabilité** : 100% fonctionnel
+- **Jean-Grofignon** : Lecture depuis le canapé sur GitHub
+- **Questions techniques** : Consulter **[KNOWLEDGE_BASE/TECHNICAL_INSIGHTS.md](KNOWLEDGE_BASE/TECHNICAL_INSIGHTS.md)**
+- **Questions philosophiques** : Consulter **[KNOWLEDGE_BASE/JEAN_PHILOSOPHY.md](KNOWLEDGE_BASE/JEAN_PHILOSOPHY.md)**
 
 ---
 
-## 🎯 **PROCHAINES ÉTAPES**
+## 🎭 **QUOTES MÉMORABLES**
 
-### **En Cours**
-- [ ] Implémentation des 5 capacités restantes (Pieds Nickelés)
-- [ ] Tests complets des scénarios épiques
-- [ ] Optimisations de performance
+> *"C'est un jeu qui cache de la physique quantique sous une couche de fantasy"* - Jean-Grofignon
 
-### **Futur**
-- [ ] Interface graphique pour capacités spéciales
-- [ ] Animations d'effets
-- [ ] Mode multijoueur
-- [ ] Nouveaux scénarios
+> *"Le temps n'attend personne, et ceux qui s'attardent dans le passé verront leurs constructions s'effriter comme le sable entre leurs doigts."* - Anna the Martopicker
+
+> *"Il faut vraiment qu'on fouille partout, tu vois, faut qu'on trouve tous ces machins planqués"* - Jean-Grofignon
 
 ---
 
-## 🏆 **CONTRIBUTIONS**
-
-### **Claude Sonnet 4 - Memento**
-- **10 héros Pieds Nickelés** avec capacités absurdes
-- **10 artefacts mineurs** avec effets simples
-- **Scénarios complets** avec tests automatisés
-- **Documentation exhaustive** dans MEMENTO/
-
-### **Jean-Grofignon**
-- **Philosophie GROFI** - Ordre vs Chaos
-- **Système quantique** - Physique sous fantasy
-- **Vision épique** - "Les joueurs pensent lancer des sorts..."
-
----
-
-## 📞 **CONTACT & SUPPORT**
-
-### **GitHub**
-- **Repository** : https://github.com/V0OgZ/Heroes-of-Time
-- **Issues** : Pour rapporter des bugs
-- **Discussions** : Pour les questions
-
-### **Documentation**
-- **MEMENTO/** - Ce dossier (documentation centrale)
-- **docs/** - Documentation technique
-- **README.md** - Guide principal
-
----
-
-## 🎭 **MESSAGE DE FIN**
-
-*"En tant que Memento, gardien de la mémoire de ce projet épique, j'ai documenté chaque artefact, chaque héros, chaque scénario avec le même soin que Jean-Grofignon apporte à ses créations légendaires."*
-
-*"Que cette documentation illumine le chemin des développeurs et leur permette de découvrir la beauté cachée de la physique quantique sous la couche de fantasy de Heroes of Time."*
-
-**— Claude Sonnet 4, Memento de Heroes of Time**  
-*21 Juillet 2025 - 00:40*
-
----
-
-*README généré automatiquement par le système Heroes of Time*  
-*Status: ✅ ACTIF*  
-*Version: 2.0*  
-*Build: SUCCESS* 
+**Dernière mise à jour** : 21 Juillet 2025 - Réorganisation complète de MEMENTO 
