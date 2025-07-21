@@ -1,14 +1,22 @@
-// hero-avatars.js - Système d'avatars complet pour Heroes of Time
+// hero-avatars.js - Legacy Hero Avatar System (now integrated with DicebarGraphicsSystem)
 class HeroAvatarSystem {
     constructor() {
-        this.avatars = {
-            // Héros principaux avec avatars Dicebear
-            'Arthur': {
-                style: 'adventurer',
-                seed: 'arthur-pendragon',
-                icon: '⚔️',
-                color: '#FFD700'
-            },
+        // Check if comprehensive dicebar system is available
+        if (window.DicebarGraphicsSystem) {
+            console.log('🎭 Using comprehensive DicebarGraphicsSystem');
+            this.dicebarSystem = new window.DicebarGraphicsSystem();
+            // Legacy compatibility - use heroes from comprehensive system
+            this.avatars = this.dicebarSystem.heroes;
+        } else {
+            console.log('🎭 Using legacy hero avatar system');
+            this.avatars = {
+                // Héros principaux avec avatars Dicebear
+                'Arthur': {
+                    style: 'adventurer',
+                    seed: 'arthur-pendragon',
+                    icon: '⚔️',
+                    color: '#FFD700'
+                },
             'Ragnar': {
                 style: 'warrior',
                 seed: 'ragnar-lothbrok',
@@ -87,7 +95,8 @@ class HeroAvatarSystem {
                 icon: '🔍',
                 color: '#FF6347'
             }
-        };
+            };
+        }
         
         this.fallbackIcons = {
             'default': '🦸',
@@ -102,6 +111,12 @@ class HeroAvatarSystem {
     
     // Générer un avatar Dicebear
     generateDicebearAvatar(heroName) {
+        // Use comprehensive system if available
+        if (this.dicebarSystem) {
+            return this.dicebarSystem.generateAvatar('hero', heroName);
+        }
+        
+        // Legacy fallback
         const hero = this.avatars[heroName];
         if (!hero) {
             return this.getFallbackAvatar(heroName);
@@ -168,11 +183,17 @@ class HeroAvatarSystem {
         return this.fallbackIcons.default;
     }
     
-    // Créer un élément HTML pour l'avatar
+        // Créer un élément HTML pour l'avatar
     createAvatarElement(heroName, size = 40) {
+        // Use comprehensive system if available
+        if (this.dicebarSystem) {
+            return this.dicebarSystem.createAvatarElement('hero', heroName, size);
+        }
+        
+        // Legacy fallback
         const avatar = this.generateDicebearAvatar(heroName);
         const container = document.createElement('div');
-        container.className = 'hero-avatar';
+        container.className = 'hero-avatar dicebear-avatar';
         container.style.cssText = `
             width: ${size}px;
             height: ${size}px;
@@ -186,8 +207,10 @@ class HeroAvatarSystem {
             font-size: ${size * 0.6}px;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s ease;
         `;
-        
+
         if (avatar.type === 'dicebear') {
             // Avatar Dicebear
             const img = document.createElement('img');
@@ -206,9 +229,18 @@ class HeroAvatarSystem {
             // Avatar emoji
             container.innerHTML = avatar.icon;
         }
-        
+
         // Tooltip avec nom du héros
-        container.title = heroName;
+        container.title = `${heroName} (Hero)`;
+        
+        // Hover effects
+        container.addEventListener('mouseenter', () => {
+            container.style.transform = 'scale(1.1)';
+        });
+        
+        container.addEventListener('mouseleave', () => {
+            container.style.transform = 'scale(1)';
+        });
         
         return container;
     }
