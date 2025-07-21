@@ -57,7 +57,7 @@ class GameplayEnhancement {
             <div class="hero-grid" id="hero-grid">
                 ${this.getAvailableHeroes().map(hero => `
                     <button class="hero-select-btn" data-hero="${hero}">
-                        ${this.avatarSystem.createAvatarElement(hero, 50).outerHTML}
+                        <div class="hero-icon">${this.getHeroIcon(hero)}</div>
                         <span class="hero-name">${hero}</span>
                     </button>
                 `).join('')}
@@ -132,10 +132,9 @@ class GameplayEnhancement {
     }
     
     getAvailableHeroes() {
+        // Liste simplifiée des héros principaux
         return [
-            'Arthur', 'Ragnar', 'Morgana', 'Merlin', 'Grunt',
-            'Lysandrel', 'Nyx-Lua', 'Thane', 'Gardien Zephyr', 'Roland',
-            'Jean-Grofignon', 'Claudius', 'The Dude', 'Walter'
+            'Arthur', 'Ragnar', 'Merlin', 'Jean-Grofignon', 'Claudius'
         ];
     }
     
@@ -173,7 +172,7 @@ class GameplayEnhancement {
         infoDiv.innerHTML = `
             <div class="hero-info">
                 <div class="hero-avatar-large">
-                    ${this.avatarSystem.createAvatarElement(this.selectedHero, 60).outerHTML}
+                    <div class="hero-icon-large">${this.getHeroIcon(this.selectedHero)}</div>
                 </div>
                 <div class="hero-stats">
                     <h4>${this.selectedHero}</h4>
@@ -220,6 +219,17 @@ class GameplayEnhancement {
         if (!hero || !window.gameRenderer) return;
         
         window.gameRenderer.centerOnHero(heroName);
+    }
+    
+    getHeroIcon(heroName) {
+        const icons = {
+            'Arthur': '⚔️',
+            'Ragnar': '🛡️',
+            'Merlin': '🔮',
+            'Jean-Grofignon': '🧠',
+            'Claudius': '⚖️'
+        };
+        return icons[heroName] || '👤';
     }
     
     executeHeroAction(action) {
@@ -313,7 +323,7 @@ class GameplayEnhancement {
     }
     
     handleMapClick(event) {
-        if (!this.isPlaying || !this.selectedHero) return;
+        if (!this.selectedHero) return;
         
         const rect = event.target.getBoundingClientRect();
         const x = event.clientX - rect.left;
@@ -322,22 +332,69 @@ class GameplayEnhancement {
         // Convertir en coordonnées hexagonales
         const hex = window.gameRenderer.pixelToHex(x, y);
         
-        switch (this.currentMode) {
-            case 'movement':
-                this.executeScript(`MOV(${this.selectedHero}, @${hex.q},${hex.r})`);
-                this.exitMode();
-                break;
-            case 'attack':
-                // Chercher un héros à cette position
-                const target = this.findHeroAtPosition(hex.q, hex.r);
-                if (target && target !== this.selectedHero) {
-                    this.executeScript(`BATTLE(${this.selectedHero}, ${target})`);
+        // Mode intelligent : détecter automatiquement l'action
+        if (this.isPlaying) {
+            // Mode action en cours
+            switch (this.currentMode) {
+                case 'movement':
+                    this.executeScript(`MOV(${this.selectedHero}, @${hex.q},${hex.r})`);
+                    this.exitMode();
+                    break;
+                case 'attack':
+                    const target = this.findHeroAtPosition(hex.q, hex.r);
+                    if (target && target !== this.selectedHero) {
+                        this.executeScript(`BATTLE(${this.selectedHero}, ${target})`);
+                    } else {
+                        alert('Aucun ennemi à cette position');
+                    }
+                    this.exitMode();
+                    break;
+            }
+        } else {
+            // Mode intelligent : détecter automatiquement
+            const target = this.findHeroAtPosition(hex.q, hex.r);
+            
+            if (target) {
+                if (target === this.selectedHero) {
+                    // Clic sur le héros sélectionné : afficher info
+                    this.showHeroInfo(target);
                 } else {
-                    alert('Aucun ennemi à cette position');
+                    // Clic sur autre héros : attaquer
+                    this.executeScript(`BATTLE(${this.selectedHero}, ${target})`);
                 }
-                this.exitMode();
-                break;
+            } else {
+                // Clic sur case vide : déplacer
+                this.executeScript(`MOV(${this.selectedHero}, @${hex.q},${hex.r})`);
+            }
         }
+    }
+    
+    showHeroInfo(heroName) {
+        const hero = this.findHeroInGameState(heroName);
+        if (!hero) return;
+        
+        const info = `
+            🦸 ${heroName}
+            ❤️ Santé: ${hero.health}/${hero.maxHealth || 100}
+            ⚡ Énergie: ${hero.temporalEnergy}/${hero.maxTemporalEnergy || 100}
+            📍 Position: (${hero.position.x}, ${hero.position.y})
+        `;
+        
+        this.showMessage(info, 'info');
+    }
+    
+    showMessage(message, type = 'info') {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `game-message ${type}`;
+        messageDiv.textContent = message;
+        
+        document.body.appendChild(messageDiv);
+        
+        setTimeout(() => {
+            if (document.body.contains(messageDiv)) {
+                document.body.removeChild(messageDiv);
+            }
+        }, 3000);
     }
     
     findHeroAtPosition(x, y) {

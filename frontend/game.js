@@ -342,9 +342,10 @@ class GameRenderer {
             // Different icons for different heroes
             const heroIcons = {
                 'Arthur': '⚔️',
-                'Morgana': '🧙‍♀️',
                 'Ragnar': '🛡️',
                 'Merlin': '🔮',
+                'Jean-Grofignon': '🧠',
+                'Claudius': '⚖️',
                 'default': '🦸'
             };
             const icon = heroIcons[hero.name] || heroIcons.default;
