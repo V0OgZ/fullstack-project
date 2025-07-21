@@ -1,0 +1,92 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------< com.heroesoftimepoc:temporal-engine >-----------------
+[INFO] Building Heroes of Time POC - Temporal Engine 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ temporal-engine ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 23 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.11.0:compile (default-compile) @ temporal-engine ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ temporal-engine ---
+[INFO] Copying 3 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.11.0:testCompile (default-testCompile) @ temporal-engine ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 18 source files with javac [debug release 17] to target/test-classes
+[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java: Some input files use unchecked or unsafe operations.
+[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java: Recompile with -Xlint:unchecked for details.
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/test/java/com/heroesoftimepoc/temporalengine/QuantumMazeTest.java:[105,79] cannot access com.heroesoftimepoc.temporalengine.service.QuantumInterferenceService.InterferenceResult
+  bad class file: /Users/admin/HOT/Heroes-of-Time/backend/target/classes/com/heroesoftimepoc/temporalengine/service/QuantumInterferenceService$InterferenceResult.class
+    unable to access file: java.nio.file.NoSuchFileException: /Users/admin/HOT/Heroes-of-Time/backend/target/classes/com/heroesoftimepoc/temporalengine/service/QuantumInterferenceService$InterferenceResult.class
+    Please remove or make sure it appears in the correct subdirectory of the classpath.
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[64,9] cannot access com.heroesoftimepoc.temporalengine.service.PanopticonService.VisualizationData
+  bad class file: /Users/admin/HOT/Heroes-of-Time/backend/target/classes/com/heroesoftimepoc/temporalengine/service/PanopticonService$VisualizationData.class
+    unable to access file: java.nio.file.NoSuchFileException: /Users/admin/HOT/Heroes-of-Time/backend/target/classes/com/heroesoftimepoc/temporalengine/service/PanopticonService$VisualizationData.class
+    Please remove or make sure it appears in the correct subdirectory of the classpath.
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[85,9] cannot access com.heroesoftimepoc.temporalengine.service.PanopticonService.PanopticonView
+  bad class file: /Users/admin/HOT/Heroes-of-Time/backend/target/classes/com/heroesoftimepoc/temporalengine/service/PanopticonService$PanopticonView.class
+    unable to access file: java.nio.file.NoSuchFileException: /Users/admin/HOT/Heroes-of-Time/backend/target/classes/com/heroesoftimepoc/temporalengine/service/PanopticonService$PanopticonView.class
+    Please remove or make sure it appears in the correct subdirectory of the classpath.
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[102,9] cannot access com.heroesoftimepoc.temporalengine.service.PanopticonService.ActionResult
+  bad class file: /Users/admin/HOT/Heroes-of-Time/backend/target/classes/com/heroesoftimepoc/temporalengine/service/PanopticonService$ActionResult.class
+    unable to access file: java.nio.file.NoSuchFileException: /Users/admin/HOT/Heroes-of-Time/backend/target/classes/com/heroesoftimepoc/temporalengine/service/PanopticonService$ActionResult.class
+    Please remove or make sure it appears in the correct subdirectory of the classpath.
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[131,9] cannot find symbol
+  symbol:   class VisualizationData
+  location: class com.heroesoftimepoc.temporalengine.PanopticonServiceTest
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[134,26] cannot access com.heroesoftimepoc.temporalengine.service.PanopticonService.SpatialNode
+  bad class file: /Users/admin/HOT/Heroes-of-Time/backend/target/classes/com/heroesoftimepoc/temporalengine/service/PanopticonService$SpatialNode.class
+    unable to access file: java.nio.file.NoSuchFileException: /Users/admin/HOT/Heroes-of-Time/backend/target/classes/com/heroesoftimepoc/temporalengine/service/PanopticonService$SpatialNode.class
+    Please remove or make sure it appears in the correct subdirectory of the classpath.
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[145,9] cannot find symbol
+  symbol:   class VisualizationData
+  location: class com.heroesoftimepoc.temporalengine.PanopticonServiceTest
+[INFO] 7 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.486 s
+[INFO] Finished at: 2025-07-21T09:57:16+02:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:testCompile (default-testCompile) on project temporal-engine: Compilation failure: Compilation failure: 
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/test/java/com/heroesoftimepoc/temporalengine/QuantumMazeTest.java:[105,79] cannot access com.heroesoftimepoc.temporalengine.service.QuantumInterferenceService.InterferenceResult
+[ERROR]   bad class file: /Users/admin/HOT/Heroes-of-Time/backend/target/classes/com/heroesoftimepoc/temporalengine/service/QuantumInterferenceService$InterferenceResult.class
+[ERROR]     unable to access file: java.nio.file.NoSuchFileException: /Users/admin/HOT/Heroes-of-Time/backend/target/classes/com/heroesoftimepoc/temporalengine/service/QuantumInterferenceService$InterferenceResult.class
+[ERROR]     Please remove or make sure it appears in the correct subdirectory of the classpath.
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[64,9] cannot access com.heroesoftimepoc.temporalengine.service.PanopticonService.VisualizationData
+[ERROR]   bad class file: /Users/admin/HOT/Heroes-of-Time/backend/target/classes/com/heroesoftimepoc/temporalengine/service/PanopticonService$VisualizationData.class
+[ERROR]     unable to access file: java.nio.file.NoSuchFileException: /Users/admin/HOT/Heroes-of-Time/backend/target/classes/com/heroesoftimepoc/temporalengine/service/PanopticonService$VisualizationData.class
+[ERROR]     Please remove or make sure it appears in the correct subdirectory of the classpath.
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[85,9] cannot access com.heroesoftimepoc.temporalengine.service.PanopticonService.PanopticonView
+[ERROR]   bad class file: /Users/admin/HOT/Heroes-of-Time/backend/target/classes/com/heroesoftimepoc/temporalengine/service/PanopticonService$PanopticonView.class
+[ERROR]     unable to access file: java.nio.file.NoSuchFileException: /Users/admin/HOT/Heroes-of-Time/backend/target/classes/com/heroesoftimepoc/temporalengine/service/PanopticonService$PanopticonView.class
+[ERROR]     Please remove or make sure it appears in the correct subdirectory of the classpath.
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[102,9] cannot access com.heroesoftimepoc.temporalengine.service.PanopticonService.ActionResult
+[ERROR]   bad class file: /Users/admin/HOT/Heroes-of-Time/backend/target/classes/com/heroesoftimepoc/temporalengine/service/PanopticonService$ActionResult.class
+[ERROR]     unable to access file: java.nio.file.NoSuchFileException: /Users/admin/HOT/Heroes-of-Time/backend/target/classes/com/heroesoftimepoc/temporalengine/service/PanopticonService$ActionResult.class
+[ERROR]     Please remove or make sure it appears in the correct subdirectory of the classpath.
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[131,9] cannot find symbol
+[ERROR]   symbol:   class VisualizationData
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.PanopticonServiceTest
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[134,26] cannot access com.heroesoftimepoc.temporalengine.service.PanopticonService.SpatialNode
+[ERROR]   bad class file: /Users/admin/HOT/Heroes-of-Time/backend/target/classes/com/heroesoftimepoc/temporalengine/service/PanopticonService$SpatialNode.class
+[ERROR]     unable to access file: java.nio.file.NoSuchFileException: /Users/admin/HOT/Heroes-of-Time/backend/target/classes/com/heroesoftimepoc/temporalengine/service/PanopticonService$SpatialNode.class
+[ERROR]     Please remove or make sure it appears in the correct subdirectory of the classpath.
+[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[145,9] cannot find symbol
+[ERROR]   symbol:   class VisualizationData
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.PanopticonServiceTest
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

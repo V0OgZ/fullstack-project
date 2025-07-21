@@ -26,8 +26,8 @@
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  0.639 s
-[INFO] Finished at: 2025-07-21T09:49:23+02:00
+[INFO] Total time:  0.714 s
+[INFO] Finished at: 2025-07-21T09:54:08+02:00
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:3.2.0:run (default-cli) on project heroes-of-time-temporal: Unable to find a suitable main class, please add a 'mainClass' property -> [Help 1]
 [ERROR] 

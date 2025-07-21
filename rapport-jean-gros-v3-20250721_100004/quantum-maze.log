@@ -1,0 +1,5 @@
+🧩 QUANTUM MAZE - TEST PUZZLE QUANTIQUE
+=======================================
+[0;34mVérification du backend...[0m
+[0;31m❌ Backend non accessible ![0m
+Lancez d'abord : cd backend && mvn spring-boot:run
