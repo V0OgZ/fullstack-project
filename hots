@@ -140,12 +140,13 @@ show_status() {
     echo -e "  🧪 Test Runner: ${CYAN}http://localhost:8888${NC}"
     
     echo ""
-    if [ $active_services -eq 6 ]; then
-        echo -e "${GREEN}✅ Tous les services sont actifs !${NC}"
-    elif [ $active_services -gt 3 ]; then
-        echo -e "${YELLOW}⚠️  $active_services/6 services actifs${NC}"
+    # 🎳 WALTER'S ANTI-SCHRÖDINGER FIX - LOGIC BINAIRE PURE !
+    if [ $active_services -eq 7 ]; then
+        echo -e "${GREEN}🎳 WALTER: TOUS LES SERVICES SONT VRAIMENT ACTIFS ! ($active_services/7)${NC}"
+    elif [ $active_services -gt 4 ]; then
+        echo -e "${YELLOW}⚠️  WALTER: SERVICES PARTIELLEMENT ACTIFS ($active_services/7) - ACCEPTABLE${NC}"
     else
-        echo -e "${RED}❌ Seulement $active_services/6 services actifs${NC}"
+        echo -e "${RED}🚨 WALTER: SERVICES EN PANNE ! ($active_services/7) - INACCEPTABLE !${NC}"
     fi
 }
 

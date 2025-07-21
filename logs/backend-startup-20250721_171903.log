@@ -2796,3 +2796,160 @@ Hibernate: alter table if exists tile_occupants add constraint FKia56skupqk3qxyp
 2025-07-21T18:19:54.561+02:00  INFO 16058 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
 2025-07-21T18:19:54.563+02:00  INFO 16058 --- [  restartedMain] c.h.t.TemporalEngineApplication          : Started TemporalEngineApplication in 0.559 seconds (process running for 3646.831)
 2025-07-21T18:19:54.564+02:00  INFO 16058 --- [  restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-07-21T18:20:10.034+02:00  INFO 16058 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat-8].[localhost].[/]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-07-21T18:20:10.034+02:00  INFO 16058 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-07-21T18:20:10.034+02:00 DEBUG 16058 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2025-07-21T18:20:10.034+02:00 DEBUG 16058 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2025-07-21T18:20:10.034+02:00 DEBUG 16058 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2025-07-21T18:20:10.035+02:00 DEBUG 16058 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@5466adb2
+2025-07-21T18:20:10.035+02:00 DEBUG 16058 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@70e62827
+2025-07-21T18:20:10.035+02:00 DEBUG 16058 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2025-07-21T18:20:10.035+02:00  INFO 16058 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-07-21T18:20:10.035+02:00 DEBUG 16058 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/game/status", parameters={}
+2025-07-21T18:20:10.035+02:00 DEBUG 16058 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.GameController#getStatus()
+Hibernate: select count(*) from games g1_0
+2025-07-21T18:20:10.038+02:00 DEBUG 16058 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-21T18:20:10.038+02:00 DEBUG 16058 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{activeGames=0, engine=Heroes of Time Temporal Engine, version=POC-0.1, status=running, timestamp=17 (truncated)...]
+2025-07-21T18:20:10.039+02:00 DEBUG 16058 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-21T18:20:10.114+02:00 DEBUG 16058 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/api/game/create", parameters={}
+2025-07-21T18:20:10.114+02:00 DEBUG 16058 --- [nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.GameController#createGame(Map)
+2025-07-21T18:20:10.115+02:00 DEBUG 16058 --- [nio-8080-exec-3] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [{gameName=Test UI Quick, maxPlayers=2}]
+Hibernate: insert into games (created_at,current_player,current_timeline,current_turn,ended_at,game_name,map_height,map_width,max_players,started_at,status,winner,id) values (?,?,?,?,?,?,?,?,?,?,?,?,default)
+Hibernate: insert into game_players (game_id,player_id) values (?,?)
+2025-07-21T18:20:10.119+02:00 DEBUG 16058 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-21T18:20:10.119+02:00 DEBUG 16058 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{gameId=1, gameName=Test UI Quick, success=true, message=Game created successfully}]
+2025-07-21T18:20:10.119+02:00 DEBUG 16058 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-21T18:20:10.134+02:00 DEBUG 16058 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : POST "/api/game/1/script", parameters={}
+2025-07-21T18:20:10.135+02:00 DEBUG 16058 --- [nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.GameController#executeScript(Long, Map)
+2025-07-21T18:20:10.135+02:00 DEBUG 16058 --- [nio-8080-exec-5] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [{script=HERO(Ragnar)}]
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0 where g1_0.id=?
+Hibernate: insert into heroes (causality_awareness,current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,temporal_immunity,temporal_vision_range,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+Hibernate: select ps1_0.game_id,ps1_0.id,ps1_0.action_type,ps1_0.branch_id,ps1_0.collapse_trigger,ps1_0.amplitude_imaginary,ps1_0.amplitude_real,ps1_0.created_at,ps1_0.delta_t,ps1_0.expression,ps1_0.owner_hero,ps1_0.probability,ps1_0.psi_id,ps1_0.status,ps1_0.target_x,ps1_0.target_y,ps1_0.use_complex_amplitude from psi_states ps1_0 where ps1_0.game_id=?
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+Hibernate: select t1_0.game_id,t1_0.id,t1_0.building_owner,t1_0.building_type,t1_0.defense_bonus,t1_0.has_psi_states,t1_0.is_locked,t1_0.is_temporal_zone,t1_0.lock_duration,t1_0.movement_cost,t1_0.temporal_energy_bonus,t1_0.temporal_zone_type,t1_0.terrain,t1_0.x,t1_0.y from game_tiles t1_0 where t1_0.game_id=?
+Hibernate: update games set created_at=?,current_player=?,current_timeline=?,current_turn=?,ended_at=?,game_name=?,map_height=?,map_width=?,max_players=?,started_at=?,status=?,winner=? where id=?
+2025-07-21T18:20:10.140+02:00 DEBUG 16058 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-21T18:20:10.140+02:00 DEBUG 16058 --- [nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{result={success=true, movementPoints=8, heroName=Ragnar, message=Game hero Ragnar created successfu (truncated)...]
+2025-07-21T18:20:10.140+02:00 DEBUG 16058 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-21T18:20:10.153+02:00 DEBUG 16058 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/game/status", parameters={}
+2025-07-21T18:20:10.153+02:00 DEBUG 16058 --- [nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.GameController#getStatus()
+Hibernate: select count(*) from games g1_0
+2025-07-21T18:20:10.154+02:00 DEBUG 16058 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-21T18:20:10.154+02:00 DEBUG 16058 --- [nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{activeGames=1, engine=Heroes of Time Temporal Engine, version=POC-0.1, status=running, timestamp=17 (truncated)...]
+2025-07-21T18:20:10.154+02:00 DEBUG 16058 --- [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-21T18:20:10.162+02:00 DEBUG 16058 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/game/status", parameters={}
+2025-07-21T18:20:10.162+02:00 DEBUG 16058 --- [nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.GameController#getStatus()
+Hibernate: select count(*) from games g1_0
+2025-07-21T18:20:10.163+02:00 DEBUG 16058 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-21T18:20:10.163+02:00 DEBUG 16058 --- [nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{activeGames=1, engine=Heroes of Time Temporal Engine, version=POC-0.1, status=running, timestamp=17 (truncated)...]
+2025-07-21T18:20:10.163+02:00 DEBUG 16058 --- [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-21T18:20:10.223+02:00 DEBUG 16058 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/temporal/health", parameters={}
+2025-07-21T18:20:10.223+02:00 DEBUG 16058 --- [nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.TemporalEngineController#health()
+2025-07-21T18:20:10.225+02:00 DEBUG 16058 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-21T18:20:10.225+02:00 DEBUG 16058 --- [nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{service=Heroes of Time Temporal Engine, version=POC-0.1, status=healthy, timestamp=1753114810224}]
+2025-07-21T18:20:10.225+02:00 DEBUG 16058 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-21T18:20:10.237+02:00 DEBUG 16058 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/api/temporal/games", parameters={}
+2025-07-21T18:20:10.237+02:00 DEBUG 16058 --- [nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.TemporalEngineController#createGame(Map)
+2025-07-21T18:20:10.237+02:00 DEBUG 16058 --- [nio-8080-exec-3] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [{gameName=UI Test Game, playerId=ui-test}]
+2025-07-21T18:20:10.237+02:00 DEBUG 16058 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Failed to complete request: jakarta.servlet.ServletException: Handler dispatch failed: java.lang.Error: Unresolved compilation problems: 
+	The method initializeGame(String) in the type GameInitializationService is not applicable for the arguments (Game)
+	The method initializePlayerEconomy(Game, String) is undefined for the type GameInitializationService
+
+2025-07-21T18:20:10.237+02:00 ERROR 16058 --- [nio-8080-exec-3] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Handler dispatch failed: java.lang.Error: Unresolved compilation problems: 
+	The method initializeGame(String) in the type GameInitializationService is not applicable for the arguments (Game)
+	The method initializePlayerEconomy(Game, String) is undefined for the type GameInitializationService
+] with root cause
+
+java.lang.Error: Unresolved compilation problems: 
+	The method initializeGame(String) in the type GameInitializationService is not applicable for the arguments (Game)
+	The method initializePlayerEconomy(Game, String) is undefined for the type GameInitializationService
+
+	at com.heroesoftimepoc.temporalengine.controller.TemporalEngineController.createGame(TemporalEngineController.java:61) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:254) ~[spring-web-6.1.1.jar:6.1.1]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:182) ~[spring-web-6.1.1.jar:6.1.1]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.1.jar:6.1.1]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:917) ~[spring-webmvc-6.1.1.jar:6.1.1]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:829) ~[spring-webmvc-6.1.1.jar:6.1.1]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.1.jar:6.1.1]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.1.jar:6.1.1]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.1.jar:6.1.1]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.1.jar:6.1.1]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.1.jar:6.1.1]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.16.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.1.jar:6.1.1]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.16.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.16.jar:10.1.16]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.16.jar:10.1.16]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.16.jar:10.1.16]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.16.jar:10.1.16]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.16.jar:10.1.16]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.1.jar:6.1.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.1.jar:6.1.1]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.16.jar:10.1.16]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.16.jar:10.1.16]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.1.jar:6.1.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.1.jar:6.1.1]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.16.jar:10.1.16]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.16.jar:10.1.16]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.1.jar:6.1.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.1.jar:6.1.1]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.16.jar:10.1.16]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.16.jar:10.1.16]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.16.jar:10.1.16]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.16.jar:10.1.16]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.16.jar:10.1.16]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.16.jar:10.1.16]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.16.jar:10.1.16]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.16.jar:10.1.16]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340) ~[tomcat-embed-core-10.1.16.jar:10.1.16]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.16.jar:10.1.16]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.16.jar:10.1.16]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.16.jar:10.1.16]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.16.jar:10.1.16]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.16.jar:10.1.16]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.16.jar:10.1.16]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.16.jar:10.1.16]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.16.jar:10.1.16]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+
+2025-07-21T18:20:10.238+02:00 DEBUG 16058 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/error", parameters={}
+2025-07-21T18:20:10.238+02:00 DEBUG 16058 --- [nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-07-21T18:20:10.239+02:00 DEBUG 16058 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-21T18:20:10.239+02:00 DEBUG 16058 --- [nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Mon Jul 21 18:20:10 CEST 2025, status=500, error=Internal Server Error, trace=java.lang.E (truncated)...]
+2025-07-21T18:20:10.240+02:00 DEBUG 16058 --- [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 500
+2025-07-21T18:20:10.253+02:00 DEBUG 16058 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : POST "/api/temporal/games/1/start", parameters={}
+2025-07-21T18:20:10.253+02:00 DEBUG 16058 --- [nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.TemporalEngineController#startGame(Long)
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0 where g1_0.id=?
+Hibernate: select p1_0.game_id,p1_0.player_id from game_players p1_0 where p1_0.game_id=?
+Hibernate: update games set created_at=?,current_player=?,current_timeline=?,current_turn=?,ended_at=?,game_name=?,map_height=?,map_width=?,max_players=?,started_at=?,status=?,winner=? where id=?
+2025-07-21T18:20:10.256+02:00 DEBUG 16058 --- [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-21T18:20:10.256+02:00 DEBUG 16058 --- [nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{currentPlayer=player1, success=true, message=Game started successfully}]
+2025-07-21T18:20:10.257+02:00 DEBUG 16058 --- [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-07-21T18:20:10.270+02:00 DEBUG 16058 --- [nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : POST "/api/temporal/games/1/script", parameters={}
+2025-07-21T18:20:10.271+02:00 DEBUG 16058 --- [nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.heroesoftimepoc.temporalengine.controller.TemporalEngineController#executeScript(Long, Map)
+2025-07-21T18:20:10.271+02:00 DEBUG 16058 --- [nio-8080-exec-6] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [{script=HERO(TestHero)}]
+Hibernate: select g1_0.id,g1_0.created_at,g1_0.current_player,g1_0.current_timeline,g1_0.current_turn,g1_0.ended_at,g1_0.game_name,g1_0.map_height,g1_0.map_width,g1_0.max_players,g1_0.started_at,g1_0.status,g1_0.winner from games g1_0 where g1_0.id=?
+Hibernate: insert into heroes (causality_awareness,current_day,days_traveled,game_id,has_observation_ability,health,max_health,max_movement_points,max_temporal_energy,movement_points,movement_points_per_day,name,observation_range,player_id,position_x,position_y,status,temporal_energy,temporal_immunity,temporal_vision_range,timeline_branch,vision_radius,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+Hibernate: select ps1_0.game_id,ps1_0.id,ps1_0.action_type,ps1_0.branch_id,ps1_0.collapse_trigger,ps1_0.amplitude_imaginary,ps1_0.amplitude_real,ps1_0.created_at,ps1_0.delta_t,ps1_0.expression,ps1_0.owner_hero,ps1_0.probability,ps1_0.psi_id,ps1_0.status,ps1_0.target_x,ps1_0.target_y,ps1_0.use_complex_amplitude from psi_states ps1_0 where ps1_0.game_id=?
+📊 Statistiques collapse causale: {activeStates=0, collapsedStates=0, totalStates=0, collapseRate=NaN, collapsesByType={}}
+Hibernate: select t1_0.game_id,t1_0.id,t1_0.building_owner,t1_0.building_type,t1_0.defense_bonus,t1_0.has_psi_states,t1_0.is_locked,t1_0.is_temporal_zone,t1_0.lock_duration,t1_0.movement_cost,t1_0.temporal_energy_bonus,t1_0.temporal_zone_type,t1_0.terrain,t1_0.x,t1_0.y from game_tiles t1_0 where t1_0.game_id=?
+2025-07-21T18:20:10.273+02:00 DEBUG 16058 --- [nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-07-21T18:20:10.273+02:00 DEBUG 16058 --- [nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{success=true, movementPoints=8, heroName=TestHero, message=Game hero TestHero created successfully, (truncated)...]
+2025-07-21T18:20:10.273+02:00 DEBUG 16058 --- [nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:01 h
+[INFO] Finished at: 2025-07-21T18:20:10+02:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:3.2.0:run (default-cli) on project temporal-engine: Process terminated with exit code: 137 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
