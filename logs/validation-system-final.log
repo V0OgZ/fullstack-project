@@ -31,8 +31,8 @@ scripts/system-unifie/validate-system-coherence.sh: line 118: [: 0
 [0;34m📋 PHASE 5: VALIDATION DE LA PERFORMANCE[0m
 ================================================================
 [1;33m🔧 Test de compilation...[0m
-[0;31m❌ Compilation backend[0m
-[1;33m   → Erreurs de compilation détectées[0m
+[0;32m✅ Compilation backend[0m
+[0;34m   → Code compile sans erreurs[0m
 [1;33m🧪 Test unitaires...[0m
 [0;31m❌ Tests unitaires[0m
 [1;33m   → Certains tests échouent[0m
@@ -82,9 +82,9 @@ backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/TemporalEngi
 ================================================================
 [0;34m📊 Statistiques:[0m
    Tests Total: 17
-   Tests Réussis: [0;32m9[0m
-   Tests Échoués: [0;31m8[0m
-   Taux de Réussite: [0;35m52%[0m
+   Tests Réussis: [0;32m10[0m
+   Tests Échoués: [0;31m7[0m
+   Taux de Réussite: [0;35m58%[0m
 
 [0;31m❌ SYSTÈME UNIFIÉ NÉCESSITE DES AMÉLIORATIONS[0m
 [0;31m❌ Cohérence globale insuffisante[0m
