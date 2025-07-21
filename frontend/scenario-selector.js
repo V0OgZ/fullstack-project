@@ -277,28 +277,267 @@ class ScenarioSelector {
         }
     }
     
-    // 👁️ APERÇU DU SCÉNARIO
-    previewSelectedScenario() {
+    // 👁️ APERÇU DU SCÉNARIO AVEC CARTE D'INFO SYMPA
+    async previewSelectedScenario() {
         if (!this.selectedScenario) {
-            alert('Veuillez sélectionner un scénario');
+            this.showMessage('Veuillez sélectionner un scénario', 'warning');
             return;
         }
         
-        const preview = `
-            <div class="scenario-preview">
+        try {
+            // Charger le contenu du fichier HOTS
+            const hotsContent = await this.loadHotsFile(this.selectedScenario.file);
+            
+            // Analyser le contenu pour extraire des infos
+            const analysis = this.analyzeScenarioContent(hotsContent);
+            
+            // Créer la carte d'info sympa
+            this.showScenarioInfoCard(analysis);
+            
+        } catch (error) {
+            console.error('Erreur lors de l\'analyse du scénario:', error);
+            this.showMessage('Erreur lors de l\'analyse du scénario', 'error');
+        }
+    }
+    
+    // 🔍 ANALYSER LE CONTENU DU SCÉNARIO
+    analyzeScenarioContent(hotsContent) {
+        const lines = hotsContent.split('\n');
+        const analysis = {
+            totalLines: lines.length,
+            commands: [],
+            heroes: [],
+            artifacts: [],
+            psiStates: [],
+            battles: [],
+            movements: [],
+            creations: [],
+            gameMode: 'async', // Par défaut asynchrone
+            complexity: 'medium',
+            estimatedTurns: 0,
+            specialFeatures: []
+        };
+        
+        lines.forEach((line, index) => {
+            line = line.trim();
+            
+            // Ignorer les commentaires et lignes vides
+            if (line.startsWith('#') || line === '') return;
+            
+            // Analyser chaque type de commande
+            if (line.startsWith('HERO(')) {
+                const heroMatch = line.match(/HERO\(([^)]+)\)/);
+                if (heroMatch) {
+                    analysis.heroes.push(heroMatch[1]);
+                }
+                analysis.commands.push({ type: 'HERO', line: index + 1, content: line });
+            } else if (line.startsWith('MOV(')) {
+                analysis.movements.push({ line: index + 1, content: line });
+                analysis.commands.push({ type: 'MOVEMENT', line: index + 1, content: line });
+            } else if (line.startsWith('CREATE(')) {
+                analysis.creations.push({ line: index + 1, content: line });
+                analysis.commands.push({ type: 'CREATE', line: index + 1, content: line });
+            } else if (line.startsWith('BATTLE(')) {
+                analysis.battles.push({ line: index + 1, content: line });
+                analysis.commands.push({ type: 'BATTLE', line: index + 1, content: line });
+            } else if (line.startsWith('USE(')) {
+                const artifactMatch = line.match(/USE\([^,]+,\s*([^,)]+)/);
+                if (artifactMatch) {
+                    analysis.artifacts.push(artifactMatch[1]);
+                }
+                analysis.commands.push({ type: 'USE', line: index + 1, content: line });
+            } else if (line.includes('ψ') && line.includes('⊙')) {
+                analysis.psiStates.push({ line: index + 1, content: line });
+                analysis.commands.push({ type: 'PSI_STATE', line: index + 1, content: line });
+            } else if (line.startsWith('†')) {
+                analysis.commands.push({ type: 'COLLAPSE', line: index + 1, content: line });
+            } else if (line.includes('Π(')) {
+                analysis.commands.push({ type: 'OBSERVATION', line: index + 1, content: line });
+                analysis.specialFeatures.push('Triggers d\'observation');
+            } else if (line.includes('TIMELINE(')) {
+                analysis.commands.push({ type: 'TIMELINE', line: index + 1, content: line });
+                analysis.specialFeatures.push('Timelines parallèles');
+            } else if (line.includes('MERGE(')) {
+                analysis.commands.push({ type: 'MERGE', line: index + 1, content: line });
+                analysis.specialFeatures.push('Fusion de timelines');
+            }
+        });
+        
+        // Déterminer la complexité
+        if (analysis.psiStates.length > 10 || analysis.battles.length > 5) {
+            analysis.complexity = 'high';
+        } else if (analysis.psiStates.length > 5 || analysis.battles.length > 2) {
+            analysis.complexity = 'medium';
+        } else {
+            analysis.complexity = 'low';
+        }
+        
+        // Estimer le nombre de tours
+        analysis.estimatedTurns = Math.max(
+            analysis.movements.length,
+            analysis.battles.length * 2,
+            analysis.psiStates.length
+        );
+        
+        // Détecter le mode de jeu
+        const uniqueHeroes = [...new Set(analysis.heroes)];
+        
+        // Mode IA par défaut (exécution automatique)
+        analysis.gameMode = 'async';
+        
+        // Détecter si c'est un scénario multiplayer (plusieurs héros différents)
+        if (uniqueHeroes.length > 1) {
+            analysis.gameMode = 'multiplayer';
+        }
+        
+        return analysis;
+    }
+    
+    // 🎨 AFFICHER LA CARTE D'INFO SYMPA
+    showScenarioInfoCard(analysis) {
+        // Supprimer l'ancienne carte si elle existe
+        const existingCard = document.querySelector('.scenario-info-card');
+        if (existingCard) {
+            existingCard.remove();
+        }
+        
+        const card = document.createElement('div');
+        card.className = 'scenario-info-card';
+        
+        const complexityColor = {
+            'low': '#27ae60',
+            'medium': '#f39c12',
+            'high': '#e74c3c'
+        };
+        
+        const complexityIcon = {
+            'low': '🟢',
+            'medium': '🟡',
+            'high': '🔴'
+        };
+        
+        card.innerHTML = `
+            <div class="info-card-header">
                 <h3>${this.selectedScenario.name}</h3>
-                <p><strong>Description:</strong> ${this.selectedScenario.description}</p>
-                <p><strong>Difficulté:</strong> ${this.selectedScenario.difficulty}</p>
-                <p><strong>Durée estimée:</strong> ${this.selectedScenario.duration}</p>
-                <p><strong>Commandes:</strong> ${this.selectedScenario.commands}</p>
-                <p><strong>États ψ:</strong> ${this.selectedScenario.psiStates}</p>
-                <p><strong>Fichier:</strong> ${this.selectedScenario.file}</p>
+                <button class="close-info-btn" onclick="this.parentElement.parentElement.remove()">×</button>
+            </div>
+            
+            <div class="info-card-content">
+                <div class="info-section">
+                    <h4>📊 Statistiques</h4>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-icon">📜</span>
+                            <span class="stat-label">Commandes</span>
+                            <span class="stat-value">${analysis.commands.length}</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-icon">ψ</span>
+                            <span class="stat-label">États Quantiques</span>
+                            <span class="stat-value">${analysis.psiStates.length}</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-icon">⚔️</span>
+                            <span class="stat-label">Batailles</span>
+                            <span class="stat-value">${analysis.battles.length}</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-icon">🔄</span>
+                            <span class="stat-label">Mouvements</span>
+                            <span class="stat-value">${analysis.movements.length}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-section">
+                    <h4>🎮 Mode de Jeu</h4>
+                    <div class="game-mode-info">
+                        <span class="mode-badge ${analysis.gameMode}">
+                            ${analysis.gameMode === 'multiplayer' ? '👥 Multiplayer' : '🤖 Mode IA'}
+                        </span>
+                        <p class="mode-description">
+                            ${analysis.gameMode === 'multiplayer' 
+                                ? 'Scénario multiplayer - Plusieurs héros/joueurs peuvent participer'
+                                : 'Mode IA - L\'intelligence artificielle exécute les commandes automatiquement'}
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="info-section">
+                    <h4>🎯 Complexité</h4>
+                    <div class="complexity-info">
+                        <span class="complexity-badge" style="color: ${complexityColor[analysis.complexity]}">
+                            ${complexityIcon[analysis.complexity]} ${analysis.complexity.toUpperCase()}
+                        </span>
+                        <p>${this.getComplexityDescription(analysis.complexity)}</p>
+                    </div>
+                </div>
+                
+                ${analysis.heroes.length > 0 ? `
+                <div class="info-section">
+                    <h4>🦸 Héros</h4>
+                    <div class="heroes-list">
+                        ${analysis.heroes.map(hero => `<span class="hero-tag">${hero}</span>`).join('')}
+                    </div>
+                </div>
+                ` : ''}
+                
+                ${analysis.artifacts.length > 0 ? `
+                <div class="info-section">
+                    <h4>🔮 Artefacts</h4>
+                    <div class="artifacts-list">
+                        ${analysis.artifacts.map(artifact => `<span class="artifact-tag">${artifact}</span>`).join('')}
+                    </div>
+                </div>
+                ` : ''}
+                
+                ${analysis.specialFeatures.length > 0 ? `
+                <div class="info-section">
+                    <h4>✨ Fonctionnalités Spéciales</h4>
+                    <div class="features-list">
+                        ${analysis.specialFeatures.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+                    </div>
+                </div>
+                ` : ''}
+                
+                <div class="info-section">
+                    <h4>⏱️ Estimation</h4>
+                    <div class="estimation-info">
+                        <p><strong>Durée:</strong> ${this.selectedScenario.duration}</p>
+                        <p><strong>Tours estimés:</strong> ${analysis.estimatedTurns}</p>
+                        <p><strong>Difficulté:</strong> ${this.selectedScenario.difficulty}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-card-actions">
+                <button class="action-btn primary" onclick="scenarioSelector.startSelectedScenario()">
+                    🚀 Lancer le Scénario
+                </button>
+                <button class="action-btn secondary" onclick="this.parentElement.parentElement.remove()">
+                    ✋ Annuler
+                </button>
             </div>
         `;
         
-        // Afficher dans une modal ou dans la console
-        console.log('Aperçu du scénario:', this.selectedScenario);
-        alert(preview);
+        // Ajouter la carte au DOM
+        document.body.appendChild(card);
+        
+        // Animation d'apparition
+        setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, 10);
+    }
+    
+    // 📝 DESCRIPTION DE LA COMPLEXITÉ
+    getComplexityDescription(complexity) {
+        const descriptions = {
+            'low': 'Scénario simple - Parfait pour débuter avec Heroes of Time',
+            'medium': 'Complexité modérée - Nécessite une bonne compréhension des mécaniques',
+            'high': 'Scénario avancé - Maîtrise des concepts temporels requise'
+        };
+        return descriptions[complexity] || descriptions.medium;
     }
     
     // 🤖 EXÉCUTER AVEC IA
@@ -504,19 +743,50 @@ class ScenarioSelector {
         console.log(message);
     }
     
-    // 💬 AFFICHER UN MESSAGE
+    // 💬 AFFICHER UN MESSAGE SOPHISTIQUÉ
     showMessage(message, type = 'info') {
+        // Supprimer les anciens messages
+        const existingMessages = document.querySelectorAll('.scenario-message');
+        existingMessages.forEach(msg => msg.remove());
+        
         const messageDiv = document.createElement('div');
-        messageDiv.className = `game-message ${type}`;
-        messageDiv.textContent = message;
+        messageDiv.className = `scenario-message ${type}`;
+        
+        const icons = {
+            'info': 'ℹ️',
+            'success': '✅',
+            'warning': '⚠️',
+            'error': '❌'
+        };
+        
+        messageDiv.innerHTML = `
+            <div class="message-content">
+                <span class="message-icon">${icons[type] || icons.info}</span>
+                <span class="message-text">${message}</span>
+            </div>
+            <button class="message-close" onclick="this.parentElement.remove()">×</button>
+        `;
         
         document.body.appendChild(messageDiv);
         
+        // Animation d'apparition
         setTimeout(() => {
-            if (document.body.contains(messageDiv)) {
-                document.body.removeChild(messageDiv);
+            messageDiv.style.opacity = '1';
+            messageDiv.style.transform = 'translateY(0)';
+        }, 10);
+        
+        // Auto-suppression après 5 secondes
+        setTimeout(() => {
+            if (messageDiv.parentElement) {
+                messageDiv.style.opacity = '0';
+                messageDiv.style.transform = 'translateY(-20px)';
+                setTimeout(() => {
+                    if (messageDiv.parentElement) {
+                        messageDiv.remove();
+                    }
+                }, 300);
             }
-        }, 3000);
+        }, 5000);
     }
     
     // 🔄 FERMER LE SÉLECTEUR
