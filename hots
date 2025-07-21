@@ -40,6 +40,8 @@ show_help() {
     echo -e "  ${GREEN}./hots test bataille${NC}     Tests bataille temporelle"
     echo -e "  ${GREEN}./hots test quantum${NC}      Tests quantum/visualiseurs"
     echo -e "  ${GREEN}./hots test scenarios${NC}    Tests scénarios HOTS complets"
+    echo -e "  ${GREEN}./hots test json${NC}         🚀 Tests nouveaux scripts JSON (HSP)"
+    echo -e "  ${GREEN}./hots test jean-gros${NC}    🎳 Tests Jean-Gros v2/v3 complets"
     echo -e "  ${GREEN}./hots test missing${NC}      🎯 Tests scénarios manquants et créatures"
     echo -e "  ${GREEN}./hots test creatures${NC}    🐉 Tests spécifiques des créatures quantiques"
     echo -e "  ${GREEN}./hots test performance${NC}  Tests de performance"
@@ -192,6 +194,8 @@ list_available_tests() {
     echo -e "  ${GREEN}bataille${NC}      - Tests bataille temporelle"
     echo -e "  ${GREEN}quantum${NC}       - Tests quantum/visualiseurs"
     echo -e "  ${GREEN}scenarios${NC}     - Tests scénarios HOTS complets"
+    echo -e "  ${GREEN}json${NC}          - Tests nouveaux scripts JSON (architecture HSP)"
+    echo -e "  ${GREEN}jean-gros${NC}     - Tests Jean-Gros v2/v3 complets"
     echo -e "  ${GREEN}performance${NC}   - Tests de performance et optimisation"
     echo -e "  ${GREEN}integration${NC}   - Tests d'intégration complète"
     echo ""
@@ -310,6 +314,46 @@ run_test_suite() {
                 return 1
             fi
             ;;
+        "json")
+            echo -e "${GREEN}🚀 Tests nouveaux scripts JSON (architecture HSP)...${NC}"
+            echo -e "${YELLOW}🔍 Test script panopticon JSON...${NC}"
+            if [ -f "scripts/test-panopticon-json-scenario.sh" ]; then
+                bash scripts/test-panopticon-json-scenario.sh
+            else
+                echo -e "${RED}❌ Script panopticon JSON non trouvé${NC}"
+            fi
+            
+            echo -e "${YELLOW}⚔️ Test script duel collapse JSON...${NC}"
+            if [ -f "scripts/test-duel-collapse-json.sh" ]; then
+                bash scripts/test-duel-collapse-json.sh
+            else
+                echo -e "${RED}❌ Script duel collapse JSON non trouvé${NC}"
+            fi
+            
+            echo -e "${YELLOW}🎮 Test runner générique JSON...${NC}"
+            if [ -f "scripts/test-json-scenario-runner.sh" ]; then
+                echo "Testing with GROFI_QUICK_TEST scenario..."
+                bash scripts/test-json-scenario-runner.sh GROFI_QUICK_TEST
+            else
+                echo -e "${RED}❌ Script runner JSON non trouvé${NC}"
+            fi
+            ;;
+        "jean-gros")
+            echo -e "${GREEN}🎳 Tests Jean-Gros complets...${NC}"
+            echo -e "${YELLOW}🔧 Lancement Jean-Gros v2 FIXED...${NC}"
+            if [ -f "scripts/test-jean-gros-v2-FIXED.sh" ]; then
+                bash scripts/test-jean-gros-v2-FIXED.sh
+            else
+                echo -e "${RED}❌ Script Jean-Gros v2 non trouvé${NC}"
+            fi
+            
+            echo -e "${YELLOW}🚀 Lancement Jean-Gros v3 WITH JSON...${NC}"
+            if [ -f "scripts/test-jean-gros-v3-with-json.sh" ]; then
+                bash scripts/test-jean-gros-v3-with-json.sh
+            else
+                echo -e "${RED}❌ Script Jean-Gros v3 non trouvé${NC}"
+            fi
+            ;;
         "performance")
             echo -e "${GREEN}⚡ Tests de performance...${NC}"
             if [ -f "scripts/test/test-optimizations-performance.sh" ]; then
@@ -382,13 +426,19 @@ run_test_suite() {
             echo -e "${YELLOW}🎭 Phase 8: Tests scénarios${NC}"
             run_test_suite "scenarios"
             
-            echo -e "${YELLOW}⚡ Phase 9: Tests performance${NC}"
+            echo -e "${YELLOW}🚀 Phase 9: Tests JSON (architecture HSP)${NC}"
+            run_test_suite "json"
+            
+            echo -e "${YELLOW}🎳 Phase 10: Tests Jean-Gros complets${NC}"
+            run_test_suite "jean-gros"
+            
+            echo -e "${YELLOW}⚡ Phase 11: Tests performance${NC}"
             run_test_suite "performance"
             
-            echo -e "${YELLOW}🔗 Phase 10: Tests intégration${NC}"
+            echo -e "${YELLOW}🔗 Phase 12: Tests intégration${NC}"
             run_test_suite "integration"
             
-            echo -e "${YELLOW}🎯 Phase 11: Tests scénarios manquants${NC}"
+            echo -e "${YELLOW}🎯 Phase 13: Tests scénarios manquants${NC}"
             run_test_suite "missing"
             
             echo ""
