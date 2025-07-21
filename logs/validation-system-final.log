@@ -56,10 +56,12 @@ find: frontend/src: No such file or directory
 scripts/system-unifie/validate-system-coherence.sh: line 199: [: backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/AdvancedTemporalController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/ApiGamesController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/BenchmarkController.java:0
+backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/CardsController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/CausalIntegrationController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/CausalPerformanceController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/CollectionController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/CreatureController.java:0
+backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/EpochController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/ExtendedQuantumController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/FormulaInterpreterController.java:0
 backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/GameController.java:0
