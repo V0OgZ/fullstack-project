@@ -203,6 +203,207 @@
             color: #fff;
         }
 
+        /* Dark Fantasy Styles pour Domburg */
+        .rarity-unique {
+            background: linear-gradient(45deg, #2c1810, #8b4513, #2c1810);
+            color: #d4af37;
+            border: 2px solid #d4af37;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            animation: darkPulse 3s infinite;
+        }
+
+        .rarity-rare {
+            background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460);
+            color: #4ecdc4;
+            border: 2px solid #4ecdc4;
+            box-shadow: 0 0 15px rgba(78, 205, 196, 0.3);
+        }
+
+        @keyframes darkPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.6); }
+        }
+
+        /* Styles pour objets d'ancrage */
+        .anchor-location {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+            border: 3px solid #8b4513;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .anchor-location::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+            animation: anchorGlow 4s infinite;
+        }
+
+        @keyframes anchorGlow {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .minor-anchor {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            border: 2px solid #4ecdc4;
+            position: relative;
+        }
+
+        .minor-anchor::after {
+            content: '🌪️';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            animation: windSpin 6s linear infinite;
+        }
+
+        @keyframes windSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Carte d'objet style jeu */
+        .item-card.card-style {
+            background: linear-gradient(145deg, #1a1a1a 0%, #2d2d2d 30%, #1a1a1a 100%);
+            border: 3px solid;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .item-card.card-style:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+        }
+
+        .item-card.card-style::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, currentColor, transparent);
+        }
+
+        .card-rarity-indicator {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card-zone {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 10px;
+            color: #bdc3c7;
+            text-transform: uppercase;
+        }
+
+        .card-effects {
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            border-left: 4px solid;
+        }
+
+        .effect-item {
+            margin-bottom: 8px;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .effect-name {
+            font-weight: bold;
+            color: #4ecdc4;
+            margin-bottom: 4px;
+        }
+
+        .effect-description {
+            color: #bdc3c7;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .card-lore {
+            font-style: italic;
+            color: #95a5a6;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 3px solid #8b4513;
+            margin-top: 15px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .card-special-properties {
+            margin-top: 15px;
+            padding: 10px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(139, 69, 19, 0.1));
+            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .special-property {
+            font-size: 12px;
+            color: #d4af37;
+            margin-bottom: 5px;
+        }
+
+        /* Styles spécifiques aux types d'objets */
+        .type-anchor-location {
+            border-color: #8b4513;
+        }
+
+        .type-anchor-location .card-effects {
+            border-left-color: #8b4513;
+        }
+
+        .type-minor-anchor-point {
+            border-color: #4ecdc4;
+        }
+
+        .type-minor-anchor-point .card-effects {
+            border-left-color: #4ecdc4;
+        }
+
+        /* Animation pour les objets fixes */
+        .fixed-item {
+            position: relative;
+        }
+
+        .fixed-item::after {
+            content: '⚓';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            font-size: 16px;
+            color: #8b4513;
+            text-shadow: 0 0 10px rgba(139, 69, 19, 0.8);
+        }
+
         .item-description {
             color: #bdc3c7;
             line-height: 1.6;
