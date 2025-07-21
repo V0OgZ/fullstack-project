@@ -36,6 +36,9 @@
             </div>
             
             <div class="side-panel">
+                <!-- 🌫️ Contrôles de Brouillard de Guerre -->
+                <div id="fog-controls-container"></div>
+                
                 <div class="script-console" id="script-console">
                     <!-- Console will be populated by JavaScript -->
                 </div>
@@ -67,6 +70,7 @@
     <script src="runic-forge.js"></script>
     <script src="temporal-integration.js"></script>
     <script src="hero-avatars.js"></script>
+    <script src="fog-of-war-system.js"></script>
     <script src="gameplay-enhancement.js"></script>
     <script src="missing-assets-loader.js"></script>
     <script src="gameplay-construction.js"></script>
@@ -79,6 +83,13 @@
         window.gameplayEnhancement = new GameplayEnhancement();
         window.missingAssetsLoader = new MissingAssetsLoader();
         window.gameplayConstruction = new GameplayConstruction();
+        
+        // 🌫️ Initialiser le système de brouillard de guerre
+        window.fogOfWarSystem = new FogOfWarSystem();
+        const fogControlsContainer = document.getElementById('fog-controls-container');
+        if (fogControlsContainer) {
+            fogControlsContainer.appendChild(window.fogOfWarSystem.createFogControls());
+        }
         
         // Fonction pour mettre à jour la barre de statut
         window.updateStatusBar = function(message) {

@@ -992,3 +992,103 @@ body {
     box-shadow: 0 3px 10px rgba(74, 144, 226, 0.3);
     background: linear-gradient(45deg, #357abd, #2c5aa0);
 }
+
+/* 🌫️ Contrôles de Brouillard de Guerre */
+.fog-controls {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid rgba(0, 212, 255, 0.6);
+    border-radius: 10px;
+    padding: 15px;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+.fog-panel h3 {
+    margin: 0 0 15px 0;
+    color: #00d4ff;
+    font-size: 16px;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.timeline-selector, .timeline-visibility, .fog-opacity, .fog-types {
+    margin-bottom: 15px;
+}
+
+.timeline-selector label, .timeline-visibility label, .fog-opacity label, .fog-types label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.timeline-selector select {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    color: #00d4ff;
+    border: 1px solid rgba(0, 212, 255, 0.5);
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 11px;
+}
+
+.timeline-toggles, .fog-type-toggles {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.timeline-toggles label, .fog-type-toggles label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.timeline-toggles input[type="checkbox"], .fog-type-toggles input[type="checkbox"] {
+    accent-color: #00d4ff;
+    transform: scale(0.9);
+}
+
+.fog-opacity input[type="range"] {
+    width: 100%;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 2px;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.fog-opacity input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #00d4ff;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.fog-opacity input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: #00d4ff;
+    color: #00d4ff;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+#opacity-value {
+    color: #00d4ff;
+    font-weight: bold;
+}
