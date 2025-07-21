@@ -1205,27 +1205,85 @@
 
         // Créer une carte d'élément
         function createItemCard(item) {
-            const icon = getItemIcon(item.category);
+            const icon = getItemIcon(item.category, item.type);
             const rarityClass = getRarityClass(item.rarity);
             const categoryClass = `category-${item.category}`;
+            const typeClass = item.type ? `type-${item.type.toLowerCase().replace(/_/g, '-')}` : '';
+            const fixedClass = item.isFixed ? 'fixed-item' : '';
+            const cardStyleClass = isDomburgItem(item) ? 'card-style' : '';
 
             return `
-                <div class="item-card ${categoryClass}" onclick="showItemDetails('${item.id}')">
+                <div class="item-card ${categoryClass} ${typeClass} ${fixedClass} ${cardStyleClass}" onclick="showItemDetails('${item.id}')">
                     <div class="item-header">
                         <div class="item-icon">${icon}</div>
                         <div class="item-title">
-                            <div class="item-name">${item.name}</div>
+                            <div class="item-name">${item.displayName || item.name}</div>
                             <div class="item-type">${getCategoryName(item.category)}</div>
                         </div>
-                        <div class="item-rarity ${rarityClass}">${item.rarity}</div>
+                        <div class="card-rarity-indicator ${rarityClass}">${item.rarity}</div>
                     </div>
+                    
+                    ${item.zone ? `<div class="card-zone">${item.zone}</div>` : ''}
                     
                     <div class="item-description">${item.description}</div>
                     
+                    ${renderEffects(item)}
+                    
+                    ${item.lore ? `<div class="card-lore">"${item.lore}"</div>` : ''}
+                    
+                    ${renderSpecialProperties(item)}
+                    
                     ${renderStats(item)}
-                    </div>
-                `;
-            }
+                </div>
+            `;
+        }
+
+        // Vérifier si c'est un objet de Domburg
+        function isDomburgItem(item) {
+            return item.id && (item.id.includes('domburg') || item.zone && item.zone.includes('Domburg'));
+        }
+
+        // Rendu des effets d'un objet
+        function renderEffects(item) {
+            if (!item.effects || item.effects.length === 0) return '';
+            
+            return `
+                <div class="card-effects">
+                    ${item.effects.map(effect => `
+                        <div class="effect-item">
+                            <div class="effect-name">${formatEffectName(effect.type)}</div>
+                            <div class="effect-description">${effect.description || ''}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Rendu des propriétés spéciales
+        function renderSpecialProperties(item) {
+            if (!item.specialProperties) return '';
+            
+            return `
+                <div class="card-special-properties">
+                    ${Object.entries(item.specialProperties).map(([key, value]) => {
+                        if (key === 'description') {
+                            return `<div class="special-property">🔗 ${value}</div>`;
+                        }
+                        return `<div class="special-property">⚡ ${formatPropertyName(key)}: ${value}</div>`;
+                    }).join('')}
+                </div>
+            `;
+        }
+
+        // Formater le nom d'un effet
+        function formatEffectName(effectType) {
+            return effectType.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        }
+
+        // Formater le nom d'une propriété
+        function formatPropertyName(propName) {
+            return propName.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+        }
             
         // Rendu des statistiques
         function renderStats(item) {
