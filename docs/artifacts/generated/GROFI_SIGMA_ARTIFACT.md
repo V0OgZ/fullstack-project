@@ -28,7 +28,7 @@ Réduit le chaos quantique et restaure l'énergie
 ### 🔧 **Informations Techniques**
 - **Créé par** : JeanGrofignon
 - **Date de création** : 2025-07-20
-- **Généré le** : 2025-07-21 17:54:03
+- **Généré le** : 2025-07-21 18:00:39
 - **Source JSON** : `custom-artifacts.json`
 
 ### 🎮 **Utilisation en Jeu**

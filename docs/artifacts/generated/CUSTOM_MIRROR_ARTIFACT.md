@@ -28,7 +28,7 @@ CONSTRUCTIVE(ψ1, ψ2) + AMPLIFY(result, 1.5)
 ### 🔧 **Informations Techniques**
 - **Créé par** : Player123
 - **Date de création** : 2024-01-15
-- **Généré le** : 2025-07-21 17:54:03
+- **Généré le** : 2025-07-21 18:00:39
 - **Source JSON** : `custom-artifacts.json`
 
 ### 🎮 **Utilisation en Jeu**

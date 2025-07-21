@@ -28,7 +28,7 @@ PROTECT_HERO(hero, 0.75, 1)
 ### 🔧 **Informations Techniques**
 - **Créé par** : Protecteur
 - **Date de création** : 2025-07-21
-- **Généré le** : 2025-07-21 17:54:03
+- **Généré le** : 2025-07-21 18:00:39
 - **Source JSON** : `custom-artifacts.json`
 
 ### 🎮 **Utilisation en Jeu**
