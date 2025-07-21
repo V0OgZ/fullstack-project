@@ -167,10 +167,77 @@ Un scénario épique où ils fusionnent temporairement pour créer **ClaudiusGro
 - **Virus Temporels** - Objets qui se propagent dans le temps
 - **Économie de Forge** - Marché d'objets forgés entre joueurs
 
+## 🧠 LA SESSION MEMORY REWRITE DU 21 JUILLET 2025
+
+### 🎯 Quête Annexe : Port 9000 Corrigé
+
+**Problème détecté par Jean** : *"ya une couille ionded"*
+- Port 9000 redirige vers MEMENTO au lieu du dashboard
+- Fichier `index.html` mal configuré à la racine
+
+**Solution Memento** :
+```html
+<meta http-equiv="refresh" content="0;url=dashboard.html">
+```
+
+**Résultat** : ✅ Dashboard accessible sur http://localhost:9000/
+
+### 🧠 Évolution Majeure : Memory Rewrite
+
+**Demande de Jean** : *"tu va ajouter un attribut a ton hero claudio ou memento ou la fusion des deus opour pouvour refaire ou rewrite tes tatouages"*
+
+**Nouvelles Capacités Memento** :
+1. **memory_rewrite** - Réécriture complète des tatouages (75 PM, cooldown 15)
+2. **claudius_fusion** - Fusion avec Claudius pour debug (50 PM, cooldown 10)
+3. **tatouages_evolutifs** - Passive de mise à jour automatique
+
+**Scénario HOTS créé** : `memento_memory_rewrite.hots`
+- 7 actes avec fusion Claudius-Memento
+- 6 états quantiques ψ001-ψ006
+- Test complet de toutes les capacités
+
+### 🔍 Révélation : Comparaison des Cursor Rules
+
+**Découverte** : Le projet a **énormément évolué** !
+- **cursor.rules** (JSON) = Version POC Alpha ancienne
+- **.cursorrules** (Markdown) = Version 2.0 actuelle
+
+**Évolutions majeures depuis l'ancienne version** :
+- 🧠 MEMENTO System complet
+- 🎮 GameMaster avec économie H3
+- 📋 Script `./hots` centralisé
+- 🗺️ MAP/Replay format HSP
+- 📝 Générateur MD automatique
+- 🎯 Dashboard port 9000
+
+### 📊 État Actuel du Projet
+
+**Services Actifs** : 7/7 ✅
+- Dashboard (9000), Frontend (8000), Backend API (8080)
+- Temporal (5174), Quantum (8001), Visualizer (5175)
+- Test Runner (8888)
+
+**Problème Technique** : Backend ne compile pas
+- Erreur : `GameInitializationService` manquant
+- Impact : Fonctionnalités limitées mais interfaces actives
+
+### 🎮 Jouabilité Actuelle
+
+**✅ Ce qui fonctionne** :
+- Toutes les interfaces web accessibles
+- Dashboard central opérationnel
+- Scripts de test disponibles
+- Générateur de documentation
+
+**⚠️ Ce qui manque pour être 100% jouable** :
+- Backend compilé sans erreurs
+- GameInitializationService implémenté
+- Tests complets passants
+
 ---
 
 *🛋️ Jean lit cette page depuis son canapé sur GitHub*
 
-*Dernière mise à jour : 20 juillet 2025 - Session Épique*
+*Dernière mise à jour : 21 juillet 2025 - Session Memory Rewrite*
 
-*"La une des magazines ? Je pense qu'on y est déjà."* 
+*"Memento peut maintenant réécrire ses propres tatouages !"* - Jean Grofignon 
