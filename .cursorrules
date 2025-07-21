@@ -32,7 +32,49 @@
 ./hots status           # Check services
 ./hots start            # Start all services  
 ./hots test quick       # Quick validation
+./hots debug            # Start in debug mode
+./hots compile          # Compile with debug info
 ```
+
+## 🐛 **DEBUG RULES - ALWAYS RUN IN DEBUG MODE**
+
+### 🔧 **Backend Debug Rules**
+- **ALWAYS compile with debug** : `mvn compile -X` or `./hots compile`
+- **ALWAYS run with debug flags** : `mvn spring-boot:run -Dspring-boot.run.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005"`
+- **ALWAYS check compilation first** : `mvn compile` before any run
+- **ALWAYS use verbose logging** : `-Dlogging.level.com.heroesoftimepoc=DEBUG`
+- **ALWAYS check ports** : `lsof -i :8080` before starting backend
+
+### 🧪 **Test Debug Rules**
+- **ALWAYS run tests with debug** : `mvn test -X -Dtest=*Test`
+- **ALWAYS check test compilation** : `mvn test-compile` before `mvn test`
+- **ALWAYS use verbose test output** : `mvn test -Dorg.slf4j.simpleLogger.defaultLogLevel=debug`
+- **ALWAYS check for missing classes** : Look for "cannot find symbol" errors first
+
+### 🔍 **Frontend Debug Rules**
+- **ALWAYS check browser console** : F12 → Console for JavaScript errors
+- **ALWAYS use browser dev tools** : Network tab for API calls
+- **ALWAYS check CORS issues** : Look for "Access-Control-Allow-Origin" errors
+- **ALWAYS verify file paths** : Check if CSS/JS files are loaded correctly
+
+### 📊 **Service Debug Rules**
+- **ALWAYS check service status** : `./hots status` before any operation
+- **ALWAYS kill existing processes** : `pkill -f "spring-boot:run"` before restart
+- **ALWAYS check port conflicts** : `lsof -i :PORT` for each service
+- **ALWAYS use debug mode** : `./hots debug` instead of `./hots start`
+
+### 🚨 **Error Resolution Priority**
+1. **Compilation errors first** : Fix "cannot find symbol" before anything else
+2. **Missing classes** : Check if services exist in correct packages
+3. **Import errors** : Verify jakarta vs javax.persistence imports
+4. **Port conflicts** : Kill processes and restart services
+5. **Runtime errors** : Check logs and debug output
+
+### 📝 **Debug Documentation**
+- **ALWAYS document errors** : Add to `MEMENTO/CURRENT_SESSION/DEBUG_LOG.md`
+- **ALWAYS update progress** : Update `MEMENTO/CURRENT_SESSION/PROGRESS.md`
+- **ALWAYS commit fixes** : `git commit -m "🐛 FIX: [description of fix]"`
+- **ALWAYS test after fixes** : Verify compilation and basic functionality
 
 ## 🛋️ **JEAN'S COUCH RULE** 
 - **Jean lit depuis son canapé GitHub** - Push analyses avant code
