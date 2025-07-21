@@ -188,6 +188,9 @@ class GameRenderer {
             this.drawHeroes();
             this.drawArtifacts();
             this.drawTemporalEffects();
+            
+            // Draw fog of war with 7 types and timeline transparency
+            this.drawFogOfWar();
         }
         
         // Draw particles
@@ -761,5 +764,15 @@ class GameRenderer {
             this.offsetY = -y;
             this.refresh();
         }
+    }
+    
+    drawFogOfWar() {
+        // Initialiser le système de brouillard s'il n'existe pas
+        if (!window.fogOfWarSystem) {
+            window.fogOfWarSystem = new FogOfWarSystem();
+        }
+        
+        // Rendre le brouillard avec les 7 types et transparence des timelines ψ
+        window.fogOfWarSystem.renderFog(this.ctx, this.gameState);
     }
 }
