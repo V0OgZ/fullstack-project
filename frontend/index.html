@@ -62,6 +62,11 @@
         <div class="status-bar" id="status-bar">
             Ready to start... Anna the Martopicker watches from the shadows ⏰
         </div>
+        
+        <!-- 🎮 Bouton d'ouverture du sélecteur de scénarios -->
+        <button id="open-scenario-selector-btn" class="scenario-selector-btn">
+            🎮 Scénarios
+        </button>
     </div>
     
     <script src="api.js"></script>
@@ -71,6 +76,7 @@
     <script src="temporal-integration.js"></script>
     <script src="hero-avatars.js"></script>
     <script src="fog-of-war-system.js"></script>
+    <script src="scenario-selector.js"></script>
     <script src="gameplay-enhancement.js"></script>
     <script src="missing-assets-loader.js"></script>
     <script src="gameplay-construction.js"></script>
@@ -89,6 +95,16 @@
         const fogControlsContainer = document.getElementById('fog-controls-container');
         if (fogControlsContainer) {
             fogControlsContainer.appendChild(window.fogOfWarSystem.createFogControls());
+        }
+        
+        // 🎮 Initialiser le sélecteur de scénarios
+        window.scenarioSelector = new ScenarioSelector();
+        const openScenarioBtn = document.getElementById('open-scenario-selector-btn');
+        if (openScenarioBtn) {
+            openScenarioBtn.addEventListener('click', () => {
+                const selectorInterface = window.scenarioSelector.createSelectorInterface();
+                document.body.appendChild(selectorInterface);
+            });
         }
         
         // Fonction pour mettre à jour la barre de statut
