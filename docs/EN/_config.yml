@@ -1,0 +1,31 @@
+# GitHub Pages Configuration for Heroes of Time English Documentation
+theme: jekyll-theme-slate
+title: Heroes of Time - English Documentation
+description: Complete documentation for the quantum temporal strategy game
+show_downloads: false
+
+# Markdown settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Navigation
+plugins:
+  - jekyll-relative-links
+
+relative_links:
+  enabled: true
+  collections: true
+
+include:
+  - README.md
+  - COMPLETE_HEROES_OF_TIME_CODEX.md
+  - COMPLETE_GAME_DOCUMENTATION.md
+  - TEMPORAL_CODEX.md
+  - TECHNICAL.md
+  - ENGINE_ARCHITECTURE.md
+  - SPATIO_TEMPORAL_GRAMMAR.md
+  - TEMPORAL_ENGINE_EXPLANATION.md
+  - GROFI_README.md
+  - TECHNICAL_DOCUMENTATION.md
