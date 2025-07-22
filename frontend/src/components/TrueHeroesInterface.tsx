@@ -23,7 +23,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ onNavigate })
   } = useGameStore();
   
   // États existants
-  const [activePanel, setActivePanel] = useState<'scenario' | 'hero' | 'castle' | 'inventory' | 'script' | 'epic'>('scenario');
+  const [activePanel, setActivePanel] = useState<'scenario' | 'hero' | 'castle' | 'inventory' | 'script' | 'epic' | 'fog'>('scenario');
   const [testMode, setTestMode] = useState(false);
   
   // NOUVEAU: État pour le mode terrain hybride
@@ -277,6 +277,13 @@ console.log("Winner: TBD");`
                 🏔️
               </button>
               <button 
+                className={`sidebar-tab ${activePanel === 'fog' ? 'active' : ''}`}
+                onClick={() => setActivePanel('fog')}
+                title="Brouillard de Causalité"
+              >
+                🌫️
+              </button>
+              <button 
                 className={`sidebar-tab ${activePanel === 'hero' ? 'active' : ''}`}
                 onClick={() => setActivePanel('hero')}
                 title="Hero"
@@ -363,6 +370,62 @@ console.log("Winner: TBD");`
                     >
                       🚀 Goldorak Easter Egg
                     </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* BROUILLARD DE CAUSALITÉ MINIMALISTE */}
+            {activePanel === 'fog' && (
+              <div className="panel-content fog-panel">
+                <div className="panel-header">
+                  <h3>🌫️ Brouillard de Causalité</h3>
+                </div>
+                <div className="fog-minimal-container">
+                  {/* Timeline Active - Barre Simple */}
+                  <div className="temporal-timeline">
+                    <div className="timeline-label">Timeline Temporelle</div>
+                    <div className="timeline-bar">
+                      <div className="timeline-progress" style={{width: '67%'}}></div>
+                      <div className="timeline-current" title="Tour Actuel: 67/100"></div>
+                    </div>
+                    <div className="timeline-info">Tour 67 • Phase Active</div>
+                  </div>
+
+                  {/* Zones de Causalité avec Couleurs et Tooltips */}
+                  <div className="causality-zones">
+                    <div className="zone-title">Zones Causales</div>
+                    <div className="zones-grid">
+                      <div className="zone-item zone-clear" title="Zone Claire: Vision totale • Effets positifs">
+                        <div className="zone-color"></div>
+                        <span>Claire</span>
+                      </div>
+                      <div className="zone-item zone-shadow" title="Zone d'Ombre: Vision partielle • Effets neutres">
+                        <div className="zone-color"></div>
+                        <span>Ombre</span>
+                      </div>
+                      <div className="zone-item zone-fog" title="Brouillard Dense: Vision limitée • Effets imprévisibles">
+                        <div className="zone-color"></div>
+                        <span>Brouillard</span>
+                      </div>
+                      <div className="zone-item zone-void" title="Vide Temporal: Aucune vision • Effets chaotiques">
+                        <div className="zone-color"></div>
+                        <span>Vide</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Indicateurs Compacts */}
+                  <div className="fog-indicators">
+                    <div className="indicator" title="Visibilité globale du terrain">
+                      👁️ <span>Visibilité: 72%</span>
+                    </div>
+                    <div className="indicator" title="Stabilité des zones temporelles">
+                      ⚡ <span>Stabilité: 85%</span>
+                    </div>
+                    <div className="indicator" title="Influence causale active">
+                      🔮 <span>Causalité: Forte</span>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -12,7 +12,7 @@ import java.util.Map;
  * Contrôleur pour l'IA avec limitations de ressources
  */
 @RestController
-@RequestMapping("/api/temporal/ai")
+@RequestMapping("/api/temporal/ai/limited")
 public class LimitedAIController {
 
     @Autowired

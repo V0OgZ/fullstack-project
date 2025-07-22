@@ -1,249 +1,160 @@
-[ERROR] COMPILATION ERROR : 
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/UnitControllerTest.java:[3,30] package com.example.demo.model does not exist
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/UnitControllerTest.java:[4,32] package com.example.demo.service does not exist
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/UnitControllerTest.java:[27,13] cannot find symbol
-  symbol:   class UnitService
-  location: class com.example.demo.controller.UnitControllerTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/UnitControllerTest.java:[30,13] cannot find symbol
-  symbol:   class UnitController
-  location: class com.example.demo.controller.UnitControllerTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/UnitControllerTest.java:[421,13] cannot find symbol
-  symbol:   class Unit
-  location: class com.example.demo.controller.UnitControllerTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/QuantumMazeTest.java:[30,13] cannot find symbol
-  symbol:   class TemporalEngineService
-  location: class com.heroesoftimepoc.temporalengine.QuantumMazeTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/QuantumMazeTest.java:[33,13] cannot find symbol
-  symbol:   class QuantumInterferenceService
-  location: class com.heroesoftimepoc.temporalengine.QuantumMazeTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[5,50] cannot find symbol
-  symbol:   class TemporalEngineService
-  location: package com.heroesoftimepoc.temporalengine.service
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[6,50] cannot find symbol
-  symbol:   class QuantumInterferenceService
-  location: package com.heroesoftimepoc.temporalengine.service
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[26,13] cannot find symbol
-  symbol:   class TemporalEngineService
-  location: class com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[29,13] cannot find symbol
-  symbol:   class QuantumInterferenceService
-  location: class com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ComplexScenarioTest.java:[3,50] cannot find symbol
-  symbol:   class TemporalEngineService
-  location: package com.heroesoftimepoc.temporalengine.service
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ComplexScenarioTest.java:[46,13] cannot find symbol
-  symbol:   class TemporalEngineService
-  location: class com.heroesoftimepoc.temporalengine.ComplexScenarioTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineIntegrationTest.java:[5,50] cannot find symbol
-  symbol:   class TemporalEngineService
-  location: package com.heroesoftimepoc.temporalengine.service
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineIntegrationTest.java:[24,13] cannot find symbol
-  symbol:   class TemporalEngineService
-  location: class com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[7,65] package com.heroesoftimepoc.temporalengine.service.GodViewService does not exist
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[26,13] cannot find symbol
-  symbol:   class PanopticonService
-  location: class com.heroesoftimepoc.temporalengine.PanopticonServiceTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[32,13] cannot find symbol
-  symbol:   class TemporalEngineService
-  location: class com.heroesoftimepoc.temporalengine.PanopticonServiceTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[6,1] package com.heroesoftimepoc.temporalengine.service.PanopticonService does not exist
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ArtifactEffectExecutorTest.java:[5,50] cannot find symbol
-  symbol:   class ArtifactEffectExecutor
-  location: package com.heroesoftimepoc.temporalengine.service
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ArtifactEffectExecutorTest.java:[40,13] cannot find symbol
-  symbol:   class ArtifactEffectExecutor
-  location: class com.heroesoftimepoc.temporalengine.ArtifactEffectExecutorTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[5,50] cannot find symbol
-  symbol:   class TemporalEngineService
-  location: package com.heroesoftimepoc.temporalengine.service
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[37,13] cannot find symbol
-  symbol:   class TemporalEngineService
-  location: class com.heroesoftimepoc.temporalengine.integration.BatailleTemporelleIntegrationTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/MultiplayerControllerTest.java:[3,30] package com.example.demo.model does not exist
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/MultiplayerControllerTest.java:[4,30] package com.example.demo.model does not exist
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/MultiplayerControllerTest.java:[5,32] package com.example.demo.service does not exist
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/MultiplayerControllerTest.java:[29,13] cannot find symbol
-  symbol:   class MultiplayerService
-  location: class com.example.demo.controller.MultiplayerControllerTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/MultiplayerControllerTest.java:[35,13] cannot find symbol
-  symbol:   class MultiplayerController
-  location: class com.example.demo.controller.MultiplayerControllerTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/MultiplayerControllerTest.java:[230,13] cannot find symbol
-  symbol:   class GameSession
-  location: class com.example.demo.controller.MultiplayerControllerTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ReadmeStoryTest.java:[31,13] cannot find symbol
-  symbol:   class TemporalEngineService
-  location: class com.heroesoftimepoc.temporalengine.ReadmeStoryTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/GameControllerTest.java:[3,32] package com.example.demo.service does not exist
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/GameControllerTest.java:[4,32] package com.example.demo.service does not exist
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/GameControllerTest.java:[27,13] cannot find symbol
-  symbol:   class GameService
-  location: class com.example.demo.controller.GameControllerTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/GameControllerTest.java:[30,13] cannot find symbol
-  symbol:   class GameStateService
-  location: class com.example.demo.controller.GameControllerTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/GameControllerTest.java:[33,13] cannot find symbol
-  symbol:   class GameController
-  location: class com.example.demo.controller.GameControllerTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[5,50] cannot find symbol
-  symbol:   class TemporalEngineService
-  location: package com.heroesoftimepoc.temporalengine.service
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[47,13] cannot find symbol
-  symbol:   class TemporalEngineService
-  location: class com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[9,50] cannot find symbol
-  symbol:   class TemporalEngineService
-  location: package com.heroesoftimepoc.temporalengine.service
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[29,13] cannot find symbol
-  symbol:   class TemporalEngineService
-  location: class com.heroesoftimepoc.temporalengine.TemporalEngineServiceTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[6,50] cannot find symbol
-  symbol:   class TemporalEngineService
-  location: package com.heroesoftimepoc.temporalengine.service
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[40,13] cannot find symbol
-  symbol:   class TemporalEngineService
-  location: class com.heroesoftimepoc.temporalengine.integration.QuantumInterferenceIntegrationTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[9,50] cannot find symbol
-  symbol:   class TemporalEngineService
-  location: package com.heroesoftimepoc.temporalengine.service
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[37,13] cannot find symbol
-  symbol:   class TemporalEngineService
-  location: class com.heroesoftimepoc.temporalengine.TemporalStressTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/AmplitudeGrofiTest.java:[21,13] cannot find symbol
-  symbol:   class DynamicFormulaParser
-  location: class com.heroesoftimepoc.temporalengine.AmplitudeGrofiTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TreasureTheftTest.java:[30,13] cannot find symbol
-  symbol:   class TemporalEngineService
-  location: class com.heroesoftimepoc.temporalengine.TreasureTheftTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TreasureTheftTest.java:[33,13] cannot find symbol
-  symbol:   class GodViewService
-  location: class com.heroesoftimepoc.temporalengine.TreasureTheftTest
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.10.1:testCompile (default-testCompile) on project temporal-engine: Compilation failure: Compilation failure: 
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/UnitControllerTest.java:[3,30] package com.example.demo.model does not exist
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/UnitControllerTest.java:[4,32] package com.example.demo.service does not exist
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/UnitControllerTest.java:[27,13] cannot find symbol
-[ERROR]   symbol:   class UnitService
-[ERROR]   location: class com.example.demo.controller.UnitControllerTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/UnitControllerTest.java:[30,13] cannot find symbol
-[ERROR]   symbol:   class UnitController
-[ERROR]   location: class com.example.demo.controller.UnitControllerTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/UnitControllerTest.java:[421,13] cannot find symbol
-[ERROR]   symbol:   class Unit
-[ERROR]   location: class com.example.demo.controller.UnitControllerTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/QuantumMazeTest.java:[30,13] cannot find symbol
-[ERROR]   symbol:   class TemporalEngineService
-[ERROR]   location: class com.heroesoftimepoc.temporalengine.QuantumMazeTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/QuantumMazeTest.java:[33,13] cannot find symbol
-[ERROR]   symbol:   class QuantumInterferenceService
-[ERROR]   location: class com.heroesoftimepoc.temporalengine.QuantumMazeTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[5,50] cannot find symbol
-[ERROR]   symbol:   class TemporalEngineService
-[ERROR]   location: package com.heroesoftimepoc.temporalengine.service
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[6,50] cannot find symbol
-[ERROR]   symbol:   class QuantumInterferenceService
-[ERROR]   location: package com.heroesoftimepoc.temporalengine.service
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[26,13] cannot find symbol
-[ERROR]   symbol:   class TemporalEngineService
-[ERROR]   location: class com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[29,13] cannot find symbol
-[ERROR]   symbol:   class QuantumInterferenceService
-[ERROR]   location: class com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ComplexScenarioTest.java:[3,50] cannot find symbol
-[ERROR]   symbol:   class TemporalEngineService
-[ERROR]   location: package com.heroesoftimepoc.temporalengine.service
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ComplexScenarioTest.java:[46,13] cannot find symbol
-[ERROR]   symbol:   class TemporalEngineService
-[ERROR]   location: class com.heroesoftimepoc.temporalengine.ComplexScenarioTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineIntegrationTest.java:[5,50] cannot find symbol
-[ERROR]   symbol:   class TemporalEngineService
-[ERROR]   location: package com.heroesoftimepoc.temporalengine.service
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineIntegrationTest.java:[24,13] cannot find symbol
-[ERROR]   symbol:   class TemporalEngineService
-[ERROR]   location: class com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[7,65] package com.heroesoftimepoc.temporalengine.service.GodViewService does not exist
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[26,13] cannot find symbol
-[ERROR]   symbol:   class PanopticonService
-[ERROR]   location: class com.heroesoftimepoc.temporalengine.PanopticonServiceTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[32,13] cannot find symbol
-[ERROR]   symbol:   class TemporalEngineService
-[ERROR]   location: class com.heroesoftimepoc.temporalengine.PanopticonServiceTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[6,1] package com.heroesoftimepoc.temporalengine.service.PanopticonService does not exist
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ArtifactEffectExecutorTest.java:[5,50] cannot find symbol
-[ERROR]   symbol:   class ArtifactEffectExecutor
-[ERROR]   location: package com.heroesoftimepoc.temporalengine.service
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ArtifactEffectExecutorTest.java:[40,13] cannot find symbol
-[ERROR]   symbol:   class ArtifactEffectExecutor
-[ERROR]   location: class com.heroesoftimepoc.temporalengine.ArtifactEffectExecutorTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[5,50] cannot find symbol
-[ERROR]   symbol:   class TemporalEngineService
-[ERROR]   location: package com.heroesoftimepoc.temporalengine.service
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[37,13] cannot find symbol
-[ERROR]   symbol:   class TemporalEngineService
-[ERROR]   location: class com.heroesoftimepoc.temporalengine.integration.BatailleTemporelleIntegrationTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/MultiplayerControllerTest.java:[3,30] package com.example.demo.model does not exist
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/MultiplayerControllerTest.java:[4,30] package com.example.demo.model does not exist
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/MultiplayerControllerTest.java:[5,32] package com.example.demo.service does not exist
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/MultiplayerControllerTest.java:[29,13] cannot find symbol
-[ERROR]   symbol:   class MultiplayerService
-[ERROR]   location: class com.example.demo.controller.MultiplayerControllerTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/MultiplayerControllerTest.java:[35,13] cannot find symbol
-[ERROR]   symbol:   class MultiplayerController
-[ERROR]   location: class com.example.demo.controller.MultiplayerControllerTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/MultiplayerControllerTest.java:[230,13] cannot find symbol
-[ERROR]   symbol:   class GameSession
-[ERROR]   location: class com.example.demo.controller.MultiplayerControllerTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ReadmeStoryTest.java:[31,13] cannot find symbol
-[ERROR]   symbol:   class TemporalEngineService
-[ERROR]   location: class com.heroesoftimepoc.temporalengine.ReadmeStoryTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/GameControllerTest.java:[3,32] package com.example.demo.service does not exist
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/GameControllerTest.java:[4,32] package com.example.demo.service does not exist
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/GameControllerTest.java:[27,13] cannot find symbol
-[ERROR]   symbol:   class GameService
-[ERROR]   location: class com.example.demo.controller.GameControllerTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/GameControllerTest.java:[30,13] cannot find symbol
-[ERROR]   symbol:   class GameStateService
-[ERROR]   location: class com.example.demo.controller.GameControllerTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/GameControllerTest.java:[33,13] cannot find symbol
-[ERROR]   symbol:   class GameController
-[ERROR]   location: class com.example.demo.controller.GameControllerTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[5,50] cannot find symbol
-[ERROR]   symbol:   class TemporalEngineService
-[ERROR]   location: package com.heroesoftimepoc.temporalengine.service
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[47,13] cannot find symbol
-[ERROR]   symbol:   class TemporalEngineService
-[ERROR]   location: class com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[9,50] cannot find symbol
-[ERROR]   symbol:   class TemporalEngineService
-[ERROR]   location: package com.heroesoftimepoc.temporalengine.service
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[29,13] cannot find symbol
-[ERROR]   symbol:   class TemporalEngineService
-[ERROR]   location: class com.heroesoftimepoc.temporalengine.TemporalEngineServiceTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[6,50] cannot find symbol
-[ERROR]   symbol:   class TemporalEngineService
-[ERROR]   location: package com.heroesoftimepoc.temporalengine.service
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[40,13] cannot find symbol
-[ERROR]   symbol:   class TemporalEngineService
-[ERROR]   location: class com.heroesoftimepoc.temporalengine.integration.QuantumInterferenceIntegrationTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[9,50] cannot find symbol
-[ERROR]   symbol:   class TemporalEngineService
-[ERROR]   location: package com.heroesoftimepoc.temporalengine.service
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[37,13] cannot find symbol
-[ERROR]   symbol:   class TemporalEngineService
-[ERROR]   location: class com.heroesoftimepoc.temporalengine.TemporalStressTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/AmplitudeGrofiTest.java:[21,13] cannot find symbol
-[ERROR]   symbol:   class DynamicFormulaParser
-[ERROR]   location: class com.heroesoftimepoc.temporalengine.AmplitudeGrofiTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TreasureTheftTest.java:[30,13] cannot find symbol
-[ERROR]   symbol:   class TemporalEngineService
-[ERROR]   location: class com.heroesoftimepoc.temporalengine.TreasureTheftTest
-[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TreasureTheftTest.java:[33,13] cannot find symbol
-[ERROR]   symbol:   class GodViewService
-[ERROR]   location: class com.heroesoftimepoc.temporalengine.TreasureTheftTest
-[ERROR] -> [Help 1]
+ ██╗  ██╗███████╗██████╗  ██████╗ ███████╗███████╗    ██████╗ ███████╗    ████████╗██╗███╗   ███╗███████╗
+ ██║  ██║██╔════╝██╔══██╗██╔═══██╗██╔════╝██╔════╝   ██╔═══██╗██╔════╝    ╚══██╔══╝██║████╗ ████║██╔════╝
+ ███████║█████╗  ██████╔╝██║   ██║█████╗  ███████╗   ██║   ██║█████╗         ██║   ██║██╔████╔██║█████╗  
+ ██╔══██║██╔══╝  ██╔══██╗██║   ██║██╔══╝  ╚════██║   ██║   ██║██╔══╝         ██║   ██║██║╚██╔╝██║██╔══╝  
+ ██║  ██║███████╗██║  ██║╚██████╔╝███████╗███████║   ╚██████╔╝██║            ██║   ██║██║ ╚═╝ ██║███████╗
+ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚══════╝    ╚═════╝ ╚═╝            ╚═╝   ╚═╝╚═╝     ╚═╝╚══════╝
+                                                                                                           
+ ⚔️  TEMPORAL ENGINE BACKEND  ⚔️                    🕰️  Quantum Mechanics & Causal Collapse  🕰️
+ ══════════════════════════════════════════════════════════════════════════════════════════════════════════
+ 
+ 🌟 Maîtrisez le temps, dominez l'espace, conquérez l'éternité
+ 
+ ⚡ Fonctionnalités Actives:
+    • Moteur Temporel Quantique    ✅
+    • États ψ (Psi) Superposés     ✅  
+    • Collapse Causal Automatique  ✅
+    • Artefacts Légendaires        ✅
+    • API REST Complète            ✅
+    
+ 🎯 Port: 8080 | 🔧 Profile: default | 📊 Version: 1.0.0 
+08:40:19.442 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+08:40:19.467 [main] INFO  com.heroesoftimepoc.temporalengine.TemporalEngineApplication - Starting TemporalEngineApplication using Java 17.0.15 on vincents-MacBook-Pro.local with PID 43623 (/Users/admin/fullstack-project/backend/target/classes started by admin in /Users/admin/fullstack-project/backend)
+08:40:19.468 [main] INFO  com.heroesoftimepoc.temporalengine.TemporalEngineApplication - No active profile set, falling back to 1 default profile: "default"
+08:40:19.724 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+08:40:19.749 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 21 ms. Found 7 JPA repository interfaces.
+08:40:20.103 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+08:40:20.110 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+08:40:20.111 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+08:40:20.111 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+08:40:20.154 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+08:40:20.155 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 670 ms
+08:40:20.195 [main] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Starting...
+08:40:20.298 [main] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Start completed.
+08:40:20.325 [main] INFO  org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:heroesdb'
+08:40:20.385 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+08:40:20.404 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+08:40:20.466 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+08:40:20.717 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+Hibernate: drop table if exists cities CASCADE 
+08:40:21.090 [main] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@1ea78c72] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+Hibernate: drop table if exists forged_objects CASCADE 
+Hibernate: drop table if exists game_history CASCADE 
+Hibernate: drop table if exists game_metadata CASCADE 
+Hibernate: drop table if exists game_players CASCADE 
+Hibernate: drop table if exists game_tiles CASCADE 
+Hibernate: drop table if exists games CASCADE 
+Hibernate: drop table if exists hero_abilities CASCADE 
+Hibernate: drop table if exists hero_inventory CASCADE 
+Hibernate: drop table if exists hero_status_effects CASCADE 
+Hibernate: drop table if exists hero_titles CASCADE 
+Hibernate: drop table if exists heroes CASCADE 
+Hibernate: drop table if exists players CASCADE 
+Hibernate: drop table if exists psi_states CASCADE 
+Hibernate: drop table if exists temporal_artifacts CASCADE 
+Hibernate: drop table if exists tile_effects CASCADE 
+Hibernate: drop table if exists tile_items CASCADE 
+Hibernate: drop table if exists tile_occupants CASCADE 
+Hibernate: create table cities (id bigint generated by default as identity, buildings TEXT, game_id bigint, income TEXT, level integer, name varchar(255), player_id varchar(255), resources TEXT, primary key (id))
+08:40:21.095 [main] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@60cbba57] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+Hibernate: create table forged_objects (id bigint generated by default as identity, cost varchar(255), effect varchar(500), forge_time timestamp, forged_by varchar(255), formula varchar(1000), is_dangerous boolean, name varchar(255) not null, stability_rating double, times_used integer, type varchar(255) not null, game_id bigint, primary key (id))
+Hibernate: create table game_history (game_id bigint not null, event varchar(255))
+Hibernate: create table game_metadata (game_id bigint not null, metadata_value integer, metadata_key varchar(255) not null, primary key (game_id, metadata_key))
+Hibernate: create table game_players (game_id bigint not null, player_id varchar(255))
+Hibernate: create table game_tiles (id bigint generated by default as identity, building_owner varchar(255), building_type varchar(255), defense_bonus integer, has_psi_states boolean, is_locked boolean, is_temporal_zone boolean, lock_duration integer, movement_cost integer, temporal_energy_bonus integer, temporal_zone_type varchar(255), terrain varchar(255), x integer not null, y integer not null, game_id bigint, primary key (id))
+Hibernate: create table games (id bigint generated by default as identity, created_at timestamp, current_player varchar(255), current_timeline varchar(255), current_turn integer, ended_at timestamp, game_name varchar(255) not null, map_height integer, map_width integer, max_players integer, started_at timestamp, status varchar(255), winner varchar(255), primary key (id))
+Hibernate: create table hero_abilities (hero_id bigint not null, ability varchar(255))
+Hibernate: create table hero_inventory (hero_id bigint not null, item varchar(255))
+Hibernate: create table hero_status_effects (hero_id bigint not null, duration integer, effect_name varchar(255) not null, primary key (hero_id, effect_name))
+Hibernate: create table hero_titles (hero_id bigint not null, title varchar(255))
+Hibernate: create table heroes (id bigint generated by default as identity, causality_awareness integer, current_day integer, days_traveled integer, has_observation_ability boolean, health integer, max_health integer, max_movement_points integer, max_temporal_energy integer, movement_points integer, movement_points_per_day integer, name varchar(255) not null, observation_range integer, player_id varchar(255), position_x integer, position_y integer, status varchar(255), temporal_energy integer, temporal_immunity boolean, temporal_vision_range integer, timeline_branch varchar(255), vision_radius integer, game_id bigint, primary key (id))
+Hibernate: create table players (id bigint generated by default as identity, joined_at timestamp, name varchar(255) not null, status varchar(255), game_id bigint, primary key (id))
+Hibernate: create table psi_states (id bigint generated by default as identity, action_type varchar(255), branch_id varchar(255), collapse_trigger varchar(255), amplitude_imaginary double, amplitude_real double, created_at timestamp, delta_t integer, expression TEXT, owner_hero varchar(255), probability double, psi_id varchar(255) not null, status varchar(255), target_x integer, target_y integer, use_complex_amplitude boolean, game_id bigint, primary key (id))
+Hibernate: create table temporal_artifacts (id bigint generated by default as identity, activated_at timestamp, artifact_id varchar(255) not null, created_at timestamp, description TEXT, effect_duration integer, effect_power integer, effect_radius integer, name varchar(255) not null, owner_id varchar(255), position_x integer, position_y integer, remaining_duration integer, status varchar(255), temporal_energy_cost integer, type varchar(255) not null, game_id bigint, primary key (id))
+Hibernate: create table tile_effects (tile_id bigint not null, effect varchar(255))
+Hibernate: create table tile_items (tile_id bigint not null, item varchar(255))
+Hibernate: create table tile_occupants (tile_id bigint not null, occupant varchar(255))
+Hibernate: alter table psi_states add constraint UK_p3db7cxh1ex7q3qcsx7b4otyr unique (psi_id)
+Hibernate: alter table temporal_artifacts add constraint UK_htd98v35r512f47a02mb18517 unique (artifact_id)
+Hibernate: alter table forged_objects add constraint FKhdsqckahlo2lb6j4klgulaffn foreign key (game_id) references games
+Hibernate: alter table game_history add constraint FK1aab4jlhfgjg0ui3p4o23uqdp foreign key (game_id) references games
+Hibernate: alter table game_metadata add constraint FKhrb23hu15c4tg72vp9e1vqbc8 foreign key (game_id) references games
+Hibernate: alter table game_players add constraint FKrbr2flqdav5ovyjas7q92u64r foreign key (game_id) references games
+Hibernate: alter table game_tiles add constraint FK9jnp7yfteauo45smvmxa8710m foreign key (game_id) references games
+Hibernate: alter table hero_abilities add constraint FK4wk3wflmkij7kl93hmbg29y9j foreign key (hero_id) references heroes
+Hibernate: alter table hero_inventory add constraint FKox21x0dd4fg7w81h3a8o6chu foreign key (hero_id) references heroes
+Hibernate: alter table hero_status_effects add constraint FKhwhtej8yql47i6ubjqd6gmj1j foreign key (hero_id) references heroes
+Hibernate: alter table hero_titles add constraint FKc69wtssobfnv2dhrvnspasx9t foreign key (hero_id) references heroes
+Hibernate: alter table heroes add constraint FKb88jgdc3dfmmhbnrpl6u5sjdn foreign key (game_id) references games
+Hibernate: alter table players add constraint FKchry7scrns4qyuyxe9dpod9k3 foreign key (game_id) references games
+Hibernate: alter table psi_states add constraint FK9kbp67wo94i0jk9w4v3ja4meq foreign key (game_id) references games
+Hibernate: alter table temporal_artifacts add constraint FK4gwvr3vnipo301cwl6hnvtyn1 foreign key (game_id) references games
+Hibernate: alter table tile_effects add constraint FK3s6ndlrmj9lbvuqiew9vp9s98 foreign key (tile_id) references game_tiles
+Hibernate: alter table tile_items add constraint FK1b41902nqng8okqb0g1q3dqj6 foreign key (tile_id) references game_tiles
+Hibernate: alter table tile_occupants add constraint FKia56skupqk3qxypotqpovr3gb foreign key (tile_id) references game_tiles
+08:40:21.131 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+08:40:21.135 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+✅ Héros GROFI chargé: Jean-Grofignon (LEGENDARY)
+✅ Héros GROFI chargé: The Dude (compagnon)
+✅ Héros GROFI chargé: Vince Vega (compagnon)
+✅ Héros GROFI chargé: Walter (compagnon)
+🦸 4 héros GROFI chargés avec succès
+08:40:21.803 [main] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+08:40:21.855 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+08:40:21.896 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - 31 mappings in 'requestMappingHandlerMapping'
+08:40:21.908 [main] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+08:40:21.916 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+08:40:21.986 [main] INFO  org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+08:40:22.000 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+08:40:22.005 [main] WARN  org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+08:40:22.007 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+08:40:22.007 [main] INFO  org.hibernate.tool.schema.internal.SchemaDropperImpl$DelayedDropActionImpl - HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+Hibernate: drop table if exists cities CASCADE 
+08:40:22.008 [main] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6affbed1] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+Hibernate: drop table if exists forged_objects CASCADE 
+Hibernate: drop table if exists game_history CASCADE 
+Hibernate: drop table if exists game_metadata CASCADE 
+Hibernate: drop table if exists game_players CASCADE 
+Hibernate: drop table if exists game_tiles CASCADE 
+Hibernate: drop table if exists games CASCADE 
+Hibernate: drop table if exists hero_abilities CASCADE 
+Hibernate: drop table if exists hero_inventory CASCADE 
+Hibernate: drop table if exists hero_status_effects CASCADE 
+Hibernate: drop table if exists hero_titles CASCADE 
+Hibernate: drop table if exists heroes CASCADE 
+Hibernate: drop table if exists players CASCADE 
+Hibernate: drop table if exists psi_states CASCADE 
+Hibernate: drop table if exists temporal_artifacts CASCADE 
+Hibernate: drop table if exists tile_effects CASCADE 
+Hibernate: drop table if exists tile_items CASCADE 
+Hibernate: drop table if exists tile_occupants CASCADE 
+08:40:22.013 [main] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Shutdown initiated...
+08:40:22.014 [main] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Shutdown completed.
+08:40:22.016 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-8080"]
+08:40:22.016 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+08:40:22.017 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8080"]
+08:40:22.017 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Destroying ProtocolHandler ["http-nio-8080"]
+08:40:22.023 [main] INFO  org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+08:40:22.030 [main] ERROR org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:2.7.18:run (default-cli) on project temporal-engine: Application finished with exit code: 1 -> [Help 1]
 [ERROR] 
 [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
 [ERROR] Re-run Maven using the -X switch to enable full debug logging.
 [ERROR] 
 [ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

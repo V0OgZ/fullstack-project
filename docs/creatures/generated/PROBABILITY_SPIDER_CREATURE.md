@@ -48,7 +48,7 @@ Une araignée qui tisse des toiles dans l'espace des probabilités.
 ## 📊 **MÉTADONNÉES**
 
 ### 🔧 **Informations Techniques**
-- **Généré le** : 2025-07-21 18:00:39
+- **Généré le** : 2025-07-22 08:50:54
 - **Source JSON** : `quantum-creatures.json`
 
 ### 🎮 **Utilisation en Jeu**
