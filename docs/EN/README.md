@@ -9,15 +9,29 @@
 ## 🏗️ **Documentation Structure**
 
 ### 📖 **Core Documentation**
-- **🎮 [COMPLETE_HEROES_OF_TIME_CODEX.md](COMPLETE_HEROES_OF_TIME_CODEX.md)** - **THE ULTIMATE REFERENCE**
-- **📖 [COMPLETE_GAME_DOCUMENTATION.md](COMPLETE_GAME_DOCUMENTATION.md)** - Complete game documentation
-- **⏱️ [TEMPORAL_CODEX.md](TEMPORAL_CODEX.md)** - Temporal codex with complex amplitudes
+- **📋 [README.md](README.md)** - Main documentation index
+- **🎮 [COMPLETE_HEROES_OF_TIME_CODEX.md](COMPLETE_HEROES_OF_TIME_CODEX.md)** - **THE ULTIMATE REFERENCE** (858 lines)
+- **📖 [COMPLETE_GAME_DOCUMENTATION.md](COMPLETE_GAME_DOCUMENTATION.md)** - Complete game documentation (448 lines)
+
+### 🎮 **Gameplay & Mechanics**
+- **🎯 [GAMEPLAY.md](GAMEPLAY.md)** - Complete feature list (203 lines)
+- **🌫️ [FOG_AND_ZONE_GAMEPLAY.md](FOG_AND_ZONE_GAMEPLAY.md)** - Fog of causality & vision mechanics (753 lines)
+- **⏱️ [TEMPORAL_CODEX.md](TEMPORAL_CODEX.md)** - Temporal mechanics with complex amplitudes (324 lines)
+- **⏰ [TEMPORAL_DECAY_SYSTEM.md](TEMPORAL_DECAY_SYSTEM.md)** - Temporal erosion system by Anna (726 lines)
+
+### 🏗️ **Technical & Architecture**
 - **📊 [TECHNICAL.md](TECHNICAL.md)** - Complete technical documentation (1490 lines)
-- **🏗️ [ENGINE_ARCHITECTURE.md](ENGINE_ARCHITECTURE.md)** - Generic engine architecture
-- **📐 [SPATIO_TEMPORAL_GRAMMAR.md](SPATIO_TEMPORAL_GRAMMAR.md)** - Temporal grammar and scripting
-- **⏱️ [TEMPORAL_ENGINE_EXPLANATION.md](TEMPORAL_ENGINE_EXPLANATION.md)** - Technical engine explanation
-- **🌟 [GROFI_README.md](GROFI_README.md)** - GROFI System - Graph of Reality
-- **🔧 [TECHNICAL_DOCUMENTATION.md](TECHNICAL_DOCUMENTATION.md)** - Root technical documentation
+- **🏛️ [ENGINE_ARCHITECTURE.md](ENGINE_ARCHITECTURE.md)** - Generic engine architecture
+- **🎨 [UI_ARCHITECTURE_ANALYSIS.md](UI_ARCHITECTURE_ANALYSIS.md)** - UI architecture recommendations (131 lines)
+
+### 👨‍💻 **Developer Guides**
+- **🔧 [DEVELOPER_INSTRUCTIONS.md](DEVELOPER_INSTRUCTIONS.md)** - Practical developer guide (717 lines)
+- **🏛️ [README_DEVELOPER_ULTIMATE.md](README_DEVELOPER_ULTIMATE.md)** - Developer philosophy & vision (496 lines)
+
+### 🌟 **Special Systems**
+- **⏱️ [TEMPORAL_ENGINE_EXPLANATION.md](TEMPORAL_ENGINE_EXPLANATION.md)** - Temporal engine explanation (629 lines)
+- **📐 [SPATIO_TEMPORAL_GRAMMAR.md](SPATIO_TEMPORAL_GRAMMAR.md)** - HOTS grammar & scripting (463 lines)
+- **🌀 [GROFI_README.md](GROFI_README.md)** - GROFI System - Graph of Reality
 
 ---
 
