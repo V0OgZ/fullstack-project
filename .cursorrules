@@ -103,7 +103,7 @@ Backend (Port 8080): Spring Boot + H2 Database + Epic Content
 ├── Services: Business logic layer + Translation services
 └── Repository: JPA entities
 
-Frontend (Port 3000): React TypeScript + Epic Assets
+Frontend (Port 8000): React TypeScript + Epic Assets
 ├── TrueHeroesInterface.tsx (main game UI + Epic panel)
 ├── EpicContentViewer.tsx (asset viewer with 4 tabs)
 ├── ModernGameRenderer.tsx (map rendering)
