@@ -158,7 +158,7 @@ class HeroInterface {
                     <div class="hero-list" id="hero-list">
                         ${this.heroes.map(hero => `
                             <div class="hero-card" data-hero-id="${hero.id}">
-                                <div class="hero-avatar">${this.getHeroAvatar(hero.name)}</div>
+                                <div class="hero-avatar hero-dicebear" id="hero-avatar-${hero.id}"></div>
                                 <div class="hero-basic-info">
                                     <h4>${hero.name}</h4>
                                     <div class="hero-title">${hero.title}</div>
@@ -190,6 +190,49 @@ class HeroInterface {
         
         document.body.appendChild(heroContainer);
         this.container = heroContainer;
+        
+        // Charger les avatars dicebear après création de l'UI
+        this.loadHeroAvatars();
+    }
+    
+    loadHeroAvatars() {
+        if (!window.dicebarSystem) {
+            console.warn('DicebarSystem non disponible, utilisation des icônes par défaut');
+            return;
+        }
+        
+        this.heroes.forEach(hero => {
+            const container = document.getElementById(`hero-avatar-${hero.id}`);
+            if (container) {
+                // Créer l'avatar dicebear
+                const avatarElement = window.dicebarSystem.createMapElement(
+                    'hero',
+                    hero.name,
+                    60,
+                    {
+                        showIcon: false,
+                        glow: hero.level >= 5,
+                        rarity: this.getHeroRarity(hero.level)
+                    }
+                );
+                
+                if (avatarElement) {
+                    container.innerHTML = '';
+                    container.appendChild(avatarElement);
+                } else {
+                    // Fallback sur emoji si dicebear échoue
+                    container.innerHTML = `<span style="font-size: 48px;">${this.getHeroAvatar(hero.name)}</span>`;
+                }
+            }
+        });
+    }
+    
+    getHeroRarity(level) {
+        if (level <= 2) return 'common';
+        if (level <= 4) return 'uncommon';
+        if (level <= 6) return 'rare';
+        if (level <= 8) return 'epic';
+        return 'legendary';
     }
     
     getHeroAvatar(heroName) {
@@ -260,7 +303,7 @@ class HeroInterface {
         
         detailPanel.innerHTML = `
             <div class="hero-detail-header">
-                <div class="hero-detail-avatar">${this.getHeroAvatar(hero.name)}</div>
+                <div class="hero-detail-avatar hero-dicebear-large" id="hero-detail-avatar"></div>
                 <div class="hero-detail-info">
                     <h3>${hero.name}</h3>
                     <div class="hero-detail-title">${hero.title}</div>
@@ -365,6 +408,30 @@ class HeroInterface {
                 </div>
             </div>
         `;
+        
+        // Charger l'avatar dicebear du héros sélectionné
+        if (window.dicebarSystem) {
+            const avatarContainer = document.getElementById('hero-detail-avatar');
+            if (avatarContainer) {
+                const avatarElement = window.dicebarSystem.createMapElement(
+                    'hero',
+                    hero.name,
+                    100, // Plus grand pour le panneau de détail
+                    {
+                        showIcon: false,
+                        glow: true,
+                        rarity: this.getHeroRarity(hero.level)
+                    }
+                );
+                
+                if (avatarElement) {
+                    avatarContainer.innerHTML = '';
+                    avatarContainer.appendChild(avatarElement);
+                } else {
+                    avatarContainer.innerHTML = `<span style="font-size: 80px;">${this.getHeroAvatar(hero.name)}</span>`;
+                }
+            }
+        }
     }
     
     getItemIcon(itemType) {
@@ -570,6 +637,9 @@ class HeroInterface {
         if (this.selectedHero) {
             this.updateHeroDetail();
         }
+        
+        // Recharger les avatars dicebear avec les nouvelles rarités
+        this.loadHeroAvatars();
     }
     
     showMessage(message, type = 'info') {

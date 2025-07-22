@@ -127,7 +127,7 @@ class CityInterface {
                     <h3>🏗️ Bâtiments</h3>
                     <div class="buildings-grid">
                         <div class="building-card" data-building="townHall">
-                            <div class="building-icon">🏛️</div>
+                            <div class="building-icon building-dicebear" id="townHall-dicebear"></div>
                             <div class="building-info">
                                 <h4>Hôtel de Ville</h4>
                                 <div class="building-level">Niveau ${this.cityData.buildings.townHall.level}/${this.cityData.buildings.townHall.maxLevel}</div>
@@ -142,7 +142,7 @@ class CityInterface {
                         </div>
                         
                         <div class="building-card" data-building="barracks">
-                            <div class="building-icon">⚔️</div>
+                            <div class="building-icon building-dicebear" id="barracks-dicebear"></div>
                             <div class="building-info">
                                 <h4>Caserne</h4>
                                 <div class="building-level">Niveau ${this.cityData.buildings.barracks.level}/${this.cityData.buildings.barracks.maxLevel}</div>
@@ -157,7 +157,7 @@ class CityInterface {
                         </div>
                         
                         <div class="building-card" data-building="tower">
-                            <div class="building-icon">🗼</div>
+                            <div class="building-icon building-dicebear" id="tower-dicebear"></div>
                             <div class="building-info">
                                 <h4>Tour de Défense</h4>
                                 <div class="building-level">Niveau ${this.cityData.buildings.tower.level}/${this.cityData.buildings.tower.maxLevel}</div>
@@ -172,7 +172,7 @@ class CityInterface {
                         </div>
                         
                         <div class="building-card" data-building="mageTower">
-                            <div class="building-icon">🧙‍♂️</div>
+                            <div class="building-icon building-dicebear" id="mageTower-dicebear"></div>
                             <div class="building-info">
                                 <h4>Tour des Mages</h4>
                                 <div class="building-level">Niveau ${this.cityData.buildings.mageTower.level}/${this.cityData.buildings.mageTower.maxLevel}</div>
@@ -201,6 +201,63 @@ class CityInterface {
         
         document.body.appendChild(cityContainer);
         this.container = cityContainer;
+        
+        // Charger les avatars dicebear après création de l'UI
+        this.loadBuildingAvatars();
+    }
+    
+    loadBuildingAvatars() {
+        if (!window.dicebarSystem) {
+            console.warn('DicebarSystem non disponible, utilisation des icônes par défaut');
+            return;
+        }
+        
+        const buildingMappings = {
+            'townHall': { name: 'Town Hall', type: 'building' },
+            'barracks': { name: 'Barracks', type: 'building' },
+            'tower': { name: 'Observatory', type: 'building' },
+            'mageTower': { name: 'Mage Tower', type: 'building' }
+        };
+        
+        Object.entries(buildingMappings).forEach(([buildingId, config]) => {
+            const container = document.getElementById(`${buildingId}-dicebear`);
+            if (container) {
+                // Créer l'avatar dicebear
+                const avatarElement = window.dicebarSystem.createMapElement(
+                    config.type,
+                    config.name,
+                    60,
+                    {
+                        showIcon: false,
+                        glow: this.cityData.buildings[buildingId].level > 0,
+                        rarity: this.getBuildingRarity(buildingId, this.cityData.buildings[buildingId].level)
+                    }
+                );
+                
+                if (avatarElement) {
+                    container.innerHTML = '';
+                    container.appendChild(avatarElement);
+                } else {
+                    // Fallback sur emoji si dicebear échoue
+                    const emojis = {
+                        'townHall': '🏛️',
+                        'barracks': '⚔️',
+                        'tower': '🗼',
+                        'mageTower': '🧙‍♂️'
+                    };
+                    container.innerHTML = `<span style="font-size: 48px;">${emojis[buildingId]}</span>`;
+                }
+            }
+        });
+    }
+    
+    getBuildingRarity(buildingType, level) {
+        if (level === 0) return null;
+        if (level === 1) return 'common';
+        if (level === 2) return 'uncommon';
+        if (level === 3) return 'rare';
+        if (level === 4) return 'epic';
+        return 'legendary';
     }
     
     bindEvents() {
@@ -361,6 +418,9 @@ class CityInterface {
                 }
             }
         });
+        
+        // Recharger les avatars dicebear avec les nouvelles rarités
+        this.loadBuildingAvatars();
     }
     
     updateBuildingEffects(effectsElement, buildingType, level) {
