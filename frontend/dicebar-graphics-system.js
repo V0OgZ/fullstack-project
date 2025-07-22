@@ -48,69 +48,89 @@ class DicebarGraphicsSystem {
 
         // Buildings and Structures with dicebar graphics
         this.buildings = {
-            'Château': {
-                style: 'bottts',
-                seed: 'castle-fortress-medieval',
+            'Nexus Tower': {
+                style: 'glass', // Nouveau style pour les bâtiments magiques !
+                seed: 'nexus-tower-magical',
+                icon: '🏛️',
+                color: '#FFD700',
+                description: 'Temporal Nexus Tower'
+            },
+            'Quantum Citadel': {
+                style: 'identicon', // Motifs géométriques pour citadelle
+                seed: 'quantum-citadel-fortress',
                 icon: '🏰',
                 color: '#8B4513',
-                description: 'Medieval Castle',
-                type: 'fortress'
+                description: 'Quantum Citadel'
             },
-            'Tour de Défense': {
-                style: 'bottts',
-                seed: 'tower-defense-watch',
-                icon: '🗼',
-                color: '#696969',
-                description: 'Defense Tower',
-                type: 'tower'
+            'Probability Forge': {
+                style: 'rings', // Anneaux concentriques pour la forge
+                seed: 'probability-forge-workshop',
+                icon: '🔨',
+                color: '#E67E22',
+                description: 'Probability Forge'
             },
-            'Hôtel de Ville': {
-                style: 'bottts',
-                seed: 'town-hall-government',
-                icon: '🏛️',
-                color: '#DAA520',
-                description: 'Town Hall',
-                type: 'government'
+            'Archives Temporelles': {
+                style: 'shapes',
+                seed: 'temporal-archives-library',
+                icon: '📚',
+                color: '#3498DB',
+                description: 'Temporal Archives'
             },
-            'Caserne': {
-                style: 'bottts',
-                seed: 'barracks-military-training',
-                icon: '⚔️',
-                color: '#8B0000',
-                description: 'Military Barracks',
-                type: 'military'
+            'Barracks': {
+                style: 'pixel-art', // Style rétro pour les baraquements
+                seed: 'barracks-military',
+                icon: '🛡️',
+                color: '#95A5A6',
+                description: 'Military Barracks'
             },
-            'Tour des Mages': {
-                style: 'bottts',
-                seed: 'mage-tower-magic',
-                icon: '🧙‍♂️',
-                color: '#9370DB',
-                description: 'Mage Tower',
-                type: 'magic'
+            'Mage Tower': {
+                style: 'glass', // Effet cristal pour tour de mage
+                seed: 'mage-tower-wizard',
+                icon: '🔮',
+                color: '#9B59B6',
+                description: 'Mage Tower'
             },
-            'Forge': {
-                style: 'bottts',
-                seed: 'forge-blacksmith-weapons',
-                icon: '⚒️',
-                color: '#CD853F',
-                description: 'Blacksmith Forge',
-                type: 'crafting'
+            'Dragon Roost': {
+                style: 'croodles', // Style dessiné pour nid de dragon
+                seed: 'dragon-roost-lair',
+                icon: '🐉',
+                color: '#E74C3C',
+                description: 'Dragon Roost'
+            },
+            'Market': {
+                style: 'fun-emoji', // Style fun pour le marché
+                seed: 'market-commerce',
+                icon: '🏪',
+                color: '#F39C12',
+                description: 'Market'
             },
             'Temple': {
-                style: 'bottts',
-                seed: 'temple-religion-worship',
+                style: 'rings',
+                seed: 'temple-divine',
                 icon: '⛪',
-                color: '#FFD700',
-                description: 'Religious Temple',
-                type: 'religious'
+                color: '#F1C40F',
+                description: 'Temple'
             },
-            'Port': {
-                style: 'bottts',
-                seed: 'port-harbor-trade',
-                icon: '⚓',
-                color: '#4169E1',
-                description: 'Trading Port',
-                type: 'trade'
+            'Forge': {
+                style: 'identicon',
+                seed: 'forge-blacksmith',
+                icon: '🔥',
+                color: '#E67E22',
+                description: 'Forge'
+            },
+            'Observatory': {
+                style: 'glass',
+                seed: 'observatory-astral',
+                icon: '🔭',
+                color: '#3498DB',
+                description: 'Observatory'
+            },
+            'Town Hall': {
+                style: 'shapes',
+                seed: 'town-hall-governance',
+                icon: '🏛️',
+                color: '#27AE60',
+                description: 'Town Hall'
             }
         };
 
@@ -1539,6 +1559,215 @@ class DicebarGraphicsSystem {
             elementDiv.appendChild(nameDiv);
             gallery.appendChild(elementDiv);
         });
+    }
+
+    // Create a dicebear element for map display with special effects
+    createMapElement(elementType, elementName, size = 60, options = {}) {
+        const element = this.getElementData(elementType, elementName);
+        if (!element) return null;
+        
+        const container = document.createElement('div');
+        container.className = 'dicebear-map-element';
+        container.style.cssText = `
+            position: relative;
+            width: ${size}px;
+            height: ${size}px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        `;
+        
+        // Create the avatar image
+        const img = document.createElement('img');
+        const params = this.buildAdvancedAvatarParams(element, elementType, elementName);
+        img.src = `${this.baseUrl}/${element.style}/svg?${params}`;
+        img.alt = element.description || elementName;
+        
+        // Apply special effects based on element type
+        if (elementType === 'building') {
+            img.style.cssText = `
+                width: 100%;
+                height: 100%;
+                filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+                transform: perspective(100px) rotateX(-5deg);
+            `;
+            
+            // Add building glow effect
+            if (options.glow) {
+                container.style.filter = `drop-shadow(0 0 10px ${element.color})`;
+            }
+        } else if (elementType === 'artifact') {
+            img.style.cssText = `
+                width: 80%;
+                height: 80%;
+                filter: drop-shadow(0 0 8px ${element.color});
+                animation: artifactPulse 2s ease-in-out infinite;
+            `;
+            
+            // Add floating animation for artifacts
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes artifactPulse {
+                    0%, 100% { transform: scale(1) translateY(0); }
+                    50% { transform: scale(1.1) translateY(-5px); }
+                }
+            `;
+            if (!document.head.querySelector('style[data-artifact-pulse]')) {
+                style.setAttribute('data-artifact-pulse', 'true');
+                document.head.appendChild(style);
+            }
+        } else if (elementType === 'creature') {
+            img.style.cssText = `
+                width: 90%;
+                height: 90%;
+                filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4));
+                transition: transform 0.3s ease;
+            `;
+            
+            // Add hover effect for creatures
+            img.addEventListener('mouseenter', () => {
+                img.style.transform = 'scale(1.1)';
+            });
+            img.addEventListener('mouseleave', () => {
+                img.style.transform = 'scale(1)';
+            });
+        } else if (elementType === 'hero') {
+            img.style.cssText = `
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                border: 3px solid ${element.color || '#FFD700'};
+                box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            `;
+        }
+        
+        // Add rarity effects
+        if (options.rarity) {
+            const rarityColors = {
+                common: '#808080',
+                uncommon: '#1EFF00',
+                rare: '#0070FF',
+                epic: '#A335EE',
+                legendary: '#FF8000',
+                mythic: '#FF0000'
+            };
+            
+            const rarityColor = rarityColors[options.rarity] || '#FFFFFF';
+            container.style.boxShadow = `0 0 20px ${rarityColor}`;
+        }
+        
+        // Add tooltip
+        if (options.showTooltip !== false) {
+            container.title = `${element.description || elementName}${options.rarity ? ` (${options.rarity})` : ''}`;
+        }
+        
+        container.appendChild(img);
+        
+        // Add icon overlay for quick identification
+        if (options.showIcon && element.icon) {
+            const iconOverlay = document.createElement('div');
+            iconOverlay.style.cssText = `
+                position: absolute;
+                bottom: -5px;
+                right: -5px;
+                width: 20px;
+                height: 20px;
+                background: white;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 14px;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            `;
+            iconOverlay.textContent = element.icon;
+            container.appendChild(iconOverlay);
+        }
+        
+        return container;
+    }
+    
+    // Get element data from any category
+    getElementData(elementType, elementName) {
+        switch(elementType) {
+            case 'hero':
+                return this.getHeroData(elementName);
+            case 'creature':
+                return this.creatures[elementName] || this.dragons[elementName];
+            case 'building':
+                return this.buildings[elementName];
+            case 'nature':
+                return this.nature[elementName];
+            case 'artifact':
+                return this.artifacts[elementName];
+            case 'spell':
+                return this.spells[elementName];
+            case 'ui':
+                return this.ui_elements[elementName];
+            case 'environment':
+                return this.environment[elementName];
+            default:
+                return null;
+        }
+    }
+    
+    // Create a grid of dicebear elements for showcase
+    createElementShowcase(elements, elementType, options = {}) {
+        const showcase = document.createElement('div');
+        showcase.className = 'dicebear-showcase';
+        showcase.style.cssText = `
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(${options.size || 80}px, 1fr));
+            gap: 15px;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 10px;
+        `;
+        
+        elements.forEach(elementName => {
+            const element = this.createMapElement(
+                elementType, 
+                elementName, 
+                options.size || 80,
+                {
+                    showIcon: options.showIcon !== false,
+                    showTooltip: true,
+                    glow: options.glow,
+                    rarity: options.rarities ? options.rarities[elementName] : null
+                }
+            );
+            
+            if (element) {
+                const wrapper = document.createElement('div');
+                wrapper.style.cssText = `
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 5px;
+                `;
+                
+                wrapper.appendChild(element);
+                
+                if (options.showName !== false) {
+                    const nameLabel = document.createElement('div');
+                    nameLabel.style.cssText = `
+                        font-size: 11px;
+                        text-align: center;
+                        color: #333;
+                        max-width: ${options.size || 80}px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                    `;
+                    nameLabel.textContent = elementName;
+                    wrapper.appendChild(nameLabel);
+                }
+                
+                showcase.appendChild(wrapper);
+            }
+        });
+        
+        return showcase;
     }
 }
 
