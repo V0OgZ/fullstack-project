@@ -1,0 +1,88 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------< com.heroesoftimepoc:temporal-engine >-----------------
+[INFO] Building temporal-engine 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:3.2.0:resources (default-resources) @ temporal-engine ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Using 'UTF-8' encoding to copy filtered properties files.
+[INFO] Copying 1 resource
+[INFO] Copying 35 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ temporal-engine ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:3.2.0:testResources (default-testResources) @ temporal-engine ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Using 'UTF-8' encoding to copy filtered properties files.
+[INFO] Copying 3 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ temporal-engine ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 13 source files to /Users/admin/fullstack-project/backend/target/test-classes
+[WARNING] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[224,82] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[301,96] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[311,83] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[112,50] unchecked conversion
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.util.Map
+[WARNING] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[127,55] unchecked conversion
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.util.Map
+[WARNING] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[156,51] unchecked conversion
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.util.Map
+[WARNING] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[102,58] unchecked conversion
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.util.Map
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ temporal-engine ---
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.heroesoftimepoc.temporalengine.TemporalScriptParserTest
+[ERROR] Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.002 s <<< FAILURE! - in com.heroesoftimepoc.temporalengine.TemporalScriptParserTest
+[ERROR] com.heroesoftimepoc.temporalengine.TemporalScriptParserTest  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.NoClassDefFoundError: com/heroesoftimepoc/temporalengine/service/TemporalScriptParser
+Caused by: java.lang.ClassNotFoundException: com.heroesoftimepoc.temporalengine.service.TemporalScriptParser
+
+[INFO] Running com.heroesoftimepoc.temporalengine.TemporalStressTest
+[ERROR] Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.001 s <<< FAILURE! - in com.heroesoftimepoc.temporalengine.TemporalStressTest
+[ERROR] com.heroesoftimepoc.temporalengine.TemporalStressTest  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.NoClassDefFoundError: com/heroesoftimepoc/temporalengine/service/TemporalEngineService
+Caused by: java.lang.ClassNotFoundException: com.heroesoftimepoc.temporalengine.service.TemporalEngineService
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Errors: 
+[ERROR]   TemporalScriptParserTest » NoClassDefFound com/heroesoftimepoc/temporalengine/...
+[ERROR]   TemporalStressTest » NoClassDefFound com/heroesoftimepoc/temporalengine/servic...
+[INFO] 
+[ERROR] Tests run: 2, Failures: 0, Errors: 2, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  6.072 s
+[INFO] Finished at: 2025-07-22T10:50:11+02:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.22.2:test (default-test) on project temporal-engine: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /Users/admin/fullstack-project/backend/target/surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
