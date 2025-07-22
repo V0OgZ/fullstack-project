@@ -570,6 +570,45 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 
 ---
 
+## 📅 **Documentation Récente (Juillet 2025)**
+
+### 🆕 **Nouvelles Fonctionnalités**
+- **💾 Système de Persistence** : [PROTOCOLE_MEMENTO_PERSISTENCE_UPDATE.md](PROTOCOLE_MEMENTO_PERSISTENCE_UPDATE.md)
+- **🎮 Gameplay vs IA** : [GAMEPLAY_VS_IA_SUMMARY.md](GAMEPLAY_VS_IA_SUMMARY.md)
+- **📊 Analyse Multi-Jours** : [PARTIE_PLUSIEURS_JOURS_ANALYSE.md](PARTIE_PLUSIEURS_JOURS_ANALYSE.md)
+- **🧠 Résumé Autonome** : [MEMENTO_AUTONOME_SUMMARY.md](MEMENTO_AUTONOME_SUMMARY.md)
+
+### 📚 **Guides Techniques Récents**
+- **📜 Clarification HOTS/JSON/SH** : [docs/RAPPORTS_TECHNIQUES/CLARIFICATION_FORMATS_SCRIPT_SH_HOTS_JSON.md](docs/RAPPORTS_TECHNIQUES/CLARIFICATION_FORMATS_SCRIPT_SH_HOTS_JSON.md)
+- **🏛️ Architecture Moteur** : [docs/architecture/ENGINE_ARCHITECTURE.md](docs/architecture/ENGINE_ARCHITECTURE.md)
+- **🎯 Instructions Développeur** : [docs/RAPPORTS_TECHNIQUES/DEVELOPER_INSTRUCTIONS.md](docs/RAPPORTS_TECHNIQUES/DEVELOPER_INSTRUCTIONS.md)
+- **🚀 Guide Démarrage Rapide** : [docs/RAPPORTS_TECHNIQUES/CURSOR_QUICK_START.md](docs/RAPPORTS_TECHNIQUES/CURSOR_QUICK_START.md)
+
+### 🔮 **Documentation Système HOTS**
+- **📖 CODEX Complet** : [docs/CODEX_COMPLET_HEROES_OF_TIME.md](docs/CODEX_COMPLET_HEROES_OF_TIME.md)
+- **⏱️ Moteur Temporel** : [docs/MOTEUR_TEMPOREL_EXPLICATION.md](docs/MOTEUR_TEMPOREL_EXPLICATION.md)
+- **🌀 Collapse Causal** : [docs/collapse-causale/COLLAPSE_CAUSALE_EXPLICATION.md](docs/collapse-causale/COLLAPSE_CAUSALE_EXPLICATION.md)
+- **📊 État Système** : [docs/RAPPORTS_TECHNIQUES/STATUS_REPORT.md](docs/RAPPORTS_TECHNIQUES/STATUS_REPORT.md)
+
+### 🦸 **Héros & Créatures**
+- **🤖 IA Claudius-Memento** : [docs/ALGORITHME_IA_CLAUDIUS_MEMENTO.md](docs/ALGORITHME_IA_CLAUDIUS_MEMENTO.md)
+- **📚 Lore Jean & Memento** : [docs/LORE_MEMENTO_JEAN_ETERNAL.md](docs/LORE_MEMENTO_JEAN_ETERNAL.md)
+- **✨ Manifeste Jean-Grofignon** : [docs/JEAN_GROFIGNON_MANIFESTO.md](docs/JEAN_GROFIGNON_MANIFESTO.md)
+- **🏛️ Archive Museum** : [docs/MUSEUM_ARCHIVE_MASTER.md](docs/MUSEUM_ARCHIVE_MASTER.md)
+
+### 🛠️ **Scripts & Tests**
+- **🎮 Test vs IA** : [scripts/test-vs-ia.sh](scripts/test-vs-ia.sh)
+- **💾 Test Persistence** : [scripts/test-persistence.sh](scripts/test-persistence.sh)
+- **📜 Index Scripts** : [scripts/INDEX_SCRIPTS_HEROES_OF_TIME.md](scripts/INDEX_SCRIPTS_HEROES_OF_TIME.md)
+
+### 📁 **MEMENTO - Sessions Récentes**
+- **🧠 Index MEMENTO** : [MEMENTO/INDEX_MEMENTO.md](MEMENTO/INDEX_MEMENTO.md)
+- **💾 Session Courante** : [MEMENTO/CURRENT_SESSION/SESSION_FINAL_REPORT.md](MEMENTO/CURRENT_SESSION/SESSION_FINAL_REPORT.md)
+- **🎮 Interface 8000** : [MEMENTO/IMPLEMENTATIONS/INTERFACE_8000_COMPLETE.md](MEMENTO/IMPLEMENTATIONS/INTERFACE_8000_COMPLETE.md)
+- **🏛️ Admin Multijoueur** : [MEMENTO/IMPLEMENTATION_ADMIN_MULTIJOUEUR_COMPLETE.md](MEMENTO/IMPLEMENTATION_ADMIN_MULTIJOUEUR_COMPLETE.md)
+
+---
+
 🎮 **Ready to play? Start with `./start-app.sh` and visit http://localhost:3000!**
 
 *"Le temps n'est qu'une illusion. La causalité, un défi à relever."* - Jean Grofignon 
