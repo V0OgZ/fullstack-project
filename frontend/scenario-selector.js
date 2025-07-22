@@ -13,7 +13,9 @@ class ScenarioSelector {
                 commands: 7,
                 psiStates: 1,
                 file: 'simple-game.hots',
-                category: 'tutorial'
+                category: 'tutorial',
+                heroes: ['Arthur', 'Merlin'],
+                items: []
             },
             {
                 id: 'initiation-combat',
@@ -24,7 +26,9 @@ class ScenarioSelector {
                 commands: 15,
                 psiStates: 0,
                 file: 'initiation_combat.hots',
-                category: 'tutorial'
+                category: 'tutorial',
+                heroes: ['Guenièvre'],
+                items: ['sword_basic', 'shield_round']
             },
             {
                 id: 'epic-arthur-vs-ragnar',
@@ -35,7 +39,9 @@ class ScenarioSelector {
                 commands: 20,
                 psiStates: 6,
                 file: 'epic-arthur-vs-ragnar.hots',
-                category: 'combat'
+                category: 'combat',
+                heroes: ['Arthur', 'Ragnar'],
+                items: ['sword_excalibur', 'axe_battle']
             },
             {
                 id: 'claudius-vs-jeangro',
@@ -46,7 +52,9 @@ class ScenarioSelector {
                 commands: 25,
                 psiStates: 8,
                 file: 'claudius_vs_jeangro_epic.hots',
-                category: 'philosophie'
+                category: 'philosophie',
+                heroes: ['Claudius Memento', 'Jean-Grofignon'],
+                items: ['TOME_MEMOIRE', 'JOINT_MAGIQUE']
             },
             {
                 id: 'quantum-maze',
@@ -57,7 +65,9 @@ class ScenarioSelector {
                 commands: 30,
                 psiStates: 12,
                 file: 'quantum_maze.hots',
-                category: 'quantique'
+                category: 'quantique',
+                heroes: ['Morgana', 'Lancelot'],
+                items: ['temporal_anchor', 'phoenix_feather']
             },
             {
                 id: 'oeil-de-wigner',
@@ -68,7 +78,9 @@ class ScenarioSelector {
                 commands: 35,
                 psiStates: 15,
                 file: 'oeil_de_wigner_scenario.hots',
-                category: 'artefacts'
+                category: 'artefacts',
+                heroes: ['Nikita Victor Nettoyeur'],
+                items: ['oeil_de_wigner', 'lunette_quantique']
             },
             {
                 id: 'memento-memory-rewrite',
@@ -79,7 +91,9 @@ class ScenarioSelector {
                 commands: 40,
                 psiStates: 20,
                 file: 'memento_memory_rewrite.hots',
-                category: 'temporel'
+                category: 'temporel',
+                heroes: ['Claudius Memento', 'Memento'],
+                items: ['avantworld_blade', 'nexus_blade']
             }
         ];
         
@@ -158,6 +172,10 @@ class ScenarioSelector {
                     <p>${scenario.description}</p>
                 </div>
                 
+                <div class="scenario-avatars" id="avatars-${scenario.id}">
+                    <!-- Les avatars dicebear seront ajoutés ici -->
+                </div>
+                
                 <div class="scenario-stats">
                     <div class="stat">
                         <span class="stat-icon">⏱️</span>
@@ -181,6 +199,81 @@ class ScenarioSelector {
         
         // Ajouter les event listeners pour la sélection
         this.setupScenarioSelection();
+        
+        // Charger les avatars dicebear après le rendu
+        this.loadScenarioAvatars(filteredScenarios);
+    }
+    
+    // 🎨 CHARGER LES AVATARS DICEBEAR
+    loadScenarioAvatars(scenarios) {
+        if (!window.dicebarSystem) {
+            console.warn('DicebarSystem non disponible');
+            return;
+        }
+        
+        scenarios.forEach(scenario => {
+            const avatarsContainer = document.getElementById(`avatars-${scenario.id}`);
+            if (!avatarsContainer) return;
+            
+            const avatarsHTML = [];
+            
+            // Ajouter les héros
+            if (scenario.heroes && scenario.heroes.length > 0) {
+                const heroesDiv = document.createElement('div');
+                heroesDiv.className = 'scenario-heroes';
+                heroesDiv.innerHTML = '<span class="avatars-label">Héros :</span>';
+                
+                scenario.heroes.forEach(heroName => {
+                    const avatarElement = window.dicebarSystem.createMapElement(
+                        'hero',
+                        heroName,
+                        40,
+                        {
+                            showIcon: false,
+                            glow: false
+                        }
+                    );
+                    
+                    if (avatarElement) {
+                        avatarElement.style.display = 'inline-block';
+                        avatarElement.style.margin = '0 5px';
+                        avatarElement.title = heroName;
+                        heroesDiv.appendChild(avatarElement);
+                    }
+                });
+                
+                avatarsContainer.appendChild(heroesDiv);
+            }
+            
+            // Ajouter les items
+            if (scenario.items && scenario.items.length > 0) {
+                const itemsDiv = document.createElement('div');
+                itemsDiv.className = 'scenario-items';
+                itemsDiv.innerHTML = '<span class="avatars-label">Items :</span>';
+                
+                scenario.items.forEach(itemName => {
+                    const avatarElement = window.dicebarSystem.createMapElement(
+                        'artifact',
+                        itemName,
+                        35,
+                        {
+                            showIcon: false,
+                            glow: true,
+                            rarity: 'rare'
+                        }
+                    );
+                    
+                    if (avatarElement) {
+                        avatarElement.style.display = 'inline-block';
+                        avatarElement.style.margin = '0 3px';
+                        avatarElement.title = itemName;
+                        itemsDiv.appendChild(avatarElement);
+                    }
+                });
+                
+                avatarsContainer.appendChild(itemsDiv);
+            }
+        });
     }
     
     // 🎯 CONFIGURER LES EVENT LISTENERS
@@ -795,6 +888,21 @@ class ScenarioSelector {
         if (selector) {
             selector.remove();
         }
+    }
+    
+    // 🎯 AFFICHER LE SÉLECTEUR
+    show() {
+        // Supprimer l'ancien sélecteur s'il existe
+        this.closeSelector();
+        
+        // Créer et afficher le nouveau sélecteur
+        const selectorUI = this.createSelectorInterface();
+        document.body.appendChild(selectorUI);
+        
+        // Charger les avatars dicebear après un court délai pour s'assurer que le DOM est prêt
+        setTimeout(() => {
+            this.renderScenarios();
+        }, 100);
     }
     
     // 🎨 UTILITAIRES

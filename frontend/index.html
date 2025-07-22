@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="styles/combat.css">
     <link rel="stylesheet" href="styles/hero.css">
     <link rel="stylesheet" href="styles/dicebear.css">
+    <link rel="stylesheet" href="styles/scenario-selector.css">
     <link rel="manifest" href="manifest.json">
 </head>
 <body>
@@ -23,6 +24,7 @@
                 <button id="combat-btn" class="btn-primary">⚔️ Combat</button>
                 <button id="hero-btn" class="btn-primary">👤 Héros</button>
                 <button id="joint-magic-btn" class="btn-warning">🚬 Joint Magique</button>
+                <button id="scenario-btn" class="btn-primary">📋 Scénarios</button>
                 <button id="add-ragnar-btn" class="btn-secondary">🛡️ Add Ragnar</button>
                 <button id="test-decay-btn" class="btn-warning">⏰ Test Decay</button>
                 <button id="dicebear-gallery-btn" class="btn-info">🎭 Dicebear Gallery</button>
@@ -166,6 +168,13 @@
             window.open('frontend/joint-panopticon-interface.html', '_blank', 'width=1200,height=800');
         });
         
+        // 📋 Événements pour le sélecteur de scénarios
+        document.getElementById('scenario-btn').addEventListener('click', () => {
+            if (window.scenarioSelector) {
+                window.scenarioSelector.show();
+            }
+        });
+        
         // 🌐 Initialiser le service de traduction
         window.translationService = new TranslationService();
         
@@ -186,8 +195,7 @@
         const openScenarioBtn = document.getElementById('open-scenario-selector-btn');
         if (openScenarioBtn) {
             openScenarioBtn.addEventListener('click', () => {
-                const selectorInterface = window.scenarioSelector.createSelectorInterface();
-                document.body.appendChild(selectorInterface);
+                window.scenarioSelector.show();
             });
         }
         
