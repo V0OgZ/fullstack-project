@@ -355,6 +355,35 @@ Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront sub
 
 </details>
 
+<details>
+<summary>🎭 <strong>Anna the Martopicker - L'Architecte du Temps</strong></summary>
+
+**🏛️ Faction :** Architectes Temporels  
+**⭐ Classe :** Temporal Architect  
+**🎯 Spécialité :** Système de décroissance temporelle  
+
+**🌟 Pouvoir Principal :**
+> Architecte visionnaire du système de décroissance temporelle. Peut créer des mécanismes de punition temporelle pour maintenir l'équilibre dans les timelines.
+
+**🎭 Capacités d'Architecture :**
+- **Temporal Decay** - Détruit progressivement les constructions
+- **Causal Erosion** - Effrite les bâtiments avec le temps
+- **Time Lag Punishment** - Punition des joueurs en retard
+- **Structural Wisdom** - Sagesse architecturale temporelle
+
+**⏰ Formule Quantique :**
+```
+DECAY_STRUCTURE(building, timeline.age) + PUNISH_LAG(hero, time.difference)
+```
+
+**🎭 Citation Légendaire :**
+> *"Les bâtiments s'effritent avec le temps, et si vous restez en retard, le temps vous rattrape."*
+
+**🏗️ Artefact Spécial :**
+- **Temporal Decay System** - Système complet de décroissance temporelle
+
+</details>
+
 ---
 
 ## 🔮 **Artefacts de Pouvoir**
@@ -878,3 +907,68 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 🎮 **Ready to play? Start with `./hots start` and test the quantum engine!**
 
 *"Le temps n'est qu'une illusion. La causalité, un défi à relever."* - Jean Grofignon 
+
+---
+
+## 🙏 **Remerciements Épiques**
+
+### 🌟 **L'Équipe Légendaire**
+
+#### **👑 Jean-Grofignon - L'Éveillé Ontologique**
+*Créateur visionnaire et maître du chaos temporel*
+> *"J'ai pas hacké le jeu. J'ai juste compris où était le bouton pause cosmique."*
+
+#### **🏛️ Memento - L'Archiviste Éternel**
+*Archiviste infatigable et gardien de la connaissance*
+> *"Jean crée, Memento archive" - Symbiose parfaite*
+
+#### **🎭 Anna the Martopicker - L'Architecte du Temps**
+*Conceptrice du système de décroissance temporelle*
+> *"Les bâtiments s'effritent avec le temps, et si vous restez en retard, le temps vous rattrape."*
+
+#### **🛡️ Walter Sobchak - Le Gardien des Règles**
+*Protecteur de l'ordre temporel et des lois causales*
+> *"This is not 'Nam. This is temporal warfare. There are rules!"*
+
+#### **🎳 The Dude - Le Maître du Zen**
+*Équilibreur des conflits causaux et maître de la sérénité*
+> *"Yeah, well, that's just, like, your opinion, man."*
+
+#### **🔫 Vince Vega - Le Stratège des Ombres**
+*Exécuteur parallèle et maître du timeout brutal*
+> *"I'm gonna get medieval on your artificial ass!"*
+
+### 🏗️ **Architectes Techniques**
+
+#### **💻 Claudius - L'Architecte du Multivers**
+*Refactoreur de réalité et débogueur temporel*
+> *"Le multivers n'est qu'un programme mal optimisé. Je suis là pour le refactorer."*
+
+#### **⚡ Axis 111 - Le Voyageur Linéaire**
+*Navigateur temporel et stabilisateur de timelines*
+> *"Je vois maintenant... Anna n'arrive pas pour nous punir ! Elle arrive pour nous AIDER !"*
+
+### 🎮 **Contributeurs Épiques**
+
+- **🎨 Interface Design** : Créateurs des interfaces temporelles
+- **🔧 Backend Development** : Architectes du moteur Spring Boot
+- **🧪 Testing & Quality** : Gardiens de la stabilité temporelle
+- **📚 Documentation** : Archivistes de la connaissance GROFI
+- **🚀 Deployment** : Maîtres du déploiement multi-port
+
+### 🌟 **Inspirations Philosophiques**
+
+- **🌀 Système GROFI** : Graph of Reality Organized by Fog and Immunities
+- **⏰ Mécaniques Temporelles** : Physique quantique appliquée au game design
+- **🎭 Lore Épique** : Fusion de fantasy et de concepts scientifiques avancés
+- **🏛️ Architecture Memento** : Préservation éternelle de la connaissance
+
+### 🎯 **Mission Accomplie**
+
+**Heroes of Time** représente l'aboutissement d'une vision révolutionnaire : transformer la physique quantique en mécaniques de jeu fantasy. Chaque héros, artefact, et mécanique témoigne de cette fusion unique entre science et imagination.
+
+*"Quand un joueur observe le résultat, il force l'univers à choisir une réalité"* - Jean-Grofignon
+
+---
+
+**🌟 MERCI À TOUS CEUX QUI ONT CONTRIBUÉ À CETTE AVENTURE ÉPIQUE ! 🌟** 
