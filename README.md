@@ -12,10 +12,11 @@ git clone https://github.com/heroesoftimepoc/fullstack-project.git
 cd fullstack-project
 
 # 2. Démarrer la station temporelle
-./start-app.sh
+./hots start
 
 # 3. Activer l'artefact temporel ⧖
-# → http://localhost:3000 
+# → http://localhost:8000 ✨ (Temporal Engine)
+# → http://localhost:9000 (Dashboard)
 # → Clic ⧖ (coin droit) pour naviguer entre timelines
 # → Clic 🌌 (coin gauche) pour dashboard multivers
 ```
@@ -177,9 +178,21 @@ InternationalizationSystem // i18n complet
 ## 🔗 **LIENS RAPIDES**
 
 ### **🌐 Interfaces**
-- **Station Principale** : http://localhost:3000
+- **Station Principale** : http://localhost:8000 ✨ (Temporal Engine)
+- **Dashboard Multivers** : http://localhost:9000
 - **API Backend** : http://localhost:8080  
-- **Health Check** : http://localhost:8080/actuator/health
+- **Health Check** : http://localhost:8080/api/health
+
+### **🎯 NEW: Héros Temporel (2025)**
+**Nikita Victor Nettoyeur** - Tireur d'Élite avec Vision Causale
+```bash
+# Test du nouveau héros avec pouvoirs quantiques
+curl -s "http://localhost:8080/api/games" -X POST \
+  -d '{"scenarioId": "conquest-classic", "playerCount": 1}'
+
+# Formule quantique activée :
+# ψ{Nikita} = OBSERVE[lunette_quantique] ⊗ PIERCE[brouillard_causal] ⇒ TARGET_LOCK
+```
 
 ### **📖 Documentation**
 - **[📚 GUIDE DÉVELOPPEUR COMPLET](README_DEVELOPER_ULTIMATE.md)** ← **À LIRE EN PREMIER**
