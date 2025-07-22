@@ -1,0 +1,13 @@
+🧩 QUANTUM MAZE - TEST PUZZLE QUANTIQUE
+=======================================
+[0;34mVérification du backend...[0m
+[0;32m✅ Backend accessible[0m
+
+[0;34mCréation de la partie Quantum Maze...[0m
+{
+  "timestamp": "2025-07-22T10:16:06.432+00:00",
+  "status": 404,
+  "error": "Not Found",
+  "path": "/api/game/create"
+}
+[0;31mErreur: Impossible de créer la partie[0m

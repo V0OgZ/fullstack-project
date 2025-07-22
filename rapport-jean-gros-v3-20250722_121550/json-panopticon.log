@@ -1,0 +1,19 @@
+🎛️ TEST SCÉNARIO PANOPTICΩN - JSON VERSION
+===========================================
+📋 Chargement du scénario JSON complet...
+[0;36m[12:16:28][0m 📄 Fichier scénario trouvé: panopticon_axis_test.json
+[0;36m[12:16:28][0m 🚀 Démarrage du test PANOPTICON JSON
+
+[0;34m🔍 Vérification du backend...[0m
+[0;32m✅ Backend accessible sur localhost:8080[0m
+
+[0;35m📋 Chargement du scénario JSON...[0m
+[0;32m✅ Scénario JSON chargé et validé[0m
+[0;36m📖 Nom: PANOPTICΩN - Test Axis et Vision 5D[0m
+[0;36m📝 Description: Test complet du système temporel avec Axis et PANOPTICΩN[0m
+[0;36m🦸 Héros: 4[0m
+[0;36m⚡ ψ-States: 8[0m
+
+[0;34m🎮 Création d'un nouveau jeu...[0m
+[0;31m❌ Échec de création du jeu[0m
+{"timestamp":"2025-07-22T10:16:28.581+00:00","status":404,"error":"Not Found","path":"/api/temporal/games"}
