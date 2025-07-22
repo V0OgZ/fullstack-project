@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 JSON Visualizer - Heroes of Time</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            border: 2px solid rgba(100, 255, 218, 0.3);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #64ffda;
+            text-shadow: 0 0 20px rgba(100, 255, 218, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #64ffda, #4fc3f7);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: #000;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 500px;
+            padding: 12px;
+            border: 2px solid rgba(100, 255, 218, 0.3);
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            color: #e0e0e0;
+            font-size: 16px;
+        }
+
+        .json-container {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid rgba(100, 255, 218, 0.2);
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .json-object {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border-left: 4px solid #64ffda;
+        }
+
+        .json-key {
+            color: #64ffda;
+            font-weight: bold;
+        }
+
+        .json-string {
+            color: #a8e6cf;
+        }
+
+        .json-number {
+            color: #ffd93d;
+        }
+
+        .json-boolean {
+            color: #ff6b6b;
+        }
+
+        .json-null {
+            color: #95a5a6;
+        }
+
+        .collapsible {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .collapsible::before {
+            content: "▼ ";
+            color: #64ffda;
+            transition: transform 0.3s ease;
+        }
+
+        .collapsible.collapsed::before {
+            transform: rotate(-90deg);
+            content: "▶ ";
+        }
+
+        .collapsed-content {
+            display: none;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: rgba(100, 255, 218, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(100, 255, 218, 0.3);
+        }
+
+        .stat-value {
+            font-size: 2em;
+            color: #64ffda;
+            font-weight: bold;
+        }
+
+        .loading {
+            text-align: center;
+            color: #64ffda;
+            font-size: 1.5em;
+            margin: 50px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📊 JSON Visualizer</h1>
+        <p>Visualisation propre des objets Heroes of Time</p>
+    </div>
+
+    <div class="controls">
+        <button class="btn btn-primary" onclick="loadHeroes()">🦸 Héros</button>
+        <button class="btn btn-primary" onclick="loadArtifacts()">⚡ Artefacts</button>
+        <button class="btn btn-primary" onclick="loadScenarios()">🎭 Scénarios</button>
+        <button class="btn btn-secondary" onclick="loadCustom()">📁 Fichier Custom</button>
+        <input type="text" class="search-box" placeholder="🔍 Rechercher dans les objets..." oninput="filterObjects(this.value)">
+    </div>
+
+    <div class="stats" id="stats"></div>
+
+    <div class="json-container" id="jsonContainer">
+        <div class="loading">Sélectionnez une catégorie pour commencer...</div>
+    </div>
+
+    <script>
+        let currentData = null;
+
+        async function loadHeroes() {
+            showLoading();
+            try {
+                const response = await fetch('/backend/src/main/resources/heroes/grofi/');
+                const heroes = [];
+                
+                // Charger les héros individuellement
+                const heroFiles = ['JeanGrofignon.json', 'TheDude.json', 'VinceVega.json'];
+                
+                for (const file of heroFiles) {
+                    try {
+                        const heroResponse = await fetch(`/backend/src/main/resources/heroes/grofi/${file}`);
+                        if (heroResponse.ok) {
+                            const hero = await heroResponse.json();
+                            hero._filename = file;
+                            heroes.push(hero);
+                        }
+                    } catch (e) {
+                        console.warn(`Impossible de charger ${file}:`, e);
+                    }
+                }
+                
+                if (heroes.length > 0) {
+                    displayData(heroes, 'Héros');
+                } else {
+                    displayError('Aucun héros trouvé');
+                }
+            } catch (error) {
+                displayError('Erreur lors du chargement des héros: ' + error.message);
+            }
+        }
+
+        async function loadArtifacts() {
+            showLoading();
+            try {
+                const response = await fetch('/backend/src/main/resources/quantum-artifacts.json');
+                if (response.ok) {
+                    const data = await response.json();
+                    displayData(data, 'Artefacts Quantiques');
+                } else {
+                    displayError('Impossible de charger les artefacts');
+                }
+            } catch (error) {
+                displayError('Erreur lors du chargement des artefacts: ' + error.message);
+            }
+        }
+
+        async function loadScenarios() {
+            showLoading();
+            try {
+                const scenarios = [];
+                const scenarioFiles = [
+                    '/game_assets/scenarios/visualizer/bataille_temporelle.json',
+                    '/game_assets/scenarios/visualizer/DANSE_ILLUSOIRE.json',
+                    '/game_assets/scenarios/visualizer/DUEL_COLLAPSE.json'
+                ];
+                
+                for (const file of scenarioFiles) {
+                    try {
+                        const response = await fetch(file);
+                        if (response.ok) {
+                            const scenario = await response.json();
+                            scenario._filename = file.split('/').pop();
+                            scenarios.push(scenario);
+                        }
+                    } catch (e) {
+                        console.warn(`Impossible de charger ${file}:`, e);
+                    }
+                }
+                
+                if (scenarios.length > 0) {
+                    displayData(scenarios, 'Scénarios');
+                } else {
+                    displayError('Aucun scénario trouvé');
+                }
+            } catch (error) {
+                displayError('Erreur lors du chargement des scénarios: ' + error.message);
+            }
+        }
+
+        function loadCustom() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        try {
+                            const data = JSON.parse(event.target.result);
+                            displayData(data, file.name);
+                        } catch (error) {
+                            displayError('Fichier JSON invalide: ' + error.message);
+                        }
+                    };
+                    reader.readAsText(file);
+                }
+            };
+            input.click();
+        }
+
+        function showLoading() {
+            document.getElementById('jsonContainer').innerHTML = '<div class="loading">⏳ Chargement...</div>';
+            document.getElementById('stats').innerHTML = '';
+        }
+
+        function displayError(message) {
+            document.getElementById('jsonContainer').innerHTML = `<div class="loading" style="color: #ff6b6b;">❌ ${message}</div>`;
+        }
+
+        function displayData(data, title) {
+            currentData = data;
+            
+            // Afficher les statistiques
+            displayStats(data, title);
+            
+            // Afficher les données
+            const container = document.getElementById('jsonContainer');
+            container.innerHTML = `<h2 style="color: #64ffda; margin-bottom: 20px;">${title}</h2>`;
+            
+            if (Array.isArray(data)) {
+                data.forEach((item, index) => {
+                    const objectDiv = document.createElement('div');
+                    objectDiv.className = 'json-object';
+                    objectDiv.innerHTML = formatObject(item, `${title}[${index}]`);
+                    container.appendChild(objectDiv);
+                });
+            } else {
+                const objectDiv = document.createElement('div');
+                objectDiv.className = 'json-object';
+                objectDiv.innerHTML = formatObject(data, title);
+                container.appendChild(objectDiv);
+            }
+            
+            // Ajouter les événements de collapse
+            addCollapseEvents();
+        }
+
+        function displayStats(data, title) {
+            const stats = document.getElementById('stats');
+            let objectCount = 0;
+            let propertyCount = 0;
+            let totalSize = 0;
+            
+            if (Array.isArray(data)) {
+                objectCount = data.length;
+                data.forEach(item => {
+                    propertyCount += Object.keys(item).length;
+                });
+            } else {
+                objectCount = 1;
+                propertyCount = Object.keys(data).length;
+            }
+            
+            totalSize = JSON.stringify(data).length;
+            
+            stats.innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-value">${objectCount}</div>
+                    <div>Objets</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${propertyCount}</div>
+                    <div>Propriétés</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${(totalSize / 1024).toFixed(1)}K</div>
+                    <div>Taille</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${title}</div>
+                    <div>Catégorie</div>
+                </div>
+            `;
+        }
+
+        function formatObject(obj, name) {
+            if (obj === null) return `<span class="json-null">null</span>`;
+            if (typeof obj === 'string') return `<span class="json-string">"${escapeHtml(obj)}"</span>`;
+            if (typeof obj === 'number') return `<span class="json-number">${obj}</span>`;
+            if (typeof obj === 'boolean') return `<span class="json-boolean">${obj}</span>`;
+            
+            if (Array.isArray(obj)) {
+                if (obj.length === 0) return '[]';
+                const content = obj.map((item, index) => 
+                    `<div style="margin-left: 20px;">[${index}]: ${formatObject(item, `${name}[${index}]`)}</div>`
+                ).join('');
+                return `<div class="collapsible">${name} [${obj.length} éléments]</div><div class="collapsed-content">${content}</div>`;
+            }
+            
+            if (typeof obj === 'object') {
+                const keys = Object.keys(obj);
+                if (keys.length === 0) return '{}';
+                
+                const content = keys.map(key => 
+                    `<div style="margin-left: 20px;"><span class="json-key">${escapeHtml(key)}</span>: ${formatObject(obj[key], `${name}.${key}`)}</div>`
+                ).join('');
+                
+                return `<div class="collapsible">${name} {${keys.length} propriétés}</div><div class="collapsed-content">${content}</div>`;
+            }
+            
+            return String(obj);
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function addCollapseEvents() {
+            document.querySelectorAll('.collapsible').forEach(element => {
+                element.addEventListener('click', function() {
+                    this.classList.toggle('collapsed');
+                    const content = this.nextElementSibling;
+                    if (content && content.classList.contains('collapsed-content')) {
+                        content.style.display = content.style.display === 'none' ? 'block' : 'none';
+                    }
+                });
+            });
+        }
+
+        function filterObjects(searchTerm) {
+            if (!currentData) return;
+            
+            const container = document.getElementById('jsonContainer');
+            const objects = container.querySelectorAll('.json-object');
+            
+            objects.forEach(obj => {
+                const text = obj.textContent.toLowerCase();
+                if (text.includes(searchTerm.toLowerCase())) {
+                    obj.style.display = 'block';
+                } else {
+                    obj.style.display = 'none';
+                }
+            });
+        }
+
+        // Auto-charger les héros au démarrage
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                loadHeroes();
+            }, 500);
+        });
+    </script>
+</body>
+</html> 

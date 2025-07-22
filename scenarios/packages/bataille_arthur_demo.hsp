@@ -1,0 +1,306 @@
+{
+  "package": {
+    "name": "Bataille d'Arthur - Démo",
+    "version": "1.0",
+    "author": "Jean-Grofignon & Claude",
+    "description": "Arthur affronte un dragon dans les ruines anciennes. Scénario de démonstration simple.",
+    "duration": "30 secondes",
+    "difficulty": "Facile",
+    "tags": ["medieval", "dragon", "demo", "simple"],
+    "thumbnail": "arthur_vs_dragon.jpg"
+  },
+  
+  "map": {
+    "size": "15x15",
+    "theme": "ancient_ruins",
+    "background": {
+      "image": "ancient_castle_ruins.jpg",
+      "music": "epic_medieval_theme.mp3"
+    },
+    "terrain": {
+      "default": "stone_floor",
+      "obstacles": [
+        {"type": "broken_wall", "positions": ["@3,3", "@4,3", "@5,3"]},
+        {"type": "pillar", "positions": ["@7,7", "@9,9"]},
+        {"type": "rubble", "positions": ["@2,8", "@12,6"]},
+        {"type": "ancient_statue", "positions": ["@7,2"]}
+      ],
+      "special_zones": [
+        {"type": "spawn_point", "name": "arthur_spawn", "position": "@2,13", "effect": "hero_spawn"},
+        {"type": "spawn_point", "name": "dragon_lair", "position": "@13,2", "effect": "boss_spawn"},
+        {"type": "treasure_chest", "position": "@7,7", "contains": ["magic_potion", "gold_100"]}
+      ]
+    },
+    "lighting": {
+      "ambient": "dim_torch_light",
+      "effects": ["flickering_shadows", "dust_particles"]
+    }
+  },
+  
+  "story": {
+    "title": "La Dernière Bataille",
+    "genre": "Heroic Fantasy",
+    "intro": {
+      "text": "Dans les ruines d'un château oublié, Arthur entend le grondement sourd d'un dragon ancien. La légende dit que celui qui vaincra cette bête obtiendra un trésor légendaire...",
+      "voice": "narrator_epic.mp3",
+      "duration": 5000
+    },
+    "acts": [
+      {
+        "name": "L'Arrivée du Héros",
+        "trigger": "game_start",
+        "dialogue": {
+          "Arthur": "Ces ruines... Elles résonnent de magie ancienne. Le dragon doit être proche."
+        },
+        "narration": "Arthur pénètre dans les ruines, son épée brillant d'une lueur magique.",
+        "camera_focus": "@2,13"
+      },
+      {
+        "name": "L'Éveil du Dragon",
+        "trigger": "arthur_moves",
+        "dialogue": {
+          "Dragon": "GRRROOOAARRR ! Qui ose troubler mon sommeil éternel ?!"
+        },
+        "narration": "Un rugissement terrible résonne dans les ruines. Le dragon se dresse de toute sa hauteur !",
+        "camera_focus": "@13,2",
+        "effects": ["screen_shake", "dragon_roar_sound"]
+      },
+      {
+        "name": "Le Défi",
+        "trigger": "dragon_appears",
+        "dialogue": {
+          "Arthur": "Par les anciens rois ! Je n'ai pas peur de toi, créature des ténèbres !",
+          "Dragon": "Alors viens, petit chevalier. Montre-moi ce que vaut ton courage !"
+        },
+        "narration": "Le combat épique est sur le point de commencer...",
+        "effects": ["battle_music_start"]
+      }
+    ],
+    "endings": {
+      "victory": {
+        "text": "Le dragon s'effondre dans un dernier souffle. Arthur récupère le trésor légendaire ! Le royaume est sauvé !",
+        "rewards": ["legendary_sword", "dragon_scale_armor", "1000_gold"],
+        "voice": "victory_fanfare.mp3"
+      },
+      "defeat": {
+        "text": "Arthur tombe sous les flammes du dragon... Mais son sacrifice ne sera pas vain. D'autres héros viendront.",
+        "effects": ["sad_music", "screen_fade_black"]
+      }
+    }
+  },
+  
+  "heroes": {
+    "Arthur": {
+      "class": "Paladin",
+      "level": 5,
+      "stats": {
+        "hp": 100,
+        "mp": 50,
+        "attack": 25,
+        "defense": 20,
+        "speed": 15
+      },
+      "position": "@2,13",
+      "equipment": {
+        "weapon": "épée_magique",
+        "armor": "armure_chevalier",
+        "accessory": "anneau_protection"
+      },
+      "abilities": [
+        {
+          "name": "Coup d'Épée",
+          "damage": 30,
+          "cost": 0,
+          "description": "Attaque de base avec l'épée"
+        },
+        {
+          "name": "Frappe Sacrée",
+          "damage": 45,
+          "cost": 20,
+          "description": "Attaque magique contre les créatures maléfiques"
+        },
+        {
+          "name": "Guérison",
+          "heal": 40,
+          "cost": 25,
+          "description": "Soigne les blessures"
+        }
+      ],
+      "sprite": "arthur_paladin.png",
+      "portrait": "arthur_portrait.jpg"
+    }
+  },
+  
+  "creatures": {
+    "Dragon": {
+      "class": "Boss",
+      "level": 8,
+      "stats": {
+        "hp": 200,
+        "mp": 100,
+        "attack": 35,
+        "defense": 25,
+        "speed": 10
+      },
+      "position": "@13,2",
+      "abilities": [
+        {
+          "name": "Souffle de Feu",
+          "damage": 40,
+          "cost": 0,
+          "area": "cone_3x3",
+          "description": "Souffle enflammé dévastateur"
+        },
+        {
+          "name": "Vol Plané",
+          "damage": 25,
+          "cost": 30,
+          "effect": "teleport_to_target",
+          "description": "S'envole et frappe depuis les airs"
+        },
+        {
+          "name": "Rugissement",
+          "damage": 0,
+          "cost": 20,
+          "effect": "fear_3_turns",
+          "description": "Terrifie l'ennemi"
+        }
+      ],
+      "sprite": "ancient_dragon.png",
+      "ai": "aggressive_boss"
+    }
+  },
+  
+  "script": [
+    "// === SETUP ===",
+    "SETUP(MAP_SIZE: 15x15, THEME: ancient_ruins)",
+    "PLAY_MUSIC(epic_medieval_theme.mp3)",
+    "SET_LIGHTING(dim_torch_light)",
+    "",
+    "// === ACTE I - ARRIVÉE ===",
+    "CHAPTER(1, 'L\\'Arrivée du Héros')",
+    "NARRATE('Dans les ruines d\\'un château oublié...')",
+    "HERO(Arthur)",
+    "PLACE(Arthur, @2,13)",
+    "CAMERA_FOCUS(@2,13, 2000)",
+    "DIALOGUE(Arthur, 'Ces ruines... Elles résonnent de magie ancienne.')",
+    "",
+    "// === ACTE II - ÉVEIL DU DRAGON ===",
+    "WAIT_FOR_MOVE(Arthur)",
+    "CHAPTER(2, 'L\\'Éveil du Dragon')",
+    "SCREEN_SHAKE(1000)",
+    "PLAY_SOUND(dragon_roar.mp3)",
+    "CREATE(CREATURE, Dragon, @13,2)",
+    "CAMERA_FOCUS(@13,2, 2000)",
+    "DIALOGUE(Dragon, 'GRRROOOAARRR ! Qui ose troubler mon sommeil ?!')",
+    "",
+    "// === ACTE III - LE DÉFI ===",
+    "CHAPTER(3, 'Le Défi')",
+    "DIALOGUE(Arthur, 'Par les anciens rois ! Je n\\'ai pas peur de toi !')",
+    "DIALOGUE(Dragon, 'Alors viens, petit chevalier !')",
+    "PLAY_MUSIC(battle_epic.mp3)",
+    "",
+    "// === COMBAT ===",
+    "BATTLE(Arthur, Dragon)",
+    "",
+    "// === RÉSOLUTION ===",
+    "ON_VICTORY: {",
+    "  NARRATE('Le dragon s\\'effondre ! Arthur récupère le trésor !')",
+    "  GIVE_ITEM(Arthur, legendary_sword)",
+    "  GIVE_GOLD(Arthur, 1000)",
+    "  PLAY_SOUND(victory_fanfare.mp3)",
+    "  CAMERA_FOCUS(@7,7, 3000)",
+    "  END_SCENARIO(VICTORY)",
+    "}",
+    "",
+    "ON_DEFEAT: {",
+    "  NARRATE('Arthur tombe... Mais son sacrifice ne sera pas vain.')",
+    "  PLAY_MUSIC(sad_ending.mp3)",
+    "  SCREEN_FADE(black, 3000)",
+    "  END_SCENARIO(DEFEAT)",
+    "}"
+  ],
+  
+  "objectives": {
+    "primary": [
+      {
+        "id": "defeat_dragon",
+        "description": "Vaincre le dragon ancien",
+        "condition": "dragon.hp <= 0",
+        "reward": "legendary_sword"
+      }
+    ],
+    "secondary": [
+      {
+        "id": "collect_treasure",
+        "description": "Récupérer le trésor dans les ruines",
+        "condition": "treasure_chest_opened",
+        "reward": "magic_potion"
+      },
+      {
+        "id": "no_healing",
+        "description": "Vaincre sans utiliser de guérison",
+        "condition": "healing_spells_used == 0",
+        "reward": "achievement_iron_will"
+      }
+    ],
+    "victory_conditions": ["defeat_dragon"],
+    "defeat_conditions": ["arthur.hp <= 0"],
+    "time_limit": 300000
+  },
+  
+  "ui": {
+    "hud_elements": [
+      {"type": "health_bar", "target": "Arthur", "position": "top_left"},
+      {"type": "mana_bar", "target": "Arthur", "position": "top_left"},
+      {"type": "boss_health", "target": "Dragon", "position": "top_center"},
+      {"type": "objectives", "position": "top_right"},
+      {"type": "minimap", "position": "bottom_right"}
+    ],
+    "controls": {
+      "movement": "wasd_or_arrows",
+      "abilities": "1234_keys",
+      "inventory": "i_key",
+      "pause": "escape"
+    }
+  },
+  
+  "settings": {
+    "difficulty": {
+      "easy": {
+        "arthur_hp_bonus": 50,
+        "dragon_damage_reduction": 0.7
+      },
+      "normal": {
+        "arthur_hp_bonus": 0,
+        "dragon_damage_reduction": 1.0
+      },
+      "hard": {
+        "arthur_hp_bonus": -25,
+        "dragon_damage_reduction": 1.3
+      }
+    },
+    "accessibility": {
+      "colorblind_support": true,
+      "subtitle_support": true,
+      "simplified_controls": true
+    }
+  },
+  
+  "metadata": {
+    "created": "2025-01-21",
+    "last_modified": "2025-01-21",
+    "version_history": [
+      {"version": "1.0", "changes": "Version initiale", "date": "2025-01-21"}
+    ],
+    "testing": {
+      "estimated_duration": "30-60 seconds",
+      "tested_on": ["Chrome", "Firefox", "Safari"],
+      "known_issues": []
+    },
+    "localization": {
+      "supported_languages": ["fr", "en"],
+      "default_language": "fr"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="0;url=dashboard.html">
+    <title>Heroes of Time - Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .redirect {
+            text-align: center;
+            padding: 20px;
+        }
+        a {
+            color: #f39c12;
+        }
+    </style>
+</head>
+<body>
+    <div class="redirect">
+        <h1>🎮 Heroes of Time</h1>
+        <p>Redirection vers le Dashboard...</p>
+        <p><a href="dashboard.html">Cliquez ici si la redirection ne fonctionne pas</a></p>
+    </div>
+    <script>
+        // Redirection JS de secours vers le dashboard
+        if (window.location.pathname === '/' || window.location.pathname === '/Heroes-of-Time/') {
+            window.location.replace('dashboard.html');
+        }
+    </script>
+</body>
+</html>

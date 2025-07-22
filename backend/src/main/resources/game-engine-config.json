@@ -1,0 +1,119 @@
+{
+  "engine_metadata": {
+    "version": "1.0.0",
+    "name": "Heroes of Time Engine",
+    "description": "Moteur de jeu générique pour création de jeux temporels et quantiques",
+    "supported_game_types": ["RPG", "Strategy", "Puzzle", "Adventure"]
+  },
+  
+  "core_mechanics": {
+    "energy_system": {
+      "default_max_energy": 100,
+      "energy_per_turn": 10,
+      "energy_cost_multiplier": 1.0
+    },
+    "movement_system": {
+      "default_movement_points": 3,
+      "diagonal_movement_cost": 1.5,
+      "terrain_affects_movement": true
+    },
+    "temporal_mechanics": {
+      "max_psi_states_per_hero": 5,
+      "psi_state_decay_turns": 10,
+      "temporal_interference_enabled": true,
+      "time_travel_enabled": true
+    },
+    "quantum_mechanics": {
+      "complex_amplitudes_enabled": true,
+      "interference_calculations": "full",
+      "collapse_probability_threshold": 0.1
+    }
+  },
+  
+  "game_rules": {
+    "win_conditions": {
+      "configurable": true,
+      "default_types": ["eliminate_enemies", "reach_objective", "time_limit", "resource_goal"]
+    },
+    "turn_system": {
+      "type": "sequential", 
+      "time_limit_per_turn": 300,
+      "simultaneous_actions": false
+    },
+    "combat_system": {
+      "damage_formula": "configurable",
+      "critical_hit_chance": 0.1,
+      "elemental_damage_types": ["physical", "temporal", "quantum", "psychic"]
+    }
+  },
+  
+  "extensibility": {
+    "custom_operations": {
+      "enabled": true,
+      "script_language": "formula_dsl",
+      "plugin_system": false
+    },
+    "custom_artifacts": {
+      "user_created": true,
+      "formula_validation": true,
+      "energy_cost_limits": [1, 200]
+    },
+    "custom_scenarios": {
+      "hots_scripts": true,
+      "visual_editor": false,
+      "sharing_enabled": true
+    }
+  },
+  
+  "supported_operations": {
+    "basic": [
+      "MODIFY_ENERGY(hero, amount)",
+      "TELEPORT_HERO(hero, x, y)", 
+      "CREATE_EFFECT(type, duration)"
+    ],
+    "quantum": [
+      "CONSTRUCTIVE(ψ1, ψ2)",
+      "DESTRUCTIVE(ψ1, ψ2)",
+      "AMPLIFY(ψ, factor)",
+      "COLLAPSE_TEMPORAL_STATES()"
+    ],
+    "temporal": [
+      "REVERSE_TIME_IF_AHEAD(hero, days)",
+      "CREATE_TEMPORAL_ECHO(hero)",
+      "FORCE_COLLAPSE_ALL(hero, radius)"
+    ],
+    "advanced": [
+      "CONDITIONAL_OPERATION(condition, op1, op2)",
+      "LOOP_OPERATION(count, operation)",
+      "CHAIN_OPERATIONS(op_list)"
+    ]
+  },
+  
+  "game_templates": {
+    "classic_rpg": {
+      "description": "RPG traditionnel avec artefacts magiques",
+      "base_artifacts": ["sword", "shield", "healing_potion", "magic_scroll"],
+      "mechanics": ["energy_system", "turn_based_combat"],
+      "example_scenario": "classic_dungeon_crawler.hots"
+    },
+    "quantum_puzzle": {
+      "description": "Jeu de puzzle utilisant la mécanique quantique",
+      "base_artifacts": ["quantum_manipulator", "probability_shifter", "wave_function_tool"],
+      "mechanics": ["quantum_mechanics", "puzzle_solving"],
+      "example_scenario": "quantum_maze_solver.hots"
+    },
+    "time_strategy": {
+      "description": "Jeu de stratégie avec voyages temporels",
+      "base_artifacts": ["time_machine", "causality_weapon", "temporal_shield"],  
+      "mechanics": ["temporal_mechanics", "strategic_combat"],
+      "example_scenario": "temporal_warfare.hots"
+    }
+  },
+  
+  "developer_tools": {
+    "formula_validator": true,
+    "scenario_tester": true,
+    "performance_profiler": true,
+    "debug_mode": true
+  }
+} 

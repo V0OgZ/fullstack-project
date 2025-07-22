@@ -1,0 +1,579 @@
+{
+  "sampleHero": {
+    "id": "hero_arthur",
+    "name": "Arthur Pendragon",
+    "playerId": "player1",
+    "x": 10,
+    "y": 10,
+    "z": 0,
+    "timeline": "ℬ1",
+    "temporalLayer": 0,
+    "level": 5,
+    "power": 0.8,
+    "health": 100,
+    "maxHealth": 100,
+    "mana": 75,
+    "maxMana": 100,
+    "temporalEnergy": 15,
+    "maxTemporalEnergy": 20,
+    "timelineAffinity": 0.3,
+    "movementPoints": 3,
+    "maxMovementPoints": 3,
+    "actionsRemaining": 2,
+    "artifacts": ["avant_world_blade", "reverse_clock"],
+    "status": "ACTIVE",
+    "createdAt": "2025-01-27T10:00:00"
+  },
+  
+  "sampleArtifacts": [
+    {
+      "id": "avant_world_blade",
+      "name": "AvantWorldBlade",
+      "displayName": "Lame d'Avant-Monde",
+      "tier": "PARADOX",
+      "type": "WEAPON",
+      "powerLevel": 9,
+      "rarity": 2.5,
+      "maxUsesPerGame": 3,
+      "usesRemaining": 3,
+      "description": "Write future events that ignore timeline conflicts",
+      "effects": [
+        {
+          "type": "PROBABILITY_BOOST",
+          "value": 0.5,
+          "duration": -1,
+          "radius": 0
+        },
+        {
+          "type": "BATTLE_SCORE_BONUS",
+          "value": 0.5,
+          "duration": -1,
+          "radius": 0
+        },
+        {
+          "type": "PHANTOM_BATTLE_TRIGGER",
+          "value": 0.85,
+          "duration": -1,
+          "radius": 0
+        }
+      ],
+      "requirements": {
+        "minHeroLevel": 5,
+        "minTemporalEnergy": 3,
+        "cooldownTurns": 2
+      },
+      "ownerId": "player1",
+      "createdAt": "2025-01-27T10:00:00"
+    },
+    {
+      "id": "reverse_clock",
+      "name": "ReverseClock",
+      "displayName": "Horloge du Dernier Instant",
+      "tier": "LEGENDARY",
+      "type": "TEMPORAL_DEVICE",
+      "powerLevel": 6,
+      "rarity": 12.0,
+      "maxUsesPerGame": 4,
+      "usesRemaining": 4,
+      "description": "Rollback 1-3 turns for a hero or building",
+      "effects": [
+        {
+          "type": "ROLLBACK_TURNS",
+          "value": 3,
+          "duration": -1,
+          "radius": 0
+        },
+        {
+          "type": "TEMPORAL_GEL_ZONE",
+          "value": 1.4,
+          "duration": 1,
+          "radius": 3
+        }
+      ],
+      "requirements": {
+        "minHeroLevel": 3,
+        "minTemporalEnergy": 2,
+        "cooldownTurns": 1
+      },
+      "ownerId": "player1",
+      "createdAt": "2025-01-27T10:00:00"
+    },
+    {
+      "id": "tour_ancrage_domburg",
+      "name": "Tour d'Ancrage",
+      "displayName": "🌑 Tour d'Ancrage",
+      "alias": ["Tour de Domburg", "Pilier du Flux Figé"],
+      "tier": "LEGENDARY_FIXED",
+      "type": "ANCHOR_LOCATION",
+      "category": "artifacts",
+      "powerLevel": 10,
+      "rarity": "Unique",
+      "maxUsesPerGame": 1,
+      "usesRemaining": 1,
+      "zone": "Dunes de Domburg",
+      "description": "🧱 Une tour en briques sombres, tordue par le temps, cerclée de chaînes astrales profondément enfoncées dans la roche. À son sommet, un dôme d'observation fermé par des grilles d'obsidienne. Aucun bruit. Aucun vent. Des glyphes gravés dans la pierre semblent résister à la corrosion des siècles.",
+      "lore": "Forgée à la lisière des Dunes de Domburg, la Tour fut la première tentative humaine de fixer le temps dans un monde en mouvement. Depuis, elle ne bouge plus. Et rien n'y bougera.",
+      "effects": [
+        {
+          "type": "STASIS_CAUSALE_ABSOLUE",
+          "description": "Toute action effectuée dans cette zone devient inchangeable",
+          "value": 1.0,
+          "duration": -1,
+          "radius": 5
+        },
+        {
+          "type": "BLOCAGE_EFFETS_SPATIO_TEMPORELS",
+          "description": "Pas de projection, de rewind, ni de superposition",
+          "value": 1.0,
+          "duration": -1,
+          "radius": 5
+        },
+        {
+          "type": "RALENTISSEMENT_TEMPS",
+          "description": "Toutes les actions coûtent le double de temps à l'intérieur, sauf celles liées à l'ancrage",
+          "value": 2.0,
+          "duration": -1,
+          "radius": 5
+        },
+        {
+          "type": "STASE_TOTALE",
+          "description": "Figer toute action dans l'absolu",
+          "value": 1.0,
+          "duration": 3,
+          "radius": 0,
+          "usesPerPlayer": 1
+        }
+      ],
+      "requirements": {
+        "minHeroLevel": 8,
+        "minTemporalEnergy": 10,
+        "cooldownTurns": 10
+      },
+      "specialProperties": {
+        "canBeChained": true,
+        "chainTarget": "anchor_network",
+        "description": "Le lieu peut être chaîné à d'autres objets pour former un réseau d'ancrage planétaire"
+      },
+      "gameEffects": {
+        "zoneType": "FIXED_STASIS",
+        "preventTimelineModification": true,
+        "paradoxResistance": true
+      },
+      "ownerId": null,
+      "isFixed": true,
+      "createdAt": "2025-01-27T10:00:00"
+    },
+    {
+      "id": "moulin_domburg",
+      "name": "Moulin de Domburg",
+      "displayName": "🌬️ Moulin de Domburg",
+      "alias": ["La Petite Ancre", "Roue du Vent"],
+      "tier": "RARE",
+      "type": "MINOR_ANCHOR_POINT",
+      "category": "artifacts",
+      "powerLevel": 6,
+      "rarity": "Rare",
+      "maxUsesPerGame": 5,
+      "usesRemaining": 5,
+      "zone": "Centre de Domburg",
+      "description": "🌾 Un moulin de style hollandais classique, mais figé dans une rotation paradoxale — ses ailes tournent à contre-temps. À certaines heures, on voit des miroirs temporels apparaître dans l'ombre du bâtiment, révélant des scènes du passé.",
+      "lore": "C'est dans ce moulin qu'un vieux savant de Domburg, obsédé par les tempêtes d'Histoire, a gravé la première clepsydre runique dans les meules. Depuis, les rafales ne soufflent plus comme avant.",
+      "effects": [
+        {
+          "type": "CHAMP_STABILISATION_LOCALE",
+          "description": "Les effets chaotiques (aléatoires, indéterminés) sont annulés dans un rayon de 3 cases",
+          "value": 1.0,
+          "duration": -1,
+          "radius": 3
+        },
+        {
+          "type": "CHRONO_BARRIERE",
+          "description": "Toute tentative de voyager dans le passé à proximité échoue (60% de chance)",
+          "value": 0.6,
+          "duration": -1,
+          "radius": 2
+        },
+        {
+          "type": "RITUEL_REMONTEE_DU_BLE",
+          "description": "Possibilité de restaurer une action détruite lors d'un tour précédent",
+          "value": 1.0,
+          "duration": 1,
+          "radius": 0,
+          "usesPerPlayer": 1
+        }
+      ],
+      "requirements": {
+        "minHeroLevel": 4,
+        "minTemporalEnergy": 5,
+        "cooldownTurns": 3
+      },
+      "specialProperties": {
+        "cannotBeDestroyed": true,
+        "cannotBeMoved": true,
+        "destructionConsequence": "Déclenche une faille dans le vent du temps"
+      },
+      "gameEffects": {
+        "preventChaoticEffects": true,
+        "reduceTimeTravel": 0.6,
+        "actionRestoration": true
+      },
+      "ownerId": null,
+      "isFixed": true,
+      "createdAt": "2025-01-27T10:00:00"
+    }
+  ],
+  
+  "sampleMap": {
+    "id": "map_demo",
+    "name": "5D Spacetime Demo Map",
+    "width": 20,
+    "height": 20,
+    "depth": 3,
+    "timelines": ["ℬ1", "ℬ2"],
+    "temporalLayers": [-1, 0, 1],
+    "buildings": [
+      {
+        "id": "castle_player1",
+        "type": "CASTLE",
+        "x": 5,
+        "y": 5,
+        "z": 0,
+        "timeline": "ℬ1",
+        "temporalLayer": 0,
+        "ownerId": "player1",
+        "health": 1000,
+        "maxHealth": 1000
+      },
+      {
+        "id": "castle_player2",
+        "type": "CASTLE",
+        "x": 15,
+        "y": 15,
+        "z": 0,
+        "timeline": "ℬ1",
+        "temporalLayer": 0,
+        "ownerId": "player2",
+        "health": 1000,
+        "maxHealth": 1000
+      },
+      {
+        "id": "nexus_gate",
+        "type": "NEXUS_GATE",
+        "x": 10,
+        "y": 10,
+        "z": 0,
+        "timeline": "ℬ1",
+        "temporalLayer": 0,
+        "ownerId": null,
+        "health": 1500,
+        "maxHealth": 1500
+      }
+    ],
+    "temporalZones": [
+      {
+        "id": "temporal_storm_1",
+        "type": "TEMPORAL_STORM",
+        "centerX": 12,
+        "centerY": 8,
+        "radius": 3,
+        "timeline": "ℬ1",
+        "temporalLayer": 0,
+        "intensity": 0.8,
+        "duration": 5
+      },
+      {
+        "id": "chronos_field_1",
+        "type": "CHRONOS_FIELD",
+        "centerX": 8,
+        "centerY": 12,
+        "radius": 2,
+        "timeline": "ℬ1",
+        "temporalLayer": 0,
+        "intensity": 1.2,
+        "duration": 8
+      }
+    ],
+    "nexusPoints": [
+      {
+        "id": "nexus_center",
+        "x": 10,
+        "y": 10,
+        "connectedTimelines": ["ℬ1", "ℬ2"],
+        "stabilityLevel": 0.9,
+        "active": true
+      }
+    ],
+    "createdAt": "2025-01-27T10:00:00"
+  },
+  
+  "sampleGame": {
+    "id": "game_demo",
+    "name": "5D Spacetime Demo Game",
+    "status": "IN_PROGRESS",
+    "currentTurn": 5,
+    "currentPlayerId": "player1",
+    "maxPlayers": 2,
+    "maxTurns": 50,
+    "players": [
+      {
+        "id": "player1",
+        "name": "Arthur",
+        "color": "blue",
+        "isReady": true,
+        "isActive": true,
+        "heroIds": ["hero_arthur"],
+        "artifactIds": ["avant_world_blade", "reverse_clock"],
+        "resources": {
+          "gold": 1200,
+          "mana": 80,
+          "temporalEnergy": 25,
+          "artifacts": 2
+        },
+        "statistics": {
+          "turnsPlayed": 5,
+          "heroesCreated": 1,
+          "artifactsUsed": 1,
+          "psiStatesCreated": 3,
+          "timelinesCreated": 1,
+          "battlesWon": 2,
+          "battlesLost": 0,
+          "temporalManipulations": 5
+        },
+        "joinedAt": "2025-01-27T10:00:00"
+      },
+      {
+        "id": "player2",
+        "name": "Merlin",
+        "color": "red",
+        "isReady": true,
+        "isActive": true,
+        "heroIds": ["hero_merlin"],
+        "artifactIds": ["anchor_tower"],
+        "resources": {
+          "gold": 1000,
+          "mana": 90,
+          "temporalEnergy": 20,
+          "artifacts": 1
+        },
+        "statistics": {
+          "turnsPlayed": 4,
+          "heroesCreated": 1,
+          "artifactsUsed": 0,
+          "psiStatesCreated": 2,
+          "timelinesCreated": 0,
+          "battlesWon": 0,
+          "battlesLost": 2,
+          "temporalManipulations": 3
+        },
+        "joinedAt": "2025-01-27T10:00:00"
+      }
+    ],
+    "settings": {
+      "timePerTurn": 120,
+      "maxTimelines": 5,
+      "maxPsiStatesPerPlayer": 10,
+      "enableTemporalArtifacts": true,
+      "enableMultipleTimelines": true,
+      "enablePhantomBattles": true,
+      "mapSize": "medium",
+      "difficulty": "normal"
+    },
+    "createdAt": "2025-01-27T10:00:00",
+    "startedAt": "2025-01-27T10:05:00",
+    "lastActivity": "2025-01-27T10:15:00"
+  },
+  
+  "samplePsiStates": [
+    {
+      "id": "ψ001",
+      "expression": "ψ001: ⊙(Δt+2 @126,65 ⟶ CREATE(CREATURE, Dragon))",
+      "branch": "ℬ1",
+      "deltaTime": 2,
+      "targetX": 126,
+      "targetY": 65,
+      "action": "CREATE",
+      "parameters": "CREATURE, Dragon",
+      "probability": 0.85,
+      "status": "ACTIVE",
+      "triggerTurn": 7,
+      "createdAt": "2025-01-27T10:10:00"
+    },
+    {
+      "id": "ψ002",
+      "expression": "ψ002: ⊙(Δt+1 @127,66 ⟶ BATTLE(HERO Arthur, CREATURE Dragon))",
+      "branch": "ℬ1",
+      "deltaTime": 1,
+      "targetX": 127,
+      "targetY": 66,
+      "action": "BATTLE",
+      "parameters": "HERO Arthur, CREATURE Dragon",
+      "probability": 0.75,
+      "status": "ACTIVE",
+      "triggerTurn": 6,
+      "createdAt": "2025-01-27T10:12:00"
+    },
+    {
+      "id": "ψ003",
+      "expression": "ψ003: ⊙(Δt+3 @128,64 ⟶ CAPTURE(BUILDING, Castle))",
+      "branch": "ℬ2",
+      "deltaTime": 3,
+      "targetX": 128,
+      "targetY": 64,
+      "action": "CAPTURE",
+      "parameters": "BUILDING, Castle",
+      "probability": 0.6,
+      "status": "ACTIVE",
+      "triggerTurn": 8,
+      "createdAt": "2025-01-27T10:13:00"
+    }
+  ],
+  
+  "sampleScripts": [
+    {
+      "name": "Basic Dragon Creation",
+      "script": "ψ001: ⊙(Δt+2 @126,65 ⟶ CREATE(CREATURE, Dragon))\nUSE(ITEM, AvantWorldBlade, HERO:Arthur)\n†ψ001",
+      "description": "Create a dragon with enhanced probability using Lame d'Avant-Monde"
+    },
+    {
+      "name": "Temporal Battle Chain",
+      "script": "ψ001: ⊙(Δt+1 @125,64 ⟶ CREATE(CREATURE, Phoenix))\nψ002: ⊙(Δt+2 @126,65 ⟶ BATTLE(CREATURE Phoenix, HERO Enemy))\nψ003: ⊙(Δt+3 @127,66 ⟶ CAPTURE(BUILDING, Castle))\nΠ(Player2 enters @126,65) ⇒ †ψ002",
+      "description": "Chain of temporal events with observation trigger"
+    },
+    {
+      "name": "Timeline Manipulation",
+      "script": "TIMELINE(ℬ2)\nψ001: ⊙(Δt+2 @128,64 ⟶ MOV(HERO Arthur, @129,65))\nUSE(ITEM, NexusCrystal, @128,64)\nMERGE(ℬ1, ℬ2)",
+      "description": "Create alternate timeline and merge with primary"
+    },
+    {
+      "name": "Artifact Combo",
+      "script": "USE(ITEM, AvantWorldBlade, HERO:Arthur)\nψ001: ⊙(Δt+1 @126,65 ⟶ CREATE(CREATURE, Dragon))\nUSE(ITEM, AnchorTower, @126,65)\nψ002: ⊙(Δt+2 @127,66 ⟶ BATTLE(CREATURE Dragon, HERO Enemy))",
+      "description": "Combine multiple artifacts for maximum effect"
+    }
+  ],
+  
+  "apiExamples": {
+    "createGame": {
+      "method": "POST",
+      "url": "/api/game/create",
+      "body": {
+        "name": "My 5D Game",
+        "maxPlayers": 4,
+        "settings": {
+          "timePerTurn": 180,
+          "maxTimelines": 3,
+          "maxPsiStatesPerPlayer": 8,
+          "enableTemporalArtifacts": true,
+          "enableMultipleTimelines": true,
+          "enablePhantomBattles": true,
+          "mapSize": "large",
+          "difficulty": "hard"
+        }
+      }
+    },
+    "joinGame": {
+      "method": "POST",
+      "url": "/api/game/{gameId}/join",
+      "body": {
+        "playerId": "player123",
+        "playerName": "Temporal Master",
+        "color": "purple"
+      }
+    },
+    "moveHero": {
+      "method": "POST",
+      "url": "/api/game/{gameId}/heroes/{heroId}/move",
+      "body": {
+        "x": 12,
+        "y": 15,
+        "z": 0,
+        "timeline": "ℬ1",
+        "temporalLayer": 0
+      }
+    },
+    "useArtifact": {
+      "method": "POST",
+      "url": "/api/game/{gameId}/artifacts/{artifactId}/use",
+      "body": {
+        "heroId": "hero_arthur",
+        "targetX": 126,
+        "targetY": 65,
+        "targetTimeline": "ℬ1",
+        "targetTemporalLayer": 0
+      }
+    },
+    "executeScript": {
+      "method": "POST",
+      "url": "/api/game/{gameId}/script/execute",
+      "body": {
+        "script": "ψ001: ⊙(Δt+2 @126,65 ⟶ CREATE(CREATURE, Dragon))\nUSE(ITEM, AvantWorldBlade, HERO:Arthur)",
+        "playerId": "player1"
+      }
+    }
+  },
+  
+  "testSequence": {
+    "description": "Complete test sequence for 5D spacetime game",
+    "steps": [
+      {
+        "step": 1,
+        "action": "Create demo game",
+        "endpoint": "POST /api/game/demo/create-sample-game",
+        "expected": "Game created with 2 players and initialized map"
+      },
+      {
+        "step": 2,
+        "action": "Get game state",
+        "endpoint": "GET /api/game/demo-game",
+        "expected": "Complete game state with heroes, artifacts, map"
+      },
+      {
+        "step": 3,
+        "action": "Move Arthur",
+        "endpoint": "POST /api/game/demo-game/heroes/hero_player1/move",
+        "body": {
+          "x": 11,
+          "y": 11,
+          "z": 0,
+          "timeline": "ℬ1",
+          "temporalLayer": 0
+        },
+        "expected": "Hero moved to new 5D position"
+      },
+      {
+        "step": 4,
+        "action": "Execute temporal script",
+        "endpoint": "POST /api/game/demo-game/script/execute",
+        "body": {
+          "script": "ψ001: ⊙(Δt+2 @126,65 ⟶ CREATE(CREATURE, Dragon))\nUSE(ITEM, AvantWorldBlade, HERO:Arthur)",
+          "playerId": "player1"
+        },
+        "expected": "ψ-states created and conflicts detected"
+      },
+      {
+        "step": 5,
+        "action": "Use artifact",
+        "endpoint": "POST /api/game/demo-game/artifacts/avant_world_blade/use",
+        "body": {
+          "heroId": "hero_player1",
+          "targetX": 126,
+          "targetY": 65,
+          "targetTimeline": "ℬ1",
+          "targetTemporalLayer": 0
+        },
+        "expected": "Artifact used successfully, temporal energy consumed"
+      },
+      {
+        "step": 6,
+        "action": "Advance turn",
+        "endpoint": "POST /api/game/demo-game/next-turn",
+        "expected": "Turn advanced, ψ-states processed, conflicts resolved"
+      },
+      {
+        "step": 7,
+        "action": "Check final state",
+        "endpoint": "GET /api/game/demo-game/psi-states",
+        "expected": "List of active and collapsed ψ-states"
+      }
+    ]
+  }
+}

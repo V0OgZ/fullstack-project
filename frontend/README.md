@@ -1,152 +1,236 @@
-# 🚀 Fullstack TypeScript Frontend
+# 🖥️ Heroes of Time - Frontend Minimaliste
 
-A modern React TypeScript frontend application with a clean architecture and production-ready setup.
+Interface utilisateur ultra-légère en HTML/CSS/JavaScript vanilla pour le moteur temporel Heroes of Time.
 
-## 🛠️ Tech Stack
+## 🚀 Démarrage Rapide
 
-- **React 18** - Modern React with hooks
-- **TypeScript** - Type-safe JavaScript
-- **CSS3** - Modern styling with gradients and animations
-- **Fetch API** - Native HTTP client
-
-## 📁 Project Structure
-
-```
-src/
-├── components/          # Reusable React components
-│   ├── StatusCard.tsx   # System status display
-│   └── ApiTester.tsx    # API testing interface
-├── services/            # API and business logic
-│   └── api.ts          # Backend API service
-├── types/              # TypeScript type definitions
-│   └── api.ts          # API response types
-├── utils/              # Utility functions
-├── App.tsx             # Main application component
-├── App.css             # Application styles
-└── index.tsx           # Application entry point
-```
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js 16+ (currently using v16.7.0)
-- npm or yarn
+### Prérequis
+- Serveur backend Heroes of Time en cours d'exécution (port 8080)
+- Navigateur web moderne
+- Serveur HTTP local (optionnel)
 
 ### Installation
 ```bash
-npm install
+# Cloner ou télécharger les fichiers
+# Pas de build nécessaire - HTML/CSS/JS vanilla
+
+# Servir les fichiers (optionnel)
+python -m http.server 3000
+# ou
+npx serve .
 ```
 
-### Development
-```bash
-npm start
+### Utilisation
+1. Ouvrir `index.html` dans un navigateur
+2. Cliquer "New Game" pour créer une partie
+3. Utiliser la console pour taper des scripts temporels
+4. Observer les effets sur la carte hexagonale
+
+## 📁 Structure des Fichiers
+
 ```
-The application will be available at http://localhost:3000
-
-### Build for Production
-```bash
-npm run build
+frontend/
+├── index.html          # Page principale
+├── styles.css          # Styles complets
+├── api.js              # Connexion backend
+├── script-console.js   # Console de script
+├── game.js             # Rendu du jeu
+├── manifest.json       # PWA manifest
+└── README.md           # Ce fichier
 ```
 
-### Testing
-```bash
-npm test
+## 🎮 Utilisation
+
+### Commandes de Script
+```javascript
+// Créer des héros
+HERO(Arthur)
+HERO(Ragnar)
+HERO(Merlin)
+
+// Mouvement
+MOV(Arthur, @10,10)
+
+// Créer des objets
+CREATE(CREATURE, Dragon, @15,15)
+CREATE(STRUCTURE, Tower, @20,20)
+
+// Artefacts temporels
+USE(ITEM, AvantWorldBlade, HERO:Arthur)
+USE(ITEM, ReverseClock, HERO:Ragnar)
+
+// ψ-states (superpositions)
+ψ001: ⊙(Δt+2 @15,15 ⟶ MOV(HERO, Arthur, @15,15))
+ψ002: ⊙(Δt+1 @20,20 ⟶ CREATE(CREATURE, Dragon, @20,20))
+
+// Collapse
+†ψ001
+†ψ002
+
+// Triggers d'observation
+Π(Player enters @15,15) ⇒ †ψ001
 ```
 
-## 🔧 Features
+### Raccourcis Clavier
+- **Entrée** : Exécuter le script
+- **Flèche Haut/Bas** : Naviguer dans l'historique
+- **Tab** : Autocomplétion
+- **Clic sur carte** : Afficher coordonnées
 
-### ✅ TypeScript Integration
-- Full type safety across the application
-- Interface definitions for API responses
-- Strict TypeScript configuration
+## 🎨 Fonctionnalités
 
-### 🎨 Modern UI/UX
-- Responsive design with mobile support
-- Glassmorphism design elements
-- Smooth animations and transitions
-- Real-time status monitoring
+### Interface
+- ✅ **Carte hexagonale** interactive
+- ✅ **Console de script** avec historique
+- ✅ **Autocomplétion** des commandes
+- ✅ **Feedback visuel** en temps réel
+- ✅ **Responsive design** mobile-friendly
 
-### 🔌 API Integration
-- Service layer for backend communication
-- Error handling and loading states
-- Health check monitoring
-- Type-safe API calls
+### Visualisation
+- ✅ **Héros** avec couleurs distinctes
+- ✅ **ψ-states** avec effets animés
+- ✅ **Barres de vie** et statistiques
+- ✅ **Indicateurs d'artefacts**
+- ✅ **Status bar** informative
 
-### 📱 Responsive Design
-- Mobile-first approach
-- Flexible grid layouts
-- Touch-friendly interactions
+### Effets Temporels
+- ✅ **Superpositions** (zones violettes brillantes)
+- ✅ **Collapse** (disparition des effets)
+- ✅ **Animations** fluides
+- ✅ **Feedback** immédiat
 
-## 🔗 Backend Integration
+## 🔧 Configuration
 
-This frontend connects to a Spring Boot backend running on:
-- **URL**: http://localhost:8080
-- **API Endpoints**:
-  - `GET /api/hello` - System information
-  - `GET /api/health` - Health check
+### Backend URL
+Par défaut : `http://localhost:8080/api/temporal`
 
-## 🎯 Key Components
+Pour changer :
+```javascript
+// Dans index.html
+window.gameAPI = new GameAPI('http://votre-serveur:8080/api/temporal');
+```
 
-### StatusCard
-Displays real-time system status for both frontend and backend services.
+### Personnalisation
+- **Couleurs** : Modifier `styles.css`
+- **Taille hexagones** : Changer `hexSize` dans `game.js`
+- **Suggestions** : Modifier `suggestions` dans `script-console.js`
 
-### ApiTester
-Interactive component for testing backend API endpoints with error handling.
+## 🌐 PWA (Progressive Web App)
 
-### ApiService
-Centralized service for all backend API communications with TypeScript types.
+L'application peut être installée comme PWA :
+1. Ouvrir dans Chrome/Edge
+2. Cliquer sur l'icône d'installation
+3. Utiliser comme application native
 
-## 🎨 Styling
+## 🐛 Dépannage
 
-The application uses modern CSS features:
-- CSS Grid and Flexbox for layouts
-- CSS Custom Properties for theming
-- Backdrop filters for glassmorphism effects
-- Smooth transitions and animations
+### Problèmes Courants
 
-## 🔄 Development Workflow
+#### Backend non accessible
+```
+❌ Error: Failed to fetch
+```
+**Solution** : Vérifier que le backend est démarré sur le port 8080
 
-1. **Hot Reload**: Changes automatically reflect in the browser
-2. **Type Checking**: TypeScript provides real-time type checking
-3. **Error Handling**: Comprehensive error handling with user feedback
-4. **API Testing**: Built-in tools for testing backend integration
+#### CORS Error
+```
+❌ Error: CORS policy
+```
+**Solution** : Servir les fichiers via un serveur HTTP local
+
+#### Pas de réponse du jeu
+```
+❌ Error: No game created
+```
+**Solution** : Cliquer "New Game" avant d'exécuter des scripts
+
+### Debug
+- Ouvrir les outils de développement (F12)
+- Vérifier la console pour les erreurs
+- Tester la connexion backend manuellement
+
+## 🎯 Exemples d'Usage
+
+### Scénario Basique
+```javascript
+// 1. Créer des héros
+HERO(Arthur)
+HERO(Ragnar)
+
+// 2. Les positionner
+MOV(Arthur, @10,10)
+MOV(Ragnar, @15,15)
+
+// 3. Créer une superposition
+ψ001: ⊙(Δt+2 @20,20 ⟶ MOV(HERO, Arthur, @20,20))
+
+// 4. Observer le résultat
+// La zone @20,20 brille en violet
+
+// 5. Collapse
+†ψ001
+// L'effet disparaît
+```
+
+### Scénario Avancé
+```javascript
+// Combat temporel
+HERO(Arthur)
+HERO(Ragnar)
+USE(ITEM, AvantWorldBlade, HERO:Arthur)
+ψ001: ⊙(Δt+2 @25,25 ⟶ BATTLE(Arthur, Ragnar))
+Π(Ragnar enters @25,25) ⇒ †ψ001
+MOV(Ragnar, @25,25)
+// Déclenche la bataille fantôme
+```
 
 ## 📊 Performance
 
-- Lazy loading of components
-- Optimized bundle size
-- Efficient re-rendering with React hooks
-- Minimal dependencies
+### Optimisations
+- Canvas 2D pour le rendu
+- Limitation des éléments affichés
+- Nettoyage automatique de l'historique
+- Rafraîchissement intelligent
 
-## 🔒 Security
+### Limites
+- ~100 lignes d'historique console
+- ~50 éléments sur la carte
+- Rafraîchissement toutes les 5 secondes
 
-- Type-safe API calls prevent runtime errors
-- Input validation through TypeScript interfaces
-- Secure fetch requests with proper error handling
+## 🔄 Intégration
 
-## 🚀 Deployment
+### Avec le Backend
+L'interface communique avec le backend via :
+- `POST /api/temporal/games` - Créer partie
+- `POST /api/temporal/games/{id}/script` - Exécuter script
+- `GET /api/temporal/games/{id}/state` - État du jeu
 
-The application is ready for deployment to:
-- Vercel
-- Netlify
-- AWS S3 + CloudFront
-- Any static hosting service
+### Avec les Tests
+Compatible avec tous les scripts de test :
+- `simulate-quick.sh`
+- `simulate-game.sh`
+- `simulate-performance.sh`
 
-## 📝 Scripts
+## 🚀 Déploiement
 
-- `npm start` - Start development server
-- `npm run build` - Build for production
-- `npm test` - Run tests
-- `npm run eject` - Eject from Create React App (not recommended)
+### Local
+```bash
+# Serveur simple
+python -m http.server 3000
+```
 
-## 🤝 Contributing
+### GitHub Pages
+1. Push vers repository GitHub
+2. Activer GitHub Pages
+3. Configurer l'URL du backend
 
-1. Follow TypeScript best practices
-2. Use functional components with hooks
-3. Maintain type safety across the application
-4. Add proper error handling
-5. Test API integrations
+### Serveur Web
+1. Copier les fichiers vers `/var/www/html/`
+2. Configurer CORS sur le backend
+3. Tester l'accès
 
-## 📄 License
+---
 
-This project is part of a fullstack application demonstrating modern web development practices.
+*Interface Frontend Heroes of Time - Prête à l'emploi*
+
+**Status : ✅ READY TO USE**

@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏛️ Heroes of Time - Collection & Grammar Translator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            border: 2px solid rgba(78, 205, 196, 0.3);
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            color: #4ecdc4;
+            text-shadow: 0 0 30px rgba(78, 205, 196, 0.8);
+            margin-bottom: 15px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #bdc3c7;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            border: 2px solid #4ecdc4;
+            background: rgba(78, 205, 196, 0.1);
+            color: #4ecdc4;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .tab-btn:hover, .tab-btn.active {
+            background: #4ecdc4;
+            color: #0f0f23;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .controls {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-box {
+            padding: 12px 20px;
+            border: 2px solid #4ecdc4;
+            background: rgba(0, 0, 0, 0.3);
+            color: #e0e0e0;
+            border-radius: 25px;
+            width: 300px;
+            font-size: 16px;
+        }
+
+        .search-box:focus {
+            outline: none;
+            box-shadow: 0 0 15px rgba(78, 205, 196, 0.4);
+        }
+
+        .filter-btn {
+            padding: 12px 24px;
+            border: 2px solid #4ecdc4;
+            background: rgba(78, 205, 196, 0.1);
+            color: #4ecdc4;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #4ecdc4;
+            color: #0f0f23;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.3);
+        }
+
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .item-card {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            padding: 25px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(78, 205, 196, 0.2);
+            border-color: #4ecdc4;
+        }
+
+        .item-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4ecdc4, #44a08d);
+        }
+
+        .item-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .item-icon {
+            font-size: 3rem;
+            width: 60px;
+            text-align: center;
+        }
+
+        .item-title {
+            flex: 1;
+        }
+
+        .item-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4ecdc4;
+            margin-bottom: 5px;
+        }
+
+        .item-type {
+            font-size: 0.9rem;
+            color: #bdc3c7;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .item-rarity {
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .rarity-legendary {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: #fff;
+        }
+
+        .rarity-mythic {
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+            color: #fff;
+        }
+
+        .rarity-epic {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: #fff;
+        }
+
+        /* Dark Fantasy Styles pour Domburg */
+        .rarity-unique {
+            background: linear-gradient(45deg, #2c1810, #8b4513, #2c1810);
+            color: #d4af37;
+            border: 2px solid #d4af37;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            animation: darkPulse 3s infinite;
+        }
+
+        .rarity-rare {
+            background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460);
+            color: #4ecdc4;
+            border: 2px solid #4ecdc4;
+            box-shadow: 0 0 15px rgba(78, 205, 196, 0.3);
+        }
+
+        @keyframes darkPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.6); }
+        }
+
+        /* Styles pour objets d'ancrage */
+        .anchor-location {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+            border: 3px solid #8b4513;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .anchor-location::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+            animation: anchorGlow 4s infinite;
+        }
+
+        @keyframes anchorGlow {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .minor-anchor {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            border: 2px solid #4ecdc4;
+            position: relative;
+        }
+
+        .minor-anchor::after {
+            content: '🌪️';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            animation: windSpin 6s linear infinite;
+        }
+
+        @keyframes windSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Carte d'objet style jeu */
+        .item-card.card-style {
+            background: linear-gradient(145deg, #1a1a1a 0%, #2d2d2d 30%, #1a1a1a 100%);
+            border: 3px solid;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .item-card.card-style:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+        }
+
+        .item-card.card-style::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, currentColor, transparent);
+        }
+
+        .card-rarity-indicator {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card-zone {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 10px;
+            color: #bdc3c7;
+            text-transform: uppercase;
+        }
+
+        .card-effects {
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            border-left: 4px solid;
+        }
+
+        .effect-item {
+            margin-bottom: 8px;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .effect-name {
+            font-weight: bold;
+            color: #4ecdc4;
+            margin-bottom: 4px;
+        }
+
+        .effect-description {
+            color: #bdc3c7;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .card-lore {
+            font-style: italic;
+            color: #95a5a6;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 3px solid #8b4513;
+            margin-top: 15px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .card-special-properties {
+            margin-top: 15px;
+            padding: 10px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(139, 69, 19, 0.1));
+            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .special-property {
+            font-size: 12px;
+            color: #d4af37;
+            margin-bottom: 5px;
+        }
+
+        /* Styles spécifiques aux types d'objets */
+        .type-anchor-location {
+            border-color: #8b4513;
+        }
+
+        .type-anchor-location .card-effects {
+            border-left-color: #8b4513;
+        }
+
+        .type-minor-anchor-point {
+            border-color: #4ecdc4;
+        }
+
+        .type-minor-anchor-point .card-effects {
+            border-left-color: #4ecdc4;
+        }
+
+        /* Animation pour les objets fixes */
+        .fixed-item {
+            position: relative;
+        }
+
+        .fixed-item::after {
+            content: '⚓';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            font-size: 16px;
+            color: #8b4513;
+            text-shadow: 0 0 10px rgba(139, 69, 19, 0.8);
+        }
+
+        .item-description {
+            color: #bdc3c7;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .item-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stat-item {
+            background: rgba(78, 205, 196, 0.1);
+            padding: 8px 12px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #4ecdc4;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-weight: bold;
+            color: #e0e0e0;
+        }
+
+        .scenarios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .scenario-card {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid rgba(78, 205, 196, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .scenario-card:hover {
+            border-color: #4ecdc4;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(78, 205, 196, 0.2);
+        }
+
+        .scenario-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #4ecdc4;
+            margin-bottom: 10px;
+        }
+
+        .scenario-description {
+            color: #bdc3c7;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .scenario-meta {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .scenario-tag {
+            background: rgba(78, 205, 196, 0.2);
+            color: #4ecdc4;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        .script-input {
+            width: 100%;
+            min-height: 200px;
+            padding: 15px;
+            border: 2px solid rgba(78, 205, 196, 0.3);
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            color: #e0e0e0;
+            font-size: 16px;
+            font-family: 'Courier New', monospace;
+            resize: vertical;
+        }
+
+        .script-input:focus {
+            outline: none;
+            border-color: #4ecdc4;
+            box-shadow: 0 0 15px rgba(78, 205, 196, 0.4);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #4a90e2, #357abd);
+            color: #fff;
+        }
+
+        .btn-examples {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            color: #fff;
+        }
+
+        .examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .example-card {
+            background: rgba(78, 205, 196, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .example-card:hover {
+            background: rgba(78, 205, 196, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .example-title {
+            font-weight: bold;
+            color: #4ecdc4;
+            margin-bottom: 8px;
+        }
+
+        .example-formula {
+            font-family: 'Courier New', monospace;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #b19cd9;
+        }
+
+        .translation-result {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid #4ecdc4;
+            margin-bottom: 20px;
+        }
+
+        .translation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .script-type {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .translation-text {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #e0e0e0;
+            margin-bottom: 15px;
+        }
+
+        .translation-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .detail-item {
+            background: rgba(78, 205, 196, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(78, 205, 196, 0.2);
+        }
+
+        .detail-label {
+            font-weight: bold;
+            color: #4ecdc4;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .grammar-reference {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid rgba(78, 205, 196, 0.2);
+            margin-top: 30px;
+        }
+
+        .grammar-symbols {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .symbol-card {
+            background: rgba(78, 205, 196, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(78, 205, 196, 0.3);
+        }
+
+        .symbol {
+            font-size: 2rem;
+            color: #4ecdc4;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .symbol-name {
+            font-weight: bold;
+            color: #4ecdc4;
+            margin-bottom: 5px;
+        }
+
+        .symbol-description {
+            color: #b19cd9;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        /* Script Translator Styles */
+        .mode-selector {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .mode-btn {
+            padding: 12px 24px;
+            background: rgba(78, 205, 196, 0.2);
+            border: 2px solid rgba(78, 205, 196, 0.3);
+            border-radius: 8px;
+            color: #4ecdc4;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .mode-btn:hover, .mode-btn.active {
+            background: rgba(78, 205, 196, 0.4);
+            border-color: #4ecdc4;
+            box-shadow: 0 0 15px rgba(78, 205, 196, 0.3);
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .result-card {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid;
+            transition: all 0.3s ease;
+        }
+
+        .result-card.literary {
+            border-color: rgba(255, 193, 7, 0.3);
+        }
+
+        .result-card.icons {
+            border-color: rgba(138, 43, 226, 0.3);
+        }
+
+        .result-card.runes {
+            border-color: rgba(46, 204, 113, 0.3);
+        }
+
+        .result-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .result-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .result-title.literary { color: #ffc107; }
+        .result-title.icons { color: #8a2be2; }
+        .result-title.runes { color: #2ecc71; }
+
+        .result-content {
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            line-height: 1.6;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .examples-section {
+            margin-top: 40px;
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .example-item {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid rgba(255, 107, 107, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .example-item:hover {
+            border-color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .example-script {
+            font-family: 'Courier New', monospace;
+            color: #ff6b6b;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .example-description {
+            color: #bdc3c7;
+            font-size: 14px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1a1a2e;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 3px solid #4ecdc4;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #4ecdc4;
+        }
+
+        .modal-close:hover {
+            color: #e74c3c;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2rem;
+            color: #4ecdc4;
+        }
+
+        .error {
+            text-align: center;
+            padding: 50px;
+            color: #e74c3c;
+        }
+
+        .category-hero { border-color: rgba(52, 152, 219, 0.3); }
+        .category-hero:hover { border-color: #3498db; }
+        .category-artifact { border-color: rgba(142, 68, 173, 0.3); }
+        .category-artifact:hover { border-color: #8e44ad; }
+        .category-creature { border-color: rgba(231, 76, 60, 0.3); }
+        .category-creature:hover { border-color: #e74c3c; }
+
+        @media (max-width: 768px) {
+            .collection-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .search-box {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🏛️ Heroes of Time</h1>
+        <p>Collection du Jeu, Scénarios HOTS & Grammar Translator</p>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="showTab('collection')">🏛️ Collection</button>
+        <button class="tab-btn" onclick="showTab('scenarios')">📜 Scénarios HOTS</button>
+        <button class="tab-btn" onclick="showTab('grammar')">🔮 Grammar Translator</button>
+        <button class="tab-btn" onclick="showTab('script-translator')">🔮 Traducteur de Scripts</button>
+    </div>
+
+    <!-- Collection Tab -->
+    <div id="collection-tab" class="tab-content active">
+    <div class="controls">
+            <button class="filter-btn active" data-filter="all">🌟 Tout</button>
+            <button class="filter-btn" data-filter="heroes">⚔️ Héros</button>
+            <button class="filter-btn" data-filter="artifacts">🔮 Artefacts</button>
+            <button class="filter-btn" data-filter="creatures">🐉 Créatures</button>
+            <input type="text" class="search-box" placeholder="🔍 Rechercher..." id="searchInput">
+    </div>
+
+        <div class="collection-grid" id="collectionGrid">
+            <div class="loading">🔄 Chargement de la collection...</div>
+        </div>
+    </div>
+
+    <!-- Scenarios Tab -->
+    <div id="scenarios-tab" class="tab-content">
+        <div class="scenarios-grid" id="scenariosGrid">
+            <div class="loading">🔄 Chargement des scénarios...</div>
+        </div>
+        </div>
+
+    <!-- Grammar Translator Tab -->
+    <div id="grammar-tab" class="tab-content">
+        <div class="examples">
+            <div class="example-card" onclick="loadExample('psi_state')">
+                <div class="example-title">État Quantique</div>
+                <div class="example-formula">ψ001: ⊙(Δt+2 @10,10 ⟶ MOV(HERO, Arthur, @10,10))</div>
+            </div>
+            
+            <div class="example-card" onclick="loadExample('collapse')">
+                <div class="example-title">Collapse</div>
+            <div class="example-formula">†ψ001</div>
+        </div>
+            
+            <div class="example-card" onclick="loadExample('observation')">
+                <div class="example-title">Trigger d'Observation</div>
+                <div class="example-formula">Π(Arthur reaches @10,10) ⇒ †ψ001</div>
+        </div>
+            
+            <div class="example-card" onclick="loadExample('hero_creation')">
+                <div class="example-title">Création Héros</div>
+                <div class="example-formula">HERO(Arthur)</div>
+        </div>
+            
+            <div class="example-card" onclick="loadExample('movement')">
+                <div class="example-title">Mouvement</div>
+                <div class="example-formula">MOV(HERO, Arthur, @15,15)</div>
+            </div>
+            
+            <div class="example-card" onclick="loadExample('creation')">
+                <div class="example-title">Création Objet</div>
+                <div class="example-formula">CREATE(CREATURE, Dragon, @20,20)</div>
+        </div>
+    </div>
+
+        <textarea 
+            class="script-input" 
+            id="scriptInput" 
+            placeholder="Entrez votre script HOTS ici...&#10;&#10;Exemples:&#10;ψ001: ⊙(Δt+2 @10,10 ⟶ MOV(HERO, Arthur, @10,10))&#10;†ψ001&#10;Π(Arthur reaches @10,10) ⇒ †ψ001"
+        ></textarea>
+
+        <div class="controls">
+            <button class="btn btn-primary" onclick="translateScript()">🔮 Traduire</button>
+            <button class="btn btn-secondary" onclick="clearInput()">🗑️ Effacer</button>
+            <button class="btn btn-examples" onclick="loadRandomExample()">🎲 Exemple Aléatoire</button>
+    </div>
+
+        <div id="translationOutput">
+            <div class="loading">Entrez un script HOTS et cliquez sur "Traduire"</div>
+        </div>
+
+        <div class="grammar-reference">
+            <h2 class="section-title">📚 Référence Grammaire HOTS</h2>
+            
+            <div class="grammar-symbols">
+                <div class="symbol-card">
+                    <div class="symbol">ψ</div>
+                    <div class="symbol-name">Psi-State</div>
+                    <div class="symbol-description">État quantique en superposition temporelle</div>
+                </div>
+                
+                <div class="symbol-card">
+                    <div class="symbol">⊙</div>
+                    <div class="symbol-name">Superposition</div>
+                    <div class="symbol-description">Action en superposition quantique</div>
+                </div>
+                
+                <div class="symbol-card">
+                    <div class="symbol">†</div>
+                    <div class="symbol-name">Collapse</div>
+                    <div class="symbol-description">Effondrement d'état quantique</div>
+                </div>
+                
+                <div class="symbol-card">
+                    <div class="symbol">Π</div>
+                    <div class="symbol-name">Observation</div>
+                    <div class="symbol-description">Déclencheur d'observation externe</div>
+                </div>
+                
+                <div class="symbol-card">
+                    <div class="symbol">Δt</div>
+                    <div class="symbol-name">Delta-T</div>
+                    <div class="symbol-description">Différentiel temporel (délai)</div>
+                </div>
+                
+                <div class="symbol-card">
+                    <div class="symbol">@</div>
+                    <div class="symbol-name">Position</div>
+                    <div class="symbol-description">Coordonnées spatiales @x,y</div>
+                </div>
+                
+                <div class="symbol-card">
+                    <div class="symbol">ℬ</div>
+                    <div class="symbol-name">Branche</div>
+                    <div class="symbol-description">Branche temporelle (ℬ1, ℬ2, etc.)</div>
+                </div>
+                
+                <div class="symbol-card">
+                    <div class="symbol">⟶</div>
+                    <div class="symbol-name">Projection</div>
+                    <div class="symbol-description">Projection d'effet ou d'action</div>
+                </div>
+                
+                <div class="symbol-card">
+                    <div class="symbol">⇒</div>
+                    <div class="symbol-name">Implication</div>
+                    <div class="symbol-description">Implication logique (si... alors)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Translator Tab -->
+    <div id="script-translator-tab" class="tab-content">
+        <div class="translator-section">
+            <h2 style="color: #ffc107; margin-bottom: 20px;">🔮 Traducteur de Scripts Unifié</h2>
+            
+            <textarea id="scriptTranslatorInput" class="script-input" placeholder="Entrez votre script HOTS ici...&#10;Exemple: HERO(Arthur)&#10;MOV(HERO, Arthur, @10,10)&#10;ψ001: ⊙(Δt+1 @10,10 ⟶ MOV(HERO, Arthur, @10,10))"></textarea>
+            
+            <div class="mode-selector">
+                <button class="mode-btn active" onclick="setTranslationMode('all')">🔮 Tous les Modes</button>
+                <button class="mode-btn" onclick="setTranslationMode('literary')">📖 Littéraire</button>
+                <button class="mode-btn" onclick="setTranslationMode('icons')">🎨 Icônes</button>
+                <button class="mode-btn" onclick="setTranslationMode('runes')">🪬 Runes</button>
+                    </div>
+            
+            <div class="controls">
+                <button class="btn btn-primary" onclick="translateScriptUnified()">🔄 Traduire</button>
+                <button class="btn btn-secondary" onclick="clearTranslatorInput()">🗑️ Effacer</button>
+            </div>
+            
+            <div id="translationResults" class="results-grid" style="display: none;"></div>
+                    </div>
+
+        <div class="examples-section">
+            <h3 style="color: #ff6b6b; margin: 30px 0 20px 0;">💡 Exemples de Scripts</h3>
+            
+            <div class="examples-grid">
+                <div class="example-item" onclick="loadTranslatorExample('HERO(Arthur)')">
+                    <div class="example-script">HERO(Arthur)</div>
+                    <div class="example-description">Création d'un héros</div>
+                    </div>
+                    
+                <div class="example-item" onclick="loadTranslatorExample('MOV(HERO, Arthur, @10,10)')">
+                    <div class="example-script">MOV(HERO, Arthur, @10,10)</div>
+                    <div class="example-description">Déplacement d'un héros</div>
+                    </div>
+                    
+                <div class="example-item" onclick="loadTranslatorExample('CREATE(CREATURE, Dragon, @15,15)')">
+                    <div class="example-script">CREATE(CREATURE, Dragon, @15,15)</div>
+                    <div class="example-description">Création d'une créature</div>
+                    </div>
+                
+                <div class="example-item" onclick="loadTranslatorExample('USE(ITEM, TimeOrb, HERO:Arthur)')">
+                    <div class="example-script">USE(ITEM, TimeOrb, HERO:Arthur)</div>
+                    <div class="example-description">Utilisation d'un artefact</div>
+                </div>
+                
+                <div class="example-item" onclick="loadTranslatorExample('ψ001: ⊙(Δt+1 @10,10 ⟶ MOV(HERO, Arthur, @10,10))')">
+                    <div class="example-script">ψ001: ⊙(Δt+1 @10,10 ⟶ MOV(HERO, Arthur, @10,10))</div>
+                    <div class="example-description">État quantique avec projection temporelle</div>
+                </div>
+                
+                <div class="example-item" onclick="loadTranslatorExample('†ψ001')">
+                    <div class="example-script">†ψ001</div>
+                    <div class="example-description">Effondrement d'un état quantique</div>
+                </div>
+                
+                <div class="example-item" onclick="loadTranslatorExample('CONSTRUCTIVE(ψ1, ψ2) + AMPLIFY(result, 1.5)')">
+                    <div class="example-script">CONSTRUCTIVE(ψ1, ψ2) + AMPLIFY(result, 1.5)</div>
+                    <div class="example-description">Formule d'artefact avec interférence</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour détails -->
+    <div class="modal" id="itemModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        let allItems = [];
+        let currentFilter = 'all';
+        let currentSearch = '';
+        let currentTab = 'collection';
+
+        const examples = {
+            psi_state: "ψ001: ⊙(Δt+2 @10,10 ⟶ MOV(HERO, Arthur, @10,10))",
+            collapse: "†ψ001",
+            observation: "Π(Arthur reaches @10,10) ⇒ †ψ001",
+            hero_creation: "HERO(Arthur)",
+            movement: "MOV(HERO, Arthur, @15,15)",
+            creation: "CREATE(CREATURE, Dragon, @20,20)",
+            complex_psi: "ψ002: (0.8+0.6i) ⊙(Δt+1 @12,12 ⟶ CREATE(ITEM, QuantumSword, @12,12))",
+            artifact_use: "USE(ITEM, AvantWorldBlade, HERO:Arthur)",
+            battle: "BATTLE(Arthur, Dragon)",
+            timeline_branch: "ψ003: ⊙(Δt+3 @25,25 ⟶ BUILD(CITY, Camelot, @25,25, PLAYER:Arthur)) ℬ2"
+        };
+
+        const scenarios = [
+            {
+                name: "Epic Battle: Arthur vs Ragnar",
+                file: "epic-arthur-vs-ragnar.hots",
+                description: "Bataille légendaire entre Arthur Pendragon et Ragnar Lothbrok avec états temporels parallèles",
+                tags: ["Combat", "États Quantiques", "Héros Légendaires"],
+                duration: "~10 secondes",
+                psi_states: 6,
+                turns: 5,
+                battles: 3
+            },
+            {
+                name: "Œil de Wigner",
+                file: "oeil_de_wigner_scenario.hots",
+                description: "Scénario complexe autour de l'Œil de Wigner avec interférences quantiques avancées",
+                tags: ["Quantique", "Interférences", "Complexe"],
+                duration: "~15 secondes",
+                psi_states: 8,
+                turns: 7,
+                battles: 4
+            },
+            {
+                name: "Quantum Interference Example",
+                file: "quantum_interference_example.hots",
+                description: "Démonstration des interférences quantiques avec amplitudes complexes",
+                tags: ["Interférences", "Amplitudes", "Démo"],
+                duration: "~8 secondes",
+                psi_states: 4,
+                turns: 3,
+                battles: 2
+            },
+            {
+                name: "Simple Game",
+                file: "simple-game.hots",
+                description: "Scénario simple pour débuter avec la grammaire HOTS",
+                tags: ["Simple", "Débutant", "Tutorial"],
+                duration: "~5 secondes",
+                psi_states: 2,
+                turns: 2,
+                battles: 1
+            }
+        ];
+
+        // Navigation des onglets
+        function showTab(tabName) {
+            // Masquer tous les onglets
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Afficher l'onglet sélectionné
+            document.getElementById(tabName + '-tab').classList.add('active');
+            event.target.classList.add('active');
+            currentTab = tabName;
+
+            // Charger les données appropriées
+            if (tabName === 'collection') {
+                loadCollection();
+            } else if (tabName === 'scenarios') {
+                loadScenarios();
+            }
+        }
+
+        // Charger la collection
+        async function loadCollection() {
+            try {
+                const response = await fetch('/api/collection/all');
+                if (!response.ok) {
+                    throw new Error('Erreur de chargement');
+                }
+                allItems = await response.json();
+                renderCollection();
+            } catch (error) {
+                document.getElementById('collectionGrid').innerHTML = 
+                    '<div class="error">❌ Erreur de chargement: ' + error.message + '</div>';
+            }
+        }
+
+        // Rendu de la collection
+        function renderCollection() {
+            const grid = document.getElementById('collectionGrid');
+            const filteredItems = allItems.filter(item => {
+                const matchesFilter = currentFilter === 'all' || item.category === currentFilter;
+                const matchesSearch = currentSearch === '' || 
+                    item.name.toLowerCase().includes(currentSearch.toLowerCase()) ||
+                    item.description.toLowerCase().includes(currentSearch.toLowerCase());
+                return matchesFilter && matchesSearch;
+            });
+
+            if (filteredItems.length === 0) {
+                grid.innerHTML = '<div class="loading">🔍 Aucun élément trouvé</div>';
+                return;
+            }
+            
+            grid.innerHTML = filteredItems.map(item => createItemCard(item)).join('');
+        }
+
+        // Créer une carte d'élément
+        function createItemCard(item) {
+            const icon = getItemIcon(item.category, item.type);
+            const rarityClass = getRarityClass(item.rarity);
+            const categoryClass = `category-${item.category}`;
+            const typeClass = item.type ? `type-${item.type.toLowerCase().replace(/_/g, '-')}` : '';
+            const fixedClass = item.isFixed ? 'fixed-item' : '';
+            const cardStyleClass = isDomburgItem(item) ? 'card-style' : '';
+
+            return `
+                <div class="item-card ${categoryClass} ${typeClass} ${fixedClass} ${cardStyleClass}" onclick="showItemDetails('${item.id}')">
+                    <div class="item-header">
+                        <div class="item-icon">${icon}</div>
+                        <div class="item-title">
+                            <div class="item-name">${item.displayName || item.name}</div>
+                            <div class="item-type">${getCategoryName(item.category)}</div>
+                        </div>
+                        <div class="card-rarity-indicator ${rarityClass}">${item.rarity}</div>
+                    </div>
+                    
+                    ${item.zone ? `<div class="card-zone">${item.zone}</div>` : ''}
+                    
+                    <div class="item-description">${item.description}</div>
+                    
+                    ${renderEffects(item)}
+                    
+                    ${item.lore ? `<div class="card-lore">"${item.lore}"</div>` : ''}
+                    
+                    ${renderSpecialProperties(item)}
+                    
+                    ${renderStats(item)}
+                </div>
+            `;
+        }
+
+        // Vérifier si c'est un objet de Domburg
+        function isDomburgItem(item) {
+            return item.id && (item.id.includes('domburg') || item.zone && item.zone.includes('Domburg'));
+        }
+
+        // Rendu des effets d'un objet
+        function renderEffects(item) {
+            if (!item.effects || item.effects.length === 0) return '';
+            
+            return `
+                <div class="card-effects">
+                    ${item.effects.map(effect => `
+                        <div class="effect-item">
+                            <div class="effect-name">${formatEffectName(effect.type)}</div>
+                            <div class="effect-description">${effect.description || ''}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Rendu des propriétés spéciales
+        function renderSpecialProperties(item) {
+            if (!item.specialProperties) return '';
+            
+            return `
+                <div class="card-special-properties">
+                    ${Object.entries(item.specialProperties).map(([key, value]) => {
+                        if (key === 'description') {
+                            return `<div class="special-property">🔗 ${value}</div>`;
+                        }
+                        return `<div class="special-property">⚡ ${formatPropertyName(key)}: ${value}</div>`;
+                    }).join('')}
+                </div>
+            `;
+        }
+
+        // Formater le nom d'un effet
+        function formatEffectName(effectType) {
+            return effectType.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        }
+
+        // Formater le nom d'une propriété
+        function formatPropertyName(propName) {
+            return propName.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+        }
+            
+        // Rendu des statistiques
+        function renderStats(item) {
+            if (!item.stats) return '';
+            
+            const stats = Object.entries(item.stats).slice(0, 6);
+            return `
+                <div class="item-stats">
+                    ${stats.map(([key, value]) => `
+                        <div class="stat-item">
+                            <div class="stat-label">${formatStatName(key)}</div>
+                            <div class="stat-value">${formatStatValue(value)}</div>
+                        </div>
+                    `).join('')}
+                    </div>
+                `;
+            }
+            
+        // Charger les scénarios
+        function loadScenarios() {
+            const grid = document.getElementById('scenariosGrid');
+            grid.innerHTML = scenarios.map(scenario => `
+                <div class="scenario-card" onclick="loadScenario('${scenario.file}')">
+                    <div class="scenario-title">${scenario.name}</div>
+                    <div class="scenario-description">${scenario.description}</div>
+                    <div class="scenario-meta">
+                        <span class="scenario-tag">⏱️ ${scenario.duration}</span>
+                        <span class="scenario-tag">ψ ${scenario.psi_states}</span>
+                        <span class="scenario-tag">🔄 ${scenario.turns} tours</span>
+                        <span class="scenario-tag">⚔️ ${scenario.battles} combats</span>
+                        ${scenario.tags.map(tag => `<span class="scenario-tag">${tag}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Charger un scénario
+        function loadScenario(filename) {
+            // Ici on pourrait charger le contenu du fichier HOTS
+            document.getElementById('scriptInput').value = `# Chargement du scénario: ${filename}\n# Contenu à implémenter...`;
+            showTab('grammar');
+        }
+
+        // Grammar Translator functions
+        function loadExample(type) {
+            document.getElementById('scriptInput').value = examples[type] || '';
+        }
+
+        function loadRandomExample() {
+            const types = Object.keys(examples);
+            const randomType = types[Math.floor(Math.random() * types.length)];
+            loadExample(randomType);
+        }
+
+        function clearInput() {
+            document.getElementById('scriptInput').value = '';
+            document.getElementById('translationOutput').innerHTML = 
+                '<div class="loading">Entrez un script HOTS et cliquez sur "Traduire"</div>';
+        }
+
+        async function translateScript() {
+            const script = document.getElementById('scriptInput').value.trim();
+            if (!script) {
+                showError('Veuillez entrer un script HOTS');
+                return;
+            }
+
+            const output = document.getElementById('translationOutput');
+            output.innerHTML = '<div class="loading">🔄 Traduction en cours...</div>';
+
+            try {
+                const response = await fetch('/api/collection/translate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ script: script })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Erreur de traduction');
+                }
+
+                const result = await response.json();
+                displayTranslation(result);
+            } catch (error) {
+                showError('Erreur de traduction: ' + error.message);
+            }
+        }
+
+        function displayTranslation(result) {
+            const output = document.getElementById('translationOutput');
+            
+            if (result.error) {
+                showError(result.error);
+                return;
+            }
+
+            const typeClass = getTypeClass(result.type);
+            const typeName = getTypeName(result.type);
+
+            output.innerHTML = `
+                <div class="translation-result">
+                    <div class="translation-header">
+                        <span class="script-type ${typeClass}">${typeName}</span>
+                        </div>
+                    
+                    <div class="translation-text">
+                        <strong>Script original:</strong><br>
+                        <code style="color: #b19cd9; font-family: 'Courier New', monospace;">${result.original}</code>
+                        </div>
+                    
+                    <div class="translation-text">
+                        <strong>Traduction:</strong><br>
+                        ${result.translation}
+                        </div>
+                    
+                    ${Object.keys(result.details).length > 0 ? `
+                        <div class="translation-details">
+                            ${Object.entries(result.details).map(([key, value]) => `
+                                <div class="detail-item">
+                                    <div class="detail-label">${formatDetailLabel(key)}</div>
+                                    <div class="detail-value">${value}</div>
+                        </div>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        function showError(message) {
+            const output = document.getElementById('translationOutput');
+            output.innerHTML = `<div class="error">❌ ${message}</div>`;
+            }
+            
+        // Utilitaires
+        function getItemIcon(category, type) {
+            // Icônes spéciales pour les objets de Domburg
+            if (type === 'ANCHOR_LOCATION') return '🌑';
+            if (type === 'MINOR_ANCHOR_POINT') return '🌬️';
+            
+            // Icônes par catégorie
+            const icons = {
+                heroes: '⚔️',
+                artifacts: '🔮',
+                creatures: '🐉',
+                locations: '🏛️',
+                anchors: '⚓'
+            };
+            return icons[category] || '📦';
+        }
+
+        function getCategoryName(category) {
+            const names = {
+                heroes: 'Héros',
+                artifacts: 'Artefact',
+                creatures: 'Créature',
+                locations: 'Lieu',
+                anchors: 'Point d\'Ancrage'
+            };
+            return names[category] || category;
+        }
+
+        function getRarityClass(rarity) {
+            const classes = {
+                LEGENDARY: 'rarity-legendary',
+                LEGENDARY_FIXED: 'rarity-unique',
+                MYTHIC: 'rarity-mythic',
+                EPIC: 'rarity-epic',
+                RARE: 'rarity-rare',
+                'Unique': 'rarity-unique',
+                'Rare': 'rarity-rare'
+            };
+            return classes[rarity] || '';
+        }
+
+        function formatStatName(key) {
+            return key.replace(/_/g, ' ').toUpperCase();
+        }
+
+        function formatStatValue(value) {
+            if (typeof value === 'number') {
+                return value % 1 === 0 ? value : value.toFixed(1);
+            }
+            return value;
+        }
+
+        function getTypeClass(type) {
+            const classes = {
+                'temporal_psi_state': 'script-type',
+                'collapse': 'script-type',
+                'observation_trigger': 'script-type',
+                'hero_creation': 'script-type',
+                'movement': 'script-type',
+                'creation': 'script-type',
+                'usage': 'script-type'
+            };
+            return classes[type] || '';
+            }
+            
+        function getTypeName(type) {
+            const names = {
+                'temporal_psi_state': 'État Quantique',
+                'collapse': 'Collapse',
+                'observation_trigger': 'Trigger d\'Observation',
+                'hero_creation': 'Création Héros',
+                'movement': 'Mouvement',
+                'creation': 'Création',
+                'usage': 'Utilisation'
+            };
+            return names[type] || 'Inconnu';
+        }
+
+        function formatDetailLabel(key) {
+            return key.replace(/_/g, ' ').toUpperCase();
+        }
+
+        // Modal
+        function showItemDetails(itemId) {
+            const item = allItems.find(i => i.id === itemId);
+            if (!item) return;
+
+            const modal = document.getElementById('itemModal');
+            const content = document.getElementById('modalContent');
+            
+            content.innerHTML = createDetailedView(item);
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('itemModal').style.display = 'none';
+            }
+            
+        function createDetailedView(item) {
+            return `
+                <h2 style="color: #4ecdc4; margin-bottom: 20px;">${item.name}</h2>
+                <p style="color: #bdc3c7; margin-bottom: 20px;">${item.description}</p>
+                
+                ${item.stats ? `
+                    <h3 style="color: #4ecdc4; margin: 20px 0 10px 0;">📊 Statistiques</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 20px;">
+                        ${Object.entries(item.stats).map(([key, value]) => `
+                            <div style="background: rgba(78, 205, 196, 0.1); padding: 10px; border-radius: 8px; text-align: center;">
+                                <div style="font-size: 0.8rem; color: #4ecdc4; text-transform: uppercase;">${formatStatName(key)}</div>
+                                <div style="font-weight: bold; color: #e0e0e0;">${formatStatValue(value)}</div>
+                    </div>
+                        `).join('')}
+                    </div>
+                ` : ''}
+                
+                ${item.abilities ? `
+                    <h3 style="color: #4ecdc4; margin: 20px 0 10px 0;">⚡ Capacités</h3>
+                    ${Object.values(item.abilities).map(ability => `
+                        <div style="background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid #4ecdc4;">
+                            <div style="font-weight: bold; color: #4ecdc4; margin-bottom: 5px;">${ability.name}</div>
+                            <div style="color: #bdc3c7; margin-bottom: 10px;">${ability.description}</div>
+                            ${ability.cost ? `<div style="font-size: 0.9rem; color: #f39c12;">Coût: ${ability.cost}</div>` : ''}
+                        </div>
+                    `).join('')}
+                ` : ''}
+                
+                ${item.backstory ? `
+                    <h3 style="color: #4ecdc4; margin: 20px 0 10px 0;">📖 Histoire</h3>
+                    <div style="background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                        <p style="color: #bdc3c7; line-height: 1.6;">${item.backstory.origin}</p>
+                    </div>
+                ` : ''}
+                `;
+            }
+            
+        // Event listeners
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                renderCollection();
+            });
+        });
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            currentSearch = e.target.value;
+            renderCollection();
+        });
+
+        document.getElementById('itemModal').addEventListener('click', (e) => {
+            if (e.target.id === 'itemModal') {
+                closeModal();
+            }
+        });
+
+        // Script Translator Functions
+        let currentTranslationMode = 'all';
+
+        function setTranslationMode(mode) {
+            currentTranslationMode = mode;
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function loadTranslatorExample(script) {
+            document.getElementById('scriptTranslatorInput').value = script;
+            translateScriptUnified();
+        }
+
+        async function translateScriptUnified() {
+            const script = document.getElementById('scriptTranslatorInput').value.trim();
+            if (!script) {
+                alert('Veuillez entrer un script à traduire');
+                return;
+            }
+
+            const resultsGrid = document.getElementById('translationResults');
+            resultsGrid.innerHTML = '<div class="loading">🔮 Traduction en cours...</div>';
+            resultsGrid.style.display = 'block';
+            
+            try {
+                const response = await fetch('/api/collection/translate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        script: script,
+                        mode: currentTranslationMode
+                    })
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    displayUnifiedResults(result);
+                } else {
+                    showUnifiedError('Erreur: ' + result.error);
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                showUnifiedError('Erreur de connexion au serveur');
+            }
+        }
+
+        function displayUnifiedResults(result) {
+            const resultsGrid = document.getElementById('translationResults');
+            resultsGrid.innerHTML = '';
+
+            if (currentTranslationMode === 'all' || result.literary) {
+                addResultCard('literary', '📖 Traduction Littéraire', result.literary || result.translated);
+            }
+            
+            if (currentTranslationMode === 'all' || result.icons) {
+                addResultCard('icons', '🎨 Version Icônes', result.icons || result.translated);
+            }
+            
+            if (currentTranslationMode === 'all' || result.runes) {
+                addResultCard('runes', '🪬 Version Runes', result.runes || result.translated);
+            }
+
+            resultsGrid.style.display = 'grid';
+        }
+
+        function addResultCard(type, title, content) {
+            const resultsGrid = document.getElementById('translationResults');
+            const card = document.createElement('div');
+            card.className = `result-card ${type}`;
+            
+            card.innerHTML = `
+                <div class="result-title ${type}">${title}</div>
+                <div class="result-content">${content || 'Aucune traduction disponible'}</div>
+                `;
+            
+            resultsGrid.appendChild(card);
+        }
+
+        function showUnifiedError(message) {
+            const resultsGrid = document.getElementById('translationResults');
+            resultsGrid.innerHTML = `<div class="error">❌ ${message}</div>`;
+            }
+
+        function clearTranslatorInput() {
+            document.getElementById('scriptTranslatorInput').value = '';
+            document.getElementById('translationResults').style.display = 'none';
+        }
+
+        // Charger au démarrage
+        loadCollection();
+    </script>
+</body>
+</html> 

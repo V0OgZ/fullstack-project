@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# 🕰️ Heroes of Time - Hook Post-Commit pour Mise à Jour Automatique du Contexte
+# Ce script est exécuté automatiquement après chaque commit
+
+echo "🔄 Hook post-commit: Mise à jour du contexte Cursor..."
+
+# Vérifier si le script de mise à jour existe
+if [ -f "update-cursor-context.sh" ]; then
+    # Obtenir les informations du dernier commit
+    LAST_COMMIT_MSG=$(git log -1 --pretty=format:"%s")
+    LAST_COMMIT_FILES=$(git diff-tree --no-commit-id --name-only -r HEAD)
+    
+    echo "📝 Dernier commit: $LAST_COMMIT_MSG"
+    echo "📁 Fichiers modifiés: $LAST_COMMIT_FILES"
+    
+    # Analyser les types de changements et mettre à jour le contexte
+    if echo "$LAST_COMMIT_FILES" | grep -q "\.java$"; then
+        ./update-cursor-context.sh add-history "Modifications Java: $LAST_COMMIT_MSG"
+    elif echo "$LAST_COMMIT_FILES" | grep -q "pom\.xml"; then
+        ./update-cursor-context.sh add-history "Mise à jour Maven: $LAST_COMMIT_MSG"
+    elif echo "$LAST_COMMIT_FILES" | grep -q "TEMPORAL_ARTIFACTS\.json"; then
+        ./update-cursor-context.sh add-history "Artefacts temporels modifiés: $LAST_COMMIT_MSG"
+    elif echo "$LAST_COMMIT_FILES" | grep -q "\.md$"; then
+        ./update-cursor-context.sh add-history "Documentation mise à jour: $LAST_COMMIT_MSG"
+    else
+        ./update-cursor-context.sh add-history "Commit: $LAST_COMMIT_MSG"
+    fi
+    
+    echo "✅ Contexte Cursor mis à jour automatiquement"
+else
+    echo "⚠️  Script update-cursor-context.sh non trouvé"
+fi
+
+echo "🎮 Hook post-commit terminé"

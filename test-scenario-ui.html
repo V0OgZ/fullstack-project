@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Scénario UI</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .result { padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        button { padding: 10px 20px; margin: 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>🎮 Test Scénario UI Heroes of Time</h1>
+    <div id="results"></div>
+    
+    <button onclick="testAPI()">Test API</button>
+    <button onclick="testCreateHero()">Test Créer Héros</button>
+    <button onclick="testScenario()">Test Scénario Complet</button>
+    
+    <script>
+        const API_BASE = 'http://localhost:8080';
+        let gameId = 1;
+        
+        function addResult(message, isSuccess = true) {
+            const div = document.createElement('div');
+            div.className = 'result ' + (isSuccess ? 'success' : 'error');
+            div.textContent = message;
+            document.getElementById('results').appendChild(div);
+        }
+        
+        async function testAPI() {
+            try {
+                const response = await fetch(`${API_BASE}/api/temporal/health`);
+                const data = await response.json();
+                addResult('✅ API accessible: ' + data.status);
+            } catch (error) {
+                addResult('❌ API inaccessible: ' + error.message, false);
+            }
+        }
+        
+        async function testCreateHero() {
+            try {
+                const response = await fetch(`${API_BASE}/api/temporal/games/${gameId}/script`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ script: 'HERO(TestUIHero)' })
+                });
+                const data = await response.json();
+                addResult('✅ Héros créé: ' + data.message);
+            } catch (error) {
+                addResult('❌ Erreur création héros: ' + error.message, false);
+            }
+        }
+        
+        async function testScenario() {
+            try {
+                // Test complet
+                await testAPI();
+                await testCreateHero();
+                
+                // Test mouvement
+                const moveResponse = await fetch(`${API_BASE}/api/temporal/games/${gameId}/script`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ script: 'MOV(TestUIHero, @10,10)' })
+                });
+                const moveData = await moveResponse.json();
+                addResult('✅ Mouvement: ' + moveData.message);
+                
+                // Test ψ-state
+                const psiResponse = await fetch(`${API_BASE}/api/temporal/games/${gameId}/script`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ script: 'ψ999: ⊙(Δt+1 @15,15 ⟶ MOV(TestUIHero, @15,15))' })
+                });
+                const psiData = await psiResponse.json();
+                addResult('✅ ψ-state: ' + psiData.message);
+                
+                addResult('🎉 Scénario complet réussi!');
+            } catch (error) {
+                addResult('❌ Erreur scénario: ' + error.message, false);
+            }
+        }
+    </script>
+</body>
+</html>

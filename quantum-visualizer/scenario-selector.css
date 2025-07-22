@@ -1,0 +1,860 @@
+/**
+ * 🎨 Scenario Selector CSS - Heroes of Time
+ * 
+ * Modern, responsive design for the scenario selection interface
+ */
+
+/* ==================== MAIN CONTAINER ==================== */
+#scenario-selector {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.scenario-selector-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+}
+
+/* ==================== FILTERS ==================== */
+.scenario-filters {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.scenario-filters select {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: #e0e0e0;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    min-width: 200px;
+}
+
+.scenario-filters select:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.scenario-filters select:focus {
+    outline: none;
+    border-color: #4ecdc4;
+    box-shadow: 0 0 15px rgba(78, 205, 196, 0.3);
+}
+
+.scenario-filters select option {
+    background: #1a1a2e;
+    color: #e0e0e0;
+}
+
+/* ==================== SCENARIO GRID ==================== */
+.scenario-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* ==================== SCENARIO CARDS ==================== */
+.scenario-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.scenario-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.scenario-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.scenario-card:hover::before {
+    opacity: 1;
+}
+
+/* Difficulty-based styling */
+.scenario-card.intermediate {
+    border-color: rgba(33, 150, 243, 0.3);
+}
+
+.scenario-card.hard {
+    border-color: rgba(255, 152, 0, 0.3);
+}
+
+.scenario-card.expert {
+    border-color: rgba(244, 67, 54, 0.3);
+}
+
+.scenario-card.master {
+    border-color: rgba(156, 39, 176, 0.3);
+}
+
+.scenario-card.ultimate {
+    border-color: rgba(255, 87, 34, 0.5);
+    box-shadow: 0 0 15px rgba(255, 87, 34, 0.3);
+}
+
+/* ==================== CARD HEADER ==================== */
+.scenario-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.scenario-type-icon {
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scenario-difficulty {
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 0.25rem 0.75rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ==================== CARD CONTENT ==================== */
+.scenario-card-content {
+    margin-bottom: 1.5rem;
+}
+
+.scenario-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.scenario-description {
+    color: #b0b0b0;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.scenario-metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.scenario-meta-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.meta-label {
+    font-size: 0.8rem;
+    color: #888;
+    margin-bottom: 0.25rem;
+}
+
+.meta-value {
+    font-weight: bold;
+    color: #4ecdc4;
+    font-size: 0.9rem;
+}
+
+/* ==================== TAGS ==================== */
+.scenario-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.scenario-tag {
+    background: rgba(78, 205, 196, 0.2);
+    color: #4ecdc4;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid rgba(78, 205, 196, 0.3);
+}
+
+/* ==================== CARD ACTIONS ==================== */
+.scenario-card-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+}
+
+.scenario-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.scenario-btn-preview {
+    background: rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.scenario-btn-preview:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.scenario-btn-play {
+    background: linear-gradient(45deg, #4ecdc4, #45b7d1);
+    color: white;
+    border: 2px solid transparent;
+    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+}
+
+.scenario-btn-play:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.4);
+}
+
+/* ==================== MODAL STYLES ==================== */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    margin: 5% auto;
+    padding: 0;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.modal-close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: #fff;
+}
+
+.modal-body {
+    padding: 2rem;
+    color: #e0e0e0;
+}
+
+.modal-footer {
+    padding: 1.5rem 2rem;
+    border-top: 2px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.preview-section {
+    margin-bottom: 2rem;
+}
+
+.preview-section h3 {
+    color: #4ecdc4;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.preview-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.preview-section li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.preview-section li:last-child {
+    border-bottom: none;
+}
+
+.artifact-list, .creature-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.artifact-tag {
+    background: rgba(255, 193, 7, 0.2);
+    color: #ffc107;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.creature-tag {
+    background: rgba(233, 30, 99, 0.2);
+    color: #e91e63;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    border: 1px solid rgba(233, 30, 99, 0.3);
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 768px) {
+    .scenario-selector-title {
+        font-size: 2rem;
+    }
+    
+    .scenario-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .scenario-filters {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .scenario-filters select {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .scenario-card {
+        padding: 1rem;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 2% auto;
+    }
+    
+    .modal-body {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #scenario-selector {
+        padding: 1rem;
+    }
+    
+    .scenario-card-actions {
+        flex-direction: column;
+    }
+    
+    .scenario-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.scenario-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.scenario-card:nth-child(even) {
+    animation-delay: 0.1s;
+}
+
+.scenario-card:nth-child(odd) {
+    animation-delay: 0.2s;
+}
+
+/* ==================== LOADING STATES ==================== */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #4ecdc4;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ==================== SPECIAL EFFECTS ==================== */
+.scenario-card.ultimate::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #ff5722, #ff9800, #ff5722);
+    z-index: -1;
+    border-radius: 12px;
+    opacity: 0.7;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+} 
+
+/* ==================== SCENARIO INFO CARD ==================== */
+.scenario-info-card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateY(20px);
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    background: linear-gradient(135deg, #1a0a2e 0%, #16213e 50%, #0f3460 100%);
+    border: 2px solid rgba(78, 205, 196, 0.3);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px);
+    z-index: 1000;
+    opacity: 0;
+    transition: all 0.3s ease;
+    overflow-y: auto;
+}
+
+.scenario-info-card::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scenario-info-card::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.scenario-info-card::-webkit-scrollbar-thumb {
+    background: rgba(78, 205, 196, 0.5);
+    border-radius: 4px;
+}
+
+.info-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid rgba(78, 205, 196, 0.2);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 20px 20px 0 0;
+}
+
+.info-card-header h3 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #4ecdc4;
+    text-shadow: 0 0 20px rgba(78, 205, 196, 0.5);
+}
+
+.close-info-btn {
+    background: none;
+    border: none;
+    color: #e0e0e0;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-info-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ff6b6b;
+    transform: rotate(90deg);
+}
+
+.info-card-content {
+    padding: 2rem;
+}
+
+.info-section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    border: 1px solid rgba(78, 205, 196, 0.1);
+}
+
+.info-section h4 {
+    margin: 0 0 1rem 0;
+    color: #4ecdc4;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(78, 205, 196, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(78, 205, 196, 0.2);
+}
+
+.stat-icon {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.9rem;
+    color: #bdc3c7;
+    margin-bottom: 0.25rem;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #4ecdc4;
+}
+
+.game-mode-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.mode-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-align: center;
+    max-width: fit-content;
+}
+
+.mode-badge.multiplayer {
+    background: linear-gradient(45deg, #4ecdc4, #45b7d1);
+    color: #1a0a2e;
+    box-shadow: 0 0 20px rgba(78, 205, 196, 0.3);
+}
+
+.mode-badge.async {
+    background: linear-gradient(45deg, #9b59b6, #8e44ad);
+    color: white;
+    box-shadow: 0 0 20px rgba(155, 89, 182, 0.3);
+}
+
+.mode-description {
+    margin: 0;
+    color: #bdc3c7;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.complexity-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.complexity-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-align: center;
+    max-width: fit-content;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid currentColor;
+}
+
+.heroes-list, .artifacts-list, .features-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.hero-tag, .artifact-tag, .feature-tag {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    background: rgba(78, 205, 196, 0.2);
+    border: 1px solid rgba(78, 205, 196, 0.3);
+    color: #4ecdc4;
+    transition: all 0.3s ease;
+}
+
+.hero-tag:hover, .artifact-tag:hover, .feature-tag:hover {
+    background: rgba(78, 205, 196, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(78, 205, 196, 0.2);
+}
+
+.estimation-info p {
+    margin: 0.5rem 0;
+    color: #bdc3c7;
+}
+
+.estimation-info strong {
+    color: #4ecdc4;
+}
+
+.info-card-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    padding: 1.5rem 2rem;
+    border-top: 1px solid rgba(78, 205, 196, 0.2);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 0 0 20px 20px;
+}
+
+.action-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 150px;
+}
+
+.action-btn.primary {
+    background: linear-gradient(45deg, #4ecdc4, #45b7d1);
+    color: #1a0a2e;
+    box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
+}
+
+.action-btn.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(78, 205, 196, 0.4);
+}
+
+.action-btn.secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.action-btn.secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Responsive design for info card */
+@media (max-width: 768px) {
+    .scenario-info-card {
+        width: 95%;
+        max-height: 95vh;
+    }
+    
+    .info-card-header {
+        padding: 1rem 1.5rem;
+    }
+    
+    .info-card-header h3 {
+        font-size: 1.5rem;
+    }
+    
+    .info-card-content {
+        padding: 1.5rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .info-card-actions {
+        flex-direction: column;
+        padding: 1rem 1.5rem;
+    }
+    
+    .action-btn {
+        width: 100%;
+    }
+}
+
+/* ==================== SCENARIO MESSAGES ==================== */
+.scenario-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    max-width: 400px;
+    background: linear-gradient(135deg, #1a0a2e 0%, #16213e 100%);
+    border: 2px solid rgba(78, 205, 196, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    z-index: 1001;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.scenario-message.success {
+    border-color: rgba(46, 204, 113, 0.5);
+    background: linear-gradient(135deg, #0a2e1a 0%, #162e1a 100%);
+}
+
+.scenario-message.warning {
+    border-color: rgba(243, 156, 18, 0.5);
+    background: linear-gradient(135deg, #2e1a0a 0%, #2e2616 100%);
+}
+
+.scenario-message.error {
+    border-color: rgba(231, 76, 60, 0.5);
+    background: linear-gradient(135deg, #2e0a0a 0%, #2e1616 100%);
+}
+
+.message-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+}
+
+.message-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.message-text {
+    color: #e0e0e0;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    flex-grow: 1;
+}
+
+.message-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    color: #bdc3c7;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.message-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ff6b6b;
+}
+
+/* Responsive design for messages */
+@media (max-width: 768px) {
+    .scenario-message {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+}
