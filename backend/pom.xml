@@ -8,11 +8,11 @@
 		<version>2.7.18</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>demo</artifactId>
+	<groupId>com.heroesoftimepoc</groupId>
+	<artifactId>temporal-engine</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
+	<name>temporal-engine</name>
+	<description>Heroes of Time - Temporal Engine with Quantum Grammar Parsing</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
