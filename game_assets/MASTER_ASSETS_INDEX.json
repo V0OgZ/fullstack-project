@@ -30,23 +30,24 @@
       "status": "EXISTING",
       "description": "Héros temporels extraits précédemment incluant Anna the Martopicker"
     },
-    "narrative_architects": {
-      "location": "game_assets/heroes/anthor-le-fordien.json",
+    "cosmic_heroes": {
+      "location": "game_assets/heroes/cosmic/cosmic-heroes.json",
       "count": 1,
-      "status": "COSMIC_FORGED", 
-      "description": "Architectes narratifs capables de manipuler la réalité même des jeux",
+      "status": "FORMAT_CORRECTED", 
+      "description": "Héros cosmiques avec pouvoirs de manipulation de réalité - Format aligné avec standard",
       "heroes": [
         {
           "id": "anthor-le-fordien",
           "name": "Anthor le Fordien",
-          "level": 50,
+          "race": "Host_Creator",
           "class": "Narrative_Architect",
+          "level": 50,
           "origin": "The Maze (Westworld)",
           "rarity": "COSMIC",
           "abilities": ["REWRITE_NARRATIVE", "MODIFY_TIMELINE", "CREATE_HOST", "ERASE_MEMORY", "GOD_MODE_PROTOCOL"],
           "unlock_condition": "Cosmic Chaos Resolution artifact usage",
           "legendary_quotes": ["These violent delights have violent ends.", "You think this is a game? It is. And I wrote the rules."],
-          "ford_integration": "Complete Westworld consciousness transfer successful"
+          "format_fixes": ["spellPower (camelCase)", "manaCost (camelCase)", "movementPoints (camelCase)", "race/gender ajoutés", "specialAbility/ultimateSkill standards"]
         }
       ]
     }
