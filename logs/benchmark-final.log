@@ -1,0 +1,14 @@
+📊 BENCHMARK SYSTÈME UNIFIÉ - HEROES OF TIME
+=============================================
+🎯 Objectif : Identifier les goulots d'étranglement de performance
+
+🔍 Phase 1: Benchmark Parser Regex
+==================================
+📋 Test scripts simples...
+✅ Scripts simples: 487 operations regex/seconde
+📋 Test scripts quantiques...
+✅ Scripts quantiques: 466 operations regex/seconde
+
+🧮 Phase 2: Benchmark Calculs Quantiques
+========================================
+📋 Test calculs de probabilités...

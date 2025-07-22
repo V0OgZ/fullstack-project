@@ -31,6 +31,17 @@ export class RetroKonamiManager {
       }
     });
 
+    // Code Forge Runique - CADEAU DE JEAN ⚡
+    this.addCode({
+      name: 'FORGE_RUNIQUE_1111',
+      sequence: ['Digit1', 'Digit1', 'Digit1', 'Digit1'],
+      description: '⚡ CADEAU DE JEAN: Active la Forge Runique Ultime - Le trésor secret!',
+      callback: () => {
+        console.log('🔨⚡ FORGE RUNIQUE ULTIME ACTIVÉE! Cadeau de Jean déverrouillé!');
+        this.triggerForgeRuniqueMode();
+      }
+    });
+
     // Code Fulgorocursor (terrain effect)
     this.addCode({
       name: 'FULGOROCURSOR',
@@ -123,6 +134,60 @@ export class RetroKonamiManager {
       detail: { message: 'GOLDORAK GO! FULGOROCURSOR READY!' }
     });
     window.dispatchEvent(event);
+  }
+
+  private triggerForgeRuniqueMode() {
+    // 🔨⚡ FORGE RUNIQUE ULTIME - CADEAU DE JEAN ⚡🔨
+    console.log('🎉 TRÉSOR DÉVERROUILLÉ! Jean te fait un cadeau spécial!');
+    
+    // Déclencher l'événement custom pour la Forge Runique
+    const event = new CustomEvent('forge-runique-activated', {
+      detail: { 
+        message: '⚡ FORGE RUNIQUE ULTIME ACTIVÉE! Cadeau de Jean déverrouillé!',
+        artifacts: ['temporal_hammer', 'reality_core', 'quantum_anvil'],
+        effects: ['golden_sparks', 'temporal_energy', 'runic_glyphs'],
+        duration: 30000 // 30 secondes d'effet
+      }
+    });
+    window.dispatchEvent(event);
+
+    // Appliquer les effets visuels de la forge
+    document.body.classList.add('forge-runique-active');
+    setTimeout(() => {
+      document.body.classList.remove('forge-runique-active');
+      console.log('🔨 Forge Runique désactivée. Le trésor reste dans ton inventaire!');
+    }, 30000);
+
+    // Afficher un message spécial de Jean
+    const notification = document.createElement('div');
+    notification.innerHTML = `
+      <div style="
+        position: fixed; 
+        top: 50%; 
+        left: 50%; 
+        transform: translate(-50%, -50%);
+        background: linear-gradient(45deg, #FFD700, #FFA500);
+        color: #8B4513;
+        padding: 20px;
+        border-radius: 15px;
+        border: 3px solid #B8860B;
+        z-index: 9999;
+        font-family: 'Cinzel', serif;
+        text-align: center;
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+        animation: forge-glow 2s ease-in-out infinite alternate;
+      ">
+        <h2 style="margin: 0; font-size: 24px;">🎁 CADEAU DE JEAN!</h2>
+        <p style="margin: 10px 0; font-size: 18px;">⚡ FORGE RUNIQUE ULTIME DÉVERROUILLÉE ⚡</p>
+        <p style="margin: 5px 0; font-size: 14px;">🔨 Tu peux maintenant forger des artefacts temporels!</p>
+        <p style="margin: 5px 0; font-size: 12px; opacity: 0.8;">Code secret: 1111</p>
+      </div>
+    `;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      document.body.removeChild(notification);
+    }, 5000);
   }
 
   private triggerTerrainEffects() {
@@ -236,6 +301,63 @@ export const RETRO_EFFECTS_CSS = `
     0%, 100% { opacity: 1; }
     98% { opacity: 1; }
     99% { opacity: 0.98; }
+  }
+
+  /* 🔨⚡ FORGE RUNIQUE ULTIME - CADEAU DE JEAN ⚡🔨 */
+  .forge-runique-active {
+    animation: forge-energy 1s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 20px #FFD700);
+  }
+  
+  @keyframes forge-energy {
+    0% { 
+      filter: brightness(1) saturate(1) drop-shadow(0 0 10px #FFD700);
+    }
+    100% { 
+      filter: brightness(1.3) saturate(1.5) drop-shadow(0 0 30px #FFA500) drop-shadow(0 0 60px #FF8C00);
+    }
+  }
+
+  @keyframes forge-glow {
+    0% { 
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+      transform: translate(-50%, -50%) scale(1);
+    }
+    100% { 
+      box-shadow: 0 0 40px rgba(255, 165, 0, 0.9);
+      transform: translate(-50%, -50%) scale(1.02);
+    }
+  }
+
+  /* Effet particules dorées pour la forge */
+  .forge-runique-active::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      radial-gradient(2px 2px at 20px 30px, #FFD700, transparent),
+      radial-gradient(2px 2px at 40px 70px, #FFA500, transparent),
+      radial-gradient(1px 1px at 90px 40px, #FF8C00, transparent),
+      radial-gradient(1px 1px at 130px 80px, #FFD700, transparent),
+      radial-gradient(2px 2px at 160px 30px, #FFA500, transparent);
+    background-size: 200px 100px;
+    animation: forge-particles 3s linear infinite;
+    pointer-events: none;
+    z-index: 9997;
+  }
+
+  @keyframes forge-particles {
+    0% { 
+      background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+      opacity: 1;
+    }
+    100% { 
+      background-position: 100% -100%, -100% 100%, 100% -100%, -100% 100%, 100% -100%;
+      opacity: 0.3;
+    }
   }
 `;
 
