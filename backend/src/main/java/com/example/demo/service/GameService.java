@@ -1256,4 +1256,38 @@ public class GameService {
     public List<Map<String, Object>> getGameHistory(String gameId) {
         return new ArrayList<>();
     }
+    
+    // ======================
+    // PERSISTENCE SUPPORT
+    // ======================
+    
+    public void replaceGameState(String gameId, Map<String, Object> newGameState) {
+        // Replace the entire game state with loaded save
+        games.put(gameId, newGameState);
+        
+        // Update game state service
+        com.example.demo.model.GameState gameState = gameStateService.getOrCreateGameState(gameId);
+        
+        // Update game state fields from loaded data
+        Integer turn = (Integer) newGameState.get("turn");
+        if (turn == null) {
+            turn = (Integer) newGameState.get("currentTurn");
+        }
+        if (turn != null) {
+            gameState.setCurrentTurn(turn);
+        }
+        
+        String currentPlayerId = (String) newGameState.get("currentPlayerId");
+        if (currentPlayerId != null) {
+            gameState.setCurrentPlayerId(currentPlayerId);
+        }
+        
+        String status = (String) newGameState.get("status");
+        if (status != null) {
+            gameState.setGameStatus(status);
+        }
+        
+        // Save updated game state
+        gameStateService.updateGameState(gameState);
+    }
 } 

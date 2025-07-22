@@ -84,6 +84,16 @@ show_help() {
     echo -e "  ${CYAN}./hots editor${NC}            # 🎨 Lance l'éditeur visuel"
     echo -e "  ${CYAN}./hots vince${NC}             # 🔫 Nettoie les process lents (animation ROFL)"
     echo -e "  ${CYAN}./hots walter${NC}            # 🎳 Protection backend Anti-Vince"
+    echo ""
+    echo -e "${PURPLE}💾 Commandes de Persistence:${NC}"
+    echo -e "  ${GREEN}save${NC} <nom> [game_id] [player]  Sauvegarder la partie"
+    echo -e "  ${GREEN}load${NC} <id> [player]            Charger une sauvegarde"
+    echo -e "  ${GREEN}list-saves${NC} [player]           Lister les sauvegardes"
+    echo ""
+    echo -e "${YELLOW}Exemples persistence:${NC}"
+    echo -e "  ${CYAN}./hots save ma-partie${NC}        # Sauvegarder la partie courante"
+    echo -e "  ${CYAN}./hots load 1${NC}                # Charger la sauvegarde ID 1"
+    echo -e "  ${CYAN}./hots list-saves${NC}            # Voir toutes les sauvegardes"
 }
 
 check_services() {
@@ -1306,6 +1316,90 @@ case "${1:-help}" in
         else
             echo -e "${RED}❌ Script walter-anti-vince-protocol.sh non trouvé ou non exécutable${NC}"
             echo -e "${YELLOW}💡 Vérifiez scripts/walter-anti-vince-protocol.sh${NC}"
+        fi
+        ;;
+    "save")
+        # Sauvegarde manuelle
+        if [ -z "$2" ]; then
+            echo -e "${RED}❌ Nom de sauvegarde requis${NC}"
+            echo -e "${YELLOW}Usage: ./hots save <nom_sauvegarde> [game_id] [player_id]${NC}"
+            exit 1
+        fi
+        
+        SAVE_NAME="$2"
+        GAME_ID="${3:-1}"
+        PLAYER_ID="${4:-player1}"
+        
+        echo -e "${BLUE}💾 Sauvegarde de la partie...${NC}"
+        RESPONSE=$(curl -s -X POST "http://localhost:8080/api/persistence/games/$GAME_ID/save" \
+            -H "Content-Type: application/json" \
+            -d "{\"playerId\": \"$PLAYER_ID\", \"saveName\": \"$SAVE_NAME\", \"description\": \"Sauvegarde manuelle\"}")
+        
+        if echo "$RESPONSE" | jq -e '.success == true' > /dev/null 2>&1; then
+            echo -e "${GREEN}✅ Partie sauvegardée: $SAVE_NAME${NC}"
+            echo "$RESPONSE" | jq -r '.message'
+        else
+            echo -e "${RED}❌ Erreur sauvegarde${NC}"
+            echo "$RESPONSE" | jq -r '.error // "Erreur inconnue"'
+        fi
+        ;;
+    "load")
+        # Charger une sauvegarde
+        if [ -z "$2" ]; then
+            echo -e "${RED}❌ ID ou nom de sauvegarde requis${NC}"
+            echo -e "${YELLOW}Usage: ./hots load <save_id_ou_nom> [player_id]${NC}"
+            exit 1
+        fi
+        
+        SAVE_ID="$2"
+        PLAYER_ID="${3:-player1}"
+        
+        echo -e "${BLUE}📂 Chargement de la sauvegarde...${NC}"
+        
+        # Si c'est un nombre, charger par ID
+        if [[ "$SAVE_ID" =~ ^[0-9]+$ ]]; then
+            RESPONSE=$(curl -s -X POST "http://localhost:8080/api/persistence/saves/$SAVE_ID/load" \
+                -H "Content-Type: application/json" \
+                -d "{\"playerId\": \"$PLAYER_ID\"}")
+        else
+            # Sinon, chercher par nom (à implémenter côté backend si nécessaire)
+            echo -e "${YELLOW}⚠️  Chargement par nom non encore implémenté${NC}"
+            echo -e "${YELLOW}💡 Utilisez './hots list-saves' pour voir les IDs${NC}"
+            exit 1
+        fi
+        
+        if echo "$RESPONSE" | jq -e '.success == true' > /dev/null 2>&1; then
+            echo -e "${GREEN}✅ Partie chargée avec succès${NC}"
+            echo "$RESPONSE" | jq -r '.message'
+        else
+            echo -e "${RED}❌ Erreur chargement${NC}"
+            echo "$RESPONSE" | jq -r '.error // "Erreur inconnue"'
+        fi
+        ;;
+    "list-saves")
+        # Lister les sauvegardes
+        PLAYER_ID="${2:-player1}"
+        
+        echo -e "${BLUE}📋 Liste des sauvegardes pour $PLAYER_ID:${NC}"
+        echo ""
+        
+        RESPONSE=$(curl -s "http://localhost:8080/api/persistence/saves?playerId=$PLAYER_ID")
+        
+        if echo "$RESPONSE" | jq -e '.success == true' > /dev/null 2>&1; then
+            COUNT=$(echo "$RESPONSE" | jq -r '.count')
+            echo -e "${GREEN}✅ $COUNT sauvegarde(s) trouvée(s)${NC}"
+            echo ""
+            
+            echo "$RESPONSE" | jq -r '.saves[] | 
+                "ID: \(.id) | \(.saveName)" +
+                "\n  Tour: \(.turnNumber) | " +
+                (if .isAutoSave then "🔄 Auto-save" else "💾 Manuelle" end) +
+                "\n  Créée: \(.createdAt) | Dernière: \(.lastPlayedAt)" +
+                "\n  " + (.description // "Pas de description") +
+                "\n"'
+        else
+            echo -e "${RED}❌ Erreur récupération sauvegardes${NC}"
+            echo "$RESPONSE" | jq -r '.error // "Erreur inconnue"'
         fi
         ;;
     "help"|*)
