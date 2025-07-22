@@ -6,18 +6,30 @@
 
 ### ⚡ **Lancement de l'Application**
 ```bash
-./start-app.sh              # Démarre Backend (8080) + Frontend (3000)
-./stop-app.sh               # Arrête tous les services
-./test-app.sh               # Tests rapides
+./hots start                 # 🎮 SCRIPT PRINCIPAL - Démarre Backend (8080) + Frontend (8000) + Dashboard (9000)
+./hots stop                  # Arrête tous les services
+./hots test quick            # Tests rapides
+./hots test final            # Tests complets
 ./run-epic-demo.sh          # 🆕 Démo du système épique
 ./test-backend-gameplay.sh  # 🆕 Test complet des actions backend
 ```
 
 ### 🎯 **URLs Importantes**
-- **Frontend**: http://localhost:3000
+- **Frontend**: http://localhost:8000 ✨ (Temporal Engine)
 - **Backend**: http://localhost:8080
-- **API Health**: http://localhost:8080/actuator/health
+- **Dashboard**: http://localhost:9000
+- **API Health**: http://localhost:8080/api/health
 - **H2 Database**: http://localhost:8080/h2-console
+
+### 🎯 **NEW: Nikita Victor Nettoyeur - Hero Testing**
+```bash
+# Test des pouvoirs temporels
+curl -s "http://localhost:8080/api/games" -X POST -H "Content-Type: application/json" \
+  -d '{"scenarioId": "conquest-classic", "playerCount": 1}'
+  
+# Test de la capacité Vision Causale
+# Formule quantique: ψ{Nikita} = OBSERVE[lunette_quantique] ⊗ PIERCE[brouillard_causal] ⇒ TARGET_LOCK
+```
 
 ---
 

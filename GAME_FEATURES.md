@@ -51,6 +51,7 @@
 - **⚔️ Arthur Pendragon** - Excalibur sword, Round Table ultimate
 - **🛡️ Jeanne d'Arc** - Divine inspiration, purifying flame
 - **🧙‍♂️ Merlin l'Enchanteur** - Primordial magic, dragon transformation
+- **🎯 Nikita Victor Nettoyeur** - 🆕 Temporal sniper, Vision Causale (pierce fog of causality)
 
 **Elven Heroes**:
 - **🏹 Legolas Feuille-Verte** - Perfect aim, elven arrow rain
@@ -87,6 +88,39 @@
 - **Rich Descriptions** - Lore and backstory for each character
 - **Visual Gallery** - High-quality artwork and animations
 - **Search & Filter** - Browse by race, tier, or abilities
+
+---
+
+## 🔮 **NEW: Quantum Hero System (2025)**
+
+### ⚡ **Temporal Abilities Framework**
+**Advanced hero powers with quantum formulas**
+
+**🎯 Nikita Victor Nettoyeur - Temporal Sniper**:
+- **Role**: Tireur d'Élite Temporel
+- **Faction**: Corps des Nettoyeurs Temporels  
+- **Rarity**: Commune (perfect for beginners)
+
+**🔮 Quantum Formula**:
+```
+ψ{Nikita} = OBSERVE[lunette_quantique] ⊗ PIERCE[brouillard_causal] ⇒ TARGET_LOCK
+```
+
+**⚡ Abilities**:
+- **Vision Causale (Passive)**: Can see and shoot through causality fog
+- **Quantum Script**: `PIERCE[fog_of_causality] ⇒ REVEAL(enemy.position) ∧ IGNORE[visibility_penalty]`
+- **Equipment**: Lunette Quantique MK-VII, Combinaison Anti-Paradoxe
+
+**📊 Balanced Stats for Beginners**:
+- Attack: 12, Defense: 8, Health: 85
+- Vision Range: 8, Attack Range: 6
+- Perfect for learning game mechanics
+
+**🎮 How It Works**:
+1. **Frontend**: Player activates ability through TrueHeroesInterface
+2. **Parser**: Quantum formula is processed by backend engine
+3. **Engine**: Temporal effects applied to game state
+4. **Result**: Enemy positions revealed through causality mist
 
 ---
 
