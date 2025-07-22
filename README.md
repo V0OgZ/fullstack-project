@@ -4,6 +4,36 @@
 
 **Heroes of Time** is a next-generation strategy game that redefines the genre by introducing **asynchronous multiplayer** with **Temporal Causality Zones (ZFC)** - where time itself becomes a strategic resource. Players can take turns at their own pace while the game's innovative temporal mechanics create unique strategic depth.
 
+## ⚡ **La Rencontre Épique**
+
+**L'Œil de Wigner** scintille au sommet de la tour en ruines. Arthur s'approche prudemment - cet artefact légendaire peut forcer l'effondrement de la réalité elle-même.
+
+*"Sire, ne le touchez pas !"* crie Lysandrel depuis la vallée. *"Si vous l'activez maintenant, toutes nos actions futures deviendront réelles instantanément !"*
+Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront submergés. Il n'a qu'un choix : saisir l'Œil et **forcer le collapse causal**.
+
+**📜 Advanced Script Language:**
+- **Unicode Symbols**: ψ (psi-state), † (collapse), ⊙ (superposition), Π (observation)
+- **5D Coordinates**: Navigate space (x,y,z) and time (timeline, temporal layer)
+- **Probability System**: Actions have success chances affected by artifacts and positioning
+
+## 🎮 **Le Jeu**
+
+**Heroes of Time** est un jeu de stratégie temporelle où vos héros peuvent :
+
+- **⏰ Voyager dans le temps** pour modifier leurs actions passées
+- **🌌 Créer des branches temporelles** avec des probabilités quantiques  
+- **⚔️ Combattre à travers les époques** avec des artefacts légendaires
+- **🔮 Manipuler la causalité** pour changer le cours de l'histoire
+
+### 🎯 **Mécaniques Uniques**
+
+- **États Psi (ψ)** : Vos actions futures existent en superposition quantique
+- **Collapse Causal** : Forcez la réalité à choisir une branche temporelle
+- **Artefacts Temporels** : Équipements qui affectent le flux du temps
+- **Bataille Multi-Temporelle** : Combats simultanés à travers plusieurs époques
+
+---
+
 ## 🌟 **What Makes This Revolutionary?**
 
 ### ⏰ **Asynchronous Multiplayer**
