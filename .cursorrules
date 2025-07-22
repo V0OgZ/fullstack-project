@@ -50,106 +50,92 @@ Before making any changes or debugging, ALWAYS:
 - Museum Archive Master - Temple de créations communes
 - Paradoxe: Memento peut oublier Jean, mais Jean se souvient toujours
 
-## 🔥 CRITICAL: ALWAYS BUILD FIRST!
+## 🔥 CRITICAL: Frontend = Temporal Engine Interface!
 
-**MANDATORY WORKFLOW - NEVER SKIP:**
-1. **FIRST COMMAND**: `cd frontend && yarn build` - ALWAYS verify build works
-2. **IF BUILD FAILS**: Fix TypeScript/React errors before proceeding
-3. **THEN**: Run demos, tests, or start servers
-4. **NEVER**: Run tests or demos without successful build first
-
-**Build Status Required:**
-- ✅ Build successful with warnings = OK to proceed
-- ❌ Build failed with errors = STOP, fix compilation errors first
+**LE VRAI FRONTEND (Port 8000):**
+- **Interface Temporal Engine** - HTML/CSS/JS simple servi par Python http.server
+- **Boutons essentiels**: 🎮 New Game, 🏛️ Ville, ⚔️ Combat, 👤 Héros, 🚬 Joint Magique
+- **PAS une app React** - C'est du HTML/CSS/JS vanilla pour simplicité
+- **Objectif**: Moteur fonctionnel, pas beauté graphique
 
 ## 🎯 Current Project State (July 2025):
-- **Status**: ✅ FULLY FUNCTIONAL with polished UI
+- **Status**: ✅ FULLY FUNCTIONAL - Moteur de jeu stable
 - **Backend**: Spring Boot (Java) on port 8080 - STABLE
-- **Frontend**: React TypeScript on port 8000 - MODERN INTERFACE
+- **Frontend**: Interface Temporal Engine HTML/CSS/JS on port 8000 - SIMPLE & FUNCTIONAL
 - **Database**: H2 in-memory - WORKING
-- **Tests**: Playwright E2E demos - PASSING
+- **Language**: HOTS scripting system avec CODEX complet
 
 ## 🔧 Essential Scripts (ALL WORKING):
 - `./hots start` - Script principal de contrôle (1313 lignes) - Start tous les services
 - `./stop-app.sh` - Stop all services cleanly
 - `./test-app.sh` - Quick tests
 - `./run-epic-demo.sh` - Epic content demos
-- Demos: `cd frontend && npx playwright test tests/e2e/gameplay-demo.spec.ts --headed`
 
-## 🎮 Main Interface (TrueHeroesInterface.tsx):
-- **Right Panel System**: Dynamic content switching (scenario/hero/inventory/castle/epic)
-- **Header Controls**: Polished buttons without borders, fantasy icons
-- **Hero System**: Cycling, selection, real images with fallbacks
-- **Turn System**: End turn with ⭐ icon - STABLE
-- **Tooltips**: Both game and demo tooltips - PERFECT
-- **Epic Content Viewer**: Assets integration with 4 tabs (Heroes, Creatures, Buildings, Artifacts)
-- **Dark Fantasy Theme**: Improved readability with The Dude & Jean-Grofignon style
+## 🎮 Main Interface (Temporal Engine - Port 8000):
+- **Simple HTML/CSS/JS** - Pas de framework complexe
+- **Boutons principaux**: New Game, Ville, Combat, Héros, Joint Magique
+- **API connectée** au backend Spring Boot (port 8080)
+- **Scripts HOTS** - Langage quantique temporel avec états ψ
 
-## 🌍 Internationalization:
-- **i18n System**: Complete FR/EN/RU support in `frontend/src/i18n/index.ts`
-- **Demo Tooltips**: Fully internationalized with translation keys
-- **Pattern**: Use `useTranslation()` hook and `t('key.name')`
-
-## 🎨 UI/UX Standards:
-- **Button Design**: No borders, hover effects, icon-only
-- **Tooltips**: Clean appearance, no bouncing animations
-- **Assets**: Hero images in `/public/assets/heroes/` with smart fallbacks
-- **Theme**: Gold medieval fantasy with modern touches, dark fantasy readability
+## 🌟 SYSTÈME HOTS - Langage Quantique Temporel:
+- **Symboles**: ψ (Psi-State), ⊙ (Superposition), † (Collapse), Π (Observation)
+- **Commandes**: HERO(), MOV(), CREATE(), USE(), BATTLE()
+- **États quantiques**: `ψ001: ⊙(Δt+2 @15,15 ⟶ MOV(Arthur, @15,15))`
+- **Service de traduction**: HOTS → Texte littéraire/Icônes/Runes
+- **Documentation complète**: `docs/CODEX_COMPLET_HEROES_OF_TIME.md`
 
 ## 🏗️ Architecture:
 ```
-Backend (Port 8080): Spring Boot + H2 Database + Epic Content
-├── com.example.demo package (REAL CURRENT STRUCTURE)
-├── Controllers: GameController, ScenarioController, AIController, MultiplayerController, EpicContentController
+Backend (Port 8080): Spring Boot + H2 Database
+├── com.example.demo package
+├── Controllers: GameController, ScenarioController, AIController, MultiplayerController
 ├── Services: GameService, ScenarioService, AIService, MultiplayerService
 ├── Models: GameState, Scenario, Unit, Building, AIPlayer
 └── Repository: JPA entities with H2 database
 
-Frontend (Port 8000): React TypeScript + Epic Assets
-├── TrueHeroesInterface.tsx (main game UI + Epic panel)
-├── EpicContentViewer.tsx (asset viewer with 4 tabs)
-├── ModernGameRenderer.tsx (map rendering)
-├── useGameStore.ts (state management)
-├── i18n/ (internationalization)
-└── translation-service.js (HOTS → Literary text conversion)
+Frontend (Port 8000): Interface Temporal Engine HTML/CSS/JS
+├── index.html (interface principale)
+├── game.js (logique du jeu)
+├── api.js (connexion backend)
+├── temporal-engine.js (moteur temporel)
+└── Translation Service (HOTS → Literary text)
+
+Services Additionnels:
+├── Dashboard (Port 9000)
+├── Interface Temporelle (Port 5174)
+├── Quantum Visualizer (Port 8001)
+├── Collection & Grammar (Port 5175)
+└── Test Runner (Port 8888)
 ```
 
 ## 🚀 Quick Development Workflow:
-1. `./hots start` - Start development environment (Backend 8080 + Frontend 8000 + Dashboard 9000)
-2. Open http://localhost:8000 - Test UI manually
-3. `cd frontend && yarn build` - ALWAYS build first to check compilation
-4. `cd frontend && npx playwright test --headed` - Run visual tests
-5. Check `DEVELOPER_INSTRUCTIONS.md` for detailed guidance
+1. `./hots start` - Start tous les services
+2. Open http://localhost:8000 - Interface Temporal Engine
+3. Utiliser les boutons pour interagir avec le jeu
+4. Scripts HOTS dans le terminal de jeu
 
 ## 🛠️ Key Files to Remember:
 - `DEVELOPER_INSTRUCTIONS.md` - Complete technical documentation
-- `TrueHeroesInterface.tsx` - Main game interface with Epic integration
-- `EpicContentViewer.tsx` - Asset viewer component
-- `gameAssets.ts` - Hero image mappings  
-- `i18n/index.ts` - All translations
-- `translation-service.js` - HOTS → Literary translation (9 script types)
-- `gameplay-demo.spec.ts` - Main demo test
+- `frontend/index.html` - Interface Temporal Engine principale
+- `frontend/api.js` - Connexion au backend
+- `frontend/game.js` - Logique du jeu
+- `docs/CODEX_COMPLET_HEROES_OF_TIME.md` - Documentation système HOTS
 - `game_assets/MASTER_ASSETS_INDEX.json` - Complete asset catalog
 
 ## ⚡ Current Capabilities:
-- ✅ Solo gameplay fully functional
-- ✅ Hero management with real images
-- ✅ Epic Content integration with 57 assets catalogued
-- ✅ Asset viewer with Heroes, Creatures, Buildings, Artifacts tabs
-- ✅ HOTS → Literary Translation Service (9 script types with fallbacks)
-- ✅ Dynamic panels with content switching
-- ✅ Internationalized tooltips system
-- ✅ Dark fantasy theme with improved readability
-- ✅ Stable turn system and game flow
-- ✅ Beautiful automated demos
-- ✅ Backend fully cleaned (old POC conflicts resolved)
+- ✅ Interface Temporal Engine fonctionnelle
+- ✅ Backend Spring Boot stable avec tous les endpoints
+- ✅ Système HOTS complet avec états quantiques
+- ✅ 83 assets épiques catalogués (héros, créatures, bâtiments, artefacts)
+- ✅ Service de traduction HOTS → Texte littéraire
+- ✅ Dashboard de monitoring sur port 9000
+- ✅ Multiples interfaces pour différents aspects du jeu
 
 ## 🚨 Remember:
-- **USE** `./hots start` as primary control (Backend 8080 + Frontend 8000 + Dashboard 9000)
-- **FRONTEND** is on port 8000 (not 3000 or other ports)
+- **USE** `./hots start` as primary control
+- **FRONTEND** is on port 8000 - Interface Temporal Engine simple HTML/CSS/JS
+- **NOT React** - C'est du vanilla JS pour simplicité
+- **HOTS SCRIPTS** - Utiliser le langage quantique temporel documenté
 - **NEVER** recreate existing functionality  
-- **ALWAYS** check `DEVELOPER_INSTRUCTIONS.md` first
-- **USE** existing patterns and components
-- **TEST** with Playwright demos before committing
-- **FOLLOW** established UI/UX guidelines
-- **TRANSLATION SERVICE**: Use `TranslationService` for HOTS scripts → literary text 
+- **ALWAYS** check documentation first
+- **FOCUS** sur moteur fonctionnel, pas beauté graphique 
