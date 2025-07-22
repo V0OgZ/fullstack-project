@@ -14,7 +14,7 @@
 Before making any changes or debugging, ALWAYS:
 1. Check `DOCS_INDEX.md` for complete documentation navigation
 2. Read `DEVELOPER_INSTRUCTIONS.md` for current status and existing scripts
-3. Do NOT recreate existing scripts (./hots, ./start-app.sh, ./stop-app.sh, ./test-app.sh)
+3. Do NOT recreate existing scripts (./start-app.sh, ./stop-app.sh, ./test-app.sh)
 4. Use existing debugging tools and follow established patterns
 5. Check existing components before creating new ones
 
@@ -31,42 +31,27 @@ Before making any changes or debugging, ALWAYS:
 - ❌ Build failed with errors = STOP, fix compilation errors first
 
 ## 🎯 Current Project State (July 2025):
-- **Status**: ✅ MULTI-INTERFACE HEROES OF TIME SYSTEM
-- **Main Control**: `./hots` script - MASTER CONTROLLER
-- **Backend API**: Spring Boot (Java) on port 8080 - PANOPTICON
-- **Dashboard**: http://localhost:9000/dashboard.html - CONTROL CENTER  
-- **Frontend Principal**: React TypeScript on port 8000 - MAIN GAME
-- **Interface Temporelle**: port 5174 - TEMPORAL ACTIONS
-- **Quantum Visualizer**: port 8001 - QUANTUM VIEW
-- **Collection & Grammar**: port 5175 - PARSING SYSTEM
+- **Status**: ✅ FULLY FUNCTIONAL with polished UI
+- **Backend**: Spring Boot (Java) on port 8080 - STABLE
+- **Frontend**: React TypeScript on port 3000 - MODERN INTERFACE
 - **Database**: H2 in-memory - WORKING
 - **Tests**: Playwright E2E demos - PASSING
 
 ## 🔧 Essential Scripts (ALL WORKING):
-- `./hots start essential` - Start core services (Dashboard + Frontend + Backend)
-- `./hots start` - Start ALL services (7 interfaces)
-- `./hots stop` - Stop all services cleanly
-- `./hots status` - Check service status
-- `./hots test` - Quick tests
-- `./hots debug` - Debug mode with compilation info
-- `./start-app.sh` - Legacy script (port 3000 system)
+- `./start-app.sh` - Start both servers with hot reload
+- `./stop-app.sh` - Stop all services cleanly
+- `./test-app.sh` - Quick tests
+- `./run-epic-demo.sh` - Epic content demos
 - Demos: `cd frontend && npx playwright test tests/e2e/gameplay-demo.spec.ts --headed`
 
-## 🎮 Multi-Interface System:
-- **🎯 Dashboard (9000)**: Main control center with replay system
-- **📊 Frontend Principal (8000)**: TrueHeroesInterface.tsx game UI
-- **⚔️ Interface Temporelle (5174)**: Temporal actions and ZFC
-- **🌌 Quantum Visualizer (8001)**: Quantum state visualization
-- **🔮 Collection & Grammar (5175)**: Script parsing system
-- **⚙️ Backend API (8080)**: Panopticon services (may need fixes)
-- **🧪 Test Runner (8888)**: Optional testing interface
-
-## 🎮 Main Interfaces:
-- **TrueHeroesInterface.tsx**: Right Panel System, Hero cycling, Turn system
-- **ModernGameRenderer.tsx**: Map rendering with hexagonal system
-- **Dashboard**: Central control with replay and service management
-- **Temporal Interface**: ZFC (Brouillard de Guerre) system
-- **Quantum Visualizer**: Real-time quantum state monitoring
+## 🎮 Main Interface (TrueHeroesInterface.tsx):
+- **Right Panel System**: Dynamic content switching (scenario/hero/inventory/castle/epic)
+- **Header Controls**: Polished buttons without borders, fantasy icons
+- **Hero System**: Cycling, selection, real images with fallbacks
+- **Turn System**: End turn with ⭐ icon - STABLE
+- **Tooltips**: Both game and demo tooltips - PERFECT
+- **Epic Content Viewer**: Assets integration with 4 tabs (Heroes, Creatures, Buildings, Artifacts)
+- **Dark Fantasy Theme**: Improved readability with The Dude & Jean-Grofignon style
 
 ## 🌍 Internationalization:
 - **i18n System**: Complete FR/EN/RU support in `frontend/src/i18n/index.ts`
@@ -77,59 +62,60 @@ Before making any changes or debugging, ALWAYS:
 - **Button Design**: No borders, hover effects, icon-only
 - **Tooltips**: Clean appearance, no bouncing animations
 - **Assets**: Hero images in `/public/assets/heroes/` with smart fallbacks
-- **Theme**: Gold medieval fantasy with modern touches
-- **Multi-Interface**: Consistent design across all 5+ interfaces
+- **Theme**: Gold medieval fantasy with modern touches, dark fantasy readability
 
 ## 🏗️ Architecture:
 ```
-Backend API (Port 8080): Spring Boot + H2 Database + Panopticon
-├── Controllers: Temporal, AI, Multiplayer, Epic Content
-├── Services: ScriptTranslation, QuantumLookup, Panopticon
-└── Repository: JPA entities (temporalengine package)
+Backend (Port 8080): Spring Boot + H2 Database + Epic Content
+├── Controllers: Scenario, Game, Multiplayer, AI, Epic Content
+├── Services: Business logic layer + Translation services
+└── Repository: JPA entities
 
-Multi-Frontend System:
-├── Dashboard (9000): Control center + Replay system  
-├── Frontend Principal (8000): TrueHeroesInterface.tsx
-├── Interface Temporelle (5174): ZFC & Temporal actions
-├── Quantum Visualizer (8001): Real-time quantum view
-├── Collection & Grammar (5175): Script parsing UI
-└── Test Runner (8888): Testing interface [Optional]
+Frontend (Port 3000): React TypeScript + Epic Assets
+├── TrueHeroesInterface.tsx (main game UI + Epic panel)
+├── EpicContentViewer.tsx (asset viewer with 4 tabs)
+├── ModernGameRenderer.tsx (map rendering)
+├── useGameStore.ts (state management)
+├── i18n/ (internationalization)
+└── translation-service.js (HOTS → Literary text conversion)
 ```
 
 ## 🚀 Quick Development Workflow:
-1. `./hots start essential` - Start core development environment
-2. Open http://localhost:9000/dashboard.html - Access control center
-3. Open http://localhost:8000 - Test main game UI
-4. `./hots status` - Check all service status
-5. `cd frontend && npx playwright test --headed` - Run visual tests
-6. Check `DEVELOPER_INSTRUCTIONS.md` for detailed guidance
+1. `./start-app.sh` - Start development environment
+2. Open http://localhost:3000 - Test UI manually
+3. `cd frontend && yarn build` - ALWAYS build first to check compilation
+4. `cd frontend && npx playwright test --headed` - Run visual tests
+5. Check `DEVELOPER_INSTRUCTIONS.md` for detailed guidance
 
 ## 🛠️ Key Files to Remember:
 - `DEVELOPER_INSTRUCTIONS.md` - Complete technical documentation
-- `./hots` - MASTER CONTROL SCRIPT (most important)
-- `TrueHeroesInterface.tsx` - Main game interface
+- `TrueHeroesInterface.tsx` - Main game interface with Epic integration
+- `EpicContentViewer.tsx` - Asset viewer component
 - `gameAssets.ts` - Hero image mappings  
 - `i18n/index.ts` - All translations
+- `translation-service.js` - HOTS → Literary translation (9 script types)
 - `gameplay-demo.spec.ts` - Main demo test
-- `backend/src/main/java/com/heroesoftimepoc/temporalengine/` - New backend
+- `game_assets/MASTER_ASSETS_INDEX.json` - Complete asset catalog
 
 ## ⚡ Current Capabilities:
-- ✅ Multi-interface Heroes of Time system operational
-- ✅ Dashboard with replay and control systems
+- ✅ Solo gameplay fully functional
 - ✅ Hero management with real images
-- ✅ Temporal ZFC (Brouillard de Guerre) system
-- ✅ Quantum visualization in real-time
-- ✅ Script parsing and translation services
+- ✅ Epic Content integration with 57 assets catalogued
+- ✅ Asset viewer with Heroes, Creatures, Buildings, Artifacts tabs
+- ✅ HOTS → Literary Translation Service (9 script types with fallbacks)
+- ✅ Dynamic panels with content switching
 - ✅ Internationalized tooltips system
-- ✅ Stable multi-service architecture
-- ✅ Beautiful automated demos across interfaces
+- ✅ Dark fantasy theme with improved readability
+- ✅ Stable turn system and game flow
+- ✅ Beautiful automated demos
+- ✅ Backend fully cleaned (old POC conflicts resolved)
 
 ## 🚨 Remember:
-- **USE** `./hots` as primary control (not start-app.sh for new features)
-- **MULTI-INTERFACE** system - test on multiple ports
+- **USE** `./start-app.sh` as primary control (Backend + Frontend)
+- **FRONTEND** is on port 3000 (not 8000 or other ports)
 - **NEVER** recreate existing functionality  
-- **ALWAYS** check `./hots status` before starting work
+- **ALWAYS** check `DEVELOPER_INSTRUCTIONS.md` first
 - **USE** existing patterns and components
-- **TEST** across all active interfaces
+- **TEST** with Playwright demos before committing
 - **FOLLOW** established UI/UX guidelines
-- **BACKEND** may need fixes (check Panopticon API status) 
+- **TRANSLATION SERVICE**: Use `TranslationService` for HOTS scripts → literary text 
