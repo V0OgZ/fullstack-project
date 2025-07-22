@@ -42,6 +42,69 @@
             margin-bottom: 15px;
         }
 
+        .heroes-grofi-section {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(78, 205, 196, 0.1) 50%, rgba(69, 183, 209, 0.1) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .heroes-grofi-title {
+            font-size: 1.5em;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .heroes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .hero-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .hero-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-icon {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+
+        .hero-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #4ecdc4;
+        }
+
+        .hero-faction {
+            font-size: 0.8em;
+            color: #a0a0a0;
+            margin-bottom: 8px;
+        }
+
+        .hero-power {
+            font-size: 0.7em;
+            color: #ff6b6b;
+            font-style: italic;
+        }
+
         .status-bar {
             display: flex;
             justify-content: center;
@@ -348,6 +411,42 @@
             <div class="status-indicator">
                 <div class="status-dot status-loading" id="testrunner-status"></div>
                 <span>Test Runner (8888)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Héros GROFI -->
+    <div class="heroes-grofi-section">
+        <h2 class="heroes-grofi-title">🌟 Compagnons GROFI Légendaires</h2>
+        <p style="color: #a0a0a0; margin-bottom: 20px;">Les héros éveillés qui maîtrisent les paradoxes temporels</p>
+        
+        <div class="heroes-grid">
+            <div class="hero-card">
+                <div class="hero-icon">👑</div>
+                <div class="hero-name">Jean-Grofignon</div>
+                <div class="hero-faction">Compagnons de Jean-Grofignon</div>
+                <div class="hero-power">Collapse Override</div>
+            </div>
+            
+            <div class="hero-card">
+                <div class="hero-icon">🛡️</div>
+                <div class="hero-name">Walter Sobchak</div>
+                <div class="hero-faction">Compagnons de Jean-Grofignon</div>
+                <div class="hero-power">Enforcement Protocol</div>
+            </div>
+            
+            <div class="hero-card">
+                <div class="hero-icon">🎳</div>
+                <div class="hero-name">The Dude</div>
+                <div class="hero-faction">Compagnons de Jean-Grofignon</div>
+                <div class="hero-power">Zen Collapse</div>
+            </div>
+            
+            <div class="hero-card">
+                <div class="hero-icon">🔫</div>
+                <div class="hero-name">Vince Vega</div>
+                <div class="hero-faction">Compagnons de Jean-Grofignon</div>
+                <div class="hero-power">Exécution Parallèle</div>
             </div>
         </div>
     </div>

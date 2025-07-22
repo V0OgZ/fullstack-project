@@ -25,6 +25,7 @@
                 <button id="hero-btn" class="btn-primary">👤 Héros</button>
                 <button id="joint-magic-btn" class="btn-warning">🚬 Joint Magique</button>
                 <button id="scenario-btn" class="btn-primary">📋 Scénarios</button>
+                <button id="grofi-heroes-btn" class="btn-primary">🌟 Héros GROFI</button>
                 <button id="add-ragnar-btn" class="btn-secondary">🛡️ Add Ragnar</button>
                 <button id="test-decay-btn" class="btn-warning">⏰ Test Decay</button>
                 <button id="dicebear-gallery-btn" class="btn-info">🎭 Dicebear Gallery</button>
@@ -353,6 +354,31 @@
             } catch (error) {
                 window.scriptConsole.addToOutput('⚠️ Backend not available for script execution', 'warning');
                 window.scriptConsole.addToOutput('🎭 Loading demo heroes with graphics instead...', 'info');
+                window.createMockHeroes();
+            }
+        });
+
+        document.getElementById('grofi-heroes-btn').addEventListener('click', async function() {
+            try {
+                // Créer les héros GROFI légendaires
+                const grofiHeroes = [
+                    'HERO(Jean-Grofignon)',
+                    'HERO(Walter Sobchak)', 
+                    'HERO(The Dude)',
+                    'HERO(Vince Vega)'
+                ];
+                
+                for (const heroScript of grofiHeroes) {
+                    const result = await window.gameAPI.executeScript(heroScript);
+                    window.scriptConsole.addToOutput(`🌟 ${heroScript} - Héros GROFI créé!`, 'success');
+                }
+                
+                window.scriptConsole.addToOutput('🌟 Tous les Compagnons GROFI sont maintenant disponibles!', 'success');
+                window.scriptConsole.addToOutput('🎭 Utilisez MOV(), CAST(), USE() avec ces héros légendaires', 'info');
+                
+            } catch (error) {
+                window.scriptConsole.addToOutput('⚠️ Backend not available, création des héros GROFI en mode démo', 'warning');
+                window.scriptConsole.addToOutput('🌟 Jean-Grofignon, Walter Sobchak, The Dude, Vince Vega créés!', 'success');
                 window.createMockHeroes();
             }
         });
