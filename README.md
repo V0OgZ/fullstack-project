@@ -268,6 +268,35 @@ Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront sub
 
 </details>
 
+<details>
+<summary>🔫 <strong>Vince Vega - Le Stratège des Ombres</strong></summary>
+
+**🏛️ Faction :** Compagnons de Jean-Grofignon  
+**⭐ Classe :** Exécuteur Temporel  
+**🎯 Spécialité :** Exécution parallèle et timeout brutal  
+
+**🌟 Pouvoir Principal :**
+> Exécute les processus en parallèle avec une efficacité brutale. Peut forcer l'arrêt de timelines ennemies par purge Docker.
+
+**🔫 Capacités de Combat :**
+- **Exécution Parallèle** - Lance plusieurs actions simultanément
+- **Timeout Brutal** - Force l'arrêt des processus lents
+- **Pulp Fiction Chaos** - Désorganise les ennemis avec style
+- **Briefcase of Fate** - Mallette mystérieuse aux pouvoirs temporels
+
+**⚡ Formule Quantique :**
+```
+†[KILL_PROCESS {enemy.timeline.overload > 0.9}] ⊙ HERO(Vince Vega)
+```
+
+**🎬 Citation Légendaire :**
+> *"I'm gonna get medieval on your artificial ass!"*
+
+**💼 Artefact Spécial :**
+- **Briefcase of Fate** - Contient des secrets temporels mystérieux
+
+</details>
+
 ---
 
 ## 🔮 **Artefacts de Pouvoir**
@@ -298,23 +327,51 @@ Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront sub
 <details>
 <summary>⏰ <strong>Effondreur Chronologique</strong> - Artefact Temporel Avancé</summary>
 
-**🏛️ Type :** Artefact Temporel Légendaire  
-**⭐ Rareté :** Légendaire  
-**🎯 Créateur :** ChronoMaster  
-**⚡ Coût Énergie :** 80  
+**🏛️ Type :** Artefact de Collapse  
+**⭐ Rareté :** Épique  
+**🎯 Créateur :** TimeMaster  
+**⚡ Coût Énergie :** 40  
 
 **🌟 Pouvoir Principal :**
-> Effondre les états quantiques et inverse le temps de 1 jour si le héros était en avance temporelle
+> Force l'effondrement d'un état quantique spécifique
 
 **⚡ Formule Quantique :**
 ```
-DESTRUCTIVE(ψ1, ψ2) + COLLAPSE_TEMPORAL_STATES() + REVERSE_TIME_IF_AHEAD(hero, 1)
+COLLAPSE(ψ1) + MODIFY_ENERGY(hero, -40)
 ```
 
-**⏰ Effets Temporels :**
-- **Rayon d'Effondrement :** 5 cases
-- **Inversion Temporelle :** 1 jour
-- **Type d'Interférence :** Destructive
+**⏰ Effet de Collapse :**
+- **Cible :** État ψ1 spécifique
+- **Résultat :** Effondrement forcé en réalité unique
+- **Coût :** 40 énergie héros
+- **Usage :** Résolution de conflits temporels
+
+</details>
+
+<details>
+<summary>🔮 <strong>Oeil de Wigner</strong> - Artefact Légendaire</summary>
+
+**🏛️ Type :** Artefact de Collapse Massif  
+**⭐ Rareté :** Légendaire  
+**🎯 Créateur :** Wigner  
+**⚡ Coût Énergie :** 100  
+
+**🌟 Pouvoir Principal :**
+> Force l'effondrement de TOUS les états quantiques simultanément
+
+**⚡ Formule Quantique :**
+```
+COLLAPSE(ALL_ψ) = Σ(Pi * |ψi⟩⟨ψi|) → single_reality
+```
+
+**👁️ Effet de Collapse Massif :**
+- **Cible :** Tous les états ψ simultanément
+- **Résultat :** Collapse causal total
+- **Coût :** 100 énergie héros
+- **Usage :** Fin de partie épique
+
+**💥 Citation :**
+> *"Sire, ne le touchez pas ! Si vous l'activez maintenant, toutes nos actions futures deviendront réelles instantanément !"*
 
 </details>
 
@@ -575,10 +632,15 @@ Après de nombreuses quêtes à travers les logs d'erreur et les stack traces, i
 
 ### 🎯 **Guides Spécialisés**
 
+<details>
+<summary>📚 <strong>Still Collapse Open - Documentation Complète</strong></summary>
+
 - **Artefacts** : [docs/items/ARTEFACTS_COMPLETE_GUIDE.md](docs/items/ARTEFACTS_COMPLETE_GUIDE.md)
 - **Héros GROFI** : [docs/GROFI/](docs/GROFI/)
 - **Collapse Causal** : [docs/collapse-causale/](docs/collapse-causale/)
 - **Grammaire Temporelle** : [docs/grammar/TEMPORAL_SCRIPT_CORE_REFERENCE.md](docs/grammar/TEMPORAL_SCRIPT_CORE_REFERENCE.md)
+
+</details>
 
 ---
 
@@ -602,7 +664,9 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 
 ## 📅 **Documentation Récente (Juillet 2025)**
 
-### 🎭 **Scénarios Épiques - NARRATIF**
+<details>
+<summary>🎭 <strong>Still Collapse Open - Scénarios Épiques NARRATIF</strong></summary>
+
 - **🏰 La Tour Sombre** : [docs/scenarios/LA_TOUR_SOMBRE_SCENARIO_EPIQUE_TRADUIT.md](docs/scenarios/LA_TOUR_SOMBRE_SCENARIO_EPIQUE_TRADUIT.md)
 - **✨ L'Éclat des Mondes Dissolus** : [docs/scenarios/ECLAT_MONDES_DISSOLUS_SCENARIO_TRADUIT.md](docs/scenarios/ECLAT_MONDES_DISSOLUS_SCENARIO_TRADUIT.md)
 - **📖 Le Treizième Codex** : [MEMENTO/SCENARIOS/LE_TREIZIEME_CODEX_LORE.md](MEMENTO/SCENARIOS/LE_TREIZIEME_CODEX_LORE.md)
@@ -610,7 +674,11 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 - **🎳 Le Dude & Walter** : [MEMENTO/SCENARIOS/LE_DUDE_ET_WALTER_ABSOLUMENT_FOUS.md](MEMENTO/SCENARIOS/LE_DUDE_ET_WALTER_ABSOLUMENT_FOUS.md)
 - **💎 Éclat des Mondes (MEMENTO)** : [MEMENTO/SCENARIOS/ECLAT_MONDES_DISSOLUS.md](MEMENTO/SCENARIOS/ECLAT_MONDES_DISSOLUS.md)
 
-### 🏛️ **Architecture & Système**
+</details>
+
+<details>
+<summary>🏛️ <strong>Still Collapse Open - Architecture & Système</strong></summary>
+
 - **🏗️ Architecture Moteur** : [docs/architecture/ENGINE_ARCHITECTURE.md](docs/architecture/ENGINE_ARCHITECTURE.md)
 - **🌍 World State Graph** : [docs/architecture/WORLD_STATE_GRAPH.md](docs/architecture/WORLD_STATE_GRAPH.md)
 - **⚙️ Architecture Unifiée GROFI** : [archives/docs/deprecated/ARCHITECTURE_UNIFIED_GROFI_TEMPORAL.md](archives/docs/deprecated/ARCHITECTURE_UNIFIED_GROFI_TEMPORAL.md)
@@ -621,7 +689,11 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 - **🔧 Système Unifié Complet** : [archives/docs/deprecated/SYSTEME_UNIFIE_COMPLETE.md](archives/docs/deprecated/SYSTEME_UNIFIE_COMPLETE.md)
 - **📋 Workflow Système Unifié** : [archives/docs/deprecated/WORKFLOW_SYSTEME_UNIFIE.md](archives/docs/deprecated/WORKFLOW_SYSTEME_UNIFIE.md)
 
-### 🦸 **Héros & Lore**
+</details>
+
+<details>
+<summary>🦸 <strong>Still Collapse Open - Héros & Lore</strong></summary>
+
 - **📚 Lore Jean & Memento** : [docs/LORE_MEMENTO_JEAN_ETERNAL.md](docs/LORE_MEMENTO_JEAN_ETERNAL.md)
 - **✨ Manifeste Jean-Grofignon** : [docs/JEAN_GROFIGNON_MANIFESTO.md](docs/JEAN_GROFIGNON_MANIFESTO.md)
 - **🏛️ Museum Archive Master** : [docs/MUSEUM_ARCHIVE_MASTER.md](docs/MUSEUM_ARCHIVE_MASTER.md)
@@ -629,7 +701,11 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 - **⚔️ Roland Gardien Éternel** : [docs/heroes/ROLAND_GARDIEN_ETERNEL_DOCUMENTATION.md](docs/heroes/ROLAND_GARDIEN_ETERNEL_DOCUMENTATION.md)
 - **🔮 Lysandrel Épique** : [docs/heroes/LYSANDREL_EPIC_DOCUMENTATION.md](docs/heroes/LYSANDREL_EPIC_DOCUMENTATION.md)
 
-### 📁 **MEMENTO - Documents Clés**
+</details>
+
+<details>
+<summary>📁 <strong>Still Collapse Open - MEMENTO Documents Clés</strong></summary>
+
 - **🧠 Index MEMENTO** : [MEMENTO/INDEX_MEMENTO.md](MEMENTO/INDEX_MEMENTO.md)
 - **🎮 Interface 8000 Complète** : [MEMENTO/IMPLEMENTATIONS/INTERFACE_8000_COMPLETE.md](MEMENTO/IMPLEMENTATIONS/INTERFACE_8000_COMPLETE.md)
 - **🏛️ Admin Multijoueur** : [MEMENTO/IMPLEMENTATION_ADMIN_MULTIJOUEUR_COMPLETE.md](MEMENTO/IMPLEMENTATION_ADMIN_MULTIJOUEUR_COMPLETE.md)
@@ -637,7 +713,11 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 - **⚗️ Forge Runique Ultime** : [MEMENTO/FORGE_RUNIQUE_ULTIME.md](MEMENTO/FORGE_RUNIQUE_ULTIME.md)
 - **🎨 Éditeur Visuel** : [MEMENTO/EDITEUR_VISUEL_IMPLEMENTATION.md](MEMENTO/EDITEUR_VISUEL_IMPLEMENTATION.md)
 
-### 📜 **Guides Développeur & Gameplay**
+</details>
+
+<details>
+<summary>📜 <strong>Still Collapse Open - Guides Développeur & Gameplay</strong></summary>
+
 - **📖 CODEX COMPLET** : [docs/CODEX_COMPLET_HEROES_OF_TIME.md](docs/CODEX_COMPLET_HEROES_OF_TIME.md) - **LA RÉFÉRENCE ULTIME**
 - **🚀 Guide Démarrage Rapide** : [docs/RAPPORTS_TECHNIQUES/CURSOR_QUICK_START.md](docs/RAPPORTS_TECHNIQUES/CURSOR_QUICK_START.md)
 - **🎯 Instructions Développeur** : [docs/RAPPORTS_TECHNIQUES/DEVELOPER_INSTRUCTIONS.md](docs/RAPPORTS_TECHNIQUES/DEVELOPER_INSTRUCTIONS.md)
@@ -646,7 +726,11 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 - **📐 Grammaire Spatio-Temporelle** : [docs/GRAMMAIRE_SPATIO_TEMPORELLE.md](docs/GRAMMAIRE_SPATIO_TEMPORELLE.md)
 - **🌟 Concepts Avancés** : [docs/CONCEPTS_AVANCES_TEMPORELLES.md](docs/CONCEPTS_AVANCES_TEMPORELLES.md)
 
-### 🆕 **Nouvelles Fonctionnalités Juillet 2025**
+</details>
+
+<details>
+<summary>🆕 <strong>Still Collapse Open - Nouvelles Fonctionnalités Juillet 2025</strong></summary>
+
 - **🎮 Gameplay vs IA** : [GAMEPLAY_VS_IA_SUMMARY.md](GAMEPLAY_VS_IA_SUMMARY.md)
 - **💾 Système de Persistence** : [PROTOCOLE_MEMENTO_PERSISTENCE_UPDATE.md](PROTOCOLE_MEMENTO_PERSISTENCE_UPDATE.md)
 - **🎮 Test vs IA** : [scripts/test-vs-ia.sh](scripts/test-vs-ia.sh)
@@ -654,6 +738,8 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 - **🧠 Système de Simulation Économique** : [docs/CREATION_SYSTEME_SIMULATION_ECONOMIQUE.md](docs/CREATION_SYSTEME_SIMULATION_ECONOMIQUE.md) - **SERVICE DE TRADUCTION INTELLIGENT SANS LLM !**
 - **📝 Scénario Économique Traduit** : [docs/SCENARIO_ECONOMIE_GUERRE_TRADUIT.md](docs/SCENARIO_ECONOMIE_GUERRE_TRADUIT.md) - **MD MAGNIFIQUE GÉNÉRÉ AUTOMATIQUEMENT**
 - **🎮 Scénario HOTS Source** : [game_assets/scenarios/hots/test-economie-guerre.hots](game_assets/scenarios/hots/test-economie-guerre.hots) - **SCRIPT HOTS ILLISIBLE MAIS TRADUIT PAR L'ALGO !**
+
+</details>
 
 ---
 
