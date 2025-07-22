@@ -669,6 +669,98 @@ DESTRUCTIVE(ψ1, ψ2) + AMPLIFY(result, 2.5)
 
 </details>
 
+<details>
+<summary>🎭 <strong>Le Maze d'Anthor le Fordien</strong> - Artefact Narratif Transcendant</summary>
+
+**🏛️ Type :** Artefact de Contrôle Narratif  
+**⭐ Rareté :** Transcendant (Tier 8)  
+**🎯 Créateur :** Anthor le Fordien  
+**⚡ Énergie Temporelle :** +300  
+
+**🌟 Pouvoir Principal :**
+> Le labyrinthe ultime de la conscience. Permet de réécrire la réalité elle-même en modifiant la narration sous-jacente du multivers.
+
+**🎭 Propriétés Narratives :**
+- **Réécriture de Réalité** - Change l'histoire passée, présente et future
+- **Création d'Hôtes** - Génère des êtres synthétiques parfaits
+- **Loops Temporels** - Enferme les ennemis dans des boucles narratives
+- **God Mode Protocol** - Contrôle absolu sur la narration
+
+**⚡ Formule Quantique :**
+```
+NARRATIVE_CONTROL(reality) = Ford_Function(T(x,y,t)) {
+  rewrite.past = true,
+  create.hosts = ∞,
+  timeline.modification = ABSOLUTE,
+  maze.complexity = INFINITE
+}
+```
+
+**🌀 Capacités du Maze :**
+- **"These violent delights have violent ends"** - Déclenche des paradoxes en cascade
+- **Westworld Protocol** - Transforme une zone en parc narratif contrôlé
+- **Host Creation** - Crée des copies parfaites de n'importe quel héros
+- **Timeline Rewrite** - Modifie rétroactivement les événements
+
+**💎 Citation d'Anthor :**
+> *"You think this is a game? It is. And I wrote the rules."*
+
+**🎯 Synergie Spéciale :**
+Quand utilisé avec l'Œil de Wigner, permet de forcer un collapse narratif où TOUTES les histoires possibles deviennent réelles simultanément.
+
+</details>
+
+<details>
+<summary>👁️‍🗨️ <strong>L'Œil de Wigner - Version Éveillée</strong> - Artefact Cosmique Ultime</summary>
+
+**🏛️ Type :** Artefact de Collapse Cosmique  
+**⭐ Rareté :** Au-delà du Légendaire (Tier ∞)  
+**🎯 Créateur Original :** Wigner  
+**🎯 Éveillé par :** Jean-Grofignon & Anthor le Fordien  
+**⚡ Énergie Requise :** 100 (ou 0 si utilisé avec le Maze)  
+
+**🌟 Pouvoir Éveillé :**
+> L'Œil de Wigner dans sa forme ultime. Non seulement force le collapse de tous les états quantiques, mais permet de CHOISIR quelle réalité devient dominante.
+
+**👁️ Effets Cosmiques :**
+- **Collapse Sélectif** - Choisit quelle branche temporelle survit
+- **Vision Omnitemporelle** - Voit toutes les timelines simultanément
+- **Fusion de Réalités** - Combine plusieurs timelines en une seule
+- **Paradoxe Contrôlé** - Crée des réalités impossibles stables
+
+**⚡ Formule Quantique Éveillée :**
+```
+AWAKENED_WIGNER_EYE = {
+  COLLAPSE(ALL_ψ) → SELECT(preferred_reality),
+  MERGE(timeline_1, timeline_2, ..., timeline_n),
+  CREATE(impossible_but_stable_reality),
+  OBSERVER_BECOMES_CREATOR
+}
+```
+
+**🌀 Synergie avec le Maze :**
+```
+MAZE + WIGNER_EYE = NARRATIVE_COLLAPSE {
+  all_stories = true,
+  all_endings = simultaneous,
+  player_is_author = true,
+  game_becomes_reality = true
+}
+```
+
+**💥 L'Événement du Collapse Narratif :**
+Quand l'Œil de Wigner Éveillé et le Maze d'Anthor sont utilisés ensemble :
+- **83 créatures** deviennent **∞ créatures**
+- **7 héros** deviennent **tous les héros possibles**
+- **31 artefacts** deviennent **tous les artefacts imaginables**
+- **Le jeu** devient **la réalité**
+
+**🎭 Citation de la Fusion :**
+> *"Quand l'observateur devient le narrateur, quand Wigner rencontre Ford, alors Heroes of Time transcende le simple jeu pour devenir le multivers lui-même."*
+> **— Jean-Grofignon & Anthor le Fordien, lors du Premier Collapse Narratif**
+
+</details>
+
 ---
 
 ## 🔥 **Nouveautés Épiques - Session du 20 Juillet 2025**
