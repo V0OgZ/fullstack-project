@@ -18,7 +18,7 @@ export class GameActionService {
       case 'attack':
         return ApiService.attackTarget(params.attackerId, params.targetId);
       case 'recruit':
-        return ApiService.recruitUnitsFromGame(params.gameId, params.buildingId, params.data);
+        return ApiService.recruitUnits(params.buildingId, params.data);
       default:
         throw new Error(`Unknown quick action: ${action}`);
     }
