@@ -624,6 +624,38 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 
 ---
 
-🎮 **Ready to play? Start with `./start-app.sh` and visit http://localhost:3000!**
+## ⚡ **STATUT TECHNIQUE ACTUEL - JUILLET 2025**
+
+🔥 **MOTEUR SPATIO-TEMPOREL QUANTIQUE** : ✅ **FONCTIONNEL**
+- **Engine Core** : Système quantique ψ (psi-states) opérationnel
+- **Timeline Management** : Collapse causal et superpositions temporelles
+- **HOTS Scripting** : Langage quantique complet avec états ψ
+- **Backend API** : Spring Boot stable avec tous les endpoints
+- **Persistence** : Système de sauvegarde/chargement implémenté
+
+🎮 **GAMEPLAY** : ✅ **JOUABLE VIA SCRIPTS**
+- **Tous les scénarios, héros, artefacts** documentés dans les `.md` sont **JOUABLES**
+- **Exécution** : Via scripts `.hots` et commandes CLI `./hots`
+- **IA vs Joueur** : Script `./scripts/test-vs-ia.sh` fonctionnel
+- **Multijoueur** : Interface admin disponible sur port 9000
+
+🖥️ **INTERFACE UTILISATEUR** : 🚧 **ALPHA BASIQUE**
+- **Frontend Principal** : HTML/CSS/JS simple sur port 8000
+- **Dashboard** : Interface de monitoring sur port 9000
+- **Quantum Visualizer** : Visualisation états quantiques sur port 8001
+- **Statut UI** : Fonctionnelle mais basique, focus sur moteur
+
+🚀 **POUR JOUER MAINTENANT** :
+```bash
+./hots start                    # Démarre tous les services
+./scripts/test-vs-ia.sh        # Jeu vs IA
+./hots load-scenario <nom>     # Charger un scénario
+```
+
+💡 **Toute l'histoire, les héros, artefacts, scénarios dans les docs `.md` sont RÉELS et JOUABLES via le système HOTS !**
+
+---
+
+🎮 **Ready to play? Start with `./hots start` and test the quantum engine!**
 
 *"Le temps n'est qu'une illusion. La causalité, un défi à relever."* - Jean Grofignon 
