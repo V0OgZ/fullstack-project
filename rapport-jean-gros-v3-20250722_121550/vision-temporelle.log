@@ -1,0 +1,56 @@
+🔮 TEST VISION TEMPORELLE - HEROES OF TIME
+==========================================
+🔍 Vérification du backend...
+🎮 Création du jeu de test asynchrone...
+✅ Jeu créé avec ID: null
+
+🎯 SCÉNARIO: Deux joueurs à des moments différents
+==================================================
+
+📝 Exécution: HERO(Alice)
+   Réponse: {"timestamp":"2025-07-22T10:16:02.419+00:00","status":404,"error":"Not Found","path":"/api/temporal/games/null/execute"}
+
+📝 Exécution: HERO(Bob)
+   Réponse: {"timestamp":"2025-07-22T10:16:02.429+00:00","status":404,"error":"Not Found","path":"/api/temporal/games/null/execute"}
+
+📝 Exécution: MOV(Alice, @5,5)
+   Réponse: {"timestamp":"2025-07-22T10:16:02.439+00:00","status":404,"error":"Not Found","path":"/api/temporal/games/null/execute"}
+
+📝 Exécution: MOV(Bob, @20,20)
+   Réponse: {"timestamp":"2025-07-22T10:16:02.450+00:00","status":404,"error":"Not Found","path":"/api/temporal/games/null/execute"}
+
+📝 Exécution: CREATE(ITEM, magic_spyglass, HERO:Alice)
+   Réponse: {"timestamp":"2025-07-22T10:16:02.460+00:00","status":404,"error":"Not Found","path":"/api/temporal/games/null/execute"}
+
+📝 Exécution: USE(ITEM, magic_spyglass, HERO:Alice)
+   Réponse: {"timestamp":"2025-07-22T10:16:02.470+00:00","status":404,"error":"Not Found","path":"/api/temporal/games/null/execute"}
+
+⏰ TEST: Temps différent pour chaque héros
+=========================================
+
+📝 Exécution: MOV(Alice, @10,10)
+   Réponse: {"timestamp":"2025-07-22T10:16:02.481+00:00","status":404,"error":"Not Found","path":"/api/temporal/games/null/execute"}
+
+📝 Exécution: MOV(Bob, @25,25)
+   Réponse: {"timestamp":"2025-07-22T10:16:02.491+00:00","status":404,"error":"Not Found","path":"/api/temporal/games/null/execute"}
+
+📝 Exécution: ψ001: ⊙(Δt+2 @15,15 ⟶ CREATE(ITEM, temporal_treasure, @15,15))
+   Réponse: {"timestamp":"2025-07-22T10:16:02.502+00:00","status":404,"error":"Not Found","path":"/api/temporal/games/null/execute"}
+
+📝 Exécution: USE(ITEM, magic_spyglass, HERO:Alice)
+   Réponse: {"timestamp":"2025-07-22T10:16:02.512+00:00","status":404,"error":"Not Found","path":"/api/temporal/games/null/execute"}
+
+🌀 TEST: Collision temporelle
+============================
+
+📝 Exécution: MOV(Alice, @15,15)
+   Réponse: {"timestamp":"2025-07-22T10:16:02.523+00:00","status":404,"error":"Not Found","path":"/api/temporal/games/null/execute"}
+
+📝 Exécution: MOV(Bob, @15,15)
+   Réponse: {"timestamp":"2025-07-22T10:16:02.533+00:00","status":404,"error":"Not Found","path":"/api/temporal/games/null/execute"}
+
+📊 État final du jeu
+===================
+null
+
+✅ Test terminé!
