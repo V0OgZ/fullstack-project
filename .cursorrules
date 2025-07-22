@@ -99,9 +99,11 @@ Before making any changes or debugging, ALWAYS:
 ## 🏗️ Architecture:
 ```
 Backend (Port 8080): Spring Boot + H2 Database + Epic Content
-├── Controllers: Scenario, Game, Multiplayer, AI, Epic Content
-├── Services: Business logic layer + Translation services
-└── Repository: JPA entities
+├── com.example.demo package (REAL CURRENT STRUCTURE)
+├── Controllers: GameController, ScenarioController, AIController, MultiplayerController, EpicContentController
+├── Services: GameService, ScenarioService, AIService, MultiplayerService
+├── Models: GameState, Scenario, Unit, Building, AIPlayer
+└── Repository: JPA entities with H2 database
 
 Frontend (Port 8000): React TypeScript + Epic Assets
 ├── TrueHeroesInterface.tsx (main game UI + Epic panel)
