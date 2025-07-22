@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎨 Collection Dicebear Advanced - Heroes of Time</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e);
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #FFD700;
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #FFD700, #FFA500, #FF6B6B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        .header p {
+            color: #FFD700;
+            margin-top: 10px;
+        }
+
+        /* Navigation */
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            background: rgba(255, 215, 0, 0.2);
+            border: 2px solid #FFD700;
+            color: #FFD700;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-tab:hover::before {
+            left: 100%;
+        }
+
+        .nav-tab:hover,
+        .nav-tab.active {
+            background: #FFD700;
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Container */
+        .collection-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            padding: 30px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* Cards */
+        .collection-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+            border: 2px solid transparent;
+            border-radius: 20px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .collection-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #FFD700, #FFA500, #FF6B6B, #00BFFF);
+            border-radius: 20px;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+        }
+
+        .collection-card:hover::before {
+            opacity: 1;
+            animation: borderRotate 3s linear infinite;
+        }
+
+        @keyframes borderRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .collection-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card-avatar-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+
+        .card-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid #FFD700;
+            background: rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .card-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .level-badge {
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            background: linear-gradient(135deg, #FF6B6B, #FFA500);
+            color: white;
+            font-weight: bold;
+            font-size: 0.8em;
+            padding: 4px 10px;
+            border-radius: 15px;
+            border: 2px solid #000;
+        }
+
+        .card-info {
+            flex: 1;
+        }
+
+        .card-name {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #FFD700;
+            margin-bottom: 5px;
+        }
+
+        .card-type {
+            font-size: 1em;
+            opacity: 0.9;
+            color: #FFA500;
+        }
+
+        .card-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .stat {
+            background: rgba(255, 215, 0, 0.15);
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 0.9em;
+            text-align: center;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .stat:hover {
+            background: rgba(255, 215, 0, 0.25);
+            transform: scale(1.05);
+        }
+
+        .stat-label {
+            font-size: 0.8em;
+            opacity: 0.8;
+            display: block;
+        }
+
+        .stat-value {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #FFD700;
+            display: block;
+            margin-top: 2px;
+        }
+
+        /* Abilities */
+        .abilities-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 107, 107, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 107, 107, 0.3);
+        }
+
+        .abilities-title {
+            color: #FF6B6B;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .ability {
+            margin: 8px 0;
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            font-size: 0.9em;
+        }
+
+        .ability-name {
+            color: #FFA500;
+            font-weight: bold;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2em;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 215, 0, 0.3);
+            border-top: 4px solid #FFD700;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Rarity effects */
+        .rarity-legendary {
+            border-color: #FFD700 !important;
+        }
+
+        .rarity-legendary .card-avatar {
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+            animation: legendaryGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes legendaryGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
+            50% { box-shadow: 0 0 40px rgba(255, 215, 0, 1); }
+        }
+
+        .rarity-epic {
+            border-color: #9B59B6 !important;
+        }
+
+        .rarity-epic .card-avatar {
+            box-shadow: 0 0 20px rgba(155, 89, 182, 0.6);
+        }
+
+        .rarity-rare {
+            border-color: #00BFFF !important;
+        }
+
+        .rarity-rare .card-avatar {
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.5);
+        }
+
+        .rarity-common {
+            border-color: #888888 !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .collection-container {
+                grid-template-columns: 1fr;
+                padding: 15px;
+            }
+            
+            .nav-tabs {
+                gap: 10px;
+                padding: 15px;
+            }
+            
+            .nav-tab {
+                padding: 8px 16px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+    <script src="frontend/dicebar-graphics-system.js"></script>
+</head>
+<body>
+    <div class="header">
+        <h1>🎨 Collection Heroes of Time - Dicebear Advanced</h1>
+        <p>Système avancé avec génération locale et effets visuels</p>
+    </div>
+
+    <div class="nav-tabs">
+        <button class="nav-tab active" onclick="showTab('heroes')">🦸 Héros</button>
+        <button class="nav-tab" onclick="showTab('creatures')">🐉 Créatures</button>
+        <button class="nav-tab" onclick="showTab('artifacts')">⚡ Artefacts</button>
+        <button class="nav-tab" onclick="showTab('buildings')">🏰 Bâtiments</button>
+        <button class="nav-tab" onclick="showTab('all')">🌟 Tout</button>
+    </div>
+
+    <div id="loading" class="loading">
+        <div class="loading-spinner"></div>
+        <div>Chargement du système Dicebear avancé...</div>
+    </div>
+    
+    <div id="collection-container" class="collection-container" style="display: none;"></div>
+
+    <script>
+        // Initialize Dicebear system
+        let dicebarSystem;
+        
+        // Data storage
+        let currentTab = 'heroes';
+        const collections = {
+            heroes: [],
+            creatures: [],
+            artifacts: [],
+            buildings: []
+        };
+
+        // Load real data from dicebear system
+        async function loadRealData() {
+            try {
+                // Wait for dicebear system to load
+                if (!window.DicebarGraphicsSystem) {
+                    console.warn('DicebarGraphicsSystem non disponible, utilisation des données de démo');
+                    loadDemoData();
+                    return;
+                }
+                
+                dicebarSystem = new DicebarGraphicsSystem();
+                
+                // Extract heroes from dicebear system
+                const heroNames = ['Arthur', 'Ragnar', 'Morgana', 'Claudius Memento', 'Nikita Victor Nettoyeur', 'Jean-Grofignon', 'Lancelot', 'Merlin'];
+                collections.heroes = heroNames.map(name => {
+                    const heroData = dicebarSystem.getHeroData ? dicebarSystem.getHeroData(name) : null;
+                    return {
+                        name: name,
+                        type: heroData?.class || 'Héros',
+                        level: Math.floor(Math.random() * 50) + 30,
+                        rarity: ['legendary', 'epic', 'rare'][Math.floor(Math.random() * 3)],
+                        stats: {
+                            attack: Math.floor(Math.random() * 50) + 50,
+                            defense: Math.floor(Math.random() * 50) + 30,
+                            hp: Math.floor(Math.random() * 200) + 100,
+                            mp: Math.floor(Math.random() * 100) + 50
+                        },
+                        abilities: [
+                            { name: 'Attaque Spéciale', description: 'Inflige des dégâts massifs' },
+                            { name: 'Défense Ultime', description: 'Augmente la défense de 50%' }
+                        ]
+                    };
+                });
+                
+                // Load other collections
+                loadDemoCreatures();
+                loadDemoArtifacts();
+                loadDemoBuildings();
+                
+                console.log('✅ Données réelles chargées avec DicebarGraphicsSystem');
+            } catch (error) {
+                console.error('Erreur lors du chargement des données:', error);
+                loadDemoData();
+            }
+        }
+
+        // Load demo data as fallback
+        function loadDemoData() {
+            collections.heroes = [
+                {
+                    name: 'Arthur',
+                    type: 'Roi Temporel',
+                    level: 50,
+                    rarity: 'legendary',
+                    stats: { attack: 85, defense: 70, hp: 250, mp: 100 },
+                    abilities: [
+                        { name: 'Excalibur Strike', description: 'Frappe divine qui ignore les défenses' },
+                        { name: 'Royal Command', description: 'Boost les alliés proches' }
+                    ]
+                },
+                {
+                    name: 'Claudius Memento',
+                    type: 'Archiviste Paradoxal',
+                    level: 100,
+                    rarity: 'legendary',
+                    stats: { attack: 60, defense: 80, hp: 300, mp: 200 },
+                    abilities: [
+                        { name: 'Archive Vivante', description: 'Copie une capacité ennemie' },
+                        { name: 'Paradoxe Créatif', description: 'Crée une nouvelle règle de jeu' }
+                    ]
+                }
+            ];
+            
+            loadDemoCreatures();
+            loadDemoArtifacts();
+            loadDemoBuildings();
+        }
+
+        function loadDemoCreatures() {
+            collections.creatures = [
+                {
+                    name: 'Dragon Rouge Temporel',
+                    type: 'Dragon Ancien',
+                    level: 80,
+                    rarity: 'legendary',
+                    stats: { attack: 120, defense: 90, hp: 500, speed: 60 }
+                },
+                {
+                    name: 'Chat de Schrödinger',
+                    type: 'Entité Quantique',
+                    level: 42,
+                    rarity: 'epic',
+                    stats: { attack: 50, defense: 50, hp: 100, quantum: 999 }
+                }
+            ];
+        }
+
+        function loadDemoArtifacts() {
+            collections.artifacts = [
+                {
+                    name: 'Œil de Wigner',
+                    type: 'Artefact Mythique',
+                    power: 100,
+                    rarity: 'legendary',
+                    stats: { vision: 100, reality: -20 }
+                },
+                {
+                    name: 'Joint Magique',
+                    type: 'Don de Jean',
+                    power: 999,
+                    rarity: 'legendary',
+                    stats: { creativity: 999, focus: -50 }
+                }
+            ];
+        }
+
+        function loadDemoBuildings() {
+            collections.buildings = [
+                {
+                    name: 'Citadelle Temporelle',
+                    type: 'Forteresse Ultime',
+                    level: 10,
+                    rarity: 'legendary',
+                    stats: { defense: 200, production: 50 }
+                },
+                {
+                    name: 'Tour de Mage',
+                    type: 'Structure Magique',
+                    level: 5,
+                    rarity: 'epic',
+                    stats: { mana: 100, research: 75 }
+                }
+            ];
+        }
+
+        // Render collection with advanced features
+        function renderCollection() {
+            const container = document.getElementById('collection-container');
+            const loading = document.getElementById('loading');
+            
+            let data = [];
+            if (currentTab === 'all') {
+                data = [
+                    ...collections.heroes,
+                    ...collections.creatures,
+                    ...collections.artifacts,
+                    ...collections.buildings
+                ];
+            } else {
+                data = collections[currentTab];
+            }
+            
+            if (!data || data.length === 0) {
+                container.innerHTML = '<div class="loading">Aucune donnée disponible</div>';
+                loading.style.display = 'none';
+                container.style.display = 'block';
+                return;
+            }
+            
+            container.innerHTML = '';
+            
+            data.forEach(item => {
+                const card = createAdvancedCard(item);
+                container.appendChild(card);
+            });
+            
+            loading.style.display = 'none';
+            container.style.display = 'grid';
+        }
+
+        // Create advanced card element
+        function createAdvancedCard(item) {
+            const cardDiv = document.createElement('div');
+            cardDiv.className = `collection-card rarity-${item.rarity}`;
+            
+            // Determine element type
+            let elementType = 'hero';
+            if (collections.creatures.includes(item)) elementType = 'creature';
+            else if (collections.artifacts.includes(item)) elementType = 'artifact';
+            else if (collections.buildings.includes(item)) elementType = 'building';
+            
+            // Create avatar container
+            const avatarContainer = document.createElement('div');
+            avatarContainer.className = 'card-avatar-container';
+            
+            const avatarDiv = document.createElement('div');
+            avatarDiv.className = 'card-avatar';
+            
+            if (dicebarSystem && dicebarSystem.createMapElement) {
+                const avatarElement = dicebarSystem.createMapElement(
+                    elementType,
+                    item.name,
+                    96,
+                    {
+                        showIcon: false,
+                        glow: item.rarity === 'legendary',
+                        rarity: item.rarity
+                    }
+                );
+                
+                if (avatarElement) {
+                    avatarElement.style.width = '100%';
+                    avatarElement.style.height = '100%';
+                    avatarDiv.appendChild(avatarElement);
+                }
+            } else {
+                // Fallback to Dicebear API
+                const styles = {
+                    hero: 'adventurer',
+                    creature: 'bottts',
+                    artifact: 'shapes',
+                    building: 'identicon'
+                };
+                const style = styles[elementType] || 'thumbs';
+                const avatarUrl = `https://api.dicebear.com/7.x/${style}/svg?seed=${encodeURIComponent(item.name)}&size=96`;
+                avatarDiv.innerHTML = `<img src="${avatarUrl}" alt="${item.name}" />`;
+            }
+            
+            avatarContainer.appendChild(avatarDiv);
+            
+            // Add level badge if applicable
+            if (item.level) {
+                const levelBadge = document.createElement('div');
+                levelBadge.className = 'level-badge';
+                levelBadge.textContent = `Lv.${item.level}`;
+                avatarContainer.appendChild(levelBadge);
+            }
+            
+            // Create stats HTML
+            let statsHtml = '';
+            if (item.stats) {
+                statsHtml = Object.entries(item.stats).map(([key, value]) => `
+                    <div class="stat">
+                        <span class="stat-label">${key.charAt(0).toUpperCase() + key.slice(1)}</span>
+                        <span class="stat-value">${value}</span>
+                    </div>
+                `).join('');
+            } else if (item.power) {
+                statsHtml = `
+                    <div class="stat">
+                        <span class="stat-label">Puissance</span>
+                        <span class="stat-value">${item.power}</span>
+                    </div>
+                `;
+            }
+            
+            // Create abilities HTML
+            let abilitiesHtml = '';
+            if (item.abilities && item.abilities.length > 0) {
+                abilitiesHtml = `
+                    <div class="abilities-section">
+                        <div class="abilities-title">⚡ Capacités Spéciales</div>
+                        ${item.abilities.map(ability => `
+                            <div class="ability">
+                                <span class="ability-name">${ability.name}:</span> ${ability.description}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+            
+            // Build card HTML
+            cardDiv.innerHTML = `
+                <div class="card-header">
+                    ${avatarContainer.outerHTML}
+                    <div class="card-info">
+                        <div class="card-name">${item.name}</div>
+                        <div class="card-type">${item.type}</div>
+                    </div>
+                </div>
+                ${statsHtml ? `<div class="card-stats">${statsHtml}</div>` : ''}
+                ${abilitiesHtml}
+            `;
+            
+            // Replace avatar container placeholder with real element
+            const placeholder = cardDiv.querySelector('.card-avatar-container');
+            placeholder.replaceWith(avatarContainer);
+            
+            return cardDiv;
+        }
+
+        // Change tab
+        function showTab(tab) {
+            currentTab = tab;
+            
+            // Update buttons
+            document.querySelectorAll('.nav-tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Re-render
+            renderCollection();
+        }
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', async () => {
+            await loadRealData();
+            renderCollection();
+        });
+    </script>
+</body>
+</html> 
