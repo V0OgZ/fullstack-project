@@ -1,140 +1,122 @@
-# 🧪 Scripts de Test - Heroes of Time
+# 🛠️ **SCRIPTS - Outils de Contrôle Heroes of Time**
 
-Ce dossier contient tous les scripts de test pour le projet Heroes of Time.
+## 🌟 **L'Arsenal de Jean-Grofignon**
 
-## 📋 **Scripts Disponibles**
+*"J'ai pas hacké le jeu. J'ai juste compris où était le bouton pause cosmique."* - Jean-Grofignon
 
-### 🎯 **Script Principal**
-- **`test-everything.sh`** - Script master qui lance TOUS les tests
-  - Compile le backend
-  - Lance les tests unitaires et d'intégration
-  - Démarre tous les services (backend, visualizer, frontend)
-  - Teste l'API et les 7 scénarios
-  - Génère un rapport complet
+**🛠️ Scripts** - L'arsenal complet pour contrôler, tester et déployer Heroes of Time.
 
-### 🔧 **Scripts Spécialisés**
+---
 
-#### **Tests Backend**
-- **`test-heroes-of-time-complet.sh`** - Tests complets backend
-- **`test-game-scripts.sh`** - Tests des scripts de jeu
-- **`test-services.sh`** - Tests des services
+## 🚀 **Scripts Principaux**
 
-#### **Tests Temporels & Quantiques**
-- **`test-temporal-engine.sh`** - Tests du moteur temporel
-- **`test-temporal-collapse.sh`** - Tests de collapse quantique
-- **`test-complete-bataille-temporelle.sh`** - Tests bataille temporelle
-- **`test-quick-temporal.sh`** - Tests rapides temporels
+### 🎮 **[hots](hots)** - Contrôleur Principal
+- **🚀 `./hots start`** - Démarre tous les services
+- **📊 `./hots status`** - État des services
+- **🧪 `./hots test <type>`** - Tests spécialisés
+- **🛑 `./hots stop`** - Arrête tous les services
 
-#### **Tests Scénarios**
-- **`test-scenarios.sh`** - Tests des 7 scénarios complets
-- **`test-complete-comparison.sh`** - Tests de comparaison
-- **`test-complete-comparison-fixed.sh`** - Tests de comparaison (fixé)
+### 🧪 **[test-app.sh](test-app.sh)** - Tests Rapides
+- **Tests de base** du système
+- **Vérification** des endpoints
+- **Validation** des services
 
-#### **Tests Interface**
-- **`test-ui-fix.sh`** - Tests UI
-- **`test-manual.sh`** - Tests manuels
-- **`test-simple.sh`** - Tests simples
+### 🛑 **[stop-app.sh](stop-app.sh)** - Arrêt Propre
+- **Arrêt sécurisé** de tous les services
+- **Nettoyage** des processus
+- **Libération** des ports
 
-## 🚀 **Comment utiliser**
+---
 
-### **Depuis la racine du projet :**
+## 📁 **Dossiers Spécialisés**
+
+### 🎯 **[actifs/](actifs/)** - Scripts Actifs
+- **Scripts en production** et utilisés quotidiennement
+- **Outils de maintenance** et de monitoring
+- **Utilitaires** de développement
+
+### 🧪 **[test/](test/)** - Tests Complets
+- **Tests unitaires** et d'intégration
+- **Scénarios de test** complexes
+- **Validation** des fonctionnalités
+
+### 🚀 **[start/](start/)** - Démarrage
+- **Scripts de démarrage** spécialisés
+- **Configuration** des environnements
+- **Initialisation** des services
+
+### 🛑 **[stop/](stop/)** - Arrêt
+- **Scripts d'arrêt** spécialisés
+- **Nettoyage** des ressources
+- **Sauvegarde** des états
+
+### 🔧 **[utils/](utils/)** - Utilitaires
+- **Outils de développement** divers
+- **Scripts d'aide** et de maintenance
+- **Fonctions communes** réutilisables
+
+### 🏗️ **[system-unifie/](system-unifie/)** - Système Unifié
+- **Scripts d'intégration** système
+- **Orchestration** des services
+- **Gestion** de l'architecture unifiée
+
+---
+
+## 🎮 **Tests Spécialisés**
+
+### 🧠 **[test-vs-ia.sh](test-vs-ia.sh)** - Test vs IA
+- **Jeu contre l'IA** Claudius-Memento
+- **Scénarios interactifs** complets
+- **Validation** du gameplay IA
+
+### 💾 **[test-persistence.sh](test-persistence.sh)** - Test Persistence
+- **Sauvegarde/chargement** de parties
+- **Validation** du système de persistence
+- **Tests de récupération** après crash
+
+### 🧪 **[test-jean-gros-v3-with-json.sh](test-jean-gros-v3-with-json.sh)** - Tests Jean-Gros v3
+- **Tests complets** avec scripts JSON
+- **Validation** de l'architecture HSP
+- **Tests de performance** et stabilité
+
+---
+
+## 🚀 **Utilisation des Scripts**
+
+### 🎮 **Pour Démarrer**
 ```bash
-# Lancer tous les tests
-./run-tests.sh
-
-# Ou directement
-scripts/test-everything.sh
+./hots start          # Démarre tous les services
+./hots status         # Vérifie l'état
 ```
 
-### **Depuis le dossier scripts/ :**
+### 🧪 **Pour Tester**
 ```bash
-cd scripts/
-
-# Script principal
-./test-everything.sh
-
-# Scripts spécialisés
-./test-scenarios.sh
-./test-temporal-engine.sh
-./test-services.sh
+./hots test economie  # Test simulation économique
+./hots test translation # Test service traduction
+./hots test md-generator # Test générateur MD
 ```
 
-## 📊 **Ce qui est testé**
-
-### **Backend (Java)**
-- ✅ Compilation Maven
-- ✅ Tests unitaires (60+ tests)
-- ✅ Tests d'intégration
-- ✅ Parser HOTS/REGEX
-- ✅ Moteur quantique temporel
-
-### **Scénarios**
-- ✅ 7 scénarios complets JSON
-- ✅ Validation syntaxe
-- ✅ Index des scénarios
-- ✅ Intégration visualizer
-
-### **Services**
-- ✅ Backend API (port 8080)
-- ✅ Quantum Visualizer (port 8001)
-- ✅ Frontend Temporal (port 5173)
-- ✅ Health checks
-
-### **API**
-- ✅ Endpoints REST
-- ✅ Création de jeux
-- ✅ Exécution de scripts
-- ✅ États quantiques
-
-## 🔧 **Maintenance**
-
-### **Ajouter un nouveau script**
-1. Créer le script dans `scripts/`
-2. Le rendre exécutable : `chmod +x scripts/mon-script.sh`
-3. Mettre à jour ce README
-
-### **Modifier le script principal**
-- Éditer `scripts/test-everything.sh`
-- Ajouter les nouvelles phases de test
-- Mettre à jour les logs
-
-### **Déboguer**
-- Logs générés dans le dossier parent
-- Suffixes : `-compile.log`, `-tests.log`, `-runtime.log`
-- Vérifier les ports utilisés avec `lsof -i :8080,8001,5173`
-
-## 📁 **Structure des Logs**
-
-```
-Heroes-of-Time/
-├── backend-compile.log      # Compilation backend
-├── backend-tests.log        # Tests unitaires
-├── backend-integration.log  # Tests d'intégration
-├── backend-runtime.log      # Runtime backend
-├── visualizer-runtime.log   # Runtime visualizer
-├── scenarios-test.log       # Tests scénarios
-├── frontend-test.log        # Tests frontend
-└── playwright-test.log      # Tests Playwright
-```
-
-## 🎯 **Ports utilisés**
-
-- **8080** : Backend Spring Boot
-- **8001** : Quantum Visualizer
-- **5173** : Frontend Temporal
-- **3000** : Frontend principal (optionnel)
-- **8000** : Serveur de test (optionnel)
-
-## 🛑 **Arrêter les services**
-
+### 🛑 **Pour Arrêter**
 ```bash
-# Utiliser le script d'arrêt
-./stop-all.sh
+./hots stop           # Arrêt propre
+./stop-app.sh         # Arrêt alternatif
+```
 
-# Ou manuellement
-lsof -ti:8080,8001,5173,3000,8000 | xargs -r kill -9
+### 🎯 **Pour Jouer**
+```bash
+./scripts/test-vs-ia.sh        # Jeu vs IA
+./scripts/test-persistence.sh  # Test persistence
 ```
 
 ---
 
-**🎮 Système Heroes of Time prêt pour les tests quantiques temporels !** 
+## 🌟 **Philosophie des Scripts**
+
+*"Les scripts sont les extensions de la volonté de Jean-Grofignon. Chaque commande est un coup de télécommande cosmique."*
+
+**🛠️ Scripts** - Arsenal de contrôle de Heroes of Time  
+*Outils de Jean-Grofignon pour maîtriser le temps*
+
+**🎯 Mission** : Fournir un contrôle total sur Heroes of Time  
+**🌟 Vision** : Automatiser et simplifier toutes les opérations  
+**⚡ Objectif** : Un clic pour tout contrôler 

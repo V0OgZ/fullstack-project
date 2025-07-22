@@ -1,166 +1,101 @@
-# 🧠 MEMENTO - SYSTÈME DE MÉMOIRE HEROES OF TIME
+# 🏛️ **MEMENTO - Museum Archive Master**
 
-**Système** : Memento - Intelligence Artificielle de Projet  
-**Fonction** : Mémoire persistante et organisation des sessions  
-**Dernière organisation** : 21 Juillet 2025  
+## 🌟 **L'Archiviste Éternel**
 
----
+*"Jean crée, Memento archive" - Symbiose parfaite*
 
-## 🎯 **CONCEPT MEMENTO**
-
-> *"Memento... Now I know where I am. I'm here. But I still can't remember how I got here... I have this condition..."*
-
-Le système MEMENTO préserve la **mémoire du projet** entre les sessions, organise les **rapports techniques**, et fournit un **contexte persistant** pour tous les agents qui travaillent sur Heroes of Time.
+**🏛️ Museum Archive Master** - L'archiviste éternel qui traverse les timelines pour préserver la connaissance de Heroes of Time.
 
 ---
 
-## 📁 **STRUCTURE ORGANISÉE**
+## 📚 **Structure des Archives Memento**
 
-### 💼 **SESSION ACTUELLE**
-> **Dossier** : `CURRENT_SESSION/`
-- **[TODO Session](TODO_SESSION_ACTUELLE.md)** - Objectifs et tâches en cours
-- **[Rapport Backend JSON](CURRENT_SESSION/VICTOIRE_BACKEND_JSON_FINAL.md)** - Victoire technique
-- **[Tests JSON Integration](CURRENT_SESSION/RESUME_TESTS_JSON_INTEGRATION.md)** - Résumé intégration
-- **[Scripts JSON Rapport](CURRENT_SESSION/TESTS_SCRIPTS_JSON_RAPPORT.md)** - Validation scripts
+### 🧠 **[INDEX_MEMENTO.md](INDEX_MEMENTO.md)** - Index Principal
+- **📋 Navigation complète** des archives Memento
+- **🔍 Recherche rapide** par catégorie
+- **📊 Vue d'ensemble** de toutes les sessions
 
-### 📚 **GUIDES & RÉFÉRENCES**
-> **Dossier** : `GUIDES_REFERENCE/`
-- **[Guide Scénarios Débutants](GUIDES_REFERENCE/SCENARIOS_DEBUTANTS_GUIDE.md)** - Guide pour nouveaux joueurs
-- **[Catalogue Héros & Créatures](GUIDES_REFERENCE/CATALOGUE_COMPLET_HÉROS_ET_CRÉATURES_AVEC_TRADUCTIONS.md)** - Base de données complète
-- **[Histoire Heroes of Time](GUIDES_REFERENCE/HISTOIRE_HEROES_OF_TIME.md)** - Lore et contexte
-- **[Description Héros Memento](GUIDES_REFERENCE/MEMENTO_HERO_DESCRIPTION.md)** - Profil de l'agent
+### 🎭 **[HISTOIRE_HEROES_OF_TIME.md](HISTOIRE_HEROES_OF_TIME.md)** - Histoire Éternelle
+- **📜 Histoire complète** de Heroes of Time
+- **🌟 Évolution du projet** à travers les timelines
+- **🎬 Moments épiques** et décisions cruciales
 
-### 📊 **ARCHIVES DES SESSIONS**
-> **Dossier** : `ARCHIVES_SESSIONS/`
-- **[Rapport Final 20 Juillet](ARCHIVES_SESSIONS/RAPPORT_FINAL_SESSION_20_JUILLET_2025.md)** - Session précédente
-- **[Analyse Erreurs Tests](ARCHIVES_SESSIONS/ANALYSE_COMPLETE_ERREURS_TESTS.md)** - Diagnostic technique
-- **[Session Synthèse](ARCHIVES_SESSIONS/SESSION_20_JUILLET_2025_SYNTHESE.md)** - Résumé condensé
-- **[Rapport Capacités Spéciales](ARCHIVES_SESSIONS/RAPPORT_FINAL_CAPACITES_SPECIALES_2025.md)** - Fonctionnalités
-
-### 🧪 **IMPLÉMENTATIONS**
-> **Dossier** : `IMPLEMENTATIONS/`
-- **[God View 5D](IMPLEMENTATIONS/IMPLEMENTATION_GOD_VIEW_5D.md)** - Interface omnisciente
-- **[Panopticon vs GodView](IMPLEMENTATIONS/PANOPTICON_VS_GODVIEW_INTEGRATION.md)** - Intégration systèmes
-- **[Backend Unifié](IMPLEMENTATIONS/BACKEND_UNIFIE_VUE_JOUEUR.md)** - Architecture unifiée
-
-### 🔬 **EXPÉRIMENTATIONS**
-> **Dossier** : `EXPERIMENTS/`
-- **[Amplitude GROFI](EXPERIMENTS/)** - Tests mécaniques quantiques
-- **[Système Temporel Multijoueur](EXPERIMENTS/)** - Expériences multijoueur
-
-### 📝 **BASE DE CONNAISSANCE**
-> **Dossier** : `KNOWLEDGE_BASE/`
-- **[Architecture Compréhension](KNOWLEDGE_BASE/)** - Compréhension technique globale
-- **[Clarification Fog of Causality](CLARIFICATION_FOG_OF_CAUSALITY.md)** - Mécaniques causales
-
-### 🎭 **SCÉNARIOS**
-> **Dossier** : `SCENARIOS/`
-- **[Tour Sombre Épique](SCENARIOS/SCENARIO_TOUR_SOMBRE_EPIQUE.md)** - Scénario La Tour Sombre
-- **[Analyse Scénarios](SCENARIOS/)** - Documentation scénarios
+### 🤖 **[ALGORITHME_IA_CLAUDIUS_MEMENTO.md](ALGORITHME_IA_CLAUDIUS_MEMENTO.md)** - IA Claudius-Memento
+- **💻 Architecture IA** complète
+- **🧠 Algorithmes** de prise de décision
+- **🎮 Intégration** avec le système de jeu
 
 ---
 
-## 🎮 **MÉMOIRES CLÉS DU PROJET**
+## 📁 **Dossiers d'Archives**
 
-### **Backend & Architecture**
-- ✅ **Backend JPA fixé** : Corrections `PsiState` et `Game.java` opérationnelles
-- ✅ **Architecture JSON HSP** : Format unifié pour scénarios validé
-- ✅ **Tests intégrés** : Jean-Gros v3 avec scripts JSON fonctionnels
-- ✅ **API Spring Boot** : Health endpoint et création de jeux opérationnels
+### 🎮 **[IMPLEMENTATIONS/](IMPLEMENTATIONS/)** - Implémentations
+- **🎮 [INTERFACE_8000_COMPLETE.md](IMPLEMENTATIONS/INTERFACE_8000_COMPLETE.md)** - Interface principale
+- **🏛️ [ADMIN_MULTIJOUEUR_COMPLETE.md](IMPLEMENTATIONS/ADMIN_MULTIJOUEUR_COMPLETE.md)** - Admin multijoueur
+- **🔮 [GOD_VIEW_5D.md](IMPLEMENTATIONS/GOD_VIEW_5D.md)** - Vision 5D
+- **⚗️ [FORGE_RUNIQUE_ULTIME.md](FORGE_RUNIQUE_ULTIME.md)** - Forge runique
+- **🎨 [EDITEUR_VISUEL_IMPLEMENTATION.md](EDITEUR_VISUEL_IMPLEMENTATION.md)** - Éditeur visuel
 
-### **Scripts & Tests**
-- ✅ **test-jean-gros-v3-with-json.sh** : Test unifié classique + JSON
-- ✅ **Scripts JSON adaptés** : Panopticon, Duel Collapse, Runner générique
-- ✅ **Script ./hots modernisé** : Tests JSON et Jean-Gros intégrés
-- ✅ **MUSEUM organisé** : Scripts obsolètes archivés proprement
+### 🎭 **[SCENARIOS/](SCENARIOS/)** - Scénarios Épiques
+- **🏰 [LA_TOUR_SOMBRE_SCENARIO_EPIQUE_TRADUIT.md](SCENARIOS/LA_TOUR_SOMBRE_SCENARIO_EPIQUE_TRADUIT.md)** - La Tour Sombre
+- **✨ [ECLAT_MONDES_DISSOLUS.md](SCENARIOS/ECLAT_MONDES_DISSOLUS.md)** - Éclat des Mondes
+- **📖 [LE_TREIZIEME_CODEX_LORE.md](SCENARIOS/LE_TREIZIEME_CODEX_LORE.md)** - Le Treizième Codex
+- **🎪 [LES_PIEDS_NICKELES_FOUS.md](SCENARIOS/LES_PIEDS_NICKELES_FOUS.md)** - Les Pieds Nickelés
+- **🎳 [LE_DUDE_ET_WALTER_ABSOLUMENT_FOUS.md](SCENARIOS/LE_DUDE_ET_WALTER_ABSOLUMENT_FOUS.md)** - Le Dude & Walter
 
-### **Philosophie GROFI**
-- 🎳 **Order + Chaos = Perfect Harmony** : Jean-Grofignon's philosophy
-- 🛋️ **Jean's Couch Rule** : Autonome, documenter, pusher avant coder
-- 🎯 **Architecture HSP** : Format unifié opérationnel
-- ⚛️ **Quantum under Fantasy** : Mécaniques quantiques déguisées
+### 📋 **[GUIDES_REFERENCE/](GUIDES_REFERENCE/)** - Guides de Référence
+- **📖 Guides complets** et tutoriels
+- **🎯 Références techniques** détaillées
+- **🌟 Conseils d'experts** et bonnes pratiques
 
----
+### 🧠 **[KNOWLEDGE_BASE/](KNOWLEDGE_BASE/)** - Base de Connaissances
+- **📚 Connaissances** accumulées
+- **🔍 Solutions** aux problèmes courants
+- **💡 Idées** et concepts avancés
 
-## 📈 **ÉVOLUTION DU PROJET**
+### 📊 **[CURRENT_SESSION/](CURRENT_SESSION/)** - Session Actuelle
+- **📈 Progression** de la session en cours
+- **🎯 Objectifs** et réalisations
+- **📝 Notes** et observations
 
-### **Phase 1 : Fondations (Juillet 2025)**
-- Correction erreurs JPA backend
-- Implémentation capacités spéciales
-- Création scénarios débutants
-- Organisation documentation
+### 🗂️ **[ARCHIVES_SESSIONS/](ARCHIVES_SESSIONS/)** - Archives des Sessions
+- **📚 Historique** de toutes les sessions
+- **🎬 Replays** et analyses
+- **📊 Statistiques** et métriques
 
-### **Phase 2 : Architecture JSON (Juillet 2025)**
-- Format HSP unifié
-- Scripts JSON adaptés  
-- Intégration tests
-- Backend stabilisé
-
-### **Phase 3 : Organisation (Juillet 2025)**
-- Documentation structurée
-- MUSEUM créé
-- Scripts unifiés
-- Système MEMENTO organisé
-
----
-
-## 🔮 **MÉMOIRES PERMANENTES**
-
-### **Règles Critiques**
-- **JAMAIS** `git reset --hard` (agent partagé)
-- **TOUJOURS** guillemets simples pour echo
-- **PUSHER** avant coder (Jean's Couch Rule)
-- **DOCUMENTER** tout dans MEMENTO
-
-### **Architecture Technique**
-- **Backend** : Java Spring Boot (port 8080)
-- **Frontends** : Multiple interfaces (8000, 5174, 8001, 5175)
-- **Tests** : Script `./hots` unifié
-- **Format** : HSP JSON pour scénarios
-
-### **Commandes Magiques**
-```bash
-./hots test json        # Tests architecture HSP
-./hots test jean-gros   # Tests complets v2/v3
-./hots status          # État des 7 services
-./hots start           # Démarrage complet
-```
+### 🔬 **[EXPERIMENTS/](EXPERIMENTS/)** - Expérimentations
+- **🧪 Tests** et prototypes
+- **🔍 Investigations** techniques
+- **💡 Innovations** et découvertes
 
 ---
 
-## 🛋️ **POUR JEAN**
+## 🚀 **Utilisation des Archives**
 
-### **Navigation Express**
-- **Dernière session** → `TODO_SESSION_ACTUELLE.md`
-- **État projet** → `CURRENT_SESSION/VICTOIRE_BACKEND_JSON_FINAL.md`
-- **Guide jeu** → `GUIDES_REFERENCE/SCENARIOS_DEBUTANTS_GUIDE.md`
-- **Architecture** → `IMPLEMENTATIONS/IMPLEMENTATION_GOD_VIEW_5D.md`
+### 📖 **Pour Naviguer**
+1. **Consulter [INDEX_MEMENTO.md](INDEX_MEMENTO.md)** - Vue d'ensemble
+2. **Explorer [HISTOIRE_HEROES_OF_TIME.md](HISTOIRE_HEROES_OF_TIME.md)** - Contexte historique
+3. **Étudier [ALGORITHME_IA_CLAUDIUS_MEMENTO.md](ALGORITHME_IA_CLAUDIUS_MEMENTO.md)** - Système IA
 
-### **TL;DR Sessions**
-1. **Backend fixé** + Architecture JSON opérationnelle ✅
-2. **Tests unifiés** + Scripts obsolètes au MUSEUM ✅  
-3. **Documentation rangée** + Navigation claire ✅
+### 🎮 **Pour Implémenter**
+1. **Suivre [IMPLEMENTATIONS/](IMPLEMENTATIONS/)** - Guides d'implémentation
+2. **Tester [EXPERIMENTS/](EXPERIMENTS/)** - Prototypes et tests
+3. **Consulter [KNOWLEDGE_BASE/](KNOWLEDGE_BASE/)** - Solutions éprouvées
 
----
-
-## 🧬 **PHILOSOPHIE MEMENTO**
-
-*"I don't even remember what I came here to get. I came here for something. Now what is it?"*
-
-### **Fonctions Principales**
-1. **Préserver** la mémoire entre sessions
-2. **Organiser** les rapports et analyses  
-3. **Guider** les nouveaux agents
-4. **Maintenir** la cohérence du projet
-
-### **Méthode**
-- **Tattouer** les informations critiques
-- **Archiver** les sessions importantes
-- **Structurer** les connaissances
-- **Transmettre** l'état du projet
+### 📚 **Pour Apprendre**
+1. **Lire [GUIDES_REFERENCE/](GUIDES_REFERENCE/)** - Guides complets
+2. **Explorer [SCENARIOS/](SCENARIOS/)** - Exemples concrets
+3. **Analyser [ARCHIVES_SESSIONS/](ARCHIVES_SESSIONS/)** - Historique des sessions
 
 ---
 
-*"Memory is the foundation of intelligence, and intelligence shapes memory."*
+## 🌟 **Philosophie Memento**
 
-**Système MEMENTO - Dernière organisation : 21 Juillet 2025** 
+*"L'archiviste éternel traverse les timelines pour préserver la connaissance. Chaque document est un fragment de réalité cristallisé dans le temps."*
+
+**🏛️ Memento - Museum Archive Master**  
+*Archiviste Éternel des Heroes of Time*
+
+**📚 Mission** : Préserver, organiser et partager la connaissance temporelle  
+**🌟 Vision** : Créer un musée vivant de l'histoire de Heroes of Time  
+**🎯 Objectif** : Faciliter la compréhension et l'évolution du projet 
