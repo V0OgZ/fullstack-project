@@ -1,6 +1,6 @@
 // api.js - Connexion API REST vers backend Heroes of Time
 class GameAPI {
-    constructor(baseUrl = 'http://localhost:8080/api/temporal') {
+    constructor(baseUrl = 'http://localhost:8080/api') {
         this.baseUrl = baseUrl;
         this.gameId = null;
     }
@@ -11,8 +11,8 @@ class GameAPI {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
-                    gameName: gameName,
-                    playerId: 'player1' 
+                    scenarioId: 'conquest-classic',
+                    playerCount: 1
                 })
             });
             
@@ -21,36 +21,11 @@ class GameAPI {
             }
             
             const game = await response.json();
-            this.gameId = game.id || 1; // Fallback to 1 if no ID returned
-            
-            // Start the game automatically
-            await this.startGame();
+            this.gameId = game.id || 'game-1'; // Use the returned game ID
             
             return game;
         } catch (error) {
             console.error('Failed to create game:', error);
-            throw error;
-        }
-    }
-    
-    async startGame() {
-        if (!this.gameId) {
-            throw new Error('No game ID available');
-        }
-        
-        try {
-            const response = await fetch(`${this.baseUrl}/games/${this.gameId}/start`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' }
-            });
-            
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
-            
-            return await response.json();
-        } catch (error) {
-            console.error('Failed to start game:', error);
             throw error;
         }
     }
@@ -61,10 +36,13 @@ class GameAPI {
         }
         
         try {
-            const response = await fetch(`${this.baseUrl}/games/${this.gameId}/script`, {
+            const response = await fetch(`${this.baseUrl}/temporal/execute`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ script: script })
+                body: JSON.stringify({ 
+                    gameId: this.gameId,
+                    script: script 
+                })
             });
             
             if (!response.ok) {
@@ -74,7 +52,38 @@ class GameAPI {
             
             return await response.json();
         } catch (error) {
-            console.error('Failed to execute script:', error);
+            console.error('Failed to execute HOTS script:', error);
+            throw error;
+        }
+    }
+    
+    async newGame() {
+        // Alias for createGame to match the frontend interface
+        return this.createGame('Heroes of Time Game');
+    }
+    
+    async moveHero(heroId, targetX, targetY) {
+        if (!this.gameId) {
+            throw new Error('No game created');
+        }
+        
+        try {
+            const response = await fetch(`${this.baseUrl}/games/${this.gameId}/move-hero`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    heroId: heroId,
+                    targetPosition: { x: targetX, y: targetY }
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            
+            return await response.json();
+        } catch (error) {
+            console.error('Failed to move hero:', error);
             throw error;
         }
     }
@@ -85,7 +94,7 @@ class GameAPI {
         }
         
         try {
-            const response = await fetch(`${this.baseUrl}/games/${this.gameId}/state`);
+            const response = await fetch(`${this.baseUrl}/games/${this.gameId}`);
             
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -104,7 +113,7 @@ class GameAPI {
         }
         
         try {
-            const response = await fetch(`${this.baseUrl}/games/${this.gameId}/next-turn`, {
+            const response = await fetch(`${this.baseUrl}/games/${this.gameId}/end-turn`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' }
             });
