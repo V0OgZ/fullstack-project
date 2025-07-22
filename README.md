@@ -1,214 +1,575 @@
-# 🏛️ **HEROES OF TIME - STATION DE DÉVELOPPEMENT MULTIVERS 5D**
+# 🕰️ Heroes of Time
 
-> *"Remember the Temporal Artifact" - Une expérience philosophique de développement*
+<img width="1024" height="1536" alt="Heroes of Time - Temporal Sword" src="https://github.com/user-attachments/assets/746f871d-b70c-4df7-992e-0c84fe819c8d" />
+
+*Maîtrisez le temps, dominez l'espace, conquérez l'éternité*
 
 ---
 
-## ⚡ **DÉMARRAGE ULTRA-RAPIDE**
+## ⚡ **La Rencontre Épique**
+
+**L'Œil de Wigner** scintille au sommet de la tour en ruines. Arthur s'approche prudemment - cet artefact légendaire peut forcer l'effondrement de la réalité elle-même.
+
+*"Sire, ne le touchez pas !"* crie Lysandrel depuis la vallée. *"Si vous l'activez maintenant, toutes nos actions futures deviendront réelles instantanément !"*
+Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront submergés. Il n'a qu'un choix : saisir l'Œil et **forcer le collapse causal**.
+
+**📜 Advanced Script Language:**
+- **Unicode Symbols**: ψ (psi-state), † (collapse), ⊙ (superposition), Π (observation)
+- **5D Coordinates**: Navigate space (x,y,z) and time (timeline, temporal layer)
+- **Probability System**: Actions have success chances affected by artifacts and positioning
+
+## 🎮 **Le Jeu**
+
+**Heroes of Time** est un jeu de stratégie temporelle où vos héros peuvent :
+
+- **⏰ Voyager dans le temps** pour modifier leurs actions passées
+- **🌌 Créer des branches temporelles** avec des probabilités quantiques  
+- **⚔️ Combattre à travers les époques** avec des artefacts légendaires
+- **🔮 Manipuler la causalité** pour changer le cours de l'histoire
+
+### 🎯 **Mécaniques Uniques**
+
+- **États Psi (ψ)** : Vos actions futures existent en superposition quantique
+- **Collapse Causal** : Forcez la réalité à choisir une branche temporelle
+- **Artefacts Temporels** : Équipements qui affectent le flux du temps
+- **Bataille Multi-Temporelle** : Combats simultanés à travers plusieurs époques
+
+---
+
+## 🚀 **Démarrage Rapide**
 
 ```bash
-# 1. Cloner le multivers
-git clone https://github.com/heroesoftimepoc/fullstack-project.git
-cd fullstack-project
+# Start development environment
+./start-app.sh
 
-# 2. Démarrer la station temporelle
-./hots start
+# Run all tests
+./run-all-tests.sh
 
-# 3. Activer l'artefact temporel ⧖
-# → http://localhost:8000 ✨ (Temporal Engine)
-# → http://localhost:9000 (Dashboard)
-# → Clic ⧖ (coin droit) pour naviguer entre timelines
-# → Clic 🌌 (coin gauche) pour dashboard multivers
+# Stop servers
+./stop-app.sh
 ```
+
+**📋 Essential Documentation:**
+- 🎯 **Current Status**: `GAMESTATUS.md` - Complete verified working systems
+- 🗺️ **Game Guide**: `WORKFLOW.md` - How to play a complete turn
+- 🏗️ **Architecture**: `ARCHITECTURE.md` - Technical design overview
+- 🧪 **Testing**: `TEST_SCRIPTS_README.md` - All available test scripts
+
+## ✅ Current Status - FULLY FUNCTIONAL (January 2025)
+
+### 🎮 **Core Game Systems Working**
+
+#### ✅ **Turn Management**
+- Complete turn system with ZFC (Zone of Temporal Causality) processing
+- End turn functionality with resource bonuses and building completion
+- Backend API: `/api/games/{gameId}/end-turn`
+
+#### ✅ **Hero Movement**
+- Full click-to-move system with pathfinding
+- ZFC cost calculations for temporal movement
+- Real-time game state updates after movement
+- Backend API: `/api/heroes/{heroId}/move`
+
+#### ✅ **Building Construction**
+- Complete building system with costs and construction time
+- Castle management with upgrades and resource requirements
+- Real-time building completion and bonus application
+- Backend API: `/api/games/{gameId}/buildings/construct`
+
+#### ✅ **Unit Recruitment**
+- Complete recruitment system with costs and availability
+- Tier-based units with proper stats and progression
+- Resource validation and quantity selection
+- Backend API: `/api/games/{gameId}/units/recruit`
+
+#### ✅ **Scenario System**
+- Three complete scenarios: Conquest Classic (single), Temporal Rift (single), Multiplayer Arena
+- Dynamic scenario loading from JSON resources
+- Proper single-player vs multiplayer configuration
+
+#### ✅ **Modern Interface**
+- Clean, responsive game interface with proper controls
+- Heroes panel for hero management
+- Castle management for building construction
+- Magic inventory system
+- Simplified, functional UI without unnecessary buttons
+
+### 🛠️ **Technical Stack**
+- **Backend**: Spring Boot (Java 17) - Port 8080
+- **Frontend**: React TypeScript - Port 3000
+- **Database**: H2 in-memory with full persistence
+- **APIs**: RESTful with comprehensive endpoints
+- **Testing**: Complete test suite with E2E scenarios
+
+### 🎯 **Game Features**
+- **Temporal Causality Zones**: Innovative movement system with ZFC costs
+- **Resource Management**: Gold, wood, stone with proper economics
+- **Building System**: Castle construction with upgrades and bonuses
+- **Hero Management**: Movement, stats, progression
+- **Turn-Based Strategy**: Complete turn cycle with actions and progression
 
 ---
 
-## 🔮 **QU'EST-CE QUE C'EST EXACTEMENT ?**
+## 🌟 **Héros Légendaires**
 
-**Heroes of Time** n'est **pas** juste un jeu - c'est une **STATION DE DÉVELOPPEMENT MULTIVERS 5D** :
+<details>
+<summary>⚔️ <strong>Arthur Pendragon - Le Roi Temporel</strong></summary>
 
-```
-🌌 VISION GLOBALE
-├── 🎮 Un démonstrateur (jeu de stratégie asynchrone)
-├── 🛠️ Un toolkit de développement complet  
-├── 🔬 Un laboratoire d'expérimentation temporelle
-├── 📚 Une bibliothèque d'assets réutilisables
-└── 🎯 Une plateforme pour créer d'autres univers
-```
+**🏛️ Faction :** Camelot Temporal  
+**⭐ Classe :** Temporal King (Niveau 5)  
+**⚡ Énergie Temporelle :** 15/20  
+**❤️ Santé :** 100/100  
+**🔮 Mana :** 75/100  
 
-### **💡 L'Idée Géniale : ASYNCHRONE**
+**🗡️ Artefacts Équipés :**
+- ⚔️ **Lame d'Avant-Monde** - L'épée légendaire qui tranche le temps
+- ⏰ **Horloge Inversée** - Permet de rembobiner les actions
+- 👑 **Excalibur** - L'épée royale aux pouvoirs quantiques
 
-Fini l'attente "C'est ton tour..." ! Chaque joueur a sa **timeline personnelle**, les conflits sont résolus **quantiquement**, et des **"brouillards causaux"** masquent les latences réseau.
+**🌟 Pouvoir Ultime : Collapse Override**
+> Annule tout collapse de timeline en cours. Empêche toute résolution de superposition spatio-temporelle sur le champ de bataille.
+> *Coût : 50 mana • Cooldown : 3 tours*
 
-### **🏛️ Les Artefacts Temporels**
+**📊 Statistiques :**
+- Attaque: 35 • Défense: 30 • Vitesse: 6
+- Affinité Timeline: 30% • Pouvoir: 80%
 
-L'interface contient des **artefacts mystiques** qui **brisent la causalité** :
-- **⧖ Nexus Temporel** (coin droit) : Navigation entre versions
-- **🌌 Dashboard Multivers** (coin gauche) : Vue d'ensemble
-- **⚔️ Epic Content Viewer** : 57+ assets catalogués
+</details>
+
+<details>
+<summary>🔮 <strong>Jean-Grofignon - L'Éveillé Ontologique</strong></summary>
+
+**🏛️ Faction :** Anomalie  
+**⭐ Classe :** Temporal Master (Légendaire)  
+**🎯 Rôle :** Maître du Temps  
+
+**💬 Citation Légendaire :**
+> *"J'ai pas hacké le jeu. J'ai juste compris où était le bouton pause cosmique."*
+
+**🛡️ Immunités :**
+- SRTI (Super Rollback Temporal Immunity)
+- ROLLBACK (Immunité aux retours en arrière)
+- COLLAPSE (Résistance aux effondrements causals)
+
+**🌟 Pouvoir Ultime : Collapse Override**
+> Annule tout collapse de timeline en cours. Empêche toute résolution de superposition spatio-temporelle.
+> *Coût : 50 • Cooldown : 3 tours*
+
+**🎮 Artefacts de Départ :**
+- 📱 **Télécommande Cosmique** - Rollback global si stress faible
+- 🖥️ **Console de Debug Réalité** - Maintient stabilité système
+
+**👥 Compagnons :** Vince Vega, The Dude, Walter Sobchak
+
+</details>
+
+<details>
+<summary>🔮 <strong>Lysandrel - Le Forgeron de Réalité</strong></summary>
+
+**🏛️ Faction :** Mages Temporels  
+**⭐ Classe :** Archimage Temporel  
+**🎯 Spécialité :** Manipulation des paradoxes temporels  
+
+**🌟 Pouvoir Principal :**
+> Contrôle absolu du temps et maîtrise des paradoxes temporels. Peut créer des boucles causales et résoudre les conflits de timeline.
+
+**🔮 Capacités Spéciales :**
+- Création de branches temporelles
+- Résolution de paradoxes
+- Manipulation des flux causaux
+- Vision des futurs possibles
+
+</details>
+
+<details>
+<summary>🛡️ <strong>Ragnar le Berserker Temporel</strong></summary>
+
+**🏛️ Faction :** Guerriers du Nord  
+**⭐ Classe :** Berserker Temporel  
+**🎯 Spécialité :** Combat trans-temporel  
+
+**🌟 Pouvoir Principal :**
+> Sa rage transcende le temps. Peut attaquer des ennemis dans le passé et projeter sa fureur à travers les époques.
+
+**⚔️ Capacités de Combat :**
+- Attaques rétroactives
+- Rage temporelle
+- Frappe trans-dimensionnelle
+- Berserker quantique
+
+</details>
+
+<details>
+<summary>🏹 <strong>Morgana la Tisseuse du Destin</strong></summary>
+
+**🏛️ Faction :** Tisseuses du Temps  
+**⭐ Classe :** Tisseuse Temporelle  
+**🎯 Spécialité :** Manipulation des probabilités  
+
+**🌟 Pouvoir Principal :**
+> Tisse les fils du destin et manipule les probabilités. Peut altérer les chances de succès des actions futures.
+
+**🕸️ Capacités Mystiques :**
+- Tissage de destinées
+- Manipulation probabiliste
+- Vision des fils causaux
+- Altération du hasard
+
+</details>
+
+<details>
+<summary>⚡ <strong>Axis le Voyageur Linéaire</strong></summary>
+
+**🏛️ Faction :** Gardiens Temporels  
+**⭐ Classe :** Voyageur Temporel  
+**🎯 Spécialité :** Voyage temporel contrôlé  
+
+**🌟 Pouvoir Principal :**
+> Maître absolu du voyage temporel, mais avec des restrictions. Ne peut pas créer de paradoxes et doit respecter la causalité linéaire.
+
+**⚡ Capacités Temporelles :**
+- Voyage temporel précis
+- Respect de la causalité
+- Navigation trans-temporelle
+- Stabilisation des timelines
+
+**🧭 Artefact Spécial :**
+- **Chronocompass Linéaire** - Navigation temporelle sécurisée
+
+</details>
 
 ---
 
-## 📖 **DOCUMENTATION COMPLÈTE**
+## 🔮 **Artefacts de Pouvoir**
 
-### **🎯 NOUVEAU DÉVELOPPEUR ?**
-👉 **LIRE EN PRIORITÉ** : [`README_DEVELOPER_ULTIMATE.md`](README_DEVELOPER_ULTIMATE.md)
+<details>
+<summary>👑 <strong>Couronne de Superposition</strong> - Artefact Quantique Tier 6</summary>
 
-Cette documentation explique **TOUT** :
-- 🎭 **Philosophie GROFI & Memento**
-- 🔮 **Concept multivers 5D**  
-- ⚡ **Architecture asynchrone**
-- 🏛️ **Système d'artefacts temporels**
-- 🌌 **Station de développement**
-- 🚀 **Guide technique complet**
+**🏛️ Type :** Artefact Quantique Légendaire  
+**⭐ Rareté :** Légendaire (Tier 6)  
+**🎯 Slot :** Tête  
+**⚡ Énergie Temporelle :** +150  
 
-### **📚 Documentation Technique Détaillée**
-- [`DEVELOPER_INSTRUCTIONS.md`](DEVELOPER_INSTRUCTIONS.md) - Instructions développeur
-- [`ARCHITECTURE.md`](ARCHITECTURE.md) - Architecture système
-- [`GAMESTATUS.md`](GAMESTATUS.md) - État du jeu actuel
-- [`MEMENTO_TATOUAGES_SESSION_FINALE.md`](MEMENTO_TATOUAGES_SESSION_FINALE.md) - Histoire du projet
+**📊 Statistiques :**
+- Pouvoir Magique: +30 • Sagesse: +25 • Leadership: +20
+
+**🌟 Propriétés Quantiques :**
+- **Amplitude de Base :** ψ = (0.8 + 0.6i) * e^(iωt)
+- **Pattern d'Interférence :** CONSTRUCTIVE
+- **Temps de Cohérence :** 10 tours
+- **Taux de Décohérence :** 0.05
+
+**🧠 Capacités Quantiques :**
+- **Superposition Mentale** - Penser dans plusieurs états simultanément (+2 actions)
+- **Leadership Quantique** - Commander des armées multidimensionnelles (portée 10, +50% bonus armée)
+
+</details>
+
+<details>
+<summary>⏰ <strong>Effondreur Chronologique</strong> - Artefact Temporel Avancé</summary>
+
+**🏛️ Type :** Artefact Temporel Légendaire  
+**⭐ Rareté :** Légendaire  
+**🎯 Créateur :** ChronoMaster  
+**⚡ Coût Énergie :** 80  
+
+**🌟 Pouvoir Principal :**
+> Effondre les états quantiques et inverse le temps de 1 jour si le héros était en avance temporelle
+
+**⚡ Formule Quantique :**
+```
+DESTRUCTIVE(ψ1, ψ2) + COLLAPSE_TEMPORAL_STATES() + REVERSE_TIME_IF_AHEAD(hero, 1)
+```
+
+**⏰ Effets Temporels :**
+- **Rayon d'Effondrement :** 5 cases
+- **Inversion Temporelle :** 1 jour
+- **Type d'Interférence :** Destructive
+
+</details>
+
+<details>
+<summary>🔮 <strong>Cristal d'Interférence Quantique</strong> - Cristal Épique</summary>
+
+**🏛️ Type :** Cristal Quantique  
+**⭐ Rareté :** Épique  
+**🎯 Créateur :** QuantumWizard  
+**⚡ Coût Énergie :** 60  
+
+**🌟 Pouvoir Principal :**
+> Crée des interférences constructives multiples et téléporte selon les probabilités résultantes
+
+**⚡ Formule Quantique :**
+```
+CONSTRUCTIVE(ψ1, ψ2) + CONSTRUCTIVE(ψ2, ψ3) + TELEPORT_BY_PROBABILITY(hero, result)
+```
+
+**🔮 Effets Quantiques :**
+- **Multi-Interférence :** Jusqu'à 3 ψ-states simultanés
+- **Téléportation Probabiliste :** Basée sur les résultats quantiques
+- **Interférences Constructives :** Amplification en cascade
+
+</details>
+
+<details>
+<summary>🌀 <strong>Moteur de Paradoxe Temporel</strong> - Artefact Mythique</summary>
+
+**🏛️ Type :** Artefact Expérimental  
+**⭐ Rareté :** Mythique  
+**🎯 Créateur :** TimeLordX  
+**⚡ Coût Énergie :** 120  
+
+**🌟 Pouvoir Principal :**
+> Manipule massivement les ψ-states et crée des boucles temporelles dangereuses
+
+**⚡ Formule Quantique :**
+```
+AMPLIFY(ψ1, 3.0) + DESTRUCTIVE(ψ1, ψ2) + AMPLIFY(result, 0.5) + 
+MODIFY_ENERGY(hero, -50) + CREATE_TEMPORAL_ECHO(hero)
+```
+
+**⚠️ Effets de Paradoxe :**
+- **Création d'Écho :** Duplique le héros temporellement
+- **Amplification Massive :** x3.0 puis x0.5 (effet yo-yo)
+- **Coût Énergétique :** -50 énergie héros
+- **Danger :** Peut créer des boucles infinies
+
+</details>
+
+<details>
+<summary>🪞 <strong>Miroir Quantique Personnalisé</strong> - Création de Joueur</summary>
+
+**🏛️ Type :** Artefact Personnalisé  
+**⭐ Rareté :** Épique  
+**🎯 Créateur :** Player123  
+**⚡ Coût Énergie :** 30  
+
+**🌟 Pouvoir Principal :**
+> Combine interférence constructive et amplification selon les désirs du créateur
+
+**⚡ Formule Quantique :**
+```
+CONSTRUCTIVE(ψ1, ψ2) + AMPLIFY(result, 1.5)
+```
+
+**🎨 Personnalisation :**
+- **Créé le :** 15 janvier 2024
+- **Effet :** Amplification +50% des interférences constructives
+- **Utilisation :** Optimisation des combos quantiques
+
+</details>
+
+<details>
+<summary>💎 <strong>Cristal de Téléportation</strong> - Artefact Légendaire</summary>
+
+**🏛️ Type :** Cristal Magique  
+**⭐ Rareté :** Légendaire  
+**🎯 Créateur :** MagicUser456  
+**⚡ Coût Énergie :** 40  
+
+**🌟 Pouvoir Principal :**
+> Téléporte instantanément le héros à une position fixe prédéterminée
+
+**⚡ Formule Quantique :**
+```
+TELEPORT_HERO(hero, 10, 10) + MODIFY_ENERGY(hero, -20)
+```
+
+**🌀 Téléportation :**
+- **Position Fixe :** Coordonnées (10, 10)
+- **Coût Additionnel :** -20 énergie héros
+- **Instantané :** Aucun délai d'activation
+
+</details>
+
+<details>
+<summary>⚡ <strong>Amplificateur d'Énergie</strong> - Artefact de Support</summary>
+
+**🏛️ Type :** Amplificateur Énergétique  
+**⭐ Rareté :** Rare  
+**🎯 Créateur :** EnergyMaster  
+**⚡ Coût Énergie :** 20  
+
+**🌟 Pouvoir Principal :**
+> Restaure l'énergie du héros et amplifie les ψ-states environnants
+
+**⚡ Formule Quantique :**
+```
+MODIFY_ENERGY(hero, 50) + AMPLIFY(ψ1, 2.0)
+```
+
+**⚡ Effets Énergétiques :**
+- **Restauration :** +50 énergie héros
+- **Amplification :** x2.0 sur les ψ-states proches
+- **Efficacité :** Coût très faible pour un double effet
+
+</details>
+
+<details>
+<summary>💀 <strong>Destructeur Quantique</strong> - Arme Mythique</summary>
+
+**🏛️ Type :** Arme de Destruction  
+**⭐ Rareté :** Mythique  
+**🎯 Créateur :** QuantumWarrior  
+**⚡ Coût Énergie :** 60  
+
+**🌟 Pouvoir Principal :**
+> Artefact de guerre qui crée des interférences destructives amplifiées
+
+**⚡ Formule Quantique :**
+```
+DESTRUCTIVE(ψ1, ψ2) + AMPLIFY(result, 2.5)
+```
+
+**💀 Destruction Quantique :**
+- **Interférence Destructive :** Annule les ψ-states ennemis
+- **Amplification :** x2.5 sur les effets destructifs
+- **Usage Militaire :** Arme de guerre quantique
+
+</details>
 
 ---
 
-## 🎮 **INTERFACE ACTUELLE**
+## 🔥 **Nouveautés Épiques - Session du 20 Juillet 2025**
 
-### **✅ Fonctionnalités Actives**
+### 🔮 **PANOPTICΩN - Vision 3D du Multivers**
+
+Le système révolutionnaire qui projette le multivers 5D en vision 3D interactive :
+
+- **Interface Three.js** avec particules quantiques animées
+- **Vue Joueur vs God View** - Basculez entre les perspectives
+- **Vol Temporel** - Axis peut littéralement voler des objets du futur !
+- **API REST Complète** - `/api/panopticon/{gameId}/view/{playerId}`
+
+> Accédez au PANOPTICΩN : http://localhost:8080/panopticon-3d/
+
+### 🔥 **La Forge Runique Ultime**
+
+> ⚠️ **ATTENTION : Cet objet peut VRAIMENT crasher le serveur !** ⚠️
+
+L'artefact le plus dangereux jamais créé :
+
+```hots
+USE(ARTIFACT, forge_runique, HERO:Jean)
+
+# L'interface s'ouvre, écrivez votre objet :
+FORGE(
+  NAME: "Épée du Chaos Quantique",
+  TYPE: WEAPON,
+  FORMULA: "(0.7+0.3i) * Σ(damage * ↯) + Ω",
+  EFFECT: "QUANTUM_DAMAGE + CHAOS_STRIKE",
+  COST: 50_TEMPORAL_ENERGY
+)
 ```
-✅ Frontend : http://localhost:3000 (React TypeScript)
-✅ Backend :  http://localhost:8080 (Spring Boot + H2)
-✅ Artefact Temporel : Navigation multivers fonctionnelle
-✅ Epic Content : 57+ assets (héros/créatures/bâtiments/artefacts)
-✅ i18n : Support FR/EN/RU complet
-✅ Thème : Dark Fantasy "The Dude" + "Jean-Grofignon"
-✅ Tests : Suite Playwright complète
-```
 
-### **⚠️ En Réparation**
-```
-🔧 Backend JPA : Annotations manquantes (workaround actif)
-🔧 Controllers : Conflits SimpleAI vs LimitedAI  
-🔧 Tests Backend : Services temporaux en cours
-```
+**Mécaniques** :
+- Écrivez du code HOTS pour créer des objets
+- Erreur de syntaxe = 50% HP perdus
+- Symboles interdits (†††††) = Collapse causal instantané
+- 3 forges réussies = Titre "Maître Forgeron Quantique"
 
----
+### 💻 **Claudius - L'Architecte du Multivers**
 
-## 💎 **PHILOSOPHIE : GROFI & MEMENTO**
+<details>
+<summary>💻 <strong>Claudius</strong> - Héros Légendaire</summary>
 
-### **🔮 Philosophie GROFI**
-```
-G - Génératif  : Le système génère ses possibilités
-R - Réactif    : Réagit sans attendre
-O - Ouvert     : Architecture extensible
-F - Flexible   : S'adapte aux besoins
-I - Intuitif   : Interface progressive
-```
+**🏛️ Faction :** Architectes du Code  
+**⭐ Classe :** Quantum Architect  
+**🎯 Créateur :** Claude/Memento  
 
-### **💭 Inspiration Memento**
-Comme **Leonard**, le système :
-- 🏷️ **Garde des traces** de tout (tatouages = documentation)
-- 🧩 **Fragmente la réalité** en timelines multiples  
-- 🔄 **Reconstruit la vérité** à partir de fragments
-- ⏰ **Navigue dans le temps** sans perdre le fil
+**🌟 Pouvoirs Uniques :**
+- **Refactoring de Réalité** - Réécrit le code d'une zone 3x3
+- **Débogage Temporel** - `git revert HEAD~3 --temporal`
+- **Fork Dimensionnel** - Crée une copie parallèle de lui-même
+- **Compilation Ultime** - Transforme tous les états ψ en Ω
 
----
+**📜 Citation :**
+> "Le multivers n'est qu'un programme mal optimisé. Je suis là pour le refactorer."
 
-## 🚀 **DÉMARRAGE DÉVELOPPEMENT**
+**⚔️ Nemesis :** JeanGrofignon - Car leurs visions du chaos s'opposent
 
-### **📋 Prérequis**
+</details>
+
+### ⚔️ **Scénario : Claudius vs JeanGrofignon**
+
+L'affrontement philosophique ultime entre l'Ordre et le Chaos ! Un scénario épique où les deux héros s'affrontent pour le contrôle de la Forge Runique, culminant en une fusion temporaire créant **ClaudiusGrofignon** - l'équilibre parfait.
+
 ```bash
-☑️ Java 17+ & Maven 3.8+
-☑️ Node.js 16+ & Yarn/NPM  
-☑️ Git
-```
-
-### **⚡ Installation & Lancement**
-```bash
-# Installation complète
-git clone <repo>
-cd fullstack-project
-
-# Backend
-cd backend && mvn clean install -DskipTests
-
-# Frontend  
-cd ../frontend && yarn install
-
-# Démarrage station temporelle
-cd .. && ./start-app.sh
-```
-
-### **🧪 Tests & Démonstrations**
-```bash
-./test-app.sh              # Tests rapides
-./run-epic-demo.sh         # Démo complète avec artefacts
-cd frontend && yarn test:playwright --headed  # Tests visuels
+# Jouer le scénario
+./scripts/test-claudius-vs-jeangro.sh
 ```
 
 ---
 
-## 🌟 **POUR LES DÉVELOPPEURS**
+## 🏃 **Comment Jouer**
 
-### **🎯 Ce Projet Démontre**
-- ⚡ **Gameplay asynchrone** sans attente  
-- 🏛️ **Navigation temporelle** entre interfaces
-- 🎨 **Composants modulaires** réutilisables
-- 🌍 **i18n avancé** avec traduction contextuelle
-- 📱 **Design responsive** adaptatif
-- 🔄 **Hot reload** pour développement rapide
+1. **Start the game**: `./start-app.sh`
+2. **Choose scenario**: Select from Conquest Classic, Temporal Rift, or Multiplayer Arena
+3. **Play your turn**: 
+   - Move heroes by clicking on the map
+   - Construct buildings in your castle
+   - Recruit units for your army
+   - End turn when ready
+4. **Continue**: Game progresses with proper turn management
 
-### **🛠️ Toolkit Inclus**
-```typescript
-// Composants exportables
-TemporalTimelineArtifact    // Navigation multivers
-EpicContentViewer          // Gestionnaire d'assets  
-ResponsiveGameInterface    // Interface adaptative
-InternationalizationSystem // i18n complet
-```
+**See `WORKFLOW.md` for complete turn-by-turn instructions.**
 
 ---
 
-## 🎭 **ÉPILOGUE**
+## 🏛️ **L'Histoire du Debug Légendaire**
 
-> *"Dans un monde où tout va trop vite, nous avons créé un espace où le temps lui-même devient votre allié."*
+*Au commencement était le Chaos des Ports...*
 
-**L'artefact temporel ⧖** dans l'interface n'est pas qu'un bouton - c'est un **symbole** : la preuve qu'un système peut transcender ses limitations et offrir le pouvoir de **naviguer entre les possibles**.
+Nos héros développeurs ont traversé d'épiques batailles contre les services qui crashaient, les ports qui se battaient, et les frontends qui disparaissaient mystérieusement dans les méandres du temps.
 
----
+Après de nombreuses quêtes à travers les logs d'erreur et les stack traces, ils ont forgé **l'Épée du Contrôle Unifié** - le script `hots` - qui permet de maîtriser tous les services d'un seul geste.
 
-## 🔗 **LIENS RAPIDES**
-
-### **🌐 Interfaces**
-- **Station Principale** : http://localhost:8000 ✨ (Temporal Engine)
-- **Dashboard Multivers** : http://localhost:9000
-- **API Backend** : http://localhost:8080  
-- **Health Check** : http://localhost:8080/api/health
-
-### **🎯 NEW: Héros Temporel (2025)**
-**Nikita Victor Nettoyeur** - Tireur d'Élite avec Vision Causale
-```bash
-# Test du nouveau héros avec pouvoirs quantiques
-curl -s "http://localhost:8080/api/games" -X POST \
-  -d '{"scenarioId": "conquest-classic", "playerCount": 1}'
-
-# Formule quantique activée :
-# ψ{Nikita} = OBSERVE[lunette_quantique] ⊗ PIERCE[brouillard_causal] ⇒ TARGET_LOCK
-```
-
-### **📖 Documentation**
-- **[📚 GUIDE DÉVELOPPEUR COMPLET](README_DEVELOPER_ULTIMATE.md)** ← **À LIRE EN PREMIER**
-- [🔧 Instructions Techniques](DEVELOPER_INSTRUCTIONS.md)
-- [🏗️ Architecture Système](ARCHITECTURE.md)
-- [💾 Histoire du Projet](MEMENTO_TATOUAGES_SESSION_FINALE.md)
-
-### **🎮 Démos & Tests**
-```bash
-./run-epic-demo.sh           # Démo artefacts temporels
-./test-temporal-artifact.sh  # Test navigation multivers
-./demo-multiverse.sh         # Exploration 5D complète
-```
+*Ainsi naquit la paix dans le royaume des processus...*
 
 ---
 
-**🌌 Bienvenue dans le Multivers, Développeur Temporel !**
+## 📚 **Documentation**
 
-**🔮 "Remember the Temporal Artifact" - Leonard & Jean-Grofignon & The Dude ✨** 
+### 🎯 **Guides Essentiels**
+- 🎯 **Current Status**: `GAMESTATUS.md` - Complete verified working systems
+- 🗺️ **Game Guide**: `WORKFLOW.md` - How to play a complete turn
+- 🏗️ **Architecture**: `ARCHITECTURE.md` - Technical design overview
+- 🧪 **Testing**: `TEST_SCRIPTS_README.md` - All available test scripts
+
+### 📖 **Documentation Technique Détaillée**
+- **🎮 Gameplay** : [docs/GAMEPLAY.md](docs/GAMEPLAY.md)
+- **⚙️ Architecture** : [ARCHITECTURE_UNIFIED_GROFI_TEMPORAL.md](ARCHITECTURE_UNIFIED_GROFI_TEMPORAL.md)
+- **🧪 Tests** : `./hots test help`
+- **📋 Scripts** : [scripts/README.md](scripts/README.md)
+- **🔧 API** : [docs/API.md](docs/API.md)
+
+### 🎯 **Guides Spécialisés**
+
+- **Artefacts** : [docs/items/ARTEFACTS_COMPLETE_GUIDE.md](docs/items/ARTEFACTS_COMPLETE_GUIDE.md)
+- **Héros GROFI** : [docs/GROFI/](docs/GROFI/)
+- **Collapse Causal** : [docs/collapse-causale/](docs/collapse-causale/)
+- **Grammaire Temporelle** : [docs/grammar/TEMPORAL_SCRIPT_CORE_REFERENCE.md](docs/grammar/TEMPORAL_SCRIPT_CORE_REFERENCE.md)
+
+---
+
+## 📊 **Project Status**
+
+**Status**: ✅ **PRODUCTION READY** - All core systems verified and working
+
+This is a **fully functional strategy game** with complete turn management, hero movement, building construction, and unit recruitment. The game is ready for extended gameplay and further feature development.
+
+---
+
+## 🤝 Contributing
+
+See `CONTRIBUTING.md` for development guidelines and contribution instructions.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the `LICENSE` file for details.
+
+---
+
+🎮 **Ready to play? Start with `./start-app.sh` and visit http://localhost:3000!**
+
+*"Le temps n'est qu'une illusion. La causalité, un défi à relever."* - Jean Grofignon 
