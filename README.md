@@ -621,6 +621,9 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 - **💾 Système de Persistence** : [PROTOCOLE_MEMENTO_PERSISTENCE_UPDATE.md](PROTOCOLE_MEMENTO_PERSISTENCE_UPDATE.md)
 - **🎮 Test vs IA** : [scripts/test-vs-ia.sh](scripts/test-vs-ia.sh)
 - **💾 Test Persistence** : [scripts/test-persistence.sh](scripts/test-persistence.sh)
+- **🧠 Système de Simulation Économique** : [docs/CREATION_SYSTEME_SIMULATION_ECONOMIQUE.md](docs/CREATION_SYSTEME_SIMULATION_ECONOMIQUE.md) - **SERVICE DE TRADUCTION INTELLIGENT SANS LLM !**
+- **📝 Scénario Économique Traduit** : [docs/SCENARIO_ECONOMIE_GUERRE_TRADUIT.md](docs/SCENARIO_ECONOMIE_GUERRE_TRADUIT.md) - **MD MAGNIFIQUE GÉNÉRÉ AUTOMATIQUEMENT**
+- **🎮 Scénario HOTS Source** : [game_assets/scenarios/hots/test-economie-guerre.hots](game_assets/scenarios/hots/test-economie-guerre.hots) - **SCRIPT HOTS ILLISIBLE MAIS TRADUIT PAR L'ALGO !**
 
 ---
 
@@ -649,6 +652,9 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 ```bash
 ./hots start                    # Démarre tous les services
 ./scripts/test-vs-ia.sh        # Jeu vs IA
+./hots test economie           # Test simulation économique complète
+./hots test translation        # Test service traduction intelligent (SANS LLM)
+./hots test md-generator       # Test générateur MD automatique
 ./hots load-scenario <nom>     # Charger un scénario
 ```
 

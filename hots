@@ -64,6 +64,9 @@ show_help() {
     echo -e "  ${GREEN}./hots test report${NC}       Rapport complet des tests"
     echo -e "  ${GREEN}./hots test final${NC}        🏆 TOUS LES TESTS (complet)"
     echo -e "  ${GREEN}./hots test list${NC}         Liste tous les tests disponibles"
+    echo -e "  ${GREEN}./hots test economie${NC}     🎮 Test simulation économique complète"
+    echo -e "  ${GREEN}./hots test translation${NC}  🧠 Test service traduction intelligent (SANS LLM)"
+    echo -e "  ${GREEN}./hots test md-generator${NC} 📝 Test générateur MD automatique"
     echo ""
     echo -e "${YELLOW}Exemples:${NC}"
     echo -e "  ${CYAN}./hots start${NC}             # Démarre tout"
@@ -587,6 +590,33 @@ run_test_suite() {
             ;;
         "list")
             list_available_tests
+            ;;
+        "economie")
+            echo -e "${GREEN}🎮 Test simulation économique complète...${NC}"
+            if [ -f "scripts/test/test-economie-guerre.sh" ]; then
+                bash scripts/test/test-economie-guerre.sh
+            else
+                echo -e "${RED}❌ Script de test économique non trouvé${NC}"
+                return 1
+            fi
+            ;;
+        "translation")
+            echo -e "${GREEN}🧠 Test service traduction intelligent (SANS LLM)...${NC}"
+            if [ -f "MUSEUM/scripts-collection/test-smart-translation.py" ]; then
+                python3 MUSEUM/scripts-collection/test-smart-translation.py
+            else
+                echo -e "${RED}❌ Script de test traduction non trouvé${NC}"
+                return 1
+            fi
+            ;;
+        "md-generator")
+            echo -e "${GREEN}📝 Test générateur MD automatique...${NC}"
+            if [ -f "scripts/test/generate-scenario-md.py" ]; then
+                python3 scripts/test/generate-scenario-md.py
+            else
+                echo -e "${RED}❌ Script générateur MD non trouvé${NC}"
+                return 1
+            fi
             ;;
         "complete"|*)
             echo -e "${GREEN}🔬 Tests complets en cours...${NC}"
