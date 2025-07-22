@@ -1,0 +1,282 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------< com.heroesoftimepoc:temporal-engine >-----------------
+[INFO] Building temporal-engine 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:3.2.0:resources (default-resources) @ temporal-engine ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Using 'UTF-8' encoding to copy filtered properties files.
+[INFO] Copying 1 resource
+[INFO] Copying 35 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ temporal-engine ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:3.2.0:testResources (default-testResources) @ temporal-engine ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Using 'UTF-8' encoding to copy filtered properties files.
+[INFO] Copying 3 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ temporal-engine ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 22 source files to /Users/admin/fullstack-project/backend/target/test-classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/UnitControllerTest.java:[3,30] package com.example.demo.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/UnitControllerTest.java:[4,32] package com.example.demo.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/UnitControllerTest.java:[27,13] cannot find symbol
+  symbol:   class UnitService
+  location: class com.example.demo.controller.UnitControllerTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/UnitControllerTest.java:[30,13] cannot find symbol
+  symbol:   class UnitController
+  location: class com.example.demo.controller.UnitControllerTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/UnitControllerTest.java:[421,13] cannot find symbol
+  symbol:   class Unit
+  location: class com.example.demo.controller.UnitControllerTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/QuantumMazeTest.java:[30,13] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: class com.heroesoftimepoc.temporalengine.QuantumMazeTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/QuantumMazeTest.java:[33,13] cannot find symbol
+  symbol:   class QuantumInterferenceService
+  location: class com.heroesoftimepoc.temporalengine.QuantumMazeTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[5,50] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: package com.heroesoftimepoc.temporalengine.service
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[6,50] cannot find symbol
+  symbol:   class QuantumInterferenceService
+  location: package com.heroesoftimepoc.temporalengine.service
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[26,13] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: class com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[29,13] cannot find symbol
+  symbol:   class QuantumInterferenceService
+  location: class com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ComplexScenarioTest.java:[3,50] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: package com.heroesoftimepoc.temporalengine.service
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ComplexScenarioTest.java:[46,13] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: class com.heroesoftimepoc.temporalengine.ComplexScenarioTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineIntegrationTest.java:[5,50] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: package com.heroesoftimepoc.temporalengine.service
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineIntegrationTest.java:[24,13] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: class com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[7,65] package com.heroesoftimepoc.temporalengine.service.GodViewService does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[26,13] cannot find symbol
+  symbol:   class PanopticonService
+  location: class com.heroesoftimepoc.temporalengine.PanopticonServiceTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[32,13] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: class com.heroesoftimepoc.temporalengine.PanopticonServiceTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[6,1] package com.heroesoftimepoc.temporalengine.service.PanopticonService does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ArtifactEffectExecutorTest.java:[5,50] cannot find symbol
+  symbol:   class ArtifactEffectExecutor
+  location: package com.heroesoftimepoc.temporalengine.service
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ArtifactEffectExecutorTest.java:[40,13] cannot find symbol
+  symbol:   class ArtifactEffectExecutor
+  location: class com.heroesoftimepoc.temporalengine.ArtifactEffectExecutorTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[5,50] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: package com.heroesoftimepoc.temporalengine.service
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[37,13] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: class com.heroesoftimepoc.temporalengine.integration.BatailleTemporelleIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/MultiplayerControllerTest.java:[3,30] package com.example.demo.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/MultiplayerControllerTest.java:[4,30] package com.example.demo.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/MultiplayerControllerTest.java:[5,32] package com.example.demo.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/MultiplayerControllerTest.java:[29,13] cannot find symbol
+  symbol:   class MultiplayerService
+  location: class com.example.demo.controller.MultiplayerControllerTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/MultiplayerControllerTest.java:[35,13] cannot find symbol
+  symbol:   class MultiplayerController
+  location: class com.example.demo.controller.MultiplayerControllerTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/MultiplayerControllerTest.java:[230,13] cannot find symbol
+  symbol:   class GameSession
+  location: class com.example.demo.controller.MultiplayerControllerTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ReadmeStoryTest.java:[31,13] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: class com.heroesoftimepoc.temporalengine.ReadmeStoryTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/GameControllerTest.java:[3,32] package com.example.demo.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/GameControllerTest.java:[4,32] package com.example.demo.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/GameControllerTest.java:[27,13] cannot find symbol
+  symbol:   class GameService
+  location: class com.example.demo.controller.GameControllerTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/GameControllerTest.java:[30,13] cannot find symbol
+  symbol:   class GameStateService
+  location: class com.example.demo.controller.GameControllerTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/GameControllerTest.java:[33,13] cannot find symbol
+  symbol:   class GameController
+  location: class com.example.demo.controller.GameControllerTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[5,50] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: package com.heroesoftimepoc.temporalengine.service
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[47,13] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: class com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[9,50] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: package com.heroesoftimepoc.temporalengine.service
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[29,13] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: class com.heroesoftimepoc.temporalengine.TemporalEngineServiceTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[6,50] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: package com.heroesoftimepoc.temporalengine.service
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[40,13] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: class com.heroesoftimepoc.temporalengine.integration.QuantumInterferenceIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[9,50] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: package com.heroesoftimepoc.temporalengine.service
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[37,13] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: class com.heroesoftimepoc.temporalengine.TemporalStressTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/AmplitudeGrofiTest.java:[21,13] cannot find symbol
+  symbol:   class DynamicFormulaParser
+  location: class com.heroesoftimepoc.temporalengine.AmplitudeGrofiTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TreasureTheftTest.java:[30,13] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: class com.heroesoftimepoc.temporalengine.TreasureTheftTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TreasureTheftTest.java:[33,13] cannot find symbol
+  symbol:   class GodViewService
+  location: class com.heroesoftimepoc.temporalengine.TreasureTheftTest
+[INFO] 46 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.877 s
+[INFO] Finished at: 2025-07-22T07:34:35+02:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.10.1:testCompile (default-testCompile) on project temporal-engine: Compilation failure: Compilation failure: 
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/UnitControllerTest.java:[3,30] package com.example.demo.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/UnitControllerTest.java:[4,32] package com.example.demo.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/UnitControllerTest.java:[27,13] cannot find symbol
+[ERROR]   symbol:   class UnitService
+[ERROR]   location: class com.example.demo.controller.UnitControllerTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/UnitControllerTest.java:[30,13] cannot find symbol
+[ERROR]   symbol:   class UnitController
+[ERROR]   location: class com.example.demo.controller.UnitControllerTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/UnitControllerTest.java:[421,13] cannot find symbol
+[ERROR]   symbol:   class Unit
+[ERROR]   location: class com.example.demo.controller.UnitControllerTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/QuantumMazeTest.java:[30,13] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.QuantumMazeTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/QuantumMazeTest.java:[33,13] cannot find symbol
+[ERROR]   symbol:   class QuantumInterferenceService
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.QuantumMazeTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[5,50] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: package com.heroesoftimepoc.temporalengine.service
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[6,50] cannot find symbol
+[ERROR]   symbol:   class QuantumInterferenceService
+[ERROR]   location: package com.heroesoftimepoc.temporalengine.service
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[26,13] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[29,13] cannot find symbol
+[ERROR]   symbol:   class QuantumInterferenceService
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ComplexScenarioTest.java:[3,50] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: package com.heroesoftimepoc.temporalengine.service
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ComplexScenarioTest.java:[46,13] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.ComplexScenarioTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineIntegrationTest.java:[5,50] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: package com.heroesoftimepoc.temporalengine.service
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineIntegrationTest.java:[24,13] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[7,65] package com.heroesoftimepoc.temporalengine.service.GodViewService does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[26,13] cannot find symbol
+[ERROR]   symbol:   class PanopticonService
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.PanopticonServiceTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[32,13] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.PanopticonServiceTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[6,1] package com.heroesoftimepoc.temporalengine.service.PanopticonService does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ArtifactEffectExecutorTest.java:[5,50] cannot find symbol
+[ERROR]   symbol:   class ArtifactEffectExecutor
+[ERROR]   location: package com.heroesoftimepoc.temporalengine.service
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ArtifactEffectExecutorTest.java:[40,13] cannot find symbol
+[ERROR]   symbol:   class ArtifactEffectExecutor
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.ArtifactEffectExecutorTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[5,50] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: package com.heroesoftimepoc.temporalengine.service
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[37,13] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.integration.BatailleTemporelleIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/MultiplayerControllerTest.java:[3,30] package com.example.demo.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/MultiplayerControllerTest.java:[4,30] package com.example.demo.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/MultiplayerControllerTest.java:[5,32] package com.example.demo.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/MultiplayerControllerTest.java:[29,13] cannot find symbol
+[ERROR]   symbol:   class MultiplayerService
+[ERROR]   location: class com.example.demo.controller.MultiplayerControllerTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/MultiplayerControllerTest.java:[35,13] cannot find symbol
+[ERROR]   symbol:   class MultiplayerController
+[ERROR]   location: class com.example.demo.controller.MultiplayerControllerTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/MultiplayerControllerTest.java:[230,13] cannot find symbol
+[ERROR]   symbol:   class GameSession
+[ERROR]   location: class com.example.demo.controller.MultiplayerControllerTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ReadmeStoryTest.java:[31,13] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.ReadmeStoryTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/GameControllerTest.java:[3,32] package com.example.demo.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/GameControllerTest.java:[4,32] package com.example.demo.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/GameControllerTest.java:[27,13] cannot find symbol
+[ERROR]   symbol:   class GameService
+[ERROR]   location: class com.example.demo.controller.GameControllerTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/GameControllerTest.java:[30,13] cannot find symbol
+[ERROR]   symbol:   class GameStateService
+[ERROR]   location: class com.example.demo.controller.GameControllerTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/GameControllerTest.java:[33,13] cannot find symbol
+[ERROR]   symbol:   class GameController
+[ERROR]   location: class com.example.demo.controller.GameControllerTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[5,50] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: package com.heroesoftimepoc.temporalengine.service
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[47,13] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[9,50] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: package com.heroesoftimepoc.temporalengine.service
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[29,13] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.TemporalEngineServiceTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[6,50] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: package com.heroesoftimepoc.temporalengine.service
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[40,13] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.integration.QuantumInterferenceIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[9,50] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: package com.heroesoftimepoc.temporalengine.service
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[37,13] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.TemporalStressTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/AmplitudeGrofiTest.java:[21,13] cannot find symbol
+[ERROR]   symbol:   class DynamicFormulaParser
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.AmplitudeGrofiTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TreasureTheftTest.java:[30,13] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.TreasureTheftTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TreasureTheftTest.java:[33,13] cannot find symbol
+[ERROR]   symbol:   class GodViewService
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.TreasureTheftTest
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

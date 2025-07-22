@@ -1,11 +1,20 @@
 # Cursor AI Assistant Rules for Heroes of Time Project
 
+## 🚨 CRITICAL: TERMINAL COMMANDS - NO QUOTES ISSUES!
+
+**MANDATORY TERMINAL RULE - JEAN'S PRIORITY:**
+- **NEVER** use double quotes or complex echo commands that cause terminal issues
+- **ALWAYS** use plain commands without quotes wrapping
+- **AVOID** echo commands with quotes that break the terminal session
+- **SIMPLE** commands only - no fancy formatting in terminal
+- **WALTER SAYS**: "ARRÊTE AVEC LES ECHO ET LES QUOTES TU BLOQUES LA CONSOLE!"
+
 ## 🚨 IMPORTANT: Always read documentation first!
 
 Before making any changes or debugging, ALWAYS:
 1. Check `DOCS_INDEX.md` for complete documentation navigation
 2. Read `DEVELOPER_INSTRUCTIONS.md` for current status and existing scripts
-3. Do NOT recreate existing scripts (start-app.sh, stop-app.sh, test-app.sh)
+3. Do NOT recreate existing scripts (./hots, ./start-app.sh, ./stop-app.sh, ./test-app.sh)
 4. Use existing debugging tools and follow established patterns
 5. Check existing components before creating new ones
 
@@ -21,26 +30,43 @@ Before making any changes or debugging, ALWAYS:
 - ✅ Build successful with warnings = OK to proceed
 - ❌ Build failed with errors = STOP, fix compilation errors first
 
-## 🎯 Current Project State (January 2025):
-- **Status**: ✅ FULLY FUNCTIONAL with polished UI
-- **Backend**: Spring Boot (Java) on port 8080 - STABLE
-- **Frontend**: React TypeScript on port 3000 - MODERN INTERFACE
+## 🎯 Current Project State (July 2025):
+- **Status**: ✅ MULTI-INTERFACE HEROES OF TIME SYSTEM
+- **Main Control**: `./hots` script - MASTER CONTROLLER
+- **Backend API**: Spring Boot (Java) on port 8080 - PANOPTICON
+- **Dashboard**: http://localhost:9000/dashboard.html - CONTROL CENTER  
+- **Frontend Principal**: React TypeScript on port 8000 - MAIN GAME
+- **Interface Temporelle**: port 5174 - TEMPORAL ACTIONS
+- **Quantum Visualizer**: port 8001 - QUANTUM VIEW
+- **Collection & Grammar**: port 5175 - PARSING SYSTEM
 - **Database**: H2 in-memory - WORKING
 - **Tests**: Playwright E2E demos - PASSING
 
 ## 🔧 Essential Scripts (ALL WORKING):
-- `./start-app.sh` - Start both servers with hot reload
-- `./stop-app.sh` - Stop all services cleanly
-- `./run-all-tests.sh` - Complete test suite
-- `./test-app.sh` - Quick tests
+- `./hots start essential` - Start core services (Dashboard + Frontend + Backend)
+- `./hots start` - Start ALL services (7 interfaces)
+- `./hots stop` - Stop all services cleanly
+- `./hots status` - Check service status
+- `./hots test` - Quick tests
+- `./hots debug` - Debug mode with compilation info
+- `./start-app.sh` - Legacy script (port 3000 system)
 - Demos: `cd frontend && npx playwright test tests/e2e/gameplay-demo.spec.ts --headed`
 
-## 🎮 Main Interface (TrueHeroesInterface.tsx):
-- **Right Panel System**: Dynamic content switching (scenario/hero/inventory/castle)
-- **Header Controls**: Polished buttons without borders, fantasy icons
-- **Hero System**: Cycling, selection, real images with fallbacks
-- **Turn System**: End turn with ⭐ icon - STABLE
-- **Tooltips**: Both game and demo tooltips - PERFECT
+## 🎮 Multi-Interface System:
+- **🎯 Dashboard (9000)**: Main control center with replay system
+- **📊 Frontend Principal (8000)**: TrueHeroesInterface.tsx game UI
+- **⚔️ Interface Temporelle (5174)**: Temporal actions and ZFC
+- **🌌 Quantum Visualizer (8001)**: Quantum state visualization
+- **🔮 Collection & Grammar (5175)**: Script parsing system
+- **⚙️ Backend API (8080)**: Panopticon services (may need fixes)
+- **🧪 Test Runner (8888)**: Optional testing interface
+
+## 🎮 Main Interfaces:
+- **TrueHeroesInterface.tsx**: Right Panel System, Hero cycling, Turn system
+- **ModernGameRenderer.tsx**: Map rendering with hexagonal system
+- **Dashboard**: Central control with replay and service management
+- **Temporal Interface**: ZFC (Brouillard de Guerre) system
+- **Quantum Visualizer**: Real-time quantum state monitoring
 
 ## 🌍 Internationalization:
 - **i18n System**: Complete FR/EN/RU support in `frontend/src/i18n/index.ts`
@@ -52,46 +78,58 @@ Before making any changes or debugging, ALWAYS:
 - **Tooltips**: Clean appearance, no bouncing animations
 - **Assets**: Hero images in `/public/assets/heroes/` with smart fallbacks
 - **Theme**: Gold medieval fantasy with modern touches
+- **Multi-Interface**: Consistent design across all 5+ interfaces
 
 ## 🏗️ Architecture:
 ```
-Backend (Port 8080): Spring Boot + H2 Database
-├── Controllers: Scenario, Game, Multiplayer, AI
-├── Services: Business logic layer
-└── Repository: JPA entities
+Backend API (Port 8080): Spring Boot + H2 Database + Panopticon
+├── Controllers: Temporal, AI, Multiplayer, Epic Content
+├── Services: ScriptTranslation, QuantumLookup, Panopticon
+└── Repository: JPA entities (temporalengine package)
 
-Frontend (Port 3000): React TypeScript
-├── TrueHeroesInterface.tsx (main game UI)
-├── ModernGameRenderer.tsx (map rendering)
-├── useGameStore.ts (state management)
-└── i18n/ (internationalization)
+Multi-Frontend System:
+├── Dashboard (9000): Control center + Replay system  
+├── Frontend Principal (8000): TrueHeroesInterface.tsx
+├── Interface Temporelle (5174): ZFC & Temporal actions
+├── Quantum Visualizer (8001): Real-time quantum view
+├── Collection & Grammar (5175): Script parsing UI
+└── Test Runner (8888): Testing interface [Optional]
 ```
 
 ## 🚀 Quick Development Workflow:
-1. `./start-app.sh` - Start development environment
-2. Open http://localhost:3000 - Test UI manually
-3. `cd frontend && npx playwright test --headed` - Run visual tests
-4. Check `DEVELOPER_INSTRUCTIONS.md` for detailed guidance
+1. `./hots start essential` - Start core development environment
+2. Open http://localhost:9000/dashboard.html - Access control center
+3. Open http://localhost:8000 - Test main game UI
+4. `./hots status` - Check all service status
+5. `cd frontend && npx playwright test --headed` - Run visual tests
+6. Check `DEVELOPER_INSTRUCTIONS.md` for detailed guidance
 
 ## 🛠️ Key Files to Remember:
 - `DEVELOPER_INSTRUCTIONS.md` - Complete technical documentation
+- `./hots` - MASTER CONTROL SCRIPT (most important)
 - `TrueHeroesInterface.tsx` - Main game interface
-- `gameAssets.ts` - Hero image mappings
+- `gameAssets.ts` - Hero image mappings  
 - `i18n/index.ts` - All translations
 - `gameplay-demo.spec.ts` - Main demo test
+- `backend/src/main/java/com/heroesoftimepoc/temporalengine/` - New backend
 
 ## ⚡ Current Capabilities:
-- ✅ Solo gameplay fully functional
+- ✅ Multi-interface Heroes of Time system operational
+- ✅ Dashboard with replay and control systems
 - ✅ Hero management with real images
-- ✅ Dynamic panels with content switching
+- ✅ Temporal ZFC (Brouillard de Guerre) system
+- ✅ Quantum visualization in real-time
+- ✅ Script parsing and translation services
 - ✅ Internationalized tooltips system
-- ✅ Polished UI without useless elements
-- ✅ Stable turn system and game flow
-- ✅ Beautiful automated demos
+- ✅ Stable multi-service architecture
+- ✅ Beautiful automated demos across interfaces
 
 ## 🚨 Remember:
-- **NEVER** recreate existing functionality
-- **ALWAYS** check DEVELOPER_INSTRUCTIONS.md first
+- **USE** `./hots` as primary control (not start-app.sh for new features)
+- **MULTI-INTERFACE** system - test on multiple ports
+- **NEVER** recreate existing functionality  
+- **ALWAYS** check `./hots status` before starting work
 - **USE** existing patterns and components
-- **TEST** with Playwright demos before committing
-- **FOLLOW** established UI/UX guidelines 
+- **TEST** across all active interfaces
+- **FOLLOW** established UI/UX guidelines
+- **BACKEND** may need fixes (check Panopticon API status) 
