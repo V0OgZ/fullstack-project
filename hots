@@ -38,6 +38,8 @@ show_help() {
     echo -e "  ${GREEN}debug${NC}       🐛 Mode debug complet (compilation + logs)"
     echo -e "  ${GREEN}compile${NC}     🔧 Compilation backend avec debug info"
     echo -e "  ${GREEN}logs${NC}        📋 Affiche les logs en temps réel"
+    echo -e "  ${GREEN}vince${NC}       🔫 Vince Process Annihilator - Nettoie les process avec style!"
+    echo -e "  ${GREEN}walter${NC}      🎳 Walter Anti-Vince Protocol - Protection backend"
     echo -e "  ${GREEN}help${NC}        Affiche cette aide"
     echo ""
     echo -e "${YELLOW}Options de test:${NC}"
@@ -76,6 +78,8 @@ show_help() {
     echo -e "  ${CYAN}./hots map list${NC}          # 🗺️  Liste les maps disponibles"
     echo -e "  ${CYAN}./hots replay center${NC}     # 🎬 Centre de Replay complet"
     echo -e "  ${CYAN}./hots editor${NC}            # 🎨 Lance l'éditeur visuel"
+    echo -e "  ${CYAN}./hots vince${NC}             # 🔫 Nettoie les process lents (animation ROFL)"
+    echo -e "  ${CYAN}./hots walter${NC}            # 🎳 Protection backend Anti-Vince"
 }
 
 check_services() {
@@ -1149,6 +1153,30 @@ case "${1:-help}" in
         
         # Attendre l'interruption
         wait
+        ;;
+    "vince")
+        echo -e "${PURPLE}🔫 Lancement de Vince's Process Annihilator !${NC}"
+        echo -e "${YELLOW}💀 'Say hello to my little friend... the SIGKILL!'${NC}"
+        echo ""
+        
+        if [ -x "scripts/vince-process-annihilator.sh" ]; then
+            ./scripts/vince-process-annihilator.sh
+        else
+            echo -e "${RED}❌ Script vince-process-annihilator.sh non trouvé ou non exécutable${NC}"
+            echo -e "${YELLOW}💡 Vérifiez scripts/vince-process-annihilator.sh${NC}"
+        fi
+        ;;
+    "walter")
+        echo -e "${BLUE}🎳 Activation du Walter's Anti-Vince Protocol !${NC}"
+        echo -e "${YELLOW}💀 'This aggression will not stand, man!'${NC}"
+        echo ""
+        
+        if [ -x "scripts/walter-anti-vince-protocol.sh" ]; then
+            ./scripts/walter-anti-vince-protocol.sh
+        else
+            echo -e "${RED}❌ Script walter-anti-vince-protocol.sh non trouvé ou non exécutable${NC}"
+            echo -e "${YELLOW}💡 Vérifiez scripts/walter-anti-vince-protocol.sh${NC}"
+        fi
         ;;
     "help"|*)
         show_help
