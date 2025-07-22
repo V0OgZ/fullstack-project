@@ -4,73 +4,16 @@ class DicebarGraphicsSystem {
         this.baseUrl = 'https://api.dicebear.com/7.x';
         this.backgroundColors = 'b6e3f4,c0aede,d1d4f9,ffd5dc,ffdfbf,e6ffed,fff2cc,ffeaa7';
         
-        // Heroes with dicebar graphics
-        this.heroes = {
-            'Arthur': {
-                style: 'adventurer',
-                seed: 'arthur-pendragon-king',
-                icon: '⚔️',
-                color: '#FFD700',
-                description: 'Legendary King Arthur'
-            },
-            'Ragnar': {
-                style: 'adventurer-neutral',
-                seed: 'ragnar-lothbrok-viking',
-                icon: '🛡️',
-                color: '#8B0000',
-                description: 'Viking Warrior'
-            },
-            'Morgana': {
-                style: 'lorelei',
-                seed: 'morgana-le-fay-sorceress',
-                icon: '🧙‍♀️',
-                color: '#800080',
-                description: 'Dark Sorceress'
-            },
-            'Merlin': {
-                style: 'bottts',
-                seed: 'merlin-ambrosius-wizard',
-                icon: '🔮',
-                color: '#4169E1',
-                description: 'Great Wizard'
-            },
-            'Lysandrel': {
-                style: 'adventurer',
-                seed: 'lysandrel-reality-forger',
-                icon: '🧝‍♀️',
-                color: '#90EE90',
-                description: 'Reality Forger'
-            },
-            'Nyx-Lua': {
-                style: 'lorelei',
-                seed: 'nyx-lua-world-weaver',
-                icon: '🌙',
-                color: '#2F4F4F',
-                description: 'World Weaver'
-            },
-            'Gardien Zephyr': {
-                style: 'adventurer-neutral',
-                seed: 'gardien-zephyr-nexus',
-                icon: '🛡️',
-                color: '#87CEEB',
-                description: 'Nexus Guardian'
-            },
-            'Thane le Tueur de Dragons': {
-                style: 'adventurer',
-                seed: 'thane-dragon-slayer',
-                icon: '🗡️',
-                color: '#DAA520',
-                description: 'Dragon Slayer'
-            },
-            'Jean-Grofignon': {
-                style: 'bottts',
-                seed: 'jean-grofignon-philosopher',
-                icon: '🧠',
-                color: '#9370DB',
-                description: 'Temporal Philosopher'
-            }
-        };
-
+        // Heroes will be populated dynamically from JSON data
+        this.heroes = {};
+        this.heroesJsonData = null;
+        
+        // Initialize with basic hero data - will be overridden by JSON
+        this.initializeBasicHeroes();
+        
+        // Load hero data from JSON files
+        this.loadHeroesFromJSON();
+        
         // Creatures with dicebar graphics
         this.creatures = {
             'Phénix Quantique': {
@@ -498,6 +441,249 @@ class DicebarGraphicsSystem {
                 color: '#8E44AD',
                 description: 'Quantum Affinity'
             }
+        };
+    }
+    
+    // Initialize basic heroes as fallback
+    initializeBasicHeroes() {
+        this.heroes = {
+            'Arthur': {
+                style: 'adventurer',
+                seed: 'arthur-pendragon-king',
+                icon: '⚔️',
+                color: '#FFD700',
+                description: 'Legendary King Arthur'
+            },
+            'Ragnar': {
+                style: 'adventurer-neutral',
+                seed: 'ragnar-lothbrok-viking',
+                icon: '🛡️',
+                color: '#8B0000',
+                description: 'Viking Warrior'
+            },
+            'Morgana': {
+                style: 'lorelei',
+                seed: 'morgana-le-fay-sorceress',
+                icon: '🧙‍♀️',
+                color: '#800080',
+                description: 'Dark Sorceress'
+            },
+            'Merlin': {
+                style: 'bottts',
+                seed: 'merlin-ambrosius-wizard',
+                icon: '🔮',
+                color: '#4169E1',
+                description: 'Great Wizard'
+            },
+            'Lysandrel': {
+                style: 'adventurer',
+                seed: 'lysandrel-reality-forger',
+                icon: '🧝‍♀️',
+                color: '#90EE90',
+                description: 'Reality Forger'
+            },
+            'Nyx-Lua': {
+                style: 'lorelei',
+                seed: 'nyx-lua-world-weaver',
+                icon: '🌙',
+                color: '#2F4F4F',
+                description: 'World Weaver'
+            },
+            'Gardien Zephyr': {
+                style: 'adventurer-neutral',
+                seed: 'gardien-zephyr-nexus',
+                icon: '🛡️',
+                color: '#87CEEB',
+                description: 'Nexus Guardian'
+            },
+            'Thane le Tueur de Dragons': {
+                style: 'adventurer',
+                seed: 'thane-dragon-slayer',
+                icon: '🗡️',
+                color: '#DAA520',
+                description: 'Dragon Slayer'
+            },
+            'Jean-Grofignon': {
+                style: 'bottts',
+                seed: 'jean-grofignon-philosopher',
+                icon: '🧠',
+                color: '#9370DB',
+                description: 'Temporal Philosopher'
+            },
+            'Claudius': {
+                style: 'bottts',
+                seed: 'claudius-memento-archiviste',
+                icon: '⚖️',
+                color: '#FF69B4',
+                description: 'Archiviste Paradoxal'
+            }
+        };
+    }
+    
+    // Load heroes from JSON files dynamically
+    async loadHeroesFromJSON() {
+        try {
+            // Try to load multiple hero sources
+            const heroSources = [
+                '/game_assets/heroes/epic/epic-heroes.json',
+                '/game_assets/heroes/extracted_heroes.json',
+                '/game_assets/MASTER_ASSETS_INDEX.json'
+            ];
+            
+            for (const source of heroSources) {
+                try {
+                    const response = await fetch(source);
+                    if (response.ok) {
+                        const data = await response.json();
+                        this.processHeroData(data, source);
+                    }
+                } catch (error) {
+                    console.log(`Could not load ${source}, using defaults`);
+                }
+            }
+        } catch (error) {
+            console.log('Using default hero configurations');
+        }
+    }
+    
+    // Process hero data from JSON and generate dicebear properties
+    processHeroData(data, source) {
+        // Process based on data structure
+        if (data.epic_heroes) {
+            // Epic heroes format
+            data.epic_heroes.forEach(hero => {
+                this.addHeroFromJSON(hero);
+            });
+        } else if (data.heroes) {
+            // Master assets index format
+            data.heroes.heroes.forEach(hero => {
+                this.addHeroFromJSON(hero);
+            });
+        } else if (Array.isArray(data)) {
+            // Direct array format
+            data.forEach(hero => {
+                this.addHeroFromJSON(hero);
+            });
+        }
+    }
+    
+    // Add a hero from JSON data with auto-generated dicebear properties
+    addHeroFromJSON(heroData) {
+        const heroName = heroData.name || heroData.id;
+        if (!heroName) return;
+        
+        // Auto-generate dicebear properties based on hero characteristics
+        const style = this.getStyleForHero(heroData);
+        const seed = this.generateSeedForHero(heroData);
+        const icon = this.getIconForHero(heroData);
+        const color = this.getColorForHero(heroData);
+        const description = heroData.description || heroData.backstory || `${heroData.class || 'Hero'} Level ${heroData.level || 1}`;
+        
+        // Override or add to existing hero data
+        this.heroes[heroName] = {
+            style: style,
+            seed: seed,
+            icon: icon,
+            color: color,
+            description: description,
+            // Store original JSON data for reference
+            jsonData: heroData
+        };
+    }
+    
+    // Determine dicebear style based on hero characteristics
+    getStyleForHero(heroData) {
+        const race = (heroData.race || '').toLowerCase();
+        const className = (heroData.class || '').toLowerCase();
+        
+        if (race.includes('robot') || race.includes('mech')) return 'bottts';
+        if (race.includes('elf') || className.includes('archer')) return 'adventurer';
+        if (race.includes('orc') || race.includes('troll')) return 'adventurer-neutral';
+        if (heroData.gender === 'Female' || className.includes('sorcere')) return 'lorelei';
+        if (className.includes('wizard') || className.includes('mage')) return 'bottts';
+        
+        return 'adventurer'; // Default
+    }
+    
+    // Generate unique seed for hero
+    generateSeedForHero(heroData) {
+        const name = heroData.name || heroData.id || 'unknown';
+        const id = heroData.id || name;
+        const level = heroData.level || 1;
+        return `${id}-${name.toLowerCase().replace(/\s+/g, '-')}-level${level}`;
+    }
+    
+    // Get appropriate icon for hero
+    getIconForHero(heroData) {
+        const className = (heroData.class || '').toLowerCase();
+        const name = (heroData.name || '').toLowerCase();
+        
+        if (name.includes('arthur')) return '⚔️';
+        if (name.includes('merlin')) return '🔮';
+        if (name.includes('morgana')) return '🧙‍♀️';
+        if (name.includes('ragnar')) return '🛡️';
+        if (name.includes('jean')) return '🧠';
+        if (name.includes('claudius')) return '⚖️';
+        
+        // Class-based icons
+        if (className.includes('wizard') || className.includes('mage')) return '🔮';
+        if (className.includes('warrior') || className.includes('knight')) return '⚔️';
+        if (className.includes('archer')) return '🏹';
+        if (className.includes('paladin')) return '🛡️';
+        if (className.includes('necromancer')) return '💀';
+        
+        return '🦸'; // Default hero icon
+    }
+    
+    // Get color based on hero attributes
+    getColorForHero(heroData) {
+        const race = (heroData.race || '').toLowerCase();
+        const className = (heroData.class || '').toLowerCase();
+        const element = heroData.element || '';
+        
+        // Element-based colors
+        if (element.includes('fire')) return '#FF6347';
+        if (element.includes('water')) return '#4169E1';
+        if (element.includes('earth')) return '#8B4513';
+        if (element.includes('air')) return '#87CEEB';
+        if (element.includes('light')) return '#FFD700';
+        if (element.includes('dark')) return '#4B0082';
+        
+        // Class-based colors
+        if (className.includes('paladin')) return '#FFD700';
+        if (className.includes('necromancer')) return '#4B0082';
+        if (className.includes('wizard')) return '#9370DB';
+        
+        // Generate color from name hash
+        const hash = this.hashCode(heroData.name || heroData.id || '');
+        const hue = hash % 360;
+        return `hsl(${hue}, 70%, 50%)`;
+    }
+    
+    // Simple hash function for color generation
+    hashCode(str) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            const char = str.charCodeAt(i);
+            hash = ((hash << 5) - hash) + char;
+            hash = hash & hash;
+        }
+        return Math.abs(hash);
+    }
+    
+    // Get hero data (either from JSON or default)
+    getHeroData(heroName) {
+        return this.heroes[heroName] || this.generateDefaultHero(heroName);
+    }
+    
+    // Generate default hero if not found
+    generateDefaultHero(heroName) {
+        return {
+            style: 'adventurer',
+            seed: heroName.toLowerCase().replace(/\s+/g, '-'),
+            icon: '🦸',
+            color: this.getColorForHero({ name: heroName }),
+            description: `${heroName} - Custom Hero`
         };
     }
 
