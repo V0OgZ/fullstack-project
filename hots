@@ -38,6 +38,7 @@ show_help() {
     echo -e "  ${GREEN}debug${NC}       🐛 Mode debug complet (compilation + logs)"
     echo -e "  ${GREEN}compile${NC}     🔧 Compilation backend avec debug info"
     echo -e "  ${GREEN}logs${NC}        📋 Affiche les logs en temps réel"
+    echo -e "  ${GREEN}scenario${NC}    🎬 Lance un scénario HEP (Heroes Epic Play)"
     echo -e "  ${GREEN}vince${NC}       🔫 Vince Process Annihilator - Nettoie les process avec style!"
     echo -e "  ${GREEN}walter${NC}      🎳 Walter Anti-Vince Protocol - Protection backend"
     echo -e "  ${GREEN}help${NC}        Affiche cette aide"
@@ -77,6 +78,9 @@ show_help() {
     echo -e "  ${CYAN}./hots generate${NC}          # 🧠 Génère tous les MD depuis JSON"
     echo -e "  ${CYAN}./hots map list${NC}          # 🗺️  Liste les maps disponibles"
     echo -e "  ${CYAN}./hots replay center${NC}     # 🎬 Centre de Replay complet"
+    echo -e "  ${CYAN}./hots scenario list${NC}     # 🎬 Liste les scénarios HEP disponibles"
+    echo -e "  ${CYAN}./hots scenario bataille${NC} # 🎬 Lance bataille temporelle HOTS"
+    echo -e "  ${CYAN}./hots scenario anthor${NC}   # 🎬 Lance duel Anthor vs Grofi"
     echo -e "  ${CYAN}./hots editor${NC}            # 🎨 Lance l'éditeur visuel"
     echo -e "  ${CYAN}./hots vince${NC}             # 🔫 Nettoie les process lents (animation ROFL)"
     echo -e "  ${CYAN}./hots walter${NC}            # 🎳 Protection backend Anti-Vince"
@@ -1056,6 +1060,129 @@ launch_admin_interface() {
     echo -e "${YELLOW}💡 Protocole Memento - Fusion Claudius activée${NC}"
 }
 
+# Fonction pour gérer les scénarios HEP
+manage_scenarios() {
+    local command="$1"
+    local scenario_name="$2"
+    
+    echo -e "${PURPLE}🎬 Gestionnaire de Scénarios HEP (Heroes Epic Play)${NC}"
+    echo -e "${PURPLE}==============================================${NC}"
+    
+    case "$command" in
+        "list"|"")
+            echo -e "${YELLOW}📋 Scénarios HEP disponibles:${NC}"
+            echo ""
+            
+            if [ -d "game_assets/scenarios/hots" ]; then
+                echo -e "${CYAN}🎬 Scénarios HOTS (.hots):${NC}"
+                find game_assets/scenarios/hots -name "*.hots" -type f | while read file; do
+                    local filename=$(basename "$file" .hots)
+                    local size=$(du -h "$file" 2>/dev/null | cut -f1)
+                    echo -e "  📄 ${GREEN}$filename${NC} (${size})"
+                done
+            fi
+            
+            if [ -d "game_assets/scenarios" ]; then
+                echo ""
+                echo -e "${CYAN}🎮 Scénarios JSON classiques:${NC}"
+                find game_assets/scenarios -name "*.json" -type f | while read file; do
+                    local filename=$(basename "$file" .json)
+                    local size=$(du -h "$file" 2>/dev/null | cut -f1)
+                    echo -e "  📄 ${BLUE}$filename${NC} (${size})"
+                done
+            fi
+            
+            echo ""
+            echo -e "${YELLOW}💡 Usage: ./hots scenario [nom_scenario]${NC}"
+            echo -e "${YELLOW}💡 Exemple: ./hots scenario bataille${NC}"
+            ;;
+            
+        "bataille"|"bataille_temporelle")
+            echo -e "${YELLOW}⚔️  Lancement de la Bataille Temporelle Complète...${NC}"
+            local scenario_file="game_assets/scenarios/hots/bataille_temporelle_complete.hots"
+            if [ -f "$scenario_file" ]; then
+                echo -e "${GREEN}✅ Scénario trouvé: $scenario_file${NC}"
+                echo -e "${CYAN}📊 Analyse du scénario:${NC}"
+                wc -l "$scenario_file"
+                echo ""
+                if [ -x "scripts/test-anthor-ford-scenario.sh" ]; then
+                    echo -e "${BLUE}🎯 Lancement avec moteur de test intégré...${NC}"
+                    ./scripts/test-anthor-ford-scenario.sh "$scenario_file"
+                else
+                    echo -e "${YELLOW}⚠️  Moteur de test non trouvé, lancement simulé...${NC}"
+                    echo -e "${CYAN}🎬 Contenu du scénario:${NC}"
+                    head -20 "$scenario_file"
+                    echo -e "${YELLOW}... (contenu tronqué)${NC}"
+                fi
+            else
+                echo -e "${RED}❌ Scénario non trouvé: $scenario_file${NC}"
+            fi
+            ;;
+            
+        "anthor"|"anthor_vs_grofi")
+            echo -e "${YELLOW}🎭 Lancement du Duel Anthor vs Jean-Grofignon...${NC}"
+            local scenario_file="game_assets/scenarios/hots/anthor_vs_grofi_temporal_duel.hots"
+            if [ -f "$scenario_file" ]; then
+                echo -e "${GREEN}✅ Scénario trouvé: $scenario_file${NC}"
+                echo -e "${CYAN}📊 Analyse du scénario:${NC}"
+                wc -l "$scenario_file"
+                echo ""
+                if [ -x "scripts/test-anthor-ford-scenario.sh" ]; then
+                    echo -e "${BLUE}🎯 Lancement du test Anthor spécialisé...${NC}"
+                    ./scripts/test-anthor-ford-scenario.sh
+                else
+                    echo -e "${YELLOW}⚠️  Moteur de test Anthor non trouvé, affichage du scénario...${NC}"
+                    echo -e "${CYAN}🎬 Extrait du duel épique:${NC}"
+                    grep -E "(HERO|SAY|ABILITY)" "$scenario_file" | head -10
+                    echo -e "${YELLOW}... (plus de contenu disponible)${NC}"
+                fi
+            else
+                echo -e "${RED}❌ Scénario non trouvé: $scenario_file${NC}"
+            fi
+            ;;
+            
+        *)
+            echo -e "${YELLOW}🔍 Recherche du scénario: $command${NC}"
+            local found=false
+            
+            # Chercher dans les fichiers .hots
+            if [ -d "game_assets/scenarios/hots" ]; then
+                for file in game_assets/scenarios/hots/*.hots; do
+                    if [[ "$(basename "$file" .hots)" == *"$command"* ]]; then
+                        echo -e "${GREEN}✅ Scénario HOTS trouvé: $(basename "$file")${NC}"
+                        echo -e "${CYAN}📊 Analyse:${NC}"
+                        wc -l "$file"
+                        echo -e "${CYAN}🎬 Aperçu:${NC}"
+                        head -10 "$file"
+                        found=true
+                        break
+                    fi
+                done
+            fi
+            
+            # Chercher dans les fichiers JSON
+            if [ ! "$found" = true ] && [ -d "game_assets/scenarios" ]; then
+                for file in game_assets/scenarios/*.json; do
+                    if [[ "$(basename "$file" .json)" == *"$command"* ]]; then
+                        echo -e "${GREEN}✅ Scénario JSON trouvé: $(basename "$file")${NC}"
+                        echo -e "${CYAN}📊 Analyse:${NC}"
+                        wc -l "$file"
+                        echo -e "${CYAN}🎬 Aperçu:${NC}"
+                        head -10 "$file"
+                        found=true
+                        break
+                    fi
+                done
+            fi
+            
+            if [ ! "$found" = true ]; then
+                echo -e "${RED}❌ Scénario '$command' non trouvé${NC}"
+                echo -e "${YELLOW}💡 Utilisez './hots scenario list' pour voir les scénarios disponibles${NC}"
+            fi
+            ;;
+    esac
+}
+
 # Fonction principale
 case "${1:-help}" in
     "start")
@@ -1153,6 +1280,9 @@ case "${1:-help}" in
         
         # Attendre l'interruption
         wait
+        ;;
+    "scenario")
+        manage_scenarios "$2" "$3"
         ;;
     "vince")
         echo -e "${PURPLE}🔫 Lancement de Vince's Process Annihilator !${NC}"
