@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>🔲 Heroes of Time - Dashboard Mosaïque</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh; 
+        }
+        .header {
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 10px 0;
+        }
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-primary { background: #007bff; }
+        .btn-success { background: #28a745; }
+        .btn-warning { background: #ffc107; color: black; }
+        .btn-danger { background: #dc3545; }
+        
+        .mosaic-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 10px;
+            height: calc(100vh - 120px);
+            padding: 10px;
+        }
+        
+        .iframe-panel {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .panel-header {
+            padding: 10px;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .panel-frontend { background: #007bff; }
+        .panel-temporal { background: #28a745; }
+        .panel-visualizer { background: #17a2b8; }
+        .panel-reports { background: #ffc107; color: black; }
+        
+        .iframe-panel iframe {
+            width: 100%;
+            height: calc(100% - 40px);
+            border: none;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        .status-online { background: #28a745; }
+        .status-offline { background: #dc3545; }
+        
+        .fullscreen-mode {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1000;
+            background: white;
+        }
+        
+        .fullscreen-mode .mosaic-container {
+            height: calc(100vh - 60px);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔲 Heroes of Time - Dashboard Mosaïque</h1>
+        <div class="controls">
+            <button class="btn btn-success" onclick="runTests()">
+                🧪 Lancer Tests
+            </button>
+            <button class="btn btn-primary" onclick="refreshAll()">
+                🔄 Actualiser Tout
+            </button>
+            <button class="btn btn-warning" onclick="toggleFullscreen()">
+                ⛶ Plein Écran
+            </button>
+            <button class="btn btn-danger" onclick="openDashboard()">
+                🎛️ Dashboard Principal
+            </button>
+        </div>
+    </div>
+    
+    <div class="mosaic-container">
+        <!-- Frontend Principal -->
+        <div class="iframe-panel">
+            <div class="panel-header panel-frontend">
+                <span class="status-indicator" id="status-frontend"></span>
+                🎮 Frontend Principal (8000)
+            </div>
+            <iframe src="http://localhost:8000" id="iframe-frontend"></iframe>
+        </div>
+        
+        <!-- Frontend Temporal -->
+        <div class="iframe-panel">
+            <div class="panel-header panel-temporal">
+                <span class="status-indicator" id="status-temporal"></span>
+                ⚡ Frontend Temporal (5173)
+            </div>
+            <iframe src="http://localhost:5173" id="iframe-temporal"></iframe>
+        </div>
+        
+        <!-- Quantum Visualizer -->
+        <div class="iframe-panel">
+            <div class="panel-header panel-visualizer">
+                <span class="status-indicator" id="status-visualizer"></span>
+                🔬 Quantum Visualizer (8001)
+            </div>
+            <iframe src="http://localhost:8001" id="iframe-visualizer"></iframe>
+        </div>
+        
+        <!-- Rapports MD -->
+        <div class="iframe-panel">
+            <div class="panel-header panel-reports">
+                <span class="status-indicator" id="status-reports"></span>
+                📄 Rapports MD (8888)
+            </div>
+            <iframe src="http://localhost:8888" id="iframe-reports"></iframe>
+        </div>
+    </div>
+
+    <script>
+        let isFullscreen = false;
+
+        // Services à vérifier
+        const services = {
+            frontend: { port: 8000, name: 'Frontend' },
+            temporal: { port: 5173, name: 'Temporal' },
+            visualizer: { port: 8001, name: 'Visualizer' },
+            reports: { port: 8888, name: 'Rapports' }
+        };
+
+        // Vérifier le statut des services
+        async function checkServices() {
+            for (const [key, service] of Object.entries(services)) {
+                try {
+                    const response = await fetch(`http://localhost:${service.port}`, { 
+                        method: 'HEAD',
+                        mode: 'no-cors',
+                        timeout: 3000
+                    });
+                    updateServiceStatus(key, true);
+                } catch (error) {
+                    updateServiceStatus(key, false);
+                }
+            }
+        }
+
+        function updateServiceStatus(serviceKey, isOnline) {
+            const indicator = document.getElementById(`status-${serviceKey}`);
+            indicator.className = `status-indicator ${isOnline ? 'status-online' : 'status-offline'}`;
+        }
+
+        // Lancer les tests
+        function runTests() {
+            // Simuler le lancement des tests
+            alert('🧪 Tests lancés en arrière-plan !\nVérifiez les logs dans le panneau Rapports.');
+            
+            // Actualiser le panneau des rapports après 3 secondes
+            setTimeout(() => {
+                const reportsIframe = document.getElementById('iframe-reports');
+                reportsIframe.src = reportsIframe.src;
+            }, 3000);
+        }
+
+        // Actualiser toutes les iframes
+        function refreshAll() {
+            Object.keys(services).forEach(key => {
+                const iframe = document.getElementById(`iframe-${key}`);
+                iframe.src = iframe.src;
+            });
+            checkServices();
+        }
+
+        // Basculer en mode plein écran
+        function toggleFullscreen() {
+            const body = document.body;
+            if (!isFullscreen) {
+                body.classList.add('fullscreen-mode');
+                isFullscreen = true;
+            } else {
+                body.classList.remove('fullscreen-mode');
+                isFullscreen = false;
+            }
+        }
+
+        // Ouvrir le dashboard principal
+        function openDashboard() {
+            window.open('http://localhost:9000', '_blank');
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            checkServices();
+            setInterval(checkServices, 30000); // Vérifier toutes les 30s
+            
+            console.log('🔲 Dashboard Mosaïque chargé !');
+            console.log('Services surveillés:', Object.keys(services));
+        });
+
+        // Gestion des erreurs d'iframe
+        document.querySelectorAll('iframe').forEach(iframe => {
+            iframe.addEventListener('error', function() {
+                const serviceKey = this.id.replace('iframe-', '');
+                updateServiceStatus(serviceKey, false);
+            });
+        });
+    </script>
+</body>
+</html> 

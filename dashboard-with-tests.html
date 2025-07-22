@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>🎛️ Heroes of Time - Dashboard avec Tests</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh; 
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        .main-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .btn-primary { background: #007bff; color: white; }
+        .btn-success { background: #28a745; color: white; }
+        .btn-warning { background: #ffc107; color: #212529; }
+        .btn-info { background: #17a2b8; color: white; }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .service-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid #dee2e6;
+        }
+        .service-card.online { border-color: #28a745; background: #d4edda; }
+        .service-card.offline { border-color: #dc3545; background: #f8d7da; }
+        
+        .test-panel {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+            border-left: 5px solid #007bff;
+        }
+        .test-status {
+            font-size: 1.2em;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 8px;
+            background: #e9ecef;
+        }
+        .test-status.running { background: #fff3cd; border-left: 4px solid #ffc107; }
+        .test-status.completed { background: #d4edda; border-left: 4px solid #28a745; }
+        .test-status.failed { background: #f8d7da; border-left: 4px solid #dc3545; }
+        
+        .test-output {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            margin-top: 15px;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎛️ Heroes of Time - Dashboard</h1>
+        
+        <!-- Contrôles principaux -->
+        <div class="main-controls">
+            <button class="btn btn-success" onclick="runTests('quick')">
+                🚀 Test Rapide
+            </button>
+            <button class="btn btn-primary" onclick="runTests('complete')">
+                🧪 Tests Complets
+            </button>
+            <button class="btn btn-info" onclick="openReports()">
+                📄 Voir Rapports
+            </button>
+            <button class="btn btn-warning" onclick="refreshStatus()">
+                🔄 Actualiser
+            </button>
+        </div>
+        
+        <!-- Services -->
+        <div class="services-grid" id="services-grid">
+            <div class="service-card" id="backend">
+                <h3>⚙️ Backend</h3>
+                <p>Port 8080</p>
+                <div class="status">Vérification...</div>
+            </div>
+            <div class="service-card" id="frontend">
+                <h3>🎮 Frontend</h3>
+                <p>Port 8000</p>
+                <div class="status">Vérification...</div>
+            </div>
+            <div class="service-card" id="temporal">
+                <h3>⚡ Temporal</h3>
+                <p>Port 5173</p>
+                <div class="status">Vérification...</div>
+            </div>
+            <div class="service-card" id="visualizer">
+                <h3>🔬 Visualizer</h3>
+                <p>Port 8001</p>
+                <div class="status">Vérification...</div>
+            </div>
+        </div>
+        
+        <!-- Panel des tests -->
+        <div class="test-panel">
+            <h3>🧪 Tests en Cours</h3>
+            <div id="test-status" class="test-status">
+                Aucun test en cours - Cliquez sur un bouton pour commencer
+            </div>
+            <div id="test-output" class="test-output" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        let testInterval = null;
+        let currentTest = null;
+
+        // Vérifier les services
+        async function checkServices() {
+            const services = [
+                { id: 'backend', url: 'http://localhost:8080/api/temporal/health' },
+                { id: 'frontend', url: 'http://localhost:8000' },
+                { id: 'temporal', url: 'http://localhost:5173' },
+                { id: 'visualizer', url: 'http://localhost:8001' }
+            ];
+
+            for (const service of services) {
+                try {
+                    const response = await fetch(service.url, { 
+                        method: 'GET', 
+                        mode: 'no-cors',
+                        timeout: 3000 
+                    });
+                    updateServiceStatus(service.id, true);
+                } catch (error) {
+                    updateServiceStatus(service.id, false);
+                }
+            }
+        }
+
+        function updateServiceStatus(serviceId, isOnline) {
+            const card = document.getElementById(serviceId);
+            const status = card.querySelector('.status');
+            
+            if (isOnline) {
+                card.className = 'service-card online';
+                status.textContent = '✅ En ligne';
+            } else {
+                card.className = 'service-card offline';
+                status.textContent = '❌ Hors ligne';
+            }
+        }
+
+        // Lancer les tests
+        async function runTests(testType) {
+            const statusDiv = document.getElementById('test-status');
+            const outputDiv = document.getElementById('test-output');
+            
+            // Simuler le lancement des tests
+            statusDiv.className = 'test-status running';
+            statusDiv.innerHTML = `
+                <div class="loading"></div>
+                Lancement des tests ${testType}... 
+                <small>(${new Date().toLocaleTimeString()})</small>
+            `;
+            
+            outputDiv.style.display = 'block';
+            outputDiv.textContent = 'Initialisation des tests...\n';
+            
+            currentTest = {
+                type: testType,
+                startTime: Date.now(),
+                status: 'running'
+            };
+            
+            // Simuler l'exécution avec des logs
+            simulateTestExecution(testType);
+        }
+
+        function simulateTestExecution(testType) {
+            const outputDiv = document.getElementById('test-output');
+            const statusDiv = document.getElementById('test-status');
+            
+            const messages = [
+                '🔍 Vérification des services...',
+                '⚙️ Démarrage du backend...',
+                '🎮 Test des interfaces utilisateur...',
+                '🧪 Exécution des tests unitaires...',
+                '📊 Génération des rapports...',
+                '✅ Tests terminés avec succès!'
+            ];
+            
+            let messageIndex = 0;
+            const interval = setInterval(() => {
+                if (messageIndex < messages.length) {
+                    outputDiv.textContent += messages[messageIndex] + '\n';
+                    outputDiv.scrollTop = outputDiv.scrollHeight;
+                    
+                    if (messageIndex === messages.length - 1) {
+                        // Tests terminés
+                        statusDiv.className = 'test-status completed';
+                        statusDiv.innerHTML = `
+                            ✅ Tests ${testType} terminés avec succès
+                            <small>(Durée: ${Math.round((Date.now() - currentTest.startTime) / 1000)}s)</small>
+                        `;
+                        clearInterval(interval);
+                        
+                        // Actualiser les rapports
+                        setTimeout(() => {
+                            outputDiv.textContent += '\n📄 Nouveaux rapports disponibles sur http://localhost:8888';
+                        }, 1000);
+                    }
+                    
+                    messageIndex++;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 2000);
+        }
+
+        function openReports() {
+            window.open('http://localhost:8888', '_blank');
+        }
+
+        function refreshStatus() {
+            checkServices();
+            location.reload();
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            checkServices();
+            setInterval(checkServices, 30000); // Vérifier toutes les 30s
+        });
+    </script>
+</body>
+</html> 

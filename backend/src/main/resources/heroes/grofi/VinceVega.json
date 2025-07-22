@@ -1,0 +1,18 @@
+{
+  "id": "hero_vince_vega",
+  "name": "Vince Vega",
+  "title": "Le Nettoyeur de Docker",
+  "description": "Si le multivers saigne, Vince le repousse à coups de scripts bash. Émissaire de la violence ordonnée, il agit quand le monde lag trop.",
+  "rarity": "compagnon",
+  "quotes": [
+    "I'm just gonna walk the earth.",
+    "You know what they call a rollback with cheese in Paris?",
+    "Tu veux que je te code une surprise ?"
+  ],
+  "summoned_by": "hero_jean_grofignon",
+  "power": {
+    "name": "Kill -9",
+    "description": "Tue un processus de timeline adverse en surcharge critique. Exécuté automatiquement quand le monde dépasse le seuil de stabilité.",
+    "quantum_script": "†[KILL_PROCESS {enemy.timeline.overload > 0.9}] ⊙ HERO(Vince Vega)"
+  }
+}

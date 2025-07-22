@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heroes of Time - Système Temporel Révolutionnaire</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="temporal-styles.css">
+    <link rel="manifest" href="manifest.json">
+    <style>
+        /* Styles temporels avancés */
+        .temporal-ui {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 500;
+        }
+        
+        .temporal-panel {
+            pointer-events: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        
+        .temporal-panel h3 {
+            margin: 0 0 10px 0;
+            color: #4ecdc4;
+            text-shadow: 0 0 5px rgba(78, 205, 196, 0.5);
+        }
+        
+        .temporal-panel h4 {
+            margin: 10px 0 5px 0;
+            color: #ff6b6b;
+            font-size: 11px;
+        }
+        
+        .temporal-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin: 10px 0;
+        }
+        
+        .temporal-controls button {
+            padding: 5px 10px;
+            background: rgba(78, 205, 196, 0.2);
+            border: 1px solid rgba(78, 205, 196, 0.5);
+            color: #4ecdc4;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .temporal-controls button:hover {
+            background: rgba(78, 205, 196, 0.3);
+            transform: translateY(-1px);
+        }
+        
+        .temporal-controls button.active {
+            background: rgba(78, 205, 196, 0.5);
+            color: white;
+        }
+        
+        .log-entry {
+            padding: 2px 5px;
+            margin: 1px 0;
+            border-radius: 2px;
+            font-size: 10px;
+            border-left: 2px solid transparent;
+        }
+        
+        .log-info {
+            color: #4ecdc4;
+            border-left-color: #4ecdc4;
+        }
+        
+        .log-warning {
+            color: #ffa726;
+            border-left-color: #ffa726;
+            background: rgba(255, 167, 38, 0.1);
+        }
+        
+        .log-error {
+            color: #f44336;
+            border-left-color: #f44336;
+            background: rgba(244, 67, 54, 0.1);
+        }
+        
+        .log-success {
+            color: #4caf50;
+            border-left-color: #4caf50;
+            background: rgba(76, 175, 80, 0.1);
+        }
+        
+        .game-area {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+        }
+        
+        .game-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            cursor: crosshair;
+        }
+        
+        .hero-timeline-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.9);
+            border-top: 2px solid rgba(78, 205, 196, 0.5);
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 20px;
+            z-index: 600;
+        }
+        
+        .hero-timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(78, 205, 196, 0.1);
+            border-radius: 5px;
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .hero-timeline-item:hover {
+            background: rgba(78, 205, 196, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .hero-timeline-item.selected {
+            background: rgba(78, 205, 196, 0.4);
+            border-color: rgba(78, 205, 196, 0.8);
+        }
+        
+        .hero-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .hero-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .hero-name {
+            color: #4ecdc4;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        
+        .hero-day {
+            color: #ffa726;
+            font-size: 10px;
+        }
+        
+        .hero-movement {
+            color: #4caf50;
+            font-size: 10px;
+        }
+        
+        .temporal-legend {
+            position: fixed;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid rgba(78, 205, 196, 0.5);
+            z-index: 600;
+            color: white;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 5px 0;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .day0 { background: rgba(255, 255, 255, 0.1); }
+        .day1 { background: rgba(255, 255, 0, 0.2); }
+        .day2 { background: rgba(255, 165, 0, 0.25); }
+        .day3 { background: rgba(255, 69, 0, 0.3); }
+        .ghost { background: rgba(128, 0, 128, 0.15); }
+        .anchor { background: rgba(255, 215, 0, 0.4); }
+        .observation { background: rgba(0, 255, 255, 0.2); }
+        .collision { background: rgba(255, 0, 0, 0.4); }
+        
+        .artifact-panel {
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        
+        .artifact-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 3px 5px;
+            margin: 2px 0;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 3px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            cursor: pointer;
+            font-size: 10px;
+        }
+        
+        .artifact-item:hover {
+            background: rgba(255, 215, 0, 0.2);
+        }
+        
+        .artifact-icon {
+            font-size: 12px;
+        }
+        
+        .quantum-status {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 0, 255, 0.5);
+            z-index: 600;
+            color: white;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            min-width: 200px;
+        }
+        
+        .quantum-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin: 3px 0;
+        }
+        
+        .quantum-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ff00ff;
+            animation: pulse 1s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        .collapse-animation {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1000;
+            animation: collapseEffect 1s ease-out;
+        }
+        
+        @keyframes collapseEffect {
+            0% { transform: scale(0); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.8; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: 1px solid rgba(78, 205, 196, 0.5);
+            z-index: 1100;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            animation: slideDown 0.5s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateX(-50%) translateY(-100%); }
+            to { transform: translateX(-50%) translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-area">
+        <canvas id="game-canvas" class="game-canvas"></canvas>
+        
+        <!-- Interface temporelle -->
+        <div class="temporal-ui">
+            <!-- Légende temporelle -->
+            <div class="temporal-legend">
+                <h3>🕰️ Légende Temporelle</h3>
+                <div class="legend-item">
+                    <div class="legend-color day0"></div>
+                    <span>Jour 0 (Actuel)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color day1"></div>
+                    <span>Jour +1</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color day2"></div>
+                    <span>Jour +2</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color day3"></div>
+                    <span>Jour +3</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color ghost"></div>
+                    <span>États Fantômes</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color anchor"></div>
+                    <span>Ancrage Temporal</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color observation"></div>
+                    <span>Observation</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color collision"></div>
+                    <span>Collision Causale</span>
+                </div>
+            </div>
+            
+            <!-- Statut quantique -->
+            <div class="quantum-status">
+                <h3>🌀 Statut Quantique</h3>
+                <div class="quantum-indicator">
+                    <div class="quantum-dot"></div>
+                    <span>États ψ: <span id="psi-count">0</span></span>
+                </div>
+                <div class="quantum-indicator">
+                    <div class="quantum-dot" style="background: #ff6b6b;"></div>
+                    <span>Collisions: <span id="collision-count">0</span></span>
+                </div>
+                <div class="quantum-indicator">
+                    <div class="quantum-dot" style="background: #4ecdc4;"></div>
+                    <span>Observations: <span id="observation-count">0</span></span>
+                </div>
+                <div class="quantum-indicator">
+                    <div class="quantum-dot" style="background: #ffa726;"></div>
+                    <span>Ancrages: <span id="anchor-count">0</span></span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Barre de timeline des héros -->
+        <div class="hero-timeline-bar" id="hero-timeline-bar">
+            <!-- Héros seront ajoutés dynamiquement -->
+        </div>
+    </div>
+    
+    <!-- Panneaux temporels créés dynamiquement -->
+    
+    <!-- Scripts -->
+    <script src="api.js"></script>
+    <script src="script-console.js"></script>
+    <script src="game.js"></script>
+    <script src="temporal-hexagonal-renderer.js"></script>
+    <script src="temporal-integration.js"></script>
+    <script src="ui-enhancements.js"></script>
+    
+    <script>
+        // Initialisation du système temporel révolutionnaire
+        let temporalSystem = null;
+        
+        // Configuration globale
+        const TEMPORAL_CONFIG = {
+            maxFutureDays: 3,
+            animationSpeed: 1000,
+            collapseAnimationDuration: 2000,
+            updateInterval: 500,
+            websocketUrl: 'ws://localhost:8080/temporal-updates'
+        };
+        
+        // Fonction d'initialisation principale
+        async function initializeHeroesOfTime() {
+            try {
+                console.log('🚀 Initialisation Heroes of Time - Système Temporel Révolutionnaire');
+                
+                // Initialiser l'API
+                window.gameAPI = new GameAPI();
+                
+                // Initialiser le système temporel
+                temporalSystem = new TemporalIntegration();
+                
+                // Initialiser la console de script
+                window.scriptConsole = new ScriptConsole('script-console');
+                
+                // Configurer les événements
+                setupGlobalEventListeners();
+                
+                // Charger l'état initial
+                await loadInitialGameState();
+                
+                // Démarrer les animations
+                startAnimationLoop();
+                
+                // Afficher notification de succès
+                showNotification('🎯 Système Temporel Révolutionnaire Activé !', 'success');
+                
+                console.log('✅ Heroes of Time initialisé avec succès');
+                
+            } catch (error) {
+                console.error('❌ Erreur initialisation Heroes of Time:', error);
+                showNotification('❌ Erreur d\'initialisation', 'error');
+            }
+        }
+        
+        function setupGlobalEventListeners() {
+            // Gestionnaire clavier
+            document.addEventListener('keydown', (e) => {
+                switch (e.key) {
+                    case 'h':
+                        toggleHeroSelection();
+                        break;
+                    case 't':
+                        toggleTemporalPreview();
+                        break;
+                    case 'a':
+                        toggleAnchorMode();
+                        break;
+                    case 'o':
+                        toggleObservationMode();
+                        break;
+                    case 'Escape':
+                        clearSelection();
+                        break;
+                }
+            });
+            
+            // Gestionnaire de redimensionnement
+            window.addEventListener('resize', () => {
+                if (temporalSystem && temporalSystem.temporalRenderer) {
+                    temporalSystem.temporalRenderer.resizeCanvas();
+                }
+            });
+            
+            // Gestionnaire d'état de connexion
+            window.addEventListener('online', () => {
+                showNotification('🌐 Connexion rétablie', 'success');
+                if (temporalSystem) {
+                    temporalSystem.reconnect();
+                }
+            });
+            
+            window.addEventListener('offline', () => {
+                showNotification('⚠️ Connexion perdue', 'warning');
+            });
+        }
+        
+        async function loadInitialGameState() {
+            try {
+                // Créer ou charger un jeu
+                const gameState = await window.gameAPI.getGameState();
+                
+                if (!gameState) {
+                    // Créer un nouveau jeu
+                    await window.gameAPI.createGame('Heroes of Time - Temporal Edition');
+                    showNotification('🎮 Nouveau jeu créé', 'info');
+                } else {
+                    showNotification('📥 Jeu chargé', 'info');
+                }
+                
+                // Mettre à jour l'affichage
+                updateHeroTimeline();
+                
+            } catch (error) {
+                console.error('❌ Erreur chargement état:', error);
+                showNotification('❌ Erreur de chargement', 'error');
+            }
+        }
+        
+        function startAnimationLoop() {
+            let lastTime = 0;
+            
+            function animate(currentTime) {
+                const deltaTime = currentTime - lastTime;
+                lastTime = currentTime;
+                
+                // Mettre à jour le système temporel
+                if (temporalSystem && temporalSystem.temporalRenderer) {
+                    temporalSystem.temporalRenderer.update(deltaTime);
+                    temporalSystem.temporalRenderer.render();
+                }
+                
+                // Mettre à jour l'interface
+                updateQuantumStatus();
+                
+                requestAnimationFrame(animate);
+            }
+            
+            requestAnimationFrame(animate);
+        }
+        
+        function updateHeroTimeline() {
+            const timelineBar = document.getElementById('hero-timeline-bar');
+            if (!timelineBar) return;
+            
+            // Simuler des héros pour la démo
+            const heroes = [
+                { id: 'arthur', name: 'Arthur', currentDay: 0, movementPoints: 4, avatar: '🛡️' },
+                { id: 'lysandrel', name: 'Lysandrel', currentDay: 1, movementPoints: 3, avatar: '🧙‍♀️' },
+                { id: 'ragnar', name: 'Ragnar', currentDay: 0, movementPoints: 5, avatar: '⚔️' }
+            ];
+            
+            timelineBar.innerHTML = '';
+            
+            heroes.forEach(hero => {
+                const heroItem = document.createElement('div');
+                heroItem.className = 'hero-timeline-item';
+                heroItem.dataset.heroId = hero.id;
+                
+                heroItem.innerHTML = `
+                    <div class="hero-avatar">${hero.avatar}</div>
+                    <div class="hero-info">
+                        <div class="hero-name">${hero.name}</div>
+                        <div class="hero-day">Jour ${hero.currentDay}</div>
+                        <div class="hero-movement">${hero.movementPoints} PM</div>
+                    </div>
+                `;
+                
+                heroItem.addEventListener('click', () => {
+                    selectHero(hero);
+                });
+                
+                timelineBar.appendChild(heroItem);
+            });
+        }
+        
+        function updateQuantumStatus() {
+            // Mettre à jour les compteurs quantiques
+            document.getElementById('psi-count').textContent = 
+                temporalSystem?.temporalRenderer?.ghostStates?.size || 0;
+            document.getElementById('collision-count').textContent = 
+                temporalSystem?.temporalRenderer?.causalCollisions?.size || 0;
+            document.getElementById('observation-count').textContent = 
+                temporalSystem?.temporalRenderer?.observationZones?.size || 0;
+            document.getElementById('anchor-count').textContent = 
+                temporalSystem?.temporalRenderer?.anchorZones?.size || 0;
+        }
+        
+        function selectHero(hero) {
+            // Désélectionner tous les héros
+            document.querySelectorAll('.hero-timeline-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // Sélectionner le héros
+            document.querySelector(`[data-hero-id="${hero.id}"]`).classList.add('selected');
+            
+            // Notifier le système temporel
+            if (temporalSystem) {
+                temporalSystem.selectHero(hero.id);
+            }
+            
+            showNotification(`🎯 Héros sélectionné: ${hero.name}`, 'info');
+        }
+        
+        function toggleHeroSelection() {
+            const heroItems = document.querySelectorAll('.hero-timeline-item');
+            const selected = document.querySelector('.hero-timeline-item.selected');
+            
+            if (selected) {
+                const nextIndex = (Array.from(heroItems).indexOf(selected) + 1) % heroItems.length;
+                heroItems[nextIndex].click();
+            } else if (heroItems.length > 0) {
+                heroItems[0].click();
+            }
+        }
+        
+        function toggleTemporalPreview() {
+            if (temporalSystem && temporalSystem.temporalRenderer) {
+                temporalSystem.temporalRenderer.showTemporalPreview = 
+                    !temporalSystem.temporalRenderer.showTemporalPreview;
+                
+                const status = temporalSystem.temporalRenderer.showTemporalPreview ? 'Activé' : 'Désactivé';
+                showNotification(`👁️ Aperçu temporel: ${status}`, 'info');
+            }
+        }
+        
+        function toggleAnchorMode() {
+            if (temporalSystem && temporalSystem.temporalRenderer) {
+                temporalSystem.temporalRenderer.toggleAnchorMode();
+                showNotification('⚓ Mode ancrage basculé', 'info');
+            }
+        }
+        
+        function toggleObservationMode() {
+            if (temporalSystem && temporalSystem.temporalRenderer) {
+                temporalSystem.temporalRenderer.toggleObservationMode();
+                showNotification('🔍 Mode observation basculé', 'info');
+            }
+        }
+        
+        function clearSelection() {
+            document.querySelectorAll('.hero-timeline-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            if (temporalSystem && temporalSystem.temporalRenderer) {
+                temporalSystem.temporalRenderer.selectedHero = null;
+                temporalSystem.temporalRenderer.showTemporalPreview = false;
+            }
+            
+            showNotification('🔄 Sélection effacée', 'info');
+        }
+        
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+        
+        // Gestionnaire d'erreurs global
+        window.addEventListener('error', (e) => {
+            console.error('❌ Erreur globale:', e.error);
+            showNotification('❌ Erreur système', 'error');
+        });
+        
+        // Initialisation au chargement
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeHeroesOfTime();
+        });
+        
+        // Exposer les fonctions globales
+        window.HeroesOfTime = {
+            selectHero,
+            toggleTemporalPreview,
+            toggleAnchorMode,
+            toggleObservationMode,
+            clearSelection,
+            showNotification
+        };
+    </script>
+</body>
+</html> 

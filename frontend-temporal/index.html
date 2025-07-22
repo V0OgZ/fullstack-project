@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🕰️ Heroes of Time - Moteur Quantique Temporel</title>
+    <link rel="stylesheet" href="../translation-styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/dimensions-paralleles.png') center / cover;
+            opacity: 0.1;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* =================
+           HEADER PRINCIPAL
+        ================= */
+        .main-header {
+            background: linear-gradient(135deg, #0f3460, #16213e);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #00bfff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .main-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/epee-temporelle.png') center / contain no-repeat;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .main-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-sword {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            opacity: 0.9;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 0 10px rgba(0, 191, 255, 0.3));
+        }
+
+        .header-sword:hover {
+            opacity: 1;
+            transform: rotate(5deg) scale(1.1);
+            filter: drop-shadow(0 0 20px rgba(0, 191, 255, 0.6));
+        }
+
+        .main-header .subtitle {
+            font-size: 1.2em;
+            color: #a0a0a0;
+            margin-bottom: 20px;
+        }
+
+        .header-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .header-btn {
+            background: linear-gradient(135deg, #0080ff, #00bfff);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .header-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        /* =================
+           INTERFACE PRINCIPALE
+        ================= */
+        .main-interface {
+            display: flex;
+            height: calc(100vh - 140px);
+            position: relative;
+            background: url('assets/images/epee-temporelle.png') center / contain no-repeat;
+            background-size: 60%;
+            background-position: center center;
+        }
+
+        .main-interface::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.2), rgba(26, 26, 46, 0.1), rgba(15, 52, 96, 0.1));
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .left-panel {
+            width: 30%;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-right: 2px solid rgba(0, 191, 255, 0.3);
+            overflow-y: auto;
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(15px);
+        }
+
+        .right-panel {
+            width: 70%;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 20px;
+            overflow-y: auto;
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(15px);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 191, 255, 0.4);
+            backdrop-filter: blur(15px);
+        }
+
+        .section h2 {
+            color: #00bfff;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .section h3 {
+            color: #ff6b85;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        /* =================
+           ÉTAT DU JEU
+        ================= */
+        .game-status {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .status-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 191, 255, 0.4);
+            text-align: center;
+            backdrop-filter: blur(15px);
+        }
+
+        .status-card .value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #00bfff;
+            margin-bottom: 5px;
+        }
+
+        .status-card .label {
+            color: #ffffff;
+            font-size: 0.9em;
+        }
+
+        /* =================
+           HÉROS
+        ================= */
+        .hero-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 191, 255, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            backdrop-filter: blur(15px);
+        }
+
+        .hero-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e94560, #ff6b85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            color: white;
+            font-weight: bold;
+        }
+
+        .hero-info {
+            flex: 1;
+        }
+
+        .hero-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #e94560;
+            margin-bottom: 5px;
+        }
+
+        .hero-stats {
+            font-size: 0.9em;
+            color: #a0a0a0;
+        }
+
+        /* =================
+           CONSOLE QUANTIQUE
+        ================= */
+        .quantum-console {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(0, 191, 255, 0.4);
+            border-radius: 8px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            color: #00ff00;
+            max-height: 300px;
+            overflow-y: auto;
+            backdrop-filter: blur(15px);
+        }
+
+        .console-input {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .console-input input {
+            flex: 1;
+            background: #1a1a1a;
+            color: #00ff00;
+            border: 1px solid #00bfff;
+            padding: 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .console-input button {
+            background: #00bfff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* =================
+           MENU TEMPOREL
+        ================= */
+        .temporal-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .temporal-menu.active {
+            display: flex;
+        }
+
+        .temporal-menu-content {
+            background: url('assets/images/dimensions-paralleles.png') center / cover;
+            width: 85%;
+            max-width: 1200px;
+            height: 85%;
+            border-radius: 15px;
+            padding: 30px;
+            color: white;
+            overflow-y: auto;
+            border: 2px solid rgba(0, 191, 255, 0.5);
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+        }
+
+        .temporal-menu-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.2), rgba(26, 26, 46, 0.1), rgba(15, 52, 96, 0.1));
+            z-index: 1;
+            pointer-events: none;
+            border-radius: 13px;
+        }
+
+        .temporal-menu-content > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .temporal-menu-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .temporal-menu-header h2 {
+            font-size: 2.5em;
+            color: #00bfff;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.9), 0 0 20px rgba(0, 191, 255, 0.5);
+            font-weight: bold;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* =================
+           TOOLTIPS
+        ================= */
+        .tooltip {
+            position: relative;
+            cursor: help;
+        }
+
+        .tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            z-index: 1000;
+            border: 1px solid #00bfff;
+            font-weight: normal;
+            max-width: 200px;
+            white-space: normal;
+        }
+
+        .scenario-btn.tooltip::after {
+            bottom: 115%;
+        }
+
+        .tooltip:hover::after {
+            opacity: 1;
+        }
+
+        .tooltip::before {
+            content: '';
+            position: absolute;
+            bottom: 115%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: rgba(0, 0, 0, 0.9);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover::before {
+            opacity: 1;
+        }
+
+        .temporal-menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .temporal-section {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 191, 255, 0.4);
+            backdrop-filter: blur(15px);
+        }
+
+        .temporal-section h3 {
+            color: #00bfff;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .setting-item label {
+            color: #ffffff;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+
+        .setting-item input, .setting-item select {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            border: 2px solid #00bfff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            width: 120px;
+            font-weight: bold;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        .scenario-btn {
+            background: rgba(0, 191, 255, 0.15);
+            color: white;
+            padding: 15px 20px;
+            border: 2px solid rgba(0, 191, 255, 0.5);
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-weight: bold;
+            box-shadow: 0 6px 20px rgba(0, 191, 255, 0.2);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            backdrop-filter: blur(15px);
+        }
+
+        .scenario-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 191, 255, 0.4);
+            background: rgba(0, 191, 255, 0.25);
+            border-color: rgba(0, 191, 255, 0.8);
+        }
+
+        .menu-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .close-btn {
+            background: rgba(255, 255, 255, 0.08);
+            color: #00bfff;
+            padding: 15px 30px;
+            border: 2px solid rgba(0, 191, 255, 0.5);
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(15px);
+        }
+
+        .close-btn:hover {
+            background: rgba(0, 191, 255, 0.25);
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 191, 255, 0.4);
+            border-color: rgba(0, 191, 255, 0.8);
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        /* =================
+           RESPONSIVE
+        ================= */
+        @media (max-width: 768px) {
+            .main-interface {
+                flex-direction: column;
+                height: auto;
+                background-size: 80%;
+            }
+
+            .left-panel, .right-panel {
+                width: 100%;
+            }
+
+            .temporal-menu-content {
+                width: 95%;
+                height: 95%;
+                padding: 20px;
+            }
+
+            .temporal-menu-grid {
+                grid-template-columns: 1fr;
+                max-width: 100%;
+            }
+
+            .temporal-section {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header principal -->
+    <div class="main-header">
+        <h1>
+            <img src="assets/images/epee-temporelle.png" alt="Épée Temporelle" class="header-sword">
+            🕰️ Heroes of Time
+        </h1>
+        <p class="subtitle">Moteur Quantique Temporel - Interface Simplifiée</p>
+        <div class="header-controls">
+            <button class="header-btn tooltip" data-tooltip="Ouvrir le menu de configuration du moteur quantique" onclick="openTemporalMenu()">🔮 Configuration Temporelle</button>
+            <button class="header-btn tooltip" data-tooltip="Charger une partie de démonstration" onclick="loadDemoGame()">🎮 Démo Quantique</button>
+            <button class="header-btn tooltip" data-tooltip="Actualiser l'état du jeu" onclick="refreshGameState()">🔄 Actualiser</button>
+        </div>
+    </div>
+
+    <!-- Interface principale -->
+    <div class="main-interface">
+        <!-- Panel gauche - Informations du jeu -->
+        <div class="left-panel">
+            <div class="section">
+                <h2>📊 État du Jeu</h2>
+                <div class="game-status">
+                    <div class="status-card">
+                        <div class="value" id="gameStatus">ACTIF</div>
+                        <div class="label">Statut</div>
+                    </div>
+                    <div class="status-card">
+                        <div class="value" id="currentTurn">1</div>
+                        <div class="label">Tour</div>
+                    </div>
+                    <div class="status-card">
+                        <div class="value" id="activeTimelines">1</div>
+                        <div class="label">Timelines</div>
+                    </div>
+                    <div class="status-card">
+                        <div class="value" id="psiStates">0</div>
+                        <div class="label">ψ-States</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>⚔️ Héros</h2>
+                <div id="heroList">
+                    <!-- Les héros seront affichés ici -->
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>🔮 États Quantiques</h2>
+                <div id="psiStatesList">
+                    <p style="color: #a0a0a0; font-style: italic;">Aucun état ψ actif</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel droite - Console et actions -->
+        <div class="right-panel">
+            <div class="section">
+                <h2>🧠 Console Quantique Temporelle</h2>
+                <p style="color: #a0a0a0; margin-bottom: 15px;">
+                    Tapez des commandes quantiques : <code>ψ001: ⊙(Δt+2 @126,65 ⟶ HERO(Arthur))</code>
+                </p>
+                <div class="quantum-console" id="quantumConsole">
+                    <div>🔮 Moteur Quantique Temporel - Prêt</div>
+                    <div>📡 Backend connecté sur port 8080</div>
+                    <div>⚡ Tapez vos commandes temporelles ci-dessous...</div>
+                </div>
+                <div class="console-input">
+                    <input type="text" id="commandInput" placeholder="Tapez votre commande quantique...">
+                    <button onclick="executeCommand()">Exécuter</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📜 Commandes Rapides</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <button class="scenario-btn tooltip" data-tooltip="Créer le héros Arthur dans le jeu" onclick="executeQuickCommand('HERO(Arthur)')">Créer Arthur</button>
+                    <button class="scenario-btn tooltip" data-tooltip="Créer la héroïne Morgana dans le jeu" onclick="executeQuickCommand('HERO(Morgana)')">Créer Morgana</button>
+                    <button class="scenario-btn tooltip" data-tooltip="Créer un état quantique superposé" onclick="executeQuickCommand('ψ001: ⊙(Δt+2 @10,10 ⟶ HERO(Test))')">Créer ψ-State</button>
+                    <button class="scenario-btn tooltip" data-tooltip="Effondrer l'état quantique ψ001" onclick="executeQuickCommand('†ψ001')">Effondrer ψ001</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>🎯 Instructions</h2>
+                <ul style="color: #a0a0a0; line-height: 1.6;">
+                    <li>🔮 <strong>Configuration Temporelle</strong> : Configurez les paramètres quantiques</li>
+                    <li>🎮 <strong>Démo Quantique</strong> : Lancez une partie de démonstration</li>
+                    <li>⚡ <strong>Console</strong> : Tapez des commandes temporelles directement</li>
+                    <li>📊 <strong>États</strong> : Surveillez les ψ-states et les timelines</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu de Configuration Temporelle -->
+    <div class="temporal-menu" id="temporalMenu">
+        <div class="temporal-menu-content">
+            <div class="temporal-menu-header">
+                <h2>🔮 Configuration Temporelle</h2>
+                <p>Ajustez les paramètres du moteur quantique</p>
+            </div>
+            <div class="temporal-menu-grid">
+                <div class="temporal-section">
+                    <h3>🔮 Paramètres Quantiques</h3>
+                    <div class="setting-item">
+                        <label class="tooltip" data-tooltip="Nombre maximum d'états quantiques superposés par joueur">Max ψ-States:</label>
+                        <input type="number" id="maxPsiStates" value="10" min="5" max="50">
+                    </div>
+                    <div class="setting-item">
+                        <label class="tooltip" data-tooltip="Nombre de timelines parallèles simultanées">Max Timelines:</label>
+                        <input type="number" id="maxTimelines" value="3" min="1" max="10">
+                    </div>
+                    <div class="setting-item">
+                        <label class="tooltip" data-tooltip="Durée maximum par tour de jeu">Temps/Tour (sec):</label>
+                        <input type="number" id="turnTime" value="60" min="30" max="300">
+                    </div>
+                    <div class="setting-item">
+                        <label class="tooltip" data-tooltip="Taille de la carte de jeu">Taille Carte:</label>
+                        <select id="mapSize">
+                            <option value="small">Petite (20x20)</option>
+                            <option value="medium" selected>Moyenne (30x30)</option>
+                            <option value="large">Grande (40x40)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="temporal-section">
+                    <h3>🌀 Fonctionnalités</h3>
+                    <div class="setting-item">
+                        <label class="tooltip" data-tooltip="Objets magiques qui affectent le temps">Artefacts Temporels:</label>
+                        <input type="checkbox" id="temporalArtifacts" checked>
+                    </div>
+                    <div class="setting-item">
+                        <label class="tooltip" data-tooltip="Permet de jouer sur plusieurs timelines simultanément">Timelines Multiples:</label>
+                        <input type="checkbox" id="multipleTimelines" checked>
+                    </div>
+                    <div class="setting-item">
+                        <label class="tooltip" data-tooltip="Combat avec des versions d'autres timelines">Batailles Fantômes:</label>
+                        <input type="checkbox" id="ghostBattles" checked>
+                    </div>
+                    <div class="setting-item">
+                        <label class="tooltip" data-tooltip="Les actions existent dans plusieurs états à la fois">Superposition Quantique:</label>
+                        <input type="checkbox" id="quantumSuperposition" checked>
+                    </div>
+                </div>
+
+                <div class="temporal-section">
+                    <h3>🎭 Scénarios Temporels</h3>
+                    <button class="scenario-btn tooltip" data-tooltip="Combat simple avec les règles de base" onclick="startScenario('classic')">⚔️ Bataille Classique</button>
+                    <button class="scenario-btn tooltip" data-tooltip="Combat avec effets quantiques aléatoires" onclick="startScenario('quantum')">🔮 Chaos Quantique</button>
+                    <button class="scenario-btn tooltip" data-tooltip="Conquête de territoires à travers le temps" onclick="startScenario('temporal')">🕰️ Conquête Temporelle</button>
+                    <button class="scenario-btn tooltip" data-tooltip="Trouver des artefacts magiques temporels" onclick="startScenario('artifacts')">🏺 Chasse aux Artefacts</button>
+                </div>
+
+                <div class="temporal-section">
+                    <h3>⚙️ Options Avancées</h3>
+                    <div class="setting-item">
+                        <label class="tooltip" data-tooltip="Affiche les infos techniques pour les développeurs">Mode Debug:</label>
+                        <input type="checkbox" id="debugMode">
+                    </div>
+                    <div class="setting-item">
+                        <label class="tooltip" data-tooltip="Sauvegarde automatique de la partie">Auto-Sauvegarde:</label>
+                        <input type="checkbox" id="autoSave" checked>
+                    </div>
+                    <div class="setting-item">
+                        <label class="tooltip" data-tooltip="Effets visuels et animations">Effets Visuels:</label>
+                        <input type="checkbox" id="visualEffects" checked>
+                    </div>
+                    <div class="setting-item">
+                        <label class="tooltip" data-tooltip="Notifications d'événements importants">Notifications:</label>
+                        <input type="checkbox" id="notifications" checked>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-actions">
+                <button class="close-btn tooltip" data-tooltip="Fermer ce menu et retourner à l'interface" onclick="closeTemporalMenu()">Fermer</button>
+                <button class="start-btn tooltip" data-tooltip="Démarrer une partie avec ces paramètres" onclick="applyTemporalConfig()">Appliquer & Démarrer</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../translation-service.js"></script>
+    <script src="js/temporal-engine.js"></script>
+    <script>
+        // Interface simplifiée
+        window.addEventListener('DOMContentLoaded', function() {
+            console.log('Interface Temporelle Simplifiée - Chargée');
+            
+            // 🌐 Initialiser le service de traduction
+            if (typeof TranslationService !== 'undefined') {
+                window.translationService = new TranslationService();
+                console.log('🌐 Service de traduction initialisé');
+            }
+            
+            // Initialisation automatique
+            if (typeof initializeTemporalEngine === 'function') {
+                initializeTemporalEngine();
+                loadDemoGame();
+            }
+        });
+
+        function openTemporalMenu() {
+            document.getElementById('temporalMenu').classList.add('active');
+        }
+
+        function closeTemporalMenu() {
+            document.getElementById('temporalMenu').classList.remove('active');
+        }
+
+        function executeCommand() {
+            const input = document.getElementById('commandInput');
+            const command = input.value.trim();
+            
+            if (command) {
+                addToConsole('> ' + command);
+                
+                // 🌐 TRADUCTION AUTOMATIQUE
+                if (window.translationService && window.translationService.isAvailable) {
+                    window.translationService.quickTranslate(command).then(translation => {
+                        if (translation && translation !== command) {
+                            addToConsole('🌐 ' + translation);
+                        }
+                    }).catch(error => {
+                        console.log('Erreur de traduction:', error);
+                    });
+                }
+                
+                // Exécuter la commande
+                if (typeof executeScript === 'function') {
+                    executeScript(command);
+                } else {
+                    addToConsole('Commande reçue : ' + command);
+                }
+                
+                input.value = '';
+            }
+        }
+
+        function executeQuickCommand(command) {
+            document.getElementById('commandInput').value = command;
+            executeCommand();
+        }
+
+        function addToConsole(message) {
+            const console = document.getElementById('quantumConsole');
+            const div = document.createElement('div');
+            div.textContent = message;
+            console.appendChild(div);
+            console.scrollTop = console.scrollHeight;
+        }
+
+        function loadDemoGame() {
+            addToConsole('🎮 Chargement de la démo quantique...');
+            
+            if (typeof createDemoGame === 'function') {
+                createDemoGame();
+            } else {
+                // Simulation simple
+                setTimeout(() => {
+                    addToConsole('✅ Démo chargée - 2 héros créés');
+                    addToConsole('🔮 États quantiques initialisés');
+                    updateGameStatus();
+                }, 1000);
+            }
+        }
+
+        function refreshGameState() {
+            addToConsole('🔄 Actualisation de l\'état du jeu...');
+            
+            if (typeof updateGameState === 'function') {
+                updateGameState();
+            } else {
+                updateGameStatus();
+            }
+        }
+
+        function updateGameStatus() {
+            // Mise à jour des statistiques
+            document.getElementById('gameStatus').textContent = 'ACTIF';
+            document.getElementById('currentTurn').textContent = '1';
+            document.getElementById('activeTimelines').textContent = '1';
+            document.getElementById('psiStates').textContent = '0';
+            
+            // Mise à jour des héros
+            const heroList = document.getElementById('heroList');
+            heroList.innerHTML = `
+                <div class="hero-card">
+                    <div class="hero-avatar">A</div>
+                    <div class="hero-info">
+                        <div class="hero-name">Arthur</div>
+                        <div class="hero-stats">HP: 100/100 | Pos: (12,10)</div>
+                    </div>
+                </div>
+                <div class="hero-card">
+                    <div class="hero-avatar">M</div>
+                    <div class="hero-info">
+                        <div class="hero-name">Morgana</div>
+                        <div class="hero-stats">HP: 100/100 | Pos: (15,12)</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function startScenario(type) {
+            addToConsole('🎭 Démarrage du scénario : ' + type);
+            closeTemporalMenu();
+            
+            switch(type) {
+                case 'classic':
+                    addToConsole('⚔️ Bataille Classique initialisée');
+                    break;
+                case 'quantum':
+                    addToConsole('🔮 Chaos Quantique activé');
+                    break;
+                case 'temporal':
+                    addToConsole('🕰️ Conquête Temporelle lancée');
+                    break;
+                case 'artifacts':
+                    addToConsole('🏺 Chasse aux Artefacts commencée');
+                    break;
+            }
+            
+            updateGameStatus();
+        }
+
+        function applyTemporalConfig() {
+            const config = {
+                maxPsiStates: document.getElementById('maxPsiStates').value,
+                maxTimelines: document.getElementById('maxTimelines').value,
+                turnTime: document.getElementById('turnTime').value,
+                mapSize: document.getElementById('mapSize').value
+            };
+            
+            addToConsole('⚙️ Configuration appliquée : ' + JSON.stringify(config, null, 2));
+            closeTemporalMenu();
+            loadDemoGame();
+        }
+
+        // Gestion des touches
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.target.id === 'commandInput') {
+                executeCommand();
+            }
+            if (e.key === 'Escape') {
+                closeTemporalMenu();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heroes of Time - Temporal Engine</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="temporal-styles.css">
+    <link rel="stylesheet" href="translation-styles.css">
+    <link rel="stylesheet" href="styles/city.css">
+    <link rel="stylesheet" href="styles/combat.css">
+    <link rel="stylesheet" href="styles/hero.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="title">🕰️ Heroes of Time - Temporal Engine</div>
+            <div class="controls">
+                <button id="new-game-btn" class="btn-primary">🎮 New Game</button>
+                <button id="city-btn" class="btn-primary">🏛️ Ville</button>
+                <button id="combat-btn" class="btn-primary">⚔️ Combat</button>
+                <button id="hero-btn" class="btn-primary">👤 Héros</button>
+                <button id="joint-magic-btn" class="btn-warning">🚬 Joint Magique</button>
+                <button id="add-ragnar-btn" class="btn-secondary">🛡️ Add Ragnar</button>
+                <button id="test-decay-btn" class="btn-warning">⏰ Test Decay</button>
+                <button id="dicebear-gallery-btn" class="btn-info">🎭 Dicebear Gallery</button>
+                <button id="settings-btn" class="btn-icon">⚙️</button>
+            </div>
+        </header>
+        
+        <div class="game-area">
+            <div class="game-board">
+                <canvas id="game-canvas"></canvas>
+                <div class="game-overlay">
+                    <div class="temporal-info" id="temporal-info">
+                        <div class="info-card">
+                            <h3>⏰ Temporal Status</h3>
+                            <div id="current-timeline">Timeline: ℬ1</div>
+                            <div id="current-turn">Turn: 0</div>
+                            <div id="decay-status">Decay: None</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="side-panel">
+                <!-- 🌫️ Brouillard de Causalité -->
+                <div id="fog-controls-container"></div>
+                
+                <!-- 🎮 Contrôles Principaux -->
+                <div class="main-controls">
+                    <div class="control-section">
+                        <h3>🎮 Contrôles Principaux</h3>
+                        <div class="control-buttons">
+                            <button id="hero-select-btn" class="btn-control">👁️ Sélectionner Héros</button>
+                            <button id="move-btn" class="btn-control">🚶 Déplacer</button>
+                            <button id="attack-btn" class="btn-control">⚔️ Attaquer</button>
+                            <button id="explore-btn" class="btn-control">🗺️ Explorer</button>
+                        </div>
+                    </div>
+                    
+                    <div class="control-section">
+                        <h3>🔮 Actions Temporelles</h3>
+                        <div class="control-buttons">
+                            <button id="psi-create-btn" class="btn-control">ψ Créer État</button>
+                            <button id="psi-collapse-btn" class="btn-control">† Effondrer</button>
+                            <button id="timeline-switch-btn" class="btn-control">🔄 Changer Timeline</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="script-console" id="script-console">
+                    <!-- Console will be populated by JavaScript -->
+                </div>
+                
+                <div class="hero-panel" id="hero-panel">
+                    <h3>🦸 Heroes</h3>
+                    <div id="heroes-list"></div>
+                </div>
+                
+                <div class="psi-panel" id="psi-panel">
+                    <h3>🔮 États ψ</h3>
+                    <div id="psi-states-list"></div>
+                </div>
+                
+                <div class="decay-panel" id="decay-panel">
+                    <h3>🎭 Anna's Decay System</h3>
+                    <div class="decay-controls">
+                        <button id="apply-decay-btn" class="btn-warning">Apply Decay</button>
+                        <button id="repair-buildings-btn" class="btn-success">Repair Buildings</button>
+                    </div>
+                    <div id="decay-stats"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="status-bar" id="status-bar">
+            Ready to start... Anna the Martopicker watches from the shadows ⏰
+        </div>
+        
+        <!-- 🎮 Bouton d'ouverture du sélecteur de scénarios -->
+        <button id="open-scenario-selector-btn" class="scenario-selector-btn">
+            🎮 Scénarios
+        </button>
+
+        <!-- Dicebear Gallery Modal -->
+        <div id="dicebear-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>🎭 Dicebear Graphics Gallery</h2>
+                    <span class="close" id="close-modal">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div id="dicebear-gallery"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="api.js"></script>
+    <script src="translation-service.js"></script>
+    <script src="components/CityInterface.js"></script>
+    <script src="components/CombatInterface.js"></script>
+    <script src="components/HeroInterface.js"></script>
+    <script src="script-console.js"></script>
+    <script src="game.js"></script>
+    <script src="runic-forge.js"></script>
+    <script src="temporal-integration.js"></script>
+    <script src="hero-avatars.js"></script>
+    <script src="scenario-selector.js"></script>
+    <script src="gameplay-enhancement.js"></script>
+    <script src="missing-assets-loader.js"></script>
+    <script src="gameplay-construction.js"></script>
+    <script src="fog-of-war-system.js"></script>
+    <script src="dicebar-graphics-system.js"></script>
+    <script>
+        // Initialize the comprehensive dicebar graphics system
+        const dicebarSystem = new DicebarGraphicsSystem();
+        
+        // 🌫️ Initialiser le système de brouillard de causalité
+        window.fogOfWarSystem = new FogOfWarSystem();
+        const fogControlsContainer = document.getElementById('fog-controls-container');
+        if (fogControlsContainer) {
+            fogControlsContainer.appendChild(window.fogOfWarSystem.createFogControls());
+        }
+        
+        // 🏛️ Événements pour l'interface de ville
+        document.getElementById('city-btn').addEventListener('click', () => {
+            window.cityInterface.toggle();
+        });
+        
+        // ⚔️ Événements pour l'interface de combat
+        document.getElementById('combat-btn').addEventListener('click', () => {
+            window.combatInterface.toggle();
+        });
+        
+        // 👤 Événements pour l'interface de héros
+        document.getElementById('hero-btn').addEventListener('click', () => {
+            window.heroInterface.toggle();
+        });
+        
+        // 🚬 Événements pour le Joint Magique
+        document.getElementById('joint-magic-btn').addEventListener('click', () => {
+            window.open('frontend/joint-panopticon-interface.html', '_blank', 'width=1200,height=800');
+        });
+        
+        // 🌐 Initialiser le service de traduction
+        window.translationService = new TranslationService();
+        
+        // 🏛️ Initialiser l'interface de ville
+        window.cityInterface = new CityInterface();
+        
+        // ⚔️ Initialiser l'interface de combat
+        window.combatInterface = new CombatInterface();
+        
+        // 👤 Initialiser l'interface de héros
+        window.heroInterface = new HeroInterface();
+        
+        // 🎮 Initialiser le sélecteur de scénarios
+        window.scenarioSelector = new ScenarioSelector();
+        const openScenarioBtn = document.getElementById('open-scenario-selector-btn');
+        if (openScenarioBtn) {
+            openScenarioBtn.addEventListener('click', () => {
+                const selectorInterface = window.scenarioSelector.createSelectorInterface();
+                document.body.appendChild(selectorInterface);
+            });
+        }
+        
+        // Initialize game components
+        let gameRenderer;
+        let gameState = {
+            heroes: [],
+            creatures: [],
+            artifacts: [],
+            currentTimeline: 'ℬ1',
+            currentTurn: 0,
+            decayStatus: 'None'
+        };
+
+        // Mock heroes with dicebar graphics
+        window.createMockHeroes = function() {
+            const mockHeroes = [
+                {
+                    name: 'Ragnar',
+                    health: 120,
+                    maxHealth: 120,
+                    temporalEnergy: 80,
+                    movementPoints: 3,
+                    timeline: 'ℬ1',
+                    position: { q: 0, r: 0 }
+                },
+                {
+                    name: 'Arthur',
+                    health: 100,
+                    maxHealth: 100,
+                    temporalEnergy: 60,
+                    movementPoints: 2,
+                    timeline: 'ℬ1',
+                    position: { q: 1, r: -1 }
+                },
+                {
+                    name: 'Jean-Grofignon',
+                    health: 80,
+                    maxHealth: 80,
+                    temporalEnergy: 120,
+                    movementPoints: 2,
+                    timeline: 'ℬ1',
+                    position: { q: -1, r: 1 }
+                }
+            ];
+            
+            gameState.heroes = mockHeroes;
+            window.updateHeroesList(mockHeroes);
+            window.updateStatusBar('Demo Heroes: Ragnar 🛡️, Arthur ⚔️, and Jean-Grofignon 🧠 ready with Dicebear graphics!');
+        };
+
+        // Enhanced heroes list with dicebar graphics
+        window.updateHeroesList = function(heroes) {
+            const heroesList = document.getElementById('heroes-list');
+            if (!heroesList) return;
+            
+            heroesList.innerHTML = '';
+            heroes.forEach(hero => {
+                const heroElement = document.createElement('div');
+                heroElement.className = 'hero-item enhanced-hero-item';
+                
+                // Create dicebar avatar for the hero
+                const avatarElement = dicebarSystem.createAvatarElement('hero', hero.name, 50);
+                
+                heroElement.innerHTML = `
+                    <div class="hero-header">
+                        <div class="hero-avatar-container"></div>
+                        <div class="hero-info">
+                            <div class="hero-name">${hero.name}</div>
+                            <div class="hero-stats">
+                                <span class="health">❤️ ${hero.health}/${hero.maxHealth}</span>
+                                <span class="energy">⚡ ${hero.temporalEnergy}</span>
+                                <span class="movement">👟 ${hero.movementPoints}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-timeline">⏰ ${hero.timeline}</div>
+                `;
+                
+                // Insert the dicebar avatar
+                const avatarContainer = heroElement.querySelector('.hero-avatar-container');
+                avatarContainer.appendChild(avatarElement);
+                
+                heroesList.appendChild(heroElement);
+            });
+        };
+
+        // Dicebear Gallery functionality
+        document.getElementById('dicebear-gallery-btn').addEventListener('click', function() {
+            const modal = document.getElementById('dicebear-modal');
+            modal.style.display = 'block';
+            
+            // Create the gallery
+            dicebarSystem.createAvatarGrid('dicebear-gallery');
+        });
+
+        document.getElementById('close-modal').addEventListener('click', function() {
+            document.getElementById('dicebear-modal').style.display = 'none';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('dicebear-modal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Initialize game when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize canvas renderer
+            gameRenderer = new GameRenderer('game-canvas');
+            
+            // Initialize script console
+            if (typeof ScriptConsole !== 'undefined') {
+                window.scriptConsole = new ScriptConsole('script-console');
+                window.scriptConsole.addToOutput('🕰️ Heroes of Time - Temporal Engine with Enhanced Dicebear Graphics', 'success');
+                window.scriptConsole.addToOutput('Available commands:', 'normal');
+                window.scriptConsole.addToOutput('  • HERO(Ragnar) - Create hero with dicebear avatar', 'normal');
+                window.scriptConsole.addToOutput('  • MOV(Ragnar, @5,3) - Move hero', 'normal');
+                window.scriptConsole.addToOutput('  • CREATURE(Dragon Rouge Temporel) - Summon creature with graphics', 'normal');
+                window.scriptConsole.addToOutput('  • ARTIFACT(avantworld_blade) - Create artifact with graphics', 'normal');
+                window.scriptConsole.addToOutput('🎭 Click "Dicebear Gallery" to see all available graphics!', 'info');
+            }
+
+            // Load demo heroes with dicebar graphics
+            setTimeout(() => {
+                window.scriptConsole.addToOutput('🎭 Loading heroes with dicebear graphics for immediate testing...', 'info');
+                window.createMockHeroes();
+            }, 1000);
+
+            // Initialize other game systems
+            if (typeof initializeGameSystems === 'function') {
+                initializeGameSystems();
+            }
+        });
+
+        // Enhanced button handlers with dicebar integration
+        document.getElementById('new-game-btn').addEventListener('click', async function() {
+            try {
+                const result = await window.gameAPI.newGame();
+                window.scriptConsole.addToOutput('🎮 New game started with dicebear graphics!', 'success');
+                window.createMockHeroes(); // Load heroes with graphics
+            } catch (error) {
+                window.scriptConsole.addToOutput('⚠️ Backend not available, using demo mode with graphics', 'warning');
+                window.createMockHeroes();
+            }
+        });
+
+        document.getElementById('add-ragnar-btn').addEventListener('click', async function() {
+            try {
+                const result = await window.gameAPI.executeScript('HERO(Ragnar)');
+                window.scriptConsole.addToOutput('🛡️ Hero Ragnar created with dicebear graphics via temporal script!', 'success');
+                window.updateHeroesList(result.heroes || []);
+            } catch (error) {
+                window.scriptConsole.addToOutput('⚠️ Backend not available for script execution', 'warning');
+                window.scriptConsole.addToOutput('🎭 Loading demo heroes with graphics instead...', 'info');
+                window.createMockHeroes();
+            }
+        });
+
+        document.getElementById('test-decay-btn').addEventListener('click', async function() {
+            try {
+                const result = await window.gameAPI.testDecay();
+                window.scriptConsole.addToOutput('⏰ Temporal decay test executed', 'success');
+                if (result.decayStatus) {
+                    document.getElementById('decay-status').textContent = `Decay: ${result.decayStatus}`;
+                }
+            } catch (error) {
+                window.scriptConsole.addToOutput('⚠️ Backend not available for decay testing', 'warning');
+                document.getElementById('decay-status').textContent = 'Decay: Demo Mode';
+            }
+        });
+
+        // Status bar update function
+        window.updateStatusBar = function(message) {
+            if (window.scriptConsole) {
+                window.scriptConsole.addToOutput(message, 'info');
+            }
+        };
+
+        // Global game state access
+        window.getGameState = function() {
+            return gameState;
+        };
+
+        window.updateGameState = function(newState) {
+            gameState = { ...gameState, ...newState };
+            if (gameRenderer) {
+                gameRenderer.updateGameState(gameState);
+            }
+        };
+
+        // Export dicebar system for global access
+        window.dicebarSystem = dicebarSystem;
+    </script>
+</body>
+</html>

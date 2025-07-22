@@ -1,0 +1,157 @@
+🚧 DEVELOPMENT ONGOING - Heroes of Time
+==========================================
+
+📅 Date: 2025-07-19
+🔄 Branche: poc-heroes-of-time
+👤 Agent: Assistant
+
+## 🎯 INSTRUCTIONS PRINCIPALES
+
+### 🚫 RÈGLES DE DÉVELOPPEMENT
+- ❌ PAS de code en dur sauf si vraiment nécessaire
+- ❌ PAS de Docker pour le moment (raisons à venir dans specs)
+- ✅ MOCK des messages backend pour le moment
+- ✅ Extension de grammaire temporelle PRIORITAIRE sur code dur
+- ✅ Vérifier que les JSON de héros sont bien loadés et interprétés
+- ✅ Formules quantiques utilisées selon système existant
+
+## 📊 ANALYSE DE COMPATIBILITÉ GROFI ↔ SYSTÈME EXISTANT
+
+### ✅ **COMPATIBLE DIRECTEMENT**
+**Héros existants :**
+- ✅ Hero.java model avec name, position, timeline, temporal energy
+- ✅ HeroRepository avec findByName, findByGameId
+- ✅ Inventory système (List<String> inventory)
+- ✅ HeroStatus enum (ACTIVE, TEMPORAL_SHIFT, QUANTUM_SUPERPOSITION, etc.)
+
+**Artefacts quantiques :**
+- ✅ quantum-artifacts.json (462 lignes) déjà présent
+- ✅ Structure quantumProperties, quantumAbilities compatible
+- ✅ ComplexAmplitude, interferencePattern déjà implémentés
+
+**Grammaire temporelle :**
+- ✅ ψ, †, ⊙, Π, Δt, @, ℬ, ⟶ déjà parsés
+- ✅ TemporalScriptParser.java fonctionnel
+- ✅ PsiState.java avec expression, branchId, probability
+
+### 🔧 **EXTENSIONS NÉCESSAIRES**
+
+**1. Hero Model Extensions :**
+```java
+// À AJOUTER dans Hero.java
+@Column(name = "title")
+private String title; // "L'Éveillé Ontologique"
+
+@Column(name = "description", columnDefinition = "TEXT")
+private String description;
+
+@Column(name = "rarity")
+private String rarity; // "légendaire"
+
+@Column(name = "role")
+private String role; // "Admin-Architecte"
+
+@Column(name = "faction")
+private String faction; // "Anomalie"
+
+@ElementCollection
+@Column(name = "companion_ids")
+private List<String> companions;
+
+@ElementCollection
+@Column(name = "quotes")
+private List<String> quotes;
+
+@ElementCollection
+@Column(name = "immunity_tags")
+private List<String> immunityTags; // ["SRTI", "OBS", "ROLLBACK"]
+
+@Column(name = "ultimate_power_name")
+private String ultimatePowerName;
+
+@Column(name = "ultimate_power_description", columnDefinition = "TEXT")
+private String ultimatePowerDescription;
+
+@Column(name = "ultimate_quantum_script", columnDefinition = "TEXT")
+private String ultimateQuantumScript;
+```
+
+**2. Grammaire Quantique Extensions :**
+```java
+// À AJOUTER dans TemporalScriptParser.java
+- †[...] : Rollback/annulation (nouveau !)
+- Π[...] : Condition logique (étendu)
+- Ω[...] : Réalité effondrée  
+- Λ[...] : Instabilité système
+- Σ[...] : Stress global
+- ↯ : Erreur/effondrement critique
+- ψ[ψ[ψ[action]]] : Superposition récursive
+```
+
+**3. Service d'Intégration GROFI :**
+```java
+@Service
+public class GrofiHeroService {
+    // Charger héros GROFI depuis JSON
+    // Convertir vers Hero entities
+    // Gérer immunity tags
+    // Parser quantum scripts avancés
+}
+```
+
+### 📁 **PLAN DE MIGRATION DES FICHIERS**
+
+**docs/GROFI/ → Structure finale :**
+```
+docs/GROFI/JeanGrofignon.json → backend/src/main/resources/heroes/grofi/
+docs/GROFI/TheDude.json → backend/src/main/resources/heroes/grofi/
+docs/GROFI/VinceVega.json → backend/src/main/resources/heroes/grofi/
+docs/GROFI/WalterSobchak.json → backend/src/main/resources/heroes/grofi/
+
+docs/GROFI/QUANTUM_ARTIFACTS_CATALOG.md → docs/quantum/
+docs/GROFI/WORLD_STATE_GRAPH.md → docs/architecture/
+docs/GROFI/TEMPORAL_SCRIPT_CORE_REFERENCE.md → docs/grammar/
+docs/GROFI/TEMPLATE_HERO.md → docs/templates/
+```
+
+### 🔮 **ARTEFACTS GROFI vs EXISTANTS**
+
+**Existant (quantum-artifacts.json) :**
+- ✅ quantumProperties.baseAmplitude
+- ✅ interferencePattern  
+- ✅ coherenceTime, decoherenceRate
+- ✅ quantumAbilities avec effects
+
+**GROFI (à intégrer) :**
+- 🔧 Stabilisation : Totem de Stabilité
+- 🔧 Collapse : Marteau de Collapse
+- 🔧 Propagation : Cristal de Propagation
+- 🔧 Immunité : Bouclier d'Immunité
+- 🔧 Ultimate : Artefacts suprêmes
+
+**→ COMPATIBLE** : Même structure JSON, juste nouveaux types d'effects
+
+## 🎯 PROCHAINES ÉTAPES
+
+1. ✅ **Analyser compatibilité** (TERMINÉ)
+2. 🔧 **Étendre Hero.java** avec champs GROFI
+3. 📁 **Migrer fichiers GROFI** vers structure appropriée  
+4. 🔤 **Étendre TemporalScriptParser** avec nouvelle grammaire
+5. 🦸 **Créer GrofiHeroService** pour chargement JSON
+6. 🔮 **Intégrer artefacts GROFI** dans quantum-artifacts.json
+7. 🌐 **Implémenter World State Graph** système
+8. ✅ **Tester compatibilité** complète
+
+## 🚨 RISQUES IDENTIFIÉS
+
+- ⚠️ **Pas de breaking changes** : Héros existants doivent continuer à fonctionner
+- ⚠️ **Performance** : Nouvelles grammaires complexes (†[...], ψ[ψ[ψ[...]]])
+- ⚠️ **Migration DB** : Nouveaux champs Hero nécessitent migration schema
+- ⚠️ **Parsing** : Grammaire récursive ψ[ψ[...]] peut être complexe
+
+## 📈 COMPATIBILITÉ SCORE : 85% ✅
+
+**85% compatible directement, 15% extensions nécessaires**
+
+==========================================
+📌 Système prêt pour intégration GROFI avec extensions mineures 

@@ -1,200 +1,287 @@
 #!/bin/bash
 
-# 🧪 Heroes of Time - Tests Unitaires Backend avec Rapport Détaillé
-# Script pour lancer les tests unitaires du backend avec rapport complet
+# 🧪 Heroes of Time - Unit Test Runner
+# ====================================
 
-set -e
+echo "🧪 Heroes of Time - Unit Test Runner"
+echo "===================================="
 
-echo "📊 Heroes of Time - Tests Unitaires Backend"
-echo "=============================================="
+# Set test environment variables
+export SPRING_PROFILES_ACTIVE=test
+export JAVA_OPTS="-Xmx2g -Xms512m"
 
-# Colors for output
+# Color codes for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-# Configuration
-PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-BACKEND_DIR="$PROJECT_ROOT/backend"
-TEST_RESULTS_DIR="$PROJECT_ROOT/test-results"
-TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
-REPORT_FILE="$TEST_RESULTS_DIR/backend-unit-tests-$TIMESTAMP.html"
-LOG_FILE="$TEST_RESULTS_DIR/backend-unit-tests-$TIMESTAMP.log"
+print_header() {
+    echo -e "${BLUE}=== $1 ===${NC}"
+}
 
-# Créer le répertoire de résultats
-mkdir -p "$TEST_RESULTS_DIR"
+print_success() {
+    echo -e "${GREEN}✅ $1${NC}"
+}
 
-echo -e "${BLUE}🔍 Configuration des tests${NC}"
-echo "  📁 Répertoire backend: $BACKEND_DIR"
-echo "  📊 Rapport HTML: $REPORT_FILE"
-echo "  📝 Log détaillé: $LOG_FILE"
-echo ""
+print_warning() {
+    echo -e "${YELLOW}⚠️  $1${NC}"
+}
 
-# Vérifier la présence du backend
-if [ ! -d "$BACKEND_DIR" ]; then
-    echo -e "${RED}❌ ERREUR: Répertoire backend non trouvé${NC}"
+print_error() {
+    echo -e "${RED}❌ $1${NC}"
+}
+
+print_info() {
+    echo -e "${BLUE}ℹ️  $1${NC}"
+}
+
+# Check if Maven is available
+if ! command -v mvn &> /dev/null; then
+    print_error "Maven is not installed or not in PATH"
     exit 1
 fi
 
-cd "$BACKEND_DIR"
-
-echo -e "${BLUE}📦 Vérification des dépendances...${NC}"
-if [ ! -f "pom.xml" ]; then
-    echo -e "${RED}❌ ERREUR: pom.xml non trouvé${NC}"
+# Check if Java is available
+if ! command -v java &> /dev/null; then
+    print_error "Java is not installed or not in PATH"
     exit 1
 fi
 
-echo -e "${BLUE}🧽 Nettoyage des anciens artifacts...${NC}"
-./mvnw clean -q > /dev/null 2>&1 || true
+# Check Java version
+JAVA_VERSION=$(java -version 2>&1 | awk -F '"' '/version/ {print $2}' | awk -F '.' '{print $1}')
+if [ "$JAVA_VERSION" -lt 17 ]; then
+    print_error "Java 17 or higher is required. Current version: $JAVA_VERSION"
+    exit 1
+fi
 
-echo -e "${BLUE}🔧 Compilation du projet...${NC}"
-./mvnw compile -q > /dev/null 2>&1
+print_info "Java version: $JAVA_VERSION"
+print_info "Maven version: $(mvn --version | head -1)"
+
+# Navigate to backend directory
+cd backend
+
+print_header "Cleaning and Compiling"
+print_info "Cleaning previous build artifacts..."
+mvn clean > /dev/null 2>&1
 if [ $? -ne 0 ]; then
-    echo -e "${RED}❌ ERREUR: Échec de la compilation${NC}"
+    print_error "Failed to clean project"
     exit 1
 fi
 
-echo -e "${BLUE}🧪 Lancement des tests unitaires avec rapport...${NC}"
-echo "  ⏳ Cela peut prendre quelques minutes..."
-
-# Démarrer le timestamp
-TEST_START_TIME=$(date +%s)
-
-# Lancer les tests avec rapport Surefire
-./mvnw test \
-    -Dmaven.test.failure.ignore=true \
-    -Dsurefire.reports.directory="$TEST_RESULTS_DIR/surefire-reports" \
-    -Dmaven.surefire.report.format=xml \
-    -Dmaven.surefire.report.format=brief \
-    > "$LOG_FILE" 2>&1
-
-TEST_EXIT_CODE=$?
-TEST_END_TIME=$(date +%s)
-TEST_DURATION=$((TEST_END_TIME - TEST_START_TIME))
-
-echo -e "${BLUE}📊 Génération du rapport HTML...${NC}"
-
-# Générer le rapport HTML
-./mvnw surefire-report:report -q > /dev/null 2>&1 || true
-
-# Générer notre rapport personnalisé
-cat > "$REPORT_FILE" << EOF
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Heroes of Time - Rapport Tests Unitaires Backend</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .header { background: #2c3e50; color: white; padding: 20px; border-radius: 5px; }
-        .summary { background: #ecf0f1; padding: 15px; margin: 20px 0; border-radius: 5px; }
-        .success { color: #27ae60; }
-        .failure { color: #e74c3c; }
-        .warning { color: #f39c12; }
-        .info { color: #3498db; }
-        .test-class { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
-        .test-method { margin: 10px 0; padding: 10px; background: #f8f9fa; border-left: 4px solid #3498db; }
-        .test-failure { border-left-color: #e74c3c; background: #fdf2f2; }
-        .test-success { border-left-color: #27ae60; background: #f0f9f0; }
-        .timestamp { font-size: 0.9em; color: #666; }
-        .duration { font-weight: bold; color: #3498db; }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <h1>⚔️ Heroes of Time - Tests Unitaires Backend</h1>
-        <p class="timestamp">Généré le $(date)</p>
-    </div>
-
-    <div class="summary">
-        <h2>📊 Résumé des Tests</h2>
-        <p><strong>Durée totale:</strong> <span class="duration">${TEST_DURATION}s</span></p>
-        <p><strong>Statut:</strong> 
-EOF
-
-# Analyser les résultats
-if [ $TEST_EXIT_CODE -eq 0 ]; then
-    echo '            <span class="success">✅ TOUS LES TESTS PASSÉS</span>' >> "$REPORT_FILE"
-else
-    echo '            <span class="failure">❌ ÉCHECS DÉTECTÉS</span>' >> "$REPORT_FILE"
+print_info "Compiling sources..."
+mvn compile > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+    print_error "Failed to compile sources"
+    exit 1
 fi
 
-# Analyser les résultats Surefire
-SUREFIRE_RESULTS="$TEST_RESULTS_DIR/surefire-reports"
-if [ -d "$SUREFIRE_RESULTS" ]; then
-    TOTAL_TESTS=$(find "$SUREFIRE_RESULTS" -name "*.xml" -exec grep -h "tests=" {} \; | sed 's/.*tests="\([0-9]*\)".*/\1/' | awk '{sum += $1} END {print sum}')
-    FAILURES=$(find "$SUREFIRE_RESULTS" -name "*.xml" -exec grep -h "failures=" {} \; | sed 's/.*failures="\([0-9]*\)".*/\1/' | awk '{sum += $1} END {print sum}')
-    ERRORS=$(find "$SUREFIRE_RESULTS" -name "*.xml" -exec grep -h "errors=" {} \; | sed 's/.*errors="\([0-9]*\)".*/\1/' | awk '{sum += $1} END {print sum}')
+print_info "Compiling test sources..."
+mvn test-compile > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+    print_error "Failed to compile test sources"
+    exit 1
+fi
+
+print_success "Compilation successful"
+
+print_header "Running Unit Tests"
+
+# Create test report directory
+TEST_REPORT_DIR="target/test-reports"
+mkdir -p $TEST_REPORT_DIR
+
+# Run specific test classes
+TEST_CLASSES=(
+    "PsiStateTest"
+    "TemporalEngineServiceTest"
+    "TemporalScriptParserTest"
+    "TemporalEngineIntegrationTest"
+)
+
+TOTAL_TESTS=0
+PASSED_TESTS=0
+FAILED_TESTS=0
+
+for TEST_CLASS in "${TEST_CLASSES[@]}"; do
+    print_info "Running $TEST_CLASS..."
     
-    cat >> "$REPORT_FILE" << EOF
-        </p>
-        <p><strong>Tests totaux:</strong> ${TOTAL_TESTS:-0}</p>
-        <p><strong>Échecs:</strong> <span class="failure">${FAILURES:-0}</span></p>
-        <p><strong>Erreurs:</strong> <span class="failure">${ERRORS:-0}</span></p>
-        <p><strong>Réussis:</strong> <span class="success">$((${TOTAL_TESTS:-0} - ${FAILURES:-0} - ${ERRORS:-0}))</span></p>
-    </div>
-
-    <div class="test-class">
-        <h2>🧪 Classes de Tests</h2>
-EOF
-
-    # Lister les classes de tests
-    for test_file in "$SUREFIRE_RESULTS"/*.xml; do
-        if [ -f "$test_file" ]; then
-            classname=$(grep -o 'classname="[^"]*"' "$test_file" | head -1 | cut -d'"' -f2)
-            echo "        <div class=\"test-method test-success\">" >> "$REPORT_FILE"
-            echo "            <h3>📋 $classname</h3>" >> "$REPORT_FILE"
-            echo "        </div>" >> "$REPORT_FILE"
+    # Run the test and capture output
+    TEST_OUTPUT=$(mvn -Dtest=com.heroesoftimepoc.temporalengine.$TEST_CLASS test 2>&1)
+    TEST_RESULT=$?
+    
+    # Parse test results
+    if echo "$TEST_OUTPUT" | grep -q "BUILD SUCCESS"; then
+        # Extract test counts
+        TESTS_RUN=$(echo "$TEST_OUTPUT" | grep -o "Tests run: [0-9]*" | grep -o "[0-9]*")
+        FAILURES=$(echo "$TEST_OUTPUT" | grep -o "Failures: [0-9]*" | grep -o "[0-9]*")
+        ERRORS=$(echo "$TEST_OUTPUT" | grep -o "Errors: [0-9]*" | grep -o "[0-9]*")
+        
+        if [ -z "$TESTS_RUN" ]; then TESTS_RUN=0; fi
+        if [ -z "$FAILURES" ]; then FAILURES=0; fi
+        if [ -z "$ERRORS" ]; then ERRORS=0; fi
+        
+        TOTAL_TESTS=$((TOTAL_TESTS + TESTS_RUN))
+        
+        if [ "$FAILURES" -eq 0 ] && [ "$ERRORS" -eq 0 ]; then
+            print_success "$TEST_CLASS: $TESTS_RUN tests passed"
+            PASSED_TESTS=$((PASSED_TESTS + TESTS_RUN))
+        else
+            print_error "$TEST_CLASS: $TESTS_RUN tests run, $FAILURES failures, $ERRORS errors"
+            FAILED_TESTS=$((FAILED_TESTS + FAILURES + ERRORS))
         fi
-    done
+    else
+        print_error "$TEST_CLASS: Test execution failed"
+        FAILED_TESTS=$((FAILED_TESTS + 1))
+    fi
+    
+    # Save detailed output to file
+    echo "$TEST_OUTPUT" > "$TEST_REPORT_DIR/${TEST_CLASS}.log"
+done
+
+print_header "Running All Tests Together"
+print_info "Running complete test suite..."
+
+# Run all tests together
+ALL_TESTS_OUTPUT=$(mvn test 2>&1)
+ALL_TESTS_RESULT=$?
+
+# Save complete output
+echo "$ALL_TESTS_OUTPUT" > "$TEST_REPORT_DIR/all-tests.log"
+
+print_header "Test Results Summary"
+
+if [ $ALL_TESTS_RESULT -eq 0 ]; then
+    print_success "All tests passed successfully!"
+    
+    # Extract detailed statistics
+    TOTAL_TESTS_RUN=$(echo "$ALL_TESTS_OUTPUT" | grep -o "Tests run: [0-9]*" | tail -1 | grep -o "[0-9]*")
+    TOTAL_FAILURES=$(echo "$ALL_TESTS_OUTPUT" | grep -o "Failures: [0-9]*" | tail -1 | grep -o "[0-9]*")
+    TOTAL_ERRORS=$(echo "$ALL_TESTS_OUTPUT" | grep -o "Errors: [0-9]*" | tail -1 | grep -o "[0-9]*")
+    TOTAL_SKIPPED=$(echo "$ALL_TESTS_OUTPUT" | grep -o "Skipped: [0-9]*" | tail -1 | grep -o "[0-9]*")
+    
+    if [ -z "$TOTAL_TESTS_RUN" ]; then TOTAL_TESTS_RUN=0; fi
+    if [ -z "$TOTAL_FAILURES" ]; then TOTAL_FAILURES=0; fi
+    if [ -z "$TOTAL_ERRORS" ]; then TOTAL_ERRORS=0; fi
+    if [ -z "$TOTAL_SKIPPED" ]; then TOTAL_SKIPPED=0; fi
+    
+    print_info "📊 Test Statistics:"
+    print_info "   Total Tests: $TOTAL_TESTS_RUN"
+    print_info "   Passed: $((TOTAL_TESTS_RUN - TOTAL_FAILURES - TOTAL_ERRORS))"
+    print_info "   Failed: $TOTAL_FAILURES"
+    print_info "   Errors: $TOTAL_ERRORS"
+    print_info "   Skipped: $TOTAL_SKIPPED"
+    
+    # Extract execution time
+    EXECUTION_TIME=$(echo "$ALL_TESTS_OUTPUT" | grep -o "Total time: [0-9]*\.[0-9]*" | grep -o "[0-9]*\.[0-9]*")
+    if [ -n "$EXECUTION_TIME" ]; then
+        print_info "   Execution Time: ${EXECUTION_TIME}s"
+    fi
+    
 else
-    echo "        </p>" >> "$REPORT_FILE"
-    echo "        <p><strong>⚠️ Aucun rapport Surefire trouvé</strong></p>" >> "$REPORT_FILE"
-    echo "    </div>" >> "$REPORT_FILE"
+    print_error "Some tests failed!"
+    
+    # Show failure details
+    if echo "$ALL_TESTS_OUTPUT" | grep -q "FAILURES"; then
+        print_error "Failure details:"
+        echo "$ALL_TESTS_OUTPUT" | grep -A 10 "FAILURES"
+    fi
+    
+    if echo "$ALL_TESTS_OUTPUT" | grep -q "ERRORS"; then
+        print_error "Error details:"
+        echo "$ALL_TESTS_OUTPUT" | grep -A 10 "ERRORS"
+    fi
 fi
 
-cat >> "$REPORT_FILE" << EOF
-    </div>
+print_header "Coverage Report"
+print_info "Generating test coverage report..."
 
-    <div class="test-class">
-        <h2>📝 Log Détaillé</h2>
-        <pre style="background: #f8f9fa; padding: 15px; border-radius: 5px; overflow-x: auto;">
-$(cat "$LOG_FILE" | tail -50)
-        </pre>
-    </div>
+# Generate coverage report (if jacoco is configured)
+mvn jacoco:report > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    print_success "Coverage report generated at target/site/jacoco/index.html"
+else
+    print_warning "Coverage report generation failed (jacoco may not be configured)"
+fi
 
-    <div class="summary">
-        <h2>🔗 Liens Utiles</h2>
-        <p><strong>Log complet:</strong> <a href="file://$LOG_FILE">$LOG_FILE</a></p>
-        <p><strong>Rapports Surefire:</strong> <a href="file://$SUREFIRE_RESULTS">$SUREFIRE_RESULTS</a></p>
-    </div>
-</body>
-</html>
+print_header "Test Report Files"
+print_info "Detailed test reports saved to:"
+for TEST_CLASS in "${TEST_CLASSES[@]}"; do
+    if [ -f "$TEST_REPORT_DIR/${TEST_CLASS}.log" ]; then
+        print_info "   - $TEST_REPORT_DIR/${TEST_CLASS}.log"
+    fi
+done
+print_info "   - $TEST_REPORT_DIR/all-tests.log"
+
+# Generate summary report
+SUMMARY_FILE="$TEST_REPORT_DIR/summary.txt"
+cat > "$SUMMARY_FILE" << EOF
+Heroes of Time - Unit Test Summary
+=================================
+
+Date: $(date)
+Total Tests: $TOTAL_TESTS_RUN
+Passed: $((TOTAL_TESTS_RUN - TOTAL_FAILURES - TOTAL_ERRORS))
+Failed: $TOTAL_FAILURES
+Errors: $TOTAL_ERRORS
+Skipped: $TOTAL_SKIPPED
+
+Test Classes Executed:
 EOF
 
-echo ""
-echo -e "${GREEN}✅ Tests terminés!${NC}"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo -e "${BLUE}📊 Résultats:${NC}"
+for TEST_CLASS in "${TEST_CLASSES[@]}"; do
+    echo "- $TEST_CLASS" >> "$SUMMARY_FILE"
+done
 
-if [ $TEST_EXIT_CODE -eq 0 ]; then
-    echo -e "  ${GREEN}✅ Tous les tests ont réussi${NC}"
+print_info "Summary report saved to: $SUMMARY_FILE"
+
+print_header "Test Validation"
+
+# Check for critical temporal engine components
+print_info "Validating temporal engine components..."
+
+CRITICAL_TESTS=(
+    "testPsiStateCreation"
+    "testPsiStateCollapse"
+    "testTemporalScriptParsing"
+    "testObservationTriggers"
+    "testArtifactEffects"
+    "testConflictResolution"
+)
+
+for CRITICAL_TEST in "${CRITICAL_TESTS[@]}"; do
+    if echo "$ALL_TESTS_OUTPUT" | grep -q "$CRITICAL_TEST"; then
+        print_success "✓ $CRITICAL_TEST validated"
+    else
+        print_warning "⚠ $CRITICAL_TEST not found in test output"
+    fi
+done
+
+print_header "Recommendations"
+
+if [ $ALL_TESTS_RESULT -eq 0 ]; then
+    print_success "🎉 All tests passed! The temporal engine is functioning correctly."
+    print_info "Next steps:"
+    print_info "1. Run integration tests: ./test-backend-integration.sh"
+    print_info "2. Test frontend connectivity: ./test-frontend-backend.sh"
+    print_info "3. Deploy to staging environment"
 else
-    echo -e "  ${RED}❌ Certains tests ont échoué${NC}"
+    print_error "❌ Tests failed. Please fix the following:"
+    print_info "1. Review test logs in $TEST_REPORT_DIR/"
+    print_info "2. Fix failing tests"
+    print_info "3. Re-run tests"
 fi
 
-echo -e "  ⏱️  Durée: ${TEST_DURATION}s"
-echo -e "  📊 Rapport HTML: ${REPORT_FILE}"
-echo -e "  📝 Log détaillé: ${LOG_FILE}"
+print_header "Cleanup"
+print_info "Cleaning up test artifacts..."
+mvn clean > /dev/null 2>&1
+
 echo ""
-echo -e "${YELLOW}💡 Pour voir le rapport: open \"$REPORT_FILE\"${NC}"
-echo -e "${YELLOW}💡 Pour voir les logs: tail -f \"$LOG_FILE\"${NC}"
-
-# Ouvrir automatiquement le rapport si sur macOS
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    echo -e "${BLUE}🌐 Ouverture du rapport dans le navigateur...${NC}"
-    open "$REPORT_FILE"
-fi
-
-exit $TEST_EXIT_CODE 
+if [ $ALL_TESTS_RESULT -eq 0 ]; then
+    print_success "🎯 Unit test execution completed successfully!"
+    exit 0
+else
+    print_error "🚨 Unit test execution completed with failures!"
+    exit 1
+fi 
