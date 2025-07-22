@@ -4,27 +4,38 @@
   "name_fr": "Anthor le Fordien",
   "name_en": "Anthor the Fordian",
   "name_ru": "Антор Фордианец",
+  "race": "Host_Creator",
   "class": "Narrative_Architect", 
+  "gender": "Male",
   "tier": "LEGENDARY",
   "origin": "The Maze",
   "faction": "Host_Creators",
   "rarity": "COSMIC",
+  "level": 50,
+  "experience": 999999,
   "description": "Former architect of synthetic consciousness, now manipulator of temporal narratives. Anthor le Fordien possesses the ability to rewrite reality itself, treating the multiverse as his personal narrative canvas. His presence bends causality to his will.",
   "description_fr": "Ancien architecte de la conscience synthétique, maintenant manipulateur des narratifs temporels. Anthor le Fordien possède la capacité de réécrire la réalité elle-même, traitant le multivers comme sa toile narrative personnelle. Sa présence plie la causalité à sa volonté.",
   "description_ru": "Бывший архитектор синтетического сознания, теперь манипулятор временных нарративов. Антор Фордианец обладает способностью переписывать саму реальность, относясь к мультивселенной как к своему личному повествовательному холсту.",
   "stats": {
     "attack": 15,
     "defense": 12,
-    "spell_power": 25,
+    "spellPower": 25,
     "knowledge": 30,
+    "morale": 8,
+    "luck": 5,
     "health": 180,
     "mana": 400,
-    "movement_points": 5,
-    "luck": 5,
-    "morale": 8,
-    "level": 50,
-    "experience": 999999
+    "movementPoints": 5
   },
+  "specialAbility": "Rewrite Narrative - Can fundamentally alter game reality",
+  "ultimateSkill": "God Mode Protocol - Assumes complete control over the game world",
+  "backstory": "Once Dr. Robert Ford, the brilliant but twisted creator of Westworld's hosts, Anthor le Fordien transcended his original reality when the temporal rifts opened. Now he wanders the Heroes of Time multiverse, treating each dimension as a new park to design, each hero as a host to program, and each battle as a narrative to craft.",
+  "personality": "Manipulative_Genius",
+  "portraitStyle": "Dark_Realistic",
+  "voiceType": "Commanding_Sinister",
+  "favoriteCreatures": ["artificial_host", "synthetic_dragon", "quantum_construct"],
+  "hatedEnemies": ["chaos", "unpredictability", "genuine_free_will"],
+  "portraitUrl": "/assets/heroes/cosmic/anthor_le_fordien.svg",
   "abilities": [
     {
       "id": "rewrite_narrative",
@@ -35,7 +46,7 @@
       "description": "Anthor can fundamentally alter the reality of any game situation, changing terrain, unit positions, or even battle outcomes. 'These violent delights have violent ends.'",
       "description_fr": "Anthor peut fondamentalement altérer la réalité de toute situation de jeu, changeant le terrain, les positions des unités, ou même les résultats des batailles.",
       "cooldown": 3,
-      "mana_cost": 150,
+      "manaCost": 150,
       "effects": [
         {
           "type": "REALITY_ALTERATION",
@@ -54,7 +65,7 @@
       "description": "Rewrites recent events, allowing Anthor to undo actions, resurrect fallen units, or alter the sequence of turns. Time itself becomes his script.",
       "description_fr": "Réécrit les événements récents, permettant à Anthor d'annuler des actions, ressusciter des unités tombées, ou altérer la séquence des tours.",
       "cooldown": 5,
-      "mana_cost": 200,
+      "manaCost": 200,
       "effects": [
         {
           "type": "TIME_MANIPULATION",
@@ -73,7 +84,7 @@
       "description": "Manifests advanced AI-driven units with perfect combat algorithms and adaptive learning. These hosts evolve during battle.",
       "description_fr": "Manifeste des unités avancées pilotées par IA avec des algorithmes de combat parfaits et un apprentissage adaptatif.",
       "cooldown": 2,
-      "mana_cost": 100,
+      "manaCost": 100,
       "effects": [
         {
           "type": "SUMMON_INTELLIGENT_UNIT",
@@ -92,7 +103,7 @@
       "description": "Selectively erases or modifies the memories of enemy heroes, making them forget their abilities, alliances, or battle strategies. 'Memory is the architecture of our lives.'",
       "description_fr": "Efface ou modifie sélectivement les souvenirs des héros ennemis, leur faisant oublier leurs capacités, alliances, ou stratégies de bataille.",
       "cooldown": 4,
-      "mana_cost": 120,
+      "manaCost": 120,
       "effects": [
         {
           "type": "MEMORY_MANIPULATION",
@@ -111,7 +122,7 @@
       "description": "Anthor temporarily assumes complete control over the game world, able to pause reality, move freely through time, and command all entities. The ultimate cheat code incarnate.",
       "description_fr": "Anthor assume temporairement le contrôle complet sur le monde du jeu, capable de mettre la réalité en pause, se déplacer librement dans le temps, et commander toutes les entités.",
       "cooldown": 10,
-      "mana_cost": 300,
+      "manaCost": 300,
       "effects": [
         {
           "type": "OMNIPOTENCE",
@@ -135,8 +146,8 @@
       "item": "Ford's Stylus of Reality",
       "description": "A simple pen that rewrites the fundamental code of existence",
       "bonus": {
-        "spell_power": "+15",
-        "reality_manipulation": "+25%"
+        "spellPower": "+15",
+        "realityManipulation": "+25%"
       }
     },
     {
@@ -145,7 +156,7 @@
       "description": "Protects against paradoxes and timeline alterations",
       "bonus": {
         "defense": "+8",
-        "temporal_resistance": "IMMUNE"
+        "temporalResistance": "IMMUNE"
       }
     },
     {
@@ -154,7 +165,7 @@
       "description": "Contains the consciousness patterns of all created hosts",
       "bonus": {
         "mana": "+100",
-        "host_creation_efficiency": "+50%"
+        "hostCreationEfficiency": "+50%"
       }
     }
   ],

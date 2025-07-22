@@ -33,6 +33,7 @@ This index organizes all project documentation by category. Files marked with �
 - ✅ **[WORKFLOW.md](WORKFLOW.md)** - Development workflow
 
 ### Development Tools
+- ✅ **[./hots](hots)** - 🎮 **SCRIPT PRINCIPAL** - Contrôleur de tous les services (Backend 8080, Frontend 8000, Dashboard 9000)
 - ✅ **[DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)** - Deployment instructions
 - ✅ **[DEVELOPMENT_ROADMAP.md](DEVELOPMENT_ROADMAP.md)** - Future development plans
 - ✅ **[manual-testing-guide.md](manual-testing-guide.md)** - Manual testing procedures
