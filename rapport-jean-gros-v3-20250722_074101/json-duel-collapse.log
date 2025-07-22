@@ -1,0 +1,24 @@
+⚔️ TEST DUEL DU COLLAPSE - JSON VERSION
+=======================================
+🥊 Chargement du scénario de duel PVP...
+[0;36m[07:42:06][0m 📄 Scénario trouvé: DUEL_COLLAPSE.json
+[0;36m[07:42:06][0m 🚀 Démarrage du test DUEL COLLAPSE JSON
+
+[0;35m📋 Analyse du scénario...[0m
+[0;36m📖 Nom: Duel du Collapse[0m
+[0;36m🎯 Type: PVP_SHORT[0m
+[0;36m🔄 Tours max: 8[0m
+[0;36m⭐ Difficulté: EXPERT[0m
+[0;36m⏱️ Durée estimée: 10-15 minutes[0m
+[0;36m🗺️ Carte: 15x15 (quantum_arena)[0m
+[0;36m🦸 Héros: 2[0m
+[0;36m- Lysander (Niveau 12, 120 HP)[0m
+[0;36m- Morwyn (Niveau 12, 100 HP)[0m
+[0;36m🏆 Conditions de victoire:[0m
+[0;36m  - Collapse de la timeline ennemie[0m
+[0;36m  - Survie au tour 8 avec HP > 0[0m
+[0;36m  - Contrôle du Nexus Central[0m
+
+[0;34m🔍 Vérification du backend...[0m
+[0;31m❌ Backend non accessible[0m
+[0;33m💡 Démarrez le backend avec: mvn spring-boot:run[0m
