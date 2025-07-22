@@ -624,11 +624,11 @@ Après de nombreuses quêtes à travers les logs d'erreur et les stack traces, i
 - 🧪 **Testing**: `TEST_SCRIPTS_README.md` - All available test scripts
 
 ### 📖 **Documentation Technique Détaillée**
-- **🎮 Gameplay** : [docs/GAMEPLAY.md](docs/GAMEPLAY.md)
-- **⚙️ Architecture** : [ARCHITECTURE_UNIFIED_GROFI_TEMPORAL.md](ARCHITECTURE_UNIFIED_GROFI_TEMPORAL.md)
+- **🎮 Gameplay** : [docs/core/GAMEPLAY.md](docs/core/GAMEPLAY.md)
+- **⚙️ Architecture** : [archives/docs/deprecated/ARCHITECTURE_UNIFIED_GROFI_TEMPORAL.md](archives/docs/deprecated/ARCHITECTURE_UNIFIED_GROFI_TEMPORAL.md)
 - **🧪 Tests** : `./hots test help`
 - **📋 Scripts** : [scripts/README.md](scripts/README.md)
-- **🔧 API** : [docs/API.md](docs/API.md)
+- **🔧 API** : [docs/core/API.md](docs/core/API.md)
 
 ### 🎯 **Guides Spécialisés**
 
