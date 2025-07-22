@@ -399,67 +399,91 @@ class GameRenderer {
             this.ctx.fillStyle = glowColor;
             this.ctx.fill();
             
-            // Hero icon with bounce animation - ICÔNES PLUS GRANDES
+            // DICEBEAR AVATAR INTEGRATION
+            // Try to get hero from dicebarSystem or create cached image
+            if (!hero.avatarImage && window.dicebarSystem) {
+                const heroData = window.dicebarSystem.getHeroData(hero.name);
+                const avatarUrl = window.dicebarSystem.generateAvatar('hero', hero.name);
+                
+                // Create and cache the avatar image
+                hero.avatarImage = new Image();
+                hero.avatarImage.onload = () => {
+                    hero.avatarLoaded = true;
+                };
+                hero.avatarImage.src = avatarUrl;
+                
+                // Store hero icon as fallback
+                hero.icon = heroData.icon;
+                hero.color = heroData.color;
+            }
+            
+            // Hero icon with bounce animation
             const bounceY = y + Math.sin(this.animationFrame * 0.05 + hero.id * 2) * 2;
             
             // Background circle for better visibility
             this.ctx.beginPath();
-            this.ctx.arc(x, bounceY, 25, 0, Math.PI * 2);
+            this.ctx.arc(x, bounceY, 35, 0, Math.PI * 2);
             this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
             this.ctx.fill();
-            this.ctx.strokeStyle = '#FFD700';
-            this.ctx.lineWidth = 2;
+            this.ctx.strokeStyle = hero.color || '#FFD700';
+            this.ctx.lineWidth = 3;
             this.ctx.stroke();
             
-            // Different icons for different heroes - TAILLE AUGMENTÉE
-            const heroIcons = {
-                'Arthur': '⚔️',
-                'Ragnar': '🛡️',
-                'Merlin': '🔮',
-                'Jean-Grofignon': '🧠',
-                'Claudius': '⚖️',
-                'Lysandrel': '🌟',
-                'Memento': '💾',
-                'The Dude': '🕶️',
-                'Vince Vega': '🎭',
-                'Walter': '🔧',
-                'default': '🦸'
-            };
-            const icon = heroIcons[hero.name] || heroIcons.default;
-            
-            // Icône plus grande et plus visible
-            this.ctx.font = 'bold 32px Arial';
-            this.ctx.textAlign = 'center';
-            this.ctx.textBaseline = 'middle';
-            this.ctx.fillStyle = '#FFD700';
-            this.ctx.fillText(icon, x, bounceY);
+            // Draw Dicebear avatar if loaded, otherwise use icon
+            if (hero.avatarLoaded && hero.avatarImage) {
+                // Draw circular clipped avatar
+                this.ctx.save();
+                this.ctx.beginPath();
+                this.ctx.arc(x, bounceY, 32, 0, Math.PI * 2);
+                this.ctx.clip();
+                
+                // Draw the dicebear avatar
+                this.ctx.drawImage(
+                    hero.avatarImage,
+                    x - 32,
+                    bounceY - 32,
+                    64,
+                    64
+                );
+                
+                this.ctx.restore();
+            } else {
+                // Fallback to icon if avatar not loaded
+                const icon = hero.icon || '🦸';
+                
+                this.ctx.font = 'bold 32px Arial';
+                this.ctx.textAlign = 'center';
+                this.ctx.textBaseline = 'middle';
+                this.ctx.fillStyle = '#FFD700';
+                this.ctx.fillText(icon, x, bounceY);
+            }
             
             // Hero name with shadow - PLUS GRAND ET PLUS VISIBLE
             this.ctx.font = 'bold 16px Arial';
             this.ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
-            this.ctx.fillText(hero.name, x + 2, y - 35);
+            this.ctx.fillText(hero.name, x + 2, y - 45);
             this.ctx.fillStyle = '#FFFFFF';
-            this.ctx.fillText(hero.name, x, y - 37);
+            this.ctx.fillText(hero.name, x, y - 47);
             
             // Health bar - PLUS GRANDE
-            const barWidth = 40;
-            const barHeight = 6;
+            const barWidth = 50;
+            const barHeight = 8;
             this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-            this.ctx.fillRect(x - barWidth / 2, y + 20, barWidth, barHeight);
+            this.ctx.fillRect(x - barWidth / 2, y + 30, barWidth, barHeight);
             
             this.ctx.fillStyle = `rgb(${255 * (1 - healthRatio)}, ${255 * healthRatio}, 0)`;
-            this.ctx.fillRect(x - barWidth / 2, y + 20, barWidth * healthRatio, barHeight);
+            this.ctx.fillRect(x - barWidth / 2, y + 30, barWidth * healthRatio, barHeight);
             
             // Health text
             this.ctx.font = 'bold 12px Arial';
             this.ctx.fillStyle = '#FFFFFF';
-            this.ctx.fillText(`${Math.round(hero.health)}/${hero.maxHealth || 100}`, x, y + 35);
+            this.ctx.fillText(`${Math.round(hero.health)}/${hero.maxHealth || 100}`, x, y + 50);
             
             // Timeline indicator
             if (hero.timeline) {
                 this.ctx.font = '10px Arial';
                 this.ctx.fillStyle = '#00D4FF';
-                this.ctx.fillText(hero.timeline, x + 20, y - 10);
+                this.ctx.fillText(hero.timeline, x + 30, y - 20);
             }
             
             // Movement trail effect
