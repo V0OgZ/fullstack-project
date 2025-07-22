@@ -51,7 +51,11 @@
 - **⚔️ Arthur Pendragon** - Excalibur sword, Round Table ultimate
 - **🛡️ Jeanne d'Arc** - Divine inspiration, purifying flame
 - **🧙‍♂️ Merlin l'Enchanteur** - Primordial magic, dragon transformation
+
+**🎓 Beginner Heroes Trio (Perfect for Learning)**:
 - **🎯 Nikita Victor Nettoyeur** - 🆕 Temporal sniper, Vision Causale (pierce fog of causality)
+- **🛡️ Marcus Bouclier de Fer** - 🆕 Quantum tank, Bouclier Quantique (25% damage reduction)
+- **🔮 Elena Flamme Douce** - 🆕 Support mage, Régénération Douce (heal adjacent allies)
 
 **Elven Heroes**:
 - **🏹 Legolas Feuille-Verte** - Perfect aim, elven arrow rain
@@ -96,31 +100,32 @@
 ### ⚡ **Temporal Abilities Framework**
 **Advanced hero powers with quantum formulas**
 
+### 🎓 **Perfect Beginner Trio - Balanced Learning Experience**
+
 **🎯 Nikita Victor Nettoyeur - Temporal Sniper**:
-- **Role**: Tireur d'Élite Temporel
-- **Faction**: Corps des Nettoyeurs Temporels  
-- **Rarity**: Commune (perfect for beginners)
+- **Role**: Tireur d'Élite Temporel | **Stats**: ATT:12 DEF:8 HP:85
+- **Ability**: Vision Causale (Passive) - See through causality fog
+- **Quantum Formula**: `ψ{Nikita} = OBSERVE[lunette_quantique] ⊗ PIERCE[brouillard_causal] ⇒ TARGET_LOCK`
+- **Perfect for**: Learning ranged combat and vision mechanics
 
-**🔮 Quantum Formula**:
-```
-ψ{Nikita} = OBSERVE[lunette_quantique] ⊗ PIERCE[brouillard_causal] ⇒ TARGET_LOCK
-```
+**🛡️ Marcus Bouclier de Fer - Quantum Tank**:
+- **Role**: Gardien Temporel Débutant | **Stats**: ATT:8 DEF:15 HP:95
+- **Ability**: Bouclier Quantique (Passive) - 25% damage reduction
+- **Quantum Formula**: `ψ{Marcus} = ABSORB[damage_quantum] ⊗ REFLECT[partial_force] ⇒ SHIELD_BOOST`
+- **Perfect for**: Learning defensive tactics and damage mitigation
 
-**⚡ Abilities**:
-- **Vision Causale (Passive)**: Can see and shoot through causality fog
-- **Quantum Script**: `PIERCE[fog_of_causality] ⇒ REVEAL(enemy.position) ∧ IGNORE[visibility_penalty]`
-- **Equipment**: Lunette Quantique MK-VII, Combinaison Anti-Paradoxe
+**🔮 Elena Flamme Douce - Support Mage**:
+- **Role**: Apprentie Mage Temporelle | **Stats**: ATT:6 DEF:7 HP:70
+- **Ability**: Régénération Douce (Passive) - Heal adjacent allies +2HP/turn
+- **Quantum Formula**: `ψ{Elena} = CHANNEL[gentle_mana] ⊗ CAST[basic_spell] ⇒ HEAL_BOOST`
+- **Perfect for**: Learning support mechanics and positioning
 
-**📊 Balanced Stats for Beginners**:
-- Attack: 12, Defense: 8, Health: 85
-- Vision Range: 8, Attack Range: 6
-- Perfect for learning game mechanics
-
-**🎮 How It Works**:
-1. **Frontend**: Player activates ability through TrueHeroesInterface
-2. **Parser**: Quantum formula is processed by backend engine
-3. **Engine**: Temporal effects applied to game state
-4. **Result**: Enemy positions revealed through causality mist
+**🎮 Why This Trio Works**:
+- ✅ **Balanced Roles**: Damage, Tank, Support
+- ✅ **Beginner Stats**: All stats ≤15 attack, ≤100 health
+- ✅ **Simple Abilities**: One passive ability each, no mana cost
+- ✅ **Automatic Effects**: No complex timing or resource management
+- ✅ **Synergy**: Tank protects, Sniper attacks, Mage heals - classic RPG trinity
 
 ---
 

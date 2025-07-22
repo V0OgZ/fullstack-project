@@ -15,7 +15,9 @@ The Quantum Heroes System introduces **temporal abilities** powered by **quantum
 
 ## 🎮 **Current Quantum Heroes**
 
-### 🎯 **Nikita Victor Nettoyeur - Temporal Sniper**
+### 🎓 **Perfect Beginner Trio - Balanced Learning Heroes**
+
+#### 🎯 **Nikita Victor Nettoyeur - Temporal Sniper**
 
 **📋 Basic Information**:
 - **ID**: `hero_nikita_victor_nettoyeur`
@@ -57,6 +59,84 @@ PIERCE[fog_of_causality] ⇒ REVEAL(enemy.position) ∧ IGNORE[visibility_penalt
 - 🎯 **No penalties**: Ignores visibility-based attack penalties  
 - 🌫️ **Temporal sight**: Reveals hidden positions in quantum zones
 - ⚡ **Instant activation**: Always active, no cooldown required
+
+#### 🛡️ **Marcus Bouclier de Fer - Quantum Tank**
+
+**📋 Basic Information**:
+- **ID**: `hero_marcus_bouclier_de_fer`
+- **Name**: Marcus Bouclier de Fer
+- **Title**: Gardien Temporel Débutant
+- **Role**: Gardien Défensif
+- **Faction**: Corps des Gardiens Temporels
+- **Rarity**: Commune (perfect for beginners)
+
+**🔮 Quantum Formula**:
+```
+ψ{Marcus} = ABSORB[damage_quantum] ⊗ REFLECT[partial_force] ⇒ SHIELD_BOOST
+```
+
+**📜 Passive Formula**:
+```
+∀attack ∈ incoming_damage : REDUCTION[ψ.shield] = ABSORB[25%]
+```
+
+### **🛡️ Bouclier Quantique (Passive Ability)**
+
+**Type**: Passive  
+**Cooldown**: 0 turns  
+**Mana Cost**: 0  
+
+**Quantum Script**:
+```
+ABSORB[incoming_damage] ⇒ REDUCE(damage, 25%) ∧ BOOST[shield_durability]
+```
+
+**Description**: Marcus automatically reduces all incoming damage by 25% and reinforces his shield durability with each absorbed hit.
+
+**Game Effects**:
+- 🛡️ **Damage reduction**: Automatically reduces all incoming damage by 25%
+- 💪 **Shield boost**: Each absorbed attack strengthens the shield
+- ⚡ **Always active**: No activation required, constant protection
+- 🔄 **Stacking durability**: Shield becomes stronger with each hit absorbed
+
+#### 🔮 **Elena Flamme Douce - Support Mage**
+
+**📋 Basic Information**:
+- **ID**: `hero_elena_flamme_douce`
+- **Name**: Elena Flamme Douce
+- **Title**: Apprentie Mage Temporelle
+- **Role**: Mage de Support
+- **Faction**: Académie des Mages Temporels
+- **Rarity**: Commune (perfect for beginners)
+
+**🔮 Quantum Formula**:
+```
+ψ{Elena} = CHANNEL[gentle_mana] ⊗ CAST[basic_spell] ⇒ HEAL_BOOST
+```
+
+**📜 Passive Formula**:
+```
+∀ally ∈ adjacent_tiles : REGENERATION[ψ.mana] = RESTORE[2hp/turn]
+```
+
+### **🌟 Régénération Douce (Passive Ability)**
+
+**Type**: Passive  
+**Cooldown**: 0 turns  
+**Mana Cost**: 0  
+
+**Quantum Script**:
+```
+CHANNEL[healing_energy] ⇒ RESTORE(ally.health, 2) ∧ ADJACENT[tiles_only]
+```
+
+**Description**: Elena automatically heals all adjacent allies for 2 HP per turn through a gentle regeneration aura.
+
+**Game Effects**:
+- 💚 **Auto-healing**: Heals adjacent allies +2 HP every turn
+- 🔄 **Continuous effect**: Always active, no activation needed
+- 📍 **Position-based**: Only affects allies on adjacent tiles
+- ⚡ **No resource cost**: Free healing every turn
 
 ---
 

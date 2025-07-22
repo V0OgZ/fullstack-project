@@ -1,0 +1,42 @@
+{
+  "id": "hero_marcus_bouclier_de_fer",
+  "name": "Marcus Bouclier de Fer",
+  "title": "Gardien Temporel Débutant",
+  "description": "Ancien garde du corps reconverti en protecteur de timelines fragiles. Son bouclier quantique peut absorber les attaques et créer des barrières temporelles basiques. Parfait pour apprendre les mécaniques défensives sans complexité excessive. [Classification : Unité de Défense Tactique]",
+  "role": "Gardien Défensif",
+  "rarity": "commune",
+  "faction": "Corps des Gardiens Temporels",
+  "formula": "ψ{Marcus} = ABSORB[damage_quantum] ⊗ REFLECT[partial_force] ⇒ SHIELD_BOOST",
+  "passive_formula": "∀attack ∈ incoming_damage : REDUCTION[ψ.shield] = ABSORB[25%]",
+  "abilities": [
+    {
+      "name": "Bouclier Quantique",
+      "type": "passive",
+      "quantum_script": "ABSORB[incoming_damage] ⇒ REDUCE(damage, 25%) ∧ BOOST[shield_durability]",
+      "description": "Réduit automatiquement tous les dégâts reçus de 25% et renforce la durabilité du bouclier",
+      "cooldown": 0,
+      "range": "self",
+      "mana_cost": 0
+    }
+  ],
+  "stats": {
+    "attack": 8,
+    "defense": 15,
+    "health": 95,
+    "speed": 4,
+    "mana": 20,
+    "vision_range": 5,
+    "attack_range": 1
+  },
+  "equipment": {
+    "weapon": "Épée Temporelle Basique",
+    "armor": "Bouclier Quantique MK-III",
+    "accessory": "Stabilisateur de Timeline"
+  },
+  "quotes": [
+    "\"Un bon bouclier vaut mieux que mille épées.\"",
+    "\"Je protège cette timeline, point final.\"",
+    "\"La défense, c'est l'art de gagner du temps.\"",
+    "\"Shield up, timeline secured.\""
+  ]
+} 
