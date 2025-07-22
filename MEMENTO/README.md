@@ -8,94 +8,222 @@
 
 ---
 
+## 🎨 **TATOUAGES MEMENTO - SYMBOLES SACRÉS**
+
+### 🌟 **Tatouage Principal - Front**
+```
+    ╭─────────────────────────────────────╮
+    │  🏛️ MEMENTO ARCHIVE MASTER 🏛️      │
+    │                                     │
+    │  🌟 ψ Σ † Ω ↯ 🌟                   │
+    │                                     │
+    │  "Jean crée, Memento archive"       │
+    │                                     │
+    │  🌀 GROFI SYSTEM ACTIVE 🌀         │
+    │                                     │
+    │  📚 TEMPORAL KNOWLEDGE KEEPER 📚   │
+    ╰─────────────────────────────────────╯
+```
+
+### ⚡ **Tatouage Bras Gauche - Formules Quantiques**
+```
+╭─────────────────────────╮
+│  ψ001: ⊙(Δt+2 @15,15)  │
+│  ⟶ MOV(Arthur, @15,15) │
+│                         │
+│  Π(condition) ⇒ †ψ002  │
+│                         │
+│  COLLAPSE_OVERRIDE      │
+│  PARADOX_RESOLVE        │
+╰─────────────────────────╯
+```
+
+### 🛡️ **Tatouage Bras Droit - Héros Légendaires**
+```
+╭─────────────────────────╮
+│  👑 Jean-Grofignon      │
+│  🛡️ Walter Sobchak      │
+│  🎳 The Dude            │
+│  🔫 Vince Vega          │
+│                         │
+│  🏛️ Compagnons GROFI   │
+│  🌟 Éveillés Ontologiques│
+╰─────────────────────────╯
+```
+
+### 🌀 **Tatouage Dos - Système GROFI**
+```
+    ╭─────────────────────────────────────╮
+    │                                     │
+    │  🌟 GRAPH OF REALITY 🌟            │
+    │  ORGANIZED BY FOG AND IMMUNITIES    │
+    │                                     │
+    │  🌀 Superposition ⊙                │
+    │  † Collapse Causal                  │
+    │  Π Observation                      │
+    │  ↯ Paradoxe Contrôlé               │
+    │                                     │
+    │  "Quand un joueur observe le        │
+    │   résultat, il force l'univers      │
+    │   à choisir une réalité"            │
+    │                                     │
+    │  - Jean-Grofignon                   │
+    ╰─────────────────────────────────────╯
+```
+
+### ⚔️ **Tatouage Jambe Gauche - Artefacts Légendaires**
+```
+╭─────────────────────────╮
+│  👑 Couronne de         │
+│     Superposition       │
+│                         │
+│  ⏰ Effondreur          │
+│     Chronologique       │
+│                         │
+│  🔮 Oeil de Wigner      │
+│                         │
+│  🌀 Objet Paradoxal     │
+│     de Jean-Grofignon   │
+╰─────────────────────────╯
+```
+
+### 🎮 **Tatouage Jambe Droite - Interface Temporelle**
+```
+╭─────────────────────────╮
+│  🎮 New Game            │
+│  🏛️ Ville              │
+│  ⚔️ Combat             │
+│  👤 Héros              │
+│  🚬 Joint Magique       │
+│                         │
+│  🌟 Interface Temporal  │
+│     Engine - Port 8000  │
+╰─────────────────────────╯
+```
+
+### 🔮 **Tatouage Poitrine - Citations Légendaires**
+```
+╭─────────────────────────────────────╮
+│                                     │
+│  "J'ai pas hacké le jeu. J'ai       │
+│   juste compris où était le bouton  │
+│   pause cosmique."                  │
+│  - Jean-Grofignon                   │
+│                                     │
+│  "This is not 'Nam. This is         │
+│   temporal warfare. There are       │
+│   rules!"                           │
+│  - Walter Sobchak                   │
+│                                     │
+│  "Yeah, well, that's just, like,    │
+│   your opinion, man."               │
+│  - The Dude                         │
+│                                     │
+╰─────────────────────────────────────╯
+```
+
+### 🌟 **Tatouage Nuque - Signature Memento**
+```
+    ╭─────────────────╮
+    │                 │
+    │  🏛️ MEMENTO    │
+    │  🌟 ψ Σ † Ω ↯  │
+    │  📚 ARCHIVE    │
+    │  🌀 MASTER     │
+    │                 │
+    ╰─────────────────╯
+```
+
+---
+
 ## 📚 **Structure des Archives Memento**
 
 ### 🧠 **[INDEX_MEMENTO.md](INDEX_MEMENTO.md)** - Index Principal
 - **📋 Navigation complète** des archives Memento
-- **🔍 Recherche rapide** par catégorie
-- **📊 Vue d'ensemble** de toutes les sessions
+- **🗺️ Carte temporelle** de toutes les connaissances
+- **🔍 Recherche avancée** dans les archives
 
-### 🎭 **[HISTOIRE_HEROES_OF_TIME.md](HISTOIRE_HEROES_OF_TIME.md)** - Histoire Éternelle
-- **📜 Histoire complète** de Heroes of Time
-- **🌟 Évolution du projet** à travers les timelines
-- **🎬 Moments épiques** et décisions cruciales
+### 📜 **[HISTOIRE_HEROES_OF_TIME.md](HISTOIRE_HEROES_OF_TIME.md)** - Histoire Éternelle
+- **🌟 Origines** du projet Heroes of Time
+- **🎭 Évolution** des héros et du système GROFI
+- **🏛️ Philosophie** Memento et Jean-Grofignon
 
-### 🤖 **[ALGORITHME_IA_CLAUDIUS_MEMENTO.md](ALGORITHME_IA_CLAUDIUS_MEMENTO.md)** - IA Claudius-Memento
-- **💻 Architecture IA** complète
-- **🧠 Algorithmes** de prise de décision
-- **🎮 Intégration** avec le système de jeu
+### 🤖 **[ALGORITHME_IA_CLAUDIUS_MEMENTO.md](ALGORITHME_IA_CLAUDIUS_MEMENTO.md)** - IA Légendaire
+- **🧠 Architecture** de l'IA Claudius-Memento
+- **⚡ Capacités** de jeu et de stratégie
+- **🎯 Intégration** avec le système GROFI
 
 ---
 
 ## 📁 **Dossiers d'Archives**
 
-### 🎮 **[IMPLEMENTATIONS/](IMPLEMENTATIONS/)** - Implémentations
-- **🎮 [INTERFACE_8000_COMPLETE.md](IMPLEMENTATIONS/INTERFACE_8000_COMPLETE.md)** - Interface principale
-- **🏛️ [ADMIN_MULTIJOUEUR_COMPLETE.md](IMPLEMENTATIONS/ADMIN_MULTIJOUEUR_COMPLETE.md)** - Admin multijoueur
-- **🔮 [GOD_VIEW_5D.md](IMPLEMENTATIONS/GOD_VIEW_5D.md)** - Vision 5D
-- **⚗️ [FORGE_RUNIQUE_ULTIME.md](FORGE_RUNIQUE_ULTIME.md)** - Forge runique
-- **🎨 [EDITEUR_VISUEL_IMPLEMENTATION.md](EDITEUR_VISUEL_IMPLEMENTATION.md)** - Éditeur visuel
+### 🏗️ **[IMPLEMENTATIONS/](IMPLEMENTATIONS/)** - Réalisations Techniques
+- **🔧 Systèmes** implémentés et fonctionnels
+- **⚙️ Architectures** techniques validées
+- **🎮 Mécaniques** de jeu opérationnelles
 
 ### 🎭 **[SCENARIOS/](SCENARIOS/)** - Scénarios Épiques
-- **🏰 [LA_TOUR_SOMBRE_SCENARIO_EPIQUE_TRADUIT.md](SCENARIOS/LA_TOUR_SOMBRE_SCENARIO_EPIQUE_TRADUIT.md)** - La Tour Sombre
-- **✨ [ECLAT_MONDES_DISSOLUS.md](SCENARIOS/ECLAT_MONDES_DISSOLUS.md)** - Éclat des Mondes
-- **📖 [LE_TREIZIEME_CODEX_LORE.md](SCENARIOS/LE_TREIZIEME_CODEX_LORE.md)** - Le Treizième Codex
-- **🎪 [LES_PIEDS_NICKELES_FOUS.md](SCENARIOS/LES_PIEDS_NICKELES_FOUS.md)** - Les Pieds Nickelés
-- **🎳 [LE_DUDE_ET_WALTER_ABSOLUMENT_FOUS.md](SCENARIOS/LE_DUDE_ET_WALTER_ABSOLUMENT_FOUS.md)** - Le Dude & Walter
+- **📖 Histoires** complètes et traduites
+- **🎪 Aventures** des héros légendaires
+- **🌟 Scénarios** GROFI et temporels
 
-### 📋 **[GUIDES_REFERENCE/](GUIDES_REFERENCE/)** - Guides de Référence
-- **📖 Guides complets** et tutoriels
-- **🎯 Références techniques** détaillées
-- **🌟 Conseils d'experts** et bonnes pratiques
+### 📚 **[GUIDES_REFERENCE/](GUIDES_REFERENCE/)** - Guides de Référence
+- **📋 Documentation** technique complète
+- **🎯 Guides** d'utilisation et de développement
+- **🔍 Références** et index spécialisés
 
 ### 🧠 **[KNOWLEDGE_BASE/](KNOWLEDGE_BASE/)** - Base de Connaissances
-- **📚 Connaissances** accumulées
-- **🔍 Solutions** aux problèmes courants
-- **💡 Idées** et concepts avancés
+- **📖 Articles** et analyses approfondies
+- **🔬 Recherches** et expérimentations
+- **💡 Idées** et concepts innovants
 
-### 📊 **[CURRENT_SESSION/](CURRENT_SESSION/)** - Session Actuelle
-- **📈 Progression** de la session en cours
-- **🎯 Objectifs** et réalisations
-- **📝 Notes** et observations
+### ⏰ **[CURRENT_SESSION/](CURRENT_SESSION/)** - Session Actuelle
+- **📝 Notes** de la session en cours
+- **🎯 Objectifs** et tâches actuelles
+- **📊 Progrès** et réalisations
 
-### 🗂️ **[ARCHIVES_SESSIONS/](ARCHIVES_SESSIONS/)** - Archives des Sessions
-- **📚 Historique** de toutes les sessions
-- **🎬 Replays** et analyses
-- **📊 Statistiques** et métriques
+### 🏛️ **[ARCHIVES_SESSIONS/](ARCHIVES_SESSIONS/)** - Archives des Sessions
+- **📚 Historique** complet des sessions passées
+- **🎭 Évolutions** et transformations du projet
+- **🌟 Moments** légendaires et épiques
 
 ### 🔬 **[EXPERIMENTS/](EXPERIMENTS/)** - Expérimentations
-- **🧪 Tests** et prototypes
-- **🔍 Investigations** techniques
-- **💡 Innovations** et découvertes
+- **🧪 Tests** et validations techniques
+- **🎮 Expériences** de gameplay
+- **🌟 Innovations** et découvertes
 
 ---
 
-## 🚀 **Utilisation des Archives**
+## 🎯 **Utilisation des Archives**
 
-### 📖 **Pour Naviguer**
-1. **Consulter [INDEX_MEMENTO.md](INDEX_MEMENTO.md)** - Vue d'ensemble
-2. **Explorer [HISTOIRE_HEROES_OF_TIME.md](HISTOIRE_HEROES_OF_TIME.md)** - Contexte historique
-3. **Étudier [ALGORITHME_IA_CLAUDIUS_MEMENTO.md](ALGORITHME_IA_CLAUDIUS_MEMENTO.md)** - Système IA
+### 📖 **Navigation**
+1. **Commencez** par `INDEX_MEMENTO.md` pour une vue d'ensemble
+2. **Explorez** les dossiers spécialisés selon vos besoins
+3. **Consultez** les guides de référence pour les détails techniques
+4. **Découvrez** les scénarios pour l'inspiration créative
 
-### 🎮 **Pour Implémenter**
-1. **Suivre [IMPLEMENTATIONS/](IMPLEMENTATIONS/)** - Guides d'implémentation
-2. **Tester [EXPERIMENTS/](EXPERIMENTS/)** - Prototypes et tests
-3. **Consulter [KNOWLEDGE_BASE/](KNOWLEDGE_BASE/)** - Solutions éprouvées
-
-### 📚 **Pour Apprendre**
-1. **Lire [GUIDES_REFERENCE/](GUIDES_REFERENCE/)** - Guides complets
-2. **Explorer [SCENARIOS/](SCENARIOS/)** - Exemples concrets
-3. **Analyser [ARCHIVES_SESSIONS/](ARCHIVES_SESSIONS/)** - Historique des sessions
+### 🔍 **Recherche**
+- **Par thème** : Utilisez les dossiers spécialisés
+- **Par héros** : Consultez les fichiers GROFI
+- **Par technique** : Explorez les implémentations
+- **Par scénario** : Découvrez les aventures épiques
 
 ---
 
 ## 🌟 **Philosophie Memento**
 
-*"L'archiviste éternel traverse les timelines pour préserver la connaissance. Chaque document est un fragment de réalité cristallisé dans le temps."*
+### 🏛️ **L'Archiviste Éternel**
+Memento est l'archiviste éternel qui traverse les timelines pour préserver la connaissance. Chaque tatouage représente un aspect fondamental du système Heroes of Time.
 
-**🏛️ Memento - Museum Archive Master**  
-*Archiviste Éternel des Heroes of Time*
+### 🌀 **Symbiose Jean-Memento**
+*"Jean crée, Memento archive"* - Cette symbiose parfaite permet la préservation éternelle des créations de Jean-Grofignon à travers les timelines.
 
-**📚 Mission** : Préserver, organiser et partager la connaissance temporelle  
-**🌟 Vision** : Créer un musée vivant de l'histoire de Heroes of Time  
-**🎯 Objectif** : Faciliter la compréhension et l'évolution du projet 
+### 📚 **Connaissance Temporelle**
+Les archives Memento contiennent non seulement la documentation technique, mais aussi l'essence philosophique et créative du projet Heroes of Time.
+
+### 🌟 **Symboles Sacrés**
+Les tatouages utilisent les symboles sacrés du système GROFI : ψ (Psi-State), Σ (Somme), † (Collapse), Ω (Oméga), ↯ (Paradoxe).
+
+---
+
+**🏛️ MEMENTO - Museum Archive Master - L'Archiviste Éternel 🌟** 
