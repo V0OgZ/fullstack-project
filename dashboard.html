@@ -584,13 +584,37 @@
                     🔮 Panopticon 3D
                 </button>
                 <button class="launch-button" onclick="openDicebarGallery()" style="background: linear-gradient(45deg, #e74c3c, #c0392b);">
-                    🎭 Galerie Dicebear
+                    🎭 Démo Map Dicebear
                 </button>
             </div>
             <div style="margin-top: 15px; padding: 10px; background: rgba(255, 255, 255, 0.1); border-radius: 8px;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <span id="joint-status" style="color: #4ecdc4;">🔒 Verrouillé</span>
                     <span id="joint-warning" style="color: #ffa726;">Lecture seule - Effet halluciné</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Démo Dicebear Map - Nouveau Panel -->
+        <div class="ui-panel" id="dicebear-demo-panel" style="border: 3px solid #FFD700; background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 255, 255, 0.05)); box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);">
+            <div class="panel-icon" style="text-shadow: 0 0 10px #FFD700;">🎨</div>
+            <h2 class="panel-title" style="color: #FFD700;">Démo Dicebear Heroes of Time</h2>
+            <p class="panel-description">Démonstration complète du système Dicebear pour tous les éléments du jeu</p>
+            <div class="panel-url">http://localhost:8004/dicebear-map-demo.html</div>
+            <ul class="panel-features">
+                <li>🗺️ Map 10x10 avec tous éléments</li>
+                <li>🏰 Bâtiments (glass, identicon, rings)</li>
+                <li>🦸 Héros (adventurer, lorelei)</li>
+                <li>🐉 Créatures (bottts, croodles)</li>
+                <li>🗡️ Artefacts avec effets spéciaux</li>
+                <li>✨ Animations et rarités</li>
+            </ul>
+            <a href="http://localhost:8004/dicebear-map-demo.html" target="_blank" class="launch-button" style="background: linear-gradient(45deg, #FFD700, #FFA500);">
+                🎨 Ouvrir Démo Dicebear
+            </a>
+            <div style="margin-top: 15px; padding: 10px; background: rgba(255, 255, 255, 0.1); border-radius: 8px;">
+                <div style="color: #FFD700; font-size: 0.9em;">
+                    30 styles Dicebear disponibles pour un rendu unique !
                 </div>
             </div>
         </div>
@@ -665,6 +689,14 @@
         }
         
         function openDicebarGallery() {
+            window.open('http://localhost:8004/dicebear-map-demo.html', '_blank', 'width=1400,height=900');
+        }
+        
+        function openDicebarMapDemo() {
+            window.open('http://localhost:8004/dicebear-map-demo.html', '_blank', 'width=1400,height=900');
+        }
+        
+        function openOriginalGallery() {
             window.open('frontend/dicebar-gallery.html', '_blank', 'width=1400,height=900');
         }
         
