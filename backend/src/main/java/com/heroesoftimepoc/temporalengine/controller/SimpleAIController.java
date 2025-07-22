@@ -23,7 +23,7 @@ public class SimpleAIController {
     /**
      * Crée une nouvelle partie IA vs Joueur
      */
-    @PostMapping("/create-game")
+    @PostMapping("/create-simple-game")
     public ResponseEntity<Map<String, Object>> createAIGame(@RequestBody Map<String, Object> request) {
         String playerName = (String) request.get("playerName");
         String scenario = (String) request.getOrDefault("scenario", "default");
@@ -39,7 +39,7 @@ public class SimpleAIController {
     /**
      * L'IA joue son tour
      */
-    @PostMapping("/play-turn/{gameId}")
+    @PostMapping("/play-simple-turn/{gameId}")
     public ResponseEntity<Map<String, Object>> playAITurn(@PathVariable Long gameId) {
         Map<String, Object> response = simpleAIService.playAITurn(gameId);
         return ResponseEntity.ok(response);

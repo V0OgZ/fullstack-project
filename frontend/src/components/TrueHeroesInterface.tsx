@@ -62,6 +62,24 @@ console.log("Combat between:", hero1.name, "vs", hero2.name);
 console.log("Winner: TBD");`
   };
 
+  // Mock hero data for better visuals
+  const mockHeroes = [
+    {
+      id: 'hero1',
+      name: 'Lysander',
+      class: 'Knight',
+      level: 5,
+      stats: { attack: 8, defense: 12, power: 3, knowledge: 5 }
+    },
+    {
+      id: 'hero2',
+      name: 'Aria',
+      class: 'Sorceress',
+      level: 7,
+      stats: { attack: 4, defense: 6, power: 15, knowledge: 18 }
+    }
+  ];
+
   // Fonction d'exécution de script
   const executeScript = useCallback(() => {
     try {
@@ -180,24 +198,6 @@ console.log("Winner: TBD");`
       description: 'Mystical bird that resurrects from ashes',
       icon: '🔥',
       stats: { attack: 18, defense: 15, health: 120 }
-    }
-  ];
-
-  // Mock hero data for better visuals
-  const mockHeroes = [
-    {
-      id: 'hero1',
-      name: 'Lysander',
-      class: 'Knight',
-      level: 5,
-      stats: { attack: 8, defense: 12, power: 3, knowledge: 5 }
-    },
-    {
-      id: 'hero2',
-      name: 'Aria',
-      class: 'Sorceress',
-      level: 7,
-      stats: { attack: 4, defense: 6, power: 15, knowledge: 18 }
     }
   ];
 
