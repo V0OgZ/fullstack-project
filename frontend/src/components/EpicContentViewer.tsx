@@ -2,17 +2,9 @@
 // Affiche tous les assets restaurés par Memento depuis game_assets/ !
 
 import React, { useState, useEffect } from 'react';
-import { 
-  fetchEpicCreatures, 
-  fetchEpicHeroes, 
-  fetchEpicBuildings,
-  fetchEpicArtifacts,
-  getServerStatus,
-  EpicCreature, 
-  EpicHero,
-  EpicBuilding,
-  EpicArtifact
-} from '../services/epicContentAPI';
+import { fetchEpicCreatures, fetchEpicHeroes, EpicCreature, EpicHero } from '../services/epicContentAPI';
+import { BUILDING_IMAGES, generateBuildingImage } from '../services/buildingImageService';
+import GoldorakEasterEgg from './GoldorakEasterEgg';
 
 interface EpicContentViewerProps {
   isVisible: boolean;
@@ -26,18 +18,7 @@ const EpicContentViewer: React.FC<EpicContentViewerProps> = ({ isVisible, onClos
   const [buildings, setBuildings] = useState<EpicBuilding[]>([]);
   const [artifacts, setArtifacts] = useState<EpicArtifact[]>([]);
   const [loading, setLoading] = useState(false);
-  const [serverStatus, setServerStatus] = useState<{
-    isAvailable: boolean;
-    endpoints: {
-      heroes: boolean;
-      creatures: boolean;
-      buildings: boolean;
-      artifacts?: boolean;
-    };
-  }>({
-    isAvailable: true,
-    endpoints: { heroes: true, creatures: true, buildings: true, artifacts: true }
-  });
+  const [showGoldorakEasterEgg, setShowGoldorakEasterEgg] = useState(false);
 
   // Charge les données depuis game_assets
   useEffect(() => {
@@ -114,18 +95,22 @@ const EpicContentViewer: React.FC<EpicContentViewerProps> = ({ isVisible, onClos
           marginBottom: '20px'
         }}>
           <h2 style={{ margin: 0, color: '#d4af37' }}>🎮 CONTENU ÉPIQUE DE HEROES OF TIME</h2>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-            {/* Server Status */}
-            <div style={{
-              backgroundColor: serverStatus.isAvailable ? '#2d5a2d' : '#5a2d2d',
-              color: serverStatus.isAvailable ? '#90EE90' : '#FF6B6B',
-              padding: '5px 10px',
-              borderRadius: '15px',
-              fontSize: '12px',
-              border: `1px solid ${serverStatus.isAvailable ? '#90EE90' : '#FF6B6B'}`
-            }}>
-              🟢 Game Assets System Online
-            </div>
+          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+            <button 
+              onClick={() => setShowGoldorakEasterEgg(true)}
+              style={{
+                backgroundColor: '#4a3728',
+                color: '#d4af37',
+                border: '2px solid #d4af37',
+                padding: '8px 16px',
+                borderRadius: '5px',
+                cursor: 'pointer',
+                fontSize: '12px',
+                fontWeight: 'bold'
+              }}
+            >
+              🚀 GOLDORAK
+            </button>
             <button 
               onClick={onClose}
               style={{
@@ -496,6 +481,14 @@ const EpicContentViewer: React.FC<EpicContentViewerProps> = ({ isVisible, onClos
           </div>
         )}
       </div>
+      
+      {/* Goldorak Easter Egg */}
+      {showGoldorakEasterEgg && (
+        <GoldorakEasterEgg 
+          isActive={showGoldorakEasterEgg} 
+          onClose={() => setShowGoldorakEasterEgg(false)} 
+        />
+      )}
     </div>
   );
 };

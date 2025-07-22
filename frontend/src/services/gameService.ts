@@ -104,17 +104,13 @@ export class GameService {
     console.log(`%c🎮 [GameService] Initializing game for scenario: ${scenarioId}`, 'color: purple; font-weight: bold');
     
     try {
-      // Step 1: Create a game directly using the scenario ID
-      console.log(`%c🎯 [GameService] Creating game for scenario: ${scenarioId}`, 'color: blue');
-      const gameData = await ApiService.createGame({
-        scenarioId: scenarioId,
-        playerCount: 2, // Default to 2 players
-        gameMode: scenarioId
-      });
+      // Step 1: Get existing game data for the scenario
+      console.log(`%c🎯 [GameService] Loading game for scenario: ${scenarioId}`, 'color: blue');
+      const gameData = await ApiService.getGame(scenarioId);
       
-      console.log(`%c🎮 [GameService] Game created successfully:`, 'color: green', gameData);
+      console.log(`%c🎮 [GameService] Game loaded successfully:`, 'color: green', gameData);
       
-      // The backend returns the full game state directly from createGame
+      // The backend returns the full game state directly from getGame
       // No need to make a second API call
       const fullGameState = gameData;
       
@@ -146,8 +142,52 @@ export class GameService {
       };
       
     } catch (error) {
-      console.error(`%c💥 [GameService] Error initializing game:`, 'color: red; font-weight: bold', error);
-      throw error;
+      console.error(`%c💥 [GameService] Error loading game:`, 'color: red; font-weight: bold', error);
+      
+      // If game doesn't exist, try to create it
+      if (error instanceof Error && error.message.includes('404')) {
+        console.log(`%c🔄 [GameService] Game not found, creating new game for scenario: ${scenarioId}`, 'color: yellow');
+        try {
+          const gameData = await ApiService.createGame({
+            scenarioId: scenarioId,
+            playerCount: 2,
+            gameMode: scenarioId
+          });
+          
+          console.log(`%c🎮 [GameService] New game created successfully:`, 'color: green', gameData);
+          
+          const fullGameState = gameData;
+          const transformedGame: Game = {
+            id: fullGameState.id,
+            name: fullGameState.name,
+            scenario: fullGameState.scenario,
+            players: fullGameState.players,
+            currentPlayerId: fullGameState.currentPlayer?.id || 'player1',
+            turn: fullGameState.currentTurn || 1,
+            maxTurns: fullGameState.maxTurns || 200,
+            map: fullGameState.map || [],
+            date: fullGameState.date || new Date().toISOString(),
+            status: fullGameState.status || 'active',
+            settings: fullGameState.settings || {},
+            gameMode: fullGameState.players?.length > 1 ? 'multiplayer' : 'standard',
+            timeline: fullGameState.timeline || []
+          };
+
+          return {
+            currentGame: transformedGame,
+            currentPlayer: fullGameState.currentPlayer || fullGameState.players?.[0],
+            pendingActions: [],
+            combatResults: [],
+            isLoading: false,
+            error: null
+          };
+        } catch (createError) {
+          console.error(`%c💥 [GameService] Error creating new game:`, 'color: red; font-weight: bold', createError);
+          throw createError;
+        }
+      } else {
+        throw error;
+      }
     }
   }
 

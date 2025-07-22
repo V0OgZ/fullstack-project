@@ -1,187 +1,136 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useGameStore } from '../store/useGameStore';
-import { useTranslation } from '../i18n';
-import TerrainModeSelector, { TerrainMode } from './TerrainModeSelector';
+import ModernGameRenderer from './ModernGameRenderer';
+import CastleManagementPanel from './CastleManagementPanel';
 import GoldorakEasterEgg from './GoldorakEasterEgg';
 import EpicContentViewer from './EpicContentViewer';
-import TemporalTimelineArtifact from './TemporalTimelineArtifact';
 import { useRetroKonami } from '../utils/retro-konami';
+import { HexTile, BiomeType } from '../types/terrain';
+import { Position } from '../types/game';
 import './TrueHeroesInterface.css';
 import './EnhancedSidebarPanels.css';
 
-interface TrueHeroesInterfaceProps {
-  onNavigate: (page: string) => void;
-}
+// Simple hash function for string
+const hashCode = (str: string): number => {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash; // Convert to 32-bit integer
+  }
+  return Math.abs(hash);
+};
 
-const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ onNavigate }) => {
+const TrueHeroesInterface: React.FC = () => {
   const { 
     currentGame, 
     currentPlayer, 
+    loadGame, 
+    endTurn, 
+    selectHero, 
     selectedHero,
-    endTurn,
-    isLoading,
-    error
+    map
   } = useGameStore();
   
-  // États existants
-  const [activePanel, setActivePanel] = useState<'scenario' | 'hero' | 'castle' | 'inventory' | 'script' | 'epic' | 'fog'>('epic');
-  const [testMode, setTestMode] = useState(false);
-  
-  // NOUVEAU: État pour le mode terrain hybride
-  const [terrainMode, setTerrainMode] = useState<TerrainMode>('canvas2d');
-  
-  // NOUVEAU: État pour Goldorak Easter Egg
+  const [activePanel, setActivePanel] = useState<'scenario' | 'hero' | 'inventory' | 'castle'>('scenario');
   const [showGoldorakEasterEgg, setShowGoldorakEasterEgg] = useState(false);
-  
-  // NOUVEAU: État pour Epic Content Viewer (toujours affiché dans le panneau epic)
-  const [showEpicContentViewer, setShowEpicContentViewer] = useState(true);
-  
-  // NOUVEAU: État pour l'artefact temporel
-  const [currentTimeline, setCurrentTimeline] = useState('main');
-
-  // NOUVEAU: États pour le script editor
-  const [scriptContent, setScriptContent] = useState<string>('');
-  const [scriptResults, setScriptResults] = useState<string>('');
-
-  // Templates de script
-  const SCRIPT_TEMPLATES = {
-    hero: `// 🧙 Create and manage heroes
-const newHero = createHero("Lysander", "Knight", 5);
-console.log("Created hero:", newHero);
-
-// Move hero to position
-moveHero(newHero.id, 10, 15);
-console.log("Hero moved to (10, 15)");`,
-    
-    castle: `// 🏰 Castle management
-buildCastle(5, 5, "human");
-console.log("Castle built at (5, 5)");
-
-// Recruit units
-recruitUnit("castle1", "peasant", 50);
-recruitUnit("castle1", "archer", 25);
-console.log("Units recruited");`,
-    
-    combat: `// ⚔️ Combat simulation
-const hero1 = createHero("Arthur", "Knight", 10);
-const hero2 = createHero("Morgana", "Sorceress", 8);
-
-console.log("Combat between:", hero1.name, "vs", hero2.name);
-console.log("Winner: TBD");`
-  };
-
-  // Mock hero data for better visuals
-  const mockHeroes = [
-    {
-      id: 'hero1',
-      name: 'Lysander',
-      class: 'Knight',
-      level: 5,
-      stats: { attack: 8, defense: 12, power: 3, knowledge: 5 }
-    },
-    {
-      id: 'hero2',
-      name: 'Aria',
-      class: 'Sorceress',
-      level: 7,
-      stats: { attack: 4, defense: 6, power: 15, knowledge: 18 }
-    },
-    {
-      id: 'hero3',
-      name: 'Anna the Martopicker',
-      class: 'Temporal Specialist',
-      level: 10,
-      stats: { attack: 20, defense: 18, power: 25, knowledge: 22 }
-    }
-  ];
-
-  // Fonction d'exécution de script
-  const executeScript = useCallback(() => {
-    try {
-      setScriptResults('🔄 Executing script...\n');
-      
-      // Mock execution context
-      const scriptContext = {
-        createHero: (name: string, heroClass: string, level: number) => ({
-          id: `hero_${Date.now()}`,
-          name,
-          class: heroClass,
-          level,
-          stats: { attack: level * 2, defense: level * 2 }
-        }),
-        moveHero: (heroId: string, x: number, y: number) => {
-          return `Hero ${heroId} moved to (${x}, ${y})`;
-        },
-        buildCastle: (x: number, y: number, type: string) => {
-          return `${type} castle built at (${x}, ${y})`;
-        },
-        recruitUnit: (castleId: string, unitType: string, count: number) => {
-          return `Recruited ${count} ${unitType}s at ${castleId}`;
-        },
-        endTurn: () => {
-          if (currentGame?.id) {
-            endTurn();
-          }
-          return 'Turn ended';
-        },
-        getGameState: () => ({
-          turn: currentGame?.turn || 1,
-          player: currentPlayer?.name || 'Player 1',
-          heroes: mockHeroes.length
-        })
-      };
-
-      // Execute script in context
-      const func = new Function(...Object.keys(scriptContext), `
-        ${scriptContent}
-        return "✅ Script executed successfully";
-      `);
-      
-      const result = func(...Object.values(scriptContext));
-      setScriptResults(prev => prev + result + '\n');
-      
-    } catch (error) {
-      setScriptResults(prev => prev + `❌ Error: ${error}\n`);
-    }
-  }, [scriptContent, currentGame?.id, currentPlayer?.name, endTurn, mockHeroes.length]);
+  const [showEpicContentViewer, setShowEpicContentViewer] = useState(false);
+  const { startListening, stopListening } = useRetroKonami();
 
   // Load default game on component mount
   useEffect(() => {
-    // Initialization logic here
-    setScriptContent(SCRIPT_TEMPLATES.hero);
-  }, []);
-
-  const handleEndTurn = useCallback(() => {
-    if (currentGame?.id) {
-      endTurn();
+    console.log('🎮 [TrueHeroesInterface] useEffect called - currentGame:', currentGame);
+    if (!currentGame) {
+      console.log('🎮 [TrueHeroesInterface] No current game, loading conquest-classic...');
+      loadGame('conquest-classic');
+    } else {
+      console.log('🎮 [TrueHeroesInterface] Current game exists:', currentGame.id);
     }
-  }, [currentGame?.id, endTurn]);
-
-  // Handler pour le changement de timeline
-  const handleTimelineChange = (timelineId: string) => {
-    setCurrentTimeline(timelineId);
-    console.log(`[TIMELINE] Basculement vers: ${timelineId}`);
     
-    // Logique spécifique selon la timeline
-    switch (timelineId) {
-      case 'main':
-        setActivePanel('epic');
-        setShowEpicContentViewer(true);
-        break;
-      case 'enhanced':
-        setActivePanel('scenario');
-        setShowEpicContentViewer(false);
-        break;
-      case 'legacy_v1':
-      case 'legacy_v2':
-        setActivePanel('hero');
-        setShowGoldorakEasterEgg(true);
-        break;
-      case 'temporal':
-        setActivePanel('fog');
-        break;
-      default:
-        setActivePanel('epic');
+    // Easter egg hint
+    console.log('🚀 [RETRO CODEUR] Tapez G-O-L-D-O-R-A-K pour activer le FULGOROCURSOR!');
+  }, [currentGame, loadGame]);
+
+  // Système de codes rétro - Écouter les événements custom
+  useEffect(() => {
+    // Démarrer l'écoute des codes rétro
+    startListening();
+    
+    // Écouter l'événement Goldorak
+    const handleGoldorakActivated = (event: CustomEvent) => {
+      console.log('🚀 GOLDORAK EVENT RECEIVED:', event.detail.message);
+      setShowGoldorakEasterEgg(true);
+    };
+
+    window.addEventListener('goldorak-activated', handleGoldorakActivated as EventListener);
+    
+    return () => {
+      stopListening();
+      window.removeEventListener('goldorak-activated', handleGoldorakActivated as EventListener);
+    };
+  }, [startListening, stopListening]);
+
+  // Convert backend map data to HexTile format
+  const convertToHexTiles = (backendMap: any[][]): HexTile[] => {
+    const hexTiles: HexTile[] = [];
+    
+    if (!backendMap || !Array.isArray(backendMap)) return hexTiles;
+    
+    for (let row = 0; row < backendMap.length; row++) {
+      for (let col = 0; col < backendMap[row].length; col++) {
+        const tile = backendMap[row][col];
+        if (tile) {
+          // Convert backend terrain types to BiomeType
+          let biome: BiomeType = 'grass';
+          switch (tile.terrain?.toLowerCase()) {
+            case 'water': biome = 'water'; break;
+            case 'forest': biome = 'forest'; break;
+            case 'mountain': biome = 'mountain'; break;
+            case 'desert': biome = 'desert'; break;
+            case 'swamp': biome = 'swamp'; break;
+            case 'snow': biome = 'snow'; break;
+            default: biome = 'grass'; break;
+          }
+          
+          // Convert row/col to hex coordinates (odd-q vertical layout)
+          const q = col;
+          const r = row - Math.floor(col / 2);
+          
+          hexTiles.push({
+            q,
+            r,
+            biome,
+            elevation: tile.elevation || Math.random() * 100,
+            humidity: tile.humidity || Math.random() * 100,
+            riverFlowDir: tile.riverFlowDir,
+            naturalBarrier: tile.naturalBarrier || false
+          });
+        }
+      }
+    }
+    
+    console.log('🗺️ [TrueHeroesInterface] Converted', hexTiles.length, 'tiles to hex format');
+    return hexTiles;
+  };
+
+  const hexTiles = convertToHexTiles(map);
+
+  const handleTileClick = (position: Position) => {
+    console.log('🎯 Tile clicked:', position);
+    // Handle tile selection logic here
+  };
+
+  const handleTileHover = (tile: HexTile | null) => {
+    console.log('🖱️ Hex tile hovered:', tile);
+    // Handle tile hover logic here
+  };
+
+  const handleEndTurn = async () => {
+    try {
+      await endTurn();
+      console.log('Turn ended successfully');
+    } catch (error) {
+      console.error('Error ending turn:', error);
     }
   };
 
@@ -198,103 +147,164 @@ console.log("Winner: TBD");`
     );
   }
 
-  // Error state
-  if (error) {
-    return (
-      <div className="true-heroes-interface error">
-        <div className="error-content">
-          <h2>⚠️ Error</h2>
-          <p>{error}</p>
-          <button onClick={() => window.location.reload()}>
-            Retry
+  return (
+    <div className="true-heroes-interface">
+      {/* Header */}
+      <div className="interface-header game-header">
+        <div className="header-left">
+          <h1>🎮 Heroes of Time ⚔️</h1>
+          <div className="game-info">
+            <span>Turn: {currentGame?.turn || 1}</span>
+            <span>Player: {currentPlayer?.name || 'Unknown'}</span>
+            <span>Map: {hexTiles.length} tiles</span>
+          </div>
+        </div>
+        
+        <div className="header-center">
+          <div className="control-buttons">
+            <button 
+              className={`control-btn ${activePanel === 'scenario' ? 'active' : ''}`}
+              onClick={() => setActivePanel('scenario')}
+              title="Scenario Info"
+            >
+              📋
+            </button>
+            <button 
+              className={`control-btn ${activePanel === 'hero' ? 'active' : ''}`}
+              onClick={() => setActivePanel('hero')}
+              title="Hero Management"
+            >
+              ⚔️
+            </button>
+            <button 
+              className={`control-btn ${activePanel === 'inventory' ? 'active' : ''}`}
+              onClick={() => setActivePanel('inventory')}
+              title="Inventory"
+            >
+              🎒
+            </button>
+            <button 
+              className={`control-btn ${activePanel === 'castle' ? 'active' : ''}`}
+              onClick={() => setActivePanel('castle')}
+              title="Castle Management"
+            >
+              🏰
+            </button>
+          </div>
+        </div>
+        
+        <div className="header-right">
+          <button 
+            className="control-btn"
+            onClick={() => setShowEpicContentViewer(true)}
+            title="Epic Content - Heroes & Creatures"
+          >
+            🧟
+          </button>
+          <button 
+            className="end-turn-btn"
+            onClick={handleEndTurn}
+            title="End Turn"
+          >
+            ⭐
           </button>
         </div>
       </div>
     );
   }
 
-  // Mock epic content data
-  const mockEpicContent = [
-    {
-      id: 'dragon1',
-      name: 'Ancient Dragon',
-      type: 'Creature',
-      rarity: 'Legendary',
-      description: 'A powerful ancient dragon with devastating breath attacks',
-      icon: '🐉',
-      stats: { attack: 30, defense: 25, health: 200 }
-    },
-    {
-      id: 'excalibur',
-      name: 'Excalibur',
-      type: 'Artifact',
-      rarity: 'Legendary',
-      description: 'The legendary sword of kings',
-      icon: '⚔️',
-      bonus: '+10 Attack, +5 Morale'
-    },
-    {
-      id: 'phoenix',
-      name: 'Phoenix',
-      type: 'Creature',
-      rarity: 'Epic',
-      description: 'Mystical bird that resurrects from ashes',
-      icon: '🔥',
-      stats: { attack: 18, defense: 15, health: 120 }
-    }
-  ];
-
-  // Enhanced hero panel component
-  const EnhancedHeroDisplay = ({ hero, isSelected, onSelect }: any) => (
-    <div 
-      className={`hero-card ${isSelected ? 'selected' : ''}`}
-      onClick={() => onSelect(hero)}
-    >
-      <div className="hero-avatar">⚔️</div>
-      <div className="hero-info">
-        <div className="hero-name">{hero.name}</div>
-        <div className="hero-class">{hero.class} - Level {hero.level}</div>
-        <div className="hero-stats">
-          <span className="hero-stat">⚔️ {hero.stats.attack}</span>
-          <span className="hero-stat">🛡️ {hero.stats.defense}</span>
-          <span className="hero-stat">⚡ {hero.stats.power}</span>
-          <span className="hero-stat">📚 {hero.stats.knowledge}</span>
+      {/* Main Content */}
+      <div className="interface-content">
+        {/* Left Panel - Game Map */}
+        <div className="left-panel">
+          <ModernGameRenderer
+            width={900}
+            height={700}
+            onTileClick={handleTileClick}
+          />
         </div>
       </div>
     </div>
   );
 
-  return (
-    <div className="true-heroes-interface">
-      {/* 🏛️ Artefact Temporel - Nexus de Cohabitation des Timelines */}
-      <TemporalTimelineArtifact 
-        onTimelineChange={handleTimelineChange}
-        currentTimeline={currentTimeline}
-      />
-
-      <div className="game-layout">
-        {/* Main game area */}
-        <div className="game-map-container">
-          {!testMode ? (
-            <div className="modern-game-renderer">
-              <div className="map-placeholder">
-                <h2>🗺️ Heroes of Time</h2>
-                <p>Epic Map Rendering Engine</p>
-                <div className="map-stats">
-                  <div>🎯 Turn: {currentGame?.turn || 1}</div>
-                  <div>👤 Player: {currentPlayer?.name || 'Player 1'}</div>
-                  <div>⚔️ Heroes: {mockHeroes.length}</div>
-                  <div>💰 Gold: {currentPlayer?.resources?.gold || 1500}</div>
+        {/* Right Panel - Dynamic Content */}
+        <div className="right-panel">
+          {activePanel === 'scenario' && (
+            <div className="panel-content">
+              <h2>🏔️ Terrain System</h2>
+              <div className="scenario-info">
+                <h3>{currentGame?.scenario || 'Conquest Classic'}</h3>
+                <p>🎯 <strong>Nouveau système de terrain hexagonal avancé</strong></p>
+                <div className="scenario-stats">
+                  <div>🗺️ Tiles: {hexTiles.length}</div>
+                                      <div>🎲 Seed: {currentGame?.id ? hashCode(currentGame.id) : 12345}</div>
+                  <div>🌍 Biomes: {new Set(hexTiles.map(t => t.biome)).size}</div>
+                  <div>🏰 Players: {currentGame?.players?.length || 4}</div>
+                </div>
+                <div className="terrain-legend">
+                  <h4>🌈 Biomes disponibles:</h4>
+                  <div className="biome-list">
+                    {Array.from(new Set(hexTiles.map(t => t.biome))).map(biome => (
+                      <div key={biome} className="biome-item">
+                        {biome === 'forest' && '🌲'} 
+                        {biome === 'water' && '🌊'} 
+                        {biome === 'mountain' && '⛰️'} 
+                        {biome === 'desert' && '🏜️'} 
+                        {biome === 'grass' && '🌱'} 
+                        {biome === 'swamp' && '🐸'} 
+                        {biome === 'snow' && '❄️'} 
+                        {biome}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          ) : (
-            <div className="test-mode-placeholder">
-              <h3>🧪 Test Mode</h3>
-              <p>Map désactivée pour tester l'interface</p>
-              <button onClick={() => setTestMode(false)}>
-                Réactiver la map
-              </button>
+          )}
+
+          {activePanel === 'hero' && (
+            <div className="panel-content">
+              <h2>Hero Management</h2>
+              <div className="hero-list">
+                {currentPlayer?.heroes?.map((hero: any) => (
+                  <div 
+                    key={hero.id} 
+                    className={`hero-card ${selectedHero?.id === hero.id ? 'selected' : ''}`}
+                    onClick={() => handleHeroSelect(hero)}
+                  >
+                    <div className="hero-avatar">👤</div>
+                    <div className="hero-info">
+                      <h4>{hero.name}</h4>
+                      <p>Level {hero.level}</p>
+                      <p>Class: {hero.class}</p>
+                    </div>
+                  </div>
+                )) || <p>No heroes available</p>}
+              </div>
+            </div>
+          )}
+
+          {activePanel === 'inventory' && (
+            <div className="panel-content">
+              <h2>Inventory</h2>
+              <div className="inventory-grid">
+                <div className="inventory-slot">Empty</div>
+                <div className="inventory-slot">Empty</div>
+                <div className="inventory-slot">Empty</div>
+                <div className="inventory-slot">Empty</div>
+                <div className="inventory-slot">Empty</div>
+                <div className="inventory-slot">Empty</div>
+              </div>
+            </div>
+          )}
+
+          {activePanel === 'castle' && (
+            <div className="panel-content">
+              <CastleManagementPanel 
+                gameId={currentGame?.id || ''}
+                playerId={currentPlayer?.id || ''}
+                onClose={() => setActivePanel('scenario')}
+              />
             </div>
           )}
         </div>
@@ -628,18 +638,16 @@ console.log("Winner: TBD");`
         </div>
       </div>
 
-      {/* Goldorak Easter Egg */}
-      {showGoldorakEasterEgg && (
-        <GoldorakEasterEgg
-          isActive={showGoldorakEasterEgg}
-          onClose={() => setShowGoldorakEasterEgg(false)}
-        />
-      )}
-
       {/* Epic Content Viewer */}
-      <EpicContentViewer
-        isVisible={showEpicContentViewer}
-        onClose={() => setShowEpicContentViewer(false)}
+      <EpicContentViewer 
+        isVisible={showEpicContentViewer} 
+        onClose={() => setShowEpicContentViewer(false)} 
+      />
+
+      {/* 🚀 GOLDORAK EASTER EGG - Tapez G-O-L-D-O-R-A-K pour l'activer! */}
+      <GoldorakEasterEgg 
+        isActive={showGoldorakEasterEgg} 
+        onClose={() => setShowGoldorakEasterEgg(false)} 
       />
     </div>
   );

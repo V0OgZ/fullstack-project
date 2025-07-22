@@ -21,6 +21,8 @@
     "@types/seedrandom": "^3.0.8"
   },
   "dependencies": {
+    "colors": "^1.4.0",
+    "node-fetch": "^3.3.2",
     "seedrandom": "^3.0.5",
     "simplex-noise": "^4.0.3"
   }

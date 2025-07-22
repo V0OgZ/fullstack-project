@@ -59,18 +59,9 @@ const Game: React.FC = () => {
   console.log('[GAME PAGE] Status: Rendering TrueHeroesInterface');
   
   return (
-    <TrueHeroesInterface 
-      onNavigate={(page) => {
-        console.log(`[GAME PAGE] Navigation requested to: ${page}`);
-        if (page === 'scenarios') {
-          navigate('/scenarios');
-        } else if (page === 'multiplayer') {
-          navigate('/multiplayer');
-        } else if (page === 'demo') {
-          navigate('/demo');
-        }
-      }}
-    />
+    <div className="game-page">
+      <TrueHeroesInterface />
+    </div>
   );
 };
 
