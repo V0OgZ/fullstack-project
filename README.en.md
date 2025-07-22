@@ -386,7 +386,7 @@ But Arthur sees the enemy army approaching. In a few turns, they'll be overwhelm
 </details>
 
 <details>
-<summary id="anna-the-martopicker">🎭 <strong>Anna the Martopicker - The Time Architect</strong> | 🔨 <strong>Анна Молоток</strong></summary>
+<summary id="anna-the-martopicker">🎭 <strong>Anna the Martopicker - The Time Architect</strong> | 🔨 <strong>Анна Молоток</strong> | ⚔️ <strong>Анна Времябойца</strong> (Time Fighter)</summary>
 
 **🎨 Epic Portrait:**
 ![ANNA THE MARTOPICKER](assets/img/anna.png)
