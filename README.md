@@ -583,9 +583,13 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 ### 🏛️ **Architecture & Système**
 - **🏗️ Architecture Moteur** : [docs/architecture/ENGINE_ARCHITECTURE.md](docs/architecture/ENGINE_ARCHITECTURE.md)
 - **🌍 World State Graph** : [docs/architecture/WORLD_STATE_GRAPH.md](docs/architecture/WORLD_STATE_GRAPH.md)
-- **📖 CODEX Complet HOTS** : [docs/CODEX_COMPLET_HEROES_OF_TIME.md](docs/CODEX_COMPLET_HEROES_OF_TIME.md)
+- **⚙️ Architecture Unifiée GROFI** : [archives/docs/deprecated/ARCHITECTURE_UNIFIED_GROFI_TEMPORAL.md](archives/docs/deprecated/ARCHITECTURE_UNIFIED_GROFI_TEMPORAL.md)
 - **⏱️ Moteur Temporel** : [docs/MOTEUR_TEMPOREL_EXPLICATION.md](docs/MOTEUR_TEMPOREL_EXPLICATION.md)
 - **🌀 Collapse Causal** : [docs/collapse-causale/COLLAPSE_CAUSALE_EXPLICATION.md](docs/collapse-causale/COLLAPSE_CAUSALE_EXPLICATION.md)
+- **📊 Technical Complete** : [docs/TECHNICAL.md](docs/TECHNICAL.md)
+- **📜 Temporal Codex** : [docs/TEMPORAL_CODEX.md](docs/TEMPORAL_CODEX.md)
+- **🔧 Système Unifié Complet** : [archives/docs/deprecated/SYSTEME_UNIFIE_COMPLETE.md](archives/docs/deprecated/SYSTEME_UNIFIE_COMPLETE.md)
+- **📋 Workflow Système Unifié** : [archives/docs/deprecated/WORKFLOW_SYSTEME_UNIFIE.md](archives/docs/deprecated/WORKFLOW_SYSTEME_UNIFIE.md)
 
 ### 🦸 **Héros & Lore**
 - **📚 Lore Jean & Memento** : [docs/LORE_MEMENTO_JEAN_ETERNAL.md](docs/LORE_MEMENTO_JEAN_ETERNAL.md)
@@ -603,10 +607,20 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 - **⚗️ Forge Runique Ultime** : [MEMENTO/FORGE_RUNIQUE_ULTIME.md](MEMENTO/FORGE_RUNIQUE_ULTIME.md)
 - **🎨 Éditeur Visuel** : [MEMENTO/EDITEUR_VISUEL_IMPLEMENTATION.md](MEMENTO/EDITEUR_VISUEL_IMPLEMENTATION.md)
 
-### 📜 **Guides Développeur**
+### 📜 **Guides Développeur & Gameplay**
+- **📖 CODEX COMPLET** : [docs/CODEX_COMPLET_HEROES_OF_TIME.md](docs/CODEX_COMPLET_HEROES_OF_TIME.md) - **LA RÉFÉRENCE ULTIME**
 - **🚀 Guide Démarrage Rapide** : [docs/RAPPORTS_TECHNIQUES/CURSOR_QUICK_START.md](docs/RAPPORTS_TECHNIQUES/CURSOR_QUICK_START.md)
 - **🎯 Instructions Développeur** : [docs/RAPPORTS_TECHNIQUES/DEVELOPER_INSTRUCTIONS.md](docs/RAPPORTS_TECHNIQUES/DEVELOPER_INSTRUCTIONS.md)
 - **📋 Clarification HOTS/JSON/SH** : [docs/RAPPORTS_TECHNIQUES/CLARIFICATION_FORMATS_SCRIPT_SH_HOTS_JSON.md](docs/RAPPORTS_TECHNIQUES/CLARIFICATION_FORMATS_SCRIPT_SH_HOTS_JSON.md)
+- **🎮 Documentation Jeu Complète** : [docs/DOCUMENTATION_JEU_COMPLETE.md](docs/DOCUMENTATION_JEU_COMPLETE.md)
+- **📐 Grammaire Spatio-Temporelle** : [docs/GRAMMAIRE_SPATIO_TEMPORELLE.md](docs/GRAMMAIRE_SPATIO_TEMPORELLE.md)
+- **🌟 Concepts Avancés** : [docs/CONCEPTS_AVANCES_TEMPORELLES.md](docs/CONCEPTS_AVANCES_TEMPORELLES.md)
+
+### 🆕 **Nouvelles Fonctionnalités Juillet 2025**
+- **🎮 Gameplay vs IA** : [GAMEPLAY_VS_IA_SUMMARY.md](GAMEPLAY_VS_IA_SUMMARY.md)
+- **💾 Système de Persistence** : [PROTOCOLE_MEMENTO_PERSISTENCE_UPDATE.md](PROTOCOLE_MEMENTO_PERSISTENCE_UPDATE.md)
+- **🎮 Test vs IA** : [scripts/test-vs-ia.sh](scripts/test-vs-ia.sh)
+- **💾 Test Persistence** : [scripts/test-persistence.sh](scripts/test-persistence.sh)
 
 ---
 
