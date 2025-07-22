@@ -2,7 +2,7 @@
 
 ## 📜 **Présentation du Scénario**
 
-*Généré automatiquement le 22/07/2025 à 15:16*
+*Généré automatiquement le 22/07/2025 à 15:36*
 
 Ce scénario épique met en scène la fondation d'un empire économique dans l'univers de Heroes of Time. Suivez Arthur Pendragon dans sa quête pour établir un royaume prospère et puissant.
 
@@ -11,7 +11,7 @@ Ce scénario épique met en scène la fondation d'un empire économique dans l'u
 > 💬 🌟 Arthur Pendragon arrive sur les terres sauvages...
 
 ### 👑 **Création du Héros**
-👑 Le Roi Temporel Arthur apparaît dans une aura de leadership royal
+🏛️ Le maître des flux temporels Arthur se matérialise avec majesté
 
 > 💬 🏛️ Il découvre une position stratégique pour fonder son royaume
 
@@ -107,7 +107,7 @@ CREATE(CREATURE, quantum_knight, (15, 15))
 > 💬 🗡️ Arthur engage le combat avec Excalibur !
 
 ### ⚔️ **Combat**
-🔥 Arthur_Pendragon affronte dans un combat titanesque quantum_knight aux coordonnées (15, 15)
+🛡️ Arthur_Pendragon défie dans une lutte héroïque quantum_knight aux coordonnées (15, 15)
 
 ### 🔮 **Utilisation d'Artefact**
 🗡️ Arthur_Pendragon dégaine Excalibur, l'épée légendaire qui fend les timelines

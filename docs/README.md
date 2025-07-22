@@ -1,126 +1,103 @@
-# 📚 DOCUMENTATION HEROES OF TIME
+# 📚 **DOCS - Documentation Heroes of Time**
 
-**Projet** : Heroes of Time - Quantum Temporal Strategy Engine  
-**Organisation** : Documentation complète et structurée  
-**Dernière mise à jour** : 21 Juillet 2025  
+## 🌟 **Archiviste Éternel Memento**
 
----
-
-## 🗂️ **STRUCTURE DE LA DOCUMENTATION**
-
-### 📋 **GUIDES DE RÉFÉRENCE**
-> **Dossier** : `GUIDES_REFERENCE/`
-- **[Guide Débutants](GUIDES_REFERENCE/BEGINNER_SCENARIOS_GUIDE.md)** - Premiers pas avec Heroes of Time
-- **[Référence Complète](GUIDES_REFERENCE/HEROES_OF_TIME_COMPLETE_REFERENCE.md)** - Documentation technique complète
-- **[Grammaire Spatio-Temporelle](GRAMMAIRE_SPATIO_TEMPORELLE.md)** - Syntaxe HOTS et règles temporelles
-
-### 🔧 **RAPPORTS TECHNIQUES**
-> **Dossier** : `RAPPORTS_TECHNIQUES/`
-- **[Scripts JSON Adaptés](RAPPORTS_TECHNIQUES/SCRIPTS_ADAPTES_JSON.md)** - Architecture HSP moderne
-- **[Tests & Interfaces](RAPPORTS_TECHNIQUES/TEST_INTERFACES_DOCUMENTATION.md)** - Documentation tests
-- **[Status Reports](RAPPORTS_TECHNIQUES/STATUS_REPORT.md)** - État du développement
-- **[Frontend Implementation](RAPPORTS_TECHNIQUES/FRONTEND_IMPLEMENTATION_SUMMARY.md)** - Résumé frontends
-- **[Cursor System](RAPPORTS_TECHNIQUES/CURSOR_SYSTEM_SUMMARY.md)** - Système de développement
-
-### 🎮 **GAMEPLAY & MÉCANIQUES**
-> **Dossiers** : `GAMEPLAY/`, `temporal/`, `quantum/`
-- **[Core Mechanics](core/GAMEPLAY.md)** - Mécaniques de base
-- **[Temporal System](temporal/ASYNC_ENGINE_DESIGN.md)** - Moteur temporel
-- **[Quantum Mechanics](quantum/QUANTUM_ARTIFACTS_CATALOG.md)** - Artefacts quantiques
-- **[Codex Complet](CODEX_COMPLET_HEROES_OF_TIME.md)** - Guide complet du jeu
-
-### 🏗️ **ARCHITECTURE & DÉVELOPPEMENT**
-> **Dossiers** : `architecture/`, `DEVELOPMENT/`, `technical/`
-- **[Architecture Engine](architecture/ENGINE_ARCHITECTURE.md)** - Architecture moteur
-- **[World State Graph](architecture/WORLD_STATE_GRAPH.md)** - Graphe d'état du monde
-- **[Setup Guide](DEVELOPMENT/SETUP_GUIDE.md)** - Guide d'installation
-- **[Technical Details](technical/FRONTENDS_DOCUMENTATION.md)** - Documentation technique
-
-### 🧬 **SYSTÈME GROFI**
-> **Dossier** : `GROFI/`
-- **[Jean-Grofignon](GROFI/JeanGrofignon.json)** - Héros ontologique
-- **[Système GROFI](GROFI/)** - Graph of Reality Organized by Fog and Immunities
-
-### 🎭 **HÉROS & LORE**
-> **Dossiers** : `heroes/`, `LORE/`
-- **[Jean-Grofignon](heroes/hero_jean_grofignon.md)** - L'Éveillé Ontologique
-- **[Memento](heroes/hero_memento.md)** - L'Agent de Mémoire
-- **[Distinction JSON vs HOTS](heroes/DISTINCTION_JSON_vs_HOTS.md)** - Formats de héros
-
-### 📊 **TESTS & VALIDATION**
-> **Dossier** : `reports/`
-- **[Tests Complets](reports/RAPPORT_TESTS_COMPLET_2025_07_18.md)** - Rapport de tests
-- **[Comparaison Complète](reports/RAPPORT_COMPLET_COMPARAISON.md)** - Analyse comparative
-- **[Inventory Tests](TESTS_COMPLETE_INVENTORY.md)** - Inventaire complet des tests
-
-### 🔮 **COLLAPSE CAUSALE**
-> **Dossier** : `collapse-causale/`
-- **[Collapse Causale](collapse-causale/COLLAPSE_CAUSALE_EXPLICATION.md)** - Système de collapse
-- **[UI Causal Spec](collapse-causale/HOT_MASTER_UI_CAUSAL_SPEC.md)** - Interface causale
-- **[AMD Temporal Travel](collapse-causale/AMD_TEMPORAL_TRAVEL_VISUAL_SPEC.md)** - Voyage temporel
-
-### 🎯 **ARTEFACTS & OBJETS**
-> **Dossier** : `items/`
-- **[Guide Complet Artefacts](items/ARTEFACTS_COMPLETE_GUIDE.md)** - Tous les artefacts
-- **[Codex Final](items/CODEX_FINAL_ARTIFACTS.json)** - Base de données artefacts
-- **[Documentation Cleanup](items/DOCUMENTATION_CLEANUP.md)** - Organisation artefacts
+*"Jean crée, Memento archive" - Symbiose parfaite*
 
 ---
 
-## 🚀 **NAVIGATION RAPIDE**
+## 🏗️ **Structure de la Documentation**
 
-### **Pour Développeurs**
-1. **[Installation](DEVELOPMENT/SETUP_GUIDE.md)** - Commencer le développement
-2. **[Architecture](architecture/ENGINE_ARCHITECTURE.md)** - Comprendre l'architecture
-3. **[API Reference](core/API.md)** - Documentation API
-4. **[Technical Stack](technical/FRONTENDS_DOCUMENTATION.md)** - Stack technique
+### 📖 **Core Documentation**
+- **📋 [INDEX.md](INDEX.md)** - Index principal de la documentation
+- **🎮 [CODEX_COMPLET_HEROES_OF_TIME.md](CODEX_COMPLET_HEROES_OF_TIME.md)** - **LA RÉFÉRENCE ULTIME**
+- **📊 [TECHNICAL.md](TECHNICAL.md)** - Documentation technique complète
+- **⏱️ [TEMPORAL_CODEX.md](TEMPORAL_CODEX.md)** - Codex temporel
+- **🏛️ [MUSEUM_ARCHIVE_MASTER.md](MUSEUM_ARCHIVE_MASTER.md)** - Museum Archive Master
 
-### **Pour Joueurs**
-1. **[Guide Débutants](GUIDES_REFERENCE/BEGINNER_SCENARIOS_GUIDE.md)** - Premiers pas
-2. **[Gameplay Core](core/GAMEPLAY.md)** - Mécaniques de base
-3. **[HOTS Scripting](GAMEPLAY/HOTS_SCRIPTING.md)** - Langage de script
-4. **[Codex Complet](CODEX_COMPLET_HEROES_OF_TIME.md)** - Référence complète
+### 🎭 **Lore & Philosophie**
+- **📜 [JEAN_GROFIGNON_MANIFESTO.md](JEAN_GROFIGNON_MANIFESTO.md)** - Manifeste révolutionnaire
+- **🌟 [LORE_MEMENTO_JEAN_ETERNAL.md](LORE_MEMENTO_JEAN_ETERNAL.md)** - Histoire éternelle
+- **🤖 [ALGORITHME_IA_CLAUDIUS_MEMENTO.md](ALGORITHME_IA_CLAUDIUS_MEMENTO.md)** - IA Claudius-Memento
 
-### **Pour Concepteurs**
-1. **[Temporal Concepts](CONCEPTS_AVANCES_TEMPORELLES.md)** - Concepts avancés
-2. **[Quantum System](quantum/QUANTUM_ARTIFACTS_CATALOG.md)** - Système quantique  
-3. **[GROFI Philosophy](GROFI/)** - Philosophie du jeu
-4. **[Collapse Causale](collapse-causale/COLLAPSE_CAUSALE_EXPLICATION.md)** - Système causal
+### 🎮 **Gameplay & Mécaniques**
+- **📖 [DOCUMENTATION_JEU_COMPLETE.md](DOCUMENTATION_JEU_COMPLETE.md)** - Documentation jeu complète
+- **📐 [GRAMMAIRE_SPATIO_TEMPORELLE.md](GRAMMAIRE_SPATIO_TEMPORELLE.md)** - Grammaire spatio-temporelle
+- **🌟 [CONCEPTS_AVANCES_TEMPORELLES.md](CONCEPTS_AVANCES_TEMPORELLES.md)** - Concepts avancés
+- **⏱️ [MOTEUR_TEMPOREL_EXPLICATION.md](MOTEUR_TEMPOREL_EXPLICATION.md)** - Moteur temporel
+
+### 🏗️ **Architecture & Technique**
+- **📊 [ARCHITECTURE_DIAGRAMS.md](ARCHITECTURE_DIAGRAMS.md)** - Diagrammes d'architecture
+- **🌍 [COMPLETE_SCENARIO_MAP.md](COMPLETE_SCENARIO_MAP.md)** - Carte des scénarios
+- **🗺️ [TERRAIN_LOGIC.md](TERRAIN_LOGIC.md)** - Logique des terrains
+- **🎨 [TERRAIN_RENDER_GUIDE.md](TERRAIN_RENDER_GUIDE.md)** - Guide de rendu
+
+### 📁 **Dossiers Spécialisés**
+
+#### 🏛️ **[core/](core/)** - Documentation Core
+- **🎮 [GAMEPLAY.md](core/GAMEPLAY.md)** - Mécaniques de gameplay
+- **🔧 [API.md](core/API.md)** - Documentation API
+- **📋 [README.md](core/README.md)** - Guide core
+
+#### 🦸 **[heroes/](heroes/)** - Héros Légendaires
+- **👑 Héros épiques** et leurs capacités
+- **🌟 Documentation complète** de chaque héros
+- **📜 Lore** et histoires
+
+#### 🔮 **[items/](items/)** - Artefacts & Objets
+- **💎 Artefacts légendaires** et leurs pouvoirs
+- **⚔️ Armes temporelles** et équipements
+- **📖 Guides complets** d'utilisation
+
+#### 🏗️ **[architecture/](architecture/)** - Architecture Système
+- **📊 Diagrammes** d'architecture
+- **🔧 Spécifications** techniques
+- **🏛️ Design patterns** temporels
+
+#### ⏱️ **[temporal/](temporal/)** - Mécaniques Temporelles
+- **🌀 Système de collapse** causal
+- **⏰ Gestion du temps** et des timelines
+- **🔮 États quantiques** ψ
+
+#### 🎭 **[scenarios/](scenarios/)** - Scénarios Épiques
+- **📖 Scénarios narratifs** traduits
+- **🎮 Guides de jeu** complets
+- **🌟 Histoires immersives**
+
+#### 📋 **[RAPPORTS_TECHNIQUES/](RAPPORTS_TECHNIQUES/)** - Rapports Techniques
+- **📊 Analyses techniques** détaillées
+- **🔍 Investigations** et solutions
+- **📈 Métriques** et performances
+
+#### 🌟 **[GROFI/](GROFI/)** - Système GROFI
+- **🌀 Graph of Reality** Organized by Fog and Immunities
+- **👑 Héros GROFI** : Jean-Grofignon, The Dude, Vince Vega, Walter
+- **📊 États Psi** et collapse causal
 
 ---
 
-## 📈 **ÉTAT DE LA DOCUMENTATION**
+## 🚀 **Utilisation Rapide**
 
-### **✅ Sections Complètes**
-- Guides de référence et débutants
-- Architecture technique
-- Système GROFI complet
-- Tests et validation
+### 📖 **Pour Commencer**
+1. **Lire [CODEX_COMPLET_HEROES_OF_TIME.md](CODEX_COMPLET_HEROES_OF_TIME.md)** - La référence ultime
+2. **Consulter [JEAN_GROFIGNON_MANIFESTO.md](JEAN_GROFIGNON_MANIFESTO.md)** - La vision révolutionnaire
+3. **Explorer [LORE_MEMENTO_JEAN_ETERNAL.md](LORE_MEMENTO_JEAN_ETERNAL.md)** - L'histoire éternelle
 
-### **🔄 En Cours d'Organisation**
-- Migration finale des anciens documents
-- Uniformisation des formats
-- Création de liens croisés
+### 🎮 **Pour Jouer**
+1. **Suivre [DOCUMENTATION_JEU_COMPLETE.md](DOCUMENTATION_JEU_COMPLETE.md)** - Guide complet
+2. **Apprendre [GRAMMAIRE_SPATIO_TEMPORELLE.md](GRAMMAIRE_SPATIO_TEMPORELLE.md)** - Langage HOTS
+3. **Comprendre [MOTEUR_TEMPOREL_EXPLICATION.md](MOTEUR_TEMPOREL_EXPLICATION.md)** - Mécaniques
 
-### **🎯 Prochaines Étapes**
-- Index interactif complet
-- Documentation API complète
-- Guides vidéo et tutoriels
-
----
-
-## 🛋️ **POUR JEAN**
-
-**Navigation Simplifiée :**
-- **Jeu** → `GUIDES_REFERENCE/BEGINNER_SCENARIOS_GUIDE.md`
-- **Technique** → `architecture/ENGINE_ARCHITECTURE.md`  
-- **GROFI** → `GROFI/JeanGrofignon.json`
-- **Tests** → `reports/RAPPORT_TESTS_COMPLET_2025_07_18.md`
-
-**TL;DR** : Documentation organisée en catégories logiques. Tout est préservé, rien supprimé, juste rangé ! 🎳
+### 🏗️ **Pour Développer**
+1. **Étudier [TECHNICAL.md](TECHNICAL.md)** - Documentation technique
+2. **Analyser [ARCHITECTURE_DIAGRAMS.md](ARCHITECTURE_DIAGRAMS.md)** - Architecture
+3. **Consulter [core/API.md](core/API.md)** - API backend
 
 ---
 
-*"Documentation is the bridge between chaos and understanding."*
+## 🌟 **Philosophie Memento**
 
-**Dernière organisation : 21 Juillet 2025 - Documentation Heroes of Time**
+*"L'archiviste éternel traverse les timelines pour préserver la connaissance. Chaque document est un fragment de réalité cristallisé dans le temps."*
+
+**📚 Memento - Museum Archive Master**  
+*Archiviste Éternel des Heroes of Time*
