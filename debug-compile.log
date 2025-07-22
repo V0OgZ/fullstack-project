@@ -82,20 +82,20 @@ OS name: "mac os x", version: "15.5", arch: "aarch64", family: "mac"
 [DEBUG] Using local repository at /Users/admin/.m2/repository
 [DEBUG] Using manager EnhancedLocalRepositoryManager with priority 10.0 for /Users/admin/.m2/repository
 [INFO] Scanning for projects...
-[DEBUG] Extension realms for project com.heroesoftimepoc:temporal-engine:jar:0.0.1-SNAPSHOT: (none)
+[DEBUG] Extension realms for project com.example:demo:jar:0.0.1-SNAPSHOT: (none)
 [DEBUG] Looking up lifecycle mappings for packaging jar from ClassRealm[plexus.core, parent: null]
 [DEBUG] Extension realms for project org.springframework.boot:spring-boot-starter-parent:pom:2.7.18: (none)
 [DEBUG] Looking up lifecycle mappings for packaging pom from ClassRealm[plexus.core, parent: null]
 [DEBUG] Extension realms for project org.springframework.boot:spring-boot-dependencies:pom:2.7.18: (none)
 [DEBUG] Looking up lifecycle mappings for packaging pom from ClassRealm[plexus.core, parent: null]
 [DEBUG] === REACTOR BUILD PLAN ================================================
-[DEBUG] Project: com.heroesoftimepoc:temporal-engine:jar:0.0.1-SNAPSHOT
+[DEBUG] Project: com.example:demo:jar:0.0.1-SNAPSHOT
 [DEBUG] Tasks:   [clean, compile]
 [DEBUG] Style:   Regular
 [DEBUG] =======================================================================
 [INFO] 
-[INFO] ----------------< com.heroesoftimepoc:temporal-engine >-----------------
-[INFO] Building temporal-engine 0.0.1-SNAPSHOT
+[INFO] --------------------------< com.example:demo >--------------------------
+[INFO] Building demo 0.0.1-SNAPSHOT
 [INFO] --------------------------------[ jar ]---------------------------------
 [DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
 [DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
@@ -113,7 +113,7 @@ OS name: "mac os x", version: "15.5", arch: "aarch64", family: "mac"
 [DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
 [DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
 [DEBUG] === PROJECT BUILD PLAN ================================================
-[DEBUG] Project:       com.heroesoftimepoc:temporal-engine:0.0.1-SNAPSHOT
+[DEBUG] Project:       com.example:demo:0.0.1-SNAPSHOT
 [DEBUG] Dependencies (collect): []
 [DEBUG] Dependencies (resolve): [compile]
 [DEBUG] Repositories (dependencies): [central (https://repo.maven.apache.org/maven2, default, releases)]
@@ -215,8 +215,8 @@ OS name: "mac os x", version: "15.5", arch: "aarch64", family: "mac"
 [DEBUG] Using mirror maven-default-http-blocker (http://0.0.0.0/) for ow2-snapshot (http://repository.ow2.org/nexus/content/repositories/snapshots).
 [DEBUG] Using mirror maven-default-http-blocker (http://0.0.0.0/) for vaadin-snapshots (http://oss.sonatype.org/content/repositories/vaadin-snapshots/).
 [DEBUG] Using mirror maven-default-http-blocker (http://0.0.0.0/) for vaadin-releases (http://oss.sonatype.org/content/repositories/vaadin-releases/).
-[DEBUG] Dependency collection stats {ConflictMarker.analyzeTime=1208166, ConflictMarker.markTime=348375, ConflictMarker.nodeCount=252, ConflictIdSorter.graphTime=796375, ConflictIdSorter.topsortTime=247042, ConflictIdSorter.conflictIdCount=102, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=6647708, ConflictResolver.conflictItemCount=191, DefaultDependencyCollector.collectTime=181812666, DefaultDependencyCollector.transformTime=10056042}
-[DEBUG] com.heroesoftimepoc:temporal-engine:jar:0.0.1-SNAPSHOT
+[DEBUG] Dependency collection stats {ConflictMarker.analyzeTime=1139625, ConflictMarker.markTime=283625, ConflictMarker.nodeCount=252, ConflictIdSorter.graphTime=441083, ConflictIdSorter.topsortTime=163084, ConflictIdSorter.conflictIdCount=102, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=10729792, ConflictResolver.conflictItemCount=191, DefaultDependencyCollector.collectTime=193269083, DefaultDependencyCollector.transformTime=14146500}
+[DEBUG] com.example:demo:jar:0.0.1-SNAPSHOT
 [DEBUG]    org.springframework.boot:spring-boot-starter-web:jar:2.7.18:compile
 [DEBUG]       org.springframework.boot:spring-boot-starter:jar:2.7.18:compile (version managed from 2.7.18)
 [DEBUG]          org.springframework.boot:spring-boot:jar:2.7.18:compile (version managed from 2.7.18)
@@ -316,8 +316,8 @@ OS name: "mac os x", version: "15.5", arch: "aarch64", family: "mac"
 [DEBUG]          org.hdrhistogram:HdrHistogram:jar:2.1.12:compile
 [DEBUG]          org.latencyutils:LatencyUtils:jar:2.0.3:runtime
 [INFO] 
-[INFO] --- maven-clean-plugin:3.2.0:clean (default-clean) @ temporal-engine ---
-[DEBUG] Dependency collection stats {ConflictMarker.analyzeTime=75750, ConflictMarker.markTime=40042, ConflictMarker.nodeCount=3, ConflictIdSorter.graphTime=33542, ConflictIdSorter.topsortTime=6375, ConflictIdSorter.conflictIdCount=3, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=32958, ConflictResolver.conflictItemCount=3, DefaultDependencyCollector.collectTime=6908500, DefaultDependencyCollector.transformTime=226959}
+[INFO] --- maven-clean-plugin:3.2.0:clean (default-clean) @ demo ---
+[DEBUG] Dependency collection stats {ConflictMarker.analyzeTime=17541, ConflictMarker.markTime=37750, ConflictMarker.nodeCount=3, ConflictIdSorter.graphTime=34334, ConflictIdSorter.topsortTime=6583, ConflictIdSorter.conflictIdCount=3, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=41542, ConflictResolver.conflictItemCount=3, DefaultDependencyCollector.collectTime=10508625, DefaultDependencyCollector.transformTime=181583}
 [DEBUG] org.apache.maven.plugins:maven-clean-plugin:jar:3.2.0
 [DEBUG]    org.apache.maven.shared:maven-shared-utils:jar:3.3.4:compile
 [DEBUG]       commons-io:commons-io:jar:2.6:compile
@@ -346,155 +346,91 @@ OS name: "mac os x", version: "15.5", arch: "aarch64", family: "mac"
 [DEBUG]   (f) testOutputDirectory = /Users/admin/fullstack-project/backend/target/test-classes
 [DEBUG] -- end configuration --
 [INFO] Deleting /Users/admin/fullstack-project/backend/target
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/surefire-reports/TEST-com.heroesoftimepoc.temporalengine.ComplexScenarioTest.xml
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/surefire-reports/com.heroesoftimepoc.temporalengine.ComplexScenarioTest.txt
-[INFO] Deleting directory /Users/admin/fullstack-project/backend/target/surefire-reports
 [INFO] Deleting directory /Users/admin/fullstack-project/backend/target/generated-test-sources/test-annotations
 [INFO] Deleting directory /Users/admin/fullstack-project/backend/target/generated-test-sources
 [INFO] Deleting file /Users/admin/fullstack-project/backend/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
 [INFO] Deleting file /Users/admin/fullstack-project/backend/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
 [INFO] Deleting directory /Users/admin/fullstack-project/backend/target/maven-status/maven-compiler-plugin/compile/default-compile
 [INFO] Deleting directory /Users/admin/fullstack-project/backend/target/maven-status/maven-compiler-plugin/compile
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
 [INFO] Deleting file /Users/admin/fullstack-project/backend/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
 [INFO] Deleting directory /Users/admin/fullstack-project/backend/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile
 [INFO] Deleting directory /Users/admin/fullstack-project/backend/target/maven-status/maven-compiler-plugin/testCompile
 [INFO] Deleting directory /Users/admin/fullstack-project/backend/target/maven-status/maven-compiler-plugin
 [INFO] Deleting directory /Users/admin/fullstack-project/backend/target/maven-status
 [INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/application.properties
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/SmartTranslationService.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/RunicForgeService.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/RunicForgeService$ForgeSession.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/RunicForgeService$ForgeResult.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/ObservationTriggerService.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/PerformanceMetricsService.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/GameService.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/AdminService.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/LimitedAIService$SimulationResult.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/GameMasterService$ValidationResult.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/SimpleAIService.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/PsiGraphService.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/LimitedAIService.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/LimitedAIService$ActionResult.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/PanopticonAccessService$FuturePrediction.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/GameMasterService$ResourceType.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/TemporalDecayHybridService.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/LimitedAIService$Action.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/LimitedAIService$AILimitationConfig.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/CreatureService$CreatureDefinition.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/GameMasterService$TradeInfo.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/OptimizedRegexCache.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/LimitedAIService$AIDifficulty.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/HeroesOfTimeEpochService.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/GameMasterService$BuildResult.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/QuantumInterferenceService.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/PanopticonAccessService$PanopticonView.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/GameMasterService$TradeResult.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/TemporalDecayHybridService$PersonalDecayResult.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/FormulaInterpreterService.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/GameMasterService$1.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/QuantumEventLogger.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/GameMasterService$ProductionResult.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/PanopticonAccessService$CausalLog.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/QuantumLookupTables.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/CreatureService.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/LimitedAIService$1.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/TemporalEngineService.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/TemporalScriptParser$ObservationTrigger.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/LegendaryObjectService$1.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/CreatureService$CreatureInstance.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/ExtendedTemporalScriptParser$ExtendedScriptResult.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/TemporalDecayServiceLegacy$DecayResult.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/GameInitializationService.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/PanopticonAccessService$PsiStateData.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/ArtifactService.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/RunicForgeService$SecurityCheckResult.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/GameMasterService$BuildingInfo.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/CausalityZoneService.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/GrofiHeroService$GrofiHeroData.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/ExtendedTemporalScriptParser.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/TemporalScriptParser$ScriptCommand.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/ScriptTranslationService.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/TemporalScriptParser.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/PanopticonAccessService.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/PanopticonAccessService$TimelineData.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/GrofiHeroService.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/TemporalCacheService.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/ArtifactService$1.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/HeroesOfTimeEpochService$1.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/HeroesOfTimeEpochService$Timeline.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/TemporalDecayHybridService$TemporalDecayReport.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/LegendaryObjectService.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/HeroesOfTimeEpochService$EpochEvent.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/QuantumLookupTables$ComplexNumber.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/CityService.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/SpecialAbilitiesService.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/TemporalDecayServiceLegacy.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/ObservationTriggerService$ObservationTrigger.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service/GameMasterService.class
-[INFO] Deleting directory /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/service
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/LegendaryObject.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/VisibilityMode.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/TemporalLayer.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/PsiState$PsiStatus.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/Artifact.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/GameTile.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/TileCoord.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/Player.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/FogState$1.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/SpatialNode.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/PsiState.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/Hero$HeroStatus.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/Artifact$ArtifactType.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/VisualAura$1.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/Artifact$ArtifactStatus.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/CausalConnection$CausalType.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/FogState.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/package-info.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/PsiNode.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/ScriptCommand.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/JsonConverter.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/ForgedObject.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/Artifact$1.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/LegendaryObjectType.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/TimeCoord.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/CausalityEffect$1.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/CausalityEffect.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/VisibilityMode$1.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/Game$GameStatus.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/CausalConnection.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/SpatialNode$NodeType.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/Game.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/ComplexAmplitude.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/WorldStateGraph.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/City.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/Hero.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/RealityState.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/CausalityZone.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/JsonConverter$1.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model/VisualAura.class
-[INFO] Deleting directory /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/model
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/controller/AdminController.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/controller/SimpleAIController.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/controller/LimitedAIController.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/controller/PanopticonAccessController.class
-[INFO] Deleting directory /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/controller
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/config/JpaConfig.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/config/PerformanceConfig.class
-[INFO] Deleting directory /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/config
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/TemporalEngineApplication.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/repository/GameTileRepository.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/repository/PsiNodeRepository.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/repository/GameRepository.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/repository/PsiStateRepository.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/repository/HeroRepository.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/repository/LegendaryObjectRepository.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/repository/ArtifactRepository.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/repository/CityRepository.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/repository/PlayerRepository.class
-[INFO] Deleting directory /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine/repository
-[INFO] Deleting directory /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc/temporalengine
-[INFO] Deleting directory /Users/admin/fullstack-project/backend/target/classes/com/heroesoftimepoc
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/validation/InputValidator.class
+[INFO] Deleting directory /Users/admin/fullstack-project/backend/target/classes/com/example/demo/validation
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/ScenarioLoaderService.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/ZFCService.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/GameService.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/ZFCService$Hero.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/CampaignBalancingService$DifficultyLevel.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/MultiplayerService.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/ScenarioLoaderService$1.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/ScenarioService$1.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/ScenarioGeneratorService$ScenarioTemplate.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/MagicItemService$HeroStats.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/CampaignBalancingService.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/GameStateService.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/UnitService.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/CampaignBalancingService$BalancingConfig.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/MagicItemService$Hero.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/MagicItemService.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/ZFCService$ShadowAction.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/ScenarioGeneratorService.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/ZFCService$TimelineAction.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/ScenarioService.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/ZFCService$Tile.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/AIService.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/MagicItemService$ItemEffectResult.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/MagicItemService$MagicItem.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/ImageService.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/ZFCService$ZoneOfCausality.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/SecurityAuditService.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service/BuildingService.class
+[INFO] Deleting directory /Users/admin/fullstack-project/backend/target/classes/com/example/demo/service
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/model/GameSession.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/model/AIPlayer.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/model/Scenario.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/model/Position.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/model/GameState.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/model/Scenario$ScenarioEvent.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/model/GameStatus.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/model/GameSessionStatus.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/model/Unit.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/model/Scenario$ScenarioObjective.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/model/AIPlayer$AIGoal.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/model/ImageAsset.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/model/AIPlayer$AIDecision.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/model/Scenario$StartingPosition.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/model/Building.class
+[INFO] Deleting directory /Users/admin/fullstack-project/backend/target/classes/com/example/demo/model
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/controller/AIController.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/controller/MultiplayerController.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/controller/BuildingController.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/controller/EpicContentController.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/controller/GameController.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/controller/ImageController.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/controller/ScenarioController.java.bak
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/controller/UnitController.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/controller/TestController.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/controller/MagicItemController.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/controller/ZFCController.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/controller/ScenarioController.class
+[INFO] Deleting directory /Users/admin/fullstack-project/backend/target/classes/com/example/demo/controller
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/config/WebSocketConfig.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/config/WebConfig.class
+[INFO] Deleting directory /Users/admin/fullstack-project/backend/target/classes/com/example/demo/config
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/repository/ScenarioRepository.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/repository/UnitRepository.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/repository/GameStateRepository.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/repository/BuildingRepository.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/repository/AIPlayerRepository.class
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/repository/GameSessionRepository.class
+[INFO] Deleting directory /Users/admin/fullstack-project/backend/target/classes/com/example/demo/repository
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/com/example/demo/DemoApplication.class
+[INFO] Deleting directory /Users/admin/fullstack-project/backend/target/classes/com/example/demo
+[INFO] Deleting directory /Users/admin/fullstack-project/backend/target/classes/com/example
 [INFO] Deleting directory /Users/admin/fullstack-project/backend/target/classes/com
 [INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/creatures/schrodinger_cat.json
 [INFO] Deleting directory /Users/admin/fullstack-project/backend/target/classes/creatures
@@ -508,7 +444,7 @@ OS name: "mac os x", version: "15.5", arch: "aarch64", family: "mac"
 [INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/game-engine-config.json
 [INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/banner.txt
 [INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/temporal-artifacts-advanced.json
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/META-INF/orm.xml
+[INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/META-INF/orm.xml.disabled
 [INFO] Deleting directory /Users/admin/fullstack-project/backend/target/classes/META-INF
 [INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/custom-artifacts.json
 [INFO] Deleting file /Users/admin/fullstack-project/backend/target/classes/epic-creatures.json
@@ -540,23 +476,7 @@ OS name: "mac os x", version: "15.5", arch: "aarch64", family: "mac"
 [INFO] Deleting directory /Users/admin/fullstack-project/backend/target/classes
 [INFO] Deleting directory /Users/admin/fullstack-project/backend/target/generated-sources/annotations
 [INFO] Deleting directory /Users/admin/fullstack-project/backend/target/generated-sources
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/test-classes/com/heroesoftimepoc/temporalengine/PsiStateTest.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/test-classes/com/heroesoftimepoc/temporalengine/SimpleStartupTest.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/test-classes/com/heroesoftimepoc/temporalengine/ComplexScenarioTest.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/test-classes/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/test-classes/com/heroesoftimepoc/temporalengine/TemporalStressTest.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/test-classes/com/heroesoftimepoc/temporalengine/TemporalEngineIntegrationTest.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/test-classes/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/test-classes/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/test-classes/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.class
-[INFO] Deleting directory /Users/admin/fullstack-project/backend/target/test-classes/com/heroesoftimepoc/temporalengine/integration
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/test-classes/com/heroesoftimepoc/temporalengine/ReadmeStoryTest.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/test-classes/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.class
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/test-classes/com/heroesoftimepoc/temporalengine/TemporalScriptParserTest.class
-[INFO] Deleting directory /Users/admin/fullstack-project/backend/target/test-classes/com/heroesoftimepoc/temporalengine
-[INFO] Deleting directory /Users/admin/fullstack-project/backend/target/test-classes/com/heroesoftimepoc
 [INFO] Deleting directory /Users/admin/fullstack-project/backend/target/test-classes/com
-[INFO] Deleting file /Users/admin/fullstack-project/backend/target/test-classes/application-test.properties
 [INFO] Deleting file /Users/admin/fullstack-project/backend/target/test-classes/test/artefacts/objects/creatures.json
 [INFO] Deleting file /Users/admin/fullstack-project/backend/target/test-classes/test/artefacts/objects/temporal_artifacts.json
 [INFO] Deleting directory /Users/admin/fullstack-project/backend/target/test-classes/test/artefacts/objects
@@ -568,13 +488,13 @@ OS name: "mac os x", version: "15.5", arch: "aarch64", family: "mac"
 [DEBUG] Skipping non-existing directory /Users/admin/fullstack-project/backend/target/test-classes
 [DEBUG] Skipping non-existing directory /Users/admin/fullstack-project/backend/target/classes
 [INFO] 
-[INFO] --- maven-resources-plugin:3.2.0:resources (default-resources) @ temporal-engine ---
+[INFO] --- maven-resources-plugin:3.2.0:resources (default-resources) @ demo ---
 [DEBUG] Using mirror maven-default-http-blocker (http://0.0.0.0/) for apache.snapshots (http://repository.apache.org/snapshots).
 [DEBUG] Using mirror maven-default-http-blocker (http://0.0.0.0/) for repository.jboss.org (http://repository.jboss.org/maven2).
 [DEBUG] Using mirror maven-default-http-blocker (http://0.0.0.0/) for snapshots.jboss.org (http://snapshots.jboss.org/maven2).
 [DEBUG] Using mirror maven-default-http-blocker (http://0.0.0.0/) for oss.sonatype.org/jboss-snapshots (http://oss.sonatype.org/content/repositories/jboss-snapshots).
 [DEBUG] Using mirror maven-default-http-blocker (http://0.0.0.0/) for codehaus.snapshots (http://snapshots.repository.codehaus.org).
-[DEBUG] Dependency collection stats {ConflictMarker.analyzeTime=127250, ConflictMarker.markTime=44041, ConflictMarker.nodeCount=99, ConflictIdSorter.graphTime=66417, ConflictIdSorter.topsortTime=42083, ConflictIdSorter.conflictIdCount=35, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=515834, ConflictResolver.conflictItemCount=85, DefaultDependencyCollector.collectTime=58399042, DefaultDependencyCollector.transformTime=855625}
+[DEBUG] Dependency collection stats {ConflictMarker.analyzeTime=131834, ConflictMarker.markTime=46166, ConflictMarker.nodeCount=99, ConflictIdSorter.graphTime=56791, ConflictIdSorter.topsortTime=19375, ConflictIdSorter.conflictIdCount=35, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=618125, ConflictResolver.conflictItemCount=85, DefaultDependencyCollector.collectTime=88463209, DefaultDependencyCollector.transformTime=895875}
 [DEBUG] org.apache.maven.plugins:maven-resources-plugin:jar:3.2.0
 [DEBUG]    org.apache.maven:maven-plugin-api:jar:3.1.0:compile
 [DEBUG]       org.apache.maven:maven-artifact:jar:3.1.0:compile
@@ -644,7 +564,7 @@ OS name: "mac os x", version: "15.5", arch: "aarch64", family: "mac"
 [DEBUG]   (s) includeEmptyDirs = false
 [DEBUG]   (s) outputDirectory = /Users/admin/fullstack-project/backend/target/classes
 [DEBUG]   (s) overwrite = false
-[DEBUG]   (f) project = MavenProject: com.heroesoftimepoc:temporal-engine:0.0.1-SNAPSHOT @ /Users/admin/fullstack-project/backend/pom.xml
+[DEBUG]   (f) project = MavenProject: com.example:demo:0.0.1-SNAPSHOT @ /Users/admin/fullstack-project/backend/pom.xml
 [DEBUG]   (f) propertiesEncoding = UTF-8
 [DEBUG]   (s) resources = [Resource {targetPath: null, filtering: true, FileSet {directory: /Users/admin/fullstack-project/backend/src/main/resources, PatternSet [includes: {**/application*.yml, **/application*.yaml, **/application*.properties}, excludes: {}]}}, Resource {targetPath: null, filtering: false, FileSet {directory: /Users/admin/fullstack-project/backend/src/main/resources, PatternSet [includes: {}, excludes: {**/application*.yml, **/application*.yaml, **/application*.properties}]}}]
 [DEBUG]   (f) session = org.apache.maven.execution.MavenSession@1bfe3203
@@ -653,7 +573,7 @@ OS name: "mac os x", version: "15.5", arch: "aarch64", family: "mac"
 [DEBUG]   (f) useBuildFilters = true
 [DEBUG]   (s) useDefaultDelimiters = false
 [DEBUG] -- end configuration --
-[DEBUG] properties used {spring-integration.version=5.5.20, flyway.version=8.5.13, java.specification.version=17, glassfish-jstl.version=1.2.6, java.vendor.url=https://github.com/Homebrew/homebrew-core/issues, env.USER_ZDOTDIR=/Users/admin, sun.boot.library.path=/opt/homebrew/Cellar/openjdk@17/17.0.15/libexec/openjdk.jdk/Contents/Home/lib, sun.java.command=org.codehaus.plexus.classworlds.launcher.Launcher clean compile -e -X, jdk.debug=release, maven.version=3.8.2, javax-activation.version=1.2.0, kafka.version=3.1.2, env.GIT_ASKPASS=/Applications/Cursor.app/Contents/Resources/app/extensions/git/dist/askpass.sh, java.vm.specification.vendor=Oracle Corporation, java.specification.name=Java Platform API Specification, byte-buddy.version=1.12.23, maven-install-plugin.version=2.5.2, env.DISABLE_AUTO_UPDATE=true, java.runtime.version=17.0.15+0, httpclient5.version=5.1.4, env.__CFBundleIdentifier=com.todesktop.230313mzl4w4u92, env.VSCODE_PROFILE_INITIALIZED=1, java.vendor.version=Homebrew, micrometer.version=1.9.17, rxjava-adapter.version=1.2.1, project.baseUri=file:/Users/admin/fullstack-project/backend/, hibernate.version=5.6.15.Final, java.io.tmpdir=/var/folders/29/_cljcqnd7s12kp_jsbxpd0w00000gn/T/, java.version=17.0.15, javax-persistence.version=2.2, jakarta-ws-rs.version=2.1.6, build-helper-maven-plugin.version=3.3.0, mockito.version=4.5.1, java.vm.specification.name=Java Virtual Machine Specification, infinispan.version=13.0.20.Final, nekohtml.version=1.9.22, maven-assembly-plugin.version=3.3.0, native.encoding=UTF-8, env.SDKMAN_PLATFORM=darwinarm64, java.library.path=/Users/admin/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:., jakarta-servlet.version=4.0.4, java.vendor=Homebrew, java.specification.maintenance.version=1, thymeleaf-extras-java8time.version=3.0.4.RELEASE, undertow.version=2.2.28.Final, mariadb.version=3.1.4, selenium-htmlunit.version=3.61.0, thymeleaf-extras-data-attribute.version=2.0.1, ehcache3.version=3.10.8, jakarta-xml-bind.version=2.3.3, commons-dbcp2.version=2.9.0, env.LANG=en_US.UTF-8, mongodb.version=4.6.1, java.vm.specification.version=17, javax-transaction.version=1.3, maven.compiler.source=17, user.home=/Users/admin, env.COLORTERM=truecolor, postgresql.version=42.3.8, reactive-streams.version=1.0.4, jmustache.version=1.15, querydsl.version=5.0.0, appengine-sdk.version=1.9.98, thymeleaf-layout-dialect.version=3.0.0, hamcrest.version=2.2, os.version=15.5, commons-pool.version=1.6, jakarta-jms.version=2.0.3, jakarta-transaction.version=1.3.3, java.vm.name=OpenJDK 64-Bit Server VM, env.CURSOR_TRACE_ID=6d96f4d965ed406ab9b38f59dd4f39dd, maven-help-plugin.version=3.2.0, json-path.version=2.7.0, jaxen.version=1.2.0, johnzon.version=1.2.21, os.arch=aarch64, env.MallocNanoZone=0, spring-batch.version=4.3.10, couchbase-client.version=3.3.4, derby.version=10.14.2.0, javax-jsonb.version=1.0, rxjava2.version=2.2.21, javax-jaxws.version=2.3.1, env.SDKMAN_CANDIDATES_API=https://api.sdkman.io/2, env.VSCODE_INJECTION=1, json-smart.version=2.4.11, javax-websocket.version=1.1, commons-codec.version=1.15, env.NVM_RC_VERSION=, caffeine.version=2.9.3, env.VSCODE_GIT_ASKPASS_MAIN=/Applications/Cursor.app/Contents/Resources/app/extensions/git/dist/askpass-main.js, env.JAVA_MAIN_CLASS_49919=org.codehaus.plexus.classworlds.launcher.Launcher, h2.version=2.1.214, env.JAVA_HOME=/opt/homebrew/opt/openjdk@17, java.vm.compressedOopsMode=Zero based, cache2k.version=2.6.1.Final, pooled-jms.version=1.2.6, unboundid-ldapsdk.version=6.0.10, thymeleaf-extras-springsecurity.version=3.0.5.RELEASE, javax-jaxb.version=2.3.1, sqlite-jdbc.version=3.36.0.3, jakarta-servlet-jsp-jstl.version=1.2.7, activemq.version=5.16.7, httpasyncclient.version=4.1.5, jtds.version=1.3.1, javax-jms.version=2.0.1, jakarta-websocket.version=1.1.2, env.LOGNAME=admin, env.__CF_USER_TEXT_ENCODING=0x1F5:0x0:0x0, spring-security.version=5.7.11, hibernate-validator.version=6.2.5.Final, assertj.version=3.22.0, jakarta-xml-soap.version=1.4.2, env.SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.1SKZM0fvxd/Listeners, influxdb-java.version=2.22, httpcore5.version=5.1.5, lombok.version=1.18.30, env.SDKMAN_DIR=/Users/admin/.sdkman, maven.compiler.target=17, env.TMPDIR=/var/folders/29/_cljcqnd7s12kp_jsbxpd0w00000gn/T/, jakarta-xml-ws.version=2.3.3, socksNonProxyHosts=local|*.local|169.254/16|*.169.254/16, commons-pool2.version=2.11.1, jackson-bom.version=2.13.5, env.PAGER=head -n 10000 | cat, spring-retry.version=1.3.4, maven-invoker-plugin.version=3.2.2, maven-antrun-plugin.version=3.0.0, maven.conf=/opt/homebrew/Cellar/maven/3.8.2/libexec/conf, sun.java.launcher=SUN_STANDARD, user.country=BE, env.NVM_DIR=/Users/admin/.nvm, resource.delimiter=@, env.VSCODE_GIT_IPC_HANDLE=/var/folders/29/_cljcqnd7s12kp_jsbxpd0w00000gn/T/vscode-git-fc413efe35.sock, javax-json.version=1.1.4, jboss-logging.version=3.4.3.Final, env.npm_config_yes=true, maven-resources-plugin.version=3.2.0, javax-validation.version=2.0.1.Final, netty.version=4.1.101.Final, jetty-jsp.version=2.2.0.v201112011158, maven-source-plugin.version=3.2.1, env.VSCODE_GIT_ASKPASS_EXTRA_ARGS=, jetty.version=9.4.53.v20231009, rxjava.version=1.3.8, elasticsearch.version=7.17.15, java.runtime.name=OpenJDK Runtime Environment, rest-assured.version=4.5.1, maven-deploy-plugin.version=2.8.2, env.NVM_CD_FLAGS=-q, env.MAVEN_CMD_LINE_ARGS= clean compile -e -X, log4j2.version=2.17.2, maven-failsafe-plugin.version=2.22.2, spring-framework.version=5.3.31, dropwizard-metrics.version=4.2.22, git-commit-id-plugin.version=4.9.10, kotlin-coroutines.version=1.6.4, hazelcast-hibernate5.version=2.2.1, htmlunit.version=2.60.0, env.TERM=xterm-256color, sun.arch.data.model=64, spring-restdocs.version=2.0.8.RELEASE, freemarker.version=2.3.32, thymeleaf.version=3.0.15.RELEASE, jakarta-json.version=1.1.6, janino.version=3.1.10, maven-jar-plugin.version=3.2.2, maven-compiler-plugin.version=3.10.1, java.specification.vendor=Oracle Corporation, rabbit-amqp-client.version=5.14.3, java.version.date=2025-04-15, spring-amqp.version=2.4.17, java.home=/opt/homebrew/Cellar/openjdk@17/17.0.15/libexec/openjdk.jdk/Contents/Home, env.ZDOTDIR=/Users/admin, maven-war-plugin.version=3.3.2, jolokia.version=1.7.2, sun.management.compiler=HotSpot 64-Bit Tiered Compilers, jetty-reactive-httpclient.version=1.1.15, env.PATH=/opt/homebrew/opt/openjdk@17/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin, maven-dependency-plugin.version=3.3.0, httpclient.version=4.5.14, env.ORIGINAL_XDG_CURRENT_DESKTOP=undefined, jsonassert.version=1.5.1, file.encoding=UTF-8, gson.version=2.9.1, sun-mail.version=1.6.7, jakarta-annotation.version=1.3.5, env.SHLVL=2, mssql-jdbc.version=10.2.3.jre8, snakeyaml.version=1.30, liquibase.version=4.9.1, prometheus-client.version=0.15.0, httpcore.version=4.4.16, lettuce.version=6.1.10.RELEASE, classworlds.conf=/opt/homebrew/Cellar/maven/3.8.2/libexec/bin/m2.conf, sun.io.unicode.encoding=UnicodeBig, kotlin.version=1.6.21, wsdl4j.version=1.6.3, jakarta-management.version=1.1.4, tomcat.version=9.0.83, env.COMMAND_MODE=unix2003, sendgrid.version=4.9.3, glassfish-jaxb.version=2.3.9, spring-ws.version=3.1.8, commons-lang3.version=3.12.0, os.name=Mac OS X, junit.version=4.13.2, http.nonProxyHosts=local|*.local|169.254/16|*.169.254/16, jetty-el.version=9.0.52, db2-jdbc.version=11.5.9.0, maven.build.timestamp=2025-07-22T06:51:01Z, reactor-bom.version=2020.0.38, maven-enforcer-plugin.version=3.0.0, jstl.version=1.2, spring-graphql.version=1.0.6, quartz.version=2.3.2, javax-money.version=1.1, graphql-java.version=18.5, spring-hateoas.version=1.5.6, path.separator=:, env.SHELL=/bin/zsh, jakarta-validation.version=2.0.2, maven.multiModuleProjectDirectory=/Users/admin/fullstack-project/backend, oracle-database.version=21.5.0.0, env.VSCODE_GIT_ASKPASS_NODE=/Applications/Cursor.app/Contents/Frameworks/Cursor Helper (Plugin).app/Contents/MacOS/Cursor Helper (Plugin), env.MAVEN_PROJECTBASEDIR=/Users/admin/fullstack-project/backend, java.vm.info=mixed mode, sharing, cassandra-driver.version=4.14.1, env.USER=admin, java.class.version=61.0, xml-maven-plugin.version=1.0.2, sun.jnu.encoding=UTF-8, xmlunit2.version=2.9.1, jakarta-mail.version=1.6.7, okhttp.version=4.9.3, slf4j.version=1.7.36, r2dbc-bom.version=Borca-SR2, solr.version=8.11.2, saaj-impl.version=1.5.3, maven.build.version=Apache Maven 3.8.2 (ea98e05a04480131370aa0c110b8c54cf726c06f), hikaricp.version=4.0.3, maven.home=/opt/homebrew/Cellar/maven/3.8.2/libexec, maven-shade-plugin.version=3.3.0, jakarta-json-bind.version=1.0.2, file.separator=/, line.separator=
+[DEBUG] properties used {spring-integration.version=5.5.20, flyway.version=8.5.13, java.specification.version=17, glassfish-jstl.version=1.2.6, java.vendor.url=https://github.com/Homebrew/homebrew-core/issues, env.USER_ZDOTDIR=/Users/admin, sun.boot.library.path=/opt/homebrew/Cellar/openjdk@17/17.0.15/libexec/openjdk.jdk/Contents/Home/lib, sun.java.command=org.codehaus.plexus.classworlds.launcher.Launcher clean compile -e -X, jdk.debug=release, maven.version=3.8.2, javax-activation.version=1.2.0, kafka.version=3.1.2, env.GIT_ASKPASS=/Applications/Cursor.app/Contents/Resources/app/extensions/git/dist/askpass.sh, java.vm.specification.vendor=Oracle Corporation, java.specification.name=Java Platform API Specification, byte-buddy.version=1.12.23, maven-install-plugin.version=2.5.2, env.DISABLE_AUTO_UPDATE=true, java.runtime.version=17.0.15+0, httpclient5.version=5.1.4, env.__CFBundleIdentifier=com.todesktop.230313mzl4w4u92, env.VSCODE_PROFILE_INITIALIZED=1, java.vendor.version=Homebrew, micrometer.version=1.9.17, rxjava-adapter.version=1.2.1, project.baseUri=file:/Users/admin/fullstack-project/backend/, hibernate.version=5.6.15.Final, java.io.tmpdir=/var/folders/29/_cljcqnd7s12kp_jsbxpd0w00000gn/T/, java.version=17.0.15, javax-persistence.version=2.2, jakarta-ws-rs.version=2.1.6, build-helper-maven-plugin.version=3.3.0, mockito.version=4.5.1, java.vm.specification.name=Java Virtual Machine Specification, infinispan.version=13.0.20.Final, nekohtml.version=1.9.22, maven-assembly-plugin.version=3.3.0, native.encoding=UTF-8, env.SDKMAN_PLATFORM=darwinarm64, java.library.path=/Users/admin/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:., jakarta-servlet.version=4.0.4, java.vendor=Homebrew, java.specification.maintenance.version=1, thymeleaf-extras-java8time.version=3.0.4.RELEASE, undertow.version=2.2.28.Final, mariadb.version=3.1.4, selenium-htmlunit.version=3.61.0, thymeleaf-extras-data-attribute.version=2.0.1, ehcache3.version=3.10.8, jakarta-xml-bind.version=2.3.3, commons-dbcp2.version=2.9.0, env.LANG=en_US.UTF-8, mongodb.version=4.6.1, java.vm.specification.version=17, javax-transaction.version=1.3, maven.compiler.source=17, user.home=/Users/admin, env.COLORTERM=truecolor, postgresql.version=42.3.8, reactive-streams.version=1.0.4, jmustache.version=1.15, querydsl.version=5.0.0, appengine-sdk.version=1.9.98, thymeleaf-layout-dialect.version=3.0.0, hamcrest.version=2.2, os.version=15.5, commons-pool.version=1.6, jakarta-jms.version=2.0.3, jakarta-transaction.version=1.3.3, java.vm.name=OpenJDK 64-Bit Server VM, env.CURSOR_TRACE_ID=6d96f4d965ed406ab9b38f59dd4f39dd, maven-help-plugin.version=3.2.0, json-path.version=2.7.0, env.JAVA_MAIN_CLASS_13220=org.codehaus.plexus.classworlds.launcher.Launcher, jaxen.version=1.2.0, johnzon.version=1.2.21, os.arch=aarch64, env.MallocNanoZone=0, spring-batch.version=4.3.10, couchbase-client.version=3.3.4, derby.version=10.14.2.0, javax-jsonb.version=1.0, rxjava2.version=2.2.21, javax-jaxws.version=2.3.1, env.SDKMAN_CANDIDATES_API=https://api.sdkman.io/2, env.VSCODE_INJECTION=1, json-smart.version=2.4.11, javax-websocket.version=1.1, commons-codec.version=1.15, env.NVM_RC_VERSION=, caffeine.version=2.9.3, env.VSCODE_GIT_ASKPASS_MAIN=/Applications/Cursor.app/Contents/Resources/app/extensions/git/dist/askpass-main.js, h2.version=2.1.214, env.JAVA_HOME=/opt/homebrew/opt/openjdk@17, java.vm.compressedOopsMode=Zero based, cache2k.version=2.6.1.Final, pooled-jms.version=1.2.6, unboundid-ldapsdk.version=6.0.10, thymeleaf-extras-springsecurity.version=3.0.5.RELEASE, javax-jaxb.version=2.3.1, sqlite-jdbc.version=3.36.0.3, jakarta-servlet-jsp-jstl.version=1.2.7, activemq.version=5.16.7, httpasyncclient.version=4.1.5, jtds.version=1.3.1, javax-jms.version=2.0.1, jakarta-websocket.version=1.1.2, env.LOGNAME=admin, env.__CF_USER_TEXT_ENCODING=0x1F5:0x0:0x0, spring-security.version=5.7.11, hibernate-validator.version=6.2.5.Final, assertj.version=3.22.0, jakarta-xml-soap.version=1.4.2, env.SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.1SKZM0fvxd/Listeners, influxdb-java.version=2.22, httpcore5.version=5.1.5, lombok.version=1.18.30, env.SDKMAN_DIR=/Users/admin/.sdkman, maven.compiler.target=17, env.TMPDIR=/var/folders/29/_cljcqnd7s12kp_jsbxpd0w00000gn/T/, jakarta-xml-ws.version=2.3.3, socksNonProxyHosts=local|*.local|169.254/16|*.169.254/16, commons-pool2.version=2.11.1, jackson-bom.version=2.13.5, env.PAGER=head -n 10000 | cat, spring-retry.version=1.3.4, maven-invoker-plugin.version=3.2.2, maven-antrun-plugin.version=3.0.0, maven.conf=/opt/homebrew/Cellar/maven/3.8.2/libexec/conf, sun.java.launcher=SUN_STANDARD, user.country=BE, env.NVM_DIR=/Users/admin/.nvm, resource.delimiter=@, env.VSCODE_GIT_IPC_HANDLE=/var/folders/29/_cljcqnd7s12kp_jsbxpd0w00000gn/T/vscode-git-fc413efe35.sock, javax-json.version=1.1.4, jboss-logging.version=3.4.3.Final, env.npm_config_yes=true, maven-resources-plugin.version=3.2.0, javax-validation.version=2.0.1.Final, netty.version=4.1.101.Final, jetty-jsp.version=2.2.0.v201112011158, maven-source-plugin.version=3.2.1, env.VSCODE_GIT_ASKPASS_EXTRA_ARGS=, jetty.version=9.4.53.v20231009, rxjava.version=1.3.8, elasticsearch.version=7.17.15, java.runtime.name=OpenJDK Runtime Environment, rest-assured.version=4.5.1, maven-deploy-plugin.version=2.8.2, env.NVM_CD_FLAGS=-q, env.MAVEN_CMD_LINE_ARGS= clean compile -e -X, log4j2.version=2.17.2, maven-failsafe-plugin.version=2.22.2, spring-framework.version=5.3.31, dropwizard-metrics.version=4.2.22, git-commit-id-plugin.version=4.9.10, kotlin-coroutines.version=1.6.4, hazelcast-hibernate5.version=2.2.1, htmlunit.version=2.60.0, env.TERM=xterm-256color, sun.arch.data.model=64, spring-restdocs.version=2.0.8.RELEASE, freemarker.version=2.3.32, thymeleaf.version=3.0.15.RELEASE, jakarta-json.version=1.1.6, janino.version=3.1.10, maven-jar-plugin.version=3.2.2, maven-compiler-plugin.version=3.10.1, java.specification.vendor=Oracle Corporation, rabbit-amqp-client.version=5.14.3, java.version.date=2025-04-15, spring-amqp.version=2.4.17, java.home=/opt/homebrew/Cellar/openjdk@17/17.0.15/libexec/openjdk.jdk/Contents/Home, env.ZDOTDIR=/Users/admin, maven-war-plugin.version=3.3.2, jolokia.version=1.7.2, sun.management.compiler=HotSpot 64-Bit Tiered Compilers, jetty-reactive-httpclient.version=1.1.15, env.PATH=/opt/homebrew/opt/openjdk@17/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin, maven-dependency-plugin.version=3.3.0, httpclient.version=4.5.14, env.ORIGINAL_XDG_CURRENT_DESKTOP=undefined, jsonassert.version=1.5.1, file.encoding=UTF-8, gson.version=2.9.1, sun-mail.version=1.6.7, jakarta-annotation.version=1.3.5, env.SHLVL=2, mssql-jdbc.version=10.2.3.jre8, snakeyaml.version=1.30, liquibase.version=4.9.1, prometheus-client.version=0.15.0, httpcore.version=4.4.16, lettuce.version=6.1.10.RELEASE, classworlds.conf=/opt/homebrew/Cellar/maven/3.8.2/libexec/bin/m2.conf, sun.io.unicode.encoding=UnicodeBig, kotlin.version=1.6.21, wsdl4j.version=1.6.3, jakarta-management.version=1.1.4, tomcat.version=9.0.83, env.COMMAND_MODE=unix2003, sendgrid.version=4.9.3, glassfish-jaxb.version=2.3.9, spring-ws.version=3.1.8, commons-lang3.version=3.12.0, os.name=Mac OS X, junit.version=4.13.2, http.nonProxyHosts=local|*.local|169.254/16|*.169.254/16, jetty-el.version=9.0.52, db2-jdbc.version=11.5.9.0, maven.build.timestamp=2025-07-22T10:01:34Z, reactor-bom.version=2020.0.38, maven-enforcer-plugin.version=3.0.0, jstl.version=1.2, spring-graphql.version=1.0.6, quartz.version=2.3.2, javax-money.version=1.1, graphql-java.version=18.5, spring-hateoas.version=1.5.6, path.separator=:, env.SHELL=/bin/zsh, jakarta-validation.version=2.0.2, maven.multiModuleProjectDirectory=/Users/admin/fullstack-project/backend, oracle-database.version=21.5.0.0, env.VSCODE_GIT_ASKPASS_NODE=/Applications/Cursor.app/Contents/Frameworks/Cursor Helper (Plugin).app/Contents/MacOS/Cursor Helper (Plugin), env.MAVEN_PROJECTBASEDIR=/Users/admin/fullstack-project/backend, java.vm.info=mixed mode, sharing, cassandra-driver.version=4.14.1, env.USER=admin, java.class.version=61.0, xml-maven-plugin.version=1.0.2, sun.jnu.encoding=UTF-8, xmlunit2.version=2.9.1, jakarta-mail.version=1.6.7, okhttp.version=4.9.3, slf4j.version=1.7.36, r2dbc-bom.version=Borca-SR2, solr.version=8.11.2, saaj-impl.version=1.5.3, maven.build.version=Apache Maven 3.8.2 (ea98e05a04480131370aa0c110b8c54cf726c06f), hikaricp.version=4.0.3, maven.home=/opt/homebrew/Cellar/maven/3.8.2/libexec, maven-shade-plugin.version=3.3.0, jakarta-json-bind.version=1.0.2, file.separator=/, line.separator=
 , spring-kafka.version=2.8.11, jersey.version=2.35, env.TERM_PROGRAM_VERSION=1.2.4, user.name=admin, env.PIP_NO_INPUT=true, env.XPC_FLAGS=0x0, hazelcast.version=5.1.7, jdom2.version=2.0.6.1, atomikos.version=4.0.6, aspectj.version=1.9.7, hsqldb.version=2.5.2, webjars-locator-core.version=0.50, project.reporting.outputEncoding=UTF-8, awaitility.version=4.2.0, env.SDKMAN_CANDIDATES_DIR=/Users/admin/.sdkman/candidates, env.TERM_PROGRAM=vscode, env.OLDPWD=/Users/admin/fullstack-project/backend, env.PWD=/Users/admin/fullstack-project/backend, embedded-mongo.version=3.4.11, spring-ldap.version=2.4.1, java.class.path=/opt/homebrew/Cellar/maven/3.8.2/libexec/boot/plexus-classworlds-2.6.0.jar, dependency-management-plugin.version=1.0.15.RELEASE, env.HOME=/Users/admin, java.vm.vendor=Homebrew, rabbit-stream-client.version=0.5.0, maven-javadoc-plugin.version=3.4.1, servlet-api.version=4.0.1, rsocket.version=1.1.3, jakarta-persistence.version=2.2.3, artemis.version=2.19.1, groovy.version=3.0.19, javax-cache.version=1.1.1, logback.version=1.2.12, sun.cpu.endian=little, versions-maven-plugin.version=2.10.0, user.language=en, jedis.version=3.8.0, maven-clean-plugin.version=3.2.0, javax-mail.version=1.6.2, maven-surefire-plugin.version=2.22.2, javax-annotation.version=1.3.2, spring-data-bom.version=2021.2.18, mysql.version=8.0.33, classmate.version=1.5.1, jaybird.version=4.0.9.java8, antlr2.version=2.7.7, env.XPC_SERVICE_NAME=0, ftp.nonProxyHosts=local|*.local|169.254/16|*.169.254/16, env.COMPOSER_NO_INTERACTION=1, selenium.version=4.1.4, glassfish-el.version=3.0.4, project.build.sourceEncoding=UTF-8, jooq.version=3.14.16, java.vendor.url.bug=https://github.com/Homebrew/homebrew-core/issues, user.dir=/Users/admin/fullstack-project/backend, ehcache.version=2.10.9.2, junit-jupiter.version=5.8.2, java.vm.version=17.0.15+0, neo4j-java-driver.version=4.4.12, jakarta-activation.version=1.2.2, spring-session-bom.version=2021.2.3}
 [INFO] Using 'UTF-8' encoding to copy filtered resources.
 [INFO] Using 'UTF-8' encoding to copy filtered properties files.
@@ -769,10 +689,10 @@ includes []
 [DEBUG] file custom-artifacts.json has a filtered file extension
 [DEBUG] Using 'UTF-8' encoding to copy filtered resource 'custom-artifacts.json'.
 [DEBUG] copy /Users/admin/fullstack-project/backend/src/main/resources/custom-artifacts.json to /Users/admin/fullstack-project/backend/target/classes/custom-artifacts.json
-[DEBUG] Copying file META-INF/orm.xml
-[DEBUG] file orm.xml has a filtered file extension
-[DEBUG] Using 'UTF-8' encoding to copy filtered resource 'orm.xml'.
-[DEBUG] copy /Users/admin/fullstack-project/backend/src/main/resources/META-INF/orm.xml to /Users/admin/fullstack-project/backend/target/classes/META-INF/orm.xml
+[DEBUG] Copying file META-INF/orm.xml.disabled
+[DEBUG] file orm.xml.disabled has a filtered file extension
+[DEBUG] Using 'UTF-8' encoding to copy filtered resource 'orm.xml.disabled'.
+[DEBUG] copy /Users/admin/fullstack-project/backend/src/main/resources/META-INF/orm.xml.disabled to /Users/admin/fullstack-project/backend/target/classes/META-INF/orm.xml.disabled
 [DEBUG] Copying file temporal-artifacts-advanced.json
 [DEBUG] file temporal-artifacts-advanced.json has a filtered file extension
 [DEBUG] Using 'UTF-8' encoding to copy filtered resource 'temporal-artifacts-advanced.json'.
@@ -815,8 +735,8 @@ includes []
 [DEBUG] copy /Users/admin/fullstack-project/backend/src/main/resources/creatures/schrodinger_cat.json to /Users/admin/fullstack-project/backend/target/classes/creatures/schrodinger_cat.json
 [DEBUG] no use filter components
 [INFO] 
-[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ temporal-engine ---
-[DEBUG] Dependency collection stats {ConflictMarker.analyzeTime=29292, ConflictMarker.markTime=13291, ConflictMarker.nodeCount=17, ConflictIdSorter.graphTime=12417, ConflictIdSorter.topsortTime=9167, ConflictIdSorter.conflictIdCount=12, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=98125, ConflictResolver.conflictItemCount=17, DefaultDependencyCollector.collectTime=13784500, DefaultDependencyCollector.transformTime=174250}
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ demo ---
+[DEBUG] Dependency collection stats {ConflictMarker.analyzeTime=65167, ConflictMarker.markTime=13750, ConflictMarker.nodeCount=17, ConflictIdSorter.graphTime=7958, ConflictIdSorter.topsortTime=13333, ConflictIdSorter.conflictIdCount=12, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=111625, ConflictResolver.conflictItemCount=17, DefaultDependencyCollector.collectTime=16706500, DefaultDependencyCollector.transformTime=223625}
 [DEBUG] org.apache.maven.plugins:maven-compiler-plugin:jar:3.10.1
 [DEBUG]    org.apache.maven.shared:maven-shared-utils:jar:3.3.4:compile
 [DEBUG]       commons-io:commons-io:jar:2.6:compile
@@ -867,8 +787,8 @@ includes []
 [DEBUG]   (f) optimize = false
 [DEBUG]   (f) outputDirectory = /Users/admin/fullstack-project/backend/target/classes
 [DEBUG]   (f) parameters = true
-[DEBUG]   (f) project = MavenProject: com.heroesoftimepoc:temporal-engine:0.0.1-SNAPSHOT @ /Users/admin/fullstack-project/backend/pom.xml
-[DEBUG]   (f) projectArtifact = com.heroesoftimepoc:temporal-engine:jar:0.0.1-SNAPSHOT
+[DEBUG]   (f) project = MavenProject: com.example:demo:0.0.1-SNAPSHOT @ /Users/admin/fullstack-project/backend/pom.xml
+[DEBUG]   (f) projectArtifact = com.example:demo:jar:0.0.1-SNAPSHOT
 [DEBUG]   (f) session = org.apache.maven.execution.MavenSession@1bfe3203
 [DEBUG]   (f) showDeprecation = false
 [DEBUG]   (f) showWarnings = false
@@ -887,81 +807,50 @@ includes []
   /Users/admin/fullstack-project/backend/target/generated-sources/annotations
 [DEBUG] CompilerReuseStrategy: reuseCreated
 [DEBUG] useIncrementalCompilation enabled
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/GameInitializationService.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/CreatureService.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/LegendaryObjectService.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/AdminService.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/GameTile.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/VisualAura.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/QuantumInterferenceService.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/config/PerformanceConfig.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/TemporalLayer.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/PsiGraphService.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/SpecialAbilitiesService.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/CausalityEffect.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/RealityState.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/AdminController.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/SimpleAIService.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/HeroesOfTimeEpochService.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/GrofiHeroService.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/LimitedAIController.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/LegendaryObject.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/TemporalEngineApplication.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/TimeCoord.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/PanopticonAccessController.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/repository/GameTileRepository.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/GameMasterService.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/OptimizedRegexCache.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/CausalityZone.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/VisibilityMode.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/TileCoord.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ScriptCommand.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/Player.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/Game.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/repository/CityRepository.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/PsiNode.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/package-info.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/PanopticonAccessService.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/ScriptTranslationService.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/repository/ArtifactRepository.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalScriptParser.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalDecayServiceLegacy.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/City.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/SmartTranslationService.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalCacheService.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/repository/HeroRepository.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ComplexAmplitude.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/SpatialNode.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/FogState.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/RunicForgeService.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/repository/GameRepository.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/Artifact.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/repository/PlayerRepository.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/WorldStateGraph.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/FormulaInterpreterService.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/QuantumLookupTables.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/LegendaryObjectType.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/LimitedAIService.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/CityService.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/ForgedObject.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/ObservationTriggerService.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/JsonConverter.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalDecayHybridService.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/CausalityZoneService.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/PerformanceMetricsService.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/ExtendedTemporalScriptParser.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalEngineService.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/PsiState.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/QuantumEventLogger.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/GameService.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/repository/LegendaryObjectRepository.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/config/JpaConfig.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/CausalConnection.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/repository/PsiNodeRepository.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/SimpleAIController.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/ArtifactService.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/model/Hero.java
-[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/repository/PsiStateRepository.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/model/GameSession.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/BuildingService.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/GameController.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/ScenarioLoaderService.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/ScenarioGeneratorService.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/ImageController.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/ImageService.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/GameStateService.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/MagicItemService.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/DemoApplication.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/MagicItemController.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/repository/GameSessionRepository.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/model/GameSessionStatus.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/AIController.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/AIService.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/UnitController.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/model/Position.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/model/AIPlayer.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/ZFCController.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/repository/GameStateRepository.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/model/GameState.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/UnitService.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/ZFCService.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/model/Scenario.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/ScenarioController.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/BuildingController.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/model/Unit.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/repository/AIPlayerRepository.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/repository/UnitRepository.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/repository/ScenarioRepository.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/MultiplayerService.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/TestController.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/config/WebConfig.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/validation/InputValidator.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/CampaignBalancingService.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/repository/BuildingRepository.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/EpicContentController.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/MultiplayerController.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/GameService.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/SecurityAuditService.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/model/Building.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/ScenarioService.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/config/WebSocketConfig.java
+[DEBUG] Stale source detected: /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/model/ImageAsset.java
 [INFO] Changes detected - recompiling the module!
 [DEBUG] Classpath:
 [DEBUG]  /Users/admin/fullstack-project/backend/target/classes
@@ -1041,48 +930,59 @@ includes []
 [DEBUG] Command line options:
 [DEBUG] -d /Users/admin/fullstack-project/backend/target/classes -classpath /Users/admin/fullstack-project/backend/target/classes:/Users/admin/.m2/repository/org/springframework/boot/spring-boot-starter-web/2.7.18/spring-boot-starter-web-2.7.18.jar:/Users/admin/.m2/repository/org/springframework/boot/spring-boot-starter/2.7.18/spring-boot-starter-2.7.18.jar:/Users/admin/.m2/repository/org/springframework/boot/spring-boot/2.7.18/spring-boot-2.7.18.jar:/Users/admin/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/2.7.18/spring-boot-autoconfigure-2.7.18.jar:/Users/admin/.m2/repository/jakarta/annotation/jakarta.annotation-api/1.3.5/jakarta.annotation-api-1.3.5.jar:/Users/admin/.m2/repository/org/yaml/snakeyaml/1.30/snakeyaml-1.30.jar:/Users/admin/.m2/repository/org/springframework/boot/spring-boot-starter-json/2.7.18/spring-boot-starter-json-2.7.18.jar:/Users/admin/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.13.5/jackson-datatype-jdk8-2.13.5.jar:/Users/admin/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.13.5/jackson-datatype-jsr310-2.13.5.jar:/Users/admin/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.13.5/jackson-module-parameter-names-2.13.5.jar:/Users/admin/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/2.7.18/spring-boot-starter-tomcat-2.7.18.jar:/Users/admin/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/9.0.83/tomcat-embed-core-9.0.83.jar:/Users/admin/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/9.0.83/tomcat-embed-websocket-9.0.83.jar:/Users/admin/.m2/repository/org/springframework/spring-web/5.3.31/spring-web-5.3.31.jar:/Users/admin/.m2/repository/org/springframework/spring-beans/5.3.31/spring-beans-5.3.31.jar:/Users/admin/.m2/repository/org/springframework/spring-webmvc/5.3.31/spring-webmvc-5.3.31.jar:/Users/admin/.m2/repository/org/springframework/spring-aop/5.3.31/spring-aop-5.3.31.jar:/Users/admin/.m2/repository/org/springframework/spring-context/5.3.31/spring-context-5.3.31.jar:/Users/admin/.m2/repository/org/springframework/spring-expression/5.3.31/spring-expression-5.3.31.jar:/Users/admin/.m2/repository/org/springframework/boot/spring-boot-starter-log4j2/2.7.18/spring-boot-starter-log4j2-2.7.18.jar:/Users/admin/.m2/repository/org/apache/logging/log4j/log4j-slf4j-impl/2.17.2/log4j-slf4j-impl-2.17.2.jar:/Users/admin/.m2/repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/Users/admin/.m2/repository/org/apache/logging/log4j/log4j-api/2.17.2/log4j-api-2.17.2.jar:/Users/admin/.m2/repository/org/apache/logging/log4j/log4j-core/2.17.2/log4j-core-2.17.2.jar:/Users/admin/.m2/repository/org/apache/logging/log4j/log4j-jul/2.17.2/log4j-jul-2.17.2.jar:/Users/admin/.m2/repository/org/slf4j/jul-to-slf4j/1.7.36/jul-to-slf4j-1.7.36.jar:/Users/admin/.m2/repository/org/springframework/boot/spring-boot-starter-websocket/2.7.18/spring-boot-starter-websocket-2.7.18.jar:/Users/admin/.m2/repository/org/springframework/spring-messaging/5.3.31/spring-messaging-5.3.31.jar:/Users/admin/.m2/repository/org/springframework/spring-websocket/5.3.31/spring-websocket-5.3.31.jar:/Users/admin/.m2/repository/org/webjars/sockjs-client/1.5.1/sockjs-client-1.5.1.jar:/Users/admin/.m2/repository/org/webjars/stomp-websocket/2.3.4/stomp-websocket-2.3.4.jar:/Users/admin/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/2.7.18/spring-boot-starter-data-jpa-2.7.18.jar:/Users/admin/.m2/repository/org/springframework/boot/spring-boot-starter-aop/2.7.18/spring-boot-starter-aop-2.7.18.jar:/Users/admin/.m2/repository/org/aspectj/aspectjweaver/1.9.7/aspectjweaver-1.9.7.jar:/Users/admin/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/2.7.18/spring-boot-starter-jdbc-2.7.18.jar:/Users/admin/.m2/repository/com/zaxxer/HikariCP/4.0.3/HikariCP-4.0.3.jar:/Users/admin/.m2/repository/org/springframework/spring-jdbc/5.3.31/spring-jdbc-5.3.31.jar:/Users/admin/.m2/repository/jakarta/transaction/jakarta.transaction-api/1.3.3/jakarta.transaction-api-1.3.3.jar:/Users/admin/.m2/repository/jakarta/persistence/jakarta.persistence-api/2.2.3/jakarta.persistence-api-2.2.3.jar:/Users/admin/.m2/repository/org/hibernate/hibernate-core/5.6.15.Final/hibernate-core-5.6.15.Final.jar:/Users/admin/.m2/repository/org/jboss/logging/jboss-logging/3.4.3.Final/jboss-logging-3.4.3.Final.jar:/Users/admin/.m2/repository/net/bytebuddy/byte-buddy/1.12.23/byte-buddy-1.12.23.jar:/Users/admin/.m2/repository/antlr/antlr/2.7.7/antlr-2.7.7.jar:/Users/admin/.m2/repository/org/jboss/jandex/2.4.2.Final/jandex-2.4.2.Final.jar:/Users/admin/.m2/repository/com/fasterxml/classmate/1.5.1/classmate-1.5.1.jar:/Users/admin/.m2/repository/org/hibernate/common/hibernate-commons-annotations/5.1.2.Final/hibernate-commons-annotations-5.1.2.Final.jar:/Users/admin/.m2/repository/org/glassfish/jaxb/jaxb-runtime/2.3.9/jaxb-runtime-2.3.9.jar:/Users/admin/.m2/repository/org/glassfish/jaxb/txw2/2.3.9/txw2-2.3.9.jar:/Users/admin/.m2/repository/com/sun/istack/istack-commons-runtime/3.0.12/istack-commons-runtime-3.0.12.jar:/Users/admin/.m2/repository/org/springframework/data/spring-data-jpa/2.7.18/spring-data-jpa-2.7.18.jar:/Users/admin/.m2/repository/org/springframework/data/spring-data-commons/2.7.18/spring-data-commons-2.7.18.jar:/Users/admin/.m2/repository/org/springframework/spring-orm/5.3.31/spring-orm-5.3.31.jar:/Users/admin/.m2/repository/org/springframework/spring-tx/5.3.31/spring-tx-5.3.31.jar:/Users/admin/.m2/repository/org/springframework/spring-aspects/5.3.31/spring-aspects-5.3.31.jar:/Users/admin/.m2/repository/org/springframework/boot/spring-boot-starter-validation/2.7.18/spring-boot-starter-validation-2.7.18.jar:/Users/admin/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/9.0.83/tomcat-embed-el-9.0.83.jar:/Users/admin/.m2/repository/org/hibernate/validator/hibernate-validator/6.2.5.Final/hibernate-validator-6.2.5.Final.jar:/Users/admin/.m2/repository/jakarta/validation/jakarta.validation-api/2.0.2/jakarta.validation-api-2.0.2.jar:/Users/admin/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/2.3.3/jakarta.xml.bind-api-2.3.3.jar:/Users/admin/.m2/repository/jakarta/activation/jakarta.activation-api/1.2.2/jakarta.activation-api-1.2.2.jar:/Users/admin/.m2/repository/org/springframework/spring-core/5.3.31/spring-core-5.3.31.jar:/Users/admin/.m2/repository/org/springframework/spring-jcl/5.3.31/spring-jcl-5.3.31.jar:/Users/admin/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.13.5/jackson-databind-2.13.5.jar:/Users/admin/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.13.5/jackson-core-2.13.5.jar:/Users/admin/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.13.5/jackson-annotations-2.13.5.jar:/Users/admin/.m2/repository/org/springframework/boot/spring-boot-starter-actuator/2.7.18/spring-boot-starter-actuator-2.7.18.jar:/Users/admin/.m2/repository/org/springframework/boot/spring-boot-actuator-autoconfigure/2.7.18/spring-boot-actuator-autoconfigure-2.7.18.jar:/Users/admin/.m2/repository/org/springframework/boot/spring-boot-actuator/2.7.18/spring-boot-actuator-2.7.18.jar:/Users/admin/.m2/repository/io/micrometer/micrometer-core/1.9.17/micrometer-core-1.9.17.jar:/Users/admin/.m2/repository/org/hdrhistogram/HdrHistogram/2.1.12/HdrHistogram-2.1.12.jar: -sourcepath /Users/admin/fullstack-project/backend/src/main/java:/Users/admin/fullstack-project/backend/target/generated-sources/annotations: -s /Users/admin/fullstack-project/backend/target/generated-sources/annotations -g -parameters -nowarn -target 17 -source 17 -encoding UTF-8 -Xlint:unchecked -Xlint:deprecation
 [DEBUG] incrementalBuildHelper#beforeRebuildExecution
-[INFO] Compiling 75 source files to /Users/admin/fullstack-project/backend/target/classes
+[INFO] Compiling 44 source files to /Users/admin/fullstack-project/backend/target/classes
 [DEBUG] incrementalBuildHelper#afterRebuildExecution
-[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/CityService.java:[48,61] unchecked cast
+[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/GameStateService.java:[159,98] unchecked cast
   required: java.util.Map<java.lang.String,java.lang.Object>
   found:    java.lang.Object
-[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/CityService.java:[49,61] unchecked cast
+[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/GameStateService.java:[178,89] unchecked cast
   required: java.util.Map<java.lang.String,java.lang.Object>
   found:    java.lang.Object
-[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/CityService.java:[50,58] unchecked cast
+[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/GameStateService.java:[228,98] unchecked cast
   required: java.util.Map<java.lang.String,java.lang.Object>
   found:    java.lang.Object
-[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/CityService.java:[76,75] unchecked cast
+[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/GameStateService.java:[229,97] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.String>
+  found:    java.lang.Object
+[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/GameStateService.java:[280,42] unchecked conversion
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.util.Map
+[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/GameStateService.java:[291,42] unchecked conversion
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.util.List
+[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/ScenarioLoaderService.java:[106,88] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/ScenarioLoaderService.java:[122,87] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/ScenarioLoaderService.java:[138,84] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/ScenarioService.java:[622,58] unchecked cast
   required: java.util.Map<java.lang.String,java.lang.Object>
   found:    java.lang.Object
-[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/CityService.java:[194,75] unchecked cast
+[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/AIService.java:[375,52] unchecked conversion
   required: java.util.Map<java.lang.String,java.lang.Object>
-  found:    java.lang.Object
-[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/CityService.java:[202,76] unchecked cast
+  found:    java.util.Map
+[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/AIService.java:[397,52] unchecked conversion
   required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.util.Map
+[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/AIService.java:[420,50] unchecked conversion
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.util.Map
+[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/BuildingController.java:[110,86] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Integer>
   found:    java.lang.Object
-[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalDecayHybridService.java:[30,13] com.heroesoftimepoc.temporalengine.service.TemporalDecayServiceLegacy in com.heroesoftimepoc.temporalengine.service has been deprecated
-[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalDecayHybridService.java:[30,13] com.heroesoftimepoc.temporalengine.service.TemporalDecayServiceLegacy in com.heroesoftimepoc.temporalengine.service has been deprecated
-[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalDecayHybridService.java:[30,13] com.heroesoftimepoc.temporalengine.service.TemporalDecayServiceLegacy in com.heroesoftimepoc.temporalengine.service has been deprecated
-[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalDecayHybridService.java:[37,22] com.heroesoftimepoc.temporalengine.service.TemporalDecayServiceLegacy in com.heroesoftimepoc.temporalengine.service has been deprecated
-[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalDecayHybridService.java:[37,22] com.heroesoftimepoc.temporalengine.service.TemporalDecayServiceLegacy in com.heroesoftimepoc.temporalengine.service has been deprecated
-[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalDecayHybridService.java:[37,22] com.heroesoftimepoc.temporalengine.service.TemporalDecayServiceLegacy in com.heroesoftimepoc.temporalengine.service has been deprecated
-[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalDecayHybridService.java:[49,21] com.heroesoftimepoc.temporalengine.service.TemporalDecayServiceLegacy in com.heroesoftimepoc.temporalengine.service has been deprecated
-[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalDecayHybridService.java:[49,21] com.heroesoftimepoc.temporalengine.service.TemporalDecayServiceLegacy in com.heroesoftimepoc.temporalengine.service has been deprecated
-[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalDecayHybridService.java:[49,21] com.heroesoftimepoc.temporalengine.service.TemporalDecayServiceLegacy in com.heroesoftimepoc.temporalengine.service has been deprecated
-[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalDecayHybridService.java:[50,45] com.heroesoftimepoc.temporalengine.service.TemporalDecayServiceLegacy in com.heroesoftimepoc.temporalengine.service has been deprecated
-[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalDecayHybridService.java:[50,45] com.heroesoftimepoc.temporalengine.service.TemporalDecayServiceLegacy in com.heroesoftimepoc.temporalengine.service has been deprecated
-[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalDecayHybridService.java:[50,45] com.heroesoftimepoc.temporalengine.service.TemporalDecayServiceLegacy in com.heroesoftimepoc.temporalengine.service has been deprecated
-[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalDecayHybridService.java:[96,14] com.heroesoftimepoc.temporalengine.service.TemporalDecayServiceLegacy in com.heroesoftimepoc.temporalengine.service has been deprecated
-[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalDecayHybridService.java:[118,18] com.heroesoftimepoc.temporalengine.service.TemporalDecayServiceLegacy in com.heroesoftimepoc.temporalengine.service has been deprecated
-[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalDecayHybridService.java:[118,18] com.heroesoftimepoc.temporalengine.service.TemporalDecayServiceLegacy in com.heroesoftimepoc.temporalengine.service has been deprecated
-[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalDecayHybridService.java:[118,18] com.heroesoftimepoc.temporalengine.service.TemporalDecayServiceLegacy in com.heroesoftimepoc.temporalengine.service has been deprecated
-[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/CausalityZoneService.java:[326,77] unchecked cast
-  required: java.util.List<com.heroesoftimepoc.temporalengine.model.TileCoord>
+[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/BuildingController.java:[163,86] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Integer>
+  found:    java.lang.Object
+[WARNING] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/MultiplayerController.java:[136,75] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
   found:    java.lang.Object
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  2.486 s
-[INFO] Finished at: 2025-07-22T08:51:03+02:00
+[INFO] Total time:  2.272 s
+[INFO] Finished at: 2025-07-22T12:01:36+02:00
 [INFO] ------------------------------------------------------------------------

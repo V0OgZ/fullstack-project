@@ -1,33 +1,3 @@
-[INFO] Scanning for projects...
-[INFO] 
-[INFO] ----------------< com.heroesoftimepoc:temporal-engine >-----------------
-[INFO] Building temporal-engine 0.0.1-SNAPSHOT
-[INFO] --------------------------------[ jar ]---------------------------------
-[INFO] 
-[INFO] >>> spring-boot-maven-plugin:2.7.18:run (default-cli) > test-compile @ temporal-engine >>>
-[INFO] 
-[INFO] --- maven-resources-plugin:3.2.0:resources (default-resources) @ temporal-engine ---
-[INFO] Using 'UTF-8' encoding to copy filtered resources.
-[INFO] Using 'UTF-8' encoding to copy filtered properties files.
-[INFO] Copying 1 resource
-[INFO] Copying 35 resources
-[INFO] 
-[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ temporal-engine ---
-[INFO] Nothing to compile - all classes are up to date
-[INFO] 
-[INFO] --- maven-resources-plugin:3.2.0:testResources (default-testResources) @ temporal-engine ---
-[INFO] Using 'UTF-8' encoding to copy filtered resources.
-[INFO] Using 'UTF-8' encoding to copy filtered properties files.
-[INFO] Copying 2 resources
-[INFO] 
-[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ temporal-engine ---
-[INFO] Nothing to compile - all classes are up to date
-[INFO] 
-[INFO] <<< spring-boot-maven-plugin:2.7.18:run (default-cli) < test-compile @ temporal-engine <<<
-[INFO] 
-[INFO] 
-[INFO] --- spring-boot-maven-plugin:2.7.18:run (default-cli) @ temporal-engine ---
-[INFO] Attaching agents: []
  ██╗  ██╗███████╗██████╗  ██████╗ ███████╗███████╗    ██████╗ ███████╗    ████████╗██╗███╗   ███╗███████╗
  ██║  ██║██╔════╝██╔══██╗██╔═══██╗██╔════╝██╔════╝   ██╔═══██╗██╔════╝    ╚══██╔══╝██║████╗ ████║██╔════╝
  ███████║█████╗  ██████╔╝██║   ██║█████╗  ███████╗   ██║   ██║█████╗         ██║   ██║██╔████╔██║█████╗  
@@ -48,25 +18,25 @@
     • API REST Complète            ✅
     
  🎯 Port: 8080 | 🔧 Profile: default | 📊 Version: 1.0.0 
-11:20:20.092 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
-11:20:20.114 [main] INFO  com.example.demo.DemoApplication - Starting DemoApplication using Java 17.0.15 on vincents-MacBook-Pro.local with PID 76563 (/Users/admin/fullstack-project/backend/target/classes started by admin in /Users/admin/fullstack-project/backend)
-11:20:20.115 [main] DEBUG com.example.demo.DemoApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
-11:20:20.115 [main] INFO  com.example.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
-11:20:20.491 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-11:20:20.517 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 22 ms. Found 6 JPA repository interfaces.
-11:20:20.744 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
-11:20:20.751 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
-11:20:20.752 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-11:20:20.753 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
-11:20:20.796 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-11:20:20.796 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 662 ms
-11:20:20.850 [main] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Starting...
-11:20:20.949 [main] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Start completed.
-11:20:20.954 [main] INFO  org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:heroesdb'
-11:20:21.018 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-11:20:21.045 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
-11:20:21.111 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-11:20:21.183 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+12:01:56.938 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+12:01:57.042 [main] INFO  com.example.demo.DemoApplication - Starting DemoApplication using Java 17.0.15 on vincents-MacBook-Pro.local with PID 13511 (/Users/admin/fullstack-project/backend/target/classes started by admin in /Users/admin/fullstack-project/backend)
+12:01:57.043 [main] DEBUG com.example.demo.DemoApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+12:01:57.043 [main] INFO  com.example.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
+12:01:57.509 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+12:01:57.539 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 25 ms. Found 6 JPA repository interfaces.
+12:01:57.765 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+12:01:57.770 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+12:01:57.771 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+12:01:57.771 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+12:01:57.812 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+12:01:57.812 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 745 ms
+12:01:57.861 [main] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Starting...
+12:01:57.950 [main] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Start completed.
+12:01:57.955 [main] INFO  org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:heroesdb'
+12:01:58.011 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+12:01:58.031 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+12:01:58.095 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+12:01:58.167 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
 Hibernate: drop table if exists ai_decision_history CASCADE 
 Hibernate: drop table if exists ai_goals CASCADE 
 Hibernate: drop table if exists ai_players CASCADE 
@@ -116,142 +86,120 @@ Hibernate: alter table scenario_events add constraint FKg78thoyk3btt4ah8w0l5kxge
 Hibernate: alter table scenario_objectives add constraint FK17ypflt578mc3v9gpawpa5rq5 foreign key (scenario_id) references scenarios
 Hibernate: alter table scenario_starting_positions add constraint FK4nw5i22e150ntccvl66v6v6ng foreign key (scenario_id) references scenarios
 Hibernate: alter table unit_abilities add constraint FKgenwc8hldy5cu1mutacji6xgi foreign key (unit_id) references units
-11:20:21.574 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-11:20:21.578 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-11:20:22.082 [main] DEBUG org.springframework.web.socket.server.support.WebSocketHandlerMapping - Patterns [/ws/**] in 'stompWebSocketHandlerMapping'
-11:20:22.097 [main] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-11:20:22.109 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+12:01:58.552 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+12:01:58.556 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+12:01:59.076 [main] DEBUG org.springframework.web.socket.server.support.WebSocketHandlerMapping - Patterns [/ws/**] in 'stompWebSocketHandlerMapping'
+12:01:59.093 [main] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+12:01:59.109 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.AIController:
 	
-11:20:22.110 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+12:01:59.109 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.BuildingController:
 	
-11:20:22.110 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+12:01:59.110 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.EpicContentController:
 	
-11:20:22.110 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+12:01:59.110 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.GameController:
 	
-11:20:22.110 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+12:01:59.110 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.ImageController:
 	
-11:20:22.110 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+12:01:59.110 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.MagicItemController:
 	
-11:20:22.111 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+12:01:59.111 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.MultiplayerController:
 	{[MESSAGE],[/game.join]}: handleJoin(Map)
 	{[MESSAGE],[/game.leave]}: handleLeave(Map)
 	{[MESSAGE],[/game.action]}: handleGameAction(Map)
 	{[MESSAGE],[/game.sync]}: handleSync(Map)
 	{[MESSAGE],[/game.chat]}: handleChat(Map)
-11:20:22.112 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+12:01:59.112 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.ScenarioController:
 	
-11:20:22.112 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+12:01:59.113 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.TestController:
 	
-11:20:22.112 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+12:01:59.113 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.UnitController:
 	
-11:20:22.112 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+12:01:59.113 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.ZFCController:
 	
-11:20:22.114 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+12:01:59.114 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	
-11:20:22.143 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-11:20:22.186 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - 136 mappings in 'requestMappingHandlerMapping'
-11:20:22.195 [main] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-11:20:22.200 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
-11:20:22.262 [main] INFO  org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
-11:20:22.273 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
-11:20:22.282 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
-11:20:22.282 [main] DEBUG org.springframework.web.SimpLogging - clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
-11:20:22.282 [main] DEBUG org.springframework.web.SimpLogging - clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
-11:20:22.282 [main] INFO  org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler - Starting...
-11:20:22.282 [main] DEBUG org.springframework.web.SimpLogging - clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@3c84c32f]
-11:20:22.282 [main] DEBUG org.springframework.web.SimpLogging - brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@3c84c32f]
-11:20:22.283 [main] INFO  org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@3c84c32f]]
-11:20:22.283 [main] INFO  org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler - Started.
-11:20:22.283 [main] DEBUG org.springframework.web.SimpLogging - clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-11:20:22.283 [main] DEBUG org.springframework.web.SimpLogging - brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-11:20:22.291 [main] INFO  com.example.demo.DemoApplication - Started DemoApplication in 2.312 seconds (JVM running for 2.593)
-🚀 Initializing scenarios from JSON files...
-🚀 Loading scenarios from JSON files...
-Hibernate: select scenario0_.id as id1_14_, scenario0_.artifacts as artifact2_14_, scenario0_.campaign_order as campaign3_14_, scenario0_.created_at as created_4_14_, scenario0_.defeat_condition as defeat_c5_14_, scenario0_.description as descript6_14_, scenario0_.difficulty as difficul7_14_, scenario0_.is_active as is_activ8_14_, scenario0_.is_campaign as is_campa9_14_, scenario0_.is_multiplayer as is_mult10_14_, scenario0_.map_height as map_hei11_14_, scenario0_.map_size as map_siz12_14_, scenario0_.map_width as map_wid13_14_, scenario0_.max_players as max_pla14_14_, scenario0_.name as name15_14_, scenario0_.neutral_creatures as neutral16_14_, scenario0_.next_scenario_id as next_sc17_14_, scenario0_.previous_scenario_id as previou18_14_, scenario0_.recommended_players as recomme19_14_, scenario0_.scenario_id as scenari20_14_, scenario0_.special_buildings as special21_14_, scenario0_.starting_resources as startin22_14_, scenario0_.terrain_distribution as terrain23_14_, scenario0_.time_limit as time_li24_14_, scenario0_.turn_limit as turn_li25_14_, scenario0_.updated_at as updated26_14_, scenario0_.victory_condition as victory27_14_, scenario0_.victory_requirement as victory28_14_ from scenarios scenario0_ where scenario0_.scenario_id=?
-Hibernate: insert into scenarios (id, artifacts, campaign_order, created_at, defeat_condition, description, difficulty, is_active, is_campaign, is_multiplayer, map_height, map_size, map_width, max_players, name, neutral_creatures, next_scenario_id, previous_scenario_id, recommended_players, scenario_id, special_buildings, starting_resources, terrain_distribution, time_limit, turn_limit, updated_at, victory_condition, victory_requirement) values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into scenario_objectives (scenario_id, completion_reward, current_value, is_completed, is_required, objective_description, objective_id, objective_title, objective_type, target_value) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into scenario_objectives (scenario_id, completion_reward, current_value, is_completed, is_required, objective_description, objective_id, objective_title, objective_type, target_value) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into scenario_starting_positions (scenario_id, castle_type, handicap, player_id, position_x, position_y, starting_army, starting_hero, starting_resources) values (?, ?, ?, ?, ?, ?, ?, ?, ?)
-✨ Loaded scenario: conquest-classic - scenarios.conquest-classic.name
-Hibernate: select scenario0_.id as id1_14_, scenario0_.artifacts as artifact2_14_, scenario0_.campaign_order as campaign3_14_, scenario0_.created_at as created_4_14_, scenario0_.defeat_condition as defeat_c5_14_, scenario0_.description as descript6_14_, scenario0_.difficulty as difficul7_14_, scenario0_.is_active as is_activ8_14_, scenario0_.is_campaign as is_campa9_14_, scenario0_.is_multiplayer as is_mult10_14_, scenario0_.map_height as map_hei11_14_, scenario0_.map_size as map_siz12_14_, scenario0_.map_width as map_wid13_14_, scenario0_.max_players as max_pla14_14_, scenario0_.name as name15_14_, scenario0_.neutral_creatures as neutral16_14_, scenario0_.next_scenario_id as next_sc17_14_, scenario0_.previous_scenario_id as previou18_14_, scenario0_.recommended_players as recomme19_14_, scenario0_.scenario_id as scenari20_14_, scenario0_.special_buildings as special21_14_, scenario0_.starting_resources as startin22_14_, scenario0_.terrain_distribution as terrain23_14_, scenario0_.time_limit as time_li24_14_, scenario0_.turn_limit as turn_li25_14_, scenario0_.updated_at as updated26_14_, scenario0_.victory_condition as victory27_14_, scenario0_.victory_requirement as victory28_14_ from scenarios scenario0_ where scenario0_.scenario_id=?
-Hibernate: insert into scenarios (id, artifacts, campaign_order, created_at, defeat_condition, description, difficulty, is_active, is_campaign, is_multiplayer, map_height, map_size, map_width, max_players, name, neutral_creatures, next_scenario_id, previous_scenario_id, recommended_players, scenario_id, special_buildings, starting_resources, terrain_distribution, time_limit, turn_limit, updated_at, victory_condition, victory_requirement) values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into scenario_events (scenario_id, event_description, event_effect, event_id, event_title, event_type, is_repeatable, is_triggered, trigger_condition, trigger_turn) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into scenario_objectives (scenario_id, completion_reward, current_value, is_completed, is_required, objective_description, objective_id, objective_title, objective_type, target_value) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into scenario_objectives (scenario_id, completion_reward, current_value, is_completed, is_required, objective_description, objective_id, objective_title, objective_type, target_value) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into scenario_starting_positions (scenario_id, castle_type, handicap, player_id, position_x, position_y, starting_army, starting_hero, starting_resources) values (?, ?, ?, ?, ?, ?, ?, ?, ?)
-✨ Loaded scenario: temporal-rift - scenarios.temporal-rift.name
-Hibernate: select scenario0_.id as id1_14_, scenario0_.artifacts as artifact2_14_, scenario0_.campaign_order as campaign3_14_, scenario0_.created_at as created_4_14_, scenario0_.defeat_condition as defeat_c5_14_, scenario0_.description as descript6_14_, scenario0_.difficulty as difficul7_14_, scenario0_.is_active as is_activ8_14_, scenario0_.is_campaign as is_campa9_14_, scenario0_.is_multiplayer as is_mult10_14_, scenario0_.map_height as map_hei11_14_, scenario0_.map_size as map_siz12_14_, scenario0_.map_width as map_wid13_14_, scenario0_.max_players as max_pla14_14_, scenario0_.name as name15_14_, scenario0_.neutral_creatures as neutral16_14_, scenario0_.next_scenario_id as next_sc17_14_, scenario0_.previous_scenario_id as previou18_14_, scenario0_.recommended_players as recomme19_14_, scenario0_.scenario_id as scenari20_14_, scenario0_.special_buildings as special21_14_, scenario0_.starting_resources as startin22_14_, scenario0_.terrain_distribution as terrain23_14_, scenario0_.time_limit as time_li24_14_, scenario0_.turn_limit as turn_li25_14_, scenario0_.updated_at as updated26_14_, scenario0_.victory_condition as victory27_14_, scenario0_.victory_requirement as victory28_14_ from scenarios scenario0_ where scenario0_.scenario_id=?
-Hibernate: insert into scenarios (id, artifacts, campaign_order, created_at, defeat_condition, description, difficulty, is_active, is_campaign, is_multiplayer, map_height, map_size, map_width, max_players, name, neutral_creatures, next_scenario_id, previous_scenario_id, recommended_players, scenario_id, special_buildings, starting_resources, terrain_distribution, time_limit, turn_limit, updated_at, victory_condition, victory_requirement) values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into scenario_events (scenario_id, event_description, event_effect, event_id, event_title, event_type, is_repeatable, is_triggered, trigger_condition, trigger_turn) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into scenario_objectives (scenario_id, completion_reward, current_value, is_completed, is_required, objective_description, objective_id, objective_title, objective_type, target_value) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into scenario_starting_positions (scenario_id, castle_type, handicap, player_id, position_x, position_y, starting_army, starting_hero, starting_resources) values (?, ?, ?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into scenario_starting_positions (scenario_id, castle_type, handicap, player_id, position_x, position_y, starting_army, starting_hero, starting_resources) values (?, ?, ?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into scenario_starting_positions (scenario_id, castle_type, handicap, player_id, position_x, position_y, starting_army, starting_hero, starting_resources) values (?, ?, ?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into scenario_starting_positions (scenario_id, castle_type, handicap, player_id, position_x, position_y, starting_army, starting_hero, starting_resources) values (?, ?, ?, ?, ?, ?, ?, ?, ?)
-✨ Loaded scenario: multiplayer-arena - scenarios.multiplayer-arena.name
-Hibernate: select scenario0_.id as id1_14_, scenario0_.artifacts as artifact2_14_, scenario0_.campaign_order as campaign3_14_, scenario0_.created_at as created_4_14_, scenario0_.defeat_condition as defeat_c5_14_, scenario0_.description as descript6_14_, scenario0_.difficulty as difficul7_14_, scenario0_.is_active as is_activ8_14_, scenario0_.is_campaign as is_campa9_14_, scenario0_.is_multiplayer as is_mult10_14_, scenario0_.map_height as map_hei11_14_, scenario0_.map_size as map_siz12_14_, scenario0_.map_width as map_wid13_14_, scenario0_.max_players as max_pla14_14_, scenario0_.name as name15_14_, scenario0_.neutral_creatures as neutral16_14_, scenario0_.next_scenario_id as next_sc17_14_, scenario0_.previous_scenario_id as previou18_14_, scenario0_.recommended_players as recomme19_14_, scenario0_.scenario_id as scenari20_14_, scenario0_.special_buildings as special21_14_, scenario0_.starting_resources as startin22_14_, scenario0_.terrain_distribution as terrain23_14_, scenario0_.time_limit as time_li24_14_, scenario0_.turn_limit as turn_li25_14_, scenario0_.updated_at as updated26_14_, scenario0_.victory_condition as victory27_14_, scenario0_.victory_requirement as victory28_14_ from scenarios scenario0_ where scenario0_.scenario_id=?
-Hibernate: insert into scenarios (id, artifacts, campaign_order, created_at, defeat_condition, description, difficulty, is_active, is_campaign, is_multiplayer, map_height, map_size, map_width, max_players, name, neutral_creatures, next_scenario_id, previous_scenario_id, recommended_players, scenario_id, special_buildings, starting_resources, terrain_distribution, time_limit, turn_limit, updated_at, victory_condition, victory_requirement) values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-✨ Loaded scenario: dragon-campaign - scenarios.dragon-campaign.name
-✅ All scenarios loaded successfully from JSON files!
-✅ Scenario initialization completed!
-11:20:30.936 [http-nio-8080-exec-2] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-11:20:30.936 [http-nio-8080-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-11:20:30.936 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
-11:20:30.936 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
-11:20:30.936 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected FixedThemeResolver
-11:20:30.937 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@557c0b65
-11:20:30.937 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@71cdde0c
-11:20:30.937 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
-11:20:30.937 [http-nio-8080-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
-11:20:30.942 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/actuator/health", parameters={}
-11:20:30.961 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-11:20:30.975 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [org.springframework.boot.actuate.health.SystemHealth@b6e7568]
-11:20:30.980 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
-11:20:37.343 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/scenarios", parameters={}
-11:20:37.345 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
-11:20:37.347 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
-11:20:37.347 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
-11:20:37.348 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
-11:20:37.349 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
-11:20:37.351 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
-11:20:37.351 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Tue Jul 22 11:20:37 CEST 2025, status=404, error=Not Found, path=/api/scenarios}]
-11:20:37.354 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
-11:20:42.473 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/games", parameters={}
-11:20:42.474 [http-nio-8080-exec-5] WARN  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
-11:20:42.474 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 405 METHOD_NOT_ALLOWED
-11:20:42.475 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
-11:20:42.475 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
-11:20:42.475 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
-11:20:42.475 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Tue Jul 22 11:20:42 CEST 2025, status=405, error=Method Not Allowed, path=/api/games}]
-11:20:42.476 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 405
-11:20:48.555 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/games", parameters={}
-11:20:48.556 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to com.example.demo.controller.GameController#createGame(Map)
-11:20:48.558 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [{scenario=test, players=[Jean-Grofignon]}]
-Hibernate: insert into buildings (id, building_id, building_type, castle_id, construction_completed, construction_started, construction_time, crystal_cost, current_units_available, daily_gold_bonus, daily_resource_bonus, defense_bonus, game_id, gems_cost, gold_cost, is_constructed, last_recruitment_reset, level, luck_bonus, mana_regeneration_bonus, max_level, morale_bonus, ore_cost, player_id, position_x, position_y, spell_power_bonus, stone_cost, sulfur_cost, unit_production_bonus, weekly_growth, wood_cost) values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into buildings (id, building_id, building_type, castle_id, construction_completed, construction_started, construction_time, crystal_cost, current_units_available, daily_gold_bonus, daily_resource_bonus, defense_bonus, game_id, gems_cost, gold_cost, is_constructed, last_recruitment_reset, level, luck_bonus, mana_regeneration_bonus, max_level, morale_bonus, ore_cost, player_id, position_x, position_y, spell_power_bonus, stone_cost, sulfur_cost, unit_production_bonus, weekly_growth, wood_cost) values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into buildings (id, building_id, building_type, castle_id, construction_completed, construction_started, construction_time, crystal_cost, current_units_available, daily_gold_bonus, daily_resource_bonus, defense_bonus, game_id, gems_cost, gold_cost, is_constructed, last_recruitment_reset, level, luck_bonus, mana_regeneration_bonus, max_level, morale_bonus, ore_cost, player_id, position_x, position_y, spell_power_bonus, stone_cost, sulfur_cost, unit_production_bonus, weekly_growth, wood_cost) values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into buildings (id, building_id, building_type, castle_id, construction_completed, construction_started, construction_time, crystal_cost, current_units_available, daily_gold_bonus, daily_resource_bonus, defense_bonus, game_id, gems_cost, gold_cost, is_constructed, last_recruitment_reset, level, luck_bonus, mana_regeneration_bonus, max_level, morale_bonus, ore_cost, player_id, position_x, position_y, spell_power_bonus, stone_cost, sulfur_cost, unit_production_bonus, weekly_growth, wood_cost) values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into building_unit_types (building_id, unit_type) values (?, ?)
-Hibernate: insert into building_unit_types (building_id, unit_type) values (?, ?)
-Hibernate: insert into buildings (id, building_id, building_type, castle_id, construction_completed, construction_started, construction_time, crystal_cost, current_units_available, daily_gold_bonus, daily_resource_bonus, defense_bonus, game_id, gems_cost, gold_cost, is_constructed, last_recruitment_reset, level, luck_bonus, mana_regeneration_bonus, max_level, morale_bonus, ore_cost, player_id, position_x, position_y, spell_power_bonus, stone_cost, sulfur_cost, unit_production_bonus, weekly_growth, wood_cost) values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into buildings (id, building_id, building_type, castle_id, construction_completed, construction_started, construction_time, crystal_cost, current_units_available, daily_gold_bonus, daily_resource_bonus, defense_bonus, game_id, gems_cost, gold_cost, is_constructed, last_recruitment_reset, level, luck_bonus, mana_regeneration_bonus, max_level, morale_bonus, ore_cost, player_id, position_x, position_y, spell_power_bonus, stone_cost, sulfur_cost, unit_production_bonus, weekly_growth, wood_cost) values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into buildings (id, building_id, building_type, castle_id, construction_completed, construction_started, construction_time, crystal_cost, current_units_available, daily_gold_bonus, daily_resource_bonus, defense_bonus, game_id, gems_cost, gold_cost, is_constructed, last_recruitment_reset, level, luck_bonus, mana_regeneration_bonus, max_level, morale_bonus, ore_cost, player_id, position_x, position_y, spell_power_bonus, stone_cost, sulfur_cost, unit_production_bonus, weekly_growth, wood_cost) values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into buildings (id, building_id, building_type, castle_id, construction_completed, construction_started, construction_time, crystal_cost, current_units_available, daily_gold_bonus, daily_resource_bonus, defense_bonus, game_id, gems_cost, gold_cost, is_constructed, last_recruitment_reset, level, luck_bonus, mana_regeneration_bonus, max_level, morale_bonus, ore_cost, player_id, position_x, position_y, spell_power_bonus, stone_cost, sulfur_cost, unit_production_bonus, weekly_growth, wood_cost) values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-Hibernate: insert into building_unit_types (building_id, unit_type) values (?, ?)
-Hibernate: insert into building_unit_types (building_id, unit_type) values (?, ?)
-11:20:48.573 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
-11:20:48.574 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{date=Tue Jul 22 11:20:48 CEST 2025, currentPlayerId=player1, currentPlayer={castleId=castle_player1 (truncated)...]
-11:20:48.582 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
-11:21:22.094 [MessageBroker-1] INFO  org.springframework.web.socket.config.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+12:01:59.147 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+12:01:59.191 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - 136 mappings in 'requestMappingHandlerMapping'
+12:01:59.199 [main] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+12:01:59.204 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+12:01:59.268 [main] INFO  org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+12:01:59.281 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+12:01:59.286 [main] WARN  org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+12:01:59.288 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+12:01:59.289 [main] INFO  org.hibernate.tool.schema.internal.SchemaDropperImpl$DelayedDropActionImpl - HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+Hibernate: drop table if exists ai_decision_history CASCADE 
+Hibernate: drop table if exists ai_goals CASCADE 
+Hibernate: drop table if exists ai_players CASCADE 
+Hibernate: drop table if exists building_spells CASCADE 
+Hibernate: drop table if exists building_unit_types CASCADE 
+Hibernate: drop table if exists buildings CASCADE 
+Hibernate: drop table if exists game_session_players CASCADE 
+Hibernate: drop table if exists game_sessions CASCADE 
+Hibernate: drop table if exists game_states CASCADE 
+Hibernate: drop table if exists image_assets CASCADE 
+Hibernate: drop table if exists image_metadata CASCADE 
+Hibernate: drop table if exists scenario_events CASCADE 
+Hibernate: drop table if exists scenario_objectives CASCADE 
+Hibernate: drop table if exists scenario_starting_positions CASCADE 
+Hibernate: drop table if exists scenarios CASCADE 
+Hibernate: drop table if exists unit_abilities CASCADE 
+Hibernate: drop table if exists units CASCADE 
+12:01:59.295 [main] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Shutdown initiated...
+12:01:59.296 [main] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Shutdown completed.
+12:01:59.297 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-8080"]
+12:01:59.297 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+12:01:59.298 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8080"]
+12:01:59.298 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Destroying ProtocolHandler ["http-nio-8080"]
+12:01:59.305 [main] INFO  org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+12:01:59.311 [main] ERROR org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:2.7.18:run (default-cli) on project demo: Application finished with exit code: 1 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         12:02:01.036 [MessageBroker-1] INFO  org.springframework.web.socket.config.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+12:02:08.774 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/health", parameters={}
+12:02:08.775 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to com.example.demo.controller.GameController#health()
+12:02:08.775 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+12:02:08.775 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{status=UP}]
+12:02:08.776 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+12:02:08.785 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/actuator/health", parameters={}
+12:02:08.793 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+12:02:08.803 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [org.springframework.boot.actuate.health.SystemHealth@3b7ad043]
+12:02:08.804 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:2.7.18:run (default-cli) on project demo: Application finished with exit code: 137 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

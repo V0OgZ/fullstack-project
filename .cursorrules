@@ -1,20 +1,23 @@
 # Cursor AI Assistant Rules for Heroes of Time Project
 
-## 🚨 CRITICAL: TERMINAL COMMANDS - NO QUOTES ISSUES!
+## 🚨🚨🚨 CRITICAL MAC TERMINAL RULE - VINCE IS ANGRY! 🚨🚨🚨
 
-**MANDATORY TERMINAL RULE - JEAN'S PRIORITY:**
-- **NEVER** use double quotes or complex echo commands that cause terminal issues
-- **ALWAYS** use plain commands without quotes wrapping
-- **AVOID** echo commands with quotes that break the terminal session
-- **SIMPLE** commands only - no fancy formatting in terminal
+**🚫 ABSOLUMENT INTERDIT - JEAN'S TOP PRIORITY:**
+- **JAMAIS D'ECHO AVEC QUOTES** - ça bloque le terminal Mac et énerve Vince !!!
+- **COMMANDES SIMPLES UNIQUEMENT** - pas de formatage fantaisie dans terminal
+- **FINI LES GUILLEMETS COMPLEXES** - ça casse la session terminal Mac
 - **WALTER SAYS**: "ARRÊTE AVEC LES ECHO ET LES QUOTES TU BLOQUES LA CONSOLE!"
+- **VINCE SAYS**: "Ces putains de quotes me foutent en l'air le terminal!"
+- **MAC OS TERMINAL = FRAGILE** - Respecte ça bordel !
+
+## 🚨 CRITICAL: TERMINAL COMMANDS - NO QUOTES ISSUES!
 
 ## 🚨 IMPORTANT: Always read documentation first!
 
 Before making any changes or debugging, ALWAYS:
 1. Check `DOCS_INDEX.md` for complete documentation navigation
 2. Read `DEVELOPER_INSTRUCTIONS.md` for current status and existing scripts
-3. Do NOT recreate existing scripts (./start-app.sh, ./stop-app.sh, ./test-app.sh)
+3. Do NOT recreate existing scripts (./hots, ./stop-app.sh, ./test-app.sh)
 4. Use existing debugging tools and follow established patterns
 5. Check existing components before creating new ones
 
@@ -33,12 +36,12 @@ Before making any changes or debugging, ALWAYS:
 ## 🎯 Current Project State (July 2025):
 - **Status**: ✅ FULLY FUNCTIONAL with polished UI
 - **Backend**: Spring Boot (Java) on port 8080 - STABLE
-- **Frontend**: React TypeScript on port 3000 - MODERN INTERFACE
+- **Frontend**: React TypeScript on port 8000 - MODERN INTERFACE
 - **Database**: H2 in-memory - WORKING
 - **Tests**: Playwright E2E demos - PASSING
 
 ## 🔧 Essential Scripts (ALL WORKING):
-- `./start-app.sh` - Start both servers with hot reload
+- `./hots start` - Script principal de contrôle (1313 lignes) - Start tous les services
 - `./stop-app.sh` - Stop all services cleanly
 - `./test-app.sh` - Quick tests
 - `./run-epic-demo.sh` - Epic content demos
@@ -81,8 +84,8 @@ Frontend (Port 3000): React TypeScript + Epic Assets
 ```
 
 ## 🚀 Quick Development Workflow:
-1. `./start-app.sh` - Start development environment
-2. Open http://localhost:3000 - Test UI manually
+1. `./hots start` - Start development environment (Backend 8080 + Frontend 8000 + Dashboard 9000)
+2. Open http://localhost:8000 - Test UI manually
 3. `cd frontend && yarn build` - ALWAYS build first to check compilation
 4. `cd frontend && npx playwright test --headed` - Run visual tests
 5. Check `DEVELOPER_INSTRUCTIONS.md` for detailed guidance
@@ -111,8 +114,8 @@ Frontend (Port 3000): React TypeScript + Epic Assets
 - ✅ Backend fully cleaned (old POC conflicts resolved)
 
 ## 🚨 Remember:
-- **USE** `./start-app.sh` as primary control (Backend + Frontend)
-- **FRONTEND** is on port 3000 (not 8000 or other ports)
+- **USE** `./hots start` as primary control (Backend 8080 + Frontend 8000 + Dashboard 9000)
+- **FRONTEND** is on port 8000 (not 3000 or other ports)
 - **NEVER** recreate existing functionality  
 - **ALWAYS** check `DEVELOPER_INSTRUCTIONS.md` first
 - **USE** existing patterns and components
