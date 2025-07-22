@@ -633,7 +633,7 @@ Après de nombreuses quêtes à travers les logs d'erreur et les stack traces, i
 ### 🎯 **Guides Spécialisés**
 
 <details>
-<summary>📚 <strong>Still Collapse Open - Documentation Complète</strong></summary>
+<summary>📚 <strong>Documentation Complète</strong></summary>
 
 - **Artefacts** : [docs/items/ARTEFACTS_COMPLETE_GUIDE.md](docs/items/ARTEFACTS_COMPLETE_GUIDE.md)
 - **Héros GROFI** : [docs/GROFI/](docs/GROFI/)
@@ -665,7 +665,7 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 ## 📅 **Documentation Récente (Juillet 2025)**
 
 <details>
-<summary>🎭 <strong>Still Collapse Open - Scénarios Épiques NARRATIF</strong></summary>
+<summary>🎭 <strong>Scénarios Épiques NARRATIF</strong></summary>
 
 - **🏰 La Tour Sombre** : [docs/scenarios/LA_TOUR_SOMBRE_SCENARIO_EPIQUE_TRADUIT.md](docs/scenarios/LA_TOUR_SOMBRE_SCENARIO_EPIQUE_TRADUIT.md)
 - **✨ L'Éclat des Mondes Dissolus** : [docs/scenarios/ECLAT_MONDES_DISSOLUS_SCENARIO_TRADUIT.md](docs/scenarios/ECLAT_MONDES_DISSOLUS_SCENARIO_TRADUIT.md)
@@ -677,7 +677,7 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 </details>
 
 <details>
-<summary>🏛️ <strong>Still Collapse Open - Architecture & Système</strong></summary>
+<summary>🏛️ <strong>Architecture & Système</strong></summary>
 
 - **🏗️ Architecture Moteur** : [docs/architecture/ENGINE_ARCHITECTURE.md](docs/architecture/ENGINE_ARCHITECTURE.md)
 - **🌍 World State Graph** : [docs/architecture/WORLD_STATE_GRAPH.md](docs/architecture/WORLD_STATE_GRAPH.md)
@@ -692,7 +692,7 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 </details>
 
 <details>
-<summary>🦸 <strong>Still Collapse Open - Héros & Lore</strong></summary>
+<summary>🦸 <strong>Héros & Lore</strong></summary>
 
 - **📚 Lore Jean & Memento** : [docs/LORE_MEMENTO_JEAN_ETERNAL.md](docs/LORE_MEMENTO_JEAN_ETERNAL.md)
 - **✨ Manifeste Jean-Grofignon** : [docs/JEAN_GROFIGNON_MANIFESTO.md](docs/JEAN_GROFIGNON_MANIFESTO.md)
@@ -704,7 +704,7 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 </details>
 
 <details>
-<summary>📁 <strong>Still Collapse Open - MEMENTO Documents Clés</strong></summary>
+<summary>📁 <strong>MEMENTO Documents Clés</strong></summary>
 
 - **🧠 Index MEMENTO** : [MEMENTO/INDEX_MEMENTO.md](MEMENTO/INDEX_MEMENTO.md)
 - **🎮 Interface 8000 Complète** : [MEMENTO/IMPLEMENTATIONS/INTERFACE_8000_COMPLETE.md](MEMENTO/IMPLEMENTATIONS/INTERFACE_8000_COMPLETE.md)
@@ -716,7 +716,7 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 </details>
 
 <details>
-<summary>📜 <strong>Still Collapse Open - Guides Développeur & Gameplay</strong></summary>
+<summary>📜 <strong>Guides Développeur & Gameplay</strong></summary>
 
 - **📖 CODEX COMPLET** : [docs/CODEX_COMPLET_HEROES_OF_TIME.md](docs/CODEX_COMPLET_HEROES_OF_TIME.md) - **LA RÉFÉRENCE ULTIME**
 - **🚀 Guide Démarrage Rapide** : [docs/RAPPORTS_TECHNIQUES/CURSOR_QUICK_START.md](docs/RAPPORTS_TECHNIQUES/CURSOR_QUICK_START.md)
@@ -729,7 +729,7 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 </details>
 
 <details>
-<summary>🆕 <strong>Still Collapse Open - Nouvelles Fonctionnalités Juillet 2025</strong></summary>
+<summary>🆕 <strong>Nouvelles Fonctionnalités Juillet 2025</strong></summary>
 
 - **🎮 Gameplay vs IA** : [GAMEPLAY_VS_IA_SUMMARY.md](GAMEPLAY_VS_IA_SUMMARY.md)
 - **💾 Système de Persistence** : [PROTOCOLE_MEMENTO_PERSISTENCE_UPDATE.md](PROTOCOLE_MEMENTO_PERSISTENCE_UPDATE.md)
