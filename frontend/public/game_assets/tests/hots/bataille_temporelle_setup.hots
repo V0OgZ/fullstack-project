@@ -1,0 +1,45 @@
+# ===============================================
+# BATAILLE TEMPORELLE - SETUP
+# Script de configuration initiale du scénario
+# ===============================================
+
+# Phase 1: Création des héros
+HERO(Arthur)
+HERO(Morgana)
+
+# Phase 2: Positionnement initial
+MOV(Arthur, @5,5)
+MOV(Morgana, @15,15)
+
+# Phase 3: Équipement initial
+EQUIP(Arthur, temporal_sword)
+EQUIP(Arthur, mystic_orb)
+EQUIP(Morgana, chrono_staff)
+EQUIP(Morgana, reality_gem)
+
+# Phase 4: Création des créatures
+CREATE(CREATURE, DragonRouge, @10,10)
+CREATE(CREATURE, PhantomWarriors, @8,12)
+
+# Phase 5: Placement des artefacts temporels
+CREATE(ARTIFACT, LameAvantMonde, @10,10)
+CREATE(ARTIFACT, HorlogeInversee, @3,17)
+CREATE(ARTIFACT, OrbeProbabilite, @12,6)
+
+# Phase 6: Configuration des zones temporelles
+CREATE(ZONE, TemporalZone, @9,9, 3x3)
+CREATE(ZONE, QuantumField, @1,1, 2x2)
+
+# Phase 7: États ψ initiaux pour démonstration
+ψ001: ⊙(Δt+1 @6,5 ⟶ MOV(Arthur, @6,5))
+ψ002: ⊙(Δt+2 @14,15 ⟶ MOV(Morgana, @14,15))
+
+# Phase 8: Triggers d'observation
+⟨ψ001 | OBSERVE(DragonRouge) ⟩ → †ψ001
+
+# Phase 9: Validation du setup
+LOG("Bataille Temporelle - Setup terminé")
+LOG("Héros créés: Arthur, Morgana")
+LOG("Créatures placées: Dragon Rouge, Guerriers Fantômes")
+LOG("Artefacts temporels: 3 objets placés")
+LOG("États ψ actifs: 2 superpositions") 
