@@ -1,0 +1,464 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------< com.heroesoftimepoc:temporal-engine >-----------------
+[INFO] Building temporal-engine 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot-maven-plugin:2.7.18:run (default-cli) > test-compile @ temporal-engine >>>
+[INFO] 
+[INFO] --- maven-resources-plugin:3.2.0:resources (default-resources) @ temporal-engine ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Using 'UTF-8' encoding to copy filtered properties files.
+[INFO] Copying 1 resource
+[INFO] Copying 35 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ temporal-engine ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:3.2.0:testResources (default-testResources) @ temporal-engine ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Using 'UTF-8' encoding to copy filtered properties files.
+[INFO] Copying 3 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ temporal-engine ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 13 source files to /Users/admin/fullstack-project/backend/target/test-classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[4,53] package com.heroesoftimepoc.temporalengine.model.Game does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[5,50] package com.heroesoftimepoc.temporalengine.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[6,50] package com.heroesoftimepoc.temporalengine.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[7,53] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[8,53] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[9,53] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[26,13] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: class com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[29,13] cannot find symbol
+  symbol:   class QuantumInterferenceService
+  location: class com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[32,13] cannot find symbol
+  symbol:   class GameRepository
+  location: class com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[35,13] cannot find symbol
+  symbol:   class HeroRepository
+  location: class com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[38,13] cannot find symbol
+  symbol:   class PsiStateRepository
+  location: class com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[40,13] cannot find symbol
+  symbol:   class Game
+  location: class com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[41,13] cannot find symbol
+  symbol:   class Hero
+  location: class com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[42,13] cannot find symbol
+  symbol:   class Hero
+  location: class com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[3,1] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ComplexScenarioTest.java:[3,50] package com.heroesoftimepoc.temporalengine.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ComplexScenarioTest.java:[4,48] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ComplexScenarioTest.java:[5,48] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ComplexScenarioTest.java:[6,53] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ComplexScenarioTest.java:[7,53] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ComplexScenarioTest.java:[46,13] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: class com.heroesoftimepoc.temporalengine.ComplexScenarioTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ComplexScenarioTest.java:[49,13] cannot find symbol
+  symbol:   class GameRepository
+  location: class com.heroesoftimepoc.temporalengine.ComplexScenarioTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ComplexScenarioTest.java:[52,13] cannot find symbol
+  symbol:   class HeroRepository
+  location: class com.heroesoftimepoc.temporalengine.ComplexScenarioTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ComplexScenarioTest.java:[54,13] cannot find symbol
+  symbol:   class Game
+  location: class com.heroesoftimepoc.temporalengine.ComplexScenarioTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineIntegrationTest.java:[5,50] package com.heroesoftimepoc.temporalengine.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineIntegrationTest.java:[24,13] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: class com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineIntegrationTest.java:[27,13] cannot find symbol
+  symbol:   class GameRepository
+  location: class com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineIntegrationTest.java:[30,13] cannot find symbol
+  symbol:   class HeroRepository
+  location: class com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineIntegrationTest.java:[33,13] cannot find symbol
+  symbol:   class PsiStateRepository
+  location: class com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineIntegrationTest.java:[36,13] cannot find symbol
+  symbol:   class GameTileRepository
+  location: class com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineIntegrationTest.java:[38,13] cannot find symbol
+  symbol:   class Game
+  location: class com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineIntegrationTest.java:[3,1] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineIntegrationTest.java:[4,1] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[5,50] package com.heroesoftimepoc.temporalengine.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[37,13] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: class com.heroesoftimepoc.temporalengine.integration.BatailleTemporelleIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[40,13] cannot find symbol
+  symbol:   class GameRepository
+  location: class com.heroesoftimepoc.temporalengine.integration.BatailleTemporelleIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[43,13] cannot find symbol
+  symbol:   class HeroRepository
+  location: class com.heroesoftimepoc.temporalengine.integration.BatailleTemporelleIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[46,13] cannot find symbol
+  symbol:   class PsiStateRepository
+  location: class com.heroesoftimepoc.temporalengine.integration.BatailleTemporelleIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[49,13] cannot find symbol
+  symbol:   class GameTileRepository
+  location: class com.heroesoftimepoc.temporalengine.integration.BatailleTemporelleIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[52,13] cannot find symbol
+  symbol:   class Game
+  location: class com.heroesoftimepoc.temporalengine.integration.BatailleTemporelleIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[3,1] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[4,1] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ReadmeStoryTest.java:[28,13] cannot find symbol
+  symbol:   class GameRepository
+  location: class com.heroesoftimepoc.temporalengine.ReadmeStoryTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ReadmeStoryTest.java:[31,13] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: class com.heroesoftimepoc.temporalengine.ReadmeStoryTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ReadmeStoryTest.java:[33,13] cannot find symbol
+  symbol:   class Game
+  location: class com.heroesoftimepoc.temporalengine.ReadmeStoryTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ReadmeStoryTest.java:[3,1] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ReadmeStoryTest.java:[4,1] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ReadmeStoryTest.java:[5,1] package com.heroesoftimepoc.temporalengine.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[5,50] package com.heroesoftimepoc.temporalengine.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[47,13] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: class com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[50,13] cannot find symbol
+  symbol:   class GameRepository
+  location: class com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[53,13] cannot find symbol
+  symbol:   class HeroRepository
+  location: class com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[56,13] cannot find symbol
+  symbol:   class PsiStateRepository
+  location: class com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[59,13] cannot find symbol
+  symbol:   class GameTileRepository
+  location: class com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[66,13] cannot find symbol
+  symbol:   class Game
+  location: class com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[3,1] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[4,1] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[3,48] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[4,48] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[5,48] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[6,53] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[7,53] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[8,53] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[9,50] package com.heroesoftimepoc.temporalengine.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[29,13] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: class com.heroesoftimepoc.temporalengine.TemporalEngineServiceTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[32,13] cannot find symbol
+  symbol:   class GameRepository
+  location: class com.heroesoftimepoc.temporalengine.TemporalEngineServiceTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[35,13] cannot find symbol
+  symbol:   class HeroRepository
+  location: class com.heroesoftimepoc.temporalengine.TemporalEngineServiceTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[38,13] cannot find symbol
+  symbol:   class PsiStateRepository
+  location: class com.heroesoftimepoc.temporalengine.TemporalEngineServiceTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[40,13] cannot find symbol
+  symbol:   class Game
+  location: class com.heroesoftimepoc.temporalengine.TemporalEngineServiceTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[6,50] package com.heroesoftimepoc.temporalengine.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[40,13] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: class com.heroesoftimepoc.temporalengine.integration.QuantumInterferenceIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[43,13] cannot find symbol
+  symbol:   class GameRepository
+  location: class com.heroesoftimepoc.temporalengine.integration.QuantumInterferenceIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[46,13] cannot find symbol
+  symbol:   class HeroRepository
+  location: class com.heroesoftimepoc.temporalengine.integration.QuantumInterferenceIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[49,13] cannot find symbol
+  symbol:   class PsiStateRepository
+  location: class com.heroesoftimepoc.temporalengine.integration.QuantumInterferenceIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[52,13] cannot find symbol
+  symbol:   class GameTileRepository
+  location: class com.heroesoftimepoc.temporalengine.integration.QuantumInterferenceIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[55,13] cannot find symbol
+  symbol:   class Game
+  location: class com.heroesoftimepoc.temporalengine.integration.QuantumInterferenceIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[424,13] cannot find symbol
+  symbol:   class PsiState
+  location: class com.heroesoftimepoc.temporalengine.integration.QuantumInterferenceIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[4,1] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[5,1] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[3,48] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[4,48] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[5,48] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[6,53] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[7,53] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[8,53] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[9,50] package com.heroesoftimepoc.temporalengine.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[37,13] cannot find symbol
+  symbol:   class TemporalEngineService
+  location: class com.heroesoftimepoc.temporalengine.TemporalStressTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[40,13] cannot find symbol
+  symbol:   class GameRepository
+  location: class com.heroesoftimepoc.temporalengine.TemporalStressTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[43,13] cannot find symbol
+  symbol:   class HeroRepository
+  location: class com.heroesoftimepoc.temporalengine.TemporalStressTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[46,13] cannot find symbol
+  symbol:   class PsiStateRepository
+  location: class com.heroesoftimepoc.temporalengine.TemporalStressTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[48,13] cannot find symbol
+  symbol:   class Game
+  location: class com.heroesoftimepoc.temporalengine.TemporalStressTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[49,13] cannot find symbol
+  symbol:   class Hero
+  location: class com.heroesoftimepoc.temporalengine.TemporalStressTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[50,13] cannot find symbol
+  symbol:   class Hero
+  location: class com.heroesoftimepoc.temporalengine.TemporalStressTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[51,13] cannot find symbol
+  symbol:   class Hero
+  location: class com.heroesoftimepoc.temporalengine.TemporalStressTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[52,13] cannot find symbol
+  symbol:   class Hero
+  location: class com.heroesoftimepoc.temporalengine.TemporalStressTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/PsiStateTest.java:[3,48] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/PsiStateTest.java:[4,48] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/PsiStateTest.java:[5,53] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/PsiStateTest.java:[6,53] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/PsiStateTest.java:[25,13] cannot find symbol
+  symbol:   class PsiStateRepository
+  location: class com.heroesoftimepoc.temporalengine.PsiStateTest
+[INFO] 100 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.652 s
+[INFO] Finished at: 2025-07-22T10:59:23+02:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.10.1:testCompile (default-testCompile) on project temporal-engine: Compilation failure: Compilation failure: 
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[4,53] package com.heroesoftimepoc.temporalengine.model.Game does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[5,50] package com.heroesoftimepoc.temporalengine.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[6,50] package com.heroesoftimepoc.temporalengine.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[7,53] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[8,53] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[9,53] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[26,13] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[29,13] cannot find symbol
+[ERROR]   symbol:   class QuantumInterferenceService
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[32,13] cannot find symbol
+[ERROR]   symbol:   class GameRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[35,13] cannot find symbol
+[ERROR]   symbol:   class HeroRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[38,13] cannot find symbol
+[ERROR]   symbol:   class PsiStateRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[40,13] cannot find symbol
+[ERROR]   symbol:   class Game
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[41,13] cannot find symbol
+[ERROR]   symbol:   class Hero
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[42,13] cannot find symbol
+[ERROR]   symbol:   class Hero
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.EclatMondesDissolusTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[3,1] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ComplexScenarioTest.java:[3,50] package com.heroesoftimepoc.temporalengine.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ComplexScenarioTest.java:[4,48] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ComplexScenarioTest.java:[5,48] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ComplexScenarioTest.java:[6,53] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ComplexScenarioTest.java:[7,53] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ComplexScenarioTest.java:[46,13] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.ComplexScenarioTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ComplexScenarioTest.java:[49,13] cannot find symbol
+[ERROR]   symbol:   class GameRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.ComplexScenarioTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ComplexScenarioTest.java:[52,13] cannot find symbol
+[ERROR]   symbol:   class HeroRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.ComplexScenarioTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ComplexScenarioTest.java:[54,13] cannot find symbol
+[ERROR]   symbol:   class Game
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.ComplexScenarioTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineIntegrationTest.java:[5,50] package com.heroesoftimepoc.temporalengine.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineIntegrationTest.java:[24,13] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineIntegrationTest.java:[27,13] cannot find symbol
+[ERROR]   symbol:   class GameRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineIntegrationTest.java:[30,13] cannot find symbol
+[ERROR]   symbol:   class HeroRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineIntegrationTest.java:[33,13] cannot find symbol
+[ERROR]   symbol:   class PsiStateRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineIntegrationTest.java:[36,13] cannot find symbol
+[ERROR]   symbol:   class GameTileRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineIntegrationTest.java:[38,13] cannot find symbol
+[ERROR]   symbol:   class Game
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.TemporalEngineIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineIntegrationTest.java:[3,1] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineIntegrationTest.java:[4,1] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[5,50] package com.heroesoftimepoc.temporalengine.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[37,13] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.integration.BatailleTemporelleIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[40,13] cannot find symbol
+[ERROR]   symbol:   class GameRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.integration.BatailleTemporelleIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[43,13] cannot find symbol
+[ERROR]   symbol:   class HeroRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.integration.BatailleTemporelleIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[46,13] cannot find symbol
+[ERROR]   symbol:   class PsiStateRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.integration.BatailleTemporelleIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[49,13] cannot find symbol
+[ERROR]   symbol:   class GameTileRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.integration.BatailleTemporelleIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[52,13] cannot find symbol
+[ERROR]   symbol:   class Game
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.integration.BatailleTemporelleIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[3,1] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[4,1] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ReadmeStoryTest.java:[28,13] cannot find symbol
+[ERROR]   symbol:   class GameRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.ReadmeStoryTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ReadmeStoryTest.java:[31,13] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.ReadmeStoryTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ReadmeStoryTest.java:[33,13] cannot find symbol
+[ERROR]   symbol:   class Game
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.ReadmeStoryTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ReadmeStoryTest.java:[3,1] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ReadmeStoryTest.java:[4,1] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/ReadmeStoryTest.java:[5,1] package com.heroesoftimepoc.temporalengine.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[5,50] package com.heroesoftimepoc.temporalengine.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[47,13] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[50,13] cannot find symbol
+[ERROR]   symbol:   class GameRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[53,13] cannot find symbol
+[ERROR]   symbol:   class HeroRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[56,13] cannot find symbol
+[ERROR]   symbol:   class PsiStateRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[59,13] cannot find symbol
+[ERROR]   symbol:   class GameTileRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[66,13] cannot find symbol
+[ERROR]   symbol:   class Game
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.integration.QuantumArtifactsIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[3,1] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[4,1] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[3,48] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[4,48] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[5,48] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[6,53] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[7,53] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[8,53] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[9,50] package com.heroesoftimepoc.temporalengine.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[29,13] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.TemporalEngineServiceTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[32,13] cannot find symbol
+[ERROR]   symbol:   class GameRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.TemporalEngineServiceTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[35,13] cannot find symbol
+[ERROR]   symbol:   class HeroRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.TemporalEngineServiceTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[38,13] cannot find symbol
+[ERROR]   symbol:   class PsiStateRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.TemporalEngineServiceTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalEngineServiceTest.java:[40,13] cannot find symbol
+[ERROR]   symbol:   class Game
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.TemporalEngineServiceTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[6,50] package com.heroesoftimepoc.temporalengine.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[40,13] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.integration.QuantumInterferenceIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[43,13] cannot find symbol
+[ERROR]   symbol:   class GameRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.integration.QuantumInterferenceIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[46,13] cannot find symbol
+[ERROR]   symbol:   class HeroRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.integration.QuantumInterferenceIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[49,13] cannot find symbol
+[ERROR]   symbol:   class PsiStateRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.integration.QuantumInterferenceIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[52,13] cannot find symbol
+[ERROR]   symbol:   class GameTileRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.integration.QuantumInterferenceIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[55,13] cannot find symbol
+[ERROR]   symbol:   class Game
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.integration.QuantumInterferenceIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[424,13] cannot find symbol
+[ERROR]   symbol:   class PsiState
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.integration.QuantumInterferenceIntegrationTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[4,1] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumInterferenceIntegrationTest.java:[5,1] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[3,48] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[4,48] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[5,48] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[6,53] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[7,53] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[8,53] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[9,50] package com.heroesoftimepoc.temporalengine.service does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[37,13] cannot find symbol
+[ERROR]   symbol:   class TemporalEngineService
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.TemporalStressTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[40,13] cannot find symbol
+[ERROR]   symbol:   class GameRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.TemporalStressTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[43,13] cannot find symbol
+[ERROR]   symbol:   class HeroRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.TemporalStressTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[46,13] cannot find symbol
+[ERROR]   symbol:   class PsiStateRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.TemporalStressTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[48,13] cannot find symbol
+[ERROR]   symbol:   class Game
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.TemporalStressTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[49,13] cannot find symbol
+[ERROR]   symbol:   class Hero
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.TemporalStressTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[50,13] cannot find symbol
+[ERROR]   symbol:   class Hero
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.TemporalStressTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[51,13] cannot find symbol
+[ERROR]   symbol:   class Hero
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.TemporalStressTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TemporalStressTest.java:[52,13] cannot find symbol
+[ERROR]   symbol:   class Hero
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.TemporalStressTest
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/PsiStateTest.java:[3,48] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/PsiStateTest.java:[4,48] package com.heroesoftimepoc.temporalengine.model does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/PsiStateTest.java:[5,53] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/PsiStateTest.java:[6,53] package com.heroesoftimepoc.temporalengine.repository does not exist
+[ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/PsiStateTest.java:[25,13] cannot find symbol
+[ERROR]   symbol:   class PsiStateRepository
+[ERROR]   location: class com.heroesoftimepoc.temporalengine.PsiStateTest
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
