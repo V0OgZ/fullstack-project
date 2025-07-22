@@ -77,6 +77,13 @@ console.log("Winner: TBD");`
       class: 'Sorceress',
       level: 7,
       stats: { attack: 4, defense: 6, power: 15, knowledge: 18 }
+    },
+    {
+      id: 'hero3',
+      name: 'Anna the Martopicker',
+      class: 'Temporal Specialist',
+      level: 10,
+      stats: { attack: 20, defense: 18, power: 25, knowledge: 22 }
     }
   ];
 

@@ -1,31 +1,4 @@
-[INFO] Scanning for projects...
-[INFO] 
-[INFO] ----------------< com.heroesoftimepoc:temporal-engine >-----------------
-[INFO] Building temporal-engine 0.0.1-SNAPSHOT
-[INFO] --------------------------------[ jar ]---------------------------------
-[INFO] 
-[INFO] >>> spring-boot-maven-plugin:2.7.18:run (default-cli) > test-compile @ temporal-engine >>>
-[INFO] 
-[INFO] --- maven-resources-plugin:3.2.0:resources (default-resources) @ temporal-engine ---
-[INFO] Using 'UTF-8' encoding to copy filtered resources.
-[INFO] Using 'UTF-8' encoding to copy filtered properties files.
-[INFO] Copying 1 resource
-[INFO] Copying 35 resources
-[INFO] 
-[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ temporal-engine ---
-[INFO] Nothing to compile - all classes are up to date
-[INFO] 
-[INFO] --- maven-resources-plugin:3.2.0:testResources (default-testResources) @ temporal-engine ---
-[INFO] Using 'UTF-8' encoding to copy filtered resources.
-[INFO] Using 'UTF-8' encoding to copy filtered properties files.
-[INFO] Copying 3 resources
-[INFO] 
-[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ temporal-engine ---
-[INFO] Changes detected - recompiling the module!
-[INFO] Compiling 22 source files to /Users/admin/fullstack-project/backend/target/test-classes
-[INFO] -------------------------------------------------------------
 [ERROR] COMPILATION ERROR : 
-[INFO] -------------------------------------------------------------
 [ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/UnitControllerTest.java:[3,30] package com.example.demo.model does not exist
 [ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/UnitControllerTest.java:[4,32] package com.example.demo.service does not exist
 [ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/UnitControllerTest.java:[27,13] cannot find symbol
@@ -146,14 +119,6 @@
 [ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/TreasureTheftTest.java:[33,13] cannot find symbol
   symbol:   class GodViewService
   location: class com.heroesoftimepoc.temporalengine.TreasureTheftTest
-[INFO] 46 errors 
-[INFO] -------------------------------------------------------------
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  1.523 s
-[INFO] Finished at: 2025-07-22T07:42:16+02:00
-[INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.10.1:testCompile (default-testCompile) on project temporal-engine: Compilation failure: Compilation failure: 
 [ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/UnitControllerTest.java:[3,30] package com.example.demo.model does not exist
 [ERROR] /Users/admin/fullstack-project/backend/src/test/java/com/example/demo/controller/UnitControllerTest.java:[4,32] package com.example.demo.service does not exist

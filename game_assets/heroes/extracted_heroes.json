@@ -119,6 +119,34 @@
         "equipment": ["cosmic_microphone", "universal_recall"],
         "abilities": ["punchline_cosmique", "rappel_universel"],
         "trigger_source": "Collapse de Pee & Kill"
+      },
+      {
+        "id": "anna_martopicker",
+        "name": "Anna the Martopicker",
+        "title": "Glaneuse d'Artefacts Oubliés",
+        "class": "TEMPORAL_SPECIALIST",
+        "source_file": "temporal_decay_system.json",
+        "description": "Architecte du Temps qui punit les joueurs en retard avec son système de décroissance temporelle",
+        "philosophy": "If you lag behind time, time lags behind you",
+        "stats": {
+          "health": 160,
+          "temporal_energy": 350,
+          "attack": 20,
+          "defense": 18,
+          "temporal_decay_mastery": 0.95,
+          "artifact_recovery_skill": 0.9,
+          "causal_cleaning_power": 0.85
+        },
+        "equipment": ["pendule_echo", "lunettes_oraculon", "spanner_rewind"],
+        "abilities": ["temporal_decay", "artifact_recovery", "causal_cleaning", "time_lag_detection"],
+        "specialties": ["TEMPORAL_DECAY", "ARTIFACT_RECOVERY", "CAUSAL_CLEANING"],
+        "grofi_alignment": "CHAOS_ORDER_BALANCE",
+        "decay_parameters": {
+          "threshold_days": 5,
+          "decay_rate_per_day": 0.15,
+          "max_decay_days": 10,
+          "superposition_multiplier": 2.0
+        }
       }
     ]
   },
@@ -132,6 +160,7 @@
       "Organiser dans game_assets",
       "Créer les fichiers individuels"
     ],
-    "latest_addition": "Pee & Kill et Ki & Pi - Héros de la transformation comique (22 juillet 2025)"
+    "latest_addition": "Anna the Martopicker - Architecte du Temps et Spécialiste Temporel (22 juillet 2025)",
+    "previous_addition": "Pee & Kill et Ki & Pi - Héros de la transformation comique (22 juillet 2025)"
   }
 }
