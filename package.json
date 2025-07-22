@@ -18,7 +18,8 @@
   "license": "MIT",
   "devDependencies": {
     "@types/lodash": "^4.17.20",
-    "@types/seedrandom": "^3.0.8"
+    "@types/seedrandom": "^3.0.8",
+    "axios": "^1.10.0"
   },
   "dependencies": {
     "colors": "^1.4.0",
