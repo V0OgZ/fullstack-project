@@ -386,7 +386,7 @@ But Arthur sees the enemy army approaching. In a few turns, they'll be overwhelm
 </details>
 
 <details>
-<summary id="anna-the-martopicker">🎭 <strong>Anna the Martopicker - The Time Architect</strong></summary>
+<summary id="anna-the-martopicker">🎭 <strong>Anna the Martopicker - The Time Architect</strong> | 🔨 <strong>Анна Молоток</strong></summary>
 
 **🎨 Epic Portrait:**
 ![ANNA THE MARTOPICKER](assets/img/anna.png)
@@ -943,7 +943,7 @@ When the Awakened Eye of Wigner and Anthor's Maze are used together:
 *Tireless archivist and guardian of knowledge*
 > *"Jean creates, Memento archives" - Perfect symbiosis*
 
-#### **🎭 Anna the Martopicker - The Time Architect**
+#### **🎭 Anna the Martopicker (Анна Молоток) - The Time Architect**
 *Designer of the temporal decay system*
 > *"Buildings crumble with time, and if you stay behind, time catches up to you."*
 
@@ -1027,7 +1027,7 @@ When the Awakened Eye of Wigner and Anthor's Maze are used together:
 - **🔫 [Vince Vega](#vince-vega)** - The Shadow Strategist
 - **🛡️ [Walter Sobchak](#walter-sobchak)** - The Rules Guardian
 - **🎳 [The Dude](#the-dude)** - The Zen Master
-- **🎭 [Anna the Martopicker](#anna-the-martopicker)** - The Time Architect
+- **🎭 [Anna the Martopicker](#anna-the-martopicker)** - The Time Architect | Анна Молоток
 - **🎬 [Anthor the Fordian](#anthor-the-fordian)** - The Narrative Architect
 
 ### 🌟 **Direct URL Examples**
