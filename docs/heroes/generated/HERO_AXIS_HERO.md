@@ -25,7 +25,7 @@ Maître absolu du voyage temporel, Axis peut se déplacer librement dans le pass
 
 ### 🔧 **Informations Techniques**
 - **Fichier source** : `Axis.json`
-- **Généré le** : 2025-07-21 18:00:39
+- **Généré le** : 2025-07-22 08:50:54
 - **Source JSON** : `Axis.json`
 
 ### 🎮 **Utilisation en Jeu**

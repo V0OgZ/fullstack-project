@@ -1,5 +1,18 @@
 # Page snapshot
 
 ```yaml
-- text: "Error: Failed to fetch ⚡ DÉMO DYNAMIQUE HEROES OF TIME ⚡ ❌ 📊 Chargement des scénarios disponibles ⚡ Récupération de toutes les missions... - Échec !"
+- heading "This site can’t be reached" [level=1]
+- paragraph:
+  - strong: localhost
+  - text: refused to connect.
+- paragraph: "Try:"
+- list:
+  - listitem: Checking the connection
+  - listitem:
+    - link "Checking the proxy and the firewall":
+      - /url: "#buttons"
+- text: ERR_CONNECTION_REFUSED
+- button "Reload"
+- button "Details"
+- text: ⚡ DÉMO DYNAMIQUE HEROES OF TIME ⚡ ❌ 🏠 Navigation vers Heroes of Time 🌐 Chargement de l'interface principale... - Erreur !
 ```

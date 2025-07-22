@@ -28,7 +28,7 @@ MODIFY_ENERGY(hero, 100)
 ### 🔧 **Informations Techniques**
 - **Créé par** : HealBot
 - **Date de création** : 2024-01-19
-- **Généré le** : 2025-07-21 18:00:39
+- **Généré le** : 2025-07-22 08:50:54
 - **Source JSON** : `custom-artifacts.json`
 
 ### 🎮 **Utilisation en Jeu**

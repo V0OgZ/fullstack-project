@@ -28,7 +28,7 @@ MODIFY_MOVEMENT(hero, +2)
 ### 🔧 **Informations Techniques**
 - **Créé par** : Coureur
 - **Date de création** : 2025-07-21
-- **Généré le** : 2025-07-21 18:00:39
+- **Généré le** : 2025-07-22 08:50:54
 - **Source JSON** : `custom-artifacts.json`
 
 ### 🎮 **Utilisation en Jeu**

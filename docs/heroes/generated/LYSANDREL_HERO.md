@@ -25,7 +25,7 @@
 
 ### 🔧 **Informations Techniques**
 - **Fichier source** : `docs/items/ECLAT_MONDES_DISSOLUS_HEROES.json`
-- **Généré le** : 2025-07-21 18:00:39
+- **Généré le** : 2025-07-22 08:50:54
 - **Source JSON** : `INDEX.json`
 
 ### 🎮 **Utilisation en Jeu**

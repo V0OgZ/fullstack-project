@@ -1,24 +1,135 @@
-::1 - - [22/Jul/2025 08:04:47] code 404, message File not found
-::1 - - [22/Jul/2025 08:04:47] "GET /game_assets/MASTER_ASSETS_INDEX.json HTTP/1.1" 404 -
-::1 - - [22/Jul/2025 08:04:48] code 501, message Unsupported method ('OPTIONS')
-::1 - - [22/Jul/2025 08:04:48] "OPTIONS /visual-script-editor.html HTTP/1.1" 501 -
-::1 - - [22/Jul/2025 08:04:48] code 501, message Unsupported method ('OPTIONS')
-::1 - - [22/Jul/2025 08:04:48] "OPTIONS / HTTP/1.1" 501 -
-::1 - - [22/Jul/2025 08:04:48] "GET /visual-script-editor.html HTTP/1.1" 200 -
-::1 - - [22/Jul/2025 08:04:48] "GET / HTTP/1.1" 200 -
-::1 - - [22/Jul/2025 08:05:26] code 404, message File not found
-::1 - - [22/Jul/2025 08:05:26] "GET /game_assets/MASTER_ASSETS_INDEX.json HTTP/1.1" 404 -
-::1 - - [22/Jul/2025 08:05:30] "GET / HTTP/1.1" 200 -
-::1 - - [22/Jul/2025 08:05:35] "GET /public/game_assets/MASTER_ASSETS_INDEX.json HTTP/1.1" 200 -
-::1 - - [22/Jul/2025 08:05:49] code 501, message Unsupported method ('OPTIONS')
-::1 - - [22/Jul/2025 08:05:49] "OPTIONS /visual-script-editor.html HTTP/1.1" 501 -
-::1 - - [22/Jul/2025 08:05:49] code 501, message Unsupported method ('OPTIONS')
-::1 - - [22/Jul/2025 08:05:49] "OPTIONS / HTTP/1.1" 501 -
-::1 - - [22/Jul/2025 08:05:49] "GET /visual-script-editor.html HTTP/1.1" 200 -
-::1 - - [22/Jul/2025 08:05:49] "GET / HTTP/1.1" 200 -
-::1 - - [22/Jul/2025 08:06:50] code 501, message Unsupported method ('OPTIONS')
-::1 - - [22/Jul/2025 08:06:50] "OPTIONS /visual-script-editor.html HTTP/1.1" 501 -
-::1 - - [22/Jul/2025 08:06:50] code 501, message Unsupported method ('OPTIONS')
-::1 - - [22/Jul/2025 08:06:50] "OPTIONS / HTTP/1.1" 501 -
-::1 - - [22/Jul/2025 08:06:50] "GET /visual-script-editor.html HTTP/1.1" 200 -
-::1 - - [22/Jul/2025 08:06:50] "GET / HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:41:10] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 08:41:10] "OPTIONS / HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 08:41:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:41:10] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 08:41:10] "GET / HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:41:10] "OPTIONS /visual-script-editor.html HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 08:41:10] "GET / HTTP/1.1" 304 -
+::1 - - [22/Jul/2025 08:41:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:42:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:42:10] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 08:42:10] "OPTIONS / HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 08:42:10] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 08:42:10] "OPTIONS /visual-script-editor.html HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 08:42:10] "GET / HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:42:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:43:10] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 08:43:10] "OPTIONS / HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 08:43:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:43:10] "GET / HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:43:10] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 08:43:10] "OPTIONS /visual-script-editor.html HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 08:43:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:44:10] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 08:44:10] "OPTIONS /visual-script-editor.html HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 08:44:10] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 08:44:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:44:10] "OPTIONS / HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 08:44:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:44:10] "GET / HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:45:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:45:10] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 08:45:10] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 08:45:10] "OPTIONS / HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 08:45:10] "OPTIONS /visual-script-editor.html HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 08:45:10] "GET / HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:45:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:46:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:46:10] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 08:46:10] "OPTIONS /visual-script-editor.html HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 08:46:10] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 08:46:10] "OPTIONS / HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 08:46:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:46:10] "GET / HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:47:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:47:10] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 08:47:10] "OPTIONS /visual-script-editor.html HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 08:47:10] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 08:47:10] "OPTIONS / HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 08:47:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:47:10] "GET / HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:48:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:48:10] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 08:48:10] "OPTIONS /visual-script-editor.html HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 08:48:10] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 08:48:10] "OPTIONS / HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 08:48:10] "GET / HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:48:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:49:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:49:10] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 08:49:10] "OPTIONS / HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 08:49:10] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 08:49:10] "OPTIONS /visual-script-editor.html HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 08:49:10] "GET / HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:49:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:50:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:50:10] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 08:50:10] "OPTIONS /visual-script-editor.html HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 08:50:10] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 08:50:10] "OPTIONS / HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 08:50:10] "GET / HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:50:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:51:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:51:10] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 08:51:10] "OPTIONS /visual-script-editor.html HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 08:51:10] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 08:51:10] "OPTIONS / HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 08:51:10] "GET / HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:51:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:52:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:52:10] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 08:52:10] "OPTIONS /visual-script-editor.html HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 08:52:10] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 08:52:10] "OPTIONS / HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 08:52:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 08:52:10] "GET / HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 09:00:14] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 09:00:14] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 09:00:14] "OPTIONS / HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 09:00:14] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 09:00:14] "GET / HTTP/1.1" 304 -
+::1 - - [22/Jul/2025 09:00:14] "OPTIONS /visual-script-editor.html HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 09:00:14] "GET / HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 09:00:14] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 09:01:14] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 09:01:14] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 09:01:14] "OPTIONS /visual-script-editor.html HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 09:01:14] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 09:01:14] "OPTIONS / HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 09:01:14] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 09:01:14] "GET / HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 09:02:14] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 09:02:14] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 09:02:14] "OPTIONS / HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 09:02:14] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 09:02:14] "OPTIONS /visual-script-editor.html HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 09:02:14] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 09:02:14] "GET / HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 09:03:14] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 09:03:14] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 09:03:14] "OPTIONS /visual-script-editor.html HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 09:03:14] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 09:03:14] "OPTIONS / HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 09:03:14] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 09:03:14] "GET / HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 09:04:14] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 09:04:14] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 09:04:14] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 09:04:14] "OPTIONS /visual-script-editor.html HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 09:04:14] "OPTIONS / HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 09:04:14] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 09:04:14] "GET / HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 09:05:14] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 09:05:14] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 09:05:14] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 09:05:14] "OPTIONS / HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 09:05:14] "OPTIONS /visual-script-editor.html HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 09:05:14] "GET / HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 09:05:14] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 09:06:14] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 09:06:14] code 501, message Unsupported method ('OPTIONS')
+::1 - - [22/Jul/2025 09:06:14] "OPTIONS /visual-script-editor.html HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 09:06:14] "OPTIONS / HTTP/1.1" 501 -
+::1 - - [22/Jul/2025 09:06:14] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 09:06:14] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [22/Jul/2025 09:06:14] "GET / HTTP/1.1" 200 -
