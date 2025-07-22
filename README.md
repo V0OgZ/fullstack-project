@@ -388,11 +388,27 @@ Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront sub
 DECAY_STRUCTURE(building, timeline.age) + PUNISH_LAG(hero, time.difference)
 ```
 
-**🎭 Citation Légendaire :**
+**🎭 Citations Légendaires :**
 > *"Les bâtiments s'effritent avec le temps, et si vous restez en retard, le temps vous rattrape."*
+
+> *"If you lag behind time, time lags behind you."*
+
+> *"Ah, tu as appris à regarder vers l'avenir. Sage décision."*
+
+> *"Le temps est impitoyable. Tes constructions s'effritent."*
+
+> *"Tu t'attardes trop dans le passé. Le présent t'attend."*
+
+> *"Parfois il faut regarder dans le passé pour construire l'avenir. Les deux systèmes coexistent en harmonie."*
 
 **🏗️ Artefact Spécial :**
 - **Temporal Decay System** - Système complet de décroissance temporelle
+
+**🌟 Histoire Épique :**
+Anna the Martopicker est l'architecte visionnaire qui a conçu le système de décroissance temporelle pour maintenir l'équilibre dans Heroes of Time. Initialement perçue comme une menace, elle s'est révélée être l'alliée finale qui va résoudre le problème du GameInitializationService. Ses deux visions du decay (structurel et personnel) ont été fusionnées en un système harmonieux par The Dude.
+
+**🎯 Révélation d'Axis 111 :**
+> *"Anna n'arrive pas pour nous punir ! Elle arrive pour nous AIDER à finaliser le projet !"*
 
 </details>
 
@@ -937,6 +953,16 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 #### **🎭 Anna the Martopicker - L'Architecte du Temps**
 *Conceptrice du système de décroissance temporelle*
 > *"Les bâtiments s'effritent avec le temps, et si vous restez en retard, le temps vous rattrape."*
+
+> *"If you lag behind time, time lags behind you."*
+
+> *"Ah, tu as appris à regarder vers l'avenir. Sage décision."*
+
+> *"Le temps est impitoyable. Tes constructions s'effritent."*
+
+> *"Tu t'attardes trop dans le passé. Le présent t'attend."*
+
+> *"Parfois il faut regarder dans le passé pour construire l'avenir. Les deux systèmes coexistent en harmonie."*
 
 #### **🛡️ Walter Sobchak - Le Gardien des Règles**
 *Protecteur de l'ordre temporel et des lois causales*
