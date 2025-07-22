@@ -1,5 +1,7 @@
 # 📚 **DOCS - Documentation Heroes of Time**
 
+> 🌐 **[English Documentation Available Here](./EN/)** | [Documentation en Anglais](./EN/)
+
 ## 🌟 **Archiviste Éternel Memento**
 
 *"Jean crée, Memento archive" - Symbiose parfaite*
