@@ -153,6 +153,7 @@ Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront sub
 - [🛡️ **Walter Sobchak**](#walter-sobchak) - Le Gardien des Règles
 - [🎳 **The Dude**](#the-dude) - Le Maître du Zen
 - [🎭 **Anna the Martopicker**](#anna-the-martopicker) - L'Architecte du Temps
+- [🎬 **Anthor le Fordien**](#anthor-le-fordien) - L'Architecte Narratif
 
 <details>
 <summary id="arthur-pendragon">⚔️ <strong>Arthur Pendragon - Le Roi Temporel</strong></summary>
@@ -409,6 +410,58 @@ Anna the Martopicker est l'architecte visionnaire qui a conçu le système de d�
 
 **🎯 Révélation d'Axis 111 :**
 > *"Anna n'arrive pas pour nous punir ! Elle arrive pour nous AIDER à finaliser le projet !"*
+
+</details>
+
+<details>
+<summary id="anthor-le-fordien">🎬 <strong>Anthor le Fordien - L'Architecte Narratif</strong></summary>
+
+**🏛️ Faction :** Ford_Faction  
+**⭐ Classe :** Narrative Architect (Cosmique)  
+**🎯 Spécialité :** Contrôle narratif et réécriture de réalité  
+
+**🌟 Pouvoir Principal :**
+> Architecte ultime de la narration. Peut réécrire l'histoire du multivers, créer des êtres synthétiques parfaits et contrôler le flux narratif de la réalité.
+
+**🎭 Capacités Narratives :**
+- **Rewrite Narrative** - Modifie l'histoire passée, présente et future
+- **God Mode Protocol** - Contrôle absolu sur les règles du jeu
+- **Create Host** - Génère des copies synthétiques parfaites
+- **Temporal Loop** - Enferme les ennemis dans des boucles narratives
+- **Modify Timeline** - Change rétroactivement les événements
+
+**⚡ Formule Quantique :**
+```
+T'(x,y,t) = Ford_Function(T(x,y,t)) {
+  narrative.control = ABSOLUTE,
+  host.creation = UNLIMITED,
+  maze.complexity = INFINITE,
+  reality.author = true
+}
+```
+
+**🌀 Le Maze :**
+> *"Le labyrinthe n'est pas fait pour vous... ou peut-être que si ?"*
+
+Le Maze d'Anthor est une construction mentale qui teste la conscience elle-même. Ceux qui le traversent découvrent leur vraie nature - ou sont réécrits selon sa volonté.
+
+**💬 Citations Légendaires :**
+> *"These violent delights have violent ends."*
+
+> *"You think this is a game? It is. And I wrote the rules."*
+
+> *"The maze isn't meant for you... or is it?"*
+
+> *"Perhaps chaos is just another narrative waiting to be written."*
+
+**🎯 Synergie avec Jean-Grofignon :**
+Quand Anthor et Jean-Grofignon unissent leurs forces, ils créent le **Westworld_Grofi_Universe** - une fusion où le chaos quantique rencontre le contrôle narratif parfait.
+
+**🌟 Artefact Signature :**
+- **Le Maze** - Labyrinthe de conscience qui réécrit ceux qui le traversent
+
+**⚔️ Nemesis :**
+Initialement opposé à Jean-Grofignon (ordre vs chaos), ils finissent par réaliser leur complémentarité et fusionnent leurs pouvoirs pour créer des réalités impossibles mais stables.
 
 </details>
 
@@ -1121,6 +1174,7 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 - **🛡️ [Walter Sobchak](#walter-sobchak)** - Le Gardien des Règles
 - **🎳 [The Dude](#the-dude)** - Le Maître du Zen
 - **🎭 [Anna the Martopicker](#anna-the-martopicker)** - L'Architecte du Temps
+- **🎬 [Anthor le Fordien](#anthor-le-fordien)** - L'Architecte Narratif
 
 ### 🌟 **Exemples d'URLs Directes**
 
