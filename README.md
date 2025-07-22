@@ -297,6 +297,64 @@ Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront sub
 
 </details>
 
+<details>
+<summary>🛡️ <strong>Walter Sobchak - Le Gardien des Règles</strong></summary>
+
+**🏛️ Faction :** Compagnons de Jean-Grofignon  
+**⭐ Classe :** Rule Keeper  
+**🎯 Spécialité :** Respect des règles et de l'ordre  
+
+**🌟 Pouvoir Principal :**
+> Gardien absolu des règles temporelles. Peut forcer le respect de la causalité et punir les violations des lois de l'univers.
+
+**🛡️ Capacités de Contrôle :**
+- **Enforcement Protocol** - Force le respect des règles
+- **Causal Law** - Applique les lois de causalité
+- **Rule Book of Reality** - Modifie les règles de l'univers
+- **Temporal Justice** - Punit les violations temporelles
+
+**⚖️ Formule Quantique :**
+```
+Π(rule.violation) ⇒ †[ENFORCE_LAW {causal.override = false}]
+```
+
+**🎯 Citation Légendaire :**
+> *"This is not 'Nam. This is temporal warfare. There are rules!"*
+
+**📚 Artefact Spécial :**
+- **Rule Book of Reality** - Contient toutes les lois de l'univers
+
+</details>
+
+<details>
+<summary>🎳 <strong>The Dude - Le Maître du Zen</strong></summary>
+
+**🏛️ Faction :** Compagnons de Jean-Grofignon  
+**⭐ Classe :** Zen Master  
+**🎯 Spécialité :** Calme et équilibre temporel  
+
+**🌟 Pouvoir Principal :**
+> Maître du zen temporel. Peut calmer les conflits causaux et rétablir l'équilibre dans les timelines agitées.
+
+**🎳 Capacités Zen :**
+- **Zen Collapse** - Calme le stress causale
+- **White Russian Elixir** - Restaure l'équilibre temporel
+- **Bowling Ball of Destiny** - Projette l'harmonie
+- **Temporal Serenity** - Apaise les paradoxes
+
+**🧘 Formule Quantique :**
+```
+⊙[ZEN_MEDITATION {timeline.stress < 0.1}] ⟶ †[SERENITY_MODE]
+```
+
+**🎳 Citation Légendaire :**
+> *"Yeah, well, that's just, like, your opinion, man."*
+
+**🥛 Artefact Spécial :**
+- **White Russian Elixir** - Potion de sérénité temporelle
+
+</details>
+
 ---
 
 ## 🔮 **Artefacts de Pouvoir**
@@ -391,12 +449,51 @@ COLLAPSE(ALL_ψ) = Σ(Pi * |ψi⟩⟨ψi|) → single_reality
 CONSTRUCTIVE(ψ1, ψ2) + CONSTRUCTIVE(ψ2, ψ3) + TELEPORT_BY_PROBABILITY(hero, result)
 ```
 
-**🔮 Effets Quantiques :**
-- **Multi-Interférence :** Jusqu'à 3 ψ-states simultanés
-- **Téléportation Probabiliste :** Basée sur les résultats quantiques
-- **Interférences Constructives :** Amplification en cascade
+**💎 Effet d'Interférence :**
+- **Cible :** États ψ1, ψ2, ψ3
+- **Résultat :** Téléportation probabiliste
+- **Coût :** 60 énergie héros
+- **Usage :** Navigation quantique avancée
 
 </details>
+
+<details>
+<summary>🌀 <strong>Objet Paradoxal de Jean-Grofignon</strong> - Artefact Légendaire</summary>
+
+**🏛️ Type :** Artefact Paradoxal Légendaire  
+**⭐ Rareté :** Légendaire (Tier 7)  
+**🎯 Créateur :** Jean-Grofignon  
+**⚡ Énergie Temporelle :** +200  
+
+**🌟 Pouvoir Principal :**
+> L'objet paradoxal ultime qui défie toutes les lois de la causalité. Peut créer des paradoxes contrôlés et les résoudre à volonté.
+
+**🌀 Propriétés Paradoxales :**
+- **Paradoxe Contrôlé** - Crée des boucles causales sans danger
+- **Résolution Spontanée** - Résout automatiquement les paradoxes
+- **Immunité Causale** - Protège contre les effets de rétroaction
+- **Manipulation Temporelle** - Altère le flux du temps localement
+
+**⚡ Formule Quantique :**
+```
+PARADOX_CREATE(condition) + PARADOX_RESOLVE(probability=1.0) + COLLAPSE_OVERRIDE
+```
+
+**🎭 Capacités Paradoxales :**
+- **Boucle Causale** - Crée des événements qui causent leur propre existence
+- **Rétroaction Positive** - Amplifie les effets temporels
+- **Immunité Paradoxale** - Protège contre les paradoxes destructeurs
+- **Manipulation de Timeline** - Modifie l'histoire sans conséquences
+
+**🌟 Citation de Jean-Grofignon :**
+> *"J'ai pas hacké le jeu. J'ai juste compris où était le bouton pause cosmique."*
+
+**🌀 Artefact Spécial :**
+- **Télécommande Cosmique** - Contrôle total sur la réalité
+
+</details>
+
+---
 
 <details>
 <summary>🌀 <strong>Moteur de Paradoxe Temporel</strong> - Artefact Mythique</summary>
