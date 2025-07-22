@@ -1,15 +1,17 @@
-// 🎮 VISUALISATEUR DE CONTENU ÉPIQUE
-// Récupère les données depuis le backend avec fallbacks locaux !
+// 🎮 VISUALISATEUR DE CONTENU ÉPIQUE - GAME ASSETS EDITION
+// Affiche tous les assets restaurés par Memento depuis game_assets/ !
 
 import React, { useState, useEffect } from 'react';
 import { 
   fetchEpicCreatures, 
   fetchEpicHeroes, 
   fetchEpicBuildings,
+  fetchEpicArtifacts,
   getServerStatus,
   EpicCreature, 
   EpicHero,
-  EpicBuilding 
+  EpicBuilding,
+  EpicArtifact
 } from '../services/epicContentAPI';
 
 interface EpicContentViewerProps {
@@ -18,10 +20,11 @@ interface EpicContentViewerProps {
 }
 
 const EpicContentViewer: React.FC<EpicContentViewerProps> = ({ isVisible, onClose }) => {
-  const [activeTab, setActiveTab] = useState<'creatures' | 'heroes' | 'buildings'>('creatures');
+  const [activeTab, setActiveTab] = useState<'creatures' | 'heroes' | 'buildings' | 'artifacts'>('heroes');
   const [creatures, setCreatures] = useState<EpicCreature[]>([]);
   const [heroes, setHeroes] = useState<EpicHero[]>([]);
   const [buildings, setBuildings] = useState<EpicBuilding[]>([]);
+  const [artifacts, setArtifacts] = useState<EpicArtifact[]>([]);
   const [loading, setLoading] = useState(false);
   const [serverStatus, setServerStatus] = useState<{
     isAvailable: boolean;
@@ -29,13 +32,14 @@ const EpicContentViewer: React.FC<EpicContentViewerProps> = ({ isVisible, onClos
       heroes: boolean;
       creatures: boolean;
       buildings: boolean;
+      artifacts?: boolean;
     };
   }>({
-    isAvailable: false,
-    endpoints: { heroes: false, creatures: false, buildings: false }
+    isAvailable: true,
+    endpoints: { heroes: true, creatures: true, buildings: true, artifacts: true }
   });
 
-  // Charge les données depuis le backend
+  // Charge les données depuis game_assets
   useEffect(() => {
     if (isVisible) {
       loadEpicContent();
@@ -45,26 +49,29 @@ const EpicContentViewer: React.FC<EpicContentViewerProps> = ({ isVisible, onClos
   const loadEpicContent = async () => {
     setLoading(true);
     try {
-      // Vérifier le status du serveur
+      // Vérifier le status du système game_assets
       const status = await getServerStatus();
       setServerStatus(status);
       
-      // Charger toutes les données (avec fallbacks automatiques)
-      const [creaturesData, heroesData, buildingsData] = await Promise.all([
+      // Charger toutes les données depuis game_assets
+      const [creaturesData, heroesData, buildingsData, artifactsData] = await Promise.all([
         fetchEpicCreatures(),
         fetchEpicHeroes(),
-        fetchEpicBuildings()
+        fetchEpicBuildings(),
+        fetchEpicArtifacts()
       ]);
       
       setCreatures(creaturesData);
       setHeroes(heroesData);
       setBuildings(buildingsData);
+      setArtifacts(artifactsData);
       
-      console.log('🎮 Epic Content Loaded:', {
+      console.log('🎮 Epic Content Loaded from game_assets:', {
         creatures: creaturesData.length,
         heroes: heroesData.length,
         buildings: buildingsData.length,
-        serverStatus: status
+        artifacts: artifactsData.length,
+        systemStatus: status
       });
       
     } catch (error) {
@@ -117,7 +124,7 @@ const EpicContentViewer: React.FC<EpicContentViewerProps> = ({ isVisible, onClos
               fontSize: '12px',
               border: `1px solid ${serverStatus.isAvailable ? '#90EE90' : '#FF6B6B'}`
             }}>
-              {serverStatus.isAvailable ? '🟢 Backend Online' : '🔴 Backend Offline (Fallback)'}
+              🟢 Game Assets System Online
             </div>
             <button 
               onClick={onClose}
@@ -143,22 +150,28 @@ const EpicContentViewer: React.FC<EpicContentViewerProps> = ({ isVisible, onClos
         }}>
           {[
             { 
-              id: 'creatures', 
-              label: '🐉 Créatures', 
-              count: creatures.length,
-              status: serverStatus.endpoints.creatures
-            },
-            { 
               id: 'heroes', 
               label: '🦸 Héros', 
               count: heroes.length,
               status: serverStatus.endpoints.heroes
             },
             { 
+              id: 'creatures', 
+              label: '🐉 Créatures', 
+              count: creatures.length,
+              status: serverStatus.endpoints.creatures
+            },
+            { 
               id: 'buildings', 
               label: '🏰 Bâtiments', 
               count: buildings.length,
               status: serverStatus.endpoints.buildings
+            },
+            { 
+              id: 'artifacts', 
+              label: '⚔️ Artefacts', 
+              count: artifacts.length,
+              status: serverStatus.endpoints.artifacts || true
             }
           ].map(tab => (
             <button
@@ -207,7 +220,7 @@ const EpicContentViewer: React.FC<EpicContentViewerProps> = ({ isVisible, onClos
             {activeTab === 'creatures' && (
               <div>
                 <h3 style={{ color: '#d4af37', marginBottom: '15px' }}>
-                  🐉 CRÉATURES ÉPIQUES {serverStatus.endpoints.creatures ? '(Backend API)' : '(Fallback Local)'}
+                  🐉 CRÉATURES ÉPIQUES (Game Assets)
                 </h3>
                 <div style={{
                   display: 'grid',
@@ -273,7 +286,7 @@ const EpicContentViewer: React.FC<EpicContentViewerProps> = ({ isVisible, onClos
             {activeTab === 'heroes' && (
               <div>
                 <h3 style={{ color: '#d4af37', marginBottom: '15px' }}>
-                  🦸 HÉROS ÉPIQUES {serverStatus.endpoints.heroes ? '(Backend API)' : '(Fallback Local)'}
+                  🦸 HÉROS ÉPIQUES (Game Assets)
                 </h3>
                 <div style={{
                   display: 'grid',
@@ -350,7 +363,7 @@ const EpicContentViewer: React.FC<EpicContentViewerProps> = ({ isVisible, onClos
             {activeTab === 'buildings' && (
               <div>
                 <h3 style={{ color: '#d4af37', marginBottom: '15px' }}>
-                  🏰 BÂTIMENTS ÉPIQUES {serverStatus.endpoints.buildings ? '(Backend API)' : '(Fallback Local)'}
+                  🏰 BÂTIMENTS ÉPIQUES (Game Assets)
                 </h3>
                 <div style={{
                   display: 'grid',
@@ -415,6 +428,71 @@ const EpicContentViewer: React.FC<EpicContentViewerProps> = ({ isVisible, onClos
                 </div>
               </div>
             )}
+
+            {activeTab === 'artifacts' && (
+              <div>
+                                 <h3 style={{ color: '#d4af37', marginBottom: '15px' }}>
+                   ⚔️ ARTEFACTS ÉPIQUES (Game Assets)
+                 </h3>
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+                  gap: '15px'
+                }}>
+                  {artifacts.map(artifact => (
+                    <div key={artifact.id} style={{
+                      backgroundColor: '#1a1a1a',
+                      border: '2px solid #d4af37',
+                      borderRadius: '8px',
+                      padding: '15px',
+                      textAlign: 'center'
+                    }}>
+                      <h4 style={{ color: '#d4af37', margin: '0 0 10px 0' }}>
+                        {artifact.name}
+                      </h4>
+                                             <div style={{
+                         width: '80px',
+                         height: '80px',
+                         margin: '0 auto 10px auto',
+                         border: '2px solid #d4af37',
+                         borderRadius: '5px',
+                         display: 'flex',
+                         alignItems: 'center',
+                         justifyContent: 'center',
+                         backgroundColor: '#2a1810',
+                         fontSize: '24px'
+                       }}>
+                         <img 
+                           src={artifact.iconUrl} 
+                           alt={artifact.name}
+                           style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                           onError={(e) => {
+                             (e.target as HTMLImageElement).style.display = 'none';
+                             (e.target as HTMLImageElement).parentElement!.innerHTML = getArtifactEmoji(artifact.type);
+                           }}
+                         />
+                       </div>
+                       <div style={{ textAlign: 'left' }}>
+                         <p style={{ color: '#ffcc00', fontSize: '14px', margin: '3px 0' }}>
+                           <strong>Type:</strong> {artifact.type} | <strong>Rarity:</strong> {artifact.rarity}
+                         </p>
+                         <p style={{ color: '#90EE90', fontSize: '12px', margin: '5px 0' }}>
+                           <strong>⚡ Bonus:</strong> {artifact.bonus}
+                         </p>
+                         {artifact.effects && artifact.effects.length > 0 && (
+                           <p style={{ color: '#87CEEB', fontSize: '11px', margin: '5px 0' }}>
+                             <strong>🌟 Effects:</strong> {artifact.effects.join(', ')}
+                           </p>
+                         )}
+                         <p style={{ color: '#cccccc', fontSize: '11px', fontStyle: 'italic', margin: '5px 0' }}>
+                           {artifact.description}
+                         </p>
+                       </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -443,6 +521,16 @@ function getBuildingEmoji(type: string): string {
   if (type.toLowerCase().includes('magic')) return '🔮';
   if (type.toLowerCase().includes('production')) return '🔨';
   return '🏘️';
+}
+
+function getArtifactEmoji(type: string): string {
+  if (type.toLowerCase().includes('weapon')) return '⚔️';
+  if (type.toLowerCase().includes('armor')) return '🛡️';
+  if (type.toLowerCase().includes('ring')) return '💍';
+  if (type.toLowerCase().includes('shield')) return '🛡️';
+  if (type.toLowerCase().includes('helmet')) return '🎩';
+  if (type.toLowerCase().includes('boots')) return '👟';
+  return '🎁';
 }
 
 export default EpicContentViewer; 

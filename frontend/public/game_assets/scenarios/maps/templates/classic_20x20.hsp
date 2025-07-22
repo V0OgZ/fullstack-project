@@ -1,0 +1,102 @@
+{
+  "mapInfo": {
+    "name": "Battlefield Classique 20x20",
+    "description": "Map équilibrée pour parties standard Heroes of Time",
+    "size": "20x20",
+    "maxPlayers": 2,
+    "difficulty": "NORMAL",
+    "estimatedDuration": "15-30 minutes",
+    "author": "Memento & Claudius",
+    "version": "1.0",
+    "created": "2025-07-21"
+  },
+  
+  "terrain": {
+    "baseType": "GRASS",
+    "features": [
+      {"type": "FOREST", "positions": [{"x": 5, "y": 5}, {"x": 15, "y": 15}]},
+      {"type": "MOUNTAIN", "positions": [{"x": 10, "y": 3}, {"x": 10, "y": 17}]},
+      {"type": "RIVER", "path": [{"x": 0, "y": 10}, {"x": 20, "y": 10}]},
+      {"type": "BRIDGE", "position": {"x": 10, "y": 10}}
+    ]
+  },
+  
+  "startingPositions": {
+    "player1": {"x": 2, "y": 2, "name": "Jean"},
+    "player2": {"x": 18, "y": 18, "name": "Claudius"}
+  },
+  
+  "resources": [
+    {"type": "GOLD_MINE", "position": {"x": 7, "y": 7}, "amount": 1000},
+    {"type": "WOOD_CAMP", "position": {"x": 13, "y": 13}, "amount": 500},
+    {"type": "STONE_QUARRY", "position": {"x": 3, "y": 17}, "amount": 300},
+    {"type": "TEMPORAL_CRYSTAL", "position": {"x": 17, "y": 3}, "amount": 100}
+  ],
+  
+  "structures": [
+    {"type": "CASTLE", "position": {"x": 2, "y": 2}, "owner": "player1"},
+    {"type": "CASTLE", "position": {"x": 18, "y": 18}, "owner": "player2"},
+    {"type": "WATCHTOWER", "position": {"x": 10, "y": 5}, "owner": "neutral"},
+    {"type": "TEMPORAL_ANCHOR", "position": {"x": 10, "y": 15}, "owner": "neutral"}
+  ],
+  
+  "neutralCreatures": [
+    {"type": "quantum_wisp", "position": {"x": 8, "y": 12}, "level": 3},
+    {"type": "probability_spider", "position": {"x": 12, "y": 8}, "level": 4}
+  ],
+  
+  "specialZones": [
+    {
+      "type": "QUANTUM_FIELD",
+      "area": {"x": 9, "y": 9, "width": 3, "height": 3},
+      "effect": "PSI_AMPLIFICATION",
+      "strength": 1.5
+    },
+    {
+      "type": "TEMPORAL_RIFT",
+      "position": {"x": 1, "y": 19},
+      "effect": "TIME_ACCELERATION",
+      "strength": 2.0
+    }
+  ],
+  
+  "gameRules": {
+    "victoryConditions": [
+      "ELIMINATE_ENEMY",
+      "CAPTURE_ALL_CASTLES",
+      "CONTROL_TEMPORAL_ANCHOR"
+    ],
+    "timeLimit": 50,
+    "resourceGeneration": true,
+    "quantumMechanics": true
+  },
+  
+  "initialScript": [
+    "# Script d'initialisation de la map",
+    "SETUP(MAP_SIZE: 20x20, MAX_TURNS: 50, MODE: CLASSIC_BATTLE)",
+    "SET_ATMOSPHERE(\"battlefield\", \"balanced\", \"competitive\")",
+    "GAME: \"Bataille Classique 20x20 - Jean vs Claudius\"",
+    "",
+    "# Placement initial des héros",
+    "HERO(Jean)",
+    "PLACE(Jean, @2,2)",
+    "EQUIP(Jean, grofi_sigma)",
+    "",
+    "HERO(Claudius)", 
+    "PLACE(Claudius, @18,18)",
+    "EQUIP(Claudius, debug_console)",
+    "",
+    "# Activation des zones spéciales",
+    "ACTIVATE(QUANTUM_FIELD, @9,9)",
+    "ACTIVATE(TEMPORAL_RIFT, @1,19)"
+  ],
+  
+  "metadata": {
+    "tags": ["classic", "balanced", "competitive", "2players"],
+    "balanceRating": 4.5,
+    "popularityScore": 8.7,
+    "lastPlayed": "2025-07-21T18:00:00",
+    "totalGamesPlayed": 42,
+    "averageDuration": "22 minutes"
+  }
+} 

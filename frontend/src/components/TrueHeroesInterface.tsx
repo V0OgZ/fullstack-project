@@ -3,6 +3,7 @@ import { useGameStore } from '../store/useGameStore';
 import { useTranslation } from '../i18n';
 import TerrainModeSelector, { TerrainMode } from './TerrainModeSelector';
 import GoldorakEasterEgg from './GoldorakEasterEgg';
+import EpicContentViewer from './EpicContentViewer';
 import { useRetroKonami } from '../utils/retro-konami';
 import './TrueHeroesInterface.css';
 import './EnhancedSidebarPanels.css';
@@ -30,6 +31,9 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ onNavigate })
   
   // NOUVEAU: État pour Goldorak Easter Egg
   const [showGoldorakEasterEgg, setShowGoldorakEasterEgg] = useState(false);
+  
+  // NOUVEAU: État pour Epic Content Viewer
+  const [showEpicContentViewer, setShowEpicContentViewer] = useState(false);
 
   // NOUVEAU: États pour le script editor
   const [scriptContent, setScriptContent] = useState<string>('');
@@ -494,16 +498,28 @@ console.log("Winner: TBD");`
             {activePanel === 'epic' && (
               <div className="panel-content epic-panel">
                 <div className="panel-header">
-                  <h3>🌟 Epic Content</h3>
+                  <h3>🌟 Epic Content - Game Assets</h3>
                 </div>
-                <div className="epic-content-grid">
-                  {mockEpicContent.map((item) => (
-                    <div key={item.id} className="epic-item">
-                      <div className="epic-item-icon">{item.icon}</div>
-                      <div className="epic-item-name">{item.name}</div>
-                      <div className="epic-item-description">{item.description}</div>
-                    </div>
-                  ))}
+                <div className="enhanced-panel">
+                  <h4>Assets Restaurés par Memento</h4>
+                  <div className="scenario-stats epic-stats">
+                    <div>🦸 Héros: Arthur, Anna, Morgana...</div>
+                    <div>🐉 Créatures: Dragons, Quantum beings...</div>
+                    <div>🏰 Bâtiments: Châteaux, Forteresses...</div>
+                    <div>⚔️ Artefacts: Armes, Armures, Anneaux...</div>
+                  </div>
+                  <div className="epic-actions">
+                    <button 
+                      className="action-btn epic-viewer-btn"
+                      onClick={() => setShowEpicContentViewer(true)}
+                    >
+                      🔍 Ouvrir Visualisateur d'Assets
+                    </button>
+                    <p style={{ fontSize: '12px', color: '#ccc', marginTop: '10px' }}>
+                      ✅ Chargement direct depuis game_assets/<br/>
+                      📊 {mockEpicContent.length} objets épiques disponibles
+                    </p>
+                  </div>
                 </div>
               </div>
             )}
@@ -518,6 +534,12 @@ console.log("Winner: TBD");`
           onClose={() => setShowGoldorakEasterEgg(false)}
         />
       )}
+
+      {/* Epic Content Viewer */}
+      <EpicContentViewer
+        isVisible={showEpicContentViewer}
+        onClose={() => setShowEpicContentViewer(false)}
+      />
     </div>
   );
 };
