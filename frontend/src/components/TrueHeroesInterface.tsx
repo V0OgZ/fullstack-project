@@ -4,6 +4,7 @@ import { useTranslation } from '../i18n';
 import TerrainModeSelector, { TerrainMode } from './TerrainModeSelector';
 import GoldorakEasterEgg from './GoldorakEasterEgg';
 import EpicContentViewer from './EpicContentViewer';
+import TemporalTimelineArtifact from './TemporalTimelineArtifact';
 import { useRetroKonami } from '../utils/retro-konami';
 import './TrueHeroesInterface.css';
 import './EnhancedSidebarPanels.css';
@@ -23,7 +24,7 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ onNavigate })
   } = useGameStore();
   
   // États existants
-  const [activePanel, setActivePanel] = useState<'scenario' | 'hero' | 'castle' | 'inventory' | 'script' | 'epic' | 'fog'>('scenario');
+  const [activePanel, setActivePanel] = useState<'scenario' | 'hero' | 'castle' | 'inventory' | 'script' | 'epic' | 'fog'>('epic');
   const [testMode, setTestMode] = useState(false);
   
   // NOUVEAU: État pour le mode terrain hybride
@@ -32,8 +33,11 @@ const TrueHeroesInterface: React.FC<TrueHeroesInterfaceProps> = ({ onNavigate })
   // NOUVEAU: État pour Goldorak Easter Egg
   const [showGoldorakEasterEgg, setShowGoldorakEasterEgg] = useState(false);
   
-  // NOUVEAU: État pour Epic Content Viewer
-  const [showEpicContentViewer, setShowEpicContentViewer] = useState(false);
+  // NOUVEAU: État pour Epic Content Viewer (toujours affiché dans le panneau epic)
+  const [showEpicContentViewer, setShowEpicContentViewer] = useState(true);
+  
+  // NOUVEAU: État pour l'artefact temporel
+  const [currentTimeline, setCurrentTimeline] = useState('main');
 
   // NOUVEAU: États pour le script editor
   const [scriptContent, setScriptContent] = useState<string>('');
@@ -153,6 +157,34 @@ console.log("Winner: TBD");`
     }
   }, [currentGame?.id, endTurn]);
 
+  // Handler pour le changement de timeline
+  const handleTimelineChange = (timelineId: string) => {
+    setCurrentTimeline(timelineId);
+    console.log(`[TIMELINE] Basculement vers: ${timelineId}`);
+    
+    // Logique spécifique selon la timeline
+    switch (timelineId) {
+      case 'main':
+        setActivePanel('epic');
+        setShowEpicContentViewer(true);
+        break;
+      case 'enhanced':
+        setActivePanel('scenario');
+        setShowEpicContentViewer(false);
+        break;
+      case 'legacy_v1':
+      case 'legacy_v2':
+        setActivePanel('hero');
+        setShowGoldorakEasterEgg(true);
+        break;
+      case 'temporal':
+        setActivePanel('fog');
+        break;
+      default:
+        setActivePanel('epic');
+    }
+  };
+
   // Loading state
   if (isLoading) {
     return (
@@ -234,6 +266,12 @@ console.log("Winner: TBD");`
 
   return (
     <div className="true-heroes-interface">
+      {/* 🏛️ Artefact Temporel - Nexus de Cohabitation des Timelines */}
+      <TemporalTimelineArtifact 
+        onTimelineChange={handleTimelineChange}
+        currentTimeline={currentTimeline}
+      />
+
       <div className="game-layout">
         {/* Main game area */}
         <div className="game-map-container">
