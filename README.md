@@ -142,8 +142,20 @@ Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront sub
 
 ## 🌟 **Héros Légendaires**
 
+### 🚀 **Navigation Rapide**
+- [👑 **Jean-Grofignon**](#jean-grofignon) - L'Éveillé Ontologique
+- [⚔️ **Arthur Pendragon**](#arthur-pendragon) - Le Roi Temporel
+- [🔮 **Lysandrel**](#lysandrel) - Le Forgeron de Réalité
+- [🛡️ **Ragnar**](#ragnar) - Le Berserker Temporel
+- [🏹 **Morgana**](#morgana) - La Tisseuse du Destin
+- [⚡ **Axis**](#axis) - Le Voyageur Linéaire
+- [🔫 **Vince Vega**](#vince-vega) - Le Stratège des Ombres
+- [🛡️ **Walter Sobchak**](#walter-sobchak) - Le Gardien des Règles
+- [🎳 **The Dude**](#the-dude) - Le Maître du Zen
+- [🎭 **Anna the Martopicker**](#anna-the-martopicker) - L'Architecte du Temps
+
 <details>
-<summary>⚔️ <strong>Arthur Pendragon - Le Roi Temporel</strong></summary>
+<summary id="arthur-pendragon">⚔️ <strong>Arthur Pendragon - Le Roi Temporel</strong></summary>
 
 **🏛️ Faction :** Camelot Temporal  
 **⭐ Classe :** Temporal King (Niveau 5)  
@@ -167,7 +179,7 @@ Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront sub
 </details>
 
 <details>
-<summary>🔮 <strong>Jean-Grofignon - L'Éveillé Ontologique</strong></summary>
+<summary id="jean-grofignon">🔮 <strong>Jean-Grofignon - L'Éveillé Ontologique</strong></summary>
 
 **🏛️ Faction :** Anomalie  
 **⭐ Classe :** Temporal Master (Légendaire)  
@@ -194,7 +206,7 @@ Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront sub
 </details>
 
 <details>
-<summary>🔮 <strong>Lysandrel - Le Forgeron de Réalité</strong></summary>
+<summary id="lysandrel">🔮 <strong>Lysandrel - Le Forgeron de Réalité</strong></summary>
 
 **🏛️ Faction :** Mages Temporels  
 **⭐ Classe :** Archimage Temporel  
@@ -212,7 +224,7 @@ Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront sub
 </details>
 
 <details>
-<summary>🛡️ <strong>Ragnar le Berserker Temporel</strong></summary>
+<summary id="ragnar">🛡️ <strong>Ragnar le Berserker Temporel</strong></summary>
 
 **🏛️ Faction :** Guerriers du Nord  
 **⭐ Classe :** Berserker Temporel  
@@ -230,7 +242,7 @@ Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront sub
 </details>
 
 <details>
-<summary>🏹 <strong>Morgana la Tisseuse du Destin</strong></summary>
+<summary id="morgana">🏹 <strong>Morgana la Tisseuse du Destin</strong></summary>
 
 **🏛️ Faction :** Tisseuses du Temps  
 **⭐ Classe :** Tisseuse Temporelle  
@@ -248,7 +260,7 @@ Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront sub
 </details>
 
 <details>
-<summary>⚡ <strong>Axis le Voyageur Linéaire</strong></summary>
+<summary id="axis">⚡ <strong>Axis le Voyageur Linéaire</strong></summary>
 
 **🏛️ Faction :** Gardiens Temporels  
 **⭐ Classe :** Voyageur Temporel  
@@ -269,7 +281,7 @@ Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront sub
 </details>
 
 <details>
-<summary>🔫 <strong>Vince Vega - Le Stratège des Ombres</strong></summary>
+<summary id="vince-vega">🔫 <strong>Vince Vega - Le Stratège des Ombres</strong></summary>
 
 **🏛️ Faction :** Compagnons de Jean-Grofignon  
 **⭐ Classe :** Exécuteur Temporel  
@@ -298,7 +310,7 @@ Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront sub
 </details>
 
 <details>
-<summary>🛡️ <strong>Walter Sobchak - Le Gardien des Règles</strong></summary>
+<summary id="walter-sobchak">🛡️ <strong>Walter Sobchak - Le Gardien des Règles</strong></summary>
 
 **🏛️ Faction :** Compagnons de Jean-Grofignon  
 **⭐ Classe :** Rule Keeper  
@@ -327,7 +339,7 @@ Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront sub
 </details>
 
 <details>
-<summary>🎳 <strong>The Dude - Le Maître du Zen</strong></summary>
+<summary id="the-dude">🎳 <strong>The Dude - Le Maître du Zen</strong></summary>
 
 **🏛️ Faction :** Compagnons de Jean-Grofignon  
 **⭐ Classe :** Zen Master  
@@ -356,7 +368,7 @@ Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront sub
 </details>
 
 <details>
-<summary>🎭 <strong>Anna the Martopicker - L'Architecte du Temps</strong></summary>
+<summary id="anna-the-martopicker">🎭 <strong>Anna the Martopicker - L'Architecte du Temps</strong></summary>
 
 **🏛️ Faction :** Architectes Temporels  
 **⭐ Classe :** Temporal Architect  
@@ -971,4 +983,33 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 
 ---
 
-**🌟 MERCI À TOUS CEUX QUI ONT CONTRIBUÉ À CETTE AVENTURE ÉPIQUE ! 🌟** 
+**🌟 MERCI À TOUS CEUX QUI ONT CONTRIBUÉ À CETTE AVENTURE ÉPIQUE ! 🌟**
+
+---
+
+## 🔗 **Liens Directs Épiques**
+
+### 🎭 **Navigation Rapide par Héros**
+
+**Liens directs vers les héros légendaires :**
+
+- **👑 [Jean-Grofignon](#jean-grofignon)** - L'Éveillé Ontologique
+- **⚔️ [Arthur Pendragon](#arthur-pendragon)** - Le Roi Temporel  
+- **🔮 [Lysandrel](#lysandrel)** - Le Forgeron de Réalité
+- **🛡️ [Ragnar](#ragnar)** - Le Berserker Temporel
+- **🏹 [Morgana](#morgana)** - La Tisseuse du Destin
+- **⚡ [Axis](#axis)** - Le Voyageur Linéaire
+- **🔫 [Vince Vega](#vince-vega)** - Le Stratège des Ombres
+- **🛡️ [Walter Sobchak](#walter-sobchak)** - Le Gardien des Règles
+- **🎳 [The Dude](#the-dude)** - Le Maître du Zen
+- **🎭 [Anna the Martopicker](#anna-the-martopicker)** - L'Architecte du Temps
+
+### 🌟 **Exemples d'URLs Directes**
+
+**Liens GitHub avec ancres :**
+- `https://github.com/V0OgZ/Heroes-of-Time/blob/dev/README.md#jean-grofignon`
+- `https://github.com/V0OgZ/Heroes-of-Time/blob/dev/README.md#anna-the-martopicker`
+- `https://github.com/V0OgZ/Heroes-of-Time/blob/dev/README.md#vince-vega`
+- `https://github.com/V0OgZ/Heroes-of-Time/blob/dev/README.md#the-dude`
+
+**🎯 Utilisez ces liens pour naviguer directement vers vos héros préférés !** 
