@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heroes of Time - Quantum Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="scenario-selector.css">
+    <style>
+        /* Interface principale */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        #game-interface {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            background: rgba(78, 205, 196, 0.2);
+            border: 2px solid rgba(78, 205, 196, 0.5);
+            color: #4ecdc4;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .back-button:hover {
+            background: rgba(78, 205, 196, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .scenario-info-bar {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            font-size: 0.9rem;
+        }
+
+        .scenario-name {
+            font-weight: bold;
+            color: #4ecdc4;
+        }
+
+        .scenario-turn {
+            color: #ffd93d;
+            margin-left: 15px;
+        }
+
+        /* Styles pour l'interface de jeu */
+        .game-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .game-main {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-sidebar {
+            width: 300px;
+            background: rgba(0, 0, 0, 0.8);
+            border-left: 2px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .quantum-canvas {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(78, 205, 196, 0.1) 0%, transparent 50%);
+        }
+
+        .control-panel {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 320px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .control-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .control-btn {
+            padding: 10px 20px;
+            background: rgba(78, 205, 196, 0.2);
+            border: 2px solid rgba(78, 205, 196, 0.5);
+            color: #4ecdc4;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .control-btn:hover {
+            background: rgba(78, 205, 196, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .control-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .turn-info {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .turn-number {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #ffd93d;
+        }
+
+        .phase-indicator {
+            color: #4ecdc4;
+            font-style: italic;
+        }
+
+        .player-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .player-status {
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .player-active {
+            background: rgba(78, 205, 196, 0.3);
+            color: #4ecdc4;
+        }
+
+        .player-waiting {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ccc;
+        }
+
+        .quantum-metrics {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .metric-label {
+            color: #ccc;
+        }
+
+        .metric-value {
+            font-weight: bold;
+            color: #4ecdc4;
+        }
+
+        .amplitude-chart {
+            width: 100%;
+            height: 100px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .narrative-panel {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .narrative-title {
+            font-weight: bold;
+            color: #ffd93d;
+            margin-bottom: 10px;
+        }
+
+        .narrative-text {
+            line-height: 1.4;
+            color: #e0e0e0;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .loading-content {
+            text-align: center;
+            color: #e0e0e0;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(78, 205, 196, 0.3);
+            border-top: 4px solid #4ecdc4;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .game-container {
+                flex-direction: column;
+            }
+            
+            .game-sidebar {
+                width: 100%;
+                max-height: 40vh;
+            }
+            
+            .control-panel {
+                right: 20px;
+                left: 20px;
+            }
+            
+            .scenario-info-bar {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sélecteur de scénarios -->
+    <div id="scenario-selector">
+        <!-- Contenu généré dynamiquement par scenario-loader.js -->
+    </div>
+
+    <!-- Interface de jeu -->
+    <div id="game-interface">
+        <button class="back-button" onclick="scenarioLoader.returnToSelector()">
+            ← Retour aux Scénarios
+        </button>
+
+        <div class="scenario-info-bar">
+            <span class="scenario-name" id="current-scenario-name">Scénario en cours</span>
+            <span class="scenario-turn" id="current-turn">Tour 1</span>
+        </div>
+
+        <div class="game-container">
+            <div class="game-main">
+                <canvas id="quantum-canvas" class="quantum-canvas"></canvas>
+                
+                <div class="control-panel">
+                    <div class="control-buttons">
+                        <button class="control-btn" id="play-btn" onclick="toggleAutoPlay()">▶️ Lecture</button>
+                        <button class="control-btn" id="pause-btn" onclick="pauseVisualization()">⏸️ Pause</button>
+                        <button class="control-btn" id="next-btn" onclick="nextTurn()">⏭️ Suivant</button>
+                        <button class="control-btn" id="reset-btn" onclick="resetVisualization()">🔄 Reset</button>
+                    </div>
+                    
+                    <div class="turn-info">
+                        <div class="turn-number">Tour <span id="turn-number">1</span></div>
+                        <div class="phase-indicator" id="phase-indicator">Phase d'initialisation</div>
+                        <div class="player-info">
+                            <span class="player-status player-active" id="player1-status">Joueur 1</span>
+                            <span class="player-status player-waiting" id="player2-status">Joueur 2</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-sidebar">
+                <div class="quantum-metrics">
+                    <h3>📊 Métriques Quantiques</h3>
+                    <div class="metric-item">
+                        <span class="metric-label">États ψ Actifs:</span>
+                        <span class="metric-value" id="psi-count">0</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Interférences:</span>
+                        <span class="metric-value" id="interference-count">0</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Probabilité Max:</span>
+                        <span class="metric-value" id="max-probability">0%</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Cohérence:</span>
+                        <span class="metric-value" id="coherence-level">100%</span>
+                    </div>
+                    <canvas id="amplitude-chart" class="amplitude-chart"></canvas>
+                </div>
+
+                <div class="narrative-panel">
+                    <div class="narrative-title">📖 Récit</div>
+                    <div class="narrative-text" id="narrative-text">
+                        Le scénario va bientôt commencer...
+                    </div>
+                </div>
+
+                <div class="quantum-metrics">
+                    <h3>🎯 Objectifs</h3>
+                    <div id="objectives-list">
+                        <div class="metric-item">
+                            <span class="metric-label">Conditions de victoire chargées...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay de chargement -->
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h3>Chargement du scénario...</h3>
+            <p id="loading-message">Initialisation des mécaniques quantiques...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="scenario-loader.js"></script>
+    <script src="quantum-visualizer-enhanced.js"></script>
+    <script src="button-fixes.js"></script>
+    <script>
+        // Variables globales
+        let currentScenario = null;
+        let isAutoPlaying = false;
+        let currentTurn = 1;
+        let gameState = null;
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('🎮 Heroes of Time - Quantum Visualizer initializing...');
+            
+            // Le scenario-loader.js se charge automatiquement
+            // Le quantum-visualizer-enhanced.js attend le scénario sélectionné
+            // Le button-fixes.js corrige les boutons
+        });
+
+        // Fonctions de contrôle
+        function toggleAutoPlay() {
+            isAutoPlaying = !isAutoPlaying;
+            const playBtn = document.getElementById('play-btn');
+            
+            if (isAutoPlaying) {
+                playBtn.textContent = '⏸️ Pause';
+                playBtn.onclick = pauseVisualization;
+                startAutoPlay();
+            } else {
+                playBtn.textContent = '▶️ Lecture';
+                playBtn.onclick = toggleAutoPlay;
+                stopAutoPlay();
+            }
+        }
+
+        function pauseVisualization() {
+            isAutoPlaying = false;
+            const playBtn = document.getElementById('play-btn');
+            playBtn.textContent = '▶️ Lecture';
+            playBtn.onclick = toggleAutoPlay;
+            stopAutoPlay();
+        }
+
+        function nextTurn() {
+            if (window.quantumVisualizer) {
+                window.quantumVisualizer.nextTurn();
+            }
+        }
+
+        function resetVisualization() {
+            if (window.quantumVisualizer) {
+                window.quantumVisualizer.reset();
+            }
+            currentTurn = 1;
+            updateTurnDisplay();
+        }
+
+        function startAutoPlay() {
+            if (window.quantumVisualizer && window.quantumVisualizer.startAutoPlay) {
+                window.quantumVisualizer.startAutoPlay();
+            }
+        }
+
+        function stopAutoPlay() {
+            if (window.quantumVisualizer && window.quantumVisualizer.stopAutoPlay) {
+                window.quantumVisualizer.stopAutoPlay();
+            }
+        }
+
+        function updateTurnDisplay() {
+            document.getElementById('turn-number').textContent = currentTurn;
+            document.getElementById('current-turn').textContent = `Tour ${currentTurn}`;
+        }
+
+        function updateQuantumMetrics(metrics) {
+            document.getElementById('psi-count').textContent = metrics.psiCount || 0;
+            document.getElementById('interference-count').textContent = metrics.interferences || 0;
+            document.getElementById('max-probability').textContent = (metrics.maxProbability || 0) + '%';
+            document.getElementById('coherence-level').textContent = (metrics.coherence || 100) + '%';
+        }
+
+        function updateNarrative(text) {
+            document.getElementById('narrative-text').textContent = text;
+        }
+
+        function updateObjectives(objectives) {
+            const objectivesList = document.getElementById('objectives-list');
+            objectivesList.innerHTML = '';
+            
+            objectives.forEach(objective => {
+                const item = document.createElement('div');
+                item.className = 'metric-item';
+                item.innerHTML = `
+                    <span class="metric-label">${objective.description}</span>
+                    <span class="metric-value">${objective.status}</span>
+                `;
+                objectivesList.appendChild(item);
+            });
+        }
+
+        function showLoadingOverlay(message) {
+            document.getElementById('loading-message').textContent = message;
+            document.getElementById('loading-overlay').style.display = 'flex';
+        }
+
+        function hideLoadingOverlay() {
+            document.getElementById('loading-overlay').style.display = 'none';
+        }
+
+        // Événements personnalisés
+        document.addEventListener('scenarioLoaded', (event) => {
+            const scenario = event.detail;
+            currentScenario = scenario;
+            
+            // Mettre à jour l'interface
+            document.getElementById('current-scenario-name').textContent = scenario.scenario_info.name;
+            
+            // Mettre à jour les objectifs
+            if (scenario.win_conditions) {
+                const objectives = Object.entries(scenario.win_conditions).map(([key, condition]) => ({
+                    description: condition.description,
+                    status: '⏳ En cours'
+                }));
+                updateObjectives(objectives);
+            }
+            
+            updateNarrative(`${scenario.scenario_info.description}`);
+            hideLoadingOverlay();
+        });
+
+        document.addEventListener('turnChanged', (event) => {
+            currentTurn = event.detail.turn;
+            updateTurnDisplay();
+            
+            if (event.detail.phase) {
+                document.getElementById('phase-indicator').textContent = event.detail.phase;
+            }
+        });
+
+        document.addEventListener('quantumMetricsUpdated', (event) => {
+            updateQuantumMetrics(event.detail);
+        });
+
+        document.addEventListener('narrativeUpdated', (event) => {
+            updateNarrative(event.detail.text);
+        });
+
+        // Interface globale
+        window.heroesOfTimeVisualizer = {
+            loadScenario: (scenarioData) => {
+                currentScenario = scenarioData;
+                document.dispatchEvent(new CustomEvent('scenarioLoaded', { detail: scenarioData }));
+            },
+            
+            updateMetrics: (metrics) => {
+                updateQuantumMetrics(metrics);
+            },
+            
+            updateNarrative: (text) => {
+                updateNarrative(text);
+            },
+            
+            setTurn: (turn, phase) => {
+                document.dispatchEvent(new CustomEvent('turnChanged', { detail: { turn, phase } }));
+            }
+        };
+    </script>
+</body>
+</html> 

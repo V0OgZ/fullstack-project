@@ -1,0 +1,462 @@
+{
+  "quantumArtifacts": {
+    "tier6": [
+      {
+        "id": "quantum_crown",
+        "name": "Couronne de Superposition",
+        "type": "ARTIFACT",
+        "tier": 6,
+        "rarity": "LEGENDARY",
+        "slot": "HEAD",
+        "stats": {
+          "temporalEnergy": 150,
+          "magicPower": 30,
+          "wisdom": 25,
+          "leadership": 20
+        },
+        "quantumProperties": {
+          "baseAmplitude": {
+            "realPart": 0.8,
+            "imaginaryPart": 0.6
+          },
+          "amplitudeFormula": "ψ = (0.8 + 0.6i) * e^(iωt)",
+          "interferencePattern": "CONSTRUCTIVE",
+          "coherenceTime": 10,
+          "decoherenceRate": 0.05
+        },
+        "quantumAbilities": {
+          "mindSuperposition": {
+            "description": "Permet au héros de penser dans plusieurs états simultanément",
+            "effect": "MULTI_THOUGHT_PROCESS",
+            "amplitudes": [
+              {"realPart": 0.707, "imaginaryPart": 0.0},
+              {"realPart": 0.0, "imaginaryPart": 0.707}
+            ],
+            "actionBonus": 2,
+            "cost": 30
+          },
+          "quantumLeadership": {
+            "description": "Commande des armées dans plusieurs dimensions",
+            "effect": "DIMENSIONAL_COMMAND",
+            "range": 10,
+            "armyBonus": 1.5,
+            "interferenceType": "CONSTRUCTIVE"
+          }
+        },
+        "interferenceCapabilities": {
+          "constructiveBonus": 0.7,
+          "destructiveResistance": 0.8,
+          "phaseControl": "TRANSCENDENT"
+        },
+        "origin": "Forgée dans les Forges Quantiques d'Atlantis lors de la Grande Convergence des Probabilités",
+        "description": "Une couronne qui permet à son porteur d'exister dans plusieurs états de conscience simultanément."
+      },
+      {
+        "id": "amplitude_sword",
+        "name": "Épée d'Amplitude Pure",
+        "type": "ARTIFACT",
+        "tier": 6,
+        "rarity": "LEGENDARY",
+        "slot": "WEAPON",
+        "stats": {
+          "attack": 50,
+          "temporalEnergy": 100,
+          "precision": 30,
+          "criticalChance": 0.4
+        },
+        "quantumProperties": {
+          "baseAmplitude": {
+            "realPart": 1.0,
+            "imaginaryPart": 0.0
+          },
+          "amplitudeFormula": "ψ = |ψ|e^(iφ) where φ adapts to enemy phase",
+          "interferencePattern": "ADAPTIVE",
+          "resonanceFrequency": 432,
+          "phaseAdaptation": true
+        },
+        "quantumAbilities": {
+          "phaseCut": {
+            "description": "Coupe à travers les phases quantiques",
+            "effect": "PHASE_SLICE",
+            "amplitudes": [
+              {"realPart": 1.0, "imaginaryPart": 0.0},
+              {"realPart": 0.0, "imaginaryPart": 1.0}
+            ],
+            "damage": 80,
+            "ignoreArmor": true,
+            "cost": 40
+          },
+          "resonanceStrike": {
+            "description": "Frappe qui résonne avec les amplitudes ennemies",
+            "effect": "RESONANCE_DAMAGE",
+            "resonanceFactor": 3.0,
+            "amplification": 2.5,
+            "cost": 35
+          }
+        },
+        "interferenceCapabilities": {
+          "constructiveBonus": 1.0,
+          "destructiveResistance": 0.6,
+          "phaseControl": "MASTER"
+        },
+        "origin": "Forgée avec des cristaux d'amplitude pure dans les Laboratoires Temporels",
+        "description": "Une épée dont la lame existe dans toutes les phases quantiques simultanément."
+      },
+      {
+        "id": "interference_shield",
+        "name": "Bouclier d'Interférence",
+        "type": "ARTIFACT",
+        "tier": 6,
+        "rarity": "LEGENDARY",
+        "slot": "SHIELD",
+        "stats": {
+          "defense": 40,
+          "temporalEnergy": 120,
+          "reflection": 0.6,
+          "absorption": 0.4
+        },
+        "quantumProperties": {
+          "baseAmplitude": {
+            "realPart": 0.6,
+            "imaginaryPart": 0.8
+          },
+          "amplitudeFormula": "ψ_defense = Σ(ψ_incoming * e^(iπ))",
+          "interferencePattern": "DESTRUCTIVE",
+          "reflectionCoefficient": 0.8,
+          "phaseInversion": true
+        },
+        "quantumAbilities": {
+          "destructiveWall": {
+            "description": "Crée un mur d'interférence destructive",
+            "effect": "DESTRUCTIVE_BARRIER",
+            "amplitudes": [
+              {"realPart": 1.0, "imaginaryPart": 0.0},
+              {"realPart": -1.0, "imaginaryPart": 0.0}
+            ],
+            "range": 3,
+            "duration": 5,
+            "cost": 50
+          },
+          "phaseReflection": {
+            "description": "Réfléchit les attaques avec phase inversée",
+            "effect": "PHASE_REFLECTION",
+            "reflectionDamage": 1.5,
+            "phaseShift": 3.14159,
+            "cost": 30
+          }
+        },
+        "interferenceCapabilities": {
+          "constructiveBonus": 0.3,
+          "destructiveResistance": 1.2,
+          "phaseControl": "GRANDMASTER"
+        },
+        "origin": "Créé par les Gardiens des Phases pour se protéger des attaques quantiques",
+        "description": "Un bouclier qui annule les attaques par interférence destructive."
+      }
+    ],
+    "tier7": [
+      {
+        "id": "probability_orb",
+        "name": "Orbe de Probabilité Absolue",
+        "type": "ARTIFACT",
+        "tier": 7,
+        "rarity": "MYTHIC",
+        "slot": "ACCESSORY",
+        "stats": {
+          "temporalEnergy": 200,
+          "magicPower": 40,
+          "luck": 50,
+          "fate": 30
+        },
+        "quantumProperties": {
+          "baseAmplitude": {
+            "realPart": 0.707,
+            "imaginaryPart": 0.707
+          },
+          "amplitudeFormula": "ψ = (a + bi) where |ψ|² = desired_probability",
+          "interferencePattern": "PROBABILITY_CONTROL",
+          "probabilityRange": [0.0, 1.0],
+          "certaintyField": 5
+        },
+        "quantumAbilities": {
+          "probabilityManipulation": {
+            "description": "Contrôle direct des probabilités quantiques",
+            "effect": "PROBABILITY_MASTERY",
+            "probabilityRange": [0.0, 1.0],
+            "range": 8,
+            "cost": 60
+          },
+          "certaintyCollapse": {
+            "description": "Force le collapse vers un résultat spécifique",
+            "effect": "FORCED_COLLAPSE",
+            "successRate": 0.95,
+            "cost": 80
+          },
+          "fortuneField": {
+            "description": "Champ qui améliore la fortune de tous les alliés",
+            "effect": "LUCK_AMPLIFICATION",
+            "luckBonus": 2.0,
+            "range": 10,
+            "cost": 50
+          }
+        },
+        "interferenceCapabilities": {
+          "constructiveBonus": 0.8,
+          "destructiveResistance": 0.8,
+          "phaseControl": "TRANSCENDENT"
+        },
+        "origin": "Cristallisé à partir de la substance pure de la Probabilité par les Tisserands du Destin",
+        "description": "Un orbe qui permet de manipuler directement les probabilités quantiques."
+      },
+      {
+        "id": "quantum_heart",
+        "name": "Cœur Quantique",
+        "type": "ARTIFACT",
+        "tier": 7,
+        "rarity": "MYTHIC",
+        "slot": "CHEST",
+        "stats": {
+          "health": 200,
+          "temporalEnergy": 300,
+          "regeneration": 20,
+          "coherence": 40
+        },
+        "quantumProperties": {
+          "baseAmplitude": {
+            "realPart": 0.8,
+            "imaginaryPart": 0.6
+          },
+          "amplitudeFormula": "ψ = ψ₀ * e^(-iHt/ℏ) where H is the quantum Hamiltonian",
+          "interferencePattern": "LIFE_SUSTAINING",
+          "coherenceRegeneration": 0.1,
+          "quantumEntanglement": true
+        },
+        "quantumAbilities": {
+          "lifeSuperposition": {
+            "description": "Existe simultanément dans plusieurs états de vie",
+            "effect": "LIFE_DEATH_SUPERPOSITION",
+            "amplitudes": [
+              {"realPart": 0.9, "imaginaryPart": 0.436},
+              {"realPart": 0.436, "imaginaryPart": 0.9}
+            ],
+            "reviveChance": 0.8,
+            "cost": 100
+          },
+          "quantumHealing": {
+            "description": "Guérison qui répare les dommages dans toutes les dimensions",
+            "effect": "DIMENSIONAL_HEALING",
+            "healingFactor": 3.0,
+            "range": 5,
+            "cost": 70
+          },
+          "coherenceField": {
+            "description": "Maintient la cohérence quantique de tous les alliés",
+            "effect": "COHERENCE_MAINTENANCE",
+            "coherenceBonus": 0.5,
+            "range": 12,
+            "cost": 40
+          }
+        },
+        "interferenceCapabilities": {
+          "constructiveBonus": 1.0,
+          "destructiveResistance": 1.0,
+          "phaseControl": "ABSOLUTE"
+        },
+        "origin": "Le cœur pulsant de la première Intelligence Quantique, préservé dans l'ambre temporel",
+        "description": "Un cœur qui bat au rythme des fluctuations quantiques de l'univers."
+      }
+    ],
+    "tier8": [
+      {
+        "id": "reality_anchor",
+        "name": "Ancre de Réalité",
+        "type": "ARTIFACT",
+        "tier": 8,
+        "rarity": "COSMIC",
+        "slot": "SPECIAL",
+        "stats": {
+          "temporalEnergy": 500,
+          "reality": 100,
+          "stability": 80,
+          "control": 60
+        },
+        "quantumProperties": {
+          "baseAmplitude": {
+            "realPart": 1.0,
+            "imaginaryPart": 0.0
+          },
+          "amplitudeFormula": "ψ = δ(x - x₀) where x₀ is the anchored reality",
+          "interferencePattern": "REALITY_STABILIZATION",
+          "realityField": 15,
+          "quantumSupression": 0.9
+        },
+        "quantumAbilities": {
+          "realityLock": {
+            "description": "Verrouille la réalité dans un état spécifique",
+            "effect": "REALITY_STABILIZATION",
+            "stabilityRadius": 15,
+            "lockStrength": 0.95,
+            "cost": 150
+          },
+          "quantumSupression": {
+            "description": "Supprime les effets quantiques dans la zone",
+            "effect": "QUANTUM_DAMPENING",
+            "suppressionFactor": 0.8,
+            "range": 20,
+            "cost": 100
+          },
+          "certaintyField": {
+            "description": "Champ qui force la certitude absolue",
+            "effect": "ABSOLUTE_CERTAINTY",
+            "certaintyLevel": 1.0,
+            "range": 10,
+            "cost": 120
+          }
+        },
+        "interferenceCapabilities": {
+          "constructiveBonus": 0.0,
+          "destructiveResistance": 2.0,
+          "phaseControl": "SUPPRESSION"
+        },
+        "origin": "Artefact cosmique créé par les Gardiens de la Réalité pour stabiliser les dimensions",
+        "description": "Une ancre qui maintient la réalité stable face aux fluctuations quantiques."
+      },
+      {
+        "id": "infinity_codex",
+        "name": "Codex de l'Infini",
+        "type": "ARTIFACT",
+        "tier": 8,
+        "rarity": "COSMIC",
+        "slot": "BOOK",
+        "stats": {
+          "temporalEnergy": 400,
+          "knowledge": 100,
+          "wisdom": 80,
+          "magicPower": 60
+        },
+        "quantumProperties": {
+          "baseAmplitude": {
+            "realPart": 0.577,
+            "imaginaryPart": 0.577
+          },
+          "amplitudeFormula": "ψ = Σ(all possible knowledge states)",
+          "interferencePattern": "KNOWLEDGE_SUPERPOSITION",
+          "informationDensity": "INFINITE",
+          "knowledgeAccess": "OMNISCIENT"
+        },
+        "quantumAbilities": {
+          "omniscientVision": {
+            "description": "Vision simultanée de toutes les possibilités",
+            "effect": "PROBABILITY_SIGHT",
+            "visionRange": "UNLIMITED",
+            "probabilityAccuracy": 0.99,
+            "cost": 200
+          },
+          "knowledgeSuperposition": {
+            "description": "Accède à toutes les connaissances dans toutes les dimensions",
+            "effect": "INFINITE_KNOWLEDGE",
+            "knowledgeScope": "COSMIC",
+            "cost": 150
+          },
+          "realityEdit": {
+            "description": "Permet de modifier les lois de la réalité",
+            "effect": "REALITY_MODIFICATION",
+            "modificationPower": 0.7,
+            "cost": 300
+          }
+        },
+        "interferenceCapabilities": {
+          "constructiveBonus": 1.5,
+          "destructiveResistance": 1.5,
+          "phaseControl": "OMNIPOTENT"
+        },
+        "origin": "Le livre ultime contenant toutes les connaissances de tous les univers possibles",
+        "description": "Un codex qui contient la somme de toutes les connaissances dans toutes les dimensions."
+      }
+    ]
+  },
+  "quantumEnhancements": {
+    "amplitudeBoosts": {
+      "minor": {"realBoost": 0.1, "imaginaryBoost": 0.1, "cost": 10},
+      "major": {"realBoost": 0.3, "imaginaryBoost": 0.3, "cost": 30},
+      "supreme": {"realBoost": 0.5, "imaginaryBoost": 0.5, "cost": 50}
+    },
+    "phaseManipulation": {
+      "quarterTurn": {"phaseShift": 0.785, "cost": 20},
+      "halfTurn": {"phaseShift": 1.57, "cost": 40},
+      "fullTurn": {"phaseShift": 3.14159, "cost": 60}
+    },
+    "interferencePatterns": {
+      "constructive": {
+        "pattern": "ALIGNED_PHASES",
+        "bonus": 1.5,
+        "cost": 25
+      },
+      "destructive": {
+        "pattern": "OPPOSITE_PHASES",
+        "bonus": 0.1,
+        "cost": 25
+      },
+      "complex": {
+        "pattern": "VARIABLE_PHASES",
+        "bonus": "VARIABLE",
+        "cost": 50
+      }
+    }
+  },
+  "quantumMechanics": {
+    "formulas": {
+      "probabilityCalculation": "|ψ|² = a² + b² where ψ = a + bi",
+      "interferenceSum": "ψ_total = Σ(ψ_i) for all interfering states",
+      "phaseEvolution": "ψ(t) = ψ₀ * e^(-iEt/ℏ)",
+      "amplitudeNormalization": "ψ_norm = ψ / |ψ|",
+      "constructiveCondition": "ψ₁ + ψ₂ when phases aligned",
+      "destructiveCondition": "ψ₁ - ψ₂ when phases opposite"
+    },
+    "constants": {
+      "reducedPlanck": 1.054571817e-34,
+      "quantumCoherence": 0.95,
+      "decoherenceRate": 0.01,
+      "maxAmplitude": 2.0,
+      "minAmplitude": 0.1
+    },
+    "effects": {
+      "QUANTUM_TUNNELING": {
+        "description": "Passage à travers les barrières quantiques",
+        "probability": "e^(-2κa) where κ = √(2m(V-E))/ℏ"
+      },
+      "ENTANGLEMENT": {
+        "description": "Corrélation quantique entre particules",
+        "correlation": "ψ = (1/√2)(|↑↓⟩ - |↓↑⟩)"
+      },
+      "DECOHERENCE": {
+        "description": "Perte de cohérence quantique",
+        "rate": "γ = 1/τ where τ is coherence time"
+      }
+    }
+  },
+  "artifactSynergies": {
+    "quantumSet": {
+      "name": "Ensemble Quantique Complet",
+      "artifacts": ["quantum_crown", "amplitude_sword", "interference_shield"],
+      "setBonuses": {
+        "2pieces": "Coherence +0.2, Temporal Energy +50",
+        "3pieces": "Quantum Mastery: All quantum effects +100%"
+      }
+    },
+    "probabilitySet": {
+      "name": "Maîtrise des Probabilités",
+      "artifacts": ["probability_orb", "quantum_heart"],
+      "setBonuses": {
+        "2pieces": "Probability Control +0.3, Luck +25"
+      }
+    },
+    "realitySet": {
+      "name": "Contrôle de la Réalité",
+      "artifacts": ["reality_anchor", "infinity_codex"],
+      "setBonuses": {
+        "2pieces": "Reality Stability +50%, Knowledge Access +100%"
+      }
+    }
+  }
+} 

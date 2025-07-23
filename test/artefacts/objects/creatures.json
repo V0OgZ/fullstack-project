@@ -1,0 +1,342 @@
+{
+  "creatures": {
+    "metadata": {
+      "version": "1.0.0",
+      "description": "Créatures pour les tests du système temporel Heroes of Time",
+      "temporal_mechanics": "Chaque créature a une résistance temporelle différente",
+      "battle_system": "Combats classiques + mécaniques temporelles"
+    },
+    "creatures": [
+      {
+        "id": "dragon_rouge",
+        "name": "Dragon Rouge",
+        "type": "DRAGON",
+        "tier": "LEGENDARY",
+        "level": 15,
+        "stats": {
+          "health": 200,
+          "max_health": 200,
+          "attack": 15,
+          "defense": 12,
+          "magic_resistance": 0.4,
+          "speed": 6,
+          "temporal_resistance": 0.3
+        },
+        "abilities": [
+          {
+            "name": "fire_breath",
+            "type": "AREA_ATTACK",
+            "damage": 25,
+            "range": 2,
+            "cooldown": 3,
+            "temporal_cost": 0
+          },
+          {
+            "name": "temporal_roar",
+            "type": "TEMPORAL_ABILITY",
+            "effect": "collapse_nearby_psi_states",
+            "range": 3,
+            "cooldown": 5,
+            "temporal_cost": 30
+          },
+          {
+            "name": "dragon_fury",
+            "type": "BUFF",
+            "effect": "double_attack",
+            "duration": 3,
+            "cooldown": 8,
+            "temporal_cost": 0
+          }
+        ],
+        "temporal_properties": {
+          "psi_detection": true,
+          "quantum_awareness": 0.7,
+          "collapse_immunity": 0.3,
+          "temporal_anchor": true
+        },
+        "loot_table": [
+          {
+            "item": "avant_monde_blade",
+            "probability": 1.0,
+            "condition": "guarded_treasure"
+          },
+          {
+            "item": "dragon_scale",
+            "probability": 0.8,
+            "condition": "defeated"
+          },
+          {
+            "item": "temporal_essence",
+            "probability": 0.6,
+            "condition": "defeated"
+          }
+        ],
+        "behavior": {
+          "aggression": 0.9,
+          "territorial_range": 5,
+          "guards_treasure": true,
+          "temporal_reactive": true
+        },
+        "description": "Dragon ancien gardien d'artefacts temporels, capable de sentir les distorsions spatio-temporelles"
+      },
+      {
+        "id": "phantom_warriors",
+        "name": "Guerriers Fantômes",
+        "type": "UNDEAD",
+        "tier": "ELITE",
+        "level": 8,
+        "quantity": 3,
+        "stats": {
+          "health": 40,
+          "max_health": 40,
+          "attack": 10,
+          "defense": 8,
+          "magic_resistance": 0.6,
+          "speed": 4,
+          "temporal_resistance": 0.8
+        },
+        "abilities": [
+          {
+            "name": "phantom_strike",
+            "type": "TEMPORAL_ATTACK",
+            "damage": 12,
+            "effect": "ignores_armor",
+            "range": 1,
+            "cooldown": 2,
+            "temporal_cost": 15
+          },
+          {
+            "name": "temporal_phase",
+            "type": "DEFENSIVE",
+            "effect": "become_incorporeal",
+            "duration": 2,
+            "cooldown": 6,
+            "temporal_cost": 25
+          },
+          {
+            "name": "phantom_multiplication",
+            "type": "SUMMON",
+            "effect": "create_phantom_copy",
+            "duration": 4,
+            "cooldown": 10,
+            "temporal_cost": 40
+          }
+        ],
+        "temporal_properties": {
+          "psi_interaction": true,
+          "quantum_awareness": 0.9,
+          "collapse_immunity": 0.8,
+          "temporal_anchor": false,
+          "phantom_battles": true
+        },
+        "loot_table": [
+          {
+            "item": "ectoplasm",
+            "probability": 0.7,
+            "condition": "defeated"
+          },
+          {
+            "item": "phantom_essence",
+            "probability": 0.5,
+            "condition": "defeated"
+          },
+          {
+            "item": "temporal_shard",
+            "probability": 0.3,
+            "condition": "defeated"
+          }
+        ],
+        "behavior": {
+          "aggression": 0.6,
+          "territorial_range": 3,
+          "guards_treasure": false,
+          "temporal_reactive": true,
+          "swarm_behavior": true
+        },
+        "description": "Guerriers morts-vivants existant partiellement dans le plan temporel, experts en combats fantômes"
+      },
+      {
+        "id": "temporal_elemental",
+        "name": "Élémentaire Temporel",
+        "type": "ELEMENTAL",
+        "tier": "MYTHIC",
+        "level": 12,
+        "stats": {
+          "health": 150,
+          "max_health": 150,
+          "attack": 12,
+          "defense": 10,
+          "magic_resistance": 0.8,
+          "speed": 8,
+          "temporal_resistance": 0.0
+        },
+        "abilities": [
+          {
+            "name": "temporal_bolt",
+            "type": "RANGED_ATTACK",
+            "damage": 18,
+            "effect": "temporal_slow",
+            "range": 4,
+            "cooldown": 1,
+            "temporal_cost": 20
+          },
+          {
+            "name": "time_distortion",
+            "type": "AREA_EFFECT",
+            "effect": "slow_all_enemies",
+            "range": 3,
+            "duration": 3,
+            "cooldown": 6,
+            "temporal_cost": 50
+          },
+          {
+            "name": "temporal_split",
+            "type": "PSI_ABILITY",
+            "effect": "create_temporal_copy",
+            "duration": 5,
+            "cooldown": 12,
+            "temporal_cost": 80
+          }
+        ],
+        "temporal_properties": {
+          "psi_manipulation": true,
+          "quantum_awareness": 1.0,
+          "collapse_immunity": 0.0,
+          "temporal_anchor": false,
+          "time_native": true
+        },
+        "loot_table": [
+          {
+            "item": "temporal_core",
+            "probability": 0.9,
+            "condition": "defeated"
+          },
+          {
+            "item": "time_crystal",
+            "probability": 0.6,
+            "condition": "defeated"
+          },
+          {
+            "item": "chronos_blessing",
+            "probability": 0.4,
+            "condition": "defeated"
+          }
+        ],
+        "behavior": {
+          "aggression": 0.5,
+          "territorial_range": 4,
+          "guards_treasure": false,
+          "temporal_reactive": true,
+          "time_manipulator": true
+        },
+        "description": "Être élémentaire né des flux temporels, maître de la manipulation temporelle"
+      },
+      {
+        "id": "quantum_spider",
+        "name": "Araignée Quantique",
+        "type": "QUANTUM_BEAST",
+        "tier": "RARE",
+        "level": 6,
+        "quantity": 5,
+        "stats": {
+          "health": 25,
+          "max_health": 25,
+          "attack": 8,
+          "defense": 6,
+          "magic_resistance": 0.2,
+          "speed": 10,
+          "temporal_resistance": 0.5
+        },
+        "abilities": [
+          {
+            "name": "quantum_web",
+            "type": "TRAP",
+            "effect": "immobilize_psi_states",
+            "range": 2,
+            "duration": 4,
+            "cooldown": 4,
+            "temporal_cost": 20
+          },
+          {
+            "name": "probability_bite",
+            "type": "MELEE_ATTACK",
+            "damage": 10,
+            "effect": "poison_probability",
+            "range": 1,
+            "cooldown": 2,
+            "temporal_cost": 15
+          },
+          {
+            "name": "quantum_leap",
+            "type": "MOVEMENT",
+            "effect": "teleport_random",
+            "range": 6,
+            "cooldown": 3,
+            "temporal_cost": 25
+          }
+        ],
+        "temporal_properties": {
+          "psi_detection": true,
+          "quantum_awareness": 0.8,
+          "collapse_immunity": 0.5,
+          "temporal_anchor": false,
+          "quantum_entanglement": true
+        },
+        "loot_table": [
+          {
+            "item": "quantum_silk",
+            "probability": 0.6,
+            "condition": "defeated"
+          },
+          {
+            "item": "probability_venom",
+            "probability": 0.4,
+            "condition": "defeated"
+          }
+        ],
+        "behavior": {
+          "aggression": 0.7,
+          "territorial_range": 2,
+          "guards_treasure": false,
+          "temporal_reactive": true,
+          "swarm_behavior": true
+        },
+        "description": "Araignées évoluant dans l'espace quantique, capables de tisser des toiles temporelles"
+      }
+    ],
+    "creature_interactions": {
+      "dragon_rouge_phantom_warriors": {
+        "relationship": "NEUTRAL",
+        "special_behavior": "dragon_ignores_phantoms",
+        "description": "Le dragon ignore les guerriers fantômes sauf s'ils approchent de son trésor"
+      },
+      "temporal_elemental_quantum_spider": {
+        "relationship": "SYMBIOTIC",
+        "special_behavior": "temporal_synchronization",
+        "description": "L'élémentaire et les araignées synchronisent leurs attaques temporelles"
+      },
+      "phantom_warriors_quantum_spider": {
+        "relationship": "HOSTILE",
+        "special_behavior": "phase_conflict",
+        "description": "Conflit entre les phases temporelles et quantiques"
+      }
+    },
+    "spawn_conditions": {
+      "temporal_zones": {
+        "spawn_rate_multiplier": 1.5,
+        "preferred_creatures": ["temporal_elemental", "quantum_spider"],
+        "description": "Les zones temporelles attirent les créatures temporelles"
+      },
+      "quantum_fields": {
+        "spawn_rate_multiplier": 2.0,
+        "preferred_creatures": ["quantum_spider"],
+        "description": "Les champs quantiques favorisent les créatures quantiques"
+      },
+      "treasure_locations": {
+        "guardian_probability": 0.8,
+        "preferred_guardians": ["dragon_rouge"],
+        "description": "Les trésors sont souvent gardés par des créatures puissantes"
+      }
+    }
+  }
+} 

@@ -1,0 +1,528 @@
+{
+  "project_name": "Heroes of Time - Temporal Engine",
+  "version": "POC Alpha V0.1",
+  "project_type": "Quantum Temporal Strategy Game Engine",
+  "last_update": "2025-07-17T20:54:50Z",
+  "core_concepts": [
+    "Jeu de stratégie temporelle quantique",
+    "Timeline locale par joueur avec branches multiples",
+    "Superpositions quantiques (ψ-states) avec collapse automatique",
+    "Artefacts temporels avec effets spatio-temporels",
+    "Batailles fantômes pour résolution de conflits causaux",
+    "Script-first gameplay avec langage temporel complet",
+    "Moteur 5D (x,y,z,timeline,temporalLayer)",
+    "Système hexagonal pour la carte"
+  ],
+  "temporal_grammar": {
+    "symbols": {
+      "⊙": "Action en superposition temporelle",
+      "†": "État effondré (collapse)",
+      "ψ": "Instance d'un état superposé",
+      "Π": "Observation externe (déclencheur de collapse)",
+      "Δt": "Délai temporel (ex: Δt+2 = dans 2 tours)",
+      "@": "Coordonnées spatiales (@x,y)",
+      "ℬ": "Branche temporelle (multivers ℬ1, ℬ2, etc.)",
+      "⟶": "Projection d'effet ou d'action",
+      "⨉": "Conflit de timeline",
+      "↺": "Rollback potentiel",
+      "τ": "Marqueur temporel relatif"
+    },
+    "syntax_examples": [
+      "ψ001: ⊙(Δt+2 @126,65 ⟶ CREATE(CREATURE, Dragon))",
+      "Π(Player2 enters @126,65) ⇒ †ψ001",
+      "†ψ001",
+      "USE(ITEM, AvantWorldBlade, HERO:Arthur)"
+    ]
+  },
+  "active_artifacts": [
+    {
+      "id": "avantworld_blade",
+      "name": "Lame de l'Avant-Monde",
+      "rarity": "Paradoxe",
+      "effect": "Bataille fantôme future"
+    },
+    {
+      "id": "reverse_clock",
+      "name": "Horloge du Dernier Instant",
+      "rarity": "Légendaire",
+      "effect": "Rollback 1-3 tours"
+    },
+    {
+      "id": "ignorance_beacon",
+      "name": "Balise d'Ignorance Temporelle",
+      "rarity": "Légendaire",
+      "effect": "Ignore entités faibles"
+    },
+    {
+      "id": "anchor_tower",
+      "name": "Tour de l'Ancrage",
+      "rarity": "Légendaire",
+      "effect": "Gèle zone temporelle"
+    },
+    {
+      "id": "temporal_echo",
+      "name": "Écho Temporel",
+      "rarity": "Épique",
+      "effect": "Répète la dernière action dans le futur"
+    }
+  ],
+  "technical_stack": {
+    "backend": {
+      "framework": "Spring Boot 3.2.0",
+      "java_version": "17+",
+      "database": "H2 in-memory",
+      "build_tool": "Maven 3.8+",
+      "port": 8080
+    },
+    "frontend": {
+      "status": "À développer",
+      "technology": "React/Electron suggéré",
+      "port": 3000
+    }
+  },
+  "implemented_features": {
+    "backend": [
+      "Moteur temporel quantique complet",
+      "Parser de scripts temporels avec regex",
+      "Système de ψ-states avec collapse",
+      "Gestion des timelines multiples",
+      "Artefacts temporels avec effets",
+      "API REST complète",
+      "Base de données H2 avec schéma complet",
+      "Système hexagonal de coordonnées",
+      "Détection et résolution des conflits causaux"
+    ],
+    "testing": [
+      "Scripts de test automatisés",
+      "Données d'exemple complètes",
+      "Tests d'intégration API",
+      "Validation des mécaniques temporelles"
+    ]
+  },
+  "current_focus": "Documentation technique COMPLÈTE - Moteur temporel expliqué avec exemples et algorithmes",
+  "api_endpoints": {
+    "games": "/api/games - Gestion des parties",
+    "heroes": "/api/heroes - Actions des héros",
+    "scripts": "/api/scripts - Exécution des scripts temporels",
+    "temporal": "/api/temporal - Opérations temporelles",
+    "tiles": "/api/tiles - Gestion de la carte",
+    "timelines": "/api/timelines - Gestion des branches temporelles"
+  },
+  "script_commands": {
+    "basic": [
+      "HERO()",
+      "MOV()",
+      "CREATE()",
+      "USE()",
+      "BATTLE()"
+    ],
+    "temporal": [
+      "ψ:",
+      "⊙()",
+      "†ψ",
+      "Π()",
+      "Δt+n",
+      "@x,y"
+    ],
+    "advanced": [
+      "ℬn",
+      "⟶",
+      "⨉",
+      "↺",
+      "τ"
+    ]
+  },
+  "files_structure": {
+    "root": [
+      "README.md - Documentation principale",
+      "RESUME_POC_HEROES_OF_TIME.md - Résumé complet",
+      "TEMPORAL_ARTIFACTS.json - Artefacts définis",
+      "GRAMMAIRE_SPATIO_TEMPORELLE.md - Syntaxe complète",
+      "sample_data.json - Données de test",
+      "cursor.rules - Ce fichier de contexte"
+    ],
+    "backend": [
+      "src/main/java/com/heroesoftimepoc/temporalengine/",
+      "model/ - Entités JPA",
+      "service/ - Logique métier",
+      "controller/ - API REST",
+      "repository/ - Accès données"
+    ]
+  },
+  "history": [
+    {
+      "timestamp": "2025-01-21T08:00:00Z",
+      "change": "Création du POC complet avec moteur temporel"
+    },
+    {
+      "timestamp": "2025-01-21T09:00:00Z",
+      "change": "Implémentation des artefacts temporels"
+    },
+    {
+      "timestamp": "2025-01-21T09:30:00Z",
+      "change": "Parser de scripts temporels avec regex complet"
+    },
+    {
+      "timestamp": "2025-01-21T10:00:00Z",
+      "change": "Système de persistance intelligent créé"
+    },
+    {
+      "timestamp": "2025-07-17T12:27:02Z",
+      "change": "Modifications du code Java détectées"
+    },
+    {
+      "timestamp": "2025-07-17T12:27:02Z",
+      "change": "Système de persistance Cursor installé et testé"
+    },
+    {
+      "timestamp": "2025-07-17T12:27:07Z",
+      "change": "Modifications du code Java détectées"
+    },
+    {
+      "timestamp": "2025-07-17T12:27:07Z",
+      "change": "Ajout artefact: Écho Temporel"
+    },
+    {
+      "timestamp": "2025-07-17T12:27:12Z",
+      "change": "Modifications du code Java détectées"
+    },
+    {
+      "timestamp": "2025-07-17T12:28:20Z",
+      "change": "Modifications du code Java détectées"
+    },
+    {
+      "timestamp": "2025-07-17T12:28:25Z",
+      "change": "Modifications du code Java détectées"
+    },
+    {
+      "timestamp": "2025-07-17T12:28:25Z",
+      "change": "Système de persistance Cursor COMPLET - Fichiers créés, testés et opérationnels"
+    },
+    {
+      "timestamp": "2025-07-17T12:29:02Z",
+      "change": "Documentation mise à jour: Create intelligent Cursor persistence system for Heroes of Time project"
+    },
+    {
+      "timestamp": "2025-07-17T12:33:50Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T12:34:34Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T12:35:06Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T12:35:48Z",
+      "change": "Commit: 🧠 Système de persistance Cursor COMPLET - Contexte intelligent permanent pour Heroes of Time"
+    },
+    {
+      "timestamp": "2025-07-17T12:35:59Z",
+      "change": "Système de persistance Cursor poussé vers GitHub - Sauvegarde complète"
+    },
+    {
+      "timestamp": "2025-07-17T12:36:24Z",
+      "change": "Commit: Update Cursor persistence system and project metadata timestamps"
+    },
+    {
+      "timestamp": "2025-07-17T12:37:46Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T12:42:09Z",
+      "change": "Scripts de simulation de partie créés - simulate-game.sh, simulate-quick.sh, simulate-performance.sh"
+    },
+    {
+      "timestamp": "2025-07-17T12:43:23Z",
+      "change": "Documentation mise à jour: 🎮 Scripts de Simulation de Partie COMPLETS - Heroes of Time"
+    },
+    {
+      "timestamp": "2025-07-17T12:44:13Z",
+      "change": "Commit: Update simulation scripts and documentation for Heroes of Time"
+    },
+    {
+      "timestamp": "2025-07-17T12:45:56Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T12:49:53Z",
+      "change": "Tests réussis - Rapport généré - Plan frontend simple créé"
+    },
+    {
+      "timestamp": "2025-07-17T12:50:18Z",
+      "change": "Documentation mise à jour: 🧪 TESTS VALIDÉS + RAPPORT + PLAN FRONTEND - Heroes of Time"
+    },
+    {
+      "timestamp": "2025-07-17T12:51:13Z",
+      "change": "Commit: Update project documentation with latest test and frontend plan details"
+    },
+    {
+      "timestamp": "2025-07-17T13:00:57Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T13:07:54Z",
+      "change": "Frontend minimaliste HTML/JS vanilla COMPLET - Interface opérationnelle"
+    },
+    {
+      "timestamp": "2025-07-17T13:09:17Z",
+      "change": "Documentation mise à jour: 🖥️ FRONTEND MINIMALISTE COMPLET - Interface HTML/JS vanilla prête à l'emploi"
+    },
+    {
+      "timestamp": "2025-07-17T13:10:33Z",
+      "change": "Documentation mise à jour: Add frontend implementation summary and update project metadata"
+    },
+    {
+      "timestamp": "2025-07-17T13:11:22Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T13:11:50Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T13:14:28Z",
+      "change": "Documentation mise à jour: 📚 EXPLICATION MOTEUR TEMPOREL COMPLÈTE - Documentation technique pour développeurs"
+    },
+    {
+      "timestamp": "2025-07-17T13:14:40Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T13:18:41Z",
+      "change": "Documentation mise à jour: 🔧 RÉPONSE TECHNIQUE COMPLÈTE - Validation moteur temporel Heroes of Time"
+    },
+    {
+      "timestamp": "2025-07-17T13:18:56Z",
+      "change": "Commit: Update project documentation and timestamp for Heroes of Time engine"
+    },
+    {
+      "timestamp": "2025-07-17T13:21:19Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T13:25:20Z",
+      "change": "Documentation mise à jour: 🎨 ÉDITEUR VISUEL SCRIPT SPATIO-TEMPOREL - Spécification complète"
+    },
+    {
+      "timestamp": "2025-07-17T13:25:40Z",
+      "change": "Commit: Update project metadata with latest timestamp and documentation note"
+    },
+    {
+      "timestamp": "2025-07-17T13:30:00Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T13:37:00Z",
+      "change": "Documentation mise à jour: ✅ VÉRIFICATION MOTEUR TEMPOREL COMPLÈTE - Documentation technique exhaustive"
+    },
+    {
+      "timestamp": "2025-07-17T13:37:21Z",
+      "change": "Commit: Update project documentation and timestamp for temporal engine checkpoint"
+    },
+    {
+      "timestamp": "2025-07-17T13:40:51Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T13:42:03Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T13:45:52Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T13:53:13Z",
+      "change": "Modifications du code Java détectées"
+    },
+    {
+      "timestamp": "2025-07-17T13:53:13Z",
+      "change": "Modifications Java: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T13:57:03Z",
+      "change": "Modifications du code Java détectées"
+    },
+    {
+      "timestamp": "2025-07-17T13:57:03Z",
+      "change": "Modifications Java: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T14:08:10Z",
+      "change": "Modifications du code Java détectées"
+    },
+    {
+      "timestamp": "2025-07-17T14:08:10Z",
+      "change": "Modifications Java: Add temporal engine documentation and test scripts for POC"
+    },
+    {
+      "timestamp": "2025-07-17T16:02:15Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T16:03:23Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T16:20:05Z",
+      "change": "Documentation mise à jour: ✅ Temporal Engine Complete - 89% Project Status"
+    },
+    {
+      "timestamp": "2025-07-17T16:20:39Z",
+      "change": "Commit: Update project documentation with latest timestamp and status"
+    },
+    {
+      "timestamp": "2025-07-17T16:23:18Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T16:25:17Z",
+      "change": "Commit: Add new classes for artifact and conflict zone models in temporal engine"
+    },
+    {
+      "timestamp": "2025-07-17T16:32:52Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T16:35:03Z",
+      "change": "Commit: 🔧 Minor updates and cleanup after status review"
+    },
+    {
+      "timestamp": "2025-07-17T16:40:01Z",
+      "change": "Documentation mise à jour: 🎮 Frontend Interface Complete - 91% Project Status"
+    },
+    {
+      "timestamp": "2025-07-17T19:18:00Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T19:20:28Z",
+      "change": "Commit: Update project metadata and changelog timestamp"
+    },
+    {
+      "timestamp": "2025-07-17T19:21:04Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T19:21:51Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T19:22:00Z",
+      "change": "Commit: Update project metadata timestamp and changelog entry"
+    },
+    {
+      "timestamp": "2025-07-17T19:22:12Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T19:53:24Z",
+      "change": "Commit: Add simple game interface for easy testing"
+    },
+    {
+      "timestamp": "2025-07-17T19:53:42Z",
+      "change": "Commit: Update project metadata with new timestamp and changelog entry"
+    },
+    {
+      "timestamp": "2025-07-17T19:54:05Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T19:55:04Z",
+      "change": "Commit: Update project metadata timestamp and add checkpoint changelog entry"
+    },
+    {
+      "timestamp": "2025-07-17T19:56:46Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T19:58:00Z",
+      "change": "Commit: Update project metadata timestamp and add checkpoint changelog entry"
+    },
+    {
+      "timestamp": "2025-07-17T20:01:00Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T20:02:12Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T20:05:33Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T20:05:55Z",
+      "change": "Commit: Update project metadata timestamp and add new changelog entry"
+    },
+    {
+      "timestamp": "2025-07-17T20:07:30Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T20:11:48Z",
+      "change": "Commit: Unify UI with animated heroes and integrated demo mode"
+    },
+    {
+      "timestamp": "2025-07-17T20:12:10Z",
+      "change": "Commit: Update project metadata and timestamp for UI demo integration"
+    },
+    {
+      "timestamp": "2025-07-17T20:14:07Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T20:14:19Z",
+      "change": "Commit: Update project metadata timestamp for checkpoint"
+    },
+    {
+      "timestamp": "2025-07-17T20:41:41Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T20:43:24Z",
+      "change": "Commit: Update project metadata timestamp for checkpoint"
+    },
+    {
+      "timestamp": "2025-07-17T20:48:17Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T20:49:01Z",
+      "change": "Commit: Update project metadata timestamp for checkpoint"
+    },
+    {
+      "timestamp": "2025-07-17T20:51:37Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T20:52:22Z",
+      "change": "Commit: Update project metadata timestamp for checkpoint"
+    },
+    {
+      "timestamp": "2025-07-17T20:53:52Z",
+      "change": "Commit: Checkpoint before follow-up message"
+    },
+    {
+      "timestamp": "2025-07-17T20:54:50Z",
+      "change": "Commit: Update project metadata timestamp and add checkpoint log entry"
+    }
+  ],
+  "next_steps": [
+    "Développement de l'interface frontend",
+    "Visualisation des timelines et zones temporelles",
+    "Tests d'intégration avec interface utilisateur",
+    "Optimisation des performances du moteur temporel"
+  ],
+  "important_notes": [
+    "Toujours respecter la grammaire spatio-temporelle définie",
+    "Les ψ-states doivent être gérés avec précaution (collapse automatique)",
+    "Les conflits causaux déclenchent des batailles fantômes",
+    "Le système est script-first : tout doit être jouable par scripts",
+    "Coordonnées hexagonales avec système de cubes",
+    "H2 database auto-initialisée avec données d'exemple"
+  ]
+}
