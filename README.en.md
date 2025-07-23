@@ -8,6 +8,362 @@
 
 ---
 
+## ⚡ **The Epic Encounter**
+
+**The Wigner Eye** glimmers atop the ruined tower. Arthur approaches cautiously - this legendary artifact can force the collapse of reality itself.
+
+### 👁️ **The Story of the Wigner Eye**
+
+**🌌 Cosmic Origin:**
+> *"Forged in the first moments of the universe when all possibilities existed simultaneously. Only the ultimate observer can master it without falling into quantum madness."*
+
+**⚡ Ultimate Powers:**
+- **Force Observation**: `COLLAPSE(ALL_ψ) = Σ(Pi * |ψi⟩⟨ψi|) → single_reality`
+- **Future Materialization**: Instantly materializes planned future events
+- **Historical Rewriting**: Retroactively modifies the last 3 turns
+- **Possibility Revelation**: The ultimate artifact that reveals and materializes all possibilities
+
+**🎭 Arthur's Dilemma:**
+Arthur sees Ragnar's army approaching with 15 knights, 20 archers, and 3 catapults. In a few turns, they will be overwhelmed.
+
+*"Sire, don't touch it!"* cries Lysandrel from the valley. *"If you activate it now, all our future actions will become real instantly! The dragon you plan to summon in 3 turns, the battle planned for tomorrow - everything will materialize NOW!"*
+
+**💥 The Fatal Moment:**
+But Arthur has only one choice: seize the Eye and **force the causal collapse**. The Tier 7 COSMIC artifact will transform all possible futures into immediate reality!
+
+**📜 Advanced Script Language:**
+- **Unicode Symbols**: ψ (psi-state), † (collapse), ⊙ (superposition), Π (observation)
+- **5D Coordinates**: Navigate space (x,y,z) and time (timeline, temporal layer)
+- **Probability System**: Actions have success chances affected by artifacts and positioning
+
+---
+
+## 🎮 **The Game**
+
+**Heroes of Time** is a temporal strategy game where your heroes can:
+
+- **⏰ Travel through time** to modify their past actions
+- **🌌 Create temporal branches** with quantum probabilities  
+- **⚔️ Fight across epochs** with legendary artifacts
+- **🔮 Manipulate causality** to change the course of history
+
+### 🎯 **Unique Mechanics**
+
+- **Psi States (ψ)**: Your future actions exist in quantum superposition
+- **Causal Collapse (†)**: Force reality to choose an outcome
+- **Multiple Timelines**: Navigate between 7 parallel realities
+- **Quantum Fog**: 7 levels of causal knowledge
+- **Temporal Artifacts**: Equipment that affects the flow of time
+- **Multi-Temporal Battle**: Simultaneous combat across multiple epochs
+
+---
+
+## 🦸 **Legendary Heroes**
+
+<details>
+<summary id="jean-grofignon">👑 <strong>Jean-Grofignon - The Ontological Awakened</strong></summary>
+
+**🏛️ Faction:** Reality Creators  
+**⭐ Class:** Quantum Chaos Master (Cosmic)  
+**🎯 Specialty:** Paradoxical manipulation and creation of impossible objects  
+
+**🌟 Main Power:**
+> Absolute master of quantum chaos. Can create paradoxical objects that defy all laws of physics and causality.
+
+**🌀 Paradoxical Abilities:**
+- **Paradoxical Object** - Creates artifacts that don't exist but work
+- **Cosmic Remote** - Controls the universe like a video game
+- **Reality Hack** - Modifies fundamental rules of reality
+- **Cosmic Pause** - Stops time for the entire universe except himself
+
+**⚡ Quantum Formula:**
+```
+PARADOX_CREATE(impossible_object) + REALITY_HACK(universe.rules) + COSMIC_PAUSE()
+```
+
+**🎭 Legendary Quotes:**
+> *"I didn't hack the game. I just figured out where the cosmic pause button was."*
+
+> *"When a player observes the result, they force the universe to choose a reality."*
+
+> *"Rules? I write them as I go."*
+
+**🌟 Signature Artifact:**
+- **Cosmic Remote** - Total control over reality
+
+</details>
+
+<details>
+<summary id="arthur-pendragon">⚔️ <strong>Arthur Pendragon - The Temporal King</strong></summary>
+
+**🏛️ Faction:** Knights of Time  
+**⭐ Class:** Temporal King  
+**🎯 Specialty:** Temporal leadership and causal collapse  
+
+**🌟 Main Power:**
+> Legendary king capable of rallying armies across epochs and forcing strategic causal collapses.
+
+**⚔️ Royal Abilities:**
+- **Rallying Cry Through Time** - Inspires all units in all timelines
+- **Temporal Excalibur** - Sword that cuts causal links
+- **Royal Collapse** - Forces the collapse of an entire timeline
+- **Time Lord Authority** - Commands heroes from past and future
+
+**⚡ Quantum Formula:**
+```
+RALLY(all_timelines) + CAUSAL_CUT(enemy_links) + TIMELINE_COLLAPSE(selected)
+```
+
+**🎭 Legendary Quotes:**
+> *"A king doesn't just rule his kingdom, but all possible kingdoms."*
+
+> *"Excalibur doesn't just cut flesh, it cuts causality itself."*
+
+**⚔️ Signature Artifact:**
+- **Temporal Excalibur** - The sword that cuts causal links
+
+</details>
+
+<details>
+<summary id="lysandrel">🔮 <strong>Lysandrel - The Reality Smith</strong></summary>
+
+**🏛️ Faction:** Cosmic Smiths  
+**⭐ Class:** Reality Smith  
+**🎯 Specialty:** Artifact creation and quantum manipulation  
+
+**🌟 Main Power:**
+> Legendary smith capable of creating artifacts from pure reality and manipulating quantum states.
+
+**🔨 Smithing Abilities:**
+- **Reality Smithing** - Forges artifacts from nothingness
+- **Quantum Hammer** - Hammer that strikes in all dimensions
+- **Artifact Awakening** - Awakens consciousness in objects
+- **Temporal Anvil** - Forges on the anvil of time itself
+
+**⚡ Quantum Formula:**
+```
+FORGE(reality_matter) + QUANTUM_STRIKE(all_dimensions) + AWAKEN(artifact)
+```
+
+**🎭 Legendary Quotes:**
+> *"Each hammer blow resonates through all possible realities."*
+
+> *"I don't forge objects. I forge possibilities."*
+
+**🔨 Signature Artifact:**
+- **Quantum Hammer** - Forges reality itself
+
+</details>
+
+<details>
+<summary id="ragnar">🛡️ <strong>Ragnar - The Temporal Berserker</strong></summary>
+
+**🏛️ Faction:** Chaos Warriors  
+**⭐ Class:** Temporal Berserker  
+**🎯 Specialty:** Quantum rage and causal destruction  
+
+**🌟 Main Power:**
+> Legendary berserker whose rage transcends temporal limits, fighting simultaneously in multiple timelines.
+
+**⚔️ Rage Abilities:**
+- **Quantum Berserker** - Enters rage in all timelines
+- **Temporal Rampage** - Destroys causal structures
+- **Paradox Immunity** - Immune to temporal effects
+- **Chaos Storm** - Multi-dimensional destruction storm
+
+**⚡ Quantum Formula:**
+```
+RAGE(all_timelines) + DESTROY(causal_structures) + CHAOS_STORM()
+```
+
+**🎭 Legendary Quotes:**
+> *"My rage burns in all realities! No timeline can contain me!"*
+
+> *"I don't fight in time. Time fights in me!"*
+
+**⚔️ Signature Artifact:**
+- **Axe of Eternal Rage** - Weapon that grows with temporal anger
+
+</details>
+
+<details>
+<summary id="morgana">🏹 <strong>Morgana - The Fate Weaver</strong></summary>
+
+**🏛️ Faction:** Time Weavers  
+**⭐ Class:** Fate Weaver  
+**🎯 Specialty:** Destiny manipulation and probability control  
+
+**🌟 Main Power:**
+> Legendary witch who weaves the threads of fate and manipulates quantum probabilities to change the course of history.
+
+**🕸️ Weaving Abilities:**
+- **Fate Weaving** - Weaves new possible destinies
+- **Probability Control** - Modifies success chances
+- **Timeline Threading** - Links events between timelines
+- **Destiny Knot** - Binds the fates of multiple heroes
+
+**⚡ Quantum Formula:**
+```
+WEAVE(new_fate) + CONTROL(probability) + THREAD(timelines) + KNOT(destinies)
+```
+
+**🎭 Legendary Quotes:**
+> *"Each thread I weave changes the destiny of a thousand universes."*
+
+> *"Chance doesn't exist. There are only misunderstood probabilities."*
+
+**🕸️ Signature Artifact:**
+- **Cosmic Loom** - Weaves the threads of universal destiny
+
+</details>
+
+<details>
+<summary id="axis">⚡ <strong>Axis - The Linear Traveler</strong></summary>
+
+**🏛️ Faction:** Temporal Navigators  
+**⭐ Class:** Linear Traveler  
+**🎯 Specialty:** Temporal navigation and stabilization  
+
+**🌟 Main Power:**
+> Expert temporal traveler capable of navigating between timelines and stabilizing causal paradoxes.
+
+**🌀 Navigation Abilities:**
+- **Linear Travel** - Moves instantly between timelines
+- **Paradox Stabilization** - Stabilizes temporal conflict zones
+- **Timeline Anchor** - Anchors a timeline in reality
+- **Temporal Compass** - Navigates through the meanders of time
+
+**⚡ Quantum Formula:**
+```
+TRAVEL(timeline_target) + STABILIZE(paradox) + ANCHOR(reality) + NAVIGATE(time)
+```
+
+**🎭 Legendary Quotes:**
+> *"I don't travel in time. I travel with time."*
+
+> *"Every paradox is an opportunity to create a more stable reality."*
+
+**🧭 Signature Artifact:**
+- **Temporal Compass** - Guides through the meanders of time
+
+</details>
+
+---
+
+## 🔮 **Artifacts of Power**
+
+<details>
+<summary>👑 <strong>Crown of Superposition</strong> - Quantum Artifact Tier 6</summary>
+
+**🏛️ Type:** Legendary Quantum Artifact  
+**⭐ Rarity:** Legendary (Tier 6)  
+**🎯 Slot:** Head  
+**⚡ Temporal Energy:** +150  
+
+**📊 Statistics:**
+- Magic Power: +30 • Wisdom: +25 • Leadership: +20
+
+**🌟 Quantum Properties:**
+- **Base Amplitude:** ψ = (0.8 + 0.6i) * e^(iωt)
+- **Interference Pattern:** CONSTRUCTIVE
+- **Coherence Time:** 10 turns
+- **Decoherence Rate:** 0.05
+
+**🧠 Quantum Abilities:**
+- **Mental Superposition** - Think in multiple states simultaneously (+2 actions)
+- **Quantum Leadership** - Command multidimensional armies (range 10, +50% army bonus)
+
+</details>
+
+<details>
+<summary>⏰ <strong>Chronological Collapser</strong> - Advanced Temporal Artifact</summary>
+
+**🏛️ Type:** Collapse Artifact  
+**⭐ Rarity:** Epic  
+**🎯 Creator:** TimeMaster  
+**⚡ Energy Cost:** 40  
+
+**🌟 Main Power:**
+> Forces the collapse of a specific quantum state
+
+**⚡ Quantum Formula:**
+```
+COLLAPSE(ψ1) + MODIFY_ENERGY(hero, -40)
+```
+
+**⏰ Collapse Effect:**
+- **Target:** Specific ψ1 state
+- **Result:** Forced collapse into single reality
+- **Cost:** 40 hero energy
+- **Usage:** Temporal conflict resolution
+
+</details>
+
+<details>
+<summary>🔮 <strong>Wigner Eye</strong> - Legendary Artifact</summary>
+
+**🏛️ Type:** Massive Collapse Artifact  
+**⭐ Rarity:** Legendary  
+**🎯 Creator:** Wigner  
+**⚡ Energy Cost:** 100  
+
+**🌟 Main Power:**
+> Forces the collapse of ALL quantum states simultaneously
+
+**⚡ Quantum Formula:**
+```
+COLLAPSE(ALL_ψ) = Σ(Pi * |ψi⟩⟨ψi|) → single_reality
+```
+
+**👁️ Massive Collapse Effect:**
+- **Target:** All ψ states simultaneously
+- **Result:** Total causal collapse
+- **Cost:** 100 hero energy
+- **Usage:** Epic endgame
+
+**💥 Quote:**
+> *"Sire, don't touch it! If you activate it now, all our future actions will become real instantly!"*
+
+</details>
+
+<details>
+<summary>🌀 <strong>Jean-Grofignon's Paradoxical Object</strong> - Legendary Artifact</summary>
+
+**🏛️ Type:** Legendary Paradoxical Artifact  
+**⭐ Rarity:** Legendary (Tier 7)  
+**🎯 Creator:** Jean-Grofignon  
+**⚡ Temporal Energy:** +200  
+
+**🌟 Main Power:**
+> The ultimate paradoxical object that defies all laws of causality. Can create controlled paradoxes and resolve them at will.
+
+**🌀 Paradoxical Properties:**
+- **Controlled Paradox** - Creates causal loops without danger
+- **Spontaneous Resolution** - Automatically resolves paradoxes
+- **Causal Immunity** - Protects against feedback effects
+- **Temporal Manipulation** - Alters local time flow
+
+**⚡ Quantum Formula:**
+```
+PARADOX_CREATE(condition) + PARADOX_RESOLVE(probability=1.0) + COLLAPSE_OVERRIDE
+```
+
+**🎭 Paradoxical Abilities:**
+- **Causal Loop** - Creates events that cause their own existence
+- **Positive Feedback** - Amplifies temporal effects
+- **Paradox Immunity** - Protects against destructive paradoxes
+- **Timeline Manipulation** - Modifies history without consequences
+
+**🌟 Jean-Grofignon Quote:**
+> *"I didn't hack the game. I just figured out where the cosmic pause button was."*
+
+**🌀 Special Artifact:**
+- **Cosmic Remote** - Total control over reality
+
+</details>
+
+---
+
 ## ⚡ **COMPLETE SYSTEM - JANUARY 2025** 🏆
 
 **Heroes of Time** is now a **complete temporal engine** with 15 integrated systems, optimized interface, and modular architecture. **ALL GRAPHICS ISSUES RESOLVED!**
@@ -101,7 +457,7 @@ window.conflictDetector.getStatistics()          # Conflict stats
 
 **📁 Documentation:** 
 - [Fog of Causality EN](docs/EN/FOG_OF_CAUSALITY_7_LEVELS_DOCUMENTATION.md)
-- [Brouillard Causalité FR](docs/BROUILLARD_CAUSALITE_7_NIVEAUX_DOCUMENTATION.md)
+- [7-Level Causality Fog FR](docs/BROUILLARD_CAUSALITE_7_NIVEAUX_DOCUMENTATION.md)
 
 ### **📝 HOTS Formulas with Conditions** ✅
 **Complete documentation of IF/THEN conditions in HOTS formulas**
@@ -127,8 +483,8 @@ window.conflictDetector.getStatistics()          # Conflict stats
 
 ### **🔗 Fixed README Links** ✅
 **Complete navigation between all documentation**
-- Complete French Documentation section
-- Functional English links
+- Complete English Documentation section
+- Functional French links
 - Index of all technical guides
 
 ---
@@ -204,8 +560,15 @@ Stable Spring Boot API
 
 ### **🇺🇸 English Documentation**
 - [🌫️ Fog of Causality 7 Levels](docs/EN/FOG_OF_CAUSALITY_7_LEVELS_DOCUMENTATION.md) - *Complete 281 lines*
-- [🏗️ Architecture Diagrams](docs/ARCHITECTURE_DIAGRAMS.md) - *Technical overview*
-- [🎯 Beginner Scenarios](docs/BEGINNER_SCENARIOS_GUIDE.md) - *Getting started guide*
+- [📚 Complete Heroes of Time Codex](docs/EN/COMPLETE_HEROES_OF_TIME_CODEX.md) - *363 lines reference*
+- [🕰️ Temporal Engine Technical Explanation](docs/EN/TEMPORAL_ENGINE_TECHNICAL_EXPLANATION.md) - *629 lines complete engine*
+- [🤖 Claudius-Memento AI Algorithm](docs/EN/CLAUDIUS_MEMENTO_AI_ALGORITHM_COMPLETE.md) - *717 lines quantum AI*
+- [🌟 Advanced Temporal Concepts](docs/EN/ADVANCED_TEMPORAL_CONCEPTS_COMPLETE.md) - *586 lines advanced concepts*
+- [🏛️ Museum Archive Master](docs/EN/MUSEUM_ARCHIVE_MASTER_COMPLETE.md) - *444 lines temporal museum*
+- [🎮 Gameplay Guide](docs/EN/GAMEPLAY.md) - *177 lines gameplay*
+- [🏛️ Jean-Grofignon Manifesto](docs/EN/JEAN_GROFIGNON_MANIFESTO.md) - *154 lines revolutionary vision*
+- [⏰ Temporal Codex](docs/EN/TEMPORAL_CODEX.md) - *292 lines temporal reference*
+- [🎯 Developer Instructions](docs/EN/DEVELOPER_INSTRUCTIONS.md) - *201 lines development guide*
 
 ### **🇫🇷 French Documentation**
 - [📊 Complete Final Report](docs/RAPPORT_FINAL_HEROES_OF_TIME_COMPLET.md) - *Exhaustive 500+ lines analysis*
