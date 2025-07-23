@@ -6,6 +6,10 @@ test-screenshots/
 test-references/
 test-report.json
 
+# Test reports - temporary files
+test-reports/
+rapport-*
+
 # Node.js
 node_modules/
 npm-debug.log*

@@ -271,13 +271,4 @@ public class GameState {
     public boolean isGameActive() {
         return this.gameStatus == GameStatus.ACTIVE;
     }
-}
-
-// Enum for game status
-enum GameStatus {
-    WAITING,
-    ACTIVE,
-    PAUSED,
-    FINISHED,
-    CANCELLED
 } 
