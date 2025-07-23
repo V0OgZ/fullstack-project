@@ -452,6 +452,209 @@ class FogOfWarSystem {
         return { x, y };
     }
     
+    // 🌈 CRÉER DIODES TIMELINE DISCRÈTES
+    createTimelineDiodes() {
+        const diodesContainer = document.createElement('div');
+        diodesContainer.className = 'timeline-diodes-container';
+        diodesContainer.style.cssText = `
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        `;
+        
+        // Couleurs par timeline (transparence/filtre)
+        const timelineColors = {
+            'ℬ1': '#FF6B6B',  // Rouge - Timeline principale
+            'ℬ2': '#4ECDC4',  // Cyan - Timeline alternative
+            'ℬ3': '#45B7D1',  // Bleu - Timeline passée
+            'ℬ4': '#96CEB4',  // Vert - Timeline future
+            'ℬ5': '#FFEAA7',  // Jaune - Timeline quantique
+            'ℬ6': '#DDA0DD',  // Violet - Timeline paradoxe
+            'ℬ7': '#98D8C8'   // Turquoise - Timeline anchor
+        };
+        
+        // Modes de transparence
+        const transparencyModes = {
+            'active': 1.0,     // Pleine opacité
+            'visible': 0.7,    // Semi-transparent
+            'ghost': 0.3,      // Fantôme
+            'hidden': 0.1      // Presque invisible
+        };
+        
+        Object.keys(timelineColors).forEach(timelineId => {
+            const diode = document.createElement('div');
+            diode.className = 'timeline-diode';
+            diode.dataset.timeline = timelineId;
+            
+            const isSelected = this.selectedTimeline === timelineId;
+            const isVisible = this.visibleTimelines.has(timelineId);
+            
+            // Déterminer le mode de transparence
+            let mode = 'hidden';
+            if (isSelected) mode = 'active';
+            else if (isVisible) mode = 'visible';
+            else if (this.visibleTimelines.size > 3) mode = 'ghost';
+            
+            const opacity = transparencyModes[mode];
+            const baseColor = timelineColors[timelineId];
+            
+            diode.style.cssText = `
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background: ${baseColor};
+                opacity: ${opacity};
+                cursor: pointer;
+                transition: all 0.3s ease;
+                border: 2px solid ${isSelected ? '#FFF' : 'transparent'};
+                box-shadow: ${isSelected ? `0 0 8px ${baseColor}` : 'none'};
+                position: relative;
+            `;
+            
+            // Pulse animation pour timeline active
+            if (isSelected) {
+                diode.style.animation = 'diodePulse 2s infinite';
+            }
+            
+            // Tooltip avec info timeline
+            diode.title = `Timeline ${timelineId} - Mode: ${mode} (${Math.round(opacity*100)}%)`;
+            
+            // Events
+            diode.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.handleDiodeClick(timelineId, e);
+            });
+            
+            diode.addEventListener('mouseenter', () => {
+                diode.style.transform = 'scale(1.3)';
+                diode.style.opacity = Math.min(1.0, opacity + 0.3);
+            });
+            
+            diode.addEventListener('mouseleave', () => {
+                diode.style.transform = 'scale(1)';
+                diode.style.opacity = opacity;
+            });
+            
+            diodesContainer.appendChild(diode);
+        });
+        
+        return diodesContainer;
+    }
+    
+    // 🖱️ GESTION CLICK DIODE
+    handleDiodeClick(timelineId, event) {
+        if (event.shiftKey) {
+            // Shift+Click = Toggle visibilité
+            this.toggleTimelineVisibility(timelineId);
+        } else if (event.ctrlKey || event.metaKey) {
+            // Ctrl+Click = Changer mode transparence
+            this.cycleTransparencyMode(timelineId);
+        } else {
+            // Click simple = Sélectionner timeline
+            this.selectTimeline(timelineId);
+        }
+        
+        // Rafraîchir diodes
+        this.refreshDiodes();
+    }
+    
+    // 🔄 CYCLER MODE TRANSPARENCE
+    cycleTransparencyMode(timelineId) {
+        const modes = ['hidden', 'ghost', 'visible', 'active'];
+        const currentMode = this.getTimelineMode(timelineId);
+        const currentIndex = modes.indexOf(currentMode);
+        const nextIndex = (currentIndex + 1) % modes.length;
+        const nextMode = modes[nextIndex];
+        
+        this.setTimelineMode(timelineId, nextMode);
+        console.log(`🌈 Timeline ${timelineId} → Mode ${nextMode}`);
+    }
+    
+    // 📊 OBTENIR MODE TIMELINE
+    getTimelineMode(timelineId) {
+        if (this.selectedTimeline === timelineId) return 'active';
+        if (this.visibleTimelines.has(timelineId)) return 'visible';
+        if (this.visibleTimelines.size > 3) return 'ghost';
+        return 'hidden';
+    }
+    
+    // ⚙️ DÉFINIR MODE TIMELINE
+    setTimelineMode(timelineId, mode) {
+        switch(mode) {
+            case 'active':
+                this.selectTimeline(timelineId);
+                this.visibleTimelines.add(timelineId);
+                break;
+            case 'visible':
+                this.visibleTimelines.add(timelineId);
+                break;
+            case 'ghost':
+                this.visibleTimelines.add(timelineId);
+                // Mode fantôme = visible mais avec opacité réduite
+                break;
+            case 'hidden':
+                this.visibleTimelines.delete(timelineId);
+                if (this.selectedTimeline === timelineId) {
+                    // Sélectionner une autre timeline visible
+                    const otherVisible = Array.from(this.visibleTimelines)[0];
+                    if (otherVisible) {
+                        this.selectTimeline(otherVisible);
+                    }
+                }
+                break;
+        }
+    }
+    
+    // 🔄 RAFRAÎCHIR DIODES
+    refreshDiodes() {
+        const diodes = document.querySelectorAll('.timeline-diode');
+        diodes.forEach(diode => {
+            const timelineId = diode.dataset.timeline;
+            const mode = this.getTimelineMode(timelineId);
+            const isSelected = this.selectedTimeline === timelineId;
+            
+            // Mettre à jour style selon mode
+            const transparencyModes = {
+                'active': 1.0,
+                'visible': 0.7, 
+                'ghost': 0.3,
+                'hidden': 0.1
+            };
+            
+            diode.style.opacity = transparencyModes[mode];
+            diode.style.border = `2px solid ${isSelected ? '#FFF' : 'transparent'}`;
+            diode.style.animation = isSelected ? 'diodePulse 2s infinite' : 'none';
+            
+            // Mettre à jour tooltip
+            diode.title = `Timeline ${timelineId} - Mode: ${mode} (${Math.round(transparencyModes[mode]*100)}%)`;
+        });
+    }
+    
+    // 🎛️ CONTRÔLES HEADER COMPACTS AVEC DIODES
+    createHeaderFogControls() {
+        const controls = document.createElement('div');
+        controls.className = 'fog-controls-header';
+        
+        // Header titre
+        const header = document.createElement('span');
+        header.className = 'fog-header-compact';
+        header.textContent = '🌫️ ZFC';
+        controls.appendChild(header);
+        
+        // Diodes timelines
+        const diodes = this.createTimelineDiodes();
+        controls.appendChild(diodes);
+        
+        // Status compact
+        const status = document.createElement('span');
+        status.className = 'fog-status-header';
+        status.textContent = 'SYS';
+        status.title = 'Zone Force Causale Operational';
+        controls.appendChild(status);
+        
+        return controls;
+    }
+    
     // 🎛️ CONTRÔLES ULTRA-COMPACTS JEAN VERSION
     createFogControls() {
         const controls = document.createElement('div');

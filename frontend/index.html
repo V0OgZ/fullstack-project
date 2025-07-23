@@ -33,6 +33,9 @@
                 <button id="test-decay-btn" class="btn-warning">⏰ Test Decay</button>
                 <button id="dicebear-gallery-btn" class="btn-info">🎭 Dicebear Gallery</button>
                 <button id="settings-btn" class="btn-icon">⚙️</button>
+                
+                <!-- 🌫️ ZFC CONTROLS IN HEADER -->
+                <div id="fog-controls-header"></div>
             </div>
         </header>
         
@@ -52,9 +55,6 @@
             </div>
             
             <div class="side-panel">
-                <!-- 🌫️ Brouillard de Causalité -->
-                <div id="fog-controls-container"></div>
-                
                 <!-- 🎮 Contrôles Principaux -->
                 <div class="main-controls">
                     <div class="control-section">
@@ -149,13 +149,13 @@
     <script src="ui-emergency-fix.js"></script>
     <script src="canvas-hero-renderer.js"></script>
     <script src="dicebar-graphics-system.js"></script>
-    <script>
+    <script src="timeline-diodes-system.js"></script>    <script>
         // Initialize the comprehensive dicebar graphics system
         const dicebarSystem = new DicebarGraphicsSystem();
         
         // 🌫️ Initialiser le système de brouillard de causalité
         window.fogOfWarSystem = new FogOfWarSystem();
-        const fogControlsContainer = document.getElementById('fog-controls-container');
+        const fogControlsContainer = document.getElementById('fog-controls-header');
         if (fogControlsContainer) {
             fogControlsContainer.appendChild(window.fogOfWarSystem.createFogControls());
         }
