@@ -17,7 +17,7 @@ Bienvenue dans *Heroes of Time* — un jeu de stratégie asynchrone où le temps
 ## 🚀 Pour Commencer
 
 * 🎮 [Documentation complète (FR)](https://github.com/V0OgZ/Heroes-of-Time/blob/main/README.md)
-* 🌍 [Version anglaise](README.en.md)
+* 🌍 [Englih version](https://github.com/V0OgZ/Heroes-of-Time/blob/main/README.en.md)
 * 🧠 [Voir le dépôt GitHub](https://github.com/V0OgZ/Heroes-of-Time)
 
 ---
