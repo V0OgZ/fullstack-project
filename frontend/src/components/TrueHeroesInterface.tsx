@@ -135,14 +135,13 @@ const TrueHeroesInterface: React.FC = () => {
     }
   };
 
-  // Loading state
-  if (isLoading) {
+  // Loading state - SIMPLIFIÉ pour éviter le blocage
+  if (isLoading && !currentGame) {
     return (
       <div className="true-heroes-interface loading">
         <div className="loading-content">
-          <div className="loading-spinner"></div>
-          <h2>Loading Heroes of Time...</h2>
-          <p>Preparing your epic adventure</p>
+          <h2>🎮 Heroes of Time</h2>
+          <p>Interface Temporal Engine ready!</p>
         </div>
       </div>
     );
@@ -211,8 +210,6 @@ const TrueHeroesInterface: React.FC = () => {
           </button>
         </div>
       </div>
-    );
-  }
 
       {/* Main Content */}
       <div className="interface-content">
