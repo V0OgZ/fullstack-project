@@ -1,9 +1,0 @@
-🎛️ TEST SCÉNARIO PANOPTICΩN - JSON VERSION
-===========================================
-📋 Chargement du scénario JSON complet...
-[0;36m[11:01:23][0m 📄 Fichier scénario trouvé: panopticon_axis_test.json
-[0;36m[11:01:23][0m 🚀 Démarrage du test PANOPTICON JSON
-
-[0;34m🔍 Vérification du backend...[0m
-[0;31m❌ Backend non accessible sur localhost:8080[0m
-[0;33m💡 Assurez-vous que le backend est démarré[0m

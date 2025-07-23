@@ -231,3 +231,504 @@ Hibernate: insert into scenarios (id, artifacts, campaign_order, created_at, def
 07:14:10.492 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
 07:14:10.492 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{status=UP}]
 07:14:10.493 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+07:14:40.487 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/health", parameters={}
+07:14:40.487 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to com.example.demo.controller.GameController#health()
+07:14:40.487 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:14:40.487 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{status=UP}]
+07:14:40.488 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+07:14:56.011 [MessageBroker-2] INFO  org.springframework.web.socket.config.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 3, active threads = 1, queued tasks = 1, completed tasks = 1]
+07:15:10.487 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/health", parameters={}
+07:15:10.487 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to com.example.demo.controller.GameController#health()
+07:15:10.487 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:15:10.487 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{status=UP}]
+07:15:10.488 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+07:15:40.488 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/health", parameters={}
+07:15:40.489 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to com.example.demo.controller.GameController#health()
+07:15:40.489 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:15:40.490 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{status=UP}]
+07:15:40.490 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+07:16:10.487 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/health", parameters={}
+07:16:10.487 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to com.example.demo.controller.GameController#health()
+07:16:10.487 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:16:10.489 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{status=UP}]
+07:16:10.490 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+07:16:40.486 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/health", parameters={}
+07:16:40.486 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to com.example.demo.controller.GameController#health()
+07:16:40.486 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:16:40.487 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{status=UP}]
+07:16:40.487 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+07:17:10.489 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/health", parameters={}
+07:17:10.489 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to com.example.demo.controller.GameController#health()
+07:17:10.490 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:10.490 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{status=UP}]
+07:17:10.490 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+07:17:37.070 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/game/status", parameters={}
+07:17:37.074 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.075 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/game/status", parameters={}
+07:17:37.075 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.075 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.076 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.076 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.076 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.076 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/game/status", parameters={}
+07:17:37.077 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+07:17:37.078 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.077 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+07:17:37.078 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.079 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.079 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.079 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.079 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+07:17:37.080 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.082 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.083 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.083 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.083 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 CEST 2025, status=404, error=Not Found, path=/api/game/status}]
+07:17:37.084 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/game/status}]
+07:17:37.084 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/game/status}]
+07:17:37.098 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.098 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.098 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.102 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/health", parameters={}
+07:17:37.103 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.104 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.105 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.105 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+07:17:37.105 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.106 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.106 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/health}]
+07:17:37.106 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.116 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games", parameters={}
+07:17:37.116 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games", parameters={}
+07:17:37.116 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games", parameters={}
+07:17:37.116 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.117 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.117 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.117 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.117 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.117 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.117 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.117 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.117 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.118 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.118 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.118 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.118 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.118 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.118 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.118 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.118 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.119 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.119 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.119 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.119 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.119 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.119 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.120 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.142 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/games/create", parameters={}
+07:17:37.143 [http-nio-8080-exec-6] WARN  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported]
+07:17:37.143 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 405 METHOD_NOT_ALLOWED
+07:17:37.144 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.144 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.145 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.146 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=405, error=Method Not Allowed, path=/api/games (truncated)...]
+07:17:37.147 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 405
+07:17:37.151 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games/null/execute", parameters={}
+07:17:37.152 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games//script", parameters={}
+07:17:37.152 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.152 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.153 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.153 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.153 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.153 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.153 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.154 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.154 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.154 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.154 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.155 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.155 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.155 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.155 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.156 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.163 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games/null/execute", parameters={}
+07:17:37.164 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.165 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.166 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.167 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.168 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.168 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.169 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.170 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.180 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games/null/execute", parameters={}
+07:17:37.180 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.180 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.180 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.181 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games//script", parameters={}
+07:17:37.181 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.181 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.181 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.181 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.181 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.181 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.181 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.182 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.182 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.183 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.183 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.183 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.184 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.211 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games//script", parameters={}
+07:17:37.212 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.213 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.213 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.214 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.214 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.215 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.215 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.215 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.219 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games/null/execute", parameters={}
+07:17:37.219 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.220 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.220 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.220 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.220 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.220 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.220 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.221 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.236 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games/null/execute", parameters={}
+07:17:37.236 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.236 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.237 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.237 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.238 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.239 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.239 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.240 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.244 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal-engine/execute/null", parameters={}
+07:17:37.244 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.244 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games/null/execute", parameters={}
+07:17:37.244 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.245 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.245 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.245 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.245 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.245 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.246 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.246 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.246 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal-engin (truncated)...]
+07:17:37.246 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.246 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.246 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.247 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.248 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.248 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.251 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games//script", parameters={}
+07:17:37.251 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.251 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.252 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.252 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.252 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.252 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.252 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.252 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.271 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games/null/execute", parameters={}
+07:17:37.272 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.273 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.273 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.274 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.274 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.276 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.276 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.277 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.283 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games/null/execute", parameters={}
+07:17:37.283 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games//script", parameters={}
+07:17:37.283 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.283 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.283 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.284 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.284 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.284 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.284 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.284 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.284 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.284 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.284 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.285 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.285 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.285 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.286 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.286 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.313 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games//script", parameters={}
+07:17:37.313 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.313 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games/null/execute", parameters={}
+07:17:37.314 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.314 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.314 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.314 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.314 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.314 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.314 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.315 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.315 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.315 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.316 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.316 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.317 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.317 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.317 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.328 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games/null/execute", parameters={}
+07:17:37.328 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.329 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.330 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.330 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.331 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.331 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.332 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.332 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.341 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games//script", parameters={}
+07:17:37.342 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games/null/execute", parameters={}
+07:17:37.343 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.342 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.344 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.344 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.344 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.344 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.345 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.345 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.345 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.345 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.345 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.345 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.346 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.346 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.346 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.346 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.358 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games/null/execute", parameters={}
+07:17:37.359 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.360 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.360 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.360 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.361 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.361 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.362 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.363 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.367 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games/null/execute", parameters={}
+07:17:37.367 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games//script", parameters={}
+07:17:37.368 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.368 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.368 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.368 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.368 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.368 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.368 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.368 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.368 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.368 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.369 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.368 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.369 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.369 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.369 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.369 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.385 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/games/create", parameters={}
+07:17:37.385 [http-nio-8080-exec-5] WARN  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported]
+07:17:37.385 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 405 METHOD_NOT_ALLOWED
+07:17:37.386 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/games/create", parameters={}
+07:17:37.386 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.387 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.387 [http-nio-8080-exec-4] WARN  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported]
+07:17:37.387 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 405 METHOD_NOT_ALLOWED
+07:17:37.388 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.388 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.388 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.388 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=405, error=Method Not Allowed, path=/api/games (truncated)...]
+07:17:37.389 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 405
+07:17:37.388 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.391 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=405, error=Method Not Allowed, path=/api/games (truncated)...]
+07:17:37.392 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 405
+07:17:37.392 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/games/create", parameters={}
+07:17:37.393 [http-nio-8080-exec-4] WARN  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported]
+07:17:37.393 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 405 METHOD_NOT_ALLOWED
+07:17:37.393 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.393 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.393 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.393 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=405, error=Method Not Allowed, path=/api/games (truncated)...]
+07:17:37.393 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 405
+07:17:37.397 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/games/create", parameters={}
+07:17:37.398 [http-nio-8080-exec-8] WARN  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported]
+07:17:37.398 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 405 METHOD_NOT_ALLOWED
+07:17:37.398 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.399 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.399 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.399 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=405, error=Method Not Allowed, path=/api/games (truncated)...]
+07:17:37.400 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 405
+07:17:37.407 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games//script", parameters={}
+07:17:37.408 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.409 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.409 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.410 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.410 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/games/create", parameters={}
+07:17:37.410 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.410 [http-nio-8080-exec-4] WARN  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported]
+07:17:37.410 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 405 METHOD_NOT_ALLOWED
+07:17:37.410 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/games/create", parameters={}
+07:17:37.410 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.410 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.410 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.410 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games/null/execute", parameters={}
+07:17:37.411 [http-nio-8080-exec-5] WARN  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported]
+07:17:37.411 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 405 METHOD_NOT_ALLOWED
+07:17:37.411 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.411 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.411 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.411 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.411 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.411 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.411 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=405, error=Method Not Allowed, path=/api/games (truncated)...]
+07:17:37.411 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/games/create", parameters={}
+07:17:37.411 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/games/create", parameters={}
+07:17:37.411 [http-nio-8080-exec-9] WARN  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported]
+07:17:37.411 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 405 METHOD_NOT_ALLOWED
+07:17:37.411 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.411 [http-nio-8080-exec-6] WARN  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported]
+07:17:37.412 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.412 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.412 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.412 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.412 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/games/create", parameters={}
+07:17:37.412 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.412 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=405, error=Method Not Allowed, path=/api/games (truncated)...]
+07:17:37.412 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.412 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 405 METHOD_NOT_ALLOWED
+07:17:37.412 [http-nio-8080-exec-8] WARN  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported]
+07:17:37.412 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 405 METHOD_NOT_ALLOWED
+07:17:37.412 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 405
+07:17:37.412 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.412 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.412 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=405, error=Method Not Allowed, path=/api/games (truncated)...]
+07:17:37.412 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.413 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.413 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.413 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 405
+07:17:37.413 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.413 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 405
+07:17:37.413 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.412 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.414 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.414 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.414 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=405, error=Method Not Allowed, path=/api/games (truncated)...]
+07:17:37.413 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=405, error=Method Not Allowed, path=/api/games (truncated)...]
+07:17:37.414 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 405
+07:17:37.414 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 405
+07:17:37.415 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/games/create", parameters={}
+07:17:37.415 [http-nio-8080-exec-5] WARN  org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported]
+07:17:37.415 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 405 METHOD_NOT_ALLOWED
+07:17:37.415 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games/null/execute", parameters={}
+07:17:37.416 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.416 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.416 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.416 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=405, error=Method Not Allowed, path=/api/games (truncated)...]
+07:17:37.416 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.416 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 405
+07:17:37.417 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.417 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.418 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.418 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.418 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.418 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.419 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.432 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/temporal/games/null/state", parameters={}
+07:17:37.433 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.433 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games//script", parameters={}
+07:17:37.433 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.434 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.434 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.434 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal-engine/execute/null", parameters={}
+07:17:37.434 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.434 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.434 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.434 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+07:17:37.434 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.434 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.434 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.434 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.434 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal-engine/execute/null", parameters={}
+07:17:37.434 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.434 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.434 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal/games/null/execute", parameters={}
+07:17:37.434 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.435 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.435 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.435 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.435 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.435 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.435 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.435 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.435 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.435 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.435 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal-engin (truncated)...]
+07:17:37.435 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.435 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.435 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.435 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal-engine/execute/null", parameters={}
+07:17:37.435 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.436 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.436 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.436 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.436 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.436 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.436 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.436 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.436 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.437 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/games (truncated)...]
+07:17:37.437 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.437 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.437 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.438 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.438 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.438 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.438 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal-engin (truncated)...]
+07:17:37.438 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal-engin (truncated)...]
+07:17:37.439 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.439 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.442 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal-engine/execute/null", parameters={}
+07:17:37.442 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal-engine/execute/null", parameters={}
+07:17:37.443 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.443 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.444 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.444 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.444 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.444 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.444 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.445 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.445 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.445 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.445 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.445 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal-engin (truncated)...]
+07:17:37.445 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.446 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.446 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal-engin (truncated)...]
+07:17:37.446 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:17:37.447 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/temporal-engine/execute/null", parameters={}
+07:17:37.447 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:17:37.448 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:17:37.448 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:17:37.449 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+07:17:37.449 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:17:37.450 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:17:37.450 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:17:37 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal-engin (truncated)...]
+07:17:37.451 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  03:44 min
+[INFO] Finished at: 2025-07-23T07:17:37+02:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:2.7.18:run (default-cli) on project demo: Application finished with exit code: 137 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

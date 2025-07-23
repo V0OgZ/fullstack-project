@@ -188,7 +188,7 @@ echo "🎳 The Dude is analyzing dependencies..."
 
 # Timestamp pour cette exécution
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
-RAPPORT_DIR="rapport-jean-gros-v3-${TIMESTAMP}"
+RAPPORT_DIR="test-reports/rapport-jean-gros-v3-${TIMESTAMP}"
 mkdir -p "$RAPPORT_DIR"
 
 echo "📊 Rapport sera généré dans: $RAPPORT_DIR"
