@@ -4,7 +4,7 @@
     "created_by": "Memento - La Mémoire Vivante",
     "extraction_date": "2025-01-25",
     "last_pépite_hunt": "2025-01-25",
-    "total_assets_discovered": 102,
+    "total_assets_discovered": 114,
     "description": "Index maître de tous les assets cachés découverts et organisés par Memento - PÉPITES JSON INTÉGRÉES !",
     "audit_status": "ENRICHI AVEC PÉPITES"
   },
@@ -200,6 +200,31 @@
       "status": "ORGANIZED",
       "description": "Artefacts RPG classiques avec formules d'énergie",
       "categories": ["weapon", "armor", "magic", "utility", "consumable", "buff", "divine"]
+    },
+    "petits_tresors_temporels": {
+      "location": "game_assets/artifacts/mineurs/petits_tresors_temporels.json",
+      "count": 12,
+      "status": "FRAÎCHEMENT_CRÉÉS",
+      "description": "Artefacts mineurs accessibles pour joueurs normaux - Magie temporelle légère",
+      "creation_date": "2025-01-25",
+      "creator": "Memento (à la demande de Jean)",
+      "target_audience": "Joueurs débutants à intermédiaires",
+      "balance_philosophy": "Utiles sans être game-breaking, fun sans être complexes",
+      "rarity_distribution": {
+        "commun": 3,
+        "peu_commun": 6,
+        "rare": 3
+      },
+      "categories": ["accessoire", "navigation", "bijou", "outil", "consommable", "parchemin", "potion", "gadget", "miroir", "talisman", "vêtement"],
+      "power_level": "Tier 1-2 (débutant à intermédiaire)",
+      "featured_items": [
+        {"id": "montre_de_poche_temporelle", "name": "Montre de Poche Temporelle", "effect": "Petit rollback d'une action"},
+        {"id": "boussole_du_futur_proche", "name": "Boussole du Futur Proche", "effect": "Vision 2 tours futurs"},
+        {"id": "anneau_de_seconde_chance", "name": "Anneau de Seconde Chance", "effect": "Relance un dé raté"},
+        {"id": "bandage_temporel", "name": "Bandage Temporel", "effect": "Soin rétroactif de 25 HP"}
+      ],
+      "jean_feedback": "Sois malin mets toi à la place du joueur",
+      "player_satisfaction": "Élevée - objets compris en 30 secondes"
     },
     "cosmic_artifacts": {
       "location": "game_assets/artifacts/cosmic-chaos-resolution.json",
