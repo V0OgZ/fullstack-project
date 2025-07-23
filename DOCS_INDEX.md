@@ -1,6 +1,6 @@
 # 📚 Heroes of Time - Documentation Index
 
-**Last Updated**: January 2025  
+**Last Updated**: January 25, 2025 - Mission Echo Temporel + Sphinx Quantique  
 **Status**: 🔄 **ACTIVE** - Primary documentation navigation
 
 ## 📖 How to Use This Index
@@ -58,6 +58,13 @@ This index organizes all project documentation by category. Files marked with �
 - ✅ **[OBJETS_MAGIQUES_GUIDE.md](OBJETS_MAGIQUES_GUIDE.md)** - Magic objects system
 - ✅ **[DRAGON_ROUGE_SAUVEGARDE.md](DRAGON_ROUGE_SAUVEGARDE.md)** - Dragon preservation story
 - ✅ **[ECRANS_MANQUANTS.md](ECRANS_MANQUANTS.md)** - Missing screens analysis
+
+### 🌟 Mission Echo Temporel - Innovation Documents (January 25, 2025)
+- ✅ **[SCENARIO_ECHO_TEMPOREL_SAUVETAGE.md](SCENARIO_ECHO_TEMPOREL_SAUVETAGE.md)** - Scénario épique équipe paradoxale
+- ✅ **[ANALYSE_CONCEPTS_RECUPERES_MISSION_ECHO.md](ANALYSE_CONCEPTS_RECUPERES_MISSION_ECHO.md)** - Analyse concepts commit 4f3c99b + PokerHeroesOfTime
+- ✅ **[STATUS_TOTALE_MUR_CAUSALITE_FRONTENDS.md](STATUS_TOTALE_MUR_CAUSALITE_FRONTENDS.md)** - Status collision port 3000 vs 8000
+- ✅ **[DOCUMENT_CONSOLIDE_FUSION_FRONTENDS_COMPLET.md](DOCUMENT_CONSOLIDE_FUSION_FRONTENDS_COMPLET.md)** - Plan merge complet frontends
+- ✅ **[APPARITION_SPHINX_QUANTIQUE_DEFI_FINAL.md](APPARITION_SPHINX_QUANTIQUE_DEFI_FINAL.md)** - Défi physique quantique + Forge Ultime
 
 ---
 
@@ -170,5 +177,5 @@ For questions about this documentation:
 2. Review [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines
 3. See [TECHNICAL_DOCUMENTATION.md](TECHNICAL_DOCUMENTATION.md) for technical details
 
-**Last Review**: January 2025  
+**Last Review**: January 25, 2025  
 **Next Review**: February 2025 
