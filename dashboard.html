@@ -588,8 +588,8 @@
             <button class="launch-button" onclick="openEtherealMode()" style="background: linear-gradient(45deg, #9d4edd, #c77dff); box-shadow: 0 0 15px rgba(157, 78, 221, 0.5);">
                 🌟 Mode Éthéré
             </button>
-            <a href="frontend/forge-runique-ultime.html" target="_blank" class="launch-button" style="background: linear-gradient(45deg, #FFD700, #FFA500); color: #8B4513; margin-top: 10px; box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);">
-                🔨⚡ Forge Runique 1111 ⚡🔨
+            <a href="http://localhost:8000/forge-runique-ultime.html" target="_blank" class="launch-button" style="background: linear-gradient(45deg, #FFD700, #FFA500); color: #8B4513; margin-top: 10px; box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);">
+                🌟 Forge Runique Ultime
             </a>
         </div>
 
@@ -692,10 +692,10 @@
                 <li>🌟 Mode lecture seule</li>
             </ul>
             <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 15px;">
-                <button class="launch-button" onclick="openJointInterface()" style="background: linear-gradient(45deg, #4ecdc4, #44a08d);">
+                <button class="launch-button" onclick="openJointInterfaceDeluxe()" style="background: linear-gradient(45deg, #4ecdc4, #44a08d);">
                     🚬 Utiliser le Joint
                 </button>
-                <button class="launch-button" onclick="openPanopticon3D()" style="background: linear-gradient(45deg, #9b59b6, #8e44ad);">
+                <button class="launch-button" onclick="openJointSmartInterface()" style="background: linear-gradient(45deg, #9b59b6, #8e44ad);">
                     🔮 Panopticon 3D
                 </button>
                 <button class="launch-button" onclick="openDicebarGallery()" style="background: linear-gradient(45deg, #e74c3c, #c0392b);">
@@ -779,41 +779,12 @@
 
     <script>
         // 🚬 Fonctions pour le Joint Oublié
-        function openJointInterface() {
-            window.open('frontend/joint-panopticon-interface.html', '_blank', 'width=1200,height=800');
+        function openJointInterfaceDeluxe() {
+            window.open('http://localhost:8000/joint-panopticon-interface.html', '_blank', 'width=1200,height=800');
         }
         
-        function openPanopticon3D() {
-            window.open('panopticon-3d/index.html', '_blank', 'width=1400,height=900');
-        }
-        
-        async function testJointAccess() {
-            try {
-                const response = await fetch('/api/temporal/panopticon/test-access/1');
-                const data = await response.json();
-                
-                if (data.success) {
-                    document.getElementById('joint-status').textContent = '✅ Test réussi';
-                    document.getElementById('joint-status').style.color = '#4ecdc4';
-                } else {
-                    document.getElementById('joint-status').textContent = '❌ Test échoué';
-                    document.getElementById('joint-status').style.color = '#ff6b6b';
-                }
-            } catch (error) {
-                document.getElementById('joint-status').textContent = '❌ Erreur connexion';
-                document.getElementById('joint-status').style.color = '#ff6b6b';
-            }
-        }
-        
-        function testJointInterface() {
-            window.open('frontend/joint-panopticon-interface.html', '_blank', 'width=1200,height=800');
-            document.getElementById('joint-status').textContent = '🎭 Interface ouverte';
-            document.getElementById('joint-status').style.color = '#17a2b8';
-        }
-        
-        function quickJointAccess() {
-            // Accès rapide avec données pré-remplies
-            const jointWindow = window.open('frontend/joint-panopticon-interface.html', '_blank', 'width=1200,height=800');
+        function openJointSmartInterface() {
+            const jointWindow = window.open('http://localhost:8000/joint-panopticon-interface.html', '_blank', 'width=1200,height=800');
             
             // Pré-remplir les champs après chargement
             jointWindow.onload = function() {
@@ -837,7 +808,7 @@
         }
         
         function openDicebarGallery() {
-            window.open('http://localhost:8004/dicebear-map-demo.html', '_blank', 'width=1400,height=900');
+            window.open('http://localhost:8000/dicebar-gallery.html', '_blank', 'width=1400,height=900');
         }
         
         function openDicebarMapDemo() {
@@ -850,7 +821,7 @@
 
         // 🦁 Fonctions pour le Sphinx Quantique
         function openSphinxDemo() {
-            window.open('frontend/sphinx-interface-demo.html', '_blank', 'width=1400,height=900');
+            window.open('http://localhost:8000/sphinx-interface-demo.html', '_blank', 'width=1400,height=900');
         }
         
         async function runSphinxGenerator() {
