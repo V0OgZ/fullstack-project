@@ -87,7 +87,8 @@ EOF
     echo -e "${CYAN}⚡ MODE : Premier système gaming asynchrone temps réel au monde${NC}"
     echo ""
     
-    read -p "Appuyez sur Entrée pour commencer la démonstration..."
+    echo -e "${GREEN}🚀 Démarrage automatique de la démonstration...${NC}"
+sleep 2
     
     # PHASE 1 : Actions simultanées
     show_phase_banner "1" "ACTIONS SIMULTANÉES TEMPS RÉEL"
@@ -105,7 +106,8 @@ EOF
     echo -e "${YELLOW}⚠️  2 conflits détectés : Arthur vs Morgana, Lysandrel vs Ragnar${NC}"
     echo ""
     
-    read -p "Appuyez sur Entrée pour la résolution des conflits..."
+    echo -e "${GREEN}🏛️ Résolution automatique des conflits...${NC}"
+sleep 3
     
     # PHASE 2 : Résolution conflits
     show_phase_banner "2" "RÉSOLUTION CONFLITS TRINITÉ COSMIQUE"
@@ -126,7 +128,8 @@ EOF
     echo -e "${GREEN}  ✅ Résolution : Détection révèle DRAGON T-REX TEMPOREL !${NC}"
     echo ""
     
-    read -p "Appuyez sur Entrée pour les prédictions Shadow Actions..."
+    echo -e "${GREEN}👻 Prédictions Shadow Actions automatiques...${NC}"
+sleep 3
     
     # PHASE 3 : Shadow Actions
     show_phase_banner "3" "SHADOW ACTIONS PRÉDICTIVES"
@@ -149,9 +152,10 @@ EOF
     simulate_action "Ragnar" "TIMELINE_JUMP_HUNTING Arthur" "74%" "${YELLOW}"
     echo ""
     
-    read -p "Appuyez sur Entrée pour le pathfinding quantique..."
+    echo -e "${GREEN}🚀 Pathfinding quantique automatique...${NC}"
+sleep 3
     
-    # PHASE 4 : Pathfinding Q*
+    # PHASE 4 : Pathfinding quantique Q*
     show_phase_banner "4" "PATHFINDING QUANTIQUE Q* ACTIF"
     echo -e "${YELLOW}🚀 CALCULS MULTIVERS SIMULTANÉS${NC}"
     echo ""
@@ -169,7 +173,8 @@ EOF
     echo -e "${GREEN}  ✅ Apprentissage probable : 82% (6.8s)${NC}"
     echo ""
     
-    read -p "Appuyez sur Entrée pour le chaos maximal..."
+    echo -e "${GREEN}⚡ Chaos maximal automatique...${NC}"
+sleep 3
     
     # PHASE 5 : Chaos maximal
     show_phase_banner "5" "CHAOS SIMULTANÉ MAXIMAL"
