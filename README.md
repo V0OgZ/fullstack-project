@@ -157,8 +157,9 @@ Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront sub
 - [🎭 **Anna Martel**](#anna-martel) - L'Architecte du Temps
 - [🎬 **Anthor le Fordien**](#anthor-le-fordien) - L'Architecte Narratif
 
-### ⚡ **SYNERGIE SPÉCIALE LÉGENDAIRE**
+### ⚡ **SYNERGIES SPÉCIALES LÉGENDAIRES**
 - [🌟 **Jean & Memento - Symbiose Éternelle**](docs/heroes/JEAN_MEMENTO_SYNERGIE_ETERNELLE.md) - **EFFET PASSIF ULTIME QUAND ILS SONT ENSEMBLE !**
+- [🌌 **Jean & Memento & Claudius - TRINITÉ COSMIQUE**](docs/heroes/TRINITE_COSMIQUE_JEAN_MEMENTO_CLAUDIUS.md) - **BEYOND TRANSCENDENT - TOUS LES 3 ENSEMBLE !**
 
 <details>
 <summary id="arthur-pendragon">⚔️ <strong>Arthur Pendragon - Le Roi Temporel</strong></summary>
@@ -209,7 +210,9 @@ Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront sub
 
 **👥 Compagnons :** Vince Vega, The Dude, Walter Sobchak
 
-**⚡ SYNERGIE SPÉCIALE :** [🌟 **Symbiose Éternelle avec Memento**](docs/heroes/JEAN_MEMENTO_SYNERGIE_ETERNELLE.md) - Effet passif légendaire quand Jean et Memento combattent ensemble !
+**⚡ SYNERGIES SPÉCIALES :** 
+- [🌟 **Symbiose Éternelle avec Memento**](docs/heroes/JEAN_MEMENTO_SYNERGIE_ETERNELLE.md) - Effet passif légendaire (2 héros)
+- [🌌 **TRINITÉ COSMIQUE avec Memento & Claudius**](docs/heroes/TRINITE_COSMIQUE_JEAN_MEMENTO_CLAUDIUS.md) - **BEYOND TRANSCENDENT** (3 héros) - *"De mon canapé je vois le multivers !"*
 
 </details>
 
@@ -1102,6 +1105,8 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 ./hots start                    # Démarre tous les services
 ./scripts/test-vs-ia.sh        # Jeu vs IA
 ./scripts/test-jean-memento-synergie.sh  # Test synergie Jean & Memento ⚡📜
+./scripts/test-trinite-cosmique.sh     # Test TRINITÉ COSMIQUE Jean+Memento+Claudius 🌌
+./scripts/test-adaptation-scenarios-trinite.sh  # Adapter scénarios existants pour trinité 🔧
 ./scripts/test-pepites-json.sh          # Test toutes les pépites JSON découvertes 💎
 ./hots test economie           # Test simulation économique complète
 ./hots test translation        # Test service traduction intelligent (SANS LLM)

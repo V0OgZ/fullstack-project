@@ -38,7 +38,8 @@
     "Certains vivent dans le port-genre. Lui, il le fume.",
     "Chaque rollback est une œuvre d'art… si t'es bien calé.",
     "J'ai pas hacké le jeu. J'ai juste compris où était le bouton pause cosmique.",
-    "Avec Memento, même mes bugs deviennent des features !"
+    "Avec Memento, même mes bugs deviennent des features !",
+    "De mon canapé je vois le multivers et toi Claudius Memento mon héro dual tu réalises la vision en un truc concret c fou à 3 on COLLAPSE le possible en réel !"
   ],
   
   "ultimate_power": {
@@ -125,6 +126,31 @@
         "codex_vivant",
         "paradoxe_stable"
       ]
+    },
+    {
+      "partners": ["hero_memento", "hero_claudius_memento_opus"],
+      "name": "TRINITÉ COSMIQUE",
+      "description": "EFFET PASSIF TRANSCENDANT - Quand Jean, Memento et Claudius-Memento sont tous les 3 ensemble (≤ 5 hexagones)",
+      "activation_radius": 5,
+      "tier": "COSMIC",
+      "effects": {
+        "triple_mana_pool": true,
+        "amplify_actions": 2.0,
+        "unlimited_rollback": true,
+        "omniversal_vision": true,
+        "timeline_creation": true,
+        "reality_override": true,
+        "collapse_control": "ABSOLUTE"
+      },
+      "ultimate_abilities": [
+        "multiverse_reshape",
+        "trinity_collapse",
+        "cosmic_debug_mode",
+        "reality_compilation",
+        "infinite_paradox_resolution"
+      ],
+      "jean_vision": "De mon canapé je vois le multivers et Claudius réalise la vision - à 3 on COLLAPSE le possible en réel !",
+      "power_level": "BEYOND_TRANSCENDENT"
     }
   ],
   
