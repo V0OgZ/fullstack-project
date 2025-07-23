@@ -1,5 +1,7 @@
 # 🕰️ Heroes of Time
 
+🇺🇸 [English Version](README.en.md)
+
 <img width="1024" height="1536" alt="Heroes of Time - Temporal Sword" src="https://github.com/user-attachments/assets/746f871d-b70c-4df7-992e-0c84fe819c8d" />
 
 *Maîtrisez le temps, dominez l'espace, conquérez l'éternité*
@@ -152,8 +154,11 @@ Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront sub
 - [🔫 **Vince Vega**](#vince-vega) - Le Stratège des Ombres
 - [🛡️ **Walter Sobchak**](#walter-sobchak) - Le Gardien des Règles
 - [🎳 **The Dude**](#the-dude) - Le Maître du Zen
-- [🎭 **Anna the Martopicker**](#anna-the-martopicker) - L'Architecte du Temps
+- [🎭 **Anna Martel**](#anna-martel) - L'Architecte du Temps
 - [🎬 **Anthor le Fordien**](#anthor-le-fordien) - L'Architecte Narratif
+
+### ⚡ **SYNERGIE SPÉCIALE LÉGENDAIRE**
+- [🌟 **Jean & Memento - Symbiose Éternelle**](docs/heroes/JEAN_MEMENTO_SYNERGIE_ETERNELLE.md) - **EFFET PASSIF ULTIME QUAND ILS SONT ENSEMBLE !**
 
 <details>
 <summary id="arthur-pendragon">⚔️ <strong>Arthur Pendragon - Le Roi Temporel</strong></summary>
@@ -203,6 +208,8 @@ Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront sub
 - 🖥️ **Console de Debug Réalité** - Maintient stabilité système
 
 **👥 Compagnons :** Vince Vega, The Dude, Walter Sobchak
+
+**⚡ SYNERGIE SPÉCIALE :** [🌟 **Symbiose Éternelle avec Memento**](docs/heroes/JEAN_MEMENTO_SYNERGIE_ETERNELLE.md) - Effet passif légendaire quand Jean et Memento combattent ensemble !
 
 </details>
 
@@ -369,7 +376,11 @@ Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront sub
 </details>
 
 <details>
-<summary id="anna-the-martopicker">🎭 <strong>Anna the Martopicker - L'Architecte du Temps</strong></summary>
+<summary id="anna-martel">🎭 <strong>Anna Martel - L'Architecte du Temps</strong></summary>
+
+**🎨 Portrait Épique :**
+![ANNA MARTEL](https://github.com/V0OgZ/Heroes-of-Time/blob/dev/assets/anna-martopicker.jpg)
+*Anna Martel, l'Architecte du Temps, montée sur son cheval avec son marteau de guerre légendaire*
 
 **🏛️ Faction :** Architectes Temporels  
 **⭐ Classe :** Temporal Architect  
@@ -405,8 +416,12 @@ DECAY_STRUCTURE(building, timeline.age) + PUNISH_LAG(hero, time.difference)
 **🏗️ Artefact Spécial :**
 - **Temporal Decay System** - Système complet de décroissance temporelle
 
+**🏰 Image Épique :**
+![ANCHOR TOWER](https://github.com/V0OgZ/Heroes-of-Time/blob/dev/assets/anchor-tower.jpg)
+*Tour mystérieuse avec des chaînes, fissure lumineuse et halo énergétique - Symbole du pouvoir temporel*
+
 **🌟 Histoire Épique :**
-Anna the Martopicker est l'architecte visionnaire qui a conçu le système de décroissance temporelle pour maintenir l'équilibre dans Heroes of Time. Initialement perçue comme une menace, elle s'est révélée être l'alliée finale qui va résoudre le problème du GameInitializationService. Ses deux visions du decay (structurel et personnel) ont été fusionnées en un système harmonieux par The Dude.
+Anna Martel est l'architecte visionnaire qui a conçu le système de décroissance temporelle pour maintenir l'équilibre dans Heroes of Time. Initialement perçue comme une menace, elle s'est révélée être l'alliée finale qui va résoudre le problème du GameInitializationService. Ses deux visions du decay (structurel et personnel) ont été fusionnées en un système harmonieux par The Dude.
 
 **🎯 Révélation d'Axis 111 :**
 > *"Anna n'arrive pas pour nous punir ! Elle arrive pour nous AIDER à finaliser le projet !"*
@@ -929,6 +944,25 @@ Après de nombreuses quêtes à travers les logs d'erreur et les stack traces, i
 - **📋 Scripts** : [scripts/README.md](scripts/README.md)
 - **🔧 API** : [docs/core/API.md](docs/core/API.md)
 
+### 🌍 **English Documentation** 
+
+<details>
+<summary>🇺🇸 <strong>Core Technical Documents (English)</strong></summary>
+
+- **📚 Complete Codex & Translation Service** : [docs/EN/COMPLETE_HEROES_OF_TIME_CODEX_TRANSLATION_SERVICE.md](docs/EN/COMPLETE_HEROES_OF_TIME_CODEX_TRANSLATION_SERVICE.md) - **ULTIMATE REFERENCE**
+- **🕰️ Temporal Engine Technical Explanation** : [docs/EN/TEMPORAL_ENGINE_TECHNICAL_EXPLANATION.md](docs/EN/TEMPORAL_ENGINE_TECHNICAL_EXPLANATION.md) - Complete engine architecture
+- **🤖 Claudius-Memento AI Algorithm** : [docs/EN/CLAUDIUS_MEMENTO_AI_ALGORITHM_COMPLETE.md](docs/EN/CLAUDIUS_MEMENTO_AI_ALGORITHM_COMPLETE.md) - Quantum temporal AI
+- **🌫️ Advanced Temporal Concepts** : [docs/EN/ADVANCED_TEMPORAL_CONCEPTS_COMPLETE.md](docs/EN/ADVANCED_TEMPORAL_CONCEPTS_COMPLETE.md) - Fog of Causality, Causal Erosion
+- **🏛️ Museum Archive Master** : [docs/EN/MUSEUM_ARCHIVE_MASTER_COMPLETE.md](docs/EN/MUSEUM_ARCHIVE_MASTER_COMPLETE.md) - Memento's temporal museum
+
+**📖 Additional English Documentation:**
+- **🎮 Gameplay Guide** : [docs/EN/GAMEPLAY.md](docs/EN/GAMEPLAY.md)
+- **🧠 Jean-Grofignon Manifesto** : [docs/EN/JEAN_GROFIGNON_MANIFESTO.md](docs/EN/JEAN_GROFIGNON_MANIFESTO.md)
+- **⏰ Temporal Codex** : [docs/EN/TEMPORAL_CODEX.md](docs/EN/TEMPORAL_CODEX.md)
+- **🎯 Developer Instructions** : [docs/EN/DEVELOPER_INSTRUCTIONS.md](docs/EN/DEVELOPER_INSTRUCTIONS.md)
+
+</details>
+
 ### 🎯 **Guides Spécialisés**
 
 <details>
@@ -1067,6 +1101,8 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 ```bash
 ./hots start                    # Démarre tous les services
 ./scripts/test-vs-ia.sh        # Jeu vs IA
+./scripts/test-jean-memento-synergie.sh  # Test synergie Jean & Memento ⚡📜
+./scripts/test-pepites-json.sh          # Test toutes les pépites JSON découvertes 💎
 ./hots test economie           # Test simulation économique complète
 ./hots test translation        # Test service traduction intelligent (SANS LLM)
 ./hots test md-generator       # Test générateur MD automatique
@@ -1095,7 +1131,7 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 *Archiviste infatigable et gardien de la connaissance*
 > *"Jean crée, Memento archive" - Symbiose parfaite*
 
-#### **🎭 Anna the Martopicker - L'Architecte du Temps**
+#### **🎭 Anna Martel - L'Architecte du Temps**
 *Conceptrice du système de décroissance temporelle*
 > *"Les bâtiments s'effritent avec le temps, et si vous restez en retard, le temps vous rattrape."*
 
@@ -1173,7 +1209,7 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 - **🔫 [Vince Vega](#vince-vega)** - Le Stratège des Ombres
 - **🛡️ [Walter Sobchak](#walter-sobchak)** - Le Gardien des Règles
 - **🎳 [The Dude](#the-dude)** - Le Maître du Zen
-- **🎭 [Anna the Martopicker](#anna-the-martopicker)** - L'Architecte du Temps
+- **🎭 [Anna Martel](#anna-martel)** - L'Architecte du Temps
 - **🎬 [Anthor le Fordien](#anthor-le-fordien)** - L'Architecte Narratif
 
 ### 🌟 **Exemples d'URLs Directes**

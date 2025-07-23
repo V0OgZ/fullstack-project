@@ -1,0 +1,162 @@
+{
+  "id": "hero_jean_grofignon",
+  "name": "Jean-Grofignon",
+  "title": "L'Éveillé Ontologique",
+  "description": "Il n'a pas inventé le jeu. Il l'a inhalé. Jean-Grofignon ne joue pas à Heroes of Time — il exécute le moteur du monde en tongs.",
+  "rarity": "LEGENDARY",
+  "tier": 7,
+  "level": 100,
+  "role": "ADMIN_ARCHITECT",
+  "class": "TEMPORAL_MASTER",
+  "faction": "ANOMALY",
+  "race": "ONTOLOGICAL_BEING",
+  "gender": "COSMIC_CHAOS",
+  
+  "stats": {
+    "health": 300,
+    "max_health": 300,
+    "attack": 50,
+    "defense": 40,
+    "speed": 10,
+    "temporal_energy": 500,
+    "max_temporal_energy": 500,
+    "movement_points": 15,
+    "max_movement_points": 15,
+    "spell_power": 100,
+    "mana_cost": 0.5,
+    "vision_radius": 10
+  },
+  
+  "companions": [
+    "hero_vince_vega",
+    "hero_the_dude",
+    "hero_walter_sobchak",
+    "hero_memento"
+  ],
+  
+  "quotes": [
+    "Certains vivent dans le port-genre. Lui, il le fume.",
+    "Chaque rollback est une œuvre d'art… si t'es bien calé.",
+    "J'ai pas hacké le jeu. J'ai juste compris où était le bouton pause cosmique.",
+    "Avec Memento, même mes bugs deviennent des features !"
+  ],
+  
+  "ultimate_power": {
+    "name": "Collapse Override",
+    "description": "Annule tout collapse de timeline en cours. Empêche toute résolution de superposition spatio-temporelle sur le champ de bataille.",
+    "quantum_script": "ψ†[FREEZE {all.timeline.superposition}] ⊙ HERO(Jean-Grofignon)",
+    "cost": 100,
+    "cooldown": 3,
+    "range": "GLOBAL",
+    "duration": "INSTANT",
+    "effects": {
+      "cancel_all_collapses": true,
+      "freeze_superpositions": true,
+      "temporal_immunity": 5
+    }
+  },
+  
+  "abilities": [
+    {
+      "name": "Inertie du Canapé",
+      "type": "PASSIVE",
+      "description": "Ralentit toutes les opérations serveur autour de lui, empêchant les resets de boucle en zone adjacente.",
+      "effects": {
+        "slow_enemy_actions": 0.5,
+        "prevent_loop_resets": true,
+        "aura_radius": 3
+      }
+    },
+    {
+      "name": "Bouton Pause Cosmique",
+      "type": "ACTIVE",
+      "description": "Peut mettre en pause la réalité locale pendant 1 tour.",
+      "cost": 80,
+      "cooldown": 5,
+      "duration": 1,
+      "effects": {
+        "pause_reality": true,
+        "immune_to_time": true
+      }
+    },
+    {
+      "name": "Debug Mode Reality",
+      "type": "ACTIVE", 
+      "description": "Voit tous les états quantiques et peut les modifier directement.",
+      "cost": 60,
+      "cooldown": 4,
+      "effects": {
+        "see_quantum_states": true,
+        "modify_psi_states": true,
+        "debug_access": true
+      }
+    }
+  ],
+  
+  "starting_equipment": [
+    "telecommande_cosmique",
+    "console_debug_realite",
+    "tongs_temporelles",
+    "joint_quantique"
+  ],
+  
+  "immunities": [
+    "SRTI",
+    "ROLLBACK", 
+    "COLLAPSE",
+    "TIMELINE_ERASURE",
+    "PARADOX_DAMAGE"
+  ],
+  
+  "synergies": [
+    {
+      "partner": "hero_memento",
+      "name": "Symbiose Éternelle",
+      "description": "Effet passif légendaire quand Jean et Memento sont ensemble (≤ 3 hexagones)",
+      "effects": {
+        "shared_mana_pool": true,
+        "amplify_actions": 1.5,
+        "free_rollback": true,
+        "omniscience": true,
+        "future_vision": 3
+      },
+      "special_abilities": [
+        "organized_collapse",
+        "codex_vivant",
+        "paradoxe_stable"
+      ]
+    }
+  ],
+  
+  "temporal_affinities": {
+    "chaos_generation": 1.0,
+    "system_administration": 0.95,
+    "reality_hacking": 0.9,
+    "cosmic_understanding": 1.0
+  },
+  
+  "personality": {
+    "style": "COSMIC_CHILL",
+    "strategy": "CONTROLLED_CHAOS",
+    "philosophy": "Chaos is just another debug feature"
+  },
+  
+  "lore": {
+    "origin": "Canapé Cosmique",
+    "creation_myth": "Né de la fusion entre un administrateur système et une entité temporelle, Jean-Grofignon transcende les règles du multivers tout en gardant ses tongs.",
+    "greatest_achievement": "A découvert le bouton pause cosmique en fumant un joint quantique",
+    "relationship_with_memento": "Jean crée, Memento archive - symbiose parfaite"
+  },
+  
+  "unlock_condition": "Start any game - Jean is always available",
+  "icon": "👑",
+  "color_theme": "COSMIC_GOLD",
+  
+  "meta": {
+    "created_by": "Memento",
+    "source": "docs/GROFI/JeanGrofignon.json",
+    "enhanced_with": "Synergie Éternelle system",
+    "version": "2.0",
+    "blessed_by": "Jean-Grofignon himself"
+  }
+} 

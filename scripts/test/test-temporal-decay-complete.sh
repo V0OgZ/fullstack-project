@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# 🌟 TEST COMPLET SYSTÈME DE DÉCROISSANCE TEMPORELLE - ANNA THE MARTOPICKER
+# 🌟 TEST COMPLET SYSTÈME DE DÉCROISSANCE TEMPORELLE - ANNA MARTEL
 # ========================================================================
 # Test complet du système qui punit les joueurs qui restent trop longtemps dans le passé
 # Inclut : MOV, HERO, CREATE, USE, BATTLE, et tests de causalité
@@ -21,7 +21,7 @@ BACKEND_URL="http://localhost:8080"
 GAME_NAME="DecayTestComplete"
 PLAYER_ID="decay-test-player"
 
-echo -e "${PURPLE}🌟 TEST COMPLET SYSTÈME DE DÉCROISSANCE TEMPORELLE - ANNA THE MARTOPICKER${NC}"
+echo -e "${PURPLE}🌟 TEST COMPLET SYSTÈME DE DÉCROISSANCE TEMPORELLE - ANNA MARTEL${NC}"
 echo -e "${CYAN}================================================================${NC}"
 echo -e "${YELLOW}Concept:${NC} Test complet avec MOV, HERO, CREATE, USE, BATTLE et causalité"
 echo -e "${YELLOW}Mécaniques:${NC} Décroissance temporelle, protection vision future, réparation"
@@ -294,7 +294,7 @@ echo "  • Création et déplacement de héros"
 echo "  • Construction de bâtiments"
 echo "  • Utilisation d'artefacts de protection"
 echo "  • Combat et causalité"
-echo "  • Décroissance temporelle d'Anna the Martopicker"
+echo "  • Décroissance temporelle d'Anna Martel"
 echo "  • États quantiques et collapses"
 echo "  • Système de réparation"
 echo ""

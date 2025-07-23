@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# 🌟 TEST SYSTÈME DE DÉCROISSANCE TEMPORELLE - ANNA THE MARTOPICKER
+# 🌟 TEST SYSTÈME DE DÉCROISSANCE TEMPORELLE - ANNA MARTEL
 # ================================================================
 # Test du système qui punit les joueurs qui restent trop longtemps dans le passé
 
@@ -20,12 +20,12 @@ BACKEND_URL="http://localhost:8080"
 GAME_NAME="DecayTest"
 PLAYER_ID="decay-test-player"
 
-echo -e "${PURPLE}🌟 TEST SYSTÈME DE DÉCROISSANCE TEMPORELLE - ANNA THE MARTOPICKER${NC}"
+echo -e "${PURPLE}🌟 TEST SYSTÈME DE DÉCROISSANCE TEMPORELLE - ANNA MARTEL${NC}"
 echo -e "${CYAN}===============================================================${NC}"
 echo -e "${YELLOW}Concept:${NC} Punir les joueurs qui restent trop longtemps dans le passé"
 echo -e "${YELLOW}Quote:${NC} \"Le temps n'attend personne, et ceux qui s'attardent dans le passé"
 echo -e "        verront leurs constructions s'effriter comme le sable entre leurs doigts.\""
-echo -e "        - Anna the Martopicker, Architecte du Temps"
+echo -e "        - Anna Martel, Architecte du Temps"
 echo ""
 
 # Fonction pour tester l'API

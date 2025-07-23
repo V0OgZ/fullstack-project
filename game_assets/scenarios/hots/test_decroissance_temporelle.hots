@@ -1,11 +1,11 @@
-# 🌟 SCÉNARIO DE TEST - DÉCROISSANCE TEMPORELLE - ANNA THE MARTOPICKER
+# 🌟 SCÉNARIO DE TEST - DÉCROISSANCE TEMPORELLE - ANNA MARTEL
 # ====================================================================
 # Scénario pour tester le système de décroissance temporelle
 # Concept: Punir les joueurs qui restent trop longtemps dans le passé
 # 
 # "Le temps n'attend personne, et ceux qui s'attardent dans le passé
 #  verront leurs constructions s'effriter comme le sable entre leurs doigts."
-#  - Anna the Martopicker, Architecte du Temps
+#  - Anna Martel, Architecte du Temps
 
 # ============================================================================
 # PHASE 1: PRÉPARATION - CRÉATION DES HÉROS ET BÂTISSEMENTS
@@ -112,7 +112,7 @@ QUOTE("L'observation d'Arthur provoque un collapse quantique...")
 
 # Simulation de la décroissance temporelle (sera appliquée par le système)
 # Arthur est maintenant 5 jours en retard, la décroissance commence
-QUOTE("Anna the Martopicker observe avec tristesse...")
+QUOTE("Anna Martel observe avec tristesse...")
 QUOTE("'Le temps est impitoyable, Arthur. Tes constructions s'effritent...'")
 
 # ============================================================================
@@ -142,8 +142,8 @@ QUOTE("Les pierres se reforment lentement...")
 # Morgana observe depuis le futur
 QUOTE("Morgana observe les conséquences de l'attachement au passé...")
 
-# Leçon finale d'Anna the Martopicker
-QUOTE("Anna the Martopicker s'adresse aux joueurs:")
+# Leçon finale d'Anna Martel
+QUOTE("Anna Martel s'adresse aux joueurs:")
 QUOTE("'Le temps n'attend personne. Ceux qui s'attardent dans le passé")
 QUOTE("verront leurs constructions s'effriter comme le sable entre leurs doigts.'")
 QUOTE("'Mais ceux qui regardent vers l'avenir avec courage")
@@ -154,5 +154,5 @@ QUOTE("trouveront la force de construire un destin meilleur.'")
 # ============================================================================
 
 QUOTE("Le test de décroissance temporelle est terminé.")
-QUOTE("Anna the Martopicker a livré sa leçon temporelle.")
+QUOTE("Anna Martel a livré sa leçon temporelle.")
 QUOTE("Que les joueurs en tirent les enseignements appropriés...") 

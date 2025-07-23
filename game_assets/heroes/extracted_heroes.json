@@ -121,9 +121,9 @@
         "trigger_source": "Collapse de Pee & Kill"
       },
       {
-        "id": "anna_martopicker",
-        "name": "Anna the Martopicker",
-        "title": "Glaneuse d'Artefacts Oubliés",
+        "id": "anna_martel",
+        "name": "Anna Martel",
+        "title": "L'Architecte du Temps",
         "class": "TEMPORAL_SPECIALIST",
         "source_file": "temporal_decay_system.json",
         "description": "Architecte du Temps qui punit les joueurs en retard avec son système de décroissance temporelle",
@@ -160,7 +160,7 @@
       "Organiser dans game_assets",
       "Créer les fichiers individuels"
     ],
-    "latest_addition": "Anna the Martopicker - Architecte du Temps et Spécialiste Temporel (22 juillet 2025)",
+    "latest_addition": "Anna Martel - Architecte du Temps et Spécialiste Temporel (22 juillet 2025)",
     "previous_addition": "Pee & Kill et Ki & Pi - Héros de la transformation comique (22 juillet 2025)"
   }
 }
