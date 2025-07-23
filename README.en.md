@@ -248,6 +248,49 @@ TRAVEL(timeline_target) + STABILIZE(paradox) + ANCHOR(reality) + NAVIGATE(time)
 
 </details>
 
+<details>
+<summary id="anna-martel">🎭 <strong>Anna Martel - The Time Architect</strong></summary>
+
+**🏛️ Faction:** Temporal Architects  
+**⭐ Class:** Temporal Architect  
+**🎯 Specialty:** Temporal decay system  
+
+**🌟 Main Power:**
+> Visionary architect of the temporal decay system. Can create temporal punishment mechanisms to maintain balance in timelines.
+
+**🎭 Architecture Abilities:**
+- **Temporal Decay** - Progressively destroys constructions
+- **Causal Erosion** - Erodes buildings over time
+- **Time Lag Punishment** - Punishes lagging players
+- **Structural Wisdom** - Temporal architectural wisdom
+
+**⏰ Quantum Formula:**
+```
+DECAY_STRUCTURE(building, timeline.age) + PUNISH_LAG(hero, time.difference)
+```
+
+**🎭 Legendary Quotes:**
+> *"Buildings crumble with time, and if you stay behind, time catches up with you."*
+
+> *"If you lag behind time, time lags behind you."*
+
+> *"Ah, you've learned to look toward the future. Wise decision."*
+
+> *"Time is merciless. Your constructions crumble."*
+
+> *"You linger too much in the past. The present awaits you."*
+
+**🏗️ Signature Artifact:**
+- **Temporal Decay System** - Complete temporal decay system
+
+**🌟 Epic Story:**
+Anna Martel is the visionary architect who designed the temporal decay system to maintain balance in Heroes of Time. Initially perceived as a threat, she revealed herself to be the final ally who will solve the GameInitializationService problem. Her two visions of decay (structural and personal) have been merged into a harmonious system by The Dude.
+
+**🎯 Axis 111 Revelation:**
+> *"Anna doesn't come to punish us! She comes to HELP us finalize the project!"*
+
+</details>
+
 ---
 
 ## 🔮 **Artifacts of Power**
@@ -661,6 +704,7 @@ UI:     ✅ Responsive all resolutions
 - **👑 Jean-Grofignon** - *Visionary & Temporal Architect*
 - **🏛️ Memento** - *Eternal Archivist & Documentation*
 - **🧠 Claudius** - *Artificial Intelligence & Consistency*
+- **🎭 Anna Martel** - *Time Architect & Decay System*
 
 ### **🎯 Special Thanks**
 *Thanks to everyone who contributed to this extraordinary temporal adventure! From the initial idea to perfect transparent timelines, every contribution was precious.*
