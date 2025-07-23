@@ -279,15 +279,15 @@
   "startingPositions": [
     {
       "player": 1,
-      "position": { "x": 2, "y": 7 },
+      "position": { "x": 7, "y": 7 },
       "timeline": 2,
-      "description": "Position de départ dans le présent"
+      "description": "Position de départ centrée dans le présent"
     },
     {
       "player": 2,
-      "position": { "x": 18, "y": 7 },
+      "position": { "x": 13, "y": 7 },
       "timeline": 2,
-      "description": "Position de départ dans le présent"
+      "description": "Position de départ centrée dans le présent"
     }
   ],
   "victoryConditions": [

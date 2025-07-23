@@ -1,18 +1,51 @@
-::1 - - [22/Jul/2025 12:02:14] "HEAD / HTTP/1.1" 200 -
-w/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/http/server.py", line 1297, in <module>
-    test(
-  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/http/server.py", line 1248, in test
-    with ServerClass(addr, HandlerClass) as httpd:
-  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/socketserver.py", line 452, in __init__
-    self.server_bind()
-  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/http/server.py", line 1291, in server_bind
-    return super().server_bind()
-  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/http/server.py", line 136, in server_bind
-    socketserver.TCPServer.server_bind(self)
-  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/socketserver.py", line 466, in server_bind
-    self.socket.bind(self.server_address)
-OSError: [Errno 48] Address already in use
+::1 - - [23/Jul/2025 07:24:31] "GET / HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /styles/scenario-selector.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /translation-styles.css HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 07:24:31] "GET /styles.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /styles/city.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /styles/combat.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /temporal-styles.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /styles/hero.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /styles/dicebear.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /api.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /script-console.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /translation-service.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 07:24:31] "GET /components/CityInterface.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /components/CombatInterface.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /game.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /runic-forge.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /missing-assets-loader.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /hero-avatars.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /components/HeroInterface.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /fog-of-war-system.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /dicebar-graphics-system.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /temporal-integration.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /gameplay-enhancement.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /gameplay-construction.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /scenario-selector.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] code 404, message File not found
+::1 - - [23/Jul/2025 07:24:31] "GET /game_assets/heroes/epic/epic-heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 07:24:31] code 404, message File not found
+::1 - - [23/Jul/2025 07:24:31] "GET /game_assets/heroes/extracted_heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 07:24:31] code 404, message File not found
+::1 - - [23/Jul/2025 07:24:31] "GET /game_assets/MASTER_ASSETS_INDEX.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 07:24:31] "GET /manifest.json HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:33] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:25:03] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:29:03] code 404, message File not found
+::1 - - [23/Jul/2025 07:29:03] "GET /game_assets/heroes/epic/epic-heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 07:29:03] code 404, message File not found
+::1 - - [23/Jul/2025 07:29:03] "GET /game_assets/heroes/extracted_heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 07:29:03] code 404, message File not found
+::1 - - [23/Jul/2025 07:29:03] "GET /favicon.ico HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 07:29:03] code 404, message File not found
+::1 - - [23/Jul/2025 07:29:03] "GET /game_assets/MASTER_ASSETS_INDEX.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 07:29:14] "GET / HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 07:29:14] code 404, message File not found
+::1 - - [23/Jul/2025 07:29:14] "GET /game_assets/heroes/epic/epic-heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 07:29:14] code 404, message File not found
+::1 - - [23/Jul/2025 07:29:14] "GET /game_assets/heroes/extracted_heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 07:29:14] code 404, message File not found
+::1 - - [23/Jul/2025 07:29:14] "GET /game_assets/MASTER_ASSETS_INDEX.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 07:29:52] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:30:22] "GET /visual-script-editor.html HTTP/1.1" 200 -

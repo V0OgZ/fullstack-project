@@ -13,7 +13,7 @@ echo ""
 # Configuration
 HOST="localhost:8080"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-REPORT_DIR="rapport-scenarios-manquants-$TIMESTAMP"
+REPORT_DIR="test-reports/rapport-scenarios-manquants-$TIMESTAMP"
 mkdir -p "$REPORT_DIR"
 REPORT_FILE="$REPORT_DIR/RAPPORT_COMPLET.md"
 
