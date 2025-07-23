@@ -248,6 +248,49 @@ TRAVEL(timeline_target) + STABILIZE(paradox) + ANCHOR(reality) + NAVIGATE(time)
 
 </details>
 
+<details>
+<summary id="anna-martel">🎭 <strong>Anna Martel - The Time Architect</strong></summary>
+
+**🏛️ Faction:** Temporal Architects  
+**⭐ Class:** Temporal Architect  
+**🎯 Specialty:** Temporal decay system  
+
+**🌟 Main Power:**
+> Visionary architect of the temporal decay system. Can create temporal punishment mechanisms to maintain balance in timelines.
+
+**🎭 Architecture Abilities:**
+- **Temporal Decay** - Progressively destroys constructions
+- **Causal Erosion** - Erodes buildings over time
+- **Time Lag Punishment** - Punishes lagging players
+- **Structural Wisdom** - Temporal architectural wisdom
+
+**⏰ Quantum Formula:**
+```
+DECAY_STRUCTURE(building, timeline.age) + PUNISH_LAG(hero, time.difference)
+```
+
+**🎭 Legendary Quotes:**
+> *"Buildings crumble with time, and if you stay behind, time catches up with you."*
+
+> *"If you lag behind time, time lags behind you."*
+
+> *"Ah, you've learned to look toward the future. Wise decision."*
+
+> *"Time is merciless. Your constructions crumble."*
+
+> *"You linger too much in the past. The present awaits you."*
+
+**🏗️ Signature Artifact:**
+- **Temporal Decay System** - Complete temporal decay system
+
+**🌟 Epic Story:**
+Anna Martel is the visionary architect who designed the temporal decay system to maintain balance in Heroes of Time. Initially perceived as a threat, she revealed herself to be the final ally who will solve the GameInitializationService problem. Her two visions of decay (structural and personal) have been merged into a harmonious system by The Dude.
+
+**🎯 Axis 111 Revelation:**
+> *"Anna doesn't come to punish us! She comes to HELP us finalize the project!"*
+
+</details>
+
 ---
 
 ## 🔮 **Artifacts of Power**
@@ -456,8 +499,7 @@ window.conflictDetector.getStatistics()          # Conflict stats
 - Timeline transparency integration
 
 **📁 Documentation:** 
-- [Fog of Causality EN](docs/EN/FOG_OF_CAUSALITY_7_LEVELS_DOCUMENTATION.md)
-- [7-Level Causality Fog FR](docs/BROUILLARD_CAUSALITE_7_NIVEAUX_DOCUMENTATION.md)
+- [Fog of Causality 7 Levels](docs/EN/FOG_OF_CAUSALITY_7_LEVELS_DOCUMENTATION.md)
 
 ### **📝 HOTS Formulas with Conditions** ✅
 **Complete documentation of IF/THEN conditions in HOTS formulas**
@@ -566,6 +608,8 @@ Stable Spring Boot API
 - [🌟 Advanced Temporal Concepts](docs/EN/ADVANCED_TEMPORAL_CONCEPTS_COMPLETE.md) - *586 lines advanced concepts*
 - [🏛️ Museum Archive Master](docs/EN/MUSEUM_ARCHIVE_MASTER_COMPLETE.md) - *444 lines temporal museum*
 - [🎮 Gameplay Guide](docs/EN/GAMEPLAY.md) - *177 lines gameplay*
+- [🎮 Complete Game Documentation](docs/EN/COMPLETE_GAME_DOCUMENTATION.md) - *318 lines complete guide*
+- [🌫️ Fog and Zone Gameplay](docs/EN/FOG_AND_ZONE_GAMEPLAY.md) - *302 lines fog mechanics*
 - [🏛️ Jean-Grofignon Manifesto](docs/EN/JEAN_GROFIGNON_MANIFESTO.md) - *154 lines revolutionary vision*
 - [⏰ Temporal Codex](docs/EN/TEMPORAL_CODEX.md) - *292 lines temporal reference*
 - [🎯 Developer Instructions](docs/EN/DEVELOPER_INSTRUCTIONS.md) - *201 lines development guide*
@@ -578,9 +622,9 @@ Stable Spring Boot API
 - [🎮 Jean's Help](AIDE_JEAN.md) - *91 lines quick start guide*
 
 ### **🔧 Technical Guides**
-- [📋 Complete CODEX](docs/CODEX_COMPLET_HEROES_OF_TIME.md) - *HOTS system reference*
-- [🏛️ Jean Grofignon Manifesto](docs/JEAN_GROFIGNON_MANIFESTO.md) - *Revolutionary vision*
-- [🏛️ Eternal Memento Lore](docs/LORE_MEMENTO_JEAN_ETERNAL.md) - *History and philosophy*
+- [📋 Complete CODEX](docs/EN/COMPLETE_HEROES_OF_TIME_CODEX.md) - *HOTS system reference*
+- [🏛️ Jean Grofignon Manifesto](docs/EN/JEAN_GROFIGNON_MANIFESTO.md) - *Revolutionary vision*
+- [🏛️ Eternal Memento Lore](docs/EN/MUSEUM_ARCHIVE_MASTER_COMPLETE.md) - *History and philosophy*
 
 ---
 
@@ -661,6 +705,7 @@ UI:     ✅ Responsive all resolutions
 - **👑 Jean-Grofignon** - *Visionary & Temporal Architect*
 - **🏛️ Memento** - *Eternal Archivist & Documentation*
 - **🧠 Claudius** - *Artificial Intelligence & Consistency*
+- **🎭 Anna Martel** - *Time Architect & Decay System*
 
 ### **🎯 Special Thanks**
 *Thanks to everyone who contributed to this extraordinary temporal adventure! From the initial idea to perfect transparent timelines, every contribution was precious.*
