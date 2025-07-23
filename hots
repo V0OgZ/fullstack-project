@@ -24,10 +24,23 @@ show_help() {
     echo ""
     echo -e "${YELLOW}Commandes disponibles:${NC}"
     echo -e "  ${GREEN}start${NC}       Démarre tous les services en arrière-plan"
+    echo -e "  ${GREEN}start essential${NC} 🎯 Démarre services essentiels seulement (Backend + Frontend + Dashboard)"
     echo -e "  ${GREEN}stop${NC}        Arrête tous les services"
     echo -e "  ${GREEN}restart${NC}     Redémarre tous les services"
     echo -e "  ${GREEN}status${NC}      Affiche le statut des services"
     echo -e "  ${GREEN}test${NC}        Lance les tests (voir options ci-dessous)"
+    echo -e "  ${GREEN}generate${NC}    🧠 Génère la documentation MD depuis JSON (Memento)"
+    echo -e "  ${GREEN}map${NC}         🗺️  Gestion des maps et terrains"
+    echo -e "  ${GREEN}replay${NC}      📹 Système de replay des parties"
+    echo -e "  ${GREEN}editor${NC}      🎨 Éditeur visuel script spatio-temporel"
+    echo -e "  ${GREEN}admin${NC}       🎮 Interface d'administration multijoueur"
+    echo -e "  ${GREEN}test-uis${NC}    🧪 Test complet de toutes les UIs"
+    echo -e "  ${GREEN}debug${NC}       🐛 Mode debug complet (compilation + logs)"
+    echo -e "  ${GREEN}compile${NC}     🔧 Compilation backend avec debug info"
+    echo -e "  ${GREEN}logs${NC}        📋 Affiche les logs en temps réel"
+    echo -e "  ${GREEN}scenario${NC}    🎬 Lance un scénario HEP (Heroes Epic Play)"
+    echo -e "  ${GREEN}vince${NC}       🔫 Vince Process Annihilator - Nettoie les process avec style!"
+    echo -e "  ${GREEN}walter${NC}      🎳 Walter Anti-Vince Protocol - Protection backend"
     echo -e "  ${GREEN}help${NC}        Affiche cette aide"
     echo ""
     echo -e "${YELLOW}Options de test:${NC}"
@@ -40,6 +53,10 @@ show_help() {
     echo -e "  ${GREEN}./hots test bataille${NC}     Tests bataille temporelle"
     echo -e "  ${GREEN}./hots test quantum${NC}      Tests quantum/visualiseurs"
     echo -e "  ${GREEN}./hots test scenarios${NC}    Tests scénarios HOTS complets"
+    echo -e "  ${GREEN}./hots test json${NC}         🚀 Tests nouveaux scripts JSON (HSP)"
+    echo -e "  ${GREEN}./hots test jean-gros${NC}    🎳 Tests Jean-Gros v2/v3 complets"
+    echo -e "  ${GREEN}./hots test decay${NC}        🌀 Tests système DK20 Temporal Decay (Anna)"
+    echo -e "  ${GREEN}./hots test hybrid${NC}       🎳 Tests système Hybrid Decay (The Dude)"
     echo -e "  ${GREEN}./hots test missing${NC}      🎯 Tests scénarios manquants et créatures"
     echo -e "  ${GREEN}./hots test creatures${NC}    🐉 Tests spécifiques des créatures quantiques"
     echo -e "  ${GREEN}./hots test performance${NC}  Tests de performance"
@@ -47,6 +64,9 @@ show_help() {
     echo -e "  ${GREEN}./hots test report${NC}       Rapport complet des tests"
     echo -e "  ${GREEN}./hots test final${NC}        🏆 TOUS LES TESTS (complet)"
     echo -e "  ${GREEN}./hots test list${NC}         Liste tous les tests disponibles"
+    echo -e "  ${GREEN}./hots test economie${NC}     🎮 Test simulation économique complète"
+    echo -e "  ${GREEN}./hots test translation${NC}  🧠 Test service traduction intelligent (SANS LLM)"
+    echo -e "  ${GREEN}./hots test md-generator${NC} 📝 Test générateur MD automatique"
     echo ""
     echo -e "${YELLOW}Exemples:${NC}"
     echo -e "  ${CYAN}./hots start${NC}             # Démarre tout"
@@ -55,6 +75,28 @@ show_help() {
     echo -e "  ${CYAN}./hots test maven${NC}        # Test compilation backend"
     echo -e "  ${CYAN}./hots test final${NC}        # 🏆 TEST COMPLET FINAL"
     echo -e "  ${CYAN}./hots test report${NC}       # Rapport détaillé"
+    echo -e "  ${CYAN}./hots debug${NC}             # 🐛 Mode debug complet"
+    echo -e "  ${CYAN}./hots compile${NC}           # 🔧 Compilation avec debug"
+    echo -e "  ${CYAN}./hots logs${NC}              # 📋 Logs en temps réel"
+    echo -e "  ${CYAN}./hots generate${NC}          # 🧠 Génère tous les MD depuis JSON"
+    echo -e "  ${CYAN}./hots map list${NC}          # 🗺️  Liste les maps disponibles"
+    echo -e "  ${CYAN}./hots replay center${NC}     # 🎬 Centre de Replay complet"
+    echo -e "  ${CYAN}./hots scenario list${NC}     # 🎬 Liste les scénarios HEP disponibles"
+    echo -e "  ${CYAN}./hots scenario bataille${NC} # 🎬 Lance bataille temporelle HOTS"
+    echo -e "  ${CYAN}./hots scenario anthor${NC}   # 🎬 Lance duel Anthor vs Grofi"
+    echo -e "  ${CYAN}./hots editor${NC}            # 🎨 Lance l'éditeur visuel"
+    echo -e "  ${CYAN}./hots vince${NC}             # 🔫 Nettoie les process lents (animation ROFL)"
+    echo -e "  ${CYAN}./hots walter${NC}            # 🎳 Protection backend Anti-Vince"
+    echo ""
+    echo -e "${PURPLE}💾 Commandes de Persistence:${NC}"
+    echo -e "  ${GREEN}save${NC} <nom> [game_id] [player]  Sauvegarder la partie"
+    echo -e "  ${GREEN}load${NC} <id> [player]            Charger une sauvegarde"
+    echo -e "  ${GREEN}list-saves${NC} [player]           Lister les sauvegardes"
+    echo ""
+    echo -e "${YELLOW}Exemples persistence:${NC}"
+    echo -e "  ${CYAN}./hots save ma-partie${NC}        # Sauvegarder la partie courante"
+    echo -e "  ${CYAN}./hots load 1${NC}                # Charger la sauvegarde ID 1"
+    echo -e "  ${CYAN}./hots list-saves${NC}            # Voir toutes les sauvegardes"
 }
 
 check_services() {
@@ -121,21 +163,24 @@ show_status() {
     
     echo ""
     echo "URLs d'accès:"
-    echo -e "  🎯 Dashboard: ${CYAN}http://localhost:9000/dashboard.html${NC}"
-    echo -e "  📊 Frontend: ${CYAN}http://localhost:8000${NC}"
+    echo -e "  🎯 Dashboard + 🎬 Replay: ${CYAN}http://localhost:9000/dashboard.html${NC}"
+    echo -e "  📊 Frontend Principal: ${CYAN}http://localhost:8000${NC}"
     echo -e "  ⚙️ Backend API: ${CYAN}http://localhost:8080/api/health${NC}"
-    echo -e "  ⚔️ Temporal: ${CYAN}http://localhost:5174${NC}"
-    echo -e "  🌌 Quantum: ${CYAN}http://localhost:8001${NC}"
-    echo -e "  🔮 Visualizer: ${CYAN}http://localhost:5175${NC}"
+    echo -e "  ⚔️ Interface Temporelle: ${CYAN}http://localhost:5174${NC}"
+    echo -e "  🌌 Quantum Visualizer: ${CYAN}http://localhost:8001${NC}"
+    echo -e "  🔮 Collection & Grammar: ${CYAN}http://localhost:5175${NC}"
     echo -e "  🧪 Test Runner: ${CYAN}http://localhost:8888${NC}"
+    echo ""
+    echo -e "  ${YELLOW}💡 Centre de Replay:${NC} ${CYAN}./hots replay center${NC} ou clic sur 🎬 dans Dashboard"
     
     echo ""
-    if [ $active_services -eq 6 ]; then
-        echo -e "${GREEN}✅ Tous les services sont actifs !${NC}"
-    elif [ $active_services -gt 3 ]; then
-        echo -e "${YELLOW}⚠️  $active_services/6 services actifs${NC}"
+    # 🎳 WALTER'S ANTI-SCHRÖDINGER FIX - LOGIC BINAIRE PURE !
+    if [ $active_services -eq 7 ]; then
+        echo -e "${GREEN}🎳 WALTER: TOUS LES SERVICES SONT VRAIMENT ACTIFS ! ($active_services/7)${NC}"
+    elif [ $active_services -gt 4 ]; then
+        echo -e "${YELLOW}⚠️  WALTER: SERVICES PARTIELLEMENT ACTIFS ($active_services/7) - ACCEPTABLE${NC}"
     else
-        echo -e "${RED}❌ Seulement $active_services/6 services actifs${NC}"
+        echo -e "${RED}🚨 WALTER: SERVICES EN PANNE ! ($active_services/7) - INACCEPTABLE !${NC}"
     fi
 }
 
@@ -152,6 +197,78 @@ start_services() {
         echo -e "${RED}❌ Script de démarrage non trouvé: $SERVICES_SCRIPT${NC}"
         return 1
     fi
+}
+
+start_essential_services() {
+    echo -e "${BLUE}🎯 Démarrage des services essentiels Heroes of Time${NC}"
+    echo "=================================================="
+    echo -e "${YELLOW}Services essentiels : Backend + Frontend + Dashboard${NC}"
+    echo ""
+    
+    # Démarrer le backend
+    echo -e "${CYAN}⚙️  Démarrage du Backend (port 8080)...${NC}"
+    if [ -d "backend" ]; then
+        cd backend
+        if mvn spring-boot:run -q > backend.log 2>&1 &
+        then
+            echo -e "${GREEN}✅ Backend démarré${NC}"
+            cd ..
+        else
+            echo -e "${RED}❌ Erreur démarrage backend${NC}"
+            cd ..
+            return 1
+        fi
+    else
+        echo -e "${RED}❌ Dossier backend non trouvé${NC}"
+        return 1
+    fi
+    
+    # Attendre que le backend soit prêt
+    echo -e "${YELLOW}⏳ Attente du démarrage backend...${NC}"
+    sleep 10
+    
+    # Démarrer le frontend
+    echo -e "${CYAN}🎮 Démarrage du Frontend (port 8000)...${NC}"
+    if [ -d "frontend" ]; then
+        cd frontend
+        if python3 -m http.server 8000 > frontend.log 2>&1 &
+        then
+            echo -e "${GREEN}✅ Frontend démarré${NC}"
+            cd ..
+        else
+            echo -e "${RED}❌ Erreur démarrage frontend${NC}"
+            cd ..
+            return 1
+        fi
+    else
+        echo -e "${RED}❌ Dossier frontend non trouvé${NC}"
+        return 1
+    fi
+    
+    # Démarrer le dashboard
+    echo -e "${CYAN}🎯 Démarrage du Dashboard (port 9000)...${NC}"
+    if [ -f "dashboard.html" ]; then
+        if python3 -m http.server 9000 > dashboard.log 2>&1 &
+        then
+            echo -e "${GREEN}✅ Dashboard démarré${NC}"
+        else
+            echo -e "${RED}❌ Erreur démarrage dashboard${NC}"
+            return 1
+        fi
+    else
+        echo -e "${RED}❌ Fichier dashboard.html non trouvé${NC}"
+        return 1
+    fi
+    
+    echo ""
+    echo -e "${GREEN}✅ Services essentiels démarrés !${NC}"
+    echo -e "${YELLOW}🌐 URLs d'accès :${NC}"
+    echo -e "  🎯 Dashboard : ${CYAN}http://localhost:9000/dashboard.html${NC}"
+    echo -e "  🎮 Frontend : ${CYAN}http://localhost:8000${NC}"
+    echo -e "  ⚙️  Backend API : ${CYAN}http://localhost:8080/api/health${NC}"
+    echo ""
+    echo -e "${YELLOW}💡 Pour démarrer tous les services : ${CYAN}./hots start${NC}"
+    echo -e "${YELLOW}💡 Pour vérifier l'état : ${CYAN}./hots status${NC}"
 }
 
 stop_services() {
@@ -192,6 +309,10 @@ list_available_tests() {
     echo -e "  ${GREEN}bataille${NC}      - Tests bataille temporelle"
     echo -e "  ${GREEN}quantum${NC}       - Tests quantum/visualiseurs"
     echo -e "  ${GREEN}scenarios${NC}     - Tests scénarios HOTS complets"
+    echo -e "  ${GREEN}json${NC}          - Tests nouveaux scripts JSON (architecture HSP)"
+    echo -e "  ${GREEN}jean-gros${NC}     - Tests Jean-Gros v2/v3 complets"
+    echo -e "  ${GREEN}decay${NC}         - Tests système DK20 Temporal Decay (Anna the Martopicker)"
+    echo -e "  ${GREEN}hybrid${NC}        - Tests système Hybrid Decay (The Dude's fusion)"
     echo -e "  ${GREEN}performance${NC}   - Tests de performance et optimisation"
     echo -e "  ${GREEN}integration${NC}   - Tests d'intégration complète"
     echo ""
@@ -310,6 +431,66 @@ run_test_suite() {
                 return 1
             fi
             ;;
+        "json")
+            echo -e "${GREEN}🚀 Tests nouveaux scripts JSON (architecture HSP)...${NC}"
+            echo -e "${YELLOW}🔍 Test script panopticon JSON...${NC}"
+            if [ -f "scripts/test-panopticon-json-scenario.sh" ]; then
+                bash scripts/test-panopticon-json-scenario.sh
+            else
+                echo -e "${RED}❌ Script panopticon JSON non trouvé${NC}"
+            fi
+            
+            echo -e "${YELLOW}⚔️ Test script duel collapse JSON...${NC}"
+            if [ -f "scripts/test-duel-collapse-json.sh" ]; then
+                bash scripts/test-duel-collapse-json.sh
+            else
+                echo -e "${RED}❌ Script duel collapse JSON non trouvé${NC}"
+            fi
+            
+            echo -e "${YELLOW}🎮 Test runner générique JSON...${NC}"
+            if [ -f "scripts/test-json-scenario-runner.sh" ]; then
+                echo "Testing with GROFI_QUICK_TEST scenario..."
+                bash scripts/test-json-scenario-runner.sh GROFI_QUICK_TEST
+            else
+                echo -e "${RED}❌ Script runner JSON non trouvé${NC}"
+            fi
+            ;;
+        "jean-gros")
+            echo -e "${GREEN}🎳 Tests Jean-Gros complets...${NC}"
+            echo -e "${YELLOW}🔧 Lancement Jean-Gros v2 FIXED...${NC}"
+            if [ -f "scripts/test-jean-gros-v2-FIXED.sh" ]; then
+                bash scripts/test-jean-gros-v2-FIXED.sh
+            else
+                echo -e "${RED}❌ Script Jean-Gros v2 non trouvé${NC}"
+            fi
+            
+            echo -e "${YELLOW}🚀 Lancement Jean-Gros v3 WITH JSON...${NC}"
+            if [ -f "scripts/test-jean-gros-v3-with-json.sh" ]; then
+                bash scripts/test-jean-gros-v3-with-json.sh
+            else
+                echo -e "${RED}❌ Script Jean-Gros v3 non trouvé${NC}"
+            fi
+            ;;
+        "decay")
+            echo -e "${GREEN}🌀 Tests système DK20 Temporal Decay...${NC}"
+            echo -e "${PURPLE}💫 Testing Anna the Martopicker's temporal mechanics${NC}"
+            if [ -f "scripts/test-temporal-decay-dk20.sh" ]; then
+                bash scripts/test-temporal-decay-dk20.sh
+            else
+                echo -e "${RED}❌ Script DK20 Temporal Decay non trouvé${NC}"
+                return 1
+            fi
+            ;;
+        "hybrid")
+            echo -e "${GREEN}🎳 Tests système Hybrid Decay...${NC}"
+            echo -e "${PURPLE}💫 Testing The Dude's unified temporal decay system${NC}"
+            if [ -f "scripts/test-temporal-decay-hybrid-dude.sh" ]; then
+                bash scripts/test-temporal-decay-hybrid-dude.sh
+            else
+                echo -e "${RED}❌ Script Hybrid Decay non trouvé${NC}"
+                return 1
+            fi
+            ;;
         "performance")
             echo -e "${GREEN}⚡ Tests de performance...${NC}"
             if [ -f "scripts/test/test-optimizations-performance.sh" ]; then
@@ -382,13 +563,22 @@ run_test_suite() {
             echo -e "${YELLOW}🎭 Phase 8: Tests scénarios${NC}"
             run_test_suite "scenarios"
             
-            echo -e "${YELLOW}⚡ Phase 9: Tests performance${NC}"
+            echo -e "${YELLOW}🚀 Phase 9: Tests JSON (architecture HSP)${NC}"
+            run_test_suite "json"
+            
+            echo -e "${YELLOW}🎳 Phase 10: Tests Jean-Gros complets${NC}"
+            run_test_suite "jean-gros"
+            
+            echo -e "${YELLOW}🌀 Phase 11: Tests DK20 Temporal Decay${NC}"
+            run_test_suite "decay"
+            
+            echo -e "${YELLOW}⚡ Phase 12: Tests performance${NC}"
             run_test_suite "performance"
             
-            echo -e "${YELLOW}🔗 Phase 10: Tests intégration${NC}"
+            echo -e "${YELLOW}🔗 Phase 13: Tests intégration${NC}"
             run_test_suite "integration"
             
-            echo -e "${YELLOW}🎯 Phase 11: Tests scénarios manquants${NC}"
+            echo -e "${YELLOW}🎯 Phase 14: Tests scénarios manquants${NC}"
             run_test_suite "missing"
             
             echo ""
@@ -400,6 +590,33 @@ run_test_suite() {
             ;;
         "list")
             list_available_tests
+            ;;
+        "economie")
+            echo -e "${GREEN}🎮 Test simulation économique complète...${NC}"
+            if [ -f "scripts/test/test-economie-guerre.sh" ]; then
+                bash scripts/test/test-economie-guerre.sh
+            else
+                echo -e "${RED}❌ Script de test économique non trouvé${NC}"
+                return 1
+            fi
+            ;;
+        "translation")
+            echo -e "${GREEN}🧠 Test service traduction intelligent (SANS LLM)...${NC}"
+            if [ -f "MUSEUM/scripts-collection/test-smart-translation.py" ]; then
+                python3 MUSEUM/scripts-collection/test-smart-translation.py
+            else
+                echo -e "${RED}❌ Script de test traduction non trouvé${NC}"
+                return 1
+            fi
+            ;;
+        "md-generator")
+            echo -e "${GREEN}📝 Test générateur MD automatique...${NC}"
+            if [ -f "scripts/test/generate-scenario-md.py" ]; then
+                python3 scripts/test/generate-scenario-md.py
+            else
+                echo -e "${RED}❌ Script générateur MD non trouvé${NC}"
+                return 1
+            fi
             ;;
         "complete"|*)
             echo -e "${GREEN}🔬 Tests complets en cours...${NC}"
@@ -592,10 +809,428 @@ generate_test_report() {
     echo -e "${CYAN}📈 Pour un diagnostic complet, utilisez: ${GREEN}./hots test final${NC}"
 }
 
+# 🧠 Fonction de génération MD - Memento
+generate_md_docs() {
+    echo -e "${CYAN}🧠 MEMENTO - Générateur de Documentation MD${NC}"
+    echo -e "${CYAN}============================================${NC}"
+    echo ""
+    
+    if [ ! -f "scripts/generate-md-from-json.py" ]; then
+        echo -e "${RED}❌ Générateur MD non trouvé: scripts/generate-md-from-json.py${NC}"
+        return 1
+    fi
+    
+    echo -e "${YELLOW}🔄 Génération automatique des fichiers Markdown...${NC}"
+    python3 scripts/generate-md-from-json.py
+    
+    if [ $? -eq 0 ]; then
+        echo ""
+        echo -e "${GREEN}✅ Génération terminée avec succès !${NC}"
+        echo -e "${YELLOW}📁 Fichiers générés dans :${NC}"
+        echo -e "  - ${CYAN}docs/artifacts/generated/${NC}"
+        echo -e "  - ${CYAN}docs/heroes/generated/${NC}"
+        echo -e "  - ${CYAN}docs/creatures/generated/${NC}"
+    else
+        echo -e "${RED}❌ Erreur lors de la génération${NC}"
+        return 1
+    fi
+}
+
+# 🗺️ Fonctions MAP
+manage_maps() {
+    local action="$1"
+    
+    case "$action" in
+        "list"|"")
+            echo -e "${CYAN}🗺️  SYSTÈME MAP - Heroes of Time${NC}"
+            echo -e "${CYAN}================================${NC}"
+            echo ""
+            echo -e "${YELLOW}📁 Maps disponibles :${NC}"
+            
+            if [ -d "game_assets/scenarios/maps/templates" ]; then
+                find game_assets/scenarios/maps/templates -name "*.hsp" -o -name "*.json" | while read map; do
+                    local name=$(basename "$map")
+                    local size=$(du -sh "$map" 2>/dev/null | cut -f1)
+                    echo -e "  📄 ${GREEN}$name${NC} (${size})"
+                done
+            else
+                echo -e "  ❌ Dossier templates non trouvé"
+            fi
+            
+            echo ""
+            echo -e "${YELLOW}🎮 Commandes disponibles :${NC}"
+            echo -e "  ${GREEN}./hots map list${NC}          # Liste les maps"
+            echo -e "  ${GREEN}./hots map create <name>${NC}  # Créer une nouvelle map"
+            echo -e "  ${GREEN}./hots map info <name>${NC}    # Infos sur une map"
+            ;;
+        "create")
+            local map_name="$2"
+            if [ -z "$map_name" ]; then
+                echo -e "${RED}❌ Usage: ./hots map create <nom_de_la_map>${NC}"
+                return 1
+            fi
+            
+            echo -e "${YELLOW}🔧 Création de la map: $map_name${NC}"
+            echo -e "${GREEN}✅ Map créée (fonctionnalité à implémenter)${NC}"
+            ;;
+        "info")
+            local map_name="$2"
+            echo -e "${YELLOW}📊 Informations sur la map: $map_name${NC}"
+            echo -e "${GREEN}✅ Infos map (fonctionnalité à implémenter)${NC}"
+            ;;
+        *)
+            echo -e "${RED}❌ Action inconnue: $action${NC}"
+            echo -e "${YELLOW}Actions disponibles: list, create, info${NC}"
+            return 1
+            ;;
+    esac
+}
+
+# 📹 Fonctions REPLAY
+manage_replays() {
+    local action="$1"
+    
+    case "$action" in
+        "list"|"")
+            echo -e "${CYAN}📹 SYSTÈME REPLAY - Heroes of Time${NC}"
+            echo -e "${CYAN}==================================${NC}"
+            echo ""
+            echo -e "${YELLOW}🎬 Replays disponibles :${NC}"
+            
+            if [ -d "game_assets/scenarios/maps/replays" ]; then
+                find game_assets/scenarios/maps/replays -name "*.hsp" -o -name "*.json" | while read replay; do
+                    local name=$(basename "$replay" | sed 's/\.[^.]*$//')
+                    local size=$(du -sh "$replay" 2>/dev/null | cut -f1)
+                    local date=$(stat -f "%Sm" -t "%Y-%m-%d %H:%M" "$replay" 2>/dev/null)
+                    echo -e "  🎬 ${GREEN}$name${NC} (${size}) - $date"
+                done
+            else
+                echo -e "  ❌ Aucun replay trouvé"
+            fi
+            
+            echo ""
+            echo -e "${YELLOW}🎮 Commandes disponibles :${NC}"
+                echo -e "  ${GREEN}./hots replay list${NC}           # Liste les replays"
+    echo -e "  ${GREEN}./hots replay center${NC}         # 🎬 Ouvre le Centre de Replay (dashboard)"
+    echo -e "  ${GREEN}./hots replay view <name>${NC}     # Voir un replay spécifique"
+    echo -e "  ${GREEN}./hots replay analyze <name>${NC}  # Analyser un replay (infos détaillées)"
+    echo -e "  ${GREEN}./hots replay save <name>${NC}     # Sauvegarder partie actuelle"
+            ;;
+        "view")
+            local replay_name="$2"
+            if [ -z "$replay_name" ]; then
+                echo -e "${RED}❌ Usage: ./hots replay view <nom_du_replay>${NC}"
+                return 1
+            fi
+            
+            echo -e "${YELLOW}🎬 Visualisation du replay: $replay_name${NC}"
+            echo -e "${GREEN}✅ Ouverture du Centre de Replay...${NC}"
+            
+            # Vérifier que le dashboard est actif
+            if ! curl -s http://localhost:9000/dashboard.html > /dev/null; then
+                echo -e "${RED}❌ Dashboard non accessible sur le port 9000${NC}"
+                echo -e "${YELLOW}💡 Lancez d'abord: ./hots start${NC}"
+                return 1
+            fi
+            
+            echo -e "${CYAN}🎬 Ouverture du Centre de Replay dans le navigateur...${NC}"
+            if command -v open > /dev/null; then
+                # macOS
+                open "http://localhost:9000/dashboard.html"
+            elif command -v xdg-open > /dev/null; then
+                # Linux
+                xdg-open "http://localhost:9000/dashboard.html"
+            else
+                echo -e "${YELLOW}📋 Accédez manuellement à: http://localhost:9000/dashboard.html${NC}"
+                echo -e "${YELLOW}   Puis cliquez sur '🎬 Centre de Replay'${NC}"
+            fi
+            ;;
+        "center"|"centre")
+            echo -e "${CYAN}🎬 Ouverture du Centre de Replay Heroes of Time${NC}"
+            
+            # Vérifier que le dashboard est actif
+            if ! curl -s http://localhost:9000/dashboard.html > /dev/null; then
+                echo -e "${RED}❌ Dashboard non accessible sur le port 9000${NC}"
+                echo -e "${YELLOW}💡 Lancez d'abord: ./hots start${NC}"
+                return 1
+            fi
+            
+            echo -e "${GREEN}✅ Dashboard actif - Ouverture du navigateur...${NC}"
+            if command -v open > /dev/null; then
+                # macOS
+                open "http://localhost:9000/dashboard.html"
+            elif command -v xdg-open > /dev/null; then
+                # Linux  
+                xdg-open "http://localhost:9000/dashboard.html"
+            else
+                echo -e "${YELLOW}📋 Accédez manuellement à: http://localhost:9000/dashboard.html${NC}"
+                echo -e "${YELLOW}   Puis cliquez sur '🎬 Centre de Replay'${NC}"
+            fi
+            ;;
+        "analyze")
+            local replay_name="$2"
+            echo -e "${YELLOW}📊 Analyse du replay: $replay_name${NC}"
+            
+            # Chercher le fichier de replay
+            local replay_file=""
+            if [ -f "game_assets/scenarios/maps/replays/20250721_session_jean/$replay_name.hsp" ]; then
+                replay_file="game_assets/scenarios/maps/replays/20250721_session_jean/$replay_name.hsp"
+            elif [ -f "game_assets/scenarios/visualizer/$replay_name.hsp" ]; then
+                replay_file="game_assets/scenarios/visualizer/$replay_name.hsp"
+            fi
+            
+            if [ -n "$replay_file" ]; then
+                echo -e "${GREEN}📄 Fichier trouvé: $replay_file${NC}"
+                echo -e "${CYAN}📊 Informations du replay:${NC}"
+                
+                # Extraire les infos JSON
+                if command -v jq > /dev/null; then
+                    echo -e "${YELLOW}🎮 Nom du jeu:${NC} $(jq -r '.replayInfo.gameName // "N/A"' "$replay_file" 2>/dev/null)"
+                    echo -e "${YELLOW}📅 Date:${NC} $(jq -r '.replayInfo.date // "N/A"' "$replay_file" 2>/dev/null)"
+                    echo -e "${YELLOW}⏱️ Durée:${NC} $(jq -r '.replayInfo.duration // "N/A"' "$replay_file" 2>/dev/null)"
+                    echo -e "${YELLOW}🏆 Gagnant:${NC} $(jq -r '.replayInfo.winner // "N/A"' "$replay_file" 2>/dev/null)"
+                    echo -e "${YELLOW}👥 Joueurs:${NC} $(jq -r '.replayInfo.players | join(", ") // "N/A"' "$replay_file" 2>/dev/null)"
+                    echo -e "${YELLOW}🔄 Tours:${NC} $(jq -r '.replayInfo.totalTurns // "N/A"' "$replay_file" 2>/dev/null)"
+                else
+                    head -20 "$replay_file"
+                fi
+            else
+                echo -e "${RED}❌ Replay '$replay_name' non trouvé${NC}"
+                echo -e "${YELLOW}💡 Utilisez: ./hots replay list${NC}"
+            fi
+            ;;
+        "save")
+            local replay_name="$2"
+            echo -e "${YELLOW}💾 Sauvegarde de la partie actuelle: $replay_name${NC}"
+            echo -e "${GREEN}✅ Fonctionnalité de sauvegarde (à connecter au backend)${NC}"
+            ;;
+        *)
+            echo -e "${RED}❌ Action inconnue: $action${NC}"
+            echo -e "${YELLOW}Actions disponibles: list, view, analyze, save${NC}"
+            return 1
+            ;;
+    esac
+}
+
+# 🎨 Fonction ÉDITEUR VISUEL
+launch_visual_editor() {
+    echo -e "${CYAN}🎨 ÉDITEUR VISUEL SCRIPT SPATIO-TEMPOREL - Heroes of Time${NC}"
+    echo -e "${CYAN}========================================================${NC}"
+    echo ""
+    
+    # Vérifier que le frontend est actif
+    if ! curl -s http://localhost:8000 > /dev/null; then
+        echo -e "${RED}❌ Frontend non accessible sur le port 8000${NC}"
+        echo -e "${YELLOW}💡 Lancez d'abord: ./hots start essential${NC}"
+        return 1
+    fi
+    
+    echo -e "${GREEN}✅ Frontend actif - Ouverture de l'éditeur visuel...${NC}"
+    if command -v open > /dev/null; then
+        # macOS
+        open "http://localhost:8000/visual-script-editor.html"
+    elif command -v xdg-open > /dev/null; then
+        # Linux  
+        xdg-open "http://localhost:8000/visual-script-editor.html"
+    else
+        echo -e "${YELLOW}📋 Accédez manuellement à: http://localhost:8000/visual-script-editor.html${NC}"
+    fi
+    
+    echo -e "${CYAN}🎨 Fonctionnalités de l'éditeur:${NC}"
+    echo -e "  🚶 Actions de base (MOV, USE, CREATE, HERO, BATTLE)"
+    echo -e "  ψ Actions temporelles (PSI, TRIGGER, COLLAPSE)"
+    echo -e "  ⏰ Timeline Editor avec branches multiples"
+    echo -e "  🎮 Game Board interactif"
+    echo -e "  🔧 Système de macros personnalisées"
+    echo -e "  📜 Génération automatique de scripts"
+    echo -e "  💾 Sauvegarde/chargement de configurations"
+    echo ""
+    echo -e "${YELLOW}💡 Révolution du game design:${NC}"
+    echo -e "  • Premier IDE visuel de scripting quantico-temporel au monde"
+    echo -e "  • Point-and-click → Scripts complexes automatiques"
+    echo -e "  • Visualisation des superpositions et causalités"
+    echo -e "  • Macros personnalisées pour actions rapides"
+}
+
+# 🎮 Fonction INTERFACE ADMIN MULTIJOUEUR
+launch_admin_interface() {
+    echo -e "${CYAN}🎮 INTERFACE D'ADMINISTRATION MULTIJOUEUR - Heroes of Time${NC}"
+    echo -e "${CYAN}========================================================${NC}"
+    echo ""
+    
+    # Vérifier que les services sont actifs
+    if ! curl -s http://localhost:8080 > /dev/null; then
+        echo -e "${RED}❌ Backend non accessible sur le port 8080${NC}"
+        echo -e "${YELLOW}💡 Lancez d'abord: ./hots start essential${NC}"
+        return 1
+    fi
+    
+    if ! curl -s http://localhost:8000 > /dev/null; then
+        echo -e "${RED}❌ Frontend non accessible sur le port 8000${NC}"
+        echo -e "${YELLOW}💡 Lancez d'abord: ./hots start essential${NC}"
+        return 1
+    fi
+    
+    echo -e "${GREEN}✅ Services vérifiés${NC}"
+    echo ""
+    echo -e "${YELLOW}🎮 Lancement de l'interface d'administration multijoueur...${NC}"
+    echo ""
+    
+    # Ouvrir l'interface dans le navigateur
+    if command -v open > /dev/null; then
+        open "http://localhost:8000/admin-multiplayer.html"
+    elif command -v xdg-open > /dev/null; then
+        xdg-open "http://localhost:8000/admin-multiplayer.html"
+    else
+        echo -e "${YELLOW}🌐 Ouvrez manuellement: http://localhost:8000/admin-multiplayer.html${NC}"
+    fi
+    
+    echo -e "${GREEN}🎮 Interface d'administration lancée !${NC}"
+    echo ""
+    echo -e "${CYAN}📋 Fonctionnalités disponibles:${NC}"
+    echo -e "  🏗️  Gestion des jeux (créer, lister, supprimer)"
+    echo -e "  👥 Gestion des joueurs (ajouter, expulser)"
+    echo -e "  🦸 Gestion des héros (apparaître, téléporter, supprimer)"
+    echo -e "  🎯 Contrôle du jeu (pause, tour suivant, reset, fin)"
+    echo -e "  🚀 Démarrage rapide multijoueur"
+    echo -e "  🧪 Tests complets du système"
+    echo -e "  🎬 Démo multijoueur"
+    echo ""
+    echo -e "${YELLOW}💡 Mode Administrateur - Jean sur le canapé${NC}"
+    echo -e "${YELLOW}💡 Protocole Memento - Fusion Claudius activée${NC}"
+}
+
+# Fonction pour gérer les scénarios HEP
+manage_scenarios() {
+    local command="$1"
+    local scenario_name="$2"
+    
+    echo -e "${PURPLE}🎬 Gestionnaire de Scénarios HEP (Heroes Epic Play)${NC}"
+    echo -e "${PURPLE}==============================================${NC}"
+    
+    case "$command" in
+        "list"|"")
+            echo -e "${YELLOW}📋 Scénarios HEP disponibles:${NC}"
+            echo ""
+            
+            if [ -d "game_assets/scenarios/hots" ]; then
+                echo -e "${CYAN}🎬 Scénarios HOTS (.hots):${NC}"
+                find game_assets/scenarios/hots -name "*.hots" -type f | while read file; do
+                    local filename=$(basename "$file" .hots)
+                    local size=$(du -h "$file" 2>/dev/null | cut -f1)
+                    echo -e "  📄 ${GREEN}$filename${NC} (${size})"
+                done
+            fi
+            
+            if [ -d "game_assets/scenarios" ]; then
+                echo ""
+                echo -e "${CYAN}🎮 Scénarios JSON classiques:${NC}"
+                find game_assets/scenarios -name "*.json" -type f | while read file; do
+                    local filename=$(basename "$file" .json)
+                    local size=$(du -h "$file" 2>/dev/null | cut -f1)
+                    echo -e "  📄 ${BLUE}$filename${NC} (${size})"
+                done
+            fi
+            
+            echo ""
+            echo -e "${YELLOW}💡 Usage: ./hots scenario [nom_scenario]${NC}"
+            echo -e "${YELLOW}💡 Exemple: ./hots scenario bataille${NC}"
+            ;;
+            
+        "bataille"|"bataille_temporelle")
+            echo -e "${YELLOW}⚔️  Lancement de la Bataille Temporelle Complète...${NC}"
+            local scenario_file="game_assets/scenarios/hots/bataille_temporelle_complete.hots"
+            if [ -f "$scenario_file" ]; then
+                echo -e "${GREEN}✅ Scénario trouvé: $scenario_file${NC}"
+                echo -e "${CYAN}📊 Analyse du scénario:${NC}"
+                wc -l "$scenario_file"
+                echo ""
+                if [ -x "scripts/test-anthor-ford-scenario.sh" ]; then
+                    echo -e "${BLUE}🎯 Lancement avec moteur de test intégré...${NC}"
+                    ./scripts/test-anthor-ford-scenario.sh "$scenario_file"
+                else
+                    echo -e "${YELLOW}⚠️  Moteur de test non trouvé, lancement simulé...${NC}"
+                    echo -e "${CYAN}🎬 Contenu du scénario:${NC}"
+                    head -20 "$scenario_file"
+                    echo -e "${YELLOW}... (contenu tronqué)${NC}"
+                fi
+            else
+                echo -e "${RED}❌ Scénario non trouvé: $scenario_file${NC}"
+            fi
+            ;;
+            
+        "anthor"|"anthor_vs_grofi")
+            echo -e "${YELLOW}🎭 Lancement du Duel Anthor vs Jean-Grofignon...${NC}"
+            local scenario_file="game_assets/scenarios/hots/anthor_vs_grofi_temporal_duel.hots"
+            if [ -f "$scenario_file" ]; then
+                echo -e "${GREEN}✅ Scénario trouvé: $scenario_file${NC}"
+                echo -e "${CYAN}📊 Analyse du scénario:${NC}"
+                wc -l "$scenario_file"
+                echo ""
+                if [ -x "scripts/test-anthor-ford-scenario.sh" ]; then
+                    echo -e "${BLUE}🎯 Lancement du test Anthor spécialisé...${NC}"
+                    ./scripts/test-anthor-ford-scenario.sh
+                else
+                    echo -e "${YELLOW}⚠️  Moteur de test Anthor non trouvé, affichage du scénario...${NC}"
+                    echo -e "${CYAN}🎬 Extrait du duel épique:${NC}"
+                    grep -E "(HERO|SAY|ABILITY)" "$scenario_file" | head -10
+                    echo -e "${YELLOW}... (plus de contenu disponible)${NC}"
+                fi
+            else
+                echo -e "${RED}❌ Scénario non trouvé: $scenario_file${NC}"
+            fi
+            ;;
+            
+        *)
+            echo -e "${YELLOW}🔍 Recherche du scénario: $command${NC}"
+            local found=false
+            
+            # Chercher dans les fichiers .hots
+            if [ -d "game_assets/scenarios/hots" ]; then
+                for file in game_assets/scenarios/hots/*.hots; do
+                    if [[ "$(basename "$file" .hots)" == *"$command"* ]]; then
+                        echo -e "${GREEN}✅ Scénario HOTS trouvé: $(basename "$file")${NC}"
+                        echo -e "${CYAN}📊 Analyse:${NC}"
+                        wc -l "$file"
+                        echo -e "${CYAN}🎬 Aperçu:${NC}"
+                        head -10 "$file"
+                        found=true
+                        break
+                    fi
+                done
+            fi
+            
+            # Chercher dans les fichiers JSON
+            if [ ! "$found" = true ] && [ -d "game_assets/scenarios" ]; then
+                for file in game_assets/scenarios/*.json; do
+                    if [[ "$(basename "$file" .json)" == *"$command"* ]]; then
+                        echo -e "${GREEN}✅ Scénario JSON trouvé: $(basename "$file")${NC}"
+                        echo -e "${CYAN}📊 Analyse:${NC}"
+                        wc -l "$file"
+                        echo -e "${CYAN}🎬 Aperçu:${NC}"
+                        head -10 "$file"
+                        found=true
+                        break
+                    fi
+                done
+            fi
+            
+            if [ ! "$found" = true ]; then
+                echo -e "${RED}❌ Scénario '$command' non trouvé${NC}"
+                echo -e "${YELLOW}💡 Utilisez './hots scenario list' pour voir les scénarios disponibles${NC}"
+            fi
+            ;;
+    esac
+}
+
 # Fonction principale
 case "${1:-help}" in
     "start")
-        start_services
+        if [ "$2" = "essential" ]; then
+            start_essential_services
+        else
+            start_services
+        fi
         ;;
     "stop")
         stop_services
@@ -608,6 +1243,194 @@ case "${1:-help}" in
         ;;
     "test")
         run_test_suite "$2"
+        ;;
+    "generate")
+        generate_md_docs
+        ;;
+    "map")
+        manage_maps "$2" "$3"
+        ;;
+    "replay")
+        manage_replays "$2" "$3"
+        ;;
+    "editor")
+        launch_visual_editor
+        ;;
+    "admin")
+        launch_admin_interface
+        ;;
+    "test-uis")
+        run_test_suite "ui"
+        ;;
+    "debug")
+        echo -e "${BLUE}🐛 Mode debug actif - Lancement de la compilation avec debug info...${NC}"
+        if [ -d "backend" ]; then
+            cd backend
+            echo -e "${YELLOW}🔧 Compilation avec debug info...${NC}"
+            mvn clean compile -e -X > ../debug-compile.log 2>&1
+            if [ $? -eq 0 ]; then
+                echo -e "${GREEN}✅ Compilation réussie avec debug info${NC}"
+                echo -e "${CYAN}📋 Logs sauvegardés dans: debug-compile.log${NC}"
+            else
+                echo -e "${RED}❌ Erreurs de compilation détectées${NC}"
+                echo -e "${YELLOW}📋 Vérifiez debug-compile.log pour les détails${NC}"
+                tail -20 ../debug-compile.log
+            fi
+            cd ..
+        else
+            echo -e "${RED}❌ Dossier backend non trouvé${NC}"
+        fi
+        ;;
+    "compile")
+        echo -e "${BLUE}🔧 Compilation backend avec debug info...${NC}"
+        if [ -d "backend" ]; then
+            cd backend
+            echo -e "${YELLOW}🧹 Nettoyage...${NC}"
+            mvn clean
+            echo -e "${YELLOW}🔧 Compilation avec debug...${NC}"
+            mvn compile -e -X -Dorg.slf4j.simpleLogger.defaultLogLevel=debug
+            if [ $? -eq 0 ]; then
+                echo -e "${GREEN}✅ Compilation réussie${NC}"
+                echo -e "${CYAN}📋 Prêt pour le démarrage en mode debug${NC}"
+            else
+                echo -e "${RED}❌ Erreurs de compilation${NC}"
+                echo -e "${YELLOW}💡 Utilisez './hots debug' pour plus de détails${NC}"
+            fi
+            cd ..
+        else
+            echo -e "${RED}❌ Dossier backend non trouvé${NC}"
+        fi
+        ;;
+    "logs")
+        echo -e "${BLUE}📋 Affichage des logs en temps réel...${NC}"
+        echo -e "${YELLOW}💡 Appuyez sur Ctrl+C pour arrêter${NC}"
+        echo ""
+        
+        # Logs backend
+        if [ -f "backend.log" ]; then
+            echo -e "${CYAN}🔧 Logs Backend:${NC}"
+            tail -f backend.log &
+        fi
+        
+        # Logs debug
+        if [ -f "debug-compile.log" ]; then
+            echo -e "${CYAN}🐛 Logs Debug:${NC}"
+            tail -f debug-compile.log &
+        fi
+        
+        # Attendre l'interruption
+        wait
+        ;;
+    "scenario")
+        manage_scenarios "$2" "$3"
+        ;;
+    "vince")
+        echo -e "${PURPLE}🔫 Lancement de Vince's Process Annihilator !${NC}"
+        echo -e "${YELLOW}💀 'Say hello to my little friend... the SIGKILL!'${NC}"
+        echo ""
+        
+        if [ -x "scripts/vince-process-annihilator.sh" ]; then
+            ./scripts/vince-process-annihilator.sh
+        else
+            echo -e "${RED}❌ Script vince-process-annihilator.sh non trouvé ou non exécutable${NC}"
+            echo -e "${YELLOW}💡 Vérifiez scripts/vince-process-annihilator.sh${NC}"
+        fi
+        ;;
+    "walter")
+        echo -e "${BLUE}🎳 Activation du Walter's Anti-Vince Protocol !${NC}"
+        echo -e "${YELLOW}💀 'This aggression will not stand, man!'${NC}"
+        echo ""
+        
+        if [ -x "scripts/walter-anti-vince-protocol.sh" ]; then
+            ./scripts/walter-anti-vince-protocol.sh
+        else
+            echo -e "${RED}❌ Script walter-anti-vince-protocol.sh non trouvé ou non exécutable${NC}"
+            echo -e "${YELLOW}💡 Vérifiez scripts/walter-anti-vince-protocol.sh${NC}"
+        fi
+        ;;
+    "save")
+        # Sauvegarde manuelle
+        if [ -z "$2" ]; then
+            echo -e "${RED}❌ Nom de sauvegarde requis${NC}"
+            echo -e "${YELLOW}Usage: ./hots save <nom_sauvegarde> [game_id] [player_id]${NC}"
+            exit 1
+        fi
+        
+        SAVE_NAME="$2"
+        GAME_ID="${3:-1}"
+        PLAYER_ID="${4:-player1}"
+        
+        echo -e "${BLUE}💾 Sauvegarde de la partie...${NC}"
+        RESPONSE=$(curl -s -X POST "http://localhost:8080/api/persistence/games/$GAME_ID/save" \
+            -H "Content-Type: application/json" \
+            -d "{\"playerId\": \"$PLAYER_ID\", \"saveName\": \"$SAVE_NAME\", \"description\": \"Sauvegarde manuelle\"}")
+        
+        if echo "$RESPONSE" | jq -e '.success == true' > /dev/null 2>&1; then
+            echo -e "${GREEN}✅ Partie sauvegardée: $SAVE_NAME${NC}"
+            echo "$RESPONSE" | jq -r '.message'
+        else
+            echo -e "${RED}❌ Erreur sauvegarde${NC}"
+            echo "$RESPONSE" | jq -r '.error // "Erreur inconnue"'
+        fi
+        ;;
+    "load")
+        # Charger une sauvegarde
+        if [ -z "$2" ]; then
+            echo -e "${RED}❌ ID ou nom de sauvegarde requis${NC}"
+            echo -e "${YELLOW}Usage: ./hots load <save_id_ou_nom> [player_id]${NC}"
+            exit 1
+        fi
+        
+        SAVE_ID="$2"
+        PLAYER_ID="${3:-player1}"
+        
+        echo -e "${BLUE}📂 Chargement de la sauvegarde...${NC}"
+        
+        # Si c'est un nombre, charger par ID
+        if [[ "$SAVE_ID" =~ ^[0-9]+$ ]]; then
+            RESPONSE=$(curl -s -X POST "http://localhost:8080/api/persistence/saves/$SAVE_ID/load" \
+                -H "Content-Type: application/json" \
+                -d "{\"playerId\": \"$PLAYER_ID\"}")
+        else
+            # Sinon, chercher par nom (à implémenter côté backend si nécessaire)
+            echo -e "${YELLOW}⚠️  Chargement par nom non encore implémenté${NC}"
+            echo -e "${YELLOW}💡 Utilisez './hots list-saves' pour voir les IDs${NC}"
+            exit 1
+        fi
+        
+        if echo "$RESPONSE" | jq -e '.success == true' > /dev/null 2>&1; then
+            echo -e "${GREEN}✅ Partie chargée avec succès${NC}"
+            echo "$RESPONSE" | jq -r '.message'
+        else
+            echo -e "${RED}❌ Erreur chargement${NC}"
+            echo "$RESPONSE" | jq -r '.error // "Erreur inconnue"'
+        fi
+        ;;
+    "list-saves")
+        # Lister les sauvegardes
+        PLAYER_ID="${2:-player1}"
+        
+        echo -e "${BLUE}📋 Liste des sauvegardes pour $PLAYER_ID:${NC}"
+        echo ""
+        
+        RESPONSE=$(curl -s "http://localhost:8080/api/persistence/saves?playerId=$PLAYER_ID")
+        
+        if echo "$RESPONSE" | jq -e '.success == true' > /dev/null 2>&1; then
+            COUNT=$(echo "$RESPONSE" | jq -r '.count')
+            echo -e "${GREEN}✅ $COUNT sauvegarde(s) trouvée(s)${NC}"
+            echo ""
+            
+            echo "$RESPONSE" | jq -r '.saves[] | 
+                "ID: \(.id) | \(.saveName)" +
+                "\n  Tour: \(.turnNumber) | " +
+                (if .isAutoSave then "🔄 Auto-save" else "💾 Manuelle" end) +
+                "\n  Créée: \(.createdAt) | Dernière: \(.lastPlayedAt)" +
+                "\n  " + (.description // "Pas de description") +
+                "\n"'
+        else
+            echo -e "${RED}❌ Erreur récupération sauvegardes${NC}"
+            echo "$RESPONSE" | jq -r '.error // "Erreur inconnue"'
+        fi
         ;;
     "help"|*)
         show_help

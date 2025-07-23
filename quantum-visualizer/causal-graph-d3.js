@@ -81,8 +81,28 @@ class CausalGraphD3 {
             .force('collision', d3.forceCollide().radius(30));
     }
     
-    loadSampleData() {
-        // Données d'exemple pour démonstration
+    async loadSampleData() {
+        try {
+            // Charger les vraies données depuis l'API backend
+            const response = await fetch('http://localhost:8080/api/temporal/causal/graph');
+            if (response.ok) {
+                const gameData = await response.json();
+                this.convertGameDataToNodes(gameData);
+                this.convertGameDataToLinks(gameData);
+            } else {
+                // Fallback avec données d'exemple si l'API n'est pas disponible
+                this.loadFallbackData();
+            }
+        } catch (error) {
+            console.log('Erreur chargement données causales, utilisation données d\'exemple:', error);
+            this.loadFallbackData();
+        }
+        
+        this.updateGraph();
+    }
+    
+    loadFallbackData() {
+        // Données d'exemple pour démonstration (fallback)
         this.nodes = [
             { 
                 id: 'initial', 
@@ -137,8 +157,6 @@ class CausalGraphD3 {
             { source: 'quantum_state', target: 'collapse', type: 'temporal' },
             { source: 'superposition', target: 'collapse', type: 'quantum_merge' }
         ];
-        
-        this.updateGraph();
     }
     
     updateGraph() {

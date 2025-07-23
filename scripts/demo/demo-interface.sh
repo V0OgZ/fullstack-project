@@ -61,55 +61,15 @@ echo '   📋 Logs détaillés'
 echo '   🎯 Boutons d'\''action'
 echo ''
 
-# Proposer de lancer
-echo '🚀 LANCEMENT DE LA DÉMONSTRATION:'
-echo '================================='
+# 🔧 FIX: Suppression de l'interaction clavier pour automatisation
+echo '🚀 LANCEMENT AUTOMATIQUE DE LA DÉMONSTRATION:'
+echo '============================================='
 echo ''
-echo '1. 🎬 Lancer l'\''interface maintenant'
-echo '2. 📋 Voir les fichiers créés'
-echo '3. 🎯 Lancer un test rapide'
-echo '4. ❌ Quitter'
+echo '🎬 Lancement de l'\''interface automatiquement...'
+echo '🌐 Ouverture sur http://localhost:8888'
+echo '🛑 Appuyez sur Ctrl+C pour arrêter'
 echo ''
-read -p '🎯 Votre choix (1-4): ' choice
-
-case $choice in
-    1)
-        echo ''
-        echo '🎬 Lancement de l'\''interface...'
-        echo '🌐 Ouverture sur http://localhost:8888'
-        echo '🛑 Appuyez sur Ctrl+C pour arrêter'
-        echo ''
-        ./start-test-runner.sh
-        ;;
-    2)
-        echo ''
-        echo '📋 Fichiers de l'\''interface:'
-        echo '============================'
-        ls -la test-runner-* start-test-runner.sh | head -5
-        echo ''
-        echo '📊 Taille totale:'
-        du -h test-runner-* start-test-runner.sh | tail -1
-        ;;
-    3)
-        echo ''
-        echo '🎯 Lancement d'\''un test rapide...'
-        echo '⚡ Test: scripts/test-rapide-hots.sh'
-        if [ -f "scripts/test-rapide-hots.sh" ]; then
-            ./scripts/test-rapide-hots.sh
-        else
-            echo '❌ Test rapide non trouvé'
-        fi
-        ;;
-    4)
-        echo ''
-        echo '👋 Au revoir !'
-        exit 0
-        ;;
-    *)
-        echo '❌ Choix invalide'
-        exit 1
-        ;;
-esac
+./start-test-runner.sh
 
 echo ''
 echo '🎉 Démonstration terminée !'

@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 Heroes of Time - Dashboard Central</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+            zoom: 0.7;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .dashboard-title {
+            font-size: 3em;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease-in-out infinite;
+            margin-bottom: 10px;
+        }
+
+        .dashboard-subtitle {
+            font-size: 1.2em;
+            color: #a0a0a0;
+            margin-bottom: 20px;
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .status-up { background-color: #4ecdc4; }
+        .status-down { background-color: #ff6b6b; }
+        .status-loading { background-color: #ffa726; }
+
+        .ui-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .ui-panel {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ui-panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .ui-panel.active {
+            border-color: #4ecdc4;
+            background: rgba(78, 205, 196, 0.1);
+        }
+
+        .ui-panel.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        .ui-panel.disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .panel-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .panel-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .panel-description {
+            color: #a0a0a0;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .panel-url {
+            font-family: 'Courier New', monospace;
+            color: #4ecdc4;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .panel-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .panel-features li {
+            padding: 5px 0;
+            color: #b0b0b0;
+            font-size: 0.9em;
+        }
+
+        .panel-features li:before {
+            content: "✨ ";
+            color: #4ecdc4;
+        }
+
+        .launch-button {
+            background: linear-gradient(45deg, #4ecdc4, #45b7d1);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .launch-button:hover {
+            background: linear-gradient(45deg, #45b7d1, #4ecdc4);
+            transform: scale(1.05);
+        }
+
+        .launch-button:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .refresh-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(78, 205, 196, 0.2);
+            border: 2px solid #4ecdc4;
+            color: #4ecdc4;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+        }
+
+        .refresh-button:hover {
+            background: #4ecdc4;
+            color: white;
+            transform: rotate(180deg);
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .ui-grid {
+                grid-template-columns: 1fr;
+            }
+            .dashboard-title {
+                font-size: 2em;
+            }
+            .status-bar {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-header">
+        <h1 class="dashboard-title">🎯 Heroes of Time</h1>
+        <p class="dashboard-subtitle">Dashboard Central - Accès à toutes les interfaces</p>
+        
+        <div class="status-bar">
+            <div class="status-indicator">
+                <div class="status-dot status-loading" id="backend-status"></div>
+                <span>Backend API (8080)</span>
+            </div>
+            <div class="status-indicator">
+                <div class="status-dot status-loading" id="frontend-status"></div>
+                <span>Frontend Principal (8000)</span>
+            </div>
+            <div class="status-indicator">
+                <div class="status-dot status-loading" id="temporal-status"></div>
+                <span>Frontend Temporal (5174)</span>
+            </div>
+            <div class="status-indicator">
+                <div class="status-dot status-loading" id="visualizer-status"></div>
+                <span>Quantum Visualizer (8001)</span>
+            </div>
+            <div class="status-indicator">
+                <div class="status-dot status-loading" id="object-viewer-status"></div>
+                <span>Collection & Grammar (5175)</span>
+            </div>
+            <div class="status-indicator">
+                <div class="status-dot status-loading" id="testrunner-status"></div>
+                <span>Test Runner (8888)</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui-grid">
+        <!-- Frontend Principal -->
+        <div class="ui-panel" id="frontend-panel">
+            <div class="panel-icon">🎮</div>
+            <h2 class="panel-title">Frontend Principal</h2>
+            <p class="panel-description">Interface de jeu principale avec console temporelle et carte hexagonale</p>
+            <div class="panel-url">http://localhost:8000</div>
+            <ul class="panel-features">
+                <li>Console temporelle HOTS</li>
+                <li>Carte hexagonale interactive</li>
+                <li>Création et gestion des héros</li>
+                <li>Scripts quantiques ψ, †, ⊙</li>
+            </ul>
+            <a href="http://localhost:8000" target="_blank" class="launch-button" id="frontend-button">
+                🚀 Lancer l'Interface
+            </a>
+        </div>
+
+        <!-- Frontend Temporal -->
+        <div class="ui-panel" id="temporal-panel">
+            <div class="panel-icon">⚡</div>
+            <h2 class="panel-title">Frontend Temporal</h2>
+            <p class="panel-description">Interface révolutionnaire avec système UTMD et visualisation temporelle avancée</p>
+            <div class="panel-url">http://localhost:5174</div>
+            <ul class="panel-features">
+                <li>Renderer hexagonal temporel</li>
+                <li>Système UTMD (temps par mouvement)</li>
+                <li>Visualisation collapse causale</li>
+                <li>Animations temporelles</li>
+            </ul>
+            <a href="http://localhost:5174" target="_blank" class="launch-button" id="temporal-button">
+                ⚡ Interface Révolutionnaire
+            </a>
+        </div>
+
+        <!-- Quantum Visualizer -->
+        <div class="ui-panel" id="visualizer-panel">
+            <div class="panel-icon">🔬</div>
+            <h2 class="panel-title">Quantum Visualizer</h2>
+            <p class="panel-description">Visualisation des graphes causaux et états quantiques</p>
+            <div class="panel-url">http://localhost:8001</div>
+            <ul class="panel-features">
+                <li>Graphes causaux D3.js</li>
+                <li>États quantiques ψ</li>
+                <li>Visualisation temporelle</li>
+                <li>Analyse des collapses</li>
+            </ul>
+            <a href="http://localhost:8001/quantum-visualizer/" target="_blank" class="launch-button" id="visualizer-button">
+                🔬 Quantum Lab
+            </a>
+        </div>
+
+        <!-- Replay & Scenarios Center -->
+        <div class="ui-panel" id="replay-panel">
+            <div class="panel-icon">🎬</div>
+            <h2 class="panel-title">Replay & Scénarios</h2>
+            <p class="panel-description">Sélecteur de scénarios HOTS et lecteur de replays épiques</p>
+            <div class="panel-url">Intégré dans le Dashboard</div>
+            <ul class="panel-features">
+                <li>26 scénarios HOTS disponibles</li>
+                <li>Lecteur de replay HSP</li>
+                <li>Contrôles de lecture</li>
+                <li>Session Jean vs Claudius</li>
+            </ul>
+            <button class="launch-button" onclick="openReplayCenter()">
+                🎬 Centre de Replay
+            </button>
+        </div>
+
+        <!-- Collection & Grammar Visualizer -->
+        <div class="ui-panel" id="object-viewer-panel">
+            <div class="panel-icon">🏛️</div>
+            <h2 class="panel-title">Collection & Grammar</h2>
+            <p class="panel-description">Hub des visualiseurs avec menu d'accès aux outils</p>
+            <div class="panel-url">http://localhost:5175</div>
+            <ul class="panel-features">
+                <li>Menu principal des visualiseurs</li>
+                <li>Collection du jeu</li>
+                <li>Grammar Translator</li>
+                <li>JSON Visualizer</li>
+            </ul>
+            <a href="http://localhost:5175" target="_blank" class="launch-button" id="object-viewer-button">
+                🏛️ Menu Visualiseurs
+            </a>
+        </div>
+
+        <!-- Experimental HOTS Unified -->
+        <div class="ui-panel" id="experimental-panel" style="border: 2px dashed #ffa500;">
+            <div class="panel-icon">🧪</div>
+            <h2 class="panel-title">HOTS Unifié (Expérimental)</h2>
+            <p class="panel-description">Interface unifiée expérimentale avec tous les outils HOTS</p>
+            <div class="panel-url">http://localhost:5175/hots</div>
+            <ul class="panel-features">
+                <li>Interface unifiée par onglets</li>
+                <li>Collection + Grammar + Scénarios</li>
+                <li>Mode expérimental</li>
+                <li>Toutes fonctions intégrées</li>
+            </ul>
+            <a href="http://localhost:5175/hots" target="_blank" class="launch-button" id="experimental-button">
+                🧪 HOTS Unifié (Test)
+            </a>
+        </div>
+
+        <!-- Ethereal Mode - Hidden UIs -->
+        <div class="ui-panel" id="ethereal-panel" style="border: 3px solid #9d4edd; background: linear-gradient(135deg, rgba(157, 78, 221, 0.1), rgba(255, 255, 255, 0.05)); box-shadow: 0 0 20px rgba(157, 78, 221, 0.3);">
+            <div class="panel-icon" style="text-shadow: 0 0 10px #9d4edd;">🌟</div>
+            <h2 class="panel-title" style="color: #c77dff;">Mode Éthéré</h2>
+            <p class="panel-description">Accès aux interfaces cachées et expérimentales récupérées</p>
+            <div class="panel-url">Interfaces Multiples</div>
+            <ul class="panel-features">
+                <li>🃏 Heroes Cards Visualizer (16 cartes)</li>
+                <li>⚡ Epoch Visualizer (Timeline)</li>
+                <li>🎯 Panopticon 3D (Vision totale)</li>
+                <li>🔮 Quantum Runic Forge</li>
+            </ul>
+            <button class="launch-button" onclick="openEtherealMode()" style="background: linear-gradient(45deg, #9d4edd, #c77dff); box-shadow: 0 0 15px rgba(157, 78, 221, 0.5);">
+                🌟 Mode Éthéré
+            </button>
+        </div>
+
+        <!-- Test Runner -->
+        <div class="ui-panel" id="testrunner-panel">
+            <div class="panel-icon">🧪</div>
+            <h2 class="panel-title">Test Runner</h2>
+            <p class="panel-description">Interface de tests automatisés et monitoring des performances</p>
+            <div class="panel-url">http://localhost:8888</div>
+            <ul class="panel-features">
+                <li>Tests automatisés complets</li>
+                <li>Monitoring performances</li>
+                <li>Tests GROFI intégrés</li>
+                <li>Rapports détaillés</li>
+            </ul>
+            <a href="http://localhost:8888" target="_blank" class="launch-button" id="testrunner-button">
+                🧪 Tests Automatiques
+            </a>
+        </div>
+
+                            <!-- MEMENTO - Mémoire Vivante -->
+                    <div class="ui-panel" id="memento-panel">
+                        <div class="panel-icon">🧠</div>
+                        <h2 class="panel-title">MEMENTO</h2>
+                        <p class="panel-description">La Mémoire Vivante - Histoire et Documentation Heroes of Time</p>
+                        <div class="panel-url">MEMENTO/HISTOIRE_HEROES_OF_TIME.html</div>
+                        <ul class="panel-features">
+                            <li>Histoire complète du projet</li>
+                            <li>Documentation générée automatiquement</li>
+                            <li>Tatouages de mémoire permanents</li>
+                            <li>Archives temporelles</li>
+                        </ul>
+                        <a href="MEMENTO/HISTOIRE_HEROES_OF_TIME.html" target="_blank" class="launch-button" id="memento-button">
+                            🧠 Accéder à MEMENTO
+                        </a>
+                    </div>
+
+                    <!-- EPOCH SYSTEM - Timeline Officielle -->
+                    <div class="ui-panel" id="epoch-panel">
+                        <div class="panel-icon">🕰️</div>
+                        <h2 class="panel-title">EPOCH SYSTEM</h2>
+                        <p class="panel-description">Timeline Officielle Heroes of Time - Pour Jean depuis son canapé</p>
+                        <div class="panel-url">epoch-visualizer.html</div>
+                        <ul class="panel-features">
+                            <li>Époque HOT : 1er juillet 2025</li>
+                            <li>Timeline ℬ∞ (Jean's Vision)</li>
+                            <li>Jour 21 - Memory Rewrite Protocol</li>
+                            <li>Phase EPIC_VISUALIZATION</li>
+                        </ul>
+                        <a href="epoch-visualizer.html" target="_blank" class="launch-button" id="epoch-button">
+                            🕰️ Timeline Officielle
+                        </a>
+                    </div>
+    </div>
+
+    <button class="refresh-button" onclick="checkAllServices()" title="Actualiser les statuts">
+        🔄
+    </button>
+
+    <div class="footer">
+        <p>🎯 Heroes of Time Dashboard - Toutes les interfaces en un seul endroit</p>
+        <p>Actualisation automatique toutes les 30 secondes</p>
+    </div>
+
+    <script>
+        const services = {
+            backend: { url: 'http://localhost:8080/api/health', port: 8080, name: 'Backend API' },
+            frontend: { url: 'http://localhost:8000', port: 8000, name: 'Frontend Principal' },
+            temporal: { url: 'http://localhost:5174', port: 5174, name: 'Frontend Temporal' },
+            visualizer: { url: 'http://localhost:8001', port: 8001, name: 'Quantum Visualizer' },
+            'object-viewer': { url: 'http://localhost:5175/hots', port: 5175, name: 'Collection & Grammar' },
+            testrunner: { url: 'http://localhost:8888', port: 8888, name: 'Test Runner' }
+        };
+
+        async function checkService(serviceKey) {
+            const service = services[serviceKey];
+            const statusDot = document.getElementById(`${serviceKey}-status`);
+            const panel = document.getElementById(`${serviceKey}-panel`);
+            const button = document.getElementById(`${serviceKey}-button`);
+
+            try {
+                const response = await fetch(service.url, { 
+                    method: 'GET',
+                    mode: 'no-cors',
+                    timeout: 5000
+                });
+                
+                // Pour no-cors, on considère que si pas d'erreur = service up
+                statusDot.className = 'status-dot status-up';
+                panel.classList.add('active');
+                panel.classList.remove('disabled');
+                button.disabled = false;
+                
+            } catch (error) {
+                statusDot.className = 'status-dot status-down';
+                panel.classList.add('disabled');
+                panel.classList.remove('active');
+                button.disabled = true;
+            }
+        }
+
+        async function checkAllServices() {
+            console.log('🔄 Vérification des services...');
+            
+            // Mettre tous en loading
+            Object.keys(services).forEach(key => {
+                document.getElementById(`${key}-status`).className = 'status-dot status-loading';
+            });
+
+            // Vérifier chaque service
+            const checks = Object.keys(services).map(key => checkService(key));
+            await Promise.all(checks);
+            
+            console.log('✅ Vérification terminée');
+        }
+
+        // Vérification initiale
+        checkAllServices();
+
+        // Vérification automatique toutes les 30 secondes
+        setInterval(checkAllServices, 30000);
+
+        // Gestion des clics sur les panneaux
+        document.querySelectorAll('.ui-panel').forEach(panel => {
+            panel.addEventListener('click', function() {
+                if (!this.classList.contains('disabled')) {
+                    const button = this.querySelector('.launch-button');
+                    if (button) {
+                        window.open(button.href, '_blank');
+                    }
+                }
+            });
+        });
+
+        console.log('🎯 Heroes of Time Dashboard chargé !');
+        console.log('📊 Services surveillés:', Object.keys(services));
+    </script>
+
+    <script>
+        // ===== CENTRE DE REPLAY =====
+        let replayCenter = null;
+
+        function openReplayCenter() {
+            if (replayCenter && !replayCenter.closed) {
+                replayCenter.focus();
+                return;
+            }
+
+            replayCenter = window.open('', 'ReplayCenter', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+            
+            const scenarios = [
+                { name: 'simple-game.hots', desc: 'Jeu simple pour débuter' },
+                { name: 'epic-arthur-vs-ragnar.hots', desc: 'Combat épique Arthur contre Ragnar' },
+                { name: 'claudius_vs_jeangro_epic.hots', desc: 'Bataille légendaire Claudius vs Jean-Grofignon' },
+                { name: 'recuperation_manifeste_jean.hots', desc: 'Scénario épique de récupération du manifeste' },
+                { name: 'memento_memory_rewrite.hots', desc: 'Test du système Memory Rewrite de Memento' },
+                { name: 'quantum_maze.hots', desc: 'Labyrinthe quantique complexe' },
+                { name: 'splintered_worlds.hots', desc: 'Mondes éclatés - Scénario avancé' },
+                { name: 'la_tour_sombre.hots', desc: 'La Tour Sombre - Défi ultime' },
+                { name: 'bataille_temporelle_complete.hots', desc: 'Bataille temporelle avec tous les mécanismes' },
+                { name: 'oeil_de_wigner_scenario.hots', desc: 'Scénario utilisant l\\'Œil de Wigner' }
+            ];
+
+            replayCenter.document.write(\`
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>🎬 Heroes of Time - Centre de Replay</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+        }
+        .title {
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 3s ease infinite;
+        }
+        @keyframes gradient { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(74, 144, 226, 0.2);
+        }
+        .section h3 {
+            color: #4a90e2;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+        .item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(74, 144, 226, 0.1);
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .item:hover { background: rgba(74, 144, 226, 0.1); transform: translateX(5px); }
+        .item.selected { background: rgba(74, 144, 226, 0.2); border-color: #4a90e2; }
+        .item-name { font-weight: bold; color: #4ecdc4; margin-bottom: 5px; }
+        .item-desc { font-size: 0.9rem; color: #a0a0a0; }
+        .controls { display: flex; gap: 10px; flex-wrap: wrap; }
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .btn-primary { background: linear-gradient(45deg, #4a90e2, #357abd); color: white; }
+        .btn-primary:hover { background: linear-gradient(45deg, #357abd, #2d5aa0); }
+        .btn-success { background: linear-gradient(45deg, #28a745, #1e7e34); color: white; }
+        .btn-warning { background: linear-gradient(45deg, #ffc107, #e0a800); color: #212529; }
+        .player {
+            grid-column: 1 / -1;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+        }
+        .player-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .display {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            padding: 15px;
+            min-height: 200px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-y: auto;
+        }
+        .turn-info {
+            background: rgba(74, 144, 226, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 class="title">🎬 Centre de Replay Heroes of Time</h1>
+        <p>Sélectionnez un scénario HOTS ou un replay HSP pour commencer</p>
+    </div>
+
+    <div class="grid">
+        <div class="section">
+            <h3>📋 Scénarios HOTS</h3>
+            <div class="list" id="scenarios">
+                \${scenarios.map((s, i) => \`
+                    <div class="item" onclick="selectScenario(\${i})">
+                        <div class="item-name">📋 \${s.name}</div>
+                        <div class="item-desc">\${s.desc}</div>
+                    </div>
+                \`).join('')}
+            </div>
+            <div class="controls">
+                <button class="btn btn-primary" onclick="loadScenario()">▶️ Charger</button>
+                <button class="btn btn-success" onclick="executeScenario()">🚀 Exécuter</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🎬 Replays HSP</h3>
+            <div class="list" id="replays">
+                <div class="item" onclick="selectReplay(0)">
+                    <div class="item-name">🎬 jean_vs_claudius_epic.hsp</div>
+                    <div class="item-desc">Jean vs Claudius - Battle Épique du Manifeste (25 min)</div>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="btn btn-primary" onclick="loadReplay()">▶️ Charger</button>
+                <button class="btn btn-warning" onclick="playReplay()">🎬 Jouer</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="player">
+        <h3>🎮 Lecteur</h3>
+        <div class="player-controls">
+            <button class="btn btn-primary" onclick="playPause()">⏯️ Play/Pause</button>
+            <button class="btn btn-primary" onclick="prevTurn()">⏮️ Précédent</button>
+            <button class="btn btn-primary" onclick="nextTurn()">⏭️ Suivant</button>
+            <button class="btn btn-primary" onclick="restart()">⏹️ Restart</button>
+            <button class="btn btn-warning" onclick="setSpeed(0.5)">0.5x</button>
+            <button class="btn btn-warning" onclick="setSpeed(1)">1x</button>
+            <button class="btn btn-warning" onclick="setSpeed(2)">2x</button>
+        </div>
+        <div class="turn-info" id="info">Aucun contenu chargé</div>
+        <div class="display" id="display">
+            <div style="color: #4a90e2; text-align: center; padding: 50px;">
+                🎬 Sélectionnez un scénario ou un replay pour commencer
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selected = null;
+        let content = null;
+        let turn = 0;
+        let playing = false;
+        let speed = 1;
+
+        function selectScenario(i) {
+            document.querySelectorAll('.item').forEach(el => el.classList.remove('selected'));
+            document.querySelectorAll('.item')[i].classList.add('selected');
+            selected = {type: 'scenario', index: i, data: \${JSON.stringify(scenarios)}[i]};
+        }
+
+        function selectReplay(i) {
+            document.querySelectorAll('.item').forEach(el => el.classList.remove('selected'));
+            document.querySelectorAll('#replays .item')[i].classList.add('selected');
+            selected = {type: 'replay', index: i};
+        }
+
+        function loadScenario() {
+            if (!selected || selected.type !== 'scenario') return alert('Sélectionnez un scénario !');
+            
+            content = {
+                type: 'scenario',
+                name: selected.data.name,
+                content: \`// Scénario: \${selected.data.name}\\n// \${selected.data.desc}\\n\\nHERO(Arthur)\\nMOV(Arthur, @10,10)\\nCREATE(CREATURE, Dragon, @15,15)\\nBATTLE(Arthur, Dragon)\`
+            };
+            
+            document.getElementById('display').innerHTML = \`<pre style="color: #4ecdc4;">\${content.content}</pre>\`;
+            document.getElementById('info').textContent = \`Scénario chargé: \${content.name}\`;
+        }
+
+        function loadReplay() {
+            if (!selected || selected.type !== 'replay') return alert('Sélectionnez un replay !');
+            
+            content = {
+                type: 'replay',
+                name: 'jean_vs_claudius_epic.hsp',
+                turns: [
+                    {turn: 1, player: 'Jean', actions: ['HERO(JeanGrofignon)', 'PLACE(@2,2)']},
+                    {turn: 2, player: 'Claudius', actions: ['HERO(Claudius)', 'PLACE(@18,18)']},
+                    {turn: 3, player: 'Jean', actions: ['MOV(@5,5)', 'USE(WignerEye)']}
+                ]
+            };
+            
+            turn = 0;
+            displayTurn();
+        }
+
+        function displayTurn() {
+            if (!content || content.type !== 'replay') return;
+            const t = content.turns[turn];
+            if (!t) return;
+            
+            document.getElementById('display').innerHTML = \`
+                <div style="color: #4a90e2; margin-bottom: 15px;"><strong>🎬 \${content.name}</strong></div>
+                <div style="color: #ffc107; margin-bottom: 10px;"><strong>Tour \${t.turn} - \${t.player}</strong></div>
+                <div style="color: #4ecdc4;">\${t.actions.map(a => \`▶️ \${a}\`).join('<br>')}</div>
+            \`;
+            document.getElementById('info').textContent = \`Tour \${turn + 1}/\${content.turns.length}\`;
+        }
+
+        function executeScenario() {
+            if (!content || content.type !== 'scenario') return alert('Chargez un scénario !');
+            document.getElementById('info').textContent = '🚀 Exécution...';
+        }
+
+        function playReplay() {
+            if (!content || content.type !== 'replay') return alert('Chargez un replay !');
+            playing = true;
+            playLoop();
+        }
+
+        function playLoop() {
+            if (!playing) return;
+            if (turn < content.turns.length - 1) {
+                nextTurn();
+                setTimeout(playLoop, 2000 / speed);
+            } else {
+                playing = false;
+                document.getElementById('info').textContent = '🎬 Replay terminé !';
+            }
+        }
+
+        function playPause() { playing = !playing; if (playing) playLoop(); }
+        function nextTurn() { if (turn < content.turns.length - 1) { turn++; displayTurn(); } }
+        function prevTurn() { if (turn > 0) { turn--; displayTurn(); } }
+        function restart() { turn = 0; playing = false; displayTurn(); }
+        function setSpeed(s) { speed = s; document.getElementById('info').textContent = \`Vitesse: \${s}x\`; }
+
+        // ===== MODE ÉTHÉRÉ =====
+        let etherealWindow = null;
+
+        function openEtherealMode() {
+            if (etherealWindow && !etherealWindow.closed) {
+                etherealWindow.focus();
+                return;
+            }
+
+            etherealWindow = window.open('', 'EtherealMode', 'width=1400,height=900,scrollbars=yes,resizable=yes');
+            
+            const etherealContent = \`
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>🌟 Heroes of Time - Mode Éthéré</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .ethereal-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(157, 78, 221, 0.1);
+            border-radius: 20px;
+            border: 2px solid rgba(157, 78, 221, 0.3);
+        }
+        .ethereal-title {
+            font-size: 3em;
+            background: linear-gradient(45deg, #9d4edd, #c77dff, #e0aaff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .ui-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        .ethereal-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid rgba(157, 78, 221, 0.2);
+            transition: all 0.4s ease;
+        }
+        .ethereal-card:hover {
+            transform: translateY(-10px);
+            border-color: #9d4edd;
+            box-shadow: 0 20px 40px rgba(157, 78, 221, 0.3);
+        }
+        .card-icon {
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .card-title {
+            font-size: 1.3em;
+            color: #c77dff;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .card-desc {
+            color: #a0a0a0;
+            margin-bottom: 20px;
+        }
+        .ethereal-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(45deg, #9d4edd, #c77dff);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+        .ethereal-btn:hover {
+            background: linear-gradient(45deg, #c77dff, #e0aaff);
+        }
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background: rgba(157, 78, 221, 0.2);
+            border: 1px solid rgba(157, 78, 221, 0.5);
+            border-radius: 25px;
+            color: #c77dff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <a href="#" class="back-btn" onclick="window.close()">← Retour Dashboard</a>
+    
+    <div class="ethereal-header">
+        <h1 class="ethereal-title">🌟 Mode Éthéré</h1>
+        <p>Interfaces cachées récupérées depuis les profondeurs du code</p>
+    </div>
+
+    <div class="ui-grid">
+        <div class="ethereal-card">
+            <div class="card-icon">🃏</div>
+            <h3 class="card-title">Heroes Cards Visualizer</h3>
+            <p class="card-desc">16 cartes interactives pour héros</p>
+            <a href="heroes-cards-visualizer.html" target="_blank" class="ethereal-btn">
+                🃏 Ouvrir Cards Visualizer
+            </a>
+        </div>
+
+        <div class="ethereal-card">
+            <div class="card-icon">⚡</div>
+            <h3 class="card-title">Epoch Visualizer</h3>
+            <p class="card-desc">Timeline officielle Heroes of Time</p>
+            <a href="epoch-visualizer.html" target="_blank" class="ethereal-btn">
+                ⚡ Ouvrir Timeline
+            </a>
+        </div>
+
+        <div class="ethereal-card">
+            <div class="card-icon">🎯</div>
+            <h3 class="card-title">Panopticon 3D</h3>
+            <p class="card-desc">Interface 3D pour visualisation totale</p>
+            <a href="panopticon-3d/index.html" target="_blank" class="ethereal-btn">
+                🎯 Vision 3D
+            </a>
+        </div>
+
+        <div class="ethereal-card">
+            <div class="card-icon">🔮</div>
+            <h3 class="card-title">Quantum Runic Forge</h3>
+            <p class="card-desc">Forge runique quantique</p>
+            <a href="frontend/quantum-runic-forge.html" target="_blank" class="ethereal-btn">
+                🔮 Forge Runique
+            </a>
+        </div>
+
+        <div class="ethereal-card">
+            <div class="card-icon">📊</div>
+            <h3 class="card-title">Mosaic Dashboard</h3>
+            <p class="card-desc">Dashboard alternatif en mosaïque</p>
+            <a href="mosaic-dashboard.html" target="_blank" class="ethereal-btn">
+                📊 Dashboard Mosaïque
+            </a>
+        </div>
+
+        <div class="ethereal-card">
+            <div class="card-icon">🧮</div>
+            <h3 class="card-title">Formula Translator</h3>
+            <p class="card-desc">Traducteur de formules d'artefacts</p>
+            <a href="quantum-visualizer/artifact-formula-translator.html" target="_blank" class="ethereal-btn">
+                🧮 Traducteur Formules
+            </a>
+        </div>
+    </div>
+</body>
+</html>
+            \`;
+            
+            etherealWindow.document.write(etherealContent);
+            \`;
+            
+            etherealWindow.document.write(etherealContent);
+        }
+    </script>
+</body>
+</html>

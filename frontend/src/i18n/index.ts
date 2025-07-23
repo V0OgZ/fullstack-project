@@ -448,6 +448,7 @@ export interface Translation {
   'tooltip.inventory': string;
   'tooltip.castle': string;
   'tooltip.endTurn': string;
+  'tooltip.scriptTester': string;
 
   // Hero movement
   clickHeroToSelect: string;
@@ -908,6 +909,7 @@ const frenchTranslations: Translation = {
   'tooltip.inventory': 'Inventaire',
   'tooltip.castle': 'Château',
   'tooltip.endTurn': 'Finir le tour',
+  'tooltip.scriptTester': 'Testeur de Scripts',
 
   // Hero movement
   clickHeroToSelect: 'Cliquez sur un héros pour le sélectionner',
@@ -1368,6 +1370,7 @@ const englishTranslations: Translation = {
   'tooltip.inventory': 'Inventory',
   'tooltip.castle': 'Castle',
   'tooltip.endTurn': 'End Turn',
+  'tooltip.scriptTester': 'Script Tester',
 
   // Hero movement
   clickHeroToSelect: 'Click on a hero to select them',
@@ -1828,6 +1831,7 @@ const russianTranslations: Translation = {
   'tooltip.inventory': 'Инвентарь',
   'tooltip.castle': 'Замок',
   'tooltip.endTurn': 'Завершить ход',
+  'tooltip.scriptTester': 'Тестер скриптов',
 
   // Hero movement
   clickHeroToSelect: 'Нажмите на героя, чтобы выбрать его',

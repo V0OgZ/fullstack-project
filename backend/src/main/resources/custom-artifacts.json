@@ -129,6 +129,106 @@
       "rarity": "épique",
       "author": "TheDude",
       "created": "2025-07-20"
+    },
+    {
+      "id": "lanterne_brouillard",
+      "name": "Lantern de Brouillard",
+      "description": "Dissipe le brouillard dans un rayon de 3 cases autour du héros",
+      "formula": "CLEAR_FOG(hero, 3)",
+      "energy_cost": 15,
+      "rarity": "commune",
+      "author": "Explorateur",
+      "created": "2025-07-21"
+    },
+    {
+      "id": "bottes_vent",
+      "name": "Bottes du Vent",
+      "description": "Augmente les points de mouvement de 2 pour ce tour",
+      "formula": "MODIFY_MOVEMENT(hero, +2)",
+      "energy_cost": 10,
+      "rarity": "commune",
+      "author": "Coureur",
+      "created": "2025-07-21"
+    },
+    {
+      "id": "pierre_ancrage",
+      "name": "Pierre d'Ancrage",
+      "description": "Empêche le héros d'être déplacé par des effets temporels pendant 2 tours",
+      "formula": "ANCHOR_HERO(hero, 2)",
+      "energy_cost": 20,
+      "rarity": "rare",
+      "author": "Gardien",
+      "created": "2025-07-21"
+    },
+    {
+      "id": "cristal_vision",
+      "name": "Cristal de Vision",
+      "description": "Augmente le rayon de vision de 1 case pendant 3 tours",
+      "formula": "MODIFY_VISION(hero, +1, 3)",
+      "energy_cost": 12,
+      "rarity": "commune",
+      "author": "Voyant",
+      "created": "2025-07-21"
+    },
+    {
+      "id": "amulette_protection",
+      "name": "Amulette de Protection",
+      "description": "Réduit les dégâts reçus de 25% pendant 1 tour",
+      "formula": "PROTECT_HERO(hero, 0.75, 1)",
+      "energy_cost": 18,
+      "rarity": "rare",
+      "author": "Protecteur",
+      "created": "2025-07-21"
+    },
+    {
+      "id": "sifflet_appel",
+      "name": "Sifflet d'Appel",
+      "description": "Révèle tous les héros dans un rayon de 5 cases",
+      "formula": "REVEAL_HEROES(hero, 5)",
+      "energy_cost": 15,
+      "rarity": "commune",
+      "author": "Éclaireur",
+      "created": "2025-07-21"
+    },
+    {
+      "id": "potion_energie",
+      "name": "Potion d'Énergie Mineure",
+      "description": "Restaure 30 points d'énergie temporelle",
+      "formula": "MODIFY_ENERGY(hero, 30)",
+      "energy_cost": 5,
+      "rarity": "commune",
+      "author": "Alchimiste",
+      "created": "2025-07-21"
+    },
+    {
+      "id": "bague_teleport",
+      "name": "Bague de Téléportation",
+      "description": "Téléporte le héros à une case adjacente libre",
+      "formula": "TELEPORT_ADJACENT(hero)",
+      "energy_cost": 25,
+      "rarity": "rare",
+      "author": "Mage",
+      "created": "2025-07-21"
+    },
+    {
+      "id": "torche_eternelle",
+      "name": "Torche Éternelle",
+      "description": "Éclaire une zone de 2x2 cases pendant 2 tours",
+      "formula": "ILLUMINATE_AREA(hero, 2, 2)",
+      "energy_cost": 8,
+      "rarity": "commune",
+      "author": "Explorateur",
+      "created": "2025-07-21"
+    },
+    {
+      "id": "medaillon_sante",
+      "name": "Médaillon de Santé",
+      "description": "Restaure 20 points de vie",
+      "formula": "HEAL_HERO(hero, 20)",
+      "energy_cost": 12,
+      "rarity": "commune",
+      "author": "Guérisseur",
+      "created": "2025-07-21"
     }
   ],
   "metadata": {

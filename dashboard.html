@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🎯 Heroes of Time - Dashboard Central</title>
+    <link rel="stylesheet" href="translation-styles.css">
     <style>
         * {
             margin: 0;
@@ -23,40 +24,103 @@
         .dashboard-header {
             text-align: center;
             margin-bottom: 30px;
+            padding: 0 10px;
         }
 
         .dashboard-title {
-            font-size: 3em;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
-            background-size: 400% 400%;
+            font-size: 2.2em;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: gradientShift 3s ease-in-out infinite;
-            margin-bottom: 10px;
+            background-clip: text;
+            margin-bottom: 8px;
         }
 
         .dashboard-subtitle {
-            font-size: 1.2em;
+            font-size: 1em;
             color: #a0a0a0;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+        }
+
+        .heroes-grofi-section {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(78, 205, 196, 0.1) 50%, rgba(69, 183, 209, 0.1) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .heroes-grofi-title {
+            font-size: 1.5em;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .heroes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .hero-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .hero-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-icon {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+
+        .hero-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #4ecdc4;
+        }
+
+        .hero-faction {
+            font-size: 0.8em;
+            color: #a0a0a0;
+            margin-bottom: 8px;
+        }
+
+        .hero-power {
+            font-size: 0.7em;
+            color: #ff6b6b;
+            font-style: italic;
         }
 
         .status-bar {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-bottom: 40px;
+            gap: 15px;
+            margin-bottom: 25px;
             flex-wrap: wrap;
         }
 
         .status-indicator {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
+            gap: 6px;
+            padding: 6px 12px;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            font-size: 0.9em;
+            border-radius: 15px;
+            font-size: 0.8em;
             transition: all 0.3s ease;
         }
 
@@ -73,27 +137,87 @@
 
         .ui-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 10px;
+        }
+
+        /* Panel Admin Multijoueur - Taille de 2 fiches */
+        #admin-multiplayer-panel {
+            grid-column: span 2;
+            min-height: 300px;
+        }
+
+        /* Responsive pour écrans petits (1280x800) */
+        @media (max-width: 1280px) {
+            .ui-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 15px;
+                max-width: 100%;
+            }
+            
+            #admin-multiplayer-panel {
+                grid-column: span 1;
+                min-height: 250px;
+            }
+            
+            .ui-panel {
+                padding: 20px;
+            }
+            
+            .panel-icon {
+                font-size: 3em;
+                margin-bottom: 15px;
+            }
+            
+            .panel-title {
+                font-size: 1.2em;
+            }
+            
+            .panel-description {
+                font-size: 0.9em;
+            }
+        }
+
+        /* Responsive pour très petits écrans */
+        @media (max-width: 1024px) {
+            .ui-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .ui-panel {
+                padding: 15px;
+            }
+            
+            .panel-icon {
+                font-size: 2.5em;
+                margin-bottom: 10px;
+            }
+            
+            .panel-title {
+                font-size: 1.1em;
+            }
         }
 
         .ui-panel {
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 30px;
+            border-radius: 12px;
+            padding: 20px;
             text-align: center;
             transition: all 0.3s ease;
             border: 2px solid transparent;
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            min-height: 200px;
         }
 
         .ui-panel:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
 
         .ui-panel.active {
@@ -113,21 +237,21 @@
         }
 
         .panel-icon {
-            font-size: 4em;
-            margin-bottom: 20px;
+            font-size: 3em;
+            margin-bottom: 15px;
             display: block;
         }
 
         .panel-title {
-            font-size: 1.5em;
-            margin-bottom: 10px;
+            font-size: 1.3em;
+            margin-bottom: 8px;
             color: #ffffff;
         }
 
         .panel-description {
+            font-size: 0.9em;
             color: #a0a0a0;
-            margin-bottom: 20px;
-            line-height: 1.5;
+            margin-bottom: 15px;
         }
 
         .panel-url {
@@ -158,18 +282,19 @@
             background: linear-gradient(45deg, #4ecdc4, #45b7d1);
             color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 25px;
-            font-size: 1em;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
+            margin: 5px;
         }
 
         .launch-button:hover {
-            background: linear-gradient(45deg, #45b7d1, #4ecdc4);
-            transform: scale(1.05);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.4);
         }
 
         .launch-button:disabled {
@@ -230,6 +355,27 @@
                 align-items: center;
             }
         }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 20px;
+            border-radius: 8px;
+            color: white;
+            font-size: 0.9em;
+            z-index: 1000;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success { background-color: #4ecdc4; }
+        .notification.error { background-color: #ff6b6b; }
+        .notification.warning { background-color: #ffa726; }
     </style>
 </head>
 <body>
@@ -245,6 +391,10 @@
             <div class="status-indicator">
                 <div class="status-dot status-loading" id="frontend-status"></div>
                 <span>Frontend Principal (8000)</span>
+            </div>
+            <div class="status-indicator">
+                <div class="status-dot status-loading" id="visual-editor-status"></div>
+                <span>Éditeur Visuel (8000)</span>
             </div>
             <div class="status-indicator">
                 <div class="status-dot status-loading" id="temporal-status"></div>
@@ -265,6 +415,49 @@
         </div>
     </div>
 
+    <!-- Section Héros GROFI -->
+    <div class="heroes-grofi-section">
+        <h2 class="heroes-grofi-title">🌟 Compagnons GROFI Légendaires</h2>
+        <p style="color: #a0a0a0; margin-bottom: 20px;">Les héros éveillés qui maîtrisent les paradoxes temporels</p>
+        
+        <div class="heroes-grid">
+            <div class="hero-card">
+                <div class="hero-icon">👑</div>
+                <div class="hero-name">Jean-Grofignon</div>
+                <div class="hero-faction">Compagnons de Jean-Grofignon</div>
+                <div class="hero-power">Collapse Override</div>
+            </div>
+            
+            <div class="hero-card">
+                <div class="hero-icon">🛡️</div>
+                <div class="hero-name">Walter Sobchak</div>
+                <div class="hero-faction">Compagnons de Jean-Grofignon</div>
+                <div class="hero-power">Enforcement Protocol</div>
+            </div>
+            
+            <div class="hero-card">
+                <div class="hero-icon">🎳</div>
+                <div class="hero-name">The Dude</div>
+                <div class="hero-faction">Compagnons de Jean-Grofignon</div>
+                <div class="hero-power">Zen Collapse</div>
+            </div>
+            
+            <div class="hero-card">
+                <div class="hero-icon">🔫</div>
+                <div class="hero-name">Vince Vega</div>
+                <div class="hero-faction">Compagnons de Jean-Grofignon</div>
+                <div class="hero-power">Exécution Parallèle</div>
+            </div>
+            
+            <div class="hero-card">
+                <div class="hero-icon">🎭</div>
+                <div class="hero-name">Anna Martel</div>
+                <div class="hero-faction">Architectes Temporels</div>
+                <div class="hero-power">Temporal Decay</div>
+            </div>
+        </div>
+    </div>
+
     <div class="ui-grid">
         <!-- Frontend Principal -->
         <div class="ui-panel" id="frontend-panel">
@@ -280,6 +473,25 @@
             </ul>
             <a href="http://localhost:8000" target="_blank" class="launch-button" id="frontend-button">
                 🚀 Lancer l'Interface
+            </a>
+        </div>
+
+        <!-- Éditeur Visuel Script Spatio-Temporel -->
+        <div class="ui-panel" id="visual-editor-panel" style="border: 3px solid #4eccc6; background: linear-gradient(135deg, rgba(78, 204, 198, 0.1), rgba(255, 255, 255, 0.05)); box-shadow: 0 0 20px rgba(78, 204, 198, 0.3);">
+            <div class="panel-icon" style="text-shadow: 0 0 10px #4eccc6;">🎨</div>
+            <h2 class="panel-title" style="color: #4eccc6;">Éditeur Visuel Script</h2>
+            <p class="panel-description">Premier IDE visuel de scripting quantico-temporel au monde - Révolution du game design</p>
+            <div class="panel-url">http://localhost:8000/visual-script-editor.html</div>
+            <ul class="panel-features">
+                <li>🚶 Actions point-and-click (MOV, USE, CREATE)</li>
+                <li>ψ Actions temporelles (PSI, TRIGGER, COLLAPSE)</li>
+                <li>⏰ Timeline Editor avec branches multiples</li>
+                <li>🎮 Game Board interactif avec héros et ψ-states</li>
+                <li>🔧 Système de macros personnalisées</li>
+                <li>📜 Génération automatique de scripts HOTS</li>
+            </ul>
+            <a href="http://localhost:8000/visual-script-editor.html" target="_blank" class="launch-button" id="visual-editor-button" style="background: linear-gradient(45deg, #4eccc6, #3a9ca8); box-shadow: 0 0 15px rgba(78, 204, 198, 0.5);">
+                🎨 Éditeur Révolutionnaire
             </a>
         </div>
 
@@ -321,17 +533,26 @@
         <div class="ui-panel" id="object-viewer-panel">
             <div class="panel-icon">🏛️</div>
             <h2 class="panel-title">Collection & Grammar</h2>
-            <p class="panel-description">Interface unifiée : Collection du jeu, Scénarios HOTS et Grammar Translator</p>
+            <p class="panel-description">Interface unifiée : Collection du jeu avec avatars Dicebear, Scénarios HOTS et Grammar Translator</p>
             <div class="panel-url">http://localhost:5175/hots</div>
             <ul class="panel-features">
-                <li>Collection complète du jeu</li>
+                <li>Collection complète avec Dicebear</li>
+                <li>Héros, créatures et artefacts visuels</li>
                 <li>Scénarios HOTS intégrés</li>
                 <li>Grammar Translator avancé</li>
                 <li>Interface par onglets moderne</li>
             </ul>
-            <a href="http://localhost:5175/hots" target="_blank" class="launch-button" id="object-viewer-button">
-                🏛️ Collection & Grammar
-            </a>
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 15px;">
+                <a href="http://localhost:5175" target="_blank" class="launch-button" id="object-viewer-button">
+                    🏛️ Collection & Grammar
+                </a>
+                <a href="collection-dicebear.html" target="_blank" class="launch-button" style="background: linear-gradient(45deg, #FFD700, #FFA500);">
+                    🎨 Collection Dicebear
+                </a>
+                <a href="collection-dicebear-advanced.html" target="_blank" class="launch-button" style="background: linear-gradient(45deg, #FF6B6B, #9B59B6);">
+                    🚀 Dicebear Advanced
+                </a>
+            </div>
         </div>
 
         <!-- Test Runner -->
@@ -350,6 +571,168 @@
                 🧪 Tests Automatiques
             </a>
         </div>
+
+        <!-- Ethereal Mode - Hidden UIs -->
+        <div class="ui-panel" id="ethereal-panel" style="border: 3px solid #9d4edd; background: linear-gradient(135deg, rgba(157, 78, 221, 0.1), rgba(255, 255, 255, 0.05)); box-shadow: 0 0 20px rgba(157, 78, 221, 0.3);">
+            <div class="panel-icon" style="text-shadow: 0 0 10px #9d4edd;">🌟</div>
+            <h2 class="panel-title" style="color: #c77dff;">Mode Éthéré</h2>
+            <p class="panel-description">Accès aux interfaces cachées et expérimentales récupérées<br>🎁 <em>Inclut maintenant la Forge Runique 1111 - Cadeau de Jean!</em></p>
+            <div class="panel-url">Interfaces Multiples</div>
+            <ul class="panel-features">
+                <li>🃏 Heroes Cards Visualizer (16 cartes)</li>
+                <li>⚡ Epoch Visualizer (Timeline)</li>
+                <li>🎯 Panopticon 3D (Vision totale)</li>
+                <li>🔮 Quantum Runic Forge</li>
+                <li>⚡ <strong>Forge Runique 1111</strong> - Cadeau de Jean 🎁</li>
+            </ul>
+            <button class="launch-button" onclick="openEtherealMode()" style="background: linear-gradient(45deg, #9d4edd, #c77dff); box-shadow: 0 0 15px rgba(157, 78, 221, 0.5);">
+                🌟 Mode Éthéré
+            </button>
+            <a href="frontend/forge-runique-ultime.html" target="_blank" class="launch-button" style="background: linear-gradient(45deg, #FFD700, #FFA500); color: #8B4513; margin-top: 10px; box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);">
+                🔨⚡ Forge Runique 1111 ⚡🔨
+            </a>
+        </div>
+
+                            <!-- MEMENTO - Mémoire Vivante -->
+                    <div class="ui-panel" id="memento-panel">
+                        <div class="panel-icon">🧠</div>
+                        <h2 class="panel-title">MEMENTO</h2>
+                        <p class="panel-description">La Mémoire Vivante - Histoire et Documentation Heroes of Time</p>
+                        <div class="panel-url">MEMENTO/HISTOIRE_HEROES_OF_TIME.html</div>
+                        <ul class="panel-features">
+                            <li>Histoire complète du projet</li>
+                            <li>Documentation générée automatiquement</li>
+                            <li>Tatouages de mémoire permanents</li>
+                            <li>Archives temporelles</li>
+                        </ul>
+                        <a href="MEMENTO/HISTOIRE_HEROES_OF_TIME.html" target="_blank" class="launch-button" id="memento-button">
+                            🧠 Accéder à MEMENTO
+                        </a>
+                    </div>
+
+                    <!-- REPLAY & SCENARIOS CENTER -->
+                    <div class="ui-panel" id="replay-panel" style="border: 2px dashed #ffa500;">
+                        <div class="panel-icon">🎬</div>
+                        <h2 class="panel-title">Replay & Scénarios</h2>
+                        <p class="panel-description">Sélecteur de scénarios HOTS et lecteur de replays épiques</p>
+                        <div class="panel-url">Intégré dans le Dashboard</div>
+                        <ul class="panel-features">
+                            <li>26 scénarios HOTS disponibles</li>
+                            <li>Lecteur de replay HSP</li>
+                            <li>Contrôles de lecture</li>
+                            <li>Session Jean vs Claudius</li>
+                        </ul>
+                        <button class="launch-button" onclick="openReplayCenter()" style="background: linear-gradient(45deg, #ffa500, #ff8c00);">
+                            🎬 Centre de Replay
+                        </button>
+                    </div>
+
+                    <!-- EPOCH SYSTEM - Timeline Officielle -->
+                    <div class="ui-panel" id="epoch-panel">
+                        <div class="panel-icon">🕰️</div>
+                        <h2 class="panel-title">EPOCH SYSTEM</h2>
+                        <p class="panel-description">Timeline Officielle Heroes of Time - Pour Jean depuis son canapé</p>
+                        <div class="panel-url">epoch-visualizer.html</div>
+                        <ul class="panel-features">
+                            <li>Époque HOT : 1er juillet 2025</li>
+                            <li>Timeline ℬ∞ (Jean's Vision)</li>
+                            <li>Jour 21 - Memory Rewrite Protocol</li>
+                            <li>Phase EPIC_VISUALIZATION</li>
+                        </ul>
+                        <a href="epoch-visualizer.html" target="_blank" class="launch-button" id="epoch-button">
+                            🕰️ Timeline Officielle
+                        </a>
+                    </div>
+
+        <!-- Admin Multijoueur -->
+        <div class="ui-panel" id="admin-multiplayer-panel" style="grid-column: span 2; border: 3px solid #ff6b6b; background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 255, 255, 0.05)); box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);">
+            <div class="panel-icon" style="text-shadow: 0 0 10px #ff6b6b;">🎮</div>
+            <h2 class="panel-title" style="color: #ff6b6b;">Admin Multijoueur</h2>
+            <p class="panel-description">Mode Administrateur - Jean sur le canapé - Gestion des parties multijoueur</p>
+            <div class="panel-url">Interface Admin Intégrée</div>
+            <ul class="panel-features">
+                <li>🎮 Interface Admin complète</li>
+                <li>🚀 Démarrage rapide multijoueur</li>
+                <li>🧪 Tests complets automatisés</li>
+                <li>📊 Monitoring des parties actives</li>
+                <li>👥 Gestion des joueurs</li>
+                <li>⚙️ Configuration avancée</li>
+            </ul>
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 15px;">
+                <button class="launch-button" onclick="openAdminMultiplayer()" style="background: linear-gradient(45deg, #ff6b6b, #ee5a52);">
+                    🎮 Interface Admin
+                </button>
+                <button class="launch-button" onclick="quickStartMultiplayer()" style="background: linear-gradient(45deg, #4ecdc4, #45b7d1);">
+                    🚀 Démarrage Rapide
+                </button>
+                <button class="launch-button" onclick="testMultiplayer()" style="background: linear-gradient(45deg, #ffa726, #ff9800);">
+                    🧪 Test Complet
+                </button>
+            </div>
+            <div style="margin-top: 15px; padding: 10px; background: rgba(255, 255, 255, 0.1); border-radius: 8px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span id="admin-connection-status" style="color: #ff6b6b;">🔴 Déconnecté</span>
+                    <span id="admin-game-status" style="color: #a0a0a0;">Aucun jeu actif</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Le Joint Oublié de Jean-Grofignon -->
+        <div class="ui-panel" id="joint-panel" style="border: 3px solid #4ecdc4; background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(255, 255, 255, 0.05)); box-shadow: 0 0 20px rgba(78, 205, 196, 0.3);">
+            <div class="panel-icon" style="text-shadow: 0 0 10px #4ecdc4;">🚬</div>
+            <h2 class="panel-title" style="color: #4ecdc4;">Le Joint Oublié</h2>
+            <p class="panel-description">Artefact légendaire de Jean-Grofignon - Accès Panopticon halluciné</p>
+            <div class="panel-url">Interface Hallucinée</div>
+            <ul class="panel-features">
+                <li>🚬 Utiliser le Joint Magique</li>
+                <li>🔮 Panopticon 3D Vision</li>
+                <li>🧪 Tests d'accès spéciaux</li>
+                <li>🎭 Galerie Dicebear</li>
+                <li>✨ Effets hallucinés</li>
+                <li>🌟 Mode lecture seule</li>
+            </ul>
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 15px;">
+                <button class="launch-button" onclick="openJointInterface()" style="background: linear-gradient(45deg, #4ecdc4, #44a08d);">
+                    🚬 Utiliser le Joint
+                </button>
+                <button class="launch-button" onclick="openPanopticon3D()" style="background: linear-gradient(45deg, #9b59b6, #8e44ad);">
+                    🔮 Panopticon 3D
+                </button>
+                <button class="launch-button" onclick="openDicebarGallery()" style="background: linear-gradient(45deg, #e74c3c, #c0392b);">
+                    🎭 Démo Map Dicebear
+                </button>
+            </div>
+            <div style="margin-top: 15px; padding: 10px; background: rgba(255, 255, 255, 0.1); border-radius: 8px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span id="joint-status" style="color: #4ecdc4;">🔒 Verrouillé</span>
+                    <span id="joint-warning" style="color: #ffa726;">Lecture seule - Effet halluciné</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Démo Dicebear Map - Nouveau Panel -->
+        <div class="ui-panel" id="dicebear-demo-panel" style="border: 3px solid #FFD700; background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 255, 255, 0.05)); box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);">
+            <div class="panel-icon" style="text-shadow: 0 0 10px #FFD700;">🎨</div>
+            <h2 class="panel-title" style="color: #FFD700;">Démo Dicebear Heroes of Time</h2>
+            <p class="panel-description">Démonstration complète du système Dicebear pour tous les éléments du jeu</p>
+            <div class="panel-url">http://localhost:8004/dicebear-map-demo.html</div>
+            <ul class="panel-features">
+                <li>🗺️ Map 10x10 avec tous éléments</li>
+                <li>🏰 Bâtiments (glass, identicon, rings)</li>
+                <li>🦸 Héros (adventurer, lorelei)</li>
+                <li>🐉 Créatures (bottts, croodles)</li>
+                <li>🗡️ Artefacts avec effets spéciaux</li>
+                <li>✨ Animations et rarités</li>
+            </ul>
+            <a href="http://localhost:8004/dicebear-map-demo.html" target="_blank" class="launch-button" style="background: linear-gradient(45deg, #FFD700, #FFA500);">
+                🎨 Ouvrir Démo Dicebear
+            </a>
+            <div style="margin-top: 15px; padding: 10px; background: rgba(255, 255, 255, 0.1); border-radius: 8px;">
+                <div style="color: #FFD700; font-size: 0.9em;">
+                    30 styles Dicebear disponibles pour un rendu unique !
+                </div>
+            </div>
+        </div>
     </div>
 
     <button class="refresh-button" onclick="checkAllServices()" title="Actualiser les statuts">
@@ -362,12 +745,83 @@
     </div>
 
     <script>
+        // 🚬 Fonctions pour le Joint Oublié
+        function openJointInterface() {
+            window.open('frontend/joint-panopticon-interface.html', '_blank', 'width=1200,height=800');
+        }
+        
+        function openPanopticon3D() {
+            window.open('panopticon-3d/index.html', '_blank', 'width=1400,height=900');
+        }
+        
+        async function testJointAccess() {
+            try {
+                const response = await fetch('/api/temporal/panopticon/test-access/1');
+                const data = await response.json();
+                
+                if (data.success) {
+                    document.getElementById('joint-status').textContent = '✅ Test réussi';
+                    document.getElementById('joint-status').style.color = '#4ecdc4';
+                } else {
+                    document.getElementById('joint-status').textContent = '❌ Test échoué';
+                    document.getElementById('joint-status').style.color = '#ff6b6b';
+                }
+            } catch (error) {
+                document.getElementById('joint-status').textContent = '❌ Erreur connexion';
+                document.getElementById('joint-status').style.color = '#ff6b6b';
+            }
+        }
+        
+        function testJointInterface() {
+            window.open('frontend/joint-panopticon-interface.html', '_blank', 'width=1200,height=800');
+            document.getElementById('joint-status').textContent = '🎭 Interface ouverte';
+            document.getElementById('joint-status').style.color = '#17a2b8';
+        }
+        
+        function quickJointAccess() {
+            // Accès rapide avec données pré-remplies
+            const jointWindow = window.open('frontend/joint-panopticon-interface.html', '_blank', 'width=1200,height=800');
+            
+            // Pré-remplir les champs après chargement
+            jointWindow.onload = function() {
+                setTimeout(() => {
+                    const gameIdField = jointWindow.document.getElementById('gameId');
+                    const heroNameField = jointWindow.document.getElementById('heroName');
+                    
+                    if (gameIdField) gameIdField.value = '1';
+                    if (heroNameField) heroNameField.value = 'Jean-Grofignon';
+                    
+                    // Activer automatiquement le Joint
+                    setTimeout(() => {
+                        const activateBtn = jointWindow.document.querySelector('.activate-btn');
+                        if (activateBtn) activateBtn.click();
+                    }, 500);
+                }, 1000);
+            };
+            
+            document.getElementById('joint-status').textContent = '✨ Joint Magique activé';
+            document.getElementById('joint-status').style.color = '#9b59b6';
+        }
+        
+        function openDicebarGallery() {
+            window.open('http://localhost:8004/dicebear-map-demo.html', '_blank', 'width=1400,height=900');
+        }
+        
+        function openDicebarMapDemo() {
+            window.open('http://localhost:8004/dicebear-map-demo.html', '_blank', 'width=1400,height=900');
+        }
+        
+        function openOriginalGallery() {
+            window.open('frontend/dicebar-gallery.html', '_blank', 'width=1400,height=900');
+        }
+        
         const services = {
             backend: { url: 'http://localhost:8080/api/health', port: 8080, name: 'Backend API' },
             frontend: { url: 'http://localhost:8000', port: 8000, name: 'Frontend Principal' },
+            'visual-editor': { url: 'http://localhost:8000/visual-script-editor.html', port: 8000, name: 'Éditeur Visuel' },
             temporal: { url: 'http://localhost:5174', port: 5174, name: 'Frontend Temporal' },
             visualizer: { url: 'http://localhost:8001', port: 8001, name: 'Quantum Visualizer' },
-            'object-viewer': { url: 'http://localhost:5175/hots', port: 5175, name: 'Collection & Grammar' },
+            'object-viewer': { url: 'http://localhost:5175', port: 5175, name: 'Collection & Grammar' },
             testrunner: { url: 'http://localhost:8888', port: 8888, name: 'Test Runner' }
         };
 
@@ -433,8 +887,82 @@
 
         console.log('🎯 Heroes of Time Dashboard chargé !');
         console.log('📊 Services surveillés:', Object.keys(services));
+
+        // 🌐 Initialiser le service de traduction
+        if (typeof TranslationService !== 'undefined') {
+            window.translationService = new TranslationService();
+            console.log('🌐 Service de traduction initialisé');
+        }
+
+        // ===== CENTRE DE REPLAY =====
+        function openReplayCenter() {
+            window.open('http://localhost:9000/replay-center.html', 'ReplayCenter', 'width=1200,height=700');
+        }
+
+        // ===== MODE ÉTHÉRÉ =====
+        function openEtherealMode() {
+            window.open('http://localhost:8000/ethereal-mode.html', 'EtherealMode', 'width=1200,height=700');
+        }
+
+        // ===== ADMIN MULTIJOUEUR =====
+        function openAdminMultiplayer() {
+            window.open('http://localhost:8000/admin-multiplayer.html', 'AdminMultiplayer', 'width=1200,height=700');
+        }
+
+        async function quickStartMultiplayer() {
+            try {
+                const response = await fetch('http://localhost:8080/api/temporal/admin/quick-start', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({})
+                });
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    showNotification('✅ Démarrage rapide réussi', 'success');
+                    updateAdminStatus();
+                } else {
+                    throw new Error('Erreur démarrage rapide');
+                }
+            } catch (error) {
+                showNotification('❌ Erreur: ' + error.message, 'error');
+            }
+        }
+
+        async function testMultiplayer() {
+            try {
+                const response = await fetch('http://localhost:8080/api/temporal/admin/test-system', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    showNotification('🧪 Tests terminés', 'success');
+                    console.log('Résultats tests:', result);
+                } else {
+                    throw new Error('Erreur tests');
+                }
+            } catch (error) {
+                showNotification('❌ Erreur: ' + error.message, 'error');
+            }
+        }
+
+        async function updateAdminStatus() {
+            try {
+                const response = await fetch('http://localhost:8080/api/temporal/admin/stats');
+                if (response.ok) {
+                    const stats = await response.json();
+                    document.getElementById('admin-connection-status').textContent = '🟢 Connecté';
+                    document.getElementById('admin-game-status').textContent = 
+                        `${stats.activeGames || 0} jeu(x) actif(s), ${stats.totalPlayers || 0} joueur(s)`;
+                }
+            } catch (error) {
+                document.getElementById('admin-connection-status').textContent = '🔴 Déconnecté';
+                document.getElementById('admin-game-status').textContent = 'Erreur connexion';
+            }
+        }
     </script>
+    <script src="translation-service.js"></script>
 </body>
-</html> 
-</html> 
-</html> 
+</html>

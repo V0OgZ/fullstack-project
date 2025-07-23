@@ -1,351 +1,585 @@
-# 🎨 HEROES OF TIME - DIAGRAMMES D'ARCHITECTURE
+# 🏗️ **ARCHITECTURE HEROES OF TIME - VERSION COMPLÈTE**
 
-## 🌐 Architecture Globale
+## 🎯 **VUE D'ENSEMBLE DU SYSTÈME**
 
 ```mermaid
 graph TB
-    subgraph "Frontend Layer"
-        UI[React UI :8000]
-        WS[WebSocket Client]
+    subgraph "🎮 Frontends Multiples"
+        DASH[Dashboard Principal<br/>Port 9000]
+        MAIN[Frontend Principal<br/>Port 8000]
+        TEMP[Interface Temporelle<br/>Port 5174]
+        QUANT[Quantum Visualizer<br/>Port 8001]
+        COLL[Collection & Grammar<br/>Port 5175]
+        TEST[Test Runner<br/>Port 8888]
+        EDIT[Éditeur Visuel<br/>Port 8081]
     end
     
-    subgraph "API Gateway"
-        REST[REST API :8080]
-        WSS[WebSocket Server :8001]
+    subgraph "🔧 Backend Core"
+        API[REST API<br/>Port 8080]
+        TEMP_ENGINE[TemporalEngineService]
+        AI_SERVICE[LimitedAIService]
+        COLLAPSE[CausalCollapseService]
+        DECAY[TemporalDecayHybridService]
+        REPLAY[ReplayService]
+        ADMIN[AdminService]
     end
     
-    subgraph "Integration Layer"
-        GCIS[GrofiCausalIntegrationService]
-        GCIS --> |coordinates| TES
-        GCIS --> |immunities| GHS
-        GCIS --> |collapse| CCS
-    end
-    
-    subgraph "Core Services"
-        TES[TemporalEngineService]
-        GHS[GrofiHeroService]
-        CCS[CausalCollapseService]
-        QIS[QuantumInterferenceService]
-        ETS[ExtendedTemporalEngineService]
-    end
-    
-    subgraph "Data Layer"
+    subgraph "🗄️ Base de Données"
         DB[(H2 Database)]
-        JSON[JSON Resources]
+        GAMES[Games]
+        HEROES[Heroes]
+        PLAYERS[Players]
+        PSI_STATES[PsiStates]
+        REPLAYS[Replays]
     end
     
-    UI --> REST
-    UI --> WS
-    WS --> WSS
-    REST --> GCIS
-    WSS --> GCIS
-    
-    TES --> DB
-    GHS --> JSON
-    CCS --> DB
-    QIS --> TES
-    ETS --> TES
-```
-
-## 🔄 Flux d'Exécution d'un Script Temporel
-
-```mermaid
-sequenceDiagram
-    participant User
-    participant API
-    participant Parser
-    participant Integration
-    participant Temporal
-    participant Causal
-    participant DB
-    
-    User->>API: POST /api/temporal/execute
-    Note right of User: ψ001: (0.8+0.6i) ⊙(Δt+2 @15,15 ⟶ MOV(Arthur, @15,15))
-    
-    API->>Parser: parseScript()
-    Parser->>Parser: detectScriptType()
-    alt GROFI Extended Script
-        Parser->>Integration: executeWithCausalProtection()
-        Integration->>Integration: checkImmunities()
-        Integration->>Temporal: delegateExecution()
-    else Standard Temporal Script
-        Parser->>Temporal: executeTemporalScript()
+    subgraph "🎯 Contrôleurs"
+        GAME_CTRL[GameController]
+        TEMP_CTRL[TemporalController]
+        AI_CTRL[LimitedAIController]
+        COLLAPSE_CTRL[CausalController]
+        DECAY_CTRL[TemporalDecayController]
+        REPLAY_CTRL[ReplayController]
+        ADMIN_CTRL[AdminController]
     end
     
-    Temporal->>DB: createPsiState()
-    Temporal->>Causal: checkCollapseTriggers()
-    
-    alt Collapse Detected
-        Causal->>Causal: processCollapse()
-        Causal->>DB: updateGameState()
-        Causal->>API: CollapseResult
-    else No Collapse
-        Temporal->>API: PsiStateCreated
+    subgraph "🧠 Services Avancés"
+        GROFI[GROFI System]
+        QUANTUM[Quantum Mechanics]
+        CAUSAL[Causality Engine]
+        MEMORY[Pattern Memory]
     end
     
-    API->>User: ExecutionResult
-```
-
-## 🌀 États Quantiques et Interférences
-
-```mermaid
-graph LR
-    subgraph "Timeline ℬ1"
-        PSI1[ψ001: 0.707+0.0i]
-        PSI2[ψ002: 0.707+0.0i]
-    end
+    DASH --> API
+    MAIN --> API
+    TEMP --> API
+    QUANT --> API
+    COLL --> API
+    TEST --> API
+    EDIT --> API
     
-    subgraph "Interference Engine"
-        CALC[Calculate Interference]
-        PSI1 --> CALC
-        PSI2 --> CALC
-        CALC --> |Constructive| AMP[Amplitude: 1.414+0.0i]
-        AMP --> PROB[Probability: 2.0]
-    end
+    API --> GAME_CTRL
+    API --> TEMP_CTRL
+    API --> AI_CTRL
+    API --> COLLAPSE_CTRL
+    API --> DECAY_CTRL
+    API --> REPLAY_CTRL
+    API --> ADMIN_CTRL
     
-    subgraph "Game Effect"
-        PROB --> |200%| BOOST[Damage Boost]
-        PROB --> |200%| SUCCESS[Success Rate]
-    end
-```
-
-## 🌊 Types de Collapse Causale
-
-```mermaid
-graph TD
-    subgraph "Collapse Detection"
-        TICK[Game Tick] --> SCAN[Scan Active ψ-States]
-        SCAN --> DET{Detect Trigger?}
-    end
+    GAME_CTRL --> TEMP_ENGINE
+    TEMP_CTRL --> TEMP_ENGINE
+    AI_CTRL --> AI_SERVICE
+    COLLAPSE_CTRL --> COLLAPSE
+    DECAY_CTRL --> DECAY
+    REPLAY_CTRL --> REPLAY
+    ADMIN_CTRL --> ADMIN
     
-    DET -->|Spatial Conflict| INT[INTERACTION]
-    DET -->|Player Enters Zone| OBS[OBSERVATION]
-    DET -->|Artifact Used| ANC[ANCHORING]
+    TEMP_ENGINE --> DB
+    AI_SERVICE --> DB
+    COLLAPSE --> DB
+    DECAY --> DB
+    REPLAY --> DB
+    ADMIN --> DB
     
-    INT --> BATTLE[Phantom Battle Resolution]
-    OBS --> FORCE[Force Collapse]
-    ANC --> GLOBAL[Global Collapse]
-    
-    BATTLE --> UPDATE[Update Game State]
-    FORCE --> UPDATE
-    GLOBAL --> UPDATE
-```
-
-## 🦸 Système d'Immunités GROFI
-
-```mermaid
-graph TB
-    subgraph "Hero: Jean-Grofignon"
-        JG[Jean-Grofignon]
-        JG --> |has| IMM1[IMMUNE_ROLLBACK]
-        JG --> |has| IMM2[IMMUNE_COLLAPSE]
-        JG --> |has| IMM3[IMMUNE_SRTI]
-    end
-    
-    subgraph "Action Attempt"
-        ACT1[†ψ001 - Rollback]
-        ACT2[Collapse Override]
-        ACT3[Observation Force]
-    end
-    
-    subgraph "Immunity Check"
-        CHECK{Check Immunities}
-        ACT1 --> CHECK
-        ACT2 --> CHECK
-        ACT3 --> CHECK
-        
-        CHECK -->|IMMUNE_ROLLBACK| BLOCK1[❌ Blocked]
-        CHECK -->|IMMUNE_COLLAPSE| ALLOW[✅ Allowed]
-        CHECK -->|IMMUNE_SRTI| BLOCK2[❌ Blocked]
-    end
-```
-
-## 📊 World State Graph Structure
-
-```mermaid
-graph TD
-    subgraph "World State Graph"
-        WSG[World State Graph]
-        WSG --> SN[Spatial Nodes]
-        WSG --> CC[Causal Connections]
-        WSG --> TL[Temporal Layers]
-        WSG --> FOG[Fog of Causality]
-        
-        SN --> HERO[Heroes]
-        SN --> PSI[ψ-States]
-        SN --> ART[Artifacts]
-        SN --> BUILD[Buildings]
-        
-        CC --> SPATIAL[Spatial Links]
-        CC --> TEMPORAL[Temporal Links]
-        CC --> QUANTUM[Quantum Links]
-        
-        FOG --> CALC[Fog Calculation]
-        CALC --> |factors| DENS[Quantum Density]
-        CALC --> |factors| CONF[Conflict Intensity]
-        CALC --> |factors| INTER[Interference Level]
-    end
-```
-
-## 🔄 Timeline Fork Mechanism
-
-```mermaid
-graph LR
-    subgraph "Initial State"
-        T1[Timeline ℬ1]
-        T1 --> PSI1[ψ001: MOV Arthur @15,15]
-        T1 --> PSI2[ψ002: MOV Ragnar @15,15]
-    end
-    
-    subgraph "Conflict Detection"
-        DETECT{Spatial Conflict?}
-        PSI1 --> DETECT
-        PSI2 --> DETECT
-        DETECT -->|YES| FORK
-    end
-    
-    subgraph "Fork Result"
-        FORK[Fork Timeline]
-        FORK --> T1B[Timeline ℬ1]
-        FORK --> T2[Timeline ℬ2]
-        T1B --> PSI1B[ψ001 remains]
-        T2 --> PSI2B[ψ002 migrated]
-    end
-```
-
-## 🎮 Complete Game Flow
-
-```mermaid
-stateDiagram-v2
-    [*] --> GameStart
-    GameStart --> PlayerAction
-    
-    PlayerAction --> ScriptParsing
-    ScriptParsing --> ImmunityCheck
-    
-    ImmunityCheck --> PsiStateCreation: Allowed
-    ImmunityCheck --> ActionBlocked: Blocked
-    
-    PsiStateCreation --> WaitingForCollapse
-    WaitingForCollapse --> CollapseDetection: Each Tick
-    
-    CollapseDetection --> ProcessCollapse: Trigger Found
-    CollapseDetection --> WaitingForCollapse: No Trigger
-    
-    ProcessCollapse --> InterferenceCalc: Multiple States
-    ProcessCollapse --> DirectExecution: Single State
-    
-    InterferenceCalc --> ExecuteWinner
-    DirectExecution --> UpdateGameState
-    ExecuteWinner --> UpdateGameState
-    
-    UpdateGameState --> PlayerAction
-    ActionBlocked --> PlayerAction
-```
-
-## 🌟 Quantum Amplitude Lifecycle
-
-```mermaid
-graph TD
-    subgraph "Creation"
-        INPUT[User Input: 0.8+0.6i]
-        INPUT --> PARSE[Parse Complex Number]
-        PARSE --> CREATE[Create ComplexAmplitude]
-    end
-    
-    subgraph "Evolution"
-        CREATE --> EVOLVE[Time Evolution]
-        EVOLVE --> |e^(-iEt/ℏ)| PHASE[Phase Rotation]
-    end
-    
-    subgraph "Interference"
-        PHASE --> INTER{Other States?}
-        INTER -->|Yes| CALC[Calculate Interference]
-        INTER -->|No| SINGLE[Single State]
-        CALC --> RESULT[Combined Amplitude]
-    end
-    
-    subgraph "Collapse"
-        RESULT --> COLLAPSE[Collapse to Reality]
-        SINGLE --> COLLAPSE
-        COLLAPSE --> PROB[|ψ|² → Action Probability]
-        PROB --> EXECUTE[Execute in Game]
-    end
-```
-
-## 📡 API Request Flow
-
-```mermaid
-flowchart LR
-    subgraph "Client"
-        REQ[HTTP Request]
-        WS[WebSocket]
-    end
-    
-    subgraph "Spring Boot"
-        CTRL[Controller Layer]
-        AUTH[Authentication]
-        VALID[Validation]
-    end
-    
-    subgraph "Business Logic"
-        SERV[Service Layer]
-        CACHE[Cache Layer]
-    end
-    
-    subgraph "Persistence"
-        REPO[Repository]
-        DB[(Database)]
-    end
-    
-    REQ --> CTRL
-    WS --> CTRL
-    CTRL --> AUTH
-    AUTH --> VALID
-    VALID --> SERV
-    SERV --> CACHE
-    CACHE --> REPO
-    REPO --> DB
-    
-    DB --> REPO
-    REPO --> CACHE
-    CACHE --> SERV
-    SERV --> CTRL
-    CTRL --> REQ
-```
-
-## 🔍 Monitoring & Metrics Flow
-
-```mermaid
-graph TB
-    subgraph "Game Events"
-        E1[ψ-State Created]
-        E2[Collapse Detected]
-        E3[Timeline Forked]
-        E4[Interference Calculated]
-    end
-    
-    subgraph "Metrics Collection"
-        COLL[MetricsCollector]
-        E1 --> COLL
-        E2 --> COLL
-        E3 --> COLL
-        E4 --> COLL
-    end
-    
-    subgraph "Analysis"
-        COLL --> STRESS[Stress Calculator]
-        COLL --> PERF[Performance Monitor]
-        COLL --> GAME[Game Statistics]
-    end
-    
-    subgraph "Alerts"
-        STRESS -->|> 0.7| ALERT1[High Stress Alert]
-        PERF -->|> 500ms| ALERT2[Performance Alert]
-        GAME -->|> 100 states| ALERT3[State Limit Alert]
-    end
+    TEMP_ENGINE --> GROFI
+    AI_SERVICE --> MEMORY
+    COLLAPSE --> QUANTUM
+    DECAY --> CAUSAL
 ```
 
 ---
 
-Ces diagrammes illustrent les principaux flux et composants du système Heroes of Time, facilitant la compréhension de l'architecture complexe et des interactions entre les différents modules.
+## 🧠 **SYSTÈME IA CLAUDIUS-MEMENTO**
+
+### **Architecture IA**
+
+```mermaid
+graph LR
+    subgraph "🎮 Interface Jeu"
+        UI[Interface Joueur]
+        API[API Backend]
+    end
+    
+    subgraph "🧠 Cerveau IA"
+        DEC[Module Décision]
+        MEM[Module Mémoire]
+        SIM[Module Simulation]
+        OPT[Module Optimisation]
+    end
+    
+    subgraph "🚨 Limitations"
+        DEPTH[Profondeur Max]
+        TIME[Timeout Calcul]
+        SIMS[Simulations Max]
+        ERROR[Erreurs Volontaires]
+    end
+    
+    subgraph "🌐 Graphe Global"
+        GLOBAL[Graphe Probabiliste]
+        COLLAPSE[Collapse Causale]
+        TIMELINE[Timelines Multiples]
+        PSI[États Psi]
+    end
+    
+    UI --> API
+    API --> DEC
+    DEC --> MEM
+    DEC --> SIM
+    SIM --> GLOBAL
+    GLOBAL --> COLLAPSE
+    GLOBAL --> TIMELINE
+    GLOBAL --> PSI
+    
+    DEC --> DEPTH
+    DEC --> TIME
+    DEC --> SIMS
+    DEC --> ERROR
+```
+
+### **Niveaux de Difficulté**
+
+| Niveau | Profondeur | Simulations | Temps (ms) | Erreurs | États Psi |
+|--------|------------|-------------|------------|---------|-----------|
+| **EASY** | 2 | 20 | 2000 | 25% | 10 |
+| **MEDIUM** | 4 | 50 | 5000 | 15% | 20 |
+| **HARD** | 6 | 100 | 8000 | 10% | 30 |
+| **EXPERT** | 8 | 200 | 12000 | 5% | 50 |
+| **PARADOX** | 10 | 500 | 20000 | 2% | 100 |
+
+---
+
+## ⚡ **SYSTÈME COLLAPSE CAUSALE**
+
+### **Types de Collapse**
+
+```mermaid
+graph TD
+    A[🎯 Action Planifiée] --> B{🔍 Type de Collapse}
+    
+    B -->|💥 INTERACTION| C[Collision d'États]
+    B -->|👁️ OBSERVATION| D[Détection d'État]
+    B -->|⚓ ANCHORING| E[Stabilisation Artefact]
+    
+    C --> F[Calcul Interférence]
+    D --> G[Probabilité Observation]
+    E --> H[Facteur Stabilité]
+    
+    F --> I[📊 Résultat Déterministe]
+    G --> I
+    H --> I
+    
+    I --> J[🎮 Exécution Action]
+```
+
+### **Calculs Quantiques**
+
+```java
+// Probabilité de collapse INTERACTION
+P(INTERACTION) = Σ(ψi * ψj) pour tous les états superposés
+
+// Probabilité de collapse OBSERVATION  
+P(OBSERVATION) = |ψ|² pour l'état le plus probable
+
+// Probabilité de collapse ANCHORING
+P(ANCHORING) = Σ(artifacts * stability_factor)
+```
+
+---
+
+## 🕰️ **SYSTÈME TEMPORAL DECAY HYBRIDE**
+
+### **Architecture Unifiée**
+
+```mermaid
+graph TB
+    subgraph "🔄 Système Hybride"
+        LEGACY[Legacy Decay<br/>Timeline-based]
+        DK20[DK20 Decay<br/>Date-based]
+        HYBRID[Hybrid Decay<br/>Unified]
+    end
+    
+    subgraph "📊 Calculs"
+        TIMELINE[Timeline Decay]
+        HERO[Hero Decay]
+        BUILDING[Building Decay]
+        ARTIFACT[Artifact Decay]
+    end
+    
+    subgraph "🎯 Résultats"
+        DECAY_RATE[Taux de Décay]
+        STABILITY[Stabilité]
+        RECOVERY[Récupération]
+    end
+    
+    LEGACY --> TIMELINE
+    DK20 --> HERO
+    HYBRID --> BUILDING
+    HYBRID --> ARTIFACT
+    
+    TIMELINE --> DECAY_RATE
+    HERO --> STABILITY
+    BUILDING --> RECOVERY
+    ARTIFACT --> DECAY_RATE
+```
+
+### **Formules de Décay**
+
+```java
+// Décay Timeline (Legacy)
+decay_rate = base_rate * timeline_factor * temporal_energy
+
+// Décay Hero (DK20)
+hero_decay = hero_level * time_factor * activity_penalty
+
+// Décay Hybride
+hybrid_decay = (legacy_decay + dk20_decay) / 2 * stability_factor
+```
+
+---
+
+## 🎬 **CENTRE DE REPLAY**
+
+### **Architecture Replay**
+
+```mermaid
+graph LR
+    subgraph "📁 Scénarios"
+        HOTS[HOTS Files<br/>26 scénarios]
+        HSP[HSP Replays<br/>Format JSON]
+    end
+    
+    subgraph "🎮 Interface"
+        REPLAY_UI[Centre de Replay]
+        CONTROLS[Contrôles Play/Pause]
+        NAV[Navigation Tours]
+        SPEED[Vitesse 0.5x-2x]
+    end
+    
+    subgraph "🔧 Backend"
+        REPLAY_SERVICE[ReplayService]
+        PARSER[HOTS Parser]
+        EXECUTOR[Replay Executor]
+    end
+    
+    HOTS --> PARSER
+    HSP --> EXECUTOR
+    PARSER --> REPLAY_SERVICE
+    EXECUTOR --> REPLAY_SERVICE
+    REPLAY_SERVICE --> REPLAY_UI
+    REPLAY_UI --> CONTROLS
+    REPLAY_UI --> NAV
+    REPLAY_UI --> SPEED
+```
+
+### **Format HSP (Heroes Scenario Playback)**
+
+```json
+{
+  "metadata": {
+    "scenario": "jean_vs_claudius_epic",
+    "duration": "25 minutes",
+    "players": ["Jean-Grofignon", "Claudius"],
+    "turns": 150
+  },
+  "turns": [
+    {
+      "turn": 1,
+      "actions": [
+        {
+          "hero": "Jean-Grofignon",
+          "action": "MOV",
+          "target": "@15,15",
+          "timestamp": "2025-07-22T10:30:00"
+        }
+      ],
+      "psi_states": ["ψ001", "ψ002"],
+      "timeline": "ℬ1"
+    }
+  ]
+}
+```
+
+---
+
+## 🌟 **MODE ÉTHÉRÉ - UIs CACHÉES**
+
+### **Interfaces Récupérées**
+
+```mermaid
+graph TB
+    subgraph "🌟 Mode Éthéré"
+        ETHEREAL[Interface Éthérée<br/>Port 9000]
+    end
+    
+    subgraph "🃏 UIs Cachées"
+        CARDS[Heroes Cards Visualizer<br/>16 cartes interactives]
+        EPOCH[Epoch Visualizer<br/>Timeline officielle]
+        PANOPTICON[Panopticon 3D<br/>Interface 3D]
+        FORGE[Quantum Runic Forge<br/>Forge runique]
+        MOSAIC[Mosaic Dashboard<br/>Dashboard alternatif]
+        FORMULA[Formula Translator<br/>Traducteur formules]
+    end
+    
+    ETHEREAL --> CARDS
+    ETHEREAL --> EPOCH
+    ETHEREAL --> PANOPTICON
+    ETHEREAL --> FORGE
+    ETHEREAL --> MOSAIC
+    ETHEREAL --> FORMULA
+```
+
+---
+
+## 🎨 **ÉDITEUR VISUEL QUANTIQUE**
+
+### **Architecture Éditeur**
+
+```mermaid
+graph TB
+    subgraph "🎨 Interface Éditeur"
+        CANVAS[Canvas de Dessin]
+        TIMELINE[Éditeur Timeline]
+        BOARD[Plateau de Jeu]
+        MACROS[Macros Personnalisées]
+    end
+    
+    subgraph "🔧 Génération"
+        SCRIPT_GEN[Générateur de Script]
+        HOTS_OUT[HOTS Output]
+        JSON_OUT[JSON Output]
+        VALIDATION[Validation Syntaxe]
+    end
+    
+    subgraph "🎮 Intégration"
+        HOTSEAT[Mode Hot Seat]
+        MULTIPLAYER[Mode Multiplayer]
+        AI[Mode IA]
+        REPLAY[Mode Replay]
+    end
+    
+    CANVAS --> SCRIPT_GEN
+    TIMELINE --> SCRIPT_GEN
+    BOARD --> SCRIPT_GEN
+    MACROS --> SCRIPT_GEN
+    
+    SCRIPT_GEN --> HOTS_OUT
+    SCRIPT_GEN --> JSON_OUT
+    SCRIPT_GEN --> VALIDATION
+    
+    HOTS_OUT --> HOTSEAT
+    HOTS_OUT --> MULTIPLAYER
+    HOTS_OUT --> AI
+    HOTS_OUT --> REPLAY
+```
+
+---
+
+## 🏛️ **SYSTÈME ADMIN**
+
+### **Fonctionnalités Admin**
+
+```mermaid
+graph LR
+    subgraph "👑 Admin Panel"
+        ADMIN_UI[Interface Admin]
+        GAME_MGMT[Gestion Parties]
+        PLAYER_MGMT[Gestion Joueurs]
+        SYSTEM_MGMT[Gestion Système]
+    end
+    
+    subgraph "🔧 Services"
+        ADMIN_SERVICE[AdminService]
+        GAME_SERVICE[GameService]
+        PLAYER_SERVICE[PlayerService]
+        SYSTEM_SERVICE[SystemService]
+    end
+    
+    subgraph "📊 Monitoring"
+        METRICS[Métriques]
+        LOGS[Logs]
+        ALERTS[Alertes]
+        REPORTS[Rapports]
+    end
+    
+    ADMIN_UI --> ADMIN_SERVICE
+    GAME_MGMT --> GAME_SERVICE
+    PLAYER_MGMT --> PLAYER_SERVICE
+    SYSTEM_MGMT --> SYSTEM_SERVICE
+    
+    ADMIN_SERVICE --> METRICS
+    GAME_SERVICE --> LOGS
+    PLAYER_SERVICE --> ALERTS
+    SYSTEM_SERVICE --> REPORTS
+```
+
+---
+
+## 🎯 **PORTS ET SERVICES**
+
+### **Allocation des Ports**
+
+| Port | Service | Description |
+|------|---------|-------------|
+| **9000** | Dashboard Principal | Interface principale avec Centre de Replay et Mode Éthéré |
+| **8000** | Frontend Principal | Jeu principal avec interface chiadée |
+| **8080** | Backend API | API REST Spring Boot |
+| **5174** | Interface Temporelle | Effets visuels temporels |
+| **8001** | Quantum Visualizer | D3.js + graphiques quantiques |
+| **5175** | Collection & Grammar | Visualiseur de collection et traducteur |
+| **8888** | Test Runner | Interface de tests |
+| **8081** | Éditeur Visuel | IDE quantique-temporel |
+
+### **Services Backend**
+
+```java
+// Services Principaux
+TemporalEngineService          // Moteur temporel principal
+LimitedAIService              // IA avec limitations
+CausalCollapseService         // Collapse causale
+TemporalDecayHybridService    // Décay temporel unifié
+ReplayService                 // Système de replay
+AdminService                  // Administration
+
+// Contrôleurs
+GameController                // Gestion des parties
+TemporalController            // Contrôle temporel
+LimitedAIController          // Contrôle IA
+CausalController             // Contrôle collapse
+TemporalDecayController      // Contrôle decay
+ReplayController             // Contrôle replay
+AdminController              // Contrôle admin
+```
+
+---
+
+## 🧮 **MODÈLES DE DONNÉES**
+
+### **Entités Principales**
+
+```mermaid
+erDiagram
+    GAME ||--o{ HERO : contains
+    GAME ||--o{ GAME_TILE : contains
+    GAME ||--o{ PSI_STATE : contains
+    GAME ||--o{ PLAYER : has
+    
+    HERO ||--o{ INVENTORY : has
+    HERO ||--o{ ARTIFACT : uses
+    
+    PLAYER ||--o{ GAME : participates
+    
+    GAME {
+        Long id
+        String gameName
+        Integer currentTurn
+        String currentPlayer
+        GameStatus status
+        String currentTimeline
+    }
+    
+    HERO {
+        Long id
+        String name
+        Integer health
+        Integer level
+        String playerId
+        Map inventory
+    }
+    
+    PSI_STATE {
+        Long id
+        String stateId
+        ComplexAmplitude amplitude
+        Double probability
+        String timeline
+    }
+```
+
+---
+
+## 🚀 **WORKFLOW DE DÉVELOPPEMENT**
+
+### **Pipeline d'Intégration**
+
+```mermaid
+graph LR
+    A[📝 Développement] --> B[🧪 Tests Locaux]
+    B --> C[🔍 Code Review]
+    C --> D[🚀 Déploiement]
+    D --> E[📊 Monitoring]
+    E --> F[🔄 Feedback]
+    F --> A
+```
+
+### **Scripts de Contrôle**
+
+```bash
+# Contrôle principal
+./hots help                    # Aide complète
+./hots status                  # Statut des services
+./hots start                   # Démarrage complet
+./hots test quick              # Tests rapides
+./hots test report             # Rapport complet
+
+# Services spécifiques
+./hots editor                  # Éditeur visuel
+./hots admin                   # Interface admin
+./hots replay center           # Centre de replay
+./hots test uis                # Test des UIs
+```
+
+---
+
+## 🎯 **ROADMAP FUTURE**
+
+### **Prochaines Implémentations**
+
+1. **🤖 IA Avancée**
+   - Apprentissage par renforcement
+   - Stratégies adaptatives
+   - IA coopérative
+
+2. **🌐 Multiplayer Réel**
+   - WebSocket temps réel
+   - Synchronisation temporelle
+   - Tournois en ligne
+
+3. **🎨 Interface 3D**
+   - Rendu WebGL
+   - Navigation 3D
+   - Effets visuels avancés
+
+4. **📱 Mobile**
+   - Application mobile
+   - Synchronisation cloud
+   - Notifications push
+
+---
+
+## 🏆 **SYSTÈMES IMPLÉMENTÉS**
+
+### **✅ Systèmes Complets**
+
+1. **🤖 IA Claudius-Memento** - Algorithme maximal avec limitations
+2. **🎬 Centre de Replay** - 26 scénarios HOTS + format HSP
+3. **🌟 Mode Éthéré** - 6 UIs cachées récupérées
+4. **🎨 Éditeur Visuel** - IDE quantique-temporel
+5. **👑 Système Admin** - Gestion complète
+6. **⚡ Collapse Causale** - 3 types de collapse
+7. **🕰️ Temporal Decay Hybride** - Système unifié
+8. **🌫️ Brouillard de Causalité** - 7 états + timelines
+9. **📜 Langage HOTS** - Scripting quantique-temporel
+10. **🏛️ GROFI System** - Jean-Grofignon's quantum mechanics
+
+### **🎯 Systèmes en Développement**
+
+1. **🏛️ Interface de Ville** - Gestion de base
+2. **⚔️ Interface de Combat** - Combat hexagonale
+3. **👤 Interface de Héros** - Progression complète
+4. **🧙‍♂️ Système de Magie** - Grimoire basique
+5. **🗺️ Minimap** - Navigation avancée
+6. **💰 Gestion Économique** - Ressources détaillées
+
+---
+
+**🏆 L'architecture Heroes of Time est maintenant complète et prête pour la production !**

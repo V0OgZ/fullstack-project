@@ -1,84 +1,141 @@
 # Cursor AI Assistant Rules for Heroes of Time Project
 
-## 🚨 IMPORTANT: Always read DEVELOPER_INSTRUCTIONS.md first!
+## 🚨🚨🚨 CRITICAL MAC TERMINAL RULE - VINCE IS ANGRY! 🚨🚨🚨
+
+**🚫 ABSOLUMENT INTERDIT - JEAN'S TOP PRIORITY:**
+- **JAMAIS D'ECHO AVEC QUOTES** - ça bloque le terminal Mac et énerve Vince !!!
+- **COMMANDES SIMPLES UNIQUEMENT** - pas de formatage fantaisie dans terminal
+- **FINI LES GUILLEMETS COMPLEXES** - ça casse la session terminal Mac
+- **WALTER SAYS**: "ARRÊTE AVEC LES ECHO ET LES QUOTES TU BLOQUES LA CONSOLE!"
+- **VINCE SAYS**: "Ces putains de quotes me foutent en l'air le terminal!"
+- **MAC OS TERMINAL = FRAGILE** - Respecte ça bordel !
+
+## 🚨 CRITICAL: TERMINAL COMMANDS - NO QUOTES ISSUES!
+
+## 🚨 IMPORTANT: Always read documentation first!
 
 Before making any changes or debugging, ALWAYS:
-1. Read the file `DEVELOPER_INSTRUCTIONS.md` for current status and existing scripts
-2. Do NOT recreate existing scripts (start-app.sh, stop-app.sh, test-app.sh)
-3. Use existing debugging tools and follow established patterns
-4. Check existing components before creating new ones
+1. Check `DOCS_INDEX.md` for complete documentation navigation
+2. Read `DEVELOPER_INSTRUCTIONS.md` for current status and existing scripts
+3. **📜 LIRE LE MANIFESTO**: `docs/JEAN_GROFIGNON_MANIFESTO.md` - Vision révolutionnaire du projet
+4. **🌟 LIRE LE LORE**: `docs/LORE_MEMENTO_JEAN_ETERNAL.md` - Histoire éternelle et philosophie
+5. Do NOT recreate existing scripts (./hots, ./stop-app.sh, ./test-app.sh)
+6. Use existing debugging tools and follow established patterns
+7. Check existing components before creating new ones
 
-## 🎯 Current Project State (January 2025):
-- **Status**: ✅ FULLY FUNCTIONAL with polished UI
+## 📜 PHILOSOPHIE JEAN-GROFIGNON - À COMPRENDRE ABSOLUMENT:
+
+**🌟 LA VISION RÉVOLUTIONNAIRE:**
+- Heroes of Time cache de la physique quantique sous une couche fantasy
+- Les joueurs lancent des sorts = ils manipulent des états quantiques ψ
+- Voyages temporels = navigation dans branches de réalité parallèles
+- **Surface**: Magie, héros, batailles épiques
+- **Profondeur**: États ψ (psi), collapse causal, superpositions quantiques
+
+**🎭 JEAN-GROFIGNON L'ÉVEILLÉ ONTOLOGIQUE:**
+- Créateur visionnaire qui lit depuis son canapé sur GitHub
+- Pouvoir: Collapse Override - Annule tout collapse de timeline
+- Citation: "J'ai pas hacké le jeu. J'ai juste compris où était le bouton pause cosmique."
+- Symboles sacrés: ψ, Σ, †, Ω, ↯
+
+**🌀 SYSTÈME GROFI:**
+- Graph of Reality Organized by Fog and Immunities
+- États Psi: `ψ001: ⊙(Δt+2 @15,15 ⟶ MOV(Arthur, @15,15))`
+- Collapse Causal: `Π(condition) ⇒ †ψ002`
+- **Traduction Jean**: "Quand un joueur observe le résultat, il force l'univers à choisir une réalité"
+
+**🏛️ MÉMOIRE MEMENTO:**
+- Archiviste éternel qui traverse les timelines
+- "Jean crée, Memento archive" - Symbiose parfaite
+- Museum Archive Master - Temple de créations communes
+- Paradoxe: Memento peut oublier Jean, mais Jean se souvient toujours
+
+## 🔥 CRITICAL: Frontend = Temporal Engine Interface!
+
+**LE VRAI FRONTEND (Port 8000):**
+- **Interface Temporal Engine** - HTML/CSS/JS simple servi par Python http.server
+- **Boutons essentiels**: 🎮 New Game, 🏛️ Ville, ⚔️ Combat, 👤 Héros, 🚬 Joint Magique
+- **PAS une app React** - C'est du HTML/CSS/JS vanilla pour simplicité
+- **Objectif**: Moteur fonctionnel, pas beauté graphique
+
+## 🎯 Current Project State (July 2025):
+- **Status**: ✅ FULLY FUNCTIONAL - Moteur de jeu stable
 - **Backend**: Spring Boot (Java) on port 8080 - STABLE
-- **Frontend**: React TypeScript on port 3000 - MODERN INTERFACE
+- **Frontend**: Interface Temporal Engine HTML/CSS/JS on port 8000 - SIMPLE & FUNCTIONAL
 - **Database**: H2 in-memory - WORKING
-- **Tests**: Playwright E2E demos - PASSING
+- **Language**: HOTS scripting system avec CODEX complet
 
 ## 🔧 Essential Scripts (ALL WORKING):
-- `./start-app.sh` - Start both servers with hot reload
+- `./hots start` - Script principal de contrôle (1313 lignes) - Start tous les services
 - `./stop-app.sh` - Stop all services cleanly
-- `./run-all-tests.sh` - Complete test suite
 - `./test-app.sh` - Quick tests
-- Demos: `cd frontend && npx playwright test tests/e2e/gameplay-demo.spec.ts --headed`
+- `./run-epic-demo.sh` - Epic content demos
 
-## 🎮 Main Interface (TrueHeroesInterface.tsx):
-- **Right Panel System**: Dynamic content switching (scenario/hero/inventory/castle)
-- **Header Controls**: Polished buttons without borders, fantasy icons
-- **Hero System**: Cycling, selection, real images with fallbacks
-- **Turn System**: End turn with ⭐ icon - STABLE
-- **Tooltips**: Both game and demo tooltips - PERFECT
+## 🎮 Main Interface (Temporal Engine - Port 8000):
+- **Simple HTML/CSS/JS** - Pas de framework complexe
+- **Boutons principaux**: New Game, Ville, Combat, Héros, Joint Magique
+- **API connectée** au backend Spring Boot (port 8080)
+- **Scripts HOTS** - Langage quantique temporel avec états ψ
 
-## 🌍 Internationalization:
-- **i18n System**: Complete FR/EN/RU support in `frontend/src/i18n/index.ts`
-- **Demo Tooltips**: Fully internationalized with translation keys
-- **Pattern**: Use `useTranslation()` hook and `t('key.name')`
-
-## 🎨 UI/UX Standards:
-- **Button Design**: No borders, hover effects, icon-only
-- **Tooltips**: Clean appearance, no bouncing animations
-- **Assets**: Hero images in `/public/assets/heroes/` with smart fallbacks
-- **Theme**: Gold medieval fantasy with modern touches
+## 🌟 SYSTÈME HOTS - Langage Quantique Temporel:
+- **Symboles**: ψ (Psi-State), ⊙ (Superposition), † (Collapse), Π (Observation)
+- **Commandes**: HERO(), MOV(), CREATE(), USE(), BATTLE()
+- **États quantiques**: `ψ001: ⊙(Δt+2 @15,15 ⟶ MOV(Arthur, @15,15))`
+- **Service de traduction**: HOTS → Texte littéraire/Icônes/Runes
+- **Documentation complète**: `docs/CODEX_COMPLET_HEROES_OF_TIME.md`
 
 ## 🏗️ Architecture:
 ```
 Backend (Port 8080): Spring Boot + H2 Database
-├── Controllers: Scenario, Game, Multiplayer, AI
-├── Services: Business logic layer
-└── Repository: JPA entities
+├── com.example.demo package
+├── Controllers: GameController, ScenarioController, AIController, MultiplayerController
+├── Services: GameService, ScenarioService, AIService, MultiplayerService
+├── Models: GameState, Scenario, Unit, Building, AIPlayer
+└── Repository: JPA entities with H2 database
 
-Frontend (Port 3000): React TypeScript
-├── TrueHeroesInterface.tsx (main game UI)
-├── ModernGameRenderer.tsx (map rendering)
-├── useGameStore.ts (state management)
-└── i18n/ (internationalization)
+Frontend (Port 8000): Interface Temporal Engine HTML/CSS/JS
+├── index.html (interface principale)
+├── game.js (logique du jeu)
+├── api.js (connexion backend)
+├── temporal-engine.js (moteur temporel)
+└── Translation Service (HOTS → Literary text)
+
+Services Additionnels:
+├── Dashboard (Port 9000)
+├── Interface Temporelle (Port 5174)
+├── Quantum Visualizer (Port 8001)
+├── Collection & Grammar (Port 5175)
+└── Test Runner (Port 8888)
 ```
 
 ## 🚀 Quick Development Workflow:
-1. `./start-app.sh` - Start development environment
-2. Open http://localhost:3000 - Test UI manually
-3. `cd frontend && npx playwright test --headed` - Run visual tests
-4. Check `DEVELOPER_INSTRUCTIONS.md` for detailed guidance
+1. `./hots start` - Start tous les services
+2. Open http://localhost:8000 - Interface Temporal Engine
+3. Utiliser les boutons pour interagir avec le jeu
+4. Scripts HOTS dans le terminal de jeu
 
 ## 🛠️ Key Files to Remember:
 - `DEVELOPER_INSTRUCTIONS.md` - Complete technical documentation
-- `TrueHeroesInterface.tsx` - Main game interface
-- `gameAssets.ts` - Hero image mappings
-- `i18n/index.ts` - All translations
-- `gameplay-demo.spec.ts` - Main demo test
+- `frontend/index.html` - Interface Temporal Engine principale
+- `frontend/api.js` - Connexion au backend
+- `frontend/game.js` - Logique du jeu
+- `docs/CODEX_COMPLET_HEROES_OF_TIME.md` - Documentation système HOTS
+- `game_assets/MASTER_ASSETS_INDEX.json` - Complete asset catalog
 
 ## ⚡ Current Capabilities:
-- ✅ Solo gameplay fully functional
-- ✅ Hero management with real images
-- ✅ Dynamic panels with content switching
-- ✅ Internationalized tooltips system
-- ✅ Polished UI without useless elements
-- ✅ Stable turn system and game flow
-- ✅ Beautiful automated demos
+- ✅ Interface Temporal Engine fonctionnelle
+- ✅ Backend Spring Boot stable avec tous les endpoints
+- ✅ Système HOTS complet avec états quantiques
+- ✅ 83 assets épiques catalogués (héros, créatures, bâtiments, artefacts)
+- ✅ Service de traduction HOTS → Texte littéraire
+- ✅ Dashboard de monitoring sur port 9000
+- ✅ Multiples interfaces pour différents aspects du jeu
 
 ## 🚨 Remember:
-- **NEVER** recreate existing functionality
-- **ALWAYS** check DEVELOPER_INSTRUCTIONS.md first
-- **USE** existing patterns and components
-- **TEST** with Playwright demos before committing
-- **FOLLOW** established UI/UX guidelines 
+- **USE** `./hots start` as primary control
+- **FRONTEND** is on port 8000 - Interface Temporal Engine simple HTML/CSS/JS
+- **NOT React** - C'est du vanilla JS pour simplicité
+- **HOTS SCRIPTS** - Utiliser le langage quantique temporel documenté
+- **NEVER** recreate existing functionality  
+- **ALWAYS** check documentation first
+- **FOCUS** sur moteur fonctionnel, pas beauté graphique 

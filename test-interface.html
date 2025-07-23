@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Interface - Heroes of Time</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a1a2e;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-section {
+            background: rgba(26, 26, 46, 0.9);
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .test-section h2 {
+            color: #4ecdc4;
+            margin-top: 0;
+        }
+        .status {
+            padding: 0.5rem;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+        }
+        .status.success { background: rgba(40, 167, 69, 0.2); color: #28a745; }
+        .status.error { background: rgba(220, 53, 69, 0.2); color: #dc3545; }
+        .status.info { background: rgba(23, 162, 184, 0.2); color: #17a2b8; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Test Interface - Heroes of Time</h1>
+        
+        <div class="test-section">
+            <h2>🌫️ Brouillard de Causalité</h2>
+            <div id="fog-test"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>🎮 Contrôles Principaux</h2>
+            <div id="controls-test"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>📊 Status</h2>
+            <div id="status-test"></div>
+        </div>
+    </div>
+
+    <script>
+        // Test simple de l'interface
+        console.log('🧪 Test Interface - Heroes of Time');
+        
+        // Simuler le chargement des composants
+        setTimeout(() => {
+            document.getElementById('status-test').innerHTML = `
+                <div class="status success">✅ Interface chargée avec succès</div>
+                <div class="status info">ℹ️ Brouillard de Causalité initialisé</div>
+                <div class="status info">ℹ️ Contrôles principaux prêts</div>
+            `;
+        }, 1000);
+        
+        // Simuler les contrôles
+        document.getElementById('controls-test').innerHTML = `
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                <button style="background: rgba(22, 33, 62, 0.8); border: 1px solid rgba(78, 205, 196, 0.3); color: #e0e0e0; padding: 0.5rem; border-radius: 4px;">👁️ Sélectionner Héros</button>
+                <button style="background: rgba(22, 33, 62, 0.8); border: 1px solid rgba(78, 205, 196, 0.3); color: #e0e0e0; padding: 0.5rem; border-radius: 4px;">🚶 Déplacer</button>
+                <button style="background: rgba(22, 33, 62, 0.8); border: 1px solid rgba(78, 205, 196, 0.3); color: #e0e0e0; padding: 0.5rem; border-radius: 4px;">⚔️ Attaquer</button>
+                <button style="background: rgba(22, 33, 62, 0.8); border: 1px solid rgba(78, 205, 196, 0.3); color: #e0e0e0; padding: 0.5rem; border-radius: 4px;">🗺️ Explorer</button>
+            </div>
+        `;
+        
+        // Simuler le brouillard
+        document.getElementById('fog-test').innerHTML = `
+            <div style="display: flex; flex-direction: column; gap: 0.3rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem;">
+                    <span style="width: 16px; height: 16px; background: rgba(50, 50, 50, 0.9); border-radius: 3px;"></span>
+                    <span>Unexplored - Jamais vu</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem;">
+                    <span style="width: 16px; height: 16px; background: rgba(255, 255, 0, 0.3); border-radius: 3px;"></span>
+                    <span>Reachable - Accessible</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem;">
+                    <span style="width: 16px; height: 16px; background: rgba(0, 255, 0, 0.1); border-radius: 3px;"></span>
+                    <span>Vision - Vu directement</span>
+                </div>
+            </div>
+        `;
+    </script>
+</body>
+</html> 

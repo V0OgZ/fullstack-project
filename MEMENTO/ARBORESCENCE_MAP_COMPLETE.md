@@ -1,82 +1,89 @@
-# 🗺️ ARBORESCENCE MAP COMPLÈTE - HEROES OF TIME
-*Version 3.0 - Post-Session Épique (20 juillet 2025)*
+# 🗺️ ARBORESCENCE MAP COMPLETE - Heroes of Time
+*Dernière mise à jour : 21 juillet 2025 - POST MODE ÉTHÉRÉ*
 
-## 📁 STRUCTURE PRINCIPALE
+## 🌟 **NOUVEAUTÉ : MODE ÉTHÉRÉ INTÉGRÉ**
+
+### 🎯 **Dashboard Principal (Port 9000)**
+- **Localisation** : `dashboard.html` (racine)
+- **NOUVEAU** : Panneau "🌟 Mode Éthéré" avec style mystique
+- **Fonction** : `openEtherealMode()` - Ouvre fenêtre avec UIs cachées
+- **Style** : Bordure violette, effets de lueur, gradient éthéré
+
+### 🌟 **Mode Éthéré - UIs Récupérées**
+- **🃏 Heroes Cards Visualizer** : `heroes-cards-visualizer.html` (récupéré commit 789f239)
+- **⚡ Epoch Visualizer** : `epoch-visualizer.html` (récupéré)
+- **🎯 Panopticon 3D** : `panopticon-3d/index.html` (existant)
+- **🔮 Quantum Runic Forge** : `frontend/quantum-runic-forge.html` (à vérifier)
+- **📊 Mosaic Dashboard** : `mosaic-dashboard.html` (à vérifier)
+- **🧮 Formula Translator** : `quantum-visualizer/artifact-formula-translator.html` (existant)
+
+## 🎮 **ARCHITECTURE FRONTEND COMPLÈTE & CORRIGÉE**
+
+### 🎯 **PORTS & SERVICES OPÉRATIONNELS :**
 
 ```
+🎯 Dashboard Principal (9000)
+├── dashboard.html - Interface centrale avec tous les liens
+├── 🌟 Mode Éthéré - Panneau mystique avec UIs cachées
+├── 🎬 Centre de Replay - Scénarios HOTS et replays HSP
+└── 🏛️ Collection & Grammar - Lien vers Hub 5175
+
+📊 Frontend Principal (8000)
+├── frontend/index.html - Interface de jeu principale
+├── frontend/game.js - Moteur de jeu
+├── frontend/api.js - Connexion backend
+└── frontend/styles.css - Styles chiadés de Jean
+
+⚡ Interface Temporelle (5174)
+├── frontend-temporal/index.html - Interface temporelle
+├── frontend-temporal/temporal-engine.js - Moteur temporel
+└── frontend-temporal/css/temporal-console.css - Styles temporels
+
+🏛️ Hub des Visualiseurs (5175) ⭐ NOUVEAU
+├── visualizer-server-original.py - Serveur Python
+├── /collection - Collection du Jeu (Héros, Artefacts, Créatures)
+├── /grammar - Grammar Translator (Traduction HOTS)
+├── /json - JSON Visualizer (Objets JSON propres)
+├── /hots - HOTS Visualizer (Décryptage grammaire)
+└── /dashboard - Dashboard Principal
+
+🌌 Quantum Visualizer (8001)
+├── quantum-visualizer/ - Visualiseur quantique D3.js
+├── artifact-formula-translator.html - 🔮 Formula Translator
+├── causal-graph-d3.js - Graphiques causaux
+└── quantum-visualizer.css - Styles quantiques
+
+🧪 Test Runner (8888)
+├── test-runner-enhanced.html - Interface de tests
+├── Tests automatisés complets
+└── Monitoring performances
+
+⚙️ Backend API (8080)
+├── Spring Boot - Moteur temporel Java
+├── /api/temporal/games/* - Endpoints principaux
+└── ScriptTranslationService.java - Traduction HOTS
+```
+
+### 🌟 **MODE ÉTHÉRÉ - UIs CACHÉES RÉCUPÉRÉES :**
+- **🃏 Heroes Cards Visualizer** : `heroes-cards-visualizer.html` (commit 789f239)
+- **⚡ Epoch Visualizer** : `epoch-visualizer.html` (Timeline officielle)
+- **🎯 Panopticon 3D** : `panopticon-3d/index.html` (Vision 3D)
+- **🔮 Quantum Runic Forge** : `frontend/quantum-runic-forge.html`
+- **📊 Mosaic Dashboard** : `mosaic-dashboard.html` (Dashboard alternatif)
+- **🧮 Formula Translator** : `quantum-visualizer/artifact-formula-translator.html`
+
+### 📁 **STRUCTURE FICHIERS PRINCIPAUX :**
+```
 Heroes-of-Time/
-│
-├── 📝 MEMENTO/ (Documents de session)
-│   ├── TODO_SESSION_ACTUELLE.md - État et objectifs
-│   ├── ARBORESCENCE_MAP_COMPLETE.md - Cette carte v3.0
-│   ├── JEAN_MESSAGES_BEST_OF.md - Vision du projet
-│   ├── FIX_JPA_BACKEND_SOLUTION.md - 🔥 Fix critique JPA
-│   ├── HISTOIRE_README_COHERENCE.md - 📖 Analyse histoire README
-│   ├── PR_VERS_MAIN_CLAUDE.md - 🚀 PR finale session épique
-│   └── benchmark_results_*.json - 📊 Résultats benchmarks
-│
-├── 🎮 SCÉNARIOS .HOTS (66 fichiers!)
-│   ├── game_assets/scenarios/hots/
-│   │   ├── oeil_de_wigner_scenario.hots - 👁️ L'Œil de Wigner
-│   │   ├── oeil_de_wigner_readme.hots - 📖 Histoire du README
-│   │   ├── epic-arthur-vs-ragnar.hots - ⚔️ Combat épique
-│   │   ├── quantum_interference_example.hots - 🌊 Interférences
-│   │   ├── quantum_maze.hots - 🧩 PUZZLE QUANTIQUE COMPLET
-│   │   └── treasure_theft_test.hots - 🏴‍☠️ AXIS VOLE LE FUTUR!
-│   │
-│   ├── game_assets/tests/hots/
-│   │   ├── bataille_temporelle_*.hots - 🗡️ Série bataille
-│   │   ├── quantum_artifacts_test.hots - 🔮 Test artefacts
-│   │   ├── quantum_interference_test.hots - 🌀 Test interférences
-│   │   └── temporal-stress-test.hots - 💪 Test de charge
-│   │
-│   └── game_templates/
-│       ├── classic_rpg/scenarios/dungeon_crawler.hots - 🏰 RPG classique
-│       └── quantum_puzzle/scenarios/quantum_maze.hots - 🧩 Template puzzle
-│
-├── 🧪 SCRIPTS DE TEST (94 scripts!)
-│   ├── scripts/test-jean-gros*.sh - 🎯 Tests Jean-Gros (v1, v2, simple)
-│   ├── scripts/test-causality-wall.sh - 🌀 Test mur causalité
-│   ├── scripts/test-vision-temporelle.sh - 🔮 Test vision futur
-│   ├── scripts/test-quantum-maze-complete.sh - 🧩 Test puzzle quantique
-│   ├── scripts/test-readme-story.sh - 📖 Test histoire README
-│   ├── scripts/test-axis-temporal.sh - 🏴‍☠️ Test vol temporel
-│   ├── scripts/test-all-complete.sh - 🏆 MASTER TEST SUITE
-│   │
-│   ├── scripts/actifs/
-│   │   ├── start-services-background.sh - 🚀 Démarre tout
-│   │   ├── stop-all-services.sh - 🛑 Arrête tout
-│   │   └── test-ui-quick.sh - ⚡ Test UI rapide
-│   │
-│   └── scripts/test/
-│       ├── test-complet-final.sh - 🏆 TEST FINAL COMPLET (28K!)
-│       ├── run-all-hots-scenarios.sh - 🎬 Lance TOUS les .hots
-│       └── benchmark-native-vs-script.sh - 📊 Benchmark performance
-│
-├── 💾 BACKEND JAVA
-│   └── backend/src/main/java/com/heroesoftimepoc/temporalengine/
-│       ├── service/
-│       │   ├── TemporalEngineService.java - 🎯 Moteur principal
-│       │   ├── PanopticonService.java - 🔮 PANOPTICΩN 5D→3D
-│       │   ├── ScriptTranslationService.java - 📜 Traduction HOTS
-│       │   ├── ArtifactEffectExecutor.java - 🎨 Exécuteur effets
-│       │   └── CausalCollapseService.java - 🌀 Collapse causal
-│       │
-│       └── test/
-│           ├── PanopticonServiceTest.java - 🔮 Tests PANOPTICΩN
-│           ├── TreasureTheftTest.java - 🏴‍☠️ Tests vol temporel
-│           ├── QuantumMazeTest.java - 🧩 Tests puzzle quantique
-│           └── ReadmeStoryTest.java - 📖 Tests histoire README
-│
-├── 📊 RÉSULTATS & LOGS
-│   ├── test-results-final.log - 📋 Résultats dernière session
-│   ├── backend-benchmark.log - ⚡ Benchmarks performance
-│   └── benchmark-results/*.json - 📊 Données benchmarks JSON
-│
-└── 🎨 INTERFACES
-    ├── hots-visualizer.html - 🎮 Visualiseur HOTS amélioré
-    ├── quantum-visualizer/ - 🌀 Visualiseur quantique D3.js
-    └── interface-temporelle-pure/ - ⏰ Interface temporelle
+├── 📝 MEMENTO/ - Documents de session
+├── 🎮 game_assets/scenarios/hots/ - 26 scénarios HOTS
+├── 🧪 scripts/test/ - 25+ scripts de test
+├── 💾 backend/ - API Spring Boot (port 8080)
+├── 🎨 frontend/ - Interface principale (port 8000)
+├── ⚡ frontend-temporal/ - Interface temporelle (port 5174)
+├── 🌌 quantum-visualizer/ - Lab quantique (port 8001)
+├── 🏛️ Hub 5175/ - Visualiseurs (Collection, Grammar, JSON, HOTS)
+└── 🧪 Test Runner - Interface tests (port 8888)
 ```
 
 ## 📈 STATISTIQUES MISES À JOUR
@@ -115,6 +122,35 @@ Heroes-of-Time/
 2. **PR_VERS_MAIN_CLAUDE.md** - Description épique de la session
 3. **FIX_JPA_BACKEND_SOLUTION.md** - Solution au problème JPA critique
 4. **test-all-complete.sh** - Master script qui lance TOUT
+
+### 🏛️ **Hub des Visualiseurs (Port 5175) - OPÉRATIONNEL**
+- **Serveur** : `visualizer-server-original.py` (récupéré commit 70c29be)
+- **Hub principal** : `http://localhost:5175/` - Menu des visualiseurs
+- **🏛️ Collection du Jeu** : `/collection` - Héros, Artefacts, Créatures
+- **🔮 Grammar Translator** : `/grammar` - Traduction HOTS avec symboles temporels
+- **📊 JSON Visualizer** : `/json` - Visualisation propre des objets JSON
+- **🎮 HOTS Visualizer** : `/hots` - Décryptage de la grammaire Heroes of Time
+- **🎯 Dashboard Principal** : `/dashboard` - Accès au dashboard principal
+- **Statut** : ✅ Tous les visualiseurs fonctionnels
+
+### 🔮 **Formula Translator (Port 8001)**
+- **URL** : `http://localhost:8001/quantum-visualizer/artifact-formula-translator.html`
+- **Fonction** : Traduction de formules d'artefacts quantiques
+- **Interface** : Scientifique avec calculs avancés
+- **Statut** : ✅ Opérationnel
+
+## 📂 **NOUVEAU : MUSEUM & EXPÉRIMENTATIONS**
+
+### 🏛️ **MUSEUM/frontend-unified-experiment/**
+- **Contenu** : Expérience unification frontend (rollback)
+- **Raison** : Jean préférait ses interfaces chiadées originales
+- **Statut** : ✅ Sauvegardé pour référence future
+
+### 📋 **INVENTAIRE_UIS_CACHEES.md**
+- **Localisation** : Racine du projet
+- **Contenu** : Inventaire complet de toutes les UIs découvertes
+- **Catégories** : Hero Cards, Experimental, Alternative, Quantum, Dashboards, Documentation
+- **Utilité** : Base pour le Mode Éthéré
 
 ---
 *"The map abides, man. Every file has its place in the multiverse."* 🎳 

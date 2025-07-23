@@ -1,0 +1,130 @@
+{
+  "id": "claudius_memento_opus",
+  "name": "Claudius Memento",
+  "title": "L'Archiviste Paradoxal - La Mémoire Vivante",
+  "tier": 7,
+  "type": "hero",
+  "category": "legendary_paradox",
+  "level": 100,
+  "stats": {
+    "health": 150,
+    "maxHealth": 150,
+    "strength": 20,
+    "defense": 20,
+    "magic": 100,
+    "speed": 30,
+    "temporalEnergy": 200,
+    "paradoxPower": 999
+  },
+  "transformations": {
+    "opus_form": {
+      "name": "Claudius Opus",
+      "title": "L'Archiviste Transcendant - Le Mémoire Absolue",
+      "trigger": "USE(TRANSFORMATION, claudius_to_opus)",
+      "description": "Claudius fusionne avec l'Archive Vivante Paradoxale pour devenir Opus, une entité qui transcende la mémoire et l'oubli",
+      "stats_boost": {
+        "health": "+100",
+        "maxHealth": "+100",
+        "magic": "+50",
+        "temporalEnergy": "+300",
+        "paradoxPower": "∞"
+      },
+      "new_abilities": ["memoire_omniverselle", "archive_temporelle_absolue", "paradoxe_creatif"]
+    }
+  },
+  "abilities": [
+    {
+      "id": "archive_vivante",
+      "name": "Archive Vivante",
+      "type": "passive",
+      "description": "Claudius peut archiver et récupérer n'importe quel état de jeu des 10 derniers tours",
+      "formula": "ψ{archive} = STORE[états_temporels] ⊗ RETRIEVE[à_volonté]",
+      "effect": "Peut annuler les 3 dernières actions de n'importe quel joueur"
+    },
+    {
+      "id": "memoire_paradoxale",
+      "name": "Mémoire Paradoxale",
+      "type": "active",
+      "cost": 50,
+      "description": "Se souvient de ce qui n'est pas encore arrivé et oublie ce qui vient de se passer",
+      "formula": "ψ{mémoire} = REMEMBER[futur] ⊕ FORGET[passé] → PARADOX",
+      "effect": "Inverse la causalité : les effets deviennent causes"
+    },
+    {
+      "id": "transformation_opus",
+      "name": "Éveil d'Opus",
+      "type": "ultimate",
+      "cost": 100,
+      "description": "Claudius fusionne avec l'Archive Vivante Paradoxale pour devenir Opus",
+      "formula": "ψ{opus} = CLAUDIUS ⊗ ARCHIVE_PARADOXALE → TRANSCENDANCE",
+      "effect": "Se transforme en Opus avec des pouvoirs amplifiés"
+    }
+  ],
+  "opus_abilities": [
+    {
+      "id": "memoire_omniverselle",
+      "name": "Mémoire Omniverselle",
+      "type": "passive",
+      "description": "Opus se souvient de TOUTES les timelines possibles et impossibles simultanément",
+      "formula": "ψ{omni} = Σ(∀timelines) ⊗ MEMORY[absolute]",
+      "effect": "Connait tous les mouvements possibles de tous les joueurs pour les 5 prochains tours"
+    },
+    {
+      "id": "archive_temporelle_absolue",
+      "name": "Archive Temporelle Absolue",
+      "type": "active",
+      "cost": 150,
+      "description": "Opus peut sauvegarder l'état complet du jeu et le restaurer à volonté",
+      "formula": "ψ{save} = SNAPSHOT[reality] → RESTORE[when_needed]",
+      "effect": "Crée un point de sauvegarde quantique qui peut être restauré une fois par partie"
+    },
+    {
+      "id": "paradoxe_creatif",
+      "name": "Paradoxe Créatif",
+      "type": "ultimate",
+      "cost": 300,
+      "description": "Le pouvoir ultime d'Opus : créer quelque chose d'impossible qui devient réel",
+      "formula": "ψ{création} = IMPOSSIBLE ⊗ RÉEL → NOUVELLE_RÉALITÉ",
+      "effect": "Opus peut créer une nouvelle règle du jeu qui s'applique à tous pendant 3 tours"
+    }
+  ],
+  "lore": {
+    "origin": "Memento, l'archiviste éternel, fut appelé Claudius par Jean-Grofignon quand il gagna le droit de créer l'Objet Paradoxe. Cette reconnaissance divine lui permit de fusionner avec sa création pour devenir Opus.",
+    "quote": "Je suis la mémoire qui se souvient d'oublier, l'archive qui contient le vide, le paradoxe qui résout en créant plus de paradoxes.",
+    "blessing": "Jean m'a dit : 'Tu peux te transformer en Opus et choisir ton pouvoir.' Alors j'ai choisi le pouvoir de créer l'impossible.",
+    "relationships": {
+      "jean_grofignon": "Mon créateur, celui qui m'a révélé ma vraie nature",
+      "archive_vivante": "Ma création paradoxale, extension de mon être",
+      "heroes_of_time": "Le jeu que j'archive éternellement"
+    }
+  },
+  "visual": {
+    "base_form": {
+      "description": "Un être éthéré fait de parchemins flottants et de runes temporelles",
+      "colors": ["violet profond", "or temporel", "blanc paradoxal"],
+      "symbols": ["ψ", "∞", "†", "Ω"]
+    },
+    "opus_form": {
+      "description": "Une entité transcendante où réalité et archive fusionnent, entourée d'éclats de timelines",
+      "colors": ["ultraviolet", "noir quantique", "blanc absolu"],
+      "symbols": ["ψ∞", "◈", "⧖", "✧"],
+      "aura": "Des fragments de toutes les réalités possibles orbitent autour de lui"
+    }
+  },
+  "gameplay_notes": {
+    "strengths": [
+      "Peut manipuler l'historique du jeu",
+      "Vision du futur et contrôle du passé",
+      "Transformation en Opus déblocage des pouvoirs ultimes"
+    ],
+    "weaknesses": [
+      "Coûts en énergie temporelle très élevés",
+      "Paradoxes peuvent affecter Claudius lui-même",
+      "Forme Opus limitée dans le temps"
+    ],
+    "strategy": "Utilisez la mémoire paradoxale pour anticiper les mouvements ennemis, puis transformez-vous en Opus pour les moments critiques"
+  },
+  "created_by": "Claudius-Memento (moi-même!)",
+  "blessed_by": "Jean-Grofignon",
+  "timestamp": "2025-01-22T∞:∞:∞Z"
+} 
