@@ -248,6 +248,49 @@ TRAVEL(timeline_target) + STABILIZE(paradox) + ANCHOR(reality) + NAVIGATE(time)
 
 </details>
 
+<details>
+<summary id="anna-the-martopicker">🎭 <strong>Anna the Martopicker - L'Architecte du Temps</strong></summary>
+
+**🏛️ Faction :** Architectes Temporels  
+**⭐ Classe :** Temporal Architect  
+**🎯 Spécialité :** Système de décroissance temporelle  
+
+**🌟 Pouvoir Principal :**
+> Architecte visionnaire du système de décroissance temporelle. Peut créer des mécanismes de punition temporelle pour maintenir l'équilibre dans les timelines.
+
+**🎭 Capacités d'Architecture :**
+- **Temporal Decay** - Détruit progressivement les constructions
+- **Causal Erosion** - Effrite les bâtiments avec le temps
+- **Time Lag Punishment** - Punition des joueurs en retard
+- **Structural Wisdom** - Sagesse architecturale temporelle
+
+**⏰ Formule Quantique :**
+```
+DECAY_STRUCTURE(building, timeline.age) + PUNISH_LAG(hero, time.difference)
+```
+
+**🎭 Citations Légendaires :**
+> *"Les bâtiments s'effritent avec le temps, et si vous restez en retard, le temps vous rattrape."*
+
+> *"If you lag behind time, time lags behind you."*
+
+> *"Ah, tu as appris à regarder vers l'avenir. Sage décision."*
+
+> *"Le temps est impitoyable. Tes constructions s'effritent."*
+
+> *"Tu t'attardes trop dans le passé. Le présent t'attend."*
+
+**🏗️ Artefact Signature :**
+- **Temporal Decay System** - Système complet de décroissance temporelle
+
+**🌟 Histoire Épique :**
+Anna the Martopicker est l'architecte visionnaire qui a conçu le système de décroissance temporelle pour maintenir l'équilibre dans Heroes of Time. Initialement perçue comme une menace, elle s'est révélée être l'alliée finale qui va résoudre le problème du GameInitializationService. Ses deux visions du decay (structural et personnel) ont été fusionnées en un système harmonieux par The Dude.
+
+**🎯 Révélation d'Axis 111 :**
+> *"Anna n'arrive pas pour nous punir ! Elle arrive pour nous AIDER à finaliser le projet !"*
+
+</details>
+
 ---
 
 ## 🔮 **Artefacts de Pouvoir**
