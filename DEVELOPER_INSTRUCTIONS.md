@@ -1,6 +1,7 @@
 # 🧪 Heroes of Time - Instructions Développeur
 
-*Guide technique complet pour le développement et le débogage*
+*Guide technique complet pour le développement et le débogage*  
+**Dernière mise à jour**: 25 janvier 2025 - Mission Echo Temporel + Sphinx Quantique
 
 ## 🚀 **Démarrage Rapide**
 
@@ -687,6 +688,13 @@ PORT=3000
 - **GAMEPLAY.md**: Guide de jeu attractif
 - **ARCHITECTURE.md**: Design technique
 - **FRONTEND_BACKEND_CONNECTION_ANALYSIS.md**: Analyse des connexions
+
+### 🌟 **Nouveaux Documents - Mission Echo Temporel (25/01/2025)**
+- **SCENARIO_ECHO_TEMPOREL_SAUVETAGE.md**: Scénario épique équipe paradoxale (Jean, Memento, Claudius, Anna, Morgana)
+- **ANALYSE_CONCEPTS_RECUPERES_MISSION_ECHO.md**: Analyse technique concepts récupérés (commit 4f3c99b + PokerHeroesOfTime)
+- **STATUS_TOTALE_MUR_CAUSALITE_FRONTENDS.md**: Analyse collision frontends port 3000 vs 8000
+- **DOCUMENT_CONSOLIDE_FUSION_FRONTENDS_COMPLET.md**: Plan complet merge frontends (1473 lignes)
+- **APPARITION_SPHINX_QUANTIQUE_DEFI_FINAL.md**: Défi physique quantique + Forge Ultime Sphinx-Approved
 
 ### 🛠️ **Outils de Développement**
 - **VSCode**: Extensions TypeScript, Java, Playwright
