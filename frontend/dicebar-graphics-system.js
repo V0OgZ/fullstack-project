@@ -4,14 +4,26 @@ class DicebarGraphicsSystem {
         this.baseUrl = 'https://api.dicebear.com/7.x';
         this.backgroundColors = 'b6e3f4,c0aede,d1d4f9,ffd5dc,ffdfbf,e6ffed,fff2cc,ffeaa7';
         
-        // Heroes will be populated dynamically from JSON data
+        // Initialize ALL collections to prevent empty gallery
         this.heroes = {};
+        this.creatures = {};
+        this.artifacts = {};
+        this.spells = {};
+        this.environment = {};
+        this.ui_elements = {};
+        this.buildings = {};
+        this.nature = {};
         this.heroesJsonData = null;
         
-        // Initialize with basic hero data - will be overridden by JSON
+        // Initialize with basic data first
         this.initializeBasicHeroes();
+        this.initializeFallbackHeroes();
+        this.initializeArtifacts();
+        this.initializeSpells();
+        this.initializeEnvironments();
+        this.initializeUIElements();
         
-        // Load hero data from JSON files
+        // Load hero data from JSON files (if available)
         this.loadHeroesFromJSON();
         
         // Creatures with dicebar graphics
@@ -536,6 +548,351 @@ class DicebarGraphicsSystem {
                 icon: '⚖️',
                 color: '#FF69B4',
                 description: 'Archiviste Paradoxal'
+            }
+        };
+    }
+    
+    // Initialize fallback heroes (for when JSON data is not available)
+    initializeFallbackHeroes() {
+        this.heroes = {
+            'Arthur': {
+                style: 'adventurer',
+                seed: 'arthur-pendragon-king',
+                icon: '⚔️',
+                color: '#FFD700',
+                description: 'Legendary King Arthur'
+            },
+            'Ragnar': {
+                style: 'adventurer-neutral',
+                seed: 'ragnar-lothbrok-viking',
+                icon: '🛡️',
+                color: '#8B0000',
+                description: 'Viking Warrior'
+            },
+            'Morgana': {
+                style: 'lorelei',
+                seed: 'morgana-le-fay-sorceress',
+                icon: '🧙‍♀️',
+                color: '#800080',
+                description: 'Dark Sorceress'
+            },
+            'Merlin': {
+                style: 'bottts',
+                seed: 'merlin-ambrosius-wizard',
+                icon: '🔮',
+                color: '#4169E1',
+                description: 'Great Wizard'
+            },
+            'Lysandrel': {
+                style: 'adventurer',
+                seed: 'lysandrel-reality-forger',
+                icon: '🧝‍♀️',
+                color: '#90EE90',
+                description: 'Reality Forger'
+            },
+            'Nyx-Lua': {
+                style: 'lorelei',
+                seed: 'nyx-lua-world-weaver',
+                icon: '🌙',
+                color: '#2F4F4F',
+                description: 'World Weaver'
+            },
+            'Gardien Zephyr': {
+                style: 'adventurer-neutral',
+                seed: 'gardien-zephyr-nexus',
+                icon: '🛡️',
+                color: '#87CEEB',
+                description: 'Nexus Guardian'
+            },
+            'Thane le Tueur de Dragons': {
+                style: 'adventurer',
+                seed: 'thane-dragon-slayer',
+                icon: '🗡️',
+                color: '#DAA520',
+                description: 'Dragon Slayer'
+            },
+            'Jean-Grofignon': {
+                style: 'bottts',
+                seed: 'jean-grofignon-philosopher',
+                icon: '🧠',
+                color: '#9370DB',
+                description: 'Temporal Philosopher'
+            },
+            'Claudius': {
+                style: 'bottts',
+                seed: 'claudius-memento-archiviste',
+                icon: '⚖️',
+                color: '#FF69B4',
+                description: 'Archiviste Paradoxal'
+            }
+        };
+    }
+    
+    // Initialize artifacts
+    initializeArtifacts() {
+        this.artifacts = {
+            'avantworld_blade': {
+                style: 'shapes',
+                seed: 'avantworld-blade-reality',
+                icon: '⚔️',
+                color: '#FFD700',
+                description: 'Avantworld Blade'
+            },
+            'wigner_eye': {
+                style: 'shapes',
+                seed: 'wigner-eye-observation',
+                icon: '👁️',
+                color: '#9B59B6',
+                description: 'Wigner\'s Eye'
+            },
+            'schrodinger_grimoire': {
+                style: 'shapes',
+                seed: 'schrodinger-grimoire-quantum',
+                icon: '📜',
+                color: '#E67E22',
+                description: 'Schrödinger\'s Grimoire'
+            },
+            'infinity_codex': {
+                style: 'shapes',
+                seed: 'infinity-codex-knowledge',
+                icon: '📖',
+                color: '#3498DB',
+                description: 'Infinity Codex'
+            },
+            'collapse_orb': {
+                style: 'shapes',
+                seed: 'collapse-orb-quantum',
+                icon: '🔮',
+                color: '#E74C3C',
+                description: 'Collapse Orb'
+            },
+            'dragon_slayer_blade': {
+                style: 'shapes',
+                seed: 'dragon-slayer-blade-legendary',
+                icon: '🗡️',
+                color: '#C0392B',
+                description: 'Dragon Slayer Blade'
+            },
+            'reality_anchor': {
+                style: 'shapes',
+                seed: 'reality-anchor-stabilizer',
+                icon: '⚓',
+                color: '#16A085',
+                description: 'Reality Anchor'
+            },
+            'guardian_shield': {
+                style: 'shapes',
+                seed: 'guardian-shield-protection',
+                icon: '🛡️',
+                color: '#27AE60',
+                description: 'Guardian Shield'
+            },
+            'causality_flame': {
+                style: 'shapes',
+                seed: 'causality-flame-temporal',
+                icon: '🔥',
+                color: '#F39C12',
+                description: 'Causality Flame'
+            },
+            'nexus_blade': {
+                style: 'shapes',
+                seed: 'nexus-blade-guardian',
+                icon: '⚡',
+                color: '#8E44AD',
+                description: 'Nexus Blade'
+            },
+            'temporal_focus_ring': {
+                style: 'shapes',
+                seed: 'temporal-focus-ring-precision',
+                icon: '💍',
+                color: '#D4AC0D',
+                description: 'Temporal Focus Ring'
+            }
+        };
+    }
+
+    // Initialize spells
+    initializeSpells() {
+        this.spells = {
+            'reality_forge': {
+                style: 'shapes',
+                seed: 'reality-forge-spell',
+                icon: '🔨',
+                color: '#E67E22',
+                description: 'Reality Forge'
+            },
+            'temporal_dominance': {
+                style: 'shapes',
+                seed: 'temporal-dominance-control',
+                icon: '👑',
+                color: '#9B59B6',
+                description: 'Temporal Dominance'
+            },
+            'quantum_collapse': {
+                style: 'shapes',
+                seed: 'quantum-collapse-destruction',
+                icon: '💥',
+                color: '#E74C3C',
+                description: 'Quantum Collapse'
+            },
+            'world_weaving': {
+                style: 'shapes',
+                seed: 'world-weaving-creation',
+                icon: '🕸️',
+                color: '#3498DB',
+                description: 'World Weaving'
+            },
+            'probability_manipulation': {
+                style: 'shapes',
+                seed: 'probability-manipulation-quantum',
+                icon: '🎲',
+                color: '#8E44AD',
+                description: 'Probability Manipulation'
+            },
+            'timeline_branching': {
+                style: 'shapes',
+                seed: 'timeline-branching-multiverse',
+                icon: '🌳',
+                color: '#27AE60',
+                description: 'Timeline Branching'
+            },
+            'protective_ward': {
+                style: 'shapes',
+                seed: 'protective-ward-defense',
+                icon: '🛡️',
+                color: '#16A085',
+                description: 'Protective Ward'
+            },
+            'anchor_zone': {
+                style: 'shapes',
+                seed: 'anchor-zone-stability',
+                icon: '⚓',
+                color: '#2C3E50',
+                description: 'Anchor Zone'
+            },
+            'temporal_barrier': {
+                style: 'shapes',
+                seed: 'temporal-barrier-protection',
+                icon: '🚧',
+                color: '#F39C12',
+                description: 'Temporal Barrier'
+            },
+            'perfect_timing': {
+                style: 'shapes',
+                seed: 'perfect-timing-precision',
+                icon: '⏱️',
+                color: '#D4AC0D',
+                description: 'Perfect Timing'
+            },
+            'dragon_weakness_sight': {
+                style: 'shapes',
+                seed: 'dragon-weakness-sight-analysis',
+                icon: '🔍',
+                color: '#C0392B',
+                description: 'Dragon Weakness Sight'
+            },
+            'temporal_strike': {
+                style: 'shapes',
+                seed: 'temporal-strike-attack',
+                icon: '⚡',
+                color: '#F1C40F',
+                description: 'Temporal Strike'
+            },
+            'future_sight': {
+                style: 'shapes',
+                seed: 'future-sight-prophecy',
+                icon: '👁️‍🗨️',
+                color: '#9B59B6',
+                description: 'Future Sight'
+            }
+        };
+    }
+
+    // Initialize environment elements
+    initializeEnvironments() {
+        this.environment = {
+            'nexus_point': {
+                style: 'shapes',
+                seed: 'nexus-point-temporal',
+                icon: '🌀',
+                color: '#3498DB',
+                description: 'Nexus Point'
+            },
+            'temporal_rift': {
+                style: 'shapes',
+                seed: 'temporal-rift-tear',
+                icon: '🌪️',
+                color: '#8E44AD',
+                description: 'Temporal Rift'
+            },
+            'quantum_field': {
+                style: 'shapes',
+                seed: 'quantum-field-energy',
+                icon: '✨',
+                color: '#F1C40F',
+                description: 'Quantum Field'
+            },
+            'reality_anchor_zone': {
+                style: 'shapes',
+                seed: 'reality-anchor-zone-stable',
+                icon: '🔒',
+                color: '#16A085',
+                description: 'Reality Anchor Zone'
+            },
+            'timeline_branch': {
+                style: 'shapes',
+                seed: 'timeline-branch-split',
+                icon: '🌿',
+                color: '#27AE60',
+                description: 'Timeline Branch'
+            },
+            'probability_storm': {
+                style: 'shapes',
+                seed: 'probability-storm-chaos',
+                icon: '⛈️',
+                color: '#E74C3C',
+                description: 'Probability Storm'
+            }
+        };
+    }
+
+    // Initialize UI elements
+    initializeUIElements() {
+        this.ui_elements = {
+            'temporal_energy': {
+                style: 'shapes',
+                seed: 'temporal-energy-ui',
+                icon: '⚡',
+                color: '#F1C40F',
+                description: 'Temporal Energy'
+            },
+            'health_point': {
+                style: 'shapes',
+                seed: 'health-point-ui',
+                icon: '❤️',
+                color: '#E74C3C',
+                description: 'Health Point'
+            },
+            'movement_point': {
+                style: 'shapes',
+                seed: 'movement-point-ui',
+                icon: '👟',
+                color: '#3498DB',
+                description: 'Movement Point'
+            },
+            'timeline_indicator': {
+                style: 'shapes',
+                seed: 'timeline-indicator-ui',
+                icon: '⏰',
+                color: '#9B59B6',
+                description: 'Timeline Indicator'
+            },
+            'quantum_affinity': {
+                style: 'shapes',
+                seed: 'quantum-affinity-ui',
+                icon: '🎭',
+                color: '#8E44AD',
+                description: 'Quantum Affinity'
             }
         };
     }
@@ -1732,8 +2089,7 @@ class DicebarGraphicsSystem {
                 {
                     showIcon: options.showIcon !== false,
                     showTooltip: true,
-                    glow: options.glow,
-                    rarity: options.rarities ? options.rarities[elementName] : null
+                    glow: options.rarities ? options.rarities[elementName] : null
                 }
             );
             
