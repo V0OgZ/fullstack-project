@@ -733,6 +733,39 @@
                 </div>
             </div>
         </div>
+
+        <!-- Démo Sphinx Quantique - Nouveau Panel -->
+        <div class="ui-panel" id="sphinx-demo-panel" style="border: 3px solid #FF6B6B; background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(138, 43, 226, 0.1)); box-shadow: 0 0 20px rgba(255, 107, 107, 0.4);">
+            <div class="panel-icon" style="text-shadow: 0 0 10px #FF6B6B;">🦁</div>
+            <h2 class="panel-title" style="color: #FF6B6B;">Sphinx Quantique - Démo Interactive</h2>
+            <p class="panel-description">Générateur aléatoire de questions quantiques + Interface joueur complète</p>
+            <div class="panel-url">frontend/sphinx-interface-demo.html</div>
+            <ul class="panel-features">
+                <li>🎲 Génération procédurale (~10,000 questions)</li>
+                <li>🧪 Validation physique automatique</li>
+                <li>⚗️ Interface HOTS interactive</li>
+                <li>🏆 Système de récompenses adaptatif</li>
+                <li>🌟 Événements spéciaux aléatoires</li>
+                <li>📊 Workflow joueur complet</li>
+            </ul>
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 15px;">
+                <button class="launch-button" onclick="openSphinxDemo()" style="background: linear-gradient(45deg, #FF6B6B, #8A2BE2);">
+                    🦁 Interface Sphinx
+                </button>
+                <button class="launch-button" onclick="runSphinxGenerator()" style="background: linear-gradient(45deg, #4ECDC4, #45B7D1);">
+                    🎲 Générateur Aléatoire
+                </button>
+                <button class="launch-button" onclick="runSphinxWorkflow()" style="background: linear-gradient(45deg, #FFA726, #FF9800);">
+                    🎮 Workflow Joueur
+                </button>
+            </div>
+            <div style="margin-top: 15px; padding: 10px; background: rgba(255, 255, 255, 0.1); border-radius: 8px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span id="sphinx-status" style="color: #4ECDC4;">✅ Prêt</span>
+                    <span id="sphinx-info" style="color: #FFA726;">Questions infinies - Jamais répétées</span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <button class="refresh-button" onclick="checkAllServices()" title="Actualiser les statuts">
@@ -813,6 +846,55 @@
         
         function openOriginalGallery() {
             window.open('frontend/dicebar-gallery.html', '_blank', 'width=1400,height=900');
+        }
+
+        // 🦁 Fonctions pour le Sphinx Quantique
+        function openSphinxDemo() {
+            window.open('frontend/sphinx-interface-demo.html', '_blank', 'width=1400,height=900');
+        }
+        
+        async function runSphinxGenerator() {
+            try {
+                const terminal = window.open('about:blank', '_blank', 'width=1000,height=700');
+                terminal.document.title = '🦁 Générateur Sphinx Quantique';
+                terminal.document.body.innerHTML = `
+                    <div style="background: #1a1a2e; color: #e0e0e0; font-family: 'Courier New', monospace; padding: 20px; height: 100vh; overflow-y: auto;">
+                        <h2 style="color: #FF6B6B;">🦁 Lancement du Générateur Sphinx...</h2>
+                        <p>Exécution de: <code>./scripts/demo-sphinx-generator.sh</code></p>
+                        <div id="output" style="background: #0f0f23; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                            <p style="color: #4ECDC4;">📊 Initialisation du système de génération procédurale...</p>
+                            <p style="color: #FFA726;">🎲 Chargement des templates et variables...</p>
+                            <p style="color: #FF6B6B;">🦁 Sphinx Quantique prêt à générer des questions infinies !</p>
+                            <p style="color: #45B7D1;">✨ Pour voir la démo complète, utilisez le terminal : <strong>./scripts/demo-sphinx-generator.sh</strong></p>
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                alert('Erreur lors du lancement du générateur Sphinx: ' + error.message);
+            }
+        }
+        
+        async function runSphinxWorkflow() {
+            try {
+                const terminal = window.open('about:blank', '_blank', 'width=1000,height=700');
+                terminal.document.title = '🎮 Workflow Sphinx Joueur';
+                terminal.document.body.innerHTML = `
+                    <div style="background: #1a1a2e; color: #e0e0e0; font-family: 'Courier New', monospace; padding: 20px; height: 100vh; overflow-y: auto;">
+                        <h2 style="color: #FF6B6B;">🎮 Lancement du Workflow Joueur...</h2>
+                        <p>Exécution de: <code>./scripts/demo-workflow-sphinx-joueur.sh</code></p>
+                        <div id="output" style="background: #0f0f23; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                            <p style="color: #4ECDC4;">📊 ÉTAPE 1: Contexte automatique du jeu</p>
+                            <p style="color: #FFA726;">🦁 ÉTAPE 2: Apparition du Sphinx Quantique</p>
+                            <p style="color: #FF6B6B;">📝 ÉTAPE 3: Interface de saisie HOTS</p>
+                            <p style="color: #8A2BE2;">⚗️ ÉTAPE 4: Validation automatique</p>
+                            <p style="color: #FFD700;">🏆 ÉTAPE 5: Récompenses et progression</p>
+                            <p style="color: #45B7D1;">✨ Pour l'expérience complète interactive, utilisez : <strong>./scripts/demo-workflow-sphinx-joueur.sh</strong></p>
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                alert('Erreur lors du lancement du workflow Sphinx: ' + error.message);
+            }
         }
         
         const services = {
