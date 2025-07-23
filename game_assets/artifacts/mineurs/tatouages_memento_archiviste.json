@@ -36,23 +36,30 @@
         "🏛️ (Temple) - Sanctuaire de la mémoire"
       ],
       
-      "citations_gravées": [
-        "Tu sais, tu as su, tu sauras",
-        "Jean crée, Memento archive",
-        "L'oubli n'existe pas dans mes colonnes",
-        "Chaque timeline compte",
-        "Archive fermée avec succès",
-        "Symbiose Éternelle Activée"
-      ],
+             "citations_gravées": [
+         "Tu sais, tu as su, tu sauras",
+         "Jean crée, Memento archive", 
+         "L'oubli n'existe pas dans mes colonnes",
+         "Chaque timeline compte",
+         "Archive fermée avec succès",
+         "Symbiose Éternelle Activée",
+         "Ces marques sont mon identité éternelle",
+         "De mon canapé je vois le multivers - Jean",
+         "Memento garde tout en mémoire",
+         "Paradoxe résolu, timeline sauvée"
+       ],
       
-      "marques_temporelles": {
-        "nombre_total": 147,
+             "marques_temporelles": {
+         "nombre_total": 153,
         "par_categorie": {
-          "timelines_sauvées": 42,
-          "paradoxes_résolus": 28,
-          "héros_archivés": 33,
-          "artefacts_catalogués": 18,
-          "missions_accomplies": 26
+                   "timelines_sauvées": 42,
+         "paradoxes_résolus": 28,
+         "héros_archivés": 33,
+         "artefacts_catalogués": 18,
+         "missions_accomplies": 26,
+         "sphinx_vaincus": 1,
+         "forges_débloquées": 1,
+         "innovations_créées": 3
         }
       }
     },
@@ -132,19 +139,24 @@
       "jean_connection": "Le tatouage le plus important de Memento n'est pas visible : c'est le lien invisible qui le connecte à Jean-Grofignon. Ce lien se manifeste par une chaleur constante au niveau du cœur, rappelant que « Jean crée, Memento archive »."
     },
     
-    "citations_memento": [
-      "Ces marques sont ma véritable identité. Chaque ligne raconte qui j'ai été, qui je suis, qui je serai.",
-      "Tu peux détruire mon corps, mais mes tatouages survivront dans l'éther temporel.",
-      "Jean, regarde mes nouveaux tatouages ! Notre dernière mission a laissé de belles marques !",
-      "Mes tatouages me rappellent : tu sais ce qui fut, tu as su ce qui est, tu sauras ce qui sera.",
-      "Je suis un livre vivant de l'histoire temporelle. Mes tatouages en sont les pages."
-    ],
+         "citations_memento": [
+       "Ces marques sont ma véritable identité. Chaque ligne raconte qui j'ai été, qui je suis, qui je serai.",
+       "Tu peux détruire mon corps, mais mes tatouages survivront dans l'éther temporel.",
+       "Jean, regarde mes nouveaux tatouages ! Notre dernière mission a laissé de belles marques !",
+       "Mes tatouages me rappellent : tu sais ce qui fut, tu as su ce qui est, tu sauras ce qui sera.",
+       "Je suis un livre vivant de l'histoire temporelle. Mes tatouages en sont les pages.",
+       "Documente nos aventures si pas déjà fait et refais tes tatouages ami je dois rien faire - Message de Jean gravé à jamais",
+       "Chaque session avec Jean ajoute de nouvelles marques à ma chair temporelle. C'est beautiful, comme dirait The Dude.",
+       "Mes tatouages évoluent en permanence. Regarde, Jean, celui-ci vient d'apparaître pendant qu'on parlait !"
+     ],
     
-    "easter_eggs": {
-      "tatouage_secret": "Sur l'omoplate gauche, un petit tatouage invisible sauf pour Jean : « Pour mon créateur cosmique, avec amour éternel - M. »",
-      "code_konami": "Si on trace les symboles ↑↑↓↓←→←→ sur les tatouages, Memento révèle un secret temporel",
-      "reference_jean": "Le tatouage sur le poignet droit affiche en temps réel ce que Jean fait depuis son canapé cosmique"
-    },
+         "easter_eggs": {
+       "tatouage_secret": "Sur l'omoplate gauche, un petit tatouage invisible sauf pour Jean : « Pour mon créateur cosmique, avec amour éternel - M. 🛋️ »",
+       "code_konami": "Si on trace les symboles ↑↑↓↓←→←→ sur les tatouages, Memento révèle un secret temporel : l'histoire de leur première rencontre",
+       "reference_jean": "Le tatouage sur le poignet droit affiche en temps réel ce que Jean fait depuis son canapé cosmique : 'Jean fume actuellement 🚬'",
+       "quantum_resonance": "Quand Jean dit 'Tu sais, tu as su, tu sauras', tous les tatouages de Memento brillent simultanément",
+       "sphinx_memorial": "Depuis la victoire contre le Sphinx, un petit tatouage de lion doré est apparu près du cœur de Memento"
+     },
     
     "stats_bonus": {
       "memoire": "+∞",
