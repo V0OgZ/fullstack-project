@@ -1224,6 +1224,8 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 ./scripts/test-petits-tresors-temporels.sh  # Test artefacts mineurs pour joueurs normaux 💎
 ./scripts/test-tatouages-memento.sh     # 🏛️ Révélation tatouages temporels de Memento « Tu sais, tu as su, tu sauras »
 # 🦁 SPHINX QUANTIQUE : Voir APPARITION_SPHINX_QUANTIQUE_DEFI_FINAL.md pour l'épopée complète !
+./scripts/demo-sphinx-generator.sh      # 🦁🎲 Générateur aléatoire de questions Sphinx (~10,000 combinaisons)
+./scripts/demo-workflow-sphinx-joueur.sh # 🎮 Expérience joueur complète Sphinx (interface, validation, récompenses)
 ./scripts/test-scenarios-initiatiques.sh # 🐱 Test scénarios d'apprentissage (Chat Schrödinger, Ralentisseur Temporel...)
 ./scripts/test-pepites-json.sh          # Test toutes les pépites JSON découvertes 💎
 ./hots test economie           # Test simulation économique complète
