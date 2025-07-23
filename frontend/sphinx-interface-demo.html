@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🦁 Interface Sphinx Quantique - Démonstration</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: #f0f0f0;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .sphinx-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.8);
+            border: 3px solid #ffd700;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .sphinx-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .sphinx-avatar {
+            font-size: 120px;
+            margin-bottom: 20px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #ffd700; }
+            to { text-shadow: 0 0 30px #ffd700, 0 0 40px #ffd700; }
+        }
+
+        .sphinx-title {
+            font-size: 32px;
+            color: #ffd700;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .game-context {
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .context-title {
+            color: #ffd700;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .context-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .info-item {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+            border-left: 4px solid #ffd700;
+        }
+
+        .question-phase {
+            margin: 30px 0;
+            padding: 25px;
+            background: linear-gradient(45deg, rgba(255, 0, 100, 0.1), rgba(0, 100, 255, 0.1));
+            border: 2px solid #ff6b6b;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .phase-title {
+            color: #ff6b6b;
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .sphinx-speech {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            font-size: 16px;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .sphinx-speech::before {
+            content: "🦁";
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 5px 10px;
+            border-radius: 15px;
+            border: 2px solid #ffd700;
+        }
+
+        .question-text {
+            font-size: 18px;
+            background: rgba(255, 215, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid #ffd700;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .answer-interface {
+            margin: 30px 0;
+            padding: 25px;
+            background: rgba(0, 255, 0, 0.05);
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+        }
+
+        .answer-title {
+            color: #4CAF50;
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .hots-editor {
+            width: 100%;
+            height: 300px;
+            background: #1e1e1e;
+            color: #f0f0f0;
+            border: 2px solid #4CAF50;
+            border-radius: 8px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            resize: vertical;
+        }
+
+        .editor-hints {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(76, 175, 80, 0.1);
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .hint-button {
+            background: #ff9800;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+
+        .hint-button:hover {
+            background: #f57c00;
+        }
+
+        .submit-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .submit-button {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+        }
+
+        .validation-phase {
+            margin: 30px 0;
+            padding: 25px;
+            background: rgba(138, 43, 226, 0.1);
+            border: 2px solid #8a2be2;
+            border-radius: 10px;
+        }
+
+        .validation-title {
+            color: #8a2be2;
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .validation-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .validation-step {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #8a2be2;
+        }
+
+        .step-status {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .success { color: #4CAF50; }
+        .warning { color: #ff9800; }
+        .error { color: #f44336; }
+
+        .results-phase {
+            margin: 30px 0;
+            padding: 25px;
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+        }
+
+        .results-title {
+            color: #ffd700;
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .reward-item {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #ffd700;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .demo-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #ffd700;
+        }
+
+        .demo-button {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin: 3px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        #progressBar {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #ffd700);
+            width: 0%;
+            transition: width 1s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-controls">
+        <div style="color: #ffd700; font-size: 14px; margin-bottom: 10px;">🎮 DÉMO INTERACTIVE</div>
+        <button class="demo-button" onclick="startDemo()">▶️ Démarrer</button>
+        <button class="demo-button" onclick="showQuestion()">🦁 Question</button>
+        <button class="demo-button" onclick="showAnswer()">📝 Réponse</button>
+        <button class="demo-button" onclick="showValidation()">✅ Validation</button>
+        <button class="demo-button" onclick="showResults()">🏆 Résultats</button>
+        <button class="demo-button" onclick="resetDemo()">🔄 Reset</button>
+    </div>
+
+    <div class="sphinx-container">
+        <div class="sphinx-header">
+            <div class="sphinx-avatar">🦁</div>
+            <h1 class="sphinx-title">SPHINX QUANTIQUE - RENCONTRE INTERACTIVE</h1>
+            <p style="color: #ccc; font-size: 16px;">Démonstration complète de l'expérience joueur</p>
+        </div>
+
+        <div id="progressBar">
+            <div class="progress-fill" id="progress"></div>
+        </div>
+
+        <!-- PHASE 1: CONTEXTE DU JEU -->
+        <div class="game-context" id="context-phase">
+            <div class="context-title">📊 CONTEXTE ACTUEL DU JEU</div>
+            <div class="context-info">
+                <div class="info-item">
+                    <strong>🦸 Héros Actif:</strong><br>
+                    Arthur le Temporel (Niveau 42)
+                </div>
+                <div class="info-item">
+                    <strong>🔮 Artefacts Possédés:</strong><br>
+                    Œil de Wigner, Télescope Temporel
+                </div>
+                <div class="info-item">
+                    <strong>🗺️ Carte Actuelle:</strong><br>
+                    Nexus des Possibilités (ZFC Active)
+                </div>
+                <div class="info-item">
+                    <strong>⚔️ Situation:</strong><br>
+                    Combat contre 3 mages quantiques
+                </div>
+            </div>
+            <div style="color: #ffd700; font-weight: bold;">
+                🎯 Le système génère une question adaptée à VOTRE situation !
+            </div>
+        </div>
+
+        <!-- PHASE 2: QUESTION DU SPHINX -->
+        <div class="question-phase" id="question-phase" style="display: none;">
+            <div class="phase-title">🦁 APPARITION DU SPHINX QUANTIQUE</div>
+            
+            <div class="sphinx-speech">
+                <p><strong>🦁 SPHINX QUANTIQUE :</strong></p>
+                <p><em>"Mortel ! Tes exploits temporels ont attiré mon attention ! Je vais maintenant tester ta compréhension des mystères quantiques dans ta situation actuelle !"</em></p>
+            </div>
+
+            <div class="sphinx-speech">
+                <p><strong>🎲 GÉNÉRATION EN COURS...</strong></p>
+                <p>📊 Analyse du contexte : ✅ Œil de Wigner détecté</p>
+                <p>🎯 Niveau de difficulté : EXPERT (basé sur niveau 42)</p>
+                <p>🌟 Événement spécial : Aucun</p>
+                <p>📋 Template sélectionné : schrodinger_adaptation</p>
+            </div>
+
+            <div class="question-text" id="generated-question">
+                <strong>🦁 QUESTION GÉNÉRÉE :</strong><br><br>
+                <em>"Dans les brumes quantiques de l'éternité, Comment l'équation de Schrödinger doit-elle être adaptée pour un système hexagonal discret avec rétroaction causale observateur-système quand un héros avec l'Œil de Wigner force un collapse dans une ZFC où d'autres héros existent en superposition ?"</em>
+            </div>
+
+            <div style="background: rgba(255, 0, 0, 0.1); padding: 15px; border-radius: 8px; margin-top: 20px;">
+                <strong>⏰ TEMPS LIMITE : 5 minutes</strong><br>
+                <strong>🎯 FORMAT REQUIS : Syntaxe HOTS</strong><br>
+                <strong>💡 INDICES DISPONIBLES : 3 maximum</strong>
+            </div>
+        </div>
+
+        <!-- PHASE 3: INTERFACE DE RÉPONSE -->
+        <div class="answer-interface" id="answer-phase" style="display: none;">
+            <div class="answer-title">📝 VOTRE RÉPONSE EN SYNTAXE HOTS</div>
+            
+            <textarea class="hots-editor" id="player-answer" placeholder="Tapez votre réponse en syntaxe HOTS ici...
+
+Exemple de structure attendue :
+
+TEMPORAL_CAUSAL_EQUATION = {
+  // État initial avec Œil de Wigner
+  INITIAL_STATE: ψ_hero = α|position⟩ + β|superposition⟩,
+  
+  // Adaptation Schrödinger pour hexagones
+  WHEN(USE_ARTIFACT(oeil_de_wigner, hero_id)) {
+    ∂ψ/∂t = (iℏ/c²) * [H_hex + V_causal(observer_effect)] * ψ
+    
+    WHERE {
+      // Vos formules ici...
+    }
+  }
+}">TEMPORAL_CAUSAL_EQUATION = {
+  // État initial : Héros avec Œil de Wigner dans ZFC
+  INITIAL_STATE: ψ_hero = α|position⟩ + β|superposition⟩,
+  
+  // Quand collapse forcé par Œil de Wigner
+  WHEN(USE_ARTIFACT(oeil_de_wigner, hero_id)) {
+
+    // Adaptation Schrödinger pour système hexagonal discret
+    ∂ψ/∂t = (iℏ/c²) * [H_hex + V_causal(observer_effect)] * ψ
+
+    WHERE {
+      // Hamiltonien hexagonal
+      H_hex = Σ(n=0 to 6) T_kinetic(hex_neighbor[n]) + V_zfc(hex_position),
+
+      // Potentiel causal avec rétroaction observateur
+      V_causal = γ * |⟨ψ_player_observation|ψ_game_state⟩|² * observer_intent,
+
+      // Propagation onde probabilité (géométrie hexagonale)
+      P_propagation(distance_hex) = |ψ_collapsed|² * exp(-distance_hex/λ_temporal),
+
+      // Relativité restreinte : facteur Lorentz pour temps de jeu
+      γ_lorentz = 1/√(1 - (v_temporal/c_game)²),
+
+      // Constantes du moteur Heroes of Time
+      c_game = 299792458 hexagones/seconde, // Vitesse causale max
+      λ_temporal = 3.0 hexagones,           // Longueur d'onde temporelle
+      ℏ_hots = 6.626e-34 * game_scale       // Constante Planck adaptée
+    }
+
+    // Collapse avec conservation probabilité
+    COLLAPSE_RESULT = {
+      FOR_EACH(adjacent_hero IN range(3_hexagones)) {
+        new_probability = P_propagation(distance(hero, adjacent_hero)),
+
+        IF (new_probability > collapse_threshold) {
+          FORCE_COLLAPSE(adjacent_hero.quantum_state),
+          APPLY_CAUSAL_FEEDBACK(hero, adjacent_hero)
+        }
+      }
+    }
+
+    // Préservation causalité : pas de paradoxes
+    CAUSALITY_CHECK = {
+      IF (creates_temporal_paradox(collapse_result)) {
+        APPLY_PARADOX_RESOLUTION_PROTOCOL(),
+        LOG_EVENT("Sphinx Quantique approuve : Paradoxe évité !")
+      }
+    }
+  }
+}</textarea>
+
+            <div class="editor-hints">
+                <strong>💡 AIDES DISPONIBLES :</strong><br>
+                <button class="hint-button" onclick="showHint(1)">💭 Indice 1 : Hamiltonien</button>
+                <button class="hint-button" onclick="showHint(2)">🔧 Indice 2 : Rétroaction</button>
+                <button class="hint-button" onclick="showHint(3)">🎮 Indice 3 : Syntaxe HOTS</button>
+                <div id="hints-display" style="margin-top: 15px; color: #ff9800;"></div>
+            </div>
+
+            <div class="submit-section">
+                <button class="submit-button" onclick="submitAnswer()">
+                    🚀 SOUMETTRE RÉPONSE AU SPHINX
+                </button>
+            </div>
+        </div>
+
+        <!-- PHASE 4: VALIDATION -->
+        <div class="validation-phase" id="validation-phase" style="display: none;">
+            <div class="validation-title">⚗️ VALIDATION SPHINX EN COURS...</div>
+            
+            <div class="validation-steps">
+                <div class="validation-step">
+                    <div class="step-status success">✅ SYNTAXE HOTS</div>
+                    <p>Structure correcte, variables définies</p>
+                </div>
+                <div class="validation-step">
+                    <div class="step-status success">✅ PHYSIQUE QUANTIQUE</div>
+                    <p>Équation de Schrödinger respectée</p>
+                </div>
+                <div class="validation-step">
+                    <div class="step-status success">✅ COHÉRENCE DIMENSIONNELLE</div>
+                    <p>Unités physiques correctes</p>
+                </div>
+                <div class="validation-step">
+                    <div class="step-status success">✅ CAUSALITÉ TEMPORELLE</div>
+                    <p>Aucun paradoxe détecté</p>
+                </div>
+                <div class="validation-step">
+                    <div class="step-status success">✅ ÉQUILIBRAGE JEU</div>
+                    <p>Implémentable et équilibré</p>
+                </div>
+                <div class="validation-step">
+                    <div class="step-status success">✅ CRÉATIVITÉ</div>
+                    <p>Approche innovante détectée</p>
+                </div>
+            </div>
+
+            <div class="sphinx-speech">
+                <p><strong>🦁 SPHINX QUANTIQUE :</strong></p>
+                <p><em>"IMPRESSIONNANT, MORTEL ! Ta compréhension des mystères quantiques dans le contexte de notre réalité hexagonale est remarquable ! Tu as montré une maîtrise exceptionnelle de l'interaction entre l'Œil de Wigner et les zones de causalité flexible !"</em></p>
+            </div>
+        </div>
+
+        <!-- PHASE 5: RÉSULTATS ET RÉCOMPENSES -->
+        <div class="results-phase" id="results-phase" style="display: none;">
+            <div class="results-title">🏆 RÉCOMPENSES SPHINX DÉBLOQUÉES</div>
+            
+            <div class="reward-item">
+                <div>
+                    <strong>🔧 ACCÈS FORGE AVANCÉE</strong><br>
+                    <span style="color: #ccc;">Artefacts temporels de niveau Expert débloqués</span>
+                </div>
+                <div style="color: #4CAF50; font-size: 24px;">✅</div>
+            </div>
+
+            <div class="reward-item">
+                <div>
+                    <strong>🎖️ CERTIFICATION SPHINX</strong><br>
+                    <span style="color: #ccc;">SPHINX_APPROVED_EXPERT attribué</span>
+                </div>
+                <div style="color: #4CAF50; font-size: 24px;">✅</div>
+            </div>
+
+            <div class="reward-item">
+                <div>
+                    <strong>🎮 CONTENU DÉBLOQUÉ</strong><br>
+                    <span style="color: #ccc;">Mécaniques temporelles + Bases quantiques</span>
+                </div>
+                <div style="color: #4CAF50; font-size: 24px;">✅</div>
+            </div>
+
+            <div class="reward-item">
+                <div>
+                    <strong>🌟 BONUS CRÉATIVITÉ</strong><br>
+                    <span style="color: #ccc;">Badge "INNOVATIVE_PHYSICS_THINKER" obtenu</span>
+                </div>
+                <div style="color: #4CAF50; font-size: 24px;">✅</div>
+            </div>
+
+            <div class="reward-item">
+                <div>
+                    <strong>📊 PROGRESSION</strong><br>
+                    <span style="color: #ccc;">+500 XP Maîtrise Quantique, +200 XP Physique</span>
+                </div>
+                <div style="color: #4CAF50; font-size: 24px;">✅</div>
+            </div>
+
+            <div class="sphinx-speech">
+                <p><strong>🦁 SPHINX QUANTIQUE :</strong></p>
+                <p><em>"Garde cette sagesse précieusement, mortel. Les mystères de l'univers s'ouvrent devant toi. Jusqu'à notre prochaine rencontre, que la physique quantique guide tes pas !"</em></p>
+                <p style="text-align: center; font-size: 20px; margin-top: 20px;">✨ *Le Sphinx disparaît dans un tourbillon de particules quantiques* ✨</p>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="submit-button" onclick="resetDemo()" style="background: linear-gradient(45deg, #2196F3, #1976D2);">
+                    🔄 NOUVELLE RENCONTRE SPHINX
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPhase = 0;
+        const phases = ['context-phase', 'question-phase', 'answer-phase', 'validation-phase', 'results-phase'];
+
+        function updateProgress(phase) {
+            const progress = document.getElementById('progress');
+            progress.style.width = ((phase + 1) / phases.length * 100) + '%';
+        }
+
+        function showPhase(phaseIndex) {
+            phases.forEach((phase, index) => {
+                document.getElementById(phase).style.display = index <= phaseIndex ? 'block' : 'none';
+            });
+            updateProgress(phaseIndex);
+            currentPhase = phaseIndex;
+        }
+
+        function startDemo() {
+            showPhase(0);
+            setTimeout(() => showPhase(1), 2000);
+        }
+
+        function showQuestion() {
+            showPhase(1);
+        }
+
+        function showAnswer() {
+            showPhase(2);
+        }
+
+        function showValidation() {
+            showPhase(3);
+            // Animation de validation
+            setTimeout(() => {
+                const steps = document.querySelectorAll('.validation-step');
+                steps.forEach((step, index) => {
+                    setTimeout(() => {
+                        step.style.opacity = '0.5';
+                        setTimeout(() => {
+                            step.style.opacity = '1';
+                            step.style.transform = 'scale(1.05)';
+                            setTimeout(() => {
+                                step.style.transform = 'scale(1)';
+                            }, 200);
+                        }, 100);
+                    }, index * 500);
+                });
+            }, 1000);
+        }
+
+        function showResults() {
+            showPhase(4);
+        }
+
+        function resetDemo() {
+            currentPhase = 0;
+            showPhase(0);
+            document.getElementById('player-answer').value = document.getElementById('player-answer').placeholder;
+            document.getElementById('hints-display').innerHTML = '';
+        }
+
+        function submitAnswer() {
+            showValidation();
+            setTimeout(() => showResults(), 4000);
+        }
+
+        let hintsShown = 0;
+        const hints = [
+            "",
+            "💭 Indice 1 : L'hamiltonien hexagonal doit inclure les 6 voisins + le potentiel ZFC central",
+            "🔧 Indice 2 : La rétroaction causale crée un terme γ * |⟨ψ_observation|ψ_game⟩|² dans le potentiel",
+            "🎮 Indice 3 : Utilisez FOR_EACH pour les boucles sur hexagones, WHERE pour les définitions"
+        ];
+
+        function showHint(number) {
+            if (hintsShown < 3) {
+                hintsShown++;
+                document.getElementById('hints-display').innerHTML += hints[number] + '<br>';
+            }
+        }
+
+        // Démarrage automatique après 2 secondes
+        setTimeout(() => {
+            showPhase(0);
+        }, 1000);
+    </script>
+</body>
+</html> 
