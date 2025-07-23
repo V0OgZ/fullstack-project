@@ -454,7 +454,7 @@ window.conflictDetector.getStatistics()          # Conflict stats
 - Selector interface with 👁️/🙈 buttons
 - Real-time multiplayer synchronization
 
-**📁 Documentation:** [Timeline Transparency](docs/TIMELINE_TRANSPARENCY_DOCUMENTATION.md)
+**📁 Documentation:** [Timeline Transparency](docs/EN/TIMELINE_TRANSPARENCY_DOCUMENTATION.md)
 
 ### **🎯 Coordinate Fix System** ✅
 **Automatic hero position correction and intelligent centering**
@@ -500,7 +500,7 @@ window.conflictDetector.getStatistics()          # Conflict stats
 
 **📁 Documentation:** 
 - [Fog of Causality EN](docs/EN/FOG_OF_CAUSALITY_7_LEVELS_DOCUMENTATION.md)
-- [7-Level Causality Fog FR](docs/BROUILLARD_CAUSALITE_7_NIVEAUX_DOCUMENTATION.md)
+- [7-Level Causality Fog](docs/EN/FOG_OF_CAUSALITY_7_LEVELS_DOCUMENTATION.md)
 
 ### **📝 HOTS Formulas with Conditions** ✅
 **Complete documentation of IF/THEN conditions in HOTS formulas**
@@ -508,7 +508,7 @@ window.conflictDetector.getStatistics()          # Conflict stats
 - Practical examples and detailed API
 - Quantum symbols: ψ, †, Ω, ↯, ⊙, Π
 
-**📁 Documentation:** [HOTS Formulas Conditions](docs/FORMULES_HOTS_CONDITIONS_EXPLICACION.md)
+**📁 Documentation:** [HOTS Formulas Conditions](docs/EN/HOTS_FORMULAS_CONDITIONS_EXPLANATION.md)
 
 ### **🔮 Runic Symbols Port 8000** ✅
 **Floating symbols system for simple interface**
@@ -621,9 +621,9 @@ Stable Spring Boot API
 - [🎮 Jean's Help](AIDE_JEAN.md) - *91 lines quick start guide*
 
 ### **🔧 Technical Guides**
-- [📋 Complete CODEX](docs/CODEX_COMPLET_HEROES_OF_TIME.md) - *HOTS system reference*
-- [🏛️ Jean Grofignon Manifesto](docs/JEAN_GROFIGNON_MANIFESTO.md) - *Revolutionary vision*
-- [🏛️ Eternal Memento Lore](docs/LORE_MEMENTO_JEAN_ETERNAL.md) - *History and philosophy*
+- [📋 Complete CODEX](docs/EN/COMPLETE_HEROES_OF_TIME_CODEX.md) - *HOTS system reference*
+- [🏛️ Jean Grofignon Manifesto](docs/EN/JEAN_GROFIGNON_MANIFESTO.md) - *Revolutionary vision*
+- [🏛️ Eternal Memento Lore](docs/EN/MUSEUM_ARCHIVE_MASTER_COMPLETE.md) - *History and philosophy*
 
 ---
 
