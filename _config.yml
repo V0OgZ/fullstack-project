@@ -1,0 +1,20 @@
+# GitHub Pages Configuration for Heroes of Time
+theme: jekyll-theme-slate
+title: Heroes of Time
+description: A quantum temporal strategy game combining Heroes of Might & Magic 3 with advanced temporal mechanics
+show_downloads: false
+
+# Include important files
+include:
+  - README.md
+  - index.html
+  - dashboard.html
+  - docs
+
+# Exclude unnecessary files
+exclude:
+  - node_modules
+  - backend
+  - scripts
+  - "*.sh"
+  - "*.log"

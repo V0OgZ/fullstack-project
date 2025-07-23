@@ -97,6 +97,129 @@
       },
       "ownerId": "player1",
       "createdAt": "2025-01-27T10:00:00"
+    },
+    {
+      "id": "tour_ancrage_domburg",
+      "name": "Tour d'Ancrage",
+      "displayName": "🌑 Tour d'Ancrage",
+      "alias": ["Tour de Domburg", "Pilier du Flux Figé"],
+      "tier": "LEGENDARY_FIXED",
+      "type": "ANCHOR_LOCATION",
+      "category": "artifacts",
+      "powerLevel": 10,
+      "rarity": "Unique",
+      "maxUsesPerGame": 1,
+      "usesRemaining": 1,
+      "zone": "Dunes de Domburg",
+      "description": "🧱 Une tour en briques sombres, tordue par le temps, cerclée de chaînes astrales profondément enfoncées dans la roche. À son sommet, un dôme d'observation fermé par des grilles d'obsidienne. Aucun bruit. Aucun vent. Des glyphes gravés dans la pierre semblent résister à la corrosion des siècles.",
+      "lore": "Forgée à la lisière des Dunes de Domburg, la Tour fut la première tentative humaine de fixer le temps dans un monde en mouvement. Depuis, elle ne bouge plus. Et rien n'y bougera.",
+      "effects": [
+        {
+          "type": "STASIS_CAUSALE_ABSOLUE",
+          "description": "Toute action effectuée dans cette zone devient inchangeable",
+          "value": 1.0,
+          "duration": -1,
+          "radius": 5
+        },
+        {
+          "type": "BLOCAGE_EFFETS_SPATIO_TEMPORELS",
+          "description": "Pas de projection, de rewind, ni de superposition",
+          "value": 1.0,
+          "duration": -1,
+          "radius": 5
+        },
+        {
+          "type": "RALENTISSEMENT_TEMPS",
+          "description": "Toutes les actions coûtent le double de temps à l'intérieur, sauf celles liées à l'ancrage",
+          "value": 2.0,
+          "duration": -1,
+          "radius": 5
+        },
+        {
+          "type": "STASE_TOTALE",
+          "description": "Figer toute action dans l'absolu",
+          "value": 1.0,
+          "duration": 3,
+          "radius": 0,
+          "usesPerPlayer": 1
+        }
+      ],
+      "requirements": {
+        "minHeroLevel": 8,
+        "minTemporalEnergy": 10,
+        "cooldownTurns": 10
+      },
+      "specialProperties": {
+        "canBeChained": true,
+        "chainTarget": "anchor_network",
+        "description": "Le lieu peut être chaîné à d'autres objets pour former un réseau d'ancrage planétaire"
+      },
+      "gameEffects": {
+        "zoneType": "FIXED_STASIS",
+        "preventTimelineModification": true,
+        "paradoxResistance": true
+      },
+      "ownerId": null,
+      "isFixed": true,
+      "createdAt": "2025-01-27T10:00:00"
+    },
+    {
+      "id": "moulin_domburg",
+      "name": "Moulin de Domburg",
+      "displayName": "🌬️ Moulin de Domburg",
+      "alias": ["La Petite Ancre", "Roue du Vent"],
+      "tier": "RARE",
+      "type": "MINOR_ANCHOR_POINT",
+      "category": "artifacts",
+      "powerLevel": 6,
+      "rarity": "Rare",
+      "maxUsesPerGame": 5,
+      "usesRemaining": 5,
+      "zone": "Centre de Domburg",
+      "description": "🌾 Un moulin de style hollandais classique, mais figé dans une rotation paradoxale — ses ailes tournent à contre-temps. À certaines heures, on voit des miroirs temporels apparaître dans l'ombre du bâtiment, révélant des scènes du passé.",
+      "lore": "C'est dans ce moulin qu'un vieux savant de Domburg, obsédé par les tempêtes d'Histoire, a gravé la première clepsydre runique dans les meules. Depuis, les rafales ne soufflent plus comme avant.",
+      "effects": [
+        {
+          "type": "CHAMP_STABILISATION_LOCALE",
+          "description": "Les effets chaotiques (aléatoires, indéterminés) sont annulés dans un rayon de 3 cases",
+          "value": 1.0,
+          "duration": -1,
+          "radius": 3
+        },
+        {
+          "type": "CHRONO_BARRIERE",
+          "description": "Toute tentative de voyager dans le passé à proximité échoue (60% de chance)",
+          "value": 0.6,
+          "duration": -1,
+          "radius": 2
+        },
+        {
+          "type": "RITUEL_REMONTEE_DU_BLE",
+          "description": "Possibilité de restaurer une action détruite lors d'un tour précédent",
+          "value": 1.0,
+          "duration": 1,
+          "radius": 0,
+          "usesPerPlayer": 1
+        }
+      ],
+      "requirements": {
+        "minHeroLevel": 4,
+        "minTemporalEnergy": 5,
+        "cooldownTurns": 3
+      },
+      "specialProperties": {
+        "cannotBeDestroyed": true,
+        "cannotBeMoved": true,
+        "destructionConsequence": "Déclenche une faille dans le vent du temps"
+      },
+      "gameEffects": {
+        "preventChaoticEffects": true,
+        "reduceTimeTravel": 0.6,
+        "actionRestoration": true
+      },
+      "ownerId": null,
+      "isFixed": true,
+      "createdAt": "2025-01-27T10:00:00"
     }
   ],
   

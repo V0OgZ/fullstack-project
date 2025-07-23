@@ -77,7 +77,29 @@ TOTAL_TESTS=$((TOTAL_TESTS + 1))
 
 # Test des scripts de test
 echo -n "🧪 Scripts de test... "
-if [ -f "tester-quantum-ui.sh" ] && [ -f "demo-quantum-final.sh" ]; then
+if [ -f "tester-quantum-ui.sh" ] && [ -f "demo-quantum-final.sh" ] && [ -f "scripts/test-creatures-quantiques.sh" ]; then
+    echo -e "${GREEN}✅ OK${NC}"
+    PASSED_TESTS=$((PASSED_TESTS + 1))
+else
+    echo -e "${RED}❌ ÉCHEC${NC}"
+    FAILED_TESTS=$((FAILED_TESTS + 1))
+fi
+TOTAL_TESTS=$((TOTAL_TESTS + 1))
+
+# Test des créatures quantiques
+echo -n "🧚‍♀️ Créatures quantiques... "
+if [ -f "backend/src/main/resources/quantum-creatures.json" ] && [ -f "scripts/test-creatures-quantiques.sh" ]; then
+    echo -e "${GREEN}✅ OK${NC}"
+    PASSED_TESTS=$((PASSED_TESTS + 1))
+else
+    echo -e "${RED}❌ ÉCHEC${NC}"
+    FAILED_TESTS=$((FAILED_TESTS + 1))
+fi
+TOTAL_TESTS=$((TOTAL_TESTS + 1))
+
+# Test du service de traduction
+echo -n "🔮 Service de traduction... "
+if [ -f "backend/src/main/java/com/heroesoftimepoc/temporalengine/service/ScriptTranslationService.java" ] && [ -f "scripts/test-service-traduction.sh" ]; then
     echo -e "${GREEN}✅ OK${NC}"
     PASSED_TESTS=$((PASSED_TESTS + 1))
 else

@@ -271,8 +271,8 @@ main() {
         esac
         
         echo ""
-        echo -n "Appuyez sur Entrée pour continuer..."
-        read
+        echo "⏳ Pause de 3 secondes avant de continuer..."
+        sleep 3
     done
 }
 

@@ -221,6 +221,11 @@ export class ApiService {
     });
   }
 
+  // Generic API method for game script engine
+  static async makeGenericRequest(endpoint: string, options: RequestInit = {}): Promise<any> {
+    return this.makeRequest(endpoint, options);
+  }
+
   static async calculateTemporalInterference(activeZFCs: any): Promise<any> {
     return this.makeRequest('/zfc/temporal-interference', {
       method: 'POST',
@@ -228,38 +233,7 @@ export class ApiService {
     });
   }
 
-  // Castle Management
-  static async getBuildingsByCastle(castleId: string): Promise<any> {
-    return this.makeRequest(`/castles/${castleId}/buildings`);
-  }
-
-  static async getAvailableUnitsForRecruitment(castleId: string): Promise<any> {
-    return this.makeRequest(`/castles/${castleId}/units/available`);
-  }
-
-  static async getCastleBonuses(castleId: string): Promise<any> {
-    return this.makeRequest(`/castles/${castleId}/bonuses`);
-  }
-
-  static async constructBuilding(castleId: string, buildingId: string): Promise<any> {
-    return this.makeRequest(`/castles/${castleId}/buildings/${buildingId}/construct`, {
-      method: 'POST'
-    });
-  }
-
-  static async upgradeBuilding(buildingId: string, data: any): Promise<any> {
-    return this.makeRequest(`/buildings/${buildingId}/upgrade`, {
-      method: 'POST',
-      body: JSON.stringify(data)
-    });
-  }
-
-  static async recruitUnits(buildingId: string, data: any): Promise<any> {
-    return this.makeRequest(`/buildings/${buildingId}/recruit`, {
-      method: 'POST',
-      body: JSON.stringify(data)
-    });
-  }
+  // Castle Management - legacy methods (kept for compatibility)
 
   static async recruitUnitsFromGame(gameId: string, buildingId: string, data: any): Promise<any> {
     return this.makeRequest(`/games/${gameId}/buildings/${buildingId}/recruit`, {
@@ -382,17 +356,55 @@ export class ApiService {
     }
   }
 
-  // New methods for castle management
+  // Castle management methods - aligned with backend endpoints
   static async getPlayerBuildings(gameId: string, playerId: string): Promise<any> {
-    return this.makeRequest(`/games/${gameId}/players/${playerId}/buildings`);
+    // Use the actual backend endpoint
+    return this.makeRequest(`/buildings/player/${playerId}`);
   }
 
-  static async getAvailableUnits(gameId: string, playerId: string): Promise<any> {
+  static async getBuildingsByGame(gameId: string): Promise<any> {
+    return this.makeRequest(`/buildings/game/${gameId}`);
+  }
+
+  static async getCastleBuildings(castleId: string): Promise<any> {
+    return this.makeRequest(`/buildings/castle/${castleId}`);
+  }
+
+  static async getAvailableUnits(gameId: string, playerId: string, castleId?: string): Promise<any> {
+    // If castleId is provided, use castle endpoint, otherwise use game endpoint
+    if (castleId) {
+      return this.makeRequest(`/buildings/castle/${castleId}/units/available`);
+    }
     return this.makeRequest(`/games/${gameId}/players/${playerId}/units/available`);
   }
 
-  static async getUnitDetails(unitType: string): Promise<any> {
-    return this.makeRequest(`/units/${unitType}`);
+  static async getUnitDetails(unitId: string): Promise<any> {
+    return this.makeRequest(`/units/${unitId}`);
+  }
+
+  static async getCastleBonuses(castleId: string): Promise<any> {
+    return this.makeRequest(`/buildings/castle/${castleId}/bonuses`);
+  }
+
+  static async recruitUnits(buildingId: string, unitType: string, quantity: number): Promise<any> {
+    return this.makeRequest(`/buildings/${buildingId}/recruit`, {
+      method: 'POST',
+      body: JSON.stringify({ unitType, quantity })
+    });
+  }
+
+  static async constructBuilding(castleId: string, playerId: string, gameId: string, buildingType: string, positionX?: number, positionY?: number): Promise<any> {
+    return this.makeRequest(`/buildings/construct`, {
+      method: 'POST',
+      body: JSON.stringify({ castleId, playerId, gameId, buildingType, positionX, positionY })
+    });
+  }
+
+  static async upgradeBuilding(buildingId: string, playerResources?: any): Promise<any> {
+    return this.makeRequest(`/buildings/${buildingId}/upgrade`, {
+      method: 'POST',
+      body: JSON.stringify({ playerResources })
+    });
   }
 
 } 

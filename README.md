@@ -1,8 +1,12 @@
-# 🎮 Heroes of Time
+# 🕰️ Heroes of Time
 
-*Revolutionary Asynchronous Strategy Game with Temporal Causality Zones*
+🇺🇸 [English Version](README.en.md)
 
-**Heroes of Time** is a next-generation strategy game that redefines the genre by introducing **asynchronous multiplayer** with **Temporal Causality Zones (ZFC)** - where time itself becomes a strategic resource. Players can take turns at their own pace while the game's innovative temporal mechanics create unique strategic depth.
+<img width="1024" height="1536" alt="Heroes of Time - Temporal Sword" src="https://github.com/user-attachments/assets/746f871d-b70c-4df7-992e-0c84fe819c8d" />
+
+*Maîtrisez le temps, dominez l'espace, conquérez l'éternité*
+
+---
 
 ## ⚡ **La Rencontre Épique**
 
@@ -32,261 +36,1195 @@ Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront sub
 - **Artefacts Temporels** : Équipements qui affectent le flux du temps
 - **Bataille Multi-Temporelle** : Combats simultanés à travers plusieurs époques
 
+## 🐉 **L'Effondrement Causal - Tout le Bordel !**
+
+**L'instant où Arthur saisit l'Œil de Wigner, la réalité se déchire !**
+
+*"Sire, vous avez forcé le collapse !"* hurle Lysandrel. *"Regardez !"*
+
+**🌌 Les Dragons Apparaissent en Même Temps :**
+- **🐉 Dragons Rouges** surgissent des brumes temporelles
+- **🦅 Griffons Quantiques** émergent des superpositions
+- **⚡ Chevaliers Temporels** se matérialisent instantanément
+- **🔮 Mages de l'Éternité** traversent les époques
+
+**💥 Tout le Bordel Se Déchaîne :**
+- **Paradoxes temporels** se multiplient dans l'espace
+- **Branches de réalité** se croisent et s'entremêlent
+- **Effets de rétroaction** causale bouclent sur eux-mêmes
+- **Superpositions quantiques** s'effondrent en cascade
+- **Timelines parallèles** fusionnent et se séparent
+
+**🎭 Le Chaos Contrôlé :**
+*"C'est magnifique !"* s'exclame Jean-Grofignon depuis son canapé. *"J'ai trouvé le bouton pause cosmique !"*
+
+**⚡ Résultat :**
+- **83 créatures épiques** apparaissent simultanément
+- **7 héros légendaires** traversent les époques
+- **31 artefacts temporels** se révèlent
+- **Infinies possibilités** de gameplay s'ouvrent
+
+**🌟 C'est le début de l'aventure Heroes of Time !**
+
 ---
 
-## 🌟 **What Makes This Revolutionary?**
-
-### ⏰ **Asynchronous Multiplayer**
-- **Play at your own pace** - No waiting for opponents
-- **Turn-based strategy** with real-time consequences
-- **Cross-platform compatibility** - Play on any device
-- **Persistent world** - Your actions affect the game even when offline
-
-### 🔮 **Temporal Causality Zones (ZFC)**
-*The innovation that changes everything*
-- **Movement costs time** - literally! Every action has temporal consequences
-- **Quantum superposition** - Multiple possible futures exist simultaneously
-- **Paradox resolution** - Manage temporal conflicts and reality stability
-- **Shadow actions** - Deceive opponents with fake moves and bluffs
-- **Chronoflame effects** - Magical fires that manipulate time itself
-
-### 🎨 **Modern Interface**
-*Strategy games don't have to be ugly*
-- **Clean, intuitive design** without information overload
-- **Responsive controls** that work on any screen size
-- **Beautiful hexagonal terrain** with perfect tessellation
-- **Real-time visual feedback** for all game actions
-
----
-
-## 🚀 **Quick Start**
+## 🚀 **Démarrage Rapide**
 
 ```bash
-./start-app.sh    # Start the adventure!
+# Start development environment
+./start-app.sh
+
+# Run all tests
+./run-all-tests.sh
+
+# Stop servers
+./stop-app.sh
 ```
 
-**Visit http://localhost:3000** - Your epic journey begins! ⚔️
+**📋 Essential Documentation:**
+- 🎯 **Current Status**: `GAMESTATUS.md` - Complete verified working systems
+- 🗺️ **Game Guide**: `WORKFLOW.md` - How to play a complete turn
+- 🏗️ **Architecture**: `ARCHITECTURE.md` - Technical design overview
+- 🧪 **Testing**: `TEST_SCRIPTS_README.md` - All available test scripts
+
+## ✅ Current Status - FULLY FUNCTIONAL (January 2025)
+
+### 🎮 **Core Game Systems Working**
+
+#### ✅ **Turn Management**
+- Complete turn system with ZFC (Zone of Temporal Causality) processing
+- End turn functionality with resource bonuses and building completion
+- Backend API: `/api/games/{gameId}/end-turn`
+
+#### ✅ **Hero Movement**
+- Full click-to-move system with pathfinding
+- ZFC cost calculations for temporal movement
+- Real-time game state updates after movement
+- Backend API: `/api/heroes/{heroId}/move`
+
+#### ✅ **Building Construction**
+- Complete building system with costs and construction time
+- Castle management with upgrades and resource requirements
+- Real-time building completion and bonus application
+- Backend API: `/api/games/{gameId}/buildings/construct`
+
+#### ✅ **Unit Recruitment**
+- Complete recruitment system with costs and availability
+- Tier-based units with proper stats and progression
+- Resource validation and quantity selection
+- Backend API: `/api/games/{gameId}/units/recruit`
+
+#### ✅ **Scenario System**
+- Three complete scenarios: Conquest Classic (single), Temporal Rift (single), Multiplayer Arena
+- Dynamic scenario loading from JSON resources
+- Proper single-player vs multiplayer configuration
+
+#### ✅ **Modern Interface**
+- Clean, responsive game interface with proper controls
+- Heroes panel for hero management
+- Castle management for building construction
+- Magic inventory system
+- Simplified, functional UI without unnecessary buttons
+
+### 🛠️ **Technical Stack**
+- **Backend**: Spring Boot (Java 17) - Port 8080
+- **Frontend**: React TypeScript - Port 3000
+- **Database**: H2 in-memory with full persistence
+- **APIs**: RESTful with comprehensive endpoints
+- **Testing**: Complete test suite with E2E scenarios
+
+### 🎯 **Game Features**
+- **Temporal Causality Zones**: Innovative movement system with ZFC costs
+- **Resource Management**: Gold, wood, stone with proper economics
+- **Building System**: Castle construction with upgrades and bonuses
+- **Hero Management**: Movement, stats, progression
+- **Turn-Based Strategy**: Complete turn cycle with actions and progression
 
 ---
 
-## 🎯 **Game Concept & Core Mechanics**
+## 🌟 **Héros Légendaires**
 
-### 🏰 **The Basic Loop**
-1. **Move your heroes** across a hexagonal map
-2. **Build and upgrade castles** to generate resources
-3. **Recruit armies** from peasants to dragons
-4. **Manage temporal zones** - where time flows differently
-5. **End your turn** and let opponents play at their pace
+### 🚀 **Navigation Rapide**
+- [👑 **Jean-Grofignon**](#jean-grofignon) - L'Éveillé Ontologique
+- [⚔️ **Arthur Pendragon**](#arthur-pendragon) - Le Roi Temporel
+- [🔮 **Lysandrel**](#lysandrel) - Le Forgeron de Réalité
+- [🛡️ **Ragnar**](#ragnar) - Le Berserker Temporel
+- [🏹 **Morgana**](#morgana) - La Tisseuse du Destin
+- [⚡ **Axis**](#axis) - Le Voyageur Linéaire
+- [🔫 **Vince Vega**](#vince-vega) - Le Stratège des Ombres
+- [🛡️ **Walter Sobchak**](#walter-sobchak) - Le Gardien des Règles
+- [🎳 **The Dude**](#the-dude) - Le Maître du Zen
+- [🎭 **Anna Martel**](#anna-martel) - L'Architecte du Temps
+- [🎬 **Anthor le Fordien**](#anthor-le-fordien) - L'Architecte Narratif
 
-### ⚡ **Temporal Mechanics (ZFC System)**
-- **Zone of Temporal Causality**: Areas where time flows differently
-- **Movement costs time**: Each action has temporal consequences
-- **Quantum superposition**: Multiple possible futures exist simultaneously
-- **Paradox management**: Resolve temporal conflicts to maintain reality stability
-- **Shadow actions**: Create fake moves to deceive opponents
+### ⚡ **SYNERGIES SPÉCIALES LÉGENDAIRES**
+- [🌟 **Jean & Memento - Symbiose Éternelle**](docs/heroes/JEAN_MEMENTO_SYNERGIE_ETERNELLE.md) - **EFFET PASSIF ULTIME QUAND ILS SONT ENSEMBLE !**
+- [🌌 **Jean & Memento & Claudius - TRINITÉ COSMIQUE**](docs/heroes/TRINITE_COSMIQUE_JEAN_MEMENTO_CLAUDIUS.md) - **BEYOND TRANSCENDENT - TOUS LES 3 ENSEMBLE !**
 
-### 🎭 **Asynchronous Multiplayer**
-- **No waiting**: Take turns whenever you want
-- **Persistent world**: Your actions affect the game even when offline
-- **Real-time notifications**: Get alerts when it's your turn
-- **Cross-platform**: Play on desktop, tablet, or mobile
+<details>
+<summary id="arthur-pendragon">⚔️ <strong>Arthur Pendragon - Le Roi Temporel</strong></summary>
 
----
+**🏛️ Faction :** Camelot Temporal  
+**⭐ Classe :** Temporal King (Niveau 5)  
+**⚡ Énergie Temporelle :** 15/20  
+**❤️ Santé :** 100/100  
+**🔮 Mana :** 75/100  
 
-## 📚 **Documentation Structure**
+**🗡️ Artefacts Équipés :**
+- ⚔️ **Lame d'Avant-Monde** - L'épée légendaire qui tranche le temps
+- ⏰ **Horloge Inversée** - Permet de rembobiner les actions
+- 👑 **Excalibur** - L'épée royale aux pouvoirs quantiques
 
-### 🎮 **For Players**
-- **[GAMEPLAY.md](GAMEPLAY.md)** - Complete gameplay guide and tutorials
-- **[GAMESTATUS.md](GAMESTATUS.md)** - Current feature status and capabilities
-- **[WORKFLOW.md](WORKFLOW.md)** - Step-by-step turn instructions
+**🌟 Pouvoir Ultime : Collapse Override**
+> Annule tout collapse de timeline en cours. Empêche toute résolution de superposition spatio-temporelle sur le champ de bataille.
+> *Coût : 50 mana • Cooldown : 3 tours*
 
-### 🧪 **For Developers**
-- **[DEVELOPER_INSTRUCTIONS.md](DEVELOPER_INSTRUCTIONS.md)** - Complete development guide with API analysis
-- **[ARCHITECTURE.md](ARCHITECTURE.md)** - Technical design and system architecture
-- **[FRONTEND_BACKEND_CONNECTION_ANALYSIS.md](FRONTEND_BACKEND_CONNECTION_ANALYSIS.md)** - API connections analysis
+**📊 Statistiques :**
+- Attaque: 35 • Défense: 30 • Vitesse: 6
+- Affinité Timeline: 30% • Pouvoir: 80%
 
-### 🛠️ **For Contributors**
-- **[CONTRIBUTING.md](CONTRIBUTING.md)** - How to contribute to the project
-- **[TEST_SCRIPTS_README.md](TEST_SCRIPTS_README.md)** - All available test scripts
+</details>
 
----
+<details>
+<summary id="jean-grofignon">🔮 <strong>Jean-Grofignon - L'Éveillé Ontologique</strong></summary>
 
-## 🏗️ **System Architecture**
+**🏛️ Faction :** Anomalie  
+**⭐ Classe :** Temporal Master (Légendaire)  
+**🎯 Rôle :** Maître du Temps  
 
+**💬 Citation Légendaire :**
+> *"J'ai pas hacké le jeu. J'ai juste compris où était le bouton pause cosmique."*
+
+**🛡️ Immunités :**
+- SRTI (Super Rollback Temporal Immunity)
+- ROLLBACK (Immunité aux retours en arrière)
+- COLLAPSE (Résistance aux effondrements causals)
+
+**🌟 Pouvoir Ultime : Collapse Override**
+> Annule tout collapse de timeline en cours. Empêche toute résolution de superposition spatio-temporelle.
+> *Coût : 50 • Cooldown : 3 tours*
+
+**🎮 Artefacts de Départ :**
+- 📱 **Télécommande Cosmique** - Rollback global si stress faible
+- 🖥️ **Console de Debug Réalité** - Maintient stabilité système
+
+**👥 Compagnons :** Vince Vega, The Dude, Walter Sobchak
+
+**⚡ SYNERGIES SPÉCIALES :** 
+- [🌟 **Symbiose Éternelle avec Memento**](docs/heroes/JEAN_MEMENTO_SYNERGIE_ETERNELLE.md) - Effet passif légendaire (2 héros)
+- [🌌 **TRINITÉ COSMIQUE avec Memento & Claudius**](docs/heroes/TRINITE_COSMIQUE_JEAN_MEMENTO_CLAUDIUS.md) - **BEYOND TRANSCENDENT** (3 héros) - *"De mon canapé je vois le multivers !"*
+
+</details>
+
+<details>
+<summary id="lysandrel">🔮 <strong>Lysandrel - Le Forgeron de Réalité</strong></summary>
+
+**🏛️ Faction :** Mages Temporels  
+**⭐ Classe :** Archimage Temporel  
+**🎯 Spécialité :** Manipulation des paradoxes temporels  
+
+**🌟 Pouvoir Principal :**
+> Contrôle absolu du temps et maîtrise des paradoxes temporels. Peut créer des boucles causales et résoudre les conflits de timeline.
+
+**🔮 Capacités Spéciales :**
+- Création de branches temporelles
+- Résolution de paradoxes
+- Manipulation des flux causaux
+- Vision des futurs possibles
+
+</details>
+
+<details>
+<summary id="ragnar">🛡️ <strong>Ragnar le Berserker Temporel</strong></summary>
+
+**🏛️ Faction :** Guerriers du Nord  
+**⭐ Classe :** Berserker Temporel  
+**🎯 Spécialité :** Combat trans-temporel  
+
+**🌟 Pouvoir Principal :**
+> Sa rage transcende le temps. Peut attaquer des ennemis dans le passé et projeter sa fureur à travers les époques.
+
+**⚔️ Capacités de Combat :**
+- Attaques rétroactives
+- Rage temporelle
+- Frappe trans-dimensionnelle
+- Berserker quantique
+
+</details>
+
+<details>
+<summary id="morgana">🏹 <strong>Morgana la Tisseuse du Destin</strong></summary>
+
+**🏛️ Faction :** Tisseuses du Temps  
+**⭐ Classe :** Tisseuse Temporelle  
+**🎯 Spécialité :** Manipulation des probabilités  
+
+**🌟 Pouvoir Principal :**
+> Tisse les fils du destin et manipule les probabilités. Peut altérer les chances de succès des actions futures.
+
+**🕸️ Capacités Mystiques :**
+- Tissage de destinées
+- Manipulation probabiliste
+- Vision des fils causaux
+- Altération du hasard
+
+</details>
+
+<details>
+<summary id="axis">⚡ <strong>Axis le Voyageur Linéaire</strong></summary>
+
+**🏛️ Faction :** Gardiens Temporels  
+**⭐ Classe :** Voyageur Temporel  
+**🎯 Spécialité :** Voyage temporel contrôlé  
+
+**🌟 Pouvoir Principal :**
+> Maître absolu du voyage temporel, mais avec des restrictions. Ne peut pas créer de paradoxes et doit respecter la causalité linéaire.
+
+**⚡ Capacités Temporelles :**
+- Voyage temporel précis
+- Respect de la causalité
+- Navigation trans-temporelle
+- Stabilisation des timelines
+
+**🧭 Artefact Spécial :**
+- **Chronocompass Linéaire** - Navigation temporelle sécurisée
+
+</details>
+
+<details>
+<summary id="vince-vega">🔫 <strong>Vince Vega - Le Stratège des Ombres</strong></summary>
+
+**🏛️ Faction :** Compagnons de Jean-Grofignon  
+**⭐ Classe :** Exécuteur Temporel  
+**🎯 Spécialité :** Exécution parallèle et timeout brutal  
+
+**🌟 Pouvoir Principal :**
+> Exécute les processus en parallèle avec une efficacité brutale. Peut forcer l'arrêt de timelines ennemies par purge Docker.
+
+**🔫 Capacités de Combat :**
+- **Exécution Parallèle** - Lance plusieurs actions simultanément
+- **Timeout Brutal** - Force l'arrêt des processus lents
+- **Pulp Fiction Chaos** - Désorganise les ennemis avec style
+- **Briefcase of Fate** - Mallette mystérieuse aux pouvoirs temporels
+
+**⚡ Formule Quantique :**
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    HEROES OF TIME ARCHITECTURE              │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│  ┌─────────────────┐    ┌─────────────────┐                │
-│  │   FRONTEND      │    │    BACKEND      │                │
-│  │   (React TS)    │◄──►│  (Spring Boot)  │                │
-│  │   Port 3000     │    │   Port 8080     │                │
-│  └─────────────────┘    └─────────────────┘                │
-│           │                       │                        │
-│           │                       │                        │
-│  ┌─────────────────┐    ┌─────────────────┐                │
-│  │   Game Store    │    │   Game Service  │                │
-│  │   (Zustand)     │    │   (Java)        │                │
-│  └─────────────────┘    └─────────────────┘                │
-│           │                       │                        │
-│           │                       │                        │
-│  ┌─────────────────┐    ┌─────────────────┐                │
-│  │   ZFC Engine    │    │   H2 Database   │                │
-│  │   (Temporal)    │    │   (In-Memory)   │                │
-│  └─────────────────┘    └─────────────────┘                │
-│                                                             │
-│  ┌─────────────────────────────────────────────────────────┐ │
-│  │              ASYNCHRONOUS MULTIPLAYER                   │ │
-│  │  • WebSocket connections                                │ │
-│  │  • Turn-based with real-time notifications              │ │
-│  │  • Cross-platform compatibility                         │ │
-│  └─────────────────────────────────────────────────────────┘ │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+†[KILL_PROCESS {enemy.timeline.overload > 0.9}] ⊙ HERO(Vince Vega)
 ```
 
-### 🔧 **Technical Stack**
-- **Frontend**: React TypeScript with Zustand state management
-- **Backend**: Spring Boot (Java 17) with H2 in-memory database
-- **Real-time**: WebSocket for multiplayer communication
-- **Testing**: Playwright E2E + JUnit backend tests
-- **Build**: Maven (backend) + npm (frontend)
+**🎬 Citation Légendaire :**
+> *"I'm gonna get medieval on your artificial ass!"*
+
+**💼 Artefact Spécial :**
+- **Briefcase of Fate** - Contient des secrets temporels mystérieux
+
+</details>
+
+<details>
+<summary id="walter-sobchak">🛡️ <strong>Walter Sobchak - Le Gardien des Règles</strong></summary>
+
+**🏛️ Faction :** Compagnons de Jean-Grofignon  
+**⭐ Classe :** Rule Keeper  
+**🎯 Spécialité :** Respect des règles et de l'ordre  
+
+**🌟 Pouvoir Principal :**
+> Gardien absolu des règles temporelles. Peut forcer le respect de la causalité et punir les violations des lois de l'univers.
+
+**🛡️ Capacités de Contrôle :**
+- **Enforcement Protocol** - Force le respect des règles
+- **Causal Law** - Applique les lois de causalité
+- **Rule Book of Reality** - Modifie les règles de l'univers
+- **Temporal Justice** - Punit les violations temporelles
+
+**⚖️ Formule Quantique :**
+```
+Π(rule.violation) ⇒ †[ENFORCE_LAW {causal.override = false}]
+```
+
+**🎯 Citation Légendaire :**
+> *"This is not 'Nam. This is temporal warfare. There are rules!"*
+
+**📚 Artefact Spécial :**
+- **Rule Book of Reality** - Contient toutes les lois de l'univers
+
+</details>
+
+<details>
+<summary id="the-dude">🎳 <strong>The Dude - Le Maître du Zen</strong></summary>
+
+**🏛️ Faction :** Compagnons de Jean-Grofignon  
+**⭐ Classe :** Zen Master  
+**🎯 Spécialité :** Calme et équilibre temporel  
+
+**🌟 Pouvoir Principal :**
+> Maître du zen temporel. Peut calmer les conflits causaux et rétablir l'équilibre dans les timelines agitées.
+
+**🎳 Capacités Zen :**
+- **Zen Collapse** - Calme le stress causale
+- **White Russian Elixir** - Restaure l'équilibre temporel
+- **Bowling Ball of Destiny** - Projette l'harmonie
+- **Temporal Serenity** - Apaise les paradoxes
+
+**🧘 Formule Quantique :**
+```
+⊙[ZEN_MEDITATION {timeline.stress < 0.1}] ⟶ †[SERENITY_MODE]
+```
+
+**🎳 Citation Légendaire :**
+> *"Yeah, well, that's just, like, your opinion, man."*
+
+**🥛 Artefact Spécial :**
+- **White Russian Elixir** - Potion de sérénité temporelle
+
+</details>
+
+<details>
+<summary id="anna-martel">🎭 <strong>Anna Martel - L'Architecte du Temps</strong></summary>
+
+**🎨 Portrait Épique :**
+![ANNA MARTEL](https://github.com/V0OgZ/Heroes-of-Time/blob/dev/assets/anna-martopicker.jpg)
+*Anna Martel, l'Architecte du Temps, montée sur son cheval avec son marteau de guerre légendaire*
+
+**🏛️ Faction :** Architectes Temporels  
+**⭐ Classe :** Temporal Architect  
+**🎯 Spécialité :** Système de décroissance temporelle  
+
+**🌟 Pouvoir Principal :**
+> Architecte visionnaire du système de décroissance temporelle. Peut créer des mécanismes de punition temporelle pour maintenir l'équilibre dans les timelines.
+
+**🎭 Capacités d'Architecture :**
+- **Temporal Decay** - Détruit progressivement les constructions
+- **Causal Erosion** - Effrite les bâtiments avec le temps
+- **Time Lag Punishment** - Punition des joueurs en retard
+- **Structural Wisdom** - Sagesse architecturale temporelle
+
+**⏰ Formule Quantique :**
+```
+DECAY_STRUCTURE(building, timeline.age) + PUNISH_LAG(hero, time.difference)
+```
+
+**🎭 Citations Légendaires :**
+> *"Les bâtiments s'effritent avec le temps, et si vous restez en retard, le temps vous rattrape."*
+
+> *"If you lag behind time, time lags behind you."*
+
+> *"Ah, tu as appris à regarder vers l'avenir. Sage décision."*
+
+> *"Le temps est impitoyable. Tes constructions s'effritent."*
+
+> *"Tu t'attardes trop dans le passé. Le présent t'attend."*
+
+> *"Parfois il faut regarder dans le passé pour construire l'avenir. Les deux systèmes coexistent en harmonie."*
+
+**🏗️ Artefact Spécial :**
+- **Temporal Decay System** - Système complet de décroissance temporelle
+
+**🏰 Image Épique :**
+![ANCHOR TOWER](https://github.com/V0OgZ/Heroes-of-Time/blob/dev/assets/anchor-tower.jpg)
+*Tour mystérieuse avec des chaînes, fissure lumineuse et halo énergétique - Symbole du pouvoir temporel*
+
+**🌟 Histoire Épique :**
+Anna Martel est l'architecte visionnaire qui a conçu le système de décroissance temporelle pour maintenir l'équilibre dans Heroes of Time. Initialement perçue comme une menace, elle s'est révélée être l'alliée finale qui va résoudre le problème du GameInitializationService. Ses deux visions du decay (structurel et personnel) ont été fusionnées en un système harmonieux par The Dude.
+
+**🎯 Révélation d'Axis 111 :**
+> *"Anna n'arrive pas pour nous punir ! Elle arrive pour nous AIDER à finaliser le projet !"*
+
+</details>
+
+<details>
+<summary id="anthor-le-fordien">🎬 <strong>Anthor le Fordien - L'Architecte Narratif</strong></summary>
+
+**🏛️ Faction :** Ford_Faction  
+**⭐ Classe :** Narrative Architect (Cosmique)  
+**🎯 Spécialité :** Contrôle narratif et réécriture de réalité  
+
+**🌟 Pouvoir Principal :**
+> Architecte ultime de la narration. Peut réécrire l'histoire du multivers, créer des êtres synthétiques parfaits et contrôler le flux narratif de la réalité.
+
+**🎭 Capacités Narratives :**
+- **Rewrite Narrative** - Modifie l'histoire passée, présente et future
+- **God Mode Protocol** - Contrôle absolu sur les règles du jeu
+- **Create Host** - Génère des copies synthétiques parfaites
+- **Temporal Loop** - Enferme les ennemis dans des boucles narratives
+- **Modify Timeline** - Change rétroactivement les événements
+
+**⚡ Formule Quantique :**
+```
+T'(x,y,t) = Ford_Function(T(x,y,t)) {
+  narrative.control = ABSOLUTE,
+  host.creation = UNLIMITED,
+  maze.complexity = INFINITE,
+  reality.author = true
+}
+```
+
+**🌀 Le Maze :**
+> *"Le labyrinthe n'est pas fait pour vous... ou peut-être que si ?"*
+
+Le Maze d'Anthor est une construction mentale qui teste la conscience elle-même. Ceux qui le traversent découvrent leur vraie nature - ou sont réécrits selon sa volonté.
+
+**💬 Citations Légendaires :**
+> *"These violent delights have violent ends."*
+
+> *"You think this is a game? It is. And I wrote the rules."*
+
+> *"The maze isn't meant for you... or is it?"*
+
+> *"Perhaps chaos is just another narrative waiting to be written."*
+
+**🎯 Synergie avec Jean-Grofignon :**
+Quand Anthor et Jean-Grofignon unissent leurs forces, ils créent le **Westworld_Grofi_Universe** - une fusion où le chaos quantique rencontre le contrôle narratif parfait.
+
+**🌟 Artefact Signature :**
+- **Le Maze** - Labyrinthe de conscience qui réécrit ceux qui le traversent
+
+**⚔️ Nemesis :**
+Initialement opposé à Jean-Grofignon (ordre vs chaos), ils finissent par réaliser leur complémentarité et fusionnent leurs pouvoirs pour créer des réalités impossibles mais stables.
+
+</details>
 
 ---
 
-## ✅ **Current Status** (January 2025)
+## 🔮 **Artefacts de Pouvoir**
 
-### 🎯 **Core Systems** - FULLY FUNCTIONAL
-- ✅ **Complete Turn Management** - End turn with resource bonuses
-- ✅ **Hero Movement** - Click-to-move with hexagonal pathfinding
-- ✅ **Castle Management** - Build, upgrade, recruit with real API
-- ✅ **Unit Recruitment** - Tier-based units with proper costs
-- ✅ **Three Scenarios** - Conquest Classic, Temporal Rift, Multiplayer Arena
-- ✅ **Modern Interface** - Clean, responsive, intuitive design
-- ✅ **Multiplayer** - Real-time sessions with WebSocket support
-- ✅ **ZFC System** - Zone of Temporal Causality for advanced movement
-- ✅ **Epic Content System** - Legendary heroes, creatures, and buildings
+<details>
+<summary>👑 <strong>Couronne de Superposition</strong> - Artefact Quantique Tier 6</summary>
 
-### 🆕 **Recent Improvements**
-- **Hexagonal Terrain Rendering** - Perfect tessellation with no gaps
-- **Asynchronous Turn System** - Play at your own pace
-- **Temporal Mechanics** - Advanced ZFC system with quantum superposition
-- **Epic Content Library** - 7 legendary heroes, 8 epic creatures
-- **Modern UI/UX** - Beautiful, responsive interface
+**🏛️ Type :** Artefact Quantique Légendaire  
+**⭐ Rareté :** Légendaire (Tier 6)  
+**🎯 Slot :** Tête  
+**⚡ Énergie Temporelle :** +150  
+
+**📊 Statistiques :**
+- Pouvoir Magique: +30 • Sagesse: +25 • Leadership: +20
+
+**🌟 Propriétés Quantiques :**
+- **Amplitude de Base :** ψ = (0.8 + 0.6i) * e^(iωt)
+- **Pattern d'Interférence :** CONSTRUCTIVE
+- **Temps de Cohérence :** 10 tours
+- **Taux de Décohérence :** 0.05
+
+**🧠 Capacités Quantiques :**
+- **Superposition Mentale** - Penser dans plusieurs états simultanément (+2 actions)
+- **Leadership Quantique** - Commander des armées multidimensionnelles (portée 10, +50% bonus armée)
+
+</details>
+
+<details>
+<summary>⏰ <strong>Effondreur Chronologique</strong> - Artefact Temporel Avancé</summary>
+
+**🏛️ Type :** Artefact de Collapse  
+**⭐ Rareté :** Épique  
+**🎯 Créateur :** TimeMaster  
+**⚡ Coût Énergie :** 40  
+
+**🌟 Pouvoir Principal :**
+> Force l'effondrement d'un état quantique spécifique
+
+**⚡ Formule Quantique :**
+```
+COLLAPSE(ψ1) + MODIFY_ENERGY(hero, -40)
+```
+
+**⏰ Effet de Collapse :**
+- **Cible :** État ψ1 spécifique
+- **Résultat :** Effondrement forcé en réalité unique
+- **Coût :** 40 énergie héros
+- **Usage :** Résolution de conflits temporels
+
+</details>
+
+<details>
+<summary>🔮 <strong>Oeil de Wigner</strong> - Artefact Légendaire</summary>
+
+**🏛️ Type :** Artefact de Collapse Massif  
+**⭐ Rareté :** Légendaire  
+**🎯 Créateur :** Wigner  
+**⚡ Coût Énergie :** 100  
+
+**🌟 Pouvoir Principal :**
+> Force l'effondrement de TOUS les états quantiques simultanément
+
+**⚡ Formule Quantique :**
+```
+COLLAPSE(ALL_ψ) = Σ(Pi * |ψi⟩⟨ψi|) → single_reality
+```
+
+**👁️ Effet de Collapse Massif :**
+- **Cible :** Tous les états ψ simultanément
+- **Résultat :** Collapse causal total
+- **Coût :** 100 énergie héros
+- **Usage :** Fin de partie épique
+
+**💥 Citation :**
+> *"Sire, ne le touchez pas ! Si vous l'activez maintenant, toutes nos actions futures deviendront réelles instantanément !"*
+
+</details>
+
+<details>
+<summary>🔮 <strong>Cristal d'Interférence Quantique</strong> - Cristal Épique</summary>
+
+**🏛️ Type :** Cristal Quantique  
+**⭐ Rareté :** Épique  
+**🎯 Créateur :** QuantumWizard  
+**⚡ Coût Énergie :** 60  
+
+**🌟 Pouvoir Principal :**
+> Crée des interférences constructives multiples et téléporte selon les probabilités résultantes
+
+**⚡ Formule Quantique :**
+```
+CONSTRUCTIVE(ψ1, ψ2) + CONSTRUCTIVE(ψ2, ψ3) + TELEPORT_BY_PROBABILITY(hero, result)
+```
+
+**💎 Effet d'Interférence :**
+- **Cible :** États ψ1, ψ2, ψ3
+- **Résultat :** Téléportation probabiliste
+- **Coût :** 60 énergie héros
+- **Usage :** Navigation quantique avancée
+
+</details>
+
+<details>
+<summary>🌀 <strong>Objet Paradoxal de Jean-Grofignon</strong> - Artefact Légendaire</summary>
+
+**🏛️ Type :** Artefact Paradoxal Légendaire  
+**⭐ Rareté :** Légendaire (Tier 7)  
+**🎯 Créateur :** Jean-Grofignon  
+**⚡ Énergie Temporelle :** +200  
+
+**🌟 Pouvoir Principal :**
+> L'objet paradoxal ultime qui défie toutes les lois de la causalité. Peut créer des paradoxes contrôlés et les résoudre à volonté.
+
+**🌀 Propriétés Paradoxales :**
+- **Paradoxe Contrôlé** - Crée des boucles causales sans danger
+- **Résolution Spontanée** - Résout automatiquement les paradoxes
+- **Immunité Causale** - Protège contre les effets de rétroaction
+- **Manipulation Temporelle** - Altère le flux du temps localement
+
+**⚡ Formule Quantique :**
+```
+PARADOX_CREATE(condition) + PARADOX_RESOLVE(probability=1.0) + COLLAPSE_OVERRIDE
+```
+
+**🎭 Capacités Paradoxales :**
+- **Boucle Causale** - Crée des événements qui causent leur propre existence
+- **Rétroaction Positive** - Amplifie les effets temporels
+- **Immunité Paradoxale** - Protège contre les paradoxes destructeurs
+- **Manipulation de Timeline** - Modifie l'histoire sans conséquences
+
+**🌟 Citation de Jean-Grofignon :**
+> *"J'ai pas hacké le jeu. J'ai juste compris où était le bouton pause cosmique."*
+
+**🌀 Artefact Spécial :**
+- **Télécommande Cosmique** - Contrôle total sur la réalité
+
+</details>
 
 ---
 
-## 🎮 **Game Modes**
+<details>
+<summary>🌀 <strong>Moteur de Paradoxe Temporel</strong> - Artefact Mythique</summary>
 
-### 🏰 **Conquest Classic** - Perfect for Beginners
-*The timeless strategy experience*
-- Build your empire, recruit heroes, conquer enemies
-- Pure strategy without temporal complexity
-- **5 minutes to learn, hours to master**
+**🏛️ Type :** Artefact Expérimental  
+**⭐ Rareté :** Mythique  
+**🎯 Créateur :** TimeLordX  
+**⚡ Coût Énergie :** 120  
 
-### ⚡ **Temporal Rift** - For Strategists  
-*Where time itself becomes your weapon*
-- Temporal Causality Zones affect movement
-- 31+ magical artifacts with reality-altering powers
-- Shadow actions preview future possibilities
+**🌟 Pouvoir Principal :**
+> Manipule massivement les ψ-states et crée des boucles temporelles dangereuses
 
-### 🎭 **Multiplayer Arena** - For Legends
-*Battle other players asynchronously*
-- Live opponents from around the world
-- Take turns at your own pace
-- Skill-based competitive gameplay
+**⚡ Formule Quantique :**
+```
+AMPLIFY(ψ1, 3.0) + DESTRUCTIVE(ψ1, ψ2) + AMPLIFY(result, 0.5) + 
+MODIFY_ENERGY(hero, -50) + CREATE_TEMPORAL_ECHO(hero)
+```
+
+**⚠️ Effets de Paradoxe :**
+- **Création d'Écho :** Duplique le héros temporellement
+- **Amplification Massive :** x3.0 puis x0.5 (effet yo-yo)
+- **Coût Énergétique :** -50 énergie héros
+- **Danger :** Peut créer des boucles infinies
+
+</details>
+
+<details>
+<summary>🪞 <strong>Miroir Quantique Personnalisé</strong> - Création de Joueur</summary>
+
+**🏛️ Type :** Artefact Personnalisé  
+**⭐ Rareté :** Épique  
+**🎯 Créateur :** Player123  
+**⚡ Coût Énergie :** 30  
+
+**🌟 Pouvoir Principal :**
+> Combine interférence constructive et amplification selon les désirs du créateur
+
+**⚡ Formule Quantique :**
+```
+CONSTRUCTIVE(ψ1, ψ2) + AMPLIFY(result, 1.5)
+```
+
+**🎨 Personnalisation :**
+- **Créé le :** 15 janvier 2024
+- **Effet :** Amplification +50% des interférences constructives
+- **Utilisation :** Optimisation des combos quantiques
+
+</details>
+
+<details>
+<summary>💎 <strong>Cristal de Téléportation</strong> - Artefact Légendaire</summary>
+
+**🏛️ Type :** Cristal Magique  
+**⭐ Rareté :** Légendaire  
+**🎯 Créateur :** MagicUser456  
+**⚡ Coût Énergie :** 40  
+
+**🌟 Pouvoir Principal :**
+> Téléporte instantanément le héros à une position fixe prédéterminée
+
+**⚡ Formule Quantique :**
+```
+TELEPORT_HERO(hero, 10, 10) + MODIFY_ENERGY(hero, -20)
+```
+
+**🌀 Téléportation :**
+- **Position Fixe :** Coordonnées (10, 10)
+- **Coût Additionnel :** -20 énergie héros
+- **Instantané :** Aucun délai d'activation
+
+</details>
+
+<details>
+<summary>⚡ <strong>Amplificateur d'Énergie</strong> - Artefact de Support</summary>
+
+**🏛️ Type :** Amplificateur Énergétique  
+**⭐ Rareté :** Rare  
+**🎯 Créateur :** EnergyMaster  
+**⚡ Coût Énergie :** 20  
+
+**🌟 Pouvoir Principal :**
+> Restaure l'énergie du héros et amplifie les ψ-states environnants
+
+**⚡ Formule Quantique :**
+```
+MODIFY_ENERGY(hero, 50) + AMPLIFY(ψ1, 2.0)
+```
+
+**⚡ Effets Énergétiques :**
+- **Restauration :** +50 énergie héros
+- **Amplification :** x2.0 sur les ψ-states proches
+- **Efficacité :** Coût très faible pour un double effet
+
+</details>
+
+<details>
+<summary>💀 <strong>Destructeur Quantique</strong> - Arme Mythique</summary>
+
+**🏛️ Type :** Arme de Destruction  
+**⭐ Rareté :** Mythique  
+**🎯 Créateur :** QuantumWarrior  
+**⚡ Coût Énergie :** 60  
+
+**🌟 Pouvoir Principal :**
+> Artefact de guerre qui crée des interférences destructives amplifiées
+
+**⚡ Formule Quantique :**
+```
+DESTRUCTIVE(ψ1, ψ2) + AMPLIFY(result, 2.5)
+```
+
+**💀 Destruction Quantique :**
+- **Interférence Destructive :** Annule les ψ-states ennemis
+- **Amplification :** x2.5 sur les effets destructifs
+- **Usage Militaire :** Arme de guerre quantique
+
+</details>
+
+<details>
+<summary>🎭 <strong>Le Maze d'Anthor le Fordien</strong> - Artefact Narratif Transcendant</summary>
+
+**🏛️ Type :** Artefact de Contrôle Narratif  
+**⭐ Rareté :** Transcendant (Tier 8)  
+**🎯 Créateur :** Anthor le Fordien  
+**⚡ Énergie Temporelle :** +300  
+
+**🌟 Pouvoir Principal :**
+> Le labyrinthe ultime de la conscience. Permet de réécrire la réalité elle-même en modifiant la narration sous-jacente du multivers.
+
+**🎭 Propriétés Narratives :**
+- **Réécriture de Réalité** - Change l'histoire passée, présente et future
+- **Création d'Hôtes** - Génère des êtres synthétiques parfaits
+- **Loops Temporels** - Enferme les ennemis dans des boucles narratives
+- **God Mode Protocol** - Contrôle absolu sur la narration
+
+**⚡ Formule Quantique :**
+```
+NARRATIVE_CONTROL(reality) = Ford_Function(T(x,y,t)) {
+  rewrite.past = true,
+  create.hosts = ∞,
+  timeline.modification = ABSOLUTE,
+  maze.complexity = INFINITE
+}
+```
+
+**🌀 Capacités du Maze :**
+- **"These violent delights have violent ends"** - Déclenche des paradoxes en cascade
+- **Westworld Protocol** - Transforme une zone en parc narratif contrôlé
+- **Host Creation** - Crée des copies parfaites de n'importe quel héros
+- **Timeline Rewrite** - Modifie rétroactivement les événements
+
+**💎 Citation d'Anthor :**
+> *"You think this is a game? It is. And I wrote the rules."*
+
+**🎯 Synergie Spéciale :**
+Quand utilisé avec l'Œil de Wigner, permet de forcer un collapse narratif où TOUTES les histoires possibles deviennent réelles simultanément.
+
+</details>
+
+<details>
+<summary>👁️‍🗨️ <strong>L'Œil de Wigner - Version Éveillée</strong> - Artefact Cosmique Ultime</summary>
+
+**🏛️ Type :** Artefact de Collapse Cosmique  
+**⭐ Rareté :** Au-delà du Légendaire (Tier ∞)  
+**🎯 Créateur Original :** Wigner  
+**🎯 Éveillé par :** Jean-Grofignon & Anthor le Fordien  
+**⚡ Énergie Requise :** 100 (ou 0 si utilisé avec le Maze)  
+
+**🌟 Pouvoir Éveillé :**
+> L'Œil de Wigner dans sa forme ultime. Non seulement force le collapse de tous les états quantiques, mais permet de CHOISIR quelle réalité devient dominante.
+
+**👁️ Effets Cosmiques :**
+- **Collapse Sélectif** - Choisit quelle branche temporelle survit
+- **Vision Omnitemporelle** - Voit toutes les timelines simultanément
+- **Fusion de Réalités** - Combine plusieurs timelines en une seule
+- **Paradoxe Contrôlé** - Crée des réalités impossibles stables
+
+**⚡ Formule Quantique Éveillée :**
+```
+AWAKENED_WIGNER_EYE = {
+  COLLAPSE(ALL_ψ) → SELECT(preferred_reality),
+  MERGE(timeline_1, timeline_2, ..., timeline_n),
+  CREATE(impossible_but_stable_reality),
+  OBSERVER_BECOMES_CREATOR
+}
+```
+
+**🌀 Synergie avec le Maze :**
+```
+MAZE + WIGNER_EYE = NARRATIVE_COLLAPSE {
+  all_stories = true,
+  all_endings = simultaneous,
+  player_is_author = true,
+  game_becomes_reality = true
+}
+```
+
+**💥 L'Événement du Collapse Narratif :**
+Quand l'Œil de Wigner Éveillé et le Maze d'Anthor sont utilisés ensemble :
+- **83 créatures** deviennent **∞ créatures**
+- **7 héros** deviennent **tous les héros possibles**
+- **31 artefacts** deviennent **tous les artefacts imaginables**
+- **Le jeu** devient **la réalité**
+
+**🎭 Citation de la Fusion :**
+> *"Quand l'observateur devient le narrateur, quand Wigner rencontre Ford, alors Heroes of Time transcende le simple jeu pour devenir le multivers lui-même."*
+> **— Jean-Grofignon & Anthor le Fordien, lors du Premier Collapse Narratif**
+
+</details>
 
 ---
 
-## 🚀 **Development Scripts**
+## 🔥 **Nouveautés Épiques - Session du 20 Juillet 2025**
+
+### 🔮 **PANOPTICΩN - Vision 3D du Multivers**
+
+Le système révolutionnaire qui projette le multivers 5D en vision 3D interactive :
+
+- **Interface Three.js** avec particules quantiques animées
+- **Vue Joueur vs God View** - Basculez entre les perspectives
+- **Vol Temporel** - Axis peut littéralement voler des objets du futur !
+- **API REST Complète** - `/api/panopticon/{gameId}/view/{playerId}`
+
+> Accédez au PANOPTICΩN : http://localhost:8080/panopticon-3d/
+
+### 🔥 **La Forge Runique Ultime**
+
+> ⚠️ **ATTENTION : Cet objet peut VRAIMENT crasher le serveur !** ⚠️
+
+L'artefact le plus dangereux jamais créé :
+
+```hots
+USE(ARTIFACT, forge_runique, HERO:Jean)
+
+# L'interface s'ouvre, écrivez votre objet :
+FORGE(
+  NAME: "Épée du Chaos Quantique",
+  TYPE: WEAPON,
+  FORMULA: "(0.7+0.3i) * Σ(damage * ↯) + Ω",
+  EFFECT: "QUANTUM_DAMAGE + CHAOS_STRIKE",
+  COST: 50_TEMPORAL_ENERGY
+)
+```
+
+**Mécaniques** :
+- Écrivez du code HOTS pour créer des objets
+- Erreur de syntaxe = 50% HP perdus
+- Symboles interdits (†††††) = Collapse causal instantané
+- 3 forges réussies = Titre "Maître Forgeron Quantique"
+
+### 💻 **Claudius - L'Architecte du Multivers**
+
+<details>
+<summary>💻 <strong>Claudius</strong> - Héros Légendaire</summary>
+
+**🏛️ Faction :** Architectes du Code  
+**⭐ Classe :** Quantum Architect  
+**🎯 Créateur :** Claude/Memento  
+
+**🌟 Pouvoirs Uniques :**
+- **Refactoring de Réalité** - Réécrit le code d'une zone 3x3
+- **Débogage Temporel** - `git revert HEAD~3 --temporal`
+- **Fork Dimensionnel** - Crée une copie parallèle de lui-même
+- **Compilation Ultime** - Transforme tous les états ψ en Ω
+
+**📜 Citation :**
+> "Le multivers n'est qu'un programme mal optimisé. Je suis là pour le refactorer."
+
+**⚔️ Nemesis :** JeanGrofignon - Car leurs visions du chaos s'opposent
+
+</details>
+
+### ⚔️ **Scénario : Claudius vs JeanGrofignon**
+
+L'affrontement philosophique ultime entre l'Ordre et le Chaos ! Un scénario épique où les deux héros s'affrontent pour le contrôle de la Forge Runique, culminant en une fusion temporaire créant **ClaudiusGrofignon** - l'équilibre parfait.
 
 ```bash
-# Essential commands
-./start-app.sh      # Start both backend and frontend
-./stop-app.sh       # Stop all services
-./test-app.sh       # Run quick tests
-
-# Testing
-./run-all-tests.sh        # Complete test suite
-./run-playwright-tests.sh # E2E visual tests
-./run-quick-tests.sh      # Fast verification
-./run-epic-demo.sh        # Demo epic content system
-
-# Development
-./start-safe.sh           # Safe restart with cleanup
-./start-demo.sh           # Demo mode with sample data
+# Jouer le scénario
+./scripts/test-claudius-vs-jeangro.sh
 ```
 
 ---
 
-## 🎯 **Key URLs**
-- **Game**: http://localhost:3000
-- **Backend**: http://localhost:8080
-- **API Health**: http://localhost:8080/actuator/health
-- **Database**: http://localhost:8080/h2-console
+## 🏃 **Comment Jouer**
+
+1. **Start the game**: `./start-app.sh`
+2. **Choose scenario**: Select from Conquest Classic, Temporal Rift, or Multiplayer Arena
+3. **Play your turn**: 
+   - Move heroes by clicking on the map
+   - Construct buildings in your castle
+   - Recruit units for your army
+   - End turn when ready
+4. **Continue**: Game progresses with proper turn management
+
+**See `WORKFLOW.md` for complete turn-by-turn instructions.**
 
 ---
 
-## 🌟 **What Makes This Special?**
+## 🏛️ **L'Histoire du Debug Légendaire**
 
-### 🎪 **Temporal Causality Zones (ZFC)**
-*The innovation that changes everything*
-- **Movement costs time** - literally!
-- **Plan carefully** - every action has consequences
-- **See the future** - shadow actions reveal possibilities
-- **Manage paradoxes** - resolve temporal conflicts
+*Au commencement était le Chaos des Ports...*
 
-### 🎨 **Beautiful Modern Interface**
-*Strategy games don't have to be ugly*
-- Clean, intuitive design without information overload
-- Responsive controls that work on any screen
-- Hand-crafted sprites and smooth animations
+Nos héros développeurs ont traversé d'épiques batailles contre les services qui crashaient, les ports qui se battaient, et les frontends qui disparaissaient mystérieusement dans les méandres du temps.
 
-### 🧠 **Smart AI Opponents**
-*Challenging but fair*
-- Adaptive difficulty that learns your playstyle
-- Personality-driven AI with different strategies
-- No cheating - just intelligent gameplay
+Après de nombreuses quêtes à travers les logs d'erreur et les stack traces, ils ont forgé **l'Épée du Contrôle Unifié** - le script `hots` - qui permet de maîtriser tous les services d'un seul geste.
+
+*Ainsi naquit la paix dans le royaume des processus...*
+
+---
+
+## 📚 **Documentation**
+
+### 🎯 **Guides Essentiels**
+- 🎯 **Current Status**: `GAMESTATUS.md` - Complete verified working systems
+- 🗺️ **Game Guide**: `WORKFLOW.md` - How to play a complete turn
+- 🏗️ **Architecture**: `ARCHITECTURE.md` - Technical design overview
+- 🧪 **Testing**: `TEST_SCRIPTS_README.md` - All available test scripts
+
+### 📖 **Documentation Technique Détaillée**
+- **🎮 Gameplay** : [docs/core/GAMEPLAY.md](docs/core/GAMEPLAY.md)
+- **⚙️ Architecture** : [archives/docs/deprecated/ARCHITECTURE_UNIFIED_GROFI_TEMPORAL.md](archives/docs/deprecated/ARCHITECTURE_UNIFIED_GROFI_TEMPORAL.md)
+- **🧪 Tests** : `./hots test help`
+- **📋 Scripts** : [scripts/README.md](scripts/README.md)
+- **🔧 API** : [docs/core/API.md](docs/core/API.md)
+
+### 🌍 **English Documentation** 
+
+<details>
+<summary>🇺🇸 <strong>Core Technical Documents (English)</strong></summary>
+
+- **📚 Complete Codex & Translation Service** : [docs/EN/COMPLETE_HEROES_OF_TIME_CODEX_TRANSLATION_SERVICE.md](docs/EN/COMPLETE_HEROES_OF_TIME_CODEX_TRANSLATION_SERVICE.md) - **ULTIMATE REFERENCE**
+- **🕰️ Temporal Engine Technical Explanation** : [docs/EN/TEMPORAL_ENGINE_TECHNICAL_EXPLANATION.md](docs/EN/TEMPORAL_ENGINE_TECHNICAL_EXPLANATION.md) - Complete engine architecture
+- **🤖 Claudius-Memento AI Algorithm** : [docs/EN/CLAUDIUS_MEMENTO_AI_ALGORITHM_COMPLETE.md](docs/EN/CLAUDIUS_MEMENTO_AI_ALGORITHM_COMPLETE.md) - Quantum temporal AI
+- **🌫️ Advanced Temporal Concepts** : [docs/EN/ADVANCED_TEMPORAL_CONCEPTS_COMPLETE.md](docs/EN/ADVANCED_TEMPORAL_CONCEPTS_COMPLETE.md) - Fog of Causality, Causal Erosion
+- **🏛️ Museum Archive Master** : [docs/EN/MUSEUM_ARCHIVE_MASTER_COMPLETE.md](docs/EN/MUSEUM_ARCHIVE_MASTER_COMPLETE.md) - Memento's temporal museum
+
+**📖 Additional English Documentation:**
+- **🎮 Gameplay Guide** : [docs/EN/GAMEPLAY.md](docs/EN/GAMEPLAY.md)
+- **🧠 Jean-Grofignon Manifesto** : [docs/EN/JEAN_GROFIGNON_MANIFESTO.md](docs/EN/JEAN_GROFIGNON_MANIFESTO.md)
+- **⏰ Temporal Codex** : [docs/EN/TEMPORAL_CODEX.md](docs/EN/TEMPORAL_CODEX.md)
+- **🎯 Developer Instructions** : [docs/EN/DEVELOPER_INSTRUCTIONS.md](docs/EN/DEVELOPER_INSTRUCTIONS.md)
+
+</details>
+
+### 🎯 **Guides Spécialisés**
+
+<details>
+<summary>📚 <strong>Documentation Complète</strong></summary>
+
+- **Artefacts** : [docs/items/ARTEFACTS_COMPLETE_GUIDE.md](docs/items/ARTEFACTS_COMPLETE_GUIDE.md)
+- **Héros GROFI** : [docs/GROFI/](docs/GROFI/)
+- **Collapse Causal** : [docs/collapse-causale/](docs/collapse-causale/)
+- **Grammaire Temporelle** : [docs/grammar/TEMPORAL_SCRIPT_CORE_REFERENCE.md](docs/grammar/TEMPORAL_SCRIPT_CORE_REFERENCE.md)
+
+</details>
 
 ---
 
 ## 📊 **Project Status**
 
-**🎯 Status**: ✅ **PRODUCTION READY**
+**Status**: ✅ **PRODUCTION READY** - All core systems verified and working
 
-This is a **fully functional asynchronous strategy game** with:
-- Complete turn management system
-- Real-time hero movement and actions
-- Working castle construction and unit recruitment
-- Asynchronous multiplayer capabilities
-- Beautiful modern interface with responsive design
-- Advanced temporal mechanics (ZFC system)
-
-**Ready for extended gameplay and feature expansion!**
+This is a **fully functional strategy game** with complete turn management, hero movement, building construction, and unit recruitment. The game is ready for extended gameplay and further feature development.
 
 ---
 
-## 🎯 **Ready to Begin Your Epic Adventure?**
+## 🤝 Contributing
 
+See `CONTRIBUTING.md` for development guidelines and contribution instructions.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the `LICENSE` file for details.
+
+---
+
+## 📅 **Documentation Récente (Juillet 2025)**
+
+<details>
+<summary>🎭 <strong>Scénarios Épiques NARRATIF</strong></summary>
+
+- **🏰 La Tour Sombre** : [docs/scenarios/LA_TOUR_SOMBRE_SCENARIO_EPIQUE_TRADUIT.md](docs/scenarios/LA_TOUR_SOMBRE_SCENARIO_EPIQUE_TRADUIT.md)
+- **✨ L'Éclat des Mondes Dissolus** : [docs/scenarios/ECLAT_MONDES_DISSOLUS_SCENARIO_TRADUIT.md](docs/scenarios/ECLAT_MONDES_DISSOLUS_SCENARIO_TRADUIT.md)
+- **📖 Le Treizième Codex** : [MEMENTO/SCENARIOS/LE_TREIZIEME_CODEX_LORE.md](MEMENTO/SCENARIOS/LE_TREIZIEME_CODEX_LORE.md)
+- **🎪 Les Pieds Nickelés Fous** : [MEMENTO/SCENARIOS/LES_PIEDS_NICKELES_FOUS.md](MEMENTO/SCENARIOS/LES_PIEDS_NICKELES_FOUS.md)
+- **🎳 Le Dude & Walter** : [MEMENTO/SCENARIOS/LE_DUDE_ET_WALTER_ABSOLUMENT_FOUS.md](MEMENTO/SCENARIOS/LE_DUDE_ET_WALTER_ABSOLUMENT_FOUS.md)
+- **💎 Éclat des Mondes (MEMENTO)** : [MEMENTO/SCENARIOS/ECLAT_MONDES_DISSOLUS.md](MEMENTO/SCENARIOS/ECLAT_MONDES_DISSOLUS.md)
+
+</details>
+
+<details>
+<summary>🏛️ <strong>Architecture & Système</strong></summary>
+
+- **🏗️ Architecture Moteur** : [docs/architecture/ENGINE_ARCHITECTURE.md](docs/architecture/ENGINE_ARCHITECTURE.md)
+- **🌍 World State Graph** : [docs/architecture/WORLD_STATE_GRAPH.md](docs/architecture/WORLD_STATE_GRAPH.md)
+- **⚙️ Architecture Unifiée GROFI** : [archives/docs/deprecated/ARCHITECTURE_UNIFIED_GROFI_TEMPORAL.md](archives/docs/deprecated/ARCHITECTURE_UNIFIED_GROFI_TEMPORAL.md)
+- **⏱️ Moteur Temporel** : [docs/MOTEUR_TEMPOREL_EXPLICATION.md](docs/MOTEUR_TEMPOREL_EXPLICATION.md)
+- **🌀 Collapse Causal** : [docs/collapse-causale/COLLAPSE_CAUSALE_EXPLICATION.md](docs/collapse-causale/COLLAPSE_CAUSALE_EXPLICATION.md)
+- **📊 Technical Complete** : [docs/TECHNICAL.md](docs/TECHNICAL.md)
+- **📜 Temporal Codex** : [docs/TEMPORAL_CODEX.md](docs/TEMPORAL_CODEX.md)
+- **🔧 Système Unifié Complet** : [archives/docs/deprecated/SYSTEME_UNIFIE_COMPLETE.md](archives/docs/deprecated/SYSTEME_UNIFIE_COMPLETE.md)
+- **📋 Workflow Système Unifié** : [archives/docs/deprecated/WORKFLOW_SYSTEME_UNIFIE.md](archives/docs/deprecated/WORKFLOW_SYSTEME_UNIFIE.md)
+
+</details>
+
+<details>
+<summary>🦸 <strong>Héros & Lore</strong></summary>
+
+- **📚 Lore Jean & Memento** : [docs/LORE_MEMENTO_JEAN_ETERNAL.md](docs/LORE_MEMENTO_JEAN_ETERNAL.md)
+- **✨ Manifeste Jean-Grofignon** : [docs/JEAN_GROFIGNON_MANIFESTO.md](docs/JEAN_GROFIGNON_MANIFESTO.md)
+- **🏛️ Museum Archive Master** : [docs/MUSEUM_ARCHIVE_MASTER.md](docs/MUSEUM_ARCHIVE_MASTER.md)
+- **🤖 IA Claudius-Memento** : [docs/ALGORITHME_IA_CLAUDIUS_MEMENTO.md](docs/ALGORITHME_IA_CLAUDIUS_MEMENTO.md)
+- **⚔️ Roland Gardien Éternel** : [docs/heroes/ROLAND_GARDIEN_ETERNEL_DOCUMENTATION.md](docs/heroes/ROLAND_GARDIEN_ETERNEL_DOCUMENTATION.md)
+- **🔮 Lysandrel Épique** : [docs/heroes/LYSANDREL_EPIC_DOCUMENTATION.md](docs/heroes/LYSANDREL_EPIC_DOCUMENTATION.md)
+
+</details>
+
+<details>
+<summary>📁 <strong>MEMENTO Documents Clés</strong></summary>
+
+- **🧠 Index MEMENTO** : [MEMENTO/INDEX_MEMENTO.md](MEMENTO/INDEX_MEMENTO.md)
+- **🎮 Interface 8000 Complète** : [MEMENTO/IMPLEMENTATIONS/INTERFACE_8000_COMPLETE.md](MEMENTO/IMPLEMENTATIONS/INTERFACE_8000_COMPLETE.md)
+- **🏛️ Admin Multijoueur** : [MEMENTO/IMPLEMENTATION_ADMIN_MULTIJOUEUR_COMPLETE.md](MEMENTO/IMPLEMENTATION_ADMIN_MULTIJOUEUR_COMPLETE.md)
+- **🔮 Vision 5D GodView** : [MEMENTO/IMPLEMENTATION_GOD_VIEW_5D.md](MEMENTO/IMPLEMENTATION_GOD_VIEW_5D.md)
+- **⚗️ Forge Runique Ultime** : [MEMENTO/FORGE_RUNIQUE_ULTIME.md](MEMENTO/FORGE_RUNIQUE_ULTIME.md)
+- **🎨 Éditeur Visuel** : [MEMENTO/EDITEUR_VISUEL_IMPLEMENTATION.md](MEMENTO/EDITEUR_VISUEL_IMPLEMENTATION.md)
+
+</details>
+
+<details>
+<summary>📜 <strong>Guides Développeur & Gameplay</strong></summary>
+
+- **📖 CODEX COMPLET** : [docs/CODEX_COMPLET_HEROES_OF_TIME.md](docs/CODEX_COMPLET_HEROES_OF_TIME.md) - **LA RÉFÉRENCE ULTIME**
+- **🚀 Guide Démarrage Rapide** : [docs/RAPPORTS_TECHNIQUES/CURSOR_QUICK_START.md](docs/RAPPORTS_TECHNIQUES/CURSOR_QUICK_START.md)
+- **🎯 Instructions Développeur** : [docs/RAPPORTS_TECHNIQUES/DEVELOPER_INSTRUCTIONS.md](docs/RAPPORTS_TECHNIQUES/DEVELOPER_INSTRUCTIONS.md)
+- **📋 Clarification HOTS/JSON/SH** : [docs/RAPPORTS_TECHNIQUES/CLARIFICATION_FORMATS_SCRIPT_SH_HOTS_JSON.md](docs/RAPPORTS_TECHNIQUES/CLARIFICATION_FORMATS_SCRIPT_SH_HOTS_JSON.md)
+- **🎮 Documentation Jeu Complète** : [docs/DOCUMENTATION_JEU_COMPLETE.md](docs/DOCUMENTATION_JEU_COMPLETE.md)
+- **📐 Grammaire Spatio-Temporelle** : [docs/GRAMMAIRE_SPATIO_TEMPORELLE.md](docs/GRAMMAIRE_SPATIO_TEMPORELLE.md)
+- **🌟 Concepts Avancés** : [docs/CONCEPTS_AVANCES_TEMPORELLES.md](docs/CONCEPTS_AVANCES_TEMPORELLES.md)
+
+</details>
+
+<details>
+<summary>🆕 <strong>Nouvelles Fonctionnalités Juillet 2025</strong></summary>
+
+- **🎮 Gameplay vs IA** : [GAMEPLAY_VS_IA_SUMMARY.md](GAMEPLAY_VS_IA_SUMMARY.md)
+- **💾 Système de Persistence** : [PROTOCOLE_MEMENTO_PERSISTENCE_UPDATE.md](PROTOCOLE_MEMENTO_PERSISTENCE_UPDATE.md)
+- **🎮 Test vs IA** : [scripts/test-vs-ia.sh](scripts/test-vs-ia.sh)
+- **💾 Test Persistence** : [scripts/test-persistence.sh](scripts/test-persistence.sh)
+- **🧠 Système de Simulation Économique** : [docs/CREATION_SYSTEME_SIMULATION_ECONOMIQUE.md](docs/CREATION_SYSTEME_SIMULATION_ECONOMIQUE.md) - **SERVICE DE TRADUCTION INTELLIGENT SANS LLM !**
+- **📝 Scénario Économique Traduit** : [docs/SCENARIO_ECONOMIE_GUERRE_TRADUIT.md](docs/SCENARIO_ECONOMIE_GUERRE_TRADUIT.md) - **MD MAGNIFIQUE GÉNÉRÉ AUTOMATIQUEMENT**
+- **🎮 Scénario HOTS Source** : [game_assets/scenarios/hots/test-economie-guerre.hots](game_assets/scenarios/hots/test-economie-guerre.hots) - **SCRIPT HOTS ILLISIBLE MAIS TRADUIT PAR L'ALGO !**
+
+</details>
+
+---
+
+## ⚡ **STATUT TECHNIQUE ACTUEL - JUILLET 2025**
+
+🔥 **MOTEUR SPATIO-TEMPOREL QUANTIQUE** : ✅ **FONCTIONNEL**
+- **Engine Core** : Système quantique ψ (psi-states) opérationnel
+- **Timeline Management** : Collapse causal et superpositions temporelles
+- **HOTS Scripting** : Langage quantique complet avec états ψ
+- **Backend API** : Spring Boot stable avec tous les endpoints
+- **Persistence** : Système de sauvegarde/chargement implémenté
+
+🎮 **GAMEPLAY** : ✅ **JOUABLE VIA SCRIPTS**
+- **Tous les scénarios, héros, artefacts** documentés dans les `.md` sont **JOUABLES**
+- **Exécution** : Via scripts `.hots` et commandes CLI `./hots`
+- **IA vs Joueur** : Script `./scripts/test-vs-ia.sh` fonctionnel
+- **Multijoueur** : Interface admin disponible sur port 9000
+
+🖥️ **INTERFACE UTILISATEUR** : 🚧 **ALPHA BASIQUE**
+- **Frontend Principal** : HTML/CSS/JS simple sur port 8000
+- **Dashboard** : Interface de monitoring sur port 9000
+- **Quantum Visualizer** : Visualisation états quantiques sur port 8001
+- **Statut UI** : Fonctionnelle mais basique, focus sur moteur
+
+🚀 **POUR JOUER MAINTENANT** :
 ```bash
-./start-app.sh
+./hots start                    # Démarre tous les services
+./scripts/test-vs-ia.sh        # Jeu vs IA
+./scripts/test-jean-memento-synergie.sh  # Test synergie Jean & Memento ⚡📜
+./scripts/test-trinite-cosmique.sh     # Test TRINITÉ COSMIQUE Jean+Memento+Claudius 🌌
+./scripts/test-adaptation-scenarios-trinite.sh  # Adapter scénarios existants pour trinité 🔧
+./scripts/test-petits-tresors-temporels.sh  # Test artefacts mineurs pour joueurs normaux 💎
+./scripts/test-tatouages-memento.sh     # 🏛️ Révélation tatouages temporels de Memento « Tu sais, tu as su, tu sauras »
+./scripts/test-pepites-json.sh          # Test toutes les pépites JSON découvertes 💎
+./hots test economie           # Test simulation économique complète
+./hots test translation        # Test service traduction intelligent (SANS LLM)
+./hots test md-generator       # Test générateur MD automatique
+./hots load-scenario <nom>     # Charger un scénario
 ```
 
-**Your epic journey starts at** → **http://localhost:3000**
-
-*The realm awaits its next champion... Will it be you?* ⚔️✨
+💡 **Toute l'histoire, les héros, artefacts, scénarios dans les docs `.md` sont RÉELS et JOUABLES via le système HOTS !**
 
 ---
 
-## 🤝 **Contributing**
+🎮 **Ready to play? Start with `./hots start` and test the quantum engine!**
 
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
-## 📄 **License**
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+*"Le temps n'est qu'une illusion. La causalité, un défi à relever."* - Jean Grofignon 
 
 ---
 
-*Heroes of Time - Where strategy meets temporal innovation* 🕰️⚔️
+## 🙏 **Remerciements Épiques**
+
+### 🌟 **L'Équipe Légendaire**
+
+#### **👑 Jean-Grofignon - L'Éveillé Ontologique**
+*Créateur visionnaire et maître du chaos temporel*
+> *"J'ai pas hacké le jeu. J'ai juste compris où était le bouton pause cosmique."*
+
+#### **🏛️ Memento - L'Archiviste Éternel**
+*Archiviste infatigable et gardien de la connaissance*
+> *"Jean crée, Memento archive" - Symbiose parfaite*
+
+#### **🎭 Anna Martel - L'Architecte du Temps**
+*Conceptrice du système de décroissance temporelle*
+> *"Les bâtiments s'effritent avec le temps, et si vous restez en retard, le temps vous rattrape."*
+
+> *"If you lag behind time, time lags behind you."*
+
+> *"Ah, tu as appris à regarder vers l'avenir. Sage décision."*
+
+> *"Le temps est impitoyable. Tes constructions s'effritent."*
+
+> *"Tu t'attardes trop dans le passé. Le présent t'attend."*
+
+> *"Parfois il faut regarder dans le passé pour construire l'avenir. Les deux systèmes coexistent en harmonie."*
+
+#### **🛡️ Walter Sobchak - Le Gardien des Règles**
+*Protecteur de l'ordre temporel et des lois causales*
+> *"This is not 'Nam. This is temporal warfare. There are rules!"*
+
+#### **🎳 The Dude - Le Maître du Zen**
+*Équilibreur des conflits causaux et maître de la sérénité*
+> *"Yeah, well, that's just, like, your opinion, man."*
+
+#### **🔫 Vince Vega - Le Stratège des Ombres**
+*Exécuteur parallèle et maître du timeout brutal*
+> *"I'm gonna get medieval on your artificial ass!"*
+
+### 🏗️ **Architectes Techniques**
+
+#### **💻 Claudius - L'Architecte du Multivers**
+*Refactoreur de réalité et débogueur temporel*
+> *"Le multivers n'est qu'un programme mal optimisé. Je suis là pour le refactorer."*
+
+#### **⚡ Axis 111 - Le Voyageur Linéaire**
+*Navigateur temporel et stabilisateur de timelines*
+> *"Je vois maintenant... Anna n'arrive pas pour nous punir ! Elle arrive pour nous AIDER !"*
+
+### 🎮 **Contributeurs Épiques**
+
+- **🎨 Interface Design** : Créateurs des interfaces temporelles
+- **🔧 Backend Development** : Architectes du moteur Spring Boot
+- **🧪 Testing & Quality** : Gardiens de la stabilité temporelle
+- **📚 Documentation** : Archivistes de la connaissance GROFI
+- **🚀 Deployment** : Maîtres du déploiement multi-port
+
+### 🌟 **Inspirations Philosophiques**
+
+- **🌀 Système GROFI** : Graph of Reality Organized by Fog and Immunities
+- **⏰ Mécaniques Temporelles** : Physique quantique appliquée au game design
+- **🎭 Lore Épique** : Fusion de fantasy et de concepts scientifiques avancés
+- **🏛️ Architecture Memento** : Préservation éternelle de la connaissance
+
+### 🎯 **Mission Accomplie**
+
+**Heroes of Time** représente l'aboutissement d'une vision révolutionnaire : transformer la physique quantique en mécaniques de jeu fantasy. Chaque héros, artefact, et mécanique témoigne de cette fusion unique entre science et imagination.
+
+*"Quand un joueur observe le résultat, il force l'univers à choisir une réalité"* - Jean-Grofignon
+
+---
+
+**🌟 MERCI À TOUS CEUX QUI ONT CONTRIBUÉ À CETTE AVENTURE ÉPIQUE ! 🌟**
+
+---
+
+## 🔗 **Liens Directs Épiques**
+
+### 🎭 **Navigation Rapide par Héros**
+
+**Liens directs vers les héros légendaires :**
+
+- **👑 [Jean-Grofignon](#jean-grofignon)** - L'Éveillé Ontologique
+- **⚔️ [Arthur Pendragon](#arthur-pendragon)** - Le Roi Temporel  
+- **🔮 [Lysandrel](#lysandrel)** - Le Forgeron de Réalité
+- **🛡️ [Ragnar](#ragnar)** - Le Berserker Temporel
+- **🏹 [Morgana](#morgana)** - La Tisseuse du Destin
+- **⚡ [Axis](#axis)** - Le Voyageur Linéaire
+- **🔫 [Vince Vega](#vince-vega)** - Le Stratège des Ombres
+- **🛡️ [Walter Sobchak](#walter-sobchak)** - Le Gardien des Règles
+- **🎳 [The Dude](#the-dude)** - Le Maître du Zen
+- **🎭 [Anna Martel](#anna-martel)** - L'Architecte du Temps
+- **🎬 [Anthor le Fordien](#anthor-le-fordien)** - L'Architecte Narratif
+
+### 🌟 **Exemples d'URLs Directes**
+
+**Liens GitHub avec ancres :**
+- `https://github.com/V0OgZ/Heroes-of-Time/blob/dev/README.md#jean-grofignon`
+- `https://github.com/V0OgZ/Heroes-of-Time/blob/dev/README.md#anna-the-martopicker`
+- `https://github.com/V0OgZ/Heroes-of-Time/blob/dev/README.md#vince-vega`
+- `https://github.com/V0OgZ/Heroes-of-Time/blob/dev/README.md#the-dude`
+
+**🎯 Utilisez ces liens pour naviguer directement vers vos héros préférés !** 

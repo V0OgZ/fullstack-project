@@ -1,108 +1,273 @@
 [INFO] Scanning for projects...
 [INFO] 
 [INFO] ----------------< com.heroesoftimepoc:temporal-engine >-----------------
-[INFO] Building Heroes of Time POC - Temporal Engine 0.0.1-SNAPSHOT
+[INFO] Building temporal-engine 0.0.1-SNAPSHOT
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO] 
-[INFO] >>> spring-boot-maven-plugin:3.2.0:run (default-cli) > test-compile @ temporal-engine >>>
+[INFO] >>> spring-boot-maven-plugin:2.7.18:run (default-cli) > test-compile @ temporal-engine >>>
 [INFO] 
-[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ temporal-engine ---
-[INFO] Copying 1 resource from src/main/resources to target/classes
-[INFO] Copying 4 resources from src/main/resources to target/classes
+[INFO] --- maven-resources-plugin:3.2.0:resources (default-resources) @ temporal-engine ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Using 'UTF-8' encoding to copy filtered properties files.
+[INFO] Copying 1 resource
+[INFO] Copying 35 resources
 [INFO] 
-[INFO] --- maven-compiler-plugin:3.11.0:compile (default-compile) @ temporal-engine ---
-[INFO] Changes detected - recompiling the module! :source
-[INFO] Compiling 27 source files with javac [debug release 17] to target/classes
-[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/AntlrTemporalScriptParser.java: /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/AntlrTemporalScriptParser.java uses or overrides a deprecated API.
-[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/AntlrTemporalScriptParser.java: Recompile with -Xlint:deprecation for details.
-[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalEngineService.java: Some input files use unchecked or unsafe operations.
-[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalEngineService.java: Recompile with -Xlint:unchecked for details.
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ temporal-engine ---
+[INFO] Nothing to compile - all classes are up to date
 [INFO] 
-[INFO] --- maven-resources-plugin:3.3.1:testResources (default-testResources) @ temporal-engine ---
-[INFO] Copying 1 resource from src/test/resources to target/test-classes
+[INFO] --- maven-resources-plugin:3.2.0:testResources (default-testResources) @ temporal-engine ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Using 'UTF-8' encoding to copy filtered properties files.
+[INFO] Copying 3 resources
 [INFO] 
-[INFO] --- maven-compiler-plugin:3.11.0:testCompile (default-testCompile) @ temporal-engine ---
-[INFO] Changes detected - recompiling the module! :dependency
-[INFO] Compiling 11 source files with javac [debug release 17] to target/test-classes
-[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java: Some input files use unchecked or unsafe operations.
-[INFO] /Users/admin/HOT/Heroes-of-Time/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java: Recompile with -Xlint:unchecked for details.
+[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ temporal-engine ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 13 source files to /Users/admin/fullstack-project/backend/target/test-classes
+[WARNING] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[224,82] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[301,96] unchecked cast
+  required: java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+  found:    java.lang.Object
+[WARNING] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/EclatMondesDissolusTest.java:[311,83] unchecked cast
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.lang.Object
+[WARNING] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[112,50] unchecked conversion
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.util.Map
+[WARNING] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[127,55] unchecked conversion
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.util.Map
+[WARNING] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java:[156,51] unchecked conversion
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.util.Map
+[WARNING] /Users/admin/fullstack-project/backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/QuantumArtifactsIntegrationTest.java:[102,58] unchecked conversion
+  required: java.util.Map<java.lang.String,java.lang.Object>
+  found:    java.util.Map
 [INFO] 
-[INFO] <<< spring-boot-maven-plugin:3.2.0:run (default-cli) < test-compile @ temporal-engine <<<
+[INFO] <<< spring-boot-maven-plugin:2.7.18:run (default-cli) < test-compile @ temporal-engine <<<
 [INFO] 
 [INFO] 
-[INFO] --- spring-boot-maven-plugin:3.2.0:run (default-cli) @ temporal-engine ---
+[INFO] --- spring-boot-maven-plugin:2.7.18:run (default-cli) @ temporal-engine ---
 [INFO] Attaching agents: []
-
-  .   ____          _            __ _ _
- /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
- \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-  '  |____| .__|_| |_|_| |_\__, | / / / /
- =========|_|==============|___/=/_/_/_/
- :: Spring Boot ::                (v3.2.0)
-
-2025-07-18T17:09:09.762+02:00  INFO 28075 --- [  restartedMain] c.h.t.TemporalEngineApplication          : Starting TemporalEngineApplication using Java 17.0.15 with PID 28075 (/Users/admin/HOT/Heroes-of-Time/backend/target/classes started by admin in /Users/admin/HOT/Heroes-of-Time/backend)
-2025-07-18T17:09:09.765+02:00  INFO 28075 --- [  restartedMain] c.h.t.TemporalEngineApplication          : No active profile set, falling back to 1 default profile: "default"
-2025-07-18T17:09:09.786+02:00  INFO 28075 --- [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2025-07-18T17:09:09.786+02:00  INFO 28075 --- [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2025-07-18T17:09:10.082+02:00  INFO 28075 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-07-18T17:09:10.118+02:00  INFO 28075 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 31 ms. Found 4 JPA repository interfaces.
-2025-07-18T17:09:10.372+02:00  INFO 28075 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-07-18T17:09:10.376+02:00  INFO 28075 --- [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-07-18T17:09:10.376+02:00  INFO 28075 --- [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
-2025-07-18T17:09:10.393+02:00  INFO 28075 --- [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-07-18T17:09:10.394+02:00  INFO 28075 --- [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 607 ms
-2025-07-18T17:09:10.408+02:00  INFO 28075 --- [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-07-18T17:09:10.488+02:00  INFO 28075 --- [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:temporaldb user=SA
-2025-07-18T17:09:10.489+02:00  INFO 28075 --- [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-07-18T17:09:10.493+02:00  INFO 28075 --- [  restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:temporaldb'
-2025-07-18T17:09:10.557+02:00  INFO 28075 --- [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-07-18T17:09:10.590+02:00  INFO 28075 --- [  restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
-2025-07-18T17:09:10.610+02:00  INFO 28075 --- [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-07-18T17:09:10.720+02:00  INFO 28075 --- [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-07-18T17:09:10.746+02:00  WARN 28075 --- [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-07-18T17:09:11.193+02:00  INFO 28075 --- [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-Hibernate: drop table if exists game_players cascade 
-Hibernate: drop table if exists game_tiles cascade 
-Hibernate: drop table if exists games cascade 
-Hibernate: drop table if exists hero_inventory cascade 
-Hibernate: drop table if exists heroes cascade 
-Hibernate: drop table if exists psi_states cascade 
-Hibernate: drop table if exists tile_occupants cascade 
+09:31:35.200 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+ ██╗  ██╗███████╗██████╗  ██████╗ ███████╗███████╗    ██████╗ ███████╗    ████████╗██╗███╗   ███╗███████╗
+ ██║  ██║██╔════╝██╔══██╗██╔═══██╗██╔════╝██╔════╝   ██╔═══██╗██╔════╝    ╚══██╔══╝██║████╗ ████║██╔════╝
+ ███████║█████╗  ██████╔╝██║   ██║█████╗  ███████╗   ██║   ██║█████╗         ██║   ██║██╔████╔██║█████╗  
+ ██╔══██║██╔══╝  ██╔══██╗██║   ██║██╔══╝  ╚════██║   ██║   ██║██╔══╝         ██║   ██║██║╚██╔╝██║██╔══╝  
+ ██║  ██║███████╗██║  ██║╚██████╔╝███████╗███████║   ╚██████╔╝██║            ██║   ██║██║ ╚═╝ ██║███████╗
+ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚══════╝    ╚═════╝ ╚═╝            ╚═╝   ╚═╝╚═╝     ╚═╝╚══════╝
+                                                                                                           
+ ⚔️  TEMPORAL ENGINE BACKEND  ⚔️                    🕰️  Quantum Mechanics & Causal Collapse  🕰️
+ ══════════════════════════════════════════════════════════════════════════════════════════════════════════
+ 
+ 🌟 Maîtrisez le temps, dominez l'espace, conquérez l'éternité
+ 
+ ⚡ Fonctionnalités Actives:
+    • Moteur Temporel Quantique    ✅
+    • États ψ (Psi) Superposés     ✅  
+    • Collapse Causal Automatique  ✅
+    • Artefacts Légendaires        ✅
+    • API REST Complète            ✅
+    
+ 🎯 Port: 8080 | 🔧 Profile: default | 📊 Version: 1.0.0 
+09:31:35.228 [main] INFO  com.heroesoftimepoc.temporalengine.TemporalEngineApplication - Starting TemporalEngineApplication using Java 17.0.15 on vincents-MacBook-Pro.local with PID 68812 (/Users/admin/fullstack-project/backend/target/classes started by admin in /Users/admin/fullstack-project/backend)
+09:31:35.230 [main] DEBUG com.heroesoftimepoc.temporalengine.TemporalEngineApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+09:31:35.230 [main] INFO  com.heroesoftimepoc.temporalengine.TemporalEngineApplication - No active profile set, falling back to 1 default profile: "default"
+09:31:35.502 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+09:31:35.535 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 29 ms. Found 7 JPA repository interfaces.
+09:31:35.890 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+09:31:35.900 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+09:31:35.901 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+09:31:35.901 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+09:31:35.946 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+09:31:35.947 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 697 ms
+09:31:35.985 [main] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Starting...
+09:31:36.077 [main] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Start completed.
+09:31:36.106 [main] INFO  org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:heroesdb'
+09:31:36.165 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+09:31:36.190 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+09:31:36.267 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+09:31:36.525 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+Hibernate: drop table if exists cities CASCADE 
+09:31:37.144 [main] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7bbe5548] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+Hibernate: drop table if exists forged_objects CASCADE 
+Hibernate: drop table if exists game_history CASCADE 
+Hibernate: drop table if exists game_metadata CASCADE 
+Hibernate: drop table if exists game_players CASCADE 
+Hibernate: drop table if exists game_tiles CASCADE 
+Hibernate: drop table if exists games CASCADE 
+Hibernate: drop table if exists hero_abilities CASCADE 
+Hibernate: drop table if exists hero_inventory CASCADE 
+Hibernate: drop table if exists hero_status_effects CASCADE 
+Hibernate: drop table if exists hero_titles CASCADE 
+Hibernate: drop table if exists heroes CASCADE 
+Hibernate: drop table if exists players CASCADE 
+Hibernate: drop table if exists psi_states CASCADE 
+Hibernate: drop table if exists temporal_artifacts CASCADE 
+Hibernate: drop table if exists tile_effects CASCADE 
+Hibernate: drop table if exists tile_items CASCADE 
+Hibernate: drop table if exists tile_occupants CASCADE 
+Hibernate: create table cities (id bigint generated by default as identity, buildings TEXT, game_id bigint, income TEXT, level integer, name varchar(255), player_id varchar(255), resources TEXT, primary key (id))
+09:31:37.152 [main] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@e1d2781] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+Hibernate: create table forged_objects (id bigint generated by default as identity, cost varchar(255), effect varchar(500), forge_time timestamp, forged_by varchar(255), formula varchar(1000), is_dangerous boolean, name varchar(255) not null, stability_rating double, times_used integer, type varchar(255) not null, game_id bigint, primary key (id))
+Hibernate: create table game_history (game_id bigint not null, event varchar(255))
+Hibernate: create table game_metadata (game_id bigint not null, metadata_value integer, metadata_key varchar(255) not null, primary key (game_id, metadata_key))
 Hibernate: create table game_players (game_id bigint not null, player_id varchar(255))
-Hibernate: create table game_tiles (defense_bonus integer, has_psi_states boolean, is_locked boolean, is_temporal_zone boolean, lock_duration integer, movement_cost integer, temporal_energy_bonus integer, x integer not null, y integer not null, game_id bigint, id bigint generated by default as identity, building_owner varchar(255), building_type varchar(255), temporal_zone_type varchar(255), terrain varchar(255), primary key (id))
-Hibernate: create table games (current_turn integer, map_height integer, map_width integer, max_players integer, created_at timestamp(6), ended_at timestamp(6), id bigint generated by default as identity, started_at timestamp(6), current_player varchar(255), current_timeline varchar(255), game_name varchar(255) not null, status varchar(255) check (status in ('WAITING','ACTIVE','PAUSED','FINISHED','CANCELLED')), winner varchar(255), primary key (id))
+Hibernate: create table game_tiles (id bigint generated by default as identity, building_owner varchar(255), building_type varchar(255), defense_bonus integer, has_psi_states boolean, is_locked boolean, is_temporal_zone boolean, lock_duration integer, movement_cost integer, temporal_energy_bonus integer, temporal_zone_type varchar(255), terrain varchar(255), x integer not null, y integer not null, game_id bigint, primary key (id))
+Hibernate: create table games (id bigint generated by default as identity, created_at timestamp, current_player varchar(255), current_timeline varchar(255), current_turn integer, ended_at timestamp, game_name varchar(255) not null, map_height integer, map_width integer, max_players integer, started_at timestamp, status varchar(255), winner varchar(255), primary key (id))
+Hibernate: create table hero_abilities (hero_id bigint not null, ability varchar(255))
 Hibernate: create table hero_inventory (hero_id bigint not null, item varchar(255))
-Hibernate: create table heroes (health integer, max_health integer, max_movement_points integer, max_temporal_energy integer, movement_points integer, position_x integer, position_y integer, temporal_energy integer, game_id bigint, id bigint generated by default as identity, name varchar(255) not null, player_id varchar(255), status varchar(255) check (status in ('ACTIVE','TEMPORAL_SHIFT','QUANTUM_SUPERPOSITION','COLLAPSED','DEAD')), timeline_branch varchar(255), primary key (id))
-Hibernate: create table psi_states (amplitude_imaginary float(53), amplitude_real float(53), delta_t integer, probability float(53), target_x integer, target_y integer, use_complex_amplitude boolean, created_at timestamp(6), game_id bigint, id bigint generated by default as identity, action_type varchar(255), branch_id varchar(255), collapse_trigger varchar(255), expression TEXT, owner_hero varchar(255), psi_id varchar(255) not null unique, status varchar(255) check (status in ('ACTIVE','COLLAPSED','TRIGGERED','EXPIRED')), primary key (id))
+Hibernate: create table hero_status_effects (hero_id bigint not null, duration integer, effect_name varchar(255) not null, primary key (hero_id, effect_name))
+Hibernate: create table hero_titles (hero_id bigint not null, title varchar(255))
+Hibernate: create table heroes (id bigint generated by default as identity, causality_awareness integer, current_day integer, days_traveled integer, has_observation_ability boolean, health integer, max_health integer, max_movement_points integer, max_temporal_energy integer, movement_points integer, movement_points_per_day integer, name varchar(255) not null, observation_range integer, player_id varchar(255), position_x integer, position_y integer, status varchar(255), temporal_energy integer, temporal_immunity boolean, temporal_vision_range integer, timeline_branch varchar(255), vision_radius integer, game_id bigint, primary key (id))
+Hibernate: create table players (id bigint generated by default as identity, joined_at timestamp, name varchar(255) not null, status varchar(255), game_id bigint, primary key (id))
+Hibernate: create table psi_states (id bigint generated by default as identity, action_type varchar(255), branch_id varchar(255), collapse_trigger varchar(255), amplitude_imaginary double, amplitude_real double, created_at timestamp, delta_t integer, expression TEXT, owner_hero varchar(255), probability double, psi_id varchar(255) not null, status varchar(255), target_x integer, target_y integer, use_complex_amplitude boolean, game_id bigint, primary key (id))
+Hibernate: create table temporal_artifacts (id bigint generated by default as identity, activated_at timestamp, artifact_id varchar(255) not null, created_at timestamp, description TEXT, effect_duration integer, effect_power integer, effect_radius integer, name varchar(255) not null, owner_id varchar(255), position_x integer, position_y integer, remaining_duration integer, status varchar(255), temporal_energy_cost integer, type varchar(255) not null, game_id bigint, primary key (id))
+Hibernate: create table tile_effects (tile_id bigint not null, effect varchar(255))
+Hibernate: create table tile_items (tile_id bigint not null, item varchar(255))
 Hibernate: create table tile_occupants (tile_id bigint not null, occupant varchar(255))
-Hibernate: alter table if exists game_players add constraint FKrbr2flqdav5ovyjas7q92u64r foreign key (game_id) references games
-Hibernate: alter table if exists game_tiles add constraint FK9jnp7yfteauo45smvmxa8710m foreign key (game_id) references games
-Hibernate: alter table if exists hero_inventory add constraint FKox21x0dd4fg7w81h3a8o6chu foreign key (hero_id) references heroes
-Hibernate: alter table if exists heroes add constraint FKb88jgdc3dfmmhbnrpl6u5sjdn foreign key (game_id) references games
-Hibernate: alter table if exists psi_states add constraint FK9kbp67wo94i0jk9w4v3ja4meq foreign key (game_id) references games
-Hibernate: alter table if exists tile_occupants add constraint FKia56skupqk3qxypotqpovr3gb foreign key (tile_id) references game_tiles
-2025-07-18T17:09:11.222+02:00  INFO 28075 --- [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-07-18T17:09:11.376+02:00  INFO 28075 --- [  restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-07-18T17:09:11.680+02:00  WARN 28075 --- [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-07-18T17:09:11.849+02:00  INFO 28075 --- [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2025-07-18T17:09:11.862+02:00  INFO 28075 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
-2025-07-18T17:09:11.867+02:00  INFO 28075 --- [  restartedMain] c.h.t.TemporalEngineApplication          : Started TemporalEngineApplication in 2.272 seconds (process running for 2.462)
-2025-07-18T17:09:12.479+02:00  INFO 28075 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-07-18T17:09:12.479+02:00  INFO 28075 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-07-18T17:09:12.480+02:00  INFO 28075 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-Hibernate: select count(*) from games g1_0
-Hibernate: select count(*) from games g1_0
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  20.357 s
-[INFO] Finished at: 2025-07-18T17:09:27+02:00
-[INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:3.2.0:run (default-cli) on project temporal-engine: Process terminated with exit code: 137 -> [Help 1]
-[ERROR] 
-[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR] 
-[ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+Hibernate: alter table psi_states add constraint UK_p3db7cxh1ex7q3qcsx7b4otyr unique (psi_id)
+Hibernate: alter table temporal_artifacts add constraint UK_htd98v35r512f47a02mb18517 unique (artifact_id)
+Hibernate: alter table forged_objects add constraint FKhdsqckahlo2lb6j4klgulaffn foreign key (game_id) references games
+Hibernate: alter table game_history add constraint FK1aab4jlhfgjg0ui3p4o23uqdp foreign key (game_id) references games
+Hibernate: alter table game_metadata add constraint FKhrb23hu15c4tg72vp9e1vqbc8 foreign key (game_id) references games
+Hibernate: alter table game_players add constraint FKrbr2flqdav5ovyjas7q92u64r foreign key (game_id) references games
+Hibernate: alter table game_tiles add constraint FK9jnp7yfteauo45smvmxa8710m foreign key (game_id) references games
+Hibernate: alter table hero_abilities add constraint FK4wk3wflmkij7kl93hmbg29y9j foreign key (hero_id) references heroes
+Hibernate: alter table hero_inventory add constraint FKox21x0dd4fg7w81h3a8o6chu foreign key (hero_id) references heroes
+Hibernate: alter table hero_status_effects add constraint FKhwhtej8yql47i6ubjqd6gmj1j foreign key (hero_id) references heroes
+Hibernate: alter table hero_titles add constraint FKc69wtssobfnv2dhrvnspasx9t foreign key (hero_id) references heroes
+Hibernate: alter table heroes add constraint FKb88jgdc3dfmmhbnrpl6u5sjdn foreign key (game_id) references games
+Hibernate: alter table players add constraint FKchry7scrns4qyuyxe9dpod9k3 foreign key (game_id) references games
+Hibernate: alter table psi_states add constraint FK9kbp67wo94i0jk9w4v3ja4meq foreign key (game_id) references games
+Hibernate: alter table temporal_artifacts add constraint FK4gwvr3vnipo301cwl6hnvtyn1 foreign key (game_id) references games
+Hibernate: alter table tile_effects add constraint FK3s6ndlrmj9lbvuqiew9vp9s98 foreign key (tile_id) references game_tiles
+Hibernate: alter table tile_items add constraint FK1b41902nqng8okqb0g1q3dqj6 foreign key (tile_id) references game_tiles
+Hibernate: alter table tile_occupants add constraint FKia56skupqk3qxypotqpovr3gb foreign key (tile_id) references game_tiles
+09:31:37.495 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09:31:37.506 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+✅ Héros GROFI chargé: Jean-Grofignon (LEGENDARY)
+✅ Héros GROFI chargé: The Dude (compagnon)
+✅ Héros GROFI chargé: Vince Vega (compagnon)
+✅ Héros GROFI chargé: Walter (compagnon)
+🦸 4 héros GROFI chargés avec succès
+09:31:38.543 [main] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+09:31:38.610 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+09:31:38.664 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - 31 mappings in 'requestMappingHandlerMapping'
+09:31:38.683 [main] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+09:31:38.690 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+09:31:38.798 [main] INFO  org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+09:31:38.818 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+09:31:38.841 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+09:31:38.850 [main] INFO  com.heroesoftimepoc.temporalengine.TemporalEngineApplication - Started TemporalEngineApplication in 3.811 seconds (JVM running for 4.144)
+09:31:43.152 [http-nio-8080-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09:31:43.152 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+09:31:43.153 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
+09:31:43.153 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
+09:31:43.153 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected FixedThemeResolver
+09:31:43.153 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@60eacbbf
+09:31:43.154 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@3f1b4a14
+09:31:43.154 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+09:31:43.154 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+09:31:43.160 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/scenarios/predefined/conquest-classic", parameters={}
+09:31:43.163 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+09:31:43.165 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+09:31:43.166 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+09:31:43.169 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+09:31:43.170 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+09:31:43.182 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+09:31:43.183 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Tue Jul 22 09:31:43 CEST 2025, status=404, error=Not Found, path=/api/scenarios/predefine (truncated)...]
+09:31:43.197 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+09:31:43.206 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/scenarios/predefined/temporal-rift", parameters={}
+09:31:43.206 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+09:31:43.207 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+09:31:43.207 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+09:31:43.207 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+09:31:43.208 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+09:31:43.208 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+09:31:43.208 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Tue Jul 22 09:31:43 CEST 2025, status=404, error=Not Found, path=/api/scenarios/predefine (truncated)...]
+09:31:43.208 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+09:31:44.369 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - OPTIONS "/api/health", parameters={}
+09:31:44.373 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+09:31:44.377 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 403 FORBIDDEN
+09:31:44.378 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/health", parameters={}
+09:31:44.379 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+09:31:44.380 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+09:31:44.380 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+09:31:44.380 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+09:31:44.381 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+09:31:44.381 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+09:31:44.382 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Tue Jul 22 09:31:44 CEST 2025, status=404, error=Not Found, path=/api/health}]
+09:31:44.383 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+09:31:49.973 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - OPTIONS "/api/health", parameters={}
+09:31:49.974 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+09:31:49.975 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 403 FORBIDDEN
+09:31:49.976 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/health", parameters={}
+09:31:49.976 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+09:31:49.977 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+09:31:49.977 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+09:31:49.978 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+09:31:49.978 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+09:31:49.978 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+09:31:49.978 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Tue Jul 22 09:31:49 CEST 2025, status=404, error=Not Found, path=/api/health}]
+09:31:49.982 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+09:31:50.272 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - OPTIONS "/api/panopticon/1/view/player1", parameters={}
+09:31:50.272 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+09:31:50.273 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 403 FORBIDDEN
+09:31:50.275 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/panopticon/1/view/player1", parameters={}
+09:31:50.275 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+09:31:50.278 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+09:31:50.280 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+09:31:50.281 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+09:31:50.283 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+09:31:50.285 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+09:31:50.286 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Tue Jul 22 09:31:50 CEST 2025, status=404, error=Not Found, path=/api/panopticon/1/view/p (truncated)...]
+09:31:50.287 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+09:31:52.274 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - OPTIONS "/api/panopticon/1/view/player1", parameters={}
+09:31:52.274 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+09:31:52.275 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 403 FORBIDDEN
+09:31:52.276 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/panopticon/1/view/player1", parameters={}
+09:31:52.276 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+09:31:52.276 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+09:31:52.277 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+09:31:52.277 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+09:31:52.277 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+09:31:52.277 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+09:31:52.277 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Tue Jul 22 09:31:52 CEST 2025, status=404, error=Not Found, path=/api/panopticon/1/view/p (truncated)...]
+09:31:52.278 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+09:31:54.274 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - OPTIONS "/api/panopticon/1/view/player1", parameters={}
+09:31:54.275 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+09:31:54.275 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 403 FORBIDDEN
+09:31:54.276 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/panopticon/1/view/player1", parameters={}
+09:31:54.277 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+09:31:54.277 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+09:31:54.277 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+09:31:54.277 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+09:31:54.278 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+09:31:54.278 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+09:31:54.278 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Tue Jul 22 09:31:54 CEST 2025, status=404, error=Not Found, path=/api/panopticon/1/view/p (truncated)...]
+09:31:54.278 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+09:31:54.664 [SpringApplicationShutdownHook] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+09:31:54.664 [SpringApplicationShutdownHook] INFO  org.hibernate.tool.schema.internal.SchemaDropperImpl$DelayedDropActionImpl - HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+Hibernate: drop table if exists cities CASCADE 
+09:31:54.664 [SpringApplicationShutdownHook] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@3acd8963] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+Hibernate: drop table if exists forged_objects CASCADE 
+Hibernate: drop table if exists game_history CASCADE 
+Hibernate: drop table if exists game_metadata CASCADE 
+Hibernate: drop table if exists game_players CASCADE 
+Hibernate: drop table if exists game_tiles CASCADE 
+Hibernate: drop table if exists games CASCADE 
+Hibernate: drop table if exists hero_abilities CASCADE 
+Hibernate: drop table if exists hero_inventory CASCADE 
+Hibernate: drop table if exists hero_status_effects CASCADE 
+Hibernate: drop table if exists hero_titles CASCADE 
+Hibernate: drop table if exists heroes CASCADE 
+Hibernate: drop table if exists players CASCADE 
+Hibernate: drop table if exists psi_states CASCADE 
+Hibernate: drop table if exists temporal_artifacts CASCADE 
+Hibernate: drop table if exists tile_effects CASCADE 
+Hibernate: drop table if exists tile_items CASCADE 
+Hibernate: drop table if exists tile_occupants CASCADE 
+09:31:54.671 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Shutdown initiated...
+09:31:54.671 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Shutdown completed.

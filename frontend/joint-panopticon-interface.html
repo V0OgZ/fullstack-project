@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Joint Oublié - Accès Panopticon</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #4ecdc4;
+            padding-bottom: 20px;
+        }
+
+        .header h1 {
+            color: #4ecdc4;
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: 0 0 10px #4ecdc4;
+        }
+
+        .header p {
+            color: #a0a0a0;
+            font-style: italic;
+            margin: 10px 0 0 0;
+        }
+
+        .joint-section {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #4ecdc4;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 20px rgba(78, 205, 196, 0.3);
+        }
+
+        .joint-title {
+            color: #4ecdc4;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .joint-description {
+            color: #c0c0c0;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .joint-quotes {
+            background: rgba(78, 205, 196, 0.1);
+            border-left: 4px solid #4ecdc4;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .joint-quote {
+            color: #a0a0a0;
+            font-style: italic;
+            margin: 5px 0;
+        }
+
+        .activation-form {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group label {
+            color: #4ecdc4;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group select {
+            padding: 10px;
+            border: 1px solid #4ecdc4;
+            border-radius: 5px;
+            background: rgba(0, 0, 0, 0.5);
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .activate-btn {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            border: none;
+            color: #000;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s ease;
+        }
+
+        .activate-btn:hover {
+            background: linear-gradient(45deg, #44a08d, #4ecdc4);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.4);
+        }
+
+        .activate-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .panopticon-view {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #f0f;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+            display: none;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+        }
+
+        .panopticon-view.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .panopticon-header {
+            color: #f0f;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 0 10px #f0f;
+        }
+
+        .panopticon-section {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(255, 0, 255, 0.1);
+            border-radius: 5px;
+        }
+
+        .section-title {
+            color: #f0f;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #f0f;
+            padding-bottom: 5px;
+        }
+
+        .data-item {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 3px;
+            border-left: 3px solid #f0f;
+        }
+
+        .data-item.hallucinated {
+            border-left-color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        .data-item.real {
+            border-left-color: #4ecdc4;
+            background: rgba(78, 205, 196, 0.1);
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            margin: 5px 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 3px;
+        }
+
+        .psi-state {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 3px;
+            background: rgba(255, 0, 255, 0.2);
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .log-entry {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 3px 0;
+            padding: 5px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 3px;
+        }
+
+        .log-entry.hallucinated {
+            color: #ff6b6b;
+            font-style: italic;
+        }
+
+        .log-entry.real {
+            color: #4ecdc4;
+        }
+
+        .prediction {
+            background: rgba(255, 215, 0, 0.1);
+            border-left: 3px solid #ffd700;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 3px;
+        }
+
+        .warning {
+            background: rgba(255, 107, 107, 0.2);
+            border: 1px solid #ff6b6b;
+            color: #ff6b6b;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .loading {
+            text-align: center;
+            color: #4ecdc4;
+            font-size: 1.2rem;
+            margin: 20px 0;
+        }
+
+        .spinner {
+            border: 3px solid rgba(78, 205, 196, 0.3);
+            border-top: 3px solid #4ecdc4;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            background: rgba(255, 107, 107, 0.2);
+            border: 1px solid #ff6b6b;
+            color: #ff6b6b;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .success {
+            background: rgba(78, 205, 196, 0.2);
+            border: 1px solid #4ecdc4;
+            color: #4ecdc4;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌀 Le Joint Oublié de Jean-Grofignon</h1>
+            <p>*Objet légendaire — artefact ontologique passif*</p>
+        </div>
+
+        <div class="joint-section">
+            <div class="joint-title">🔥 Alias : "le mégot originel", "le déclencheur", "la cendre du monde"</div>
+            
+            <div class="joint-description">
+                Un minuscule reste de roulé, à peine reconnaissable, encore tiède. On le retrouve dans un vieux cendrier oublié sur le rebord d'un Nexus. Personne ne sait quand il a été fumé… ou si quelqu'un l'a jamais allumé.
+            </div>
+
+            <div class="joint-quotes">
+                <div class="joint-quote">"Ce n'est pas toi qui tires dessus. C'est lui qui te tire en arrière."</div>
+                <div class="joint-quote">"Tu vois le jeu. Puis tu vois le joueur. Puis tu vois toi en train de voir."</div>
+                <div class="joint-quote">"Il reste tiède. Comme s'il venait d'être fumé dans un autre monde."</div>
+            </div>
+
+            <div class="warning">
+                ⚠️ <strong>ATTENTION :</strong> L'utilisation du Joint Oublié ouvre l'accès au PANOPTICON en mode lecture seule hallucinée. 
+                Aucune modification du jeu n'est possible. Effet temporaire et halluciné.
+            </div>
+
+            <div class="activation-form">
+                <div class="form-group">
+                    <label for="gameId">ID de la Partie :</label>
+                    <input type="number" id="gameId" value="1" min="1">
+                </div>
+                
+                <div class="form-group">
+                    <label for="heroName">Nom du Héros :</label>
+                    <select id="heroName">
+                        <option value="Jean-Grofignon">Jean-Grofignon</option>
+                        <option value="Arthur">Arthur</option>
+                        <option value="Ragnar">Ragnar</option>
+                        <option value="Merlin">Merlin</option>
+                        <option value="Claudius">Claudius</option>
+                    </select>
+                </div>
+                
+                <button class="activate-btn" onclick="activateJoint()">🚬 TIRER UNE BOUFFÉE</button>
+            </div>
+        </div>
+
+        <div class="loading" id="loading" style="display: none;">
+            <div class="spinner"></div>
+            <div>Initialisation du PANOPTICON... Connexion au multivers 5D</div>
+        </div>
+
+        <div class="panopticon-view" id="panopticonView">
+            <div class="panopticon-header">🔮 PANOPTICΩN - Vision 200D Hallucinée</div>
+            
+            <div class="panopticon-section">
+                <div class="section-title">🎮 État du Jeu</div>
+                <div id="gameState"></div>
+            </div>
+
+            <div class="panopticon-section">
+                <div class="section-title">⏰ Timelines</div>
+                <div id="timelines"></div>
+            </div>
+
+            <div class="panopticon-section">
+                <div class="section-title">ψ États Quantiques</div>
+                <div id="psiStates"></div>
+            </div>
+
+            <div class="panopticon-section">
+                <div class="section-title">📜 Logs Causaux</div>
+                <div id="causalLogs"></div>
+            </div>
+
+            <div class="panopticon-section">
+                <div class="section-title">🔮 Prédictions Futures</div>
+                <div id="futurePredictions"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function activateJoint() {
+            const gameId = document.getElementById('gameId').value;
+            const heroName = document.getElementById('heroName').value;
+            const activateBtn = document.querySelector('.activate-btn');
+            const loading = document.getElementById('loading');
+            const panopticonView = document.getElementById('panopticonView');
+
+            if (!gameId || !heroName) {
+                showError('Veuillez remplir tous les champs');
+                return;
+            }
+
+            // Désactiver le bouton et afficher le loading
+            activateBtn.disabled = true;
+            loading.style.display = 'block';
+            panopticonView.classList.remove('active');
+
+            try {
+                // Essayer d'abord le backend réel
+                let data;
+                try {
+                    const response = await fetch(`/api/temporal/panopticon/joint-access/${gameId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            heroName: heroName
+                        })
+                    });
+
+                    if (response.ok) {
+                        data = await response.json();
+                    } else {
+                        throw new Error('Backend non disponible');
+                    }
+                } catch (backendError) {
+                    console.log('Backend non disponible, utilisation du mode mock');
+                    // Mode mock - données hallucinées
+                    data = createMockPanopticonData(gameId, heroName);
+                }
+
+                if (data.success !== false) {
+                    displayPanopticonView(data);
+                    showSuccess('Accès Panopticon activé avec succès');
+                } else {
+                    showError(data.message || 'Erreur lors de l\'activation');
+                }
+
+            } catch (error) {
+                console.log('Erreur, utilisation du mode mock');
+                const mockData = createMockPanopticonData(gameId, heroName);
+                displayPanopticonView(mockData);
+                showSuccess('Accès Panopticon activé (mode mock)');
+            } finally {
+                activateBtn.disabled = false;
+                loading.style.display = 'none';
+            }
+        }
+
+        function createMockPanopticonData(gameId, heroName) {
+            return {
+                success: true,
+                message: "Accès Panopticon activé via le Joint Oublié (MODE MOCK)",
+                accessMode: "PANOPTICON:200D:READ_ONLY",
+                hallucinated: true,
+                heroName: heroName,
+                activationTime: new Date().toISOString(),
+                gameState: {
+                    gameId: gameId,
+                    currentTurn: 5,
+                    currentTimeline: "ℬ1",
+                    status: "ACTIVE",
+                    onticInsight: "Le jeu est une simulation quantique temporelle",
+                    playerConsciousness: "Le joueur devient conscient du système",
+                    metaLevel: "Niveau 200D - Vision totale du multivers"
+                },
+                timelines: [
+                    {
+                        id: "ℬ1",
+                        name: "Timeline Principale",
+                        probability: 0.85,
+                        hallucinatedDescription: "La timeline que tu vois n'est qu'une projection de ta conscience"
+                    },
+                    {
+                        id: "ℬ2",
+                        name: "Timeline ℬ2 (Hallucinée)",
+                        probability: 0.12,
+                        hallucinatedDescription: "Cette timeline existe peut-être, peut-être pas"
+                    },
+                    {
+                        id: "ℬ3",
+                        name: "Timeline ℬ3 (Hallucinée)",
+                        probability: 0.08,
+                        hallucinatedDescription: "Timeline parallèle - réalité incertaine"
+                    }
+                ],
+                psiStates: [
+                    {
+                        id: "ψ001",
+                        probability: 0.75,
+                        timeline: "ℬ1",
+                        hallucinatedDescription: "État quantique superposé - réalité incertaine"
+                    },
+                    {
+                        id: "ψ002",
+                        probability: 0.45,
+                        timeline: "ℬ1",
+                        hallucinatedDescription: "État halluciné - produit de la conscience élargie"
+                    },
+                    {
+                        id: "ψ003",
+                        probability: 0.32,
+                        timeline: "ℬ2",
+                        hallucinatedDescription: "État quantique superposé - réalité incertaine"
+                    }
+                ],
+                causalLogs: [
+                    {
+                        timestamp: new Date().toISOString(),
+                        event: "ψ001: COLLAPSE(conscience_joueur) → GAIN(ontic_insight)",
+                        type: "HALLUCINATED",
+                        hallucinatedDescription: "Événement halluciné - produit de la conscience élargie"
+                    },
+                    {
+                        timestamp: new Date().toISOString(),
+                        event: "ψ002: OBSERVER(système_jeu) → COMPREHENSION(mécaniques_internes)",
+                        type: "HALLUCINATED",
+                        hallucinatedDescription: "Événement halluciné - produit de la conscience élargie"
+                    },
+                    {
+                        timestamp: new Date().toISOString(),
+                        event: "ψ003: HALLUCINATION(timeline_parallèle) → VISION(multivers)",
+                        type: "HALLUCINATED",
+                        hallucinatedDescription: "Événement halluciné - produit de la conscience élargie"
+                    }
+                ],
+                futurePredictions: [
+                    {
+                        description: "Le héros atteindra le niveau 10 dans 5 tours",
+                        probability: 0.85,
+                        timeline: "ℬ1",
+                        hallucinatedDescription: "Prédiction hallucinée - possible futur"
+                    },
+                    {
+                        description: "Une bataille épique aura lieu au tour 15",
+                        probability: 0.67,
+                        timeline: "ℬ1",
+                        hallucinatedDescription: "Prédiction hallucinée - possible futur"
+                    },
+                    {
+                        description: "Un artefact légendaire sera découvert",
+                        probability: 0.42,
+                        timeline: "ℬ2",
+                        hallucinatedDescription: "Prédiction hallucinée - possible futur"
+                    }
+                ]
+            };
+        }
+
+        function displayPanopticonView(data) {
+            // Afficher l'état du jeu
+            const gameState = document.getElementById('gameState');
+            gameState.innerHTML = '';
+            
+            Object.entries(data.gameState).forEach(([key, value]) => {
+                const item = document.createElement('div');
+                item.className = 'data-item';
+                item.innerHTML = `<strong>${key}:</strong> ${value}`;
+                gameState.appendChild(item);
+            });
+
+            // Afficher les timelines
+            const timelines = document.getElementById('timelines');
+            timelines.innerHTML = '';
+            
+            data.timelines.forEach(timeline => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+                item.innerHTML = `
+                    <span><strong>${timeline.id}</strong> - ${timeline.name}</span>
+                    <span>${(timeline.probability * 100).toFixed(1)}%</span>
+                `;
+                timelines.appendChild(item);
+            });
+
+            // Afficher les états ψ
+            const psiStates = document.getElementById('psiStates');
+            psiStates.innerHTML = '';
+            
+            data.psiStates.forEach(psi => {
+                const item = document.createElement('div');
+                item.className = 'psi-state';
+                item.innerHTML = `${psi.id} (${(psi.probability * 100).toFixed(1)}%)`;
+                psiStates.appendChild(item);
+            });
+
+            // Afficher les logs causaux
+            const causalLogs = document.getElementById('causalLogs');
+            causalLogs.innerHTML = '';
+            
+            data.causalLogs.forEach(log => {
+                const item = document.createElement('div');
+                item.className = `log-entry ${log.type.toLowerCase()}`;
+                item.innerHTML = `<strong>${log.timestamp}</strong> - ${log.event}`;
+                causalLogs.appendChild(item);
+            });
+
+            // Afficher les prédictions futures
+            const futurePredictions = document.getElementById('futurePredictions');
+            futurePredictions.innerHTML = '';
+            
+            data.futurePredictions.forEach(prediction => {
+                const item = document.createElement('div');
+                item.className = 'prediction';
+                item.innerHTML = `
+                    <div><strong>${prediction.description}</strong></div>
+                    <div>Probabilité: ${(prediction.probability * 100).toFixed(1)}% | Timeline: ${prediction.timeline}</div>
+                `;
+                futurePredictions.appendChild(item);
+            });
+
+            // Afficher la vue
+            panopticonView.classList.add('active');
+        }
+
+        function showError(message) {
+            const error = document.createElement('div');
+            error.className = 'error';
+            error.textContent = message;
+            document.querySelector('.container').appendChild(error);
+            
+            setTimeout(() => error.remove(), 5000);
+        }
+
+        function showSuccess(message) {
+            const success = document.createElement('div');
+            success.className = 'success';
+            success.textContent = message;
+            document.querySelector('.container').appendChild(success);
+            
+            setTimeout(() => success.remove(), 5000);
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🌀 Interface Joint Oublié chargée');
+        });
+    </script>
+</body>
+</html> 

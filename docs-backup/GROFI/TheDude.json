@@ -1,0 +1,50 @@
+{
+  "id": "hero_the_dude",
+  "name": "TheDude",
+  "title": "Gardien du Flux",
+  "description": "Le monde peut trembler. The Dude, lui, sirote. Il stabilise les timelines en chillant si fort que les effondrements hésitent à venir.",
+  "rarity": "COMPANION",
+  "role": "STABILIZER",
+  "faction": "ZEN",
+  "quotes": [
+    "This aggression will not stand, man.",
+    "That's just, like, your opinion, man.",
+    "Je chill, donc je suis."
+  ],
+  "summoned_by": "hero_jean_grofignon",
+  "immunityTags": ["STRESS", "OBS"],
+  "power": {
+    "name": "Zen Superposition",
+    "description": "Empêche tout effondrement dans une zone stable tant que The Dude est invoqué.",
+    "quantum_script": "†[MAINTAIN_SUPERPOSITION] ⊙ ZONE(centered_on=TheDude)",
+    "formula": "Ω[STABLE] ⊙ ZONE(radius=2, center=TheDude)"
+  },
+  "starting_artifacts": [
+    {
+      "name": "Tapis Sacré",
+      "type": "ZONE_STABILIZER",
+      "formula": "Σ[VALUE:0.1] ⊙ ZONE(radius=3, center=TheDude)",
+      "description": "Maintient un stress causale très bas autour de The Dude",
+      "charges": -1
+    },
+    {
+      "name": "White Russian Quantique",
+      "type": "STRESS_REDUCER",
+      "formula": "Σ[REDUCE:0.5] ⊙ HERO(TheDude)",
+      "description": "Réduit le stress causale global quand consommé",
+      "charges": 3
+    }
+  ],
+  "temporal_affinities": {
+    "stress_generation": -0.8,
+    "zone_stabilization": 0.9,
+    "chill_factor": 1.0
+  },
+  "stats": {
+    "base_health": 80,
+    "base_temporal_energy": 100,
+    "movement_points": 2,
+    "vision_radius": 3,
+    "level": 5
+  }
+}

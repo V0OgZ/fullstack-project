@@ -94,7 +94,7 @@ fi
 run_test "api-status" "curl -s http://localhost:8080/api/game/status"
 
 # Scripts de test existants
-for script in "test-causality-wall.sh" "test-vision-temporelle.sh" "test-quantum-maze.sh"; do
+for script in "test-causality-wall.sh" "test-vision-temporelle.sh" "test-quantum-maze.sh" "test-creatures-quantiques.sh" "test-service-traduction.sh"; do
     if [ -f "$ROOT_DIR/scripts/$script" ]; then
         run_test "$(basename "$script" .sh)" "cd '$ROOT_DIR' && timeout 60s ./scripts/$script"
     else

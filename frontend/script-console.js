@@ -79,6 +79,18 @@ class ScriptConsole {
         this.history.push(script);
         this.historyIndex = this.history.length;
         
+        // 🌐 TRADUCTION AUTOMATIQUE DU SCRIPT
+        if (window.translationService && window.translationService.isAvailable) {
+            try {
+                const translation = await window.translationService.quickTranslate(script);
+                if (translation && translation !== script) {
+                    this.addToOutput(`🌐 ${translation}`, 'translation');
+                }
+            } catch (error) {
+                console.log('Erreur de traduction:', error);
+            }
+        }
+        
         try {
             // Use UI enhancements controller if available
             if (window.uiEnhancements && window.uiEnhancements.executeScript) {
@@ -163,7 +175,17 @@ class ScriptConsole {
     addToOutput(text, type = 'normal') {
         const line = document.createElement('div');
         line.className = `console-line ${type}`;
-        line.textContent = text;
+        
+        // 🌐 STYLISATION SPÉCIALE POUR LES TRADUCTIONS
+        if (type === 'translation') {
+            line.innerHTML = `
+                <span class="translation-icon">🌐</span>
+                <span class="translation-text">${text.replace('🌐 ', '')}</span>
+            `;
+        } else {
+            line.textContent = text;
+        }
+        
         this.output.appendChild(line);
         this.output.scrollTop = this.output.scrollHeight;
         

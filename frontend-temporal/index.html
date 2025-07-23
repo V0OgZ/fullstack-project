@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🕰️ Heroes of Time - Moteur Quantique Temporel</title>
+    <link rel="stylesheet" href="../translation-styles.css">
     <style>
         * {
             margin: 0;
@@ -741,11 +742,18 @@
         </div>
     </div>
 
+    <script src="../translation-service.js"></script>
     <script src="js/temporal-engine.js"></script>
     <script>
         // Interface simplifiée
         window.addEventListener('DOMContentLoaded', function() {
             console.log('Interface Temporelle Simplifiée - Chargée');
+            
+            // 🌐 Initialiser le service de traduction
+            if (typeof TranslationService !== 'undefined') {
+                window.translationService = new TranslationService();
+                console.log('🌐 Service de traduction initialisé');
+            }
             
             // Initialisation automatique
             if (typeof initializeTemporalEngine === 'function') {
@@ -768,6 +776,17 @@
             
             if (command) {
                 addToConsole('> ' + command);
+                
+                // 🌐 TRADUCTION AUTOMATIQUE
+                if (window.translationService && window.translationService.isAvailable) {
+                    window.translationService.quickTranslate(command).then(translation => {
+                        if (translation && translation !== command) {
+                            addToConsole('🌐 ' + translation);
+                        }
+                    }).catch(error => {
+                        console.log('Erreur de traduction:', error);
+                    });
+                }
                 
                 // Exécuter la commande
                 if (typeof executeScript === 'function') {

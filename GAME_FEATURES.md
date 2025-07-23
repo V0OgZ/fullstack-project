@@ -52,6 +52,11 @@
 - **🛡️ Jeanne d'Arc** - Divine inspiration, purifying flame
 - **🧙‍♂️ Merlin l'Enchanteur** - Primordial magic, dragon transformation
 
+**🎓 Beginner Heroes Trio (Perfect for Learning)**:
+- **🎯 Nikita Victor Nettoyeur** - 🆕 Temporal sniper, Vision Causale (pierce fog of causality)
+- **🛡️ Marcus Bouclier de Fer** - 🆕 Quantum tank, Bouclier Quantique (25% damage reduction)
+- **🔮 Elena Flamme Douce** - 🆕 Support mage, Régénération Douce (heal adjacent allies)
+
 **Elven Heroes**:
 - **🏹 Legolas Feuille-Verte** - Perfect aim, elven arrow rain
 - **✨ Galadriel Lumière-Étoilée** - Mirror of truth, star light
@@ -87,6 +92,40 @@
 - **Rich Descriptions** - Lore and backstory for each character
 - **Visual Gallery** - High-quality artwork and animations
 - **Search & Filter** - Browse by race, tier, or abilities
+
+---
+
+## 🔮 **NEW: Quantum Hero System (2025)**
+
+### ⚡ **Temporal Abilities Framework**
+**Advanced hero powers with quantum formulas**
+
+### 🎓 **Perfect Beginner Trio - Balanced Learning Experience**
+
+**🎯 Nikita Victor Nettoyeur - Temporal Sniper**:
+- **Role**: Tireur d'Élite Temporel | **Stats**: ATT:12 DEF:8 HP:85
+- **Ability**: Vision Causale (Passive) - See through causality fog
+- **Quantum Formula**: `ψ{Nikita} = OBSERVE[lunette_quantique] ⊗ PIERCE[brouillard_causal] ⇒ TARGET_LOCK`
+- **Perfect for**: Learning ranged combat and vision mechanics
+
+**🛡️ Marcus Bouclier de Fer - Quantum Tank**:
+- **Role**: Gardien Temporel Débutant | **Stats**: ATT:8 DEF:15 HP:95
+- **Ability**: Bouclier Quantique (Passive) - 25% damage reduction
+- **Quantum Formula**: `ψ{Marcus} = ABSORB[damage_quantum] ⊗ REFLECT[partial_force] ⇒ SHIELD_BOOST`
+- **Perfect for**: Learning defensive tactics and damage mitigation
+
+**🔮 Elena Flamme Douce - Support Mage**:
+- **Role**: Apprentie Mage Temporelle | **Stats**: ATT:6 DEF:7 HP:70
+- **Ability**: Régénération Douce (Passive) - Heal adjacent allies +2HP/turn
+- **Quantum Formula**: `ψ{Elena} = CHANNEL[gentle_mana] ⊗ CAST[basic_spell] ⇒ HEAL_BOOST`
+- **Perfect for**: Learning support mechanics and positioning
+
+**🎮 Why This Trio Works**:
+- ✅ **Balanced Roles**: Damage, Tank, Support
+- ✅ **Beginner Stats**: All stats ≤15 attack, ≤100 health
+- ✅ **Simple Abilities**: One passive ability each, no mana cost
+- ✅ **Automatic Effects**: No complex timing or resource management
+- ✅ **Synergy**: Tank protects, Sniper attacks, Mage heals - classic RPG trinity
 
 ---
 

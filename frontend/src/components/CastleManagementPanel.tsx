@@ -65,12 +65,15 @@ const CastleManagementPanel: React.FC<CastleManagementPanelProps> = ({ gameId, p
         setLoading(true);
         setError(null);
 
-        // Load player buildings using existing API
+        // Load player buildings using backend endpoint
         const buildingsResponse = await ApiService.getPlayerBuildings(gameId, playerId);
         setBuildings(buildingsResponse || []);
 
-        // Load available units using existing API
-        const unitsResponse = await ApiService.getAvailableUnits(gameId, playerId);
+        // Get castleId from the first building (assuming all buildings belong to the same castle)
+        const castleId = buildingsResponse?.[0]?.castleId;
+
+        // Load available units using backend endpoint with castleId if available
+        const unitsResponse = await ApiService.getAvailableUnits(gameId, playerId, castleId);
         setAvailableUnits(unitsResponse || {});
 
         // Load unit details for all available units
@@ -274,6 +277,29 @@ const CastleManagementPanel: React.FC<CastleManagementPanelProps> = ({ gameId, p
       setError('Failed to recruit units. Please try again.');
     } finally {
       setRecruiting(prev => ({ ...prev, [`${unitType}-${buildingId}`]: false }));
+    }
+  };
+
+  const handleUpgradeBuilding = async (buildingId: string) => {
+    if (!currentPlayer) return;
+    
+    try {
+      const response = await fetch(`/api/games/${gameId}/buildings/${buildingId}/upgrade`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ playerId: currentPlayer.id })
+      });
+      
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Building upgrade started:', result);
+        // TODO: Rafraîchir les données après l'upgrade
+      } else {
+        const error = await response.json();
+        console.error('Failed to upgrade building:', error);
+      }
+    } catch (error) {
+      console.error('Error upgrading building:', error);
     }
   };
 
