@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # DK20 Temporal Decay System Test Script
-# Tests Anna the Martopicker's temporal decay mechanics
+# Tests Anna Martel's temporal decay mechanics
 
 set -e
 
@@ -19,7 +19,7 @@ PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 echo -e "${CYAN}🌀 DK20 TEMPORAL DECAY SYSTEM TEST${NC}"
 echo -e "${CYAN}====================================${NC}"
-echo -e "${PURPLE}💫 Testing Anna the Martopicker's temporal decay mechanics${NC}"
+echo -e "${PURPLE}💫 Testing Anna Martel's temporal decay mechanics${NC}"
 echo -e "${PURPLE}   'If you lag behind time, time lags behind you.'${NC}"
 echo ""
 
@@ -166,13 +166,13 @@ test_decay_levels() {
 
 # Test 5: Anna the Martopicker hero
 test_anna_hero() {
-    echo -e "${YELLOW}📋 Test 5: Anna the Martopicker Hero Validation${NC}"
+    echo -e "${YELLOW}📋 Test 5: Anna Martel Hero Validation${NC}"
     
     # Test Anna's hero profile
-    echo -e "${BLUE}👤 Testing Anna the Martopicker hero...${NC}"
+    echo -e "${BLUE}👤 Testing Anna Martel hero...${NC}"
     
     ANNA_PROFILE='{
-        "name": "Anna the Martopicker",
+        "name": "Anna Martel",
         "title": "Glaneuse d'\''Artefacts Oubliés",
         "type": "TEMPORAL_SPECIALIST",
         "philosophy": "If you lag behind time, time lags behind you",
@@ -264,7 +264,7 @@ run_all_tests() {
     
     if [[ $passed_tests -eq $test_count ]]; then
         echo -e "${GREEN}🎉 All DK20 tests completed successfully!${NC}"
-        echo -e "${PURPLE}💫 Anna the Martopicker's temporal decay system is ready!${NC}"
+        echo -e "${PURPLE}💫 Anna Martel's temporal decay system is ready!${NC}"
     else
         echo -e "${YELLOW}⚠️ Some tests had issues (likely due to unimplemented endpoints)${NC}"
         echo -e "${BLUE}📝 This is expected for initial DK20 integration${NC}"

@@ -248,4 +248,20 @@
 - ✅ **Clean build system** - zero warnings or errors
 - ✅ **Production-ready codebase** - ready for deployment
 
+### ⚡ **NEW FEATURE: Hero Synergies** (January 2025)
+
+#### **Jean-Grofignon & Memento Symbiose Éternelle**
+- ✅ **Passive synergy system** - Automatic activation when heroes are together
+- ✅ **Distance-based activation** - ≤ 3 hexagons for synergy effects
+- ✅ **Shared mana pool** - Combined resources for ultimate abilities
+- ✅ **Amplified actions** - +50% effectiveness when working together
+- ✅ **Special abilities unlocked**:
+  - 🌀 **Collapse Organisé** - Jean forces collapse, Memento selects reality
+  - 📚 **Codex Vivant** - Learn enemy abilities and teach to allies
+  - 🎭 **Paradoxe Stable** - Create impossible but stable effects
+- ✅ **Achievement system** - "Symbiose Parfaite" for maintaining synergy
+- ✅ **Test script available** - `./scripts/test-jean-memento-synergie.sh`
+
+**Documentation**: [docs/heroes/JEAN_MEMENTO_SYNERGIE_ETERNELLE.md](docs/heroes/JEAN_MEMENTO_SYNERGIE_ETERNELLE.md)
+
 **Status**: 🚀 **MISSION ACCOMPLISHED** - From framework to complete game! 

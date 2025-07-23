@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# 🌟 TEST SCÉNARIO DÉCROISSANCE TEMPORELLE - ANNA THE MARTOPICKER
+# 🌟 TEST SCÉNARIO DÉCROISSANCE TEMPORELLE - ANNA MARTEL
 # ================================================================
 # Test du scénario HOTS de décroissance temporelle
 
@@ -21,7 +21,7 @@ SCENARIO_FILE="game_assets/scenarios/hots/test_decroissance_temporelle.hots"
 GAME_NAME="DecayScenarioTest"
 PLAYER_ID="decay-scenario-test"
 
-echo -e "${PURPLE}🌟 TEST SCÉNARIO DÉCROISSANCE TEMPORELLE - ANNA THE MARTOPICKER${NC}"
+echo -e "${PURPLE}🌟 TEST SCÉNARIO DÉCROISSANCE TEMPORELLE - ANNA MARTEL${NC}"
 echo -e "${CYAN}===============================================================${NC}"
 echo -e "${YELLOW}Scénario:${NC} $SCENARIO_FILE"
 echo -e "${YELLOW}Concept:${NC} Test complet du système de décroissance temporelle"
@@ -174,7 +174,7 @@ echo ""
 echo -e "${PURPLE}🎯 RÉSUMÉ FINAL DU TEST SCÉNARIO${NC}"
 echo -e "${CYAN}==================================${NC}"
 echo -e "${GREEN}✅ Scénario de décroissance temporelle testé avec succès${NC}"
-echo -e "${GREEN}✅ Système d'Anna the Martopicker validé${NC}"
+echo -e "${GREEN}✅ Système d'Anna Martel validé${NC}"
 echo ""
 echo -e "${YELLOW}📋 Fonctionnalités testées:${NC}"
 echo "  • Création de héros (Arthur, Morgana)"
