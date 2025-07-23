@@ -391,9 +391,25 @@ class ContextualHeroActions {
     }
     
     executeTemporalDecay() {
-        console.log('⏰ Temporal Decay activated!');
+        console.log('⏰ Temporal Decay activated');
         if (window.temporalIntegration) {
             window.temporalIntegration.applyDecay('current-game');
+        }
+        
+        // Citation spéciale d'Anna sur les erreurs répétitives
+        if (window.systemMessages) {
+            const frustrated = Math.random() > 0.7; // 30% chance de frustration
+            if (frustrated) {
+                window.systemMessages.showQuote(
+                    'When you tell people something, they don\'t listen. Then something happens - ALL THE TIME, ALL THE TIME, the same thing.',
+                    'Anna Martel - Time Architect'
+                );
+            } else {
+                window.systemMessages.showQuote(
+                    'Le decay n\'est pas une punition, c\'est un rappel à l\'ordre',
+                    'Anna Martel'
+                );
+            }
         }
     }
     

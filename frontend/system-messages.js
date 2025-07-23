@@ -115,6 +115,9 @@ class SystemMessages {
             'Engine operational - Awaiting temporal instructions',
             'Timeline systems stable - Ready for hero commands',
             'Anna Martel: "Le temps attend vos décisions"',
+            'Anna Martel: "When you tell people something, they don\'t listen. Then something happens - ALL THE TIME, ALL THE TIME, the same thing."',
+            'Anna Martel: "Quand on prévient les gens, ils n\'écoutent pas. Puis ça arrive - TOUJOURS, TOUJOURS, la même chose."',
+            'Anna Martel: "J\'ai construit ce système pour éviter les répétitions causales, mais les humains... toujours les mêmes erreurs."',
             'Quantum states in equilibrium - Ready to collapse',
             'Temporal nexus active - Heroes ready for deployment'
         ];
