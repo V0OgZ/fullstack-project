@@ -1,6 +1,7 @@
 # 📚 DOCUMENTATION HEROES OF TIME
 
-**Documentation organisée et structure propre après grand nettoyage**
+📘 Cette page est en **français**. [🔀 English version (README.en.md)](https://github.com/v0ogz/Heroes-of-Time/blob/main/README.en.md)  
+🔗 [Voir le dépôt sur GitHub](https://github.com/v0ogz/Heroes-of-Time)
 
 ---
 
@@ -63,63 +64,41 @@
 
 ## 📁 **RAPPORTS & ANALYSES**
 
-### **📈 Rapports Spéciaux** (dossier `../rapports/`)
-- **FINAL_TEST_REPORT.md** → Rapport final de tests
-- **HOTS_FINAL_STATUS_REPORT.md** → Status HOTS final
-- **QUANTUM_SYSTEM_VALIDATION_REPORT.md** → Validation système quantique
-- **RAPPORT_FINAL_ACCOMPLISSEMENT.md** → Accomplissements finaux
+### **📈 Rapports Spéciaux**
+- **FINAL_TEST_REPORT.md**
+- **HOTS_FINAL_STATUS_REPORT.md**
+- **QUANTUM_SYSTEM_VALIDATION_REPORT.md**
+- **RAPPORT_FINAL_ACCOMPLISSEMENT.md**
 
-### **🔍 Analyses** (dossier `../analysis/`)
-- **DEVELOPMENT_NOTES.md** → Notes de développement
-- **PROJECT_STATUS.md** → Status du projet
+### **🔍 Analyses**
+- **[DEVELOPMENT_NOTES.md](../analysis/DEVELOPMENT_NOTES.md)**
+- **[PROJECT_STATUS.md](../analysis/PROJECT_STATUS.md)**
 
 ---
 
-## 🗂️ **ARCHIVES** (dossier `../archives/docs/`)
+## 🗂️ **ARCHIVES**
 
-### **📚 Documentation Archivée**
-- **old-reports/** → Anciens rapports de performance
-- **deprecated/** → Documentation obsolète
-- **duplicates/** → Doublons supprimés
-- **status-reports/** → Anciens rapports de status
+- `old-reports/` → Anciens rapports
+- `deprecated/` → Obsolète
+- `duplicates/` → Doublons supprimés
+- `status-reports/` → Rapports d’état
 
-**🧹 Plus de 80 fichiers .md obsolètes archivés lors du grand nettoyage !**
+🧹 *Plus de 80 fichiers .md obsolètes archivés lors du grand nettoyage !*
 
 ---
 
 ## 🚀 **DÉMARRAGE RAPIDE**
 
 ### **🎯 Pour Jouer**
-1. Lire **[README.md](../README.md)** → Histoire et présentation
+1. Lire **[README.md](../README.md)** → Histoire
 2. Suivre **[INSTALLATION.md](core/INSTALLATION.md)** → Setup
-3. Consulter **[GAMEPLAY.md](core/GAMEPLAY.md)** → Mécaniques
+3. Voir **[GAMEPLAY.md](core/GAMEPLAY.md)** → Mécaniques
 
 ### **🔧 Pour Développer**
 1. **[API.md](core/API.md)** → Référence API
-2. **[ENGINE_ARCHITECTURE.md](architecture/ENGINE_ARCHITECTURE.md)** → Architecture
+2. **[ENGINE_ARCHITECTURE.md](architecture/ENGINE_ARCHITECTURE.md)** → Moteur
 3. **[INDEX_SCRIPTS_HEROES_OF_TIME.md](../scripts/INDEX_SCRIPTS_HEROES_OF_TIME.md)** → Scripts
 
 ### **🧪 Pour Tester**
 ```bash
 ./scripts/test-dashboard.sh  # Dashboard interactif
-```
-
----
-
-## 💡 **CONCEPTS CLÉS**
-
-### **🧠 Distinction Fondamentale**
-- **📋 JSON = DÉFINITIONS** → *Comment les objets sont définis*
-- **📜 HOTS = SCÉNARIOS** → *Comment les histoires avancent*
-- **🔄 Axes orthogonaux** → Se complètent, ne se concurrencent pas
-
-### **⚡ Héros Légendaires**
-- **Arthur** → Roi Temporel avec Excalibur Quantique
-- **Axis** → Voyageur Linéaire (super OP mais limité)
-- **Jean-Grofignon** → Éveillé Ontologique maître des paradoxes
-- **Lysandrel** → Archimage du contrôle temporel
-
----
-
-**🎯 Documentation propre, organisée et navigable !**  
-**Plus de bordel avec 100+ fichiers .md partout !** ✨ 
