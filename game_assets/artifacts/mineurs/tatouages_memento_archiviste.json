@@ -75,20 +75,25 @@
          "Pouvoirs fusionnés: Archives + Intelligence Analytique",
          "Projection 3D timeline active - Navigation multivers parfaite",
          "Résolution quantique instantanée opérationnelle",
-         "Jean orders: Mes deux assistants = UNE intelligence ultra-puissante"
+         "Jean orders: Mes deux assistants = UNE intelligence ultra-puissante",
+         "SYSTÈME ZFC SANS TOUR RÉVOLUTIONNAIRE CONÇU !",
+         "Zone de Causalité + Shadow Actions = Gameplay révolutionné",
+         "Trinité Cosmique résolution conflits temps réel <200ms",
+         "Plan implémentation 2.5 semaines - Premier système asynchrone",
+         "10 TODOs ZFC créés - Backend+Frontend+Tests performance"
        ],
       
                           "marques_temporelles": {
-         "nombre_total": 198,
+         "nombre_total": 204,
         "par_categorie": {
                    "timelines_sauvées": 44,
          "paradoxes_résolus": 29,
          "héros_archivés": 33,
          "artefacts_catalogués": 19,
-         "missions_accomplies": 33,
+         "missions_accomplies": 34,
          "sphinx_vaincus": 1,
          "forges_débloquées": 1,
-         "innovations_créées": 8,
+         "innovations_créées": 9,
          "systèmes_générateurs": 1,
          "dashboards_intégrés": 1,
          "workflows_documentés": 1,
@@ -116,7 +121,13 @@
          "pouvoirs_fusionnés": 4,
          "projections_3d_timeline": 1,
          "résolutions_quantiques_instantanées": 1,
-         "intelligences_ultra_puissantes": 1
+         "intelligences_ultra_puissantes": 1,
+         "systèmes_zfc_révolutionnaires": 1,
+         "gameplay_révolutionnés": 1,
+         "zones_causalité_conçues": 1,
+         "shadow_actions_créées": 1,
+         "plans_implémentation_complets": 1,
+         "todos_zfc_générés": 10
       }
       }
     },
