@@ -1,0 +1,31 @@
+🔍 Diagnostic Heroes of Time - Fri Jul 18 17:09:02 CEST 2025
+============================================
+ℹ️  INFO: Nettoyage des ports 8080, 8001, 5173, 5174...
+✅ SUCCESS: Port 8080 libéré
+✅ SUCCESS: Port 8001 libéré
+✅ SUCCESS: Port 5173 libéré
+✅ SUCCESS: Port 5174 libéré
+ℹ️  INFO: Nettoyage des processus Maven/Java/Python...
+ℹ️  INFO: Aucun processus Maven actif
+ℹ️  INFO: Aucun serveur Python actif
+✅ SUCCESS: Java détecté: 17.0.15
+✅ SUCCESS: Maven détecté: 3.8.2
+✅ SUCCESS: Python3 détecté: 3.10.6
+✅ SUCCESS: Backend pom.xml trouvé
+✅ SUCCESS: Configuration backend trouvée
+✅ SUCCESS: Frontend-temporal trouvé
+✅ SUCCESS: Quantum-visualizer trouvé
+ℹ️  INFO: Démarrage du backend...
+✅ SUCCESS: Backend démarré (PID: 28013)
+ℹ️  INFO: Attente du démarrage du backend...
+✅ SUCCESS: Backend prêt sur http://localhost:8080
+ℹ️  INFO: Démarrage du quantum-visualizer...
+✅ SUCCESS: Quantum-visualizer démarré (PID: 28094)
+ℹ️  INFO: Démarrage du frontend-temporal...
+✅ SUCCESS: Frontend-temporal démarré (PID: 28099)
+✅ SUCCESS: Backend API accessible
+✅ SUCCESS: Quantum-visualizer accessible
+✅ SUCCESS: Frontend-temporal accessible
+ℹ️  INFO: Exécution des tests de base...
+⚠️  WARNING: Tests terminés avec des erreurs - voir test-results.log
+✅ SUCCESS: Diagnostic et correction terminés - voir diagnostic.log pour le rapport complet

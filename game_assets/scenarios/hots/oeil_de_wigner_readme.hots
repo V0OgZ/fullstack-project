@@ -1,0 +1,129 @@
+# ========================================
+# L'ŒIL DE WIGNER - HISTOIRE DU README
+# La Rencontre Épique racontée dans le README
+# ========================================
+
+# === ACTE I: LA MISE EN SCÈNE ===
+# L'Œil de Wigner scintille au sommet de la tour en ruines
+
+# Créer les héros principaux
+HERO(Arthur)
+HERO(Lysandrel)
+
+# Arthur s'approche prudemment de la tour
+MOV(Arthur, @25,30)
+
+# Lysandrel reste dans la vallée
+MOV(Lysandrel, @25,10)
+
+# Créer l'Œil de Wigner au sommet de la tour
+CREATE(ARTIFACT, wigner_eye, @25,35)
+
+# === ACTE II: L'ARMÉE ENNEMIE APPROCHE ===
+
+# Créer l'armée ennemie
+HERO(Ragnar)  # Chef ennemi
+HERO(EnemySoldier1)
+HERO(EnemySoldier2)
+HERO(EnemySoldier3)
+
+# Positionner l'armée ennemie qui approche
+MOV(Ragnar, @20,5)
+MOV(EnemySoldier1, @21,6)
+MOV(EnemySoldier2, @22,7)
+MOV(EnemySoldier3, @23,8)
+
+# === ACTE III: LES OPTIONS QUANTIQUES ===
+# Arthur contemple ses actions futures en superposition
+
+# Option 1: Arthur saisit l'Œil de Wigner (haute probabilité)
+ψ001: (0.8+0.2i) ⊙(Δt+2 @25,35 ⟶ USE(ARTIFACT, wigner_eye, HERO:Arthur))
+
+# Option 2: Arthur combat l'armée (probabilité moyenne)
+ψ002: (0.6+0.4i) ⊙(Δt+3 @22,8 ⟶ BATTLE(Arthur, Ragnar))
+
+# Option 3: Lysandrel lance un sort de protection (probabilité moyenne)
+ψ003: (0.7+0.3i) ⊙(Δt+1 @25,15 ⟶ CAST(SPELL, temporal_shield, HERO:Lysandrel))
+
+# Option 4: Retraite stratégique (faible probabilité)
+ψ004: (0.3+0.1i) ⊙(Δt+1 @30,30 ⟶ MOV(Arthur, @30,30))
+
+# === DIALOGUE DRAMATIQUE ===
+# "Sire, ne le touchez pas !" crie Lysandrel depuis la vallée.
+# "Si vous l'activez maintenant, toutes nos actions futures deviendront réelles instantanément !"
+
+# === ACTE IV: LA DÉCISION FATIDIQUE ===
+
+# Arthur voit l'armée ennemie approcher
+# Dans quelques tours, ils seront submergés
+# Il n'a qu'un choix : saisir l'Œil et forcer le collapse causal
+
+# Arthur se déplace vers l'Œil
+MOV(Arthur, @25,35)
+
+# Arthur équipe l'Œil de Wigner
+CREATE(ARTIFACT, wigner_eye, HERO:Arthur)
+
+# === ACTE V: LE COLLAPSE CAUSAL ===
+# 💥 ARTHUR FORCE LE COLLAPSE CAUSAL ! 💥
+
+# L'Œil de Wigner force l'effondrement de toutes les superpositions
+†ψ001  # L'action d'Arthur devient réelle
+†ψ002  # Le combat potentiel s'effondre
+†ψ003  # Le sort de Lysandrel s'effondre
+†ψ004  # La retraite n'aura pas lieu
+
+# === CONSÉQUENCES DU COLLAPSE ===
+
+# L'armée ennemie est désorientée par le collapse
+# Les probabilités se solidifient en réalité
+
+# Arthur utilise maintenant l'Œil pour observer tous les futurs possibles
+USE(ARTIFACT, wigner_eye, HERO:Arthur)
+
+# Lysandrel lance finalement son sort pour protéger Arthur
+CAST(SPELL, temporal_shield, HERO:Lysandrel)
+
+# === ÉPILOGUE: LA BATAILLE TEMPORELLE ===
+
+# Avec l'Œil de Wigner, Arthur peut voir les mouvements futurs
+# Il anticipe chaque attaque ennemie
+
+# Combat épique avec vision temporelle
+BATTLE(Arthur, Ragnar)
+
+# Les soldats ennemis tentent d'attaquer
+BATTLE(EnemySoldier1, Arthur)
+BATTLE(EnemySoldier2, Lysandrel)
+
+# Mais Arthur, avec l'Œil, a déjà vu leur défaite
+# Il frappe aux points précis révélés par la vision quantique
+
+# === VICTOIRE ===
+# L'armée ennemie est vaincue
+# L'Œil de Wigner a permis à Arthur de maîtriser le temps
+
+# Lysandrel s'approche
+MOV(Lysandrel, @25,30)
+
+# "Vous avez pris un grand risque, Sire"
+# "Parfois, Lysandrel, il faut forcer le destin pour le maîtriser"
+
+# ========================================
+# NOTES TECHNIQUES
+# ========================================
+# 
+# Ce scénario démontre :
+# - Les états quantiques en superposition (ψ)
+# - Le collapse causal forcé (†)
+# - L'utilisation d'artefacts légendaires
+# - Les amplitudes complexes et probabilités
+# - La narration dramatique intégrée au gameplay
+#
+# L'Œil de Wigner est un artefact qui :
+# - Force l'effondrement des états quantiques
+# - Permet de voir les futurs possibles
+# - Donne un avantage tactique en combat
+#
+# "Maîtrisez le temps, dominez l'espace, conquérez l'éternité"
+# ======================================== 

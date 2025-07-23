@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PANOPTICΩN - Vision 3D du Multivers</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #0ff;
+        }
+        
+        #canvas-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border: 2px solid #0ff;
+            border-radius: 5px;
+            box-shadow: 0 0 20px #0ff;
+        }
+        
+        #controls {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border: 2px solid #f0f;
+            border-radius: 5px;
+            box-shadow: 0 0 20px #f0f;
+        }
+        
+        .timeline-selector {
+            margin: 10px 0;
+        }
+        
+        .hero-marker {
+            position: absolute;
+            padding: 5px 10px;
+            background: rgba(255, 255, 0, 0.8);
+            border-radius: 3px;
+            font-size: 12px;
+            pointer-events: none;
+            transform: translate(-50%, -100%);
+        }
+        
+        .quantum-state {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f0f;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            text-align: center;
+        }
+        
+        .glitch {
+            animation: glitch 0.3s infinite;
+        }
+        
+        @keyframes glitch {
+            0% { text-shadow: 2px 0 #f00, -2px 0 #0ff; }
+            50% { text-shadow: -2px 0 #f00, 2px 0 #0ff; }
+            100% { text-shadow: 2px 0 #f00, -2px 0 #0ff; }
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container">
+        <div id="loading" class="glitch">
+            INITIALISATION DU PANOPTICΩN...<br>
+            <span style="font-size: 14px;">Connexion au multivers 5D</span>
+        </div>
+        
+        <div id="info" style="display: none;">
+            <h2>🔮 PANOPTICΩN</h2>
+            <div>Dimension: <span id="current-dimension">ℬ1</span></div>
+            <div>Tour: <span id="current-turn">0</span></div>
+            <div>Héros actifs: <span id="hero-count">0</span></div>
+            <div>États ψ: <span id="psi-count">0</span></div>
+            <div>Mode: <span id="view-mode">Joueur</span></div>
+        </div>
+        
+        <div id="controls" style="display: none;">
+            <h3>Contrôles</h3>
+            <div class="timeline-selector">
+                Timeline: 
+                <input type="range" id="timeline-slider" min="-10" max="10" value="0">
+                <span id="timeline-value">Présent</span>
+            </div>
+            <div>
+                <button onclick="toggleViewMode()">Basculer Vue</button>
+                <button onclick="showQuantumStates()">États Quantiques</button>
+                <button onclick="collapseRandom()">Collapse Aléatoire</button>
+            </div>
+            <div style="margin-top: 10px;">
+                <label>
+                    <input type="checkbox" id="show-fog" checked> Fog of Causality
+                </label>
+                <br>
+                <label>
+                    <input type="checkbox" id="show-interference"> Interférences
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script>
+        // Configuration
+        const API_URL = 'http://localhost:8080/api';
+        let gameId = 1;
+        let playerId = 'player1';
+        let viewMode = 'player'; // 'player' ou 'god'
+        
+        // Three.js setup
+        let scene, camera, renderer, controls;
+        let gameData = null;
+        let heroMeshes = {};
+        let quantumStateMeshes = {};
+        let fogMesh = null;
+        
+        // Initialisation Three.js
+        function initThreeJS() {
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x000011);
+            scene.fog = new THREE.Fog(0x000011, 10, 100);
+            
+            // Caméra
+            camera = new THREE.PerspectiveCamera(
+                75, 
+                window.innerWidth / window.innerHeight, 
+                0.1, 
+                1000
+            );
+            camera.position.set(30, 40, 30);
+            camera.lookAt(0, 0, 0);
+            
+            // Renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            document.getElementById('canvas-container').appendChild(renderer.domElement);
+            
+            // Contrôles
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            
+            // Lumières
+            const ambientLight = new THREE.AmbientLight(0x404040);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+            directionalLight.position.set(50, 100, 50);
+            directionalLight.castShadow = true;
+            directionalLight.shadow.camera.left = -50;
+            directionalLight.shadow.camera.right = 50;
+            directionalLight.shadow.camera.top = 50;
+            directionalLight.shadow.camera.bottom = -50;
+            scene.add(directionalLight);
+            
+            // Grille temporelle
+            createTemporalGrid();
+            
+            // Particules quantiques
+            createQuantumParticles();
+            
+            // Masquer le loading
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('info').style.display = 'block';
+            document.getElementById('controls').style.display = 'block';
+        }
+        
+        // Créer la grille temporelle
+        function createTemporalGrid() {
+            const gridHelper = new THREE.GridHelper(100, 50, 0x00ffff, 0x004444);
+            scene.add(gridHelper);
+            
+            // Axes temporels
+            const axesHelper = new THREE.AxesHelper(20);
+            scene.add(axesHelper);
+            
+            // Plans de timeline
+            for (let t = -5; t <= 5; t++) {
+                if (t === 0) continue;
+                
+                const planeGeometry = new THREE.PlaneGeometry(100, 100);
+                const planeMaterial = new THREE.MeshBasicMaterial({
+                    color: t > 0 ? 0x0088ff : 0xff8800,
+                    transparent: true,
+                    opacity: 0.1,
+                    side: THREE.DoubleSide
+                });
+                
+                const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+                plane.rotation.x = -Math.PI / 2;
+                plane.position.y = t * 5;
+                scene.add(plane);
+            }
+        }
+        
+        // Créer les particules quantiques
+        function createQuantumParticles() {
+            const particleCount = 1000;
+            const geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
+            
+            for (let i = 0; i < particleCount; i++) {
+                positions[i * 3] = (Math.random() - 0.5) * 100;
+                positions[i * 3 + 1] = Math.random() * 50;
+                positions[i * 3 + 2] = (Math.random() - 0.5) * 100;
+                
+                colors[i * 3] = Math.random();
+                colors[i * 3 + 1] = Math.random();
+                colors[i * 3 + 2] = Math.random();
+            }
+            
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            
+            const material = new THREE.PointsMaterial({
+                size: 0.5,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.6
+            });
+            
+            const particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+            
+            // Animation des particules
+            function animateParticles() {
+                const positions = particles.geometry.attributes.position.array;
+                
+                for (let i = 0; i < particleCount; i++) {
+                    positions[i * 3 + 1] += Math.sin(Date.now() * 0.001 + i) * 0.01;
+                    
+                    if (positions[i * 3 + 1] > 50) {
+                        positions[i * 3 + 1] = 0;
+                    }
+                }
+                
+                particles.geometry.attributes.position.needsUpdate = true;
+                requestAnimationFrame(animateParticles);
+            }
+            
+            animateParticles();
+        }
+        
+        // Charger les données du jeu
+        async function loadGameData() {
+            try {
+                const response = await fetch(`${API_URL}/panopticon/${gameId}/view/${playerId}`);
+                const data = await response.json();
+                
+                if (data.projection3D) {
+                    updateVisualization(data.projection3D);
+                }
+                
+                // Mettre à jour l'interface
+                document.getElementById('current-dimension').textContent = data.currentDimension || 'ℬ1';
+                document.getElementById('current-turn').textContent = data.temporalPosition || 0;
+                document.getElementById('hero-count').textContent = data.visibleHeroes?.length || 0;
+                document.getElementById('psi-count').textContent = data.quantumStates?.length || 0;
+                
+            } catch (error) {
+                console.error('Erreur chargement données:', error);
+            }
+        }
+        
+        // Mettre à jour la visualisation 3D
+        function updateVisualization(projection3D) {
+            // Nettoyer les anciens objets
+            Object.values(heroMeshes).forEach(mesh => scene.remove(mesh));
+            Object.values(quantumStateMeshes).forEach(mesh => scene.remove(mesh));
+            
+            heroMeshes = {};
+            quantumStateMeshes = {};
+            
+            // Ajouter les héros
+            projection3D.heroes?.forEach(hero => {
+                const geometry = new THREE.ConeGeometry(1, 3, 8);
+                const material = new THREE.MeshPhongMaterial({
+                    color: getHeroColor(hero.playerId),
+                    emissive: getHeroColor(hero.playerId),
+                    emissiveIntensity: 0.3
+                });
+                
+                const mesh = new THREE.Mesh(geometry, material);
+                mesh.position.set(hero.position.x, hero.position.y, hero.position.z);
+                mesh.castShadow = true;
+                mesh.receiveShadow = true;
+                
+                scene.add(mesh);
+                heroMeshes[hero.id] = mesh;
+                
+                // Ajouter un label
+                addHeroLabel(hero);
+            });
+            
+            // Ajouter les états quantiques
+            projection3D.quantumStates?.forEach(state => {
+                const geometry = new THREE.SphereGeometry(0.5, 16, 16);
+                const material = new THREE.MeshPhongMaterial({
+                    color: 0xff00ff,
+                    transparent: true,
+                    opacity: state.probability || 0.5,
+                    emissive: 0xff00ff,
+                    emissiveIntensity: 0.5
+                });
+                
+                const mesh = new THREE.Mesh(geometry, material);
+                mesh.position.set(state.position.x, state.position.y, state.position.z);
+                
+                scene.add(mesh);
+                quantumStateMeshes[state.id] = mesh;
+                
+                // Animation de pulsation
+                animateQuantumState(mesh, state);
+            });
+            
+            // Mettre à jour le fog of causality
+            updateFogOfCausality(projection3D.fogOfCausality);
+        }
+        
+        // Obtenir la couleur du héros selon le joueur
+        function getHeroColor(playerId) {
+            const colors = {
+                'player1': 0x00ff00,
+                'player2': 0xff0000,
+                'player3': 0x0000ff,
+                'player4': 0xffff00
+            };
+            return colors[playerId] || 0xffffff;
+        }
+        
+        // Ajouter un label pour un héros
+        function addHeroLabel(hero) {
+            // Utiliser CSS2DRenderer pour les labels (à implémenter)
+            // Pour l'instant, on log juste
+            console.log(`Héros: ${hero.name} à (${hero.position.x}, ${hero.position.z})`);
+        }
+        
+        // Animer un état quantique
+        function animateQuantumState(mesh, state) {
+            const scale = 1 + Math.sin(Date.now() * 0.001 + state.phase) * 0.3;
+            mesh.scale.set(scale, scale, scale);
+            mesh.rotation.y += 0.01;
+        }
+        
+        // Mettre à jour le fog of causality
+        function updateFogOfCausality(fogData) {
+            if (!document.getElementById('show-fog').checked) {
+                if (fogMesh) {
+                    scene.remove(fogMesh);
+                    fogMesh = null;
+                }
+                return;
+            }
+            
+            // Créer un mesh de fog (simplifié)
+            if (!fogMesh) {
+                const geometry = new THREE.BoxGeometry(100, 50, 100);
+                const material = new THREE.MeshBasicMaterial({
+                    color: 0x000088,
+                    transparent: true,
+                    opacity: 0.3,
+                    side: THREE.BackSide
+                });
+                
+                fogMesh = new THREE.Mesh(geometry, material);
+                scene.add(fogMesh);
+            }
+        }
+        
+        // Basculer entre vue joueur et God View
+        function toggleViewMode() {
+            viewMode = viewMode === 'player' ? 'god' : 'player';
+            document.getElementById('view-mode').textContent = 
+                viewMode === 'player' ? 'Joueur' : 'God View';
+            
+            // Recharger avec la nouvelle vue
+            if (viewMode === 'god') {
+                playerId = 'ADMIN';
+            } else {
+                playerId = 'player1';
+            }
+            
+            loadGameData();
+        }
+        
+        // Afficher les états quantiques
+        function showQuantumStates() {
+            // Toggle visibility des états quantiques
+            Object.values(quantumStateMeshes).forEach(mesh => {
+                mesh.visible = !mesh.visible;
+            });
+        }
+        
+        // Collapse aléatoire
+        async function collapseRandom() {
+            try {
+                const response = await fetch(`${API_URL}/games/${gameId}/execute`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        script: '†ψ' + String(Math.floor(Math.random() * 100)).padStart(3, '0')
+                    })
+                });
+                
+                if (response.ok) {
+                    // Effet visuel de collapse
+                    scene.background = new THREE.Color(0xff00ff);
+                    setTimeout(() => {
+                        scene.background = new THREE.Color(0x000011);
+                        loadGameData();
+                    }, 200);
+                }
+            } catch (error) {
+                console.error('Erreur collapse:', error);
+            }
+        }
+        
+        // Animation principale
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            controls.update();
+            
+            // Animer les états quantiques
+            Object.entries(quantumStateMeshes).forEach(([id, mesh]) => {
+                if (mesh.visible) {
+                    mesh.rotation.y += 0.01;
+                    mesh.material.opacity = 0.3 + Math.sin(Date.now() * 0.001) * 0.2;
+                }
+            });
+            
+            // Effet de distorsion temporelle
+            if (document.getElementById('show-interference').checked) {
+                camera.position.x += Math.sin(Date.now() * 0.0005) * 0.1;
+                camera.position.z += Math.cos(Date.now() * 0.0005) * 0.1;
+            }
+            
+            renderer.render(scene, camera);
+        }
+        
+        // Gestion du slider de timeline
+        document.getElementById('timeline-slider').addEventListener('input', (e) => {
+            const value = parseInt(e.target.value);
+            let label = 'Présent';
+            
+            if (value < 0) {
+                label = `Passé (${Math.abs(value)} tours)`;
+            } else if (value > 0) {
+                label = `Futur (+${value} tours)`;
+            }
+            
+            document.getElementById('timeline-value').textContent = label;
+            
+            // Ajuster la hauteur de la caméra selon la timeline
+            camera.position.y = 40 + value * 5;
+        });
+        
+        // Redimensionnement
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // Initialisation
+        initThreeJS();
+        animate();
+        
+        // Charger les données toutes les 2 secondes
+        loadGameData();
+        setInterval(loadGameData, 2000);
+        
+        // Message de bienvenue
+        console.log('%c🔮 PANOPTICΩN ACTIVÉ', 'color: #0ff; font-size: 20px; font-weight: bold;');
+        console.log('%cVision 3D du multivers 5D opérationnelle', 'color: #f0f;');
+    </script>
+</body>
+</html> 
