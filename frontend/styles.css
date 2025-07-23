@@ -2195,3 +2195,164 @@ body {
   font-size: 0.5rem;
   color: #87CEEB;
 }
+
+/* === TIMELINE DIODES DISCRÈTES === */
+.timeline-diodes-container {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  margin: 0 6px;
+}
+
+.timeline-diode {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.timeline-diode:hover {
+  transform: scale(1.3);
+}
+
+/* Animation pulse pour timeline active */
+@keyframes diodePulse {
+  0%, 100% { 
+    box-shadow: 0 0 8px currentColor;
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 0 0 16px currentColor;
+    transform: scale(1.1);
+  }
+}
+
+/* === FOG CONTROLS HEADER VERSION === */
+.fog-controls-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(20, 20, 30, 0.9);
+  border: 1px solid rgba(70, 130, 180, 0.4);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 0.7rem;
+  margin-left: 10px;
+}
+
+.fog-header-compact {
+  color: #4682B4;
+  font-weight: bold;
+  margin-right: 6px;
+}
+
+.fog-status-header {
+  font-size: 0.6rem;
+  color: #87CEEB;
+  font-weight: bold;
+  margin-left: 6px;
+}
+
+/* === SMART CLICK SYSTEM STYLES === */
+.smart-context-menu {
+  position: fixed;
+  background: rgba(20, 20, 30, 0.95);
+  border: 1px solid #4A90E2;
+  border-radius: 6px;
+  padding: 4px;
+  z-index: 1000;
+  font-size: 0.8rem;
+  min-width: 150px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.context-menu-item {
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background 0.2s;
+}
+
+.context-menu-item:hover {
+  background: rgba(74, 144, 226, 0.3);
+}
+
+.keyboard-feedback {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(74, 144, 226, 0.9);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  z-index: 999;
+  animation: fadeInOut 1s ease;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-10px); }
+  50% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+
+/* === TIMELINE DIODES DISCRÈTES === */
+.timeline-diodes-container {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  margin: 0 6px;
+}
+
+.timeline-diode {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.timeline-diode:hover {
+  transform: scale(1.3);
+}
+
+@keyframes diodePulse {
+  0%, 100% { 
+    box-shadow: 0 0 8px currentColor;
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 0 0 16px currentColor;
+    transform: scale(1.1);
+  }
+}
+
+/* === FOG CONTROLS HEADER === */
+.fog-controls-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(20, 20, 30, 0.9);
+  border: 1px solid rgba(70, 130, 180, 0.4);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 0.7rem;
+  margin-left: 10px;
+}
+
+.fog-header-compact {
+  color: #4682B4;
+  font-weight: bold;
+  margin-right: 6px;
+}
+
+.fog-status-header {
+  font-size: 0.6rem;
+  color: #87CEEB;
+  font-weight: bold;
+  margin-left: 6px;
+}
