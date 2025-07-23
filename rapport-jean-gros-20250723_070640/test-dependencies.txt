@@ -1,0 +1,16 @@
+# The Dude's Test Analysis
+# ========================
+# test-complet-final.sh INCLUDES:
+#   - test-backend-conformity.sh
+#   - test-scenarios-ui.sh
+#   - benchmark tests
+#   - all HOTS scenarios
+#
+# SKIP THESE IF RUNNING test-complet-final.sh:
+#   - Individual backend tests (maven test covers them)
+#   - Individual scenario tests
+#
+# RUN IN PARALLEL:
+#   - Backend compilation
+#   - Frontend tests
+#   - Different scenario categories
