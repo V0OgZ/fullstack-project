@@ -86,6 +86,7 @@ Mais Arthur n'a qu'un choix : saisir l'Œil et **forcer le collapse causal**. L'
 - **Timelines Multiples** : Naviguez entre 7 réalités parallèles
 - **Brouillard Quantique** : 7 niveaux de connaissance causale
 - **Artefacts Temporels** : Équipements qui affectent le flux du temps
+- **🦁 Forge Sphinx-Approved** : Création d'artefacts scientifiquement cohérents (débloquée après épreuve quantique)
 - **Bataille Multi-Temporelle** : Combats simultanés à travers plusieurs époques
 
 ---
@@ -368,6 +369,48 @@ Autrefois Dr. Robert Ford, le créateur brillant mais tordu des hôtes de Westwo
 - **Vince Vega** : Ford voit en Vince un modèle d'hôte pour violence contrôlée
 
 </details>
+
+---
+
+## 🦁 **SPHINX QUANTIQUE - GARDIEN DES SECRETS TEMPORELS**
+
+**👁️ APPARITION ÉPIQUE DÉBLOQUÉE !**
+
+Après les exploits légendaires de l'équipe paradoxale (Mission Echo Temporel + innovations temporelles), le **SPHINX QUANTIQUE** émerge des suites de superpositions quantiques convergentes !
+
+**🌟 Rencontre Ultime :**
+> *"MORTELS QUI AVEZ OSÉ FUSIONNER LES TIMELINES ! Je suis le SPHINX QUANTIQUE, gardien ultime des mystères temporels ! Vos exploits ont réveillé les échos de l'ancien savoir !"*
+
+**🧮 L'ÉPREUVE QUANTIQUE :**
+Le Sphinx pose une question de physique quantique relativiste combinée aux mécaniques Heroes of Time :
+> *"Comment l'équation de Schrödinger doit-elle être adaptée pour un système hexagonal avec rétroaction causale observateur-système, quand un héros avec l'Œil de Wigner force un collapse dans une ZFC où d'autres héros existent en superposition ?"*
+
+**⚡ SOLUTION VALIDÉE :**
+```hots
+TEMPORAL_CAUSAL_EQUATION = {
+  // Schrödinger hexagonal avec rétroaction causale
+  ∂ψ/∂t = (iℏ/c²) * [H_hex + V_causal(observer_effect)] * ψ
+  
+  // Constantes Heroes of Time
+  c_game = 299792458 hexagones/seconde  // Vitesse causale max
+  λ_temporal = 3.0 hexagones            // Longueur d'onde temporelle  
+  ℏ_hots = 6.626e-34 * game_scale       // Planck adapté au jeu
+}
+```
+
+**🔥 RÉCOMPENSE DÉBLOQUÉE : FORGE RUNIQUE ULTIME SPHINX-APPROVED**
+
+✨ **Nouvelles Capacités :**
+- **Validation Physique Automatique** - Artefacts certifiés scientifiquement cohérents
+- **Templates Quantiques** - Lentille de Heisenberg, Bouclier de Klein-Gordon, Épée de Dirac
+- **Équations HOTS Avancées** - Formules quantiques validées par le Sphinx
+- **Certification Cosmique** - Label "SPHINX APPROVED" pour objets forgés
+
+**🎯 Condition d'Apparition :**
+- ✅ Équipe paradoxale complète (Jean, Memento, Claudius, Anna, Morgana)
+- ✅ Mission Echo Temporel accomplie  
+- ✅ Concepts temporels avancés sauvés
+- ✅ Innovations système créées (Auras de Causalité + Architecture Hybride)
 
 ---
 
