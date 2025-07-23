@@ -1,7 +1,12 @@
 {
   "id": "hero_elena_flamme_douce",
   "name": "Elena Flamme Douce",
-  "title": "Apprentie Mage Temporelle",
+  "icon": "🔥",
+  "display": {
+    "icon": "🔥",
+    "color": "#FF6B35",
+    "category": "fire_mage"
+  },  "title": "Apprentie Mage Temporelle",
   "description": "Jeune sorcière spécialisée dans la manipulation douce des énergies temporelles. Ses sorts de base permettent d'apprendre la magie sans risque de surcharge. Idéale pour découvrir les mécaniques magiques avec des effets prévisibles. [Classification : Unité de Support Magique]",
   "role": "Mage de Support",
   "rarity": "commune",

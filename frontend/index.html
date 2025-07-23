@@ -31,7 +31,7 @@
                 <button id="grofi-heroes-btn" class="btn-primary">🌟 Héros GROFI</button>
                 <button id="add-ragnar-btn" class="btn-secondary">🛡️ Add Ragnar</button>
                 <button id="test-decay-btn" class="btn-warning">⏰ Test Decay</button>
-                <button id="dicebear-gallery-btn" class="btn-info">🎭 Dicebear Gallery</button>
+                <button id="dicebear-gallery-btn" class="btn-info">🦸 Héros Gallery</button>
                 <button id="settings-btn" class="btn-icon">⚙️</button>
                 
                 <!-- 🌫️ ZFC CONTROLS IN HEADER -->
@@ -148,10 +148,10 @@
     <script src="coordinate-fix.js"></script>
     <script src="ui-emergency-fix.js"></script>
     <script src="canvas-hero-renderer.js"></script>
-    <script src="dicebar-graphics-system.js"></script>
+    <script src="json-icon-system.js"></script>
     <script src="timeline-diodes-system.js"></script>    <script>
         // Initialize the comprehensive dicebar graphics system
-        const dicebarSystem = new DicebarGraphicsSystem();
+        // JSON Icon System loaded automatically
         
         // 🌫️ Initialiser le système de brouillard de causalité
         window.fogOfWarSystem = new FogOfWarSystem();
@@ -301,7 +301,7 @@
             modal.style.display = 'block';
             
             // Create the gallery
-            dicebarSystem.createAvatarGrid('dicebear-gallery');
+            window.jsonIconSystem.createSimpleGallery('dicebear-gallery');
         });
 
         document.getElementById('close-modal').addEventListener('click', function() {
@@ -695,6 +695,6 @@
     <script src="the-source-system.js"></script>
     
     <!-- 🌀⚡ ZFC COMPLETE SYSTEM - FINAL ENGINE ⚡🌀 -->
-    <script src="zfc-complete-system.js"></script>
+    <!-- <!-- <script src="zfc-complete-system.js"></script> --> <!-- DÉSACTIVÉ - Interface trop intrusive --> --> <!-- DÉSACTIVÉ - Interface trop intrusive -->
 </body>
 </html>

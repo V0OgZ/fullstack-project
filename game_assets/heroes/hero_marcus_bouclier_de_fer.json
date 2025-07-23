@@ -1,7 +1,12 @@
 {
   "id": "hero_marcus_bouclier_de_fer",
   "name": "Marcus Bouclier de Fer",
-  "title": "Gardien Temporel Débutant",
+  "icon": "🛡️",
+  "display": {
+    "icon": "🛡️",
+    "color": "#87CEEB",
+    "category": "tank_guardian"
+  },  "title": "Gardien Temporel Débutant",
   "description": "Ancien garde du corps reconverti en protecteur de timelines fragiles. Son bouclier quantique peut absorber les attaques et créer des barrières temporelles basiques. Parfait pour apprendre les mécaniques défensives sans complexité excessive. [Classification : Unité de Défense Tactique]",
   "role": "Gardien Défensif",
   "rarity": "commune",
