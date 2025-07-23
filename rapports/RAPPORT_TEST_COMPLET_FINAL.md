@@ -2,20 +2,20 @@
 
 ## 📊 Résumé Exécutif
 
-**Date**: 2025-07-22 12:24:54  
-**Durée**: 19m 21s  
+**Date**: 2025-07-23 08:48:37  
+**Durée**: 20m 13s  
 **Tests Total**: 54  
-**Tests Réussis**: 29 (53%)  
-**Tests Échoués**: 25 (46%)  
+**Tests Réussis**: 31 (57%)  
+**Tests Échoués**: 23 (42%)  
 **Tests Ignorés**: 0 (0%)  
 
 ## 🎯 Score Global
 
-⚠️ **SUCCÈS PARTIEL** - 25 tests ont échoué
+⚠️ **SUCCÈS PARTIEL** - 23 tests ont échoué
 
 ## 📋 Détails des Tests
 
-### ✅ Tests Réussis (29)
+### ✅ Tests Réussis (31)
 - Installation et configuration système
 - Compilation et tests unitaires backend
 - API Heroes of Time (HOTS)
@@ -23,7 +23,7 @@
 - Interfaces utilisateur (3 frontends)
 - Tests d'intégration complète
 
-### ❌ Tests Échoués (25)
+### ❌ Tests Échoués (23)
 Voir les détails dans les logs individuels
 
 ## 🌐 Services Testés
