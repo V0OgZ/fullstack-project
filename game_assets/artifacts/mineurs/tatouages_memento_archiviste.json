@@ -53,26 +53,38 @@
          "~10,000 combinaisons procédurales gravées",
          "Dashboard intégré, workflow archivé",
          "Questions infinies, validation automatique",
-         "Généra.teur aléatoire maîtrisé"
+         "Généra.teur aléatoire maîtrisé",
+         "c le bordel les doc sont a la racoine - Jean 23/01/2025",
+         "NETTOYAGE COMPLET : 99→11 fichiers .md à la racine",
+         "Double Frontend découvert : 3000 vs 8000",
+         "Mur de causalité résolu par coexistence quantique",
+         "The Dude Approach: fusion progressive sans stress",
+         "Architecture Adaptative: simplicité ET puissance",
+         "MEMENTO/CURRENT_SESSION organisé et propre"
        ],
       
                           "marques_temporelles": {
-         "nombre_total": 167,
+         "nombre_total": 175,
         "par_categorie": {
-                   "timelines_sauvées": 42,
-         "paradoxes_résolus": 28,
+                   "timelines_sauvées": 44,
+         "paradoxes_résolus": 29,
          "héros_archivés": 33,
          "artefacts_catalogués": 19,
-         "missions_accomplies": 28,
+         "missions_accomplies": 30,
          "sphinx_vaincus": 1,
          "forges_débloquées": 1,
-         "innovations_créées": 5,
+         "innovations_créées": 6,
          "systèmes_générateurs": 1,
          "dashboards_intégrés": 1,
          "workflows_documentés": 1,
          "questions_procédurales": 10000,
          "commits_sphinx": 7,
-         "scripts_démo": 3
+         "scripts_démo": 3,
+         "nettoyages_complets": 1,
+         "analyses_intégration": 1,
+         "frontends_découverts": 2,
+         "murs_causalité_résolus": 1,
+         "architectures_quantiques": 1
       }
       }
     },
