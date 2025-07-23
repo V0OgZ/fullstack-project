@@ -376,6 +376,104 @@
         .notification.success { background-color: #4ecdc4; }
         .notification.error { background-color: #ff6b6b; }
         .notification.warning { background-color: #ffa726; }
+
+        /* Héros cliquables */
+        .clickable-hero {
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .clickable-hero:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+            border-color: #FFD700;
+        }
+        
+        .clickable-hero:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+        
+        .clickable-hero.selected {
+            border: 3px solid #FFD700;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+        }
+        
+        .clickable-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .clickable-hero:hover::before {
+            left: 100%;
+        }
+        
+        .hero-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .clickable-hero:hover .hero-icon {
+            transform: scale(1.2) rotate(5deg);
+            text-shadow: 0 0 15px currentColor;
+        }
+        
+        .hero-selection-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #FFD700;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        .clickable-hero.selected .hero-selection-indicator {
+            display: flex;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+        }
+        
+        /* Message de sélection */
+        .hero-selection-message {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(26, 26, 46, 0.95);
+            color: #FFD700;
+            padding: 15px 25px;
+            border-radius: 25px;
+            border: 2px solid #FFD700;
+            font-weight: bold;
+            z-index: 10000;
+            display: none;
+            backdrop-filter: blur(10px);
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -421,18 +519,18 @@
         <p style="color: #a0a0a0; margin-bottom: 20px;">Les héros éveillés qui maîtrisent les paradoxes temporels</p>
         
         <div class="heroes-grid">
-            <div class="hero-card">
-                <div class="hero-icon">👑</div>
+            <div class="hero-card clickable-hero" data-hero-id="hero_jean_grofignon" onclick="selectDashboardHero(this)">
+                <div class="hero-icon">🚬</div>
                 <div class="hero-name">Jean-Grofignon</div>
-                <div class="hero-faction">Compagnons de Jean-Grofignon</div>
+                <div class="hero-faction">Éveillé Ontologique</div>
                 <div class="hero-power">Collapse Override</div>
             </div>
             
-            <div class="hero-card">
-                <div class="hero-icon">🛡️</div>
-                <div class="hero-name">Walter Sobchak</div>
-                <div class="hero-faction">Compagnons de Jean-Grofignon</div>
-                <div class="hero-power">Enforcement Protocol</div>
+            <div class="hero-card clickable-hero" data-hero-id="anna_martel" onclick="selectDashboardHero(this)">
+                <div class="hero-icon">⚡</div>
+                <div class="hero-name">Anna Martel</div>
+                <div class="hero-faction">Architectes Temporels</div>
+                <div class="hero-power">Temporal Decay</div>
             </div>
             
             <div class="hero-card">
@@ -1015,7 +1113,201 @@
                 document.getElementById('admin-game-status').textContent = 'Erreur connexion';
             }
         }
+
+        // Gestion des clics sur les héros dans la section Heroes GROFI
+        document.querySelectorAll('.heroes-grid .hero-card').forEach(heroCard => {
+            heroCard.addEventListener('click', function() {
+                const heroId = this.dataset.heroId;
+                if (heroId) {
+                    selectDashboardHero(this);
+                }
+            });
+        });
+
+        function selectDashboardHero(heroCard) {
+            // Remove active class from all hero cards
+            document.querySelectorAll('.heroes-grid .hero-card').forEach(card => {
+                card.classList.remove('active-hero');
+            });
+            // Add active class to the clicked hero card
+            heroCard.classList.add('active-hero');
+
+            // Update the button text and href
+            const frontendButton = document.getElementById('frontend-button');
+            const visualEditorButton = document.getElementById('visual-editor-button');
+            const temporalButton = document.getElementById('temporal-button');
+            const visualizerButton = document.getElementById('visualizer-button');
+            const objectViewerButton = document.getElementById('object-viewer-button');
+            const testrunnerButton = document.getElementById('testrunner-button');
+            const etherealButton = document.querySelector('.ui-panel button[onclick="openEtherealMode()"]');
+            const mementoButton = document.getElementById('memento-button');
+            const replayButton = document.querySelector('.ui-panel button[onclick="openReplayCenter()"]');
+            const epochButton = document.getElementById('epoch-button');
+            const adminButton = document.querySelector('.ui-panel button[onclick="openAdminMultiplayer()"]');
+            const jointButton = document.querySelector('.ui-panel button[onclick="openJointInterfaceDeluxe()"]');
+            const dicebearDemoButton = document.getElementById('dicebear-demo-button');
+            const sphinxDemoButton = document.querySelector('.ui-panel button[onclick="openSphinxDemo()"]');
+
+            // Update buttons based on heroId
+            if (heroId === 'hero_jean_grofignon') {
+                frontendButton.textContent = '🚀 Lancer l\'Interface';
+                frontendButton.href = 'http://localhost:8000';
+                visualEditorButton.textContent = '🎨 Éditeur Révolutionnaire';
+                visualEditorButton.href = 'http://localhost:8000/visual-script-editor.html';
+                temporalButton.textContent = '⚡ Interface Révolutionnaire';
+                temporalButton.href = 'http://localhost:5174';
+                visualizerButton.textContent = '🔬 Scénarios & Replay';
+                visualizerButton.href = 'http://localhost:8001/quantum-visualizer/';
+                objectViewerButton.textContent = '🏛️ Collection & Grammar';
+                objectViewerButton.href = 'http://localhost:5175/hots';
+                testrunnerButton.textContent = '🧪 Tests Automatiques';
+                testrunnerButton.href = 'http://localhost:8888';
+                etherealButton.textContent = '🌟 Mode Éthéré';
+                etherealButton.href = 'http://localhost:8000/ethereal-mode.html';
+                mementoButton.textContent = '🧠 Accéder à MEMENTO';
+                mementoButton.href = 'MEMENTO/HISTOIRE_HEROES_OF_TIME.html';
+                replayButton.textContent = '🎬 Centre de Replay';
+                replayButton.href = 'http://localhost:9000/replay-center.html';
+                epochButton.textContent = '🕰️ Timeline Officielle';
+                epochButton.href = 'epoch-visualizer.html';
+                adminButton.textContent = '🎮 Interface Admin';
+                adminButton.href = 'http://localhost:8000/admin-multiplayer.html';
+                jointButton.textContent = '🚬 Utiliser le Joint';
+                jointButton.href = 'http://localhost:8000/joint-panopticon-interface.html';
+                dicebearDemoButton.textContent = '🎨 Ouvrir Démo Dicebear';
+                dicebearDemoButton.href = 'http://localhost:8004/dicebear-map-demo.html';
+                sphinxDemoButton.textContent = '🦁 Interface Sphinx';
+                sphinxDemoButton.href = 'http://localhost:8000/sphinx-interface-demo.html';
+            } else if (heroId === 'anna_martel') {
+                frontendButton.textContent = '🚀 Lancer l\'Interface';
+                frontendButton.href = 'http://localhost:8000';
+                visualEditorButton.textContent = '🎨 Éditeur Révolutionnaire';
+                visualEditorButton.href = 'http://localhost:8000/visual-script-editor.html';
+                temporalButton.textContent = '⚡ Interface Révolutionnaire';
+                temporalButton.href = 'http://localhost:5174';
+                visualizerButton.textContent = '🔬 Scénarios & Replay';
+                visualizerButton.href = 'http://localhost:8001/quantum-visualizer/';
+                objectViewerButton.textContent = '🏛️ Collection & Grammar';
+                objectViewerButton.href = 'http://localhost:5175/hots';
+                testrunnerButton.textContent = '🧪 Tests Automatiques';
+                testrunnerButton.href = 'http://localhost:8888';
+                etherealButton.textContent = '🌟 Mode Éthéré';
+                etherealButton.href = 'http://localhost:8000/ethereal-mode.html';
+                mementoButton.textContent = '🧠 Accéder à MEMENTO';
+                mementoButton.href = 'MEMENTO/HISTOIRE_HEROES_OF_TIME.html';
+                replayButton.textContent = '🎬 Centre de Replay';
+                replayButton.href = 'http://localhost:9000/replay-center.html';
+                epochButton.textContent = '🕰️ Timeline Officielle';
+                epochButton.href = 'epoch-visualizer.html';
+                adminButton.textContent = '🎮 Interface Admin';
+                adminButton.href = 'http://localhost:8000/admin-multiplayer.html';
+                jointButton.textContent = '🚬 Utiliser le Joint';
+                jointButton.href = 'http://localhost:8000/joint-panopticon-interface.html';
+                dicebearDemoButton.textContent = '🎨 Ouvrir Démo Dicebear';
+                dicebearDemoButton.href = 'http://localhost:8004/dicebear-map-demo.html';
+                sphinxDemoButton.textContent = '🦁 Interface Sphinx';
+                sphinxDemoButton.href = 'http://localhost:8000/sphinx-interface-demo.html';
+            }
+        }
     </script>
     <script src="translation-service.js"></script>
+    <!-- Message de sélection héros -->
+    <div class="hero-selection-message" id="hero-selection-message">
+        <span id="hero-selection-text"></span>
+    </div>
+    
+    <script>
+        // Variables globales pour gestion héros
+        let selectedHeroData = null;
+        let selectedHeroElement = null;
+        
+        // Fonction de sélection d'un héros depuis le dashboard
+        function selectDashboardHero(heroElement) {
+            // Désélectionner le héros précédent
+            if (selectedHeroElement) {
+                selectedHeroElement.classList.remove('selected');
+            }
+            
+            // Sélectionner le nouveau héros
+            selectedHeroElement = heroElement;
+            heroElement.classList.add('selected');
+            
+            // Récupérer les données du héros
+            const heroId = heroElement.dataset.heroId;
+            const heroName = heroElement.querySelector('.hero-name').textContent;
+            const heroFaction = heroElement.querySelector('.hero-faction').textContent;
+            const heroIcon = heroElement.querySelector('.hero-icon').textContent;
+            
+            selectedHeroData = {
+                id: heroId,
+                name: heroName,
+                faction: heroFaction,
+                icon: heroIcon
+            };
+            
+            // Afficher message de sélection
+            showHeroSelectionMessage(heroName, heroIcon);
+            
+            // Simuler position au centre de l'écran pour les actions contextuelles
+            const centerPosition = {
+                x: window.innerWidth / 2,
+                y: window.innerHeight / 2
+            };
+            
+            // Déclencher le système d'actions contextuelles si disponible
+            if (window.contextualHeroActions) {
+                setTimeout(() => {
+                    window.contextualHeroActions.triggerHeroSelection(selectedHeroData, centerPosition);
+                }, 500);
+            }
+            
+            console.log('🎯 Héros sélectionné depuis dashboard:', selectedHeroData);
+        }
+        
+        // Afficher message de sélection
+        function showHeroSelectionMessage(heroName, heroIcon) {
+            const messageElement = document.getElementById('hero-selection-message');
+            const textElement = document.getElementById('hero-selection-text');
+            
+            textElement.innerHTML = `${heroIcon} ${heroName} sélectionné ! Actions disponibles autour du héros`;
+            messageElement.style.display = 'block';
+            
+            // Auto-hide après 3 secondes
+            setTimeout(() => {
+                messageElement.style.display = 'none';
+            }, 3000);
+        }
+        
+        // Intégration avec le système temporal si disponible
+        function getSelectedHeroForTemporal() {
+            return selectedHeroData;
+        }
+        
+        // API pour d'autres systèmes
+        window.dashboardHeroSelection = {
+            getSelectedHero: () => selectedHeroData,
+            selectHero: selectDashboardHero,
+            clearSelection: () => {
+                if (selectedHeroElement) {
+                    selectedHeroElement.classList.remove('selected');
+                }
+                selectedHeroData = null;
+                selectedHeroElement = null;
+            }
+        };
+        
+        // Auto-sélectionner Jean-Grofignon au chargement pour demo
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const jeanElement = document.querySelector('[data-hero-id="hero_jean_grofignon"]');
+                if (jeanElement) {
+                    console.log('🚬 Auto-selecting Jean-Grofignon for demo');
+                    // selectDashboardHero(jeanElement);
+                }
+            }, 1000);
+        });
+        
+        console.log('🎮 Dashboard Hero Selection System loaded!');
+    </script>
 </body>
 </html>
