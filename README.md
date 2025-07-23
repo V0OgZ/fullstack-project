@@ -12,8 +12,24 @@
 
 **L'Œil de Wigner** scintille au sommet de la tour en ruines. Arthur s'approche prudemment - cet artefact légendaire peut forcer l'effondrement de la réalité elle-même.
 
-*"Sire, ne le touchez pas !"* crie Lysandrel depuis la vallée. *"Si vous l'activez maintenant, toutes nos actions futures deviendront réelles instantanément !"*
-Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront submergés. Il n'a qu'un choix : saisir l'Œil et **forcer le collapse causal**.
+### 👁️ **L'Histoire de l'Œil de Wigner**
+
+**🌌 Origine Cosmique :**
+> *"Forgé dans les premiers instants de l'univers quand toutes les possibilités existaient simultanément. Seul l'observateur ultime peut le maîtriser sans sombrer dans la folie quantique."*
+
+**⚡ Pouvoirs Ultimes :**
+- **Forcer l'Observation** : `COLLAPSE(ALL_ψ) = Σ(Pi * |ψi⟩⟨ψi|) → single_reality`
+- **Matérialisation Future** : Matérialise instantanément les événements futurs planifiés
+- **Réécriture Historique** : Modifie rétroactivement les 3 derniers tours
+- **Révélation des Possibilités** : L'artefact ultime qui révèle et matérialise toutes les possibilités
+
+**🎭 Le Dilemme d'Arthur :**
+Arthur voit l'armée de Ragnar approcher avec 15 chevaliers, 20 archers et 3 catapultes. Dans quelques tours, ils seront submergés.
+
+*"Sire, ne le touchez pas !"* crie Lysandrel depuis la vallée. *"Si vous l'activez maintenant, toutes nos actions futures deviendront réelles instantanément ! Le dragon que vous prévoyez d'invoquer dans 3 tours, la bataille planifiée pour demain - tout se matérialisera MAINTENANT !"*
+
+**💥 Le Moment Fatal :**
+Mais Arthur n'a qu'un choix : saisir l'Œil et **forcer le collapse causal**. L'artefact de Tier 7 COSMIQUE va transformer tous les futurs possibles en réalité immédiate !
 
 **📜 Advanced Script Language:**
 - **Unicode Symbols**: ψ (psi-state), † (collapse), ⊙ (superposition), Π (observation)
