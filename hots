@@ -1282,14 +1282,14 @@ case "${1:-help}" in
             fi
         fi
         
-        # Ouvrir SEULEMENT l'interface 8000 (Temporal Engine)
-        echo -e "${YELLOW}🌐 Ouverture Interface Temporal Engine...${NC}"
+        # Ouvrir l'interface 8000 avec paramètre auto-replay
+        echo -e "${YELLOW}🌐 Ouverture Interface Temporal Engine avec Auto-Replay...${NC}"
         if command -v open >/dev/null 2>&1; then
-            # macOS
-            open "http://localhost:8000" 2>/dev/null &
+            # macOS  
+            open "http://localhost:8000?demo=auto&scenario=zfc" 2>/dev/null &
         elif command -v xdg-open >/dev/null 2>&1; then
             # Linux
-            xdg-open "http://localhost:8000" 2>/dev/null &
+            xdg-open "http://localhost:8000?demo=auto&scenario=zfc" 2>/dev/null &
         fi
         
         if [ "$2" = "quick" ]; then
