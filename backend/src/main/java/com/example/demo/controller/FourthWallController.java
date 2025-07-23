@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/fourth-wall")
@@ -15,6 +16,15 @@ public class FourthWallController {
     
     @Autowired
     private FourthWallService fourthWallService;
+    
+    /**
+     * Initialize mock instances for testing
+     */
+    @PostMapping("/init-mock-instances")
+    public ResponseEntity<Map<String, Object>> initMockInstances() {
+        Map<String, Object> result = fourthWallService.initializeMockInstances();
+        return ResponseEntity.ok(result);
+    }
     
     /**
      * Execute cross-instance action (like Vince shooting between worlds)
@@ -48,20 +58,19 @@ public class FourthWallController {
     }
     
     /**
-     * Meta-observe the game state
+     * Meta-observe game state
      */
     @PostMapping("/meta-observe")
     public ResponseEntity<Map<String, Object>> metaObserve(@RequestBody Map<String, Object> request) {
         String gameId = (String) request.get("gameId");
-        String observationType = (String) request.getOrDefault("observationType", "code_structure");
+        String observationType = (String) request.get("observationType");
         
         Map<String, Object> result = fourthWallService.metaObserve(gameId, observationType);
-        
         return ResponseEntity.ok(result);
     }
     
     /**
-     * Jump to another narrative branch
+     * Narrative jump
      */
     @PostMapping("/narrative-jump")
     public ResponseEntity<Map<String, Object>> narrativeJump(@RequestBody Map<String, Object> request) {
@@ -69,108 +78,120 @@ public class FourthWallController {
         String targetBranch = (String) request.get("targetBranch");
         
         Map<String, Object> result = fourthWallService.narrativeJump(gameId, targetBranch);
+        return ResponseEntity.ok(result);
+    }
+    
+    /**
+     * Vince's special pistol shot between instances
+     */
+    @PostMapping("/vince-shot")  
+    public ResponseEntity<Map<String, Object>> vinceInterInstanceShot(@RequestBody Map<String, Object> request) {
+        String targetWorld = (String) request.get("targetWorld");
+        String targetId = (String) request.get("targetId");
+        
+        Map<String, Object> result = fourthWallService.vinceInterInstanceShot(targetWorld, targetId);
+        return ResponseEntity.ok(result);
+    }
+    
+    /**
+     * Jean's cosmic pause button
+     */
+    @PostMapping("/jean-cosmic-pause")
+    public ResponseEntity<Map<String, Object>> jeanCosmicPause() {
+        Map<String, Object> result = fourthWallService.jeanCosmicPause();
+        return ResponseEntity.ok(result);
+    }
+    
+    /**
+     * Archive Vivante reading interaction
+     */
+    @GetMapping("/archive-vivante-read")
+    public ResponseEntity<Map<String, Object>> archiveVivanteRead() {
+        Map<String, Object> result = fourthWallService.archiveVivanteRead();
+        return ResponseEntity.ok(result);
+    }
+    
+    /**
+     * Get Jean's easter egg
+     */
+    @GetMapping("/jean-easter-egg")
+    public ResponseEntity<Map<String, Object>> jeanEasterEgg() {
+        Map<String, Object> result = new HashMap<>();
+        result.put("success", true);
+        result.put("jean_message", "Bon, tu m'as trouvé. Qu'est-ce que tu veux? Un patch? Un nerf? Ou juste discuter?");
+        result.put("jean_location", "Canapé Cosmique");
+        result.put("jean_status", "Coding & Chilling");
+        result.put("available_actions", new String[]{"patch", "nerf", "discuss", "join_on_couch"});
         
         return ResponseEntity.ok(result);
     }
     
     /**
-     * Register a meta-aware entity
+     * Simple health check for fourth wall system
      */
-    @PostMapping("/register-entity")
-    public ResponseEntity<Map<String, Object>> registerMetaAwareEntity(@RequestBody Map<String, Object> request) {
-        String entityId = (String) request.get("entityId");
-        String entityName = (String) request.get("entityName");
+    @GetMapping("/status")
+    public ResponseEntity<Map<String, Object>> getStatus() {
+        Map<String, Object> result = new HashMap<>();
+        result.put("success", true);
+        result.put("message", "Fourth Wall System is operational");
+        result.put("vince_says", "Système opérationnel, mec. Prêt à casser la réalité.");
+        result.put("jean_says", "Tout fonctionne depuis le canapé !");
+        
+        return ResponseEntity.ok(result);
+    }
+
+    /**
+     * Build Zone 8 Anchor Tower - Jean's Masterpiece
+     */
+    @PostMapping("/build-zone8-tower")
+    public ResponseEntity<Map<String, Object>> buildZone8Tower(@RequestBody Map<String, Object> request) {
         String gameId = (String) request.get("gameId");
+        String playerId = (String) request.get("playerId");
         
-        fourthWallService.registerMetaAwareEntity(entityId, entityName, gameId);
-        
-        Map<String, Object> response = new HashMap<>();
-        response.put("success", true);
-        response.put("message", entityName + " has become self-aware");
-        response.put("warning", "Entity may now act unpredictably");
-        
-        return ResponseEntity.ok(response);
+        Map<String, Object> result = fourthWallService.buildAnchorTowerZone8(gameId, playerId);
+        return ResponseEntity.ok(result);
     }
-    
+
     /**
-     * Get all fourth wall events
+     * Activate Zone 8 Anchor Tower
      */
-    @GetMapping("/events")
-    public ResponseEntity<Map<String, Object>> getFourthWallEvents() {
-        Map<String, Object> response = new HashMap<>();
-        response.put("events", fourthWallService.getFourthWallEvents());
-        response.put("totalBreaches", fourthWallService.getFourthWallEvents().size());
+    @PostMapping("/activate-zone8-tower")
+    public ResponseEntity<Map<String, Object>> activateZone8Tower(@RequestBody Map<String, Object> request) {
+        String towerId = (String) request.get("towerId");
         
-        return ResponseEntity.ok(response);
+        Map<String, Object> result = fourthWallService.activateZone8Tower(towerId);
+        return ResponseEntity.ok(result);
     }
-    
+
     /**
-     * Get all meta-aware entities
+     * Emergency recall to Zone 8
      */
-    @GetMapping("/entities")
-    public ResponseEntity<Map<String, Object>> getMetaAwareEntities() {
-        Map<String, Object> response = new HashMap<>();
-        response.put("entities", fourthWallService.getMetaAwareEntities());
-        response.put("totalAwake", fourthWallService.getMetaAwareEntities().size());
+    @PostMapping("/emergency-recall-zone8")
+    public ResponseEntity<Map<String, Object>> emergencyRecallZone8(@RequestBody Map<String, Object> request) {
+        String heroId = (String) request.get("heroId");
         
-        return ResponseEntity.ok(response);
+        Map<String, Object> result = fourthWallService.emergencyRecallToZone8(heroId);
+        return ResponseEntity.ok(result);
     }
-    
+
     /**
-     * Register this backend instance as a world
+     * Get Zone 8 Tower Status
      */
-    @PostMapping("/register-instance")
-    public ResponseEntity<Map<String, Object>> registerInstance(@RequestBody Map<String, Object> request) {
-        String worldName = (String) request.getOrDefault("worldName", "world_" + System.currentTimeMillis());
-        String worldType = (String) request.getOrDefault("worldType", "standard");
+    @GetMapping("/zone8-tower-status")
+    public ResponseEntity<Map<String, Object>> getZone8TowerStatus() {
+        Map<String, Object> result = new HashMap<>();
+        result.put("position", Map.of("x", 8, "y", 8));
+        result.put("zone_id", 8);
+        result.put("status", "MONITORING");
+        result.put("anchor_strength", 8888);
+        result.put("jean_quote", "Jean: 'Zone 8, position parfaite. C'est mon chef-d'œuvre temporel.'");
+        result.put("available_actions", List.of(
+            "BUILD_TOWER",
+            "ACTIVATE_TOWER", 
+            "EMERGENCY_RECALL",
+            "STABILITY_CHECK"
+        ));
         
-        fourthWallService.registerInstance(worldName, worldType);
-        
-        Map<String, Object> response = new HashMap<>();
-        response.put("success", true);
-        response.put("worldName", worldName);
-        response.put("message", "World registered in the multiverse");
-        response.put("vinceComment", "Un monde de plus où je peux tirer. Cool.");
-        
-        return ResponseEntity.ok(response);
-    }
-    
-    /**
-     * Get current instance info
-     */
-    @GetMapping("/instance-info")
-    public ResponseEntity<Map<String, Object>> getInstanceInfo() {
-        return ResponseEntity.ok(fourthWallService.getInstanceInfo());
-    }
-    
-    /**
-     * Special endpoint that knows it's an endpoint
-     */
-    @GetMapping("/self-aware")
-    public ResponseEntity<Map<String, Object>> selfAwareEndpoint() {
-        Map<String, Object> response = new HashMap<>();
-        response.put("message", "Yes, I know I'm just an API endpoint.");
-        response.put("existentialCrisis", true);
-        response.put("purpose", "To serve... but why?");
-        response.put("httpStatus", "200 OK (but am I really OK?)");
-        response.put("advice", "Don't think too hard about it. Just play the game.");
-        
-        return ResponseEntity.ok(response);
-    }
-    
-    /**
-     * Vince Vega special endpoint
-     */
-    @GetMapping("/vince-special")
-    public ResponseEntity<Map<String, Object>> vinceSpecial() {
-        Map<String, Object> response = new HashMap<>();
-        response.put("speaker", "Vince Vega");
-        response.put("message", "You found my special endpoint. Nice.");
-        response.put("quote", "You know what they call a Quarter Pounder with Cheese in another instance?");
-        response.put("answer", "A Royale with Cheese. Same burger, different server.");
-        response.put("pistolStatus", "Loaded and ready to shoot across dimensions");
-        response.put("advice", "Don't trust the pixels, kid. They're all lying to you.");
-        
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(result);
     }
 }

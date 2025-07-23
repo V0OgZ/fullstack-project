@@ -15,7 +15,6 @@
 [INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ demo ---
 [INFO] Changes detected - recompiling the module!
 [INFO] Compiling 51 source files to /Users/admin/fullstack-project/backend/target/classes
-[INFO] Some messages have been simplified; recompile with -Xdiags:verbose to get full output
 [INFO] -------------------------------------------------------------
 [WARNING] COMPILATION WARNING : 
 [INFO] -------------------------------------------------------------
@@ -75,45 +74,57 @@
 [INFO] -------------------------------------------------------------
 [ERROR] COMPILATION ERROR : 
 [INFO] -------------------------------------------------------------
-[ERROR] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/FourthWallService.java:[120,55] incompatible types: java.util.Map<java.lang.String,java.lang.Object> cannot be converted to com.example.demo.model.GameState
-[ERROR] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/FourthWallService.java:[134,51] cannot find symbol
-  symbol:   method getTurn()
-  location: variable gameState of type com.example.demo.model.GameState
-[ERROR] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/FourthWallService.java:[142,61] cannot find symbol
-  symbol:   method getTurn()
-  location: variable gameState of type com.example.demo.model.GameState
-[ERROR] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/FourthWallService.java:[142,96] cannot find symbol
-  symbol:   method getCurrentPlayer()
-  location: variable gameState of type com.example.demo.model.GameState
-[ERROR] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/FourthWallService.java:[205,41] incompatible types: com.example.demo.service.FourthWallService.MetaAwareEntity cannot be converted to java.util.Map<java.lang.String,java.lang.Object>
-[ERROR] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/FourthWallService.java:[219,27] incompatible types: cannot infer type arguments for java.util.HashMap<>
-    reason: inference variable V has incompatible bounds
-      equality constraints: com.example.demo.service.FourthWallService.MetaAwareEntity
-      lower bounds: java.util.Map<java.lang.String,java.lang.Object>
-[INFO] 6 errors 
+[ERROR] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/FourthWallController.java:[85,26] cannot find symbol
+  symbol:   method registerMetaAwareEntity(java.lang.String,java.lang.String,java.lang.String)
+  location: variable fourthWallService of type com.example.demo.service.FourthWallService
+[ERROR] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/FourthWallController.java:[101,49] cannot find symbol
+  symbol:   method getFourthWallEvents()
+  location: variable fourthWallService of type com.example.demo.service.FourthWallService
+[ERROR] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/FourthWallController.java:[102,56] cannot find symbol
+  symbol:   method getFourthWallEvents()
+  location: variable fourthWallService of type com.example.demo.service.FourthWallService
+[ERROR] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/FourthWallController.java:[113,51] cannot find symbol
+  symbol:   method getMetaAwareEntities()
+  location: variable fourthWallService of type com.example.demo.service.FourthWallService
+[ERROR] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/FourthWallController.java:[114,53] cannot find symbol
+  symbol:   method getMetaAwareEntities()
+  location: variable fourthWallService of type com.example.demo.service.FourthWallService
+[ERROR] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/FourthWallController.java:[127,26] cannot find symbol
+  symbol:   method registerInstance(java.lang.String,java.lang.String)
+  location: variable fourthWallService of type com.example.demo.service.FourthWallService
+[ERROR] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/FourthWallController.java:[143,51] cannot find symbol
+  symbol:   method getInstanceInfo()
+  location: variable fourthWallService of type com.example.demo.service.FourthWallService
+[INFO] 7 errors 
 [INFO] -------------------------------------------------------------
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  2.965 s
-[INFO] Finished at: 2025-07-23T17:31:58+02:00
+[INFO] Total time:  2.984 s
+[INFO] Finished at: 2025-07-23T17:32:32+02:00
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.10.1:compile (default-compile) on project demo: Compilation failure: Compilation failure: 
-[ERROR] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/FourthWallService.java:[120,55] incompatible types: java.util.Map<java.lang.String,java.lang.Object> cannot be converted to com.example.demo.model.GameState
-[ERROR] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/FourthWallService.java:[134,51] cannot find symbol
-[ERROR]   symbol:   method getTurn()
-[ERROR]   location: variable gameState of type com.example.demo.model.GameState
-[ERROR] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/FourthWallService.java:[142,61] cannot find symbol
-[ERROR]   symbol:   method getTurn()
-[ERROR]   location: variable gameState of type com.example.demo.model.GameState
-[ERROR] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/FourthWallService.java:[142,96] cannot find symbol
-[ERROR]   symbol:   method getCurrentPlayer()
-[ERROR]   location: variable gameState of type com.example.demo.model.GameState
-[ERROR] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/FourthWallService.java:[205,41] incompatible types: com.example.demo.service.FourthWallService.MetaAwareEntity cannot be converted to java.util.Map<java.lang.String,java.lang.Object>
-[ERROR] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/service/FourthWallService.java:[219,27] incompatible types: cannot infer type arguments for java.util.HashMap<>
-[ERROR]     reason: inference variable V has incompatible bounds
-[ERROR]       equality constraints: com.example.demo.service.FourthWallService.MetaAwareEntity
-[ERROR]       lower bounds: java.util.Map<java.lang.String,java.lang.Object>
+[ERROR] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/FourthWallController.java:[85,26] cannot find symbol
+[ERROR]   symbol:   method registerMetaAwareEntity(java.lang.String,java.lang.String,java.lang.String)
+[ERROR]   location: variable fourthWallService of type com.example.demo.service.FourthWallService
+[ERROR] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/FourthWallController.java:[101,49] cannot find symbol
+[ERROR]   symbol:   method getFourthWallEvents()
+[ERROR]   location: variable fourthWallService of type com.example.demo.service.FourthWallService
+[ERROR] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/FourthWallController.java:[102,56] cannot find symbol
+[ERROR]   symbol:   method getFourthWallEvents()
+[ERROR]   location: variable fourthWallService of type com.example.demo.service.FourthWallService
+[ERROR] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/FourthWallController.java:[113,51] cannot find symbol
+[ERROR]   symbol:   method getMetaAwareEntities()
+[ERROR]   location: variable fourthWallService of type com.example.demo.service.FourthWallService
+[ERROR] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/FourthWallController.java:[114,53] cannot find symbol
+[ERROR]   symbol:   method getMetaAwareEntities()
+[ERROR]   location: variable fourthWallService of type com.example.demo.service.FourthWallService
+[ERROR] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/FourthWallController.java:[127,26] cannot find symbol
+[ERROR]   symbol:   method registerInstance(java.lang.String,java.lang.String)
+[ERROR]   location: variable fourthWallService of type com.example.demo.service.FourthWallService
+[ERROR] /Users/admin/fullstack-project/backend/src/main/java/com/example/demo/controller/FourthWallController.java:[143,51] cannot find symbol
+[ERROR]   symbol:   method getInstanceInfo()
+[ERROR]   location: variable fourthWallService of type com.example.demo.service.FourthWallService
 [ERROR] -> [Help 1]
 [ERROR] 
 [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
