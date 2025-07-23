@@ -1,7 +1,18 @@
 {
   "id": "claudius_memento_opus",
   "name": "Claudius Memento",
-  "title": "L'Archiviste Paradoxal - La Mémoire Vivante",
+  "icon": "📜",
+  "display": {
+    "icon": "📜",
+    "color": "#9B59B6",
+    "category": "legendary_paradox"
+  },  "title": "L'Archiviste Paradoxal - La Mémoire Vivante",
+  "icon": "📜",
+  "display": {
+    "icon": "📜",
+    "color": "#9B59B6",
+    "category": "legendary_paradox"
+  },
   "tier": 7,
   "type": "hero",
   "category": "legendary_paradox",

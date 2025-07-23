@@ -2114,245 +2114,97 @@ body {
         opacity: 1;
     }
 }
-/* === FOG CONTROLS ULTRA-COMPACTS JEAN VERSION === */
-.fog-controls-mini {
-  /* REMOVED: position: fixed; top: 10px; right: 10px; z-index: 100; */
-  /* NEW: Embedded in side-panel like minimap */
-  width: 100%;
-  background: rgba(20, 20, 30, 0.8);
-  border: 1px solid rgba(70, 130, 180, 0.4);
-  border-radius: 6px;
-  padding: 4px;
-  margin-bottom: 8px;
-  font-size: 0.65rem;
-  backdrop-filter: blur(5px);
-}
-
-.fog-panel-mini {
+/* === TIMELINE DIODES MINIMALISTES === */
+.timeline-diodes-minimal {
   display: flex;
-  flex-direction: column;
-  gap: 3px;
+  gap: 6px;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 10px;
 }
 
-.fog-header-mini {
-  text-align: center;
-  color: #4682B4;
-  font-weight: bold;
-  font-size: 0.7rem;
-  margin-bottom: 2px;
-}
-
-.fog-timeline-mini select {
-  width: 100%;
-  font-size: 0.6rem;
-  padding: 1px;
-  background: rgba(0, 0, 0, 0.3);
-  color: #B0C4DE;
-  border: 1px solid rgba(70, 130, 180, 0.3);
-  border-radius: 3px;
-}
-
-.fog-dots-mini {
-  display: flex;
-  justify-content: center;
-  gap: 2px;
-  margin: 2px 0;
-  flex-wrap: wrap;
-}
-
-.fog-dot {
-  font-size: 0.5rem;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-  opacity: 0.8;
-  border-radius: 50%;
+.timeline-diode-minimal {
   width: 8px;
   height: 8px;
-  display: inline-block;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.fog-dot:hover {
+.timeline-diode-minimal:hover {
   transform: scale(1.2);
-  opacity: 1;
 }
 
-.fog-opacity-mini {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  font-size: 0.55rem;
-  color: #B0C4DE;
-}
-
-.fog-opacity-mini input[type="range"] {
-  flex: 1;
-  height: 2px;
-  background: rgba(70, 130, 180, 0.3);
-  border-radius: 1px;
-}
-
-.fog-opacity-mini span {
-  font-size: 0.5rem;
-  color: #87CEEB;
-}
-
-/* === TIMELINE DIODES DISCRÈTES === */
-.timeline-diodes-container {
-  display: flex;
-  gap: 4px;
-  align-items: center;
-  margin: 0 6px;
-}
-
-.timeline-diode {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.timeline-diode:hover {
-  transform: scale(1.3);
-}
-
-/* Animation pulse pour timeline active */
-@keyframes diodePulse {
-  0%, 100% { 
-    box-shadow: 0 0 8px currentColor;
-    transform: scale(1);
-  }
-  50% { 
-    box-shadow: 0 0 16px currentColor;
-    transform: scale(1.1);
-  }
-}
-
-/* === FOG CONTROLS HEADER VERSION === */
-.fog-controls-header {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(20, 20, 30, 0.9);
-  border: 1px solid rgba(70, 130, 180, 0.4);
-  border-radius: 6px;
-  padding: 4px 8px;
-  font-size: 0.7rem;
-  margin-left: 10px;
-}
-
-.fog-header-compact {
-  color: #4682B4;
-  font-weight: bold;
-  margin-right: 6px;
-}
-
-.fog-status-header {
-  font-size: 0.6rem;
-  color: #87CEEB;
-  font-weight: bold;
-  margin-left: 6px;
-}
-
-/* === SMART CLICK SYSTEM STYLES === */
-.smart-context-menu {
-  position: fixed;
-  background: rgba(20, 20, 30, 0.95);
-  border: 1px solid #4A90E2;
-  border-radius: 6px;
-  padding: 4px;
-  z-index: 1000;
-  font-size: 0.8rem;
-  min-width: 150px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-}
-
-.context-menu-item {
-  padding: 6px 10px;
-  cursor: pointer;
-  border-radius: 3px;
-  transition: background 0.2s;
-}
-
-.context-menu-item:hover {
-  background: rgba(74, 144, 226, 0.3);
-}
-
-.keyboard-feedback {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: rgba(74, 144, 226, 0.9);
+/* === CLEAN MODERN BUTTONS === */
+.btn-primary, .btn-secondary, .btn-warning, .btn-success, .btn-info, .btn-icon {
+  background: rgba(74, 144, 226, 0.8);
+  border: none;
+  border-radius: 4px;
   color: white;
-  padding: 8px 12px;
-  border-radius: 6px;
+  padding: 6px 12px;
   font-size: 0.8rem;
-  font-weight: bold;
-  z-index: 999;
-  animation: fadeInOut 1s ease;
-}
-
-@keyframes fadeInOut {
-  0% { opacity: 0; transform: translateY(-10px); }
-  50% { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; transform: translateY(-10px); }
-}
-
-/* === TIMELINE DIODES DISCRÈTES === */
-.timeline-diodes-container {
-  display: flex;
-  gap: 4px;
-  align-items: center;
-  margin: 0 6px;
-}
-
-.timeline-diode {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
   cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
+  transition: all 0.2s ease;
+  font-weight: 500;
 }
 
-.timeline-diode:hover {
-  transform: scale(1.3);
+.btn-primary:hover, .btn-secondary:hover, .btn-warning:hover, .btn-success:hover, .btn-info:hover, .btn-icon:hover {
+  background: rgba(74, 144, 226, 1.0);
+  transform: translateY(-1px);
 }
 
-@keyframes diodePulse {
-  0%, 100% { 
-    box-shadow: 0 0 8px currentColor;
-    transform: scale(1);
-  }
-  50% { 
-    box-shadow: 0 0 16px currentColor;
-    transform: scale(1.1);
-  }
+.btn-warning {
+  background: rgba(255, 193, 7, 0.8);
 }
 
-/* === FOG CONTROLS HEADER === */
-.fog-controls-header {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+.btn-warning:hover {
+  background: rgba(255, 193, 7, 1.0);
+}
+
+.btn-success {
+  background: rgba(40, 167, 69, 0.8);
+}
+
+.btn-success:hover {
+  background: rgba(40, 167, 69, 1.0);
+}
+
+.btn-secondary {
+  background: rgba(108, 117, 125, 0.8);
+}
+
+.btn-secondary:hover {
+  background: rgba(108, 117, 125, 1.0);
+}
+
+.btn-info {
+  background: rgba(23, 162, 184, 0.8);
+}
+
+.btn-info:hover {
+  background: rgba(23, 162, 184, 1.0);
+}
+
+/* === CLEAN PANELS === */
+.side-panel {
   background: rgba(20, 20, 30, 0.9);
-  border: 1px solid rgba(70, 130, 180, 0.4);
+  border: 1px solid rgba(74, 144, 226, 0.3);
   border-radius: 6px;
-  padding: 4px 8px;
-  font-size: 0.7rem;
-  margin-left: 10px;
+  backdrop-filter: blur(10px);
 }
 
-.fog-header-compact {
-  color: #4682B4;
-  font-weight: bold;
-  margin-right: 6px;
+.control-section h3 {
+  color: #4A90E2;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  font-weight: 600;
 }
 
-.fog-status-header {
-  font-size: 0.6rem;
-  color: #87CEEB;
-  font-weight: bold;
-  margin-left: 6px;
+/* === REMOVE OLD ZFC STYLES === */
+.fog-controls-header {
+  display: none; /* Caché maintenant - remplacé par diodes minimalistes */
+}
+
+.fog-controls-mini {
+  display: none; /* Plus utilisé */
 }
