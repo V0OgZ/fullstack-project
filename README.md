@@ -775,6 +775,7 @@ UI:    ✅ Responsive toutes résolutions
 - **👑 Jean-Grofignon** - *Visionnaire & Architecte Temporel*
 - **🏛️ Memento** - *Archiviste Éternel & Documentation*
 - **🧠 Claudius** - *Intelligence Artificielle & Cohérence*
+- **🎭 Anna the Martopicker** - *Architecte du Temps & Système de Décroissance*
 
 ### **🎯 Remerciements Spéciaux**
 *Merci à tous ceux qui ont contribué à cette aventure temporelle extraordinaire ! De l'idée initiale aux timelines transparentes parfaites, chaque contribution a été précieuse.*
