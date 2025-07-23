@@ -8,6 +8,7 @@ import { useRetroKonami } from '../utils/retro-konami';
 import { HexTile, BiomeType } from '../types/terrain';
 import { Position } from '../types/game';
 import './TrueHeroesInterface.css';
+import './FogPanelCompact.css';
 import './EnhancedSidebarPanels.css';
 
 // Simple hash function for string
@@ -423,57 +424,33 @@ const TrueHeroesInterface: React.FC = () => {
               </div>
             )}
 
-            {/* BROUILLARD DE CAUSALITÉ MINIMALISTE */}
+            {/* BROUILLARD DE CAUSALITÉ ULTRA-DISCRET */}
             {activePanel === 'fog' && (
-              <div className="panel-content fog-panel">
-                <div className="panel-header">
-                  <h3>🌫️ Brouillard de Causalité</h3>
+              <div className="panel-content fog-panel-compact">
+                <div className="panel-header-mini">
+                  <h4>🌫️ Causalité</h4>
                 </div>
-                <div className="fog-minimal-container">
-                  {/* Timeline Active - Barre Simple */}
-                  <div className="temporal-timeline">
-                    <div className="timeline-label">Timeline Temporelle</div>
-                    <div className="timeline-bar">
-                      <div className="timeline-progress" style={{width: '67%'}}></div>
-                      <div className="timeline-current" title="Tour Actuel: 67/100"></div>
+                <div className="fog-ultra-compact">
+                  {/* Barre de Timeline Minimaliste */}
+                  <div className="timeline-mini">
+                    <div className="timeline-bar-mini">
+                      <div className="timeline-progress-mini" style={{width: '67%'}}></div>
                     </div>
-                    <div className="timeline-info">Tour 67 • Phase Active</div>
+                    <div className="timeline-text-mini">T67 🎯</div>
                   </div>
 
-                  {/* Zones de Causalité avec Couleurs et Tooltips */}
-                  <div className="causality-zones">
-                    <div className="zone-title">Zones Causales</div>
-                    <div className="zones-grid">
-                      <div className="zone-item zone-clear" title="Zone Claire: Vision totale • Effets positifs">
-                        <div className="zone-color"></div>
-                        <span>Claire</span>
-                      </div>
-                      <div className="zone-item zone-shadow" title="Zone d'Ombre: Vision partielle • Effets neutres">
-                        <div className="zone-color"></div>
-                        <span>Ombre</span>
-                      </div>
-                      <div className="zone-item zone-fog" title="Brouillard Dense: Vision limitée • Effets imprévisibles">
-                        <div className="zone-color"></div>
-                        <span>Brouillard</span>
-                      </div>
-                      <div className="zone-item zone-void" title="Vide Temporal: Aucune vision • Effets chaotiques">
-                        <div className="zone-color"></div>
-                        <span>Vide</span>
-                      </div>
-                    </div>
+                  {/* Zones Super Compactes */}
+                  <div className="zones-ultra-mini">
+                    <div className="zone-dot zone-clear" title="Claire: 72%">●</div>
+                    <div className="zone-dot zone-shadow" title="Ombre: 15%">●</div>
+                    <div className="zone-dot zone-fog" title="Brouillard: 10%">●</div>
+                    <div className="zone-dot zone-void" title="Vide: 3%">●</div>
                   </div>
 
-                  {/* Indicateurs Compacts */}
-                  <div className="fog-indicators">
-                    <div className="indicator" title="Visibilité globale du terrain">
-                      👁️ <span>Visibilité: 72%</span>
-                    </div>
-                    <div className="indicator" title="Stabilité des zones temporelles">
-                      ⚡ <span>Stabilité: 85%</span>
-                    </div>
-                    <div className="indicator" title="Influence causale active">
-                      🔮 <span>Causalité: Forte</span>
-                    </div>
+                  {/* Indicateurs Ultra-Compacts */}
+                  <div className="indicators-mini">
+                    <div className="mini-stat" title="Visibilité">👁️72%</div>
+                    <div className="mini-stat" title="Stabilité">⚡85%</div>
                   </div>
                 </div>
               </div>

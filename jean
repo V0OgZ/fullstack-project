@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# 👑 JEAN - COMMANDE ULTIME SIMPLIFIÉE
+# 3 BOUTONS MAXIMUM - Zéro complexité !
+
+clear
+echo "╔═══════════════════════════════════════╗"
+echo "║        👑 JEAN COMMANDE SIMPLE        ║"
+echo "╚═══════════════════════════════════════╝"
+echo ""
+echo "🎯 QUE VEUX-TU JEAN ?"
+echo ""
+echo "1) 🤖 CLAUDIUS    - Il répond à tout"
+echo "2) 🎮 JOUER       - Lancer le jeu"  
+echo "3) 📱 DÉMO        - Regarder du canapé"
+echo ""
+echo -n "👆 Choix (1-3): "
+read choix
+
+case $choix in
+    1)
+        echo "🤖 Appel Claudius..."
+        ./claudius-simple.sh
+        ;;
+    2)
+        echo "🎮 Lancement jeu..."
+        ./hots start
+        ;;
+    3)
+        echo "📱 Démo canapé..."
+        ./hots demo
+        ;;
+    *)
+        echo "❌ Jean ! Tape 1, 2 ou 3 !"
+        echo "🔄 Relance: ./jean"
+        ;;
+esac 
