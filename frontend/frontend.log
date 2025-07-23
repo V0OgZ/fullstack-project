@@ -7,14 +7,17 @@ Traceback (most recent call last):
 ::1 - - [23/Jul/2025 07:13:40] "GET / HTTP/1.1" 200 -
 ::1 - - [23/Jul/2025 07:14:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
 ::1 - - [23/Jul/2025 07:14:10] "GET / HTTP/1.1" 200 -
-http/server.py", line 1248, in test
-    with ServerClass(addr, HandlerClass) as httpd:
-  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/socketserver.py", line 452, in __init__
-    self.server_bind()
-  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/http/server.py", line 1291, in server_bind
-    return super().server_bind()
-  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/http/server.py", line 136, in server_bind
-    socketserver.TCPServer.server_bind(self)
-  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/socketserver.py", line 466, in server_bind
-    self.socket.bind(self.server_address)
-OSError: [Errno 48] Address already in use
+::1 - - [23/Jul/2025 07:14:40] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:14:40] "GET / HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:15:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:15:10] "GET / HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:15:40] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:15:40] "GET / HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:16:10] "GET / HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:16:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:16:40] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:16:40] "GET / HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:17:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:17:10] "GET / HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:17:37] "GET / HTTP/1.1" 200 -
+s already in use

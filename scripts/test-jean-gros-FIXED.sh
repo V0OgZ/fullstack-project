@@ -16,8 +16,8 @@ cd "$ROOT_DIR" || exit 1
 echo "📂 Répertoire de travail: $ROOT_DIR"
 
 # Configuration
-TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-REPORT_DIR="$ROOT_DIR/rapport-jean-gros-$TIMESTAMP"
+TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+REPORT_DIR="$ROOT_DIR/test-reports/rapport-jean-gros-$TIMESTAMP"
 mkdir -p "$REPORT_DIR" || { echo "❌ Impossible de créer $REPORT_DIR"; exit 1; }
 REPORT_FILE="$REPORT_DIR/RAPPORT_COMPLET.md"
 
