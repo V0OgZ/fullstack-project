@@ -568,19 +568,20 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
           backgroundColor: '#f0f0f0'
         }}
       />
-      {/* Instructions pour demo */}
+      {/* Instructions pour demo - SUPER DISCRÈTES */}
       <div style={{
         position: 'absolute',
-        bottom: '10px',
-        left: '10px',
-        background: 'rgba(0,0,0,0.8)',
-        color: '#FFD700',
-        padding: '8px',
-        borderRadius: '4px',
-        fontSize: '12px',
-        pointerEvents: 'none'
+        bottom: '5px',
+        right: '5px',  
+        background: 'rgba(0,0,0,0.4)',
+        color: '#888',
+        padding: '3px 5px',
+        borderRadius: '2px',
+        fontSize: '9px',
+        pointerEvents: 'none',
+        opacity: 0.6
       }}>
-        🔮 Shift+Clic pour tester les symboles runiques
+        🔮 Shift+Clic
       </div>
     </div>
   );
