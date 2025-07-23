@@ -177,7 +177,7 @@
   },
   
   "unlock_condition": "Complete any temporal scenario or reach timeline instability",
-  "icon": "⚡",
+  "icon": "🔨",
   "color_theme": "TEMPORAL_PURPLE",
   "display": {
     "primary_color": "#9C27B0",

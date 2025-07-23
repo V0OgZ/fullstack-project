@@ -204,3 +204,129 @@
     transform: scale(1.5);
   }
 } 
+
+/* 🔧 CONTRÔLES DE ZOOM */
+.zoom-controls {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(26, 26, 46, 0.9);
+  border: 2px solid #FFD700;
+  border-radius: 25px;
+  padding: 8px 12px;
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.zoom-btn {
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid #FFD700;
+  border-radius: 6px;
+  color: #FFD700;
+  font-size: 18px;
+  font-weight: bold;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.zoom-btn:hover {
+  background: rgba(255, 215, 0, 0.2);
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+}
+
+.zoom-btn:active {
+  transform: scale(0.95);
+}
+
+.zoom-level {
+  background: rgba(0, 0, 0, 0.7);
+  color: #FFD700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  min-width: 45px;
+  text-align: center;
+  font-family: 'Courier New', monospace;
+}
+
+.zoom-reset {
+  font-size: 16px;
+}
+
+/* 🔧 AIDE CONTRÔLES */
+.controls-help {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  background: rgba(26, 26, 46, 0.9);
+  border: 1px solid #FFD700;
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #FFD700;
+  font-size: 12px;
+  line-height: 1.4;
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  font-family: 'Courier New', monospace;
+}
+
+.controls-help div {
+  margin: 2px 0;
+  opacity: 0.8;
+}
+
+.controls-help div:hover {
+  opacity: 1;
+  color: #FFFFFF;
+}
+
+/* 🔧 CURSEUR DYNAMIQUE */
+.modern-game-renderer canvas {
+  transition: cursor 0.1s ease;
+}
+
+.modern-game-renderer canvas[style*="grabbing"] {
+  cursor: grabbing !important;
+}
+
+/* 🔧 RESPONSIVE ZOOM CONTROLS */
+@media (max-width: 768px) {
+  .zoom-controls {
+    top: 10px;
+    right: 10px;
+    padding: 6px 10px;
+    gap: 6px;
+  }
+  
+  .zoom-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+  }
+  
+  .zoom-level {
+    font-size: 12px;
+    padding: 3px 6px;
+    min-width: 40px;
+  }
+  
+  .controls-help {
+    bottom: 10px;
+    left: 10px;
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+} 

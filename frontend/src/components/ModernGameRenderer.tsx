@@ -114,11 +114,23 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
   showTransitions = true
 }, ref) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const viewportRef = useRef({ x: 0, y: 0, zoom: 1 });
+  
+  // 🔧 SYSTÈME DE ZOOM AMÉLIORÉ
+  const viewportRef = useRef({ 
+    x: 0, 
+    y: 0, 
+    zoom: 0.8  // 🎯 ZOOM PAR DÉFAUT RÉDUIT pour voir plus de tuiles
+  });
+  
   const animationFrameRef = useRef<number | undefined>();
   
   // 🔮 ÉTAT SYMBOLES RUNIQUES
   const [runicSymbols, setRunicSymbols] = useState<RunicSymbol[]>([]);
+  
+  // 🔧 CONSTANTES DE ZOOM
+  const MIN_ZOOM = 0.2;  // Zoom out maximum
+  const MAX_ZOOM = 3.0;  // Zoom in maximum
+  const ZOOM_SPEED = 0.1; // Vitesse de zoom
   
   // Hexagonal rendering constants
   const hexSize = 20;
@@ -497,6 +509,105 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     };
   }, [runicSymbols.length, animate]);
 
+  // 🔧 GESTION DU ZOOM AVEC ROULETTE
+  const handleWheelZoom = useCallback((event: WheelEvent) => {
+    event.preventDefault();
+    
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    
+    // Position de la souris dans le canvas
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = event.clientX - rect.left;
+    const mouseY = event.clientY - rect.top;
+    
+    // Position monde avant zoom
+    const worldBeforeX = (mouseX - width / 2) / viewportRef.current.zoom + viewportRef.current.x;
+    const worldBeforeY = (mouseY - height / 2) / viewportRef.current.zoom + viewportRef.current.y;
+    
+    // Calculer nouveau zoom
+    const zoomDelta = event.deltaY > 0 ? -ZOOM_SPEED : ZOOM_SPEED;
+    const newZoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, viewportRef.current.zoom + zoomDelta));
+    
+    // Position monde après zoom
+    const worldAfterX = (mouseX - width / 2) / newZoom + viewportRef.current.x;
+    const worldAfterY = (mouseY - height / 2) / newZoom + viewportRef.current.y;
+    
+    // Ajuster la position pour garder la souris au même endroit
+    viewportRef.current.x += worldBeforeX - worldAfterX;
+    viewportRef.current.y += worldBeforeY - worldAfterY;
+    viewportRef.current.zoom = newZoom;
+    
+    render();
+  }, [width, height, render]);
+  
+  // 🔧 CONTRÔLES CLAVIER ZOOM
+  const handleKeyboardZoom = useCallback((event: KeyboardEvent) => {
+    if (event.ctrlKey || event.metaKey) {
+      switch (event.key) {
+        case '+':
+        case '=':
+          event.preventDefault();
+          viewportRef.current.zoom = Math.min(MAX_ZOOM, viewportRef.current.zoom + ZOOM_SPEED);
+          render();
+          break;
+        case '-':
+          event.preventDefault();
+          viewportRef.current.zoom = Math.max(MIN_ZOOM, viewportRef.current.zoom - ZOOM_SPEED);
+          render();
+          break;
+        case '0':
+          event.preventDefault();
+          viewportRef.current.zoom = 0.8; // Reset au zoom par défaut
+          render();
+          break;
+      }
+    }
+  }, [render]);
+  
+  // 🔧 DÉPLACEMENT PAR GLISSER
+  const [isPanning, setIsPanning] = useState(false);
+  const [lastPanPosition, setLastPanPosition] = useState({ x: 0, y: 0 });
+  
+  const handleMouseDown = useCallback((event: React.MouseEvent<HTMLCanvasElement>) => {
+    if (event.button === 1 || (event.button === 0 && event.altKey)) { // Bouton milieu ou Alt+clic
+      setIsPanning(true);
+      setLastPanPosition({ x: event.clientX, y: event.clientY });
+      event.preventDefault();
+    }
+  }, []);
+  
+  const handleMouseMove = useCallback((event: React.MouseEvent<HTMLCanvasElement>) => {
+    if (isPanning) {
+      const deltaX = event.clientX - lastPanPosition.x;
+      const deltaY = event.clientY - lastPanPosition.y;
+      
+      viewportRef.current.x -= deltaX / viewportRef.current.zoom;
+      viewportRef.current.y -= deltaY / viewportRef.current.zoom;
+      
+      setLastPanPosition({ x: event.clientX, y: event.clientY });
+      render();
+    }
+  }, [isPanning, lastPanPosition, render]);
+  
+  const handleMouseUp = useCallback(() => {
+    setIsPanning(false);
+  }, []);
+  
+  // 🔧 BIND EVENTS ZOOM
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    
+    canvas.addEventListener('wheel', handleWheelZoom, { passive: false });
+    document.addEventListener('keydown', handleKeyboardZoom);
+    
+    return () => {
+      canvas.removeEventListener('wheel', handleWheelZoom);
+      document.removeEventListener('keydown', handleKeyboardZoom);
+    };
+  }, [handleWheelZoom, handleKeyboardZoom]);
+
   // Handle canvas click
   const handleCanvasClick = useCallback((event: React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current;
@@ -562,26 +673,61 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
         width={width}
         height={height}
         onClick={handleCanvasClick}
-        style={{ 
-          border: '1px solid #ccc',
-          cursor: 'pointer',
-          backgroundColor: '#f0f0f0'
-        }}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        style={{ cursor: isPanning ? 'grabbing' : 'crosshair' }}
       />
-      {/* Instructions pour demo - SUPER DISCRÈTES */}
-      <div style={{
-        position: 'absolute',
-        bottom: '5px',
-        right: '5px',  
-        background: 'rgba(0,0,0,0.4)',
-        color: '#888',
-        padding: '3px 5px',
-        borderRadius: '2px',
-        fontSize: '9px',
-        pointerEvents: 'none',
-        opacity: 0.6
-      }}>
-        🔮 Shift+Clic
+      
+      {/* 🔧 CONTRÔLES DE ZOOM */}
+      <div className="zoom-controls">
+        <button 
+          className="zoom-btn zoom-out" 
+          onClick={() => {
+            viewportRef.current.zoom = Math.max(MIN_ZOOM, viewportRef.current.zoom - ZOOM_SPEED);
+            render();
+          }}
+          title="Zoom Out (Ctrl + -)"
+        >
+          −
+        </button>
+        
+        <div className="zoom-level" title="Niveau de zoom">
+          {Math.round(viewportRef.current.zoom * 100)}%
+        </div>
+        
+        <button 
+          className="zoom-btn zoom-in" 
+          onClick={() => {
+            viewportRef.current.zoom = Math.min(MAX_ZOOM, viewportRef.current.zoom + ZOOM_SPEED);
+            render();
+          }}
+          title="Zoom In (Ctrl + +)"
+        >
+          +
+        </button>
+        
+        <button 
+          className="zoom-btn zoom-reset" 
+          onClick={() => {
+            viewportRef.current.zoom = 0.8;
+            viewportRef.current.x = 0;
+            viewportRef.current.y = 0;
+            render();
+          }}
+          title="Reset Zoom (Ctrl + 0)"
+        >
+          🎯
+        </button>
+      </div>
+      
+      {/* 🔧 AIDE CONTRÔLES */}
+      <div className="controls-help">
+        <div>🖱️ Roulette: Zoom</div>
+        <div>🖱️ Alt+Glisser: Déplacer</div>
+        <div>⌨️ Ctrl+/- : Zoom</div>
+        <div>⌨️ Shift+Clic: Effet runique</div>
       </div>
     </div>
   );

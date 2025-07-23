@@ -42,7 +42,8 @@ class ContextualHeroActions {
             interaction: [
                 { id: 'search', icon: '🔍', label: 'Search', hotkey: 'S', color: '#607D8B' },
                 { id: 'open_chest', icon: '📦', label: 'Open', hotkey: 'O', color: '#FF9800' },
-                { id: 'talk', icon: '💬', label: 'Talk', hotkey: 'Space', color: '#795548' }
+                { id: 'talk', icon: '💬', label: 'Talk', hotkey: 'Space', color: '#795548' },
+                { id: 'center_view', icon: '🎯', label: 'Center View', hotkey: 'C', color: '#2196F3' }
             ],
             
             // Actions spéciales Jean-Grofignon
@@ -413,7 +414,30 @@ class ContextualHeroActions {
     
     executeGenericAction(action) {
         console.log(`⚡ Generic action: ${action.label}`);
-        // TODO: Implémenter actions génériques
+        
+        // Actions spéciales génériques
+        switch (action.id) {
+            case 'center_view':
+                this.executeCenterView();
+                break;
+            default:
+                console.log(`🎯 Action générique: ${action.label}`);
+        }
+    }
+    
+    executeCenterView() {
+        console.log('🎯 Center View activated');
+        if (this.selectedHero && window.modernGameRenderer) {
+            // Utiliser l'API du renderer pour centrer sur le héros
+            window.modernGameRenderer.centerOnPosition(
+                this.selectedHero.position?.x || 0, 
+                this.selectedHero.position?.y || 0
+            );
+        }
+        
+        if (window.systemMessages) {
+            window.systemMessages.showAction('Vue centrée sur le héros', 'VIEW');
+        }
     }
     
     handleHotkey(e) {
