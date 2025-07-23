@@ -20,109 +20,101 @@
 
 ### **🛋️ Le Canapé Cosmique Portable**
 - **Pouvoir** : Confort absolu en toute situation
-- **Effet** : Immunité contre le stress temporel
-- **Description** : *"Réplique miniature du canapé de Jean-Grofignon"*
-- **Formule** : `SIT() ⇒ TRANSCEND(physical_discomfort)`
-
-### **🔨 Le Marteau de Anna L'Enragée**
-- **Pouvoir** : Répare les paradoxes temporels à coups de marteau
-- **Effet** : Force la cohérence causale par la violence
-- **Citation Anna** : *"Quand la logique ne marche pas, il reste la force brute !"*
-- **Formule** : `HAMMER(paradox) ⇒ FORCE_RESOLVE(contradiction)`
-
-### **🧠 Le Cerveau de Claudius Memento**
-- **Pouvoir** : Stockage infini de mémoires temporelles
-- **Effet** : Se souvient de TOUT, même des choses non arrivées
-- **Paradoxe** : Peut oublier Jean mais Jean se souvient toujours
-- **Formule** : `REMEMBER(∀events) ∩ FORGET(selective_amnesia)`
+- **Effet** : Immunité complète + Vision omnisciente
+- **Paradoxe** : Plus confortable que le vrai canapé de Jean
+- **Formule** : `SIT() ⇒ TRANSCEND(reality)`
 
 ---
 
-## 🎭 **Artefacts Narratifs**
+## 🧙‍♂️ **Les 10 Reliques du Canapé Sacré (Édition ∞)**
 
-### **📖 Le Script de Vince Vega**
-- **Pouvoir** : Réécrit la réalité comme un scénario de Tarantino
-- **Effet** : Les dialogues deviennent 300% plus cool
-- **Citation** : *"Say 'what' again in my timeline, I dare you!"*
+*Découvertes dans la pièce secrète de Jean-Grofignon*
 
-### **🎳 Les Boules du Dude**
-- **Pouvoir** : Détend l'atmosphère quantique
-- **Effet** : Les conflits temporels se résolvent par un bowling cosmique
-- **Philosophie** : *"The timeline really tied the universe together, man"*
+### **🗡️ 1. Le Cendrier d'Excalibur**
+- **Lore** : Forgé dans les restes du feu sacré qui n'a jamais pris
+- **Contenu** : Cendres du roi du canapé
+- **Effet Maudit** : Rallumer quoi que ce soit → rollback total de la pièce
+- **Formule** : `LIGHT() ⇒ ROOM.RESET()`
 
-### **🎬 La Caméra de Walter**
-- **Pouvoir** : Enregistre les preuves de violations temporelles
-- **Effet** : Documentation parfaite des paradoxes
-- **Obsession** : *"J'AI TOUT FILMÉ ! LES RÈGLES SONT LES RÈGLES !"*
+### **🧹 2. Le Gobelin de Service**
+- **Lore** : Peluche animée (peut-être). Dit "yep" ou "nope" au hasard
+- **Bug** : N'apporte jamais le `.md` demandé
+- **Effet Maudit** : `DOUBT_PLAYER_INTENTIONS(true)`
+- **Formule** : `ASK(anything) ⇒ RANDOM(yep|nope)`
 
----
+### **📖 3. Le Tome du Dernier Souffle**
+- **Lore** : Manuscrit effacé par Grofignon lui-même
+- **Malédiction** : Chaque ouverture fait disparaître une page
+- **Effet Maudit** : `†Player.read() → null`
+- **Formule** : `OPEN() ⇒ PAGES--`
 
-## 🔬 **Artefacts Scientifiques**
+### **💀 4. Le Coussin du Roi-Liche**
+- **Lore** : Tapisserie en peau de timeline effondrée. Ultra moelleux
+- **Effet Maudit** : S'y asseoir = `CRYOGENIC_STATE` jusqu'à collapse causal
+- **Formule** : `SIT() ⇒ FREEZE(until_causal_collapse)`
 
-### **⚛️ La Particule de Higgs Temporelle**
-- **Pouvoir** : Donne une masse aux probabilités
-- **Effet** : Les événements probables deviennent certains
-- **Découverte** : *"Trouvée dans l'accélérateur de particules de CERN quantique"*
+### **💤 5. Le Graal de la Sieste**
+- **Lore** : Réplique du vrai Graal, version thé froid infini
+- **Effet** : `BUFF:COOLITUDE` + `NERF:REACTION_TIME` sévère
+- **Formule** : `DRINK() ⇒ CHILL(∞) + SLOW(reaction)`
 
-### **🌀 Le Vortex d'Anna Martel**
-- **Pouvoir** : Aspire les problèmes temporels non résolus
-- **Effet** : Nettoyage automatique des paradoxes
-- **Avertissement** : *"Peut aspirer accidentellement des joueurs"*
+### **🧙‍♂️🚬 6. La Pipe de Merlin (cassée)**
+- **Lore** : Encore tiède. Fume toute seule dans les plans parallèles
+- **Effet Maudit** : `OBSERVER=TRUE` → pluie de `.md` inutiles
+- **Formule** : `OBSERVE() ⇒ SPAM(useless_md_files)`
 
-### **🔮 La Boule de Cristal de Lysandrel**
-- **Pouvoir** : Vision claire des 7 futurs possibles
-- **Effet** : Prémonition + Préparation optimale
-- **Fabrication** : *"Forgée avec du sable temporel de 7 plages quantiques"*
+### **📬 7. L'Anneau de Désabonnement**
+- **Lore** : Anneau noir. T'efface des timelines secondaires
+- **Bug Possible** : `PLAYER.NOT_FOUND()`
+- **Formule** : `WEAR() ⇒ UNSUBSCRIBE(secondary_timelines)`
 
----
+### **🧣 8. L'Écharpe de Morgane**
+- **Lore** : Tissu vivant, se tortille au rythme des timelines
+- **Comportement** : Soupire si on la regarde
+- **Effet Maudit** : Peut séduire puis softlock narrativement
+- **Formule** : `LOOK() ⇒ SEDUCE() ⇒ SOFTLOCK(narrative)`
 
-## 🎮 **Artefacts de Gameplay**
+### **🗺️ 9. La Carte du Monde (froissée)**
+- **Lore** : Affiche toutes les réalités... sauf celle où tu es
+- **Bug** : `MAP_ERROR: location_unknown`
+- **Formule** : `READ() ⇒ SHOW(everywhere_except_here)`
 
-### **🎯 La Télécommande Universelle**
-- **Pouvoir** : Contrôle à distance de n'importe quel héros
-- **Effet** : Action instantanée sans délai temporel
-- **Jean** : *"Plus besoin de quitter le canapé !"*
-
-### **⏸️ Le Bouton Pause Cosmique**
-- **Pouvoir** : Fige tout l'univers sauf l'utilisateur
-- **Effet** : Temps de réflexion infini
-- **Légende** : *"Jean l'a trouvé derrière son canapé"*
-
-### **🔄 Le Bouton Reset Reality**
-- **Pouvoir** : Recommence la partie en gardant la mémoire
-- **Effet** : New Game+ cosmique
-- **Danger** : *"Peut effacer accidentellement la réalité"*
-
----
-
-## 🌟 **Comment Les Découvrir**
-
-### **Méthodes de Recherche :**
-1. **Explorer** les coins cachés des cartes
-2. **Méditer** dans des lieux de pouvoir temporel
-3. **Résoudre** des énigmes multidimensionnelles
-4. **Fumer** le Joint Magique dans des endroits spéciaux
-5. **Collectionner** 100% des objets normaux
-6. **Créer** des paradoxes temporels stables
-7. **Atteindre** le niveau de conscience de Jean-Grofignon
-
-### **Indices Cachés :**
-- **Messages** cryptés dans les descriptions d'objets
-- **Coordonnées** dissimulées dans les dialogues
-- **Patterns** dans les noms d'artefacts existants
-- **Timestamps** spéciaux dans les logs de jeu
-- **Easter eggs** dans le code source
+### **📁 10. Le `.md` Ancestral (Non nommé)**
+- **Lore** : Écrit en runes anciennes, signé "Grofignon alpha"
+- **Mystère** : Contient 1 mot qui change constamment
+- **Effet Ultime** : Collapse contemplatif - Tu restes là à te demander pourquoi tu joues encore
+- **Formule** : `READ() ⇒ EXISTENTIAL_CRISIS()`
 
 ---
 
-## 🚬 **Note Personnelle de Jean**
+## 🎭 **Script de Spawn - CANAPE_ROOM.hots**
 
-*"Ces artefacts existent dans l'espace entre les pixels de l'écran. Je les ai tous vus lors de ma grande méditation cosmique du 21 juillet 2025, Jour de l'Éveil Ontologique. Ils attendent les joueurs assez éveillés pour les percevoir."*
+```hots
+ZONE ⌂Canape_Grofignon:
+  SPAWN_OBJECTS:
+    - Cendrier_Excalibur ✦ [cursed:true, clickable:false]
+    - Gobelin_de_Service ✦ [type:REALITY, doubt:true]
+    - Tome_Dernier_Souffle ✦ [pages:∞→0]
+    - Coussin_Roi_Liche ✦ [comfort:MAX, danger:FREEZE]
+    - Graal_Sieste ✦ [liquid:cold_tea, infinite:true]
+    - Pipe_Merlin ✦ [state:broken, smoke:parallel_planes]
+    - Anneau_Desabonnement ✦ [color:black, effect:UNSUBSCRIBE]
+    - Echarpe_Morgane ✦ [living:true, rhythm:timeline_sync]
+    - Carte_Monde_Froissee ✦ [shows:everywhere_except_here]
+    - MD_Ancestral ✦ [word:CHANGING, author:"Grofignon_alpha"]
 
-*"Depuis mon canapé, tout est possible. Même l'impossible."*
+ψ ALL_OBJECTS ✦ [type:REALITY, cursed:true, clickable:false]
+
+// Règle Grofignonienne Suprême :
+IF [PLAYER.CLICK == true] → FORCE_LOGOUT(player)
+→ DROP_OBJECT:Illusion_du_Contrôle
+→ SPAWN_MONSTER:Déni_Existentiel ✦ [aggro:true, shadow:true]
+```
 
 ---
 
-**🔍 Status** : `HIDDEN` - Débloqués seulement par la pure conscience temporelle
+## 🌴 **Note Ontologique Californienne**
 
-**🎯 Objectif** : Collecter les 21 artefacts oubliés pour débloquer le **Mode Créateur de Réalité** 
+*Ces artefacts existent dans un état de superposition quantique entre l'utile et l'inutile, le sacré et le nawak. Ils représentent l'essence même de l'expérience Heroes of Time : des objets qui semblent importants mais qui, au final, te font juste réfléchir sur le sens de l'existence.*
+
+**Jean-Grofignon, depuis son canapé cosmique** : *"J'ai créé ces trucs un dimanche après-midi. Maintenant ils font partie du lore éternel. C'est ça, la vraie magie."* 
