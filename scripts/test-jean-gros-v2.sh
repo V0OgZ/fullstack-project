@@ -13,7 +13,7 @@ echo "🔫 Vince Vega: Setting up parallel execution..."
 echo ""
 
 # Configuration
-REPORT_DIR="rapport-jean-gros-$(date +%Y%m%d_%H%M%S)"
+REPORT_DIR="test-reports/rapport-jean-gros-$(date +%Y%m%d_%H%M%S)"
 mkdir -p "$REPORT_DIR"
 REPORT_FILE="$REPORT_DIR/RAPPORT_COMPLET.md"
 TIMEOUT_SECONDS=300  # Vince: "5 minutes max per test, or I shoot it"
