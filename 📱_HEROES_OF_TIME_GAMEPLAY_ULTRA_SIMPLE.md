@@ -69,7 +69,7 @@ Alice avec ses objets **ÉCRASE** Bob !
 ### **Citation Cosmique :**
 > *"Le brouillard, c'est comme la réalité : plus tu cours après, moins il y en a. Mais si tu restes sur ton canapé... tout devient flou."*
 
-### **Paradoxe Grofignonien :**
+### **Paradoxe GROFIGNONIEN :**
 - **Jean reste immobile** → Voit tout depuis son canapé cosmique
 - **Joueurs bougent** → Voient moins à cause du brouillard  
 - **Conclusion** : Jean a hacké la physique quantique
