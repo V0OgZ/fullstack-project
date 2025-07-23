@@ -1108,6 +1108,7 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 ./scripts/test-trinite-cosmique.sh     # Test TRINITÉ COSMIQUE Jean+Memento+Claudius 🌌
 ./scripts/test-adaptation-scenarios-trinite.sh  # Adapter scénarios existants pour trinité 🔧
 ./scripts/test-petits-tresors-temporels.sh  # Test artefacts mineurs pour joueurs normaux 💎
+./scripts/test-tatouages-memento.sh     # 🏛️ Révélation tatouages temporels de Memento « Tu sais, tu as su, tu sauras »
 ./scripts/test-pepites-json.sh          # Test toutes les pépites JSON découvertes 💎
 ./hots test economie           # Test simulation économique complète
 ./hots test translation        # Test service traduction intelligent (SANS LLM)
