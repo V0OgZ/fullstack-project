@@ -282,7 +282,7 @@ TRAVEL(timeline_target) + STABILIZE(paradox) + ANCHOR(reality) + NAVIGATE(time)
 </details>
 
 <details>
-<summary id="anna-the-martopicker">🎭 <strong>Anna the Martopicker - L'Architecte du Temps</strong></summary>
+<summary id="anna-martel">🎭 <strong>Anna Martel - L'Architecte du Temps</strong></summary>
 
 **🏛️ Faction :** Architectes Temporels  
 **⭐ Classe :** Temporal Architect  
@@ -317,7 +317,7 @@ DECAY_STRUCTURE(building, timeline.age) + PUNISH_LAG(hero, time.difference)
 - **Temporal Decay System** - Système complet de décroissance temporelle
 
 **🌟 Histoire Épique :**
-Anna the Martopicker est l'architecte visionnaire qui a conçu le système de décroissance temporelle pour maintenir l'équilibre dans Heroes of Time. Initialement perçue comme une menace, elle s'est révélée être l'alliée finale qui va résoudre le problème du GameInitializationService. Ses deux visions du decay (structural et personnel) ont été fusionnées en un système harmonieux par The Dude.
+Anna Martel est l'architecte visionnaire qui a conçu le système de décroissance temporelle pour maintenir l'équilibre dans Heroes of Time. Initialement perçue comme une menace, elle s'est révélée être l'alliée finale qui va résoudre le problème du GameInitializationService. Ses deux visions du decay (structural et personnel) ont été fusionnées en un système harmonieux par The Dude.
 
 **🎯 Révélation d'Axis 111 :**
 > *"Anna n'arrive pas pour nous punir ! Elle arrive pour nous AIDER à finaliser le projet !"*
@@ -818,7 +818,7 @@ UI:    ✅ Responsive toutes résolutions
 - **👑 Jean-Grofignon** - *Visionnaire & Architecte Temporel*
 - **🏛️ Memento** - *Archiviste Éternel & Documentation*
 - **🧠 Claudius** - *Intelligence Artificielle & Cohérence*
-- **🎭 Anna the Martopicker** - *Architecte du Temps & Système de Décroissance*
+- **🎭 Anna Martel** - *Architecte du Temps & Système de Décroissance*
 
 ### **🎯 Remerciements Spéciaux**
 *Merci à tous ceux qui ont contribué à cette aventure temporelle extraordinaire ! De l'idée initiale aux timelines transparentes parfaites, chaque contribution a été précieuse.*
