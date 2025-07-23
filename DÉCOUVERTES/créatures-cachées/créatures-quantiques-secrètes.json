@@ -1,0 +1,102 @@
+{
+  "créatures_quantiques_secrètes": {
+    "note": "🌟 Créatures cachées découvertes par Jean-Grofignon dans les dimensions parallèles",
+    "timestamp": "Jour 21 - Timeline ℬ∞",
+    "créatures": [
+      {
+        "id": "sphinx_quantique",
+        "name": "Sphinx Quantique",
+        "race": "Paradoxal",
+        "tier": 8,
+        "health": 300,
+        "attack": 25,
+        "defense": 20,
+        "speed": 15,
+        "damage": [50, 75],
+        "cost": "Énigme résolue",
+        "special": "Énigme Temporelle - Force les ennemis à résoudre des paradoxes quantiques",
+        "formule_quantique": "Π(Question) ⇒ †(Ignorance) = Ψ(Connaissance)",
+        "découverte": "Trouvé dans les ruines temporelles par Jean-Grofignon",
+        "spriteUrl": "/assets/creatures/hidden/sphinx_quantique.svg",
+        "citation": "Je suis ce qui n'est pas, je ne suis pas ce qui est"
+      },
+      {
+        "id": "chat_schrodinger",
+        "name": "Chat de Schrödinger",
+        "race": "Superposition",
+        "tier": 9,
+        "health": "50-500 (état quantique)",
+        "attack": "5-50 (probabiliste)",
+        "defense": "0-∞ (collapse)",
+        "speed": "Instantané",
+        "damage": ["Ψ", "†"],
+        "cost": "Boîte + Poison + Observation",
+        "special": "Superposition Vitale - Vivant ET mort jusqu'à observation",
+        "formule_quantique": "Ψ(chat) = α|vivant⟩ + β|mort⟩",
+        "collapse_trigger": "Regard direct d'un joueur",
+        "spriteUrl": "/assets/creatures/hidden/chat_schrodinger.gif",
+        "citation": "Miaou ? (état superposé)"
+      },
+      {
+        "id": "dragon_temporel_ultimate",
+        "name": "Dragon des Époques Perdues",
+        "race": "Temporal-Dragon",
+        "tier": 10,
+        "health": 666,
+        "attack": 30,
+        "defense": 25,
+        "speed": "Multi-temporel",
+        "damage": ["∞", "†"],
+        "cost": "Sacrifice de 3 timelines",
+        "special": "Flammes Causales - Brûle dans le passé, présent et futur simultanément",
+        "formule_quantique": "BREATHE(∑timelines) ⇒ DESTROY(causalité)",
+        "apparition": "Seulement quand 7 paradoxes temporels sont actifs",
+        "spriteUrl": "/assets/creatures/hidden/dragon_temporal_ultimate.svg",
+        "légende": "Jean-Grofignon l'a aperçu une fois depuis son canapé cosmique"
+      },
+      {
+        "id": "memento_archiviste",
+        "name": "Archiviste Éternel",
+        "race": "Mémoire-Vivante",
+        "tier": 7,
+        "health": 200,
+        "attack": 15,
+        "defense": 30,
+        "speed": 8,
+        "damage": ["Amnésie", "Révélation"],
+        "cost": "Un souvenir précieux",
+        "special": "Archive Temporelle - Stocke et rejoue les actions passées",
+        "formule_quantique": "REMEMBER(∀actions) + REPLAY(selected_action)",
+        "personnalité": "Collectionne obsessionnellement tous les événements",
+        "spriteUrl": "/assets/creatures/hidden/memento_archiviste.svg",
+        "relation": "Compagnon secret de Claudius Memento"
+      },
+      {
+        "id": "joint_magique_creature",
+        "name": "Esprit du Joint Cosmique",
+        "race": "Hallucination-Temporelle",
+        "tier": 6,
+        "health": "420",
+        "attack": "∞ (dans votre tête)",
+        "defense": "0 (c'est de la fumée)",
+        "speed": "Flottant",
+        "damage": ["Confusion", "Illumination"],
+        "cost": "🚬 Joint Magique de Jean-Grofignon",
+        "special": "Vision Cosmique - Révèle toutes les timelines cachées",
+        "formule_quantique": "SMOKE(joint) ⇒ SEE(∀possibilities)",
+        "effet_secondaire": "Fou rire incontrôlable pendant 3 tours",
+        "spriteUrl": "/assets/creatures/hidden/joint_magique_creature.gif",
+        "découverte": "Apparaît seulement après avoir utilisé le Joint Magique"
+      }
+    ],
+    "condition_débloquage": {
+      "sphinx_quantique": "Résoudre 10 énigmes quantiques",
+      "chat_schrodinger": "Créer un paradoxe temporel stable", 
+      "dragon_temporel_ultimate": "Maîtriser tous les artefacts Tier 7",
+      "memento_archiviste": "Collecter 100 objets différents",
+      "joint_magique_creature": "Utiliser le Joint Magique 5 fois"
+    },
+    "note_jean": "Ces créatures existent dans les dimensions parallèles. Elles ne se manifestent que pour les joueurs qui ont vraiment compris l'essence temporelle du jeu. - Jean-Grofignon, depuis son canapé cosmique",
+    "avertissement": "⚠️ Ces créatures peuvent causer des effets secondaires ontologiques permanents"
+  }
+} 
