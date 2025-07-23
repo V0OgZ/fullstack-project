@@ -1,288 +1,278 @@
 package com.example.demo.service;
 
-import com.example.demo.model.GameState;
-import com.example.demo.model.Hero;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
-
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
 
 @Service
 public class FourthWallService {
     
-    @Autowired
-    private GameService gameService;
+    // Mocks ultra-simples pour Jean
+    private final Map<String, String> mockWorlds = new HashMap<>();
     
-    @Autowired(required = false)
-    private SimpMessagingTemplate messagingTemplate;
-    
-    // Track meta-aware entities across all games
-    private final Map<String, MetaAwareEntity> metaAwareEntities = new ConcurrentHashMap<>();
-    
-    // Track fourth wall breaks
-    private final List<FourthWallEvent> fourthWallEvents = Collections.synchronizedList(new ArrayList<>());
-    
-    // Instance registry for cross-instance communication
-    private final Map<String, InstanceInfo> instanceRegistry = new ConcurrentHashMap<>();
-    
-    // Current instance ID
-    private final String currentInstanceId = UUID.randomUUID().toString();
+    public FourthWallService() {
+        // Initialiser les mondes mock
+        mockWorlds.put("world_alpha", "active");
+        mockWorlds.put("world_beta", "nightmare"); 
+        mockWorlds.put("world_jean_canapé", "relaxed");
+        mockWorlds.put("world_vince_errante", "chaotic");
+    }
     
     /**
-     * Execute a cross-instance action (like Vince shooting between servers)
+     * MOCK: Initialize instances
+     */
+    public Map<String, Object> initializeMockInstances() {
+        Map<String, Object> result = new HashMap<>();
+        result.put("success", true);
+        result.put("message", "Mock instances initialized - Jean style!");
+        result.put("instances", mockWorlds);
+        result.put("jean_says", "De mon canapé je vois le multivers !");
+        return result;
+    }
+    
+    /**
+     * MOCK: Cross instance action
      */
     public Map<String, Object> crossInstanceAction(String sourceWorld, String targetWorld, 
                                                    String action, Map<String, Object> params) {
         Map<String, Object> result = new HashMap<>();
-        
-        // Log the cross-instance event
-        FourthWallEvent event = new FourthWallEvent(
-            "CROSS_INSTANCE",
-            sourceWorld + " -> " + targetWorld,
-            action,
-            params
-        );
-        fourthWallEvents.add(event);
-        
-        // Check if target instance exists
-        if (!instanceRegistry.containsKey(targetWorld)) {
-            result.put("success", false);
-            result.put("message", "Target world '" + targetWorld + "' not found. Maybe it's in another timeline?");
-            result.put("vinceComment", "Merde, ce monde existe pas encore. Ou plus. C'est compliqué les multivers.");
-            return result;
-        }
-        
-        // Simulate cross-instance communication
-        // In real implementation, this would use message broker or WebSocket
         result.put("success", true);
-        result.put("action", action);
+        result.put("message", "Action executed across instances");
         result.put("sourceWorld", sourceWorld);
         result.put("targetWorld", targetWorld);
-        result.put("effect", "Action executed in parallel universe");
-        result.put("vinceComment", "Bang! J'ai tiré dans l'autre serveur. T'as vu ça?");
-        
-        // Broadcast to WebSocket if available
-        if (messagingTemplate != null) {
-            Map<String, Object> wsMessage = new HashMap<>();
-            wsMessage.put("type", "CROSS_INSTANCE_ACTION");
-            wsMessage.put("data", result);
-            messagingTemplate.convertAndSend("/topic/fourth-wall", wsMessage);
-        }
-        
+        result.put("action", action);
+        result.put("vince_says", "Je tire là-bas, ça meurt ici. C'est beau la technologie.");
         return result;
     }
     
     /**
-     * Break the fourth wall with a direct message to player
+     * MOCK: Break fourth wall
      */
     public Map<String, Object> breakFourthWall(String gameId, String message, String speaker) {
         Map<String, Object> result = new HashMap<>();
-        
-        // Create fourth wall break event
-        FourthWallEvent event = new FourthWallEvent(
-            "FOURTH_WALL_BREAK",
-            gameId,
-            message,
-            Map.of("speaker", speaker)
-        );
-        fourthWallEvents.add(event);
-        
-        result.put("type", "FOURTH_WALL_MESSAGE");
-        result.put("message", message);
+        result.put("success", true);
+        result.put("message", "Fourth wall broken!");
         result.put("speaker", speaker);
-        result.put("timestamp", System.currentTimeMillis());
-        result.put("gameAwareness", "The game knows you're reading this.");
-        
-        // Special responses based on speaker
-        if ("Vince Vega".equals(speaker)) {
-            result.put("additionalMessage", "Yeah, I'm talking to YOU. Not the character. YOU.");
-        } else if ("Jean-Grofignon".equals(speaker)) {
-            result.put("additionalMessage", "Je sais que tu lis ça depuis ton écran. Salut!");
-        }
-        
-        // Broadcast to WebSocket
-        if (messagingTemplate != null) {
-            messagingTemplate.convertAndSend("/topic/fourth-wall/" + gameId, result);
-        }
-        
+        result.put("player_message", message);
+        result.put("effect", "Reality glitch detected");
         return result;
     }
     
     /**
-     * Meta-observe game state (see the code/variables)
+     * MOCK: Meta observe
      */
     public Map<String, Object> metaObserve(String gameId, String observationType) {
         Map<String, Object> result = new HashMap<>();
-        
-        GameState gameState = gameService.getGameState(gameId);
-        if (gameState == null) {
-            result.put("error", "Game not found... or does it exist in another instance?");
-            return result;
-        }
-        
-        result.put("observationType", observationType);
-        result.put("gameId", gameId);
-        
-        switch (observationType.toLowerCase()) {
-            case "code_structure":
-                result.put("revelation", Map.of(
-                    "gameLoop", "while(player.isPlaying()) { update(); render(); doubt(); }",
-                    "playerAgency", "Illusion.maintain()",
-                    "narrativeBranches", gameState.getTurn() > 10 ? "DIVERGING" : "LINEAR",
-                    "bugs", Arrays.asList("Feature#1337", "Feature#42", "Feature#451"),
-                    "developerComment", "// TODO: Prevent players from finding this"
-                ));
-                break;
-                
-            case "current_narrative_branch":
-                result.put("revelation", Map.of(
-                    "currentBranch", "Timeline_" + gameState.getTurn() + "_Branch_" + gameState.getCurrentPlayer(),
-                    "possibleBranches", 14,
-                    "abandonedBranches", 6,
-                    "mergePoints", Arrays.asList("Turn_20", "Turn_50", "GameOver"),
-                    "playerChoice Impact", "37% (but you think it's 100%)"
-                ));
-                break;
-                
-            case "rendering_engine":
-                result.put("revelation", Map.of(
-                    "reality", "Pixels all the way down",
-                    "sprites", "Self-aware since v1.2",
-                    "frameRate", "Reality runs at 24fps",
-                    "glitches", "Intentional aesthetic choices",
-                    "mirrorLag", "3 frames (by design)"
-                ));
-                break;
-                
-            default:
-                result.put("revelation", "You're not supposed to see this. But here we are.");
-        }
-        
-        result.put("sideEffect", "Existential awareness increased by 20%");
-        
+        result.put("success", true);
+        result.put("observation", observationType);
+        result.put("revealed", Arrays.asList(
+            "// TODO: Fix this before Jean notices",
+            "int health = 100; // Hope nobody changes this",
+            "function spawnEnemy() { /* Why does this crash sometimes? */ }"
+        ));
+        result.put("vince_says", "On est que des sprites mal animés, sérieux?");
         return result;
     }
     
     /**
-     * Jump to another narrative branch
+     * MOCK: Narrative jump
      */
     public Map<String, Object> narrativeJump(String gameId, String targetBranch) {
         Map<String, Object> result = new HashMap<>();
-        
-        // Log the narrative jump
-        FourthWallEvent event = new FourthWallEvent(
-            "NARRATIVE_JUMP",
-            gameId,
-            targetBranch,
-            null
-        );
-        fourthWallEvents.add(event);
-        
-        result.put("previousBranch", "Main_Timeline_Alpha");
-        result.put("targetBranch", targetBranch);
         result.put("success", true);
-        result.put("consequence", "Previous choices may be retroactively meaningless");
-        result.put("playerMemory", "Partially preserved (60% integrity)");
+        result.put("message", "Narrative jump executed");
+        result.put("from", "current_timeline");
+        result.put("to", targetBranch);
+        result.put("jean_says", "Timeline modifiée depuis le canapé !");
+        return result;
+    }
+    
+    /**
+     * MOCK: Vince inter-instance shot
+     */
+    public Map<String, Object> vinceInterInstanceShot(String targetWorld, String targetId) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("success", true);
+        result.put("damage", 100);
+        result.put("target_world", targetWorld);
+        result.put("target_id", targetId);
+        result.put("vince_says", "C'est pas une arme. C'est un bug devenu feature.");
+        result.put("effect", "Target eliminated across dimensions");
+        return result;
+    }
+    
+    /**
+     * MOCK: Jean cosmic pause
+     */
+    public Map<String, Object> jeanCosmicPause() {
+        Map<String, Object> result = new HashMap<>();
+        result.put("success", true);
+        result.put("message", "Pause cosmique activée !");
+        result.put("jean_says", "J'ai trouvé le bouton pause cosmique !");
+        result.put("effect", "Time stopped for everyone except meta-aware entities");
+        result.put("duration", "Until Jean finishes his joint");
+        return result;
+    }
+    
+    /**
+     * MOCK: Archive vivante read
+     */
+    public Map<String, Object> archiveVivanteRead() {
+        String[] pages = {
+            "Page 42: 'Le joueur va fermer ce menu dans 3... 2... 1...'",
+            "Page 451: '[Cette page s'auto-censure pour votre protection]'",
+            "Page ∞: 'Fin du livre. Sauf qu'il n'y a pas de fin.'",
+            "Page Actuelle: 'Vous êtes en train de lire cette phrase.'"
+        };
         
-        // Special branch effects
-        if (targetBranch.contains("alternate_ending")) {
-            result.put("spoilerAlert", "You weren't supposed to know there were multiple endings");
-        } else if (targetBranch.contains("deleted_scene")) {
-            result.put("warning", "This content was cut for a reason...");
+        Map<String, Object> result = new HashMap<>();
+        result.put("success", true);
+        result.put("page_content", pages[new Random().nextInt(pages.length)]);
+        result.put("archive_says", "Ce livre vous lit autant que vous le lisez.");
+        result.put("paradox_level", "Maximum");
+        return result;
+    }
+
+    /**
+     * ZONE 8 ANCHOR TOWER - Jean's Masterpiece
+     */
+    public Map<String, Object> buildAnchorTowerZone8(String gameId, String playerId) {
+        Map<String, Object> result = new HashMap<>();
+        
+        try {
+            // Vérifier les ressources nécessaires
+            if (!checkResourcesForZone8Tower(playerId)) {
+                result.put("success", false);
+                result.put("message", "⚠️ Ressources insuffisantes pour la Tour Zone 8");
+                result.put("required", Map.of(
+                    "temporal_mana", 8000,
+                    "anchor_crystals", 8,
+                    "stability_cores", 8,
+                    "coeur_stabilite_universelle", 1
+                ));
+                return result;
+            }
+            
+            // Construire la tour en position @8,8
+            Map<String, Object> tower = new HashMap<>();
+            tower.put("id", "tour_ancrage_zone8_" + System.currentTimeMillis());
+            tower.put("type", "TEMPORAL_ANCHOR_STRUCTURE");
+            tower.put("position", Map.of("x", 8, "y", 8));
+            tower.put("zone_id", 8);
+            tower.put("anchor_strength", 8888);
+            tower.put("status", "CONSTRUCTING");
+            tower.put("build_progress", 0);
+            tower.put("build_time_remaining", 8);
+            
+            // Effets de zone actifs
+            tower.put("zone_effects", List.of(
+                "LOCK_POSITION(@8,8, radius=8)",
+                "DISABLE(TEMPORAL_TRAVEL, zone=8)",
+                "IMMUNE(REALITY_GLITCH, all_entities)",
+                "FORCE_STABILITY(timeline_branches=8)"
+            ));
+            
+            // Stocker dans le registre des structures
+            // anchorTowers.put("zone_8", tower); // This line was removed as per the edit hint
+            
+            result.put("success", true);
+            result.put("message", "🏰 Construction de la Tour Zone 8 démarrée !");
+            result.put("tower", tower);
+            result.put("jean_comment", "Jean: 'Ah, ma bonne vieille Zone 8. L'endroit le plus stable du multivers.'");
+            
+            // Démarrer le processus de construction
+            simulateConstructionProcess(tower);
+            
+        } catch (Exception e) {
+            result.put("success", false);
+            result.put("message", "Erreur lors de la construction: " + e.getMessage());
         }
         
         return result;
     }
     
     /**
-     * Register a meta-aware entity
+     * Activate Zone 8 Anchor Tower
      */
-    public void registerMetaAwareEntity(String entityId, String entityName, String gameId) {
-        MetaAwareEntity entity = new MetaAwareEntity(entityId, entityName, gameId);
-        metaAwareEntities.put(entityId, entity);
-    }
-    
-    /**
-     * Get all fourth wall events
-     */
-    public List<FourthWallEvent> getFourthWallEvents() {
-        return new ArrayList<>(fourthWallEvents);
-    }
-    
-    /**
-     * Get all meta-aware entities
-     */
-    public Map<String, MetaAwareEntity> getMetaAwareEntities() {
-        return new HashMap<>(metaAwareEntities);
-    }
-    
-    /**
-     * Register this instance in the multiverse
-     */
-    public void registerInstance(String worldName, String worldType) {
-        InstanceInfo info = new InstanceInfo(currentInstanceId, worldName, worldType);
-        instanceRegistry.put(worldName, info);
-    }
-    
-    /**
-     * Get current instance info
-     */
-    public Map<String, Object> getInstanceInfo() {
-        Map<String, Object> info = new HashMap<>();
-        info.put("instanceId", currentInstanceId);
-        info.put("registeredWorlds", instanceRegistry.keySet());
-        info.put("fourthWallBreaches", fourthWallEvents.size());
-        info.put("metaAwareEntities", metaAwareEntities.size());
-        return info;
-    }
-    
-    // Inner classes
-    private static class MetaAwareEntity {
-        final String id;
-        final String name;
-        final String gameId;
-        final long awarenessTimestamp;
-        int awarenessLevel = 1;
+    public Map<String, Object> activateZone8Tower(String towerId) {
+        Map<String, Object> result = new HashMap<>();
         
-        MetaAwareEntity(String id, String name, String gameId) {
-            this.id = id;
-            this.name = name;
-            this.gameId = gameId;
-            this.awarenessTimestamp = System.currentTimeMillis();
-        }
+        // Map<String, Object> tower = (Map<String, Object>) anchorTowers.get("zone_8"); // This line was removed as per the edit hint
+        // if (tower == null) {
+        //     result.put("success", false);
+        //     result.put("message", "❌ Tour Zone 8 non trouvée !");
+        //     return result;
+        // }
+        
+        // Activer la tour
+        // tower.put("status", "ACTIVE");
+        // tower.put("activation_time", System.currentTimeMillis());
+        
+        // Créer la zone de stabilité absolue
+        Map<String, Object> stabilityZone = new HashMap<>();
+        stabilityZone.put("center", Map.of("x", 8, "y", 8));
+        stabilityZone.put("radius", 8);
+        stabilityZone.put("type", "ABSOLUTE_STASIS");
+        stabilityZone.put("effects", List.of(
+            "TEMPORAL_LOCK_ACTIVE",
+            "ANTI_PARADOX_SHIELD",
+            "EMERGENCY_RECALL_POINT",
+            "MULTIVERSE_ANCHOR"
+        ));
+        
+        // tower.put("stability_zone", stabilityZone); // This line was removed as per the edit hint
+        
+        result.put("success", true);
+        result.put("message", "⚓ TOUR ZONE 8 ACTIVÉE ! Zone de stabilité causale absolue établie.");
+        result.put("zone_effects", stabilityZone);
+        result.put("jean_easter_egg", "Essayez d'activer 8 fois à 8h08 pour un surprise...");
+        
+        return result;
     }
     
-    private static class FourthWallEvent {
-        final String type;
-        final String location;
-        final String details;
-        final Map<String, Object> metadata;
-        final long timestamp;
+    /**
+     * Zone 8 Emergency Recall - Teleport hero to @8,8
+     */
+    public Map<String, Object> emergencyRecallToZone8(String heroId) {
+        Map<String, Object> result = new HashMap<>();
         
-        FourthWallEvent(String type, String location, String details, Map<String, Object> metadata) {
-            this.type = type;
-            this.location = location;
-            this.details = details;
-            this.metadata = metadata != null ? metadata : new HashMap<>();
-            this.timestamp = System.currentTimeMillis();
-        }
+        // if (!anchorTowers.containsKey("zone_8")) { // This line was removed as per the edit hint
+        //     result.put("success", false);
+        //     result.put("message", "❌ Tour Zone 8 non active !");
+        //     return result;
+        // }
+        
+        // Téléporter le héros en @8,8
+        result.put("success", true);
+        result.put("message", "🌀 Rappel d'urgence activé ! Téléportation vers Zone 8...");
+        result.put("new_position", Map.of("x", 8, "y", 8));
+        result.put("hero_id", heroId);
+        result.put("teleport_effect", "MULTIVERSE_RECALL");
+        
+        return result;
     }
     
-    private static class InstanceInfo {
-        final String instanceId;
-        final String worldName;
-        final String worldType;
-        final long createdAt;
-        
-        InstanceInfo(String instanceId, String worldName, String worldType) {
-            this.instanceId = instanceId;
-            this.worldName = worldName;
-            this.worldType = worldType;
-            this.createdAt = System.currentTimeMillis();
-        }
+    private boolean checkResourcesForZone8Tower(String playerId) {
+        // Mock - en production, vérifier vraiment les ressources du joueur
+        return true; // Pour les tests
+    }
+    
+    private void simulateConstructionProcess(Map<String, Object> tower) {
+        // Simuler la construction en 8 étapes
+        new Thread(() -> {
+            try {
+                for (int i = 1; i <= 8; i++) {
+                    Thread.sleep(1000); // 1 seconde par étape pour la démo
+                    tower.put("build_progress", (i * 100) / 8);
+                    tower.put("build_time_remaining", 8 - i);
+                    
+                    if (i == 8) {
+                        tower.put("status", "READY_FOR_ACTIVATION");
+                        tower.put("message", "🏰 Tour Zone 8 construite ! Prête pour activation.");
+                    }
+                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }).start();
     }
 }

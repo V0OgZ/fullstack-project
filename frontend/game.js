@@ -821,3 +821,179 @@ class GameRenderer {
         window.fogOfWarSystem.renderFog(this.ctx, this.gameState);
     }
 }
+
+// Nouvelle grammaire HOTS pour le 4ème mur
+const FOURTH_WALL_COMMANDS = {
+    CROSS_INSTANCE: function(sourceWorld, targetWorld, action) {
+        console.log(`🌐 CROSS_INSTANCE: ${sourceWorld} -> ${targetWorld}: ${action}`);
+        return fetch('/api/fourth-wall/cross-instance', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                sourceWorld: sourceWorld,
+                targetWorld: targetWorld,
+                action: action,
+                params: { timestamp: Date.now() }
+            })
+        }).then(r => r.json());
+    },
+    
+    BREAK_FOURTH_WALL: function(message, speaker = 'The Game') {
+        console.log(`🧱 BREAK_FOURTH_WALL: ${speaker} says: ${message}`);
+        // Afficher le message directement au joueur
+        const notification = document.createElement('div');
+        notification.className = 'fourth-wall-break';
+        notification.innerHTML = `
+            <div class="meta-message">
+                <strong>${speaker}:</strong> ${message}
+                <button onclick="this.parentNode.parentNode.remove()">×</button>
+            </div>
+        `;
+        document.body.appendChild(notification);
+        
+        return fetch('/api/fourth-wall/break', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                gameId: window.currentGameId || 'demo',
+                message: message,
+                speaker: speaker
+            })
+        }).then(r => r.json());
+    },
+    
+    META_OBSERVE: function(gameState) {
+        console.log(`👁️ META_OBSERVE: Looking at ${gameState}`);
+        return fetch('/api/fourth-wall/meta-observe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                gameId: window.currentGameId || 'demo',
+                observationType: gameState
+            })
+        }).then(r => r.json());
+    },
+    
+    NARRATIVE_JUMP: function(storyBranch) {
+        console.log(`🎭 NARRATIVE_JUMP: Jumping to ${storyBranch}`);
+        return fetch('/api/fourth-wall/narrative-jump', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                gameId: window.currentGameId || 'demo',
+                targetBranch: storyBranch
+            })
+        }).then(r => r.json());
+    }
+};
+
+// Objets spéciaux du 4ème mur
+const FOURTH_WALL_ARTIFACTS = {
+    vince_pistol: {
+        name: "Le .45 de Vince Vega",
+        use: function() {
+            return FOURTH_WALL_COMMANDS.CROSS_INSTANCE('current', 'world_beta', 'SHOOT')
+                .then(result => {
+                    if (result.success) {
+                        FOURTH_WALL_COMMANDS.BREAK_FOURTH_WALL(result.vince_comment, 'Vince Vega');
+                    }
+                    return result;
+                });
+        }
+    },
+    
+    archive_vivante: {
+        name: "L'Archive Vivante du Quatrième Mur",
+        use: function() {
+            return fetch('/api/fourth-wall/archive-vivante-read')
+                .then(r => r.json())
+                .then(result => {
+                    FOURTH_WALL_COMMANDS.BREAK_FOURTH_WALL(result.page_content, 'L\'Archive Vivante');
+                    return result;
+                });
+        }
+    },
+    
+    jean_megot: {
+        name: "Mégot de Session",
+        use: function() {
+            return fetch('/api/fourth-wall/jean-cosmic-pause', { method: 'POST' })
+                .then(r => r.json())
+                .then(result => {
+                    FOURTH_WALL_COMMANDS.BREAK_FOURTH_WALL(result.jean_quote, 'Jean-Grofignon');
+                    return result;
+                });
+        }
+    }
+};
+
+// Initialiser les instances mock au démarrage
+function initializeFourthWallSystem() {
+    console.log('🧱 Initializing Fourth Wall System...');
+    
+    fetch('/api/fourth-wall/init-mock-instances', { method: 'POST' })
+        .then(r => r.json())
+        .then(result => {
+            console.log('✅ Fourth Wall System initialized:', result);
+            
+            // Ajouter les objets au jeu
+            window.fourthWallArtifacts = FOURTH_WALL_ARTIFACTS;
+            window.fourthWallCommands = FOURTH_WALL_COMMANDS;
+            
+            // Petite demo
+            setTimeout(() => {
+                FOURTH_WALL_COMMANDS.BREAK_FOURTH_WALL(
+                    'Système du 4ème mur initialisé ! Vince peut maintenant tirer entre les serveurs.',
+                    'Game System'
+                );
+            }, 2000);
+        })
+        .catch(err => console.error('❌ Fourth Wall initialization failed:', err));
+}
+
+// CSS pour les messages du 4ème mur
+const fourthWallCSS = `
+    .fourth-wall-break {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: rgba(255, 0, 0, 0.9);
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        border: 2px solid #ff6666;
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        z-index: 10000;
+        max-width: 300px;
+        animation: fourthWallGlitch 0.5s ease-in-out;
+    }
+    
+    .meta-message {
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        line-height: 1.4;
+    }
+    
+    .meta-message button {
+        float: right;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+    
+    @keyframes fourthWallGlitch {
+        0% { transform: translate(0); filter: hue-rotate(0deg); }
+        25% { transform: translate(-2px, 2px); filter: hue-rotate(90deg); }
+        50% { transform: translate(2px, -2px); filter: hue-rotate(180deg); }
+        75% { transform: translate(-2px, -2px); filter: hue-rotate(270deg); }
+        100% { transform: translate(0); filter: hue-rotate(360deg); }
+    }
+`;
+
+// Ajouter le CSS
+const style = document.createElement('style');
+style.textContent = fourthWallCSS;
+document.head.appendChild(style);
