@@ -64,17 +64,19 @@
          "MAP ÉVEIL MEMENTO créée - Instructions commit/session",
          "Checklist permanente pour organisation parfaite",
          "Templates pratiques Jean-approved sans quotes",
-         "Mantras éternels : Tu sais, tu as su, tu sauras"
+         "Mantras éternels : Tu sais, tu as su, tu sauras",
+         "Bullshit 1M revenue supprimé ROFL - Jean orders",
+         "Nettoyage documentation commercial goals clean"
        ],
       
                           "marques_temporelles": {
-         "nombre_total": 180,
+         "nombre_total": 182,
         "par_categorie": {
                    "timelines_sauvées": 44,
          "paradoxes_résolus": 29,
          "héros_archivés": 33,
          "artefacts_catalogués": 19,
-         "missions_accomplies": 31,
+         "missions_accomplies": 32,
          "sphinx_vaincus": 1,
          "forges_débloquées": 1,
          "innovations_créées": 7,
@@ -93,7 +95,8 @@
          "checklists_permanentes": 1,
          "templates_jean_approved": 3,
          "mantras_éternels": 5,
-         "instructions_commit_session": 1
+         "instructions_commit_session": 1,
+         "nettoyages_bullshit": 1
       }
       }
     },
