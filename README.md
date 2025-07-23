@@ -730,9 +730,8 @@ Spring Boot API Stable
 - [🎮 Aide Jean](AIDE_JEAN.md) - *Guide démarrage rapide 91 lignes*
 
 ### **🇺🇸 English Documentation**
+- [📚 Complete English Documentation](docs/EN/README.md) - *All documentation in English*
 - [🌫️ Fog of Causality 7 Levels](docs/EN/FOG_OF_CAUSALITY_7_LEVELS_DOCUMENTATION.md) - *Complete 281 lines*
-- [🏗️ Architecture Diagrams](docs/ARCHITECTURE_DIAGRAMS.md) - *Technical overview*
-- [🎯 Beginner Scenarios](docs/BEGINNER_SCENARIOS_GUIDE.md) - *Getting started*
 
 ### **🔧 Guides Techniques**
 - [📋 CODEX Complet](docs/CODEX_COMPLET_HEROES_OF_TIME.md) - *Référence système HOTS*
