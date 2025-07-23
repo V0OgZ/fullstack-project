@@ -1,23 +1,51 @@
-Traceback (most recent call last):
-  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/py::1 - - [23/Jul/2025 07:12:40] "GET / HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:12:40] "GET /visual-script-editor.html HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:13:10] "GET / HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:13:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:13:40] "GET /visual-script-editor.html HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:13:40] "GET / HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:14:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:14:10] "GET / HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:14:40] "GET /visual-script-editor.html HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:14:40] "GET / HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:15:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:15:10] "GET / HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:15:40] "GET /visual-script-editor.html HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:15:40] "GET / HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:16:10] "GET / HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:16:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:16:40] "GET /visual-script-editor.html HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:16:40] "GET / HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:17:10] "GET /visual-script-editor.html HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:17:10] "GET / HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:17:37] "GET / HTTP/1.1" 200 -
-s already in use
+::1 - - [23/Jul/2025 07:24:31] "GET / HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /styles/scenario-selector.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /translation-styles.css HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 07:24:31] "GET /styles.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /styles/city.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /styles/combat.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /temporal-styles.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /styles/hero.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /styles/dicebear.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /api.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /script-console.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /translation-service.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 07:24:31] "GET /components/CityInterface.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /components/CombatInterface.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /game.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /runic-forge.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /missing-assets-loader.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /hero-avatars.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /components/HeroInterface.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /fog-of-war-system.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /dicebar-graphics-system.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /temporal-integration.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /gameplay-enhancement.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /gameplay-construction.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] "GET /scenario-selector.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:31] code 404, message File not found
+::1 - - [23/Jul/2025 07:24:31] "GET /game_assets/heroes/epic/epic-heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 07:24:31] code 404, message File not found
+::1 - - [23/Jul/2025 07:24:31] "GET /game_assets/heroes/extracted_heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 07:24:31] code 404, message File not found
+::1 - - [23/Jul/2025 07:24:31] "GET /game_assets/MASTER_ASSETS_INDEX.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 07:24:31] "GET /manifest.json HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:24:33] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:25:03] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:29:03] code 404, message File not found
+::1 - - [23/Jul/2025 07:29:03] "GET /game_assets/heroes/epic/epic-heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 07:29:03] code 404, message File not found
+::1 - - [23/Jul/2025 07:29:03] "GET /game_assets/heroes/extracted_heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 07:29:03] code 404, message File not found
+::1 - - [23/Jul/2025 07:29:03] "GET /favicon.ico HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 07:29:03] code 404, message File not found
+::1 - - [23/Jul/2025 07:29:03] "GET /game_assets/MASTER_ASSETS_INDEX.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 07:29:14] "GET / HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 07:29:14] code 404, message File not found
+::1 - - [23/Jul/2025 07:29:14] "GET /game_assets/heroes/epic/epic-heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 07:29:14] code 404, message File not found
+::1 - - [23/Jul/2025 07:29:14] "GET /game_assets/heroes/extracted_heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 07:29:14] code 404, message File not found
+::1 - - [23/Jul/2025 07:29:14] "GET /game_assets/MASTER_ASSETS_INDEX.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 07:29:52] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 07:30:22] "GET /visual-script-editor.html HTTP/1.1" 200 -
