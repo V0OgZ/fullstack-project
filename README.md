@@ -220,6 +220,61 @@ TEMPORAL_CAUSAL_EQUATION = {
 
 **📚 Documentation Complète :** [🦁 **APPARITION_SPHINX_QUANTIQUE_DEFI_FINAL.md**](APPARITION_SPHINX_QUANTIQUE_DEFI_FINAL.md)
 
+---
+
+## 🐱 **SCÉNARIOS INITIATIQUES - DÉCOUVERTE DES CONCEPTS BIZARRES**
+
+**🎯 Apprentissage ludique et accessible des mécaniques quantiques !**
+
+Pour les joueurs qui veulent découvrir les concepts les plus bizarres de Heroes of Time de manière amusante et simple, nous avons créé une collection de **scénarios initiatiques** mignons et éducatifs.
+
+### **🌟 Scénarios Principaux Disponibles**
+
+#### **🐱 Le Chat de Schrödinger** *(10-15 min)*
+> *"Découvrir la superposition quantique avec Whiskers, un petit chat mignon qui est à la fois vivant ET mort jusqu'à ce qu'on ouvre la boîte !"*
+
+**Concept appris :** Superposition quantique, Observation/Collapse, Probabilité
+```bash
+./hots play chat_schrodinger_initiatique
+```
+
+#### **⏰ Le Ralentisseur Temporel** *(10-15 min)*
+> *"Ralentir les autres pour avoir plus d'actions par tour ! Alice découvre comment manipuler le temps personnel dans une course épique."*
+
+**Concept appris :** Manipulation temporelle, Actions multiples, Avantage tactique
+```bash
+./hots play ralentisseur_temporel_initiatique
+```
+
+### **🎮 Collection Complète de 12 Mini-Scénarios**
+
+- 🌀 **Le Dédoubleur Quantique** - Se dédoubler pour explorer plusieurs possibilités
+- 🔄 **La Boucle Temporelle** - Répéter un moment jusqu'au succès
+- 🌊 **L'Onde de Probabilité** - Voir les actions se propager dans l'espace-temps
+- 🔮 **Le Télescope Temporel** - Regarder dans le futur pour éviter un piège
+- 🪞 **Le Miroir des Possibilités** - Voir toutes les versions alternatives de soi
+- ⚖️ **La Balance Quantique** - Équilibrer les probabilités pour influencer le hasard
+- 🧭 **La Boussole Causale** - Suivre les chaînes de cause à effet
+- 🎲 **Les Dés de Heisenberg** - Plus on connaît le résultat, moins on peut le prédire
+- 🌈 **Le Prisme Temporel** - Décomposer un événement en composantes temporelles
+- 🔗 **Les Chaînes d'Intrication** - Objets liés quantiquement qui réagissent instantanément
+- 📐 **Le Triangle de Penrose** - Labyrinthe impossible dans l'espace-temps plié
+
+### **📊 Progression Pédagogique Recommandée**
+
+**🟢 Débutant** (30 min) → **🟡 Intermédiaire** (40 min) → **🟠 Avancé** (50 min)
+
+**🎓 Objectif Final :** *"Après ces scénarios, n'importe qui peut comprendre et jouer avec les concepts les plus bizarres de Heroes of Time !"*
+
+### **🧪 Tester les Scénarios**
+```bash
+./scripts/test-scenarios-initiatiques.sh  # Test complet des scénarios
+```
+
+**📚 Documentation Complète :** [🐱 **SCENARIOS_INITIATIQUES_BIZARRES.md**](docs/scenarios/SCENARIOS_INITIATIQUES_BIZARRES.md)
+
+---
+
 <details>
 <summary id="arthur-pendragon">⚔️ <strong>Arthur Pendragon - Le Roi Temporel</strong></summary>
 
@@ -1169,6 +1224,7 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 ./scripts/test-petits-tresors-temporels.sh  # Test artefacts mineurs pour joueurs normaux 💎
 ./scripts/test-tatouages-memento.sh     # 🏛️ Révélation tatouages temporels de Memento « Tu sais, tu as su, tu sauras »
 # 🦁 SPHINX QUANTIQUE : Voir APPARITION_SPHINX_QUANTIQUE_DEFI_FINAL.md pour l'épopée complète !
+./scripts/test-scenarios-initiatiques.sh # 🐱 Test scénarios d'apprentissage (Chat Schrödinger, Ralentisseur Temporel...)
 ./scripts/test-pepites-json.sh          # Test toutes les pépites JSON découvertes 💎
 ./hots test economie           # Test simulation économique complète
 ./hots test translation        # Test service traduction intelligent (SANS LLM)

@@ -1,0 +1,170 @@
+# ===============================================================================
+# 🐱 LE CHAT DE SCHRÖDINGER - SCÉNARIO INITIATIQUE
+# ===============================================================================
+# Script Heroes of Time - Découverte de la superposition quantique
+# "Whiskers le chat qui est à la fois vivant ET mort... jusqu'à ce qu'on regarde !"
+# ===============================================================================
+
+# 🎬 PROLOGUE : LABORATOIRE DU PROFESSEUR QUANTUM
+GAME: "Le Chat de Schrödinger"
+MAP_SIZE: 10x10
+DIFFICULTY: débutant
+DURATION: 10-15 minutes
+
+# 👨‍🔬 PERSONNAGES
+HERO: professeur_quantum    # Le scientifique bienveillant
+CREATURE: whiskers_chat     # Le fameux chat de Schrödinger
+
+# 📍 SETUP DU LABORATOIRE
+# Laboratoire au centre
+CREATE(BUILDING, laboratoire_quantum, @5,5)
+SET(laboratoire_quantum.description, "Un laboratoire rempli d'équipements quantiques étranges")
+
+# Professeur Quantum devant son labo
+MOV(professeur_quantum, @5,4)
+SET(professeur_quantum.greeting, "🤓 Bonjour ! Je suis le Professeur Quantum !")
+
+# 📦 LA BOÎTE MYSTÉRIEUSE
+CREATE(OBJECT, boite_quantique, @5,6)
+SET(boite_quantique.description, "Une boîte fermée avec un mécanisme quantique à l'intérieur")
+SET(boite_quantique.state, FERMEE)
+SET(boite_quantique.interactive, true)
+
+# 🐱 WHISKERS - LE CHAT QUANTIQUE (état initial superposé)
+ψ001: ⊙(chat_vivant ⊕ chat_mort) → CHAT_SUPERPOSE
+CREATE(CREATURE, whiskers_chat, @5,6, STATE:ψ001)
+SET(whiskers_chat.visible, false)  # Invisible tant que la boîte est fermée
+SET(whiskers_chat.name, "Whiskers")
+SET(whiskers_chat.description, "Un adorable chat orange dans un état quantique superposé")
+
+# 🎯 PHASE 1: INTRODUCTION ET EXPLICATION
+ANNOUNCE("🎓 === LEÇON DE PHYSIQUE QUANTIQUE ===")
+WAIT(1)
+ANNOUNCE("🤓 Professeur Quantum : Bonjour ! Je vais vous expliquer un concept fascinant...")
+WAIT(2)
+ANNOUNCE("🐱 Voici Whiskers, le chat de Schrödinger !")
+WAIT(1)
+ANNOUNCE("📦 Il est dans cette boîte fermée avec un mécanisme quantique spécial")
+WAIT(2)
+ANNOUNCE("🌀 Tant qu'on n'ouvre pas la boîte, selon la physique quantique...")
+WAIT(1)
+ANNOUNCE("✨ Whiskers est à la fois VIVANT ET MORT simultanément !")
+WAIT(2)
+ANNOUNCE("🤔 Bizarre, non ? C'est ce qu'on appelle la SUPERPOSITION QUANTIQUE !")
+
+# 🎮 INTERACTION JOUEUR
+SET_CURSOR_HELP("👆 Cliquez sur la boîte pour regarder à l'intérieur !")
+ANNOUNCE("🎮 Votre mission : Cliquez sur la boîte pour découvrir l'état de Whiskers !")
+
+# Attendre que le joueur clique sur la boîte
+WAIT_FOR_CLICK(boite_quantique)
+
+# 🌟 MOMENT DRAMATIQUE
+ANNOUNCE("👁️ Vous regardez dans la boîte...")
+ANIMATION(suspense, duration:2)
+ANNOUNCE("⚡ L'OBSERVATION VA FORCER UN CHOIX QUANTIQUE !")
+
+# ⚡ COLLAPSE QUANTIQUE - LE MOMENT MAGIQUE !
+COLLAPSE(ψ001) → {
+  # 50% de chance pour chaque état
+  IF(RANDOM() > 0.5) {
+    # 😸 CHAT VIVANT
+    RESULT: chat_vivant
+    SET(whiskers_chat.state, VIVANT)
+    SET(whiskers_chat.visible, true)
+    SET(whiskers_chat.animation, "purring_happy")
+    ANNOUNCE("😸 MIAOU ! Whiskers est VIVANT et vous fait un gros câlin !")
+    ANIMATION(chat_content, whiskers_chat)
+    ANNOUNCE("💖 Il ronronne de bonheur ! *purr purr*")
+    PLAY_SOUND("cat_purr.wav")
+    
+    # Whiskers bouge vers le joueur
+    MOV(whiskers_chat, @5,4)
+    
+  } ELSE {
+    # 😿 CHAT MORT (mais dans le quantum, c'est pas grave !)
+    RESULT: chat_mort
+    SET(whiskers_chat.state, MORT)
+    SET(whiskers_chat.visible, true)
+    SET(whiskers_chat.animation, "sleeping_peacefully")
+    ANNOUNCE("😿 Oh non... Whiskers semble dormir éternellement...")
+    ANNOUNCE("🌟 Mais ne vous inquiétez pas ! Dans l'univers quantique...")
+    WAIT(1)
+    ANNOUNCE("🔄 La mort n'est qu'un état temporaire qui peut changer !")
+    ANNOUNCE("💫 En fait, il dort peut-être juste très profondément !")
+  }
+}
+
+# 🤓 EXPLICATION PÉDAGOGIQUE
+WAIT(2)
+ANNOUNCE("🤓 Professeur : Vous venez de découvrir la SUPERPOSITION QUANTIQUE !")
+WAIT(1)
+ANNOUNCE("📚 Concept clé : Avant l'observation, Whiskers était dans les DEUX états")
+WAIT(1)
+ANNOUNCE("👁️ Votre regard a FORCÉ la réalité à choisir un seul état")
+WAIT(1)
+ANNOUNCE("🎲 Le résultat était PROBABILISTE - on ne pouvait pas le prédire !")
+
+# 🏆 RÉCOMPENSE D'APPRENTISSAGE
+ANNOUNCE("🎉 Félicitations ! Vous maîtrisez maintenant la superposition quantique !")
+GIVE_ITEM(lunettes_quantiques, professeur_quantum)
+ANNOUNCE("🤓 Vous recevez les Lunettes Quantiques du Professeur !")
+ANNOUNCE("👓 Elles vous permettront de voir les états superposés dans d'autres scénarios !")
+
+# 🔄 OPTION DE REJEU
+IF(whiskers_chat.state == MORT) {
+  ANNOUNCE("💡 Voulez-vous essayer de 'réveiller' Whiskers ?")
+  ANNOUNCE("🔄 Cliquez à nouveau sur la boîte pour créer une nouvelle superposition !")
+  
+  # Possibilité de rejouer
+  ON_CLICK(boite_quantique) {
+    ANNOUNCE("🌀 Nouvelle superposition quantique créée !")
+    ψ002: ⊙(chat_vivant ⊕ chat_endormi) → CHAT_SUPERPOSE_2
+    SET(whiskers_chat.state, ψ002)
+    
+    COLLAPSE(ψ002) → {
+      IF(RANDOM() > 0.3) {  # 70% de chance cette fois
+        RESULT: chat_vivant
+        ANNOUNCE("😸 MIRACLE QUANTIQUE ! Whiskers se réveille et miaule !")
+        SET(whiskers_chat.animation, "happy_awakening")
+      } ELSE {
+        RESULT: chat_endormi
+        ANNOUNCE("😴 Whiskers continue de dormir paisiblement...")
+        ANNOUNCE("🌙 Parfois les chats quantiques ont juste besoin de repos !")
+      }
+    }
+  }
+}
+
+# 📊 RÉCAPITULATIF ÉDUCATIF
+ANNOUNCE("📖 === RÉCAPITULATIF DE LA LEÇON ===")
+ANNOUNCE("✅ Superposition quantique : États multiples simultanés")
+ANNOUNCE("✅ Observation/Collapse : L'observation force un choix")
+ANNOUNCE("✅ Probabilité : Résultats imprévisibles mais calculables")
+ANNOUNCE("✅ Réalité quantique : Plus bizarre qu'on ne l'imagine !")
+
+# 🌟 MESSAGE FINAL ENCOURAGEANT
+ANNOUNCE("🎓 Bravo ! Vous êtes maintenant prêt pour des scénarios plus complexes !")
+ANNOUNCE("🐱 Whiskers vous remercie de l'avoir observé avec bienveillance !")
+
+# 🏁 FIN DU SCÉNARIO
+END_SCENARIO()
+ANNOUNCE("🎮 Scénario terminé : Le Chat de Schrödinger")
+ANNOUNCE("⏭️ Prochaine étape suggérée : Le Ralentisseur Temporel")
+
+# 📈 DONNÉES DE PROGRESSION
+SET_PLAYER_PROGRESS(concept_learned: "superposition_quantique")
+SET_PLAYER_PROGRESS(scenario_completed: "chat_schrodinger")
+SET_PLAYER_PROGRESS(difficulty_unlocked: "intermédiaire")
+UNLOCK_SCENARIO("ralentisseur_temporel")
+
+# 🎯 ACHIEVEMENTS DÉBLOQUÉS
+UNLOCK_ACHIEVEMENT("first_quantum_observer")
+UNLOCK_ACHIEVEMENT("whiskers_friend")
+IF(whiskers_chat.state == VIVANT) {
+  UNLOCK_ACHIEVEMENT("cat_savior")
+}
+
+# 💾 SAUVEGARDE DE LA SESSION
+SAVE_GAME_STATE()
+ANNOUNCE("💾 Progression sauvegardée ! À bientôt pour d'autres aventures quantiques !") 
