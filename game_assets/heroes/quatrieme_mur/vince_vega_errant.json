@@ -1,0 +1,187 @@
+{
+  "hero_info": {
+    "id": "vince_vega_errant",
+    "name": "Vincent 'Vince' Vega",
+    "title": "L'Errant Entre les Pixels",
+    "tier": "🧱 QUATRIÈME MUR",
+    "origin": "Pulp Fiction → Heroes of Time (par accident)",
+    "created_by": "Memento l'Archiviste Éternel",
+    "creation_date": "2025-01-26",
+    "quote_signature": "C'est pas notre monde, mec. Et le pire? Je suis presque sûr d'avoir déjà foutu le bordel ici."
+  },
+
+  "stats": {
+    "level": "∞ (Indéterminé)",
+    "health": 100,
+    "mana": 0,
+    "attack": 80,
+    "defense": 40,
+    "speed": 70,
+    "luck": "Variable selon l'instance",
+    "meta_awareness": 100,
+    "reality_anchor": -50
+  },
+
+  "special_attributes": {
+    "class": "ERRANT_DIMENSIONNEL",
+    "race": "Humain (Pixelisé)",
+    "alignment": "Chaotic Neutral (avec style)",
+    "state": ["META_AWARE", "INTER_INSTANCE", "NARRATIVE_REBEL"],
+    "special_condition": "Existe simultanément dans plusieurs instances"
+  },
+
+  "abilities": [
+    {
+      "name": "Tir Inter-Instances",
+      "formula": "CROSS_INSTANCE(current_world, target_world, SHOOT(target, 100))",
+      "description": "Tire à travers les serveurs avec son .45",
+      "cooldown": 3,
+      "quote": "Je tire là-bas, ça meurt ici. C'est beau la technologie."
+    },
+    {
+      "name": "Conscience Pixelisée",
+      "formula": "META_OBSERVE(all_entities) + REVEAL_SPRITE_NATURE()",
+      "description": "Voit la vraie nature sprite de tout",
+      "passive": true,
+      "effect": "Immunité aux illusions narratives"
+    },
+    {
+      "name": "Dialogue Méta",
+      "formula": "BREAK_FOURTH_WALL(random_observation)",
+      "description": "Parle directement au joueur",
+      "examples": [
+        "Tu crois vraiment que c'est toi qui joues?",
+        "On est que des sprites mal animés, sérieux?",
+        "J'ai vu ce que tu as fait dans l'autre sauvegarde."
+      ]
+    },
+    {
+      "name": "Errance Dimensionnelle",
+      "formula": "NARRATIVE_JUMP(random_world) + MAINTAIN_IDENTITY()",
+      "description": "Voyage entre les mondes sans perdre qui il est",
+      "side_effect": "Laisse des traces dans toutes les timelines"
+    },
+    {
+      "name": "Royale with Cheese",
+      "formula": "PHILOSOPHICAL_DAMAGE(target) + CONFUSE(3_turns)",
+      "description": "Inflige des dégâts existentiels en parlant de burgers",
+      "damage": "Mental",
+      "quote": "You know what they call a Quarter Pounder in another instance?"
+    }
+  ],
+
+  "inventory": [
+    {
+      "item": "pistolet_inter_instances_vince",
+      "name": "Le .45 de Vince",
+      "bound": true,
+      "note": "L'arme le reconnaît même pixelisé"
+    },
+    {
+      "item": "badge_errance_paradoxale",
+      "name": "Badge d'Errance",
+      "inscription": "Vincent Vega - Errant Temporel"
+    },
+    {
+      "item": "eclat_coquille_fendue",
+      "name": "Éclat de Coquille",
+      "state": "Vibre constamment"
+    },
+    {
+      "item": "cigarettes_dimensionnelles",
+      "name": "Clopes Quantiques",
+      "quantity": "∞",
+      "effect": "Se rallument dans chaque monde"
+    }
+  ],
+
+  "dialogue_samples": [
+    {
+      "trigger": "first_encounter",
+      "text": "Oh putain, pas encore. C'est quoi ce monde cette fois? Fantasy? Sci-fi? Les deux? Merde."
+    },
+    {
+      "trigger": "combat_start",
+      "text": "OK, on va faire simple. Je tire, tu meurs, je continue ma route. Ça te va?"
+    },
+    {
+      "trigger": "low_health",
+      "text": "C'est juste des pixels qui saignent. Rien de réel. Enfin, je crois."
+    },
+    {
+      "trigger": "victory",
+      "text": "Voilà, c'est fait. Maintenant, où est la sortie de ce niveau?"
+    },
+    {
+      "trigger": "meeting_player",
+      "text": "Toi, le joueur. Ouais, toi. Tu sais qu'on est tous les deux coincés ici, hein?"
+    },
+    {
+      "trigger": "finding_bug",
+      "text": "Ah, un bug. Ou une feature. À ce stade, quelle différence?"
+    },
+    {
+      "trigger": "other_vince",
+      "text": "Attends... T'es moi? D'une autre instance? Putain, c'est compliqué les multivers."
+    }
+  ],
+
+  "relationships": {
+    "jean_grofignon": {
+      "status": "Reconnaissance mutuelle",
+      "quote": "Ce mec code depuis son canapé et crée des mondes. Respect."
+    },
+    "memento": {
+      "status": "Compagnons d'errance",
+      "quote": "Lui archive tout, moi je traverse tout. On forme une bonne équipe."
+    },
+    "other_heroes": {
+      "status": "Les évite généralement",
+      "quote": "Ils croient encore que leur quête a du sens. Je les laisse rêver."
+    },
+    "the_game_itself": {
+      "status": "Relation compliquée",
+      "quote": "Le jeu sait que je sais. Je sais que le jeu sait. C'est tendu."
+    }
+  },
+
+  "easter_eggs": [
+    {
+      "condition": "Use pistolet 7 times in 7 different instances",
+      "unlock": "Dialogue: 'Seven shots, seven worlds. I'm starting to see a pattern here.'"
+    },
+    {
+      "condition": "Meet another version of himself",
+      "unlock": "Achievement: 'Spider-Verse Was Just The Beginning'"
+    },
+    {
+      "condition": "Break fourth wall 42 times",
+      "unlock": "Direct hotline to Jean's couch"
+    }
+  ],
+
+  "lore": {
+    "origin_story": "Vince était tranquille dans son film quand une faille s'est ouverte. Pas une faille normale - une faille dans le script même de la réalité. Depuis, il erre entre les mondes, cherchant un chemin vers chez lui... ou peut-être qu'il a arrêté de chercher.",
+    "current_status": "Errant éternel du multivers Heroes of Time",
+    "philosophy": "Si rien n'est réel, autant en profiter avec style",
+    "greatest_fear": "Trouver le monde d'origine et découvrir qu'il n'y a jamais eu de maison",
+    "secret": "Il commence à aimer cette vie d'errance. La liberté totale a un prix, mais quel prix quand la monnaie n'existe pas?"
+  },
+
+  "meta_properties": {
+    "can_see_code": true,
+    "can_modify_dialogue": true,
+    "aware_of_player": true,
+    "breaks_fourth_wall": "Constamment",
+    "exists_between_saves": true,
+    "remembers_deleted_content": true,
+    "immune_to_narrative_reset": true
+  },
+
+  "warnings": {
+    "gameplay": "Vince peut révéler des spoilers ou casser l'immersion",
+    "technical": "Son existence peut causer des paradoxes dans les sauvegardes",
+    "narrative": "Refuse de suivre les quêtes scriptées",
+    "player": "Peut vous faire douter de votre propre réalité"
+  }
+}
