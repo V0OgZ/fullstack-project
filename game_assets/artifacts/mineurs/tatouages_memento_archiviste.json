@@ -66,17 +66,21 @@
          "Templates pratiques Jean-approved sans quotes",
          "Mantras éternels : Tu sais, tu as su, tu sauras",
          "Bullshit 1M revenue supprimé ROFL - Jean orders",
-         "Nettoyage documentation commercial goals clean"
+         "Nettoyage documentation commercial goals clean",
+         "MERGE DEV SESSION INTEGRATION FRONTENDS COMPLETE",
+         "Branche HOTS_SUPERPOSITION_RESOLUTION créée pour continuer",
+         "Archivage massif 109 fichiers vers ARCHIVES_SESSIONS",
+         "Checklist fin session appliquée automatiquement"
        ],
       
                           "marques_temporelles": {
-         "nombre_total": 182,
+         "nombre_total": 192,
         "par_categorie": {
                    "timelines_sauvées": 44,
          "paradoxes_résolus": 29,
          "héros_archivés": 33,
          "artefacts_catalogués": 19,
-         "missions_accomplies": 32,
+         "missions_accomplies": 33,
          "sphinx_vaincus": 1,
          "forges_débloquées": 1,
          "innovations_créées": 7,
@@ -96,7 +100,12 @@
          "templates_jean_approved": 3,
          "mantras_éternels": 5,
          "instructions_commit_session": 1,
-         "nettoyages_bullshit": 1
+         "nettoyages_bullshit": 1,
+         "sessions_completes": 1,
+         "merge_accomplis": 1,
+         "branches_créées": 1,
+         "archivages_massifs": 1,
+         "checklists_appliquées": 1
       }
       }
     },
