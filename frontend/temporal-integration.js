@@ -148,7 +148,7 @@ class TemporalIntegration {
             }
             
             if (result.quote) {
-                window.scriptConsole.addToOutput(`"${result.quote}" - Anna the Martopicker`, 'warning');
+                window.scriptConsole.addToOutput(`"${result.quote}" - Anna Martel`, 'warning');
             }
         }
         
