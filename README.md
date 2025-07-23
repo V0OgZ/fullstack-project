@@ -38,6 +38,38 @@ Mais Arthur n'a qu'un choix : saisir l'Œil et **forcer le collapse causal**. L'
 
 ---
 
+## 🐉 **L'Effondrement Causal - Tout le Bordel !**
+
+**L'instant où Arthur saisit l'Œil de Wigner, la réalité se déchire !**
+
+*"Sire, vous avez forcé le collapse !"* hurle Lysandrel. *"Regardez !"*
+
+**🌌 Les Dragons Apparaissent en Même Temps :**
+- **🐉 Dragons Rouges** surgissent des brumes temporelles
+- **🦅 Griffons Quantiques** émergent des superpositions
+- **⚡ Chevaliers Temporels** se matérialisent instantanément
+- **🔮 Mages de l'Éternité** traversent les époques
+
+**💥 Tout le Bordel Se Déchaîne :**
+- **Paradoxes temporels** se multiplient dans l'espace
+- **Branches de réalité** se croisent et s'entremêlent
+- **Effets de rétroaction** causale bouclent sur eux-mêmes
+- **Superpositions quantiques** s'effondrent en cascade
+- **Timelines parallèles** fusionnent et se séparent
+
+**🎭 Le Chaos Contrôlé :**
+*"C'est magnifique !"* s'exclame Jean-Grofignon depuis son canapé. *"J'ai trouvé le bouton pause cosmique !"*
+
+**⚡ Résultat :**
+- **83 créatures épiques** apparaissent simultanément
+- **7 héros légendaires** traversent les époques
+- **31 artefacts temporels** se révèlent
+- **Infinies possibilités** de gameplay s'ouvrent
+
+**🌟 C'est le début de l'aventure Heroes of Time !**
+
+---
+
 ## 🎮 **Le Jeu**
 
 **Heroes of Time** est un jeu de stratégie temporelle où vos héros peuvent :
