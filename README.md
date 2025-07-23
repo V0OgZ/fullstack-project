@@ -1120,6 +1120,7 @@ Après de nombreuses quêtes à travers les logs d'erreur et les stack traces, i
 - **🕰️ Temporal Engine Technical Explanation** : [docs/EN/TEMPORAL_ENGINE_TECHNICAL_EXPLANATION.md](docs/EN/TEMPORAL_ENGINE_TECHNICAL_EXPLANATION.md) - Complete engine architecture
 - **🤖 Claudius-Memento AI Algorithm** : [docs/EN/CLAUDIUS_MEMENTO_AI_ALGORITHM_COMPLETE.md](docs/EN/CLAUDIUS_MEMENTO_AI_ALGORITHM_COMPLETE.md) - Quantum temporal AI
 - **🌫️ Advanced Temporal Concepts** : [docs/EN/ADVANCED_TEMPORAL_CONCEPTS_COMPLETE.md](docs/EN/ADVANCED_TEMPORAL_CONCEPTS_COMPLETE.md) - Fog of Causality, Causal Erosion
+- **🌫️ Fog of Causality 7 Levels** : [docs/EN/FOG_OF_CAUSALITY_7_LEVELS_DOCUMENTATION.md](docs/EN/FOG_OF_CAUSALITY_7_LEVELS_DOCUMENTATION.md) - Complete 7-level fog system documentation
 - **🏛️ Museum Archive Master** : [docs/EN/MUSEUM_ARCHIVE_MASTER_COMPLETE.md](docs/EN/MUSEUM_ARCHIVE_MASTER_COMPLETE.md) - Memento's temporal museum
 
 **📖 Additional English Documentation:**
@@ -1127,6 +1128,10 @@ Après de nombreuses quêtes à travers les logs d'erreur et les stack traces, i
 - **🧠 Jean-Grofignon Manifesto** : [docs/EN/JEAN_GROFIGNON_MANIFESTO.md](docs/EN/JEAN_GROFIGNON_MANIFESTO.md)
 - **⏰ Temporal Codex** : [docs/EN/TEMPORAL_CODEX.md](docs/EN/TEMPORAL_CODEX.md)
 - **🎯 Developer Instructions** : [docs/EN/DEVELOPER_INSTRUCTIONS.md](docs/EN/DEVELOPER_INSTRUCTIONS.md)
+
+### **📚 Documentation Française**
+- **🌫️ Brouillard de Causalité 7 Niveaux** : [docs/BROUILLARD_CAUSALITE_7_NIVEAUX_DOCUMENTATION.md](docs/BROUILLARD_CAUSALITE_7_NIVEAUX_DOCUMENTATION.md) - Documentation complète système brouillard 7 états
+- **🔮 Formules HOTS avec Conditions** : [docs/FORMULES_HOTS_CONDITIONS_EXPLICACION.md](docs/FORMULES_HOTS_CONDITIONS_EXPLICACION.md) - Explication formules IF/THEN interprétées par le moteur
 
 </details>
 

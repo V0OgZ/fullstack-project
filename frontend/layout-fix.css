@@ -1,0 +1,302 @@
+/* 🎯 LAYOUT FIX CSS - JEAN EDITION */
+/* ================================= */
+/* Correction du layout: map centrée, pas de désordre */
+
+/* 🎮 CONTENEUR PRINCIPAL */
+#game-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+}
+
+/* 🎯 ZONE DE JEU PRINCIPALE - CENTRÉE */
+#game-canvas-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    min-height: 0; /* Important pour flex */
+    padding: 20px;
+}
+
+/* 🗺️ CANVAS DE JEU - CENTRÉ ET RESPONSIVE */
+#gameCanvas {
+    max-width: 100%;
+    max-height: 100%;
+    border: 2px solid rgba(74, 144, 226, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.2);
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+/* 🎛️ PANNEAUX LATÉRAUX - ORGANISÉS */
+.side-panel {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.85);
+    border: 1px solid rgba(74, 144, 226, 0.3);
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    padding: 1rem;
+    z-index: 100;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+/* 📊 PANNEAU GAUCHE - CONTRÔLES */
+.side-panel.left {
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 200px;
+}
+
+/* 👤 PANNEAU DROIT - HÉROS ET STATUS */
+.side-panel.right {
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 250px;
+}
+
+/* 🌫️ PANNEAU BROUILLARD - COIN HAUT DROIT */
+.fog-panel {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 180px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(74, 144, 226, 0.3);
+    border-radius: 6px;
+    padding: 0.8rem;
+    z-index: 110;
+    backdrop-filter: blur(8px);
+}
+
+/* 🎮 BARRE D'OUTILS - HAUT CENTRÉE */
+.toolbar {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 105;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid rgba(74, 144, 226, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+/* 📱 RESPONSIVE - ÉCRANS PETITS */
+@media (max-width: 1280px) {
+    .side-panel.left {
+        width: 180px;
+        left: 10px;
+    }
+    
+    .side-panel.right {
+        width: 220px;
+        right: 10px;
+    }
+    
+    .fog-panel {
+        width: 150px;
+        right: 10px;
+        top: 10px;
+    }
+    
+    .toolbar {
+        top: 10px;
+        padding: 8px 15px;
+    }
+    
+    #game-canvas-container {
+        padding: 10px;
+    }
+}
+
+/* 📱 TRÈS PETITS ÉCRANS */
+@media (max-width: 800px) {
+    .side-panel {
+        position: relative;
+        width: 100%;
+        max-height: none;
+        margin: 10px 0;
+    }
+    
+    .side-panel.left,
+    .side-panel.right {
+        position: relative;
+        transform: none;
+        left: auto;
+        right: auto;
+        top: auto;
+    }
+    
+    #game-container {
+        flex-direction: column;
+    }
+    
+    .fog-panel {
+        position: relative;
+        width: 100%;
+        margin: 10px 0;
+        top: auto;
+        right: auto;
+        transform: none;
+    }
+    
+    .toolbar {
+        position: relative;
+        transform: none;
+        left: auto;
+        top: auto;
+        margin: 10px 0;
+        justify-content: center;
+    }
+}
+
+/* 🎯 CORRECTIONS SPÉCIFIQUES PROBLÈMES JEAN */
+
+/* Empêcher débordement des éléments */
+* {
+    box-sizing: border-box;
+}
+
+/* Forcer les éléments flottants à rester dans leurs conteneurs */
+.floating-element {
+    position: absolute !important;
+    z-index: 50;
+}
+
+/* Corriger les éléments qui se chevauchent */
+.hero-panel,
+.status-panel,
+.controls-panel {
+    position: relative;
+    margin: 10px 0;
+    clear: both;
+}
+
+/* 🌟 ANIMATIONS DOUCES */
+.side-panel,
+.fog-panel,
+.toolbar {
+    transition: all 0.3s ease;
+}
+
+.side-panel:hover,
+.fog-panel:hover {
+    background: rgba(0, 0, 0, 0.9);
+    border-color: rgba(74, 144, 226, 0.5);
+}
+
+/* 🎨 STYLES POUR ÉLÉMENTS TRANSPARENTS */
+.timeline-transparent {
+    opacity: 0.7 !important;
+    transition: opacity 0.3s ease;
+}
+
+.timeline-transparent:hover {
+    opacity: 0.9 !important;
+}
+
+/* 🔧 CORRECTIONS DEBUG */
+.debug-overlay {
+    position: fixed;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid #ff0000;
+    padding: 10px;
+    color: #ffffff;
+    font-family: monospace;
+    font-size: 12px;
+    z-index: 1000;
+    max-width: 200px;
+}
+
+/* 🎯 CENTRAGE FORCÉ DU CANVAS */
+#gameCanvas {
+    display: block;
+    margin: 0 auto;
+}
+
+/* 📐 CORRECTION RATIO ASPECT */
+#game-canvas-container {
+    aspect-ratio: 16/9;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* 🎮 INTERFACE OVERLAY - PAS DE DÉBORDEMENT */
+.game-ui-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.game-ui-overlay > * {
+    pointer-events: auto;
+}
+
+/* 🌀 TIMELINE SELECTOR - POSITION FIXE */
+.timeline-selector {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 200px;
+    z-index: 120;
+}
+
+/* 🎯 BOUTONS ACTIONS - COIN BAS DROIT */
+.action-buttons {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 115;
+}
+
+/* ⚡ PERFORMANCE - RÉDUIRE REPAINTS */
+.side-panel,
+.fog-panel,
+.toolbar,
+#gameCanvas {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+/* 🎨 SCROLLBARS CUSTOM */
+.side-panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.side-panel::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+}
+
+.side-panel::-webkit-scrollbar-thumb {
+    background: rgba(74, 144, 226, 0.5);
+    border-radius: 3px;
+}
+
+.side-panel::-webkit-scrollbar-thumb:hover {
+    background: rgba(74, 144, 226, 0.7);
+} 

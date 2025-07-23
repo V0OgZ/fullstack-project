@@ -452,64 +452,35 @@ class FogOfWarSystem {
         return { x, y };
     }
     
-    // 🎛️ CONTRÔLES DE L'INTERFACE SIMPLIFIÉS
+    // 🎛️ CONTRÔLES ULTRA-COMPACTS JEAN VERSION
     createFogControls() {
         const controls = document.createElement('div');
-        controls.className = 'fog-controls';
+        controls.className = 'fog-controls-mini';
         controls.innerHTML = `
-            <div class="fog-panel">
-                <h3>🌫️ Brouillard de Causalité</h3>
+            <div class="fog-panel-mini">
+                <div class="fog-header-mini">🌫️ Causalité</div>
                 
-                <div class="fog-info">
-                    <p>Le brouillard représente l'incertitude quantique du futur</p>
-                </div>
-                
-                <div class="timeline-selector">
-                    <label>Timeline active:</label>
+                <div class="fog-timeline-mini">
                     <select id="timeline-select">
-                        <option value="ℬ1">ℬ1 - Principale</option>
-                        <option value="ℬ2">ℬ2 - Alternative</option>
-                        <option value="ℬ3">ℬ3 - Quantique</option>
+                        <option value="ℬ1">ℬ1</option>
+                        <option value="ℬ2">ℬ2</option>
+                        <option value="ℬ3">ℬ3</option>
                     </select>
                 </div>
                 
-                <div class="fog-states-info">
-                    <h4>États du Brouillard:</h4>
-                    <div class="fog-states-list">
-                        <div class="fog-state-item">
-                            <span class="fog-color" style="background: rgba(50, 50, 50, 0.9)"></span>
-                            <span>Unexplored - Jamais vu</span>
-                        </div>
-                        <div class="fog-state-item">
-                            <span class="fog-color" style="background: rgba(100, 100, 100, 0.7)"></span>
-                            <span>Collapsed Past - Passé résolu</span>
-                        </div>
-                        <div class="fog-state-item">
-                            <span class="fog-color" style="background: rgba(255, 255, 0, 0.3)"></span>
-                            <span>Reachable - Accessible</span>
-                        </div>
-                        <div class="fog-state-item">
-                            <span class="fog-color" style="background: rgba(0, 255, 0, 0.1)"></span>
-                            <span>Vision - Vu directement</span>
-                        </div>
-                        <div class="fog-state-item">
-                            <span class="fog-color" style="background: rgba(255, 255, 255, 0.2)"></span>
-                            <span>Ghost - Vu avec Voile</span>
-                        </div>
-                        <div class="fog-state-item">
-                            <span class="fog-color" style="background: rgba(128, 0, 255, 0.4)"></span>
-                            <span>Superposed - Flux quantique</span>
-                        </div>
-                        <div class="fog-state-item">
-                            <span class="fog-color" style="background: rgba(0, 0, 255, 0.3)"></span>
-                            <span>Anchored - Bloque branchement</span>
-                        </div>
-                    </div>
-                </div>
+                                 <div class="fog-dots-mini">
+                     <span class="fog-dot" style="background: rgba(50,50,50,0.9)" title="Unexplored - Jamais vu">●</span>
+                     <span class="fog-dot" style="background: rgba(100,100,100,0.7)" title="Collapsed Past - Passé résolu">●</span>
+                     <span class="fog-dot" style="background: rgba(255,255,0,0.5)" title="Reachable - Accessible">●</span>
+                     <span class="fog-dot" style="background: rgba(0,255,0,0.3)" title="Vision - Direct">●</span>
+                     <span class="fog-dot" style="background: rgba(255,255,255,0.4)" title="Ghost - Voile spectral">●</span>
+                     <span class="fog-dot" style="background: rgba(128,0,255,0.6)" title="Superposed - Flux quantique">●</span>
+                     <span class="fog-dot" style="background: rgba(0,0,255,0.5)" title="Anchored - Bloque branchement">●</span>
+                 </div>
                 
-                <div class="fog-opacity">
-                    <label>Opacité: <span id="opacity-value">80%</span></label>
-                    <input type="range" id="fog-opacity-slider" min="10" max="100" value="80">
+                <div class="fog-opacity-mini">
+                    <input type="range" id="fog-opacity-slider" min="10" max="100" value="80" style="width: 60px;">
+                    <span id="opacity-value">80%</span>
                 </div>
             </div>
         `;
