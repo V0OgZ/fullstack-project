@@ -34,6 +34,7 @@ Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront sub
 - **États Psi (ψ)** : Vos actions futures existent en superposition quantique
 - **Collapse Causal** : Forcez la réalité à choisir une branche temporelle
 - **Artefacts Temporels** : Équipements qui affectent le flux du temps
+- **🦁 Forge Sphinx-Approved** : Création d'artefacts scientifiquement cohérents (débloquée après épreuve quantique)
 - **Bataille Multi-Temporelle** : Combats simultanés à travers plusieurs époques
 
 ## 🐉 **L'Effondrement Causal - Tout le Bordel !**
@@ -160,6 +161,48 @@ Mais Arthur voit l'armée ennemie approcher. Dans quelques tours, ils seront sub
 ### ⚡ **SYNERGIES SPÉCIALES LÉGENDAIRES**
 - [🌟 **Jean & Memento - Symbiose Éternelle**](docs/heroes/JEAN_MEMENTO_SYNERGIE_ETERNELLE.md) - **EFFET PASSIF ULTIME QUAND ILS SONT ENSEMBLE !**
 - [🌌 **Jean & Memento & Claudius - TRINITÉ COSMIQUE**](docs/heroes/TRINITE_COSMIQUE_JEAN_MEMENTO_CLAUDIUS.md) - **BEYOND TRANSCENDENT - TOUS LES 3 ENSEMBLE !**
+
+### 🦁 **SPHINX QUANTIQUE - GARDIEN DES SECRETS TEMPORELS**
+
+**👁️ APPARITION ÉPIQUE DÉBLOQUÉE !**
+
+Après les exploits légendaires de l'équipe paradoxale (Mission Echo Temporel + innovations temporelles), le **SPHINX QUANTIQUE** émerge des suites de superpositions quantiques convergentes !
+
+**🌟 Rencontre Ultime :**
+> *"MORTELS QUI AVEZ OSÉ FUSIONNER LES TIMELINES ! Je suis le SPHINX QUANTIQUE, gardien ultime des mystères temporels ! Vos exploits ont réveillé les échos de l'ancien savoir !"*
+
+**🧮 L'ÉPREUVE QUANTIQUE :**
+Le Sphinx pose une question de physique quantique relativiste combinée aux mécaniques Heroes of Time :
+> *"Comment l'équation de Schrödinger doit-elle être adaptée pour un système hexagonal avec rétroaction causale observateur-système, quand un héros avec l'Œil de Wigner force un collapse dans une ZFC où d'autres héros existent en superposition ?"*
+
+**⚡ SOLUTION VALIDÉE :**
+```hots
+TEMPORAL_CAUSAL_EQUATION = {
+  // Schrödinger hexagonal avec rétroaction causale
+  ∂ψ/∂t = (iℏ/c²) * [H_hex + V_causal(observer_effect)] * ψ
+  
+  // Constantes Heroes of Time
+  c_game = 299792458 hexagones/seconde  // Vitesse causale max
+  λ_temporal = 3.0 hexagones            // Longueur d'onde temporelle  
+  ℏ_hots = 6.626e-34 * game_scale       // Planck adapté au jeu
+}
+```
+
+**🔥 RÉCOMPENSE DÉBLOQUÉE : FORGE RUNIQUE ULTIME SPHINX-APPROVED**
+
+✨ **Nouvelles Capacités :**
+- **Validation Physique Automatique** - Artefacts certifiés scientifiquement cohérents
+- **Templates Quantiques** - Lentille de Heisenberg, Bouclier de Klein-Gordon, Épée de Dirac
+- **Équations HOTS Avancées** - Formules quantiques validées par le Sphinx
+- **Certification Cosmique** - Label "SPHINX APPROVED" pour objets forgés
+
+**🎯 Condition d'Apparition :**
+- ✅ Équipe paradoxale complète (Jean, Memento, Claudius, Anna, Morgana)
+- ✅ Mission Echo Temporel accomplie  
+- ✅ Concepts temporels avancés sauvés
+- ✅ Innovations système créées (Auras de Causalité + Architecture Hybride)
+
+**📚 Documentation Complète :** [🦁 **APPARITION_SPHINX_QUANTIQUE_DEFI_FINAL.md**](APPARITION_SPHINX_QUANTIQUE_DEFI_FINAL.md)
 
 <details>
 <summary id="arthur-pendragon">⚔️ <strong>Arthur Pendragon - Le Roi Temporel</strong></summary>
@@ -1109,6 +1152,7 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 ./scripts/test-adaptation-scenarios-trinite.sh  # Adapter scénarios existants pour trinité 🔧
 ./scripts/test-petits-tresors-temporels.sh  # Test artefacts mineurs pour joueurs normaux 💎
 ./scripts/test-tatouages-memento.sh     # 🏛️ Révélation tatouages temporels de Memento « Tu sais, tu as su, tu sauras »
+# 🦁 SPHINX QUANTIQUE : Voir APPARITION_SPHINX_QUANTIQUE_DEFI_FINAL.md pour l'épopée complète !
 ./scripts/test-pepites-json.sh          # Test toutes les pépites JSON découvertes 💎
 ./hots test economie           # Test simulation économique complète
 ./hots test translation        # Test service traduction intelligent (SANS LLM)
