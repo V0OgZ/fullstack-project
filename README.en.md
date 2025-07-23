@@ -615,11 +615,7 @@ Stable Spring Boot API
 - [🎯 Developer Instructions](docs/EN/DEVELOPER_INSTRUCTIONS.md) - *201 lines development guide*
 
 ### **🇫🇷 French Documentation**
-- [📊 Complete Final Report](docs/RAPPORT_FINAL_HEROES_OF_TIME_COMPLET.md) - *Exhaustive 500+ lines analysis*
-- [🌀 Timeline Transparency](docs/TIMELINE_TRANSPARENCY_DOCUMENTATION.md) - *Complete 339 lines guide*
-- [🌫️ 7-Level Causality Fog](docs/BROUILLARD_CAUSALITE_7_NIVEAUX_DOCUMENTATION.md) - *281 detailed lines*
-- [📝 HOTS Formula Conditions](docs/FORMULES_HOTS_CONDITIONS_EXPLICACION.md) - *229 technical lines*
-- [🎮 Jean's Help](AIDE_JEAN.md) - *91 lines quick start guide*
+- [📚 Complete French Documentation](README.md) - *All documentation in French*
 
 ### **🔧 Technical Guides**
 - [📋 Complete CODEX](docs/EN/COMPLETE_HEROES_OF_TIME_CODEX.md) - *HOTS system reference*
