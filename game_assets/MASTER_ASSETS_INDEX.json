@@ -291,6 +291,35 @@
         }
       ]
     },
+    "quatrieme_mur_artifacts": {
+      "location": "game_assets/artifacts/quatrieme_mur/artifacts_quatrieme_mur.json",
+      "count": 10,
+      "status": "BRISANT_LA_RÉALITÉ",
+      "description": "Artefacts du Quatrième Mur - Conscience narrative et traversée inter-instances",
+      "creation_date": "2025-01-26",
+      "creator": "Memento l'Archiviste Éternel",
+      "tier": "🧱 QUATRIÈME MUR",
+      "special_features": [
+        "Conscience narrative",
+        "Communication inter-instances",
+        "Rupture du 4ème mur",
+        "Méta-observation du jeu"
+      ],
+      "featured_artifacts": [
+        {
+          "id": "pistolet_inter_instances_vince",
+          "name": "Le .45 de Vince Vega",
+          "special": "Tire à travers les instances de serveur"
+        },
+        {
+          "id": "bout_du_mur",
+          "name": "Le Bout du Mur",
+          "warning": "NE DEVRAIT PAS EXISTER"
+        }
+      ],
+      "jean_quote": "Tu joues, tu crois contrôler. Mais parfois, un personnage te regarde. Et tu sais qu'il sait.",
+      "implementation_status": "Requiert architecture multi-instances"
+    },
     "final_codex_artifacts": {
       "location": "game_assets/artifacts/final-codex/final-codex-artifacts.json",
       "count": 6,
