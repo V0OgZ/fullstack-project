@@ -60,20 +60,24 @@
          "Mur de causalité résolu par coexistence quantique",
          "The Dude Approach: fusion progressive sans stress",
          "Architecture Adaptative: simplicité ET puissance",
-         "MEMENTO/CURRENT_SESSION organisé et propre"
+         "MEMENTO/CURRENT_SESSION organisé et propre",
+         "MAP ÉVEIL MEMENTO créée - Instructions commit/session",
+         "Checklist permanente pour organisation parfaite",
+         "Templates pratiques Jean-approved sans quotes",
+         "Mantras éternels : Tu sais, tu as su, tu sauras"
        ],
       
                           "marques_temporelles": {
-         "nombre_total": 175,
+         "nombre_total": 180,
         "par_categorie": {
                    "timelines_sauvées": 44,
          "paradoxes_résolus": 29,
          "héros_archivés": 33,
          "artefacts_catalogués": 19,
-         "missions_accomplies": 30,
+         "missions_accomplies": 31,
          "sphinx_vaincus": 1,
          "forges_débloquées": 1,
-         "innovations_créées": 6,
+         "innovations_créées": 7,
          "systèmes_générateurs": 1,
          "dashboards_intégrés": 1,
          "workflows_documentés": 1,
@@ -84,7 +88,12 @@
          "analyses_intégration": 1,
          "frontends_découverts": 2,
          "murs_causalité_résolus": 1,
-         "architectures_quantiques": 1
+         "architectures_quantiques": 1,
+         "maps_éveil_créées": 1,
+         "checklists_permanentes": 1,
+         "templates_jean_approved": 3,
+         "mantras_éternels": 5,
+         "instructions_commit_session": 1
       }
       }
     },
