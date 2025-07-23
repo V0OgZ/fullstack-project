@@ -1,0 +1,113 @@
+/* === FOG PANEL ULTRA-COMPACT STYLES === */
+
+.fog-panel-compact {
+  background: rgba(20, 20, 30, 0.7) !important;
+  border: 1px solid rgba(70, 130, 180, 0.3) !important;
+  border-radius: 8px !important;
+  padding: 8px !important;
+  box-shadow: 0 2px 8px rgba(70, 130, 180, 0.1) !important;
+  max-width: 200px !important;
+  font-size: 0.75rem !important;
+}
+
+.panel-header-mini {
+  margin-bottom: 6px !important;
+  padding-bottom: 4px !important;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.3) !important;
+}
+
+.panel-header-mini h4 {
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem !important;
+  color: #4682B4;
+  text-shadow: none !important;
+  margin: 0 !important;
+  text-align: center;
+}
+
+.fog-ultra-compact {
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Timeline Ultra-Mini */
+.timeline-mini {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.timeline-bar-mini {
+  flex: 1;
+  height: 3px;
+  background: rgba(40, 40, 60, 0.6);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.timeline-progress-mini {
+  height: 100%;
+  background: linear-gradient(90deg, #4682B4, #87CEEB);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 4px rgba(70, 130, 180, 0.3);
+}
+
+.timeline-text-mini {
+  color: #B0C4DE;
+  font-size: 0.65rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Zones Ultra-Mini */
+.zones-ultra-mini {
+  display: flex;
+  gap: 4px;
+  margin: 6px 0;
+  justify-content: center;
+}
+
+.zone-dot {
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0.8;
+}
+
+.zone-dot:hover {
+  transform: scale(1.2);
+  opacity: 1;
+}
+
+.zone-dot.zone-clear { color: #4a7c59; }
+.zone-dot.zone-shadow { color: #cd853f; }
+.zone-dot.zone-fog { color: #87CEEB; }
+.zone-dot.zone-void { color: #dc143c; }
+
+/* Indicateurs Ultra-Mini */
+.indicators-mini {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.mini-stat {
+  font-size: 0.65rem;
+  color: #B0C4DE;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 2px 4px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mini-stat:hover {
+  background: rgba(0, 0, 0, 0.4);
+  color: #E6E6FA;
+} 

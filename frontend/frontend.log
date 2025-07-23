@@ -1,51 +1,153 @@
-::1 - - [23/Jul/2025 07:24:31] "GET / HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:24:31] "GET /styles/scenario-selector.css HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:24:31] "GET /translation-styles.css HTTP/1.1" 304 -
-::1 - - [23/Jul/2025 07:24:31] "GET /styles.css HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:24:31] "GET /styles/city.css HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:24:31] "GET /styles/combat.css HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:24:31] "GET /temporal-styles.css HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:24:31] "GET /styles/hero.css HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:24:31] "GET /styles/dicebear.css HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:24:31] "GET /api.js HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:24:31] "GET /script-console.js HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:24:31] "GET /translation-service.js HTTP/1.1" 304 -
-::1 - - [23/Jul/2025 07:24:31] "GET /components/CityInterface.js HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:24:31] "GET /components/CombatInterface.js HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:24:31] "GET /game.js HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:24:31] "GET /runic-forge.js HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:24:31] "GET /missing-assets-loader.js HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:24:31] "GET /hero-avatars.js HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:24:31] "GET /components/HeroInterface.js HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:24:31] "GET /fog-of-war-system.js HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:24:31] "GET /dicebar-graphics-system.js HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:24:31] "GET /temporal-integration.js HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:24:31] "GET /gameplay-enhancement.js HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:24:31] "GET /gameplay-construction.js HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:24:31] "GET /scenario-selector.js HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:24:31] code 404, message File not found
-::1 - - [23/Jul/2025 07:24:31] "GET /game_assets/heroes/epic/epic-heroes.json HTTP/1.1" 404 -
-::1 - - [23/Jul/2025 07:24:31] code 404, message File not found
-::1 - - [23/Jul/2025 07:24:31] "GET /game_assets/heroes/extracted_heroes.json HTTP/1.1" 404 -
-::1 - - [23/Jul/2025 07:24:31] code 404, message File not found
-::1 - - [23/Jul/2025 07:24:31] "GET /game_assets/MASTER_ASSETS_INDEX.json HTTP/1.1" 404 -
-::1 - - [23/Jul/2025 07:24:31] "GET /manifest.json HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:24:33] "GET /visual-script-editor.html HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:25:03] "GET /visual-script-editor.html HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:29:03] code 404, message File not found
-::1 - - [23/Jul/2025 07:29:03] "GET /game_assets/heroes/epic/epic-heroes.json HTTP/1.1" 404 -
-::1 - - [23/Jul/2025 07:29:03] code 404, message File not found
-::1 - - [23/Jul/2025 07:29:03] "GET /game_assets/heroes/extracted_heroes.json HTTP/1.1" 404 -
-::1 - - [23/Jul/2025 07:29:03] code 404, message File not found
-::1 - - [23/Jul/2025 07:29:03] "GET /favicon.ico HTTP/1.1" 404 -
-::1 - - [23/Jul/2025 07:29:03] code 404, message File not found
-::1 - - [23/Jul/2025 07:29:03] "GET /game_assets/MASTER_ASSETS_INDEX.json HTTP/1.1" 404 -
-::1 - - [23/Jul/2025 07:29:14] "GET / HTTP/1.1" 304 -
-::1 - - [23/Jul/2025 07:29:14] code 404, message File not found
-::1 - - [23/Jul/2025 07:29:14] "GET /game_assets/heroes/epic/epic-heroes.json HTTP/1.1" 404 -
-::1 - - [23/Jul/2025 07:29:14] code 404, message File not found
-::1 - - [23/Jul/2025 07:29:14] "GET /game_assets/heroes/extracted_heroes.json HTTP/1.1" 404 -
-::1 - - [23/Jul/2025 07:29:14] code 404, message File not found
-::1 - - [23/Jul/2025 07:29:14] "GET /game_assets/MASTER_ASSETS_INDEX.json HTTP/1.1" 404 -
-::1 - - [23/Jul/2025 07:29:52] "GET /visual-script-editor.html HTTP/1.1" 200 -
-::1 - - [23/Jul/2025 07:30:22] "GET /visual-script-editor.html HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:00:22] "GET /?demo=auto&scenario=zfc HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:00:22] "GET /runic-symbols-port8000.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:00:22] "GET /translation-styles.css HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:00:22] "GET /styles/hero.css HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:00:22] "GET /styles.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:00:22] "GET /temporal-styles.css HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:00:22] "GET /styles/dicebear.css HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:00:22] "GET /styles/scenario-selector.css HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:00:22] "GET /styles/city.css HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:00:22] "GET /translation-service.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:00:22] "GET /styles/combat.css HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:00:22] "GET /api.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:00:22] "GET /components/CityInterface.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:00:22] "GET /components/HeroInterface.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:00:22] "GET /game.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:00:22] "GET /script-console.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:00:22] "GET /runic-forge.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:00:22] "GET /temporal-integration.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:00:22] "GET /components/CombatInterface.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:00:22] "GET /fog-of-war-system.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:00:22] "GET /scenario-selector.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:00:22] "GET /gameplay-construction.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:00:22] "GET /gameplay-enhancement.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:00:22] "GET /dicebar-graphics-system.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:00:22] "GET /hero-avatars.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:00:22] "GET /missing-assets-loader.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:00:22] code 404, message File not found
+::1 - - [23/Jul/2025 09:00:22] "GET /game_assets/heroes/epic/epic-heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 09:00:22] code 404, message File not found
+::1 - - [23/Jul/2025 09:00:22] "GET /game_assets/heroes/extracted_heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 09:00:22] "GET /manifest.json HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:00:22] code 404, message File not found
+::1 - - [23/Jul/2025 09:00:22] "GET /game_assets/MASTER_ASSETS_INDEX.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 09:08:38] "GET /?demo=auto&scenario=zfc HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:08:38] "GET /responsive-1280x800.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:08:38] "GET /styles.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:08:38] "GET /conflict-detection-fusion.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:08:38] "GET /websocket-handler-zfc.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:08:38] "GET /trinity-cosmique-service.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:08:38] "GET /fog-of-war-system.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:08:38] "GET /runic-symbols-port8000.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:08:38] code 404, message File not found
+::1 - - [23/Jul/2025 09:08:38] "GET /game_assets/heroes/epic/epic-heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 09:08:38] code 404, message File not found
+::1 - - [23/Jul/2025 09:08:38] "GET /game_assets/heroes/extracted_heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 09:08:38] code 404, message File not found
+::1 - - [23/Jul/2025 09:08:38] "GET /game_assets/MASTER_ASSETS_INDEX.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 09:08:48] "GET /?demo=auto&scenario=zfc HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:08:48] "GET /styles.css HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:08:48] "GET /responsive-1280x800.css HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:08:48] code 404, message File not found
+::1 - - [23/Jul/2025 09:08:48] "GET /game_assets/heroes/epic/epic-heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 09:08:48] code 404, message File not found
+::1 - - [23/Jul/2025 09:08:48] "GET /game_assets/heroes/extracted_heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 09:08:48] code 404, message File not found
+::1 - - [23/Jul/2025 09:08:48] "GET /game_assets/MASTER_ASSETS_INDEX.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 09:08:50] "GET /?demo=auto&scenario=zfc HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:08:50] code 404, message File not found
+::1 - - [23/Jul/2025 09:08:50] "GET /game_assets/heroes/epic/epic-heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 09:08:50] code 404, message File not found
+::1 - - [23/Jul/2025 09:08:50] "GET /game_assets/heroes/extracted_heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 09:08:50] code 404, message File not found
+::1 - - [23/Jul/2025 09:08:50] "GET /game_assets/MASTER_ASSETS_INDEX.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 09:10:55] "GET /?demo=auto&scenario=zfc HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:10:55] "GET /timeline-transparency-manager.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:10:55] "GET /websocket-handler-zfc.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:10:55] "GET /responsive-1280x800.css HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:10:55] "GET /trinity-cosmique-service.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:10:55] "GET /conflict-detection-fusion.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:10:55] "GET /styles.css HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:10:55] code 404, message File not found
+::1 - - [23/Jul/2025 09:10:55] "GET /game_assets/heroes/epic/epic-heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 09:10:55] code 404, message File not found
+::1 - - [23/Jul/2025 09:10:55] "GET /game_assets/heroes/extracted_heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 09:10:55] code 404, message File not found
+::1 - - [23/Jul/2025 09:10:55] "GET /game_assets/MASTER_ASSETS_INDEX.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 09:12:28] "GET /?demo=auto&scenario=zfc HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:12:29] "GET /responsive-1280x800.css HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:12:29] "GET /styles.css HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:12:29] "GET /fog-of-war-system.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:12:29] "GET /runic-symbols-port8000.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:12:29] "GET /conflict-detection-fusion.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:12:29] "GET /websocket-handler-zfc.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:12:29] "GET /trinity-cosmique-service.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:12:29] "GET /timeline-transparency-manager.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:12:29] code 404, message File not found
+::1 - - [23/Jul/2025 09:12:29] "GET /game_assets/heroes/epic/epic-heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 09:12:29] code 404, message File not found
+::1 - - [23/Jul/2025 09:12:29] "GET /game_assets/heroes/extracted_heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 09:12:29] code 404, message File not found
+::1 - - [23/Jul/2025 09:12:29] "GET /favicon.ico HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 09:12:29] code 404, message File not found
+::1 - - [23/Jul/2025 09:12:29] "GET /game_assets/MASTER_ASSETS_INDEX.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 09:16:19] "GET /?demo=auto&scenario=zfc HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:19] "GET /layout-fix.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:19] "GET /styles.css HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:16:19] "GET /coordinate-fix.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:19] "GET /responsive-1280x800.css HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:16:19] "GET /fog-of-war-system.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:16:19] "GET /runic-symbols-port8000.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:16:19] "GET /conflict-detection-fusion.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:16:19] "GET /websocket-handler-zfc.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:16:19] "GET /trinity-cosmique-service.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:16:19] "GET /timeline-transparency-manager.js HTTP/1.1" 304 -
+::1 - - [23/Jul/2025 09:16:19] code 404, message File not found
+::1 - - [23/Jul/2025 09:16:19] "GET /game_assets/heroes/epic/epic-heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 09:16:19] code 404, message File not found
+::1 - - [23/Jul/2025 09:16:19] "GET /game_assets/heroes/extracted_heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 09:16:19] code 404, message File not found
+::1 - - [23/Jul/2025 09:16:19] "GET /favicon.ico HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 09:16:19] code 404, message File not found
+::1 - - [23/Jul/2025 09:16:19] "GET /game_assets/MASTER_ASSETS_INDEX.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 09:16:31] "GET /?demo=auto&scenario=zfc HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /styles/combat.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /temporal-styles.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /styles.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /responsive-1280x800.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /translation-styles.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /layout-fix.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /styles/hero.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /styles/city.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /styles/dicebear.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /styles/scenario-selector.css HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /api.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /translation-service.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /components/CombatInterface.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /components/HeroInterface.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /components/CityInterface.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /script-console.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /runic-forge.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /game.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /temporal-integration.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /hero-avatars.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /scenario-selector.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /gameplay-enhancement.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /missing-assets-loader.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /gameplay-construction.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /fog-of-war-system.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /runic-symbols-port8000.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /conflict-detection-fusion.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /websocket-handler-zfc.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /trinity-cosmique-service.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /timeline-transparency-manager.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /coordinate-fix.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] "GET /dicebar-graphics-system.js HTTP/1.1" 200 -
+::1 - - [23/Jul/2025 09:16:31] code 404, message File not found
+::1 - - [23/Jul/2025 09:16:31] "GET /game_assets/heroes/epic/epic-heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 09:16:31] code 404, message File not found
+::1 - - [23/Jul/2025 09:16:31] "GET /game_assets/heroes/extracted_heroes.json HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 09:16:31] code 404, message File not found
+::1 - - [23/Jul/2025 09:16:31] "GET /favicon.ico HTTP/1.1" 404 -
+::1 - - [23/Jul/2025 09:16:31] code 404, message File not found
+::1 - - [23/Jul/2025 09:16:31] "GET /game_assets/MASTER_ASSETS_INDEX.json HTTP/1.1" 404 -
