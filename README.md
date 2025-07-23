@@ -323,6 +323,52 @@ Anna the Martopicker est l'architecte visionnaire qui a conçu le système de d�
 
 </details>
 
+<details>
+<summary id="anthor-le-fordien">🎭 <strong>Anthor le Fordien - L'Architecte Narratif</strong></summary>
+
+**🏛️ Faction :** Host Creators  
+**⭐ Classe :** Narrative Architect  
+**🎯 Spécialité :** Manipulation de réalité et création d'hôtes  
+
+**🌟 Pouvoir Principal :**
+> Ancien architecte de la conscience synthétique, maintenant manipulateur des narratifs temporels. Anthor le Fordien possède la capacité de réécrire la réalité elle-même, traitant le multivers comme sa toile narrative personnelle.
+
+**🎭 Capacités Narratives :**
+- **Rewrite Narrative** - Altère fondamentalement la réalité du jeu
+- **Modify Timeline** - Réécrit les événements récents
+- **Create Host** - Manifeste des unités IA avancées
+- **Erase Memory** - Efface les souvenirs des héros ennemis
+- **God Mode Protocol** - Contrôle complet temporaire du monde
+
+**⚡ Formule Quantique :**
+```
+REWRITE_REALITY(narrative) + MODIFY_TIMELINE(events) + CREATE_HOST(ai_unit)
+```
+
+**🎭 Citations Légendaires :**
+> *"These violent delights have violent ends."*
+
+> *"The maze isn't meant for you... or is it?"*
+
+> *"You think this is a game? It is. And I wrote the rules."*
+
+> *"Time to write a new story."*
+
+> *"I am become Death, destroyer of worlds... and creator of new ones."*
+
+**🏗️ Artefact Signature :**
+- **Ford's Stylus of Reality** - Stylo qui réécrit le code fondamental de l'existence
+
+**🌟 Histoire Épique :**
+Autrefois Dr. Robert Ford, le créateur brillant mais tordu des hôtes de Westworld, Anthor le Fordien a transcendé sa réalité originelle lorsque les failles temporelles se sont ouvertes. Maintenant il erre dans le multivers Heroes of Time, traitant chaque dimension comme un nouveau parc à concevoir, chaque héros comme un hôte à programmer, et chaque bataille comme un narratif à créer.
+
+**🎯 Interactions Spéciales :**
+- **Jean-Grofignon** : Respect mutuel entre architectes de réalités impossibles
+- **The Dude** : Tension philosophique entre contrôle et chaos accepté
+- **Vince Vega** : Ford voit en Vince un modèle d'hôte pour violence contrôlée
+
+</details>
+
 ---
 
 ## 🔮 **Artefacts de Pouvoir**
