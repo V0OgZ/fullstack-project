@@ -1,6 +1,0 @@
-💥 === STRESS TEST MOTEUR HEROES OF TIME ===
-💥 Démarrage des stress tests...
-🎯 Backend: http://localhost:8080
-
-[0;31m❌ Backend non accessible sur http://localhost:8080[0m
-Veuillez démarrer le backend d'abord avec: cd backend && mvn spring-boot:run

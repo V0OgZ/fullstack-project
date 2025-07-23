@@ -2,9 +2,11 @@ package com.example.demo.repository;
 
 import com.example.demo.model.GameSave;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,8 +36,11 @@ public interface GameSaveRepository extends JpaRepository<GameSave, Long> {
     // Count saves for a player
     Long countByPlayerId(String playerId);
     
-    // Delete old auto-saves (keep only last N)
-    @Query("DELETE FROM GameSave gs WHERE gs.isAutoSave = true AND gs.gameId = :gameId AND gs.id NOT IN " +
-           "(SELECT g.id FROM GameSave g WHERE g.gameId = :gameId AND g.isAutoSave = true ORDER BY g.createdAt DESC LIMIT :keepCount)")
+    // Delete old auto-saves (keep only last N) - using native query for complex logic
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM game_saves WHERE is_auto_save = true AND game_id = :gameId AND id NOT IN " +
+           "(SELECT id FROM (SELECT id FROM game_saves WHERE game_id = :gameId AND is_auto_save = true ORDER BY created_at DESC LIMIT :keepCount) AS subquery)", 
+           nativeQuery = true)
     void deleteOldAutoSaves(@Param("gameId") String gameId, @Param("keepCount") int keepCount);
 } 

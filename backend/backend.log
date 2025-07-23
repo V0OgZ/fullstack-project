@@ -1,34 +1,3 @@
-[INFO] Scanning for projects...
-[INFO] 
-[INFO] --------------------------< com.example:demo >--------------------------
-[INFO] Building demo 0.0.1-SNAPSHOT
-[INFO] --------------------------------[ jar ]---------------------------------
-[INFO] 
-[INFO] >>> spring-boot-maven-plugin:2.7.18:run (default-cli) > test-compile @ demo >>>
-[INFO] 
-[INFO] --- maven-resources-plugin:3.2.0:resources (default-resources) @ demo ---
-[INFO] Using 'UTF-8' encoding to copy filtered resources.
-[INFO] Using 'UTF-8' encoding to copy filtered properties files.
-[INFO] Copying 1 resource
-[INFO] Copying 34 resources
-[INFO] 
-[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ demo ---
-[INFO] Nothing to compile - all classes are up to date
-[INFO] 
-[INFO] --- maven-resources-plugin:3.2.0:testResources (default-testResources) @ demo ---
-[INFO] Using 'UTF-8' encoding to copy filtered resources.
-[INFO] Using 'UTF-8' encoding to copy filtered properties files.
-[INFO] Copying 2 resources
-[INFO] 
-[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ demo ---
-[INFO] Nothing to compile - all classes are up to date
-[INFO] 
-[INFO] <<< spring-boot-maven-plugin:2.7.18:run (default-cli) < test-compile @ demo <<<
-[INFO] 
-[INFO] 
-[INFO] --- spring-boot-maven-plugin:2.7.18:run (default-cli) @ demo ---
-[INFO] Attaching agents: []
-12:25:08.581 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
  ██╗  ██╗███████╗██████╗  ██████╗ ███████╗███████╗    ██████╗ ███████╗    ████████╗██╗███╗   ███╗███████╗
  ██║  ██║██╔════╝██╔══██╗██╔═══██╗██╔════╝██╔════╝   ██╔═══██╗██╔════╝    ╚══██╔══╝██║████╗ ████║██╔════╝
  ███████║█████╗  ██████╔╝██║   ██║█████╗  ███████╗   ██║   ██║█████╗         ██║   ██║██╔████╔██║█████╗  
@@ -49,30 +18,32 @@
     • API REST Complète            ✅
     
  🎯 Port: 8080 | 🔧 Profile: default | 📊 Version: 1.0.0 
-12:25:08.605 [main] INFO  com.example.demo.DemoApplication - Starting DemoApplication using Java 17.0.15 on vincents-MacBook-Pro.local with PID 56193 (/Users/admin/fullstack-project/backend/target/classes started by admin in /Users/admin/fullstack-project/backend)
-12:25:08.606 [main] DEBUG com.example.demo.DemoApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
-12:25:08.606 [main] INFO  com.example.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
-12:25:08.962 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-12:25:08.991 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 25 ms. Found 6 JPA repository interfaces.
-12:25:09.251 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
-12:25:09.257 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
-12:25:09.258 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-12:25:09.258 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
-12:25:09.297 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-12:25:09.297 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 672 ms
-12:25:09.349 [main] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Starting...
-12:25:09.445 [main] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Start completed.
-12:25:09.450 [main] INFO  org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:heroesdb'
-12:25:09.500 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-12:25:09.519 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
-12:25:09.580 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-12:25:09.653 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+07:24:22.675 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+07:24:22.695 [main] INFO  com.example.demo.DemoApplication - Starting DemoApplication using Java 17.0.15 on vincents-MacBook-Pro.local with PID 24872 (/Users/admin/fullstack-project/backend/target/classes started by admin in /Users/admin/fullstack-project/backend)
+07:24:22.696 [main] DEBUG com.example.demo.DemoApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+07:24:22.696 [main] INFO  com.example.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
+07:24:23.072 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+07:24:23.116 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 38 ms. Found 7 JPA repository interfaces.
+07:24:23.364 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+07:24:23.371 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+07:24:23.372 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+07:24:23.372 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+07:24:23.413 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+07:24:23.413 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 700 ms
+07:24:23.470 [main] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Starting...
+07:24:23.566 [main] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Start completed.
+07:24:23.572 [main] INFO  org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:heroesdb'
+07:24:23.632 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+07:24:23.660 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+07:24:23.731 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+07:24:23.808 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
 Hibernate: drop table if exists ai_decision_history CASCADE 
 Hibernate: drop table if exists ai_goals CASCADE 
 Hibernate: drop table if exists ai_players CASCADE 
 Hibernate: drop table if exists building_spells CASCADE 
 Hibernate: drop table if exists building_unit_types CASCADE 
 Hibernate: drop table if exists buildings CASCADE 
+Hibernate: drop table if exists game_saves CASCADE 
 Hibernate: drop table if exists game_session_players CASCADE 
 Hibernate: drop table if exists game_sessions CASCADE 
 Hibernate: drop table if exists game_states CASCADE 
@@ -90,6 +61,7 @@ Hibernate: create table ai_players (id bigint generated by default as identity, 
 Hibernate: create table building_spells (building_id bigint not null, spell_id varchar(255))
 Hibernate: create table building_unit_types (building_id bigint not null, unit_type varchar(255))
 Hibernate: create table buildings (id bigint generated by default as identity, building_id varchar(255) not null, building_type varchar(255) not null, castle_id varchar(255) not null, construction_completed timestamp, construction_started timestamp not null, construction_time integer not null, crystal_cost integer, current_units_available integer, daily_gold_bonus integer, daily_resource_bonus integer, defense_bonus integer, game_id varchar(255) not null, gems_cost integer, gold_cost integer not null, is_constructed boolean not null, last_recruitment_reset timestamp, level integer not null, luck_bonus integer, mana_regeneration_bonus integer, max_level integer not null, morale_bonus integer, ore_cost integer, player_id varchar(255) not null, position_x integer not null, position_y integer not null, spell_power_bonus integer, stone_cost integer, sulfur_cost integer, unit_production_bonus integer, weekly_growth integer, wood_cost integer, primary key (id))
+Hibernate: create table game_saves (id bigint generated by default as identity, created_at timestamp not null, description varchar(255), game_id varchar(255) not null, is_auto_save boolean, last_played_at timestamp, player_id varchar(255) not null, save_data TEXT, save_name varchar(255) not null, turn_number integer, primary key (id))
 Hibernate: create table game_session_players (session_id bigint not null, player_id varchar(255))
 Hibernate: create table game_sessions (id bigint generated by default as identity, created_at timestamp not null, current_players integer not null, ended_at timestamp, game_mode varchar(255) not null, max_players integer not null, name varchar(255) not null, network_mode boolean not null, real_time_sync boolean not null, session_id varchar(255) not null, started_at timestamp, status varchar(255) not null, zfc_enabled boolean not null, primary key (id))
 Hibernate: create table game_states (gameId varchar(255) not null, active_events TEXT, combat_results TEXT, created_at timestamp not null, current_player_id varchar(255), current_political_event TEXT, current_turn integer not null, equipped_items TEXT, game_status varchar(255), hero_positions TEXT, last_action_time timestamp, locked_zones TEXT, movement_ranges TEXT, pending_actions TEXT, player_inventories TEXT, player_resources TEXT, political_advisors TEXT, reputation TEXT, selected_heroes TEXT, shadow_actions TEXT, turn_duration_minutes integer, turn_start_time timestamp, updated_at timestamp not null, visible_zfcs TEXT, primary key (gameId))
@@ -116,83 +88,87 @@ Hibernate: alter table scenario_events add constraint FKg78thoyk3btt4ah8w0l5kxge
 Hibernate: alter table scenario_objectives add constraint FK17ypflt578mc3v9gpawpa5rq5 foreign key (scenario_id) references scenarios
 Hibernate: alter table scenario_starting_positions add constraint FK4nw5i22e150ntccvl66v6v6ng foreign key (scenario_id) references scenarios
 Hibernate: alter table unit_abilities add constraint FKgenwc8hldy5cu1mutacji6xgi foreign key (unit_id) references units
-12:25:10.021 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-12:25:10.025 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-12:25:10.528 [main] DEBUG org.springframework.web.socket.server.support.WebSocketHandlerMapping - Patterns [/ws/**] in 'stompWebSocketHandlerMapping'
-12:25:10.541 [main] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-12:25:10.555 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+07:24:24.236 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+07:24:24.241 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+07:24:24.607 [main] DEBUG org.springframework.web.filter.CorsFilter - Filter 'corsFilter' configured for use
+07:24:24.891 [main] DEBUG org.springframework.web.socket.server.support.WebSocketHandlerMapping - Patterns [/ws/**] in 'stompWebSocketHandlerMapping'
+07:24:24.908 [main] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+07:24:24.922 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.AIController:
 	
-12:25:10.556 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+07:24:24.923 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.BuildingController:
 	
-12:25:10.556 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+07:24:24.923 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.EpicContentController:
 	
-12:25:10.556 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+07:24:24.923 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.GameController:
 	
-12:25:10.556 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+07:24:24.923 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.ImageController:
 	
-12:25:10.556 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+07:24:24.923 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.MagicItemController:
 	
-12:25:10.557 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+07:24:24.924 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.MultiplayerController:
 	{[MESSAGE],[/game.join]}: handleJoin(Map)
 	{[MESSAGE],[/game.leave]}: handleLeave(Map)
 	{[MESSAGE],[/game.action]}: handleGameAction(Map)
 	{[MESSAGE],[/game.sync]}: handleSync(Map)
 	{[MESSAGE],[/game.chat]}: handleChat(Map)
-12:25:10.558 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+07:24:24.925 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+	c.e.d.c.PersistenceController:
+	
+07:24:24.925 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.ScenarioController:
 	
-12:25:10.558 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+07:24:24.925 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.TestController:
 	
-12:25:10.558 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+07:24:24.925 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.UnitController:
 	
-12:25:10.558 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+07:24:24.925 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.ZFCController:
 	
-12:25:10.560 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+07:24:24.927 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	
-12:25:10.718 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-12:25:10.899 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - 136 mappings in 'requestMappingHandlerMapping'
-12:25:10.912 [main] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-12:25:10.919 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
-12:25:10.990 [main] INFO  org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
-12:25:11.008 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
-12:25:11.018 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
-12:25:11.019 [main] DEBUG org.springframework.web.SimpLogging - clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
-12:25:11.019 [main] DEBUG org.springframework.web.SimpLogging - clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
-12:25:11.019 [main] INFO  org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler - Starting...
-12:25:11.020 [main] DEBUG org.springframework.web.SimpLogging - clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@3e5d10fc]
-12:25:11.020 [main] DEBUG org.springframework.web.SimpLogging - brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@3e5d10fc]
-12:25:11.020 [main] INFO  org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@3e5d10fc]]
-12:25:11.020 [main] INFO  org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler - Started.
-12:25:11.020 [main] DEBUG org.springframework.web.SimpLogging - clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-12:25:11.020 [main] DEBUG org.springframework.web.SimpLogging - brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-12:25:11.028 [main] INFO  com.example.demo.DemoApplication - Started DemoApplication in 2.559 seconds (JVM running for 2.831)
+07:24:24.974 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+07:24:25.039 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - 145 mappings in 'requestMappingHandlerMapping'
+07:24:25.054 [main] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+07:24:25.070 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+07:24:25.221 [main] INFO  org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+07:24:25.242 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+07:24:25.256 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+07:24:25.257 [main] DEBUG org.springframework.web.SimpLogging - clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+07:24:25.257 [main] DEBUG org.springframework.web.SimpLogging - clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+07:24:25.257 [main] INFO  org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler - Starting...
+07:24:25.258 [main] DEBUG org.springframework.web.SimpLogging - clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2197990b]
+07:24:25.258 [main] DEBUG org.springframework.web.SimpLogging - brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2197990b]
+07:24:25.258 [main] INFO  org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2197990b]]
+07:24:25.258 [main] INFO  org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler - Started.
+07:24:25.258 [main] DEBUG org.springframework.web.SimpLogging - clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+07:24:25.258 [main] DEBUG org.springframework.web.SimpLogging - brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+07:24:25.269 [main] INFO  com.example.demo.DemoApplication - Started DemoApplication in 2.706 seconds (JVM running for 3.003)
 🚀 Initializing scenarios from JSON files...
 🚀 Loading scenarios from JSON files...
-Hibernate: select scenario0_.id as id1_14_, scenario0_.artifacts as artifact2_14_, scenario0_.campaign_order as campaign3_14_, scenario0_.created_at as created_4_14_, scenario0_.defeat_condition as defeat_c5_14_, scenario0_.description as descript6_14_, scenario0_.difficulty as difficul7_14_, scenario0_.is_active as is_activ8_14_, scenario0_.is_campaign as is_campa9_14_, scenario0_.is_multiplayer as is_mult10_14_, scenario0_.map_height as map_hei11_14_, scenario0_.map_size as map_siz12_14_, scenario0_.map_width as map_wid13_14_, scenario0_.max_players as max_pla14_14_, scenario0_.name as name15_14_, scenario0_.neutral_creatures as neutral16_14_, scenario0_.next_scenario_id as next_sc17_14_, scenario0_.previous_scenario_id as previou18_14_, scenario0_.recommended_players as recomme19_14_, scenario0_.scenario_id as scenari20_14_, scenario0_.special_buildings as special21_14_, scenario0_.starting_resources as startin22_14_, scenario0_.terrain_distribution as terrain23_14_, scenario0_.time_limit as time_li24_14_, scenario0_.turn_limit as turn_li25_14_, scenario0_.updated_at as updated26_14_, scenario0_.victory_condition as victory27_14_, scenario0_.victory_requirement as victory28_14_ from scenarios scenario0_ where scenario0_.scenario_id=?
+Hibernate: select scenario0_.id as id1_15_, scenario0_.artifacts as artifact2_15_, scenario0_.campaign_order as campaign3_15_, scenario0_.created_at as created_4_15_, scenario0_.defeat_condition as defeat_c5_15_, scenario0_.description as descript6_15_, scenario0_.difficulty as difficul7_15_, scenario0_.is_active as is_activ8_15_, scenario0_.is_campaign as is_campa9_15_, scenario0_.is_multiplayer as is_mult10_15_, scenario0_.map_height as map_hei11_15_, scenario0_.map_size as map_siz12_15_, scenario0_.map_width as map_wid13_15_, scenario0_.max_players as max_pla14_15_, scenario0_.name as name15_15_, scenario0_.neutral_creatures as neutral16_15_, scenario0_.next_scenario_id as next_sc17_15_, scenario0_.previous_scenario_id as previou18_15_, scenario0_.recommended_players as recomme19_15_, scenario0_.scenario_id as scenari20_15_, scenario0_.special_buildings as special21_15_, scenario0_.starting_resources as startin22_15_, scenario0_.terrain_distribution as terrain23_15_, scenario0_.time_limit as time_li24_15_, scenario0_.turn_limit as turn_li25_15_, scenario0_.updated_at as updated26_15_, scenario0_.victory_condition as victory27_15_, scenario0_.victory_requirement as victory28_15_ from scenarios scenario0_ where scenario0_.scenario_id=?
 Hibernate: insert into scenarios (id, artifacts, campaign_order, created_at, defeat_condition, description, difficulty, is_active, is_campaign, is_multiplayer, map_height, map_size, map_width, max_players, name, neutral_creatures, next_scenario_id, previous_scenario_id, recommended_players, scenario_id, special_buildings, starting_resources, terrain_distribution, time_limit, turn_limit, updated_at, victory_condition, victory_requirement) values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 Hibernate: insert into scenario_objectives (scenario_id, completion_reward, current_value, is_completed, is_required, objective_description, objective_id, objective_title, objective_type, target_value) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 Hibernate: insert into scenario_objectives (scenario_id, completion_reward, current_value, is_completed, is_required, objective_description, objective_id, objective_title, objective_type, target_value) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 Hibernate: insert into scenario_starting_positions (scenario_id, castle_type, handicap, player_id, position_x, position_y, starting_army, starting_hero, starting_resources) values (?, ?, ?, ?, ?, ?, ?, ?, ?)
 ✨ Loaded scenario: conquest-classic - scenarios.conquest-classic.name
-Hibernate: select scenario0_.id as id1_14_, scenario0_.artifacts as artifact2_14_, scenario0_.campaign_order as campaign3_14_, scenario0_.created_at as created_4_14_, scenario0_.defeat_condition as defeat_c5_14_, scenario0_.description as descript6_14_, scenario0_.difficulty as difficul7_14_, scenario0_.is_active as is_activ8_14_, scenario0_.is_campaign as is_campa9_14_, scenario0_.is_multiplayer as is_mult10_14_, scenario0_.map_height as map_hei11_14_, scenario0_.map_size as map_siz12_14_, scenario0_.map_width as map_wid13_14_, scenario0_.max_players as max_pla14_14_, scenario0_.name as name15_14_, scenario0_.neutral_creatures as neutral16_14_, scenario0_.next_scenario_id as next_sc17_14_, scenario0_.previous_scenario_id as previou18_14_, scenario0_.recommended_players as recomme19_14_, scenario0_.scenario_id as scenari20_14_, scenario0_.special_buildings as special21_14_, scenario0_.starting_resources as startin22_14_, scenario0_.terrain_distribution as terrain23_14_, scenario0_.time_limit as time_li24_14_, scenario0_.turn_limit as turn_li25_14_, scenario0_.updated_at as updated26_14_, scenario0_.victory_condition as victory27_14_, scenario0_.victory_requirement as victory28_14_ from scenarios scenario0_ where scenario0_.scenario_id=?
+Hibernate: select scenario0_.id as id1_15_, scenario0_.artifacts as artifact2_15_, scenario0_.campaign_order as campaign3_15_, scenario0_.created_at as created_4_15_, scenario0_.defeat_condition as defeat_c5_15_, scenario0_.description as descript6_15_, scenario0_.difficulty as difficul7_15_, scenario0_.is_active as is_activ8_15_, scenario0_.is_campaign as is_campa9_15_, scenario0_.is_multiplayer as is_mult10_15_, scenario0_.map_height as map_hei11_15_, scenario0_.map_size as map_siz12_15_, scenario0_.map_width as map_wid13_15_, scenario0_.max_players as max_pla14_15_, scenario0_.name as name15_15_, scenario0_.neutral_creatures as neutral16_15_, scenario0_.next_scenario_id as next_sc17_15_, scenario0_.previous_scenario_id as previou18_15_, scenario0_.recommended_players as recomme19_15_, scenario0_.scenario_id as scenari20_15_, scenario0_.special_buildings as special21_15_, scenario0_.starting_resources as startin22_15_, scenario0_.terrain_distribution as terrain23_15_, scenario0_.time_limit as time_li24_15_, scenario0_.turn_limit as turn_li25_15_, scenario0_.updated_at as updated26_15_, scenario0_.victory_condition as victory27_15_, scenario0_.victory_requirement as victory28_15_ from scenarios scenario0_ where scenario0_.scenario_id=?
 Hibernate: insert into scenarios (id, artifacts, campaign_order, created_at, defeat_condition, description, difficulty, is_active, is_campaign, is_multiplayer, map_height, map_size, map_width, max_players, name, neutral_creatures, next_scenario_id, previous_scenario_id, recommended_players, scenario_id, special_buildings, starting_resources, terrain_distribution, time_limit, turn_limit, updated_at, victory_condition, victory_requirement) values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 Hibernate: insert into scenario_events (scenario_id, event_description, event_effect, event_id, event_title, event_type, is_repeatable, is_triggered, trigger_condition, trigger_turn) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 Hibernate: insert into scenario_objectives (scenario_id, completion_reward, current_value, is_completed, is_required, objective_description, objective_id, objective_title, objective_type, target_value) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 Hibernate: insert into scenario_objectives (scenario_id, completion_reward, current_value, is_completed, is_required, objective_description, objective_id, objective_title, objective_type, target_value) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 Hibernate: insert into scenario_starting_positions (scenario_id, castle_type, handicap, player_id, position_x, position_y, starting_army, starting_hero, starting_resources) values (?, ?, ?, ?, ?, ?, ?, ?, ?)
 ✨ Loaded scenario: temporal-rift - scenarios.temporal-rift.name
-Hibernate: select scenario0_.id as id1_14_, scenario0_.artifacts as artifact2_14_, scenario0_.campaign_order as campaign3_14_, scenario0_.created_at as created_4_14_, scenario0_.defeat_condition as defeat_c5_14_, scenario0_.description as descript6_14_, scenario0_.difficulty as difficul7_14_, scenario0_.is_active as is_activ8_14_, scenario0_.is_campaign as is_campa9_14_, scenario0_.is_multiplayer as is_mult10_14_, scenario0_.map_height as map_hei11_14_, scenario0_.map_size as map_siz12_14_, scenario0_.map_width as map_wid13_14_, scenario0_.max_players as max_pla14_14_, scenario0_.name as name15_14_, scenario0_.neutral_creatures as neutral16_14_, scenario0_.next_scenario_id as next_sc17_14_, scenario0_.previous_scenario_id as previou18_14_, scenario0_.recommended_players as recomme19_14_, scenario0_.scenario_id as scenari20_14_, scenario0_.special_buildings as special21_14_, scenario0_.starting_resources as startin22_14_, scenario0_.terrain_distribution as terrain23_14_, scenario0_.time_limit as time_li24_14_, scenario0_.turn_limit as turn_li25_14_, scenario0_.updated_at as updated26_14_, scenario0_.victory_condition as victory27_14_, scenario0_.victory_requirement as victory28_14_ from scenarios scenario0_ where scenario0_.scenario_id=?
+Hibernate: select scenario0_.id as id1_15_, scenario0_.artifacts as artifact2_15_, scenario0_.campaign_order as campaign3_15_, scenario0_.created_at as created_4_15_, scenario0_.defeat_condition as defeat_c5_15_, scenario0_.description as descript6_15_, scenario0_.difficulty as difficul7_15_, scenario0_.is_active as is_activ8_15_, scenario0_.is_campaign as is_campa9_15_, scenario0_.is_multiplayer as is_mult10_15_, scenario0_.map_height as map_hei11_15_, scenario0_.map_size as map_siz12_15_, scenario0_.map_width as map_wid13_15_, scenario0_.max_players as max_pla14_15_, scenario0_.name as name15_15_, scenario0_.neutral_creatures as neutral16_15_, scenario0_.next_scenario_id as next_sc17_15_, scenario0_.previous_scenario_id as previou18_15_, scenario0_.recommended_players as recomme19_15_, scenario0_.scenario_id as scenari20_15_, scenario0_.special_buildings as special21_15_, scenario0_.starting_resources as startin22_15_, scenario0_.terrain_distribution as terrain23_15_, scenario0_.time_limit as time_li24_15_, scenario0_.turn_limit as turn_li25_15_, scenario0_.updated_at as updated26_15_, scenario0_.victory_condition as victory27_15_, scenario0_.victory_requirement as victory28_15_ from scenarios scenario0_ where scenario0_.scenario_id=?
 Hibernate: insert into scenarios (id, artifacts, campaign_order, created_at, defeat_condition, description, difficulty, is_active, is_campaign, is_multiplayer, map_height, map_size, map_width, max_players, name, neutral_creatures, next_scenario_id, previous_scenario_id, recommended_players, scenario_id, special_buildings, starting_resources, terrain_distribution, time_limit, turn_limit, updated_at, victory_condition, victory_requirement) values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 Hibernate: insert into scenario_events (scenario_id, event_description, event_effect, event_id, event_title, event_type, is_repeatable, is_triggered, trigger_condition, trigger_turn) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 Hibernate: insert into scenario_objectives (scenario_id, completion_reward, current_value, is_completed, is_required, objective_description, objective_id, objective_title, objective_type, target_value) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
@@ -201,71 +177,205 @@ Hibernate: insert into scenario_starting_positions (scenario_id, castle_type, ha
 Hibernate: insert into scenario_starting_positions (scenario_id, castle_type, handicap, player_id, position_x, position_y, starting_army, starting_hero, starting_resources) values (?, ?, ?, ?, ?, ?, ?, ?, ?)
 Hibernate: insert into scenario_starting_positions (scenario_id, castle_type, handicap, player_id, position_x, position_y, starting_army, starting_hero, starting_resources) values (?, ?, ?, ?, ?, ?, ?, ?, ?)
 ✨ Loaded scenario: multiplayer-arena - scenarios.multiplayer-arena.name
-Hibernate: select scenario0_.id as id1_14_, scenario0_.artifacts as artifact2_14_, scenario0_.campaign_order as campaign3_14_, scenario0_.created_at as created_4_14_, scenario0_.defeat_condition as defeat_c5_14_, scenario0_.description as descript6_14_, scenario0_.difficulty as difficul7_14_, scenario0_.is_active as is_activ8_14_, scenario0_.is_campaign as is_campa9_14_, scenario0_.is_multiplayer as is_mult10_14_, scenario0_.map_height as map_hei11_14_, scenario0_.map_size as map_siz12_14_, scenario0_.map_width as map_wid13_14_, scenario0_.max_players as max_pla14_14_, scenario0_.name as name15_14_, scenario0_.neutral_creatures as neutral16_14_, scenario0_.next_scenario_id as next_sc17_14_, scenario0_.previous_scenario_id as previou18_14_, scenario0_.recommended_players as recomme19_14_, scenario0_.scenario_id as scenari20_14_, scenario0_.special_buildings as special21_14_, scenario0_.starting_resources as startin22_14_, scenario0_.terrain_distribution as terrain23_14_, scenario0_.time_limit as time_li24_14_, scenario0_.turn_limit as turn_li25_14_, scenario0_.updated_at as updated26_14_, scenario0_.victory_condition as victory27_14_, scenario0_.victory_requirement as victory28_14_ from scenarios scenario0_ where scenario0_.scenario_id=?
+Hibernate: select scenario0_.id as id1_15_, scenario0_.artifacts as artifact2_15_, scenario0_.campaign_order as campaign3_15_, scenario0_.created_at as created_4_15_, scenario0_.defeat_condition as defeat_c5_15_, scenario0_.description as descript6_15_, scenario0_.difficulty as difficul7_15_, scenario0_.is_active as is_activ8_15_, scenario0_.is_campaign as is_campa9_15_, scenario0_.is_multiplayer as is_mult10_15_, scenario0_.map_height as map_hei11_15_, scenario0_.map_size as map_siz12_15_, scenario0_.map_width as map_wid13_15_, scenario0_.max_players as max_pla14_15_, scenario0_.name as name15_15_, scenario0_.neutral_creatures as neutral16_15_, scenario0_.next_scenario_id as next_sc17_15_, scenario0_.previous_scenario_id as previou18_15_, scenario0_.recommended_players as recomme19_15_, scenario0_.scenario_id as scenari20_15_, scenario0_.special_buildings as special21_15_, scenario0_.starting_resources as startin22_15_, scenario0_.terrain_distribution as terrain23_15_, scenario0_.time_limit as time_li24_15_, scenario0_.turn_limit as turn_li25_15_, scenario0_.updated_at as updated26_15_, scenario0_.victory_condition as victory27_15_, scenario0_.victory_requirement as victory28_15_ from scenarios scenario0_ where scenario0_.scenario_id=?
 Hibernate: insert into scenarios (id, artifacts, campaign_order, created_at, defeat_condition, description, difficulty, is_active, is_campaign, is_multiplayer, map_height, map_size, map_width, max_players, name, neutral_creatures, next_scenario_id, previous_scenario_id, recommended_players, scenario_id, special_buildings, starting_resources, terrain_distribution, time_limit, turn_limit, updated_at, victory_condition, victory_requirement) values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 ✨ Loaded scenario: dragon-campaign - scenarios.dragon-campaign.name
 ✅ All scenarios loaded successfully from JSON files!
 ✅ Scenario initialization completed!
-12:25:20.547 [http-nio-8080-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-12:25:20.548 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-12:25:20.548 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
-12:25:20.548 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
-12:25:20.548 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected FixedThemeResolver
-12:25:20.549 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@ab5954d
-12:25:20.549 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@3723de42
-12:25:20.549 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
-12:25:20.550 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms
-12:25:20.556 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/health", parameters={}
-12:25:20.559 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to com.example.demo.controller.GameController#health()
-12:25:20.572 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
-12:25:20.573 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{status=UP}]
-12:25:20.579 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
-12:25:26.028 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/game/status", parameters={}
-12:25:26.030 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
-12:25:26.030 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
-12:25:26.031 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
-12:25:26.032 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
-12:25:26.033 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
-12:25:26.035 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
-12:25:26.035 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Tue Jul 22 12:25:26 CEST 2025, status=404, error=Not Found, path=/api/game/status}]
-12:25:26.042 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
-12:25:26.076 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/game/create", parameters={}
-12:25:26.077 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
-12:25:26.078 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
-12:25:26.078 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
-12:25:26.078 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
-12:25:26.078 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
-12:25:26.078 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
-12:25:26.078 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Tue Jul 22 12:25:26 CEST 2025, status=404, error=Not Found, path=/api/game/create}]
-12:25:26.079 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
-12:25:26.091 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/game/status", parameters={}
-12:25:26.091 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
-12:25:26.091 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
-12:25:26.092 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
-12:25:26.092 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
-12:25:26.092 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
-12:25:26.092 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
-12:25:26.092 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Tue Jul 22 12:25:26 CEST 2025, status=404, error=Not Found, path=/api/game/status}]
-12:25:26.093 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
-12:25:26.102 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/game/status", parameters={}
-12:25:26.102 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
-12:25:26.103 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
-12:25:26.103 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
-12:25:26.103 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
-12:25:26.103 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
-12:25:26.104 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
-12:25:26.104 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Tue Jul 22 12:25:26 CEST 2025, status=404, error=Not Found, path=/api/game/status}]
-12:25:26.104 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  24.643 s
-[INFO] Finished at: 2025-07-22T12:25:32+02:00
-[INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:2.7.18:run (default-cli) on project demo: Application finished with exit code: 137 -> [Help 1]
-[ERROR] 
-[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR] 
-[ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+07:24:31.467 [http-nio-8080-exec-2] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+07:24:31.471 [http-nio-8080-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+07:24:31.471 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
+07:24:31.471 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
+07:24:31.471 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected FixedThemeResolver
+07:24:31.473 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@3c48bbf3
+07:24:31.473 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@73625632
+07:24:31.473 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+07:24:31.473 [http-nio-8080-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+07:24:31.497 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/temporal/city/data", parameters={}
+07:24:31.497 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/collection/translation-modes", parameters={}
+07:24:31.497 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/runic-forge/grammar-examples", parameters={}
+07:24:31.497 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/temporal/combat/data", parameters={}
+07:24:31.497 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/temporal/heroes/data", parameters={}
+07:24:31.497 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/runic-forge/objects?gameId=1", parameters={masked}
+07:24:31.502 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:24:31.503 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:24:31.502 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:24:31.502 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:24:31.503 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:24:31.503 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:24:31.506 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:24:31.506 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:24:31.506 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:24:31.506 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:24:31.506 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:24:31.506 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:24:31.506 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:24:31.506 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:24:31.506 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:24:31.507 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:24:31.507 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:24:31.506 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:24:31.520 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+07:24:31.520 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+07:24:31.520 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+07:24:31.520 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+07:24:31.520 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error?gameId=1", parameters={masked}
+07:24:31.520 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+07:24:31.522 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:24:31.522 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:24:31.522 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:24:31.522 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:24:31.522 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:24:31.522 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:24:31.538 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:24:31.538 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:24:31.538 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:24:31.538 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:24:31.538 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:24:31.538 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:24:31.539 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:24:31 CEST 2025, status=404, error=Not Found, path=/api/temporal/city/data}]
+07:24:31.539 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:24:31 CEST 2025, status=404, error=Not Found, path=/api/runic-forge/objects (truncated)...]
+07:24:31.539 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:24:31 CEST 2025, status=404, error=Not Found, path=/api/temporal/combat/dat (truncated)...]
+07:24:31.539 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:24:31 CEST 2025, status=404, error=Not Found, path=/api/runic-forge/grammar (truncated)...]
+07:24:31.539 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:24:31 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/heroe (truncated)...]
+07:24:31.539 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:24:31 GMT+02:00 2025, status=404, error=Not Found, path=/api/collection/tra (truncated)...]
+07:24:31.574 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:24:31.574 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:24:31.575 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:24:31.576 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:24:31.578 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:24:31.578 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:24:33.114 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/health", parameters={}
+07:24:33.115 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to com.example.demo.controller.GameController#health()
+07:24:33.118 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:24:33.118 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{status=UP}]
+07:24:33.120 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+07:25:03.424 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/health", parameters={}
+07:25:03.424 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to com.example.demo.controller.GameController#health()
+07:25:03.425 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:25:03.425 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{status=UP}]
+07:25:03.426 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+07:25:24.903 [MessageBroker-2] INFO  org.springframework.web.socket.config.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 3, active threads = 1, queued tasks = 1, completed tasks = 1]
+07:29:02.783 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/health", parameters={}
+07:29:02.783 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to com.example.demo.controller.GameController#health()
+07:29:02.784 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:29:02.784 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{status=UP}]
+07:29:02.784 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+07:29:03.280 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/temporal/combat/data", parameters={}
+07:29:03.280 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/runic-forge/grammar-examples", parameters={}
+07:29:03.280 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/collection/translation-modes", parameters={}
+07:29:03.280 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/temporal/city/data", parameters={}
+07:29:03.280 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/temporal/heroes/data", parameters={}
+07:29:03.281 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:29:03.281 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:29:03.281 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:29:03.281 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/runic-forge/objects?gameId=1", parameters={masked}
+07:29:03.282 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:29:03.281 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:29:03.282 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:29:03.284 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:29:03.284 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:29:03.284 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:29:03.284 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:29:03.285 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+07:29:03.285 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:29:03.286 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+07:29:03.286 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:29:03.286 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:29:03.286 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error?gameId=1", parameters={masked}
+07:29:03.286 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:29:03.286 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:29:03.286 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:29:03.286 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:29:03.286 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:29:03.286 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:29:03.286 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+07:29:03.286 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:29:03 GMT+02:00 2025, status=404, error=Not Found, path=/api/runic-forge/gr (truncated)...]
+07:29:03.288 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:29:03.288 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:29:03.288 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:29:03.288 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:29:03.288 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+07:29:03.288 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:29:03.288 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:29:03 GMT+02:00 2025, status=404, error=Not Found, path=/api/collection/tra (truncated)...]
+07:29:03.288 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:29:03.288 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:29:03 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/city/ (truncated)...]
+07:29:03.289 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:29:03.289 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:29:03 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/heroe (truncated)...]
+07:29:03.289 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:29:03.289 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:29:03.284 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:29:03.290 [http-nio-8080-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:29:03.290 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:29:03.290 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+07:29:03.291 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:29:03.291 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:29:03 GMT+02:00 2025, status=404, error=Not Found, path=/api/runic-forge/ob (truncated)...]
+07:29:03.291 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:29:03.293 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:29:03.293 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:29:03.294 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:29:03 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/comba (truncated)...]
+07:29:03.295 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:29:14.917 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/collection/translation-modes", parameters={}
+07:29:14.918 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/temporal/city/data", parameters={}
+07:29:14.918 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/temporal/combat/data", parameters={}
+07:29:14.918 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/temporal/heroes/data", parameters={}
+07:29:14.918 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:29:14.918 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/runic-forge/grammar-examples", parameters={}
+07:29:14.918 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:29:14.918 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:29:14.918 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:29:14.919 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:29:14.919 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/runic-forge/objects?gameId=1", parameters={masked}
+07:29:14.919 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:29:14.919 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:29:14.920 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:29:14.920 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:29:14.920 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:29:14.920 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:29:14.920 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+07:29:14.920 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:29:14.920 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+07:29:14.920 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+07:29:14.920 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+07:29:14.920 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:29:14.920 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:29:14.920 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:29:14.921 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:29:14.920 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:29:14.921 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:29:14 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/city/ (truncated)...]
+07:29:14.921 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
+07:29:14.921 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:29:14.921 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+07:29:14.921 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+07:29:14.921 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:29:14.921 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:29:14.922 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:29:14 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/comba (truncated)...]
+07:29:14.922 [http-nio-8080-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:29:14.923 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:29:14.921 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+07:29:14.924 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:29:14.924 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error?gameId=1", parameters={masked}
+07:29:14.920 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:29:14.925 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+07:29:14.923 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:29:14.925 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:29:14 GMT+02:00 2025, status=404, error=Not Found, path=/api/temporal/heroe (truncated)...]
+07:29:14.925 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:29:14.926 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:29:14 GMT+02:00 2025, status=404, error=Not Found, path=/api/runic-forge/ob (truncated)...]
+07:29:14.927 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:29:14.925 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:29:14.927 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:29:14.927 [http-nio-8080-exec-9] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:29:14.927 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:29:14 GMT+02:00 2025, status=404, error=Not Found, path=/api/collection/tra (truncated)...]
+07:29:14.927 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Wed Jul 23 07:29:14 GMT+02:00 2025, status=404, error=Not Found, path=/api/runic-forge/gr (truncated)...]
+07:29:14.928 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:29:14.928 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+07:29:52.785 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/health", parameters={}
+07:29:52.786 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to com.example.demo.controller.GameController#health()
+07:29:52.787 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:29:52.787 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{status=UP}]
+07:29:52.787 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+07:30:22.788 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/health", parameters={}
+07:30:22.788 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to com.example.demo.controller.GameController#health()
+07:30:22.789 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+07:30:22.789 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{status=UP}]
+07:30:22.790 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK

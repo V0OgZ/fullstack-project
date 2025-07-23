@@ -300,7 +300,6 @@ public class HeroesReforgedEngine {
 
 ### 📈 **Commercial Goals**
 - **10,000+ DAU** within 6 months of launch
-- **$1M+ revenue** in first year
 - **90%+ positive reviews** on all platforms
 - **Competitive esports scene** with tournaments
 - **Active modding community** with custom content

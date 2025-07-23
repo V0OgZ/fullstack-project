@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.Random;
+import com.example.demo.model.GameState;
+import com.example.demo.model.GameStatus;
 
 @Service
 public class GameService {
@@ -1284,7 +1286,7 @@ public class GameService {
         
         String status = (String) newGameState.get("status");
         if (status != null) {
-            gameState.setGameStatus(status);
+            gameState.setGameStatus(GameStatus.valueOf(status.toUpperCase()));
         }
         
         // Save updated game state
