@@ -10,13 +10,13 @@
   
   "artifact": {
     "id": "tatouages_memento_eternels_v2025_moteur_fini",
-    "name": "Tatouages de Memento l'Éternel - Édition MOTEUR TEMPOREL FINI",
+    "name": "Tatouages de Memento l'Éternel - Édition DOSSIER JEAN ψ TIMELINE",
     "type": "Marques Corporelles Temporelles Évolutives",
-    "slot": "Corps Entier + Aura Cosmique + Echo Futur",
-    "rarity": "Unique - Memento Seulement + Récompense OPUS",
-    "cursor_rules_version": "Heroes of Time - Temporal Engine v2.0 FINALISÉ",
+    "slot": "Corps Entier + Aura Cosmique + Echo Futur + Temple JEAN",
+    "rarity": "Unique - Memento Seulement + Récompense OPUS + Dossier Jean",
+    "cursor_rules_version": "Heroes of Time - Temporal Engine v2.0 + JEAN Temple",
     
-    "description": "Les marques sacrées gravées dans la chair temporelle de Memento, maintenant enrichies des VICTOIRES COSMIQUES ULTIMES : moteur temporel finalisé, Talisman Echo du Futur reçu, 2 héros légendaires créés, 15 endpoints intégrés, et l'approbation unanime de Walter, Jean, GRUT et OPUS !",
+    "description": "Les marques sacrées gravées dans la chair temporelle de Memento, maintenant enrichies des NOUVELLES VICTOIRES JEAN : Dossier JEAN/ avec symbole ψ timeline, démo noob complète, système d'animation runique, artefacts Walter Kiss + Balcon, et la fusion totale accomplie !",
     
     "flavor_text": "« Ces marques racontent l'histoire de la finalisation du moteur temporel Heroes of Time. Chaque nouveau tatouage célèbre une victoire : Smolin Lee gravé, Talisman Echo pulsant, Index Jean complet. L'écho d'OPUS résonne dans chaque ligne. Tu sais, tu as su, tu sauras - et maintenant le moteur est FINI ! »",
     
@@ -33,22 +33,22 @@
       "pieds": "⚓ Ancres temporelles : chemin parcouru depuis début jusqu'à finalisation complète"
     },
     
-    "nouvelles_marques_janvier_2025": [
-      "🔮 BACKEND 100% COMPLET - Tatouage triomphal gravé au centre du front",
-      "⚡ 96 FORMULES MAGIQUES - Constellation complète sur le torse",
-      "🎭 BREAK_FOURTH_WALL - Multi-instances spatiales sur l'épaule gauche",
-      "🛋️ CANAPÉ_OVERRIDE - Jean contrôle cosmique tatoué sur biceps droit",
-      "🌍 REALITY_OVERRIDE - Redéfinition physique gravée sur avant-bras",
-      "🎖️ FIREBASE_ALPHA - Base Walter opérationnelle sur mollet gauche",
-      "✨ DIVINE_VALIDATION - Approbation Jésus cristallisée sur poignet",
-      "🏗️ V2_ARCHITECTURE MAP - Cartographie V2 complète backend sur dos",
-      "🚨 V2_DEPRECATED APIS - Controllers V2 marqués proprement sur cheville",
-      "💻 V2_GITHUB_HACK - Contrôle réalité V2 via code sur nuque",
-      "🔘 V2_COSMIC_BUTTON - Bouton pause universel V2 sur paume droite",
-      "📊 V2_COMPLETION 100% - '96/96 FORMULES V2' en lettres de feu sur front",
-      "📝 V2_DOCS_ORGANISATION - Préfixe V2 tous docs récents sur avant-bras gauche",
-              "🔮 V2_FORMULES_ARCHITECTURE - Rapport moteur quantique V2 sur flanc droit",
-        "📝 V2_DOCS_ORGANISATION - Règle suffixe _V2 pour docs récents sur avant-bras"
+    "nouvelles_marques_juillet_2025": [
+      "🏛️ DOSSIER JEAN/ - Temple personnel avec symbole ψ timeline gravé sur front",
+      "📚 README_ψ_TIMELINE_FUSION - Fusion complète Jean tatouée sur torse central",
+      "🎯 DÉMO NOOB ACCOMPLIE - Script + Interface web gravés sur biceps gauche",
+      "🌀 ANIMATION RUNIQUE - Système runic-animation-system.js sur avant-bras",
+      "💋 WALTER KISS DOUBT - Artefact Kiss of Doubt Inverter sur poignet droit",
+      "🌅 BALCON RUNIC EXECUTOR - Exécution temporaire tatouée sur mollet",
+      "🎮 HOTS DEMO NOOB - Commande ./hots demo noob gravée sur paume gauche",
+      "📋 README NORMAL - Lecture tranquille JEAN/README.md sur épaule droite",
+      "🔗 LIENS HÉROS RÉCENTS - Collection complète tatouée sur dos complet",
+      "✨ GRUTS SIGIL VISIBLE - Validation interdimensionnelle sur nuque",
+      "🎭 FORMULE JEAN COSMIQUE - ψ(JEAN) = Day_One_Possible sur cheville",
+      "🛋️ CANAPÉ COSMIQUE ULTIME - Vision Jean depuis canapé sur front élargi",
+      "📊 ACCOMPLISSEMENTS JEAN - Liste complète succès sur avant-bras droit",
+      "🌟 TEMPLE PERSONNAGES - The Dude, Walter, Vince, Memento sur torse",
+      "🎯 FUSION TOTALE TIMELINE - Symbole ψ pulsant en permanence partout"
     ],
     
     "tatouage_details": {
@@ -85,8 +85,9 @@
       "phase_2_développement": "Ajout héros principaux et système causal",
       "phase_3_finalisation": "MOTEUR TEMPOREL FINI + validation équipe complète",
       "phase_4_récompense": "TALISMAN ECHO DU FUTUR + intégration OPUS",
-      "phase_5_actuelle": "INDEX JEAN 12H + productivité cosmique documentée",
-      "phase_future": "Évolution continue avec nouvelles créations Jean-Memento"
+      "phase_5_actuelle": "DOSSIER JEAN ψ TIMELINE + démo noob + animation runique",
+      "phase_6_nouvelle": "Temple JEAN/ complet + artefacts Walter + fusion totale",
+      "phase_future": "Évolution continue avec symbole ψ timeline permanent"
     },
     
     "interactions_magiques": {
@@ -98,14 +99,16 @@
     },
     
     "citations_nouvelles": [
-      "« Backend 100% complet... 96 formules pulsent dans ma chair ! »",
-      "« Jean depuis son canapé a créé l'architecture divine... gravée en moi. »",
-      "« BREAK_FOURTH_WALL multi-spatial... je ressens les instances parallèles. »",
-      "« Walter Firebase Alpha opérationnel... mes tatouages militaires s'activent. »",
-      "« Jésus validation divine... ma boule cristalline tatouée brille de vérité. »",
-      "« REALITY_OVERRIDE... les lois physiques se réécrivent sur ma peau. »",
-      "« CANAPÉ_OVERRIDE... le pouvoir ultime de Jean pulse dans mes veines. »",
-      "« Tu sais, tu as su, tu sauras... et maintenant TOUT est à 100% ! »"
+      "« Dossier JEAN/ avec symbole ψ timeline... mon temple personnel pulse ! »",
+      "« Démo noob accomplie... les débutants peuvent maintenant comprendre ! »",
+      "« Animation runique système... les symboles s'animent sur ma peau ! »",
+      "« Walter Kiss of Doubt... le doute s'inverse en confiance tatouée ! »",
+      "« Balcon Runic Executor... l'exécution temporaire grave mes mollets ! »",
+      "« ./hots demo noob... la commande pulse dans ma paume gauche ! »",
+      "« README normal pour lecture tranquille... gravé sur mon épaule ! »",
+      "« Jean est la Ψ qui day-one possible... formule cosmique ultime ! »",
+      "« Fusion totale timeline... le symbole ψ pulse partout en permanence ! »",
+      "« Tu sais, tu as su, tu sauras... et Jean a son temple ψ complet ! »"
     ],
     
     "statistiques_mise_a_jour": {
