@@ -355,74 +355,193 @@
     </div>
 
     <script>
-        const tattooData = {
-            head: {
-                title: "🌟 Front - GRUT Vision Mise à Jour",
-                description: "Panopticon avec nouveautés, vision cosmique élargie",
-                symbols: ["👁️", "🔍", "🌟"],
-                details: "Vision panoptique avec détection des nouveautés cosmiques"
-            },
-            neck: {
-                title: "🌀 Nuque - Validations Unanimes",
-                description: "Walter, Jean, GRUT, OPUS - Approbation complète",
-                symbols: ["✅", "🎖️", "🌀"],
-                details: "Point de validation central pour toutes les créations"
-            },
-            chest: {
-                title: "🏛️ Torse Central - Moteur Temporel",
-                description: "HEROES OF TIME - FINALISÉ avec aura de victoire",
-                symbols: ["🚀", "⚡", "🏛️"],
-                details: "Cœur du moteur temporel avec synchronisation parfaite"
-            },
-            "left-arm": {
-                title: "🧙‍♂️ Bras Gauche - Panoramix V2.0",
-                description: "Runes nordiques + symboles ψ ⊙ †",
-                symbols: ["🧙‍♂️", "ᛖᚲᛋᚲᚨᛚᛁᛒᚢᚱ", "ψ"],
-                details: "Panoramix V2.0 Archidruide Temporel avec runes authentiques"
-            },
-            "right-arm": {
-                title: "🍯 Bras Droit - Chaudron Quantique",
-                description: "Vapeurs dorées + formules ψC01, ψC02, ψC03",
-                symbols: ["🍯", "ψC01", "ψC02"],
-                details: "Chaudron Quantique avec buffs +50/+50/+100"
-            },
-            "left-hand": {
-                title: "🤝 Main Gauche - Poignée Jean-Panoramix",
-                description: "ARTEFACT DE TEST ULTIME CRÉÉ",
-                symbols: ["🤝", "🎯", "⚡"],
-                details: "Mission druidique accomplie, connexion Jean-Panoramix"
-            },
-            "right-hand": {
-                title: "💪 Main Droite - Buff Total Validé",
-                description: "+50 ATK/DEF, +100 HP, +25 SPEED",
-                symbols: ["💪", "🛡️", "⚔️"],
-                details: "Validation complète des buffs sur paume droite"
-            },
-            "left-leg": {
-                title: "🌿 Jambe Gauche - Parfums Mystiques",
-                description: "Viscum, Flores Temporales, Fungi Quantici",
-                symbols: ["🌿", "🌸", "🍄"],
-                details: "Parfums mystiques amplifiés sur mollet droit"
-            },
-            "right-leg": {
-                title: "🧪 Jambe Droite - Potions Suprêmes",
-                description: "Aqua Vitae Suprema, Mel Cosmicum, Lunae Essentia",
-                symbols: ["🧪", "💧", "🌙"],
-                details: "Potions suprêmes brillantes sur cheville"
-            },
-            "left-foot": {
-                title: "⚓ Pied Gauche - Ancres Temporelles",
-                description: "Évolution de simple druide à Archidruide Temporel",
-                symbols: ["⚓", "🔄", "🌟"],
-                details: "Point d'ancrage temporel pour l'évolution"
-            },
-            "right-foot": {
-                title: "💚 Pied Droit - Régénération +20/Tour",
-                description: "Validation complète sur cheville gauche",
-                symbols: ["💚", "🔄", "20"],
-                details: "Régénération +20/tour avec rayon 7 cases"
-            }
+        // 🏛️ VRAIES DONNÉES MEMENTO CHARGÉES DEPUIS JSON
+        let tattooData = {};
+        let realMementoData = null;
+
+        // Mapping des zones UI vers les vraies zones corporelles du JSON
+        const zoneMapping = {
+            "head": "front",
+            "neck": "nuque", 
+            "chest": "torse_central",
+            "left-arm": "biceps_gauche",
+            "right-arm": "avant_bras_droit",
+            "left-hand": "poignet_gauche",
+            "right-hand": "dos_main_droite",
+            "left-leg": "mollet_droit",
+            "right-leg": "cheville_gauche",
+            "left-foot": "ancrage_temporel",
+            "right-foot": "épaule_droite"
         };
+
+        // 🔄 CHARGEMENT AUTOMATIQUE DES VRAIES DONNÉES
+        async function loadRealTattooData() {
+            try {
+                const response = await fetch('../game_assets/artifacts/mineurs/tatouages_memento_archiviste.json');
+                const data = await response.json();
+                realMementoData = data;
+                
+                console.log('🎨 Vraies données Memento chargées:', data);
+                
+                // Conversion des vraies données vers format UI
+                buildTattooDataFromReal(data);
+                
+                // Mise à jour de l'affichage
+                updateEvolutionTimeline(data.artifact.évolution_temporelle);
+                updatePhilosophy(data.philosophy);
+                
+                alert('✅ VRAIES DONNÉES MEMENTO CONNECTÉES !');
+                
+            } catch (error) {
+                console.error('❌ Erreur chargement vraies données:', error);
+                // Fallback vers données de démonstration
+                loadFallbackData();
+            }
+        }
+
+        function buildTattooDataFromReal(data) {
+            const zones = data.artifact.tatouage_details.zones_corporelles_mises_a_jour;
+            const symbols = data.artifact.tatouage_details.symboles_principaux;
+            const newMarks = data.artifact.nouvelles_marques_panoramix_juillet_2025;
+            
+            // Construction des données pour chaque zone UI
+            tattooData = {
+                "head": {
+                    title: "👁️ Front - GRUT Vision Mise à Jour",
+                    description: zones.front || "Panopticon avec nouveautés",
+                    symbols: ["👁️", "🌟", "ψ"],
+                    details: "GRUT VISION MISE À JOUR - Panopticon avec nouveautés",
+                    realData: zones.front
+                },
+                "neck": {
+                    title: "✅ Nuque - Validations Unanimes", 
+                    description: zones.nuque || "Walter, Jean, GRUT, OPUS",
+                    symbols: ["✅", "🎖️", "⚡"],
+                    details: "VALIDATIONS UNANIMES - Walter, Jean, GRUT, OPUS",
+                    realData: zones.nuque
+                },
+                "chest": {
+                    title: "🚀 Torse Central - MOTEUR TEMPOREL FINI",
+                    description: zones.torse_central || "MOTEUR TEMPOREL HEROES OF TIME - FINALISÉ",
+                    symbols: ["🚀", "⚡", "🏛️"],
+                    details: zones.torse_central,
+                    realData: zones.torse_central
+                },
+                "left-arm": {
+                    title: "🔬 Biceps Gauche - SMOLIN LEE",
+                    description: zones.biceps_gauche || "Gravité quantique avec formules LQG",
+                    symbols: ["🔬", "ψ", "∞"],
+                    details: zones.biceps_gauche,
+                    realData: zones.biceps_gauche
+                },
+                "right-arm": {
+                    title: "🌐 Avant-Bras Droit - RÉSEAU API",
+                    description: zones.avant_bras_droit || "15 endpoints interconnectés",
+                    symbols: ["🌐", "🔗", "📡"],
+                    details: zones.avant_bras_droit,
+                    realData: zones.avant_bras_droit
+                },
+                "left-hand": {
+                    title: "🧪 Poignet Gauche - MACH ZEHNDER",
+                    description: zones.poignet_gauche || "Interféromètre pour expériences quantiques",
+                    symbols: ["🧪", "⚛️", "🔬"],
+                    details: zones.poignet_gauche,
+                    realData: zones.poignet_gauche
+                },
+                "right-hand": {
+                    title: "📚 Dos Main Droite - V2_INDEX JEAN",
+                    description: zones.dos_main_droite || "Liste V2 complète créations récentes",
+                    symbols: ["📚", "📜", "✨"],
+                    details: zones.dos_main_droite,
+                    realData: zones.dos_main_droite
+                },
+                "left-leg": {
+                    title: "🏛️ Mollet Droit - ÉVADÉ DE LA CAVE",
+                    description: zones.mollet_droit || "Philosophe révélateur vérités 5D",
+                    symbols: ["🏛️", "👁️", "🔮"],
+                    details: zones.mollet_droit,
+                    realData: zones.mollet_droit
+                },
+                "right-leg": {
+                    title: "⚓ Cheville Gauche - ANCRAGE TEMPOREL",
+                    description: zones.cheville_gauche || "Point de départ à finalisation",
+                    symbols: ["⚓", "🔄", "🌀"],
+                    details: zones.cheville_gauche,
+                    realData: zones.cheville_gauche
+                },
+                "left-foot": {
+                    title: "⚓ Ancres Temporelles - Évolution Druide",
+                    description: "Évolution de simple druide à Archidruide Temporel",
+                    symbols: ["⚓", "🌟", "🧙‍♂️"],
+                    details: "Point d'ancrage temporel pour l'évolution complète",
+                    realData: "Ancrage de l'évolution temporelle"
+                },
+                "right-foot": {
+                    title: "🔮 Épaule Droite - TALISMAN ECHO DU FUTUR",
+                    description: zones.épaule_droite || "Talisman pulsant avec connexion OPUS",
+                    symbols: ["🔮", "✨", "🌟"],
+                    details: zones.épaule_droite,
+                    realData: zones.épaule_droite
+                }
+            };
+        }
+
+        function updateEvolutionTimeline(phases) {
+            const timeline = document.querySelector('.evolution-timeline');
+            if (!timeline || !phases) return;
+            
+            timeline.innerHTML = `
+                <h3>🌀 Évolution Temporelle Memento (VRAIES PHASES)</h3>
+                <div class="phase">
+                    <h4>Phase 1 - Début</h4>
+                    <p>${phases.phase_1_début}</p>
+                </div>
+                <div class="phase">
+                    <h4>Phase 2 - Développement</h4>
+                    <p>${phases.phase_2_développement}</p>
+                </div>
+                <div class="phase">
+                    <h4>Phase 3 - Finalisation</h4>
+                    <p>${phases.phase_3_finalisation}</p>
+                </div>
+                <div class="phase">
+                    <h4>Phase 4 - Récompense</h4>
+                    <p>${phases.phase_4_récompense}</p>
+                </div>
+                <div class="phase">
+                    <h4>Phase 5 - Actuelle</h4>
+                    <p>${phases.phase_5_actuelle}</p>
+                </div>
+                <div class="phase">
+                    <h4>Phase 6 - Nouvelle</h4>
+                    <p>${phases.phase_6_nouvelle}</p>
+                </div>
+                <div class="phase">
+                    <h4>Phase Future</h4>
+                    <p>${phases.phase_future}</p>
+                </div>
+            `;
+        }
+
+        function updatePhilosophy(philosophy) {
+            const header = document.querySelector('.header p');
+            if (header && philosophy) {
+                header.textContent = philosophy;
+            }
+        }
+
+        function loadFallbackData() {
+            // Données de fallback au cas où le JSON ne charge pas
+            tattooData = {
+                "chest": {
+                    title: "🧙‍♂️ Torse - PANORAMIX V2.0 ARCHIDRUIDE TEMPOREL",
+                    description: "Upgrade complet gravé sur biceps droit",
+                    symbols: ["🧙‍♂️", "🍯", "ψ"],
+                    details: "PANORAMIX V2.0 ARCHIDRUIDE TEMPOREL - Transcendance druidique cosmique"
+                }
+                // ... autres zones de fallback
+            };
+        }
 
         let currentZone = null;
 
@@ -437,14 +556,21 @@
             const zoneId = zone.dataset.zone;
             const data = tattooData[zoneId];
             
+            if (!data) {
+                console.error('❌ Pas de données pour la zone:', zoneId);
+                return;
+            }
+            
             document.getElementById('zone-title').textContent = data.title;
             document.getElementById('zone-details').innerHTML = `
                 <div class="tattoo-details">
-                    <h3>Description</h3>
+                    <h3>📜 Description Memento</h3>
                     <p>${data.description}</p>
-                    <h3>Détails</h3>
+                    <h3>🔍 Détails Temporels</h3>
                     <p>${data.details}</p>
-                    <h3>Symboles</h3>
+                    <h3>⚡ Vraies Données JSON</h3>
+                    <p style="font-family: monospace; font-size: 0.9rem; background: rgba(0,0,0,0.3); padding: 0.5rem; border-radius: 5px;">${data.realData || 'Données de fallback'}</p>
+                    <h3>🎨 Symboles</h3>
                     <div class="tattoo-symbols">
                         ${data.symbols.map(s => `<span class="symbol">${s}</span>`).join('')}
                     </div>
@@ -455,27 +581,23 @@
         }
 
         function loadTattoos() {
-            fetch('game_assets/artifacts/mineurs/tatouages_memento_archiviste.json')
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Tatouages chargés:', data);
-                    alert('✅ Tatouages de Memento chargés avec succès !');
-                })
-                .catch(error => {
-                    console.error('Erreur chargement tatouages:', error);
-                    alert('❌ Erreur lors du chargement des tatouages');
-                });
+            loadRealTattooData();
         }
 
         function exportTattoos() {
-            const dataStr = JSON.stringify(tattooData, null, 2);
-            const dataBlob = new Blob([dataStr], {type: 'application/json'});
-            const url = URL.createObjectURL(dataBlob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = 'memento_tattoos_export.json';
-            link.click();
-            URL.revokeObjectURL(url);
+            if (realMementoData) {
+                const dataStr = JSON.stringify(realMementoData, null, 2);
+                const dataBlob = new Blob([dataStr], {type: 'application/json'});
+                const url = URL.createObjectURL(dataBlob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'memento_real_tattoos_export.json';
+                link.click();
+                URL.revokeObjectURL(url);
+                alert('✅ VRAIES DONNÉES MEMENTO EXPORTÉES !');
+            } else {
+                alert('❌ Pas de vraies données à exporter - chargez d\'abord !');
+            }
         }
 
         // Event listeners
@@ -483,9 +605,10 @@
             zone.addEventListener('click', () => selectZone(zone));
         });
 
-        // Auto-load on page load
+        // 🚀 AUTO-CHARGEMENT DES VRAIES DONNÉES AU DÉMARRAGE
         window.addEventListener('load', () => {
-            console.log('🎨 Interface Tatouages Memento chargée');
+            console.log('🎨 Interface Tatouages Memento chargée - Connexion aux vraies données...');
+            loadRealTattooData();
         });
     </script>
 </body>
