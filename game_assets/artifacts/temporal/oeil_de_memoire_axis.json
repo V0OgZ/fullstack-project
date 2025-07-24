@@ -111,7 +111,7 @@
   
   "formula_integration": {
     "paradox_risk_modifier": -0.8,
-    "temporal_stability_bonus": +0.5,
+    "temporal_stability_bonus": 0.5,
     "causal_weight_reduction": 0.3,
     "fog_penetration": "complete"
   },
