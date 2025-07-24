@@ -1,25 +1,64 @@
 #!/usr/bin/env python3
 """
 Script de test pour le nouveau service de traduction intelligent
-Teste sur de vrais fichiers HOTS et JSON
+Teste sur de vrais fichiers HOTS et JSON - INTÉGRÉ AVEC MOTEUR UNIFIÉ
 """
 
 import json
 import re
 import random
+import requests
 from pathlib import Path
 
 class SmartTranslator:
     def __init__(self):
         self.hero_data = {}
+        self.backend_url = "http://localhost:8080"
+        self.magic_formula_endpoint = f"{self.backend_url}/api/magic-formulas/execute"
         self.load_hero_data()
         self.setup_variations()
     
+    def call_magic_formula_engine(self, formula):
+        """Appelle le moteur unifié pour traduction + exécution"""
+        try:
+            payload = {
+                "formula": formula,
+                "context": {
+                    "translation_mode": True,
+                    "narrative_output": True
+                }
+            }
+            
+            response = requests.post(
+                self.magic_formula_endpoint,
+                json=payload,
+                headers={"Content-Type": "application/json"},
+                timeout=5
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                # Extraire la traduction narrative du moteur unifié
+                if "normalInterpretation" in result:
+                    return result["normalInterpretation"]
+                elif "message" in result:
+                    return result["message"]
+            else:
+                print(f"⚠️ Backend error {response.status_code}: {response.text}")
+                
+        except requests.exceptions.RequestException as e:
+            print(f"⚠️ Connexion backend échouée: {e}")
+        except Exception as e:
+            print(f"⚠️ Erreur moteur unifié: {e}")
+        
+        # Fallback vers traduction locale si backend indisponible
+        return None
+
     def load_hero_data(self):
         """Charge les données des héros depuis les fichiers JSON"""
         hero_files = [
             "backend/src/main/resources/heroes/legendary/Arthur.json",
-            "backend/src/main/resources/heroes/legendary/Ragnar.json",
+            "backend/src/main/resources/heroes/legendary/Ragnar.json", 
             "backend/src/main/resources/heroes/memento.json"
         ]
         
@@ -202,7 +241,14 @@ class SmartTranslator:
         return script.strip()
     
     def translate_script(self, script):
-        """Traduit un script complet"""
+        """Traduit un script complet - MOTEUR UNIFIÉ D'ABORD"""
+        # 🔥 PRIORITÉ 1: Essayer le moteur unifié magic-formulas
+        unified_translation = self.call_magic_formula_engine(script)
+        if unified_translation:
+            return unified_translation
+        
+        # 🔄 FALLBACK: Traduction locale si backend indisponible
+        print(f"🔄 Fallback traduction locale pour: {script[:50]}...")
         result = script
         result = self.translate_heroes(result)
         result = self.translate_movements(result)
@@ -225,7 +271,10 @@ def test_on_files():
     ]
     
     print("\n" + "="*60)
-    print("🧪 TEST DU NOUVEAU SYSTÈME DE TRADUCTION INTELLIGENT")
+    print("🧪 TEST DU SYSTÈME DE TRADUCTION INTELLIGENT - MOTEUR UNIFIÉ")
+    print("="*60)
+    print("🔥 INTÉGRATION: Service connecté au MagicFormulaEngine (port 8080)")
+    print("🔄 FALLBACK: Traduction locale si backend indisponible")
     print("="*60)
     
     # Tests simples d'abord
