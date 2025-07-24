@@ -1,0 +1,62 @@
+# 🌌 EXPÉRIENCE DOUBLE FENTE - EINSTEIN QUANTUM TEST
+# ======================================================
+# 📜 EXPÉRIENCE DE PENSÉE : Dualité onde-particule
+# 🎯 OBJECTIF : Tester superposition quantique dans Heroes of Time
+# 🧪 PROTOCOLE : Photon traverse 2 fentes → Pattern d'interférence
+
+SCENARIO: "DOUBLE_SLIT_QUANTUM_001"
+MAP_SIZE: 15x10
+REFERENCE_TIMELINE: T0
+CAUSAL_ENGINE: QUANTUM_LAB
+PHYSICS_MODE: WAVE_PARTICLE_DUALITY
+
+# 🔬 ÉQUIPEMENT EXPÉRIMENTAL
+SETUP_LAB:
+  SOURCE_PHOTON: @2,5 → EMIT(photon_wave)
+  BARRIER_FENTE_A: @7,4 STATE(open)
+  BARRIER_FENTE_B: @7,6 STATE(open)  
+  DETECTOR_SCREEN: @12,5 MODE(interference_pattern)
+  
+# ⚛️ ÉTATS QUANTIQUES PSI
+ψ001: ⊙(PHOTON @2,5 ⟶ SUPERPOSITION(fente_A + fente_B))
+ψ002: ⊙(WAVE_FUNCTION ⟶ INTERFERENCE(@12,5))
+ψ003: Π(OBSERVATION) ⇒ †ψ001 → COLLAPSE(particle_state)
+
+# 🎮 SCRIPT EXPÉRIENCE
+PHASE_1_PREPARATION:
+  CREATE_ITEM("Mac_Zehnder_Interferometer", @5,5)
+  HERO("Einstein_Observer", @1,5) WITH_ABILITY("quantum_vision")
+  
+PHASE_2_EMISSION:
+  EMIT_PHOTON(@2,5) → DIRECTION(east)
+  ψ_STATE: SUPERPOSITION(path_A + path_B)
+  
+PHASE_3_TRAVERSEE:
+  IF fente_A.open AND fente_B.open:
+    QUANTUM_SPLIT(photon) → [path_A, path_B]
+    MAINTAIN_COHERENCE(wave_function)
+  
+PHASE_4_DETECTION:
+  AT_SCREEN(@12,5):
+    IF no_observation: SHOW_INTERFERENCE_PATTERN()
+    IF observation_active: COLLAPSE_TO_PARTICLE()
+    
+# 🏆 CONDITIONS SUCCÈS
+WIN_CONDITION:
+  - Pattern d'interférence visible SANS observation
+  - Collapse en particule AVEC observation  
+  - Einstein_Observer peut basculer entre modes
+  
+FAIL_CONDITION:
+  - Pas de superposition détectée
+  - Pattern incorrect sur écran
+  - Collapse prématuré
+
+# 📊 MÉTRIQUES QUANTIQUES
+MEASURE:
+  wave_coherence: 0.95
+  interference_visibility: 0.87
+  collapse_probability: 1.0 (si observé)
+  
+# 🌟 CITATIONS EINSTEIN
+QUOTE: "Dieu ne joue pas aux dés avec l'univers... mais dans Heroes of Time, les dés sont quantiques !" 
