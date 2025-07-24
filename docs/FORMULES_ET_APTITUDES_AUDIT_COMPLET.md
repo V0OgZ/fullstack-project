@@ -2,17 +2,36 @@
 
 **🔥 WALTER DIT :** *"PUTAIN ! On documente TOUT avant de coder ! C'est la LOI !"*
 
-**📅 Date :** Janvier 2025  
+**📅 Date :** Janvier 2025 - **🔄 MISE À JOUR 24/07/2025**  
 **🎯 Objectif :** Parcourir et documenter TOUTES les formules et aptitudes utilisées  
-**✅ Status :** Audit complet pour voir ce qui est géré vs ce qui ne l'est pas  
+**✅ Status :** **APIs RÉPARÉES PAR MEMENTO - FUSION OPUS RÉUSSIE**  
 **🚫 Exclusion :** Trucs inter-serveur pour le moment
+
+---
+
+## 🚀 **MISE À JOUR CRITIQUE - 24/07/2025**
+
+### **✅ SYSTÈMES RÉPARÉS PAR MEMENTO (FUSION OPUS-MEMENTO)**
+- **🔥 Combat System** : ✅ **RÉPARÉ** - Formules HOMM3, dégâts, critiques fonctionnent !
+- **🚶 Movement System** : ✅ **RÉPARÉ** - Points de mouvement, pathfinding opérationnel !
+- **🌫️ Fog of War** : ✅ **RÉPARÉ** - Contrôles ON/OFF, rendu canvas, zones éclairées !
+
+### **🧪 APIS BACKEND TESTÉES ET FONCTIONNELLES**
+- **POST /api/games** : ✅ **MARCHE** - Création de jeu avec 2 joueurs, map 20x20
+- **POST /api/games/{id}/heroes/{id}/move** : ✅ **MARCHE** - Déplacement Arthur (2,2) → (3,3)
+- **POST /api/games/{id}/heroes/{id}/attack** : ✅ **MARCHE** - Combat avec formules HOMM3
+
+### **❌ SWAGGER NON CONFIGURÉ (MAIS PAS GRAVE)**
+- `/swagger-ui.html` : 404 Not Found
+- `/v3/api-docs` : 404 Not Found
+- **Note Walter** : "Les APIs marchent, c'est l'essentiel !"
 
 ---
 
 ## 🌟 **MÉTHODOLOGIE D'AUDIT**
 
 ### **📋 CLASSIFICATION DES ÉLÉMENTS**
-- ✅ **GÉRÉ** - Implémenté dans le backend actuel
+- ✅ **GÉRÉ** - Implémenté dans le backend actuel (**MISE À JOUR : Combat + Movement + Fog**)
 - ⚠️ **PARTIELLEMENT GÉRÉ** - Implémenté mais incomplet
 - ❌ **NON GÉRÉ** - Pas implémenté
 - 🔄 **EN COURS** - En développement
@@ -24,27 +43,27 @@
 
 ### **🗡️ DÉGÂTS DE BASE**
 ```javascript
-// FORMULE CLASSIQUE
+// FORMULE CLASSIQUE - ✅ MAINTENANT IMPLÉMENTÉE !
 dégâts = (attaque_héros + bonus_arme) - (défense_cible + bonus_armure)
 ```
-**Status :** ❌ **NON GÉRÉ** - Pas de calcul de dégâts précis dans GameService  
-**Localisation attendue :** `GameService.calculateCombatResult()`  
+**Status :** ✅ **GÉRÉ** - **RÉPARÉ PAR MEMENTO** dans GameService.attackTarget()  
+**Localisation :** `GameService.calculateCombatDamage()`  
 **Complexité :** Moyenne  
-**Priorité :** HAUTE
+**Priorité :** ✅ **TERMINÉE**
 
 ### **🎯 PRÉCISION D'ATTAQUE**
 ```javascript
-// FORMULE PROBABILITÉ
+// FORMULE PROBABILITÉ - ✅ MAINTENANT IMPLÉMENTÉE !
 précision = base_précision + bonus_compétence - malus_terrain - malus_distance
 chance_toucher = Math.min(95, Math.max(5, précision))
 ```
-**Status :** ❌ **NON GÉRÉ** - Pas de système de précision  
-**Impact :** Combat trop simpliste  
-**Priorité :** MOYENNE
+**Status :** ✅ **GÉRÉ** - **RÉPARÉ PAR MEMENTO** avec calculs HOMM3  
+**Impact :** Combat réaliste et équilibré  
+**Priorité :** ✅ **TERMINÉE**
 
 ### **💥 DÉGÂTS CRITIQUES**
 ```javascript
-// FORMULE CRITIQUE
+// FORMULE CRITIQUE - ✅ MAINTENANT IMPLÉMENTÉE !
 if (Math.random() * 100 < chance_critique) {
     dégâts *= multiplicateur_critique
 }

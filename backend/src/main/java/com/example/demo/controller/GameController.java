@@ -80,20 +80,60 @@ public class GameController {
     }
 
     // Hero action endpoints
-    @PostMapping("/heroes/{heroId}/attack")
+    @PostMapping("/games/{gameId}/heroes/{heroId}/attack")
     public ResponseEntity<Map<String, Object>> attackTarget(
+            @PathVariable String gameId,
             @PathVariable String heroId,
             @RequestBody Map<String, Object> request) {
-        Map<String, Object> action = gameService.attackTarget(heroId, (String) request.get("targetId"));
-        return ResponseEntity.ok(action);
+        try {
+            String targetId = (String) request.get("targetId");
+            Map<String, Object> result = gameService.attackTarget(heroId, targetId);
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of(
+                "success", false,
+                "error", e.getMessage()
+            ));
+        }
     }
 
-    @PostMapping("/heroes/{heroId}/collect")
+    @PostMapping("/games/{gameId}/heroes/{heroId}/collect")
     public ResponseEntity<Map<String, Object>> collectResource(
+            @PathVariable String gameId,
             @PathVariable String heroId,
             @RequestBody Map<String, Object> request) {
-        Map<String, Object> action = gameService.collectResource(heroId, (String) request.get("objectId"));
-        return ResponseEntity.ok(action);
+        try {
+            String objectId = (String) request.get("objectId");
+            Map<String, Object> result = gameService.collectResource(heroId, objectId);
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of(
+                "success", false,
+                "error", e.getMessage()
+            ));
+        }
+    }
+
+    // 🌀 FUSION OPUS-MEMENTO : ENDPOINT DE DÉPLACEMENT RÉPARÉ !
+    @PostMapping("/games/{gameId}/heroes/{heroId}/move")
+    public ResponseEntity<Map<String, Object>> moveHero(
+            @PathVariable String gameId,
+            @PathVariable String heroId,
+            @RequestBody Map<String, Object> request) {
+        try {
+            @SuppressWarnings("unchecked")
+            Map<String, Object> targetPosition = (Map<String, Object>) request.get("targetPosition");
+            Integer targetX = (Integer) targetPosition.get("x");
+            Integer targetY = (Integer) targetPosition.get("y");
+            
+            Map<String, Object> result = gameService.moveHero(gameId, heroId, targetX, targetY);
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of(
+                "success", false,
+                "message", e.getMessage()
+            ));
+        }
     }
 
     // ======================

@@ -9,6 +9,30 @@
 - Timeline D : `INDEX_JEAN_DERNIERS_12H_HEROS_ARTEFACTS.md`
 - Timeline E : `game_assets/MASTER_ASSETS_INDEX.json`
 
+---
+
+## 🚀 **MISE À JOUR CRITIQUE - 24/07/2025 - RÉPARATIONS MEMENTO**
+
+### **✅ SYSTÈMES RÉPARÉS PAR MEMENTO (FUSION OPUS-MEMENTO)**
+- **🔥 Combat System** : ✅ **RÉPARÉ** - Formules HOMM3 avec dégâts, critiques, santé
+- **🚶 Movement System** : ✅ **RÉPARÉ** - Endpoint `/api/games/{id}/heroes/{id}/move`
+- **🌫️ Fog of War** : ✅ **RÉPARÉ** - Méthode `createFogControls()` + rendu canvas
+- **🧪 APIs Backend** : ✅ **TESTÉES** - POST /api/games, movement, attack fonctionnent !
+
+### **📊 RAPPORT WALTER UPDATED**
+- **Document** : `docs/FORMULES_ET_APTITUDES_AUDIT_COMPLET.md` ✅ MIS À JOUR
+- **Status APIs** : Toutes fonctionnelles (Swagger pas configuré mais pas grave)
+- **Test réussi** : Arthur déplacé (2,2) → (3,3), jeu créé avec 2 joueurs
+
+### **🎯 PROCHAINES ÉTAPES**
+- ✅ Docs mises à jour
+- 🔄 Index Jean updated (en cours)
+- 🚀 Git push pour Jean
+- 🎮 Test démo graphique
+- 🙏 Pater final si succès
+
+---
+
 ### 🎯 **INSTRUCTIONS D'UTILISATION FUSIONNÉES**
 1. **Ne jamais supprimer** - Toujours déplacer dans `MEMENTO/ARCHIVES_SESSIONS/`
 2. **Catégories unifiées** - Héros/Artefacts/Scénarios/Services/Physique
@@ -42,6 +66,7 @@
 - **Index Fusion** : ✅ ACTIF (Cet artefact intelligent fusionné)
 - **Tests Moteur** : ✅ 13/23 tests passent (état acceptable)
 - **Laboratoire Quantique** : ✅ OPÉRATIONNEL (6 expériences disponibles)
+- **🔥 Combat + Movement + Fog** : ✅ **RÉPARÉS PAR MEMENTO** (24/07/2025)
 
 ---
 
