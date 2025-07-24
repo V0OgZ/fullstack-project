@@ -1,0 +1,325 @@
+{
+  "collection_name": "Objets Intermédiaires Tier 3-4",
+  "description": "Artefacts intermédiaires pour combler le gap entre débutant et avancé",
+  "target_tiers": [3, 4],
+  "balance_philosophy": "Effets modérés à notables, cooldowns courts à moyens",
+  "target_audience": "Joueurs intermédiaires",
+  
+  "artifacts": [
+    {
+      "id": "cristal_de_stockage_energie",
+      "name": "Cristal de Stockage d'Énergie",
+      "tier": 3,
+      "rarity": "Peu Commun",
+      "type": "Cristal",
+      "slot": "Accessoire",
+      "description": "Cristal qui accumule l'énergie ambiante pour la libérer au bon moment.",
+      "flavor_text": "« L'énergie du cosmos se concentre dans ce cristal bleuté. »",
+      "stats": {
+        "energy_storage": 100,
+        "mana_regen": 5,
+        "intelligence": 3
+      },
+      "abilities": [
+        {
+          "name": "Accumulation d'Énergie",
+          "type": "Passif",
+          "effect": "Gagne 2 points d'énergie par tour, maximum 50 stockés",
+          "formula_hots": "ENERGY_ACCUMULATE(+2_per_turn, max=50)"
+        },
+        {
+          "name": "Libération d'Énergie",
+          "type": "Actif",
+          "cost": 0,
+          "effect": "Libère toute l'énergie stockée pour booster le prochain sort",
+          "cooldown": 4,
+          "formula_hots": "RELEASE_STORED_ENERGY(boost_next_spell)"
+        }
+      ],
+      "power_level": 150,
+      "found_in": ["Donjons niveau moyen", "Mages marchands"]
+    },
+
+    {
+      "id": "armure_de_reflexion_magique",
+      "name": "Armure de Réflexion Magique",
+      "tier": 3,
+      "rarity": "Rare",
+      "type": "Armure",
+      "slot": "Torse",
+      "description": "Armure enchantée qui renvoie une partie des sorts subis à l'attaquant.",
+      "flavor_text": "« Que tes propres sorts te reviennent ! »",
+      "stats": {
+        "defense": 8,
+        "magic_resistance": 15,
+        "reflection_power": 25
+      },
+      "abilities": [
+        {
+          "name": "Réflexion Magique",
+          "type": "Passif",
+          "effect": "Renvoie 30% des dégâts magiques subis à l'attaquant",
+          "formula_hots": "REFLECT_MAGIC_DAMAGE(30_percent)"
+        },
+        {
+          "name": "Contre-Sort Automatique",
+          "type": "Réactif",
+          "effect": "Si touché par un sort, 20% de chance de lancer le même sort sur l'attaquant",
+          "limitation": "1 fois par combat",
+          "formula_hots": "AUTO_COUNTER_SPELL(20_percent_chance)"
+        }
+      ],
+      "power_level": 180,
+      "found_in": ["Forgerons enchanteurs", "Boss de donjon"]
+    },
+
+    {
+      "id": "epee_dapprentissage_rapide",
+      "name": "Épée d'Apprentissage Rapide",
+      "tier": 3,
+      "rarity": "Rare",
+      "type": "Arme",
+      "slot": "Main droite",
+      "description": "Épée magique qui apprend des techniques de combat de ses adversaires.",
+      "flavor_text": "« Chaque combat enseigne une nouvelle leçon. »",
+      "stats": {
+        "attack": 12,
+        "experience_bonus": 25,
+        "adaptability": 10
+      },
+      "abilities": [
+        {
+          "name": "Apprentissage de Combat",
+          "type": "Passif",
+          "effect": "Gagne un bonus permanent de +1 attaque après avoir vaincu 3 ennemis différents",
+          "formula_hots": "LEARN_FROM_DEFEATS(+1_attack_per_3_defeats)"
+        },
+        {
+          "name": "Copie de Technique",
+          "type": "Actif",
+          "cost": 30,
+          "effect": "Copie la dernière capacité spéciale utilisée par un ennemi",
+          "cooldown": 6,
+          "limitation": "Une seule technique copiée à la fois",
+          "formula_hots": "COPY_ENEMY_ABILITY(last_used)"
+        }
+      ],
+      "power_level": 170,
+      "found_in": ["Maîtres d'armes", "Académies militaires"]
+    },
+
+    {
+      "id": "amulette_de_seconde_vue",
+      "name": "Amulette de Seconde Vue",
+      "tier": 4,
+      "rarity": "Rare",
+      "type": "Bijou",
+      "slot": "Cou",
+      "description": "Permet de voir les probabilités futures et d'ajuster ses actions en conséquence.",
+      "flavor_text": "« L'avenir n'est pas fixé, il est plein de possibilités. »",
+      "stats": {
+        "foresight": 12,
+        "luck": 8,
+        "wisdom": 6
+      },
+      "abilities": [
+        {
+          "name": "Vision Probabiliste",
+          "type": "Passif",
+          "effect": "Affiche les chances de réussite de vos actions avant de les exécuter",
+          "formula_hots": "SHOW_SUCCESS_PROBABILITY(all_actions)"
+        },
+        {
+          "name": "Ajustement Temporel",
+          "type": "Actif",
+          "cost": 40,
+          "effect": "Améliore les chances de réussite de la prochaine action de 25%",
+          "cooldown": 5,
+          "formula_hots": "BOOST_SUCCESS_CHANCE(+25_percent, next_action)"
+        }
+      ],
+      "power_level": 220,
+      "found_in": ["Oracles", "Tours de divination"]
+    },
+
+    {
+      "id": "bouclier_de_riposte_temporelle",
+      "name": "Bouclier de Riposte Temporelle",
+      "tier": 4,
+      "rarity": "Épique",
+      "type": "Bouclier",
+      "slot": "Main gauche",
+      "description": "Bouclier qui stocke les attaques parées pour les renvoyer plus tard.",
+      "flavor_text": "« Patience... le moment de la riposte viendra. »",
+      "stats": {
+        "defense": 15,
+        "block_chance": 30,
+        "temporal_storage": 20
+      },
+      "abilities": [
+        {
+          "name": "Stockage d'Attaque",
+          "type": "Passif",
+          "effect": "Chaque attaque parée est stockée dans le bouclier (max 3)",
+          "formula_hots": "STORE_BLOCKED_ATTACKS(max=3)"
+        },
+        {
+          "name": "Riposte Différée",
+          "type": "Actif",
+          "cost": 25,
+          "effect": "Libère toutes les attaques stockées en une seule riposte dévastatrice",
+          "cooldown": 3,
+          "formula_hots": "RELEASE_STORED_ATTACKS(combined_damage)"
+        }
+      ],
+      "power_level": 280,
+      "found_in": ["Forgerons temporels", "Boss élites"]
+    },
+
+    {
+      "id": "cape_de_deplacement_dimensionnel",
+      "name": "Cape de Déplacement Dimensionnel",
+      "tier": 4,
+      "rarity": "Épique",
+      "type": "Cape",
+      "slot": "Dos",
+      "description": "Cape qui permet de se déplacer brièvement dans une dimension parallèle.",
+      "flavor_text": "« Entre les mondes, il y a toujours un chemin. »",
+      "stats": {
+        "mobility": 10,
+        "dimensional_affinity": 15,
+        "stealth": 8
+      },
+      "abilities": [
+        {
+          "name": "Pas Dimensionnel",
+          "type": "Actif",
+          "cost": 35,
+          "effect": "Se téléporte jusqu'à 5 cases en ignorant les obstacles",
+          "cooldown": 4,
+          "formula_hots": "DIMENSIONAL_STEP(range=5, ignore_obstacles)"
+        },
+        {
+          "name": "Traversée Fantôme",
+          "type": "Actif",
+          "cost": 50,
+          "effect": "Devient intangible pendant 2 tours, peut traverser ennemis et murs",
+          "cooldown": 8,
+          "limitation": "Ne peut pas attaquer en mode fantôme",
+          "formula_hots": "GHOST_MODE(duration=2_turns, no_collision)"
+        }
+      ],
+      "power_level": 300,
+      "found_in": ["Rifts dimensionnels", "Mages planaires"]
+    },
+
+    {
+      "id": "grimoire_de_sorts_evolutifs",
+      "name": "Grimoire de Sorts Évolutifs",
+      "tier": 4,
+      "rarity": "Épique",
+      "type": "Livre",
+      "slot": "Inventaire",
+      "description": "Grimoire dont les sorts deviennent plus puissants à chaque utilisation.",
+      "flavor_text": "« La magie grandit avec la pratique et la compréhension. »",
+      "stats": {
+        "spell_power": 18,
+        "mana_capacity": 50,
+        "evolution_rate": 12
+      },
+      "abilities": [
+        {
+          "name": "Sorts Évolutifs",
+          "type": "Passif",
+          "effect": "Chaque sort lancé gagne +5% de puissance (max +50%)",
+          "formula_hots": "EVOLVING_SPELLS(+5_percent_per_use, max=50_percent)"
+        },
+        {
+          "name": "Nouveau Sort Découvert",
+          "type": "Événement",
+          "effect": "Tous les 10 sorts lancés, découvre un nouveau sort aléatoire",
+          "formula_hots": "DISCOVER_NEW_SPELL(every_10_casts)"
+        },
+        {
+          "name": "Métamorphose Magique",
+          "type": "Actif",
+          "cost": 60,
+          "effect": "Transforme un sort connu en version supérieure (Tier +1)",
+          "cooldown": 10,
+          "limitation": "1 sort par grimoire",
+          "formula_hots": "UPGRADE_SPELL(tier_plus_1)"
+        }
+      ],
+      "power_level": 350,
+      "found_in": ["Bibliothèques maudites", "Archimages déchus"]
+    },
+
+    {
+      "id": "anneau_de_coordination_tactique",
+      "name": "Anneau de Coordination Tactique",
+      "tier": 3,
+      "rarity": "Peu Commun",
+      "type": "Bijou",
+      "slot": "Doigt",
+      "description": "Améliore la coordination avec les alliés et permet des combos d'équipe.",
+      "flavor_text": "« Ensemble, nous sommes plus forts. »",
+      "stats": {
+        "leadership": 8,
+        "team_coordination": 15,
+        "morale": 5
+      },
+      "abilities": [
+        {
+          "name": "Boost d'Équipe",
+          "type": "Passif",
+          "effect": "Tous les alliés dans un rayon de 3 cases gagnent +10% de précision",
+          "formula_hots": "TEAM_ACCURACY_BOOST(+10_percent, radius=3)"
+        },
+        {
+          "name": "Attaque Coordonnée",
+          "type": "Actif",
+          "cost": 25,
+          "effect": "Le prochain allié qui attaque la même cible fait +50% de dégâts",
+          "cooldown": 4,
+          "formula_hots": "COORDINATED_ATTACK(+50_percent_damage)"
+        }
+      ],
+      "power_level": 160,
+      "found_in": ["Officiers militaires", "Guildes d'aventuriers"]
+    }
+  ],
+
+  "tier_distribution": {
+    "tier_3": {
+      "count": 4,
+      "power_range": [150, 200],
+      "rarity_focus": "Peu Commun à Rare"
+    },
+    "tier_4": {
+      "count": 4,
+      "power_range": [201, 400],
+      "rarity_focus": "Rare à Épique"
+    }
+  },
+
+  "balance_notes": {
+    "philosophy": "Combler le gap entre objets débutants et légendaires",
+    "power_scaling": "Progression linéaire et cohérente",
+    "cooldown_balance": "Courts à moyens pour usage régulier",
+    "integration": "Compatible avec système existant"
+  },
+
+  "usage_guidelines": {
+    "tier_3": "Objets de transition pour joueurs qui progressent",
+    "tier_4": "Objets puissants pour joueurs confirmés pré-expert",
+    "synergies": "Conçus pour fonctionner avec objets existants",
+    "progression": "Passerelle vers objets légendaires Tier 7"
+  },
+
+  "integration_notes": {
+    "master_index": "À ajouter dans MASTER_ASSETS_INDEX.json",
+    "backend_support": "Compatible MagicFormulaEngine",
+    "frontend_display": "Prêt pour TrueHeroesInterface",
+    "testing": "Formules HOTS testables"
+  }
+} 
