@@ -1,0 +1,26 @@
+
+> panopticon-grut-dashboard@1.0.0 dev
+> vite --port 8001 --host
+
+
+  VITE v5.4.19  ready in 296 ms
+
+  ➜  Local:   http://localhost:8001/
+  ➜  Network: http://192.168.1.12:8001/
+12:00:14 AM [vite] hmr update /src/App.tsx
+12:00:22 AM [vite] hmr update /src/App.tsx
+12:00:32 AM [vite] hmr update /src/App.tsx
+12:00:40 AM [vite] hmr update /src/App.tsx
+12:04:41 AM [vite] hmr update /src/App.tsx
+12:04:48 AM [vite] hmr update /src/App.tsx
+12:04:58 AM [vite] hmr update /src/App.tsx
+12:05:06 AM [vite] hmr update /src/App.tsx
+12:05:12 AM [vite] hmr update /src/App.tsx
+12:07:10 AM [vite] hmr update /src/App.tsx
+12:07:19 AM [vite] hmr update /src/App.tsx
+12:07:29 AM [vite] hmr update /src/App.tsx
+12:07:37 AM [vite] hmr update /src/App.tsx
+12:08:52 AM [vite] hmr update /src/App.tsx
+12:09:01 AM [vite] hmr update /src/App.tsx
+12:09:11 AM [vite] hmr update /src/App.tsx
+12:09:19 AM [vite] hmr update /src/App.tsx
