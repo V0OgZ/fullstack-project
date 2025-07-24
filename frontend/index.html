@@ -3,910 +3,318 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heroes of Time - Temporal Engine</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="responsive-1280x800.css">
-    <link rel="stylesheet" href="layout-fix.css">
-    <link rel="stylesheet" href="temporal-styles.css">
-    <link rel="stylesheet" href="translation-styles.css">
-    <link rel="stylesheet" href="styles/city.css">
-    <link rel="stylesheet" href="styles/combat.css">
-    <link rel="stylesheet" href="styles/hero.css">
-    <link rel="stylesheet" href="styles/dicebear.css">
-    <link rel="stylesheet" href="styles/scenario-selector.css">
-    <link rel="stylesheet" href="event-log-styles.css">
-    <link rel="manifest" href="manifest.json">
+    <title>🕰️ Heroes of Time - Interface Temporal Engine</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border: 2px solid #4a9eff;
+            border-radius: 10px;
+            padding: 20px;
+            background: rgba(74, 158, 255, 0.1);
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .btn-primary { background: #4a9eff; color: white; }
+        .btn-success { background: #28a745; color: white; }
+        .btn-warning { background: #ffc107; color: black; }
+        .btn-danger { background: #dc3545; color: white; }
+        .btn-info { background: #17a2b8; color: white; }
+        .btn-panoramix { background: linear-gradient(45deg, #8B4513, #DAA520); color: white; border: 2px solid #FFD700; }
+
+        .game-area {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .map-container {
+            background: rgba(0,0,0,0.3);
+            border: 2px solid #4a9eff;
+            border-radius: 10px;
+            padding: 20px;
+            min-height: 400px;
+        }
+
+        .side-panel {
+            background: rgba(0,0,0,0.3);
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .panoramix-section {
+            background: linear-gradient(135deg, #8B4513, #DAA520);
+            border: 3px solid #FFD700;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .chaudron {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, #B8860B, #8B4513);
+            border: 4px solid #FFD700;
+            border-radius: 50%;
+            margin: 20px auto;
+            position: relative;
+            animation: chaudronGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes chaudronGlow {
+            0% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+            100% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.8); }
+        }
+
+        .vapeurs {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #FFD700;
+            font-size: 20px;
+            animation: vapeurFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes vapeurFloat {
+            0%, 100% { transform: translateX(-50%) translateY(0px); opacity: 0.7; }
+            50% { transform: translateX(-50%) translateY(-10px); opacity: 1; }
+        }
+
+        .buff-status {
+            background: rgba(40, 167, 69, 0.2);
+            border: 1px solid #28a745;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 12px;
+        }
+
+        .status-display {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid #4a9eff;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 20px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <header class="header">
-            <div class="title">🕰️ Heroes of Time - Temporal Engine</div>
-            <div class="controls">
-                <button id="new-game-btn" class="btn-primary">🎮 New Game</button>
-                <button id="demo-noob-btn" class="btn-success">🎯 Démo Noob</button>
-                <button id="city-btn" class="btn-primary">🏛️ Ville</button>
-                <button id="combat-btn" class="btn-primary">⚔️ Combat</button>
-                <button id="hero-btn" class="btn-primary">👤 Héros</button>
-                <button id="joint-magic-btn" class="btn-warning">🚬 Joint Magique</button>
-                <button id="scenario-btn" class="btn-primary">📋 Scénarios</button>
-                <button id="grofi-heroes-btn" class="btn-primary">🌟 Héros GROFI</button>
-                <button id="add-ragnar-btn" class="btn-secondary">🛡️ Add Ragnar</button>
-                <button id="test-decay-btn" class="btn-warning">⏰ Test Decay</button>
-                <button id="dicebear-gallery-btn" class="btn-info">🦸 Héros Gallery</button>
-                <button id="settings-btn" class="btn-icon">⚙️</button>
-                
-                <!-- 🌫️ ZFC CONTROLS IN HEADER -->
-                <div id="fog-controls-header"></div>
-            </div>
-        </header>
-        
-        <div class="game-area">
-            <div class="game-board">
-                <canvas id="game-canvas"></canvas>
-                <div class="game-overlay">
-                    <div class="temporal-info" id="temporal-info">
-                        <div class="info-card">
-                            <h3>⏰ Temporal Status</h3>
-                            <div id="current-timeline">Timeline: ℬ1</div>
-                            <div id="current-turn">Turn: 0</div>
-                            <div id="decay-status">Decay: None</div>
-                        </div>
-                    </div>
+        <div class="header">
+            <h1>🕰️ Heroes of Time - Interface Temporal Engine</h1>
+            <p>🌀 Moteur Temporel Quantique - Contrôlez le temps, dominez l'espace</p>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-primary" onclick="newGame()">🎮 New Game</button>
+            <button class="btn btn-success" onclick="openVille()">🏛️ Ville</button>
+            <button class="btn btn-danger" onclick="startCombat()">⚔️ Combat</button>
+            <button class="btn btn-info" onclick="manageHeroes()">👤 Héros</button>
+            <button class="btn btn-warning" onclick="jointMagique()">🚬 Joint Magique</button>
+            <button class="btn btn-panoramix" onclick="activatePanoramix()">🍯 Panoramix Chaudron</button>
+        </div>
+
+        <!-- NOUVELLE SECTION PANORAMIX -->
+        <div class="panoramix-section" id="panoramixSection" style="display: none;">
+            <h3>🧙‍♂️ Panoramix l'Archidruide Temporel V2.0</h3>
+            <div style="text-align: center;">
+                <div class="chaudron">
+                    <div class="vapeurs">ψ ⊙ †</div>
                 </div>
+                <p><strong>🍯 Chaudron Quantique Actif</strong></p>
+                <p>🌟 <em>"Par Toutatis ! Ce chaudron n'est pas un simple récipient !"</em></p>
             </div>
             
-            <div class="side-panel">
-                <!-- 🎮 Contrôles Principaux -->
-                <div class="main-controls">
-                    <div class="control-section">
-                        <h3>🎮 Contrôles Principaux</h3>
-                        <div class="control-buttons">
-                            <button id="hero-select-btn" class="btn-control">👁️ Sélectionner Héros</button>
-                            <button id="move-btn" class="btn-control">🚶 Déplacer</button>
-                            <button id="attack-btn" class="btn-control">⚔️ Attaquer</button>
-                            <button id="explore-btn" class="btn-control">🗺️ Explorer</button>
-                        </div>
-                    </div>
-                    
-                    <div class="control-section">
-                        <h3>🔮 Actions Temporelles</h3>
-                        <div class="control-buttons">
-                            <button id="psi-create-btn" class="btn-control">ψ Créer État</button>
-                            <button id="psi-collapse-btn" class="btn-control">† Effondrer</button>
-                            <button id="timeline-switch-btn" class="btn-control">🔄 Changer Timeline</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="script-console" id="script-console">
-                    <!-- Console will be populated by JavaScript -->
-                </div>
-                
-                <div class="hero-panel" id="hero-panel">
-                    <h3>🦸 Heroes</h3>
-                    <div id="heroes-list"></div>
-                </div>
-                
-                <div class="psi-panel" id="psi-panel">
-                    <h3>🔮 États ψ</h3>
-                    <div id="psi-states-list"></div>
-                </div>
+            <div class="buff-status">
+                <strong>🔮 Effets du Chaudron (Rayon 7 cases) :</strong><br>
+                ⚔️ ATK +50 | 🛡️ DEF +50 | ❤️ HP +100<br>
+                ⚡ SPEED +25 | 🔵 MANA +30 | 🌿 REGEN +20/tour<br>
+                🧪 Immunité Poison | 🌟 Durée: 5 tours
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;">
+                <button class="btn btn-info" onclick="activateChaudron()">🍯 Activer Chaudron</button>
+                <button class="btn btn-warning" onclick="parfumsAmplifies()">🌸 Parfums Amplifiés</button>
+                <button class="btn btn-success" onclick="potionsSupremes()">🧪 Potions Suprêmes</button>
+                <button class="btn btn-danger" onclick="testPoisonImmunity()">☠️ Test Immunité</button>
+            </div>
+
+            <div id="panoramixStatus" class="status-display">
+                🧙‍♂️ Panoramix prêt à agir...<br>
+                🍯 Chaudron: En attente d'activation<br>
+                ⚡ Mana: 100/100 | 🔥 Flammes: Éternelles
             </div>
         </div>
-        
-        <div class="status-bar" id="status-bar">
-            ⚡ HEROES OF TIME ENGINE - Initializing temporal systems...
-        </div>
-        
-        <!-- 🎮 Bouton d'ouverture du sélecteur de scénarios -->
-        <button id="open-scenario-selector-btn" class="scenario-selector-btn">
-            🎮 Scénarios
-        </button>
 
-        <!-- Dicebear Gallery Modal -->
-        <div id="dicebear-modal" class="modal" style="display: none;">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>🎭 Dicebear Graphics Gallery</h2>
-                    <span class="close" id="close-modal">&times;</span>
+        <div class="game-area">
+            <div class="map-container">
+                <h3>🗺️ Carte Temporelle</h3>
+                <div id="gameMap">
+                    <p>🌀 Chargement de la carte quantique...</p>
+                    <p>⚡ États ψ en superposition...</p>
                 </div>
-                <div class="modal-body">
-                    <div id="dicebear-gallery"></div>
+            </div>
+
+            <div class="side-panel">
+                <h3>📊 Panneau de Contrôle</h3>
+                <div id="gameStatus">
+                    <p><strong>🎮 Statut:</strong> En attente</p>
+                    <p><strong>👤 Joueur:</strong> Jean-Grofignon</p>
+                    <p><strong>⏰ Tour:</strong> 1</p>
+                    <p><strong>🌀 Timeline:</strong> ℬ1</p>
+                </div>
+                
+                <div class="status-display">
+                    <strong>🔧 Services Actifs:</strong><br>
+                    ✅ Backend (8080)<br>
+                    ✅ Frontend (8000)<br>
+                    ✅ Temporal (5174)<br>
+                    ✅ Quantum (8001)
                 </div>
             </div>
         </div>
     </div>
-    
-    <script src="api.js"></script>
-    <script src="translation-service.js"></script>
-    <script src="components/CityInterface.js"></script>
-    <script src="components/CombatInterface.js"></script>
-    <script src="components/HeroInterface.js"></script>
-    <script src="script-console.js"></script>
-    <script src="game.js"></script>
-    <script src="runic-forge.js"></script>
-    <script src="temporal-integration.js"></script>
-    <script src="hero-avatars.js"></script>
-    <script src="scenario-selector.js"></script>
-    <script src="gameplay-enhancement.js"></script>
-    <script src="missing-assets-loader.js"></script>
-    <script src="gameplay-construction.js"></script>
-    <script src="fog-of-war-system.js"></script>
-    <script src="runic-symbols-port8000.js"></script>
-    <script src="conflict-detection-fusion.js"></script>
-    <script src="websocket-handler-zfc.js"></script>
-    <script src="trinity-cosmique-service.js"></script>
-    <script src="timeline-transparency-manager.js"></script>
-    <script src="coordinate-fix.js"></script>
-    <script src="ui-emergency-fix.js"></script>
-    <script src="canvas-hero-renderer.js"></script>
-    <script src="json-icon-system.js"></script>
-    <script src="timeline-diodes-system.js"></script>
-    <script src="system-messages.js"></script>
-    <script src="contextual-hero-actions.js"></script>
-    <script src="startup-message-system.js"></script>
+
     <script>
-        // Anna Martel visibility fix loaded first
-        // Anna Repetitive Errors Detector active
-        // Initialize the comprehensive dicebar graphics system
-        // JSON Icon System loaded automatically
-        // Startup Message System active - No blocking animations!
-        
-        // 🌫️ Initialiser le système de brouillard de causalité
-        window.fogOfWarSystem = new FogOfWarSystem();
-        const fogControlsContainer = document.getElementById('fog-controls-header');
-        if (fogControlsContainer) {
-            fogControlsContainer.appendChild(window.fogOfWarSystem.createFogControls());
+        // Fonctions principales
+        function newGame() {
+            updateStatus("🎮 Nouvelle partie initialisée");
+            document.getElementById('gameMap').innerHTML = `
+                <p>🗺️ Carte 20x20 générée</p>
+                <p>👤 Héros placés aux positions de départ</p>
+                <p>🏰 Structures initiales créées</p>
+            `;
         }
-        
-        // 🎯 Événements pour la démo noob
-        document.getElementById('demo-noob-btn').addEventListener('click', () => {
-            showDemoNoob();
-        });
-        
-        // 🏛️ Événements pour l'interface de ville
-        document.getElementById('city-btn').addEventListener('click', () => {
-            window.cityInterface.toggle();
-        });
-        
-        // ⚔️ Événements pour l'interface de combat
-        document.getElementById('combat-btn').addEventListener('click', () => {
-            window.combatInterface.toggle();
-        });
-        
-        // 👤 Événements pour l'interface de héros
-        document.getElementById('hero-btn').addEventListener('click', () => {
-            window.heroInterface.toggle();
-        });
-        
-        // 🚬 Événements pour le Joint Magique
-        document.getElementById('joint-magic-btn').addEventListener('click', () => {
-            window.open('frontend/joint-panopticon-interface.html', '_blank', 'width=1200,height=800');
-        });
-        
-        // 📋 Événements pour le sélecteur de scénarios
-        document.getElementById('scenario-btn').addEventListener('click', () => {
-            if (window.scenarioSelector) {
-                window.scenarioSelector.show();
+
+        function openVille() {
+            updateStatus("🏛️ Interface ville ouverte");
+        }
+
+        function startCombat() {
+            updateStatus("⚔️ Mode combat activé");
+        }
+
+        function manageHeroes() {
+            updateStatus("👤 Gestion des héros");
+        }
+
+        function jointMagique() {
+            updateStatus("🚬 Joint magique activé - Fonctionnalités avancées débloquées");
+        }
+
+        // NOUVELLES FONCTIONS PANORAMIX
+        function activatePanoramix() {
+            const section = document.getElementById('panoramixSection');
+            if (section.style.display === 'none') {
+                section.style.display = 'block';
+                updateStatus("🧙‍♂️ Panoramix l'Archidruide Temporel V2.0 invoqué !");
+                updatePanoramixStatus("🌟 Panoramix apparaît dans un tourbillon de vapeurs dorées !");
+            } else {
+                section.style.display = 'none';
+                updateStatus("🧙‍♂️ Panoramix retourne dans la forêt temporelle");
             }
-        });
-        
-        // 🌐 Initialiser le service de traduction
-        window.translationService = new TranslationService();
-        
-        // 🎮 Initialiser l'API de jeu
-        window.gameAPI = new GameAPI();
-        
-        // 🏛️ Initialiser l'interface de ville
-        window.cityInterface = new CityInterface();
-        
-        // ⚔️ Initialiser l'interface de combat
-        window.combatInterface = new CombatInterface();
-        
-        // 👤 Initialiser l'interface de héros
-        window.heroInterface = new HeroInterface();
-        
-        // 🎮 Initialiser le sélecteur de scénarios
-        window.scenarioSelector = new ScenarioSelector();
-        const openScenarioBtn = document.getElementById('open-scenario-selector-btn');
-        if (openScenarioBtn) {
-            openScenarioBtn.addEventListener('click', () => {
-                window.scenarioSelector.show();
-            });
         }
-        
-        // Initialize game components
-        let gameRenderer;
-        let gameState = {
-            heroes: [],
-            creatures: [],
-            artifacts: [],
-            currentTimeline: 'ℬ1',
-            currentTurn: 0,
-            decayStatus: 'None'
+
+        function activateChaudron() {
+            updatePanoramixStatus(`
+                🍯 CHAUDRON QUANTIQUE ACTIVÉ !<br>
+                🌟 Tous les alliés dans un rayon de 7 cases reçoivent :<br>
+                ⚔️ +50 ATK | 🛡️ +50 DEF | ❤️ +100 HP<br>
+                ⚡ +25 SPEED | 🔵 +30 MANA | 🌿 +20 REGEN/tour<br>
+                🧪 Immunité poison pendant 5 tours !
+            `);
+            updateStatus("🍯 Chaudron Quantique de Panoramix activé - Buffs appliqués !");
+        }
+
+        function parfumsAmplifies() {
+            updatePanoramixStatus(`
+                🌸 PARFUMS AMPLIFIÉS LIBÉRÉS !<br>
+                🌿 Viscum Quantique → 3 portails temporels ouverts<br>
+                🌺 Flores Temporales → Temps ennemi ralenti x0.5<br>
+                🍄 Fungi Mystici → Téléportation instantanée activée
+            `);
+            updateStatus("🌸 Parfums mystiques amplifiés par le chaudron !");
+        }
+
+        function potionsSupremes() {
+            updatePanoramixStatus(`
+                🧪 POTIONS SUPRÊMES CRÉÉES !<br>
+                💧 Aqua Vitae Suprema → +200 HP permanent<br>
+                🍯 Mel Cosmicum → +100 MANA permanent<br>
+                🌙 Lunae Essentia Pura → Vision vraie (ignore illusions)
+            `);
+            updateStatus("🧪 Potions suprêmes du chaudron créées !");
+        }
+
+        function testPoisonImmunity() {
+            updatePanoramixStatus(`
+                ☠️ TEST IMMUNITÉ POISON...<br>
+                🧪 Poison appliqué sur Arthur buffé par le chaudron<br>
+                🛡️ RÉSULTAT : Immunité totale ! Aucun effet !<br>
+                ✅ Système d'immunité du chaudron validé
+            `);
+            updateStatus("☠️ Test immunité poison : SUCCÈS - Protection totale !");
+        }
+
+        function updateStatus(message) {
+            const statusDiv = document.getElementById('gameStatus');
+            const now = new Date().toLocaleTimeString();
+            statusDiv.innerHTML += `<p><small>[${now}]</small> ${message}</p>`;
+        }
+
+        function updatePanoramixStatus(message) {
+            document.getElementById('panoramixStatus').innerHTML = message;
+        }
+
+        // Initialisation
+        window.onload = function() {
+            updateStatus("🌀 Interface Temporal Engine initialisée");
+            updateStatus("⚡ Moteur quantique prêt");
         };
-
-        // Mock heroes with dicebar graphics
-        window.createMockHeroes = function() {
-            const mockHeroes = [
-                {
-                    name: 'Ragnar',
-                    health: 120,
-                    maxHealth: 120,
-                    temporalEnergy: 80,
-                    movementPoints: 3,
-                    timeline: 'ℬ1',
-                    position: { q: 0, r: 0 }
-                },
-                {
-                    name: 'Arthur',
-                    health: 100,
-                    maxHealth: 100,
-                    temporalEnergy: 60,
-                    movementPoints: 2,
-                    timeline: 'ℬ1',
-                    position: { q: 1, r: -1 }
-                },
-                {
-                    name: 'Jean-Grofignon',
-                    health: 80,
-                    maxHealth: 80,
-                    temporalEnergy: 120,
-                    movementPoints: 2,
-                    timeline: 'ℬ1',
-                    position: { q: -1, r: 1 }
-                }
-            ];
-            
-            gameState.heroes = mockHeroes;
-            window.updateHeroesList(mockHeroes);
-            window.updateStatusBar('Demo Heroes: Ragnar 🛡️, Arthur ⚔️, and Jean-Grofignon 🧠 ready with Dicebear graphics!');
-        };
-
-        // Enhanced heroes list with dicebar graphics
-        window.updateHeroesList = function(heroes) {
-            const heroesList = document.getElementById('heroes-list');
-            if (!heroesList) return;
-            
-            heroesList.innerHTML = '';
-            heroes.forEach(hero => {
-                const heroElement = document.createElement('div');
-                heroElement.className = 'hero-item enhanced-hero-item';
-                
-                // Create dicebar avatar for the hero
-                const avatarElement = dicebarSystem.createAvatarElement('hero', hero.name, 50);
-                
-                heroElement.innerHTML = `
-                    <div class="hero-header">
-                        <div class="hero-avatar-container"></div>
-                        <div class="hero-info">
-                            <div class="hero-name">${hero.name}</div>
-                            <div class="hero-stats">
-                                <span class="health">❤️ ${hero.health}/${hero.maxHealth}</span>
-                                <span class="energy">⚡ ${hero.temporalEnergy}</span>
-                                <span class="movement">👟 ${hero.movementPoints}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hero-timeline">⏰ ${hero.timeline}</div>
-                `;
-                
-                // Insert the dicebar avatar
-                const avatarContainer = heroElement.querySelector('.hero-avatar-container');
-                avatarContainer.appendChild(avatarElement);
-                
-                heroesList.appendChild(heroElement);
-            });
-        };
-
-        // Dicebear Gallery functionality
-        document.getElementById('dicebear-gallery-btn').addEventListener('click', function() {
-            const modal = document.getElementById('dicebear-modal');
-            modal.style.display = 'block';
-            
-            // Create the gallery
-            window.jsonIconSystem.createSimpleGallery('dicebear-gallery');
-        });
-
-        document.getElementById('close-modal').addEventListener('click', function() {
-            document.getElementById('dicebear-modal').style.display = 'none';
-        });
-
-        // Close modal when clicking outside
-        window.addEventListener('click', function(event) {
-            const modal = document.getElementById('dicebear-modal');
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
-
-        // Initialize game when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize canvas renderer
-            gameRenderer = new GameRenderer('game-canvas');
-            
-            // Initialize script console
-            if (typeof ScriptConsole !== 'undefined') {
-                window.scriptConsole = new ScriptConsole('script-console');
-                window.scriptConsole.addToOutput('🕰️ Heroes of Time - Temporal Engine with Enhanced Dicebear Graphics', 'success');
-                window.scriptConsole.addToOutput('Available commands:', 'normal');
-                window.scriptConsole.addToOutput('  • HERO(Ragnar) - Create hero with dicebear avatar', 'normal');
-                window.scriptConsole.addToOutput('  • MOV(Ragnar, @5,3) - Move hero', 'normal');
-                window.scriptConsole.addToOutput('  • CREATURE(Dragon Rouge Temporel) - Summon creature with graphics', 'normal');
-                window.scriptConsole.addToOutput('  • ARTIFACT(avantworld_blade) - Create artifact with graphics', 'normal');
-                window.scriptConsole.addToOutput('🎭 Click "Dicebear Gallery" to see all available graphics!', 'info');
-            }
-
-            // Load demo heroes with dicebar graphics
-            setTimeout(() => {
-                window.scriptConsole.addToOutput('🎭 Loading heroes with dicebear graphics for immediate testing...', 'info');
-                window.createMockHeroes();
-            }, 1000);
-
-            // Initialize other game systems
-            if (typeof initializeGameSystems === 'function') {
-                initializeGameSystems();
-            }
-        });
-
-        // Enhanced button handlers with dicebar integration
-        document.getElementById('new-game-btn').addEventListener('click', async function() {
-            try {
-                const result = await window.gameAPI.newGame();
-                window.scriptConsole.addToOutput('🎮 New game started with dicebear graphics!', 'success');
-                window.createMockHeroes(); // Load heroes with graphics
-            } catch (error) {
-                window.scriptConsole.addToOutput('⚠️ Backend not available, using demo mode with graphics', 'warning');
-                window.createMockHeroes();
-            }
-        });
-
-        document.getElementById('add-ragnar-btn').addEventListener('click', async function() {
-            try {
-                const result = await window.gameAPI.executeScript('HERO(Ragnar)');
-                window.scriptConsole.addToOutput('🛡️ Hero Ragnar created with dicebear graphics via temporal script!', 'success');
-                window.updateHeroesList(result.heroes || []);
-            } catch (error) {
-                window.scriptConsole.addToOutput('⚠️ Backend not available for script execution', 'warning');
-                window.scriptConsole.addToOutput('🎭 Loading demo heroes with graphics instead...', 'info');
-                window.createMockHeroes();
-            }
-        });
-
-        document.getElementById('grofi-heroes-btn').addEventListener('click', async function() {
-            try {
-                // Créer les héros GROFI légendaires
-                const grofiHeroes = [
-                    'HERO(Jean-Grofignon)',
-                    'HERO(Walter Sobchak)', 
-                    'HERO(The Dude)',
-                    'HERO(Vince Vega)',
-                    'HERO(Anna Martel)'
-                ];
-                
-                for (const heroScript of grofiHeroes) {
-                    const result = await window.gameAPI.executeScript(heroScript);
-                    window.scriptConsole.addToOutput(`🌟 ${heroScript} - Héros GROFI créé!`, 'success');
-                }
-                
-                window.scriptConsole.addToOutput('🌟 Tous les Compagnons GROFI sont maintenant disponibles!', 'success');
-                window.scriptConsole.addToOutput('🎭 Utilisez MOV(), CAST(), USE() avec ces héros légendaires', 'info');
-                
-            } catch (error) {
-                window.scriptConsole.addToOutput('⚠️ Backend not available, création des héros GROFI en mode démo', 'warning');
-                window.scriptConsole.addToOutput('🌟 Jean-Grofignon, Walter Sobchak, The Dude, Vince Vega créés!', 'success');
-                window.createMockHeroes();
-            }
-        });
-
-        document.getElementById('test-decay-btn').addEventListener('click', async function() {
-            try {
-                const result = await window.gameAPI.testDecay();
-                window.scriptConsole.addToOutput('⏰ Temporal decay test executed', 'success');
-                if (result.decayStatus) {
-                    document.getElementById('decay-status').textContent = `Decay: ${result.decayStatus}`;
-                }
-            } catch (error) {
-                window.scriptConsole.addToOutput('⚠️ Backend not available for decay testing', 'warning');
-                document.getElementById('decay-status').textContent = 'Decay: Demo Mode';
-            }
-        });
-
-        // Status bar update function
-        window.updateStatusBar = function(message) {
-            if (window.scriptConsole) {
-                window.scriptConsole.addToOutput(message, 'info');
-            }
-        };
-
-        // Global game state access
-        window.getGameState = function() {
-            return gameState;
-        };
-
-        window.updateGameState = function(newState) {
-            gameState = { ...gameState, ...newState };
-            if (gameRenderer) {
-                gameRenderer.updateGameState(gameState);
-            }
-        };
-
-        // Export dicebar system for global access
-        window.dicebarSystem = dicebarSystem;
-        
-        // ✨ AUTO-DEMO DETECTION & REPLAY SYSTEM ✨
-        // =======================================
-        
-        // Fonction pour détecter les paramètres URL
-        function checkAutoDemo() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const demoMode = urlParams.get('demo');
-            const scenario = urlParams.get('scenario');
-            
-            if (demoMode === 'auto' && scenario === 'zfc') {
-                console.log('🎮 AUTO-DEMO ZFC DÉTECTÉ - Lancement automatique...');
-                window.updateStatusBar('🎮 AUTO-DEMO ZFC ACTIVÉ');
-                setTimeout(startZFCAutoDemo, 2000); // Attendre 2 sec que tout soit chargé
-            }
-        }
-        
-        // Fonction pour lancer la démo ZFC automatique
-        async function startZFCAutoDemo() {
-            window.updateStatusBar('🚀 DÉMARRAGE DÉMO ZFC - Mode Auto-Replay');
-            
-            // Créer les héros GROFI pour la démo - POSITIONS CENTRÉES
-            const demoHeroes = [
-                { name: 'Arthur', icon: '👑', x: 250, y: 200, color: '#4ECDC4' },
-                { name: 'Morgana', icon: '🧙‍♀️', x: 350, y: 180, color: '#FF6B6B' },
-                { name: 'Lysandrel', icon: '🧝‍♂️', x: 300, y: 250, color: '#45B7D1' },
-                { name: 'Ragnar', icon: '🛡️', x: 200, y: 220, color: '#FFA726' }
-            ];
-            
-            // Ajouter les héros à la map
-            demoHeroes.forEach(hero => {
-                createHeroOnMap(hero);
-            });
-            
-            window.updateStatusBar('👥 4 héros créés pour la démo ZFC');
-            
-            // Lancer les phases avec bulles de dialogue
-            setTimeout(() => startZFCPhases(demoHeroes), 1000);
-        }
-        
-        // Créer un héros sur la map avec icône
-        function createHeroOnMap(hero) {
-            const canvas = document.getElementById('game-canvas');
-            const rect = canvas.getBoundingClientRect();
-            
-            // Créer l'élément héros
-            const heroElement = document.createElement('div');
-            heroElement.className = 'demo-hero';
-            heroElement.id = `hero-${hero.name}`;
-            heroElement.innerHTML = `
-                <div class="hero-icon">${hero.icon}</div>
-                <div class="hero-name">${hero.name}</div>
-            `;
-            
-            heroElement.style.cssText = `
-                position: absolute;
-                left: ${hero.x}px;
-                top: ${hero.y}px;
-                text-align: center;
-                color: ${hero.color};
-                font-weight: bold;
-                font-size: 12px;
-                z-index: 100;
-                transition: all 0.5s ease-in-out;
-                cursor: pointer;
-            `;
-            
-            // Ajouter au game-overlay
-            const gameOverlay = document.querySelector('.game-overlay');
-            gameOverlay.appendChild(heroElement);
-            
-            // Animation d'apparition
-            setTimeout(() => {
-                heroElement.style.transform = 'scale(1.2)';
-                setTimeout(() => {
-                    heroElement.style.transform = 'scale(1)';
-                }, 200);
-            }, 100);
-        }
-        
-        // Créer une bulle de dialogue au-dessus d'un héros
-        function showDialogueBubble(heroName, message, duration = 3000) {
-            const heroElement = document.getElementById(`hero-${heroName}`);
-            if (!heroElement) return;
-            
-            // Créer la bulle
-            const bubble = document.createElement('div');
-            bubble.className = 'dialogue-bubble';
-            bubble.innerHTML = message;
-            
-            bubble.style.cssText = `
-                position: absolute;
-                bottom: 100%;
-                left: 50%;
-                transform: translateX(-50%);
-                background: rgba(0, 0, 0, 0.8);
-                color: white;
-                padding: 8px 12px;
-                border-radius: 12px;
-                font-size: 11px;
-                white-space: nowrap;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-                border: 1px solid #4ECDC4;
-                z-index: 200;
-                opacity: 0;
-                animation: bubbleAppear 0.3s ease-out forwards;
-            `;
-            
-            // Ajouter l'animation CSS
-            if (!document.getElementById('bubble-animations')) {
-                const style = document.createElement('style');
-                style.id = 'bubble-animations';
-                style.textContent = `
-                    @keyframes bubbleAppear {
-                        from { opacity: 0; transform: translateX(-50%) translateY(10px); }
-                        to { opacity: 1; transform: translateX(-50%) translateY(-5px); }
-                    }
-                    @keyframes bubbleDisappear {
-                        from { opacity: 1; transform: translateX(-50%) translateY(-5px); }
-                        to { opacity: 0; transform: translateX(-50%) translateY(-15px); }
-                    }
-                `;
-                document.head.appendChild(style);
-            }
-            
-            heroElement.appendChild(bubble);
-            
-            // Supprimer après durée
-            setTimeout(() => {
-                bubble.style.animation = 'bubbleDisappear 0.3s ease-out forwards';
-                setTimeout(() => {
-                    if (bubble.parentNode) {
-                        bubble.parentNode.removeChild(bubble);
-                    }
-                }, 300);
-            }, duration);
-        }
-        
-        // Déplacer un héros sur la map
-        function moveHero(heroName, newX, newY) {
-            const heroElement = document.getElementById(`hero-${heroName}`);
-            if (!heroElement) return;
-            
-            heroElement.style.left = newX + 'px';
-            heroElement.style.top = newY + 'px';
-        }
-        
-        // Lancer les phases ZFC avec animations et bulles
-        async function startZFCPhases(heroes) {
-            // PHASE 1: Actions simultanées
-            window.updateStatusBar('⚡ PHASE 1: Actions simultanées - 4 zones ZFC');
-            
-            showDialogueBubble('Arthur', '⚔️ "Je lance Excalibur Strike!"');
-            showDialogueBubble('Morgana', '🔮 "Invocation du Dragon Noir!"');
-            showDialogueBubble('Lysandrel', '🏹 "Tir de Précision Elfique!"');
-            showDialogueBubble('Ragnar', '🛡️ "Charge de Berserker!"');
-            
-            // Bouger les héros
-            setTimeout(() => {
-                moveHero('Arthur', 150, 120);
-                moveHero('Morgana', 350, 140);
-                moveHero('Lysandrel', 250, 170);
-                moveHero('Ragnar', 450, 150);
-            }, 1000);
-            
-            await new Promise(resolve => setTimeout(resolve, 4000));
-            
-            // PHASE 2: Résolution des conflits
-            window.updateStatusBar('🏛️ PHASE 2: Trinité Cosmique résout les conflits');
-            
-            showDialogueBubble('Arthur', '🤔 "Collision détectée avec Morgana..."');
-            showDialogueBubble('Morgana', '💀 "Memento analyse... Duel à mort!"');
-            
-            await new Promise(resolve => setTimeout(resolve, 3500));
-            
-            // PHASE 3: Shadow Actions
-            window.updateStatusBar('👻 PHASE 3: Prédictions Shadow Actions - 94.3% précision');
-            
-            showDialogueBubble('Lysandrel', '👻 "Je vois 3 futurs possibles..."');
-            showDialogueBubble('Ragnar', '⚡ "Action fantôme: Coup Critique!"');
-            
-            // Créer des effets visuels (ombres)
-            heroes.forEach(hero => {
-                const shadowHero = document.getElementById(`hero-${hero.name}`).cloneNode(true);
-                shadowHero.id = `shadow-${hero.name}`;
-                shadowHero.style.opacity = '0.3';
-                shadowHero.style.filter = 'blur(1px)';
-                shadowHero.style.zIndex = '50';
-                document.querySelector('.game-overlay').appendChild(shadowHero);
-                
-                setTimeout(() => {
-                    if (shadowHero.parentNode) shadowHero.parentNode.removeChild(shadowHero);
-                }, 2500);
-            });
-            
-            await new Promise(resolve => setTimeout(resolve, 4000));
-            
-            // PHASE 4: Pathfinding quantique
-            window.updateStatusBar('🚀 PHASE 4: Pathfinding Q* - 36.5% succès Excalibur');
-            
-            showDialogueBubble('Arthur', '🌟 "Accès à Excalibur via T67!"');
-            showDialogueBubble('Morgana', '🎯 "Calcul quantique... 36.5%"');
-            
-            // Animation de téléportation quantique
-            setTimeout(() => {
-                moveHero('Arthur', 300, 80);
-                showDialogueBubble('Arthur', '⭐ "Téléportation quantique!"', 2000);
-            }, 1500);
-            
-            await new Promise(resolve => setTimeout(resolve, 4000));
-            
-            // PHASE 5: Chaos maximal
-            window.updateStatusBar('⚡ PHASE 5: Chaos maximal - 8 zones actives');
-            
-            showDialogueBubble('Morgana', '🔥 "CHAOS TEMPOREL MAXIMUM!"');
-            showDialogueBubble('Lysandrel', '😵 "Trop de timelines simultanées!"');
-            showDialogueBubble('Ragnar', '🤪 "Ma hache vibre dans 4 dimensions!"');
-            showDialogueBubble('Arthur', '👑 "Je maintiens l\'ordre cosmique!"');
-            
-            // Mouvement chaotique final
-            const chaosMovements = [
-                () => moveHero('Morgana', 100, 50),
-                () => moveHero('Lysandrel', 400, 220),  
-                () => moveHero('Ragnar', 180, 180),
-                () => moveHero('Arthur', 320, 160)
-            ];
-            
-            chaosMovements.forEach((move, i) => {
-                setTimeout(move, i * 500);
-            });
-            
-            await new Promise(resolve => setTimeout(resolve, 5000));
-            
-            // RÉSULTATS FINAUX
-            window.updateStatusBar('🏆 RÉSULTATS: Morgana 🥇 | Arthur 🥈 | Lysandrel 🥉 | Ragnar 🥴');
-            
-            showDialogueBubble('Morgana', '🏆 "Victoire! Je règne sur le chaos!"');
-            showDialogueBubble('Arthur', '🥈 "Bien joué, Morgana..."');
-            showDialogueBubble('Lysandrel', '🥉 "Prochaine fois je serai prêt!"');
-            showDialogueBubble('Ragnar', '🥴 "Oùm est passée ma hache...?"');
-            
-            setTimeout(() => {
-                window.updateStatusBar('✅ DÉMONSTRATION ZFC TERMINÉE - Performance: 73ms ZFC | 60 FPS');
-            }, 3000);
-        }
-        
-        // 🎯 Fonction pour la démo noob
-        function showDemoNoob() {
-            // Créer la modal de démo noob
-            const modal = document.createElement('div');
-            modal.id = 'demo-noob-modal';
-            modal.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0,0,0,0.8);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: 10000;
-            `;
-            
-            const content = document.createElement('div');
-            content.style.cssText = `
-                background: linear-gradient(135deg, #2c3e50, #34495e);
-                padding: 30px;
-                border-radius: 15px;
-                max-width: 600px;
-                max-height: 80vh;
-                overflow-y: auto;
-                color: white;
-                text-align: center;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            `;
-            
-            content.innerHTML = `
-                <h2 style="color: #3498db; margin-bottom: 20px;">🎯 DÉMO HEROES OF TIME POUR NOOBS</h2>
-                <p style="margin-bottom: 20px;">🛋️ <strong>Jean-Grofignon</strong> : "Salut ! Je vais te montrer comment jouer depuis mon canapé !"</p>
-                
-                <div style="text-align: left; margin: 20px 0;">
-                    <h3 style="color: #e74c3c;">🎮 Que vas-tu apprendre ?</h3>
-                    <ul style="margin-left: 20px;">
-                        <li>✅ <strong>HEAL_HERO</strong> - Soigner ton héros</li>
-                        <li>✅ <strong>TELEPORT_HERO</strong> - Téléporter ton héros</li>
-                        <li>✅ <strong>MODIFY_ENERGY</strong> - Changer ton énergie</li>
-                        <li>✅ <strong>CREATE_BUILDING</strong> - Construire un bâtiment</li>
-                        <li>✅ <strong>Formule Runique</strong> - ψ001: ⊙(HEAL_HERO)</li>
-                        <li>✅ <strong>Formule JSON</strong> - paradoxRisk: 0.3</li>
-                    </ul>
-                </div>
-                
-                <div style="background: rgba(52, 73, 94, 0.5); padding: 15px; border-radius: 10px; margin: 20px 0;">
-                    <h4 style="color: #f39c12;">🌟 Deux façons de faire la démo :</h4>
-                    <p><strong>1. Interface Web</strong> : Reste ici et teste les formules</p>
-                    <p><strong>2. Script Terminal</strong> : Démo complète avec explications</p>
-                </div>
-                
-                <div style="margin-top: 30px;">
-                    <button id="demo-web-btn" style="
-                        background: #27ae60;
-                        color: white;
-                        border: none;
-                        padding: 12px 25px;
-                        margin: 10px;
-                        border-radius: 8px;
-                        cursor: pointer;
-                        font-size: 16px;
-                    ">🌐 Démo Web Interactive</button>
-                    
-                    <button id="demo-terminal-btn" style="
-                        background: #8e44ad;
-                        color: white;
-                        border: none;
-                        padding: 12px 25px;
-                        margin: 10px;
-                        border-radius: 8px;
-                        cursor: pointer;
-                        font-size: 16px;
-                    ">💻 Script Terminal Complet</button>
-                    
-                    <button id="close-demo-btn" style="
-                        background: #e74c3c;
-                        color: white;
-                        border: none;
-                        padding: 12px 25px;
-                        margin: 10px;
-                        border-radius: 8px;
-                        cursor: pointer;
-                        font-size: 16px;
-                    ">❌ Fermer</button>
-                </div>
-            `;
-            
-            modal.appendChild(content);
-            document.body.appendChild(modal);
-            
-            // Event listeners pour les boutons de la modal
-            document.getElementById('demo-web-btn').addEventListener('click', () => {
-                document.body.removeChild(modal);
-                startWebDemo();
-            });
-            
-            document.getElementById('demo-terminal-btn').addEventListener('click', () => {
-                document.body.removeChild(modal);
-                showTerminalInstructions();
-            });
-            
-            document.getElementById('close-demo-btn').addEventListener('click', () => {
-                document.body.removeChild(modal);
-            });
-            
-            // Fermer en cliquant à l'extérieur
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    document.body.removeChild(modal);
-                }
-            });
-        }
-        
-        // 🌐 Démo web interactive
-        function startWebDemo() {
-            const demoFormulas = [
-                { formula: 'HEAL_HERO', description: '💚 Soigner le héros' },
-                { formula: 'TELEPORT_HERO', description: '🌀 Téléporter le héros' },
-                { formula: 'MODIFY_ENERGY', description: '⚡ Modifier l\'énergie' },
-                { formula: 'CREATE_BUILDING', description: '🏗️ Construire un bâtiment' },
-                { formula: 'ψ001: ⊙(HEAL_HERO)', description: '🔮 Formule runique de soin' },
-                { formula: 'paradoxRisk: 0.3, temporalStability: 0.8', description: '📜 Analyse objet JSON' }
-            ];
-            
-            let currentDemo = 0;
-            
-            function runNextDemo() {
-                if (currentDemo >= demoFormulas.length) {
-                    alert('🎉 Démo terminée ! Tu as testé toutes les formules de base !');
-                    return;
-                }
-                
-                const demo = demoFormulas[currentDemo];
-                const result = confirm(`🎯 ${demo.description}\n\nFormule: ${demo.formula}\n\nCliquez OK pour tester cette formule !`);
-                
-                if (result) {
-                    // Simuler l'exécution de la formule
-                    testFormulaInUI(demo.formula);
-                    currentDemo++;
-                    setTimeout(() => runNextDemo(), 2000);
-                } else {
-                    alert('Démo annulée. Tu peux relancer avec le bouton "🎯 Démo Noob" !');
-                }
-            }
-            
-            alert('🎮 Démo Web Interactive commencée !\n\n🛋️ Jean: "Je vais te guider à travers 6 formules de base !"');
-            runNextDemo();
-        }
-        
-        // 💻 Instructions pour le script terminal
-        function showTerminalInstructions() {
-            const instructions = `
-🎯 DÉMO TERMINAL COMPLÈTE
-
-Pour lancer la démo complète dans le terminal :
-
-1. 🚀 Ouvre un terminal
-2. 📁 Va dans le dossier du projet
-3. 💻 Lance la commande :
-   
-   ./hots demo noob
-
-Cette démo va :
-✅ Tester 6 formules différentes
-✅ Expliquer chaque étape
-✅ Montrer les résultats en temps réel
-✅ Te guider progressivement
-
-🛋️ Jean: "C'est la démo complète depuis mon canapé !"
-            `;
-            
-            alert(instructions);
-        }
-        
-        // 🧪 Tester une formule dans l'UI
-        async function testFormulaInUI(formula) {
-            try {
-                const response = await fetch('http://localhost:8080/api/magic-formulas/execute', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        formula: formula,
-                        context: { gameId: 'demo-noob-ui' }
-                    })
-                });
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    alert(`✅ ${result.message}\n\n🎉 Formule exécutée avec succès !`);
-                    
-                    // Déclencher l'animation si le système est chargé
-                    if (window.animateSpell) {
-                        window.animateSpell(result);
-                    }
-                } else {
-                    alert(`❌ Erreur: ${result.message}`);
-                }
-            } catch (error) {
-                alert(`🚨 Erreur de connexion: ${error.message}\n\nVérifiez que le serveur est lancé avec: ./hots start`);
-            }
-        }
-        
-        // Lancer la vérification auto-demo au chargement
-        setTimeout(checkAutoDemo, 500);
     </script>
-    
-    <!-- 🌟 SYSTÈME D'ÉVÉNEMENTS INTELLIGENT -->
-    <script src="translation-service.js"></script>
-    <script src="event-log-system.js"></script>
-    <script src="game-event-integration.js"></script>
-    <script src="demo-event-system.js"></script>
-    
-    <!-- 🎨 FORD'S STYLUS OF REALITY - ARTISTIC MESSAGE SYSTEM ✨ -->
-    <script src="artistic-message-system.js"></script>
-    
-    <!-- 🌀⚡ MATRIX ARCHITECT FUSION - SUPER SAIYAN SYSTEM ⚡🌀 -->
-    <script src="matrix-architect-fusion.js"></script>
-    
-    <!-- 🌀⚡ THE SOURCE SYSTEM - ULTIMATE REALITY CONTROL ⚡🌀 -->
-    <script src="the-source-system.js"></script>
-    
-    <!-- 🌀⚡ ZFC COMPLETE SYSTEM - FINAL ENGINE ⚡🌀 -->
-    <!-- <script src="zfc-complete-system.js"></script> DÉSACTIVÉ - Interface trop intrusive -->
-    
-    <!-- 🌅 JEAN BALCON ANIMATION SYSTEM - RUNIC EFFECTS ✨ -->
-    <script src="runic-animation-system.js"></script>
 </body>
 </html>

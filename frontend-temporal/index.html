@@ -861,53 +861,15 @@
                         <div class="hero-stats">HP: 100/100 | Pos: (15,12)</div>
                     </div>
                 </div>
-            `;
-        }
-
-        function startScenario(type) {
-            addToConsole('🎭 Démarrage du scénario : ' + type);
-            closeTemporalMenu();
-            
-            switch(type) {
-                case 'classic':
-                    addToConsole('⚔️ Bataille Classique initialisée');
-                    break;
-                case 'quantum':
-                    addToConsole('🔮 Chaos Quantique activé');
-                    break;
-                case 'temporal':
-                    addToConsole('🕰️ Conquête Temporelle lancée');
-                    break;
-                case 'artifacts':
-                    addToConsole('🏺 Chasse aux Artefacts commencée');
-                    break;
-            }
-            
-            updateGameStatus();
-        }
-
-        function applyTemporalConfig() {
-            const config = {
-                maxPsiStates: document.getElementById('maxPsiStates').value,
-                maxTimelines: document.getElementById('maxTimelines').value,
-                turnTime: document.getElementById('turnTime').value,
-                mapSize: document.getElementById('mapSize').value
-            };
-            
-            addToConsole('⚙️ Configuration appliquée : ' + JSON.stringify(config, null, 2));
-            closeTemporalMenu();
-            loadDemoGame();
-        }
-
-        // Gestion des touches
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && e.target.id === 'commandInput') {
-                executeCommand();
-            }
-            if (e.key === 'Escape') {
-                closeTemporalMenu();
-            }
-        });
-    </script>
-</body>
-</html>
+                <div class="hero-card panoramix-card">
+                    <div class="hero-avatar panoramix-avatar">🧙‍♂️</div>
+                    <div class="hero-info">
+                        <div class="hero-name">Panoramix V2.0</div>
+                        <div class="hero-stats">HP: 120/120 | Pos: (13,11) | 🍯 Chaudron</div>
+                        <div class="panoramix-status">
+                            <span class="chaudron-indicator">🍯 Chaudron Quantique Actif</span>
+                            <div class="buff-effects">+50 ATK/DEF | +100 HP | 🧪 Immunité</div>
+                        </div>
+                    </div>
+                </div>
+            `

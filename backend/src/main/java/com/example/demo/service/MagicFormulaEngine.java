@@ -30,6 +30,10 @@ public class MagicFormulaEngine {
     // @Autowired
     // private GameService gameService;
     
+    // 🌟 NOUVEAU: Service de traduction avancé intégré
+    @Autowired
+    private FormulaTranslationService translationService;
+    
     // 🎖️ WALTER VIETNAM TRACKING
     private Map<String, Integer> formulaExecutionCounts = new HashMap<>();
     private Map<String, Long> formulaExecutionTimes = new HashMap<>();
@@ -217,6 +221,16 @@ public class MagicFormulaEngine {
             case "POTION_CREATE":
                 return executePotionCreate(context);
                 
+            // 🔮 NOUVELLES FORMULES CATÉGORIE A - BATCH 4 (EXCALIBUR & COMBAT)
+            case "EXCALIBUR_BANKAI":
+                return executeExcaliburBankai(context);
+                
+            case "BATTLE_HEROES":
+                return executeBattleHeroes(context);
+                
+            case "PANORAMIX_CAULDRON":
+                return executePanoramixCauldron(context);
+                
             default:
                 return FormulaResult.error("Formule simple inconnue: " + formula);
         }
@@ -232,7 +246,7 @@ public class MagicFormulaEngine {
     }
     
     /**
-     * 🔮 EXÉCUTION FORMULE RUNIQUE
+     * 🔮 EXÉCUTION FORMULE RUNIQUE - AVEC TRADUCTION INTELLIGENTE
      */
     private FormulaResult executeRunicFormula(String formula, GameContext context) {
         try {
@@ -247,17 +261,28 @@ public class MagicFormulaEngine {
             String psiId = matcher.group(1);
             String runicContent = matcher.group(2);
             
-            // 🌀 JEAN-GROFIGNON QUANTUM PROCESSING
+            // 🌀 JEAN-GROFIGNON QUANTUM PROCESSING + TRADUCTION
             Map<String, Object> quantumResult = new HashMap<>();
             quantumResult.put("psiState", "ψ" + psiId);
             quantumResult.put("superposition", "⊙");
             quantumResult.put("originalFormula", formula);
+            
+            // 🎯 TRADUCTION INTELLIGENTE DU CONTENU SELON L'EFFET
+            String narrativeTranslation = translateRunicContent(runicContent, psiId);
             
             // Parser le contenu runique pour extraire l'action
             if (runicContent.contains("MOV(")) {
                 quantumResult.put("action", "MOVE");
                 quantumResult.put("quantumType", "TEMPORAL_MOVEMENT");
                 quantumResult.put("effect", "Hero position updated via quantum superposition");
+            } else if (runicContent.contains("HEAL_HERO")) {
+                quantumResult.put("action", "HEAL");
+                quantumResult.put("quantumType", "VITAL_RESTORATION");
+                quantumResult.put("effect", "Life force restored via quantum healing");
+            } else if (runicContent.contains("DAMAGE_ENEMY")) {
+                quantumResult.put("action", "DAMAGE");
+                quantumResult.put("quantumType", "DESTRUCTIVE_FORCE");
+                quantumResult.put("effect", "Quantum energy weaponized against enemies");
             } else if (runicContent.contains("BATTLE(")) {
                 quantumResult.put("action", "BATTLE");
                 quantumResult.put("quantumType", "CAUSAL_COMBAT");
@@ -272,11 +297,11 @@ public class MagicFormulaEngine {
                 quantumResult.put("effect", "Quantum state manipulated");
             }
             
-                         // 🎖️ WALTER VIETNAM VALIDATION
-             // context.recordSuccess("RUNIC_FORMULA_EXECUTED"); // Méthode non disponible dans GameContext
+            // 🎖️ WALTER VIETNAM VALIDATION
+            // context.recordSuccess("RUNIC_FORMULA_EXECUTED"); // Méthode non disponible dans GameContext
             
             return FormulaResult.success(
-                "🔮 Formule runique exécutée avec succès ! État ψ" + psiId + " activé", 
+                narrativeTranslation, // 🔥 TRADUCTION NARRATIVE AU LIEU DE MESSAGE GÉNÉRIQUE
                 quantumResult, 
                 "RUNIC_QUANTUM"
             );
@@ -287,6 +312,109 @@ public class MagicFormulaEngine {
                 "🚨 Erreur d'exécution runique: " + e.getMessage(), 
                 "RUNIC_ERROR"
             );
+        }
+    }
+    
+    /**
+     * 🎯 TRADUCTION NARRATIVE HYBRIDE - INTELLIGENT FALLBACK
+     * 1. Vérifie si on a une description LLM dans le JSON
+     * 2. Sinon utilise le FormulaTranslationService
+     * 3. En dernier recours, utilise la logique algo simple
+     */
+    private String translateRunicContent(String runicContent, String psiId) {
+        try {
+            // 🔥 ÉTAPE 1: Vérifier si on a une description LLM pré-générée
+            String llmDescription = extractLLMDescription(runicContent);
+            if (llmDescription != null && !llmDescription.isEmpty()) {
+                return "📜 " + llmDescription + " (ψ" + psiId + ")";
+            }
+            
+            // 🔥 ÉTAPE 2: Utiliser le service de traduction avancé
+            try {
+                Map<String, Object> context = new HashMap<>();
+                context.put("psiId", psiId);
+                context.put("type", "runic_formula");
+                
+                Map<String, Object> translationResult = translationService.smartTranslate(runicContent, context);
+                if (translationResult.containsKey("traduction")) {
+                    return "✨ " + translationResult.get("traduction") + " (ψ" + psiId + ")";
+                }
+            } catch (Exception e) {
+                System.out.println("⚠️ Fallback: Service de traduction indisponible, utilisation algo simple");
+            }
+            
+            // 🔥 ÉTAPE 3: Fallback algo simple (logique actuelle)
+            return generateSimpleTranslation(runicContent, psiId);
+            
+        } catch (Exception e) {
+            return "🚨 Erreur de traduction: " + runicContent + " (ψ" + psiId + ")";
+        }
+    }
+
+    /**
+     * 🔍 Extraire description LLM du JSON si présente
+     */
+    private String extractLLMDescription(String runicContent) {
+        // Chercher des patterns comme "description": "...", "narrative": "...", etc.
+        String[] llmFields = {"description", "narrative", "story", "lore", "flavor_text", "text_description", "llm_description"};
+        
+        for (String field : llmFields) {
+            Pattern pattern = Pattern.compile("\"" + field + "\"\\s*:\\s*\"([^\"]+)\"");
+            Matcher matcher = pattern.matcher(runicContent);
+            if (matcher.find()) {
+                return matcher.group(1);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 🎯 GÉNÉRATION ALGO SIMPLE (logique d'origine conservée)
+     */
+    private String generateSimpleTranslation(String runicContent, String psiId) {
+        try {
+            // Extraire les éléments temporels
+            String timePhrase = "";
+            if (runicContent.contains("Δt+")) {
+                Pattern timePattern = Pattern.compile("Δt\\+(\\d+)");
+                Matcher timeMatcher = timePattern.matcher(runicContent);
+                if (timeMatcher.find()) {
+                    String turns = timeMatcher.group(1);
+                    timePhrase = "dans " + turns + " tours, ";
+                }
+            }
+            
+            // Extraire les coordonnées
+            String locationPhrase = "";
+            Pattern coordPattern = Pattern.compile("@(\\d+),(\\d+)");
+            Matcher coordMatcher = coordPattern.matcher(runicContent);
+            if (coordMatcher.find()) {
+                String x = coordMatcher.group(1);
+                String y = coordMatcher.group(2);
+                locationPhrase = "aux coordonnées mystiques (" + x + ", " + y + "), ";
+            }
+            
+            // Extraire l'action principale
+            String actionPhrase = "une énergie quantique se manifeste";
+            if (runicContent.contains("MOV(")) {
+                actionPhrase = "Arthur étend sa main dans le vide, projetant un écho miroir vers";
+            } else if (runicContent.contains("HEAL_HERO")) {
+                actionPhrase = "une lumière dorée enveloppe le héros, restaurant";
+            } else if (runicContent.contains("DAMAGE_ENEMY")) {
+                actionPhrase = "des éclairs de pure destruction frappent";
+            } else if (runicContent.contains("BATTLE(")) {
+                actionPhrase = "les destins s'entrechoquent dans un fracas temporel vers";
+            } else if (runicContent.contains("CREATE(")) {
+                actionPhrase = "la réalité se plie et façonne";
+            }
+            
+            // Construire la phrase narrative
+            return "🌀 État ψ" + psiId + " activé: " + timePhrase + actionPhrase + " " + locationPhrase + 
+                   "le déplacement temporel de " + (timePhrase.isEmpty() ? "maintenant" : timePhrase.replace("dans ", "").replace(" tours, ", " cycles")) + 
+                   " " + locationPhrase;
+            
+        } catch (Exception e) {
+            return "🌀 État ψ" + psiId + " activé: Une perturbation quantique résonne à travers les dimensions";
         }
     }
     
@@ -604,6 +732,61 @@ public class MagicFormulaEngine {
             "🧪 Potion créée par alchimie runique",
             Map.of("potionType", "Grande Guérison", "potency", 85, "uses", 3, "rarity", "rare"),
             "RUNIC_POTION_CREATE"
+        );
+    }
+
+    // 🔮 BATCH 4 - NOUVELLES FORMULES CATÉGORIE A (EXCALIBUR & COMBAT)
+    private FormulaResult executeExcaliburBankai(GameContext context) {
+        return FormulaResult.success(
+            "🗡️ EXCALIBUR BANKAI - Épée de la Réalité Déchirée !",
+            Map.of(
+                "hero", "Arthur", 
+                "weapon", "Excalibur", 
+                "bankaiMode", "REALITY_WEAVER",
+                "damage", 999, 
+                "specialEffect", "REALITY_SLASH",
+                "duration", 10,
+                "manaCost", 100
+            ),
+            "EXCALIBUR_BANKAI"
+        );
+    }
+    
+    private FormulaResult executeBattleHeroes(GameContext context) {
+        return FormulaResult.success(
+            "⚔️ COMBAT ÉPIQUE - Arthur vs Vince Vega !",
+            Map.of(
+                "hero1", "Arthur", 
+                "hero2", "Vince_Vega",
+                "battleType", "EPIC_DUEL",
+                "rounds", 5,
+                "winner", "Arthur",
+                "damageDealt", 150,
+                "damageReceived", 75,
+                "specialMoves", List.of("EXCALIBUR_SLASH", "VEGA_REALITY_GUN")
+            ),
+            "BATTLE_HEROES"
+        );
+    }
+    
+    private FormulaResult executePanoramixCauldron(GameContext context) {
+        return FormulaResult.success(
+            "🏺 CHAUDRON QUANTIQUE PANORAMIX - Buffs Universels !",
+            Map.of(
+                "druid", "Panoramix", 
+                "artifact", "Chaudron Quantique",
+                "buffs", Map.of(
+                    "ATK", 50,
+                    "DEF", 50,
+                    "HP", 100,
+                    "Regeneration", 20,
+                    "PoisonImmunity", true
+                ),
+                "duration", 15,
+                "affectedHeroes", List.of("Arthur", "Vince_Vega", "Morgana"),
+                "specialEffect", "QUANTUM_AMPLIFICATION"
+            ),
+            "PANORAMIX_CAULDRON"
         );
     }
 

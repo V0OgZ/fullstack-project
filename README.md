@@ -8,6 +8,26 @@
 
 ---
 
+## 🌟 **NOUVELLES DOCUMENTATIONS V2 - PANORAMIX & EXCALIBUR** 🔮
+
+### **🧙‍♂️ Panoramix Archidruide Temporel V2.0**
+- [🍯 **Lore Panoramix Complet**](docs/LORE_PANORAMIX_ARCHIDRUIDE_TEMPOREL.md) - *Archidruide avec Chaudron Quantique*
+- [🏺 **Chaudron Quantique Artifact**](game_assets/artifacts/legendaires/chaudron_quantique_panoramix.json) - *Buff total pour tous les alliés*
+
+### **⚔️ Excalibur BANKAI Arthur**
+- [🗡️ **Arthur & Excalibur BANKAI**](docs/heroes/ARTHUR_PENDRAGON_EXCALIBUR_BANKAI.md) - *Roi Temporel avec épée ultime*
+- [⚡ **Formules Excalibur**](scenarios/test_complet_excalibur_vega_50_actions.runic) - *Scénario de combat complet en runique*
+
+### **📜 Dictionnaire Runique Complet**
+- [🔤 **Dictionnaire Runique Jean**](docs/DICTIONNAIRE_RUNIC_COMPLET_JEAN.md) - *Tous les symboles et traductions*
+- [📖 **CODEX V10.0 Mis à Jour**](docs/CODEX_COMPLET_HEROES_OF_TIME.md) - *Version intégrant Panoramix et runique*
+
+### **🎮 Gameplay V2 Complet**
+- [🎯 **Combat Excalibur vs Vince Vega**](scenarios/test_complet_excalibur_vega_50_actions.runic) - *75 actions épiques*
+- [🔮 **Test Chaudron Panoramix**](scenarios/test_complet_excalibur_vega_50_actions.runic#L66-L75) - *Phase VI avec buffs et régénération*
+
+---
+
 ## ⚡ **La Rencontre Épique**
 
 **L'Œil de Wigner** scintille au sommet de la tour en ruines. Arthur s'approche prudemment - cet artefact légendaire peut forcer l'effondrement de la réalité elle-même.
