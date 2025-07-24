@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Scenario Runner - 3 Formats</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: linear-gradient(135deg, #0c0c0c, #1a1a2e, #16213e);
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            border: 3px solid #4a9eff;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            background: rgba(74, 158, 255, 0.1);
+        }
+
+        .formats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .format-panel {
+            background: rgba(0,0,0,0.6);
+            border: 2px solid;
+            border-radius: 10px;
+            padding: 20px;
+            min-height: 500px;
+        }
+
+        .format-hots { border-color: #ff69b4; }
+        .format-runic { border-color: #87ceeb; }
+        .format-json { border-color: #32cd32; }
+
+        .format-header {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .hots-header { background: rgba(255, 105, 180, 0.2); color: #ff69b4; }
+        .runic-header { background: rgba(135, 206, 235, 0.2); color: #87ceeb; }
+        .json-header { background: rgba(50, 205, 50, 0.2); color: #32cd32; }
+
+        .scenario-content {
+            background: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 5px;
+            padding: 15px;
+            font-family: 'Monaco', monospace;
+            font-size: 12px;
+            line-height: 1.4;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 5px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .btn-hots { background: linear-gradient(45deg, #ff69b4, #ff1493); }
+        .btn-runic { background: linear-gradient(45deg, #87ceeb, #4682b4); }
+        .btn-json { background: linear-gradient(45deg, #32cd32, #228b22); }
+
+        .results-panel {
+            background: rgba(0,0,0,0.8);
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .combat-log {
+            background: #1a1a1a;
+            border: 1px solid #444;
+            border-radius: 5px;
+            padding: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .log-entry {
+            margin: 5px 0;
+            padding: 5px;
+            border-left: 3px solid;
+        }
+
+        .log-action { border-color: #4a9eff; color: #4a9eff; }
+        .log-combat { border-color: #ff4444; color: #ff4444; }
+        .log-buff { border-color: #32cd32; color: #32cd32; }
+        .log-panoramix { border-color: #ffd700; color: #ffd700; background: rgba(255, 215, 0, 0.1); }
+
+        .stats-display {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .stat-card {
+            background: rgba(74, 158, 255, 0.1);
+            border: 1px solid #4a9eff;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #4a9eff;
+        }
+
+        .panoramix-section {
+            background: linear-gradient(135deg, #8B4513, #DAA520);
+            border: 3px solid #FFD700;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 15px 0;
+            color: #000;
+            text-align: center;
+        }
+
+        .chaudron-visual {
+            font-size: 3em;
+            margin: 10px 0;
+            animation: chaudronGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes chaudronGlow {
+            0% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+            100% { text-shadow: 0 0 40px rgba(255, 215, 0, 0.8); }
+        }
+
+        .quantum-symbols {
+            color: #ff69b4;
+            font-size: 16px;
+            text-shadow: 0 0 10px #ff69b4;
+            margin: 0 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎮 Heroes of Time - Scenario Runner</h1>
+        <p>🗡️⚡ Test des 3 formats : HOTS, RUNIC, JSON</p>
+        <p>🧙‍♂️ Scénario Excalibur vs Vince Vega + Panoramix Chaudron</p>
+    </div>
+
+    <div class="formats-container">
+        <!-- FORMAT HOTS -->
+        <div class="format-panel format-hots">
+            <div class="format-header hots-header">
+                🔤 FORMAT HOTS <span class="quantum-symbols">ψ ⊙ †</span>
+            </div>
+            <div class="scenario-content" id="hotsContent">
+                <div style="color: #ff69b4;">Chargement du scénario HOTS...</div>
+            </div>
+            <button class="btn btn-hots" onclick="runScenario('hots')">🚀 Exécuter HOTS</button>
+            <div style="font-size: 11px; margin-top: 10px; color: #aaa;">
+                Format natif Heroes of Time avec symboles quantiques
+            </div>
+        </div>
+
+        <!-- FORMAT RUNIC -->
+        <div class="format-panel format-runic">
+            <div class="format-header runic-header">
+                📜 FORMAT RUNIC <span style="font-family: 'Times New Roman';">ᚱᚢᚾᛁᚲ</span>
+            </div>
+            <div class="scenario-content" id="runicContent">
+                <div style="color: #87ceeb;">Chargement du scénario RUNIC...</div>
+            </div>
+            <button class="btn btn-runic" onclick="runScenario('runic')">🚀 Exécuter RUNIC</button>
+            <div style="font-size: 11px; margin-top: 10px; color: #aaa;">
+                Version runique complète avec alphabet nordique
+            </div>
+        </div>
+
+        <!-- FORMAT JSON -->
+        <div class="format-panel format-json">
+            <div class="format-header json-header">
+                📦 FORMAT JSON <span style="color: #32cd32;">{...}</span>
+            </div>
+            <div class="scenario-content" id="jsonContent">
+                <div style="color: #32cd32;">Chargement du scénario JSON...</div>
+            </div>
+            <button class="btn btn-json" onclick="runScenario('json')">🚀 Exécuter JSON</button>
+            <div style="font-size: 11px; margin-top: 10px; color: #aaa;">
+                Structure de données pour APIs et intégrations
+            </div>
+        </div>
+    </div>
+
+    <!-- PANORAMIX SECTION -->
+    <div class="panoramix-section">
+        <h3>🧙‍♂️ Panoramix l'Archidruide Temporel V2.0</h3>
+        <div class="chaudron-visual">🍯</div>
+        <div id="panoramixQuote" style="font-weight: bold; font-size: 14px;">
+            "Par Toutatis ! Mes 3 formats de scénarios sont prêts à être testés !"
+        </div>
+    </div>
+
+    <!-- RESULTS PANEL -->
+    <div class="results-panel">
+        <h3>📊 Résultats d'Exécution</h3>
+        
+        <div class="stats-display">
+            <div class="stat-card">
+                <div class="stat-value" id="arthurHp">100</div>
+                <div>Arthur HP</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="vinceHp">100</div>
+                <div>Vince HP</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="panoramixMana">100</div>
+                <div>Panoramix MANA</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="buffsActive">0</div>
+                <div>Buffs Actifs</div>
+            </div>
+        </div>
+
+        <div class="combat-log" id="combatLog">
+            <div class="log-entry log-action">🎮 Scenario Runner initialisé</div>
+            <div class="log-entry log-action">⚡ Prêt à exécuter les 3 formats</div>
+            <div class="log-entry log-panoramix">🧙‍♂️ Panoramix : "Choisissez votre format, mes amis !"</div>
+        </div>
+    </div>
+
+    <script>
+        // Données de scénarios simulées
+        const scenarios = {
+            hots: `// SCÉNARIO HOTS - Excalibur vs Vince Vega + Panoramix
+GAME: "Excalibur vs Vince Vega - Combat Épique"
+VERSION: "1.0"
+AUTHOR: "Jean-Grofignon"
+
+// Phase I - Création des héros
+CREARE_HEROS("Arthur", @15,15)
+EQUIPARE("Arthur", "excalibur_temporal")
+AFFIRMARE_RUNA("Arthur", "ψ001: ⊙(BANKAI_TEMPOREL)")
+
+CREARE_HEROS("Vince_Vega", @25,15)  
+EQUIPARE("Vince_Vega", "reality_gun")
+AFFIRMARE_RUNA("Vince_Vega", "ψ002: ⊙(POWER_WORMHOLE)")
+
+// Phase VI - Panoramix arrive
+CREARE_HEROS("Panoramix", @20,10)
+EQUIPARE("Panoramix", "chaudron_quantique_panoramix")
+FORMULA_CHAUDRON("activation", RADIUS_7, BUFF_TOTAL)
+
+// Combat avec buffs
+MOVERE("Arthur", @18,12)
+MOVERE("Vince_Vega", @22,12)
+AFFIRMARE_RUNA("Arthur", "ATK", 75)  // +50 du chaudron
+AFFIRMARE_RUNA("Vince_Vega", "ATK", 80)  // +50 du chaudron`,
+
+            runic: `// SCÉNARIO RUNIC - Version Complète
+ᚷᚨᛗᛖ: "ᛖᚲᛋᚲᚨᛚᛁᛒᚢᚱ ᚢᛋ ᚢᛁᚾᚲᛖ ᚢᛖᚷᚨ - ᚲᛟᛗᛒᚨᛏ ᛖᛈᛁᚲ"
+ᚢᛖᚱᛋᛁᛟ: "1.0"
+ᚨᚢᚲᛏᛟᚱ: "ᛃᛖᚨᚾ-ᚷᚱᛟᚠᛁᚷᚾᛟᚾ"
+
+// ᛈᚺᚨᛋᛁᛋ I - ᚲᚱᛖᚨᛏᛁᛟ ᚺᛖᚱᛟᚢᛗ
+ᚲᚱᛖᚨᚱᛖ_ᚺᛖᚱᛟᛋ("ᚨᚱᛏᚺᚢᚱ", @15,15)
+ᛖᚲᚢᛁᛈᚨᚱᛖ("ᚨᚱᛏᚺᚢᚱ", "ᛖᚲᛋᚲᚨᛚᛁᛒᚢᚱ_ᛏᛖᛗᛈᛟᚱᚨᛚ")
+ᚨᚠᚠᛁᚱᛗᚨᚱᛖ_ᚱᚢᚾᚨ("ᚨᚱᛏᚺᚢᚱ", "ψ001: ⊙(ᛒᚨᚾᚲᚨᛁ_ᛏᛖᛗᛈᛟᚱᛖᛚ)")
+
+ᚲᚱᛖᚨᚱᛖ_ᚺᛖᚱᛟᛋ("ᚢᛁᚾᚲᛖ_ᚢᛖᚷᚨ", @25,15)
+ᛖᚲᚢᛁᛈᚨᚱᛖ("ᚢᛁᚾᚲᛖ_ᚢᛖᚷᚨ", "ᚱᛖᚨᛚᛁᛏᚤ_ᚷᚢᚾ")
+ᚨᚠᚠᛁᚱᛗᚨᚱᛖ_ᚱᚢᚾᚨ("ᚢᛁᚾᚲᛖ_ᚢᛖᚷᚨ", "ψ002: ⊙(ᛈᛟᚹᛖᚱ_ᚹᛟᚱᛗᚺᛟᛚᛖ)")
+
+// ᛈᚺᚨᛋᛁᛋ VI - ᛈᚨᚾᛟᚱᚨᛗᛁᚲᛋ ᚨᚱᚱᛁᚢᚨᛏ
+ᚲᚱᛖᚨᚱᛖ_ᚺᛖᚱᛟᛋ("ᛈᚨᚾᛟᚱᚨᛗᛁᚲᛋ", @20,10)
+ᛖᚲᚢᛁᛈᚨᚱᛖ("ᛈᚨᚾᛟᚱᚨᛗᛁᚲᛋ", "ᚲᚺᚨᚢᛞᚱᛟᚾ_ᚲᚢᚨᚾᛏᛁᚲᚢᛗ_ᛈᚨᚾᛟᚱᚨᛗᛁᚲᛋ")
+ᚠᛟᚱᛗᚢᛚᚨ_ᚲᚺᚨᚢᛞᚱᛟᚾ("ᚨᚲᛏᛁᚢᚨᛏᛁᛟ", ᚱᚨᛞᛁᚢᛋ_7, ᛒᚢᚠᚠ_ᛏᛟᛏᚨᛚ)`,
+
+            json: `{
+  "scenario": {
+    "name": "Excalibur vs Vince Vega + Panoramix",
+    "version": "1.0",
+    "author": "Jean-Grofignon",
+    "type": "combat_epic"
+  },
+  "heroes": [
+    {
+      "id": "arthur",
+      "name": "Arthur Pendragon",
+      "position": {"x": 15, "y": 15},
+      "equipment": ["excalibur_temporal"],
+      "stats": {"hp": 100, "attack": 25, "defense": 20},
+      "formulas": ["BANKAI_TEMPOREL"]
+    },
+    {
+      "id": "vince_vega",
+      "name": "Vince Vega",
+      "position": {"x": 25, "y": 15},
+      "equipment": ["reality_gun"],
+      "stats": {"hp": 100, "attack": 30, "defense": 15},
+      "formulas": ["POWER_WORMHOLE"]
+    },
+    {
+      "id": "panoramix",
+      "name": "Panoramix l'Archidruide V2.0",
+      "position": {"x": 20, "y": 10},
+      "equipment": ["chaudron_quantique_panoramix"],
+      "stats": {"hp": 120, "attack": 15, "defense": 25, "mana": 100},
+      "formulas": ["FORMULA_CHAUDRON", "PARFUMS_AMPLIFIES"]
+    }
+  ],
+  "actions": [
+    {"type": "activate_chaudron", "hero": "panoramix", "radius": 7},
+    {"type": "apply_buffs", "targets": ["arthur", "vince_vega"], "effects": {"attack": 50, "defense": 50, "hp": 100}},
+    {"type": "combat", "hero1": "arthur", "hero2": "vince_vega", "buffed": true}
+  ]
+}`
+        };
+
+        const panoramixQuotes = [
+            "Par Toutatis ! Mes 3 formats de scénarios sont prêts à être testés !",
+            "Regardez ! Chaque format révèle une facet différente de la bataille !",
+            "TROP DRÔLE BRAVO ! Les buffs marchent dans tous les formats !",
+            "Mon chaudron quantique fonctionne parfaitement en HOTS, RUNIC et JSON !",
+            "Mes amis ! Approchez-vous et choisissez votre format préféré !"
+        ];
+
+        function loadScenarios() {
+            document.getElementById('hotsContent').innerHTML = 
+                `<pre style="color: #ff69b4;">${scenarios.hots}</pre>`;
+            
+            document.getElementById('runicContent').innerHTML = 
+                `<pre style="color: #87ceeb;">${scenarios.runic}</pre>`;
+            
+            document.getElementById('jsonContent').innerHTML = 
+                `<pre style="color: #32cd32;">${JSON.stringify(JSON.parse(scenarios.json), null, 2)}</pre>`;
+        }
+
+        function addLog(message, type = 'action') {
+            const log = document.getElementById('combatLog');
+            const entry = document.createElement('div');
+            entry.className = `log-entry log-${type}`;
+            entry.innerHTML = message;
+            log.appendChild(entry);
+            log.scrollTop = log.scrollHeight;
+        }
+
+        function updateStats(arthur = 100, vince = 100, panoramix = 100, buffs = 0) {
+            document.getElementById('arthurHp').textContent = arthur;
+            document.getElementById('vinceHp').textContent = vince;
+            document.getElementById('panoramixMana').textContent = panoramix;
+            document.getElementById('buffsActive').textContent = buffs;
+        }
+
+        function runScenario(format) {
+            addLog(`🚀 <strong>Exécution du format ${format.toUpperCase()}</strong>`, 'action');
+            
+            // Simulation d'exécution selon le format
+            setTimeout(() => {
+                addLog('👤 Arthur créé à la position (15,15)', 'action');
+                addLog('🔫 Vince Vega créé à la position (25,15)', 'action');
+                addLog('🧙‍♂️ Panoramix invoqué à la position (20,10)', 'action');
+            }, 500);
+
+            setTimeout(() => {
+                addLog('🍯 <strong>Panoramix active son Chaudron Quantique !</strong>', 'panoramix');
+                addLog('⚡ Buffs appliqués : +50 ATK/DEF, +100 HP, Immunité poison', 'buff');
+                updateStats(200, 200, 80, 6); // HP buffés, mana utilisée, 6 buffs actifs
+            }, 1500);
+
+            setTimeout(() => {
+                addLog('⚔️ Arthur (ATK: 75) attaque Vince Vega (DEF: 65)', 'combat');
+                addLog('💥 Dégâts : 75 - 65 = 10 HP', 'combat');
+                addLog('🔫 Vince Vega (ATK: 80) riposte contre Arthur (DEF: 70)', 'combat');
+                addLog('💥 Dégâts : 80 - 70 = 10 HP', 'combat');
+                updateStats(190, 190, 80, 6);
+            }, 2500);
+
+            setTimeout(() => {
+                addLog('🌿 Régénération active : +20 HP pour tous', 'buff');
+                addLog('🧪 Test immunité poison : SUCCÈS - Aucun effet', 'buff');
+                updateStats(210, 210, 80, 6);
+            }, 3500);
+
+            setTimeout(() => {
+                const quote = panoramixQuotes[Math.floor(Math.random() * panoramixQuotes.length)];
+                document.getElementById('panoramixQuote').textContent = quote;
+                addLog(`🧙‍♂️ <strong>Panoramix :</strong> "${quote}"`, 'panoramix');
+                addLog(`✅ <strong>Format ${format.toUpperCase()} exécuté avec succès !</strong>`, 'action');
+            }, 4000);
+        }
+
+        // Initialisation
+        window.onload = function() {
+            loadScenarios();
+            addLog('🎮 Scenario Runner initialisé avec les 3 formats', 'action');
+            addLog('🧙‍♂️ Panoramix : "Mes amis ! Choisissez votre format !"', 'panoramix');
+        };
+    </script>
+</body>
+</html> 

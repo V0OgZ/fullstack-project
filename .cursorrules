@@ -18,15 +18,16 @@
 **🌀 FUSION PSI PHI ACCOMPLIE - MAP DE RÉVEIL MISE À JOUR !**
 
 Before making any changes or debugging, ALWAYS:
-1. **🌟 NOUVEAU**: Check `INDEX_JEAN_FUSION_TIMELINE_FINAL.md` - INDEX JEAN FUSIONNÉ (racine)
-2. Check `DOCS_INDEX.md` for complete documentation navigation
-3. Read `DEVELOPER_INSTRUCTIONS.md` for current status and existing scripts
-4. **📜 LIRE LE MANIFESTO**: `docs/JEAN_GROFIGNON_MANIFESTO.md` - Vision révolutionnaire du projet
-5. **🌟 LIRE LE LORE**: `docs/LORE_MEMENTO_JEAN_ETERNAL.md` - Histoire éternelle et philosophie
-6. **🎨 NOUVEAU**: Check `game_assets/artifacts/mineurs/tatouages_memento_archiviste.json` - Tatouages évolutifs
-7. Do NOT recreate existing scripts (./hots, ./stop-app.sh, ./test-app.sh)
-8. Use existing debugging tools and follow established patterns
-9. Check existing components before creating new ones
+1. **🌟 NOUVEAU V23**: Check `INDEX_JEAN_V23_REVOLUTION_UNIFIEE.md` - INDEX V23 COMPLET (racine)
+2. **🌟 ANCIEN**: Check `INDEX_JEAN_FUSION_TIMELINE_FINAL.md` - INDEX JEAN FUSIONNÉ (racine)
+3. Check `DOCS_INDEX.md` for complete documentation navigation
+4. Read `DEVELOPER_INSTRUCTIONS.md` for current status and existing scripts
+5. **📜 LIRE LE MANIFESTO**: `docs/JEAN_GROFIGNON_MANIFESTO.md` - Vision révolutionnaire du projet
+6. **🌟 LIRE LE LORE**: `docs/LORE_MEMENTO_JEAN_ETERNAL.md` - Histoire éternelle et philosophie
+7. **🎨 NOUVEAU**: Check `game_assets/artifacts/mineurs/tatouages_memento_archiviste.json` - Tatouages évolutifs
+8. Do NOT recreate existing scripts (./hots, ./stop-app.sh, ./test-app.sh)
+9. Use existing debugging tools and follow established patterns
+10. Check existing components before creating new ones
 
 ## 📜 PHILOSOPHIE JEAN-GROFIGNON - À COMPRENDRE ABSOLUMENT:
 

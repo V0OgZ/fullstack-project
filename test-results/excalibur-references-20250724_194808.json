@@ -1,0 +1,38 @@
+{
+  "timestamp": "2025-07-24 19:48:07",
+  "tests": [
+    {
+      "name": "Connexion Backend",
+      "passed": true
+    },
+    {
+      "name": "Spell Reference Resolver",
+      "passed": false
+    },
+    {
+      "name": "Sorts Uniques Excalibur",
+      "passed": false
+    },
+    {
+      "name": "Ensemble Sorts Excalibur",
+      "passed": false
+    },
+    {
+      "name": "Combinaison de Sorts",
+      "passed": false
+    },
+    {
+      "name": "Int\u00e9gration Excalibur",
+      "passed": false
+    },
+    {
+      "name": "Performance",
+      "passed": false
+    }
+  ],
+  "summary": {
+    "total_tests": 7,
+    "passed_tests": 1,
+    "success_rate": 14.285714285714285
+  }
+}

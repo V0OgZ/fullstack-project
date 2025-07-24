@@ -195,6 +195,53 @@ public class GameController {
         }
     }
 
+    // ===========================
+    // TEMPORAL GAMES ENDPOINTS
+    // ===========================
+    
+    @PostMapping("/temporal/games")
+    public ResponseEntity<Map<String, Object>> createTemporalGame(@RequestBody Map<String, Object> request) {
+        try {
+            // Utiliser le GameService existant avec des paramètres temporels
+            Map<String, Object> temporalRequest = new HashMap<>(request);
+            temporalRequest.put("gameMode", "temporal-engine");
+            temporalRequest.put("temporalEnabled", true);
+            
+            Map<String, Object> game = gameService.createGame(temporalRequest);
+            
+            // Ajouter des propriétés temporelles spécifiques
+            game.put("temporalEngine", "ACTIVE");
+            game.put("quantumState", "INITIALIZED");
+            game.put("timelineCount", 1);
+            
+            return ResponseEntity.ok(game);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of(
+                "success", false,
+                "message", "Erreur création jeu temporel: " + e.getMessage(),
+                "temporalEngine", "ERROR"
+            ));
+        }
+    }
+
+    @GetMapping("/temporal/games/{gameId}")
+    public ResponseEntity<Map<String, Object>> getTemporalGame(@PathVariable String gameId) {
+        try {
+            Map<String, Object> game = gameService.getGame(gameId);
+            
+            // Ajouter des informations temporelles
+            game.put("temporalEngine", "ACTIVE");
+            game.put("quantumState", "STABLE");
+            
+            return ResponseEntity.ok(game);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of(
+                "success", false,
+                "message", "Jeu temporel non trouvé: " + e.getMessage()
+            ));
+        }
+    }
+
     @GetMapping("/games/{gameId}/players/{playerId}/buildings")
     public ResponseEntity<List<Building>> getPlayerBuildings(@PathVariable String gameId,
                                                            @PathVariable String playerId) {

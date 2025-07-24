@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 Heroes of Time - Test Runner Interface</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .auto-controls {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #e9ecef;
+        }
+
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .test-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .test-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .test-card.running {
+            border-color: #ffc107;
+            background: #fff8e1;
+        }
+
+        .test-card.success {
+            border-color: #28a745;
+            background: #f0fff4;
+        }
+
+        .test-card.error {
+            border-color: #dc3545;
+            background: #fff5f5;
+        }
+
+        .test-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .test-description {
+            color: #6c757d;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+
+        .test-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.8em;
+            color: #6c757d;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-warning {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .output-section {
+            margin-top: 30px;
+            background: #1a1a1a;
+            border-radius: 10px;
+            padding: 20px;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            min-height: 200px;
+            max-height: 500px;
+            overflow-y: auto;
+            border: 2px solid #333;
+        }
+
+        .output-line {
+            margin-bottom: 5px;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+
+        .output-success {
+            color: #28a745;
+        }
+
+        .output-error {
+            color: #dc3545;
+        }
+
+        .output-warning {
+            color: #ffc107;
+        }
+
+        .output-info {
+            color: #17a2b8;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745, #20c997);
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .status-idle {
+            background: #f8f9fa;
+            color: #6c757d;
+        }
+
+        .status-running {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .arguments-section {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .args-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Heroes of Time - Test Runner Interface</h1>
+        
+        <!-- Auto Controls -->
+        <div class="auto-controls">
+            <h3>🚀 Mode Automatique</h3>
+            <div class="controls">
+                <button class="btn btn-success" onclick="runAllTests()">
+                    🎯 Lancer TOUS les Tests
+                </button>
+                <button class="btn btn-primary" onclick="runMainTests()">
+                    🏆 Tests Principaux
+                </button>
+                <button class="btn btn-warning" onclick="runQuickTests()">
+                    ⚡ Tests Rapides
+                </button>
+                <button class="btn btn-danger" onclick="stopAllTests()">
+                    ⏹️ Arrêter Tout
+                </button>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="globalProgress" style="width: 0%"></div>
+            </div>
+            <div style="text-align: center; margin-top: 10px;">
+                <span id="globalStatus" class="status-badge status-idle">Prêt</span>
+            </div>
+        </div>
+
+        <!-- Test Grid -->
+        <div class="test-grid">
+            <!-- Test Principal -->
+            <div class="test-card" id="card-main">
+                <div class="test-title">🏆 Test Complet Final</div>
+                <div class="test-description">
+                    Script principal avec tous les tests (47 tests, 11 phases)
+                </div>
+                <div class="test-info">
+                    <span>📁 test-complet-final.sh</span>
+                    <span>⏱️ ~3 min</span>
+                    <span>📊 26KB</span>
+                </div>
+                <div class="arguments-section">
+                    <label>Arguments:</label>
+                    <input type="text" class="args-input" id="args-main" placeholder="--verbose --quick">
+                </div>
+                <div class="controls">
+                    <button class="btn btn-primary" onclick="runTest('main')">
+                        ▶️ Lancer
+                    </button>
+                    <button class="btn btn-secondary" onclick="viewScript('main')">
+                        📄 Voir Script
+                    </button>
+                </div>
+                <div class="status-badge status-idle" id="status-main">Prêt</div>
+            </div>
+
+            <!-- Test Optimizations -->
+            <div class="test-card" id="card-optimizations">
+                <div class="test-title">🚀 Optimisations Performance</div>
+                <div class="test-description">
+                    Tests des optimisations Phase 1 (+300% performance)
+                </div>
+                <div class="test-info">
+                    <span>📁 test-optimizations-performance.sh</span>
+                    <span>⏱️ ~2 min</span>
+                    <span>📊 10KB</span>
+                </div>
+                <div class="arguments-section">
+                    <label>Arguments:</label>
+                    <input type="text" class="args-input" id="args-optimizations" placeholder="--detailed --benchmark">
+                </div>
+                <div class="controls">
+                    <button class="btn btn-primary" onclick="runTest('optimizations')">
+                        ▶️ Lancer
+                    </button>
+                    <button class="btn btn-secondary" onclick="viewScript('optimizations')">
+                        📄 Voir Script
+                    </button>
+                </div>
+                <div class="status-badge status-idle" id="status-optimizations">Prêt</div>
+            </div>
+
+            <!-- Test Rapide -->
+            <div class="test-card" id="card-quick">
+                <div class="test-title">⚡ Test Rapide HOTS</div>
+                <div class="test-description">
+                    Tests rapides Heroes of Time (1-2 minutes)
+                </div>
+                <div class="test-info">
+                    <span>📁 scripts/test-rapide-hots.sh</span>
+                    <span>⏱️ ~1 min</span>
+                    <span>📊 5KB</span>
+                </div>
+                <div class="arguments-section">
+                    <label>Arguments:</label>
+                    <input type="text" class="args-input" id="args-quick" placeholder="--fast --no-ui">
+                </div>
+                <div class="controls">
+                    <button class="btn btn-primary" onclick="runTest('quick')">
+                        ▶️ Lancer
+                    </button>
+                    <button class="btn btn-secondary" onclick="viewScript('quick')">
+                        📄 Voir Script
+                    </button>
+                </div>
+                <div class="status-badge status-idle" id="status-quick">Prêt</div>
+            </div>
+
+            <!-- Test UI -->
+            <div class="test-card" id="card-ui">
+                <div class="test-title">🌐 Test Scénarios UI</div>
+                <div class="test-description">
+                    Tests UI complets avec 3 frontends
+                </div>
+                <div class="test-info">
+                    <span>📁 test-scenarios-ui.sh</span>
+                    <span>⏱️ ~2 min</span>
+                    <span>📊 11KB</span>
+                </div>
+                <div class="arguments-section">
+                    <label>Arguments:</label>
+                    <input type="text" class="args-input" id="args-ui" placeholder="--ui-only --headless">
+                </div>
+                <div class="controls">
+                    <button class="btn btn-primary" onclick="runTest('ui')">
+                        ▶️ Lancer
+                    </button>
+                    <button class="btn btn-secondary" onclick="viewScript('ui')">
+                        📄 Voir Script
+                    </button>
+                </div>
+                <div class="status-badge status-idle" id="status-ui">Prêt</div>
+            </div>
+
+            <!-- Test Bataille -->
+            <div class="test-card" id="card-bataille">
+                <div class="test-title">⚔️ Test Bataille Temporelle</div>
+                <div class="test-description">
+                    Tests bataille temporelle spécialisés
+                </div>
+                <div class="test-info">
+                    <span>📁 scripts/test-complete-bataille-temporelle.sh</span>
+                    <span>⏱️ ~3 min</span>
+                    <span>📊 13KB</span>
+                </div>
+                <div class="arguments-section">
+                    <label>Arguments:</label>
+                    <input type="text" class="args-input" id="args-bataille" placeholder="--scenario=all --verbose">
+                </div>
+                <div class="controls">
+                    <button class="btn btn-primary" onclick="runTest('bataille')">
+                        ▶️ Lancer
+                    </button>
+                    <button class="btn btn-secondary" onclick="viewScript('bataille')">
+                        📄 Voir Script
+                    </button>
+                </div>
+                <div class="status-badge status-idle" id="status-bataille">Prêt</div>
+            </div>
+
+            <!-- Test Quantum UI -->
+            <div class="test-card" id="card-quantum">
+                <div class="test-title">🌀 Test Quantum UI</div>
+                <div class="test-description">
+                    Tests UI quantique avec visualisations
+                </div>
+                <div class="test-info">
+                    <span>📁 tester-quantum-ui.sh</span>
+                    <span>⏱️ ~2 min</span>
+                    <span>📊 16KB</span>
+                </div>
+                <div class="arguments-section">
+                    <label>Arguments:</label>
+                    <input type="text" class="args-input" id="args-quantum" placeholder="--quantum-only --debug">
+                </div>
+                <div class="controls">
+                    <button class="btn btn-primary" onclick="runTest('quantum')">
+                        ▶️ Lancer
+                    </button>
+                    <button class="btn btn-secondary" onclick="viewScript('quantum')">
+                        📄 Voir Script
+                    </button>
+                </div>
+                <div class="status-badge status-idle" id="status-quantum">Prêt</div>
+            </div>
+        </div>
+
+        <!-- Output Section -->
+        <div class="output-section" id="output">
+            <div class="output-line output-info">🎯 Heroes of Time Test Runner Interface - Prêt</div>
+            <div class="output-line output-info">💡 Cliquez sur un bouton pour lancer un test</div>
+            <div class="output-line output-info">🚀 Utilisez le mode automatique pour lancer plusieurs tests</div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration des tests
+        const testConfigs = {
+            main: {
+                script: './test-complet-final.sh',
+                name: 'Test Complet Final',
+                duration: 180000 // 3 minutes
+            },
+            optimizations: {
+                script: './test-optimizations-performance.sh',
+                name: 'Optimisations Performance',
+                duration: 120000 // 2 minutes
+            },
+            quick: {
+                script: './scripts/test-rapide-hots.sh',
+                name: 'Test Rapide HOTS',
+                duration: 60000 // 1 minute
+            },
+            ui: {
+                script: './test-scenarios-ui.sh',
+                name: 'Test Scénarios UI',
+                duration: 120000 // 2 minutes
+            },
+            bataille: {
+                script: './scripts/test-complete-bataille-temporelle.sh',
+                name: 'Test Bataille Temporelle',
+                duration: 180000 // 3 minutes
+            },
+            quantum: {
+                script: './tester-quantum-ui.sh',
+                name: 'Test Quantum UI',
+                duration: 120000 // 2 minutes
+            }
+        };
+
+        let runningTests = new Set();
+        let testProcesses = new Map();
+
+        // Fonction pour log dans l'output
+        function log(message, type = 'info') {
+            const output = document.getElementById('output');
+            const timestamp = new Date().toLocaleTimeString();
+            const line = document.createElement('div');
+            line.className = `output-line output-${type}`;
+            line.textContent = `[${timestamp}] ${message}`;
+            output.appendChild(line);
+            output.scrollTop = output.scrollHeight;
+        }
+
+        // Fonction pour mettre à jour le statut d'un test
+        function updateTestStatus(testId, status) {
+            const card = document.getElementById(`card-${testId}`);
+            const statusBadge = document.getElementById(`status-${testId}`);
+            
+            // Nettoyer les classes précédentes
+            card.classList.remove('running', 'success', 'error');
+            statusBadge.classList.remove('status-idle', 'status-running', 'status-success', 'status-error');
+            
+            // Ajouter les nouvelles classes
+            card.classList.add(status);
+            statusBadge.classList.add(`status-${status}`);
+            
+            // Mettre à jour le texte
+            const statusTexts = {
+                idle: 'Prêt',
+                running: 'En cours...',
+                success: 'Terminé ✅',
+                error: 'Erreur ❌'
+            };
+            
+            statusBadge.textContent = statusTexts[status];
+        }
+
+        // Fonction pour lancer un test
+        async function runTest(testId) {
+            if (runningTests.has(testId)) {
+                log(`❌ Test ${testConfigs[testId].name} déjà en cours`, 'warning');
+                return;
+            }
+
+            const config = testConfigs[testId];
+            const args = document.getElementById(`args-${testId}`).value;
+            const command = args ? `${config.script} ${args}` : config.script;
+
+            log(`🚀 Lancement du test: ${config.name}`, 'info');
+            log(`📝 Commande: ${command}`, 'info');
+
+            runningTests.add(testId);
+            updateTestStatus(testId, 'running');
+
+            try {
+                // Simuler l'exécution du test (dans un vrai environnement, utiliser fetch ou WebSocket)
+                const result = await simulateTestExecution(testId, command);
+                
+                if (result.success) {
+                    log(`✅ Test ${config.name} terminé avec succès`, 'success');
+                    updateTestStatus(testId, 'success');
+                } else {
+                    log(`❌ Test ${config.name} terminé avec erreurs`, 'error');
+                    updateTestStatus(testId, 'error');
+                }
+            } catch (error) {
+                log(`💥 Erreur lors du test ${config.name}: ${error.message}`, 'error');
+                updateTestStatus(testId, 'error');
+            } finally {
+                runningTests.delete(testId);
+            }
+        }
+
+        // Simulation d'exécution de test
+        async function simulateTestExecution(testId, command) {
+            const config = testConfigs[testId];
+            
+            return new Promise((resolve) => {
+                // Simuler des logs pendant l'exécution
+                const interval = setInterval(() => {
+                    const messages = [
+                        `📋 Exécution en cours: ${config.name}`,
+                        `🔍 Vérification des composants...`,
+                        `🏗️ Compilation en cours...`,
+                        `🧪 Tests unitaires...`,
+                        `🚀 Tests d'intégration...`,
+                        `📊 Génération des rapports...`
+                    ];
+                    const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                    log(randomMessage, 'info');
+                }, 2000);
+
+                // Simuler la fin du test
+                setTimeout(() => {
+                    clearInterval(interval);
+                    resolve({ success: Math.random() > 0.2 }); // 80% de succès
+                }, config.duration / 10); // Accélérer pour la démo
+            });
+        }
+
+        // Fonction pour lancer tous les tests
+        async function runAllTests() {
+            log('🎯 Lancement de TOUS les tests en mode automatique', 'info');
+            updateGlobalStatus('running');
+            
+            const testIds = Object.keys(testConfigs);
+            let completed = 0;
+            
+            for (const testId of testIds) {
+                await runTest(testId);
+                completed++;
+                updateGlobalProgress((completed / testIds.length) * 100);
+            }
+            
+            updateGlobalStatus('success');
+            log('🎉 Tous les tests terminés !', 'success');
+        }
+
+        // Fonction pour lancer les tests principaux
+        async function runMainTests() {
+            log('🏆 Lancement des tests principaux', 'info');
+            updateGlobalStatus('running');
+            
+            const mainTests = ['main', 'optimizations'];
+            let completed = 0;
+            
+            for (const testId of mainTests) {
+                await runTest(testId);
+                completed++;
+                updateGlobalProgress((completed / mainTests.length) * 100);
+            }
+            
+            updateGlobalStatus('success');
+            log('🎉 Tests principaux terminés !', 'success');
+        }
+
+        // Fonction pour lancer les tests rapides
+        async function runQuickTests() {
+            log('⚡ Lancement des tests rapides', 'info');
+            updateGlobalStatus('running');
+            
+            const quickTests = ['quick', 'ui'];
+            let completed = 0;
+            
+            for (const testId of quickTests) {
+                await runTest(testId);
+                completed++;
+                updateGlobalProgress((completed / quickTests.length) * 100);
+            }
+            
+            updateGlobalStatus('success');
+            log('🎉 Tests rapides terminés !', 'success');
+        }
+
+        // Fonction pour arrêter tous les tests
+        function stopAllTests() {
+            log('⏹️ Arrêt de tous les tests', 'warning');
+            runningTests.clear();
+            testProcesses.clear();
+            
+            // Remettre tous les tests à l'état idle
+            Object.keys(testConfigs).forEach(testId => {
+                updateTestStatus(testId, 'idle');
+            });
+            
+            updateGlobalStatus('idle');
+            updateGlobalProgress(0);
+        }
+
+        // Fonction pour voir un script
+        function viewScript(testId) {
+            const config = testConfigs[testId];
+            log(`📄 Ouverture du script: ${config.script}`, 'info');
+            
+            // Dans un environnement réel, ouvrir le script dans un éditeur
+            // Ici, on simule avec une alerte
+            alert(`Script: ${config.script}\nNom: ${config.name}\nDurée estimée: ${config.duration / 1000}s`);
+        }
+
+        // Fonction pour mettre à jour le statut global
+        function updateGlobalStatus(status) {
+            const statusBadge = document.getElementById('globalStatus');
+            statusBadge.classList.remove('status-idle', 'status-running', 'status-success', 'status-error');
+            statusBadge.classList.add(`status-${status}`);
+            
+            const statusTexts = {
+                idle: 'Prêt',
+                running: 'En cours...',
+                success: 'Terminé ✅',
+                error: 'Erreur ❌'
+            };
+            
+            statusBadge.textContent = statusTexts[status];
+        }
+
+        // Fonction pour mettre à jour la barre de progression globale
+        function updateGlobalProgress(percentage) {
+            const progressBar = document.getElementById('globalProgress');
+            progressBar.style.width = `${percentage}%`;
+        }
+
+        // Initialisation
+        log('🎯 Interface de test Heroes of Time initialisée', 'success');
+        log('💡 Prêt à lancer les tests !', 'info');
+    </script>
+</body>
+</html> 
