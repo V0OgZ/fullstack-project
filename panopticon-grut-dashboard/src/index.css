@@ -1,0 +1,242 @@
+/* 🏛️ PANOPTICON GRUT - Styles Globaux */
+
+/* Reset et base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Orbitron', monospace;
+}
+
+body {
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a3a 50%, #2d1b69 100%);
+  color: #e0e6ed;
+  overflow-x: hidden;
+}
+
+/* Variables CSS GRUT */
+:root {
+  --grut-primary: #7c77c6;
+  --grut-secondary: #ff77c6;
+  --grut-accent: #77dbff;
+  --grut-bg-dark: #0f0f23;
+  --grut-bg-mid: #1a1a3a;
+  --grut-bg-light: #2d1b69;
+  --grut-text: #e0e6ed;
+  --grut-text-dim: #a0a6ad;
+  --grut-success: #4ade80;
+  --grut-warning: #fbbf24;
+  --grut-error: #ef4444;
+  --grut-critical: #dc2626;
+}
+
+/* Effets cosmiques globaux */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.1) 0%, transparent 50%);
+  z-index: -1;
+  animation: cosmicPulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes cosmicPulse {
+  0% { opacity: 0.8; transform: scale(1); }
+  100% { opacity: 1; transform: scale(1.02); }
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--grut-bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--grut-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--grut-accent);
+}
+
+/* Classes utilitaires GRUT */
+.grut-card {
+  background: rgba(26, 26, 58, 0.8);
+  border: 1px solid var(--grut-primary);
+  border-radius: 8px;
+  padding: 1rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(124, 119, 198, 0.2);
+}
+
+.grut-button {
+  background: linear-gradient(135deg, var(--grut-primary), var(--grut-accent));
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  color: white;
+  font-family: 'Orbitron', monospace;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.grut-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(124, 119, 198, 0.4);
+}
+
+.grut-input {
+  background: rgba(15, 15, 35, 0.8);
+  border: 1px solid var(--grut-primary);
+  border-radius: 4px;
+  padding: 0.75rem;
+  color: var(--grut-text);
+  font-family: 'Space Mono', monospace;
+}
+
+.grut-input:focus {
+  outline: none;
+  border-color: var(--grut-accent);
+  box-shadow: 0 0 0 2px rgba(119, 219, 255, 0.2);
+}
+
+/* États de sévérité */
+.severity-low { color: var(--grut-success); }
+.severity-medium { color: var(--grut-warning); }
+.severity-high { color: var(--grut-error); }
+.severity-critical { 
+  color: var(--grut-critical);
+  animation: criticalPulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes criticalPulse {
+  0% { opacity: 0.8; }
+  100% { opacity: 1; text-shadow: 0 0 10px var(--grut-critical); }
+}
+
+/* États du panopticon */
+.panopticon-watching { color: var(--grut-accent); }
+.panopticon-analyzing { color: var(--grut-warning); }
+.panopticon-intervening { 
+  color: var(--grut-error);
+  animation: interventionPulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes interventionPulse {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.05); text-shadow: 0 0 15px var(--grut-error); }
+}
+
+/* Grid layouts responsive */
+.grut-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.grut-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grut-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grut-grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 768px) {
+  .grut-grid-2,
+  .grut-grid-3,
+  .grut-grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Animations d'apparition */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.5s ease-out;
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Effets de loading GRUT */
+.grut-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--grut-accent);
+}
+
+.grut-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid var(--grut-accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Tooltips cosmiques */
+.grut-tooltip {
+  position: relative;
+  cursor: help;
+}
+
+.grut-tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--grut-bg-dark);
+  color: var(--grut-text);
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  border: 1px solid var(--grut-primary);
+  z-index: 1000;
+}
+
+.grut-tooltip:hover::after {
+  opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  body {
+    font-size: 14px;
+  }
+  
+  .grut-card {
+    padding: 0.75rem;
+  }
+} 
