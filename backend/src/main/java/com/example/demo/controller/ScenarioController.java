@@ -13,6 +13,22 @@ import java.util.HashMap;
 import java.util.Optional;
 import java.util.ArrayList;
 
+/**
+ * 🎮 SCENARIO CONTROLLER - SYSTÈME UNIFIÉ
+ * =======================================
+ * @deprecated Potentiellement non utilisé par frontend actuel (port 8000)
+ * 
+ * Controller avec système i18n complet (EN/FR/RU) mais traductions hardcodées.
+ * Gère scénarios prédéfinis et localisation complète.
+ * 
+ * STATUS: SUSPECT - Pas d'utilisation détectée dans frontend simple
+ * UTILISATION: Frontend port 3000 React uniquement ?
+ * POTENTIEL: Système de scénarios multilingue complet
+ * LOCALISATION: Traductions hardcodées EN/FR/RU (400+ lignes)
+ * 
+ * JEAN: "VÉRIFIER SI UTILISÉ - SYSTÈME I18N COMPLEXE MAIS PEUT-ÊTRE INUTILE"
+ */
+@Deprecated
 @RestController
 @RequestMapping("/api/scenarios")
 @CrossOrigin(origins = "http://localhost:3000")

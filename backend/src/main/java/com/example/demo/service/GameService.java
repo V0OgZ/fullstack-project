@@ -9,6 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.Random;
 import com.example.demo.model.GameState;
 import com.example.demo.model.GameStatus;
+import com.example.demo.service.QuantumScriptParser;
 
 @Service
 public class GameService {
@@ -22,6 +23,9 @@ public class GameService {
     
     @Autowired
     private GameStateService gameStateService;
+    
+    @Autowired
+    private QuantumScriptParser quantumScriptParser;
     
     public Map<String, Object> getGame(String gameId) {
         Map<String, Object> game = games.get(gameId);
@@ -1291,5 +1295,198 @@ public class GameService {
         
         // Save updated game state
         gameStateService.updateGameState(gameState);
+    }
+
+    /**
+     * 🌀 NOUVEAU: Exécute une action de héros avec support quantique
+     * Intègre le QuantumScriptParser au système unifié
+     */
+    public Map<String, Object> executeHeroQuantumAction(String gameId, String heroId, String action, Map<String, Object> params) {
+        Map<String, Object> result = new HashMap<>();
+        
+        try {
+            // Récupérer le héros
+            Map<String, Object> game = getGame(gameId);
+            Map<String, Object> hero = findHeroInGame(game, heroId);
+            
+            if (hero == null) {
+                result.put("success", false);
+                result.put("message", "Héros non trouvé: " + heroId);
+                return result;
+            }
+            
+            // Vérifier si le héros a un quantum_script
+            String quantumScript = (String) hero.get("quantum_script");
+            if (quantumScript != null && !quantumScript.trim().isEmpty()) {
+                
+                // Créer le contexte pour le parser
+                Map<String, Object> context = new HashMap<>();
+                context.put("gameId", gameId);
+                context.put("heroId", heroId);
+                context.put("hero", hero);
+                context.put("action", action);
+                context.put("params", params);
+                context.put("game", game);
+                
+                // Exécuter le script quantique
+                Map<String, Object> quantumResult = quantumScriptParser.executeQuantumScript(quantumScript, context);
+                
+                result.put("success", true);
+                result.put("message", "Action quantique exécutée pour " + hero.get("name"));
+                result.put("quantumResult", quantumResult);
+                result.put("effects", quantumResult.get("effects"));
+                result.put("heroName", hero.get("name"));
+                result.put("quantumScript", quantumScript);
+                
+                // Appliquer les effets quantiques au jeu
+                applyQuantumEffects(gameId, (List<Map<String, Object>>) quantumResult.get("effects"));
+                
+            } else {
+                // Action normale sans quantum
+                result = executeNormalHeroAction(gameId, heroId, action, params);
+                result.put("quantumEnabled", false);
+            }
+            
+        } catch (Exception e) {
+            result.put("success", false);
+            result.put("message", "Erreur action quantique: " + e.getMessage());
+            result.put("error", e.getClass().getSimpleName());
+        }
+        
+        return result;
+    }
+    
+    /**
+     * 🌀 Applique les effets quantiques au jeu
+     */
+    private void applyQuantumEffects(String gameId, List<Map<String, Object>> effects) {
+        if (effects == null || effects.isEmpty()) return;
+        
+        for (Map<String, Object> effect : effects) {
+            String effectType = (String) effect.get("type");
+            
+            switch (effectType) {
+                case "temporal_superposition":
+                    applyTemporalSuperposition(gameId, effect);
+                    break;
+                case "universal_effect":
+                    applyUniversalEffect(gameId, effect);
+                    break;
+                case "collapse_effect":
+                    applyCollapseEffect(gameId, effect);
+                    break;
+                case "direct_effect":
+                    applyDirectEffect(gameId, effect);
+                    break;
+                default:
+                    System.out.println("⚠️ Effet quantique non géré: " + effectType);
+            }
+        }
+    }
+    
+    /**
+     * 🌀 Applique un effet de superposition temporelle
+     */
+    private void applyTemporalSuperposition(String gameId, Map<String, Object> effect) {
+        System.out.println("🌀 Application superposition temporelle: " + effect.get("action"));
+        // TODO: Implémenter la logique de superposition
+    }
+    
+    /**
+     * 🌀 Applique un effet universel
+     */
+    private void applyUniversalEffect(String gameId, Map<String, Object> effect) {
+        System.out.println("🌀 Application effet universel: " + effect.get("modification"));
+        // TODO: Implémenter la logique d'effet universel
+    }
+    
+    /**
+     * 🌀 Applique un effet de collapse
+     */
+    private void applyCollapseEffect(String gameId, Map<String, Object> effect) {
+        System.out.println("🌀 Application collapse causal: " + effect.get("targetPsi"));
+        // TODO: Implémenter la logique de collapse
+    }
+    
+    /**
+     * 🌀 Applique un effet direct
+     */
+    private void applyDirectEffect(String gameId, Map<String, Object> effect) {
+        System.out.println("🌀 Application effet direct: " + effect.get("description"));
+        // TODO: Implémenter la logique d'effet direct
+    }
+    
+    /**
+     * 🔍 Trouve un héros dans le jeu
+     */
+    private Map<String, Object> findHeroInGame(Map<String, Object> game, String heroId) {
+        List<Map<String, Object>> players = (List<Map<String, Object>>) game.get("players");
+        if (players == null) return null;
+        
+        for (Map<String, Object> player : players) {
+            List<Map<String, Object>> heroes = (List<Map<String, Object>>) player.get("heroes");
+            if (heroes != null) {
+                for (Map<String, Object> hero : heroes) {
+                    if (heroId.equals(hero.get("id"))) {
+                        return hero;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * 🎮 Action normale sans quantum (fallback)
+     */
+    private Map<String, Object> executeNormalHeroAction(String gameId, String heroId, String action, Map<String, Object> params) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("success", true);
+        result.put("message", "Action normale exécutée pour " + heroId);
+        result.put("action", action);
+        result.put("quantumEnabled", false);
+        return result;
+    }
+    
+    /**
+     * 🌀 NOUVEAU: Charge les quantum_scripts depuis les JSONs héros
+     */
+    public Map<String, String> loadHeroQuantumScripts() {
+        Map<String, String> quantumScripts = new HashMap<>();
+        
+        // TODO: Charger depuis game_assets/heroes/*.json
+        // Pour l'instant, scripts d'exemple
+        quantumScripts.put("arthur", "ψ001: ⊙(Δt+2 @15,15 ⟶ MOV(Arthur, @15,15))");
+        quantumScripts.put("merlin", "∀enemy ∈ field : enemy.ARMOR = DISARMED (1t)");
+        quantumScripts.put("jean-grofignon", "†ψ001 ⟶ COLLAPSE_OVERRIDE");
+        
+        return quantumScripts;
+    }
+    
+    /**
+     * 🌀 NOUVEAU: Valide tous les quantum_scripts chargés
+     */
+    public Map<String, Object> validateAllQuantumScripts() {
+        Map<String, Object> validation = new HashMap<>();
+        Map<String, String> scripts = loadHeroQuantumScripts();
+        
+        int validCount = 0;
+        int totalCount = scripts.size();
+        Map<String, Boolean> results = new HashMap<>();
+        
+        for (Map.Entry<String, String> entry : scripts.entrySet()) {
+            boolean isValid = quantumScriptParser.isValidQuantumScript(entry.getValue());
+            results.put(entry.getKey(), isValid);
+            if (isValid) validCount++;
+        }
+        
+        validation.put("totalScripts", totalCount);
+        validation.put("validScripts", validCount);
+        validation.put("invalidScripts", totalCount - validCount);
+        validation.put("validationRate", (double) validCount / totalCount);
+        validation.put("results", results);
+        validation.put("message", validCount + "/" + totalCount + " scripts quantiques valides");
+        
+        return validation;
     }
 } 

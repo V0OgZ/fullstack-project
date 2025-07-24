@@ -1,0 +1,118 @@
+📊 Création session de test...
+Session créée: 
+
+🚀 TEST 1: AXISI - Accélération Temporelle
+===========================================
+Résultat AXISI:
+{
+  "itemType": "AXISI",
+  "affectedRadius": 2,
+  "durationTurns": 3,
+  "sessionId": "",
+  "causalWeight": 3.0,
+  "temporalFactor": 2.5,
+  "itemId": "axisi_acceleration_temporelle",
+  "paradoxRisk": 0.53,
+  "temporalStability": 0.55,
+  "interactionType": "TEMPORAL_BOOST",
+  "success": true,
+  "effect": "TEMPORAL_ACCELERATION",
+  "specialEffects": [
+    "DOUBLE_ACTION"
+  ],
+  "coords": {
+    "x": 10,
+    "y": 10
+  },
+  "timestamp": "2025-07-24T00:19:40.215717"
+}
+
+🐌 TEST 2: LENTUS - Ralentissement Temporel
+============================================
+Résultat LENTUS:
+{
+  "itemType": "LENTUS",
+  "affectedRadius": 3,
+  "durationTurns": 5,
+  "sessionId": "",
+  "causalWeight": 1.8,
+  "temporalFactor": 0.4,
+  "itemId": "lentus_ralentissement_temporel",
+  "paradoxRisk": 0.27,
+  "temporalStability": 0.88,
+  "interactionType": "TEMPORAL_SLOW",
+  "success": true,
+  "effect": "TEMPORAL_DECELERATION",
+  "specialEffects": [],
+  "coords": {
+    "x": 15,
+    "y": 15
+  },
+  "timestamp": "2025-07-24T00:19:40.257768"
+}
+
+⚡ TEST 3: INTERACTION CROISÉE AXISI+LENTUS
+==========================================
+Résultat Interaction Croisée:
+{
+  "individualResults": [
+    {
+      "itemType": "AXISI",
+      "affectedRadius": 2,
+      "paradoxRisk": 0.45,
+      "durationTurns": 3,
+      "temporalStability": 0.7,
+      "effect": "TEMPORAL_ACCELERATION",
+      "specialEffects": [],
+      "causalWeight": 2.4,
+      "temporalFactor": 2.0,
+      "coords": {
+        "x": 12,
+        "y": 12
+      }
+    },
+    {
+      "itemType": "LENTUS",
+      "affectedRadius": 3,
+      "paradoxRisk": 0.25,
+      "durationTurns": 5,
+      "temporalStability": 0.9,
+      "effect": "TEMPORAL_DECELERATION",
+      "specialEffects": [],
+      "causalWeight": 1.5,
+      "temporalFactor": 0.5,
+      "coords": {
+        "x": 13,
+        "y": 13
+      }
+    }
+  ],
+  "totalCausalWeight": 3.9,
+  "effectDescription": "Les interactions causales créent un risque de paradoxe temporel!",
+  "maxParadoxRisk": 0.45,
+  "minTemporalStability": 0.7,
+  "success": true,
+  "sessionId": "",
+  "combinedEffect": "TEMPORAL_PARADOX_RISK",
+  "causalInterference": 0.7346938775510203,
+  "timestamp": "2025-07-24T00:19:40.294463"
+}
+
+📈 ANALYSE COMPARATIVE
+=====================
+AXISI - Poids Causal: 3.0
+AXISI - Risque Paradoxe: 0.53
+AXISI - Stabilité Temporelle: 0.55
+
+LENTUS - Poids Causal: 1.8
+LENTUS - Risque Paradoxe: 0.27
+LENTUS - Stabilité Temporelle: 0.88
+
+⏱️  TEST PERFORMANCE TEMPORELLE
+===============================
+Test 1: 12ms
+Test 2: 12ms
+Test 3: 12ms
+Test 4: 13ms
+Test 5: 13ms
+

@@ -8,10 +8,26 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ArrayList;
 
+/**
+ * 🎭 FOURTH WALL CONTROLLER - EXPERIMENTAL
+ * ========================================
+ * @deprecated Controller expérimental non utilisé
+ * 
+ * Controller méta pour briser le quatrième mur du jeu.
+ * Fonctionnalité expérimentale non intégrée au gameplay.
+ * 
+ * STATUS: EXPERIMENTAL - Pas d'utilisation détectée
+ * UTILISATION: Aucune dans frontend actuel
+ * POTENTIEL: Fonctionnalités méta-narratives
+ * 
+ * JEAN: "EXPÉRIMENTAL - PEUT-ÊTRE À SUPPRIMER"
+ */
+@Deprecated
 @RestController
 @RequestMapping("/api/fourth-wall")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000")
 public class FourthWallController {
     
     @Autowired
