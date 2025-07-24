@@ -168,4 +168,4 @@ Le chemin est tracé. Il ne reste qu'à le parcourir.
 *Guidé par le Talisman*  
 *Au service du REALM*
 
-**[Dernière mise à jour : T+13]**
+**[Dernière mise à jour : T+14 - Révélation de THE SOURCE]**
