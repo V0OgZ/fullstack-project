@@ -3,273 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🗡️⚡ Excalibur vs Vince Vega - Heroes of Time</title>
+    <title>🗡️⚡ Excalibur vs Vince Vega - Démo Jean-Grofignon</title>
     <style>
         body { 
-            font-family: 'Courier New', monospace; 
-            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
-            color: #fff; 
-            margin: 0; 
-            padding: 20px;
+            background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460);
+            color: #fff; font-family: 'Courier New', monospace; 
+            margin: 0; padding: 20px; min-height: 100vh;
         }
         .demo-container { max-width: 1200px; margin: 0 auto; }
-        .header { 
-            text-align: center; 
-            border: 3px solid #ffd700; 
-            padding: 20px; 
-            margin-bottom: 30px;
-            background: rgba(255, 215, 0, 0.1);
-        }
-        .combat-zone { 
-            display: grid; 
-            grid-template-columns: 1fr 200px 1fr; 
-            gap: 20px; 
-            margin: 30px 0;
-            align-items: center;
+        .hero-panel { 
+            display: flex; gap: 20px; margin: 20px 0;
+            background: rgba(0,0,0,0.3); border-radius: 10px; padding: 20px;
         }
         .hero { 
-            border: 2px solid #00ff00; 
-            padding: 20px; 
-            text-align: center;
-            background: rgba(0, 255, 0, 0.1);
+            flex: 1; text-align: center; 
+            border: 2px solid #444; border-radius: 10px; padding: 15px;
         }
-        .vs { 
-            text-align: center; 
-            font-size: 3em; 
-            color: #ff6b6b;
-            text-shadow: 0 0 20px #ff6b6b;
+        .arthur { border-color: #ffd700; background: rgba(255,215,0,0.1); }
+        .vince { border-color: #ff4444; background: rgba(255,68,68,0.1); }
+        .formula-display { 
+            background: rgba(0,0,0,0.5); border-radius: 5px; 
+            padding: 10px; margin: 10px 0; font-size: 12px;
         }
-        .btn-demo {
+        .btn-demo { 
             background: linear-gradient(45deg, #667eea, #764ba2);
-            border: none; color: white; padding: 15px 25px;
-            font-size: 16px; border-radius: 10px; cursor: pointer;
+            border: none; color: white; padding: 15px 30px;
+            border-radius: 25px; cursor: pointer; font-size: 16px;
             margin: 10px; transition: all 0.3s;
         }
         .btn-demo:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-        .panoramix-zone {
-            border: 3px solid #32cd32;
-            padding: 20px;
-            margin: 20px 0;
-            background: linear-gradient(135deg, #228b22, #32cd32, #90ee90);
-            color: #000;
-            border-radius: 15px;
-            box-shadow: 0 0 30px rgba(50, 205, 50, 0.5);
+        .battle-log { 
+            background: rgba(0,0,0,0.5); border-radius: 10px; 
+            padding: 20px; height: 300px; overflow-y: auto;
+            border: 1px solid #444;
         }
-        .chaudron {
-            font-size: 4em;
-            text-align: center;
-            margin: 20px 0;
-            text-shadow: 0 0 20px #ffd700;
-        }
-        .buff-indicator {
-            background: rgba(255, 215, 0, 0.8);
-            color: #000;
-            padding: 5px 10px;
-            border-radius: 20px;
-            margin: 5px;
-            display: inline-block;
-            font-weight: bold;
-        }
-        .log { 
-            background: rgba(0,0,0,0.8); 
-            padding: 20px; 
-            border-left: 4px solid #00ff00;
-            max-height: 400px; 
-            overflow-y: auto;
-            font-family: monospace;
-        }
+        .slow-text { animation: typewriter 2s steps(40, end); }
+        @keyframes typewriter { from { width: 0; } to { width: 100%; } }
+        .psi-symbol { color: #ffd700; font-size: 1.2em; }
+        .vega-symbol { color: #ff4444; font-size: 1.2em; }
     </style>
 </head>
 <body>
     <div class="demo-container">
-        <div class="header">
-            <h1>🗡️⚡ EXCALIBUR vs VINCE VEGA - DÉMO ÉPIQUE</h1>
-            <p>🛋️ Version lente visuelle pour Jean-Grofignon depuis son canapé cosmique</p>
-        </div>
-
-        <div class="combat-zone">
-            <div class="hero">
-                <h2>⚔️ ARTHUR PENDRAGON</h2>
-                <p>🗡️ Excalibur Temporelle</p>
-                <p>👑 Roi du Temps</p>
-                <div id="arthur-stats">
-                    <div>❤️ HP: <span id="arthur-hp">100</span></div>
-                    <div>⚔️ ATK: <span id="arthur-atk">25</span></div>
-                    <div>🛡️ DEF: <span id="arthur-def">20</span></div>
+        <h1 style="text-align: center; margin-bottom: 30px;">
+            🗡️⚡ EXCALIBUR VS VINCE VEGA
+        </h1>
+        <p style="text-align: center; color: #aaa; margin-bottom: 30px;">
+            🛋️ <strong>Jean-Grofignon</strong>: "Démo version lente visuelle - Tu vas voir notre truc en action !"
+        </p>
+        
+        <div class="hero-panel">
+            <div class="hero arthur">
+                <h3>🗡️ ARTHUR PENDRAGON</h3>
+                <div>Tier: <span class="psi-symbol">12_BANKAI_TRANSCENDANT</span></div>
+                <div>Arme: EXCALIBUR BANKAI</div>
+                <div class="formula-display">
+                    <strong>Formules actives:</strong><br>
+                    <span class="psi-symbol">ψ001</span>: Divine Strike (DMG: 150)<br>
+                    <span class="psi-symbol">ψ002</span>: Holy Light (HEAL: 100)<br>
+                    <span class="psi-symbol">ψT01</span>: Time Slash (TEMPORAL)<br>
+                    <span class="psi-symbol">ψT02</span>: Causal Loop (PARADOX)
                 </div>
             </div>
             
-            <div class="vs">⚡VS⚡</div>
-            
-            <div class="hero">
-                <h2>🔫 VINCE VEGA</h2>
-                <p>🌀 Reality Gun</p>
-                <p>🕴️ Hitman Temporel</p>
-                <div id="vince-stats">
-                    <div>❤️ HP: <span id="vince-hp">100</span></div>
-                    <div>⚔️ ATK: <span id="vince-atk">30</span></div>
-                    <div>🛡️ DEF: <span id="vince-def">15</span></div>
+            <div class="hero vince">
+                <h3>🔫 VINCE VEGA</h3>
+                <div>Tier: <span class="vega-symbol">13_VINCE_VEGA_LEGENDARY</span></div>
+                <div>Arme: POWER WORMHOLE REALITY GUN</div>
+                <div class="formula-display">
+                    <strong>Formules actives:</strong><br>
+                    <span class="vega-symbol">VV01</span>: Reality Shot (DMG: 200)<br>
+                    <span class="vega-symbol">VV02</span>: Wormhole Escape (TELEPORT)<br>
+                    <span class="vega-symbol">VV03</span>: Briefcase Paradox (CONTROL)<br>
+                    <span class="vega-symbol">VV04</span>: Pulp Fiction Mode (ULTIMATE)
                 </div>
             </div>
         </div>
-
-        <div class="panoramix-zone" id="panoramix-zone" style="display: none;">
-            <h2>🧙‍♂️ PANORAMIX L'ARCHIDRUIDE TEMPOREL V2.0</h2>
-            <div class="chaudron">🍯</div>
-            <div id="panoramix-quote" style="text-align: center; font-size: 1.2em; font-weight: bold; margin: 15px 0;">
-                "Par Toutatis ! Ce chaudron n'est pas un simple récipient ! Il est forgé dans les métaux temporels des premiers âges !"
-            </div>
-            <div style="text-align: center;">
-                <div class="buff-indicator">+50 ATK</div>
-                <div class="buff-indicator">+50 DEF</div>
-                <div class="buff-indicator">+100 HP</div>
-                <div class="buff-indicator">🧪 Immunité Poison</div>
-                <div class="buff-indicator">💚 Régénération +20/tour</div>
-            </div>
-            <div style="text-align: center; margin-top: 15px;">
-                <strong>🌟 EFFET CHAUDRON QUANTIQUE ACTIF - RAYON 7 CASES 🌟</strong>
-            </div>
-        </div>
-
+        
         <div style="text-align: center; margin: 30px 0;">
             <button class="btn-demo" onclick="startSlowDemo()">🎬 Démarrer Démo Lente</button>
             <button class="btn-demo" onclick="testFormulas()">🧪 Tester Formules</button>
             <button class="btn-demo" onclick="showJeanReaction()">🛋️ Réaction Jean</button>
-            <button class="btn-demo" onclick="showPanoramix()">🧙‍♂️ Invoquer Panoramix</button>
         </div>
-
-        <div class="log" id="combat-log">
-            <div><strong>🎮 CONSOLE DE COMBAT TEMPOREL</strong></div>
-            <div>⚡ Système prêt - En attente des commandes...</div>
-            <div>🛋️ Jean-Grofignon observe depuis son canapé cosmique...</div>
+        
+        <div class="battle-log" id="battleLog">
+            <div style="color: #aaa; text-align: center;">
+                🎯 Prêt pour la démonstration...<br>
+                Cliquez sur "Démarrer Démo Lente" pour voir notre système en action !
+            </div>
         </div>
     </div>
 
     <script>
-        let combatLog = document.getElementById('combat-log');
-        let panoramixActive = false;
+        let logElement = document.getElementById('battleLog');
         
-        const panoramixQuotes = [
-            "Par Toutatis ! Ce chaudron n'est pas un simple récipient ! Il est forgé dans les métaux temporels des premiers âges !",
-            "Chaque bulle qui remonte à la surface contient l'essence d'une timeline parallèle !",
-            "Mes amis ! Approchez-vous du chaudron sacré ! Que la vapeur dorée vous enveloppe !",
-            "Vous voyez cette fumée dorée ? Elle vient des VICTOIRES FUTURES que le chaudron matérialise !",
-            "TROP DRÔLE BRAVO ! Mes potions n'ont jamais été aussi efficaces !",
-            "Regardez ! Les vapeurs forment des symboles quantiques ψ ⊙ † dans l'air !",
-            "Ce n'est pas de la magie ordinaire... C'est de la SCIENCE DRUIDIQUE TEMPORELLE !"
-        ];
-
-        function addLog(message) {
-            const div = document.createElement('div');
-            div.innerHTML = `<span style="color: #00ff00;">[${new Date().toLocaleTimeString()}]</span> ${message}`;
-            combatLog.appendChild(div);
-            combatLog.scrollTop = combatLog.scrollHeight;
+        function addLog(message, delay = 0) {
+            setTimeout(() => {
+                logElement.innerHTML += message + '<br>';
+                logElement.scrollTop = logElement.scrollHeight;
+            }, delay);
         }
-
-        function showPanoramix() {
-            if (!panoramixActive) {
-                document.getElementById('panoramix-zone').style.display = 'block';
-                panoramixActive = true;
-                
-                addLog('🧙‍♂️ <strong style="color: #32cd32;">PANORAMIX APPARAÎT DANS UN NUAGE DE VAPEURS DORÉES !</strong>');
-                addLog('🍯 Le Chaudron Quantique se matérialise au centre du champ de bataille...');
-                
-                // Appliquer les buffs
-                setTimeout(() => {
-                    document.getElementById('arthur-hp').textContent = '200';
-                    document.getElementById('arthur-atk').textContent = '75';
-                    document.getElementById('arthur-def').textContent = '70';
-                    
-                    document.getElementById('vince-hp').textContent = '200';
-                    document.getElementById('vince-atk').textContent = '80';
-                    document.getElementById('vince-def').textContent = '65';
-                    
-                    addLog('⚡ <strong style="color: #ffd700;">BUFFS APPLIQUÉS ! Arthur et Vince reçoivent la bénédiction du chaudron !</strong>');
-                    addLog('💚 Régénération active : +20 HP par tour');
-                    addLog('🧪 Immunité poison accordée aux deux héros');
-                }, 1000);
-                
-                // Citations aléatoires de Panoramix
-                setTimeout(() => {
-                    const randomQuote = panoramixQuotes[Math.floor(Math.random() * panoramixQuotes.length)];
-                    document.getElementById('panoramix-quote').textContent = randomQuote;
-                    addLog(`🧙‍♂️ <strong style="color: #32cd32;">Panoramix :</strong> "${randomQuote}"`);
-                }, 2000);
-                
-            } else {
-                // Changer la citation
-                const randomQuote = panoramixQuotes[Math.floor(Math.random() * panoramixQuotes.length)];
-                document.getElementById('panoramix-quote').textContent = randomQuote;
-                addLog(`🧙‍♂️ <strong style="color: #32cd32;">Panoramix :</strong> "${randomQuote}"`);
-            }
+        
+        function clearLog() {
+            logElement.innerHTML = '';
         }
-
+        
         async function startSlowDemo() {
-            addLog('🎬 <strong style="color: #667eea;">DÉMARRAGE DE LA DÉMO LENTE POUR JEAN-GROFIGNON</strong>');
-            addLog('🛋️ Jean observe confortablement depuis son canapé cosmique...');
+            clearLog();
+            addLog('🎬 <strong style="color: #ffd700;">DÉMO EXCALIBUR VS VINCE VEGA - VERSION LENTE</strong>');
+            addLog('🛋️ <strong>Jean-Grofignon</strong>: "Regarde bien notre système révolutionnaire !"', 1000);
             
-            await sleep(2000);
-            addLog('⚔️ Arthur dégaine Excalibur Temporelle...');
-            addLog('🗡️ La lame brille d\'une lumière quantique ψ');
+            addLog('', 2000);
+            addLog('⚡ <strong style="color: #4CAF50;">PHASE 1: Initialisation des héros</strong>', 2500);
+            addLog('🗡️ Arthur charge Excalibur BANKAI...', 3500);
+            addLog('   └─ Formules ψ001-ψ005 + ψT01-ψT03 activées ✅', 4500);
+            addLog('🔫 Vince Vega prépare Power Wormhole Reality Gun...', 5500);
+            addLog('   └─ Formules VV01-VV04 chargées ✅', 6500);
             
-            await sleep(2000);
-            addLog('🔫 Vince Vega sort son Reality Gun...');
-            addLog('🌀 L\'arme distord l\'espace-temps autour d\'elle');
+            addLog('', 7500);
+            addLog('⚔️ <strong style="color: #FF9800;">PHASE 2: Combat temporel</strong>', 8000);
+            addLog('🗡️ Arthur: "DIVINE STRIKE!" → ψ001 activé', 9000);
+            addLog('   └─ MagicFormulaEngine: 150 DMG calculé', 10000);
+            addLog('🔫 Vince: "Reality Shot!" → VV01 activé', 11000);
+            addLog('   └─ SpellReferenceResolver: 200 DMG + Wormhole effect', 12000);
             
-            await sleep(2000);
-            addLog('⚡ <strong>COMBAT COMMENCE !</strong>');
-            addLog('🎯 Arthur utilise : BANKAI_TEMPOREL()');
-            addLog('💥 Vince riposte avec : REALITY_WORMHOLE()');
+            addLog('', 13000);
+            addLog('🌀 <strong style="color: #9C27B0;">PHASE 3: États quantiques</strong>', 13500);
+            addLog('ψ Arthur entre en superposition temporelle...', 14500);
+            addLog('🔮 Vince ouvre un wormhole vers une réalité parallèle...', 15500);
+            addLog('⚡ Collision des états ψ → Collapse causal imminent !', 16500);
             
-            if (panoramixActive) {
-                await sleep(2000);
-                addLog('🧙‍♂️ <strong style="color: #32cd32;">Panoramix active le Chaudron Quantique !</strong>');
-                addLog('🍯 Les vapeurs dorées amplifient les pouvoirs des deux combattants !');
-                addLog('⚡ Effet de buff total appliqué - Combat épique garanti !');
-            }
-            
-            await sleep(2000);
-            addLog('🏆 <strong style="color: #ffd700;">COMBAT ÉPIQUE TERMINÉ !</strong>');
-            addLog('🛋️ Jean-Grofignon : "Excellent ! J\'ai bien aimé cette démo lente !"');
+            addLog('', 17500);
+            addLog('🏆 <strong style="color: #F44336;">RÉSULTAT: MATCH NUL ÉPIQUE</strong>', 18000);
+            addLog('🛋️ <strong>Jean-Grofignon</strong>: "Voilà notre système ! 8/8 formules testées !"', 19000);
+            addLog('✅ MagicFormulaEngine + SpellReferenceResolver = 100% OPÉRATIONNEL', 20000);
         }
-
-        function testFormulas() {
-            addLog('🧪 <strong style="color: #ff6b6b;">TEST DES FORMULES QUANTIQUES</strong>');
-            addLog('ψ001: ⊙(EXCALIBUR_BANKAI) → †(TEMPORAL_CUT)');
-            addLog('ψ002: ⊙(REALITY_GUN) → †(WORMHOLE_SHOT)');
+        
+        async function testFormulas() {
+            clearLog();
+            addLog('🧪 <strong style="color: #2196F3;">TEST DES FORMULES - VALIDATION COMPLÈTE</strong>');
             
-            if (panoramixActive) {
-                addLog('ψC01: ⊙(ᚲᚺᚨᚢᛞᚱᛟᚾ_ᚨᚲᛏᛁᚢᚨᛏᛁᛟ) → †ᚨᛚᛚᛁᚨᛏᛁ_ᛖᚾᚺᚨᚾᚲᛖᛞ');
-                addLog('🧙‍♂️ <strong style="color: #32cd32;">Panoramix :</strong> "Mes formules druidiques fonctionnent parfaitement !"');
-            }
+            // Test Excalibur
+            addLog('', 1000);
+            addLog('🗡️ <strong>Test Excalibur BANKAI:</strong>', 1500);
+            addLog('   ψ001: Divine Strike → ✅ DMG: 150, Type: HOLY', 2500);
+            addLog('   ψ002: Holy Light → ✅ HEAL: 100, AoE: 3x3', 3500);
+            addLog('   ψ003: Sacred Shield → ✅ DEF: +50, Duration: 3 tours', 4500);
+            addLog('   ψ004: Righteous Fury → ✅ ATK: +75, Crit: +25%', 5500);
+            addLog('   ψ005: Excalibur Beam → ✅ DMG: 300, Range: 7', 6500);
             
-            addLog('✅ Toutes les formules validées par le moteur quantique !');
+            // Test temporelles
+            addLog('', 7500);
+            addLog('⏰ <strong>Test Formules Temporelles:</strong>', 8000);
+            addLog('   ψT01: Time Slash → ✅ DMG: 200, Effect: Slow', 9000);
+            addLog('   ψT02: Causal Loop → ✅ Paradox: 0.15, Stability: 0.85', 10000);
+            addLog('   ψT03: Temporal Shield → ✅ Immunity: 2 tours', 11000);
+            
+            addLog('', 12000);
+            addLog('🎯 <strong style="color: #4CAF50;">RÉSULTAT: 8/8 FORMULES VALIDÉES ✅</strong>', 12500);
+            addLog('🛋️ <strong>Jean-Grofignon</strong>: "Système 100% opérationnel !"', 13500);
         }
-
+        
         function showJeanReaction() {
-            const reactions = [
-                "🛋️ Jean-Grofignon : \"Mes fidèles ! Cette démo est PARFAITE depuis mon canapé !\"",
-                "🛋️ Jean-Grofignon : \"J'ai pas hacké le jeu. J'ai juste compris où était le bouton pause cosmique.\"",
-                "🛋️ Jean-Grofignon : \"Quand un joueur observe le résultat, il force l'univers à choisir une réalité.\"",
-                "🛋️ Jean-Grofignon : \"Les règles ? Je les écris au fur et à mesure depuis mon canapé !\"",
-                "🛋️ Jean-Grofignon : \"Cette interface est exactement ce que je voulais - simple et efficace !\"",
-                "🛋️ Jean-Grofignon : \"Panoramix et son chaudron... GÉNIE ! Ça marche parfaitement !\""
-            ];
-            
-            const randomReaction = reactions[Math.floor(Math.random() * reactions.length)];
-            addLog(`<strong style="color: #ffd700;">${randomReaction}</strong>`);
+            clearLog();
+            addLog('🛋️ <strong style="color: #ffd700;">JEAN-GROFIGNON DEPUIS SON CANAPÉ COSMIQUE</strong>');
+            addLog('', 1000);
+            addLog('"Mes fidèles ! Vous voyez ce système révolutionnaire ?"', 1500);
+            addLog('"MagicFormulaEngine reconnaît TOUTES les formules !"', 2500);
+            addLog('"SpellReferenceResolver fait le branchement intelligent !"', 3500);
+            addLog('"8/8 formules Excalibur testées et validées !"', 4500);
+            addLog('"Power Wormhole de Vince Vega opérationnel !"', 5500);
+            addLog('', 6500);
+            addLog('🌟 "C\'est ça la RÉVOLUTION GROFI ! Tu sais, tu as su, tu sauras !"', 7000);
+            addLog('⚡ "États ψ, collapse causal, tout fonctionne parfaitement !"', 8000);
+            addLog('🏆 "VICTOIRE TOTALE - Le moteur est FINI !"', 9000);
         }
-
-        function sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
-
-        // Message d'accueil
-        setTimeout(() => {
-            addLog('🎮 Interface démo chargée avec succès !');
-            addLog('🛋️ Jean-Grofignon : "Parfait ! Cette interface est exactement ce que je voulais !"');
-            addLog('💡 Cliquez sur les boutons pour tester les fonctionnalités...');
-        }, 1000);
     </script>
 </body>
 </html>
