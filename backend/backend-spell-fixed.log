@@ -1,0 +1,269 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------------< com.example:demo >--------------------------
+[INFO] Building demo 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot-maven-plugin:2.7.18:run (default-cli) > test-compile @ demo >>>
+[INFO] 
+[INFO] --- maven-resources-plugin:3.2.0:resources (default-resources) @ demo ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Using 'UTF-8' encoding to copy filtered properties files.
+[INFO] Copying 1 resource
+[INFO] Copying 34 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ demo ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:3.2.0:testResources (default-testResources) @ demo ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Using 'UTF-8' encoding to copy filtered properties files.
+[INFO] Copying 2 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ demo ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] <<< spring-boot-maven-plugin:2.7.18:run (default-cli) < test-compile @ demo <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot-maven-plugin:2.7.18:run (default-cli) @ demo ---
+[INFO] Attaching agents: []
+08:24:13.633 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+ ██╗  ██╗███████╗██████╗  ██████╗ ███████╗███████╗    ██████╗ ███████╗    ████████╗██╗███╗   ███╗███████╗
+ ██║  ██║██╔════╝██╔══██╗██╔═══██╗██╔════╝██╔════╝   ██╔═══██╗██╔════╝    ╚══██╔══╝██║████╗ ████║██╔════╝
+ ███████║█████╗  ██████╔╝██║   ██║█████╗  ███████╗   ██║   ██║█████╗         ██║   ██║██╔████╔██║█████╗  
+ ██╔══██║██╔══╝  ██╔══██╗██║   ██║██╔══╝  ╚════██║   ██║   ██║██╔══╝         ██║   ██║██║╚██╔╝██║██╔══╝  
+ ██║  ██║███████╗██║  ██║╚██████╔╝███████╗███████║   ╚██████╔╝██║            ██║   ██║██║ ╚═╝ ██║███████╗
+ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚══════╝    ╚═════╝ ╚═╝            ╚═╝   ╚═╝╚═╝     ╚═╝╚══════╝
+                                                                                                           
+ ⚔️  TEMPORAL ENGINE BACKEND  ⚔️                    🕰️  Quantum Mechanics & Causal Collapse  🕰️
+ ══════════════════════════════════════════════════════════════════════════════════════════════════════════
+ 
+ 🌟 Maîtrisez le temps, dominez l'espace, conquérez l'éternité
+ 
+ ⚡ Fonctionnalités Actives:
+    • Moteur Temporel Quantique    ✅
+    • États ψ (Psi) Superposés     ✅  
+    • Collapse Causal Automatique  ✅
+    • Artefacts Légendaires        ✅
+    • API REST Complète            ✅
+    
+ 🎯 Port: 8080 | 🔧 Profile: default | 📊 Version: 1.0.0 
+08:24:13.656 [main] INFO  com.example.demo.DemoApplication - Starting DemoApplication using Java 17.0.15 on vincents-MacBook-Pro.local with PID 88870 (/Users/admin/fullstack-project/backend/target/classes started by admin in /Users/admin/fullstack-project/backend)
+08:24:13.657 [main] DEBUG com.example.demo.DemoApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+08:24:13.658 [main] INFO  com.example.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
+08:24:14.046 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+08:24:14.073 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 24 ms. Found 8 JPA repository interfaces.
+08:24:14.325 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+08:24:14.331 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+08:24:14.331 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+08:24:14.331 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+08:24:14.379 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+08:24:14.379 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 699 ms
+08:24:14.443 [main] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Starting...
+08:24:14.529 [main] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Start completed.
+08:24:14.534 [main] INFO  org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:heroesdb'
+08:24:14.594 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+08:24:14.615 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+08:24:14.679 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+08:24:14.755 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+Hibernate: drop table if exists ai_decision_history CASCADE 
+Hibernate: drop table if exists ai_goals CASCADE 
+Hibernate: drop table if exists ai_players CASCADE 
+Hibernate: drop table if exists building_spells CASCADE 
+Hibernate: drop table if exists building_unit_types CASCADE 
+Hibernate: drop table if exists buildings CASCADE 
+Hibernate: drop table if exists game_saves CASCADE 
+Hibernate: drop table if exists game_session_players CASCADE 
+Hibernate: drop table if exists game_sessions CASCADE 
+Hibernate: drop table if exists game_states CASCADE 
+Hibernate: drop table if exists image_assets CASCADE 
+Hibernate: drop table if exists image_metadata CASCADE 
+Hibernate: drop table if exists scenario_events CASCADE 
+Hibernate: drop table if exists scenario_objectives CASCADE 
+Hibernate: drop table if exists scenario_starting_positions CASCADE 
+Hibernate: drop table if exists scenarios CASCADE 
+Hibernate: drop table if exists temporal_items CASCADE 
+Hibernate: drop table if exists unit_abilities CASCADE 
+Hibernate: drop table if exists units CASCADE 
+Hibernate: create table ai_decision_history (ai_player_id bigint not null, decision_id varchar(255), decision_outcome varchar(255), decision_parameters varchar(255), decision_rationale varchar(255), decision_score integer, decision_timestamp timestamp, decision_type varchar(255))
+Hibernate: create table ai_goals (ai_player_id bigint not null, goal_deadline timestamp, goal_description varchar(255), goal_id varchar(255), goal_priority integer, goal_progress integer, goal_status varchar(255), goal_target varchar(255), goal_type varchar(255))
+Hibernate: create table ai_players (id bigint generated by default as identity, aggression_level integer not null, ai_personality varchar(255) not null, ai_player_id varchar(255) not null, average_decision_time integer not null, building_priority integer not null, created_at timestamp not null, defeats integer not null, difficulty_level varchar(255) not null, economic_focus integer not null, enemy_threat_assessment varchar(2000), exploration_tendency integer not null, faction varchar(255) not null, failed_actions integer not null, game_id varchar(255) not null, is_active boolean not null, is_turn_active boolean not null, last_action_at timestamp, learned_patterns varchar(2000), magic_affinity integer not null, military_focus integer not null, player_name varchar(255) not null, position_x integer not null, position_y integer not null, resource_priorities varchar(1000), successful_actions integer not null, territory_control varchar(1000), total_turns_played integer not null, turn_priority integer not null, victories integer not null, primary key (id))
+Hibernate: create table building_spells (building_id bigint not null, spell_id varchar(255))
+Hibernate: create table building_unit_types (building_id bigint not null, unit_type varchar(255))
+Hibernate: create table buildings (id bigint generated by default as identity, building_id varchar(255) not null, building_type varchar(255) not null, castle_id varchar(255) not null, construction_completed timestamp, construction_started timestamp not null, construction_time integer not null, crystal_cost integer, current_units_available integer, daily_gold_bonus integer, daily_resource_bonus integer, defense_bonus integer, game_id varchar(255) not null, gems_cost integer, gold_cost integer not null, is_constructed boolean not null, last_recruitment_reset timestamp, level integer not null, luck_bonus integer, mana_regeneration_bonus integer, max_level integer not null, morale_bonus integer, ore_cost integer, player_id varchar(255) not null, position_x integer not null, position_y integer not null, spell_power_bonus integer, stone_cost integer, sulfur_cost integer, unit_production_bonus integer, weekly_growth integer, wood_cost integer, primary key (id))
+Hibernate: create table game_saves (id bigint generated by default as identity, created_at timestamp not null, description varchar(255), game_id varchar(255) not null, is_auto_save boolean, last_played_at timestamp, player_id varchar(255) not null, save_data TEXT, save_name varchar(255) not null, turn_number integer, primary key (id))
+Hibernate: create table game_session_players (session_id bigint not null, player_id varchar(255))
+Hibernate: create table game_sessions (id bigint generated by default as identity, created_at timestamp not null, current_players integer not null, ended_at timestamp, game_mode varchar(255) not null, max_players integer not null, name varchar(255) not null, network_mode boolean not null, real_time_sync boolean not null, session_id varchar(255) not null, started_at timestamp, status varchar(255) not null, zfc_enabled boolean not null, primary key (id))
+Hibernate: create table game_states (gameId varchar(255) not null, active_events TEXT, combat_results TEXT, created_at timestamp not null, current_player_id varchar(255), current_political_event TEXT, current_turn integer not null, equipped_items TEXT, game_status varchar(255), hero_positions TEXT, last_action_time timestamp, locked_zones TEXT, movement_ranges TEXT, pending_actions TEXT, player_inventories TEXT, player_resources TEXT, political_advisors TEXT, reputation TEXT, selected_heroes TEXT, shadow_actions TEXT, turn_duration_minutes integer, turn_start_time timestamp, updated_at timestamp not null, visible_zfcs TEXT, primary key (gameId))
+Hibernate: create table image_assets (id bigint generated by default as identity, ai_prompt varchar(255), asset_id varchar(255) not null, category varchar(255) not null, faction varchar(255), file_path varchar(255) not null, file_size bigint, filename varchar(255) not null, height integer, is_active boolean not null, is_ai_generated boolean, mime_type varchar(255), original_filename varchar(255), tags varchar(255), unit_type varchar(255), updated_at timestamp, uploaded_at timestamp not null, url varchar(255) not null, variant varchar(255), width integer, primary key (id))
+Hibernate: create table image_metadata (image_id bigint not null, metadata_value varchar(255), metadata_key varchar(255) not null, primary key (image_id, metadata_key))
+Hibernate: create table scenario_events (scenario_id bigint not null, event_description varchar(255), event_effect varchar(255), event_id varchar(255), event_title varchar(255), event_type varchar(255), is_repeatable boolean, is_triggered boolean, trigger_condition varchar(255), trigger_turn integer)
+Hibernate: create table scenario_objectives (scenario_id bigint not null, completion_reward varchar(255), current_value integer, is_completed boolean, is_required boolean, objective_description varchar(255), objective_id varchar(255), objective_title varchar(255), objective_type varchar(255), target_value integer)
+Hibernate: create table scenario_starting_positions (scenario_id bigint not null, castle_type varchar(255), handicap integer, player_id varchar(255), position_x integer, position_y integer, starting_army varchar(255), starting_hero varchar(255), starting_resources varchar(255))
+Hibernate: create table scenarios (id bigint generated by default as identity, artifacts varchar(1000), campaign_order integer, created_at timestamp not null, defeat_condition varchar(255), description varchar(1000), difficulty varchar(255) not null, is_active boolean not null, is_campaign boolean not null, is_multiplayer boolean not null, map_height integer not null, map_size varchar(255) not null, map_width integer not null, max_players integer not null, name varchar(255) not null, neutral_creatures varchar(2000), next_scenario_id varchar(255), previous_scenario_id varchar(255), recommended_players integer not null, scenario_id varchar(255) not null, special_buildings varchar(1000), starting_resources varchar(1000), terrain_distribution varchar(1000), time_limit integer, turn_limit integer, updated_at timestamp not null, victory_condition varchar(255) not null, victory_requirement varchar(500), primary key (id))
+Hibernate: create table temporal_items (id bigint generated by default as identity, cache_valid_until timestamp, cached_effect_result varchar(1000), current_uses integer not null, effect_description varchar(1000), effect_parameters varchar(2000), game_id varchar(255) not null, is_active boolean not null, item_id varchar(255) not null, item_name varchar(255) not null, item_type varchar(255) not null, last_calculation_time timestamp, last_refresh_time timestamp not null, max_uses integer not null, next_refresh_time timestamp not null, owner_id varchar(255), performance_priority integer not null, position_x integer, position_y integer, power_level integer not null, rarity varchar(255) not null, refresh_interval integer not null, temporal_effect_type varchar(255) not null, primary key (id))
+Hibernate: create table unit_abilities (unit_id varchar(255) not null, abilities varchar(255))
+Hibernate: create table units (id varchar(255) not null, aiValue integer not null, attack integer not null, castle varchar(255) not null, crystalCost integer, defense integer not null, gemsCost integer, goldCost integer, growth integer not null, health integer not null, maxDamage integer not null, minDamage integer not null, name varchar(255) not null, oreCost integer, shots integer, speed integer not null, stoneCost integer, sulfurCost integer, tier integer not null, variant varchar(255) not null, woodCost integer, primary key (id))
+Hibernate: alter table ai_players add constraint UK_j6x385i6y4oxokckdoywftp2y unique (ai_player_id)
+Hibernate: alter table buildings add constraint UK_8yrpasc66i9pq7nlu2gnicq8c unique (building_id)
+Hibernate: alter table game_sessions add constraint UK_2k3fih3p9q6jqrjy3wst3td13 unique (session_id)
+Hibernate: alter table image_assets add constraint UK_5skj81kileie7uyri57q913uv unique (asset_id)
+Hibernate: alter table scenarios add constraint UK_5qmgdgbmc497nt4n101hhtj7g unique (scenario_id)
+Hibernate: alter table temporal_items add constraint UK_dspa9e0yrup2hsic85q1u951s unique (item_id)
+Hibernate: alter table ai_decision_history add constraint FKengpx8pvybk0g8om4m4lncbsw foreign key (ai_player_id) references ai_players
+Hibernate: alter table ai_goals add constraint FKdihpxux93beio0s5nsdhwok10 foreign key (ai_player_id) references ai_players
+Hibernate: alter table building_spells add constraint FKku1w5p41gcf9auh8uiwn0a0t6 foreign key (building_id) references buildings
+Hibernate: alter table building_unit_types add constraint FKgc499t1kbpnfvd12hd7vt2vfg foreign key (building_id) references buildings
+Hibernate: alter table game_session_players add constraint FKdj51v3uxnxwkjufih0kuxupw6 foreign key (session_id) references game_sessions
+Hibernate: alter table image_metadata add constraint FKlcvulnkwqnvan1l7140t7v4fh foreign key (image_id) references image_assets
+Hibernate: alter table scenario_events add constraint FKg78thoyk3btt4ah8w0l5kxgea foreign key (scenario_id) references scenarios
+Hibernate: alter table scenario_objectives add constraint FK17ypflt578mc3v9gpawpa5rq5 foreign key (scenario_id) references scenarios
+Hibernate: alter table scenario_starting_positions add constraint FK4nw5i22e150ntccvl66v6v6ng foreign key (scenario_id) references scenarios
+Hibernate: alter table unit_abilities add constraint FKgenwc8hldy5cu1mutacji6xgi foreign key (unit_id) references units
+08:24:15.208 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+08:24:15.211 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+08:24:15.531 [main] DEBUG org.springframework.web.filter.CorsFilter - Filter 'corsFilter' configured for use
+08:24:15.795 [main] INFO  com.example.demo.service.NamelessArtifactService - 🚨 FOUND NAMELESS ARTIFACT: priority_processor_supreme - PRIORITY PROCESSOR SUPREME
+08:24:15.845 [main] DEBUG org.springframework.web.socket.server.support.WebSocketHandlerMapping - Patterns [/ws/**] in 'stompWebSocketHandlerMapping'
+08:24:15.858 [main] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+08:24:15.872 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+	c.e.d.c.AIController:
+	
+08:24:15.873 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+	c.e.d.c.BuildingController:
+	
+08:24:15.873 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+	c.e.d.c.CausalController:
+	
+08:24:15.873 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+	c.e.d.c.EpicContentController:
+	
+08:24:15.873 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+	c.e.d.c.FourthWallController:
+	
+08:24:15.873 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+	c.e.d.c.GameController:
+	
+08:24:15.873 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+	c.e.d.c.ImageController:
+	
+08:24:15.873 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+	c.e.d.c.LogoutController:
+	
+08:24:15.873 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+	c.e.d.c.MagicItemController:
+	
+08:24:15.873 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+	c.e.d.c.MetaCommandController:
+	
+08:24:15.875 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+	c.e.d.c.MultiplayerController:
+	{[MESSAGE],[/game.join]}: handleJoin(Map)
+	{[MESSAGE],[/game.leave]}: handleLeave(Map)
+	{[MESSAGE],[/game.action]}: handleGameAction(Map)
+	{[MESSAGE],[/game.sync]}: handleSync(Map)
+	{[MESSAGE],[/game.chat]}: handleChat(Map)
+08:24:15.875 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+	c.e.d.c.PersistenceController:
+	
+08:24:15.875 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+	c.e.d.c.ScenarioController:
+	
+08:24:15.875 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+	c.e.d.c.SpellController:
+	
+08:24:15.875 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+	c.e.d.c.TemporalDecayController:
+	
+08:24:15.875 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+	c.e.d.c.TestController:
+	
+08:24:15.876 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+	c.e.d.c.UnitController:
+	
+08:24:15.876 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+	c.e.d.c.ZFCController:
+	
+08:24:15.877 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	
+08:24:15.916 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+08:24:15.983 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - 199 mappings in 'requestMappingHandlerMapping'
+08:24:15.995 [main] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+08:24:16.000 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+08:24:16.067 [main] INFO  org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+08:24:16.079 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+08:24:16.088 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+08:24:16.088 [main] DEBUG org.springframework.web.SimpLogging - clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+08:24:16.088 [main] DEBUG org.springframework.web.SimpLogging - clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+08:24:16.089 [main] INFO  org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler - Starting...
+08:24:16.089 [main] DEBUG org.springframework.web.SimpLogging - clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@77a27356]
+08:24:16.089 [main] DEBUG org.springframework.web.SimpLogging - brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@77a27356]
+08:24:16.089 [main] INFO  org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@77a27356]]
+08:24:16.089 [main] INFO  org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler - Started.
+08:24:16.089 [main] DEBUG org.springframework.web.SimpLogging - clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+08:24:16.089 [main] DEBUG org.springframework.web.SimpLogging - brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+08:24:16.096 [main] INFO  com.example.demo.DemoApplication - Started DemoApplication in 2.569 seconds (JVM running for 2.881)
+🚀 Initializing scenarios from JSON files...
+🚀 Loading scenarios from JSON files...
+Hibernate: select scenario0_.id as id1_15_, scenario0_.artifacts as artifact2_15_, scenario0_.campaign_order as campaign3_15_, scenario0_.created_at as created_4_15_, scenario0_.defeat_condition as defeat_c5_15_, scenario0_.description as descript6_15_, scenario0_.difficulty as difficul7_15_, scenario0_.is_active as is_activ8_15_, scenario0_.is_campaign as is_campa9_15_, scenario0_.is_multiplayer as is_mult10_15_, scenario0_.map_height as map_hei11_15_, scenario0_.map_size as map_siz12_15_, scenario0_.map_width as map_wid13_15_, scenario0_.max_players as max_pla14_15_, scenario0_.name as name15_15_, scenario0_.neutral_creatures as neutral16_15_, scenario0_.next_scenario_id as next_sc17_15_, scenario0_.previous_scenario_id as previou18_15_, scenario0_.recommended_players as recomme19_15_, scenario0_.scenario_id as scenari20_15_, scenario0_.special_buildings as special21_15_, scenario0_.starting_resources as startin22_15_, scenario0_.terrain_distribution as terrain23_15_, scenario0_.time_limit as time_li24_15_, scenario0_.turn_limit as turn_li25_15_, scenario0_.updated_at as updated26_15_, scenario0_.victory_condition as victory27_15_, scenario0_.victory_requirement as victory28_15_ from scenarios scenario0_ where scenario0_.scenario_id=?
+Hibernate: insert into scenarios (id, artifacts, campaign_order, created_at, defeat_condition, description, difficulty, is_active, is_campaign, is_multiplayer, map_height, map_size, map_width, max_players, name, neutral_creatures, next_scenario_id, previous_scenario_id, recommended_players, scenario_id, special_buildings, starting_resources, terrain_distribution, time_limit, turn_limit, updated_at, victory_condition, victory_requirement) values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: insert into scenario_objectives (scenario_id, completion_reward, current_value, is_completed, is_required, objective_description, objective_id, objective_title, objective_type, target_value) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: insert into scenario_objectives (scenario_id, completion_reward, current_value, is_completed, is_required, objective_description, objective_id, objective_title, objective_type, target_value) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: insert into scenario_starting_positions (scenario_id, castle_type, handicap, player_id, position_x, position_y, starting_army, starting_hero, starting_resources) values (?, ?, ?, ?, ?, ?, ?, ?, ?)
+✨ Loaded scenario: conquest-classic - scenarios.conquest-classic.name
+Hibernate: select scenario0_.id as id1_15_, scenario0_.artifacts as artifact2_15_, scenario0_.campaign_order as campaign3_15_, scenario0_.created_at as created_4_15_, scenario0_.defeat_condition as defeat_c5_15_, scenario0_.description as descript6_15_, scenario0_.difficulty as difficul7_15_, scenario0_.is_active as is_activ8_15_, scenario0_.is_campaign as is_campa9_15_, scenario0_.is_multiplayer as is_mult10_15_, scenario0_.map_height as map_hei11_15_, scenario0_.map_size as map_siz12_15_, scenario0_.map_width as map_wid13_15_, scenario0_.max_players as max_pla14_15_, scenario0_.name as name15_15_, scenario0_.neutral_creatures as neutral16_15_, scenario0_.next_scenario_id as next_sc17_15_, scenario0_.previous_scenario_id as previou18_15_, scenario0_.recommended_players as recomme19_15_, scenario0_.scenario_id as scenari20_15_, scenario0_.special_buildings as special21_15_, scenario0_.starting_resources as startin22_15_, scenario0_.terrain_distribution as terrain23_15_, scenario0_.time_limit as time_li24_15_, scenario0_.turn_limit as turn_li25_15_, scenario0_.updated_at as updated26_15_, scenario0_.victory_condition as victory27_15_, scenario0_.victory_requirement as victory28_15_ from scenarios scenario0_ where scenario0_.scenario_id=?
+Hibernate: insert into scenarios (id, artifacts, campaign_order, created_at, defeat_condition, description, difficulty, is_active, is_campaign, is_multiplayer, map_height, map_size, map_width, max_players, name, neutral_creatures, next_scenario_id, previous_scenario_id, recommended_players, scenario_id, special_buildings, starting_resources, terrain_distribution, time_limit, turn_limit, updated_at, victory_condition, victory_requirement) values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: insert into scenario_events (scenario_id, event_description, event_effect, event_id, event_title, event_type, is_repeatable, is_triggered, trigger_condition, trigger_turn) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: insert into scenario_objectives (scenario_id, completion_reward, current_value, is_completed, is_required, objective_description, objective_id, objective_title, objective_type, target_value) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: insert into scenario_objectives (scenario_id, completion_reward, current_value, is_completed, is_required, objective_description, objective_id, objective_title, objective_type, target_value) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: insert into scenario_starting_positions (scenario_id, castle_type, handicap, player_id, position_x, position_y, starting_army, starting_hero, starting_resources) values (?, ?, ?, ?, ?, ?, ?, ?, ?)
+✨ Loaded scenario: temporal-rift - scenarios.temporal-rift.name
+Hibernate: select scenario0_.id as id1_15_, scenario0_.artifacts as artifact2_15_, scenario0_.campaign_order as campaign3_15_, scenario0_.created_at as created_4_15_, scenario0_.defeat_condition as defeat_c5_15_, scenario0_.description as descript6_15_, scenario0_.difficulty as difficul7_15_, scenario0_.is_active as is_activ8_15_, scenario0_.is_campaign as is_campa9_15_, scenario0_.is_multiplayer as is_mult10_15_, scenario0_.map_height as map_hei11_15_, scenario0_.map_size as map_siz12_15_, scenario0_.map_width as map_wid13_15_, scenario0_.max_players as max_pla14_15_, scenario0_.name as name15_15_, scenario0_.neutral_creatures as neutral16_15_, scenario0_.next_scenario_id as next_sc17_15_, scenario0_.previous_scenario_id as previou18_15_, scenario0_.recommended_players as recomme19_15_, scenario0_.scenario_id as scenari20_15_, scenario0_.special_buildings as special21_15_, scenario0_.starting_resources as startin22_15_, scenario0_.terrain_distribution as terrain23_15_, scenario0_.time_limit as time_li24_15_, scenario0_.turn_limit as turn_li25_15_, scenario0_.updated_at as updated26_15_, scenario0_.victory_condition as victory27_15_, scenario0_.victory_requirement as victory28_15_ from scenarios scenario0_ where scenario0_.scenario_id=?
+Hibernate: insert into scenarios (id, artifacts, campaign_order, created_at, defeat_condition, description, difficulty, is_active, is_campaign, is_multiplayer, map_height, map_size, map_width, max_players, name, neutral_creatures, next_scenario_id, previous_scenario_id, recommended_players, scenario_id, special_buildings, starting_resources, terrain_distribution, time_limit, turn_limit, updated_at, victory_condition, victory_requirement) values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: insert into scenario_events (scenario_id, event_description, event_effect, event_id, event_title, event_type, is_repeatable, is_triggered, trigger_condition, trigger_turn) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: insert into scenario_objectives (scenario_id, completion_reward, current_value, is_completed, is_required, objective_description, objective_id, objective_title, objective_type, target_value) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: insert into scenario_starting_positions (scenario_id, castle_type, handicap, player_id, position_x, position_y, starting_army, starting_hero, starting_resources) values (?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: insert into scenario_starting_positions (scenario_id, castle_type, handicap, player_id, position_x, position_y, starting_army, starting_hero, starting_resources) values (?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: insert into scenario_starting_positions (scenario_id, castle_type, handicap, player_id, position_x, position_y, starting_army, starting_hero, starting_resources) values (?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: insert into scenario_starting_positions (scenario_id, castle_type, handicap, player_id, position_x, position_y, starting_army, starting_hero, starting_resources) values (?, ?, ?, ?, ?, ?, ?, ?, ?)
+✨ Loaded scenario: multiplayer-arena - scenarios.multiplayer-arena.name
+Hibernate: select scenario0_.id as id1_15_, scenario0_.artifacts as artifact2_15_, scenario0_.campaign_order as campaign3_15_, scenario0_.created_at as created_4_15_, scenario0_.defeat_condition as defeat_c5_15_, scenario0_.description as descript6_15_, scenario0_.difficulty as difficul7_15_, scenario0_.is_active as is_activ8_15_, scenario0_.is_campaign as is_campa9_15_, scenario0_.is_multiplayer as is_mult10_15_, scenario0_.map_height as map_hei11_15_, scenario0_.map_size as map_siz12_15_, scenario0_.map_width as map_wid13_15_, scenario0_.max_players as max_pla14_15_, scenario0_.name as name15_15_, scenario0_.neutral_creatures as neutral16_15_, scenario0_.next_scenario_id as next_sc17_15_, scenario0_.previous_scenario_id as previou18_15_, scenario0_.recommended_players as recomme19_15_, scenario0_.scenario_id as scenari20_15_, scenario0_.special_buildings as special21_15_, scenario0_.starting_resources as startin22_15_, scenario0_.terrain_distribution as terrain23_15_, scenario0_.time_limit as time_li24_15_, scenario0_.turn_limit as turn_li25_15_, scenario0_.updated_at as updated26_15_, scenario0_.victory_condition as victory27_15_, scenario0_.victory_requirement as victory28_15_ from scenarios scenario0_ where scenario0_.scenario_id=?
+Hibernate: insert into scenarios (id, artifacts, campaign_order, created_at, defeat_condition, description, difficulty, is_active, is_campaign, is_multiplayer, map_height, map_size, map_width, max_players, name, neutral_creatures, next_scenario_id, previous_scenario_id, recommended_players, scenario_id, special_buildings, starting_resources, terrain_distribution, time_limit, turn_limit, updated_at, victory_condition, victory_requirement) values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+✨ Loaded scenario: dragon-campaign - scenarios.dragon-campaign.name
+✅ All scenarios loaded successfully from JSON files!
+✅ Scenario initialization completed!
+08:24:30.137 [http-nio-8080-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+08:24:30.137 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+08:24:30.137 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
+08:24:30.137 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
+08:24:30.137 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected FixedThemeResolver
+08:24:30.138 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@6b6b4177
+08:24:30.138 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@28f663de
+08:24:30.138 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+08:24:30.138 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+08:24:30.144 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/spells/cast-temporal", parameters={}
+08:24:30.146 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to com.example.demo.controller.SpellController#castTemporalSpell(Map)
+08:24:30.158 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [{spellType=AXISI, temporalFactor=1.5, durationTurns=3, casterId=hero-jean, targetId=enemy-lich}]
+08:24:30.165 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+08:24:30.165 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{actionPointsBonus=3, targetId=enemy-lich, durationTurns=3, success=true, casterId=hero-jean, effect (truncated)...]
+08:24:30.178 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+08:24:36.853 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/spells/cast", parameters={}
+08:24:36.853 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to com.example.demo.controller.SpellController#castSpell(Map)
+08:24:36.854 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [{spellId=fireball, casterId=hero-arthur, targetId=enemy-dragon, casterLevel=5, manaCost=15, spellTyp (truncated)...]
+08:24:36.855 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+08:24:36.855 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{effects={hitChance=80, spellPower=20, damage=51, spellType=offensive, casterLevel=5}, targetId=enem (truncated)...]
+08:24:36.855 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+08:24:41.816 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/spells/hero/arthur/available", parameters={}
+08:24:41.817 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to com.example.demo.controller.SpellController#getAvailableSpells(String, Integer, Integer)
+08:24:41.822 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+08:24:41.822 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [[{basePower=10, requiredLevel=1, onCooldown=false, name=Cure, cooldown=0, baseDamage=20, type=healin (truncated)...]
+08:24:41.822 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+08:24:47.486 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/spells/cast-quantum", parameters={}
+08:24:47.486 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to com.example.demo.controller.SpellController#castQuantumSpell(Map)
+08:24:47.487 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [{spellId=quantum_superposition, casterId=hero-jean, targetIds=[enemy-1, enemy-2, enemy-3], quantumAm (truncated)...]
+08:24:47.487 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+08:24:47.487 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{quantumEffects=[{amplitude=0.26666666666666666, targetId=enemy-1, probability=0.6400000000000001, s (truncated)...]
+08:24:47.488 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+08:25:15.855 [MessageBroker-2] INFO  org.springframework.web.socket.config.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 3, active threads = 1, queued tasks = 1, completed tasks = 1]
