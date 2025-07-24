@@ -1,0 +1,51 @@
+📊 Création session de test...
+Session créée: 
+
+🚀 TEST 1: AXISI - Accélération Temporelle
+===========================================
+Résultat AXISI:
+{
+  "timestamp": "2025-07-23T22:18:08.495+00:00",
+  "status": 404,
+  "error": "Not Found",
+  "path": "/api/causal/interaction"
+}
+
+🐌 TEST 2: LENTUS - Ralentissement Temporel
+============================================
+Résultat LENTUS:
+{
+  "timestamp": "2025-07-23T22:18:08.542+00:00",
+  "status": 404,
+  "error": "Not Found",
+  "path": "/api/causal/interaction"
+}
+
+⚡ TEST 3: INTERACTION CROISÉE AXISI+LENTUS
+==========================================
+Résultat Interaction Croisée:
+{
+  "timestamp": "2025-07-23T22:18:08.581+00:00",
+  "status": 404,
+  "error": "Not Found",
+  "path": "/api/causal/cross-interaction"
+}
+
+📈 ANALYSE COMPARATIVE
+=====================
+AXISI - Poids Causal: N/A
+AXISI - Risque Paradoxe: N/A
+AXISI - Stabilité Temporelle: N/A
+
+LENTUS - Poids Causal: N/A
+LENTUS - Risque Paradoxe: N/A
+LENTUS - Stabilité Temporelle: N/A
+
+⏱️  TEST PERFORMANCE TEMPORELLE
+===============================
+Test 1: 12ms
+Test 2: 12ms
+Test 3: 12ms
+Test 4: 14ms
+Test 5: 13ms
+

@@ -343,6 +343,55 @@ public class GameController {
         }
     }
 
+    // ======================
+    // 🌀 QUANTUM ACTIONS - NOUVEAU SYSTÈME UNIFIÉ
+    // ======================
+
+    @PostMapping("/games/{gameId}/heroes/{heroId}/quantum-action")
+    public ResponseEntity<Map<String, Object>> executeQuantumAction(
+            @PathVariable String gameId,
+            @PathVariable String heroId,
+            @RequestBody Map<String, Object> request) {
+        try {
+            String action = (String) request.get("action");
+            Map<String, Object> params = (Map<String, Object>) request.getOrDefault("params", new HashMap<>());
+            
+            Map<String, Object> result = gameService.executeHeroQuantumAction(gameId, heroId, action, params);
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of(
+                "success", false,
+                "message", "Erreur action quantique: " + e.getMessage(),
+                "error", e.getClass().getSimpleName()
+            ));
+        }
+    }
+
+    @GetMapping("/games/{gameId}/quantum/scripts")
+    public ResponseEntity<Map<String, String>> getQuantumScripts(@PathVariable String gameId) {
+        try {
+            Map<String, String> scripts = gameService.loadHeroQuantumScripts();
+            return ResponseEntity.ok(scripts);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of(
+                "error", "Erreur chargement scripts: " + e.getMessage()
+            ));
+        }
+    }
+
+    @GetMapping("/games/{gameId}/quantum/validate")
+    public ResponseEntity<Map<String, Object>> validateQuantumScripts(@PathVariable String gameId) {
+        try {
+            Map<String, Object> validation = gameService.validateAllQuantumScripts();
+            return ResponseEntity.ok(validation);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of(
+                "success", false,
+                "message", "Erreur validation: " + e.getMessage()
+            ));
+        }
+    }
+
     // Utility endpoints
     @GetMapping("/games/{gameId}/history")
     public ResponseEntity<List<Map<String, Object>>> getGameHistory(@PathVariable String gameId) {

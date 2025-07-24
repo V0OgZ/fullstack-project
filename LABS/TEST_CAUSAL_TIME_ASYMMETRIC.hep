@@ -1,0 +1,64 @@
+SCENARIO: LAB_ASYMMETRIC_CAUSAL_ENCOUNTER_001
+AUTHOR: Jean-Grofignon (via Grooke)
+LAST_MODIFIED: 2025-07-24T02:12
+PURPOSE: Tester les rencontres asymétriques entre joueurs à temps causaux différents
+
+WORLD_SETUP:
+  MAP_SIZE: 10x10
+  TIMELINE: T0 (référence globale)
+  CAUSAL_ENGINE: ACTIVE
+  GROPHY_MODE: LABORATORY
+
+PLAYERS:
+  - PLAYER_A: "Héros Rapide"
+    POSITION: (3,3)
+    Tc: t+5 (a cliqué 5 fois)
+    CAUSAL_SPEED: HIGH
+    
+  - PLAYER_B: "Héros Lent" 
+    POSITION: (5,5)
+    Tc: t+1 (inactif, 1 action seulement)
+    CAUSAL_SPEED: LOW
+
+OBJECTS:
+  - TREASURE: Coffre_Quantique at (4,4)
+    VISIBILITY: DEPENDS_ON_CAUSAL_TIME
+
+SCRIPT:
+  1. PLAYER_A MOV → (4,3)  // Se rapproche du coffre
+  2. PLAYER_B MOV → (4,5)  // Se rapproche aussi
+  3. BOTH_PLAYERS MOV → (4,4)  // Convergent vers le coffre
+  4. OBSERVE_INTERACTION
+  5. PLAYER_A USE Coffre_Quantique
+  6. CHECK_CAUSAL_STATE
+
+EXPECTATIONS:
+  # Brouillard Causal
+  FOG[PLAYER_A sees PLAYER_B] == PARTIAL  // A voit une "ombre" de B
+  FOG[PLAYER_B sees PLAYER_A] == OPAQUE   // B ne voit pas A (trop rapide)
+  
+  # Interaction avec l'objet
+  COFFRE_STATE == SUPERPOSED  // Tant qu'aucun collapse
+  
+  # Temps causaux
+  Tc[PLAYER_A] > Tc[PLAYER_B]  // Écart temporel maintenu
+  
+  # Propagation causale
+  GROPHY_NODES[coffre] == UNRESOLVED  // Pas encore collapsé
+
+WIN_CONDITION:
+  - Le joueur rapide peut agir sur le coffre
+  - Le joueur lent ne voit pas l'action en temps réel
+  - Le brouillard protège le lent de la "pollution causale"
+  - GROPHY maintient la cohérence du graphe
+
+FAIL_CONDITIONS:
+  - Les deux joueurs se voient normalement (brouillard raté)
+  - Le temps causal ne différencie pas les actions
+  - Le coffre collapse prématurément
+  - Incohérence dans le WorldState
+
+NOTES:
+  Ce test valide le principe fondamental:
+  "Un joueur rapide causalement devient partiellement invisible 
+   pour un joueur plus lent jusqu'à synchronisation temporelle" 

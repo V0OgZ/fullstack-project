@@ -9,6 +9,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 🏰 BUILDING CONTROLLER - SYSTÈME UNIFIÉ ACTIVÉ
+ * ==============================================
+ * 
+ * Controller pour la gestion complète des bâtiments dans Heroes of Time
+ * Fait partie du système unifié - RÉACTIVÉ par Jean-Grofignon !
+ * 
+ * STATUS: ✅ ACTIF - Système unifié opérationnel
+ * ENDPOINTS: 415 lignes de logique de construction
+ * UTILISATION: Intégré au moteur de jeu principal
+ * 
+ * JEAN: "SYSTÈME UNIFIÉ RÉACTIVÉ - ÇA MARCHE !"
+ */
 @RestController
 @RequestMapping("/api/buildings")
 @CrossOrigin(origins = "http://localhost:3000")
@@ -16,6 +29,12 @@ public class BuildingController {
     
     @Autowired
     private BuildingService buildingService;
+    
+    // ===========================
+    // JEAN-PRESERVATION-ZONE
+    // Architecture de construction complète
+    // Prête pour réactivation système unifié
+    // ===========================
     
     // ======================
     // BUILDING QUERIES

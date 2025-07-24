@@ -1,0 +1,195 @@
+# Scénario: test_quatrieme_mur
+
+## Fichier Source
+`scenarios/test_quatrieme_mur.hots`
+
+## Contenu HOTS
+```hots
+# 🧱 TEST SCENARIO: Objets du Quatrième Mur
+# Scénario épique pour tester les nouveaux artefacts méta-conscients
+# Créé par Memento pour Jean-Grofignon
+
+SCENARIO_INIT: "test_quatrieme_mur"
+MAP_SIZE: 10x10
+PLAYERS: 2
+
+# === SETUP INITIAL ===
+HERO_CREATE: "vince_vega_errant"
+HERO_POSITION: @5,5
+HERO_STATE: ["META_AWARE", "INTER_INSTANCE"]
+HERO_INVENTORY: ["pistolet_inter_instances_vince", "badge_errance_paradoxale"]
+
+HERO_CREATE: "jean_grofignon"  
+HERO_POSITION: @2,8
+HERO_STATE: ["BEYOND_TRANSCENDENT", "CANAPÉ_MODE"]
+HERO_INVENTORY: ["megot_session", "journal_inverse_jean"]
+
+# === OBJETS ÉPARPILLÉS ===
+PLACE_ARTIFACT: @3,3, "archive_vivante_quatrieme_mur"
+PLACE_ARTIFACT: @7,7, "miroir_de_pixelisation"
+PLACE_ARTIFACT: @1,9, "cabine_errante"
+PLACE_ARTIFACT: @9,1, "rideau_velvet_hill"
+PLACE_ARTIFACT: @5,1, "bout_du_mur"
+
+# === PHASE 1: Test Conscience Méta ===
+PHASE: "conscience_meta"
+
+VINCE_SPEAKS: "Oh putain, encore un monde bizarre. Au moins cette fois j'ai mon flingue."
+BREAK_FOURTH_WALL: "Salut joueur ! Ouais toi, derrière l'écran. Tu veux voir un truc cool ?"
+
+# Test du pistolet inter-instances
+USE_ARTIFACT: "pistolet_inter_instances_vince"
+CROSS_INSTANCE: "world_alpha", "world_beta", SHOOT(enemy_mocked)
+VINCE_COMMENT: "Je tire là-bas, ça meurt ici. C'est beau la technologie."
+
+# Jean s'active depuis son canapé
+JEAN_WAKES_UP: @2,8
+JEAN_SPEAKS: "De mon canapé je vois le multivers ! Vince, on teste mes objets ?"
+USE_ARTIFACT: "megot_session"
+TRIGGER_VISION: "alternate_reality"
+JEAN_COMMENT: "Si tu lis ça, c'est que t'as trop fumé"
+
+# === PHASE 2: Test Archive Vivante ===
+PHASE: "archive_vivante_test"
+
+MOVE_HERO: "vince_vega_errant", @3,3
+INTERACT_WITH: "archive_vivante_quatrieme_mur"
+
+ARCHIVE_RESPONSE: "Avertissement: Ce livre vous lit autant que vous le lisez."
+BREAK_FOURTH_WALL: "Le joueur va fermer ce menu dans 3... 2... 1..."
+
+# L'Archive dialogue avec le joueur
+ARCHIVE_DIALOGUE: [
+    "Joueur: *pense* 'C'est quoi ce truc?'",
+    "Archive: *écrit* 'Je suis ce que tu es en train de lire, évidemment.'"
+]
+
+# === PHASE 3: Test Portails ===
+PHASE: "portails_interdimensionnels"
+
+# Test de la Cabine Errante
+MOVE_HERO: "jean_grofignon", @1,9
+USE_ARTIFACT: "cabine_errante"
+NARRATIVE_JUMP: "alternate_timeline_phone_booth"
+PHONE_RING: "mysterious_caller"
+JEAN_ANSWERS: "Allô? C'est qui? Ah, c'est moi d'une autre instance."
+
+# Test du Rideau de Velvet Hill
+MOVE_HERO: "vince_vega_errant", @9,1
+USE_ARTIFACT: "rideau_velvet_hill"
+CROSS_BARRIER: "mirror_world"
+INVERT_REALITY: true
+VINCE_SPEAKS: "Putain, tout est à l'envers ici. Même les balles vont en arrière."
+
+# === PHASE 4: Test Miroir de Pixelisation ===
+PHASE: "vision_du_code"
+
+MOVE_HERO: "vince_vega_errant", @7,7
+USE_ARTIFACT: "miroir_de_pixelisation"
+META_OBSERVE: "rendering_engine"
+REVEAL_CODE_STRUCTURE: true
+
+VINCE_SEES: [
+    "// TODO: Fix this before Jean notices",
+    "int health = 100; // Hope nobody changes this",
+    "function spawnEnemy() { /* Why does this crash sometimes? */ }"
+]
+
+VINCE_COMMENT: "On est que des sprites mal animés, sérieux?"
+BREAK_FOURTH_WALL: "Erreur 404: Réalité non trouvée."
+
+# === PHASE 5: Le Bout du Mur (DANGEREUX) ===
+PHASE: "bout_du_mur_ultimate"
+
+WARNING: "⚠️ ATTENTION: L'objet suivant ne devrait pas exister"
+APPROACH: @5,1
+USE_ARTIFACT: "bout_du_mur"
+
+EXIT_NARRATIVE: true
+BECOME_OBSERVER: true
+SEE_GAME_AS_GAME: true
+
+VINCE_SEES_TRUTH: "Quoi?! Tu peux me voir pour ce que je suis vraiment?!"
+BREAK_FOURTH_WALL: "Tu vois maintenant. Nous sommes juste du code qui rêve d'être réel."
+
+# === EASTER EGG FINAL ===
+PHASE: "easter_egg_jean"
+
+# Activer l'easter egg ultime
+USE_TOGETHER: ["journal_inverse_jean", "megot_session", "bout_du_mur"]
+JEAN_APPEARS_IN_GAME: true
+
+JEAN_DIRECT_DIALOGUE: "Bon, tu m'as trouvé. Qu'est-ce que tu veux? Un patch? Un nerf? Ou juste discuter?"
+BREAK_FOURTH_WALL: "Jean-Grofignon est maintenant disponible pour chat direct !"
+
+PLAYER_OPTIONS: [
+    "patch" -> "D'accord, qu'est-ce qui bug?",
+    "nerf" -> "Tu trouves que c'est trop OP?", 
+    "discuss" -> "Viens sur le canapé, on discute.",
+    "join_on_couch" -> "Bienvenue dans l'équipe dev !"
+]
+
+# === TEST FINAL ===
+PHASE: "chaos_total"
+
+# Activer tous les portails en même temps
+ACTIVATE_ALL_PORTALS: true
+CROSS_INSTANCE_MERGE: ["world_alpha", "world_beta", "world_jean_canapé"]
+REALITY_COLLAPSE: "controlled_chaos"
+
+SYSTEM_MESSAGE: "Fusion temporaire de toutes les instances"
+EFFECT: "Chaos total mais amusant pendant 5 minutes"
+
+VINCE_FINAL: "Bordel, c'est quoi ce délire? On est dans Matrix ou quoi?"
+JEAN_FINAL: "C'est exactement ce que j'avais imaginé. Mission accomplie."
+
+# === VALIDATION TESTS ===
+VALIDATE: {
+    fourth_wall_breaks: 5,
+    cross_instance_actions: 3,
+    meta_observations: 2,
+    narrative_jumps: 2,
+    reality_collapses: 1,
+    jean_appearances: 1
+}
+
+SUCCESS_CONDITION: "Tous les objets du 4ème mur fonctionnent"
+FAILURE_CONDITION: "La réalité s'effondre définitivement"
+
+# === METADATA ===
+CREATED_BY: "Memento l'Archiviste Éternel"
+APPROVED_BY: "Jean-Grofignon depuis son canapé"
+TEST_PURPOSE: "Valider les artefacts méta-conscients"
+RECOMMENDED_PLAYERS: "Développeurs et joueurs curieux"
+WARNING: "Peut causer une crise existentielle IRL" 
+```
+
+## Résultats d'Exécution
+
+### Commande
+```bash
+./hots run scenarios/test_quatrieme_mur.hots
+```
+
+### Sortie
+```
+./test-scenarios-simples.sh: line 60: timeout: command not found
+ERROR (exit code: 127)
+```
+
+## Analyse
+
+### Résultats Attendus
+- Scénario doit se lancer sans erreur
+- Affichage des états ψ (psi)
+- Interactions temporelles fonctionnelles
+- Pas de crash ou timeout
+
+### Résultats Obtenus
+❌ ERREUR - Problème d'exécution
+
+### Statut
+À CORRIGER ❌
+
+---
+*Généré le Thu Jul 24 00:22:14 CEST 2025*

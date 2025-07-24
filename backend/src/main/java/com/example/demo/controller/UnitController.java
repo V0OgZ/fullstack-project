@@ -10,6 +10,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * JEAN-GROFIGNON PRESERVATION ZONE
+ * ================================
+ * @deprecated Code préservé pour système unifié potentiel
+ * 
+ * Ce controller fait partie d'un système d'unités avec localisation complète.
+ * Architecture i18n (EN/FR/RU) prête pour réactivation future.
+ * 
+ * STATUS: DORMANT - Pas utilisé par frontend actuel (port 8000)
+ * UTILISATION: Aucune détectée dans les logs backend
+ * POTENTIEL: Système d'unités multilingue complet
+ * LOCALISATION: Support EN/FR/RU intégré (161 lignes)
+ * 
+ * RÉACTIVATION POSSIBLE via:
+ * - Configuration i18n frontend
+ * - Appels vers /api/units/localized/{language}
+ * - Système de châteaux et tiers d'unités
+ * 
+ * JEAN: "SYSTÈME I18N COMPLET - GARDER POUR FUTUR MULTILINGUE!"
+ */
+@Deprecated
 @RestController
 @RequestMapping("/api/units")
 @CrossOrigin(origins = "http://localhost:3000")
