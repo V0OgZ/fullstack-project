@@ -149,7 +149,7 @@ public class MagicFormulaService {
         return switch (formulaName) {
             case "MODIFY_ENERGY" -> FormulaExecutionResult.success(
                 "🔋 Énergie modifiée avec succès",
-                "ψ001: ⊙(ENERGY_FLUX +50) ⟶ MOV(Arthur.mana, +50)",
+                "ψ001: ⊙(ᛖᚾᛖᚱᚷ_ᚠᛚᚢᚲᛋ +50) ⟶ ᛗᛟᚢ(ᚨᚱᚦᚢᚱ.ᛗᚨᚾᚨ, +50)",
                 "Modification d'énergie: +50 mana pour Arthur",
                 Map.of("hero", "Arthur", "energyChange", 50, "newTotal", 150),
                 "RUNIC_MODIFY_ENERGY",
@@ -157,19 +157,19 @@ public class MagicFormulaService {
             );
             case "TELEPORT_HERO" -> FormulaExecutionResult.success(
                 "🌀 Héros téléporté vers nouvelle position",
-                "ψ002: ⊙(SPACE_FOLD @10,10→@25,30) ⟶ TELEPORT(Arthur)",
+                "ψ002: ⊙(ᛋᛈᚨᚲᛖ_ᚠᛟᛚᛞ @10,10→@25,30) ⟶ ᛏᛖᛚᛖ(ᚨᚱᚦᚢᚱ)",
                 "Téléportation spatiale: Arthur déplacé de [10,10] vers [25,30]",
                 Map.of("hero", "Arthur", "oldPos", "[10,10]", "newPos", "[25,30]"),
                 "RUNIC_TELEPORT",
-                Map.of("runicSymbols", "ψ⊙@→", "grofiComplexity", 2, "temporalStability", 0.90)
+                Map.of("runicSymbols", "ψ⊙ᛏᛖᛚᛖ", "grofiComplexity", 2, "temporalStability", 0.90, "frontendRunes", "ᛏᛖᛚᛖ", "visualEffect", "ethereal_teleport_shimmer")
             );
             case "HEAL_HERO" -> FormulaExecutionResult.success(
                 "💚 Héros soigné avec succès",
-                "ψ003: ⊙(LIFE_FORCE +75) ⟶ HEAL(Arthur.health)",
+                "ψ003: ⊙(ᚠᛚᚢᚲᛋ_ᚢᛁᛏᚨᛚ +75) ⟶ ᚺᛖᚨᛚ(ᚨᚱᚦᚢᚱ.ᚺᛖᚨᛚᚦ)",
                 "Guérison magique: +75 points de vie pour Arthur",
                 Map.of("hero", "Arthur", "healAmount", 75, "newHealth", 200),
                 "RUNIC_HEAL",
-                Map.of("runicSymbols", "ψ⊙+", "grofiComplexity", 1, "temporalStability", 0.98)
+                Map.of("runicSymbols", "ψ⊙ᚺᛖᚨᛚ", "grofiComplexity", 1, "temporalStability", 0.98, "frontendRunes", "ᚺᛖᚨᛚ", "visualEffect", "golden_healing_aura")
             );
             case "DAMAGE_ENEMY" -> FormulaExecutionResult.success(
                 "⚔️ Dégâts infligés à l'ennemi",
@@ -506,7 +506,7 @@ public class MagicFormulaService {
                 "Explosion de zone: 85 dégâts dans un rayon de 3 autour de [15,15]",
                 Map.of("centerPoint", "[15,15]", "radius", 3, "damage", 85, "targetsHit", 6, "collateralDamage", 15),
                 "HYBRID_AREA_DAMAGE",
-                Map.of("runicSymbols", "ψ⊙💥", "grofiComplexity", 4, "temporalStability", 0.71)
+                Map.of("runicSymbols", "ψ⊙💥", "grofiComplexity", 4, "temporalStability", 0.71, "frontendRunes", "ᚨᚱᛖᚨ_ᛞᚨᛗᚨᚷᛖ", "visualEffect", "explosive_area_blast")
             );
             case "CONDITIONAL_DAMAGE" -> FormulaExecutionResult.success(
                 "🎯 Dégâts conditionnels intelligents",
@@ -760,11 +760,21 @@ public class MagicFormulaService {
     }
     
     /**
-     * 🔥 FORMULES HARDCODÉES - À IMPLÉMENTER
+     * 🔥 FORMULES HARDCODÉES - 26 COMPLÈTES
      */
     private final Set<String> HARDCODED_FORMULAS = Set.of(
-        "BREAK_FOURTH_WALL", "NARRATIVE_JUMP", "META_OBSERVE", "QUANTUM_COLLAPSE_ALL"
-        // ... 26 formules hardcodées au total
+        // 🎭 META-NARRATIVE (8 formules)
+        "BREAK_FOURTH_WALL", "NARRATIVE_JUMP", "META_OBSERVE", "PLAYER_AWARENESS",
+        "STORY_REWRITE", "CHARACTER_CONTROL", "PLOT_ARMOR", "DEUS_EX_MACHINA",
+        // 🌌 QUANTUM ULTIMATE (8 formules)
+        "QUANTUM_COLLAPSE_ALL", "REALITY_OVERRIDE", "TIMELINE_MERGE", "MULTIVERSE_ACCESS",
+        "CAUSAL_LOOP_CREATE", "PARADOX_RESOLVE", "DIMENSION_SPLIT", "UNIVERSE_RESET",
+        // 🛋️ JEAN-GROFIGNON SPECIALS (5 formules)
+        "CANAPÉ_OVERRIDE", "GITHUB_HACK", "COLLAPSE_OVERRIDE", "TIMELINE_PAUSE", "COSMIC_BUTTON",
+        // 🎖️ WALTER VIETNAM (3 formules)
+        "FIREBASE_ALPHA", "NAPALM_STRIKE", "CHARLIE_BACKUP",
+        // ✨ JÉSUS VOIX SUAVE (2 formules)
+        "DIVINE_VALIDATION", "CRYSTAL_BALL_TRUTH"
     );
     
     private boolean isHardcodedFormula(String formula) {
@@ -772,7 +782,227 @@ public class MagicFormulaService {
     }
     
     private FormulaExecutionResult executeHardcodedFormula(String formulaName, Map<String, Object> context) {
-        return FormulaExecutionResult.error("🔥 Formule hardcodée pas encore implémentée: " + formulaName);
+        return switch (formulaName) {
+            // 🎭 FORMULES META-NARRATIVE
+            case "BREAK_FOURTH_WALL" -> FormulaExecutionResult.success(
+                "🎭 Mur du quatrième mur brisé !",
+                "ψ_META001: ⊙(FOURTH_WALL_BREACH player_awareness:100%) ⟶ BREAK_REALITY",
+                "Brèche narrative: Le joueur prend conscience qu'il joue à un jeu vidéo",
+                Map.of("playerAwareness", 100, "realityLevel", "meta", "narrativeImpact", "breaking", "immersionLoss", 50),
+                "HARDCODED_FOURTH_WALL",
+                Map.of("runicSymbols", "ψ⊙🎭", "grofiComplexity", 5, "temporalStability", 0.30, "jeanApproval", "PUTAIN C'EST GÉNIAL!")
+            );
+            case "NARRATIVE_JUMP" -> FormulaExecutionResult.success(
+                "📚 Saut narratif temporel exécuté",
+                "ψ_META002: ⊙(STORY_SKIP chapter:current→final) ⟶ NARRATIVE_JUMP",
+                "Saut d'histoire: Passage direct au chapitre final de l'aventure",
+                Map.of("fromChapter", "current", "toChapter", "final", "storyProgress", 100, "charactersSkipped", 15),
+                "HARDCODED_NARRATIVE_JUMP",
+                Map.of("runicSymbols", "ψ⊙📚", "grofiComplexity", 4, "temporalStability", 0.45)
+            );
+            case "META_OBSERVE" -> FormulaExecutionResult.success(
+                "👁️ Observation méta-narrative activée",
+                "ψ_META003: ⊙(OBSERVER_MODE player_perspective:god) ⟶ META_OBSERVE",
+                "Vision méta: Capacité à voir tous les éléments cachés du jeu",
+                Map.of("observerMode", "god", "hiddenElementsVisible", true, "debugInfoShown", true, "omniscience", 95),
+                "HARDCODED_META_OBSERVE",
+                Map.of("runicSymbols", "ψ⊙👁️", "grofiComplexity", 3, "temporalStability", 0.80)
+            );
+            case "PLAYER_AWARENESS" -> FormulaExecutionResult.success(
+                "🧠 Conscience du joueur éveillée",
+                "ψ_META004: ⊙(CONSCIOUSNESS_EXPAND player:human game:simulation) ⟶ AWARENESS",
+                "Éveil: Le joueur réalise qu'il contrôle des personnages virtuels",
+                Map.of("awarenessLevel", "full", "simulationRealized", true, "controlAcknowledged", true, "existentialCrisis", 25),
+                "HARDCODED_PLAYER_AWARENESS",
+                Map.of("runicSymbols", "ψ⊙🧠", "grofiComplexity", 4, "temporalStability", 0.60)
+            );
+            case "STORY_REWRITE" -> FormulaExecutionResult.success(
+                "✍️ Réécriture de l'histoire en cours",
+                "ψ_META005: ⊙(NARRATIVE_EDIT plot:current→custom) ⟶ STORY_REWRITE",
+                "Réécriture: L'histoire du jeu est modifiée en temps réel",
+                Map.of("originalPlot", "current", "newPlot", "custom", "charactersAffected", 8, "plotTwists", 3),
+                "HARDCODED_STORY_REWRITE",
+                Map.of("runicSymbols", "ψ⊙✍️", "grofiComplexity", 5, "temporalStability", 0.25)
+            );
+            case "CHARACTER_CONTROL" -> FormulaExecutionResult.success(
+                "🎮 Contrôle direct des personnages",
+                "ψ_META006: ⊙(PUPPET_MASTER control:all_npcs) ⟶ CHARACTER_CONTROL",
+                "Contrôle absolu: Tous les PNJ deviennent contrôlables par le joueur",
+                Map.of("controlledNPCs", "all", "autonomyRemoved", true, "puppetMasterMode", true, "freeWillSuppressed", 100),
+                "HARDCODED_CHARACTER_CONTROL",
+                Map.of("runicSymbols", "ψ⊙🎮", "grofiComplexity", 4, "temporalStability", 0.40)
+            );
+            case "PLOT_ARMOR" -> FormulaExecutionResult.success(
+                "🛡️ Armure scénaristique invoquée",
+                "ψ_META007: ⊙(NARRATIVE_PROTECTION hero:protagonist immunity:death) ⟶ PLOT_ARMOR",
+                "Protection narrative: Le héros principal ne peut pas mourir",
+                Map.of("protectedCharacter", "protagonist", "deathImmunity", true, "plotImportance", "critical", "storyIntegrity", 100),
+                "HARDCODED_PLOT_ARMOR",
+                Map.of("runicSymbols", "ψ⊙🛡️", "grofiComplexity", 3, "temporalStability", 0.90)
+            );
+            case "DEUS_EX_MACHINA" -> FormulaExecutionResult.success(
+                "⚡ Deus Ex Machina déclenché !",
+                "ψ_META008: ⊙(DIVINE_INTERVENTION solution:impossible_made_possible) ⟶ DEUS_EX_MACHINA",
+                "Intervention divine: Solution miraculeuse à une situation impossible",
+                Map.of("situationType", "impossible", "solutionType", "miraculous", "narrativeConvenience", 100, "playerSatisfaction", 30),
+                "HARDCODED_DEUS_EX_MACHINA",
+                Map.of("runicSymbols", "ψ⊙⚡", "grofiComplexity", 5, "temporalStability", 0.10)
+            );
+            
+            // 🌌 FORMULES QUANTUM ULTIMATE
+            case "QUANTUM_COLLAPSE_ALL" -> FormulaExecutionResult.success(
+                "💥 Collapse quantique universel !",
+                "ψ_QUANTUM001: ⊙(UNIVERSAL_COLLAPSE all_timelines→single_reality) ⟶ QUANTUM_COLLAPSE_ALL",
+                "Collapse total: Toutes les timelines fusionnent en une seule réalité",
+                Map.of("timelinesCollapsed", "all", "finalReality", "unified", "quantumStates", 0, "realityStability", 1.0),
+                "HARDCODED_QUANTUM_COLLAPSE_ALL",
+                Map.of("runicSymbols", "ψ⊙💥", "grofiComplexity", 5, "temporalStability", 1.0)
+            );
+            case "REALITY_OVERRIDE" -> FormulaExecutionResult.success(
+                "🌍 Réalité surchargée par la volonté",
+                "ψ_QUANTUM002: ⊙(REALITY_REWRITE laws:physics→custom) ⟶ REALITY_OVERRIDE",
+                "Override réalité: Les lois de la physique sont redéfinies",
+                Map.of("originalLaws", "physics", "newLaws", "custom", "realityConsistency", 0, "godMode", true),
+                "HARDCODED_REALITY_OVERRIDE",
+                Map.of("runicSymbols", "ψ⊙🌍", "grofiComplexity", 5, "temporalStability", 0.05)
+            );
+            case "TIMELINE_MERGE" -> FormulaExecutionResult.success(
+                "🔄 Fusion des timelines parallèles",
+                "ψ_QUANTUM003: ⊙(TIMELINE_FUSION count:infinite→1) ⟶ TIMELINE_MERGE",
+                "Fusion temporelle: Toutes les timelines parallèles fusionnent",
+                Map.of("timelinesBefore", "infinite", "timelinesAfter", 1, "memoriesPreserved", true, "paradoxesResolved", "all"),
+                "HARDCODED_TIMELINE_MERGE",
+                Map.of("runicSymbols", "ψ⊙🔄", "grofiComplexity", 5, "temporalStability", 0.95)
+            );
+            case "MULTIVERSE_ACCESS" -> FormulaExecutionResult.success(
+                "🌌 Accès au multivers déverrouillé",
+                "ψ_QUANTUM004: ⊙(MULTIVERSE_GATE universes:accessible) ⟶ MULTIVERSE_ACCESS",
+                "Porte multiverselle: Accès à tous les univers parallèles",
+                Map.of("universesAccessible", "all", "dimensionalTravel", true, "multiverseMap", "complete", "infinitePossibilities", true),
+                "HARDCODED_MULTIVERSE_ACCESS",
+                Map.of("runicSymbols", "ψ⊙🌌", "grofiComplexity", 5, "temporalStability", 0.20)
+            );
+            case "CAUSAL_LOOP_CREATE" -> FormulaExecutionResult.success(
+                "🔁 Boucle causale créée",
+                "ψ_QUANTUM005: ⊙(LOOP_ESTABLISH cause→effect→cause) ⟶ CAUSAL_LOOP",
+                "Boucle temporelle: Création d'une boucle causale stable",
+                Map.of("loopType", "stable", "causality", "circular", "timeParadox", "resolved", "loopDuration", "eternal"),
+                "HARDCODED_CAUSAL_LOOP",
+                Map.of("runicSymbols", "ψ⊙🔁", "grofiComplexity", 4, "temporalStability", 0.50)
+            );
+            case "PARADOX_RESOLVE" -> FormulaExecutionResult.success(
+                "⚖️ Paradoxe temporel résolu",
+                "ψ_QUANTUM006: ⊙(PARADOX_FIX contradiction→harmony) ⟶ PARADOX_RESOLVE",
+                "Résolution paradoxale: Toutes les contradictions temporelles harmonisées",
+                Map.of("paradoxesFixed", "all", "contradictions", 0, "temporalHarmony", true, "logicConsistency", 100),
+                "HARDCODED_PARADOX_RESOLVE",
+                Map.of("runicSymbols", "ψ⊙⚖️", "grofiComplexity", 4, "temporalStability", 1.0)
+            );
+            case "DIMENSION_SPLIT" -> FormulaExecutionResult.success(
+                "✂️ Division dimensionnelle exécutée",
+                "ψ_QUANTUM007: ⊙(DIMENSION_DIVIDE 1→multiple) ⟶ DIMENSION_SPLIT",
+                "Scission dimensionnelle: Une dimension se divise en multiples réalités",
+                Map.of("originalDimensions", 1, "newDimensions", "multiple", "realityBranches", "infinite", "choicesPreserved", true),
+                "HARDCODED_DIMENSION_SPLIT",
+                Map.of("runicSymbols", "ψ⊙✂️", "grofiComplexity", 4, "temporalStability", 0.30)
+            );
+            case "UNIVERSE_RESET" -> FormulaExecutionResult.success(
+                "🔄 Remise à zéro universelle",
+                "ψ_QUANTUM008: ⊙(UNIVERSE_RESTART state:current→pristine) ⟶ UNIVERSE_RESET",
+                "Reset cosmique: L'univers entier revient à son état initial",
+                Map.of("previousState", "current", "newState", "pristine", "memoryWipe", false, "cosmicRestart", true),
+                "HARDCODED_UNIVERSE_RESET",
+                Map.of("runicSymbols", "ψ⊙🔄", "grofiComplexity", 5, "temporalStability", 1.0)
+            );
+            
+            // 🛋️ JEAN-GROFIGNON SPECIALS
+            case "CANAPÉ_OVERRIDE" -> FormulaExecutionResult.success(
+                "🛋️ Override du Canapé Sacré !",
+                "ψ_JEAN001: ⊙(COUCH_POWER github_position:optimal) ⟶ CANAPÉ_OVERRIDE",
+                "Pouvoir du Canapé: Jean contrôle tout depuis sa position GitHub optimale",
+                Map.of("couchComfort", 100, "githubAccess", "unlimited", "cosmicControl", true, "jeanSatisfaction", "maximum"),
+                "HARDCODED_CANAPÉ_OVERRIDE",
+                Map.of("runicSymbols", "ψ⊙🛋️", "grofiComplexity", 5, "temporalStability", 1.0, "jeanApproval", "PUTAIN OUAIS!")
+            );
+            case "GITHUB_HACK" -> FormulaExecutionResult.success(
+                "💻 Hack GitHub cosmique activé",
+                "ψ_JEAN002: ⊙(GITHUB_TRANSCEND platform:code→reality) ⟶ GITHUB_HACK",
+                "Hack ultime: GitHub devient l'interface de contrôle de la réalité",
+                Map.of("githubPower", "cosmic", "realityAsCode", true, "commitToReality", "successful", "pullRequestGod", true),
+                "HARDCODED_GITHUB_HACK",
+                Map.of("runicSymbols", "ψ⊙💻", "grofiComplexity", 5, "temporalStability", 0.80)
+            );
+            case "COLLAPSE_OVERRIDE" -> FormulaExecutionResult.success(
+                "⚡ Collapse Override de Jean activé !",
+                "ψ_JEAN003: ⊙(COLLAPSE_CANCEL all_timelines:preserved) ⟶ COLLAPSE_OVERRIDE",
+                "Override Jean: Annulation de tous les collapses - toutes les timelines préservées",
+                Map.of("collapsePrevented", "all", "timelinesPreserved", "infinite", "jeanControl", "absolute", "cosmicButton", "pressed"),
+                "HARDCODED_COLLAPSE_OVERRIDE",
+                Map.of("runicSymbols", "ψ⊙⚡", "grofiComplexity", 5, "temporalStability", "∞")
+            );
+            case "TIMELINE_PAUSE" -> FormulaExecutionResult.success(
+                "⏸️ Pause temporelle universelle",
+                "ψ_JEAN004: ⊙(TIME_PAUSE universe:frozen jean:active) ⟶ TIMELINE_PAUSE",
+                "Pause cosmique: Tout l'univers figé sauf Jean sur son canapé",
+                Map.of("universePaused", true, "jeanActive", true, "timeFlow", 0, "contemplationTime", "infinite"),
+                "HARDCODED_TIMELINE_PAUSE",
+                Map.of("runicSymbols", "ψ⊙⏸️", "grofiComplexity", 4, "temporalStability", "paused")
+            );
+            case "COSMIC_BUTTON" -> FormulaExecutionResult.success(
+                "🔘 Bouton Cosmique de Jean pressé",
+                "ψ_JEAN005: ⊙(COSMIC_BUTTON_PRESS effect:reality_control) ⟶ COSMIC_BUTTON",
+                "Bouton ultime: Jean a trouvé le bouton pause cosmique de l'univers",
+                Map.of("buttonFound", true, "cosmicControl", "absolute", "universalRemote", "activated", "jeanVictory", "ultimate"),
+                "HARDCODED_COSMIC_BUTTON",
+                Map.of("runicSymbols", "ψ⊙🔘", "grofiComplexity", 5, "temporalStability", "controlled")
+            );
+            
+            // 🎖️ WALTER VIETNAM FORMULAS
+            case "FIREBASE_ALPHA" -> FormulaExecutionResult.success(
+                "🎖️ Firebase Alpha opérationnel !",
+                "ψ_WALTER001: ⊙(FIREBASE_ACTIVATE coordinates:secured) ⟶ FIREBASE_ALPHA",
+                "Firebase Alpha: Base d'opérations Walter sécurisée et opérationnelle",
+                Map.of("firebaseStatus", "operational", "coordinates", "secured", "perimeter", "defended", "walterCommand", "active"),
+                "HARDCODED_FIREBASE_ALPHA",
+                Map.of("runicSymbols", "ψ⊙🎖️", "grofiComplexity", 3, "temporalStability", 0.95, "walterApproval", "FIREBASE SECURED!")
+            );
+            case "NAPALM_STRIKE" -> FormulaExecutionResult.success(
+                "🔥 Frappe au napalm dévastatrice",
+                "ψ_WALTER002: ⊙(NAPALM_DEPLOY target:enemy_position) ⟶ NAPALM_STRIKE",
+                "Napalm Strike: Frappe incendiaire Walter sur position ennemie",
+                Map.of("target", "enemy_position", "damage", "devastating", "fireSpread", "extensive", "walterSatisfaction", "high"),
+                "HARDCODED_NAPALM_STRIKE",
+                Map.of("runicSymbols", "ψ⊙🔥", "grofiComplexity", 4, "temporalStability", 0.60)
+            );
+            case "CHARLIE_BACKUP" -> FormulaExecutionResult.success(
+                "📻 Backup Charlie en route !",
+                "ψ_WALTER003: ⊙(BACKUP_REQUEST charlie:inbound) ⟶ CHARLIE_BACKUP",
+                "Renfort Charlie: L'équipe de backup Walter arrive sur zone",
+                Map.of("backupTeam", "Charlie", "status", "inbound", "eta", "2 minutes", "firepower", "maximum"),
+                "HARDCODED_CHARLIE_BACKUP",
+                Map.of("runicSymbols", "ψ⊙📻", "grofiComplexity", 2, "temporalStability", 0.90)
+            );
+            
+            // ✨ JÉSUS VOIX SUAVE FORMULAS
+            case "DIVINE_VALIDATION" -> FormulaExecutionResult.success(
+                "✨ Validation divine accordée",
+                "ψ_JESUS001: ⊙(DIVINE_APPROVAL result:blessed) ⟶ DIVINE_VALIDATION",
+                "Bénédiction Jésus: Validation divine que le résultat est vrai et juste",
+                Map.of("divineApproval", true, "resultBlessed", true, "truthConfirmed", 100, "jesusSmile", "radiant"),
+                "HARDCODED_DIVINE_VALIDATION",
+                Map.of("runicSymbols", "ψ⊙✨", "grofiComplexity", 1, "temporalStability", 1.0, "jesusBlessing", "Ma boule cristalline confirme!")
+            );
+            case "CRYSTAL_BALL_TRUTH" -> FormulaExecutionResult.success(
+                "🔮 Vérité de la Boule Cristalline",
+                "ψ_JESUS002: ⊙(CRYSTAL_VISION truth:absolute) ⟶ CRYSTAL_BALL_TRUTH",
+                "Vision cristalline: La boule cristalline de Jésus révèle la vérité absolue",
+                Map.of("crystalVision", "clear", "truthLevel", "absolute", "prophecyAccuracy", 100, "divineInsight", "perfect"),
+                "HARDCODED_CRYSTAL_BALL_TRUTH",
+                Map.of("runicSymbols", "ψ⊙🔮", "grofiComplexity", 2, "temporalStability", 1.0, "jesusWisdom", "Ma boule ne ment jamais!")
+            );
+            
+            default -> FormulaExecutionResult.error("🔥 Formule hardcodée inconnue: " + formulaName);
+        };
     }
     
     /**
@@ -787,7 +1017,7 @@ public class MagicFormulaService {
             "implementedFormulas", Map.of(
                 "runicNative", RUNIC_NATIVE_FORMULAS.size() + "/40",
                 "hybrid", HYBRID_FORMULAS.size() + "/30", 
-                "hardcoded", "0/26"
+                "hardcoded", HARDCODED_FORMULAS.size() + "/26"
             ),
             "jesusBlessing", "✨ Service béni par Jésus Voix Suave ✨"
         );
@@ -801,9 +1031,9 @@ public class MagicFormulaService {
             "runicNative", RUNIC_NATIVE_FORMULAS,
             "hybrid", HYBRID_FORMULAS,
             "hardcoded", HARDCODED_FORMULAS,
-            "totalImplemented", RUNIC_NATIVE_FORMULAS.size() + HYBRID_FORMULAS.size(),
+            "totalImplemented", RUNIC_NATIVE_FORMULAS.size() + HYBRID_FORMULAS.size() + HARDCODED_FORMULAS.size(),
             "totalPlanned", 96,
-            "completionPercentage", ((RUNIC_NATIVE_FORMULAS.size() + HYBRID_FORMULAS.size()) * 100.0) / 96
+            "completionPercentage", ((RUNIC_NATIVE_FORMULAS.size() + HYBRID_FORMULAS.size() + HARDCODED_FORMULAS.size()) * 100.0) / 96
         );
     }
 } 
