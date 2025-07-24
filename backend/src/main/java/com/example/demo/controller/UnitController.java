@@ -13,14 +13,14 @@ import java.util.Optional;
 /**
  * JEAN-GROFIGNON PRESERVATION ZONE
  * ================================
- * @deprecated Code préservé pour système unifié potentiel
+ * @deprecated DEPRECATED 2025-01-27 - Non utilisé par frontend actuel
  * 
  * Ce controller fait partie d'un système d'unités avec localisation complète.
  * Architecture i18n (EN/FR/RU) prête pour réactivation future.
  * 
- * STATUS: DORMANT - Pas utilisé par frontend actuel (port 8000)
+ * STATUS: 🚨 DEPRECATED - Pas utilisé par frontend actuel (port 8000)
  * UTILISATION: Aucune détectée dans les logs backend
- * POTENTIEL: Système d'unités multilingue complet
+ * POTENTIEL: Système d'unités multilingue complet à conserver
  * LOCALISATION: Support EN/FR/RU intégré (161 lignes)
  * 
  * RÉACTIVATION POSSIBLE via:
@@ -28,7 +28,8 @@ import java.util.Optional;
  * - Appels vers /api/units/localized/{language}
  * - Système de châteaux et tiers d'unités
  * 
- * JEAN: "SYSTÈME I18N COMPLET - GARDER POUR FUTUR MULTILINGUE!"
+ * JEAN: "DEPRECATED MAIS SYSTÈME I18N COMPLET - GARDER POUR FUTUR MULTILINGUE!"
+ * CONSERVATION: Architecture complète préservée pour réactivation future
  */
 @Deprecated
 @RestController
