@@ -1,0 +1,24 @@
+[0;35m🌟 TEST MOTEUR FINAL - Jean-Grofignon Edition[0m
+[0;36m================================================================[0m
+[2025-07-24 16:26:12] [INFO] 🚀 Début des tests automatiques du moteur Heroes of Time
+[2025-07-24 16:26:12] [INFO] 📁 Logs sauvegardés dans: test-results/test-moteur-final-20250724_162612.log
+[2025-07-24 16:26:12] [INFO] 🎯 Catégorie de test: conversion
+[2025-07-24 16:26:12] [TEST] 🏥 Test de santé du backend...
+[2025-07-24 16:26:12] [KEYWORD] 🔍 BACKEND_HEALTH -> ✅ UP | Backend opérationnel
+[2025-07-24 16:26:12] [CATEGORY] 🔄 === TESTS CONVERSION FORMATS ===
+[2025-07-24 16:26:12] [TEST] 🔄 Test conversion HOTS...
+[2025-07-24 16:26:12] [KEYWORD] 🔍 HOTS_TO_JSON -> ✅ SUCCESS | Fichier JSON trouvé
+[2025-07-24 16:26:12] [KEYWORD] 🔍 JSON_VALIDATION -> ✅ VALID | Structure JSON correcte
+[2025-07-24 16:26:12] [KEYWORD] 🔍 HOTS_TO_HEP -> ✅ SUCCESS | HEP exécutable trouvé
+[2025-07-24 16:26:12] [KEYWORD] 🔍 HEP_EXECUTION -> ✅ SUCCESS | HEP s'exécute correctement
+[2025-07-24 16:26:12] [REPORT] 📊 === GÉNÉRATION DU RAPPORT ===
+
+[0;35m📊 RAPPORT FINAL[0m
+[0;36m==================[0m
+[2025-07-24 16:26:12] [SUMMARY] Total tests: 5
+[2025-07-24 16:26:12] [SUMMARY] Succès: 5 ✅
+[2025-07-24 16:26:12] [SUMMARY] Échecs: 0
+0 ❌
+[2025-07-24 16:26:12] [SUMMARY] Warnings: 0
+0 ⚠️
+[0;32m🎉 MOTEUR EN EXCELLENT ÉTAT ![0m
