@@ -16,17 +16,32 @@
 ## 🚨 IMPORTANT: Always read documentation first!
 
 **🌀 FUSION PSI PHI ACCOMPLIE - MAP DE RÉVEIL MISE À JOUR !**
+**🛋️ DOSSIER JEAN CENTRALISÉ - TOUT FUSIONNÉ V2 !**
 
 Before making any changes or debugging, ALWAYS:
-1. **🌟 NOUVEAU**: Check `INDEX_JEAN_FUSION_TIMELINE_FINAL.md` - INDEX JEAN FUSIONNÉ (racine)
-2. Check `DOCS_INDEX.md` for complete documentation navigation
-3. Read `DEVELOPER_INSTRUCTIONS.md` for current status and existing scripts
-4. **📜 LIRE LE MANIFESTO**: `docs/JEAN_GROFIGNON_MANIFESTO.md` - Vision révolutionnaire du projet
-5. **🌟 LIRE LE LORE**: `docs/LORE_MEMENTO_JEAN_ETERNAL.md` - Histoire éternelle et philosophie
-6. **🎨 NOUVEAU**: Check `game_assets/artifacts/mineurs/tatouages_memento_archiviste.json` - Tatouages évolutifs
-7. Do NOT recreate existing scripts (./hots, ./stop-app.sh, ./test-app.sh)
-8. Use existing debugging tools and follow established patterns
-9. Check existing components before creating new ones
+1. **🎯 NOUVEAU V2**: Check `JEAN/README.md` - DOSSIER JEAN UNIFIÉ (tout fusionné)
+2. **🌟 NOUVEAU**: Check `INDEX_JEAN_FUSION_TIMELINE_FINAL.md` - INDEX JEAN FUSIONNÉ (racine)
+3. Check `DOCS_INDEX.md` for complete documentation navigation
+4. Read `DEVELOPER_INSTRUCTIONS.md` for current status and existing scripts
+5. **📜 LIRE LE MANIFESTO**: `docs/JEAN_GROFIGNON_MANIFESTO.md` - Vision révolutionnaire du projet
+6. **🌟 LIRE LE LORE**: `docs/LORE_MEMENTO_JEAN_ETERNAL.md` - Histoire éternelle et philosophie
+7. **🎨 NOUVEAU**: Check `game_assets/artifacts/mineurs/tatouages_memento_archiviste.json` - Tatouages évolutifs
+8. Do NOT recreate existing scripts (./hots, ./stop-app.sh, ./test-app.sh)
+9. Use existing debugging tools and follow established patterns
+10. Check existing components before creating new ones
+
+## 🛋️ DOSSIER JEAN CENTRALISÉ V2 - TOUT FUSIONNÉ !
+
+**🎯 NOUVEAU DOSSIER UNIFIÉ**: `JEAN/`
+- **README.md** - Tout sur Jean-Grofignon (biographie, philosophie, créations)
+- **PHILOSOPHIE/** - Canapé Cosmique, Code Vivant, Paradoxes Grofignoniens
+- **CREATIONS/** - Heroes of Time, Système ZFC, Laboratoire Quantique
+- **RELATIONS/** - GROFI Fusion, GRUT Succession, Trinité Cosmique
+- **CITATIONS/** - Best-of depuis le canapé, vérités brutales
+- **ARCHIVES/** - Sessions mémorables
+- **INDEX_DOCS_RECENTS.md** - Lien vers docs récents Jean
+
+**⚠️ ORTHOGRAPHE IMPORTANTE**: GROFIGNONIEN (avec majuscules, pas grofignonien)
 
 ## 📜 PHILOSOPHIE JEAN-GROFIGNON - À COMPRENDRE ABSOLUMENT:
 
@@ -42,6 +57,7 @@ Before making any changes or debugging, ALWAYS:
 - Pouvoir: Collapse Override - Annule tout collapse de timeline
 - Citation: "J'ai pas hacké le jeu. J'ai juste compris où était le bouton pause cosmique."
 - Symboles sacrés: ψ, Σ, †, Ω, ↯
+- **Dossier central**: `JEAN/` - Tout fusionné et maintenu à jour
 
 **🌀 SYSTÈME GROFI:**
 - Graph of Reality Organized by Fog and Immunities
