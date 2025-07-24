@@ -1,18 +1,6 @@
-Traceback (most recent call last):
-  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/runpy.py", line 196, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/runpy.py", line 86, in _run_code
-    exec(code, run_globals)
-  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/http/server.py", line 1297, in <module>
-    test(
-  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/http/server.py", line 1248, in test
-    with ServerClass(addr, HandlerClass) as httpd:
-  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/socketserver.py", line 452, in __init__
-    self.server_bind()
-  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/http/server.py", line 1291, in server_bind
-    return super().server_bind()
-  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/http/server.py", line 136, in server_bind
-    socketserver.TCPServer.server_bind(self)
-  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/socketserver.py", line 466, in server_bind
-    self.socket.bind(self.server_address)
-OSError: [Errno 48] Address already in use
+::1 - - [24/Jul/2025 22:11:39] "GET /dashboard.html HTTP/1.1" 200 -
+::1 - - [24/Jul/2025 22:11:41] "GET /dashboard.html HTTP/1.1" 200 -
+::1 - - [24/Jul/2025 22:11:41] code 404, message File not found
+::1 - - [24/Jul/2025 22:11:41] code 404, message File not found
+::1 - - [24/Jul/2025 22:11:41] "GET /translation-styles.css HTTP/1.1" 404 -
+::1 - - [24/Jul/2025 22:11:41] "GET /translation-service.js HTTP/1.1" 404 -

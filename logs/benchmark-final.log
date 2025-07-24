@@ -5,55 +5,12 @@
 🔍 Phase 1: Benchmark Parser Regex
 ==================================
 📋 Test scripts simples...
-✅ Scripts simples: 459 operations regex/seconde
+✅ Scripts simples: 417 operations regex/seconde
 📋 Test scripts quantiques...
-✅ Scripts quantiques: 410 operations regex/seconde
+✅ Scripts quantiques: 297 operations regex/seconde
 
 🧮 Phase 2: Benchmark Calculs Quantiques
 ========================================
 📋 Test calculs de probabilités...
-✅ Calculs probabilités: 107 calculs quantiques/seconde
+✅ Calculs probabilités: 188 calculs quantiques/seconde
 📋 Test interférences quantiques...
-✅ Interférences quantiques: 146 calculs complexes/seconde
-
-🌐 Phase 3: Benchmark API
-========================
-📋 Test latence API...
-✅ Latence API moyenne: 11 ms
-✅ Taux de succès: 100/100
-📋 Test throughput API...
-✅ Throughput API: 409 requêtes/seconde
-
-💾 Phase 4: Benchmark Mémoire
-============================
-📋 Test consommation mémoire...
-✅ Mémoire utilisée: 14176 KB pour 100k ψ-states
-
-🔍 Phase 5: Analyse des Goulots d'Étranglement
-==============================================
-📊 RÉSULTATS DÉTAILLÉS:
-========================
-⚠️ GOULOT DÉTECTÉ: Parser simple (459 ops/sec < 10k)
-⚠️ GOULOT DÉTECTÉ: Parser quantique (410 ops/sec < 5k)
-⚠️ GOULOT DÉTECTÉ: Calculs quantiques (107 calc/sec < 50k)
-⚠️ GOULOT DÉTECTÉ: Interférences (146 calc/sec < 25k)
-
-🎯 RECOMMANDATIONS:
-===================
-🔧 Optimiser le parser regex simple (pré-compilation, cache)
-🔧 Optimiser le parser quantique (regex plus efficace, AST cache)
-🔧 Optimiser les calculs quantiques (lookup tables, vectorisation)
-🔧 Optimiser les interférences (calculs parallèles, cache FFT)
-
-📈 RÉSUMÉ FINAL DES PERFORMANCES
-===============================
-🔍 Parser Simple: 459 ops/sec
-🌀 Parser Quantique: 410 ops/sec
-🧮 Calculs Quantiques: 107 calc/sec
-🔬 Interférences: 146 calc/sec
-💾 Mémoire: 14176 KB/100k états
-🌐 Latence API: 11 ms
-📡 Throughput API: 409 req/sec
-
-🎉 BENCHMARK TERMINÉ
-====================

@@ -97,6 +97,8 @@ public class MagicFormulaEngine {
         System.out.println("🌀 JEAN DEBUG: Longueur = " + formula.length());
         
         // 🧪 TEST FORMULES SIMPLES D'ABORD
+        System.out.println("🌀 JEAN DEBUG: Vérification SIMPLE_TEST_FORMULAS pour: '" + formula + "'");
+        System.out.println("🌀 JEAN DEBUG: SIMPLE_TEST_FORMULAS contient: " + SIMPLE_TEST_FORMULAS.contains(formula));
         if (SIMPLE_TEST_FORMULAS.contains(formula)) {
             System.out.println("🌀 JEAN DEBUG: Formule simple détectée");
             return executeSimpleFormula(formula, context);

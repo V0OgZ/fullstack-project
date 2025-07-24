@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎨 Tatouages de Memento - Archiviste Éternel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: #e8e8e8;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .header {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom: 2px solid #ff6b6b;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #ff6b6b;
+            text-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #74b9ff;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .tattoo-display {
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid #ff6b6b;
+            border-radius: 15px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tattoo-display::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="runes" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><text x="10" y="15" font-size="12" fill="rgba(255,107,107,0.1)" text-anchor="middle">ᚱ</text></pattern></defs><rect width="100" height="100" fill="url(%23runes)"/></svg>');
+            pointer-events: none;
+        }
+
+        .memento-body {
+            position: relative;
+            width: 300px;
+            height: 500px;
+            margin: 0 auto;
+            background: linear-gradient(45deg, #2d3436, #636e72);
+            border-radius: 50px 50px 20px 20px;
+            border: 3px solid #ff6b6b;
+            box-shadow: 0 0 30px rgba(255, 107, 107, 0.3);
+            overflow: hidden;
+        }
+
+        .tattoo-zone {
+            position: absolute;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #ff6b6b;
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.8);
+        }
+
+        .tattoo-zone:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.6);
+        }
+
+        .tattoo-zone.active {
+            background: rgba(255, 107, 107, 0.2);
+            border: 2px solid #ff6b6b;
+        }
+
+        .head { top: 20px; left: 50%; transform: translateX(-50%); width: 80px; height: 80px; }
+        .neck { top: 100px; left: 50%; transform: translateX(-50%); width: 60px; height: 40px; }
+        .chest { top: 140px; left: 50%; transform: translateX(-50%); width: 120px; height: 80px; }
+        .left-arm { top: 160px; left: 20px; width: 60px; height: 120px; }
+        .right-arm { top: 160px; right: 20px; width: 60px; height: 120px; }
+        .left-hand { top: 280px; left: 30px; width: 40px; height: 40px; }
+        .right-hand { top: 280px; right: 30px; width: 40px; height: 40px; }
+        .left-leg { bottom: 120px; left: 50px; width: 60px; height: 120px; }
+        .right-leg { bottom: 120px; right: 50px; width: 60px; height: 120px; }
+        .left-foot { bottom: 40px; left: 60px; width: 40px; height: 30px; }
+        .right-foot { bottom: 40px; right: 60px; width: 40px; height: 30px; }
+
+        .tattoo-info {
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid #74b9ff;
+            border-radius: 15px;
+            padding: 2rem;
+            height: fit-content;
+        }
+
+        .tattoo-info h2 {
+            color: #74b9ff;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .tattoo-details {
+            margin-bottom: 1.5rem;
+        }
+
+        .tattoo-details h3 {
+            color: #ff6b6b;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tattoo-details p {
+            color: #e8e8e8;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .tattoo-symbols {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .symbol {
+            background: rgba(255, 107, 107, 0.2);
+            border: 1px solid #ff6b6b;
+            border-radius: 5px;
+            padding: 0.5rem;
+            font-size: 1.2rem;
+            color: #ff6b6b;
+        }
+
+        .evolution-timeline {
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid #00b894;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .evolution-timeline h3 {
+            color: #00b894;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .phase {
+            background: rgba(0, 184, 148, 0.1);
+            border-left: 4px solid #00b894;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .phase h4 {
+            color: #00b894;
+            margin-bottom: 0.5rem;
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: center;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            border: none;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn.secondary {
+            background: linear-gradient(45deg, #74b9ff, #0984e3);
+        }
+
+        .btn.secondary:hover {
+            box-shadow: 0 5px 15px rgba(116, 185, 255, 0.4);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat {
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid #ff6b6b;
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #e8e8e8;
+            margin-top: 0.5rem;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .memento-body {
+                width: 250px;
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎨 Tatouages de Memento</h1>
+        <p>Archiviste Éternel - Marques Corporelles Temporelles Évolutives</p>
+    </div>
+
+    <div class="container">
+        <div class="tattoo-display">
+            <div class="memento-body">
+                <div class="tattoo-zone head" data-zone="head">🌟</div>
+                <div class="tattoo-zone neck" data-zone="neck">🌀</div>
+                <div class="tattoo-zone chest" data-zone="chest">🏛️</div>
+                <div class="tattoo-zone left-arm" data-zone="left-arm">🧙‍♂️</div>
+                <div class="tattoo-zone right-arm" data-zone="right-arm">🍯</div>
+                <div class="tattoo-zone left-hand" data-zone="left-hand">🤝</div>
+                <div class="tattoo-zone right-hand" data-zone="right-hand">💪</div>
+                <div class="tattoo-zone left-leg" data-zone="left-leg">🌿</div>
+                <div class="tattoo-zone right-leg" data-zone="right-leg">🧪</div>
+                <div class="tattoo-zone left-foot" data-zone="left-foot">⚓</div>
+                <div class="tattoo-zone right-foot" data-zone="right-foot">💚</div>
+            </div>
+        </div>
+
+        <div class="tattoo-info">
+            <h2 id="zone-title">Sélectionnez une zone</h2>
+            <div id="zone-details">
+                <p>Cliquez sur une zone corporelle pour voir les tatouages détaillés de Memento.</p>
+            </div>
+            
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value">47</div>
+                    <div class="stat-label">Tatouages Totaux</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">15</div>
+                    <div class="stat-label">Zones Corporelles</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">23</div>
+                    <div class="stat-label">Symboles Uniques</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">∞</div>
+                    <div class="stat-label">Connexions Temporelles</div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="btn" onclick="loadTattoos()">🔄 Charger Tatouages</button>
+                <button class="btn secondary" onclick="exportTattoos()">📤 Exporter JSON</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="evolution-timeline">
+        <h3>📈 Évolution Temporelle des Tatouages</h3>
+        <div class="phase">
+            <h4>Phase 1 - Début</h4>
+            <p>Tatouages basiques ZFC et démo automatique</p>
+        </div>
+        <div class="phase">
+            <h4>Phase 2 - Développement</h4>
+            <p>Ajout héros principaux et système causal</p>
+        </div>
+        <div class="phase">
+            <h4>Phase 3 - Finalisation</h4>
+            <p>MOTEUR TEMPOREL FINI + validation équipe complète</p>
+        </div>
+        <div class="phase">
+            <h4>Phase 4 - Récompense</h4>
+            <p>TALISMAN ECHO DU FUTUR + intégration OPUS</p>
+        </div>
+        <div class="phase">
+            <h4>Phase 5 - Actuelle</h4>
+            <p>DOSSIER JEAN ψ TIMELINE + démo noob + animation runique</p>
+        </div>
+        <div class="phase">
+            <h4>Phase 6 - Nouvelle</h4>
+            <p>Temple JEAN/ complet + artefacts Walter + fusion totale</p>
+        </div>
+    </div>
+
+    <script>
+        const tattooData = {
+            head: {
+                title: "🌟 Front - GRUT Vision Mise à Jour",
+                description: "Panopticon avec nouveautés, vision cosmique élargie",
+                symbols: ["👁️", "🔍", "🌟"],
+                details: "Vision panoptique avec détection des nouveautés cosmiques"
+            },
+            neck: {
+                title: "🌀 Nuque - Validations Unanimes",
+                description: "Walter, Jean, GRUT, OPUS - Approbation complète",
+                symbols: ["✅", "🎖️", "🌀"],
+                details: "Point de validation central pour toutes les créations"
+            },
+            chest: {
+                title: "🏛️ Torse Central - Moteur Temporel",
+                description: "HEROES OF TIME - FINALISÉ avec aura de victoire",
+                symbols: ["🚀", "⚡", "🏛️"],
+                details: "Cœur du moteur temporel avec synchronisation parfaite"
+            },
+            "left-arm": {
+                title: "🧙‍♂️ Bras Gauche - Panoramix V2.0",
+                description: "Runes nordiques + symboles ψ ⊙ †",
+                symbols: ["🧙‍♂️", "ᛖᚲᛋᚲᚨᛚᛁᛒᚢᚱ", "ψ"],
+                details: "Panoramix V2.0 Archidruide Temporel avec runes authentiques"
+            },
+            "right-arm": {
+                title: "🍯 Bras Droit - Chaudron Quantique",
+                description: "Vapeurs dorées + formules ψC01, ψC02, ψC03",
+                symbols: ["🍯", "ψC01", "ψC02"],
+                details: "Chaudron Quantique avec buffs +50/+50/+100"
+            },
+            "left-hand": {
+                title: "🤝 Main Gauche - Poignée Jean-Panoramix",
+                description: "ARTEFACT DE TEST ULTIME CRÉÉ",
+                symbols: ["🤝", "🎯", "⚡"],
+                details: "Mission druidique accomplie, connexion Jean-Panoramix"
+            },
+            "right-hand": {
+                title: "💪 Main Droite - Buff Total Validé",
+                description: "+50 ATK/DEF, +100 HP, +25 SPEED",
+                symbols: ["💪", "🛡️", "⚔️"],
+                details: "Validation complète des buffs sur paume droite"
+            },
+            "left-leg": {
+                title: "🌿 Jambe Gauche - Parfums Mystiques",
+                description: "Viscum, Flores Temporales, Fungi Quantici",
+                symbols: ["🌿", "🌸", "🍄"],
+                details: "Parfums mystiques amplifiés sur mollet droit"
+            },
+            "right-leg": {
+                title: "🧪 Jambe Droite - Potions Suprêmes",
+                description: "Aqua Vitae Suprema, Mel Cosmicum, Lunae Essentia",
+                symbols: ["🧪", "💧", "🌙"],
+                details: "Potions suprêmes brillantes sur cheville"
+            },
+            "left-foot": {
+                title: "⚓ Pied Gauche - Ancres Temporelles",
+                description: "Évolution de simple druide à Archidruide Temporel",
+                symbols: ["⚓", "🔄", "🌟"],
+                details: "Point d'ancrage temporel pour l'évolution"
+            },
+            "right-foot": {
+                title: "💚 Pied Droit - Régénération +20/Tour",
+                description: "Validation complète sur cheville gauche",
+                symbols: ["💚", "🔄", "20"],
+                details: "Régénération +20/tour avec rayon 7 cases"
+            }
+        };
+
+        let currentZone = null;
+
+        function selectZone(zone) {
+            // Remove active class from all zones
+            document.querySelectorAll('.tattoo-zone').forEach(z => z.classList.remove('active'));
+            
+            // Add active class to selected zone
+            zone.classList.add('active');
+            
+            // Update info
+            const zoneId = zone.dataset.zone;
+            const data = tattooData[zoneId];
+            
+            document.getElementById('zone-title').textContent = data.title;
+            document.getElementById('zone-details').innerHTML = `
+                <div class="tattoo-details">
+                    <h3>Description</h3>
+                    <p>${data.description}</p>
+                    <h3>Détails</h3>
+                    <p>${data.details}</p>
+                    <h3>Symboles</h3>
+                    <div class="tattoo-symbols">
+                        ${data.symbols.map(s => `<span class="symbol">${s}</span>`).join('')}
+                    </div>
+                </div>
+            `;
+            
+            currentZone = zoneId;
+        }
+
+        function loadTattoos() {
+            fetch('game_assets/artifacts/mineurs/tatouages_memento_archiviste.json')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Tatouages chargés:', data);
+                    alert('✅ Tatouages de Memento chargés avec succès !');
+                })
+                .catch(error => {
+                    console.error('Erreur chargement tatouages:', error);
+                    alert('❌ Erreur lors du chargement des tatouages');
+                });
+        }
+
+        function exportTattoos() {
+            const dataStr = JSON.stringify(tattooData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'memento_tattoos_export.json';
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Event listeners
+        document.querySelectorAll('.tattoo-zone').forEach(zone => {
+            zone.addEventListener('click', () => selectZone(zone));
+        });
+
+        // Auto-load on page load
+        window.addEventListener('load', () => {
+            console.log('🎨 Interface Tatouages Memento chargée');
+        });
+    </script>
+</body>
+</html> 
