@@ -43,8 +43,8 @@ check_port 8888 "Test Runner" && ACTIVE_COUNT=$((ACTIVE_COUNT + 1))
 
 echo ""
 echo "URLs d'accès:"
-echo "  🎯 Dashboard: http://localhost:9000/dashboard.html"
-echo "  📊 Frontend: http://localhost:8000"
+echo "  🎯 Dashboard + 🎬 Replay: http://localhost:8000/dashboard.html"
+echo "  📊 Frontend Principal: http://localhost:8000"
 echo "  ⚙️ Backend API: http://localhost:8080/api/health"
 echo "  ⚔️ Temporal: http://localhost:5174"
 echo "  🌌 Quantum: http://localhost:8001"

@@ -1,0 +1,23 @@
+[0;35m🌟 TEST MOTEUR FINAL - Jean-Grofignon Edition[0m
+[0;36m================================================================[0m
+[2025-07-24 16:53:02] [INFO] 🚀 Début des tests automatiques du moteur Heroes of Time
+[2025-07-24 16:53:02] [INFO] 📁 Logs sauvegardés dans: test-results/test-moteur-final-20250724_165302.log
+[2025-07-24 16:53:02] [INFO] 🎯 Catégorie de test: causal
+[2025-07-24 16:53:02] [TEST] 🏥 Test de santé du backend...
+[2025-07-24 16:53:02] [KEYWORD] 🔍 BACKEND_HEALTH -> ✅ UP | Backend opérationnel
+[2025-07-24 16:53:02] [CATEGORY] 🔮 === TESTS ENDPOINTS CAUSAUX ===
+[2025-07-24 16:53:02] [TEST] 🧪 Test Cross-Interaction...
+[2025-07-24 16:53:02] [KEYWORD] 🔍 CROSS_INTERACTION -> ✅ SUCCESS | Response received
+[2025-07-24 16:53:02] [TEST] 🧪 Test Temporal Simulation...
+[2025-07-24 16:53:03] [KEYWORD] 🔍 TEMPORAL_SIMULATION -> ✅ SUCCESS | Simulation réussie
+[2025-07-24 16:53:03] [REPORT] 📊 === GÉNÉRATION DU RAPPORT ===
+
+[0;35m📊 RAPPORT FINAL[0m
+[0;36m==================[0m
+[2025-07-24 16:53:03] [SUMMARY] Total tests: 3
+[2025-07-24 16:53:03] [SUMMARY] Succès: 3 ✅
+[2025-07-24 16:53:03] [SUMMARY] Échecs: 0
+0 ❌
+[2025-07-24 16:53:03] [SUMMARY] Warnings: 0
+0 ⚠️
+[0;32m🎉 MOTEUR EN EXCELLENT ÉTAT ![0m

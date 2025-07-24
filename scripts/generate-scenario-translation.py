@@ -112,9 +112,22 @@ class HotsToLiteraryTranslator:
         author = "unknown"
         for line in hots_content:
             if 'SCENARIO_ID:' in line:
-                scenario_id = re.search(r'"([^"]+)"', line).group(1)
+                match = re.search(r'"([^"]+)"', line)
+                if match:
+                    scenario_id = match.group(1)
             if 'AUTHOR:' in line:
-                author = re.search(r'"([^"]+)"', line).group(1)
+                match = re.search(r'"([^"]+)"', line)
+                if match:
+                    author = match.group(1)
+            # Support pour format commentaire
+            if '// AUTHOR:' in line:
+                parts = line.split('// AUTHOR:')
+                if len(parts) > 1:
+                    author = parts[1].strip()
+            if 'SCENARIO_START(' in line:
+                match = re.search(r'SCENARIO_START\("([^"]+)"\)', line)
+                if match:
+                    scenario_id = match.group(1)
         
         # Commencer le MD
         md_content = f"""# 📜 **{scenario_id.replace('_', ' ').upper()}**
