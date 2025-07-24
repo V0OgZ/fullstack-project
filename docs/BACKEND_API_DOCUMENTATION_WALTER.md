@@ -10,8 +10,22 @@
 
 ## 🌀 **NOUVEAUTÉ RÉVOLUTIONNAIRE : MAGIC FORMULA ENGINE API**
 
-### **🔥 WALTER BREAKTHROUGH:**
-> *"Firebase Charlie 1970 - Le MagicFormulaEngine est maintenant LE CENTRE DE COMMANDEMENT de toutes les formules ! Simple, Runique, JSON - même endpoint, même puissance ! Architecture de combat unifiée déployée !"*
+### **🔥 WALTER BREAKTHROUGH V3.0:**
+> *"Firebase Charlie 1970 - Le MagicFormulaEngine est maintenant LE CENTRE DE COMMANDEMENT de toutes les formules ! 104 formules cataloguées dont 8 nouvelles Tier 3-4 ! Simple, Runique, JSON - même endpoint, même puissance ! Architecture de combat unifiée déployée !"*
+
+### **🆕 NOUVELLES FORMULES TIER 3-4** (Janvier 2025)
+```http
+POST /api/magic-formulas/execute
+Content-Type: application/json
+
+{
+  "formula": "ENERGY_ACCUMULATE(+2_per_turn, max=50)",
+  "context": {
+    "artifactId": "cristal_de_stockage_energie",
+    "tier": 3
+  }
+}
+```
 
 ### **🚀 ENDPOINT PRINCIPAL UNIFIÉ**
 
