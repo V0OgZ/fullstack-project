@@ -127,22 +127,7 @@ public class GameService {
         return action;
     }
 
-    public Map<String, Object> attackTarget(String heroId, String targetId) {
-        // Real combat calculation
-        Map<String, Object> combatResult = calculateCombatResult(heroId, targetId);
-        
-        Map<String, Object> action = new HashMap<>();
-        action.put("id", UUID.randomUUID().toString());
-        action.put("type", "attack");
-        action.put("heroId", heroId);
-        action.put("targetId", targetId);
-        action.put("scheduledTime", new Date());
-        action.put("executionTime", new Date(System.currentTimeMillis() + 5000)); // 5 seconds
-        action.put("status", "pending");
-        action.put("combatPreview", combatResult);
-        
-        return action;
-    }
+    // Méthode supprimée - remplacée par la version FUSION OPUS-MEMENTO plus complète
 
     public Map<String, Object> collectResource(String heroId, String objectId) {
         // Real resource collection
@@ -543,6 +528,88 @@ public class GameService {
                 .filter(p -> playerId.equals(p.get("id")))
                 .findFirst()
                 .orElse(null);
+    }
+    
+    // 🌀 FUSION OPUS-MEMENTO : MÉTHODE DE DÉPLACEMENT RÉPARÉE !
+    @SuppressWarnings("unchecked")
+    public Map<String, Object> moveHero(String gameId, String heroId, Integer targetX, Integer targetY) {
+        Map<String, Object> game = getGame(gameId);
+        if (game == null) {
+            throw new RuntimeException("Game not found: " + gameId);
+        }
+        
+        // Trouver le héros dans tous les joueurs
+        List<Map<String, Object>> players = (List<Map<String, Object>>) game.get("players");
+        Map<String, Object> hero = null;
+        Map<String, Object> ownerPlayer = null;
+        
+        for (Map<String, Object> player : players) {
+            List<Map<String, Object>> heroes = (List<Map<String, Object>>) player.get("heroes");
+            for (Map<String, Object> h : heroes) {
+                if (heroId.equals(h.get("id"))) {
+                    hero = h;
+                    ownerPlayer = player;
+                    break;
+                }
+            }
+            if (hero != null) break;
+        }
+        
+        if (hero == null) {
+            throw new RuntimeException("Hero not found: " + heroId);
+        }
+        
+        // Vérifier les points de mouvement
+        Integer movementPoints = (Integer) hero.get("movementPoints");
+        if (movementPoints <= 0) {
+            throw new RuntimeException("Hero has no movement points left");
+        }
+        
+        // Calculer le coût de déplacement (simple pour l'instant)
+        @SuppressWarnings("unchecked")
+        Map<String, Object> currentPos = (Map<String, Object>) hero.get("position");
+        Integer currentX = (Integer) currentPos.get("x");
+        Integer currentY = (Integer) currentPos.get("y");
+        
+        int distance = Math.abs(targetX - currentX) + Math.abs(targetY - currentY);
+        if (distance > movementPoints) {
+            throw new RuntimeException("Not enough movement points. Required: " + distance + ", Available: " + movementPoints);
+        }
+        
+        // Effectuer le déplacement
+        Map<String, Object> newPosition = new HashMap<>();
+        newPosition.put("x", targetX);
+        newPosition.put("y", targetY);
+        hero.put("position", newPosition);
+        hero.put("movementPoints", movementPoints - distance);
+        
+        // Mettre à jour la carte (visibilité)
+        @SuppressWarnings("unchecked")
+        List<List<Map<String, Object>>> map = (List<List<Map<String, Object>>>) game.get("map");
+        if (map != null && targetY < map.size() && targetX < map.get(targetY).size()) {
+            Map<String, Object> targetTile = map.get(targetY).get(targetX);
+            targetTile.put("visible", true);
+            targetTile.put("explored", true);
+            targetTile.put("hero", hero);
+            
+            // Retirer le héros de l'ancienne position
+            if (currentY < map.size() && currentX < map.get(currentY).size()) {
+                Map<String, Object> oldTile = map.get(currentY).get(currentX);
+                oldTile.remove("hero");
+            }
+        }
+        
+        // Sauvegarder le jeu
+        games.put(gameId, game);
+        
+        Map<String, Object> result = new HashMap<>();
+        result.put("success", true);
+        result.put("hero", hero);
+        result.put("newPosition", newPosition);
+        result.put("remainingMovement", hero.get("movementPoints"));
+        result.put("message", "Hero moved successfully");
+        
+        return result;
     }
     
     private Map<String, Integer> getBuildingCost(Building building) {
@@ -1488,5 +1555,143 @@ public class GameService {
         validation.put("message", validCount + "/" + totalCount + " scripts quantiques valides");
         
         return validation;
+    }
+
+    // 🔥 FUSION OPUS-MEMENTO : SYSTÈME DE COMBAT RÉPARÉ !
+    @SuppressWarnings("unchecked")
+    public Map<String, Object> attackTarget(String attackerHeroId, String targetId) {
+        Map<String, Object> result = new HashMap<>();
+        
+        try {
+            // Trouver le héros attaquant
+            Map<String, Object> attackerHero = null;
+            Map<String, Object> attackerGame = null;
+            
+            for (Map<String, Object> game : games.values()) {
+                List<Map<String, Object>> players = (List<Map<String, Object>>) game.get("players");
+                for (Map<String, Object> player : players) {
+                    List<Map<String, Object>> heroes = (List<Map<String, Object>>) player.get("heroes");
+                    for (Map<String, Object> hero : heroes) {
+                        if (attackerHeroId.equals(hero.get("id"))) {
+                            attackerHero = hero;
+                            attackerGame = game;
+                            break;
+                        }
+                    }
+                    if (attackerHero != null) break;
+                }
+                if (attackerHero != null) break;
+            }
+            
+            if (attackerHero == null) {
+                throw new RuntimeException("Attacker hero not found: " + attackerHeroId);
+            }
+            
+            // Trouver la cible (peut être un autre héros, une créature, ou un bâtiment)
+            Map<String, Object> target = findTarget(attackerGame, targetId);
+            if (target == null) {
+                throw new RuntimeException("Target not found: " + targetId);
+            }
+            
+            // Calculer les dégâts HOMM3-style
+            Map<String, Object> combatResult = calculateCombatDamage(attackerHero, target);
+            
+            result.put("success", true);
+            result.put("attacker", attackerHero.get("name"));
+            result.put("target", target.get("name"));
+            result.put("damage", combatResult.get("damage"));
+            result.put("isCritical", combatResult.get("isCritical"));
+            result.put("targetHealth", combatResult.get("targetHealth"));
+            result.put("message", combatResult.get("message"));
+            
+            // Appliquer les dégâts à la cible
+            applyCombatDamage(target, (Integer) combatResult.get("damage"));
+            
+        } catch (Exception e) {
+            result.put("success", false);
+            result.put("error", e.getMessage());
+        }
+        
+        return result;
+    }
+    
+    @SuppressWarnings("unchecked")
+    private Map<String, Object> findTarget(Map<String, Object> game, String targetId) {
+        // Chercher dans les héros
+        List<Map<String, Object>> players = (List<Map<String, Object>>) game.get("players");
+        for (Map<String, Object> player : players) {
+            List<Map<String, Object>> heroes = (List<Map<String, Object>>) player.get("heroes");
+            for (Map<String, Object> hero : heroes) {
+                if (targetId.equals(hero.get("id"))) {
+                    return hero;
+                }
+            }
+        }
+        
+        // Chercher dans les créatures neutres (si implémentées)
+        // TODO: Ajouter la recherche dans les créatures neutres
+        
+        return null;
+    }
+    
+    private Map<String, Object> calculateCombatDamage(Map<String, Object> attacker, Map<String, Object> target) {
+        Map<String, Object> result = new HashMap<>();
+        
+        // Stats de l'attaquant (HOMM3-style)
+        Integer attackPower = (Integer) attacker.getOrDefault("attack", 10);
+        Integer attackerLevel = (Integer) attacker.getOrDefault("level", 1);
+        Integer minDamage = (Integer) attacker.getOrDefault("minDamage", 1);
+        Integer maxDamage = (Integer) attacker.getOrDefault("maxDamage", 3);
+        
+        // Stats de la cible
+        Integer defense = (Integer) target.getOrDefault("defense", 8);
+        Integer currentHealth = (Integer) target.getOrDefault("health", 100);
+        Integer maxHealth = (Integer) target.getOrDefault("maxHealth", 100);
+        
+        // Formule HOMM3 : Dégâts = (Min + Random(Max-Min+1)) * (1 + (Attack-Defense)*0.05)
+        int baseDamage = minDamage + (int)(Math.random() * (maxDamage - minDamage + 1));
+        
+        // Modificateur attaque vs défense
+        double attackDefenseModifier = 1.0 + ((attackPower - defense) * 0.05);
+        attackDefenseModifier = Math.max(0.1, Math.min(3.0, attackDefenseModifier)); // Cap entre 10% et 300%
+        
+        // Bonus de niveau
+        double levelBonus = 1.0 + (attackerLevel * 0.1);
+        
+        // Calcul final
+        int finalDamage = (int)(baseDamage * attackDefenseModifier * levelBonus);
+        
+        // Chance de critique (5% de base + 1% par niveau)
+        boolean isCritical = Math.random() < (0.05 + attackerLevel * 0.01);
+        if (isCritical) {
+            finalDamage = (int)(finalDamage * 1.5);
+        }
+        
+        // Appliquer les dégâts
+        int newHealth = Math.max(0, currentHealth - finalDamage);
+        
+        result.put("damage", finalDamage);
+        result.put("isCritical", isCritical);
+        result.put("targetHealth", newHealth);
+        result.put("isTargetDefeated", newHealth <= 0);
+        
+        String message = String.format("%s attaque %s pour %d dégâts%s! Santé restante: %d/%d", 
+            attacker.get("name"), target.get("name"), finalDamage, 
+            isCritical ? " (CRITIQUE)" : "", newHealth, maxHealth);
+        result.put("message", message);
+        
+        return result;
+    }
+    
+    private void applyCombatDamage(Map<String, Object> target, Integer damage) {
+        Integer currentHealth = (Integer) target.getOrDefault("health", 100);
+        Integer newHealth = Math.max(0, currentHealth - damage);
+        target.put("health", newHealth);
+        
+        // Si la cible est vaincue
+        if (newHealth <= 0) {
+            target.put("isDefeated", true);
+            target.put("isActive", false);
+        }
     }
 } 
