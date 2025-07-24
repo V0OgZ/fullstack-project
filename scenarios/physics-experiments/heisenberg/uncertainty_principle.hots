@@ -1,0 +1,96 @@
+# ⚛️ PRINCIPE D'INCERTITUDE - HEISENBERG QUANTUM TEST
+# ===================================================
+# 📜 EXPÉRIENCE : Limites fondamentales de la mesure quantique
+# 🎯 OBJECTIF : Démontrer Δx·Δp ≥ ℏ/2 dans Heroes of Time
+# 🧪 PROTOCOLE : Mesurer position ET impulsion simultanément
+
+SCENARIO: "HEISENBERG_UNCERTAINTY_001"
+MAP_SIZE: 12x12
+REFERENCE_TIMELINE: T0
+CAUSAL_ENGINE: QUANTUM_MEASUREMENT
+PHYSICS_MODE: UNCERTAINTY_PRINCIPLE
+
+# 🔬 ÉQUIPEMENT QUANTIQUE
+SETUP_MEASUREMENT:
+  PARTICLE_SOURCE: @2,6 → EMIT(electron_beam)
+  POSITION_DETECTOR: @6,6 PRECISION(Δx)
+  MOMENTUM_DETECTOR: @10,6 PRECISION(Δp)
+  HEISENBERG_APPARATUS: @6,6 TYPE("quantum_microscope")
+
+# ⚛️ ÉTATS PSI INCERTITUDE
+ψ001: ⊙(ELECTRON @x ⟶ WAVE_PACKET(σₓ, σₚ))
+ψ002: Π(MEASURE_POSITION) ⇒ †ψ001 → COLLAPSE(Δx↓, Δp↑)
+ψ003: Π(MEASURE_MOMENTUM) ⇒ †ψ001 → COLLAPSE(Δp↓, Δx↑)
+ψ004: ⊙(SIMULTANEOUS_MEASURE) → VIOLATION_IMPOSSIBLE
+
+# 🎮 SCRIPT PRINCIPE INCERTITUDE
+PHASE_1_PREPARATION:
+  HERO("Heisenberg_Observer", @1,6) WITH_ABILITY("quantum_measurement")
+  CREATE_ITEM("Microscope_Quantique", @6,6)
+  SET_MEASUREMENT_MODE("position_first")
+  
+PHASE_2_MESURE_POSITION:
+  FOCUS_BEAM(@6,6) → HIGH_ENERGY_PHOTONS
+  MEASURE_POSITION(electron) → Δx = λ/2 = h/2p_photon
+  CONSEQUENCE: Δp_electron ≥ p_photon (recul Compton)
+  CALCULATE: Δx·Δp ≥ h/2
+  
+PHASE_3_MESURE_IMPULSION:
+  CHANGE_MODE("momentum_measurement")
+  USE_LOW_ENERGY_PHOTONS → Δp↓ (précision impulsion)
+  CONSEQUENCE: Δx↑ (position floue)
+  VERIFY: Δx·Δp ≥ ℏ/2
+  
+PHASE_4_TENTATIVE_SIMULTANÉE:
+  TRY_SIMULTANEOUS_MEASUREMENT():
+    RESULT: IMPOSSIBLE_PERFECT_PRECISION
+    QUANTUM_LIMIT: Δx·Δp ≥ ℏ/2 = 5.27×10⁻³⁵ J·s
+    
+PHASE_5_INTERPRÉTATION:
+  Heisenberg_Observer EXPLAIN("complementarity_principle")
+  "Plus on connaît précisément la position, moins on connaît l'impulsion"
+  "Ce n'est pas une limite technique, c'est la nature quantique !"
+
+# 🏆 CONDITIONS SUCCÈS
+WIN_CONDITION:
+  - Relation incertitude vérifiée : Δx·Δp ≥ ℏ/2
+  - Mesure position précise → impulsion floue
+  - Mesure impulsion précise → position floue
+  - Impossibilité mesure simultanée parfaite
+  
+FAIL_CONDITION:
+  - Violation principe incertitude
+  - Mesure simultanée parfaite réussie
+  - Relation Δx·Δp < ℏ/2
+
+# 📊 MÉTRIQUES QUANTIQUES
+MEASURE:
+  uncertainty_product: Δx·Δp
+  minimum_limit: ℏ/2 = 5.27×10⁻³⁵ J·s
+  position_precision: Δx (mètres)
+  momentum_precision: Δp (kg·m/s)
+  measurement_disturbance: Δp_recul
+  
+# 🌟 FORMULES HEISENBERG
+PHYSICS_EQUATIONS:
+  # Principe incertitude fondamental
+  Δx·Δp ≥ ℏ/2
+  # Énergie-temps
+  ΔE·Δt ≥ ℏ/2
+  # Angle-moment angulaire
+  Δφ·ΔL ≥ ℏ/2
+  # Microscope Heisenberg
+  Δx ≈ λ/2sinθ, Δp ≈ (h/λ)sinθ
+  
+# 🧠 IMPLICATIONS PHILOSOPHIQUES
+QUANTUM_PHILOSOPHY:
+  "L'incertitude n'est pas due à notre ignorance,
+   mais à la nature fondamentale de la réalité quantique.
+   Dans Heroes of Time, même les héros doivent respecter
+   les limites quantiques de la connaissance !"
+   
+# 💭 CITATIONS HEISENBERG
+QUOTES:
+  - "Ce que nous observons n'est pas la nature en soi, mais la nature exposée à notre méthode de questionnement"
+  - "Dans Heroes of Time, l'incertitude devient une mécanique de jeu !"
+  - "Plus on veut connaître précisément, plus on perturbe le système" 
