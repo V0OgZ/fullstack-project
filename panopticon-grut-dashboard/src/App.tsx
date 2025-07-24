@@ -1,8 +1,14 @@
 // 🏛️ PANOPTICON GRUT - Interface Principale
 import React, { useState, useEffect } from 'react'
-import { Eye, AlertTriangle, Activity, Users, Gamepad2, Server, Sparkles } from 'lucide-react'
+import { Eye, AlertTriangle, Activity, Users, Gamepad2, Server, Sparkles, Hammer, Brain, Zap, Layers, Globe, ExternalLink } from 'lucide-react'
 import GrutApiService from './services/grutApiService'
 import LegendaryElements from './components/LegendaryElements'
+import RunicForge from './components/RunicForge'
+import SphinxGenerator from './components/SphinxGenerator'
+import QuantumVisualizer from './components/QuantumVisualizer'
+import GrutOntologyViewer from './components/GrutOntologyViewer'
+import WorldStateGraph from './components/WorldStateGraph'
+import NavigationHub from './components/NavigationHub'
 import type { GrutVision, GameState, GameSession, CausalConflict } from './types/index'
 
 interface PanopticonStats {
@@ -20,6 +26,12 @@ const App: React.FC = () => {
   const [selectedGame, setSelectedGame] = useState<string | null>(null)
   const [autoRefresh, setAutoRefresh] = useState(true)
   const [showLegendaryElements, setShowLegendaryElements] = useState(false)
+  const [showRunicForge, setShowRunicForge] = useState(false)
+  const [showSphinxGenerator, setShowSphinxGenerator] = useState(false)
+  const [showQuantumVisualizer, setShowQuantumVisualizer] = useState(false)
+  const [showGrutOntology, setShowGrutOntology] = useState(false)
+  const [showWorldStateGraph, setShowWorldStateGraph] = useState(false)
+  const [showNavigationHub, setShowNavigationHub] = useState(false)
 
   // Charge la vision GRUT depuis le backend
   const loadGrutVision = async () => {
@@ -118,16 +130,82 @@ const App: React.FC = () => {
               </span>
             </div>
 
-            {/* Toggle Éléments Légendaires */}
-            <button
-              onClick={() => setShowLegendaryElements(!showLegendaryElements)}
-              className={`px-3 py-1 rounded text-sm font-mono flex items-center gap-2 ${
-                showLegendaryElements ? 'bg-grut-secondary/20 text-grut-secondary' : 'bg-gray-600/20 text-gray-400'
-              }`}
-            >
-              <Sparkles className="w-4 h-4" />
-              Artefacts Légendaires
-            </button>
+                              {/* Toggle Éléments Légendaires */}
+                  <button
+                    onClick={() => setShowLegendaryElements(!showLegendaryElements)}
+                    className={`px-3 py-1 rounded text-sm font-mono flex items-center gap-2 ${
+                      showLegendaryElements ? 'bg-grut-secondary/20 text-grut-secondary' : 'bg-gray-600/20 text-gray-400'
+                    }`}
+                  >
+                    <Sparkles className="w-4 h-4" />
+                    Artefacts Légendaires
+                  </button>
+
+                  {/* Toggle Forge Runique */}
+                  <button
+                    onClick={() => setShowRunicForge(!showRunicForge)}
+                    className={`px-3 py-1 rounded text-sm font-mono flex items-center gap-2 ${
+                      showRunicForge ? 'bg-grut-primary/20 text-grut-primary' : 'bg-gray-600/20 text-gray-400'
+                    }`}
+                  >
+                    <Hammer className="w-4 h-4" />
+                    Forge Runique
+                  </button>
+
+                  {/* Toggle Sphinx Generator */}
+                  <button
+                    onClick={() => setShowSphinxGenerator(!showSphinxGenerator)}
+                    className={`px-3 py-1 rounded text-sm font-mono flex items-center gap-2 ${
+                      showSphinxGenerator ? 'bg-yellow-500/20 text-yellow-400' : 'bg-gray-600/20 text-gray-400'
+                    }`}
+                  >
+                    <Brain className="w-4 h-4" />
+                    Sphinx Quantique
+                  </button>
+
+                  {/* Toggle Quantum Visualizer */}
+                  <button
+                    onClick={() => setShowQuantumVisualizer(!showQuantumVisualizer)}
+                    className={`px-3 py-1 rounded text-sm font-mono flex items-center gap-2 ${
+                      showQuantumVisualizer ? 'bg-blue-500/20 text-blue-400' : 'bg-gray-600/20 text-gray-400'
+                    }`}
+                  >
+                    <Zap className="w-4 h-4" />
+                    Visualiseur Quantique
+                  </button>
+
+                  {/* Toggle GRUT Ontology */}
+                  <button
+                    onClick={() => setShowGrutOntology(!showGrutOntology)}
+                    className={`px-3 py-1 rounded text-sm font-mono flex items-center gap-2 ${
+                      showGrutOntology ? 'bg-purple-500/20 text-purple-400' : 'bg-gray-600/20 text-gray-400'
+                    }`}
+                  >
+                    <Layers className="w-4 h-4" />
+                    Vision GRUT 5D
+                  </button>
+
+                  {/* Toggle World State Graph */}
+                  <button
+                    onClick={() => setShowWorldStateGraph(!showWorldStateGraph)}
+                    className={`px-3 py-1 rounded text-sm font-mono flex items-center gap-2 ${
+                      showWorldStateGraph ? 'bg-green-500/20 text-green-400' : 'bg-gray-600/20 text-gray-400'
+                    }`}
+                  >
+                    <Globe className="w-4 h-4" />
+                    Graphe Monde
+                  </button>
+
+                  {/* Toggle Navigation Hub */}
+                  <button
+                    onClick={() => setShowNavigationHub(!showNavigationHub)}
+                    className={`px-3 py-1 rounded text-sm font-mono flex items-center gap-2 ${
+                      showNavigationHub ? 'bg-orange-500/20 text-orange-400' : 'bg-gray-600/20 text-gray-400'
+                    }`}
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    Navigation Hub
+                  </button>
 
             {/* Auto-refresh toggle */}
             <button
@@ -147,16 +225,58 @@ const App: React.FC = () => {
         </div>
       </header>
 
-      {/* Éléments Légendaires - Évadé de la Cave + Joint Cosmique */}
-      {showLegendaryElements && (
-        <div className="mb-6">
-          <LegendaryElements
-            legendaryArtifacts={grutVision?.legendaryArtifacts}
-            philosopherHeroes={grutVision?.philosopherHeroes}
-            jointCosmiqueStatus={grutVision?.jointCosmiqueStatus}
-          />
-        </div>
-      )}
+                  {/* Éléments Légendaires - Évadé de la Cave + Joint Cosmique */}
+            {showLegendaryElements && (
+              <div className="mb-6">
+                <LegendaryElements
+                  legendaryArtifacts={grutVision?.legendaryArtifacts}
+                  philosopherHeroes={grutVision?.philosopherHeroes}
+                  jointCosmiqueStatus={grutVision?.jointCosmiqueStatus}
+                />
+              </div>
+            )}
+
+            {/* Forge Runique - Éditeur HOTS */}
+            {showRunicForge && (
+              <div className="mb-6">
+                <RunicForge isVisible={showRunicForge} />
+              </div>
+            )}
+
+            {/* Sphinx Generator - Questions Quantiques */}
+            {showSphinxGenerator && (
+              <div className="mb-6">
+                <SphinxGenerator isVisible={showSphinxGenerator} />
+              </div>
+            )}
+
+            {/* Quantum Visualizer - États ψ Temps Réel */}
+            {showQuantumVisualizer && (
+              <div className="mb-6">
+                <QuantumVisualizer isVisible={showQuantumVisualizer} />
+              </div>
+            )}
+
+            {/* GRUT Ontology Viewer - Vision 5D→2.5D */}
+            {showGrutOntology && (
+              <div className="mb-6">
+                <GrutOntologyViewer isVisible={showGrutOntology} grutVision={grutVision || undefined} />
+              </div>
+            )}
+
+            {/* World State Graph - État du Monde Interactif */}
+            {showWorldStateGraph && (
+              <div className="mb-6">
+                <WorldStateGraph isVisible={showWorldStateGraph} grutVision={grutVision || undefined} />
+              </div>
+            )}
+
+            {/* Navigation Hub - Interfaces Externes */}
+            {showNavigationHub && (
+              <div className="mb-6">
+                <NavigationHub isVisible={showNavigationHub} />
+              </div>
+            )}
 
       {/* Dashboard Grid Principal */}
       <div className="grut-grid grut-grid-4 mb-6">
