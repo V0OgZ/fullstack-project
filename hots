@@ -40,7 +40,7 @@ show_help() {
     echo -e "  ${GREEN}compile${NC}     🔧 Compilation backend avec debug info"
     echo -e "  ${GREEN}logs${NC}        📋 Affiche les logs en temps réel"
     echo -e "  ${GREEN}scenario${NC}    🎬 Lance un scénario HEP (Heroes Epic Play)"
-    echo -e "  ${GREEN}demo${NC}        🎮 Démonstration ZFC - Replay épique (./hots demo quick pour rapide)"
+    echo -e "  ${GREEN}demo${NC}        🎮 Démonstration ZFC - Replay épique (./hots demo quick pour rapide, ./hots demo noob pour débutants)"
     echo -e "  ${GREEN}vince${NC}       🔫 Vince Process Annihilator - Nettoie les process avec style!"
     echo -e "  ${GREEN}walter${NC}      🎳 Walter Anti-Vince Protocol - Protection backend"
     echo -e "  ${GREEN}help${NC}        Affiche cette aide"
@@ -166,7 +166,7 @@ show_status() {
     
     echo ""
     echo "URLs d'accès:"
-    echo -e "  🎯 Dashboard + 🎬 Replay: ${CYAN}http://localhost:9000/dashboard.html${NC}"
+    echo -e "  🎯 Dashboard + 🎬 Replay: ${CYAN}http://localhost:8000/dashboard.html${NC}"
     echo -e "  📊 Frontend Principal: ${CYAN}http://localhost:8000${NC}"
     echo -e "  ⚙️ Backend API: ${CYAN}http://localhost:8080/api/health${NC}"
     echo -e "  ⚔️ Interface Temporelle: ${CYAN}http://localhost:5174${NC}"
@@ -266,7 +266,7 @@ start_essential_services() {
     echo ""
     echo -e "${GREEN}✅ Services essentiels démarrés !${NC}"
     echo -e "${YELLOW}🌐 URLs d'accès :${NC}"
-    echo -e "  🎯 Dashboard : ${CYAN}http://localhost:9000/dashboard.html${NC}"
+    echo -e "  🎯 Dashboard : ${CYAN}http://localhost:8000/dashboard.html${NC}"
     echo -e "  🎮 Frontend : ${CYAN}http://localhost:8000${NC}"
     echo -e "  ⚙️  Backend API : ${CYAN}http://localhost:8080/api/health${NC}"
     echo ""
@@ -1315,7 +1315,20 @@ case "${1:-help}" in
         manage_replays "$2" "$3"
         ;;
     "demo")
-        if [ "$2" = "quick" ]; then
+        if [ "$2" = "noob" ]; then
+            # MODE NOOB - Démonstration pour débutants
+            echo -e "${PURPLE}🎮 HEROES OF TIME - DÉMO POUR NOOBS${NC}"
+            echo "======================================="
+            echo -e "${CYAN}🛋️ Jean-Grofignon: Démo ultra-simple pour joueurs lambda !${NC}"
+            echo ""
+            if [ -f "./hots-demo-noob.sh" ]; then
+                bash ./hots-demo-noob.sh
+            else
+                echo -e "${RED}❌ Script hots-demo-noob.sh non trouvé${NC}"
+                exit 1
+            fi
+            exit 0
+        elif [ "$2" = "quick" ]; then
             # MODE QUICK - Démonstration rapide automatique
             echo -e "${PURPLE}🎮 HEROES OF TIME - DÉMO ZFC QUICK MODE${NC}"
             echo "========================================="
@@ -1395,7 +1408,7 @@ case "${1:-help}" in
         echo "  📊 Frontend Temporal Engine : http://localhost:8000"
         echo ""
         echo -e "${YELLOW}💡 Autres interfaces disponibles :${NC}"
-        echo "  🎯 Dashboard : http://localhost:9000/dashboard.html"
+        echo "  🎯 Dashboard : http://localhost:8000/dashboard.html"
         echo "  ⚔️  Interface Temporelle : http://localhost:5174"
         echo ""
         

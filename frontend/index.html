@@ -23,6 +23,7 @@
             <div class="title">🕰️ Heroes of Time - Temporal Engine</div>
             <div class="controls">
                 <button id="new-game-btn" class="btn-primary">🎮 New Game</button>
+                <button id="demo-noob-btn" class="btn-success">🎯 Démo Noob</button>
                 <button id="city-btn" class="btn-primary">🏛️ Ville</button>
                 <button id="combat-btn" class="btn-primary">⚔️ Combat</button>
                 <button id="hero-btn" class="btn-primary">👤 Héros</button>
@@ -157,6 +158,11 @@
         if (fogControlsContainer) {
             fogControlsContainer.appendChild(window.fogOfWarSystem.createFogControls());
         }
+        
+        // 🎯 Événements pour la démo noob
+        document.getElementById('demo-noob-btn').addEventListener('click', () => {
+            showDemoNoob();
+        });
         
         // 🏛️ Événements pour l'interface de ville
         document.getElementById('city-btn').addEventListener('click', () => {
@@ -673,6 +679,211 @@
             }, 3000);
         }
         
+        // 🎯 Fonction pour la démo noob
+        function showDemoNoob() {
+            // Créer la modal de démo noob
+            const modal = document.createElement('div');
+            modal.id = 'demo-noob-modal';
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.8);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+            `;
+            
+            const content = document.createElement('div');
+            content.style.cssText = `
+                background: linear-gradient(135deg, #2c3e50, #34495e);
+                padding: 30px;
+                border-radius: 15px;
+                max-width: 600px;
+                max-height: 80vh;
+                overflow-y: auto;
+                color: white;
+                text-align: center;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            `;
+            
+            content.innerHTML = `
+                <h2 style="color: #3498db; margin-bottom: 20px;">🎯 DÉMO HEROES OF TIME POUR NOOBS</h2>
+                <p style="margin-bottom: 20px;">🛋️ <strong>Jean-Grofignon</strong> : "Salut ! Je vais te montrer comment jouer depuis mon canapé !"</p>
+                
+                <div style="text-align: left; margin: 20px 0;">
+                    <h3 style="color: #e74c3c;">🎮 Que vas-tu apprendre ?</h3>
+                    <ul style="margin-left: 20px;">
+                        <li>✅ <strong>HEAL_HERO</strong> - Soigner ton héros</li>
+                        <li>✅ <strong>TELEPORT_HERO</strong> - Téléporter ton héros</li>
+                        <li>✅ <strong>MODIFY_ENERGY</strong> - Changer ton énergie</li>
+                        <li>✅ <strong>CREATE_BUILDING</strong> - Construire un bâtiment</li>
+                        <li>✅ <strong>Formule Runique</strong> - ψ001: ⊙(HEAL_HERO)</li>
+                        <li>✅ <strong>Formule JSON</strong> - paradoxRisk: 0.3</li>
+                    </ul>
+                </div>
+                
+                <div style="background: rgba(52, 73, 94, 0.5); padding: 15px; border-radius: 10px; margin: 20px 0;">
+                    <h4 style="color: #f39c12;">🌟 Deux façons de faire la démo :</h4>
+                    <p><strong>1. Interface Web</strong> : Reste ici et teste les formules</p>
+                    <p><strong>2. Script Terminal</strong> : Démo complète avec explications</p>
+                </div>
+                
+                <div style="margin-top: 30px;">
+                    <button id="demo-web-btn" style="
+                        background: #27ae60;
+                        color: white;
+                        border: none;
+                        padding: 12px 25px;
+                        margin: 10px;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        font-size: 16px;
+                    ">🌐 Démo Web Interactive</button>
+                    
+                    <button id="demo-terminal-btn" style="
+                        background: #8e44ad;
+                        color: white;
+                        border: none;
+                        padding: 12px 25px;
+                        margin: 10px;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        font-size: 16px;
+                    ">💻 Script Terminal Complet</button>
+                    
+                    <button id="close-demo-btn" style="
+                        background: #e74c3c;
+                        color: white;
+                        border: none;
+                        padding: 12px 25px;
+                        margin: 10px;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        font-size: 16px;
+                    ">❌ Fermer</button>
+                </div>
+            `;
+            
+            modal.appendChild(content);
+            document.body.appendChild(modal);
+            
+            // Event listeners pour les boutons de la modal
+            document.getElementById('demo-web-btn').addEventListener('click', () => {
+                document.body.removeChild(modal);
+                startWebDemo();
+            });
+            
+            document.getElementById('demo-terminal-btn').addEventListener('click', () => {
+                document.body.removeChild(modal);
+                showTerminalInstructions();
+            });
+            
+            document.getElementById('close-demo-btn').addEventListener('click', () => {
+                document.body.removeChild(modal);
+            });
+            
+            // Fermer en cliquant à l'extérieur
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                }
+            });
+        }
+        
+        // 🌐 Démo web interactive
+        function startWebDemo() {
+            const demoFormulas = [
+                { formula: 'HEAL_HERO', description: '💚 Soigner le héros' },
+                { formula: 'TELEPORT_HERO', description: '🌀 Téléporter le héros' },
+                { formula: 'MODIFY_ENERGY', description: '⚡ Modifier l\'énergie' },
+                { formula: 'CREATE_BUILDING', description: '🏗️ Construire un bâtiment' },
+                { formula: 'ψ001: ⊙(HEAL_HERO)', description: '🔮 Formule runique de soin' },
+                { formula: 'paradoxRisk: 0.3, temporalStability: 0.8', description: '📜 Analyse objet JSON' }
+            ];
+            
+            let currentDemo = 0;
+            
+            function runNextDemo() {
+                if (currentDemo >= demoFormulas.length) {
+                    alert('🎉 Démo terminée ! Tu as testé toutes les formules de base !');
+                    return;
+                }
+                
+                const demo = demoFormulas[currentDemo];
+                const result = confirm(`🎯 ${demo.description}\n\nFormule: ${demo.formula}\n\nCliquez OK pour tester cette formule !`);
+                
+                if (result) {
+                    // Simuler l'exécution de la formule
+                    testFormulaInUI(demo.formula);
+                    currentDemo++;
+                    setTimeout(() => runNextDemo(), 2000);
+                } else {
+                    alert('Démo annulée. Tu peux relancer avec le bouton "🎯 Démo Noob" !');
+                }
+            }
+            
+            alert('🎮 Démo Web Interactive commencée !\n\n🛋️ Jean: "Je vais te guider à travers 6 formules de base !"');
+            runNextDemo();
+        }
+        
+        // 💻 Instructions pour le script terminal
+        function showTerminalInstructions() {
+            const instructions = `
+🎯 DÉMO TERMINAL COMPLÈTE
+
+Pour lancer la démo complète dans le terminal :
+
+1. 🚀 Ouvre un terminal
+2. 📁 Va dans le dossier du projet
+3. 💻 Lance la commande :
+   
+   ./hots demo noob
+
+Cette démo va :
+✅ Tester 6 formules différentes
+✅ Expliquer chaque étape
+✅ Montrer les résultats en temps réel
+✅ Te guider progressivement
+
+🛋️ Jean: "C'est la démo complète depuis mon canapé !"
+            `;
+            
+            alert(instructions);
+        }
+        
+        // 🧪 Tester une formule dans l'UI
+        async function testFormulaInUI(formula) {
+            try {
+                const response = await fetch('http://localhost:8080/api/magic-formulas/execute', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        formula: formula,
+                        context: { gameId: 'demo-noob-ui' }
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert(`✅ ${result.message}\n\n🎉 Formule exécutée avec succès !`);
+                    
+                    // Déclencher l'animation si le système est chargé
+                    if (window.animateSpell) {
+                        window.animateSpell(result);
+                    }
+                } else {
+                    alert(`❌ Erreur: ${result.message}`);
+                }
+            } catch (error) {
+                alert(`🚨 Erreur de connexion: ${error.message}\n\nVérifiez que le serveur est lancé avec: ./hots start`);
+            }
+        }
+        
         // Lancer la vérification auto-demo au chargement
         setTimeout(checkAutoDemo, 500);
     </script>
@@ -694,5 +905,8 @@
     
     <!-- 🌀⚡ ZFC COMPLETE SYSTEM - FINAL ENGINE ⚡🌀 -->
     <!-- <script src="zfc-complete-system.js"></script> DÉSACTIVÉ - Interface trop intrusive -->
+    
+    <!-- 🌅 JEAN BALCON ANIMATION SYSTEM - RUNIC EFFECTS ✨ -->
+    <script src="runic-animation-system.js"></script>
 </body>
 </html>

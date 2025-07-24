@@ -1,6 +1,9 @@
 package com.example.demo.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.model.FormulaResult;
+import com.example.demo.model.GameContext;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -12,9 +15,14 @@ import java.util.concurrent.ConcurrentHashMap;
  * 
  * 🛋️ JEAN-GROFIGNON: "Jésus avait raison ! Service séparé = architecture divine !"
  * ✨ JÉSUS VOIX SUAVE: "Ma boule cristalline ne ment jamais, mes enfants !"
+ * 
+ * 🌀 FUSION JEAN 2025: Maintenant connecté au MagicFormulaEngine pour unification !
  */
 @Service
 public class MagicFormulaService {
+    
+    // 🌀 JEAN FUSION FIXED: Instanciation directe pour éviter dépendance circulaire
+    private MagicFormulaEngine magicFormulaEngine = new MagicFormulaEngine();
     
     // 📊 STATISTIQUES ET TRACKING
     private final Map<String, Integer> formulaUsageCount = new ConcurrentHashMap<>();
@@ -108,8 +116,44 @@ public class MagicFormulaService {
      */
     private FormulaExecutionResult executeByCategory(String formulaName, Map<String, Object> context) {
         
+        // 🌀 JEAN FUSION: D'ABORD ESSAYER LE MOTEUR UNIFIÉ !
+        System.out.println("🌀 JEAN FUSION: Tentative moteur unifié pour: " + formulaName);
+        try {
+            GameContext gameContext = new GameContext("default-game");
+            // Copier le contexte dans GameContext
+            if (context.containsKey("gameId")) {
+                gameContext = new GameContext((String) context.get("gameId"));
+            }
+            
+            System.out.println("🌀 JEAN FUSION: Appel magicFormulaEngine.executeFormula...");
+            FormulaResult engineResult = magicFormulaEngine.executeFormula(formulaName, gameContext);
+            System.out.println("🌀 JEAN FUSION: Résultat moteur = " + engineResult.isSuccess());
+            
+            if (engineResult.isSuccess()) {
+                System.out.println("🌀 JEAN FUSION: SUCCÈS ! Conversion en FormulaExecutionResult");
+                // Convertir FormulaResult en FormulaExecutionResult
+                return FormulaExecutionResult.success(
+                    engineResult.getMessage(),
+                    "ψ_ENGINE: ⊙(" + formulaName + ") ⟶ SUCCESS",
+                    engineResult.getMessage(),
+                    (Map<String, Object>) engineResult.getData(),
+                    engineResult.getFormulaType(),
+                    Map.of("engineProcessed", true, "engineType", engineResult.getFormulaType())
+                );
+            } else {
+                System.out.println("🌀 JEAN FUSION: Moteur unifié a échoué, message: " + engineResult.getMessage());
+            }
+        } catch (Exception e) {
+            // Si le moteur unifié échoue, on continue avec les catégories existantes
+            System.out.println("🌀 JEAN: Moteur unifié échoué, essai catégories: " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        System.out.println("🌀 JEAN FUSION: Passage aux catégories existantes...");
+        
         // 🔮 CATÉGORIE A: FORMULES RUNIQUES NATIVES (29 implémentées)
         if (isRunicNativeFormula(formulaName)) {
+            System.out.println("🌀 JEAN FUSION: Formule runique native détectée");
             return executeRunicNativeFormula(formulaName, context);
         }
         
@@ -123,6 +167,7 @@ public class MagicFormulaService {
             return executeHardcodedFormula(formulaName, context);
         }
         
+        System.out.println("🌀 JEAN FUSION: Aucune catégorie trouvée pour: " + formulaName);
         return FormulaExecutionResult.error("🚨 Formule inconnue: " + formulaName);
     }
     

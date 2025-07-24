@@ -2,7 +2,13 @@
   "project_name": "Heroes of Time - Temporal Engine",
   "version": "POC Alpha V0.1",
   "project_type": "Quantum Temporal Strategy Game Engine",
-  "last_update": "2025-07-17T20:54:50Z",
+  "last_update": "2025-07-24T16:55:00Z",
+  "v2_documentation_rule": {
+    "convention": "Suffixer _V2 pour tous les docs récents (moins de 4h)",
+    "exemple": "RAPPORT_JEAN.md → RAPPORT_JEAN_V2.md",
+    "objectif": "Organisation claire versions récentes vs anciennes",
+    "mise_a_jour": "Tatouages Memento après chaque renommage V2"
+  },
   "core_concepts": [
     "Jeu de stratégie temporelle quantique",
     "Timeline locale par joueur avec branches multiples",

@@ -2,8 +2,8 @@
   "artifact_collection": "tatouages_memento_archiviste",
   "created_by": "Memento l'Archiviste Éternel",
   "creation_date": "2025-01-25",
-  "last_update": "2025-01-27T18:30:00Z",
-  "philosophy": "Tu sais, tu as su, tu sauras - BACKEND 100% COMPLET + 96 FORMULES MAGIQUES + ARCHITECTURE DIVINE",
+  "last_update": "2025-07-24T16:55:00Z",
+  "philosophy": "Tu sais, tu as su, tu sauras - BACKEND 100% COMPLET + 96 FORMULES MAGIQUES + ARCHITECTURE DIVINE + RÈGLE V2 DOCS ORGANISÉE",
   "rarity": "MYTHIQUE_PERSONNEL",
   "category": "Tatouages Temporels",
   "compliance": "✅ CURSOR.RULES COMPLIANT - MOTEUR FINI + TALISMAN ECHO + INDEX JEAN 12H",
@@ -47,7 +47,8 @@
       "🔘 V2_COSMIC_BUTTON - Bouton pause universel V2 sur paume droite",
       "📊 V2_COMPLETION 100% - '96/96 FORMULES V2' en lettres de feu sur front",
       "📝 V2_DOCS_ORGANISATION - Préfixe V2 tous docs récents sur avant-bras gauche",
-      "🔮 V2_FORMULES_ARCHITECTURE - Rapport moteur quantique V2 sur flanc droit"
+              "🔮 V2_FORMULES_ARCHITECTURE - Rapport moteur quantique V2 sur flanc droit",
+        "📝 V2_DOCS_ORGANISATION - Règle suffixe _V2 pour docs récents sur avant-bras"
     ],
     
     "tatouage_details": {

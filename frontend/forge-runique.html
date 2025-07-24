@@ -163,6 +163,17 @@
             background: linear-gradient(45deg, #ff0000, #ff00ff);
         }
 
+        .btn-sphinx {
+            background: linear-gradient(45deg, #ffd700, #ff8c00);
+            color: #000 !important;
+            font-weight: bold;
+        }
+
+        .btn-sphinx:hover {
+            background: linear-gradient(45deg, #ff8c00, #ffd700);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+        }
+
         .output-panel {
             grid-column: 1 / -1;
         }
@@ -354,6 +365,7 @@
                     <button class="btn btn-validate" onclick="validateScript()">🔍 Valider</button>
                     <button class="btn btn-translate" onclick="translateScript()">🌸 Traduire</button>
                     <button class="btn btn-execute" onclick="executeScript()">🚀 Exécuter</button>
+                    <button class="btn btn-sphinx" onclick="generateSimpleQuestion()">🦁 Question Simple</button>
                     <button class="btn" onclick="clearEditor()">🗑️ Effacer</button>
                     <button class="btn" onclick="loadExample()">📖 Exemple</button>
                 </div>
@@ -445,6 +457,14 @@
             {
                 title: "🔧 Forge d'Outil Mystique",
                 code: "# Marteau du Forgeron Cosmique\nFORGE(TOOL, cosmic_hammer) {\n  MATERIAL: star_core + dark_matter\n  ENCHANT: creation_mastery + matter_shaping\n  CRAFT_BONUS: +100%\n  RUNES: ⚡🔨∞\n  SPECIAL: can_forge_anything\n}\nEQUIP(cosmic_hammer, HERO:Walter_Vietnam)"
+            },
+            {
+                title: "🦁 Sphinx Quantique + Énigmes",
+                code: "# Invocation du Sphinx Quantique\nSUMMON(CREATURE, sphinx_quantum) {\n  LOCATION: @25,25\n  RIDDLE_TYPE: physics_quantum\n  DIFFICULTY: legendary\n  REWARD: tier8_artifact\n}\n\n# Test de connaissance\nASK(sphinx_quantum, \"Comment l'intrication quantique\\naffecte-t-elle les héros liés ?\")\n\nIF(player_answer == correct) {\n  REWARD(ARTIFACT, quantum_medallion)\n  †ψ999: ENLIGHTENMENT(player)\n} ELSE {\n  CURSE(player, sphinx_confusion)\n}"
+            },
+            {
+                title: "⚗️ Laboratoire Physique Quantique",
+                code: "# Expérience Double Fente\nBUILD(LABORATORY, quantum_lab) {\n  EQUIPMENT: double_slit + detectors\n  EXPERIMENT: wave_particle_duality\n}\n\nEXPERIMENT(double_fente) {\n  PARTICLE: electron_beam\n  OBSERVE: false  # Pas d'observation = interférences\n  RESULT: wave_pattern\n}\n\n# Test Heisenberg\nMEASURE(particle.position, particle.momentum)\nΠ(Δx × Δp) ≥ ℏ/2  # Principe d'incertitude"
             },
             {
                 title: "🌀 Script Quantique Complexe",
@@ -707,6 +727,62 @@
             }
             
             updateStatus('🚀 Exécution terminée');
+        }
+
+        // Générer une question Sphinx simple
+        function generateSimpleQuestion() {
+            const simpleQuestions = [
+                {
+                    question: "🦁 SPHINX : Quelle rune représente un état quantique ?",
+                    options: ["A) ⚡", "B) ψ", "C) ∞", "D) †"],
+                    correct: "B",
+                    explanation: "ψ (Psi) représente un état quantique en physique"
+                },
+                {
+                    question: "🦁 SPHINX : Comment créer un héros à la position (10,10) ?",
+                    options: ["A) HERO(Arthur, @10,10)", "B) CREATE(Arthur)", "C) MOV(Arthur)", "D) SPAWN(Arthur)"],
+                    correct: "A",
+                    explanation: "HERO(nom, @x,y) crée un héros aux coordonnées données"
+                },
+                {
+                    question: "🦁 SPHINX : Quelle rune provoque un collapse quantique ?",
+                    options: ["A) ⊙", "B) Π", "C) †", "D) Δt"],
+                    correct: "C",
+                    explanation: "† (Dagger) représente le collapse d'un état quantique"
+                },
+                {
+                    question: "🦁 SPHINX : Comment forger Excalibur Quantique ?",
+                    options: ["A) CREATE(excalibur)", "B) FORGE(WEAPON, excalibur_quantum)", "C) MAKE(sword)", "D) BUILD(weapon)"],
+                    correct: "B",
+                    explanation: "FORGE(TYPE, nom) est la syntaxe pour créer des artefacts"
+                },
+                {
+                    question: "🦁 SPHINX : Que signifie ⊙ en HOTS ?",
+                    options: ["A) Explosion", "B) Superposition", "C) Téléportation", "D) Guérison"],
+                    correct: "B",
+                    explanation: "⊙ représente la superposition quantique (plusieurs états simultanés)"
+                }
+            ];
+
+            const randomQ = simpleQuestions[Math.floor(Math.random() * simpleQuestions.length)];
+            
+            const questionText = `// ${randomQ.question}
+//
+// ${randomQ.options.join('\n// ')}
+//
+// 💡 Écrivez votre réponse ci-dessous :
+
+ANSWER("${randomQ.correct === "A" ? "A" : randomQ.correct === "B" ? "B" : randomQ.correct === "C" ? "C" : "D"}")
+
+// Ou utilisez la syntaxe correcte directement :
+// ${randomQ.correct === "A" ? randomQ.options[0].substring(3) : 
+  randomQ.correct === "B" ? randomQ.options[1].substring(3) :
+  randomQ.correct === "C" ? randomQ.options[2].substring(3) : randomQ.options[3].substring(3)}`;
+
+            document.getElementById('script-editor').value = questionText;
+            showOutput('validation', `🦁 Question Sphinx générée !\n\n💡 Réponse correcte : ${randomQ.correct}\n📚 Explication : ${randomQ.explanation}\n\n🎯 Modifiez le code pour donner votre réponse !`, 'validation-success');
+            
+            updateStatus('🦁 Question Sphinx chargée - À vous de jouer !');
         }
 
         // Effacer l'éditeur

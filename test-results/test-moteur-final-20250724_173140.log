@@ -1,0 +1,74 @@
+[0;35m🌟 TEST MOTEUR FINAL - Jean-Grofignon Edition[0m
+[0;36m================================================================[0m
+[2025-07-24 17:31:40] [INFO] 🚀 Début des tests automatiques du moteur Heroes of Time
+[2025-07-24 17:31:40] [INFO] 📁 Logs sauvegardés dans: test-results/test-moteur-final-20250724_173140.log
+[2025-07-24 17:31:40] [INFO] 🎯 Catégorie de test: all
+[2025-07-24 17:31:40] [TEST] 🏥 Test de santé du backend...
+[2025-07-24 17:31:40] [KEYWORD] 🔍 BACKEND_HEALTH -> ✅ UP | Backend opérationnel
+[2025-07-24 17:31:40] [CATEGORY] 🔮 === TESTS ENDPOINTS CAUSAUX ===
+[2025-07-24 17:31:40] [TEST] 🧪 Test Cross-Interaction...
+[2025-07-24 17:31:40] [KEYWORD] 🔍 CROSS_INTERACTION -> ✅ SUCCESS | Response received
+[2025-07-24 17:31:40] [TEST] 🧪 Test Temporal Simulation...
+[2025-07-24 17:31:40] [KEYWORD] 🔍 TEMPORAL_SIMULATION -> ✅ SUCCESS | Simulation réussie
+[2025-07-24 17:31:40] [CATEGORY] 🧮 === TESTS FORMULES MATHÉMATIQUES ===
+[2025-07-24 17:31:40] [TEST] 🧮 Analyse des formules...
+[2025-07-24 17:31:40] [CATEGORY] 📜 === TESTS SCÉNARIOS HOTS ===
+[2025-07-24 17:31:40] [TEST] 📜 Test scénario: axis_vol_tresor_causal
+[2025-07-24 17:31:40] [KEYWORD] 🔍 HOTS_STRUCTURE -> ❌ INVALID | axis_vol_tresor_causal
+[2025-07-24 17:31:41] [TEST] 📜 Test scénario: cave_platon_panopticon_5d
+[2025-07-24 17:31:41] [KEYWORD] 🔍 HOTS_STRUCTURE -> ❌ INVALID | cave_platon_panopticon_5d
+[2025-07-24 17:31:41] [TEST] 📜 Test scénario: claudius_opus_demo
+[2025-07-24 17:31:41] [KEYWORD] 🔍 HOTS_STRUCTURE -> ❌ INVALID | claudius_opus_demo
+[2025-07-24 17:31:41] [TEST] 📜 Test scénario: fusion_temporelle_jean_claudius_memento
+[2025-07-24 17:31:41] [KEYWORD] 🔍 HOTS_STRUCTURE -> ❌ INVALID | fusion_temporelle_jean_claudius_memento
+[2025-07-24 17:31:41] [TEST] 📜 Test scénario: jean-memento-synergie-test
+[2025-07-24 17:31:41] [KEYWORD] 🔍 HOTS_STRUCTURE -> ❌ INVALID | jean-memento-synergie-test
+[2025-07-24 17:31:41] [TEST] 📜 Test scénario: laboratoire_debutant_walter
+[2025-07-24 17:31:41] [KEYWORD] 🔍 HOTS_STRUCTURE -> ❌ INVALID | laboratoire_debutant_walter
+[2025-07-24 17:31:41] [TEST] 📜 Test scénario: moteur_temporel_final_opus
+[2025-07-24 17:31:41] [KEYWORD] 🔍 HOTS_STRUCTURE -> ❌ INVALID | moteur_temporel_final_opus
+[2025-07-24 17:31:41] [TEST] 📜 Test scénario: reconciliation_vince_opus_ADAPTED
+[2025-07-24 17:31:41] [KEYWORD] 🔍 HOTS_STRUCTURE -> ❌ INVALID | reconciliation_vince_opus_ADAPTED
+[2025-07-24 17:31:41] [TEST] 📜 Test scénario: reconciliation_vince_opus_WORKING
+[2025-07-24 17:31:41] [KEYWORD] 🔍 HOTS_STRUCTURE -> ❌ INVALID | reconciliation_vince_opus_WORKING
+[2025-07-24 17:31:41] [TEST] 📜 Test scénario: reconciliation_vince_opus
+[2025-07-24 17:31:41] [KEYWORD] 🔍 HOTS_STRUCTURE -> ❌ INVALID | reconciliation_vince_opus
+[2025-07-24 17:31:41] [TEST] 📜 Test scénario: scenario_debutant_v2_moteur
+[2025-07-24 17:31:41] [KEYWORD] 🔍 HOTS_STRUCTURE -> ✅ VALID | scenario_debutant_v2_moteur
+[2025-07-24 17:31:41] [KEYWORD] 🔍 HOTS_AUTHOR -> ✅ PRESENT | scenario_debutant_v2_moteur
+[2025-07-24 17:31:41] [KEYWORD] 🔍 HOTS_SYMBOLS -> ✅ PRESENT | scenario_debutant_v2_moteur
+[2025-07-24 17:31:41] [KEYWORD] 🔍 JEAN_CHARACTERS -> ✅ PRESENT | scenario_debutant_v2_moteur
+[2025-07-24 17:31:41] [TEST] 📜 Test scénario: scenario_excalibur_test_complet
+[2025-07-24 17:31:41] [KEYWORD] 🔍 HOTS_STRUCTURE -> ❌ INVALID | scenario_excalibur_test_complet
+[2025-07-24 17:31:41] [TEST] 📜 Test scénario: test_nouveaux_pouvoirs_omegzero
+[2025-07-24 17:31:41] [KEYWORD] 🔍 HOTS_STRUCTURE -> ❌ INVALID | test_nouveaux_pouvoirs_omegzero
+[2025-07-24 17:31:41] [TEST] 📜 Test scénario: test_quatrieme_mur
+[2025-07-24 17:31:41] [KEYWORD] 🔍 HOTS_STRUCTURE -> ❌ INVALID | test_quatrieme_mur
+[2025-07-24 17:31:41] [TEST] 📜 Test scénario: test_the_source_matrix_architect
+[2025-07-24 17:31:41] [KEYWORD] 🔍 HOTS_STRUCTURE -> ❌ INVALID | test_the_source_matrix_architect
+[2025-07-24 17:31:41] [TEST] 📜 Test scénario: test_tour_ancrage_zone8
+[2025-07-24 17:31:41] [KEYWORD] 🔍 HOTS_STRUCTURE -> ❌ INVALID | test_tour_ancrage_zone8
+[2025-07-24 17:31:41] [TEST] 📜 Test scénario: trou_noir_horizon_causal
+[2025-07-24 17:31:41] [KEYWORD] 🔍 HOTS_STRUCTURE -> ❌ INVALID | trou_noir_horizon_causal
+[2025-07-24 17:31:41] [TEST] 📜 Test scénario: zone_inverted_001_adapte_jean
+[2025-07-24 17:31:41] [KEYWORD] 🔍 HOTS_STRUCTURE -> ✅ VALID | zone_inverted_001_adapte_jean
+[2025-07-24 17:31:41] [KEYWORD] 🔍 HOTS_AUTHOR -> ✅ PRESENT | zone_inverted_001_adapte_jean
+[2025-07-24 17:31:41] [KEYWORD] 🔍 HOTS_SYMBOLS -> ✅ PRESENT | zone_inverted_001_adapte_jean
+[2025-07-24 17:31:41] [KEYWORD] 🔍 JEAN_CHARACTERS -> ✅ PRESENT | zone_inverted_001_adapte_jean
+[2025-07-24 17:31:41] [INFO] 📊 Total scénarios analysés: 18
+[2025-07-24 17:31:41] [CATEGORY] 🔄 === TESTS CONVERSION FORMATS ===
+[2025-07-24 17:31:41] [TEST] 🔄 Test conversion HOTS...
+[2025-07-24 17:31:41] [KEYWORD] 🔍 HOTS_TO_JSON -> ✅ SUCCESS | Fichier JSON trouvé
+[2025-07-24 17:31:41] [KEYWORD] 🔍 JSON_VALIDATION -> ✅ VALID | Structure JSON correcte
+[2025-07-24 17:31:41] [KEYWORD] 🔍 HOTS_TO_HEP -> ✅ SUCCESS | HEP exécutable trouvé
+[2025-07-24 17:31:42] [KEYWORD] 🔍 HEP_EXECUTION -> ✅ SUCCESS | HEP s'exécute correctement
+[2025-07-24 17:31:42] [REPORT] 📊 === GÉNÉRATION DU RAPPORT ===
+
+[0;35m📊 RAPPORT FINAL[0m
+[0;36m==================[0m
+[2025-07-24 17:31:42] [SUMMARY] Total tests: 31
+[2025-07-24 17:31:42] [SUMMARY] Succès: 15 ✅
+[2025-07-24 17:31:42] [SUMMARY] Échecs: 16 ❌
+[2025-07-24 17:31:42] [SUMMARY] Warnings: 0
+0 ⚠️
+[0;31m❌ MOTEUR NÉCESSITE ATTENTION[0m

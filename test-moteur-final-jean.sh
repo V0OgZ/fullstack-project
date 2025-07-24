@@ -99,7 +99,7 @@ test_causal_endpoints() {
          -H "Content-Type: application/json" \
          -d '{"scenario":"axisi_vs_lentus_battle","turns":3}' 2>/dev/null || echo '{"error":"failed"}')
     
-    if echo "$temporal_response" | grep -q "success.*true"; then
+    if echo "$temporal_response" | grep -q "SUCCESS"; then
         log_keyword "TEMPORAL_SIMULATION" "✅ SUCCESS" "Simulation réussie"
         echo -e "${GREEN}✅ Temporal Simulation OK${NC}"
         

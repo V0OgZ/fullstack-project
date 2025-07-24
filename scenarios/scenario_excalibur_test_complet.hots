@@ -1,0 +1,60 @@
+SCENARIO_ID: "scenario_excalibur_test_complet"
+AUTHOR: "Jean-Grofignon"
+VERSION: "V2_FINAL"
+DATE: "2025-07-24"
+
+SCENARIO_START("Test Complet Excalibur - Laboratoire Jean")
+
+// Contexte initial
+WORLD_STATE: "laboratoire_quantique"
+DIFFICULTY: "expert"
+
+// === INITIALISATION ===
+HERO(Arthur, @10,10)
+CREATE(WEAPON, excalibur_quantum, Arthur)
+SET_LOCATION(Arthur, "Laboratoire Quantique Jean")
+
+// === PHASE 1: POUVOIRS DE BASE ===
+ψ001: ⊙(Δt+1 @10,10 ⟶ MOV(Arthur, @15,15))
+Arthur brandit Excalibur et se téléporte quantiquement !
+
+USE(excalibur_quantum, POWER_SLASH)
+†ψ002: Arthur libère une onde de choc temporelle qui fend l'espace-temps !
+
+// === PHASE 2: POUVOIRS AVANCÉS ===
+CAUSAL_RULE: IF(Arthur.health < 50%) THEN USE(excalibur_quantum, DIVINE_HEAL)
+L'épée divine restaure instantanément la vitalité d'Arthur !
+
+USE(excalibur_quantum, TIME_REWIND)
+ψ003: ⊙(Δt-5 @15,15 ⟶ TEMPORAL_ECHO(Arthur, previous_state))
+Arthur remonte le temps de 5 secondes - paradoxe temporel maîtrisé !
+
+// === PHASE 3: POUVOIRS ULTIMES ===
+USE(excalibur_quantum, REALITY_CUT)
+†ψ004: Π(reality_fabric) ⇒ SLICE(dimension, Arthur.target)
+Excalibur tranche littéralement la réalité - les lois physiques se plient !
+
+USE(excalibur_quantum, CANAPÉ_OVERRIDE)
+Jean-Grofignon approuve depuis son canapé cosmique - pouvoir divin activé !
+
+// === PHASE 4: COMBO LÉGENDAIRE ===
+COMBO_START()
+  USE(excalibur_quantum, POWER_SLASH)
+  USE(excalibur_quantum, TIME_REWIND) 
+  USE(excalibur_quantum, REALITY_CUT)
+COMBO_END()
+
+ψ005: ⊙(COMBO_EFFECT ⟶ LEGENDARY_STRIKE(Arthur, excalibur_quantum))
+EXPLOSION COSMIQUE ! Arthur transcende les limites du possible !
+
+// === PHASE 5: TEST LABORATOIRE ===
+LABORATORY_TEST("Excalibur Quantum Analysis")
+  MEASURE(excalibur_quantum.power_level)
+  MEASURE(Arthur.quantum_resonance)
+  ANALYZE(temporal_distortion)
+END_TEST()
+
+// === RÉSULTATS ===
+SCENARIO_END("Excalibur - Tous pouvoirs testés avec succès !")
+
+// JEAN-GROFIGNON SIGNATURE: "Cette épée défonce tout depuis le canapé !" 
