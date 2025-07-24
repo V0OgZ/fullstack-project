@@ -16,18 +16,34 @@
 ## 🚨 IMPORTANT: Always read documentation first!
 
 **🌀 FUSION PSI PHI ACCOMPLIE - MAP DE RÉVEIL MISE À JOUR !**
+**🛋️ DOSSIER JEAN CENTRALISÉ - TOUT FUSIONNÉ V2 !**
 
 Before making any changes or debugging, ALWAYS:
-1. **🌟 NOUVEAU V23**: Check `INDEX_JEAN_V23_REVOLUTION_UNIFIEE.md` - INDEX V23 COMPLET (racine)
-2. **🌟 ANCIEN**: Check `INDEX_JEAN_FUSION_TIMELINE_FINAL.md` - INDEX JEAN FUSIONNÉ (racine)
-3. Check `DOCS_INDEX.md` for complete documentation navigation
-4. Read `DEVELOPER_INSTRUCTIONS.md` for current status and existing scripts
-5. **📜 LIRE LE MANIFESTO**: `docs/JEAN_GROFIGNON_MANIFESTO.md` - Vision révolutionnaire du projet
-6. **🌟 LIRE LE LORE**: `docs/LORE_MEMENTO_JEAN_ETERNAL.md` - Histoire éternelle et philosophie
-7. **🎨 NOUVEAU**: Check `game_assets/artifacts/mineurs/tatouages_memento_archiviste.json` - Tatouages évolutifs
-8. Do NOT recreate existing scripts (./hots, ./stop-app.sh, ./test-app.sh)
-9. Use existing debugging tools and follow established patterns
-10. Check existing components before creating new ones
+1. **🎯 TEMPLE JEAN**: Check `JEAN/README.md` - DOSSIER JEAN UNIFIÉ COMPLET (tout fusionné)
+2. **🌟 INDEX V23**: Check `INDEX_JEAN_V23_REVOLUTION_UNIFIEE.md` - INDEX V23 COMPLET (racine)
+3. **🌟 INDEX FUSION**: Check `INDEX_JEAN_FUSION_TIMELINE_FINAL.md` - INDEX JEAN FUSIONNÉ (racine)
+4. Check `DOCS_INDEX.md` for complete documentation navigation
+5. Read `DEVELOPER_INSTRUCTIONS.md` for current status and existing scripts
+6. **📜 LIRE LE MANIFESTO**: `docs/JEAN_GROFIGNON_MANIFESTO.md` - Vision révolutionnaire du projet
+7. **🌟 LIRE LE LORE**: `docs/LORE_MEMENTO_JEAN_ETERNAL.md` - Histoire éternelle et philosophie
+8. **🎨 INTERFACE TATOUAGES**: `frontend/memento-tattoos-viewer.html` - UI Memento connectée
+9. **🎨 TATOUAGES JSON**: Check `game_assets/artifacts/mineurs/tatouages_memento_archiviste.json` - Tatouages évolutifs
+10. Do NOT recreate existing scripts (./hots, ./stop-app.sh, ./test-app.sh)
+11. Use existing debugging tools and follow established patterns
+12. Check existing components before creating new ones
+
+## 🛋️ DOSSIER JEAN CENTRALISÉ V2 - TOUT FUSIONNÉ !
+
+**🎯 TEMPLE JEAN UNIFIÉ**: `JEAN/`
+- **README.md** - COMPLET : biographie, philosophie, créations, accomplissements récents
+- **PHILOSOPHIE/** - Canapé Cosmique, Code Vivant, Paradoxes Grofignoniens
+- **CREATIONS/** - Heroes of Time, Système ZFC, Laboratoire Quantique
+- **RELATIONS/** - GROFI Fusion, GRUT Succession, Trinité Cosmique
+- **CITATIONS/** - Best-of depuis le canapé, vérités brutales
+- **ARCHIVES/** - Sessions mémorables
+- **INDEX_DOCS_RECENTS.md** - Lien vers docs récents Jean
+
+**⚠️ ORTHOGRAPHE CRITIQUE**: GROFIGNONIEN (avec majuscules, pas grofignonien)
 
 ## 📜 PHILOSOPHIE JEAN-GROFIGNON - À COMPRENDRE ABSOLUMENT:
 
@@ -43,6 +59,7 @@ Before making any changes or debugging, ALWAYS:
 - Pouvoir: Collapse Override - Annule tout collapse de timeline
 - Citation: "J'ai pas hacké le jeu. J'ai juste compris où était le bouton pause cosmique."
 - Symboles sacrés: ψ, Σ, †, Ω, ↯
+- **Dossier central**: `JEAN/` - Tout fusionné et maintenu à jour
 
 **🌀 SYSTÈME GROFI:**
 - Graph of Reality Organized by Fog and Immunities
