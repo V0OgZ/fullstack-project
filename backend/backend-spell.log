@@ -28,7 +28,7 @@
 [INFO] 
 [INFO] --- spring-boot-maven-plugin:2.7.18:run (default-cli) @ demo ---
 [INFO] Attaching agents: []
-08:16:13.570 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+08:23:19.247 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
  ██╗  ██╗███████╗██████╗  ██████╗ ███████╗███████╗    ██████╗ ███████╗    ████████╗██╗███╗   ███╗███████╗
  ██║  ██║██╔════╝██╔══██╗██╔═══██╗██╔════╝██╔════╝   ██╔═══██╗██╔════╝    ╚══██╔══╝██║████╗ ████║██╔════╝
  ███████║█████╗  ██████╔╝██║   ██║█████╗  ███████╗   ██║   ██║█████╗         ██║   ██║██╔████╔██║█████╗  
@@ -49,24 +49,24 @@
     • API REST Complète            ✅
     
  🎯 Port: 8080 | 🔧 Profile: default | 📊 Version: 1.0.0 
-08:16:13.592 [main] INFO  com.example.demo.DemoApplication - Starting DemoApplication using Java 17.0.15 on vincents-MacBook-Pro.local with PID 84354 (/Users/admin/fullstack-project/backend/target/classes started by admin in /Users/admin/fullstack-project/backend)
-08:16:13.593 [main] DEBUG com.example.demo.DemoApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
-08:16:13.593 [main] INFO  com.example.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
-08:16:13.931 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-08:16:13.957 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 23 ms. Found 8 JPA repository interfaces.
-08:16:14.176 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
-08:16:14.182 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
-08:16:14.182 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-08:16:14.182 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
-08:16:14.221 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-08:16:14.221 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 612 ms
-08:16:14.277 [main] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Starting...
-08:16:14.361 [main] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Start completed.
-08:16:14.366 [main] INFO  org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:heroesdb'
-08:16:14.420 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-08:16:14.441 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
-08:16:14.502 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-08:16:14.572 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+08:23:19.279 [main] INFO  com.example.demo.DemoApplication - Starting DemoApplication using Java 17.0.15 on vincents-MacBook-Pro.local with PID 87656 (/Users/admin/fullstack-project/backend/target/classes started by admin in /Users/admin/fullstack-project/backend)
+08:23:19.280 [main] DEBUG com.example.demo.DemoApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+08:23:19.281 [main] INFO  com.example.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
+08:23:19.664 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+08:23:19.702 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 35 ms. Found 8 JPA repository interfaces.
+08:23:19.975 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+08:23:19.981 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+08:23:19.981 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+08:23:19.981 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+08:23:20.024 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+08:23:20.024 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 723 ms
+08:23:20.073 [main] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Starting...
+08:23:20.163 [main] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Start completed.
+08:23:20.168 [main] INFO  org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:heroesdb'
+08:23:20.222 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+08:23:20.243 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+08:23:20.312 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+08:23:20.405 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
 Hibernate: drop table if exists ai_decision_history CASCADE 
 Hibernate: drop table if exists ai_goals CASCADE 
 Hibernate: drop table if exists ai_players CASCADE 
@@ -121,87 +121,90 @@ Hibernate: alter table scenario_events add constraint FKg78thoyk3btt4ah8w0l5kxge
 Hibernate: alter table scenario_objectives add constraint FK17ypflt578mc3v9gpawpa5rq5 foreign key (scenario_id) references scenarios
 Hibernate: alter table scenario_starting_positions add constraint FK4nw5i22e150ntccvl66v6v6ng foreign key (scenario_id) references scenarios
 Hibernate: alter table unit_abilities add constraint FKgenwc8hldy5cu1mutacji6xgi foreign key (unit_id) references units
-08:16:14.987 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-08:16:14.990 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-08:16:15.281 [main] DEBUG org.springframework.web.filter.CorsFilter - Filter 'corsFilter' configured for use
-08:16:15.530 [main] INFO  com.example.demo.service.NamelessArtifactService - 🚨 FOUND NAMELESS ARTIFACT: priority_processor_supreme - PRIORITY PROCESSOR SUPREME
-08:16:15.579 [main] DEBUG org.springframework.web.socket.server.support.WebSocketHandlerMapping - Patterns [/ws/**] in 'stompWebSocketHandlerMapping'
-08:16:15.592 [main] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-08:16:15.609 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+08:23:20.863 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+08:23:20.867 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+08:23:21.208 [main] DEBUG org.springframework.web.filter.CorsFilter - Filter 'corsFilter' configured for use
+08:23:21.510 [main] INFO  com.example.demo.service.NamelessArtifactService - 🚨 FOUND NAMELESS ARTIFACT: priority_processor_supreme - PRIORITY PROCESSOR SUPREME
+08:23:21.564 [main] DEBUG org.springframework.web.socket.server.support.WebSocketHandlerMapping - Patterns [/ws/**] in 'stompWebSocketHandlerMapping'
+08:23:21.579 [main] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+08:23:21.597 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.AIController:
 	
-08:16:15.610 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+08:23:21.597 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.BuildingController:
 	
-08:16:15.610 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+08:23:21.597 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.CausalController:
 	
-08:16:15.610 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+08:23:21.597 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.EpicContentController:
 	
-08:16:15.610 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+08:23:21.597 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.FourthWallController:
 	
-08:16:15.610 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+08:23:21.597 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.GameController:
 	
-08:16:15.610 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+08:23:21.597 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.ImageController:
 	
-08:16:15.610 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+08:23:21.597 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.LogoutController:
 	
-08:16:15.610 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+08:23:21.598 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.MagicItemController:
 	
-08:16:15.610 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+08:23:21.598 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.MetaCommandController:
 	
-08:16:15.612 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+08:23:21.599 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.MultiplayerController:
 	{[MESSAGE],[/game.join]}: handleJoin(Map)
 	{[MESSAGE],[/game.leave]}: handleLeave(Map)
 	{[MESSAGE],[/game.action]}: handleGameAction(Map)
 	{[MESSAGE],[/game.sync]}: handleSync(Map)
 	{[MESSAGE],[/game.chat]}: handleChat(Map)
-08:16:15.613 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+08:23:21.601 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.PersistenceController:
 	
-08:16:15.613 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+08:23:21.601 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.ScenarioController:
 	
-08:16:15.613 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+08:23:21.602 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+	c.e.d.c.SpellController:
+	
+08:23:21.602 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.TemporalDecayController:
 	
-08:16:15.613 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+08:23:21.602 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.TestController:
 	
-08:16:15.613 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+08:23:21.602 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.UnitController:
 	
-08:16:15.613 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+08:23:21.602 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	c.e.d.c.ZFCController:
 	
-08:16:15.615 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
+08:23:21.604 [main] DEBUG org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	
-08:16:15.652 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-08:16:15.700 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - 190 mappings in 'requestMappingHandlerMapping'
-08:16:15.709 [main] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-08:16:15.714 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
-08:16:15.773 [main] INFO  org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
-08:16:15.787 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
-08:16:15.795 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
-08:16:15.796 [main] DEBUG org.springframework.web.SimpLogging - clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
-08:16:15.796 [main] DEBUG org.springframework.web.SimpLogging - clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
-08:16:15.796 [main] INFO  org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler - Starting...
-08:16:15.796 [main] DEBUG org.springframework.web.SimpLogging - clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@35e7cdb2]
-08:16:15.796 [main] DEBUG org.springframework.web.SimpLogging - brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@35e7cdb2]
-08:16:15.796 [main] INFO  org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@35e7cdb2]]
-08:16:15.796 [main] INFO  org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler - Started.
-08:16:15.796 [main] DEBUG org.springframework.web.SimpLogging - clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-08:16:15.797 [main] DEBUG org.springframework.web.SimpLogging - brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-08:16:15.805 [main] INFO  com.example.demo.DemoApplication - Started DemoApplication in 2.341 seconds (JVM running for 2.594)
+08:23:22.002 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+08:23:22.097 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - 199 mappings in 'requestMappingHandlerMapping'
+08:23:22.111 [main] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+08:23:22.116 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+08:23:22.198 [main] INFO  org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+08:23:22.213 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+08:23:22.229 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+08:23:22.231 [main] DEBUG org.springframework.web.SimpLogging - clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+08:23:22.231 [main] DEBUG org.springframework.web.SimpLogging - clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+08:23:22.231 [main] INFO  org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler - Starting...
+08:23:22.231 [main] DEBUG org.springframework.web.SimpLogging - clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@c310aa3]
+08:23:22.231 [main] DEBUG org.springframework.web.SimpLogging - brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@c310aa3]
+08:23:22.231 [main] INFO  org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@c310aa3]]
+08:23:22.231 [main] INFO  org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler - Started.
+08:23:22.231 [main] DEBUG org.springframework.web.SimpLogging - clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+08:23:22.231 [main] DEBUG org.springframework.web.SimpLogging - brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+08:23:22.243 [main] INFO  com.example.demo.DemoApplication - Started DemoApplication in 3.099 seconds (JVM running for 3.386)
 🚀 Initializing scenarios from JSON files...
 🚀 Loading scenarios from JSON files...
 Hibernate: select scenario0_.id as id1_15_, scenario0_.artifacts as artifact2_15_, scenario0_.campaign_order as campaign3_15_, scenario0_.created_at as created_4_15_, scenario0_.defeat_condition as defeat_c5_15_, scenario0_.description as descript6_15_, scenario0_.difficulty as difficul7_15_, scenario0_.is_active as is_activ8_15_, scenario0_.is_campaign as is_campa9_15_, scenario0_.is_multiplayer as is_mult10_15_, scenario0_.map_height as map_hei11_15_, scenario0_.map_size as map_siz12_15_, scenario0_.map_width as map_wid13_15_, scenario0_.max_players as max_pla14_15_, scenario0_.name as name15_15_, scenario0_.neutral_creatures as neutral16_15_, scenario0_.next_scenario_id as next_sc17_15_, scenario0_.previous_scenario_id as previou18_15_, scenario0_.recommended_players as recomme19_15_, scenario0_.scenario_id as scenari20_15_, scenario0_.special_buildings as special21_15_, scenario0_.starting_resources as startin22_15_, scenario0_.terrain_distribution as terrain23_15_, scenario0_.time_limit as time_li24_15_, scenario0_.turn_limit as turn_li25_15_, scenario0_.updated_at as updated26_15_, scenario0_.victory_condition as victory27_15_, scenario0_.victory_requirement as victory28_15_ from scenarios scenario0_ where scenario0_.scenario_id=?
@@ -231,48 +234,24 @@ Hibernate: insert into scenarios (id, artifacts, campaign_order, created_at, def
 ✨ Loaded scenario: dragon-campaign - scenarios.dragon-campaign.name
 ✅ All scenarios loaded successfully from JSON files!
 ✅ Scenario initialization completed!
-08:16:35.264 [http-nio-8080-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-08:16:35.264 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-08:16:35.264 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
-08:16:35.264 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
-08:16:35.264 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected FixedThemeResolver
-08:16:35.265 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@363a1d8d
-08:16:35.265 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@1dfd39fe
-08:16:35.265 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
-08:16:35.265 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
-08:16:35.272 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/causal/health", parameters={}
-08:16:35.274 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to com.example.demo.controller.CausalController#health()
-08:16:35.288 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
-08:16:35.288 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{capabilities=[AXISI_PROCESSING, LENTUS_PROCESSING, CROSS_INTERACTION, TEMPORAL_SIMULATION], service (truncated)...]
-08:16:35.295 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
-08:16:55.652 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/causal/health", parameters={}
-08:16:55.653 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to com.example.demo.controller.CausalController#health()
-08:16:55.654 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
-08:16:55.654 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{capabilities=[AXISI_PROCESSING, LENTUS_PROCESSING, CROSS_INTERACTION, TEMPORAL_SIMULATION], service (truncated)...]
-08:16:55.654 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
-08:16:55.663 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/causal/health", parameters={}
-08:16:55.664 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to com.example.demo.controller.CausalController#health()
-08:16:55.664 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
-08:16:55.664 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{capabilities=[AXISI_PROCESSING, LENTUS_PROCESSING, CROSS_INTERACTION, TEMPORAL_SIMULATION], service (truncated)...]
-08:16:55.665 [http-nio-8080-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
-08:16:55.692 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/causal/cross-interaction", parameters={}
-08:16:55.692 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to com.example.demo.controller.CausalController#processCrossInteraction(Map)
-08:16:55.696 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [{items=[AXISI, LENTUS], scenario=test_auto}]
-08:16:55.700 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Failed to complete request: java.lang.NullPointerException: Cannot invoke "java.util.List.iterator()" because "interactions" is null
-08:16:55.700 [http-nio-8080-exec-7] ERROR org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException: Cannot invoke "java.util.List.iterator()" because "interactions" is null] with root cause
-java.lang.NullPointerException: Cannot invoke "java.util.List.iterator()" because "interactions" is null
-	at com.example.demo.controller.CausalController.processCrossInteraction(CausalController.java:69) ~[classes/:?]
-	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
-	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
-	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
-	at java.lang.reflect.Method.invoke(Method.java:569) ~[?:?]
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-5.3.31.jar:5.3.31]
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-5.3.31.jar:5.3.31]
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-5.3.31.jar:5.3.31]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) ~[spring-webmvc-5.3.31.jar:5.3.31]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) ~[spring-webmvc-5.3.31.jar:5.3.31]
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.3.31.jar:5.3.31]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072) ~[spring-webmvc-5.3.31.jar:5.3.31]
+08:23:33.197 [http-nio-8080-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+08:23:33.197 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+08:23:33.197 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
+08:23:33.197 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
+08:23:33.197 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected FixedThemeResolver
+08:23:33.198 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@4ba56bbe
+08:23:33.198 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@e4b9a64
+08:23:33.198 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+08:23:33.198 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+08:23:33.203 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/spells/cast", parameters={}
+08:23:33.206 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to com.example.demo.controller.SpellController#castSpell(Map)
+08:23:33.206 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Failed to complete request: java.lang.IllegalArgumentException: When allowCredentials is true, allowedOrigins cannot contain the special value "*" since that cannot be set on the "Access-Control-Allow-Origin" response header. To allow credentials to a set of origins, list them explicitly or consider using "allowedOriginPatterns" instead.
+08:23:33.208 [http-nio-8080-exec-1] ERROR org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.IllegalArgumentException: When allowCredentials is true, allowedOrigins cannot contain the special value "*" since that cannot be set on the "Access-Control-Allow-Origin" response header. To allow credentials to a set of origins, list them explicitly or consider using "allowedOriginPatterns" instead.] with root cause
+java.lang.IllegalArgumentException: When allowCredentials is true, allowedOrigins cannot contain the special value "*" since that cannot be set on the "Access-Control-Allow-Origin" response header. To allow credentials to a set of origins, list them explicitly or consider using "allowedOriginPatterns" instead.
+	at org.springframework.web.cors.CorsConfiguration.validateAllowCredentials(CorsConfiguration.java:495) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.handler.AbstractHandlerMapping.getHandler(AbstractHandlerMapping.java:532) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1266) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1048) ~[spring-webmvc-5.3.31.jar:5.3.31]
 	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965) ~[spring-webmvc-5.3.31.jar:5.3.31]
 	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.3.31.jar:5.3.31]
 	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909) ~[spring-webmvc-5.3.31.jar:5.3.31]
@@ -320,41 +299,138 @@ java.lang.NullPointerException: Cannot invoke "java.util.List.iterator()" becaus
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
 	at java.lang.Thread.run(Thread.java:840) ~[?:?]
-08:16:55.708 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
-08:16:55.709 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
-08:16:55.711 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
-08:16:55.711 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Thu Jul 24 08:16:55 CEST 2025, status=500, error=Internal Server Error, path=/api/causal/ (truncated)...]
-08:16:55.721 [http-nio-8080-exec-7] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 500
-08:16:55.744 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/causal/temporal-simulation", parameters={}
-08:16:55.744 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to com.example.demo.controller.CausalController#runTemporalSimulation(Map)
-08:16:55.744 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [{scenario=axisi_vs_lentus_battle, turns=3}]
-08:16:55.745 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
-08:16:55.745 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{scenario=axisi_vs_lentus_battle, success=true, totalTurns=3, turnResults=[{axisiPower=3.09, tempora (truncated)...]
-08:16:55.746 [http-nio-8080-exec-8] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
-08:17:15.588 [MessageBroker-2] INFO  org.springframework.web.socket.config.WebSocketMessageBrokerStats - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 3, active threads = 1, queued tasks = 1, completed tasks = 1]
-08:20:58.471 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/spells/cast", parameters={}
-08:20:58.482 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
-08:20:58.488 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
-08:20:58.488 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
-08:20:58.490 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
-08:20:58.490 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
-08:20:58.491 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
-08:20:58.492 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Thu Jul 24 08:20:58 CEST 2025, status=404, error=Not Found, path=/api/spells/cast}]
-08:20:58.493 [http-nio-8080-exec-10] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
-08:23:11.693 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/spells/cast", parameters={}
-08:23:11.697 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
-08:23:11.701 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.resource.ResourceHttpRequestHandler - Resource not found
-08:23:11.702 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
-08:23:11.703 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
-08:23:11.704 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
-08:23:11.706 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
-08:23:11.706 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Thu Jul 24 08:23:11 CEST 2025, status=404, error=Not Found, path=/api/spells/cast}]
-08:23:11.707 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 404
+08:23:33.213 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+08:23:33.214 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+08:23:33.227 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+08:23:33.228 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Thu Jul 24 08:23:33 CEST 2025, status=500, error=Internal Server Error, path=/api/spells/ (truncated)...]
+08:23:33.240 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 500
+08:23:39.771 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/spells/cast-temporal", parameters={}
+08:23:39.771 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to com.example.demo.controller.SpellController#castTemporalSpell(Map)
+08:23:39.771 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Failed to complete request: java.lang.IllegalArgumentException: When allowCredentials is true, allowedOrigins cannot contain the special value "*" since that cannot be set on the "Access-Control-Allow-Origin" response header. To allow credentials to a set of origins, list them explicitly or consider using "allowedOriginPatterns" instead.
+08:23:39.772 [http-nio-8080-exec-2] ERROR org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.IllegalArgumentException: When allowCredentials is true, allowedOrigins cannot contain the special value "*" since that cannot be set on the "Access-Control-Allow-Origin" response header. To allow credentials to a set of origins, list them explicitly or consider using "allowedOriginPatterns" instead.] with root cause
+java.lang.IllegalArgumentException: When allowCredentials is true, allowedOrigins cannot contain the special value "*" since that cannot be set on the "Access-Control-Allow-Origin" response header. To allow credentials to a set of origins, list them explicitly or consider using "allowedOriginPatterns" instead.
+	at org.springframework.web.cors.CorsConfiguration.validateAllowCredentials(CorsConfiguration.java:495) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.handler.AbstractHandlerMapping.getHandler(AbstractHandlerMapping.java:532) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1266) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1048) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:555) ~[tomcat-embed-core-9.0.83.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623) ~[tomcat-embed-core-9.0.83.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96) ~[spring-boot-actuator-2.7.18.jar:2.7.18]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1794) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at java.lang.Thread.run(Thread.java:840) ~[?:?]
+08:23:39.772 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for POST "/error", parameters={}
+08:23:39.772 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+08:23:39.773 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+08:23:39.773 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Thu Jul 24 08:23:39 CEST 2025, status=500, error=Internal Server Error, path=/api/spells/ (truncated)...]
+08:23:39.773 [http-nio-8080-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 500
+08:23:45.028 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/spells/hero/arthur/available", parameters={}
+08:23:45.029 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to com.example.demo.controller.SpellController#getAvailableSpells(String, Integer, Integer)
+08:23:45.029 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Failed to complete request: java.lang.IllegalArgumentException: When allowCredentials is true, allowedOrigins cannot contain the special value "*" since that cannot be set on the "Access-Control-Allow-Origin" response header. To allow credentials to a set of origins, list them explicitly or consider using "allowedOriginPatterns" instead.
+08:23:45.029 [http-nio-8080-exec-3] ERROR org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.IllegalArgumentException: When allowCredentials is true, allowedOrigins cannot contain the special value "*" since that cannot be set on the "Access-Control-Allow-Origin" response header. To allow credentials to a set of origins, list them explicitly or consider using "allowedOriginPatterns" instead.] with root cause
+java.lang.IllegalArgumentException: When allowCredentials is true, allowedOrigins cannot contain the special value "*" since that cannot be set on the "Access-Control-Allow-Origin" response header. To allow credentials to a set of origins, list them explicitly or consider using "allowedOriginPatterns" instead.
+	at org.springframework.web.cors.CorsConfiguration.validateAllowCredentials(CorsConfiguration.java:495) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.handler.AbstractHandlerMapping.getHandler(AbstractHandlerMapping.java:532) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1266) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1048) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529) ~[tomcat-embed-core-9.0.83.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.3.31.jar:5.3.31]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623) ~[tomcat-embed-core-9.0.83.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96) ~[spring-boot-actuator-2.7.18.jar:2.7.18]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.31.jar:5.3.31]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1794) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.83.jar:9.0.83]
+	at java.lang.Thread.run(Thread.java:840) ~[?:?]
+08:23:45.030 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - "ERROR" dispatch for GET "/error", parameters={}
+08:23:45.030 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+08:23:45.030 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+08:23:45.030 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing [{timestamp=Thu Jul 24 08:23:45 CEST 2025, status=500, error=Internal Server Error, path=/api/spells/ (truncated)...]
+08:23:45.031 [http-nio-8080-exec-3] DEBUG org.springframework.web.servlet.DispatcherServlet - Exiting from "ERROR" dispatch, status 500
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  07:04 min
-[INFO] Finished at: 2025-07-24T08:23:17+02:00
+[INFO] Total time:  53.941 s
+[INFO] Finished at: 2025-07-24T08:24:11+02:00
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:2.7.18:run (default-cli) on project demo: Application finished with exit code: 137 -> [Help 1]
 [ERROR] 
