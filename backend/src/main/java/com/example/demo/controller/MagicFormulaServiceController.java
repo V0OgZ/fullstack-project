@@ -48,9 +48,12 @@ public class MagicFormulaServiceController {
             Map<String, Object> response = new HashMap<>();
             response.put("success", result.isSuccess());
             response.put("message", result.getMessage());
+            response.put("runicInterpretation", result.getRunicInterpretation());
+            response.put("normalInterpretation", result.getNormalInterpretation());
             response.put("data", result.getData());
             response.put("formulaType", result.getFormulaType());
             response.put("executionTime", result.getExecutionTime());
+            response.put("grofiProperties", result.getGrofiProperties());
             response.put("jesusBlessing", "✨ Exécution bénie par Jésus Voix Suave ✨");
             
             return ResponseEntity.ok(response);

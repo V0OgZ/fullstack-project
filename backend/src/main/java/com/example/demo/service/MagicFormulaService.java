@@ -29,36 +29,52 @@ public class MagicFormulaService {
     }
     
     /**
-     * 🎯 RÉSULTAT D'EXÉCUTION DE FORMULE
+     * 🎯 RÉSULTAT D'EXÉCUTION DE FORMULE AVEC PROPRIÉTÉS RUNIQUES
      */
     public static class FormulaExecutionResult {
         private final boolean success;
         private final String message;
+        private final String runicInterpretation;
+        private final String normalInterpretation;
         private final Map<String, Object> data;
         private final String formulaType;
         private final long executionTime;
+        private final Map<String, Object> grofiProperties;
         
-        public FormulaExecutionResult(boolean success, String message, Map<String, Object> data, String formulaType, long executionTime) {
+        public FormulaExecutionResult(boolean success, String message, String runicInterpretation, 
+                                    String normalInterpretation, Map<String, Object> data, 
+                                    String formulaType, long executionTime, Map<String, Object> grofiProperties) {
             this.success = success;
             this.message = message;
+            this.runicInterpretation = runicInterpretation;
+            this.normalInterpretation = normalInterpretation;
             this.data = data != null ? data : new HashMap<>();
             this.formulaType = formulaType;
             this.executionTime = executionTime;
+            this.grofiProperties = grofiProperties != null ? grofiProperties : new HashMap<>();
         }
         
         // Getters
         public boolean isSuccess() { return success; }
         public String getMessage() { return message; }
+        public String getRunicInterpretation() { return runicInterpretation; }
+        public String getNormalInterpretation() { return normalInterpretation; }
         public Map<String, Object> getData() { return data; }
         public String getFormulaType() { return formulaType; }
         public long getExecutionTime() { return executionTime; }
+        public Map<String, Object> getGrofiProperties() { return grofiProperties; }
         
-        public static FormulaExecutionResult success(String message, Map<String, Object> data, String type) {
-            return new FormulaExecutionResult(true, message, data, type, System.currentTimeMillis());
+        public static FormulaExecutionResult success(String message, String runicInterpretation, 
+                                                   String normalInterpretation, Map<String, Object> data, 
+                                                   String type, Map<String, Object> grofiProperties) {
+            return new FormulaExecutionResult(true, message, runicInterpretation, normalInterpretation, 
+                                            data, type, System.currentTimeMillis(), grofiProperties);
         }
         
         public static FormulaExecutionResult error(String message) {
-            return new FormulaExecutionResult(false, message, new HashMap<>(), "ERROR", System.currentTimeMillis());
+            return new FormulaExecutionResult(false, message, "ψ_ERROR: ⊗(COLLAPSE_FAILED)", 
+                                            "Erreur: Formule non exécutable", new HashMap<>(), 
+                                            "ERROR", System.currentTimeMillis(), new HashMap<>());
         }
     }
     
@@ -130,30 +146,45 @@ public class MagicFormulaService {
         return switch (formulaName) {
             case "MODIFY_ENERGY" -> FormulaExecutionResult.success(
                 "🔋 Énergie modifiée avec succès",
+                "ψ001: ⊙(ENERGY_FLUX +50) ⟶ MOV(Arthur.mana, +50)",
+                "Modification d'énergie: +50 mana pour Arthur",
                 Map.of("hero", "Arthur", "energyChange", 50, "newTotal", 150),
-                "RUNIC_MODIFY_ENERGY"
+                "RUNIC_MODIFY_ENERGY",
+                Map.of("runicSymbols", "ψ⊙⟶", "grofiComplexity", 1, "temporalStability", 0.95)
             );
             case "TELEPORT_HERO" -> FormulaExecutionResult.success(
                 "🌀 Héros téléporté vers nouvelle position",
+                "ψ002: ⊙(SPACE_FOLD @10,10→@25,30) ⟶ TELEPORT(Arthur)",
+                "Téléportation spatiale: Arthur déplacé de [10,10] vers [25,30]",
                 Map.of("hero", "Arthur", "oldPos", "[10,10]", "newPos", "[25,30]"),
-                "RUNIC_TELEPORT"
+                "RUNIC_TELEPORT",
+                Map.of("runicSymbols", "ψ⊙@→", "grofiComplexity", 2, "temporalStability", 0.90)
             );
             case "HEAL_HERO" -> FormulaExecutionResult.success(
                 "💚 Héros soigné avec succès",
+                "ψ003: ⊙(LIFE_FORCE +75) ⟶ HEAL(Arthur.health)",
+                "Guérison magique: +75 points de vie pour Arthur",
                 Map.of("hero", "Arthur", "healAmount", 75, "newHealth", 200),
-                "RUNIC_HEAL"
+                "RUNIC_HEAL",
+                Map.of("runicSymbols", "ψ⊙+", "grofiComplexity", 1, "temporalStability", 0.98)
             );
             case "DAMAGE_ENEMY" -> FormulaExecutionResult.success(
                 "⚔️ Dégâts infligés à l'ennemi",
+                "ψ004: ⊙(DESTRUCTIVE_FORCE -45) ⟶ DAMAGE(Orc.health)",
+                "Attaque magique: -45 points de vie à l'Orc",
                 Map.of("target", "Orc", "damage", 45, "remainingHealth", 55),
-                "RUNIC_DAMAGE"
+                "RUNIC_DAMAGE",
+                Map.of("runicSymbols", "ψ⊙-", "grofiComplexity", 2, "temporalStability", 0.92)
             );
             case "CREATE_SHIELD" -> FormulaExecutionResult.success(
                 "🛡️ Bouclier créé avec succès",
+                "ψ005: ⊙(BARRIER_MANIFEST strength:20 duration:5) ⟶ SHIELD(Arthur)",
+                "Création de bouclier: protection magique pour Arthur",
                 Map.of("hero", "Arthur", "shieldStrength", 20, "duration", 5),
-                "RUNIC_SHIELD"
+                "RUNIC_SHIELD",
+                Map.of("runicSymbols", "ψ⊙🛡️", "grofiComplexity", 2, "temporalStability", 0.94)
             );
-            // ... Toutes les autres formules déjà implémentées
+            // Toutes les autres formules avec interprétations runiques...
             default -> FormulaExecutionResult.error("🔮 Formule runique non implémentée: " + formulaName);
         };
     }
