@@ -35,12 +35,14 @@ public class MagicFormulaEngine {
     private Map<String, Long> formulaExecutionTimes = new HashMap<>();
     private int totalWalterFlashbacks = 0;
     
-    // 🔮 FORMULES SIMPLES POUR TESTS (21 formules - 5 originales + 16 nouvelles)
+    // 🔮 FORMULES SIMPLES POUR TESTS (29 formules - 5 originales + 24 nouvelles)
     private static final List<String> SIMPLE_TEST_FORMULAS = Arrays.asList(
         "MODIFY_ENERGY", "TELEPORT_HERO", "HEAL_HERO", "DAMAGE_ENEMY", "CREATE_SHIELD",
         "CREATE_EFFECT", "AMPLIFY", "CONSTRUCTIVE", "DESTRUCTIVE", "COLLAPSE_TEMPORAL_STATES",
         "TEMPORAL_BOOST", "ENERGY_DRAIN", "PHASE_SHIFT", "QUANTUM_LEAP", "MANA_RESTORE",
-        "SPELL_REFLECT", "INVISIBILITY", "SPEED_BOOST", "STRENGTH_BOOST", "DEFENSE_BOOST", "LUCK_MODIFIER"
+        "SPELL_REFLECT", "INVISIBILITY", "SPEED_BOOST", "STRENGTH_BOOST", "DEFENSE_BOOST", 
+        "LUCK_MODIFIER", "MORALE_BOOST", "EXPERIENCE_GAIN", "LEVEL_UP", "SKILL_BOOST",
+        "ARTIFACT_ENHANCE", "WEAPON_ENCHANT", "ARMOR_ENCHANT", "POTION_CREATE"
     );
     
     /**
