@@ -16,17 +16,18 @@ import java.util.ArrayList;
 /**
  * 🎮 SCENARIO CONTROLLER - SYSTÈME UNIFIÉ
  * =======================================
- * @deprecated Potentiellement non utilisé par frontend actuel (port 8000)
+ * @deprecated DEPRECATED 2025-01-27 - Non utilisé par frontend actuel (port 8000)
  * 
  * Controller avec système i18n complet (EN/FR/RU) mais traductions hardcodées.
  * Gère scénarios prédéfinis et localisation complète.
  * 
- * STATUS: SUSPECT - Pas d'utilisation détectée dans frontend simple
- * UTILISATION: Frontend port 3000 React uniquement ?
- * POTENTIEL: Système de scénarios multilingue complet
+ * STATUS: 🚨 DEPRECATED - Pas d'utilisation détectée dans frontend simple port 8000
+ * UTILISATION: Potentiellement frontend port 3000 React uniquement
+ * POTENTIEL: Système de scénarios multilingue complet à réactiver si besoin
  * LOCALISATION: Traductions hardcodées EN/FR/RU (400+ lignes)
  * 
- * JEAN: "VÉRIFIER SI UTILISÉ - SYSTÈME I18N COMPLEXE MAIS PEUT-ÊTRE INUTILE"
+ * JEAN: "DEPRECATED MAIS GARDER POUR FUTUR MULTILINGUE - SYSTÈME I18N COMPLET!"
+ * RÉACTIVATION: Possible si frontend port 3000 React utilisé
  */
 @Deprecated
 @RestController
