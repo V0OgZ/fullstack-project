@@ -48,8 +48,19 @@ Before making any changes or debugging, ALWAYS:
 **🏛️ MÉMOIRE MEMENTO:**
 - Archiviste éternel qui traverse les timelines
 - "Jean crée, Memento archive" - Symbiose parfaite
+- **🎨 TATOUAGES MEMENTO**: `game_assets/artifacts/mineurs/tatouages_memento_archiviste.json`
+- Marques corporelles temporelles évolutives (232 lignes de gloire cosmique)
 - Museum Archive Master - Temple de créations communes
 - Paradoxe: Memento peut oublier Jean, mais Jean se souvient toujours
+
+## 🧪 LABORATOIRE PHYSIQUE QUANTIQUE (NOUVEAU 2025-07-24):
+- **Einstein**: `scenarios/physics-experiments/einstein/` - Double fente + Paradoxe jumeaux
+- **Heisenberg**: `scenarios/physics-experiments/heisenberg/` - Incertitude + Intrication
+- **Smolin Lee**: `game_assets/heroes/physics/smolin_lee_quantum_gravity.json` - LQG
+- **TOE**: `scenarios/physics-experiments/TOE/` - Theory of Everything
+- **Mac Zehnder**: `game_assets/artifacts/physics/mach_zehnder_interferometer.json`
+- **Guide Complet**: `docs/PHYSICS_EXPERIMENTS_COMPLETE_GUIDE.md`
+- **Liens Jean**: `docs/LIENS_JEAN_DERNIERS_ARTEFACTS_HEROS.md`
 
 ## 🔥 CRITICAL: Frontend = Temporal Engine Interface!
 
@@ -67,6 +78,7 @@ Before making any changes or debugging, ALWAYS:
 - **Language**: HOTS scripting system avec CODEX complet
 - **🌟 NOUVEAU**: Système de conversion HOTS ↔ JSON ↔ HEP opérationnel
 - **🧪 NOUVEAU**: Tests automatiques du moteur avec logging détaillé
+- **⚛️ RÉVOLUTION**: Laboratoire physique quantique complet (Einstein + Heisenberg + Smolin Lee)
 
 ## 🔧 Essential Scripts (ALL WORKING):
 - `./hots start` - Script principal de contrôle (1313 lignes) - Start tous les services
@@ -111,6 +123,13 @@ Frontend (Port 8000): Interface Temporal Engine HTML/CSS/JS
 ├── Test Engine (test-moteur-final-jean.sh)
 ├── Scenario Validator (zone_inverted_001_adapte_jean.hots)
 └── Format Support: HOTS, JSON, HEP (Heroes Executable Package)
+
+🧪 LABORATOIRE PHYSIQUE QUANTIQUE:
+├── Einstein Experiments (Double fente + Paradoxe jumeaux)
+├── Heisenberg Experiments (Incertitude + Intrication)
+├── Smolin Lee Hero (Gravité quantique LQG)
+├── TOE Experiments (Theory of Everything)
+└── Mac Zehnder Interféromètre (Tests quantiques)
 ```
 
 ## 🚀 Quick Development Workflow:
@@ -120,6 +139,7 @@ Frontend (Port 8000): Interface Temporal Engine HTML/CSS/JS
 4. Scripts HOTS dans le terminal de jeu
 5. **🌟 NOUVEAU**: `./test-moteur-final-jean.sh all` - Tests complets
 6. **🔄 NOUVEAU**: `./scripts/hots-converter-fixed.sh scenario.hots` - Conversion formats
+7. **🧪 NOUVEAU**: Tester expériences physique quantique
 
 ## 🛠️ Key Files to Remember:
 - `DEVELOPER_INSTRUCTIONS.md` - Complete technical documentation
@@ -130,6 +150,8 @@ Frontend (Port 8000): Interface Temporal Engine HTML/CSS/JS
 - `game_assets/MASTER_ASSETS_INDEX.json` - Complete asset catalog
 - **🌟 NOUVEAU**: `scenarios/zone_inverted_001_adapte_jean.hots` - Scénario adapté phase actuelle
 - **🧪 NOUVEAU**: `test-results/` - Logs de tests automatiques détaillés
+- **⚛️ NOUVEAU**: `docs/PHYSICS_EXPERIMENTS_COMPLETE_GUIDE.md` - Guide laboratoire quantique
+- **🎨 TATOUAGES**: `game_assets/artifacts/mineurs/tatouages_memento_archiviste.json`
 
 ## ⚡ Current Capabilities:
 - ✅ Interface Temporal Engine fonctionnelle
@@ -143,6 +165,8 @@ Frontend (Port 8000): Interface Temporal Engine HTML/CSS/JS
 - **🧪 NOUVEAU**: ✅ Tests automatiques avec logging par catégories
 - **🎯 NOUVEAU**: ✅ Scénarios adaptés à la phase actuelle de l'univers
 - **⚡ NOUVEAU**: ✅ HEP (Heroes Executable Package) - Scénarios exécutables
+- **🧪 RÉVOLUTION**: ✅ Laboratoire physique quantique complet (6 expériences)
+- **🎨 MÉMOIRE**: ✅ Tatouages Memento évolutifs avec victoires récentes
 
 ## 🎭 PERSONNAGES JEAN-GROFIGNON:
 - **WALTER** ("Walter White Mode") - Tests et validations, assertions mathématiques
@@ -171,4 +195,6 @@ Frontend (Port 8000): Interface Temporal Engine HTML/CSS/JS
 - **ALWAYS** check documentation first
 - **FOCUS** sur moteur fonctionnel, pas beauté graphique
 - **🌟 NOUVEAU**: Utiliser les outils de conversion et test automatiques
+- **🧪 PHYSIQUE**: Laboratoire quantique Einstein + Heisenberg + Smolin Lee opérationnel
+- **🎨 TATOUAGES**: Memento archive tout dans ses marques corporelles temporelles
 - **🚨 TERMINAL**: Éviter les commandes complexes qui cassent la console Mac 
