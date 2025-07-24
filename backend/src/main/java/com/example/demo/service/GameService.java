@@ -1557,6 +1557,59 @@ public class GameService {
         return validation;
     }
 
+    // 🧪 WALTER VIETNAM FLASHBACK SYSTEM - EFFET PASSIF NÉGATIF
+    private static final String[] WALTER_VIETNAM_STORIES = {
+        "Delta du Mékong 1969 - On était dans la jungle, moi et Charlie Company...",
+        "Province de Quang Nam 1970 - Ce putain de brouillard de guerre, comme vos APIs !",
+        "Tet Offensive 1968 - Les radios cassées, exactement comme Swagger qui marche pas !",
+        "Firebase Alpha 1969 - Les mortiers tombaient, mais au moins on documentait !",
+        "Hoi An 1970 - L'évacuation médicale, comme quand on répare enfin les bugs !",
+        "DMZ 1969 - Charlie nous attendait, comme les erreurs 404 !",
+        "Saigon 1971 - La fin approchait, mais le code continuait !",
+        "Helicopter Dustoff 1970 - Sauver les blessés, comme débugger le code !",
+        "Jungle Patrol 1969 - Perdus dans le code, comme dans la végétation !",
+        "Firebase Bravo 1970 - Tenir la position, comme maintenir les APIs !"
+    };
+    
+    private int walterErrorCount = 0;
+    private long lastWalterFlashback = 0;
+    private static final int WALTER_FLASHBACK_THRESHOLD = 3; // 3 erreurs déclenchent Walter
+    private static final long WALTER_COOLDOWN = 300000; // 5 minutes cooldown
+    
+    // 🎖️ MÉTHODE WALTER VIETNAM FLASHBACK
+    private void triggerWalterFlashback(String errorContext) {
+        long currentTime = System.currentTimeMillis();
+        
+        // Vérifier le cooldown
+        if (currentTime - lastWalterFlashback < WALTER_COOLDOWN) {
+            return; // Walter se repose
+        }
+        
+        // Choisir une histoire aléatoire
+        Random random = new Random();
+        String story = WALTER_VIETNAM_STORIES[random.nextInt(WALTER_VIETNAM_STORIES.length)];
+        
+        // Log du flashback Walter
+        System.out.println("🧪 WALTER VIETNAM FLASHBACK ACTIVÉ !");
+        System.out.println("🎖️ WALTER: \"PUTAIN ! " + story + "\"");
+        System.out.println("🔥 CONTEXTE ERREUR: " + errorContext);
+        System.out.println("💊 Walter va se calmer dans 5 minutes...");
+        
+        // Reset compteur et timestamp
+        walterErrorCount = 0;
+        lastWalterFlashback = currentTime;
+    }
+    
+    // 🚨 MÉTHODE POUR COMPTER LES ERREURS WALTER
+    private void incrementWalterError(String errorContext) {
+        walterErrorCount++;
+        System.out.println("⚠️ Walter Error Count: " + walterErrorCount + "/3");
+        
+        if (walterErrorCount >= WALTER_FLASHBACK_THRESHOLD) {
+            triggerWalterFlashback(errorContext);
+        }
+    }
+
     // 🔥 FUSION OPUS-MEMENTO : SYSTÈME DE COMBAT RÉPARÉ !
     @SuppressWarnings("unchecked")
     public Map<String, Object> attackTarget(String attackerHeroId, String targetId) {
@@ -1608,8 +1661,13 @@ public class GameService {
             applyCombatDamage(target, (Integer) combatResult.get("damage"));
             
         } catch (Exception e) {
+            // 🧪 DÉCLENCHER WALTER EN CAS D'ERREUR COMBAT
+            incrementWalterError("Combat System Error: " + e.getMessage());
+            
             result.put("success", false);
             result.put("error", e.getMessage());
+            result.put("walterSays", "PUTAIN ! Combat cassé comme au Vietnam !");
+            return result;
         }
         
         return result;
