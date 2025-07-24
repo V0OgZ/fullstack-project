@@ -30,6 +30,7 @@ show_help() {
     echo -e "  ${GREEN}status${NC}      Affiche le statut des services"
     echo -e "  ${GREEN}test${NC}        Lance les tests (voir options ci-dessous)"
     echo -e "  ${GREEN}generate${NC}    🧠 Génère la documentation MD depuis JSON (Memento)"
+    echo -e "  ${GREEN}translate${NC}   📜 Traduit un scénario HOTS en narration littéraire"
     echo -e "  ${GREEN}map${NC}         🗺️  Gestion des maps et terrains"
     echo -e "  ${GREEN}replay${NC}      📹 Système de replay des parties"
     echo -e "  ${GREEN}editor${NC}      🎨 Éditeur visuel script spatio-temporel"
@@ -80,6 +81,7 @@ show_help() {
     echo -e "  ${CYAN}./hots compile${NC}           # 🔧 Compilation avec debug"
     echo -e "  ${CYAN}./hots logs${NC}              # 📋 Logs en temps réel"
     echo -e "  ${CYAN}./hots generate${NC}          # 🧠 Génère tous les MD depuis JSON"
+    echo -e "  ${CYAN}./hots translate scenario.hots${NC} # 📜 Traduit HOTS en narration"
     echo -e "  ${CYAN}./hots map list${NC}          # 🗺️  Liste les maps disponibles"
     echo -e "  ${CYAN}./hots replay center${NC}     # 🎬 Centre de Replay complet"
     echo -e "  ${CYAN}./hots scenario list${NC}     # 🎬 Liste les scénarios HEP disponibles"
@@ -837,6 +839,61 @@ generate_md_docs() {
     fi
 }
 
+# 📜 Fonction de traduction HOTS → Littéraire - OPUS
+translate_scenario() {
+    local scenario_file="$1"
+    
+    echo -e "${PURPLE}📜 OPUS - Traduction Littéraire Heroes of Time${NC}"
+    echo -e "${PURPLE}===============================================${NC}"
+    echo ""
+    
+    # Vérifier que le script existe
+    if [ ! -f "scripts/generate-scenario-translation.py" ]; then
+        echo -e "${RED}❌ Script de traduction non trouvé: scripts/generate-scenario-translation.py${NC}"
+        return 1
+    fi
+    
+    # Si aucun fichier spécifié, afficher l'aide
+    if [ -z "$scenario_file" ]; then
+        echo -e "${YELLOW}Usage: ./hots translate <fichier.hots>${NC}"
+        echo ""
+        echo -e "${CYAN}Exemples:${NC}"
+        echo -e "  ${GREEN}./hots translate scenarios/bataille_temporelle.hots${NC}"
+        echo -e "  ${GREEN}./hots translate scenarios/reconciliation_vince_opus.hots${NC}"
+        echo ""
+        echo -e "${CYAN}📋 Scénarios disponibles:${NC}"
+        if [ -d "scenarios" ]; then
+            ls -1 scenarios/*.hots 2>/dev/null | head -10
+        fi
+        if [ -d "frontend/public/game_assets/scenarios/hots" ]; then
+            echo -e "${CYAN}📋 Autres scénarios:${NC}"
+            ls -1 frontend/public/game_assets/scenarios/hots/*.hots 2>/dev/null | head -10
+        fi
+        return 0
+    fi
+    
+    # Vérifier que le fichier existe
+    if [ ! -f "$scenario_file" ]; then
+        echo -e "${RED}❌ Fichier non trouvé: $scenario_file${NC}"
+        return 1
+    fi
+    
+    # Lancer la traduction
+    echo -e "${CYAN}🔮 Traduction en cours de: $scenario_file${NC}"
+    python3 scripts/generate-scenario-translation.py "$scenario_file"
+    
+    # Afficher le résultat
+    if [ $? -eq 0 ]; then
+        local output_name="${scenario_file##*/}"
+        output_name="${output_name%.hots}_LITERARY.md"
+        echo -e "${GREEN}✅ Traduction générée: docs/scenarios/generated/$output_name${NC}"
+        echo -e "${YELLOW}💡 Ouvrez le fichier pour lire la narration épique !${NC}"
+    else
+        echo -e "${RED}❌ Erreur lors de la traduction${NC}"
+        return 1
+    fi
+}
+
 # 🗺️ Fonctions MAP
 manage_maps() {
     local action="$1"
@@ -1247,6 +1304,9 @@ case "${1:-help}" in
         ;;
     "generate")
         generate_md_docs
+        ;;
+    "translate")
+        translate_scenario "$2"
         ;;
     "map")
         manage_maps "$2" "$3"
