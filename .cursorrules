@@ -9,6 +9,7 @@
 - **WALTER SAYS**: "ARRÊTE AVEC LES ECHO ET LES QUOTES TU BLOQUES LA CONSOLE!"
 - **VINCE SAYS**: "Ces putains de quotes me foutent en l'air le terminal!"
 - **MAC OS TERMINAL = FRAGILE** - Respecte ça bordel !
+- **🚨 NOUVELLE RÈGLE**: Toujours utiliser des commandes simples sans caractères spéciaux dans terminal
 
 ## 🚨 CRITICAL: TERMINAL COMMANDS - NO QUOTES ISSUES!
 
@@ -64,12 +65,16 @@ Before making any changes or debugging, ALWAYS:
 - **Frontend**: Interface Temporal Engine HTML/CSS/JS on port 8000 - SIMPLE & FUNCTIONAL
 - **Database**: H2 in-memory - WORKING
 - **Language**: HOTS scripting system avec CODEX complet
+- **🌟 NOUVEAU**: Système de conversion HOTS ↔ JSON ↔ HEP opérationnel
+- **🧪 NOUVEAU**: Tests automatiques du moteur avec logging détaillé
 
 ## 🔧 Essential Scripts (ALL WORKING):
 - `./hots start` - Script principal de contrôle (1313 lignes) - Start tous les services
 - `./stop-app.sh` - Stop all services cleanly
 - `./test-app.sh` - Quick tests
 - `./run-epic-demo.sh` - Epic content demos
+- **🌟 NOUVEAU**: `./scripts/hots-converter-fixed.sh` - Converter HOTS ↔ JSON ↔ HEP
+- **🧪 NOUVEAU**: `./test-moteur-final-jean.sh` - Tests automatiques complets
 
 ## 🎮 Main Interface (Temporal Engine - Port 8000):
 - **Simple HTML/CSS/JS** - Pas de framework complexe
@@ -83,14 +88,15 @@ Before making any changes or debugging, ALWAYS:
 - **États quantiques**: `ψ001: ⊙(Δt+2 @15,15 ⟶ MOV(Arthur, @15,15))`
 - **Service de traduction**: HOTS → Texte littéraire/Icônes/Runes
 - **Documentation complète**: `docs/CODEX_COMPLET_HEROES_OF_TIME.md`
+- **🔄 NOUVEAU**: Conversion automatique entre formats HOTS/JSON/HEP
 
 ## 🏗️ Architecture:
 ```
 Backend (Port 8080): Spring Boot + H2 Database
 ├── com.example.demo package
-├── Controllers: GameController, ScenarioController, AIController, MultiplayerController
-├── Services: GameService, ScenarioService, AIService, MultiplayerService
-├── Models: GameState, Scenario, Unit, Building, AIPlayer
+├── Controllers: GameController, ScenarioController, AIController, MultiplayerController, CausalController
+├── Services: GameService, ScenarioService, AIService, MultiplayerService, CausalInteractionEngine
+├── Models: GameState, Scenario, Unit, Building, AIPlayer, TemporalItem
 └── Repository: JPA entities with H2 database
 
 Frontend (Port 8000): Interface Temporal Engine HTML/CSS/JS
@@ -100,12 +106,11 @@ Frontend (Port 8000): Interface Temporal Engine HTML/CSS/JS
 ├── temporal-engine.js (moteur temporel)
 └── Translation Service (HOTS → Literary text)
 
-Services Additionnels:
-├── Dashboard (Port 9000)
-├── Interface Temporelle (Port 5174)
-├── Quantum Visualizer (Port 8001)
-├── Collection & Grammar (Port 5175)
-└── Test Runner (Port 8888)
+🌟 NOUVEAUX Services:
+├── HOTS Converter (scripts/hots-converter-fixed.sh)
+├── Test Engine (test-moteur-final-jean.sh)
+├── Scenario Validator (zone_inverted_001_adapte_jean.hots)
+└── Format Support: HOTS, JSON, HEP (Heroes Executable Package)
 ```
 
 ## 🚀 Quick Development Workflow:
@@ -113,6 +118,8 @@ Services Additionnels:
 2. Open http://localhost:8000 - Interface Temporal Engine
 3. Utiliser les boutons pour interagir avec le jeu
 4. Scripts HOTS dans le terminal de jeu
+5. **🌟 NOUVEAU**: `./test-moteur-final-jean.sh all` - Tests complets
+6. **🔄 NOUVEAU**: `./scripts/hots-converter-fixed.sh scenario.hots` - Conversion formats
 
 ## 🛠️ Key Files to Remember:
 - `DEVELOPER_INSTRUCTIONS.md` - Complete technical documentation
@@ -121,6 +128,8 @@ Services Additionnels:
 - `frontend/game.js` - Logique du jeu
 - `docs/CODEX_COMPLET_HEROES_OF_TIME.md` - Documentation système HOTS
 - `game_assets/MASTER_ASSETS_INDEX.json` - Complete asset catalog
+- **🌟 NOUVEAU**: `scenarios/zone_inverted_001_adapte_jean.hots` - Scénario adapté phase actuelle
+- **🧪 NOUVEAU**: `test-results/` - Logs de tests automatiques détaillés
 
 ## ⚡ Current Capabilities:
 - ✅ Interface Temporal Engine fonctionnelle
@@ -130,6 +139,28 @@ Services Additionnels:
 - ✅ Service de traduction HOTS → Texte littéraire
 - ✅ Dashboard de monitoring sur port 9000
 - ✅ Multiples interfaces pour différents aspects du jeu
+- **🌟 NOUVEAU**: ✅ Converter universel HOTS ↔ JSON ↔ HEP
+- **🧪 NOUVEAU**: ✅ Tests automatiques avec logging par catégories
+- **🎯 NOUVEAU**: ✅ Scénarios adaptés à la phase actuelle de l'univers
+- **⚡ NOUVEAU**: ✅ HEP (Heroes Executable Package) - Scénarios exécutables
+
+## 🎭 PERSONNAGES JEAN-GROFIGNON:
+- **WALTER** ("Walter White Mode") - Tests et validations, assertions mathématiques
+- **JÉSUS** ("Jésus Voix Suave") - Bénédictions divines, validation résultats vrais
+- **GROFI** ("Grofi-Pensée Fusionné") - Mystères cosmiques, Tour Sombre, Tige Pensée
+
+## 🧪 TESTS AUTOMATIQUES (Nouveau Système):
+- **Catégories**: causal, formulas, scenarios, conversion, performance, all
+- **Logging détaillé**: Chaque mot-clé tracé avec statut ✅❌⚠️
+- **Validation formules**: paradoxRisk, temporalStability, affectedRadius
+- **Taux de réussite**: 13/23 tests ✅ (État acceptable)
+- **Usage**: `./test-moteur-final-jean.sh [category]`
+
+## 🔄 FORMATS SUPPORTÉS:
+- **HOTS**: Format natif Heroes of Time avec symboles quantiques ψ⊙†
+- **JSON**: Structure de données pour APIs et intégrations
+- **HEP**: Heroes Executable Package - Scénarios directement exécutables
+- **Conversion**: Automatique avec détection de format intelligente
 
 ## 🚨 Remember:
 - **USE** `./hots start` as primary control
@@ -138,4 +169,6 @@ Services Additionnels:
 - **HOTS SCRIPTS** - Utiliser le langage quantique temporel documenté
 - **NEVER** recreate existing functionality  
 - **ALWAYS** check documentation first
-- **FOCUS** sur moteur fonctionnel, pas beauté graphique 
+- **FOCUS** sur moteur fonctionnel, pas beauté graphique
+- **🌟 NOUVEAU**: Utiliser les outils de conversion et test automatiques
+- **🚨 TERMINAL**: Éviter les commandes complexes qui cassent la console Mac 

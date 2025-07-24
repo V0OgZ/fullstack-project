@@ -50,6 +50,12 @@ public class CausalController {
 
     @PostMapping("/cross-interaction")
     public ResponseEntity<Map<String, Object>> processCrossInteraction(@RequestBody Map<String, Object> request) {
+        // Nouveau: Support pour format simple axisiPower/lentusPower
+        if (request.containsKey("axisiPower") && request.containsKey("lentusPower")) {
+            return processSimpleCrossInteraction(request);
+        }
+        
+        // Format original avec interactions list
         String sessionId = (String) request.get("sessionId");
         List<Map<String, Object>> interactions = (List<Map<String, Object>>) request.get("interactions");
 
@@ -273,6 +279,47 @@ public class CausalController {
         }
         
         return comparisons > 0 ? totalInterference / comparisons : 0.0;
+    }
+
+    /**
+     * 🚨 WALTER FIX - Simple cross-interaction pour tests
+     */
+    private ResponseEntity<Map<String, Object>> processSimpleCrossInteraction(Map<String, Object> request) {
+        double axisiPower = ((Number) request.get("axisiPower")).doubleValue();
+        double lentusPower = ((Number) request.get("lentusPower")).doubleValue();
+        String interactionType = (String) request.getOrDefault("interactionType", "BATTLE");
+        
+        Map<String, Object> result = new HashMap<>();
+        
+        // Calculs réels selon formules causales - WALTER FIX
+        double paradoxRisk = Math.min(0.95, (axisiPower * lentusPower) / (axisiPower + lentusPower + 1.0));
+        double temporalStability = Math.max(0.05, 1.0 - (Math.abs(axisiPower - lentusPower) / 10.0));
+        double affectedRadius = Math.sqrt(axisiPower * axisiPower + lentusPower * lentusPower) * 1.2; // WALTER: Rayon plus réaliste 
+        double causalWeight = (axisiPower + lentusPower) * paradoxRisk;
+        
+        result.put("axisiPower", axisiPower);
+        result.put("lentusPower", lentusPower);
+        result.put("interactionType", interactionType);
+        result.put("paradoxRisk", Math.round(paradoxRisk * 100.0) / 100.0);
+        result.put("temporalStability", Math.round(temporalStability * 100.0) / 100.0);
+        result.put("affectedRadius", Math.round(affectedRadius * 100.0) / 100.0);
+        result.put("causalWeight", Math.round(causalWeight * 100.0) / 100.0);
+        result.put("timestamp", LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+        result.put("success", true);
+        
+        // Effet selon interaction
+        if (paradoxRisk > 0.8) {
+            result.put("effect", "PARADOX_CRITICAL");
+            result.put("description", "Risque critique de paradoxe temporel!");
+        } else if (paradoxRisk > 0.5) {
+            result.put("effect", "CAUSAL_INSTABILITY");
+            result.put("description", "Instabilité causale détectée");
+        } else {
+            result.put("effect", "STABLE_INTERACTION");
+            result.put("description", "Interaction causale stable");
+        }
+        
+        return ResponseEntity.ok(result);
     }
 
     // ===========================

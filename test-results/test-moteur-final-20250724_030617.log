@@ -1,0 +1,58 @@
+[0;35m🌟 TEST MOTEUR FINAL - Jean-Grofignon Edition[0m
+[0;36m================================================================[0m
+[2025-07-24 03:06:17] [INFO] 🚀 Début des tests automatiques du moteur Heroes of Time
+[2025-07-24 03:06:17] [INFO] 📁 Logs sauvegardés dans: test-results/test-moteur-final-20250724_030617.log
+[2025-07-24 03:06:17] [INFO] 🎯 Catégorie de test: all
+[2025-07-24 03:06:17] [TEST] 🏥 Test de santé du backend...
+[2025-07-24 03:06:17] [KEYWORD] 🔍 BACKEND_HEALTH -> ✅ UP | Backend opérationnel
+[2025-07-24 03:06:17] [CATEGORY] 🔮 === TESTS ENDPOINTS CAUSAUX ===
+[2025-07-24 03:06:17] [TEST] 🧪 Test Cross-Interaction...
+[2025-07-24 03:06:17] [KEYWORD] 🔍 CROSS_INTERACTION -> ❌ FAIL | Erreur dans la réponse
+[2025-07-24 03:06:17] [TEST] 🧪 Test Temporal Simulation...
+[2025-07-24 03:06:17] [KEYWORD] 🔍 TEMPORAL_SIMULATION -> ✅ SUCCESS | Simulation réussie
+[2025-07-24 03:06:17] [KEYWORD] 🔍 AXISI_POWER -> ✅ CALCULATED | Puissance Axisi calculée
+[2025-07-24 03:06:17] [KEYWORD] 🔍 LENTUS_POWER -> ✅ CALCULATED | Puissance Lentus calculée
+[2025-07-24 03:06:17] [KEYWORD] 🔍 CAUSAL_BALANCE -> ✅ CALCULATED | Balance causale calculée
+[2025-07-24 03:06:17] [CATEGORY] 🧮 === TESTS FORMULES MATHÉMATIQUES ===
+[2025-07-24 03:06:17] [TEST] 🧮 Analyse des formules...
+[2025-07-24 03:06:17] [CATEGORY] 📜 === TESTS SCÉNARIOS HOTS ===
+[2025-07-24 03:06:17] [TEST] 📜 Test scénario: axis_vol_tresor_causal
+[2025-07-24 03:06:17] [KEYWORD] 🔍 HOTS_STRUCTURE -> ❌ INVALID | axis_vol_tresor_causal
+[2025-07-24 03:06:17] [TEST] 📜 Test scénario: claudius_opus_demo
+[2025-07-24 03:06:17] [KEYWORD] 🔍 HOTS_STRUCTURE -> ❌ INVALID | claudius_opus_demo
+[2025-07-24 03:06:17] [TEST] 📜 Test scénario: fusion_temporelle_jean_claudius_memento
+[2025-07-24 03:06:17] [KEYWORD] 🔍 HOTS_STRUCTURE -> ❌ INVALID | fusion_temporelle_jean_claudius_memento
+[2025-07-24 03:06:17] [TEST] 📜 Test scénario: jean-memento-synergie-test
+[2025-07-24 03:06:17] [KEYWORD] 🔍 HOTS_STRUCTURE -> ❌ INVALID | jean-memento-synergie-test
+[2025-07-24 03:06:17] [TEST] 📜 Test scénario: laboratoire_debutant_walter
+[2025-07-24 03:06:17] [KEYWORD] 🔍 HOTS_STRUCTURE -> ❌ INVALID | laboratoire_debutant_walter
+[2025-07-24 03:06:17] [TEST] 📜 Test scénario: test_quatrieme_mur
+[2025-07-24 03:06:17] [KEYWORD] 🔍 HOTS_STRUCTURE -> ❌ INVALID | test_quatrieme_mur
+[2025-07-24 03:06:17] [TEST] 📜 Test scénario: test_the_source_matrix_architect
+[2025-07-24 03:06:17] [KEYWORD] 🔍 HOTS_STRUCTURE -> ❌ INVALID | test_the_source_matrix_architect
+[2025-07-24 03:06:17] [TEST] 📜 Test scénario: test_tour_ancrage_zone8
+[2025-07-24 03:06:17] [KEYWORD] 🔍 HOTS_STRUCTURE -> ❌ INVALID | test_tour_ancrage_zone8
+[2025-07-24 03:06:17] [TEST] 📜 Test scénario: trou_noir_horizon_causal
+[2025-07-24 03:06:17] [KEYWORD] 🔍 HOTS_STRUCTURE -> ❌ INVALID | trou_noir_horizon_causal
+[2025-07-24 03:06:17] [TEST] 📜 Test scénario: zone_inverted_001_adapte_jean
+[2025-07-24 03:06:17] [KEYWORD] 🔍 HOTS_STRUCTURE -> ✅ VALID | zone_inverted_001_adapte_jean
+[2025-07-24 03:06:17] [KEYWORD] 🔍 HOTS_AUTHOR -> ✅ PRESENT | zone_inverted_001_adapte_jean
+[2025-07-24 03:06:17] [KEYWORD] 🔍 HOTS_SYMBOLS -> ✅ PRESENT | zone_inverted_001_adapte_jean
+[2025-07-24 03:06:17] [KEYWORD] 🔍 JEAN_CHARACTERS -> ✅ PRESENT | zone_inverted_001_adapte_jean
+[2025-07-24 03:06:17] [INFO] 📊 Total scénarios analysés: 10
+[2025-07-24 03:06:17] [CATEGORY] 🔄 === TESTS CONVERSION FORMATS ===
+[2025-07-24 03:06:17] [TEST] 🔄 Test conversion HOTS...
+[2025-07-24 03:06:17] [KEYWORD] 🔍 HOTS_TO_JSON -> ✅ SUCCESS | Fichier JSON trouvé
+[2025-07-24 03:06:17] [KEYWORD] 🔍 JSON_VALIDATION -> ✅ VALID | Structure JSON correcte
+[2025-07-24 03:06:17] [KEYWORD] 🔍 HOTS_TO_HEP -> ✅ SUCCESS | HEP exécutable trouvé
+[2025-07-24 03:06:17] [KEYWORD] 🔍 HEP_EXECUTION -> ✅ SUCCESS | HEP s'exécute correctement
+[2025-07-24 03:06:17] [REPORT] 📊 === GÉNÉRATION DU RAPPORT ===
+
+[0;35m📊 RAPPORT FINAL[0m
+[0;36m==================[0m
+[2025-07-24 03:06:17] [SUMMARY] Total tests: 23
+[2025-07-24 03:06:17] [SUMMARY] Succès: 13 ✅
+[2025-07-24 03:06:17] [SUMMARY] Échecs: 10 ❌
+[2025-07-24 03:06:17] [SUMMARY] Warnings: 0
+0 ⚠️
+[1;33m⚠️ MOTEUR EN ÉTAT ACCEPTABLE[0m
