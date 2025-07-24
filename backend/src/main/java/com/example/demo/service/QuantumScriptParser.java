@@ -251,19 +251,28 @@ public class QuantumScriptParser {
         Map<String, Object> data = new HashMap<>();
         data.put("command", projection.trim());
         
-        // Parser commandes HOTS
-        if (projection.contains("MOV(")) {
+        // Parser commandes HOTS (ANGLAIS + RUNES)
+        if (projection.contains("MOV(") || projection.contains("ᛗᛟᚢ(")) {
             data.put("type", "movement");
             data.put("action", "move");
-        } else if (projection.contains("BATTLE(")) {
+        } else if (projection.contains("BATTLE(") || projection.contains("ᛒᚨᛏᛏᛚᛖ(")) {
             data.put("type", "combat");
             data.put("action", "battle");
-        } else if (projection.contains("USE(")) {
+        } else if (projection.contains("USE(") || projection.contains("ᚢᛋᛖ(")) {
             data.put("type", "item_usage");
             data.put("action", "use");
-        } else if (projection.contains("CREATE(")) {
+        } else if (projection.contains("CREATE(") || projection.contains("ᚲᚱᛖᚨᛏᛖ(")) {
             data.put("type", "creation");
             data.put("action", "create");
+        } else if (projection.contains("HEAL(") || projection.contains("ᚺᛖᚨᛚ(")) {
+            data.put("type", "healing");
+            data.put("action", "heal");
+        } else if (projection.contains("TELEPORT(") || projection.contains("ᛏᛖᛚᛖ(")) {
+            data.put("type", "teleportation");
+            data.put("action", "teleport");
+        } else if (projection.contains("RESTORE(") || projection.contains("ᚱᛖᛋᛏ(")) {
+            data.put("type", "restoration");
+            data.put("action", "restore");
         } else {
             data.put("type", "unknown");
             data.put("action", "generic");

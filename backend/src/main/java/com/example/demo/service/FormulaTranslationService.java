@@ -37,6 +37,36 @@ public class FormulaTranslationService {
         put("cooldown", "temps de recharge");
     }};
 
+    // 🔮 MAPPING ANGLAIS → VRAIES RUNES (pour frontend)
+    private static final Map<String, String> ENGLISH_TO_RUNES = new HashMap<String, String>() {{
+        // Actions de base
+        put("HEAL", "ᚺᛖᚨᛚ");          // Rune de guérison
+        put("RESTORE", "ᚱᛖᛋᛏ");       // Rune de restauration
+        put("TELEPORT", "ᛏᛖᛚᛖ");      // Rune de téléportation
+        put("MOV", "ᛗᛟᚢ");            // Rune de mouvement
+        put("DMG", "ᛞᛗᚷ");            // Rune de dégâts
+        put("DAMAGE", "ᛞᚨᛗᚨᚷᛖ");      // Rune de dégâts complets
+        put("ENERGY", "ᛖᚾᛖᚱᚷ");       // Rune d'énergie
+        put("MANA", "ᛗᚨᚾᚨ");          // Rune de mana
+        put("HEALTH", "ᚺᛖᚨᛚᚦ");       // Rune de santé
+        put("AREA", "ᚨᚱᛖᚨ");          // Rune de zone
+        put("EXPLOSION", "ᛖᚲᛋᛈ");     // Rune d'explosion
+        put("MATRIX", "ᛗᚨᛏᚱ");        // Rune de matrice
+        put("FLUX", "ᚠᛚᚢᚲᛋ");         // Rune de flux
+        
+        // Héros et cibles
+        put("Hero", "ᚺᛖᚱᛟ");          // Rune de héros
+        put("Arthur", "ᚨᚱᚦᚢᚱ");       // Rune d'Arthur
+        put("SELF", "ᛋᛖᛚᚠ");          // Rune de soi
+        put("target", "ᛏᚨᚱᚷ");        // Rune de cible
+        
+        // Propriétés magiques
+        put("radius", "ᚱᚨᛞ");         // Rune de rayon
+        put("power", "ᛈᛟᚹᚱ");         // Rune de puissance
+        put("range", "ᚱᚨᚾᚷ");         // Rune de portée
+        put("position", "ᛈᛟᛋ");       // Rune de position
+    }};
+
     // 🌀 TRADUCTION FANTASY INTELLIGENTE → FRANÇAIS
     private static final Map<String, String> FANTASY_TRANSLATION = new HashMap<String, String>() {{
         // Termes Quantiques → Fantasy
@@ -50,6 +80,7 @@ public class FormulaTranslationService {
         put("MOV", "glissement éthéré");
         put("DMG", "fracture dimensionnelle");
         put("HEAL", "restauration vitale");
+        put("RESTORE", "régénération mystique");
         put("TELEPORT", "translation planaire");
         put("PHASE_SHIFT", "passage entre les voiles");
         

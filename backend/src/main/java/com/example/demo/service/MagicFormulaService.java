@@ -785,12 +785,15 @@ public class MagicFormulaService {
         return switch (formulaName) {
             // 🎭 FORMULES META-NARRATIVE
             case "BREAK_FOURTH_WALL" -> FormulaExecutionResult.success(
-                "🎭 Mur du quatrième mur brisé !",
-                "ψ_META001: ⊙(FOURTH_WALL_BREACH player_awareness:100%) ⟶ BREAK_REALITY",
-                "Brèche narrative: Le joueur prend conscience qu'il joue à un jeu vidéo",
-                Map.of("playerAwareness", 100, "realityLevel", "meta", "narrativeImpact", "breaking", "immersionLoss", 50),
+                "🎭 Mur du quatrième mur brisé - Multi-instances spatiales !",
+                "ψ_META001: ⊙(FOURTH_WALL_BREACH spatial_instances:multiple player_awareness:100%) ⟶ BREAK_REALITY",
+                "Brèche narrative multi-spatiale: Le joueur prend conscience qu'il contrôle plusieurs instances du jeu simultanément dans différents espaces",
+                Map.of("playerAwareness", 100, "realityLevel", "meta", "narrativeImpact", "breaking", "immersionLoss", 50, 
+                       "spatialInstances", "multiple", "crossInstanceAwareness", true, "spatialBreachRadius", 5, 
+                       "multiInstanceControl", true, "spatialCoordinates", "all_active_games"),
                 "HARDCODED_FOURTH_WALL",
-                Map.of("runicSymbols", "ψ⊙🎭", "grofiComplexity", 5, "temporalStability", 0.30, "jeanApproval", "PUTAIN C'EST GÉNIAL!")
+                Map.of("runicSymbols", "ψ⊙🎭", "grofiComplexity", 5, "temporalStability", 0.30, "jeanApproval", "PUTAIN C'EST GÉNIAL!", 
+                       "spatialComplexity", "multi-dimensional", "instanceSynchronization", "cross-spatial")
             );
             case "NARRATIVE_JUMP" -> FormulaExecutionResult.success(
                 "📚 Saut narratif temporel exécuté",
