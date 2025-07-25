@@ -1,0 +1,238 @@
+{
+  "scenario_info": {
+    "id": "vol_de_lame",
+    "name": "Vol de la Lame d'Avant-Monde",
+    "type": "INFILTRATION",
+    "version": "1.0.0",
+    "description": "Infiltrer une forteresse gardée par un Dragon Rouge et lui voler la Lame d'Avant-Monde avant qu'il ne se réveille.",
+    "max_turns": 7,
+    "players": 1,
+    "difficulty": "EXPERT",
+    "duration_estimate": "12-18 minutes",
+    "tags": ["infiltration", "stealth", "dragon", "theft", "time_pressure"]
+  },
+  
+  "game_settings": {
+    "map": {
+      "width": 25,
+      "height": 25,
+      "terrain": "dragon_fortress",
+      "special_zones": [
+        {"type": "dragon_lair", "x": 20, "y": 20, "effect": "dragon_sleep_zone"},
+        {"type": "treasure_vault", "x": 22, "y": 22, "effect": "artifact_storage"},
+        {"type": "guard_post", "x": 5, "y": 5, "effect": "patrol_start"},
+        {"type": "guard_post", "x": 5, "y": 20, "effect": "patrol_waypoint"},
+        {"type": "guard_post", "x": 20, "y": 5, "effect": "patrol_waypoint"},
+        {"type": "secret_entrance", "x": 1, "y": 12, "effect": "stealth_entry"},
+        {"type": "escape_route", "x": 24, "y": 1, "effect": "quick_exit"}
+      ]
+    },
+    "turn_limits": {
+      "time_per_turn": 90,
+      "total_turns": 7
+    },
+    "victory_conditions": [
+      "Voler la Lame d'Avant-Monde",
+      "Fuir avant le tour 7",
+      "Dragon ne se réveille pas"
+    ]
+  },
+
+  "heroes": [
+    {
+      "id": "master_thief",
+      "name": "Kael l'Ombre",
+      "player": "player1",
+      "start_position": {"x": 1, "y": 12},
+      "level": 18,
+      "stats": {
+        "health": 90,
+        "max_health": 90,
+        "temporal_energy": 180,
+        "max_temporal_energy": 180,
+        "attack": 12,
+        "defense": 8,
+        "stealth": 0.9,
+        "speed": 6,
+        "lockpicking": 0.8
+      },
+      "equipment": ["shadow_cloak", "silence_boots", "phantom_blade"],
+      "abilities": ["shadow_step", "invisible", "lock_mastery", "dragon_lore", "quick_escape"]
+    }
+  ],
+
+  "artifacts": [
+    {
+      "id": "avantworld_blade",
+      "location": {"x": 22, "y": 22},
+      "status": "guarded",
+      "scenario_override": {
+        "theft_difficulty": 0.7,
+        "dragon_wake_chance": 0.3,
+        "requires_lockpicking": true
+      }
+    }
+  ],
+
+  "creatures": [
+    {
+      "id": "dragon_rouge",
+      "count": 1,
+      "spawn_locations": [{"x": 20, "y": 20}],
+      "behavior": "sleeping",
+      "wake_conditions": [
+        {"type": "noise_threshold", "value": 3},
+        {"type": "proximity", "distance": 2},
+        {"type": "time_limit", "turn": 6}
+      ],
+      "stats": {
+        "health": 300,
+        "attack": 40,
+        "defense": 25,
+        "breath_range": 8,
+        "sleep_depth": 0.8
+      }
+    },
+    {
+      "id": "phantom_guards",
+      "count": 4,
+      "spawn_locations": [
+        {"x": 5, "y": 5},
+        {"x": 5, "y": 20},
+        {"x": 20, "y": 5},
+        {"x": 15, "y": 15}
+      ],
+      "behavior": "patrol",
+      "patrol_routes": [
+        [{"x": 5, "y": 5}, {"x": 10, "y": 10}, {"x": 15, "y": 15}],
+        [{"x": 5, "y": 20}, {"x": 10, "y": 15}, {"x": 15, "y": 10}],
+        [{"x": 20, "y": 5}, {"x": 15, "y": 10}, {"x": 10, "y": 15}],
+        [{"x": 15, "y": 15}, {"x": 18, "y": 18}, {"x": 20, "y": 20}]
+      ],
+      "detection_range": 3
+    }
+  ],
+
+  "turn_sequence": [
+    {
+      "turn": 1,
+      "phase": "infiltration",
+      "events": [
+        {"type": "message", "text": "Entrée furtive réussie. Le Dragon Rouge dort profondément... pour l'instant."},
+        {"type": "stealth_mode", "enabled": true},
+        {"type": "patrol_start", "guards": ["phantom_guards"]}
+      ]
+    },
+    {
+      "turn": 2,
+      "phase": "navigation",
+      "events": [
+        {"type": "message", "text": "Les gardes patrouillent. Évitez leur regard."},
+        {"type": "noise_warning", "threshold": 2}
+      ]
+    },
+    {
+      "turn": 3,
+      "phase": "approach",
+      "events": [
+        {"type": "message", "text": "Vous approchez du trésor. Le Dragon remue légèrement."},
+        {"type": "dragon_stir", "wake_chance": 0.1}
+      ]
+    },
+    {
+      "turn": 4,
+      "phase": "vault",
+      "events": [
+        {"type": "message", "text": "Chambre au trésor ! La Lame d'Avant-Monde brille dans les ténèbres."},
+        {"type": "treasure_visible", "artifact": "avantworld_blade"},
+        {"type": "lockpicking_challenge", "difficulty": 0.7}
+      ]
+    },
+    {
+      "turn": 5,
+      "phase": "theft",
+      "events": [
+        {"type": "message", "text": "Tentative de vol ! Faites vite et silencieusement."},
+        {"type": "theft_attempt", "noise_risk": 0.4},
+        {"type": "dragon_stir", "wake_chance": 0.3}
+      ]
+    },
+    {
+      "turn": 6,
+      "phase": "escape",
+      "events": [
+        {"type": "message", "text": "Le Dragon s'agite ! Fuyez avant qu'il ne se réveille complètement !"},
+        {"type": "dragon_wake_warning", "wake_chance": 0.6},
+        {"type": "guards_alert", "detection_bonus": 0.2}
+      ]
+    },
+    {
+      "turn": 7,
+      "phase": "finale",
+      "events": [
+        {"type": "message", "text": "Dernier tour ! Sortez de la forteresse MAINTENANT !"},
+        {"type": "dragon_wake", "probability": 0.8},
+        {"type": "escape_route_activation"}
+      ]
+    }
+  ],
+
+  "win_conditions": {
+    "successful_theft": {
+      "type": "item_acquisition",
+      "condition": "has_avantworld_blade AND position_exit_zone",
+      "description": "Lame volée et évasion réussie"
+    },
+    "stealth_master": {
+      "type": "conditional_victory",
+      "condition": "dragon_sleeping AND has_avantworld_blade",
+      "description": "Vol parfait sans réveiller le Dragon"
+    }
+  },
+
+  "lose_conditions": {
+    "dragon_awakens": {
+      "type": "instant_defeat",
+      "condition": "dragon_awake AND player_in_lair",
+      "description": "Le Dragon Rouge vous incinère"
+    },
+    "caught_by_guards": {
+      "type": "instant_defeat",
+      "condition": "detected_by_guards AND combat_failed",
+      "description": "Capturé par les gardes fantômes"
+    },
+    "time_expired": {
+      "type": "time_defeat",
+      "condition": "turn >= 7 AND NOT has_avantworld_blade",
+      "description": "Temps écoulé sans vol réussi"
+    }
+  },
+
+  "stealth_mechanics": {
+    "base_stealth": 0.9,
+    "noise_accumulation": 0,
+    "max_noise_threshold": 3,
+    "dragon_sleep_depth": 0.8,
+    "guard_detection_range": 3,
+    "shadow_zones": [
+      {"x": 1, "y": 12, "radius": 2},
+      {"x": 12, "y": 1, "radius": 2},
+      {"x": 8, "y": 8, "radius": 3}
+    ]
+  },
+
+  "testing_scenarios": [
+    {
+      "name": "Perfect Stealth Test",
+      "description": "Test du vol parfait sans réveiller le Dragon",
+      "setup": "Max stealth, avoid all guards, minimum noise",
+      "expected": "Successful theft with dragon sleeping"
+    },
+    {
+      "name": "Dragon Wake Test",
+      "description": "Test du réveil du Dragon au tour 6",
+      "setup": "Make noise threshold 3, approach dragon",
+      "expected": "Dragon wakes up, breath attack triggered"
+    }
+  ]
+} 

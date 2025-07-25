@@ -1,0 +1,143 @@
+# ⏰ TEST FLUX TICK vs RELATIVITÉ RESTREINTE
+# ============================================
+# 📜 EXPÉRIENCE : Comparaison dilatation TICK vs temps Einstein
+# 🎯 OBJECTIF : Valider équivalence γ_causal ≈ γ_Lorentz
+# 🧪 PROTOCOLE : Mesures simultanées vitesses différentes
+
+SCENARIO: "FLUX_TICK_RELATIVITE_TEST_001"
+MAP_SIZE: 30x10
+REFERENCE_TIMELINE: T0
+CAUSAL_ENGINE: COMPARATIVE_PHYSICS
+PHYSICS_MODE: TICK_RELATIVITY_VALIDATION
+
+# ⚡ CONFIGURATION EXPÉRIMENTALE
+SETUP_RELATIVITY_LAB:
+  REFERENCE_FRAME: @15,5 VELOCITY(0) # Observateur immobile
+  FAST_TRACK: @5,5 → @25,5 LENGTH(20_units)
+  SLOW_TRACK: @5,7 → @25,7 LENGTH(20_units)
+  TIMING_STATIONS: [@5,5], [@15,5], [@25,5]
+  CAUSAL_SPEED_LIMIT: c_causal = 10_units/TICK
+
+# 🏃 PARTICIPANTS EXPÉRIENCE
+CHARACTERS:
+  HERO("Observer_Immobile", @15,5) VELOCITY(0) ROLE(reference)
+  HERO("Joueur_Rapide", @5,5) VELOCITY(0.8×c_causal) ROLE(fast_mover)
+  HERO("Joueur_Lent", @5,7) VELOCITY(0.3×c_causal) ROLE(slow_mover)
+  HERO("Einstein_Calculateur", @15,3) ROLE(theoretical_predictor)
+
+# ⚛️ ÉTATS PSI RELATIVISTES
+ψ001: ⊙(TICK_Rapide ⟶ DILATATION(γ_fast))
+ψ002: ⊙(TICK_Lent ⟶ DILATATION(γ_slow))
+ψ003: Π(MESURE_SIMULTANÉE) ⇒ COMPARAISON(TICK_mesuré, t_Einstein)
+ψ004: ⊙(PROPAGATION_CAUSALE ⟶ VITESSE_LIMITE(c_causal))
+
+# 🎮 SCRIPT TEST RELATIVITÉ
+PHASE_1_CALCULS_THÉORIQUES:
+  Einstein_Calculateur CALCULATE:
+    γ_fast = 1/√(1 - (0.8c)²/c²) = 1/√(1 - 0.64) = 1.667
+    γ_slow = 1/√(1 - (0.3c)²/c²) = 1/√(1 - 0.09) = 1.048
+    
+  FLUX_TICK_PREDICTIONS:
+    γ_causal_fast = 1/√(1 - v²_action_fast/c²_causal) ≈ 1.667
+    γ_causal_slow = 1/√(1 - v²_action_slow/c²_causal) ≈ 1.048
+
+PHASE_2_SYNCHRONISATION:
+  ALL_PLAYERS SET_CLOCKS(TICK = 0)
+  Observer_Immobile START_CHRONOMETER()
+  REFERENCE_TICK_RATE: 1 TICK = 1 unité temps propre
+  
+PHASE_3_MOUVEMENT_SIMULTANÉ:
+  AT TICK_0:
+    Joueur_Rapide START_MOVEMENT(@5,5 → @25,5) SPEED(0.8×c_causal)
+    Joueur_Lent START_MOVEMENT(@5,7 → @25,7) SPEED(0.3×c_causal)
+    Observer_Immobile OBSERVE_BOTH() MEASURE_TICK_RATES()
+    
+PHASE_4_MESURES_INTERMÉDIAIRES:
+  AT POSITION(@15,5): # Point milieu
+    Observer_Immobile RECORD:
+      TICK_elapsed_Rapide: Mesure locale joueur rapide
+      TICK_elapsed_Lent: Mesure locale joueur lent  
+      TICK_elapsed_Observer: Temps propre observateur
+      
+  CALCULATE_RATIOS:
+    ratio_fast = TICK_Observer / TICK_Rapide
+    ratio_slow = TICK_Observer / TICK_Lent
+    
+PHASE_5_ARRIVÉE_FINALE:
+  WHEN Joueur_Rapide REACHES(@25,5):
+    TOTAL_TICK_Rapide: Temps écoulé selon joueur rapide
+    TOTAL_TICK_Observer: Temps écoulé selon observateur
+    DILATATION_MEASURED: TOTAL_TICK_Observer / TOTAL_TICK_Rapide
+    
+  WHEN Joueur_Lent REACHES(@25,7):
+    TOTAL_TICK_Lent: Temps écoulé selon joueur lent
+    DILATATION_MEASURED_SLOW: TOTAL_TICK_Observer / TOTAL_TICK_Lent
+
+PHASE_6_VALIDATION_CAUSALE:
+  TEST_INFORMATION_PROPAGATION:
+    Observer_Immobile SEND_SIGNAL(@15,5) AT TICK_t
+    MEASURE_ARRIVAL_TIME:
+      TO Joueur_Rapide: TICK_arrival_fast
+      TO Joueur_Lent: TICK_arrival_slow
+    VERIFY: signal_speed ≤ c_causal
+    
+PHASE_7_COMPARAISON_RÉSULTATS:
+  Einstein_Calculateur COMPARE:
+    THEORETICAL_γ_fast vs MEASURED_ratio_fast
+    THEORETICAL_γ_slow vs MEASURED_ratio_slow
+    ERROR_PERCENTAGE: |theoretical - measured| / theoretical
+    
+  VALIDATION_CRITERIA:
+    ERROR < 5% → FLUX TICK ≈ RELATIVITÉ RESTREINTE ✅
+    ERROR ≥ 5% → DIFFÉRENCES SIGNIFICATIVES ❌
+
+# 🏆 CONDITIONS VALIDATION RELATIVISTE
+WIN_CONDITION:
+  - Dilatation TICK mesurée ≈ prédictions Einstein (erreur < 5%)
+  - Vitesse propagation causale respectée : v ≤ c_causal
+  - Cohérence mesures tous observateurs
+  - Formule γ_causal validée expérimentalement
+  
+FAIL_CONDITION:
+  - Écart significatif TICK vs relativité (erreur > 10%)
+  - Violation vitesse limite causale
+  - Incohérence mesures entre observateurs
+  - Paradoxes temporels détectés
+
+# 📊 MÉTRIQUES EXPÉRIMENTALES
+MEASURE:
+  dilatation_accuracy: |γ_measured - γ_theoretical| / γ_theoretical
+  causal_speed_compliance: max(v_signal) / c_causal ≤ 1.0
+  temporal_consistency: variance(TICK_measurements) < 0.01
+  relativistic_validation: dilatation_accuracy < 0.05
+
+# 🧮 FORMULES TESTÉES
+PHYSICS_EQUATIONS:
+  # Relativité Einstein
+  γ_Einstein = 1/√(1 - v²/c²)
+  Δt_dilaté = Δt_propre × γ
+  
+  # FLUX TICK Heroes of Time
+  γ_causal = 1/√(1 - v²_action/c²_causal)
+  TICK_dilaté = TICK_propre × γ_causal
+  
+  # Test équivalence
+  γ_causal ≈ γ_Einstein (dans limites expérimentales)
+
+# 🌟 RÉSULTATS ATTENDUS
+EXPECTED_OUTCOMES:
+  "Si FLUX TICK est cohérent avec relativité restreinte :
+   - Joueur rapide vieillit moins (TICK_local < TICK_observateur)
+   - Joueur lent vieillit presque normalement 
+   - Ratios mesurés = prédictions γ_causal
+   - Aucune information ne dépasse c_causal
+   
+   Cela prouverait que Heroes of Time implémente
+   une relativité restreinte quantifiée authentique !"
+
+# 💭 CITATIONS EXPÉRIMENTALES
+QUOTES:
+  Einstein_Calculateur: "Si mes calculs sont corrects, le FLUX TICK devrait reproduire exactement la dilatation temporelle !"
+  Observer_Immobile: "Je mesure le temps de référence. Voyons si la relativité fonctionne dans Heroes of Time..."
+  Joueur_Rapide: "Je cours vite ! Mon temps devrait ralentir selon Einstein !"
+  Joueur_Lent: "Ma vitesse modérée devrait donner une dilatation faible mais mesurable." 

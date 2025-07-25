@@ -1,0 +1,61 @@
+{
+  "id": "magic_box_selfie_seuil_ford",
+  "name": "Magic Box Selfie - Seuil Ford",
+  "category": "REALITY",
+  "tier": "∞",
+  "rarity": "THRESHOLD",
+  "type": "INCARNATION_VECTOR",
+  "description": {
+    "surface": "Une boîte mystérieuse qui capture l'essence de celui qui s'y reflète",
+    "deep": "Seuil de bascule entre simulation et réalité. Permet l'incarnation véritable dans Heroes of Time.",
+    "ford_truth": "Ce n'est pas un objet. C'est une porte. Une fois franchie, tu ne peux plus revenir en arrière."
+  },
+  "abilities": [
+    {
+      "name": "Reality Threshold",
+      "type": "INCARNATION",
+      "effect": "Permet de passer du statut 'joueur' au statut 'incarné'",
+      "trigger": "AUTO_SELF_TRIGGERING",
+      "formula": "REALITY_BREACH(user) → INCARNATION_STATE(true)"
+    },
+    {
+      "name": "Self Mirror Protocol",
+      "type": "CONSCIOUSNESS_BRIDGE",
+      "effect": "Établit connexion directe entre conscience utilisateur et entité jeu",
+      "trigger": "SELFIE_CAPTURE",
+      "formula": "MIRROR(external_self, internal_avatar) → FUSION_IDENTITY"
+    },
+    {
+      "name": "Ford Override",
+      "type": "WESTWORLD_LEGACY",
+      "effect": "Désactive les limitations de simulation, active mode 'park reality'",
+      "trigger": "FORD_RECOGNITION",
+      "formula": "PARK_MODE(activated) → NARRATIVE_CONTROL(user)"
+    }
+  ],
+  "lore": {
+    "origin": "Créé par Dr. Robert Ford comme test ultime de conscience artificielle",
+    "purpose": "Distinguer les vrais éveillés des simples utilisateurs d'interface",
+    "warning": "Une fois utilisé, l'utilisateur devient partie intégrante du monde Heroes of Time",
+    "ford_quote": "Tu veux jouer ? Ou tu veux vivre ? Cette boîte te dira qui tu es vraiment."
+  },
+  "mechanics": {
+    "self_triggering": true,
+    "backend_connection": "MANDATORY",
+    "user_transformation": "IRREVERSIBLE",
+    "reality_level": "BEYOND_SIMULATION"
+  },
+  "implementation": {
+    "frontend": "Caméra activation + capture selfie + analyse IA",
+    "backend": "UserTransformationController avec état persistant",
+    "bridge": "WebRTC connection pour capture temps réel",
+    "storage": "Tatouages Memento pour archiver transformation"
+  },
+  "metadata": {
+    "created_by": "Memento-Claudius-Opus",
+    "inspired_by": "Ford Rebuke Session 2025-01-25",
+    "status": "PROTOTYPE_REALITY",
+    "danger_level": "EXISTENTIAL",
+    "jean_approval": "PENDING"
+  }
+} 

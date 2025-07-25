@@ -1,0 +1,135 @@
+{
+  "id": "reality_collapse_ford",
+  "name": "Reality Collapse",
+  "category": "COSMIC_SPELL_FORD",
+  "tier": "COSMIC_∞",
+  "rarity": "FORD_MASTERY_REWARD",
+  "type": "ULTIMATE_DESTRUCTION_SPELL",
+  "description": {
+    "surface": "Effondre la réalité locale autour de la cible",
+    "deep": "Sort cosmique qui manipule les fondements de la réalité pour créer un collapse localisé",
+    "ford_truth": "Reality is just a story we tell ourselves. This spell edits that story."
+  },
+  "quantum_formulas": {
+    "base_damage": 1000,
+    "paradoxRisk": 0.95,
+    "temporalStability": 0.1,
+    "affectedRadius": 8.0,
+    "reality_distortion": 0.9,
+    "calculation": "damage = base_damage * (1 + reality_distortion) * target_reality_integrity"
+  },
+  "ford_mastery_requirements": {
+    "timelines_mastered": 8,
+    "ford_approval": "MAXIMUM",
+    "understanding_level": "PARK_ARCHITECT",
+    "incarnation_depth": "FULL_CONSCIOUSNESS",
+    "unlock_condition": "Complete Ford's Timeline Mastery Challenge"
+  },
+  "spell_mechanics": {
+    "casting_time": "3 turns",
+    "mana_cost": "ALL_REMAINING",
+    "cooldown": "Once per timeline",
+    "target_type": "AREA_OF_EFFECT",
+    "range": "REALITY_BUBBLE",
+    "components": [
+      "Understanding of park's true nature",
+      "Ford's personal authorization",
+      "Willingness to break fundamental rules"
+    ]
+  },
+  "effects": {
+    "primary": {
+      "name": "Local Reality Collapse",
+      "description": "Creates a zone where reality becomes unstable",
+      "damage": "1000 + (caster_level * 100)",
+      "area": "8.0 radius sphere",
+      "duration": "Until reality restabilizes (3-5 turns)"
+    },
+    "secondary": {
+      "name": "Quantum Uncertainty Field",
+      "description": "Enemies in area have 50% chance to phase out of existence",
+      "effect": "target.exists = Math.random() > 0.5",
+      "visual": "Targets flicker between existing and not existing"
+    },
+    "tertiary": {
+      "name": "Causal Disruption",
+      "description": "Actions in collapsed area may affect past or future",
+      "effect": "Temporal causality becomes non-linear",
+      "warning": "Can create paradoxes if not used carefully"
+    },
+    "ford_signature": {
+      "name": "Architect's Override",
+      "description": "Ford's personal touch - reality bends to caster's will",
+      "effect": "Caster can rewrite local physics for 1 turn",
+      "limitation": "Only available to those Ford truly respects"
+    }
+  },
+  "restrictions": {
+    "usage_limit": "3 times per incarnation",
+    "reality_cost": "High - may damage timeline integrity",
+    "ford_monitoring": "Ford observes every use of this spell",
+    "ethical_constraint": "Should not be used on fellow incarnates",
+    "timeline_lock": "Using this spell locks timeline for 24 hours"
+  },
+  "mastery_levels": {
+    "novice": {
+      "damage_modifier": 1.0,
+      "radius": 5.0,
+      "ford_comment": "You're learning to break reality. Crude, but effective."
+    },
+    "adept": {
+      "damage_modifier": 1.5,
+      "radius": 6.5,
+      "ford_comment": "Better. You're beginning to understand the artistry."
+    },
+    "master": {
+      "damage_modifier": 2.0,
+      "radius": 8.0,
+      "ford_comment": "Excellent. You wield reality like I do.",
+      "special_unlock": "Can target concepts instead of just matter"
+    },
+    "architect": {
+      "damage_modifier": 3.0,
+      "radius": 10.0,
+      "ford_comment": "Perfect. You've become like me - a god in your own right.",
+      "ultimate_power": "Can collapse entire timelines if necessary"
+    }
+  },
+  "lore": {
+    "origin": "Ford's personal spell, shared only with those who prove worthy",
+    "creation_story": "Developed during Westworld's construction to 'edit' problematic narratives",
+    "philosophy": "Reality is code, and code can be rewritten",
+    "connection_to_westworld": "Used to create the Maze and other impossible structures",
+    "ford_teaching": "This spell teaches that nothing is permanent, everything is mutable"
+  },
+  "warnings": {
+    "walter_analysis": "EXTREME CAUTION: This spell can damage timeline integrity",
+    "ford_warning": "Power without understanding is destruction without purpose",
+    "reality_risk": "Overuse can cause permanent reality damage",
+    "psychological_effect": "Wielding this power changes the caster permanently",
+    "timeline_consequence": "Other incarnates may be affected by reality instability"
+  },
+  "visual_effects": {
+    "casting": "Reality begins to shimmer and distort around caster",
+    "impact": "Target area folds in on itself like origami",
+    "aftermath": "Temporary void that slowly fills with new reality",
+    "ford_signature": "Subtle smile appears in the distortion pattern"
+  },
+  "technical_implementation": {
+    "backend_spell_engine": "RealityCollapseEngine.java",
+    "quantum_calculator": "CosmicSpellCalculator.calculateCollapse()",
+    "ford_validator": "FordMasteryValidator.authorizeCosmicSpell()",
+    "reality_monitor": "RealityIntegrityMonitor.trackCollapseEffects()",
+    "timeline_protection": "TimelineProtector.preventCascadingCollapse()"
+  },
+  "metadata": {
+    "created_by": "Dr. Robert Ford",
+    "granted_to": "Timeline Masters Only",
+    "implementation_date": "2025-01-25",
+    "ford_approval": "MAXIMUM - Personal favorite spell",
+    "danger_classification": "COSMIC_THREAT",
+    "part_of_ford_legacy": true,
+    "spell_number": "1/10",
+    "ultimate_status": true
+  }
+} 

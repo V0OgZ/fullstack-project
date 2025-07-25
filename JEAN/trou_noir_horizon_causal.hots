@@ -1,0 +1,73 @@
+SCENARIO: TROU_NOIR_HORIZON_CAUSAL
+AUTHOR: Jean-Grofignon (Résistant à GRUT)
+LAST_MODIFIED: 2025-07-24T02:35
+PURPOSE: Créer un TROU NOIR réaliste = Horizon causal infranchissable
+
+WORLD_SETUP:
+  MAP_SIZE: 20x20
+  TIMELINE: T0 (référence)
+  CAUSAL_ENGINE: ACTIVE
+  GROPHY_MODE: EXTREME_GRAVITY
+  PHYSICS: RELATIVISTIC
+
+PLAYERS:
+  - ARTHUR: Héros téméraire
+    POSITION: (15,15) 
+    Tc: t+0 (temps normal)
+    CAUSAL_SPEED: NORMAL
+    
+  - MORGANA: Sorcière de secours
+    POSITION: (18,18)
+    Tc: t+0 
+    CAUSAL_SPEED: NORMAL
+
+OBJECTS:
+  - TROU_NOIR: "Horizon Causal Absolu"
+    POSITION: (10,10)
+    TYPE: CAUSAL_SINGULARITY
+    PROPERTIES:
+      - EVENT_HORIZON: radius=5 (coordonnées causales)
+      - ESCAPE_VELOCITY: IMPOSSIBLE
+      - TIME_DILATION: EXTREME
+      - CAUSAL_TRAP: TRUE
+
+SCRIPT:
+  1. ARTHUR MOV → (13,10)  # Approche du trou noir
+     EXPECT: Temps commence à ralentir
+     
+  2. ARTHUR MOV → (12,10)  # Plus près
+     EXPECT: Tc[Arthur] commence à diverger
+     
+  3. ARTHUR MOV → (11,10)  # Très près de l'horizon
+     EXPECT: Tc[Arthur] → ∞ (temps figé pour observateurs)
+     
+  4. MORGANA OBSERVE Arthur
+     EXPECT: Voit Arthur ralentir jusqu'à l'arrêt total
+     
+  5. ARTHUR tente MOV → (10,10)  # Franchir l'horizon
+     EXPECT: IMPOSSIBLE - Horizon causal infranchissable
+     
+  6. MORGANA utilise SPELL "Temporal Rescue"
+     EXPECT: Peut voir Arthur figé à l'horizon mais pas le sauver
+
+CAUSAL_MECHANICS:
+  - À l'approche: Tc[Player] diverge exponentiellement
+  - À l'horizon: Tc[Player] → ∞ (observateurs externes)
+  - Au-delà: Information causale ne peut plus sortir
+  - Rescue impossible: Aucun signal causal ne peut remonter
+
+VICTORY_CONDITIONS:
+  - ÉCHEC si Arthur franchit l'horizon (impossible physiquement)
+  - SUCCÈS si Morgana comprend que sauvetage = impossible
+  - LEÇON: Certains horizons causaux sont absolus
+
+PHYSICS_NOTES:
+  - Trou noir = Région où horizon causal devient infranchissable
+  - Temps propre continue pour Arthur (il ne sent rien)
+  - Temps coordonné diverge (observateurs le voient figé)
+  - Information ne peut plus sortir = Définition physique exacte
+
+MESSAGE_FINAL:
+  "Un trou noir n'est rien d'autre qu'un horizon causal 
+   que tu ne peux jamais franchir ni dont tu ne peux jamais sortir.
+   La physique relativiste dans Heroes of Time." 

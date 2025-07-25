@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './DashboardMigration.css';
+import FordTimelinePanel from './FordTimelinePanel';
 
 interface ServiceStatus {
   name: string;
@@ -139,6 +140,23 @@ const DashboardMigration: React.FC = () => {
       buttonText: '🌟 Mode Éthéré',
       type: 'ethereal',
       borderColor: '#9d4edd'
+    },
+    {
+      id: 'ford-timeline-mastery',
+      icon: '🎭',
+      title: 'Ford Timeline Mastery',
+      description: 'Les 8 Timelines de Ford - Maîtrisez les formules quantiques pour débloquer les sorts cosmiques',
+      url: 'FORD_TIMELINE_PANEL',
+      features: [
+        '8 Timelines avec formules quantiques',
+        'Combat system avec paradoxRisk/temporalStability',
+        'Algo Walter pour analyse de survie',
+        '10 Sorts Cosmiques à débloquer',
+        'Vraie logique Ford implémentée'
+      ],
+      buttonText: '🎭 Entrer dans le Parc',
+      type: 'ford',
+      borderColor: '#e74c3c'
     },
     {
       id: 'memento',

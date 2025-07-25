@@ -1,0 +1,126 @@
+{
+  "id": "power_of_classes_quantum_mixer",
+  "name": "Power of Classes - Quantum Mixer",
+  "type": "mage_artifact",
+  "tier": 5,
+  "rarity": "EPIC_CHAOTIC",
+  "image": "assets/img/quantum_mixer.png",
+  "description_french": "Premier artefact pour mages qui mélange aléatoirement les formules quantiques. Peut créer des effets spectaculaires... ou échouer lamentablement !",
+  "description_english": "First mage artifact that randomly mixes quantum formulas. Can create spectacular effects... or fail miserably!",
+  
+  "class_restriction": "MAGE",
+  "slot": "accessory",
+  "required_level": 8,
+  
+  "quantum_properties": {
+    "formula_mixing": true,
+    "random_combination": true,
+    "chaos_factor": 0.4,
+    "success_rate": 0.6,
+    "spectacular_failure_rate": 0.2,
+    "amazing_success_rate": 0.2
+  },
+  
+  "runic_interpretation": "ψΣ†: ⊙(RANDOM_MIX quantum_formulas) ⟶ CHAOS_RESULT(success|fail)",
+  
+  "mixing_formulas": [
+    "MODIFY_ENERGY",
+    "TELEPORT_HERO", 
+    "HEAL_HERO",
+    "DAMAGE_ENEMY",
+    "CREATE_SHIELD",
+    "TEMPORAL_BOOST",
+    "PHASE_SHIFT",
+    "QUANTUM_LEAP",
+    "MANA_RESTORE",
+    "SPELL_REFLECT"
+  ],
+  
+  "possible_combinations": {
+    "amazing_success": [
+      {
+        "mix": ["HEAL_HERO", "DAMAGE_ENEMY"],
+        "result": "ψMIX: ⊙(HEAL_ALL_ALLIES +999) ⟶ DAMAGE_ALL_ENEMIES(500)",
+        "description": "Soigne tous les alliés ET blesse tous les ennemis !",
+        "translation": "🌟 COMBO LÉGENDAIRE ! Vos alliés brillent de santé tandis que vos ennemis s'effondrent !"
+      },
+      {
+        "mix": ["TELEPORT_HERO", "CREATE_SHIELD"],
+        "result": "ψMIX: ⊙(TELEPORT_WITH_INVINCIBILITY) ⟶ SHIELD_EVERYWHERE",
+        "description": "Téléportation avec invincibilité temporaire !",
+        "translation": "✨ MAGIE PURE ! Vous disparaissez dans un éclat doré et réapparaissez, intouchable !"
+      },
+      {
+        "mix": ["QUANTUM_LEAP", "MANA_RESTORE"],
+        "result": "ψMIX: ⊙(INFINITE_MANA_JUMP) ⟶ REALITY_BREACH",
+        "description": "Saut quantique avec mana infinie !",
+        "translation": "🚀 TRANSCENDANCE ! Vous brisez les lois de la physique avec une énergie cosmique !"
+      }
+    ],
+    
+    "normal_success": [
+      {
+        "mix": ["HEAL_HERO", "MANA_RESTORE"],
+        "result": "ψMIX: ⊙(REGENERATION_COMBO) ⟶ RESTORE_ALL",
+        "description": "Régénération complète santé + mana",
+        "translation": "💚 Énergie vitale restaurée ! Vous vous sentez comme neuf !"
+      },
+      {
+        "mix": ["DAMAGE_ENEMY", "SPELL_REFLECT"],
+        "result": "ψMIX: ⊙(COUNTER_ATTACK) ⟶ REFLECT_DAMAGE",
+        "description": "Attaque qui renvoie les dégâts",
+        "translation": "⚔️ Lame miroir ! Vos ennemis se blessent en vous attaquant !"
+      }
+    ],
+    
+    "spectacular_failures": [
+      {
+        "mix": ["TELEPORT_HERO", "DAMAGE_ENEMY"],
+        "result": "ψFAIL: ⊙(TELEPORT_INTO_ENEMY) ⟶ SELF_DAMAGE(200)",
+        "description": "Vous vous téléportez DANS l'ennemi !",
+        "translation": "💥 OUPS ! Vous émergez à l'intérieur de votre cible... Aïe !"
+      },
+      {
+        "mix": ["HEAL_HERO", "PHASE_SHIFT"],
+        "result": "ψFAIL: ⊙(HEAL_WRONG_DIMENSION) ⟶ HEAL_ENEMIES(300)",
+        "description": "Vous soignez les ennemis par accident !",
+        "translation": "😅 RATÉ ! Votre magie de soin traverse les dimensions... vers vos ennemis !"
+      },
+      {
+        "mix": ["CREATE_SHIELD", "QUANTUM_LEAP"],
+        "result": "ψFAIL: ⊙(SHIELD_PARADOX) ⟶ TRAP_SELF_IN_SHIELD",
+        "description": "Vous vous enfermez dans votre propre bouclier !",
+        "translation": "🛡️ PROBLÈME ! Votre bouclier quantique vous emprisonne... Embarrassant !"
+      }
+    ]
+  },
+  
+  "usage_mechanics": {
+    "activation": "USE(ARTIFACT, power_of_classes_quantum_mixer, HERO:mage_name)",
+    "cooldown": 3,
+    "mana_cost": 50,
+    "requires_two_formulas": true,
+    "random_selection": true,
+    "translation_integration": true
+  },
+  
+  "stats_bonuses": {
+    "spell_power": 15,
+    "mana_regeneration": 10,
+    "chaos_resistance": -5,
+    "luck": 8,
+    "critical_spell_chance": 12
+  },
+  
+  "flavor_text": "« J'ai mélangé deux sorts... Soit je deviens un dieu, soit j'explose. Les deux sont excitants ! » - Mage Téméraire",
+  
+  "lore": "Créé par un mage fou qui voulait 'optimiser' la magie en combinant des formules au hasard. L'artefact fonctionne... parfois. Les résultats vont du génie absolu au désastre cosmique. Populaire chez les mages aventureux et les kamikaze magiques.",
+  
+  "integration_notes": {
+    "translator_compatible": true,
+    "magic_formula_engine": "Utilise les vraies formules du MagicFormulaEngine",
+    "random_mixing": "Sélection aléatoire de 2 formules dans la liste",
+    "result_translation": "Chaque résultat a sa traduction narrative",
+    "jean_approval": "Artefact approuvé par Jean-Grofignon depuis son canapé cosmique"
+  }
+} 

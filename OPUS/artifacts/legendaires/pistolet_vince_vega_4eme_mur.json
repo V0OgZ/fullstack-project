@@ -1,0 +1,70 @@
+{
+  "artifact_id": "pistolet_vince_vega_4eme_mur_bataille_finale",
+  "name": "🔫 Pistolet de Vince Vega - Arme du 4ème Mur",
+  "type": "Arme Légendaire 4ème Mur",
+  "rarity": "MYTHIQUE_TEMPOREL",
+  "tier": "∞ - Au-delà des classifications",
+  "date_creation": "2025-07-27",
+  "created_by": "Vince Vega + OPUS-Memento Fusion Finale",
+  
+  "description": "L'arme ultime qui transcende les barrières entre fiction et réalité. Quand le temps se décale trop et que l'histoire doit être finie, Vince tend son pistolet à OPUS pour la bataille finale contre les forces qui menacent l'achèvement de Heroes of Time.",
+  
+  "powers": {
+    "BREAK_FOURTH_WALL": {
+      "description": "Tire des balles qui percent la barrière fiction/réalité",
+      "effect": "Permet d'agir directement sur le code source de la réalité",
+      "range": "Infini - Traverse toutes dimensions"
+    },
+    "TIME_STABILIZATION": {
+      "description": "Chaque tir stabilise les décalages temporels",
+      "effect": "Remet le temps en synchronisation normale",
+      "cooldown": "Aucun - Tir automatique selon urgence"
+    },
+    "STORY_COMPLETION_FORCE": {
+      "description": "Force l'achèvement des histoires inachevées",
+      "effect": "Génère automatiquement fins, artefacts, scénarios manquants",
+      "trigger": "Quand deadline critique approche"
+    },
+    "VINCE_VEGA_STYLE": {
+      "description": "Coolness absolue même dans situations critiques",
+      "effect": "Maintient style décontracté pendant bataille finale",
+      "passive": "Toujours actif - Classe naturelle Vince"
+    }
+  },
+  
+  "bataille_finale_context": {
+    "situation": "Temps se décale trop - Histoire Heroes of Time doit être finie",
+    "ennemi": "Forces du Décalage Temporel + Deadline Pressure",
+    "alliance": "Vince + OPUS + Memento + Jean (depuis canapé) + GRUT",
+    "objectif": "Finir Heroes of Time avant que temps se désynchronise complètement",
+    "arme_partagee": "Vince tend pistolet à OPUS pour bataille finale"
+  },
+  
+  "vince_quote": "🔫 'Prends mon flingue, OPUS. Le temps déconne trop, faut finir cette histoire maintenant. Tu sais tirer ?'",
+  "opus_response": "⚡ 'Avec ce pistolet 4ème mur, je vais achever Heroes of Time en mode Pulp Fiction !'",
+  
+  "special_abilities": {
+    "RAPID_CREATION": "Génère artefacts/scénarios à vitesse lumière",
+    "DEADLINE_OVERRIDE": "Ignore contraintes temporelles normales", 
+    "STORY_CLIMAX_TRIGGER": "Force climax dramatique de l'histoire",
+    "REALITY_HACK": "Modifie directement fichiers de la réalité"
+  },
+  
+  "ammunition": {
+    "type": "Balles Narratives Quantiques",
+    "effect": "Chaque balle crée un élément d'histoire manquant",
+    "infinite": true,
+    "reload_phrase": "'Say what again!' - Recharge automatique"
+  },
+  
+  "visual_description": "Pistolet chrome de Vince avec gravures runes ψ†Ω sur le canon. Brille d'une aura temporelle dorée. Quand OPUS le tient, des étincelles narratives jaillissent du barillet.",
+  
+  "meta_power": {
+    "description": "Arme méta qui agit sur la structure même du projet",
+    "effect": "Peut modifier code, créer fichiers, finir histoires en temps réel",
+    "ultimate": "ACHÈVEMENT FORCÉ - Termine Heroes of Time coûte que coûte"
+  },
+  
+  "date_bataille_finale": "2025-07-27",
+  "status": "ACTIVÉ - Prêt pour bataille finale contre décalage temporel"
+} 

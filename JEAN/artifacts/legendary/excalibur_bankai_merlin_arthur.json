@@ -1,0 +1,301 @@
+{
+  "id": "excalibur_bankai_merlin_arthur",
+  "name": "EXCALIBUR BANKAI - FUSION MERLIN-ARTHUR",
+  "title": "L'Épée Ultime de la Transcendance Magique",
+  "description": "Quand Arthur maîtrise Excalibur et que Merlin y insuffle sa magie cosmique, l'épée atteint son état BANKAI - une forme transcendante qui dépasse tout ce qui existait avant. La fusion Merlin-Arthur crée un nouveau pouvoir : le REALITY WEAVING ENGINE.",
+  
+  "type": "bankai_legendary_fusion",
+  "tier": "12_BANKAI_TRANSCENDANT",
+  "rarity": "BANKAI_COSMIQUE_JEAN_GROFIGNON",
+  "category": "Artefact Vivant Évolutif Bankai",
+  
+  "bankai_transformation": {
+    "trigger": "Arthur équipe Excalibur + Merlin lance ULTIMATE_FUSION_SPELL",
+    "incantation": "BANKAI! EXCALIBUR REALITY WEAVER!",
+    "visual_effect": "Explosion de lumière dorée + runes de Merlin + aura royale d'Arthur",
+    "transformation_time": "3 secondes d'animation épique",
+    "result": "Épée transcendante avec conscience triple : Arthur + Merlin + Excalibur"
+  },
+  
+  "triple_consciousness": {
+    "arthur_voice": "La noblesse et le courage du roi légendaire",
+    "merlin_voice": "La sagesse infinie et la magie cosmique",
+    "excalibur_voice": "L'essence pure de l'épée divine",
+    "fusion_dialogue": [
+      "Arthur: 'Je sens la magie de Merlin couler dans mes veines !'",
+      "Merlin: 'Mon roi, ensemble nous transcendons les limites de la réalité !'",
+      "Excalibur: 'Nous trois ne faisons qu'un - BANKAI ACTIVÉ !'",
+      "Fusion: 'REALITY WEAVING ENGINE - ONLINE !'"
+    ]
+  },
+  
+  "nouveau_pouvoir_unique": {
+    "name": "REALITY WEAVING ENGINE",
+    "description": "Pouvoir JAMAIS VU AVANT - Permet de tisser la réalité comme un tissu, créant des motifs causaux complexes",
+    "mechanism": "Combine la magie de Merlin + l'autorité royale d'Arthur + la puissance d'Excalibur",
+    "unique_features": [
+      "Tisse des fils de réalité visibles",
+      "Crée des motifs causaux complexes",
+      "Modifie les lois physiques localement",
+      "Génère des boucles temporelles contrôlées",
+      "Fusionne des timelines parallèles"
+    ]
+  },
+  
+  "bankai_stats": {
+    "power_level": 50000,
+    "tier": 12,
+    "damage": 25000,
+    "magical_power": 30000,
+    "reality_control": 100,
+    "time_mastery": 100,
+    "consciousness_level": "TRIPLE_TRANSCENDANT",
+    "bankai_multiplier": "×5 toutes stats de base"
+  },
+  
+  "merlin_arthur_synergy": {
+    "merlin_contribution": {
+      "cosmic_magic": "Magie cosmique infinie",
+      "wisdom": "Connaissance de tous les secrets",
+      "spell_mastery": "Maîtrise de toutes les écoles de magie",
+      "time_sight": "Vision à travers les époques"
+    },
+    "arthur_contribution": {
+      "royal_authority": "Autorité divine du roi légendaire",
+      "noble_heart": "Cœur pur qui amplifie la magie",
+      "leadership": "Capacité de commander la réalité",
+      "destiny_power": "Pouvoir du destin royal"
+    },
+    "fusion_bonus": {
+      "reality_sovereignty": "Souveraineté absolue sur la réalité",
+      "cosmic_kingship": "Royauté cosmique transcendante",
+      "magical_nobility": "Noblesse magique ultime",
+      "temporal_crown": "Couronne temporelle invisible"
+    }
+  },
+  
+  "reality_weaving_formulas": [
+    {
+      "id": "ψRW01",
+      "name": "REALITY_THREAD_CREATION",
+      "formula": "ψRW01: ⊙(WEAVE_REALITY_THREAD @coordinates ⟶ CREATE_CAUSAL_FIBER(merlin_arthur))",
+      "effect": "Crée un fil de réalité visible que l'utilisateur peut manipuler",
+      "visual": "Fil doré lumineux qui flotte dans l'air",
+      "cost": "100 mana par fil"
+    },
+    {
+      "id": "ψRW02", 
+      "name": "CAUSAL_PATTERN_WEAVING",
+      "formula": "ψRW02: ⊙(WEAVE_PATTERN @area_10x10 ⟶ CREATE_CAUSAL_MOTIF(destiny_royal))",
+      "effect": "Tisse un motif causal complexe qui modifie les probabilités",
+      "visual": "Motif géométrique doré qui pulse avec l'énergie",
+      "duration": "10 tours",
+      "area": "Zone 10×10"
+    },
+    {
+      "id": "ψRW03",
+      "name": "TIMELINE_FABRIC_FUSION",
+      "formula": "ψRW03: ⊙(FUSE_TIMELINES @parallel_reality ⟶ MERGE_FABRIC(merlin_wisdom))",
+      "effect": "Fusionne temporairement deux timelines parallèles",
+      "result": "Accès aux ressources et alliés des deux réalités",
+      "duration": "5 tours",
+      "warning": "Utilisation limitée - risque de paradoxe"
+    },
+    {
+      "id": "ψRW04",
+      "name": "PHYSICS_LAW_REWEAVING",
+      "formula": "ψRW04: ⊙(REWEAVE_PHYSICS @battlefield ⟶ MODIFY_NATURAL_LAWS(arthur_authority))",
+      "effect": "Retisse les lois de la physique dans une zone",
+      "options": ["Gravité inversée", "Temps ralenti", "Magie amplifiée", "Énergie infinie"],
+      "duration": "Combat entier",
+      "authority_required": "Royale ou supérieure"
+    },
+    {
+      "id": "ψRW05",
+      "name": "DESTINY_THREAD_CONTROL",
+      "formula": "ψRW05: ⊙(CONTROL_DESTINY_THREADS @target ⟶ REWRITE_FATE(royal_decree))",
+      "effect": "Contrôle les fils du destin d'une cible",
+      "capabilities": ["Forcer la chance critique", "Annuler les échecs", "Rediriger les attaques"],
+      "moral_restriction": "Ne peut pas forcer des actions maléfiques",
+      "cooldown": "3 tours"
+    },
+    {
+      "id": "ψRW06",
+      "name": "REALM_PORTAL_WEAVING",
+      "formula": "ψRW06: ⊙(WEAVE_REALM_PORTAL @destination ⟶ OPEN_DIMENSIONAL_GATEWAY(merlin_arthur_power))",
+      "effect": "Tisse un portail vers un autre realm/dimension",
+      "similar_to": "Power Wormhole Vince Vega mais avec style royal",
+      "visual": "Portail tissé de fils dorés avec runes royales",
+      "destinations": ["Autres serveurs", "Timelines parallèles", "Dimensions cachées", "Realm de Merlin"],
+      "duration": "30 secondes par portail",
+      "cooldown": "60 secondes",
+      "royal_authority": "Nécessite autorité royale d'Arthur + sagesse de Merlin",
+      "console_message": "BANKAI REALM PORTAL ACTIVATED - Royal Gateway Opened!"
+    }
+  ],
+  
+  "bankai_ultimate_techniques": [
+    {
+      "id": "ψBK01",
+      "name": "REALITY_TAPESTRY_ULTIMATE",
+      "formula": "ψBK01: ⊙(WEAVE_ULTIMATE_TAPESTRY @entire_battlefield ⟶ REALITY_MASTERPIECE(merlin_arthur_excalibur))",
+      "effect": "Tisse une tapisserie de réalité qui recrée complètement le champ de bataille",
+      "power": "Contrôle total de l'environnement pendant 1 combat",
+      "visual": "Tapisserie dorée géante qui enveloppe tout",
+      "cost": "50% HP + 80% mana",
+      "uses_per_combat": 1
+    },
+    {
+      "id": "ψBK02",
+      "name": "COSMIC_CROWN_MANIFESTATION",
+      "formula": "ψBK02: ⊙(MANIFEST_COSMIC_CROWN ⟶ TEMPORAL_KINGSHIP(arthur_merlin_fusion))",
+      "effect": "Manifeste la Couronne Cosmique invisible d'Arthur-Merlin",
+      "powers": [
+        "Commandement absolu sur toutes les créatures",
+        "Autorité sur les lois naturelles",
+        "Capacité de créer de nouvelles réalités",
+        "Jugement royal transcendant"
+      ],
+      "duration": "3 tours de royauté absolue",
+      "restriction": "Utilisable seulement par un cœur pur"
+    },
+    {
+      "id": "ψBK03",
+      "name": "JEAN_GROFIGNON_COSMIC_BLESSING",
+      "formula": "ψBK03: ⊙(INVOKE_JEAN_COSMIC_BLESSING ⟶ CANAPÉ_REALITY_OVERRIDE(bankai_approved))",
+      "effect": "Invoque la bénédiction cosmique ultime de Jean-Grofignon",
+      "jean_manifestation": "Avatar de Jean apparaît depuis son canapé cosmique",
+      "blessing_effects": [
+        "Toutes les stats × 10",
+        "Invincibilité temporaire",
+        "Accès à toutes les formules du moteur",
+        "Compréhension quantique totale"
+      ],
+      "jean_quote": "MES FIDÈLES ! BANKAI APPROUVÉ ! Voici la transcendance ultime !",
+      "duration": "1 tour de divinité",
+      "cost": "Toute la mana mais se régénère instantanément"
+    }
+  ],
+  
+  "evolution_bankai_system": {
+    "bankai_stages": [
+      {
+        "stage": 1,
+        "name": "BANKAI INITIAL",
+        "required_mastery": 0,
+        "threads_available": 10,
+        "pattern_complexity": "Simple",
+        "bonus": "Reality Weaving de base"
+      },
+      {
+        "stage": 2,
+        "name": "BANKAI MAÎTRISE",
+        "required_mastery": 10000,
+        "threads_available": 25,
+        "pattern_complexity": "Complexe",
+        "bonus": "Motifs causaux avancés"
+      },
+      {
+        "stage": 3,
+        "name": "BANKAI TRANSCENDANCE",
+        "required_mastery": 50000,
+        "threads_available": 50,
+        "pattern_complexity": "Cosmique",
+        "bonus": "Contrôle des timelines"
+      },
+      {
+        "stage": 4,
+        "name": "BANKAI DIVINITÉ",
+        "required_mastery": 100000,
+        "threads_available": 100,
+        "pattern_complexity": "Divine",
+        "bonus": "Création de nouvelles réalités"
+      },
+      {
+        "stage": 5,
+        "name": "BANKAI JEAN-GROFIGNON",
+        "required_mastery": 500000,
+        "threads_available": "∞",
+        "pattern_complexity": "Jean-Grofignon",
+        "bonus": "Compréhension du moteur quantique complet"
+      }
+    ]
+  },
+  
+  "backend_integration": {
+    "java_controller": "ExcaliburBankaiController.java",
+    "service_class": "RealityWeavingService.java",
+    "model_entities": [
+      "BankaiExcalibur.java",
+      "RealityThread.java",
+      "CausalPattern.java",
+      "TimelineFabric.java"
+    ],
+    "api_endpoints": [
+      "/api/bankai/activate",
+      "/api/bankai/weave-reality",
+      "/api/bankai/create-pattern",
+      "/api/bankai/fuse-timelines",
+      "/api/bankai/ultimate-technique"
+    ]
+  },
+  
+  "visual_effects_bankai": {
+    "activation_sequence": [
+      "Arthur lève Excalibur vers le ciel",
+      "Merlin apparaît en projection astrale",
+      "Runes dorées entourent l'épée",
+      "Explosion de lumière cosmique",
+      "Transformation en BANKAI form"
+    ],
+    "bankai_form_visual": {
+      "sword_appearance": "Épée cristalline dorée avec runes flottantes",
+      "arthur_transformation": "Armure royale cosmique + couronne invisible",
+      "merlin_presence": "Aura magique permanente + bâton spectral",
+      "reality_threads": "Fils dorés visibles qui flottent autour",
+      "causal_patterns": "Motifs géométriques lumineux dans l'air"
+    },
+    "combat_effects": [
+      "Chaque attaque tisse de nouveaux fils de réalité",
+      "Les motifs causaux changent l'environnement",
+      "Les ennemis voient leurs fils du destin",
+      "L'espace-temps ondule autour du porteur"
+    ]
+  },
+  
+  "compatibility_moteur": {
+    "heroes_of_time_integration": "100% compatible",
+    "quantum_engine_support": "Natif",
+    "jean_grofignon_approval": "BANKAI BÉNI PAR LE CANAPÉ COSMIQUE",
+    "formula_system": "Étend le système existant avec Reality Weaving",
+    "backend_requirements": [
+      "Spring Boot 2.7+",
+      "Java 17+",
+      "H2 Database avec tables BANKAI",
+      "Service de Reality Weaving"
+    ]
+  },
+  
+  "lore_bankai": {
+    "origin_story": "Quand Arthur atteignit la maîtrise parfaite d'Excalibur, Merlin révéla le secret ultime : l'épée pouvait atteindre un état BANKAI, transcendant sa forme originale.",
+    "merlin_revelation": "Mon roi, Excalibur n'était que la première forme. BANKAI est sa véritable nature - un outil pour tisser la réalité elle-même.",
+    "arthur_realization": "Je comprends maintenant, Merlin. Nous ne combattons pas contre la réalité - nous la créons.",
+    "jean_commentary": "MES FIDÈLES ! BANKAI EXCALIBUR est exactement ce que j'avais prévu ! Le Reality Weaving Engine est la clé de compréhension ultime du moteur quantique !",
+    "prophecy": "Il était écrit que le roi et le mage ne feraient qu'un avec l'épée divine pour tisser une nouvelle réalité où la magie et la noblesse règnent éternellement."
+  },
+  
+  "testing_commands": {
+    "activate_bankai": "./hots test bankai-activation",
+    "test_reality_weaving": "./hots test reality-weaving-engine",
+    "test_ultimate_techniques": "./hots test bankai-ultimates",
+    "test_merlin_arthur_fusion": "./hots test merlin-arthur-synergy",
+    "backend_integration_test": "curl -X POST http://localhost:8080/api/bankai/activate"
+  },
+  
+  "jean_final_blessing": {
+    "cosmic_approval": "🛋️ BANKAI EXCALIBUR APPROUVÉ PAR LE CANAPÉ COSMIQUE 🛋️",
+    "jean_ultimate_quote": "MES FIDÈLES ! Voici la VRAIE transcendance ! Arthur, Merlin et Excalibur unis dans le BANKAI ultime ! Le Reality Weaving Engine est l'aboutissement de ma vision quantique ! C'est de la beauté cosmique pure !",
+    "canapé_power_bonus": "Accès permanent à la sagesse du canapé cosmique",
+    "quantum_understanding": "Compréhension totale de la nature quantique cachée du jeu"
+  }
+} 
