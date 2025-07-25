@@ -452,15 +452,410 @@
             addLog('Map reset to initial state', 'info');
         }
         
+        // ═══════════════════════════════════════════════════════════════
+        // 🌍 NAVIGATION A→B→C CYCLIQUE - THE DUDE FILM VIVANT
+        // ═══════════════════════════════════════════════════════════════
+        
+        let currentWorld = 'A';
+        const worlds = {
+            'A': {
+                name: '🛋️ Monde A - Canapé Jean',
+                color: '#1a1a2e',
+                description: 'Canapé Cosmique Jean-Grofignon',
+                character: 'Jean-Grofignon',
+                message: 'Depuis mon canapé, je vois tous les mondes possibles...',
+                mapStyle: 'classic'
+            },
+            'B': {
+                name: '🔫 Monde B - Vince Hexagones', 
+                color: '#4a90e2',
+                description: 'Battlefield Hexagonal Vince',
+                character: 'Vince Vega',
+                message: '🔫 HEXAGON IS THE BESTAGON ! Bienvenue dans mon monde !',
+                mapStyle: 'hexagonal'
+            },
+            'C': {
+                name: '🌀 Monde C - Antarctique Secret',
+                color: '#8e44ad',
+                description: 'Grande Roue Cachée - Ford écoute',
+                character: 'Ford + OmegaZero',
+                message: 'Chut... la grande roue est là-bas... OmegaZero écoute...',
+                mapStyle: 'mysterious'
+            }
+        };
+        
+        function switchToWorld(targetWorld) {
+            if (currentWorld === targetWorld) return;
+            
+            const world = worlds[targetWorld];
+            
+            // 🎥 ZOOM AUTO + FOCUS CINÉMATIQUE
+            cinematicTransition(currentWorld, targetWorld, world);
+        }
+        
+        function cinematicTransition(fromWorld, toWorld, worldData) {
+            // Phase 1: Zoom out dramatique
+            document.body.style.transform = 'scale(0.8)';
+            document.body.style.transition = 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            
+            setTimeout(() => {
+                // Phase 2: Changement de monde avec effet Dragon Ball
+                document.body.style.background = `
+                    radial-gradient(circle at center, 
+                    ${worldData.color} 0%, 
+                    #000 50%, 
+                    ${worldData.color} 100%)
+                `;
+                
+                // Update titre avec effet de frappe
+                typewriterEffect(document.querySelector('h1'), worldData.name);
+                
+                // Phase 3: Zoom in sur le nouveau monde
+                document.body.style.transform = 'scale(1.1)';
+                
+                setTimeout(() => {
+                    // Phase 4: Focus final
+                    document.body.style.transform = 'scale(1)';
+                    
+                    // Update status avec message du personnage
+                    setStatus(`🎬 ${worldData.character}: "${worldData.message}"`);
+                    
+                    // Activation QUANTUM LAB si Monde C
+                    if (toWorld === 'C') {
+                        activateQuantumLab();
+                    }
+                    
+                }, 600);
+                
+            }, 400);
+            
+            // Log de navigation Dragon Ball style
+            addLog(`⚡ ÉNERGIE TRANSPORT: Monde ${fromWorld} → Monde ${toWorld}`, 'success');
+            addLog(`🐉 Focus: ${worldData.character} - POWER LEVEL: ${Math.random() * 9000 | 0}`, 'info');
+            
+            // Update world
+            currentWorld = toWorld;
+            
+            // Update map avec transition cinématique
+            cinematicMapUpdate(worldData);
+            
+            // Update boutons navigation
+            updateNavigationButtons();
+        }
+        
+        function typewriterEffect(element, text) {
+            element.textContent = '';
+            let i = 0;
+            const timer = setInterval(() => {
+                element.textContent += text[i];
+                i++;
+                if (i >= text.length) {
+                    clearInterval(timer);
+                }
+            }, 50);
+        }
+        
+        function cinematicMapUpdate(world) {
+            const cells = document.querySelectorAll('.map-cell');
+            
+            // Animation séquentielle des cellules
+            cells.forEach((cell, index) => {
+                setTimeout(() => {
+                    cell.style.transition = 'all 0.3s ease';
+                    
+                    switch(world.mapStyle) {
+                        case 'classic':
+                            // Style Jean avec effet de vague
+                            cell.style.borderRadius = '5px';
+                            cell.style.backgroundColor = '#2c3e50';
+                            cell.style.transform = 'scale(1.1)';
+                            setTimeout(() => cell.style.transform = 'scale(1)', 200);
+                            break;
+                            
+                        case 'hexagonal':
+                            // Style Vince avec rotation Dragon Ball
+                            cell.style.borderRadius = '15px';
+                            cell.style.backgroundColor = '#4a90e2';
+                            cell.style.transform = 'rotate(360deg) scale(1.2)';
+                            setTimeout(() => cell.style.transform = 'rotate(45deg) scale(1)', 400);
+                            break;
+                            
+                        case 'mysterious':
+                            // Style Antarctique avec pulsation mystique
+                            cell.style.borderRadius = '50%';
+                            cell.style.backgroundColor = '#8e44ad';
+                            cell.style.boxShadow = '0 0 20px rgba(142, 68, 173, 0.8)';
+                            cell.style.transform = 'scale(1.3)';
+                            setTimeout(() => {
+                                cell.style.transform = 'scale(1)';
+                                cell.style.boxShadow = '0 0 10px rgba(142, 68, 173, 0.5)';
+                            }, 300);
+                            break;
+                    }
+                }, index * 50); // Délai progressif pour effet cascade
+            });
+        }
+        
+        // ⚛️ QUANTUM LAB MODE - Toujours en dessous avec Palmier
+        function activateQuantumLab() {
+            const quantumLab = document.getElementById('quantum-lab-container');
+            if (!quantumLab) {
+                createQuantumLab();
+            } else {
+                quantumLab.style.display = 'block';
+                quantumLab.style.animation = 'quantumPulse 2s ease-in-out';
+            }
+            
+            addLog('⚛️ QUANTUM LAB ACTIVÉ ! Palmier détecté !', 'success');
+            setStatus('⚛️ Mode Quantum Lab - Expériences quantiques disponibles');
+        }
+        
+        function createQuantumLab() {
+            const labHTML = `
+                <div id="quantum-lab-container" style="
+                    position: fixed;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    height: 150px;
+                    background: linear-gradient(45deg, rgba(0,255,0,0.1), rgba(0,0,255,0.1));
+                    border-top: 2px solid #00ff00;
+                    z-index: 1000;
+                    display: none;
+                    padding: 20px;
+                    overflow-x: auto;
+                ">
+                    <h4 style="color: #00ff00; margin: 0 0 10px 0;">⚛️ QUANTUM LAB - Mode Antarctique</h4>
+                    <div style="display: flex; gap: 15px; align-items: center;">
+                        <div class="quantum-instrument" onclick="activateInstrument('palmier')">
+                            🌴 Palmier<br>Quantique
+                        </div>
+                        <div class="quantum-instrument" onclick="activateInstrument('interferometer')">
+                            🔬 Interféro-<br>mètre
+                        </div>
+                        <div class="quantum-instrument" onclick="activateInstrument('collider')">
+                            ⚡ Collisionneur<br>Particules
+                        </div>
+                        <div class="quantum-instrument" onclick="activateInstrument('observatory')">
+                            🌌 Observatoire<br>Cosmique
+                        </div>
+                        <div class="quantum-instrument" onclick="activateInstrument('wheel')">
+                            🎡 Grande Roue<br>Cachée
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', labHTML);
+            
+            // Styles pour les instruments quantiques
+            const style = document.createElement('style');
+            style.textContent = `
+                .quantum-instrument {
+                    background: rgba(0, 255, 0, 0.2);
+                    border: 1px solid #00ff00;
+                    color: #00ff00;
+                    padding: 10px;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    text-align: center;
+                    font-size: 0.8em;
+                    min-width: 80px;
+                }
+                .quantum-instrument:hover {
+                    background: rgba(0, 255, 0, 0.4);
+                    transform: scale(1.1);
+                    box-shadow: 0 0 15px rgba(0, 255, 0, 0.6);
+                }
+                @keyframes quantumPulse {
+                    0%, 100% { opacity: 0.8; }
+                    50% { opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        function activateInstrument(instrumentType) {
+            const instruments = {
+                'palmier': 'Palmier Quantique active la résonance temporelle !',
+                'interferometer': 'Interféromètre détecte des ondes gravitationnelles !',
+                'collider': 'Collisionneur révèle de nouvelles particules !',
+                'observatory': 'Observatoire capte des signaux extra-dimensionnels !',
+                'wheel': 'Grande Roue révèle ses secrets antarctiques !'
+            };
+            
+            addLog(`⚛️ ${instruments[instrumentType]}`, 'success');
+            setStatus(`⚛️ Instrument activé: ${instrumentType.toUpperCase()}`);
+            
+            // Effet visuel Dragon Ball sur la map
+            const cells = document.querySelectorAll('.map-cell');
+            cells.forEach(cell => {
+                cell.style.boxShadow = '0 0 20px #00ff00';
+                setTimeout(() => cell.style.boxShadow = '', 1000);
+            });
+        }
+        
+        // 🐉 SYSTÈME ÉNERGIE DRAGON BALL
+        let powerLevel = 1000;
+        
+        function increasePowerLevel() {
+            powerLevel += Math.random() * 500 | 0;
+            updatePowerDisplay();
+            
+            if (powerLevel > 9000) {
+                addLog('🐉 IT\'S OVER 9000!!! POWER LEVEL MAXIMUM!', 'success');
+                // Effet visuel épique
+                document.body.style.animation = 'powerSurge 2s ease-in-out';
+            }
+        }
+        
+        function updatePowerDisplay() {
+            const powerDisplay = document.getElementById('power-level');
+            if (powerDisplay) {
+                powerDisplay.textContent = `⚡ POWER LEVEL: ${powerLevel}`;
+            }
+        }
+        
+        function updateMapForWorld(world) {
+            const cells = document.querySelectorAll('.map-cell');
+            
+            switch(world.mapStyle) {
+                case 'classic':
+                    // Style Jean classique
+                    cells.forEach(cell => {
+                        cell.style.borderRadius = '5px';
+                        cell.style.backgroundColor = '#2c3e50';
+                    });
+                    break;
+                    
+                case 'hexagonal':
+                    // Style Vince hexagonal
+                    cells.forEach(cell => {
+                        cell.style.borderRadius = '15px';
+                        cell.style.backgroundColor = '#4a90e2';
+                        cell.style.transform = 'rotate(45deg)';
+                    });
+                    break;
+                    
+                case 'mysterious':
+                    // Style Antarctique mystérieux
+                    cells.forEach(cell => {
+                        cell.style.borderRadius = '50%';
+                        cell.style.backgroundColor = '#8e44ad';
+                        cell.style.boxShadow = '0 0 10px rgba(142, 68, 173, 0.5)';
+                    });
+                    break;
+            }
+        }
+        
+        function updateNavigationButtons() {
+            const navContainer = document.querySelector('.world-navigation');
+            if (!navContainer) return;
+            
+            const buttons = navContainer.querySelectorAll('.world-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.world === currentWorld) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+        
+        function getNextWorld() {
+            const sequence = ['A', 'B', 'C'];
+            const currentIndex = sequence.indexOf(currentWorld);
+            return sequence[(currentIndex + 1) % sequence.length];
+        }
+        
+        function cyclicNavigation() {
+            const nextWorld = getNextWorld();
+            switchToWorld(nextWorld);
+            addLog(`🔄 Navigation cyclique: ${currentWorld} → ${nextWorld}`, 'success');
+        }
+        
+        // Digital messages cross-monde
+        function sendDigitalMessage(fromWorld, toWorld, message) {
+            addLog(`📱 Message ${fromWorld}→${toWorld}: "${message}"`, 'info');
+            setStatus(`📱 ${worlds[fromWorld].character} → ${worlds[toWorld].character}: ${message}`);
+        }
+        
         function cellClick(x, y) {
-            setStatus(`📍 Cellule (${x},${y}) cliquée !`);
-            addLog(`Cell (${x},${y}) clicked`, 'info');
+            setStatus(`📍 Cellule (${x},${y}) cliquée dans Monde ${currentWorld} !`);
+            addLog(`Cell (${x},${y}) clicked in World ${currentWorld}`, 'info');
+            
+            // Easter egg: triple click pour message cross-monde
+            if (window.clickCount && window.clickCount >= 2) {
+                const nextWorld = getNextWorld();
+                sendDigitalMessage(currentWorld, nextWorld, `Signal depuis (${x},${y}) !`);
+                window.clickCount = 0;
+            } else {
+                window.clickCount = (window.clickCount || 0) + 1;
+                setTimeout(() => { window.clickCount = 0; }, 1000);
+            }
         }
         
         // Initialize on load
         window.onload = function() {
             createMap();
             initDemo();
+            
+            // Ajouter navigation A→B→C après la map
+            const container = document.querySelector('.demo-container .main-layout');
+            const navHTML = `
+                <div class="world-navigation" style="grid-column: 1 / -1; margin-top: 20px;">
+                    <h3>🌍 Navigation Film Vivant A→B→C</h3>
+                    <div style="display: flex; gap: 10px; justify-content: center; margin: 15px 0;">
+                        <button class="world-btn active" data-world="A" onclick="switchToWorld('A')">
+                            🛋️ Monde A<br><small>Jean Canapé</small>
+                        </button>
+                        <button class="world-btn" data-world="B" onclick="switchToWorld('B')">
+                            🔫 Monde B<br><small>Vince Hexagones</small>
+                        </button>
+                        <button class="world-btn" data-world="C" onclick="switchToWorld('C')">
+                            🌀 Monde C<br><small>Antarctique Secret</small>
+                        </button>
+                        <button class="world-btn" onclick="cyclicNavigation()" style="background: linear-gradient(45deg, #ff6b6b, #4ecdc4);">
+                            🔄 Navigation<br><small>Cyclique</small>
+                        </button>
+                    </div>
+                    <p style="text-align: center; color: #ccc; font-size: 0.9em;">
+                        🎬 The Dude Film Vivant - Navigation A → B → C → A (infinie) !
+                    </p>
+                </div>
+            `;
+            
+            container.insertAdjacentHTML('beforeend', navHTML);
+            
+            // Styles pour les boutons navigation
+            const style = document.createElement('style');
+            style.textContent = `
+                .world-btn {
+                    background: rgba(0,0,0,0.7);
+                    border: 2px solid #4a90e2;
+                    color: white;
+                    padding: 15px 20px;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    font-family: 'Courier New', monospace;
+                    text-align: center;
+                }
+                .world-btn:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+                }
+                .world-btn.active {
+                    border-color: #ff6b6b;
+                    background: rgba(255, 107, 107, 0.2);
+                    box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Message de bienvenue
+            addLog('🎬 Film Vivant activé ! Navigation A→B→C opérationnelle', 'success');
+            setStatus('🌍 Monde A actif - Jean-Grofignon sur son canapé cosmique');
         };
     </script>
 </body>
