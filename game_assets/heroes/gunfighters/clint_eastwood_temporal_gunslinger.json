@@ -1,0 +1,158 @@
+{
+  "id": "clint_eastwood_temporal_gunslinger",
+  "name": "Clint Eastwood",
+  "title": "🔫 The Temporal Gunslinger",
+  "category": "GUNFIGHTER_TEMPOREL",
+  "tier": "LEGENDARY_GUNSLINGER",
+  "faction": "SOURCEGUARDIANS",
+  "level": 42,
+  "description": "L'homme aux yeux plissés qui tire plus vite que le temps lui-même. Clint Eastwood a maîtrisé l'art de la gunfight temporelle, capable de tirer dans le passé pour toucher dans le présent.",
+  
+  "stats": {
+    "attack": 95,
+    "defense": 78,
+    "speed": 92,
+    "precision": 99,
+    "coolness": 100,
+    "temporal_sync": 88,
+    "intimidation": 96
+  },
+  
+  "weapons": {
+    "primary": {
+      "name": "🔫 .44 Magnum Temporel",
+      "type": "REVOLVER_QUANTUM",
+      "damage": "150-200",
+      "range": "UNLIMITED",
+      "special": "TEMPORAL_BULLET_TIME",
+      "quote": "Go ahead, make my day... in any timeline"
+    },
+    "secondary": {
+      "name": "🏹 Winchester Causal",
+      "type": "RIFLE_DIMENSIONAL",
+      "damage": "200-300",
+      "range": "CROSS_DIMENSIONAL",
+      "special": "CAUSALITY_SHOT"
+    }
+  },
+  
+  "abilities": {
+    "BULLET_TIME": {
+      "name": "🎯 Bullet Time",
+      "type": "TEMPORAL_SLOW",
+      "description": "Ralentit le temps autour de Clint, lui permettant de viser avec une précision absolue",
+      "cooldown": 30,
+      "duration": 8,
+      "effect": "TIME_DILATION_FACTOR_0.1",
+      "formula": "ψ(bullet_time) → Δt × 0.1 for 8 seconds"
+    },
+    
+    "QUICKDRAW": {
+      "name": "⚡ Quickdraw",
+      "type": "INSTANT_SHOT",
+      "description": "Tir instantané plus rapide que la lumière",
+      "cooldown": 15,
+      "damage": "300",
+      "special": "BYPASSES_ALL_DEFENSES",
+      "formula": "INSTANT_HIT(target) → †(enemy_defense)"
+    },
+    
+    "TEMPORAL_RICOCHET": {
+      "name": "🌀 Temporal Ricochet",
+      "type": "CAUSAL_SHOT",
+      "description": "La balle rebondit à travers les dimensions pour toucher plusieurs cibles",
+      "cooldown": 45,
+      "targets": "ALL_ENEMIES_IN_DIMENSION",
+      "effect": "DIMENSIONAL_BOUNCE",
+      "formula": "SHOT(primary) → BOUNCE(dimension_1, dimension_2, dimension_n)"
+    },
+    
+    "HIGH_NOON": {
+      "name": "☀️ High Noon",
+      "type": "ULTIMATE_DUEL",
+      "description": "Duel à mort au coucher du soleil, dans toutes les timelines simultanément",
+      "cooldown": 120,
+      "effect": "TIMELINE_DUEL",
+      "damage": "INSTANT_KILL_OR_MUTUAL_DESTRUCTION",
+      "formula": "DUEL(clint, target) → MAX(precision_clint, precision_target) wins"
+    }
+  },
+  
+  "passive_skills": {
+    "DEAD_EYE": {
+      "name": "👁️ Dead Eye",
+      "description": "Précision absolue - ne rate jamais sa cible",
+      "effect": "ACCURACY_100_PERCENT"
+    },
+    
+    "INTIMIDATION_AURA": {
+      "name": "😎 Intimidation Aura",
+      "description": "Les ennemis tremblent avant même qu'il dégaine",
+      "effect": "ENEMY_ACCURACY_REDUCED_50_PERCENT"
+    },
+    
+    "TEMPORAL_INSTINCT": {
+      "name": "🕰️ Temporal Instinct",
+      "description": "Sent les embuscades à travers le temps",
+      "effect": "IMMUNE_TO_SURPRISE_ATTACKS"
+    }
+  },
+  
+  "equipment": {
+    "hat": "🤠 Chapeau de Cowboy Temporel (+10 Coolness)",
+    "coat": "🧥 Poncho Dimensionnel (+15 Defense)",
+    "boots": "👢 Bottes à Éperons Quantiques (+20 Speed)",
+    "accessory": "🚬 Cigare Éternel (Regeneration +5/turn)"
+  },
+  
+  "quotes": {
+    "spawn": "🔫 \"The good, the bad, and the temporal... I'm all three.\"",
+    "kill": "⚰️ \"That timeline just got canceled.\"",
+    "ability_use": "⚡ \"Time to make some history... or erase it.\"",
+    "death": "💀 \"Even legends... fade to black...\"",
+    "victory": "😎 \"Just another day in the temporal west.\""
+  },
+  
+  "lore": {
+    "origin": "Clint Eastwood a découvert ses pouvoirs temporels lors d'un duel à midi dans une ville fantôme. Au moment où les deux adversaires tiraient, le temps s'est arrêté, et Clint a réalisé qu'il pouvait manipuler les flux temporels.",
+    "mission": "Protéger l'équipe SourceGuardians avec ses revolvers temporels, éliminer les menaces d'OmégaZero d'un tir précis à travers les dimensions.",
+    "personality": "Calme, calculateur, et d'un sang-froid légendaire. Parle peu mais chaque mot porte. Ses yeux plissés voient à travers les mensonges et les illusions temporelles."
+  },
+  
+  "synergies": {
+    "with_vince_vega": {
+      "name": "🔫 Gun Bros Temporels",
+      "effect": "DUAL_GUNFIGHT_MODE",
+      "bonus": "+50% damage when fighting together"
+    },
+    "with_arthur": {
+      "name": "⚔️ Sword & Gun Alliance",
+      "effect": "MEDIEVAL_WESTERN_FUSION",
+      "bonus": "Combined ultimate attacks"
+    },
+    "with_jean": {
+      "name": "🛋️ Philosopher & Gunslinger",
+      "effect": "WISDOM_PRECISION",
+      "bonus": "Perfect tactical coordination"
+    }
+  },
+  
+  "formulas": {
+    "TEMPORAL_GUNSHOT": "ψ(bullet) → TRAVEL(past_t-3) → HIT(present_target)",
+    "QUICKDRAW_FORMULA": "INSTANT_DRAW() → LIGHT_SPEED_SHOT → †(target)",
+    "HIGH_NOON_DUEL": "CHALLENGE(target) → PARALLEL_TIMELINES → BEST_SHOT_WINS",
+    "INTIMIDATION_WAVE": "PRESENCE(clint) → FEAR_AURA → ENEMY_STATS(-50%)"
+  },
+  
+  "combat_style": "TEMPORAL_GUNFIGHTER",
+  "signature_move": "HIGH_NOON_ACROSS_DIMENSIONS",
+  "weakness": "Honorable - refuse de tirer dans le dos",
+  "strength": "Précision temporelle absolue",
+  
+  "meta": {
+    "created_for": "GRUT_VISION_GUNS_TEAM",
+    "role_in_team": "RANGED_DPS_TEMPORAL_CONTROL",
+    "priority_target": "OMEGA_ZERO_MINIONS",
+    "backup_role": "TEAM_PROTECTOR"
+  }
+} 

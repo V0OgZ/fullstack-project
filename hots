@@ -1926,4 +1926,14 @@ EOF
     "help"|*)
         show_help
         ;;
+    console)
+        echo "🎮 Opening HOTS Console Simple..."
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+            open "file://$PWD/frontend/hots-console-simple.html"
+        else
+            xdg-open "file://$PWD/frontend/hots-console-simple.html"
+        fi
+        echo "✅ HOTS Console Simple opened in browser"
+        echo "💡 This is a bookmarkable one-click interface for HOTS commands"
+        ;;
 esac 

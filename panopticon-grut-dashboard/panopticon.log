@@ -3,7 +3,9 @@
 > vite --port 8001 --host
 
 
-  VITE v5.4.19  ready in 158 ms
+  VITE v5.4.19  ready in 164 ms
 
   ➜  Local:   http://localhost:8001/
   ➜  Network: http://192.168.1.12:8001/
+9:08:14 AM [vite] hmr update /src/components/NavigationHub.tsx
+9:08:25 AM [vite] hmr update /src/components/NavigationHub.tsx

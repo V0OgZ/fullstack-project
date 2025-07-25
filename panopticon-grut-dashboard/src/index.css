@@ -1,4 +1,4 @@
-/* 🌌 PANOPTICON GRUT - Style Interface Temporelle Volé de Jean ! */
+/* 🌌 PANOPTICON GRUT - Style Interface Temporelle Amélioré ! */
 
 /* Reset et base */
 * {
@@ -16,7 +16,7 @@ body {
   background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
   color: #ffffff;
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: auto;
   position: relative;
 }
 
@@ -29,7 +29,7 @@ body::before {
   width: 100%;
   height: 100%;
   background: url('/assets/images/dimensions-paralleles.png') center / cover;
-  opacity: 0.1;
+  opacity: 0.05;
   z-index: -1;
   pointer-events: none;
 }
@@ -40,14 +40,16 @@ body::before {
   --grut-secondary: #0080ff;
   --grut-accent: #ffd700;
   --grut-background: #1a1a2e;
-  --grut-surface: rgba(255, 255, 255, 0.05);
+  --grut-surface: rgba(255, 255, 255, 0.08);
   --grut-text: #ffffff;
   --grut-text-dim: #a0a0a0;
-  --grut-border: rgba(0, 191, 255, 0.3);
+  --grut-border: rgba(0, 191, 255, 0.4);
   --grut-success: #00ff7f;
   --grut-warning: #ff8c00;
   --grut-error: #ff4757;
   --grut-critical: #ff3838;
+  --grut-shadow: rgba(0, 191, 255, 0.2);
+  --grut-glow: 0 4px 20px rgba(0, 191, 255, 0.3);
 }
 
 /* 🌊 Console temporelle avec blur effects ! */
@@ -198,14 +200,57 @@ body::before {
 /* 🌊 Grilles temporelles */
 .grut-grid {
   display: grid;
-  gap: 1.5rem;
+  gap: 24px;
+  width: 100%;
+  max-width: 100%;
 }
 
 .grut-grid-2 { grid-template-columns: repeat(2, 1fr); }
 .grut-grid-3 { grid-template-columns: repeat(3, 1fr); }
 .grut-grid-4 { grid-template-columns: repeat(4, 1fr); }
 
+/* 🏛️ PANNEAUX AMÉLIORÉS - ESPACEMENT ET DESIGN */
+.grut-card {
+  background: var(--grut-surface);
+  border: 2px solid var(--grut-border);
+  border-radius: 16px;
+  padding: 24px;
+  backdrop-filter: blur(15px);
+  box-shadow: var(--grut-glow);
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.grut-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--grut-primary), transparent);
+  opacity: 0.6;
+}
+
+.grut-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 191, 255, 0.4);
+  border-color: var(--grut-primary);
+}
+
+/* 📱 RESPONSIVE AMÉLIORÉ */
+@media (max-width: 1200px) {
+  .grut-grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grut-grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (max-width: 768px) {
+  .grut-grid {
+    gap: 16px;
+  }
+  
   .grut-grid-2,
   .grut-grid-3,
   .grut-grid-4 {
@@ -213,8 +258,63 @@ body::before {
   }
   
   .grut-card {
-    padding: 1rem;
+    padding: 20px;
+    margin-bottom: 16px;
+    border-radius: 12px;
   }
+}
+
+@media (max-width: 480px) {
+  .grut-grid {
+    gap: 12px;
+  }
+  
+  .grut-card {
+    padding: 16px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+  }
+}
+
+/* 🎨 TITRES DE PANNEAUX */
+.grut-panel-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--grut-accent);
+  margin-bottom: 16px;
+  text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.grut-panel-subtitle {
+  font-size: 0.9rem;
+  color: var(--grut-text-dim);
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+/* 🔗 LIENS ET BOUTONS DANS PANNEAUX */
+.grut-panel-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(0, 191, 255, 0.1);
+  border: 1px solid var(--grut-border);
+  border-radius: 8px;
+  color: var(--grut-primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  margin: 4px;
+}
+
+.grut-panel-link:hover {
+  background: rgba(0, 191, 255, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 191, 255, 0.3);
 }
 
 /* ✨ Animations temporelles */
@@ -348,4 +448,29 @@ body::before {
 @keyframes legendaryGlow {
   0% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
   100% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 107, 107, 0.3); }
+} 
+
+/* 🏛️ CONTENEUR PRINCIPAL RESPONSIVE */
+.app-container {
+  max-width: 100vw;
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 📱 RESPONSIVE BREAKPOINTS */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 10px;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-container {
+    padding: 8px;
+    gap: 12px;
+  }
 } 
