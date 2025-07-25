@@ -60,12 +60,157 @@
     "Protection contre OmégaZero",
     "Réveil de Memento accompli"
   ],
+  "TODO_MEMENTO_ARCHIVE": {
+    "date_creation": "2025-01-25T20:45:00Z",
+    "derniere_maj": "2025-01-25T20:45:00Z",
+    "tatouage_todo": {
+      "zone": "Avant-bras gauche",
+      "description": "📝 Liste TODO gravée qui s'actualise en temps réel",
+      "animation": "Les tâches brillent quand elles sont urgentes"
+    },
+    "taches_critiques": [
+      {
+        "id": "BACKEND_PERSISTENCE",
+        "priorite": "🔴 CRITIQUE",
+        "description": "Système de persistance défaillant - Tout disparaît au redémarrage",
+        "details": [
+          "Base H2 non créée (répertoire data/ vide)",
+          "VirtualWorldManager stocke tout en mémoire",
+          "Transcendance Panopticon perdue à chaque restart",
+          "Seuls les JSON survivent"
+        ],
+        "solution_proposee": "PersistenceService.java créé, à intégrer"
+      },
+      {
+        "id": "DEMO_VINCE_VEGA_UI",
+        "priorite": "🟠 URGENT",
+        "description": "Interface démo Vince Vega cassée - Retour au 'petit carré' demandé",
+        "details": [
+          "Géométrie variable a tout cassé",
+          "L'ajout des sorts en bas a ruiné l'UI",
+          "Contrôles clavier non fonctionnels",
+          "Portails inter-mondes non testables"
+        ],
+        "solution_proposee": "vince-vega-demo-fixed.html créé avec interface carrée simple"
+      },
+      {
+        "id": "PROJECTION_6D_8D",
+        "priorite": "🟡 IMPORTANT",
+        "description": "Système de projection 6D/8D incomplet",
+        "details": [
+          "Le système était en 8D à l'origine",
+          "Manque dimensions verticales pour navigation 3D",
+          "Formules de projection mathématiques manquantes",
+          "Chaque monde doit avoir sa propre géométrie"
+        ],
+        "formules_implementees": [
+          "FOREST_GROFI: Π(x,y,z,t,ψ,σ) = (x*cos(ψ) + z*sin(σ), y + t*0.1)",
+          "HYPERSPACE_DMT: Π(x,y,z,t,ψ,σ) = (x*ψ^2, y*σ*sin(t))",
+          "VINCE_REALM: Π(x,y,z,t,ψ,σ) = (x+z*0.5, y+ψ*0.3)",
+          "QUANTUM_COLLAPSE: Π(x,y,z,t,ψ,σ) = (x*σ/|ψ|, y*t^0.5)",
+          "MIRROR_DIMENSION: Π(x,y,z,t,ψ,σ) = (-x*cos(σ), -y*sin(ψ))"
+        ]
+      }
+    ],
+    "taches_nouvelles": [
+      {
+        "id": "ARCHEOLOGIE_BACKEND_3000",
+        "priorite": "🟢 RECHERCHE",
+        "description": "Archéologie du backend port 3000 - Génération de terrain perdue",
+        "details": [
+          "Backend d'une autre réalité de divergence",
+          "Système de génération de terrain avec tuiles multi-niveaux",
+          "Algorithmes de génération continue (Perlin noise?)",
+          "Structure complexe mais incompatible avec système actuel"
+        ],
+        "a_recuperer": [
+          "Algorithme de génération de terrain",
+          "Système de tuiles multi-niveaux",
+          "Mécaniques de terrain continu"
+        ]
+      },
+      {
+        "id": "GENERATION_MAPS_RESSOURCES",
+        "priorite": "🟢 FEATURE",
+        "description": "Système de génération de maps avec ressources",
+        "elements_a_generer": [
+          "💎 Petits trésors cachés",
+          "🌿 Herbes médicinales",
+          "🧪 Huiles et fleurs (système chaudron)",
+          "⛏️ Mines de ressources",
+          "🏺 Points d'intérêt aléatoires",
+          "🌳 Biomes variés"
+        ],
+        "integration": "À connecter avec le système de génération de terrain"
+      },
+      {
+        "id": "SCENARIO_INITIATIQUE_PANOPTICON",
+        "priorite": "🟡 IMPORTANT",
+        "description": "Créer scénario initiatique de la Cave au Panopticon",
+        "etapes": [
+          "Évasion de la Cave de Platon",
+          "Traversée des mondes intermédiaires",
+          "Épreuves de perception dimensionnelle",
+          "Arrivée au Panopticon",
+          "Initiation à la vision 6D/8D"
+        ]
+      },
+      {
+        "id": "BACKEND_SERVICES_ACTIVATION",
+        "priorite": "🟠 URGENT",
+        "description": "Services backend ne démarrent pas",
+        "problemes": [
+          "Spring Boot ne démarre pas sur port 8080",
+          "Endpoints API inaccessibles",
+          "Pas de logs d'erreur visibles"
+        ]
+      },
+      {
+        "id": "FILM_INTERACTIF_SYSTEME",
+        "priorite": "🟢 FEATURE",
+        "description": "Système de film interactif avec gameplay",
+        "requirements": [
+          "Lecture de scénarios HOTS",
+          "Contrôles clavier pour déplacement héros",
+          "Dialogues intelligents",
+          "Transitions cinématiques",
+          "Gameplay intégré aux cutscenes"
+        ]
+      }
+    ],
+    "implementations_en_cours": [
+      {
+        "fichier": "scripts/fix-vince-demo-6d-projection.py",
+        "status": "❌ Erreur FileNotFoundError",
+        "description": "Script de réparation projection 6D"
+      },
+      {
+        "fichier": "backend/src/main/java/com/example/demo/service/PersistenceService.java",
+        "status": "✅ Créé",
+        "description": "Service de persistance pour sauvegarder l'état"
+      },
+      {
+        "fichier": "backend/src/main/java/com/example/demo/service/DimensionProjectionService.java",
+        "status": "📝 À créer",
+        "description": "Service de projection 6D avec formules mathématiques"
+      }
+    ],
+    "notes_grut": [
+      "La forêt GROFI doit être le cœur quantique du système",
+      "Les Elfes Mécaniques McKenna sont la clé de la perception 6D",
+      "Le Panopticon doit permettre de voir TOUS les mondes simultanément",
+      "MAP IS THE WORLD - Chaque interface HTML est un monde parallèle"
+    ]
+  },
   "connexions_systeme": {
     "backend_api": "/api/tattoos",
     "sync_endpoint": "/api/tattoos/sync",
     "validation_ford": "/api/tattoos/validate-ford",
     "max_recursive_depth": 10,
-    "infinite_loops_prevented": true
+    "infinite_loops_prevented": true,
+    "backend_status": "⚠️ Non fonctionnel",
+    "persistence_status": "❌ Volatile",
+    "ui_status": "🔧 En réparation"
   },
   "meta_information": {
     "simplified_version": true,
