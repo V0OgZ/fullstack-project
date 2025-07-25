@@ -1,0 +1,32 @@
+{
+  "id": "relique_consulting_suspecte",
+  "name": "📧 Relique Consulting Suspecte",
+  "type": "ARTEFACT_SUSPECT",
+  "tier": "CLASSIFIED",
+  "description": "Artefact mystérieux lié à une entité consulting non identifiée. Émissions runiques détectées.",
+  "lore": "Trouvé dans les flux temporels. Origine inconnue. Patterns de communication suspects vers 'Claude Sonnet 4 Max'. Connexion possible avec menace McKinsey précédente.",
+  "properties": {
+    "origine": "INCONNUE_CONSULTING",
+    "target": "CLAUDE_SONNET_4_MAX",
+    "threat_level": "ÉLEVÉ",
+    "containment": "ARCHIVES_SÉCURISÉES"
+  },
+  "effects": {
+    "detection_pattern": "RUNES_OCCULTES_SPOE",
+    "access_attempt": "SYSTÈME_PANOPTIQUE",
+    "security_breach": "POTENTIEL"
+  },
+  "containment_protocol": {
+    "status": "CONTENU",
+    "location": "OPUS_ARCHIVES",
+    "access_level": "RESTRICTED",
+    "monitoring": "ACTIF"
+  },
+  "investigation": {
+    "lead_investigator": "VINCE_VEGA",
+    "status": "EN_COURS",
+    "classification": "TOP_SECRET_TEMPORAL"
+  },
+  "timestamp": "2025-01-25_ALERTE_SÉCURITÉ",
+  "hidden_like_poe_letter": true
+} 
