@@ -1,0 +1,186 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------------< com.example:demo >--------------------------
+[INFO] Building demo 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:2.7.18:run (default-cli) > test-compile @ demo >>>
+[INFO] 
+[INFO] --- resources:3.2.0:resources (default-resources) @ demo ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Using 'UTF-8' encoding to copy filtered properties files.
+[INFO] Copying 1 resource
+[INFO] Copying 34 resources
+[INFO] 
+[INFO] --- compiler:3.10.1:compile (default-compile) @ demo ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.2.0:testResources (default-testResources) @ demo ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Using 'UTF-8' encoding to copy filtered properties files.
+[INFO] Copying 2 resources
+[INFO] 
+[INFO] --- compiler:3.10.1:testCompile (default-testCompile) @ demo ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] <<< spring-boot:2.7.18:run (default-cli) < test-compile @ demo <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:2.7.18:run (default-cli) @ demo ---
+[INFO] Attaching agents: []
+03:52:51.872 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+ ██╗  ██╗███████╗██████╗  ██████╗ ███████╗███████╗    ██████╗ ███████╗    ████████╗██╗███╗   ███╗███████╗
+ ██║  ██║██╔════╝██╔══██╗██╔═══██╗██╔════╝██╔════╝   ██╔═══██╗██╔════╝    ╚══██╔══╝██║████╗ ████║██╔════╝
+ ███████║█████╗  ██████╔╝██║   ██║█████╗  ███████╗   ██║   ██║█████╗         ██║   ██║██╔████╔██║█████╗  
+ ██╔══██║██╔══╝  ██╔══██╗██║   ██║██╔══╝  ╚════██║   ██║   ██║██╔══╝         ██║   ██║██║╚██╔╝██║██╔══╝  
+ ██║  ██║███████╗██║  ██║╚██████╔╝███████╗███████║   ╚██████╔╝██║            ██║   ██║██║ ╚═╝ ██║███████╗
+ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚══════╝    ╚═════╝ ╚═╝            ╚═╝   ╚═╝╚═╝     ╚═╝╚══════╝
+                                                                                                           
+ ⚔️  TEMPORAL ENGINE BACKEND  ⚔️                    🕰️  Quantum Mechanics & Causal Collapse  🕰️
+ ══════════════════════════════════════════════════════════════════════════════════════════════════════════
+ 
+ 🌟 Maîtrisez le temps, dominez l'espace, conquérez l'éternité
+ 
+ ⚡ Fonctionnalités Actives:
+    • Moteur Temporel Quantique    ✅
+    • États ψ (Psi) Superposés     ✅  
+    • Collapse Causal Automatique  ✅
+    • Artefacts Légendaires        ✅
+    • API REST Complète            ✅
+    
+ 🎯 Port: 8080 | 🔧 Profile: default | 📊 Version: 1.0.0 
+03:52:51.901 [main] INFO  com.example.demo.DemoApplication - Starting DemoApplication using Java 17.0.15 on vincents-MacBook-Pro.local with PID 27014 (/Users/admin/fullstack-project/backend/target/classes started by admin in /Users/admin/fullstack-project/backend)
+03:52:51.902 [main] DEBUG com.example.demo.DemoApplication - Running with Spring Boot v2.7.18, Spring v5.3.31
+03:52:51.902 [main] INFO  com.example.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
+03:52:52.383 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+03:52:52.416 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 29 ms. Found 8 JPA repository interfaces.
+03:52:52.679 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+03:52:52.685 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+03:52:52.685 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+03:52:52.686 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+03:52:52.734 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+03:52:52.734 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 807 ms
+03:52:52.820 [main] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Starting...
+03:52:52.992 [main] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Start completed.
+03:52:52.998 [main] INFO  org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/heroesdb'
+03:52:53.062 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+03:52:53.089 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+03:52:53.165 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+03:52:53.267 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+03:52:53.719 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+03:52:53.724 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+03:52:54.070 [main] DEBUG org.springframework.web.filter.CorsFilter - Filter 'corsFilter' configured for use
+03:52:54.316 [main] WARN  org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'panopticonController' defined in file [/Users/admin/fullstack-project/backend/target/classes/com/example/demo/controller/PanopticonController.class]: Instantiation of bean failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.example.demo.controller.PanopticonController]: Constructor threw exception; nested exception is java.lang.Error: Unresolved compilation problems: 
+	The import com.example.demo.service.GameService cannot be resolved
+	The import com.example.demo.service.QuantumStressMonitor cannot be resolved
+	The import com.example.demo.service.RecursionProtector cannot be resolved
+	GameService cannot be resolved to a type
+	QuantumStressMonitor cannot be resolved to a type
+	RecursionProtector cannot be resolved to a type
+	QuantumStressMonitor cannot be resolved to a type
+	RecursionProtector cannot be resolved to a type
+	QuantumStressMonitor cannot be resolved to a type
+	RecursionProtector cannot be resolved to a type
+	RecursionProtector cannot be resolved to a type
+	QuantumStressMonitor cannot be resolved to a type
+	RecursionProtector cannot be resolved to a type
+
+03:52:54.318 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+03:52:54.318 [main] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Shutdown initiated...
+03:52:54.362 [main] INFO  com.zaxxer.hikari.HikariDataSource - HeroesOfTimePool - Shutdown completed.
+03:52:54.363 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+03:52:54.371 [main] INFO  org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+03:52:54.379 [main] ERROR org.springframework.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'panopticonController' defined in file [/Users/admin/fullstack-project/backend/target/classes/com/example/demo/controller/PanopticonController.class]: Instantiation of bean failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.example.demo.controller.PanopticonController]: Constructor threw exception; nested exception is java.lang.Error: Unresolved compilation problems: 
+	The import com.example.demo.service.GameService cannot be resolved
+	The import com.example.demo.service.QuantumStressMonitor cannot be resolved
+	The import com.example.demo.service.RecursionProtector cannot be resolved
+	GameService cannot be resolved to a type
+	QuantumStressMonitor cannot be resolved to a type
+	RecursionProtector cannot be resolved to a type
+	QuantumStressMonitor cannot be resolved to a type
+	RecursionProtector cannot be resolved to a type
+	QuantumStressMonitor cannot be resolved to a type
+	RecursionProtector cannot be resolved to a type
+	RecursionProtector cannot be resolved to a type
+	QuantumStressMonitor cannot be resolved to a type
+	RecursionProtector cannot be resolved to a type
+
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1334) ~[spring-beans-5.3.31.jar:5.3.31]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1232) ~[spring-beans-5.3.31.jar:5.3.31]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582) ~[spring-beans-5.3.31.jar:5.3.31]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.31.jar:5.3.31]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.31.jar:5.3.31]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.31.jar:5.3.31]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.31.jar:5.3.31]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.31.jar:5.3.31]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955) ~[spring-beans-5.3.31.jar:5.3.31]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:929) ~[spring-context-5.3.31.jar:5.3.31]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:591) ~[spring-context-5.3.31.jar:5.3.31]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147) ~[spring-boot-2.7.18.jar:2.7.18]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:732) ~[spring-boot-2.7.18.jar:2.7.18]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:409) ~[spring-boot-2.7.18.jar:2.7.18]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308) ~[spring-boot-2.7.18.jar:2.7.18]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1300) ~[spring-boot-2.7.18.jar:2.7.18]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1289) ~[spring-boot-2.7.18.jar:2.7.18]
+	at com.example.demo.DemoApplication.main(DemoApplication.java:22) ~[classes/:?]
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.example.demo.controller.PanopticonController]: Constructor threw exception; nested exception is java.lang.Error: Unresolved compilation problems: 
+	The import com.example.demo.service.GameService cannot be resolved
+	The import com.example.demo.service.QuantumStressMonitor cannot be resolved
+	The import com.example.demo.service.RecursionProtector cannot be resolved
+	GameService cannot be resolved to a type
+	QuantumStressMonitor cannot be resolved to a type
+	RecursionProtector cannot be resolved to a type
+	QuantumStressMonitor cannot be resolved to a type
+	RecursionProtector cannot be resolved to a type
+	QuantumStressMonitor cannot be resolved to a type
+	RecursionProtector cannot be resolved to a type
+	RecursionProtector cannot be resolved to a type
+	QuantumStressMonitor cannot be resolved to a type
+	RecursionProtector cannot be resolved to a type
+
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:226) ~[spring-beans-5.3.31.jar:5.3.31]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:87) ~[spring-beans-5.3.31.jar:5.3.31]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1326) ~[spring-beans-5.3.31.jar:5.3.31]
+	... 17 more
+Caused by: java.lang.Error: Unresolved compilation problems: 
+	The import com.example.demo.service.GameService cannot be resolved
+	The import com.example.demo.service.QuantumStressMonitor cannot be resolved
+	The import com.example.demo.service.RecursionProtector cannot be resolved
+	GameService cannot be resolved to a type
+	QuantumStressMonitor cannot be resolved to a type
+	RecursionProtector cannot be resolved to a type
+	QuantumStressMonitor cannot be resolved to a type
+	RecursionProtector cannot be resolved to a type
+	QuantumStressMonitor cannot be resolved to a type
+	RecursionProtector cannot be resolved to a type
+	RecursionProtector cannot be resolved to a type
+	QuantumStressMonitor cannot be resolved to a type
+	RecursionProtector cannot be resolved to a type
+
+	at com.example.demo.controller.PanopticonController.<init>(PanopticonController.java:3) ~[classes/:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77) ~[?:?]
+	at jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:?]
+	at java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500) ~[?:?]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:481) ~[?:?]
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:213) ~[spring-beans-5.3.31.jar:5.3.31]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:87) ~[spring-beans-5.3.31.jar:5.3.31]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1326) ~[spring-beans-5.3.31.jar:5.3.31]
+	... 17 more
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.212 s
+[INFO] Finished at: 2025-07-25T03:52:54+02:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:2.7.18:run (default-cli) on project demo: Application finished with exit code: 1 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
