@@ -17,6 +17,7 @@
   "author": "Heroes of Time Team",
   "license": "MIT",
   "devDependencies": {
+    "@playwright/test": "^1.54.1",
     "@types/lodash": "^4.17.20",
     "@types/seedrandom": "^3.0.8",
     "axios": "^1.10.0"

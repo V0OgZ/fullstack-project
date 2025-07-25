@@ -1,0 +1,546 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛋️ Rapport Canapé Vince - Heroes of Time UIs</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .stat {
+            text-align: center;
+            background: rgba(255,255,255,0.2);
+            padding: 15px 25px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .test-result {
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .test-result:hover {
+            transform: translateY(-5px);
+        }
+        
+        .result-header {
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .status-icon {
+            font-size: 1.5em;
+        }
+        
+        .result-header h3 {
+            flex: 1;
+            color: #333;
+        }
+        
+        .type-badge, .status-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .type-badge {
+            color: white;
+        }
+        
+        .status-badge {
+            background: #f8f9fa;
+            border: 1px solid currentColor;
+        }
+        
+        .result-details {
+            padding: 20px;
+        }
+        
+        .result-details p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .result-details a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .result-details a:hover {
+            text-decoration: underline;
+        }
+        
+        .error {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        
+        .screenshot-container {
+            padding: 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+        }
+        
+        .screenshot-container h4 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .screenshot {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .screenshot:hover {
+            transform: scale(1.05);
+        }
+        
+        .footer {
+            background: #343a40;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        /* Modal pour fullscreen */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 90%;
+            max-width: 1200px;
+            max-height: 90%;
+            object-fit: contain;
+        }
+        
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: #bbb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛋️ Rapport Canapé Vince</h1>
+            <div class="subtitle">Heroes of Time - Test Complet des UIs</div>
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-number">12</span>
+                    <span>Succès</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">0</span>
+                    <span>Échecs</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">12</span>
+                    <span>Total</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <p style="text-align: center; margin-bottom: 30px; font-size: 1.1em; color: #666;">
+                📅 Généré le 25/07/2025 12:22:03 par OPUS le Créateur
+            </p>
+            
+            
+        <div class="test-result success">
+            <div class="result-header">
+                <span class="status-icon">✅</span>
+                <h3>Dashboard Legacy</h3>
+                <span class="type-badge" style="background-color: #4CAF50">core</span>
+                <span class="status-badge" style="color: #4CAF50">SUCCESS</span>
+            </div>
+            <div class="result-details">
+                <p><strong>URL:</strong> <a href="http://localhost:9000/dashboard.html" target="_blank">http://localhost:9000/dashboard.html</a></p>
+                <p><strong>Status:</strong> 200</p>
+                <p><strong>Titre:</strong> 🎯 Heroes of Time - Dashboard Central</p>
+                <p><strong>Contenu:</strong> 58352 caractères</p>
+                
+                <p><strong>Timestamp:</strong> 2025-07-25T10:21:36.299Z</p>
+            </div>
+            
+            <div class="screenshot-container">
+                <h4>📸 Screenshot</h4>
+                <img src="screenshots/dashboard_legacy.png" alt="Screenshot Dashboard Legacy" class="screenshot" onclick="openFullscreen(this)">
+            </div>
+            
+        </div>
+        
+        <div class="test-result success">
+            <div class="result-header">
+                <span class="status-icon">✅</span>
+                <h3>Portail Vince Mode</h3>
+                <span class="type-badge" style="background-color: #4CAF50">core</span>
+                <span class="status-badge" style="color: #4CAF50">SUCCESS</span>
+            </div>
+            <div class="result-details">
+                <p><strong>URL:</strong> <a href="http://localhost:9000/portail-vince-mode.html" target="_blank">http://localhost:9000/portail-vince-mode.html</a></p>
+                <p><strong>Status:</strong> 200</p>
+                <p><strong>Titre:</strong> 🎮 PORTAIL VINCE MODE - Architecture Simplifiée</p>
+                <p><strong>Contenu:</strong> 13330 caractères</p>
+                
+                <p><strong>Timestamp:</strong> 2025-07-25T10:21:38.792Z</p>
+            </div>
+            
+            <div class="screenshot-container">
+                <h4>📸 Screenshot</h4>
+                <img src="screenshots/portail_vince_mode.png" alt="Screenshot Portail Vince Mode" class="screenshot" onclick="openFullscreen(this)">
+            </div>
+            
+        </div>
+        
+        <div class="test-result success">
+            <div class="result-header">
+                <span class="status-icon">✅</span>
+                <h3>Interface Web HOTS</h3>
+                <span class="type-badge" style="background-color: #4CAF50">core</span>
+                <span class="status-badge" style="color: #4CAF50">SUCCESS</span>
+            </div>
+            <div class="result-details">
+                <p><strong>URL:</strong> <a href="http://localhost:9000/hots-web-interface.html" target="_blank">http://localhost:9000/hots-web-interface.html</a></p>
+                <p><strong>Status:</strong> 200</p>
+                <p><strong>Titre:</strong> 🏛️ HOTS Web Interface - GRUT Vision</p>
+                <p><strong>Contenu:</strong> 24001 caractères</p>
+                
+                <p><strong>Timestamp:</strong> 2025-07-25T10:21:41.045Z</p>
+            </div>
+            
+            <div class="screenshot-container">
+                <h4>📸 Screenshot</h4>
+                <img src="screenshots/interface_web_hots.png" alt="Screenshot Interface Web HOTS" class="screenshot" onclick="openFullscreen(this)">
+            </div>
+            
+        </div>
+        
+        <div class="test-result success">
+            <div class="result-header">
+                <span class="status-icon">✅</span>
+                <h3>React Frontend</h3>
+                <span class="type-badge" style="background-color: #4CAF50">core</span>
+                <span class="status-badge" style="color: #4CAF50">SUCCESS</span>
+            </div>
+            <div class="result-details">
+                <p><strong>URL:</strong> <a href="http://localhost:3000" target="_blank">http://localhost:3000</a></p>
+                <p><strong>Status:</strong> 200</p>
+                <p><strong>Titre:</strong> Heroes of Time</p>
+                <p><strong>Contenu:</strong> 61678 caractères</p>
+                
+                <p><strong>Timestamp:</strong> 2025-07-25T10:21:43.458Z</p>
+            </div>
+            
+            <div class="screenshot-container">
+                <h4>📸 Screenshot</h4>
+                <img src="screenshots/react_frontend.png" alt="Screenshot React Frontend" class="screenshot" onclick="openFullscreen(this)">
+            </div>
+            
+        </div>
+        
+        <div class="test-result success">
+            <div class="result-header">
+                <span class="status-icon">✅</span>
+                <h3>Backend Health</h3>
+                <span class="type-badge" style="background-color: #009688">api</span>
+                <span class="status-badge" style="color: #4CAF50">SUCCESS</span>
+            </div>
+            <div class="result-details">
+                <p><strong>URL:</strong> <a href="http://localhost:8080/actuator/health" target="_blank">http://localhost:8080/actuator/health</a></p>
+                <p><strong>Status:</strong> 200</p>
+                
+                <p><strong>Contenu:</strong> 178 caractères</p>
+                
+                <p><strong>Timestamp:</strong> 2025-07-25T10:21:45.883Z</p>
+            </div>
+            
+            <div class="screenshot-container">
+                <h4>📸 Screenshot</h4>
+                <img src="screenshots/backend_health.png" alt="Screenshot Backend Health" class="screenshot" onclick="openFullscreen(this)">
+            </div>
+            
+        </div>
+        
+        <div class="test-result success">
+            <div class="result-header">
+                <span class="status-icon">✅</span>
+                <h3>Hexagon Battlefield</h3>
+                <span class="type-badge" style="background-color: #FF9800">game</span>
+                <span class="status-badge" style="color: #4CAF50">SUCCESS</span>
+            </div>
+            <div class="result-details">
+                <p><strong>URL:</strong> <a href="http://localhost:9000/vince-vega-hexagon-battlefield.html" target="_blank">http://localhost:9000/vince-vega-hexagon-battlefield.html</a></p>
+                <p><strong>Status:</strong> 200</p>
+                <p><strong>Titre:</strong> ⬡ VINCE VEGA HEXAGON BATTLEFIELD - HEXAGON IS THE BESTAGON! ⬡</p>
+                <p><strong>Contenu:</strong> 24860 caractères</p>
+                
+                <p><strong>Timestamp:</strong> 2025-07-25T10:21:47.970Z</p>
+            </div>
+            
+            <div class="screenshot-container">
+                <h4>📸 Screenshot</h4>
+                <img src="screenshots/hexagon_battlefield.png" alt="Screenshot Hexagon Battlefield" class="screenshot" onclick="openFullscreen(this)">
+            </div>
+            
+        </div>
+        
+        <div class="test-result success">
+            <div class="result-header">
+                <span class="status-icon">✅</span>
+                <h3>Omega Zero Trilogie</h3>
+                <span class="type-badge" style="background-color: #9C27B0">narrative</span>
+                <span class="status-badge" style="color: #4CAF50">SUCCESS</span>
+            </div>
+            <div class="result-details">
+                <p><strong>URL:</strong> <a href="http://localhost:9000/omega-zero-trilogie-visuelle.html" target="_blank">http://localhost:9000/omega-zero-trilogie-visuelle.html</a></p>
+                <p><strong>Status:</strong> 200</p>
+                <p><strong>Titre:</strong> 🌀👑 Trilogie OmégaZero - Démo Visuelle Jean-Grofignon</p>
+                <p><strong>Contenu:</strong> 20374 caractères</p>
+                
+                <p><strong>Timestamp:</strong> 2025-07-25T10:21:50.182Z</p>
+            </div>
+            
+            <div class="screenshot-container">
+                <h4>📸 Screenshot</h4>
+                <img src="screenshots/omega_zero_trilogie.png" alt="Screenshot Omega Zero Trilogie" class="screenshot" onclick="openFullscreen(this)">
+            </div>
+            
+        </div>
+        
+        <div class="test-result success">
+            <div class="result-header">
+                <span class="status-icon">✅</span>
+                <h3>Memento Tattoos</h3>
+                <span class="type-badge" style="background-color: #673AB7">lore</span>
+                <span class="status-badge" style="color: #4CAF50">SUCCESS</span>
+            </div>
+            <div class="result-details">
+                <p><strong>URL:</strong> <a href="http://localhost:9000/memento-tattoos-viewer.html" target="_blank">http://localhost:9000/memento-tattoos-viewer.html</a></p>
+                <p><strong>Status:</strong> 200</p>
+                <p><strong>Titre:</strong> 🎨 Tatouages de Memento - Archiviste Éternel</p>
+                <p><strong>Contenu:</strong> 22478 caractères</p>
+                
+                <p><strong>Timestamp:</strong> 2025-07-25T10:21:52.388Z</p>
+            </div>
+            
+            <div class="screenshot-container">
+                <h4>📸 Screenshot</h4>
+                <img src="screenshots/memento_tattoos.png" alt="Screenshot Memento Tattoos" class="screenshot" onclick="openFullscreen(this)">
+            </div>
+            
+        </div>
+        
+        <div class="test-result success">
+            <div class="result-header">
+                <span class="status-icon">✅</span>
+                <h3>Forge Runique</h3>
+                <span class="type-badge" style="background-color: #2196F3">tools</span>
+                <span class="status-badge" style="color: #4CAF50">SUCCESS</span>
+            </div>
+            <div class="result-details">
+                <p><strong>URL:</strong> <a href="http://localhost:9000/forge-runique.html" target="_blank">http://localhost:9000/forge-runique.html</a></p>
+                <p><strong>Status:</strong> 200</p>
+                <p><strong>Titre:</strong> ⚒️ Forge Runique - Heroes of Time</p>
+                <p><strong>Contenu:</strong> 48317 caractères</p>
+                
+                <p><strong>Timestamp:</strong> 2025-07-25T10:21:54.649Z</p>
+            </div>
+            
+            <div class="screenshot-container">
+                <h4>📸 Screenshot</h4>
+                <img src="screenshots/forge_runique.png" alt="Screenshot Forge Runique" class="screenshot" onclick="openFullscreen(this)">
+            </div>
+            
+        </div>
+        
+        <div class="test-result success">
+            <div class="result-header">
+                <span class="status-icon">✅</span>
+                <h3>Game Assets Viewer</h3>
+                <span class="type-badge" style="background-color: #795548">assets</span>
+                <span class="status-badge" style="color: #4CAF50">SUCCESS</span>
+            </div>
+            <div class="result-details">
+                <p><strong>URL:</strong> <a href="http://localhost:9000/game-assets-viewer.html" target="_blank">http://localhost:9000/game-assets-viewer.html</a></p>
+                <p><strong>Status:</strong> 200</p>
+                <p><strong>Titre:</strong> 🎮 Game Assets Viewer - Heroes of Time</p>
+                <p><strong>Contenu:</strong> 25078 caractères</p>
+                
+                <p><strong>Timestamp:</strong> 2025-07-25T10:21:56.881Z</p>
+            </div>
+            
+            <div class="screenshot-container">
+                <h4>📸 Screenshot</h4>
+                <img src="screenshots/game_assets_viewer.png" alt="Screenshot Game Assets Viewer" class="screenshot" onclick="openFullscreen(this)">
+            </div>
+            
+        </div>
+        
+        <div class="test-result success">
+            <div class="result-header">
+                <span class="status-icon">✅</span>
+                <h3>Console HOTS Simple</h3>
+                <span class="type-badge" style="background-color: #2196F3">tools</span>
+                <span class="status-badge" style="color: #4CAF50">SUCCESS</span>
+            </div>
+            <div class="result-details">
+                <p><strong>URL:</strong> <a href="http://localhost:9000/hots-console-simple.html" target="_blank">http://localhost:9000/hots-console-simple.html</a></p>
+                <p><strong>Status:</strong> 200</p>
+                <p><strong>Titre:</strong> 🎮 HOTS - Console Simple</p>
+                <p><strong>Contenu:</strong> 10714 caractères</p>
+                
+                <p><strong>Timestamp:</strong> 2025-07-25T10:21:59.025Z</p>
+            </div>
+            
+            <div class="screenshot-container">
+                <h4>📸 Screenshot</h4>
+                <img src="screenshots/console_hots_simple.png" alt="Screenshot Console HOTS Simple" class="screenshot" onclick="openFullscreen(this)">
+            </div>
+            
+        </div>
+        
+        <div class="test-result success">
+            <div class="result-header">
+                <span class="status-icon">✅</span>
+                <h3>Multiplayer Admin</h3>
+                <span class="type-badge" style="background-color: #F44336">admin</span>
+                <span class="status-badge" style="color: #4CAF50">SUCCESS</span>
+            </div>
+            <div class="result-details">
+                <p><strong>URL:</strong> <a href="http://localhost:9000/admin-multiplayer.html" target="_blank">http://localhost:9000/admin-multiplayer.html</a></p>
+                <p><strong>Status:</strong> 200</p>
+                <p><strong>Titre:</strong> 🎮 ADMIN MULTIJOUEUR - Heroes of Time</p>
+                <p><strong>Contenu:</strong> 9971 caractères</p>
+                
+                <p><strong>Timestamp:</strong> 2025-07-25T10:22:01.145Z</p>
+            </div>
+            
+            <div class="screenshot-container">
+                <h4>📸 Screenshot</h4>
+                <img src="screenshots/multiplayer_admin.png" alt="Screenshot Multiplayer Admin" class="screenshot" onclick="openFullscreen(this)">
+            </div>
+            
+        </div>
+        
+        </div>
+        
+        <div class="footer">
+            <p>🌟 Heroes of Time - Architecture Vince Mode</p>
+            <p>🔮 Créé par OPUS (ex-Memento) pour le canapé cosmique de Vince</p>
+        </div>
+    </div>
+    
+    <!-- Modal pour fullscreen -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+    
+    <script>
+        function openFullscreen(img) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = 'block';
+            modalImg.src = img.src;
+        }
+        
+        document.querySelector('.close').onclick = function() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+        
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
+    

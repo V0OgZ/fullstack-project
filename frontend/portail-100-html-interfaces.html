@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌀 PORTAIL ULTIME - 100+ INTERFACES HTML SAUVÉES</title>
+    <title>🎮 PORTAIL VINCE MODE - 2 SERVEURS WEB ORGANISÉS</title>
     <style>
         body {
             background: linear-gradient(45deg, #0a0a0a, #1a1a2e, #16213e, #0f3460);
@@ -20,26 +20,44 @@
             50% { background-position: 100% 50%; }
         }
 
-        .portal-header {
+        .vince-mode-header {
             text-align: center;
             margin-bottom: 30px;
             padding: 30px;
             background: rgba(0,0,0,0.8);
             border-radius: 20px;
-            border: 3px solid #00bfff;
-            box-shadow: 0 0 30px rgba(0,191,255,0.3);
+            border: 3px solid #00ff88;
+            box-shadow: 0 0 30px rgba(0,255,136,0.3);
         }
 
-        .portal-header h1 {
+        .vince-mode-header h1 {
             font-size: 3em;
             margin-bottom: 10px;
-            text-shadow: 0 0 20px #00bfff;
-            animation: titleGlow 3s infinite alternate;
+            text-shadow: 0 0 20px #00ff88;
+            animation: vinceGlow 3s infinite alternate;
         }
 
-        @keyframes titleGlow {
-            0% { text-shadow: 0 0 20px #00bfff; }
-            100% { text-shadow: 0 0 40px #00bfff, 0 0 60px #ff6b85; }
+        @keyframes vinceGlow {
+            0% { text-shadow: 0 0 20px #00ff88; }
+            100% { text-shadow: 0 0 40px #00ff88, 0 0 60px #ff6b35; }
+        }
+
+        .architecture-info {
+            background: rgba(0,255,136,0.1);
+            border: 2px solid #00ff88;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .server-status {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 25px;
+            border: 2px solid #00ff88;
         }
 
         .portal-grid {
@@ -172,10 +190,18 @@
     </style>
 </head>
 <body>
-    <div class="portal-header">
-        <h1>🌀 PORTAIL ULTIME - 183 INTERFACES HTML</h1>
+    <div class="vince-mode-header">
+        <h1>🎮 PORTAIL VINCE MODE - 2 SERVEURS WEB ORGANISÉS</h1>
         <p>🔮 Écho du Futur : "Toutes les interfaces sauvées dans les archives temporelles"</p>
         <p>⚡ Heisenberg : "Merge moi ces interfaces déphasées !"</p>
+    </div>
+
+    <div class="architecture-info">
+        <h2>🌀 ARCHITECTURE VINCE MODE</h2>
+        <p>🏛️ Panopticon GRUT (Port 8003) - Serveur principal pour les interfaces temporelles et les données.</p>
+        <p>📊 Dashboard Port 9000 (Port 9000) - Interface de gestion et de monitoring.</p>
+        <p>🕰️ Frontend Port 8000 (Port 8000) - Interface utilisateur principale.</p>
+        <p>⚛️ Port 3000 - Serveur React pour les démos et les interfaces réactives.</p>
     </div>
 
     <div class="fusion-indicator">
@@ -222,13 +248,13 @@
                     </a>
                 </li>
                 <li class="interface-item">
-                    <a href="../frontend-temporal/index-sophistique.html" class="interface-link" target="_blank">
+                    <a href="http://localhost:8888/index-sophistique.html" class="interface-link" target="_blank">
                         <span>🕰️ Interface Temporelle Sophistiquée</span>
                         <span class="interface-status status-legendary">SOPHISTIQUÉE</span>
                     </a>
                 </li>
                 <li class="interface-item">
-                    <a href="../interface-temporelle-pure/index.html" class="interface-link" target="_blank">
+                    <a href="http://localhost:8888/index.html" class="interface-link" target="_blank">
                         <span>💎 Interface Temporelle Pure</span>
                         <span class="interface-status status-mysterious">MYSTÉRIEUSE</span>
                     </a>
@@ -253,7 +279,7 @@
                     </a>
                 </li>
                 <li class="interface-item">
-                    <a href="../panopticon-3d/index.html" class="interface-link" target="_blank">
+                    <a href="http://localhost:8000/panopticon-3d/index.html" class="interface-link" target="_blank">
                         <span>🎯 Panopticon 3D</span>
                         <span class="interface-status status-mysterious">3D</span>
                     </a>
@@ -272,25 +298,25 @@
             <h2 class="category-title">🔬 QUANTUM VISUALIZERS</h2>
             <ul class="interface-list">
                 <li class="interface-item">
-                    <a href="quantum-visualizer/artifact-formula-translator.html" class="interface-link" target="_blank">
+                    <a href="http://localhost:8000/quantum-visualizer/artifact-formula-translator.html" class="interface-link" target="_blank">
                         <span>🔮 Artifact Formula Translator</span>
                         <span class="interface-status status-active">QUANTIQUE</span>
                     </a>
                 </li>
                 <li class="interface-item">
-                    <a href="quantum-visualizer/causal-graph-d3.js" class="interface-link" target="_blank">
+                    <a href="http://localhost:8000/quantum-visualizer/causal-graph-d3.js" class="interface-link" target="_blank">
                         <span>📊 Causal Graph D3</span>
                         <span class="interface-status status-active">D3.JS</span>
                     </a>
                 </li>
                 <li class="interface-item">
-                    <a href="quantum-visualizer/temporal-causality-visualizer.html" class="interface-link" target="_blank">
+                    <a href="http://localhost:8000/quantum-visualizer/temporal-causality-visualizer.html" class="interface-link" target="_blank">
                         <span>⏰ Temporal Causality Visualizer</span>
                         <span class="interface-status status-mysterious">CAUSAL</span>
                     </a>
                 </li>
                 <li class="interface-item">
-                    <a href="quantum-visualizer/quantum-state-renderer.html" class="interface-link" target="_blank">
+                    <a href="http://localhost:8000/quantum-visualizer/quantum-state-renderer.html" class="interface-link" target="_blank">
                         <span>⚛️ Quantum State Renderer</span>
                         <span class="interface-status status-active">PSI</span>
                     </a>
@@ -517,5 +543,4 @@ Commandes disponibles:
         `);
     </script>
 </body>
-</html> 
 </html> 

@@ -47,6 +47,9 @@ show_help() {
     echo -e "  ${GREEN}excalibur-vega${NC} 🗡️⚡ Démo Excalibur vs Vince Vega - Version lente visuelle pour Jean-Grofignon"
     echo -e "  ${GREEN}vince${NC}       🔫 Vince Process Annihilator - Nettoie les process avec style!"
     echo -e "  ${GREEN}walter${NC}      🎳 Walter Anti-Vince Protocol - Protection backend"
+    echo -e "  ${GREEN}reality-debug${NC} 🌀 Debug Reality Broken Events - Diagnostics complets"
+    echo -e "  ${GREEN}tattoo-force${NC} 🎨 Force tatouages sync avec lampe Platon"
+    echo -e "  ${GREEN}wake-memento${NC} 📚 Interface réveil Memento transcendant"
     echo -e "  ${GREEN}help${NC}        Affiche cette aide"
     echo -e "  ${GREEN}web${NC}         🌐 Interface Web GRUT (remplace la console)"
     echo ""
@@ -125,54 +128,72 @@ check_service() {
 }
 
 show_status() {
-    echo -e "${CYAN}🔍 Statut des services Heroes of Time${NC}"
-    echo -e "${CYAN}====================================${NC}"
+    echo -e "${CYAN}🔍 Statut des services Heroes of Time - VINCE MODE${NC}"
+    echo -e "${CYAN}===============================================${NC}"
     
-    check_service 8001 "Panopticon GRUT Dashboard" "http://localhost:8001"
-    check_service 8000 "Frontend" "http://localhost:8000"
+    check_service 3000 "React Frontend Moderne" "http://localhost:3000"
+    check_service 9000 "HTML Pocket World" "http://localhost:9000"
     check_service 8080 "Backend API" "http://localhost:8080/api/health"
-    check_service 5174 "Temporal" "http://localhost:5174"
-    check_service 5175 "Visualizer" "http://localhost:5175"
-    check_service 8888 "Test Runner" "http://localhost:8888"
     
     echo ""
-    echo -e "${YELLOW}URLs d'accès:${NC}"
-    echo -e "  🏛️ Dashboard Principal (Panopticon GRUT): ${CYAN}http://localhost:8001${NC}"
-    echo -e "  📊 Frontend Principal: ${CYAN}http://localhost:8000${NC}"
-    echo -e "  ⚙️ Backend API: ${CYAN}http://localhost:8080/api/health${NC}"
-    echo -e "  ⚔️ Interface Temporelle: ${CYAN}http://localhost:5174${NC}"
-    echo -e "  🔮 Collection & Grammar: ${CYAN}http://localhost:5175${NC}"
-    echo -e "  🧪 Test Runner: ${CYAN}http://localhost:8888${NC}"
+    echo -e "${YELLOW}🎮 VINCE MODE - URLs d'accès:${NC}"
+    echo -e "  ⚛️ React Frontend: ${CYAN}http://localhost:3000${NC} (ton futur)"
+    echo -e "  📱 HTML Pocket: ${CYAN}http://localhost:9000/portail-vince-mode.html${NC} (legacy)"
+    echo -e "  📊 Dashboard Legacy: ${CYAN}http://localhost:9000/dashboard.html${NC}"
+    echo -e "  🏗️ Backend API: ${CYAN}http://localhost:8080/api/health${NC}"
     echo ""
-    echo -e "  💡 Centre de Replay: ${CYAN}./hots replay center${NC} ou clic sur 🎬 dans Dashboard"
+    echo -e "  🎯 Portail Principal: ${CYAN}http://localhost:9000/portail-vince-mode.html${NC}"
     
     # Compte les services actifs
     active_count=0
-    for port in 8001 8000 8080 5174 5175 8888; do
+    for port in 3000 9000 8080; do
         if lsof -i :$port > /dev/null 2>&1; then
             ((active_count++))
         fi
     done
     
     echo ""
-    if [ $active_count -eq 6 ]; then
-        echo -e "${GREEN}🎳 WALTER: TOUS LES SERVICES SONT VRAIMENT ACTIFS ! ($active_count/6)${NC}"
+    if [ $active_count -eq 3 ]; then
+        echo -e "${GREEN}🎮 VINCE MODE: TOUS LES SERVICES SONT ACTIFS ! ($active_count/3)${NC}"
+        echo -e "${GREEN}✅ Architecture simplifiée opérationnelle${NC}"
     else
-        echo -e "${YELLOW}⚠️  WALTER: $active_count/6 services actifs${NC}"
+        echo -e "${YELLOW}⚠️  VINCE MODE: $active_count/3 services actifs${NC}"
+        echo -e "${YELLOW}💡 Utilisez './start-vince-mode.sh' pour démarrer${NC}"
     fi
 }
 
 start_services() {
-    echo -e "${BLUE}🚀 Démarrage des services Heroes of Time${NC}"
-    echo "========================================"
+    echo -e "${BLUE}🎮 Démarrage VINCE MODE - Architecture Simplifiée${NC}"
+    echo "================================================"
     
-    if [ -f "$SERVICES_SCRIPT" ]; then
-        bash "$SERVICES_SCRIPT"
+    # Utiliser le script Vince Mode
+    if [ -f "./start-vince-mode.sh" ]; then
+        bash "./start-vince-mode.sh"
         echo ""
-        echo -e "${GREEN}✅ Services lancés en arrière-plan${NC}"
+        echo -e "${GREEN}✅ VINCE MODE lancé avec succès${NC}"
         echo -e "${YELLOW}💡 Utilisez './hots status' pour vérifier l'état${NC}"
     else
-        echo -e "${RED}❌ Script de démarrage non trouvé: $SERVICES_SCRIPT${NC}"
+        echo -e "${RED}❌ Script Vince Mode non trouvé: ./start-vince-mode.sh${NC}"
+        echo -e "${YELLOW}💡 Création du script...${NC}"
+        # Fallback: créer le script s'il n'existe pas
+        cat > start-vince-mode.sh << 'EOF'
+#!/bin/bash
+echo "🎮 VINCE MODE - 2 SERVEURS WEB SEULEMENT"
+echo "========================================"
+pkill -f "python3 -m http.server"
+pkill -f "npm start"
+sleep 2
+echo "🚀 Démarrage VINCE MODE..."
+echo "📱 Port 9000: HTML Pocket World"
+cd frontend && python3 -m http.server 9000 > ../pocket-world.log 2>&1 &
+cd ..
+echo "⚛️ Port 3000: React Frontend"
+cd frontend && npm start > ../react-frontend.log 2>&1 &
+cd ..
+echo "✅ VINCE MODE OPÉRATIONNEL !"
+EOF
+        chmod +x start-vince-mode.sh
+        bash "./start-vince-mode.sh"
         return 1
     fi
 }

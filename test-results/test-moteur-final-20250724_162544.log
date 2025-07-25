@@ -1,8 +1,0 @@
-[0;35m🌟 TEST MOTEUR FINAL - Jean-Grofignon Edition[0m
-[0;36m================================================================[0m
-[2025-07-24 16:25:44] [INFO] 🚀 Début des tests automatiques du moteur Heroes of Time
-[2025-07-24 16:25:44] [INFO] 📁 Logs sauvegardés dans: test-results/test-moteur-final-20250724_162544.log
-[2025-07-24 16:25:44] [INFO] 🎯 Catégorie de test: formulas
-[2025-07-24 16:25:44] [TEST] 🏥 Test de santé du backend...
-[2025-07-24 16:25:44] [KEYWORD] 🔍 BACKEND_HEALTH -> ❌ DOWN | Connexion impossible
-[2025-07-24 16:25:44] [ERROR] ❌ Backend non disponible - arrêt des tests
