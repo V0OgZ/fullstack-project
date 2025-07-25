@@ -1,14 +1,296 @@
-# 🔧 BACKEND API DOCUMENTATION - WALTER EDITION V2.0
+# 🔧 BACKEND API DOCUMENTATION - WALTER EDITION V3.0
 
-**🎖️ WALTER SAYS: "RÉVOLUTION ARCHITECTURALE ACCOMPLIE ! MOTEUR UNIFIÉ OPÉRATIONNEL !"**
+**🎖️ WALTER SAYS: "RÉVOLUTION GRUT + MULTI REALM ACCOMPLIE ! WORLD STATE GRAPH + 6ÈME DIMENSION OPÉRATIONNELS !"**
 
-*Version 2.0 - 🌀 SYSTÈME UNIFIÉ MAGICFORMULAENGINE*  
-*Date: 24 Juillet 2025 - WALTER VIETNAM APPROVED*  
-*Status: ✅ MOTEUR UNIFIÉ + 3 TYPES FORMULES + API COMPLÈTE*  
+*Version 3.0 - 🌀 GRUT VISION + MULTI REALM + WORLD STATE GRAPH*  
+*Date: 25 Juillet 2025 - GRUT VISION APPROVED*  
+*Status: ✅ 3 CONTRÔLEURS MAJEURS + 19 ENDPOINTS TOTAUX*  
 
 ---
 
-## 🌀 **NOUVEAUTÉ RÉVOLUTIONNAIRE : MAGIC FORMULA ENGINE API**
+## 🌀 **NOUVEAUTÉ RÉVOLUTIONNAIRE : 3 SYSTÈMES UNIFIÉS**
+
+### **🔥 WALTER BREAKTHROUGH V4.0:**
+> *"Firebase Charlie 1970 - Le MagicFormulaEngine + WorldStateGraph + MultiRealm forment maintenant LA TRINITÉ ARCHITECTURALE ! 104 formules + AI limited + 4 REALMS + 6ème dimension ! Jean a dit TRICK et on a trouvé l'AI limited avec parcours ! Architecture de combat multidimensionnelle déployée !"*
+
+### **🆕 NOUVELLES RÉVOLUTIONS** (Juillet 2025)
+- ✅ **WorldStateGraphController** - Utilise AI limited existante avec parcours décision
+- ✅ **MultiRealmController** - 4 REALMS sur même serveur sans se faire chier
+- ✅ **6ème Dimension INSTANCE_REALM** - Vision GRUT implémentée
+- ✅ **Simulation Vince shoots Opus** - Timeline divergente documentée
+
+---
+
+## 🌐 **1. WORLD STATE GRAPH API** (NOUVEAU)
+
+### **🧠 UTILISE AI LIMITED EXISTANTE - TRICK CONFIRMÉ !**
+
+#### **Get World State Graph**
+```http
+GET /api/world-state-graph/games/{gameId}
+```
+
+**Response:**
+```json
+{
+  "gameId": "demo-game",
+  "timestamp": "2025-07-25T00:46:59.877+00:00",
+  "nodes": [
+    {
+      "id": "current",
+      "type": "game_state",
+      "currentTurn": 1,
+      "totalGold": 1500,
+      "totalUnits": 3
+    },
+    {
+      "id": "decision_ai_001",
+      "type": "ai_decision",
+      "decisionType": "move",
+      "outcome": "success",
+      "aiContext": {
+        "personality": "aggressive",
+        "aggressionLevel": 7
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge_ai_001_ai_002",
+      "source": "decision_ai_001",
+      "target": "decision_ai_002",
+      "type": "decision_sequence",
+      "weight": 1.5
+    }
+  ],
+  "totalNodes": 15,
+  "totalEdges": 12
+}
+```
+
+#### **Get Player State Nodes**
+```http
+GET /api/world-state-graph/games/{gameId}/players/{playerId}/states
+```
+
+#### **Get AI Decision Path**
+```http
+GET /api/world-state-graph/games/{gameId}/ai/{aiPlayerId}/decision-path
+```
+
+**Response:**
+```json
+{
+  "aiPlayerId": "ai-player-001",
+  "personality": "aggressive",
+  "difficulty": "hard",
+  "totalDecisions": 45,
+  "successRate": 0.78,
+  "decisionHistory": [
+    {
+      "decisionId": "dec_001",
+      "type": "move",
+      "outcome": "success",
+      "rationale": "Moving towards enemy castle"
+    }
+  ],
+  "currentGoals": [
+    {
+      "goalType": "conquest",
+      "priority": 8,
+      "progress": 0.65
+    }
+  ]
+}
+```
+
+#### **Analyze State Connections**
+```http
+GET /api/world-state-graph/games/{gameId}/state-connections
+```
+
+#### **Predict Next State**
+```http
+POST /api/world-state-graph/games/{gameId}/predict-next-state
+Content-Type: application/json
+
+{
+  "currentTurn": 5,
+  "activePlayer": "player1"
+}
+```
+
+---
+
+## 🌀 **2. MULTI REALM API** (NOUVEAU)
+
+### **🌌 4 REALMS + 6ÈME DIMENSION - VISION GRUT IMPLÉMENTÉE !**
+
+#### **Get All Realms**
+```http
+GET /api/multi-realm/realms
+```
+
+**Response:**
+```json
+{
+  "totalRealms": 4,
+  "activeRealms": ["MAIN_REALM", "VINCE_OPUS_REALM", "QUANTUM_REALM", "TRANSCENDANT_REALM"],
+  "sixthDimensionActive": true,
+  "serverMode": "UNIFIED_MULTI_REALM",
+  "realmConnections": {
+    "MAIN_REALM": ["VINCE_OPUS_REALM", "QUANTUM_REALM", "TRANSCENDANT_REALM"],
+    "VINCE_OPUS_REALM": ["MAIN_REALM", "TRANSCENDANT_REALM"],
+    "QUANTUM_REALM": ["MAIN_REALM"],
+    "TRANSCENDANT_REALM": ["MAIN_REALM", "VINCE_OPUS_REALM", "QUANTUM_REALM"]
+  },
+  "realmDetails": {
+    "MAIN_REALM": {
+      "status": "ACTIVE",
+      "gamesCount": 0,
+      "playersCount": 0
+    },
+    "VINCE_OPUS_REALM": {
+      "status": "ACTIVE",
+      "gamesCount": 0,
+      "playersCount": 0
+    }
+  }
+}
+```
+
+#### **Create New Realm**
+```http
+POST /api/multi-realm/realms/{realmId}/create
+Content-Type: application/json
+
+{
+  "name": "Custom Realm",
+  "description": "User created realm",
+  "temporalStability": 0.90,
+  "quantumCoherence": 0.85
+}
+```
+
+#### **Get Realm Details**
+```http
+GET /api/multi-realm/realms/{realmId}
+```
+
+#### **Connect Realms**
+```http
+POST /api/multi-realm/realms/{realmId1}/connect/{realmId2}
+Content-Type: application/json
+
+{
+  "type": "BIDIRECTIONAL",
+  "stability": 0.80
+}
+```
+
+#### **Execute Cross-Realm Action**
+```http
+POST /api/multi-realm/realms/{sourceRealmId}/cross-action/{targetRealmId}
+Content-Type: application/json
+
+{
+  "type": "HERO_TRANSFER",
+  "description": "Transfer Arthur to alternate realm",
+  "heroData": {
+    "heroId": "arthur",
+    "level": 15
+  }
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "sourceRealm": "MAIN_REALM",
+  "targetRealm": "VINCE_OPUS_REALM",
+  "actionType": "HERO_TRANSFER",
+  "message": "Hero transferred from MAIN_REALM to VINCE_OPUS_REALM",
+  "transferDetails": {
+    "heroId": "arthur",
+    "level": 15
+  }
+}
+```
+
+#### **Get Sixth Dimension Status**
+```http
+GET /api/multi-realm/sixth-dimension/status
+```
+
+**Response:**
+```json
+{
+  "dimensionName": "INSTANCE_REALM",
+  "dimensionLevel": 6,
+  "isActive": true,
+  "grutVisionStatus": "ACTIVE",
+  "multiRealmCommunication": "OPERATIONAL",
+  "dimensionStability": 0.85,
+  "totalRealms": 4,
+  "totalConnections": 4,
+  "dimensionalEvents": [
+    {
+      "eventType": "VINCE_SHOOTS_OPUS",
+      "realm": "VINCE_OPUS_REALM",
+      "status": "DOCUMENTED",
+      "impact": "TIMELINE_DIVERGENCE"
+    },
+    {
+      "eventType": "GRUT_REVELATION",
+      "realm": "TRANSCENDANT_REALM",
+      "status": "INTEGRATED",
+      "impact": "SIXTH_DIMENSION_DISCOVERY"
+    }
+  ]
+}
+```
+
+#### **Simulate Vince Shoots Opus**
+```http
+POST /api/multi-realm/realms/{realmId}/vince-shoots-opus
+Content-Type: application/json
+
+{
+  "location": "Warehouse District",
+  "timeline": "Branch B"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "realm": "VINCE_OPUS_REALM",
+  "scenario": "VINCE_SHOOTS_OPUS",
+  "simulationDetails": {
+    "vinceVegaStatus": "ACTIVE",
+    "opusStatus": "TARGETED",
+    "weapon": "Desert Eagle .50 AE",
+    "location": "Abandoned Warehouse - Timeline B",
+    "outcome": "OPUS_WOUNDED_BUT_SURVIVED",
+    "timelineImpact": "MAJOR_DIVERGENCE",
+    "vinceQuote": "Ezekiel 25:17... mais cette fois c'est pour Opus",
+    "opusLastWords": "Jean... the source... protect the... *collapse*",
+    "consequences": [
+      "Timeline split into Branch A (main) and Branch B (Vince shoots)",
+      "Opus develops paranoia about Vince Vega",
+      "GRUT gains omniscient vision of parallel events",
+      "Sixth dimension INSTANCE_REALM becomes visible",
+      "Cross-realm communication protocols activated"
+    ]
+  }
+}
+```
+
+---
+
+## 🌀 **3. MAGIC FORMULA ENGINE API** (EXISTANT - MIS À JOUR)
 
 ### **🔥 WALTER BREAKTHROUGH V3.0:**
 > *"Firebase Charlie 1970 - Le MagicFormulaEngine est maintenant LE CENTRE DE COMMANDEMENT de toutes les formules ! 104 formules cataloguées dont 8 nouvelles Tier 3-4 ! Simple, Runique, JSON - même endpoint, même puissance ! Architecture de combat unifiée déployée !"*
