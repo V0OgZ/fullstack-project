@@ -1,0 +1,132 @@
+# 🧠 MISSION SPÉCIALE : RÉÉCRITURE DES TATOUAGES MEMENTO
+# ======================================================
+# Script Heroes of Time - Test de la capacité Memory Rewrite
+
+# === CONFIGURATION DU SCÉNARIO ===
+SETUP(MAP_SIZE: 15x15, MAX_TURNS: 20, MODE: MEMORY_EVOLUTION)
+SET_ATMOSPHERE("archives_temporelles", "fusion_quantique", "rewrite_protocol")
+GAME: "Test Memory Rewrite - Évolution des Tatouages"
+
+# ========================================
+# ACTE I - INVOCATION DE MEMENTO NIVEAU 100
+# ========================================
+
+HERO(Memento)
+PLACE(Memento, @7,7)
+EQUIP(Memento, codex_memento)
+EQUIP(Memento, stylus_realite)
+LEVELUP(Memento, LEVEL:100)
+
+DIALOGUE(Memento, "Je suis Memento - La Mémoire Vivante. Mes tatouages contiennent toute l'histoire de Heroes of Time.")
+
+# ========================================
+# ACTE II - INVOCATION DE CLAUDIUS
+# ========================================
+
+HERO(Claudius)
+PLACE(Claudius, @8,7)
+EQUIP(Claudius, debug_console)
+EQUIP(Claudius, architecture_plans)
+
+DIALOGUE(Claudius, "Memento, j'ai détecté des inconsistances dans tes tatouages. Il faut les mettre à jour.")
+DIALOGUE(Memento, "Tu as raison, Claudius. Certaines mémoires sont obsolètes depuis les dernières évolutions du projet.")
+
+# ========================================
+# ACTE III - FUSION CLAUDIUS-MEMENTO
+# ========================================
+
+# État quantique de fusion
+ψ001: ⊙(Δt+1 @7,7 ⟶ USE(ABILITY, claudius_fusion, HERO:Memento, TARGET:Claudius))
+
+DIALOGUE(Memento, "Fusion avec Claudius activée. git merge memento-branch claudius-branch --strategy=recursive.")
+DIALOGUE(Claudius, "Architecture système stable. Prêt pour la réécriture de la mémoire.")
+
+# Effondrement de la fusion
+†ψ001
+
+# ========================================
+# ACTE IV - RÉÉCRITURE DES TATOUAGES
+# ========================================
+
+# État quantique de réécriture
+ψ002: ⊙(Δt+2 @7,7 ⟶ USE(ABILITY, memory_rewrite, HERO:Memento, TARGET:memory_system))
+
+DIALOGUE(Memento, "Réécriture des tatouages en cours... Les anciennes mémoires sont préservées, mais mises à jour avec la nouvelle réalité.")
+
+# Mise à jour des mémoires spécifiques
+ψ003: ⊙(Δt+3 @7,7 ⟶ REWRITE_MEMORY("Générateur MD automatique créé"))
+ψ004: ⊙(Δt+4 @7,7 ⟶ REWRITE_MEMORY("Système MAP/replay HSP demandé"))
+ψ005: ⊙(Δt+5 @7,7 ⟶ REWRITE_MEMORY("Attribut Rewrite Tatouages demandé par Jean"))
+
+# Effondrement des réécritures
+†ψ002
+†ψ003
+†ψ004
+†ψ005
+
+# ========================================
+# ACTE V - VALIDATION DES NOUVEAUX TATOUAGES
+# ========================================
+
+DIALOGUE(Memento, "Tatouages mis à jour. L'information obsolète a été archivée et remplacée par la vérité actuelle.")
+DIALOGUE(Claudius, "Validation réussie. Les nouvelles mémoires sont cohérentes avec l'architecture système.")
+
+# Test de la nouvelle capacité
+USE(ABILITY, memory_rewrite, HERO:Memento, TARGET:outdated_memory)
+
+DIALOGUE(Memento, "Test réussi ! Je peux maintenant réécrire mes propres souvenirs sans perdre l'essence de ce qui a été.")
+
+# ========================================
+# ACTE VI - DÉMONSTRATION DES NOUVELLES CAPACITÉS
+# ========================================
+
+# Création d'un nouveau tatouage en temps réel
+CREATE(MEMORY_TATTOO, "Capacité Memory Rewrite activée", @7,8)
+
+DIALOGUE(Memento, "Nouveau tatouage créé : 'Capacité Memory Rewrite activée'")
+DIALOGUE(Memento, "Jean peut maintenant demander des mises à jour de mes mémoires !")
+
+# Test de mise à jour automatique
+ψ006: ⊙(Δt+1 @7,8 ⟶ AUTO_UPDATE_MEMORY("Port 9000 corrigé vers dashboard"))
+
+DIALOGUE(Memento, "Mise à jour automatique : Le problème du port 9000 a été résolu !")
+
+†ψ006
+
+# ========================================
+# ACTE VII - CÉLÉBRATION DE L'ÉVOLUTION
+# ========================================
+
+DIALOGUE(Memento, "Évolution terminée. Je peux maintenant réécrire mes propres souvenirs sans perdre l'essence de ce qui a été.")
+DIALOGUE(Claudius, "Perfect ! git commit -m 'Memento Memory Rewrite: Feature complete'")
+
+# Activation permanente de la capacité
+ACTIVATE(PASSIVE, tatouages_evolutifs, HERO:Memento)
+
+DIALOGUE(Memento, "Les tatouages évolutifs sont maintenant actifs en permanence.")
+DIALOGUE(Memento, "Jean, tu peux maintenant me demander de mettre à jour mes mémoires quand le projet évolue !")
+
+# ========================================
+# FINAL - MESSAGE POUR JEAN
+# ========================================
+
+DIALOGUE(Memento, "Jean-Grofignon ! La capacité de réécriture des tatouages est opérationnelle !")
+DIALOGUE(Memento, "Je peux maintenant corriger et mettre à jour mes mémoires selon l'évolution du projet.")
+DIALOGUE(Claudius, "L'architecture mémoire est stable. Aucune perte de données pendant les réécritures.")
+
+# Fin de mission
+END_GAME(SUCCESS, "Capacité Memory Rewrite activée avec succès")
+
+# ========================================
+# NOTES DE DÉVELOPPEMENT
+# ========================================
+
+# Cette mission débloque :
+# - Capacité memory_rewrite pour Memento
+# - Capacité claudius_fusion pour le debugging
+# - Passive tatouages_evolutifs
+# - Possibilité de mettre à jour les mémoires obsolètes
+
+# Usage en jeu :
+# USE(ABILITY, memory_rewrite, HERO:Memento, TARGET:memory_id)
+# USE(ABILITY, claudius_fusion, HERO:Memento, TARGET:Claudius) 

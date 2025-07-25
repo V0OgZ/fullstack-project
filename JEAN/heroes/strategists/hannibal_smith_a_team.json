@@ -1,0 +1,185 @@
+{
+  "id": "hannibal_smith_a_team",
+  "name": "Hannibal Smith",
+  "title": "🚁 The A-Team Leader",
+  "category": "STRATEGIST_TACTICAL",
+  "tier": "LEGENDARY_COMMANDER",
+  "faction": "SOURCEGUARDIANS_ATEAM",
+  "level": 50,
+  "description": "Le colonel Hannibal Smith, leader légendaire de l'A-Team. Maître stratège capable de transformer n'importe quelle situation désespérée en victoire éclatante. 'J'adore quand un plan se déroule sans accroc !'",
+  
+  "stats": {
+    "leadership": 100,
+    "strategy": 98,
+    "charisma": 95,
+    "improvisation": 99,
+    "cigar_coolness": 100,
+    "plan_execution": 97,
+    "team_coordination": 100
+  },
+  
+  "weapons": {
+    "primary": {
+      "name": "🔫 M16 Tactical",
+      "type": "ASSAULT_RIFLE",
+      "damage": "120-180",
+      "range": "LONG",
+      "special": "SUPPRESSION_FIRE"
+    },
+    "secondary": {
+      "name": "🎯 Strategic Mind",
+      "type": "MENTAL_WEAPON",
+      "damage": "INFINITE",
+      "range": "GLOBAL",
+      "special": "PERFECT_PLANNING"
+    }
+  },
+  
+  "abilities": {
+    "MASTER_PLAN": {
+      "name": "🧠 Master Plan",
+      "type": "STRATEGIC_ULTIMATE",
+      "description": "Hannibal élabore un plan parfait qui garantit la victoire de l'équipe",
+      "cooldown": 180,
+      "effect": "TEAM_VICTORY_GUARANTEED",
+      "duration": 60,
+      "formula": "PLAN(hannibal) → SUCCESS_RATE(100%) for all team actions"
+    },
+    
+    "IMPROVISATION": {
+      "name": "⚡ Improvisation",
+      "type": "ADAPTIVE_STRATEGY",
+      "description": "S'adapte instantanément à toute situation imprévue",
+      "cooldown": 30,
+      "effect": "COUNTER_ALL_ENEMY_PLANS",
+      "formula": "ADAPT(situation) → OPTIMAL_RESPONSE(instant)"
+    },
+    
+    "TEAM_COORDINATION": {
+      "name": "👥 Team Coordination",
+      "type": "LEADERSHIP_BUFF",
+      "description": "Coordonne parfaitement toute l'équipe pour une efficacité maximale",
+      "cooldown": 60,
+      "effect": "ALL_TEAM_ACTIONS_SYNCHRONIZED",
+      "bonus": "+100% team effectiveness",
+      "formula": "COORDINATE(team) → SYNERGY_BOOST(maximum)"
+    },
+    
+    "I_LOVE_IT_WHEN_A_PLAN_COMES_TOGETHER": {
+      "name": "😎 I Love It When A Plan Comes Together",
+      "type": "SIGNATURE_ULTIMATE",
+      "description": "La phrase légendaire qui active le mode victoire automatique",
+      "cooldown": 300,
+      "effect": "INSTANT_MISSION_SUCCESS",
+      "trigger": "WHEN_PLAN_SUCCEEDS",
+      "formula": "CIGAR_SMILE() → VICTORY_GUARANTEED → OMEGA_ZERO_DEFEATED"
+    }
+  },
+  
+  "passive_skills": {
+    "TACTICAL_GENIUS": {
+      "name": "🎯 Tactical Genius",
+      "description": "Voit toujours 3 coups d'avance",
+      "effect": "PREDICT_ENEMY_MOVES_3_TURNS_AHEAD"
+    },
+    
+    "UNSHAKEABLE_CONFIDENCE": {
+      "name": "💪 Unshakeable Confidence",
+      "description": "Jamais découragé, inspire confiance à toute l'équipe",
+      "effect": "TEAM_MORALE_ALWAYS_MAX"
+    },
+    
+    "CIGAR_WISDOM": {
+      "name": "🚬 Cigar Wisdom",
+      "description": "Chaque bouffée de cigare révèle une nouvelle stratégie",
+      "effect": "GAIN_STRATEGY_POINT_PER_TURN"
+    }
+  },
+  
+  "equipment": {
+    "hat": "🧢 Casquette A-Team (+15 Leadership)",
+    "jacket": "🧥 Veste Tactique (+20 Defense)",
+    "accessory": "🚬 Cigare Éternel (Wisdom +10/turn)",
+    "badge": "⭐ Colonel Insignia (+25 Charisma)"
+  },
+  
+  "quotes": {
+    "spawn": "🚁 \"I love it when a plan comes together!\"",
+    "plan_success": "😎 \"Another flawless execution, team!\"",
+    "ability_use": "🧠 \"Time to put the plan into action!\"",
+    "team_buff": "👥 \"A-Team, let's show them how it's done!\"",
+    "victory": "🚬 \"Mission accomplished. Light up the cigars!\""
+  },
+  
+  "a_team_members": {
+    "face": "Face - The Conman (Charming negotiator)",
+    "ba": "B.A. Baracus - The Mechanic (Mr. T, vehicle expert)",
+    "murdock": "Murdock - The Pilot (Crazy but brilliant aviator)",
+    "hannibal": "Hannibal - The Leader (Master strategist)"
+  },
+  
+  "lore": {
+    "origin": "Colonel Hannibal Smith, ancien des forces spéciales, condamné à tort pour un crime qu'il n'a pas commis. Évadé de prison militaire avec son équipe, il utilise maintenant ses talents stratégiques pour protéger l'univers Heroes of Time.",
+    "mission": "Leader de l'équipe SourceGuardians, coordonne toutes les opérations contre OmégaZero. Sa spécialité : transformer l'impossible en victoire certaine.",
+    "personality": "Calme, confiant, toujours un cigare à la bouche. Adore les défis impossibles et les plans complexes. Son sourire en coin annonce toujours une victoire imminente."
+  },
+  
+  "synergies": {
+    "with_clint_eastwood": {
+      "name": "🔫 Western Tactics Alliance",
+      "effect": "COMBINED_GUNFIGHT_STRATEGY",
+      "bonus": "Perfect coordination between planning and execution"
+    },
+    "with_vince_vega": {
+      "name": "💼 Professional Alliance",
+      "effect": "TACTICAL_PRECISION",
+      "bonus": "Hannibal's plans + Vince's execution = Perfection"
+    },
+    "with_jean": {
+      "name": "🛋️ Philosophers & Tacticians",
+      "effect": "COSMIC_STRATEGY",
+      "bonus": "Jean's vision + Hannibal's execution = Universal victory"
+    },
+    "with_arthur": {
+      "name": "⚔️ Leaders Alliance",
+      "effect": "DUAL_COMMAND",
+      "bonus": "Medieval honor + Modern tactics"
+    }
+  },
+  
+  "special_vehicles": {
+    "a_team_van": {
+      "name": "🚐 A-Team Van",
+      "type": "TACTICAL_VEHICLE",
+      "armor": "REINFORCED_STEEL",
+      "weapons": "MOUNTED_MACHINE_GUNS",
+      "special": "MOBILE_COMMAND_CENTER"
+    },
+    "helicopter": {
+      "name": "🚁 Combat Helicopter",
+      "type": "AIR_SUPPORT",
+      "pilot": "Murdock",
+      "weapons": "ROCKETS_AND_MINIGUNS",
+      "special": "AERIAL_RECONNAISSANCE"
+    }
+  },
+  
+  "formulas": {
+    "MASTER_PLAN_EXECUTION": "PLAN(hannibal) → ANALYZE(situation) → PERFECT_STRATEGY → VICTORY(100%)",
+    "TEAM_SYNCHRONIZATION": "COORDINATE(team) → SYNC_ALL_ACTIONS → MULTIPLIED_EFFECTIVENESS",
+    "IMPROVISATION_MATRIX": "UNEXPECTED_EVENT → INSTANT_ADAPTATION → TURN_DISADVANTAGE_TO_ADVANTAGE",
+    "CIGAR_MEDITATION": "SMOKE(cigar) → TACTICAL_INSIGHT → REVEAL_OPTIMAL_PATH"
+  },
+  
+  "combat_style": "STRATEGIC_COMMANDER",
+  "signature_move": "I_LOVE_IT_WHEN_A_PLAN_COMES_TOGETHER",
+  "weakness": "Sometimes overcomplicates simple situations",
+  "strength": "Can turn any defeat into victory with the right plan",
+  
+  "meta": {
+    "created_for": "SOURCEGUARDIANS_A_TEAM_DIVISION",
+    "role_in_team": "SUPREME_COMMANDER_STRATEGIST",
+    "priority_mission": "COORDINATE_ANTI_OMEGA_ZERO_OPERATIONS",
+    "backup_role": "MORALE_BOOSTER_AND_TACTICAL_ADVISOR"
+  }
+} 

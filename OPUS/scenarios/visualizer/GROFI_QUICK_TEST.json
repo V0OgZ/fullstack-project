@@ -1,0 +1,18 @@
+{
+  "scenario_info": {
+    "id": "grofi_quick_test", 
+    "name": "🚀 GROFI Quick Test",
+    "type": "QUICK_DEMO",
+    "description": "Test rapide des fonctionnalités GROFI pour l'UI 8001",
+    "max_turns": 5,
+    "players": 1
+  },
+  
+  "script_sequence": [
+    "HERO(Jean-Grofignon)",
+    "MOV(Jean-Grofignon, @10,10)",
+    "ψ001: ⊙(Δt+2 @15,15 ⟶ CREATE(CREATURE, Dragon, @15,15))",
+    "†ψ001",
+    "ULTIMATE(Jean-Grofignon, collapse_override)"
+  ]
+} 

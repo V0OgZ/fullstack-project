@@ -1,0 +1,32 @@
+{
+  "id": "item_joint_jean_grofignon",
+  "name": "Le Joint Oublié de Jean-Grofignon",
+  "title": "Trace Ontologique",
+  "type": "artefact_légendaire",
+  "rarity": "unique",
+  "faction": "Anomalie",
+  "description": "Un vieux mégot coincé dans un cendrier fractal. Il aurait été laissé là par Jean-Grofignon lui-même, ou par son ombre. Le fumer, c'est risquer de voir le jeu... et plus que ça. [Note moteur : verrouillé en écriture — accès en lecture hallucinée autorisé.]",
+  "formula": "INHALE(joint) ⟶ COLLAPSE(ψ_joueur) ⟶ VIEW(PANOPTICON, mode='200D', perm='read-only')",
+  "activation": "USE(SELF) → ψ.GAIN(ONTIC_INSIGHT)",
+  "effect": {
+    "summary": "Débloque temporairement le PANOPTICON (Godmode 200D) en lecture seule",
+    "details": [
+      "Le joueur voit toutes les timelines visibles",
+      "Peut consulter les logs causaux internes de la partie",
+      "Peut lire les intentions de script ou événements à venir",
+      "Impossible d'agir ou de modifier quoi que ce soit",
+      "Certains éléments sont interprétés en version tisonnante (hallucinée)"
+    ]
+  },
+  "quotes": [
+    "Ce n'est pas toi qui tires dessus. C'est lui qui te tire en arrière.",
+    "Tu vois le jeu. Puis tu vois le joueur. Puis tu vois toi en train de voir.",
+    "Il reste tiède. Comme s'il venait d'être fumé dans un autre monde."
+  ],
+  "metadata": {
+    "access_mode": "PANOPTICON:200D:READ_ONLY",
+    "source": "Jean-Grofignon",
+    "translator_warning": "Effet halluciné – activer fallback runique si confusion",
+    "tags": ["godmode", "admin", "hallucination", "temps", "meta"]
+  }
+} 

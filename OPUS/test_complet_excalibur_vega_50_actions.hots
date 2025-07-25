@@ -1,0 +1,180 @@
+# HEROES OF TIME - TEST COMPLET EXCALIBUR VS VINCE VEGA
+# Scénario de test sérieux avec 50+ actions pour validation moteur
+# Format: HOTS (Heroes of Time Script)
+# Auteur: Jean-Grofignon depuis son canapé cosmique
+# Version: 1.0 - Test Exhaustif
+
+SCENARIO_START("Test Complet Excalibur vs Vince Vega - 50+ Actions")
+AUTHOR("Jean-Grofignon")
+VERSION("1.0")
+DESCRIPTION("Test sérieux du moteur avec vraies formules, vrais calculs, vrais résultats")
+
+# =============================================================================
+# PHASE 1: INITIALISATION COMPLÈTE (Actions 1-10)
+# =============================================================================
+
+# Action 1-2: Création des héros avec leurs armes légendaires
+CREATE(HERO, Arthur_Pendragon, @10,10)
+EQUIP(HERO:Arthur_Pendragon, ARTIFACT:excalibur_bankai_merlin_arthur)
+
+CREATE(HERO, Vince_Vega, @20,20)  
+EQUIP(HERO:Vince_Vega, ARTIFACT:power_wormhole_vince_vega)
+
+# Action 3-4: Vérification des stats de base
+ASSERT(HERO:Arthur_Pendragon.hp == 1000)
+ASSERT(HERO:Arthur_Pendragon.mp == 500)
+ASSERT(HERO:Vince_Vega.hp == 800)
+ASSERT(HERO:Vince_Vega.mp == 600)
+
+# Action 5-6: Test des formules de base
+USE_FORMULA(HERO:Arthur_Pendragon, "ψ001", TARGET:SELF)
+ASSERT(HERO:Arthur_Pendragon.atk_bonus == 150)
+
+USE_FORMULA(HERO:Vince_Vega, "VV01", TARGET:DUMMY)
+ASSERT(LAST_DAMAGE == 200)
+
+# Action 7-8: Positionnement tactique
+MOV(HERO:Arthur_Pendragon, @15,15)
+MOV(HERO:Vince_Vega, @18,18)
+
+# Action 9-10: États quantiques initiaux
+ACTIVATE_PSI_STATE(HERO:Arthur_Pendragon, "ψ_superposition")
+ACTIVATE_QUANTUM_STATE(HERO:Vince_Vega, "reality_flux")
+
+# =============================================================================
+# PHASE 2: COMBAT INTENSIF - ROUND 1 (Actions 11-25)
+# =============================================================================
+
+# Action 11-13: Arthur attaque avec Divine Strike
+ANNOUNCE("🗡️ ROUND 1 - Arthur lance Divine Strike!")
+USE_FORMULA(HERO:Arthur_Pendragon, "ψ001", TARGET:Vince_Vega)
+ASSERT(HERO:Vince_Vega.hp == 650) # 800 - 150 = 650
+
+# Action 14-16: Vince contre-attaque avec Reality Shot
+ANNOUNCE("🔫 Vince Vega riposte avec Reality Shot!")
+USE_FORMULA(HERO:Vince_Vega, "VV01", TARGET:Arthur_Pendragon)
+ASSERT(HERO:Arthur_Pendragon.hp == 800) # 1000 - 200 = 800
+
+# Action 17-19: Arthur utilise Holy Light pour se soigner
+ANNOUNCE("✨ Arthur se soigne avec Holy Light!")
+USE_FORMULA(HERO:Arthur_Pendragon, "ψ002", TARGET:SELF)
+ASSERT(HERO:Arthur_Pendragon.hp == 900) # 800 + 100 = 900
+
+# Action 20-22: Vince utilise Wormhole Escape
+ANNOUNCE("🌀 Vince ouvre un wormhole!")
+USE_FORMULA(HERO:Vince_Vega, "VV02", TARGET:@25,25)
+ASSERT(HERO:Vince_Vega.position == "@25,25")
+
+# Action 23-25: Arthur active Sacred Shield
+ANNOUNCE("🛡️ Arthur active Sacred Shield!")
+USE_FORMULA(HERO:Arthur_Pendragon, "ψ003", TARGET:SELF)
+ASSERT(HERO:Arthur_Pendragon.def_bonus == 50)
+
+# =============================================================================
+# PHASE 3: COMBAT INTENSIF - ROUND 2 (Actions 26-40)
+# =============================================================================
+
+# Action 26-28: Vince utilise Briefcase Paradox
+ANNOUNCE("💼 Vince active Briefcase Paradox!")
+USE_FORMULA(HERO:Vince_Vega, "VV03", TARGET:Arthur_Pendragon)
+ASSERT(HERO:Arthur_Pendragon.status_effects.contains("controlled"))
+
+# Action 29-31: Arthur brise le contrôle avec Righteous Fury
+ANNOUNCE("⚡ Arthur explose de Righteous Fury!")
+USE_FORMULA(HERO:Arthur_Pendragon, "ψ004", TARGET:SELF)
+ASSERT(HERO:Arthur_Pendragon.atk_bonus == 225) # 150 + 75 = 225
+ASSERT(!HERO:Arthur_Pendragon.status_effects.contains("controlled"))
+
+# Action 32-34: Combat à distance - Excalibur Beam
+ANNOUNCE("🌟 Arthur lance Excalibur Beam!")
+USE_FORMULA(HERO:Arthur_Pendragon, "ψ005", TARGET:Vince_Vega)
+ASSERT(HERO:Vince_Vega.hp == 350) # 650 - 300 = 350
+
+# Action 35-37: Vince active Pulp Fiction Mode (ULTIMATE)
+ANNOUNCE("🎬 Vince entre en Pulp Fiction Mode!")
+USE_FORMULA(HERO:Vince_Vega, "VV04", TARGET:SELF)
+ASSERT(HERO:Vince_Vega.all_stats_multiplier == 2.0)
+
+# Action 38-40: Vince régénère avec l'ultimate
+HEAL(HERO:Vince_Vega, 200)
+ASSERT(HERO:Vince_Vega.hp == 550) # 350 + 200 = 550
+
+# =============================================================================
+# PHASE 4: FORMULES TEMPORELLES (Actions 41-55)
+# =============================================================================
+
+# Action 41-43: Arthur utilise Time Slash
+ANNOUNCE("⏰ Arthur active Time Slash temporel!")
+USE_FORMULA(HERO:Arthur_Pendragon, "ψT01", TARGET:Vince_Vega)
+ASSERT(HERO:Vince_Vega.hp == 350) # 550 - 200 = 350
+ASSERT(HERO:Vince_Vega.status_effects.contains("slowed"))
+
+# Action 44-46: Arthur crée un Causal Loop
+ANNOUNCE("🌀 Arthur crée un Causal Loop!")
+USE_FORMULA(HERO:Arthur_Pendragon, "ψT02", TARGET:BATTLEFIELD)
+ASSERT(BATTLEFIELD.paradox_risk == 0.15)
+ASSERT(BATTLEFIELD.temporal_stability == 0.85)
+
+# Action 47-49: Arthur active Temporal Shield
+ANNOUNCE("🛡️⏰ Arthur active Temporal Shield!")
+USE_FORMULA(HERO:Arthur_Pendragon, "ψT03", TARGET:SELF)
+ASSERT(HERO:Arthur_Pendragon.temporal_immunity == 2)
+
+# Action 50-52: Vince tente de briser la temporalité
+ANNOUNCE("💥 Vince tente de briser l'espace-temps!")
+USE_FORMULA(HERO:Vince_Vega, "VV01", TARGET:Arthur_Pendragon)
+ASSERT(LAST_DAMAGE == 0) # Bloqué par Temporal Shield
+
+# Action 53-55: Test des effets combinés
+ANNOUNCE("🔬 Test des interactions complexes...")
+ASSERT(HERO:Arthur_Pendragon.atk_bonus == 225)
+ASSERT(HERO:Arthur_Pendragon.def_bonus == 50)
+ASSERT(HERO:Arthur_Pendragon.temporal_immunity > 0)
+
+# =============================================================================
+# PHASE 5: VALIDATION FINALE (Actions 56-65)
+# =============================================================================
+
+# Action 56-58: Vérification des HP finaux
+ANNOUNCE("📊 Vérification des statistiques finales...")
+ASSERT(HERO:Arthur_Pendragon.hp > 0)
+ASSERT(HERO:Vince_Vega.hp > 0)
+
+# Action 59-61: Test des formules utilisées
+ASSERT(HERO:Arthur_Pendragon.formulas_used.size() >= 8)
+ASSERT(HERO:Vince_Vega.formulas_used.size() >= 4)
+
+# Action 62-64: Validation des états quantiques
+ASSERT(HERO:Arthur_Pendragon.psi_states.contains("ψ_superposition"))
+ASSERT(HERO:Vince_Vega.quantum_states.contains("reality_flux"))
+
+# Action 65: Résultat final
+ANNOUNCE("🏆 TEST COMPLET TERMINÉ - TOUTES LES FORMULES VALIDÉES!")
+
+# =============================================================================
+# RÉSULTATS ATTENDUS
+# =============================================================================
+
+EXPECTED_RESULTS {
+    "arthur_hp": "between 800-900",
+    "vince_hp": "between 300-400", 
+    "formulas_tested": 12,
+    "temporal_effects": 3,
+    "quantum_states": 2,
+    "total_actions": 65,
+    "test_success": true
+}
+
+# =============================================================================
+# VALIDATION MOTEUR
+# =============================================================================
+
+VALIDATE_ENGINE {
+    "MagicFormulaEngine": "all_formulas_recognized",
+    "SpellReferenceResolver": "intelligent_branching_active",
+    "TemporalEngine": "paradox_management_working",
+    "QuantumStates": "superposition_collapse_functional",
+    "CombatSystem": "damage_calculation_accurate"
+}
+
+SCENARIO_END("Test réussi - 65 actions validées - Moteur 100% opérationnel") 

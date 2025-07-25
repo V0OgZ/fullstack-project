@@ -1,0 +1,39 @@
+# 🎮 TEST VS IA - Scénario simple
+# Partie rapide pour tester le gameplay contre l'IA
+
+# Configuration de la carte
+SETUP(MAP_SIZE: 15x15, MAX_TURNS: 30)
+
+# Créer le héros du joueur
+HERO(Jean-Grofignon)
+PLACE(Jean-Grofignon, @5,5)
+EQUIP(Jean-Grofignon, joint_magique)
+
+# Créer les héros IA
+HERO(Claudius)
+PLACE(Claudius, @10,10)
+EQUIP(Claudius, codex_ordre)
+
+HERO(Memento)
+PLACE(Memento, @12,12)
+EQUIP(Memento, archive_temporelle)
+
+# Créer quelques bâtiments
+CREATE(BUILDING, Tour_de_Garde, @7,7)
+CREATE(BUILDING, Citadelle_IA, @11,11)
+
+# Créer des ressources
+CREATE(ARTIFACT, cristal_temporel, @8,5)
+CREATE(ARTIFACT, potion_soin, @4,8)
+
+# Créer quelques créatures neutres
+CREATE(CREATURE, Dragon_Temporel, @7,10)
+CREATE(CREATURE, Golem_Cristal, @5,12)
+
+# États quantiques initiaux
+ψ001: ⊙(Δt+5 @8,8 ⟶ CREATE(CREATURE, Phoenix_Quantique))
+ψ002: ⊙(Δt+10 @6,6 ⟶ CREATE(ARTIFACT, oeil_de_wigner))
+
+# Objectifs
+# VICTORY_CONDITION(DEFEAT_ALL_ENEMY_HEROES)
+# DEFEAT_CONDITION(LOSE_ALL_HEROES) 

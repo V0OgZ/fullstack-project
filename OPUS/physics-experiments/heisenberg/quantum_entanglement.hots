@@ -1,0 +1,110 @@
+# 🌀 INTRICATION QUANTIQUE - HEISENBERG ENTANGLEMENT TEST
+# ========================================================
+# 📜 EXPÉRIENCE : Action fantôme à distance (Einstein)
+# 🎯 OBJECTIF : Tester intrication et violation inégalités Bell
+# 🧪 PROTOCOLE : Paires EPR + mesures corrélées
+
+SCENARIO: "QUANTUM_ENTANGLEMENT_001"
+MAP_SIZE: 20x10
+REFERENCE_TIMELINE: T0
+CAUSAL_ENGINE: NON_LOCAL_CORRELATIONS
+PHYSICS_MODE: QUANTUM_ENTANGLEMENT
+
+# 🔬 ÉQUIPEMENT INTRICATION
+SETUP_EPR_EXPERIMENT:
+  SOURCE_EPR: @10,5 → EMIT(entangled_photon_pairs)
+  DETECTOR_ALICE: @5,5 ORIENTATION(θ_A)
+  DETECTOR_BOB: @15,5 ORIENTATION(θ_B)
+  QUANTUM_CHANNEL: @10,5 ↔ @5,5 ↔ @15,5
+
+# ⚛️ ÉTATS PSI INTRIQUÉS
+ψ001: ⊙(PAIRE_EPR ⟶ |↑↓⟩ - |↓↑⟩)/√2  # État singulet
+ψ002: Π(MEASURE_ALICE) ⇒ †ψ001 → INSTANT_CORRELATION(Bob)
+ψ003: ⊙(NON_LOCALITY ⟶ CORRELATION(A,B) > CLASSICAL_LIMIT)
+ψ004: BELL_STATE: (|00⟩ + |11⟩)/√2  # Maximally entangled
+
+# 🎮 SCRIPT INTRICATION QUANTIQUE
+PHASE_1_CRÉATION_PAIRES:
+  HERO("Alice_Quantum", @5,5) WITH_DETECTOR("polarization_A")
+  HERO("Bob_Quantum", @15,5) WITH_DETECTOR("polarization_B") 
+  SOURCE_EPR EMIT(photon_pair) → ENTANGLED_STATE
+  SEPARATE_PHOTONS(distance = 10_units)
+  
+PHASE_2_MESURES_CORRÉLÉES:
+  Alice SET_ANGLE(θ_A = 0°)
+  Bob SET_ANGLE(θ_B = 0°)
+  SIMULTANEOUS_MEASUREMENT():
+    RESULT: PERFECT_ANTICORRELATION
+    IF Alice_measures(↑) THEN Bob_measures(↓)
+    CORRELATION: C(0°,0°) = -1
+    
+PHASE_3_TEST_BELL_INEQUALITY:
+  FOR angles IN [(0°,0°), (0°,45°), (45°,0°), (45°,45°)]:
+    MEASURE_CORRELATION(θ_A, θ_B)
+    CALCULATE_S_PARAMETER()
+    
+  # Inégalité Bell classique : S ≤ 2
+  # Limite quantique : S ≤ 2√2 ≈ 2.828
+  
+PHASE_4_VIOLATION_BELL:
+  CALCULATE_CHSH_PARAMETER:
+    S = |E(0°,0°) - E(0°,45°) + E(45°,0°) + E(45°,45°)|
+    QUANTUM_RESULT: S ≈ 2.828 > 2 (violation !)
+    
+PHASE_5_ACTION_FANTÔME:
+  Alice CHANGE_ANGLE(θ_A = 90°) INSTANTLY
+  Bob OBSERVE_CORRELATION() → IMMEDIATE_CHANGE
+  DISTANCE_IRRELEVANT: "Corrélation instantanée"
+  EINSTEIN_OBJECTION: "Action fantôme à distance !"
+
+# 🏆 CONDITIONS SUCCÈS
+WIN_CONDITION:
+  - Corrélations parfaites aux angles identiques
+  - Violation inégalités Bell : S > 2
+  - Action instantanée à distance confirmée
+  - État intriqué maintenu jusqu'à mesure
+  
+FAIL_CONDITION:
+  - Corrélations classiques seulement
+  - Pas de violation Bell
+  - Décohérence prématurée
+  - Variables cachées locales expliquent résultats
+
+# 📊 MÉTRIQUES INTRICATION
+MEASURE:
+  bell_parameter_S: 2.828 (théorique quantique)
+  correlation_strength: |C(θ_A, θ_B)|
+  entanglement_fidelity: F = ⟨ψ_ideal|ρ_measured|ψ_ideal⟩
+  decoherence_time: T₂* (temps cohérence)
+  violation_significance: (S_measured - 2)/σ
+  
+# 🌟 FORMULES INTRICATION
+PHYSICS_EQUATIONS:
+  # État EPR singulet
+  |Ψ⟩ = (|↑↓⟩ - |↓↑⟩)/√2
+  # Corrélation quantique
+  C(θ_A, θ_B) = -cos(θ_A - θ_B)
+  # Paramètre CHSH
+  S = |E(a,b) - E(a,b') + E(a',b) + E(a',b')|
+  # Limite quantique
+  S_max = 2√2 ≈ 2.828
+  
+# 🧠 PARADOXE EPR
+EPR_ARGUMENT:
+  "Si la mécanique quantique est complète,
+   alors soit elle est non-locale (action à distance),
+   soit elle est non-réaliste (pas de propriétés définies).
+   Dans Heroes of Time, on accepte la non-localité !"
+   
+# 🌀 APPLICATIONS HÉROÏQUES
+GAME_MECHANICS:
+  - Communication quantique instantanée entre héros
+  - Téléportation quantique d'objets
+  - Cryptographie quantique inviolable
+  - Détection d'espionnage par décohérence
+  
+# 💭 CITATIONS QUANTIQUES
+QUOTES:
+  - "Dieu ne joue pas aux dés... mais il joue avec l'intrication !" (Einstein modifié)
+  - "L'intrication est la ressource la plus précieuse de l'univers quantique"
+  - "Dans Heroes of Time, les héros intriqués sont plus forts ensemble !" 

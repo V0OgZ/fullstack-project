@@ -1,0 +1,315 @@
+{
+  "scenario": "Le Treizième Codex",
+  "description": "Artefacts et capacités du combat final contre Omega-Zéro",
+  
+  "boss": {
+    "name": "Omega-Zéro",
+    "title": "La Somme des Oubliés",
+    "description": "Fusion de 999 héros effacés, existant avant d'être",
+    "stats": {
+      "hp": 2000,
+      "energy": 999,
+      "rank": "TRANSCENDENT",
+      "actions_per_turn": 3,
+      "pre_existence": true
+    }
+  },
+  
+  "legendary_artifacts": [
+    {
+      "id": "oeil_de_wigner",
+      "name": "Œil de Wigner",
+      "type": "ARTIFACT",
+      "tier": 7,
+      "effects": [
+        "OBSERVE_ALL_TIMELINES",
+        "COLLAPSE_ON_OBSERVATION",
+        "SEE_QUANTUM_STATES"
+      ],
+      "description": "Observe toutes les possibilités simultanément",
+      "owner": "Omega-Zero"
+    },
+    {
+      "id": "trompette_apocalypse",
+      "name": "Trompette de l'Apocalypse",
+      "type": "ARTIFACT",
+      "tier": 7,
+      "effects": [
+        "ANNOUNCE_END_TIMES",
+        "FORCE_TIMELINE_COLLAPSE",
+        "SUMMON_FALLEN_HEROES"
+      ],
+      "description": "Annonce la fin de toutes choses",
+      "owner": "Omega-Zero"
+    },
+    {
+      "id": "codex_eternite",
+      "name": "Codex de l'Éternité",
+      "type": "ARTIFACT",
+      "tier": 7,
+      "effects": [
+        "INFINITE_KNOWLEDGE",
+        "REWRITE_HISTORY",
+        "SELF_UPDATING_PAGES"
+      ],
+      "description": "Contient tous les savoirs passés et futurs",
+      "owner": "Omega-Zero"
+    },
+    {
+      "id": "lame_avant_monde",
+      "name": "Lame d'Avant-Monde",
+      "type": "ARTIFACT",
+      "tier": 7,
+      "effects": [
+        "CUT_NONEXISTENCE",
+        "SEVER_TIMELINES",
+        "PRE_EMPTIVE_STRIKE"
+      ],
+      "description": "Coupe ce qui n'existe pas encore",
+      "owner": "Omega-Zero"
+    },
+    {
+      "id": "orbe_echos",
+      "name": "Orbe des Échos",
+      "type": "ARTIFACT",
+      "tier": 7,
+      "effects": [
+        "RESONATE_WITH_DEAD",
+        "CREATE_HERO_ECHOES",
+        "AMPLIFY_PAST_ACTIONS"
+      ],
+      "description": "Résonne avec les héros morts",
+      "owner": "Omega-Zero"
+    },
+    {
+      "id": "graine_origine",
+      "name": "Graine de l'Origine",
+      "type": "ARTIFACT",
+      "tier": 7,
+      "effects": [
+        "CREATE_NEW_TIMELINE",
+        "RESET_TO_BEGINNING",
+        "SPAWN_PRIMORDIAL_CHAOS"
+      ],
+      "description": "Contient le premier instant de création",
+      "owner": "Omega-Zero"
+    },
+    {
+      "id": "cristal_nexus",
+      "name": "Cristal du Nexus",
+      "type": "ARTIFACT",
+      "tier": 7,
+      "effects": [
+        "REALITY_ANCHOR",
+        "MULTIVERSE_HEART",
+        "STABILIZE_PARADOXES"
+      ],
+      "description": "Cœur battant de la réalité elle-même",
+      "owner": "Omega-Zero"
+    }
+  ],
+  
+  "coalition_artifacts": [
+    {
+      "id": "container_paradoxal",
+      "name": "Container Paradoxal",
+      "type": "ARTIFACT",
+      "tier": 6,
+      "effects": [
+        "TRAP_IN_INFINITE_LOOP",
+        "CONTAIN_PARADOXES",
+        "DEBUG_REALITY_GLITCHES"
+      ],
+      "description": "Piège les entités dans des boucles infinies de logs",
+      "owner": "Jean-Grofignon"
+    },
+    {
+      "id": "debugger_supreme",
+      "name": "Debugger Suprême",
+      "type": "ARTIFACT",
+      "tier": 6,
+      "effects": [
+        "FREEZE_COLLAPSE",
+        "FORCE_INSTANCE_ACTIVATION",
+        "SACRIFICE_ANCHOR"
+      ],
+      "description": "L'outil ultime pour déboguer l'existence",
+      "owner": "Jean-Grofignon"
+    },
+    {
+      "id": "compilateur_quantique",
+      "name": "Compilateur Quantique",
+      "type": "ARTIFACT",
+      "tier": 6,
+      "effects": [
+        "REALITY_RECOMPILE",
+        "ANALYZE_SOURCE_CODE",
+        "INTRODUCE_TIMELINE_VIRUS"
+      ],
+      "description": "Compile et recompile le code de la réalité",
+      "owner": "Claudius"
+    },
+    {
+      "id": "fork_dimensionnel",
+      "name": "Fork Dimensionnel",
+      "type": "ARTIFACT",
+      "tier": 6,
+      "effects": [
+        "CREATE_TIMELINE_FORK",
+        "EVENT_ROLLBACK",
+        "DIVERGE_REALITY"
+      ],
+      "description": "Crée des branches alternatives de réalité",
+      "owner": "Claudius"
+    },
+    {
+      "id": "parchemin_sale",
+      "name": "Parchemin Sale",
+      "type": "ARTIFACT",
+      "tier": 6,
+      "effects": [
+        "SCRIBE_REALITY",
+        "WRITE_NONEXISTENCE",
+        "REVEAL_HIDDEN_TRUTH"
+      ],
+      "description": "Contient des mots jamais écrits",
+      "owner": "Chlamydius"
+    },
+    {
+      "id": "encre_vivante",
+      "name": "Encre Vivante",
+      "type": "ARTIFACT",
+      "tier": 6,
+      "effects": [
+        "ERASE_FROM_EXISTENCE",
+        "WRITE_TEMPORARY_REALITY",
+        "CREATE_REALITY_CORE"
+      ],
+      "description": "Encre qui écrit d'elle-même le destin",
+      "owner": "Chlamydius"
+    },
+    {
+      "id": "livre_vide_sans_nom",
+      "name": "Livre Vide Sans Nom",
+      "type": "ARTIFACT",
+      "tier": 8,
+      "effects": [
+        "ULTIMATE_PRISON",
+        "CONTAIN_EVERYTHING",
+        "BECOME_NOTHING"
+      ],
+      "description": "L'antithèse de toute existence - la page blanche absolue",
+      "created_by": "Coalition des Trois"
+    }
+  ],
+  
+  "boss_abilities": [
+    {
+      "id": "pre_existence_strike",
+      "name": "Frappe Pré-Existante",
+      "description": "Attaque avant même d'avoir agi",
+      "effect": "DAMAGE_BEFORE_ACTION"
+    },
+    {
+      "id": "memory_infection",
+      "name": "Infection Mémorielle",
+      "description": "Corrompt les souvenirs des héros",
+      "effect": "SWAP_HERO_ABILITIES"
+    },
+    {
+      "id": "false_heroes",
+      "name": "Faux Héros",
+      "description": "Crée des copies inversées parfaites",
+      "effect": "CREATE_EVIL_DUPLICATES"
+    },
+    {
+      "id": "reality_persistence",
+      "name": "Réalité Persistante",
+      "description": "Rend ses actions permanentes",
+      "effect": "ACTIONS_CANNOT_BE_UNDONE"
+    },
+    {
+      "id": "reversible_collapse",
+      "name": "Effondrement Réversible",
+      "description": "Peut annuler ses propres effondrements",
+      "effect": "UNDO_COLLAPSE"
+    }
+  ],
+  
+  "coalition_abilities": [
+    {
+      "id": "freeze_collapse",
+      "name": "Gel des Effondrements",
+      "hero": "Jean-Grofignon",
+      "description": "Bloque tous les collapses temporels",
+      "cost": "1 ANCHOR_POINT"
+    },
+    {
+      "id": "reality_recompile",
+      "name": "Recompilation de Réalité",
+      "hero": "Claudius",
+      "description": "Tente de recompiler une zone",
+      "risk": "TIMELINE_CONTAMINATION"
+    },
+    {
+      "id": "scribe_nonexistence",
+      "name": "Écriture du Néant",
+      "hero": "Chlamydius",
+      "description": "Efface quelque chose de l'existence",
+      "target": "ARTIFACT or ENTITY"
+    }
+  ],
+  
+  "ultimate_sequence": {
+    "name": "Séquence du Treizième Codex",
+    "requirements": [
+      "Les trois héros doivent être adjacents",
+      "Tour 27 ou plus",
+      "Au moins un artefact d'Omega détruit"
+    ],
+    "steps": [
+      {
+        "hero": "Jean-Grofignon",
+        "action": "ψ†",
+        "effect": "Effondre tous les paradoxes d'Omega"
+      },
+      {
+        "hero": "Claudius",
+        "action": "Σ",
+        "effect": "Compile toutes les possibilités d'Omega"
+      },
+      {
+        "hero": "Chlamydius",
+        "action": "FORGE(REALITY_CORE)",
+        "effect": "Crée le Livre Vide Sans Nom"
+      }
+    ],
+    "result": "Omega-Zéro est scellé dans une page blanche pour l'éternité"
+  },
+  
+  "victory_rewards": [
+    {
+      "type": "TITLE",
+      "name": "Scribes du Treizième",
+      "description": "Ont vaincu ce qui n'aurait jamais dû être"
+    },
+    {
+      "type": "ARTIFACT",
+      "name": "Fragment du Codex",
+      "description": "Un morceau du Treizième Codex, pulsant de pouvoir"
+    },
+    {
+      "type": "SCENARIO",
+      "name": "new_game_plus_omega",
+      "description": "Rejouez avec Omega comme allié... si vous l'osez"
+    }
+  ],
+  
+  "lore_notes": [
+    "Omega-Zéro est né de 999 héros oubliés fusionnés",
+    "Il existe avant d'agir, rendant la causalité inutile",
+    "Le Livre Vide Sans Nom est son antithèse parfaite",
+    "Dans les marges, il écrit encore : 'Je reviendrai'",
+    "Les trois héros portent à jamais les cicatrices de cette bataille"
+  ]
+} 

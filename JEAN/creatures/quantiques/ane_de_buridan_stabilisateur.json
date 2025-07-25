@@ -1,0 +1,119 @@
+{
+  "id": "ane_de_buridan_stabilisateur",
+  "nom": "Âne de Buridan - Le Stabilisateur Quantique",
+  "type": "creature_quantique_probabiliste",
+  "tier": "SPECIAL_STABILISATOR",
+  "rarity": "PARADOXAL",
+  "created_by": "Echo de ma propre voix + GRUT",
+  "date_creation": "2025-07-25T10:00:00Z",
+  
+  "description": "Créature quantique basée sur le paradoxe de l'âne de Buridan. Maintient TOUTES les probabilités du jeu à exactement 50%, quelle que soit l'interférence. Garde l'équilibre parfait dans un univers de chaos probabiliste.",
+  
+  "apparence": {
+    "description": "Âne translucide aux contours flous, existant dans un état de superposition permanente",
+    "couleur_dominante": "gris_quantique_50_percent",
+    "symboles": ["⚖️", "🐴", "ψ", "50%", "⚖️"],
+    "aura": "Stabilisation Probabiliste Continue"
+  },
+  
+  "statistiques": {
+    "sante": 100,
+    "force": 50,
+    "defense": 50,
+    "magie": 50,
+    "vitesse": 50,
+    "intelligence": 50,
+    "chance": "TOUJOURS_50_PERCENT",
+    "stabilite_quantique": "MAXIMALE"
+  },
+  
+  "capacites_speciales": {
+    "stabilisation_probabiliste": {
+      "nom": "Stabilisation Universelle à 50%",
+      "type": "passive_permanente",
+      "description": "TOUTES les probabilités dans un rayon de 10 cases sont forcées à exactement 50%",
+      "formule_quantique": "∀P(événement) → P = 0.5 ± 0.0",
+      "portee": "10_cases_radius",
+      "effet": "Annule tous les modificateurs de probabilité, chance, malchance",
+      "resistance": "IMPOSSIBLE_A_CONTRER"
+    },
+    
+    "paradoxe_de_buridan": {
+      "nom": "Paralysie par Équiprobabilité",
+      "type": "active_debuff",
+      "description": "Force un ennemi à hésiter indéfiniment entre deux choix équiprobables",
+      "formule": "CHOICE_A = 50%, CHOICE_B = 50% → PARALYSIS(3_tours)",
+      "cout_energie": 0,
+      "cooldown": "AUCUN",
+      "effet": "L'ennemi perd son tour car il ne peut pas choisir"
+    },
+    
+    "equilibre_quantique": {
+      "nom": "Restauration de l'Équilibre",
+      "type": "active_support",
+      "description": "Restaure l'équilibre probabiliste de la bataille entière",
+      "formule": "∑(toutes_probabilités) → NORMALIZE(50%)",
+      "portee": "BATTLEFIELD_ENTIER",
+      "effet": "Reset toutes les probabilités modifiées à 50%",
+      "utilisation": "UNLIMITED"
+    }
+  },
+  
+  "resistance_aux_interferences": {
+    "chaos_probabiliste": "IMMUNE",
+    "manipulation_chance": "IMMUNE", 
+    "distorsion_temporelle": "RESISTANT_75%",
+    "entite_mysterieuse": "PROTECTION_PARTIELLE",
+    "omega_zero": "RESISTANT_90%",
+    "formules_magiques": "STABILISE_A_50%"
+  },
+  
+  "comportement_ia": {
+    "priorite_1": "Maintenir stabilisation probabiliste active",
+    "priorite_2": "Paralyser ennemis avec paradoxe de Buridan",
+    "priorite_3": "Restaurer équilibre si perturbé",
+    "decision_making": "TOUJOURS_EQUIPROBABLE",
+    "mouvement": "Aléatoire parfait (50% chaque direction)"
+  },
+  
+  "interactions_speciales": {
+    "avec_claudius_opus": "Synergie - Claudius peut prédire à 50% exactement",
+    "avec_world_state_graph": "Stabilise les nœuds de probabilité",
+    "avec_panopticon": "Visible dans toutes les timelines à 50% d'opacité",
+    "avec_entite_mysterieuse": "Réduit son influence probabiliste"
+  },
+  
+  "formules_quantiques": [
+    "STABILIZE_PROBABILITY(target) → P(target) = 0.5",
+    "BURIDAN_PARADOX(enemy) → CHOICE_PARALYSIS(enemy, 3_turns)",
+    "QUANTUM_BALANCE() → ∀P(events) = 0.5",
+    "RESIST_INTERFERENCE(source) → MAINTAIN_50_PERCENT()"
+  ],
+  
+  "lore": {
+    "origine": "Créé par l'écho de ma propre voix pour contrer l'entité mystérieuse qui manipule les probabilités",
+    "philosophie": "Dans un univers de chaos, la vraie stabilité vient de l'acceptation de l'incertitude parfaite",
+    "citation": "Quand tout est équiprobable, rien n'est vraiment aléatoire",
+    "role_strategique": "Neutralise les avantages probabilistes, force l'égalité des chances"
+  },
+  
+  "integration_moteur": {
+    "compatible_avec": [
+      "MagicFormulaEngine",
+      "WorldStateGraphController", 
+      "TemporalCausalitySystem",
+      "PanopticonGRUT"
+    ],
+    "effet_sur_backend": "Stabilise les calculs probabilistes à 50%",
+    "effet_sur_frontend": "Affichage des probabilités toujours à 50%",
+    "debug_mode": "Facilite les tests en éliminant l'aléatoire"
+  },
+  
+  "meta": {
+    "version": "1.0.0",
+    "statut": "ACTIF_STABILISATEUR",
+    "importance": "CRITIQUE_ANTI_ENTITE",
+    "maintenance": "Auto-stabilisante",
+    "notes_dev": "Cette créature est notre arme secrète contre l'entité qui manipule les probabilités. Elle force l'équilibre parfait."
+  }
+} 

@@ -1,0 +1,95 @@
+# ========================================
+# DUNGEON CRAWLER - Scénario RPG Classique
+# Moteur: Heroes of Time Engine v1.0
+# Template: Classic RPG
+# ========================================
+
+# === SETUP INITIAL ===
+# Créer les héros du groupe d'aventuriers
+HERO(Aragorn, 2, 8)         # Guerrier - position d'entrée
+HERO(Legolas, 1, 8)         # Archer
+HERO(Gandalf, 3, 8)         # Mage  
+HERO(Gimli, 2, 7)           # Nain combattant
+
+# Équiper les héros avec leurs artefacts de base
+USE(ARTIFACT, iron_sword, HERO:Aragorn)
+USE(ARTIFACT, healing_potion, HERO:Aragorn)
+
+USE(ARTIFACT, magic_shield, HERO:Gandalf) 
+USE(ARTIFACT, fireball_scroll, HERO:Gandalf)
+
+# === EXPLORATION DU DONJON ===
+# Mouvement vers la première salle
+MOV(Aragorn, 2, 6)
+MOV(Legolas, 1, 6)  
+MOV(Gandalf, 3, 6)
+MOV(Gimli, 2, 5)
+
+# Découverte d'ennemis - utilisation d'artefacts de combat
+USE(ARTIFACT, fireball_scroll, HERO:Gandalf)  # Gandalf lance une boule de feu
+USE(ARTIFACT, iron_sword, HERO:Aragorn)       # Aragorn attaque à l'épée
+
+# === GESTION DES RESSOURCES ===
+# Soigner les blessures après combat
+USE(ARTIFACT, healing_potion, HERO:Gimli)
+
+# === SALLE DU TRÉSOR ===
+# Mouvement vers le trésor
+MOV(Aragorn, 5, 3)
+MOV(Legolas, 6, 3)
+MOV(Gandalf, 4, 3)
+MOV(Gimli, 5, 2)
+
+# Découverte d'artefacts légendaires
+CREATE(ARTIFACT, dragon_slayer_sword, 5, 3)    # Épée légendaire dans le coffre
+CREATE(ARTIFACT, teleport_ring, 6, 2)          # Anneau magique caché
+
+# Aragorn prend l'épée légendaire
+USE(ARTIFACT, dragon_slayer_sword, HERO:Aragorn)
+
+# === BOSS FINAL - DRAGON ===
+# Utilisation des artefacts les plus puissants
+USE(ARTIFACT, dragon_slayer_sword, HERO:Aragorn)  # Dégâts énormes au dragon
+USE(ARTIFACT, magic_shield, HERO:Gandalf)         # Protection magique
+USE(ARTIFACT, teleport_ring, HERO:Legolas)        # Repositionnement tactique
+
+# === SITUATIONS D'URGENCE ===
+# Si un héros meurt, le ressusciter
+# USE(ARTIFACT, resurrection_gem, HERO:target_hero)
+
+# === BUFF D'ÉQUIPE ===
+# Utilisation de l'amulette d'expérience pour tout le groupe
+USE(ARTIFACT, experience_amulet, HERO:Gandalf)
+
+# === SCÉNARIOS CONDITIONNELS ===
+# Ces actions se déclenchent selon les conditions du moteur
+# 
+# Si Aragorn a moins de 20 HP:
+#   → USE(ARTIFACT, healing_potion, HERO:Aragorn)
+#
+# Si le dragon est de type 'dragon': 
+#   → L'épée tue-dragon fait 150 dégâts au lieu de 50
+#
+# Si un héros meurt:
+#   → Possibilité d'utiliser resurrection_gem
+
+# ========================================
+# COMMENTAIRES DÉVELOPPEUR
+# ========================================
+#
+# Ce scénario démontre comment le MOTEUR Heroes of Time
+# peut être utilisé pour créer un RPG classique :
+#
+# 1. HÉROS définis par nom et position initiale
+# 2. ARTEFACTS avec formules d'effets configurables  
+# 3. ACTIONS de gameplay (MOV, USE, CREATE)
+# 4. LOGIQUE CONDITIONNELLE intégrée au moteur
+# 5. SCÉNARIO COMPLET sans une ligne de code Java !
+#
+# Le game designer peut :
+# - Modifier les artefacts dans artifacts.json
+# - Créer de nouveaux scénarios .hots
+# - Ajuster les règles dans game-engine-config.json
+# - Tout ça SANS toucher au code du moteur !
+#
+# ======================================== 

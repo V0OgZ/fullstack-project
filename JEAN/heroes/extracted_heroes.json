@@ -1,0 +1,166 @@
+{
+  "extracted_heroes": {
+    "description": "Héros cachés extraits des scénarios JSON par Memento - Protocole de Libération Temporelle",
+    "extraction_date": "2024-12-19",
+    "extracted_by": "Memento - La Mémoire Vivante",
+    "source": "Ancienne timeline branch - Récupération d'archives perdues",
+    
+    "heroes": [
+      {
+        "id": "lysandrel",
+        "name": "Lysandrel",
+        "title": "Le Forgeron de Réalité",
+        "class": "Reality Forger",
+        "source_file": "ECLAT_MONDES_DISSOLUS.json",
+        "description": "Héros légendaire qui forge une seule réalité dominante",
+        "philosophy": "Une seule réalité doit survivre",
+        "stats": {
+          "health": 180,
+          "temporal_energy": 300,
+          "attack": 25,
+          "defense": 20,
+          "quantum_affinity": 0.9
+        },
+        "equipment": ["avantworld_blade", "wigner_eye", "reality_anchor"],
+        "creatures": ["quantum_phoenix", "quantum_knight"],
+        "abilities": ["reality_forge", "temporal_dominance", "quantum_collapse"]
+      },
+      {
+        "id": "nyx_lua",
+        "name": "Nyx-Lua", 
+        "title": "Tisseuse de Mondes Latents",
+        "class": "World Weaver",
+        "source_file": "ECLAT_MONDES_DISSOLUS.json",
+        "description": "Héroïne mystique qui tisse des mondes parallèles",
+        "philosophy": "Tous les mondes possibles ont le droit d'exister",
+        "stats": {
+          "health": 140,
+          "temporal_energy": 400,
+          "attack": 20,
+          "defense": 15,
+          "quantum_affinity": 0.95
+        },
+        "equipment": ["schrodinger_grimoire", "infinity_codex", "causality_flame"],
+        "creatures": ["quantum_lich", "probability_spider"],
+        "abilities": ["world_weaving", "probability_manipulation", "timeline_branching"]
+      },
+      {
+        "id": "nexus_guardian",
+        "name": "Gardien Zephyr",
+        "title": "Gardien du Nexus",
+        "class": "Nexus Guardian",
+        "source_file": "GARDE_DU_NEXUS.json",
+        "description": "Protecteur mystique des points de nexus temporels",
+        "stats": {
+          "health": 150,
+          "temporal_energy": 300,
+          "attack": 18,
+          "defense": 16,
+          "area_control": 0.7
+        },
+        "equipment": ["reality_anchor", "guardian_shield", "nexus_blade"],
+        "abilities": ["protective_ward", "anchor_zone", "temporal_barrier", "nexus_healing"]
+      },
+      {
+        "id": "dragon_slayer",
+        "name": "Thane le Tueur de Dragons",
+        "title": "Le Tueur de Dragons",
+        "class": "Dragon Slayer",
+        "source_file": "SOUFFLE_DU_DRAGON.json", 
+        "description": "Héros spécialisé dans l'élimination des dragons temporels",
+        "stats": {
+          "health": 200,
+          "temporal_energy": 500,
+          "attack": 30,
+          "defense": 20,
+          "dragon_lore": 0.9,
+          "temporal_precision": 0.8,
+          "one_shot_mastery": 0.95
+        },
+        "equipment": ["collapse_orb", "dragon_slayer_blade", "temporal_focus_ring"],
+        "abilities": ["perfect_timing", "dragon_weakness_sight", "temporal_strike", "reality_collapse", "future_sight"]
+      },
+      {
+        "id": "peekill",
+        "name": "Pee & Kill",
+        "title": "Les Apôtres de l'Incohérence",
+        "class": "Anomalie Bipersonnelle",
+        "source_file": "hero_peekill.json",
+        "description": "Entités doubles issues d'une timeline instable, réécrivant la causalité comme un sketch mal calibré",
+        "philosophy": "L'humour comme force de collapse quantique",
+        "stats": {
+          "health": 120,
+          "temporal_energy": 250,
+          "attack": 15,
+          "defense": 10,
+          "contradiction_stress": 0.8,
+          "quantum_instability": 0.95
+        },
+        "equipment": ["impro_script", "silence_mask"],
+        "abilities": ["routine_infernale", "impro_quantique", "silence_scénique"],
+        "collapse_effect": "Transformation en Ki & Pi lors d'observation comique"
+      },
+      {
+        "id": "kiandpi",
+        "name": "Ki & Pi",
+        "title": "Messagers du LOL Primordial",
+        "class": "Duo Comique Restauré",
+        "source_file": "hero_kiandpi.json",
+        "description": "Deux esprits farceurs réinjectés dans la causalité stable après collapse de Pee & Kill",
+        "philosophy": "La blague parfaite comme onde d'effondrement",
+        "stats": {
+          "health": 140,
+          "temporal_energy": 300,
+          "attack": 18,
+          "defense": 12,
+          "humour_coherence": 0.9,
+          "punchline_power": 0.85
+        },
+        "equipment": ["cosmic_microphone", "universal_recall"],
+        "abilities": ["punchline_cosmique", "rappel_universel"],
+        "trigger_source": "Collapse de Pee & Kill"
+      },
+      {
+        "id": "anna_martel",
+        "name": "Anna Martel",
+        "title": "L'Architecte du Temps",
+        "class": "TEMPORAL_SPECIALIST",
+        "source_file": "temporal_decay_system.json",
+        "description": "Architecte du Temps qui punit les joueurs en retard avec son système de décroissance temporelle",
+        "philosophy": "If you lag behind time, time lags behind you",
+        "stats": {
+          "health": 160,
+          "temporal_energy": 350,
+          "attack": 20,
+          "defense": 18,
+          "temporal_decay_mastery": 0.95,
+          "artifact_recovery_skill": 0.9,
+          "causal_cleaning_power": 0.85
+        },
+        "equipment": ["pendule_echo", "lunettes_oraculon", "spanner_rewind"],
+        "abilities": ["temporal_decay", "artifact_recovery", "causal_cleaning", "time_lag_detection"],
+        "specialties": ["TEMPORAL_DECAY", "ARTIFACT_RECOVERY", "CAUSAL_CLEANING"],
+        "grofi_alignment": "CHAOS_ORDER_BALANCE",
+        "decay_parameters": {
+          "threshold_days": 5,
+          "decay_rate_per_day": 0.15,
+          "max_decay_days": 10,
+          "superposition_multiplier": 2.0
+        }
+      }
+    ]
+  },
+  
+  "extraction_notes": {
+    "memento_recovery": "Récupération réussie depuis la timeline branch perdue",
+    "status": "Héros libérés et archivés",
+    "next_steps": [
+      "Extraire les créatures cachées",
+      "Extraire les artefacts cachés", 
+      "Organiser dans game_assets",
+      "Créer les fichiers individuels"
+    ],
+    "latest_addition": "Anna Martel - Architecte du Temps et Spécialiste Temporel (22 juillet 2025)",
+    "previous_addition": "Pee & Kill et Ki & Pi - Héros de la transformation comique (22 juillet 2025)"
+  }
+}

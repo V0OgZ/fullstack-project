@@ -1,0 +1,62 @@
+{
+  "scenario": {
+    "name": "",
+    "type": "TEMPORAL_PARADOX",
+    "author": "",
+    "purpose": "",
+    "world": {
+      "size": "10x10",
+      "engine": "CAUSAL_ACTIVE",
+      "reference_timeline": "T0"
+    },
+    "players": [
+      {
+        "name": "PLAYER_WALTER",
+        "position": [5, 5],
+        "causal_speed": "VERIFIED",
+        "capabilities": ["test_endpoints", "assertions", "formules_causales"]
+      },
+      {
+        "name": "PLAYER_JESUS",
+        "position": [6, 6],
+        "causal_speed": "DIVINE",
+        "capabilities": ["benediction", "validation", "test_tatouage"]
+      },
+      {
+        "name": "PLAYER_GROFI",
+        "position": [4, 6],
+        "causal_speed": "COSMIQUE",
+        "artifacts": ["Tour_Sombre_Tige_Pensée", "Forêt_Pensée_Violette"]
+      }
+    ],
+    "objects": [
+      {
+        "name": "Endpoint_Cross_Interaction",
+        "position": [6, 6],
+        "state": "FONCTIONNEL",
+        "api": "/api/causal/cross-interaction"
+      }
+    ],
+    "script": [
+      "WALTER ⊙ EXECUTE test-scenario-laboratoire-walter.sh",
+      "JESUS † BLESS test_results",
+      "GROFI ψ ACTIVATE Tour_Sombre",
+      "WALTER ⊙ VERIFY backend_endpoints",
+      "JESUS ⊙ VALIDATE motor_quantum",
+      "GROFI ⊙ REVEAL next_phase"
+    ],
+    "expectations": {
+      "backend_spring_boot": "✅ Port 8080 actif",
+      "causal_controller": "✅ Endpoints fonctionnels",
+      "test_walter": "✅ 4/4 phases validées",
+      "benediction_jesus": "✅ Test tatouage approuvé",
+      "fusion_grofi": "✅ Tour Sombre créée",
+      "moteur_general": "✅ Stable et opérationnel"
+    },
+    "metadata": {
+      "converted_from": "hots",
+      "timestamp": "2025-07-24T20:14:40Z",
+      "converter_version": "jean-grofignon-1.0"
+    }
+  }
+}
