@@ -51,6 +51,12 @@ const WorldStateGraph: React.FC<WorldStateGraphProps> = ({ isVisible, grutVision
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const animationRef = useRef<number>()
 
+  // 🌐 NOUVEAU: Connexion au backend World State Graph
+  const [gameId, setGameId] = useState('heroes-conquest-1') // Game ID par défaut
+  const [backendConnected, setBackendConnected] = useState(false)
+  const [lastUpdate, setLastUpdate] = useState<Date | null>(null)
+  const [aiDecisionPaths, setAiDecisionPaths] = useState<any[]>([])
+
   // Initialiser le monde
   useEffect(() => {
     if (isVisible) {
@@ -64,6 +70,113 @@ const WorldStateGraph: React.FC<WorldStateGraphProps> = ({ isVisible, grutVision
       }
     }
   }, [isVisible, grutVision])
+
+  // 🚨 GRUT: Charger les données depuis le backend
+  const loadWorldStateFromBackend = async () => {
+    try {
+      console.log('🌐 GRUT: Chargement World State Graph depuis backend...')
+      
+      // Récupérer le World State Graph complet
+      const worldGraphResponse = await GrutApiService.getWorldStateGraph(gameId)
+      
+      if (worldGraphResponse.success && worldGraphResponse.data) {
+        const graphData = worldGraphResponse.data
+        console.log('✅ GRUT: World State Graph reçu:', graphData)
+        
+        // Convertir les nœuds backend en format frontend
+        if (graphData.nodes) {
+          const convertedNodes: WorldNode[] = graphData.nodes.map((node: any, index: number) => ({
+            id: node.id || `node_${index}`,
+            name: node.type === 'game_state' ? `État ${node.currentTurn || 'Initial'}` : node.name || `Node ${index}`,
+            type: node.type === 'game_state' ? 'temporal_nexus' : 'city',
+            position: { 
+              x: 100 + (index % 5) * 150, 
+              y: 100 + Math.floor(index / 5) * 120 
+            },
+            size: 20 + (node.importance || 1) * 10,
+            importance: node.importance || 1,
+            connections: [],
+            entities: [],
+            temporalStability: node.temporalStability || 0.8,
+            causalWeight: node.causalWeight || 1.0
+          }))
+          
+          setWorldNodes(convertedNodes)
+        }
+        
+        // Convertir les connexions backend en format frontend
+        if (graphData.edges) {
+          const convertedConnections: WorldConnection[] = graphData.edges.map((edge: any) => ({
+            from: edge.from || edge.source,
+            to: edge.to || edge.target,
+            type: edge.type || 'causal_link',
+            distance: edge.distance || 1,
+            difficulty: edge.difficulty || 1,
+            bidirectional: edge.bidirectional !== false,
+            active: edge.active !== false
+          }))
+          
+          setWorldConnections(convertedConnections)
+        }
+        
+        setBackendConnected(true)
+        setLastUpdate(new Date())
+        
+        // Récupérer les chemins de décision AI si disponibles
+        if (graphData.aiPlayersCount && graphData.aiPlayersCount > 0) {
+          loadAIDecisionPaths()
+        }
+        
+      } else {
+        console.warn('⚠️ GRUT: Pas de données World State Graph reçues')
+        // Fallback vers données simulées
+        generateSimulatedWorldData()
+      }
+      
+    } catch (error) {
+      console.error('❌ GRUT: Erreur chargement World State Graph:', error)
+      setBackendConnected(false)
+      // Fallback vers données simulées
+      generateSimulatedWorldData()
+    }
+  }
+
+  // 🤖 Charger les chemins de décision AI
+  const loadAIDecisionPaths = async () => {
+    try {
+      // Pour l'instant, on utilise un AI player ID générique
+      const aiPlayerId = 'ai_player_1'
+      const aiPathResponse = await GrutApiService.getAIDecisionPath(gameId, aiPlayerId)
+      
+      if (aiPathResponse.success && aiPathResponse.data) {
+        setAiDecisionPaths([aiPathResponse.data])
+        console.log('🤖 GRUT: AI Decision Path chargé:', aiPathResponse.data)
+      }
+    } catch (error) {
+      console.warn('⚠️ GRUT: Impossible de charger AI Decision Paths:', error)
+    }
+  }
+
+  // 🔄 Actualiser les données depuis le backend
+  const refreshWorldState = () => {
+    loadWorldStateFromBackend()
+  }
+
+  // 🎯 Chargement initial et actualisation périodique
+  useEffect(() => {
+    if (isVisible) {
+      loadWorldStateFromBackend()
+      
+      // Actualisation automatique toutes les 30 secondes
+      const interval = setInterval(() => {
+        if (backendConnected) {
+          loadWorldStateFromBackend()
+        }
+      }, 30000)
+      
+      return () => clearInterval(interval)
+    }
+  }, [isVisible, gameId])
 
   const generateWorldState = () => {
     // Générer les nœuds du monde

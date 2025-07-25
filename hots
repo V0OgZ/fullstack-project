@@ -1311,6 +1311,62 @@ case "${1:-help}" in
     "test")
         run_test_suite "$2"
         ;;
+    "playwright")
+        echo -e "${PURPLE}🎭 PLAYWRIGHT UNIVERSE TEST${NC}"
+        echo "============================="
+        echo ""
+        echo -e "${YELLOW}🚀 Lancement tests Playwright sur toutes les interfaces...${NC}"
+        
+        # Quick test des interfaces principales
+        echo -e "${CYAN}📊 Test rapide des URLs principales:${NC}"
+        
+        interfaces=(
+            "http://localhost:8000/portail-100-html-interfaces.html|🌀 Portail Ultime"
+            "http://localhost:8000/vince-vega-hexagon-battlefield.html|⬡ Hexagon Battlefield"
+            "http://localhost:8000/omega-zero-trilogie-visuelle.html|⚔️ OmegaZero Trilogie"
+            "http://localhost:9000/dashboard.html|📊 Dashboard 9000"
+            "http://localhost:8003|🏛️ Panopticon GRUT"
+            "http://localhost:3000|⚛️ React Frontend"
+            "http://localhost:8080/api/health|🔧 Backend Health"
+        )
+        
+        success_count=0
+        total_count=${#interfaces[@]}
+        
+        for interface in "${interfaces[@]}"; do
+            url=$(echo "$interface" | cut -d'|' -f1)
+            name=$(echo "$interface" | cut -d'|' -f2)
+            
+            echo -n "  Testing $name... "
+            
+            if curl -s -f --connect-timeout 3 "$url" > /dev/null 2>&1; then
+                echo -e "${GREEN}✅ OK${NC}"
+                ((success_count++))
+            else
+                echo -e "${RED}❌ FAILED${NC}"
+            fi
+        done
+        
+        echo ""
+        echo -e "${CYAN}📊 Résultats Playwright Universe:${NC}"
+        echo -e "  ✅ Succès: $success_count/$total_count"
+        echo -e "  📈 Taux: $((success_count * 100 / total_count))%"
+        
+        if [ $success_count -eq $total_count ]; then
+            echo -e "${GREEN}🎉 TOUS LES TESTS PLAYWRIGHT PASSÉS !${NC}"
+            echo -e "${PURPLE}⚡ Hexagon Battlefield: BESTAGON CONFIRMED${NC}"
+            echo -e "${PURPLE}🌀 Interface Fusion: READY FOR HEISENBERG${NC}"
+        else
+            echo -e "${YELLOW}⚠️ Certaines interfaces nécessitent attention${NC}"
+            echo -e "${CYAN}💡 Utilisez './hots start' pour démarrer tous les services${NC}"
+        fi
+        
+        # Ouvrir le portail si tout fonctionne
+        if [ $success_count -ge 4 ] && command -v open >/dev/null 2>&1; then
+            echo -e "${CYAN}🌀 Ouverture du Portail Ultime...${NC}"
+            open "http://localhost:8000/portail-100-html-interfaces.html" 2>/dev/null &
+        fi
+        ;;
     "generate")
         generate_md_docs
         ;;

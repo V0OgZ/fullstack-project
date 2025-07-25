@@ -273,6 +273,105 @@ export class GrutApiService {
       return false
     }
   }
+
+  /* ================================
+     WORLD STATE GRAPH - NOUVEAU !
+     ================================ */
+  
+  // 🌐 Obtenir le World State Graph complet pour une partie
+  static async getWorldStateGraph(gameId: string): Promise<ApiResponse<any>> {
+    try {
+      const response = await api.get(`/api/world-state-graph/games/${gameId}`)
+      return {
+        success: true,
+        data: response.data,
+        message: 'World State Graph récupéré avec succès'
+      }
+    } catch (error: any) {
+      console.error('❌ GRUT: Erreur World State Graph:', error)
+      return {
+        success: false,
+        data: null,
+        message: `Erreur World State Graph: ${error.message}`
+      }
+    }
+  }
+
+  // 🎯 Obtenir les nœuds d'état pour un joueur spécifique  
+  static async getPlayerStateNodes(gameId: string, playerId: string): Promise<ApiResponse<any>> {
+    try {
+      const response = await api.get(`/api/world-state-graph/games/${gameId}/players/${playerId}/states`)
+      return {
+        success: true,
+        data: response.data,
+        message: 'Player State Nodes récupérés'
+      }
+    } catch (error: any) {
+      console.error('❌ GRUT: Erreur Player States:', error)
+      return {
+        success: false,
+        data: null,
+        message: `Erreur Player States: ${error.message}`
+      }
+    }
+  }
+
+  // 🤖 Obtenir le parcours de décision d'une AI
+  static async getAIDecisionPath(gameId: string, aiPlayerId: string): Promise<ApiResponse<any>> {
+    try {
+      const response = await api.get(`/api/world-state-graph/games/${gameId}/ai/${aiPlayerId}/decision-path`)
+      return {
+        success: true,
+        data: response.data,
+        message: 'AI Decision Path récupéré'
+      }
+    } catch (error: any) {
+      console.error('❌ GRUT: Erreur AI Decision Path:', error)
+      return {
+        success: false,
+        data: null,
+        message: `Erreur AI Decision Path: ${error.message}`
+      }
+    }
+  }
+
+  // 🔗 Analyser les connexions entre états
+  static async getStateConnections(gameId: string): Promise<ApiResponse<any>> {
+    try {
+      const response = await api.get(`/api/world-state-graph/games/${gameId}/state-connections`)
+      return {
+        success: true,
+        data: response.data,
+        message: 'State Connections analysées'
+      }
+    } catch (error: any) {
+      console.error('❌ GRUT: Erreur State Connections:', error)
+      return {
+        success: false,
+        data: null,
+        message: `Erreur State Connections: ${error.message}`
+      }
+    }
+  }
+
+  // 🔮 Prédire le prochain état basé sur l'historique AI
+  static async predictNextState(gameId: string, currentState: any): Promise<ApiResponse<any>> {
+    try {
+      const response = await api.post(`/api/world-state-graph/games/${gameId}/predict-next-state`, currentState)
+      return {
+        success: true,
+        data: response.data,
+        message: 'Prédiction état suivant générée'
+      }
+    } catch (error: any) {
+      console.error('❌ GRUT: Erreur Predict Next State:', error)
+      return {
+        success: false,
+        data: null,
+        message: `Erreur Prédiction: ${error.message}`
+      }
+    }
+  }
 }
 
 export default GrutApiService 
