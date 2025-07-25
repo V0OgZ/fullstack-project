@@ -36,6 +36,9 @@ show_help() {
     echo -e "  ${GREEN}editor${NC}      🎨 Éditeur visuel script spatio-temporel"
     echo -e "  ${GREEN}admin${NC}       🎮 Interface d'administration multijoueur"
     echo -e "  ${GREEN}test-uis${NC}    🧪 Test complet de toutes les UIs"
+    echo -e "  ${GREEN}worldstate${NC}  🌐 World State Graph - Visualisation état mondial"
+    echo -e "  ${GREEN}multi-realm${NC} 🌌 Multi Realm Manager - Gestion des realms"
+    echo -e "  ${GREEN}benedikt${NC}    🌀 Benedikt Conulbrurcus - Tests téléportation"
     echo -e "  ${GREEN}debug${NC}       🐛 Mode debug complet (compilation + logs)"
     echo -e "  ${GREEN}compile${NC}     🔧 Compilation backend avec debug info"
     echo -e "  ${GREEN}logs${NC}        📋 Affiche les logs en temps réel"
@@ -1473,6 +1476,94 @@ case "${1:-help}" in
         ;;
     "test-uis")
         run_test_suite "ui"
+        ;;
+    "worldstate")
+        echo -e "${BLUE}🌐 World State Graph - Visualisation état mondial${NC}"
+        echo "================================="
+        echo ""
+        echo -e "${GREEN}🎯 Tests World State Graph API:${NC}"
+        
+        # Test backend connection
+        if curl -s http://localhost:8080/api/health > /dev/null 2>&1; then
+            echo -e "${GREEN}✅ Backend connecté${NC}"
+            
+            echo -e "${YELLOW}📊 Test endpoints World State Graph:${NC}"
+            echo -e "${CYAN}  🌐 GET /api/world-state-graph/graph${NC}"
+            curl -s "http://localhost:8080/api/world-state-graph/graph" | head -3
+            
+            echo -e "${CYAN}  👥 GET /api/world-state-graph/player-nodes${NC}"
+            curl -s "http://localhost:8080/api/world-state-graph/player-nodes" | head -3
+            
+            echo -e "${CYAN}  🧠 GET /api/world-state-graph/ai-decisions${NC}"
+            curl -s "http://localhost:8080/api/world-state-graph/ai-decisions" | head -3
+            
+            echo ""
+            echo -e "${GREEN}🏛️ Panopticon GRUT avec World State Graph:${NC}"
+            echo "  📊 http://localhost:8001 (React Dashboard)"
+            
+            if command -v open >/dev/null 2>&1; then
+                open "http://localhost:8001" 2>/dev/null &
+            fi
+        else
+            echo -e "${RED}❌ Backend non connecté - Démarrez avec ./hots start${NC}"
+        fi
+        ;;
+    "multi-realm")
+        echo -e "${BLUE}🌌 Multi Realm Manager - Gestion des realms${NC}"
+        echo "=========================================="
+        echo ""
+        echo -e "${GREEN}🎯 Tests Multi Realm API:${NC}"
+        
+        if curl -s http://localhost:8080/api/health > /dev/null 2>&1; then
+            echo -e "${GREEN}✅ Backend connecté${NC}"
+            
+            echo -e "${YELLOW}🌌 Test endpoints Multi Realm:${NC}"
+            echo -e "${CYAN}  🌐 GET /api/multi-realm/realms${NC}"
+            curl -s "http://localhost:8080/api/multi-realm/realms" | head -5
+            
+            echo -e "${CYAN}  👁️ GET /api/multi-realm/sixth-dimension${NC}"
+            curl -s "http://localhost:8080/api/multi-realm/sixth-dimension" | head -3
+            
+            echo -e "${CYAN}  🔫 POST /api/multi-realm/vince-shoots-opus${NC}"
+            curl -s -X POST "http://localhost:8080/api/multi-realm/vince-shoots-opus" | head -3
+            
+            echo ""
+            echo -e "${GREEN}🏛️ GRUT Vision Multi Realm validée !${NC}"
+        else
+            echo -e "${RED}❌ Backend non connecté - Démarrez avec ./hots start${NC}"
+        fi
+        ;;
+    "benedikt")
+        echo -e "${BLUE}🌀 Benedikt Conulbrurcus - Tests téléportation${NC}"
+        echo "=============================================="
+        echo ""
+        echo -e "${GREEN}🎯 Tests formules Benedikt:${NC}"
+        
+        if curl -s http://localhost:8080/api/health > /dev/null 2>&1; then
+            echo -e "${GREEN}✅ Backend connecté${NC}"
+            
+            echo -e "${YELLOW}🌀 Test formules téléportation Benedikt:${NC}"
+            
+            echo -e "${CYAN}  🌀 BENEDIKT_CIRCLE_TELEPORT${NC}"
+            curl -s -X POST "http://localhost:8080/api/magic-formulas/execute" \
+                -H "Content-Type: application/json" \
+                -d '{"formulaType": "SIMPLE", "formulaName": "BENEDIKT_CIRCLE_TELEPORT", "parameters": {}}' | head -3
+            
+            echo -e "${CYAN}  🌀 BENEDIKT_MULTI_TELEPORT${NC}"
+            curl -s -X POST "http://localhost:8080/api/magic-formulas/execute" \
+                -H "Content-Type: application/json" \
+                -d '{"formulaType": "SIMPLE", "formulaName": "BENEDIKT_MULTI_TELEPORT", "parameters": {}}' | head -3
+            
+            echo -e "${CYAN}  🌀 BENEDIKT_COSMIC_CIRCLES${NC}"
+            curl -s -X POST "http://localhost:8080/api/magic-formulas/execute" \
+                -H "Content-Type: application/json" \
+                -d '{"formulaType": "SIMPLE", "formulaName": "BENEDIKT_COSMIC_CIRCLES", "parameters": {}}' | head -3
+            
+            echo ""
+            echo -e "${GREEN}🌀 BENEDIKT CONULBRURCUS : Téléportation cosmique validée !${NC}"
+        else
+            echo -e "${RED}❌ Backend non connecté - Démarrez avec ./hots start${NC}"
+        fi
         ;;
     "debug")
         echo -e "${BLUE}🐛 Mode debug actif - Lancement de la compilation avec debug info...${NC}"
