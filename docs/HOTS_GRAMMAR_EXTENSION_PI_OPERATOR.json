@@ -1,0 +1,54 @@
+{
+  "new_operators": {
+    "Π": {
+      "name": "Projection Operator",
+      "symbol": "Π",
+      "syntax": "Π(formula × time_delta) × world_specific_modifier",
+      "description": "Projette une formule causale dans une géométrie monde spécifique",
+      "examples": [
+        "Π(ψ_STANDARD × Δt) × entropy_normal",
+        "Π(ψ_FOREST × Δt) × quantum_tree_network",
+        "Π(ψ_HALLUCINATION × Δt^-1) × syntax_vibration"
+      ]
+    }
+  },
+  "vibrating_syntax": {
+    "description": "Syntaxe qui change selon la fréquence vibratoire du monde",
+    "rules": [
+      {
+        "world": "HYPERSPACE_DMT_REALM",
+        "modifications": [
+          "Les parenthèses peuvent vibrer: ( ) → 〰️( )〰️",
+          "Les opérateurs changent de couleur selon l'intention",
+          "Les mots-clés se transforment en fractales",
+          "La ponctuation devient musicale"
+        ]
+      },
+      {
+        "world": "FOREST_GROFI",
+        "modifications": [
+          "Les formules poussent comme des branches",
+          "Les variables sont des feuilles",
+          "Les boucles sont des racines",
+          "Les conditions sont des saisons"
+        ]
+      }
+    ]
+  },
+  "new_keywords": [
+    "PROJECT",
+    "VIBRATE",
+    "FRACTAL",
+    "WEAVE",
+    "RESONATE",
+    "HALLUCINATE",
+    "MANIFEST",
+    "TRANSCEND"
+  ],
+  "implementation_notes": {
+    "parser_update": "TemporalScriptParser.java needs Π operator support",
+    "lexer_update": "Add vibrating token recognition",
+    "ast_update": "Support for world-specific syntax trees",
+    "validator_update": "Context-aware validation based on current world"
+  }
+}

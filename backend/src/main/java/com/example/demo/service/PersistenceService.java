@@ -1,323 +1,164 @@
 package com.example.demo.service;
 
-import com.example.demo.model.GameSave;
-import com.example.demo.repository.GameSaveRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.HashMap;
+import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
-@Transactional
 public class PersistenceService {
-    
-    @Autowired
-    private GameSaveRepository gameSaveRepository;
-    
-    @Autowired
-    private GameService gameService;
+
+    private static final Logger logger = LoggerFactory.getLogger(PersistenceService.class);
+    private static final String DATA_DIR = "./data";
+    private static final String WORLDS_DIR = "./data/worlds";
+    private static final String BACKUP_DIR = "./data/backup";
     
     @Autowired
     private ObjectMapper objectMapper;
     
-    // Track games that need auto-save
-    private final Map<String, LocalDateTime> gamesToAutoSave = new ConcurrentHashMap<>();
-    
-    // Configuration
-    private static final int MAX_SAVES_PER_PLAYER = 50;
-    private static final int MAX_AUTO_SAVES_PER_GAME = 5;
-    private static final long AUTO_SAVE_INTERVAL_MINUTES = 5;
-    
-    // ======================
-    // SAVE OPERATIONS
-    // ======================
-    
-    public GameSave saveGame(String gameId, String playerId, String saveName, String description) {
+    @Autowired
+    private VirtualWorldManager worldManager;
+
+    @PostConstruct
+    public void init() {
         try {
-            // Get current game state
-            Map<String, Object> gameState = gameService.getGame(gameId);
+            // Créer les répertoires nécessaires
+            Files.createDirectories(Paths.get(DATA_DIR));
+            Files.createDirectories(Paths.get(WORLDS_DIR));
+            Files.createDirectories(Paths.get(BACKUP_DIR));
+            Files.createDirectories(Paths.get(DATA_DIR + "/transcendence"));
+            Files.createDirectories(Paths.get(DATA_DIR + "/panopticon"));
             
-            // Serialize to JSON
-            String saveData = objectMapper.writeValueAsString(gameState);
+            // Charger les états sauvegardés
+            loadSavedStates();
             
-            // Get turn number
-            Integer turnNumber = (Integer) gameState.get("turn");
-            if (turnNumber == null) {
-                turnNumber = (Integer) gameState.get("currentTurn");
-            }
-            
-            // Check if save with this name already exists
-            Optional<GameSave> existingSave = gameSaveRepository.findBySaveNameAndPlayerId(saveName, playerId);
-            
-            GameSave gameSave;
-            if (existingSave.isPresent()) {
-                // Update existing save
-                gameSave = existingSave.get();
-                gameSave.setSaveData(saveData);
-                gameSave.setLastPlayedAt(LocalDateTime.now());
-                gameSave.setTurnNumber(turnNumber);
-                if (description != null) {
-                    gameSave.setDescription(description);
-                }
-            } else {
-                // Create new save
-                gameSave = new GameSave(saveName, gameId, playerId, saveData, turnNumber);
-                gameSave.setDescription(description);
-                
-                // Check save limit
-                Long saveCount = gameSaveRepository.countByPlayerId(playerId);
-                if (saveCount >= MAX_SAVES_PER_PLAYER) {
-                    throw new RuntimeException("Maximum save limit reached (" + MAX_SAVES_PER_PLAYER + ")");
+            logger.info("✅ Service de persistance initialisé");
+        } catch (IOException e) {
+            logger.error("❌ Erreur lors de l'initialisation de la persistance", e);
+        }
+    }
+
+    @PreDestroy
+    public void shutdown() {
+        logger.info("💾 Sauvegarde de l'état avant arrêt...");
+        saveAllStates();
+    }
+
+    private void loadSavedStates() {
+        // Charger les mondes sauvegardés
+        File worldsDir = new File(WORLDS_DIR);
+        if (worldsDir.exists() && worldsDir.isDirectory()) {
+            File[] worldFiles = worldsDir.listFiles((dir, name) -> name.endsWith(".json"));
+            if (worldFiles != null) {
+                for (File worldFile : worldFiles) {
+                    try {
+                        Map<String, Object> worldData = objectMapper.readValue(worldFile, Map.class);
+                        String worldId = worldFile.getName().replace(".json", "");
+                        worldManager.createWorld(worldId, worldData);
+                        logger.info("📍 Monde chargé : {}", worldId);
+                    } catch (IOException e) {
+                        logger.error("Erreur chargement monde : {}", worldFile.getName(), e);
+                    }
                 }
             }
-            
-            return gameSaveRepository.save(gameSave);
-            
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to save game: " + e.getMessage(), e);
         }
     }
-    
-    public GameSave autoSaveGame(String gameId) {
-        try {
-            // Get current game state
-            Map<String, Object> gameState = gameService.getGame(gameId);
-            
-            // Get first player ID (for now, auto-save for first player)
-            @SuppressWarnings("unchecked")
-            List<Map<String, Object>> players = (List<Map<String, Object>>) gameState.get("players");
-            if (players == null || players.isEmpty()) {
-                return null;
-            }
-            
-            String playerId = (String) players.get(0).get("id");
-            
-            // Serialize to JSON
-            String saveData = objectMapper.writeValueAsString(gameState);
-            
-            // Get turn number
-            Integer turnNumber = (Integer) gameState.get("turn");
-            if (turnNumber == null) {
-                turnNumber = (Integer) gameState.get("currentTurn");
-            }
-            
-            // Create auto-save name
-            String saveName = "Auto-Save Turn " + turnNumber;
-            
-            // Create new auto-save
-            GameSave gameSave = new GameSave(saveName, gameId, playerId, saveData, turnNumber);
-            gameSave.setIsAutoSave(true);
-            gameSave.setDescription("Automatic save at turn " + turnNumber);
-            
-            gameSave = gameSaveRepository.save(gameSave);
-            
-            // Clean up old auto-saves
-            cleanupAutoSaves(gameId);
-            
-            return gameSave;
-            
-        } catch (Exception e) {
-            System.err.println("Auto-save failed for game " + gameId + ": " + e.getMessage());
-            return null;
-        }
-    }
-    
-    // ======================
-    // LOAD OPERATIONS
-    // ======================
-    
-    public Map<String, Object> loadGame(Long saveId, String playerId) {
-        try {
-            GameSave gameSave = gameSaveRepository.findById(saveId)
-                .orElseThrow(() -> new RuntimeException("Save not found"));
-            
-            // Verify player owns this save
-            if (!gameSave.getPlayerId().equals(playerId)) {
-                throw new RuntimeException("Unauthorized: Save belongs to another player");
-            }
-            
-            // Deserialize game state
-            @SuppressWarnings("unchecked")
-            Map<String, Object> gameState = objectMapper.readValue(gameSave.getSaveData(), Map.class);
-            
-            // Update last played time
-            gameSave.setLastPlayedAt(LocalDateTime.now());
-            gameSaveRepository.save(gameSave);
-            
-            // Replace current game state
-            String gameId = gameSave.getGameId();
-            gameService.replaceGameState(gameId, gameState);
-            
-            return gameState;
-            
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to load game: " + e.getMessage(), e);
-        }
-    }
-    
-    public Map<String, Object> loadLatestAutoSave(String gameId, String playerId) {
-        try {
-            List<GameSave> autoSaves = gameSaveRepository.findLatestAutoSave(gameId);
-            if (autoSaves.isEmpty()) {
-                throw new RuntimeException("No auto-save found for this game");
-            }
-            
-            GameSave latestSave = autoSaves.get(0);
-            
-            // Verify player has access to this game
-            @SuppressWarnings("unchecked")
-            Map<String, Object> gameState = objectMapper.readValue(latestSave.getSaveData(), Map.class);
-            
-            // Update last played time
-            latestSave.setLastPlayedAt(LocalDateTime.now());
-            gameSaveRepository.save(latestSave);
-            
-            // Replace current game state
-            gameService.replaceGameState(gameId, gameState);
-            
-            return gameState;
-            
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to load auto-save: " + e.getMessage(), e);
-        }
-    }
-    
-    // ======================
-    // LIST OPERATIONS
-    // ======================
-    
-    public List<Map<String, Object>> listSaves(String playerId) {
-        List<GameSave> saves = gameSaveRepository.findByPlayerId(playerId);
-        
-        return saves.stream().map(save -> {
-            Map<String, Object> saveInfo = new HashMap<>();
-            saveInfo.put("id", save.getId());
-            saveInfo.put("saveName", save.getSaveName());
-            saveInfo.put("gameId", save.getGameId());
-            saveInfo.put("turnNumber", save.getTurnNumber());
-            saveInfo.put("createdAt", save.getCreatedAt());
-            saveInfo.put("lastPlayedAt", save.getLastPlayedAt());
-            saveInfo.put("isAutoSave", save.getIsAutoSave());
-            saveInfo.put("description", save.getDescription());
-            return saveInfo;
-        }).toList();
-    }
-    
-    // ======================
-    // DELETE OPERATIONS
-    // ======================
-    
-    public void deleteSave(Long saveId, String playerId) {
-        GameSave gameSave = gameSaveRepository.findById(saveId)
-            .orElseThrow(() -> new RuntimeException("Save not found"));
-        
-        // Verify player owns this save
-        if (!gameSave.getPlayerId().equals(playerId)) {
-            throw new RuntimeException("Unauthorized: Save belongs to another player");
+
+    private void saveAllStates() {
+        // Sauvegarder tous les mondes
+        Map<String, Object> allWorlds = worldManager.getAllWorlds();
+        for (Map.Entry<String, Object> entry : allWorlds.entrySet()) {
+            saveWorldState(entry.getKey(), entry.getValue());
         }
         
-        gameSaveRepository.delete(gameSave);
+        // Créer un backup complet
+        createFullBackup();
     }
-    
-    // ======================
-    // AUTO-SAVE MANAGEMENT
-    // ======================
-    
-    public void markGameForAutoSave(String gameId) {
-        gamesToAutoSave.put(gameId, LocalDateTime.now());
-    }
-    
-    public void unmarkGameForAutoSave(String gameId) {
-        gamesToAutoSave.remove(gameId);
-    }
-    
-    @Scheduled(fixedDelay = 60000) // Check every minute
-    public void autoSaveScheduler() {
-        LocalDateTime now = LocalDateTime.now();
-        
-        gamesToAutoSave.entrySet().forEach(entry -> {
-            String gameId = entry.getKey();
-            LocalDateTime lastCheck = entry.getValue();
-            
-            // Auto-save if more than 5 minutes have passed
-            if (lastCheck.plusMinutes(AUTO_SAVE_INTERVAL_MINUTES).isBefore(now)) {
-                autoSaveGame(gameId);
-                gamesToAutoSave.put(gameId, now);
-            }
-        });
-    }
-    
-    private void cleanupAutoSaves(String gameId) {
+
+    public void saveWorldState(String worldId, Object worldData) {
         try {
-            List<GameSave> autoSaves = gameSaveRepository.findLatestAutoSave(gameId);
-            
-            if (autoSaves.size() > MAX_AUTO_SAVES_PER_GAME) {
-                // Delete older auto-saves
-                for (int i = MAX_AUTO_SAVES_PER_GAME; i < autoSaves.size(); i++) {
-                    gameSaveRepository.delete(autoSaves.get(i));
-                }
-            }
-        } catch (Exception e) {
-            System.err.println("Failed to cleanup auto-saves: " + e.getMessage());
+            Path worldFile = Paths.get(WORLDS_DIR, worldId + ".json");
+            objectMapper.writerWithDefaultPrettyPrinter()
+                .writeValue(worldFile.toFile(), worldData);
+            logger.info("💾 Monde sauvegardé : {}", worldId);
+        } catch (IOException e) {
+            logger.error("Erreur sauvegarde monde : {}", worldId, e);
         }
     }
-    
-    // ======================
-    // EXPORT/IMPORT
-    // ======================
-    
-    public String exportSave(Long saveId, String playerId) {
+
+    public void saveTranscendenceState(String entityId, Map<String, Object> state) {
         try {
-            GameSave gameSave = gameSaveRepository.findById(saveId)
-                .orElseThrow(() -> new RuntimeException("Save not found"));
+            Path stateFile = Paths.get(DATA_DIR, "transcendence", entityId + ".json");
+            Files.createDirectories(stateFile.getParent());
             
-            // Verify player owns this save
-            if (!gameSave.getPlayerId().equals(playerId)) {
-                throw new RuntimeException("Unauthorized: Save belongs to another player");
-            }
+            Map<String, Object> transcendenceData = new HashMap<>();
+            transcendenceData.put("entity_id", entityId);
+            transcendenceData.put("state", state);
+            transcendenceData.put("timestamp", LocalDateTime.now().toString());
             
-            // Create export data
-            Map<String, Object> exportData = new HashMap<>();
-            exportData.put("saveName", gameSave.getSaveName());
-            exportData.put("gameId", gameSave.getGameId());
-            exportData.put("turnNumber", gameSave.getTurnNumber());
-            exportData.put("description", gameSave.getDescription());
-            exportData.put("exportDate", LocalDateTime.now());
-            exportData.put("gameData", gameSave.getSaveData());
-            
-            return objectMapper.writeValueAsString(exportData);
-            
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to export save: " + e.getMessage(), e);
+            objectMapper.writerWithDefaultPrettyPrinter()
+                .writeValue(stateFile.toFile(), transcendenceData);
+            logger.info("🌟 État de transcendance sauvegardé : {}", entityId);
+        } catch (IOException e) {
+            logger.error("Erreur sauvegarde transcendance : {}", entityId, e);
         }
     }
-    
-    public GameSave importSave(String exportData, String playerId) {
+
+    public void savePanopticonSnapshot(Map<String, Object> panopticonState) {
         try {
-            @SuppressWarnings("unchecked")
-            Map<String, Object> importData = objectMapper.readValue(exportData, Map.class);
+            String timestamp = LocalDateTime.now().toString().replace(":", "-");
+            Path snapshotFile = Paths.get(DATA_DIR, "panopticon", "snapshot_" + timestamp + ".json");
             
-            String saveName = (String) importData.get("saveName");
-            String gameId = (String) importData.get("gameId");
-            Integer turnNumber = (Integer) importData.get("turnNumber");
-            String description = (String) importData.get("description");
-            String gameData = (String) importData.get("gameData");
+            objectMapper.writerWithDefaultPrettyPrinter()
+                .writeValue(snapshotFile.toFile(), panopticonState);
+            logger.info("👁️ Snapshot Panopticon sauvegardé");
+        } catch (IOException e) {
+            logger.error("Erreur sauvegarde Panopticon", e);
+        }
+    }
+
+    private void createFullBackup() {
+        try {
+            String timestamp = LocalDateTime.now().toString().replace(":", "-");
+            Path backupDir = Paths.get(BACKUP_DIR, "backup_" + timestamp);
+            Files.createDirectories(backupDir);
             
-            // Create imported save with new name
-            saveName = saveName + " (Imported)";
+            // Copier tous les fichiers de données
+            copyDirectory(Paths.get(WORLDS_DIR), backupDir.resolve("worlds"));
+            copyDirectory(Paths.get(DATA_DIR, "transcendence"), backupDir.resolve("transcendence"));
+            copyDirectory(Paths.get(DATA_DIR, "panopticon"), backupDir.resolve("panopticon"));
             
-            GameSave gameSave = new GameSave(saveName, gameId, playerId, gameData, turnNumber);
-            gameSave.setDescription(description + " - Imported on " + LocalDateTime.now());
-            
-            return gameSaveRepository.save(gameSave);
-            
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to import save: " + e.getMessage(), e);
+            logger.info("📦 Backup complet créé : {}", backupDir);
+        } catch (IOException e) {
+            logger.error("Erreur création backup", e);
+        }
+    }
+
+    private void copyDirectory(Path source, Path target) throws IOException {
+        if (Files.exists(source)) {
+            Files.walk(source)
+                .forEach(sourcePath -> {
+                    try {
+                        Path targetPath = target.resolve(source.relativize(sourcePath));
+                        Files.createDirectories(targetPath.getParent());
+                        if (Files.isRegularFile(sourcePath)) {
+                            Files.copy(sourcePath, targetPath);
+                        }
+                    } catch (IOException e) {
+                        logger.error("Erreur copie fichier", e);
+                    }
+                });
         }
     }
 } 

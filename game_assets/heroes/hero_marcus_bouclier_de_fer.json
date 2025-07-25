@@ -11,6 +11,7 @@
   "role": "Gardien Défensif",
   "rarity": "commune",
   "faction": "Corps des Gardiens Temporels",
+  "world_id": "VALISSON",
   "formula": "ψ{Marcus} = ABSORB[damage_quantum] ⊗ REFLECT[partial_force] ⇒ SHIELD_BOOST",
   "passive_formula": "∀attack ∈ incoming_damage : REDUCTION[ψ.shield] = ABSORB[25%]",
   "abilities": [

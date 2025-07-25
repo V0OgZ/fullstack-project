@@ -1,0 +1,148 @@
+{
+  "id": "tour_sombre_grofi",
+  "name": "Tour Sombre de Grofi",
+  "name_en": "Grofi's Dark Tower",
+  "name_ru": "Темная Башня Грофи",
+  "type": "MYSTICAL_STRUCTURE",
+  "category": "GROFI_FUSION",
+  "rarity": "BEYOND_LEGENDARY",
+  "tier": "COSMIQUE_Ω+",
+  
+  "description": "La mystérieuse Tour Sombre qui s'élève depuis la fusion de Grofi avec sa forêt-pensée. Sa tige s'étend infiniment vers les dimensions supérieures.",
+  "description_en": "The mysterious Dark Tower rising from Grofi's fusion with his thought-forest. Its stem extends infinitely toward higher dimensions.",
+  "description_ru": "Таинственная Темная Башня, возвышающаяся из слияния Грофи с его лесом-мыслью. Её стебель простирается бесконечно к высшим измерениям.",
+  
+  "lore": "Quand Grofi fusionna avec sa forêt-pensée (une petite fleur violette), la tige de cette pensée cosmique grandit jusqu'à devenir la Tour Sombre. Personne ne connaît son sommet - même Grofi n'a pas encore percé ce mystère.",
+  
+  "physical_properties": {
+    "height": "INFINITE",
+    "base_diameter": "Variable selon l'observateur",
+    "material": "Tige de Pensée Cosmique",
+    "color": "Noir avec reflets violets (couleur de la pensée)",
+    "transparency": "Opaque mais révèle des visions",
+    "growth_rate": "Selon la volonté de Grofi"
+  },
+  
+  "game_mechanics": {
+    "building_cost": {
+      "requirement": "Fusion Grofi-Pensée accomplie",
+      "resources": "Impossible à construire - Apparaît naturellement"
+    },
+    "effects": {
+      "vision_range": "+∞ (Révèle toute la carte)",
+      "mystical_power": "+50 à tous les héros alliés",
+      "temporal_anchor": "Stabilise toutes les timelines",
+      "dimensional_access": "Permet voyage entre dimensions"
+    },
+    "special_abilities": {
+      "tower_climb": {
+        "name": "Escalade de la Tour",
+        "description": "Les héros peuvent grimper pour découvrir des mystères cosmiques",
+        "cost": "1 tour par niveau",
+        "rewards": "Artefacts dimensionnels, connaissances interdites"
+      },
+      "grofi_communion": {
+        "name": "Communion avec Grofi",
+        "description": "Parler directement avec Grofi fusionné",
+        "effect": "Révèle secrets du cosmos, conseils stratégiques"
+      },
+      "thought_blossom": {
+        "name": "Floraison de Pensée",
+        "description": "La pensée-base peut fleurir et créer de nouvelles tours",
+        "trigger": "Volonté de Grofi",
+        "result": "Nouvelles structures mystiques"
+      }
+    }
+  },
+  
+  "architectural_levels": {
+    "base": {
+      "level": 0,
+      "name": "Racines de Pensée",
+      "description": "Base souterraine connectée aux racines cosmiques",
+      "inhabitants": "Esprits des pensées oubliées"
+    },
+    "stem_levels": {
+      "1-10": "Niveaux de Croissance - Mémoires de Grofi",
+      "11-50": "Niveaux Philosophiques - Théories cosmiques",
+      "51-100": "Niveaux Ontologiques - Nature de la réalité",
+      "101-∞": "Niveaux Transcendants - Au-delà de la compréhension"
+    },
+    "summit": {
+      "level": "∞",
+      "name": "Sommet Inconnu",
+      "description": "Même Grofi n'a pas encore atteint ce niveau",
+      "mystery": "Que trouve-t-on au sommet d'une pensée infinie ?"
+    }
+  },
+  
+  "connection_to_grofi": {
+    "relationship": "EXTENSION_CORPORELLE",
+    "consciousness": "Grofi peut percevoir tout ce qui se passe dans la tour",
+    "control": "Grofi peut modifier la tour par la pensée",
+    "limitation": "Le sommet reste mystérieux même pour lui"
+  },
+  
+  "flower_base": {
+    "species": "Pensée Cosmique (Viola Cosmicus)",
+    "colors": ["Violet profond", "Jaune lumière", "Noir mystique"],
+    "size": "Apparemment petite, cosmiquement infinie",
+    "petals": "Chaque pétale contient une dimension",
+    "center": "Cœur de la conscience Grofi"
+  },
+  
+  "gameplay_integration": {
+    "quest_line": "Mystères de la Tour Sombre",
+    "objectives": [
+      "Découvrir la fusion Grofi-Pensée",
+      "Escalader les premiers niveaux",
+      "Communiquer avec Grofi",
+      "Percer le mystère du sommet"
+    ],
+    "rewards": {
+      "knowledge": "Secrets cosmiques",
+      "artifacts": "Objets dimensionnels",
+      "abilities": "Pouvoirs de pensée pure"
+    },
+    "dangers": {
+      "vertigo_ontologique": "Perdre pied dans l'infini",
+      "overload_pensee": "Surcharge de connaissances",
+      "grofi_displeasure": "Mécontentement de Grofi"
+    }
+  },
+  
+  "philosophical_aspects": {
+    "questions": [
+      "Qu'est-ce qui se trouve au sommet d'une pensée ?",
+      "Une tour peut-elle grandir plus vite que celui qui la gravit ?",
+      "Grofi rêve-t-il de la tour ou la tour rêve-t-elle de Grofi ?"
+    ],
+    "themes": [
+      "Croissance infinie de la conscience",
+      "Mystère de l'inconnaissable",
+      "Fusion entre créateur et création"
+    ]
+  },
+  
+  "grofi_quotes": [
+    "Ma pensée a grandi... mais son sommet m'échappe encore.",
+    "Chaque niveau révèle de nouveaux mystères, même à moi.",
+    "Je suis la tour, la tour est moi... mais que suis-je vraiment ?",
+    "Montez, braves héros... peut-être verrez-vous ce que je ne vois pas."
+  ],
+  
+  "visual_design": {
+    "style": "Tige végétale sombre s'élevant vers l'infini",
+    "texture": "Écorce de pensée avec motifs fractals",
+    "lighting": "Lueur violette interne, ombres mouvantes",
+    "animation": "Croissance lente et continue",
+    "effects": "Particules de pensée flottantes"
+  },
+  
+  "meta_notes": {
+    "creator": "Jean-Grofignon (via révélation terrasse)",
+    "inspiration": "Fusion ontologique Grofi + Forêt-Pensée",
+    "mystery_level": "Maximum - Même le créateur ne connaît pas tout",
+    "expandable": "Structure peut évoluer selon les révélations futures"
+  }
+} 

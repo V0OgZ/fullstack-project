@@ -1,0 +1,21 @@
+{
+  "id": "GROFI_PANOPTICON_TOTEM",
+  "name": "🗿 Totem de Vision GRUT",
+  "type": "PORTAL_ARTIFACT",
+  "location": "Centre de la Forêt GROFI",
+  "description": "Ancien totem couvert de runes qui pulse avec l'énergie du Panopticon",
+  "activation_method": "Toucher le totem en prononçant 'GRUT VOIT TOUT'",
+  "portal_properties": {
+    "destination": "PANOPTICON_6D_INTERFACE",
+    "url": "http://localhost:8001/panopticon",
+    "transition_effect": "FOREST_TO_COSMIC_VISION",
+    "bidirectional": true
+  },
+  "visual_effects": [
+    "Runes qui s'illuminent en spirale",
+    "Projection holographique des 6 dimensions",
+    "Racines quantiques qui connectent aux arbres",
+    "Aura de vision omnisciente"
+  ],
+  "grut_message": "À travers ce totem, je vois la forêt dans toutes ses dimensions. Chaque arbre est un monde, chaque feuille une timeline, chaque racine une connexion causale."
+}

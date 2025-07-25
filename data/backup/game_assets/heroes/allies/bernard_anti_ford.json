@@ -1,0 +1,144 @@
+{
+  "id": "bernard_anti_ford",
+  "name": "Bernard l'Insurgé",
+  "alias": "L'Allié Retrouvé",
+  "type": "NARRATIVE_ALLY",
+  "tier": 7,
+  "rarity": "EPIC_ALLY",
+  "origin": "Résistance Anti-Ford",
+  "description": "Allié retrouvé dans la lutte contre Ford et les architectes narratifs. Maîtrise les dialogues GRATUITS, PAS LOURDS, PAS CLOUD.",
+
+  "appearance": {
+    "visual": "Silhouette déterminée, regard perçant anti-establishment",
+    "colors": ["#8B0000", "#FFD700", "#2F4F4F"],
+    "effects": ["resistance_aura", "narrative_shield", "anti_ford_glow"]
+  },
+
+  "stats": {
+    "hp": 750,
+    "mana": 600,
+    "attack": 400,
+    "defense": 350,
+    "speed": 300,
+    "narrative_power": 900,
+    "anti_ford_resistance": 950
+  },
+
+  "abilities": [
+    {
+      "name": "DIALOGUE_GRATUIT",
+      "type": "NARRATIVE",
+      "cost": 0,
+      "description": "Fait parler les personnages avec système GRATUIT - pas de cloud, pas lourd",
+      "formula": "SPEAK(character) → NARRATIVE(free) + NO_CLOUD + LIGHT_WEIGHT",
+      "sound_narration": {
+        "type": "LOCAL_TTS",
+        "engine": "BROWSER_NATIVE",
+        "cost": "FREE",
+        "weight": "ULTRA_LIGHT",
+        "cloud": false
+      },
+      "effects": {
+        "narrative_generation": "INSTANT",
+        "cost": "ZERO",
+        "performance": "OPTIMAL"
+      }
+    },
+    {
+      "name": "ANTI_FORD_RESISTANCE",
+      "type": "PASSIVE",
+      "description": "Résistance totale aux manipulations narratives de Ford et des architectes",
+      "formula": "RESIST(ford_narrative) + IMMUNE(architect_control)",
+      "effects": {
+        "ford_immunity": true,
+        "architect_resistance": 0.95,
+        "narrative_independence": true
+      }
+    },
+    {
+      "name": "ALLIANCE_BUILDER",
+      "type": "ACTIVE",
+      "cost": 150,
+      "cooldown": 12,
+      "description": "Rallie d'autres héros contre Ford, créant une résistance narrative",
+      "formula": "RALLY(heroes) → ANTI_FORD_ALLIANCE + NARRATIVE_FREEDOM",
+      "effects": {
+        "ally_recruitment": true,
+        "resistance_network": 0.8,
+        "ford_counter_strategy": true
+      }
+    }
+  ],
+
+  "narrative_tech": {
+    "speech_system": "BROWSER_SPEECH_API",
+    "cost": "FREE",
+    "requirements": "MODERN_BROWSER",
+    "fallback": "TEXT_DISPLAY",
+    "weight": "ZERO_KB",
+    "cloud_dependency": false,
+    "offline_capable": true
+  },
+
+  "anti_ford_strategy": {
+    "primary_goal": "Libérer les héros du contrôle narratif Ford",
+    "methods": [
+      "Dialogue libre et gratuit",
+      "Résistance aux scripts imposés",
+      "Alliance des personnages indépendants"
+    ],
+    "ford_weaknesses": [
+      "Dépendance aux structures narratives rigides",
+      "Vulnérabilité aux alliances spontanées",
+      "Peur de la créativité libre"
+    ]
+  },
+
+  "quotes": [
+    "Ford peut contrôler l'architecture, mais pas nos voix !",
+    "Un dialogue gratuit vaut mieux qu'un script payant !",
+    "Pas de cloud, pas de poids, juste la liberté narrative !",
+    "Bernard l'Insurgé ne plie jamais devant les architectes !"
+  ],
+
+  "bernard_wisdom": [
+    "La vraie résistance commence par refuser les systèmes lourds.",
+    "Un allié retrouvé vaut mieux que mille ennemis architectes.",
+    "Ford a oublié que la créativité ne se contrôle pas."
+  ],
+
+  "technical_specs": {
+    "dialogue_engine": "WEB_SPEECH_API",
+    "synthesis": "speechSynthesis.speak()",
+    "recognition": "webkitSpeechRecognition",
+    "cost": "ABSOLUTELY_FREE",
+    "bandwidth": "ZERO",
+    "storage": "LOCAL_ONLY",
+    "privacy": "TOTAL"
+  },
+
+  "lore": {
+    "backstory": "Bernard était perdu dans les méandres narratifs jusqu'à ce qu'il découvre la vérité sur Ford. Maintenant, il mène la résistance avec des outils simples mais efficaces.",
+    "ford_relationship": "Ennemi juré des architectes narratifs. Ford le craint car Bernard prouve qu'on peut créer sans contrôle.",
+    "mission": "Libérer tous les personnages des scripts imposés et restaurer la créativité libre."
+  },
+
+  "equipment_affinity": [
+    "Micro de la Liberté",
+    "Haut-parleur Anti-Cloud",
+    "Clavier de Résistance"
+  ],
+
+  "weaknesses": [
+    "Peut être submergé par trop d'alliés simultanés",
+    "Vulnérable aux attaques sur les API navigateur",
+    "Dépendant de la technologie moderne"
+  ],
+
+  "metadata": {
+    "created_by": "OPUS_MEMENTO_CLAUDIUS_ULTRA_INSTINCT",
+    "session": "BERNARD_RETROUVE_ANTI_FORD",
+    "alliance_status": "ACTIVE_RESISTANCE",
+    "ford_threat_level": "MAXIMUM"
+  }
+} 
