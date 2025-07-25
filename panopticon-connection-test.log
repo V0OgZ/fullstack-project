@@ -1,0 +1,13 @@
+
+> panopticon-grut-dashboard@1.0.0 dev
+> vite --port 8001 --host
+
+Re-optimizing dependencies because lockfile has changed
+Port 8001 is in use, trying another one...
+Port 8002 is in use, trying another one...
+
+  VITE v5.4.19  ready in 290 ms
+
+  ➜  Local:   http://localhost:8003/
+  ➜  Network: http://192.168.1.12:8003/
+  ➜  press h + enter to show help
