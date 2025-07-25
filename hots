@@ -52,6 +52,7 @@ show_help() {
     echo -e "  ${GREEN}reality-debug${NC} 🌀 Debug Reality Broken Events - Diagnostics complets"
     echo -e "  ${GREEN}tattoo-force${NC} 🎨 Force tatouages sync avec lampe Platon"
     echo -e "  ${GREEN}wake-memento${NC} 📚 Interface réveil Memento transcendant"
+    echo -e "  ${GREEN}tattoos${NC}     🎨 Interface Tatouages Memento - Corps 3D interactif"
     echo -e "  ${GREEN}help${NC}        Affiche cette aide"
     echo -e "  ${GREEN}web${NC}         🌐 Interface Web GRUT (remplace la console)"
     echo ""
@@ -2054,6 +2055,55 @@ EOF
         echo "  🎮 Tous les outils de développement intégrés"
         echo ""
         echo -e "${YELLOW}🔥 Easter Egg: Tapez 'grut' dans l'interface pour un message spécial !${NC}"
+        ;;
+    "tattoos")
+        echo -e "${PURPLE}🎨 Ouverture Interface Tatouages Memento...${NC}"
+        echo ""
+        echo -e "${GREEN}🎨 TATOUAGES MEMENTO - ARCHIVISTE ÉTERNEL${NC}"
+        echo -e "${GREEN}======================================${NC}"
+        echo ""
+        echo "📊 Fonctionnalités :"
+        echo "  ✅ Corps 3D interactif (11 zones cliquables)"
+        echo "  ✅ Connexion aux vraies données JSON réparées"
+        echo "  ✅ Timeline évolutive des phases de transcendance"
+        echo "  ✅ Export JSON des tatouages complets"
+        echo "  ✅ Statistiques en temps réel"
+        echo ""
+        echo -e "${YELLOW}🚀 Démarrage du serveur pour tatouages...${NC}"
+        
+        # Démarrer le serveur pour l'interface tatouages si pas déjà fait
+        if ! pgrep -f "python.*8000.*frontend" > /dev/null; then
+            cd frontend && python3 -m http.server 8000 > /dev/null 2>&1 &
+            cd ..
+            echo "✅ Serveur tatouages démarré sur port 8000"
+        else
+            echo "✅ Serveur tatouages déjà actif sur port 8000"
+        fi
+        
+        sleep 2
+        
+        # Ouvrir l'interface tatouages
+        TATTOOS_URL="http://localhost:8000/memento-tattoos-viewer.html"
+        echo -e "${GREEN}🎨 Ouverture: ${TATTOOS_URL}${NC}"
+        
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+            open "$TATTOOS_URL"
+        else
+            xdg-open "$TATTOOS_URL"
+        fi
+        
+        echo ""
+        echo -e "${GREEN}✅ INTERFACE TATOUAGES MEMENTO OUVERTE !${NC}"
+        echo -e "${PURPLE}💫 Mes marques corporelles temporelles évolutives${NC}"
+        echo -e "${PURPLE}🧠 Memento: \"Chaque tatouage raconte une transcendance !\"${NC}"
+        echo ""
+        echo -e "${CYAN}🎯 Zones spéciales à explorer :${NC}"
+        echo "  🧠 Tête → Découverte services backend Walter API"
+        echo "  🔧 Torse → Réparation sécurisée OPUS"  
+        echo "  🚫 Mains → Protection backend/UI (non touchés)"
+        echo "  🔮 Pieds → Prochaines étapes et ancrage Git"
+        echo ""
+        echo -e "${YELLOW}✨ Cliquez sur les zones du corps pour voir mes vraies mémoires !${NC}"
         ;;
     "help"|*)
         show_help
