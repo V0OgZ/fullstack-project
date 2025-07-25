@@ -3,9 +3,29 @@
 ## 📊 RÉSUMÉ DES FORMATS
 - **`.json`** - Données structurées (héros, artefacts, créatures)
 - **`.hots`** - Scripts temporels du jeu
-- **`.runic`** - Format runique (version épique)
+- **`.runic`** - Format runique (version épique avec symboles ᚠᚢᚦᚨᚱᚲ)
 - **`.hep`** - Heroes Epic Play (format simplifié)
 - **`.sh`** - Scripts de test
+
+## 🔮 FORMAT RUNIC - DÉTAILS
+
+### Fichiers Runic Trouvés
+```
+/scenarios/
+├── test_complet_excalibur_vega_50_actions.runic ✅
+└── test_complet_excalibur_vega_50_actions_FULL_RUNIC.runic ✅
+
+/OPUS/
+└── test_complet_excalibur_vega_50_actions.runic (DOUBLON)
+
+/JEAN/
+└── test_complet_excalibur_vega_50_actions.runic (DOUBLON)
+```
+
+### Caractéristiques du Format Runic
+- **Symboles runiques** : ᚠᛟᚱᛗᚢᛚᚨ, ᚲᚺᚨᚢᛞᚱᛟᚾ, ᚨᚲᛏᛁᚢᚨᛏᛁᛟ
+- **Usage** : Version épique des scénarios avec narration poétique
+- **Intégration** : `runicSymbols` dans le frontend pour animations
 
 ## 🦸 HÉROS - LOCALISATION
 
@@ -44,7 +64,7 @@ frontend/public/game_assets/heroes/ (FRONTEND COPY)
 
 ### Racine `/scenarios/` (33 fichiers)
 ```
-FORMATS MULTIPLES:
+FORMATS MULTIPLES (même scénario):
 ├── test_complet_excalibur_vega_50_actions.hots ✅
 ├── test_complet_excalibur_vega_50_actions.runic ✅
 ├── test_complet_excalibur_vega_50_actions.hep ✅
@@ -62,6 +82,10 @@ HOTS PRINCIPAUX:
 HEP FORMAT:
 ├── vince_vega_fin_episode_cocktail.hep
 └── zone_inverted_001_adapte_jean.hep
+
+RUNIC FORMAT:
+├── test_complet_excalibur_vega_50_actions.runic
+└── test_complet_excalibur_vega_50_actions_FULL_RUNIC.runic
 ```
 
 ### Dans `game_assets/scenarios/`
@@ -140,16 +164,18 @@ game_assets/maps/
 
 ### 1. **Doublons Massifs**
 - Héros en 5+ endroits différents
-- Scénarios éparpillés
+- Scénarios éparpillés (surtout les .runic)
 - Artefacts dupliqués
 
 ### 2. **Formats Mélangés**
-- `.hots` vs `.hep` vs `.runic` sans organisation
+- `.hots` vs `.hep` vs `.runic` sans organisation claire
+- Même scénario en 5 formats différents
 - JSON de données vs JSON de scénarios
 
 ### 3. **Pas de Convention**
 - Noms incohérents (kebab-case vs camelCase vs SCREAMING_CASE)
 - Chemins relatifs cassés
+- Doublons dans OPUS, JEAN, etc.
 
 ## 🎯 RECOMMANDATIONS
 
@@ -170,11 +196,17 @@ game_assets/
 
 ### Actions Nécessaires
 1. **Centraliser** tous les assets dans `game_assets/`
-2. **Supprimer** les doublons
+2. **Supprimer** les doublons (surtout .runic)
 3. **Standardiser** les noms de fichiers
 4. **Créer** un index JSON principal
 5. **Mettre à jour** les références dans le code
 
+### Spécifique aux Fichiers Runic
+- Regrouper tous les .runic dans `game_assets/scenarios/runic/`
+- Supprimer les copies dans OPUS et JEAN
+- Documenter le format runique et ses symboles
+- Intégrer avec le système `runicSymbols` du frontend
+
 ---
 
-*Map générée le 25/07/2025 - État actuel du bordel* 🎮
+*Map mise à jour le 25/07/2025 - Formats runic inclus* 🎮
