@@ -72,7 +72,12 @@ public class MagicFormulaEngine {
         "SORT_DE_PRECEDENCE", "MODE_LITTERAIRE", "PLANQUER_MOTEUR", "INSTANCE_ISOLEE",
         // 🏛️ GRUT TRANSCENDANCE - OBJETS RÉVÉLATION 6ÈME DIMENSION
         "GRUT_VISION_OMNISCIENTE", "PASSERELLE_INSTANCES_VINCE_VEGA", "CODEX_OPUS_BOOTSTRAP_TRANSCENDANT", 
-        "CANAPÉ_COSMIQUE_JEAN_TRANSCENDANT", "SOURCE_TRANSCENDANTE_OMEGA_PROTECTION"
+        "CANAPÉ_COSMIQUE_JEAN_TRANSCENDANT", "SOURCE_TRANSCENDANTE_OMEGA_PROTECTION",
+        // 🌀 BENEDIKT CONULBRURCUS - TÉLÉPORTEUR COSMIQUE
+        "BENEDIKT_CIRCLE_TELEPORT", "BENEDIKT_MULTI_TELEPORT", "BENEDIKT_REALM_TELEPORT", 
+        "BENEDIKT_EMERGENCY_RECALL", "BENEDIKT_COSMIC_CIRCLES",
+        // 🎭 4ÈME MUR - FORMULES CROSS-INSTANCE
+        "CROSS_INSTANCE", "BREAK_FOURTH_WALL", "META_OBSERVE", "NARRATIVE_JUMP"
     );
     
     /**
@@ -353,6 +358,28 @@ public class MagicFormulaEngine {
             case "SOURCE_TRANSCENDANTE_OMEGA_PROTECTION":
                 return executeSourceTranscendanteOmegaProtection(context);
                 
+            // 🌀 BENEDIKT CONULBRURCUS TELEPORTATION FORMULAS
+            case "BENEDIKT_CIRCLE_TELEPORT":
+                return FormulaResult.success("🌀 BENEDIKT: 'Mes cercles cosmiques s'ouvrent ! CONULBRURCUS MAXIMUS !'");
+            case "BENEDIKT_MULTI_TELEPORT":
+                return FormulaResult.success("🌀 BENEDIKT: 'CONULBRURCUS INFINITUS ! Je me dédouble dans l'espace !'");
+            case "BENEDIKT_REALM_TELEPORT":
+                return FormulaResult.success("🌀 BENEDIKT: 'CONULBRURCUS DIMENSIONALIS ! Je traverse les REALMS !'");
+            case "BENEDIKT_EMERGENCY_RECALL":
+                return FormulaResult.success("🌀 BENEDIKT: 'CONULBRURCUS ESCAPUS ! Retour d'urgence au canapé cosmique !'");
+            case "BENEDIKT_COSMIC_CIRCLES":
+                return FormulaResult.success("🌀 BENEDIKT: 'CONULBRURCUS SUPREMUS ! Les cercles cosmiques de Jean-Grofignon !'");
+                
+            // 🎭 4ÈME MUR FORMULAS
+            case "CROSS_INSTANCE":
+                return FormulaResult.success("🎭 CROSS_INSTANCE: Tir inter-dimensionnel exécuté ! 'Bang! T'as vu ça? J'ai tiré dans un autre serveur!'");
+            case "BREAK_FOURTH_WALL":
+                return FormulaResult.success("🎭 BREAK_FOURTH_WALL: 'Tu crois vraiment que c'est toi qui joues? Je te vois...'");
+            case "META_OBSERVE":
+                return FormulaResult.success("🎭 META_OBSERVE: Vision du code révélée ! Variables cachées, bugs, intentions du développeur visibles !");
+            case "NARRATIVE_JUMP":
+                return FormulaResult.success("🎭 NARRATIVE_JUMP: Saut vers branche narrative alternative ! Timeline modifiée !");
+
             default:
                 return FormulaResult.error("Formule simple inconnue: " + formula);
         }
