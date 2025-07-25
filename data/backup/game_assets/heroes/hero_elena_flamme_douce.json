@@ -1,0 +1,47 @@
+{
+  "id": "hero_elena_flamme_douce",
+  "name": "Elena Flamme Douce",
+  "icon": "🔥",
+  "display": {
+    "icon": "🔥",
+    "color": "#FF6B35",
+    "category": "fire_mage"
+  },  "title": "Apprentie Mage Temporelle",
+  "description": "Jeune sorcière spécialisée dans la manipulation douce des énergies temporelles. Ses sorts de base permettent d'apprendre la magie sans risque de surcharge. Idéale pour découvrir les mécaniques magiques avec des effets prévisibles. [Classification : Unité de Support Magique]",
+  "role": "Mage de Support",
+  "rarity": "commune",
+  "faction": "Académie des Mages Temporels",
+  "formula": "ψ{Elena} = CHANNEL[gentle_mana] ⊗ CAST[basic_spell] ⇒ HEAL_BOOST",
+  "passive_formula": "∀ally ∈ adjacent_tiles : REGENERATION[ψ.mana] = RESTORE[2hp/turn]",
+  "abilities": [
+    {
+      "name": "Régénération Douce",
+      "type": "passive",
+      "quantum_script": "CHANNEL[healing_energy] ⇒ RESTORE(ally.health, 2) ∧ ADJACENT[tiles_only]",
+      "description": "Soigne automatiquement les alliés adjacents de 2 PV par tour grâce à une aura de régénération douce",
+      "cooldown": 0,
+      "range": "adjacent",
+      "mana_cost": 0
+    }
+  ],
+  "stats": {
+    "attack": 6,
+    "defense": 7,
+    "health": 70,
+    "speed": 5,
+    "mana": 40,
+    "vision_range": 6,
+    "attack_range": 3
+  },
+  "equipment": {
+    "weapon": "Bâton de Cristal Débutant",
+    "armor": "Robe de Mage Apprentie",
+    "accessory": "Amulette de Concentration"
+  },
+  "quotes": [
+    "\"La magie douce soigne les cœurs et les corps.\"",
+    "\"Chaque sort est une leçon apprise.\"",
+    "\"L'énergie temporelle coule en moi comme une rivière paisible.\"",
+    "\"Gentle magic, powerful results.\""
+  ]
+} 

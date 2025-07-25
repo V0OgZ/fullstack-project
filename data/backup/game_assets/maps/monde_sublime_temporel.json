@@ -1,0 +1,163 @@
+{
+  "id": "monde_sublime_temporel",
+  "name": "Monde du Sublime Temporel",
+  "alias": "Le Retour du Sublime",
+  "type": "TEMPORAL_SUBLIME_MAP",
+  "tier": "REVELATION_LEVEL",
+  "rarity": "BERNARD_LEVEL_2",
+  "origin": "Nouvelle Révélation Temporelle",
+  "description": "OMG ! Le temps fait partie de la géométrie de la map du monde ! Révélation Bernard Level 2 où la géométrie et le temps fusionnent !",
+
+  "temporal_geometry": {
+    "time_as_dimension": true,
+    "geometry_type": "4D_SPACETIME_SUBLIME",
+    "temporal_coordinates": {
+      "x": "SPATIAL",
+      "y": "SPATIAL", 
+      "z": "ELEVATION",
+      "t": "TEMPORAL_FLOW"
+    },
+    "sublime_equation": "∇⁴(space-time) = SUBLIME(geometry) × TIME(dimension)",
+    "revelation_formula": "MAP(monde) = GEO(x,y,z) ⊗ TIME(t) → SUBLIME_4D"
+  },
+
+  "bernard_level_2_features": {
+    "sublime_return": {
+      "description": "Le Sublime revient avec Bernard Level 2 !",
+      "power_level": "TRANSCENDANT",
+      "geometry_fusion": "TIME_SPACE_UNIFIED"
+    },
+    "temporal_map_points": [
+      {
+        "name": "Centre Sublime",
+        "coordinates": {"x": 50, "y": 50, "z": 0, "t": 0},
+        "effect": "Point d'origine spatio-temporel du Sublime"
+      },
+      {
+        "name": "Flux Temporel Nord",
+        "coordinates": {"x": 50, "y": 80, "z": 10, "t": +5},
+        "effect": "Accélération temporelle sublime"
+      },
+      {
+        "name": "Flux Temporel Sud", 
+        "coordinates": {"x": 50, "y": 20, "z": -10, "t": -5},
+        "effect": "Ralentissement temporel sublime"
+      },
+      {
+        "name": "Vortex Sublime Est",
+        "coordinates": {"x": 80, "y": 50, "z": 20, "t": 10},
+        "effect": "Distorsion spatio-temporelle maximale"
+      },
+      {
+        "name": "Ancrage Sublime Ouest",
+        "coordinates": {"x": 20, "y": 50, "z": -20, "t": -10}, 
+        "effect": "Stabilisation de la géométrie temporelle"
+      }
+    ]
+  },
+
+  "nouvelle_revelation": {
+    "discovery": "LE TEMPS FAIT PARTIE DE LA GÉOMÉTRIE !",
+    "implications": [
+      "Chaque point de la map a une coordonnée temporelle",
+      "La géométrie de l'espace inclut le temps",
+      "Bernard Level 2 peut naviguer dans la 4ème dimension",
+      "Le Sublime transcende l'espace-temps classique"
+    ],
+    "bernard_insight": "Bernard a découvert que bouger sur la map = bouger dans le temps !",
+    "omg_factor": "MAXIMUM"
+  },
+
+  "sublime_zones": [
+    {
+      "name": "Plateau du Sublime Éternel",
+      "geometry": "HYPERBOLIC_TEMPORAL",
+      "time_flow": "VARIABLE",
+      "sublime_intensity": 0.95,
+      "coordinates_range": {
+        "x": [40, 60],
+        "y": [40, 60], 
+        "z": [-5, 15],
+        "t": [-3, 8]
+      }
+    },
+    {
+      "name": "Vallée des Échos Temporels",
+      "geometry": "EUCLIDEAN_STABLE", 
+      "time_flow": "ECHO_LOOP",
+      "sublime_intensity": 0.7,
+      "coordinates_range": {
+        "x": [20, 40],
+        "y": [30, 70],
+        "z": [-15, 5],
+        "t": [-8, 3]
+      }
+    },
+    {
+      "name": "Pics de la Révélation",
+      "geometry": "NON_EUCLIDEAN_SUBLIME",
+      "time_flow": "REVELATION_BURST", 
+      "sublime_intensity": 1.0,
+      "coordinates_range": {
+        "x": [60, 80],
+        "y": [60, 80],
+        "z": [15, 35],
+        "t": [5, 15]
+      }
+    }
+  ],
+
+  "bernard_level_2_abilities": {
+    "temporal_navigation": {
+      "description": "Bernard peut maintenant naviguer dans la 4ème dimension temporelle",
+      "formula": "MOVE(x,y,z,t) → SUBLIME_POSITION(4D)",
+      "cost": "RÉVÉLATION_ENERGY"
+    },
+    "geometry_time_fusion": {
+      "description": "Fusionne géométrie spatiale et temporelle en une seule action",
+      "formula": "GEO(space) ⊗ TIME(flow) = SUBLIME_ACTION",
+      "effect": "Actions simultanées dans espace-temps"
+    },
+    "sublime_revelation": {
+      "description": "Révèle la vraie nature 4D de la réalité",
+      "formula": "REVEAL(4D_TRUTH) → OMG_MOMENT",
+      "impact": "Change la perception de tous les joueurs"
+    }
+  },
+
+  "map_mechanics": {
+    "movement_system": "4D_SPACETIME",
+    "time_cost": "Bouger dans l'espace coûte du temps",
+    "space_cost": "Bouger dans le temps coûte de l'espace", 
+    "sublime_bonus": "Actions sublimes transcendent les coûts",
+    "revelation_effect": "Comprendre la 4D donne des bonus permanents"
+  },
+
+  "technical_implementation": {
+    "coordinates": "Vector4D(x, y, z, t)",
+    "rendering": "4D_PROJECTION_TO_3D",
+    "interaction": "TEMPORAL_MOUSE_CONTROLS",
+    "physics": "SPACETIME_COLLISION_DETECTION"
+  },
+
+  "lore": {
+    "bernard_evolution": "Bernard Level 2 a transcendé sa compréhension de l'espace",
+    "sublime_return": "Le Sublime revient plus puissant que jamais",
+    "revelation_moment": "OMG ! Tout ce temps, la géométrie incluait le temps !",
+    "world_impact": "Cette révélation change la nature même du jeu"
+  },
+
+  "quotes": [
+    "OMG ! Le temps fait partie de la géométrie !",
+    "Bernard Level 2 - Retour du Sublime !",
+    "Chaque pas dans l'espace est un pas dans le temps !",
+    "La map du monde EST la map du temps !"
+  ],
+
+  "metadata": {
+    "created_by": "OPUS_MEMENTO_CLAUDIUS_REVELATION",
+    "session": "BERNARD_LEVEL_2_SUBLIME_RETURN", 
+    "revelation_level": "OMG_MAXIMUM",
+    "temporal_signature": "4D_SUBLIME_SPACETIME"
+  }
+} 

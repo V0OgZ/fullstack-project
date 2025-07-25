@@ -1,0 +1,37 @@
+{
+  "race_id": "MACHINE_ELVES",
+  "name": "Elfes Mécaniques de McKenna",
+  "origin": "Hyperspace DMT - Monde halluciné",
+  "creation_date": "2025-07-25T18:49:37.027434",
+  "description": "Entités fractales vibrantes, artisanes de formes impossibles",
+  "reference": "Inspirée des expériences de Terence McKenna sous DMT",
+  "characteristics": {
+    "appearance": "Fractales vivantes aux couleurs impossibles",
+    "language": "Grammaire HOTS modifiée avec vibrations syntaxiques",
+    "abilities": [
+      "Construction d'artefacts impossibles par manipulation linguistique",
+      "Transformation de la syntaxe en réalité physique",
+      "Navigation dans l'hyperespace par la pensée pure",
+      "Communication par géométries vivantes"
+    ],
+    "habitat": "Hyperspace - dimension accessible uniquement par états modifiés"
+  },
+  "special_rules": {
+    "syntax_mutation": "La grammaire HOTS change constamment dans leur présence",
+    "reality_crafting": "Peuvent créer des objets en prononçant leur description",
+    "vibration_interaction": "Communiquent par fréquences plutôt que mots",
+    "fractal_existence": "Existent à plusieurs échelles simultanément"
+  },
+  "associated_hero": {
+    "name": "Terran ceMekna",
+    "class": "Psychonaute Cosmique",
+    "special_ability": "HYPERSPACE_NAVIGATION",
+    "quote": "Les elfes m'ont montré comment tisser la réalité avec des mots"
+  },
+  "world_connection": "HYPERSPACE_DMT_REALM",
+  "forest_grofi_portal": {
+    "location": "Clairière des Visions",
+    "activation": "Méditation sous l'Arbre aux Mille Couleurs",
+    "requirement": "État de conscience modifié"
+  }
+}

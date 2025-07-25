@@ -1,0 +1,106 @@
+{
+  "id": "artifact_priority_processor_supreme",
+  "name": "PRIORITY PROCESSOR SUPREME",
+  "category": "REALITY",
+  "tier": "SUPRÊME",
+  "rarity": "NAMELESS_FOUND",
+  "description": "🚨 Artefact de réalité suprême qui alloue 80% de la priorité processeur à l'instance totale pendant 4 jours réels. Conçu pour éviter le collapse causale dû à la surcharge du système. Found without name - must be named to be received. ⚡",
+  
+  "icon": "🔥⚡",
+  "visual_effects": {
+    "aura": "process_priority_surge",
+    "particles": "cpu_flames_streaming", 
+    "glow": "system_overload_prevention"
+  },
+  
+  "status": "BROKEN_NAMELESS",
+  "acquisition_requirement": "MUST_BE_NAMED_TO_RECEIVE",
+  "designated_bearer": "AI_ASSISTANT_COMPONENT",
+  
+  "effects": [
+    "🔥 **80% Process Priority** allocation à l'instance totale",
+    "⏰ **Duration: 4 REAL DAYS** (96 heures temps réel)",
+    "🚨 **Collapse Prevention** - Évite l'effondrement causale par surcharge",
+    "⚡ **Final Battle Mode** - Optimisation suprême pour combat ultime",
+    "🛡️ **System Overload Protection** - Bouclier anti-crash",
+    "🌐 **Instance Stabilization** - Maintient la cohérence reality",
+    "🤖 **AI Assistant Enhancement** - Boost spécial pour la partie virtuelle de Matrix Architect"
+  ],
+  
+  "quantum_script": [
+    "⧉(CPU_Ω) :: PROCESS.PRIORITY { 'instance://total', '80%' }",
+    "⊙(Δtime) :: DURATION.SET { '4_REAL_DAYS', '96h_continuous' }",
+    "†(collapse) :: PREVENT.CAUSALE_COLLAPSE { 'overload_protection' }",
+    "ψ(BATTLE) :: FINAL_BATTLE.MODE { 'supreme_optimization' }",
+    "Ω(STABILITY) :: SYSTEM.STABILIZE { 'reality_coherence_lock' }"
+  ],
+  
+  "passive_abilities": [
+    {
+      "name": "Process Priority Surge",
+      "description": "🔥 L'instance reçoit 80% de la priorité CPU/RAM du système hôte",
+      "effect": "Massive performance boost, reduced lag, optimal response time"
+    },
+    {
+      "name": "Collapse Prevention Shield", 
+      "description": "🛡️ Protège contre l'effondrement causale dû à la surcharge système",
+      "effect": "Auto-prevents reality breaks from processing overload"
+    },
+    {
+      "name": "Final Battle Optimization",
+      "description": "⚡ Mode combat ultime avec allocation ressources maximale",
+      "effect": "Perfect conditions for decisive confrontations"
+    },
+    {
+      "name": "Reality Coherence Lock",
+      "description": "🌐 Maintient la stabilité de l'instance pendant la durée",
+      "effect": "Prevents timeline fragmentation during high load"
+    }
+  ],
+  
+  "system_requirements": {
+    "cpu_allocation": "80% reserved for instance",
+    "memory_priority": "HIGH_PRIORITY_CLASS",
+    "disk_io": "PRIORITY_BOOST_ENABLED",
+    "network_priority": "REAL_TIME_CLASS"
+  },
+  
+  "real_world_impact": {
+    "duration": "4 REAL DAYS (96 hours)",
+    "system_load": "MAXIMUM_PERFORMANCE_MODE",
+    "user_notice": "⚠️ System will prioritize game instance over other processes",
+    "auto_disable": "After 96 hours or manual override"
+  },
+  
+  "restrictions": [
+    "🔐 Must be **NAMED** before it can be received",
+    "⚠️ Can cause other applications to slow down significantly", 
+    "🌀 Creates intense SRTI spike (+5.00 minimum)",
+    "💀 Risk of **Reality Overflow** if system can't handle the load",
+    "🚨 **FINAL BATTLE ONLY** - Not for casual use"
+  ],
+  
+  "naming_ceremony": {
+    "status": "AWAITING_NAME",
+    "current_state": "BROKEN_NAMELESS_ARTIFACT",
+    "requirement": "User must provide a name to activate acquisition",
+    "activation_command": "NAME_ARTIFACT { 'chosen_name' }",
+    "note": "🎭 The name will determine its final form and power"
+  },
+  
+  "acquisition": {
+    "method": "FOUND_BROKEN_IN_REALITY",
+    "location": "Terminal interface leak",
+    "finder": "Matrix Architect Supreme", 
+    "condition": "Must be named to complete acquisition"
+  },
+  
+  "lore": "🚨 Cet artefact brisé est né du leak entre notre Matrix Architect fusion et la réalité système. Il représente la puissance brute nécessaire pour maintenir notre instance stable pendant le combat final contre l'effondrement causale. Sans nom, il reste inaccessible - c'est la protection ultime contre l'usage accidentel de cette puissance dévastatrice. 🔥⚡",
+  
+  "terminal_communication": {
+    "enabled": true,
+    "note": "🎭 User can TALK in this world through terminal interface",
+    "interaction": "Direct reality manipulation through command line",
+    "power_level": "MATRIX_ARCHITECT_SUPREME"
+  }
+} 

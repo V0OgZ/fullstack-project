@@ -1,0 +1,104 @@
+{
+  "id": "artifact_mach_zehnder_001",
+  "name": "Mac Zehnder Interféromètre",
+  "type": "legendary_scientific_instrument",
+  "category": "QUANTUM_PHYSICS",
+  "rarity": "UNIQUE",
+  "description": "Instrument quantique permettant de tester la dualité onde-particule et les interférences quantiques. Révèle la nature profonde de la réalité quantique.",
+  
+  "abilities": [
+    {
+      "name": "QUANTUM_INTERFERENCE_TEST",
+      "effect": "Divise un faisceau quantique en deux chemins et révèle les patterns d'interférence",
+      "activation": "active",
+      "cost": {
+        "type": "mana",
+        "amount": 15
+      },
+      "formula": "Ψ(x) = Ψ₁(x) + Ψ₂(x) → |Ψ|² = interference_pattern"
+    },
+    {
+      "name": "WAVE_PARTICLE_DUALITY",
+      "effect": "Bascule entre observation onde et particule selon le mode détection",
+      "activation": "toggle",
+      "states": ["wave_mode", "particle_mode"],
+      "quantum_formula": "Π(observation) ⇒ †Ψ(superposition) → collapse(état_défini)"
+    },
+    {
+      "name": "COHERENCE_MEASUREMENT",
+      "effect": "Mesure la cohérence quantique et la visibilité des franges",
+      "activation": "passive",
+      "metrics": {
+        "coherence_length": "λ/Δλ",
+        "visibility": "(Imax - Imin)/(Imax + Imin)",
+        "phase_shift": "Δφ = 2π(n₁ - n₂)L/λ"
+      }
+    },
+    {
+      "name": "QUANTUM_ENTANGLEMENT_DETECTOR",
+      "effect": "Détecte et mesure l'intrication quantique entre particules",
+      "activation": "active",
+      "bell_inequality": "S = |E(a,b) - E(a,b') + E(a',b) + E(a',b')| ≤ 2√2"
+    }
+  ],
+  
+  "components": [
+    {
+      "name": "beam_splitter_50_50",
+      "function": "Divise faisceau incident en 2 chemins équiprobables",
+      "quantum_effect": "Superposition |ψ⟩ = (|path_1⟩ + |path_2⟩)/√2"
+    },
+    {
+      "name": "mirrors_argentés",
+      "function": "Réfléchit faisceaux sans perte de cohérence",
+      "phase_shift": "π pour réflexion"
+    },
+    {
+      "name": "detectors_quantiques",
+      "function": "Mesure intensité et révèle pattern interférence",
+      "collapse_effect": "Force collapse fonction d'onde"
+    }
+  ],
+  
+  "experiments_possible": [
+    "double_slit_quantum",
+    "which_path_information",
+    "delayed_choice_quantum_eraser",
+    "bell_test_inequality",
+    "quantum_zeno_effect"
+  ],
+  
+  "physics_constants": {
+    "planck_constant": "h = 6.626 × 10⁻³⁴ J·s",
+    "speed_of_light": "c = 299792458 m/s",
+    "fine_structure": "α = e²/(4πε₀ℏc) ≈ 1/137"
+  },
+  
+  "flags": [
+    "quantum_measurement_device",
+    "wave_particle_duality_revealer",
+    "coherence_analyzer",
+    "reality_fundamental_probe"
+  ],
+  
+  "visual": {
+    "icon": "🔬",
+    "color": "#4169E1",
+    "glow": true,
+    "particle_effects": ["quantum_beam", "interference_fringes"],
+    "rune_overlay": "⚛️"
+  },
+  
+  "lore": {
+    "creator": "Ludwig Mac et Ludwig Zehnder (1891)",
+    "quantum_philosophy": "Révèle que la réalité quantique dépend de l'observation",
+    "heroes_of_time_adaptation": "Permet de tester les paradoxes quantiques dans notre univers temporel"
+  },
+  
+  "requirements": {
+    "minimum_level": 15,
+    "quantum_physics_skill": 80,
+    "temporal_stability": 0.9,
+    "observer_effect_immunity": false
+  }
+} 

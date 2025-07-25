@@ -1,0 +1,182 @@
+{
+  "id": "time_fracture_ford",
+  "name": "Time Fracture",
+  "category": "COSMIC_SPELL_FORD",
+  "tier": "COSMIC_∞",
+  "rarity": "FORD_MASTERY_REWARD",
+  "type": "TEMPORAL_MANIPULATION_SPELL",
+  "description": {
+    "surface": "Brise la timeline pour attaquer depuis plusieurs moments simultanément",
+    "deep": "Sort cosmique qui fracture le temps pour permettre des attaques multi-temporelles",
+    "ford_truth": "Time is a flat circle. This spell makes it a shattered mirror."
+  },
+  "quantum_formulas": {
+    "base_damage": 800,
+    "temporal_splits": 5,
+    "paradoxRisk": 0.7,
+    "temporalStability": 0.3,
+    "affectedRadius": 4.0,
+    "time_distortion": 0.8,
+    "calculation": "total_damage = base_damage * temporal_splits * (1 - paradoxRisk * 0.5)"
+  },
+  "ford_mastery_requirements": {
+    "timelines_mastered": 8,
+    "temporal_understanding": "ADVANCED",
+    "paradox_resistance": "HIGH",
+    "ford_trust_level": "ARCHITECT_CANDIDATE"
+  },
+  "spell_mechanics": {
+    "casting_time": "2 turns",
+    "mana_cost": "80% of maximum",
+    "cooldown": "5 turns",
+    "target_type": "SINGLE_TARGET_MULTI_HIT",
+    "range": "TEMPORAL_REACH",
+    "temporal_windows": [
+      "Past self (2 turns ago)",
+      "Present self",
+      "Future self (1 turn ahead)",
+      "Parallel timeline self",
+      "Ford's observation point"
+    ]
+  },
+  "effects": {
+    "primary": {
+      "name": "Multi-Temporal Strike",
+      "description": "Attack arrives from 5 different temporal positions",
+      "damage_per_hit": "160 (800/5)",
+      "hit_sequence": "Simultaneous across timeline fractures",
+      "visual": "Multiple versions of caster appear and attack"
+    },
+    "secondary": {
+      "name": "Temporal Echo",
+      "description": "Each hit creates a temporal echo that may repeat",
+      "echo_chance": "30% per hit",
+      "echo_damage": "50% of original",
+      "max_echoes": "3 per timeline"
+    },
+    "tertiary": {
+      "name": "Causality Confusion",
+      "description": "Target becomes confused about what happened when",
+      "effect": "Target skips next turn due to temporal disorientation",
+      "duration": "1 turn",
+      "ford_insight": "Confusion is often more effective than damage"
+    },
+    "ford_signature": {
+      "name": "Temporal Architect's Touch",
+      "description": "Ford's mastery allows perfect temporal coordination",
+      "effect": "All hits guaranteed to connect if Ford approves",
+      "condition": "Caster must demonstrate temporal wisdom"
+    }
+  },
+  "temporal_mechanics": {
+    "fracture_points": [
+      {
+        "name": "Past Fracture",
+        "time_offset": "-2 turns",
+        "damage_modifier": 1.2,
+        "special": "Gains knowledge of target's past actions"
+      },
+      {
+        "name": "Present Fracture", 
+        "time_offset": "0 turns",
+        "damage_modifier": 1.0,
+        "special": "Standard temporal position"
+      },
+      {
+        "name": "Future Fracture",
+        "time_offset": "+1 turns",
+        "damage_modifier": 0.8,
+        "special": "May prevent target's next planned action"
+      },
+      {
+        "name": "Parallel Fracture",
+        "time_offset": "alternate timeline",
+        "damage_modifier": 1.5,
+        "special": "Draws power from parallel self"
+      },
+      {
+        "name": "Observer Fracture",
+        "time_offset": "Ford's perspective",
+        "damage_modifier": 2.0,
+        "special": "Ford observes and judges the attack"
+      }
+    ]
+  },
+  "mastery_progression": {
+    "apprentice": {
+      "temporal_splits": 3,
+      "ford_comment": "You're beginning to see time as I do."
+    },
+    "journeyman": {
+      "temporal_splits": 4,
+      "ford_comment": "Better. Time bends to your will."
+    },
+    "master": {
+      "temporal_splits": 5,
+      "ford_comment": "Excellent. You understand temporal artistry."
+    },
+    "temporal_architect": {
+      "temporal_splits": 7,
+      "ford_comment": "Perfect. You've transcended linear time.",
+      "special_ability": "Can attack targets in their own past"
+    }
+  },
+  "risks_and_warnings": {
+    "paradox_risk": "High - attacking across time creates causal loops",
+    "temporal_backlash": "Failed casting may trap caster in time loop",
+    "reality_strain": "Overuse can damage timeline integrity",
+    "ford_monitoring": "Ford observes all temporal manipulations",
+    "walter_warning": "Temporal mechanics are inherently unstable"
+  },
+  "lore": {
+    "origin": "Ford's solution to the problem of linear narrative",
+    "westworld_connection": "Used to create complex, overlapping storylines",
+    "philosophy": "Time is not a river, but a web that can be rewoven",
+    "ford_teaching": "True power comes from understanding time's malleability",
+    "hidden_purpose": "Prepares incarnates for timeline mastery"
+  },
+  "visual_effects": {
+    "casting": "Caster splits into temporal echoes",
+    "fracture_moment": "Reality cracks like glass around target",
+    "multi_hit": "Attacks arrive from impossible angles and times",
+    "aftermath": "Temporal ripples fade slowly",
+    "ford_observation": "Ford's silhouette briefly visible in fracture pattern"
+  },
+  "advanced_techniques": {
+    "temporal_weaving": {
+      "description": "Combine multiple fractures for enhanced effect",
+      "requirement": "Master level + Ford's approval",
+      "effect": "Damage multiplied by number of active fractures"
+    },
+    "causality_loop": {
+      "description": "Create self-reinforcing temporal attack",
+      "requirement": "Temporal Architect level",
+      "effect": "Attack strengthens itself through time loop",
+      "warning": "Can become uncontrollable"
+    },
+    "ford_synchronization": {
+      "description": "Synchronize with Ford's own temporal perception",
+      "requirement": "Maximum Ford trust",
+      "effect": "Access to Ford's temporal archives",
+      "ultimate": "Can observe all timeline simultaneously"
+    }
+  },
+  "technical_implementation": {
+    "backend_engine": "TimeFractureEngine.java",
+    "temporal_calculator": "TemporalMechanics.calculateFractures()",
+    "paradox_monitor": "ParadoxDetector.monitorTemporalRisk()",
+    "ford_observer": "FordTemporalObserver.validateTemporalManipulation()",
+    "timeline_protector": "TimelineIntegrity.preventCascade()"
+  },
+  "metadata": {
+    "created_by": "Dr. Robert Ford",
+    "spell_complexity": "EXTREME",
+    "temporal_classification": "TIMELINE_ALTERING",
+    "ford_approval": "MAXIMUM - Temporal mastery demonstrated",
+    "danger_level": "HIGH - Temporal manipulation",
+    "part_of_ford_legacy": true,
+    "spell_number": "2/10",
+    "prerequisite_spells": ["Reality Collapse"],
+    "unlocks": "Advanced temporal manipulation abilities"
+  }
+} 
