@@ -830,6 +830,71 @@
             }
         }
         
+        // 💬 SYSTÈME DE DIALOGUES FLOTTANTS
+        const dialogues = {
+            'A': [
+                '"Bon, on va où maintenant ?"',
+                '"Ce monde A me paraît familier..."',
+                '"Vince, tu sens quelque chose ?"',
+                '"Les hexagones commencent à vibrer !"'
+            ],
+            'B': [
+                '"Putain, l\'interstice encore !"',
+                '"Ça me rappelle Pulp Fiction..."',
+                '"Jules serait fier de moi ici !"',
+                '"L\'hexagone pulse de plus en plus fort !"'
+            ],
+            'C': [
+                '"Wow, le labo quantique !"',
+                '"Ces instruments sont dingues !"',
+                '"Einstein aurait adoré ça !"',
+                '"Le Palmier quantique... magnifique !"'
+            ]
+        };
+        
+        let currentDialogue = '';
+        let dialogueTimer = null;
+        
+        function showDialogue(worldId) {
+            const worldDialogues = dialogues[worldId] || dialogues['A'];
+            const randomDialogue = worldDialogues[Math.random() * worldDialogues.length | 0];
+            
+            currentDialogue = randomDialogue;
+            
+            // Afficher le dialogue
+            const dialogueDiv = document.getElementById('character-dialogue');
+            if (dialogueDiv) {
+                dialogueDiv.textContent = currentDialogue;
+                dialogueDiv.style.display = 'block';
+                dialogueDiv.style.opacity = '1';
+                
+                // Auto-hide après 4 secondes
+                clearTimeout(dialogueTimer);
+                dialogueTimer = setTimeout(() => {
+                    dialogueDiv.style.opacity = '0';
+                    setTimeout(() => {
+                        dialogueDiv.style.display = 'none';
+                    }, 500);
+                }, 4000);
+            }
+            
+            addLog(`💬 Dialogue: ${currentDialogue}`, 'info');
+        }
+        
+        // 🎭 DIALOGUE AUTOMATIQUE sur changement de monde
+        function changeWorldWithDialogue(targetWorld) {
+            changeWorld(targetWorld);
+            setTimeout(() => {
+                showDialogue(targetWorld);
+            }, 1500); // Après les transitions
+        }
+        
+        // 🎲 DIALOGUE ALÉATOIRE sur clic
+        function triggerRandomDialogue() {
+            showDialogue(currentWorld);
+            playSound('quantum');
+        }
+        
         // Initialize on load
         window.onload = function() {
             createMap();
@@ -841,17 +906,57 @@
                 <div class="world-navigation" style="grid-column: 1 / -1; margin-top: 20px;">
                     <h3>🌍 Navigation Film Vivant A→B→C</h3>
                     <div style="display: flex; gap: 10px; justify-content: center; margin: 15px 0;">
-                        <button class="world-btn active" data-world="A" onclick="switchToWorld('A')">
-                            🛋️ Monde A<br><small>Jean Canapé</small>
+                        <button onclick="triggerRandomDialogue()" style="
+                            background: linear-gradient(45deg, #FFD700, #FFA500);
+                            color: #000;
+                            border: none;
+                            padding: 10px 20px;
+                            border-radius: 15px;
+                            font-weight: bold;
+                            cursor: pointer;
+                            margin: 5px;
+                            transition: all 0.3s ease;
+                        " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                            💬 Dialogue
                         </button>
-                        <button class="world-btn" data-world="B" onclick="switchToWorld('B')">
-                            🔫 Monde B<br><small>Vince Hexagones</small>
+                        
+                        <button onclick="changeWorldWithDialogue('A')" style="
+                            background: linear-gradient(45deg, #4CAF50, #45a049);
+                            color: white;
+                            border: none;
+                            padding: 10px 20px;
+                            border-radius: 15px;
+                            font-weight: bold;
+                            cursor: pointer;
+                            margin: 5px;
+                        " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                            🗺️ Monde A
                         </button>
-                        <button class="world-btn" data-world="C" onclick="switchToWorld('C')">
-                            🌀 Monde C<br><small>Antarctique Secret</small>
+                        
+                        <button onclick="changeWorldWithDialogue('B')" style="
+                            background: linear-gradient(45deg, #FF9800, #F57C00);
+                            color: white;
+                            border: none;
+                            padding: 10px 20px;
+                            border-radius: 15px;
+                            font-weight: bold;
+                            cursor: pointer;
+                            margin: 5px;
+                        " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                            🌌 Monde B
                         </button>
-                        <button class="world-btn" onclick="cyclicNavigation()" style="background: linear-gradient(45deg, #ff6b6b, #4ecdc4);">
-                            🔄 Navigation<br><small>Cyclique</small>
+                        
+                        <button onclick="changeWorldWithDialogue('C')" style="
+                            background: linear-gradient(45deg, #9C27B0, #7B1FA2);
+                            color: white;
+                            border: none;
+                            padding: 10px 20px;
+                            border-radius: 15px;
+                            font-weight: bold;
+                            cursor: pointer;
+                            margin: 5px;
+                        " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                            ⚛️ Monde C
                         </button>
                     </div>
                     <p style="text-align: center; color: #ccc; font-size: 0.9em;">
@@ -891,6 +996,14 @@
             // Message de bienvenue
             addLog('🎬 Film Vivant activé ! Navigation A→B→C opérationnelle', 'success');
             setStatus('🌍 Monde A actif - Jean-Grofignon sur son canapé cosmique');
+
+            // 💬 DIALOGUE FLOTTANT
+            const dialogueDiv = document.getElementById('character-dialogue');
+            if (dialogueDiv) {
+                dialogueDiv.textContent = "Dialogue ici..."; // Initial text
+                dialogueDiv.style.display = 'block';
+                dialogueDiv.style.opacity = '1';
+            }
         };
     </script>
 </body>
