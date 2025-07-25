@@ -160,6 +160,31 @@
             0% { opacity: 1; transform: translateY(0); }
             100% { opacity: 0; transform: translateY(-20px); }
         }
+
+        @keyframes pulse {
+            0% { 
+                box-shadow: 0 0 15px rgba(255, 107, 107, 0.8);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 25px rgba(255, 107, 107, 1), 0 0 35px rgba(78, 205, 196, 0.8);
+                transform: scale(1.05);
+            }
+            100% { 
+                box-shadow: 0 0 15px rgba(255, 107, 107, 0.8);
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes wormhole-activate {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.5) rotate(180deg); }
+            100% { transform: scale(1) rotate(360deg); }
+        }
+        
+        .wormhole-active {
+            animation: wormhole-activate 1s ease-in-out;
+        }
     </style>
 </head>
 <body>
@@ -245,31 +270,62 @@
         }
         
         function updateMap() {
-            // Clear all
-            document.querySelectorAll('.map-cell').forEach(cell => {
-                cell.innerHTML = '';
-                cell.className = 'map-cell';
-            });
+            const mapContainer = document.getElementById('gameMap');
+            mapContainer.innerHTML = '';
             
-            // Place heroes
-            const arthurCell = document.getElementById(`cell-${gameState.arthur.x}-${gameState.arthur.y}`);
-            arthurCell.innerHTML = '⚔️';
-            arthurCell.classList.add('hero-arthur');
+            // Grille de base
+            for (let y = 0; y < 12; y++) {
+                for (let x = 0; x < 16; x++) {
+                    const cell = document.createElement('div');
+                    cell.style.cssText = `
+                        width: 30px;
+                        height: 30px;
+                        border: 1px solid #333;
+                        display: inline-block;
+                        background: linear-gradient(45deg, #1a1a2e, #16213e);
+                        position: relative;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                    `;
+                    
+                    // Vérifier si c'est un wormhole
+                    const worldWormholes = wormholes[currentWorld] || [];
+                    const wormhole = worldWormholes.find(w => w.x === x && w.y === y);
+                    
+                    if (wormhole) {
+                        cell.style.background = 'radial-gradient(circle, #FF6B6B, #4ECDC4, #45B7D1)';
+                        cell.style.animation = 'pulse 2s infinite';
+                        cell.innerHTML = `<span style="font-size: 20px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">${wormhole.symbol}</span>`;
+                        cell.title = wormhole.name;
+                        cell.style.boxShadow = '0 0 15px rgba(255, 107, 107, 0.8)';
+                    }
+                    
+                    // Effet hover
+                    cell.onmouseover = () => {
+                        if (wormhole) {
+                            cell.style.transform = 'scale(1.2)';
+                            cell.style.zIndex = '100';
+                        } else {
+                            cell.style.background = 'linear-gradient(45deg, #2a2a4e, #26335e)';
+                        }
+                    };
+                    
+                    cell.onmouseout = () => {
+                        if (wormhole) {
+                            cell.style.transform = 'scale(1)';
+                            cell.style.zIndex = '1';
+                        } else {
+                            cell.style.background = 'linear-gradient(45deg, #1a1a2e, #16213e)';
+                        }
+                    };
+                    
+                    mapContainer.appendChild(cell);
+                }
+                mapContainer.appendChild(document.createElement('br'));
+            }
             
-            const vinceCell = document.getElementById(`cell-${gameState.vince.x}-${gameState.vince.y}`);
-            vinceCell.innerHTML = '🔫';
-            vinceCell.classList.add('hero-vince');
-            
-            const grutCell = document.getElementById(`cell-${gameState.grut.x}-${gameState.grut.y}`);
-            grutCell.innerHTML = '🏛️';
-            grutCell.classList.add('hero-grut');
-            
-            // Place wormholes
-            gameState.wormholes.forEach(wh => {
-                const whCell = document.getElementById(`cell-${wh.x}-${wh.y}`);
-                whCell.innerHTML = '🌀';
-                whCell.classList.add('wormhole');
-            });
+            // Ajouter event listener pour clics
+            mapContainer.onclick = handleMapClick;
         }
         
         function setStatus(message) {
@@ -895,6 +951,94 @@
             playSound('quantum');
         }
         
+        // 🌀 WORMHOLES INTERACTIFS VINCE
+        const wormholes = {
+            'A': [
+                { x: 8, y: 4, target: 'B', symbol: '🌀', name: 'Portal vers Interstice' },
+                { x: 12, y: 8, target: 'C', symbol: '⚛️', name: 'Portal Quantique' }
+            ],
+            'B': [
+                { x: 6, y: 6, target: 'A', symbol: '🗺️', name: 'Retour Monde A' },
+                { x: 10, y: 3, target: 'C', symbol: '⚛️', name: 'Portal Labo' },
+                { x: 4, y: 9, target: 'A', symbol: '🔄', name: 'Cycle Retour' }
+            ],
+            'C': [
+                { x: 7, y: 2, target: 'A', symbol: '🗺️', name: 'Retour Origine' },
+                { x: 11, y: 7, target: 'B', symbol: '🌌', name: 'Vers Interstice' },
+                { x: 5, y: 5, target: 'A', symbol: '🔄', name: 'Cycle Complet' }
+            ]
+        };
+        
+        // 🎯 DÉTECTION CLIC SUR WORMHOLE
+        function handleMapClick(event) {
+            const mapContainer = document.getElementById('gameMap'); // Changed from 'map-container' to 'gameMap'
+            const rect = mapContainer.getBoundingClientRect();
+            const cellSize = 60; // Taille des cellules
+            
+            const x = Math.floor((event.clientX - rect.left) / cellSize);
+            const y = Math.floor((event.clientY - rect.top) / cellSize);
+            
+            // Vérifier si clic sur wormhole
+            const worldWormholes = wormholes[currentWorld] || [];
+            const clickedWormhole = worldWormholes.find(w => w.x === x && w.y === y);
+            
+            if (clickedWormhole) {
+                activateWormhole(clickedWormhole);
+            } else {
+                addLog(`🎯 Clic map: (${x}, ${y}) - Pas de wormhole`, 'info');
+            }
+        }
+        
+        // ⚡ ACTIVATION WORMHOLE
+        function activateWormhole(wormhole) {
+            addLog(`🌀 WORMHOLE ACTIVÉ: ${wormhole.name}`, 'success');
+            setStatus(`🌀 Traversée vers Monde ${wormhole.target}...`);
+            
+            // Effet visuel de traversée
+            const mapContainer = document.getElementById('gameMap'); // Changed from 'map-container' to 'gameMap'
+            mapContainer.style.filter = 'blur(5px) brightness(2)';
+            playSound('quantum');
+            
+            setTimeout(() => {
+                changeWorldWithDialogue(wormhole.target);
+                mapContainer.style.filter = 'none';
+                addLog(`✅ Arrivée Monde ${wormhole.target} via wormhole !`, 'success');
+                
+                // Dialogue spécial traversée
+                setTimeout(() => {
+                    const traversalDialogues = [
+                        '"Putain, ce wormhole déchire !"',
+                        '"Vince traverse les dimensions !"',
+                        '"Ça c\'est du voyage temporel !"',
+                        '"Portal activé, mission accomplie !"'
+                    ];
+                    const dialogue = traversalDialogues[Math.random() * traversalDialogues.length | 0];
+                    showCustomDialogue(dialogue);
+                }, 2000);
+            }, 1000);
+        }
+        
+        // 💫 DIALOGUE CUSTOM POUR WORMHOLES
+        function showCustomDialogue(text) {
+            const dialogueDiv = document.getElementById('character-dialogue');
+            if (dialogueDiv) {
+                dialogueDiv.textContent = text;
+                dialogueDiv.style.display = 'block';
+                dialogueDiv.style.opacity = '1';
+                dialogueDiv.style.background = 'linear-gradient(45deg, #FF6B6B, #4ECDC4)';
+                dialogueDiv.style.borderColor = '#FF6B6B';
+                
+                setTimeout(() => {
+                    dialogueDiv.style.opacity = '0';
+                    setTimeout(() => {
+                        dialogueDiv.style.display = 'none';
+                        dialogueDiv.style.background = 'rgba(0, 0, 0, 0.9)';
+                        dialogueDiv.style.borderColor = '#FFD700';
+                    }, 500);
+                }, 4000);
+            }
+        }
+        
         // Initialize on load
         window.onload = function() {
             createMap();
@@ -1004,6 +1148,10 @@
                 dialogueDiv.style.display = 'block';
                 dialogueDiv.style.opacity = '1';
             }
+
+            // 🌀 WORMHOLES INTERACTIFS VINCE
+            const mapContainer = document.getElementById('gameMap');
+            mapContainer.addEventListener('click', handleMapClick);
         };
     </script>
 </body>
