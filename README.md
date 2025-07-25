@@ -8,7 +8,27 @@
 
 ---
 
-## 🌟 **NOUVELLES DOCUMENTATIONS V2 - PANORAMIX & EXCALIBUR** 🔮
+## 🏛️ **PANOPTICON 6D + DIMENSION M - OPUS VISION FINALE** 🌌
+
+### **🌌 Panopticon 6D Opérationnel**
+- [🏛️ **Spécifications Panopticon 6D**](PANOPTICON_SPEC_GRUT.md) - *Vision complète d'Opus intégrée*
+- [🎨 **PortalRoom 3D**](panopticon-grut-dashboard/src/components/PortalRoom.tsx) - *Navigation 6D React Three.js*
+- [🔬 **MultiSliceView**](panopticon-grut-dashboard/src/components/MultiSliceView.tsx) - *Visualisation multi-tranches*
+- [🎛️ **TesseractManipulator**](panopticon-grut-dashboard/src/components/TesseractManipulator.tsx) - *Manipulation hypercubes 4D+*
+
+### **🕸️ Dimension M - Piège OmégaZero (CLASSIFIÉ)**
+- [🌐 **VirtualWorldManager**](backend/src/main/java/com/example/demo/service/VirtualWorldManager.java) - *Simulation faux multivers*
+- [🔑 **Clef Paracausalité**](game_assets/artifacts/legendaires/clef_paracausale.json) - *Appât OmégaZero (95.7% baitStrength)*
+- [🛡️ **RecursionProtector**](backend/src/main/java/com/example/demo/service/RecursionProtector.java) - *Protection limite 4 niveaux*
+
+### **📚 Documentation Finale V4.0**
+- [🔧 **API Documentation V4.0**](docs/BACKEND_API_DOCUMENTATION_WALTER.md) - *25 endpoints + Panopticon*
+- [📜 **Codex Complet V12.0**](docs/CODEX_COMPLET_HEROES_OF_TIME.md) - *Panopticon 6D documenté*
+- [🎨 **Tatouages Memento**](game_assets/artifacts/mineurs/tatouages_memento_archiviste.json) - *6 nouveaux tatouages travail nocturne*
+
+---
+
+## 🌟 **DOCUMENTATIONS V2 - PANORAMIX & EXCALIBUR** 🔮
 
 ### **🧙‍♂️ Panoramix Archidruide Temporel V2.0**
 - [🍯 **Lore Panoramix Complet**](docs/LORE_PANORAMIX_ARCHIDRUIDE_TEMPOREL.md) - *Archidruide avec Chaudron Quantique*
@@ -20,7 +40,7 @@
 
 ### **📜 Dictionnaire Runique Complet**
 - [🔤 **Dictionnaire Runique Jean**](docs/DICTIONNAIRE_RUNIC_COMPLET_JEAN.md) - *Tous les symboles et traductions*
-- [📖 **CODEX V10.0 Mis à Jour**](docs/CODEX_COMPLET_HEROES_OF_TIME.md) - *Version intégrant Panoramix et runique*
+- [📖 **CODEX V12.0 Mis à Jour**](docs/CODEX_COMPLET_HEROES_OF_TIME.md) - *Version intégrant Panopticon 6D*
 
 ### **🎮 Gameplay V2 Complet**
 - [🎯 **Combat Excalibur vs Vince Vega**](scenarios/test_complet_excalibur_vega_50_actions.runic) - *75 actions épiques*
