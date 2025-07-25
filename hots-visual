@@ -1,0 +1,201 @@
+#!/bin/bash
+
+# 🎮 HOTS VISUAL MENU - Service → Sous-service → Action
+# Tout affiché, navigation flèches + Enter, X pour quitter
+
+show_full_menu() {
+    clear
+    echo "🎮 HEROES OF TIME - CONTRÔLE SERVICES"
+    echo "======================================"
+    echo ""
+    echo "📋 SERVICES DISPONIBLES:"
+    echo ""
+    echo "┌─────────────────────────────────────────────────────────────────────┐"
+    echo "│  🖥️  [B] BACKEND      │  🌐 [F] FRONTEND     │  🏛️  [P] PANOPTICON   │"
+    echo "│     Spring Boot       │     Interface Web    │     Dashboard GRUT    │"
+    echo "│  🚀 Start  🔫 Stop    │  🚀 Start  🔫 Stop   │  🚀 Start  🔫 Stop    │"
+    echo "│  📊 Status            │  📊 Status           │  📊 Status            │"
+    echo "├─────────────────────────────────────────────────────────────────────┤"
+    echo "│  🧪 [T] TESTS         │  🎮 [D] DÉMOS        │  🛠️  [U] UTILS         │"
+    echo "│     Validation        │     Scenarios        │     Outils            │"
+    echo "│  ⚡ Quick  🏆 Complet │  🎬 Scenario 📹 Replay│  🧠 Generate 📜 Trans │"
+    echo "│  🐛 Debug  🎯 Backend │  ⚔️  Bataille 👑 Noob │  🗺️  Map     💾 Save  │"
+    echo "└─────────────────────────────────────────────────────────────────────┘"
+    echo ""
+    echo "🎯 ACTIONS UNIVERSELLES:"
+    echo "  🚀 [S] START    🔫 [X] STOP/QUIT    📊 [T] STATUS    🔄 [R] RESTART"
+    echo ""
+    echo "🧭 NAVIGATION: Lettres directes ou ↑↓ + Enter"
+    echo ""
+    echo -n "Choisir un service: "
+}
+
+show_backend_detail() {
+    clear
+    echo "🖥️  BACKEND - Spring Boot Services"
+    echo "=================================="
+    echo ""
+    echo "📦 SOUS-SERVICES:"
+    echo ""
+    echo "┌─────────────────────────────────────────────────────────────────┐"
+    echo "│  🌐 [A] API Server     │  🗃️  [D] Database      │  🔧 [C] Compile    │"
+    echo "│     Port 8080          │     H2 Memory          │     Maven Build    │"
+    echo "│                        │                        │                    │"
+    echo "│  🚀 [S] START          │  🔫 [X] STOP           │  📊 [T] STATUS     │"
+    echo "│  🔄 [R] RESTART        │  📋 [L] LOGS           │  🐛 [G] DEBUG      │"
+    echo "└─────────────────────────────────────────────────────────────────┘"
+    echo ""
+    echo "🎯 ACTIONS RAPIDES:"
+    echo "  🚀 S = Start Backend    🔫 X = Stop Backend    📊 T = Check Status"
+    echo ""
+    echo "⬅️  [B] RETOUR au menu principal"
+    echo ""
+    echo -n "Action: "
+}
+
+show_frontend_detail() {
+    clear
+    echo "🌐 FRONTEND - Interface Web"
+    echo "==========================="
+    echo ""
+    echo "📦 SOUS-SERVICES:"
+    echo ""
+    echo "┌─────────────────────────────────────────────────────────────────┐"
+    echo "│  🎮 [W] Web Interface  │  🏛️  [P] Panopticon    │  📚 [M] Memento    │"
+    echo "│     Port 8000          │     Port 8001          │     Archive UI     │"
+    echo "│                        │                        │                    │"
+    echo "│  🚀 [S] START          │  🔫 [X] STOP           │  📊 [T] STATUS     │"
+    echo "│  🔄 [R] RESTART        │  🌐 [O] OPEN BROWSER   │  🧪 [U] TEST UI    │"
+    echo "└─────────────────────────────────────────────────────────────────┘"
+    echo ""
+    echo "🎯 ACTIONS RAPIDES:"
+    echo "  🚀 S = Start Frontend   🔫 X = Stop Frontend   📊 T = Check Status"
+    echo ""
+    echo "⬅️  [B] RETOUR au menu principal"
+    echo ""
+    echo -n "Action: "
+}
+
+show_panopticon_detail() {
+    clear
+    echo "🏛️  PANOPTICON - Dashboard GRUT"
+    echo "=============================="
+    echo ""
+    echo "📦 SOUS-SERVICES:"
+    echo ""
+    echo "┌─────────────────────────────────────────────────────────────────┐"
+    echo "│  👁️  [G] GRUT Vision   │  🌐 [W] World State    │  📊 [D] Dashboard  │"
+    echo "│     Ontologie 6D       │     Graph API          │     React UI       │"
+    echo "│                        │                        │                    │"
+    echo "│  🚀 [S] START          │  🔫 [X] STOP           │  📊 [T] STATUS     │"
+    echo "│  🔄 [R] RESTART        │  🌐 [O] OPEN DASHBOARD │  🧪 [I] INSPECT    │"
+    echo "└─────────────────────────────────────────────────────────────────┘"
+    echo ""
+    echo "🎯 ACTIONS RAPIDES:"
+    echo "  🚀 S = Start Panopticon 🔫 X = Stop Panopticon 📊 T = Check Status"
+    echo ""
+    echo "⬅️  [B] RETOUR au menu principal"
+    echo ""
+    echo -n "Action: "
+}
+
+execute_service_action() {
+    local service=$1
+    local action=$2
+    
+    case "$service-$action" in
+        # BACKEND
+        "B-S"|"B-s") ./hots-full start essential ;;
+        "B-X"|"B-x") ./hots-full stop ;;
+        "B-T"|"B-t") ./hots-full status ;;
+        "B-R"|"B-r") ./hots-full restart ;;
+        "B-L"|"B-l") ./hots-full logs ;;
+        "B-G"|"B-g") ./hots-full debug ;;
+        
+        # FRONTEND
+        "F-S"|"F-s") ./hots-full start ;;
+        "F-X"|"F-x") ./hots-full stop ;;
+        "F-T"|"F-t") ./hots-full status ;;
+        "F-R"|"F-r") ./hots-full restart ;;
+        "F-O"|"F-o") ./hots-full web ;;
+        "F-U"|"F-u") ./hots-full test-uis ;;
+        
+        # PANOPTICON
+        "P-S"|"P-s") ./hots-full worldstate ;;
+        "P-X"|"P-x") pkill -f "panopticon" ;;
+        "P-T"|"P-t") ./hots-full status ;;
+        "P-R"|"P-r") ./hots-full restart ;;
+        "P-O"|"P-o") open "http://localhost:8001" ;;
+        "P-I"|"P-i") ./hots-full worldstate ;;
+        
+        *) echo "❌ Action inconnue: $service-$action" ;;
+    esac
+    
+    echo ""
+    echo "✅ Commande exécutée. Retour automatique dans 2 secondes..."
+    sleep 2
+}
+
+# BOUCLE PRINCIPALE
+while true; do
+    show_full_menu
+    read -n1 choice
+    echo ""
+    
+    case "$choice" in
+        "B"|"b")
+            while true; do
+                show_backend_detail
+                read -n1 action
+                echo ""
+                [[ "$action" == "B" || "$action" == "b" ]] && break
+                [[ "$action" == "X" || "$action" == "x" ]] && break
+                execute_service_action "B" "$action"
+            done
+            ;;
+        "F"|"f")
+            while true; do
+                show_frontend_detail
+                read -n1 action
+                echo ""
+                [[ "$action" == "B" || "$action" == "b" ]] && break
+                [[ "$action" == "X" || "$action" == "x" ]] && break
+                execute_service_action "F" "$action"
+            done
+            ;;
+        "P"|"p")
+            while true; do
+                show_panopticon_detail
+                read -n1 action
+                echo ""
+                [[ "$action" == "B" || "$action" == "b" ]] && break
+                [[ "$action" == "X" || "$action" == "x" ]] && break
+                execute_service_action "P" "$action"
+            done
+            ;;
+        "T"|"t")
+            ./hots-full test quick
+            echo "Retour au menu..."
+            sleep 2
+            ;;
+        "D"|"d")
+            ./hots-full demo noob
+            echo "Retour au menu..."
+            sleep 2
+            ;;
+        "U"|"u")
+            ./hots-full generate
+            echo "Retour au menu..."
+            sleep 2
+            ;;
+        "X"|"x"|"Q"|"q")
+            clear
+            echo "🔫 Vince Vega says: See you later!"
+            exit 0
+            ;;
+        *)
+            echo "❌ Service inconnu: $choice"
+            sleep 1
+            ;;
+    esac
+done 
