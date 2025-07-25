@@ -48,8 +48,28 @@ public class VirtualWorldManager {
         }
         
         // Monde spécial M-VOID pour piéger OmégaZero
-        VirtualWorld mVoid = new VirtualWorld("M_VOID_TRAP", "OMEGA_TRAP", generateMVoidTrap());
-        virtualWorlds.put("M_VOID_TRAP", mVoid);
+        VirtualWorld trapWorld = new VirtualWorld("M_VOID_TRAP", "DIMENSION_M", generateFakeMultiverseData());
+        virtualWorlds.put("M_VOID_TRAP", trapWorld);
+    }
+    
+    /**
+     * ✅ CREATE WORLD - Méthode requise par PersistenceService
+     */
+    public void createWorld(String worldId, Map<String, Object> worldData) {
+        String dimension = (String) worldData.getOrDefault("dimension", "UNKNOWN");
+        VirtualWorld world = new VirtualWorld(worldId, dimension, worldData);
+        virtualWorlds.put(worldId, world);
+    }
+    
+    /**
+     * ✅ GET ALL WORLDS - Méthode requise par PersistenceService  
+     */
+    public Map<String, Object> getAllWorlds() {
+        Map<String, Object> result = new ConcurrentHashMap<>();
+        for (Map.Entry<String, VirtualWorld> entry : virtualWorlds.entrySet()) {
+            result.put(entry.getKey(), entry.getValue().getData());
+        }
+        return result;
     }
     
     /**
@@ -246,6 +266,10 @@ public class VirtualWorldManager {
         
         public void activateTrap() {
             this.trapActivated = true;
+        }
+
+        public Map<String, Object> getData() {
+            return multiverseData;
         }
     }
 } 

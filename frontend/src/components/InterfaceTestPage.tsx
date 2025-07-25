@@ -1,287 +1,100 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './InterfaceTestPage.css';
-
-interface InterfaceVersion {
-  id: string;
-  name: string;
-  description: string;
-  commit: string;
-  route: string;
-}
-
-interface InterfaceGroup {
-  id: string;
-  name: string;
-  description: string;
-  color: string;
-  versions: InterfaceVersion[];
-}
+import React from 'react';
+import { Link } from 'react-router-dom';
+import SimpleSquareUI from './SimpleSquareUI';
 
 const InterfaceTestPage: React.FC = () => {
-  const navigate = useNavigate();
-  
-  // État pour stocker la version sélectionnée pour chaque groupe
-  const [selectedVersions, setSelectedVersions] = useState<Record<string, string>>({
-    'true-heroes': 'current',
-    'simple-game': 'current',
-    'modern-game': 'current',
-    'simple-modern': 'current'
-  });
-
-  const interfaceGroups: InterfaceGroup[] = [
-    {
-      id: 'true-heroes',
-      name: '🎮 TrueHeroesInterface',
-      description: 'Interface principale avec boutons de contrôle',
-      color: '#4CAF50',
-      versions: [
-        {
-          id: 'current',
-          name: 'Version ACTUELLE',
-          description: 'Avec Epic Content (🧟) et boutons fixés',
-          commit: 'HEAD',
-          route: '/test/true-heroes'
-        },
-        {
-          id: 'v1',
-          name: 'Version HIER',
-          description: 'Avec Goldorak - avant problèmes Epic',
-          commit: 'afdeae9',
-          route: '/test/true-heroes-v1'
-        },
-        {
-          id: 'v2',
-          name: 'Version AVANT-HIER',
-          description: 'Avec système retro complet',
-          commit: '741ff81',
-          route: '/test/true-heroes-v2'
-        },
-        {
-          id: 'v3',
-          name: 'Version REFACTORÉE',
-          description: 'Interface game refactorée',
-          commit: 'dd0100d',
-          route: '/test/true-heroes-v3'
-        },
-        {
-          id: 'v4',
-          name: 'Version ANCIENNE',
-          description: 'Avant modernisation',
-          commit: '14636c4',
-          route: '/test/true-heroes-v4'
-        }
-      ]
-    },
-    {
-      id: 'simple-game',
-      name: '🎯 SimpleGameInterface',
-      description: 'Interface simple avec sidebar (bonne disposition)',
-      color: '#2196F3',
-      versions: [
-        {
-          id: 'current',
-          name: 'Version ACTUELLE',
-          description: 'Version simple avec sidebar',
-          commit: 'HEAD',
-          route: '/test/simple-game'
-        },
-        {
-          id: 'v1',
-          name: 'Version HIER',
-          description: 'Version simple d\'hier',
-          commit: 'afdeae9',
-          route: '/test/simple-game-v1'
-        },
-        {
-          id: 'v2',
-          name: 'Version AVANT-HIER',
-          description: 'Version simple avant-hier',
-          commit: '741ff81',
-          route: '/test/simple-game-v2'
-        },
-        {
-          id: 'v3',
-          name: 'Version REFACTORÉE',
-          description: 'Version simple refactorée',
-          commit: 'dd0100d',
-          route: '/test/simple-game-v3'
-        },
-        {
-          id: 'v4',
-          name: 'Version ANCIENNE',
-          description: 'Version simple ancienne',
-          commit: '14636c4',
-          route: '/test/simple-game-v4'
-        }
-      ]
-    },
-    {
-      id: 'modern-game',
-      name: '✨ ModernGameInterface',
-      description: 'Interface moderne avec animations',
-      color: '#9C27B0',
-      versions: [
-        {
-          id: 'current',
-          name: 'Version ACTUELLE',
-          description: 'Interface moderne actuelle',
-          commit: 'HEAD',
-          route: '/test/modern-game'
-        },
-        {
-          id: 'v1',
-          name: 'Version HIER',
-          description: 'Interface moderne d\'hier',
-          commit: 'afdeae9',
-          route: '/test/modern-game-v1'
-        },
-        {
-          id: 'v2',
-          name: 'Version AVANT-HIER',
-          description: 'Interface moderne avant-hier',
-          commit: '741ff81',
-          route: '/test/modern-game-v2'
-        },
-        {
-          id: 'v3',
-          name: 'Version REFACTORÉE',
-          description: 'Interface moderne refactorée',
-          commit: 'dd0100d',
-          route: '/test/modern-game-v3'
-        },
-        {
-          id: 'v4',
-          name: 'Version ANCIENNE',
-          description: 'Interface moderne ancienne',
-          commit: '14636c4',
-          route: '/test/modern-game-v4'
-        }
-      ]
-    },
-    {
-      id: 'simple-modern',
-      name: '🎨 SimpleModernInterface',
-      description: 'Interface moderne simplifiée',
-      color: '#FF9800',
-      versions: [
-        {
-          id: 'current',
-          name: 'Version ACTUELLE',
-          description: 'Interface moderne simplifiée actuelle',
-          commit: 'HEAD',
-          route: '/test/simple-modern'
-        },
-        {
-          id: 'v1',
-          name: 'Version HIER',
-          description: 'Interface moderne simplifiée d\'hier',
-          commit: 'afdeae9',
-          route: '/test/simple-modern-v1'
-        },
-        {
-          id: 'v2',
-          name: 'Version AVANT-HIER',
-          description: 'Interface moderne simplifiée avant-hier',
-          commit: '741ff81',
-          route: '/test/simple-modern-v2'
-        },
-        {
-          id: 'v3',
-          name: 'Version REFACTORÉE',
-          description: 'Interface moderne simplifiée refactorée',
-          commit: 'dd0100d',
-          route: '/test/simple-modern-v3'
-        },
-        {
-          id: 'v4',
-          name: 'Version ANCIENNE',
-          description: 'Interface moderne simplifiée ancienne',
-          commit: '14636c4',
-          route: '/test/simple-modern-v4'
-        }
-      ]
-    }
-  ];
-
-  const handleVersionChange = (groupId: string, versionId: string) => {
-    setSelectedVersions(prev => ({
-      ...prev,
-      [groupId]: versionId
-    }));
-  };
-
-  const handleTestInterface = (groupId: string) => {
-    const selectedVersion = selectedVersions[groupId];
-    const group = interfaceGroups.find(g => g.id === groupId);
-    const version = group?.versions.find(v => v.id === selectedVersion);
-    
-    if (version && group) {
-      console.log(`🔍 Testing ${group.name} - ${version.name} (${version.commit})`);
-      navigate(version.route);
-    }
-  };
-
   return (
-    <div className="interface-test-page">
-      <div className="test-header">
-        <h1>🧪 Interface Versions Diagnostic</h1>
-        <p>Testez 5 versions de chaque interface pour trouver celle qui marche</p>
-      </div>
-
-      <div className="interface-groups">
-        {interfaceGroups.map((group) => (
-          <div key={group.id} className="interface-group">
-            <div className="group-header">
-              <h2 style={{ color: group.color }}>{group.name}</h2>
-              <p>{group.description}</p>
-            </div>
-
-            <div className="versions-selector">
-              {group.versions.map((version) => (
-                <label key={version.id} className="version-option">
-                  <input
-                    type="radio"
-                    name={group.id}
-                    value={version.id}
-                    checked={selectedVersions[group.id] === version.id}
-                    onChange={() => handleVersionChange(group.id, version.id)}
-                  />
-                  <div className="version-info">
-                    <div className="version-name">{version.name}</div>
-                    <div className="version-description">{version.description}</div>
-                    <div className="version-commit">📅 {version.commit}</div>
-                  </div>
-                </label>
-              ))}
-            </div>
-
-            <button
-              className="test-button"
-              style={{ '--button-color': group.color } as React.CSSProperties}
-              onClick={() => handleTestInterface(group.id)}
-            >
-              🚀 Tester {group.name}
-            </button>
-          </div>
-        ))}
-      </div>
-
-      <div className="test-info">
-        <h2>🔍 Instructions</h2>
-        <ol>
-          <li><strong>Choisissez une version</strong> avec les radio buttons</li>
-          <li><strong>Cliquez sur "Tester"</strong> pour voir l'interface</li>
-          <li><strong>Vérifiez si vous voyez :</strong></li>
-          <ul>
-            <li>✅ Boutons de contrôle au centre (📋 ⚔️ 🎒 🏰)</li>
-            <li>✅ Bouton Epic Content (🧟) - <em>l'ancienne version du "grunt"</em></li>
-            <li>✅ Bouton End Turn (⭐)</li>
-            <li>✅ Panel droit fonctionnel</li>
-            <li>✅ Bonne disposition</li>
+    <div style={{ 
+      padding: '20px', 
+      fontFamily: 'Arial, sans-serif',
+      background: 'linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%)',
+      minHeight: '100vh',
+      color: '#f5f5f5'
+    }}>
+      <h1 style={{ color: '#e94560', textAlign: 'center', marginBottom: '30px' }}>
+        🎮 Heroes of Time - Interface Test Center
+      </h1>
+      
+      {/* SimpleSquareUI intégré avec données de test */}
+      <SimpleSquareUI 
+        heroName="Arthur"
+        worldName="Valisson"
+        health={85}
+        maxHealth={100}
+        energy={42}
+        maxEnergy={50}
+      />
+      
+      <div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+        gap: '20px',
+        marginTop: '20px'
+      }}>
+        <div style={{ 
+          background: 'rgba(255,255,255,0.1)', 
+          padding: '20px', 
+          borderRadius: '10px',
+          border: '1px solid #e94560'
+        }}>
+          <h3>🎯 Interface Tests</h3>
+          <ul style={{ listStyle: 'none', padding: 0 }}>
+            <li><Link to="/test/true-heroes" style={{ color: '#3498db', textDecoration: 'none' }}>✨ True Heroes Interface</Link></li>
+            <li><Link to="/test/simple-game" style={{ color: '#3498db', textDecoration: 'none' }}>🎮 Simple Game Interface</Link></li>
+            <li><Link to="/test/modern-game" style={{ color: '#3498db', textDecoration: 'none' }}>🚀 Modern Game Interface</Link></li>
+            <li><Link to="/test/simple-modern" style={{ color: '#3498db', textDecoration: 'none' }}>💎 Simple Modern Interface</Link></li>
           </ul>
-          <li><strong>Testez différentes versions</strong> jusqu'à trouver la bonne !</li>
-        </ol>
+        </div>
+        
+        <div style={{ 
+          background: 'rgba(255,255,255,0.1)', 
+          padding: '20px', 
+          borderRadius: '10px',
+          border: '1px solid #e94560'
+        }}>
+          <h3>🧪 Specialized Tests</h3>
+          <ul style={{ listStyle: 'none', padding: 0 }}>
+            <li><Link to="/hexagon-test" style={{ color: '#3498db', textDecoration: 'none' }}>🔷 Hexagonal Grid Test</Link></li>
+            <li><Link to="/offline-avatar-test" style={{ color: '#3498db', textDecoration: 'none' }}>🖼️ Offline Avatar Test</Link></li>
+          </ul>
+        </div>
+
+        <div style={{ 
+          background: 'rgba(255,255,255,0.1)', 
+          padding: '20px', 
+          borderRadius: '10px',
+          border: '1px solid #e94560'
+        }}>
+          <h3>🎯 Live Game</h3>
+          <ul style={{ listStyle: 'none', padding: 0 }}>
+            <li><Link to="/game/conquest-classic" style={{ color: '#3498db', textDecoration: 'none' }}>⚔️ Conquest Classic</Link></li>
+            <li><Link to="/multiplayer" style={{ color: '#3498db', textDecoration: 'none' }}>👥 Multiplayer</Link></li>
+            <li><Link to="/demo" style={{ color: '#3498db', textDecoration: 'none' }}>🎮 Demo Mode</Link></li>
+          </ul>
+        </div>
+        
+        <div style={{ 
+          background: 'rgba(233, 69, 96, 0.2)', 
+          padding: '20px', 
+          borderRadius: '10px',
+          border: '1px solid #e94560'
+        }}>
+          <h3>✨ SimpleSquareUI Demo</h3>
+          <p>L'interface "petit carré" est maintenant intégrée ! 👉</p>
+          <p>✅ Design 300x300px élégant</p>
+          <p>✅ Stats animées (santé/énergie)</p>
+          <p>✅ Actions rapides au clic</p>
+          <p>✅ Position fixe en bas à droite</p>
+        </div>
+      </div>
+      
+      <div style={{ 
+        marginTop: '30px', 
+        textAlign: 'center', 
+        opacity: 0.7 
+      }}>
+        <p>🌟 Heroes of Time - Interface Testing Environment</p>
+        <p>Backend API: <span style={{ color: '#2ecc71' }}>http://localhost:8080</span></p>
       </div>
     </div>
   );

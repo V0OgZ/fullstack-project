@@ -97,14 +97,23 @@ public class PersistenceController {
                 ));
             }
             
-            Map<String, Object> gameState = persistenceService.loadGame(saveId, playerId);
+            com.example.demo.model.GameSave gameSave = persistenceService.loadGame(saveId, playerId);
             
-            Map<String, Object> response = new HashMap<>();
-            response.put("success", true);
-            response.put("gameState", gameState);
-            response.put("message", "Game loaded successfully");
-            
-            return ResponseEntity.ok(response);
+            if (gameSave != null) {
+                Map<String, Object> response = new HashMap<>();
+                response.put("success", true);
+                response.put("saveId", gameSave.getId());
+                response.put("saveName", gameSave.getSaveName());
+                response.put("gameId", gameSave.getGameId());
+                response.put("playerId", gameSave.getPlayerId());
+                response.put("description", gameSave.getDescription());
+                response.put("createdAt", gameSave.getCreatedAt());
+                response.put("message", "Game loaded successfully");
+                
+                return ResponseEntity.ok(response);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
             
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of(
@@ -128,14 +137,21 @@ public class PersistenceController {
                 ));
             }
             
-            Map<String, Object> gameState = persistenceService.loadLatestAutoSave(gameId, playerId);
+            com.example.demo.model.GameSave gameSave = persistenceService.loadLatestAutoSave(playerId, gameId);
             
-            Map<String, Object> response = new HashMap<>();
-            response.put("success", true);
-            response.put("gameState", gameState);
-            response.put("message", "Auto-save loaded successfully");
-            
-            return ResponseEntity.ok(response);
+            if (gameSave != null) {
+                Map<String, Object> response = new HashMap<>();
+                response.put("success", true);
+                response.put("saveId", gameSave.getId());
+                response.put("saveName", gameSave.getSaveName());
+                response.put("gameId", gameSave.getGameId());
+                response.put("autoSave", true);
+                response.put("message", "Latest auto-save loaded successfully");
+                
+                return ResponseEntity.ok(response);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
             
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of(
@@ -148,12 +164,24 @@ public class PersistenceController {
     @GetMapping("/saves")
     public ResponseEntity<Map<String, Object>> listSaves(@RequestParam String playerId) {
         try {
-            List<Map<String, Object>> saves = persistenceService.listSaves(playerId);
+            java.util.List<com.example.demo.model.GameSave> saves = persistenceService.listSaves(playerId);
+            
+            java.util.List<Map<String, Object>> savesList = new java.util.ArrayList<>();
+            for (com.example.demo.model.GameSave save : saves) {
+                Map<String, Object> saveMap = new HashMap<>();
+                saveMap.put("saveId", save.getId());
+                saveMap.put("saveName", save.getSaveName());
+                saveMap.put("gameId", save.getGameId());
+                saveMap.put("playerId", save.getPlayerId());
+                saveMap.put("description", save.getDescription());
+                saveMap.put("createdAt", save.getCreatedAt());
+                savesList.add(saveMap);
+            }
             
             Map<String, Object> response = new HashMap<>();
             response.put("success", true);
-            response.put("saves", saves);
-            response.put("count", saves.size());
+            response.put("saves", savesList);
+            response.put("count", savesList.size());
             
             return ResponseEntity.ok(response);
             
@@ -193,13 +221,29 @@ public class PersistenceController {
             @RequestParam String playerId) {
         
         try {
-            String exportData = persistenceService.exportSave(saveId, playerId);
+            com.example.demo.model.GameSave gameSave = persistenceService.exportSave(saveId, playerId);
             
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.setContentDispositionFormData("attachment", "heroes_of_time_save_" + saveId + ".json");
-            
-            return new ResponseEntity<>(exportData, headers, HttpStatus.OK);
+            if (gameSave != null) {
+                // Conversion en JSON string
+                Map<String, Object> exportData = new HashMap<>();
+                exportData.put("saveId", gameSave.getId());
+                exportData.put("saveName", gameSave.getSaveName());
+                exportData.put("gameId", gameSave.getGameId());
+                exportData.put("playerId", gameSave.getPlayerId());
+                exportData.put("description", gameSave.getDescription());
+                exportData.put("createdAt", gameSave.getCreatedAt());
+                exportData.put("exportedAt", java.time.LocalDateTime.now());
+                
+                String jsonExport = new com.fasterxml.jackson.databind.ObjectMapper()
+                    .writeValueAsString(exportData);
+                
+                return ResponseEntity.ok()
+                    .header("Content-Type", "application/json")
+                    .header("Content-Disposition", "attachment; filename=save_" + saveId + ".json")
+                    .body(jsonExport);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
             
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of(

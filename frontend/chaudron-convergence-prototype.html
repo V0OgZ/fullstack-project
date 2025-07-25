@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍲 Chaudron de Convergence - Prototype</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            color: #f5f5f5;
+            font-family: 'Courier New', monospace;
+            min-height: 100vh;
+        }
+
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .chaudron {
+            width: 300px;
+            height: 300px;
+            margin: 20px auto;
+            position: relative;
+            background: radial-gradient(circle, #8B4513 0%, #654321 50%, #3A2817 100%);
+            border-radius: 50% 50% 45% 45%;
+            border: 4px solid #2F1B0C;
+            box-shadow: 
+                inset 0 10px 20px rgba(0,0,0,0.5),
+                0 10px 30px rgba(139, 69, 19, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .chaudron:hover {
+            transform: scale(1.05);
+            box-shadow: 
+                inset 0 10px 20px rgba(0,0,0,0.5),
+                0 15px 40px rgba(139, 69, 19, 0.5);
+        }
+
+        .flame {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 40px;
+            background: radial-gradient(circle, #FF4500 0%, #FF6347 30%, #FF0000 70%, transparent 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: flicker 1s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { 
+                transform: translateX(-50%) scale(1);
+                opacity: 0.8;
+            }
+            100% { 
+                transform: translateX(-50%) scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        .ingredients {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .ingredient {
+            background: rgba(233, 69, 96, 0.2);
+            border: 2px solid #e94560;
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .ingredient:hover {
+            transform: translateY(-5px);
+            background: rgba(233, 69, 96, 0.4);
+            box-shadow: 0 10px 20px rgba(233, 69, 96, 0.3);
+        }
+
+        .ingredient.selected {
+            background: rgba(76, 175, 80, 0.3);
+            border-color: #4CAF50;
+            transform: scale(0.9);
+        }
+
+        .ingredient-icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .ingredient-name {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .potion-result {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            border: 2px solid #FFD700;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .controls {
+            margin: 20px 0;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #e94560 0%, #c73650 100%);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(233, 69, 96, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .formula-display {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #00ff00;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #555;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #FFD700;
+        }
+
+        .bubbles {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 150px;
+            pointer-events: none;
+        }
+
+        .bubble {
+            position: absolute;
+            background: rgba(0, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: bubble-rise 2s infinite linear;
+        }
+
+        @keyframes bubble-rise {
+            0% {
+                transform: translateY(150px) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-50px) scale(1);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>🍲 Chaudron de Convergence</h1>
+        <p>Mélangez les ingrédients quantiques et créez des potions temporelles !</p>
+
+        <div class="chaudron" id="chaudron">
+            <div class="flame"></div>
+            <div class="bubbles" id="bubbles"></div>
+        </div>
+
+        <div class="ingredients">
+            <div class="ingredient" data-ingredient="psi">
+                <div class="ingredient-icon">ψ</div>
+                <div class="ingredient-name">Psi-State</div>
+            </div>
+            <div class="ingredient" data-ingredient="omega">
+                <div class="ingredient-icon">Ω</div>
+                <div class="ingredient-name">Oméga</div>
+            </div>
+            <div class="ingredient" data-ingredient="tau">
+                <div class="ingredient-icon">τ</div>
+                <div class="ingredient-name">Temporal</div>
+            </div>
+            <div class="ingredient" data-ingredient="zfc">
+                <div class="ingredient-icon">↯</div>
+                <div class="ingredient-name">ZFC</div>
+            </div>
+            <div class="ingredient" data-ingredient="collapse">
+                <div class="ingredient-icon">†</div>
+                <div class="ingredient-name">Collapse</div>
+            </div>
+            <div class="ingredient" data-ingredient="superposition">
+                <div class="ingredient-icon">⊙</div>
+                <div class="ingredient-name">Superposition</div>
+            </div>
+            <div class="ingredient" data-ingredient="observation">
+                <div class="ingredient-icon">Π</div>
+                <div class="ingredient-name">Observation</div>
+            </div>
+            <div class="ingredient" data-ingredient="movement">
+                <div class="ingredient-icon">⟶</div>
+                <div class="ingredient-name">Mouvement</div>
+            </div>
+        </div>
+
+        <div class="formula-display" id="formula">
+            Formule actuelle: <span id="current-formula">Aucune</span>
+        </div>
+
+        <div class="potion-result" id="result">
+            🧪 Sélectionnez des ingrédients et cliquez sur "Brasser" !
+        </div>
+
+        <div class="controls">
+            <button class="btn" id="brew-btn">🍲 Brasser</button>
+            <button class="btn" id="clear-btn">🧹 Vider</button>
+            <button class="btn" id="analyze-btn">🔬 Analyser</button>
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <div>Potions créées</div>
+                <div class="stat-value" id="potions-count">0</div>
+            </div>
+            <div class="stat">
+                <div>Formules découvertes</div>
+                <div class="stat-value" id="formulas-count">0</div>
+            </div>
+            <div class="stat">
+                <div>Score</div>
+                <div class="stat-value" id="score">0</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // État du jeu
+        const gameState = {
+            selectedIngredients: [],
+            discoveredFormulas: new Set(),
+            potionsCreated: 0,
+            score: 0
+        };
+
+        // Recettes de potions
+        const recipes = {
+            'psi,omega': { name: '🌟 Potion de Héros Transcendant', power: 100, description: 'Transforme un héros ordinaire en légende !' },
+            'tau,collapse': { name: '⏰ Élixir de Retour Temporel', power: 80, description: 'Permet de revenir en arrière dans le temps' },
+            'superposition,observation': { name: '👁️ Philtre de Vision Quantique', power: 90, description: 'Révèle tous les états possibles' },
+            'zfc,movement': { name: '🌀 Potion de Voyage Dimensionnel', power: 75, description: 'Ouvre des portails vers d\'autres réalités' },
+            'psi,tau,omega': { name: '🔮 Élixir Suprême de Convergence', power: 150, description: 'La potion ultime des maîtres alchimistes !' },
+            'collapse,superposition': { name: '💥 Potion de Paradoxe', power: 60, description: 'Crée un état impossible mais stable' },
+            'observation,movement': { name: '🏃 Accélérateur de Perception', power: 65, description: 'Accélère le temps de réaction' }
+        };
+
+        // Éléments DOM
+        const ingredients = document.querySelectorAll('.ingredient');
+        const chaudron = document.getElementById('chaudron');
+        const formulaDisplay = document.getElementById('current-formula');
+        const resultDisplay = document.getElementById('result');
+        const brewBtn = document.getElementById('brew-btn');
+        const clearBtn = document.getElementById('clear-btn');
+        const analyzeBtn = document.getElementById('analyze-btn');
+        const bubblesContainer = document.getElementById('bubbles');
+
+        // Event listeners
+        ingredients.forEach(ingredient => {
+            ingredient.addEventListener('click', () => selectIngredient(ingredient));
+        });
+
+        chaudron.addEventListener('click', brewPotion);
+        brewBtn.addEventListener('click', brewPotion);
+        clearBtn.addEventListener('click', clearIngredients);
+        analyzeBtn.addEventListener('click', analyzeFormula);
+
+        function selectIngredient(element) {
+            const ingredient = element.dataset.ingredient;
+            
+            if (element.classList.contains('selected')) {
+                // Désélectionner
+                element.classList.remove('selected');
+                gameState.selectedIngredients = gameState.selectedIngredients.filter(i => i !== ingredient);
+            } else {
+                // Sélectionner (max 3 ingrédients)
+                if (gameState.selectedIngredients.length < 3) {
+                    element.classList.add('selected');
+                    gameState.selectedIngredients.push(ingredient);
+                }
+            }
+            
+            updateFormulaDisplay();
+        }
+
+        function updateFormulaDisplay() {
+            if (gameState.selectedIngredients.length === 0) {
+                formulaDisplay.textContent = 'Aucune';
+            } else {
+                const formula = gameState.selectedIngredients.join(' + ');
+                formulaDisplay.textContent = formula;
+            }
+        }
+
+        function brewPotion() {
+            if (gameState.selectedIngredients.length === 0) {
+                resultDisplay.innerHTML = '❌ Ajoutez des ingrédients d\'abord !';
+                return;
+            }
+
+            // Créer des bulles
+            createBubbles();
+
+            // Chercher la recette
+            const sortedIngredients = [...gameState.selectedIngredients].sort();
+            const recipeKey = sortedIngredients.join(',');
+            
+            setTimeout(() => {
+                if (recipes[recipeKey]) {
+                    const recipe = recipes[recipeKey];
+                    resultDisplay.innerHTML = `
+                        <div>${recipe.name}</div>
+                        <div style="font-size: 14px; margin-top: 5px;">${recipe.description}</div>
+                        <div style="font-size: 12px; color: #FFD700;">Puissance: ${recipe.power}</div>
+                    `;
+                    
+                    // Mise à jour des stats
+                    gameState.potionsCreated++;
+                    gameState.score += recipe.power;
+                    
+                    if (!gameState.discoveredFormulas.has(recipeKey)) {
+                        gameState.discoveredFormulas.add(recipeKey);
+                        gameState.score += 50; // Bonus découverte
+                    }
+                } else {
+                    resultDisplay.innerHTML = '💭 Expérience intéressante, mais aucune potion connue...';
+                }
+                
+                updateStats();
+                clearIngredients();
+            }, 1500);
+        }
+
+        function createBubbles() {
+            // Nettoyer les anciennes bulles
+            bubblesContainer.innerHTML = '';
+            
+            // Créer 10 bulles
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    const bubble = document.createElement('div');
+                    bubble.className = 'bubble';
+                    bubble.style.left = Math.random() * 180 + 'px';
+                    bubble.style.width = bubble.style.height = (Math.random() * 20 + 10) + 'px';
+                    bubble.style.animationDelay = Math.random() * 0.5 + 's';
+                    
+                    bubblesContainer.appendChild(bubble);
+                    
+                    // Supprimer la bulle après l'animation
+                    setTimeout(() => {
+                        if (bubble.parentNode) {
+                            bubble.parentNode.removeChild(bubble);
+                        }
+                    }, 2000);
+                }, i * 100);
+            }
+        }
+
+        function clearIngredients() {
+            gameState.selectedIngredients = [];
+            ingredients.forEach(ingredient => {
+                ingredient.classList.remove('selected');
+            });
+            updateFormulaDisplay();
+        }
+
+        function analyzeFormula() {
+            if (gameState.selectedIngredients.length === 0) {
+                resultDisplay.innerHTML = '🔬 Aucune formule à analyser !';
+                return;
+            }
+
+            const sortedIngredients = [...gameState.selectedIngredients].sort();
+            const recipeKey = sortedIngredients.join(',');
+            
+            if (recipes[recipeKey]) {
+                resultDisplay.innerHTML = `🔬 Analyse: Cette combinaison créera "${recipes[recipeKey].name}"`;
+            } else {
+                resultDisplay.innerHTML = '🔬 Analyse: Combinaison inconnue. Expérimentez !';
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('potions-count').textContent = gameState.potionsCreated;
+            document.getElementById('formulas-count').textContent = gameState.discoveredFormulas.size;
+            document.getElementById('score').textContent = gameState.score;
+        }
+
+        // Message de démarrage
+        setTimeout(() => {
+            resultDisplay.innerHTML = '🎯 Essayez ψ + Ω pour commencer !';
+        }, 2000);
+    </script>
+</body>
+</html> 
