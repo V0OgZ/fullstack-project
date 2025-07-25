@@ -42,6 +42,77 @@
             justify-content: center;
             font-size: 48px;
             color: #666;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* SYMBOLES ANIMÉS AUTOUR DU HÉROS */
+        .hero-symbols {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .floating-symbol {
+            position: absolute;
+            font-size: 16px;
+            opacity: 0.7;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+        }
+        
+        /* Symboles quantiques - mouvement désorganisé */
+        .quantum-symbol {
+            color: #9b59b6;
+            text-shadow: 0 0 5px #9b59b6;
+            animation-name: quantumFloat;
+        }
+        
+        @keyframes quantumFloat {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(30px, -20px) rotate(90deg); }
+            50% { transform: translate(-20px, -30px) rotate(180deg); }
+            75% { transform: translate(-30px, 20px) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+        
+        /* Symboles runiques - rotation régulière */
+        .runic-symbol {
+            color: #e67e22;
+            text-shadow: 0 0 5px #e67e22;
+            animation-name: runicRotate;
+        }
+        
+        @keyframes runicRotate {
+            0% { transform: rotate(0deg) translateX(40px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(40px) rotate(-360deg); }
+        }
+        
+        /* Symboles guerrier - mouvement puissant */
+        .warrior-symbol {
+            color: #e74c3c;
+            text-shadow: 0 0 5px #e74c3c;
+            animation-name: warriorPulse;
+        }
+        
+        @keyframes warriorPulse {
+            0%, 100% { transform: scale(1) translateY(0); }
+            50% { transform: scale(1.3) translateY(-10px); }
+        }
+        
+        /* Symboles scribe - flottement élégant */
+        .scribe-symbol {
+            color: #3498db;
+            text-shadow: 0 0 5px #3498db;
+            animation-name: scribeFloat;
+        }
+        
+        @keyframes scribeFloat {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            33% { transform: translateY(-15px) translateX(10px); }
+            66% { transform: translateY(10px) translateX(-10px); }
         }
         
         .hero-stats {
@@ -169,6 +240,16 @@
         .console-line.warning { color: #ffff00; }
         .console-line.error { color: #ff0000; }
         .console-line.success { color: #00ff00; }
+        .console-line.narrative { 
+            color: #ffd700; 
+            font-style: italic;
+            margin: 5px 0;
+        }
+        .console-line.combat { 
+            color: #ff6b6b; 
+            font-weight: bold;
+            text-shadow: 0 0 3px #ff6b6b;
+        }
         
         /* Boutons de contrôle */
         .controls {
@@ -244,6 +325,46 @@
             z-index: 2;
         }
         
+        /* Effets de combat */
+        .combat-effect {
+            position: absolute;
+            font-size: 24px;
+            animation: combatBurst 1s ease-out forwards;
+            z-index: 10;
+            pointer-events: none;
+        }
+        
+        @keyframes combatBurst {
+            0% { 
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 1;
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.5);
+            }
+            100% { 
+                transform: translate(-50%, -50%) scale(2);
+                opacity: 0;
+            }
+        }
+        
+        /* Audio toggle */
+        .audio-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.8);
+            border: 1px solid #764ba2;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        
         /* Titre */
         h1 {
             text-align: center;
@@ -263,6 +384,7 @@
             <div class="hero-portrait" id="heroPortrait">
                 <!-- Zone portrait vide pour l'instant -->
                 <span style="color: #666;">[ Portrait ]</span>
+                <div class="hero-symbols" id="heroSymbols"></div>
             </div>
             <div class="hero-stats">
                 <div class="stat-line">
@@ -295,6 +417,10 @@
                     <span>💰 Or:</span>
                     <span id="heroGold">1337</span>
                 </div>
+                <div class="stat-line">
+                    <span>🎭 Classe:</span>
+                    <span id="heroClass">Warrior</span>
+                </div>
             </div>
         </div>
         
@@ -312,6 +438,7 @@
                 <button class="btn" onclick="grutVision()">🏛️ GRUT Vision</button>
                 <button class="btn" onclick="switchHero()">🔄 Switch Hero</button>
                 <button class="btn" onclick="resetMap()">♻️ Reset</button>
+                <button class="btn" onclick="testCombat()">⚡ Test Combat</button>
             </div>
             
             <!-- Console -->
@@ -327,39 +454,52 @@
         <div class="spells-panel">
             <h3>✨ Sorts Disponibles</h3>
             
-            <button class="spell-btn" onclick="castFireball()">
+            <button class="spell-btn" onclick="castSpell('FIREBALL')">
                 <span class="spell-icon">🔥</span>
                 <span>Fireball (5 MP)</span>
             </button>
             
-            <button class="spell-btn" onclick="castHeal()">
+            <button class="spell-btn" onclick="castSpell('HEAL')">
                 <span class="spell-icon">💚</span>
                 <span>Heal (3 MP)</span>
             </button>
             
-            <button class="spell-btn" onclick="castTeleport()">
+            <button class="spell-btn" onclick="castSpell('TELEPORT')">
                 <span class="spell-icon">💫</span>
                 <span>Teleport (8 MP)</span>
             </button>
             
-            <button class="spell-btn" onclick="castTimeStop()">
+            <button class="spell-btn" onclick="castSpell('TIME_STOP')">
                 <span class="spell-icon">⏱️</span>
                 <span>Time Stop (15 MP)</span>
             </button>
             
-            <button class="spell-btn" onclick="castPortal()">
+            <button class="spell-btn" onclick="castSpell('PORTAL')">
                 <span class="spell-icon">🌀</span>
                 <span>Portal (10 MP)</span>
             </button>
             
-            <button class="spell-btn" onclick="castQuantumShift()">
+            <button class="spell-btn" onclick="castSpell('QUANTUM_SHIFT')">
                 <span class="spell-icon">🔮</span>
                 <span>Quantum Shift (20 MP)</span>
             </button>
         </div>
     </div>
+    
+    <!-- Toggle audio -->
+    <div class="audio-toggle" onclick="toggleAudio()" id="audioToggle">
+        🔇
+    </div>
 
+    <script src="translation-service.js"></script>
     <script>
+        // Service de traduction
+        let translationService = null;
+        
+        // Audio
+        let audioEnabled = false;
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
         // État du jeu
         let gameState = {
             arthur: { x: 2, y: 3 },
@@ -370,6 +510,7 @@
             objects: []
         };
         
+        // Données des héros avec classes
         let currentHeroData = {
             arthur: {
                 name: "⚔️ Arthur Pendragon",
@@ -380,7 +521,9 @@
                 speed: 10,
                 troops: 42,
                 dimension: "Prime",
-                gold: 1337
+                gold: 1337,
+                class: "Warrior",
+                symbols: ["⚔️", "🛡️", "⚡", "💪"]
             },
             vince: {
                 name: "🔫 Vince Vega",
@@ -391,7 +534,9 @@
                 speed: 15,
                 troops: 13,
                 dimension: "Pulp",
-                gold: 2500
+                gold: 2500,
+                class: "Gunslinger",
+                symbols: ["🔫", "💥", "🎯", "💀"]
             },
             grut: {
                 name: "🏛️ GRUT Omniscient",
@@ -402,9 +547,83 @@
                 speed: 8,
                 troops: 108,
                 dimension: "6D",
-                gold: 9999
+                gold: 9999,
+                class: "Quantum",
+                symbols: ["ψ", "Ω", "∞", "⊗"]
             }
         };
+        
+        // Formules de sorts par classe
+        const spellFormulas = {
+            FIREBALL: {
+                Warrior: "POWER_STRIKE(target, 50)",
+                Gunslinger: "EXPLOSIVE_SHOT(target, 60)",
+                Quantum: "ψ_BURN: ⊙(Δt+0 @target ⟶ QUANTUM_FIRE(70))"
+            },
+            HEAL: {
+                Warrior: "BATTLE_RECOVERY(self, 20)",
+                Gunslinger: "QUICK_PATCH(self, 15)",
+                Quantum: "ψ_RESTORE: ⊙(HP ⟶ HP + 25 * quantum_factor)"
+            },
+            TELEPORT: {
+                Warrior: "CHARGE(position)",
+                Gunslinger: "DODGE_ROLL(position)",
+                Quantum: "ψ_PHASE: ⊙(position ∈ superposition) → †collapse"
+            },
+            TIME_STOP: {
+                Warrior: "BATTLE_FOCUS(duration: 2)",
+                Gunslinger: "BULLET_TIME(duration: 3)",
+                Quantum: "Ω_FREEZE: ∀t ∈ [now, now+5] → frozen"
+            },
+            PORTAL: {
+                Warrior: "SUMMON_GATE(position)",
+                Gunslinger: "REALITY_HOLE(position)",
+                Quantum: "ψ_PORTAL: ⊙(space ⟷ space') ∧ entanglement"
+            },
+            QUANTUM_SHIFT: {
+                Warrior: "HEROIC_TRANSFORMATION()",
+                Gunslinger: "DIMENSION_SLIDE()",
+                Quantum: "Ψ_SHIFT: reality' = reality ⊗ quantum_matrix"
+            }
+        };
+        
+        // Initialiser le service de traduction
+        async function initTranslation() {
+            if (typeof TranslationService !== 'undefined') {
+                translationService = new TranslationService();
+                await translationService.checkAvailability();
+                log('🌐 Service de traduction initialisé', 'success');
+            }
+        }
+        
+        // Jouer un son
+        function playSound(frequency, duration, type = 'sine') {
+            if (!audioEnabled) return;
+            
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = frequency;
+            oscillator.type = type;
+            
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + duration);
+        }
+        
+        // Toggle audio
+        function toggleAudio() {
+            audioEnabled = !audioEnabled;
+            document.getElementById('audioToggle').textContent = audioEnabled ? '🔊' : '🔇';
+            if (audioEnabled) {
+                playSound(440, 0.1); // Note de test
+            }
+        }
         
         // Créer la map
         function createMap() {
@@ -420,6 +639,11 @@
                     map.appendChild(cell);
                 }
             }
+            
+            // Son de chargement
+            playSound(261.63, 0.1); // Do
+            setTimeout(() => playSound(329.63, 0.1), 100); // Mi
+            setTimeout(() => playSound(392.00, 0.1), 200); // Sol
         }
         
         // Mettre à jour la map
@@ -461,7 +685,7 @@
             grutCell.classList.add('hero-grut');
         }
         
-        // Console log
+        // Console log avec types
         function log(message, type = 'info') {
             const console = document.getElementById('console');
             const line = document.createElement('div');
@@ -471,16 +695,58 @@
             console.scrollTop = console.scrollHeight;
         }
         
+        // Mettre à jour les symboles flottants
+        function updateHeroSymbols() {
+            const symbolsContainer = document.getElementById('heroSymbols');
+            symbolsContainer.innerHTML = '';
+            
+            const hero = currentHeroData[gameState.currentHero];
+            const symbols = hero.symbols;
+            
+            symbols.forEach((symbol, index) => {
+                const symbolEl = document.createElement('div');
+                symbolEl.className = 'floating-symbol';
+                symbolEl.textContent = symbol;
+                
+                // Position aléatoire
+                symbolEl.style.left = `${20 + Math.random() * 60}%`;
+                symbolEl.style.top = `${20 + Math.random() * 60}%`;
+                
+                // Classe selon le type de héros
+                switch(hero.class) {
+                    case 'Quantum':
+                        symbolEl.classList.add('quantum-symbol');
+                        symbolEl.style.animationDelay = `${Math.random() * 3}s`;
+                        break;
+                    case 'Warrior':
+                        symbolEl.classList.add('warrior-symbol');
+                        symbolEl.style.animationDelay = `${index * 0.5}s`;
+                        break;
+                    case 'Gunslinger':
+                        symbolEl.classList.add('runic-symbol');
+                        symbolEl.style.animationDelay = `${index * 0.8}s`;
+                        break;
+                    default:
+                        symbolEl.classList.add('scribe-symbol');
+                        symbolEl.style.animationDelay = `${index * 0.6}s`;
+                }
+                
+                symbolsContainer.appendChild(symbolEl);
+            });
+        }
+        
         // Actions
         function moveArthur() {
             gameState.arthur.x = Math.min(9, gameState.arthur.x + 1);
             log('⚔️ Arthur avance d\'une case', 'info');
+            playSound(220, 0.1); // La
             updateMap();
             
             // Check proximité
             if (Math.abs(gameState.arthur.x - gameState.vince.x) <= 1 && 
                 Math.abs(gameState.arthur.y - gameState.vince.y) <= 1) {
                 log('⚡ Arthur et Vince sont proches !', 'warning');
+                playSound(440, 0.2, 'triangle');
             }
         }
         
@@ -494,6 +760,11 @@
             
             log('🔫 Vince: "Reality Shot!" *BANG*', 'success');
             log('🌀 Un portail violet apparaît !', 'info');
+            
+            // Son du gun
+            playSound(150, 0.05, 'square');
+            setTimeout(() => playSound(100, 0.1, 'sawtooth'), 50);
+            
             updateMap();
             
             // Retirer le portail après 3 secondes
@@ -509,6 +780,11 @@
             log('🏛️ GRUT: "Vision omnisciente activée !"', 'success');
             log('👁️ GRUT voit 8 formules, 3 timelines, 1 vérité', 'info');
             
+            // Son mystique
+            playSound(523.25, 0.3, 'sine'); // Do5
+            playSound(659.25, 0.3, 'sine'); // Mi5
+            playSound(783.99, 0.3, 'sine'); // Sol5
+            
             // Effet visuel
             document.querySelectorAll('.map-cell').forEach(cell => {
                 cell.style.background = 'rgba(116,75,162,0.2)';
@@ -523,7 +799,9 @@
             const currentIndex = heroes.indexOf(gameState.currentHero);
             gameState.currentHero = heroes[(currentIndex + 1) % 3];
             updateHeroPanel();
+            updateHeroSymbols();
             log(`🔄 Héros actif: ${currentHeroData[gameState.currentHero].name}`, 'info');
+            playSound(440, 0.1);
         }
         
         function updateHeroPanel() {
@@ -536,6 +814,7 @@
             document.getElementById('heroTroops').textContent = hero.troops;
             document.getElementById('heroDimension').textContent = hero.dimension;
             document.getElementById('heroGold').textContent = hero.gold;
+            document.getElementById('heroClass').textContent = hero.class;
         }
         
         function resetMap() {
@@ -553,45 +832,132 @@
         
         function cellClick(x, y) {
             log(`📍 Clic sur case (${x},${y})`, 'info');
+            playSound(880, 0.05);
         }
         
-        // Sorts
-        function castFireball() {
-            log('🔥 Fireball lancé ! -5 MP', 'warning');
-        }
-        
-        function castHeal() {
-            log('💚 Soin lancé ! +20 HP, -3 MP', 'success');
-        }
-        
-        function castTeleport() {
-            log('💫 Téléportation ! -8 MP', 'info');
-        }
-        
-        function castTimeStop() {
-            log('⏱️ Le temps s\'arrête ! -15 MP', 'warning');
-        }
-        
-        function castPortal() {
-            const portal = {
-                x: Math.floor(Math.random() * 10),
-                y: Math.floor(Math.random() * 8)
+        // Lancer un sort avec traduction
+        async function castSpell(spellType) {
+            const hero = currentHeroData[gameState.currentHero];
+            const formula = spellFormulas[spellType][hero.class] || spellFormulas[spellType].Warrior;
+            
+            // Narration normale
+            log(`${hero.name.split(' ')[0]} lance un sort !`, 'narrative');
+            
+            // Formule technique
+            log(`Formula: ${formula}`, 'info');
+            
+            // Traduction si disponible
+            if (translationService && translationService.isAvailable) {
+                try {
+                    const translation = await translationService.translateFormula(formula, 'literary');
+                    log(translation.translated || translation, 'narrative');
+                } catch (e) {
+                    console.error('Erreur traduction:', e);
+                }
+            }
+            
+            // Effet visuel selon le sort
+            const effects = {
+                FIREBALL: '🔥',
+                HEAL: '💚',
+                TELEPORT: '💫',
+                TIME_STOP: '⏱️',
+                PORTAL: '🌀',
+                QUANTUM_SHIFT: '🔮'
             };
-            gameState.portals.push(portal);
-            log('🌀 Portail créé ! -10 MP', 'success');
-            updateMap();
+            
+            showCombatEffect(gameState[gameState.currentHero].x, gameState[gameState.currentHero].y, effects[spellType]);
+            
+            // Son du sort
+            const spellSounds = {
+                FIREBALL: () => { playSound(200, 0.2, 'sawtooth'); },
+                HEAL: () => { playSound(440, 0.3, 'sine'); playSound(550, 0.3, 'sine'); },
+                TELEPORT: () => { playSound(800, 0.1); playSound(1200, 0.1); },
+                TIME_STOP: () => { playSound(100, 0.5, 'square'); },
+                PORTAL: () => { playSound(300, 0.3, 'triangle'); },
+                QUANTUM_SHIFT: () => { 
+                    playSound(400, 0.1);
+                    playSound(600, 0.1);
+                    playSound(800, 0.1);
+                }
+            };
+            
+            if (spellSounds[spellType]) spellSounds[spellType]();
+            
+            // Message de combat
+            const spellNames = {
+                FIREBALL: 'Boule de feu',
+                HEAL: 'Soin',
+                TELEPORT: 'Téléportation',
+                TIME_STOP: 'Arrêt du temps',
+                PORTAL: 'Portail',
+                QUANTUM_SHIFT: 'Shift quantique'
+            };
+            
+            log(`💥 ${spellNames[spellType]} lancé !`, 'combat');
         }
         
-        function castQuantumShift() {
-            log('🔮 Shift quantique ! Réalité altérée ! -20 MP', 'error');
+        // Effet visuel de combat
+        function showCombatEffect(x, y, effect) {
+            const cell = document.getElementById(`cell-${x}-${y}`);
+            const effectEl = document.createElement('div');
+            effectEl.className = 'combat-effect';
+            effectEl.textContent = effect;
+            effectEl.style.left = '50%';
+            effectEl.style.top = '50%';
+            cell.appendChild(effectEl);
+            
+            setTimeout(() => effectEl.remove(), 1000);
+        }
+        
+        // Test de combat
+        async function testCombat() {
+            log('⚔️ === COMBAT COMMENCE ===', 'combat');
+            
+            const hero = currentHeroData[gameState.currentHero];
+            log(`${hero.name} attaque !`, 'narrative');
+            
+            // Formule d'attaque selon la classe
+            const attackFormulas = {
+                Warrior: "SWORD_STRIKE(target, ATK * 2)",
+                Gunslinger: "BULLET_BARRAGE(target, ATK * 1.5, hits: 3)",
+                Quantum: "ψ_ATTACK: ⊙(damage ∈ [ATK, ATK*3]) → collapse_on_hit"
+            };
+            
+            const formula = attackFormulas[hero.class];
+            log(`Combat Formula: ${formula}`, 'info');
+            
+            // Traduction narrative
+            if (translationService && translationService.isAvailable) {
+                try {
+                    const context = { mode: 'combat', heroClass: hero.class };
+                    const result = await translationService.translateScript(formula, 'detailed');
+                    if (result.translated) {
+                        log(result.translated, 'narrative');
+                    }
+                } catch (e) {
+                    console.error('Erreur traduction combat:', e);
+                }
+            }
+            
+            // Effet et son
+            showCombatEffect(gameState[gameState.currentHero].x, gameState[gameState.currentHero].y, '⚔️');
+            playSound(150, 0.1, 'square');
+            setTimeout(() => playSound(100, 0.1, 'square'), 100);
+            
+            log('💥 Dégâts infligés : ' + hero.atk * 2, 'combat');
+            log('⚔️ === COMBAT TERMINÉ ===', 'combat');
         }
         
         // Init
-        window.onload = () => {
+        window.onload = async () => {
             createMap();
             updateMap();
             updateHeroPanel();
+            updateHeroSymbols();
+            await initTranslation();
             log('🎬 Jean: "La démo est prête !"', 'success');
+            log('🎵 Cliquez sur 🔇 pour activer le son', 'info');
         };
     </script>
 </body>
