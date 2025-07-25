@@ -49,11 +49,16 @@
 
 ## 🎮 MINI-JEUX INTÉGRÉS
 
-### 1. 🍲 **Le Chaudron Magique**
+### 1. 🍲 **Le Chaudron Magique** ⭐ RECOMMANDÉ
 - Système de craft alchimique
 - Mélange d'herbes et huiles trouvées
 - Création de potions dimensionnelles
 - **Twist**: Les recettes changent selon la dimension !
+- **Pourquoi c'est parfait** :
+  - Simple à implémenter (drag & drop d'ingrédients)
+  - Utilise les ressources qu'on génère déjà
+  - Métaphore parfaite : mélanger = créer de nouvelles réalités
+  - Progression naturelle (nouvelles recettes = nouveaux mondes)
 
 ### 2. 🎯 **Bowling Cosmique de Walter**
 - Mini-jeu de précision temporelle
@@ -191,6 +196,23 @@ Le système de génération de terrain du backend port 3000 contenait déjà les
 - Recettes cachées révélées par le Panopticon
 - Potions qui permettent de voir d'autres dimensions
 - Meta-jeu : créer la potion qui révèle le code source
+
+**Implémentation Simple :**
+```javascript
+// Système de recettes basique
+const recipes = {
+  "vision_dimensionnelle": ["herbe_grofi", "cristal_dmt", "eau_temporelle"],
+  "potion_transcendance": ["essence_panopticon", "larme_memento", "poudre_etoile"],
+  "elixir_navigation": ["carte_monde", "plume_ford", "encre_quantique"]
+};
+
+// Effet selon le monde actuel
+const worldEffects = {
+  "FOREST_GROFI": { multiplier: 1.5, special: "vision_arbres" },
+  "HYPERSPACE_DMT": { multiplier: 2.0, special: "perception_fractale" },
+  "VALISSON": { multiplier: 1.0, special: "memoire_collective" }
+};
+```
 
 ---
 

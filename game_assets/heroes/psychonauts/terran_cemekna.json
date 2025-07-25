@@ -4,6 +4,7 @@
   "title": "Le Psychonaute Cosmique",
   "class": "REALITY_WEAVER",
   "origin": "Hyperspace DMT Realm",
+  "world_id": "HYPERSPACE_DMT_REALM",
   "creation_date": "2025-07-25T18:55:43.697542",
   "stats": {
     "health": 80,
