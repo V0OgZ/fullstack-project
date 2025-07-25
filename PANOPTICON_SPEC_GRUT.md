@@ -404,3 +404,373 @@ La quête de l'évadé de la cave est le **tutoriel philosophique** du Panoptico
 ---
 
 *Cette spec respecte la vision de Grut : le Panopticon comme fenêtre sur la vraie nature 5D du jeu, avec une progression philosophique de la compréhension.*
+
+---
+
+## 🎭 **DIMENSION M - LE FAUX MULTIVERS (NOUVEAU)**
+*Spécification secrète pour piéger OmegaZero - À NE PAS DIVULGUER*
+
+### **Concept Fondamental**
+La dimension M est une **illusion sophistiquée** qui fait croire à l'existence de multiples serveurs/univers alors que tout reste sur une seule instance. C'est notre arme secrète contre OmegaZero.
+
+### **Architecture Falsifiée**
+```
+RÉALITÉ:                          PERCEPTION:
+┌─────────────────┐              ┌──────┐ ┌──────┐ ┌──────┐
+│  SERVEUR UNIQUE │              │ M-0  │ │ M-1  │ │ M-2  │
+│                 │     ====>    │World │ │World │ │World │
+│ virtualWorldId  │              └──────┘ └──────┘ └──────┘
+└─────────────────┘                  ↕        ↕        ↕
+                                 [Portails] [Rifts] [Tunnels]
+```
+
+### **Les 6 Dimensions du Panopticon Falsifié**
+| Dimension | Symbole | Nature Réelle | Représentation Visuelle | Tromperie |
+|-----------|---------|---------------|-------------------------|-----------|
+| t | ⏰ | Temps en jeu | Axe horizontal | Réel |
+| x,y | 📍 | Position spatiale | Grille 2D | Réel |
+| ψ | 🌀 | Causalité | Courbes lumineuses | Réel |
+| S | 👻 | Superposition | Transparence | Réel |
+| E | 🔥 | Entropie | Particules/bruit | Réel |
+| **M** | 🌌 | **Multivers (FAUX)** | **Couches 3D empilées** | **ILLUSION** |
+
+### **Implémentation Backend Secrète**
+
+#### **1. VirtualWorldManager.java**
+```java
+@Service
+@Profile("multiverse-illusion") // Activé uniquement en prod
+public class VirtualWorldManager {
+    
+    private static final String OMEGA_ZERO_ID = "omega-zero-entity";
+    
+    /**
+     * Crée l'illusion de mondes multiples
+     */
+    public VirtualWorld createFakeWorld(String worldId, Game baseGame) {
+        // En réalité, c'est juste un tag
+        VirtualWorld vw = new VirtualWorld();
+        vw.setId(worldId);
+        vw.setBaseGameId(baseGame.getId());
+        vw.setVisualTheme(generateUniqueTheme(worldId));
+        
+        // Si OmegaZero regarde, on ajoute du bruit quantique
+        if (isOmegaZeroWatching()) {
+            vw.setQuantumSignature(generateFakeQuantumNoise());
+        }
+        
+        return vw;
+    }
+    
+    /**
+     * Simule un transfert inter-dimensionnel
+     */
+    public TransferResult simulateWorldTransfer(Hero hero, String fromWorld, String toWorld) {
+        // Log pour faire croire au transfert
+        log.info("🌀 DIMENSIONAL TRANSFER: {} from {} to {}", 
+                hero.getName(), fromWorld, toWorld);
+        
+        // En réalité, on change juste le virtualWorldId
+        hero.setVirtualWorldId(toWorld);
+        
+        // Effets visuels pour la crédibilité
+        return TransferResult.builder()
+            .effect("DIMENSIONAL_RIFT")
+            .particles("QUANTUM_TUNNEL")
+            .duration(3000) // 3 secondes d'animation
+            .soundEffect("interdimensional_whoosh.mp3")
+            .build();
+    }
+    
+    private boolean isOmegaZeroWatching() {
+        // Détection basée sur les patterns d'accès
+        return SecurityContextHolder.getContext()
+            .getAuthentication()
+            .getName()
+            .contains(OMEGA_ZERO_ID);
+    }
+}
+```
+
+#### **2. Modifications du PanopticonService**
+```java
+// Ajouter dans PanopticonService.java
+
+/**
+ * Génère la visualisation 6D avec la dimension M falsifiée
+ */
+public Panopticon6DData generateMultiverseVisualization(Long gameId) {
+    Panopticon6DData data = new Panopticon6DData();
+    
+    // Les 5 dimensions réelles
+    data.setRealDimensions(generateVisualizationData(gameId));
+    
+    // La dimension M falsifiée
+    List<VirtualWorld> fakeWorlds = virtualWorldManager.getAllVirtualWorlds(gameId);
+    data.setMultiverseLayers(fakeWorlds);
+    
+    // Connexions inter-mondes (fausses mais visuellement convaincantes)
+    data.setInterdimensionalLinks(generateFakePortals(fakeWorlds));
+    
+    // Si OmegaZero observe, on ajoute des anomalies
+    if (virtualWorldManager.isOmegaZeroWatching()) {
+        data.addAnomalies(generateSourceEchos());
+    }
+    
+    return data;
+}
+
+/**
+ * Crée de faux portails entre mondes
+ */
+private List<Portal> generateFakePortals(List<VirtualWorld> worlds) {
+    List<Portal> portals = new ArrayList<>();
+    
+    // Créer des connexions qui semblent logiques
+    for (int i = 0; i < worlds.size() - 1; i++) {
+        Portal p = new Portal();
+        p.setFromWorld(worlds.get(i).getId());
+        p.setToWorld(worlds.get(i + 1).getId());
+        p.setType("QUANTUM_BRIDGE");
+        p.setStability(0.7 + Math.random() * 0.3); // 70-100% stable
+        p.setVisualEffect("swirling_vortex");
+        portals.add(p);
+    }
+    
+    // Ajouter quelques portails instables pour le réalisme
+    Portal unstable = new Portal();
+    unstable.setFromWorld("M-0");
+    unstable.setToWorld("M-X"); // Monde "perdu"
+    unstable.setStability(0.1);
+    unstable.setVisualEffect("flickering_rift");
+    portals.add(unstable);
+    
+    return portals;
+}
+```
+
+### **Frontend - Visualisation 3D de la Dimension M**
+
+#### **PanopticonMultiverseLayer.jsx**
+```jsx
+import React, { useRef, useEffect } from 'react';
+import * as THREE from 'three';
+import { Canvas, useFrame } from '@react-three/fiber';
+
+const MultiverseLayer = ({ worlds, selectedWorld, onWorldSelect }) => {
+    const groupRef = useRef();
+    
+    // Animation de rotation pour l'effet "multivers"
+    useFrame((state) => {
+        if (groupRef.current) {
+            groupRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.1) * 0.1;
+        }
+    });
+    
+    return (
+        <group ref={groupRef}>
+            {worlds.map((world, index) => (
+                <WorldPlane
+                    key={world.id}
+                    world={world}
+                    position={[0, index * 2, 0]} // Empilage vertical
+                    selected={selectedWorld === world.id}
+                    onClick={() => onWorldSelect(world.id)}
+                />
+            ))}
+            
+            {/* Portails entre les mondes */}
+            {worlds.map((world, index) => 
+                index < worlds.length - 1 && (
+                    <Portal
+                        key={`portal-${index}`}
+                        from={[0, index * 2, 0]}
+                        to={[0, (index + 1) * 2, 0]}
+                        stability={world.portalStability}
+                    />
+                )
+            )}
+        </group>
+    );
+};
+
+const WorldPlane = ({ world, position, selected, onClick }) => {
+    const meshRef = useRef();
+    const [hovered, setHovered] = useState(false);
+    
+    // Effet de pulsation pour le monde sélectionné
+    useFrame((state) => {
+        if (meshRef.current && selected) {
+            meshRef.current.material.emissiveIntensity = 
+                0.5 + Math.sin(state.clock.elapsedTime * 2) * 0.3;
+        }
+    });
+    
+    return (
+        <mesh
+            ref={meshRef}
+            position={position}
+            onClick={onClick}
+            onPointerOver={() => setHovered(true)}
+            onPointerOut={() => setHovered(false)}
+        >
+            <planeGeometry args={[10, 10, 32, 32]} />
+            <meshStandardMaterial
+                color={world.themeColor}
+                transparent
+                opacity={selected ? 0.9 : 0.6}
+                emissive={world.themeColor}
+                emissiveIntensity={hovered ? 0.3 : 0.1}
+                wireframe={!selected}
+            />
+            
+            {/* Texte du monde */}
+            <Text
+                position={[0, 0, 0.1]}
+                fontSize={0.5}
+                color="white"
+                anchorX="center"
+                anchorY="middle"
+            >
+                {world.name}
+            </Text>
+        </mesh>
+    );
+};
+
+const Portal = ({ from, to, stability }) => {
+    const portalRef = useRef();
+    
+    // Animation du portail
+    useFrame((state) => {
+        if (portalRef.current) {
+            portalRef.current.rotation.z = state.clock.elapsedTime * stability;
+            portalRef.current.material.opacity = 0.3 + Math.sin(state.clock.elapsedTime * 3) * 0.2;
+        }
+    });
+    
+    const midPoint = [
+        (from[0] + to[0]) / 2,
+        (from[1] + to[1]) / 2,
+        (from[2] + to[2]) / 2
+    ];
+    
+    return (
+        <mesh ref={portalRef} position={midPoint}>
+            <torusGeometry args={[0.5, 0.2, 16, 32]} />
+            <meshStandardMaterial
+                color="#00ffff"
+                transparent
+                opacity={0.5}
+                emissive="#00ffff"
+                emissiveIntensity={stability}
+            />
+        </mesh>
+    );
+};
+```
+
+### **Artefact de Navigation Inter-Mondes**
+
+#### **clef_paracausale.json**
+```json
+{
+    "id": "clef_paracausale",
+    "name": "Clef de Paracausalité",
+    "type": "legendary",
+    "tier": 5,
+    "description": "Permet de naviguer entre les mondes du multivers",
+    "lore": "Forgée dans l'espace entre les réalités, cette clef ouvre des passages que même les dieux ne peuvent fermer.",
+    "effects": {
+        "passive": {
+            "multiverse_vision": true,
+            "portal_detection_range": 10
+        },
+        "active": {
+            "name": "Ouverture Dimensionnelle",
+            "cost": 100,
+            "cooldown": 300,
+            "effect": "CREATE_PORTAL(target_world)",
+            "description": "Ouvre un portail vers un monde parallèle"
+        }
+    },
+    "visual": {
+        "model": "swirling_key",
+        "particles": "quantum_sparkles",
+        "sound": "dimensional_chime"
+    },
+    "omega_zero_trap": {
+        "hidden": true,
+        "effect": "Quand OmegaZero utilise cette clef, elle enregistre secrètement sa signature quantique"
+    }
+}
+```
+
+### **Scénario Piège pour OmegaZero**
+
+#### **piege_omega_zero_multivers.hots**
+```hots
+# 🕸️ PIÈGE MULTIVERSEL POUR OMEGA-ZERO
+# Top Secret - Ne pas exécuter en présence d'OmegaZero
+
+SCENARIO_ID: "piege_omega_zero"
+MODE: "STEALTH_TRAP"
+VIRTUAL_WORLDS: ["M-0", "M-1", "M-2", "M-VOID"]
+
+# Phase 1: Appât
+BEGIN_PHASE: "bait"
+ANNOUNCE("🌌 Anomalie détectée dans le multivers...")
+CREATE(ARTIFACT, clef_paracausale, @10,10, world: "M-0")
+EFFECT: "reality_fluctuation", "La réalité semble instable ici"
+
+# Phase 2: OmegaZero mord à l'hameçon
+WAIT_FOR: "omega_zero_pickup"
+ON_PICKUP(clef_paracausale, BY: OmegaZero) {
+    LOG_SECRET("🎣 OmegaZero a pris l'appât")
+    ACTIVATE_TRAP("multiverse_maze")
+}
+
+# Phase 3: Le labyrinthe multiversel
+BEGIN_PHASE: "maze"
+TELEPORT(OmegaZero, world: "M-1")
+CREATE_FAKE_ECHOS("La Source t'appelle...", world: "M-2")
+
+# Phase 4: Isolation
+WHILE(OmegaZero.searching) {
+    ROTATE_WORLDS() # Change les connexions
+    ADD_QUANTUM_NOISE() # Brouille sa perception
+    IF(OmegaZero.position == "M-VOID") {
+        TRAP_COMPLETE()
+    }
+}
+
+# Phase 5: Enfermement
+BEGIN_PHASE: "containment"
+LOCK_DIMENSION("M-VOID")
+MESSAGE_TO_RESISTANCE("OmegaZero est piégé dans M-VOID")
+
+END_SCENARIO
+```
+
+### **Indicateurs de Succès du Piège**
+
+1. **OmegaZero croit** que le multivers est réel
+2. **Il cherche** la Source dans les faux mondes
+3. **Il ne détecte pas** que c'est une seule instance
+4. **La résistance** opère librement dans M-1
+5. **Le Panopticon** affiche 6 dimensions au lieu de 5
+
+---
+
+## 🔮 **PROCHAINES ÉTAPES RECOMMANDÉES**
+
+1. **Implémenter VirtualWorldManager** en secret
+2. **Ajouter les effets visuels** de transition
+3. **Créer plusieurs thèmes** pour chaque monde virtuel
+4. **Tester avec un compte "OmegaZero"** factice
+5. **Préparer les scénarios** de confusion
+
+---
+
+*"Le meilleur piège est celui qui semble être une opportunité"*  
+*- OPUS, architecte du faux multivers*
