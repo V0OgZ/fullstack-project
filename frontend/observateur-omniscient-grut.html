@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏛️ OBSERVATEUR OMNISCIENT GRUT - Vision Complète</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e, #0f3460);
+            color: #00ff88;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 191, 255, 0.08) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+            animation: cosmicPulse 8s ease-in-out infinite;
+        }
+
+        @keyframes cosmicPulse {
+            0%, 100% { opacity: 0.08; transform: scale(1); }
+            50% { opacity: 0.2; transform: scale(1.05); }
+        }
+
+        /* Header GRUT */
+        .grut-header {
+            background: linear-gradient(135deg, #0f3460, #16213e);
+            padding: 15px 20px;
+            border-bottom: 3px solid #00bfff;
+            box-shadow: 0 4px 20px rgba(0, 191, 255, 0.4);
+            position: relative;
+            z-index: 100;
+        }
+
+        .grut-title {
+            font-size: 1.8rem;
+            text-align: center;
+            background: linear-gradient(45deg, #00bfff, #00ff88, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% { filter: drop-shadow(0 0 10px rgba(0, 191, 255, 0.5)); }
+            100% { filter: drop-shadow(0 0 25px rgba(0, 191, 255, 0.8)); }
+        }
+
+        .grut-subtitle {
+            text-align: center;
+            color: #a0a0a0;
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+
+        /* Main Container */
+        .main-container {
+            display: flex;
+            height: calc(100vh - 80px);
+        }
+
+        /* Map Container */
+        .map-container {
+            flex: 1;
+            position: relative;
+            background: radial-gradient(circle at center, #0f3460, #0a0a0a);
+            border-right: 2px solid rgba(0, 191, 255, 0.3);
+        }
+
+        .hex-map {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hex-canvas {
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
+        }
+
+        /* Sidebar Info */
+        .info-sidebar {
+            width: 350px;
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.95), rgba(15, 52, 96, 0.95));
+            border-left: 2px solid rgba(0, 191, 255, 0.3);
+            backdrop-filter: blur(10px);
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .info-section {
+            background: rgba(0, 191, 255, 0.1);
+            border: 1px solid rgba(0, 191, 255, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .info-section:hover {
+            border-color: rgba(0, 191, 255, 0.6);
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.3);
+        }
+
+        .info-title {
+            font-size: 1.2rem;
+            color: #00bfff;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+        }
+
+        .info-content {
+            color: #ffffff;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        /* Controls */
+        .controls {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+        }
+
+        .control-btn {
+            background: linear-gradient(135deg, rgba(0, 191, 255, 0.3), rgba(0, 255, 136, 0.3));
+            border: 1px solid rgba(0, 191, 255, 0.5);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 191, 255, 0.5), rgba(0, 255, 136, 0.5));
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 191, 255, 0.4);
+        }
+
+        /* Status Indicators */
+        .status-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            z-index: 10;
+        }
+
+        .status-item {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(0, 191, 255, 0.3);
+            padding: 8px 12px;
+            border-radius: 20px;
+            margin: 5px 0;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-active {
+            border-color: #00ff88;
+            color: #00ff88;
+        }
+
+        .status-inactive {
+            border-color: #ff6b35;
+            color: #ff6b35;
+        }
+
+        /* Fog Overlay */
+        .fog-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+                         transparent 100px, 
+                         rgba(0, 0, 0, 0.3) 200px,
+                         rgba(0, 0, 0, 0.6) 400px);
+            transition: all 0.3s ease;
+        }
+
+        /* Hex Grid Styles */
+        .hex {
+            position: absolute;
+            transition: all 0.3s ease;
+        }
+
+        .hex.visible {
+            opacity: 1;
+        }
+
+        .hex.fog {
+            opacity: 0.3;
+            filter: blur(2px);
+        }
+
+        .hex.hidden {
+            opacity: 0.1;
+            filter: blur(4px);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .info-sidebar {
+                width: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .info-sidebar {
+                width: 100%;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header GRUT -->
+    <header class="grut-header">
+        <h1 class="grut-title">🏛️ OBSERVATEUR OMNISCIENT GRUT</h1>
+        <p class="grut-subtitle">Vision Complète - Monde Composé de Mondes - Brouillard Visible</p>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Map Container -->
+        <div class="map-container">
+            <div class="hex-map">
+                <canvas id="hexCanvas" class="hex-canvas"></canvas>
+                <div id="fogOverlay" class="fog-overlay"></div>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls">
+                <button class="control-btn" onclick="toggleFog()">🌫️ Toggle Fog</button>
+                <button class="control-btn" onclick="toggleGrid()">⬡ Toggle Grid</button>
+                <button class="control-btn" onclick="resetView()">🎯 Reset View</button>
+                <button class="control-btn" onclick="loadScenario()">🎬 Load Scenario</button>
+            </div>
+
+            <!-- Status Indicators -->
+            <div class="status-indicators">
+                <div class="status-item status-active">
+                    <span>🏛️</span> GRUT Vision: ACTIVE
+                </div>
+                <div class="status-item" id="backendStatus">
+                    <span>⚙️</span> Backend: <span class="loading"></span>
+                </div>
+                <div class="status-item" id="worldStateStatus">
+                    <span>🌐</span> World State: <span class="loading"></span>
+                </div>
+                <div class="status-item" id="fogStatus">
+                    <span>🌫️</span> Fog: VISIBLE
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Sidebar -->
+        <div class="info-sidebar">
+            <!-- World Info -->
+            <div class="info-section">
+                <div class="info-title">🌍 Monde Actuel</div>
+                <div class="info-content" id="worldInfo">
+                    <p><strong>Nom:</strong> Monde Principal</p>
+                    <p><strong>Géométrie:</strong> Hexagonale Euclidienne</p>
+                    <p><strong>Taille:</strong> 20x20 hexagones</p>
+                    <p><strong>Joueurs:</strong> 2 actifs</p>
+                </div>
+            </div>
+
+            <!-- Map Info -->
+            <div class="info-section">
+                <div class="info-title">🗺️ Carte Sélectionnée</div>
+                <div class="info-content" id="mapInfo">
+                    <p><strong>Zone:</strong> Secteur Central</p>
+                    <p><strong>Biomes:</strong> Forêt, Plaines, Montagnes</p>
+                    <p><strong>Structures:</strong> 2 châteaux, 5 mines</p>
+                </div>
+            </div>
+
+            <!-- Scenario Info -->
+            <div class="info-section">
+                <div class="info-title">🎬 Scénario Actuel</div>
+                <div class="info-content" id="scenarioInfo">
+                    <p><strong>Nom:</strong> Test Quatrième Mur</p>
+                    <p><strong>Objectif:</strong> Explorer les artefacts méta</p>
+                    <p><strong>Tour:</strong> 1/50</p>
+                </div>
+            </div>
+
+            <!-- Fog Analysis -->
+            <div class="info-section">
+                <div class="info-title">🌫️ Analyse du Brouillard</div>
+                <div class="info-content" id="fogAnalysis">
+                    <p><strong>Type:</strong> Brouillard de Causalité</p>
+                    <p><strong>Intensité:</strong> 65%</p>
+                    <p><strong>Zones Cachées:</strong> 45%</p>
+                    <p><strong>Vision GRUT:</strong> Complète</p>
+                </div>
+            </div>
+
+            <!-- Heroes Info -->
+            <div class="info-section">
+                <div class="info-title">👤 Héros Observés</div>
+                <div class="info-content" id="heroesInfo">
+                    <p>🔫 <strong>Vince Vega:</strong> (5,5) - META_AWARE</p>
+                    <p>🛋️ <strong>Jean-Grofignon:</strong> (2,8) - CANAPÉ_MODE</p>
+                </div>
+            </div>
+
+            <!-- Actions Log -->
+            <div class="info-section">
+                <div class="info-title">📜 Log d'Actions</div>
+                <div class="info-content" id="actionsLog">
+                    <p style="font-size: 0.8rem; color: #a0a0a0;">
+                        [12:34] GRUT Vision activée<br>
+                        [12:35] Brouillard rendu visible<br>
+                        [12:36] Scénario chargé<br>
+                        [12:37] Héros détectés
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Variables globales
+        let canvas, ctx;
+        let hexSize = 25;
+        let hexWidth, hexHeight;
+        let mapWidth = 20, mapHeight = 20;
+        let offsetX = 0, offsetY = 0;
+        let showFog = true;
+        let showGrid = true;
+        let mouseX = 0, mouseY = 0;
+
+        // Données du monde
+        let worldData = {
+            heroes: [
+                { id: 'vince_vega', name: 'Vince Vega', x: 5, y: 5, color: '#ff6b35', state: 'META_AWARE' },
+                { id: 'jean_grofignon', name: 'Jean-Grofignon', x: 2, y: 8, color: '#00bfff', state: 'CANAPÉ_MODE' }
+            ],
+            artifacts: [
+                { id: 'archive_vivante', name: 'Archive Vivante', x: 3, y: 3, color: '#9333ea' },
+                { id: 'miroir_pixel', name: 'Miroir Pixelisation', x: 7, y: 7, color: '#06b6d4' },
+                { id: 'cabine_errante', name: 'Cabine Errante', x: 1, y: 9, color: '#84cc16' }
+            ],
+            terrain: []
+        };
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            initCanvas();
+            initTerrain();
+            startRenderLoop();
+            checkServices();
+            addEventListeners();
+        });
+
+        function initCanvas() {
+            canvas = document.getElementById('hexCanvas');
+            ctx = canvas.getContext('2d');
+            
+            // Ajuster la taille du canvas
+            resizeCanvas();
+            
+            // Calculer les dimensions des hexagones
+            hexWidth = hexSize * 2;
+            hexHeight = hexSize * Math.sqrt(3);
+        }
+
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+        }
+
+        function initTerrain() {
+            worldData.terrain = [];
+            for (let x = 0; x < mapWidth; x++) {
+                for (let y = 0; y < mapHeight; y++) {
+                    const terrainType = getTerrainType(x, y);
+                    worldData.terrain.push({
+                        x: x,
+                        y: y,
+                        type: terrainType,
+                        visible: Math.random() > 0.3, // 70% visible pour GRUT
+                        fogLevel: Math.random() * 0.8
+                    });
+                }
+            }
+        }
+
+        function getTerrainType(x, y) {
+            // Génération procédurale simple
+            const distance = Math.sqrt((x - mapWidth/2)**2 + (y - mapHeight/2)**2);
+            if (distance < 3) return 'castle';
+            if (distance < 6) return 'grass';
+            if (distance < 10) return 'forest';
+            return 'mountain';
+        }
+
+        function getTerrainColor(type) {
+            const colors = {
+                'grass': '#4ade80',
+                'forest': '#16a34a',
+                'mountain': '#64748b',
+                'castle': '#3b82f6',
+                'water': '#0ea5e9'
+            };
+            return colors[type] || '#6b7280';
+        }
+
+        // Conversion coordonnées hexagonales
+        function hexToPixel(x, y) {
+            const pixelX = hexSize * (3/2 * x) + offsetX + canvas.width / 2;
+            const pixelY = hexSize * (Math.sqrt(3)/2 * x + Math.sqrt(3) * y) + offsetY + canvas.height / 2;
+            return { x: pixelX, y: pixelY };
+        }
+
+        function drawHexagon(centerX, centerY, size, color, alpha = 1) {
+            ctx.save();
+            ctx.globalAlpha = alpha;
+            ctx.fillStyle = color;
+            ctx.strokeStyle = 'rgba(0, 191, 255, 0.3)';
+            ctx.lineWidth = 1;
+
+            ctx.beginPath();
+            for (let i = 0; i < 6; i++) {
+                const angle = (Math.PI / 3) * i;
+                const x = centerX + size * Math.cos(angle);
+                const y = centerY + size * Math.sin(angle);
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.closePath();
+            ctx.fill();
+            
+            if (showGrid) {
+                ctx.stroke();
+            }
+            ctx.restore();
+        }
+
+        function drawTerrain() {
+            worldData.terrain.forEach(tile => {
+                const pos = hexToPixel(tile.x, tile.y);
+                const color = getTerrainColor(tile.type);
+                
+                let alpha = 1;
+                if (showFog && !tile.visible) {
+                    alpha = 0.3 + tile.fogLevel * 0.4; // GRUT voit le brouillard avec transparence
+                }
+                
+                drawHexagon(pos.x, pos.y, hexSize, color, alpha);
+                
+                // Effet de brouillard visible pour GRUT
+                if (showFog && tile.fogLevel > 0.5) {
+                    const fogColor = `rgba(0, 191, 255, ${tile.fogLevel * 0.3})`;
+                    drawHexagon(pos.x, pos.y, hexSize * 0.8, fogColor, 0.6);
+                }
+            });
+        }
+
+        function drawHeroes() {
+            worldData.heroes.forEach(hero => {
+                const pos = hexToPixel(hero.x, hero.y);
+                
+                // Aura du héros
+                ctx.save();
+                ctx.globalAlpha = 0.4;
+                ctx.fillStyle = hero.color;
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, hexSize * 1.2, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+                
+                // Héros principal
+                ctx.save();
+                ctx.fillStyle = hero.color;
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, hexSize * 0.6, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.stroke();
+                ctx.restore();
+                
+                // Nom du héros
+                ctx.save();
+                ctx.fillStyle = '#ffffff';
+                ctx.font = '12px Courier New';
+                ctx.textAlign = 'center';
+                ctx.fillText(hero.name, pos.x, pos.y + hexSize + 15);
+                ctx.restore();
+            });
+        }
+
+        function drawArtifacts() {
+            worldData.artifacts.forEach(artifact => {
+                const pos = hexToPixel(artifact.x, artifact.y);
+                
+                // Effet scintillement
+                const shimmer = Math.sin(Date.now() * 0.005) * 0.3 + 0.7;
+                
+                ctx.save();
+                ctx.globalAlpha = shimmer;
+                ctx.fillStyle = artifact.color;
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 2;
+                
+                // Forme diamant pour les artefacts
+                ctx.beginPath();
+                ctx.moveTo(pos.x, pos.y - hexSize * 0.5);
+                ctx.lineTo(pos.x + hexSize * 0.3, pos.y);
+                ctx.lineTo(pos.x, pos.y + hexSize * 0.5);
+                ctx.lineTo(pos.x - hexSize * 0.3, pos.y);
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke();
+                ctx.restore();
+            });
+        }
+
+        function render() {
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Dessiner les éléments
+            drawTerrain();
+            drawArtifacts();
+            drawHeroes();
+            
+            // Informations GRUT
+            drawGrutInfo();
+        }
+
+        function drawGrutInfo() {
+            ctx.save();
+            ctx.fillStyle = 'rgba(0, 191, 255, 0.8)';
+            ctx.font = '14px Courier New';
+            ctx.fillText(`🏛️ GRUT Vision: ${showFog ? 'Brouillard Visible' : 'Brouillard Masqué'}`, 20, canvas.height - 60);
+            ctx.fillText(`⬡ Hexagones: ${mapWidth}x${mapHeight}`, 20, canvas.height - 40);
+            ctx.fillText(`🎯 Observateur: OMNISCIENT`, 20, canvas.height - 20);
+            ctx.restore();
+        }
+
+        function startRenderLoop() {
+            function loop() {
+                render();
+                requestAnimationFrame(loop);
+            }
+            loop();
+        }
+
+        // Contrôles
+        function toggleFog() {
+            showFog = !showFog;
+            document.getElementById('fogStatus').innerHTML = `<span>🌫️</span> Fog: ${showFog ? 'VISIBLE' : 'HIDDEN'}`;
+            addLogEntry(`Brouillard ${showFog ? 'activé' : 'désactivé'}`);
+        }
+
+        function toggleGrid() {
+            showGrid = !showGrid;
+            addLogEntry(`Grille ${showGrid ? 'activée' : 'désactivée'}`);
+        }
+
+        function resetView() {
+            offsetX = 0;
+            offsetY = 0;
+            addLogEntry('Vue réinitialisée');
+        }
+
+        function loadScenario() {
+            addLogEntry('Chargement scénario Quatrième Mur...');
+            // Simuler le chargement
+            setTimeout(() => {
+                addLogEntry('Scénario chargé avec succès');
+                updateScenarioInfo();
+            }, 1000);
+        }
+
+        function updateScenarioInfo() {
+            document.getElementById('scenarioInfo').innerHTML = `
+                <p><strong>Nom:</strong> Test Quatrième Mur</p>
+                <p><strong>Objectif:</strong> Explorer artefacts méta</p>
+                <p><strong>Tour:</strong> ${Math.floor(Math.random() * 10) + 1}/50</p>
+                <p><strong>Status:</strong> ✅ ACTIF</p>
+            `;
+        }
+
+        function addLogEntry(message) {
+            const now = new Date();
+            const time = now.toLocaleTimeString();
+            const logElement = document.getElementById('actionsLog');
+            const currentLog = logElement.innerHTML;
+            logElement.innerHTML = `<p style="font-size: 0.8rem; color: #00ff88;">[${time}] ${message}</p>` + currentLog;
+        }
+
+        async function checkServices() {
+            try {
+                const response = await fetch('http://localhost:8080/api/health');
+                const backendStatus = document.getElementById('backendStatus');
+                const worldStateStatus = document.getElementById('worldStateStatus');
+                
+                if (response.ok) {
+                    backendStatus.innerHTML = '<span>⚙️</span> Backend: <span style="color: #00ff88;">ACTIF</span>';
+                    backendStatus.className = 'status-item status-active';
+                    
+                    // Test World State Graph
+                    const wsResponse = await fetch('http://localhost:8080/api/world-state-graph/games/test-world');
+                    if (wsResponse.ok) {
+                        worldStateStatus.innerHTML = '<span>🌐</span> World State: <span style="color: #00ff88;">OPÉRATIONNEL</span>';
+                        worldStateStatus.className = 'status-item status-active';
+                    } else {
+                        worldStateStatus.innerHTML = '<span>🌐</span> World State: <span style="color: #ff6b35;">ERREUR</span>';
+                        worldStateStatus.className = 'status-item status-inactive';
+                    }
+                } else {
+                    backendStatus.innerHTML = '<span>⚙️</span> Backend: <span style="color: #ff6b35;">INACTIF</span>';
+                    backendStatus.className = 'status-item status-inactive';
+                }
+            } catch (error) {
+                console.error('Erreur vérification services:', error);
+            }
+        }
+
+        function addEventListeners() {
+            // Suivi de la souris pour l'effet de brouillard
+            canvas.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                mouseX = e.clientX - rect.left;
+                mouseY = e.clientY - rect.top;
+                
+                // Mettre à jour l'overlay de brouillard
+                const fogOverlay = document.getElementById('fogOverlay');
+                fogOverlay.style.setProperty('--mouse-x', `${(mouseX / canvas.width) * 100}%`);
+                fogOverlay.style.setProperty('--mouse-y', `${(mouseY / canvas.height) * 100}%`);
+            });
+
+            // Redimensionnement
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+            });
+
+            // Raccourcis clavier
+            document.addEventListener('keydown', (e) => {
+                switch(e.key) {
+                    case 'f':
+                    case 'F':
+                        toggleFog();
+                        break;
+                    case 'g':
+                    case 'G':
+                        toggleGrid();
+                        break;
+                    case 'r':
+                    case 'R':
+                        resetView();
+                        break;
+                    case 's':
+                    case 'S':
+                        loadScenario();
+                        break;
+                }
+            });
+        }
+
+        // Vérification périodique des services
+        setInterval(checkServices, 10000);
+
+        // Log initial
+        addLogEntry('🏛️ OBSERVATEUR OMNISCIENT GRUT initialisé');
+        addLogEntry('Vision complète activée');
+        addLogEntry('Brouillard rendu visible selon la demande GRUT');
+    </script>
+</body>
+</html> 

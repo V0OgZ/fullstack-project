@@ -1,0 +1,85 @@
+{
+  "timestamp": "2025-07-25T09:58:19.212Z",
+  "mode": "Vince Mode - Test Simple",
+  "total_tested": 15,
+  "success_rate": 93,
+  "working_links": [
+    {
+      "url": "http://localhost:3000",
+      "status": 200,
+      "result": "OK"
+    },
+    {
+      "url": "http://localhost:8080/api/health",
+      "status": 200,
+      "result": "OK"
+    },
+    {
+      "url": "http://localhost:9000/dashboard.html",
+      "status": 200,
+      "result": "OK"
+    },
+    {
+      "url": "http://localhost:3000",
+      "status": 200,
+      "result": "OK"
+    },
+    {
+      "url": "http://localhost:9000/dashboard.html",
+      "status": 200,
+      "result": "OK"
+    },
+    {
+      "url": "http://localhost:9000/portail-vince-mode.html",
+      "status": 200,
+      "result": "OK"
+    },
+    {
+      "url": "http://localhost:9000/vince-vega-hexagon-battlefield.html",
+      "status": 200,
+      "result": "OK"
+    },
+    {
+      "url": "http://localhost:9000/omega-zero-trilogie-visuelle.html",
+      "status": 200,
+      "result": "OK"
+    },
+    {
+      "url": "http://localhost:9000/hots-console-simple.html",
+      "status": 200,
+      "result": "OK"
+    },
+    {
+      "url": "http://localhost:9000/memento-tattoos-viewer.html",
+      "status": 200,
+      "result": "OK"
+    },
+    {
+      "url": "http://localhost:9000/forge-runique.html",
+      "status": 200,
+      "result": "OK"
+    },
+    {
+      "url": "http://localhost:9000/game-assets-viewer.html",
+      "status": 200,
+      "result": "OK"
+    },
+    {
+      "url": "http://localhost:9000/hots-web-interface.html",
+      "status": 200,
+      "result": "OK"
+    },
+    {
+      "url": "http://localhost:8080/api/health",
+      "status": 200,
+      "result": "OK"
+    }
+  ],
+  "broken_links": [
+    {
+      "url": "http://localhost:3000/game",
+      "status": 404,
+      "error": "Status 404"
+    }
+  ]
+}
