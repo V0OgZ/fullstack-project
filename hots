@@ -101,95 +101,62 @@ show_help() {
     echo -e "  ${GREEN}save${NC} <nom> [game_id] [player]  Sauvegarder la partie"
     echo -e "  ${GREEN}load${NC} <id> [player]            Charger une sauvegarde"
     echo -e "  ${GREEN}list-saves${NC} [player]           Lister les sauvegardes"
-    echo ""
-    echo -e "${YELLOW}Exemples persistence:${NC}"
-    echo -e "  ${CYAN}./hots save ma-partie${NC}        # Sauvegarder la partie courante"
-    echo -e "  ${CYAN}./hots load 1${NC}                # Charger la sauvegarde ID 1"
-    echo -e "  ${CYAN}./hots list-saves${NC}            # Voir toutes les sauvegardes"
 }
 
-check_services() {
-    local services_found=0
+check_service() {
+    local port=$1
+    local name=$2
+    local url=$3
     
-    # Vérifier chaque port
-    if lsof -i :9000 >/dev/null 2>&1; then
-        echo -e "  ✅ Dashboard (9000) - ACTIF"
-        ((services_found++))
+    if lsof -i :$port > /dev/null 2>&1; then
+        if [[ $port == "8001" ]]; then
+            # Pour le Panopticon GRUT React, on vérifie juste le port
+            echo -e "  ${GREEN}✅ $name ($port) - ACTIF${NC}"
+        elif curl -s "$url" > /dev/null 2>&1; then
+            echo -e "  ${GREEN}✅ $name ($port) - ACTIF${NC}"
+        else
+            echo -e "  ${YELLOW}⚠️  $name ($port) - PORT OUVERT MAIS SERVICE NON RÉACTIF${NC}"
+        fi
     else
-        echo -e "  ❌ Dashboard (9000) - ARRÊTÉ"
+        echo -e "  ${RED}❌ $name ($port) - INACTIF${NC}"
     fi
-    
-    if lsof -i :8000 >/dev/null 2>&1; then
-        echo -e "  ✅ Frontend (8000) - ACTIF"
-        ((services_found++))
-    else
-        echo -e "  ❌ Frontend (8000) - ARRÊTÉ"
-    fi
-    
-    if lsof -i :8080 >/dev/null 2>&1; then
-        echo -e "  ✅ Backend API (8080) - ACTIF"
-        ((services_found++))
-    else
-        echo -e "  ❌ Backend API (8080) - ARRÊTÉ"
-    fi
-    
-    if lsof -i :5174 >/dev/null 2>&1; then
-        echo -e "  ✅ Temporal (5174) - ACTIF"
-        ((services_found++))
-    else
-        echo -e "  ❌ Temporal (5174) - ARRÊTÉ"
-    fi
-    
-    if lsof -i :8001 >/dev/null 2>&1; then
-        echo -e "  ✅ Quantum (8001) - ACTIF"
-        ((services_found++))
-    else
-        echo -e "  ❌ Quantum (8001) - ARRÊTÉ"
-    fi
-    
-    if lsof -i :5175 >/dev/null 2>&1; then
-        echo -e "  ✅ Visualizer (5175) - ACTIF"
-        ((services_found++))
-    else
-        echo -e "  ❌ Visualizer (5175) - ARRÊTÉ"
-    fi
-    
-    if lsof -i :8888 >/dev/null 2>&1; then
-        echo -e "  ✅ Test Runner (8888) - ACTIF"
-        ((services_found++))
-    else
-        echo -e "  ❌ Test Runner (8888) - ARRÊTÉ"
-    fi
-    
-    return $services_found
 }
 
 show_status() {
-    echo -e "${BLUE}🔍 Statut des services Heroes of Time${NC}"
-    echo "===================================="
-    check_services
-    local active_services=$?
+    echo -e "${CYAN}🔍 Statut des services Heroes of Time${NC}"
+    echo -e "${CYAN}====================================${NC}"
+    
+    check_service 8001 "Panopticon GRUT Dashboard" "http://localhost:8001"
+    check_service 8000 "Frontend" "http://localhost:8000"
+    check_service 8080 "Backend API" "http://localhost:8080/api/health"
+    check_service 5174 "Temporal" "http://localhost:5174"
+    check_service 5175 "Visualizer" "http://localhost:5175"
+    check_service 8888 "Test Runner" "http://localhost:8888"
     
     echo ""
-    echo "URLs d'accès:"
-    echo -e "  🎯 Dashboard + 🎬 Replay: ${CYAN}http://localhost:8000/dashboard.html${NC}"
+    echo -e "${YELLOW}URLs d'accès:${NC}"
+    echo -e "  🏛️ Dashboard Principal (Panopticon GRUT): ${CYAN}http://localhost:8001${NC}"
     echo -e "  📊 Frontend Principal: ${CYAN}http://localhost:8000${NC}"
     echo -e "  ⚙️ Backend API: ${CYAN}http://localhost:8080/api/health${NC}"
     echo -e "  ⚔️ Interface Temporelle: ${CYAN}http://localhost:5174${NC}"
-    echo -e "  🌌 Quantum Visualizer: ${CYAN}http://localhost:8001${NC}"
     echo -e "  🔮 Collection & Grammar: ${CYAN}http://localhost:5175${NC}"
     echo -e "  🧪 Test Runner: ${CYAN}http://localhost:8888${NC}"
     echo ""
-    echo -e "  ${YELLOW}💡 Centre de Replay:${NC} ${CYAN}./hots replay center${NC} ou clic sur 🎬 dans Dashboard"
+    echo -e "  💡 Centre de Replay: ${CYAN}./hots replay center${NC} ou clic sur 🎬 dans Dashboard"
+    
+    # Compte les services actifs
+    active_count=0
+    for port in 8001 8000 8080 5174 5175 8888; do
+        if lsof -i :$port > /dev/null 2>&1; then
+            ((active_count++))
+        fi
+    done
     
     echo ""
-    # 🎳 WALTER'S ANTI-SCHRÖDINGER FIX - LOGIC BINAIRE PURE !
-    if [ $active_services -eq 7 ]; then
-        echo -e "${GREEN}🎳 WALTER: TOUS LES SERVICES SONT VRAIMENT ACTIFS ! ($active_services/7)${NC}"
-    elif [ $active_services -gt 4 ]; then
-        echo -e "${YELLOW}⚠️  WALTER: SERVICES PARTIELLEMENT ACTIFS ($active_services/7) - ACCEPTABLE${NC}"
+    if [ $active_count -eq 6 ]; then
+        echo -e "${GREEN}🎳 WALTER: TOUS LES SERVICES SONT VRAIMENT ACTIFS ! ($active_count/6)${NC}"
     else
-        echo -e "${RED}🚨 WALTER: SERVICES EN PANNE ! ($active_services/7) - INACCEPTABLE !${NC}"
+        echo -e "${YELLOW}⚠️  WALTER: $active_count/6 services actifs${NC}"
     fi
 }
 
@@ -681,11 +648,14 @@ generate_test_report() {
     
     # Vérifier l'état des services
     echo -e "${YELLOW}🔍 État des services:${NC}"
-    check_services
-    local active_services=$?
-    echo ""
+    check_service 8001 "Panopticon GRUT Dashboard" "http://localhost:8001"
+    check_service 8000 "Frontend" "http://localhost:8000"
+    check_service 8080 "Backend API" "http://localhost:8080/api/health"
+    check_service 5174 "Temporal" "http://localhost:5174"
+    check_service 5175 "Visualizer" "http://localhost:5175"
+    check_service 8888 "Test Runner" "http://localhost:8888"
     
-    # Vérifier le Test Runner
+    echo ""
     echo -e "${YELLOW}🧪 Test Runner Analysis:${NC}"
     if lsof -i :8888 >/dev/null 2>&1; then
         echo -e "  ✅ Test Runner actif sur port 8888"
@@ -767,7 +737,7 @@ generate_test_report() {
             echo -e "  ✅ Compilation: ${GREEN}Réussie${NC}"
         else
             echo -e "  ❌ Compilation: ${RED}Échoue${NC}"
-            echo -e "    💡 Problèmes connus: executeFormula manquante, JPA entities"
+            echo -e "    💡 Problèmes connus: executeFormula manquante, JPA entities${NC}"
         fi
     else
         echo -e "  ❌ Backend Maven non trouvé"
@@ -800,7 +770,7 @@ generate_test_report() {
     
     echo ""
     echo -e "${YELLOW}📊 Résumé du rapport:${NC}"
-    echo -e "  🎮 Services actifs: ${GREEN}$active_services/6${NC}"
+    echo -e "  🎮 Services actifs: ${GREEN}$active_count/6${NC}"
     echo -e "  🧪 Scripts de test: ${GREEN}$test_count${NC}"
     echo -e "  🖥️  Frontends: ${GREEN}$frontend_count${NC}"
     echo -e "  🌐 Test Runner: $(if lsof -i :8888 >/dev/null 2>&1; then echo -e "${GREEN}Actif${NC}"; else echo -e "${RED}Inactif${NC}"; fi)"
@@ -811,7 +781,7 @@ generate_test_report() {
     echo -e "${YELLOW}🏥 État de santé global:${NC}"
     local health_score=0
     
-    if [ $active_services -ge 4 ]; then ((health_score += 25)); fi
+    if [ $active_count -ge 4 ]; then ((health_score += 25)); fi
     if [ $test_count -ge 20 ]; then ((health_score += 25)); fi
     if lsof -i :8888 >/dev/null 2>&1; then ((health_score += 25)); fi
     if [ -f "backend/pom.xml" ]; then ((health_score += 25)); fi
@@ -830,7 +800,7 @@ generate_test_report() {
     echo ""
     echo -e "${YELLOW}💡 Recommandations:${NC}"
     
-    if [ $active_services -lt 6 ]; then
+    if [ $active_count -lt 6 ]; then
         echo -e "  ⚠️  Démarrer tous les services: ${CYAN}./hots start${NC}"
     fi
     
@@ -1024,8 +994,8 @@ manage_replays() {
             echo -e "${GREEN}✅ Ouverture du Centre de Replay...${NC}"
             
             # Vérifier que le dashboard est actif
-            if ! curl -s http://localhost:9000/dashboard.html > /dev/null; then
-                echo -e "${RED}❌ Dashboard non accessible sur le port 9000${NC}"
+            if ! curl -s http://localhost:8000/dashboard.html > /dev/null; then
+                echo -e "${RED}❌ Dashboard non accessible sur le port 8000${NC}"
                 echo -e "${YELLOW}💡 Lancez d'abord: ./hots start${NC}"
                 return 1
             fi
@@ -1033,12 +1003,12 @@ manage_replays() {
             echo -e "${CYAN}🎬 Ouverture du Centre de Replay dans le navigateur...${NC}"
             if command -v open > /dev/null; then
                 # macOS
-                open "http://localhost:9000/dashboard.html"
+                open "http://localhost:8000/dashboard.html"
             elif command -v xdg-open > /dev/null; then
                 # Linux
-                xdg-open "http://localhost:9000/dashboard.html"
+                xdg-open "http://localhost:8000/dashboard.html"
             else
-                echo -e "${YELLOW}📋 Accédez manuellement à: http://localhost:9000/dashboard.html${NC}"
+                echo -e "${YELLOW}📋 Accédez manuellement à: http://localhost:8000/dashboard.html${NC}"
                 echo -e "${YELLOW}   Puis cliquez sur '🎬 Centre de Replay'${NC}"
             fi
             ;;
@@ -1046,8 +1016,8 @@ manage_replays() {
             echo -e "${CYAN}🎬 Ouverture du Centre de Replay Heroes of Time${NC}"
             
             # Vérifier que le dashboard est actif
-            if ! curl -s http://localhost:9000/dashboard.html > /dev/null; then
-                echo -e "${RED}❌ Dashboard non accessible sur le port 9000${NC}"
+            if ! curl -s http://localhost:8000/dashboard.html > /dev/null; then
+                echo -e "${RED}❌ Dashboard non accessible sur le port 8000${NC}"
                 echo -e "${YELLOW}💡 Lancez d'abord: ./hots start${NC}"
                 return 1
             fi
@@ -1055,12 +1025,12 @@ manage_replays() {
             echo -e "${GREEN}✅ Dashboard actif - Ouverture du navigateur...${NC}"
             if command -v open > /dev/null; then
                 # macOS
-                open "http://localhost:9000/dashboard.html"
+                open "http://localhost:8000/dashboard.html"
             elif command -v xdg-open > /dev/null; then
                 # Linux  
-                xdg-open "http://localhost:9000/dashboard.html"
+                xdg-open "http://localhost:8000/dashboard.html"
             else
-                echo -e "${YELLOW}📋 Accédez manuellement à: http://localhost:9000/dashboard.html${NC}"
+                echo -e "${YELLOW}📋 Accédez manuellement à: http://localhost:8000/dashboard.html${NC}"
                 echo -e "${YELLOW}   Puis cliquez sur '🎬 Centre de Replay'${NC}"
             fi
             ;;
