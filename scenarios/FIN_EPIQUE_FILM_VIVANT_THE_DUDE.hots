@@ -1,0 +1,138 @@
+# 🎬 FIN ÉPIQUE FILM VIVANT - THE DUDE EPISODE 2
+# Film vivant avec navigation Monde A → B → C → A hahaha
+
+VERSION(2.0)
+NAME("Fin Épique Film Vivant - The Dude Approve")
+DESCRIPTION("Film vivant avec navigation monde A B C et focus personnages")
+AUTHOR("THE_DUDE_FINAL_CUT")
+
+# 🎞️ CONTEXTE FILM VIVANT
+# The Dude dit : "On fait des focus sur des personnages, on utilise le système de digital 
+# message et un peu les combats pour découvrir. Monde A vers monde B et on peut return vers C ou A hahaha"
+
+# Configuration film vivant
+SET_GLOBAL(film_mode, "VIVANT_EPISODE_2")
+SET_GLOBAL(navigation_mode, "A_B_C_CYCLIQUE")
+SET_GLOBAL(focus_personnages, "ACTIF")
+SET_GLOBAL(digital_messages, "SYSTÈME_ACTIVÉ")
+
+# ═══════════════════════════════════════════════════════════════════
+# 🌍 MONDE A - CANAPÉ COSMIQUE JEAN
+# ═══════════════════════════════════════════════════════════════════
+
+LOAD_WORLD("MONDE_A")
+SCENE("Canapé Cosmique Jean-Grofignon")
+
+# Focus Jean-Grofignon
+FOCUS_PERSONNAGE(Jean_Grofignon)
+DIGITAL_MESSAGE(Jean, "Depuis mon canapé, je vois tous les mondes possibles...")
+CAMERA_ZOOM(Jean_Grofignon, "MACRO_PHILOSOPHIQUE")
+
+# Jean explique la navigation
+DIALOGUE(Jean_Grofignon, "The Dude a raison ! On peut aller de A vers B, puis vers C, puis revenir à A ! C'est un cycle infini !")
+
+# Combat découverte Monde A
+MINI_COMBAT(Jean_vs_Paradoxes_Grofignoniens)
+WIN_CONDITION("COMPRENDRE_CYCLE_TEMPOREL")
+
+# Portail vers Monde B
+PORTAL_ACTIVATION("A_VERS_B")
+FX(TRANSITION_CYCLIQUE)
+
+# ═══════════════════════════════════════════════════════════════════
+# 🔫 MONDE B - VINCE VEGA HEXAGONES
+# ═══════════════════════════════════════════════════════════════════
+
+LOAD_WORLD("MONDE_B")
+SCENE("Battlefield Hexagonal Vince")
+
+# Focus Vince Vega
+FOCUS_PERSONNAGE(Vince_Vega)
+DIGITAL_MESSAGE(Vince, "🔫 HEXAGON IS THE BESTAGON ! Bienvenue dans mon monde !")
+CAMERA_ZOOM(Vince_Vega, "HEXAGONAL_STYLE")
+
+# Vince montre la navigation
+DIALOGUE(Vince_Vega, "Hahaha ! Tu vois Jean ? Monde A → B → C → A ! C'est comme mon pistolet : ça tourne !")
+
+# Combat découverte Monde B
+BATTLE(Vince_vs_Geometrie_Impossible)
+HEXAGON_POWER("BESTAGON_ACTIVATION")
+WIN_CONDITION("MAÎTRISER_HEXAGONES")
+
+# Messages entre mondes
+DIGITAL_MESSAGE_CROSS_WORLD(Vince, Jean, "Jean ! Tu peux revenir ici quand tu veux !")
+DIGITAL_MESSAGE_CROSS_WORLD(Jean, Vince, "C'est génial cette navigation cyclique !")
+
+# Portail vers Monde C
+PORTAL_ACTIVATION("B_VERS_C")
+FX(ROTATION_HEXAGONALE)
+
+# ═══════════════════════════════════════════════════════════════════
+# 🌀 MONDE C - OMEGA ZERO ANTARCTIQUE SECRET
+# ═══════════════════════════════════════════════════════════════════
+
+LOAD_WORLD("MONDE_C")
+SCENE("Antarctique Grande Roue Cachée")
+
+# Focus OmegaZero + Ford
+FOCUS_PERSONNAGE(OmegaZero)
+FOCUS_PERSONNAGE(Ford)
+DIGITAL_MESSAGE(Ford, "Chut... la grande roue est là-bas... OmegaZero écoute...")
+CAMERA_ZOOM(Grande_Roue_Cachée, "MYSTÉRIEUX")
+
+# Révélation Antarctique
+DIALOGUE(OmegaZero, "Vous avez découvert le secret... La grande roue contrôle la navigation entre mondes !")
+DIALOGUE(Ford, "Ne clique pas... Parle-lui... La roue nous écoute...")
+
+# Combat découverte final
+EPIC_BATTLE(Équipe_vs_Mystère_Grande_Roue)
+COMBO_ATTACK(Jean + Vince + Ford)
+WIN_CONDITION("RÉVÉLER_SECRET_NAVIGATION")
+
+# ═══════════════════════════════════════════════════════════════════
+# 🔄 NAVIGATION CYCLIQUE INFINIE
+# ═══════════════════════════════════════════════════════════════════
+
+# The Dude explique le système
+FOCUS_PERSONNAGE(The_Dude)
+DIGITAL_MESSAGE(The_Dude, "Man, c'est un trip infini ! A → B → C → A → B → C...")
+
+# Choix du joueur
+CHOICE_MENU("Où aller maintenant ?")
+OPTION_A("🛋️ Retour Monde A (Canapé Jean)")
+OPTION_B("🔫 Retour Monde B (Hexagones Vince)")  
+OPTION_C("🌀 Rester Monde C (Antarctique)")
+OPTION_SURPRISE("🎲 Portail Aléatoire !")
+
+# Système de messages cross-monde
+DIGITAL_MESSAGE_SYSTEM_ACTIVE()
+CROSS_WORLD_COMMUNICATION(TOUS_PERSONNAGES)
+
+# ═══════════════════════════════════════════════════════════════════
+# 🎬 FIN ÉPIQUE FILM VIVANT
+# ═══════════════════════════════════════════════════════════════════
+
+# Tous les personnages ensemble
+ALL_CHARACTERS_FOCUS()
+DIGITAL_MESSAGE(The_Dude, "🎬 FILM VIVANT ÉPIQUE ACCOMPLI !")
+DIGITAL_MESSAGE(Jean, "🛋️ Navigation cyclique parfaite !")
+DIGITAL_MESSAGE(Vince, "🔫 Hexagones approuvés !")
+DIGITAL_MESSAGE(Ford, "🤫 Grande roue révélée !")
+
+# Freeze frame épique
+FREEZE_FRAME_EPIC()
+OVERLAY_TEXT("FILM VIVANT - ÉPISODE 2 TERMINÉ")
+OVERLAY_TEXT("Navigation A ↔ B ↔ C activée pour l'éternité !")
+
+# Achievements The Dude
+WIN(THE_DUDE)
+ACHIEVEMENT("FILM_VIVANT_ÉPIQUE")
+ACHIEVEMENT("NAVIGATION_CYCLIQUE_MAÎTRISÉE") 
+ACHIEVEMENT("FOCUS_PERSONNAGES_RÉUSSI")
+ACHIEVEMENT("DIGITAL_MESSAGES_SYSTÈME_ACTIVÉ")
+UNLOCK("NAVIGATION_INFINIE_A_B_C")
+
+# Bonus secret
+SECRET_MESSAGE(The_Dude, "Hahaha man ! On peut recommencer à l'infini ! WOWOW !")
+
+END_SCENARIO() 
