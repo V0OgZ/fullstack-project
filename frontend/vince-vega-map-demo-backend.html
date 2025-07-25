@@ -185,6 +185,70 @@
         .wormhole-active {
             animation: wormhole-activate 1s ease-in-out;
         }
+
+        @keyframes quantum-spin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+        
+        @keyframes cycle-rotate {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(90deg) scale(1.05); }
+            50% { transform: rotate(180deg); }
+            75% { transform: rotate(270deg) scale(1.05); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes origin-pulse {
+            0% { transform: scale(1); filter: brightness(1); }
+            50% { transform: scale(1.1); filter: brightness(1.5); }
+            100% { transform: scale(1); filter: brightness(1); }
+        }
+        
+        @keyframes tear-reality {
+            0% { transform: scaleX(1); }
+            50% { transform: scaleX(0.1) rotateY(90deg); }
+            100% { transform: scaleX(1) rotateY(0deg); }
+        }
+        
+        @keyframes quantum-tunnel {
+            0% { transform: scale(1) rotateZ(0deg); opacity: 1; }
+            50% { transform: scale(0.5) rotateZ(180deg); opacity: 0.3; }
+            100% { transform: scale(1) rotateZ(360deg); opacity: 1; }
+        }
+        
+        @keyframes vince-warp {
+            0% { transform: scale(1) skewX(0deg); }
+            50% { transform: scale(1.5) skewX(15deg); }
+            100% { transform: scale(1) skewX(0deg); }
+        }
+        
+        @keyframes john-travolta-dance {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg) scale(1.1); }
+            50% { transform: rotate(10deg) scale(0.9); }
+            75% { transform: rotate(-5deg) scale(1.05); }
+            100% { transform: rotate(0deg); }
+        }
+        
+        .wormhole-active {
+            animation: wormhole-activate 1s ease-in-out;
+        }
+        
+        .easter-egg-gold {
+            background: radial-gradient(circle, #FFD700, #FFA500, #FF8C00) !important;
+            animation: origin-pulse 0.5s infinite;
+        }
+        
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Courier New', monospace;
+            color: white;
+            min-height: 100vh;
+        }
     </style>
 </head>
 <body>
@@ -293,39 +357,54 @@
                     const wormhole = worldWormholes.find(w => w.x === x && w.y === y);
                     
                     if (wormhole) {
-                        cell.style.background = 'radial-gradient(circle, #FF6B6B, #4ECDC4, #45B7D1)';
-                        cell.style.animation = 'pulse 2s infinite';
-                        cell.innerHTML = `<span style="font-size: 20px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">${wormhole.symbol}</span>`;
+                        const wormholeType = wormholeTypes[wormhole.type];
+                        
+                        cell.style.background = wormholeType.gradient;
+                        cell.style.animation = wormholeType.animation;
+                        cell.innerHTML = `<span style="font-size: 20px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">${wormholeType.symbol}</span>`;
                         cell.title = wormhole.name;
                         cell.style.boxShadow = '0 0 15px rgba(255, 107, 107, 0.8)';
-                    }
-                    
-                    // Effet hover
-                    cell.onmouseover = () => {
-                        if (wormhole) {
+                        
+                        // Easter egg hover detection
+                        cell.onmouseover = () => {
                             cell.style.transform = 'scale(1.2)';
                             cell.style.zIndex = '100';
-                        } else {
-                            cell.style.background = 'linear-gradient(45deg, #2a2a4e, #26335e)';
-                        }
-                    };
-                    
-                    cell.onmouseout = () => {
-                        if (wormhole) {
+                            
+                            // Easter egg: hover 10 secondes sans clic
+                            hoverTimer = setTimeout(() => {
+                                showCustomDialogue('"Tu danses ou tu traverses ?"');
+                                cell.style.animation = 'john-travolta-dance 2s ease-in-out';
+                                setTimeout(() => {
+                                    cell.style.animation = wormholeType.animation;
+                                }, 2000);
+                            }, 10000);
+                        };
+                        
+                        cell.onmouseout = () => {
                             cell.style.transform = 'scale(1)';
                             cell.style.zIndex = '1';
-                        } else {
+                            clearTimeout(hoverTimer);
+                        };
+                        
+                        cell.onclick = () => {
+                            clearTimeout(hoverTimer);
+                            activateWormhole(wormhole);
+                        };
+                    } else {
+                        // Cellule normale
+                        cell.onmouseover = () => {
+                            cell.style.background = 'linear-gradient(45deg, #2a2a4e, #26335e)';
+                        };
+                        
+                        cell.onmouseout = () => {
                             cell.style.background = 'linear-gradient(45deg, #1a1a2e, #16213e)';
-                        }
-                    };
+                        };
+                    }
                     
                     mapContainer.appendChild(cell);
                 }
                 mapContainer.appendChild(document.createElement('br'));
             }
-            
-            // Ajouter event listener pour clics
-            mapContainer.onclick = handleMapClick;
         }
         
         function setStatus(message) {
@@ -951,68 +1030,134 @@
             playSound('quantum');
         }
         
-        // 🌀 WORMHOLES INTERACTIFS VINCE
+        // 🌀 WORMHOLES INTERACTIFS VINCE - VERSION COMPLÈTE
+        const wormholeTypes = {
+            'portal_interstice': {
+                symbol: '🌀',
+                gradient: 'radial-gradient(circle, #FF6B6B, #4ECDC4, #45B7D1)',
+                animation: 'pulse 2s infinite',
+                sound: 'quantum',
+                dialogues: [
+                    '"Putain, ce wormhole déchire !"',
+                    '"L\'interstice m\'appelle !"',
+                    '"Portal Fiction, baby !"'
+                ]
+            },
+            'portal_quantique': {
+                symbol: '⚛️',
+                gradient: 'radial-gradient(circle, #9C27B0, #E91E63, #FF5722)',
+                animation: 'quantum-spin 3s infinite',
+                sound: 'quantum',
+                dialogues: [
+                    '"Einstein aurait kiffé ça !"',
+                    '"Quantum leap, motherfucker !"',
+                    '"La physique quantique, c\'est royal !"'
+                ]
+            },
+            'portal_retour': {
+                symbol: '🔄',
+                gradient: 'radial-gradient(circle, #4CAF50, #8BC34A, #CDDC39)',
+                animation: 'cycle-rotate 4s infinite',
+                sound: 'hexagon',
+                dialogues: [
+                    '"Retour aux sources !"',
+                    '"Cycle temporel activé !"',
+                    '"Back to the future, Vince style !"'
+                ]
+            },
+            'portal_origine': {
+                symbol: '🗺️',
+                gradient: 'radial-gradient(circle, #FF9800, #FFC107, #FFEB3B)',
+                animation: 'origin-pulse 2.5s infinite',
+                sound: 'powerup',
+                dialogues: [
+                    '"Retour à la base !"',
+                    '"L\'origine m\'attend !"',
+                    '"Home sweet home !"'
+                ]
+            }
+        };
+        
         const wormholes = {
             'A': [
-                { x: 8, y: 4, target: 'B', symbol: '🌀', name: 'Portal vers Interstice' },
-                { x: 12, y: 8, target: 'C', symbol: '⚛️', name: 'Portal Quantique' }
+                { x: 8, y: 4, target: 'B', type: 'portal_interstice', name: 'Portal vers Interstice' },
+                { x: 12, y: 8, target: 'C', type: 'portal_quantique', name: 'Portal Quantique' },
+                { x: 3, y: 2, target: 'B', type: 'portal_retour', name: 'Cycle vers B' }
             ],
             'B': [
-                { x: 6, y: 6, target: 'A', symbol: '🗺️', name: 'Retour Monde A' },
-                { x: 10, y: 3, target: 'C', symbol: '⚛️', name: 'Portal Labo' },
-                { x: 4, y: 9, target: 'A', symbol: '🔄', name: 'Cycle Retour' }
+                { x: 6, y: 6, target: 'A', type: 'portal_origine', name: 'Retour Monde A' },
+                { x: 10, y: 3, target: 'C', type: 'portal_quantique', name: 'Portal Labo' },
+                { x: 4, y: 9, target: 'A', type: 'portal_retour', name: 'Cycle Retour' },
+                { x: 13, y: 5, target: 'C', type: 'portal_interstice', name: 'Interstice→Quantum' }
             ],
             'C': [
-                { x: 7, y: 2, target: 'A', symbol: '🗺️', name: 'Retour Origine' },
-                { x: 11, y: 7, target: 'B', symbol: '🌌', name: 'Vers Interstice' },
-                { x: 5, y: 5, target: 'A', symbol: '🔄', name: 'Cycle Complet' }
+                { x: 7, y: 2, target: 'A', type: 'portal_origine', name: 'Retour Origine' },
+                { x: 11, y: 7, target: 'B', type: 'portal_interstice', name: 'Vers Interstice' },
+                { x: 5, y: 5, target: 'A', type: 'portal_retour', name: 'Cycle Complet' },
+                { x: 14, y: 10, target: 'B', type: 'portal_quantique', name: 'Quantum→Interstice' }
             ]
         };
         
-        // 🎯 DÉTECTION CLIC SUR WORMHOLE
-        function handleMapClick(event) {
-            const mapContainer = document.getElementById('gameMap'); // Changed from 'map-container' to 'gameMap'
-            const rect = mapContainer.getBoundingClientRect();
-            const cellSize = 60; // Taille des cellules
-            
-            const x = Math.floor((event.clientX - rect.left) / cellSize);
-            const y = Math.floor((event.clientY - rect.top) / cellSize);
-            
-            // Vérifier si clic sur wormhole
-            const worldWormholes = wormholes[currentWorld] || [];
-            const clickedWormhole = worldWormholes.find(w => w.x === x && w.y === y);
-            
-            if (clickedWormhole) {
-                activateWormhole(clickedWormhole);
-            } else {
-                addLog(`🎯 Clic map: (${x}, ${y}) - Pas de wormhole`, 'info');
-            }
-        }
+        // 🎭 EASTER EGGS TRACKING
+        let portalClickCount = 0;
+        let hoverTimer = null;
+        let traversalCount = 0;
+        let lastTraversalTime = 0;
         
-        // ⚡ ACTIVATION WORMHOLE
+        // ⚡ ACTIVATION WORMHOLE AMÉLIORÉE
         function activateWormhole(wormhole) {
-            addLog(`🌀 WORMHOLE ACTIVÉ: ${wormhole.name}`, 'success');
+            const wormholeType = wormholeTypes[wormhole.type];
+            portalClickCount++;
+            traversalCount++;
+            
+            // Easter egg: 7 clics
+            if (portalClickCount === 7) {
+                showCustomDialogue('"Royale with cheese, mais en version quantique !"');
+                // Rendre le portal doré
+                setTimeout(() => {
+                    const cells = document.querySelectorAll('#gameMap div');
+                    cells.forEach(cell => {
+                        if (cell.title === wormhole.name) {
+                            cell.classList.add('easter-egg-gold');
+                            setTimeout(() => cell.classList.remove('easter-egg-gold'), 10000);
+                        }
+                    });
+                }, 500);
+            }
+            
+            addLog(`🌀 WORMHOLE ACTIVÉ: ${wormhole.name} (${wormhole.type})`, 'success');
             setStatus(`🌀 Traversée vers Monde ${wormhole.target}...`);
             
-            // Effet visuel de traversée
-            const mapContainer = document.getElementById('gameMap'); // Changed from 'map-container' to 'gameMap'
-            mapContainer.style.filter = 'blur(5px) brightness(2)';
-            playSound('quantum');
+            // Effet visuel spécialisé selon le type
+            const mapContainer = document.getElementById('gameMap');
+            if (wormhole.type === 'portal_quantique') {
+                mapContainer.style.filter = 'blur(8px) brightness(3) hue-rotate(90deg)';
+                mapContainer.style.animation = 'quantum-tunnel 2s ease-in-out';
+            } else if (wormhole.type === 'portal_retour') {
+                mapContainer.style.filter = 'blur(6px) brightness(2.5) saturate(2)';
+                mapContainer.style.animation = 'cycle-rotate 1.5s ease-in-out';
+            } else {
+                mapContainer.style.filter = 'blur(5px) brightness(2)';
+            }
+            
+            playSound(wormholeType.sound);
             
             setTimeout(() => {
                 changeWorldWithDialogue(wormhole.target);
                 mapContainer.style.filter = 'none';
-                addLog(`✅ Arrivée Monde ${wormhole.target} via wormhole !`, 'success');
+                mapContainer.style.animation = 'none';
+                addLog(`✅ Arrivée Monde ${wormhole.target} via ${wormhole.type} !`, 'success');
                 
-                // Dialogue spécial traversée
+                // Power level boost
+                updatePowerLevel();
+                if (traversalCount % 3 === 0) {
+                    updatePowerLevel(); // Bonus triple traversal
+                    addLog('🏆 TRIPLE TRAVERSAL BONUS !', 'critical');
+                }
+                
+                // Dialogue spécialisé
                 setTimeout(() => {
-                    const traversalDialogues = [
-                        '"Putain, ce wormhole déchire !"',
-                        '"Vince traverse les dimensions !"',
-                        '"Ça c\'est du voyage temporel !"',
-                        '"Portal activé, mission accomplie !"'
-                    ];
-                    const dialogue = traversalDialogues[Math.random() * traversalDialogues.length | 0];
+                    const dialogue = wormholeType.dialogues[Math.random() * wormholeType.dialogues.length | 0];
                     showCustomDialogue(dialogue);
                 }, 2000);
             }, 1000);
