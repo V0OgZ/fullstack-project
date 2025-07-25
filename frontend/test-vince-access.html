@@ -38,6 +38,31 @@
             border-radius: 10px;
             margin: 20px 0;
         }
+        .demo-card {
+            background: rgba(0,0,0,0.3);
+            border: 2px solid #667eea;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            display: inline-block;
+            margin: 10px 0;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 15px rgba(102, 126, 234, 0.3);
+        }
+        .btn-success {
+            background: linear-gradient(45deg, #2ecc71, #27ae60);
+        }
     </style>
 </head>
 <body>
@@ -56,20 +81,37 @@
             <br><small>Map interactive 10x8 + Dialogues + Wormholes</small>
         </a>
         
-        <a href="vince-vega-hexagon-battlefield.html" class="demo-link">
-            ⬡ VINCE VEGA HEXAGON BATTLEFIELD
-            <br><small>Battlefield hexagonal + Items ronds + Pouvoirs</small>
-        </a>
+        <div class="demo-card">
+            <h3>⬡ HEXAGON BATTLEFIELD ORIGINAL</h3>
+            <p><strong>Status:</strong> ⚠️ Fonctionnel mais "LED"</p>
+            <p><strong>Avantages:</strong> HP/MP, sorts, spawn items</p>
+            <p><strong>Problème:</strong> Style trop flashy/LED</p>
+            <a href="vince-vega-hexagon-battlefield.html" target="_blank" class="btn">🎮 Test Original Hexagon</a>
+        </div>
+
+        <div class="demo-card" style="border: 3px solid #2ecc71; background: rgba(46, 204, 113, 0.1);">
+            <h3>⬡ HEXAGON BATTLEFIELD FIXED ⭐</h3>
+            <p><strong>Status:</strong> ✅ NOUVELLES AMÉLIORATIONS!</p>
+            <p><strong>Features:</strong> 
+                • Toutes les fonctionnalités conservées<br>
+                • Style naturel (fini le LED!)<br>
+                • Couleurs améliorées<br>
+                • Animations plus douces<br>
+                • HP/MP + Sorts + Items fonctionnent
+            </p>
+            <a href="vince-vega-hexagon-battlefield-fixed.html" target="_blank" class="btn btn-success">🌟 Test Hexagon Fixed</a>
+        </div>
         
         <a href="#" class="demo-link" onclick="alert('🌟 V11 AMÉLIORÉE ! UI + Features V9 fusionnées !')" style="background: linear-gradient(45deg, #44ff44, #00aa88);">
             🌟 V11 HYBRID (ACTUELLE)
             <br><small>💬 Dialogues BD + 🌀 Wormholes V9 + ⚡ Easter Eggs</small>
         </a>
         
-        <a href="versions-compare/index-compare.html" class="demo-link" style="background: linear-gradient(45deg, #44aaff, #6666ff);">
-            🔄 COMPARER VERSIONS
-            <br><small>🎮 Tester V10, V11, V12 vs V9 actuelle</small>
-        </a>
+        <div class="status" style="background: rgba(255, 193, 7, 0.2); border: 2px solid #ffc107;">
+            <h3>⚠️ INFOS DÉVELOPPEMENT</h3>
+            <p>Les anciennes versions de comparaison ont été nettoyées.</p>
+            <p>Version active : <strong>V11 Hybrid + Hexagon Fixed</strong></p>
+        </div>
         
         <div class="status">
             <h3>🎯 FONCTIONNALITÉS TEST :</h3>

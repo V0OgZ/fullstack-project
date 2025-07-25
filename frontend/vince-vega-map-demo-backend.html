@@ -203,6 +203,12 @@
             animation: origin-pulse 1s infinite !important;
             box-shadow: 0 0 20px gold !important;
         }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
     </style>
 </head>
 <body>
@@ -222,10 +228,44 @@
                 <div class="controls">
                     <button class="btn" onclick="initDemo()">🎬 Init Demo</button>
                     <button class="btn" onclick="moveArthur()">⚔️ Move Arthur</button>
-                    <button class="btn" onclick="vinceWormhole()">🔫 Vince Wormhole</button>
+                    <button class="btn" onclick="selectHero('vince')">🔫 Select Vince</button>
+                    <button class="btn" onclick="vinceFire()">🔥 Vince Fire</button>
                     <button class="btn" onclick="grutVision()">🏛️ GRUT Vision</button>
                     <button class="btn" onclick="executeFormula()">⚡ Execute Formula</button>
                     <button class="btn" onclick="resetMap()">🔄 Reset</button>
+                </div>
+                
+                <div class="power-controls" style="margin-top: 15px; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 10px;">
+                    <label style="color: #ffd700; font-weight: bold;">🔫 Vince Powers:</label>
+                    <select id="vincePowerSelect" style="width: 100%; padding: 8px; margin: 5px 0; background: rgba(0,0,0,0.8); color: white; border: 1px solid #555; border-radius: 8px;">
+                        <option value="REALITY_SHOT">🔫 Reality Shot</option>
+                        <option value="WORMHOLE_BLAST">🌀 Wormhole Blast</option>
+                        <option value="FOURTH_WALL_BREAK">💥 Fourth Wall Break</option>
+                        <option value="DIMENSIONAL_SHOT">🌌 Dimensional Shot</option>
+                        <option value="CAUSALITY_BULLET">⚛️ Causality Bullet</option>
+                        <option value="QUANTUM_RELOAD">🔄 Quantum Reload</option>
+                    </select>
+                    <button class="btn" onclick="castVincePower()" style="width: 100%; margin: 5px 0;">
+                        ✨ Cast Vince Power
+                    </button>
+                    
+                    <div class="hero-stats" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px;">
+                        <div style="background: rgba(255,215,0,0.2); padding: 8px; border-radius: 8px; text-align: center; border: 1px solid #ffd700;">
+                            <strong>⚔️ Arthur</strong><br>
+                            HP: <span id="arthurHp">100</span><br>
+                            MP: <span id="arthurMp">50</span>
+                        </div>
+                        <div style="background: rgba(255,68,68,0.2); padding: 8px; border-radius: 8px; text-align: center; border: 1px solid #ff4444;">
+                            <strong>🔫 Vince</strong><br>
+                            HP: <span id="vinceHp">100</span><br>
+                            MP: <span id="vinceMp">30</span>
+                        </div>
+                        <div style="background: rgba(116,75,162,0.2); padding: 8px; border-radius: 8px; text-align: center; border: 1px solid #744ba2;">
+                            <strong>🏛️ GRUT</strong><br>
+                            HP: <span id="grutHp">150</span><br>
+                            MP: <span id="grutMp">100</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -263,10 +303,11 @@
 
     <script>
         let gameState = {
-            arthur: { x: 2, y: 3, energy: 100 },
-            vince: { x: 7, y: 4, energy: 100 },
-            grut: { x: 5, y: 1, energy: 100 },
-            wormholes: []
+            arthur: { x: 2, y: 3, energy: 100, hp: 100, mp: 50 },
+            vince: { x: 7, y: 4, energy: 100, hp: 100, mp: 30 },
+            grut: { x: 5, y: 1, energy: 100, hp: 150, mp: 100 },
+            wormholes: [],
+            selectedHero: 'vince'
         };
         
         const API_BASE = 'http://localhost:8080/api';
@@ -332,6 +373,15 @@
         
         function setStatus(message) {
             document.getElementById('status').innerHTML = message;
+        }
+        
+        function updateHeroStats() {
+            document.getElementById('arthurHp').textContent = gameState.arthur.hp;
+            document.getElementById('arthurMp').textContent = gameState.arthur.mp;
+            document.getElementById('vinceHp').textContent = gameState.vince.hp;
+            document.getElementById('vinceMp').textContent = gameState.vince.mp;
+            document.getElementById('grutHp').textContent = gameState.grut.hp;
+            document.getElementById('grutMp').textContent = gameState.grut.mp;
         }
         
         function addLog(message, type = 'info') {
@@ -449,36 +499,208 @@
             addLog(`Arthur moved to (${gameState.arthur.x}, ${gameState.arthur.y})`, 'info');
         }
         
-        function vinceWormhole() {
-            const wormhole = {
-                x: Math.floor(Math.random() * 10),
-                y: Math.floor(Math.random() * 8)
-            };
-            gameState.wormholes.push(wormhole);
+        function selectHero(heroName) {
+            gameState.selectedHero = heroName;
+            setStatus(`🎯 ${heroName.toUpperCase()} selected! Ready to act!`);
+            addLog(`Selected hero: ${heroName}`, 'info');
+            updateHeroStats();
+        }
+        
+        function vinceFire() {
+            if (gameState.vince.mp < 5) {
+                setStatus('🔫 Vince: "Out of ammo! Need to reload!"');
+                addLog('❌ Not enough MP to fire', 'error');
+                return;
+            }
             
-            setStatus('🔫 Vince: "Reality Shot!" - Wormhole créé !');
-            updateMap();
-            addLog(`Wormhole created at (${wormhole.x}, ${wormhole.y})`, 'info');
+            const targetX = Math.floor(Math.random() * 10);
+            const targetY = Math.floor(Math.random() * 8);
+            
+            gameState.vince.mp -= 5;
+            
+            const targetCell = document.getElementById(`cell-${targetX}-${targetY}`);
+            targetCell.innerHTML = '💥';
+            targetCell.style.background = 'rgba(255, 68, 68, 0.8)';
+            
+            setStatus(`🔫 Vince: "Say hello to my little friend!" Shot at (${targetX}, ${targetY})`);
+            addLog(`🔥 Vince fires at (${targetX}, ${targetY})!`, 'success');
             
             setTimeout(() => {
-                gameState.wormholes = gameState.wormholes.filter(wh => 
-                    wh.x !== wormhole.x || wh.y !== wormhole.y);
+                targetCell.innerHTML = '';
+                targetCell.style.background = '';
                 updateMap();
-                addLog('Wormhole collapsed', 'info');
-            }, 3000);
+            }, 1500);
+            
+            updateHeroStats();
+        }
+        
+        function castVincePower() {
+            const power = document.getElementById('vincePowerSelect').value;
+            const vince = gameState.vince;
+            
+            addLog(`🔫 Vince casts ${power}`, 'warning');
+            
+            switch (power) {
+                case 'REALITY_SHOT':
+                    if (vince.mp < 10) {
+                        addLog('❌ Not enough MP for Reality Shot', 'error');
+                        return;
+                    }
+                    vince.mp -= 10;
+                    
+                    const wormhole = {
+                        x: Math.floor(Math.random() * 10),
+                        y: Math.floor(Math.random() * 8)
+                    };
+                    gameState.wormholes.push(wormhole);
+                    
+                    setStatus('🔫 Vince: "Reality Shot fired! Wormhole created!"');
+                    addLog(`🌀 Reality Shot creates wormhole at (${wormhole.x}, ${wormhole.y})`, 'success');
+                    
+                    setTimeout(() => {
+                        gameState.wormholes = gameState.wormholes.filter(wh => 
+                            wh.x !== wormhole.x || wh.y !== wormhole.y);
+                        updateMap();
+                        addLog('Wormhole collapsed', 'info');
+                    }, 4000);
+                    break;
+                    
+                case 'WORMHOLE_BLAST':
+                    if (vince.mp < 15) {
+                        addLog('❌ Not enough MP for Wormhole Blast', 'error');
+                        return;
+                    }
+                    vince.mp -= 15;
+                    
+                    for (let i = 0; i < 3; i++) {
+                        const blastWormhole = {
+                            x: Math.floor(Math.random() * 10),
+                            y: Math.floor(Math.random() * 8)
+                        };
+                        gameState.wormholes.push(blastWormhole);
+                    }
+                    
+                    setStatus('🔫 Vince: "Triple wormhole blast!"');
+                    addLog('🌀 Triple wormhole blast activated!', 'success');
+                    break;
+                    
+                case 'FOURTH_WALL_BREAK':
+                    if (vince.mp < 20) {
+                        addLog('❌ Not enough MP for Fourth Wall Break', 'error');
+                        return;
+                    }
+                    vince.mp -= 20;
+                    
+                    setStatus('🔫 Vince: "Hey Jean! Can you see me?"');
+                    addLog('💥 Fourth Wall Break! Reality bends!', 'success');
+                    
+                    document.querySelectorAll('.map-cell').forEach(cell => {
+                        cell.style.animation = 'shake 0.5s ease-in-out';
+                        setTimeout(() => cell.style.animation = '', 500);
+                    });
+                    break;
+                    
+                case 'DIMENSIONAL_SHOT':
+                    if (vince.mp < 12) {
+                        addLog('❌ Not enough MP for Dimensional Shot', 'error');
+                        return;
+                    }
+                    vince.mp -= 12;
+                    
+                    const newX = Math.floor(Math.random() * 10);
+                    const newY = Math.floor(Math.random() * 8);
+                    vince.x = newX;
+                    vince.y = newY;
+                    
+                    setStatus(`🔫 Vince: "Dimensional shot teleports me!" Moved to (${newX}, ${newY})`);
+                    addLog('🌌 Dimensional shot with teleportation!', 'success');
+                    break;
+                    
+                case 'CAUSALITY_BULLET':
+                    if (vince.mp < 25) {
+                        addLog('❌ Not enough MP for Causality Bullet', 'error');
+                        return;
+                    }
+                    vince.mp -= 25;
+                    
+                    setStatus('🔫 Vince: "This bullet travels backward in time!"');
+                    addLog('⚛️ Causality Bullet fired! Reality fluctuates!', 'success');
+                    
+                    setTimeout(() => {
+                        addLog('⏰ Causality Bullet arrives BEFORE it was fired!', 'warning');
+                    }, 1000);
+                    break;
+                    
+                case 'QUANTUM_RELOAD':
+                    vince.mp = Math.min(vince.mp + 20, 100);
+                    setStatus('🔫 Vince: "Quantum reload! Ready for more!"');
+                    addLog('🔄 Quantum reload restores MP!', 'success');
+                    break;
+            }
+            
+            updateMap();
+            updateHeroStats();
         }
         
         function grutVision() {
-            setStatus('🏛️ GRUT: "Vision omnisciente activée !"');
-            addLog('GRUT Vision: All possibilities revealed', 'success');
+            if (gameState.grut.mp < 15) {
+                setStatus('🏛️ GRUT: "Insufficient knowledge to activate Vision!"');
+                addLog('❌ Not enough MP for GRUT Vision', 'error');
+                return;
+            }
             
-            document.querySelectorAll('.map-cell').forEach(cell => {
-                cell.style.background = 'rgba(116,75,162,0.3)';
+            gameState.grut.mp -= 15;
+            
+            setStatus('🏛️ GRUT: "Vision omnisciente activée ! Révélation de tous les possibles !"');
+            addLog('👁️ GRUT Vision: All possibilities revealed across spacetime', 'success');
+            
+            // Phase 1: Activation pulsante
+            document.querySelectorAll('.map-cell').forEach((cell, index) => {
                 setTimeout(() => {
-                    cell.style.background = '';
-                    updateMap();
-                }, 1000);
+                    cell.style.background = 'rgba(116,75,162,0.6)';
+                    cell.style.border = '2px solid #744ba2';
+                    cell.style.boxShadow = '0 0 15px rgba(116,75,162,0.8)';
+                    cell.innerHTML = cell.innerHTML + '<div style="position: absolute; top: 2px; right: 2px; color: #744ba2;">👁️</div>';
+                }, index * 20);
             });
+            
+            // Phase 2: Vision révélée (reste 5 secondes)
+            setTimeout(() => {
+                addLog('🔮 GRUT Vision reveals: Hidden paths and potential futures', 'warning');
+                
+                // Montrer des chemins potentiels
+                for (let i = 0; i < 5; i++) {
+                    const x = Math.floor(Math.random() * 10);
+                    const y = Math.floor(Math.random() * 8);
+                    const cell = document.getElementById(`cell-${x}-${y}`);
+                    if (cell) {
+                        cell.innerHTML += '<div style="position: absolute; bottom: 2px; left: 2px; color: #00ff00;">⭐</div>';
+                    }
+                }
+                
+                setStatus('🏛️ GRUT: "Je vois toutes les timelines... Les possibilités sont infinies..."');
+            }, 1000);
+            
+            // Phase 3: Désactivation progressive (après 5 secondes total)
+            setTimeout(() => {
+                addLog('👁️ GRUT Vision fading... returning to normal perception', 'info');
+                
+                document.querySelectorAll('.map-cell').forEach((cell, index) => {
+                    setTimeout(() => {
+                        cell.style.background = '';
+                        cell.style.border = '';
+                        cell.style.boxShadow = '';
+                        // Nettoie les icônes ajoutées
+                        const eyes = cell.querySelectorAll('div');
+                        eyes.forEach(eye => eye.remove());
+                        updateMap();
+                    }, index * 15);
+                });
+                
+                setStatus('🏛️ GRUT: "Vision complete. Reality has been observed."');
+            }, 5000);
+            
+            updateHeroStats();
         }
         
         function epicBattle() {
@@ -1130,6 +1352,7 @@
         // Initialize on load
         window.onload = function() {
             createMap();
+            updateHeroStats();
             initDemo();
             
             // Ajouter navigation A→B→C après la map
