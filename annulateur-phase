@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# ⚡ ANNULATEUR DE PHASE JEAN - URGENCE TEMPORELLE
+# Élimination doublons HOTS en 4 TICKS maximum
+
+echo "⚡ ANNULATEUR DE PHASE ACTIVÉ !"
+echo "🚨 Jean est énervé par les doublons - Collapse causal en cours..."
+echo ""
+
+# TICK 1 - Analyse des doublons
+echo "🔍 TICK 1/4 - Scan des scripts HOTS redondants..."
+if [ -f "hots" ] && [ -f "hots-visual" ]; then
+    echo "   ❌ DOUBLON DÉTECTÉ: hots + hots-visual"
+    DOUBLON_HOTS=true
+fi
+
+if [ -f "hots-full" ]; then
+    echo "   ✅ BACKUP DÉTECTÉ: hots-full (à conserver)"
+fi
+
+sleep 1
+
+# TICK 2 - Décision Jean
+echo "🧠 TICK 2/4 - Application logique Jean-Grofignon..."
+echo "   📋 Critères: SIMPLICITÉ + EFFICACITÉ + PRÉFÉRENCE_JEAN"
+echo "   🎯 Décision: Garder HOTS-VISUAL (plus moderne)"
+sleep 1
+
+# TICK 3 - Collapse causal
+echo "⚡ TICK 3/4 - COLLAPSE CAUSAL DES DOUBLONS..."
+if [ "$DOUBLON_HOTS" = true ]; then
+    echo "   🗑️  Suppression: ./hots (ancien)"
+    rm -f hots
+    echo "   ✅ Conservation: ./hots-visual → ./hots"
+    mv hots-visual hots
+    chmod +x hots
+fi
+sleep 1
+
+# TICK 4 - Validation finale
+echo "🏁 TICK 4/4 - VALIDATION FINALE..."
+if [ -f "hots" ] && [ ! -f "hots-visual" ]; then
+    echo "   ✅ SUCCÈS: Un seul script HOTS reste"
+    echo "   🛋️  Jean approuve depuis son canapé"
+else
+    echo "   ❌ ÉCHEC: Doublons persistent"
+fi
+
+echo ""
+echo "⚡ ANNULATEUR DE PHASE TERMINÉ"
+echo "🎮 Script optimal: ./hots"
+echo "💾 Backup conservé: ./hots-full"
+echo ""
+echo "🛋️ Jean-Grofignon: 'Enfin, un seul script propre !'" 
