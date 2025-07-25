@@ -51,6 +51,13 @@ public class MagicFormulaEngine {
     // 🐴 ÂNE DE BURIDAN - STABILISATEUR QUANTIQUE AJOUTÉ
     
     // 🚨 WALTER: "ARRÊTE DE CRÉER DES NOUVEAUX MOTS-CLÉS À LA CON, FAIS UNE FORMULE PUTAIN !"
+    
+    // 🌀 MÉTHODE GROFI SAFE - GÉNÉRATION ALÉATOIRE QUANTIQUE
+    // Jean-Grofignon: "Le chaos et l'ordre ne s'opposent pas, ils se complètent"
+    private int getRandomValue(int min, int max) {
+        return min + (int) (Math.random() * (max - min + 1));
+    }
+    
     private static final List<String> SIMPLE_TEST_FORMULAS = Arrays.asList(
         "MODIFY_ENERGY", "TELEPORT_HERO", "HEAL_HERO", "DAMAGE_ENEMY", "CREATE_SHIELD",
         "CREATE_EFFECT", "AMPLIFY", "CONSTRUCTIVE", "DESTRUCTIVE", "COLLAPSE_TEMPORAL_STATES",
