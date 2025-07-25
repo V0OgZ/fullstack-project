@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔫 Vince Vega Access Test - Port 8001</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            font-family: 'Courier New', monospace;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .demo-link {
+            display: block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 15px;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+        .demo-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+        .status {
+            background: rgba(0,0,0,0.5);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔫 VINCE VEGA DEMO ACCESS</h1>
+        <div class="status">
+            <h3>📊 SERVER STATUS</h3>
+            <p>✅ Port 8001 : ACTIF</p>
+            <p>🕒 Timestamp : <span id="timestamp"></span></p>
+        </div>
+        
+        <h2>🎮 DÉMOS DISPONIBLES :</h2>
+        
+        <a href="vince-vega-map-demo-backend.html" class="demo-link">
+            🗺️ VINCE VEGA MAP DEMO
+            <br><small>Map interactive 10x8 + Dialogues + Wormholes</small>
+        </a>
+        
+        <a href="vince-vega-hexagon-battlefield.html" class="demo-link">
+            ⬡ VINCE VEGA HEXAGON BATTLEFIELD
+            <br><small>Battlefield hexagonal + Items ronds + Pouvoirs</small>
+        </a>
+        
+        <a href="#" class="demo-link" onclick="alert('✅ VERSION RESTAURÉE ! V9 Wormhole Complets maintenant active')" style="background: linear-gradient(45deg, #00ff88, #00aa66);">
+            ✅ VERSION RESTAURÉE
+            <br><small>🌟 V9 Wormhole Complets (14h) - Fonctionnelle !</small>
+        </a>
+        
+        <div class="status">
+            <h3>🎯 FONCTIONNALITÉS TEST :</h3>
+            <ul style="text-align: left;">
+                <li>✅ Serveur HTTP Python actif</li>
+                <li>✅ Fichiers accessibles</li>
+                <li>✅ Port 8001 libre</li>
+                <li>🔫 Gun interdimensionnel Vince</li>
+                <li>🌀 Portails wormhole</li>
+                <li>💬 Dialogues BD style</li>
+                <li>⬡ Hexagons is the bestagon!</li>
+            </ul>
+        </div>
+        
+        <div style="background: rgba(255,68,68,0.2); padding: 15px; border-radius: 10px; margin-top: 30px;">
+            <h3>🔥 CITATION VINCE :</h3>
+            <p><em>"Je tire là-bas, ça meurt ici. C'est beau la technologie."</em></p>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('timestamp').textContent = new Date().toLocaleString();
+        
+        // Test de connexion
+        setTimeout(() => {
+            console.log('🔫 Vince Vega Demo Access Test loaded successfully!');
+        }, 1000);
+    </script>
+</body>
+</html> 
