@@ -18,3 +18,8 @@ Traceback (most recent call last):
 ::1 - - [25/Jul/2025 14:27:19] "GET /wake-up-memento-ford-compliant.html HTTP/1.1" 304 -
 ::1 - - [25/Jul/2025 14:27:19] code 404, message File not found
 ::1 - - [25/Jul/2025 14:27:19] "GET /assets/img/Domburg_tower.webp HTTP/1.1" 404 -
+::1 - - [25/Jul/2025 15:25:45] "GET /wake-up-memento-ford-compliant.html HTTP/1.1" 304 -
+::1 - - [25/Jul/2025 15:25:45] code 404, message File not found
+::1 - - [25/Jul/2025 15:25:45] "GET /assets/img/Domburg_tower.webp HTTP/1.1" 404 -
+::1 - - [25/Jul/2025 15:25:57] code 404, message File not found
+::1 - - [25/Jul/2025 15:25:57] "GET /game_assets/artifacts/mineurs/tatouages_memento_archiviste.json HTTP/1.1" 404 -
