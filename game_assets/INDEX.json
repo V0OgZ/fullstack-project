@@ -1,0 +1,27 @@
+{
+  "version": "2.0",
+  "lastUpdate": "2025-07-25",
+  "structure": {
+    "scenarios": {
+      "hots": "Scripts temporels Heroes of Time",
+      "runic": "Format runique avec symboles ᚠᚢᚦᚨᚱᚲ",
+      "hep": "Heroes Epic Play - format simplifié",
+      "json": "Données de scénarios JSON"
+    },
+    "heroes": {
+      "source": "backend/src/main/resources/heroes/",
+      "categories": ["legendary", "grofi", "special"]
+    },
+    "artifacts": {
+      "categories": ["legendaires", "epiques", "mineurs", "temporels"]
+    },
+    "creatures": {
+      "categories": ["quantiques", "temporelles", "normales"]
+    }
+  },
+  "notes": {
+    "doublons": "Archivés dans MUSEUM/archives/doublons/",
+    "officialHeroes": "backend/src/main/resources/heroes/",
+    "sprites": "Conservés dans leurs emplacements actuels"
+  }
+}
