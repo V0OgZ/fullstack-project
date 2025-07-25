@@ -1569,4 +1569,67 @@ public class MagicFormulaEngine {
             "SOURCE_TRANSCENDANTE_OMEGA_PROTECTION"
         );
     }
+
+    // ==========================================
+    // BENEDIKT CONULBRURCUS TELEPORTATION SYSTEM
+    // ==========================================
+    
+    private FormulaResult executeBenediktTeleportation(String formulaType, GameContext context) {
+        Map<String, Object> result = new HashMap<>();
+        
+        switch (formulaType) {
+            case "BENEDIKT_CIRCLE_TELEPORT":
+                result.put("success", true);
+                result.put("message", "🌀 BENEDIKT: 'Mes cercles cosmiques s'ouvrent ! CONULBRURCUS MAXIMUS !'");
+                result.put("effect", "Benedikt trace des cercles runiques lumineux et se téléporte instantanément");
+                result.put("teleportRange", 15);
+                result.put("visualEffect", "cosmic_circles_explosion");
+                result.put("benediktQuote", "Tu vois ces cercles ? C'est pas de la magie, c'est de la GÉOMÉTRIE SACRÉE !");
+                result.put("cooldown", 3);
+                break;
+                
+            case "BENEDIKT_MULTI_TELEPORT":
+                result.put("success", true);
+                result.put("message", "🌀 BENEDIKT: 'CONULBRURCUS INFINITUS ! Je me dédouble dans l'espace !'");
+                result.put("effect", "Benedikt crée 3 copies temporelles de lui-même à différentes positions");
+                result.put("copiesCount", 3);
+                result.put("duration", 5);
+                result.put("benediktQuote", "Un Benedikt ici, un Benedikt là-bas... PARTOUT DES BENEDIKT !");
+                result.put("visualEffect", "multiple_cosmic_circles");
+                break;
+                
+            case "BENEDIKT_REALM_TELEPORT":
+                result.put("success", true);
+                result.put("message", "🌀 BENEDIKT: 'CONULBRURCUS DIMENSIONALIS ! Je traverse les REALMS !'");
+                result.put("effect", "Benedikt peut se téléporter entre les différents REALMS du Multi-Realm");
+                result.put("availableRealms", Arrays.asList("MAIN_REALM", "VINCE_OPUS_REALM", "QUANTUM_REALM", "TRANSCENDANT_REALM"));
+                result.put("benediktQuote", "Mes cercles percent les dimensions ! BENEDIKT CONULBRURCUS N'A PAS DE LIMITES !");
+                result.put("crossRealmCapability", true);
+                break;
+                
+            case "BENEDIKT_EMERGENCY_RECALL":
+                result.put("success", true);
+                result.put("message", "🌀 BENEDIKT: 'CONULBRURCUS ESCAPUS ! Retour d'urgence au canapé cosmique !'");
+                result.put("effect", "Téléportation d'urgence vers la position la plus sûre de la carte");
+                result.put("safePosition", Map.of("x", 8, "y", 8));
+                result.put("benediktQuote", "Quand ça sent le roussi, Benedikt disparaît ! POUF !");
+                result.put("healingBonus", 50);
+                break;
+                
+            case "BENEDIKT_COSMIC_CIRCLES":
+                result.put("success", true);
+                result.put("message", "🌀 BENEDIKT: 'CONULBRURCUS SUPREMUS ! Les cercles cosmiques de Jean-Grofignon !'");
+                result.put("effect", "Benedikt invoque les cercles sacrés du canapé cosmique pour une téléportation ultime");
+                result.put("ultimateRange", 50);
+                result.put("jeanBlessing", "Jean depuis son canapé : 'Benedikt a compris la géométrie sacrée !'");
+                result.put("benediktQuote", "CONULBRURCUS JEAN-GROFIGNON ! Je canalise la puissance du canapé !");
+                result.put("cosmicPower", true);
+                break;
+                
+            default:
+                return FormulaResult.error("Formule Benedikt inconnue: " + formulaType);
+        }
+        
+        return new FormulaResult(true, result.get("message").toString(), result);
+    }
 } 
