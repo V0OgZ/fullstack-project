@@ -28,8 +28,6 @@ show_help() {
     echo -e "  ${GREEN}stop${NC}        Arrête tous les services"
     echo -e "  ${GREEN}restart${NC}     Redémarre tous les services"
     echo -e "  ${GREEN}status${NC}      Affiche le statut des services"
-    echo -e "  ${GREEN}upload${NC}      📤 Upload JSON vers ether (persistence)"
-    echo -e "  ${GREEN}sync${NC}        🔄 Synchroniser tatouages Memento"
     echo -e "  ${GREEN}test${NC}        Lance les tests (voir options ci-dessous)"
     echo -e "  ${GREEN}generate${NC}    🧠 Génère la documentation MD depuis JSON (Memento)"
     echo -e "  ${GREEN}translate${NC}   📜 Système de traduction hybride (LLM → Service → Algo)"
