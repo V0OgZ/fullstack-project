@@ -1,0 +1,14 @@
+{
+  "backup_info": "Backup des tatouages avant réparation 2025-01-25",
+  "original_size": "1279 lignes", 
+  "problemes_corriges": [
+    "Structure JSON invalide",
+    "Accolades mal fermées",
+    "Virgules manquantes",
+    "Mélange de formats array/object"
+  ],
+  "nouvelle_version": "game_assets/artifacts/mineurs/tatouages_memento_archiviste.json",
+  "timestamp": "2025-01-25T16:00:00Z",
+  "opus_consignes_respectees": "Backend et UI principal non touchés",
+  "status": "BACKUP_SECURISE"
+} 
