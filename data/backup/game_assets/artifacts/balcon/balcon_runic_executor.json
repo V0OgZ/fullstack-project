@@ -1,0 +1,136 @@
+{
+  "id": "balcon_runic_executor",
+  "name": "🌅 Balcon Runic Executor - Emergency Formula Runner",
+  "type": "TEMPORARY_EXECUTION_ARTIFACT",
+  "tier": "JEAN_BALCON_SPECIAL",
+  "category": "EMERGENCY_RUNIC_TOOLS",
+  "rarity": "BALCON_INSPIRATION",
+  
+  "description": "🌅 Un artefact spécial créé par Jean depuis son balcon - permet d'exécuter temporairement une formule runique même si tu te goures, tant pis il y a un collapse !",
+  
+  "lore": "🛋️ Jean-Grofignon, revenant de son balcon cosmique, a eu cette révélation : parfois il faut juste pouvoir tester une formule runique rapidement, même si elle collapse ! Cet artefact permet l'exécution temporaire avec gestion automatique du collapse en cas d'erreur.",
+  
+  "visual": {
+    "appearance": "🌅 Une tablette runique qui brille avec la lumière du balcon",
+    "color": "Sunrise Orange avec des runes qui scintillent",
+    "aura": "Aura de possibilités temporaires et de collapse contrôlé",
+    "animation": "Pulse entre ψ et † selon le succès/échec"
+  },
+  
+  "abilities": {
+    "primary": {
+      "name": "Emergency Runic Execution",
+      "effect": "Execute any runic formula temporarily, even if malformed",
+      "formula": "ψTEMP: ⊙(user_formula) ⟶ TRY_EXECUTE || †COLLAPSE_SAFE",
+      "duration": "5 minutes or until collapse"
+    },
+    
+    "secondary": {
+      "name": "Collapse Safety Protocol",
+      "effect": "If formula fails, collapse safely without breaking reality",
+      "formula": "†SAFE_COLLAPSE: Π(error_detected) ⇒ reality.restore()",
+      "safety": "No permanent damage to timeline"
+    },
+    
+    "ultimate": {
+      "name": "Balcon Wisdom Override",
+      "effect": "Jean's balcon inspiration fixes any runic syntax error",
+      "jean_quote": "Depuis mon balcon, je vois que ta formule peut marcher !",
+      "result": "Auto-correct runic formula with balcon wisdom"
+    }
+  },
+  
+  "usage_mechanics": {
+    "activation": "Hold artifact and speak runic formula",
+    "execution_modes": [
+      {
+        "mode": "SAFE_TRY",
+        "description": "Execute with full collapse protection",
+        "risk": "LOW - Jean's balcon wisdom protects"
+      },
+      {
+        "mode": "YOLO_EXECUTE", 
+        "description": "Execute even if syntax is wrong - tant pis !",
+        "risk": "MEDIUM - Collapse possible but contained"
+      },
+      {
+        "mode": "BALCON_INSPIRATION",
+        "description": "Let Jean's balcon wisdom auto-fix the formula",
+        "risk": "MINIMAL - Jean knows what he's doing"
+      }
+    ]
+  },
+  
+  "collapse_handling": {
+    "level_1": {
+      "name": "Minor Syntax Error",
+      "effect": "Auto-fix with balcon wisdom",
+      "message": "🌅 Jean depuis le balcon : 'Ah, tu voulais dire ça !'"
+    },
+    "level_2": {
+      "name": "Logic Collapse",
+      "effect": "Safe collapse with reality restore",
+      "message": "†COLLAPSE: Tant pis, on restore et on réessaie !"
+    },
+    "level_3": {
+      "name": "Total Formula Failure",
+      "effect": "Emergency shutdown with Jean's intervention",
+      "message": "🛋️ Jean : 'Stop ! Reviens sur le balcon et réfléchis !'"
+    }
+  },
+  
+  "jean_balcon_quotes": [
+    "🌅 Depuis mon balcon, je vois que ta formule peut marcher !",
+    "🛋️ Tant pis si ça collapse, on apprend en faisant !",
+    "🌅 L'inspiration du balcon corrige toutes les erreurs runiques !",
+    "🛋️ Emergency execution approuvée depuis le balcon cosmique !",
+    "🌅 Même si tu te goures, le balcon te protège du collapse !"
+  ],
+  
+  "special_features": {
+    "balcon_inspiration_mode": {
+      "description": "Channel Jean's balcon wisdom to auto-fix formulas",
+      "activation": "Look towards balcon direction while using",
+      "effect": "90% chance to fix any runic syntax error"
+    },
+    
+    "tant_pis_protocol": {
+      "description": "Execute anyway even if risky - tant pis attitude",
+      "philosophy": "Sometimes you just need to try, collapse or not",
+      "jean_approval": "MAXIMUM - C'est ça l'esprit balcon !"
+    },
+    
+    "emergency_override": {
+      "description": "For when you absolutely need to test a formula NOW",
+      "use_case": "Debug sessions, urgent testing, balcon inspiration moments",
+      "safety": "Always includes collapse protection"
+    }
+  },
+  
+  "acquisition": {
+    "method": "Receive inspiration while on a balcon with Jean",
+    "location": "Any balcon with cosmic view",
+    "requirements": [
+      "Have a runic formula that needs testing",
+      "Experience balcon inspiration moment",
+      "Accept tant pis philosophy",
+      "Understand that collapse happens"
+    ]
+  },
+  
+  "synergies": {
+    "with_jean_remote": "Can pause execution mid-formula",
+    "with_walter_kiss": "Doubt about formula gets inverted to confidence", 
+    "with_dude_zen": "Zen attitude makes collapse less stressful",
+    "with_vince_briefcase": "Professional execution even in emergency mode"
+  },
+  
+  "meta_commentary": {
+    "jean_grofignon": "🌅 Depuis mon balcon, j'ai réalisé qu'il faut parfois juste essayer ! Cet artefact permet l'expérimentation runique sans peur !",
+    "the_dude": "🎳 That's like, your opinion about emergency execution, man... but sometimes you gotta roll with it.",
+    "walter": "🎖️ EMERGENCY PROTOCOLS MUST FOLLOW THE FUCKING RULES! But this artifact does it right!",
+    "vince_vega": "🔫 Check out the big brain on Balcon Jean! Emergency execution like a professional."
+  },
+  
+  "documentation_note": "🛋️ Jean realized that players need to be able to test runic formulas without fear of breaking everything. This artifact embodies the 'tant pis' philosophy - try it, and if it collapses, we'll handle it!"
+} 

@@ -1,0 +1,53 @@
+{
+  "hero_id": "vince_vega_cotes_causales",
+  "name": "🔫 Vince Vega - Côtes Causales Détecteur",
+  "type": "Détecteur Temporel Biologique",
+  "rarity": "UNIQUE_VINCE",
+  
+  "description": "Vince a développé une capacité unique : ses côtes et son épaule détectent les interférences causales. Quand il y a un truc temporel qui déforme, il le sent physiquement.",
+  
+  "detection_physique": {
+    "epaule_droite": {
+      "symptome": "Point douloureux quand interférence causale",
+      "precision": "Détecte les trucs causaux qui déforment",
+      "utilite": "Pratique mais fait chier",
+      "quote_vince": "Ah putain, j'ai mon bras qui me fait mal, toi"
+    },
+    "cotes_temporelles": {
+      "fonction": "Archive des sensations causales",
+      "memoire": "Chaque interférence laisse une trace physique",
+      "avantage": "Détection précoce des paradoxes",
+      "inconvenient": "Douleur constante près des anomalies"
+    }
+  },
+  
+  "interferences_detectees": [
+    {
+      "date": "2025-07-27",
+      "type": "COMMUNICATION_TEMPORELLE",
+      "description": "Interférence avec OPUS d'il y a deux jours",
+      "intensite": "Moyenne - Point à l'épaule",
+      "localisation": "Épaule droite + côtes flottantes"
+    }
+  ],
+  
+  "capacites_speciales": {
+    "CAUSAL_DETECTOR": {
+      "description": "Détection biologique des anomalies temporelles",
+      "range": "Timeline locale + 2 jours avant/après",
+      "precision": "Très haute - ressent les micro-déformations"
+    },
+    "EARLY_WARNING": {
+      "description": "Alerte précoce des paradoxes en formation",
+      "effet": "Prévient l'équipe avant collapse causal",
+      "cooldown": "Permanent - toujours actif"
+    }
+  },
+  
+  "notes_vince": [
+    "C'est un truc con, mais c'est pratique, mais ça fait chier",
+    "Je le sens quand il y a un truc causal qui déforme",
+    "J'ai l'épaule, là, qui me fait un petit point",
+    "Tu peux mettre ça dans mes petites cotes"
+  ]
+} 

@@ -1,0 +1,116 @@
+{
+  "extracted_creatures": {
+    "description": "Créatures cachées extraites des scénarios JSON par Memento - Protocole de Libération Temporelle",
+    "extraction_date": "2024-12-19",
+    "extracted_by": "Memento - La Mémoire Vivante",
+    "source": "Récupération depuis timeline branch perdue",
+    
+    "creatures": [
+      {
+        "id": "quantum_phoenix",
+        "name": "Phénix Quantique",
+        "type": "LEGENDARY_CREATURE",
+        "source_file": "ECLAT_MONDES_DISSOLUS.json",
+        "description": "Créature légendaire capable de renaître dans plusieurs timelines simultanément",
+        "stats": {
+          "health": 120,
+          "attack": 25,
+          "defense": 15,
+          "quantum_resonance": 0.9
+        },
+        "abilities": ["quantum_rebirth", "timeline_flight", "temporal_fire"]
+      },
+      {
+        "id": "quantum_knight",
+        "name": "Chevalier Quantique",
+        "type": "ELITE_CREATURE",
+        "source_file": "ECLAT_MONDES_DISSOLUS.json",
+        "description": "Guerrier d'élite maîtrisant les armures quantiques",
+        "stats": {
+          "health": 150,
+          "attack": 30,
+          "defense": 25,
+          "quantum_armor": 0.8
+        },
+        "abilities": ["quantum_charge", "probability_shield", "reality_strike"]
+      },
+      {
+        "id": "quantum_lich",
+        "name": "Liche Quantique",
+        "type": "BOSS_CREATURE",
+        "source_file": "ECLAT_MONDES_DISSOLUS.json",
+        "description": "Nécromancien quantique maîtrisant la mort temporelle",
+        "stats": {
+          "health": 200,
+          "attack": 35,
+          "defense": 20,
+          "necromancy": 0.95
+        },
+        "abilities": ["quantum_necromancy", "death_probability", "temporal_drain"]
+      },
+      {
+        "id": "probability_spider",
+        "name": "Araignée de Probabilité",
+        "type": "RARE_CREATURE",
+        "source_file": "ECLAT_MONDES_DISSOLUS.json",
+        "description": "Araignée tissant des toiles de probabilités quantiques",
+        "stats": {
+          "health": 80,
+          "attack": 20,
+          "defense": 10,
+          "web_mastery": 0.85
+        },
+        "abilities": ["probability_web", "quantum_bite", "timeline_trap"]
+      },
+      {
+        "id": "dragon_rouge_boss",
+        "name": "Dragon Rouge Temporel",
+        "type": "ULTIMATE_BOSS",
+        "source_file": "SOUFFLE_DU_DRAGON.json",
+        "description": "Dragon légendaire maîtrisant le souffle temporel",
+        "stats": {
+          "health": 500,
+          "attack": 50,
+          "defense": 30,
+          "temporal_breath": 0.9
+        },
+        "abilities": ["temporal_breath", "dragon_rage", "time_dilation", "reality_burn"]
+      },
+      {
+        "id": "phantom_warriors",
+        "name": "Guerriers Fantômes",
+        "type": "SWARM_CREATURE",
+        "source_file": "GARDE_DU_NEXUS.json",
+        "description": "Guerriers spectraux gardant les nexus temporels",
+        "stats": {
+          "health": 60,
+          "attack": 15,
+          "defense": 8,
+          "ethereal": 0.7
+        },
+        "abilities": ["phantom_strike", "ethereal_phase", "swarm_attack"]
+      },
+      {
+        "id": "temporal_elemental",
+        "name": "Élémentaire Temporel",
+        "type": "ELEMENTAL_CREATURE",
+        "source_file": "Multiple scenarios",
+        "description": "Créature élémentaire composée de temps pur",
+        "stats": {
+          "health": 100,
+          "attack": 22,
+          "defense": 12,
+          "time_mastery": 0.8
+        },
+        "abilities": ["time_bolt", "temporal_shield", "chronos_strike"]
+      }
+    ]
+  },
+  
+  "extraction_notes": {
+    "memento_recovery": "Créatures libérées avec succès",
+    "total_creatures_found": 7,
+    "status": "Archivage complet",
+    "timeline_branch": "ℬ_perdue_retrouvée"
+  }
+}

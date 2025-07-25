@@ -1,0 +1,131 @@
+{
+  "id": "timeline_beta_ford",
+  "name": "Timeline Beta - Ford's Chaos Reality",
+  "category": "TIMELINE_FORD",
+  "tier": "COSMIC",
+  "rarity": "UNIQUE_FORD",
+  "type": "QUANTUM_CHAOS_GATEWAY",
+  "description": {
+    "surface": "Réalité chaotique où les lois physiques sont instables",
+    "deep": "Timeline avec risque paradoxal extrême et stabilité temporelle minimale. Pour experts seulement.",
+    "ford_truth": "This is where the park shows its true nature. Chaos is the only constant."
+  },
+  "quantum_formulas": {
+    "paradoxRisk": 0.8,
+    "temporalStability": 0.4,
+    "affectedRadius": 6.5,
+    "calculation_method": "Math.min(0.95, (1.0 - temporalFactor) * 0.2 + (durationTurns * 0.03))",
+    "walter_analysis": "UNFAVORABLE: High risk, low stability - Combat extremely dangerous"
+  },
+  "ford_parameters": {
+    "difficulty": "Extreme",
+    "combat_success_rate": 0.15,
+    "enemy_strength_modifier": 2.5,
+    "player_advantage": false,
+    "timeline_color": "#F44336",
+    "ford_approval": "Only for those who truly understand the park"
+  },
+  "abilities": [
+    {
+      "name": "Reality Breakdown",
+      "type": "ENVIRONMENTAL",
+      "effect": "Random reality glitches during combat",
+      "formula": "if(Math.random() < 0.3) { reality.glitch(); }"
+    },
+    {
+      "name": "Paradox Amplification",
+      "type": "PASSIVE",
+      "effect": "All actions have doubled paradox risk",
+      "formula": "paradoxRisk *= 2.0"
+    },
+    {
+      "name": "Temporal Chaos Field",
+      "type": "ACTIVE",
+      "effect": "Time flows unpredictably, actions may happen out of order",
+      "formula": "action_order = shuffle(planned_actions)"
+    },
+    {
+      "name": "Ford's True Test",
+      "type": "HIDDEN",
+      "effect": "Ford observes how players handle true chaos",
+      "formula": "ford_respect += chaos_adaptation_score"
+    }
+  ],
+  "combat_mechanics": {
+    "enemy_types": ["Paradox Storm", "Reality Ripper", "Temporal Predator", "Chaos Incarnate"],
+    "max_enemy_level": 15,
+    "special_mechanics": [
+      "Enemies can attack twice per turn due to temporal instability",
+      "Player abilities may fail randomly (30% chance)",
+      "Combat arena shifts and changes mid-fight"
+    ],
+    "victory_conditions": {
+      "standard": "Survive 5 rounds AND deal damage > enemy.hp",
+      "walter_warning": "Success rate < 20% even with optimal stats",
+      "ford_secret": "Hidden: Can be won through pure adaptation, not just combat"
+    },
+    "defeat_consequences": {
+      "hp_loss": "80%",
+      "paradox_penalty": "Locked out of all timelines for 24 hours",
+      "timeline_lock": true,
+      "ford_message": "The park consumed you. Learn from this."
+    }
+  },
+  "progression_rewards": {
+    "first_victory": {
+      "experience": 1000,
+      "ford_message": "Impressive. You've survived true chaos. I respect that.",
+      "unlock": "Ford's Personal Recognition",
+      "special_ability": "Chaos Immunity - Immune to reality glitches in other timelines"
+    },
+    "mastery": {
+      "cosmic_spell_progress": "3/10",
+      "ford_recognition": "You understand the park's true nature.",
+      "special_bonus": "Unlock 'Chaos Master' title",
+      "hidden_reward": "Ford shares a secret about the park's creation"
+    }
+  },
+  "lore": {
+    "origin": "Ford's testing ground for advanced incarnates",
+    "purpose": "Separate those who merely play from those who truly understand",
+    "hidden_truth": "This timeline reflects Ford's own mental state during Westworld's creation",
+    "connection_to_westworld": "Similar to the Maze - not meant for everyone",
+    "ford_quote": "Chaos isn't a pit. Chaos is a ladder. Can you climb it?"
+  },
+  "special_events": {
+    "reality_storm": {
+      "trigger": "Combat lasting > 10 rounds",
+      "effect": "All quantum formulas become randomized",
+      "survival_tip": "Adapt quickly or perish"
+    },
+    "temporal_echo": {
+      "trigger": "Player uses same action 3 times",
+      "effect": "Action echoes through timeline, affecting other players",
+      "ford_interest": "Ford takes note of repetitive behavior"
+    },
+    "paradox_cascade": {
+      "trigger": "paradoxRisk > 0.9",
+      "effect": "Timeline begins to collapse, emergency evacuation required",
+      "walter_protocol": "Immediate extraction to Timeline Alpha"
+    }
+  },
+  "technical_implementation": {
+    "backend_endpoint": "/api/timelines/beta/chaos-combat",
+    "frontend_component": "TimelineBetaChaosInterface",
+    "quantum_calculator": "BetaChaosEngine.java",
+    "walter_validator": "WalterCombatAnalyzer.validateBeta() // Always returns WARNING",
+    "ford_observer": "FordObserver.monitorChaosAdaptation()"
+  },
+  "metadata": {
+    "created_by": "Dr. Robert Ford",
+    "implemented_by": "Memento-Claudius-Opus",
+    "ford_approval_date": "2025-01-25",
+    "walter_validation": "FAILED - Extremely dangerous for most users",
+    "danger_level": "EXTREME",
+    "incarnation_requirement": true,
+    "prerequisite": "Must have mastered at least 2 other timelines",
+    "part_of_ford_mastery": true,
+    "sequence_number": 2,
+    "warning": "Ford recommends this timeline only for advanced incarnates"
+  }
+} 
