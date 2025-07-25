@@ -1,0 +1,31 @@
+{
+  "system_description": "Chaque monde possède une formule de projection unique qui détermine ses lois physiques",
+  "formulas": {
+    "MAIN_REALM": {
+      "formula": "Π(ψ_STANDARD × Δt) × entropy_normal",
+      "description": "Projection standard euclidienne"
+    },
+    "FOREST_GROFI": {
+      "formula": "Π(ψ_FOREST × Δt) × quantum_tree_network",
+      "description": "Projection fractale récursive"
+    },
+    "HYPERSPACE_DMT": {
+      "formula": "Π(ψ_HALLUCINATION × Δt^-1) × syntax_vibration",
+      "description": "Projection non-euclidienne vibrante"
+    },
+    "QUANTUM_REALM": {
+      "formula": "Π(ψ_QUANTUM × |Δt⟩) × superposition_collapse",
+      "description": "Projection quantique superposée"
+    },
+    "VINCE_OPUS_REALM": {
+      "formula": "Π(ψ_NARRATIVE × Δt_broken) × fourth_wall_breach",
+      "description": "Projection narrative méta-fictionnelle"
+    }
+  },
+  "implementation": {
+    "backend_field": "world_formula",
+    "parser_support": "HOTS grammar extended with Π operator",
+    "visual_shader": "Custom shader per world formula",
+    "physics_engine": "Laws derived from formula"
+  }
+}
