@@ -10,6 +10,9 @@ import GrutOntologyViewer from './components/GrutOntologyViewer'
 import WorldStateGraph from './components/WorldStateGraph'
 import NavigationHub from './components/NavigationHub'
 import type { GrutVision, GameState, GameSession, CausalConflict } from './types/index'
+import DashboardMigration from './components/DashboardMigration';
+
+type ViewType = 'navigation' | 'world-state' | 'grut-ontology' | 'quantum' | 'sphinx' | 'runic' | 'legendary' | 'dashboard-migration';
 
 interface PanopticonStats {
   activeGames: number
@@ -32,6 +35,7 @@ const App: React.FC = () => {
   const [showGrutOntology, setShowGrutOntology] = useState(false)
   const [showWorldStateGraph, setShowWorldStateGraph] = useState(false)
   const [showNavigationHub, setShowNavigationHub] = useState(false)
+  const [currentView, setCurrentView] = useState<ViewType>('navigation');
 
   // Charge la vision GRUT depuis le backend
   const loadGrutVision = async () => {

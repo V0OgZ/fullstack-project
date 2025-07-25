@@ -7,3 +7,5 @@
 
   ➜  Local:   http://localhost:8001/
   ➜  Network: http://192.168.1.12:8001/
+3:06:31 AM [vite] hmr update /src/App.tsx
+3:06:39 AM [vite] hmr update /src/App.tsx
