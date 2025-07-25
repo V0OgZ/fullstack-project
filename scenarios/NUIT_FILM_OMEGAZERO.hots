@@ -1,0 +1,85 @@
+# 🎞️ NUIT_FILM_OMEGAZERO.hots
+# Scénario scripté pour le moteur temporel Heroes of Time — première projection incarnée.
+
+VERSION(1.0)
+NAME("Nuit Film OmegaZero - Première Projection Incarnée")
+DESCRIPTION("Première nuit enregistrée par le moteur du monde")
+AUTHOR("OMEGA_ZERO_ARCHIVE")
+
+# 🎞️ CONTEXTE
+# Première nuit enregistrée par le moteur du monde. Le film s'ouvre sur l'arrivée silencieuse d'OmegaZero, 
+# la dislocation des interstices, l'éveil progressif des Manteaux, et la révélation de la Tour d'Ancrage.
+
+# Configuration temporelle
+SET_GLOBAL(film_mode, "PROJECTION_INCARNEE")
+SET_GLOBAL(omega_zero_threat, "ACTIVE")
+SET_GLOBAL(causal_stability, 0.1)
+
+# 🧾 SEQUENCE 01 — Appel du vide
+# @TIME 00:00
+SCENE("silence_intermittent")
+FX(AMBIENT_VOID_FLICKER)
+DIALOGUE("??", "...")
+
+# @TIME 00:04
+ENTITY(OmegaZero, APPEAR, "Interstice_Central")
+FX(PORTAL_GLITCH_OPEN)
+SFX(LOW_SIGNAL_RESIDUAL)
+
+# 🧾 SEQUENCE 02 — Frémissements causals
+# @TIME 00:07
+TRIGGER("Brouillard", EXPAND, LEVEL_4)
+EFFECT("Collapse Prediction Field")
+
+# @TIME 00:08
+ENTITY(Anna_Martel, ENTER, "UnknownPath")
+DIALOGUE(Anna_Martel, "Quelque chose se réveille… ou bien c'est nous.")
+
+# @TIME 00:09
+ENTITY(Jean_Grofignon, SPAWN, "Clé_Oubliée")
+FX(GLITCH_FLASH)
+
+# 🧾 SEQUENCE 03 — Activation des Manteaux
+# @TIME 00:11
+COMMAND("REVEILLE_MANTEAUX")
+EFFECT("TattooFlash")
+ENTITY(Ford, PROJECTION, "Layer_4")
+DIALOGUE(Ford, "Ne clique pas. Parle-lui.")
+
+# 🧾 SEQUENCE 04 — Apparition de la Tour d'Ancrage
+# @TIME 00:14
+ENVIRONMENT(FADE_TO_BLACK)
+FX(ANCHOR_TOWER_REVEAL)
+SFX(RESONANCE_DEEP)
+ENTITY(Tour_Ancrage, PLACE, "Nexus_Fracturé")
+
+# @TIME 00:15
+DIALOGUE(Jean_Grofignon, "Elle a toujours été là.")
+
+# 🧾 SEQUENCE 05 — Fracture
+# @TIME 00:18
+FX(DIMENSION_SPLIT_OPEN)
+COMMAND("LAUNCH_COLLAPSE", "Timeline_AZ_01")
+EFFECT("SuperpositionCollapse")
+
+# @TIME 00:19
+ENTITY(Nyx_Lua, ARRIVE, "Lame d'Avant-Monde")
+DIALOGUE(Nyx_Lua, "Nous ne sommes pas prêts. Mais nous sommes là.")
+
+# 🧾 SEQUENCE 06 — Dernier cadre (Film Freeze)
+# @TIME 00:23
+FREEZE_FRAME()
+ENTITY(OmegaZero, HOLD)
+ENTITY(Tour_Ancrage, GLOWING)
+
+OVERLAY_TEXT("Le monde se souvient de sa première nuit.")
+FADE_OUT(5)
+
+# 🎭 Fin de la première projection incarnée.
+# Ce fichier est à jouer tel quel dans une instance stable du moteur HOTS.
+
+WIN(OMEGA_ZERO)
+ACHIEVEMENT("PREMIERE_PROJECTION_INCARNEE")
+UNLOCK("FILM_DU_MONDE_ACTIVE")
+
+END_SCENARIO() 
