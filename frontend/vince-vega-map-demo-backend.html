@@ -7,253 +7,406 @@
     <style>
         body { 
             background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460);
-            color: #fff; font-family: 'Courier New', monospace; 
-            margin: 0; padding: 20px; min-height: 100vh;
+            color: #fff; 
+            font-family: 'Courier New', monospace; 
+            margin: 0; 
+            padding: 10px; 
+            min-height: 100vh;
         }
         
-        .demo-container { 
-            max-width: 1400px; 
-            margin: 0 auto; 
-        }
-        
-        .main-layout {
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 300px;
+            grid-template-columns: 300px 1fr 250px;
             gap: 20px;
         }
         
-        .left-panel {
-            display: flex;
-            flex-direction: column;
+        /* PANNEAU HÉROS (gauche) */
+        .hero-panel {
+            background: rgba(0,0,0,0.7);
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 15px;
         }
         
+        .hero-portrait {
+            width: 100%;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid #444;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: #666;
+        }
+        
+        .hero-stats {
+            background: rgba(0,0,0,0.5);
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .stat-line {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        
+        .hero-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffd700;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        /* ZONE CENTRALE */
+        .game-area {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        /* Map damier */
         .map-container {
             display: grid;
-            grid-template-columns: repeat(10, 60px);
-            grid-template-rows: repeat(8, 60px);
-            gap: 2px;
-            background: rgba(0,0,0,0.5);
-            padding: 20px;
+            grid-template-columns: repeat(10, 50px);
+            grid-template-rows: repeat(8, 50px);
+            gap: 1px;
+            background: #222;
+            padding: 10px;
+            border: 2px solid #444;
             border-radius: 10px;
-            margin: 20px 0;
             justify-content: center;
         }
         
         .map-cell {
-            width: 60px;
-            height: 60px;
-            background: rgba(0,100,0,0.3);
-            border: 1px solid #444;
-            border-radius: 5px;
+            width: 50px;
+            height: 50px;
+            background: rgba(0,50,0,0.5);
+            border: 1px solid #333;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            transition: all 0.3s;
+            font-size: 20px;
             cursor: pointer;
+            transition: all 0.2s;
             position: relative;
         }
         
         .map-cell:hover {
-            background: rgba(100,100,100,0.3);
-            transform: scale(1.1);
-            z-index: 10;
+            background: rgba(100,100,100,0.5);
+            transform: scale(1.05);
         }
         
-        .hero-arthur { background: rgba(255,215,0,0.5); }
-        .hero-vince { background: rgba(255,68,68,0.5); }
-        .hero-grut { background: rgba(116,75,162,0.5); }
+        /* Classes héros */
+        .hero-arthur { 
+            background: rgba(255,215,0,0.3) !important; 
+            box-shadow: 0 0 10px rgba(255,215,0,0.5);
+        }
+        .hero-vince { 
+            background: rgba(255,68,68,0.3) !important; 
+            box-shadow: 0 0 10px rgba(255,68,68,0.5);
+        }
+        .hero-grut { 
+            background: rgba(116,75,162,0.3) !important; 
+            box-shadow: 0 0 10px rgba(116,75,162,0.5);
+        }
         
+        /* Portail animé */
+        .portal {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, #9400d3, #4b0082);
+            border-radius: 50%;
+            animation: portalPulse 1.5s infinite;
+            z-index: 5;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        @keyframes portalPulse {
+            0% { 
+                transform: translate(-50%, -50%) scale(0.8); 
+                box-shadow: 0 0 10px #9400d3;
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.2); 
+                box-shadow: 0 0 20px #9400d3, 0 0 30px #4b0082;
+            }
+            100% { 
+                transform: translate(-50%, -50%) scale(0.8); 
+                box-shadow: 0 0 10px #9400d3;
+            }
+        }
+        
+        /* Console */
+        .console {
+            background: rgba(0,0,0,0.8);
+            border: 1px solid #00ff00;
+            border-radius: 5px;
+            padding: 10px;
+            height: 150px;
+            overflow-y: auto;
+            font-size: 12px;
+            font-family: 'Consolas', 'Courier New', monospace;
+        }
+        
+        .console-line {
+            margin: 2px 0;
+            color: #00ff00;
+        }
+        
+        .console-line.info { color: #00ffff; }
+        .console-line.warning { color: #ffff00; }
+        .console-line.error { color: #ff0000; }
+        .console-line.success { color: #00ff00; }
+        
+        /* Boutons de contrôle */
         .controls {
             display: flex;
             gap: 10px;
             justify-content: center;
-            margin: 20px 0;
             flex-wrap: wrap;
         }
         
         .btn {
             background: linear-gradient(45deg, #667eea, #764ba2);
-            border: none; color: white; padding: 10px 20px;
-            border-radius: 20px; cursor: pointer; font-size: 14px;
-            transition: all 0.3s;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
         }
         
-        .btn:hover { 
-            transform: scale(1.05); 
+        .btn:hover {
+            transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
         
-        .status-panel {
-            background: rgba(0,0,0,0.5);
-            padding: 15px;
-            border-radius: 10px;
-            margin: 10px 0;
-            text-align: center;
-        }
-        
-        /* Panneau d'actions latéral */
-        .actions-panel {
+        /* MENU SORTS (droite) */
+        .spells-panel {
             background: rgba(0,0,0,0.7);
-            border: 2px solid #667eea;
+            border: 2px solid #764ba2;
             border-radius: 10px;
-            padding: 20px;
-            position: sticky;
-            top: 20px;
+            padding: 15px;
         }
         
-        .actions-panel h3 {
-            color: #667eea;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        .action-category {
-            margin-bottom: 20px;
-        }
-        
-        .action-category h4 {
+        .spells-panel h3 {
             color: #764ba2;
-            margin-bottom: 10px;
-            font-size: 14px;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 16px;
         }
         
-        .action-btn {
+        .spell-btn {
             width: 100%;
             margin-bottom: 8px;
-            padding: 10px;
-            background: rgba(102, 126, 234, 0.2);
-            border: 1px solid #667eea;
+            padding: 8px;
+            background: rgba(118, 75, 162, 0.2);
+            border: 1px solid #764ba2;
             color: white;
-            border-radius: 8px;
+            border-radius: 5px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
             text-align: left;
-            font-size: 13px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
-        .action-btn:hover {
-            background: rgba(102, 126, 234, 0.4);
-            transform: translateX(5px);
+        .spell-btn:hover {
+            background: rgba(118, 75, 162, 0.4);
+            transform: translateX(3px);
         }
         
-        .action-btn.special {
-            background: rgba(255, 68, 68, 0.2);
-            border-color: #ff4444;
+        .spell-icon {
+            font-size: 16px;
         }
         
-        .action-btn.special:hover {
-            background: rgba(255, 68, 68, 0.4);
-        }
-        
-        .wormhole {
-            background: radial-gradient(circle, #ff00ff, #8000ff);
-            animation: pulse 1s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-        
-        .explosion {
-            background: radial-gradient(circle, #ff4444, #ffaa00);
-            animation: explode 0.5s ease-out;
-        }
-        
-        @keyframes explode {
-            0% { transform: scale(1); }
-            50% { transform: scale(2); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        
-        /* Petits objets sur la map */
+        /* Petits objets */
         .map-object {
             position: absolute;
-            font-size: 12px;
+            font-size: 14px;
             bottom: 2px;
             right: 2px;
+            z-index: 2;
         }
         
-        .treasure { color: #FFD700; }
-        .flower { color: #FF69B4; }
-        .tree { color: #228B22; }
+        /* Titre */
+        h1 {
+            text-align: center;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
-    <div class="demo-container">
-        <h1 style="text-align: center;">🗺️ VINCE VEGA MAP DEMO</h1>
-        
-        <div class="status-panel">
-            <div id="status">🛋️ Jean: "Prêt pour la démo map !"</div>
+    <h1>🎮 Heroes of Time - Vince Vega Map Demo</h1>
+    
+    <div class="main-container">
+        <!-- PANNEAU HÉROS -->
+        <div class="hero-panel">
+            <div class="hero-name" id="currentHeroName">⚔️ Arthur Pendragon</div>
+            <div class="hero-portrait" id="heroPortrait">
+                <!-- Zone portrait vide pour l'instant -->
+                <span style="color: #666;">[ Portrait ]</span>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-line">
+                    <span>❤️ HP:</span>
+                    <span id="heroHP">100/100</span>
+                </div>
+                <div class="stat-line">
+                    <span>⚔️ ATK:</span>
+                    <span id="heroATK">25</span>
+                </div>
+                <div class="stat-line">
+                    <span>🛡️ DEF:</span>
+                    <span id="heroDEF">15</span>
+                </div>
+                <div class="stat-line">
+                    <span>⚡ SPEED:</span>
+                    <span id="heroSpeed">10</span>
+                </div>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-line">
+                    <span>👥 Troupes:</span>
+                    <span id="heroTroops">42</span>
+                </div>
+                <div class="stat-line">
+                    <span>🌍 Dimension:</span>
+                    <span id="heroDimension">Prime</span>
+                </div>
+                <div class="stat-line">
+                    <span>💰 Or:</span>
+                    <span id="heroGold">1337</span>
+                </div>
+            </div>
         </div>
         
-        <div class="main-layout">
-            <div class="left-panel">
-                <div class="map-container" id="gameMap">
-                    <!-- Map généré en JS -->
-                </div>
-                
-                <div class="controls">
-                    <button class="btn" onclick="initDemo()">🎬 Init Demo</button>
-                    <button class="btn" onclick="moveArthur()">⚔️ Move Arthur</button>
-                    <button class="btn" onclick="vinceWormhole()">🔫 Vince Wormhole</button>
-                    <button class="btn" onclick="grutVision()">🏛️ GRUT Vision</button>
-                    <button class="btn" onclick="epicBattle()">💥 Epic Battle</button>
-                    <button class="btn" onclick="resetMap()">🔄 Reset</button>
-                </div>
+        <!-- ZONE CENTRALE -->
+        <div class="game-area">
+            <!-- Map -->
+            <div class="map-container" id="gameMap">
+                <!-- Généré en JS -->
             </div>
             
-            <div class="actions-panel">
-                <h3>🎮 Actions Panel</h3>
-                
-                <div class="action-category">
-                    <h4>⚔️ Actions Arthur</h4>
-                    <button class="action-btn" onclick="moveArthur()">→ Avancer</button>
-                    <button class="action-btn" onclick="arthurAttack()">⚔️ Attaquer</button>
-                    <button class="action-btn" onclick="arthurDefend()">🛡️ Défendre</button>
-                </div>
-                
-                <div class="action-category">
-                    <h4>🔫 Actions Vince</h4>
-                    <button class="action-btn" onclick="vinceWormhole()">🌀 Créer Wormhole</button>
-                    <button class="action-btn special" onclick="vinceShoot()">🔫 Reality Shot</button>
-                    <button class="action-btn" onclick="vinceTeleport()">💫 Téléporter</button>
-                </div>
-                
-                <div class="action-category">
-                    <h4>🏛️ Actions GRUT</h4>
-                    <button class="action-btn" onclick="grutVision()">👁️ Vision Omnisciente</button>
-                    <button class="action-btn" onclick="grutAnalyze()">🧠 Analyser</button>
-                    <button class="action-btn" onclick="grutPredict()">🔮 Prédire</button>
-                </div>
-                
-                <div class="action-category">
-                    <h4>🌍 Actions Map</h4>
-                    <button class="action-btn" onclick="addTreasure()">💰 Ajouter Trésor</button>
-                    <button class="action-btn" onclick="addFlowers()">🌸 Ajouter Fleurs</button>
-                    <button class="action-btn" onclick="addTrees()">🌲 Ajouter Arbres</button>
-                </div>
+            <!-- Contrôles -->
+            <div class="controls">
+                <button class="btn" onclick="moveArthur()">⚔️ Move Arthur</button>
+                <button class="btn" onclick="activateVinceGun()">🔫 Vince Gun</button>
+                <button class="btn" onclick="grutVision()">🏛️ GRUT Vision</button>
+                <button class="btn" onclick="switchHero()">🔄 Switch Hero</button>
+                <button class="btn" onclick="resetMap()">♻️ Reset</button>
+            </div>
+            
+            <!-- Console -->
+            <div class="console" id="console">
+                <div class="console-line success">🎮 Heroes of Time - Map Demo Initialized</div>
+                <div class="console-line info">📍 Arthur en position (2,3)</div>
+                <div class="console-line info">📍 Vince en position (7,4)</div>
+                <div class="console-line info">📍 GRUT en position (5,1)</div>
             </div>
         </div>
         
-        <div class="status-panel">
-            <div><strong>Session Active:</strong> session_1753403372496_840</div>
-            <div><strong>Players:</strong> jean_grofignon, grut_omniscient, vince_vega_interdimensional</div>
-            <div><strong>Mode:</strong> TRANSCENDANCE_MODE</div>
+        <!-- MENU SORTS -->
+        <div class="spells-panel">
+            <h3>✨ Sorts Disponibles</h3>
+            
+            <button class="spell-btn" onclick="castFireball()">
+                <span class="spell-icon">🔥</span>
+                <span>Fireball (5 MP)</span>
+            </button>
+            
+            <button class="spell-btn" onclick="castHeal()">
+                <span class="spell-icon">💚</span>
+                <span>Heal (3 MP)</span>
+            </button>
+            
+            <button class="spell-btn" onclick="castTeleport()">
+                <span class="spell-icon">💫</span>
+                <span>Teleport (8 MP)</span>
+            </button>
+            
+            <button class="spell-btn" onclick="castTimeStop()">
+                <span class="spell-icon">⏱️</span>
+                <span>Time Stop (15 MP)</span>
+            </button>
+            
+            <button class="spell-btn" onclick="castPortal()">
+                <span class="spell-icon">🌀</span>
+                <span>Portal (10 MP)</span>
+            </button>
+            
+            <button class="spell-btn" onclick="castQuantumShift()">
+                <span class="spell-icon">🔮</span>
+                <span>Quantum Shift (20 MP)</span>
+            </button>
         </div>
     </div>
 
     <script>
+        // État du jeu
         let gameState = {
             arthur: { x: 2, y: 3 },
             vince: { x: 7, y: 4 },
             grut: { x: 5, y: 1 },
-            wormholes: [],
+            portals: [],
+            currentHero: 'arthur',
             objects: []
         };
         
+        let currentHeroData = {
+            arthur: {
+                name: "⚔️ Arthur Pendragon",
+                hp: 100,
+                maxHp: 100,
+                atk: 25,
+                def: 15,
+                speed: 10,
+                troops: 42,
+                dimension: "Prime",
+                gold: 1337
+            },
+            vince: {
+                name: "🔫 Vince Vega",
+                hp: 80,
+                maxHp: 80,
+                atk: 35,
+                def: 10,
+                speed: 15,
+                troops: 13,
+                dimension: "Pulp",
+                gold: 2500
+            },
+            grut: {
+                name: "🏛️ GRUT Omniscient",
+                hp: 150,
+                maxHp: 150,
+                atk: 20,
+                def: 30,
+                speed: 8,
+                troops: 108,
+                dimension: "6D",
+                gold: 9999
+            }
+        };
+        
+        // Créer la map
         function createMap() {
             const map = document.getElementById('gameMap');
             map.innerHTML = '';
@@ -269,23 +422,32 @@
             }
         }
         
+        // Mettre à jour la map
         function updateMap() {
-            // Clear all
+            // Clear
             document.querySelectorAll('.map-cell').forEach(cell => {
                 cell.innerHTML = '';
                 cell.className = 'map-cell';
             });
             
-            // Place objects first (background)
+            // Objets
             gameState.objects.forEach(obj => {
                 const cell = document.getElementById(`cell-${obj.x}-${obj.y}`);
                 const objSpan = document.createElement('span');
-                objSpan.className = `map-object ${obj.type}`;
+                objSpan.className = 'map-object';
                 objSpan.textContent = obj.icon;
                 cell.appendChild(objSpan);
             });
             
-            // Place heroes
+            // Portails
+            gameState.portals.forEach(portal => {
+                const cell = document.getElementById(`cell-${portal.x}-${portal.y}`);
+                const portalDiv = document.createElement('div');
+                portalDiv.className = 'portal';
+                cell.appendChild(portalDiv);
+            });
+            
+            // Héros
             const arthurCell = document.getElementById(`cell-${gameState.arthur.x}-${gameState.arthur.y}`);
             arthurCell.innerHTML = '⚔️' + arthurCell.innerHTML;
             arthurCell.classList.add('hero-arthur');
@@ -297,73 +459,83 @@
             const grutCell = document.getElementById(`cell-${gameState.grut.x}-${gameState.grut.y}`);
             grutCell.innerHTML = '🏛️' + grutCell.innerHTML;
             grutCell.classList.add('hero-grut');
-            
-            // Place wormholes
-            gameState.wormholes.forEach(wh => {
-                const whCell = document.getElementById(`cell-${wh.x}-${wh.y}`);
-                whCell.innerHTML = '🌀' + whCell.innerHTML;
-                whCell.classList.add('wormhole');
-            });
         }
         
-        function setStatus(message) {
-            document.getElementById('status').innerHTML = message;
+        // Console log
+        function log(message, type = 'info') {
+            const console = document.getElementById('console');
+            const line = document.createElement('div');
+            line.className = `console-line ${type}`;
+            line.textContent = `> ${message}`;
+            console.appendChild(line);
+            console.scrollTop = console.scrollHeight;
         }
         
-        function initDemo() {
-            setStatus('🎬 Jean: "Démo initialisée ! Regardez cette map épique !"');
-            updateMap();
-        }
-        
+        // Actions
         function moveArthur() {
             gameState.arthur.x = Math.min(9, gameState.arthur.x + 1);
-            setStatus('⚔️ Arthur avance avec Excalibur !');
+            log('⚔️ Arthur avance d\'une case', 'info');
             updateMap();
             
-            // Test collision
+            // Check proximité
             if (Math.abs(gameState.arthur.x - gameState.vince.x) <= 1 && 
                 Math.abs(gameState.arthur.y - gameState.vince.y) <= 1) {
-                setTimeout(() => {
-                    setStatus('⚡ Arthur et Vince sont proches ! Combat imminent !');
-                }, 500);
+                log('⚡ Arthur et Vince sont proches !', 'warning');
             }
         }
         
-        function vinceWormhole() {
-            const wh = {
-                x: Math.floor(Math.random() * 10),
-                y: Math.floor(Math.random() * 8)
+        function activateVinceGun() {
+            // Créer un portail
+            const portal = {
+                x: gameState.vince.x + 1,
+                y: gameState.vince.y
             };
-            gameState.wormholes.push(wh);
-            setStatus('🔫 Vince: "Reality Shot!" - Wormhole créé !');
+            gameState.portals.push(portal);
+            
+            log('🔫 Vince: "Reality Shot!" *BANG*', 'success');
+            log('🌀 Un portail violet apparaît !', 'info');
             updateMap();
+            
+            // Retirer le portail après 3 secondes
+            setTimeout(() => {
+                gameState.portals = gameState.portals.filter(p => 
+                    p.x !== portal.x || p.y !== portal.y);
+                log('💨 Le portail se dissipe...', 'info');
+                updateMap();
+            }, 3000);
         }
         
         function grutVision() {
-            setStatus('🏛️ GRUT: "Je vois tout ! 8 formules, 3 timelines, 1 vérité !"');
-            // Highlight all cells briefly
+            log('🏛️ GRUT: "Vision omnisciente activée !"', 'success');
+            log('👁️ GRUT voit 8 formules, 3 timelines, 1 vérité', 'info');
+            
+            // Effet visuel
             document.querySelectorAll('.map-cell').forEach(cell => {
-                cell.style.background = 'rgba(116,75,162,0.3)';
+                cell.style.background = 'rgba(116,75,162,0.2)';
                 setTimeout(() => {
                     cell.style.background = '';
                 }, 1000);
             });
         }
         
-        function epicBattle() {
-            setStatus('💥 BATAILLE ÉPIQUE EN COURS !');
-            const battleX = Math.floor((gameState.arthur.x + gameState.vince.x) / 2);
-            const battleY = Math.floor((gameState.arthur.y + gameState.vince.y) / 2);
-            
-            const battleCell = document.getElementById(`cell-${battleX}-${battleY}`);
-            battleCell.innerHTML = '💥';
-            battleCell.classList.add('explosion');
-            
-            setTimeout(() => {
-                setStatus('🏆 Jean: "Match nul épique ! Tout le monde gagne !"');
-                battleCell.innerHTML = '';
-                battleCell.classList.remove('explosion');
-            }, 2000);
+        function switchHero() {
+            const heroes = ['arthur', 'vince', 'grut'];
+            const currentIndex = heroes.indexOf(gameState.currentHero);
+            gameState.currentHero = heroes[(currentIndex + 1) % 3];
+            updateHeroPanel();
+            log(`🔄 Héros actif: ${currentHeroData[gameState.currentHero].name}`, 'info');
+        }
+        
+        function updateHeroPanel() {
+            const hero = currentHeroData[gameState.currentHero];
+            document.getElementById('currentHeroName').textContent = hero.name;
+            document.getElementById('heroHP').textContent = `${hero.hp}/${hero.maxHp}`;
+            document.getElementById('heroATK').textContent = hero.atk;
+            document.getElementById('heroDEF').textContent = hero.def;
+            document.getElementById('heroSpeed').textContent = hero.speed;
+            document.getElementById('heroTroops').textContent = hero.troops;
+            document.getElementById('heroDimension').textContent = hero.dimension;
+            document.getElementById('heroGold').textContent = hero.gold;
         }
         
         function resetMap() {
@@ -371,89 +543,55 @@
                 arthur: { x: 2, y: 3 },
                 vince: { x: 7, y: 4 },
                 grut: { x: 5, y: 1 },
-                wormholes: [],
+                portals: [],
+                currentHero: 'arthur',
                 objects: []
             };
-            setStatus('🔄 Map réinitialisée !');
+            log('♻️ Map réinitialisée', 'success');
             updateMap();
         }
         
         function cellClick(x, y) {
-            setStatus(`📍 Clic sur (${x}, ${y})`);
+            log(`📍 Clic sur case (${x},${y})`, 'info');
         }
         
-        // Nouvelles fonctions pour le panneau d'actions
-        function arthurAttack() {
-            setStatus('⚔️ Arthur: "Pour Camelot !" *attaque avec Excalibur*');
+        // Sorts
+        function castFireball() {
+            log('🔥 Fireball lancé ! -5 MP', 'warning');
         }
         
-        function arthurDefend() {
-            setStatus('🛡️ Arthur lève son bouclier !');
+        function castHeal() {
+            log('💚 Soin lancé ! +20 HP, -3 MP', 'success');
         }
         
-        function vinceShoot() {
-            setStatus('🔫 Vince: "Say hello to my little friend!" *BANG*');
+        function castTeleport() {
+            log('💫 Téléportation ! -8 MP', 'info');
         }
         
-        function vinceTeleport() {
-            gameState.vince.x = Math.floor(Math.random() * 10);
-            gameState.vince.y = Math.floor(Math.random() * 8);
-            setStatus('💫 Vince se téléporte !');
-            updateMap();
+        function castTimeStop() {
+            log('⏱️ Le temps s\'arrête ! -15 MP', 'warning');
         }
         
-        function grutAnalyze() {
-            setStatus('🧠 GRUT: "Analyse en cours... 42 possibilités détectées !"');
-        }
-        
-        function grutPredict() {
-            setStatus('🔮 GRUT: "Je prédis... un match nul épique !"');
-        }
-        
-        function addTreasure() {
-            const treasure = {
+        function castPortal() {
+            const portal = {
                 x: Math.floor(Math.random() * 10),
-                y: Math.floor(Math.random() * 8),
-                type: 'treasure',
-                icon: '💰'
+                y: Math.floor(Math.random() * 8)
             };
-            gameState.objects.push(treasure);
-            setStatus('💰 Un trésor apparaît !');
+            gameState.portals.push(portal);
+            log('🌀 Portail créé ! -10 MP', 'success');
             updateMap();
         }
         
-        function addFlowers() {
-            for (let i = 0; i < 5; i++) {
-                const flower = {
-                    x: Math.floor(Math.random() * 10),
-                    y: Math.floor(Math.random() * 8),
-                    type: 'flower',
-                    icon: '🌸'
-                };
-                gameState.objects.push(flower);
-            }
-            setStatus('🌸 Des fleurs poussent sur la map !');
-            updateMap();
+        function castQuantumShift() {
+            log('🔮 Shift quantique ! Réalité altérée ! -20 MP', 'error');
         }
         
-        function addTrees() {
-            for (let i = 0; i < 3; i++) {
-                const tree = {
-                    x: Math.floor(Math.random() * 10),
-                    y: Math.floor(Math.random() * 8),
-                    type: 'tree',
-                    icon: '🌲'
-                };
-                gameState.objects.push(tree);
-            }
-            setStatus('🌲 Une forêt apparaît !');
-            updateMap();
-        }
-        
-        // Init on load
+        // Init
         window.onload = () => {
             createMap();
-            initDemo();
+            updateMap();
+            updateHeroPanel();
+            log('🎬 Jean: "La démo est prête !"', 'success');
         };
     </script>
 </body>
