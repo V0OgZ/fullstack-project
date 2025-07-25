@@ -1,0 +1,262 @@
+{
+  "extraction_formules_laboratoire": {
+    "version": "1.0_LABORATOIRE_QUANTIQUE",
+    "date_extraction": "2025-01-27",
+    "sources": [
+      "scenarios/laboratoire_debutant_walter.hots",
+      "scenarios/physics-experiments/einstein/double_slit_experiment.hots", 
+      "scenarios/physics-experiments/heisenberg/quantum_entanglement.hots"
+    ],
+    "total_formules": 23,
+    "walter_lab_approved": true
+  },
+
+  "formules_walter_lab": {
+    "source": "laboratoire_debutant_walter.hots",
+    "description": "Formules du laboratoire débutant Walter avec assertions physiques",
+    "count": 8,
+    "formules": [
+      {
+        "id": "axisi_basic_use",
+        "formule": "ARTHUR USE AXISI_BASIC → (3,2)",
+        "type": "CAUSAL_ACTION",
+        "metriques": {
+          "paradoxRisk": "0.1-0.2",
+          "temporalStability": "> 0.8", 
+          "affectedRadius": "1.0-1.5"
+        },
+        "assertion": "paradoxRisk < 0.3",
+        "fail_message": "AXISI trop puissant pour débutant!"
+      },
+      {
+        "id": "lentus_basic_use", 
+        "formule": "ARTHUR USE LENTUS_BASIC → (1,2)",
+        "type": "CAUSAL_ACTION",
+        "metriques": {
+          "paradoxRisk": "0.1-0.2",
+          "temporalStability": "> 0.8",
+          "affectedRadius": "1.0-1.5"
+        },
+        "assertion": "temporalStability > 0.7",
+        "fail_message": "LENTUS déstabilise trop la timeline!"
+      },
+      {
+        "id": "cross_interaction_basic",
+        "formule": "ARTHUR USE BOTH AXISI_BASIC + LENTUS_BASIC → CROSS_INTERACTION",
+        "type": "COMBINED_CAUSAL",
+        "metriques": {
+          "paradoxRisk": "0.2-0.4",
+          "causalInterference": "< 0.5",
+          "combinedEffect": "STABLE_INTERACTION"
+        },
+        "assertion": "paradoxRisk < 0.5 AND causalInterference < 0.6",
+        "fail_message": "Interaction trop dangereuse pour débutant!"
+      },
+      {
+        "id": "treasure_access_conditional",
+        "formule": "IF ALL_ASSERTIONS_PASS: ARTHUR MOV → (3,3) + USE TREASURE_SIMPLE",
+        "type": "CONDITIONAL_ACCESS",
+        "result": "+10 experience, level up possible"
+      },
+      {
+        "id": "physics_validation_strict",
+        "formule": "PHYSICS_VALIDATION: STRICT",
+        "type": "ENGINE_MODE",
+        "description": "Mode strict pour calculs physiques réels"
+      },
+      {
+        "id": "causal_requirement_treasure",
+        "formule": "CAUSAL_REQUIREMENT: paradoxRisk < 0.3",
+        "type": "ACCESS_CONDITION",
+        "object": "Coffre_Basique"
+      }
+    ]
+  },
+
+  "formules_einstein_double_fente": {
+    "source": "scenarios/physics-experiments/einstein/double_slit_experiment.hots",
+    "description": "Formules expérience double fente - dualité onde-particule",
+    "count": 8,
+    "formules": [
+      {
+        "id": "psi_001_photon_superposition",
+        "formule": "ψ001: ⊙(PHOTON @2,5 ⟶ SUPERPOSITION(fente_A + fente_B))",
+        "type": "QUANTUM_PSI_STATE",
+        "description": "Superposition quantique du photon traversant 2 fentes"
+      },
+      {
+        "id": "psi_002_wave_interference",
+        "formule": "ψ002: ⊙(WAVE_FUNCTION ⟶ INTERFERENCE(@12,5))",
+        "type": "QUANTUM_PSI_STATE", 
+        "description": "Fonction d'onde créant pattern d'interférence"
+      },
+      {
+        "id": "psi_003_observation_collapse",
+        "formule": "ψ003: Π(OBSERVATION) ⇒ †ψ001 → COLLAPSE(particle_state)",
+        "type": "QUANTUM_COLLAPSE",
+        "description": "Observation provoque collapse en particule"
+      },
+      {
+        "id": "emit_photon",
+        "formule": "EMIT_PHOTON(@2,5) → DIRECTION(east)",
+        "type": "QUANTUM_EMISSION",
+        "initial_state": "SUPERPOSITION(path_A + path_B)"
+      },
+      {
+        "id": "quantum_split", 
+        "formule": "IF fente_A.open AND fente_B.open: QUANTUM_SPLIT(photon) → [path_A, path_B]",
+        "type": "QUANTUM_BRANCHING",
+        "condition": "MAINTAIN_COHERENCE(wave_function)"
+      },
+      {
+        "id": "interference_pattern_show",
+        "formule": "IF no_observation: SHOW_INTERFERENCE_PATTERN()",
+        "type": "QUANTUM_DISPLAY",
+        "alternative": "IF observation_active: COLLAPSE_TO_PARTICLE()"
+      },
+      {
+        "id": "mac_zehnder_create",
+        "formule": "CREATE_ITEM('Mac_Zehnder_Interferometer', @5,5)",
+        "type": "EQUIPMENT_SPAWN",
+        "artifact_reference": "mach_zehnder_interferometer.json"
+      },
+      {
+        "id": "quantum_vision_hero",
+        "formule": "HERO('Einstein_Observer', @1,5) WITH_ABILITY('quantum_vision')",
+        "type": "HERO_SPAWN_ABILITY",
+        "special_power": "Basculer entre observation/non-observation"
+      }
+    ]
+  },
+
+  "formules_heisenberg_intrication": {
+    "source": "scenarios/physics-experiments/heisenberg/quantum_entanglement.hots", 
+    "description": "Formules intrication quantique et violation Bell",
+    "count": 12,
+    "formules": [
+      {
+        "id": "psi_001_epr_singlet",
+        "formule": "ψ001: ⊙(PAIRE_EPR ⟶ |↑↓⟩ - |↓↑⟩)/√2",
+        "type": "QUANTUM_PSI_STATE",
+        "description": "État singulet EPR - intrication maximale"
+      },
+      {
+        "id": "psi_002_instant_correlation",
+        "formule": "ψ002: Π(MEASURE_ALICE) ⇒ †ψ001 → INSTANT_CORRELATION(Bob)",
+        "type": "QUANTUM_NONLOCALITY",
+        "description": "Mesure Alice provoque corrélation instantanée chez Bob"
+      },
+      {
+        "id": "psi_003_bell_violation",
+        "formule": "ψ003: ⊙(NON_LOCALITY ⟶ CORRELATION(A,B) > CLASSICAL_LIMIT)",
+        "type": "QUANTUM_PSI_STATE",
+        "description": "Corrélations quantiques dépassent limite classique"
+      },
+      {
+        "id": "psi_004_bell_state",
+        "formule": "ψ004: BELL_STATE: (|00⟩ + |11⟩)/√2",
+        "type": "QUANTUM_PSI_STATE",
+        "description": "État de Bell maximalement intriqué"
+      },
+      {
+        "id": "emit_entangled_pairs",
+        "formule": "SOURCE_EPR EMIT(photon_pair) → ENTANGLED_STATE",
+        "type": "QUANTUM_EMISSION",
+        "setup": "SEPARATE_PHOTONS(distance = 10_units)"
+      },
+      {
+        "id": "simultaneous_measurement",
+        "formule": "SIMULTANEOUS_MEASUREMENT(): IF Alice_measures(↑) THEN Bob_measures(↓)",
+        "type": "QUANTUM_CORRELATION",
+        "result": "PERFECT_ANTICORRELATION",
+        "correlation": "C(0°,0°) = -1"
+      },
+      {
+        "id": "bell_inequality_test",
+        "formule": "FOR angles IN [(0°,0°), (0°,45°), (45°,0°), (45°,45°)]: MEASURE_CORRELATION(θ_A, θ_B)",
+        "type": "QUANTUM_PROTOCOL",
+        "purpose": "CALCULATE_S_PARAMETER()"
+      },
+      {
+        "id": "chsh_parameter_calc",
+        "formule": "S = |E(0°,0°) - E(0°,45°) + E(45°,0°) + E(45°,45°)|",
+        "type": "QUANTUM_CALCULATION",
+        "classical_limit": "S ≤ 2",
+        "quantum_limit": "S ≤ 2√2 ≈ 2.828",
+        "violation": "S ≈ 2.828 > 2"
+      },
+      {
+        "id": "action_fantome",
+        "formule": "Alice CHANGE_ANGLE(θ_A = 90°) INSTANTLY → Bob OBSERVE_CORRELATION() → IMMEDIATE_CHANGE",
+        "type": "QUANTUM_NONLOCALITY",
+        "property": "DISTANCE_IRRELEVANT",
+        "einstein_objection": "Action fantôme à distance !"
+      },
+      {
+        "id": "epr_correlation_formula",
+        "formule": "C(θ_A, θ_B) = -cos(θ_A - θ_B)",
+        "type": "PHYSICS_EQUATION",
+        "description": "Corrélation quantique selon angles détecteurs"
+      },
+      {
+        "id": "entanglement_fidelity",
+        "formule": "F = ⟨ψ_ideal|ρ_measured|ψ_ideal⟩",
+        "type": "PHYSICS_EQUATION",
+        "description": "Fidélité de l'état intriqué mesuré"
+      },
+      {
+        "id": "quantum_communication",
+        "formule": "Communication quantique instantanée entre héros",
+        "type": "GAME_MECHANIC",
+        "applications": [
+          "Téléportation quantique d'objets",
+          "Cryptographie quantique inviolable", 
+          "Détection d'espionnage par décohérence"
+        ]
+      }
+    ]
+  },
+
+  "metriques_laboratoire": {
+    "walter_lab": {
+      "paradoxRisk": "0.1-0.5 (contrôlé)",
+      "temporalStability": "0.7-0.8+ (stable)",
+      "affectedRadius": "1.0-1.5 (local)",
+      "causalInterference": "<0.6 (acceptable)"
+    },
+    "einstein_double_fente": {
+      "wave_coherence": "0.95",
+      "interference_visibility": "0.87", 
+      "collapse_probability": "1.0 (si observé)"
+    },
+    "heisenberg_intrication": {
+      "bell_parameter_S": "2.828 (violation quantique)",
+      "correlation_strength": "|C(θ_A, θ_B)|",
+      "entanglement_fidelity": "F proche de 1.0",
+      "decoherence_time": "T₂* (cohérence)",
+      "violation_significance": "(S_measured - 2)/σ"
+    }
+  },
+
+  "implementation_status": {
+    "walter_lab_formules": "🔄 PARTIELLEMENT_IMPLÉMENTÉ",
+    "einstein_formules": "❌ NON_IMPLÉMENTÉ", 
+    "heisenberg_formules": "❌ NON_IMPLÉMENTÉ",
+    "total_nouvelles": 23,
+    "priorite": "HAUTE - Laboratoires quantiques essentiels"
+  },
+
+  "integration_notes": {
+    "magic_formula_engine": "Doit supporter états ψ quantiques",
+    "physics_mode": "Modes QUANTUM_LAB, WAVE_PARTICLE_DUALITY, NON_LOCAL_CORRELATIONS",
+    "scenarios_ready": "3 scénarios lab prêts pour tests",
+    "hero_abilities": "quantum_vision, polarization_detection nécessaires"
+  },
+
+  "test_recommendations": {
+    "test_walter_lab": "Priorité 1 - Assertions physiques",
+    "test_double_fente": "Priorité 2 - Superposition/collapse", 
+    "test_intrication": "Priorité 3 - Corrélations non-locales",
+    "test_integration": "Vérifier compatibilité avec formules Tier 3-4"
+  }
+} 

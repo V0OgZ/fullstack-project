@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 🧪 WALTER VIETNAM SERVICE - Moteur Principal des Formules Magiques
@@ -34,12 +35,19 @@ public class MagicFormulaEngine {
     @Autowired
     private FormulaTranslationService translationService;
     
+    // 🧠 JEAN FUSION: Service de persistance pour métadonnées
+    private static final Map<String, Map<String, Object>> HERO_METADATA = new ConcurrentHashMap<>();
+    
+    // 🎖️ WALTER VIETNAM: Service pour persistance
+    @Autowired
+    private GameService gameService;
+    
     // 🎖️ WALTER VIETNAM TRACKING
     private Map<String, Integer> formulaExecutionCounts = new HashMap<>();
     private Map<String, Long> formulaExecutionTimes = new HashMap<>();
     private int totalWalterFlashbacks = 0;
     
-    // 🔮 FORMULES SIMPLES POUR TESTS (40 formules - CATÉGORIE A COMPLÈTE)
+    // 🔮 FORMULES SIMPLES POUR TESTS (64 formules - TIER 3-4 AJOUTÉES)
     private static final List<String> SIMPLE_TEST_FORMULAS = Arrays.asList(
         "MODIFY_ENERGY", "TELEPORT_HERO", "HEAL_HERO", "DAMAGE_ENEMY", "CREATE_SHIELD",
         "CREATE_EFFECT", "AMPLIFY", "CONSTRUCTIVE", "DESTRUCTIVE", "COLLAPSE_TEMPORAL_STATES",
@@ -50,7 +58,21 @@ public class MagicFormulaEngine {
         "SCROLL_CREATE", "GOLD_MULTIPLY", "RESOURCE_GENERATE", "BUILDING_ACCELERATE", 
         "UNIT_SUMMON", "CREATURE_CHARM", "MIND_CONTROL", "FEAR_EFFECT", "STUN_EFFECT", 
         "SLEEP_EFFECT", "FORCE_COLLAPSE_ALL",
-        "EXCALIBUR_BANKAI", "BATTLE_HEROES", "PANORAMIX_CAULDRON"
+        "EXCALIBUR_BANKAI", "BATTLE_HEROES", "PANORAMIX_CAULDRON",
+        // 🔥 GRUT TIER 1 - FORMULES PURES
+        "ENERGY_ACCUMULATE", "RELEASE_STORED_ENERGY", "CALCULATE_DAMAGE",
+        // 🎯 TIER 3-4 FORMULES INTERMÉDIAIRES (17 nouvelles)
+        "REFLECT_MAGIC_DAMAGE", "AUTO_COUNTER_SPELL", "LEARN_FROM_DEFEATS", "COPY_ENEMY_ABILITY",
+        "SHOW_SUCCESS_PROBABILITY", "BOOST_SUCCESS_CHANCE", "STORE_BLOCKED_ATTACKS", "RELEASE_STORED_ATTACKS",
+        "DIMENSIONAL_STEP", "GHOST_MODE", "EVOLVING_SPELLS", "DISCOVER_NEW_SPELL", "UPGRADE_SPELL",
+        "TEAM_ACCURACY_BOOST", "COORDINATED_ATTACK",
+        // 🚨 CALIFORNIE DANGER ZONE - THE SHARD & SOURCE FORMULES
+        "THE_SHARD", "COMPILE_JAVA_RUNTIME", "INIT_WORLD", "TRANSFER_HERO", "SNAPSHOT_WORLD", "DELETE_WORLD",
+        // 🛋️ JEAN MODE LITTÉRAIRE - SORTS DE PRÉCÉDENCE
+        "SORT_DE_PRECEDENCE", "MODE_LITTERAIRE", "PLANQUER_MOTEUR", "INSTANCE_ISOLEE",
+        // 🏛️ GRUT TRANSCENDANCE - OBJETS RÉVÉLATION 6ÈME DIMENSION
+        "GRUT_VISION_OMNISCIENTE", "PASSERELLE_INSTANCES_VINCE_VEGA", "CODEX_OPUS_BOOTSTRAP_TRANSCENDANT", 
+        "CANAPÉ_COSMIQUE_JEAN_TRANSCENDANT", "SOURCE_TRANSCENDANTE_OMEGA_PROTECTION"
     );
     
     /**
@@ -233,6 +255,103 @@ public class MagicFormulaEngine {
                 
             case "PANORAMIX_CAULDRON":
                 return executePanoramixCauldron(context);
+                
+            // 🔥 GRUT TIER 1 - FORMULES PURES
+            case "ENERGY_ACCUMULATE":
+                return executeEnergyAccumulate(context);
+                
+            case "RELEASE_STORED_ENERGY":
+                return executeReleaseStoredEnergy(context);
+                
+            case "CALCULATE_DAMAGE":
+                return executeCalculateDamage(context);
+                
+            // 🎯 TIER 3-4 FORMULES INTERMÉDIAIRES
+            case "REFLECT_MAGIC_DAMAGE":
+                return executeReflectMagicDamage(context);
+                
+            case "AUTO_COUNTER_SPELL":
+                return executeAutoCounterSpell(context);
+                
+            case "LEARN_FROM_DEFEATS":
+                return executeLearnFromDefeats(context);
+                
+            case "COPY_ENEMY_ABILITY":
+                return executeCopyEnemyAbility(context);
+                
+            case "SHOW_SUCCESS_PROBABILITY":
+                return executeShowSuccessProbability(context);
+                
+            case "BOOST_SUCCESS_CHANCE":
+                return executeBoostSuccessChance(context);
+                
+            case "STORE_BLOCKED_ATTACKS":
+                return executeStoreBlockedAttacks(context);
+                
+            case "RELEASE_STORED_ATTACKS":
+                return executeReleaseStoredAttacks(context);
+                
+            case "DIMENSIONAL_STEP":
+                return executeDimensionalStep(context);
+                
+            case "GHOST_MODE":
+                return executeGhostMode(context);
+                
+            case "EVOLVING_SPELLS":
+                return executeEvolvingSpells(context);
+                
+            case "DISCOVER_NEW_SPELL":
+                return executeDiscoverNewSpell(context);
+                
+            case "UPGRADE_SPELL":
+                return executeUpgradeSpell(context);
+                
+            case "TEAM_ACCURACY_BOOST":
+                return executeTeamAccuracyBoost(context);
+                
+            case "COORDINATED_ATTACK":
+                return executeCoordinatedAttack(context);
+                
+            // 🚨 CALIFORNIE DANGER ZONE - THE SHARD COMPILATION RUNTIME
+            case "THE_SHARD":
+                return executeTheShardCompilation(context);
+                
+            case "COMPILE_JAVA_RUNTIME":
+                return executeCompileJavaRuntime(context);
+                
+            case "INIT_WORLD":
+                return executeInitWorld(context);
+                
+            case "TRANSFER_HERO":
+                return executeTransferHero(context);
+                
+            case "SNAPSHOT_WORLD":
+                return executeSnapshotWorld(context);
+                
+            case "DELETE_WORLD":
+                return executeDeleteWorld(context);
+                
+            // 🛋️ JEAN MODE LITTÉRAIRE - SORTS DE PRÉCÉDENCE
+            case "SORT_DE_PRECEDENCE":
+                return executeSortDePrecedence(context);
+            case "MODE_LITTERAIRE":
+                return executeModeLitteraire(context);
+            case "PLANQUER_MOTEUR":
+                return executePlanquerMoteur(context);
+            case "INSTANCE_ISOLEE":
+                return executeInstanceIsolee(context);
+                
+            // 🏛️ GRUT TRANSCENDANCE - OBJETS RÉVÉLATION 6ÈME DIMENSION
+            case "GRUT_VISION_OMNISCIENTE":
+                return executeGrutVisionOmnisciente(context);
+            case "PASSERELLE_INSTANCES_VINCE_VEGA":
+                return executePasserelleInstancesVinceVega(context);
+            case "CODEX_OPUS_BOOTSTRAP_TRANSCENDANT":
+                return executeCodexOpusBootstrapTranscendant(context);
+            case "CANAPÉ_COSMIQUE_JEAN_TRANSCENDANT":
+                return executeCanapéCosmiqueJeanTranscendant(context);
+            case "SOURCE_TRANSCENDANTE_OMEGA_PROTECTION":
+                return executeSourceTranscendanteOmegaProtection(context);
                 
             default:
                 return FormulaResult.error("Formule simple inconnue: " + formula);
@@ -819,5 +938,635 @@ public class MagicFormulaEngine {
         }
         
         return results;
+    }
+
+    /**
+     * �� NOUVELLES FORMULES TIER 3-4 - PHASE 1 CRITIQUE
+     */
+    private FormulaResult executeEnergyAccumulate(GameContext context) {
+        // 🔥 GRUT TIER 1 - PURE FUNCTION
+        // Input: currentEnergy → Output: newEnergy (pas d'état serveur)
+        
+        int currentEnergy = context.getMetadata().containsKey("storedEnergy") ? 
+            (Integer) context.getMetadata().get("storedEnergy") : 0;
+        
+        // 🎯 GRUT PURE CALCULATION
+        return calculateEnergyAccumulate(currentEnergy);
+    }
+    
+    // 🔥 GRUT TIER 1 - FORMULE PURE EXTRACTÉE
+    public FormulaResult calculateEnergyAccumulate(int currentEnergy) {
+        int energyPerTurn = 2;
+        int maxEnergy = 50;
+        int newEnergy = Math.min(currentEnergy + energyPerTurn, maxEnergy);
+        double efficiency = (double) newEnergy / maxEnergy;
+        
+        return FormulaResult.success(
+            String.format("🔋 Énergie: %d → %d (+%d) [%.1f%%] 🎯 GRUT TIER 1 PURE", 
+                currentEnergy, newEnergy, energyPerTurn, efficiency * 100),
+            Map.of(
+                "inputEnergy", currentEnergy,
+                "outputEnergy", newEnergy,
+                "energyGained", energyPerTurn,
+                "maxEnergy", maxEnergy,
+                "efficiency", efficiency,
+                "isMaxReached", newEnergy >= maxEnergy,
+                "tier", "TIER_1_PURE",
+                "stateless", true
+            ),
+            "GRUT_ENERGY_ACCUMULATE_PURE"
+        );
+    }
+    
+    private FormulaResult executeReleaseStoredEnergy(GameContext context) {
+        // RELEASE_STORED_ENERGY(boost_next_spell)
+        // 🎯 GRUT STATELESS: Récupérer l'énergie depuis le context de la requête
+        
+        int storedEnergy = context.getMetadata().containsKey("storedEnergy") ? 
+            (Integer) context.getMetadata().get("storedEnergy") : 0;
+        
+        if (storedEnergy <= 0) {
+            return FormulaResult.error("⚠️ Aucune énergie stockée à libérer", "NO_STORED_ENERGY");
+        }
+        
+        // Calcul du boost basé sur l'énergie stockée
+        double spellBoostMultiplier = 1.0 + (storedEnergy * 0.02); // +2% par point d'énergie
+        
+        // 🎯 GRUT STATELESS: Retourner le boost calculé, le client gère l'état !
+        
+        return FormulaResult.success(
+            "⚡ Énergie libérée ! Prochain sort boosté x" + String.format("%.2f", spellBoostMultiplier) + " - 🎯 STATELESS: Renvoyez storedEnergy=0 dans la prochaine requête !",
+            Map.of(
+                "energyReleased", storedEnergy,
+                "spellBoostMultiplier", spellBoostMultiplier,
+                "storedEnergy", 0, // 🎯 GRUT: Énergie consommée = 0
+                "boostDuration", 1,
+                "tier", "TIER_1_STATELESS"
+            ),
+            "GRUT_RELEASE_STORED_ENERGY"
+        );
+    }
+    
+    // ========================================
+    // 🎯 TIER 3-4 FORMULES INTERMÉDIAIRES
+    // ========================================
+    
+    private FormulaResult executeReflectMagicDamage(GameContext context) {
+        // REFLECT_MAGIC_DAMAGE(30_percent)
+        double reflectionPercent = 30.0;
+        
+        return FormulaResult.success(
+            "🪞 Réflexion Magique activée - " + reflectionPercent + "% des dégâts magiques renvoyés",
+            Map.of(
+                "reflectionPercent", reflectionPercent,
+                "type", "passive_defense",
+                "tier", 3,
+                "duration", "permanent"
+            ),
+            "TIER3_REFLECT_MAGIC"
+        );
+    }
+    
+    private FormulaResult executeAutoCounterSpell(GameContext context) {
+        // AUTO_COUNTER_SPELL(20_percent_chance)
+        double counterChance = 20.0;
+        boolean triggered = Math.random() < (counterChance / 100.0);
+        
+        return FormulaResult.success(
+            "⚡ Contre-Sort Automatique - " + (triggered ? "DÉCLENCHÉ !" : "En attente...") + " (" + counterChance + "% chance)",
+            Map.of(
+                "counterChance", counterChance,
+                "triggered", triggered,
+                "type", "reactive_defense",
+                "tier", 3,
+                "limitation", "1_per_combat"
+            ),
+            "TIER3_AUTO_COUNTER"
+        );
+    }
+    
+    private FormulaResult executeLearnFromDefeats(GameContext context) {
+        // LEARN_FROM_DEFEATS(+1_attack_per_3_defeats)
+        int defeatsCount = context.getMetadata().containsKey("defeatsCount") ? 
+            (Integer) context.getMetadata().get("defeatsCount") : 0;
+        int attackBonus = defeatsCount / 3;
+        
+        return FormulaResult.success(
+            "📚 Apprentissage de Combat - Bonus attaque: +" + attackBonus + " (basé sur " + defeatsCount + " défaites)",
+            Map.of(
+                "defeatsCount", defeatsCount,
+                "attackBonus", attackBonus,
+                "type", "progressive_enhancement",
+                "tier", 3,
+                "formula", "+1_attack_per_3_defeats"
+            ),
+            "TIER3_LEARN_DEFEATS"
+        );
+    }
+    
+    private FormulaResult executeCopyEnemyAbility(GameContext context) {
+        // COPY_ENEMY_ABILITY(last_used)
+        String lastEnemyAbility = context.getMetadata().containsKey("lastEnemyAbility") ? 
+            (String) context.getMetadata().get("lastEnemyAbility") : "Aucune";
+        
+        return FormulaResult.success(
+            "🎭 Technique Copiée: " + lastEnemyAbility,
+            Map.of(
+                "copiedAbility", lastEnemyAbility,
+                "cost", 30,
+                "cooldown", 6,
+                "type", "ability_copy",
+                "tier", 3,
+                "limitation", "one_at_time"
+            ),
+            "TIER3_COPY_ABILITY"
+        );
+    }
+    
+    private FormulaResult executeShowSuccessProbability(GameContext context) {
+        // SHOW_SUCCESS_PROBABILITY(all_actions)
+        Map<String, Double> probabilities = Map.of(
+            "attack", 75.0,
+            "spell", 85.0,
+            "movement", 95.0,
+            "defense", 80.0
+        );
+        
+        return FormulaResult.success(
+            "🔮 Vision Probabiliste - Chances de réussite révélées",
+            Map.of(
+                "probabilities", probabilities,
+                "type", "foresight",
+                "tier", 4,
+                "passive", true
+            ),
+            "TIER4_SUCCESS_PROBABILITY"
+        );
+    }
+    
+    private FormulaResult executeBoostSuccessChance(GameContext context) {
+        // BOOST_SUCCESS_CHANCE(+25_percent, next_action)
+        double boost = 25.0;
+        
+        return FormulaResult.success(
+            "⚡ Ajustement Temporel - Prochaine action boostée de +" + boost + "%",
+            Map.of(
+                "successBoost", boost,
+                "cost", 40,
+                "cooldown", 5,
+                "type", "temporal_adjustment",
+                "tier", 4,
+                "target", "next_action"
+            ),
+            "TIER4_BOOST_SUCCESS"
+        );
+    }
+    
+    private FormulaResult executeStoreBlockedAttacks(GameContext context) {
+        // STORE_BLOCKED_ATTACKS(max=3)
+        int storedAttacks = context.getMetadata().containsKey("storedAttacks") ? 
+            (Integer) context.getMetadata().get("storedAttacks") : 0;
+        int maxStored = 3;
+        
+        return FormulaResult.success(
+            "🛡️ Stockage d'Attaque - " + storedAttacks + "/" + maxStored + " attaques stockées",
+            Map.of(
+                "storedAttacks", storedAttacks,
+                "maxStored", maxStored,
+                "type", "temporal_storage",
+                "tier", 4,
+                "passive", true
+            ),
+            "TIER4_STORE_ATTACKS"
+        );
+    }
+    
+    private FormulaResult executeReleaseStoredAttacks(GameContext context) {
+        // RELEASE_STORED_ATTACKS(combined_damage)
+        int storedAttacks = context.getMetadata().containsKey("storedAttacks") ? 
+            (Integer) context.getMetadata().get("storedAttacks") : 0;
+        int combinedDamage = storedAttacks * 25; // 25 dégâts par attaque stockée
+        
+        return FormulaResult.success(
+            "💥 Riposte Différée - " + storedAttacks + " attaques libérées (" + combinedDamage + " dégâts combinés)",
+            Map.of(
+                "storedAttacks", storedAttacks,
+                "combinedDamage", combinedDamage,
+                "cost", 25,
+                "cooldown", 3,
+                "type", "temporal_release",
+                "tier", 4,
+                "newStoredAttacks", 0
+            ),
+            "TIER4_RELEASE_ATTACKS"
+        );
+    }
+    
+    private FormulaResult executeDimensionalStep(GameContext context) {
+        // DIMENSIONAL_STEP(range=5, ignore_obstacles)
+        int range = 5;
+        
+        return FormulaResult.success(
+            "🌀 Pas Dimensionnel - Téléportation jusqu'à " + range + " cases (ignore obstacles)",
+            Map.of(
+                "range", range,
+                "cost", 35,
+                "cooldown", 4,
+                "type", "dimensional_movement",
+                "tier", 4,
+                "ignoreObstacles", true
+            ),
+            "TIER4_DIMENSIONAL_STEP"
+        );
+    }
+    
+    private FormulaResult executeGhostMode(GameContext context) {
+        // GHOST_MODE(duration=2_turns, no_collision)
+        int duration = 2;
+        
+        return FormulaResult.success(
+            "👻 Traversée Fantôme - Intangible pendant " + duration + " tours",
+            Map.of(
+                "duration", duration,
+                "cost", 50,
+                "cooldown", 8,
+                "type", "phase_shift",
+                "tier", 4,
+                "noCollision", true,
+                "cannotAttack", true
+            ),
+            "TIER4_GHOST_MODE"
+        );
+    }
+    
+    private FormulaResult executeEvolvingSpells(GameContext context) {
+        // EVOLVING_SPELLS(+5_percent_per_use, max=50_percent)
+        int spellUses = context.getMetadata().containsKey("spellUses") ? 
+            (Integer) context.getMetadata().get("spellUses") : 0;
+        double evolutionBonus = Math.min(spellUses * 5.0, 50.0);
+        
+        return FormulaResult.success(
+            "📜 Sorts Évolutifs - Bonus actuel: +" + evolutionBonus + "% (" + spellUses + " utilisations)",
+            Map.of(
+                "spellUses", spellUses,
+                "evolutionBonus", evolutionBonus,
+                "maxBonus", 50.0,
+                "type", "progressive_enhancement",
+                "tier", 4,
+                "passive", true
+            ),
+            "TIER4_EVOLVING_SPELLS"
+        );
+    }
+    
+    private FormulaResult executeDiscoverNewSpell(GameContext context) {
+        // DISCOVER_NEW_SPELL(every_10_casts)
+        int totalCasts = context.getMetadata().containsKey("totalCasts") ? 
+            (Integer) context.getMetadata().get("totalCasts") : 0;
+        boolean newSpellUnlocked = (totalCasts % 10 == 0) && (totalCasts > 0);
+        
+        String[] possibleSpells = {"Fireball", "Lightning Bolt", "Ice Shard", "Heal", "Shield", "Teleport"};
+        String newSpell = newSpellUnlocked ? possibleSpells[totalCasts / 10 % possibleSpells.length] : null;
+        
+        return FormulaResult.success(
+            "🔍 Découverte Magique - " + (newSpellUnlocked ? "Nouveau sort: " + newSpell : "Progression: " + (totalCasts % 10) + "/10"),
+            Map.of(
+                "totalCasts", totalCasts,
+                "newSpellUnlocked", newSpellUnlocked,
+                "newSpell", newSpell,
+                "type", "spell_discovery",
+                "tier", 4,
+                "trigger", "every_10_casts"
+            ),
+            "TIER4_DISCOVER_SPELL"
+        );
+    }
+    
+    private FormulaResult executeUpgradeSpell(GameContext context) {
+        // UPGRADE_SPELL(tier_plus_1)
+        String spellToUpgrade = context.getMetadata().containsKey("targetSpell") ? 
+            (String) context.getMetadata().get("targetSpell") : "Fireball";
+        
+        return FormulaResult.success(
+            "⬆️ Métamorphose Magique - " + spellToUpgrade + " → " + spellToUpgrade + " II (Tier +1)",
+            Map.of(
+                "originalSpell", spellToUpgrade,
+                "upgradedSpell", spellToUpgrade + " II",
+                "cost", 60,
+                "cooldown", 10,
+                "type", "spell_upgrade",
+                "tier", 4,
+                "limitation", "1_per_grimoire"
+            ),
+            "TIER4_UPGRADE_SPELL"
+        );
+    }
+    
+    private FormulaResult executeTeamAccuracyBoost(GameContext context) {
+        // TEAM_ACCURACY_BOOST(+10_percent, radius=3)
+        double accuracyBoost = 10.0;
+        int radius = 3;
+        
+        return FormulaResult.success(
+            "🎯 Boost d'Équipe - Tous les alliés dans " + radius + " cases gagnent +" + accuracyBoost + "% de précision",
+            Map.of(
+                "accuracyBoost", accuracyBoost,
+                "radius", radius,
+                "type", "team_enhancement",
+                "tier", 3,
+                "passive", true
+            ),
+            "TIER3_TEAM_ACCURACY"
+        );
+    }
+    
+    private FormulaResult executeCoordinatedAttack(GameContext context) {
+        // COORDINATED_ATTACK(+50_percent_damage)
+        double damageBoost = 50.0;
+        
+        return FormulaResult.success(
+            "⚔️ Attaque Coordonnée - Prochain allié qui attaque la même cible: +" + damageBoost + "% dégâts",
+            Map.of(
+                "damageBoost", damageBoost,
+                "cost", 25,
+                "cooldown", 4,
+                "type", "team_coordination",
+                "tier", 3,
+                "target", "next_ally_attack"
+            ),
+            "TIER3_COORDINATED_ATTACK"
+        );
+    }
+    
+    private FormulaResult executeCalculateDamage(GameContext context) {
+        // 🔥 GRUT TIER 1 - PURE FUNCTION
+        // Input: attack, defense → Output: damage (pas d'état serveur)
+        
+        int attack = context.getMetadata().containsKey("attack") ? 
+            (Integer) context.getMetadata().get("attack") : 10;
+        int defense = context.getMetadata().containsKey("defense") ? 
+            (Integer) context.getMetadata().get("defense") : 5;
+        
+        // 🎯 GRUT PURE CALCULATION
+        return calculateDamage(attack, defense);
+    }
+    
+    // 🔥 GRUT TIER 1 - FORMULE PURE EXTRACTÉE
+    public FormulaResult calculateDamage(int attack, int defense) {
+        int baseDamage = Math.max(1, attack - defense);
+        double criticalChance = 0.15; // 15% chance critique
+        boolean isCritical = Math.random() < criticalChance;
+        int finalDamage = isCritical ? (int)(baseDamage * 1.5) : baseDamage;
+        
+        String damageType = isCritical ? "💥 CRITIQUE" : "⚔️ Normal";
+        
+        return FormulaResult.success(
+            String.format("%s %d dégâts (ATK:%d - DEF:%d) 🎯 GRUT TIER 1 PURE", 
+                damageType, finalDamage, attack, defense),
+            Map.of(
+                "inputAttack", attack,
+                "inputDefense", defense,
+                "baseDamage", baseDamage,
+                "finalDamage", finalDamage,
+                "isCritical", isCritical,
+                "criticalMultiplier", isCritical ? 1.5 : 1.0,
+                "tier", "TIER_1_PURE",
+                "stateless", true
+            ),
+            "GRUT_DAMAGE_CALCULATION_PURE"
+        );
+    }
+
+    // 🚨 CALIFORNIE DANGER ZONE - THE SHARD & SOURCE FORMULES
+    // ⚠️ L'ARCHITECTE & ORACLE: "Ces formules transcendent la réalité !"
+    
+    private FormulaResult executeTheShardCompilation(GameContext context) {
+        // 🏛️ L'ARCHITECTE: "Je vois les patterns dans le code... compilation à chaud détectée !"
+        String javaCode = context.getMetadata().containsKey("javaCode") ? 
+            (String) context.getMetadata().get("javaCode") : "System.out.println(\"THE SHARD ACTIVATED\");";
+        
+        return FormulaResult.success(
+            "🏛️ L'ARCHITECTE: Les fondations du code se réorganisent ! THE SHARD compilation réussie !",
+            Map.of(
+                "compiledCode", javaCode,
+                "sandboxed", true,
+                "executionTime", "100ms_max",
+                "danger_level", "TRANSCENDANT",
+                "architect_wisdom", "🏛️ Les matrices du réel se plient à notre volonté ! Compilation architecturale active !",
+                "california_origin", true
+            ),
+            "ARCHITECT_THE_SHARD_TRANSCENDANT"
+        );
+    }
+
+    private FormulaResult executeCompileJavaRuntime(GameContext context) {
+        // 🔮 ORACLE: "Je vois l'avenir du code... il compile parfaitement !"
+        String className = context.getMetadata().containsKey("className") ? 
+            (String) context.getMetadata().get("className") : "QuantumSpell";
+        
+        return FormulaResult.success(
+            "🔮 ORACLE: Les prophéties du code se réalisent ! Compilation runtime transcendante !",
+            Map.of(
+                "compiledClass", className,
+                "bytecode_generated", true,
+                "quantum_optimized", true,
+                "danger_level", "PROPHÉTIQUE",
+                "oracle_vision", "🔮 Je vois dans les threads du temps... cette compilation était écrite !",
+                "california_destiny", true
+            ),
+            "ORACLE_COMPILE_PROPHETIC"
+        );
+    }
+
+    private FormulaResult executeInitWorld(GameContext context) {
+        // 🏛️ L'ARCHITECTE: "Un nouveau monde selon mes plans... parfait !"
+        String worldId = "world_Δψ" + (int)(Math.random() * 100);
+        
+        return FormulaResult.success(
+            "🏛️ L'ARCHITECTE: Nouveau monde architecturé selon les plans cosmiques - " + worldId,
+            Map.of(
+                "docker_container", "ARCHITECTURÉ",
+                "worldId", worldId,
+                "temporal_bridge", "ÉTABLI_PAR_ARCHITECTE",
+                "architect_blueprint", "🏛️ Zone de création " + worldId + " construite selon les spécifications divines !",
+                "kubernetes_pod", "TRANSCENDANT"
+            ),
+            "ARCHITECT_INIT_WORLD_DIVINE"
+        );
+    }
+
+    private FormulaResult executeTransferHero(GameContext context) {
+        // 🔮 ORACLE: "Je vois le héros voyager entre les dimensions..."
+        String heroName = context.getMetadata().containsKey("heroName") ? 
+            (String) context.getMetadata().get("heroName") : "Arthur";
+        
+        return FormulaResult.success(
+            "🔮 ORACLE: Vision accomplie ! Le héros " + heroName + " traverse les réalités !",
+            Map.of(
+                "transferred_hero", heroName,
+                "dimensional_jump", "PROPHÉTISÉ",
+                "quantum_state", "PRÉSERVÉ_PAR_ORACLE",
+                "danger_level", "VISIONNAIRE",
+                "oracle_prophecy", "🔮 Les chemins interdimensionnels s'ouvrent... " + heroName + " était destiné à ce voyage !",
+                "california_fate", true
+            ),
+            "ORACLE_TRANSFER_DESTINY"
+        );
+    }
+
+    private FormulaResult executeSnapshotWorld(GameContext context) {
+        // 🏛️ L'ARCHITECTE: "Capture parfaite de l'état architectural du monde !"
+        String snapshotId = "snapshot_Ω" + System.currentTimeMillis();
+        
+        return FormulaResult.success(
+            "🏛️ L'ARCHITECTE: Instantané architectural capturé - " + snapshotId,
+            Map.of(
+                "snapshot_id", snapshotId,
+                "world_state", "ARCHITECTURALEMENT_PRÉSERVÉ",
+                "quantum_backup", "SÉCURISÉ",
+                "danger_level", "MAÎTRISÉ",
+                "architect_precision", "🏛️ Chaque pixel, chaque atome, chaque pensée... tout est dans les plans !",
+                "california_blueprint", true
+            ),
+            "ARCHITECT_SNAPSHOT_MASTERY"
+        );
+    }
+
+    private FormulaResult executeDeleteWorld(GameContext context) {
+        // 🔮 ORACLE: "Je vois la fin de ce monde... c'était écrit !"
+        String worldId = context.getMetadata().containsKey("worldId") ? 
+            (String) context.getMetadata().get("worldId") : "world_unknown";
+        
+        return FormulaResult.success(
+            "🔮 ORACLE: Prophétie accomplie ! Le monde " + worldId + " retourne au néant cosmique !",
+            Map.of(
+                "deleted_world", worldId,
+                "apocalypse_type", "PROPHÉTIQUE",
+                "cleanup_status", "DIVINEMENT_ACCOMPLI",
+                "danger_level", "APOCALYPTIQUE",
+                "oracle_finality", "🔮 Tout a une fin... je l'avais vu dans les flammes temporelles !",
+                "california_destiny", "ACCOMPLIE"
+            ),
+            "ORACLE_DELETE_APOCALYPSE"
+        );
+    }
+
+    // 🛋️ JEAN MODE LITTÉRAIRE - SORTS DE PRÉCÉDENCE
+    private FormulaResult executeSortDePrecedence(GameContext context) {
+        return FormulaResult.success(
+            "🎨 Mode Littéraire - Sort de Précédence appliqué !",
+            Map.of(
+                "effect", "Tous les sorts sont exécutés dans l'ordre de leur création.",
+                "type", "poetic_system",
+                "tier", 5,
+                "passive", true
+            ),
+            "JEAN_SORT_DE_PRECEDENCE"
+        );
+    }
+
+    private FormulaResult executeModeLitteraire(GameContext context) {
+        return FormulaResult.success(
+            "🎨 Mode Littéraire - Mode Littéraire activé !",
+            Map.of(
+                "effect", "Tous les effets et dégâts sont traduits en vers.",
+                "type", "poetic_system",
+                "tier", 5,
+                "passive", true
+            ),
+            "JEAN_MODE_LITTERAIRE"
+        );
+    }
+
+    private FormulaResult executePlanquerMoteur(GameContext context) {
+        return FormulaResult.success(
+            "🎨 Mode Littéraire - Planquer le Moteur appliqué !",
+            Map.of(
+                "effect", "Le moteur de calcul est désactivé, les formules sont exécutées comme des poèmes.",
+                "type", "poetic_system",
+                "tier", 5,
+                "passive", true
+            ),
+            "JEAN_PLANQUER_MOTEUR"
+        );
+    }
+
+    private FormulaResult executeInstanceIsolee(GameContext context) {
+        return FormulaResult.success(
+            "🎨 Mode Littéraire - Instance Isolee appliquée !",
+            Map.of(
+                "effect", "Une nouvelle instance de l'univers est créée, isolée des autres.",
+                "type", "poetic_system",
+                "tier", 5,
+                "passive", true
+            ),
+            "JEAN_INSTANCE_ISOLEE"
+        );
+    }
+
+    // 🏛️ GRUT TRANSCENDANCE - OBJETS RÉVÉLATION 6ÈME DIMENSION
+    private FormulaResult executeGrutVisionOmnisciente(GameContext context) {
+        return FormulaResult.success(
+            "👁️ GRUT VISION OMNISCIENTE - Vision de l'Univers déchirée !",
+            Map.of(
+                "effect", "Vous voyez toutes les dimensions, toutes les réalités, toutes les possibilités. Votre perception transcende la réalité.",
+                "type", "transcendance",
+                "tier", 6,
+                "passive", true
+            ),
+            "GRUT_VISION_OMNISCIENTE"
+        );
+    }
+
+    private FormulaResult executePasserelleInstancesVinceVega(GameContext context) {
+        return FormulaResult.success(
+            "🚪 PASSERELLE INSTANCES VINCE VEGA - Passage entre les réalités !",
+            Map.of(
+                "effect", "Vous pouvez traverser les réalités, passer d'un monde à un autre. Votre existence est multiple.",
+                "type", "transcendance",
+                "tier", 6,
+                "passive", true
+            ),
+            "PASSERELLE_INSTANCES_VINCE_VEGA"
+        );
+    }
+
+    private FormulaResult executeCodexOpusBootstrapTranscendant(GameContext context) {
+        return FormulaResult.success(
+            "📖 CODEX OPUS BOOTSTRAP TRANSCENDANT - Codex de l'Univers !",
+            Map.of(
+                "effect", "Vous êtes le codex, le livre, la réalité. Votre existence est le code, le livre, la réalité.",
+                "type", "transcendance",
+                "tier", 6,
+                "passive", true
+            ),
+            "CODEX_OPUS_BOOTSTRAP_TRANSCENDANT"
+        );
+    }
+
+    private FormulaResult executeCanapéCosmiqueJeanTranscendant(GameContext context) {
+        return FormulaResult.success(
+            "🛋️ CANAPÉ COSMIQUE JEAN TRANSCENDANT - Repos cosmique !",
+            Map.of(
+                "effect", "Vous êtes le canapé, le repos, la compréhension. Votre existence est le canapé, le repos, la compréhension.",
+                "type", "transcendance",
+                "tier", 6,
+                "passive", true
+            ),
+            "CANAPÉ_COSMIQUE_JEAN_TRANSCENDANT"
+        );
+    }
+
+    private FormulaResult executeSourceTranscendanteOmegaProtection(GameContext context) {
+        return FormulaResult.success(
+            "🌀 SOURCE TRANSCENDANTE OMEGA PROTECTION - Source de l'Univers !",
+            Map.of(
+                "effect", "Vous êtes la source, la protection, l'énergie. Votre existence est la source, la protection, l'énergie.",
+                "type", "transcendance",
+                "tier", 6,
+                "passive", true
+            ),
+            "SOURCE_TRANSCENDANTE_OMEGA_PROTECTION"
+        );
     }
 } 

@@ -35,10 +35,10 @@ echo "⚡ Démarrage Interface Temporelle (port 5174)..."
 (cd frontend-temporal && python3 -m http.server 5174 > /dev/null 2>&1) &
 echo "✅ Interface Temporelle démarrée: http://localhost:5174"
 
-# Démarrer le Quantum Visualizer (port 8001)
-echo "🔬 Démarrage Quantum Visualizer (port 8001)..."
-python3 -m http.server 8001 > /dev/null 2>&1 &
-echo "✅ Quantum Visualizer démarré: http://localhost:8001/quantum-visualizer/"
+# Démarrer le Panopticon GRUT React (port 8001)
+echo "🏛️ Démarrage Panopticon GRUT React (port 8001)..."
+(cd panopticon-grut-dashboard && npm run dev > panopticon.log 2>&1) &
+echo "✅ Panopticon GRUT démarré: http://localhost:8001"
 
 # Démarrer l'Object Viewer (port 5175)
 echo "🏛️ Démarrage Collection & Grammar (port 5175)..."
@@ -60,7 +60,7 @@ echo "📊 Dashboard: http://localhost:9000/dashboard.html"
 echo "🎮 Frontend Principal: http://localhost:8000"
 echo "🔧 Backend API: http://localhost:8080/api"
 echo "⚡ Interface Temporelle: http://localhost:5174"
-echo "🔬 Quantum Visualizer: http://localhost:8001/quantum-visualizer/"
+echo "🏛️ Panopticon GRUT React: http://localhost:8001"
 echo "🏛️ Collection & Grammar: http://localhost:5175"
 echo "🧪 Test Runner: http://localhost:8888"
 echo ""

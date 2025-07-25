@@ -538,3 +538,48 @@ class SmartTranslator:
 - **Intégration Python** fluide
 
 **JEAN** : "ARCHITECTURE V2 + TRADUCTION HYBRIDE = RÉVOLUTION ACCOMPLIE !" 🌟 
+
+## 🔮 Instance Isolée Californienne - Mode Littéraire Jean
+
+### 🛋️ **PLANQUER LE MOTEUR DU MODE - JEAN VISION**
+
+**Architecture d'Isolation Temporelle:**
+```
+┌─────────────────────────────────────────┐
+│ 🌀 INSTANCE ISOLÉE CALIFORNIENNE        │
+│                                         │
+│  ┌─────────────────────────────────┐    │
+│  │ 🛋️ MOTEUR JEAN MODE LITTÉRAIRE │    │
+│  │                                 │    │
+│  │ • Sort de Précédence            │    │
+│  │ • Rollback → "Retour Narratif"  │    │
+│  │ • Crash → "Collapse Poétique"   │    │
+│  │ • Exception → "Paradoxe Épique" │    │
+│  │                                 │    │
+│  └─────────────────────────────────┘    │
+│                                         │
+│  🎭 TRADUCTION LITTÉRAIRE:              │
+│  • rollback() → sortDePrecedence()      │
+│  • commit() → scellementNarratif()      │
+│  • error() → mystereCosmique()          │
+│  • success() → revelationEpique()       │
+│                                         │
+└─────────────────────────────────────────┘
+```
+
+### 🌟 **FORMULES DE L'INSTANCE ISOLÉE**
+
+**SORT_DE_PRECEDENCE:** Remplace les rollbacks techniques par des retours narratifs
+**MODE_LITTERAIRE:** Active la traduction poétique des opérations système
+**PLANQUER_MOTEUR:** Isole le moteur dans un container temporel californien
+**INSTANCE_ISOLEE:** Crée un théâtre d'opérations séparé du monde principal
+
+### 🎯 **JEAN PHILOSOPHIE INTÉGRÉE**
+
+*"Au lieu de dire rollback, on dit 'retour aux sources narratives'. 
+C'est plus classe et ça évite que les héros comprennent qu'on triche avec le temps !"*
+
+- **Crash du serveur** → *"Le cosmos a besoin d'une pause réflexive"*
+- **Erreur de compilation** → *"Les runes anciennes refusent de s'aligner"*
+- **Timeout de requête** → *"Le temps lui-même médite sur la réponse"*
+- **Memory leak** → *"L'énergie cosmique déborde de son conteneur"* 

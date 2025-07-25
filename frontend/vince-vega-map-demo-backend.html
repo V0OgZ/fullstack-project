@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🗺️ Vince Vega Backend Demo - Jean Style</title>
+    <style>
+        body { 
+            background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460);
+            color: #fff; font-family: 'Courier New', monospace; 
+            margin: 0; padding: 20px; min-height: 100vh;
+        }
+        
+        .demo-container { max-width: 1400px; margin: 0 auto; }
+        
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 20px;
+        }
+        
+        .map-container {
+            display: grid;
+            grid-template-columns: repeat(10, 60px);
+            grid-template-rows: repeat(8, 60px);
+            gap: 2px;
+            background: rgba(0,0,0,0.5);
+            padding: 20px;
+            border-radius: 10px;
+            justify-content: center;
+        }
+        
+        .map-cell {
+            width: 60px;
+            height: 60px;
+            background: rgba(0,100,0,0.3);
+            border: 1px solid #444;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .map-cell:hover {
+            background: rgba(100,100,100,0.3);
+            transform: scale(1.1);
+        }
+        
+        .hero-arthur { background: rgba(255,215,0,0.5); }
+        .hero-vince { background: rgba(255,68,68,0.5); }
+        .hero-grut { background: rgba(116,75,162,0.5); }
+        
+        .controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none; color: white; padding: 10px 15px;
+            border-radius: 20px; cursor: pointer; font-size: 12px;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover { transform: scale(1.05); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .status-panel {
+            background: rgba(0,0,0,0.5);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        
+        .backend-panel {
+            background: rgba(0,0,0,0.7);
+            padding: 20px;
+            border-radius: 10px;
+            height: fit-content;
+        }
+        
+        .formula-log {
+            background: rgba(0,0,0,0.8);
+            padding: 15px;
+            border-radius: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-size: 12px;
+            line-height: 1.4;
+            margin: 10px 0;
+        }
+        
+        .log-entry {
+            margin: 5px 0;
+            padding: 5px;
+            border-left: 3px solid;
+            padding-left: 10px;
+        }
+        
+        .log-success { border-color: #4CAF50; color: #90EE90; }
+        .log-error { border-color: #f44336; color: #FFB6C1; }
+        .log-info { border-color: #2196F3; color: #87CEEB; }
+        
+        .formula-selector {
+            margin: 10px 0;
+        }
+        
+        .formula-selector select {
+            background: rgba(0,0,0,0.8);
+            color: white;
+            border: 1px solid #444;
+            padding: 8px;
+            border-radius: 5px;
+            width: 100%;
+        }
+        
+        .wormhole {
+            background: radial-gradient(circle, #ff00ff, #8000ff);
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        .explosion {
+            background: radial-gradient(circle, #ff4444, #ffaa00);
+            animation: explode 0.5s ease-out;
+        }
+        
+        @keyframes explode {
+            0% { transform: scale(1); }
+            50% { transform: scale(2); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .formula-effect {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: rgba(255,255,0,0.8);
+            color: black;
+            font-size: 10px;
+            padding: 2px 4px;
+            border-radius: 3px;
+            animation: fadeOut 2s forwards;
+        }
+        
+        @keyframes fadeOut {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1 style="text-align: center;">🗺️ VINCE VEGA BACKEND DEMO</h1>
+        
+        <div class="status-panel">
+            <div id="status">🛋️ Jean: "Backend connecté ! Prêt pour les formules !"</div>
+        </div>
+        
+        <div class="main-layout">
+            <div class="map-section">
+                <div class="map-container" id="gameMap">
+                    <!-- Map généré en JS -->
+                </div>
+                
+                <div class="controls">
+                    <button class="btn" onclick="initDemo()">🎬 Init Demo</button>
+                    <button class="btn" onclick="moveArthur()">⚔️ Move Arthur</button>
+                    <button class="btn" onclick="vinceWormhole()">🔫 Vince Wormhole</button>
+                    <button class="btn" onclick="grutVision()">🏛️ GRUT Vision</button>
+                    <button class="btn" onclick="executeFormula()">⚡ Execute Formula</button>
+                    <button class="btn" onclick="resetMap()">🔄 Reset</button>
+                </div>
+            </div>
+            
+            <div class="backend-panel">
+                <h3>🔧 Backend Connection</h3>
+                <div>Status: <span id="backendStatus">🔍 Checking...</span></div>
+                
+                <div class="formula-selector">
+                    <label>🧪 Select Formula:</label>
+                    <select id="formulaSelect">
+                        <option value="ENERGY_ACCUMULATE">⚡ Energy Accumulate</option>
+                        <option value="RELEASE_STORED_ENERGY">💥 Release Energy</option>
+                        <option value="REFLECT_MAGIC_DAMAGE">🛡️ Reflect Magic</option>
+                        <option value="AUTO_COUNTER_SPELL">🔄 Auto Counter</option>
+                        <option value="DIMENSIONAL_STEP">🌀 Dimensional Step</option>
+                        <option value="GHOST_MODE">👻 Ghost Mode</option>
+                        <option value="THE_SHARD">💎 THE SHARD</option>
+                        <option value="SORT_DE_PRECEDENCE">🎨 Sort de Précédence</option>
+                        <option value="GRUT_VISION_OMNISCIENTE">👁️ GRUT Vision</option>
+                    </select>
+                </div>
+                
+                <div class="formula-log" id="formulaLog">
+                    <div class="log-entry log-info">🚀 Backend Demo Ready!</div>
+                </div>
+                
+                <div style="margin-top: 15px;">
+                    <div><strong>Session:</strong> session_backend_demo</div>
+                    <div><strong>Mode:</strong> BACKEND_CONNECTED</div>
+                    <div><strong>API:</strong> http://localhost:8080</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let gameState = {
+            arthur: { x: 2, y: 3, energy: 100 },
+            vince: { x: 7, y: 4, energy: 100 },
+            grut: { x: 5, y: 1, energy: 100 },
+            wormholes: []
+        };
+        
+        const API_BASE = 'http://localhost:8080/api';
+        let backendConnected = false;
+        
+        function createMap() {
+            const map = document.getElementById('gameMap');
+            map.innerHTML = '';
+            
+            for (let y = 0; y < 8; y++) {
+                for (let x = 0; x < 10; x++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'map-cell';
+                    cell.id = `cell-${x}-${y}`;
+                    cell.onclick = () => cellClick(x, y);
+                    map.appendChild(cell);
+                }
+            }
+        }
+        
+        function updateMap() {
+            // Clear all
+            document.querySelectorAll('.map-cell').forEach(cell => {
+                cell.innerHTML = '';
+                cell.className = 'map-cell';
+            });
+            
+            // Place heroes
+            const arthurCell = document.getElementById(`cell-${gameState.arthur.x}-${gameState.arthur.y}`);
+            arthurCell.innerHTML = '⚔️';
+            arthurCell.classList.add('hero-arthur');
+            
+            const vinceCell = document.getElementById(`cell-${gameState.vince.x}-${gameState.vince.y}`);
+            vinceCell.innerHTML = '🔫';
+            vinceCell.classList.add('hero-vince');
+            
+            const grutCell = document.getElementById(`cell-${gameState.grut.x}-${gameState.grut.y}`);
+            grutCell.innerHTML = '🏛️';
+            grutCell.classList.add('hero-grut');
+            
+            // Place wormholes
+            gameState.wormholes.forEach(wh => {
+                const whCell = document.getElementById(`cell-${wh.x}-${wh.y}`);
+                whCell.innerHTML = '🌀';
+                whCell.classList.add('wormhole');
+            });
+        }
+        
+        function setStatus(message) {
+            document.getElementById('status').innerHTML = message;
+        }
+        
+        function addLog(message, type = 'info') {
+            const log = document.getElementById('formulaLog');
+            const entry = document.createElement('div');
+            entry.className = `log-entry log-${type}`;
+            entry.innerHTML = `[${new Date().toLocaleTimeString()}] ${message}`;
+            log.appendChild(entry);
+            log.scrollTop = log.scrollHeight;
+        }
+        
+        async function checkBackend() {
+            try {
+                const response = await fetch(`${API_BASE}/status`);
+                if (response.ok) {
+                    backendConnected = true;
+                    document.getElementById('backendStatus').innerHTML = '✅ Connected';
+                    addLog('Backend connection established!', 'success');
+                } else {
+                    throw new Error('Backend not responding');
+                }
+            } catch (error) {
+                backendConnected = false;
+                document.getElementById('backendStatus').innerHTML = '❌ Disconnected';
+                addLog('Backend connection failed - using demo mode', 'error');
+            }
+        }
+        
+        async function executeFormula() {
+            const formulaType = document.getElementById('formulaSelect').value;
+            addLog(`Executing formula: ${formulaType}`, 'info');
+            
+            if (backendConnected) {
+                try {
+                    const response = await fetch(`${API_BASE}/magic-formulas/execute`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            gameId: 'demo-backend',
+                            formulaType: formulaType,
+                            metadata: {
+                                heroPosition: `${gameState.arthur.x},${gameState.arthur.y}`,
+                                energy: gameState.arthur.energy.toString()
+                            }
+                        })
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        addLog(`✅ ${result.message}`, 'success');
+                        showFormulaEffect(gameState.arthur.x, gameState.arthur.y, formulaType);
+                        
+                        // Apply visual effects based on formula
+                        applyFormulaVisualEffect(formulaType);
+                    } else {
+                        addLog(`❌ Formula failed: ${result.message}`, 'error');
+                    }
+                } catch (error) {
+                    addLog(`❌ Network error: ${error.message}`, 'error');
+                }
+            } else {
+                // Demo mode
+                addLog(`🎭 Demo mode: ${formulaType} executed locally`, 'info');
+                showFormulaEffect(gameState.arthur.x, gameState.arthur.y, formulaType);
+                applyFormulaVisualEffect(formulaType);
+            }
+        }
+        
+        function showFormulaEffect(x, y, formula) {
+            const cell = document.getElementById(`cell-${x}-${y}`);
+            const effect = document.createElement('div');
+            effect.className = 'formula-effect';
+            effect.textContent = formula.substring(0, 3);
+            cell.appendChild(effect);
+            
+            setTimeout(() => {
+                if (effect.parentNode) {
+                    effect.parentNode.removeChild(effect);
+                }
+            }, 2000);
+        }
+        
+        function applyFormulaVisualEffect(formulaType) {
+            switch(formulaType) {
+                case 'DIMENSIONAL_STEP':
+                    vinceWormhole();
+                    break;
+                case 'GRUT_VISION_OMNISCIENTE':
+                    grutVision();
+                    break;
+                case 'GHOST_MODE':
+                    const arthurCell = document.getElementById(`cell-${gameState.arthur.x}-${gameState.arthur.y}`);
+                    arthurCell.style.opacity = '0.5';
+                    setTimeout(() => arthurCell.style.opacity = '1', 2000);
+                    break;
+                case 'THE_SHARD':
+                    epicBattle();
+                    break;
+            }
+        }
+        
+        function initDemo() {
+            setStatus('🎬 Jean: "Backend Demo initialisé ! Formules connectées !"');
+            updateMap();
+            checkBackend();
+        }
+        
+        function moveArthur() {
+            gameState.arthur.x = Math.min(9, gameState.arthur.x + 1);
+            setStatus('⚔️ Arthur avance avec Excalibur !');
+            updateMap();
+            addLog(`Arthur moved to (${gameState.arthur.x}, ${gameState.arthur.y})`, 'info');
+        }
+        
+        function vinceWormhole() {
+            const wormhole = {
+                x: Math.floor(Math.random() * 10),
+                y: Math.floor(Math.random() * 8)
+            };
+            gameState.wormholes.push(wormhole);
+            
+            setStatus('🔫 Vince: "Reality Shot!" - Wormhole créé !');
+            updateMap();
+            addLog(`Wormhole created at (${wormhole.x}, ${wormhole.y})`, 'info');
+            
+            setTimeout(() => {
+                gameState.wormholes = gameState.wormholes.filter(wh => 
+                    wh.x !== wormhole.x || wh.y !== wormhole.y);
+                updateMap();
+                addLog('Wormhole collapsed', 'info');
+            }, 3000);
+        }
+        
+        function grutVision() {
+            setStatus('🏛️ GRUT: "Vision omnisciente activée !"');
+            addLog('GRUT Vision: All possibilities revealed', 'success');
+            
+            document.querySelectorAll('.map-cell').forEach(cell => {
+                cell.style.background = 'rgba(116,75,162,0.3)';
+                setTimeout(() => {
+                    cell.style.background = '';
+                    updateMap();
+                }, 1000);
+            });
+        }
+        
+        function epicBattle() {
+            setStatus('💥 THE SHARD ACTIVATED ! Reality fractures !');
+            
+            const battleX = Math.floor((gameState.arthur.x + gameState.vince.x) / 2);
+            const battleY = Math.floor((gameState.arthur.y + gameState.vince.y) / 2);
+            
+            const battleCell = document.getElementById(`cell-${battleX}-${battleY}`);
+            battleCell.innerHTML = '💎';
+            battleCell.classList.add('explosion');
+            
+            setTimeout(() => {
+                setStatus('🏆 Jean: "THE SHARD contained ! Reality stabilized !"');
+                battleCell.innerHTML = '';
+                battleCell.classList.remove('explosion');
+            }, 2000);
+        }
+        
+        function resetMap() {
+            gameState = {
+                arthur: { x: 2, y: 3, energy: 100 },
+                vince: { x: 7, y: 4, energy: 100 },
+                grut: { x: 5, y: 1, energy: 100 },
+                wormholes: []
+            };
+            setStatus('🔄 Map reset ! Backend ready !');
+            updateMap();
+            addLog('Map reset to initial state', 'info');
+        }
+        
+        function cellClick(x, y) {
+            setStatus(`📍 Cellule (${x},${y}) cliquée !`);
+            addLog(`Cell (${x},${y}) clicked`, 'info');
+        }
+        
+        // Initialize on load
+        window.onload = function() {
+            createMap();
+            initDemo();
+        };
+    </script>
+</body>
+</html> 
