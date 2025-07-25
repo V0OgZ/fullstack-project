@@ -1,476 +1,120 @@
-/* 🌌 PANOPTICON GRUT - Style Interface Temporelle Amélioré ! */
+/* 🏛️ PANOPTICON GRUT 6D - STYLES COSMIQUES */
 
-/* Reset et base */
+:root {
+  --grut-primary: #00ff88;
+  --grut-secondary: #ff6b35;
+  --grut-dark: #0a0a0a;
+  --grut-medium: #1a1a2e;
+  --grut-light: #16213e;
+  --grut-quantum: #8a2be2;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html, body {
-  height: 100%;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
 body {
-  background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
-  color: #ffffff;
+  font-family: 'Courier New', monospace;
+  background: linear-gradient(135deg, var(--grut-dark), var(--grut-medium), var(--grut-light));
+  color: var(--grut-primary);
   min-height: 100vh;
-  overflow-x: auto;
-  position: relative;
+  overflow-x: hidden;
 }
 
-/* 🖼️ FOND MULTIVERS VOLÉ ! */ 
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('/assets/images/dimensions-paralleles.png') center / cover;
-  opacity: 0.05;
-  z-index: -1;
-  pointer-events: none;
+.grut-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-/* Variables CSS GRUT - Palette Interface Temporelle */
-:root {
-  --grut-primary: #00bfff;
-  --grut-secondary: #0080ff;
-  --grut-accent: #ffd700;
-  --grut-background: #1a1a2e;
-  --grut-surface: rgba(255, 255, 255, 0.08);
-  --grut-text: #ffffff;
-  --grut-text-dim: #a0a0a0;
-  --grut-border: rgba(0, 191, 255, 0.4);
-  --grut-success: #00ff7f;
-  --grut-warning: #ff8c00;
-  --grut-error: #ff4757;
-  --grut-critical: #ff3838;
-  --grut-shadow: rgba(0, 191, 255, 0.2);
-  --grut-glow: 0 4px 20px rgba(0, 191, 255, 0.3);
+.grut-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 20px;
+  margin: 20px 0;
 }
 
-/* 🌊 Console temporelle avec blur effects ! */
-.grut-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 2px solid var(--grut-border);
-  border-radius: 15px;
-  padding: 1.5rem;
-  backdrop-filter: blur(15px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  position: relative;
-  overflow: hidden;
+.grut-panel {
+  background: rgba(26, 26, 46, 0.9);
+  border: 2px solid var(--grut-primary);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+  transition: all 0.3s ease;
 }
 
-.grut-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(0, 191, 255, 0.1), rgba(15, 52, 96, 0.1));
-  z-index: -1;
-  pointer-events: none;
+.grut-panel:hover {
+  box-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
+  transform: translateY(-5px);
 }
 
-/* ⚡ Boutons interface temporelle */
+.grut-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-shadow: 0 0 10px var(--grut-primary);
+  animation: grutPulse 2s infinite;
+}
+
+@keyframes grutPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
 .grut-button {
-  background: linear-gradient(135deg, var(--grut-secondary), var(--grut-primary));
+  background: linear-gradient(45deg, var(--grut-primary), var(--grut-secondary));
+  color: var(--grut-dark);
   border: none;
-  border-radius: 25px;
   padding: 12px 24px;
-  color: white;
-  font-size: 1em;
-  font-weight: 600;
+  border-radius: 6px;
+  font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  position: relative;
-  overflow: hidden;
-}
-
-.grut-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
+  margin: 5px;
+  font-family: inherit;
 }
 
 .grut-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 191, 255, 0.4);
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
 }
 
-.grut-button:hover::before {
-  left: 100%;
+.grut-status {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
 }
 
-/* 🔮 Input temporels */
-.grut-input {
-  background: rgba(0, 0, 0, 0.3);
-  border: 2px solid var(--grut-border);
-  border-radius: 10px;
-  padding: 12px 16px;
-  color: var(--grut-text);
-  font-family: 'Courier New', monospace;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
+.status-active {
+  background: var(--grut-primary);
+  color: var(--grut-dark);
 }
 
-.grut-input:focus {
-  outline: none;
-  border-color: var(--grut-primary);
-  box-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
-  background: rgba(0, 0, 0, 0.5);
+.status-inactive {
+  background: var(--grut-secondary);
+  color: white;
 }
 
-/* 🌟 États cosmiques */
-.severity-low { 
-  color: var(--grut-success); 
-  filter: drop-shadow(0 0 5px var(--grut-success));
-}
-
-.severity-medium { 
-  color: var(--grut-warning);
-  filter: drop-shadow(0 0 5px var(--grut-warning));
-}
-
-.severity-high { 
-  color: var(--grut-error);
-  filter: drop-shadow(0 0 5px var(--grut-error));
-}
-
-.severity-critical { 
-  color: var(--grut-critical);
-  animation: temporalCritical 1s ease-in-out infinite alternate;
-  filter: drop-shadow(0 0 10px var(--grut-critical));
-}
-
-@keyframes temporalCritical {
-  0% { opacity: 0.8; transform: scale(1); }
-  100% { 
-    opacity: 1; 
-    transform: scale(1.05); 
-    text-shadow: 0 0 20px var(--grut-critical);
-  }
-}
-
-/* 👁️ États du Panopticon */
-.panopticon-watching { 
-  color: var(--grut-primary);
-  animation: watchingPulse 3s ease-in-out infinite;
-}
-
-.panopticon-analyzing { 
-  color: var(--grut-warning);
-  animation: analyzingFlicker 2s ease-in-out infinite;
-}
-
-.panopticon-intervening { 
-  color: var(--grut-error);
-  animation: interveningChaos 1s ease-in-out infinite;
-}
-
-@keyframes watchingPulse {
-  0%, 100% { opacity: 0.7; filter: drop-shadow(0 0 5px var(--grut-primary)); }
-  50% { opacity: 1; filter: drop-shadow(0 0 15px var(--grut-primary)); }
-}
-
-@keyframes analyzingFlicker {
-  0%, 100% { opacity: 0.8; }
-  25%, 75% { opacity: 1; filter: drop-shadow(0 0 10px var(--grut-warning)); }
-  50% { opacity: 0.9; }
-}
-
-@keyframes interveningChaos {
-  0% { transform: translateX(0) rotate(0deg); }
-  25% { transform: translateX(-2px) rotate(-1deg); }
-  50% { transform: translateX(2px) rotate(1deg); }
-  75% { transform: translateX(-1px) rotate(-0.5deg); }
-  100% { transform: translateX(0) rotate(0deg); }
-}
-
-/* 🌊 Grilles temporelles */
-.grut-grid {
-  display: grid;
-  gap: 24px;
+.grut-graph {
   width: 100%;
-  max-width: 100%;
-}
-
-.grut-grid-2 { grid-template-columns: repeat(2, 1fr); }
-.grut-grid-3 { grid-template-columns: repeat(3, 1fr); }
-.grut-grid-4 { grid-template-columns: repeat(4, 1fr); }
-
-/* 🏛️ PANNEAUX AMÉLIORÉS - ESPACEMENT ET DESIGN */
-.grut-card {
-  background: var(--grut-surface);
-  border: 2px solid var(--grut-border);
-  border-radius: 16px;
-  padding: 24px;
-  backdrop-filter: blur(15px);
-  box-shadow: var(--grut-glow);
-  transition: all 0.3s ease;
-  margin-bottom: 20px;
-  position: relative;
-  overflow: hidden;
-}
-
-.grut-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--grut-primary), transparent);
-  opacity: 0.6;
-}
-
-.grut-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 32px rgba(0, 191, 255, 0.4);
-  border-color: var(--grut-primary);
-}
-
-/* 📱 RESPONSIVE AMÉLIORÉ */
-@media (max-width: 1200px) {
-  .grut-grid-4 { grid-template-columns: repeat(2, 1fr); }
-  .grut-grid-3 { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 768px) {
-  .grut-grid {
-    gap: 16px;
-  }
-  
-  .grut-grid-2,
-  .grut-grid-3,
-  .grut-grid-4 {
-    grid-template-columns: 1fr;
-  }
-  
-  .grut-card {
-    padding: 20px;
-    margin-bottom: 16px;
-    border-radius: 12px;
-  }
-}
-
-@media (max-width: 480px) {
-  .grut-grid {
-    gap: 12px;
-  }
-  
-  .grut-card {
-    padding: 16px;
-    margin-bottom: 12px;
-    border-radius: 10px;
-  }
-}
-
-/* 🎨 TITRES DE PANNEAUX */
-.grut-panel-title {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: var(--grut-accent);
-  margin-bottom: 16px;
-  text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.grut-panel-subtitle {
-  font-size: 0.9rem;
-  color: var(--grut-text-dim);
-  margin-bottom: 20px;
-  font-style: italic;
-}
-
-/* 🔗 LIENS ET BOUTONS DANS PANNEAUX */
-.grut-panel-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  background: rgba(0, 191, 255, 0.1);
-  border: 1px solid var(--grut-border);
+  height: 400px;
+  border: 1px solid var(--grut-primary);
   border-radius: 8px;
+  background: rgba(10, 10, 10, 0.7);
+}
+
+.grut-link {
   color: var(--grut-primary);
   text-decoration: none;
-  font-size: 0.9rem;
-  transition: all 0.2s ease;
-  margin: 4px;
+  font-weight: bold;
+  transition: color 0.3s ease;
 }
 
-.grut-panel-link:hover {
-  background: rgba(0, 191, 255, 0.2);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 191, 255, 0.3);
-}
-
-/* ✨ Animations temporelles */
-.fade-in {
-  animation: temporalFadeIn 0.8s ease-out;
-}
-
-@keyframes temporalFadeIn {
-  from { 
-    opacity: 0; 
-    transform: translateY(30px) scale(0.95);
-    filter: blur(5px);
-  }
-  to { 
-    opacity: 1; 
-    transform: translateY(0) scale(1);
-    filter: blur(0);
-  }
-}
-
-.slide-in-left {
-  animation: temporalSlideLeft 0.6s ease-out;
-}
-
-@keyframes temporalSlideLeft {
-  from { 
-    opacity: 0; 
-    transform: translateX(-50px);
-    filter: blur(3px);
-  }
-  to { 
-    opacity: 1; 
-    transform: translateX(0);
-    filter: blur(0);
-  }
-}
-
-/* 🔄 Loading temporel */
-.grut-loading {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.8rem;
-  color: var(--grut-primary);
-}
-
-.grut-spinner {
-  width: 20px;
-  height: 20px;
-  border: 3px solid transparent;
-  border-top: 3px solid var(--grut-primary);
-  border-radius: 50%;
-  animation: temporalSpin 1.2s linear infinite;
-  filter: drop-shadow(0 0 5px var(--grut-primary));
-}
-
-@keyframes temporalSpin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* 🌌 Tooltips cosmiques */
-.grut-tooltip {
-  position: relative;
-  cursor: help;
-}
-
-.grut-tooltip::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: 120%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.9);
-  color: var(--grut-text);
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s ease;
-  border: 1px solid var(--grut-primary);
-  backdrop-filter: blur(10px);
-  z-index: 1000;
-  box-shadow: 0 4px 20px rgba(0, 191, 255, 0.3);
-}
-
-.grut-tooltip:hover::after {
-  opacity: 1;
-  transform: translateX(-50%) translateY(-5px);
-}
-
-/* 📱 Scrollbar temporelle */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, var(--grut-primary), var(--grut-secondary));
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 191, 255, 0.3);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, var(--grut-secondary), var(--grut-accent));
-  box-shadow: 0 0 15px rgba(0, 191, 255, 0.5);
-}
-
-/* 🌟 Effet de particules cosmiques */
-@keyframes cosmicFloat {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  33% { transform: translateY(-10px) rotate(120deg); }
-  66% { transform: translateY(5px) rotate(240deg); }
-}
-
-.cosmic-particle {
-  animation: cosmicFloat 6s ease-in-out infinite;
-}
-
-/* 🎯 Boutons spéciaux avec effets */
-.btn-legendary {
-  background: linear-gradient(135deg, var(--grut-accent), #ff6b6b);
-  animation: legendaryGlow 2s ease-in-out infinite alternate;
-}
-
-@keyframes legendaryGlow {
-  0% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
-  100% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 107, 107, 0.3); }
-} 
-
-/* 🏛️ CONTENEUR PRINCIPAL RESPONSIVE */
-.app-container {
-  max-width: 100vw;
-  min-height: 100vh;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-/* 📱 RESPONSIVE BREAKPOINTS */
-@media (max-width: 768px) {
-  .app-container {
-    padding: 10px;
-    gap: 15px;
-  }
-}
-
-@media (max-width: 480px) {
-  .app-container {
-    padding: 8px;
-    gap: 12px;
-  }
+.grut-link:hover {
+  color: var(--grut-secondary);
+  text-shadow: 0 0 5px currentColor;
 } 
