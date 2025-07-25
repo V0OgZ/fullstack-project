@@ -5,7 +5,6 @@ echo "========================================"
 
 # Nettoyer les ports si nécessaire
 echo "🧹 Nettoyage des ports..."
-lsof -ti:9000 | xargs kill -9 2>/dev/null || true
 lsof -ti:8000 | xargs kill -9 2>/dev/null || true
 lsof -ti:8080 | xargs kill -9 2>/dev/null || true
 lsof -ti:5174 | xargs kill -9 2>/dev/null || true
@@ -14,11 +13,6 @@ lsof -ti:5175 | xargs kill -9 2>/dev/null || true
 lsof -ti:8888 | xargs kill -9 2>/dev/null || true
 
 sleep 2
-
-# Démarrer le Dashboard (port 9000)
-echo "📊 Démarrage Dashboard (port 9000)..."
-python3 -m http.server 9000 > /dev/null 2>&1 &
-echo "✅ Dashboard démarré: http://localhost:9000/dashboard.html"
 
 # Démarrer le Frontend Principal (port 8000)
 echo "🎮 Démarrage Frontend Principal (port 8000)..."
@@ -35,8 +29,8 @@ echo "⚡ Démarrage Interface Temporelle (port 5174)..."
 (cd frontend-temporal && python3 -m http.server 5174 > /dev/null 2>&1) &
 echo "✅ Interface Temporelle démarrée: http://localhost:5174"
 
-# Démarrer le Panopticon GRUT React (port 8001)
-echo "🏛️ Démarrage Panopticon GRUT React (port 8001)..."
+# 🏛️ PANOPTICON GRUT REACT - NOUVEAU DASHBOARD PRINCIPAL (port 8001)
+echo "🏛️ Démarrage Panopticon GRUT React - Dashboard Principal (port 8001)..."
 (cd panopticon-grut-dashboard && npm run dev > panopticon.log 2>&1) &
 echo "✅ Panopticon GRUT démarré: http://localhost:8001"
 
@@ -50,21 +44,13 @@ echo "🧪 Démarrage Test Runner (port 8888)..."
 python3 test-runner-server.py > /dev/null 2>&1 &
 echo "✅ Test Runner démarré: http://localhost:8888"
 
-
-sleep 5
-
 echo ""
-echo "🎯 TOUS LES SERVICES SONT DÉMARRÉS !"
-echo "====================================="
-echo "📊 Dashboard: http://localhost:9000/dashboard.html"
-echo "🎮 Frontend Principal: http://localhost:8000"
-echo "🔧 Backend API: http://localhost:8080/api"
-echo "⚡ Interface Temporelle: http://localhost:5174"
-echo "🏛️ Panopticon GRUT React: http://localhost:8001"
-echo "🏛️ Collection & Grammar: http://localhost:5175"
-echo "🧪 Test Runner: http://localhost:8888"
+echo "🎯 SERVICES DÉMARRÉS - ACCÈS RAPIDE:"
+echo "  📊 Dashboard Principal (Panopticon GRUT): http://localhost:8001"
+echo "  🎮 Frontend Principal: http://localhost:8000"
+echo "  🔧 Backend API: http://localhost:8080/api"
+echo "  ⚡ Interface Temporelle: http://localhost:5174"
+echo "  🏛️ Collection & Grammar: http://localhost:5175"
+echo "  🧪 Test Runner: http://localhost:8888"
 echo ""
-echo "🔄 Vérification des ports..."
-lsof -i :9000,8000,8080,5174,8001,5175,8888 | grep LISTEN
-echo ""
-echo "✅ Services prêts !" 
+echo "🏆 WALTER: TOUS LES SERVICES SONT DÉMARRÉS !" 
