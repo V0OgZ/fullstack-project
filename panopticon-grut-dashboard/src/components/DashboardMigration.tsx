@@ -1,257 +1,369 @@
 import React, { useState, useEffect } from 'react';
 import './DashboardMigration.css';
 
-interface PanelData {
-  id: string;
-  title: string;
-  icon: string;
-  description: string;
+interface ServiceStatus {
+  name: string;
   url: string;
-  features: string[];
-  status: 'active' | 'disabled' | 'ethereal';
-  special?: boolean;
+  status: 'active' | 'inactive';
 }
 
 const DashboardMigration: React.FC = () => {
-  const [panels, setPanels] = useState<PanelData[]>([]);
-  const [selectedHero, setSelectedHero] = useState<string>('');
-  const [serviceStatus, setServiceStatus] = useState<Record<string, boolean>>({});
+  const [serviceStatuses, setServiceStatuses] = useState<ServiceStatus[]>([
+    { name: 'Backend', url: 'http://localhost:8080', status: 'inactive' },
+    { name: 'Frontend 8000', url: 'http://localhost:8000', status: 'inactive' },
+    { name: 'Panopticon 8001', url: 'http://localhost:8001', status: 'active' },
+    { name: 'Temporal 5174', url: 'http://localhost:5174', status: 'inactive' },
+    { name: 'Collection 5175', url: 'http://localhost:5175', status: 'inactive' },
+    { name: 'Test Runner 8888', url: 'http://localhost:8888', status: 'inactive' },
+    { name: 'Dicebear 8004', url: 'http://localhost:8004', status: 'inactive' }
+  ]);
 
-  // 🎭 16 PANELS DU DASHBOARD 9000 IDENTIFIÉS
-  const dashboardPanels: PanelData[] = [
+  const [selectedHero, setSelectedHero] = useState('jean-grofignon');
+
+  const heroes = [
+    { id: 'jean-grofignon', name: 'Jean-Grofignon', icon: '🛋️', faction: 'Canapé Cosmique', power: 'Collapse Override' },
+    { id: 'arthur-pendragon', name: 'Arthur Pendragon', icon: '⚔️', faction: 'Royaume de Camelot', power: 'Excalibur Fusion' },
+    { id: 'vince-vega', name: 'Vince Vega', icon: '🔫', faction: 'Pulp Fiction', power: 'Temporal Bullets' },
+    { id: 'grut-ontologique', name: 'GRUT Ontologique', icon: '🏛️', faction: 'Vision Omnisciente', power: 'Reality Graph' },
+    { id: 'claudius-memento', name: 'Claudius Memento', icon: '🧠', faction: 'Archiviste Éternel', power: 'Museum Archive Master' }
+  ];
+
+  const panels = [
     {
-      id: 'frontend-panel',
-      title: 'Frontend Principal',
+      id: 'frontend-principal',
       icon: '🎮',
-      description: 'Interface principale Heroes of Time',
+      title: 'Frontend Principal',
+      description: 'Interface de jeu principale avec console temporelle et carte hexagonale',
       url: 'http://localhost:8000',
-      features: ['Interface temporelle', 'Système de jeu', 'UI/UX principal'],
-      status: 'active'
+      features: [
+        'Console temporelle HOTS',
+        'Carte hexagonale interactive', 
+        'Création et gestion des héros',
+        'Scripts quantiques ψ, †, ⊙'
+      ],
+      buttonText: '🚀 Lancer Interface',
+      type: 'normal'
     },
     {
-      id: 'visual-editor-panel', 
-      title: 'Visual Editor',
+      id: 'visual-editor',
       icon: '🎨',
-      description: 'Éditeur visuel avancé',
-      url: 'http://localhost:5174',
-      features: ['Édition visuelle', 'Interface moderne', 'Outils créatifs'],
-      status: 'active',
-      special: true
+      title: 'Éditeur Visuel Script',
+      description: 'Premier IDE visuel de scripting quantico-temporel au monde - Révolution du game design',
+      url: 'http://localhost:8000/visual-script-editor.html',
+      features: [
+        '🚶 Actions point-and-click (MOV, USE, CREATE)',
+        'ψ Actions temporelles (PSI, TRIGGER, COLLAPSE)',
+        '⏰ Timeline Editor avec branches multiples',
+        '🎮 Game Board interactif avec héros et ψ-states',
+        '🔧 Système de macros personnalisées',
+        '📜 Génération automatique de scripts HOTS'
+      ],
+      buttonText: '🎨 Éditeur Révolutionnaire',
+      type: 'special',
+      borderColor: '#4eccc6'
     },
     {
-      id: 'temporal-panel',
-      title: 'Interface Temporelle',
+      id: 'frontend-temporal',
       icon: '⚡',
-      description: 'Gestion des voyages temporels',
+      title: 'Frontend Temporal',
+      description: 'Interface révolutionnaire avec système UTMD et visualisation temporelle avancée',
       url: 'http://localhost:5174',
-      features: ['Voyages temporels', 'Paradoxes causaux', 'Timeline management'],
-      status: 'active'
+      features: [
+        'Renderer hexagonal temporel',
+        'Système UTMD (temps par mouvement)',
+        'Visualisation collapse causale',
+        'Animations temporelles'
+      ],
+      buttonText: '⚡ Interface Révolutionnaire',
+      type: 'normal'
     },
     {
-      id: 'visualizer-panel',
+      id: 'quantum-visualizer',
+      icon: '🔬',
       title: 'Quantum Visualizer',
-      icon: '🔮',
-      description: 'Visualisation quantique avancée',
-      url: 'http://localhost:3001',
-      features: ['États quantiques', 'Visualisation 3D', 'Particules'],
-      status: 'active'
+      description: 'Sélecteur de scénarios, replay et visualisation des graphes causaux',
+      url: 'http://localhost:8001/quantum-visualizer/',
+      features: [
+        'Sélecteur de scénarios GROFI',
+        'Système de replay',
+        'Graphes causaux D3.js',
+        'Navigation entre timelines'
+      ],
+      buttonText: '🔬 Scénarios & Replay',
+      type: 'normal'
     },
     {
-      id: 'object-viewer-panel',
-      title: 'Collection & Grammar',
-      icon: '📚',
-      description: 'Visualiseur d\'objets et grammaire',
-      url: 'http://localhost:5175',
-      features: ['Collection d\'objets', 'Grammaire HOTS', 'Analyse syntaxique'],
-      status: 'active'
-    },
-    {
-      id: 'testrunner-panel',
-      title: 'Test Runner',
-      icon: '🧪',
-      description: 'Exécuteur de tests automatisés',
-      url: 'http://localhost:8888',
-      features: ['Tests automatiques', 'Validation code', 'Rapports détaillés'],
-      status: 'active'
-    },
-    {
-      id: 'ethereal-panel',
-      title: 'Mode Éthéré',
-      icon: '👻',
-      description: 'Interfaces cachées et secrètes',
-      url: '#ethereal',
-      features: ['Interfaces secrètes', 'Mode développeur', 'Outils cachés'],
-      status: 'ethereal',
-      special: true
-    },
-    {
-      id: 'memento-panel',
-      title: 'Memento Archive',
+      id: 'collection-grammar',
       icon: '🏛️',
-      description: 'Archives temporelles Memento',
-      url: '#memento',
-      features: ['Archives temporelles', 'Mémoire collective', 'Tatouages évolutifs'],
-      status: 'active'
+      title: 'Collection & Grammar',
+      description: 'Interface unifiée : Collection du jeu avec avatars Dicebear, Scénarios HOTS et Grammar Translator',
+      url: 'http://localhost:5175/hots',
+      features: [
+        'Collection complète avec Dicebear',
+        'Héros, créatures et artefacts visuels',
+        'Scénarios HOTS intégrés',
+        'Grammar Translator avancé',
+        'Interface par onglets moderne'
+      ],
+      buttonText: '🏛️ Collection & Grammar',
+      type: 'normal'
     },
     {
-      id: 'replay-panel',
-      title: 'Replay System',
+      id: 'test-runner',
+      icon: '🧪',
+      title: 'Test Runner',
+      description: 'Interface de tests automatisés et monitoring des performances',
+      url: 'http://localhost:8888',
+      features: [
+        'Tests automatisés complets',
+        'Monitoring performances',
+        'Tests GROFI intégrés',
+        'Rapports détaillés'
+      ],
+      buttonText: '🧪 Tests Automatiques',
+      type: 'normal'
+    },
+    {
+      id: 'ethereal-mode',
+      icon: '🌟',
+      title: 'Mode Éthéré',
+      description: 'Accès aux interfaces cachées et expérimentales récupérées\n🎁 Inclut maintenant la Forge Runique 1111 - Cadeau de Jean!',
+      url: 'Interfaces Multiples',
+      features: [
+        '🃏 Heroes Cards Visualizer (16 cartes)',
+        '⚡ Epoch Visualizer (Timeline)',
+        '🎯 Panopticon 3D (Vision totale)',
+        '🔮 Quantum Runic Forge',
+        '⚡ Forge Runique 1111 - Cadeau de Jean 🎁'
+      ],
+      buttonText: '🌟 Mode Éthéré',
+      type: 'ethereal',
+      borderColor: '#9d4edd'
+    },
+    {
+      id: 'memento',
+      icon: '🧠',
+      title: 'MEMENTO',
+      description: 'La Mémoire Vivante - Histoire et Documentation Heroes of Time',
+      url: 'MEMENTO/HISTOIRE_HEROES_OF_TIME.html',
+      features: [
+        'Histoire complète du projet',
+        'Documentation générée automatiquement',
+        'Tatouages de mémoire permanents',
+        'Archives temporelles'
+      ],
+      buttonText: '🧠 Accéder à MEMENTO',
+      type: 'normal'
+    },
+    {
+      id: 'replay-scenarios',
       icon: '🎬',
-      description: 'Système de replay et enregistrement',
-      url: '#replay',
-      features: ['Enregistrement parties', 'Replay système', 'Analyse gameplay'],
-      status: 'disabled'
+      title: 'Replay & Scénarios',
+      description: 'Sélecteur de scénarios HOTS et lecteur de replays épiques',
+      url: 'Intégré dans le Dashboard',
+      features: [
+        '26 scénarios HOTS disponibles',
+        'Lecteur de replay HSP',
+        'Contrôles de lecture',
+        'Session Jean vs Claudius'
+      ],
+      buttonText: '🎬 Centre de Replay',
+      type: 'special',
+      borderColor: '#ffa500'
     },
     {
-      id: 'epoch-panel',
-      title: 'Epoch Manager',
-      icon: '⏰',
-      description: 'Gestion des époques temporelles',
-      url: '#epoch',
-      features: ['Gestion époques', 'Timeline control', 'Synchronisation'],
-      status: 'active'
+      id: 'epoch-system',
+      icon: '🕰️',
+      title: 'EPOCH SYSTEM',
+      description: 'Timeline Officielle Heroes of Time - Pour Jean depuis son canapé',
+      url: 'epoch-visualizer.html',
+      features: [
+        'Époque HOT : 1er juillet 2025',
+        'Timeline ℬ∞ (Jean\'s Vision)',
+        'Jour 21 - Memory Rewrite Protocol',
+        'Phase EPIC_VISUALIZATION'
+      ],
+      buttonText: '🕰️ Timeline Officielle',
+      type: 'normal'
     },
     {
-      id: 'admin-multiplayer-panel',
+      id: 'admin-multiplayer',
+      icon: '🎮',
       title: 'Admin Multijoueur',
-      icon: '👥',
-      description: 'Administration système multijoueur',
-      url: 'admin-multiplayer.html',
-      features: ['Gestion sessions', 'Admin joueurs', 'Monitoring temps réel'],
-      status: 'active',
-      special: true
+      description: 'Mode Administrateur - Jean sur le canapé - Gestion des parties multijoueur',
+      url: 'Interface Admin Intégrée',
+      features: [
+        '🎮 Interface Admin complète',
+        '🚀 Démarrage rapide multijoueur',
+        '🧪 Tests complets automatisés',
+        '📊 Monitoring des parties actives',
+        '👥 Gestion des joueurs',
+        '⚙️ Configuration avancée'
+      ],
+      buttonText: '🎮 Interface Admin',
+      type: 'admin',
+      borderColor: '#ff6b6b',
+      isWide: true
     },
     {
-      id: 'joint-panel',
-      title: 'Le Joint Oublié',
+      id: 'joint-oublie',
       icon: '🚬',
-      description: 'Panopticon 3D et expériences',
-      url: 'panopticon-3d/index.html',
-      features: ['Panopticon 3D', 'Expériences visuelles', 'Réalité augmentée'],
-      status: 'active',
-      special: true
+      title: 'Le Joint Oublié',
+      description: 'Artefact légendaire de Jean-Grofignon - Accès Panopticon halluciné',
+      url: 'Interface Hallucinée',
+      features: [
+        '🚬 Utiliser le Joint Magique',
+        '🔮 Panopticon 3D Vision',
+        '🧪 Tests d\'accès spéciaux',
+        '🎭 Galerie Dicebear',
+        '✨ Effets hallucinés',
+        '🌟 Mode lecture seule'
+      ],
+      buttonText: '🚬 Utiliser le Joint',
+      type: 'special',
+      borderColor: '#4ecdc4'
     },
     {
-      id: 'dicebear-demo-panel',
-      title: 'Dicebear Demo',
-      icon: '🎲',
-      description: 'Générateur d\'avatars Dicebear',
-      url: '#dicebear',
-      features: ['Génération avatars', 'API Dicebear', 'Customisation'],
-      status: 'active'
+      id: 'dicebear-demo',
+      icon: '🎨',
+      title: 'Démo Dicebear Heroes of Time',
+      description: 'Démonstration complète du système Dicebear pour tous les éléments du jeu',
+      url: 'http://localhost:8004/dicebear-map-demo.html',
+      features: [
+        '🗺️ Map 10x10 avec tous éléments',
+        '🏰 Bâtiments (glass, identicon, rings)',
+        '🦸 Héros (adventurer, lorelei)',
+        '🐉 Créatures (bottts, croodles)',
+        '🗡️ Artefacts avec effets spéciaux',
+        '✨ Animations et rarités'
+      ],
+      buttonText: '🎨 Ouvrir Démo Dicebear',
+      type: 'special',
+      borderColor: '#FFD700'
     },
     {
-      id: 'sphinx-demo-panel',
-      title: 'Sphinx Quantique',
+      id: 'sphinx-quantique',
       icon: '🦁',
-      description: 'Générateur Sphinx intelligent',
-      url: '#sphinx',
-      features: ['IA Sphinx', 'Génération contenu', 'Analyse quantique'],
-      status: 'active'
+      title: 'Sphinx Quantique - Démo Interactive',
+      description: 'Générateur aléatoire de questions quantiques + Interface joueur complète',
+      url: 'frontend/sphinx-interface-demo.html',
+      features: [
+        '🎲 Génération procédurale (~10,000 questions)',
+        '🧪 Validation physique automatique',
+        '⚗️ Interface HOTS interactive',
+        '🏆 Système de récompenses adaptatif',
+        '🌟 Événements spéciaux aléatoires',
+        '📊 Workflow joueur complet'
+      ],
+      buttonText: '🦁 Interface Sphinx',
+      type: 'special',
+      borderColor: '#FF6B6B'
     },
     {
-      id: 'world-state-graph-panel',
-      title: 'World State Graph',
-      icon: '🌐',
-      description: 'Visualisation graphe d\'état mondial',
-      url: '#world-state-graph',
-      features: ['Graphe d\'état', 'AI Limited data', 'Visualisation réseau'],
-      status: 'active'
+      id: 'console-hots-simple',
+      icon: '⌨️',
+      title: 'Console HOTS Simple',
+      description: 'Interface ultra-basique avec console intégrée - Un clic et c\'est parti !',
+      url: 'file://frontend/hots-console-simple.html',
+      features: [
+        '⚡ Boutons rapides (Énergie, Téléport, Combat)',
+        '🔧 Status backend temps réel',
+        '📝 Console interactive pour commandes HOTS',
+        '🔗 Lien sauvegardable en favoris',
+        '🌐 Connexion API localhost:8080'
+      ],
+      buttonText: '⌨️ Console Simple',
+      type: 'special',
+      borderColor: '#00ff88'
     },
     {
-      id: 'multi-realm-panel',
-      title: 'Multi Realm Manager',
-      icon: '🌌',
-      description: 'Gestionnaire des realms multiples',
-      url: '#multi-realm',
-      features: ['Gestion REALMS', '6ème dimension', 'Cross-realm actions'],
-      status: 'active'
+      id: 'true-heroes-interface',
+      icon: '🎯',
+      title: 'TrueHeroesInterface (Port 3000)',
+      description: 'Interface React sophistiquée avec Canvas 60 FPS, système ZFC complet et i18n',
+      url: 'http://localhost:3000',
+      features: [
+        '🎨 Canvas rendering 60 FPS',
+        '🌐 Système i18n multilingue',
+        '⚡ ZFC (Zermelo-Fraenkel-Choice) complet',
+        '🎮 Interface moderne React 19',
+        '🔄 State management Zustand',
+        '📱 Design responsive avancé'
+      ],
+      buttonText: '🎯 Interface Sophistiquée',
+      type: 'special',
+      borderColor: '#45b7d1'
     }
   ];
 
-  const heroesGrofi = [
-    { id: 'arthur', name: 'Arthur Pendragon', icon: '⚔️', faction: 'Camelot' },
-    { id: 'jean-grofignon', name: 'Jean-Grofignon', icon: '🛋️', faction: 'Canapé Cosmique' },
-    { id: 'anna-martel', name: 'Anna Martel', icon: '🔨', faction: 'Forge Temporelle' },
-    { id: 'memento', name: 'Memento Archive', icon: '🏛️', faction: 'Archiviste Éternel' },
-    { id: 'grut', name: 'GRUT Vision', icon: '👁️', faction: 'Omniscience' },
-    { id: 'vince-vega', name: 'Vince Vega', icon: '🔫', faction: 'Pulp Fiction' },
-    { id: 'benedikt', name: 'Benedikt Conulbrurcus', icon: '🌀', faction: 'Téléporteur Cosmique' }
-  ];
+  const checkServiceStatus = async (service: ServiceStatus) => {
+    try {
+      const response = await fetch(service.url, { 
+        method: 'GET', 
+        mode: 'no-cors',
+        signal: AbortSignal.timeout(3000)
+      });
+      return 'active';
+    } catch {
+      return 'inactive';
+    }
+  };
+
+  const checkAllServices = async () => {
+    const updatedStatuses = await Promise.all(
+      serviceStatuses.map(async (service) => ({
+        ...service,
+        status: await checkServiceStatus(service) as 'active' | 'inactive'
+      }))
+    );
+    setServiceStatuses(updatedStatuses);
+  };
 
   useEffect(() => {
-    setPanels(dashboardPanels);
-    checkServiceStatus();
+    checkAllServices();
+    const interval = setInterval(checkAllServices, 30000);
+    return () => clearInterval(interval);
   }, []);
 
-  const checkServiceStatus = async () => {
-    const services = [
-      { name: 'backend', url: 'http://localhost:8080/api/health' },
-      { name: 'frontend', url: 'http://localhost:8000' },
-      { name: 'temporal', url: 'http://localhost:5174' },
-      { name: 'visualizer', url: 'http://localhost:3001' },
-      { name: 'collection', url: 'http://localhost:5175' },
-      { name: 'testrunner', url: 'http://localhost:8888' },
-      { name: 'dashboard', url: 'http://localhost:9000' }
-    ];
-
-    const status: Record<string, boolean> = {};
-    
-    for (const service of services) {
-      try {
-        const response = await fetch(service.url, { 
-          method: 'GET',
-          mode: 'no-cors'
-        });
-        status[service.name] = true;
-      } catch {
-        status[service.name] = false;
-      }
-    }
-    
-    setServiceStatus(status);
-  };
-
-  const handlePanelClick = (panel: PanelData) => {
-    if (panel.status === 'disabled') return;
-    
+  const handlePanelClick = (panel: any) => {
     if (panel.url.startsWith('http')) {
       window.open(panel.url, '_blank');
+    } else if (panel.url.startsWith('file://')) {
+      // Handle local file URLs
+      const localPath = panel.url.replace('file://', '');
+      window.open(localPath, '_blank');
     } else {
-      // Handle internal navigation or special panels
-      console.log(`Navigating to internal panel: ${panel.id}`);
+      // Handle other URLs or show modal
+      console.log(`Opening ${panel.title}: ${panel.url}`);
     }
-  };
-
-  const handleHeroSelect = (heroId: string) => {
-    setSelectedHero(heroId);
-    console.log(`Hero selected: ${heroId}`);
   };
 
   return (
     <div className="dashboard-migration">
       <div className="dashboard-header">
-        <h1 className="dashboard-title">
-          🎯 Heroes of Time - Dashboard Central MIGRÉ
-        </h1>
+        <h1 className="dashboard-title">🎯 Heroes of Time - Dashboard Central</h1>
         <p className="dashboard-subtitle">
-          Migration complète du Dashboard 9000 vers Panopticon React
+          Interface unifiée - Migration complète du Dashboard HTML vers React
         </p>
       </div>
 
       {/* Heroes GROFI Section */}
       <div className="heroes-grofi-section">
-        <h2 className="heroes-grofi-title">🌟 Heroes GROFI Selection</h2>
+        <h2 className="heroes-grofi-title">🏛️ Heroes GROFI - Sélection</h2>
+        <p className="heroes-grofi-subtitle">
+          Choisissez votre héros pour commencer l'aventure temporelle
+        </p>
         <div className="heroes-grid">
-          {heroesGrofi.map(hero => (
-            <div 
+          {heroes.map((hero) => (
+            <div
               key={hero.id}
               className={`hero-card ${selectedHero === hero.id ? 'selected' : ''}`}
-              onClick={() => handleHeroSelect(hero.id)}
+              onClick={() => setSelectedHero(hero.id)}
             >
               <div className="hero-icon">{hero.icon}</div>
               <div className="hero-name">{hero.name}</div>
               <div className="hero-faction">{hero.faction}</div>
+              <div className="hero-power">{hero.power}</div>
             </div>
           ))}
         </div>
@@ -261,49 +373,78 @@ const DashboardMigration: React.FC = () => {
       <div className="status-bar">
         <h3>📊 Status des Services</h3>
         <div className="service-indicators">
-          {Object.entries(serviceStatus).map(([service, isActive]) => (
-            <div 
-              key={service}
-              className={`service-indicator ${isActive ? 'active' : 'inactive'}`}
+          {serviceStatuses.map((service) => (
+            <div
+              key={service.name}
+              className={`service-indicator ${service.status}`}
             >
-              <span className="service-dot"></span>
-              {service.charAt(0).toUpperCase() + service.slice(1)}
+              <div className="service-dot"></div>
+              <span>{service.name}</span>
             </div>
           ))}
         </div>
       </div>
 
       {/* Main Panels Grid */}
-      <div className="ui-grid">
-        {panels.map(panel => (
-          <div 
+      <div className="main-panels">
+        {panels.map((panel) => (
+          <div
             key={panel.id}
-            className={`ui-panel ${panel.status} ${panel.special ? 'special' : ''}`}
+            className={`ui-panel ${panel.type} ${panel.isWide ? 'wide' : ''}`}
+            style={panel.borderColor ? { 
+              borderColor: panel.borderColor,
+              boxShadow: `0 0 20px ${panel.borderColor}40`
+            } : {}}
             onClick={() => handlePanelClick(panel)}
           >
-            <div className="panel-icon">{panel.icon}</div>
-            <div className="panel-title">{panel.title}</div>
-            <div className="panel-description">{panel.description}</div>
-            <div className="panel-url">{panel.url}</div>
-            <ul className="panel-features">
-              {panel.features.map((feature, index) => (
-                <li key={index}>{feature}</li>
-              ))}
-            </ul>
-            <button 
-              className="launch-button"
-              disabled={panel.status === 'disabled'}
-            >
-              {panel.status === 'active' ? 'Lancer' : 
-               panel.status === 'ethereal' ? 'Mode Éthéré' : 'Désactivé'}
-            </button>
+            <div className="panel-header">
+              <div className="panel-icon" style={panel.borderColor ? { 
+                textShadow: `0 0 10px ${panel.borderColor}` 
+              } : {}}>
+                {panel.icon}
+              </div>
+              <h2 className="panel-title" style={panel.borderColor ? { 
+                color: panel.borderColor 
+              } : {}}>
+                {panel.title}
+              </h2>
+            </div>
+            
+            <div className="panel-content">
+              <p className="panel-description">{panel.description}</p>
+              <div className="panel-url">{panel.url}</div>
+              
+              <ul className="panel-features">
+                {panel.features.map((feature, index) => (
+                  <li key={index}>{feature}</li>
+                ))}
+              </ul>
+            </div>
+            
+            <div className="panel-footer">
+              <button 
+                className="launch-button"
+                style={panel.borderColor ? {
+                  background: `linear-gradient(45deg, ${panel.borderColor}, ${panel.borderColor}dd)`,
+                  boxShadow: `0 0 15px ${panel.borderColor}50`
+                } : {}}
+              >
+                {panel.buttonText}
+              </button>
+            </div>
           </div>
         ))}
       </div>
 
+      {/* Refresh Button */}
+      <button className="refresh-button" onClick={checkAllServices} title="Actualiser les statuts">
+        🔄
+      </button>
+
+      {/* Footer */}
       <div className="footer">
-        <p>🛋️ Dashboard migré par Jean-Grofignon depuis le Canapé Cosmique</p>
-        <p>🌀 Architecture React + TypeScript + GRUT Vision</p>
+        <p>🎯 Heroes of Time Dashboard - Migration React Complète</p>
+        <p>16 panneaux migrés - Actualisation automatique toutes les 30 secondes</p>
       </div>
     </div>
   );

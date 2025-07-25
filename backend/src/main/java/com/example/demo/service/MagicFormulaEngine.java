@@ -1659,4 +1659,71 @@ public class MagicFormulaEngine {
         
         return FormulaResult.success(result.get("message").toString(), result, "BENEDIKT");
     }
+    
+    // ==========================================
+    // OMEGA ZERO TRILOGY FORMULAS - WALTER FIX
+    // ==========================================
+    
+    private FormulaResult executeOmegaZeroFormula(String formulaType, GameContext context) {
+        Map<String, Object> result = new HashMap<>();
+        
+        switch (formulaType) {
+            case "THREATEN":
+                result.put("success", true);
+                result.put("message", "⚠️ MENACE DÉTECTÉE: OmégaZero approche (Niveau: COSMIQUE)");
+                result.put("threat_target", "timeline_principale");
+                result.put("threat_level", "EXISTENTIEL");
+                result.put("threat_range", 999);
+                result.put("countermeasures_available", true);
+                result.put("walter_status", "🎖️ WALTER: Menace identifiée ! Protocole défensif activé !");
+                break;
+                
+            case "DISSOLVE":
+                result.put("success", true);
+                result.put("message", "💧 DISSOLUTION EN COURS: Mondes dissolus détectés (Intensité: CRITIQUE)");
+                result.put("dissolution_target", "reality_fragments");
+                result.put("dissolution_rate", 85);
+                result.put("time_remaining", getRandomValue(3, 8));
+                result.put("reversible", false);
+                result.put("lysandrel_status", "🔨 LYSANDREL: Je forge des ancres anti-dissolution !");
+                break;
+                
+            case "ERASE":
+                result.put("success", true);
+                result.put("message", "🌀 EFFACEMENT INITIÉ: OmégaZero tente l'effacement total (Portée: UNIVERSELLE)");
+                result.put("erasure_target", "toute_existence");
+                result.put("erasure_scope", "cosmique");
+                result.put("progress", getRandomValue(10, 40));
+                result.put("resistance_detected", true);
+                result.put("anthan_status", "✒️ ANTHAN: Mon stylo protège contre l'effacement !");
+                result.put("omega_zero_signature", true);
+                break;
+                
+            case "PROTECT_NARRATIVE":
+                result.put("success", true);
+                result.put("message", "📚 PROTECTION NARRATIVE: Histoire ancrée dans l'éternité (Niveau: ÉTERNEL)");
+                result.put("protected_story", "heroes_of_time_saga");
+                result.put("protection_strength", 100);
+                result.put("erasure_immunity", true);
+                result.put("narrative_anchor", "permanent");
+                result.put("anthan_blessing", "✒️ Cette histoire est maintenant gravée dans l'éternité !");
+                break;
+                
+            case "COUNTER_OMEGA":
+                result.put("success", true);
+                result.put("message", "⚔️ CONTRE-ATTAQUE OMÉGAZERO: Résistance unifiée activée (Héros: TOUS)");
+                result.put("counter_strategy", "unified_resistance");
+                result.put("heroes_united", "jean_claudius_anna_anthor_lysandrel");
+                result.put("success_probability", getRandomValue(70, 95));
+                result.put("omega_weakness_detected", true);
+                result.put("jean_status", "🛋️ JEAN: J'ai trouvé le bouton anti-effacement cosmique !");
+                result.put("ultimate_powers_ready", true);
+                break;
+                
+            default:
+                return FormulaResult.error("Formule OmégaZero inconnue: " + formulaType);
+        }
+        
+        return FormulaResult.success(result.get("message").toString(), result, "OMEGA_ZERO_TRILOGY");
+    }
 } 

@@ -80,6 +80,26 @@ const NavigationHub: React.FC<NavigationHubProps> = ({ isVisible }) => {
       icon: <TestTube className="w-5 h-5" />,
       category: 'dev',
       status: 'unknown'
+    },
+    {
+      id: 'omega_zero_trilogy',
+      name: '🌟 OmégaZero Trilogie',
+      description: 'Démo visuelle complète de la trilogie OmégaZero - Combat épique final',
+      port: 8000,
+      path: '/omega-zero-trilogie-visuelle.html',
+      icon: <Activity className="w-5 h-5" />,
+      category: 'game',
+      status: 'unknown'
+    },
+    {
+      id: 'hots_console',
+      name: '⚡ Console HOTS',
+      description: 'Console interactive Heroes of Time - Commandes directes',
+      port: 8000,
+      path: '/hots-console-simple.html',
+      icon: <Settings className="w-5 h-5" />,
+      category: 'dev',
+      status: 'unknown'
     }
   ]
 
