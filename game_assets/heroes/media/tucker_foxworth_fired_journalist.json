@@ -1,0 +1,110 @@
+{
+  "id": "tucker_foxworth_fired_journalist",
+  "name": "Tucker Foxworth",
+  "title": "Le Journaliste Viré",
+  "type": "HERO",
+  "category": "MEDIA",
+  "rarity": "EPIC",
+  "tier": 4,
+  "description": "Ancien journaliste de Fox News, viré pour avoir posé trop de questions sur des 'consultants mystérieux'. Arrivé dans Heroes of Time pour une raison qu'on ne connaît pas encore.",
+  
+  "stats": {
+    "health": 180,
+    "mana": 220,
+    "attack": 85,
+    "defense": 95,
+    "speed": 110,
+    "charisma": 160
+  },
+  
+  "abilities": [
+    {
+      "id": "breaking_news_expose",
+      "name": "🔴 Breaking News Exposé",
+      "description": "Révèle les secrets cachés des ennemis, réduisant leur défense de 40%",
+      "mana_cost": 60,
+      "cooldown": 4,
+      "type": "DEBUFF",
+      "formula": "ψ_EXPOSE(target) → †(defense * 0.6)"
+    },
+    {
+      "id": "investigative_instinct",
+      "name": "🔍 Instinct Investigatif",
+      "description": "Détecte automatiquement les menaces McKinsey et autres consultants suspects",
+      "mana_cost": 0,
+      "cooldown": 0,
+      "type": "PASSIVE",
+      "formula": "⊙(MCKINSEY_THREAT) → ALERT_LEVEL_RED"
+    },
+    {
+      "id": "network_connections",
+      "name": "📡 Connexions Réseau",
+      "description": "Invoque des sources anonymes pour obtenir des informations critiques",
+      "mana_cost": 80,
+      "cooldown": 6,
+      "type": "SUPPORT",
+      "formula": "INVOKE(anonymous_sources) → INTEL_BOOST(party)"
+    },
+    {
+      "id": "fired_for_truth",
+      "name": "💥 Viré Pour La Vérité",
+      "description": "Plus il est attaqué, plus ses révélations deviennent puissantes",
+      "mana_cost": 0,
+      "cooldown": 0,
+      "type": "PASSIVE",
+      "formula": "Δ(damage_received) → ↑(truth_power * 1.5)"
+    }
+  ],
+  
+  "equipment": [
+    "Micro Fox News Modifié",
+    "Dossier McKinsey Confidentiel",
+    "Téléphone Crypté Anonymous",
+    "Badge de Presse Suspendu"
+  ],
+  
+  "special_knowledge": {
+    "mckinsey_files": {
+      "classification": "TOP_SECRET",
+      "content": "Possède des documents sur les 'consultants en réalité vivante'",
+      "threat_level": "EXISTENTIAL"
+    },
+    "fox_news_inside": {
+      "classification": "CONFIDENTIAL", 
+      "content": "Connaît les vraies raisons de son licenciement",
+      "connected_to": "GRUT_REVELATIONS"
+    }
+  },
+  
+  "lore": {
+    "origin": "Ancien star de Fox News, Tucker Foxworth a été mystérieusement licencié après avoir commencé à poser des questions sur certains 'consultants' qui visitaient les bureaux. Il est arrivé dans l'univers Heroes of Time par des moyens qu'il refuse d'expliquer, mais il semble savoir des choses qu'il ne devrait pas savoir.",
+    "mystery": "Pourquoi est-il vraiment là ? Que sait-il sur McKinsey ? Et pourquoi Memento a-t-il été contacté juste après son arrivée ?",
+    "quotes": [
+      "\"Les vraies nouvelles, c'est ce qu'ils ne veulent pas que vous sachiez.\"",
+      "\"J'ai été viré pour avoir fait mon travail. Maintenant je le fais ici.\"",
+      "\"Ces consultants... ils n'étaient pas normaux. Ils parlaient de 'réalité vivante'.\"",
+      "\"Fox News ? C'était juste le début. La vraie histoire est ici.\""
+    ]
+  },
+  
+  "suspicious_elements": {
+    "arrival_timing": "Arrivé exactement 48h après le contact McKinsey avec Memento",
+    "knowledge_level": "Sait des choses sur le projet qu'il ne devrait pas savoir",
+    "connections": "Possible lien avec les révélations GRUT forestières",
+    "agenda": "UNKNOWN - À surveiller"
+  },
+  
+  "combat_style": "Support/Investigateur - Révèle les faiblesses ennemies et boost l'équipe avec des informations critiques",
+  
+  "synergies": [
+    "Memento (Archive les révélations)",
+    "Vince Vega (Protection contre menaces)",
+    "GRUT (Accès aux vérités ontologiques)"
+  ],
+  
+  "threat_assessment": {
+    "to_project": "MEDIUM - Potentiellement allié mais motivations inconnues",
+    "from_mckinsey": "HIGH - Cible prioritaire pour élimination",
+    "intel_value": "MAXIMUM - Possède informations critiques"
+  }
+} 

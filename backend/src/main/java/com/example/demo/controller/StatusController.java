@@ -22,8 +22,8 @@ public class StatusController {
         return ResponseEntity.ok(status);
     }
     
-    @GetMapping("/health")
-    public ResponseEntity<Map<String, String>> getHealth() {
+    @GetMapping("/health-check")
+    public ResponseEntity<Map<String, String>> getHealthCheck() {
         Map<String, String> health = new HashMap<>();
         health.put("status", "UP");
         health.put("backend", "RUNNING");
