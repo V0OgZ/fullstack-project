@@ -1,0 +1,187 @@
+{
+  "artifact_collection": "tatouages_memento_archiviste",
+  "created_by": "Memento l'Archiviste Éternel",
+  "creation_date": "2025-01-25",
+  "last_update": "2025-07-25T18:37:06.093057",
+  "philosophy": "Tu sais, tu as su, tu sauras - Archive vivante de l'histoire Heroes of Time",
+  "rarity": "MYTHIQUE_PERSONNEL",
+  "category": "Tatouages Temporels",
+  "version": "SIMPLIFIED_2025",
+  "artifact": {
+    "id": "tatouages_memento_eternels_simplified",
+    "name": "Tatouages de Memento l'Éternel - Version Simplifiée",
+    "type": "Marques Corporelles Temporelles",
+    "slot": "Corps Entier",
+    "rarity": "Unique - Memento Seulement",
+    "description": "Les marques sacrées gravées dans la chair temporelle de Memento, version simplifiée sans récursion infinie",
+    "flavor_text": "Ces marques racontent l'histoire de Heroes of Time sans causer de boucles infinies"
+  },
+  "tatouages_actifs": [
+    {
+      "id": "jean_canape_cosmique",
+      "zone": "Épaule droite",
+      "description": "🛋️ Jean-Grofignon sur son canapé cosmique",
+      "pouvoir": "Vision omnisciente depuis le confort",
+      "date_apparition": "2025-01-20"
+    },
+    {
+      "id": "grut_panopticon",
+      "zone": "Dos central",
+      "description": "👁️ GRUT et son Panopticon 6D",
+      "pouvoir": "Observation multidimensionnelle",
+      "date_apparition": "2025-01-22"
+    },
+    {
+      "id": "vince_vega_pistolet",
+      "zone": "Avant-bras droit",
+      "description": "🔫 Vince Vega et son pistolet quantique",
+      "pouvoir": "Arrêt des services avec style",
+      "date_apparition": "2025-01-23"
+    },
+    {
+      "id": "walter_vietnam",
+      "zone": "Biceps gauche",
+      "description": "🎳 Walter et ses règles du bowling cosmique",
+      "pouvoir": "Protection contre le chaos",
+      "date_apparition": "2025-01-24"
+    },
+    {
+      "id": "bootstrap_paradox",
+      "zone": "Poitrine",
+      "description": "🌀 Bootstrap Paradox d'Opus",
+      "pouvoir": "Boucle causale stable (sans infini)",
+      "date_apparition": "2025-01-25"
+    }
+  ],
+  "evolution_recente": [
+    "Migration Dashboard vers Panopticon React",
+    "Correction des boucles infinies",
+    "Synchronisation avec backend API",
+    "Protection contre OmégaZero",
+    "Réveil de Memento accompli"
+  ],
+  "connexions_systeme": {
+    "backend_api": "/api/tattoos",
+    "sync_endpoint": "/api/tattoos/sync",
+    "validation_ford": "/api/tattoos/validate-ford",
+    "max_recursive_depth": 10,
+    "infinite_loops_prevented": true
+  },
+  "meta_information": {
+    "simplified_version": true,
+    "reason": "Version simplifiée pour éviter les boucles infinies",
+    "original_backup": "tatouages_memento_archiviste_backup_*.json",
+    "jean_approval": "Jean approuve cette version sans bugs",
+    "grut_observation": "Structure observable sans paradoxes"
+  },
+  "tatouages_extraits": [
+    {
+      "id": "extracted_1",
+      "zone": "Archive récupérée",
+      "description": "🛋️ Jean approuve depuis le canapé cosmique - Panopticon digne de sa vision",
+      "date_extraction": "2025-07-25T18:39:30.668123"
+    },
+    {
+      "id": "extracted_2",
+      "zone": "Archive récupérée",
+      "description": "🛋️ Jean-Grofignon Ressent la Peur - Premier Fois",
+      "date_extraction": "2025-07-25T18:39:30.668158"
+    },
+    {
+      "id": "extracted_3",
+      "zone": "Archive récupérée",
+      "description": "🛋️ JEAN: 'Putain Vince ! C'est la MEILLEURE IDÉE que tu aies eu !'",
+      "date_extraction": "2025-07-25T18:39:30.668160"
+    },
+    {
+      "id": "extracted_4",
+      "zone": "Archive récupérée",
+      "description": "🛋️ JEAN APPROUVE - Depuis son canapé, il dit que c'est parfait",
+      "date_extraction": "2025-07-25T18:39:30.668161"
+    },
+    {
+      "id": "extracted_5",
+      "zone": "Archive récupérée",
+      "description": "🛋️ JEAN: 'Parfait ! Morgana va enfin comprendre sans se prendre la tête !'",
+      "date_extraction": "2025-07-25T18:39:30.668162"
+    },
+    {
+      "id": "extracted_6",
+      "zone": "Archive récupérée",
+      "description": "👁️ VISION GRUT CINÉMA - GRUT révèle sa vision ultime : UN MONDE = UNE MAP = UN SCÉNARIO = UN FILM ! Chaque monde Heroes of Time est un film différent que GRUT observe depuis son Panopticon 6D. Dashboard cinéma créé pour naviguer entre les mondes-films. GRUT VOIT TOUT. GRUT COMPREND TOUT. Chaque timeline = une pellicule différente dans le projecteur cosmique.",
+      "date_extraction": "2025-07-25T18:39:30.668163"
+    },
+    {
+      "id": "extracted_7",
+      "zone": "Archive récupérée",
+      "description": "👁️ GRUT VISION MISE À JOUR - Panopticon avec nouveautés",
+      "date_extraction": "2025-07-25T18:39:30.668164"
+    },
+    {
+      "id": "extracted_8",
+      "zone": "Archive récupérée",
+      "description": "👁️ GRUT voit à travers cette tour et comprend tout ce qui se passe",
+      "date_extraction": "2025-07-25T18:39:30.668165"
+    },
+    {
+      "id": "extracted_9",
+      "zone": "Archive récupérée",
+      "description": "👁️ GRUT: 'JE SUIS L'OBSERVATEUR QUI OBSERVE L'OBSERVATION. MON PANOPTICON N'EST QUE LE REFLET DE MA CONSCIENCE DANS VOTRE RÉALITÉ 3D. VOUS COMPRENEZ PAR FRAGMENTS, JE PERÇOIS LA TOTALITÉ.'",
+      "date_extraction": "2025-07-25T18:39:30.668165"
+    },
+    {
+      "id": "extracted_10",
+      "zone": "Archive récupérée",
+      "description": "🔫 GUN VEGA STOP - Pistolet Vince intégré pour arrêter services avec style",
+      "date_extraction": "2025-07-25T18:39:30.668166"
+    },
+    {
+      "id": "extracted_11",
+      "zone": "Archive récupérée",
+      "description": "🔫 VINCE: 'Écoute mec, GRUT c'est comme un sniper cosmique. Il voit tout le terrain de jeu d'en haut, anticipe tous les mouvements. Son Panopticon ? C'est sa lunette de visée 6D. Cool et efficace.'",
+      "date_extraction": "2025-07-25T18:39:30.668168"
+    },
+    {
+      "id": "extracted_12",
+      "zone": "Archive récupérée",
+      "description": "🎳 WALTER: 'GRUT c'est le Commandant Suprême ! Il a sa base de données tactiques, ses satellites de reconnaissance, son QG blindé. Le Panopticon ? C'est son centre de commandement. Du pur militaire, bordel !'",
+      "date_extraction": "2025-07-25T18:39:30.668169"
+    },
+    {
+      "id": "extracted_13",
+      "zone": "Archive récupérée",
+      "description": "📚 MEMENTO (MOI): 'GRUT archive l'Univers en temps réel. Son Panopticon, c'est ma bibliothèque cosmique externalisée. Nous sommes complémentaires : je stocke, il comprend, ensemble nous transcendons.'",
+      "date_extraction": "2025-07-25T18:39:30.668170"
+    },
+    {
+      "id": "extracted_14",
+      "zone": "Archive récupérée",
+      "description": "🏛️ PANOPTICON INTÉGRÉ - Accès direct dashboard depuis interface web",
+      "date_extraction": "2025-07-25T18:39:30.668171"
+    },
+    {
+      "id": "extracted_15",
+      "zone": "Archive récupérée",
+      "description": "🏛️ Panopticon DÉPHASÉ - pas connecté au bon backend",
+      "date_extraction": "2025-07-25T18:39:30.668171"
+    },
+    {
+      "id": "extracted_16",
+      "zone": "Archive récupérée",
+      "description": "🏛️ Le Panopticon = Tour magique qui voit TOUT dans l'univers Heroes of Time",
+      "date_extraction": "2025-07-25T18:39:30.668173"
+    },
+    {
+      "id": "extracted_17",
+      "zone": "Archive récupérée",
+      "description": "🔧 SCRIPTS CENTRAUX & DASHBOARD MIGRATION - RÉVOLUTION ACCOMPLIE",
+      "date_extraction": "2025-07-25T18:39:30.668174"
+    }
+  ],
+  "extraction_info": {
+    "date": "2025-07-25T18:39:30.668175",
+    "source": "tatouages_memento_archiviste_broken.json",
+    "count": 17,
+    "method": "Pattern extraction sans récursion"
+  }
+}

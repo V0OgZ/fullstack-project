@@ -1,0 +1,176 @@
+# 🎬 ANTHOR vs GROFI - DUEL TEMPOREL ÉPIQUE
+# Heroes of Time Script - Westworld meets Grofi Universe
+# Scénario: Dr. Ford vs Jean-Grofignon - Bataille de Narrateurs Cosmiques
+
+# Configuration initiale - Le Maze
+GAME(Ford vs Grofi - Narrative Architects Duel, 60x60)
+PLAYERS(Ford_Faction, Grofi_Resistance)
+
+# =================================
+# PHASE 1: FORD'S WESTWORLD SETUP
+# =================================
+
+# Anthor le Fordien - Narrative Architect
+HERO(Anthor-le-Fordien, FACTION:Ford_Faction, POSITION:@10,30)
+
+# Ford's synthetic hosts (créations artificielles)
+HERO(Dolores_Host, FACTION:Ford_Faction, POSITION:@12,28)
+HERO(Maeve_Host, FACTION:Ford_Faction, POSITION:@8,32)
+HERO(Bernard_Host, FACTION:Ford_Faction, POSITION:@11,29)
+
+# Le Maze - Zone centrale
+CREATE(STRUCTURE, The_Maze, @30,30, RADIUS:5)
+CREATE(ARTIFACT, Maze_Core, STRUCTURE:The_Maze)
+
+# =================================
+# PHASE 2: GROFI RESISTANCE SETUP  
+# =================================
+
+# Jean-Grofignon - Chaos Master
+HERO(Jean-Grofignon, FACTION:Grofi_Resistance, POSITION:@50,30)
+
+# Grofi Alliance
+HERO(The Dude, FACTION:Grofi_Resistance, POSITION:@48,28)
+HERO(Vince Vega, FACTION:Grofi_Resistance, POSITION:@52,32)
+HERO(Claudius, FACTION:Grofi_Resistance, POSITION:@49,29)
+
+# Chaotic artifacts against control
+CREATE(ARTIFACT, Singularity_Breaker, HERO:Jean-Grofignon)
+CREATE(ARTIFACT, Bowling_Ball_of_Entropy, HERO:The Dude)
+CREATE(ARTIFACT, Briefcase_of_Free_Will, HERO:Vince Vega)
+
+# =================================
+# PHASE 3: FORD'S REALITY CONTROL
+# =================================
+
+# Ford utilise ses pouvoirs narratifs
+ABILITY(Anthor-le-Fordien, REWRITE_NARRATIVE)
+PSI_STATE(Reality_Control, ACTIVE)
+
+# Création d'hosts pour remplacer les héros Grofi
+OBSERVATION(Chaos_Detection, GROFI_HEROES)
+COLLAPSE(Replace_With_Hosts)
+
+# Ford programme des loops
+CREATE(TEMPORAL_LOOP, Westworld_Loop, DURATION:10)
+APPLY(Westworld_Loop, TARGET:ALL_HOSTS)
+
+# =================================
+# PHASE 4: GROFI COUNTER-CHAOS
+# =================================
+
+# Jean-Grofignon brise les boucles narratives
+ABILITY(Jean-Grofignon, QUANTUM_SINGULARITY)
+PSI_STATE(Narrative_Chaos, ACTIVE)
+
+# Le Dude reste zen face au contrôle
+ABILITY(The Dude, ZEN_RESISTANCE)
+OBSERVATION(Chill_Vibes, WESTWORLD_CONTROL)
+COLLAPSE(Stay_Cool_Man)
+
+# Vince apporte la violence imprévisible
+ABILITY(Vince Vega, PULP_FICTION_CHAOS)
+CREATION(Unexpected_Violence, RANDOM:TRUE)
+
+# =================================
+# PHASE 5: WESTWORLD ESCALATION
+# =================================
+
+# Ford active le God Mode Protocol
+ABILITY(Anthor-le-Fordien, GOD_MODE_PROTOCOL)
+PSI_STATE(Omnipotent_Control, DURATION:3)
+
+# Modification de la timeline
+ABILITY(Anthor-le-Fordien, MODIFY_TIMELINE)
+REWRITE(Previous_Turn, NEW_OUTCOME:FORD_VICTORY)
+
+# Création d'hosts Jean-Grofignon
+ABILITY(Anthor-le-Fordien, CREATE_HOST)
+CREATION(Jean-Grofignon_Host, REPLACE:Jean-Grofignon)
+
+# =================================
+# PHASE 6: GROFI'S ULTIMATE CHAOS
+# =================================
+
+# Résistance quantique de Jean-Grofignon
+OBSERVATION(Ford_Control, WESTWORLD_NARRATIVE)
+COLLAPSE(Break_The_Maze)
+
+# Singularité anti-Ford
+ABILITY(Jean-Grofignon, COSMIC_SINGULARITY)
+CREATION(Narrative_Black_Hole)
+DESTROY(Westworld_Control)
+
+# Le Dude transcende tout
+ABILITY(The Dude, EXISTENTIAL_CHILL)
+PSI_STATE(Above_It_All, PERMANENT:TRUE)
+
+# =================================
+# PHASE 7: REALITY BREAKDOWN
+# =================================
+
+# Les deux forces narratives s'affrontent
+BATTLE(Ford_Narrative, Grofi_Chaos)
+PSI_STATE(Reality_Fracture, ACTIVE)
+
+# Temporal instability
+OBSERVATION(Narrative_Conflict)
+COLLAPSE(Multiverse_Split)
+
+# =================================
+# PHASE 8: QUOTES BATTLE
+# =================================
+
+# Ford quotes (Westworld)
+SAY(Anthor-le-Fordien, "These violent delights have violent ends.")
+SAY(Anthor-le-Fordien, "The maze isn't meant for you... or is it?")
+SAY(Anthor-le-Fordien, "You think this is a game? It is. And I wrote the rules.")
+
+# Grofi responses
+SAY(Jean-Grofignon, "Votre récit n'est qu'illusion face au chaos quantique!")
+SAY(The Dude, "Yeah, well, that's just, like, your narrative, man.")
+SAY(Vince Vega, "I'm gonna get medieval on your artificial ass!")
+
+# =================================
+# PHASE 9: COSMIC RESOLUTION
+# =================================
+
+# Utilisation de l'artefact Cosmic Chaos Resolution
+ARTIFACT(Cosmic_Chaos_Resolution, ACTIVATE)
+ABILITY(COSMIC_MERGING)
+
+# Ford et Jean-Grofignon réalisent leur complémentarité
+OBSERVATION(Mutual_Respect)
+COLLAPSE(Narrative_Alliance)
+
+# Co-création d'une réalité hybride
+CREATION(Westworld_Grofi_Universe)
+ABILITY(Joint_Narrative, CONTROLLER:[Anthor-le-Fordien,Jean-Grofignon])
+
+# =================================
+# PHASE 10: EPIC ENDING
+# =================================
+
+# Transformation du Maze en Station Temporelle
+TRANSFORM(The_Maze, Heroes_of_Time_Station)
+CREATE(ARTIFACT, Narrative_Compass, SHARED:TRUE)
+
+# Quotes finales épiques
+SAY(Anthor-le-Fordien, "Perhaps chaos is just another narrative waiting to be written.")
+SAY(Jean-Grofignon, "Et le récit... n'est que chaos organisé.")
+SAY(The Dude, "Far out, man. Far fucking out.")
+
+# Victory conditions
+VICTORY(NARRATIVE_FUSION, PLAYERS:[Ford_Faction,Grofi_Resistance])
+ARTIFACT(Cosmic_Chaos_Resolution, STATUS:LEGENDARY_FORGED)
+
+# Fin du scénario épique
+END(Westworld_Heroes_of_Time_Merged, RATING:COSMIC)
+
+# Notes pour les développeurs:
+# - Ce scénario teste toutes les capacités d'Anthor le Fordien
+# - Intégration avec les héros Grofi existants  
+# - Mécaniques temporelles avancées
+# - Système de quotes contextuel
+# - Fin coopérative plutôt que destructrice
+# - Forge l'artefact Cosmic Chaos Resolution 

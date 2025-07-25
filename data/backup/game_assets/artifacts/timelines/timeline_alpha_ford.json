@@ -1,0 +1,98 @@
+{
+  "id": "timeline_alpha_ford",
+  "name": "Timeline Alpha - Ford's First Reality",
+  "category": "TIMELINE_FORD",
+  "tier": "COSMIC",
+  "rarity": "UNIQUE_FORD",
+  "type": "QUANTUM_REALITY_GATEWAY",
+  "description": {
+    "surface": "La première réalité du parc de Ford - stable et prévisible",
+    "deep": "Timeline avec faible risque paradoxal et haute stabilité temporelle. Idéale pour débuter.",
+    "ford_truth": "This is where beginners learn the rules. But rules are meant to be broken."
+  },
+  "quantum_formulas": {
+    "paradoxRisk": 0.2,
+    "temporalStability": 0.9,
+    "affectedRadius": 3.0,
+    "calculation_method": "Math.min(0.95, temporalFactor * 0.15 + (durationTurns * 0.05))",
+    "walter_analysis": "FAVORABLE: Low paradox risk, high stability - Combat recommended"
+  },
+  "ford_parameters": {
+    "difficulty": "Easy",
+    "combat_success_rate": 0.8,
+    "enemy_strength_modifier": 0.7,
+    "player_advantage": true,
+    "timeline_color": "#4CAF50",
+    "ford_approval": "Acceptable starting point"
+  },
+  "abilities": [
+    {
+      "name": "Stable Reality Anchor",
+      "type": "PASSIVE",
+      "effect": "Reduces paradox risk by 50% for all actions in this timeline",
+      "formula": "paradoxRisk *= 0.5"
+    },
+    {
+      "name": "Temporal Stability Field",
+      "type": "PASSIVE", 
+      "effect": "Maintains high temporal stability even during combat",
+      "formula": "temporalStability = Math.max(0.8, base_stability)"
+    },
+    {
+      "name": "Ford's Training Wheels",
+      "type": "HIDDEN",
+      "effect": "Ford secretly assists new incarnates in this timeline",
+      "formula": "combat_success_rate += 0.3"
+    }
+  ],
+  "combat_mechanics": {
+    "enemy_types": ["Training Dummy", "Weak Paradox Echo", "Stable Reality Glitch"],
+    "max_enemy_level": 3,
+    "victory_conditions": {
+      "standard": "Deal damage > enemy.hp",
+      "walter_bonus": "If paradoxRisk < 0.3 AND temporalStability > 0.7, +50% damage",
+      "ford_secret": "Timeline Alpha enemies have 30% less HP"
+    },
+    "defeat_consequences": {
+      "hp_loss": "20%",
+      "paradox_penalty": "None (Ford protects beginners)",
+      "timeline_lock": false
+    }
+  },
+  "progression_rewards": {
+    "first_victory": {
+      "experience": 100,
+      "ford_message": "Ford nods slightly. You're beginning to understand.",
+      "unlock": "Timeline Beta access"
+    },
+    "mastery": {
+      "cosmic_spell_progress": "1/10",
+      "ford_recognition": "This timeline no longer challenges you.",
+      "special_bonus": "Permanent +10% success rate in all timelines"
+    }
+  },
+  "lore": {
+    "origin": "Created by Ford as the entry point to his park",
+    "purpose": "Test basic understanding of quantum combat mechanics",
+    "hidden_truth": "Ford monitors every action in this timeline personally",
+    "connection_to_westworld": "Similar to Sweetwater - designed to be safe for newcomers",
+    "ford_quote": "Everyone starts somewhere. Even I had a first timeline."
+  },
+  "technical_implementation": {
+    "backend_endpoint": "/api/timelines/alpha/combat",
+    "frontend_component": "TimelineAlphaInterface",
+    "quantum_calculator": "AlphaQuantumEngine.java",
+    "walter_validator": "WalterCombatAnalyzer.validateAlpha()",
+    "ford_observer": "FordObserver.monitorAlphaActivity()"
+  },
+  "metadata": {
+    "created_by": "Dr. Robert Ford",
+    "implemented_by": "Memento-Claudius-Opus",
+    "ford_approval_date": "2025-01-25",
+    "walter_validation": "PASSED - Optimal beginner timeline",
+    "danger_level": "MINIMAL",
+    "incarnation_requirement": true,
+    "part_of_ford_mastery": true,
+    "sequence_number": 1
+  }
+} 

@@ -1,0 +1,76 @@
+{
+    "id": "clef_paracausale",
+    "name": "Clef de Paracausalité",
+    "type": "legendary",
+    "tier": 5,
+    "description": "Permet de naviguer entre les mondes du multivers",
+    "lore": "Forgée dans l'espace entre les réalités, cette clef ouvre des passages que même les dieux ne peuvent fermer. Les sages murmurent qu'elle fut créée par les architectes du premier monde, avant que la causalité ne se fragmente.",
+    "stats": {
+        "intelligence": 50,
+        "temporal_affinity": 100,
+        "dimensional_resonance": 75
+    },
+    "effects": {
+        "passive": {
+            "multiverse_vision": true,
+            "portal_detection_range": 10,
+            "dimensional_stability": 0.25,
+            "reality_anchor": "Empêche d'être perdu entre les dimensions"
+        },
+        "active": {
+            "name": "Ouverture Dimensionnelle",
+            "cost": {
+                "mp": 100,
+                "temporal_energy": 50
+            },
+            "cooldown": 300,
+            "effect": "CREATE_PORTAL(target_world)",
+            "description": "Ouvre un portail stable vers un monde parallèle pendant 60 secondes",
+            "quantum_formula": "ψ(M) = Σ(|world_i⟩ ⊗ |portal⟩) → BRIDGE(i,j)"
+        },
+        "ultimate": {
+            "name": "Convergence des Mondes",
+            "cost": {
+                "mp": 500,
+                "all_temporal_charges": true
+            },
+            "cooldown": 3600,
+            "effect": "MERGE_REALITIES(radius: 5)",
+            "description": "Fusionne temporairement plusieurs réalités en un point"
+        }
+    },
+    "visual": {
+        "model": "swirling_key",
+        "particles": "quantum_sparkles",
+        "sound": "dimensional_chime",
+        "glow": {
+            "color": "#00FFFF",
+            "intensity": "pulsating",
+            "pattern": "fibonacci_spiral"
+        }
+    },
+    "requirements": {
+        "level": 50,
+        "intelligence": 200,
+        "achievements": ["dimensional_traveler", "reality_scholar"]
+    },
+    "omega_zero_trap": {
+        "hidden": true,
+        "effect": "Quand OmegaZero utilise cette clef, elle enregistre secrètement sa signature quantique",
+        "tracking": {
+            "log_all_uses": true,
+            "fake_destinations": ["M-VOID", "M-NULL", "M-TRAP"],
+            "redirect_probability": 0.15
+        }
+    },
+    "crafting": {
+        "materials": [
+            "fragment_realite_x3",
+            "essence_temporelle_pure",
+            "oeil_observateur_quantique"
+        ],
+        "location": "forge_interdimensionnelle",
+        "time": 7200,
+        "success_rate": 0.33
+    }
+}
