@@ -159,9 +159,16 @@ public class QuantumStressMonitor {
     }
     
     /**
-     * ⚡ Obtenir le niveau de stress quantique actuel
+     * 📊 GET CURRENT STRESS LEVEL - Niveau de stress actuel
      */
     public double getCurrentStressLevel() {
+        return getCurrentStress();
+    }
+    
+    /**
+     * 📊 GET CURRENT STRESS - Stress quantique actuel
+     */
+    public double getCurrentStress() {
         double stressLevel = 0.0;
         
         // Contribution CPU

@@ -1657,6 +1657,6 @@ public class MagicFormulaEngine {
                 return FormulaResult.error("Formule Benedikt inconnue: " + formulaType);
         }
         
-        return new FormulaResult(true, result.get("message").toString(), result);
+        return FormulaResult.success(result.get("message").toString(), result, "BENEDIKT");
     }
 } 

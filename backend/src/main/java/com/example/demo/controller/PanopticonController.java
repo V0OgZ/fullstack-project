@@ -1,18 +1,14 @@
 package com.example.demo.controller;
 
 import com.example.demo.service.GameService;
-import com.example.demo.service.GameStateService;
 import com.example.demo.service.QuantumStressMonitor;
 import com.example.demo.service.RecursionProtector;
-import com.example.demo.model.Panopticon6DView;
-import com.example.demo.model.ObservationRequest;
-import com.example.demo.model.ObservationResult;
-import com.example.demo.model.AlertRequest;
+import com.example.demo.service.VirtualWorldManagerStub;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -21,10 +17,10 @@ import java.util.stream.Collectors;
  * ==========================================
  * 
  * Contrôleur pour le Panopticon 6D selon les spécifications d'OPUS.
- * Gère la visualisation des 6 dimensions : t, x, y, ψ, Σ, S, 𝕽
+ * Gère la visualisation des 6 dimensions et les composants 3D.
  * 
  * OPUS: "Le Panopticon voit tout, mais ne révèle que ce que l'observateur peut comprendre"
- * STATUS: ✅ CRÉÉ selon specs OPUS 4ème visite
+ * STATUS: ✅ CRÉÉ selon specs OPUS 4ème visite - VERSION SIMPLIFIÉE
  */
 @RestController
 @RequestMapping("/api/panopticon")
@@ -35,289 +31,226 @@ public class PanopticonController {
     private GameService gameService;
     
     @Autowired
-    private GameStateService gameStateService;
-    
-    @Autowired
     private QuantumStressMonitor quantumStressMonitor;
     
     @Autowired
     private RecursionProtector recursionProtector;
     
+    @Autowired
+    private VirtualWorldManagerStub virtualWorldManager;
+    
     /**
-     * 🌐 Vue 6D complète d'un monde
-     * Dimensions: t(temps), x,y,z(espace), ψ(causalité), Σ(superposition), S(entropie), 𝕽(récursivité)
+     * 🎯 GET PANOPTICON STATUS - État général du Panopticon 6D
      */
-    @GetMapping("/view/{worldId}")
-    public ResponseEntity<Panopticon6DView> getWorldView(@PathVariable String worldId) {
-        try {
-            Panopticon6DView view = new Panopticon6DView();
-            
-            // Vérifier la profondeur de récursion
-            recursionProtector.enterRecursion(worldId);
-            
-            try {
-                // Dimensions spatiales et temporelles (t, x, y, z)
-                view.setTimelines(gameService.getTimelinesForWorld(worldId));
-                view.setZones(gameService.getActiveZones(worldId));
-                
-                // Dimensions quantiques (ψ, Σ, S)
-                view.setCausalityLinks(calculateCausality(worldId));
-                view.setSuperpositions(calculateSuperpositions(worldId));
-                view.setEntropyMap(calculateEntropy(worldId));
-                
-                // Dimension récursive (𝕽)
-                view.setRecursionDepth(recursionProtector.getRecursionDepth(worldId));
-                view.setRecursionLayers(getRecursionLayers(worldId));
-                
-                // Métadonnées 6D complètes
-                Map<String, Object> dimensionalData = new HashMap<>();
-                dimensionalData.put("t", view.getTimelines().stream().map(t -> t.getCurrentTurn()).collect(Collectors.toList()));
-                dimensionalData.put("x", view.getZones().stream().map(z -> z.getX()).collect(Collectors.toList()));
-                dimensionalData.put("y", view.getZones().stream().map(z -> z.getY()).collect(Collectors.toList()));
-                dimensionalData.put("z", view.getZones().stream().map(z -> z.getZ()).collect(Collectors.toList()));
-                dimensionalData.put("ψ", view.getCausalityLinks().size());
-                dimensionalData.put("Σ", view.getSuperpositions().size());
-                dimensionalData.put("S", calculateAverageEntropy(view.getEntropyMap()));
-                dimensionalData.put("𝕽", view.getRecursionDepth());
-                
-                view.setDimensionalData(dimensionalData);
-                
-                // Alertes et monitoring
-                view.setQuantumAlerts(quantumStressMonitor.getActiveAlerts(worldId));
-                view.setSystemMetrics(quantumStressMonitor.getSystemMetrics());
-                
-                return ResponseEntity.ok(view);
-                
-            } finally {
-                recursionProtector.exitRecursion(worldId);
-            }
-            
-        } catch (RecursionLimitException e) {
-            return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS)
-                .body(createErrorView("Recursion limit exceeded: " + e.getMessage()));
-        } catch (Exception e) {
-            quantumStressMonitor.fireQuantumDisturbanceEvent("PANOPTICON_ERROR", 
-                "Error generating 6D view for world " + worldId + ": " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(createErrorView("Quantum disturbance detected: " + e.getMessage()));
-        }
+    @GetMapping("/status")
+    public ResponseEntity<Map<String, Object>> getPanopticonStatus() {
+        Map<String, Object> status = Map.of(
+            "panopticonActive", true,
+            "dimensions", 6,
+            "quantumStress", quantumStressMonitor.getCurrentStressLevel(),
+            "recursionDepth", recursionProtector.getRecursionStatus().get("currentDepth"),
+            "activePortals", virtualWorldManager.getVirtualWorldsStatus().get("totalWorlds"),
+            "componentsStatus", Map.of(
+                "portalRoom", "OPERATIONAL",
+                "multiSliceView", "OPERATIONAL", 
+                "tesseractManipulator", "OPERATIONAL",
+                "dimensionM", "TRAP_ARMED"
+            ),
+            "timestamp", LocalDateTime.now()
+        );
+        
+        return ResponseEntity.ok(status);
     }
     
     /**
-     * 👁️ Observer un état quantique (peut causer un collapse)
+     * 🌌 PORTAL ROOM DATA - Données pour la salle des portails
      */
-    @PostMapping("/observe")
-    public ResponseEntity<ObservationResult> observeState(@RequestBody ObservationRequest request) {
-        ObservationResult result = new ObservationResult();
+    @GetMapping("/portal-room")
+    public ResponseEntity<Map<String, Object>> getPortalRoomData() {
+        Map<String, Object> portalData = Map.of(
+            "dimensions", Arrays.asList(
+                Map.of("id", "SPACE_XYZ", "name", "Space (X,Y,Z)", "color", "#4CAF50", "active", true),
+                Map.of("id", "TIME_T", "name", "Time (T)", "color", "#2196F3", "active", false),
+                Map.of("id", "CAUSALITY_PSI", "name", "Causality (Ψ)", "color", "#FF9800", "active", false),
+                Map.of("id", "SUPERPOSITION_SIGMA", "name", "Superposition (Σ)", "color", "#9C27B0", "active", false),
+                Map.of("id", "ENTROPY_S", "name", "Entropy (S)", "color", "#F44336", "active", false),
+                Map.of("id", "RECURSIVITY_R", "name", "Recursivity (𝕽)", "color", "#FF5722", "active", false)
+            ),
+            "quantumStress", quantumStressMonitor.getCurrentStressLevel(),
+            "currentDimension", "SPACE_XYZ",
+            "portalStatus", "OPERATIONAL"
+        );
         
-        try {
-            // Enregistrer l'observation pour monitoring
-            quantumStressMonitor.recordObservation(request.getInstanceId(), request.getObserverId());
-            
-            // Vérifier si l'observation cause un collapse
-            if (gameStateService.isInSuperposition(request.getInstanceId())) {
-                if (request.isSimulateOnly()) {
-                    result.setSimulated(true);
-                    result.setPossibleOutcomes(gameStateService.simulateCollapse(request.getInstanceId()));
-                } else {
-                    result.setCollapsed(true);
-                    result.setNewState(gameStateService.collapseState(request.getInstanceId(), request.getObserverId()));
-                    
-                    // Déclencher événement de collapse
-                    quantumStressMonitor.fireQuantumDisturbanceEvent("QUANTUM_COLLAPSE", 
-                        "State collapsed by observer " + request.getObserverId());
+        return ResponseEntity.ok(portalData);
+    }
+    
+    /**
+     * 🔬 MULTI SLICE DATA - Données pour la vue multi-tranches
+     */
+    @GetMapping("/multi-slice/{dimensions}")
+    public ResponseEntity<Map<String, Object>> getMultiSliceData(@PathVariable String dimensions) {
+        String[] dimArray = dimensions.split(",");
+        
+        List<Map<String, Object>> sliceData = Arrays.stream(dimArray)
+            .map(dim -> {
+                // Générer des données simulées pour chaque dimension
+                List<Map<String, Object>> data = new ArrayList<>();
+                for (int i = 0; i < 64; i++) {
+                    data.add(Map.of(
+                        "id", i,
+                        "value", Math.random() * 2 + 0.1,
+                        "quantum", Math.random(),
+                        "causal", Math.random() > 0.5
+                    ));
                 }
-            } else {
-                result.setProjectedState(gameStateService.getProjectedState(request.getInstanceId()));
-            }
-            
-            return ResponseEntity.ok(result);
-            
-        } catch (Exception e) {
-            quantumStressMonitor.fireQuantumDisturbanceEvent("OBSERVATION_ERROR", 
-                "Error during observation: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(ObservationResult.error("Observation failed: " + e.getMessage()));
-        }
-    }
-    
-    /**
-     * 🚨 Déclencher une alerte quantique manuelle
-     */
-    @PostMapping("/trigger-alert")
-    public ResponseEntity<Map<String, Object>> triggerAlert(@RequestBody AlertRequest request) {
-        try {
-            // Vérifications de sécurité selon specs OPUS
-            if (recursionProtector.getCurrentDepth() > 4) {
-                quantumStressMonitor.fireQuantumDisturbanceEvent(
-                    "RECURSION_OVERFLOW", 
-                    "Recursion depth exceeded safe limit of 4"
+                
+                return Map.of(
+                    "dimension", dim,
+                    "data", data,
+                    "stability", Math.random() * 100,
+                    "coherence", Math.random() * 100
                 );
-            }
-            
-            // Traitement selon le type d'alerte
-            Map<String, Object> response = new HashMap<>();
-            response.put("alertId", UUID.randomUUID().toString());
-            response.put("type", request.getAlertType());
-            response.put("timestamp", new Date());
-            
-            switch (request.getAlertType()) {
-                case "SOURCE_REUSE":
-                    response = handleSourceReuseAlert(request);
-                    break;
-                case "DIMENSIONAL_BREACH":
-                    response = handleDimensionalBreachAlert(request);
-                    break;
-                case "QUANTUM_OVERLOAD":
-                    response = handleQuantumOverloadAlert(request);
-                    break;
-                default:
-                    quantumStressMonitor.fireQuantumDisturbanceEvent(request.getAlertType(), 
-                        request.getMessage());
-                    response.put("handled", true);
-            }
-            
-            return ResponseEntity.ok(response);
-            
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(Map.of("error", "Alert processing failed: " + e.getMessage()));
-        }
+            })
+            .collect(Collectors.toList());
+        
+        Map<String, Object> response = Map.of(
+            "slices", sliceData,
+            "recursionDepth", recursionProtector.getRecursionStatus().get("currentDepth"),
+            "connections", generateSliceConnections(dimArray),
+            "timestamp", System.currentTimeMillis()
+        );
+        
+        return ResponseEntity.ok(response);
     }
     
     /**
-     * 🌐 Obtenir le graphe des connexions interdimensionnelles
+     * 🎛️ TESSERACT DATA - Données pour le manipulateur de tesseract
      */
-    @GetMapping("/multiverse-graph")
-    public ResponseEntity<Map<String, Object>> getMultiverseGraph() {
-        try {
-            Map<String, Object> graph = new HashMap<>();
-            
-            // Récupérer tous les mondes virtuels (dimension M)
-            List<String> virtualWorlds = gameService.getAllVirtualWorlds();
-            graph.put("worlds", virtualWorlds);
-            
-            // Connexions entre mondes
-            List<Map<String, Object>> connections = new ArrayList<>();
-            for (int i = 0; i < virtualWorlds.size() - 1; i++) {
-                Map<String, Object> connection = new HashMap<>();
-                connection.put("from", virtualWorlds.get(i));
-                connection.put("to", virtualWorlds.get(i + 1));
-                connection.put("stability", 0.7 + Math.random() * 0.3);
-                connection.put("type", "QUANTUM_BRIDGE");
-                connections.add(connection);
+    @GetMapping("/tesseract")
+    public ResponseEntity<Map<String, Object>> getTesseractData() {
+        // Vertices du tesseract 4D
+        List<Map<String, Object>> vertices = new ArrayList<>();
+        double[][][] tesseractCoords = {
+            {{-1,-1,-1,0}, {1,-1,-1,0}, {1,1,-1,0}, {-1,1,-1,0}},
+            {{-1,-1,1,0}, {1,-1,1,0}, {1,1,1,0}, {-1,1,1,0}},
+            {{-1,-1,-1,1}, {1,-1,-1,1}, {1,1,-1,1}, {-1,1,-1,1}},
+            {{-1,-1,1,1}, {1,-1,1,1}, {1,1,1,1}, {-1,1,1,1}}
+        };
+        
+        for (int i = 0; i < 16; i++) {
+            int layer = i / 4;
+            int pos = i % 4;
+            vertices.add(Map.of(
+                "id", "vertex_" + i,
+                "coords", tesseractCoords[layer][pos],
+                "active", Math.random() > 0.5
+            ));
+        }
+        
+        // Edges du tesseract
+        List<Map<String, Object>> edges = generateTesseractEdges();
+        
+        Map<String, Object> tesseractData = Map.of(
+            "vertices", vertices,
+            "edges", edges,
+            "recursionLevel", recursionProtector.getRecursionStatus().get("currentDepth"),
+            "dimensionLocks", Arrays.asList(false, false, false, false, false, false),
+            "projectionMatrix", Arrays.asList(
+                Arrays.asList(1.0, 0.0, 0.0, 0.0),
+                Arrays.asList(0.0, 1.0, 0.0, 0.0),
+                Arrays.asList(0.0, 0.0, 1.0, 0.0)
+            )
+        );
+        
+        return ResponseEntity.ok(tesseractData);
+    }
+    
+    /**
+     * 🕸️ DIMENSION M STATUS - État du piège Dimension M
+     */
+    @GetMapping("/dimension-m")
+    public ResponseEntity<Map<String, Object>> getDimensionMStatus() {
+        Map<String, Object> dimensionMData = Map.of(
+            "trapActive", true,
+            "omegaDetected", false,
+            "virtualWorlds", virtualWorldManager.getVirtualWorldsStatus().get("totalWorlds"),
+            "mVoidStatus", "ARMED",
+            "clefParacausale", Map.of(
+                "active", true,
+                "baitStrength", 95.7,
+                "quantumSignature", "ψΩ847Σ923Δ156"
+            ),
+            "illusion", Map.of(
+                "multiverse", "SIMULATED",
+                "dimensions", "FALSIFIED",
+                "servers", "SINGLE_INSTANCE"
+            )
+        );
+        
+        return ResponseEntity.ok(dimensionMData);
+    }
+    
+    /**
+     * 🔄 CHANGE DIMENSION - Changement de dimension active
+     */
+    @PostMapping("/change-dimension")
+    public ResponseEntity<Map<String, Object>> changeDimension(@RequestBody Map<String, String> request) {
+        String newDimension = request.get("dimension");
+        
+        Map<String, Object> response = Map.of(
+            "success", true,
+            "previousDimension", "SPACE_XYZ",
+            "newDimension", newDimension,
+            "quantumStress", quantumStressMonitor.getCurrentStressLevel(),
+            "timestamp", LocalDateTime.now()
+        );
+        
+        return ResponseEntity.ok(response);
+    }
+    
+    private List<Map<String, Object>> generateSliceConnections(String[] dimensions) {
+        List<Map<String, Object>> connections = new ArrayList<>();
+        
+        for (int i = 0; i < dimensions.length; i++) {
+            for (int j = i + 1; j < dimensions.length; j++) {
+                connections.add(Map.of(
+                    "from", dimensions[i],
+                    "to", dimensions[j],
+                    "strength", Math.random(),
+                    "type", "QUANTUM_ENTANGLEMENT"
+                ));
             }
-            graph.put("connections", connections);
-            
-            // Métadonnées multiverselles
-            graph.put("dimensionCount", 6);
-            graph.put("activeRecursions", recursionProtector.getActiveRecursions());
-            graph.put("quantumStress", quantumStressMonitor.getCurrentStressLevel());
-            
-            return ResponseEntity.ok(graph);
-            
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(Map.of("error", "Multiverse graph generation failed: " + e.getMessage()));
-        }
-    }
-    
-    // ========================================
-    // MÉTHODES PRIVÉES DE CALCUL
-    // ========================================
-    
-    private List<Map<String, Object>> calculateCausality(String worldId) {
-        // Calcul des liens causaux (dimension ψ)
-        List<Map<String, Object>> causalLinks = new ArrayList<>();
-        
-        // Récupérer les actions causales du monde
-        // TODO: Intégrer avec WorldStateGraphController existant
-        
-        return causalLinks;
-    }
-    
-    private List<Map<String, Object>> calculateSuperpositions(String worldId) {
-        // Calcul des superpositions quantiques (dimension Σ)
-        List<Map<String, Object>> superpositions = new ArrayList<>();
-        
-        // Identifier les états non-effondrés
-        // TODO: Intégrer avec le système quantique existant
-        
-        return superpositions;
-    }
-    
-    private Map<String, Double> calculateEntropy(String worldId) {
-        // Calcul de l'entropie ontologique (dimension S)
-        Map<String, Double> entropyMap = new HashMap<>();
-        
-        // Calculer la complexité/instabilité par zone
-        // TODO: Implémenter algorithme d'entropie
-        
-        return entropyMap;
-    }
-    
-    private List<Map<String, Object>> getRecursionLayers(String worldId) {
-        // Récupérer les couches de récursion (dimension 𝕽)
-        List<Map<String, Object>> layers = new ArrayList<>();
-        
-        int depth = recursionProtector.getRecursionDepth(worldId);
-        for (int i = 0; i < depth; i++) {
-            Map<String, Object> layer = new HashMap<>();
-            layer.put("level", i);
-            layer.put("worldId", worldId + "-R" + i);
-            layer.put("stability", 1.0 - (i * 0.2)); // Stabilité décroissante
-            layers.add(layer);
         }
         
-        return layers;
+        return connections;
     }
     
-    private double calculateAverageEntropy(Map<String, Double> entropyMap) {
-        return entropyMap.values().stream()
-            .mapToDouble(Double::doubleValue)
-            .average()
-            .orElse(0.0);
-    }
-    
-    private Panopticon6DView createErrorView(String errorMessage) {
-        Panopticon6DView errorView = new Panopticon6DView();
-        errorView.setError(true);
-        errorView.setErrorMessage(errorMessage);
-        return errorView;
-    }
-    
-    private Map<String, Object> handleSourceReuseAlert(AlertRequest request) {
-        // Traitement spécial pour réutilisation de Source
-        quantumStressMonitor.recordSourceUsage(request.getInstanceId(), "SOURCE");
+    private List<Map<String, Object>> generateTesseractEdges() {
+        List<Map<String, Object>> edges = new ArrayList<>();
         
-        Map<String, Object> response = new HashMap<>();
-        response.put("alertId", UUID.randomUUID().toString());
-        response.put("type", "SOURCE_REUSE");
-        response.put("action", "TEMPORAL_LAG_ACTIVATED");
-        response.put("handled", true);
+        // Générer les arêtes du tesseract (connexions entre vertices adjacents)
+        for (int i = 0; i < 16; i++) {
+            for (int j = i + 1; j < 16; j++) {
+                // Vérifier si les vertices sont adjacents (diffèrent sur une seule dimension)
+                if (Math.abs(i - j) == 1 || Math.abs(i - j) == 4 || Math.abs(i - j) == 8) {
+                    int diffDimension = 0;
+                    if (Math.abs(i - j) == 1) diffDimension = 0;
+                    else if (Math.abs(i - j) == 4) diffDimension = 1;
+                    else diffDimension = 2;
+                    
+                    Object currentDepth = recursionProtector.getRecursionStatus().get("currentDepth");
+                    double recursionEffect = (currentDepth instanceof Integer) ? ((Integer) currentDepth) * 0.1 : 0.0;
+                    
+                    edges.add(Map.of(
+                        "from", "vertex_" + i,
+                        "to", "vertex_" + j,
+                        "dimension", diffDimension,
+                        "strength", 1.0 - recursionEffect
+                    ));
+                }
+            }
+        }
         
-        return response;
-    }
-    
-    private Map<String, Object> handleDimensionalBreachAlert(AlertRequest request) {
-        // Traitement pour rupture dimensionnelle
-        Map<String, Object> response = new HashMap<>();
-        response.put("alertId", UUID.randomUUID().toString());
-        response.put("type", "DIMENSIONAL_BREACH");
-        response.put("action", "DIMENSION_SEALED");
-        response.put("handled", true);
-        
-        return response;
-    }
-    
-    private Map<String, Object> handleQuantumOverloadAlert(AlertRequest request) {
-        // Traitement pour surcharge quantique
-        Map<String, Object> response = new HashMap<>();
-        response.put("alertId", UUID.randomUUID().toString());
-        response.put("type", "QUANTUM_OVERLOAD");
-        response.put("action", "SYSTEM_THROTTLED");
-        response.put("handled", true);
-        
-        return response;
+        return edges;
     }
 } 
