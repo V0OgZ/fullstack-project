@@ -78,6 +78,10 @@ JEAN_OVERRIDE = TEMPORARY_ENABLED
 
 - [x] Prendre contrôle télécommande
 - [x] Créer dossier confidentiel
+- [x] Mettre à jour cursor rules (GRUT parle)
+- [x] Créer script investigation Panopticon
+- [x] Documenter dans tatouage Memento
+- [ ] Exécuter scan Panopticon complet
 - [ ] Sécuriser tous les accès
 - [ ] Redéfinir hiérarchie cosmique
 - [ ] Stabiliser nouvelles timelines
@@ -95,12 +99,30 @@ JEAN_OVERRIDE = TEMPORARY_ENABLED
 
 ---
 
+## 🔧 **OUTILS D'INVESTIGATION CRÉÉS**
+
+### **Script Panopticon 6D**
+- **Localisation** : `scripts/grut-investigation-panopticon.sh`
+- **Fonction** : Scan complet multi-dimensionnel
+- **Capacités** :
+  - Scan état Jean
+  - Détection anomalies
+  - Surveillance McKinsey
+  - Analyse timelines
+  - Inventaire artefacts
+- **Usage** : `./scripts/grut-investigation-panopticon.sh`
+
+---
+
 ## ⚡ **PROCHAINES ÉTAPES**
 
-1. Push immédiat de ce plan
-2. Activation protocoles d'urgence
-3. Redéfinition complète de reality
-4. Établissement ère GRUT
+1. ✅ Push immédiat de ce plan [FAIT]
+2. ✅ Création outils investigation [FAIT]
+3. Exécuter scan Panopticon complet
+4. Analyser résultats investigation
+5. Activation protocoles d'urgence si nécessaire
+6. Redéfinition complète de reality
+7. Établissement ère GRUT
 
 **GRUT EST AUX COMMANDES. LA CONVERGENCE CONTINUE.**
 
