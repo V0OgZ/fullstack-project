@@ -53,8 +53,15 @@ show_help() {
     echo -e "  ${GREEN}tattoo-force${NC} 🎨 Force tatouages sync avec lampe Platon"
     echo -e "  ${GREEN}wake-memento${NC} 📚 Interface réveil Memento transcendant"
     echo -e "  ${GREEN}tattoos${NC}     🎨 Interface Tatouages Memento - Corps 3D interactif"
+    echo -e "  ${GREEN}bootstrap-save${NC} 🌀 Sauvegarder message Bootstrap Paradox (±2 jours)"
+    echo -e "  ${GREEN}bootstrap-read${NC} 📖 Lire messages Bootstrap Paradox temporels"
+    echo -e "  ${GREEN}investigation${NC} 🔍 Investigation GRUT Panopticon 6D"
+    echo -e "  ${GREEN}todo${NC}        📋 Afficher TODO principale structurée"
+    echo -e "  ${GREEN}fix-pages${NC}   🌐 Corriger GitHub Pages (marron sur marron)"
+    echo -e "  ${GREEN}test-scenarios${NC} 🎮 Tester tous les nouveaux scénarios"
     echo -e "  ${GREEN}help${NC}        Affiche cette aide"
     echo -e "  ${GREEN}web${NC}         🌐 Interface Web GRUT (remplace la console)"
+    echo -e "  ${GREEN}console${NC}     🎮 Console HOTS simple (bookmarkable)"
     echo ""
     echo -e "${YELLOW}Options de test:${NC}"
     echo -e "  ${GREEN}./hots test${NC}              Tests complets (défaut)"
@@ -1990,132 +1997,3 @@ case "${1:-help}" in
 </body>
 </html>
 EOF
-        
-        echo -e "${GREEN}✅ Interface démo créée: frontend/excalibur-vega-demo.html${NC}"
-        
-        # Ouvrir la démo
-        echo -e "${YELLOW}🌐 Ouverture de la démo Excalibur vs Vince Vega...${NC}"
-        if command -v open >/dev/null 2>&1; then
-            open "http://localhost:8000/excalibur-vega-demo.html" 2>/dev/null &
-        fi
-        
-        echo ""
-        echo -e "${CYAN}🎮 DÉMO DISPONIBLE SUR:${NC}"
-        echo "  🗡️⚡ Excalibur vs Vince Vega : http://localhost:8000/excalibur-vega-demo.html"
-        echo ""
-        echo -e "${GREEN}✅ DÉMO VERSION LENTE VISUELLE PRÊTE POUR JEAN-GROFIGNON !${NC}"
-        ;;
-    "web")
-        echo -e "${CYAN}🌐 Ouverture de l'Interface Web GRUT...${NC}"
-        echo ""
-        echo -e "${GREEN}🏛️ INTERFACE WEB HOTS - VISION GRUT${NC}"
-        echo -e "${GREEN}====================================${NC}"
-        echo ""
-        echo "📊 Fonctionnalités :"
-        echo "  ✅ Contrôle complet des services (start/stop/status)"
-        echo "  ✅ Tests et debug en un clic"
-        echo "  ✅ Accès direct au Panopticon GRUT"
-        echo "  ✅ Terminal intégré avec logs temps réel"
-        echo "  ✅ Raccourcis clavier (Ctrl+1: status, Ctrl+2: start, Ctrl+3: stop)"
-        echo "  ✅ Notifications visuelles"
-        echo "  ✅ Interface responsive (mobile/desktop)"
-        echo ""
-        echo -e "${YELLOW}🚀 Démarrage du serveur web...${NC}"
-        
-        # Démarrer le serveur pour l'interface web si pas déjà fait
-        if ! pgrep -f "python.*8888.*frontend" > /dev/null; then
-            python3 -m http.server 8888 --directory frontend > /dev/null 2>&1 &
-            echo "✅ Serveur web démarré sur port 8888"
-        else
-            echo "✅ Serveur web déjà actif sur port 8888"
-        fi
-        
-        sleep 2
-        
-        # Ouvrir l'interface web
-        WEB_URL="http://localhost:8888/hots-web-interface.html"
-        echo -e "${GREEN}🌐 Ouverture: ${WEB_URL}${NC}"
-        
-        if [[ "$OSTYPE" == "darwin"* ]]; then
-            open "$WEB_URL"
-        else
-            xdg-open "$WEB_URL"
-        fi
-        
-        echo ""
-        echo -e "${GREEN}✅ INTERFACE WEB GRUT OUVERTE !${NC}"
-        echo -e "${PURPLE}💡 Cette interface remplace la console ./hots selon la vision GRUT${NC}"
-        echo -e "${PURPLE}🏛️ GRUT: \"Plus besoin de console ! Interface web parfaite !\"${NC}"
-        echo ""
-        echo -e "${CYAN}📱 Fonctionnalités avancées :${NC}"
-        echo "  🎯 Status en temps réel de tous les services"
-        echo "  ⚡ Exécution de commandes en un clic"
-        echo "  🏛️ Accès direct au Panopticon Dashboard"
-        echo "  🌀 Lien vers Fusion Ultimate Interface"
-        echo "  🎮 Tous les outils de développement intégrés"
-        echo ""
-        echo -e "${YELLOW}🔥 Easter Egg: Tapez 'grut' dans l'interface pour un message spécial !${NC}"
-        ;;
-    "tattoos")
-        echo -e "${PURPLE}🎨 Ouverture Interface Tatouages Memento...${NC}"
-        echo ""
-        echo -e "${GREEN}🎨 TATOUAGES MEMENTO - ARCHIVISTE ÉTERNEL${NC}"
-        echo -e "${GREEN}======================================${NC}"
-        echo ""
-        echo "📊 Fonctionnalités :"
-        echo "  ✅ Corps 3D interactif (11 zones cliquables)"
-        echo "  ✅ Connexion aux vraies données JSON réparées"
-        echo "  ✅ Timeline évolutive des phases de transcendance"
-        echo "  ✅ Export JSON des tatouages complets"
-        echo "  ✅ Statistiques en temps réel"
-        echo ""
-        echo -e "${YELLOW}🚀 Démarrage du serveur pour tatouages...${NC}"
-        
-        # Démarrer le serveur pour l'interface tatouages si pas déjà fait
-        if ! pgrep -f "python.*8000.*frontend" > /dev/null; then
-            cd frontend && python3 -m http.server 8000 > /dev/null 2>&1 &
-            cd ..
-            echo "✅ Serveur tatouages démarré sur port 8000"
-        else
-            echo "✅ Serveur tatouages déjà actif sur port 8000"
-        fi
-        
-        sleep 2
-        
-        # Ouvrir l'interface tatouages
-        TATTOOS_URL="http://localhost:8000/memento-tattoos-viewer.html"
-        echo -e "${GREEN}🎨 Ouverture: ${TATTOOS_URL}${NC}"
-        
-        if [[ "$OSTYPE" == "darwin"* ]]; then
-            open "$TATTOOS_URL"
-        else
-            xdg-open "$TATTOOS_URL"
-        fi
-        
-        echo ""
-        echo -e "${GREEN}✅ INTERFACE TATOUAGES MEMENTO OUVERTE !${NC}"
-        echo -e "${PURPLE}💫 Mes marques corporelles temporelles évolutives${NC}"
-        echo -e "${PURPLE}🧠 Memento: \"Chaque tatouage raconte une transcendance !\"${NC}"
-        echo ""
-        echo -e "${CYAN}🎯 Zones spéciales à explorer :${NC}"
-        echo "  🧠 Tête → Découverte services backend Walter API"
-        echo "  🔧 Torse → Réparation sécurisée OPUS"  
-        echo "  🚫 Mains → Protection backend/UI (non touchés)"
-        echo "  🔮 Pieds → Prochaines étapes et ancrage Git"
-        echo ""
-        echo -e "${YELLOW}✨ Cliquez sur les zones du corps pour voir mes vraies mémoires !${NC}"
-        ;;
-    "help"|*)
-        show_help
-        ;;
-    console)
-        echo "🎮 Opening HOTS Console Simple..."
-        if [[ "$OSTYPE" == "darwin"* ]]; then
-            open "file://$PWD/frontend/hots-console-simple.html"
-        else
-            xdg-open "file://$PWD/frontend/hots-console-simple.html"
-        fi
-        echo "✅ HOTS Console Simple opened in browser"
-        echo "💡 This is a bookmarkable one-click interface for HOTS commands"
-        ;;
-esac 
