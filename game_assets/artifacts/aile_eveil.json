@@ -1,0 +1,93 @@
+{
+  "id": "aile_eveil",
+  "name": "🪶 Aile d'Éveil",
+  "aliases": ["Wing of Awakening", "Plume Onirique", "Dream Feather"],
+  "type": "ARTIFACT",
+  "category": "DREAMER_EXCLUSIVE",
+  "rarity": "UNIQUE",
+  "tier": 8,
+  "description": "Une plume cristallisée du premier rêve de Zhuangri. Elle vibre entre existence et non-existence, permettant à son porteur de naviguer entre les couches du réel.",
+  "lore": "Quand Zhuangri rêva pour la première fois qu'il était un papillon, une plume tomba. Était-ce une plume de papillon rêvant d'être une plume, ou une plume rêvant d'être un papillon ? Cette question reste sans réponse, mais la plume demeure, preuve tangible qu'un rêve peut laisser des traces dans le réel.",
+  "bound_to": "zhuangri",
+  "effects": {
+    "dream_amplification": {
+      "description": "Amplifie les pouvoirs oniriques du porteur",
+      "dream_power": "+50%",
+      "reality_manipulation": "+30%"
+    },
+    "phase_shift": {
+      "description": "Permet de passer entre rêve et réalité à volonté",
+      "activation": "USE(ARTIFACT, aile_eveil)",
+      "cooldown": 3,
+      "effect": "TOGGLE_STATE(DREAM/REALITY)"
+    },
+    "dream_echo": {
+      "description": "Les actions dans le rêve affectent la réalité avec un délai",
+      "delay": "1-3 turns",
+      "intensity": "Variable selon l'état quantique"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Éveil Paradoxal",
+      "activation": "WHEN HEALTH < 30%",
+      "effect": "Inverse rêve et réalité pour tous les combattants",
+      "duration": 5,
+      "warning": "Peut causer des paradoxes permanents"
+    },
+    {
+      "name": "Vol du Papillon",
+      "activation": "PASSIVE",
+      "effect": "Immunité aux dégâts physiques en état de rêve",
+      "limitation": "Vulnérabilité x2 aux attaques mentales"
+    },
+    {
+      "name": "Cristallisation Onirique",
+      "activation": "USE(SPECIAL)",
+      "cost": "50 mana + 1 dream fragment",
+      "effect": "Transforme un rêve en objet réel temporaire",
+      "duration": "Until next dawn"
+    }
+  ],
+  "synergies": [
+    {
+      "with": "miroir_quantique",
+      "effect": "Peut observer ses propres rêves sans s'y perdre"
+    },
+    {
+      "with": "codex_memento",
+      "effect": "Archive les rêves pour consultation ultérieure"
+    },
+    {
+      "with": "50-50",
+      "effect": "50% de chance que le rêve devienne réalité permanente"
+    }
+  ],
+  "warnings": [
+    "Utilisation prolongée peut causer une dissociation permanente",
+    "Les rêves créés peuvent développer leur propre conscience",
+    "Ne pas utiliser près des Tours d'Ancrage Temporel",
+    "Risque de créer des boucles oniriques infinies"
+  ],
+  "visual_effects": {
+    "appearance": "Une plume iridescente qui change constamment de couleur et de forme",
+    "aura": "Particules de rêve qui flottent autour du porteur",
+    "activation": "Explosion de papillons lumineux qui se dissolvent en poussière d'étoiles"
+  },
+  "quantum_properties": {
+    "state": "SUPERPOSITION",
+    "collapse_resistance": 0.8,
+    "dream_reality_ratio": "∞:1",
+    "temporal_anchor": "NONE"
+  },
+  "acquisition": {
+    "method": "Automatiquement liée à Zhuangri",
+    "alternative": "Peut être trouvée dans le Nexus des Rêves Perdus si Zhuangri périt",
+    "warning": "Sans Zhuangri, l'artefact devient instable"
+  },
+  "quotes": {
+    "activation": "Le papillon bat des ailes, et la réalité tremble.",
+    "dream_state": "Dans le rêve, je suis éveillé. Éveillé, je rêve.",
+    "reality_shift": "Quelle aile porte le rêve ? Quelle aile porte le réel ?"
+  }
+}
