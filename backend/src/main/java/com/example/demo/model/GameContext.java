@@ -91,6 +91,37 @@ public class GameContext {
                             uptime);
     }
     
+    // 🌀 MÉTHODES POUR QUANTUM SERVICE
+    
+    public String getActiveHeroId() {
+        // Retourne le héros actif du joueur courant
+        if (currentPlayerId != null) {
+            Map<String, Object> player = getPlayer(currentPlayerId);
+            if (player != null && player.containsKey("activeHeroId")) {
+                return (String) player.get("activeHeroId");
+            }
+        }
+        return "hero_" + gameId; // Fallback
+    }
+    
+    public String getTargetStateId() {
+        // Retourne l'état ciblé depuis les métadonnées
+        Object targetState = metadata.get("targetStateId");
+        return targetState != null ? targetState.toString() : "state_" + gameId;
+    }
+    
+    public String getSourceUnitId() {
+        // Retourne l'unité source depuis les métadonnées
+        Object sourceUnit = metadata.get("sourceUnitId");
+        return sourceUnit != null ? sourceUnit.toString() : getActiveHeroId();
+    }
+    
+    public String getTargetUnitId() {
+        // Retourne l'unité cible depuis les métadonnées
+        Object targetUnit = metadata.get("targetUnitId");
+        return targetUnit != null ? targetUnit.toString() : "target_" + gameId;
+    }
+    
     // 🔮 GETTERS ET SETTERS STANDARD
     
     public String getGameId() {
