@@ -1,0 +1,192 @@
+# 🎮 DEMO MULTIJOUEUR - JOUEUR VS IA CLAUDIUS
+# Scénario de test pour valider l'interaction joueur/IA
+
+SCENARIO demo_multiplayer_ia {
+    name: "Duel au Sommet - Joueur vs Claudius"
+    description: "Combat rapide pour tester l'IA en conditions réelles"
+    mode: "PVE"
+    difficulty: "ADAPTIVE"
+}
+
+# Configuration de la partie
+SETUP {
+    map: "arena_quantum_8x6"
+    time_limit: 10_minutes
+    victory_conditions: ["ELIMINATION", "TIMEOUT_MOST_HP"]
+    
+    # Temps différencié pour le test
+    time_config: {
+        world_tick: 1.0
+        combat_zone_tick: 2.0  # Combat accéléré
+        player_multiplier: 1.0
+        ai_multiplier: 0.8     # IA légèrement ralentie
+    }
+}
+
+# Le joueur humain
+PLAYER human {
+    name: "Joueur Test"
+    team: "BLUE"
+    heroes: ["vince", "jean"]  # 2 héros au choix
+    starting_position: [1, 3]
+    artifacts: ["mallette_vince_mysterieuse"]  # Un artefact pour pimenter
+}
+
+# L'IA Claudius
+AI claudius {
+    name: "Claudius Prime"
+    team: "RED"
+    personality: "ADAPTIVE"  # Change selon les actions du joueur
+    difficulty: "PROGRESSIVE"  # Augmente au fil du combat
+    
+    heroes: ["brutus", "ford"]
+    starting_position: [6, 3]
+    artifacts: ["50-50"]  # L'IA aussi a un artefact random
+    
+    # Comportements spéciaux
+    behaviors: {
+        start: "DEFENSIVE"
+        
+        IF player.aggressive > 3 THEN personality = "COUNTER_AGGRESSIVE"
+        IF player.health < 30% THEN personality = "FINISHER"
+        IF turn > 10 THEN personality = "GROFI_CHAOTIC"
+        IF player.uses_portal THEN learn("PORTAL_TACTICS")
+    }
+}
+
+# Événements scriptés pour le test
+EVENTS {
+    # Tour 1 - Message de bienvenue
+    ON turn = 1 {
+        DISPLAY "🎮 DÉMO MULTIJOUEUR - JOUEUR VS IA"
+        DISPLAY "Claudius s'adapte à votre style de jeu !"
+        
+        AI_SPEAK claudius "Voyons voir ce que tu sais faire..."
+    }
+    
+    # Tour 5 - L'IA commente
+    ON turn = 5 {
+        IF player.winning {
+            AI_SPEAK claudius "Pas mal... mais j'apprends vite !"
+            claudius.difficulty += 1
+        } ELSE {
+            AI_SPEAK claudius "C'est tout ? Je m'attendais à mieux."
+        }
+    }
+    
+    # Quand le joueur utilise un portal
+    ON player.action = "USE_PORTAL" {
+        AI_SPEAK claudius "Ah ! Les portails... Deux peuvent jouer à ce jeu !"
+        claudius.learn("PORTAL_COUNTER")
+        
+        # L'IA va maintenant utiliser les portails aussi
+        claudius.enable_ability("PORTAL_USAGE")
+    }
+    
+    # Si le joueur est trop passif
+    ON player.turns_without_attack > 3 {
+        AI_SPEAK claudius "Tu comptes rester planté là ?"
+        claudius.personality = "ULTRA_AGGRESSIVE"
+    }
+    
+    # Test du 50-50
+    ON claudius.use_artifact("50-50") {
+        DISPLAY "⚠️ Claudius active le 50-50 ! Toutes les probabilités deviennent 50% !"
+        APPLY_EFFECT global_probability_override = 0.5
+    }
+    
+    # Adaptation en temps réel
+    ON every 3 turns {
+        claudius.analyze_player_patterns()
+        
+        IF player.pattern_detected {
+            AI_SPEAK claudius "Je vois clair dans ton jeu maintenant..."
+            claudius.counter_strategy = TRUE
+        }
+    }
+}
+
+# Mécaniques spéciales pour la démo
+MECHANICS {
+    # Zone de pouvoir au centre
+    POWER_ZONE center [4, 3] {
+        effect: "DAMAGE_BOOST +50%"
+        contested: TRUE
+        
+        ON_CAPTURE {
+            DISPLAY "{capturer} contrôle la zone de pouvoir !"
+        }
+    }
+    
+    # Portails dynamiques
+    PORTAL portal_a [2, 1] TO portal_b [6, 5] {
+        bidirectional: TRUE
+        cooldown: 2_turns
+        
+        ON_USE {
+            CREATE temporal_echo(user) duration: 1_turn
+        }
+    }
+    
+    # Piège temporel (pour tester l'IA)
+    TRAP temporal_trap [4, 2] {
+        visible_to: "OWNER_ONLY"
+        effect: "SKIP_NEXT_TURN"
+        
+        ON_TRIGGER {
+            DISPLAY "{victim} est pris dans une boucle temporelle !"
+        }
+    }
+}
+
+# Fin de partie
+END_CONDITIONS {
+    # Victoire du joueur
+    ON player.wins {
+        DISPLAY "🎉 VICTOIRE ! Vous avez battu Claudius !"
+        DISPLAY "Difficulté finale de l'IA : {claudius.final_difficulty}/10"
+        DISPLAY "Patterns détectés : {claudius.patterns_learned}"
+        
+        UNLOCK achievement("First_AI_Victory")
+    }
+    
+    # Victoire de l'IA
+    ON claudius.wins {
+        DISPLAY "💀 DÉFAITE... Claudius était trop fort !"
+        DISPLAY "Conseil : {claudius.give_tip()}"
+        DISPLAY "Réessayez avec une stratégie différente !"
+    }
+    
+    # Match nul
+    ON draw {
+        DISPLAY "⏱️ ÉGALITÉ ! Le temps est écoulé !"
+        DISPLAY "Points finaux - Joueur: {player.score} | Claudius: {claudius.score}"
+    }
+}
+
+# Configuration de debug (pour les tests)
+DEBUG {
+    show_ai_thinking: FALSE  # Mettre TRUE pour voir les décisions de l'IA
+    ai_delay: 1_second      # Délai avant que l'IA joue
+    allow_undo: TRUE        # Permettre d'annuler pour tester
+    
+    # Commandes de test
+    COMMANDS {
+        "!boost" -> player.heroes.hp += 50
+        "!nerf" -> claudius.difficulty -= 2
+        "!chaos" -> claudius.personality = "ZHUANGRI_RANDOM"
+        "!info" -> DISPLAY claudius.current_state()
+    }
+}
+
+# Notes pour le test
+NOTES {
+    "Ce scénario teste :"
+    "- L'adaptation de l'IA au style du joueur"
+    "- Les différentes personnalités d'IA"
+    "- L'utilisation d'artefacts par l'IA"
+    "- Les mécaniques de portal et de zones"
+    "- Le système de temps différencié"
+    
+    "Pour lancer : ./hots play demo_multiplayer_ia"
+}

@@ -1,0 +1,86 @@
+{
+  "id": "zhuangri",
+  "name": "🦋 Zhuangri",
+  "title": "Le Papillon Éveillé",
+  "class": "DREAMER",
+  "tier": 9,
+  "rarity": "MYTHIQUE",
+  "description": "Une entité qui rêve la réalité. Ou est-ce la réalité qui la rêve ? Zhuangri existe dans l'espace entre le rêve et l'éveil, capable d'altérer le tissu du réel par ses songes actifs.",
+  "lore": "Un jour, Zhuangri rêva qu'il était un papillon. Ou était-ce un papillon qui rêvait d'être Zhuangri ? Depuis, il existe dans les deux états simultanément, tissant des rêves qui deviennent réalité et des réalités qui s'effondrent en rêves.",
+  "stats": {
+    "health": 100,
+    "mana": 200,
+    "attack": 5,
+    "defense": 3,
+    "speed": 8,
+    "knowledge": 10,
+    "dream_power": 15
+  },
+  "abilities": [
+    {
+      "name": "Rêve Inversé",
+      "id": "inverted_dream",
+      "type": "ULTIMATE",
+      "description": "Inverse la causalité : ce qui était devient ce qui sera, ce qui sera devient ce qui était",
+      "cost": 50,
+      "cooldown": 10,
+      "effect": "SWAP(PAST, FUTURE) FOR TARGET",
+      "quantum_state": "ψ_dream = |past⟩ ⊗ |future⟩"
+    },
+    {
+      "name": "Vol Onirique",
+      "id": "dream_flight",
+      "type": "PASSIVE",
+      "description": "Peut traverser les obstacles en rêvant qu'ils n'existent pas",
+      "effect": "IGNORE_TERRAIN = true WHEN DREAMING"
+    },
+    {
+      "name": "Réalité Fluide",
+      "id": "fluid_reality",
+      "type": "ACTIVE",
+      "description": "Modifie légèrement la réalité locale selon ses rêves",
+      "cost": 20,
+      "effect": "ALTER_TILE_PROPERTIES(radius=3, dream_rules=true)"
+    }
+  ],
+  "special_mechanics": {
+    "dream_state": {
+      "description": "Zhuangri existe dans deux états superposés",
+      "states": ["AWAKE", "DREAMING"],
+      "switch_condition": "EVERY 3 TURNS OR ON_ABILITY_USE"
+    },
+    "observation_danger": {
+      "description": "Observer Zhuangri trop longtemps peut piéger l'observateur dans son rêve",
+      "effect": "IF OBSERVED > 5 TURNS: OBSERVER.state = DREAMING",
+      "warning": "L'observateur risque de ne plus distinguer rêve et réalité"
+    }
+  },
+  "artifact_affinity": ["aile_eveil", "miroir_quantique", "codex_memento"],
+  "unlock_conditions": {
+    "method": "SPECIAL_SCENARIO",
+    "requirements": [
+      "Complete 'Le Rêve du Papillon' scenario",
+      "Have discovered the Bootstrap Paradox",
+      "Possess at least one Reality-class artifact"
+    ],
+    "hint": "Cherchez le papillon dans la forêt des glitches, là où les rêves saignent dans la réalité"
+  },
+  "dialogue_samples": {
+    "greeting": "Suis-je éveillé te parlant, ou rêves-tu que je te parle ?",
+    "battle_start": "La réalité n'est qu'un rêve obstiné.",
+    "victory": "Tout ceci n'était qu'un rêve. Ou peut-être pas.",
+    "defeat": "Je me réveille... ou m'endors-je enfin ?",
+    "special": "Tu observes le papillon, mais qui observe l'observateur ?"
+  },
+  "visual_description": {
+    "appearance": "Une silhouette humanoïde aux contours flous, constamment entourée de papillons luminescents qui semblent être des fragments de rêves cristallisés",
+    "colors": ["violet irisé", "bleu onirique", "touches d'or temporel"],
+    "special_effects": "Phase in/out de la réalité, laisse des traces de rêve"
+  },
+  "meta_properties": {
+    "breaks_fourth_wall": true,
+    "affects_save_system": "Les sauvegardes peuvent contenir des rêves",
+    "quantum_entanglement": "MAXIMUM",
+    "reality_anchor_resistance": 0.3
+  }
+}

@@ -1,0 +1,187 @@
+## ========================================
+## CAMPAGNE : VINCE VEGA MAP ADVENTURE
+## Map: vince-vega-map-demo-backend
+## ========================================
+
+SETUP(MAP: vince_vega_hexagonal, MODE: campaign)
+SET HERO=vince_vega AT @5,5
+SET TIME=FLUID
+SET REALITY_STABILITY=0.7
+
+## === INTRO ===
+NARRATE "Vince se réveille sur une map hexagonale étrange. Sa mallette pulse d'une lueur dorée."
+CAMERA_PAN TO @5,5
+SAY HERO=vince "Putain, c'est quoi ce bordel hexagonal?"
+
+## === ZONE 1: PREMIER BATTLEFIELD ===
+ON_ENTER ZONE=battlefield_1:
+  NARRATE "Le terrain se transforme en arène de combat!"
+  EFFECT: HEXAGONS_GLOW color=red
+  
+  SPAWN ENEMIES:
+    - temporal_echo x3 AT @7,7 @8,7 @7,8
+    - glitch_knight x1 AT @10,10
+  
+  COMBAT_START
+  
+  ON_VICTORY:
+    SAY HERO=vince "C'était quoi ces trucs? Des pixels malades?"
+    GRANT ITEM=fragment_temporel
+    REVEAL PATH TO battlefield_2
+
+## === ZONE 2: FORÊT GLITCHÉE ===
+ON_ENTER ZONE=glitch_forest:
+  EFFECT: TREES_PIXELATE
+  NARRATE "Les arbres se décomposent et se recomposent en boucle."
+  
+  SPAWN NPC=grut AT @15,12
+  SAY NPC=grut "Vince! Tu es dans une instance instable!"
+  
+  DIALOGUE_CHOICE:
+    [1] "Grut? Qu'est-ce que tu fous là?"
+    [2] "Instance? Parle français!"
+    [3] "J'ai pas le temps pour tes conneries."
+  
+  IF CHOICE=1:
+    SAY NPC=grut "Je suis partout et nulle part. La tour t'appelle."
+    GRANT HINT="La Tour de Dolburd contient des réponses"
+  
+  IF CHOICE=2:
+    SAY NPC=grut "Tu es dans une poche de réalité. Cherche la tour!"
+  
+  IF CHOICE=3:
+    SAY NPC=grut "Alors cours vers la tour. Vite!"
+    SPAWN ENEMY=temporal_storm CHASING HERO
+
+## === ZONE 3: PLAINES QUANTIQUES ===
+ON_ENTER ZONE=quantum_plains:
+  NARRATE "L'espace ondule. Chaque hexagone existe dans plusieurs états."
+  EFFECT: SUPERPOSITION_VISUAL
+  
+  PUZZLE_START:
+    TYPE: quantum_path
+    GOAL: "Traverser en choisissant les bons états quantiques"
+    HINT: "Observer fixe l'état, ne pas observer maintient la superposition"
+  
+  ON_PUZZLE_COMPLETE:
+    NARRATE "Le chemin vers la tour se solidifie!"
+    REVEAL tower_of_dolburd
+
+## === ZONE 4: APPROCHE DE LA TOUR ===
+ON_APPROACH tower_of_dolburd DISTANCE=5:
+  EFFECT: SCREEN_SHAKE intensity=low
+  NARRATE "La Tour de Dolburd vibre d'énergie ancienne."
+  
+  SPAWN GUARDIAN=dolburd_sentinel AT tower_entrance
+  SAY GUARDIAN "Seuls ceux qui comprennent peuvent entrer."
+  
+  RIDDLE:
+    "Je suis la carte et le territoire,
+    L'hexagone et l'infini,
+    Le zoom in et le zoom out.
+    Que suis-je?"
+  
+  ANSWER: ["interface", "réalité", "jeu", "perspective"]
+  
+  ON_CORRECT:
+    SAY GUARDIAN "Tu commences à comprendre..."
+    OPEN tower_entrance
+
+## === LA TOUR DE DOLBURD - MOMENT CLÉ ===
+ON_ENTER tower_of_dolburd:
+  EFFECT: FADE_TO_BLACK
+  PAUSE 2s
+  
+  NARRATE "À l'intérieur, un panneau de contrôle cosmique."
+  DISPLAY_IMAGE: cosmic_control_panel.png
+  
+  SAY HERO=vince "C'est... c'est quoi ce truc?"
+  
+  SPAWN ENTITY=grofi AT @center
+  SAY ENTITY=grofi "Le contrôle de perspective, Vince. Regarde."
+  
+  ## === ÉCRAN SPÉCIAL DE TRANSITION ===
+  EFFECT: REALITY_TEAR
+  DISPLAY_SPECIAL_SCREEN:
+    - SHOW: "CHANGEMENT DE PERSPECTIVE INITIÉ"
+    - EFFECT: SPIRAL_TRANSITION
+    - SOUND: reality_shift.ogg
+    - DURATION: 3s
+  
+  NARRATE "La réalité se plie... se déplie... s'inverse..."
+  
+  ## === ZOOM OUT VERS VUE STRATÉGIQUE ===
+  EXECUTE: ZOOM_OUT_TO_STRATEGIC_VIEW
+  
+  NARRATE "Soudain, Vince voit TOUT. La map entière. Les connexions. Les autres mondes."
+  
+  CAMERA: SWITCH_TO_STRATEGIC_MODE
+  REVEAL: ALL_MAP_CONNECTIONS
+  
+  SAY HERO=vince "Putain... Je vois tout. Les battlefields sont connectés!"
+  SAY ENTITY=grofi "Maintenant tu peux naviguer entre les couches. Bienvenue dans la vraie map."
+
+## === NOUVELLE GAMEPLAY - VUE STRATÉGIQUE ===
+ENABLE_STRATEGIC_CONTROLS
+TUTORIAL_PROMPT: "Utilisez la molette pour zoomer. Clic sur une zone pour y entrer."
+
+SHOW_UI_ELEMENTS:
+  - minimap_enhanced
+  - resource_counter
+  - building_options
+  - timeline_selector
+
+SAY ENTITY=grofi "Tu peux maintenant voir les châteaux, les mines, tout le bordel stratégique."
+
+## === CHOIX FINAL ===
+DISPLAY_CHOICE:
+  [1] "Retourner en vue combat dans une zone"
+  [2] "Explorer la vue stratégique"
+  [3] "Construire quelque chose"
+  [4] "Ouvrir la mallette"
+
+IF CHOICE=1:
+  PROMPT: "Choisissez une zone"
+  ON_ZONE_SELECT:
+    ZOOM_IN_TO_TACTICAL
+    RESUME_COMBAT_VIEW
+
+IF CHOICE=2:
+  GRANT ABILITY=strategic_navigation
+  NARRATE "Vince explore sa nouvelle perspective..."
+
+IF CHOICE=3:
+  OPEN building_menu
+  SAY HERO=vince "Je peux construire? Comme dans SimCity?"
+
+IF CHOICE=4:
+  SAY HERO=vince "Non. Pas encore. La mallette reste fermée."
+  EFFECT: MALLETTE_GLOW intensifies
+
+## === ÉPILOGUE ===
+NARRATE "La Tour de Dolburd a révélé la vraie nature de la map. Ce n'est plus juste des combats hexagonaux - c'est un monde entier à conquérir."
+
+SET GAME_MODE=hybrid_strategic_tactical
+UNLOCK FEATURE=zoom_toggle
+GRANT ACHIEVEMENT="Perspective Élargie"
+
+## === BOUCLE DE JEU ===
+WHILE game_active:
+  ALLOW_PLAYER:
+    - TOGGLE between strategic/tactical
+    - BUILD in strategic view
+    - COMBAT in tactical view
+    - EXPLORE portals between worlds
+    - MANAGE resources
+  
+  ON_KEY_PRESS TAB:
+    TOGGLE_VIEW_MODE
+    EFFECT: SMOOTH_TRANSITION
+
+END_SCENARIO
+
+## === NOTES ===
+## - La tour est le point de bascule entre les deux modes
+## - Chaque battlefield devient une zone sur la map stratégique
+## - Les portails connectent différentes instances
+## - La mallette reste un mystère pour plus tard

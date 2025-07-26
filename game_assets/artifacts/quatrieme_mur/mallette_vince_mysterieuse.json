@@ -1,0 +1,110 @@
+{
+  "id": "mallette_vince_mysterieuse",
+  "name": "💼 La Mallette de Vince",
+  "aliases": ["Mysterious Briefcase", "The Briefcase", "La Valise Dorée"],
+  "type": "ARTIFACT",
+  "category": "QUATRIEME_MUR",
+  "rarity": "PARADOXAL",
+  "tier": 10,
+  "description": "Une mallette qui reste fermée. Toujours. Son contenu est inconnu et doit le rester. Émet une lueur dorée impossible à regarder directement.",
+  "lore": "Certains disent qu'elle contient l'âme de Marcellus Wallace. D'autres pensent qu'elle renferme le code source du multivers. Vince, lui, refuse d'en parler. La seule certitude : elle ne doit jamais être ouverte.",
+  "state": "PERMANENTLY_LOCKED",
+  "effects": {
+    "passive_aura": {
+      "name": "Lueur Mystérieuse",
+      "description": "Émet une aura dorée qui intrigue et déstabilise",
+      "radius": 5,
+      "effects": [
+        "Curiosité +100% pour tous les observateurs",
+        "Anxiété existentielle +50%",
+        "Questions sans réponses +∞"
+      ]
+    },
+    "quantum_superposition": {
+      "description": "Le contenu existe dans tous les états possibles tant que non observé",
+      "schrodinger_state": true,
+      "collapse_forbidden": true
+    },
+    "narrative_anchor": {
+      "description": "Ancre la réalité narrative de Pulp Fiction dans Heroes of Time",
+      "effect": "Empêche Vince de disparaître complètement du jeu",
+      "stability": "+50 Reality Anchor pour Vince"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Refus d'Ouverture",
+      "activation": "PASSIVE",
+      "effect": "Toute tentative d'ouverture échoue automatiquement",
+      "quote": "Tu veux pas savoir ce qu'il y a dedans, crois-moi."
+    },
+    {
+      "name": "Mystère Éternel",
+      "activation": "WHEN_OBSERVED",
+      "effect": "L'observateur est submergé de théories contradictoires",
+      "mental_damage": "2d20 confusion",
+      "duration": "Jusqu'à ce que l'observateur arrête de regarder"
+    },
+    {
+      "name": "Portal de Fuite",
+      "activation": "USE(ARTIFACT, mallette_vince_mysterieuse, EMERGENCY)",
+      "cooldown": "Une fois par instance",
+      "effect": "Ouvre un wormhole vers une instance aléatoire",
+      "warning": "Ne garantit pas une destination sûre"
+    }
+  ],
+  "interactions": {
+    "with_50_50": {
+      "result": "PARADOX_ERROR",
+      "description": "50% de chance d'ouvrir ? La mallette refuse le concept même."
+    },
+    "with_omegazero": {
+      "result": "MUTUAL_IGNORANCE",
+      "description": "OmegaZero et la mallette s'ignorent mutuellement"
+    },
+    "with_player_curiosity": {
+      "result": "ETERNAL_MYSTERY",
+      "description": "Plus on veut l'ouvrir, plus elle résiste"
+    }
+  },
+  "opening_conditions": {
+    "known_conditions": [],
+    "speculation": [
+      "Quand Vince acceptera son destin",
+      "À la fin de toutes les timelines",
+      "Jamais",
+      "Quand le joueur comprendra qu'il ne faut pas l'ouvrir"
+    ],
+    "truth": "UNDEFINED"
+  },
+  "contents": {
+    "theories": [
+      "L'âme de Marcellus Wallace",
+      "Le code source de Heroes of Time",
+      "Une photo de Jean-Grofignon sur son canapé",
+      "Le script original de Pulp Fiction",
+      "Rien",
+      "Tout",
+      "La réponse à CLUE²"
+    ],
+    "actual_content": "ERROR: CANNOT_OBSERVE_UNOPENED_CONTAINER"
+  },
+  "warnings": [
+    "NE PAS tenter d'ouvrir avec des exploits de code",
+    "NE PAS utiliser d'artefacts de manipulation quantique",
+    "NE PAS demander à Vince ce qu'il y a dedans",
+    "L'ouverture pourrait causer un effondrement narratif total"
+  ],
+  "quotes": {
+    "vince": "C'est pas mes affaires ce qu'il y a dedans. Je la transporte, c'est tout.",
+    "jean_grofignon": "Même moi je sais pas ce qu'il y a dedans. Et j'ai créé ce putain de jeu.",
+    "memento": "J'ai archivé toutes les théories. Aucune n'est vraie. Toutes sont vraies.",
+    "ford": "Un mystère parfait. Ne le gâchez pas avec des réponses."
+  },
+  "meta_properties": {
+    "breaks_fourth_wall": true,
+    "exists_outside_game_logic": true,
+    "immune_to_debugging": true,
+    "protected_by": "NARRATIVE_IMPERATIVE"
+  }
+}
