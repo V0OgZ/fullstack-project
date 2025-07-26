@@ -18,7 +18,6 @@ NC='\033[0m' # No Color
 
 show_help() {
     echo -e "${CYAN}🎮 Heroes of Time - Contrôle des services${NC}"
-    echo -e "${CYAN}=========================================${NC}"
     echo ""
     echo -e "${GREEN}Usage:${NC} ./hots [commande] [options]"
     echo ""
@@ -62,7 +61,6 @@ show_help() {
     echo -e "  ${GREEN}ai-arena${NC}    🎮 AI Arena Test - Deathmatch IA autonome"
     echo -e "  ${GREEN}ai-control${NC}  🤖 AI Control Panel - Gestion IA avec items"
     echo -e "  ${GREEN}ai-wsg${NC}      🌐 AI + WSG Integration - IA connectée au World State"
->>>>>>> main
     echo -e "  ${GREEN}help${NC}        Affiche cette aide"
     echo -e "  ${GREEN}web${NC}         🌐 Interface Web GRUT (remplace la console)"
     echo -e "  ${GREEN}console${NC}     🎮 Console HOTS simple (bookmarkable)"
@@ -146,7 +144,6 @@ check_service() {
 
 show_status() {
     echo -e "${CYAN}🔍 Statut des services Heroes of Time - VINCE MODE${NC}"
-    echo -e "${CYAN}===============================================${NC}"
     
     check_service 3000 "React Frontend Moderne" "http://localhost:3000"
     check_service 9000 "HTML Pocket World" "http://localhost:9000"
@@ -181,7 +178,6 @@ show_status() {
 
 start_services() {
     echo -e "${BLUE}🎮 Démarrage VINCE MODE - Architecture Simplifiée${NC}"
-    echo "================================================"
     
     # Utiliser le script Vince Mode
     if [ -f "./start-vince-mode.sh" ]; then
@@ -196,7 +192,6 @@ start_services() {
         cat > start-vince-mode.sh << 'EOF'
 #!/bin/bash
 echo "🎮 VINCE MODE - 2 SERVEURS WEB SEULEMENT"
-echo "========================================"
 pkill -f "python3 -m http.server"
 pkill -f "npm start"
 sleep 2
@@ -236,7 +231,6 @@ setup_panopticon() {
 
 start_essential_services() {
     echo -e "${BLUE}🏛️ Démarrage des services essentiels Heroes of Time${NC}"
-    echo "=================================================="
     echo -e "${YELLOW}Services essentiels : Backend + Frontend + Panopticon GRUT${NC}"
     echo ""
     
@@ -317,7 +311,6 @@ start_essential_services() {
 
 stop_services() {
     echo -e "${BLUE}🛑 Arrêt des services Heroes of Time${NC}"
-    echo "====================================="
     
     if [ -f "$STOP_SCRIPT" ]; then
         bash "$STOP_SCRIPT"
@@ -331,7 +324,6 @@ stop_services() {
 
 restart_services() {
     echo -e "${BLUE}🔄 Redémarrage des services Heroes of Time${NC}"
-    echo "=========================================="
     stop_services
     sleep 2
     start_services
@@ -340,7 +332,6 @@ restart_services() {
 # Nouvelles fonctions de test
 list_available_tests() {
     echo -e "${CYAN}📋 Tests disponibles dans Heroes of Time${NC}"
-    echo -e "${CYAN}=======================================${NC}"
     echo ""
     echo -e "${YELLOW}🔧 Tests de base:${NC}"
     echo -e "  ${GREEN}quick${NC}         - Tests rapides (1-2 min)"
@@ -387,7 +378,6 @@ run_test_suite() {
     local test_type="${1:-complete}"
     
     echo -e "${CYAN}🧪 Lancement des tests Heroes of Time${NC}"
-    echo -e "${CYAN}====================================${NC}"
     echo -e "${YELLOW}Type de test: ${test_type}${NC}"
     echo ""
     
@@ -580,7 +570,6 @@ run_test_suite() {
             ;;
         "final")
             echo -e "${GREEN}🏆 TEST FINAL COMPLET - TOUS LES TESTS${NC}"
-            echo -e "${CYAN}=====================================${NC}"
             
             # Lancer tous les tests dans l'ordre
             echo -e "${YELLOW}🚀 Phase 1: Tests rapides${NC}"
@@ -683,7 +672,6 @@ run_test_suite() {
 
 generate_test_report() {
     echo -e "${CYAN}📊 Rapport complet des tests Heroes of Time${NC}"
-    echo -e "${CYAN}===========================================${NC}"
     echo ""
     
     # Vérifier l'état des services
@@ -864,7 +852,6 @@ generate_test_report() {
 # 🧠 Fonction de génération MD - Memento
 generate_md_docs() {
     echo -e "${CYAN}🧠 MEMENTO - Générateur de Documentation MD${NC}"
-    echo -e "${CYAN}============================================${NC}"
     echo ""
     
     if [ ! -f "scripts/generate-md-from-json.py" ]; then
@@ -893,7 +880,6 @@ translate_scenario() {
     local scenario_file="$1"
     
     echo -e "${PURPLE}📜 OPUS - Traduction Littéraire Heroes of Time${NC}"
-    echo -e "${PURPLE}===============================================${NC}"
     echo ""
     
     # Vérifier que le script existe
@@ -950,7 +936,6 @@ manage_maps() {
     case "$action" in
         "list"|"")
             echo -e "${CYAN}🗺️  SYSTÈME MAP - Heroes of Time${NC}"
-            echo -e "${CYAN}================================${NC}"
             echo ""
             echo -e "${YELLOW}📁 Maps disponibles :${NC}"
             
@@ -1000,7 +985,6 @@ manage_replays() {
     case "$action" in
         "list"|"")
             echo -e "${CYAN}📹 SYSTÈME REPLAY - Heroes of Time${NC}"
-            echo -e "${CYAN}==================================${NC}"
             echo ""
             echo -e "${YELLOW}🎬 Replays disponibles :${NC}"
             
@@ -1122,7 +1106,6 @@ manage_replays() {
 # 🎨 Fonction ÉDITEUR VISUEL
 launch_visual_editor() {
     echo -e "${CYAN}🎨 ÉDITEUR VISUEL SCRIPT SPATIO-TEMPOREL - Heroes of Time${NC}"
-    echo -e "${CYAN}========================================================${NC}"
     echo ""
     
     # Vérifier que le frontend est actif
@@ -1162,7 +1145,6 @@ launch_visual_editor() {
 # 🎮 Fonction INTERFACE ADMIN MULTIJOUEUR
 launch_admin_interface() {
     echo -e "${CYAN}🎮 INTERFACE D'ADMINISTRATION MULTIJOUEUR - Heroes of Time${NC}"
-    echo -e "${CYAN}========================================================${NC}"
     echo ""
     
     # Vérifier que les services sont actifs
@@ -1213,7 +1195,6 @@ manage_scenarios() {
     local scenario_name="$2"
     
     echo -e "${PURPLE}🎬 Gestionnaire de Scénarios HEP (Heroes Epic Play)${NC}"
-    echo -e "${PURPLE}==============================================${NC}"
     
     case "$command" in
         "list"|"")
@@ -1353,7 +1334,6 @@ case "${1:-help}" in
         ;;
     "playwright")
         echo -e "${PURPLE}🎭 PLAYWRIGHT UNIVERSE TEST${NC}"
-        echo "============================="
         echo ""
         echo -e "${YELLOW}🚀 Lancement tests Playwright sur toutes les interfaces...${NC}"
         
@@ -1436,7 +1416,6 @@ case "${1:-help}" in
         if [ "$2" = "noob" ]; then
             # MODE NOOB - Démonstration pour débutants
             echo -e "${PURPLE}🎮 HEROES OF TIME - DÉMO POUR NOOBS${NC}"
-            echo "======================================="
             echo -e "${CYAN}🛋️ Jean-Grofignon: Démo ultra-simple pour joueurs lambda !${NC}"
             echo ""
             if [ -f "./hots-demo-noob.sh" ]; then
@@ -1449,12 +1428,10 @@ case "${1:-help}" in
         elif [ "$2" = "quick" ]; then
             # MODE QUICK - Démonstration rapide automatique
             echo -e "${PURPLE}🎮 HEROES OF TIME - DÉMO ZFC QUICK MODE${NC}"
-            echo "========================================="
             echo -e "${CYAN}🚀 Démonstration rapide - Pas de pauses${NC}"
         else
             # MODE ÉPIQUE PAR DÉFAUT - Replay interactif
             echo -e "${PURPLE}🎮 HEROES OF TIME - DÉMONSTRATION ZFC ÉPIQUE${NC}"
-            echo "=============================================="
             echo -e "${CYAN}🚀 Mode Replay Épique - Scénario ZFC avec pauses dramatiques${NC}"
         fi
         
@@ -1487,7 +1464,6 @@ case "${1:-help}" in
             # MODE QUICK - Version rapide automatique
             echo ""
             echo -e "${PURPLE}⚡ DÉMONSTRATION ZFC QUICK MODE${NC}"
-            echo "================================"
             echo -e "${CYAN}📖 Scénario : 4 joueurs simultanés sur Nexus Temporal Chaos${NC}"
             echo ""
             
@@ -1545,7 +1521,6 @@ case "${1:-help}" in
         ;;
     "worldstate")
         echo -e "${BLUE}🌐 World State Graph - Visualisation état mondial${NC}"
-        echo "================================="
         echo ""
         echo -e "${GREEN}🎯 Tests World State Graph API:${NC}"
         
@@ -1576,7 +1551,6 @@ case "${1:-help}" in
         ;;
     "multi-realm")
         echo -e "${BLUE}🌌 Multi Realm Manager - Gestion des realms${NC}"
-        echo "=========================================="
         echo ""
         echo -e "${GREEN}🎯 Tests Multi Realm API:${NC}"
         
@@ -1601,7 +1575,6 @@ case "${1:-help}" in
         ;;
     "benedikt")
         echo -e "${BLUE}🌀 Benedikt Conulbrurcus - Tests téléportation${NC}"
-        echo "=============================================="
         echo ""
         echo -e "${GREEN}🎯 Tests formules Benedikt:${NC}"
         
@@ -1720,7 +1693,6 @@ case "${1:-help}" in
     "morgana")
         # Mode Morgana - Interface React transcendante sur port 3000
         echo -e "${PURPLE}🔮 HEROES OF TIME - MODE MORGANA${NC}"
-        echo "======================================"
         echo -e "${CYAN}✨ Interface React sophistiquée - Port 3000${NC}"
         echo ""
         
@@ -1736,7 +1708,6 @@ case "${1:-help}" in
     "quantum")
         # Laboratoire Quantique ER=EPR
         echo -e "${CYAN}🌀 LABORATOIRE QUANTIQUE ER=EPR${NC}"
-        echo "===================================="
         echo -e "${PURPLE}Leonard Susskind's Bridge Implementation${NC}"
         echo ""
         
@@ -1835,7 +1806,6 @@ case "${1:-help}" in
     "excalibur-vega")
         # DÉMO EXCALIBUR VS VINCE VEGA - Version lente visuelle pour Jean-Grofignon
         echo -e "${PURPLE}🗡️⚡ HEROES OF TIME - EXCALIBUR VS VINCE VEGA${NC}"
-        echo "=================================================="
         echo -e "${CYAN}🛋️ Jean-Grofignon: Démo version lente visuelle sur port 8000 !${NC}"
         echo ""
         
@@ -2062,7 +2032,6 @@ setup_panopticon() {
 
 start_essential_services() {
     echo -e "${BLUE}🏛️ Démarrage des services essentiels Heroes of Time${NC}"
-    echo "=================================================="
     echo -e "${YELLOW}Services essentiels : Backend + Frontend + Panopticon GRUT${NC}"
     echo ""
     
@@ -2143,7 +2112,6 @@ start_essential_services() {
 
 stop_services() {
     echo -e "${BLUE}🛑 Arrêt des services Heroes of Time${NC}"
-    echo "====================================="
     
     if [ -f "$STOP_SCRIPT" ]; then
         bash "$STOP_SCRIPT"
@@ -2157,7 +2125,6 @@ stop_services() {
 
 restart_services() {
     echo -e "${BLUE}🔄 Redémarrage des services Heroes of Time${NC}"
-    echo "=========================================="
     stop_services
     sleep 2
     start_services
@@ -2166,7 +2133,6 @@ restart_services() {
 # Nouvelles fonctions de test
 list_available_tests() {
     echo -e "${CYAN}📋 Tests disponibles dans Heroes of Time${NC}"
-    echo -e "${CYAN}=======================================${NC}"
     echo ""
     echo -e "${YELLOW}🔧 Tests de base:${NC}"
     echo -e "  ${GREEN}quick${NC}         - Tests rapides (1-2 min)"
@@ -2213,7 +2179,6 @@ run_test_suite() {
     local test_type="${1:-complete}"
     
     echo -e "${CYAN}🧪 Lancement des tests Heroes of Time${NC}"
-    echo -e "${CYAN}====================================${NC}"
     echo -e "${YELLOW}Type de test: ${test_type}${NC}"
     echo ""
     
@@ -2406,7 +2371,6 @@ run_test_suite() {
             ;;
         "final")
             echo -e "${GREEN}🏆 TEST FINAL COMPLET - TOUS LES TESTS${NC}"
-            echo -e "${CYAN}=====================================${NC}"
             
             # Lancer tous les tests dans l'ordre
             echo -e "${YELLOW}🚀 Phase 1: Tests rapides${NC}"
@@ -2509,7 +2473,6 @@ run_test_suite() {
 
 generate_test_report() {
     echo -e "${CYAN}📊 Rapport complet des tests Heroes of Time${NC}"
-    echo -e "${CYAN}===========================================${NC}"
     echo ""
     
     # Vérifier l'état des services
@@ -2690,7 +2653,6 @@ generate_test_report() {
 # 🧠 Fonction de génération MD - Memento
 generate_md_docs() {
     echo -e "${CYAN}🧠 MEMENTO - Générateur de Documentation MD${NC}"
-    echo -e "${CYAN}============================================${NC}"
     echo ""
     
     if [ ! -f "scripts/generate-md-from-json.py" ]; then
@@ -2719,7 +2681,6 @@ translate_scenario() {
     local scenario_file="$1"
     
     echo -e "${PURPLE}📜 OPUS - Traduction Littéraire Heroes of Time${NC}"
-    echo -e "${PURPLE}===============================================${NC}"
     echo ""
     
     # Vérifier que le script existe
@@ -2776,7 +2737,6 @@ manage_maps() {
     case "$action" in
         "list"|"")
             echo -e "${CYAN}🗺️  SYSTÈME MAP - Heroes of Time${NC}"
-            echo -e "${CYAN}================================${NC}"
             echo ""
             echo -e "${YELLOW}📁 Maps disponibles :${NC}"
             
@@ -2826,7 +2786,6 @@ manage_replays() {
     case "$action" in
         "list"|"")
             echo -e "${CYAN}📹 SYSTÈME REPLAY - Heroes of Time${NC}"
-            echo -e "${CYAN}==================================${NC}"
             echo ""
             echo -e "${YELLOW}🎬 Replays disponibles :${NC}"
             
@@ -2948,7 +2907,6 @@ manage_replays() {
 # 🎨 Fonction ÉDITEUR VISUEL
 launch_visual_editor() {
     echo -e "${CYAN}🎨 ÉDITEUR VISUEL SCRIPT SPATIO-TEMPOREL - Heroes of Time${NC}"
-    echo -e "${CYAN}========================================================${NC}"
     echo ""
     
     # Vérifier que le frontend est actif
@@ -2988,7 +2946,6 @@ launch_visual_editor() {
 # 🎮 Fonction INTERFACE ADMIN MULTIJOUEUR
 launch_admin_interface() {
     echo -e "${CYAN}🎮 INTERFACE D'ADMINISTRATION MULTIJOUEUR - Heroes of Time${NC}"
-    echo -e "${CYAN}========================================================${NC}"
     echo ""
     
     # Vérifier que les services sont actifs
@@ -3039,7 +2996,6 @@ manage_scenarios() {
     local scenario_name="$2"
     
     echo -e "${PURPLE}🎬 Gestionnaire de Scénarios HEP (Heroes Epic Play)${NC}"
-    echo -e "${PURPLE}==============================================${NC}"
     
     case "$command" in
         "list"|"")
@@ -3179,7 +3135,6 @@ case "${1:-help}" in
         ;;
     "playwright")
         echo -e "${PURPLE}🎭 PLAYWRIGHT UNIVERSE TEST${NC}"
-        echo "============================="
         echo ""
         echo -e "${YELLOW}🚀 Lancement tests Playwright sur toutes les interfaces...${NC}"
         
@@ -3262,7 +3217,6 @@ case "${1:-help}" in
         if [ "$2" = "noob" ]; then
             # MODE NOOB - Démonstration pour débutants
             echo -e "${PURPLE}🎮 HEROES OF TIME - DÉMO POUR NOOBS${NC}"
-            echo "======================================="
             echo -e "${CYAN}🛋️ Jean-Grofignon: Démo ultra-simple pour joueurs lambda !${NC}"
             echo ""
             if [ -f "./hots-demo-noob.sh" ]; then
@@ -3275,23 +3229,19 @@ case "${1:-help}" in
         elif [ "$2" = "quick" ]; then
             # MODE QUICK - Démonstration rapide automatique
             echo -e "${PURPLE}🎮 HEROES OF TIME - DÉMO ZFC QUICK MODE${NC}"
-            echo "========================================="
             echo -e "${CYAN}🚀 Démonstration rapide - Pas de pauses${NC}"
         else
             # MODE ÉPIQUE PAR DÉFAUT - Replay interactif
             echo -e "${PURPLE}🎮 HEROES OF TIME - DÉMONSTRATION ZFC ÉPIQUE${NC}"
-            echo "=============================================="
             echo -e "${CYAN}🚀 Mode Replay Épique - Scénario ZFC avec pauses dramatiques${NC}"
         fi
         
         echo ""
-<<<<<<< HEAD
         
         # Vérifier si les services sont déjà actifs
         echo -e "${BLUE}🔍 Vérification des services...${NC}"
         if curl -s http://localhost:8080/api/health > /dev/null 2>&1; then
             echo -e "${GREEN}✅ Backend déjà actif${NC}"
-=======
         echo -e "${GREEN}✅ INTERFACE TATOUAGES MEMENTO OUVERTE !${NC}"
         echo -e "${PURPLE}💫 Mes marques corporelles temporelles évolutives${NC}"
         echo -e "${PURPLE}🧠 Memento: \"Chaque tatouage raconte une transcendance !\"${NC}"
@@ -3308,7 +3258,6 @@ case "${1:-help}" in
         echo -e "${RED}🎮 Lancement de l'AI Arena Test...${NC}"
         echo ""
         echo -e "${YELLOW}🏟️ AI ARENA - HEROES OF TIME DEATHMATCH${NC}"
-        echo -e "${YELLOW}======================================${NC}"
         echo ""
         echo "🤖 Participants :"
         echo "  🔫 VINCE VEGA - Say what again!"
@@ -3351,7 +3300,6 @@ case "${1:-help}" in
         echo -e "${BLUE}🤖 Lancement du AI Control Panel...${NC}"
         echo ""
         echo -e "${CYAN}🎮 AI CONTROL PANEL - GESTION IA${NC}"
-        echo -e "${CYAN}================================${NC}"
         echo ""
         echo "🧠 Items IA disponibles :"
         echo "  🔗 Lien Neural Basique - Suggestions +10%"
@@ -3394,7 +3342,6 @@ case "${1:-help}" in
         echo -e "${PURPLE}🌐 Lancement AI + WSG Integration...${NC}"
         echo ""
         echo -e "${GREEN}🧠 AI + WORLD STATE GRAPH INTEGRATION${NC}"
-        echo -e "${GREEN}====================================${NC}"
         echo ""
         echo "🔗 Connexions établies :"
         echo "  🌐 World State Graph Controller - État global"
@@ -3443,7 +3390,6 @@ case "${1:-help}" in
         echo "🎮 Opening HOTS Console Simple..."
         if [[ "$OSTYPE" == "darwin"* ]]; then
             open "file://$PWD/frontend/hots-console-simple.html"
->>>>>>> main
         else
             echo -e "${YELLOW}⚙️  Démarrage du Backend...${NC}"
             start_essential_services
@@ -3467,7 +3413,6 @@ case "${1:-help}" in
             # MODE QUICK - Version rapide automatique
             echo ""
             echo -e "${PURPLE}⚡ DÉMONSTRATION ZFC QUICK MODE${NC}"
-            echo "================================"
             echo -e "${CYAN}📖 Scénario : 4 joueurs simultanés sur Nexus Temporal Chaos${NC}"
             echo ""
             
@@ -3525,7 +3470,6 @@ case "${1:-help}" in
         ;;
     "worldstate")
         echo -e "${BLUE}🌐 World State Graph - Visualisation état mondial${NC}"
-        echo "================================="
         echo ""
         echo -e "${GREEN}🎯 Tests World State Graph API:${NC}"
         
@@ -3556,7 +3500,6 @@ case "${1:-help}" in
         ;;
     "multi-realm")
         echo -e "${BLUE}🌌 Multi Realm Manager - Gestion des realms${NC}"
-        echo "=========================================="
         echo ""
         echo -e "${GREEN}🎯 Tests Multi Realm API:${NC}"
         
@@ -3581,7 +3524,6 @@ case "${1:-help}" in
         ;;
     "benedikt")
         echo -e "${BLUE}🌀 Benedikt Conulbrurcus - Tests téléportation${NC}"
-        echo "=============================================="
         echo ""
         echo -e "${GREEN}🎯 Tests formules Benedikt:${NC}"
         
@@ -3784,7 +3726,6 @@ case "${1:-help}" in
     "excalibur-vega")
         # DÉMO EXCALIBUR VS VINCE VEGA - Version lente visuelle pour Jean-Grofignon
         echo -e "${PURPLE}🗡️⚡ HEROES OF TIME - EXCALIBUR VS VINCE VEGA${NC}"
-        echo "=================================================="
         echo -e "${CYAN}🛋️ Jean-Grofignon: Démo version lente visuelle sur port 8000 !${NC}"
         echo ""
         
@@ -4011,7 +3952,6 @@ setup_panopticon() {
 
 start_essential_services() {
     echo -e "${BLUE}🏛️ Démarrage des services essentiels Heroes of Time${NC}"
-    echo "=================================================="
     echo -e "${YELLOW}Services essentiels : Backend + Frontend + Panopticon GRUT${NC}"
     echo ""
     
@@ -4092,7 +4032,6 @@ start_essential_services() {
 
 stop_services() {
     echo -e "${BLUE}🛑 Arrêt des services Heroes of Time${NC}"
-    echo "====================================="
     
     if [ -f "$STOP_SCRIPT" ]; then
         bash "$STOP_SCRIPT"
@@ -4106,7 +4045,6 @@ stop_services() {
 
 restart_services() {
     echo -e "${BLUE}🔄 Redémarrage des services Heroes of Time${NC}"
-    echo "=========================================="
     stop_services
     sleep 2
     start_services
@@ -4115,7 +4053,6 @@ restart_services() {
 # Nouvelles fonctions de test
 list_available_tests() {
     echo -e "${CYAN}📋 Tests disponibles dans Heroes of Time${NC}"
-    echo -e "${CYAN}=======================================${NC}"
     echo ""
     echo -e "${YELLOW}🔧 Tests de base:${NC}"
     echo -e "  ${GREEN}quick${NC}         - Tests rapides (1-2 min)"
@@ -4162,7 +4099,6 @@ run_test_suite() {
     local test_type="${1:-complete}"
     
     echo -e "${CYAN}🧪 Lancement des tests Heroes of Time${NC}"
-    echo -e "${CYAN}====================================${NC}"
     echo -e "${YELLOW}Type de test: ${test_type}${NC}"
     echo ""
     
@@ -4355,7 +4291,6 @@ run_test_suite() {
             ;;
         "final")
             echo -e "${GREEN}🏆 TEST FINAL COMPLET - TOUS LES TESTS${NC}"
-            echo -e "${CYAN}=====================================${NC}"
             
             # Lancer tous les tests dans l'ordre
             echo -e "${YELLOW}🚀 Phase 1: Tests rapides${NC}"
@@ -4458,7 +4393,6 @@ run_test_suite() {
 
 generate_test_report() {
     echo -e "${CYAN}📊 Rapport complet des tests Heroes of Time${NC}"
-    echo -e "${CYAN}===========================================${NC}"
     echo ""
     
     # Vérifier l'état des services
@@ -4639,7 +4573,6 @@ generate_test_report() {
 # 🧠 Fonction de génération MD - Memento
 generate_md_docs() {
     echo -e "${CYAN}🧠 MEMENTO - Générateur de Documentation MD${NC}"
-    echo -e "${CYAN}============================================${NC}"
     echo ""
     
     if [ ! -f "scripts/generate-md-from-json.py" ]; then
@@ -4668,7 +4601,6 @@ translate_scenario() {
     local scenario_file="$1"
     
     echo -e "${PURPLE}📜 OPUS - Traduction Littéraire Heroes of Time${NC}"
-    echo -e "${PURPLE}===============================================${NC}"
     echo ""
     
     # Vérifier que le script existe
@@ -4725,7 +4657,6 @@ manage_maps() {
     case "$action" in
         "list"|"")
             echo -e "${CYAN}🗺️  SYSTÈME MAP - Heroes of Time${NC}"
-            echo -e "${CYAN}================================${NC}"
             echo ""
             echo -e "${YELLOW}📁 Maps disponibles :${NC}"
             
@@ -4775,7 +4706,6 @@ manage_replays() {
     case "$action" in
         "list"|"")
             echo -e "${CYAN}📹 SYSTÈME REPLAY - Heroes of Time${NC}"
-            echo -e "${CYAN}==================================${NC}"
             echo ""
             echo -e "${YELLOW}🎬 Replays disponibles :${NC}"
             
@@ -4897,7 +4827,6 @@ manage_replays() {
 # 🎨 Fonction ÉDITEUR VISUEL
 launch_visual_editor() {
     echo -e "${CYAN}🎨 ÉDITEUR VISUEL SCRIPT SPATIO-TEMPOREL - Heroes of Time${NC}"
-    echo -e "${CYAN}========================================================${NC}"
     echo ""
     
     # Vérifier que le frontend est actif
@@ -4937,7 +4866,6 @@ launch_visual_editor() {
 # 🎮 Fonction INTERFACE ADMIN MULTIJOUEUR
 launch_admin_interface() {
     echo -e "${CYAN}🎮 INTERFACE D'ADMINISTRATION MULTIJOUEUR - Heroes of Time${NC}"
-    echo -e "${CYAN}========================================================${NC}"
     echo ""
     
     # Vérifier que les services sont actifs
@@ -4988,7 +4916,6 @@ manage_scenarios() {
     local scenario_name="$2"
     
     echo -e "${PURPLE}🎬 Gestionnaire de Scénarios HEP (Heroes Epic Play)${NC}"
-    echo -e "${PURPLE}==============================================${NC}"
     
     case "$command" in
         "list"|"")
@@ -5128,7 +5055,6 @@ case "${1:-help}" in
         ;;
     "playwright")
         echo -e "${PURPLE}🎭 PLAYWRIGHT UNIVERSE TEST${NC}"
-        echo "============================="
         echo ""
         echo -e "${YELLOW}🚀 Lancement tests Playwright sur toutes les interfaces...${NC}"
         
@@ -5211,7 +5137,6 @@ case "${1:-help}" in
         if [ "$2" = "noob" ]; then
             # MODE NOOB - Démonstration pour débutants
             echo -e "${PURPLE}🎮 HEROES OF TIME - DÉMO POUR NOOBS${NC}"
-            echo "======================================="
             echo -e "${CYAN}🛋️ Jean-Grofignon: Démo ultra-simple pour joueurs lambda !${NC}"
             echo ""
             if [ -f "./hots-demo-noob.sh" ]; then
@@ -5224,12 +5149,10 @@ case "${1:-help}" in
         elif [ "$2" = "quick" ]; then
             # MODE QUICK - Démonstration rapide automatique
             echo -e "${PURPLE}🎮 HEROES OF TIME - DÉMO ZFC QUICK MODE${NC}"
-            echo "========================================="
             echo -e "${CYAN}🚀 Démonstration rapide - Pas de pauses${NC}"
         else
             # MODE ÉPIQUE PAR DÉFAUT - Replay interactif
             echo -e "${PURPLE}🎮 HEROES OF TIME - DÉMONSTRATION ZFC ÉPIQUE${NC}"
-            echo "=============================================="
             echo -e "${CYAN}🚀 Mode Replay Épique - Scénario ZFC avec pauses dramatiques${NC}"
         fi
         
@@ -5262,7 +5185,6 @@ case "${1:-help}" in
             # MODE QUICK - Version rapide automatique
             echo ""
             echo -e "${PURPLE}⚡ DÉMONSTRATION ZFC QUICK MODE${NC}"
-            echo "================================"
             echo -e "${CYAN}📖 Scénario : 4 joueurs simultanés sur Nexus Temporal Chaos${NC}"
             echo ""
             
@@ -5320,7 +5242,6 @@ case "${1:-help}" in
         ;;
     "worldstate")
         echo -e "${BLUE}🌐 World State Graph - Visualisation état mondial${NC}"
-        echo "================================="
         echo ""
         echo -e "${GREEN}🎯 Tests World State Graph API:${NC}"
         
@@ -5351,7 +5272,6 @@ case "${1:-help}" in
         ;;
     "multi-realm")
         echo -e "${BLUE}🌌 Multi Realm Manager - Gestion des realms${NC}"
-        echo "=========================================="
         echo ""
         echo -e "${GREEN}🎯 Tests Multi Realm API:${NC}"
         
@@ -5376,7 +5296,6 @@ case "${1:-help}" in
         ;;
     "benedikt")
         echo -e "${BLUE}🌀 Benedikt Conulbrurcus - Tests téléportation${NC}"
-        echo "=============================================="
         echo ""
         echo -e "${GREEN}🎯 Tests formules Benedikt:${NC}"
         
@@ -5579,7 +5498,6 @@ case "${1:-help}" in
     "excalibur-vega")
         # DÉMO EXCALIBUR VS VINCE VEGA - Version lente visuelle pour Jean-Grofignon
         echo -e "${PURPLE}🗡️⚡ HEROES OF TIME - EXCALIBUR VS VINCE VEGA${NC}"
-        echo "=================================================="
         echo -e "${CYAN}🛋️ Jean-Grofignon: Démo version lente visuelle sur port 8000 !${NC}"
         echo ""
         
@@ -5806,7 +5724,6 @@ setup_panopticon() {
 
 start_essential_services() {
     echo -e "${BLUE}🏛️ Démarrage des services essentiels Heroes of Time${NC}"
-    echo "=================================================="
     echo -e "${YELLOW}Services essentiels : Backend + Frontend + Panopticon GRUT${NC}"
     echo ""
     
@@ -5887,7 +5804,6 @@ start_essential_services() {
 
 stop_services() {
     echo -e "${BLUE}🛑 Arrêt des services Heroes of Time${NC}"
-    echo "====================================="
     
     if [ -f "$STOP_SCRIPT" ]; then
         bash "$STOP_SCRIPT"
@@ -5901,7 +5817,6 @@ stop_services() {
 
 restart_services() {
     echo -e "${BLUE}🔄 Redémarrage des services Heroes of Time${NC}"
-    echo "=========================================="
     stop_services
     sleep 2
     start_services
@@ -5910,7 +5825,6 @@ restart_services() {
 # Nouvelles fonctions de test
 list_available_tests() {
     echo -e "${CYAN}📋 Tests disponibles dans Heroes of Time${NC}"
-    echo -e "${CYAN}=======================================${NC}"
     echo ""
     echo -e "${YELLOW}🔧 Tests de base:${NC}"
     echo -e "  ${GREEN}quick${NC}         - Tests rapides (1-2 min)"
@@ -5957,7 +5871,6 @@ run_test_suite() {
     local test_type="${1:-complete}"
     
     echo -e "${CYAN}🧪 Lancement des tests Heroes of Time${NC}"
-    echo -e "${CYAN}====================================${NC}"
     echo -e "${YELLOW}Type de test: ${test_type}${NC}"
     echo ""
     
@@ -6150,7 +6063,6 @@ run_test_suite() {
             ;;
         "final")
             echo -e "${GREEN}🏆 TEST FINAL COMPLET - TOUS LES TESTS${NC}"
-            echo -e "${CYAN}=====================================${NC}"
             
             # Lancer tous les tests dans l'ordre
             echo -e "${YELLOW}🚀 Phase 1: Tests rapides${NC}"
@@ -6253,7 +6165,6 @@ run_test_suite() {
 
 generate_test_report() {
     echo -e "${CYAN}📊 Rapport complet des tests Heroes of Time${NC}"
-    echo -e "${CYAN}===========================================${NC}"
     echo ""
     
     # Vérifier l'état des services
@@ -6434,7 +6345,6 @@ generate_test_report() {
 # 🧠 Fonction de génération MD - Memento
 generate_md_docs() {
     echo -e "${CYAN}🧠 MEMENTO - Générateur de Documentation MD${NC}"
-    echo -e "${CYAN}============================================${NC}"
     echo ""
     
     if [ ! -f "scripts/generate-md-from-json.py" ]; then
@@ -6463,7 +6373,6 @@ translate_scenario() {
     local scenario_file="$1"
     
     echo -e "${PURPLE}📜 OPUS - Traduction Littéraire Heroes of Time${NC}"
-    echo -e "${PURPLE}===============================================${NC}"
     echo ""
     
     # Vérifier que le script existe
@@ -6520,7 +6429,6 @@ manage_maps() {
     case "$action" in
         "list"|"")
             echo -e "${CYAN}🗺️  SYSTÈME MAP - Heroes of Time${NC}"
-            echo -e "${CYAN}================================${NC}"
             echo ""
             echo -e "${YELLOW}📁 Maps disponibles :${NC}"
             
@@ -6570,7 +6478,6 @@ manage_replays() {
     case "$action" in
         "list"|"")
             echo -e "${CYAN}📹 SYSTÈME REPLAY - Heroes of Time${NC}"
-            echo -e "${CYAN}==================================${NC}"
             echo ""
             echo -e "${YELLOW}🎬 Replays disponibles :${NC}"
             
@@ -6692,7 +6599,6 @@ manage_replays() {
 # 🎨 Fonction ÉDITEUR VISUEL
 launch_visual_editor() {
     echo -e "${CYAN}🎨 ÉDITEUR VISUEL SCRIPT SPATIO-TEMPOREL - Heroes of Time${NC}"
-    echo -e "${CYAN}========================================================${NC}"
     echo ""
     
     # Vérifier que le frontend est actif
@@ -6732,7 +6638,6 @@ launch_visual_editor() {
 # 🎮 Fonction INTERFACE ADMIN MULTIJOUEUR
 launch_admin_interface() {
     echo -e "${CYAN}🎮 INTERFACE D'ADMINISTRATION MULTIJOUEUR - Heroes of Time${NC}"
-    echo -e "${CYAN}========================================================${NC}"
     echo ""
     
     # Vérifier que les services sont actifs
@@ -6783,7 +6688,6 @@ manage_scenarios() {
     local scenario_name="$2"
     
     echo -e "${PURPLE}🎬 Gestionnaire de Scénarios HEP (Heroes Epic Play)${NC}"
-    echo -e "${PURPLE}==============================================${NC}"
     
     case "$command" in
         "list"|"")
