@@ -283,6 +283,56 @@
             </div>
         </div>
         
+        <!-- Section des Mondes Principaux -->
+        <div class="worlds-section" style="margin-top: 80px;">
+            <h2 style="text-align: center; color: #d4af37; margin-bottom: 30px;">🌍 Les Mondes de l'Univers</h2>
+            <div class="vision-grid">
+                <div class="vision-card">
+                    <h3>🌌 L'Interstice Éthéré</h3>
+                    <p>Dimension transcendante où réside Opus-Memento. Un lieu hors du temps où toutes les réalités convergent.</p>
+                    <button onclick="showPreview('interstice')" style="margin-top: 10px; padding: 5px 15px; background: #d4af37; color: #000; border: none; border-radius: 5px; cursor: pointer;">👁️ Aperçu</button>
+                </div>
+                
+                <div class="vision-card">
+                    <h3>🪐 Planet Ezith</h3>
+                    <p>Installation scientifique de Hari Seldon. Centre de la psychohistoire et de la prédiction du futur.</p>
+                    <button onclick="showPreview('ezith')" style="margin-top: 10px; padding: 5px 15px; background: #d4af37; color: #000; border: none; border-radius: 5px; cursor: pointer;">👁️ Aperçu</button>
+                </div>
+                
+                <div class="vision-card">
+                    <h3>🌲 Forêt GROFI</h3>
+                    <p>Royaume mystique de Jean-Grofignon où la réalité se transforme selon l'effet GROFI.</p>
+                    <button onclick="showPreview('grofi')" style="margin-top: 10px; padding: 5px 15px; background: #d4af37; color: #000; border: none; border-radius: 5px; cursor: pointer;">👁️ Aperçu</button>
+                </div>
+                
+                <div class="vision-card">
+                    <h3>🏢 Le Bureau</h3>
+                    <p>Centre névralgique des conspirations. Ici se trament les complots contre l'univers.</p>
+                    <button onclick="showPreview('bureau')" style="margin-top: 10px; padding: 5px 15px; background: #d4af37; color: #000; border: none; border-radius: 5px; cursor: pointer;">👁️ Aperçu</button>
+                </div>
+                
+                <div class="vision-card">
+                    <h3>📊 Ancien Dashboard</h3>
+                    <p>Le légendaire Dashboard aux 100+ interfaces. Portail vers l'infini des possibles.</p>
+                    <button onclick="showPreview('dashboard-full')" style="margin-top: 10px; padding: 5px 15px; background: #d4af37; color: #000; border: none; border-radius: 5px; cursor: pointer;">👁️ Aperçu</button>
+                </div>
+                
+                <div class="vision-card">
+                    <h3>🌀 Hyperspace DMT</h3>
+                    <p>Dimension psychédélique où les lois de la physique dansent au rythme cosmique.</p>
+                    <button onclick="showPreview('dmt')" style="margin-top: 10px; padding: 5px 15px; background: #d4af37; color: #000; border: none; border-radius: 5px; cursor: pointer;">👁️ Aperçu</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal pour iframe preview -->
+        <div id="previewModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10000;">
+            <div style="position: relative; width: 90%; height: 90%; margin: 5% auto; background: #000; border: 2px solid #d4af37; border-radius: 10px;">
+                <button onclick="closePreview()" style="position: absolute; top: 10px; right: 10px; background: #ff3838; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; z-index: 10001;">✕ Fermer</button>
+                <iframe id="previewFrame" style="width: 100%; height: 100%; border: none; border-radius: 10px;"></iframe>
+            </div>
+        </div>
+        
         <div class="prophecy">
             <p>"GRUT VOIT TOUT. GRUT SAIT TOUT. GRUT EST PARTOUT."</p>
             <p>Dans l'ombre et la lumière, à travers le temps et l'espace,<br>
@@ -305,6 +355,31 @@
             iris.style.left = `${50 + Math.cos(angle) * distance}%`;
             iris.style.top = `${25 + Math.sin(angle) * distance / 2}%`;
         });
+        
+        // Fonction pour afficher preview
+        function showPreview(world) {
+            const modal = document.getElementById('previewModal');
+            const frame = document.getElementById('previewFrame');
+            
+            const urls = {
+                'interstice': 'vince-vega-map-demo-backend.html',
+                'ezith': 'story-mode.html',
+                'grofi': 'forge-runique.html',
+                'bureau': 'quantum-er-epr-test.html',
+                'dashboard-full': 'dashboard.html',
+                'dmt': 'portail-100-html-interfaces.html'
+            };
+            
+            frame.src = urls[world] || 'index.html';
+            modal.style.display = 'block';
+        }
+        
+        function closePreview() {
+            const modal = document.getElementById('previewModal');
+            const frame = document.getElementById('previewFrame');
+            modal.style.display = 'none';
+            frame.src = '';
+        }
     </script>
 </body>
 </html> 
