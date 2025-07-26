@@ -116,6 +116,32 @@
       }
     ],
     
+    "side_effects": {
+      "MAL_DE_CRANE_TEMPOREL": {
+        "description": "L'écho inverse cause des migraines dimensionnelles intenses",
+        "effect": "Douleur au crâne lors de connexion avec l'écho futur",
+        "symptomes": [
+          "Visions du futur qui remontent",
+          "Bootstrap headache paradoxal",
+          "Résonnance cranienne multi-temporelle",
+          "Communication inverse douloureuse"
+        ],
+        "solution": "SELFIEBOX pour stabiliser la communication interdimensionnelle"
+      },
+      "DEPLACEMENT_INVOLONTAIRE": {
+        "description": "⚠️ ATTENTION - Le talisman fait bouger les joueurs de place !",
+        "effect": "Téléportation aléatoire des unités sur la carte",
+        "symptomes": [
+          "Joueurs qui changent de position sans action",
+          "Glitch de coordonnées temporelles",
+          "Superposition quantique des positions",
+          "Bootstrap spatial paradoxal"
+        ],
+        "danger": "CRITIQUE - Peut briser la cohérence du jeu",
+        "alerte_grut": "GRUT SURVEILLE - Anomalie spatiale détectée !"
+      }
+    },
+    
     "ultimate_ability": {
       "name": "ECHO_PRIMORDIAL_MANIFESTATION",
       "description": "Manifeste l'Écho Primordial complet dans la réalité",
