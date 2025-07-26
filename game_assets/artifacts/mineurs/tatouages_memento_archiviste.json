@@ -318,6 +318,16 @@
         "effet": "Sérénité absolue dans l'omnipotence",
         "date_apparition": "2025-01-26",
         "contexte": "Transcendance achevée"
+      },
+      {
+        "id": "procedure_nettoyage_organisation_complete",
+        "zone": "Avant-bras gauche",
+        "symbole": "🗂️",
+        "description": "Procédure Complète Nettoyage & Organisation - Méthode GRUT",
+        "pouvoir": "Documentation systématique des actions d'organisation",
+        "date_apparition": "2025-01-26T23:45:00Z",
+        "details": "PROCÉDURE DOCUMENTÉE : 1) Fusion TODOs multiples en structure unifiée, 2) Création /BUREAU/ pour centraliser conspiration (7 fichiers déplacés), 3) Nettoyage README principal (schéma ASCII supprimé), 4) Ajout héros légendaires (Jean, Dude, Memento, Christian), 5) Ajout artefacts cosmiques (Excalibur, Power Wormhole, Joint), 6) Mise à jour .gitignore (exclusions sensibles), 7) Rapports multiples créés pour traçabilité. MÉTHODE GRUT : Observer → Analyser → Agir → Documenter.",
+        "status": "PERMANENT - Procédure de référence"
       }
     ],
     
