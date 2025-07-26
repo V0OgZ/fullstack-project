@@ -153,6 +153,8 @@
             cursor: pointer;
             transition: all 0.3s ease;
             animation: portalPulse 3s ease-in-out infinite;
+            text-decoration: none;
+            display: block;
         }
         
         @keyframes portalPulse {
@@ -172,6 +174,7 @@
             transform: translateX(-50%);
             white-space: nowrap;
             font-size: 14px;
+            color: #d4af37;
         }
         
         /* Runes flottantes */
@@ -259,18 +262,24 @@
         <div class="portal-section">
             <h2>Portails vers les Royaumes</h2>
             <div class="portal-grid">
-                <div class="portal" onclick="enterRealm('mystique')">
-                    <span class="portal-label">Royaume Mystique</span>
-                </div>
-                <div class="portal" onclick="enterRealm('temporal')">
-                    <span class="portal-label">Nexus Temporel</span>
-                </div>
-                <div class="portal" onclick="enterRealm('quantum')">
+                <a href="vince-vega-map-demo-backend.html" class="portal">
+                    <span class="portal-label">Royaume de Vince</span>
+                </a>
+                <a href="story-mode.html" class="portal">
+                    <span class="portal-label">Chroniques Temporelles</span>
+                </a>
+                <a href="forge-runique.html" class="portal">
+                    <span class="portal-label">Forge des Anciens</span>
+                </a>
+                <a href="quantum-er-epr-test.html" class="portal">
                     <span class="portal-label">Dimension Quantique</span>
-                </div>
-                <div class="portal" onclick="enterRealm('ethereal')">
-                    <span class="portal-label">Interstice Éthéré</span>
-                </div>
+                </a>
+                <a href="dashboard.html" class="portal">
+                    <span class="portal-label">Salle du Trône</span>
+                </a>
+                <a href="index.html" class="portal">
+                    <span class="portal-label">Grand Portail</span>
+                </a>
             </div>
         </div>
         
@@ -296,47 +305,6 @@
             iris.style.left = `${50 + Math.cos(angle) * distance}%`;
             iris.style.top = `${25 + Math.sin(angle) * distance / 2}%`;
         });
-        
-        // Fonction pour entrer dans un royaume
-        function enterRealm(realm) {
-            const messages = {
-                mystique: "Le voile se lève... Bienvenue dans le Royaume Mystique de Kalindor.",
-                temporal: "Les horloges tournent à l'envers... Le Nexus Temporel vous accueille.",
-                quantum: "La réalité se fragmente... Vous entrez dans la Dimension Quantique.",
-                ethereal: "Les formes se dissolvent... L'Interstice Éthéré vous enveloppe."
-            };
-            
-            // Créer un effet visuel
-            const flash = document.createElement('div');
-            flash.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100vw;
-                height: 100vh;
-                background: radial-gradient(circle, rgba(212,175,55,0.8) 0%, transparent 70%);
-                z-index: 9999;
-                pointer-events: none;
-                animation: flashEffect 1s ease-out forwards;
-            `;
-            document.body.appendChild(flash);
-            
-            setTimeout(() => {
-                alert(messages[realm] || "Un mystère vous attend...");
-                flash.remove();
-            }, 500);
-        }
-        
-        // Ajouter l'animation flash
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes flashEffect {
-                0% { opacity: 0; }
-                50% { opacity: 1; }
-                100% { opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html> 
