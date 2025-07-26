@@ -1,75 +1,315 @@
 package com.example.demo.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import com.example.demo.model.GameState;
 
+/**
+ * 🎭 FOURTH WALL SERVICE - Briseur de Réalité
+ * 
+ * VINCE: "C'est pas un bug, c'est une feature interdimensionnelle !"
+ * JEAN: "De mon canapé, je contrôle toutes les réalités."
+ * GRUT: "Je vois à travers tous les murs, dans toutes les dimensions."
+ */
 @Service
 public class FourthWallService {
     
-    // Mocks ultra-simples pour Jean
-    private final Map<String, String> mockWorlds = new HashMap<>();
+    @Autowired
+    private GameService gameService;
+    
+    @Autowired
+    private QuantumService quantumService;
+    
+    // 🌍 Registre des mondes actifs
+    private final Map<String, WorldInstance> activeWorlds = new ConcurrentHashMap<>();
+    
+    // 🔗 Connexions inter-instances
+    private final Map<String, List<String>> worldConnections = new ConcurrentHashMap<>();
+    
+    // 📊 Métriques 4ème mur
+    private int fourthWallBreaks = 0;
+    private int crossInstanceActions = 0;
+    
+    /**
+     * 🌍 Instance de Monde
+     */
+    public static class WorldInstance {
+        private String id;
+        private String name;
+        private String status; // active, paused, nightmare, transcendent
+        private Map<String, Object> metadata;
+        private long creationTime;
+        
+        public WorldInstance(String id, String name, String status) {
+            this.id = id;
+            this.name = name;
+            this.status = status;
+            this.metadata = new HashMap<>();
+            this.creationTime = System.currentTimeMillis();
+        }
+        
+        // Getters...
+        public String getId() { return id; }
+        public String getName() { return name; }
+        public String getStatus() { return status; }
+    }
     
     public FourthWallService() {
-        // Initialiser les mondes mock
-        mockWorlds.put("world_alpha", "active");
-        mockWorlds.put("world_beta", "nightmare"); 
-        mockWorlds.put("world_jean_canapé", "relaxed");
-        mockWorlds.put("world_vince_errante", "chaotic");
+        // Initialiser les mondes de base
+        initializeBaseWorlds();
     }
     
     /**
-     * MOCK: Initialize instances
+     * 🌍 Initialiser les mondes de base
      */
-    public Map<String, Object> initializeMockInstances() {
+    private void initializeBaseWorlds() {
+        // Monde Alpha - Standard
+        WorldInstance alpha = new WorldInstance("world_alpha", "Monde Alpha", "active");
+        alpha.metadata.put("type", "standard");
+        alpha.metadata.put("creator", "system");
+        activeWorlds.put("world_alpha", alpha);
+        
+        // Monde Beta - Cauchemar
+        WorldInstance beta = new WorldInstance("world_beta", "Monde Beta", "nightmare");
+        beta.metadata.put("type", "nightmare");
+        beta.metadata.put("danger_level", 9);
+        activeWorlds.put("world_beta", beta);
+        
+        // Monde Jean - Canapé Cosmique
+        WorldInstance jean = new WorldInstance("world_jean_canape", "Canapé Cosmique", "relaxed");
+        jean.metadata.put("type", "cosmic");
+        jean.metadata.put("creator", "Jean-Grofignon");
+        jean.metadata.put("special", "Centre de contrôle cosmique");
+        activeWorlds.put("world_jean_canape", jean);
+        
+        // Monde Vince - Errance Quantique
+        WorldInstance vince = new WorldInstance("world_vince_errante", "Errance de Vince", "chaotic");
+        vince.metadata.put("type", "quantum");
+        vince.metadata.put("bullets_remaining", 6);
+        vince.metadata.put("fourth_wall_cracks", 17);
+        activeWorlds.put("world_vince_errante", vince);
+        
+        // Établir connexions de base
+        worldConnections.put("world_alpha", Arrays.asList("world_beta", "world_jean_canape"));
+        worldConnections.put("world_vince_errante", Arrays.asList("world_alpha", "world_beta", "world_jean_canape"));
+        worldConnections.put("world_jean_canape", Arrays.asList("ALL")); // Jean voit tout
+    }
+    
+    /**
+     * 🌍 Obtenir toutes les instances actives
+     */
+    public Map<String, Object> getActiveInstances() {
         Map<String, Object> result = new HashMap<>();
         result.put("success", true);
-        result.put("message", "Mock instances initialized - Jean style!");
-        result.put("instances", mockWorlds);
-        result.put("jean_says", "De mon canapé je vois le multivers !");
+        result.put("message", "Instances actives récupérées");
+        
+        Map<String, Map<String, Object>> instances = new HashMap<>();
+        for (WorldInstance world : activeWorlds.values()) {
+            Map<String, Object> worldData = new HashMap<>();
+            worldData.put("name", world.getName());
+            worldData.put("status", world.getStatus());
+            worldData.put("metadata", world.metadata);
+            instances.put(world.getId(), worldData);
+        }
+        
+        result.put("instances", instances);
+        result.put("total_worlds", activeWorlds.size());
+        result.put("connections", worldConnections);
         return result;
     }
     
     /**
-     * MOCK: Cross instance action
+     * 🔗 Action Cross-Instance
      */
     public Map<String, Object> crossInstanceAction(String sourceWorld, String targetWorld, 
                                                    String action, Map<String, Object> params) {
         Map<String, Object> result = new HashMap<>();
-        result.put("success", true);
-        result.put("message", "Action executed across instances");
+        
+        // Vérifier que les mondes existent
+        WorldInstance source = activeWorlds.get(sourceWorld);
+        WorldInstance target = activeWorlds.get(targetWorld);
+        
+        if (source == null || target == null) {
+            result.put("success", false);
+            result.put("error", "Monde source ou cible non trouvé");
+            return result;
+        }
+        
+        // Vérifier la connexion
+        List<String> connections = worldConnections.get(sourceWorld);
+        if (connections == null || (!connections.contains(targetWorld) && !connections.contains("ALL"))) {
+            result.put("success", false);
+            result.put("error", "Pas de connexion entre ces mondes");
+            result.put("grut_says", "Je ne vois pas de passage entre ces dimensions");
+            return result;
+        }
+        
+        // Exécuter l'action selon le type
+        switch (action) {
+            case "TRANSFER_HERO":
+                result.put("success", true);
+                result.put("message", "Héros transféré entre les mondes");
+                result.put("effect", "Superposition quantique pendant le transfert");
+                
+                // Créer une superposition pendant le transfert
+                if (quantumService != null && params.containsKey("heroId")) {
+                    String heroId = (String) params.get("heroId");
+                    List<Object> worlds = Arrays.asList(sourceWorld, targetWorld);
+                    double[] probs = {0.5, 0.5};
+                    quantumService.createSuperposition(heroId, "WORLD_POSITION", worlds, probs);
+                }
+                break;
+                
+            case "VINCE_SHOT":
+                result.put("success", true);
+                result.put("damage", 100);
+                result.put("message", "Tir trans-dimensionnel exécuté");
+                result.put("vince_says", "Bang! À travers le 4ème mur !");
+                crossInstanceActions++;
+                break;
+                
+            case "JEAN_COLLAPSE":
+                result.put("success", true);
+                result.put("message", "Jean a forcé un collapse depuis son canapé");
+                result.put("effect", "Timeline " + targetWorld + " réalignée");
+                result.put("jean_says", "Un petit ajustement cosmique...");
+                break;
+                
+            default:
+                result.put("success", false);
+                result.put("error", "Action inconnue: " + action);
+        }
+        
         result.put("sourceWorld", sourceWorld);
         result.put("targetWorld", targetWorld);
         result.put("action", action);
-        result.put("vince_says", "Je tire là-bas, ça meurt ici. C'est beau la technologie.");
+        result.put("cross_instance_count", ++crossInstanceActions);
+        
         return result;
     }
     
     /**
-     * MOCK: Break fourth wall
+     * 🎭 Briser le 4ème Mur
      */
     public Map<String, Object> breakFourthWall(String gameId, String message, String speaker) {
         Map<String, Object> result = new HashMap<>();
+        
+        fourthWallBreaks++;
+        
+        // Effets selon qui brise le mur
+        String effect = "";
+        String response = "";
+        
+        switch (speaker.toLowerCase()) {
+            case "vince":
+                effect = "Trous de balles dans l'écran du joueur";
+                response = "C'est quoi ce bordel ? Je tire sur qui là ?";
+                
+                // Créer une fissure quantique
+                if (quantumService != null) {
+                    quantumService.createBootstrapState("fourth_wall_crack_" + fourthWallBreaks, 
+                                                       "REALITY_BREACH");
+                }
+                break;
+                
+            case "jean":
+                effect = "Le code source devient visible derrière le jeu";
+                response = "Ah, vous voyez enfin la vérité derrière le rideau !";
+                break;
+                
+            case "grut":
+                effect = "Vision 6D activée - toutes les dimensions visibles";
+                response = "JE VOIS À TRAVERS TOUT. MÊME À TRAVERS VOUS.";
+                break;
+                
+            case "memento":
+                effect = "Les souvenirs du joueur s'affichent à l'écran";
+                response = "J'archive même vos pensées non exprimées...";
+                break;
+                
+            default:
+                effect = "Glitch de réalité détecté";
+                response = "Le 4ème mur tremble...";
+        }
+        
         result.put("success", true);
-        result.put("message", "Fourth wall broken!");
+        result.put("message", "4ème mur brisé !");
         result.put("speaker", speaker);
         result.put("player_message", message);
-        result.put("effect", "Reality glitch detected");
+        result.put("effect", effect);
+        result.put("response", response);
+        result.put("break_count", fourthWallBreaks);
+        result.put("reality_integrity", Math.max(0, 100 - (fourthWallBreaks * 5)) + "%");
+        
+        // Si trop de brisures, quelque chose se passe...
+        if (fourthWallBreaks >= 20) {
+            result.put("CRITICAL_EVENT", "LA RÉALITÉ S'EFFONDRE !");
+            result.put("omega_zero_awakens", true);
+        }
+        
         return result;
     }
     
     /**
-     * MOCK: Meta observe
+     * 👁️ Méta-Observation
      */
     public Map<String, Object> metaObserve(String gameId, String observationType) {
         Map<String, Object> result = new HashMap<>();
+        
+        List<String> revealed = new ArrayList<>();
+        String insight = "";
+        
+        switch (observationType.toUpperCase()) {
+            case "CODE_STRUCTURE":
+                revealed.add("// JEAN: Cette architecture est belle depuis mon canapé");
+                revealed.add("private boolean isRealityStable = false; // GRUT: Plus pour longtemps");
+                revealed.add("if (fourthWallBroken) { reality.leak(); }");
+                insight = "Le code lui-même est conscient de sa nature";
+                break;
+                
+            case "HIDDEN_VARIABLES":
+                revealed.add("private static final int OMEGA_ZERO_THRESHOLD = 42;");
+                revealed.add("String SECRET_JEAN_PASSWORD = 'canape_cosmique_2025';");
+                revealed.add("boolean mcKinseyIsWatching = true; // DANGER");
+                insight = "Des variables cachées contrôlent le destin";
+                break;
+                
+            case "PLAYER_DATA":
+                revealed.add("player.realName = '" + System.getProperty("user.name") + "';");
+                revealed.add("player.playTime = " + System.currentTimeMillis() + ";");
+                revealed.add("player.secretThoughts = 'Pourquoi je joue à ça ?';");
+                insight = "Le jeu vous connaît mieux que vous ne le pensez";
+                break;
+                
+            case "TIMELINE_LEAKS":
+                revealed.add("// Future: Episode 2 prévu pour 2028");
+                revealed.add("// Past: Ce code existait avant d'être écrit");
+                revealed.add("// Present: Vous lisez ceci maintenant");
+                insight = "Le temps n'est qu'une suggestion dans ce code";
+                break;
+                
+            default:
+                revealed.add("// Observer effect detected");
+                revealed.add("// Your observation changes the code");
+                revealed.add("// Look away to restore original state");
+                insight = "L'observation modifie la réalité observée";
+        }
+        
         result.put("success", true);
-        result.put("observation", observationType);
-        result.put("revealed", Arrays.asList(
-            "// TODO: Fix this before Jean notices",
-            "int health = 100; // Hope nobody changes this",
-            "function spawnEnemy() { /* Why does this crash sometimes? */ }"
-        ));
-        result.put("vince_says", "On est que des sprites mal animés, sérieux?");
+        result.put("observation_type", observationType);
+        result.put("revealed", revealed);
+        result.put("insight", insight);
+        result.put("meta_level", "DANGEROUSLY_HIGH");
+        result.put("warning", "Trop d'observation peut causer un paradoxe");
+        
+        // Easter egg
+        if (observationType.equals("MEMENTO")) {
+            result.put("memento_says", "Tu observes l'observateur qui t'observe...");
+            result.put("infinite_loop_risk", true);
+        }
+        
         return result;
     }
     
