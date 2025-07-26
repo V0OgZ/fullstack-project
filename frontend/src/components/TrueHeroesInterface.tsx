@@ -4,6 +4,7 @@ import ModernGameRenderer from './ModernGameRenderer';
 import CastleManagementPanel from './CastleManagementPanel';
 import GoldorakEasterEgg from './GoldorakEasterEgg';
 import EpicContentViewer from './EpicContentViewer';
+import { QuantumBridgeVisualizer } from './QuantumBridgeVisualizer';
 import { useRetroKonami } from '../utils/retro-konami';
 import { HexTile, BiomeType } from '../types/terrain';
 import { Position } from '../types/game';
@@ -33,7 +34,7 @@ const TrueHeroesInterface: React.FC = () => {
     map
   } = useGameStore();
   
-  const [activePanel, setActivePanel] = useState<'scenario' | 'hero' | 'inventory' | 'castle'>('scenario');
+  const [activePanel, setActivePanel] = useState<'scenario' | 'hero' | 'inventory' | 'castle' | 'quantum'>('scenario');
   const [showGoldorakEasterEgg, setShowGoldorakEasterEgg] = useState(false);
   const [showEpicContentViewer, setShowEpicContentViewer] = useState(false);
   const { startListening, stopListening } = useRetroKonami();
