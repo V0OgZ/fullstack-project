@@ -5,18 +5,20 @@
 
 ---
 
-## 🎮 NOUVELLE PRIORITÉ - MODE RPG NARRATIF (DÉCISION GROFI)
+## 🎮 NOUVELLE PRIORITÉ - MODE HISTOIRE JOUABLE (FOCUS #1)
 
-### 🌟 **FOCUS : VERSION JOUABLE RPG**
-**Décision Grofi :** On documente les bâtiments/construction pour plus tard, focus sur le RPG narratif
+### 🎯 **FOCUS ABSOLU : MODE HISTOIRE DEBUGGÉ ET VISUEL**
+**Décision finale :** Le mode Histoire doit marcher, être visuel, avec changements de mondes fluides
 
-### 📖 **MODES DE JEU À IMPLÉMENTER EN PRIORITÉ**
+### 📖 **MODE HISTOIRE - PRIORITÉ ABSOLUE**
 
-1. **🎭 Mode Histoire Interactive (PRIORITÉ ABSOLUE)**
-   - [ ] Histoire complète avec Platon → Interstice → Source
-   - [ ] Joueur prend le contrôle à des moments clés
-   - [ ] Intégration Memento comme assistant narratif
-   - [ ] Transitions 2D → 3D fonctionnelles
+1. **🎭 Mode Histoire Interactive (DÉBUGGER MAINTENANT)**
+   - [ ] Histoire Platon → Interstice → Source FONCTIONNELLE
+   - [ ] Transitions visuelles entre mondes (2D → 3D)
+   - [ ] Changements de monde fluides et spectaculaires
+   - [ ] Contrôle joueur aux moments clés
+   - [ ] Intégration visuelle de Memento
+   - [ ] Effets visuels pour chaque transition
 
 2. **🤖 Mode IA Avancée (1v1 ou 2v2)**
    - [ ] Combat contre IA adaptative
@@ -34,6 +36,47 @@
    - [ ] Vérifier que ça marche encore
    - [ ] Maps à faire plus tard
    - [ ] Test basique de connexion
+
+---
+
+## ⚡ IMPLÉMENTATIONS RAPIDES (SI PAS D'IMPACT SUR HISTOIRE)
+
+### 🏗️ **BUILDINGS RAPIDES**
+**Condition :** Ne doit PAS impacter le mode Histoire
+**Status :** ✅ PEUT ÊTRE FAIT EN PARALLÈLE
+
+#### Implémentation minimale :
+1. **3-4 bâtiments de base**
+   - [ ] Mairie (production Or)
+   - [ ] Caserne (production unités)
+   - [ ] Tour de garde (défense)
+   - [ ] Marché (échange ressources)
+
+2. **Système simple**
+   - [ ] Placement sur grille
+   - [ ] Coût fixe en ressources
+   - [ ] Production automatique
+
+### 💎 **SYSTÈME PICKUP D'OBJETS**
+**Condition :** Améliore le gameplay du mode Histoire
+**Status :** ✅ À FAIRE RAPIDEMENT
+
+#### Mécanisme de pickup :
+1. **Objets sur la map**
+   - [ ] Spawn aléatoire d'objets rares
+   - [ ] Créatures bleues droppent des items
+   - [ ] Visuel clair (glow/particules)
+
+2. **Système de ramassage**
+   - [ ] Collision = auto-pickup
+   - [ ] Notification visuelle
+   - [ ] Application immédiate du buff
+
+3. **Types d'objets**
+   - [ ] Potions de vie (+HP)
+   - [ ] Cristaux de mana (+MP)
+   - [ ] Buffs temporaires (vitesse, force)
+   - [ ] Objets rares permanents
 
 ---
 
@@ -227,27 +270,28 @@
 
 ---
 
-## 📊 RÉSUMÉ EXÉCUTIF - NOUVELLE PRIORITÉ RPG
+## 📊 RÉSUMÉ EXÉCUTIF - FOCUS MODE HISTOIRE
 
-### 🔴 **PRIORITÉ ABSOLUE (Jours 1-2)**
-1. Réparer le backend - RIEN ne marche sans ça
-2. Mode Histoire Interactive Platon → Source
-3. Interface combat minimale pour démos
+### 🔴 **PRIORITÉ #1 ABSOLUE (Jour 1)**
+1. Backend fonctionnel (BLOQUANT)
+2. Mode Histoire debuggé et visuel
+3. Transitions entre mondes spectaculaires
 
-### 🟠 **PRIORITÉ HAUTE (Jours 3-5)**
-1. Mode IA 1v1/2v2 fonctionnel
-2. Mode Démo Auto qui impressionne
-3. Assistant Memento intégré au RPG
+### ⚡ **IMPLÉMENTATIONS RAPIDES (Jour 1-2)**
+**Si ça n'impacte pas le mode Histoire :**
+1. Système pickup d'objets (améliore le gameplay)
+2. 3-4 bâtiments basiques (production simple)
+3. Créatures communes qui droppent des items
 
-### 🟡 **PRIORITÉ MOYENNE (Jours 6-8)**
-1. Vérifier multiplayer existant
-2. Analyser conspiration/système GroFi
-3. Supprimer mocks critiques
+### 🟠 **PRIORITÉ HAUTE (Jours 2-3)**
+1. Mode IA 1v1/2v2 basique
+2. Mode Démo Auto
+3. Memento assistant visuel
 
-### 🟢 **REPORTÉ APRÈS RPG**
-1. Interface de ville complète
-2. Système de construction
-3. Gestion ressources avancée
+### 🟡 **BIEN DOCUMENTÉ MAIS REPORTÉ**
+1. Interface ville complète (doc détaillée disponible)
+2. Système construction avancé
+3. Tous les autres modes complexes
 4. Mondes à temps inversé
 
 ---
