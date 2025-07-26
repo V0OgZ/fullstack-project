@@ -188,6 +188,9 @@ public class RealityController {
             pocketId = "POCKET_" + UUID.randomUUID().toString().substring(0, 8);
         }
         
+        // Rendre pocketId final pour l'utiliser dans la lambda
+        final String finalPocketId = pocketId;
+        
         // Ford requirement: Real teleportation, not simulation
         // Calcul des nouvelles coordonnées dans la même pocket
         Random quantum = new Random(pocketId.hashCode());
@@ -211,18 +214,18 @@ public class RealityController {
         teleport.properties.put("from_y", startY);
         teleport.properties.put("to_x", newX);
         teleport.properties.put("to_y", newY);
-        teleport.properties.put("pocket_id", pocketId);
+        teleport.properties.put("pocket_id", finalPocketId);
         teleport.properties.put("same_pocket", true);
         
         activeRealityObjects.put(teleport.id, teleport);
         
         // Self-triggering log
-        addSelfTriggerLog("🌀 Pocket Teleportation: (" + startX + "," + startY + ") -> (" + newX + "," + newY + ") in " + pocketId);
+        addSelfTriggerLog("🌀 Pocket Teleportation: (" + startX + "," + startY + ") -> (" + newX + "," + newY + ") in " + finalPocketId);
         
         Map<String, Object> response = new HashMap<>();
         response.put("success", true);
         response.put("teleport_id", teleport.id);
-        response.put("pocket_id", pocketId);
+        response.put("pocket_id", finalPocketId);
         response.put("from", Map.of("x", startX, "y", startY));
         response.put("to", Map.of("x", newX, "y", newY));
         response.put("distance", Math.sqrt(Math.pow(newX - startX, 2) + Math.pow(newY - startY, 2)));
@@ -232,13 +235,13 @@ public class RealityController {
         // Si on atteint 5 téléportations dans la même pocket, quelque chose se passe
         long pocketTeleports = activeRealityObjects.values().stream()
             .filter(obj -> "POCKET_TELEPORTATION".equals(obj.category))
-            .filter(obj -> pocketId.equals(obj.properties.get("pocket_id")))
+            .filter(obj -> finalPocketId.equals(obj.properties.get("pocket_id")))
             .count();
             
         if (pocketTeleports >= 5) {
             response.put("pocket_saturation", true);
             response.put("special_event", "La pocket dimensionnelle devient instable après 5 téléportations !");
-            addSelfTriggerLog("⚠️ Pocket " + pocketId + " SATURÉE - Instabilité détectée");
+            addSelfTriggerLog("⚠️ Pocket " + finalPocketId + " SATURÉE - Instabilité détectée");
         }
         
         return ResponseEntity.ok(response);

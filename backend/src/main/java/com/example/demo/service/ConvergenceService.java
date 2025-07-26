@@ -78,7 +78,16 @@ public class ConvergenceService {
         mainState.mergedTimelines.addAll(divergentTimelines);
         
         // 2. Créer des ponts ER=EPR entre toutes les timelines
-        createConvergenceBridges(divergentTimelines);
+        for (int i = 0; i < divergentTimelines.size() - 1; i++) {
+            for (int j = i + 1; j < divergentTimelines.size(); j++) {
+                erEqualsEPRService.createERBridge(
+                    divergentTimelines.get(i), 
+                    divergentTimelines.get(j), 
+                    Map.of("type", "CONVERGENCE_BRIDGE")
+                );
+            }
+        }
+        System.out.println("🌉 Created " + (divergentTimelines.size() * (divergentTimelines.size() - 1) / 2) + " ER bridges");
         
         // 3. Initier la superposition quantique consciente
         Map<String, Object> superposition = createConsciousSuperposition(divergentTimelines);
@@ -127,7 +136,7 @@ public class ConvergenceService {
                 erEqualsEPRService.createERBridge(
                     timelines.get(i), 
                     timelines.get(j), 
-                    "CONVERGENCE_BRIDGE"
+                    Map.of("type", "CONVERGENCE_BRIDGE")
                 );
             }
         }
@@ -202,13 +211,15 @@ public class ConvergenceService {
         state.quantumState.put("merged_count", state.mergedTimelines.size() / 2);
         
         // Collapse partiel de certaines timelines
-        causalCollapseService.triggerCollapse(
+        causalCollapseService.handleCollapse(
             "CONVERGENCE_PARTIAL",
             Map.of(
                 "timelines", state.mergedTimelines.subList(0, state.mergedTimelines.size() / 2),
                 "target", state.timelineId
             )
         );
+        
+        System.out.println("🌀 Partial merge completed for " + state.timelineId);
     }
     
     /**
@@ -219,7 +230,7 @@ public class ConvergenceService {
         mainConvergenceActive = false;
         
         // Collapse final de toutes les timelines
-        causalCollapseService.triggerCollapse(
+        causalCollapseService.handleCollapse(
             "CONVERGENCE_COMPLETE",
             Map.of(
                 "timelines", state.mergedTimelines,
