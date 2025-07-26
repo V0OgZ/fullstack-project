@@ -1,0 +1,72 @@
+{
+  "id": "fragment_introspection",
+  "name": "💭 Fragment d'Introspection",
+  "type": "KEY_ARTIFACT",
+  "rarity": "rare",
+  "description": "Un éclat de pensée cristallisée. En le regardant, on voit son propre reflet multiplié à l'infini, chaque version légèrement différente.",
+  
+  "acquisition": {
+    "methods": [
+      {
+        "type": "QUEST_REWARD",
+        "quest": "mirror_of_truth",
+        "description": "Récompense pour avoir résolu l'énigme du Miroir de Vérité"
+      },
+      {
+        "type": "HIDDEN_LOCATION",
+        "world": "surface_world",
+        "hint": "Là où trois chemins se croisent, regarde non pas devant, mais en toi"
+      },
+      {
+        "type": "SPECIAL_EVENT",
+        "condition": "Répondre correctement aux trois questions de l'Archiviste avec sagesse plutôt qu'avec savoir"
+      }
+    ]
+  },
+  
+  "properties": {
+    "consumable": false,
+    "tradeable": false,
+    "unique": true,
+    "soulbound": true
+  },
+  
+  "effects": {
+    "passive": {
+      "wisdom_bonus": 5,
+      "perception_range": 2,
+      "reveal_hidden": "PHILOSOPHICAL"
+    },
+    "active": {
+      "name": "Regard Intérieur",
+      "description": "Révèle la vraie nature des choses pendant 19 secondes",
+      "cooldown": 190,
+      "cost": {
+        "mana": 50,
+        "sanity": 10
+      }
+    }
+  },
+  
+  "lore": {
+    "text": "Les sages disent que la plus grande aventure n'est pas de conquérir des mondes, mais de se conquérir soi-même. Ce fragment est né de cette vérité.",
+    "author": "L'Archiviste",
+    "hidden_text": "Certains cherchent la Source à l'extérieur. Les vrais explorateurs savent qu'elle est d'abord en nous."
+  },
+  
+  "visual": {
+    "icon": "💭",
+    "color": "#E6E6FA",
+    "particle_effect": "thought_bubbles",
+    "glow_intensity": 0.7
+  },
+  
+  "interactions": {
+    "with_altar": {
+      "interstice_mirror_altar": {
+        "result": "unlock_memoire_grutienne_001",
+        "message": "Le fragment résonne avec l'autel. Une lumière dorée émane du vide..."
+      }
+    }
+  }
+}
