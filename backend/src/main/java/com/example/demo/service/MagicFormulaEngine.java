@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.model.FormulaResult;
 import com.example.demo.model.GameContext;
+import com.example.demo.model.Position;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,6 +13,7 @@ import java.util.Arrays;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.util.concurrent.ConcurrentHashMap;
+import javax.annotation.PostConstruct;
 
 /**
  * 🧪 WALTER VIETNAM SERVICE - Moteur Principal des Formules Magiques
@@ -41,6 +43,10 @@ public class MagicFormulaEngine {
     // 🎖️ WALTER VIETNAM: Service pour persistance
     @Autowired
     private GameService gameService;
+    
+    // 🌀 GROFI: Service Quantique pour superpositions
+    @Autowired
+    private QuantumService quantumService;
     
     // 🎖️ WALTER VIETNAM TRACKING
     private Map<String, Integer> formulaExecutionCounts = new HashMap<>();
@@ -98,8 +104,29 @@ public class MagicFormulaEngine {
         // 🎭 4ÈME MUR - FORMULES CROSS-INSTANCE
         "CROSS_INSTANCE", "BREAK_FOURTH_WALL", "META_OBSERVE", "NARRATIVE_JUMP",
         // 🐴 ÂNE DE BURIDAN - STABILISATEUR QUANTIQUE (WALTER APPROVED)
-        "BURIDAN_STABILIZE", "BURIDAN_PARADOX", "QUANTUM_BALANCE_50", "PROBABILITY_LOCK"
+        "BURIDAN_STABILIZE", "BURIDAN_PARADOX", "QUANTUM_BALANCE_50", "PROBABILITY_LOCK",
+        // 🌀 FORMULES QUANTIQUES GROFI - SUPERPOSITION ET INTRICATION
+        "QUANTUM_SUPERPOSE", "OBSERVE_STATE", "ENTANGLE_UNITS"
     );
+    
+    /**
+     * 🌀 GROFI INIT - Connexion des services quantiques
+     */
+    @PostConstruct
+    public void initGrofiConnections() {
+        System.out.println("🌀 GROFI INIT: Connexion MagicFormulaEngine ↔ QuantumService");
+        
+        if (quantumService != null) {
+            quantumService.connectToFormulaEngine(this);
+            System.out.println("✅ GROFI: QuantumService connecté avec succès !");
+            System.out.println("🎯 JEAN: Superposition + Formules = Réalité quantique activée !");
+        } else {
+            System.out.println("⚠️ GROFI: QuantumService non disponible - vérifier configuration Spring");
+        }
+        
+        // TODO: Reconnecter CausalCollapseService quand disponible
+        System.out.println("📝 TODO: Reconnecter CausalCollapseService");
+    }
     
     /**
      * 🔥 MÉTHODE PRINCIPALE - EXÉCUTION DE FORMULE
@@ -221,6 +248,16 @@ public class MagicFormulaEngine {
                 
                         case "PHASE_SHIFT":
                 return executePhaseShift(context);
+                
+            // 🌀 FORMULES QUANTIQUES GROFI
+            case "QUANTUM_SUPERPOSE":
+                return executeQuantumSuperposition(context);
+                
+            case "OBSERVE_STATE":
+                return executeQuantumObservation(context);
+                
+            case "ENTANGLE_UNITS":
+                return executeQuantumEntanglement(context);
                 
             // 🔮 NOUVELLES FORMULES CATÉGORIE A - BATCH 2
             case "QUANTUM_LEAP":
@@ -1807,5 +1844,110 @@ public class MagicFormulaEngine {
         result.put("vietnam_flashback", "Firebase Charlie 1970 - Validation terminée !");
         
         return FormulaResult.success(result.get("message").toString(), result, "WALTER_QUANTUM_VALIDATION");
+    }
+    
+    /**
+     * 🌀 GROFI: Créer une superposition quantique
+     */
+    private FormulaResult executeQuantumSuperposition(GameContext context) {
+        if (quantumService == null) {
+            return FormulaResult.error("QuantumService non disponible", "NO_QUANTUM_SERVICE");
+        }
+        
+        try {
+            // Exemple: Héros en superposition de positions
+            String heroId = "hero_" + context.getGameId();
+            List<Object> positions = Arrays.asList(
+                new Position(5, 5),
+                new Position(10, 10),
+                new Position(15, 15)
+            );
+            double[] probabilities = {0.5, 0.3, 0.2};
+            
+            QuantumService.QuantumState state = quantumService.createSuperposition(
+                heroId, "POSITION", positions, probabilities
+            );
+            
+            return FormulaResult.success(
+                "🌀 Superposition quantique créée ! Le héros existe en 3 positions simultanément.",
+                Map.of(
+                    "stateId", state.getId(),
+                    "positions", positions,
+                    "probabilities", probabilities
+                ),
+                "QUANTUM_SUPERPOSITION"
+            );
+        } catch (Exception e) {
+            return FormulaResult.error("Erreur quantique: " + e.getMessage(), "QUANTUM_ERROR");
+        }
+    }
+    
+    /**
+     * 👁️ GROFI: Observer un état quantique (collapse)
+     */
+    private FormulaResult executeQuantumObservation(GameContext context) {
+        if (quantumService == null) {
+            return FormulaResult.error("QuantumService non disponible", "NO_QUANTUM_SERVICE");
+        }
+        
+        try {
+            String stateId = "state_" + context.getGameId();
+            String observerId = "observer_" + context.getGameId();
+            
+            Object collapsedValue = quantumService.observeState(stateId, observerId);
+            
+            return FormulaResult.success(
+                "👁️ État observé et collapsé ! La réalité a choisi.",
+                Map.of(
+                    "stateId", stateId,
+                    "finalValue", collapsedValue != null ? collapsedValue : "null",
+                    "observer", observerId
+                ),
+                "QUANTUM_OBSERVATION"
+            );
+        } catch (Exception e) {
+            return FormulaResult.error("Erreur d'observation: " + e.getMessage(), "OBSERVATION_ERROR");
+        }
+    }
+    
+    /**
+     * 🔗 GROFI: Intriquer deux unités
+     */
+    private FormulaResult executeQuantumEntanglement(GameContext context) {
+        if (quantumService == null) {
+            return FormulaResult.error("QuantumService non disponible", "NO_QUANTUM_SERVICE");
+        }
+        
+        try {
+            String unit1 = "unit1_" + context.getGameId();
+            String unit2 = "unit2_" + context.getGameId();
+            
+            // Créer des états pour les deux unités
+            List<Object> healthValues = Arrays.asList(100, 75, 50, 25);
+            double[] probs = {0.4, 0.3, 0.2, 0.1};
+            
+            QuantumService.QuantumState state1 = quantumService.createSuperposition(
+                unit1, "HEALTH", healthValues, probs
+            );
+            QuantumService.QuantumState state2 = quantumService.createSuperposition(
+                unit2, "HEALTH", healthValues, probs
+            );
+            
+            // Les intriquer
+            quantumService.entangleStates(state1.getId(), state2.getId());
+            
+            return FormulaResult.success(
+                "🔗 Unités intriquées ! Observer l'une affectera l'autre instantanément.",
+                Map.of(
+                    "unit1", unit1,
+                    "unit2", unit2,
+                    "state1Id", state1.getId(),
+                    "state2Id", state2.getId()
+                ),
+                "QUANTUM_ENTANGLEMENT"
+            );
+        } catch (Exception e) {
+            return FormulaResult.error("Erreur d'intrication: " + e.getMessage(), "ENTANGLEMENT_ERROR");
+        }
     }
 } 
