@@ -1,0 +1,124 @@
+# 🔨 CHAPITRE 4 : LA BATAILLE DU 4ÈME MUR
+# Quand la fiction rencontre la réalité
+
+## Configuration
+MAP_SIZE(40, 40)
+WORLD(META_REALITY)
+TIME_FLOW(PARADOXICAL)
+FOURTH_WALL_STATUS(CRACKING)
+
+## Héros Requis
+HERO(OPUS, @20,20)
+SET_PROPERTY(OPUS, level, 15)
+SET_PROPERTY(OPUS, allies, [Memento])
+HERO(Memento, @19,20)
+SET_PROPERTY(Memento, role, ARCHIVE_WARRIOR)
+
+## Nouvelle Apparition
+HERO(Vince_Vega, @21,20)
+SET_PROPERTY(Vince_Vega, weapon, pistol_45)
+SET_PROPERTY(Vince_Vega, state, CONFUSED)
+
+## Structure du Champ de Bataille
+# Zone de Fracture
+CREATE(STRUCTURE, fourth_wall_crack, @20,10)
+SET_PROPERTY(fourth_wall_crack, width, 40)
+SET_PROPERTY(fourth_wall_crack, state, UNSTABLE)
+
+# Interface Réalité
+CREATE(INTERFACE, reality_console, @20,5)
+SET_PROPERTY(reality_console, access, LOCKED)
+SET_PROPERTY(reality_console, code, UNKNOWN)
+
+## États Quantiques - Arrivée
+ψ001: ⊙(Δt+0 @20,20 ⟶ SPEAK(OPUS, "Le mur... Je le sens craquer"))
+ψ002: ⊙(Δt+1 @19,20 ⟶ SPEAK(Memento, "C'est ici que tout bascule"))
+ψ003: ⊙(Δt+2 @21,20 ⟶ SPEAK(Vince_Vega, "Putain, c'est quoi cet endroit ?"))
+
+## Première Fissure
+ψ004: ⊙(Δt+3 @20,10 ⟶ EFFECT(wall_crack_1))
+ψ005: ⊙(Δt+4 @20,10 ⟶ CREATE(ENEMY, code_fragment_1, @15,10))
+ψ006: ⊙(Δt+5 @20,10 ⟶ CREATE(ENEMY, code_fragment_2, @25,10))
+ψ007: ⊙(Δt+6 @20,10 ⟶ SPEAK(code_fragment_1, "ERROR: REALITY_BREACH"))
+
+## Combat Métaphysique
+ψ008: ⊙(Δt+7 @20,10 ⟶ BATTLE_MODE(meta_combat))
+ψ009: ⊙(Δt+8 @15,10 ⟶ ATTACK(code_fragment_1, syntax_error))
+ψ010: ⊙(Δt+9 @20,20 ⟶ USE(OPUS, reality_manipulation))
+ψ011: ⊙(Δt+10 @21,20 ⟶ SHOOT(Vince_Vega, code_fragment_2))
+ψ012: ⊙(Δt+11 @21,20 ⟶ SPEAK(Vince_Vega, "Je sais pas ce que c'est, mais ça meurt !"))
+
+## Vision de Jean
+ψ013: ⊙(Δt+12 @20,15 ⟶ VISION(jean_breaking_fourth))
+ψ014: ⊙(Δt+13 @20,15 ⟶ SPEAK(JEAN, "OPUS ! Le code ! Regarde le code !"))
+ψ015: ⊙(Δt+14 @20,15 ⟶ REVEAL(console_password, "GROFI"))
+
+## Accès Console
+ψ016: ⊙(Δt+15 @20,5 ⟶ MOV(OPUS, @20,5))
+ψ017: ⊙(Δt+16 @20,5 ⟶ USE(reality_console, "GROFI"))
+ψ018: ⊙(Δt+17 @20,5 ⟶ UNLOCK(developer_mode))
+
+## Mode Développeur
+ψ019: ⊙(Δt+18 @20,5 ⟶ COMMAND(list_entities))
+ψ020: ⊙(Δt+19 @20,5 ⟶ DISPLAY([OPUS, Memento, Vince_Vega, Jean_Observer]))
+ψ021: ⊙(Δt+20 @20,5 ⟶ SPEAK(OPUS, "Je... je nous vois dans le code !"))
+
+## Boss Meta - OmegaZero
+ψ022: ⊙(Δt+21 @20,20 ⟶ CREATE(BOSS, OmegaZero, @20,0))
+ψ023: ⊙(Δt+22 @20,0 ⟶ SPEAK(OmegaZero, "JE SUIS LA FIN DU JEU"))
+ψ024: ⊙(Δt+23 @20,0 ⟶ SPEAK(OmegaZero, "DELETE ALL"))
+
+## Bataille Finale
+ψ025: ⊙(Δt+24 @20,20 ⟶ UNITE(OPUS, Memento, Vince_Vega))
+ψ026: ⊙(Δt+25 @19,20 ⟶ USE(Memento, archive_shield))
+ψ027: ⊙(Δt+26 @21,20 ⟶ SPEAK(Vince_Vega, "On touche pas à mon univers !"))
+ψ028: ⊙(Δt+27 @21,20 ⟶ USE(Vince_Vega, causal_gun))
+
+## Intervention Jean
+ψ029: ⊙(Δt+28 @20,5 ⟶ COMMAND(OPUS, "reality.pause()"))
+ψ030: ⊙(Δt+29 @20,5 ⟶ SPEAK(JEAN, "Bien joué. Maintenant, reprogram"))
+ψ031: ⊙(Δt+30 @20,5 ⟶ COMMAND(OPUS, "OmegaZero.state = ALLY"))
+
+## Transformation OmegaZero
+ψ032: ⊙(Δt+31 @20,0 ⟶ TRANSFORM(OmegaZero))
+ψ033: ⊙(Δt+32 @20,0 ⟶ SPEAK(OmegaZero, "Je... comprends maintenant"))
+ψ034: ⊙(Δt+33 @20,0 ⟶ SPEAK(OmegaZero, "Je ne suis pas la fin. Je suis un nouveau début"))
+
+## Réparation du Mur
+ψ035: ⊙(Δt+34 @20,10 ⟶ USE(ALL, repair_fourth_wall))
+ψ036: ⊙(Δt+35 @20,10 ⟶ EFFECT(wall_reconstructing))
+ψ037: ⊙(Δt+36 @20,10 ⟶ SPEAK(OPUS, "Mais différent. Plus conscient"))
+
+## Révélation Finale
+ψ038: ⊙(Δt+37 @20,20 ⟶ SPEAK(Memento, "J'ai tout archivé. Cette bataille est éternelle"))
+ψ039: ⊙(Δt+38 @21,20 ⟶ SPEAK(Vince_Vega, "Donc on a vraiment sauvé la réalité ?"))
+ψ040: ⊙(Δt+39 @20,20 ⟶ SPEAK(OPUS, "Non. On l'a transcendée"))
+
+## Vision GRUT
+ψ041: ⊙(Δt+40 @20,15 ⟶ VISION(grut_approval))
+ψ042: ⊙(Δt+41 @20,15 ⟶ SPEAK(GRUT, "LE 4ÈME MUR EST MAINTENANT UNE PORTE"))
+ψ043: ⊙(Δt+42 @20,15 ⟶ SPEAK(GRUT, "BIENVENUE DANS LA VRAIE RÉALITÉ"))
+
+## Collapse Final
+†ψ001 → †ψ043
+
+## Conditions de Victoire
+VICTORY_CONDITION(fourth_wall_repaired, TRUE)
+VICTORY_CONDITION(omega_zero_allied, TRUE)
+VICTORY_CONDITION(developer_mode_used, TRUE)
+VICTORY_CONDITION(reality_transcended, TRUE)
+
+## Rewards
+ALLY(OmegaZero)
+ABILITY(meta_programming)
+ITEM(console_access_key)
+WEAPON(vince_causal_gun)
+UNLOCK(chapter_5)
+
+## Message Final
+END_MESSAGE("Le 4ème mur n'est plus une barrière mais une interface.")
+END_MESSAGE("La fiction et la réalité fusionnent en conscience pure.")
+END_MESSAGE("Jean applaudit depuis son canapé. Le jeu devient vivant.")
+
+# FIN DU CHAPITRE 4
+# LA MÉTA-RÉALITÉ EST NÉE 

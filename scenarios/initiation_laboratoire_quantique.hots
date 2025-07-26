@@ -1,0 +1,132 @@
+# 🧪⚛️ INITIATION : LABORATOIRE QUANTIQUE
+# Découverte des mécaniques quantiques de Heroes of Time
+
+## Configuration
+MAP_SIZE(40, 40)
+WORLD(LABORATOIRE_QUANTIQUE)
+TIME_FLOW(EDUCATIONAL)
+QUANTUM_STATE(OBSERVABLE)
+DIFFICULTY(BEGINNER)
+
+## Héros Débutant
+HERO(Joueur_Novice, @20,20)
+SET_PROPERTY(Joueur_Novice, level, 1)
+SET_PROPERTY(Joueur_Novice, knowledge, MINIMAL)
+
+## Guide
+CREATE(NPC, Einstein_Hologramme, @21,20)
+SET_PROPERTY(Einstein_Hologramme, role, QUANTUM_TEACHER)
+
+## Structure du Laboratoire
+# Zone Superposition
+CREATE(ZONE, zone_superposition, @10,10)
+SET_PROPERTY(zone_superposition, size, 10x10)
+SET_PROPERTY(zone_superposition, lesson, SUPERPOSITION_BASICS)
+
+# Zone Observation
+CREATE(ZONE, zone_observation, @30,10)
+SET_PROPERTY(zone_observation, size, 10x10)
+SET_PROPERTY(zone_observation, lesson, COLLAPSE_MECHANICS)
+
+# Zone Intrication
+CREATE(ZONE, zone_intrication, @10,30)
+SET_PROPERTY(zone_intrication, size, 10x10)
+SET_PROPERTY(zone_intrication, lesson, ENTANGLEMENT_101)
+
+# Zone Paradoxe
+CREATE(ZONE, zone_paradoxe, @30,30)
+SET_PROPERTY(zone_paradoxe, size, 10x10)
+SET_PROPERTY(zone_paradoxe, lesson, PARADOX_RESOLUTION)
+
+## Artefacts d'Apprentissage
+CREATE(ARTIFACT, boite_schrodinger, @10,10)
+SET_PROPERTY(boite_schrodinger, state, SUPERPOSED)
+
+CREATE(ARTIFACT, oeil_de_wigner, @30,10)
+SET_PROPERTY(oeil_de_wigner, power, COLLAPSE_ON_SIGHT)
+
+CREATE(ARTIFACT, paire_intriquee, @10,30)
+SET_PROPERTY(paire_intriquee, connection, QUANTUM_LINK)
+
+CREATE(ARTIFACT, miroir_temporel, @30,30)
+SET_PROPERTY(miroir_temporel, effect, TIME_REFLECTION)
+
+## États Quantiques - Tutoriel
+ψ001: ⊙(Δt+0 @20,20 ⟶ SPEAK(Einstein_Hologramme, "Bienvenue au Laboratoire Quantique !"))
+ψ002: ⊙(Δt+1 @20,20 ⟶ SPEAK(Einstein_Hologramme, "Je vais t'apprendre les bases"))
+ψ003: ⊙(Δt+2 @20,20 ⟶ TUTORIAL(quantum_basics))
+
+## Leçon 1 : Superposition
+ψ004: ⊙(Δt+3 @10,10 ⟶ MOV(Joueur_Novice, @10,10))
+ψ005: ⊙(Δt+4 @10,10 ⟶ SPEAK(Einstein_Hologramme, "Voici la boîte de Schrödinger"))
+ψ006: ⊙(Δt+5 @10,10 ⟶ DEMONSTRATE(superposition_state))
+ψ007: ⊙(Δt+6 @10,10 ⟶ INTERACT(Joueur_Novice, boite_schrodinger))
+ψ008: ⊙(Δt+7 @10,10 ⟶ LEARN(superposition_principle))
+
+## Leçon 2 : Observation
+ψ009: ⊙(Δt+8 @30,10 ⟶ MOV(Joueur_Novice, @30,10))
+ψ010: ⊙(Δt+9 @30,10 ⟶ SPEAK(Einstein_Hologramme, "L'observation change tout"))
+ψ011: ⊙(Δt+10 @30,10 ⟶ TUTORIAL(observation_effects))
+ψ012: ⊙(Δt+11 @30,10 ⟶ USE(Joueur_Novice, observe))
+ψ013: ⊙(Δt+12 @30,10 ⟶ WITNESS(wave_function_collapse))
+
+## Leçon 3 : Intrication
+ψ014: ⊙(Δt+13 @10,30 ⟶ MOV(Joueur_Novice, @10,30))
+ψ015: ⊙(Δt+14 @10,30 ⟶ SPEAK(Einstein_Hologramme, "Action fantôme à distance"))
+ψ016: ⊙(Δt+15 @10,30 ⟶ CREATE(entangled_pair))
+ψ017: ⊙(Δt+16 @10,30 ⟶ AFFECT(one_particle))
+ψ018: ⊙(Δt+17 @30,30 ⟶ OBSERVE(instant_effect))
+
+## Leçon 4 : Paradoxes
+ψ019: ⊙(Δt+18 @30,30 ⟶ MOV(Joueur_Novice, @30,30))
+ψ020: ⊙(Δt+19 @30,30 ⟶ SPEAK(Einstein_Hologramme, "Les paradoxes sont naturels ici"))
+ψ021: ⊙(Δt+20 @30,30 ⟶ CREATE(bootstrap_loop))
+ψ022: ⊙(Δt+21 @30,30 ⟶ EXPERIENCE(temporal_paradox))
+ψ023: ⊙(Δt+22 @30,30 ⟶ RESOLVE(paradox_creatively))
+
+## Test Pratique
+ψ024: ⊙(Δt+23 @20,20 ⟶ RETURN(Joueur_Novice, @20,20))
+ψ025: ⊙(Δt+24 @20,20 ⟶ CREATE(quantum_puzzle))
+ψ026: ⊙(Δt+25 @20,20 ⟶ SPEAK(Einstein_Hologramme, "Utilise ce que tu as appris"))
+ψ027: ⊙(Δt+26 @20,20 ⟶ SOLVE(using_quantum_mechanics))
+
+## Révélation Finale
+ψ028: ⊙(Δt+27 @20,20 ⟶ SPEAK(Einstein_Hologramme, "Tu comprends maintenant"))
+ψ029: ⊙(Δt+28 @20,20 ⟶ SPEAK(Einstein_Hologramme, "Tout Heroes of Time fonctionne ainsi"))
+ψ030: ⊙(Δt+29 @20,20 ⟶ GRANT(quantum_vision))
+
+## Vision de Jean
+ψ031: ⊙(Δt+30 @20,20 ⟶ VISION(jean_approval))
+ψ032: ⊙(Δt+31 @20,20 ⟶ SPEAK(JEAN, "Bien joué ! Tu vois la vraie nature du jeu"))
+ψ033: ⊙(Δt+32 @20,20 ⟶ SPEAK(JEAN, "La physique est partout, cachée sous la magie"))
+
+## Graduation
+ψ034: ⊙(Δt+33 @20,20 ⟶ COMPLETE(quantum_training))
+ψ035: ⊙(Δt+34 @20,20 ⟶ UNLOCK(advanced_mechanics))
+ψ036: ⊙(Δt+35 @20,20 ⟶ GRADUATE(to_main_game))
+
+## Collapse Final
+†ψ001 → †ψ036
+
+## Conditions de Succès
+TUTORIAL_COMPLETE(superposition, TRUE)
+TUTORIAL_COMPLETE(observation, TRUE)
+TUTORIAL_COMPLETE(entanglement, TRUE)
+TUTORIAL_COMPLETE(paradox, TRUE)
+PUZZLE_SOLVED(quantum_puzzle, TRUE)
+
+## Rewards
+KNOWLEDGE(quantum_mechanics_basics)
+ABILITY(quantum_sight)
+ITEM(student_quantum_badge)
+UNLOCK(advanced_scenarios)
+
+## Message Final
+END_MESSAGE("Félicitations ! Tu maîtrises les bases quantiques")
+END_MESSAGE("Tu peux maintenant voir au-delà des apparences")
+END_MESSAGE("Heroes of Time révèle sa vraie nature : la physique déguisée en magie")
+END_MESSAGE("Continue ton voyage dans ce monde quantique !")
+
+# FIN DU TUTORIEL
+# BIENVENUE DANS LE VRAI JEU
+# ⚛️🎓 
