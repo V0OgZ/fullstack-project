@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 AI ARENA - HEROES OF TIME DEATHMATCH</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Arena Map */
+        .arena {
+            width: 100vw;
+            height: 80vh;
+            position: relative;
+            background: radial-gradient(circle at center, #1a1a2e 0%, #000 100%);
+            border: 2px solid #00ff88;
+            overflow: hidden;
+        }
+
+        /* Grid overlay for future 3D */
+        .arena::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 49px, rgba(0,255,136,0.1) 49px, rgba(0,255,136,0.1) 50px),
+                repeating-linear-gradient(90deg, transparent, transparent 49px, rgba(0,255,136,0.1) 49px, rgba(0,255,136,0.1) 50px);
+            pointer-events: none;
+        }
+
+        /* Players */
+        .player {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            font-size: 30px;
+            transition: all 0.2s;
+            filter: drop-shadow(0 0 10px currentColor);
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .player.vince { color: #ff0000; }
+        .player.grut { color: #00ff88; }
+        .player.walter { color: #ffff00; }
+        .player.morgana { color: #ff00ff; }
+
+        /* Health bars */
+        .health-bar {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 4px;
+            background: #333;
+            border: 1px solid #fff;
+        }
+
+        .health-fill {
+            height: 100%;
+            background: #00ff00;
+            transition: width 0.3s;
+        }
+
+        /* Items */
+        .item {
+            position: absolute;
+            font-size: 25px;
+            animation: float 2s ease-in-out infinite;
+            cursor: pointer;
+            z-index: 5;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(180deg); }
+        }
+
+        /* Projectiles */
+        .projectile {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            z-index: 15;
+        }
+
+        .bullet { background: #ff0; box-shadow: 0 0 10px #ff0; }
+        .magic { background: #f0f; box-shadow: 0 0 15px #f0f; }
+        .arrow { background: #0ff; box-shadow: 0 0 10px #0ff; }
+
+        /* Announcements */
+        .announcer {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3em;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px #000;
+            z-index: 100;
+            animation: announce 2s ease-out;
+        }
+
+        @keyframes announce {
+            0% { transform: translateX(-50%) scale(0); opacity: 0; }
+            50% { transform: translateX(-50%) scale(1.2); opacity: 1; }
+            100% { transform: translateX(-50%) scale(1); opacity: 0; }
+        }
+
+        /* Kill feed */
+        .kill-feed {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            width: 300px;
+            font-size: 14px;
+            z-index: 50;
+        }
+
+        .kill-entry {
+            background: rgba(0,0,0,0.8);
+            padding: 5px 10px;
+            margin-bottom: 5px;
+            border-left: 3px solid #ff0000;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Score board */
+        .scoreboard {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 20vh;
+            background: rgba(0,0,0,0.9);
+            border-top: 2px solid #00ff88;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .player-score {
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            min-width: 150px;
+        }
+
+        .player-score.leading {
+            border-color: #00ff88;
+            box-shadow: 0 0 20px rgba(0,255,136,0.5);
+        }
+
+        /* Power-up effects */
+        .quad-damage {
+            animation: quadPulse 0.5s infinite;
+        }
+
+        @keyframes quadPulse {
+            0%, 100% { filter: drop-shadow(0 0 20px #00ffff) brightness(1.5); }
+            50% { filter: drop-shadow(0 0 40px #00ffff) brightness(2); }
+        }
+
+        .speed-boost {
+            animation: speedTrail 0.1s infinite;
+        }
+
+        @keyframes speedTrail {
+            0% { filter: drop-shadow(0 0 5px currentColor); }
+            100% { filter: drop-shadow(-10px 0 10px currentColor); }
+        }
+
+        /* Chat messages */
+        .chat {
+            position: fixed;
+            bottom: 22vh;
+            left: 10px;
+            width: 300px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-size: 12px;
+        }
+
+        .chat-message {
+            background: rgba(0,0,0,0.7);
+            padding: 3px 8px;
+            margin-bottom: 2px;
+            opacity: 0.8;
+        }
+
+        /* FPS counter */
+        .fps {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            font-size: 16px;
+            color: #00ff88;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <!-- FPS Counter -->
+    <div class="fps">FPS: <span id="fpsValue">60</span></div>
+
+    <!-- Arena -->
+    <div class="arena" id="arena">
+        <!-- Players will be spawned here -->
+    </div>
+
+    <!-- Announcer -->
+    <div id="announcer"></div>
+
+    <!-- Kill Feed -->
+    <div class="kill-feed" id="killFeed"></div>
+
+    <!-- Chat -->
+    <div class="chat" id="chat"></div>
+
+    <!-- Scoreboard -->
+    <div class="scoreboard">
+        <div class="player-score" id="scoreVince">
+            <div style="font-size: 30px;">🔫</div>
+            <div>VINCE VEGA</div>
+            <div class="score">0</div>
+        </div>
+        <div class="player-score" id="scoreGrut">
+            <div style="font-size: 30px;">👁️</div>
+            <div>GRUT</div>
+            <div class="score">0</div>
+        </div>
+        <div class="player-score" id="scoreWalter">
+            <div style="font-size: 30px;">🎳</div>
+            <div>WALTER</div>
+            <div class="score">0</div>
+        </div>
+        <div class="player-score" id="scoreMorgana">
+            <div style="font-size: 30px;">🧙‍♀️</div>
+            <div>MORGANA</div>
+            <div class="score">0</div>
+        </div>
+    </div>
+
+    <script>
+        // Game state
+        const arena = document.getElementById('arena');
+        const arenaRect = arena.getBoundingClientRect();
+        
+        // Players
+        const players = {
+            vince: {
+                name: 'VINCE VEGA',
+                emoji: '🔫',
+                x: 100,
+                y: 100,
+                health: 100,
+                score: 0,
+                speed: 3,
+                weapon: 'gun',
+                powerups: [],
+                quotes: [
+                    "SAY WHAT AGAIN!",
+                    "ROYALE WITH CHEESE!",
+                    "OH MAN, I SHOT MARVIN!",
+                    "THAT'S A BOLD STATEMENT!"
+                ]
+            },
+            grut: {
+                name: 'GRUT',
+                emoji: '👁️',
+                x: 700,
+                y: 100,
+                health: 100,
+                score: 0,
+                speed: 2,
+                weapon: 'vision',
+                powerups: [],
+                quotes: [
+                    "JE VOIS TOUT!",
+                    "PANOPTICON ACTIVATED!",
+                    "6D VISION ENGAGED!",
+                    "OMNISCIENCE ACHIEVED!"
+                ]
+            },
+            walter: {
+                name: 'WALTER',
+                emoji: '🎳',
+                x: 100,
+                y: 400,
+                health: 100,
+                score: 0,
+                speed: 2.5,
+                weapon: 'bowling',
+                powerups: [],
+                quotes: [
+                    "OVER THE LINE!",
+                    "THIS IS VIETNAM!",
+                    "MARK IT ZERO!",
+                    "WORLD OF PAIN!"
+                ]
+            },
+            morgana: {
+                name: 'MORGANA',
+                emoji: '🧙‍♀️',
+                x: 700,
+                y: 400,
+                health: 100,
+                score: 0,
+                speed: 2.5,
+                weapon: 'magic',
+                powerups: [],
+                quotes: [
+                    "MAGIE PURE!",
+                    "FINI LES TRUCS GEEK!",
+                    "TRANSFORMATION EN CRAPAUD!",
+                    "FEU MYSTIQUE!"
+                ]
+            }
+        };
+
+        // Items
+        const items = [
+            { type: 'joint', emoji: '🚬', x: 400, y: 250, respawn: 30000, 
+              effect: 'JEAN\'S UNFINISHED JOINT! +CHILL -SPEED' },
+            { type: 'potion', emoji: '🧪', x: 200, y: 200, respawn: 20000,
+              effect: 'PANORAMIX POTION! +STRENGTH +INVINCIBILITY' },
+            { type: 'quad', emoji: '💠', x: 600, y: 300, respawn: 60000,
+              effect: 'QUAD DAMAGE!!!' },
+            { type: 'health', emoji: '❤️', x: 400, y: 100, respawn: 15000,
+              effect: '+25 HEALTH' },
+            { type: 'armor', emoji: '🛡️', x: 300, y: 350, respawn: 20000,
+              effect: 'ARMOR SHARD' }
+        ];
+
+        // Sound effects (text-based)
+        const sounds = {
+            shoot: ['PEW!', 'BANG!', 'BLAM!', 'ZAP!'],
+            hit: ['OOF!', 'ARGH!', 'GAH!', 'OUCH!'],
+            pickup: ['YEAH!', 'NICE!', 'GOT IT!', 'SWEET!'],
+            quad: ['QUAD DAMAGE!!!', 'ULTIMATE POWER!'],
+            kill: ['EXCELLENT!', 'IMPRESSIVE!', 'DOMINATING!', 'GODLIKE!']
+        };
+
+        // Initialize players
+        function initGame() {
+            // Spawn players
+            Object.entries(players).forEach(([id, player]) => {
+                const div = document.createElement('div');
+                div.className = `player ${id}`;
+                div.id = id;
+                div.innerHTML = `
+                    ${player.emoji}
+                    <div class="health-bar">
+                        <div class="health-fill" style="width: 100%"></div>
+                    </div>
+                `;
+                div.style.left = player.x + 'px';
+                div.style.top = player.y + 'px';
+                arena.appendChild(div);
+            });
+
+            // Spawn items
+            items.forEach((item, index) => {
+                spawnItem(item, index);
+            });
+
+            // Start AI
+            setInterval(updateAI, 100);
+            setInterval(updateProjectiles, 16);
+            setInterval(checkCollisions, 50);
+            
+            // Start announcing
+            announce("FIGHT!");
+            
+            // Random chat messages
+            setInterval(randomChat, 3000);
+        }
+
+        // Spawn item
+        function spawnItem(item, index) {
+            const div = document.createElement('div');
+            div.className = 'item';
+            div.id = `item-${index}`;
+            div.innerHTML = item.emoji;
+            div.style.left = item.x + 'px';
+            div.style.top = item.y + 'px';
+            div.dataset.type = item.type;
+            arena.appendChild(div);
+        }
+
+        // AI Update
+        function updateAI() {
+            Object.entries(players).forEach(([id, player]) => {
+                if (player.health <= 0) return;
+
+                // Find nearest enemy
+                let nearestEnemy = null;
+                let minDist = Infinity;
+
+                Object.entries(players).forEach(([enemyId, enemy]) => {
+                    if (enemyId !== id && enemy.health > 0) {
+                        const dist = Math.hypot(enemy.x - player.x, enemy.y - player.y);
+                        if (dist < minDist) {
+                            minDist = dist;
+                            nearestEnemy = enemy;
+                        }
+                    }
+                });
+
+                if (nearestEnemy) {
+                    // Move towards enemy
+                    const angle = Math.atan2(nearestEnemy.y - player.y, nearestEnemy.x - player.x);
+                    const speed = player.powerups.includes('joint') ? player.speed * 0.5 : player.speed;
+                    
+                    player.x += Math.cos(angle) * speed;
+                    player.y += Math.sin(angle) * speed;
+
+                    // Keep in bounds
+                    player.x = Math.max(20, Math.min(arenaRect.width - 60, player.x));
+                    player.y = Math.max(20, Math.min(arenaRect.height - 60, player.y));
+
+                    // Update position
+                    const elem = document.getElementById(id);
+                    elem.style.left = player.x + 'px';
+                    elem.style.top = player.y + 'px';
+
+                    // Shoot if close enough
+                    if (minDist < 200 && Math.random() < 0.1) {
+                        shoot(id, player, angle);
+                    }
+                }
+
+                // Look for items
+                document.querySelectorAll('.item').forEach(itemElem => {
+                    const itemX = parseInt(itemElem.style.left);
+                    const itemY = parseInt(itemElem.style.top);
+                    const dist = Math.hypot(itemX - player.x, itemY - player.y);
+                    
+                    if (dist < 30) {
+                        pickupItem(id, player, itemElem);
+                    }
+                });
+            });
+        }
+
+        // Shooting
+        const projectiles = [];
+        function shoot(id, player, angle) {
+            const projectile = {
+                x: player.x + 20,
+                y: player.y + 20,
+                vx: Math.cos(angle) * 10,
+                vy: Math.sin(angle) * 10,
+                owner: id,
+                damage: player.powerups.includes('quad') ? 40 : 10,
+                type: player.weapon
+            };
+            
+            projectiles.push(projectile);
+            
+            // Create visual
+            const div = document.createElement('div');
+            div.className = `projectile ${player.weapon === 'gun' ? 'bullet' : 'magic'}`;
+            div.style.left = projectile.x + 'px';
+            div.style.top = projectile.y + 'px';
+            arena.appendChild(div);
+            projectile.element = div;
+
+            // Sound effect
+            showEffect(player.x, player.y, sounds.shoot[Math.floor(Math.random() * sounds.shoot.length)]);
+        }
+
+        // Update projectiles
+        function updateProjectiles() {
+            projectiles.forEach((proj, index) => {
+                proj.x += proj.vx;
+                proj.y += proj.vy;
+
+                if (proj.element) {
+                    proj.element.style.left = proj.x + 'px';
+                    proj.element.style.top = proj.y + 'px';
+                }
+
+                // Remove if out of bounds
+                if (proj.x < 0 || proj.x > arenaRect.width || proj.y < 0 || proj.y > arenaRect.height) {
+                    if (proj.element) proj.element.remove();
+                    projectiles.splice(index, 1);
+                }
+            });
+        }
+
+        // Check collisions
+        function checkCollisions() {
+            projectiles.forEach((proj, projIndex) => {
+                Object.entries(players).forEach(([id, player]) => {
+                    if (id !== proj.owner && player.health > 0) {
+                        const dist = Math.hypot(player.x + 20 - proj.x, player.y + 20 - proj.y);
+                        
+                        if (dist < 30) {
+                            // Hit!
+                            const damage = player.powerups.includes('armor') ? proj.damage / 2 : proj.damage;
+                            player.health -= damage;
+                            
+                            // Update health bar
+                            const healthBar = document.querySelector(`#${id} .health-fill`);
+                            healthBar.style.width = Math.max(0, player.health) + '%';
+                            
+                            // Effects
+                            showEffect(player.x, player.y, sounds.hit[Math.floor(Math.random() * sounds.hit.length)]);
+                            
+                            // Remove projectile
+                            if (proj.element) proj.element.remove();
+                            projectiles.splice(projIndex, 1);
+                            
+                            // Check for kill
+                            if (player.health <= 0) {
+                                playerKilled(id, proj.owner);
+                            }
+                        }
+                    }
+                });
+            });
+        }
+
+        // Player killed
+        function playerKilled(victimId, killerId) {
+            const victim = players[victimId];
+            const killer = players[killerId];
+            
+            killer.score++;
+            updateScoreboard();
+            
+            // Kill feed
+            addKillFeed(`${killer.name} 💀 ${victim.name}`);
+            
+            // Announce
+            if (killer.score % 5 === 0) {
+                announce(sounds.kill[Math.min(killer.score / 5 - 1, sounds.kill.length - 1)]);
+            }
+            
+            // Chat taunt
+            addChat(killer.name, killer.quotes[Math.floor(Math.random() * killer.quotes.length)]);
+            
+            // Respawn after 3 seconds
+            setTimeout(() => {
+                victim.health = 100;
+                victim.x = Math.random() * (arenaRect.width - 60) + 20;
+                victim.y = Math.random() * (arenaRect.height - 60) + 20;
+                victim.powerups = [];
+                
+                const elem = document.getElementById(victimId);
+                elem.style.left = victim.x + 'px';
+                elem.style.top = victim.y + 'px';
+                elem.querySelector('.health-fill').style.width = '100%';
+                elem.classList.remove('quad-damage', 'speed-boost');
+            }, 3000);
+        }
+
+        // Pickup item
+        function pickupItem(playerId, player, itemElem) {
+            const itemType = itemElem.dataset.type;
+            const itemIndex = parseInt(itemElem.id.split('-')[1]);
+            const item = items[itemIndex];
+            
+            // Apply effect
+            switch(itemType) {
+                case 'joint':
+                    player.powerups.push('joint');
+                    setTimeout(() => {
+                        player.powerups = player.powerups.filter(p => p !== 'joint');
+                    }, 10000);
+                    addChat(player.name, "WHOA... EVERYTHING'S SLOW...");
+                    break;
+                    
+                case 'potion':
+                    player.powerups.push('strength');
+                    player.health = Math.min(150, player.health + 50);
+                    setTimeout(() => {
+                        player.powerups = player.powerups.filter(p => p !== 'strength');
+                    }, 15000);
+                    addChat(player.name, "PAR TOUTATIS!");
+                    break;
+                    
+                case 'quad':
+                    player.powerups.push('quad');
+                    document.getElementById(playerId).classList.add('quad-damage');
+                    setTimeout(() => {
+                        player.powerups = player.powerups.filter(p => p !== 'quad');
+                        document.getElementById(playerId).classList.remove('quad-damage');
+                    }, 30000);
+                    announce("QUAD DAMAGE!");
+                    break;
+                    
+                case 'health':
+                    player.health = Math.min(100, player.health + 25);
+                    break;
+                    
+                case 'armor':
+                    player.powerups.push('armor');
+                    break;
+            }
+            
+            // Update health
+            document.querySelector(`#${playerId} .health-fill`).style.width = Math.min(100, player.health) + '%';
+            
+            // Show pickup effect
+            showEffect(player.x, player.y, sounds.pickup[Math.floor(Math.random() * sounds.pickup.length)]);
+            
+            // Remove item and respawn later
+            itemElem.remove();
+            setTimeout(() => {
+                spawnItem(item, itemIndex);
+            }, item.respawn);
+        }
+
+        // Visual effects
+        function showEffect(x, y, text) {
+            const div = document.createElement('div');
+            div.style.position = 'absolute';
+            div.style.left = x + 'px';
+            div.style.top = y + 'px';
+            div.style.color = '#ffff00';
+            div.style.fontSize = '20px';
+            div.style.fontWeight = 'bold';
+            div.style.zIndex = '100';
+            div.textContent = text;
+            arena.appendChild(div);
+            
+            setTimeout(() => div.remove(), 1000);
+        }
+
+        // Announce
+        function announce(text) {
+            const announcer = document.getElementById('announcer');
+            announcer.textContent = text;
+            announcer.className = 'announcer';
+            
+            setTimeout(() => {
+                announcer.className = '';
+            }, 2000);
+        }
+
+        // Kill feed
+        function addKillFeed(text) {
+            const div = document.createElement('div');
+            div.className = 'kill-entry';
+            div.textContent = text;
+            document.getElementById('killFeed').prepend(div);
+            
+            // Remove old entries
+            const entries = document.querySelectorAll('.kill-entry');
+            if (entries.length > 5) {
+                entries[entries.length - 1].remove();
+            }
+        }
+
+        // Chat
+        function addChat(player, message) {
+            const div = document.createElement('div');
+            div.className = 'chat-message';
+            div.innerHTML = `<strong>${player}:</strong> ${message}`;
+            document.getElementById('chat').appendChild(div);
+            
+            // Auto scroll
+            document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
+        }
+
+        // Random chat
+        function randomChat() {
+            if (Math.random() < 0.3) {
+                const playerIds = Object.keys(players);
+                const randomId = playerIds[Math.floor(Math.random() * playerIds.length)];
+                const player = players[randomId];
+                const quote = player.quotes[Math.floor(Math.random() * player.quotes.length)];
+                addChat(player.name, quote);
+            }
+        }
+
+        // Update scoreboard
+        function updateScoreboard() {
+            let maxScore = 0;
+            let leader = null;
+            
+            Object.entries(players).forEach(([id, player]) => {
+                const scoreElem = document.querySelector(`#score${id.charAt(0).toUpperCase() + id.slice(1)} .score`);
+                scoreElem.textContent = player.score;
+                
+                if (player.score > maxScore) {
+                    maxScore = player.score;
+                    leader = id;
+                }
+            });
+            
+            // Highlight leader
+            document.querySelectorAll('.player-score').forEach(elem => {
+                elem.classList.remove('leading');
+            });
+            
+            if (leader) {
+                document.getElementById(`score${leader.charAt(0).toUpperCase() + leader.slice(1)}`).classList.add('leading');
+            }
+        }
+
+        // FPS counter
+        let fps = 60;
+        let lastTime = performance.now();
+        function updateFPS() {
+            const now = performance.now();
+            const delta = now - lastTime;
+            fps = Math.round(1000 / delta);
+            lastTime = now;
+            
+            document.getElementById('fpsValue').textContent = fps;
+            requestAnimationFrame(updateFPS);
+        }
+
+        // Initialize
+        initGame();
+        updateFPS();
+    </script>
+</body>
+</html>
