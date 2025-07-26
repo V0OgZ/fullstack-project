@@ -1,0 +1,29 @@
+::1 - - [26/Jul/2025 19:57:52] "GET /vince-vega-map-demo-backend.html HTTP/1.1" 200 -
+::1 - - [26/Jul/2025 19:57:52] "GET /vince-vega-map-demo-backend.html HTTP/1.1" 200 -
+----------------------------------------
+Exception occurred during processing of request from ('::1', 62951, 0, 0)
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/socketserver.py", line 683, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/http/server.py", line 1294, in finish_request
+    self.RequestHandlerClass(request, client_address, self,
+  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/http/server.py", line 658, in __init__
+    super().__init__(*args, **kwargs)
+  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/socketserver.py", line 747, in __init__
+    self.handle()
+  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/http/server.py", line 432, in handle
+    self.handle_one_request()
+  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/http/server.py", line 420, in handle_one_request
+    method()
+  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/http/server.py", line 665, in do_GET
+    self.copyfile(f, self.wfile)
+  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/http/server.py", line 865, in copyfile
+    shutil.copyfileobj(source, outputfile)
+  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/shutil.py", line 198, in copyfileobj
+    fdst_write(buf)
+  File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/socketserver.py", line 826, in write
+    self._sock.sendall(b)
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
+::1 - - [26/Jul/2025 19:58:52] "GET /vince-vega-map-demo-backend.html HTTP/1.1" 200 -
+::1 - - [26/Jul/2025 19:58:52] "GET /vince-vega-map-demo-backend.html HTTP/1.1" 200 -
