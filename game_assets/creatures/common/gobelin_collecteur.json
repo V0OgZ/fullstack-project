@@ -1,0 +1,60 @@
+{
+  "id": "gobelin_collecteur",
+  "name": "Gobelin Collecteur",
+  "description": "Un petit gobelin vert obsédé par la collecte de trésors. Ses poches sont pleines de ressources volées.",
+  "type": "COMMON",
+  "rarity": "common",
+  "stats": {
+    "health": 30,
+    "maxHealth": 30,
+    "attack": 8,
+    "defense": 5,
+    "speed": 5,
+    "experience": 20
+  },
+  "abilities": [
+    {
+      "id": "pickpocket",
+      "name": "Pickpocket",
+      "description": "Peut voler une petite quantité d'or au joueur",
+      "cooldown": 10
+    }
+  ],
+  "drops": {
+    "dropRate": 0.5,
+    "possibleDrops": [
+      {
+        "itemId": "or",
+        "chance": 0.4,
+        "quantity": "10-20"
+      },
+      {
+        "itemId": "bois",
+        "chance": 0.3,
+        "quantity": "5-10"
+      },
+      {
+        "itemId": "potion_moyenne",
+        "chance": 0.2,
+        "quantity": 1
+      },
+      {
+        "itemId": "pierre",
+        "chance": 0.1,
+        "quantity": "3-7"
+      }
+    ]
+  },
+  "visual": {
+    "color": "#4CAF50",
+    "size": "small",
+    "animation": "idle_greedy",
+    "particleEffect": "gold_sparkles"
+  },
+  "behavior": {
+    "aggressive": true,
+    "fleeOnLowHealth": true,
+    "wanderRadius": 10,
+    "preferredTarget": "player_with_gold"
+  }
+}
