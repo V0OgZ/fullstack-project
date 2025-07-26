@@ -75,6 +75,17 @@ public class StoryModeController {
         chapter6.put("completed", false);
         chapter6.put("locked", true);
         CHAPTERS.add(chapter6);
+        
+        // Chapitre 7 - Le Bureau
+        Map<String, Object> chapter7 = new HashMap<>();
+        chapter7.put("id", 7);
+        chapter7.put("title", "🌀 Le Bureau");
+        chapter7.put("scenario", "le_bureau_investigation.hots");
+        chapter7.put("completed", false);
+        chapter7.put("locked", false);
+        chapter7.put("special", true);
+        chapter7.put("world", "world_le_bureau");
+        CHAPTERS.add(chapter7);
     }
 
     // État de progression
