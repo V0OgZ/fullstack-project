@@ -1,0 +1,409 @@
+# 🎮 AVENTURE COMPLÈTE - DE LA CAVE À L'INTERSTICE
+# ================================================
+# Une aventure progressive qui guide le joueur depuis
+# l'ignorance 2D jusqu'à la révélation SOURCE
+
+SCENARIO adventure_complete {
+    name: "L'Éveil du Héros"
+    description: "De prisonnier des ombres à gardien de l'Interstice"
+    mode: "ADVENTURE"
+    combat_enabled: false  # Pas de combat au début
+}
+
+# Configuration globale
+SETUP {
+    starting_world: "cave_2d"
+    progression: "LINEAR_WITH_BRANCHES"
+    ai_control: true
+    save_checkpoints: true
+}
+
+# ═══════════════════════════════════════════════════════════════
+# CHAPITRE 1 : S'ÉVADER DE LA CAVE (2D → 3D)
+# ═══════════════════════════════════════════════════════════════
+
+CHAPTER cave_escape {
+    title: "Les Ombres sur le Mur"
+    world: {
+        id: "cave_2d"
+        geometry: "2D_FLAT"
+        tick_rate: 1.0
+    }
+    
+    # Configuration initiale
+    ON_START {
+        # Le joueur commence enchaîné
+        PLAYER.position = [2, 7]
+        PLAYER.movement = "DISABLED"
+        PLAYER.vision = "SHADOWS_ONLY"
+        PLAYER.hero = "prisoner_001"  # Héros de base
+        
+        # Spawn de l'Évadé (contrôlé par IA)
+        AI_SPAWN npc_evade {
+            hero: "evade_de_la_cave"
+            position: [19, 7]
+            personality: "PHILOSOPHICAL_GUIDE"
+            dialogue_tree: "platon_awakening"
+        }
+        
+        # Ambiance
+        SET_ATMOSPHERE {
+            lighting: "FLICKERING_FIRE"
+            shadows: "DANCING_ON_WALL"
+            sound: "cave_echo.ogg"
+            music: "philosophical_ambient.ogg"
+        }
+        
+        DISPLAY_TEXT "Vous êtes enchaîné dans une cave sombre..."
+        DISPLAY_TEXT "Des ombres dansent sur le mur devant vous."
+    }
+    
+    # Phase 1 : Prise de conscience
+    PHASE awakening {
+        # L'IA contrôle l'Évadé
+        AI_ACTION npc_evade {
+            APPROACH player slowly
+            SPEAK "Ces ombres... ne sont-elles pas étranges ?"
+            WAIT player_response
+        }
+        
+        DIALOGUE_CHOICE {
+            option_1: "Ce sont juste des ombres." → {
+                npc_evade.SPEAK "Vraiment ? Regardez mieux..."
+                REVEAL fire_source
+            }
+            option_2: "Que voulez-vous dire ?" → {
+                npc_evade.SPEAK "Excellent ! Vous commencez à douter."
+                REVEAL fire_source
+            }
+        }
+        
+        # Révélation du feu
+        ON fire_revealed {
+            CAMERA_PAN to: [15, 7]
+            SHOW_EFFECT "light_revelation"
+            PLAYER.vision = "2D_PARTIAL"
+            
+            npc_evade.SPEAK "Le feu crée les ombres. Les ombres ne sont pas la réalité."
+        }
+    }
+    
+    # Phase 2 : Libération
+    PHASE liberation {
+        npc_evade.ACTION "break_chains"
+        PLAY_ANIMATION "chains_breaking"
+        PLAYER.movement = "ENABLED"
+        PLAYER.vision = "2D_FULL"
+        
+        TUTORIAL {
+            title: "Mouvement Basique"
+            text: "Utilisez WASD ou les flèches pour vous déplacer"
+            highlight: "movement_keys"
+        }
+        
+        # Autres prisonniers (IA hostile)
+        AI_SPAWN other_prisoners {
+            count: 3
+            positions: [[1,6], [1,7], [1,8]]
+            personality: "FEARFUL_AGGRESSIVE"
+            
+            ON_PLAYER_APPROACH {
+                SPEAK_RANDOM [
+                    "Retourne à ta place !",
+                    "Les ombres sont la vérité !",
+                    "Tu deviens fou !"
+                ]
+                
+                IF player_insists THEN {
+                    STATE = "HOSTILE"
+                    ATTACK player  # Premier combat tutoriel simple
+                }
+            }
+        }
+    }
+    
+    # Phase 3 : Sortie vers le 3D
+    PHASE exit_to_3d {
+        # Approche de la sortie
+        TRIGGER at_exit WHEN player.position == [20, 7] {
+            npc_evade.SPEAK "Êtes-vous prêt pour la vraie réalité ?"
+            
+            CHOICE {
+                "Oui, montrez-moi !" → PROCEED
+                "J'ai peur..." → {
+                    npc_evade.SPEAK "La peur est normale. Mais le courage c'est d'avancer malgré elle."
+                    WAIT 3
+                    PROCEED
+                }
+            }
+        }
+        
+        # Transition 2D → 3D
+        TRANSITION_EFFECT {
+            type: "DIMENSIONAL_SHIFT"
+            duration: 5.0
+            
+            # Changement progressif de géométrie
+            MORPH_WORLD {
+                from: "2D_FLAT"
+                to: "3D_PERSPECTIVE"
+                
+                # Effets visuels
+                ADD_EFFECT "light_explosion"
+                ADD_EFFECT "reality_warping"
+                
+                # Le monde se transforme
+                PLAYER.vision = "3D_BLURRY" → "3D_CLEAR" over 3s
+            }
+        }
+        
+        # Arrivée dans le monde 3D
+        LOAD_WORLD "outside_3d" {
+            geometry: "3D_STANDARD"
+            player_spawn: [2, 10]
+            time_of_day: "DAWN"
+        }
+    }
+}
+
+# ═══════════════════════════════════════════════════════════════
+# CHAPITRE 2 : LE MONDE EXTÉRIEUR (3D)
+# ═══════════════════════════════════════════════════════════════
+
+CHAPTER outside_world {
+    title: "La Vraie Réalité"
+    world: "outside_3d"
+    
+    ON_START {
+        # Le joueur est ébloui
+        APPLY_EFFECT "sun_blindness" duration: 5
+        
+        npc_evade.SPEAK "Vos yeux s'habitueront. Regardez... le vrai monde !"
+        
+        # Tutoriel 3D
+        TUTORIAL {
+            title: "Navigation 3D"
+            text: "Utilisez la souris pour regarder autour"
+            text2: "Shift pour courir, Espace pour sauter"
+        }
+    }
+    
+    # Découverte du monde
+    PHASE exploration {
+        # Points d'intérêt avec IA
+        POI real_tree {
+            position: [10, 15]
+            AI_GUARD guardian_spirit {
+                personality: "WISE_CRYPTIC"
+                ON_INTERACT {
+                    SPEAK "Cet arbre existait avant vos ombres..."
+                    GIVE_ITEM "seed_of_truth"
+                }
+            }
+        }
+        
+        POI real_horse {
+            position: [25, 20]
+            AI_CREATURE wild_horse {
+                personality: "SKITTISH"
+                behavior: "FLEE_UNLESS_CALM"
+                
+                IF player_has("seed_of_truth") {
+                    behavior: "APPROACHABLE"
+                    ON_INTERACT {
+                        SPEAK_EMOTE "*Le cheval vous reconnaît comme éveillé*"
+                        UNLOCK_MOUNT "philosophical_steed"
+                    }
+                }
+            }
+        }
+    }
+    
+    # Mini-quête : Retour à la cave
+    QUEST return_to_cave {
+        giver: npc_evade
+        title: "Partager la Vérité"
+        
+        OBJECTIVE_1: "Retournez à la cave"
+        OBJECTIVE_2: "Tentez de convaincre un prisonnier"
+        
+        ON_COMPLETE {
+            # Les prisonniers rejettent violemment la vérité
+            TRIGGER_EVENT "philosophical_rejection"
+            
+            npc_evade.SPEAK "Vous comprenez maintenant le fardeau de la connaissance..."
+            UNLOCK_ABILITY "truth_sight"  # Voir à travers les illusions
+        }
+    }
+}
+
+# ═══════════════════════════════════════════════════════════════
+# CHAPITRE 3 : SCÉNARIOS INTERMÉDIAIRES
+# ═══════════════════════════════════════════════════════════════
+
+CHAPTER intermediate_adventures {
+    title: "Les Épreuves de l'Éveil"
+    
+    # Intégration de scénarios existants
+    INCLUDE_SCENARIO "temporal_rift" {
+        # Le joueur découvre le temps comme dimension
+        ON_COMPLETE {
+            PLAYER.vision += "4D_TEMPORAL"
+            UNLOCK_ARTIFACT "chronometre_philosophique"
+        }
+    }
+    
+    INCLUDE_SCENARIO "quantum_forest" {
+        # Rencontre avec les paradoxes
+        MODIFY {
+            ADD_NPC grofi_echo {
+                personality: "PARADOXICAL"
+                hint: "L'Interstice vous observe déjà..."
+            }
+        }
+    }
+    
+    INCLUDE_SCENARIO "vince_map_campaign" {
+        # La carte de Vince mène vers des révélations
+        MODIFY {
+            dolburd_tower.ON_REACH {
+                TRIGGER special_zoom_out
+                REVEAL panopticon_entrance
+            }
+        }
+    }
+}
+
+# ═══════════════════════════════════════════════════════════════
+# CHAPITRE 4 : L'APPROCHE DE L'INTERSTICE
+# ═══════════════════════════════════════════════════════════════
+
+CHAPTER approaching_interstice {
+    title: "Les Portes de l'Entre-Monde"
+    world: "panopticon_threshold"
+    
+    ON_START {
+        # Convergence des personnages
+        SPAWN_ALLIES [
+            "vince",
+            "jean_grofignon",
+            "brutus",
+            "the_dude"
+        ]
+        
+        # L'Archiviste apparaît
+        AI_SPAWN the_archivist {
+            hero: "interstice_guardian"
+            position: "CENTER"
+            state: "ETHEREAL"
+            
+            ON_FIRST_SIGHT {
+                SPEAK "Vous voici enfin... Mais êtes-vous prêt ?"
+                REVEAL interstice_portal
+            }
+        }
+    }
+    
+    # Le test final
+    PHASE final_test {
+        the_archivist.SPEAK "Trois questions détermineront votre accès..."
+        
+        # Active le système de questions
+        TRIGGER_SPECIAL interstice_questions {
+            question_count: 3
+            difficulty: "ADAPTIVE"
+            
+            ON_SUCCESS {
+                the_archivist.SPEAK "Bienvenue dans l'Interstice, Éveillé."
+                OPEN_PORTAL interstice_entrance
+            }
+            
+            ON_FAILURE {
+                the_archivist.SPEAK "Pas encore... Continuez votre quête."
+                TELEPORT player to: "last_checkpoint"
+            }
+        }
+    }
+}
+
+# ═══════════════════════════════════════════════════════════════
+# CHAPITRE 5 : L'INTERSTICE
+# ═══════════════════════════════════════════════════════════════
+
+CHAPTER the_interstice {
+    title: "Entre les Mondes"
+    world: "interstice_realm"
+    geometry: "NON_EUCLIDEAN"
+    
+    ON_ENTER {
+        # Transformation finale
+        PLAYER.class = "AWAKENED"
+        PLAYER.vision = "5D_OMNISCIENT"
+        
+        # Rencontre avec GRUT et TISN
+        CUTSCENE source_revelation {
+            GRUT: "Tu nous vois enfin."
+            TISN: "Mais qui t'observe, toi ?"
+            PLAYER: "..."
+            GRUT: "C'est ça. Tu commences à comprendre."
+            
+            REVEAL meta_truth {
+                text: "Vous réalisez que vous êtes dans un jeu..."
+                text2: "...mais le jeu est aussi en vous."
+            }
+        }
+    }
+    
+    # L'Interstice est un hub vers tout
+    HUB_OPTIONS {
+        portal_1: "Retour au début" → "cave_2d"
+        portal_2: "Mondes parallèles" → "multiverse_map"
+        portal_3: "La Source" → "SOURCE_LOCKED"  # Pour plus tard
+        portal_4: "Créer votre monde" → "world_editor"
+    }
+}
+
+# ═══════════════════════════════════════════════════════════════
+# SYSTÈME DE PROGRESSION
+# ═══════════════════════════════════════════════════════════════
+
+PROGRESSION_SYSTEM {
+    # Déblocages progressifs
+    vision_levels: [
+        "SHADOWS_ONLY",
+        "2D_PARTIAL",
+        "2D_FULL",
+        "3D_BLURRY",
+        "3D_CLEAR",
+        "4D_TEMPORAL",
+        "5D_OMNISCIENT"
+    ]
+    
+    # Achievements philosophiques
+    achievements: [
+        "Premier Doute",
+        "Briseur de Chaînes",
+        "Voyant de Vérité",
+        "Marcheur des Mondes",
+        "Gardien de l'Interstice"
+    ]
+    
+    # Système de sauvegarde
+    checkpoints: [
+        "cave_awakening",
+        "first_3d_step",
+        "return_to_cave",
+        "temporal_mastery",
+        "interstice_threshold"
+    ]
+}
+
+# Notes pour l'implémentation
+NOTES {
+    "- L'IA contrôle tous les NPCs avec des personnalités distinctes"
+    "- Pas de combat obligatoire dans le premier chapitre"
+    "- Progression naturelle de 2D vers 5D"
+    "- Intégration des scénarios existants"
+    "- Le système de questions de l'Interstice est le climax"
+    "- Possibilité de rejouer avec des variations"
+}
