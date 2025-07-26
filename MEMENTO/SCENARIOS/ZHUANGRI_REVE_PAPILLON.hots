@@ -1,0 +1,139 @@
+## ========================================
+## SCÉNARIO : LE RÊVE DU PAPILLON
+## Déblocage : ZHUANGRI, LE PAPILLON ÉVEILLÉ
+## ========================================
+
+SETUP(MAP: glitch_forest_dream, WEATHER: reality_flux)
+SET TIME = INDETERMINATE
+SET REALITY_STABILITY = 0.5
+
+## === INTRODUCTION ===
+NARRATE "La Forêt des Glitches pulse étrangement aujourd'hui. Les arbres semblent respirer, leurs pixels se réarrangeant en motifs hypnotiques."
+PAUSE 3s
+NARRATE "Vous apercevez un papillon luminescent. Ou est-ce un homme ? La vision oscille, refuse de se stabiliser."
+
+## === PREMIER CONTACT ===
+SPAWN ENTITY=PAPILLON_LUMINEUX AT @CENTER
+EFFECT: PHASE_SHIFT interval=2s between PAPILLON/HUMAIN
+
+ON_APPROACH PLAYER TO PAPILLON_LUMINEUX:
+  NARRATE "L'entité vous remarque. Ses yeux - ont-ils des yeux ? - se tournent vers vous."
+  
+  SAY ENTITY=PAPILLON_LUMINEUX "Étrange... Je rêvais que j'étais un papillon observant un héros. Ou suis-je un héros rêvant d'observer un papillon ?"
+  
+  EFFECT: REALITY_GLITCH radius=10 intensity=HIGH
+
+## === TEST DU RÊVE ===
+DISPLAY_CHOICE:
+  [1] "Vous êtes clairement un papillon."
+  [2] "Vous êtes un homme qui rêve."
+  [3] "Vous êtes les deux à la fois."
+  [4] "La question n'a pas de sens."
+
+## === RÉPONSES ===
+IF CHOICE = 1:
+  SAY ENTITY=PAPILLON_LUMINEUX "Si je suis un papillon, alors mes ailes créent des tempêtes dans d'autres réalités."
+  EFFECT: SPAWN BUTTERFLIES count=100
+  SET PATH = DREAMER_PATH
+
+IF CHOICE = 2:
+  SAY ENTITY=PAPILLON_LUMINEUX "Si je suis un homme qui rêve, alors vous êtes peut-être mon rêve."
+  EFFECT: PLAYER.transparency = 0.5 duration=5s
+  SET PATH = REALITY_PATH
+
+IF CHOICE = 3:
+  SAY ENTITY=PAPILLON_LUMINEUX "Ah ! Vous comprenez. La dualité n'est qu'illusion."
+  EFFECT: SPLIT_SCREEN showing BOTH_FORMS
+  SET PATH = WISDOM_PATH
+  GRANT BONUS_AFFINITY = +20
+
+IF CHOICE = 4:
+  SAY ENTITY=PAPILLON_LUMINEUX "Le sens est une cage. Vous êtes plus libre que je ne pensais."
+  EFFECT: GRAVITY_INVERT duration=3s
+  SET PATH = CHAOS_PATH
+
+## === L'ÉPREUVE ONIRIQUE ===
+NARRATE "L'entité vous fixe intensément. La réalité commence à fondre autour de vous."
+
+CREATE DREAM_SEQUENCE:
+  - ENVIRONMENT = SHIFTING_DREAMSCAPE
+  - RULES = DREAM_LOGIC
+  - OBJECTIVE = FIND_TRUE_SELF
+
+SPAWN ENEMIES:
+  - NIGHTMARE_ECHO x3
+  - REALITY_FRAGMENT x2
+  - DOUBT_INCARNATE x1
+
+COMBAT_RULES:
+  - Physical attacks have 50% chance to pass through
+  - Magic affects reality directly
+  - Defeating enemies reveals memory fragments
+
+## === RÉVÉLATION ===
+ON_COMBAT_VICTORY:
+  NARRATE "Les derniers échos du doute se dissipent. L'entité applaudit... avec des ailes ? Des mains ?"
+  
+  TRANSFORM PAPILLON_LUMINEUX TO ZHUANGRI
+  
+  SAY HERO=ZHUANGRI "Je suis Zhuangri. Ou peut-être êtes-vous Zhuangri rêvant d'être vous-même. Peu importe."
+  
+  NARRATE "Il tend une plume cristallisée qui semble exister dans plusieurs dimensions à la fois."
+  
+  GRANT ITEM=AILE_EVEIL TO PLAYER
+
+## === CHOIX FINAL ===
+SAY HERO=ZHUANGRI "Voulez-vous que je vous accompagne ? Attention : voyager avec un rêve vivant a ses dangers."
+
+DISPLAY_CHOICE:
+  [1] "Rejoignez-moi, Papillon Éveillé."
+  [2] "Je préfère garder les pieds dans la réalité."
+  [3] "Enseignez-moi d'abord à distinguer rêve et réel."
+
+## === RÉSOLUTIONS ===
+IF CHOICE = 1:
+  UNLOCK HERO=ZHUANGRI
+  SAY HERO=ZHUANGRI "Alors rêvons ensemble de nouvelles réalités."
+  GRANT ACHIEVEMENT="Maître des Rêves"
+  NARRATE "Zhuangri rejoint votre équipe. La réalité semble déjà plus... flexible."
+  WARNING "Les sauvegardes peuvent désormais contenir des fragments de rêves."
+
+IF CHOICE = 2:
+  SAY HERO=ZHUANGRI "Sage décision. Mais gardez la plume, elle vous rappellera que la réalité n'est qu'un rêve persistant."
+  GRANT ACHIEVEMENT="Les Pieds sur Terre"
+  SET ZHUANGRI_LOCATION = GLITCH_FOREST
+  NARRATE "Zhuangri reste dans la forêt, mais vous pourrez le retrouver si vous changez d'avis."
+
+IF CHOICE = 3:
+  SAY HERO=ZHUANGRI "La première leçon : il n'y a pas de distinction. Seulement des degrés de rêve."
+  INITIATE TUTORIAL=DREAM_MECHANICS
+  GRANT ABILITY="Vision Onirique" level=1
+  NARRATE "Vous passez un temps indéterminé à apprendre. Était-ce des heures ? Des jours ? Dans le rêve, le temps n'a pas de sens."
+  UNLOCK HERO=ZHUANGRI after TUTORIAL_COMPLETE
+
+## === ÉPILOGUE ===
+EFFECT: REALITY_STABILIZE slowly over 10s
+
+IF ZHUANGRI IN PARTY:
+  NARRATE "En quittant la forêt, vous remarquez des papillons qui vous suivent. Ou sont-ce des fragments de code ? Avec Zhuangri, la distinction importe peu."
+  SET WORLD_PROPERTY="DREAM_BLEED" = true
+
+ELSE:
+  NARRATE "La forêt reprend son aspect glitché habituel. Mais parfois, au coin de l'œil, vous apercevez un papillon qui n'est peut-être pas là."
+
+## === BONUS SECRET ===
+IF PLAYER HAS ITEM="BOOTSTRAP_PARADOX_EVIDENCE":
+  TRIGGER SECRET_DIALOGUE:
+    SAY HERO=ZHUANGRI "Oh ! Vous portez la marque du paradoxe. Savez-vous que c'est moi qui ai rêvé le premier bootstrap ?"
+    GRANT LORE="L'Origine du Paradoxe"
+    UNLOCK SPECIAL_ABILITY="Rêve Causal"
+
+## === FIN ===
+FADE_OUT
+END_SCENARIO
+
+## === NOTES DE DÉVELOPPEMENT ===
+## - Zhuangri peut apparaître dans d'autres scénarios comme PNJ onirique
+## - Ses dialogues changent selon l'état de rêve du joueur
+## - Attention : peut causer des bugs de sauvegarde intentionnels
+## - Le papillon apparaît parfois dans les menus (feature, not bug)
