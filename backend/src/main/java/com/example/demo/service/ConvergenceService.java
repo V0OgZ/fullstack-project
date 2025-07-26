@@ -27,9 +27,6 @@ public class ConvergenceService {
     @Autowired
     private CausalCollapseService causalCollapseService;
     
-    @Autowired
-    private RealityController realityController;
-    
     // États de convergence
     private final Map<String, ConvergenceState> convergenceStates = new ConcurrentHashMap<>();
     private volatile boolean mainConvergenceActive = false;

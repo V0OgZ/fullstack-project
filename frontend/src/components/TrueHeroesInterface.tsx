@@ -5,6 +5,7 @@ import CastleManagementPanel from './CastleManagementPanel';
 import GoldorakEasterEgg from './GoldorakEasterEgg';
 import EpicContentViewer from './EpicContentViewer';
 import { QuantumBridgeVisualizer } from './QuantumBridgeVisualizer';
+import BoseConvergenceVisualizer from './BoseConvergenceVisualizer';
 import { useRetroKonami } from '../utils/retro-konami';
 import { HexTile, BiomeType } from '../types/terrain';
 import { Position } from '../types/game';
@@ -365,6 +366,13 @@ const TrueHeroesInterface: React.FC = () => {
               >
                 🌟
               </button>
+              <button 
+                className={`sidebar-tab ${activePanel === 'quantum' ? 'active' : ''}`}
+                onClick={() => setActivePanel('quantum')}
+                title="Quantum Convergence"
+              >
+                🌀
+              </button>
             </div>
           </div>
 
@@ -605,6 +613,21 @@ const TrueHeroesInterface: React.FC = () => {
                       ✅ Chargement direct depuis game_assets/<br/>
                       📊 {mockEpicContent.length} objets épiques disponibles
                     </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* QUANTUM CONVERGENCE PANEL */}
+            {activePanel === 'quantum' && (
+              <div className="panel-content quantum-panel">
+                <div className="panel-header">
+                  <h3>🌀 Quantum Convergence</h3>
+                </div>
+                <div className="quantum-content">
+                  <BoseConvergenceVisualizer />
+                  <div style={{ marginTop: '20px' }}>
+                    <QuantumBridgeVisualizer />
                   </div>
                 </div>
               </div>
