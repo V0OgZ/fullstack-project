@@ -1,0 +1,117 @@
+{
+  "id": "talisman_echos_inverses",
+  "name": "🪞 Talisman des Échos Inversés",
+  "aliases": ["Echo Talisman", "Mirror of Divergence", "Le Double-Parleur"],
+  "type": "ARTIFACT",
+  "category": "QUANTUM_INSTABLE",
+  "rarity": "MYTHIQUE",
+  "tier": 9,
+  "description": "Projette deux versions d'un être conscient dans deux timelines divergentes avec la possibilité de les faire interagir. L'un d'eux ment toujours.",
+  "lore": "Forgé dans l'interstice entre deux réalités qui n'auraient jamais dû se toucher, ce talisman capture l'essence même de la divergence. Ceux qui l'utilisent risquent de ne plus savoir quelle version d'eux-mêmes est la vraie.",
+  "state": "QUANTUM_UNSTABLE",
+  "effects": {
+    "timeline_split": {
+      "description": "Crée deux versions divergentes du porteur",
+      "tick_offset": [3, 5],
+      "memory_divergence": true,
+      "interaction_possible": true
+    },
+    "echo_manifestation": {
+      "description": "Les deux versions peuvent se voir et se parler",
+      "transparency": 0.7,
+      "phase_shift": "alternating",
+      "collision": "selective"
+    },
+    "causal_instability": {
+      "description": "Chaque interaction augmente l'instabilité",
+      "instability_per_interaction": 10,
+      "max_instability": 100,
+      "collapse_threshold": 80
+    }
+  },
+  "abilities": [
+    {
+      "name": "Invocation des Échos",
+      "activation": "USE(ARTIFACT, talisman_echos_inverses, HERO:<name>)",
+      "effect": "SPLIT HERO INTO <name>_A, <name>_B",
+      "duration": "Until collapse or fusion",
+      "cooldown": "Once per instance"
+    },
+    {
+      "name": "Dialogue Divergent",
+      "activation": "AUTOMATIC",
+      "effect": "Les deux versions ont des souvenirs différents",
+      "example": {
+        "version_A": "J'ai activé le talisman à tic +38",
+        "version_B": "C'était moi, à tic +41"
+      }
+    },
+    {
+      "name": "Observation Paradoxale",
+      "activation": "OBSERVE <VERSION>",
+      "effect": "Révèle les traces mémoires divergentes",
+      "reveals": [
+        "Actions différentes",
+        "Choix alternatifs",
+        "Rencontres manquées"
+      ]
+    }
+  ],
+  "resolution_options": {
+    "fusion": {
+      "command": "FUSE <name>_A WITH <name>_B",
+      "result": "REWRITTEN_IDENTITY",
+      "risk": "Mémoires contradictoires permanentes",
+      "success_rate": 0.6
+    },
+    "elimination": {
+      "command": "COLLAPSE <VERSION>",
+      "result": "Une version survit",
+      "risk": "Perte d'expériences vécues",
+      "success_rate": 0.9
+    },
+    "coexistence": {
+      "command": "ALLOW BOTH",
+      "result": "Ramification de l'Écheveau",
+      "risk": "Fork infini possible",
+      "success_rate": 0.3
+    }
+  },
+  "interactions": {
+    "with_50_50": {
+      "result": "CHAOS_TOTAL",
+      "description": "50% de chance que chaque version dise la vérité"
+    },
+    "with_sablier_compression": {
+      "result": "TEMPORAL_OVERFLOW",
+      "description": "Les versions divergent à vitesse exponentielle"
+    },
+    "with_mallette_vince": {
+      "result": "DOUBLE_MYSTERY",
+      "description": "Chaque version a sa propre mallette"
+    }
+  },
+  "map_requirements": {
+    "geometry_formula": "HEX_FRACTAL",
+    "timeline_phasing_enabled": true,
+    "minimum_tick_difference": 3
+  },
+  "warnings": [
+    "Ne pas utiliser sur des entités déjà dupliquées",
+    "L'instabilité causale peut devenir permanente",
+    "Les deux versions peuvent développer une conscience indépendante",
+    "Le mensonge d'une version peut devenir la vérité de l'autre"
+  ],
+  "quotes": {
+    "activation": "Tu étais là. Et là aussi. Mais ce n'était pas la même toi.",
+    "divergence": "L'un de vous ment. Ou peut-être les deux disent vrai.",
+    "resolution": "Je me souviens des deux versions. Laquelle ai-je vécue?",
+    "warning": "Le moteur hésite..."
+  },
+  "meta_properties": {
+    "affects_save_system": true,
+    "creates_parallel_logs": true,
+    "quantum_entanglement": "HIGH",
+    "bootstrap_risk": "EXTREME"
+  }
+}
