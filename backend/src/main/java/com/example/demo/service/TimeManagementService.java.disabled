@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.model.TimeConfiguration;
 import com.example.demo.model.TimeConfiguration.ZoneType;
+import com.example.demo.repository.TimeConfigurationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
