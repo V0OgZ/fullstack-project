@@ -157,6 +157,57 @@ L'espace entre les mondes. Seuls les plus braves osent y pénétrer. L'Archivist
 
 ---
 
+## 🏗️ **Architecture Technique**
+
+### Vue d'ensemble du système
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                   HEROES OF TIME - ARCHITECTURE             │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  👤 JOUEUR                                                  │
+│     │                                                       │
+│     ▼                                                       │
+│  ┌──────────┐     ┌───────────┐     ┌──────────┐         │
+│  │ SCÉNARIO │────▶│   MONDE   │────▶│   MAP    │         │
+│  │  (.hots) │     │  (world)  │     │ (terrain)│         │
+│  └──────────┘     └───────────┘     └──────────┘         │
+│                          │                                  │
+│                          ▼                                  │
+│                   ┌─────────────┐                          │
+│                   │ GAME ENGINE │                          │
+│                   │ • Quantum   │                          │
+│                   │ • Causal    │                          │
+│                   │ • Reality   │                          │
+│                   └─────────────┘                          │
+│                          │                                  │
+│                          ▼                                  │
+│                   ┌─────────────┐                          │
+│                   │   BACKEND   │                          │
+│                   │  Port 8080  │                          │
+│                   └─────────────┘                          │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Mondes disponibles
+- **🏔️ Mystique** - Monde fantasy classique
+- **🌀 Temporal Nexus** - Paradoxes temporels
+- **⚛️ Quantum Realm** - Laboratoire quantique
+- **🏛️ Cave of Platon** - Philosophie et ombres
+- **🗼 Dark Tower** - Tour mystérieuse
+- **🔬 Planet Ezith** - Bastion scientifique
+
+### Technologies
+- **Frontend** : React (Port 3000) + HTML/JS (Port 8000)
+- **Backend** : Spring Boot Java (Port 8080)
+- **Moteur** : Quantum Service + Causal Collapse + Reality Controller
+- **Base** : H2 Database + Persistence Service
+
+*Pour plus de détails techniques, voir [MEMENTO/SCHEMA_ARCHITECTURE_HEROES_OF_TIME.md](MEMENTO/SCHEMA_ARCHITECTURE_HEROES_OF_TIME.md)*
+
+---
+
 ## 🎯 **Commencez Votre Aventure**
 
 ### 📥 **Installation Simple**

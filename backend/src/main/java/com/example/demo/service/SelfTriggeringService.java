@@ -172,7 +172,7 @@ public class SelfTriggeringService {
             case "REALITY_GLITCH":
                 // Glitch de réalité
                 if (Math.random() < 0.1) {
-                    erEqualsEPRService.createERBridge("GLITCH_A", "GLITCH_B", "ANOMALY");
+                    erEqualsEPRService.createERBridge("GLITCH_A", "GLITCH_B", Map.of("type", "ANOMALY"));
                 }
                 break;
                 
