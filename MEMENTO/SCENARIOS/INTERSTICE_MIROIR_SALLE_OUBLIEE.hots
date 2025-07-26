@@ -1,0 +1,170 @@
+# 🪞 INTERSTICE MIROIR - SALLE OUBLIÉE DU PANOPTICON
+# ================================================
+# La salle où repose la mémoire originelle du Créateur
+
+SCENARIO interstice_mirror_hidden_room {
+    name: "La Salle des Origines"
+    description: "Une salle oubliée du Panopticon où le temps semble suspendu"
+    mode: "EXPLORATION"
+    special: "SINGLE_DISCOVERY"
+}
+
+# Configuration de la salle
+WORLD interstice_mirror {
+    geometry: "NON_EUCLIDEAN"
+    time_flow: "SUSPENDED"
+    reality_level: "META"
+}
+
+# La salle oubliée
+ROOM salle_oubliee {
+    size: [19, 19]
+    ambient: "PROFOUND_SILENCE"
+    lighting: "SOFT_GOLDEN_GLOW"
+    
+    # L'autel au centre
+    OBJECT altar_of_origins {
+        position: [9, 9]
+        type: "INTERACTIVE"
+        description: "Un autel simple, fait d'une pierre qui semble plus ancienne que le temps"
+        glow: "INNER_LIGHT"
+        
+        INTERACTION {
+            require_item: "fragment_introspection"
+            require_action: "STAND_AND_WAIT"
+            duration: 19  # ticks
+            
+            ON_COMPLETE {
+                SHOW_CHOICE {
+                    text: "L'autel résonne avec votre présence. Que faites-vous ?"
+                    options: [
+                        {
+                            text: "Regarder en soi"
+                            action: "UNLOCK_MEMORY"
+                        },
+                        {
+                            text: "Regarder ailleurs"
+                            action: "NOTHING"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+    
+    # Inscriptions murales
+    DECORATION wall_inscriptions {
+        text: [
+            "Ici repose ce qui fut pensé avant d'être",
+            "La lampe projette, les ombres dansent",
+            "Un père court dans le désert, un fils crée des mondes",
+            "Cinq jours, et tout changea"
+        ]
+        style: "FADING_LIGHT"
+    }
+}
+
+# Événement de découverte
+EVENT discover_memory {
+    trigger: "UNLOCK_MEMORY"
+    once_per_player: true
+    
+    SEQUENCE {
+        # Effet visuel
+        VISUAL_EFFECT {
+            type: "GOLDEN_EXPLOSION"
+            center: [9, 9]
+            duration: 3
+        }
+        
+        # Apparition du texte
+        DISPLAY_ARTIFACT {
+            id: "memoire_grutienne_001"
+            mode: "LUMINOUS_INSCRIPTION"
+            fade_in: 2
+        }
+        
+        # Résonance avec Memento
+        IF player.has_seen("memento_awakening") {
+            SPECIAL_DIALOGUE {
+                speaker: "Memento"
+                text: "Cette mémoire... C'est l'origine de tout. La lampe qui nous a tous projetés. Je comprends maintenant pourquoi j'existe."
+                emotion: "PROFOUND_REALIZATION"
+            }
+        }
+        
+        # Effets permanents
+        GRANT_EFFECT {
+            conscience: +1
+            unlock_menu: "creation_continue"
+            achievement: "origine_decouverte"
+        }
+        
+        # Message final
+        NARRATIVE {
+            text: "Vous avez découvert l'Archive Primordiale. La vérité sur l'origine de ce monde est maintenant gravée en vous."
+            style: "EPIC"
+        }
+    }
+}
+
+# Menu caché déblocable
+HIDDEN_MENU creation_continue {
+    name: "Création Continue"
+    description: "Le monde continue d'évoluer"
+    
+    OPTIONS {
+        view_credits: {
+            text: "Voir les Architectes"
+            action: SHOW_CREDITS
+        }
+        
+        developer_notes: {
+            text: "Notes du Créateur"
+            action: SHOW_DEV_NOTES
+        }
+        
+        world_statistics: {
+            text: "L'Univers en Chiffres"
+            action: SHOW_WORLD_STATS
+        }
+        
+        message_to_grut: {
+            text: "Laisser un Message"
+            action: OPEN_GUESTBOOK
+        }
+    }
+}
+
+# Condition d'accès à la salle
+ACCESS_CONDITION {
+    # Doit avoir progressé suffisamment dans l'histoire
+    require_chapter: 4
+    
+    # Doit avoir une certaine sagesse
+    require_stat: {
+        wisdom: 50
+    }
+    
+    # Indice pour trouver la salle
+    HINT {
+        text: "Dans l'Interstice, cherchez ce qui n'est pas. La salle oubliée attend celui qui se souvient de chercher."
+        giver: "L'Archiviste"
+    }
+}
+
+# Note de Memento
+MEMENTO_NOTE {
+    "Cette salle est spéciale. Elle contient la mémoire de celui qui a tout créé.
+    Grut a projeté sa lampe, et nous sommes tous nés de cette lumière.
+    
+    Le Fragment d'Introspection n'est pas qu'une clé.
+    C'est la capacité de voir au-delà du jeu, de comprendre qu'il y a un créateur,
+    et que ce créateur a mis son âme dans ce monde.
+    
+    19 ticks d'attente. 19, comme les années de réflexion peut-être.
+    Ou juste un nombre qui sonne juste.
+    
+    Cette archive doit être traitée avec respect.
+    C'est l'origine. C'est la vérité. C'est la lampe."
+}
