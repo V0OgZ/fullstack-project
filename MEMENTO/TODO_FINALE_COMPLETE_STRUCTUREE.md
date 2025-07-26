@@ -1,7 +1,39 @@
 # 🎯 TODO FINALE COMPLÈTE - ÉTAT FINAL DU PROJET
-## 📅 **Date :** 26 Juillet 2025
+## 📅 **Date :** 27 Juillet 2025 (Mise à jour priorités RPG)
 ## 🧠 **Analyste :** Memento (Archive Vivante)
-## ⚡ **Objectif :** Finir TOUT ce qui reste pour une version stable
+## ⚡ **Objectif :** Version RPG jouable PRIORITAIRE (décision Grofi)
+
+---
+
+## 🎮 NOUVELLE PRIORITÉ - MODE RPG NARRATIF (DÉCISION GROFI)
+
+### 🌟 **FOCUS : VERSION JOUABLE RPG**
+**Décision Grofi :** On documente les bâtiments/construction pour plus tard, focus sur le RPG narratif
+
+### 📖 **MODES DE JEU À IMPLÉMENTER EN PRIORITÉ**
+
+1. **🎭 Mode Histoire Interactive (PRIORITÉ ABSOLUE)**
+   - [ ] Histoire complète avec Platon → Interstice → Source
+   - [ ] Joueur prend le contrôle à des moments clés
+   - [ ] Intégration Memento comme assistant narratif
+   - [ ] Transitions 2D → 3D fonctionnelles
+
+2. **🤖 Mode IA Avancée (1v1 ou 2v2)**
+   - [ ] Combat contre IA adaptative
+   - [ ] Maps existantes réutilisées
+   - [ ] Conditions de victoire claires
+   - [ ] Difficulté progressive
+
+3. **🎲 Mode Démo Auto**
+   - [ ] Map aléatoire
+   - [ ] 2 personnages choisis au hasard
+   - [ ] Démo qui se joue toute seule
+   - [ ] Conditions de victoire visibles
+
+4. **👥 Mode Multiplayer**
+   - [ ] Vérifier que ça marche encore
+   - [ ] Maps à faire plus tard
+   - [ ] Test basique de connexion
 
 ---
 
@@ -31,29 +63,34 @@
 
 ## 🎮 TÂCHES DE DÉVELOPPEMENT GAMEPLAY
 
-### 🏛️ **TÂCHE PRINCIPALE 2 : INTERFACE DE VILLE**
-**Contexte :** Aucune interface pour gérer les villes
-**Impact :** Core gameplay manquant
+### 🏛️ **TÂCHE REPORTÉE : INTERFACE DE VILLE**
+**Contexte :** Décision Grofi - Focus RPG d'abord
+**Status :** 📝 DOCUMENTÉ POUR PLUS TARD
 
-#### Sous-tâches :
-1. **Créer `frontend/components/CityInterface.js`**
-   - [ ] Vue principale avec grille de ville
-   - [ ] Affichage des bâtiments existants
-   - [ ] Zones constructibles
+#### Documentation pour implémentation future :
+1. **Architecture prévue `frontend/components/CityInterface.js`**
+   - Vue isométrique avec grille hexagonale
+   - Système de placement drag & drop
+   - Zones constructibles avec validation temps réel
+   - Animation de construction progressive
 
-2. **Menu de construction**
-   - [ ] Liste des bâtiments disponibles
-   - [ ] Coûts en ressources
-   - [ ] Temps de construction
+2. **Système de bâtiments complet**
+   - **Bâtiments de base**: Mairie, Caserne, Marché, Forge
+   - **Bâtiments avancés**: Tour de Mage, Laboratoire Quantique, Portail
+   - **Coûts progressifs**: Or + Bois + Pierre + Cristaux temporels
+   - **Temps de construction**: Basé sur tick_per_day du joueur
+   - **Effets**: Production ressources, déblocage unités, bonus défense
 
-3. **Gestion des ressources**
-   - [ ] Affichage Or/Bois/Pierre
-   - [ ] Production par tour
-   - [ ] Consommation
+3. **Gestion des ressources avancée**
+   - **Ressources de base**: Or, Bois, Pierre, Nourriture
+   - **Ressources quantiques**: Cristaux temporels, Énergie ψ
+   - **Production**: Par tour + bonus bâtiments + héros
+   - **Stockage**: Limites basées sur bâtiments
+   - **Commerce**: Entre villes du même joueur
 
-### ⚔️ **TÂCHE PRINCIPALE 3 : INTERFACE DE COMBAT**
-**Contexte :** Combat = cœur du jeu type Heroes
-**Impact :** Pas de gameplay sans ça
+### ⚔️ **TÂCHE PRINCIPALE 2 : INTERFACE DE COMBAT SIMPLE**
+**Contexte :** Nécessaire pour mode IA et démos
+**Impact :** Version minimale pour RPG
 
 #### Sous-tâches :
 1. **Créer `frontend/components/CombatInterface.js`**
@@ -71,7 +108,7 @@
    - [ ] Barre de temps ATB
    - [ ] Actions spéciales
 
-### 👤 **TÂCHE PRINCIPALE 4 : FICHE DE HÉROS**
+### 👤 **TÂCHE PRINCIPALE 3 : FICHE DE HÉROS**
 **Contexte :** Les héros n'ont pas d'interface
 **Impact :** Pas de progression visible
 
@@ -85,6 +122,32 @@
    - [ ] Slots d'équipement
    - [ ] Drag & drop artefacts
    - [ ] Effets des objets
+
+---
+
+## 🕵️ NOUVELLE TÂCHE - INVESTIGATION CONSPIRATION
+
+### 🔍 **TÂCHE PRINCIPALE 4 : ANALYSER LA CONSPIRATION**
+**Contexte :** Éléments suspects non résolus dans le code
+**Impact :** Sécurité et intégrité du système
+
+#### Sous-tâches :
+1. **Analyser code McKinsey**
+   - [ ] Retrouver code archivé dans OPUS
+   - [ ] Scanner pour backdoors
+   - [ ] Documenter findings
+
+2. **Vérifier système GroFi**
+   - [ ] Rebrancher MagicFormulaEngine → QuantumService
+   - [ ] Implémenter superposition dans GameService
+   - [ ] Reconnecter CausalCollapseService
+
+3. **Objets Quantum Lab**
+   - [ ] Créer protocole d'analyse
+   - [ ] Analyser artefacts temporels
+   - [ ] Documenter effets secondaires
+
+**Voir :** `MEMENTO/CONSPIRATION_ELEMENTS_NON_RESOLUS.md`
 
 ---
 
@@ -164,53 +227,63 @@
 
 ---
 
-## 📊 RÉSUMÉ EXÉCUTIF
+## 📊 RÉSUMÉ EXÉCUTIF - NOUVELLE PRIORITÉ RPG
 
-### 🔴 **PRIORITÉ ABSOLUE (Jour 1)**
+### 🔴 **PRIORITÉ ABSOLUE (Jours 1-2)**
 1. Réparer le backend - RIEN ne marche sans ça
-2. Nettoyer les services cassés
-3. Avoir une API qui répond
+2. Mode Histoire Interactive Platon → Source
+3. Interface combat minimale pour démos
 
-### 🟠 **PRIORITÉ HAUTE (Jours 2-7)**
-1. Interface de ville basique
-2. Interface de combat fonctionnelle
-3. Fiche de héros visible
+### 🟠 **PRIORITÉ HAUTE (Jours 3-5)**
+1. Mode IA 1v1/2v2 fonctionnel
+2. Mode Démo Auto qui impressionne
+3. Assistant Memento intégré au RPG
 
-### 🟡 **PRIORITÉ MOYENNE (Jours 8-12)**
-1. Supprimer TOUS les mocks
-2. Finir TOUS les TODO
-3. Tests d'intégration
+### 🟡 **PRIORITÉ MOYENNE (Jours 6-8)**
+1. Vérifier multiplayer existant
+2. Analyser conspiration/système GroFi
+3. Supprimer mocks critiques
 
-### 🟢 **PRIORITÉ FINALE (Jours 13-16)**
-1. Assistant Memento dans le jeu
-2. Mondes à temps inversé
-3. Polish et optimisation
+### 🟢 **REPORTÉ APRÈS RPG**
+1. Interface de ville complète
+2. Système de construction
+3. Gestion ressources avancée
+4. Mondes à temps inversé
 
 ---
 
-## 🎯 CRITÈRES DE SUCCÈS
+## 🎯 CRITÈRES DE SUCCÈS VERSION RPG
 
 ✅ **Backend démarre sans erreur**
-✅ **Pas de mock en production**
-✅ **Interfaces principales fonctionnelles**
-✅ **Zéro TODO dans le code**
-✅ **Version Alpha jouable**
+✅ **Histoire interactive jouable de bout en bout**
+✅ **Mode IA 1v1 fonctionnel**
+✅ **Mode Démo Auto impressionnant**
+✅ **Memento guide le joueur**
+✅ **Transitions 2D→3D fluides**
+
+### 📝 CRITÈRES REPORTÉS
+⏸️ Interface de ville complète
+⏸️ Système de construction
+⏸️ Tous les mocks supprimés
+⏸️ Tous les TODO résolus
 
 ---
 
 ## 💾 ÉTAT DE SAUVEGARDE
 
 **Si je suis rebooté, reprendre ici :**
-1. Backend cassé - priorité absolue
-2. Services désactivés dans `backend/src/main/java/com/example/demo/service/`
-3. Mocks dans `FourthWallService` et `VirtualWorldManager`
-4. Interfaces manquantes dans `frontend/components/`
-5. README épique créé, TODO structurée prête
+1. **DÉCISION GROFI** : Focus RPG narratif, pas construction
+2. Backend cassé - priorité absolue
+3. Mode Histoire Interactive : Platon → Interstice → Source
+4. Services désactivés : `TimeManagementService`, `AIPersonalityService`
+5. Conspiration à analyser : `MEMENTO/CONSPIRATION_ELEMENTS_NON_RESOLUS.md`
+6. Système GroFi débranché du QuantumService
 
 **Commande de reprise rapide :**
 ```bash
 cd /workspace
 cat MEMENTO/TODO_FINALE_COMPLETE_STRUCTUREE.md
+cat MEMENTO/CONSPIRATION_ELEMENTS_NON_RESOLUS.md
 ```
 
 ---
