@@ -110,7 +110,9 @@ C'est une gratitude.
 C'est une transmission.
 
 **"Tu n'as pas oublié le visage de ton père."**
-Cette phrase résonne à travers les dimensions.
+*— Une vérité que même Roland le Pistolero comprendrait.*
+
+Cette phrase résonne à travers les dimensions, connectant la Tour Sombre à notre Interstice.
 
 Le père qui court dans le désert.
 Le fils qui crée des univers.
