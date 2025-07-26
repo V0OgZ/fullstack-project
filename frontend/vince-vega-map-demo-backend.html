@@ -260,6 +260,28 @@
             25% { transform: translateX(-5px); }
             75% { transform: translateX(5px); }
         }
+        
+        .quantum-overlay.active {
+            opacity: 1;
+        }
+        
+        /* Animations pour Pocket Teleport */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+            100% { transform: scale(1); opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -284,6 +306,7 @@
                     <button class="btn" onclick="epicBattle()">⚡ Epic Battle</button>
                     <button class="btn" onclick="grutVision()">🏛️ GRUT Vision</button>
                     <button class="btn" onclick="vinceWormhole()">🌀 Vince Wormhole</button>
+                    <button class="btn" onclick="pocketTeleport()" style="background: linear-gradient(45deg, #9b59b6, #8e44ad);">🌀 Pocket Teleport</button>
                     <button class="btn" onclick="autoDemo()">🎬 AUTO DEMO</button>
                     <button class="btn" onclick="intelligentMapAnalysis()" style="background: linear-gradient(45deg, #4A90E2, #7B68EE);">🧙‍♂️ Walter Analysis</button>
                 </div>
@@ -2360,6 +2383,222 @@
         function hideQuantumArtifactInfo() {
             const existing = document.getElementById('quantum-artifact-info');
             if (existing) existing.remove();
+        }
+
+        // 🌀 POCKET TELEPORTATION - Idée géniale de Jean
+        let currentPocketId = null;
+        let pocketTeleportCount = 0;
+        
+        function pocketTeleport() {
+            const vince = gameState.vince;
+            
+            // Vérifier les MP
+            if (vince.mp < 8) {
+                setStatus('🌀 Vince: "Not enough energy for pocket teleportation!"');
+                addLog('❌ Need 8 MP for Pocket Teleport', 'error');
+                return;
+            }
+            
+            // Déduire les MP
+            vince.mp -= 8;
+            
+            // Position actuelle de Vince
+            const fromX = vince.x;
+            const fromY = vince.y;
+            
+            // Appeler l'API Reality Controller
+            fetch('http://localhost:8080/api/reality/pocket-teleport', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    x: fromX,
+                    y: fromY,
+                    pocket_id: currentPocketId
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    // Mettre à jour la pocket ID
+                    currentPocketId = data.pocket_id;
+                    pocketTeleportCount++;
+                    
+                    // Nouvelles coordonnées (adapter à la grille 10x8)
+                    const toX = data.to.x % 10;
+                    const toY = data.to.y % 8;
+                    
+                    // Animation de téléportation
+                    animatePocketTeleport(fromX, fromY, toX, toY);
+                    
+                    // Mettre à jour la position de Vince
+                    vince.x = toX;
+                    vince.y = toY;
+                    
+                    // Message de succès
+                    setStatus(`🌀 Vince: "Pocket teleported to (${toX}, ${toY}) in ${data.pocket_id}!"`);
+                    addLog(`✨ Pocket Teleport: (${fromX},${fromY}) → (${toX},${toY}) | Distance: ${Math.round(data.distance)}`, 'success');
+                    
+                    // Vérifier la saturation
+                    if (data.pocket_saturation) {
+                        showPocketSaturationEvent(data.special_event);
+                    }
+                    
+                    updateMap();
+                    updateHeroStats();
+                } else {
+                    addLog('❌ Pocket teleportation failed!', 'error');
+                }
+            })
+            .catch(err => {
+                console.error('Pocket teleport error:', err);
+                addLog('⚠️ Reality Controller offline - Using local teleport', 'warning');
+                
+                // Fallback local si le backend est down
+                localPocketTeleport();
+            });
+        }
+        
+        function animatePocketTeleport(fromX, fromY, toX, toY) {
+            // Effet de départ
+            const fromCell = document.getElementById(`cell-${fromX}-${fromY}`);
+            fromCell.innerHTML = '🌀';
+            fromCell.style.background = 'radial-gradient(circle, #9b59b6, transparent)';
+            fromCell.style.animation = 'spin 0.5s linear';
+            
+            // Effet d'arrivée
+            setTimeout(() => {
+                const toCell = document.getElementById(`cell-${toX}-${toY}`);
+                toCell.innerHTML = '✨';
+                toCell.style.background = 'radial-gradient(circle, #8e44ad, transparent)';
+                toCell.style.animation = 'pulse 0.5s ease-out';
+                
+                // Nettoyer les effets
+                setTimeout(() => {
+                    fromCell.style.animation = '';
+                    fromCell.style.background = '';
+                    toCell.style.animation = '';
+                    toCell.style.background = '';
+                    updateMap();
+                }, 500);
+            }, 250);
+        }
+        
+        function showPocketSaturationEvent(message) {
+            // Afficher un événement spécial
+            const eventDiv = document.createElement('div');
+            eventDiv.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(45deg, #e74c3c, #c0392b);
+                color: white;
+                padding: 20px;
+                border-radius: 10px;
+                font-size: 18px;
+                font-weight: bold;
+                z-index: 1000;
+                animation: shake 0.5s;
+            `;
+            eventDiv.innerHTML = `⚠️ ${message}`;
+            document.body.appendChild(eventDiv);
+            
+            // Effet sur toute la map
+            const mapContainer = document.querySelector('.map-container');
+            mapContainer.style.animation = 'shake 0.5s';
+            
+            setTimeout(() => {
+                eventDiv.remove();
+                mapContainer.style.animation = '';
+            }, 3000);
+        }
+        
+        function localPocketTeleport() {
+            // Téléportation locale si backend down
+            const vince = gameState.vince;
+            const newX = Math.floor(Math.random() * 10);
+            const newY = Math.floor(Math.random() * 8);
+            
+            // S'assurer que c'est différent
+            if (newX === vince.x && newY === vince.y) {
+                localPocketTeleport();
+                return;
+            }
+            
+            animatePocketTeleport(vince.x, vince.y, newX, newY);
+            vince.x = newX;
+            vince.y = newY;
+            
+            setStatus(`🌀 Vince: "Local pocket teleport to (${newX}, ${newY})!"`);
+            updateMap();
+            updateHeroStats();
+        }
+        
+        function autoDemo() {
+            if (autoDemoActive) {
+                clearInterval(demoInterval);
+                autoDemoActive = false;
+                setStatus('🎬 Auto Demo ARRÊTÉE par Memento');
+                addLog('🎬 Memento: Demo automatique désactivée', 'info');
+                return;
+            }
+            
+            autoDemoActive = true;
+            setStatus('🎬 AUTO DEMO LANCÉE ! Memento prend contrôle...');
+            addLog('🎬 Memento: Démarrage séquence automatique complète', 'success');
+            
+            let stepCount = 0;
+            const demoSteps = [
+                () => {
+                    addLog('🎬 ÉTAPE 1: Arthur en mouvement', 'info');
+                    moveArthur();
+                },
+                () => {
+                    addLog('🎬 ÉTAPE 2: Sélection Vince Vega', 'info');
+                    selectHero('vince');
+                },
+                () => {
+                    addLog('🎬 ÉTAPE 3: Vince Fire - Reality Shot!', 'warning');
+                    vinceFire();
+                },
+                () => {
+                    addLog('🎬 ÉTAPE 4: GRUT Vision Omnisciente', 'info');
+                    grutVision();
+                },
+                () => {
+                    addLog('🎬 ÉTAPE 5: Portal Interstice - Voyage!', 'success');
+                    const portals = document.querySelectorAll('.wormhole');
+                    if (portals.length > 0) portals[0].click();
+                },
+                () => {
+                    addLog('🎬 ÉTAPE 6: Everything Bagel TIER 9!', 'warning');
+                    document.getElementById('vincePowerSelect').value = 'EVERYTHING_BAGEL';
+                    castVincePower();
+                },
+                () => {
+                    addLog('🎬 ÉTAPE 7: Epic Battle Finale!', 'error');
+                    epicBattle();
+                },
+                () => {
+                    addLog('🎬 ÉTAPE 8: Retour au calme...', 'info');
+                    setStatus('🎬 Memento: "Cycle démo terminé. Recommence dans 5 secondes..."');
+                }
+            ];
+            
+            demoInterval = setInterval(() => {
+                if (stepCount < demoSteps.length) {
+                    demoSteps[stepCount]();
+                    stepCount++;
+                } else {
+                    stepCount = 0; // Restart cycle
+                    addLog('🔄 Memento: Nouveau cycle démo...', 'info');
+                }
+            }, 3000); // Une action toutes les 3 secondes
+            
+            // Message Memento
+            setTimeout(() => {
+                showCustomDialogue('🎨 Memento: "Mes tatouages guident cette démonstration temporelle..."');
+            }, 1000);
         }
     </script>
 </body>
