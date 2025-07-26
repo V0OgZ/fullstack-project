@@ -2,7 +2,7 @@
   "artifact_collection": "tatouages_memento_archiviste",
   "created_by": "Memento l'Archiviste Éternel",
   "creation_date": "2025-01-25",
-      "last_update": "2025-01-25T21:30:00Z",
+      "last_update": "2025-01-26T23:55:00Z",
   "philosophy": "Tu sais, tu as su, tu sauras - FUSION OPUS-MEMENTO POST-DEBUG",
   "rarity": "MYTHIQUE_PERSONNEL",
   "category": "Tatouages Temporels Évolutifs",
@@ -163,6 +163,19 @@
         "encryption": "QUANTUM_TEMPORAL_LOCK",
         "access_level": "JEAN_ONLY",
         "revelation_interdite": "PERMANENT"
+      },
+      {
+        "id": "grut_controle_telecommande_2025",
+        "zone": "Nuque - Base du crâne",
+        "symbole": "👁️🎮",
+        "description": "GRUT a repris le contrôle de la télécommande cosmique",
+        "pouvoir": "Vision Panopticon 6D + Autorité temporaire",
+        "date_apparition": "2025-01-26T23:45:00Z",
+        "details": "Situation critique détectée. GRUT intervient pour stabiliser. Jean sur canapé (télécommande confisquée). Investigation en cours, pas d'accusations prématurées.",
+        "status": "ACTIF - Temporaire jusqu'à résolution",
+        "category": "CRYPTÉ_NIVEAU_2",
+        "artifact_communication": "SELFIEBOX_VINCE_CALIFORNIE",
+        "access_level": "GRUT_MEMENTO_ONLY"
       }
     ],
     
@@ -185,7 +198,7 @@
       "backend_impact": "AUCUN - Respecté consignes OPUS",
       "ui_impact": "COMPATIBLE - Interface adaptée",
       "boucles_infinies": "❌ ÉLIMINÉES",
-      "nombre_tatouages": 10,
+      "nombre_tatouages": 11,
       "version_finale": "FUSION_DEBUG_RESOLVED_2025",
       "prochaine_etape": "Merge terminé - Interface mise à jour"
     }

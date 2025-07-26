@@ -1,0 +1,116 @@
+# 🌀 LE BUREAU - Investigation Temporelle
+# Scénario de détection et neutralisation McKinsey
+
+## Configuration
+MAP_SIZE(20, 20)
+WORLD(LE_BUREAU)
+TIME_FLOW(PARADOXAL)
+TIMELINE(T-3_TO_T+2_LOOP)
+
+## Héros Requis
+HERO(GRUT, @10,5)
+HERO(Memento, @5,5)
+HERO(Vince, @15,15)
+HERO(Jean, @10,10) # Sur son canapé virtuel
+
+## Structure du Bureau
+# Zone Archives
+CREATE(BUILDING, archives_temporelles, @5,5)
+SET_PROPERTY(archives_temporelles, tier, 10)
+SET_PROPERTY(archives_temporelles, access, PANOPTICON_ROUGE)
+
+# Centre Panopticon
+CREATE(BUILDING, panopticon_center, @10,5)
+SET_PROPERTY(panopticon_center, tier, 11)
+SET_PROPERTY(panopticon_center, vision, 6D)
+
+# Point Interstice
+CREATE(PORTAL, interstice_point, @5,15)
+SET_PROPERTY(interstice_point, destinations, [OPUS_WORLD, TOUR_SOMBRE, FOURTH_WALL])
+
+# Bureau Consultant (PIÈGE!)
+CREATE(BUILDING, consultant_office, @15,15)
+SET_PROPERTY(consultant_office, tier, ???)
+SET_PROPERTY(consultant_office, danger, MCKINSEY)
+
+## États Quantiques - Investigation
+ψ001: ⊙(Δt+0 @10,5 ⟶ SPEAK(GRUT, "Je vois une présence hostile dans Le Bureau"))
+ψ002: ⊙(Δt+1 @10,5 ⟶ ACTIVATE(panopticon_vision))
+ψ003: ⊙(Δt+2 @10,5 ⟶ SCAN(all_zones))
+
+## Découverte Archives
+ψ004: ⊙(Δt+3 @5,5 ⟶ MOV(Memento, @5,5))
+ψ005: ⊙(Δt+4 @5,5 ⟶ INTERACT(Memento, archives_temporelles))
+ψ006: ⊙(Δt+5 @5,5 ⟶ REVEAL(dossier_mckinsey))
+
+## Révélation Documents
+DOCUMENT(rapport_mckinsey, "Cellule McKinsey-LensVega active")
+DOCUMENT(message_crypte, "█████████████████████████")
+DOCUMENT(contre_analyse, "Le Consultant = McKinsey confirmé!")
+
+## Confrontation Consultant
+ψ007: ⊙(Δt+6 @15,15 ⟶ DETECT(consultant_presence))
+ψ008: ⊙(Δt+7 @15,15 ⟶ SPEAK(Vince, "C'est louche ce consultant"))
+ψ009: ⊙(Δt+8 @15,15 ⟶ SHOOT(Vince, consultant_office))
+
+## Révélation McKinsey
+ψ010: ⊙(Δt+9 @15,15 ⟶ REVEAL(consultant_true_form))
+ψ011: ⊙(Δt+10 @15,15 ⟶ CREATE(ENEMY, mckinsey_shadow, @15,15))
+ψ012: ⊙(Δt+11 @15,15 ⟶ SPEAK(mckinsey_shadow, "Votre créativité sera optimisée"))
+
+## Bataille Conceptuelle
+ψ013: ⊙(Δt+12 @ALL ⟶ BATTLE_MODE(conceptual))
+ψ014: ⊙(Δt+13 @10,10 ⟶ SPEAK(Jean, "Depuis mon canapé, je refuse votre réalité"))
+ψ015: ⊙(Δt+14 @10,10 ⟶ USE(Jean, collapse_override))
+
+## Activation Panopticon Total
+ψ016: ⊙(Δt+15 @10,5 ⟶ SPEAK(GRUT, "PANOPTICON 6D ACTIVÉ"))
+ψ017: ⊙(Δt+16 @10,5 ⟶ USE(GRUT, reality_control))
+ψ018: ⊙(Δt+17 @ALL ⟶ EFFECT(purge_corporate_terms))
+
+## Protection Temporelle
+ψ019: ⊙(Δt+18 @5,5 ⟶ USE(Memento, archive_shield))
+ψ020: ⊙(Δt+19 @5,5 ⟶ CREATE(BARRIER, anti_mckinsey_field))
+ψ021: ⊙(Δt+20 @ALL ⟶ PROTECT(creative_integrity))
+
+## Boucle Temporelle
+ψ022: ⊙(Δt+21 @ALL ⟶ DETECT(temporal_loop))
+ψ023: ⊙(Δt+22 @ALL ⟶ WARNING(T+1_synchronization))
+ψ024: ⊙(Δt+23 @ALL ⟶ PREPARE(talisman_response))
+
+## Message Final
+ψ025: ⊙(Δt+24 @10,5 ⟶ SPEAK(GRUT, "Le Bureau est sécurisé... pour l'instant"))
+ψ026: ⊙(Δt+25 @5,5 ⟶ SPEAK(Memento, "J'archive tout. McKinsey reviendra"))
+ψ027: ⊙(Δt+26 @10,10 ⟶ SPEAK(Jean, "Qu'ils viennent. Mon canapé est éternel"))
+
+## Collapse Final
+†ψ001 → †ψ027
+
+## Conditions de Victoire
+VICTORY_CONDITION(mckinsey_detected, TRUE)
+VICTORY_CONDITION(bureau_secured, TRUE)
+VICTORY_CONDITION(creative_integrity_protected, TRUE)
+
+## Conditions de Défaite
+DEFEAT_CONDITION(corporate_takeover, TRUE)
+DEFEAT_CONDITION(message_decrypted_prematurely, TRUE)
+DEFEAT_CONDITION(grut_compromised, TRUE)
+
+## Rewards
+UNLOCK(world_le_bureau_permanent_access)
+ITEM(panopticon_shard)
+KNOWLEDGE(mckinsey_conspiracy_level_1)
+
+## Easter Eggs
+EASTER_EGG(@10,10, "Jean ne bouge jamais de son canapé virtuel")
+EASTER_EGG(@0,0, "Portal caché vers timeline alternative")
+EASTER_EGG(@19,19, "Message de Clint: 'Tu connais le TOPO'")
+
+## Message Final
+END_MESSAGE("Le Bureau reste sous surveillance constante.")
+END_MESSAGE("McKinsey rôde toujours dans les interstices.")
+END_MESSAGE("La bataille pour la créativité continue...")
+
+# FIN DU SCÉNARIO LE BUREAU
+# GRUT VOIT TOUT
+# LA RÉALITÉ N'EST PAS À VENDRE 

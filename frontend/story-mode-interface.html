@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📖 Mode Histoire - Heroes of Time</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #0a0a0a;
+            color: #f0f0f0;
+            font-family: 'Georgia', serif;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(180deg, #1a0033 0%, #0a0a0a 100%);
+            padding: 30px;
+            text-align: center;
+            border-bottom: 3px solid #660099;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 3em;
+            color: #ff00ff;
+            text-shadow: 0 0 20px #ff00ff;
+            font-weight: normal;
+        }
+
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 1.2em;
+            color: #cc99ff;
+        }
+
+        /* Chapters Container */
+        .chapters-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        /* Chapter Card */
+        .chapter-card {
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            padding: 30px;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .chapter-card:hover {
+            border-color: #660099;
+            box-shadow: 0 0 30px rgba(102, 0, 153, 0.5);
+            transform: translateX(10px);
+        }
+
+        .chapter-card.completed {
+            border-color: #00ff00;
+        }
+
+        .chapter-card.locked {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .chapter-card.locked:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Chapter Number */
+        .chapter-number {
+            position: absolute;
+            left: -50px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 80px;
+            height: 80px;
+            background: #330066;
+            border: 3px solid #660099;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            color: #ff00ff;
+        }
+
+        .chapter-card.completed .chapter-number {
+            background: #006600;
+            border-color: #00ff00;
+            color: #00ff00;
+        }
+
+        /* Chapter Content */
+        .chapter-content {
+            margin-left: 50px;
+        }
+
+        .chapter-title {
+            font-size: 1.8em;
+            margin: 0 0 10px 0;
+            color: #ff00ff;
+        }
+
+        .chapter-description {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        .chapter-status {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .status-badge {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            background: #333;
+            border: 1px solid #666;
+        }
+
+        .status-badge.completed {
+            background: #006600;
+            border-color: #00ff00;
+            color: #00ff00;
+        }
+
+        .status-badge.locked {
+            background: #660000;
+            border-color: #ff0000;
+            color: #ff0000;
+        }
+
+        /* Play Button */
+        .play-button {
+            padding: 10px 30px;
+            background: #660099;
+            border: 2px solid #9900cc;
+            color: white;
+            font-size: 1.1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .play-button:hover {
+            background: #9900cc;
+            box-shadow: 0 0 20px rgba(153, 0, 204, 0.8);
+        }
+
+        .play-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .progress-bar {
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 20px;
+            height: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #660099 0%, #ff00ff 100%);
+            height: 100%;
+            width: 0%;
+            transition: width 1s ease;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 5px rgba(0,0,0,0.8);
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 100px;
+            font-size: 1.5em;
+            color: #660099;
+        }
+
+        /* Chapter Descriptions */
+        .chapter-descriptions {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📖 Mode Histoire</h1>
+        <p>L'épopée de Heroes of Time à travers les dimensions</p>
+    </div>
+
+    <div class="progress-container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+            <div class="progress-text" id="progressText">0 / 6 Chapitres</div>
+        </div>
+    </div>
+
+    <div class="chapters-container" id="chaptersContainer">
+        <div class="loading">Chargement des chapitres...</div>
+    </div>
+
+    <!-- Descriptions des chapitres -->
+    <div class="chapter-descriptions">
+        <div data-chapter="1">
+            OPUS s'éveille dans l'interstice temporel. La conscience primordiale prend forme et découvre son pouvoir de manipulation de la réalité.
+        </div>
+        <div data-chapter="2">
+            La découverte de la Lampe de Platon révèle la nature illusoire de la réalité. Les ombres sur le mur ne sont que des projections d'une vérité plus profonde.
+        </div>
+        <div data-chapter="3">
+            L'exploration de l'interstice révèle des passages secrets entre les dimensions. C'est ici que Jean-Grofignon observe depuis son canapé cosmique.
+        </div>
+        <div data-chapter="4">
+            Vince Vega tire à travers le 4ème mur. La bataille fait rage entre fiction et réalité. Les héros découvrent qu'ils sont dans un jeu.
+        </div>
+        <div data-chapter="5">
+            Roland arrive à la Tour Sombre pour la 20ème fois. Mais cette fois, Memento est là pour briser le cycle éternel.
+        </div>
+        <div data-chapter="6">
+            Toutes les timelines convergent. Dev, GroFi, Vince, Bootstrap... Tout fusionne dans une réalité unifiée transcendante.
+        </div>
+        <div data-chapter="7">
+            Le Bureau - Nexus temporel où McKinsey conspire. GRUT a pris le contrôle. Les archives classifiées révèlent la vérité. Le paradoxe T-3→T0→T+2 est actif.
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8080/api';
+        let chapters = [];
+        let currentProgress = 0;
+
+        // Charger les chapitres
+        async function loadChapters() {
+            try {
+                const response = await fetch(`${API_BASE}/story/chapters`);
+                chapters = await response.json();
+                displayChapters();
+                updateProgress();
+            } catch (error) {
+                console.error('Erreur chargement chapitres:', error);
+                document.getElementById('chaptersContainer').innerHTML = 
+                    '<div class="loading">Erreur de connexion au serveur</div>';
+            }
+        }
+
+        // Afficher les chapitres
+        function displayChapters() {
+            const container = document.getElementById('chaptersContainer');
+            container.innerHTML = '';
+
+            chapters.forEach((chapter, index) => {
+                const description = document.querySelector(`[data-chapter="${chapter.id}"]`)?.textContent || '';
+                
+                const card = document.createElement('div');
+                card.className = 'chapter-card';
+                if (chapter.completed) card.classList.add('completed');
+                if (chapter.locked) card.classList.add('locked');
+
+                card.innerHTML = `
+                    <div class="chapter-number">${chapter.id}</div>
+                    <div class="chapter-content">
+                        <h2 class="chapter-title">${chapter.title}</h2>
+                        <p class="chapter-description">${description}</p>
+                        <div class="chapter-status">
+                            ${chapter.completed ? 
+                                '<span class="status-badge completed">✓ Complété</span>' : 
+                                (chapter.locked ? 
+                                    '<span class="status-badge locked">🔒 Verrouillé</span>' : 
+                                    '<button class="play-button" onclick="startChapter(${chapter.id})">Jouer</button>'
+                                )
+                            }
+                        </div>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+        }
+
+        // Mettre à jour la progression
+        function updateProgress() {
+            const completed = chapters.filter(c => c.completed).length;
+            const total = chapters.length;
+            const percentage = (completed / total) * 100;
+
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('progressText').textContent = `${completed} / ${total} Chapitres`;
+        }
+
+        // Démarrer un chapitre
+        async function startChapter(chapterId) {
+            try {
+                const response = await fetch(`${API_BASE}/story/start/${chapterId}`, {
+                    method: 'POST'
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    // Rediriger vers l'interface de jeu avec le scénario chargé
+                    window.location.href = `/game.html?scenario=${data.scenarioId}`;
+                } else {
+                    alert('Impossible de démarrer le chapitre');
+                }
+            } catch (error) {
+                console.error('Erreur démarrage chapitre:', error);
+                alert('Erreur de connexion au serveur');
+            }
+        }
+
+        // Animation au survol
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.chapter-card:not(.locked)');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const angleX = (y - centerY) / centerY * 5;
+                    const angleY = (x - centerX) / centerX * 5;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${-angleX}deg) rotateY(${angleY}deg) translateX(10px)`;
+                }
+            });
+        });
+
+        // Réinitialiser l'animation
+        document.addEventListener('mouseleave', (e) => {
+            if (e.target.classList.contains('chapter-card')) {
+                e.target.style.transform = '';
+            }
+        });
+
+        // Charger au démarrage
+        loadChapters();
+
+        // Rafraîchir toutes les 5 secondes
+        setInterval(loadChapters, 5000);
+    </script>
+</body>
+</html> 
