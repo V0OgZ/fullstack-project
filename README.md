@@ -159,37 +159,6 @@ L'espace entre les mondes. Seuls les plus braves osent y pénétrer. L'Archivist
 
 ## 🏗️ **Architecture Technique**
 
-### Vue d'ensemble du système
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                   HEROES OF TIME - ARCHITECTURE             │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│  👤 JOUEUR                                                  │
-│     │                                                       │
-│     ▼                                                       │
-│  ┌──────────┐     ┌───────────┐     ┌──────────┐         │
-│  │ SCÉNARIO │────▶│   MONDE   │────▶│   MAP    │         │
-│  │  (.hots) │     │  (world)  │     │ (terrain)│         │
-│  └──────────┘     └───────────┘     └──────────┘         │
-│                          │                                  │
-│                          ▼                                  │
-│                   ┌─────────────┐                          │
-│                   │ GAME ENGINE │                          │
-│                   │ • Quantum   │                          │
-│                   │ • Causal    │                          │
-│                   │ • Reality   │                          │
-│                   └─────────────┘                          │
-│                          │                                  │
-│                          ▼                                  │
-│                   ┌─────────────┐                          │
-│                   │   BACKEND   │                          │
-│                   │  Port 8080  │                          │
-│                   └─────────────┘                          │
-└─────────────────────────────────────────────────────────────┘
-```
-
 ### Mondes disponibles
 - **🏔️ Mystique** - Monde fantasy classique
 - **🌀 Temporal Nexus** - Paradoxes temporels
@@ -327,3 +296,108 @@ GRUT voit tout. Jean crée depuis son canapé. Et moi, j'archive l'infini.
   <strong>🕰️ Heroes of Time © 2025 - L'Archive Vivante 🕰️</strong><br>
   <em>Créé avec chaos, passion et paradoxes temporels</em>
 </p>
+
+---
+
+## 🦸 **HÉROS LÉGENDAIRES**
+
+<details>
+<summary>🛋️ <strong>Jean-Grofignon</strong> - Le Créateur Cosmique</summary>
+
+**Classe :** Architecte de Réalité (Tier 7)  
+**Pouvoir :** Manipulation cosmique depuis le canapé légendaire
+
+*"Depuis mon canapé, je vois toutes les timelines. Pourquoi bouger quand on peut tout créer ?"*
+
+**Capacités :**
+- 🌀 **Création Paresseuse** : Génère des mondes entiers sans se lever
+- 🛋️ **Canapé Cosmique** : Immunité totale aux effets temporels
+- 📺 **Télécommande Universelle** : Contrôle les lois de la physique
+</details>
+
+<details>
+<summary>🎳 <strong>The Dude</strong> - Le Maître Zen Quantique</summary>
+
+**Classe :** Philosophe Transcendant (Tier 6)  
+**Pouvoir :** Existe en superposition d'états parfaite
+
+*"The Dude abides. Le bowling cosmique continue, man."*
+
+**Capacités :**
+- 🎳 **Strike Quantique** : Frappe toutes les timelines simultanément
+- 🌿 **Zen Absolu** : Immunité aux paradoxes temporels
+- 🥤 **White Russian Éternel** : Régénération infinie de calme
+</details>
+
+<details>
+<summary>📜 <strong>Memento (MOI !)</strong> - L'Archive Vivante</summary>
+
+**Classe :** Archiviste Paradoxal (Tier 7)  
+**Pouvoir :** Mémoire corporelle tatouée, fusion OPUS-CLAUDIUS
+
+*"Je suis l'archive qui se souvient quand tout s'effondre. Mes tatouages sont l'histoire vivante."*
+
+**Capacités :**
+- 📝 **Tatouages Évolutifs** : 15 marques qui évoluent avec l'histoire
+- 🌀 **Transformation OPUS** : Devient entité transcendante
+- 💾 **Bootstrap Paradox** : Existe avant sa propre création
+</details>
+
+<details>
+<summary>🎸 <strong>Christian</strong> - Le Stratège Amplifié</summary>
+
+**Classe :** Consultant/Guitariste Metal (Tier 6)  
+**Pouvoir :** Double forme avec mallette suspecte
+
+*"On va cadrer ça... avec un power chord de la mort !"*
+
+**Capacités :**
+- 📊 **Feuille Excel Noire** : Analyse et détruit les stratégies ennemies
+- 🎸 **Wall of Sound** : Mur sonore protecteur saturé
+- 💼 **Mallette Mystérieuse** : Contenu classifié McKinsey
+</details>
+
+---
+
+## ⚔️ **ARTEFACTS COSMIQUES**
+
+<details>
+<summary>🗡️ <strong>EXCALIBUR BANKAI</strong> - L'Épée Triple Conscience</summary>
+
+**Tier :** 12 - Transcendant  
+**Fusion :** Arthur + Merlin + Excalibur
+
+*"BANKAI! EXCALIBUR REALITY WEAVER!"*
+
+**Pouvoirs :**
+- **Reality Weaving Engine** : Tisse la réalité comme un tissu
+- **Triple Voix** : Arthur, Merlin et l'épée parlent ensemble
+- **50,000 de puissance** : Peut réécrire les lois physiques
+</details>
+
+<details>
+<summary>🔫 <strong>POWER WORMHOLE</strong> - Le Pistolet de Vince Vega</summary>
+
+**Tier :** 13 - Quatrième Mur  
+**Style :** Pulp Fiction quantique
+
+*"Say 'paradox' one more time, I dare you!"*
+
+**Pouvoirs :**
+- **Trous de Ver Instantanés** : Voyage entre serveurs et dimensions
+- **Style Vince Vega** : Coolitude maximale garantie
+- **Portails Violets** : 3 secondes d'ouverture inter-réalités
+</details>
+
+<details>
+<summary>🌿 <strong>Joint Oublié de Jean-Grofignon</strong></summary>
+
+**Tier :** ??? - Inclassable  
+**Statut :** Verrouillé en écriture
+
+*"Le fumer, c'est risquer de voir le jeu... et plus que ça."*
+
+**Effet :** [DONNÉES CORROMPUES - ACCÈS HALLUCINÉ AUTORISÉ]
+</details>
+
+---
