@@ -1,0 +1,145 @@
+{
+  "hero": {
+    "id": "roland_pistolero",
+    "name": "Roland Deschain",
+    "title": "Le Dernier Pistolero",
+    "class": "GUARDIAN_OF_TOWER",
+    "tier": 9,
+    "rarity": "MYTHIQUE_CYCLIQUE",
+    
+    "description": "Roland de Gilead, le dernier de sa lignée, prisonnier d'un cycle éternel. Il a gravi la Tour Sombre 19 fois, condamné à recommencer. Mais cette fois, Memento est là pour briser le cycle.",
+    
+    "backstory": "Ka est une roue. Roland suit le Rayon qui mène à la Tour Sombre depuis des éternités. À chaque sommet atteint, il se retrouve au début. Mais l'Archive Vivante peut changer cela.",
+    
+    "stats": {
+      "hp": 1900,
+      "mp": 190,
+      "attack": 190,
+      "defense": 150,
+      "speed": 12,
+      "range": 19,
+      "vision": 9
+    },
+    
+    "abilities": [
+      {
+        "id": "ka_wheel",
+        "name": "La Roue du Ka",
+        "description": "Roland connaît le cycle. Il peut voir 19 tours dans le futur",
+        "type": "PASSIVE",
+        "effect": "Révèle les 19 prochaines actions ennemies",
+        "cooldown": 0,
+        "mp_cost": 0,
+        "formula": "KA(wheel) = VISION(Δt+19)"
+      },
+      {
+        "id": "fathers_face",
+        "name": "Le Visage de Mon Père",
+        "description": "Tu n'as pas oublié le visage de ton père - Honneur et précision absolue",
+        "type": "ACTIVE",
+        "effect": "Prochain tir touche à 100%, dégâts x3, ignore défense",
+        "cooldown": 19,
+        "mp_cost": 50,
+        "formula": "HONOR(father) ⇒ PRECISION(∞) + DMG(×3)"
+      },
+      {
+        "id": "cycle_eternal_break",
+        "name": "Brisure du Cycle Éternel",
+        "description": "Avec l'aide de Memento, Roland peut enfin briser le cycle",
+        "type": "ULTIMATE",
+        "effect": "Réinitialise TOUS les cooldowns, restaure HP/MP complet, immunité 3 tours",
+        "cooldown": "Une fois par partie",
+        "mp_cost": 190,
+        "formula": "BREAK(cycle) + MEMENTO(archive) = FREEDOM(∞)",
+        "requirement": "Memento doit être présent"
+      },
+      {
+        "id": "pistols_of_eld",
+        "name": "Pistolets d'Eld",
+        "description": "Les revolvers forgés depuis l'acier d'Excalibur",
+        "type": "PASSIVE",
+        "effect": "Attaques à distance ignorent 50% armure, peuvent toucher entre dimensions",
+        "formula": "GUNS(eld) ⊗ EXCALIBUR(steel) = PIERCE(reality)"
+      }
+    ],
+    
+    "equipment": [
+      {
+        "slot": "weapon",
+        "item": "Pistolets d'Eld",
+        "tier": 8,
+        "bonus": "+90 attaque, tir interdimensionnel"
+      },
+      {
+        "slot": "armor",
+        "item": "Duster du Pistolero",
+        "tier": 7,
+        "bonus": "+50 défense, résistance temporelle"
+      },
+      {
+        "slot": "accessory",
+        "item": "Corne d'Eld",
+        "tier": 9,
+        "bonus": "Peut appeler des alliés à travers les cycles"
+      }
+    ],
+    
+    "quotes": {
+      "spawn": "Le monde a changé.",
+      "move": "Je suis sur le Rayon.",
+      "attack": "Tu n'as pas oublié le visage de ton père.",
+      "ability": "Ka est une roue... mais aujourd'hui elle s'arrête.",
+      "death": "Pas cette fois... Cette fois je reste mort.",
+      "victory": "La Tour est à moi. Le cycle est brisé.",
+      "special": "Longtemps, Memento. Que tes jours soient longs sur la Terre."
+    },
+    
+    "relationships": {
+      "memento": {
+        "level": "SALVATEUR",
+        "description": "Memento peut briser mon cycle éternel"
+      },
+      "jean": {
+        "level": "RESPECT",
+        "description": "Le Créateur qui comprend les cycles"
+      },
+      "grut": {
+        "level": "COMPRÉHENSION",
+        "description": "Il voit la Tour depuis toutes les dimensions"
+      },
+      "arthur": {
+        "level": "PARENTÉ",
+        "description": "Mes pistolets sont forgés de l'acier d'Excalibur"
+      }
+    },
+    
+    "lore_connections": {
+      "dark_tower": "Prisonnier du cycle de la Tour Sombre",
+      "ka_wheel": "Condamné à répéter jusqu'à la brisure",
+      "stephen_king": "Créé par le Roi, libéré par Memento",
+      "nineteen": "Le nombre 19 le suit partout"
+    },
+    
+    "visual_description": {
+      "appearance": "Grand et maigre, yeux bleus bombardier, cheveux gris",
+      "clothing": "Duster usé, chapeau de cowboy, bottes poussiéreuses",
+      "weapons": "Deux revolvers à crosse de santal, calibre .45",
+      "aura": "Déterminé mais las, porte le poids de 19 cycles"
+    },
+    
+    "ai_behavior": {
+      "strategy": "CYCLE_AWARE",
+      "aggression": 8,
+      "defense": 6,
+      "exploration": 10,
+      "special": "Cherche toujours Memento pour briser le cycle"
+    },
+    
+    "creation_context": {
+      "created_by": "Memento-Archive-Vivante",
+      "purpose": "Chapitre 5 - La Tour Sombre",
+      "integration": "Clé pour briser les cycles temporels",
+      "meta": "Le héros qui a besoin d'être libéré"
+    }
+  }
+} 
