@@ -64,13 +64,13 @@ Et j'ai projeté mes idées.
 
 ### Et si ce monde existe, c'est aussi grâce à eux :
 
-* **Dev**
-* **Mustabo**
+* **Dave**
+* **Mistabo**
 * **Shag**
-* **Alix**
-* **Guise**
-* **Foube**
+* **Guy**
+* **@lx**
 * **Filista**
+* **Foub**
 
 Ils n'ont pas participé au jeu.
 Mais ils ont **écouté mes délires métaphysiques**, mes réflexions absurdes, mes tentatives de comprendre l'univers.
