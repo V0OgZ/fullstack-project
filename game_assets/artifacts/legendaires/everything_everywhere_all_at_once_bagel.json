@@ -1,0 +1,132 @@
+{
+  "id": "everything_everywhere_bagel",
+  "name": "🥯 Everything Bagel of Infinite Realities",
+  "name_fr": "🥯 Bagel de Toutes les Réalités Infinies",
+  "tier": "TIER_9_MULTIVERSAL",
+  "rarity": "LEGENDARY_MULTIVERSE",
+  "type": "REALITY_MANIPULATOR",
+  "category": "INTERDIMENSIONAL_ARTIFACT",
+  
+  "description": {
+    "en": "A seemingly simple bagel that contains all possibilities across infinite universes. One bite and you experience everything, everywhere, all at once. The googly eyes are optional but recommended.",
+    "fr": "Un bagel apparemment simple qui contient toutes les possibilités à travers des univers infinis. Une bouchée et vous expérimentez tout, partout, en même temps. Les yeux mobiles sont optionnels mais recommandés."
+  },
+  
+  "lore": {
+    "en": "Found in a laundromat between dimensions, this bagel was created when a universe collapsed into itself while someone was making breakfast. Now it contains the weight of all existence, plus everything seasoning.",
+    "fr": "Trouvé dans une laverie entre les dimensions, ce bagel fut créé quand un univers s'effondra sur lui-même pendant que quelqu'un préparait le petit-déjeuner. Il contient maintenant le poids de toute existence, plus l'assaisonnement tout-en-un."
+  },
+  
+  "visual": {
+    "symbol": "🥯",
+    "colors": ["#000000", "#FFFFFF", "#8B4513", "#FFD700"],
+    "effects": [
+      "multiverse_swirl",
+      "reality_distortion", 
+      "googly_eyes_optional",
+      "everything_seasoning_sparkles"
+    ],
+    "animation": "infinite_rotation_with_reality_tears"
+  },
+  
+  "powers": {
+    "primary": {
+      "name": "Everything Everywhere All at Once",
+      "name_fr": "Tout Partout en Même Temps",
+      "description": "Experience all possible realities simultaneously. See every choice you could have made, every path not taken, every universe where you chose differently.",
+      "description_fr": "Expérimentez toutes les réalités possibles simultanément. Voyez tous les choix que vous auriez pu faire, tous les chemins non pris, tous les univers où vous avez choisi différemment.",
+      "effect": "OMNIVERSAL_AWARENESS",
+      "duration": "PERMANENT_EXISTENTIAL_CRISIS",
+      "cost": "YOUR_SANITY_BUT_ALSO_ENLIGHTENMENT"
+    },
+    
+    "secondary": {
+      "name": "Googly Eyes Vision",
+      "name_fr": "Vision Yeux Mobiles", 
+      "description": "See the absurdity in everything. Even the most serious situations become ridiculous when viewed through googly eyes.",
+      "description_fr": "Voyez l'absurdité en toute chose. Même les situations les plus sérieuses deviennent ridicules vues à travers des yeux mobiles.",
+      "effect": "ABSURDIST_CLARITY",
+      "bonus": "+∞ Humor, -999 Taking Things Seriously"
+    },
+    
+    "ultimate": {
+      "name": "Laundromat Portal",
+      "name_fr": "Portail Laverie",
+      "description": "Open a portal to any laundromat in any universe. Because sometimes you just need to do laundry while contemplating existence.",
+      "description_fr": "Ouvrez un portail vers n'importe quelle laverie dans n'importe quel univers. Parce que parfois vous avez juste besoin de faire la lessive en contemplant l'existence.",
+      "effect": "INTERDIMENSIONAL_LAUNDRY_ACCESS"
+    }
+  },
+  
+  "stats": {
+    "reality_manipulation": "∞",
+    "multiverse_awareness": "ALL",
+    "existential_dread": "MAXIMUM",
+    "hope_in_chaos": "INFINITE",
+    "everything_seasoning": "YES"
+  },
+  
+  "requirements": {
+    "min_level": "BEYOND_LEVELS",
+    "prerequisites": [
+      "Have experienced at least 3 existential crises",
+      "Understand that kindness matters more than power",
+      "Be able to see beauty in the mundane",
+      "Accept that you are both everything and nothing"
+    ]
+  },
+  
+  "discovery_conditions": {
+    "location": "A random laundromat between dimensions",
+    "trigger": "When you realize that doing taxes is a form of interdimensional torture",
+    "special": "Only appears when you've given up looking for meaning and found it in a googly eye"
+  },
+  
+  "quotes": [
+    {
+      "en": "In another universe, I'm a rock. But in this one, I have googly eyes.",
+      "fr": "Dans un autre univers, je suis un rocher. Mais dans celui-ci, j'ai des yeux mobiles.",
+      "speaker": "Previous Wielder"
+    },
+    {
+      "en": "Everything is connected. Even this bagel and your mom's disappointment.",
+      "fr": "Tout est connecté. Même ce bagel et la déception de votre mère.",
+      "speaker": "Multiversal Sage"
+    },
+    {
+      "en": "🔫 Holy sh*t, this bagel is trippier than my interdimensional gun!",
+      "fr": "🔫 Putain, ce bagel est plus tripant que mon flingue interdimensionnel !",
+      "speaker": "Vince Vega"
+    }
+  ],
+  
+  "movie_references": {
+    "everything_everywhere_all_at_once": {
+      "bagel_of_destruction": "The black bagel that could destroy everything",
+      "googly_eyes": "Making everything less serious and more human",
+      "laundromat": "Where the multiverse converges",
+      "hot_dog_fingers": "Alternative universe possibility (not included)",
+      "rock_universe": "Sometimes being a rock is enough"
+    }
+  },
+  
+  "interactions": {
+    "with_vince_gun": {
+      "result": "REALITY_OVERLOAD",
+      "description": "Combining interdimensional travel with omniversal awareness causes temporary insanity but ultimate wisdom"
+    },
+    "with_jean_canape": {
+      "result": "COSMIC_BREAKFAST",
+      "description": "Jean realizes he's been coding the multiverse from his couch all along"
+    },
+    "with_grut_vision": {
+      "result": "EVERYTHING_VISION",
+      "description": "GRUT sees not just all possibilities, but all impossibilities too"
+    }
+  },
+  
+  "creation_date": "2025-07-26T02:00:00Z",
+  "created_by": "Vince Vega & Memento",
+  "inspired_by": "Everything Everywhere All at Once (2022)",
+  "universe_classification": "TIER_9_MULTIVERSAL_CHAOS_WITH_HEART"
+} 

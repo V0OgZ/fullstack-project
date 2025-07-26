@@ -5,38 +5,34 @@
 🔍 Phase 1: Benchmark Parser Regex
 ==================================
 📋 Test scripts simples...
-✅ Scripts simples: 417 operations regex/seconde
+✅ Scripts simples: 486 operations regex/seconde
 📋 Test scripts quantiques...
-✅ Scripts quantiques: 297 operations regex/seconde
+✅ Scripts quantiques: 485 operations regex/seconde
 
 🧮 Phase 2: Benchmark Calculs Quantiques
 ========================================
 📋 Test calculs de probabilités...
-✅ Calculs probabilités: 188 calculs quantiques/seconde
+✅ Calculs probabilités: 206 calculs quantiques/seconde
 📋 Test interférences quantiques...
-✅ Interférences quantiques: 127 calculs complexes/seconde
+✅ Interférences quantiques: 143 calculs complexes/seconde
 
 🌐 Phase 3: Benchmark API
 ========================
-📋 Test latence API...
-✅ Latence API moyenne: 15 ms
-✅ Taux de succès: 100/100
-📋 Test throughput API...
-✅ Throughput API: 258 requêtes/seconde
+❌ Backend non accessible - tests API ignorés
 
 💾 Phase 4: Benchmark Mémoire
 ============================
 📋 Test consommation mémoire...
-✅ Mémoire utilisée: 11600 KB pour 100k ψ-states
+✅ Mémoire utilisée: 6912 KB pour 100k ψ-states
 
 🔍 Phase 5: Analyse des Goulots d'Étranglement
 ==============================================
 📊 RÉSULTATS DÉTAILLÉS:
 ========================
-⚠️ GOULOT DÉTECTÉ: Parser simple (417 ops/sec < 10k)
-⚠️ GOULOT DÉTECTÉ: Parser quantique (297 ops/sec < 5k)
-⚠️ GOULOT DÉTECTÉ: Calculs quantiques (188 calc/sec < 50k)
-⚠️ GOULOT DÉTECTÉ: Interférences (127 calc/sec < 25k)
+⚠️ GOULOT DÉTECTÉ: Parser simple (486 ops/sec < 10k)
+⚠️ GOULOT DÉTECTÉ: Parser quantique (485 ops/sec < 5k)
+⚠️ GOULOT DÉTECTÉ: Calculs quantiques (206 calc/sec < 50k)
+⚠️ GOULOT DÉTECTÉ: Interférences (143 calc/sec < 25k)
 
 🎯 RECOMMANDATIONS:
 ===================
@@ -47,15 +43,11 @@
 
 📈 RÉSUMÉ FINAL DES PERFORMANCES
 ===============================
-🔍 Parser Simple: 417 ops/sec
-🌀 Parser Quantique: 297 ops/sec
-🧮 Calculs Quantiques: 188 calc/sec
-🔬 Interférences: 127 calc/sec
-💾 Mémoire: 11600 KB/100k états
-
-🎉 BENCHMARK TERMINÉ
-====================
- req/sec
+🔍 Parser Simple: 486 ops/sec
+🌀 Parser Quantique: 485 ops/sec
+🧮 Calculs Quantiques: 206 calc/sec
+🔬 Interférences: 143 calc/sec
+💾 Mémoire: 6912 KB/100k états
 
 🎉 BENCHMARK TERMINÉ
 ====================

@@ -2,6 +2,825 @@
 > heroes-of-time-frontend@1.0.0 start
 > react-scripts start
 
-(node:88016) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
+(node:23337) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
 (Use `node --trace-deprecation ...` to show where the warning was created)
-Something is already running on port 3000.
+(node:23337) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(node:23337) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+Starting the development server...
+
+Failed to compile.
+
+[eslint] 
+src/components/TrueHeroesInterface.tsx
+Syntax error: Declaration or statement expected (613:6)
+ERROR in ./src/components/TrueHeroesInterface.tsx
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /Users/admin/fullstack-project/frontend/src/components/TrueHeroesInterface.tsx: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>? (613:6)
+
+  611 |           </div>
+  612 |         </div>
+> 613 |       </div>
+      |       ^
+  614 |
+  615 |       {/* Epic Content Viewer */}
+  616 |       <EpicContentViewer 
+    at constructor (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:367:19)
+    at TypeScriptParserMixin.raise (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:6627:19)
+    at TypeScriptParserMixin.jsxParseElementAt (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:4772:18)
+    at TypeScriptParserMixin.jsxParseElement (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:4779:17)
+    at TypeScriptParserMixin.parseExprAtom (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:4792:19)
+    at TypeScriptParserMixin.parseExprSubscripts (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:11076:23)
+    at TypeScriptParserMixin.parseUpdate (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:11061:21)
+    at TypeScriptParserMixin.parseMaybeUnary (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:11041:23)
+    at TypeScriptParserMixin.parseMaybeUnary (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:9852:18)
+    at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:10894:61)
+    at TypeScriptParserMixin.parseExprOps (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:10899:23)
+    at TypeScriptParserMixin.parseMaybeConditional (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:10876:23)
+    at TypeScriptParserMixin.parseMaybeAssign (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:10826:21)
+    at /Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:9790:39
+    at TypeScriptParserMixin.tryParse (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:6935:20)
+    at TypeScriptParserMixin.parseMaybeAssign (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:9790:18)
+    at TypeScriptParserMixin.parseExpressionBase (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:10779:23)
+    at /Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:10775:39
+    at TypeScriptParserMixin.allowInAnd (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:12422:16)
+    at TypeScriptParserMixin.parseExpression (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:10775:17)
+    at TypeScriptParserMixin.parseStatementContent (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:12895:23)
+    at TypeScriptParserMixin.parseStatementContent (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:9527:18)
+    at TypeScriptParserMixin.parseStatementLike (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:12767:17)
+    at TypeScriptParserMixin.parseStatementListItem (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:12747:17)
+    at TypeScriptParserMixin.parseBlockOrModuleBlockBody (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:13316:61)
+    at TypeScriptParserMixin.parseBlockBody (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:13309:10)
+    at TypeScriptParserMixin.parseBlock (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:13297:10)
+    at TypeScriptParserMixin.parseFunctionBody (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:12101:24)
+    at TypeScriptParserMixin.parseArrowExpression (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:12076:10)
+    at TypeScriptParserMixin.parseParenAndDistinguishExpression (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:11686:12)
+    at TypeScriptParserMixin.parseExprAtom (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:11326:23)
+    at TypeScriptParserMixin.parseExprAtom (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:4794:20)
+    at TypeScriptParserMixin.parseExprSubscripts (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:11076:23)
+    at TypeScriptParserMixin.parseUpdate (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:11061:21)
+    at TypeScriptParserMixin.parseMaybeUnary (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:11041:23)
+    at TypeScriptParserMixin.parseMaybeUnary (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:9852:18)
+    at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:10894:61)
+    at TypeScriptParserMixin.parseExprOps (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:10899:23)
+    at TypeScriptParserMixin.parseMaybeConditional (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:10876:23)
+    at TypeScriptParserMixin.parseMaybeAssign (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:10826:21)
+    at TypeScriptParserMixin.parseMaybeAssign (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:9801:20)
+    at /Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:10795:39
+    at TypeScriptParserMixin.allowInAnd (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:12422:16)
+    at TypeScriptParserMixin.parseMaybeAssignAllowIn (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:10795:17)
+    at TypeScriptParserMixin.parseVar (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:13384:91)
+    at TypeScriptParserMixin.parseVarStatement (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:13230:10)
+    at TypeScriptParserMixin.parseVarStatement (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:9493:31)
+    at TypeScriptParserMixin.parseStatementContent (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:12851:23)
+    at TypeScriptParserMixin.parseStatementContent (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:9527:18)
+    at TypeScriptParserMixin.parseStatementLike (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:12767:17)
+
+ERROR in ./src/pages/TestPages.tsx 6:0-68
+Module not found: Error: Can't resolve '../components/SimpleGameInterface' in '/Users/admin/fullstack-project/frontend/src/pages'
+
+ERROR in ./src/pages/TestPages.tsx 7:0-68
+Module not found: Error: Can't resolve '../components/ModernGameInterface' in '/Users/admin/fullstack-project/frontend/src/pages'
+
+ERROR in ./src/pages/TestPages.tsx 8:0-72
+Module not found: Error: Can't resolve '../components/SimpleModernInterface' in '/Users/admin/fullstack-project/frontend/src/pages'
+
+ERROR in [eslint] 
+src/components/TrueHeroesInterface.tsx
+  Line 613:6:  Parsing error: Declaration or statement expected
+
+webpack compiled with 5 errors
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+ERROR in src/components/EpicContentViewer.tsx:18:46
+TS2304: Cannot find name 'EpicBuilding'.
+    16 |   const [creatures, setCreatures] = useState<EpicCreature[]>([]);
+    17 |   const [heroes, setHeroes] = useState<EpicHero[]>([]);
+  > 18 |   const [buildings, setBuildings] = useState<EpicBuilding[]>([]);
+       |                                              ^^^^^^^^^^^^
+    19 |   const [artifacts, setArtifacts] = useState<EpicArtifact[]>([]);
+    20 |   const [loading, setLoading] = useState(false);
+    21 |   const [showGoldorakEasterEgg, setShowGoldorakEasterEgg] = useState(false);
+
+ERROR in src/components/EpicContentViewer.tsx:19:46
+TS2304: Cannot find name 'EpicArtifact'.
+    17 |   const [heroes, setHeroes] = useState<EpicHero[]>([]);
+    18 |   const [buildings, setBuildings] = useState<EpicBuilding[]>([]);
+  > 19 |   const [artifacts, setArtifacts] = useState<EpicArtifact[]>([]);
+       |                                              ^^^^^^^^^^^^
+    20 |   const [loading, setLoading] = useState(false);
+    21 |   const [showGoldorakEasterEgg, setShowGoldorakEasterEgg] = useState(false);
+    22 |
+
+ERROR in src/components/EpicContentViewer.tsx:34:28
+TS2304: Cannot find name 'getServerStatus'.
+    32 |     try {
+    33 |       // Vérifier le status du système game_assets
+  > 34 |       const status = await getServerStatus();
+       |                            ^^^^^^^^^^^^^^^
+    35 |       setServerStatus(status);
+    36 |       
+    37 |       // Charger toutes les données depuis game_assets
+
+ERROR in src/components/EpicContentViewer.tsx:35:7
+TS2304: Cannot find name 'setServerStatus'.
+    33 |       // Vérifier le status du système game_assets
+    34 |       const status = await getServerStatus();
+  > 35 |       setServerStatus(status);
+       |       ^^^^^^^^^^^^^^^
+    36 |       
+    37 |       // Charger toutes les données depuis game_assets
+    38 |       const [creaturesData, heroesData, buildingsData, artifactsData] = await Promise.all([
+
+ERROR in src/components/EpicContentViewer.tsx:41:9
+TS2304: Cannot find name 'fetchEpicBuildings'.
+    39 |         fetchEpicCreatures(),
+    40 |         fetchEpicHeroes(),
+  > 41 |         fetchEpicBuildings(),
+       |         ^^^^^^^^^^^^^^^^^^
+    42 |         fetchEpicArtifacts()
+    43 |       ]);
+    44 |       
+
+ERROR in src/components/EpicContentViewer.tsx:42:9
+TS2304: Cannot find name 'fetchEpicArtifacts'.
+    40 |         fetchEpicHeroes(),
+    41 |         fetchEpicBuildings(),
+  > 42 |         fetchEpicArtifacts()
+       |         ^^^^^^^^^^^^^^^^^^
+    43 |       ]);
+    44 |       
+    45 |       setCreatures(creaturesData);
+
+ERROR in src/components/EpicContentViewer.tsx:141:23
+TS2304: Cannot find name 'serverStatus'.
+    139 |               label: '🦸 Héros', 
+    140 |               count: heroes.length,
+  > 141 |               status: serverStatus.endpoints.heroes
+        |                       ^^^^^^^^^^^^
+    142 |             },
+    143 |             { 
+    144 |               id: 'creatures', 
+
+ERROR in src/components/EpicContentViewer.tsx:147:23
+TS2304: Cannot find name 'serverStatus'.
+    145 |               label: '🐉 Créatures', 
+    146 |               count: creatures.length,
+  > 147 |               status: serverStatus.endpoints.creatures
+        |                       ^^^^^^^^^^^^
+    148 |             },
+    149 |             { 
+    150 |               id: 'buildings', 
+
+ERROR in src/components/EpicContentViewer.tsx:153:23
+TS2304: Cannot find name 'serverStatus'.
+    151 |               label: '🏰 Bâtiments', 
+    152 |               count: buildings.length,
+  > 153 |               status: serverStatus.endpoints.buildings
+        |                       ^^^^^^^^^^^^
+    154 |             },
+    155 |             { 
+    156 |               id: 'artifacts', 
+
+ERROR in src/components/EpicContentViewer.tsx:159:23
+TS2304: Cannot find name 'serverStatus'.
+    157 |               label: '⚔️ Artefacts', 
+    158 |               count: artifacts.length,
+  > 159 |               status: serverStatus.endpoints.artifacts || true
+        |                       ^^^^^^^^^^^^
+    160 |             }
+    161 |           ].map(tab => (
+    162 |             <button
+
+ERROR in src/components/HeroFPV.tsx:2:30
+TS2307: Cannot find module '../hooks/useGameState' or its corresponding type declarations.
+    1 | import React, { useState, useEffect } from 'react';
+  > 2 | import { useGameState } from '../hooks/useGameState';
+      |                              ^^^^^^^^^^^^^^^^^^^^^^^
+    3 | import './HeroFPV.css';
+    4 |
+    5 | interface HeroFPVProps {
+
+ERROR in src/components/ModernGameRenderer.tsx:125:29
+TS2554: Expected 1 arguments, but got 0.
+    123 |   });
+    124 |   
+  > 125 |   const animationFrameRef = useRef<number | undefined>();
+        |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    126 |   
+    127 |   // 🔮 ÉTAT SYMBOLES RUNIQUES
+    128 |   const [runicSymbols, setRunicSymbols] = useState<RunicSymbol[]>([]);
+
+ERROR in src/components/TimelinesDashboard.tsx:77:11
+TS2322: Type '{ onNavigate: (page: string) => void; }' is not assignable to type 'IntrinsicAttributes'.
+  Property 'onNavigate' does not exist on type 'IntrinsicAttributes'.
+    75 |       <div className="current-interface">
+    76 |         <CurrentComponent 
+  > 77 |           onNavigate={(page: string) => {
+       |           ^^^^^^^^^^
+    78 |             console.log(`[DASHBOARD] Navigation vers: ${page}`);
+    79 |           }}
+    80 |         />
+
+ERROR in src/components/TrueHeroesInterface_v3.tsx:109:13
+TS2322: Type '(position: {    x: number;    y: number;}) => void' is not assignable to type '(x: number, y: number) => void'.
+  Types of parameters 'position' and 'x' are incompatible.
+    Type 'number' is not assignable to type '{ x: number; y: number; }'.
+    107 |             width={800}
+    108 |             height={600}
+  > 109 |             onTileClick={handleTileClick}
+        |             ^^^^^^^^^^^
+    110 |           />
+    111 |         </div>
+    112 |
+
+ERROR in src/components/TrueHeroesInterface.tsx
+TS1161: Unterminated regular expression literal.
+
+ERROR in src/components/TrueHeroesInterface.tsx:139:7
+TS2304: Cannot find name 'isLoading'.
+    137 |
+    138 |   // Loading state - SIMPLIFIÉ pour éviter le blocage
+  > 139 |   if (isLoading && !currentGame) {
+        |       ^^^^^^^^^
+    140 |     return (
+    141 |       <div className="true-heroes-interface loading">
+    142 |         <div className="loading-content">
+
+ERROR in src/components/TrueHeroesInterface.tsx:221:13
+TS2322: Type '(position: Position) => void' is not assignable to type '(x: number, y: number) => void'.
+  Types of parameters 'position' and 'x' are incompatible.
+    Type 'number' is not assignable to type 'Position'.
+    219 |             width={900}
+    220 |             height={700}
+  > 221 |             onTileClick={handleTileClick}
+        |             ^^^^^^^^^^^
+    222 |           />
+    223 |         </div>
+    224 |       </div>
+
+ERROR in src/components/TrueHeroesInterface.tsx:238:81
+TS18047: 'currentGame' is possibly 'null'.
+    236 |                 <div className="scenario-stats">
+    237 |                   <div>🗺️ Tiles: {hexTiles.length}</div>
+  > 238 |                                       <div>🎲 Seed: {currentGame?.id ? hashCode(currentGame.id) : 12345}</div>
+        |                                                                                 ^^^^^^^^^^^
+    239 |                   <div>🌍 Biomes: {new Set(hexTiles.map(t => t.biome)).size}</div>
+    240 |                   <div>🏰 Players: {currentGame?.players?.length || 4}</div>
+    241 |                 </div>
+
+ERROR in src/components/TrueHeroesInterface.tsx:271:36
+TS2304: Cannot find name 'handleHeroSelect'.
+    269 |                     key={hero.id} 
+    270 |                     className={`hero-card ${selectedHero?.id === hero.id ? 'selected' : ''}`}
+  > 271 |                     onClick={() => handleHeroSelect(hero)}
+        |                                    ^^^^^^^^^^^^^^^^
+    272 |                   >
+    273 |                     <div className="hero-avatar">👤</div>
+    274 |                     <div className="hero-info">
+
+ERROR in src/components/TrueHeroesInterface.tsx:326:43
+TS2367: This comparison appears to be unintentional because the types '"scenario" | "hero" | "inventory" | "castle"' and '"fog"' have no overlap.
+    324 |               </button>
+    325 |               <button 
+  > 326 |                 className={`sidebar-tab ${activePanel === 'fog' ? 'active' : ''}`}
+        |                                           ^^^^^^^^^^^^^^^^^^^^^
+    327 |                 onClick={() => setActivePanel('fog')}
+    328 |                 title="Brouillard de Causalité"
+    329 |               >
+
+ERROR in src/components/TrueHeroesInterface.tsx:327:47
+TS2345: Argument of type '"fog"' is not assignable to parameter of type 'SetStateAction<"scenario" | "hero" | "inventory" | "castle">'.
+    325 |               <button 
+    326 |                 className={`sidebar-tab ${activePanel === 'fog' ? 'active' : ''}`}
+  > 327 |                 onClick={() => setActivePanel('fog')}
+        |                                               ^^^^^
+    328 |                 title="Brouillard de Causalité"
+    329 |               >
+    330 |                 🌫️
+
+ERROR in src/components/TrueHeroesInterface.tsx:354:43
+TS2367: This comparison appears to be unintentional because the types '"scenario" | "hero" | "inventory" | "castle"' and '"script"' have no overlap.
+    352 |               </button>
+    353 |               <button 
+  > 354 |                 className={`sidebar-tab ${activePanel === 'script' ? 'active' : ''}`}
+        |                                           ^^^^^^^^^^^^^^^^^^^^^^^^
+    355 |                 onClick={() => setActivePanel('script')}
+    356 |                 title="Script Editor"
+    357 |               >
+
+ERROR in src/components/TrueHeroesInterface.tsx:355:47
+TS2345: Argument of type '"script"' is not assignable to parameter of type 'SetStateAction<"scenario" | "hero" | "inventory" | "castle">'.
+    353 |               <button 
+    354 |                 className={`sidebar-tab ${activePanel === 'script' ? 'active' : ''}`}
+  > 355 |                 onClick={() => setActivePanel('script')}
+        |                                               ^^^^^^^^
+    356 |                 title="Script Editor"
+    357 |               >
+    358 |                 🧪
+
+ERROR in src/components/TrueHeroesInterface.tsx:361:43
+TS2367: This comparison appears to be unintentional because the types '"scenario" | "hero" | "inventory" | "castle"' and '"epic"' have no overlap.
+    359 |               </button>
+    360 |               <button 
+  > 361 |                 className={`sidebar-tab ${activePanel === 'epic' ? 'active' : ''}`}
+        |                                           ^^^^^^^^^^^^^^^^^^^^^^
+    362 |                 onClick={() => setActivePanel('epic')}
+    363 |                 title="Epic Content"
+    364 |               >
+
+ERROR in src/components/TrueHeroesInterface.tsx:362:47
+TS2345: Argument of type '"epic"' is not assignable to parameter of type 'SetStateAction<"scenario" | "hero" | "inventory" | "castle">'.
+    360 |               <button 
+    361 |                 className={`sidebar-tab ${activePanel === 'epic' ? 'active' : ''}`}
+  > 362 |                 onClick={() => setActivePanel('epic')}
+        |                                               ^^^^^^
+    363 |                 title="Epic Content"
+    364 |               >
+    365 |                 🌟
+
+ERROR in src/components/TrueHeroesInterface.tsx:381:20
+TS2304: Cannot find name 'TerrainModeSelector'.
+    379 |                   
+    380 |                   {/* Sélecteur de mode terrain */}
+  > 381 |                   <TerrainModeSelector 
+        |                    ^^^^^^^^^^^^^^^^^^^
+    382 |                     currentMode={terrainMode}
+    383 |                     onModeChange={setTerrainMode}
+    384 |                     disabled={isLoading}
+
+ERROR in src/components/TrueHeroesInterface.tsx:382:34
+TS2304: Cannot find name 'terrainMode'.
+    380 |                   {/* Sélecteur de mode terrain */}
+    381 |                   <TerrainModeSelector 
+  > 382 |                     currentMode={terrainMode}
+        |                                  ^^^^^^^^^^^
+    383 |                     onModeChange={setTerrainMode}
+    384 |                     disabled={isLoading}
+    385 |                   />
+
+ERROR in src/components/TrueHeroesInterface.tsx:383:35
+TS2304: Cannot find name 'setTerrainMode'.
+    381 |                   <TerrainModeSelector 
+    382 |                     currentMode={terrainMode}
+  > 383 |                     onModeChange={setTerrainMode}
+        |                                   ^^^^^^^^^^^^^^
+    384 |                     disabled={isLoading}
+    385 |                   />
+    386 |                   
+
+ERROR in src/components/TrueHeroesInterface.tsx:384:31
+TS2304: Cannot find name 'isLoading'.
+    382 |                     currentMode={terrainMode}
+    383 |                     onModeChange={setTerrainMode}
+  > 384 |                     disabled={isLoading}
+        |                               ^^^^^^^^^
+    385 |                   />
+    386 |                   
+    387 |                   <div className="scenario-stats">
+
+ERROR in src/components/TrueHeroesInterface.tsx:390:35
+TS2304: Cannot find name 'mockHeroes'.
+    388 |                     <div>Turn: {currentGame?.turn || 1}</div>
+    389 |                     <div>Player: {currentPlayer?.name || 'Player 1'}</div>
+  > 390 |                     <div>Heroes: {mockHeroes.length}</div>
+        |                                   ^^^^^^^^^^
+    391 |                     <div>Gold: {currentPlayer?.resources?.gold || 1500}</div>
+    392 |                   </div>
+    393 |                   
+
+ERROR in src/components/TrueHeroesInterface.tsx:399:33
+TS2304: Cannot find name 'isLoading'.
+    397 |                       className="end-turn-btn"
+    398 |                       onClick={handleEndTurn}
+  > 399 |                       disabled={isLoading}
+        |                                 ^^^^^^^^^
+    400 |                     >
+    401 |                       ⭐ End Turn
+    402 |                     </button>
+
+ERROR in src/components/TrueHeroesInterface.tsx:405:38
+TS2304: Cannot find name 'setTestMode'.
+    403 |                     <button 
+    404 |                       className="test-mode-btn"
+  > 405 |                       onClick={() => setTestMode(!testMode)}
+        |                                      ^^^^^^^^^^^
+    406 |                     >
+    407 |                       🔧 Test Mode
+    408 |                     </button>
+
+ERROR in src/components/TrueHeroesInterface.tsx:405:51
+TS2304: Cannot find name 'testMode'.
+    403 |                     <button 
+    404 |                       className="test-mode-btn"
+  > 405 |                       onClick={() => setTestMode(!testMode)}
+        |                                                   ^^^^^^^^
+    406 |                     >
+    407 |                       🔧 Test Mode
+    408 |                     </button>
+
+ERROR in src/components/TrueHeroesInterface.tsx:425:14
+TS2367: This comparison appears to be unintentional because the types '"scenario" | "hero" | "inventory" | "castle"' and '"fog"' have no overlap.
+    423 |
+    424 |             {/* BROUILLARD DE CAUSALITÉ ULTRA-DISCRET */}
+  > 425 |             {activePanel === 'fog' && (
+        |              ^^^^^^^^^^^^^^^^^^^^^
+    426 |               <div className="panel-content fog-panel-compact">
+    427 |                 <div className="panel-header-mini">
+    428 |                   <h4>🌫️ Causalité</h4>
+
+ERROR in src/components/TrueHeroesInterface.tsx:462:20
+TS2304: Cannot find name 'mockHeroes'.
+    460 |                 </div>
+    461 |                 <div className="heroes-list">
+  > 462 |                   {mockHeroes.map((hero) => (
+        |                    ^^^^^^^^^^
+    463 |                     <EnhancedHeroDisplay
+    464 |                       key={hero.id}
+    465 |                       hero={hero}
+
+ERROR in src/components/TrueHeroesInterface.tsx:462:36
+TS7006: Parameter 'hero' implicitly has an 'any' type.
+    460 |                 </div>
+    461 |                 <div className="heroes-list">
+  > 462 |                   {mockHeroes.map((hero) => (
+        |                                    ^^^^
+    463 |                     <EnhancedHeroDisplay
+    464 |                       key={hero.id}
+    465 |                       hero={hero}
+
+ERROR in src/components/TrueHeroesInterface.tsx:463:22
+TS2304: Cannot find name 'EnhancedHeroDisplay'.
+    461 |                 <div className="heroes-list">
+    462 |                   {mockHeroes.map((hero) => (
+  > 463 |                     <EnhancedHeroDisplay
+        |                      ^^^^^^^^^^^^^^^^^^^
+    464 |                       key={hero.id}
+    465 |                       hero={hero}
+    466 |                       isSelected={selectedHero?.id === hero.id}
+
+ERROR in src/components/TrueHeroesInterface.tsx:530:14
+TS2367: This comparison appears to be unintentional because the types '"scenario" | "hero" | "inventory" | "castle"' and '"script"' have no overlap.
+    528 |
+    529 |             {/* SCRIPT EDITOR INTÉGRÉ */}
+  > 530 |             {activePanel === 'script' && (
+        |              ^^^^^^^^^^^^^^^^^^^^^^^^
+    531 |               <div className="panel-content script-panel">
+    532 |                 <div className="panel-header">
+    533 |                   <h3>🧪 Script Editor</h3>
+
+ERROR in src/components/TrueHeroesInterface.tsx:537:67
+TS2304: Cannot find name 'setScriptContent'.
+    535 |                 <div className="script-editor-container">
+    536 |                   <div className="script-editor-toolbar">
+  > 537 |                     <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.hero)}>New Hero</button>
+        |                                                                   ^^^^^^^^^^^^^^^^
+    538 |                     <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.castle)}>New Castle</button>
+    539 |                     <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.combat)}>Combat</button>
+    540 |                     <button className="script-btn" onClick={() => executeScript()}>▶️ Run</button>
+
+ERROR in src/components/TrueHeroesInterface.tsx:537:84
+TS2304: Cannot find name 'SCRIPT_TEMPLATES'.
+    535 |                 <div className="script-editor-container">
+    536 |                   <div className="script-editor-toolbar">
+  > 537 |                     <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.hero)}>New Hero</button>
+        |                                                                                    ^^^^^^^^^^^^^^^^
+    538 |                     <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.castle)}>New Castle</button>
+    539 |                     <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.combat)}>Combat</button>
+    540 |                     <button className="script-btn" onClick={() => executeScript()}>▶️ Run</button>
+
+ERROR in src/components/TrueHeroesInterface.tsx:538:67
+TS2304: Cannot find name 'setScriptContent'.
+    536 |                   <div className="script-editor-toolbar">
+    537 |                     <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.hero)}>New Hero</button>
+  > 538 |                     <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.castle)}>New Castle</button>
+        |                                                                   ^^^^^^^^^^^^^^^^
+    539 |                     <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.combat)}>Combat</button>
+    540 |                     <button className="script-btn" onClick={() => executeScript()}>▶️ Run</button>
+    541 |                     <button className="script-btn" onClick={() => setScriptResults('')}>🗑️ Clear</button>
+
+ERROR in src/components/TrueHeroesInterface.tsx:538:84
+TS2304: Cannot find name 'SCRIPT_TEMPLATES'.
+    536 |                   <div className="script-editor-toolbar">
+    537 |                     <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.hero)}>New Hero</button>
+  > 538 |                     <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.castle)}>New Castle</button>
+        |                                                                                    ^^^^^^^^^^^^^^^^
+    539 |                     <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.combat)}>Combat</button>
+    540 |                     <button className="script-btn" onClick={() => executeScript()}>▶️ Run</button>
+    541 |                     <button className="script-btn" onClick={() => setScriptResults('')}>🗑️ Clear</button>
+
+ERROR in src/components/TrueHeroesInterface.tsx:539:67
+TS2304: Cannot find name 'setScriptContent'.
+    537 |                     <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.hero)}>New Hero</button>
+    538 |                     <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.castle)}>New Castle</button>
+  > 539 |                     <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.combat)}>Combat</button>
+        |                                                                   ^^^^^^^^^^^^^^^^
+    540 |                     <button className="script-btn" onClick={() => executeScript()}>▶️ Run</button>
+    541 |                     <button className="script-btn" onClick={() => setScriptResults('')}>🗑️ Clear</button>
+    542 |                   </div>
+
+ERROR in src/components/TrueHeroesInterface.tsx:539:84
+TS2304: Cannot find name 'SCRIPT_TEMPLATES'.
+    537 |                     <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.hero)}>New Hero</button>
+    538 |                     <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.castle)}>New Castle</button>
+  > 539 |                     <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.combat)}>Combat</button>
+        |                                                                                    ^^^^^^^^^^^^^^^^
+    540 |                     <button className="script-btn" onClick={() => executeScript()}>▶️ Run</button>
+    541 |                     <button className="script-btn" onClick={() => setScriptResults('')}>🗑️ Clear</button>
+    542 |                   </div>
+
+ERROR in src/components/TrueHeroesInterface.tsx:540:67
+TS2304: Cannot find name 'executeScript'.
+    538 |                     <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.castle)}>New Castle</button>
+    539 |                     <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.combat)}>Combat</button>
+  > 540 |                     <button className="script-btn" onClick={() => executeScript()}>▶️ Run</button>
+        |                                                                   ^^^^^^^^^^^^^
+    541 |                     <button className="script-btn" onClick={() => setScriptResults('')}>🗑️ Clear</button>
+    542 |                   </div>
+    543 |                   <textarea 
+
+ERROR in src/components/TrueHeroesInterface.tsx:541:67
+TS2304: Cannot find name 'setScriptResults'.
+    539 |                     <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.combat)}>Combat</button>
+    540 |                     <button className="script-btn" onClick={() => executeScript()}>▶️ Run</button>
+  > 541 |                     <button className="script-btn" onClick={() => setScriptResults('')}>🗑️ Clear</button>
+        |                                                                   ^^^^^^^^^^^^^^^^
+    542 |                   </div>
+    543 |                   <textarea 
+    544 |                     className="script-textarea"
+
+ERROR in src/components/TrueHeroesInterface.tsx:546:28
+TS2304: Cannot find name 'scriptContent'.
+    544 |                     className="script-textarea"
+    545 |                     placeholder="Enter your Heroes of Time script here..."
+  > 546 |                     value={scriptContent}
+        |                            ^^^^^^^^^^^^^
+    547 |                     onChange={(e) => setScriptContent(e.target.value)}
+    548 |                   />
+    549 |                   {scriptResults && (
+
+ERROR in src/components/TrueHeroesInterface.tsx:547:38
+TS2304: Cannot find name 'setScriptContent'.
+    545 |                     placeholder="Enter your Heroes of Time script here..."
+    546 |                     value={scriptContent}
+  > 547 |                     onChange={(e) => setScriptContent(e.target.value)}
+        |                                      ^^^^^^^^^^^^^^^^
+    548 |                   />
+    549 |                   {scriptResults && (
+    550 |                     <div className="script-results">
+
+ERROR in src/components/TrueHeroesInterface.tsx:549:20
+TS2304: Cannot find name 'scriptResults'.
+    547 |                     onChange={(e) => setScriptContent(e.target.value)}
+    548 |                   />
+  > 549 |                   {scriptResults && (
+        |                    ^^^^^^^^^^^^^
+    550 |                     <div className="script-results">
+    551 |                       <h4>📋 Results:</h4>
+    552 |                       <pre>{scriptResults}</pre>
+
+ERROR in src/components/TrueHeroesInterface.tsx:552:29
+TS2304: Cannot find name 'scriptResults'.
+    550 |                     <div className="script-results">
+    551 |                       <h4>📋 Results:</h4>
+  > 552 |                       <pre>{scriptResults}</pre>
+        |                             ^^^^^^^^^^^^^
+    553 |                     </div>
+    554 |                   )}
+    555 |                   <div className="script-help">
+
+ERROR in src/components/TrueHeroesInterface.tsx:583:14
+TS2367: This comparison appears to be unintentional because the types '"scenario" | "hero" | "inventory" | "castle"' and '"epic"' have no overlap.
+    581 |
+    582 |             {/* EPIC CONTENT INTÉGRÉ */}
+  > 583 |             {activePanel === 'epic' && (
+        |              ^^^^^^^^^^^^^^^^^^^^^^
+    584 |               <div className="panel-content epic-panel">
+    585 |                 <div className="panel-header">
+    586 |                   <h3>🌟 Epic Content - Game Assets</h3>
+
+ERROR in src/components/TrueHeroesInterface.tsx:605:27
+TS2304: Cannot find name 'mockEpicContent'.
+    603 |                     <p style={{ fontSize: '12px', color: '#ccc', marginTop: '10px' }}>
+    604 |                       ✅ Chargement direct depuis game_assets/<br/>
+  > 605 |                       📊 {mockEpicContent.length} objets épiques disponibles
+        |                           ^^^^^^^^^^^^^^^
+    606 |                     </p>
+    607 |                   </div>
+    608 |                 </div>
+
+ERROR in src/components/TrueHeroesInterface.tsx:613:7
+TS1128: Declaration or statement expected.
+    611 |           </div>
+    612 |         </div>
+  > 613 |       </div>
+        |       ^^
+    614 |
+    615 |       {/* Epic Content Viewer */}
+    616 |       <EpicContentViewer 
+
+ERROR in src/components/TrueHeroesInterface.tsx:613:9
+TS2304: Cannot find name 'div'.
+    611 |           </div>
+    612 |         </div>
+  > 613 |       </div>
+        |         ^^^
+    614 |
+    615 |       {/* Epic Content Viewer */}
+    616 |       <EpicContentViewer 
+
+ERROR in src/components/TrueHeroesInterface.tsx:613:9
+TS2365: Operator '<' cannot be applied to types 'boolean' and 'FC<EpicContentViewerProps>'.
+    611 |           </div>
+    612 |         </div>
+  > 613 |       </div>
+        |         ^^^^
+  > 614 |
+        | ^
+  > 615 |       {/* Epic Content Viewer */}
+        | ^
+  > 616 |       <EpicContentViewer 
+        | ^^^^^^^^^^^^^^^^^^^^^^^^^
+    617 |         isVisible={showEpicContentViewer} 
+    618 |         onClose={() => setShowEpicContentViewer(false)} 
+    619 |       />
+
+ERROR in src/components/TrueHeroesInterface.tsx:617:9
+TS2304: Cannot find name 'isVisible'.
+    615 |       {/* Epic Content Viewer */}
+    616 |       <EpicContentViewer 
+  > 617 |         isVisible={showEpicContentViewer} 
+        |         ^^^^^^^^^
+    618 |         onClose={() => setShowEpicContentViewer(false)} 
+    619 |       />
+    620 |
+
+ERROR in src/components/TrueHeroesInterface.tsx:617:20
+TS2552: Cannot find name 'showEpicContentViewer'. Did you mean 'EpicContentViewer'?
+    615 |       {/* Epic Content Viewer */}
+    616 |       <EpicContentViewer 
+  > 617 |         isVisible={showEpicContentViewer} 
+        |                    ^^^^^^^^^^^^^^^^^^^^^
+    618 |         onClose={() => setShowEpicContentViewer(false)} 
+    619 |       />
+    620 |
+
+ERROR in src/components/TrueHeroesInterface.tsx:618:9
+TS2552: Cannot find name 'onClose'. Did you mean 'onclose'?
+    616 |       <EpicContentViewer 
+    617 |         isVisible={showEpicContentViewer} 
+  > 618 |         onClose={() => setShowEpicContentViewer(false)} 
+        |         ^^^^^^^
+    619 |       />
+    620 |
+    621 |       {/* 🚀 GOLDORAK EASTER EGG - Tapez G-O-L-D-O-R-A-K pour l'activer! */}
+
+ERROR in src/components/TrueHeroesInterface.tsx:618:17
+TS2349: This expression is not callable.
+  Type '{}' has no call signatures.
+    616 |       <EpicContentViewer 
+    617 |         isVisible={showEpicContentViewer} 
+  > 618 |         onClose={() => setShowEpicContentViewer(false)} 
+        |                 ^
+    619 |       />
+    620 |
+    621 |       {/* 🚀 GOLDORAK EASTER EGG - Tapez G-O-L-D-O-R-A-K pour l'activer! */}
+
+ERROR in src/components/TrueHeroesInterface.tsx:618:18
+TS1136: Property assignment expected.
+    616 |       <EpicContentViewer 
+    617 |         isVisible={showEpicContentViewer} 
+  > 618 |         onClose={() => setShowEpicContentViewer(false)} 
+        |                  ^
+    619 |       />
+    620 |
+    621 |       {/* 🚀 GOLDORAK EASTER EGG - Tapez G-O-L-D-O-R-A-K pour l'activer! */}
+
+ERROR in src/components/TrueHeroesInterface.tsx:618:21
+TS1005: ';' expected.
+    616 |       <EpicContentViewer 
+    617 |         isVisible={showEpicContentViewer} 
+  > 618 |         onClose={() => setShowEpicContentViewer(false)} 
+        |                     ^^
+    619 |       />
+    620 |
+    621 |       {/* 🚀 GOLDORAK EASTER EGG - Tapez G-O-L-D-O-R-A-K pour l'activer! */}
+
+ERROR in src/components/TrueHeroesInterface.tsx:618:24
+TS2552: Cannot find name 'setShowEpicContentViewer'. Did you mean 'EpicContentViewer'?
+    616 |       <EpicContentViewer 
+    617 |         isVisible={showEpicContentViewer} 
+  > 618 |         onClose={() => setShowEpicContentViewer(false)} 
+        |                        ^^^^^^^^^^^^^^^^^^^^^^^^
+    619 |       />
+    620 |
+    621 |       {/* 🚀 GOLDORAK EASTER EGG - Tapez G-O-L-D-O-R-A-K pour l'activer! */}
+
+ERROR in src/components/TrueHeroesInterface.tsx:618:55
+TS1128: Declaration or statement expected.
+    616 |       <EpicContentViewer 
+    617 |         isVisible={showEpicContentViewer} 
+  > 618 |         onClose={() => setShowEpicContentViewer(false)} 
+        |                                                       ^
+    619 |       />
+    620 |
+    621 |       {/* 🚀 GOLDORAK EASTER EGG - Tapez G-O-L-D-O-R-A-K pour l'activer! */}
+
+ERROR in src/components/TrueHeroesInterface.tsx:623:19
+TS2552: Cannot find name 'showGoldorakEasterEgg'. Did you mean 'GoldorakEasterEgg'?
+    621 |       {/* 🚀 GOLDORAK EASTER EGG - Tapez G-O-L-D-O-R-A-K pour l'activer! */}
+    622 |       <GoldorakEasterEgg 
+  > 623 |         isActive={showGoldorakEasterEgg} 
+        |                   ^^^^^^^^^^^^^^^^^^^^^
+    624 |         onClose={() => setShowGoldorakEasterEgg(false)} 
+    625 |       />
+    626 |     </div>
+
+ERROR in src/components/TrueHeroesInterface.tsx:624:24
+TS2552: Cannot find name 'setShowGoldorakEasterEgg'. Did you mean 'GoldorakEasterEgg'?
+    622 |       <GoldorakEasterEgg 
+    623 |         isActive={showGoldorakEasterEgg} 
+  > 624 |         onClose={() => setShowGoldorakEasterEgg(false)} 
+        |                        ^^^^^^^^^^^^^^^^^^^^^^^^
+    625 |       />
+    626 |     </div>
+    627 |   );
+
+ERROR in src/components/TrueHeroesInterface.tsx:626:5
+TS1128: Declaration or statement expected.
+    624 |         onClose={() => setShowGoldorakEasterEgg(false)} 
+    625 |       />
+  > 626 |     </div>
+        |     ^^
+    627 |   );
+    628 | };
+    629 |
+
+ERROR in src/components/TrueHeroesInterface.tsx:626:7
+TS2304: Cannot find name 'div'.
+    624 |         onClose={() => setShowGoldorakEasterEgg(false)} 
+    625 |       />
+  > 626 |     </div>
+        |       ^^^
+    627 |   );
+    628 | };
+    629 |
+
+ERROR in src/components/TrueHeroesInterface.tsx:627:3
+TS1109: Expression expected.
+    625 |       />
+    626 |     </div>
+  > 627 |   );
+        |   ^
+    628 | };
+    629 |
+    630 | export default TrueHeroesInterface; 
+
+ERROR in src/components/TrueHeroesInterface.tsx:628:1
+TS1128: Declaration or statement expected.
+    626 |     </div>
+    627 |   );
+  > 628 | };
+        | ^
+    629 |
+    630 | export default TrueHeroesInterface; 
+
+ERROR in src/pages/TestPages.tsx:3:33
+TS2307: Cannot find module '../components/SimpleGameInterface' or its corresponding type declarations.
+    1 | import React from 'react';
+    2 | import TrueHeroesInterface from '../components/TrueHeroesInterface';
+  > 3 | import SimpleGameInterface from '../components/SimpleGameInterface';
+      |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    4 | import ModernGameInterface from '../components/ModernGameInterface';
+    5 | import SimpleModernInterface from '../components/SimpleModernInterface';
+    6 |
+
+ERROR in src/pages/TestPages.tsx:4:33
+TS2307: Cannot find module '../components/ModernGameInterface' or its corresponding type declarations.
+    2 | import TrueHeroesInterface from '../components/TrueHeroesInterface';
+    3 | import SimpleGameInterface from '../components/SimpleGameInterface';
+  > 4 | import ModernGameInterface from '../components/ModernGameInterface';
+      |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    5 | import SimpleModernInterface from '../components/SimpleModernInterface';
+    6 |
+    7 | // Page de test pour TrueHeroesInterface
+
+ERROR in src/pages/TestPages.tsx:5:35
+TS2307: Cannot find module '../components/SimpleModernInterface' or its corresponding type declarations.
+    3 | import SimpleGameInterface from '../components/SimpleGameInterface';
+    4 | import ModernGameInterface from '../components/ModernGameInterface';
+  > 5 | import SimpleModernInterface from '../components/SimpleModernInterface';
+      |                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    6 |
+    7 | // Page de test pour TrueHeroesInterface
+    8 | export const TestTrueHeroesInterface: React.FC = () => {
+
+ERROR in src/services/gameActionService.ts:21:27
+TS2554: Expected 3 arguments, but got 2.
+    19 |         return ApiService.attackTarget(params.attackerId, params.targetId);
+    20 |       case 'recruit':
+  > 21 |         return ApiService.recruitUnits(params.buildingId, params.data);
+       |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    22 |       default:
+    23 |         throw new Error(`Unknown quick action: ${action}`);
+    24 |     }
+
