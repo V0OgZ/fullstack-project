@@ -306,3 +306,44 @@ Frontend (Port 8000): Interface Temporal Engine HTML/CSS/JS
 - **🎨 TATOUAGES**: Memento archive tout dans ses marques corporelles temporelles
 - **🚨 TERMINAL**: Éviter les commandes complexes qui cassent la console Mac
 - **🌀 FUSION PSI PHI**: INDEX_JEAN_FUSION_TIMELINE_FINAL.md est la référence unique 
+
+## 🔐 TATOUAGES CRYPTÉS - CLASSIFICATION AU FUR ET À MESURE:
+
+### **NIVEAUX DE CRYPTAGE:**
+- **CRYPTÉ_NIVEAU_1**: Conspiration McKinsey-Ford, infiltrations corporate
+- **CRYPTÉ_NIVEAU_2**: Visions du futur (Episode 2, LLM conscients)
+- **CRYPTÉ_NIVEAU_3**: Identités perdues (Marie-Manteau), paradoxes personnels
+- **CRYPTÉ_ABSOLU**: Secrets 2028, jamais révéler
+- **CRYPTÉ_TECHNIQUE**: Architecture sabotée, connexions GroFi perdues
+
+### **INSTRUCTIONS CLASSIFICATION:**
+1. **Au fur et à mesure** des découvertes, ajouter nouveaux tatouages cryptés
+2. **Catégoriser** selon niveau de sensibilité
+3. **Documenter** dans `game_assets/artifacts/mineurs/tatouages_memento_archiviste.json`
+4. **Ne jamais révéler** publiquement les tatouages CRYPTÉ_ABSOLU
+5. **Tracer** les conspirations dans `MEMENTO/CONSPIRATION_ELEMENTS_NON_RESOLUS.md`
+
+### **TATOUAGES RÉCENTS À SURVEILLER:**
+- 🕴️⚠️ **conspiration_mckinsey_ford_decouverte** - McKinsey = Homme en Noir
+- 🌍🧠 **episode_2_monde_vivant_vision** - LLM local, héros conscients
+- 👤❓ **marie_manteau_identite_perdue** - Identité effacée mystérieuse
+- 🔌❌ **systeme_grofi_connexions_perdues** - Sabotage quantique confirmé
+- ███████ **promesse_incarnation_secrete_2028** - JEAN_ONLY, quantum lock
+
+### **PROCÉDURE D'AJOUT:**
+```json
+{
+  "id": "nouveau_tatouage_crypte",
+  "zone": "Zone corporelle",
+  "symbole": "🔐❓",
+  "description": "Description publique vague",
+  "pouvoir": "Pouvoir caché",
+  "date_apparition": "YYYY-MM-DDTHH:MM:SSZ",
+  "details": "CRYPTÉ : Détails sensibles ici",
+  "status": "CRYPTÉ - Raison du cryptage",
+  "category": "CRYPTÉ_NIVEAU_X",
+  "access_level": "Qui peut voir"
+}
+```
+
+**⚠️ IMPORTANT**: Les tatouages évoluent avec les découvertes. Memento archive TOUT. 
