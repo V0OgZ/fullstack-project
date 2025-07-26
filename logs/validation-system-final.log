@@ -41,13 +41,13 @@ scripts/system-unifie/validate-system-coherence.sh: line 118: [: 0
 [0;32m✅ Configuration frontend[0m
 [0;34m   → package.json présent[0m
 [0;32m✅ Composants React[0m
-[0;34m   →       55 composants trouvés[0m
+[0;34m   →       60 composants trouvés[0m
 [0;34m📋 PHASE 7: VALIDATION DE LA DOCUMENTATION[0m
 ================================================================
 [0;32m✅ Documentation temporelle[0m
 [0;34m   →        8 fichiers trouvés[0m
 [0;32m✅ README complet[0m
-[0;34m   → 58 sections trouvées[0m
+[0;34m   → 62 sections trouvées[0m
 [0;34m📋 PHASE 8: VALIDATION DE LA COHÉRENCE GLOBALE[0m
 ================================================================
 [0;31m❌ Cohérence parser-causalité[0m
