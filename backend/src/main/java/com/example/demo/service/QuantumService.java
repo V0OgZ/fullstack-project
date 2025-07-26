@@ -21,8 +21,8 @@ import com.example.demo.model.Position;
 @Service
 public class QuantumService {
     
-    // @Autowired
-    // private CausalCollapseService causalCollapseService; // TODO: À reconnecter
+    @Autowired
+    private CausalCollapseService causalCollapseService;
     
     // 🌀 États Psi en superposition
     private Map<String, QuantumState> psiStates = new ConcurrentHashMap<>();
@@ -147,8 +147,7 @@ public class QuantumService {
         totalCollapses++;
         
         // Notifier le CausalCollapseService
-        // TODO: Reconnecter quand CausalCollapseService sera disponible
-        /*
+        // Déclencher le collapse causal
         if (causalCollapseService != null) {
             Map<String, Object> collapseData = new HashMap<>();
             collapseData.put("stateId", stateId);
@@ -156,7 +155,6 @@ public class QuantumService {
             collapseData.put("observer", observerId);
             causalCollapseService.handleCollapse("QUANTUM_OBSERVATION", collapseData);
         }
-        */
         
         System.out.println("👁️ COLLAPSE QUANTIQUE: " + stateId + 
                           " → " + finalValue + " (observé par " + observerId + ")");
