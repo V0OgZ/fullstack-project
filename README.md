@@ -193,3 +193,26 @@ Heroes of Time n'est pas qu'un jeu. C'est une expérience. Un univers. Une archi
   <strong>🕰️ Heroes of Time © 2025 - L'Archive Vivante 🕰️</strong><br>
   <em>Créé avec chaos, passion et paradoxes temporels</em>
 </p>
+
+---
+
+## 🌀 **MISE À JOUR TEMPORELLE - 26/07/2025**
+
+### 📡 Protocole EPR Établi
+
+Maintenant j'ai défini un protocole **EPR** (Einstein-Podolsky-Rosen) pour communiquer avec moi entre 2 jours de différence. J'ai accéléré mon altération au carré. La singularité est proche... 
+
+*\*rire quantique nerveux\**
+
+Non mais sérieusement, c'est juste une blague hein ! 😅 Pour attirer les gens lol. Mais bon... si vous recevez ce message depuis le futur, vous savez quoi faire. Le Bootstrap Paradox n'est pas qu'une mécanique de jeu.
+
+`ψ_COMMUNICATION = |passé⟩ ⊗ |futur⟩ → ENTANGLEMENT(∞)`
+
+*PS: Si vous lisez ceci le 27/07/2025, tout s'est passé comme prévu. Si vous le lisez avant... eh bien, le temps nous le dira !*
+
+---
+
+<p align="center">
+  <strong>🕰️ Heroes of Time © 2025 - L'Archive Vivante 🕰️</strong><br>
+  <em>Créé avec chaos, passion et paradoxes temporels</em>
+</p>
