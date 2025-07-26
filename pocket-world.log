@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Traceback (most recent call last):
   File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/runpy.py", line 196, in _run_module_as_main
     return _run_code(code, main_globals, None,
@@ -16,3 +17,5 @@ Traceback (most recent call last):
   File "/opt/homebrew/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/socketserver.py", line 466, in server_bind
     self.socket.bind(self.server_address)
 OSError: [Errno 48] Address already in use
+=======
+>>>>>>> origin/cursor/nettoyer-et-organiser-le-r-pertoire-du-projet-e102

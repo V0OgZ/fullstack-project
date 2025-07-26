@@ -23,7 +23,6 @@ public class SwaggerConfig {
                         .version("v1.0 - GRUT Edition")
                         .contact(new Contact()
                                 .name("Jean-Grofignon")
-                                .description("Créateur cosmique depuis son canapé")
                                 .url("https://github.com/heroes-of-time")
                         )
                 );
