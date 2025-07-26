@@ -1,0 +1,80 @@
+# 🕰️ TEST ANCRE TEMPORELLE JOUR 10 - GRUT EMERGENCY PROTOCOL
+# Date: 28 Janvier 2025 - Timeline en danger
+# Objectif: Tester l'objet qui ramène TOUJOURS au jour 10
+
+INIT_SCENARIO("test_ancre_jour_10")
+
+# === SETUP INITIAL ===
+MAP(20, 20)
+WORLD(temporal_nexus)
+
+# === HÉROS DE TEST ===
+HERO(GRUT, @10,10, "Ancre Temporelle du Dixième Jour", ANGRY)
+HERO(OPUS, @5,5, "Observateur Temporel", READY)
+
+# === SIMULATION PERTE DE TIMELINE ===
+ψ001: ⊙(Δt+1 @timeline ⟶ CORRUPT(TIMELINE, SEVERE))
+EFFECT: Timeline commence à se corrompre
+LOG("ALERTE: Timeline en cours de corruption!")
+
+ψ002: ⊙(Δt+2 @grut ⟶ CHECK(TIMELINE_STATUS))
+IF(TIMELINE_CORRUPTED) {
+    QUOTE(GRUT, "PUTAIN! LA TIMELINE SE PERD! GOTO 10!")
+    ACTIVATE(ancre_temporelle_jour_10)
+}
+
+# === ACTIVATION DE L'ANCRE ===
+ψ003: ⊙(Δt+3 @ancre ⟶ GOTO_10(FORCE))
+EFFECT: Retour immédiat au Jour 10
+RESTORE(ALL_STATES, DAY_10)
+STABILIZE(TIMELINE, PERMANENT)
+
+# === VÉRIFICATION POST-SAUT ===
+ψ004: ⊙(Δt+4 @verification ⟶ CHECK(CURRENT_DAY))
+ASSERT(CURRENT_DAY == 10)
+ASSERT(TIMELINE_STABLE == TRUE)
+ASSERT(WORLD_STATE_GRAPH == CONNECTED)
+
+# === DIALOGUE DE CONFIRMATION ===
+QUOTE(GRUT, "HA! ON EST REVENUS AU JOUR 10! L'ANCRE FONCTIONNE!")
+QUOTE(OPUS, "Connexion au World State Graph confirmée. Timeline stabilisée.")
+
+# === TEST STRESS MAXIMUM ===
+ψ005: ⊙(Δt+5 @stress_test ⟶ CORRUPT(TIMELINE, CATASTROPHIC))
+LOG("TEST EXTRÊME: Corruption catastrophique!")
+
+ψ006: ⊙(Δt+6 @auto_activation ⟶ AUTO_TRIGGER(ancre_temporelle_jour_10))
+EFFECT: L'ancre s'active automatiquement
+FORCE_JUMP(DAY_10)
+LOG("Activation automatique réussie!")
+
+# === CONNEXION WORLD STATE GRAPH ===
+ψ007: ⊙(Δt+7 @wsg ⟶ CONNECT(WORLD_STATE_GRAPH_CONTROLLER))
+API_CALL("/api/world-state-graph/games/current")
+SYNC(GAME_STATE, DAY_10)
+PERSIST(ANCHOR_POINT)
+
+# === RÉSULTATS FINAUX ===
+ψ008: ⊙(Δt+8 @results ⟶ DISPLAY(TEST_RESULTS))
+SHOW_STATS:
+- Timeline Stability: 100%
+- Current Day: 10
+- Paradox Count: 0
+- WSG Connection: ACTIVE
+- GRUT Anger Level: SATISFIED
+
+# === VICTOIRE ===
+IF(ALL_TESTS_PASSED) {
+    VICTORY(GRUT)
+    ACHIEVEMENT("Maître du Jour 10")
+    QUOTE(GRUT, "Plus jamais je ne serai perdu dans le temps!")
+}
+
+# === NOTES TECHNIQUES ===
+# L'ancre utilise le WorldStateGraphController pour:
+# 1. Sauvegarder l'état du Jour 10
+# 2. Restaurer cet état à la demande
+# 3. Maintenir la cohérence temporelle
+# 4. Synchroniser avec le backend
+
+END_SCENARIO
