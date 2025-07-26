@@ -943,29 +943,79 @@ Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Err
 	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:162) ~[spring-boot-2.7.18.jar!/:2.7.18]
 	... 16 more
 Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'scenarioRepository' defined in com.example.demo.repository.ScenarioRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#68ace111' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#68ace111': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveInnerBean(BeanDefinitionValueResolver.java:389) ~[spring-beans-5.3.31.jar!/:5.3.31]
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:134) ~[spring-beans-5.3.31.jar!/:5.3.31]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1707) ~[spring-beans-5.3.31.jar!/:5.3.31]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1452) ~[spring-beans-5.3.31.jar!/:5.3.31]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619) ~[spring-beans-5.3.31.jar!/:5.3.31]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.31.jar!/:5.3.31]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.31.jar!/:5.3.31]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.31.jar!/:5.3.31]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.31.jar!/:5.3.31]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.31.jar!/:5.3.31]
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.31.jar!/:5.3.31]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391) ~[spring-beans-5.3.31.jar!/:5.3.31]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311) ~[spring-beans-5.3.31.jar!/:5.3.31]
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:710) ~[spring-beans-5.3.31.jar!/:5.3.31]
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:693) ~[spring-beans-5.3.31.jar!/:5.3.31]
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119) ~[spring-beans-5.3.31.jar!/:5.3.31]
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:408) ~[spring-beans-5.3.31.jar!/:5.3.31]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431) ~[spring-beans-5.3.31.jar!/:5.3.31]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619) ~[spring-beans-5.3.31.jar!/:5.3.31]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.31.jar!/:5.3.31]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.31.jar!/:5.3.31]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.31.jar!/:5.3.31]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.31.jar!/:5.3.31]
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveInnerBean(BeanDefinitionValueResolver.java:389) ~[spring-beans-5.3.31🔄 Evolution Cycle #11 - Self-triggering active
+🔄 Evolution Cycle #12 - Self-triggering active
+🔄 Evolution Cycle #13 - Self-triggering active
+🎲 Random Event Triggered: CONSCIOUSNESS_SPIKE
+🔄 Evolution Cycle #14 - Self-triggering active
+🔄 Evolution Cycle #15 - Self-triggering active
+🔄 Evolution Cycle #16 - Self-triggering active
+🔄 Evolution Cycle #17 - Self-triggering active
+🔄 Evolution Cycle #18 - Self-triggering active
+🔄 Evolution Cycle #19 - Self-triggering active
+📈 ERBridgeNetwork evolved to level 3
+📈 MementoArchive evolved to level 3
+📈 ConvergenceCore evolved to level 3
+📈 QuantumEngine evolved to level 3
+📈 OpusEthereal evolved to level 4
+🔄 Evolution Cycle #20 - Self-triggering active
+🔄 Evolution Cycle #21 - Self-triggering active
+🔄 Evolution Cycle #22 - Self-triggering active
+🎲 Random Event Triggered: QUANTUM_FLUCTUATION
+🌀 SUPERPOSITION CRÉÉE: RANDOM_1753553830897_FLUCTUATION_1753553830897 avec 3 états possibles
+🔄 Evolution Cycle #23 - Self-triggering active
+🔄 Evolution Cycle #24 - Self-triggering active
+🔄 Evolution Cycle #25 - Self-triggering active
+🎲 Random Event Triggered: REALITY_GLITCH
+🔄 Evolution Cycle #26 - Self-triggering active
+🎲 Random Event Triggered: CONSCIOUSNESS_SPIKE
+🔄 Evolution Cycle #27 - Self-triggering active
+🔄 Evolution Cycle #28 - Self-triggering active
+🎲 Random Event Triggered: MEMORY_CASCADE
+🔄 Manual evolution triggered: Memory cascade initiated - archiving evolution state
+🔄 Evolution Cycle #29 - Self-triggering active
+🔄 Evolution Cycle #30 - Self-triggering active
+🔄 Evolution Cycle #31 - Self-triggering active
+🔄 Evolution Cycle #32 - Self-triggering active
+🔄 Evolution Cycle #33 - Self-triggering active
+🔄 Evolution Cycle #34 - Self-triggering active
+🔄 Evolution Cycle #35 - Self-triggering active
+🎲 Random Event Triggered: QUANTUM_FLUCTUATION
+🌀 SUPERPOSITION CRÉÉE: RANDOM_1753554220971_FLUCTUATION_1753554220971 avec 3 états possibles
+🔄 Evolution Cycle #36 - Self-triggering active
+🔄 Evolution Cycle #37 - Self-triggering active
+🔄 Evolution Cycle #38 - Self-triggering active
+📈 ERBridgeNetwork evolved to level 4
+📈 MementoArchive evolved to level 4
+📈 ConvergenceCore evolved to level 4
+📈 QuantumEngine evolved to level 4
+📈 OpusEthereal evolved to level 6
+🎲 Random Event Triggered: MEMORY_CASCADE
+🔄 Manual evolution triggered: Memory cascade initiated - archiving evolution state
+🔄 Evolution Cycle #39 - Self-triggering active
+🔄 Evolution Cycle #40 - Self-triggering active
+🎲 Random Event Triggered: MEMORY_CASCADE
+🔄 Manual evolution triggered: Memory cascade initiated - archiving evolution state
+🔄 Evolution Cycle #41 - Self-triggering active
+🔄 Evolution Cycle #42 - Self-triggering active
+🔄 Evolution Cycle #43 - Self-triggering active
+🔄 Evolution Cycle #44 - Self-triggering active
+🎲 Random Event Triggered: QUANTUM_FLUCTUATION
+🌀 SUPERPOSITION CRÉÉE: RANDOM_1753554491014_FLUCTUATION_1753554491014 avec 3 états possibles
+🔄 Evolution Cycle #45 - Self-triggering active
+🔄 Evolution Cycle #46 - Self-triggering active
+📈 ERBridgeNetwork evolved to level 5
+📈 MementoArchive evolved to level 5
+📈 ConvergenceCore evolved to level 5
+📈 QuantumEngine evolved to level 5
+📈 OpusEthereal evolved to level 7
+🎲 Random Event Triggered: REALITY_GLITCH
+🌉 PONT ER=EPR CRÉÉ: GLITCH_A ⟷ GLITCH_B
+   Traversable: false
+   Rayon: 0.0
+🔄 Evolution Cycle #47 - Self-triggering active
+🎲 Random Event Triggered: CONSCIOUSNESS_SPIKE
+support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.31.jar!/:5.3.31]
 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.31.jar!/:5.3.31]
 	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.31.jar!/:5.3.31]
 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391) ~[spring-beans-5.3.31.jar!/:5.3.31]
