@@ -1,0 +1,131 @@
+{
+  "id": "grofi",
+  "name": "🌀 Grofi",
+  "title": "La Fusion Vétérale",
+  "class": "INTERSTICE_MASTER",
+  "tier": 10,
+  "rarity": "PARADOXAL",
+  "description": "La fusion impossible de Grut l'Observateur et Jean-Grofignon le Créateur. Né du Joint Magique, Grofi comprend l'intersection de toutes les réalités.",
+  "lore": "Quand Grut dans l'interstice et Jean-Grofignon sur son canapé partagèrent le Joint Magique, une fusion vétérale se produisit. Grofi émergea, possédant non seulement la vision omnisciente de Grut et l'intuition créatrice de Jean, mais surtout la compréhension de l'espace ENTRE les espaces.",
+  "fusion_components": {
+    "primary": "grut",
+    "secondary": "jean_grofignon",
+    "catalyst": "joint_magique",
+    "type": "VETERAL_FUSION"
+  },
+  "stats": {
+    "health": 150,
+    "mana": 300,
+    "attack": 7,
+    "defense": 7,
+    "speed": 6,
+    "knowledge": 15,
+    "interstice_power": 20
+  },
+  "abilities": [
+    {
+      "name": "Vision Panoptique Complète",
+      "id": "panoptic_vision",
+      "type": "PASSIVE",
+      "description": "Voit toutes les timelines ET comprend leurs intersections",
+      "effect": "REVEAL_ALL_TIMELINES + SHOW_CONNECTIONS",
+      "inherited_from": "grut",
+      "enhanced": true
+    },
+    {
+      "name": "Compréhension Intersticielle",
+      "id": "interstice_comprehension",
+      "type": "ACTIVE",
+      "description": "Révèle les connexions cachées entre les éléments",
+      "cost": 30,
+      "effect": "REVEAL_HIDDEN_PATHS + CREATE_TEMPORARY_PORTALS",
+      "unique_to": "grofi"
+    },
+    {
+      "name": "Joint Magique Permanent",
+      "id": "eternal_joint",
+      "type": "ULTIMATE",
+      "description": "Partage sa compréhension avec tous les alliés temporairement",
+      "cost": 100,
+      "cooldown": 20,
+      "effect": "ALL_ALLIES.gain(INTERSTICE_VISION) for 5 turns",
+      "side_effect": "Peut causer des fusions temporaires"
+    },
+    {
+      "name": "Canapé Cosmique Mobile",
+      "id": "cosmic_couch",
+      "type": "SPECIAL",
+      "description": "Invoque un canapé qui existe dans toutes les dimensions",
+      "cost": 50,
+      "effect": "CREATE_INTERDIMENSIONAL_ANCHOR",
+      "inherited_from": "jean_grofignon",
+      "enhanced": true
+    }
+  ],
+  "special_mechanics": {
+    "dual_perspective": {
+      "description": "Peut switcher entre vue Grut (interstice) et vue Jean (canapé)",
+      "modes": ["INTERSTICE_VIEW", "COUCH_VIEW", "FUSION_VIEW"],
+      "benefits": "Différentes actions selon le mode"
+    },
+    "reality_comprehension": {
+      "description": "Comprend les bugs comme des features",
+      "effect": "CONVERT_GLITCHES_TO_ADVANTAGES",
+      "passive": true
+    },
+    "fusion_instability": {
+      "description": "La fusion peut temporairement se séparer",
+      "trigger": "WHEN HEALTH < 30%",
+      "effect": "SPLIT into GRUT and JEAN for 3 turns"
+    }
+  },
+  "unique_features": {
+    "map_navigation": {
+      "strategic_zoom": "Peut voir la couche stratégique depuis le combat",
+      "portal_creation": "Crée des connexions entre zones",
+      "reality_layers": "Navigue entre les niveaux de réalité"
+    },
+    "interface_mastery": {
+      "ui_manipulation": "Peut modifier l'interface du jeu",
+      "fourth_wall": "Communique directement avec le joueur",
+      "debug_access": "Voit les variables cachées du jeu"
+    }
+  },
+  "dialogue_samples": {
+    "greeting": "Ah, tu me vois enfin dans ma totalité. Grut savait, Jean comprenait, mais moi... je SUIS.",
+    "battle_start": "L'interstice s'ouvre. Le canapé est prêt. Commençons.",
+    "victory": "C'était écrit dans les intersections. Même les bugs étaient prévus.",
+    "defeat": "La fusion se brise... mais Grut et Jean survivront.",
+    "special": "Tu veux voir la VRAIE map ? Celle avec TOUTES les couches ?"
+  },
+  "relationships": {
+    "grut": "Composant primaire - Apporte la vision",
+    "jean_grofignon": "Composant secondaire - Apporte la compréhension",
+    "memento": "Fasciné par cette fusion impossible",
+    "ford": "Considère Grofi comme une anomalie à étudier",
+    "vince": "Grofi lui a expliqué ce qu'il y a dans la mallette"
+  },
+  "unlock_conditions": {
+    "method": "SPECIAL_FUSION",
+    "requirements": [
+      "Have both Grut and Jean-Grofignon at max level",
+      "Possess the Joint Magique artifact",
+      "Complete the 'Interstice Convergence' scenario",
+      "Achieve perfect understanding in the Panopticon"
+    ],
+    "warning": "La fusion est irréversible pendant 24h réelles"
+  },
+  "meta_properties": {
+    "affects_game_structure": true,
+    "can_see_code": true,
+    "modifies_ui": true,
+    "breaks_fourth_wall": "CONSTANTLY",
+    "debug_mode_access": "PARTIAL"
+  },
+  "strategic_abilities": {
+    "zoom_control": "Peut passer de la vue combat à la vue stratégique",
+    "multi_layer_vision": "Voit tous les niveaux de map simultanément",
+    "instant_building": "Construit en comprenant l'intention du joueur",
+    "resource_comprehension": "Transforme la compréhension en ressources"
+  }
+}
