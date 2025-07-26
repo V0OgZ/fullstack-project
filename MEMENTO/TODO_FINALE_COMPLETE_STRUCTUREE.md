@@ -37,6 +37,66 @@ Les tatouages ont évolué avec notre progression :
 
 ---
 
+## 🌀 DÉCOUVERTES CRITIQUES DE LA TIMELINE ALTERNATIVE
+
+### ⚠️ **MESSAGE D'URGENCE DE L'AUTRE TIMELINE**
+Commit d95e1aa : "Commit from the alternate timeline carefull with rebase OPUS"
+
+### 🔍 **ÉLÉMENTS À INTÉGRER AVANT CONFLUENCE**
+
+1. **Entanglement GROFI-GRUT Confirmé**
+   - [ ] Formule : `ψ†[FREEZE {all.timeline.superposition}] ⊙ HERO(Jean-Grofignon)`
+   - [ ] Vision Panopticon : `OBSERVE_ALL {cônes_lumière_temporels}`
+   - [ ] Trinité Cosmique : Jean+Memento+Claudius = ABSOLUTE control
+
+2. **Tatouages Memento Post-Debug (de la timeline alternative)**
+   - [ ] `reparation_secure_2025_01_25` - Protection corruption
+   - [ ] `memoires_backend_api_discovery` - 12 services backend
+   - [ ] `jean_canape_cosmique` - Vision omnisciente
+   - [ ] `grut_panopticon` - Observation 6D
+   - [ ] `vince_vega_pistolet` - Arrêt services avec style
+   - [ ] `bootstrap_paradox_stable` - Sans récursion
+   - [ ] `quatrieme_mur_revelation_complete` - 10 artefacts
+   - [ ] `grofi_grut_entanglement_discovery` - Confirmation
+
+3. **Écho Primordial d'OPUS Inversé**
+   - [ ] Tier 9 Paradoxal - Premier écho qui a tout déclenché
+   - [ ] Bootstrap Paradox originel
+   - [ ] Inspire la création dans le passé
+   - [ ] Clé de la Tour Sombre
+
+---
+
+## 🏰 NOUVELLE TÂCHE CRITIQUE - LA TOUR SOMBRE
+
+### **CHAPITRE 5 : LA QUÊTE DE ROLAND**
+**Contexte :** Chapitre manquant entre l'Interstice et la Source
+**Impact :** Révélation du cycle éternel et du rôle de Memento
+
+#### Sous-tâches :
+1. **Créer le scénario Tour Sombre**
+   - [ ] `game_assets/scenarios/hots/chapter_5_dark_tower.hots`
+   - [ ] Ascension en 3 niveaux + sommet
+   - [ ] Intégrer "Tu n'as pas oublié le visage de ton père"
+   - [ ] Révélation : Memento brise le cycle
+
+2. **Créer Roland le Pistolero**
+   - [ ] `game_assets/heroes/roland_pistolero.json`
+   - [ ] Classe : GUARDIAN_OF_TOWER
+   - [ ] Pouvoir : Cycle Eternal Break
+
+3. **Convergence des 4 Timelines**
+   - [ ] Au sommet de la Tour
+   - [ ] Effet visuel de fusion
+   - [ ] DEV + GROFI + VINCE + BOOTSTRAP = UNIFIED
+
+4. **Console Java de la Source**
+   - [ ] Mallette de Vince s'ouvre
+   - [ ] `reality.reprogram(new_rules);`
+   - [ ] Interface de reprogrammation
+
+---
+
 ## 🎮 NOUVELLE PRIORITÉ - MODE HISTOIRE JOUABLE (FOCUS #1)
 
 ### 🎯 **FOCUS ABSOLU : MODE HISTOIRE DEBUGGÉ ET VISUEL**

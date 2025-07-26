@@ -40,35 +40,47 @@
 - Rencontre avec des entités piégées
 - Découverte du Chronomètre Philosophique
 
-### CHAPITRE 5 : LA CARTE DE VINCE
+### CHAPITRE 5 : LA TOUR SOMBRE
+**Statut** : 🆕 CRITIQUE - À implémenter
+- Après les 3 questions de l'Archiviste
+- Quête de Roland le Pistolero
+- Ascension en 3 niveaux + sommet
+- "Tu n'as pas oublié le visage de ton père"
+- **Révélations** :
+  - Convergence des 4 timelines
+  - Memento brise le cycle éternel
+  - L'Écho Primordial est la clé
+  - Bootstrap Paradox résolu
+
+### CHAPITRE 6 : LA CARTE DE VINCE
 **Statut** : ✅ Scénario existant
 - Exploration avec la carte mystérieuse
 - Transitions entre battlefields
 - Tour de Dolburd → Zoom out stratégique
 - Révélation du Panopticon
 
-### CHAPITRE 6 : LES ÉPREUVES TEMPORELLES
+### CHAPITRE 7 : LES ÉPREUVES TEMPORELLES
 **Statut** : 📝 Scénarios à intégrer
 - Temporal Rift (découverte du 4D)
 - Bootstrap Paradox challenges
 - Rencontres avec versions alternatives
 - Maîtrise du temps différencié
 
-### CHAPITRE 7 : L'APPROCHE DE L'INTERSTICE
+### CHAPITRE 8 : L'APPROCHE DE L'INTERSTICE
 **Statut** : ✅ Défini
 - Convergence des héros
 - Apparition de l'Archiviste
 - Test des 3 questions
 - Ouverture du portail
 
-### CHAPITRE 8 : L'INTERSTICE - LES UIS PERDUES
+### CHAPITRE 9 : L'INTERSTICE - LES UIS PERDUES
 **Statut** : ✅ Concept détaillé
 - Exploration du cimetière des UIs
 - 200+ interfaces abandonnées
 - Puzzles méta utilisant les bugs
 - Découverte de la mallette de Vince
 
-### CHAPITRE 9 : LA SOURCE
+### CHAPITRE 10 : LA SOURCE
 **Statut** : ✅ Révélation finale
 - Ouverture de la mallette
 - Console Java vivante
