@@ -1,743 +1,620 @@
-// ⚔️ INTERFACE DE COMBAT BASIQUE - Heroes of Time
-// PRIORITÉ 2 : Combat = cœur du jeu HOMM3
+/**
+ * ⚔️ INTERFACE DE COMBAT - Heroes of Time
+ * 
+ * Version simple pour mode IA et démos
+ * Grille hexagonale 8x6
+ */
 
 class CombatInterface {
-    constructor() {
-        this.combatData = {
-            isActive: false,
-            currentTurn: 1,
-            maxTurns: 50,
-            gridSize: { width: 8, height: 6 },
-            units: [],
-            selectedUnit: null,
-            validMoves: [],
-            validTargets: [],
-            initiative: []
-        };
+    constructor(containerId) {
+        this.container = document.getElementById(containerId);
+        this.canvas = null;
+        this.ctx = null;
+        this.hexGrid = [];
+        this.units = [];
+        this.selectedUnit = null;
+        this.currentTurn = 'player';
         
+        // Configuration hexagones
         this.hexSize = 40;
-        this.hexWidth = this.hexSize * 2;
-        this.hexHeight = this.hexSize * Math.sqrt(3);
-        this.gameId = null;
+        this.gridWidth = 8;
+        this.gridHeight = 6;
+        
+        // État du combat
+        this.turnOrder = [];
+        this.currentUnitIndex = 0;
         
         this.init();
     }
     
-    async init() {
-        await this.loadCombatData();
-        this.createCombatUI();
-        this.bindEvents();
-        this.setupDemoCombat();
-    }
-    
-    async loadCombatData() {
-        try {
-            // Charger les données depuis l'API backend
-            const response = await fetch(`http://localhost:8080/api/temporal/combat/data`);
-            if (response.ok) {
-                const data = await response.json();
-                this.combatData = { ...this.combatData, ...data };
-            }
-        } catch (error) {
-            console.log('Erreur chargement données combat, utilisation données par défaut:', error);
-        }
-    }
-    
-    async saveCombatData() {
-        try {
-            const response = await fetch(`http://localhost:8080/api/temporal/combat/save`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(this.combatData)
-            });
-            
-            if (response.ok) {
-                console.log('✅ Données combat sauvegardées');
-            } else {
-                console.error('❌ Erreur sauvegarde combat');
-            }
-        } catch (error) {
-            console.error('Erreur sauvegarde combat:', error);
-        }
-    }
-    
-    createCombatUI() {
-        // Créer le conteneur principal
-        const combatContainer = document.createElement('div');
-        combatContainer.id = 'combat-interface';
-        combatContainer.className = 'combat-interface';
-        combatContainer.style.display = 'none';
+    init() {
+        // Créer le canvas
+        this.canvas = document.createElement('canvas');
+        this.canvas.width = 800;
+        this.canvas.height = 600;
+        this.canvas.style.border = '2px solid #4a7c7e';
+        this.canvas.style.borderRadius = '10px';
+        this.container.appendChild(this.canvas);
         
-        combatContainer.innerHTML = `
-            <div class="combat-header">
-                <h2>⚔️ Combat</h2>
-                <div class="combat-info">
-                    <span class="turn-counter">Tour ${this.combatData.currentTurn}/${this.combatData.maxTurns}</span>
-                    <span class="initiative-display" id="initiative-display">Initiative: -</span>
-                </div>
-                <button class="close-combat-btn" onclick="combatInterface.hide()">×</button>
+        this.ctx = this.canvas.getContext('2d');
+        
+        // Créer l'interface de contrôle
+        this.createControls();
+        
+        // Initialiser la grille hexagonale
+        this.initHexGrid();
+        
+        // Événements
+        this.canvas.addEventListener('click', (e) => this.handleClick(e));
+        this.canvas.addEventListener('mousemove', (e) => this.handleMouseMove(e));
+        
+        // Charger les unités de test
+        this.loadTestUnits();
+        
+        // Dessiner initial
+        this.draw();
+    }
+    
+    createControls() {
+        const controls = document.createElement('div');
+        controls.className = 'combat-controls';
+        controls.innerHTML = `
+            <div class="turn-indicator">
+                <h3>Tour: <span id="current-turn">Joueur</span></h3>
             </div>
-            
-            <div class="combat-content">
-                <div class="combat-grid-container">
-                    <canvas id="combat-grid" width="640" height="480"></canvas>
-                    <div class="combat-overlay" id="combat-overlay"></div>
-                </div>
-                
-                <div class="combat-sidebar">
-                    <div class="unit-info-panel">
-                        <h3>👤 Informations Unité</h3>
-                        <div id="unit-info" class="unit-info">
-                            <p>Sélectionnez une unité</p>
-                        </div>
-                    </div>
-                    
-                    <div class="combat-actions">
-                        <h3>⚔️ Actions</h3>
-                        <div class="action-buttons">
-                            <button id="move-btn" class="action-btn" onclick="combatInterface.startMove()">
-                                🚶 Déplacer
-                            </button>
-                            <button id="attack-btn" class="action-btn" onclick="combatInterface.startAttack()">
-                                ⚔️ Attaquer
-                            </button>
-                            <button id="wait-btn" class="action-btn" onclick="combatInterface.wait()">
-                                ⏸️ Attendre
-                            </button>
-                            <button id="defend-btn" class="action-btn" onclick="combatInterface.defend()">
-                                🛡️ Défendre
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="combat-log">
-                        <h3>📜 Journal de Combat</h3>
-                        <div id="combat-log-content" class="log-content">
-                            <div class="log-entry">Combat commencé</div>
-                        </div>
-                    </div>
-                </div>
+            <div class="unit-info" id="unit-info">
+                <p>Sélectionnez une unité</p>
             </div>
-            
-            <div class="combat-footer">
-                <button class="combat-btn primary" onclick="combatInterface.nextTurn()">
-                    ⏰ Tour Suivant
-                </button>
-                <button class="combat-btn secondary" onclick="combatInterface.autoResolve()">
-                    🎲 Résolution Auto
-                </button>
-                <button class="combat-btn warning" onclick="combatInterface.surrender()">
-                    🏳️ Se Rendre
-                </button>
+            <div class="action-buttons">
+                <button onclick="combat.endTurn()">⏭️ Fin de Tour</button>
+                <button onclick="combat.useAbility(1)">🔥 Capacité 1</button>
+                <button onclick="combat.useAbility(2)">⚡ Capacité 2</button>
+            </div>
+            <div class="combat-log" id="combat-log">
+                <h4>Journal de Combat</h4>
+                <div id="log-content"></div>
             </div>
         `;
         
-        document.body.appendChild(combatContainer);
-        this.container = combatContainer;
-        this.canvas = document.getElementById('combat-grid');
-        this.ctx = this.canvas.getContext('2d');
+        this.container.appendChild(controls);
     }
     
-    bindEvents() {
-        // Gestion des clics sur la grille
-        this.canvas.addEventListener('click', (e) => {
-            const rect = this.canvas.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            this.handleGridClick(x, y);
-        });
-        
-        // Gestion des touches
-        document.addEventListener('keydown', (e) => {
-            if (!this.combatData.isActive) return;
-            
-            switch(e.key) {
-                case 'Escape':
-                    this.clearSelection();
-                    break;
-                case 'Enter':
-                    this.nextTurn();
-                    break;
-                case 'm':
-                case 'M':
-                    this.startMove();
-                    break;
-                case 'a':
-                case 'A':
-                    this.startAttack();
-                    break;
+    initHexGrid() {
+        // Créer la grille hexagonale
+        for (let row = 0; row < this.gridHeight; row++) {
+            this.hexGrid[row] = [];
+            for (let col = 0; col < this.gridWidth; col++) {
+                const hex = {
+                    row: row,
+                    col: col,
+                    x: this.getHexX(col, row),
+                    y: this.getHexY(row),
+                    occupied: false,
+                    highlighted: false,
+                    inRange: false
+                };
+                this.hexGrid[row][col] = hex;
             }
-        });
-    }
-    
-    setupDemoCombat() {
-        // Créer des unités de démonstration
-        this.combatData.units = [
-            {
-                id: 1,
-                name: "Chevalier",
-                type: "cavalry",
-                team: "player",
-                x: 2,
-                y: 2,
-                hp: 100,
-                maxHp: 100,
-                attack: 25,
-                defense: 15,
-                speed: 6,
-                initiative: 8,
-                hasMoved: false,
-                hasAttacked: false
-            },
-            {
-                id: 2,
-                name: "Archer",
-                type: "ranged",
-                team: "player",
-                x: 1,
-                y: 3,
-                hp: 60,
-                maxHp: 60,
-                attack: 20,
-                defense: 8,
-                speed: 4,
-                initiative: 10,
-                hasMoved: false,
-                hasAttacked: false
-            },
-            {
-                id: 3,
-                name: "Gobelin",
-                type: "infantry",
-                team: "enemy",
-                x: 5,
-                y: 3,
-                hp: 40,
-                maxHp: 40,
-                attack: 15,
-                defense: 5,
-                speed: 5,
-                initiative: 12,
-                hasMoved: false,
-                hasAttacked: false
-            },
-            {
-                id: 4,
-                name: "Orc",
-                type: "infantry",
-                team: "enemy",
-                x: 6,
-                y: 2,
-                hp: 80,
-                maxHp: 80,
-                attack: 30,
-                defense: 12,
-                speed: 4,
-                initiative: 6,
-                hasMoved: false,
-                hasAttacked: false
-            }
-        ];
-        
-        this.updateInitiative();
-        this.renderCombatGrid();
-    }
-    
-    show() {
-        this.combatData.isActive = true;
-        this.container.style.display = 'flex';
-        this.renderCombatGrid();
-        this.updateDisplay();
-        console.log('⚔️ Interface de combat ouverte');
-    }
-    
-    hide() {
-        this.combatData.isActive = false;
-        this.container.style.display = 'none';
-        this.clearSelection();
-        console.log('⚔️ Interface de combat fermée');
-    }
-    
-    toggle() {
-        if (this.combatData.isActive) {
-            this.hide();
-        } else {
-            this.show();
         }
     }
     
-    renderCombatGrid() {
+    getHexX(col, row) {
+        const offset = row % 2 === 0 ? 0 : this.hexSize * 0.866;
+        return 60 + col * this.hexSize * 1.732 + offset;
+    }
+    
+    getHexY(row) {
+        return 60 + row * this.hexSize * 1.5;
+    }
+    
+    loadTestUnits() {
+        // Unités du joueur
+        this.addUnit({
+            id: 'hero_1',
+            name: 'Arthur',
+            team: 'player',
+            hp: 100,
+            maxHp: 100,
+            mp: 50,
+            maxMp: 50,
+            attack: 15,
+            defense: 10,
+            speed: 5,
+            range: 3,
+            position: { row: 2, col: 1 },
+            icon: '⚔️',
+            abilities: [
+                { name: 'Frappe héroïque', damage: 25, mpCost: 10 },
+                { name: 'Bouclier sacré', effect: 'defense+', mpCost: 15 }
+            ]
+        });
+        
+        this.addUnit({
+            id: 'hero_2',
+            name: 'Merlin',
+            team: 'player',
+            hp: 70,
+            maxHp: 70,
+            mp: 100,
+            maxMp: 100,
+            attack: 10,
+            defense: 5,
+            speed: 3,
+            range: 5,
+            position: { row: 3, col: 1 },
+            icon: '🧙‍♂️',
+            abilities: [
+                { name: 'Boule de feu', damage: 30, mpCost: 20 },
+                { name: 'Téléportation', effect: 'teleport', mpCost: 25 }
+            ]
+        });
+        
+        // Unités ennemies
+        this.addUnit({
+            id: 'enemy_1',
+            name: 'Gobelin',
+            team: 'enemy',
+            hp: 50,
+            maxHp: 50,
+            mp: 0,
+            maxMp: 0,
+            attack: 10,
+            defense: 5,
+            speed: 4,
+            range: 1,
+            position: { row: 2, col: 6 },
+            icon: '👺'
+        });
+        
+        this.addUnit({
+            id: 'enemy_2',
+            name: 'Squelette',
+            team: 'enemy',
+            hp: 40,
+            maxHp: 40,
+            mp: 0,
+            maxMp: 0,
+            attack: 12,
+            defense: 3,
+            speed: 6,
+            range: 2,
+            position: { row: 3, col: 6 },
+            icon: '💀'
+        });
+        
+        // Initialiser l'ordre des tours
+        this.calculateTurnOrder();
+    }
+    
+    addUnit(unitData) {
+        const unit = {
+            ...unitData,
+            moved: false,
+            acted: false
+        };
+        
+        this.units.push(unit);
+        
+        // Marquer l'hexagone comme occupé
+        const hex = this.hexGrid[unit.position.row][unit.position.col];
+        if (hex) {
+            hex.occupied = true;
+            hex.unit = unit;
+        }
+    }
+    
+    calculateTurnOrder() {
+        // Trier par vitesse
+        this.turnOrder = [...this.units].sort((a, b) => b.speed - a.speed);
+    }
+    
+    draw() {
+        // Effacer le canvas
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         
-        // Dessiner la grille hexagonale
-        for (let row = 0; row < this.combatData.gridSize.height; row++) {
-            for (let col = 0; col < this.combatData.gridSize.width; col++) {
-                this.drawHexagon(col, row);
-            }
-        }
+        // Dessiner la grille
+        this.drawHexGrid();
         
         // Dessiner les unités
-        this.combatData.units.forEach(unit => {
-            this.drawUnit(unit);
-        });
+        this.drawUnits();
         
-        // Dessiner les cases valides
-        this.drawValidMoves();
-        this.drawValidTargets();
+        // Dessiner l'UI
+        this.drawUI();
     }
     
-    drawHexagon(col, row) {
-        const x = col * this.hexWidth * 0.75 + this.hexWidth / 2;
-        const y = row * this.hexHeight + (col % 2) * this.hexHeight / 2 + this.hexHeight / 2;
+    drawHexGrid() {
+        for (let row = 0; row < this.gridHeight; row++) {
+            for (let col = 0; col < this.gridWidth; col++) {
+                const hex = this.hexGrid[row][col];
+                this.drawHex(hex);
+            }
+        }
+    }
+    
+    drawHex(hex) {
+        const x = hex.x;
+        const y = hex.y;
+        const size = this.hexSize;
         
         this.ctx.beginPath();
         for (let i = 0; i < 6; i++) {
-            const angle = (i * Math.PI) / 3;
-            const hexX = x + this.hexSize * Math.cos(angle);
-            const hexY = y + this.hexSize * Math.sin(angle);
+            const angle = (Math.PI / 3) * i;
+            const hx = x + size * Math.cos(angle);
+            const hy = y + size * Math.sin(angle);
             
             if (i === 0) {
-                this.ctx.moveTo(hexX, hexY);
+                this.ctx.moveTo(hx, hy);
             } else {
-                this.ctx.lineTo(hexX, hexY);
+                this.ctx.lineTo(hx, hy);
             }
         }
         this.ctx.closePath();
         
-        // Couleur de base
-        this.ctx.fillStyle = 'rgba(78, 205, 196, 0.1)';
-        this.ctx.fill();
-        this.ctx.strokeStyle = 'rgba(78, 205, 196, 0.3)';
-        this.ctx.lineWidth = 1;
-        this.ctx.stroke();
+        // Couleur selon l'état
+        if (hex.highlighted) {
+            this.ctx.fillStyle = 'rgba(74, 124, 126, 0.3)';
+        } else if (hex.inRange) {
+            this.ctx.fillStyle = 'rgba(199, 244, 100, 0.2)';
+        } else {
+            this.ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+        }
         
-        // Stocker les coordonnées pour les clics
-        if (!this.hexCoords) this.hexCoords = {};
-        this.hexCoords[`${col},${row}`] = { x, y, col, row };
+        this.ctx.fill();
+        this.ctx.strokeStyle = '#4a7c7e';
+        this.ctx.stroke();
+    }
+    
+    drawUnits() {
+        for (const unit of this.units) {
+            this.drawUnit(unit);
+        }
     }
     
     drawUnit(unit) {
-        const hex = this.hexCoords[`${unit.x},${unit.y}`];
+        const hex = this.hexGrid[unit.position.row][unit.position.col];
         if (!hex) return;
         
         const x = hex.x;
         const y = hex.y;
         
-        // Couleur selon l'équipe
-        const color = unit.team === 'player' ? '#4ecdc4' : '#e74c3c';
-        const bgColor = unit.team === 'player' ? 'rgba(78, 205, 196, 0.3)' : 'rgba(231, 76, 60, 0.3)';
-        
-        // Dessiner le fond de l'unité
+        // Dessiner le cercle de l'unité
         this.ctx.beginPath();
-        this.ctx.arc(x, y, this.hexSize * 0.8, 0, 2 * Math.PI);
-        this.ctx.fillStyle = bgColor;
+        this.ctx.arc(x, y, 25, 0, Math.PI * 2);
+        this.ctx.fillStyle = unit.team === 'player' ? '#4a7c7e' : '#c44569';
         this.ctx.fill();
-        this.ctx.strokeStyle = color;
-        this.ctx.lineWidth = 2;
-        this.ctx.stroke();
         
-        // Dessiner l'icône de l'unité
-        this.ctx.fillStyle = color;
-        this.ctx.font = '20px Arial';
-        this.ctx.textAlign = 'center';
-        this.ctx.textBaseline = 'middle';
-        
-        const icons = {
-            cavalry: '🐎',
-            ranged: '🏹',
-            infantry: '⚔️',
-            magic: '🔮'
-        };
-        
-        this.ctx.fillText(icons[unit.type] || '👤', x, y - 5);
-        
-        // Dessiner la barre de vie
-        const healthPercent = unit.hp / unit.maxHp;
-        const barWidth = this.hexSize * 1.2;
-        const barHeight = 6;
-        
-        this.ctx.fillStyle = '#e74c3c';
-        this.ctx.fillRect(x - barWidth/2, y + 15, barWidth, barHeight);
-        
-        this.ctx.fillStyle = '#27ae60';
-        this.ctx.fillRect(x - barWidth/2, y + 15, barWidth * healthPercent, barHeight);
-        
-        // Bordure de la barre
-        this.ctx.strokeStyle = '#2c3e50';
-        this.ctx.lineWidth = 1;
-        this.ctx.strokeRect(x - barWidth/2, y + 15, barWidth, barHeight);
-        
-        // Sélection
-        if (this.combatData.selectedUnit && this.combatData.selectedUnit.id === unit.id) {
-            this.ctx.strokeStyle = '#f39c12';
+        if (unit === this.selectedUnit) {
+            this.ctx.strokeStyle = '#c7f464';
             this.ctx.lineWidth = 3;
             this.ctx.stroke();
         }
+        
+        // Dessiner l'icône
+        this.ctx.font = '24px Arial';
+        this.ctx.textAlign = 'center';
+        this.ctx.textBaseline = 'middle';
+        this.ctx.fillText(unit.icon, x, y);
+        
+        // Barre de vie
+        const barWidth = 40;
+        const barHeight = 6;
+        const barY = y + 30;
+        
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+        this.ctx.fillRect(x - barWidth/2, barY, barWidth, barHeight);
+        
+        const hpPercent = unit.hp / unit.maxHp;
+        this.ctx.fillStyle = hpPercent > 0.5 ? '#4a7c7e' : 
+                            hpPercent > 0.25 ? '#f39c12' : '#e74c3c';
+        this.ctx.fillRect(x - barWidth/2, barY, barWidth * hpPercent, barHeight);
     }
     
-    drawValidMoves() {
-        if (!this.combatData.selectedUnit) return;
-        
-        this.combatData.validMoves.forEach(pos => {
-            const hex = this.hexCoords[`${pos.x},${pos.y}`];
-            if (!hex) return;
-            
-            this.ctx.beginPath();
-            this.ctx.arc(hex.x, hex.y, this.hexSize * 0.6, 0, 2 * Math.PI);
-            this.ctx.fillStyle = 'rgba(39, 174, 96, 0.3)';
-            this.ctx.fill();
-            this.ctx.strokeStyle = '#27ae60';
-            this.ctx.lineWidth = 2;
-            this.ctx.stroke();
-        });
-    }
-    
-    drawValidTargets() {
-        if (!this.combatData.selectedUnit) return;
-        
-        this.combatData.validTargets.forEach(pos => {
-            const hex = this.hexCoords[`${pos.x},${pos.y}`];
-            if (!hex) return;
-            
-            this.ctx.beginPath();
-            this.ctx.arc(hex.x, hex.y, this.hexSize * 0.6, 0, 2 * Math.PI);
-            this.ctx.fillStyle = 'rgba(231, 76, 60, 0.3)';
-            this.ctx.fill();
-            this.ctx.strokeStyle = '#e74c3c';
-            this.ctx.lineWidth = 2;
-            this.ctx.stroke();
-        });
-    }
-    
-    handleGridClick(x, y) {
-        // Trouver la case hexagonale cliquée
-        const clickedHex = this.findHexAtPosition(x, y);
-        if (!clickedHex) return;
-        
-        // Vérifier s'il y a une unité à cette position
-        const unit = this.getUnitAt(clickedHex.col, clickedHex.row);
-        
-        if (unit) {
-            this.selectUnit(unit);
-        } else if (this.combatData.selectedUnit) {
-            // Vérifier si c'est un mouvement valide
-            if (this.isValidMove(clickedHex.col, clickedHex.row)) {
-                this.moveUnit(this.combatData.selectedUnit, clickedHex.col, clickedHex.row);
-            } else if (this.isValidTarget(clickedHex.col, clickedHex.row)) {
-                const targetUnit = this.getUnitAt(clickedHex.col, clickedHex.row);
-                if (targetUnit) {
-                    this.attackUnit(this.combatData.selectedUnit, targetUnit);
-                }
+    drawUI() {
+        // Indicateur de tour actuel
+        const currentUnit = this.turnOrder[this.currentUnitIndex];
+        if (currentUnit) {
+            const turnText = document.getElementById('current-turn');
+            if (turnText) {
+                turnText.textContent = currentUnit.name;
             }
         }
     }
     
-    findHexAtPosition(mouseX, mouseY) {
-        for (const [key, hex] of Object.entries(this.hexCoords)) {
-            const distance = Math.sqrt(
-                Math.pow(mouseX - hex.x, 2) + Math.pow(mouseY - hex.y, 2)
-            );
-            if (distance <= this.hexSize) {
-                return hex;
+    handleClick(event) {
+        const rect = this.canvas.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        
+        // Trouver l'hexagone cliqué
+        const hex = this.getHexAtPosition(x, y);
+        if (!hex) return;
+        
+        if (hex.occupied && hex.unit) {
+            // Sélectionner l'unité
+            this.selectUnit(hex.unit);
+        } else if (this.selectedUnit && hex.inRange) {
+            // Déplacer l'unité
+            this.moveUnit(this.selectedUnit, hex);
+        }
+    }
+    
+    getHexAtPosition(x, y) {
+        // Algorithme simple de détection d'hexagone
+        for (let row = 0; row < this.gridHeight; row++) {
+            for (let col = 0; col < this.gridWidth; col++) {
+                const hex = this.hexGrid[row][col];
+                const dx = x - hex.x;
+                const dy = y - hex.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < this.hexSize * 0.866) {
+                    return hex;
+                }
             }
         }
         return null;
     }
     
-    getUnitAt(x, y) {
-        return this.combatData.units.find(unit => unit.x === x && unit.y === y);
-    }
-    
     selectUnit(unit) {
-        this.combatData.selectedUnit = unit;
+        this.selectedUnit = unit;
+        this.highlightMovementRange(unit);
         this.updateUnitInfo(unit);
-        this.calculateValidMoves(unit);
-        this.calculateValidTargets(unit);
-        this.renderCombatGrid();
-        
-        console.log(`⚔️ Unité sélectionnée: ${unit.name}`);
     }
     
-    clearSelection() {
-        this.combatData.selectedUnit = null;
-        this.combatData.validMoves = [];
-        this.combatData.validTargets = [];
-        this.updateUnitInfo(null);
-        this.renderCombatGrid();
-    }
-    
-    calculateValidMoves(unit) {
-        if (unit.hasMoved) {
-            this.combatData.validMoves = [];
-            return;
+    highlightMovementRange(unit) {
+        // Réinitialiser
+        for (let row = 0; row < this.gridHeight; row++) {
+            for (let col = 0; col < this.gridWidth; col++) {
+                this.hexGrid[row][col].inRange = false;
+            }
         }
         
-        this.combatData.validMoves = [];
+        // Calculer la portée de mouvement
         const range = unit.speed;
+        const start = unit.position;
         
-        for (let dx = -range; dx <= range; dx++) {
-            for (let dy = -range; dy <= range; dy++) {
-                const newX = unit.x + dx;
-                const newY = unit.y + dy;
-                
-                if (this.isValidPosition(newX, newY) && 
-                    !this.getUnitAt(newX, newY) &&
-                    Math.abs(dx) + Math.abs(dy) <= range) {
-                    this.combatData.validMoves.push({ x: newX, y: newY });
+        // Algorithme BFS pour trouver les hexagones accessibles
+        const visited = new Set();
+        const queue = [{...start, distance: 0}];
+        
+        while (queue.length > 0) {
+            const current = queue.shift();
+            const key = `${current.row},${current.col}`;
+            
+            if (visited.has(key) || current.distance > range) continue;
+            visited.add(key);
+            
+            if (current.row >= 0 && current.row < this.gridHeight &&
+                current.col >= 0 && current.col < this.gridWidth) {
+                const hex = this.hexGrid[current.row][current.col];
+                if (!hex.occupied || hex.unit === unit) {
+                    hex.inRange = true;
                 }
             }
-        }
-    }
-    
-    calculateValidTargets(unit) {
-        this.combatData.validTargets = [];
-        const range = unit.type === 'ranged' ? 3 : 1;
-        
-        for (let dx = -range; dx <= range; dx++) {
-            for (let dy = -range; dy <= range; dy++) {
-                const targetX = unit.x + dx;
-                const targetY = unit.y + dy;
-                
-                const targetUnit = this.getUnitAt(targetX, targetY);
-                if (targetUnit && targetUnit.team !== unit.team) {
-                    this.combatData.validTargets.push({ x: targetX, y: targetY });
-                }
+            
+            // Ajouter les voisins
+            const neighbors = this.getHexNeighbors(current.row, current.col);
+            for (const neighbor of neighbors) {
+                queue.push({
+                    row: neighbor.row,
+                    col: neighbor.col,
+                    distance: current.distance + 1
+                });
             }
         }
-    }
-    
-    isValidPosition(x, y) {
-        return x >= 0 && x < this.combatData.gridSize.width &&
-               y >= 0 && y < this.combatData.gridSize.height;
-    }
-    
-    isValidMove(x, y) {
-        return this.combatData.validMoves.some(pos => pos.x === x && pos.y === y);
-    }
-    
-    isValidTarget(x, y) {
-        return this.combatData.validTargets.some(pos => pos.x === x && pos.y === y);
-    }
-    
-    moveUnit(unit, newX, newY) {
-        unit.x = newX;
-        unit.y = newY;
-        unit.hasMoved = true;
         
-        this.addLogEntry(`${unit.name} se déplace vers (${newX}, ${newY})`);
-        this.clearSelection();
-        this.renderCombatGrid();
+        this.draw();
     }
     
-    attackUnit(attacker, target) {
-        // Calcul des dégâts
-        const baseDamage = attacker.attack - target.defense;
-        const damage = Math.max(1, Math.floor(baseDamage * (0.8 + Math.random() * 0.4)));
+    getHexNeighbors(row, col) {
+        const neighbors = [];
+        const offset = row % 2 === 0 ? -1 : 0;
         
-        target.hp = Math.max(0, target.hp - damage);
-        attacker.hasAttacked = true;
+        const directions = [
+            { row: -1, col: offset },
+            { row: -1, col: offset + 1 },
+            { row: 0, col: -1 },
+            { row: 0, col: 1 },
+            { row: 1, col: offset },
+            { row: 1, col: offset + 1 }
+        ];
         
-        this.addLogEntry(`${attacker.name} attaque ${target.name} pour ${damage} dégâts`);
-        
-        if (target.hp <= 0) {
-            this.removeUnit(target);
-            this.addLogEntry(`${target.name} est vaincu !`);
+        for (const dir of directions) {
+            const newRow = row + dir.row;
+            const newCol = col + dir.col;
+            
+            if (newRow >= 0 && newRow < this.gridHeight &&
+                newCol >= 0 && newCol < this.gridWidth) {
+                neighbors.push({ row: newRow, col: newCol });
+            }
         }
         
-        this.clearSelection();
-        this.renderCombatGrid();
-        this.updateDisplay();
+        return neighbors;
     }
     
-    removeUnit(unit) {
-        this.combatData.units = this.combatData.units.filter(u => u.id !== unit.id);
-    }
-    
-    startMove() {
-        if (!this.combatData.selectedUnit) return;
-        // Le mouvement se fait en cliquant sur la grille
-        this.addLogEntry('Mode déplacement activé');
-    }
-    
-    startAttack() {
-        if (!this.combatData.selectedUnit) return;
-        // L'attaque se fait en cliquant sur la grille
-        this.addLogEntry('Mode attaque activé');
-    }
-    
-    wait() {
-        if (!this.combatData.selectedUnit) return;
+    moveUnit(unit, targetHex) {
+        // Libérer l'ancienne position
+        const oldHex = this.hexGrid[unit.position.row][unit.position.col];
+        oldHex.occupied = false;
+        oldHex.unit = null;
         
-        const unit = this.combatData.selectedUnit;
-        unit.hasMoved = true;
-        unit.hasAttacked = true;
+        // Déplacer vers la nouvelle position
+        unit.position = { row: targetHex.row, col: targetHex.col };
+        targetHex.occupied = true;
+        targetHex.unit = unit;
         
-        this.addLogEntry(`${unit.name} attend`);
-        this.clearSelection();
-    }
-    
-    defend() {
-        if (!this.combatData.selectedUnit) return;
+        unit.moved = true;
         
-        const unit = this.combatData.selectedUnit;
-        unit.hasMoved = true;
-        unit.hasAttacked = true;
-        unit.defense += 5; // Bonus temporaire
+        // Log
+        this.addCombatLog(`${unit.name} se déplace en ${targetHex.row},${targetHex.col}`);
         
-        this.addLogEntry(`${unit.name} se met en position défensive`);
-        this.clearSelection();
-    }
-    
-    nextTurn() {
-        this.combatData.currentTurn++;
-        
-        // Réinitialiser les actions des unités
-        this.combatData.units.forEach(unit => {
-            unit.hasMoved = false;
-            unit.hasAttacked = false;
-            if (unit.defense > 15) unit.defense = 15; // Reset bonus défense
-        });
-        
-        this.updateInitiative();
-        this.clearSelection();
-        this.addLogEntry(`Tour ${this.combatData.currentTurn} commencé`);
-        this.updateDisplay();
-        
-        // Vérifier la fin du combat
-        this.checkCombatEnd();
-    }
-    
-    updateInitiative() {
-        this.combatData.initiative = [...this.combatData.units]
-            .sort((a, b) => b.initiative - a.initiative);
-        
-        const nextUnit = this.combatData.initiative[0];
-        if (nextUnit) {
-            document.getElementById('initiative-display').textContent = 
-                `Prochain: ${nextUnit.name} (${nextUnit.team === 'player' ? 'Allié' : 'Ennemi'})`;
-        }
-    }
-    
-    checkCombatEnd() {
-        const playerUnits = this.combatData.units.filter(u => u.team === 'player');
-        const enemyUnits = this.combatData.units.filter(u => u.team === 'enemy');
-        
-        if (playerUnits.length === 0) {
-            this.endCombat('defeat');
-        } else if (enemyUnits.length === 0) {
-            this.endCombat('victory');
-        } else if (this.combatData.currentTurn >= this.combatData.maxTurns) {
-            this.endCombat('draw');
-        }
-    }
-    
-    endCombat(result) {
-        this.addLogEntry(`Combat terminé: ${result === 'victory' ? 'Victoire !' : result === 'defeat' ? 'Défaite !' : 'Match nul'}`);
-        
-        setTimeout(() => {
-            this.hide();
-            // Ici on pourrait retourner au jeu principal avec les résultats
-        }, 2000);
-    }
-    
-    autoResolve() {
-        this.addLogEntry('Résolution automatique du combat...');
-        // Logique simple de résolution automatique
-        setTimeout(() => {
-            this.endCombat('victory');
-        }, 1000);
-    }
-    
-    surrender() {
-        this.addLogEntry('Vous vous rendez...');
-        setTimeout(() => {
-            this.endCombat('defeat');
-        }, 1000);
+        // Redessiner
+        this.highlightMovementRange(unit);
+        this.draw();
     }
     
     updateUnitInfo(unit) {
-        const unitInfo = document.getElementById('unit-info');
+        const info = document.getElementById('unit-info');
+        if (info) {
+            info.innerHTML = `
+                <h4>${unit.icon} ${unit.name}</h4>
+                <p>HP: ${unit.hp}/${unit.maxHp}</p>
+                <p>MP: ${unit.mp}/${unit.maxMp}</p>
+                <p>ATK: ${unit.attack} | DEF: ${unit.defense}</p>
+                <p>SPD: ${unit.speed} | RNG: ${unit.range}</p>
+            `;
+        }
+    }
+    
+    endTurn() {
+        // Passer au prochain dans l'ordre
+        this.currentUnitIndex = (this.currentUnitIndex + 1) % this.turnOrder.length;
         
-        if (!unit) {
-            unitInfo.innerHTML = '<p>Sélectionnez une unité</p>';
+        // Réinitialiser les états
+        for (const unit of this.units) {
+            unit.moved = false;
+            unit.acted = false;
+        }
+        
+        this.selectedUnit = null;
+        this.draw();
+        
+        // Si c'est un ennemi, jouer automatiquement
+        const currentUnit = this.turnOrder[this.currentUnitIndex];
+        if (currentUnit.team === 'enemy') {
+            setTimeout(() => this.playAITurn(currentUnit), 1000);
+        }
+    }
+    
+    playAITurn(unit) {
+        // IA simple - attaquer l'unité la plus proche
+        const target = this.findNearestEnemy(unit);
+        if (target) {
+            this.addCombatLog(`${unit.name} attaque ${target.name} !`);
+            this.attack(unit, target);
+        }
+        
+        // Fin du tour automatique
+        setTimeout(() => this.endTurn(), 1500);
+    }
+    
+    findNearestEnemy(unit) {
+        let nearest = null;
+        let minDistance = Infinity;
+        
+        for (const other of this.units) {
+            if (other.team !== unit.team && other.hp > 0) {
+                const distance = Math.abs(other.position.row - unit.position.row) +
+                                Math.abs(other.position.col - unit.position.col);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    nearest = other;
+                }
+            }
+        }
+        
+        return nearest;
+    }
+    
+    attack(attacker, target) {
+        const damage = Math.max(1, attacker.attack - target.defense);
+        target.hp = Math.max(0, target.hp - damage);
+        
+        this.addCombatLog(`${damage} points de dégâts !`);
+        
+        if (target.hp <= 0) {
+            this.removeUnit(target);
+            this.addCombatLog(`${target.name} est vaincu !`);
+        }
+        
+        this.draw();
+    }
+    
+    removeUnit(unit) {
+        // Retirer de la grille
+        const hex = this.hexGrid[unit.position.row][unit.position.col];
+        if (hex) {
+            hex.occupied = false;
+            hex.unit = null;
+        }
+        
+        // Retirer des listes
+        this.units = this.units.filter(u => u !== unit);
+        this.turnOrder = this.turnOrder.filter(u => u !== unit);
+    }
+    
+    useAbility(abilityIndex) {
+        if (!this.selectedUnit || this.selectedUnit.team !== 'player') {
             return;
         }
         
-        unitInfo.innerHTML = `
-            <div class="unit-details">
-                <h4>${unit.name}</h4>
-                <div class="unit-stats">
-                    <div class="stat">
-                        <span class="stat-label">HP:</span>
-                        <span class="stat-value">${unit.hp}/${unit.maxHp}</span>
-                        <div class="health-bar">
-                            <div class="health-fill" style="width: ${(unit.hp / unit.maxHp) * 100}%"></div>
-                        </div>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-label">Attaque:</span>
-                        <span class="stat-value">${unit.attack}</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-label">Défense:</span>
-                        <span class="stat-value">${unit.defense}</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-label">Vitesse:</span>
-                        <span class="stat-value">${unit.speed}</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-label">Initiative:</span>
-                        <span class="stat-value">${unit.initiative}</span>
-                    </div>
-                </div>
-                <div class="unit-status">
-                    <span class="status ${unit.hasMoved ? 'used' : 'available'}">Mouvement: ${unit.hasMoved ? 'Utilisé' : 'Disponible'}</span>
-                    <span class="status ${unit.hasAttacked ? 'used' : 'available'}">Attaque: ${unit.hasAttacked ? 'Utilisée' : 'Disponible'}</span>
-                </div>
-            </div>
-        `;
+        const ability = this.selectedUnit.abilities?.[abilityIndex - 1];
+        if (!ability) return;
+        
+        if (this.selectedUnit.mp < ability.mpCost) {
+            this.addCombatLog("Pas assez de MP !");
+            return;
+        }
+        
+        this.selectedUnit.mp -= ability.mpCost;
+        this.addCombatLog(`${this.selectedUnit.name} utilise ${ability.name} !`);
+        
+        // Effets simplifiés
+        if (ability.damage) {
+            const target = this.findNearestEnemy(this.selectedUnit);
+            if (target) {
+                target.hp = Math.max(0, target.hp - ability.damage);
+                this.addCombatLog(`${ability.damage} points de dégâts magiques !`);
+                
+                if (target.hp <= 0) {
+                    this.removeUnit(target);
+                    this.addCombatLog(`${target.name} est vaincu !`);
+                }
+            }
+        }
+        
+        this.draw();
     }
     
-    addLogEntry(message) {
-        const logContent = document.getElementById('combat-log-content');
-        const entry = document.createElement('div');
-        entry.className = 'log-entry';
-        entry.textContent = `[Tour ${this.combatData.currentTurn}] ${message}`;
-        
-        logContent.appendChild(entry);
-        logContent.scrollTop = logContent.scrollHeight;
-        
-        // Limiter à 20 entrées
-        while (logContent.children.length > 20) {
-            logContent.removeChild(logContent.firstChild);
+    addCombatLog(message) {
+        const log = document.getElementById('log-content');
+        if (log) {
+            const entry = document.createElement('div');
+            entry.textContent = `> ${message}`;
+            entry.style.marginBottom = '5px';
+            log.appendChild(entry);
+            log.scrollTop = log.scrollHeight;
         }
     }
     
-    updateDisplay() {
-        document.querySelector('.turn-counter').textContent = 
-            `Tour ${this.combatData.currentTurn}/${this.combatData.maxTurns}`;
-    }
-    
-    // Méthodes pour l'intégration avec le jeu principal
-    startCombat(playerUnits, enemyUnits) {
-        this.combatData.units = [...playerUnits, ...enemyUnits];
-        this.combatData.currentTurn = 1;
-        this.updateInitiative();
-        this.show();
-    }
-    
-    getCombatResult() {
-        const playerUnits = this.combatData.units.filter(u => u.team === 'player');
-        const enemyUnits = this.combatData.units.filter(u => u.team === 'enemy');
+    handleMouseMove(event) {
+        const rect = this.canvas.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
         
-        if (playerUnits.length === 0) return 'defeat';
-        if (enemyUnits.length === 0) return 'victory';
-        return 'ongoing';
+        // Highlight hex sous la souris
+        for (let row = 0; row < this.gridHeight; row++) {
+            for (let col = 0; col < this.gridWidth; col++) {
+                this.hexGrid[row][col].highlighted = false;
+            }
+        }
+        
+        const hex = this.getHexAtPosition(x, y);
+        if (hex) {
+            hex.highlighted = true;
+            this.draw();
+        }
     }
 }
 
-// 🌍 EXPORT POUR UTILISATION GLOBALE
-window.CombatInterface = CombatInterface; 
+// Instance globale pour faciliter les tests
+let combat = null;
+
+// Initialisation quand le DOM est prêt
+if (typeof document !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', () => {
+        if (document.getElementById('combat-container')) {
+            combat = new CombatInterface('combat-container');
+        }
+    });
+} 
