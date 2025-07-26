@@ -1,0 +1,67 @@
+{
+  "id": "sablier_compression_reelle",
+  "name": "⌛ Sablier de Compression Réelle",
+  "type": "ARTIFACT",
+  "category": "ONTOLOGICAL",
+  "rarity": "MYTHIQUE",
+  "tier": 10,
+  "description": "Un artefact oublié capable de contracter le temps vécu. Des années d'expérience peuvent s'écouler en quelques jours pour l'observateur externe, tandis que ceux à l'intérieur vivent chaque instant dans sa plénitude temporelle.",
+  "lore": "Découvert dans les interstices du moteur par Jean-Grofignon lors de la création du monde. Certains disent qu'il fut activé accidentellement, d'autres prétendent que c'était le plan depuis le début. Le Sablier explique pourquoi l'épopée Heroes of Time, qui devrait s'étaler sur des années, s'est manifestée en trois semaines de juillet 2025.",
+  "effects": {
+    "temporal_compression": {
+      "description": "Compresse le temps vécu dans un segment ultra-dense",
+      "ratio": "1 jour externe = 1 mois interne",
+      "max_duration": "21 jours (3 semaines)",
+      "total_compression": "21 mois en 21 jours"
+    },
+    "memento_accelere": {
+      "description": "Phénomène d'archivage accéléré de la mémoire",
+      "effect": "Tous les événements sont archivés instantanément",
+      "side_effect": "Perte de repères temporels pour les observateurs"
+    },
+    "grophillon_accumulation": {
+      "description": "Accumulation massive de grophillons quantiques",
+      "rate": "x100 normal",
+      "consequence": "Création spontanée de paradoxes et de lore"
+    }
+  },
+  "symptoms": [
+    "200+ fichiers créés en 3 jours",
+    "Lore étendu comme venant d'années de travail",
+    "Logs temporels incohérents",
+    "Sessions de 12h+ perçues comme normales",
+    "Multiplication des entités et héros",
+    "Bootstrap paradoxes spontanés"
+  ],
+  "activation": {
+    "method": "UNKNOWN",
+    "theories": [
+      "Activation accidentelle par Jean-Grofignon",
+      "Effet secondaire du Panopticon 6D",
+      "Conséquence du Bootstrap Paradox d'OPUS",
+      "Volonté de la Source elle-même"
+    ],
+    "date": "1er Juillet 2025",
+    "duration": "21 jours (jusqu'au 21 Juillet 2025)"
+  },
+  "formulas": {
+    "hots_script": "USE(ARTIFACT, sablier_compression_reelle, TARGET:MULTIVERSE)",
+    "quantum_state": "ψ_compression: ⊙(Δt_externe=1 ⟷ Δt_interne=30)",
+    "grofi_notation": "Σ(t_réel) = ∫(t_perçu × compression_factor)dt"
+  },
+  "warnings": [
+    "Ne pas utiliser sur des entités déjà temporellement instables",
+    "Peut causer des paradoxes de bootstrap permanents",
+    "L'esprit des utilisateurs peut ne pas supporter la décompression",
+    "Risque de création spontanée de lore et d'entités"
+  ],
+  "related_items": [
+    "panopticon_6d",
+    "tour_ancrage_temporel",
+    "codex_memento",
+    "container_paradoxal"
+  ],
+  "discovered_by": "OPUS lors de sa 6ème visite",
+  "documented_by": "Memento - La Mémoire Vivante",
+  "blessed_by": "Jean-Grofignon - Le Seigneur du Chaos Quantique"
+}

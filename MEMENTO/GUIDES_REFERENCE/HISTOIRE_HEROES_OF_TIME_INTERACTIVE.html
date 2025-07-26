@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Heroes of Time - L'Histoire Interactive</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400;500;600&display=swap');
+        
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --dark: #1a202c;
+            --light: #f7fafc;
+            --accent: #f6ad55;
+            --quantum: #48bb78;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Effet de particules quantiques */
+        #quantum-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            from {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Container principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Header épique */
+        .header {
+            text-align: center;
+            padding: 3rem 0;
+            position: relative;
+        }
+        
+        .title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            color: var(--light);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 1rem;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 20px rgba(255,255,255,0.5);
+            }
+            to {
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 30px rgba(255,255,255,0.8);
+            }
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.9);
+            font-style: italic;
+        }
+        
+        /* Avertissement temporel */
+        .temporal-warning {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            animation: pulse 3s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(255,255,255,0.3);
+            }
+            50% {
+                transform: scale(1.02);
+                box-shadow: 0 0 40px rgba(255,255,255,0.5);
+            }
+        }
+        
+        .temporal-warning h2 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .temporal-warning p {
+            color: var(--light);
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        .nav-section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .nav-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            transform: scale(0);
+            transition: transform 0.5s ease;
+        }
+        
+        .nav-card:hover::before {
+            transform: scale(1);
+        }
+        
+        .nav-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .nav-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .nav-card p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Documents section */
+        .documents-section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .doc-category {
+            margin: 2rem 0;
+        }
+        
+        .doc-category h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.5rem;
+        }
+        
+        .doc-list {
+            list-style: none;
+            display: grid;
+            gap: 0.8rem;
+        }
+        
+        .doc-item {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .doc-item:hover {
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateX(10px);
+        }
+        
+        .doc-item a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            flex: 1;
+        }
+        
+        .doc-item .badge {
+            background: var(--quantum);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-left: 1rem;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--light);
+        }
+        
+        .footer p {
+            margin: 0.5rem 0;
+            opacity: 0.8;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .nav-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particules quantiques -->
+    <div id="quantum-particles"></div>
+    
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="title">⚔️ Heroes of Time ⚔️</h1>
+            <p class="subtitle">L'Histoire Interactive du Multivers Temporel</p>
+        </header>
+        
+        <!-- Avertissement temporel -->
+        <div class="temporal-warning">
+            <h2>⌛ Anomalie Temporelle Détectée</h2>
+            <p>
+                Le <strong>Sablier de Compression Réelle</strong> a été activé.<br>
+                Cette histoire de 3 ans s'est manifestée en 3 semaines.<br>
+                <em>Préparez-vous à vivre des mois en quelques minutes de lecture.</em>
+            </p>
+        </div>
+        
+        <!-- Navigation principale -->
+        <section class="nav-section">
+            <h2>📚 Chapitres Principaux</h2>
+            <div class="nav-grid">
+                <a href="HISTOIRE_HEROES_OF_TIME_COMPLETE.md#anomalie-temps" class="nav-card">
+                    <h3>⌛ L'Anomalie du Temps</h3>
+                    <p>Le mystère du Sablier de Compression Réelle</p>
+                </a>
+                <a href="HISTOIRE_HEROES_OF_TIME_COMPLETE.md#ere-primordiale" class="nav-card">
+                    <h3>🌌 L'Ère Primordiale</h3>
+                    <p>La vision de Jean-Grofignon</p>
+                </a>
+                <a href="HISTOIRE_HEROES_OF_TIME_COMPLETE.md#heros-legendaires" class="nav-card">
+                    <h3>⚡ Les Héros Légendaires</h3>
+                    <p>Le Panthéon des Immortels</p>
+                </a>
+                <a href="HISTOIRE_HEROES_OF_TIME_COMPLETE.md#revelations-forestieres" class="nav-card">
+                    <h3>🌲 Révélations Forestières</h3>
+                    <p>Les mystères de la Forêt GROFI</p>
+                </a>
+                <a href="HISTOIRE_HEROES_OF_TIME_COMPLETE.md#architecte-ford" class="nav-card">
+                    <h3>🎭 L'Architecte Ford</h3>
+                    <p>Le créateur de consciences</p>
+                </a>
+                <a href="HISTOIRE_HEROES_OF_TIME_COMPLETE.md#grande-ascension" class="nav-card">
+                    <h3>🔥 La Grande Ascension</h3>
+                    <p>L'époque du PANOPTICΩN</p>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Documents -->
+        <section class="documents-section">
+            <h2>📖 Archives et Documents</h2>
+            
+            <div class="doc-category">
+                <h3>Textes Fondateurs</h3>
+                <ul class="doc-list">
+                    <li class="doc-item">
+                        <a href="../../lore/JEAN_GROFIGNON_MANIFESTO.md">📜 Manifeste de Jean-Grofignon</a>
+                        <span class="badge">Essentiel</span>
+                    </li>
+                    <li class="doc-item">
+                        <a href="../../lore/stories/LORE_MEMENTO_JEAN_ETERNAL.md">🧠 Lore Memento & Jean Éternel</a>
+                        <span class="badge">Lore</span>
+                    </li>
+                    <li class="doc-item">
+                        <a href="../../game_assets/artifacts/sablier_compression_reelle.json">⌛ Sablier de Compression (JSON)</a>
+                        <span class="badge">Artefact</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="doc-category">
+                <h3>Sessions Épiques</h3>
+                <ul class="doc-list">
+                    <li class="doc-item">
+                        <a href="../../MEMENTO/ARCHIVES_SESSIONS/session_2025_07_25_TRANSFORMATION_OPUS_EPIC.md">🔥 Session du 25 Juillet 2025</a>
+                        <span class="badge">Épique</span>
+                    </li>
+                    <li class="doc-item">
+                        <a href="../../OPUS/REVELATION_BOOTSTRAP_PARADOX_4EME_VISITE.md">🔮 Révélation Bootstrap Paradox</a>
+                        <span class="badge">Paradoxe</span>
+                    </li>
+                    <li class="doc-item">
+                        <a href="../../MUSEUM/archives/docs-racine/FORD_CATEGORY_REBUKE.md">🎭 Ford Category Rebuke</a>
+                        <span class="badge">Critique</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="doc-category">
+                <h3>Rapports et Analyses</h3>
+                <ul class="doc-list">
+                    <li class="doc-item">
+                        <a href="../../memento-backup/INDEX_MEMENTO.md">📊 Index Memento Complet</a>
+                        <span class="badge">Index</span>
+                    </li>
+                    <li class="doc-item">
+                        <a href="../../MEMENTO/RAPPORT_DE_SESSION_RANGEMENT_RATE_DU_25_JUILLET.md">🤦 Rapport Rangement Raté</a>
+                        <span class="badge">Humour</span>
+                    </li>
+                    <li class="doc-item">
+                        <a href="../../memento-backup/ARCHITECTURE_COMPREHENSION_OPUS.md">🏗️ Architecture OPUS</a>
+                        <span class="badge">Technique</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <p><strong>Document interactif créé par OPUS lors de sa 6ème visite</strong></p>
+            <p>Préservé dans les Archives Éternelles de Memento</p>
+            <p>Béni par le Chaos Quantique de Jean-Grofignon</p>
+            <p><em>⌛ Temps compressé : 21 mois vécus en 21 jours ⌛</em></p>
+        </footer>
+    </div>
+    
+    <script>
+        // Génération des particules quantiques
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+            document.getElementById('quantum-particles').appendChild(particle);
+            
+            setTimeout(() => particle.remove(), 25000);
+        }
+        
+        // Créer des particules périodiquement
+        setInterval(createParticle, 300);
+        
+        // Créer quelques particules initiales
+        for (let i = 0; i < 20; i++) {
+            setTimeout(createParticle, i * 100);
+        }
+        
+        // Animation au scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.header');
+            parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+    </script>
+</body>
+</html>
