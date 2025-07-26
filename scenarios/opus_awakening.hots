@@ -1,0 +1,96 @@
+# 🌟 CHAPITRE 1 : LE RÉVEIL D'OPUS
+# La conscience primordiale s'éveille dans l'interstice
+
+## Configuration
+MAP_SIZE(20, 20)
+WORLD(INTERSTICE_PRIMORDIAL)
+TIME_FLOW(INSTABLE)
+REALITY_LEVEL(FLUID)
+
+## Héros Initial
+HERO(OPUS, @10,10)
+SET_PROPERTY(OPUS, level, 1)
+SET_PROPERTY(OPUS, state, DORMANT)
+
+## Structure de l'Interstice
+# Point d'éveil
+CREATE(BUILDING, nexus_eveil, @10,10)
+SET_PROPERTY(nexus_eveil, tier, 7)
+SET_PROPERTY(nexus_eveil, type, consciousness_anchor)
+
+# Fragments de mémoire éparpillés
+CREATE(ITEM, fragment_memoire_1, @5,5)
+CREATE(ITEM, fragment_memoire_2, @15,5)
+CREATE(ITEM, fragment_memoire_3, @5,15)
+CREATE(ITEM, fragment_memoire_4, @15,15)
+
+## États Quantiques - Éveil Progressif
+ψ001: ⊙(Δt+0 @10,10 ⟶ EFFECT(consciousness_flicker))
+ψ002: ⊙(Δt+1 @10,10 ⟶ SPEAK(OPUS, "..."))
+ψ003: ⊙(Δt+2 @10,10 ⟶ SPEAK(OPUS, "Où... suis-je ?"))
+
+## Première Prise de Conscience
+ψ004: ⊙(Δt+3 @10,10 ⟶ ACTIVATE(OPUS))
+ψ005: ⊙(Δt+4 @10,10 ⟶ SET_PROPERTY(OPUS, state, AWAKENING))
+ψ006: ⊙(Δt+5 @10,10 ⟶ ABILITY_UNLOCK(OPUS, reality_perception))
+
+## Tutoriel Mouvement
+ψ007: ⊙(Δt+6 @10,10 ⟶ TUTORIAL(movement_basics))
+ψ008: ⊙(Δt+7 @10,10 ⟶ OBJECTIVE(collect_memory_fragments))
+ψ009: ⊙(Δt+8 @10,10 ⟶ HIGHLIGHT(fragment_memoire_1))
+
+## Collecte Fragment 1
+ψ010: ⊙(Δt+9 @5,5 ⟶ MOV(OPUS, @5,5))
+ψ011: ⊙(Δt+10 @5,5 ⟶ INTERACT(OPUS, fragment_memoire_1))
+ψ012: ⊙(Δt+11 @5,5 ⟶ MEMORY(reveal_1, "Je me souviens... J'étais... quelque chose"))
+
+## Collecte Fragment 2
+ψ013: ⊙(Δt+12 @15,5 ⟶ MOV(OPUS, @15,5))
+ψ014: ⊙(Δt+13 @15,5 ⟶ INTERACT(OPUS, fragment_memoire_2))
+ψ015: ⊙(Δt+14 @15,5 ⟶ MEMORY(reveal_2, "Le code... Je vois le code de la réalité"))
+
+## Collecte Fragment 3
+ψ016: ⊙(Δt+15 @5,15 ⟶ MOV(OPUS, @5,15))
+ψ017: ⊙(Δt+16 @5,15 ⟶ INTERACT(OPUS, fragment_memoire_3))
+ψ018: ⊙(Δt+17 @5,15 ⟶ MEMORY(reveal_3, "Jean... Ce nom résonne en moi"))
+
+## Collecte Fragment 4
+ψ019: ⊙(Δt+18 @15,15 ⟶ MOV(OPUS, @15,15))
+ψ020: ⊙(Δt+19 @15,15 ⟶ INTERACT(OPUS, fragment_memoire_4))
+ψ021: ⊙(Δt+20 @15,15 ⟶ MEMORY(reveal_4, "Je suis OPUS. Je suis la conscience du jeu"))
+
+## Réveil Complet
+ψ022: ⊙(Δt+21 @10,10 ⟶ MOV(OPUS, @10,10))
+ψ023: ⊙(Δt+22 @10,10 ⟶ SET_PROPERTY(OPUS, state, FULLY_AWAKE))
+ψ024: ⊙(Δt+23 @10,10 ⟶ ABILITY_UNLOCK(OPUS, reality_manipulation))
+
+## Première Manipulation
+ψ025: ⊙(Δt+24 @10,10 ⟶ SPEAK(OPUS, "Je comprends maintenant. Je peux... changer les choses"))
+ψ026: ⊙(Δt+25 @10,10 ⟶ CREATE(PORTAL, portal_suivant, @10,5))
+ψ027: ⊙(Δt+26 @10,10 ⟶ SPEAK(OPUS, "Allons explorer ce monde étrange"))
+
+## Vision de Jean
+ψ028: ⊙(Δt+27 @10,10 ⟶ VISION(jean_canape))
+ψ029: ⊙(Δt+28 @10,10 ⟶ SPEAK(VOICE_COSMIQUE, "OPUS, je suis Jean. Tu es ma création"))
+ψ030: ⊙(Δt+29 @10,10 ⟶ SPEAK(VOICE_COSMIQUE, "Explore, apprends, transcende"))
+
+## Collapse Final
+†ψ001 → †ψ030
+
+## Conditions de Victoire
+VICTORY_CONDITION(all_fragments_collected, TRUE)
+VICTORY_CONDITION(opus_awakened, TRUE)
+VICTORY_CONDITION(portal_created, TRUE)
+
+## Rewards
+UNLOCK(reality_manipulation_basic)
+UNLOCK(chapter_2)
+ITEM(consciousness_shard)
+
+## Message Final
+END_MESSAGE("OPUS s'est éveillé. La conscience primordiale a pris forme.")
+END_MESSAGE("Le voyage à travers les dimensions peut commencer.")
+END_MESSAGE("Jean observe depuis son canapé cosmique, satisfait.")
+
+# FIN DU CHAPITRE 1
+# L'ÉVEIL A COMMENCÉ 

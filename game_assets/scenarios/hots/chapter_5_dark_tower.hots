@@ -1,0 +1,113 @@
+# 🏰 CHAPITRE 5 : LA TOUR SOMBRE
+# La Quête de Roland et la Convergence des Timelines
+
+## Configuration
+MAP_SIZE(30, 30)
+WORLD(TOUR_SOMBRE)
+TIME_FLOW(CYCLIQUE)
+PARADOX_LEVEL(MAXIMUM)
+
+## Héros Requis
+HERO(Roland, @15,15)
+HERO(Memento, @14,15)
+HERO(Jean, @16,15)
+HERO(GRUT, @15,14)
+
+## Structure de la Tour
+# Niveau 1 - Base de la Tour
+CREATE(BUILDING, tour_sombre_base, @15,10)
+SET_PROPERTY(tour_sombre_base, tier, 9)
+SET_PROPERTY(tour_sombre_base, portal, niveau_2)
+
+# Niveau 2 - Salle des Échos
+CREATE(BUILDING, salle_echos, @15,5)
+SET_PROPERTY(salle_echos, tier, 10)
+SET_PROPERTY(salle_echos, echo_count, ∞)
+
+# Niveau 3 - Antichambre du Destin
+CREATE(BUILDING, antichambre_destin, @15,2)
+SET_PROPERTY(antichambre_destin, tier, 11)
+SET_PROPERTY(antichambre_destin, timeline_view, ALL)
+
+# Sommet - Point de Convergence
+CREATE(BUILDING, sommet_tour, @15,0)
+SET_PROPERTY(sommet_tour, tier, 12)
+SET_PROPERTY(sommet_tour, convergence_point, TRUE)
+
+## États Quantiques
+ψ001: ⊙(Δt+0 @15,15 ⟶ SPEAK(Roland, "Le monde a changé"))
+ψ002: ⊙(Δt+1 @15,15 ⟶ SPEAK(Roland, "Tu n'as pas oublié le visage de ton père"))
+ψ003: ⊙(Δt+2 @15,14 ⟶ MOV(Roland, @15,10))
+
+## Ascension Niveau 1
+ψ004: ⊙(Δt+3 @15,10 ⟶ INTERACT(Roland, tour_sombre_base))
+ψ005: ⊙(Δt+4 @15,10 ⟶ CREATE(PORTAL, portal_niveau_2, @15,9))
+ψ006: ⊙(Δt+5 @15,10 ⟶ REVEAL(memory_cycle_1))
+
+## Révélation Cycle 1
+MEMORY(cycle_1, "Roland a déjà gravi cette tour... 19 fois")
+MEMORY(cycle_2, "Mais cette fois, Memento est là")
+MEMORY(cycle_3, "L'Archive Vivante peut briser le cycle")
+
+## Ascension Niveau 2
+ψ007: ⊙(Δt+6 @15,9 ⟶ TELEPORT(ALL_HEROES, @15,5))
+ψ008: ⊙(Δt+7 @15,5 ⟶ ECHO(past_cycles, 19))
+ψ009: ⊙(Δt+8 @15,5 ⟶ SPEAK(Memento, "Je me souviens de tous tes passages"))
+
+## Salle des Échos - Révélations
+ψ010: ⊙(Δt+9 @15,5 ⟶ SHOW_VISION(timeline_dev))
+ψ011: ⊙(Δt+10 @15,5 ⟶ SHOW_VISION(timeline_grofi))
+ψ012: ⊙(Δt+11 @15,5 ⟶ SHOW_VISION(timeline_vince))
+ψ013: ⊙(Δt+12 @15,5 ⟶ SHOW_VISION(timeline_bootstrap))
+
+## Ascension Niveau 3
+ψ014: ⊙(Δt+13 @15,5 ⟶ CREATE(PORTAL, portal_niveau_3, @15,4))
+ψ015: ⊙(Δt+14 @15,4 ⟶ TELEPORT(ALL_HEROES, @15,2))
+ψ016: ⊙(Δt+15 @15,2 ⟶ SPEAK(GRUT, "Je vois toutes les timelines converger"))
+
+## Antichambre - Préparation Finale
+ψ017: ⊙(Δt+16 @15,2 ⟶ EQUIP(Roland, pistolet_ka))
+ψ018: ⊙(Δt+17 @15,2 ⟶ EQUIP(Memento, archive_complete))
+ψ019: ⊙(Δt+18 @15,2 ⟶ SPEAK(Jean, "Depuis mon canapé, je vois la fin et le début"))
+
+## Ascension Finale
+ψ020: ⊙(Δt+19 @15,2 ⟶ CREATE(PORTAL, portal_sommet, @15,1))
+ψ021: ⊙(Δt+20 @15,1 ⟶ TELEPORT(ALL_HEROES, @15,0))
+
+## Sommet - Convergence
+ψ022: ⊙(Δt+21 @15,0 ⟶ EVENT(CONVERGENCE_START))
+ψ023: ⊙(Δt+22 @15,0 ⟶ MERGE(timeline_dev, timeline_grofi))
+ψ024: ⊙(Δt+23 @15,0 ⟶ MERGE(timeline_vince, timeline_bootstrap))
+ψ025: ⊙(Δt+24 @15,0 ⟶ MERGE(ALL_TIMELINES, UNIFIED_REALITY))
+
+## Brisure du Cycle
+ψ026: ⊙(Δt+25 @15,0 ⟶ SPEAK(Memento, "Je brise le cycle éternel"))
+ψ027: ⊙(Δt+26 @15,0 ⟶ USE(Memento, archive_complete))
+ψ028: ⊙(Δt+27 @15,0 ⟶ EFFECT(CYCLE_BREAK))
+
+## Révélation Finale
+ψ029: ⊙(Δt+28 @15,0 ⟶ SPEAK(Roland, "Le cycle est brisé. Je suis libre"))
+ψ030: ⊙(Δt+29 @15,0 ⟶ CREATE(ARTIFACT, mallette_ouverte, @15,0))
+ψ031: ⊙(Δt+30 @15,0 ⟶ REVEAL(console_java_source))
+
+## Console de la Source
+ψ032: ⊙(Δt+31 @15,0 ⟶ INTERFACE(reality_console))
+ψ033: ⊙(Δt+32 @15,0 ⟶ CODE("reality.reprogram(new_rules);"))
+ψ034: ⊙(Δt+33 @15,0 ⟶ CODE("universe.setCreators(['Jean', 'Memento', 'OPUS']);"))
+
+## Collapse Final
+†ψ001 → †ψ034
+
+## Conditions de Victoire
+VICTORY_CONDITION(cycle_broken, TRUE)
+VICTORY_CONDITION(timelines_merged, TRUE)
+VICTORY_CONDITION(reality_reprogrammed, TRUE)
+
+## Message Final
+END_MESSAGE("La Tour Sombre n'est plus une prison. Elle est devenue un phare.")
+END_MESSAGE("Roland est libre. Memento a tout archivé. Jean sourit depuis son canapé.")
+END_MESSAGE("Heroes of Time transcende vers l'infini.")
+
+# FIN DU CHAPITRE 5
+# La boucle est brisée
+# L'histoire continue 

@@ -379,6 +379,25 @@
     }
   },
 
+  "worlds": {
+    "temporal_nexus": {
+      "location": "game_assets/worlds/le_bureau/world_definition.json",
+      "count": 1,
+      "status": "CREATED",
+      "description": "Monde temporel paradoxal - Le Bureau où McKinsey conspire",
+      "worlds": [
+        {
+          "id": "world_le_bureau", 
+          "name": "🌀 Le Bureau",
+          "tier": 11,
+          "type": "temporal_nexus",
+          "danger": "EXTREME",
+          "features": ["panopticon_6d", "timeline_viewer", "mckinsey_presence", "paradox_loop"]
+        }
+      ]
+    }
+  },
+
   "organization_summary": {
     "assets_moved": 5,
     "directories_created": 7,
