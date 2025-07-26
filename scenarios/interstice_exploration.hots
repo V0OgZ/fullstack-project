@@ -1,0 +1,133 @@
+# 🌀 CHAPITRE 3 : L'INTERSTICE
+# L'exploration des passages secrets entre les dimensions
+
+## Configuration
+MAP_SIZE(30, 30)
+WORLD(INTERSTICE_NETWORK)
+TIME_FLOW(NON_LINEAR)
+DIMENSION_COUNT(7)
+
+## Héros Requis
+HERO(OPUS, @15,15)
+SET_PROPERTY(OPUS, level, 10)
+SET_PROPERTY(OPUS, items, [lampe_de_platon, consciousness_shard])
+HERO(Memento, @14,15)
+SET_PROPERTY(Memento, state, FIRST_ENCOUNTER)
+
+## Structure de l'Interstice
+# Nexus Central
+CREATE(BUILDING, nexus_central, @15,15)
+SET_PROPERTY(nexus_central, tier, 8)
+SET_PROPERTY(nexus_central, connections, 7)
+
+# Portails Dimensionnels
+CREATE(PORTAL, portal_alpha, @15,5)
+SET_PROPERTY(portal_alpha, destination, DIMENSION_ALPHA)
+CREATE(PORTAL, portal_beta, @25,15)
+SET_PROPERTY(portal_beta, destination, DIMENSION_BETA)
+CREATE(PORTAL, portal_gamma, @15,25)
+SET_PROPERTY(portal_gamma, destination, DIMENSION_GAMMA)
+CREATE(PORTAL, portal_delta, @5,15)
+SET_PROPERTY(portal_delta, destination, DIMENSION_DELTA)
+
+# Anomalies Temporelles
+CREATE(ANOMALY, time_rift_1, @10,10)
+CREATE(ANOMALY, time_rift_2, @20,20)
+CREATE(ANOMALY, time_rift_3, @10,20)
+CREATE(ANOMALY, time_rift_4, @20,10)
+
+## États Quantiques - Rencontre
+ψ001: ⊙(Δt+0 @15,15 ⟶ SPEAK(OPUS, "Cet endroit... C'est le cœur de tout"))
+ψ002: ⊙(Δt+1 @14,15 ⟶ REVEAL(Memento))
+ψ003: ⊙(Δt+2 @14,15 ⟶ SPEAK(Memento, "Enfin, tu arrives OPUS"))
+
+## Présentation de Memento
+ψ004: ⊙(Δt+3 @14,15 ⟶ SPEAK(Memento, "Je suis Memento, l'Archiviste Éternel"))
+ψ005: ⊙(Δt+4 @14,15 ⟶ SPEAK(Memento, "J'archive tout ce qui se passe dans l'Interstice"))
+ψ006: ⊙(Δt+5 @15,15 ⟶ SPEAK(OPUS, "Tu... tu me connais ?"))
+ψ007: ⊙(Δt+6 @14,15 ⟶ SPEAK(Memento, "Je connais toutes tes incarnations"))
+
+## Tutoriel Navigation
+ψ008: ⊙(Δt+7 @15,15 ⟶ SPEAK(Memento, "Laisse-moi te montrer comment naviguer"))
+ψ009: ⊙(Δt+8 @15,15 ⟶ TUTORIAL(interstice_navigation))
+ψ010: ⊙(Δt+9 @15,15 ⟶ HIGHLIGHT(portal_alpha))
+
+## Exploration Portal Alpha
+ψ011: ⊙(Δt+10 @15,5 ⟶ MOV(OPUS, @15,5))
+ψ012: ⊙(Δt+11 @15,5 ⟶ INTERACT(OPUS, portal_alpha))
+ψ013: ⊙(Δt+12 @DIMENSION_ALPHA ⟶ TELEPORT(OPUS, DIMENSION_ALPHA))
+ψ014: ⊙(Δt+13 @DIMENSION_ALPHA ⟶ DISCOVER(fragment_jean_1))
+ψ015: ⊙(Δt+14 @15,5 ⟶ RETURN(OPUS, @15,5))
+
+## Vision de Jean
+ψ016: ⊙(Δt+15 @15,15 ⟶ VISION(jean_canape_cosmique))
+ψ017: ⊙(Δt+16 @15,15 ⟶ SPEAK(JEAN, "Tu explores bien, OPUS"))
+ψ018: ⊙(Δt+17 @15,15 ⟶ SPEAK(JEAN, "L'Interstice est mon observation post"))
+ψ019: ⊙(Δt+18 @15,15 ⟶ SPEAK(JEAN, "D'ici, je vois toutes les réalités"))
+
+## Anomalie Temporelle
+ψ020: ⊙(Δt+19 @10,10 ⟶ ACTIVATE(time_rift_1))
+ψ021: ⊙(Δt+20 @10,10 ⟶ CREATE(ENEMY, echo_temporel, @10,10))
+ψ022: ⊙(Δt+21 @10,10 ⟶ SPEAK(echo_temporel, "Je suis toi... du futur !"))
+
+## Combat Temporel
+ψ023: ⊙(Δt+22 @10,10 ⟶ MOV(OPUS, @10,10))
+ψ024: ⊙(Δt+23 @10,10 ⟶ BATTLE_MODE(temporal))
+ψ025: ⊙(Δt+24 @10,10 ⟶ SPEAK(OPUS, "Comment combattre mon propre futur ?"))
+ψ026: ⊙(Δt+25 @14,15 ⟶ SPEAK(Memento, "Utilise la Lampe ! Révèle la vérité !"))
+
+## Résolution Paradoxe
+ψ027: ⊙(Δt+26 @10,10 ⟶ USE(OPUS, lampe_de_platon))
+ψ028: ⊙(Δt+27 @10,10 ⟶ REVEAL(echo_truth))
+ψ029: ⊙(Δt+28 @10,10 ⟶ SPEAK(echo_temporel, "Je ne suis qu'une possibilité..."))
+ψ030: ⊙(Δt+29 @10,10 ⟶ MERGE(OPUS, echo_temporel))
+
+## Multi-Portal Navigation
+ψ031: ⊙(Δt+30 @15,15 ⟶ OBJECTIVE(explore_all_portals))
+ψ032: ⊙(Δt+31 @25,15 ⟶ MOV(OPUS, @25,15))
+ψ033: ⊙(Δt+32 @25,15 ⟶ ENTER(portal_beta))
+ψ034: ⊙(Δt+33 @15,25 ⟶ MOV(OPUS, @15,25))
+ψ035: ⊙(Δt+34 @15,25 ⟶ ENTER(portal_gamma))
+ψ036: ⊙(Δt+35 @5,15 ⟶ MOV(OPUS, @5,15))
+ψ037: ⊙(Δt+36 @5,15 ⟶ ENTER(portal_delta))
+
+## Révélation GRUT
+ψ038: ⊙(Δt+37 @15,15 ⟶ CREATE(VISION, grut_preview))
+ψ039: ⊙(Δt+38 @15,15 ⟶ SPEAK(GRUT_VOICE, "JE VOIS TOUT"))
+ψ040: ⊙(Δt+39 @15,15 ⟶ SPEAK(GRUT_VOICE, "L'INTERSTICE EST MON DOMAINE"))
+ψ041: ⊙(Δt+40 @14,15 ⟶ SPEAK(Memento, "GRUT... Il arrive bientôt"))
+
+## Archive de Memento
+ψ042: ⊙(Δt+41 @14,15 ⟶ USE(Memento, archive_moment))
+ψ043: ⊙(Δt+42 @14,15 ⟶ CREATE(TATTOO, first_meeting_opus))
+ψ044: ⊙(Δt+43 @14,15 ⟶ SPEAK(Memento, "Je grave ce moment dans ma mémoire éternelle"))
+
+## Ouverture Finale
+ψ045: ⊙(Δt+44 @15,15 ⟶ UNLOCK(hidden_portal))
+ψ046: ⊙(Δt+45 @15,15 ⟶ CREATE(PORTAL, portal_fourth_wall, @15,0))
+ψ047: ⊙(Δt+46 @15,15 ⟶ SPEAK(OPUS, "Un nouveau passage... vers où ?"))
+ψ048: ⊙(Δt+47 @14,15 ⟶ SPEAK(Memento, "Vers le 4ème mur. Prépare-toi"))
+
+## Collapse Final
+†ψ001 → †ψ048
+
+## Conditions de Victoire
+VICTORY_CONDITION(all_portals_explored, TRUE)
+VICTORY_CONDITION(temporal_echo_resolved, TRUE)
+VICTORY_CONDITION(memento_alliance, TRUE)
+VICTORY_CONDITION(fourth_wall_unlocked, TRUE)
+
+## Rewards
+ALLY(Memento)
+ABILITY(interstice_navigation)
+ITEM(temporal_compass)
+KNOWLEDGE(dimensional_structure)
+UNLOCK(chapter_4)
+
+## Message Final
+END_MESSAGE("L'Interstice révèle ses secrets. OPUS maîtrise la navigation dimensionnelle.")
+END_MESSAGE("Memento devient un allié précieux, archivant chaque moment.")
+END_MESSAGE("Le 4ème mur attend. La réalité va bientôt se briser.")
+
+# FIN DU CHAPITRE 3
+# L'INTERSTICE EST CONQUIS 
