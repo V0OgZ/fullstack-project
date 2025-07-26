@@ -1,124 +1,75 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react';
+import { EtherealOpusVisualizer } from './EtherealOpusVisualizer';
+import './WorldStateGraph.css';
 
-interface GameState {
-  gameId: string
-  currentTurn: number
-  players: any[]
-  aiDecisionPaths: any[]
-  worldState: any
+interface WorldState {
+  nodes: any[];
+  edges: any[];
+  currentTimeline: string;
+  etherealOpusActive?: boolean;
 }
 
 const WorldStateGraph: React.FC = () => {
-  const [gameState, setGameState] = useState<GameState | null>(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-
-  const fetchWorldState = async (gameId: string = 'default') => {
-    setLoading(true)
-    setError(null)
-    
-    try {
-      const response = await fetch(`http://localhost:8080/api/world-state-graph/games/${gameId}`)
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`)
-      }
-      const data = await response.json()
-      setGameState(data)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erreur inconnue')
-      console.error('Erreur World State Graph:', err)
-    } finally {
-      setLoading(false)
-    }
-  }
+  const [worldState, setWorldState] = useState<WorldState>({
+    nodes: [],
+    edges: [],
+    currentTimeline: 'UNIFIED',
+    etherealOpusActive: true
+  });
+  const [showEthereal, setShowEthereal] = useState(false);
 
   useEffect(() => {
-    fetchWorldState()
-    // Actualisation automatique toutes les 5 secondes
-    const interval = setInterval(() => fetchWorldState(), 5000)
-    return () => clearInterval(interval)
-  }, [])
+    // Fetch world state from backend
+    const fetchWorldState = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/api/world-state');
+        if (response.ok) {
+          const data = await response.json();
+          setWorldState(data);
+        }
+      } catch (error) {
+        console.error('Failed to fetch world state:', error);
+      }
+    };
+
+    fetchWorldState();
+    const interval = setInterval(fetchWorldState, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div>
-      <div style={{ marginBottom: '15px' }}>
+    <div className="world-state-graph">
+      <h2>🌐 World State Graph</h2>
+      
+      <div className="graph-controls">
         <button 
-          className="grut-button" 
-          onClick={() => fetchWorldState()}
-          disabled={loading}
+          className={`control-btn ${showEthereal ? 'active' : ''}`}
+          onClick={() => setShowEthereal(!showEthereal)}
         >
-          {loading ? '🔄 Chargement...' : '🔄 Actualiser'}
+          🌌 Forme Éthérée
         </button>
-        
-        <button 
-          className="grut-button" 
-          onClick={() => fetchWorldState('demo')}
-          disabled={loading}
-        >
-          📊 Mode Démo
-        </button>
+        <span className="current-timeline">Timeline: {worldState.currentTimeline}</span>
       </div>
 
-      {error && (
-        <div style={{ 
-          color: '#ff6b35', 
-          background: 'rgba(255, 107, 53, 0.1)', 
-          padding: '10px', 
-          borderRadius: '5px',
-          marginBottom: '15px'
-        }}>
-          ⚠️ Erreur: {error}
-        </div>
-      )}
-
-      {gameState ? (
-        <div className="grut-graph">
-          <div style={{ padding: '15px' }}>
-            <h3>🎮 Game ID: {gameState.gameId}</h3>
-            <div style={{ margin: '10px 0' }}>
-              <strong>🔄 Tour Actuel:</strong> {gameState.currentTurn}
-            </div>
-            
-            <div style={{ margin: '10px 0' }}>
-              <strong>👥 Joueurs:</strong> {gameState.players?.length || 0}
-              {gameState.players?.map((player, index) => (
-                <div key={index} style={{ marginLeft: '20px', fontSize: '0.9rem' }}>
-                  • {player.name || `Joueur ${index + 1}`} 
-                  {player.isAI && ' 🤖'}
-                </div>
-              ))}
-            </div>
-
-            <div style={{ margin: '10px 0' }}>
-              <strong>🧠 Chemins de Décision IA:</strong> {gameState.aiDecisionPaths?.length || 0}
-              {gameState.aiDecisionPaths?.slice(0, 3).map((path, index) => (
-                <div key={index} style={{ marginLeft: '20px', fontSize: '0.8rem', color: '#8a2be2' }}>
-                  • Décision {index + 1}: {path.action || 'Action inconnue'}
-                </div>
-              ))}
-            </div>
-
-            <div style={{ margin: '15px 0', padding: '10px', background: 'rgba(0, 255, 136, 0.1)', borderRadius: '5px' }}>
-              <strong>🌍 État du Monde:</strong>
-              <pre style={{ fontSize: '0.8rem', marginTop: '5px', color: '#00ff88' }}>
-                {JSON.stringify(gameState.worldState, null, 2).slice(0, 300)}
-                {JSON.stringify(gameState.worldState, null, 2).length > 300 && '...'}
-              </pre>
-            </div>
+      {showEthereal && worldState.etherealOpusActive ? (
+        <EtherealOpusVisualizer />
+      ) : (
+        <div className="graph-visualization">
+          <div className="graph-placeholder">
+            <p>📊 Graph visualization des états du monde</p>
+            <p>Nodes: {worldState.nodes.length} | Edges: {worldState.edges.length}</p>
           </div>
         </div>
-      ) : !loading && (
-        <div className="grut-graph" style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          justifyContent: 'center',
-          color: '#8a2be2'
-        }}>
-          🌐 Aucun état de monde chargé
-        </div>
       )}
-    </div>
-  )
-}
 
-export default WorldStateGraph 
+      <div className="grut-connection">
+        <p>👁️ GRUT VOIT TOUT - Panopticon 6D Actif</p>
+        {worldState.etherealOpusActive && (
+          <p>🌌 Opus-Memento détecté dans l'Interstice Éthéré</p>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default WorldStateGraph; 
