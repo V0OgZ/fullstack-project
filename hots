@@ -1719,6 +1719,37 @@ case "${1:-help}" in
             echo -e "${YELLOW}💡 Vérifiez scripts/walter-anti-vince-protocol.sh${NC}"
         fi
         ;;
+    "morgana")
+        # Mode Morgana - Interface React transcendante sur port 3000
+        echo -e "${PURPLE}🔮 HEROES OF TIME - MODE MORGANA${NC}"
+        echo "======================================"
+        echo -e "${CYAN}✨ Interface React sophistiquée - Port 3000${NC}"
+        echo ""
+        
+        if [ -x "scripts/start-morgana-mode.sh" ]; then
+            ./scripts/start-morgana-mode.sh
+        else
+            echo -e "${RED}❌ Script start-morgana-mode.sh non trouvé${NC}"
+            echo -e "${YELLOW}💡 Lancement du frontend React...${NC}"
+            cd frontend
+            npm start
+        fi
+        ;;
+    "quantum")
+        # Laboratoire Quantique ER=EPR
+        echo -e "${CYAN}🌀 LABORATOIRE QUANTIQUE ER=EPR${NC}"
+        echo "===================================="
+        echo -e "${PURPLE}Leonard Susskind's Bridge Implementation${NC}"
+        echo ""
+        
+        # Ouvrir la page de test quantique
+        if [ -f "frontend/quantum-er-epr-test.html" ]; then
+            echo -e "${GREEN}✅ Ouverture du laboratoire quantique...${NC}"
+            open "frontend/quantum-er-epr-test.html" 2>/dev/null || xdg-open "frontend/quantum-er-epr-test.html" 2>/dev/null
+        else
+            echo -e "${RED}❌ Page de test quantique non trouvée${NC}"
+        fi
+        ;;
     "save")
         # Sauvegarde manuelle
         if [ -z "$2" ]; then
