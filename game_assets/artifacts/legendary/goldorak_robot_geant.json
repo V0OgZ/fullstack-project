@@ -1,0 +1,104 @@
+{
+  "artifact_collection": "legendary_mecha_units",
+  "created_by": "OPUS-GRUT Goldorak Protocol",
+  "creation_date": "2025-01-28",
+  "category": "Giant Robots",
+  
+  "artifact": {
+    "id": "goldorak_robot_geant",
+    "name": "Goldorak",
+    "type": "Mecha Unit / Special Item",
+    "slot": "Mount/Transformation",
+    "rarity": "Mythique Hors-Jeu",
+    "tier": 10,
+    
+    "description": "Robot géant de 30 mètres, dernière création du professeur Procyon. Alimenté par l'énergie photonique, il est la dernière défense de la Terre contre les forces de Véga.",
+    
+    "flavor_text": "« Fulguropoing ! Cornofulgure ! Métamorphose ! » - Les attaques légendaires de Goldorak",
+    
+    "visual_description": {
+      "appearance": "Robot géant rouge, bleu et jaune avec cornes rétractables",
+      "size": "30 mètres (échelle 3D spéciale)",
+      "effects": "Particules photoniques, transformation épique",
+      "3d_model": "goldorak_full_3d.glb"
+    },
+    
+    "stats": {
+      "attack": 100,
+      "defense": 80,
+      "speed": 60,
+      "energy": 999,
+      "size_category": "COLOSSAL"
+    },
+    
+    "abilities": [
+      {
+        "name": "Fulguropoing",
+        "description": "Poing rocket détachable",
+        "damage": "200-300",
+        "range": "Infini",
+        "animation_3d": "fulguropoing_launch.anim"
+      },
+      {
+        "name": "Cornofulgure", 
+        "description": "Lames d'énergie des cornes",
+        "damage": "150-250",
+        "type": "AOE",
+        "animation_3d": "cornofulgure_spin.anim"
+      },
+      {
+        "name": "Planitron",
+        "description": "Disques tranchants rotatifs",
+        "damage": "100-200 x3",
+        "animation_3d": "planitron_throw.anim"
+      },
+      {
+        "name": "Mégavolts",
+        "description": "Décharge électrique massive",
+        "damage": "300-400",
+        "type": "AOE électrique",
+        "animation_3d": "megavolts_discharge.anim"
+      }
+    ],
+    
+    "special_properties": {
+      "requires_pilot": "actarus_prince_euphor",
+      "3d_mode_only": false,
+      "can_switch_2d_3d": true,
+      "indestructible": true,
+      "flying_unit": true,
+      "giant_category": true
+    },
+    
+    "transformation_modes": {
+      "robot_mode": {
+        "type": "Combat terrestre",
+        "stats_modifier": "+50 DEF"
+      },
+      "ovterre_mode": {
+        "type": "Soucoupe volante", 
+        "stats_modifier": "+100 SPEED"
+      },
+      "aquatic_mode": {
+        "type": "Combat sous-marin",
+        "stats_modifier": "+30 DEF sous l'eau"
+      }
+    },
+    
+    "world_integration": {
+      "2d_world": "Version sprite simplifiée",
+      "3d_pocket_universe": {
+        "name": "Goldorak_Battle_Arena_3D",
+        "description": "Arène spéciale pour combats de mechas géants",
+        "portal_access": true,
+        "full_3d_animations": true
+      }
+    },
+    
+    "lore": {
+      "origin": "Construit sur la planète Euphor par le Professeur Procyon",
+      "purpose": "Défendre la galaxie contre les forces du mal",
+      "pilot_link": "Synchronisation neuronale avec Actarus"
+    }
+  }
+}
