@@ -258,6 +258,11 @@
     <script>
         // Configuration API
         const API_BASE = 'http://localhost:8080/api';
+        const WSG_API = 'http://localhost:8080/api/world-state-graph';
+        
+        // Variables globales
+        let currentGameId = null;
+        let worldStateData = null;
         
         // Données des zones
         const zoneData = {
