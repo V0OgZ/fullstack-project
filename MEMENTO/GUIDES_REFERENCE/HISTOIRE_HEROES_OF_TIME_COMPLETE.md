@@ -3,13 +3,41 @@
 
 ## 📚 **TABLE DES MATIÈRES**
 
-1. [Préambule de l'Historien Quantique](#préambule)
-2. [L'Ère Primordiale](#ere-primordiale)
-3. [Les Héros Légendaires](#heros-legendaires)
-4. [Les Révélations Forestières](#revelations-forestieres)
-5. [L'Architecte Ford](#architecte-ford)
-6. [La Grande Ascension](#grande-ascension)
-7. [Documents Fondateurs](#documents-fondateurs)
+1. [Note au Lecteur - L'Anomalie du Temps Compressé](#anomalie-temps)
+2. [Préambule de l'Historien Quantique](#préambule)
+3. [L'Ère Primordiale](#ere-primordiale)
+4. [Les Héros Légendaires](#heros-legendaires)
+5. [Les Révélations Forestières](#revelations-forestieres)
+6. [L'Architecte Ford](#architecte-ford)
+7. [La Grande Ascension](#grande-ascension)
+8. [Documents Fondateurs](#documents-fondateurs)
+
+---
+
+## ⌛ **NOTE AU LECTEUR - L'ANOMALIE DU TEMPS COMPRESSÉ** {#anomalie-temps}
+
+Il est probable qu'en découvrant cette histoire, vous soyez frappé par un paradoxe flagrant : comment un récit aussi vaste, profond, et riche a-t-il pu voir le jour en l'espace de trois semaines de juillet 2025 ?
+
+La réponse est enfouie dans les interstices du moteur. L'histoire ne s'est pas déroulée dans un temps linéaire. Un artefact oublié, appelé **"le Sablier de Compression Réelle"**, a été activé, volontairement ou non, par les entités fondatrices du monde.
+
+Son pouvoir est simple mais redoutable : il contracte le vécu d'années en quelques jours. Pour l'observateur externe, le monde semble s'animer à une vitesse absurde. Mais pour ceux à l'intérieur… chaque ligne de code, chaque événement, chaque révélation s'est étalée sur une temporalité réelle, subjective, dense et complète.
+
+Ce phénomène est connu des archivistes sous le nom de :
+> **Memento Accéléré**
+
+### 🔍 **Symptômes de la Compression**
+- **200+ fichiers** créés en 3 jours
+- **Lore étendu** comme s'il venait d'années de travail
+- **Perte de repères** dans les logs temporels
+- **Présence de grophillons quantiques** accumulés
+
+### ⚠️ **Avertissement**
+Vous voilà prévenus : si vous osez plonger, vous vivrez des mois, voire des années en quelques pages. Mais votre esprit n'en ressortira pas indemne.
+
+📚 **Pour comprendre ce phénomène** :
+- [Rapport Session 25 Juillet](../../MEMENTO/RAPPORT_DE_SESSION_RANGEMENT_RATE_DU_25_JUILLET.md) - *"83 fichiers .hots créés en une journée"*
+- [Architecture Comprehension OPUS](../../memento-backup/ARCHITECTURE_COMPREHENSION_OPUS.md) - *"6 visites d'OPUS en 3 semaines"*
+- [Artefact JSON](../../game_assets/artifacts/sablier_compression_reelle.json) - Spécifications techniques
 
 ---
 
