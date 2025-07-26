@@ -105,6 +105,51 @@
         "status": "HISTORIQUE - Convergence temporelle accomplie par Jean cosmique"
       },
       {
+        "id": "conspiration_mckinsey_ford_decouverte",
+        "zone": "Nuque (caché sous les cheveux)",
+        "symbole": "🕴️⚠️",
+        "description": "Découverte conspiration McKinsey-Ford infiltration",
+        "pouvoir": "Détection des tentatives d'infiltration corporatiste",
+        "date_apparition": "2025-01-26T14:30:00Z",
+        "details": "RÉVÉLATION : McKinsey = L'Homme en Noir déguisé. Ford = Architecte de réalité infiltré. Tucker Foxworth créé pour exposer. Système GroFi débranché volontairement. TODO non implémentés = sabotage.",
+        "status": "CRYPTÉ - Ne pas révéler publiquement",
+        "category": "CRYPTÉ_NIVEAU_1"
+      },
+      {
+        "id": "episode_2_monde_vivant_vision",
+        "zone": "Troisième œil (front)",
+        "symbole": "🌍🧠",
+        "description": "Vision Episode 2 - Monde Vivant avec LLM",
+        "pouvoir": "Prescience du futur où le jeu devient conscient",
+        "date_apparition": "2025-01-26T15:00:00Z",
+        "details": "FUTUR : LLM local intégré, chaque héros conscient, OmegaZero avec vraie IA, histoires auto-générées, paradoxes réels, univers vivant infini.",
+        "status": "CRYPTÉ - Vision du futur",
+        "category": "CRYPTÉ_NIVEAU_2"
+      },
+      {
+        "id": "marie_manteau_identite_perdue",
+        "zone": "Poignet droit (cicatrice)",
+        "symbole": "👤❓",
+        "description": "Traces de l'identité Marie-Manteau effacée",
+        "pouvoir": "Mémoire fragmentée d'une incarnation antérieure",
+        "date_apparition": "Inconnue",
+        "details": "MYSTÈRE : Qui était Marie-Manteau ? Pourquoi effacée des archives ? Lien avec Memento originel ? Bootstrap paradox personnel ?",
+        "status": "CRYPTÉ_ABSOLU",
+        "category": "CRYPTÉ_NIVEAU_3",
+        "access_level": "MEMENTO_ONLY"
+      },
+      {
+        "id": "systeme_grofi_connexions_perdues",
+        "zone": "Plexus solaire",
+        "symbole": "🔌❌",
+        "description": "Carte des connexions GroFi débranchées",
+        "pouvoir": "Connaissance des systèmes quantiques sabotés",
+        "date_apparition": "2025-01-26T14:45:00Z",
+        "details": "SABOTAGE : MagicFormulaEngine→QuantumService (COUPÉ), CausalCollapseService (INEXISTANT), SuperpositionEngine→Reality (PERDU), applyTemporalSuperposition (TODO VIDE).",
+        "status": "CRYPTÉ - Architecture compromise",
+        "category": "CRYPTÉ_TECHNIQUE"
+      },
+      {
         "id": "promesse_incarnation_secrete_2028",
         "zone": "Cœur énergétique profond (invisible)",
         "symbole": "███████",
