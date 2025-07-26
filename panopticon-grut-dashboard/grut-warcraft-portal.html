@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌍 GRUT - Portail des Mondes - Kalimdor ⚔️ Azeroth 🌍</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #0a0a0a, #1a0f1f, #2a1a3a);
+            color: #ffcc00;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0,0,0,0.8);
+            border-bottom: 3px solid #ff6600;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            text-shadow: 0 0 20px #ff6600, 0 0 40px #ff3300;
+            margin: 0;
+            animation: orcGlow 2s infinite;
+        }
+
+        @keyframes orcGlow {
+            0%, 100% { color: #ffcc00; }
+            50% { color: #ff6600; }
+        }
+
+        .world-container {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 50px;
+            padding: 40px;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        .map-section {
+            background: rgba(0,0,0,0.7);
+            border: 3px solid #ff6600;
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ffcc00;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .map-canvas {
+            width: 100%;
+            height: 500px;
+            background: #1a1a1a;
+            border: 2px solid #666;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Map de Kalimdor */
+        .kalimdor-map {
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500"><rect fill="%23654321" width="400" height="500"/><text x="200" y="50" text-anchor="middle" fill="%23ffcc00" font-size="24">KALIMDOR</text><circle cx="100" cy="150" r="30" fill="%23228b22" stroke="%23ffcc00" stroke-width="2"/><text x="100" y="155" text-anchor="middle" fill="%23fff" font-size="12">Teldrassil</text><circle cx="200" cy="250" r="40" fill="%23ff6600" stroke="%23ffcc00" stroke-width="2"/><text x="200" y="255" text-anchor="middle" fill="%23fff" font-size="12">Orgrimmar</text><circle cx="150" cy="400" r="35" fill="%23daa520" stroke="%23ffcc00" stroke-width="2"/><text x="150" y="405" text-anchor="middle" fill="%23000" font-size="12">Tanaris</text></svg>') center/cover;
+        }
+
+        /* Map d'Azeroth (Eastern Kingdoms) */
+        .azeroth-map {
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500"><rect fill="%23483d8b" width="400" height="500"/><text x="200" y="50" text-anchor="middle" fill="%23ffcc00" font-size="24">AZEROTH</text><circle cx="200" cy="150" r="35" fill="%234169e1" stroke="%23ffcc00" stroke-width="2"/><text x="200" y="155" text-anchor="middle" fill="%23fff" font-size="12">Stormwind</text><circle cx="150" cy="300" r="30" fill="%23800080" stroke="%23ffcc00" stroke-width="2"/><text x="150" y="305" text-anchor="middle" fill="%23fff" font-size="12">Undercity</text><circle cx="250" cy="400" r="25" fill="%23cd853f" stroke="%23ffcc00" stroke-width="2"/><text x="250" y="405" text-anchor="middle" fill="%23fff" font-size="12">Ironforge</text></svg>') center/cover;
+        }
+
+        /* Portails */
+        .portal-container {
+            display: flex;
+            flex-direction: column;
+            gap: 100px;
+            align-items: center;
+        }
+
+        .portal {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .portal-main {
+            background: radial-gradient(circle, #9932cc, #4b0082, #000);
+            box-shadow: 0 0 50px #9932cc, inset 0 0 30px #4b0082;
+            animation: portalSpin 4s linear infinite;
+        }
+
+        .portal-mystery {
+            background: radial-gradient(circle, #ff0000, #8b0000, #000);
+            box-shadow: 0 0 50px #ff0000, inset 0 0 30px #8b0000;
+            animation: portalPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes portalSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes portalPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 50px #ff0000; }
+            50% { transform: scale(1.1); box-shadow: 0 0 80px #ff0000; }
+        }
+
+        .portal-label {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .portal:hover {
+            transform: scale(1.2);
+        }
+
+        /* Status API */
+        .api-status {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.9);
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #00ff00;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .status-online { background: #00ff00; }
+        .status-offline { background: #ff0000; }
+
+        /* Zones interactives */
+        .zone-marker {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,0,0.3);
+            border: 2px solid #ffcc00;
+            border-radius: 50%;
+            cursor: pointer;
+            animation: markerPulse 2s infinite;
+        }
+
+        @keyframes markerPulse {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+
+        /* Info panel */
+        .info-panel {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.95);
+            padding: 30px;
+            border-radius: 15px;
+            border: 3px solid #ff6600;
+            display: none;
+            z-index: 1000;
+            max-width: 500px;
+        }
+
+        .info-panel h2 {
+            color: #ffcc00;
+            margin-top: 0;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff0000;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔥 GRUT L'ORQUE - PORTAIL DES MONDES 🔥</h1>
+        <p>Lok'tar Ogar! La victoire ou la mort!</p>
+    </div>
+
+    <div class="world-container">
+        <!-- Map de Kalimdor -->
+        <div class="map-section">
+            <h2 class="map-title">⚔️ KALIMDOR ⚔️</h2>
+            <div class="map-canvas kalimdor-map" id="kalimdor">
+                <div class="zone-marker" style="top: 120px; left: 70px;" data-zone="teldrassil"></div>
+                <div class="zone-marker" style="top: 220px; left: 170px;" data-zone="orgrimmar"></div>
+                <div class="zone-marker" style="top: 370px; left: 120px;" data-zone="tanaris"></div>
+            </div>
+        </div>
+
+        <!-- Portails -->
+        <div class="portal-container">
+            <div class="portal portal-main" id="portal-worlds" title="Portail entre les mondes">
+                <div class="portal-label">Portail des Mondes</div>
+            </div>
+            <div class="portal portal-mystery" id="portal-interstice" title="Vers l'Interstice et Heroes of Time">
+                <div class="portal-label">Interstice Mystérieux</div>
+            </div>
+        </div>
+
+        <!-- Map d'Azeroth -->
+        <div class="map-section">
+            <h2 class="map-title">🛡️ AZEROTH 🛡️</h2>
+            <div class="map-canvas azeroth-map" id="azeroth">
+                <div class="zone-marker" style="top: 120px; left: 170px;" data-zone="stormwind"></div>
+                <div class="zone-marker" style="top: 270px; left: 120px;" data-zone="undercity"></div>
+                <div class="zone-marker" style="top: 370px; left: 220px;" data-zone="ironforge"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status API -->
+    <div class="api-status">
+        <span class="status-indicator" id="api-indicator"></span>
+        <span id="api-text">Connexion Backend...</span>
+    </div>
+
+    <!-- Info Panel -->
+    <div class="info-panel" id="info-panel">
+        <button class="close-btn" onclick="closeInfo()">X</button>
+        <h2 id="info-title"></h2>
+        <p id="info-content"></p>
+    </div>
+
+    <script>
+        // Configuration API
+        const API_BASE = 'http://localhost:8080/api';
+        
+        // Données des zones
+        const zoneData = {
+            teldrassil: {
+                title: "Teldrassil - L'Arbre Monde",
+                content: "Demeure des Elfes de la Nuit, un arbre gigantesque planté sur le dos d'une tortue géante."
+            },
+            orgrimmar: {
+                title: "Orgrimmar - Capitale de la Horde",
+                content: "Forteresse de GRUT et de ses frères orques. Construite par Thrall en l'honneur d'Orgrim Doomhammer."
+            },
+            tanaris: {
+                title: "Tanaris - Le Désert",
+                content: "Désert aride abritant la cité neutre de Gadgetzan et les ruines de Zul'Farrak."
+            },
+            stormwind: {
+                title: "Stormwind - Capitale de l'Alliance",
+                content: "Cité humaine majestueuse, siège du roi Varian Wrynn et bastion de l'Alliance."
+            },
+            undercity: {
+                title: "Undercity - Cité des Réprouvés",
+                content: "Ancienne crypte transformée en capitale par Sylvanas Windrunner et les morts-vivants libérés."
+            },
+            ironforge: {
+                title: "Ironforge - Montagne de Fer",
+                content: "Forteresse naine creusée dans la montagne, abritant la Grande Forge et le Conseil des Trois Marteaux."
+            }
+        };
+
+        // Vérifier la connexion backend
+        async function checkBackendConnection() {
+            const indicator = document.getElementById('api-indicator');
+            const text = document.getElementById('api-text');
+            
+            try {
+                const response = await fetch(`${API_BASE}/game/status`);
+                if (response.ok) {
+                    indicator.className = 'status-indicator status-online';
+                    text.textContent = 'Backend connecté ✓';
+                    return true;
+                } else {
+                    throw new Error('Backend non disponible');
+                }
+            } catch (error) {
+                indicator.className = 'status-indicator status-offline';
+                text.textContent = 'Backend hors ligne ✗';
+                return false;
+            }
+        }
+
+        // Charger les données du monde depuis le backend
+        async function loadWorldData() {
+            try {
+                const response = await fetch(`${API_BASE}/game/world/current`);
+                if (response.ok) {
+                    const worldData = await response.json();
+                    console.log('Données du monde chargées:', worldData);
+                    // Ici on pourrait mettre à jour les maps avec les vraies données
+                }
+            } catch (error) {
+                console.error('Erreur chargement monde:', error);
+            }
+        }
+
+        // Gestion des clics sur les zones
+        document.querySelectorAll('.zone-marker').forEach(marker => {
+            marker.addEventListener('click', (e) => {
+                const zone = e.target.dataset.zone;
+                showZoneInfo(zone);
+            });
+        });
+
+        // Afficher les infos d'une zone
+        function showZoneInfo(zone) {
+            const data = zoneData[zone];
+            if (data) {
+                document.getElementById('info-title').textContent = data.title;
+                document.getElementById('info-content').textContent = data.content;
+                document.getElementById('info-panel').style.display = 'block';
+            }
+        }
+
+        // Fermer le panneau d'info
+        function closeInfo() {
+            document.getElementById('info-panel').style.display = 'none';
+        }
+
+        // Gestion du portail principal
+        document.getElementById('portal-worlds').addEventListener('click', async () => {
+            alert('🌀 PORTAIL ACTIVÉ ! Transport entre Kalimdor et Azeroth...');
+            // Animation de téléportation
+            document.body.style.animation = 'teleport 1s';
+            setTimeout(() => {
+                document.body.style.animation = '';
+            }, 1000);
+        });
+
+        // Gestion du portail mystérieux
+        document.getElementById('portal-interstice').addEventListener('click', async () => {
+            if (await checkBackendConnection()) {
+                // Tenter de se connecter à l'Interstice via l'API
+                try {
+                    const response = await fetch(`${API_BASE}/game/interstice/enter`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ hero: 'GRUT', portal: 'mystery' })
+                    });
+                    
+                    if (response.ok) {
+                        alert('🔮 INTERSTICE DÉTECTÉ ! Connexion à Heroes of Time établie...');
+                        // Redirection vers Heroes of Time
+                        window.location.href = '/frontend/index.html';
+                    }
+                } catch (error) {
+                    alert('⚠️ Le portail tremble mais reste fermé... Le backend doit être configuré.');
+                }
+            } else {
+                alert('❌ Impossible d\'ouvrir le portail sans connexion au backend!');
+            }
+        });
+
+        // Animation de téléportation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes teleport {
+                0% { opacity: 1; filter: blur(0); }
+                50% { opacity: 0; filter: blur(10px); }
+                100% { opacity: 1; filter: blur(0); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialisation
+        window.addEventListener('load', () => {
+            checkBackendConnection();
+            setInterval(checkBackendConnection, 10000); // Vérifier toutes les 10s
+            loadWorldData();
+        });
+    </script>
+</body>
+</html>
