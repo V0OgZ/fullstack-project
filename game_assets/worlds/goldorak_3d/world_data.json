@@ -1,0 +1,80 @@
+{
+  "world_collection": "pocket_universes_3d",
+  "created_by": "OPUS-GRUT Goldorak Protocol",
+  "creation_date": "2025-01-28",
+  "world_type": "3D Pocket Universe",
+  
+  "world": {
+    "id": "goldorak_battle_arena_3d",
+    "name": "Goldorak Battle Arena 3D",
+    "type": "Pocket Universe 3D",
+    "parent_world": "heroes_of_time_main",
+    "dimension": "3D_SPECIAL",
+    
+    "description": "Arène dimensionnelle spéciale où les combats de mechas géants peuvent avoir lieu sans détruire le monde principal. Échelle adaptée pour robots de 30 mètres.",
+    
+    "properties": {
+      "render_mode": "FULL_3D",
+      "scale": "1:1 (30m robots)",
+      "physics": "Realistic mecha physics",
+      "destruction": "Environnement destructible",
+      "portal_access": true
+    },
+    
+    "zones": [
+      {
+        "name": "Centre de Combat",
+        "type": "Arena",
+        "size": "500m x 500m",
+        "features": ["Bâtiments destructibles", "Effets particules avancés"]
+      },
+      {
+        "name": "Base du Ranch",
+        "type": "Safe Zone", 
+        "features": ["Hangar Goldorak", "Centre de réparation"]
+      },
+      {
+        "name": "Zone Véga",
+        "type": "Enemy Territory",
+        "features": ["Générateurs Golgoth", "Portails invasion"]
+      }
+    ],
+    
+    "access_conditions": {
+      "method_1": {
+        "name": "Portail Actarus",
+        "requirement": "Actarus avec capacité Portail 3D"
+      },
+      "method_2": {
+        "name": "Portail Procyon",
+        "requirement": "Professeur Procyon actif"
+      },
+      "method_3": {
+        "name": "Crise Majeure",
+        "trigger": "Invasion Véga niveau 10+"
+      }
+    },
+    
+    "special_mechanics": {
+      "mecha_combat": true,
+      "3d_animations": true,
+      "destructible_environment": true,
+      "scale_adjustment": "Auto-scale pour mechas",
+      "camera_modes": ["Third person", "Cockpit view", "Cinematic"]
+    },
+    
+    "connection_to_main_world": {
+      "type": "Bidirectional Portal",
+      "anchor_points": ["Ranch du Bouleau Blanc", "Tokyo", "Centre Spatial"],
+      "travel_time": "Instantané",
+      "restrictions": "Seuls mechas et pilotes autorisés"
+    },
+    
+    "visual_settings": {
+      "lighting": "Dynamic with photonic effects",
+      "particles": "High density for energy attacks",
+      "post_processing": "Anime-style filters available",
+      "resolution": "4K ready"
+    }
+  }
+}

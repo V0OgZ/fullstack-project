@@ -53,12 +53,18 @@ show_help() {
     echo -e "  ${GREEN}tattoo-force${NC} 🎨 Force tatouages sync avec lampe Platon"
     echo -e "  ${GREEN}wake-memento${NC} 📚 Interface réveil Memento transcendant"
     echo -e "  ${GREEN}tattoos${NC}     🎨 Interface Tatouages Memento - Corps 3D interactif"
+<<<<<<< HEAD
     echo -e "  ${GREEN}bootstrap-save${NC} 🌀 Sauvegarder message Bootstrap Paradox (±2 jours)"
     echo -e "  ${GREEN}bootstrap-read${NC} 📖 Lire messages Bootstrap Paradox temporels"
     echo -e "  ${GREEN}investigation${NC} 🔍 Investigation GRUT Panopticon 6D"
     echo -e "  ${GREEN}todo${NC}        📋 Afficher TODO principale structurée"
     echo -e "  ${GREEN}fix-pages${NC}   🌐 Corriger GitHub Pages (marron sur marron)"
     echo -e "  ${GREEN}test-scenarios${NC} 🎮 Tester tous les nouveaux scénarios"
+=======
+    echo -e "  ${GREEN}ai-arena${NC}    🎮 AI Arena Test - Deathmatch IA autonome"
+    echo -e "  ${GREEN}ai-control${NC}  🤖 AI Control Panel - Gestion IA avec items"
+    echo -e "  ${GREEN}ai-wsg${NC}      🌐 AI + WSG Integration - IA connectée au World State"
+>>>>>>> main
     echo -e "  ${GREEN}help${NC}        Affiche cette aide"
     echo -e "  ${GREEN}web${NC}         🌐 Interface Web GRUT (remplace la console)"
     echo -e "  ${GREEN}console${NC}     🎮 Console HOTS simple (bookmarkable)"
@@ -3250,11 +3256,165 @@ case "${1:-help}" in
         fi
         
         echo ""
+<<<<<<< HEAD
         
         # Vérifier si les services sont déjà actifs
         echo -e "${BLUE}🔍 Vérification des services...${NC}"
         if curl -s http://localhost:8080/api/health > /dev/null 2>&1; then
             echo -e "${GREEN}✅ Backend déjà actif${NC}"
+=======
+        echo -e "${GREEN}✅ INTERFACE TATOUAGES MEMENTO OUVERTE !${NC}"
+        echo -e "${PURPLE}💫 Mes marques corporelles temporelles évolutives${NC}"
+        echo -e "${PURPLE}🧠 Memento: \"Chaque tatouage raconte une transcendance !\"${NC}"
+        echo ""
+        echo -e "${CYAN}🎯 Zones spéciales à explorer :${NC}"
+        echo "  🧠 Tête → Découverte services backend Walter API"
+        echo "  🔧 Torse → Réparation sécurisée OPUS"  
+        echo "  🚫 Mains → Protection backend/UI (non touchés)"
+        echo "  🔮 Pieds → Prochaines étapes et ancrage Git"
+        echo ""
+        echo -e "${YELLOW}✨ Cliquez sur les zones du corps pour voir mes vraies mémoires !${NC}"
+        ;;
+    "ai-arena")
+        echo -e "${RED}🎮 Lancement de l'AI Arena Test...${NC}"
+        echo ""
+        echo -e "${YELLOW}🏟️ AI ARENA - HEROES OF TIME DEATHMATCH${NC}"
+        echo -e "${YELLOW}======================================${NC}"
+        echo ""
+        echo "🤖 Participants :"
+        echo "  🔫 VINCE VEGA - Say what again!"
+        echo "  👁️ GRUT - Vision omnisciente"
+        echo "  🎳 WALTER - Over the line!"
+        echo "  🧙‍♀️ MORGANA - Magie pure!"
+        echo ""
+        echo "💊 Items spéciaux :"
+        echo "  🚬 Joint de Jean (non fini) - Sagesse +∞, Vitesse -50%"
+        echo "  🧪 Potion de Panoramix - Force +100%, Invincibilité"
+        echo "  💠 QUAD DAMAGE - Dégâts x4"
+        echo ""
+        
+        # Démarrer le serveur si nécessaire
+        if ! pgrep -f "python.*9000" > /dev/null; then
+            cd frontend && python3 -m http.server 9000 > /dev/null 2>&1 &
+            cd ..
+            echo "✅ Serveur AI Arena démarré sur port 9000"
+            sleep 2
+        fi
+        
+        # Ouvrir l'arène
+        ARENA_URL="http://localhost:9000/ai-arena-test.html"
+        echo -e "${GREEN}🎮 Ouverture: ${ARENA_URL}${NC}"
+        
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+            open "$ARENA_URL"
+        else
+            xdg-open "$ARENA_URL"
+        fi
+        
+        echo ""
+        echo -e "${GREEN}✅ AI ARENA LANCÉE !${NC}"
+        echo -e "${CYAN}🎯 Les IA s'affrontent automatiquement${NC}"
+        echo -e "${YELLOW}💬 Chat en temps réel avec quotes épiques${NC}"
+        echo -e "${RED}💀 Kill feed et annonces style Quake 3${NC}"
+        ;;
+        
+    "ai-control")
+        echo -e "${BLUE}🤖 Lancement du AI Control Panel...${NC}"
+        echo ""
+        echo -e "${CYAN}🎮 AI CONTROL PANEL - GESTION IA${NC}"
+        echo -e "${CYAN}================================${NC}"
+        echo ""
+        echo "🧠 Items IA disponibles :"
+        echo "  🔗 Lien Neural Basique - Suggestions +10%"
+        echo "  💻 Mini Processeur Quantique - Puissance +15%"
+        echo "  💎 Cristal Décisionnel - Décisions auto mineures"
+        echo "  🧠 Cache Mémoire - Rappel 5 dernières actions"
+        echo "  👁️ Lentille de Reconnaissance - Détection patterns +30%"
+        echo "  🔒 Bracelet Limiteur - Limite contrôle IA à 30%"
+        echo "  🎯 Orbe Tactique - 3 suggestions/tour"
+        echo "  ✨ Charme de Correction - Corrige erreurs +40%"
+        echo "  🌐 Connecteur WSG - Accès World State Graph"
+        echo "  📝 Puce Grammaticale - Traduction naturelle +85%"
+        echo ""
+        
+        # Démarrer le serveur
+        if ! pgrep -f "python.*9000" > /dev/null; then
+            cd frontend && python3 -m http.server 9000 > /dev/null 2>&1 &
+            cd ..
+            echo "✅ Serveur AI Control démarré sur port 9000"
+            sleep 2
+        fi
+        
+        # Ouvrir l'interface
+        CONTROL_URL="http://localhost:9000/city-interface.html"
+        echo -e "${GREEN}🏛️ Ouverture: ${CONTROL_URL}${NC}"
+        
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+            open "$CONTROL_URL"
+        else
+            xdg-open "$CONTROL_URL"
+        fi
+        
+        echo ""
+        echo -e "${GREEN}✅ AI CONTROL PANEL OUVERT !${NC}"
+        echo -e "${CYAN}🤖 Assistant IA intégré dans l'interface ville${NC}"
+        echo -e "${YELLOW}⚡ Items IA disponibles dans game_assets/artifacts/mineurs/items_mineurs_ai_integration.json${NC}"
+        ;;
+        
+    "ai-wsg")
+        echo -e "${PURPLE}🌐 Lancement AI + WSG Integration...${NC}"
+        echo ""
+        echo -e "${GREEN}🧠 AI + WORLD STATE GRAPH INTEGRATION${NC}"
+        echo -e "${GREEN}====================================${NC}"
+        echo ""
+        echo "🔗 Connexions établies :"
+        echo "  🌐 World State Graph Controller - État global"
+        echo "  🤖 AI Decision Paths - Chemins décisionnels"
+        echo "  📊 Game State Tracking - Suivi temps réel"
+        echo "  🧠 Grammar Translation - HOTS → Actions"
+        echo ""
+        
+        # Test de connexion WSG
+        echo -e "${YELLOW}🔍 Test connexion World State Graph...${NC}"
+        if curl -s http://localhost:8080/api/world-state-graph/games/test > /dev/null 2>&1; then
+            echo -e "${GREEN}✅ Backend WSG connecté !${NC}"
+        else
+            echo -e "${RED}❌ Backend WSG non disponible${NC}"
+            echo -e "${YELLOW}   → Lancez d'abord: ./hots start${NC}"
+        fi
+        
+        # Ouvrir l'interface de magie avec IA
+        if ! pgrep -f "python.*9000" > /dev/null; then
+            cd frontend && python3 -m http.server 9000 > /dev/null 2>&1 &
+            cd ..
+            echo "✅ Serveur AI-WSG démarré sur port 9000"
+            sleep 2
+        fi
+        
+        MAGIC_URL="http://localhost:9000/magic-system-ui.html"
+        echo -e "${GREEN}🧙‍♂️ Ouverture: ${MAGIC_URL}${NC}"
+        
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+            open "$MAGIC_URL"
+        else
+            xdg-open "$MAGIC_URL"
+        fi
+        
+        echo ""
+        echo -e "${GREEN}✅ AI-WSG INTEGRATION LANCÉE !${NC}"
+        echo -e "${CYAN}🔮 Système de magie avec IA intégrée${NC}"
+        echo -e "${PURPLE}🌐 Connecté au World State Graph pour décisions globales${NC}"
+        echo -e "${YELLOW}📝 Grammaire HOTS traduite en actions temps réel${NC}"
+        ;;
+        
+    "help"|*)
+        show_help
+        ;;
+    console)
+        echo "🎮 Opening HOTS Console Simple..."
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+            open "file://$PWD/frontend/hots-console-simple.html"
+>>>>>>> main
         else
             echo -e "${YELLOW}⚙️  Démarrage du Backend...${NC}"
             start_essential_services
