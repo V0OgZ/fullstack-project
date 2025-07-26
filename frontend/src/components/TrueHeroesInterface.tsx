@@ -624,18 +624,15 @@ const TrueHeroesInterface: React.FC = () => {
                 <div className="panel-header">
                   <h3>🌀 Quantum Convergence</h3>
                 </div>
-                <div className="quantum-content">
-                  <BoseConvergenceVisualizer />
-                  <div style={{ marginTop: '20px' }}>
-                    <QuantumBridgeVisualizer />
-                  </div>
-                </div>
+                <BoseConvergenceVisualizer />
               </div>
             )}
           </div>
+        </div>
+      </div>
+
       {/* Epic Content Viewer */}
       <EpicContentViewer 
-        isVisible={showEpicContentViewer} 
         onClose={() => setShowEpicContentViewer(false)} 
       />
 

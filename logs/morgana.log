@@ -2,33 +2,33 @@
 > heroes-of-time-frontend@1.0.0 start
 > react-scripts start
 
-(node:35166) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
+(node:36972) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
 (Use `node --trace-deprecation ...` to show where the warning was created)
-(node:35166) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
-(node:35166) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(node:36972) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(node:36972) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
 Starting the development server...
 
 Failed to compile.
 
 [eslint] 
 src/components/TrueHeroesInterface.tsx
-Syntax error: Declaration or statement expected (648:2)
+Syntax error: Declaration or statement expected (632:6)
 ERROR in ./src/components/TrueHeroesInterface.tsx
 Module build failed (from ./node_modules/babel-loader/lib/index.js):
-SyntaxError: /Users/admin/fullstack-project/frontend/src/components/TrueHeroesInterface.tsx: Unexpected token (648:2)
+SyntaxError: /Users/admin/fullstack-project/frontend/src/components/TrueHeroesInterface.tsx: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>? (632:6)
 
-  646 |       />
-  647 |     </div>
-> 648 |   );
-      |   ^
-  649 | };
-  650 |
-  651 | export default TrueHeroesInterface; 
+  630 |           </div>
+  631 |         </div>
+> 632 |       </div>
+      |       ^
+  633 |
+  634 |       {/* Epic Content Viewer */}
+  635 |       <EpicContentViewer 
     at constructor (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:367:19)
     at TypeScriptParserMixin.raise (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:6627:19)
-    at TypeScriptParserMixin.unexpected (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:6647:16)
-    at TypeScriptParserMixin.parseExprAtom (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:11442:16)
-    at TypeScriptParserMixin.parseExprAtom (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:4794:20)
+    at TypeScriptParserMixin.jsxParseElementAt (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:4772:18)
+    at TypeScriptParserMixin.jsxParseElement (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:4779:17)
+    at TypeScriptParserMixin.parseExprAtom (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:4792:19)
     at TypeScriptParserMixin.parseExprSubscripts (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:11076:23)
     at TypeScriptParserMixin.parseUpdate (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:11061:21)
     at TypeScriptParserMixin.parseMaybeUnary (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:11041:23)
@@ -37,7 +37,9 @@ SyntaxError: /Users/admin/fullstack-project/frontend/src/components/TrueHeroesIn
     at TypeScriptParserMixin.parseExprOps (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:10899:23)
     at TypeScriptParserMixin.parseMaybeConditional (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:10876:23)
     at TypeScriptParserMixin.parseMaybeAssign (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:10826:21)
-    at TypeScriptParserMixin.parseMaybeAssign (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:9801:20)
+    at /Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:9790:39
+    at TypeScriptParserMixin.tryParse (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:6935:20)
+    at TypeScriptParserMixin.parseMaybeAssign (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:9790:18)
     at TypeScriptParserMixin.parseExpressionBase (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:10779:23)
     at /Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:10775:39
     at TypeScriptParserMixin.allowInAnd (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:12422:16)
@@ -72,8 +74,6 @@ SyntaxError: /Users/admin/fullstack-project/frontend/src/components/TrueHeroesIn
     at TypeScriptParserMixin.parseStatementContent (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:12851:23)
     at TypeScriptParserMixin.parseStatementContent (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:9527:18)
     at TypeScriptParserMixin.parseStatementLike (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:12767:17)
-    at TypeScriptParserMixin.parseModuleItem (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:12744:17)
-    at TypeScriptParserMixin.parseBlockOrModuleBlockBody (/Users/admin/fullstack-project/frontend/node_modules/@babel/parser/lib/index.js:13316:36)
 
 ERROR in ./src/pages/TestPages.tsx 6:0-68
 Module not found: Error: Can't resolve '../components/SimpleGameInterface' in '/Users/admin/fullstack-project/frontend/src/pages'
@@ -86,7 +86,7 @@ Module not found: Error: Can't resolve '../components/SimpleModernInterface' in 
 
 ERROR in [eslint] 
 src/components/TrueHeroesInterface.tsx
-  Line 648:2:  Parsing error: Declaration or statement expected
+  Line 632:6:  Parsing error: Declaration or statement expected
 
 webpack compiled with 5 errors
 Files successfully emitted, waiting for typecheck results...
@@ -252,6 +252,9 @@ TS2322: Type '(position: {    x: number;    y: number;}) => void' is not assigna
     110 |           />
     111 |         </div>
     112 |
+
+ERROR in src/components/TrueHeroesInterface.tsx
+TS1161: Unterminated regular expression literal.
 
 ERROR in src/components/TrueHeroesInterface.tsx:141:7
 TS2304: Cannot find name 'isLoading'.
@@ -625,24 +628,161 @@ TS2304: Cannot find name 'mockEpicContent'.
     616 |                   </div>
     617 |                 </div>
 
-ERROR in src/components/TrueHeroesInterface.tsx:648:3
+ERROR in src/components/TrueHeroesInterface.tsx:632:7
 TS1128: Declaration or statement expected.
-    646 |       />
-    647 |     </div>
-  > 648 |   );
-        |   ^
-    649 | };
-    650 |
-    651 | export default TrueHeroesInterface; 
+    630 |           </div>
+    631 |         </div>
+  > 632 |       </div>
+        |       ^^
+    633 |
+    634 |       {/* Epic Content Viewer */}
+    635 |       <EpicContentViewer 
 
-ERROR in src/components/TrueHeroesInterface.tsx:649:1
-TS1128: Declaration or statement expected.
-    647 |     </div>
-    648 |   );
-  > 649 | };
+ERROR in src/components/TrueHeroesInterface.tsx:632:9
+TS2304: Cannot find name 'div'.
+    630 |           </div>
+    631 |         </div>
+  > 632 |       </div>
+        |         ^^^
+    633 |
+    634 |       {/* Epic Content Viewer */}
+    635 |       <EpicContentViewer 
+
+ERROR in src/components/TrueHeroesInterface.tsx:632:9
+TS2365: Operator '<' cannot be applied to types 'boolean' and 'FC<EpicContentViewerProps>'.
+    630 |           </div>
+    631 |         </div>
+  > 632 |       </div>
+        |         ^^^^
+  > 633 |
         | ^
-    650 |
-    651 | export default TrueHeroesInterface; 
+  > 634 |       {/* Epic Content Viewer */}
+        | ^
+  > 635 |       <EpicContentViewer 
+        | ^^^^^^^^^^^^^^^^^^^^^^^^^
+    636 |         onClose={() => setShowEpicContentViewer(false)} 
+    637 |       />
+    638 |
+
+ERROR in src/components/TrueHeroesInterface.tsx:636:9
+TS2552: Cannot find name 'onClose'. Did you mean 'onclose'?
+    634 |       {/* Epic Content Viewer */}
+    635 |       <EpicContentViewer 
+  > 636 |         onClose={() => setShowEpicContentViewer(false)} 
+        |         ^^^^^^^
+    637 |       />
+    638 |
+    639 |       {/* 🚀 GOLDORAK EASTER EGG - Tapez G-O-L-D-O-R-A-K pour l'activer! */}
+
+ERROR in src/components/TrueHeroesInterface.tsx:636:17
+TS2349: This expression is not callable.
+  Type '{}' has no call signatures.
+    634 |       {/* Epic Content Viewer */}
+    635 |       <EpicContentViewer 
+  > 636 |         onClose={() => setShowEpicContentViewer(false)} 
+        |                 ^
+    637 |       />
+    638 |
+    639 |       {/* 🚀 GOLDORAK EASTER EGG - Tapez G-O-L-D-O-R-A-K pour l'activer! */}
+
+ERROR in src/components/TrueHeroesInterface.tsx:636:18
+TS1136: Property assignment expected.
+    634 |       {/* Epic Content Viewer */}
+    635 |       <EpicContentViewer 
+  > 636 |         onClose={() => setShowEpicContentViewer(false)} 
+        |                  ^
+    637 |       />
+    638 |
+    639 |       {/* 🚀 GOLDORAK EASTER EGG - Tapez G-O-L-D-O-R-A-K pour l'activer! */}
+
+ERROR in src/components/TrueHeroesInterface.tsx:636:21
+TS1005: ';' expected.
+    634 |       {/* Epic Content Viewer */}
+    635 |       <EpicContentViewer 
+  > 636 |         onClose={() => setShowEpicContentViewer(false)} 
+        |                     ^^
+    637 |       />
+    638 |
+    639 |       {/* 🚀 GOLDORAK EASTER EGG - Tapez G-O-L-D-O-R-A-K pour l'activer! */}
+
+ERROR in src/components/TrueHeroesInterface.tsx:636:24
+TS2552: Cannot find name 'setShowEpicContentViewer'. Did you mean 'EpicContentViewer'?
+    634 |       {/* Epic Content Viewer */}
+    635 |       <EpicContentViewer 
+  > 636 |         onClose={() => setShowEpicContentViewer(false)} 
+        |                        ^^^^^^^^^^^^^^^^^^^^^^^^
+    637 |       />
+    638 |
+    639 |       {/* 🚀 GOLDORAK EASTER EGG - Tapez G-O-L-D-O-R-A-K pour l'activer! */}
+
+ERROR in src/components/TrueHeroesInterface.tsx:636:55
+TS1128: Declaration or statement expected.
+    634 |       {/* Epic Content Viewer */}
+    635 |       <EpicContentViewer 
+  > 636 |         onClose={() => setShowEpicContentViewer(false)} 
+        |                                                       ^
+    637 |       />
+    638 |
+    639 |       {/* 🚀 GOLDORAK EASTER EGG - Tapez G-O-L-D-O-R-A-K pour l'activer! */}
+
+ERROR in src/components/TrueHeroesInterface.tsx:641:19
+TS2552: Cannot find name 'showGoldorakEasterEgg'. Did you mean 'GoldorakEasterEgg'?
+    639 |       {/* 🚀 GOLDORAK EASTER EGG - Tapez G-O-L-D-O-R-A-K pour l'activer! */}
+    640 |       <GoldorakEasterEgg 
+  > 641 |         isActive={showGoldorakEasterEgg} 
+        |                   ^^^^^^^^^^^^^^^^^^^^^
+    642 |         onClose={() => setShowGoldorakEasterEgg(false)} 
+    643 |       />
+    644 |     </div>
+
+ERROR in src/components/TrueHeroesInterface.tsx:642:24
+TS2552: Cannot find name 'setShowGoldorakEasterEgg'. Did you mean 'GoldorakEasterEgg'?
+    640 |       <GoldorakEasterEgg 
+    641 |         isActive={showGoldorakEasterEgg} 
+  > 642 |         onClose={() => setShowGoldorakEasterEgg(false)} 
+        |                        ^^^^^^^^^^^^^^^^^^^^^^^^
+    643 |       />
+    644 |     </div>
+    645 |   );
+
+ERROR in src/components/TrueHeroesInterface.tsx:644:5
+TS1128: Declaration or statement expected.
+    642 |         onClose={() => setShowGoldorakEasterEgg(false)} 
+    643 |       />
+  > 644 |     </div>
+        |     ^^
+    645 |   );
+    646 | };
+    647 |
+
+ERROR in src/components/TrueHeroesInterface.tsx:644:7
+TS2304: Cannot find name 'div'.
+    642 |         onClose={() => setShowGoldorakEasterEgg(false)} 
+    643 |       />
+  > 644 |     </div>
+        |       ^^^
+    645 |   );
+    646 | };
+    647 |
+
+ERROR in src/components/TrueHeroesInterface.tsx:645:3
+TS1109: Expression expected.
+    643 |       />
+    644 |     </div>
+  > 645 |   );
+        |   ^
+    646 | };
+    647 |
+    648 | export default TrueHeroesInterface; 
+
+ERROR in src/components/TrueHeroesInterface.tsx:646:1
+TS1128: Declaration or statement expected.
+    644 |     </div>
+    645 |   );
+  > 646 | };
+        | ^
+    647 |
+    648 | export default TrueHeroesInterface; 
 
 ERROR in src/pages/TestPages.tsx:3:33
 TS2307: Cannot find module '../components/SimpleGameInterface' or its corresponding type declarations.
@@ -673,6 +813,65 @@ TS2307: Cannot find module '../components/SimpleModernInterface' or its correspo
     6 |
     7 | // Page de test pour TrueHeroesInterface
     8 | export const TestTrueHeroesInterface: React.FC = () => {
+
+ERROR in src/services/epicService.ts:2:14
+TS2451: Cannot redeclare block-scoped variable 'getServerStatus'.
+    1 |
+  > 2 | export const getServerStatus = async () => {
+      |              ^^^^^^^^^^^^^^^
+    3 |   return { endpoints: { heroes: true, creatures: true, buildings: true, artifacts: true } };
+    4 | };
+    5 |
+
+ERROR in src/services/epicService.ts:6:14
+TS2451: Cannot redeclare block-scoped variable 'fetchEpicBuildings'.
+    4 | };
+    5 |
+  > 6 | export const fetchEpicBuildings = async (): Promise<any[]> => {
+      |              ^^^^^^^^^^^^^^^^^^
+    7 |   return [];
+    8 | };
+    9 |
+
+ERROR in src/services/epicService.ts:10:14
+TS2451: Cannot redeclare block-scoped variable 'fetchEpicArtifacts'.
+     8 | };
+     9 |
+  > 10 | export const fetchEpicArtifacts = async (): Promise<any[]> => {
+       |              ^^^^^^^^^^^^^^^^^^
+    11 |   return [];
+    12 | };
+    13 |
+
+ERROR in src/services/epicService.ts:14:14
+TS2451: Cannot redeclare block-scoped variable 'getServerStatus'.
+    12 | };
+    13 |
+  > 14 | export const getServerStatus = async () => {
+       |              ^^^^^^^^^^^^^^^
+    15 |   return { endpoints: { heroes: true, creatures: true, buildings: true, artifacts: true } };
+    16 | };
+    17 |
+
+ERROR in src/services/epicService.ts:18:14
+TS2451: Cannot redeclare block-scoped variable 'fetchEpicBuildings'.
+    16 | };
+    17 |
+  > 18 | export const fetchEpicBuildings = async (): Promise<any[]> => {
+       |              ^^^^^^^^^^^^^^^^^^
+    19 |   return [];
+    20 | };
+    21 |
+
+ERROR in src/services/epicService.ts:22:14
+TS2451: Cannot redeclare block-scoped variable 'fetchEpicArtifacts'.
+    20 | };
+    21 |
+  > 22 | export const fetchEpicArtifacts = async (): Promise<any[]> => {
+       |              ^^^^^^^^^^^^^^^^^^
+    23 |   return [];
+    24 | };
+    25 |
 
 ERROR in src/services/gameActionService.ts:21:27
 TS2554: Expected 3 arguments, but got 2.
