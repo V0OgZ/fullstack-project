@@ -634,7 +634,6 @@ const TrueHeroesInterface: React.FC = () => {
             )}
           </div>
         </div>
-      </div>
 
       {/* Epic Content Viewer */}
       <EpicContentViewer 
