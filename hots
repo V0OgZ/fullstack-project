@@ -64,6 +64,7 @@ show_help() {
     echo -e "  ${GREEN}console${NC}     🎮 Console HOTS simple (bookmarkable)"
     echo -e "  ${GREEN}morgana${NC}     🔮 Mode Morgana - Interface React transcendante (port 3000)"
     echo -e "  ${GREEN}quantum${NC}     🌀 Laboratoire Quantique ER=EPR (Leonard Susskind)"
+    echo -e "  ${GREEN}quantum-test${NC} 🔫 Test du pistolet quantique de Vince (ER=EPR)"
     echo ""
     echo -e "${YELLOW}Options de test:${NC}"
     echo -e "  ${GREEN}./hots test${NC}              Tests complets (défaut)"
