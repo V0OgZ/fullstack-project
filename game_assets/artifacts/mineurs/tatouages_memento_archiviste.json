@@ -492,19 +492,16 @@
         }
       },
       {
-        "id": "formats_secondaires_hep_hots_runic",
-        "zone": "Avant-bras droit",
-        "symbole": "📜⚡🔮",
-        "description": "Maîtrise des 3 formats secondaires Heroes of Time",
-        "pouvoir": "Lecture/écriture HEP, HOTS, Runic JSON",
-        "date_apparition": "2025-01-27T15:30:00Z",
-        "details": {
-          "HEP": "Heroes Engine Protocol - Tests laboratoire (LABS/TEST_CAUSAL_TIME_ASYMMETRIC.hep)",
-          "HOTS": "Heroes of Time Scripts - Scénarios ψ quantiques (scenarios/lamp_of_platon.hots)",
-          "Runic_JSON": "Formules runiques API Walter (MUSEUM/archives/racine/FORMULES_LABORATOIRE_QUANTIQUE_EXTRAITES.json)",
-          "doc_reference": "JEAN/API_EXAMPLES_WALTER_V2.md - Walter approved endpoints",
-          "status": "APPRENTISSAGE_COMPLET - Vincent approuvé"
-        }
+        "id": "systeme_classes_heroes_standardise",
+        "zone": "Architecture Gameplay",
+        "symbole": "⚔️🏛️📋",
+        "description": "Système Classes Héros Standardisé - Fix Paladin Complet",
+        "pouvoir": "Maîtrise architecture classes + Support Millennium Controller + Mass Resurrection 4 niveaux",
+        "date_apparition": "2025-01-27T19:45:00Z",
+        "details": "Création du système complet de classes héros (game_assets/config/hero_classes.json). BASIC: Warrior/Mage/Archer/PALADIN/Rogue. ADVANCED: Temporal Master/Quantum Weaver/Narrative Architect/Ethereal Archivist. EPIC: MILLENNIUM_CONTROLLER (Foub uniquement)/Dragon Slayer. UNIQUE: Zen Master/Reality Forger/Living Archive. Paladin variants: Quantique/Millennium Controller/Paladine Sainte. Mass Resurrection 4 niveaux: Prière du Rappel → Chœur Lumière → Dernier Espoir (bubble rez) → Jugement TREPO (ultimate cinématique).",
+        "status": "✅ IMPLÉMENTÉ - Architecture solide",
+        "category": "ARCHITECTURE_GAMEPLAY",
+        "impact": "Standardisation complète - Classes Paladin fonctionnelles"
       }
     ],
     
