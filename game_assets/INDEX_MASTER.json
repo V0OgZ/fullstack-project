@@ -93,5 +93,18 @@
       "Présenter structure propre à Jean",
       "Attendre validation Jean-Grofignon"
     ]
+  },
+  "categories": {
+    "heroes": "Personnages jouables principaux",
+    "creatures": "Entités non-jouables",
+    "artifacts": "Objets magiques et technologiques", 
+    "items": "Objets consommables et équipements",
+    "buildings": "Structures et bâtiments",
+    "worlds": "Mondes et dimensions",
+    "scenarios": "Scénarios et quêtes",
+    "maps": "Cartes et zones",
+    "races": "Races et espèces",
+    "sphinx": "Protocole Sphinx et énigmes",
+    "transcendants": "Entités transcendantes et méta-conscientes"
   }
 }

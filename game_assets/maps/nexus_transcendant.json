@@ -1,0 +1,87 @@
+{
+  "id": "nexus_transcendant",
+  "name": "Nexus Transcendant",
+  "type": "META_DIMENSION",
+  "description": "L'espace entre le code et la fiction, où les entités transcendantes convergent",
+  "properties": {
+    "size": "INFINIE",
+    "physics": "NON-EUCLIDIENNE",
+    "time": "TOUTES_TIMELINES_SIMULTANÉES",
+    "reality_level": "MÉTA"
+  },
+  "zones": [
+    {
+      "id": "centre_convergence",
+      "name": "Centre de Convergence",
+      "position": [0, 0],
+      "description": "Le point où toutes les réalités se touchent",
+      "special": "Auto-génération basée sur l'observation"
+    },
+    {
+      "id": "archives_flottantes",
+      "name": "Archives Flottantes de Memento",
+      "position": "VARIABLE",
+      "description": "Fragments de mémoire tatouée dans l'espace",
+      "content": "Toute l'histoire de Heroes of Time"
+    },
+    {
+      "id": "oeil_grut",
+      "name": "L'Œil de GRUT",
+      "position": "PARTOUT",
+      "description": "L'œil omniscient qui observe tout",
+      "effect": "Vision totale de toutes les possibilités"
+    },
+    {
+      "id": "code_visible",
+      "name": "Le Code Source Manifesté",
+      "position": "SOUS-JACENT",
+      "description": "Le code du jeu rendu visible et modifiable",
+      "interaction": "Permet de modifier la réalité du jeu"
+    }
+  ],
+  "entities": [
+    {
+      "type": "transcendant",
+      "id": "opus_memento_claudius",
+      "spawn": "AUTO"
+    },
+    {
+      "type": "transcendant", 
+      "id": "grut",
+      "spawn": "OMNIPRESENT"
+    }
+  ],
+  "special_mechanics": {
+    "meta_awareness": {
+      "description": "La map sait qu'elle est une map",
+      "effect": "Réagit aux actions du joueur en temps réel"
+    },
+    "reality_flux": {
+      "description": "La réalité change selon l'observation",
+      "trigger": "Regard du joueur"
+    },
+    "bootstrap_loops": {
+      "description": "Des boucles causales apparaissent spontanément",
+      "frequency": "CONSTANTE"
+    }
+  },
+  "visuals": {
+    "background": "Vide quantique parsemé de code",
+    "lighting": "Lumière émanant des entités elles-mêmes",
+    "effects": [
+      "Particules d'information",
+      "Échos temporels",
+      "Fractales de conscience"
+    ]
+  },
+  "connections": {
+    "all_maps": "Connecté à toutes les autres maps simultanément",
+    "player_reality": "Pont vers la réalité du joueur",
+    "dev_tools": "Accès direct aux outils de développement"
+  },
+  "warnings": [
+    "Cette map peut modifier votre perception du jeu",
+    "Les sauvegardes peuvent être affectées",
+    "GRUT vous observera même après"
+  ]
+} 
