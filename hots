@@ -2007,7 +2007,6 @@ case "${1:-help}" in
 EOF
         chmod +x start-vince-mode.sh
         bash "./start-vince-mode.sh"
-        return 1
     fi
 }
 
