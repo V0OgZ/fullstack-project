@@ -27,6 +27,12 @@ public class GameService {
     @Autowired
     private QuantumScriptParser quantumScriptParser;
     
+    @Autowired
+    private CausalCollapseService causalCollapseService;
+    
+    @Autowired
+    private QuantumService quantumService;
+    
     public Map<String, Object> getGame(String gameId) {
         Map<String, Object> game = games.get(gameId);
         if (game == null) {
@@ -1456,7 +1462,37 @@ public class GameService {
      */
     private void applyTemporalSuperposition(String gameId, Map<String, Object> effect) {
         System.out.println("🌀 Application superposition temporelle: " + effect.get("action"));
-        // TODO: Implémenter la logique de superposition
+        
+        // Utilisation du QuantumService pour créer la superposition
+        if (quantumService != null) {
+            String action = (String) effect.get("action");
+            String targetId = gameId + "_" + action + "_" + System.currentTimeMillis();
+            
+            // Créer les états possibles basés sur l'action
+            List<Object> possibleStates = new ArrayList<>();
+            double[] probabilities;
+            
+            // Exemple de superposition temporelle
+            if ("timeline_split".equals(action)) {
+                possibleStates.add("timeline_alpha");
+                possibleStates.add("timeline_beta");
+                possibleStates.add("timeline_omega");
+                probabilities = new double[]{0.4, 0.4, 0.2};
+            } else {
+                // Superposition générique
+                possibleStates.add("state_active");
+                possibleStates.add("state_dormant");
+                probabilities = new double[]{0.7, 0.3};
+            }
+            
+            quantumService.createSuperposition(targetId, "TEMPORAL_EFFECT", possibleStates, probabilities);
+            System.out.println("✅ Superposition temporelle créée: " + targetId);
+            
+            // Stocker la référence de superposition dans l'effet
+            effect.put("superpositionId", targetId);
+        } else {
+            System.out.println("⚠️ QuantumService non disponible pour superposition");
+        }
     }
     
     /**
@@ -1464,7 +1500,73 @@ public class GameService {
      */
     private void applyUniversalEffect(String gameId, Map<String, Object> effect) {
         System.out.println("🌀 Application effet universel: " + effect.get("modification"));
-        // TODO: Implémenter la logique d'effet universel
+        
+        // Effets universels affectent tout le jeu
+        Map<String, Object> game = getGame(gameId);
+        if (game == null) {
+            System.out.println("⚠️ Jeu non trouvé pour effet universel");
+            return;
+        }
+        
+        String modification = (String) effect.get("modification");
+        Object value = effect.get("value");
+        
+        // Appliquer l'effet selon le type
+        switch (modification) {
+            case "TIME_ACCELERATION":
+                // Accélération temporelle globale
+                game.put("timeMultiplier", value != null ? value : 2.0);
+                System.out.println("⚡ Temps accéléré x" + value);
+                break;
+                
+            case "REALITY_SHIFT":
+                // Changement de réalité
+                game.put("realityLayer", value != null ? value : "alternate");
+                // Déclencher une superposition sur tous les héros
+                applyRealityShiftToAllEntities(gameId);
+                break;
+                
+            case "QUANTUM_STORM":
+                // Tempête quantique affectant toutes les positions
+                game.put("quantumStormActive", true);
+                game.put("quantumStormIntensity", value != null ? value : 0.5);
+                break;
+                
+            case "CAUSAL_FREEZE":
+                // Gel causal - arrête toutes les actions
+                game.put("causalFreezeActive", true);
+                if (causalCollapseService != null) {
+                    Map<String, Object> freezeParams = new HashMap<>();
+                    freezeParams.put("gameId", gameId);
+                    freezeParams.put("type", "UNIVERSAL_FREEZE");
+                    causalCollapseService.handleCollapse("CAUSAL_FREEZE", freezeParams);
+                }
+                break;
+                
+            default:
+                // Effet universel générique
+                game.put("universalEffect_" + modification, value);
+                System.out.println("🌍 Effet universel appliqué: " + modification);
+        }
+        
+        // Log l'événement universel
+        System.out.println("✅ Effet universel '" + modification + "' appliqué au jeu " + gameId);
+    }
+    
+    /**
+     * 🌀 Applique un changement de réalité à toutes les entités
+     */
+    private void applyRealityShiftToAllEntities(String gameId) {
+        if (quantumService != null) {
+            // Créer une superposition pour chaque entité
+            quantumService.createSuperposition(
+                gameId + "_reality_shift",
+                "REALITY_SHIFT",
+                Arrays.asList("reality_prime", "reality_alternate", "reality_quantum"),
+                new double[]{0.5, 0.3, 0.2}
+            );
+            System.out.println("🌀 Changement de réalité appliqué à toutes les entités");
+        }
     }
     
     /**
@@ -1472,7 +1574,20 @@ public class GameService {
      */
     private void applyCollapseEffect(String gameId, Map<String, Object> effect) {
         System.out.println("🌀 Application collapse causal: " + effect.get("targetPsi"));
-        // TODO: Implémenter la logique de collapse
+        
+        // Utilisation du CausalCollapseService reconnecté
+        if (causalCollapseService != null) {
+            String targetPsi = (String) effect.get("targetPsi");
+            Map<String, Object> collapseParams = new HashMap<>();
+            collapseParams.put("gameId", gameId);
+            collapseParams.put("targetPsi", targetPsi);
+            collapseParams.put("effect", effect);
+            
+            causalCollapseService.handleCollapse("GAME_COLLAPSE_EFFECT", collapseParams);
+            System.out.println("✅ Collapse causal appliqué via CausalCollapseService");
+        } else {
+            System.out.println("⚠️ CausalCollapseService non disponible");
+        }
     }
     
     /**
