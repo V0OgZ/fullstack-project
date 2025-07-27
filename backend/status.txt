@@ -1,0 +1,3 @@
+Backend port 8080 OK
+Interface port 8000 OK
+Map Vince port 8888 OK
