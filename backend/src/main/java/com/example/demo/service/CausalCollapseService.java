@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import com.example.demo.model.GameState;
@@ -21,6 +22,7 @@ public class CausalCollapseService {
     private GameService gameService;
     
     @Autowired
+    @Lazy
     private QuantumService quantumService;
     
     @Autowired
