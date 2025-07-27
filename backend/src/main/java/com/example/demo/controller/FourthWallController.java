@@ -34,11 +34,11 @@ public class FourthWallController {
     private FourthWallService fourthWallService;
     
     /**
-     * Initialize mock instances for testing
+     * Initialize real world instances for Heroes of Time multiverse
      */
-    @PostMapping("/init-mock-instances")
-    public ResponseEntity<Map<String, Object>> initMockInstances() {
-        Map<String, Object> result = fourthWallService.initializeMockInstances();
+    @PostMapping("/init-real-instances")
+    public ResponseEntity<Map<String, Object>> initRealInstances() {
+        Map<String, Object> result = fourthWallService.initializeRealInstances();
         return ResponseEntity.ok(result);
     }
     
