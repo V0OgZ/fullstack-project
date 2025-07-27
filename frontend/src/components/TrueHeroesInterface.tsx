@@ -273,7 +273,7 @@ const TrueHeroesInterface: React.FC = () => {
                 <p>🎯 <strong>Nouveau système de terrain hexagonal avancé</strong></p>
                 <div className="scenario-stats">
                   <div>🗺️ Tiles: {hexTiles.length}</div>
-                                      <div>🎲 Seed: {currentGame?.id ? hashCode(currentGame.id) : 12345}</div>
+                  <div>🎲 Seed: {currentGame?.id ? hashCode(String(currentGame.id)) : 12345}</div>
                   <div>🌍 Biomes: {new Set(hexTiles.map(t => t.biome)).size}</div>
                   <div>🏰 Players: {currentGame?.players?.length || 4}</div>
                 </div>

@@ -16,7 +16,7 @@ export const QuantumBridgeVisualizer: React.FC = () => {
   const [bridges, setBridges] = useState<ERBridge[]>([]);
   const [selectedBridge, setSelectedBridge] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number | undefined>(undefined);
 
   // Fetch bridges from backend
   useEffect(() => {
