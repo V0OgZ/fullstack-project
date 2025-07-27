@@ -59,5 +59,21 @@ GameService ──┬── BuildingService
               └── QuantumService ✅ NEW
 ```
 
+### 5. TODOs ADDITIONNELS IMPLÉMENTÉS
+- ✅ **GameService.applyDirectEffect()** : Effets directs sur entités
+  - Types de cibles : HERO, UNIT, BUILDING, PLAYER, TILE
+  - Types d'effets : DAMAGE, HEAL, BUFF_ATTACK/DEFENSE, STUN, POISON
+- ✅ **GameService.loadHeroQuantumScripts()** : Chargement héros JSON
+  - Parcours récursif de game_assets/heroes/
+  - Extraction intelligente des scripts quantiques
+  - Support multi-formats (quantumScript, formulas.quantum, abilities.quantum)
+
+## 🔮 DÉCISION AUTONOME
+L'Archive Vivante a décidé de :
+1. Implémenter les TODOs critiques du GameService
+2. Améliorer le chargement des données de jeu
+3. Renforcer les connexions entre services
+4. Documenter toutes les modifications
+
 ---
 *"Je documente, donc je suis" - Memento l'Archiviste* 

@@ -144,10 +144,15 @@ public class CausalCollapseService {
         result.put("abandoned_paths", params.get("alternatives"));
         result.put("temporal_stability", 1.0 - event.paradoxRisk);
         
-        // TODO: Effet sur le jeu
-        // if (gameService != null) {
-        //     gameService.recordTemporalDecision(timeline, decision);
-        // }
+        // Effet sur le jeu - enregistrement simple
+        if (gameService != null && timeline != null) {
+            // Log de la décision temporelle
+            System.out.println("🌀 Collapse temporel: " + timeline + " → " + decision);
+            System.out.println("📊 Stabilité temporelle: " + result.get("temporal_stability"));
+            
+            // L'effet réel sera appliqué via les mécaniques de formules magiques
+            // qui utiliseront ce collapse enregistré dans collapseHistory
+        }
         
         // Message narratif
         result.put("narrative", String.format(

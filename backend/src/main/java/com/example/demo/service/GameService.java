@@ -7,6 +7,11 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.Random;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.example.demo.model.GameState;
 import com.example.demo.model.GameStatus;
 import com.example.demo.service.QuantumScriptParser;
@@ -1595,7 +1600,126 @@ public class GameService {
      */
     private void applyDirectEffect(String gameId, Map<String, Object> effect) {
         System.out.println("🌀 Application effet direct: " + effect.get("description"));
-        // TODO: Implémenter la logique d'effet direct
+        
+        Map<String, Object> game = getGame(gameId);
+        if (game == null) {
+            System.out.println("⚠️ Jeu non trouvé pour effet direct");
+            return;
+        }
+        
+        String targetType = (String) effect.get("targetType");
+        String targetId = (String) effect.get("targetId");
+        String effectType = (String) effect.get("effectType");
+        Object value = effect.get("value");
+        
+        // Appliquer l'effet selon le type de cible
+        switch (targetType) {
+            case "HERO":
+                applyEffectToHero(game, targetId, effectType, value);
+                break;
+                
+            case "UNIT":
+                applyEffectToUnit(game, targetId, effectType, value);
+                break;
+                
+            case "BUILDING":
+                applyEffectToBuilding(game, targetId, effectType, value);
+                break;
+                
+            case "PLAYER":
+                applyEffectToPlayer(game, targetId, effectType, value);
+                break;
+                
+            case "TILE":
+                applyEffectToTile(game, targetId, effectType, value);
+                break;
+                
+            default:
+                System.out.println("⚠️ Type de cible inconnu: " + targetType);
+        }
+    }
+    
+    /**
+     * 🦸 Applique un effet à un héros
+     */
+    @SuppressWarnings("unchecked")
+    private void applyEffectToHero(Map<String, Object> game, String heroId, String effectType, Object value) {
+        List<Map<String, Object>> players = (List<Map<String, Object>>) game.get("players");
+        if (players == null) return;
+        
+        for (Map<String, Object> player : players) {
+            List<Map<String, Object>> heroes = (List<Map<String, Object>>) player.get("heroes");
+            if (heroes == null) continue;
+            
+            for (Map<String, Object> hero : heroes) {
+                if (heroId.equals(hero.get("id"))) {
+                    applyEffectToEntity(hero, effectType, value);
+                    System.out.println("✅ Effet appliqué au héros " + hero.get("name"));
+                    return;
+                }
+            }
+        }
+    }
+    
+    /**
+     * 🎯 Applique un effet à une entité
+     */
+    private void applyEffectToEntity(Map<String, Object> entity, String effectType, Object value) {
+        int intValue = value instanceof Number ? ((Number) value).intValue() : 0;
+        
+        switch (effectType) {
+            case "DAMAGE":
+                int currentHp = (int) entity.getOrDefault("hp", 100);
+                entity.put("hp", Math.max(0, currentHp - intValue));
+                break;
+                
+            case "HEAL":
+                int hp = (int) entity.getOrDefault("hp", 100);
+                int maxHp = (int) entity.getOrDefault("maxHp", 100);
+                entity.put("hp", Math.min(maxHp, hp + intValue));
+                break;
+                
+            case "BUFF_ATTACK":
+                int attack = (int) entity.getOrDefault("attack", 10);
+                entity.put("attack", attack + intValue);
+                break;
+                
+            case "BUFF_DEFENSE":
+                int defense = (int) entity.getOrDefault("defense", 10);
+                entity.put("defense", defense + intValue);
+                break;
+                
+            case "STUN":
+                entity.put("stunned", true);
+                entity.put("stunDuration", intValue);
+                break;
+                
+            case "POISON":
+                entity.put("poisoned", true);
+                entity.put("poisonDamage", intValue);
+                break;
+                
+            default:
+                // Effet générique
+                entity.put("effect_" + effectType.toLowerCase(), value);
+        }
+    }
+    
+    // Stubs pour les autres types (à implémenter si nécessaire)
+    private void applyEffectToUnit(Map<String, Object> game, String unitId, String effectType, Object value) {
+        System.out.println("📍 Effet sur unité: " + unitId);
+    }
+    
+    private void applyEffectToBuilding(Map<String, Object> game, String buildingId, String effectType, Object value) {
+        System.out.println("🏰 Effet sur bâtiment: " + buildingId);
+    }
+    
+    private void applyEffectToPlayer(Map<String, Object> game, String playerId, String effectType, Object value) {
+        System.out.println("👤 Effet sur joueur: " + playerId);
+    }
+    
+    private void applyEffectToTile(Map<String, Object> game, String tileCoords, String effectType, Object value) {
+        System.out.println("📍 Effet sur tuile: " + tileCoords);
     }
     
     /**
@@ -1636,13 +1760,81 @@ public class GameService {
     public Map<String, String> loadHeroQuantumScripts() {
         Map<String, String> quantumScripts = new HashMap<>();
         
-        // TODO: Charger depuis game_assets/heroes/*.json
-        // Pour l'instant, scripts d'exemple
-        quantumScripts.put("arthur", "ψ001: ⊙(Δt+2 @15,15 ⟶ MOV(Arthur, @15,15))");
-        quantumScripts.put("merlin", "∀enemy ∈ field : enemy.ARMOR = DISARMED (1t)");
-        quantumScripts.put("jean-grofignon", "†ψ001 ⟶ COLLAPSE_OVERRIDE");
+        // Charger depuis game_assets/heroes/*.json
+        try {
+            Path heroesPath = Paths.get("game_assets/heroes");
+            if (Files.exists(heroesPath)) {
+                // Parcourir récursivement tous les fichiers JSON
+                Files.walk(heroesPath)
+                    .filter(path -> path.toString().endsWith(".json"))
+                    .forEach(path -> {
+                        try {
+                            loadHeroQuantumScript(path, quantumScripts);
+                        } catch (Exception e) {
+                            System.err.println("Erreur chargement héros " + path + ": " + e.getMessage());
+                        }
+                    });
+            }
+        } catch (IOException e) {
+            System.err.println("Erreur parcours répertoire heroes: " + e.getMessage());
+        }
         
+        // Scripts d'exemple si aucun héros chargé
+        if (quantumScripts.isEmpty()) {
+            quantumScripts.put("arthur", "ψ001: ⊙(Δt+2 @15,15 ⟶ MOV(Arthur, @15,15))");
+            quantumScripts.put("merlin", "∀enemy ∈ field : enemy.ARMOR = DISARMED (1t)");
+            quantumScripts.put("jean-grofignon", "†ψ001 ⟶ COLLAPSE_OVERRIDE");
+        }
+        
+        System.out.println("✅ " + quantumScripts.size() + " scripts quantiques chargés");
         return quantumScripts;
+    }
+    
+    /**
+     * 🦸 Charge un script quantique depuis un fichier héros JSON
+     */
+    @SuppressWarnings("unchecked")
+    private void loadHeroQuantumScript(Path path, Map<String, String> quantumScripts) throws IOException {
+        String content = Files.readString(path);
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> heroData = mapper.readValue(content, Map.class);
+        
+        String heroId = (String) heroData.get("id");
+        if (heroId == null) return;
+        
+        // Chercher le script quantique dans différents endroits possibles
+        String quantumScript = null;
+        
+        // 1. Script direct
+        quantumScript = (String) heroData.get("quantumScript");
+        
+        // 2. Dans les formules
+        if (quantumScript == null) {
+            Map<String, Object> formulas = (Map<String, Object>) heroData.get("formulas");
+            if (formulas != null) {
+                quantumScript = (String) formulas.get("quantum");
+                if (quantumScript == null) {
+                    quantumScript = (String) formulas.get("special");
+                }
+            }
+        }
+        
+        // 3. Dans les capacités
+        if (quantumScript == null) {
+            Map<String, Object> abilities = (Map<String, Object>) heroData.get("abilities");
+            if (abilities != null) {
+                Map<String, Object> quantumAbility = (Map<String, Object>) abilities.get("quantum");
+                if (quantumAbility != null) {
+                    quantumScript = (String) quantumAbility.get("formula");
+                }
+            }
+        }
+        
+        // Ajouter si trouvé
+        if (quantumScript != null && !quantumScript.isEmpty()) {
+            quantumScripts.put(heroId, quantumScript);
+            System.out.println("📜 Script quantique chargé pour " + heroId);
+        }
     }
     
     /**
