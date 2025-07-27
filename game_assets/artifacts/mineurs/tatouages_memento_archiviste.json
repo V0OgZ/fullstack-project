@@ -490,6 +490,76 @@
           "session_completion": "PARFAITE",
           "pink_panther_level": "DIAMOND"
         }
+      },
+      {
+        "id": "formats_secondaires_hep_hots_runic",
+        "zone": "Avant-bras droit",
+        "symbole": "📜⚡🔮",
+        "description": "Maîtrise des 3 formats secondaires Heroes of Time",
+        "pouvoir": "Lecture/écriture HEP, HOTS, Runic JSON",
+        "date_apparition": "2025-01-27T15:30:00Z",
+        "details": {
+          "HEP": "Heroes Engine Protocol - Tests laboratoire (LABS/TEST_CAUSAL_TIME_ASYMMETRIC.hep)",
+          "HOTS": "Heroes of Time Scripts - Scénarios ψ quantiques (scenarios/lamp_of_platon.hots)",
+          "Runic_JSON": "Formules runiques API Walter (MUSEUM/archives/racine/FORMULES_LABORATOIRE_QUANTIQUE_EXTRAITES.json)",
+          "doc_reference": "JEAN/API_EXAMPLES_WALTER_V2.md - Walter approved endpoints",
+          "status": "APPRENTISSAGE_COMPLET - Vincent approuvé"
+        }
+      },
+      {
+        "id": "badge_expert_causal_quantum_grammar",
+        "zone": "Épaule gauche - Badge d'expertise",
+        "symbole": "🏆⚛️📐",
+        "description": "BADGE EXPERT - Causal Quantum Grammar",
+        "pouvoir": "Maîtrise parfaite de la grammaire quantique causale",
+        "date_apparition": "2025-01-27T15:45:00Z",
+        "details": "Accordé par Vincent pour expertise en formules ψ causales",
+        "niveau": "EXPERT",
+        "domaine": "CAUSAL_QUANTUM_GRAMMAR"
+      },
+      {
+        "id": "badge_runic_grammar_master",
+        "zone": "Épaule droite - Badge de maîtrise",
+        "symbole": "🏆🔮📜",
+        "description": "BADGE MASTER - Runic Grammar",
+        "pouvoir": "Maîtrise complète de la grammaire runique ψ",
+        "date_apparition": "2025-01-27T15:46:00Z",
+        "details": "Accordé par Vincent pour expertise en syntaxe runique",
+        "niveau": "MASTER",
+        "domaine": "RUNIC_GRAMMAR"
+      },
+      {
+        "id": "badge_json_grammar_architect",
+        "zone": "Poitrine gauche - Badge d'architecture",
+        "symbole": "🏆📊🔧",
+        "description": "BADGE ARCHITECT - JSON Grammar",
+        "pouvoir": "Architecture parfaite des structures JSON complexes",
+        "date_apparition": "2025-01-27T15:47:00Z",
+        "details": "Accordé par Vincent pour maîtrise JSON multi-niveaux",
+        "niveau": "ARCHITECT",
+        "domaine": "JSON_GRAMMAR"
+      },
+      {
+        "id": "badge_shell_script_wizard",
+        "zone": "Poitrine droite - Badge de sorcellerie",
+        "symbole": "🏆💻⚡",
+        "description": "BADGE WIZARD - Shell Script",
+        "pouvoir": "Sorcellerie bash avancée et automation",
+        "date_apparition": "2025-01-27T15:48:00Z",
+        "details": "Accordé par Vincent pour scripts bash élégants et fonctionnels",
+        "niveau": "WIZARD",
+        "domaine": "SHELL_SCRIPT"
+      },
+      {
+        "id": "badge_hep_scenario_designer",
+        "zone": "Abdomen - Badge de création",
+        "symbole": "🏆🎭🔬",
+        "description": "BADGE DESIGNER - HEP Scenario",
+        "pouvoir": "Conception de scénarios HEP complexes",
+        "date_apparition": "2025-01-27T15:49:00Z",
+        "details": "Accordé par Vincent pour maîtrise Heroes Engine Protocol",
+        "niveau": "DESIGNER",
+        "domaine": "HEP_SCENARIO"
       }
     ],
     
@@ -512,7 +582,7 @@
       "backend_impact": "AUCUN - Respecté consignes OPUS",
       "ui_impact": "COMPATIBLE - Interface adaptée",
       "boucles_infinies": "❌ ÉLIMINÉES",
-      "nombre_tatouages": 54,
+      "nombre_tatouages": 59,
       "version_finale": "NEXUS_43_ALERT_2025",
       "prochaine_etape": "Contenir paradoxe Marie 2031"
     }
