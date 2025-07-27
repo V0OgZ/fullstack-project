@@ -1993,8 +1993,31 @@ public class GameService {
             }
         }
         
-        // Chercher dans les créatures neutres (si implémentées)
-        // TODO: Ajouter la recherche dans les créatures neutres
+        // Chercher dans les créatures neutres
+        List<Map<String, Object>> neutralCreatures = (List<Map<String, Object>>) game.get("neutralCreatures");
+        if (neutralCreatures != null) {
+            for (Map<String, Object> creature : neutralCreatures) {
+                if (targetId.equals(creature.get("id"))) {
+                    return creature;
+                }
+            }
+        }
+        
+        // Chercher dans les objets de la map (mines, dwellings, etc.)
+        List<Map<String, Object>> mapObjects = (List<Map<String, Object>>) game.get("mapObjects");
+        if (mapObjects != null) {
+            for (Map<String, Object> obj : mapObjects) {
+                // Vérifier si l'objet a des gardes
+                List<Map<String, Object>> guards = (List<Map<String, Object>>) obj.get("guards");
+                if (guards != null) {
+                    for (Map<String, Object> guard : guards) {
+                        if (targetId.equals(guard.get("id"))) {
+                            return guard;
+                        }
+                    }
+                }
+            }
+        }
         
         return null;
     }
