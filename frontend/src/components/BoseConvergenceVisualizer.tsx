@@ -17,7 +17,7 @@ const BoseConvergenceVisualizer: React.FC = () => {
         { name: 'GRUT (6D)', progress: Infinity, color: '#f1c40f', phase: Math.PI * 1.5 }
     ]);
     const [convergenceMessage, setConvergenceMessage] = useState('');
-    const animationRef = useRef<number>();
+    const animationRef = useRef<number | undefined>(undefined);
 
     useEffect(() => {
         const canvas = canvasRef.current;
