@@ -9,6 +9,7 @@ import BoseConvergenceVisualizer from './BoseConvergenceVisualizer';
 import { useRetroKonami } from '../utils/retro-konami';
 import { HexTile, BiomeType } from '../types/terrain';
 import { Position } from '../types/game';
+import TerrainModeSelector from './TerrainModeSelector';
 import './TrueHeroesInterface.css';
 import './FogPanelCompact.css';
 import './EnhancedSidebarPanels.css';
@@ -27,7 +28,7 @@ const hashCode = (str: string): number => {
 const TrueHeroesInterface: React.FC = () => {
   // Game state
   const { currentGame, currentPlayer, endTurn } = useGameStore();
-  const [activePanel, setActivePanel] = useState<'scenario' | 'hero' | 'inventory' | 'castle' | 'quantum'>('scenario');
+  const [activePanel, setActivePanel] = useState<'scenario' | 'hero' | 'inventory' | 'castle' | 'quantum' | 'fog' | 'script' | 'epic'>('scenario');
   const [showEpicContentViewer, setShowEpicContentViewer] = useState(false);
   const [showGoldorakEasterEgg, setShowGoldorakEasterEgg] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -152,8 +153,8 @@ const TrueHeroesInterface: React.FC = () => {
 
   const hexTiles = convertToHexTiles(currentGame?.map || []);
 
-  const handleTileClick = (position: Position) => {
-    console.log('🎯 Tile clicked:', position);
+  const handleTileClick = (x: number, y: number) => {
+    console.log('🎯 Tile clicked:', x, y);
     // Handle tile selection logic here
   };
 
@@ -252,6 +253,7 @@ const TrueHeroesInterface: React.FC = () => {
         {/* Left Panel - Game Map */}
         <div className="left-panel">
           <ModernGameRenderer
+            map={currentGame?.map || []}
             width={900}
             height={700}
             onTileClick={handleTileClick}
@@ -503,12 +505,14 @@ const TrueHeroesInterface: React.FC = () => {
                 </div>
                 <div className="heroes-list">
                   {mockHeroes.map((hero) => (
-                    <EnhancedHeroDisplay
-                      key={hero.id}
-                      hero={hero}
-                      isSelected={currentPlayer?.selectedHero?.id === hero.id}
-                      onSelect={(hero: any) => console.log('Hero selected:', hero)}
-                    />
+                    <div 
+                      key={hero.id} 
+                      className={`hero-card ${false ? 'selected' : ''}`}
+                      onClick={() => console.log('Hero selected:', hero)}
+                    >
+                      <h4>{hero.name}</h4>
+                      <p>{hero.class} - Level {hero.level}</p>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -577,9 +581,9 @@ const TrueHeroesInterface: React.FC = () => {
                 </div>
                 <div className="script-editor-container">
                   <div className="script-editor-toolbar">
-                    <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.hero)}>New Hero</button>
-                    <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.castle)}>New Castle</button>
-                    <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.combat)}>Combat</button>
+                    <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.basic)}>Basic</button>
+                    <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.quantum)}>Quantum</button>
+                    {/* <button className="script-btn" onClick={() => setScriptContent(SCRIPT_TEMPLATES.combat)}>Combat</button> */}
                     <button className="script-btn" onClick={() => executeScript()}>▶️ Run</button>
                     <button className="script-btn" onClick={() => setScriptResults('')}>🗑️ Clear</button>
                   </div>
@@ -665,9 +669,12 @@ const TrueHeroesInterface: React.FC = () => {
         </div>
 
       {/* Epic Content Viewer */}
-      <EpicContentViewer 
-        onClose={() => setShowEpicContentViewer(false)} 
-      />
+      {showEpicContentViewer && (
+        <EpicContentViewer 
+          isVisible={showEpicContentViewer}
+          onClose={() => setShowEpicContentViewer(false)} 
+        />
+      )}
 
       {/* 🚀 GOLDORAK EASTER EGG - Tapez G-O-L-D-O-R-A-K pour l'activer! */}
       <GoldorakEasterEgg 
