@@ -1,6 +1,8 @@
 package com.example.demo.sphinx;
 
 import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.service.BernardAntiFordService;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -12,6 +14,9 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 @Component
 public class SphinxProtocol {
+    
+    @Autowired
+    private BernardAntiFordService bernardService;
     
     private static final String[] QUESTION_TEMPLATES = {
         "Si une particule existe dans %d états superposés et que %d observateurs la mesurent simultanément, quelle est la probabilité de collapse vers l'état %s ?",
@@ -32,6 +37,11 @@ public class SphinxProtocol {
      * Génère une question quantique procédurale
      */
     public SphinxQuestion generateQuestion(String playerId, int difficultyLevel) {
+        // Protection Bernard Anti-Ford
+        if (bernardService != null && bernardService.detectFordInfluence(playerId)) {
+            playerId = bernardService.cleanFordInfluence(playerId);
+        }
+        
         String template = QUESTION_TEMPLATES[ThreadLocalRandom.current().nextInt(QUESTION_TEMPLATES.length)];
         
         // Paramètres procéduraux basés sur la difficulté
@@ -40,6 +50,11 @@ public class SphinxProtocol {
         String param3 = generateQuantumState(difficultyLevel);
         
         String question = String.format(template, param1, param2, param3);
+        
+        // Protection Bernard sur la question générée
+        if (bernardService != null && bernardService.detectFordInfluence(question)) {
+            question = bernardService.cleanFordInfluence(question);
+        }
         
         // Calcul de la réponse correcte (simplifié pour le jeu)
         double correctAnswer = calculateQuantumAnswer(param1, param2, difficultyLevel);
