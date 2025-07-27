@@ -19,7 +19,7 @@ Log: `/Users/admin/HOT/Heroes-of-Time/rapport-jean-gros-20250720_223046/backend-
 Erreur:
 ```
 [ERROR] 
-[ERROR] Please refer to /Users/admin/HOT/Heroes-of-Time/backend/target/surefire-reports for the individual test results.
+[ERROR] Please refer to /Users/admin/HOT/Heroes-of-Time/🖥️ backend/target/surefire-reports for the individual test results.
 [ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
 [ERROR] -> [Help 1]
 [ERROR] 
@@ -44,7 +44,7 @@ Log: `/Users/admin/HOT/Heroes-of-Time/rapport-jean-gros-20250720_223046/test-cau
 
 Erreur:
 ```
-./scripts/test-jean-gros-FIXED.sh: line 48: timeout: command not found
+./⚙️ scripts/test-jean-gros-FIXED.sh: line 48: timeout: command not found
 ```
 
 ### test-vision-temporelle
@@ -55,7 +55,7 @@ Log: `/Users/admin/HOT/Heroes-of-Time/rapport-jean-gros-20250720_223046/test-vis
 
 Erreur:
 ```
-./scripts/test-jean-gros-FIXED.sh: line 48: timeout: command not found
+./⚙️ scripts/test-jean-gros-FIXED.sh: line 48: timeout: command not found
 ```
 
 ### test-quantum-maze
@@ -66,7 +66,7 @@ Log: `/Users/admin/HOT/Heroes-of-Time/rapport-jean-gros-20250720_223046/test-qua
 
 Erreur:
 ```
-./scripts/test-jean-gros-FIXED.sh: line 48: timeout: command not found
+./⚙️ scripts/test-jean-gros-FIXED.sh: line 48: timeout: command not found
 ```
 
 ### ui-quick
@@ -77,7 +77,7 @@ Log: `/Users/admin/HOT/Heroes-of-Time/rapport-jean-gros-20250720_223046/ui-quick
 
 Erreur:
 ```
-./scripts/test-jean-gros-FIXED.sh: line 48: timeout: command not found
+./⚙️ scripts/test-jean-gros-FIXED.sh: line 48: timeout: command not found
 ```
 
 
@@ -99,21 +99,21 @@ Erreur:
 /Users/admin/HOT/Heroes-of-Time/archives/docs
 /Users/admin/HOT/Heroes-of-Time/archives/scripts-old
 /Users/admin/HOT/Heroes-of-Time/backend
-/Users/admin/HOT/Heroes-of-Time/backend/src
-/Users/admin/HOT/Heroes-of-Time/backend/target
+/Users/admin/HOT/Heroes-of-Time/🖥️ backend/src
+/Users/admin/HOT/Heroes-of-Time/🖥️ backend/target
 /Users/admin/HOT/Heroes-of-Time/benchmark-results
 /Users/admin/HOT/Heroes-of-Time/docs
-/Users/admin/HOT/Heroes-of-Time/docs/architecture
-/Users/admin/HOT/Heroes-of-Time/docs/collapse-causale
-/Users/admin/HOT/Heroes-of-Time/docs/core
-/Users/admin/HOT/Heroes-of-Time/docs/grammar
-/Users/admin/HOT/Heroes-of-Time/docs/GROFI
-/Users/admin/HOT/Heroes-of-Time/docs/heroes
-/Users/admin/HOT/Heroes-of-Time/docs/items
-/Users/admin/HOT/Heroes-of-Time/docs/quantum
-/Users/admin/HOT/Heroes-of-Time/docs/reports
-/Users/admin/HOT/Heroes-of-Time/docs/technical
-/Users/admin/HOT/Heroes-of-Time/docs/temporal
+/Users/admin/HOT/Heroes-of-Time/📖 docs/architecture
+/Users/admin/HOT/Heroes-of-Time/📖 docs/collapse-causale
+/Users/admin/HOT/Heroes-of-Time/📖 docs/core
+/Users/admin/HOT/Heroes-of-Time/📖 docs/grammar
+/Users/admin/HOT/Heroes-of-Time/📖 docs/GROFI
+/Users/admin/HOT/Heroes-of-Time/📖 docs/heroes
+/Users/admin/HOT/Heroes-of-Time/📖 docs/items
+/Users/admin/HOT/Heroes-of-Time/📖 docs/quantum
+/Users/admin/HOT/Heroes-of-Time/📖 docs/reports
+/Users/admin/HOT/Heroes-of-Time/📖 docs/technical
+/Users/admin/HOT/Heroes-of-Time/📖 docs/temporal
 /Users/admin/HOT/Heroes-of-Time/frontend
 /Users/admin/HOT/Heroes-of-Time/frontend-legendary-ui
 /Users/admin/HOT/Heroes-of-Time/frontend-temporal
@@ -123,10 +123,10 @@ Erreur:
 /Users/admin/HOT/Heroes-of-Time/frontend-temporal/css
 /Users/admin/HOT/Heroes-of-Time/frontend-temporal/js
 /Users/admin/HOT/Heroes-of-Time/frontend-temporal/node_modules
-/Users/admin/HOT/Heroes-of-Time/frontend/node_modules
+/Users/admin/HOT/Heroes-of-Time/🌐 frontend/node_modules
 /Users/admin/HOT/Heroes-of-Time/game_assets
-/Users/admin/HOT/Heroes-of-Time/game_assets/scenarios
-/Users/admin/HOT/Heroes-of-Time/game_assets/tests
+/Users/admin/HOT/Heroes-of-Time/🎮 game_assets/scenarios
+/Users/admin/HOT/Heroes-of-Time/🎮 game_assets/tests
 /Users/admin/HOT/Heroes-of-Time/game_templates
 /Users/admin/HOT/Heroes-of-Time/game_templates/classic_rpg
 /Users/admin/HOT/Heroes-of-Time/game_templates/quantum_puzzle
@@ -134,7 +134,7 @@ Erreur:
 /Users/admin/HOT/Heroes-of-Time/logs
 /Users/admin/HOT/Heroes-of-Time/logs/performance-tests
 /Users/admin/HOT/Heroes-of-Time/MEMENTO
-/Users/admin/HOT/Heroes-of-Time/MEMENTO/SCENARIOS
+/Users/admin/HOT/Heroes-of-Time/📚 MEMENTO/SCENARIOS
 /Users/admin/HOT/Heroes-of-Time/MUSEUM
 /Users/admin/HOT/Heroes-of-Time/MUSEUM/scripts-archive
 /Users/admin/HOT/Heroes-of-Time/MUSEUM/scripts-collection
@@ -163,15 +163,15 @@ Erreur:
 /Users/admin/HOT/Heroes-of-Time/rapports
 /Users/admin/HOT/Heroes-of-Time/scripts
 /Users/admin/HOT/Heroes-of-Time/scripts-test
-/Users/admin/HOT/Heroes-of-Time/scripts/actifs
-/Users/admin/HOT/Heroes-of-Time/scripts/archive-scripts-test
-/Users/admin/HOT/Heroes-of-Time/scripts/archives
-/Users/admin/HOT/Heroes-of-Time/scripts/demo
-/Users/admin/HOT/Heroes-of-Time/scripts/start
-/Users/admin/HOT/Heroes-of-Time/scripts/stop
-/Users/admin/HOT/Heroes-of-Time/scripts/system-unifie
-/Users/admin/HOT/Heroes-of-Time/scripts/test
-/Users/admin/HOT/Heroes-of-Time/scripts/utils
+/Users/admin/HOT/Heroes-of-Time/⚙️ scripts/actifs
+/Users/admin/HOT/Heroes-of-Time/⚙️ scripts/archive-scripts-test
+/Users/admin/HOT/Heroes-of-Time/⚙️ scripts/archives
+/Users/admin/HOT/Heroes-of-Time/⚙️ scripts/demo
+/Users/admin/HOT/Heroes-of-Time/⚙️ scripts/start
+/Users/admin/HOT/Heroes-of-Time/⚙️ scripts/stop
+/Users/admin/HOT/Heroes-of-Time/⚙️ scripts/system-unifie
+/Users/admin/HOT/Heroes-of-Time/⚙️ scripts/test
+/Users/admin/HOT/Heroes-of-Time/⚙️ scripts/utils
 /Users/admin/HOT/Heroes-of-Time/target
 /Users/admin/HOT/Heroes-of-Time/target/classes
 /Users/admin/HOT/Heroes-of-Time/target/generated-sources
@@ -184,11 +184,11 @@ Erreur:
 
 ### Formules trouvées
 ```
-/Users/admin/HOT/Heroes-of-Time/backend/src/main/resources/heroes/grofi/Axis.json
-/Users/admin/HOT/Heroes-of-Time/backend/src/main/resources/heroes/grofi/JeanGrofignon.json
-/Users/admin/HOT/Heroes-of-Time/backend/src/main/resources/heroes/legendary/Claudius.json
-/Users/admin/HOT/Heroes-of-Time/backend/src/main/resources/quantum-creatures.json
-/Users/admin/HOT/Heroes-of-Time/backend/src/main/resources/quantum-artifacts.json
+/Users/admin/HOT/Heroes-of-Time/🖥️ backend/src/main/resources/heroes/grofi/Axis.json
+/Users/admin/HOT/Heroes-of-Time/🖥️ backend/src/main/resources/heroes/grofi/JeanGrofignon.json
+/Users/admin/HOT/Heroes-of-Time/🖥️ backend/src/main/resources/heroes/legendary/Claudius.json
+/Users/admin/HOT/Heroes-of-Time/🖥️ backend/src/main/resources/quantum-creatures.json
+/Users/admin/HOT/Heroes-of-Time/🖥️ backend/src/main/resources/quantum-artifacts.json
 ```
 
 ## 📋 RÉSUMÉ FINAL

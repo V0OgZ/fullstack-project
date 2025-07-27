@@ -207,7 +207,7 @@ curl http://localhost:8080/api/temporal/decay/info
 
 ### **✅ Pour Jean**
 - 🛋️ **Peut tester depuis son canapé** : `./hots test hybrid`
-- 📖 **Documentation complète** dans MEMENTO/
+- 📖 **Documentation complète** dans 📚 MEMENTO/
 - 🚀 **Prêt pour développement** futur
 - 🎯 **Vision d'Anna complète** préservée et étendue
 

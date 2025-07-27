@@ -111,9 +111,9 @@ git stash push -m "WIP avant récupération backend main"
 #### **PHASE 2 - RÉCUPÉRATION BACKEND MAIN** 
 ```bash
 # Récupérer le BON backend de main
-git checkout main -- backend/src/main/java/com/example/demo/
-git checkout main -- backend/src/test/java/com/example/demo/
-git checkout main -- backend/pom.xml
+git checkout main -- 🖥️ backend/src/main/java/com/example/demo/
+git checkout main -- 🖥️ backend/src/test/java/com/example/demo/
+git checkout main -- 🖥️ backend/pom.xml
 ```
 
 #### **PHASE 3 - CHERRY-PICK SÉLECTIF**

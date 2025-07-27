@@ -9,7 +9,7 @@ echo "🏰 Downloading Game Assets Collection for Heroes of Time..."
 echo "============================================================"
 
 # Variables de configuration
-ASSETS_DIR="frontend/public/assets"
+ASSETS_DIR="🌐 frontend/public/assets"
 BUILDINGS_DIR="$ASSETS_DIR/buildings"
 CREATURES_DIR="$ASSETS_DIR/creatures"
 TEMP_DIR="temp_assets_download"
@@ -269,13 +269,13 @@ echo "🔍 Checking Heroes of Time Assets..."
 echo "=================================="
 
 echo "🏰 Buildings:"
-find frontend/public/assets/buildings -name "*.png" -o -name "*.jpg" | wc -l | xargs echo "  PNG/JPG files:"
+find 🌐 frontend/public/assets/buildings -name "*.png" -o -name "*.jpg" | wc -l | xargs echo "  PNG/JPG files:"
 
 echo "🐉 Creatures:"
-find frontend/public/assets/creatures -name "*.png" -o -name "*.jpg" | wc -l | xargs echo "  PNG/JPG files:"
+find 🌐 frontend/public/assets/creatures -name "*.png" -o -name "*.jpg" | wc -l | xargs echo "  PNG/JPG files:"
 
 echo "🎨 Heroes:"
-find frontend/public/assets/heroes -name "*.png" -o -name "*.jpg" | wc -l | xargs echo "  PNG/JPG files:"
+find 🌐 frontend/public/assets/heroes -name "*.png" -o -name "*.jpg" | wc -l | xargs echo "  PNG/JPG files:"
 
 echo ""
 echo "✅ Asset check complete!"

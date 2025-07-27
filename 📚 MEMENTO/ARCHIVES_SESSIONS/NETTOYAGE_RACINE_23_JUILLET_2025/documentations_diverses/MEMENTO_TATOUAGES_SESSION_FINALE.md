@@ -31,7 +31,7 @@
 ```
 ✅ EpicContentViewer dans TrueHeroesInterface (UI principale)
 ✅ 57 assets catalogués: héros/créatures/bâtiments/artefacts
-✅ Accès direct game_assets/ sans backend
+✅ Accès direct 🎮 game_assets/ sans backend
 ✅ Anna the Martopicker intégrée partout
 ```
 
@@ -97,7 +97,7 @@
 ### **⚔️ Epic Content**
 ```
 - Panel Epic → 4 onglets (Héros/Créatures/Bâtiments/Artefacts)
-- Accès direct: game_assets/ (57 éléments)
+- Accès direct: 🎮 game_assets/ (57 éléments)
 - Modal viewer intégré avec détails complets
 ```
 

@@ -1,0 +1,75 @@
+.terrain-mode-selector {
+  margin: 15px 0;
+}
+
+.terrain-mode-selector h4 {
+  margin: 0 0 10px 0;
+  color: #FFD700;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.mode-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mode-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #ffffff;
+}
+
+.mode-option:hover {
+  background: rgba(255, 215, 0, 0.1);
+  border-color: rgba(255, 215, 0, 0.5);
+  transform: translateY(-1px);
+}
+
+.mode-option.active {
+  background: rgba(255, 215, 0, 0.2);
+  border-color: #FFD700;
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+}
+
+.mode-option:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.mode-icon {
+  font-size: 20px;
+  width: 24px;
+  text-align: center;
+}
+
+.mode-info {
+  flex: 1;
+}
+
+.mode-name {
+  font-weight: bold;
+  font-size: 13px;
+  color: #FFD700;
+  margin-bottom: 2px;
+}
+
+.mode-description {
+  font-size: 11px;
+  color: #cccccc;
+  margin-bottom: 2px;
+}
+
+.mode-performance {
+  font-size: 10px;
+  color: #999999;
+  font-style: italic;
+} 

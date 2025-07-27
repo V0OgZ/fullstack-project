@@ -28,7 +28,7 @@
 ## 🦸 **HÉROS CRÉÉS (DERNIERS 12H)**
 
 ### 1. 🔬 **SMOLIN LEE - GRAVITÉ QUANTIQUE**
-**Fichier** : `game_assets/heroes/physics/smolin_lee_quantum_gravity.json`  
+**Fichier** : `🎮 game_assets/heroes/physics/smolin_lee_quantum_gravity.json`  
 **Créé** : 2025-07-24 09:00  
 **Type** : Héros Physique Quantique  
 
@@ -49,7 +49,7 @@
 > *"Je ne manipule pas la gravité. Je comprends sa vraie nature quantique."*
 
 ### 2. 🏛️ **ÉVADÉ DE LA CAVE - PHILOSOPHE PASSIF**
-**Fichier** : `game_assets/heroes/philosophy/evade_de_la_cave_passif.json`  
+**Fichier** : `🎮 game_assets/heroes/philosophy/evade_de_la_cave_passif.json`  
 **Créé** : 2025-07-24 10:30  
 **Type** : Personnage Passif Philosophique  
 
@@ -73,7 +73,7 @@
 ## 🔮 **ARTEFACTS CRÉÉS (DERNIERS 12H)**
 
 ### 1. 🔬 **MACH ZEHNDER INTERFÉROMÈTRE**
-**Fichier** : `game_assets/artifacts/physics/mach_zehnder_interferometer.json`  
+**Fichier** : `🎮 game_assets/artifacts/physics/mach_zehnder_interferometer.json`  
 **Créé** : 2025-07-24 08:45  
 **Type** : Artefact Physique Quantique  
 
@@ -90,7 +90,7 @@
 - **Superposition Analysis** : Analyse états superposés
 
 ### 2. 🧿 **ŒIL DE MÉMOIRE (MIS À JOUR)**
-**Fichier** : `game_assets/artifacts/temporal/oeil_de_memoire_axis.json`  
+**Fichier** : `🎮 game_assets/artifacts/temporal/oeil_de_memoire_axis.json`  
 **Mis à jour** : 2025-07-24 09:15  
 **Type** : Artefact Temporel Légendaire  
 
@@ -101,7 +101,7 @@
 - **Causal Immunity** : Résistance paradoxes causaux
 
 ### 3. 🔮 **TALISMAN ECHO DU FUTUR** ⭐ **NOUVEAU !**
-**Fichier** : `game_assets/artifacts/temporal/talisman_echo_futur.json`  
+**Fichier** : `🎮 game_assets/artifacts/temporal/talisman_echo_futur.json`  
 **Créé** : 2025-07-24 11:30  
 **Type** : Artefact Cosmique Tier 8  
 
@@ -128,27 +128,27 @@ Découvert après finalisation du moteur temporel, laissé par l'écho d'OPUS du
 ## 📜 **DOCUMENTS CRÉÉS (DERNIERS 12H)**
 
 ### 1. 📚 **TEMPS RELATIF EXPLIQUÉ POUR THE DUDE**
-**Fichier** : `docs/TEMPS_RELATIF_EXPLIQUE_POUR_DUDE.md`  
+**Fichier** : `📖 docs/TEMPS_RELATIF_EXPLIQUE_POUR_DUDE.md`  
 **Créé** : 2025-07-24 11:45  
 **Contenu** : Explication système temps relatif Heroes of Time
 
 ### 2. 🚀 **MOTEUR TEMPOREL FINAL OPUS RAPPORT**
-**Fichier** : `docs/MOTEUR_TEMPOREL_FINAL_OPUS_RAPPORT.md`  
+**Fichier** : `📖 docs/MOTEUR_TEMPOREL_FINAL_OPUS_RAPPORT.md`  
 **Créé** : 2025-07-24 11:50  
 **Contenu** : Rapport finalisation moteur temporel
 
 ### 3. 🔮 **TALISMAN ECHO FUTUR INTÉGRATION**
-**Fichier** : `docs/TALISMAN_ECHO_FUTUR_INTEGRATION.md`  
+**Fichier** : `📖 docs/TALISMAN_ECHO_FUTUR_INTEGRATION.md`  
 **Créé** : 2025-07-24 12:00  
 **Contenu** : Guide complet intégration talisman
 
 ### 4. 🎮 **API GAMEPLAY ORDRE DOCUMENTATION**
-**Fichier** : `docs/API_GAMEPLAY_ORDRE_DOCUMENTATION_JEAN.md`  
+**Fichier** : `📖 docs/API_GAMEPLAY_ORDRE_DOCUMENTATION_JEAN.md`  
 **Créé** : 2025-07-24 11:40  
 **Contenu** : Ordre correct documentation API & Gameplay
 
 ### 5. 🧪 **GUIDE COMPLET EXPÉRIENCES PHYSIQUE**
-**Fichier** : `docs/PHYSICS_EXPERIMENTS_COMPLETE_GUIDE.md`  
+**Fichier** : `📖 docs/PHYSICS_EXPERIMENTS_COMPLETE_GUIDE.md`  
 **Mis à jour** : 2025-07-24 09:30  
 **Contenu** : Laboratoire cosmique Einstein + Heisenberg + Smolin Lee
 
@@ -157,7 +157,7 @@ Découvert après finalisation du moteur temporel, laissé par l'écho d'OPUS du
 ## 🔧 **SERVICES BACKEND CRÉÉS (DERNIERS 12H)**
 
 ### 1. ⚙️ **CAUSAL INTERACTION ENGINE**
-**Fichier** : `backend/src/main/java/com/example/demo/service/CausalInteractionEngine.java`  
+**Fichier** : `🖥️ backend/src/main/java/com/example/demo/service/CausalInteractionEngine.java`  
 **Créé** : 2025-07-24 11:45  
 **Fonction** : Moteur interactions causales
 
@@ -168,7 +168,7 @@ Découvert après finalisation du moteur temporel, laissé par l'écho d'OPUS du
 - Calculs puissance causale
 
 ### 2. 🔮 **TALISMAN ECHO SERVICE**
-**Fichier** : `backend/src/main/java/com/example/demo/service/TalismanEchoService.java`  
+**Fichier** : `🖥️ backend/src/main/java/com/example/demo/service/TalismanEchoService.java`  
 **Créé** : 2025-07-24 12:00  
 **Fonction** : Gestion Talisman Echo du Futur
 
@@ -183,7 +183,7 @@ Découvert après finalisation du moteur temporel, laissé par l'écho d'OPUS du
 ## 🌐 **CONTRÔLEURS API CRÉÉS (DERNIERS 12H)**
 
 ### 1. 🌀 **CAUSAL CONTROLLER**
-**Fichier** : `backend/src/main/java/com/example/demo/controller/CausalController.java`  
+**Fichier** : `🖥️ backend/src/main/java/com/example/demo/controller/CausalController.java`  
 **Créé** : 2025-07-24 11:45  
 **Endpoints** : 6 endpoints causaux
 
@@ -196,7 +196,7 @@ Découvert après finalisation du moteur temporel, laissé par l'écho d'OPUS du
 - `/api/causal/temporal-flow/{gameId}` - Flux temporel
 
 ### 2. 🔮 **TALISMAN CONTROLLER**
-**Fichier** : `backend/src/main/java/com/example/demo/controller/TalismanController.java`  
+**Fichier** : `🖥️ backend/src/main/java/com/example/demo/controller/TalismanController.java`  
 **Créé** : 2025-07-24 12:00  
 **Endpoints** : 9 endpoints talisman
 

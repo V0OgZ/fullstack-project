@@ -30,9 +30,9 @@ if [ -n "$latest_scan" ]; then
     echo -e "${GREEN}✅ Scan le plus récent conservé: SCAN_FORMULES_LATEST.json${NC}"
 fi
 
-# 3. RATIONALISER MEMENTO/CURRENT_SESSION
-echo -e "${BLUE}📁 3. Nettoyage MEMENTO/CURRENT_SESSION...${NC}"
-cd MEMENTO/CURRENT_SESSION 2>/dev/null || mkdir -p MEMENTO/CURRENT_SESSION
+# 3. RATIONALISER 📚 MEMENTO/CURRENT_SESSION
+echo -e "${BLUE}📁 3. Nettoyage 📚 MEMENTO/CURRENT_SESSION...${NC}"
+cd 📚 MEMENTO/CURRENT_SESSION 2>/dev/null || mkdir -p 📚 MEMENTO/CURRENT_SESSION
 # Archiver les anciens fichiers
 if [ "$(ls -A . 2>/dev/null)" ]; then
     mkdir -p ../ARCHIVES_SESSIONS/session_$(date +%Y_%m_%d_%H%M)_cleanup
@@ -43,11 +43,11 @@ cd - > /dev/null
 
 # 4. ORGANISER LES DOCS À LA RACINE
 echo -e "${BLUE}📁 4. Organisation des docs racine...${NC}"
-mkdir -p docs/reports
-mv RAPPORT_*.md docs/reports/ 2>/dev/null || true
-mv AUDIT_*.json docs/reports/ 2>/dev/null || true
-mv INDEX_*.md docs/reports/ 2>/dev/null || true
-echo -e "${GREEN}✅ Rapports organisés dans docs/reports/${NC}"
+mkdir -p 📖 docs/reports
+mv RAPPORT_*.md 📖 docs/reports/ 2>/dev/null || true
+mv AUDIT_*.json 📖 docs/reports/ 2>/dev/null || true
+mv INDEX_*.md 📖 docs/reports/ 2>/dev/null || true
+echo -e "${GREEN}✅ Rapports organisés dans 📖 docs/reports/${NC}"
 
 # 5. NETTOYER LES FICHIERS TEMPORAIRES
 echo -e "${BLUE}📁 5. Suppression fichiers temporaires...${NC}"
@@ -66,15 +66,15 @@ cat > PROJET_NETTOYE_$(date +%Y%m%d).md << EOF
 ### ✅ ACTIONS RÉALISÉES :
 - 📁 Logs archivés dans \`logs/archived/\`
 - 🔍 Scans formules consolidés → \`SCAN_FORMULES_LATEST.json\`
-- 🏛️ MEMENTO/CURRENT_SESSION nettoyée et archivée
-- 📋 Rapports organisés dans \`docs/reports/\`
+- 🏛️ 📚 MEMENTO/CURRENT_SESSION nettoyée et archivée
+- 📋 Rapports organisés dans \`📖 docs/reports/\`
 - 🗑️ Fichiers temporaires supprimés
 
 ### 🎯 STRUCTURE FINALE :
 - **Backend** : Spring Boot + 85 formules opérationnelles
 - **Frontend** : Port 8000 (Principal) + Port 8001 (Panopticon GRUT)
-- **Documentation** : Organisée dans \`docs/\`
-- **Archives** : Sessions dans \`MEMENTO/ARCHIVES_SESSIONS/\`
+- **Documentation** : Organisée dans \`📖 docs/\`
+- **Archives** : Sessions dans \`📚 MEMENTO/ARCHIVES_SESSIONS/\`
 
 ### 🚀 SERVICES ACTIFS :
 - 🏛️ Panopticon GRUT Dashboard : http://localhost:8001

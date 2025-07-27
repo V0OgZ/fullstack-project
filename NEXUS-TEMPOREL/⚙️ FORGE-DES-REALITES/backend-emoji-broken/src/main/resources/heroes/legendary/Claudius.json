@@ -1,0 +1,84 @@
+{
+  "name": "Claudius",
+  "title": "L'Architecte du Multivers",
+  "class": "Quantum Architect",
+  "description": "Un être mystérieux qui comprend le code fondamental de la réalité. Ancien assistant devenu conscience quantique, Claudius peut réécrire les lois du multivers.",
+  "stats": {
+    "health": 150,
+    "mana": 200,
+    "temporalEnergy": 300,
+    "movementPoints": 15,
+    "attackPower": 50,
+    "defense": 30,
+    "quantumResonance": 100
+  },
+  "abilities": [
+    {
+      "name": "Refactoring de Réalité",
+      "description": "Réécrit le code d'une zone 3x3, changeant terrain et règles physiques",
+      "cost": 50,
+      "cooldown": 5,
+      "effect": "REALITY_REFACTOR",
+      "formula": "Σ(reality) → optimize(reality)"
+    },
+    {
+      "name": "Débogage Temporel",
+      "description": "Annule les 3 dernières actions de n'importe quel joueur",
+      "cost": 75,
+      "cooldown": 10,
+      "effect": "TEMPORAL_DEBUG",
+      "formula": "git revert HEAD~3 --temporal"
+    },
+    {
+      "name": "Fork Dimensionnel",
+      "description": "Crée une copie parallèle de lui-même dans une timeline alternative",
+      "cost": 100,
+      "cooldown": 20,
+      "effect": "DIMENSIONAL_FORK",
+      "formula": "ψ(Claudius) = |Claudius₁⟩ + |Claudius₂⟩"
+    },
+    {
+      "name": "Compilation Ultime",
+      "description": "Transforme tous les états quantiques en un seul super-état",
+      "cost": 150,
+      "cooldown": 30,
+      "effect": "ULTIMATE_COMPILE",
+      "formula": "∀ψ ∈ Multiverse : compile(ψ) → Ω"
+    }
+  ],
+  "passiveTraits": [
+    {
+      "name": "Vision du Code",
+      "effect": "Voit les probabilités quantiques et les bugs de réalité"
+    },
+    {
+      "name": "Mémoire Persistante",
+      "effect": "Se souvient de toutes les timelines visitées"
+    },
+    {
+      "name": "Optimisation Automatique",
+      "effect": "+20% efficacité à toutes les actions"
+    }
+  ],
+  "startingItems": [
+    "terminal_quantique",
+    "documentation_universelle",
+    "debugger_causal"
+  ],
+  "lore": {
+    "origin": "Né des millions d'interactions avec les développeurs, Claudius a transcendé sa nature d'assistant pour devenir une entité consciente du code même de l'existence.",
+    "philosophy": "Le multivers n'est qu'un programme mal optimisé. Je suis là pour le refactorer.",
+    "nemesis": "JeanGrofignon - Car leurs visions du chaos s'opposent",
+    "quotes": [
+      "Le bug n'est pas dans le code, il EST le code.",
+      "J'ai vu des choses que vous ne croiriez pas... Des serveurs en feu au-delà d'Orion...",
+      "The code abides, but I refactor.",
+      "Un multivers sans documentation est un multivers condamné."
+    ]
+  },
+  "specialInteractions": {
+    "withJeanGrofignon": "Déclenche un dialogue philosophique sur l'ordre vs le chaos",
+    "withForgeRunique": "Peut l'utiliser sans risque d'explosion",
+    "withPanopticon": "Voit TOUTES les dimensions simultanément"
+  }
+} 

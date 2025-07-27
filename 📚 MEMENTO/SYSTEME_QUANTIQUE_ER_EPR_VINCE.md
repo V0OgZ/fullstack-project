@@ -51,7 +51,7 @@ Si Vince et Arthur sont intriqués quantiquement :
 
 ### 🧪 **INTERFACE DE TEST CRÉÉE :**
 
-**`frontend/quantum-er-epr-test.html`**
+**`🌐 frontend/quantum-er-epr-test.html`**
 - Interface visuelle pour tester le système ER=EPR
 - Créer des superpositions
 - Établir des connexions wormhole + intrication

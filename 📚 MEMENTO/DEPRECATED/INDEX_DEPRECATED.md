@@ -60,12 +60,12 @@
 ## 🧹 **NETTOYAGE EFFECTUÉ**
 
 ### Avant nettoyage
-- **42 fichiers** dans MEMENTO/
+- **42 fichiers** dans 📚 MEMENTO/
 - Documentation éparpillée
 - Fixes résolus mélangés avec docs actuelles
 
 ### Après nettoyage  
-- **31 fichiers actifs** dans MEMENTO/
+- **31 fichiers actifs** dans 📚 MEMENTO/
 - **11 fichiers deprecated** organisés
 - Structure claire et navigable
 
@@ -80,4 +80,4 @@
 
 ---
 
-*Objectif atteint : MEMENTO/ propre et focalisé ! 🎯* 
+*Objectif atteint : 📚 MEMENTO/ propre et focalisé ! 🎯* 

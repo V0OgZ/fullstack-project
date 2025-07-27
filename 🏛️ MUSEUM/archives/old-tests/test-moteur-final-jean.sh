@@ -194,7 +194,7 @@ test_format_conversion() {
     if [ -f "scenarios/zone_inverted_001_adapte_jean.hots" ]; then
         log_message "TEST" "🔄 Test conversion HOTS..."
         
-        if [ -x "scripts/hots-converter-fixed.sh" ]; then
+        if [ -x "⚙️ scripts/hots-converter-fixed.sh" ]; then
             # Vérifier les fichiers convertis existants
             if [ -f "scenarios/zone_inverted_001_adapte_jean.json" ]; then
                 log_keyword "HOTS_TO_JSON" "✅ SUCCESS" "Fichier JSON trouvé"

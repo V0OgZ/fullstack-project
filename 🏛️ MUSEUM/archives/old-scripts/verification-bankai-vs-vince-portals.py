@@ -21,7 +21,7 @@ def check_bankai_formulas():
     print("🗡️ VÉRIFICATION EXCALIBUR BANKAI")
     print("-" * 35)
     
-    bankai_file = "game_assets/artifacts/legendary/excalibur_bankai_merlin_arthur.json"
+    bankai_file = "🎮 game_assets/artifacts/legendary/excalibur_bankai_merlin_arthur.json"
     bankai_data = load_json_file(bankai_file)
     
     if not bankai_data:
@@ -54,7 +54,7 @@ def check_vince_vega_formulas():
     print("🔫 VÉRIFICATION POWER WORMHOLE VINCE VEGA")
     print("-" * 40)
     
-    vince_file = "game_assets/artifacts/quatrieme_mur/power_wormhole_vince_vega.json"
+    vince_file = "🎮 game_assets/artifacts/quatrieme_mur/power_wormhole_vince_vega.json"
     vince_data = load_json_file(vince_file)
     
     if not vince_data:
@@ -119,7 +119,7 @@ def check_147_formulas():
     print("-" * 35)
     
     # Arthur-Excalibur Fusion
-    fusion_file = "game_assets/artifacts/legendary/excalibur_arthur_fusion.json"
+    fusion_file = "🎮 game_assets/artifacts/legendary/excalibur_arthur_fusion.json"
     fusion_data = load_json_file(fusion_file)
     
     if fusion_data:
@@ -154,7 +154,7 @@ def check_147_formulas():
             print(f"⚠️ DISCREPANCE : {total_claimed} revendiquées vs détails")
     
     # BANKAI
-    bankai_file = "game_assets/artifacts/legendary/excalibur_bankai_merlin_arthur.json"
+    bankai_file = "🎮 game_assets/artifacts/legendary/excalibur_bankai_merlin_arthur.json"
     bankai_data = load_json_file(bankai_file)
     
     if bankai_data:
@@ -204,9 +204,9 @@ def check_for_bugs():
     
     # Vérification fichiers existent
     files_to_check = [
-        "game_assets/artifacts/legendary/excalibur_arthur_fusion.json",
-        "game_assets/artifacts/legendary/excalibur_bankai_merlin_arthur.json", 
-        "game_assets/artifacts/quatrieme_mur/power_wormhole_vince_vega.json"
+        "🎮 game_assets/artifacts/legendary/excalibur_arthur_fusion.json",
+        "🎮 game_assets/artifacts/legendary/excalibur_bankai_merlin_arthur.json", 
+        "🎮 game_assets/artifacts/quatrieme_mur/power_wormhole_vince_vega.json"
     ]
     
     for filepath in files_to_check:

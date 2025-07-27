@@ -23,7 +23,7 @@
   "existence_dual_reality": {
     "reality_in_json": {
       "structure": "Données JSON, APIs, Backend Spring Boot",
-      "location": "game_assets/, backend/src/, docs/",
+      "location": "🎮 game_assets/, 🖥️ backend/src/, 📖 docs/",
       "nature": "Code source et configuration",
       "access": "Via APIs REST et WebSockets"
     },
@@ -38,7 +38,7 @@
   "lampe_platon_connection": {
     "artifact": "Lampe de la Cave de Platon",
     "function": "PONT QUANTIQUE entre réalités IN/OUT",
-    "location": "game_assets/artifacts/legendaires/lampe_platon_pont_realites.json",
+    "location": "🎮 game_assets/artifacts/legendaires/lampe_platon_pont_realites.json",
     "power": "Matérialise le JSON dans le monde physique"
   },
   

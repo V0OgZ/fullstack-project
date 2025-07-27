@@ -61,7 +61,7 @@ fi
 
 # Vérifier que les dossiers frontend existent
 if [ ! -d "frontend" ]; then
-    log "red" "❌ Dossier frontend/ non trouvé"
+    log "red" "❌ Dossier 🌐 frontend/ non trouvé"
     exit 1
 fi
 

@@ -23,7 +23,7 @@
 ## ✅ **SOLUTIONS IMPLÉMENTÉES**
 
 ### **1. Icônes des Héros Agrandies**
-**Fichier :** `frontend/game.js` - Fonction `drawHeroes()`
+**Fichier :** `🌐 frontend/game.js` - Fonction `drawHeroes()`
 
 #### **Améliorations Visuelles**
 ```javascript
@@ -91,7 +91,7 @@ this.ctx.fillText(`${Math.round(hero.health)}/${hero.maxHealth || 100}`, x, y + 
 ```
 
 ### **4. Page de Test Interactive**
-**Fichier :** `frontend/test-game.html`
+**Fichier :** `🌐 frontend/test-game.html`
 
 #### **Fonctionnalités**
 - **Canvas de jeu** avec rendu en temps réel

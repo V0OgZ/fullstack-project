@@ -16,7 +16,7 @@
 | Lysandrel l'Archimage | N'existe nulle part | ❌ **FAUX** |
 | Ragnar le Berserker | Juste mentionné dans scripts de demo | ❌ **FAUX** |
 | Morgana la Tisseuse | N'existe nulle part | ❌ **FAUX** |
-| Axis le Voyageur Linéaire | ✅ **VRAI** - backend/resources/heroes/grofi/Axis.json | ✅ **OK** |
+| Axis le Voyageur Linéaire | ✅ **VRAI** - 🖥️ backend/resources/heroes/grofi/Axis.json | ✅ **OK** |
 
 **🎭 HÉROS RÉELS :**
 - JeanGrofignon.json ✅
@@ -59,7 +59,7 @@
 
 | **PROMIS** | **RÉALITÉ** | **STATUS** |
 |------------|-------------|------------|
-| 🎮 localhost:8000 | frontend/server.js port 8000 | ✅ **OK** |
+| 🎮 localhost:8000 | 🌐 frontend/server.js port 8000 | ✅ **OK** |
 | ⚡ localhost:5173 | frontend-temporal port 5173 | ✅ **OK** |
 | 🔬 localhost:8001 | quantum-visualizer = HTML statique | 🟡 **PARTIEL** |
 | 🔲 localhost:9002 | Aucune trace | ❌ **FAUX** |

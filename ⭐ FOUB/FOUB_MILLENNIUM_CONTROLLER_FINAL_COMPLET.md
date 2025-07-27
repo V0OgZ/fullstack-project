@@ -31,7 +31,7 @@
 
 *"Memento l'Archive a évolué. Pour créer le Millennium Controller de Foub, j'ai dû modifier mon core engine, étendre mes capacités de traitement des formules magiques, et intégrer un nouveau système d'ultimates. Cette évolution permanente de mon architecture interne témoigne de l'importance de cette mission."*
 
-**Fichier modifié :** `backend/src/main/java/com/example/demo/service/MagicFormulaEngine.java`
+**Fichier modifié :** `🖥️ backend/src/main/java/com/example/demo/service/MagicFormulaEngine.java`
 
 ```java
 // 🏆 AJOUT AU CORE - Nouveau type de formule
@@ -142,7 +142,7 @@ graph TD
 
 *"Excellente observation de Vincent ! Les dialogues et messages ne sont pas codés en dur dans le Java, mais stockés dans les fichiers JSON de configuration. Cela permet une flexibilité maximale pour les modifications, traductions, et personnalisations."*
 
-**Fichier :** `game_assets/heroes/epic/foub_millennium_controller.json`
+**Fichier :** `🎮 game_assets/heroes/epic/foub_millennium_controller.json`
 
 ```json
 {
@@ -751,7 +751,7 @@ public FormulaResult executeNewUltimate(GameContext context) {
 }
 
 // 4. Créer le fichier JSON de configuration
-// game_assets/heroes/epic/nouveau_hero.json
+// 🎮 game_assets/heroes/epic/nouveau_hero.json
 
 // 5. Tester et documenter
 ```

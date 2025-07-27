@@ -29,7 +29,7 @@ Enquête et solution complète pour le "marron sur marron" :
 - ✅ **Diagnostic** : `index.hml` (faute de frappe) avec style sombre
 - ✅ **Rapport détaillé** : `RAPPORT_GITHUB_PAGES_PROBLEME.md`
 - ✅ **Nouveau design** : `index-heroes-of-time.html` moderne
-- ✅ **Script automatique** : `scripts/fix-github-pages.sh`
+- ✅ **Script automatique** : `⚙️ scripts/fix-github-pages.sh`
 - ✅ **Déploiement** : Nouveau site Heroes of Time en ligne !
 
 ### 3. **🎯 INTÉGRATION LE BUREAU**

@@ -341,6 +341,6 @@
     ],
     "integration_status": "Ready for JSON scenario runner",
     "test_status": "Converted and ready for validation",
-    "original_script": "scripts/test-heros-memento.sh"
+    "original_script": "⚙️ scripts/test-heros-memento.sh"
   }
 }

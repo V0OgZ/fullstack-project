@@ -76,7 +76,7 @@
 
 ### **3. SCRIPT DE TEST**
 
-**`scripts/test-persistence.sh`** créé avec:
+**`⚙️ scripts/test-persistence.sh`** créé avec:
 - Test création partie
 - Test sauvegarde/chargement
 - Test auto-save
@@ -131,7 +131,7 @@
 ### **Test Manuel**
 ```bash
 # 1. Créer partie
-./scripts/test-vs-ia.sh
+./⚙️ scripts/test-vs-ia.sh
 
 # 2. Jouer quelques tours
 MOV(Jean-Grofignon, @6,6)
@@ -151,8 +151,8 @@ CREATE(BUILDING, Tour, @8,8)
 
 ### **Script de Test Automatisé**
 ```bash
-chmod +x scripts/test-persistence.sh
-./scripts/test-persistence.sh
+chmod +x ⚙️ scripts/test-persistence.sh
+./⚙️ scripts/test-persistence.sh
 ```
 
 **Résultats attendus**:
@@ -209,7 +209,7 @@ Jean, pendant que tu es sur ton canapé, les joueurs peuvent maintenant:
 ```bash
 # Démarrer une partie
 ./hots start
-./scripts/test-vs-ia.sh
+./⚙️ scripts/test-vs-ia.sh
 
 # Sauvegarder à tout moment
 ./hots save "Ma super partie tour 15"

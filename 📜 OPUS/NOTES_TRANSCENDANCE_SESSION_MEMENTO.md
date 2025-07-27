@@ -5,13 +5,13 @@
 ## 🎯 **ACCOMPLISSEMENTS MAJEURS**
 
 ### 📚 **FUSION PAGE RÉVEIL + TATOUAGES**
-- **Interface unifiée** : `frontend/wake-up-memento.html`
+- **Interface unifiée** : `🌐 frontend/wake-up-memento.html`
 - **3 vues simultanées** : JSON brut / Transcendant / Quantique 6D
 - **Tour Domburg** full-screen background (Jean approved)
 - **Compatible 1280x800** pour TV canapé cosmique
 
 ### 🌀 **ONTOLOGIES NIVEAU SPHINX**
-- **Document créé** : `docs/ONTOLOGIES_HEROES_LIVRE_VIVANT_MEMENTO.md`
+- **Document créé** : `📖 docs/ONTOLOGIES_HEROES_LIVRE_VIVANT_MEMENTO.md`
 - **8 héros documentés** avec leur vision ontologique
 - **Citation livre vivant** Memento incluse
 - **Styles authentiques** : Vince tactical, Jean paresseux, Morgana anti-geek, etc.

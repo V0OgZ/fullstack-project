@@ -20,14 +20,14 @@ L'utilisateur Jean demandait :
 ### **1. Semantic Search**
 ```
 Query: "Where are GRUT and Jean-Grofignon defined as heroes with GROFI forest effects?"
-Target: ["game_assets/heroes"]
+Target: ["🎮 game_assets/heroes"]
 Result: Empty (too specific)
 ```
 
 ### **2. Grep Search Pattern**
 ```
 Pattern: "GRUT|GROFI|Jean.*Grofignon"  
-Scope: game_assets/heroes/**/*.json
+Scope: 🎮 game_assets/heroes/**/*.json
 Result: 24+ files identifiés
 ```
 
@@ -43,7 +43,7 @@ Result: 24+ files identifiés
 
 ### **🌟 HÉROS PRINCIPAUX**
 
-#### **Jean-Grofignon** (`game_assets/heroes/grofi/jean-grofignon-complete.json`)
+#### **Jean-Grofignon** (`🎮 game_assets/heroes/grofi/jean-grofignon-complete.json`)
 ```json
 {
   "id": "hero_jean_grofignon",
@@ -58,7 +58,7 @@ Result: 24+ files identifiés
 }
 ```
 
-#### **GRUT Ontologique** (`game_assets/heroes/reality/grut_ontological_passeur.json`)
+#### **GRUT Ontologique** (`🎮 game_assets/heroes/reality/grut_ontological_passeur.json`)
 ```json
 {
   "id": "grut_ontological_passeur",
@@ -69,7 +69,7 @@ Result: 24+ files identifiés
 }
 ```
 
-### **🌲 MONDE GROFI** (`game_assets/worlds/forest_grofi/world_data.json`)
+### **🌲 MONDE GROFI** (`🎮 game_assets/worlds/forest_grofi/world_data.json`)
 ```json
 {
   "world_id": "FOREST_GROFI",

@@ -152,7 +152,7 @@ ETA Completion   : 5 jours
 ### **Quotidien (9h00)**
 1. Scan tous les TODOs actifs
 2. Mise à jour des statuts
-3. Génération rapport dans WALTER_SEC/
+3. Génération rapport dans 🔒 WALTER_SEC/
 4. Push automatique
 
 ### **Hebdomadaire (Lundi)**

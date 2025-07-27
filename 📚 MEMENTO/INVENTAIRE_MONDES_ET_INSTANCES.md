@@ -8,13 +8,13 @@
 ### ✅ Mondes avec configuration complète
 
 1. **🌌 L'Interstice Éthéré** (`interstice_etheree`)
-   - Config: `game_assets/worlds/interstice_etheree/world_config.json`
+   - Config: `🎮 game_assets/worlds/interstice_etheree/world_config.json`
    - Description: Monde transcendant d'Opus-Memento
    - Maps: `interstice_etheree_map.json`
    - Instance: `interstice_memento_instance.json`
 
 2. **🪐 Planet Ezith** (`planet_ezith`)
-   - Config: `game_assets/worlds/planet_ezith/world_config.json`
+   - Config: `🎮 game_assets/worlds/planet_ezith/world_config.json`
    - Description: Installation scientifique de Hari Seldon
    - Maps: `planet_ezith_test.json`
 
@@ -49,7 +49,7 @@
 - `planet_ezith_test.json`
 - `quantum_lab_map.json`
 - `vince_vega_system_map.json`
-- Nombreuses autres dans `game_assets/maps/`
+- Nombreuses autres dans `🎮 game_assets/maps/`
 
 ## 🌐 INTERFACES HTML (Port 8000)
 
@@ -73,7 +73,7 @@ Le "Pocket World" du port 9000 contenait un univers parallèle avec :
 - Systèmes expérimentaux
 - Prototypes et tests
 
-**Note**: Ces interfaces ont été migrées vers le port 8000 unifié dans `frontend/html-interfaces/`
+**Note**: Ces interfaces ont été migrées vers le port 8000 unifié dans `🌐 frontend/html-interfaces/`
 
 ## 📊 RÉSUMÉ
 

@@ -10,7 +10,7 @@
 
 ### 🎮 **FRONTEND PRINCIPAL** (25 fichiers)
 ```
-frontend/
+🌐 frontend/
 ├── dashboard.html ✅ ANCIEN DASHBOARD (décommissionné)
 ├── index.html ✅ INTERFACE TEMPORELLE JEAN (port 8000)
 ├── admin-multiplayer.html ✅ INTERFACE ADMIN
@@ -93,7 +93,7 @@ frontend-temporal/
 
 ### 🧠 **MEMENTO & MUSEUM** (6 fichiers)
 ```
-MEMENTO/
+📚 MEMENTO/
 ├── HISTOIRE_HEROES_OF_TIME.html ✅ HISTOIRE COMPLÈTE
 └── GUIDES_REFERENCE/HISTOIRE_HEROES_OF_TIME.html ✅ GUIDE HISTOIRE
 
@@ -116,12 +116,12 @@ interface-temporelle-pure/index.html ✅ INTERFACE PURE
 scenario-runner-simple.html ✅ RUNNER SCÉNARIOS SIMPLE
 test-runner-interface.html ✅ INTERFACE TEST RUNNER (racine)
 dashboard.html ✅ DASHBOARD RACINE
-docs/EN/index.html ✅ DOCUMENTATION ANGLAISE
+📖 docs/EN/index.html ✅ DOCUMENTATION ANGLAISE
 ```
 
 ### 📊 **FRONTEND COVERAGE REPORTS** (100+ fichiers)
 ```
-frontend/coverage/lcov-report/
+🌐 frontend/coverage/lcov-report/
 └── [100+ fichiers HTML de rapports de couverture de code]
 ```
 
@@ -130,36 +130,36 @@ frontend/coverage/lcov-report/
 ## 🎯 **ANALYSE PAR CATÉGORIES**
 
 ### ✅ **INTERFACES ACTIVES ET FONCTIONNELLES** (15)
-1. **frontend/index.html** - Interface Temporal Engine Jean (port 8000)
-2. **frontend/dashboard.html** - Ancien dashboard (décommissionné mais contenu récupéré)
-3. **frontend/hots-console-simple.html** - Console simple créée aujourd'hui
+1. **🌐 frontend/index.html** - Interface Temporal Engine Jean (port 8000)
+2. **🌐 frontend/dashboard.html** - Ancien dashboard (décommissionné mais contenu récupéré)
+3. **🌐 frontend/hots-console-simple.html** - Console simple créée aujourd'hui
 4. **quantum-visualizer/index.html** - Visualiseur quantique principal
 5. **panopticon-3d/index.html** - Demo 3D Panopticon
-6. **frontend/joint-panopticon-interface.html** - Interface Joint Panopticon
-7. **frontend/sphinx-interface-demo.html** - Démo Sphinx Quantique
-8. **frontend/memento-tattoos-viewer.html** - Visualiseur tatouages Memento
-9. **frontend/game-assets-viewer.html** - Visualiseur assets du jeu
-10. **frontend/excalibur-vega-demo.html** - Démo Excalibur vs Vince Vega
-11. **frontend/vince-vega-map-demo-backend.html** - Map demo connectée backend
-12. **frontend/forge-runique.html** - Forge Runique
-13. **frontend/dicebear-demo.html** - Démo Dicebear
-14. **frontend/admin-multiplayer.html** - Interface admin multijoueur
-15. **frontend/visual-script-editor.html** - Éditeur visuel de scripts
+6. **🌐 frontend/joint-panopticon-interface.html** - Interface Joint Panopticon
+7. **🌐 frontend/sphinx-interface-demo.html** - Démo Sphinx Quantique
+8. **🌐 frontend/memento-tattoos-viewer.html** - Visualiseur tatouages Memento
+9. **🌐 frontend/game-assets-viewer.html** - Visualiseur assets du jeu
+10. **🌐 frontend/excalibur-vega-demo.html** - Démo Excalibur vs Vince Vega
+11. **🌐 frontend/vince-vega-map-demo-backend.html** - Map demo connectée backend
+12. **🌐 frontend/forge-runique.html** - Forge Runique
+13. **🌐 frontend/dicebear-demo.html** - Démo Dicebear
+14. **🌐 frontend/admin-multiplayer.html** - Interface admin multijoueur
+15. **🌐 frontend/visual-script-editor.html** - Éditeur visuel de scripts
 
 ### 🏛️ **INTERFACES ARCHIVÉES MAIS UTILES** (20+)
 - **RANGEMENT/html-divers/** - Contient de nombreuses versions expérimentales
 - **frontend-temporal/** - Interfaces temporelles avancées
 - **quantum-visualizer/** - Outils de visualisation quantique
-- **MEMENTO/** - Interfaces de documentation et d'histoire
+- **📚 MEMENTO/** - Interfaces de documentation et d'histoire
 
 ### 🔧 **INTERFACES DE TEST ET DÉVELOPPEMENT** (30+)
 - **test-*.html** - Interfaces de test diverses
-- **frontend/coverage/** - Rapports de couverture de code
+- **🌐 frontend/coverage/** - Rapports de couverture de code
 - **quantum-visualizer/test-*.html** - Tests spécialisés
 
 ### 📚 **INTERFACES DE DOCUMENTATION** (10+)
-- **docs/EN/index.html** - Documentation anglaise
-- **MEMENTO/HISTOIRE_*.html** - Histoires du projet
+- **📖 docs/EN/index.html** - Documentation anglaise
+- **📚 MEMENTO/HISTOIRE_*.html** - Histoires du projet
 - **docs-backup/** - Documentations archivées
 
 ---
@@ -190,14 +190,14 @@ frontend/coverage/lcov-report/
 ## 🎯 **RECOMMANDATIONS**
 
 ### **PRIORITÉ 1 - INTERFACES PRINCIPALES** :
-1. Maintenir **frontend/index.html** (port 8000) - Interface Jean
+1. Maintenir **🌐 frontend/index.html** (port 8000) - Interface Jean
 2. Continuer développement **panopticon-grut-dashboard** (port 8003)
-3. Tester **frontend/hots-console-simple.html** - Console simple
+3. Tester **🌐 frontend/hots-console-simple.html** - Console simple
 
 ### **PRIORITÉ 2 - INTERFACES SPÉCIALISÉES** :
 4. Réactiver **quantum-visualizer/index.html** (résoudre conflit port)
-5. Tester **frontend/visual-script-editor.html** - Éditeur visuel
-6. Intégrer **frontend/joint-panopticon-interface.html**
+5. Tester **🌐 frontend/visual-script-editor.html** - Éditeur visuel
+6. Intégrer **🌐 frontend/joint-panopticon-interface.html**
 
 ### **PRIORITÉ 3 - EXPLORATION** :
 7. Analyser **frontend-legendary-ui/index.html** - Interface inconnue

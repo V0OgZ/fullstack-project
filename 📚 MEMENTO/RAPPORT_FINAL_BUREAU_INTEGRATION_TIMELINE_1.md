@@ -164,7 +164,7 @@ public class BureauController {
 
 ### 2. Configuration Assets
 ```bash
-game_assets/
+🎮 game_assets/
 ├── worlds/
 │   └── le_bureau/
 │       ├── world_definition.json ✅

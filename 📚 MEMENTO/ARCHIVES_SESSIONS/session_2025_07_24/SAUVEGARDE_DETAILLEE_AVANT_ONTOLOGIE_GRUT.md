@@ -34,16 +34,16 @@
 
 ### **1️⃣ CONTROLLERS RÉACTIVÉS**
 **Fichiers modifiés:**
-- `backend/src/main/java/com/example/demo/controller/BuildingController.java`
+- `🖥️ backend/src/main/java/com/example/demo/controller/BuildingController.java`
   - **Changement:** Suppression `@Deprecated` et commentaires préservation
   - **Raison:** Fait partie du système unifié, pas "dead code"
   
-- `backend/src/main/java/com/example/demo/controller/UnitController.java`
+- `🖥️ backend/src/main/java/com/example/demo/controller/UnitController.java`
   - **Changement:** Suppression `@Deprecated` et commentaires préservation
   - **Raison:** Fait partie du système unifié, pas "dead code"
 
 ### **2️⃣ QUANTUM SCRIPT PARSER CRÉÉ**
-**Fichier:** `backend/src/main/java/com/example/demo/service/QuantumScriptParser.java`
+**Fichier:** `🖥️ backend/src/main/java/com/example/demo/service/QuantumScriptParser.java`
 ```java
 @Service
 public class QuantumScriptParser {
@@ -56,11 +56,11 @@ public class QuantumScriptParser {
 **Fonction:** Interprète les formules quantiques des héros JSON
 
 ### **3️⃣ GAME SERVICE AMÉLIORÉ**
-**Fichier:** `backend/src/main/java/com/example/demo/service/GameService.java`
+**Fichier:** `🖥️ backend/src/main/java/com/example/demo/service/GameService.java`
 **Changement:** Intégration du QuantumScriptParser pour traiter les `quantum_script`
 
 ### **4️⃣ GAME CONTROLLER ENDPOINT QUANTIQUE**
-**Fichier:** `backend/src/main/java/com/example/demo/controller/GameController.java`
+**Fichier:** `🖥️ backend/src/main/java/com/example/demo/controller/GameController.java`
 **Nouveau endpoint:** `/api/games/{id}/heroes/{heroId}/quantum-action`
 **Fonction:** Traite les actions quantiques des héros
 
@@ -74,16 +74,16 @@ public class QuantumScriptParser {
 ## 🗂️ **DOCUMENTATION CRÉÉE**
 
 ### **📋 Rapports Session:**
-1. `MEMENTO/CURRENT_SESSION/EXPLICATION_METRIQUES_CAUSALES_POUR_DUDE.md`
+1. `📚 MEMENTO/CURRENT_SESSION/EXPLICATION_METRIQUES_CAUSALES_POUR_DUDE.md`
    - Explication Poids Causal, Risque Paradoxe, Stabilité Temporelle
    
-2. `MEMENTO/CURRENT_SESSION/NETTOYAGE_CODEX_POURRI_JESUS_QUINTANA.md`
+2. `📚 MEMENTO/CURRENT_SESSION/NETTOYAGE_CODEX_POURRI_JESUS_QUINTANA.md`
    - Audit des fichiers CODEX redondants
    
-3. `MEMENTO/CURRENT_SESSION/SYSTEME_UNIFIE_FIXED_JEAN.md`
+3. `📚 MEMENTO/CURRENT_SESSION/SYSTEME_UNIFIE_FIXED_JEAN.md`
    - Rapport complet sur le "fix tout"
    
-4. `MEMENTO/CURRENT_SESSION/REVELATION_GRUT_PASSEUR_ONTOLOGIQUE.md`
+4. `📚 MEMENTO/CURRENT_SESSION/REVELATION_GRUT_PASSEUR_ONTOLOGIQUE.md`
    - **⚠️ CRÉÉ MAIS PAS ENCORE EXPLORÉ EN DÉTAIL**
 
 ### **🏗️ Architecture Confirmée:**
@@ -97,7 +97,7 @@ public class QuantumScriptParser {
 ## 🎮 **HÉROS ET ASSETS**
 
 ### **🌟 GRUT - PASSEUR D'ONTOLOGIE**
-**Fichier:** `game_assets/heroes/reality/grut_ontological_passeur.json`
+**Fichier:** `🎮 game_assets/heroes/reality/grut_ontological_passeur.json`
 **Status:** JSON créé, MD documenté, **ONTOLOGIE PAS ENCORE EXPLORÉE**
 
 **Caractéristiques clés:**
@@ -107,7 +107,7 @@ public class QuantumScriptParser {
 - **Citation:** *"Heroes of Time n'est pas un jeu - c'est un simulateur de relativité causale"*
 
 ### **🏛️ Assets Catalogue:**
-- **Total:** 115+ assets dans `game_assets/MASTER_ASSETS_INDEX.json`
+- **Total:** 115+ assets dans `🎮 game_assets/MASTER_ASSETS_INDEX.json`
 - **Héros:** 20+ incluant Jean-Grofignon, Anna Martel, Claudius Memento
 - **Artefacts:** 30+ incluant Reliques du Canapé Sacré
 - **Créatures:** Dragons temporels, Liches quantiques
@@ -153,18 +153,18 @@ L'ontologie de GRUT contient:
 ## 🔗 **LIENS VERS CODE CRITIQUE**
 
 ### **Backend Core:**
-- `backend/src/main/java/com/example/demo/controller/GameController.java` - Controller principal
-- `backend/src/main/java/com/example/demo/service/GameService.java` - Logique métier
-- `backend/src/main/java/com/example/demo/service/QuantumScriptParser.java` - Parser quantique
+- `🖥️ backend/src/main/java/com/example/demo/controller/GameController.java` - Controller principal
+- `🖥️ backend/src/main/java/com/example/demo/service/GameService.java` - Logique métier
+- `🖥️ backend/src/main/java/com/example/demo/service/QuantumScriptParser.java` - Parser quantique
 
 ### **Frontend:**
-- `frontend/index.html` - Interface Temporal Engine
-- `frontend/api.js` - Connexion backend
-- `frontend/game.js` - Logique jeu
+- `🌐 frontend/index.html` - Interface Temporal Engine
+- `🌐 frontend/api.js` - Connexion backend
+- `🌐 frontend/game.js` - Logique jeu
 
 ### **Assets:**
-- `game_assets/heroes/reality/grut_ontological_passeur.json` - GRUT JSON
-- `game_assets/MASTER_ASSETS_INDEX.json` - Catalogue complet
+- `🎮 game_assets/heroes/reality/grut_ontological_passeur.json` - GRUT JSON
+- `🎮 game_assets/MASTER_ASSETS_INDEX.json` - Catalogue complet
 
 ### **Scripts:**
 - `./hots` - Script principal (1313 lignes)

@@ -12,7 +12,7 @@ TEMP_FILE="/tmp/formules_temp.txt"
 
 echo "🔍 SCAN COMPLET DES FORMULES - ASSETS JSON"
 echo "=========================================="
-echo "📁 Scanning dans: game_assets/"
+echo "📁 Scanning dans: 🎮 game_assets/"
 echo "📝 Output: $OUTPUT_FILE"
 echo ""
 
@@ -22,9 +22,9 @@ cat > "$OUTPUT_FILE" <<'EOF'
   "scan_formules_assets": {
     "timestamp": "TIMESTAMP_PLACEHOLDER",
     "scan_directories": [
-      "game_assets/artifacts/",
-      "game_assets/heroes/",
-      "game_assets/creatures/",
+      "🎮 game_assets/artifacts/",
+      "🎮 game_assets/heroes/",
+      "🎮 game_assets/creatures/",
       "scenarios/"
     ],
     "total_files_scanned": 0,

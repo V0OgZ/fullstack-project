@@ -106,7 +106,7 @@ h1, h2, h3 {
 <div class="timeline-item">
 <strong>17:35</strong> - Investigation & Correction
 <div class="code-block">
-Problème identifié : index.html redirige vers /Heroes-of-Time/MEMENTO/HISTOIRE_HEROES_OF_TIME.html
+Problème identifié : index.html redirige vers /Heroes-of-Time/📚 MEMENTO/HISTOIRE_HEROES_OF_TIME.html
 Solution : Modifier meta refresh vers dashboard.html
 </div>
 </div>
@@ -155,7 +155,7 @@ Mise à jour HISTOIRE_HEROES_OF_TIME.md avec cette session
 
 **Problème** :
 ```html
-<meta http-equiv="refresh" content="0;url=/Heroes-of-Time/MEMENTO/HISTOIRE_HEROES_OF_TIME.html">
+<meta http-equiv="refresh" content="0;url=/Heroes-of-Time/📚 MEMENTO/HISTOIRE_HEROES_OF_TIME.html">
 ```
 
 **Solution** :

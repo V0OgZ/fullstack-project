@@ -47,7 +47,7 @@
 
 ### **2. NOUVELLE ORGANISATION HEROES**
 ```
-game_assets/heroes/
+🎮 game_assets/heroes/
 ├── epic/                    # Héros standards (Arthur, Jeanne, etc.)
 │   └── epic-heroes.json
 └── cosmic/                  # Héros cosmiques (Anthor, futurs)
@@ -120,7 +120,7 @@ game_assets/heroes/
 
 #### **📁 Structure Template Prévue:**
 ```
-docs/
+📖 docs/
 ├── templates/
 │   ├── hero-template/
 │   │   ├── epic-hero-template.json

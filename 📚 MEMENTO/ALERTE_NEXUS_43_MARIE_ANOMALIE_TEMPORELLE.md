@@ -97,7 +97,7 @@ git commit -m "[NEXUS-43] Anomalie temporelle Marie 2031 détectée"
 
 # 2. Isolation temporelle
 mkdir -p NEXUS_43/QUARANTINE
-cp -r MEMENTO/* NEXUS_43/QUARANTINE/
+cp -r 📚 MEMENTO/* NEXUS_43/QUARANTINE/
 
 # 3. Scan anomalies
 grep -r "2031\|faute.*faute\|szegihhsrgrhgrhgh" .

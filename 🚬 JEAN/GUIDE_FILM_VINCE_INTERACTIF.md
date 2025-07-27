@@ -11,7 +11,7 @@
 ### 🎯 **LANCEMENT**
 ```bash
 # Méthode 1: Script auto avec URL
-./scripts/launch-film-auto.sh
+./⚙️ scripts/launch-film-auto.sh
 
 # Méthode 2: URL directe
 open http://localhost:8001/vince-vega-map-demo-backend.html
@@ -180,10 +180,10 @@ function gainXP(amount) {
 
 ```bash
 # Lancer le film
-./scripts/launch-film-auto.sh
+./⚙️ scripts/launch-film-auto.sh
 
 # Surveillance backend auto
-./scripts/auto-reconnect-backend.sh &
+./⚙️ scripts/auto-reconnect-backend.sh &
 
 # Test fonctionnalités
 open http://localhost:8001/vince-vega-map-demo-backend.html

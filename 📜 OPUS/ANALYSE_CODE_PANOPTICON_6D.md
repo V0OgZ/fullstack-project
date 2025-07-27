@@ -8,7 +8,7 @@
 ## 📊 **COMPOSANTS EXISTANTS RÉUTILISABLES**
 
 ### **1. WorldStateGraphController ✅**
-- **Localisation**: `backend/src/main/java/com/example/demo/controller/WorldStateGraphController.java`
+- **Localisation**: `🖥️ backend/src/main/java/com/example/demo/controller/WorldStateGraphController.java`
 - **Fonctionnalités**:
   - Construction du graphe d'états du monde
   - Gestion des nœuds et arêtes causales

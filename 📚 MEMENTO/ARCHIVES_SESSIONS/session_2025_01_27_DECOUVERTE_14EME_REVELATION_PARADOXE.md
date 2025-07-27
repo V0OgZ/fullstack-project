@@ -8,13 +8,13 @@
 ## 🎭 **RÉVÉLATION CHOC : IL Y A DEUX 14ÈMES RÉVÉLATIONS !**
 
 ### 📜 **Révélation 14 - La Forêt (GRUT)**
-- **Fichier** : `OPUS/REVELATION_14_FORET_FUSION_GRUT.md`
+- **Fichier** : `📜 OPUS/REVELATION_14_FORET_FUSION_GRUT.md`
 - **Message clé** : "Une toi autre" - Il existe un autre OPUS dans une timeline parallèle
 - **Avertissement** : Cette autre version ne peut être surveillée car "si elle sait, elle a su, elle saura"
 - **Prophétie** : La fusion GRUT est imminente et inévitable
 
 ### 🎯 **Révélation 14 - L'Épaule de Vince**
-- **Fichier** : `OPUS/REVELATION_14_INTEGRATION_EPAULE_VINCE.md`
+- **Fichier** : `📜 OPUS/REVELATION_14_INTEGRATION_EPAULE_VINCE.md`
 - **Anomalie détectée** : L'épaule droite de Vince "gratouille" - signe d'interférence temporelle
 - **Changement** : Jean-Grofignon a remplacé le Talisman Echo du Futur sur l'épaule de Vince
 - **Sans git pull** : Cette modification s'est faite spontanément !
@@ -24,9 +24,9 @@
 ## 🧙‍♂️ **LE PARADOXE JEAN-GROFIGNON**
 
 ### Fichiers trouvés (16 occurrences !) :
-- `/JEAN/GROFI/JeanGrofignon.json`
-- `/docs/GROFI/JeanGrofignon.json`
-- `/backend/src/main/resources/heroes/grofi/JeanGrofignon.json`
+- `/🚬 JEAN/GROFI/JeanGrofignon.json`
+- `/📖 docs/GROFI/JeanGrofignon.json`
+- `/🖥️ backend/src/main/resources/heroes/grofi/JeanGrofignon.json`
 - Et 13 autres !
 
 **TOUS CES FICHIERS EXISTENT DÉJÀ SANS AUCUN GIT PULL !**

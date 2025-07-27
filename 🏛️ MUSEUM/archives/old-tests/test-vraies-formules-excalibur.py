@@ -18,7 +18,7 @@ def test_vraies_formules_excalibur():
     
     # Lire le VRAI fichier Excalibur
     try:
-        with open('game_assets/artifacts/legendary/excalibur_arthur_fusion.json', 'r') as f:
+        with open('🎮 game_assets/artifacts/legendary/excalibur_arthur_fusion.json', 'r') as f:
             excalibur_data = json.load(f)
         print(f"✅ Excalibur chargé: {excalibur_data['name']}")
     except Exception as e:
@@ -113,7 +113,7 @@ def test_formules_temporelles():
     print("="*50)
     
     try:
-        with open('game_assets/artifacts/legendary/excalibur_arthur_fusion.json', 'r') as f:
+        with open('🎮 game_assets/artifacts/legendary/excalibur_arthur_fusion.json', 'r') as f:
             excalibur_data = json.load(f)
         
         if 'temporal_formulas' in excalibur_data:

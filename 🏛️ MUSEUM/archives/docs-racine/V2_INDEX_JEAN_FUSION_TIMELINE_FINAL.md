@@ -7,7 +7,7 @@
 - Timeline B : `INDEX_DOCS_RECENTS_JEAN_12H.md`
 - Timeline C : `INDEX_JEAN_INTELLIGENT_ARTEFACT_V2.md`
 - Timeline D : `INDEX_JEAN_DERNIERS_12H_HEROS_ARTEFACTS.md`
-- Timeline E : `game_assets/MASTER_ASSETS_INDEX.json`
+- Timeline E : `🎮 game_assets/MASTER_ASSETS_INDEX.json`
 
 ---
 
@@ -44,7 +44,7 @@
 ---
 
 ### 🎯 **INSTRUCTIONS D'UTILISATION FUSIONNÉES**
-1. **Ne jamais supprimer** - Toujours déplacer dans `MEMENTO/ARCHIVES_SESSIONS/`
+1. **Ne jamais supprimer** - Toujours déplacer dans `📚 MEMENTO/ARCHIVES_SESSIONS/`
 2. **Catégories unifiées** - Héros/Artefacts/Scénarios/Services/Physique
 3. **Liens automatiques complets** - Vers fiches MD et traductions narratives
 4. **Service de traduction intégré** - `./hots test translation` avec icônes
@@ -84,8 +84,8 @@
 
 ### 1. 🔬 **SMOLIN LEE - MAÎTRE GRAVITÉ QUANTIQUE**
 **Créé** : 2025-07-24 09:00  
-**Fichier JSON** : `game_assets/heroes/physics/smolin_lee_quantum_gravity.json` ✅  
-**Narratif Complet** : `docs/heroes/generated/SMOLIN_LEE_NARRATIF_COMPLET.md` ✅ CRÉÉ  
+**Fichier JSON** : `🎮 game_assets/heroes/physics/smolin_lee_quantum_gravity.json` ✅  
+**Narratif Complet** : `📖 docs/heroes/generated/SMOLIN_LEE_NARRATIF_COMPLET.md` ✅ CRÉÉ  
 **Traduction HOTS** : Compatible `./hots test translation` avec icône 🔬
 
 #### 🌟 **POUVOIRS LÉGENDAIRES**
@@ -110,8 +110,8 @@
 
 ### 2. 🏛️ **ÉVADÉ DE LA CAVE - PHILOSOPHE TRANSCENDANT**
 **Créé** : 2025-07-24 10:30  
-**Fichier JSON** : `game_assets/heroes/philosophy/evade_de_la_cave_passif.json` ✅  
-**Narratif Complet** : `docs/heroes/generated/EVADE_CAVE_NARRATIF_COMPLET.md` ✅ CRÉÉ  
+**Fichier JSON** : `🎮 game_assets/heroes/philosophy/evade_de_la_cave_passif.json` ✅  
+**Narratif Complet** : `📖 docs/heroes/generated/EVADE_CAVE_NARRATIF_COMPLET.md` ✅ CRÉÉ  
 **Traduction HOTS** : Compatible `./hots test translation` avec icône 🏛️
 
 #### 🌟 **CAPACITÉS PHILOSOPHIQUES**
@@ -140,8 +140,8 @@
 
 ### 1. 🔮 **TALISMAN ECHO DU FUTUR** ⭐ **TIER 8 COSMIQUE**
 **Créé** : 2025-07-24 11:30  
-**Fichier JSON** : `game_assets/artifacts/temporal/talisman_echo_futur.json` ✅  
-**Narratif Légendaire** : `docs/artifacts/generated/TALISMAN_ECHO_FUTUR_NARRATIF_LEGENDAIRE.md` ✅ CRÉÉ  
+**Fichier JSON** : `🎮 game_assets/artifacts/temporal/talisman_echo_futur.json` ✅  
+**Narratif Légendaire** : `📖 docs/artifacts/generated/TALISMAN_ECHO_FUTUR_NARRATIF_LEGENDAIRE.md` ✅ CRÉÉ  
 **Récompense** : OPUS pour finalisation moteur temporel
 
 #### 🌟 **POUVOIRS COSMIQUES MAJEURS**
@@ -151,7 +151,7 @@
 - **Temporal Navigation** : Navigation intuitive entre possibilités temporelles
 
 #### 📚 **DOCUMENTATION COMPLÈTE**
-- **Guide complet** : [TALISMAN_ECHO_FUTUR_INTEGRATION.md](docs/TALISMAN_ECHO_FUTUR_INTEGRATION.md) ✅
+- **Guide complet** : [TALISMAN_ECHO_FUTUR_INTEGRATION.md](📖 docs/TALISMAN_ECHO_FUTUR_INTEGRATION.md) ✅
 - **Service backend** : `TalismanEchoService.java` ✅ (9 endpoints)
 - **Contrôleur** : `TalismanController.java` ✅ fonctionnel
 
@@ -163,13 +163,13 @@
 
 ### 2. 🔬 **MACH ZEHNDER INTERFÉROMÈTRE**
 **Créé** : 2025-07-24 08:45  
-**Fichier JSON** : `game_assets/artifacts/physics/mach_zehnder_interferometer.json` ✅  
+**Fichier JSON** : `🎮 game_assets/artifacts/physics/mach_zehnder_interferometer.json` ✅  
 **Usage** : Expériences physique quantique + observation superpositions
 **Traduction** : *🔬 L'Interféromètre divise la réalité en faisceaux quantiques*
 
 ### 3. 🧿 **ŒIL DE MÉMOIRE (MIS À JOUR)**
 **Mis à jour** : 2025-07-24 09:15  
-**Fichier JSON** : `game_assets/artifacts/temporal/oeil_de_memoire_axis.json` ✅  
+**Fichier JSON** : `🎮 game_assets/artifacts/temporal/oeil_de_memoire_axis.json` ✅  
 **Usage** : Zones inversées FOG=6 + révélation traces effondrées  
 **Traduction** : *🧿 L'Œil de Mémoire révèle les traces du passé effondré*
 
@@ -179,7 +179,7 @@
 
 ### 1. 🧪 **LABORATOIRE PHYSIQUE QUANTIQUE COMPLET**
 **Créé** : 2025-07-24 08:00-12:00  
-**Guide complet** : `docs/PHYSICS_EXPERIMENTS_COMPLETE_GUIDE.md` ✅
+**Guide complet** : `📖 docs/PHYSICS_EXPERIMENTS_COMPLETE_GUIDE.md` ✅
 
 #### 🔬 **EXPÉRIENCES EINSTEIN**
 - `scenarios/physics-experiments/einstein/double_slit_experiment.hots`
@@ -195,11 +195,11 @@
 
 ### 2. 🌀 **ZONE INVERSÉE AXIS FINAL**
 **Fichier HOTS** : `scenarios/zone_inverted_001_adapte_jean.hots` ✅  
-**Documentation** : `docs/SCENARIO_ZONE_INVERSEE_AXIS_FINAL.md` ✅  
+**Documentation** : `📖 docs/SCENARIO_ZONE_INVERSEE_AXIS_FINAL.md` ✅  
 **Spécialité** : FOG=6 + Œil de Mémoire + interactions causales inversées
 
 ### 3. 📜 **SCÉNARIOS EXISTANTS TRADUITS**
-**Répertoire** : `docs/scenarios/`  
+**Répertoire** : `📖 docs/scenarios/`  
 **Déjà traduits via système intelligent** :
 - ✅ `ECLAT_MONDES_DISSOLUS_SCENARIO_TRADUIT.md`
 - ✅ `LA_TOUR_SOMBRE_SCENARIO_EPIQUE_TRADUIT.md`
@@ -211,13 +211,13 @@
 
 ### 1. ⚙️ **CAUSAL INTERACTION ENGINE**
 **Créé** : 2025-07-24 11:45  
-**Fichier** : `backend/src/main/java/com/example/demo/service/CausalInteractionEngine.java` ✅  
+**Fichier** : `🖥️ backend/src/main/java/com/example/demo/service/CausalInteractionEngine.java` ✅  
 **Contrôleur** : `CausalController.java` (6 endpoints) ✅  
 **Tests** : Via `./test-moteur-final-jean.sh causal` ✅
 
 ### 2. 🔮 **TALISMAN ECHO SERVICE**
 **Créé** : 2025-07-24 12:00  
-**Fichier** : `backend/src/main/java/com/example/demo/service/TalismanEchoService.java` ✅  
+**Fichier** : `🖥️ backend/src/main/java/com/example/demo/service/TalismanEchoService.java` ✅  
 **Contrôleur** : `TalismanController.java` (9 endpoints) ✅  
 **Status** : ✅ Intégré et fonctionnel avec récompense OPUS
 
@@ -226,7 +226,7 @@
 ## 🎨 **TATOUAGES MEMENTO FUSIONNÉS**
 
 ### 🔮 **SYNCHRONISATION ÉVOLUTIVE**
-**Fichier** : `game_assets/artifacts/mineurs/tatouages_memento_archiviste.json` ✅  
+**Fichier** : `🎮 game_assets/artifacts/mineurs/tatouages_memento_archiviste.json` ✅  
 **Dernière MAJ** : 2025-07-24 12:30 (Fusion PSI PHI)  
 **Nouveaux tatouages fusionnés** :
 - 🌀 **FUSION PSI PHI** - Spirales temporelles unifiées sur front
@@ -276,7 +276,7 @@ python3 MUSEUM/scripts-collection/test-smart-translation.py
 ### 🗂️ **STRUCTURE UNIFIÉE FINALE**
 
 ```
-docs/
+📖 docs/
 ├── heroes/
 │   ├── generated/          # Narratifs complets créés
 │   │   ├── SMOLIN_LEE_NARRATIF_COMPLET.md ✅ CRÉÉ
@@ -296,7 +296,7 @@ docs/
 │       └── TOE/ (2 expériences)
 └── [autres docs]
 
-game_assets/
+🎮 game_assets/
 ├── heroes/
 │   ├── physics/
 │   │   └── smolin_lee_quantum_gravity.json ✅

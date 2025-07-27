@@ -130,8 +130,8 @@ git commit -m "Pre-confluence - Memento 7th awakening with Dark Tower"
 
 # Après merge
 cd backend && mvn clean compile
-./scripts/start-backend.sh
-# Ouvrir frontend/story-mode.html
+./⚙️ scripts/start-backend.sh
+# Ouvrir 🌐 frontend/story-mode.html
 ```
 
 ---

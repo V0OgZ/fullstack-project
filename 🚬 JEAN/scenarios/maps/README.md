@@ -14,7 +14,7 @@ Ce dossier contient le système de **MAP/replay** permettant de :
 ## 📁 **Structure**
 
 ```
-game_assets/scenarios/maps/
+🎮 game_assets/scenarios/maps/
 ├── README.md                    # Ce fichier
 ├── replays/                     # Parties sauvegardées
 │   ├── 20250721_session_jean/   # Session du jour

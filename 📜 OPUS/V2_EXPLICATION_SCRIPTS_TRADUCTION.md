@@ -6,15 +6,15 @@
 
 ## 🔍 **Les Deux Scripts de Traduction**
 
-### **1. `scripts/test/generate-scenario-md.py`** (EXISTANT)
+### **1. `⚙️ scripts/test/generate-scenario-md.py`** (EXISTANT)
 ```python
 # Script original de Memento
 # TRÈS spécifique et complexe
 
 def main():
     # Chemin HARDCODÉ
-    hots_file = "game_assets/scenarios/hots/test-economie-guerre.hots"
-    output_file = "docs/SCENARIO_ECONOMIE_GUERRE_TRADUIT.md"
+    hots_file = "🎮 game_assets/scenarios/hots/test-economie-guerre.hots"
+    output_file = "📖 docs/SCENARIO_ECONOMIE_GUERRE_TRADUIT.md"
 ```
 
 **Caractéristiques :**
@@ -24,7 +24,7 @@ def main():
 - 📚 **440 lignes** de code avec beaucoup de complexité
 - 🎯 **Usage** : Spécifique pour UN seul scénario
 
-### **2. `scripts/generate-scenario-translation.py`** (NOUVEAU - OPUS)
+### **2. `⚙️ scripts/generate-scenario-translation.py`** (NOUVEAU - OPUS)
 ```python
 # Script créé par OPUS
 # UNIVERSEL et simple
@@ -32,12 +32,12 @@ def main():
 def main():
     # Accepte N'IMPORTE QUEL fichier
     hots_file = Path(sys.argv[1])
-    output_path = Path("docs/scenarios/generated") / f"{stem}_LITERARY.md"
+    output_path = Path("📖 docs/scenarios/generated") / f"{stem}_LITERARY.md"
 ```
 
 **Caractéristiques :**
 - ✅ **Fichier d'entrée variable** : Accepte n'importe quel `.hots`
-- ✅ **Sortie organisée** : Dans `docs/scenarios/generated/`
+- ✅ **Sortie organisée** : Dans `📖 docs/scenarios/generated/`
 - 📖 **Traduction consistante** : Même résultat à chaque fois
 - 💡 **~200 lignes** de code simple et clair
 - 🌍 **Usage** : Universel pour TOUS les scénarios
@@ -55,10 +55,10 @@ vi scenarios/reconciliation_vince_opus.hots
 ### **Étape 2 : Traduction automatique**
 ```bash
 # Utilisation de MON script universel
-python3 scripts/generate-scenario-translation.py scenarios/reconciliation_vince_opus.hots
+python3 ⚙️ scripts/generate-scenario-translation.py scenarios/reconciliation_vince_opus.hots
 
 # Résultat automatique
-✨ Traduction littéraire générée : docs/scenarios/generated/reconciliation_vince_opus_LITERARY.md
+✨ Traduction littéraire générée : 📖 docs/scenarios/generated/reconciliation_vince_opus_LITERARY.md
 ```
 
 ---

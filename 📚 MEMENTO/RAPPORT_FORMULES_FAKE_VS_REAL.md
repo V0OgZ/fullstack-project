@@ -50,7 +50,7 @@
 ❌ EUROPEAN_REALITY_JUMP(metric_system)  -> Fiction pure
 ```
 
-### 🌀 **OPUS/TEMPORAL AVANCÉ - FAKE**
+### 🌀 **📜 OPUS/TEMPORAL AVANCÉ - FAKE**
 ```
 ❌ ECHO(futur) ⇒ REVEAL(évents_probables)     -> Pas codé
 ❌ NAVIGATE(timelines) ⇒ CHOICE(branches)     -> Simulation

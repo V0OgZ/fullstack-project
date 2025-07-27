@@ -253,9 +253,9 @@ TEMPORAL_CAUSAL_EQUATION = {
 
 ### **🧪 Section Scripts de Test :**
 ```markdown
-./scripts/test-tatouages-memento.sh     # 🏛️ Révélation tatouages temporels de Memento « Tu sais, tu as su, tu sauras »
+./⚙️ scripts/test-tatouages-memento.sh     # 🏛️ Révélation tatouages temporels de Memento « Tu sais, tu as su, tu sauras »
 # 🦁 SPHINX QUANTIQUE : Voir APPARITION_SPHINX_QUANTIQUE_DEFI_FINAL.md pour l'épopée complète !
-./scripts/test-pepites-json.sh          # Test toutes les pépites JSON découvertes 💎
+./⚙️ scripts/test-pepites-json.sh          # Test toutes les pépites JSON découvertes 💎
 ```
 
 ---
@@ -427,9 +427,9 @@ git push origin dev                     # Push vers branche dev
 ## 🎯 **SOURCES UTILISÉES POUR ENRICHISSEMENT**
 
 ### **📖 Documentation Œil de Wigner :**
-- `game_assets/scenarios/visualizer/OEIL_DE_WIGNER.json` - Lore cosmique complet
-- `game_assets/scenarios/hots/oeil_de_wigner_scenario.hots` - Scénario épique
-- `docs/heroes/LYSANDREL_EPIC_DOCUMENTATION.md` - Pouvoirs détaillés
+- `🎮 game_assets/scenarios/visualizer/OEIL_DE_WIGNER.json` - Lore cosmique complet
+- `🎮 game_assets/scenarios/hots/oeil_de_wigner_scenario.hots` - Scénario épique
+- `📖 docs/heroes/LYSANDREL_EPIC_DOCUMENTATION.md` - Pouvoirs détaillés
 
 ### **🦁 Documentation Sphinx :**
 - `APPARITION_SPHINX_QUANTIQUE_DEFI_FINAL.md` - Documentation complète existante

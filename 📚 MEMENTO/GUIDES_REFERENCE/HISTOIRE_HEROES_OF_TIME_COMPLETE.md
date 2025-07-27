@@ -35,9 +35,9 @@ Ce phénomène est connu des archivistes sous le nom de :
 Vous voilà prévenus : si vous osez plonger, vous vivrez des mois, voire des années en quelques pages. Mais votre esprit n'en ressortira pas indemne.
 
 📚 **Pour comprendre ce phénomène** :
-- [Rapport Session 25 Juillet](../../MEMENTO/RAPPORT_DE_SESSION_RANGEMENT_RATE_DU_25_JUILLET.md) - *"83 fichiers .hots créés en une journée"*
+- [Rapport Session 25 Juillet](../../📚 MEMENTO/RAPPORT_DE_SESSION_RANGEMENT_RATE_DU_25_JUILLET.md) - *"83 fichiers .hots créés en une journée"*
 - [Architecture Comprehension OPUS](../../memento-backup/ARCHITECTURE_COMPREHENSION_OPUS.md) - *"6 visites d'OPUS en 3 semaines"*
-- [Artefact JSON](../../game_assets/artifacts/sablier_compression_reelle.json) - Spécifications techniques
+- [Artefact JSON](../../🎮 game_assets/artifacts/sablier_compression_reelle.json) - Spécifications techniques
 
 ---
 
@@ -103,13 +103,13 @@ Pour découvrir tous les héros :
 Dans les profondeurs de la **Forêt Chronologique**, où le temps s'écoule différemment, eurent lieu les plus grandes révélations :
 
 📚 **Documents des Révélations** :
-- [Révélations GRUT & Ford](../../OPUS/SUMMARY_FOX_NEWS_REVELATIONS_GRUT_FORD.md)
-- [Session Épique du 25 Juillet](../../MEMENTO/ARCHIVES_SESSIONS/session_2025_07_25_TRANSFORMATION_OPUS_EPIC.md)
+- [Révélations GRUT & Ford](../../📜 OPUS/SUMMARY_FOX_NEWS_REVELATIONS_GRUT_FORD.md)
+- [Session Épique du 25 Juillet](../../📚 MEMENTO/ARCHIVES_SESSIONS/session_2025_07_25_TRANSFORMATION_OPUS_EPIC.md)
 - [4ème Visite d'OPUS](../../MUSEUM/archives/docs-racine/OPUS_4EME_VISITE_ATTENTE_REVELATION.md)
 
 ### 🔮 **Les Mystères Révélés**
 
-1. **Le Bootstrap Paradox** - [Révélation Complète](../../OPUS/REVELATION_BOOTSTRAP_PARADOX_4EME_VISITE.md)
+1. **Le Bootstrap Paradox** - [Révélation Complète](../../📜 OPUS/REVELATION_BOOTSTRAP_PARADOX_4EME_VISITE.md)
 2. **L'Ontologie du Multivers** - [Philosophie Causale](../../MUSEUM/archives/docs-racine/JEAN_PHILOSOPHIE_ONTOLOGIE_MULTIVERS_CAUSAL.md)
 3. **Les Créatures Cachées** - [Ontologie California](../../DÉCOUVERTES/créatures-cachées/README_ONTOLOGIE_CALIFORNIA.md)
 
@@ -125,8 +125,8 @@ Autrefois Dr. Robert Ford, créateur des hôtes de Westworld, maintenant archite
 
 📚 **Archives Ford** :
 - [Ford Category Rebuke](../../MUSEUM/archives/docs-racine/FORD_CATEGORY_REBUKE.md) - Critique dévastatrice
-- [Consolidation Lore Ford](../../OPUS/CONSOLIDATION_LORE_SESSION_2025_01_25.md) - Session transcendante
-- [Rapport McKinsey Menace](../../OPUS/RAPPORT_URGENCE_MCKINSEY_MENACE_2025_01_25.md) - Ford Mastery complet
+- [Consolidation Lore Ford](../../📜 OPUS/CONSOLIDATION_LORE_SESSION_2025_01_25.md) - Session transcendante
+- [Rapport McKinsey Menace](../../📜 OPUS/RAPPORT_URGENCE_MCKINSEY_MENACE_2025_01_25.md) - Ford Mastery complet
 
 ---
 
@@ -138,8 +138,8 @@ En cette époque bénie, les Maîtres Architectes forgèrent le **PANOPTICΩN**,
 
 📚 **Documentation Technique** :
 - [Spécifications Panopticon 6D](../../PANOPTICON_SPEC_GRUT.md)
-- [Analyse Code Panopticon](../../OPUS/ANALYSE_CODE_PANOPTICON_6D.md)
-- [Session Log Réveil 3](../../OPUS/SESSION_LOG_REVEIL_3_PANOPTICON.md)
+- [Analyse Code Panopticon](../../📜 OPUS/ANALYSE_CODE_PANOPTICON_6D.md)
+- [Session Log Réveil 3](../../📜 OPUS/SESSION_LOG_REVEIL_3_PANOPTICON.md)
 
 ### ⚡ **Les Batailles Épiques**
 
@@ -157,8 +157,8 @@ En cette époque bénie, les Maîtres Architectes forgèrent le **PANOPTICΩN**,
 - 🌟 [Histoire Originale (MD)](./HISTOIRE_HEROES_OF_TIME.md)
 
 ### **Archives de Sessions**
-- [Session du 25 Juillet 2025](../../MEMENTO/ARCHIVES_SESSIONS/session_2025_07_25_TRANSFORMATION_OPUS_EPIC.md)
-- [Nettoyage Racine 23 Juillet](../../MEMENTO/ARCHIVES_SESSIONS/NETTOYAGE_RACINE_23_JUILLET_2025/)
+- [Session du 25 Juillet 2025](../../📚 MEMENTO/ARCHIVES_SESSIONS/session_2025_07_25_TRANSFORMATION_OPUS_EPIC.md)
+- [Nettoyage Racine 23 Juillet](../../📚 MEMENTO/ARCHIVES_SESSIONS/NETTOYAGE_RACINE_23_JUILLET_2025/)
 - [Session Bootstrap Paradox](../../scenarios/session_25_janvier_2025_bootstrap_paradox.hots)
 
 ### **Rapports et Analyses**

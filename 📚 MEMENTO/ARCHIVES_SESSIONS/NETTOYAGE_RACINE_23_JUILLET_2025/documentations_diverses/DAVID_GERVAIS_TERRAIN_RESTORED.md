@@ -164,7 +164,7 @@ export interface Tile {
 
 **Terrain Rendering Tests:**
 ```bash
-cd frontend && npx playwright test tests/e2e/terrain-rendering-test.spec.ts --headed
+cd frontend && npx playwright test 🧪 tests/e2e/terrain-rendering-test.spec.ts --headed
 ```
 
 ## 📊 Comparaison Avant/Après
@@ -214,7 +214,7 @@ grass: {
 **Ajouter des Sprites:**
 ```bash
 # Placer les sprites David Gervais dans :
-frontend/public/assets/terrain/[type]/[variant].png
+🌐 frontend/public/assets/terrain/[type]/[variant].png
 ```
 
 **Modifier les Élévations:**

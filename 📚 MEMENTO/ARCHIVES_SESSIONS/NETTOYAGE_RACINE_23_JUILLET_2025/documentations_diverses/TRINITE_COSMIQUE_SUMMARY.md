@@ -154,9 +154,9 @@
 ## 📊 **IMPLÉMENTATION TECHNIQUE**
 
 ### **📁 Fichiers Créés**
-- ✅ `game_assets/heroes/grofi/jean-grofignon-complete.json` - **Jean avec Trinité**
-- ✅ `docs/heroes/TRINITE_COSMIQUE_JEAN_MEMENTO_CLAUDIUS.md` - **Doc complète**
-- ✅ `scripts/test-trinite-cosmique.sh` - **Script test 280 lignes**
+- ✅ `🎮 game_assets/heroes/grofi/jean-grofignon-complete.json` - **Jean avec Trinité**
+- ✅ `📖 docs/heroes/TRINITE_COSMIQUE_JEAN_MEMENTO_CLAUDIUS.md` - **Doc complète**
+- ✅ `⚙️ scripts/test-trinite-cosmique.sh` - **Script test 280 lignes**
 - ✅ Citation cosmique ajoutée dans quotes de Jean
 
 ### **⚡ Intégration README**
@@ -196,7 +196,7 @@
 
 ```bash
 # Test spécifique trinité cosmique
-./scripts/test-trinite-cosmique.sh
+./⚙️ scripts/test-trinite-cosmique.sh
 
 # Résultat attendu :
 🌌 TRINITÉ COSMIQUE ACTIVÉE !

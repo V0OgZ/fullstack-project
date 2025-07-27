@@ -13,7 +13,7 @@
    - PID: 46380 (npm start)
 
 2. **Port 8000 - Hub HTML Unifié**
-   - TOUTES les interfaces HTML dans `frontend/html-interfaces/`
+   - TOUTES les interfaces HTML dans `🌐 frontend/html-interfaces/`
    - Accès via index.html principal
    - Inclut: Vince Map, GRUT Fantasy, Dashboard, Story Mode, etc.
    - PID: 46707 (python3 http.server)
@@ -41,7 +41,7 @@
 ## 📁 Structure Simplifiée
 
 ```
-frontend/
+🌐 frontend/
 ├── src/              # React (Port 3000)
 ├── html-interfaces/  # HTML (Port 8000)
 │   ├── index.html

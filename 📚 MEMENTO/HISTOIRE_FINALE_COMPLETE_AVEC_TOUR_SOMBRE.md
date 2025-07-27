@@ -186,10 +186,10 @@ Quelque chose de NOUVEAU commence.
 ## 📝 IMPLÉMENTATION TECHNIQUE
 
 ### Fichiers à Créer/Modifier
-1. `game_assets/scenarios/hots/chapter_5_dark_tower.hots`
-2. `game_assets/heroes/roland_pistolero.json`
-3. `game_assets/instances/tour_sombre_instance.json`
-4. `frontend/dark-tower-ascension.html`
+1. `🎮 game_assets/scenarios/hots/chapter_5_dark_tower.hots`
+2. `🎮 game_assets/heroes/roland_pistolero.json`
+3. `🎮 game_assets/instances/tour_sombre_instance.json`
+4. `🌐 frontend/dark-tower-ascension.html`
 
 ### Mécaniques de Jeu
 - **Ascension Verticale** : Nouveau type de navigation

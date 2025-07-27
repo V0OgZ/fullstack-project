@@ -1,0 +1,819 @@
+/* temporal-styles.css - Styles pour le Système Temporel Révolutionnaire */
+
+/* Variables CSS temporelles */
+:root {
+    --temporal-primary: #4ecdc4;
+    --temporal-secondary: #ff6b6b;
+    --temporal-accent: #ffa726;
+    --temporal-quantum: #ff00ff;
+    --temporal-anchor: #ffd700;
+    --temporal-observation: #00ffff;
+    --temporal-collision: #ff0000;
+    --temporal-ghost: #9c27b0;
+    
+    --temporal-bg-primary: rgba(15, 15, 35, 0.95);
+    --temporal-bg-secondary: rgba(26, 26, 46, 0.9);
+    --temporal-bg-accent: rgba(78, 205, 196, 0.1);
+    
+    --temporal-border-primary: rgba(78, 205, 196, 0.5);
+    --temporal-border-secondary: rgba(255, 107, 107, 0.3);
+    
+    --temporal-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    --temporal-glow: 0 0 20px rgba(78, 205, 196, 0.3);
+    
+    --temporal-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --temporal-animation-fast: 0.3s;
+    --temporal-animation-normal: 0.5s;
+    --temporal-animation-slow: 1s;
+}
+
+/* Animations temporelles */
+@keyframes temporalPulse {
+    0%, 100% { 
+        opacity: 1; 
+        transform: scale(1);
+    }
+    50% { 
+        opacity: 0.7; 
+        transform: scale(1.05);
+    }
+}
+
+@keyframes temporalGlow {
+    0%, 100% { 
+        box-shadow: 0 0 5px var(--temporal-primary);
+    }
+    50% { 
+        box-shadow: 0 0 20px var(--temporal-primary), 0 0 30px var(--temporal-primary);
+    }
+}
+
+@keyframes temporalShimmer {
+    0% { 
+        background-position: -200% 0;
+    }
+    100% { 
+        background-position: 200% 0;
+    }
+}
+
+@keyframes temporalFloat {
+    0%, 100% { 
+        transform: translateY(0);
+    }
+    50% { 
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes temporalRotate {
+    from { 
+        transform: rotate(0deg);
+    }
+    to { 
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes temporalCollapseWave {
+    0% { 
+        transform: scale(0);
+        opacity: 1;
+    }
+    50% { 
+        transform: scale(1.5);
+        opacity: 0.8;
+    }
+    100% { 
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+@keyframes temporalQuantumFlicker {
+    0%, 100% { 
+        opacity: 1;
+        filter: brightness(1);
+    }
+    25% { 
+        opacity: 0.7;
+        filter: brightness(1.2);
+    }
+    50% { 
+        opacity: 0.9;
+        filter: brightness(0.8);
+    }
+    75% { 
+        opacity: 0.6;
+        filter: brightness(1.1);
+    }
+}
+
+@keyframes temporalAnchorBeam {
+    0% { 
+        transform: scale(1) rotate(0deg);
+        opacity: 0.8;
+    }
+    50% { 
+        transform: scale(1.1) rotate(180deg);
+        opacity: 1;
+    }
+    100% { 
+        transform: scale(1) rotate(360deg);
+        opacity: 0.8;
+    }
+}
+
+@keyframes temporalObservationScan {
+    0% { 
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    50% { 
+        transform: scale(1.3);
+        opacity: 1;
+    }
+    100% { 
+        transform: scale(1);
+        opacity: 0.5;
+    }
+}
+
+/* Styles base temporels */
+.temporal-element {
+    transition: var(--temporal-transition);
+    font-family: 'Courier New', monospace;
+}
+
+.temporal-panel {
+    background: var(--temporal-bg-primary);
+    border: 2px solid var(--temporal-border-primary);
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: var(--temporal-shadow);
+    backdrop-filter: blur(10px);
+    color: var(--temporal-primary);
+    position: relative;
+    overflow: hidden;
+}
+
+.temporal-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(78, 205, 196, 0.1),
+        transparent
+    );
+    animation: temporalShimmer 3s infinite;
+}
+
+.temporal-panel:hover {
+    border-color: var(--temporal-primary);
+    box-shadow: var(--temporal-glow);
+    transform: translateY(-2px);
+}
+
+/* Boutons temporels */
+.temporal-button {
+    background: var(--temporal-bg-accent);
+    border: 1px solid var(--temporal-border-primary);
+    color: var(--temporal-primary);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--temporal-transition);
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.temporal-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(78, 205, 196, 0.3) 0%, transparent 70%);
+    transition: var(--temporal-transition);
+    transform: translate(-50%, -50%);
+}
+
+.temporal-button:hover::before {
+    width: 200%;
+    height: 200%;
+}
+
+.temporal-button:hover {
+    background: rgba(78, 205, 196, 0.2);
+    border-color: var(--temporal-primary);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(78, 205, 196, 0.2);
+}
+
+.temporal-button.active {
+    background: rgba(78, 205, 196, 0.3);
+    border-color: var(--temporal-primary);
+    box-shadow: 0 0 12px rgba(78, 205, 196, 0.4);
+    color: white;
+}
+
+.temporal-button.active::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    border: 1px solid rgba(78, 205, 196, 0.5);
+    border-radius: 4px;
+    pointer-events: none;
+}
+
+/* Indicateurs temporels */
+.temporal-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 8px;
+    background: var(--temporal-bg-secondary);
+    border: 1px solid var(--temporal-border-secondary);
+    border-radius: 12px;
+    font-size: 11px;
+    color: var(--temporal-accent);
+    animation: temporalPulse 2s infinite;
+}
+
+.temporal-indicator.quantum {
+    border-color: var(--temporal-quantum);
+    color: var(--temporal-quantum);
+    animation: temporalQuantumFlicker 1.5s infinite;
+}
+
+.temporal-indicator.anchor {
+    border-color: var(--temporal-anchor);
+    color: var(--temporal-anchor);
+    animation: temporalAnchorBeam 3s infinite;
+}
+
+.temporal-indicator.observation {
+    border-color: var(--temporal-observation);
+    color: var(--temporal-observation);
+    animation: temporalObservationScan 2s infinite;
+}
+
+.temporal-indicator.collision {
+    border-color: var(--temporal-collision);
+    color: var(--temporal-collision);
+    animation: temporalPulse 0.5s infinite;
+}
+
+/* Dots temporels */
+.temporal-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--temporal-primary);
+    animation: temporalPulse 1s infinite;
+    position: relative;
+}
+
+.temporal-dot::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: inherit;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: temporalCollapseWave 2s infinite;
+}
+
+.temporal-dot.quantum {
+    background: var(--temporal-quantum);
+}
+
+.temporal-dot.anchor {
+    background: var(--temporal-anchor);
+}
+
+.temporal-dot.observation {
+    background: var(--temporal-observation);
+}
+
+.temporal-dot.collision {
+    background: var(--temporal-collision);
+}
+
+/* Timelines des héros */
+.hero-timeline {
+    background: var(--temporal-bg-primary);
+    border-top: 2px solid var(--temporal-border-primary);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    backdrop-filter: blur(5px);
+}
+
+.hero-timeline-item {
+    background: var(--temporal-bg-accent);
+    border: 1px solid var(--temporal-border-primary);
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    transition: var(--temporal-transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-timeline-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(78, 205, 196, 0.1),
+        transparent
+    );
+    opacity: 0;
+    transition: var(--temporal-transition);
+}
+
+.hero-timeline-item:hover::before {
+    opacity: 1;
+}
+
+.hero-timeline-item:hover {
+    border-color: var(--temporal-primary);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(78, 205, 196, 0.2);
+}
+
+.hero-timeline-item.selected {
+    border-color: var(--temporal-primary);
+    background: rgba(78, 205, 196, 0.2);
+    box-shadow: 0 0 16px rgba(78, 205, 196, 0.3);
+}
+
+.hero-timeline-item.selected::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    border: 1px solid rgba(78, 205, 196, 0.6);
+    border-radius: 6px;
+    pointer-events: none;
+}
+
+.hero-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--temporal-secondary), var(--temporal-primary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-avatar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: conic-gradient(
+        from 0deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    animation: temporalRotate 3s linear infinite;
+}
+
+.hero-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.hero-name {
+    color: var(--temporal-primary);
+    font-weight: bold;
+    font-size: 13px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.hero-day {
+    color: var(--temporal-accent);
+    font-size: 11px;
+    opacity: 0.9;
+}
+
+.hero-movement {
+    color: var(--temporal-primary);
+    font-size: 10px;
+    opacity: 0.8;
+}
+
+/* Légendes temporelles */
+.temporal-legend {
+    background: var(--temporal-bg-primary);
+    border: 2px solid var(--temporal-border-primary);
+    border-radius: 12px;
+    padding: 15px;
+    backdrop-filter: blur(10px);
+    max-width: 200px;
+}
+
+.temporal-legend h3 {
+    color: var(--temporal-primary);
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    text-align: center;
+    text-shadow: 0 0 8px rgba(78, 205, 196, 0.5);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0;
+    padding: 4px;
+    border-radius: 4px;
+    transition: var(--temporal-transition);
+}
+
+.legend-item:hover {
+    background: rgba(78, 205, 196, 0.1);
+    transform: translateX(2px);
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.legend-color::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: temporalCollapseWave 3s infinite;
+}
+
+.legend-item span {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Statuts quantiques */
+.quantum-status {
+    background: var(--temporal-bg-primary);
+    border: 2px solid var(--temporal-quantum);
+    border-radius: 12px;
+    padding: 15px;
+    backdrop-filter: blur(10px);
+    min-width: 220px;
+}
+
+.quantum-status h3 {
+    color: var(--temporal-quantum);
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    text-align: center;
+    text-shadow: 0 0 8px rgba(255, 0, 255, 0.5);
+    animation: temporalQuantumFlicker 2s infinite;
+}
+
+.quantum-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0;
+    padding: 6px 8px;
+    background: rgba(255, 0, 255, 0.05);
+    border: 1px solid rgba(255, 0, 255, 0.2);
+    border-radius: 6px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.9);
+    transition: var(--temporal-transition);
+}
+
+.quantum-indicator:hover {
+    background: rgba(255, 0, 255, 0.1);
+    border-color: rgba(255, 0, 255, 0.4);
+    transform: translateX(2px);
+}
+
+/* Notifications temporelles */
+.temporal-notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--temporal-bg-primary);
+    border: 1px solid var(--temporal-border-primary);
+    border-radius: 8px;
+    padding: 12px 20px;
+    box-shadow: var(--temporal-shadow);
+    backdrop-filter: blur(10px);
+    z-index: 1100;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: var(--temporal-primary);
+    animation: temporalSlideDown 0.5s ease-out;
+    max-width: 400px;
+    word-wrap: break-word;
+}
+
+@keyframes temporalSlideDown {
+    from { 
+        transform: translateX(-50%) translateY(-100%);
+        opacity: 0;
+    }
+    to { 
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+.temporal-notification.success {
+    border-color: #4caf50;
+    color: #4caf50;
+}
+
+.temporal-notification.warning {
+    border-color: var(--temporal-accent);
+    color: var(--temporal-accent);
+}
+
+.temporal-notification.error {
+    border-color: var(--temporal-collision);
+    color: var(--temporal-collision);
+}
+
+.temporal-notification.info {
+    border-color: var(--temporal-observation);
+    color: var(--temporal-observation);
+}
+
+/* Effets d'animation de collapse */
+.collapse-animation {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1000;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid var(--temporal-collision);
+    animation: temporalCollapseWave 1.5s ease-out;
+}
+
+.collapse-animation.interaction {
+    border-color: var(--temporal-collision);
+    box-shadow: 0 0 20px var(--temporal-collision);
+}
+
+.collapse-animation.observation {
+    border-color: var(--temporal-observation);
+    box-shadow: 0 0 20px var(--temporal-observation);
+}
+
+.collapse-animation.anchoring {
+    border-color: var(--temporal-anchor);
+    box-shadow: 0 0 20px var(--temporal-anchor);
+}
+
+/* Artefacts temporels */
+.temporal-artifact {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 6px;
+    font-size: 11px;
+    color: var(--temporal-anchor);
+    cursor: pointer;
+    transition: var(--temporal-transition);
+    overflow: hidden;
+}
+
+.temporal-artifact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 215, 0, 0.2),
+        transparent
+    );
+    animation: temporalShimmer 2s infinite;
+}
+
+.temporal-artifact:hover {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: rgba(255, 215, 0, 0.5);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+}
+
+.temporal-artifact.active {
+    background: rgba(255, 215, 0, 0.3);
+    border-color: var(--temporal-anchor);
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+    animation: temporalFloat 2s infinite;
+}
+
+.artifact-icon {
+    font-size: 14px;
+    animation: temporalRotate 4s linear infinite;
+}
+
+/* Logs temporels */
+.temporal-log {
+    background: var(--temporal-bg-secondary);
+    border: 1px solid var(--temporal-border-secondary);
+    border-radius: 6px;
+    padding: 8px;
+    max-height: 150px;
+    overflow-y: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+}
+
+.temporal-log-entry {
+    padding: 2px 4px;
+    margin: 1px 0;
+    border-radius: 3px;
+    border-left: 2px solid transparent;
+    transition: var(--temporal-transition);
+}
+
+.temporal-log-entry:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(2px);
+}
+
+.temporal-log-entry.info {
+    color: var(--temporal-primary);
+    border-left-color: var(--temporal-primary);
+}
+
+.temporal-log-entry.warning {
+    color: var(--temporal-accent);
+    border-left-color: var(--temporal-accent);
+    background: rgba(255, 167, 38, 0.05);
+}
+
+.temporal-log-entry.error {
+    color: var(--temporal-collision);
+    border-left-color: var(--temporal-collision);
+    background: rgba(255, 0, 0, 0.05);
+}
+
+.temporal-log-entry.success {
+    color: #4caf50;
+    border-left-color: #4caf50;
+    background: rgba(76, 175, 80, 0.05);
+}
+
+/* Scrollbar temporal */
+.temporal-log::-webkit-scrollbar {
+    width: 6px;
+}
+
+.temporal-log::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.temporal-log::-webkit-scrollbar-thumb {
+    background: var(--temporal-primary);
+    border-radius: 3px;
+    opacity: 0.6;
+}
+
+.temporal-log::-webkit-scrollbar-thumb:hover {
+    background: var(--temporal-primary);
+    opacity: 1;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .temporal-panel {
+        padding: 10px;
+        font-size: 11px;
+    }
+    
+    .temporal-legend {
+        max-width: 150px;
+    }
+    
+    .quantum-status {
+        min-width: 180px;
+    }
+    
+    .hero-timeline {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .hero-timeline-item {
+        min-width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .temporal-panel {
+        padding: 8px;
+        font-size: 10px;
+    }
+    
+    .temporal-legend,
+    .quantum-status {
+        position: relative;
+        transform: none;
+        margin: 10px;
+    }
+    
+    .hero-timeline {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .hero-timeline-item {
+        width: 100%;
+    }
+}
+
+/* Thème sombre amélioré */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --temporal-primary: #64ffda;
+        --temporal-secondary: #ff5722;
+        --temporal-accent: #ffb74d;
+        --temporal-bg-primary: rgba(0, 0, 0, 0.95);
+        --temporal-bg-secondary: rgba(10, 10, 20, 0.9);
+    }
+}
+
+/* Accessibilité */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus pour navigation clavier */
+.temporal-button:focus,
+.temporal-artifact:focus,
+.hero-timeline-item:focus {
+    outline: 2px solid var(--temporal-primary);
+    outline-offset: 2px;
+}
+
+/* Sélection de texte */
+::selection {
+    background: rgba(78, 205, 196, 0.3);
+    color: white;
+} 

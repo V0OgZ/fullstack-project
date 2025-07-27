@@ -205,7 +205,7 @@ main() {
     # Installer les dépendances si nécessaire
     echo -e "${YELLOW}📦 Vérification des dépendances...${NC}"
     
-    if [ -d "frontend" ] && [ ! -d "frontend/node_modules" ]; then
+    if [ -d "frontend" ] && [ ! -d "🌐 frontend/node_modules" ]; then
         echo -e "${YELLOW}📦 Installation des dépendances frontend...${NC}"
         cd ./frontend && npm install && cd ..
     fi

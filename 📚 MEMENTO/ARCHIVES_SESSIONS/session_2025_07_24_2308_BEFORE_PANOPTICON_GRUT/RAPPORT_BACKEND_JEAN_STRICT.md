@@ -4,7 +4,7 @@
 
 ## 📊 **CE QUI MARCHE VRAIMENT:**
 
-### ✅ **GameController** - `backend/src/main/java/com/example/demo/controller/GameController.java`
+### ✅ **GameController** - `🖥️ backend/src/main/java/com/example/demo/controller/GameController.java`
 - **UTILISÉ** par le frontend
 - **ENDPOINTS ACTIFS:**
   - `GET /api/games/{gameId}` ✅
@@ -12,7 +12,7 @@
   - `POST /api/games/multiplayer` ✅
 - **CONNECTÉ** au GameService
 
-### ✅ **CausalController** - `backend/src/main/java/com/example/demo/controller/CausalController.java`
+### ✅ **CausalController** - `🖥️ backend/src/main/java/com/example/demo/controller/CausalController.java`
 - **CRÉÉ RÉCEMMENT** pour AXISI/LENTUS
 - **ENDPOINTS ACTIFS:**
   - `POST /api/causal/interaction` ✅
@@ -23,22 +23,22 @@
 
 ## ❌ **CODE MORT CONFIRMÉ:**
 
-### 🗑️ **BuildingController** - `backend/src/main/java/com/example/demo/controller/BuildingController.java`
+### 🗑️ **BuildingController** - `🖥️ backend/src/main/java/com/example/demo/controller/BuildingController.java`
 - **415 LIGNES** de code
 - **AUCUN FRONTEND** ne l'utilise
 - **ENDPOINTS MORTS:**
   - `/api/buildings/*` - JAMAIS APPELÉS
 
-### 🗑️ **UnitController** - `backend/src/main/java/com/example/demo/controller/UnitController.java`
+### 🗑️ **UnitController** - `🖥️ backend/src/main/java/com/example/demo/controller/UnitController.java`
 - **161 LIGNES** de localisation fake
 - **ENDPOINTS MORTS:**
   - `/api/units/*` - JAMAIS APPELÉS
 
-### 🗑️ **ScenarioController** - `backend/src/main/java/com/example/demo/controller/ScenarioController.java`
+### 🗑️ **ScenarioController** - `🖥️ backend/src/main/java/com/example/demo/controller/ScenarioController.java`
 - **400+ LIGNES** de traductions hardcodées
 - **FAKE I18N** - Français/Russe/Anglais en dur
 
-### 🗑️ **MultiplayerController** - `backend/src/main/java/com/example/demo/controller/MultiplayerController.java`
+### 🗑️ **MultiplayerController** - `🖥️ backend/src/main/java/com/example/demo/controller/MultiplayerController.java`
 - **WebSocket CONFIGURÉ** mais pas utilisé
 - **ENDPOINTS MORTS:**
   - `/api/multiplayer/*` - JAMAIS APPELÉS
@@ -46,8 +46,8 @@
 ## 🚨 **PROBLÈME PRINCIPAL:**
 
 ### ❌ **AUCUN PARSER POUR JSON HÉROS:**
-- **game_assets/heroes/anna-martel-complete.json** ✅ EXISTE
-- **game_assets/heroes/hero_claudius_memento_opus.json** ✅ EXISTE
+- **🎮 game_assets/heroes/anna-martel-complete.json** ✅ EXISTE
+- **🎮 game_assets/heroes/hero_claudius_memento_opus.json** ✅ EXISTE
 - **MAIS** aucun service backend pour les lire!
 
 ### ❌ **MOTS-CLÉS IGNORÉS:**
@@ -77,9 +77,9 @@ temporal_energy: 400
 
 ## 🔗 **LIENS DIRECTS:**
 
-- **Code qui marche:** `backend/src/main/java/com/example/demo/controller/GameController.java`
-- **Code qui marche:** `backend/src/main/java/com/example/demo/controller/CausalController.java`
-- **JSON à connecter:** `game_assets/heroes/anna-martel-complete.json`
-- **JSON à connecter:** `game_assets/heroes/hero_claudius_memento_opus.json`
+- **Code qui marche:** `🖥️ backend/src/main/java/com/example/demo/controller/GameController.java`
+- **Code qui marche:** `🖥️ backend/src/main/java/com/example/demo/controller/CausalController.java`
+- **JSON à connecter:** `🎮 game_assets/heroes/anna-martel-complete.json`
+- **JSON à connecter:** `🎮 game_assets/heroes/hero_claudius_memento_opus.json`
 
 **🔨 ANNA:** *"Voilà la VRAIE situation Jean! Pas de blabla, que des faits!"* 

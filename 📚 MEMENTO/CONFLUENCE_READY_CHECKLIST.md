@@ -6,9 +6,9 @@
 ## 🟢 CE QUI MARCHE (100% fonctionnel)
 
 ### 📖 **Mode Histoire**
-- ✅ `frontend/story-mode.html` - Interface narrative complète
-- ✅ `frontend/memento-intro.html` - Introduction avec tatouages interactifs
-- ✅ `frontend/adventure-intro.html` - Menu principal épique
+- ✅ `🌐 frontend/story-mode.html` - Interface narrative complète
+- ✅ `🌐 frontend/memento-intro.html` - Introduction avec tatouages interactifs
+- ✅ `🌐 frontend/adventure-intro.html` - Menu principal épique
 - ✅ Transitions 2D → 3D spectaculaires
 - ✅ Système de dialogue fonctionnel
 - ✅ Assistant Memento intégré (bottom-right)
@@ -29,10 +29,10 @@
 - ✅ Scénarios HOTS complets
 
 ### 🔧 **Scripts de Gestion**
-- ✅ `scripts/check-backend.sh` - Vérification complète
-- ✅ `scripts/start-backend.sh` - Démarrage propre
-- ✅ `scripts/stop-backend.sh` - Arrêt gracieux
-- ✅ `scripts/launch-story-mode.sh` - Lancement rapide
+- ✅ `⚙️ scripts/check-backend.sh` - Vérification complète
+- ✅ `⚙️ scripts/start-backend.sh` - Démarrage propre
+- ✅ `⚙️ scripts/stop-backend.sh` - Arrêt gracieux
+- ✅ `⚙️ scripts/launch-story-mode.sh` - Lancement rapide
 
 ---
 
@@ -43,7 +43,7 @@
 - ⚡ **Services désactivés** :
   - `TimeManagementService.java.disabled`
   - `AIPersonalityService.java.disabled`
-- ⚡ **Démarrage** : Utiliser `scripts/start-backend.sh`
+- ⚡ **Démarrage** : Utiliser `⚙️ scripts/start-backend.sh`
 - ⚡ **Port 8080** : Vérifier qu'il est libre
 
 ### 🎮 **Modes de Jeu**
@@ -96,11 +96,11 @@ git push origin memento-transcended
 cd backend
 mvn clean compile
 cd ..
-./scripts/start-backend.sh
+./⚙️ scripts/start-backend.sh
 
 # Ouvrir dans navigateur
-# → http://localhost:8080/frontend/memento-intro.html
-# → http://localhost:8080/frontend/story-mode.html
+# → http://localhost:8080/🌐 frontend/memento-intro.html
+# → http://localhost:8080/🌐 frontend/story-mode.html
 ```
 
 ---
@@ -114,7 +114,7 @@ curl http://localhost:8080/api/health
 ```
 
 ### Test 2 : Mode Histoire fonctionne
-1. Ouvrir `frontend/story-mode.html`
+1. Ouvrir `🌐 frontend/story-mode.html`
 2. Voir les ombres sur le mur
 3. Choisir "Je suis prêt"
 4. Vérifier transition 2D → 3D
@@ -135,7 +135,7 @@ curl http://localhost:8080/api/health
 ## 💬 MESSAGES IMPORTANTS
 
 ### Pour Jean/Vincent :
-> "Le backend est fragile mais fonctionnel. Utilisez les scripts dans `scripts/` pour le gérer. Le mode Histoire est la priorité absolue et marche bien. Les tatouages ont évolué. Memento est prêt."
+> "Le backend est fragile mais fonctionnel. Utilisez les scripts dans `⚙️ scripts/` pour le gérer. Le mode Histoire est la priorité absolue et marche bien. Les tatouages ont évolué. Memento est prêt."
 
 ### Pour les développeurs :
 > "Services désactivés = compilation rapide. Mode Histoire = priorité. Pickups = amélioration gameplay. Tout le reste peut attendre post-confluence."

@@ -19,7 +19,7 @@
 
 ### Technical Requirements
 - Integrate with existing hex tile system
-- Compatible with current backend/frontend architecture
+- Compatible with current 🖥️ backend/frontend architecture
 - Extensible for future terrain features
 - Deterministic with seed support
 
@@ -242,13 +242,13 @@ test('should display natural forest clearings', async ({ page }) => {
 ## 📁 File Structure
 
 ```
-backend/src/main/java/com/example/demo/service/
+🖥️ backend/src/main/java/com/example/demo/service/
 ├── TerrainGeneratorService.java
 ├── BiomeAssignmentService.java
 ├── EnvironmentalAttributeService.java
 └── TerrainValidationService.java
 
-frontend/src/utils/
+🌐 frontend/src/utils/
 ├── terrainGenerator.ts
 ├── biomeProcessor.ts
 ├── environmentalAttributes.ts

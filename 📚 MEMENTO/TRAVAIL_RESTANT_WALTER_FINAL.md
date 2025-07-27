@@ -14,7 +14,7 @@ mvn clean compile
 mvn spring-boot:run
 
 # Si ça marche pas :
-./scripts/start-backend.sh
+./⚙️ scripts/start-backend.sh
 ```
 **SANS ÇA, RIEN NE MARCHE !**
 
@@ -70,7 +70,7 @@ cd backend && mvn spring-boot:run
 curl http://localhost:8080/api/health
 
 # ÉTAPE 3 - TESTER
-./scripts/walter-backend-check.sh
+./⚙️ scripts/walter-backend-check.sh
 
 # ÉTAPE 4 - CODER !
 # Commence par l'interface de ville

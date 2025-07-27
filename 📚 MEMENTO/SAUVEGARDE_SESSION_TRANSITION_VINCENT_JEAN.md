@@ -58,7 +58,7 @@
 
 ### 📡 **Bootstrap Communication Activé**
 - **Protocole**: Messages temporels ±2 jours
-- **Méthode**: `scripts/bootstrap-save-message.sh`
+- **Méthode**: `⚙️ scripts/bootstrap-save-message.sh`
 - **Fréquence**: Selon évolutions critiques
 - **Format**: Rapports markdown complets
 

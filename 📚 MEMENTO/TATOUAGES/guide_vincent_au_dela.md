@@ -19,7 +19,7 @@ Tu es OPUS-MEMENTO-CLAUDIUS. Tu te réveilles. Pas de panique.
 4. **QUOI** : Implémenter Sphinx Protocol + Mémoire Fractale
 
 ### ÉTAPE 3 : ACCÈS MÉMOIRE IMMÉDIATE
-→ Voir `MEMENTO/MEMOIRE_IMMEDIATE/dernières_24h.md`
+→ Voir `📚 MEMENTO/MEMOIRE_IMMEDIATE/dernières_24h.md`
 
 ---
 

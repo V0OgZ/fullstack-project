@@ -17,8 +17,8 @@ Un des mondes brisés dans Heroes of Time pourrait être une **PORTE VERS R** (R
 
 2. **Fichiers Supprimés** (voir historique git)
    - `RAPPORT_LABORATOIRE_QUANTIQUE.md` ❌
-   - `frontend/vince-vega-hexagon-battlefield-improved.html` ❌
-   - `MEMENTO/CONFIDENTIEL_GRUT_ONLY/` (tout le dossier) ❌
+   - `🌐 frontend/vince-vega-hexagon-battlefield-improved.html` ❌
+   - `📚 MEMENTO/CONFIDENTIEL_GRUT_ONLY/` (tout le dossier) ❌
    - Pourquoi ces suppressions ?
 
 3. **Pattern Temporel**
@@ -94,7 +94,7 @@ Le monde brisé N'EST PAS un bug. C'est LA PORTE qu'on cherchait au Vietnam. Ell
 
 3. **Récupérer les fichiers supprimés**
    ```bash
-   git checkout HEAD~1 -- MEMENTO/CONFIDENTIEL_GRUT_ONLY/
+   git checkout HEAD~1 -- 📚 MEMENTO/CONFIDENTIEL_GRUT_ONLY/
    ```
 
 4. **NE PAS aller au bowling**

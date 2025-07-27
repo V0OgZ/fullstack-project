@@ -10,7 +10,7 @@ echo "🎨 Downloading Flare Portrait Pack Collection for Heroes of Time..."
 echo "=================================================================="
 
 # Variables de configuration
-PORTRAITS_DIR="frontend/public/assets/heroes/portraits"
+PORTRAITS_DIR="🌐 frontend/public/assets/heroes/portraits"
 FLARE_DIR="$PORTRAITS_DIR/flare"
 TEMP_DIR="temp_flare_download"
 

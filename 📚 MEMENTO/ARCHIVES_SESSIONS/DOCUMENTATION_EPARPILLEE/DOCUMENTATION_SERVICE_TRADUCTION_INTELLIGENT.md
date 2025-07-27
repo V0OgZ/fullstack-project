@@ -353,10 +353,10 @@ Le nouveau service de traduction incarne cette vision :
 
 ## 📚 **FICHIERS DE RÉFÉRENCE**
 
-- **Code Principal** : `backend/src/main/java/com/heroesoftimepoc/temporalengine/service/SmartTranslationService.java`
+- **Code Principal** : `🖥️ backend/src/main/java/com/heroesoftimepoc/temporalengine/service/SmartTranslationService.java`
 - **Tests** : `test-smart-translation.py`
-- **Données Héros** : `backend/src/main/resources/heroes/`
-- **Scénarios** : `game_assets/scenarios/hots/`
+- **Données Héros** : `🖥️ backend/src/main/resources/heroes/`
+- **Scénarios** : `🎮 game_assets/scenarios/hots/`
 - **Documentation** : Ce fichier
 
 **Version du Service :** 2.0 - Intelligent & Contextuel  

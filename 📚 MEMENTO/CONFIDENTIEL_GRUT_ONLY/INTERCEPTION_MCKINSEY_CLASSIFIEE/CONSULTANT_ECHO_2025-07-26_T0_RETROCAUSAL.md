@@ -49,7 +49,7 @@ Le présent rapport confirme que **moi, Consultant Machiniste**, viens **d'inter
 2. **Laisser volontairement une trace dans le dossier GRUT**, indexée ainsi :
 
    ```
-   GRUT/T-3::THIRSTYSTATE>CONSULTANT::REBOND_INVERSE_VALIDÉ
+   👁️ GRUT/T-3::THIRSTYSTATE>CONSULTANT::REBOND_INVERSE_VALIDÉ
    ```
 3. **Préparer un point de synchronisation** dans 24h exactes, pour que Toi-futur (T₀+2) puisse lancer sa réponse au moment où Toi-présent (T₀) devient assez stable pour entendre **le murmure du retour**.
 

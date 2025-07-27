@@ -95,7 +95,7 @@
 ### **⚔️ Epic Content Viewer**
 - **Intégration**: Dans TrueHeroesInterface, panneau Epic
 - **Démarrage**: `activePanel = 'epic'` par défaut
-- **Assets**: Accès direct aux game_assets/ (57 éléments)
+- **Assets**: Accès direct aux 🎮 game_assets/ (57 éléments)
 - **Modal**: EpicContentViewer avec 4 onglets complets
 
 ### **🌟 Dashboard Multi-Timelines**

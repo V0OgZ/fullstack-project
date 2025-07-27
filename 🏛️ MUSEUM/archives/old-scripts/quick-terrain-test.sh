@@ -10,7 +10,7 @@ echo "=============================================="
 
 # Check if terrain sprites exist
 echo "🔍 Checking terrain sprite files..."
-TERRAIN_DIR="frontend/public/assets/terrain"
+TERRAIN_DIR="🌐 frontend/public/assets/terrain"
 
 if [ ! -d "$TERRAIN_DIR" ]; then
     echo "❌ Terrain directory not found: $TERRAIN_DIR"
@@ -36,7 +36,7 @@ echo "📊 Sprite Status: $FOUND_SPRITES/${#TERRAIN_SPRITES[@]} sprites found"
 # Check if the terrain sprite service is correctly configured
 echo ""
 echo "🔧 Checking terrain sprite service configuration..."
-SERVICE_FILE="frontend/src/services/terrainSpriteService.ts"
+SERVICE_FILE="🌐 frontend/src/services/terrainSpriteService.ts"
 
 if [ ! -f "$SERVICE_FILE" ]; then
     echo "❌ TerrainSpriteService not found: $SERVICE_FILE"
@@ -53,7 +53,7 @@ fi
 # Check if ModernGameRenderer is importing the service
 echo ""
 echo "🎮 Checking game renderer integration..."
-RENDERER_FILE="frontend/src/components/ModernGameRenderer.tsx"
+RENDERER_FILE="🌐 frontend/src/components/ModernGameRenderer.tsx"
 
 if [ ! -f "$RENDERER_FILE" ]; then
     echo "❌ ModernGameRenderer not found: $RENDERER_FILE"
@@ -98,7 +98,7 @@ cat > "terrain-sprite-test.html" << 'EOF'
         sprites.forEach(sprite => {
             const img = document.createElement('img');
             img.className = 'sprite';
-            img.src = `frontend/public/assets/terrain/${sprite}.png`;
+            img.src = `🌐 frontend/public/assets/terrain/${sprite}.png`;
             img.alt = sprite;
             img.title = sprite;
             

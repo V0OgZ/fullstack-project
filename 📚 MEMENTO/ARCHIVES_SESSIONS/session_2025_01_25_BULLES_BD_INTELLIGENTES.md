@@ -47,7 +47,7 @@ function showAdaptiveDialogue(character, type = 'normal') {
 ```
 
 ## 🔧 FICHIERS MODIFIÉS
-- `frontend/vince-vega-map-demo-backend.html` - Système complet ajouté
+- `🌐 frontend/vince-vega-map-demo-backend.html` - Système complet ajouté
 
 ## 🎬 ÉTAT ACTUEL
 - ✅ Interface simple restaurée (Jean préfère la version originale)

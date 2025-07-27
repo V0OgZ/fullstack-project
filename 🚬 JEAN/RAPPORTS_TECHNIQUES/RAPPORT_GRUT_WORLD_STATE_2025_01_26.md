@@ -5,7 +5,7 @@
 ### ✅ TODO #1 - COMPLÉTÉ
 **Créer visualisation GRUT World State Graph interactive**
 - Status: **COMPLETED** ✅
-- Fichier créé: `frontend/html-interfaces/grut-world-state-visualization.html`
+- Fichier créé: `🌐 frontend/html-interfaces/grut-world-state-visualization.html`
 - Canvas interactif avec graphe de nœuds
 - Connexion temps réel au backend via WebSocket
 - Animation GRUT pulsante

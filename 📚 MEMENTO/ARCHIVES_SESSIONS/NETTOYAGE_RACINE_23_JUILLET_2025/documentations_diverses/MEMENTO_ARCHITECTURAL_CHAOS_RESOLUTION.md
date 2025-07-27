@@ -36,17 +36,17 @@
 
 | Composant | Port | Package | Status | Utilité |
 |---|---|---|---|---|
-| **frontend/** | 3000 | TrueHeroesInterface | ✅ Fonctionne | **ANCIEN PROJET** |
+| **🌐 frontend/** | 3000 | TrueHeroesInterface | ✅ Fonctionne | **ANCIEN PROJET** |
 | **frontend-temporal/** | 8000 | Grille hexagonale | ✅ Attendu | **VRAI Heroes of Time** |
-| **backend/ (dev)** | 8080 | com.heroesoftimepoc | ❌ **MORT** | **BACKEND CASSÉ** |
-| **backend/ (main)** | 8080 | com.example.demo | ✅ Fonctionne | **BON BACKEND** |
+| **🖥️ backend/ (dev)** | 8080 | com.heroesoftimepoc | ❌ **MORT** | **BACKEND CASSÉ** |
+| **🖥️ backend/ (main)** | 8080 | com.example.demo | ✅ Fonctionne | **BON BACKEND** |
 
 ### **🔗 COMPATIBILITÉS API**
 
 | Frontend | Endpoints attendus | Backend compatible |
 |---|---|---|
 | frontend-temporal | `/api/game/*` (singulier) | ✅ main (avec `/api/games/*`) |
-| frontend/ | `/api/epic/*` | ❌ aucun |
+| 🌐 frontend/ | `/api/epic/*` | ❌ aucun |
 
 ---
 
@@ -94,7 +94,7 @@ git merge main --strategy-option=theirs  # Backend main prioritaire
 
 ### **📋 PHASE 3: CHERRY-PICK SÉLECTIF**
 ```bash
-# Sauvegarder SEULEMENT les développements frontend/docs
+# Sauvegarder SEULEMENT les développements 🌐 frontend/docs
 git cherry-pick 5a5410d  # Artefact temporel (critique)
 git cherry-pick 7d9be30  # Docs GROFI
 git cherry-pick 913fd75  # Tatouages Memento
@@ -121,7 +121,7 @@ git push origin dev --force  # Push final
 
 ### **❌ RISQUES = ZÉRO**
 - Backend dev **INUTILISABLE** = aucune perte
-- Développements post-793e1b6 = **100% frontend/docs** = sauvables
+- Développements post-793e1b6 = **100% 🌐 frontend/docs** = sauvables
 - Archives disponibles si besoin de rollback
 
 ### **🔄 ROLLBACK PLAN**
@@ -189,7 +189,7 @@ echo "✅ BACKEND MAIN RESTAURÉ - READY FOR FRONTEND CHERRY-PICK"
 
 ```
 ✅ Backend: com.example.demo (MAIN) - FONCTIONNEL
-✅ Frontend: frontend/ (port 3000) - STABLE  
+✅ Frontend: 🌐 frontend/ (port 3000) - STABLE  
 ✅ Frontend-Temporal: frontend-temporal/ (port 8000) - CONNECTÉ
 ✅ Développements: Artefact temporel + Docs GROFI - SAUVÉS
 ✅ Architecture: Claire et cohérente

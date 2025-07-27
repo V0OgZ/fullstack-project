@@ -141,8 +141,8 @@ UNUSED_CONSTANTS=(
     "src/constants/gameIcons.ts"
     "src/constants/playerColors.ts"
     "src/constants/unifiedAssets.ts"
-    "src/data/heroes.ts"
-    "src/data/magicObjects.ts"
+    "src/💾 data/heroes.ts"
+    "src/💾 data/magicObjects.ts"
 )
 
 for constant in "${UNUSED_CONSTANTS[@]}"; do

@@ -1,0 +1,486 @@
+/* ⚔️ STYLES INTERFACE DE COMBAT - Heroes of Time */
+
+/* ==================== CONTENEUR PRINCIPAL ==================== */
+.combat-interface {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(26, 26, 46, 0.95), rgba(22, 33, 62, 0.95));
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #e0e0e0;
+}
+
+/* ==================== HEADER DE COMBAT ==================== */
+.combat-header {
+    background: linear-gradient(135deg, #0f3460, #16213e);
+    padding: 15px 20px;
+    border-bottom: 2px solid #e74c3c;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.combat-header h2 {
+    font-size: 1.8em;
+    margin: 0;
+    color: #e74c3c;
+    text-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
+}
+
+.combat-info {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.turn-counter {
+    background: rgba(231, 76, 60, 0.2);
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid #e74c3c;
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+.initiative-display {
+    background: rgba(78, 205, 196, 0.2);
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid #4ecdc4;
+    font-weight: bold;
+    color: #4ecdc4;
+}
+
+.close-combat-btn {
+    background: rgba(231, 76, 60, 0.8);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-combat-btn:hover {
+    background: rgba(231, 76, 60, 1);
+    transform: scale(1.1);
+}
+
+/* ==================== CONTENU DE COMBAT ==================== */
+.combat-content {
+    flex: 1;
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    overflow: hidden;
+}
+
+/* ==================== GRILLE DE COMBAT ==================== */
+.combat-grid-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    border: 2px solid rgba(231, 76, 60, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+#combat-grid {
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(231, 76, 60, 0.2);
+    cursor: crosshair;
+}
+
+.combat-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* ==================== SIDEBAR DE COMBAT ==================== */
+.combat-sidebar {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+}
+
+.unit-info-panel,
+.combat-actions,
+.combat-log {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+    border: 2px solid rgba(231, 76, 60, 0.3);
+}
+
+.unit-info-panel h3,
+.combat-actions h3,
+.combat-log h3 {
+    margin: 0 0 15px 0;
+    color: #e74c3c;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+/* ==================== INFORMATIONS UNITÉ ==================== */
+.unit-details h4 {
+    margin: 0 0 15px 0;
+    color: #4ecdc4;
+    font-size: 1.3em;
+    text-align: center;
+}
+
+.unit-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+}
+
+.stat-label {
+    color: #bdc3c7;
+    font-size: 0.9em;
+}
+
+.stat-value {
+    color: #4ecdc4;
+    font-weight: bold;
+}
+
+.health-bar {
+    width: 100px;
+    height: 8px;
+    background: rgba(231, 76, 60, 0.3);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-left: 10px;
+}
+
+.health-fill {
+    height: 100%;
+    background: linear-gradient(45deg, #27ae60, #2ecc71);
+    transition: width 0.3s ease;
+}
+
+.unit-status {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 0.85em;
+    text-align: center;
+}
+
+.status.available {
+    background: rgba(39, 174, 96, 0.2);
+    color: #27ae60;
+    border: 1px solid #27ae60;
+}
+
+.status.used {
+    background: rgba(108, 117, 125, 0.2);
+    color: #6c757d;
+    border: 1px solid #6c757d;
+}
+
+/* ==================== ACTIONS DE COMBAT ==================== */
+.action-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.action-btn {
+    background: linear-gradient(45deg, #e74c3c, #c0392b);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9em;
+}
+
+.action-btn:hover:not(:disabled) {
+    background: linear-gradient(45deg, #c0392b, #e74c3c);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+}
+
+.action-btn:disabled {
+    background: rgba(108, 117, 125, 0.5);
+    color: #6c757d;
+    cursor: not-allowed;
+}
+
+/* ==================== JOURNAL DE COMBAT ==================== */
+.log-content {
+    max-height: 200px;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.log-entry {
+    padding: 5px 0;
+    font-size: 0.85em;
+    color: #bdc3c7;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.log-entry:last-child {
+    border-bottom: none;
+}
+
+.log-entry:first-child {
+    color: #4ecdc4;
+    font-weight: bold;
+}
+
+/* ==================== FOOTER DE COMBAT ==================== */
+.combat-footer {
+    background: linear-gradient(135deg, #0f3460, #16213e);
+    padding: 15px 20px;
+    border-top: 2px solid #e74c3c;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.combat-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 140px;
+}
+
+.combat-btn.primary {
+    background: linear-gradient(45deg, #27ae60, #2ecc71);
+    color: white;
+}
+
+.combat-btn.primary:hover {
+    background: linear-gradient(45deg, #2ecc71, #27ae60);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+}
+
+.combat-btn.secondary {
+    background: linear-gradient(45deg, #f39c12, #e67e22);
+    color: white;
+}
+
+.combat-btn.secondary:hover {
+    background: linear-gradient(45deg, #e67e22, #f39c12);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);
+}
+
+.combat-btn.warning {
+    background: linear-gradient(45deg, #e74c3c, #c0392b);
+    color: white;
+}
+
+.combat-btn.warning:hover {
+    background: linear-gradient(45deg, #c0392b, #e74c3c);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.combat-interface {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.unit-info-panel,
+.combat-actions,
+.combat-log {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.unit-info-panel { animation-delay: 0.1s; }
+.combat-actions { animation-delay: 0.2s; }
+.combat-log { animation-delay: 0.3s; }
+
+/* ==================== EFFETS VISUELS ==================== */
+.combat-grid-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(231,76,60,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+    pointer-events: none;
+    opacity: 0.3;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 1200px) {
+    .combat-content {
+        flex-direction: column;
+    }
+    
+    .combat-sidebar {
+        width: 100%;
+        flex-direction: row;
+        gap: 15px;
+    }
+    
+    .unit-info-panel,
+    .combat-actions,
+    .combat-log {
+        flex: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .combat-header {
+        padding: 10px 15px;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .combat-header h2 {
+        font-size: 1.5em;
+    }
+    
+    .combat-info {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .combat-content {
+        padding: 10px;
+    }
+    
+    .combat-sidebar {
+        flex-direction: column;
+    }
+    
+    .combat-footer {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .combat-btn {
+        width: 100%;
+        max-width: 200px;
+    }
+    
+    #combat-grid {
+        width: 100%;
+        height: auto;
+        max-width: 500px;
+    }
+}
+
+@media (max-width: 480px) {
+    .action-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    .combat-btn {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+}
+
+/* ==================== THÈMES DE COULEUR HOMM3 ==================== */
+/* Couleurs pour les équipes */
+.team-player {
+    color: #4ecdc4;
+    border-color: #4ecdc4;
+}
+
+.team-enemy {
+    color: #e74c3c;
+    border-color: #e74c3c;
+}
+
+/* Couleurs pour les types d'unités */
+.unit-type-cavalry { color: #f1c40f; }
+.unit-type-ranged { color: #3498db; }
+.unit-type-infantry { color: #e67e22; }
+.unit-type-magic { color: #9b59b6; }
+
+/* ==================== SCROLLBARS PERSONNALISÉES ==================== */
+.combat-sidebar::-webkit-scrollbar,
+.log-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.combat-sidebar::-webkit-scrollbar-track,
+.log-content::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.combat-sidebar::-webkit-scrollbar-thumb,
+.log-content::-webkit-scrollbar-thumb {
+    background: rgba(231, 76, 60, 0.5);
+    border-radius: 4px;
+}
+
+.combat-sidebar::-webkit-scrollbar-thumb:hover,
+.log-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(231, 76, 60, 0.7);
+} 

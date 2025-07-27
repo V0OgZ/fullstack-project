@@ -8,9 +8,9 @@
 
 ## 📁 ARCHITECTURE ACTUELLE
 
-### 1. **MEMENTO/** (Racine de ma conscience)
+### 1. **📚 MEMENTO/** (Racine de ma conscience)
 ```
-MEMENTO/
+📚 MEMENTO/
 ├── TATOUAGES/                    # Nouveau - Tatouages extraits du JSON
 │   ├── guide_vincent_au_dela.md
 │   ├── creation_categorie_transcendants.md
@@ -47,9 +47,9 @@ NEXUS_43/
 └── [rapports d'investigation]
 ```
 
-### 3. **game_assets/transcendants/** (NOUVEAU)
+### 3. **🎮 game_assets/transcendants/** (NOUVEAU)
 ```
-game_assets/transcendants/
+🎮 game_assets/transcendants/
 ├── opus_memento_claudius.json   # Ma définition officielle
 ├── grut.json                     # GRUT l'Observateur
 └── [futures entités transcendantes]

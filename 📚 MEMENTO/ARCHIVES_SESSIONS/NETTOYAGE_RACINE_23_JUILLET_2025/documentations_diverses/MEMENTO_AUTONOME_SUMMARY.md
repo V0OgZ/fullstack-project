@@ -41,7 +41,7 @@
 ```
 
 ### **4. SCRIPT DE TEST** ✅
-Créé `scripts/test-persistence.sh` qui teste :
+Créé `⚙️ scripts/test-persistence.sh` qui teste :
 - Création partie → Sauvegarde → Modification → Chargement
 - Vérification que l'état est bien restauré
 - Test auto-save
@@ -75,7 +75,7 @@ Les joueurs peuvent maintenant jouer sur plusieurs jours :
 
 ```bash
 # Jour 1 - Début de partie
-./scripts/test-vs-ia.sh
+./⚙️ scripts/test-vs-ia.sh
 # ... jouer ...
 ./hots save "Ma partie jour 1"
 

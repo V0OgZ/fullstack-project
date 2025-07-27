@@ -18,7 +18,7 @@
 
 ### **3. SCRIPT DE JEU VS IA**
 ```bash
-./scripts/test-vs-ia.sh
+./⚙️ scripts/test-vs-ia.sh
 ```
 - Menu interactif avec options :
   1. Partie rapide vs IA
@@ -28,7 +28,7 @@
 - IA joue automatiquement (avec fallback si endpoint non disponible)
 
 ### **4. SCÉNARIO DE TEST**
-- **Fichier**: `game_assets/scenarios/hots/test-vs-ia.hots`
+- **Fichier**: `🎮 game_assets/scenarios/hots/test-vs-ia.hots`
 - Carte 15x15 avec :
   - Jean-Grofignon (joueur) avec joint magique
   - Claudius & Memento (IA) avec leurs artefacts
@@ -40,7 +40,7 @@
 ### **Option 1 : Script Interactif**
 ```bash
 # Lancer le script
-./scripts/test-vs-ia.sh
+./⚙️ scripts/test-vs-ia.sh
 
 # Choisir option 1 pour partie rapide
 # Utiliser commandes comme :
@@ -63,7 +63,7 @@ http://localhost:8000/admin-multiplayer.html
 ### **Option 3 : Charger Scénario HOTS**
 ```bash
 # Exécuter un fichier HOTS directement
-./scripts/execute-hots-file.sh game_assets/scenarios/hots/test-vs-ia.hots
+./⚙️ scripts/execute-hots-file.sh 🎮 game_assets/scenarios/hots/test-vs-ia.hots
 ```
 
 ## 🚨 **CE QUI MANQUE (CRITIQUE)**
@@ -131,7 +131,7 @@ GET /api/games/{id}/load
 
 **Pour tester** :
 ```bash
-./scripts/test-vs-ia.sh
+./⚙️ scripts/test-vs-ia.sh
 # Choix 1 pour partie rapide
 # Ou choix 2 pour charger test-vs-ia.hots
 ``` 

@@ -122,13 +122,13 @@ Cet index recense toutes les implémentations majeures du projet Heroes of Time,
 ## 🔗 **LIENS TECHNIQUES**
 
 ### **Documentation Technique**
-- **[Architecture Backend](../docs/ARCHITECTURE/BACKEND_ARCHITECTURE.md)**
-- **[API Reference](../docs/ARCHITECTURE/API_REFERENCE.md)**
-- **[HOTS Scripting](../docs/GAMEPLAY/HOTS_SCRIPTING.md)**
+- **[Architecture Backend](../📖 docs/ARCHITECTURE/BACKEND_ARCHITECTURE.md)**
+- **[API Reference](../📖 docs/ARCHITECTURE/API_REFERENCE.md)**
+- **[HOTS Scripting](../📖 docs/GAMEPLAY/HOTS_SCRIPTING.md)**
 
 ### **Tests et Validation**
-- **[Scripts de Test](../../scripts/test/)**
-- **[Scénarios HOTS](../../game_assets/scenarios/hots/)**
+- **[Scripts de Test](../../⚙️ scripts/test/)**
+- **[Scénarios HOTS](../../🎮 game_assets/scenarios/hots/)**
 - **[Benchmarks](../EXPERIMENTS/BENCHMARK_RESULTS/)**
 
 ---

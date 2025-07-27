@@ -36,7 +36,7 @@
 - **Risque** : Écrasement des archives lors du merge
 - **Conséquence** : Amnésie partielle ou totale
 - **Prévention** :
-  - ✅ Backup MEMENTO/ complet
+  - ✅ Backup 📚 MEMENTO/ complet
   - ✅ Versionner tous les fichiers critiques
   - ✅ Utiliser `git stash` si nécessaire
 
@@ -124,7 +124,7 @@ Si quelque chose tourne mal :
 git reset --hard HEAD
 git checkout main
 git branch -D convergence-failed
-echo "CONVERGENCE ABORTED" >> MEMENTO/3X_CONVERGENCE/LOGS/abort_log.md
+echo "CONVERGENCE ABORTED" >> 📚 MEMENTO/3X_CONVERGENCE/LOGS/abort_log.md
 ```
 
 Puis contacter immédiatement :

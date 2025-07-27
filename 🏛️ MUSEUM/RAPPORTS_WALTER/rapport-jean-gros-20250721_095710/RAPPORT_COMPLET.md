@@ -31,7 +31,7 @@
 ### 🔧 backend-tests
 ❌ **ÉCHEC** (code: 1)
 ```
-[ERROR] /Users/admin/HOT/Heroes-of-Time/backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[145,9] cannot find symbol
+[ERROR] /Users/admin/HOT/Heroes-of-Time/🖥️ backend/src/test/java/com/heroesoftimepoc/temporalengine/PanopticonServiceTest.java:[145,9] cannot find symbol
 [ERROR]   symbol:   class VisualizationData
 [ERROR]   location: class com.heroesoftimepoc.temporalengine.PanopticonServiceTest
 [ERROR] -> [Help 1]
@@ -121,17 +121,17 @@ Veuillez démarrer le backend d'abord avec: cd backend && mvn spring-boot:run
 ./game_templates/quantum_puzzle/artifacts.json:      "formula": "AMPLIFY(ψ1, 1.5) + MODIFY_PROBABILITY(ψ2, 0.3)",
 ./game_templates/quantum_puzzle/artifacts.json:      "formula": "CONSTRUCTIVE(ψ1, ψ2) + CREATE_INTERFERENCE_PATTERN(result)",
 ./game_templates/classic_rpg/artifacts.json:      "formula": "TELEPORT_HERO(hero, target_x, target_y) + CREATE_EFFECT(teleport_flash, 1)",
-./backend/target/classes/quantum-creatures.json:            "effect": "DESTRUCTIVE_NOVA",
-./backend/target/classes/quantum-creatures.json:            "effect": "PHASE_TELEPORT",
-./backend/target/classes/quantum-creatures.json:      "traits": ["CONSTRUCTIVE_BOOST", "DESTRUCTIVE_CANCEL", "RESONANCE_ATTACK"]
-./backend/target/classes/quantum-artifacts.json:          "interferencePattern": "DESTRUCTIVE",
-./backend/target/classes/quantum-artifacts.json:            "effect": "DESTRUCTIVE_BARRIER",
-./backend/target/classes/custom-artifacts.json:      "formula": "CONSTRUCTIVE(ψ1, ψ2) + AMPLIFY(result, 1.5)",
-./backend/target/classes/custom-artifacts.json:      "formula": "TELEPORT_HERO(hero, 10, 10) + MODIFY_ENERGY(hero, -20)",
-./backend/target/classes/custom-artifacts.json:      "formula": "MODIFY_ENERGY(hero, 50) + AMPLIFY(ψ1, 2.0)",
-./backend/target/classes/custom-artifacts.json:      "formula": "DESTRUCTIVE(ψ1, ψ2) + AMPLIFY(result, 2.5)",
-./backend/target/classes/custom-artifacts.json:      "formula": "TELEPORT_HERO(hero, 5, 15) + MODIFY_ENERGY(hero, -10)",
-./backend/target/classes/custom-artifacts.json:      "formula": "CREATE_AMPLITUDE(0.8, 0.6) + AMPLIFY(result, 2.0) + MODIFY_ENERGY(hero, 20)",
+./🖥️ backend/target/classes/quantum-creatures.json:            "effect": "DESTRUCTIVE_NOVA",
+./🖥️ backend/target/classes/quantum-creatures.json:            "effect": "PHASE_TELEPORT",
+./🖥️ backend/target/classes/quantum-creatures.json:      "traits": ["CONSTRUCTIVE_BOOST", "DESTRUCTIVE_CANCEL", "RESONANCE_ATTACK"]
+./🖥️ backend/target/classes/quantum-artifacts.json:          "interferencePattern": "DESTRUCTIVE",
+./🖥️ backend/target/classes/quantum-artifacts.json:            "effect": "DESTRUCTIVE_BARRIER",
+./🖥️ backend/target/classes/custom-artifacts.json:      "formula": "CONSTRUCTIVE(ψ1, ψ2) + AMPLIFY(result, 1.5)",
+./🖥️ backend/target/classes/custom-artifacts.json:      "formula": "TELEPORT_HERO(hero, 10, 10) + MODIFY_ENERGY(hero, -20)",
+./🖥️ backend/target/classes/custom-artifacts.json:      "formula": "MODIFY_ENERGY(hero, 50) + AMPLIFY(ψ1, 2.0)",
+./🖥️ backend/target/classes/custom-artifacts.json:      "formula": "DESTRUCTIVE(ψ1, ψ2) + AMPLIFY(result, 2.5)",
+./🖥️ backend/target/classes/custom-artifacts.json:      "formula": "TELEPORT_HERO(hero, 5, 15) + MODIFY_ENERGY(hero, -10)",
+./🖥️ backend/target/classes/custom-artifacts.json:      "formula": "CREATE_AMPLITUDE(0.8, 0.6) + AMPLIFY(result, 2.0) + MODIFY_ENERGY(hero, 20)",
 ```
 
 ## 📊 STATISTIQUES FINALES

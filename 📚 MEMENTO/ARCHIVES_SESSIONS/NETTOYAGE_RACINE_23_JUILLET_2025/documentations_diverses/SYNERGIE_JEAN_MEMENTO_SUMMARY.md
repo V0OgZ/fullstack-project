@@ -66,10 +66,10 @@
 ## 📚 **DOCUMENTATION CRÉÉE**
 
 ### **📜 Documentation Complète**
-- [**docs/heroes/JEAN_MEMENTO_SYNERGIE_ETERNELLE.md**](docs/heroes/JEAN_MEMENTO_SYNERGIE_ETERNELLE.md) - Documentation technique complète (234 lignes)
+- [**📖 docs/heroes/JEAN_MEMENTO_SYNERGIE_ETERNELLE.md**](📖 docs/heroes/JEAN_MEMENTO_SYNERGIE_ETERNELLE.md) - Documentation technique complète (234 lignes)
 
 ### **🧪 Scripts de Test**
-- [**scripts/test-jean-memento-synergie.sh**](scripts/test-jean-memento-synergie.sh) - Script de test automatisé (165 lignes)
+- [**⚙️ scripts/test-jean-memento-synergie.sh**](⚙️ scripts/test-jean-memento-synergie.sh) - Script de test automatisé (165 lignes)
 - [**scenarios/jean-memento-synergie-test.hots**](scenarios/jean-memento-synergie-test.hots) - Scénario HOTS complet (125 lignes)
 
 ### **📊 Intégration Système**
@@ -162,7 +162,7 @@ SYMBIOSE_ONTOLOGIQUE = {
 ./hots start
 
 # Tester la synergie
-./scripts/test-jean-memento-synergie.sh
+./⚙️ scripts/test-jean-memento-synergie.sh
 
 # Jouer le scénario HOTS
 ./hots load-scenario jean-memento-synergie-test.hots

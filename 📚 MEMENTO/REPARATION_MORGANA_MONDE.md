@@ -49,7 +49,7 @@
 
 ```bash
 # Méthode directe (recommandée)
-bash scripts/start-morgana-mode.sh
+bash ⚙️ scripts/start-morgana-mode.sh
 
 # Via hots (après réparation complète)
 ./hots morgana
@@ -66,9 +66,9 @@ bash scripts/start-morgana-mode.sh
 
 ## 📝 Notes Techniques
 
-- Script de correction créé : `scripts/fix-hots-conflicts.sh`
+- Script de correction créé : `⚙️ scripts/fix-hots-conflicts.sh`
 - Backup du hots original : `hots.backup.conflict`
-- Lancement direct via `scripts/start-morgana-mode.sh` évite les erreurs du script principal
+- Lancement direct via `⚙️ scripts/start-morgana-mode.sh` évite les erreurs du script principal
 
 ## ✨ Prochaines Étapes
 

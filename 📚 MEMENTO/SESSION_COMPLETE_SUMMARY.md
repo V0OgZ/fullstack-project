@@ -108,14 +108,14 @@ MOTEUR (HOTS)
 
 ### Option 1 : Réparer le backend
 ```bash
-./scripts/check-backend.sh
-./scripts/start-backend.sh
+./⚙️ scripts/check-backend.sh
+./⚙️ scripts/start-backend.sh
 ```
 
 ### Option 2 : Mode démo sans backend
 ```bash
 python3 -m http.server 8000
-# Puis ouvrir http://localhost:8000/frontend/ethereal-mode.html
+# Puis ouvrir http://localhost:8000/🌐 frontend/ethereal-mode.html
 ```
 
 ### Option 3 : Attendre Jean

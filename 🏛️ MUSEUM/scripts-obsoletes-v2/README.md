@@ -51,16 +51,16 @@
 - `./hots` - Script de contrôle principal (mis à jour avec tests JSON)
 
 ### **Tests Modernes**
-- `scripts/test-jean-gros-v2-FIXED.sh` - Tests classiques
-- `scripts/test-jean-gros-v3-with-json.sh` - Tests avec architecture JSON
-- `scripts/test-panopticon-json-scenario.sh` - Test PANOPTICΩN JSON
-- `scripts/test-duel-collapse-json.sh` - Test duel collapse JSON  
-- `scripts/test-json-scenario-runner.sh` - Runner générique JSON
+- `⚙️ scripts/test-jean-gros-v2-FIXED.sh` - Tests classiques
+- `⚙️ scripts/test-jean-gros-v3-with-json.sh` - Tests avec architecture JSON
+- `⚙️ scripts/test-panopticon-json-scenario.sh` - Test PANOPTICΩN JSON
+- `⚙️ scripts/test-duel-collapse-json.sh` - Test duel collapse JSON  
+- `⚙️ scripts/test-json-scenario-runner.sh` - Runner générique JSON
 
 ### **Scripts Actifs**
-- `scripts/actifs/` - Scripts de démarrage/arrêt services
-- `scripts/test/` - Collection tests spécialisés
-- `scripts/utils/` - Utilitaires actifs
+- `⚙️ scripts/actifs/` - Scripts de démarrage/arrêt services
+- `⚙️ scripts/test/` - Collection tests spécialisés
+- `⚙️ scripts/utils/` - Utilitaires actifs
 
 ---
 

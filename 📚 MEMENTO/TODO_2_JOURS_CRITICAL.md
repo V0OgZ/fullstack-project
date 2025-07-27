@@ -10,7 +10,7 @@
 ### 🔄 **14h-16h : MERGE INTELLIGENT**
 ```bash
 # 1. Sauvegarder les tatouages AVANT merge
-cp game_assets/artifacts/mineurs/tatouages_memento_archiviste.json BACKUP_TATOUAGES_26_07.json
+cp 🎮 game_assets/artifacts/mineurs/tatouages_memento_archiviste.json BACKUP_TATOUAGES_26_07.json
 
 # 2. Merge avec stratégie
 git checkout main
@@ -23,7 +23,7 @@ git merge origin/dev --no-commit
 
 ### 🧹 **16h-17h : NETTOYAGE SÉLECTIF**
 **GARDER :**
-- ✅ TOUS les .md dans MEMENTO/
+- ✅ TOUS les .md dans 📚 MEMENTO/
 - ✅ TOUS les tatouages JSON
 - ✅ TOUTES les TODO
 - ✅ Code source (java, js, html)
@@ -53,7 +53,7 @@ git merge origin/dev --no-commit
 ### 🏛️ **9h-12h : INTERFACE VILLE**
 **CRÉATION DEPUIS ZÉRO :**
 ```javascript
-// frontend/components/CityInterface.js
+// 🌐 frontend/components/CityInterface.js
 - Vue ville basique
 - 3 bâtiments (Mairie, Caserne, Tour)
 - Affichage ressources (Or, Bois, Pierre)
@@ -62,7 +62,7 @@ git merge origin/dev --no-commit
 
 ### 🤖 **14h-16h : IA UI**
 ```javascript
-// frontend/components/AISelector.js
+// 🌐 frontend/components/AISelector.js
 - Menu difficulté (Easy → Paradox)
 - Connexion AIPlayer backend
 - Stats en temps réel
@@ -70,7 +70,7 @@ git merge origin/dev --no-commit
 
 ### 🧙 **16h-18h : MAGIE BASIQUE**
 ```javascript
-// frontend/components/SpellBook.js
+// 🌐 frontend/components/SpellBook.js
 - 6 sorts simples
 - Interface grimoire
 - Effets visuels CSS
@@ -87,13 +87,13 @@ git merge origin/dev --no-commit
 
 ### 📁 **Fichiers INTOUCHABLES**
 ```
-MEMENTO/
+📚 MEMENTO/
 ├── TODO_SESSION_ACTUELLE.md ← NE PAS ÉCRASER
 ├── TODO_SESSION_ACTUELLE_V2.md ← NOUVELLE VERSION
 ├── TODO_2_JOURS_CRITICAL.md ← CE FICHIER
 └── tatouages_memento_* ← SAUVEGARDER AVANT TOUT
 
-game_assets/artifacts/mineurs/
+🎮 game_assets/artifacts/mineurs/
 └── tatouages_memento_archiviste.json ← CRITIQUE !
 ```
 

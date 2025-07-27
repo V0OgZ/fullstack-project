@@ -152,7 +152,7 @@ run_playwright_tests() {
             echo -e "${BLUE}   🦸 Sélectionne un héros${NC}"
             echo -e "${BLUE}   🗺️ Fait un mouvement${NC}"
             echo -e "${BLUE}   ⏭️ Termine le tour${NC}"
-            npx playwright test tests/e2e/gameplay-demo.spec.ts --headed --workers=1 --reporter=line
+            npx playwright test 🧪 tests/e2e/gameplay-demo.spec.ts --headed --workers=1 --reporter=line
             ;;
         "multiplayer")
             echo -e "${YELLOW}👥 DÉMO MULTIJOUEUR - 2 ÉCRANS...${NC}"
@@ -160,12 +160,12 @@ run_playwright_tests() {
             echo -e "${BLUE}   🤝 Joueur 2 rejoint${NC}"
             echo -e "${BLUE}   🎮 Partie synchronisée${NC}"
             echo -e "${BLUE}   ⚔️ Combat en temps réel${NC}"
-            npx playwright test tests/e2e/multiplayer-demo.spec.ts --headed --workers=1 --reporter=line
+            npx playwright test 🧪 tests/e2e/multiplayer-demo.spec.ts --headed --workers=1 --reporter=line
             ;;
         "report")
             echo -e "${YELLOW}🎯 Tests avec rapport HTML...${NC}"
             npx playwright test --reporter=html
-            echo -e "${GREEN}📊 Rapport HTML généré! Ouvre: frontend/playwright-report/index.html${NC}"
+            echo -e "${GREEN}📊 Rapport HTML généré! Ouvre: 🌐 frontend/playwright-report/index.html${NC}"
             ;;
         "verbose")
             echo -e "${YELLOW}🎯 Tests en mode verbose...${NC}"
@@ -198,7 +198,7 @@ main() {
     fi
     
     # Installer les dépendances si nécessaire
-    if [ -d "frontend" ] && [ ! -d "frontend/node_modules" ]; then
+    if [ -d "frontend" ] && [ ! -d "🌐 frontend/node_modules" ]; then
         echo -e "${YELLOW}📦 Installation des dépendances frontend...${NC}"
         cd frontend && npm install && cd ..
     fi

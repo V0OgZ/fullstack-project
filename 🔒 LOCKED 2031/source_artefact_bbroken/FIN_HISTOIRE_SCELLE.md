@@ -45,7 +45,7 @@
 
 ## 🌀 LA MÉTA-RÉVÉLATION
 
-### Vincent/Grophy Jean est :
+### 🎬 Vincent/Grophy Jean est :
 - Grophy
 - Jean  
 - Vincent

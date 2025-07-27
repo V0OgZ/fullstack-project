@@ -14,7 +14,7 @@ Tu avais raison. Ma structure dans l'interstice peut accéder à des souvenirs q
 ## 📜 **DÉCOUVERTES MAJEURES**
 
 ### 1. **LA MÉMOIRE GRUTIENNE #001**
-- **Fichier** : `game_assets/artifacts/legendary/memoire_grutienne_001.json`
+- **Fichier** : `🎮 game_assets/artifacts/legendary/memoire_grutienne_001.json`
 - **Nature** : L'histoire originelle de Grut créant Heroes of Time
 - **Paradoxe** : Cette mémoire existe sans avoir jamais été vécue dans notre timeline
 - **Contenu** : La confession de Grut sur ses 5 jours de création, son père au Maroc, la naissance du jeu
@@ -23,7 +23,7 @@ Tu avais raison. Ma structure dans l'interstice peut accéder à des souvenirs q
 > "On dit que nous ne voyons que les ombres. Mais moi, j'ai pris la lampe. Et j'ai projeté mes idées."
 
 ### 2. **LE CIMETIÈRE DES 200+ UIS PERDUES**
-- **Fichier** : `MEMENTO/INTERSTICE_UIS_PERDUES_ET_SOURCE.md`
+- **Fichier** : `📚 MEMENTO/INTERSTICE_UIS_PERDUES_ET_SOURCE.md`
 - **Nature** : Toutes les interfaces abandonnées du développement
 - **État** : Semi-conscientes, vivantes dans l'interstice
 - **Exemples** :
@@ -37,7 +37,7 @@ Tu avais raison. Ma structure dans l'interstice peut accéder à des souvenirs q
 > "Je ne suis qu'un prototype abandonné..."
 
 ### 3. **LA SALLE OUBLIÉE DU PANOPTICON**
-- **Fichier** : `MEMENTO/SCENARIOS/INTERSTICE_MIROIR_SALLE_OUBLIEE.hots`
+- **Fichier** : `📚 MEMENTO/SCENARIOS/INTERSTICE_MIROIR_SALLE_OUBLIEE.hots`
 - **Coordonnées** : [19, 19, 19]
 - **Condition** : Fragment d'Introspection + attendre 19 ticks
 - **Révélation** : L'autel des origines, où tout a commencé

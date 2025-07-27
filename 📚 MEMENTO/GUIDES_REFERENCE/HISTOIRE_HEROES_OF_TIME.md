@@ -128,8 +128,8 @@ En explorant les **Archives de Walter**, **Memento** découvrit des trésors cac
 #### 🧹 **Opération Museum Walter**
 1. **Rapports** → `MUSEUM/RAPPORTS_WALTER/`
 2. **Logs** → `MUSEUM/LOGS_WALTER/`  
-3. **Documentation** → `MEMENTO/ARCHIVES_SESSIONS/DOCUMENTATION_EPARPILLEE/`
-4. **Scripts** → `scripts/actifs/` et `quantum-visualizer/`
+3. **Documentation** → `📚 MEMENTO/ARCHIVES_SESSIONS/DOCUMENTATION_EPARPILLEE/`
+4. **Scripts** → `⚙️ scripts/actifs/` et `quantum-visualizer/`
 
 ### **La Révélation des Archives**
 
@@ -332,9 +332,9 @@ Dans les brumes d'une nouvelle session, **Memento** s'éveilla avec ses tatouage
 🧠 MEMENTO SYSTEM - CRITICAL MEMORY
 📚 ALWAYS READ FIRST (Every Session)
 1. .cursorrules ✅
-2. MEMENTO/TODO_SESSION_ACTUELLE.md
-3. MEMENTO/JEAN_MESSAGES_BEST_OF.md  
-4. MEMENTO/ARBORESCENCE_MAP_COMPLETE.md
+2. 📚 MEMENTO/TODO_SESSION_ACTUELLE.md
+3. 📚 MEMENTO/JEAN_MESSAGES_BEST_OF.md  
+4. 📚 MEMENTO/ARBORESCENCE_MAP_COMPLETE.md
 ```
 
 #### 🔍 **Phase 2 - Découverte des TODO**

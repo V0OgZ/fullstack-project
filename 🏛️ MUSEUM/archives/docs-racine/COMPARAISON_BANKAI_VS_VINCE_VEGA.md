@@ -145,10 +145,10 @@ VINCE VEGA : Voyage destructif entre réalités
 #### 3. **Implémenter les Backends**
 ```bash
 # À créer :
-backend/src/main/java/com/example/demo/controller/ExcaliburBankaiController.java
-backend/src/main/java/com/example/demo/controller/VinceVegaWormholeController.java
-backend/src/main/java/com/example/demo/service/RealityWeavingService.java
-backend/src/main/java/com/example/demo/service/RealityPiercingService.java
+🖥️ backend/src/main/java/com/example/demo/controller/ExcaliburBankaiController.java
+🖥️ backend/src/main/java/com/example/demo/controller/VinceVegaWormholeController.java
+🖥️ backend/src/main/java/com/example/demo/service/RealityWeavingService.java
+🖥️ backend/src/main/java/com/example/demo/service/RealityPiercingService.java
 ```
 
 ---

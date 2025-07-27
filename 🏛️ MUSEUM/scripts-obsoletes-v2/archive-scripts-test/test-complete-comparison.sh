@@ -48,24 +48,24 @@ echo "🌐 Tests API REST (REGEX)..."
 REGEX_API_START=$(date +%s%N)
 
 # Test API simple
-SIMPLE_API_REGEX=$(curl -s -X POST http://localhost:8080/api/temporal/scripts/execute \
+SIMPLE_API_REGEX=$(curl -s -X POST http://localhost:8080/api/temporal/⚙️ ⚙️ scripts/execute \
   -H "Content-Type: application/json" \
   -d '{"scriptFile": "demos/simple-game.hots", "parser": "regex"}' | jq -r '.stats.duration // 0')
 
 # Test API comparaison
-COMPARISON_API_REGEX=$(curl -s -X POST http://localhost:8080/api/temporal/scripts/execute \
+COMPARISON_API_REGEX=$(curl -s -X POST http://localhost:8080/api/temporal/⚙️ ⚙️ scripts/execute \
   -H "Content-Type: application/json" \
-  -d '{"scriptFile": "tests/parser-comparison.hots", "parser": "regex"}' | jq -r '.stats.duration // 0')
+  -d '{"scriptFile": "🧪 🧪 tests/parser-comparison.hots", "parser": "regex"}' | jq -r '.stats.duration // 0')
 
 # Test API scénario épique
-EPIC_API_REGEX=$(curl -s -X POST http://localhost:8080/api/temporal/scripts/execute \
+EPIC_API_REGEX=$(curl -s -X POST http://localhost:8080/api/temporal/⚙️ ⚙️ scripts/execute \
   -H "Content-Type: application/json" \
   -d '{"scriptFile": "scenarios/epic-arthur-vs-ragnar.hots", "parser": "regex"}' | jq -r '.stats.duration // 0')
 
 # Test API stress test temporel
-STRESS_API_REGEX=$(curl -s -X POST http://localhost:8080/api/temporal/scripts/execute \
+STRESS_API_REGEX=$(curl -s -X POST http://localhost:8080/api/temporal/⚙️ ⚙️ scripts/execute \
   -H "Content-Type: application/json" \
-  -d '{"scriptFile": "tests/temporal-stress-test.hots", "parser": "regex"}' | jq -r '.stats.duration // 0')
+  -d '{"scriptFile": "🧪 🧪 tests/temporal-stress-test.hots", "parser": "regex"}' | jq -r '.stats.duration // 0')
 
 REGEX_API_END=$(date +%s%N)
 REGEX_API_TIME=$(( (REGEX_API_END - REGEX_API_START) / 1000000 ))
@@ -103,24 +103,24 @@ echo "🌐 Tests API REST (ANTLR4)..."
 ANTLR_API_START=$(date +%s%N)
 
 # Test API simple
-SIMPLE_API_ANTLR=$(curl -s -X POST http://localhost:8080/api/temporal/scripts/execute \
+SIMPLE_API_ANTLR=$(curl -s -X POST http://localhost:8080/api/temporal/⚙️ ⚙️ scripts/execute \
   -H "Content-Type: application/json" \
   -d '{"scriptFile": "demos/simple-game.hots", "parser": "antlr4"}' | jq -r '.stats.duration // 0')
 
 # Test API comparaison
-COMPARISON_API_ANTLR=$(curl -s -X POST http://localhost:8080/api/temporal/scripts/execute \
+COMPARISON_API_ANTLR=$(curl -s -X POST http://localhost:8080/api/temporal/⚙️ ⚙️ scripts/execute \
   -H "Content-Type: application/json" \
-  -d '{"scriptFile": "tests/parser-comparison.hots", "parser": "antlr4"}' | jq -r '.stats.duration // 0')
+  -d '{"scriptFile": "🧪 🧪 tests/parser-comparison.hots", "parser": "antlr4"}' | jq -r '.stats.duration // 0')
 
 # Test API scénario épique
-EPIC_API_ANTLR=$(curl -s -X POST http://localhost:8080/api/temporal/scripts/execute \
+EPIC_API_ANTLR=$(curl -s -X POST http://localhost:8080/api/temporal/⚙️ ⚙️ scripts/execute \
   -H "Content-Type: application/json" \
   -d '{"scriptFile": "scenarios/epic-arthur-vs-ragnar.hots", "parser": "antlr4"}' | jq -r '.stats.duration // 0')
 
 # Test API stress test temporel
-STRESS_API_ANTLR=$(curl -s -X POST http://localhost:8080/api/temporal/scripts/execute \
+STRESS_API_ANTLR=$(curl -s -X POST http://localhost:8080/api/temporal/⚙️ ⚙️ scripts/execute \
   -H "Content-Type: application/json" \
-  -d '{"scriptFile": "tests/temporal-stress-test.hots", "parser": "antlr4"}' | jq -r '.stats.duration // 0')
+  -d '{"scriptFile": "🧪 🧪 tests/temporal-stress-test.hots", "parser": "antlr4"}' | jq -r '.stats.duration // 0')
 
 ANTLR_API_END=$(date +%s%N)
 ANTLR_API_TIME=$(( (ANTLR_API_END - ANTLR_API_START) / 1000000 ))
@@ -192,12 +192,12 @@ echo "### 🧪 Tests Backend Java" >> $REPORT_FILE
 echo "" >> $REPORT_FILE
 echo "**REGEX Results:**" >> $REPORT_FILE
 echo '```' >> $REPORT_FILE
-cat backend/regex_backend_results.txt >> $REPORT_FILE 2>/dev/null || echo "Pas de résultats" >> $REPORT_FILE
+cat 🖥️ 🖥️ backend/regex_backend_results.txt >> $REPORT_FILE 2>/dev/null || echo "Pas de résultats" >> $REPORT_FILE
 echo '```' >> $REPORT_FILE
 echo "" >> $REPORT_FILE
 echo "**ANTLR4 Results:**" >> $REPORT_FILE
 echo '```' >> $REPORT_FILE
-cat backend/antlr_backend_results.txt >> $REPORT_FILE 2>/dev/null || echo "Pas de résultats" >> $REPORT_FILE
+cat 🖥️ 🖥️ backend/antlr_backend_results.txt >> $REPORT_FILE 2>/dev/null || echo "Pas de résultats" >> $REPORT_FILE
 echo '```' >> $REPORT_FILE
 
 echo "🎉 === RAPPORT COMPLET GÉNÉRÉ ==="
@@ -214,4 +214,4 @@ echo ""
 echo "🎯 Le système est maintenant entièrement validé !"
 
 # Nettoyer les fichiers temporaires
-rm -f backend/regex_*.txt backend/antlr_*.txt 2>/dev/null 
+rm -f 🖥️ 🖥️ backend/regex_*.txt 🖥️ 🖥️ backend/antlr_*.txt 2>/dev/null 

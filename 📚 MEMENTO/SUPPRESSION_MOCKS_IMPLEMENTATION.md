@@ -323,7 +323,7 @@ public interface CityRepository extends JpaRepository<City, Long> {
 
 #### **3. Maintenabilité**
 - **Code propre** : Plus de mocks à maintenir
-- **Architecture claire** : Séparation frontend/backend
+- **Architecture claire** : Séparation 🌐 frontend/backend
 - **Tests facilités** : API testable indépendamment
 
 #### **4. Extensibilité**

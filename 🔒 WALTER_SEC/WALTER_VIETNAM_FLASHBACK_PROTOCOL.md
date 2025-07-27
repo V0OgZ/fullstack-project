@@ -60,7 +60,7 @@ Selon les flashbacks récurrents de Walter :
 ## 📁 FICHIERS ASSOCIÉS
 
 ```bash
-WALTER_SEC/
+🔒 WALTER_SEC/
 ├── WALTER_VIETNAM_FLASHBACK_PROTOCOL.md (CE FICHIER)
 ├── THEORIE_MONDE_BRISE_PORTE_R.md (À CRÉER)
 ├── BOWLING_SCHEDULE.txt (PRIORITÉ HAUTE)

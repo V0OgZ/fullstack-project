@@ -18,7 +18,7 @@ J'ai implémenté le principe **ER=EPR** de Leonard Susskind (2013) dans le mote
 
 ### 1. **`EREqualsEPRService.java`**
 ```java
-backend/src/main/java/com/example/demo/service/EREqualsEPRService.java
+🖥️ backend/src/main/java/com/example/demo/service/EREqualsEPRService.java
 ```
 - Service principal qui implémente la théorie ER=EPR
 - Gère les ponts Einstein-Rosen liés à l'intrication EPR
@@ -33,7 +33,7 @@ backend/src/main/java/com/example/demo/service/EREqualsEPRService.java
 
 ### 2. **`QuantumBridgeController.java`**
 ```java
-backend/src/main/java/com/example/demo/controller/QuantumBridgeController.java
+🖥️ backend/src/main/java/com/example/demo/controller/QuantumBridgeController.java
 ```
 - API REST pour exposer les fonctionnalités ER=EPR
 - Endpoints pour le pistolet quantique de Vince
@@ -51,7 +51,7 @@ GET  /api/quantum-bridge/demo            - Démonstration théorique
 
 ### 3. **`test-quantum-er-epr.sh`**
 ```bash
-scripts/test-quantum-er-epr.sh
+⚙️ scripts/test-quantum-er-epr.sh
 ```
 - Script de test complet du système ER=EPR
 - Tests du pistolet quantique de Vince

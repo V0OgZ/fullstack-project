@@ -190,12 +190,12 @@
 # test-persistence.sh
 
 # 1. Créer une partie
-./scripts/test-vs-ia.sh <<EOF
+./⚙️ scripts/test-vs-ia.sh <<EOF
 1
 EOF
 
 # 2. Jouer quelques tours
-echo "MOV(Jean-Grofignon, @6,6)" | ./scripts/execute-hots-file.sh
+echo "MOV(Jean-Grofignon, @6,6)" | ./⚙️ scripts/execute-hots-file.sh
 
 # 3. Sauvegarder
 ./hots save test-save-1

@@ -28,7 +28,7 @@ Heroes of Time is built with a **modern full-stack architecture** designed for s
 
 ### Backend Structure
 ```
-backend/
+🖥️ backend/
 ├── src/main/java/com/example/demo/
 │   ├── controller/           # REST API Controllers
 │   │   ├── GameController.java
@@ -58,7 +58,7 @@ backend/
 
 ### Frontend Structure
 ```
-frontend/
+🌐 frontend/
 ├── src/
 │   ├── components/          # React Components
 │   │   ├── TrueHeroesInterface.tsx
@@ -75,7 +75,7 @@ frontend/
 │   ├── constants/           # Static Data
 │   │   ├── 🆕 epicCreatures.ts
 │   │   └── 🆕 epicHeroes.ts
-│   └── tests/e2e/           # End-to-End Tests
+│   └── 🧪 tests/e2e/           # End-to-End Tests
 │       ├── gameplay-demo.spec.ts
 │       └── 🆕 epic-content-demo.spec.ts
 ├── public/
@@ -161,7 +161,7 @@ The Epic Content System integrates seamlessly with the main game interface throu
 
 # Manual testing
 cd frontend
-npx playwright test tests/e2e/epic-content-demo.spec.ts --headed
+npx playwright test 🧪 tests/e2e/epic-content-demo.spec.ts --headed
 ```
 
 ## 🔌 API Documentation
@@ -353,15 +353,15 @@ cd backend && mvn clean package -DskipTests
 # Multi-stage build for production
 FROM node:16 AS frontend-build
 WORKDIR /app/frontend
-COPY frontend/package*.json ./
+COPY 🌐 frontend/package*.json ./
 RUN npm install
-COPY frontend/ .
+COPY 🌐 frontend/ .
 RUN npm run build
 
 FROM openjdk:17-jdk-slim
 WORKDIR /app
-COPY backend/target/*.jar app.jar
-COPY --from=frontend-build /app/frontend/build ./static
+COPY 🖥️ backend/target/*.jar app.jar
+COPY --from=frontend-build /app/🌐 frontend/build ./static
 EXPOSE 8080
 CMD ["java", "-jar", "app.jar"]
 ```
@@ -466,7 +466,7 @@ Additionally, responsibility for loading game data was centralized into the top-
 
 ---
 
-For more detailed information, see the individual component documentation in the `docs/` directory. 
+For more detailed information, see the individual component documentation in the `📖 docs/` directory. 
 
 ## 8. WebSocket Communication
 

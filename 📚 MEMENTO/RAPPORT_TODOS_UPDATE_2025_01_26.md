@@ -21,7 +21,7 @@
   - Notification visuelle créée
   - Application immédiate des buffs
 - [x] **Configuration drop tables**
-  - `game_assets/config/drop_tables.json` créé
+  - `🎮 game_assets/config/drop_tables.json` créé
   - Système modulaire et extensible
 
 ### ⚔️ **INTERFACE COMBAT HEXAGONALE**

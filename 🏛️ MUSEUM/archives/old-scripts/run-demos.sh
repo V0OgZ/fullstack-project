@@ -105,8 +105,8 @@ else
 fi
 
 echo ""
-echo -e "${BLUE}📁 Captures d'écran et vidéos sauvegardées dans:${NC} frontend/test-results/"
-echo -e "${BLUE}📄 Rapports détaillés dans:${NC} frontend/test-results/"
+echo -e "${BLUE}📁 Captures d'écran et vidéos sauvegardées dans:${NC} 🌐 frontend/test-results/"
+echo -e "${BLUE}📄 Rapports détaillés dans:${NC} 🌐 frontend/test-results/"
 
 echo ""
 echo -e "${BLUE}💡 Pour lancer les tests automatisés:${NC}"

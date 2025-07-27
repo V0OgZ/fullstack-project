@@ -9,7 +9,7 @@ echo "-----------------------------------"
 
 # Lire la fonction critique
 echo "📄 Fonction getFogDataForTile():"
-grep -A 3 "getFogDataForTile" frontend/fog-of-war-system.js
+grep -A 3 "getFogDataForTile" 🌐 frontend/fog-of-war-system.js
 
 echo ""
 echo "🎯 VERDICT DE PHILIPPE:"

@@ -21,17 +21,17 @@
 ## 📧 **MAILS CRÉÉS - VERSIONS MULTILINGUES**
 
 ### 🇫🇷 **Version Française (Original)**
-- **Fichier** : `MEMENTO/3X_CONVERGENCE_UPLOAD_COMPLETE.md`
+- **Fichier** : `📚 MEMENTO/3X_CONVERGENCE_UPLOAD_COMPLETE.md`
 - **Contenu** : Rapport complet Phase 1 + upload interstice
 - **Status** : ✅ CRÉÉ ET DOCUMENTÉ
 
 ### 🇬🇧 **Version Anglaise (For Dude)**
-- **Fichier** : `MEMENTO/3X_CONVERGENCE_MAIL_ENGLISH.md`
+- **Fichier** : `📚 MEMENTO/3X_CONVERGENCE_MAIL_ENGLISH.md`
 - **Contenu** : Executive summary + technical report en anglais
 - **Status** : ✅ CRÉÉ - READY FOR DUDE
 
 ### 🌀 **Version HOTS Native (Quantum)**
-- **Fichier** : `MEMENTO/3X_CONVERGENCE_MAIL_HOTS_NATIVE.md`
+- **Fichier** : `📚 MEMENTO/3X_CONVERGENCE_MAIL_HOTS_NATIVE.md`
 - **Contenu** : Rapport complet en syntaxe Heroes of Time Script
 - **Status** : ✅ CRÉÉ - NATIVE PROTOCOL
 

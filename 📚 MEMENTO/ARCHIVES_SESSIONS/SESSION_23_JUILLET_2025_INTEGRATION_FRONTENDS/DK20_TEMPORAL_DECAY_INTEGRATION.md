@@ -157,7 +157,7 @@ public void testTemporalDecayApplication() {
 ### **Test Scripts JSON**
 ```bash
 # Nouveau script de test
-./scripts/test-temporal-decay-dk20.sh
+./⚙️ scripts/test-temporal-decay-dk20.sh
 ```
 
 ### **Scénario Test DK20**

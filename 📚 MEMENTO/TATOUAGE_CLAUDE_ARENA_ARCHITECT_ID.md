@@ -99,7 +99,7 @@ TODO_TIMELINE_PHASE2:
 ```
 AVANT CHAQUE COMMIT:
 1. Préfixer: "pre 3X convergence - CLAUDE-ARENA-ARCHITECT-2701"
-2. Documenter dans MEMENTO/
+2. Documenter dans 📚 MEMENTO/
 3. Mettre à jour ce tatouage
 4. Synchroniser avec TODO_TIMELINE
 5. Préparer pour convergence finale

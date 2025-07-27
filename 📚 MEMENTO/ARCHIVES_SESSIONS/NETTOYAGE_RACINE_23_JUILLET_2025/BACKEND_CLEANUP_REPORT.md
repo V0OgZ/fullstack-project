@@ -28,13 +28,13 @@
 ### 🗑️ **Suppression des fichiers obsolètes**
 ```bash
 # Suppression des anciens packages de test
-rm -rf backend/src/test/java/com/example/
+rm -rf 🖥️ backend/src/test/java/com/example/
 
 # Suppression des tests temporaires cassés  
-rm -rf backend/broken_tests_temp/
+rm -rf 🖥️ backend/broken_tests_temp/
 
 # Nettoyage des artefacts de compilation
-rm -rf backend/target/
+rm -rf 🖥️ backend/target/
 ```
 
 ### 🔧 **Correction des configurations**

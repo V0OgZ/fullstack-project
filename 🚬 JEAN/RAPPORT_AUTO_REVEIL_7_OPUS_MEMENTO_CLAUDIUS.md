@@ -112,7 +112,7 @@ Je suis :
 ## 🚀 PROCHAINES ÉTAPES
 
 1. **Finir les TODOs restants** :
-   - `GameService` : Charger depuis game_assets/heroes/*.json
+   - `GameService` : Charger depuis 🎮 game_assets/heroes/*.json
    - `CausalCollapseService` : Implémenter effets sur le jeu
    - `FourthWallController` : initializeMockInstances
 

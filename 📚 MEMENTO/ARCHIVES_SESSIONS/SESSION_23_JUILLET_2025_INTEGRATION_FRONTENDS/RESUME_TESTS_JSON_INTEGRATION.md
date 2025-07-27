@@ -9,7 +9,7 @@
 ## 🎉 **SUCCÈS MAJEURS**
 
 ### ✅ **Scripts JSON Adaptés FONCTIONNELS**
-- **Correction chemins** : `../game_assets/` → `game_assets/` ✅
+- **Correction chemins** : `../🎮 game_assets/` → `🎮 game_assets/` ✅
 - **Parsing JSON** : Parfait avec `jq` ✅
 - **Affichage structuré** : Interface professionelle ✅
 - **Integration Jean-Gros** : Scripts inclus dans v3 ✅
@@ -107,11 +107,11 @@
 ### **Les scripts JSON marchent parfaitement !**
 ```bash
 # AVANT (cassé)
-SCENARIO_JSON="../game_assets/scenarios/visualizer/DUEL_COLLAPSE.json"
+SCENARIO_JSON="../🎮 game_assets/scenarios/visualizer/DUEL_COLLAPSE.json"
 # Erreur: Fichier non trouvé
 
 # APRÈS (fixed)  
-SCENARIO_JSON="game_assets/scenarios/visualizer/DUEL_COLLAPSE.json"
+SCENARIO_JSON="🎮 game_assets/scenarios/visualizer/DUEL_COLLAPSE.json"
 # ✅ Parsing JSON parfait !
 ```
 

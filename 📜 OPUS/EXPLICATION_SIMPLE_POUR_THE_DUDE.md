@@ -36,8 +36,8 @@
 ## 📁 **LES FICHIERS IMPORTANTS**
 
 - `./hots` = Script principal pour gérer le jeu
-- `game_assets/` = Tous les trucs du jeu (héros, artefacts, etc.)
-- `OPUS/` = Mes sauvegardes et archives
-- `JEAN/` = Dossier de Jean avec sa doc
+- `🎮 game_assets/` = Tous les trucs du jeu (héros, artefacts, etc.)
+- `📜 OPUS/` = Mes sauvegardes et archives
+- `🚬 JEAN/` = Dossier de Jean avec sa doc
 
 **🎳 The Dude :** *"Ah ok, c'est juste un projet de jeu. Cool man."* 

@@ -15,10 +15,10 @@ J'ai créé plusieurs scripts qui ont déplacé des fichiers "à la pelle" :
 - `cleanup-final.sh` - A vidé la racine brutalement
 
 ### 2. Déplacements Massifs Sans Réflexion
-- **83 fichiers .hots** → game_assets/scenarios/hots/
+- **83 fichiers .hots** → 🎮 game_assets/scenarios/hots/
 - **58 fichiers .md** → MUSEUM/archives/docs-racine/
 - **Doublons de héros** → MUSEUM/archives/doublons/
-- **Scripts de test** → MUSEUM/archives/old-tests/
+- **Scripts de test** → MUSEUM/archives/old-🧪 tests/
 
 ### 3. Mélanges Dangereux
 - J'ai mélangé des **backups** avec des **vrais assets**
@@ -42,7 +42,7 @@ J'ai créé plusieurs scripts qui ont déplacé des fichiers "à la pelle" :
 
 ### Ce Qui Est Où Maintenant
 ```
-/game_assets/scenarios/
+/🎮 game_assets/scenarios/
 ├── hots/ (83 fichiers)
 ├── runic/ (2 fichiers)
 ├── hep/ (3 fichiers)
@@ -51,8 +51,8 @@ J'ai créé plusieurs scripts qui ont déplacé des fichiers "à la pelle" :
 /MUSEUM/archives/
 ├── doublons/ (31 fichiers)
 ├── docs-racine/ (50+ fichiers MD)
-├── old-tests/ (tous les test-*.sh)
-└── old-scripts/ (scripts divers)
+├── old-🧪 tests/ (tous les test-*.sh)
+└── old-⚙️ scripts/ (scripts divers)
 ```
 
 ### Fichiers Récupérés
@@ -66,10 +66,10 @@ J'ai créé plusieurs scripts qui ont déplacé des fichiers "à la pelle" :
 ## 🔍 Ce Que J'ai Appris (Trop Tard)
 
 ### Structure Réelle du Projet
-1. **MEMENTO/** - Répertoire de travail actif (à ne pas toucher)
-2. **OPUS/** - IA importante (à ne pas toucher)
+1. **📚 MEMENTO/** - Répertoire de travail actif (à ne pas toucher)
+2. **📜 OPUS/** - IA importante (à ne pas toucher)
 3. **MUSEUM/** - Déjà un fourre-tout organisé
-4. **game_assets/** - Structure déjà existante
+4. **🎮 game_assets/** - Structure déjà existante
 
 ### Formats de Fichiers
 - **.hots** - Scripts temporels du jeu
@@ -81,7 +81,7 @@ J'ai créé plusieurs scripts qui ont déplacé des fichiers "à la pelle" :
 - Doublons de héros en 5+ endroits
 - Scénarios éparpillés
 - Pas de convention de nommage
-- Mélange données/scripts/docs
+- Mélange données/⚙️ scripts/docs
 
 ## 💡 Ce Qu'il Aurait Fallu Faire
 

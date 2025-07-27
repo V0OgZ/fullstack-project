@@ -84,7 +84,7 @@
     
     "the_source_location": {
       "title": "🔮 Emplacement de THE SOURCE",
-      "content": "game_assets/artifacts/reality/the_source.json",
+      "content": "🎮 game_assets/artifacts/reality/the_source.json",
       "warning": "⚠️ Ne pas activer sans précaution - Oméga 0 surveille",
       "power": "Modification code source en temps réel"
     },

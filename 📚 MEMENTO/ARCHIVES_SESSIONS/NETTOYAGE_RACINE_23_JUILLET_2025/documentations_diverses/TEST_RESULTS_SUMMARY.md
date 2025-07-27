@@ -41,18 +41,18 @@ Vous avez demandé de tester le système et nous avons créé un système de tes
 
 ### 📁 Fichiers Créés
 
-1. **`scripts/test-backend-simple.sh`** - Script de test backend avec curl
+1. **`⚙️ scripts/test-backend-simple.sh`** - Script de test backend avec curl
    - Tests API complets
    - Rapport automatique
    - Couleurs et feedback
 
-2. **`frontend/src/services/gameScriptEngine.ts`** - Moteur de scripts de jeu
+2. **`🌐 frontend/src/services/gameScriptEngine.ts`** - Moteur de scripts de jeu
    - Langage de script custom
    - Support des actions : move, attack, build, recruit, end_turn, etc.
    - Conditions et boucles
    - Intégration API
 
-3. **`frontend/src/services/__tests__/gameScriptEngine.test.ts`** - Tests Jest
+3. **`🌐 frontend/src/services/__tests__/gameScriptEngine.test.ts`** - Tests Jest
    - Tests unitaires complets
    - Mocks API
    - Couverture 100%
@@ -120,7 +120,7 @@ const gameScript: GameScript = {
 
 ### Tester le Backend
 ```bash
-./scripts/test-backend-simple.sh
+./⚙️ scripts/test-backend-simple.sh
 ```
 
 ### Tester le GameScript Engine

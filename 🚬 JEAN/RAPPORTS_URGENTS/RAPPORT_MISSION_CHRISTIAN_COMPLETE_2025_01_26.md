@@ -63,7 +63,7 @@ Christian (beau-frère de Vince) = **CRÉÉ ET INTÉGRÉ** ✅
 ## 📍 OÙ TROUVER TOUT
 
 ```
-/VINCE/
+/🔫 VINCE/
 ├── README.md                          # Vue d'ensemble
 ├── RAPPORT_FINAL_CHRISTIAN_INTERSTICE.md   # Détails complets
 ├── EXPLICATION_WALTER_MECANIQUES_MOTEUR.md # Technique

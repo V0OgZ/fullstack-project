@@ -86,10 +86,10 @@ MERGE Session integration frontends complete
 #### **1. 🏛️ ARCHIVAGE SESSION**
 ```bash
 # Créer nouveau dossier archive avec date
-mkdir -p MEMENTO/ARCHIVES_SESSIONS/SESSION_[DATE]_[THEME]
+mkdir -p 📚 MEMENTO/ARCHIVES_SESSIONS/SESSION_[DATE]_[THEME]
 
 # Déplacer documents de travail
-mv MEMENTO/CURRENT_SESSION/[old_docs] MEMENTO/ARCHIVES_SESSIONS/SESSION_[DATE]_[THEME]/
+mv 📚 MEMENTO/CURRENT_SESSION/[old_docs] 📚 MEMENTO/ARCHIVES_SESSIONS/SESSION_[DATE]_[THEME]/
 
 # Garder seulement documents actifs dans CURRENT_SESSION
 # Documents permanents: MAP_EVEIL_MEMENTO_INSTRUCTIONS.md, analyses en cours

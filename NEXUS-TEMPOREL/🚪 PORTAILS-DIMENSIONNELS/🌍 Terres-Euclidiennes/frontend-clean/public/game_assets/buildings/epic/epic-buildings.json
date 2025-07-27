@@ -1,0 +1,256 @@
+{
+  "epic_buildings": [
+    {
+      "id": "human_castle",
+      "name": "Château Humain",
+      "race": "Human",
+      "type": "Castle",
+      "imageUrl": "/assets/buildings/human/castle.svg",
+      "iconUrl": "/assets/buildings/human/castle_icon.svg",
+      "description": "Château médiéval avec tours et remparts",
+      "cost": {
+        "wood": 15,
+        "stone": 20,
+        "gold": 1000
+      },
+      "buildTime": 5,
+      "level": 1
+    },
+    {
+      "id": "human_barracks",
+      "name": "Caserne Humaine",
+      "race": "Human",
+      "type": "Military",
+      "imageUrl": "/assets/buildings/human/barracks.svg",
+      "iconUrl": "/assets/buildings/human/barracks_icon.svg",
+      "description": "Caserne pour entraîner les soldats",
+      "cost": {
+        "wood": 10,
+        "stone": 5,
+        "gold": 500
+      },
+      "buildTime": 3,
+      "level": 1
+    },
+    {
+      "id": "human_tower",
+      "name": "Tour de Mage",
+      "race": "Human",
+      "type": "Magic",
+      "imageUrl": "/assets/buildings/human/tower.svg",
+      "iconUrl": "/assets/buildings/human/tower_icon.svg",
+      "description": "Tour mystique pour les sorts",
+      "cost": {
+        "wood": 5,
+        "stone": 15,
+        "gold": 800
+      },
+      "buildTime": 4,
+      "level": 1
+    },
+    {
+      "id": "elf_tree_castle",
+      "name": "Château-Arbre Elfique",
+      "race": "Elf",
+      "type": "Castle",
+      "imageUrl": "/assets/buildings/elf/tree_castle.svg",
+      "iconUrl": "/assets/buildings/elf/tree_castle_icon.svg",
+      "description": "Château vivant dans un arbre géant",
+      "cost": {
+        "wood": 25,
+        "stone": 5,
+        "gold": 1200
+      },
+      "buildTime": 6,
+      "level": 1
+    },
+    {
+      "id": "elf_moonwell",
+      "name": "Puits de Lune",
+      "race": "Elf",
+      "type": "Magic",
+      "imageUrl": "/assets/buildings/elf/moonwell.svg",
+      "iconUrl": "/assets/buildings/elf/moonwell_icon.svg",
+      "description": "Source de magie lunaire",
+      "cost": {
+        "wood": 10,
+        "stone": 10,
+        "gold": 600
+      },
+      "buildTime": 4,
+      "level": 1
+    },
+    {
+      "id": "dwarf_mountain_hall",
+      "name": "Salle des Montagnes",
+      "race": "Dwarf",
+      "type": "Castle",
+      "imageUrl": "/assets/buildings/dwarf/mountain_hall.svg",
+      "iconUrl": "/assets/buildings/dwarf/mountain_hall_icon.svg",
+      "description": "Forteresse creusée dans la roche",
+      "cost": {
+        "wood": 5,
+        "stone": 30,
+        "gold": 1500
+      },
+      "buildTime": 8,
+      "level": 1
+    },
+    {
+      "id": "dwarf_forge",
+      "name": "Grande Forge",
+      "race": "Dwarf",
+      "type": "Production",
+      "imageUrl": "/assets/buildings/dwarf/forge.svg",
+      "iconUrl": "/assets/buildings/dwarf/forge_icon.svg",
+      "description": "Forge légendaire des nains",
+      "cost": {
+        "wood": 8,
+        "stone": 20,
+        "gold": 1000
+      },
+      "buildTime": 5,
+      "level": 1
+    },
+    {
+      "id": "orc_stronghold",
+      "name": "Forteresse Orc",
+      "race": "Orc",
+      "type": "Castle",
+      "imageUrl": "/assets/buildings/orc/stronghold.svg",
+      "iconUrl": "/assets/buildings/orc/stronghold_icon.svg",
+      "description": "Forteresse brutale en os et métal",
+      "cost": {
+        "wood": 20,
+        "stone": 15,
+        "gold": 800
+      },
+      "buildTime": 4,
+      "level": 1
+    },
+    {
+      "id": "orc_pit",
+      "name": "Fosse de Combat",
+      "race": "Orc",
+      "type": "Military",
+      "imageUrl": "/assets/buildings/orc/pit.svg",
+      "iconUrl": "/assets/buildings/orc/pit_icon.svg",
+      "description": "Arène pour entraîner les guerriers",
+      "cost": {
+        "wood": 15,
+        "stone": 10,
+        "gold": 600
+      },
+      "buildTime": 3,
+      "level": 1
+    },
+    {
+      "id": "undead_necropolis",
+      "name": "Nécropole",
+      "race": "Undead",
+      "type": "Castle",
+      "imageUrl": "/assets/buildings/undead/necropolis.svg",
+      "iconUrl": "/assets/buildings/undead/necropolis_icon.svg",
+      "description": "Cité des morts-vivants",
+      "cost": {
+        "wood": 5,
+        "stone": 25,
+        "gold": 1000
+      },
+      "buildTime": 6,
+      "level": 1
+    },
+    {
+      "id": "undead_mausoleum",
+      "name": "Mausolée",
+      "race": "Undead",
+      "type": "Magic",
+      "imageUrl": "/assets/buildings/undead/mausoleum.svg",
+      "iconUrl": "/assets/buildings/undead/mausoleum_icon.svg",
+      "description": "Tombeau des anciens sorciers",
+      "cost": {
+        "wood": 10,
+        "stone": 15,
+        "gold": 700
+      },
+      "buildTime": 4,
+      "level": 1
+    },
+    {
+      "id": "celestial_crystal_spire",
+      "name": "Flèche de Cristal",
+      "race": "Celestial",
+      "type": "Castle",
+      "imageUrl": "/assets/buildings/celestial/crystal_spire.svg",
+      "iconUrl": "/assets/buildings/celestial/crystal_spire_icon.svg",
+      "description": "Tour de cristal céleste",
+      "cost": {
+        "wood": 10,
+        "stone": 20,
+        "gold": 2000
+      },
+      "buildTime": 10,
+      "level": 1
+    },
+    {
+      "id": "celestial_sanctuary",
+      "name": "Sanctuaire",
+      "race": "Celestial",
+      "type": "Magic",
+      "imageUrl": "/assets/buildings/celestial/sanctuary.svg",
+      "iconUrl": "/assets/buildings/celestial/sanctuary_icon.svg",
+      "description": "Sanctuaire de lumière divine",
+      "cost": {
+        "wood": 15,
+        "stone": 15,
+        "gold": 1500
+      },
+      "buildTime": 7,
+      "level": 1
+    }
+  ],
+  "races": [
+    {
+      "id": "human",
+      "name": "Humain",
+      "description": "Civilisation équilibrée avec des structures classiques",
+      "color": "#D2691E",
+      "speciality": "Polyvalence"
+    },
+    {
+      "id": "elf",
+      "name": "Elfe",
+      "description": "Peuple de la nature avec des constructions organiques",
+      "color": "#228B22",
+      "speciality": "Magie naturelle"
+    },
+    {
+      "id": "dwarf",
+      "name": "Nain",
+      "description": "Maîtres artisans avec des forteresses de pierre",
+      "color": "#696969",
+      "speciality": "Artisanat"
+    },
+    {
+      "id": "orc",
+      "name": "Orc",
+      "description": "Guerriers brutaux avec des structures fonctionnelles",
+      "color": "#8B0000",
+      "speciality": "Combat"
+    },
+    {
+      "id": "undead",
+      "name": "Mort-Vivant",
+      "description": "Légions des ténèbres avec des structures morbides",
+      "color": "#2F4F4F",
+      "speciality": "Nécromancie"
+    },
+    {
+      "id": "celestial",
+      "name": "Céleste",
+      "description": "Êtres divins avec des structures cristallines",
+      "color": "#00CED1",
+      "speciality": "Magie divine"
+    }
+  ]
+} 

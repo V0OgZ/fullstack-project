@@ -1,0 +1,87 @@
+{
+  "scenarioId": "temporal-rift",
+  "name": "scenarios.temporal-rift.name",
+  "description": "scenarios.temporal-rift.description",
+  "difficulty": "hard",
+  "maxPlayers": 1,
+  "recommendedPlayers": 1,
+  "mapSize": "large",
+  "mapWidth": 40,
+  "mapHeight": 40,
+  "turnLimit": 300,
+  "timeLimit": null,
+  "victoryCondition": "special",
+  "victoryRequirement": "victory.temporal-rift",
+  "defeatCondition": "defeat.temporal-rift",
+  "isActive": true,
+  "isCampaign": true,
+  "defaultHero": "TRISTAN",
+  "heroConfig": {
+    "heroId": "TRISTAN",
+    "heroName": "Tristan",
+    "heroClass": "Knight",
+    "heroDescription": "Brave knight from another time, skilled in temporal combat",
+    "startingLevel": 3,
+    "startingStats": {
+      "attack": 12,
+      "defense": 10,
+      "spellPower": 4,
+      "knowledge": 5,
+      "health": 120,
+      "mana": 40
+    },
+    "startingSkills": ["Leadership", "Combat", "Time Magic"],
+    "startingSpells": ["Temporal Shield", "Haste"]
+  },
+  "objectives": [
+    {
+      "objectiveId": "obj1",
+      "objectiveType": "special",
+      "objectiveTitle": "objectives.temporal-rift.obj1.title",
+      "objectiveDescription": "objectives.temporal-rift.obj1.description",
+      "targetValue": 1,
+      "isRequired": true
+    },
+    {
+      "objectiveId": "obj2",
+      "objectiveType": "collect",
+      "objectiveTitle": "objectives.temporal-rift.obj2.title",
+      "objectiveDescription": "objectives.temporal-rift.obj2.description",
+      "targetValue": 3,
+      "isRequired": true
+    }
+  ],
+  "startingPositions": [
+    {
+      "playerId": "player1",
+      "positionX": 20,
+      "positionY": 20,
+      "castleType": "temporal_fortress",
+      "startingHero": "TRISTAN"
+    }
+  ],
+  "specialRules": [
+    {
+      "ruleId": "temporal_zones",
+      "ruleName": "Temporal Zones",
+      "ruleDescription": "Certain areas of the map have temporal distortions that affect movement and combat",
+      "isActive": true
+    },
+    {
+      "ruleId": "time_crystals",
+      "ruleName": "Time Crystals",
+      "ruleDescription": "Collect time crystals to power temporal abilities",
+      "isActive": true
+    }
+  ],
+  "events": [
+    {
+      "eventId": "temporal_storm",
+      "eventName": "Temporal Storm",
+      "eventDescription": "A temporal storm affects the battlefield",
+      "triggerTurn": 50,
+      "isRepeating": true,
+      "repeatInterval": 25
+    }
+  ]
+} 

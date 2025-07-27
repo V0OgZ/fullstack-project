@@ -68,7 +68,7 @@ frontend-quantum-lab/
 │   │   │   ├── CausalHorizon.tsx     # ⚫ Horizon causal
 │   │   │   ├── FluxTick.tsx          # ⏰ Relativité flux
 │   │   │   └── Schrodinger.tsx       # 🐱 Schrödinger
-│   │   └── GRUT/
+│   │   └── 👁️ GRUT/
 │   │       ├── Panopticon.tsx        # 👁️ Vision omnisciente
 │   │       └── OntologyGame.tsx      # 🧠 Passage ontologique
 │   ├── ai-opponent/
@@ -436,11 +436,11 @@ frontend-quantum-lab/
 │   ├── services/                # Services API
 │   ├── store/                   # État global Zustand
 │   └── utils/                   # Utilitaires quantiques
-├── tests/
+├── 🧪 tests/
 │   ├── quantum/                 # Tests physique
 │   ├── ai/                      # Tests IA
 │   └── grut/                    # Tests ontologiques
-└── docs/
+└── 📖 docs/
     ├── QUANTUM_GUIDE.md         # Guide quantique
     ├── AI_DOCUMENTATION.md      # Doc IA
     └── GRUT_ONTOLOGY.md         # Ontologie GRUT

@@ -8,7 +8,7 @@
 echo "🗺️ Downloading David Gervais Hex Tileset..."
 
 # Create directories
-mkdir -p frontend/public/assets/terrain/{grass,forest,water,desert,mountain,swamp}
+mkdir -p 🌐 frontend/public/assets/terrain/{grass,forest,water,desert,mountain,swamp}
 
 # Download the tileset (you'll need to adjust the URL when you have the actual download link)
 echo "📥 Please download the tileset manually from:"
@@ -23,28 +23,28 @@ if [ -d "temp_tileset" ]; then
     
     # Organize grass tiles
     echo "🌱 Organizing grass tiles..."
-    mkdir -p frontend/public/assets/terrain/grass
+    mkdir -p 🌐 frontend/public/assets/terrain/grass
     # You'll need to manually copy the appropriate tiles here
     
     # Organize forest tiles
     echo "🌲 Organizing forest tiles..."
-    mkdir -p frontend/public/assets/terrain/forest
+    mkdir -p 🌐 frontend/public/assets/terrain/forest
     
     # Organize water tiles
     echo "🌊 Organizing water tiles..."
-    mkdir -p frontend/public/assets/terrain/water
+    mkdir -p 🌐 frontend/public/assets/terrain/water
     
     # Organize desert tiles
     echo "🏜️ Organizing desert tiles..."
-    mkdir -p frontend/public/assets/terrain/desert
+    mkdir -p 🌐 frontend/public/assets/terrain/desert
     
     # Organize mountain tiles
     echo "⛰️ Organizing mountain tiles..."
-    mkdir -p frontend/public/assets/terrain/mountain
+    mkdir -p 🌐 frontend/public/assets/terrain/mountain
     
     # Organize swamp tiles
     echo "🐸 Organizing swamp tiles..."
-    mkdir -p frontend/public/assets/terrain/swamp
+    mkdir -p 🌐 frontend/public/assets/terrain/swamp
     
     echo "✅ Tileset organized successfully!"
 else
@@ -53,7 +53,7 @@ else
     echo "1. Download tileset from: https://opengameart.org/content/hexagon-tileset"
     echo "2. Extract to temp_tileset/ directory"
     echo "3. Manually organize tiles according to structure in:"
-    echo "   frontend/public/assets/terrain/README.md"
+    echo "   🌐 frontend/public/assets/terrain/README.md"
     echo ""
     echo "📋 Expected structure:"
     echo "assets/terrain/"

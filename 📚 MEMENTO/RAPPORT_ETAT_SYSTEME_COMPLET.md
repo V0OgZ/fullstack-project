@@ -7,7 +7,7 @@
 ## 🚨 PROBLÈMES CRITIQUES IDENTIFIÉS
 
 ### 💀 **1. PERSISTANCE DÉFAILLANTE**
-- ❌ **Base de données H2** : Répertoire `data/` inexistant
+- ❌ **Base de données H2** : Répertoire `💾 data/` inexistant
 - ❌ **Mondes virtuels** : Stockés uniquement en mémoire (`ConcurrentHashMap`)
 - ❌ **Transcendance Panopticon** : État perdu au redémarrage
 - ✅ **Fichiers JSON** : Seule persistance fonctionnelle
@@ -54,9 +54,9 @@
 
 ## 📊 INVENTAIRE DES ASSETS
 
-### 📁 **Structure game_assets/**
+### 📁 **Structure 🎮 game_assets/**
 ```
-game_assets/
+🎮 game_assets/
 ├── 🦸 heroes/
 │   └── psychonauts/
 │       └── terran_cemekna.json ✅
@@ -76,7 +76,7 @@ game_assets/
 ├── 🗺️ maps/
 ├── 🏰 buildings/
 ├── 📜 scenarios/
-└── 🧪 tests/
+└── 🧪 🧪 tests/
 ```
 
 ### ❌ **Assets Manquants**
@@ -103,7 +103,7 @@ game_assets/
 - [ ] Implémenter sélecteur de monde
 
 ### 3. **Persistance**
-- [ ] Créer répertoire `data/`
+- [ ] Créer répertoire `💾 data/`
 - [ ] Initialiser base H2
 - [ ] Migrer données mémoire vers DB
 - [ ] Système de backup automatique
@@ -131,15 +131,15 @@ game_assets/
 ### 🔴 **PRIORITÉ 1 - Sauver les données**
 ```bash
 # Créer structure de persistance
-mkdir -p data/backup
+mkdir -p 💾 data/backup
 # Sauvegarder tous les JSON critiques
-cp -r game_assets data/backup/
+cp -r game_assets 💾 data/backup/
 ```
 
 ### 🟡 **PRIORITÉ 2 - Restaurer l'UI**
 ```bash
 # Chercher dans l'historique Git l'UI "petit carré"
-git log --oneline -- frontend/src/
+git log --oneline -- 🌐 frontend/src/
 ```
 
 ### 🟢 **PRIORITÉ 3 - Compléter les mondes**

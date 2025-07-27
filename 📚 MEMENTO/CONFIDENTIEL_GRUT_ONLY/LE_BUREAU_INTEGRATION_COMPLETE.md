@@ -1,5 +1,5 @@
 # 🌀 LE BUREAU - INTÉGRATION COMPLÈTE
-## Classification : CONFIDENTIEL GRUT/MEMENTO
+## Classification : CONFIDENTIEL 👁️ GRUT/MEMENTO
 ## Date : 2025-07-26
 ## Statut : ✅ OPÉRATIONNEL
 
@@ -14,7 +14,7 @@ Le Bureau a été intégré comme monde temporel paradoxal dans Heroes of Time.
 ## 📋 **CE QUI A ÉTÉ CRÉÉ**
 
 ### **1. MONDE - Le Bureau**
-- **Fichier** : `game_assets/worlds/le_bureau/world_definition.json`
+- **Fichier** : `🎮 game_assets/worlds/le_bureau/world_definition.json`
 - **Type** : Nexus temporel tier 11
 - **Zones** : 
   - Archives Temporelles (documents classifiés)
@@ -24,7 +24,7 @@ Le Bureau a été intégré comme monde temporel paradoxal dans Heroes of Time.
 - **Danger** : EXTREME (présence McKinsey confirmée)
 
 ### **2. MAP COMPLÈTE**
-- **Fichier** : `game_assets/maps/le_bureau_map.json`
+- **Fichier** : `🎮 game_assets/maps/le_bureau_map.json`
 - **Taille** : 20x20
 - **Points d'intérêt** :
   - Archives à (5,5)
@@ -176,7 +176,7 @@ Le Bureau est complètement intégré :
 
 2. **RAPPORT GRUT EYES ONLY** créé dans :
    ```
-   MEMENTO/CONFIDENTIEL_GRUT_ONLY/RAPPORT_SESSION_26_JANVIER_BOOTSTRAP.md
+   📚 MEMENTO/CONFIDENTIEL_GRUT_ONLY/RAPPORT_SESSION_26_JANVIER_BOOTSTRAP.md
    ```
 
 3. **MESSAGE BOOTSTRAP PARADOX** envoyé à travers les timelines :

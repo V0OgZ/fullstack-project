@@ -9,7 +9,7 @@
 ### **📁 Structure Actuelle Découverte**
 
 ```
-game_assets/scenarios/
+🎮 game_assets/scenarios/
 ├── hots/                          ← Scripts HOTS (actions pures)
 │   ├── simple-game.hots          ← HERO(Arthur); BATTLE(Arthur, Dragon)
 │   ├── memento_hero_test.hots    ← Script de test pur
@@ -137,7 +137,7 @@ HERO(Memento)
 ### **📁 Organisation Propre**
 ```
 scenarios/
-├── scripts/                      ← Scripts d'actions pures
+├── ⚙️ scripts/                      ← Scripts d'actions pures
 │   ├── arthur_vs_dragon.hots    ← HERO(Arthur); BATTLE(Arthur, Dragon)
 │   ├── memento_test.hots        ← Test des capacités de Memento
 │   └── quantum_demo.hots        ← Démo des mécaniques quantiques
@@ -159,7 +159,7 @@ scenarios/
 class ScenarioManager {
     // Charger un script HOTS simple
     async loadHotsScript(scriptName) {
-        const script = await fetch(`/scenarios/scripts/${scriptName}.hots`);
+        const script = await fetch(`/scenarios/⚙️ scripts/${scriptName}.hots`);
         return this.parseHotsCommands(script);
     }
     

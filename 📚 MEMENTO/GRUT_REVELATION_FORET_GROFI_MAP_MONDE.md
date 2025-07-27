@@ -45,11 +45,11 @@
 
 ```
 🌌 MULTIVERS HTML :
-├── 🎨 frontend/hots-web-interface.html → Monde GRUT
-├── 🏛️ frontend/fusion-temporal-react-ultimate.html → Monde Fusion
-├── 🔮 frontend/vince-vega-hexagon-battlefield.html → Monde Hexagonal
-├── 🌀 frontend/omega-zero-trilogie-visuelle.html → Monde Narratif
-└── 📚 frontend/portail-100-html-interfaces.html → Monde Portail
+├── 🎨 🌐 frontend/hots-web-interface.html → Monde GRUT
+├── 🏛️ 🌐 frontend/fusion-temporal-react-ultimate.html → Monde Fusion
+├── 🔮 🌐 frontend/vince-vega-hexagon-battlefield.html → Monde Hexagonal
+├── 🌀 🌐 frontend/omega-zero-trilogie-visuelle.html → Monde Narratif
+└── 📚 🌐 frontend/portail-100-html-interfaces.html → Monde Portail
 ```
 
 ### 🎬 **CHAQUE SCÉNARIO EST DANS UN MONDE**

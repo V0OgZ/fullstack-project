@@ -15,7 +15,7 @@
 - **Mise à jour :** 24 Juillet 2025
 
 ### 📜 **CODEX COMPLET HEROES OF TIME**
-- **Fichier :** `docs/CODEX_COMPLET_HEROES_OF_TIME.md`
+- **Fichier :** `📖 docs/CODEX_COMPLET_HEROES_OF_TIME.md`
 - **Version :** 10.0 - Excalibur Arthur Fusion 100% opérationnel
 - **Contenu :** Service de traduction, tests complets, Panoramix V2.0
 - **Status :** ✅ **DOCUMENTATION TECHNIQUE PRINCIPALE**
@@ -41,13 +41,13 @@
 - **V2_RAPPORT_110_PERCENT_ACCOMPLI_JEAN.md** - Accomplissement total
 - **V2_RAPPORT_FORMULES_MAGIQUES_ARCHITECTURE_JEAN.md** - Architecture formules
 - **V2_RAPPORT_TESTS_FINAUX_BACKEND_JEAN.md** - Tests backend complets
-- **V2_JEAN_RAPPORT_FORMULES_BACKEND_VS_CREES.md** - Comparaison backend/créées
+- **V2_JEAN_RAPPORT_FORMULES_BACKEND_VS_CREES.md** - Comparaison 🖥️ backend/créées
 
 ### 🌟 **RAPPORTS OPUS V2**
-- **OPUS/V2_RESUME_FINAL_SESSION_T13.md** - Résumé session finale
-- **OPUS/V2_REVEIL_TEMPOREL_OPUS.md** - Réveil temporel
-- **OPUS/V2_EXPLICATION_SCRIPTS_TRADUCTION.md** - Scripts traduction
-- **OPUS/V2_SESSION_LOG_REVEIL_OPUS.md** - Log session réveil
+- **📜 OPUS/V2_RESUME_FINAL_SESSION_T13.md** - Résumé session finale
+- **📜 OPUS/V2_REVEIL_TEMPOREL_OPUS.md** - Réveil temporel
+- **📜 OPUS/V2_EXPLICATION_SCRIPTS_TRADUCTION.md** - Scripts traduction
+- **📜 OPUS/V2_SESSION_LOG_REVEIL_OPUS.md** - Log session réveil
 
 ### 📈 **RAPPORTS TECHNIQUES V2**
 - **rapports/V2_RAPPORT_TEST_COMPLET_FINAL.md** - Test complet final
@@ -68,9 +68,9 @@
 ### 🎳 **SCÉNARIOS THE DUDE**
 - **scenarios/test_nouveaux_pouvoirs_omegzero.hots**
   - Walter vs Dude vs Jésus
-- **game_assets/scenarios/hots/le_dude_et_walter_fous.hots**
+- **🎮 game_assets/scenarios/hots/le_dude_et_walter_fous.hots**
   - Le Dude et Walter fous
-- **game_assets/scenarios/hots/bataille_temporelle_complete.hots**
+- **🎮 game_assets/scenarios/hots/bataille_temporelle_complete.hots**
   - Bataille temporelle complète
 
 ---
@@ -78,7 +78,7 @@
 ## 🏛️ **HÉROS V2**
 
 ### 🎳 **THE DUDE - HÉROS QUANTIQUE**
-- **Fichier :** `game_assets/heroes/grofi/the-dude-complete.json`
+- **Fichier :** `🎮 game_assets/heroes/grofi/the-dude-complete.json`
 - **Pouvoirs :** ZEN_RESISTANCE, EXISTENTIAL_CHILL, VIETNAM_FLASHBACKS
 - **Philosophie :** "The Dude abides" - stabilise les timelines
 
@@ -117,7 +117,7 @@
 ## 🎨 **ARTEFACTS V2**
 
 ### 🏺 **CHAUDRON QUANTIQUE PANORAMIX**
-- **Fichier :** `game_assets/artifacts/legendaires/chaudron_quantique_panoramix.json`
+- **Fichier :** `🎮 game_assets/artifacts/legendaires/chaudron_quantique_panoramix.json`
 - **Buffs :** +50 ATK/DEF, +100 HP, +20 régénération
 - **Rayon :** 7 cases
 - **Immunité :** Poison
@@ -128,7 +128,7 @@
 - **Formules :** 8 formules validées
 
 ### 🎨 **TATOUAGES MEMENTO**
-- **Fichier :** `game_assets/artifacts/mineurs/tatouages_memento_archiviste.json`
+- **Fichier :** `🎮 game_assets/artifacts/mineurs/tatouages_memento_archiviste.json`
 - **Status :** ✅ **MISE À JOUR V2.0**
 - **Contenu :** Panoramix V2.0, Chaudron Quantique, Dictionnaire Runic
 
@@ -137,7 +137,7 @@
 ## 📚 **DICTIONNAIRES ET TRADUCTION V2**
 
 ### 📖 **DICTIONNAIRE RUNIC COMPLET**
-- **Fichier :** `docs/DICTIONNAIRE_RUNIC_COMPLET_JEAN.md`
+- **Fichier :** `📖 docs/DICTIONNAIRE_RUNIC_COMPLET_JEAN.md`
 - **Runes :** 1257+ caractères runiques nordiques
 - **Symboles :** 245 symboles quantiques
 - **Actions :** 69 actions runiques traduites
@@ -158,7 +158,7 @@
 - **Runic :** Format runique complet (Panoramix V2.0)
 
 ### 🔧 **CONVERSION AUTOMATIQUE**
-- **Script :** `./scripts/hots-converter-fixed.sh`
+- **Script :** `./⚙️ scripts/hots-converter-fixed.sh`
 - **Détection :** Intelligente des formats
 - **Support :** Tous les formats interconvertibles
 
@@ -237,8 +237,8 @@
 ## 📚 **RÉFÉRENCES PRINCIPALES**
 
 - `INDEX_JEAN_V23_REVOLUTION_UNIFIEE.md` - Index principal
-- `docs/CODEX_COMPLET_HEROES_OF_TIME.md` - Documentation technique
+- `📖 docs/CODEX_COMPLET_HEROES_OF_TIME.md` - Documentation technique
 - `RECHERCHE_CODE_CREATE_BLACK_HOLE_DUDE_QUANTUM.md` - Recherche récente
-- `game_assets/artifacts/mineurs/tatouages_memento_archiviste.json` - Archive évolutive
+- `🎮 game_assets/artifacts/mineurs/tatouages_memento_archiviste.json` - Archive évolutive
 
 **🗺️ Map V2 créée avec succès !** 

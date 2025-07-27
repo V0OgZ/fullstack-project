@@ -8,12 +8,12 @@ Le système de héros a été complètement refactorisé pour unifier les portra
 
 ### 1. 🎨 Système de Couleurs de Joueur
 - **8 couleurs disponibles** : Rouge, Bleu, Vert, Jaune, Violet, Orange, Cyan, Rose
-- **Configuration centralisée** dans `frontend/src/constants/playerColors.ts`
+- **Configuration centralisée** dans `🌐 frontend/src/constants/playerColors.ts`
 - **Couleurs cohérentes** pour drapeaux, bordures et highlights
 - **Fonctions utilitaires** pour obtenir couleurs aléatoires et rotation
 
 ### 2. 🖼️ Système de Portraits Unifié
-- **Service centralisé** : `frontend/src/services/heroSpriteService.ts`
+- **Service centralisé** : `🌐 frontend/src/services/heroSpriteService.ts`
 - **Portraits SVG** pour les héros principaux (Arthur, Morgana, Tristan, Elara)
 - **Fallbacks PNG** pour les classes génériques
 - **Cache d'images** avec gestion des erreurs
@@ -40,7 +40,7 @@ Le système de héros a été complètement refactorisé pour unifier les portra
 - **Niveau du héros** affiché en dessous
 
 ### 6. 📊 Données de Héros Structurées
-- **Fichier de données** : `frontend/src/data/heroes.ts`
+- **Fichier de données** : `🌐 frontend/src/💾 data/heroes.ts`
 - **Propriétés étendues** : `playerColor`, `portraitId`, `mountType`, `flagColor`
 - **Héros principaux** avec statistiques complètes
 - **Classes génériques** pour fallback
@@ -56,11 +56,11 @@ Le système de héros a été complètement refactorisé pour unifier les portra
 ## 🗂️ Structure des Fichiers
 
 ```
-frontend/src/
+🌐 frontend/src/
 ├── types/game.ts                    # Types étendus pour héros
 ├── constants/playerColors.ts        # Configuration des couleurs
 ├── services/heroSpriteService.ts    # Service unifié des sprites
-├── data/heroes.ts                   # Données des héros
+├── 💾 data/heroes.ts                   # Données des héros
 ├── components/
 │   ├── ModernGameRenderer.tsx       # Rendu unifié sur carte
 │   ├── TrueHeroesInterface.tsx      # Interface mise à jour

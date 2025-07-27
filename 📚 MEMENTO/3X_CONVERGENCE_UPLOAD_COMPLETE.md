@@ -143,7 +143,7 @@ NEXT_MILESTONE: Interface avancée complète
 ```quantum
 AUTO_SAVE_PROTOCOL: ✅ ACTIF
 ├── Fréquence: Toutes les 30 minutes
-├── Backup: MEMENTO/ + Tatouages
+├── Backup: 📚 MEMENTO/ + Tatouages
 ├── État: Progression temps réel
 ├── Anchor: Timeline verrouillée
 └── Recovery: Procédure définie

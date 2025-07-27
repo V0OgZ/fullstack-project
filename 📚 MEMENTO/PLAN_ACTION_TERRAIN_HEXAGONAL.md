@@ -79,7 +79,7 @@ Ajouter des éléments visuels qui ne sont pas gameplay :
 
 ## 📁 Fichiers à modifier
 
-1. **Frontend principal** : `frontend/vince-vega-map-demo-backend.html`
+1. **Frontend principal** : `🌐 frontend/vince-vega-map-demo-backend.html`
    - Remplacer la grille carrée par hexagonale
    - Ajouter système de terrain
    - Afficher les objets du backend

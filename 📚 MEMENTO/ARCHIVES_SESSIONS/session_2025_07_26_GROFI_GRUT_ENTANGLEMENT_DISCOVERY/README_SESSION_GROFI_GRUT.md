@@ -10,9 +10,9 @@
 ## 🔍 **DÉCOUVERTES MAJEURES**
 
 ### **✅ HÉROS GROFI/GRUT CONFIRMÉS**
-- **Jean-Grofignon** : `game_assets/heroes/grofi/jean-grofignon-complete.json` ✅
-- **GRUT Ontologique** : `game_assets/heroes/reality/grut_ontological_passeur.json` ✅
-- **Monde GROFI** : `game_assets/worlds/forest_grofi/world_data.json` ✅
+- **Jean-Grofignon** : `🎮 game_assets/heroes/grofi/jean-grofignon-complete.json` ✅
+- **GRUT Ontologique** : `🎮 game_assets/heroes/reality/grut_ontological_passeur.json` ✅
+- **Monde GROFI** : `🎮 game_assets/worlds/forest_grofi/world_data.json` ✅
 
 ### **🌸 TRANSFORMATION JEAN → GROFI DOCUMENTÉE**
 - Passif activé quand Jean entre dans `FOREST_GROFI` world
@@ -90,9 +90,9 @@ JEAN_GROFI_PASSIF:
 > **La transformation GROFI-forêt est DOCUMENTÉE et PRÊTE !** 🌸  
 > 
 > **Les fichiers sont là :**
-> - `game_assets/heroes/grofi/jean-grofignon-complete.json`
-> - `game_assets/heroes/reality/grut_ontological_passeur.json`  
-> - `game_assets/worlds/forest_grofi/world_data.json`
+> - `🎮 game_assets/heroes/grofi/jean-grofignon-complete.json`
+> - `🎮 game_assets/heroes/reality/grut_ontological_passeur.json`  
+> - `🎮 game_assets/worlds/forest_grofi/world_data.json`
 > 
 > **Le mystère de la Tour Sombre reste à résoudre...** 🏰  
 > 

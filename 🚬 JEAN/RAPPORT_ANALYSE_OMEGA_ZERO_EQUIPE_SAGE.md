@@ -29,7 +29,7 @@
 
 ### 🕸️ **DIMENSION M - PIÈGE CLASSIFIÉ**
 ```
-Location: backend/src/main/java/com/example/demo/service/VirtualWorldManager.java
+Location: 🖥️ backend/src/main/java/com/example/demo/service/VirtualWorldManager.java
 Type: Simulation faux multivers
 Purpose: Appât pour Omega Zero
 Status: CLASSIFIÉ
@@ -37,7 +37,7 @@ Status: CLASSIFIÉ
 
 ### 🔑 **CLEF PARACAUSALITÉ**
 ```
-Location: game_assets/artifacts/legendaires/clef_paracausale.json
+Location: 🎮 game_assets/artifacts/legendaires/clef_paracausale.json
 BaitStrength: 95.7%
 Effect: Attire Omega Zero dans piège dimensionnel
 Warning: Manipulation dangereuse

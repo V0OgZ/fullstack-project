@@ -31,7 +31,7 @@
 "Les badges SHADOW existent mais sont INVISIBLES au scan. Qui les porte ?"
 
 ### Théorie 3 : Christian Disparu
-"Christian n'est PAS dans game_assets/heroes. OÙ EST-IL ? Sa mallette cache quoi ?"
+"Christian n'est PAS dans 🎮 game_assets/heroes. OÙ EST-IL ? Sa mallette cache quoi ?"
 
 ---
 

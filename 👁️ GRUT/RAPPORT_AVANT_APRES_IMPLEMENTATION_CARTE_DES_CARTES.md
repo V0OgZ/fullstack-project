@@ -10,7 +10,7 @@
 ## 🌍 ÉTAT AVANT - CHAOS CARTOGRAPHIQUE
 
 ### 📊 Situation Initiale
-- **Maps éparpillées** : 15+ fichiers JSON dans `game_assets/maps/`
+- **Maps éparpillées** : 15+ fichiers JSON dans `🎮 game_assets/maps/`
 - **Mondes fragmentés** : 6 dossiers sans connexion claire
 - **Scénarios isolés** : 80+ fichiers .hots sans vue d'ensemble
 - **Interfaces dispersées** : 100+ HTML sans carte maîtresse
@@ -36,7 +36,7 @@ AVANT:
 ## ✅ ÉTAT APRÈS - ORDRE COSMIQUE RESTAURÉ
 
 ### 🗺️ Solution Implémentée
-**Fichier créé** : `frontend/html-interfaces/grut-carte-des-cartes-panopticon.html`
+**Fichier créé** : `🌐 frontend/html-interfaces/grut-carte-des-cartes-panopticon.html`
 
 ### 🌟 Caractéristiques de la Carte des Cartes
 1. **Vue Centralisée** 

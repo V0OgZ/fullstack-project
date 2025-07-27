@@ -134,11 +134,11 @@
 
 ## 📁 **FICHIERS CRÉÉS:**
 
-1. `MEMENTO/CURRENT_SESSION/API_ENDPOINTS_VERIFICATION_WALTER.md`
+1. `📚 MEMENTO/CURRENT_SESSION/API_ENDPOINTS_VERIFICATION_WALTER.md`
 2. `test-verification-vrais-resultats.sh`
 3. `scenarios/laboratoire_debutant_walter.hots`
 4. `test-scenario-laboratoire-walter.sh`
-5. `MEMENTO/CURRENT_SESSION/WALTER_MISSION_ACCOMPLISHED.md`
+5. `📚 MEMENTO/CURRENT_SESSION/WALTER_MISSION_ACCOMPLISHED.md`
 
 ---
 

@@ -46,7 +46,7 @@ chmod +x download-magic-items.sh
 
 ## 📁 Structure des Assets (si téléchargés)
 ```
-frontend/public/assets/objects/
+🌐 frontend/public/assets/objects/
 ├── swords/         # Épées
 ├── shields/        # Boucliers
 ├── rings/          # Anneaux

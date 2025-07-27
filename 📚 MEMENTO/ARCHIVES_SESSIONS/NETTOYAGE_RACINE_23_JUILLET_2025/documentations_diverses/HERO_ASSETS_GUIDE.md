@@ -30,14 +30,14 @@ Your game already has:
 ./download-hero-assets.sh
 
 # Organize downloaded assets
-frontend/public/assets/heroes/sprites/     # For map movement
-frontend/public/assets/heroes/portraits/   # For UI portraits
-frontend/public/assets/heroes/animations/  # For combat animations
+🌐 frontend/public/assets/heroes/sprites/     # For map movement
+🌐 frontend/public/assets/heroes/portraits/   # For UI portraits
+🌐 frontend/public/assets/heroes/animations/  # For combat animations
 ```
 
 ### 2. **Update gameAssets.ts**
 ```typescript
-// Add to frontend/src/constants/gameAssets.ts
+// Add to 🌐 frontend/src/constants/gameAssets.ts
 export const HERO_SPRITES = {
   WARRIOR: '/assets/heroes/sprites/warrior_sprite.png',
   MAGE: '/assets/heroes/sprites/mage_sprite.png',
@@ -151,7 +151,7 @@ const getHeroImage = (heroType: string): string => {
 ./download-hero-assets.sh
 
 # 2. Download Classic Hero Pack from the URLs shown
-# 3. Extract to frontend/public/assets/heroes/sprites/
+# 3. Extract to 🌐 frontend/public/assets/heroes/sprites/
 # 4. Update gameAssets.ts with new paths
 # 5. Implement hero movement with real graphics!
 ```

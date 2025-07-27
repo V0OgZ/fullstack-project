@@ -15,7 +15,7 @@
 > *"ATTNETION DES ASEET ON BOUGER ET TOUT A CHAGNER IL FAUDRA REPARE APRES PERD RIEN"*
 
 **🔍 TRADUCTION URGENTE :**
-- **Assets déplacés** : Changements structurels dans `game_assets/`
+- **Assets déplacés** : Changements structurels dans `🎮 game_assets/`
 - **Tout a changé** : Réorganisation majeure en cours
 - **Réparation nécessaire** : Intervention post-changements
 - **IMPÉRATIF** : **NE RIEN PERDRE** !
@@ -27,20 +27,20 @@
 ### **🛡️ ASSETS CRITIQUES À PROTÉGER :**
 
 #### **🌸 GROFI/GRUT ESSENTIELS :**
-- ✅ `game_assets/heroes/grofi/jean-grofignon-complete.json`
-- ✅ `game_assets/heroes/reality/grut_ontological_passeur.json`  
-- ✅ `game_assets/worlds/forest_grofi/world_data.json`
-- ✅ `game_assets/artifacts/mineurs/tatouages_memento_archiviste.json`
+- ✅ `🎮 game_assets/heroes/grofi/jean-grofignon-complete.json`
+- ✅ `🎮 game_assets/heroes/reality/grut_ontological_passeur.json`  
+- ✅ `🎮 game_assets/worlds/forest_grofi/world_data.json`
+- ✅ `🎮 game_assets/artifacts/mineurs/tatouages_memento_archiviste.json`
 
 #### **🔫 VINCE VEGA SYSTÈME :**
-- ✅ `game_assets/heroes/quatrieme_mur/vince_vega_errant.json`
-- ✅ `game_assets/heroes/quatrieme_mur/vince_vega_cotes_causales.json`
-- ✅ `frontend/vince-vega-map-demo-backend.html` (V11 Hybrid)
-- ✅ `frontend/vince-vega-hexagon-battlefield-fixed.html`
+- ✅ `🎮 game_assets/heroes/quatrieme_mur/vince_vega_errant.json`
+- ✅ `🎮 game_assets/heroes/quatrieme_mur/vince_vega_cotes_causales.json`
+- ✅ `🌐 frontend/vince-vega-map-demo-backend.html` (V11 Hybrid)
+- ✅ `🌐 frontend/vince-vega-hexagon-battlefield-fixed.html`
 
 #### **📚 ARCHIVES BOOTSTRAP :**  
-- ✅ `MEMENTO/ARCHIVES_SESSIONS/session_2025_07_26_GROFI_GRUT_ENTANGLEMENT_DISCOVERY/`
-- ✅ `MEMENTO/CONVERGANCE_TEMPORELLE_CONCEPT.md`
+- ✅ `📚 MEMENTO/ARCHIVES_SESSIONS/session_2025_07_26_GROFI_GRUT_ENTANGLEMENT_DISCOVERY/`
+- ✅ `📚 MEMENTO/CONVERGANCE_TEMPORELLE_CONCEPT.md`
 - ✅ Archives OPUS-MEMENTO fusion complètes
 
 ---

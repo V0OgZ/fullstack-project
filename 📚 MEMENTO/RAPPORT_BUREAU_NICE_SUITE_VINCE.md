@@ -163,8 +163,8 @@
 
 ```bash
 # Créer la structure complète
-mkdir -p game_assets/artifacts/bureau
-mkdir -p game_assets/maps/bureau_zones
+mkdir -p 🎮 game_assets/artifacts/bureau
+mkdir -p 🎮 game_assets/maps/bureau_zones
 
 # Artefacts à créer
 - machine_cafe_quantique.json

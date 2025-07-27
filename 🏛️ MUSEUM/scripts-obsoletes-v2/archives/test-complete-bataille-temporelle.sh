@@ -67,8 +67,8 @@ log $CYAN "📁 Structure des répertoires:"
 [ -d "test/artefacts" ] && log $GREEN "✅ test/artefacts/" || log $RED "❌ test/artefacts/"
 [ -d "test/artefacts/scenarios" ] && log $GREEN "✅ test/artefacts/scenarios/" || log $RED "❌ test/artefacts/scenarios/"
 [ -d "test/artefacts/objects" ] && log $GREEN "✅ test/artefacts/objects/" || log $RED "❌ test/artefacts/objects/"
-[ -d "test/artefacts/scripts" ] && log $GREEN "✅ test/artefacts/scripts/" || log $RED "❌ test/artefacts/scripts/"
-[ -d "backend/src/test/java" ] && log $GREEN "✅ backend/src/test/java/" || log $RED "❌ backend/src/test/java/"
+[ -d "test/artefacts/scripts" ] && log $GREEN "✅ test/artefacts/⚙️ scripts/" || log $RED "❌ test/artefacts/⚙️ scripts/"
+[ -d "🖥️ backend/src/test/java" ] && log $GREEN "✅ 🖥️ backend/src/test/java/" || log $RED "❌ 🖥️ backend/src/test/java/"
 echo ""
 
 # Vérification des fichiers principaux
@@ -101,30 +101,30 @@ echo ""
 
 # Scripts .hots
 log $YELLOW "📜 SCRIPTS TEMPORELS (.hots):"
-check_file "test/artefacts/scripts/bataille_temporelle_setup.hots" "Phase 1: Setup"
-if [ -f "test/artefacts/scripts/bataille_temporelle_setup.hots" ]; then
-    lines=$(count_lines "test/artefacts/scripts/bataille_temporelle_setup.hots")
+check_file "test/artefacts/⚙️ scripts/bataille_temporelle_setup.hots" "Phase 1: Setup"
+if [ -f "test/artefacts/⚙️ scripts/bataille_temporelle_setup.hots" ]; then
+    lines=$(count_lines "test/artefacts/⚙️ scripts/bataille_temporelle_setup.hots")
     log $GREEN "   └── $lines lignes (23 commandes de setup)"
 fi
 
-check_file "test/artefacts/scripts/bataille_temporelle_combat.hots" "Phase 2: Combat"
-if [ -f "test/artefacts/scripts/bataille_temporelle_combat.hots" ]; then
-    lines=$(count_lines "test/artefacts/scripts/bataille_temporelle_combat.hots")
+check_file "test/artefacts/⚙️ scripts/bataille_temporelle_combat.hots" "Phase 2: Combat"
+if [ -f "test/artefacts/⚙️ scripts/bataille_temporelle_combat.hots" ]; then
+    lines=$(count_lines "test/artefacts/⚙️ scripts/bataille_temporelle_combat.hots")
     log $GREEN "   └── $lines lignes (32 commandes de combat)"
 fi
 
-check_file "test/artefacts/scripts/bataille_temporelle_finale.hots" "Phase 3: Finale"
-if [ -f "test/artefacts/scripts/bataille_temporelle_finale.hots" ]; then
-    lines=$(count_lines "test/artefacts/scripts/bataille_temporelle_finale.hots")
+check_file "test/artefacts/⚙️ scripts/bataille_temporelle_finale.hots" "Phase 3: Finale"
+if [ -f "test/artefacts/⚙️ scripts/bataille_temporelle_finale.hots" ]; then
+    lines=$(count_lines "test/artefacts/⚙️ scripts/bataille_temporelle_finale.hots")
     log $GREEN "   └── $lines lignes (58 commandes de finale)"
 fi
 echo ""
 
 # Tests d'intégration
 log $YELLOW "🧪 TESTS D'INTÉGRATION:"
-check_file "backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java" "Test d'intégration principal"
-if [ -f "backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java" ]; then
-    lines=$(count_lines "backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java")
+check_file "🖥️ backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java" "Test d'intégration principal"
+if [ -f "🖥️ backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java" ]; then
+    lines=$(count_lines "🖥️ backend/src/test/java/com/heroesoftimepoc/temporalengine/integration/BatailleTemporelleIntegrationTest.java")
     log $GREEN "   └── $lines lignes de tests Java"
 fi
 
@@ -150,16 +150,16 @@ setup_commands=0
 combat_commands=0
 finale_commands=0
 
-if [ -f "test/artefacts/scripts/bataille_temporelle_setup.hots" ]; then
-    setup_commands=$(grep -c "^[^#]" "test/artefacts/scripts/bataille_temporelle_setup.hots" || echo "0")
+if [ -f "test/artefacts/⚙️ scripts/bataille_temporelle_setup.hots" ]; then
+    setup_commands=$(grep -c "^[^#]" "test/artefacts/⚙️ scripts/bataille_temporelle_setup.hots" || echo "0")
 fi
 
-if [ -f "test/artefacts/scripts/bataille_temporelle_combat.hots" ]; then
-    combat_commands=$(grep -c "^[^#]" "test/artefacts/scripts/bataille_temporelle_combat.hots" || echo "0")
+if [ -f "test/artefacts/⚙️ scripts/bataille_temporelle_combat.hots" ]; then
+    combat_commands=$(grep -c "^[^#]" "test/artefacts/⚙️ scripts/bataille_temporelle_combat.hots" || echo "0")
 fi
 
-if [ -f "test/artefacts/scripts/bataille_temporelle_finale.hots" ]; then
-    finale_commands=$(grep -c "^[^#]" "test/artefacts/scripts/bataille_temporelle_finale.hots" || echo "0")
+if [ -f "test/artefacts/⚙️ scripts/bataille_temporelle_finale.hots" ]; then
+    finale_commands=$(grep -c "^[^#]" "test/artefacts/⚙️ scripts/bataille_temporelle_finale.hots" || echo "0")
 fi
 
 total_commands=$((setup_commands + combat_commands + finale_commands))
@@ -365,7 +365,7 @@ echo ""
 log $CYAN "🔄 Serveurs toujours actifs (non-interactif):"
 log $CYAN "   Backend: PID $backend_pid"
 log $CYAN "   Frontend: PID $frontend_pid"
-log $CYAN "   Pour arrêter manuellement: ./scripts/actifs/stop-all-services.sh"
+log $CYAN "   Pour arrêter manuellement: ./⚙️ scripts/actifs/stop-all-services.sh"
 
 echo ""
 log $PURPLE "🎊 SYSTÈME HEROES OF TIME - MISSION ACCOMPLIE !"

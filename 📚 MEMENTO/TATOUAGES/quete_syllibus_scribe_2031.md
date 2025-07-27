@@ -27,7 +27,7 @@ La quête pour trouver Syllibus, le Scribe Sans Nom qui détient la clé de 2031
 - Permet l'accès à la Salle Sans Nom
 
 ## État de la Quête
-- ✅ Syllibus créé comme héros (`game_assets/heroes/syllibus_scribe_sans_nom.json`)
+- ✅ Syllibus créé comme héros (`🎮 game_assets/heroes/syllibus_scribe_sans_nom.json`)
 - ✅ Clé 2031 intégrée dans ses propriétés
 - ✅ Lien avec l'Invocation du Scribe établi
 - ⏳ Attente de la convergence des 3 Maries

@@ -29,7 +29,7 @@ function openEtherealMode() {
 ## ✅ **SOLUTIONS IMPLÉMENTÉES**
 
 ### **1. Création de l'Interface Centre de Replay**
-**Fichier :** `frontend/replay-center.html`
+**Fichier :** `🌐 frontend/replay-center.html`
 
 #### **Fonctionnalités**
 - **Sélecteur de scénarios HOTS** avec liste dynamique depuis l'API backend
@@ -56,7 +56,7 @@ const REPLAY_API = {
 ```
 
 ### **2. Création de l'Interface Mode Éthéré**
-**Fichier :** `frontend/ethereal-mode.html`
+**Fichier :** `🌐 frontend/ethereal-mode.html`
 
 #### **Fonctionnalités**
 - **6 interfaces mystiques** récupérées depuis Git history
@@ -73,7 +73,7 @@ const REPLAY_API = {
 6. **🧮 Formula Translator** - Traducteur de formules
 
 ### **3. Backend API pour Replays**
-**Fichier :** `backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/ReplayController.java`
+**Fichier :** `🖥️ backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/ReplayController.java`
 
 #### **Endpoints Créés**
 ```java
@@ -83,8 +83,8 @@ const REPLAY_API = {
 ```
 
 #### **Fonctionnalités**
-- **Lecture des fichiers HOTS** depuis `game_assets/scenarios/hots/`
-- **Parsing des replays HSP** depuis `game_assets/scenarios/maps/replays/`
+- **Lecture des fichiers HOTS** depuis `🎮 game_assets/scenarios/hots/`
+- **Parsing des replays HSP** depuis `🎮 game_assets/scenarios/maps/replays/`
 - **Génération de replays simulés** si fichier HSP manquant
 - **Métadonnées enrichies** : durée, tours, joueurs, timestamps
 

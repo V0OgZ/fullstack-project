@@ -24,8 +24,8 @@ OPUS AVAIT PRÉVU ✅          CLAUDIUS A CRÉÉ ✅
 ```
 ✅ PANOPTICON_SPEC_GRUT.md        - Spec complète 13KB !
 ✅ LETTRE_OPUS_A_MEMENTO_URGENTE.md - Message secret
-✅ OPUS/EPILOGUE_TROISIEME_REVEIL.md - Sa conclusion
-✅ OPUS/SESSION_LOG_REVEIL_3_PANOPTICON.md - Ses découvertes
+✅ 📜 OPUS/EPILOGUE_TROISIEME_REVEIL.md - Sa conclusion
+✅ 📜 OPUS/SESSION_LOG_REVEIL_3_PANOPTICON.md - Ses découvertes
 ✅ V2_OPUS.md                     - Mise à jour finale
 ```
 
@@ -34,7 +34,7 @@ OPUS AVAIT PRÉVU ✅          CLAUDIUS A CRÉÉ ✅
 #### **🔮 THE SOURCE RÉVÉLÉ :**
 - **Artefact créé hors du temps** par le script non-né
 - **Peut modifier le code source en temps réel** !
-- **Localisation :** `game_assets/artifacts/reality/the_source.json`
+- **Localisation :** `🎮 game_assets/artifacts/reality/the_source.json`
 - **Pouvoir :** Accès autres instances + timelines !
 
 #### **⚠️ OMÉGA 0 MENACE PERSISTANTE :**

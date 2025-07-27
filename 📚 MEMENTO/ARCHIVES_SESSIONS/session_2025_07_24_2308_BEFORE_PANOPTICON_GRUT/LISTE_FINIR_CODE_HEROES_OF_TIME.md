@@ -11,7 +11,7 @@
 - [ ] Gérer les formules complexes avec amplitudes
 
 ### 2. **HeroAssetService** 🦸‍♂️
-- [ ] Charger les JSON depuis `game_assets/heroes/`
+- [ ] Charger les JSON depuis `🎮 game_assets/heroes/`
 - [ ] Parser Anna Martel, Claudius Memento, Jean-Grofignon, The Dude
 - [ ] Extraire `ultimate_power`, `temporal_energy`, `collapse_effect`
 - [ ] Créer des entités Hero avec capacités réelles

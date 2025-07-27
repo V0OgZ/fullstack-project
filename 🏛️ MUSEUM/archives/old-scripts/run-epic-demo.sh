@@ -27,7 +27,7 @@ echo "🎯 Running Epic Content Demo..."
 echo ""
 
 cd frontend
-npx playwright test tests/e2e/epic-content-demo.spec.ts --headed --project=demo
+npx playwright test 🧪 tests/e2e/epic-content-demo.spec.ts --headed --project=demo
 
 echo ""
 echo "🎉 Demo completed!"

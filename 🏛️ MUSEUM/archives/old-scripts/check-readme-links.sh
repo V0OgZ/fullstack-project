@@ -51,9 +51,9 @@ check_file_links() {
 # Scanner tous les README du projet
 find . -name "README.md" -type f \
     -not -path "./node_modules/*" \
-    -not -path "./frontend/node_modules/*" \
+    -not -path "./🌐 frontend/node_modules/*" \
     -not -path "./panopticon-grut-dashboard/node_modules/*" \
-    -not -path "./backend/target/*" | \
+    -not -path "./🖥️ backend/target/*" | \
 while read -r readme_file; do
     check_file_links "$readme_file"
 done

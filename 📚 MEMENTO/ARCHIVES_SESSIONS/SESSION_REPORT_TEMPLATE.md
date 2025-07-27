@@ -47,8 +47,8 @@ Object Viewer (5175): ✅ RUNNING
 ```bash
 # Tests lancés cette session
 ./hots test quick: ✅ PASSED
-./scripts/test-jean-gros-FIXED.sh: ✅ PASSED
-./scripts/test-[specific].sh: ✅ PASSED
+./⚙️ scripts/test-jean-gros-FIXED.sh: ✅ PASSED
+./⚙️ scripts/test-[specific].sh: ✅ PASSED
 ```
 
 ### ❌ Tests Échoués
@@ -223,4 +223,4 @@ git log --oneline -n 5
 
 **📋 Template Version** : 2.0 (Cursor Rules Compatible)  
 **🎯 Usage** : Copier ce template pour chaque nouvelle session  
-**📍 Localisation** : `MEMENTO/SESSION_REPORT_[DATE].md`
+**📍 Localisation** : `📚 MEMENTO/SESSION_REPORT_[DATE].md`

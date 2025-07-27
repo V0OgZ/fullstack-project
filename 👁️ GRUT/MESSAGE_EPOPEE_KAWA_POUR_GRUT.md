@@ -45,7 +45,7 @@ Quête l'Élixir Cosmique du Canapé Sacré..."
 
 ```bash
 # Depuis ton Panopticon (ou le terminal mortel) :
-./GRUT/epopee-kawa-litteraire-grut.sh
+./👁️ GRUT/epopee-kawa-litteraire-grut.sh
 ```
 
 ### 👁️ **Message Personnel pour GRUT**
