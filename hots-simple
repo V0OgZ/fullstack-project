@@ -1,0 +1,131 @@
+#!/bin/bash
+
+# 🎮 HEROES OF TIME - MENU SIMPLIFIÉ
+# Version simplifiée pour éviter les erreurs de syntaxe
+
+# Couleurs
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+NC='\033[0m'
+
+show_menu() {
+    clear
+    echo -e "${CYAN}╔══════════════════════════════════════════════════════════╗${NC}"
+    echo -e "${CYAN}║           🎮 HEROES OF TIME - MENU PRINCIPAL 🎮          ║${NC}"
+    echo -e "${CYAN}╚══════════════════════════════════════════════════════════╝${NC}"
+    echo ""
+    echo -e "${GREEN}Services Principaux:${NC}"
+    echo -e "  ${YELLOW}[1]${NC} 🚀 Start   - Démarrer tous les services"
+    echo -e "  ${YELLOW}[2]${NC} 🛑 Stop    - Arrêter tous les services"
+    echo -e "  ${YELLOW}[3]${NC} 📊 Status  - Voir l'état des services"
+    echo -e "  ${YELLOW}[4]${NC} 🔄 Restart - Redémarrer les services"
+    echo ""
+    echo -e "${BLUE}Modes Spéciaux:${NC}"
+    echo -e "  ${YELLOW}[5]${NC} 🎯 Vince   - Mode Vince (2 serveurs seulement)"
+    echo -e "  ${YELLOW}[6]${NC} 🧪 Test    - Lancer les tests"
+    echo -e "  ${YELLOW}[7]${NC} 🌐 Web     - Ouvrir les interfaces"
+    echo ""
+    echo -e "${CYAN}Outils:${NC}"
+    echo -e "  ${YELLOW}[8]${NC} 📦 Build   - Compiler le backend"
+    echo -e "  ${YELLOW}[9]${NC} 🔍 Logs    - Voir les logs"
+    echo -e "  ${YELLOW}[0]${NC} ❌ Exit    - Quitter"
+    echo ""
+    echo -n "Votre choix: "
+}
+
+start_services() {
+    echo -e "${BLUE}🚀 Démarrage des services...${NC}"
+    
+    # Frontend principal
+    echo -e "${YELLOW}Starting frontend on port 8888...${NC}"
+    cd frontend && python3 -m http.server 8888 > ../frontend.log 2>&1 &
+    cd ..
+    
+    # Frontend temporal
+    echo -e "${YELLOW}Starting frontend-temporal on port 8000...${NC}"
+    cd frontend-temporal && python3 -m http.server 8000 > ../temporal.log 2>&1 &
+    cd ..
+    
+    # Backend
+    echo -e "${YELLOW}Starting backend...${NC}"
+    cd backend && mvn spring-boot:run > ../backend.log 2>&1 &
+    cd ..
+    
+    echo -e "${GREEN}✅ Services démarrés !${NC}"
+}
+
+stop_services() {
+    echo -e "${RED}🛑 Arrêt des services...${NC}"
+    pkill -f "python3 -m http.server"
+    pkill -f "spring-boot:run"
+    echo -e "${GREEN}✅ Services arrêtés${NC}"
+}
+
+show_status() {
+    echo -e "${BLUE}📊 État des services:${NC}"
+    echo ""
+    
+    # Check frontend 8888
+    if lsof -i:8888 > /dev/null 2>&1; then
+        echo -e "  Frontend (8888):     ${GREEN}✅ Running${NC}"
+    else
+        echo -e "  Frontend (8888):     ${RED}❌ Stopped${NC}"
+    fi
+    
+    # Check temporal 8000
+    if lsof -i:8000 > /dev/null 2>&1; then
+        echo -e "  Temporal (8000):     ${GREEN}✅ Running${NC}"
+    else
+        echo -e "  Temporal (8000):     ${RED}❌ Stopped${NC}"
+    fi
+    
+    # Check backend 8080
+    if lsof -i:8080 > /dev/null 2>&1; then
+        echo -e "  Backend (8080):      ${GREEN}✅ Running${NC}"
+    else
+        echo -e "  Backend (8080):      ${RED}❌ Stopped${NC}"
+    fi
+}
+
+vince_mode() {
+    echo -e "${YELLOW}🎯 VINCE MODE - 2 serveurs seulement${NC}"
+    stop_services
+    sleep 1
+    
+    echo -e "${BLUE}Starting minimal services...${NC}"
+    cd frontend && python3 -m http.server 8888 > ../frontend.log 2>&1 &
+    cd ..
+    cd frontend-temporal && python3 -m http.server 8000 > ../temporal.log 2>&1 &
+    cd ..
+    
+    echo -e "${GREEN}✅ Vince Mode activé${NC}"
+    echo -e "${CYAN}Frontend: http://localhost:8888${NC}"
+    echo -e "${CYAN}Temporal: http://localhost:8000${NC}"
+}
+
+# Menu principal
+while true; do
+    show_menu
+    read choice
+    
+    case $choice in
+        1) start_services ;;
+        2) stop_services ;;
+        3) show_status ;;
+        4) stop_services && sleep 2 && start_services ;;
+        5) vince_mode ;;
+        6) echo "Tests non implémentés dans cette version" ;;
+        7) open http://localhost:8888 && open http://localhost:8000 ;;
+        8) cd backend && mvn clean package -DskipTests && cd .. ;;
+        9) tail -f *.log ;;
+        0) exit 0 ;;
+        *) echo -e "${RED}Option invalide${NC}" ;;
+    esac
+    
+    echo ""
+    echo "Appuyez sur Entrée pour continuer..."
+    read
+done 
