@@ -3,6 +3,7 @@ package com.example.demo.model;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
  * 🧪 WALTER VIETNAM CLASS - Contexte d'exécution des formules magiques
@@ -65,8 +66,30 @@ public class GameContext {
     }
     
     public List<Map<String, Object>> getHeroesInRadius(Position center, int radius) {
-        // TODO: Implémenter la recherche géométrique
-        return List.of();
+        List<Map<String, Object>> heroesInRadius = new ArrayList<>();
+        
+        // Parcourir tous les héros et vérifier leur distance au centre
+        for (Map.Entry<String, Object> entry : heroes.entrySet()) {
+            if (entry.getValue() instanceof Map) {
+                Map<String, Object> hero = (Map<String, Object>) entry.getValue();
+                Position heroPos = getPosition(entry.getKey());
+                
+                if (heroPos != null && center != null) {
+                    // Calculer la distance euclidienne
+                    double distance = Math.sqrt(
+                        Math.pow(heroPos.getX() - center.getX(), 2) + 
+                        Math.pow(heroPos.getY() - center.getY(), 2)
+                    );
+                    
+                    // Si le héros est dans le rayon, l'ajouter à la liste
+                    if (distance <= radius) {
+                        heroesInRadius.add(hero);
+                    }
+                }
+            }
+        }
+        
+        return heroesInRadius;
     }
     
     // 🎖️ WALTER VIETNAM DIAGNOSTICS

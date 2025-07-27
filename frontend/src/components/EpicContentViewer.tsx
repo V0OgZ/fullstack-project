@@ -2,7 +2,17 @@
 // Affiche tous les assets restaurés par Memento depuis game_assets/ !
 
 import React, { useState, useEffect } from 'react';
-import { fetchEpicCreatures, fetchEpicHeroes, EpicCreature, EpicHero } from '../services/epicContentAPI';
+import { 
+  fetchEpicCreatures, 
+  fetchEpicHeroes,
+  fetchEpicBuildings,
+  fetchEpicArtifacts,
+  getServerStatus,
+  EpicCreature,
+  EpicHero,
+  EpicBuilding,
+  EpicArtifact
+} from '../services/epicService';
 import { BUILDING_IMAGES, generateBuildingImage } from '../services/buildingImageService';
 import GoldorakEasterEgg from './GoldorakEasterEgg';
 
@@ -19,6 +29,7 @@ const EpicContentViewer: React.FC<EpicContentViewerProps> = ({ isVisible, onClos
   const [artifacts, setArtifacts] = useState<EpicArtifact[]>([]);
   const [loading, setLoading] = useState(false);
   const [showGoldorakEasterEgg, setShowGoldorakEasterEgg] = useState(false);
+  const [serverStatus, setServerStatus] = useState({ endpoints: { heroes: true, creatures: true, buildings: true, artifacts: true } });
 
   // Charge les données depuis game_assets
   useEffect(() => {

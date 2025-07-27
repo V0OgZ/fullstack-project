@@ -122,7 +122,7 @@ const ModernGameRenderer = forwardRef<ModernGameRendererRef, ModernGameRendererP
     zoom: 0.8  // 🎯 ZOOM PAR DÉFAUT RÉDUIT pour voir plus de tuiles
   });
   
-  const animationFrameRef = useRef<number | undefined>();
+  const animationFrameRef = useRef<number | undefined>(undefined);
   
   // 🔮 ÉTAT SYMBOLES RUNIQUES
   const [runicSymbols, setRunicSymbols] = useState<RunicSymbol[]>([]);
