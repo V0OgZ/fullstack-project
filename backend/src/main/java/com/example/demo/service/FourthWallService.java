@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import com.example.demo.model.GameState;
+import java.util.Arrays;
+import java.util.UUID;
 
 /**
  * 🎭 FOURTH WALL SERVICE - Briseur de Réalité
@@ -514,5 +516,58 @@ public class FourthWallService {
                 Thread.currentThread().interrupt();
             }
         }).start();
+    }
+    
+    /**
+     * 🎮 Initialize Mock Instances - Créer des instances de test
+     * 
+     * JEAN: "Depuis mon canapé, je crée des mondes de test instantanément !"
+     */
+    public Map<String, Object> initializeMockInstances() {
+        Map<String, Object> result = new HashMap<>();
+        List<Map<String, Object>> createdInstances = new ArrayList<>();
+        
+        try {
+            // Créer 3 instances de test
+            String[] mockWorlds = {"Test-Alpha", "Test-Beta", "Test-Omega"};
+            String[] statuses = {"active", "paused", "transcendent"};
+            
+            for (int i = 0; i < mockWorlds.length; i++) {
+                String worldId = "mock-world-" + UUID.randomUUID().toString().substring(0, 8);
+                WorldInstance instance = new WorldInstance(worldId, mockWorlds[i], statuses[i]);
+                
+                // Ajouter des métadonnées de test
+                instance.metadata.put("test_mode", true);
+                instance.metadata.put("created_by", "FourthWallService");
+                instance.metadata.put("paradox_level", i * 33.33);
+                
+                activeWorlds.put(worldId, instance);
+                
+                Map<String, Object> instanceInfo = new HashMap<>();
+                instanceInfo.put("id", worldId);
+                instanceInfo.put("name", mockWorlds[i]);
+                instanceInfo.put("status", statuses[i]);
+                instanceInfo.put("metadata", instance.metadata);
+                createdInstances.add(instanceInfo);
+            }
+            
+            // Créer des connexions entre les mondes de test
+            worldConnections.put(createdInstances.get(0).get("id").toString(), 
+                Arrays.asList(createdInstances.get(1).get("id").toString(), 
+                            createdInstances.get(2).get("id").toString()));
+            
+            result.put("status", "success");
+            result.put("message", "Mock instances initialized successfully");
+            result.put("instances_created", createdInstances.size());
+            result.put("instances", createdInstances);
+            result.put("connections", worldConnections.size());
+            
+        } catch (Exception e) {
+            result.put("status", "error");
+            result.put("message", "Failed to initialize mock instances: " + e.getMessage());
+            result.put("error", e.getClass().getSimpleName());
+        }
+        
+        return result;
     }
 }
