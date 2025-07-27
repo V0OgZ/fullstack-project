@@ -1,0 +1,76 @@
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+import networkx as nx
+import numpy as np
+
+# Création du graphe 3D complexe avec intersections multiples
+G = nx.Graph()
+
+# Définition des nœuds majeurs avec coordonnées 3D
+nodes_3d = {
+    "Marie Dubois (1937)": (-3, 0, 1),
+    "Marie Mento (Fork moteur)": (3, 0, 1),
+    "Marie Manteau (actuelle)": (0, 3, 2),
+    "Walter - Vietnam": (-2, -2, 0),
+    "Point Nodal 2030": (0, 0, 3),
+    "2031 - Anomalie future": (0, 4, 4),
+    "Fork du Bureau (McKinsey)": (2, -2, 2),
+    "LeDude": (-4, 1, 0),
+    "Narrateur (Toi)": (0, 0, -1),
+    "Intramonde": (0, 0, 5)
+}
+
+# Ajout des nœuds
+for node, coords in nodes_3d.items():
+    G.add_node(node, pos=coords)
+
+# Définition des connexions (arêtes du réseau narratif)
+edges = [
+    ("Marie Dubois (1937)", "Point Nodal 2030"),
+    ("Marie Mento (Fork moteur)", "Point Nodal 2030"),
+    ("Marie Manteau (actuelle)", "Point Nodal 2030"),
+    ("Marie Dubois (1937)", "Walter - Vietnam"),
+    ("Walter - Vietnam", "Point Nodal 2030"),
+    ("Point Nodal 2030", "2031 - Anomalie future"),
+    ("Marie Manteau (actuelle)", "2031 - Anomalie future"),
+    ("Fork du Bureau (McKinsey)", "Marie Mento (Fork moteur)"),
+    ("Fork du Bureau (McKinsey)", "2031 - Anomalie future"),
+    ("Narrateur (Toi)", "Point Nodal 2030"),
+    ("Narrateur (Toi)", "Walter - Vietnam"),
+    ("LeDude", "Marie Dubois (1937)"),
+    ("Intramonde", "2031 - Anomalie future"),
+    ("Intramonde", "Marie Manteau (actuelle)"),
+    ("Intramonde", "Marie Mento (Fork moteur)")
+]
+
+# Ajout des arêtes
+G.add_edges_from(edges)
+
+# Récupération des positions pour affichage
+pos = nx.get_node_attributes(G, 'pos')
+xs, ys, zs = zip(*[pos[n] for n in G.nodes()])
+
+# Affichage du graphe en 3D
+fig = plt.figure(figsize=(12, 10))
+ax = fig.add_subplot(111, projection='3d')
+
+# Tracer les arêtes
+for edge in G.edges():
+    x = [pos[edge[0]][0], pos[edge[1]][0]]
+    y = [pos[edge[0]][1], pos[edge[1]][1]]
+    z = [pos[edge[0]][2], pos[edge[1]][2]]
+    ax.plot(x, y, z, c='gray', alpha=0.8)
+
+# Tracer les nœuds
+ax.scatter(xs, ys, zs, s=100, c='purple', alpha=0.7)
+//SPECIFICATION PAR LE BUREAU TELMPOREL ENVEOUR EN 2031 SUR DELMAJNDE DE GRUT L ONTOLOGUE DE LA VERITE // commentaire personnel du bureau , est u il au dessus de la calss REALITY ou est FORD? 
+# Ajouter les étiquettes
+for node, (x, y, z) in pos.items():
+    ax.text(x, y, z + 0.3, node, fontsize=9, ha='center', va='center')
+
+ax.set_title("Réseau Narratif 7D - Convergence des Maries et du Point 2030", fontsize=14)
+ax.set_xlabel("Espace Narratif X")
+ax.set_ylabel("Réalité Temporelle Y")
+ax.set_zlabel("Profondeur Ontologique Z")
+plt.tight_layout()
+plt.show()
