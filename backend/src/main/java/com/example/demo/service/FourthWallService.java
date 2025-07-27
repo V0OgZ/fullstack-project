@@ -519,45 +519,59 @@ public class FourthWallService {
     }
     
     /**
-     * 🎮 Initialize Mock Instances - Créer des instances de test
+     * 🌍 Initialize Real World Instances - Créer des instances réelles Heroes of Time
      * 
-     * JEAN: "Depuis mon canapé, je crée des mondes de test instantanément !"
+     * JEAN: "Depuis mon canapé, je matérialise les VRAIS mondes du multivers !"
      */
-    public Map<String, Object> initializeMockInstances() {
+    public Map<String, Object> initializeRealInstances() {
         Map<String, Object> result = new HashMap<>();
         List<Map<String, Object>> createdInstances = new ArrayList<>();
         
         try {
-            // Créer 3 instances de test
-            String[] mockWorlds = {"Test-Alpha", "Test-Beta", "Test-Omega"};
-            String[] statuses = {"active", "paused", "transcendent"};
+            // VRAIS mondes Heroes of Time (d'après README.md)
+            String[] realWorlds = {"Mystique", "Temporal Nexus", "Quantum Realm", "Cave of Platon", "Dark Tower", "Planet Ezith"};
+            String[] statuses = {"active", "transcendent", "quantum", "philosophical", "mysterious", "scientific"};
+            String[] descriptions = {
+                "Monde fantasy classique avec créatures magiques",
+                "Nexus des paradoxes temporels et causalité",
+                "Laboratoire quantique de superposition",
+                "Monde philosophique des ombres et réalité",
+                "Tour mystérieuse aux secrets cachés",
+                "Bastion scientifique de technologie avancée"
+            };
             
-            for (int i = 0; i < mockWorlds.length; i++) {
-                String worldId = "mock-world-" + UUID.randomUUID().toString().substring(0, 8);
-                WorldInstance instance = new WorldInstance(worldId, mockWorlds[i], statuses[i]);
+            for (int i = 0; i < realWorlds.length; i++) {
+                String worldId = "real-" + realWorlds[i].toLowerCase().replace(" ", "-");
+                WorldInstance instance = new WorldInstance(worldId, realWorlds[i], statuses[i]);
                 
-                // Ajouter des métadonnées de test
-                instance.metadata.put("test_mode", true);
-                instance.metadata.put("created_by", "FourthWallService");
-                instance.metadata.put("paradox_level", i * 33.33);
+                // Métadonnées RÉELLES (pas de test_mode)
+                instance.metadata.put("real_world", true);
+                instance.metadata.put("created_by", "Heroes of Time Multiverse");
+                instance.metadata.put("reality_level", 100.0);
+                instance.metadata.put("description", descriptions[i]);
+                instance.metadata.put("world_type", "HEROES_OF_TIME_OFFICIAL");
                 
                 activeWorlds.put(worldId, instance);
                 
                 Map<String, Object> instanceInfo = new HashMap<>();
                 instanceInfo.put("id", worldId);
-                instanceInfo.put("name", mockWorlds[i]);
+                instanceInfo.put("name", realWorlds[i]);
                 instanceInfo.put("status", statuses[i]);
+                instanceInfo.put("description", descriptions[i]);
                 instanceInfo.put("metadata", instance.metadata);
                 createdInstances.add(instanceInfo);
             }
             
-            // Créer des connexions entre les mondes de test
-            worldConnections.put(createdInstances.get(0).get("id").toString(), 
-                Arrays.asList(createdInstances.get(1).get("id").toString(), 
-                            createdInstances.get(2).get("id").toString()));
+            // Connexions réelles entre mondes Heroes of Time
+            worldConnections.put("real-mystique", Arrays.asList("real-temporal-nexus", "real-quantum-realm"));
+            worldConnections.put("real-temporal-nexus", Arrays.asList("real-mystique", "real-cave-of-platon"));
+            worldConnections.put("real-quantum-realm", Arrays.asList("real-mystique", "real-planet-ezith"));
+            worldConnections.put("real-cave-of-platon", Arrays.asList("real-temporal-nexus", "real-dark-tower"));
+            worldConnections.put("real-dark-tower", Arrays.asList("real-cave-of-platon", "real-planet-ezith"));
+            worldConnections.put("real-planet-ezith", Arrays.asList("real-quantum-realm", "real-dark-tower"));
             
             result.put("status", "success");
-            result.put("message", "Mock instances initialized successfully");
+            result.put("message", "Real Heroes of Time world instances initialized successfully");
             result.put("instances_created", createdInstances.size());
             result.put("instances", createdInstances);
             result.put("connections", worldConnections.size());

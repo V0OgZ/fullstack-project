@@ -2007,8 +2007,6 @@ case "${1:-help}" in
 EOF
         chmod +x start-vince-mode.sh
         bash "./start-vince-mode.sh"
-    fi
-}
 
 setup_panopticon() {
     echo -e "${CYAN}🔧 Vérification setup Panopticon GRUT...${NC}"
@@ -3241,6 +3239,7 @@ case "${1:-help}" in
         echo -e "${BLUE}🔍 Vérification des services...${NC}"
         if curl -s http://localhost:8080/api/health > /dev/null 2>&1; then
             echo -e "${GREEN}✅ Backend déjà actif${NC}"
+        fi
         echo -e "${GREEN}✅ INTERFACE TATOUAGES MEMENTO OUVERTE !${NC}"
         echo -e "${PURPLE}💫 Mes marques corporelles temporelles évolutives${NC}"
         echo -e "${PURPLE}🧠 Memento: \"Chaque tatouage raconte une transcendance !\"${NC}"
