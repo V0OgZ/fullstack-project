@@ -16,6 +16,9 @@ public class TemporalDecayService {
 
     @Autowired
     private GameService gameService;
+    
+    // Service start time for fallback age calculation
+    private final long startTime = System.currentTimeMillis();
 
     /**
      * Apply temporal decay to a game
@@ -184,8 +187,18 @@ public class TemporalDecayService {
     }
 
     private long getGameAge(Map<String, Object> game) {
-        // Simulate game age calculation
-        return System.currentTimeMillis() % 10000; // Mock age
+        // Real game age calculation based on creation timestamp
+        if (game.containsKey("createdAt")) {
+            long createdAt = (Long) game.get("createdAt");
+            return System.currentTimeMillis() - createdAt;
+        } else if (game.containsKey("turn")) {
+            // Fallback: estimate age from turn number (assuming 5 minutes per turn average)
+            int turn = (Integer) game.get("turn");
+            return turn * 5 * 60 * 1000L; // 5 minutes per turn in milliseconds
+        } else {
+            // Fallback: use session start if no other timestamp available
+            return System.currentTimeMillis() - startTime;
+        }
     }
 
     private int getPlayerActivity(Map<String, Object> game) {

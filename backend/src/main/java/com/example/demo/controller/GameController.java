@@ -62,9 +62,34 @@ public class GameController {
 
     @GetMapping("/games/joinable")
     public ResponseEntity<Map<String, Object>> getJoinableSessions() {
-        // For now, return a mock joinable session
-        Map<String, Object> session = gameService.getGame("joinable");
-        return ResponseEntity.ok(session);
+        // Real implementation: get actual joinable multiplayer sessions
+        List<Map<String, Object>> joinableSessions = new ArrayList<>();
+        
+        // Get all available games/sessions that accept new players
+        List<Map<String, Object>> availableGames = gameService.getAvailableGames();
+        
+        if (availableGames != null) {
+            
+            for (Map<String, Object> session : availableGames) {
+                String status = (String) session.get("status");
+                Integer currentPlayers = (Integer) session.get("current_players");
+                Integer maxPlayers = (Integer) session.get("max_players");
+                
+                // Session is joinable if waiting for players or in progress with room
+                if (("waiting".equals(status) || "in_progress".equals(status)) && 
+                    currentPlayers != null && maxPlayers != null && 
+                    currentPlayers < maxPlayers) {
+                    joinableSessions.add(session);
+                }
+            }
+        }
+        
+        Map<String, Object> response = new HashMap<>();
+        response.put("joinable_sessions", joinableSessions);
+        response.put("total_count", joinableSessions.size());
+        response.put("message", joinableSessions.isEmpty() ? "No joinable sessions available" : "Joinable sessions found");
+        
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/games/{gameId}/join")
