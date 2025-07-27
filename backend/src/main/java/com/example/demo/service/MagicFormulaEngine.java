@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.util.concurrent.ConcurrentHashMap;
@@ -110,7 +111,9 @@ public class MagicFormulaEngine {
         // 🐴 ÂNE DE BURIDAN - STABILISATEUR QUANTIQUE (WALTER APPROVED)
         "BURIDAN_STABILIZE", "BURIDAN_PARADOX", "QUANTUM_BALANCE_50", "PROBABILITY_LOCK",
         // 🌀 FORMULES QUANTIQUES GROFI - SUPERPOSITION ET INTRICATION
-        "QUANTUM_SUPERPOSE", "OBSERVE_STATE", "ENTANGLE_UNITS"
+        "QUANTUM_SUPERPOSE", "OBSERVE_STATE", "ENTANGLE_UNITS",
+        // 🏆 MILLENNIUM CONTROLLER - FOUB PALADIN ULTIMATE
+        "MILLENNIUM_CONTROLLER"
     );
     
     /**
@@ -267,6 +270,10 @@ public class MagicFormulaEngine {
                 
             case "ENTANGLE_UNITS":
                 return executeQuantumEntanglement(context);
+                
+            // 🏆 MILLENNIUM CONTROLLER - FOUB PALADIN ULTIMATE
+            case "MILLENNIUM_CONTROLLER":
+                return executeMillenniumController(context);
                 
             // 🔮 NOUVELLES FORMULES CATÉGORIE A - BATCH 2
             case "QUANTUM_LEAP":
@@ -1958,5 +1965,144 @@ public class MagicFormulaEngine {
         } catch (Exception e) {
             return FormulaResult.error("Erreur d'intrication: " + e.getMessage(), "ENTANGLEMENT_ERROR");
         }
+    }
+    
+    /**
+     * 🏆 MILLENNIUM CONTROLLER - FOUB PALADIN ULTIMATE
+     * 
+     * "LUEUR DE FOUB - Résurrection du Juste"
+     * Inspiré du légendaire rez de masse sous bubulle de WOW
+     * 
+     * @param context GameContext avec heroId et données de combat
+     * @return FormulaResult avec résultats de l'ultimate
+     */
+    public FormulaResult executeMillenniumController(GameContext context) {
+        Map<String, Object> result = new HashMap<>();
+        
+        // 🎮 VALIDATION FOUB PALADIN
+        String heroId = context.getActiveHeroId();
+        if (heroId == null || !heroId.contains("foub")) {
+            return FormulaResult.error("🚫 MILLENNIUM CONTROLLER: Seul Foub peut utiliser cet ultimate !", "NOT_FOUB_PALADIN");
+        }
+        
+        // 🏛️ PHASE 1: PROTECTION DIVINE (Bubulle WOW-style)
+        result.put("phase_1_protection_divine", true);
+        result.put("invulnerability_duration", "10 secondes");
+        result.put("divine_bubble_active", true);
+        result.put("wow_inspiration", "Protection Divine - Paladin WOW classique");
+        
+        // ⚡ PHASE 2: RÉSURRECTION DE MASSE
+        List<String> resurrectableAllies = Arrays.asList("vince_vega", "walter_vietnam", "colt_eastwood", "morgana_witch");
+        List<String> resurrectedAllies = new ArrayList<>();
+        
+        // Sélectionner jusqu'à 3 alliés morts pour résurrection
+        int maxResurrections = 3;
+        int resurrectionsPerformed = 0;
+        
+        for (String ally : resurrectableAllies) {
+            if (resurrectionsPerformed < maxResurrections) {
+                // Simuler résurrection avec 50% HP + buff aléatoire
+                Map<String, Object> resurrectionData = new HashMap<>();
+                resurrectionData.put("ally", ally);
+                resurrectionData.put("hp_restored", "50%");
+                resurrectionData.put("random_buff", generateRandomBuff());
+                resurrectionData.put("timeline_vision", generateTimelineVision(ally));
+                
+                resurrectedAllies.add(ally);
+                resurrectionsPerformed++;
+                
+                result.put("resurrection_" + resurrectionsPerformed, resurrectionData);
+            }
+        }
+        
+        result.put("phase_2_mass_resurrection", true);
+        result.put("resurrected_count", resurrectionsPerformed);
+        result.put("resurrected_allies", resurrectedAllies);
+        
+        // 🌀 PHASE 3: FRAGMENTS MÉMOIRE (Timeline alternatives)
+        result.put("phase_3_memory_fragments", true);
+        result.put("timeline_visions_granted", true);
+        result.put("narrative_bonus", "Ressuscités peuvent voir d'autres mondes pour quêtes spéciales");
+        
+        // 😴 PHASE 4: ÉPUISEMENT DIVIN
+        result.put("phase_4_divine_exhaustion", true);
+        result.put("foub_debuff", "Étourdi pendant 3 tours");
+        result.put("energy_cost", "100% + épuisement");
+        result.put("cooldown", "Une fois par instance (cosmique)");
+        
+        // 🏆 MILLENNIUM LEGACY
+        result.put("millennium_legacy", Map.of(
+            "guild_name", "Guilde des Milleniums",
+            "former_name", "Trépot",
+            "wow_connection", "Directement inspiré des mécaniques Paladin WOW",
+            "legendary_status", true
+        ));
+        
+        // 🎖️ WALTER APPROVAL
+        result.put("walter_approval", "🎖️ WALTER: Ce rez de masse me rappelle nos évacuations au Vietnam ! APPROUVÉ !");
+        
+        // ✨ VISUAL EFFECTS
+        result.put("visual_effects", Map.of(
+            "divine_bubble", "Bubulle dorée massive style WOW",
+            "resurrection_light", "Éclats lumineux pour chaque ressuscité",
+            "timeline_flashes", "Visions d'autres mondes pour les ressuscités",
+            "exhaustion_aura", "Foub s'affaisse, vidé de sa force divine"
+        ));
+        
+        return FormulaResult.success(
+            "🏆 MILLENNIUM CONTROLLER ACTIVÉ ! Foub invoque la Lueur du Juste - " + 
+            resurrectionsPerformed + " alliés ressuscités avec visions de timelines alternatives !",
+            result,
+            "MILLENNIUM_CONTROLLER_ULTIMATE"
+        );
+    }
+    
+    /**
+     * 🎲 Générer un buff aléatoire pour les ressuscités
+     */
+    private String generateRandomBuff() {
+        String[] buffs = {
+            "Bénédiction de Force (+25% attaque)",
+            "Aura de Sagesse (+25% magie)", 
+            "Protection Divine (+25% défense)",
+            "Vitesse Éthérée (+25% vitesse)",
+            "Vision Prophétique (+25% chance critique)",
+            "Résilience Temporelle (résistance débuffs)"
+        };
+        return buffs[(int) (Math.random() * buffs.length)];
+    }
+    
+    /**
+     * 🌀 Générer une vision de timeline alternative
+     */
+    private Map<String, Object> generateTimelineVision(String ally) {
+        Map<String, Object> vision = new HashMap<>();
+        
+        switch (ally) {
+            case "vince_vega":
+                vision.put("timeline_seen", "Une réalité où Vince devient détective privé");
+                vision.put("narrative_hook", "Quête spéciale: L'Enquête de Vince");
+                break;
+            case "walter_vietnam":
+                vision.put("timeline_seen", "Une ligne où Walter devient général pacifiste");
+                vision.put("narrative_hook", "Quête spéciale: La Paix de Walter");
+                break;
+            case "colt_eastwood":
+                vision.put("timeline_seen", "Un monde où Colt devient shérif d'une ville fantôme");
+                vision.put("narrative_hook", "Quête spéciale: Le Dernier Shérif");
+                break;
+            case "morgana_witch":
+                vision.put("timeline_seen", "Une réalité où Morgana devient guérisseuse divine");
+                vision.put("narrative_hook", "Quête spéciale: La Rédemption de Morgana");
+                break;
+            default:
+                vision.put("timeline_seen", "Vision d'un monde parallèle mystérieux");
+                vision.put("narrative_hook", "Quête spéciale: Le Mystère Temporel");
+        }
+        
+        vision.put("vision_clarity", Math.random() * 0.5 + 0.5); // 50-100% clarté
+        vision.put("emotional_impact", "Profond");
+        
+        return vision;
     }
 } 

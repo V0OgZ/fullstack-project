@@ -1,0 +1,93 @@
+{
+  "id": "foub_millennium_controller",
+  "name": "Foub - Paladin du Millennium",
+  "race": "Humain Éveillé",
+  "class": "Paladin Millennium Controller",
+  "gender": "Male",
+  "level": 35,
+  "experience": 100000,
+  "role": "Divine Resurrector & Timeline Guardian",
+  "stats": {
+    "attack": 20,
+    "defense": 25,
+    "spellPower": 30,
+    "knowledge": 28,
+    "morale": 30,
+    "luck": 22
+  },
+  "traits": [
+    "Ancien joueur Guilde des Milleniums (Trépot)",
+    "Maître du rez de masse sous bubulle",
+    "Contrôleur de timeline post-wipe"
+  ],
+  "specialAbility": "Lumière Divine - Aura DBZ massive (+50% stats équipe, rayon 5 cases)",
+  "ultimateSkill": "LUEUR DE FOUB - Résurrection du Juste (Millennium Controller)",
+  "backstory": "Foub, ancien maître de la Guilde des Milleniums sous le nom Trépot. Spécialiste légendaire du rez de masse sous protection divine. Dans Heroes of Time, son ultimate devient le Millennium Controller.",
+  "personality": "Legendary_Paladin",
+  "portraitStyle": "WOW_Paladin_Divine",
+  "voiceType": "Divine_Commander",
+  "favoriteCreatures": ["phoenix", "light_elemental", "divine_spirit"],
+  "hatedEnemies": ["undead", "shadow_creatures", "timeline_corruptors"],
+  "equipment": {
+    "weapon": "Marteau de la Résurrection Éternelle",
+    "armor": "Armure de Lumière Millennium",
+    "accessory": "Amulette des Mille Vies"
+  },
+  "millennium_controller": {
+    "name": "LUEUR DE FOUB - Résurrection du Juste",
+    "type": "ULTIMATE_DIVINE_RESURRECTION",
+    "description": "L'ultimate légendaire inspiré du rez de masse sous bubulle de WOW. Foub invoque une protection divine et ressuscite massivement ses alliés.",
+    "wow_inspiration": "Protection Divine + Résurrection en masse - Le combo légendaire des paladins WOW",
+    "cooldown": "Une fois par instance (cosmique)",
+    "manaCost": "100% énergie + épuisement divin",
+    "phases": {
+      "phase_1": "Protection Divine - Bubulle dorée invulnérable 10 secondes",
+      "phase_2": "Résurrection de Masse - Rez jusqu'à 3 alliés morts",
+      "phase_3": "Fragments Mémoire - Chaque ressuscité voit timeline alternative",
+      "phase_4": "Épuisement Divin - Foub étourdi/affaibli après l'ultimate"
+    },
+    "effects": [
+      "DIVINE_BUBBLE_INVULNERABILITY_10SEC",
+      "MASS_RESURRECTION_3_TARGETS_MAX",
+      "MEMORY_FRAGMENTS_TIMELINE_VISION",
+      "DIVINE_EXHAUSTION_POST_ULTIMATE",
+      "LEGENDARY_COMEBACK_POTENTIAL"
+    ],
+    "visual_effect": "Foub s'entoure d'une bubulle dorée massive style WOW, la lumière explose, il ressuscite ses alliés avec des éclats lumineux, chacun recevant des visions d'autres mondes",
+    "gameplay_mechanics": {
+      "invulnerability_duration": "10 secondes",
+      "max_resurrections": 3,
+      "resurrection_hp": "50% HP + buff aléatoire",
+      "post_ultimate_debuff": "Étourdi 3 tours",
+      "range": "Vision complète de la map",
+      "narrative_bonus": "Ressuscités peuvent voir timelines alternatives (quêtes/événements spéciaux)"
+    }
+  },
+  "lumiere_divine": {
+    "name": "Lumière Divine",
+    "type": "AURA_DBZ_STYLE",
+    "description": "Grosse aura de Paladin style Super Saiyan qui booste massivement l'équipe",
+    "cooldown": 0,
+    "manaCost": 20,
+    "aura_radius": 5,
+    "effects": [
+      "TEAM_ATTACK_BOOST_50_PERCENT",
+      "TEAM_DEFENSE_BOOST_50_PERCENT", 
+      "TEAM_MORALE_BOOST_50_PERCENT",
+      "GOLDEN_AURA_VISUAL_DBZ",
+      "INSPIRING_PRESENCE"
+    ],
+    "visual_effect": "Aura dorée massive qui entoure Foub et s'étend sur 5 cases, style Super Saiyan DBZ"
+  },
+  "millennium_legacy": {
+    "guild_name": "Guilde des Milleniums",
+    "former_name": "Trépot",
+    "specialization": "Paladin Sacré - Résurrection & Support",
+    "legendary_moments": [
+      "Rez de masse sous bubulle lors du raid Molten Core",
+      "Sauveur légendaire dans les instances Burning Crusade",
+      "Maître du comeback impossible en PvP"
+    ],
+    "wow_connection": "Directement inspiré des mécaniques WOW Paladin classiques"
+  }
+} 
