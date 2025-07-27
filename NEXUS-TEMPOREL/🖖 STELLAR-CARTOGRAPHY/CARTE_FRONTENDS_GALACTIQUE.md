@@ -6,6 +6,31 @@
 
 ---
 
+## 🌳 **ARBORESCENCE FRONTENDS**
+
+```
+📂 fullstack-project/
+├── 🏛️ MUSEUM/
+│   └── frontend-unified-experiment/              → 🧪 Expérience unification
+│
+└── 🌀 NEXUS-TEMPOREL/
+    └── 🚪 PORTAILS-DIMENSIONNELS/
+        ├── 🌍 Terres-Euclidiennes/
+        │   ├── 🌐 frontend/                      → ⚡ React Port 3000 (Principal)
+        │   ├── 🌐 frontend-port8000/            → 🌐 HTML Simple Port 8000
+        │   ├── ⏰ frontend-temporal/             → ⏰ Interface Temporelle Basique
+        │   ├── 🎨 frontend-legendary-ui/        → 🎨 Legendary Interface Compacte
+        │   ├── 🏆 frontend-temporal-legendary/  → 🏆 Fusion Temporal + Legendary
+        │   ├── ⏳ interface-temporelle-pure/    → ⏳ Interface Pure (MOVED HERE)
+        │   └── frontend-clean/                  → 🧹 Version propre sans emojis
+        │
+        └── 🌌 Royaume-Morgane-3D/
+            ├── [FUTUR] Interface 3D Morgane     → 🚀 Port 3000 (en développement)
+            └── [FUTUR] Portail Goldorak         → 🤖 Depuis Vince
+```
+
+---
+
 ## 🌌 **SECTEUR NEXUS-TEMPOREL**
 
 ### 🚪 **Portails Dimensionnels - Terres Euclidiennes**
