@@ -181,10 +181,10 @@ interface ZFCSystem {
 ## 📚 **DOCUMENTATION**
 
 ### 📖 **Guides Essentiels**
-- [Guide Physique Quantique](/workspace/docs/PHYSICS_EXPERIMENTS_COMPLETE_GUIDE.md)
-- [Architecture Système](/workspace/MEMENTO/CURRENT_SESSION/IMPLEMENTATION_SYSTEME_SANS_TOUR_ZFC.md)
-- [API Backend](/workspace/docs/BACKEND_API_DOCUMENTATION_WALTER.md)
-- [Grammaire HOTS](/workspace/docs/CARTOGRAPHIE_COMPLETE_FORMULES_GRAMMAIRE_JEAN.md)
+- [Guide Physique Quantique](/workspace/📖 docs/PHYSICS_EXPERIMENTS_COMPLETE_GUIDE.md)
+- [Architecture Système](/workspace/📚 MEMENTO/CURRENT_SESSION/IMPLEMENTATION_SYSTEME_SANS_TOUR_ZFC.md)
+- [API Backend](/workspace/📖 docs/BACKEND_API_DOCUMENTATION_WALTER.md)
+- [Grammaire HOTS](/workspace/📖 docs/CARTOGRAPHIE_COMPLETE_FORMULES_GRAMMAIRE_JEAN.md)
 
 ---
 

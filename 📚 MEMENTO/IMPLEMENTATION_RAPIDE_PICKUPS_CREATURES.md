@@ -178,7 +178,7 @@ const BUILDINGS_SIMPLE = {
 
 ## ⚡ CHECKLIST IMPLÉMENTATION RAPIDE
 
-- [ ] Créer 3-5 créatures communes dans `game_assets/creatures/common/`
+- [ ] Créer 3-5 créatures communes dans `🎮 game_assets/creatures/common/`
 - [ ] Ajouter PickupService.java au backend
 - [ ] Créer les icônes de pickup (potions, cristaux, or)
 - [ ] Ajouter l'effet visuel de glow

@@ -11,7 +11,7 @@
 #### **🏗️ Architecture Technique**
 ```typescript
 // Structure moderne React TypeScript
-frontend/
+🌐 frontend/
 ├── src/
 │   ├── components/
 │   │   ├── TrueHeroesInterface.tsx      // Interface principale du jeu
@@ -27,7 +27,7 @@ frontend/
 │   ├── constants/
 │   │   ├── epicCreatures.ts             // Données créatures
 │   │   └── epicHeroes.ts                // Données héros
-│   └── tests/e2e/
+│   └── 🧪 tests/e2e/
 │       └── gameplay-demo.spec.ts        // Tests Playwright
 ```
 
@@ -132,7 +132,7 @@ test('Complete game flow', async ({ page }) => {
 #### **🏗️ Architecture Simple**
 ```javascript
 // Structure HTML/CSS/JS vanilla
-frontend/
+🌐 frontend/
 ├── index.html                    // Interface principale
 ├── api.js                        // Communication backend
 ├── game.js                       // Logique du jeu  

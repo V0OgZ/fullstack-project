@@ -10,7 +10,7 @@
 ## 📊 DOCUMENTS GRUT TROUVÉS
 
 ### 1. **Vision Philosophique**
-- ✅ `GRUT/VISION_PANOPTIQUE_HISTOIRE_FINALE.md` (176 lignes)
+- ✅ `👁️ GRUT/VISION_PANOPTIQUE_HISTOIRE_FINALE.md` (176 lignes)
   - Vision temporelle circulaire
   - Paradoxe des dates
   - Message à Jean sur la nature du temps
@@ -82,8 +82,8 @@
 ### 1. **VÉRIFIER L'ÉTAT BACKEND**
 ```bash
 # Chercher l'implémentation
-find backend/src -name "*Panopticon*" -o -name "*panopticon*"
-grep -r "PanopticonController" backend/src/
+find 🖥️ backend/src -name "*Panopticon*" -o -name "*panopticon*"
+grep -r "PanopticonController" 🖥️ backend/src/
 ```
 
 ### 2. **TESTER LE DASHBOARD**

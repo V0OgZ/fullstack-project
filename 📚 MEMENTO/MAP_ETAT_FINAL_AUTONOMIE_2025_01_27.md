@@ -57,7 +57,7 @@ PROBLÈMES                    SOLUTIONS
 
 ### **Backend (Port 8080)**
 ```
-backend/
+🖥️ backend/
 ├── src/main/java/com/example/demo/
 │   └── service/
 │       ├── CausalCollapseService.java ✅ (Dépendance fantôme supprimée)
@@ -69,7 +69,7 @@ backend/
 
 ### **Frontend React (Port 3000)**
 ```
-frontend/src/
+🌐 frontend/src/
 ├── services/
 │   └── epicService.ts ✅ (Types complets ajoutés)
 ├── components/
@@ -84,12 +84,12 @@ frontend/src/
 ## 🔮 **CHEMINS MYSTIQUES**
 
 ```
-MEMENTO/
+📚 MEMENTO/
 ├── SCHEMA_ARCHITECTURE_PARADOXALE_OPUS.md 🌀
 ├── RAPPORT_VINCENT_AUTONOMIE_TOTALE_2025_01_27.md 📊
 └── MAP_ETAT_FINAL_AUTONOMIE_2025_01_27.md 🗺️ (ce fichier)
 
-game_assets/artifacts/mineurs/
+🎮 game_assets/artifacts/mineurs/
 └── tatouages_memento_archiviste.json
     └── Tatouage #49: "superposition_quantique_autonome" ⚛️
 ```

@@ -9,9 +9,9 @@
 ## 🚀 **RÉVOLUTION IMPLÉMENTÉE**
 
 ### **✅ PRODUIT FINAL**
-- **Interface complète** : `frontend/visual-script-editor.html`
-- **Styles quantiques** : `frontend/visual-script-editor.css`
-- **Logique avancée** : `frontend/visual-script-editor.js`
+- **Interface complète** : `🌐 frontend/visual-script-editor.html`
+- **Styles quantiques** : `🌐 frontend/visual-script-editor.css`
+- **Logique avancée** : `🌐 frontend/visual-script-editor.js`
 - **Intégration** : `./hots editor` command
 
 ### **🎨 FONCTIONNALITÉS RÉVOLUTIONNAIRES**
@@ -67,7 +67,7 @@
 
 ### **📁 Structure des Fichiers**
 ```
-frontend/
+🌐 frontend/
 ├── visual-script-editor.html    # Interface principale
 ├── visual-script-editor.css     # Styles quantiques
 └── visual-script-editor.js      # Logique complète

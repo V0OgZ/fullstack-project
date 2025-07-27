@@ -55,7 +55,7 @@ CREATE_BLACK_HOLE(@20,20) IN_BULK
 
 ### 📍 **OCCURRENCES MAJEURES :**
 
-#### 1. **game_assets/heroes/grofi/the-dude-complete.json**
+#### 1. **🎮 game_assets/heroes/grofi/the-dude-complete.json**
 ```json
 {
   "id": "hero_the_dude",
@@ -67,8 +67,8 @@ CREATE_BLACK_HOLE(@20,20) IN_BULK
 
 #### 2. **Scénarios avec The Dude :**
 - `scenarios/test_nouveaux_pouvoirs_omegzero.hots`
-- `game_assets/scenarios/hots/le_dude_et_walter_fous.hots`
-- `game_assets/scenarios/hots/bataille_temporelle_complete.hots`
+- `🎮 game_assets/scenarios/hots/le_dude_et_walter_fous.hots`
+- `🎮 game_assets/scenarios/hots/bataille_temporelle_complete.hots`
 
 #### 3. **Pouvoirs The Dude :**
 ```hots
@@ -199,8 +199,8 @@ ABILITY(The Dude, EXISTENTIAL_CHILL)
 ## 📚 **RÉFÉRENCES :**
 
 - `scenarios/HOLOGRAPHIC_PRINCIPLE_001.hots`
-- `game_assets/heroes/grofi/the-dude-complete.json`
-- `docs/CODEX_COMPLET_HEROES_OF_TIME.md`
-- `game_assets/artifacts/mineurs/tatouages_memento_archiviste.json`
+- `🎮 game_assets/heroes/grofi/the-dude-complete.json`
+- `📖 docs/CODEX_COMPLET_HEROES_OF_TIME.md`
+- `🎮 game_assets/artifacts/mineurs/tatouages_memento_archiviste.json`
 
 **🔍 Recherche terminée avec succès !** 

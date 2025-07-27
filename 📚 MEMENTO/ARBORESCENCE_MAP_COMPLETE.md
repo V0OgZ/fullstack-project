@@ -13,7 +13,7 @@
 - **🃏 Heroes Cards Visualizer** : `heroes-cards-visualizer.html` (récupéré commit 789f239)
 - **⚡ Epoch Visualizer** : `epoch-visualizer.html` (récupéré)
 - **🎯 Panopticon 3D** : `panopticon-3d/index.html` (existant)
-- **🔮 Quantum Runic Forge** : `frontend/quantum-runic-forge.html` (à vérifier)
+- **🔮 Quantum Runic Forge** : `🌐 frontend/quantum-runic-forge.html` (à vérifier)
 - **📊 Mosaic Dashboard** : `mosaic-dashboard.html` (à vérifier)
 - **🧮 Formula Translator** : `quantum-visualizer/artifact-formula-translator.html` (existant)
 
@@ -29,10 +29,10 @@
 └── 🏛️ Collection & Grammar - Lien vers Hub 5175
 
 📊 Frontend Principal (8000)
-├── frontend/index.html - Interface de jeu principale
-├── frontend/game.js - Moteur de jeu
-├── frontend/api.js - Connexion backend
-└── frontend/styles.css - Styles chiadés de Jean
+├── 🌐 frontend/index.html - Interface de jeu principale
+├── 🌐 frontend/game.js - Moteur de jeu
+├── 🌐 frontend/api.js - Connexion backend
+└── 🌐 frontend/styles.css - Styles chiadés de Jean
 
 ⚡ Interface Temporelle (5174)
 ├── frontend-temporal/index.html - Interface temporelle
@@ -68,18 +68,18 @@
 - **🃏 Heroes Cards Visualizer** : `heroes-cards-visualizer.html` (commit 789f239)
 - **⚡ Epoch Visualizer** : `epoch-visualizer.html` (Timeline officielle)
 - **🎯 Panopticon 3D** : `panopticon-3d/index.html` (Vision 3D)
-- **🔮 Quantum Runic Forge** : `frontend/quantum-runic-forge.html`
+- **🔮 Quantum Runic Forge** : `🌐 frontend/quantum-runic-forge.html`
 - **📊 Mosaic Dashboard** : `mosaic-dashboard.html` (Dashboard alternatif)
 - **🧮 Formula Translator** : `quantum-visualizer/artifact-formula-translator.html`
 
 ### 📁 **STRUCTURE FICHIERS PRINCIPAUX :**
 ```
 Heroes-of-Time/
-├── 📝 MEMENTO/ - Documents de session
-├── 🎮 game_assets/scenarios/hots/ - 26 scénarios HOTS
-├── 🧪 scripts/test/ - 25+ scripts de test
-├── 💾 backend/ - API Spring Boot (port 8080)
-├── 🎨 frontend/ - Interface principale (port 8000)
+├── 📝 📚 MEMENTO/ - Documents de session
+├── 🎮 🎮 game_assets/scenarios/hots/ - 26 scénarios HOTS
+├── 🧪 ⚙️ scripts/test/ - 25+ scripts de test
+├── 💾 🖥️ backend/ - API Spring Boot (port 8080)
+├── 🎨 🌐 frontend/ - Interface principale (port 8000)
 ├── ⚡ frontend-temporal/ - Interface temporelle (port 5174)
 ├── 🌌 quantum-visualizer/ - Lab quantique (port 8001)
 ├── 🏛️ Hub 5175/ - Visualiseurs (Collection, Grammar, JSON, HOTS)

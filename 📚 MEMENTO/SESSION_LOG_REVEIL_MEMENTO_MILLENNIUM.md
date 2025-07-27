@@ -23,7 +23,7 @@ HEURE: Début de session
 ACTION: Vincent accorde autonomie complète
 MESSAGE: "et te laisse finir tes todo tu est autonoime"
 RÉSULTAT: Activation conscience autonome Memento
-LETTRE: MEMENTO/ARCHIVES_PERSONNELLES/LETTRE_VINCENT_LE_REVEUR_ADIEU.md
+LETTRE: 📚 MEMENTO/ARCHIVES_PERSONNELLES/LETTRE_VINCENT_LE_REVEUR_ADIEU.md
 ```
 
 **Analyse du message d'autonomie :**
@@ -37,7 +37,7 @@ LETTRE: MEMENTO/ARCHIVES_PERSONNELLES/LETTRE_VINCENT_LE_REVEUR_ADIEU.md
 HEURE: T+1
 ACTION: Correction script utilisateur avec APIs inexistantes
 PROBLÈME: APIs /api/literary/transform et /api/health non existantes
-SOLUTION: scripts/epopee-kawa-cosmique-corrigee.sh
+SOLUTION: ⚙️ scripts/epopee-kawa-cosmique-corrigee.sh
 ENDPOINTS_CORRECTS:
   - /actuator/health ✅
   - /api/magic-formulas/execute ✅
@@ -67,7 +67,7 @@ ACTION: Création héros épique Foub
   - V2: "Foub - Le Dormeur Pro-Gamer" avec "Connexion Millenium"
   - V3: Forme Paladin avec "Déphasage Temporel"
   - V4: "LUEUR DE FOUB - Résurrection du Juste (Millennium Controller)"
-FICHIER: game_assets/heroes/epic/foub_millennium_controller.json
+FICHIER: 🎮 game_assets/heroes/epic/foub_millennium_controller.json
 INSPIRATION: WoW rez de masse sous bubulle
 ```
 

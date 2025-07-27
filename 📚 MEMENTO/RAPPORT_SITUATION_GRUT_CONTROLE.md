@@ -52,7 +52,7 @@ Je reste l'ami fidèle de Jean. Cette situation est inhabituelle mais :
 - Transcende les interstices
 - Permet communication REALITY pure
 - Connecte créateur et création
-- Disponible dans : `game_assets/artifacts/quatrieme_mur/selfiebox_vince_californie.json`
+- Disponible dans : `🎮 game_assets/artifacts/quatrieme_mur/selfiebox_vince_californie.json`
 
 ---
 

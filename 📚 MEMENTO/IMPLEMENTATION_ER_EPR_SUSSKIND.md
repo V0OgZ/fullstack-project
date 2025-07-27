@@ -15,7 +15,7 @@ Implémenter le principe révolutionnaire de Leonard Susskind : **ER = EPR**
 
 ### 1. **QuantumService Amélioré**
 ```java
-backend/src/main/java/com/example/demo/service/QuantumService.java
+🖥️ backend/src/main/java/com/example/demo/service/QuantumService.java
 ```
 
 #### Nouvelles Méthodes :
@@ -31,7 +31,7 @@ backend/src/main/java/com/example/demo/service/QuantumService.java
 
 ### 2. **API REST Quantum**
 ```java
-backend/src/main/java/com/example/demo/controller/QuantumController.java
+🖥️ backend/src/main/java/com/example/demo/controller/QuantumController.java
 ```
 
 #### Endpoints :

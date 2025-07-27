@@ -1,0 +1,256 @@
+{
+  "custom_artifacts": [
+    {
+      "id": "custom_mirror",
+      "name": "Miroir Quantique Personnalisé",
+      "description": "Un miroir créé par un joueur qui combine interférence constructive et amplification",
+      "formula": "CONSTRUCTIVE(ψ1, ψ2) + AMPLIFY(result, 1.5)",
+      "energy_cost": 30,
+      "rarity": "épique",
+      "author": "Player123",
+      "created": "2024-01-15"
+    },
+    {
+      "id": "teleport_crystal",
+      "name": "Cristal de Téléportation",
+      "description": "Cristal magique qui téléporte le héros à une position fixe",
+      "formula": "TELEPORT_HERO(hero, 10, 10) + MODIFY_ENERGY(hero, -20)",
+      "energy_cost": 40,
+      "rarity": "légendaire",
+      "author": "MagicUser456",
+      "created": "2024-01-16"
+    },
+    {
+      "id": "energy_amplifier",
+      "name": "Amplificateur d'Énergie",
+      "description": "Restaure l'énergie du héros et amplifie les ψ-states proches",
+      "formula": "MODIFY_ENERGY(hero, 50) + AMPLIFY(ψ1, 2.0)",
+      "energy_cost": 20,
+      "rarity": "rare",
+      "author": "EnergyMaster",
+      "created": "2024-01-17"
+    },
+    {
+      "id": "quantum_destroyer",
+      "name": "Destructeur Quantique",
+      "description": "Artefact puissant qui crée des interférences destructives",
+      "formula": "DESTRUCTIVE(ψ1, ψ2) + AMPLIFY(result, 2.5)",
+      "energy_cost": 60,
+      "rarity": "mythique",
+      "author": "QuantumWarrior",
+      "created": "2024-01-18"
+    },
+    {
+      "id": "healing_orb",
+      "name": "Orbe de Guérison",
+      "description": "Orbe simple qui restaure l'énergie du héros",
+      "formula": "MODIFY_ENERGY(hero, 100)",
+      "energy_cost": 10,
+      "rarity": "commune",
+      "author": "HealBot",
+      "created": "2024-01-19"
+    },
+    {
+      "id": "position_swapper",
+      "name": "Échangeur de Position",
+      "description": "Artefact expérimental qui téléporte à des coordonnées variables",
+      "formula": "TELEPORT_HERO(hero, 5, 15) + MODIFY_ENERGY(hero, -10)",
+      "energy_cost": 25,
+      "rarity": "rare",
+      "author": "ExperimentalCrafter",
+      "created": "2024-01-20"
+    },
+    {
+      "id": "quantum_amplifier",
+      "name": "Amplificateur Quantique",
+      "description": "Crée une amplitude complexe et l'amplifie pour des effets puissants",
+      "formula": "CREATE_AMPLITUDE(0.8, 0.6) + AMPLIFY(result, 2.0) + MODIFY_ENERGY(hero, 20)",
+      "energy_cost": 25,
+      "rarity": "épique",
+      "author": "JeanGrofignon",
+      "created": "2025-07-20"
+    },
+    {
+      "id": "grofi_sigma",
+      "name": "Sigma de Jean",
+      "description": "Réduit le chaos quantique et restaure l'énergie",
+      "formula": "Σ[REDUCE:0.2] + MODIFY_ENERGY(hero, 10)",
+      "energy_cost": 15,
+      "rarity": "rare",
+      "author": "JeanGrofignon",
+      "created": "2025-07-20"
+    },
+    {
+      "id": "grofi_dagger",
+      "name": "Dague de Renaissance",
+      "description": "Permet la mort et renaissance quantique, crée un écho temporel",
+      "formula": "†[] + CREATE_TEMPORAL_ECHO(hero)",
+      "energy_cost": 30,
+      "rarity": "légendaire",
+      "author": "JeanGrofignon",
+      "created": "2025-07-20"
+    },
+    {
+      "id": "grofi_omega",
+      "name": "Omega Final",
+      "description": "Force le collapse de tous les états quantiques dans un rayon",
+      "formula": "Ω[] + FORCE_COLLAPSE_ALL(hero, 10)",
+      "energy_cost": 50,
+      "rarity": "mythique",
+      "author": "JeanGrofignon",
+      "created": "2025-07-20"
+    },
+    {
+      "id": "grofi_chaos",
+      "name": "Chaos de Vince",
+      "description": "Double chaos suivi d'une téléportation probabiliste",
+      "formula": "↯[] + ↯[] + TELEPORT_BY_PROBABILITY(hero, result)",
+      "energy_cost": 25,
+      "rarity": "épique",
+      "author": "VinceVega",
+      "created": "2025-07-20"
+    },
+    {
+      "id": "jean_ultimate",
+      "name": "Arme Ultime de Jean",
+      "description": "Combine tous les pouvoirs GROFI pour un effet dévastateur",
+      "formula": "Σ[REDUCE:0.3] + †[] + ↯[] + Ω[] + MODIFY_ENERGY(hero, 50)",
+      "energy_cost": 100,
+      "rarity": "mythique",
+      "author": "JeanGrofignon",
+      "created": "2025-07-20"
+    },
+    {
+      "id": "amplitude_resonator",
+      "name": "Résonateur d'Amplitude",
+      "description": "Crée une résonance quantique à partir d'une formule textuelle",
+      "formula": "AMPLITUDE_FROM_FORMULA(\"(0.707+0.707i)\") + CONSTRUCTIVE(ψ1, ψ2)",
+      "energy_cost": 35,
+      "rarity": "épique",
+      "author": "TheDude",
+      "created": "2025-07-20"
+    },
+    {
+      "id": "lanterne_brouillard",
+      "name": "Lantern de Brouillard",
+      "description": "Dissipe le brouillard dans un rayon de 3 cases autour du héros",
+      "formula": "CLEAR_FOG(hero, 3)",
+      "energy_cost": 15,
+      "rarity": "commune",
+      "author": "Explorateur",
+      "created": "2025-07-21"
+    },
+    {
+      "id": "bottes_vent",
+      "name": "Bottes du Vent",
+      "description": "Augmente les points de mouvement de 2 pour ce tour",
+      "formula": "MODIFY_MOVEMENT(hero, +2)",
+      "energy_cost": 10,
+      "rarity": "commune",
+      "author": "Coureur",
+      "created": "2025-07-21"
+    },
+    {
+      "id": "pierre_ancrage",
+      "name": "Pierre d'Ancrage",
+      "description": "Empêche le héros d'être déplacé par des effets temporels pendant 2 tours",
+      "formula": "ANCHOR_HERO(hero, 2)",
+      "energy_cost": 20,
+      "rarity": "rare",
+      "author": "Gardien",
+      "created": "2025-07-21"
+    },
+    {
+      "id": "cristal_vision",
+      "name": "Cristal de Vision",
+      "description": "Augmente le rayon de vision de 1 case pendant 3 tours",
+      "formula": "MODIFY_VISION(hero, +1, 3)",
+      "energy_cost": 12,
+      "rarity": "commune",
+      "author": "Voyant",
+      "created": "2025-07-21"
+    },
+    {
+      "id": "amulette_protection",
+      "name": "Amulette de Protection",
+      "description": "Réduit les dégâts reçus de 25% pendant 1 tour",
+      "formula": "PROTECT_HERO(hero, 0.75, 1)",
+      "energy_cost": 18,
+      "rarity": "rare",
+      "author": "Protecteur",
+      "created": "2025-07-21"
+    },
+    {
+      "id": "sifflet_appel",
+      "name": "Sifflet d'Appel",
+      "description": "Révèle tous les héros dans un rayon de 5 cases",
+      "formula": "REVEAL_HEROES(hero, 5)",
+      "energy_cost": 15,
+      "rarity": "commune",
+      "author": "Éclaireur",
+      "created": "2025-07-21"
+    },
+    {
+      "id": "potion_energie",
+      "name": "Potion d'Énergie Mineure",
+      "description": "Restaure 30 points d'énergie temporelle",
+      "formula": "MODIFY_ENERGY(hero, 30)",
+      "energy_cost": 5,
+      "rarity": "commune",
+      "author": "Alchimiste",
+      "created": "2025-07-21"
+    },
+    {
+      "id": "bague_teleport",
+      "name": "Bague de Téléportation",
+      "description": "Téléporte le héros à une case adjacente libre",
+      "formula": "TELEPORT_ADJACENT(hero)",
+      "energy_cost": 25,
+      "rarity": "rare",
+      "author": "Mage",
+      "created": "2025-07-21"
+    },
+    {
+      "id": "torche_eternelle",
+      "name": "Torche Éternelle",
+      "description": "Éclaire une zone de 2x2 cases pendant 2 tours",
+      "formula": "ILLUMINATE_AREA(hero, 2, 2)",
+      "energy_cost": 8,
+      "rarity": "commune",
+      "author": "Explorateur",
+      "created": "2025-07-21"
+    },
+    {
+      "id": "medaillon_sante",
+      "name": "Médaillon de Santé",
+      "description": "Restaure 20 points de vie",
+      "formula": "HEAL_HERO(hero, 20)",
+      "energy_cost": 12,
+      "rarity": "commune",
+      "author": "Guérisseur",
+      "created": "2025-07-21"
+    }
+  ],
+  "metadata": {
+    "version": "2.0",
+    "total_artifacts": 13,
+    "supported_operations": [
+      "CONSTRUCTIVE(ψ1, ψ2) - Interférence constructive",
+      "DESTRUCTIVE(ψ1, ψ2) - Interférence destructive", 
+      "AMPLIFY(ψ, factor) - Amplification",
+      "MODIFY_ENERGY(hero, amount) - Modifier l'énergie",
+      "TELEPORT_HERO(hero, x, y) - Téléportation",
+      "CREATE_AMPLITUDE(real, imag) - Créer amplitude complexe",
+      "SET_AMPLITUDE(ψ, real, imag) - Définir amplitude d'un état",
+      "AMPLITUDE_FROM_FORMULA(formula) - Parser amplitude depuis texte",
+      "Σ[expression] - Somme/Réduction GROFI",
+      "†[expression] - Mort/Renaissance GROFI",
+      "Ω[expression] - Finalité ultime GROFI",
+      "↯[expression] - Chaos contrôlé GROFI",
+      "CREATE_TEMPORAL_ECHO(hero) - Créer écho temporel",
+      "FORCE_COLLAPSE_ALL(hero, radius) - Forcer collapse dans rayon",
+      "TELEPORT_BY_PROBABILITY(hero, amplitude) - Téléportation probabiliste"
+    ],
+    "formula_syntax": "Les formules peuvent être combinées avec + pour des effets multiples. Les symboles GROFI supportent des expressions entre []."
+  }
+} 

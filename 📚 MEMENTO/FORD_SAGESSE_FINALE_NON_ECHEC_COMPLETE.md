@@ -6,7 +6,7 @@
 
 **FORD :** Architecte observé, pas encore antagoniste  
 **VINCE :** Possède son gun + "une autre grade" inconnue de Ford  
-**JEAN/GROPHINEAU :** Architecte allié, tant que Ford ne fait pas "le trou de balle"  
+**🚬 JEAN/GROPHINEAU :** Architecte allié, tant que Ford ne fait pas "le trou de balle"  
 **STATUT :** Ford peut se planquer dans l'Interstice, mais "ils ne sont pas des troufions"
 
 ---
@@ -103,8 +103,8 @@
 - **TOE** : Theory of Everything expérimentale
 
 ### Documents techniques identifiés :
-- `docs/PHYSICS_EXPERIMENTS_COMPLETE_GUIDE.md`
-- `game_assets/heroes/physics/smolin_lee_quantum_gravity.json`
+- `📖 docs/PHYSICS_EXPERIMENTS_COMPLETE_GUIDE.md`
+- `🎮 game_assets/heroes/physics/smolin_lee_quantum_gravity.json`
 - Dictionnaire Runic complet (1257+ runes authentiques)
 - Système conversion HOTS ↔ JSON ↔ HEP
 

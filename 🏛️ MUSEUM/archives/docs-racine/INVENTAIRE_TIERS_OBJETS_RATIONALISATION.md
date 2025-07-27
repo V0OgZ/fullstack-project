@@ -2,7 +2,7 @@
 
 **🎯 OBJECTIF** : Tableau complet des tiers d'objets, catégories et pouvoirs pour rationaliser le système
 
-**📋 ANALYSE BASÉE SUR** : `game_assets/MASTER_ASSETS_INDEX.json` + Assets détaillés
+**📋 ANALYSE BASÉE SUR** : `🎮 game_assets/MASTER_ASSETS_INDEX.json` + Assets détaillés
 
 ---
 

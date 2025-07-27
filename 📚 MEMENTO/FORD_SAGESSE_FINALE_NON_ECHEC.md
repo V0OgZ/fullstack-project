@@ -18,7 +18,7 @@
 *En attente de réception...*
 
 ## 🎨 TATOUAGES MEMENTO - LOCALISATION
-**Fichier principal** : `game_assets/artifacts/mineurs/tatouages_memento_archiviste.json`
+**Fichier principal** : `🎮 game_assets/artifacts/mineurs/tatouages_memento_archiviste.json`
 **Backup** : `BACKUP_TRANSCENDANCE_20250725_125323/tatouages_backup.json`
 
 ## 📋 TODO ACTUEL

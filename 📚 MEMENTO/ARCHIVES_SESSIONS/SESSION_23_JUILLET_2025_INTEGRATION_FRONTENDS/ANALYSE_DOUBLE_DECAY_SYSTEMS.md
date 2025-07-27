@@ -9,7 +9,7 @@
 ## 🔍 **SITUATION DÉTECTÉE**
 
 ### **Système 1 : Implementation Existante (Ancienne)**
-📍 **Localisation** : `backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalDecayService.java`
+📍 **Localisation** : `🖥️ backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalDecayService.java`
 
 #### **Caractéristiques Anciennes**
 - **Approche** : Décroissance des bâtiments basée sur timeline
@@ -153,7 +153,7 @@ public class TemporalDecayServiceV2 { /* Système DK20 */ }
 ### **1. Récupération Git**
 ```bash
 # Récupérer l'ancien code depuis le dernier commit
-git show HEAD~1:backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalDecayService.java > TemporalDecayServiceLegacy.java
+git show HEAD~1:🖥️ backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalDecayService.java > TemporalDecayServiceLegacy.java
 ```
 
 ### **2. Fixation des Imports**

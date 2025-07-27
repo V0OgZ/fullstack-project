@@ -85,7 +85,7 @@ Le système **EpicView** permet de parcourir et visualiser tous les assets du je
 
 ### Structure des fichiers
 ```
-frontend/public/assets/
+🌐 frontend/public/assets/
 ├── heroes/portraits/flare/          # 23 portraits Flare
 ├── creatures/                       # 28 sprites créatures
 ├── buildings/                       # (vide - placeholders)

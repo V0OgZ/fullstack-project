@@ -14,7 +14,7 @@ Documenter la procédure complète de nettoyage et organisation du projet Heroes
 
 ### 1️⃣ **FUSION DES TODOS**
 - **Fichiers sources** : Multiples TODO éparpillées
-- **Fichier cible** : `MEMENTO/TODO_FINALE_COMPLETE_STRUCTUREE.md`
+- **Fichier cible** : `📚 MEMENTO/TODO_FINALE_COMPLETE_STRUCTUREE.md`
 - **Méthode** : Consolidation par priorité et catégorie
 - **Résultat** : Structure unifiée avec états clairs
 
@@ -54,21 +54,21 @@ Documenter la procédure complète de nettoyage et organisation du projet Heroes
   *_BACKUP_*
   
   # Dossiers sensibles
-  VINCE/
+  🔫 VINCE/
   BUREAU/
-  MEMENTO/CONFIDENTIEL_GRUT_ONLY/
+  📚 MEMENTO/CONFIDENTIEL_GRUT_ONLY/
   
   # Rapports datés
   *_2025_01_*.md
   ```
 
 ### 5️⃣ **CRÉATION RAPPORTS**
-- `VINCE/README.md` - Vue d'ensemble
-- `VINCE/RAPPORT_FINAL_CHRISTIAN_INTERSTICE.md`
-- `VINCE/BRIEFING_FINAL_TOUT_COMPILE.md`
-- `VINCE/RAPPORT_COMPLET_VINCE.html`
-- `MEMENTO/RAPPORT_TODOS_UPDATE_2025_01_26.md`
-- `JEAN/RAPPORTS_URGENTS/RAPPORT_RANGEMENT_BUREAU_2025_01_26.md`
+- `🔫 VINCE/README.md` - Vue d'ensemble
+- `🔫 VINCE/RAPPORT_FINAL_CHRISTIAN_INTERSTICE.md`
+- `🔫 VINCE/BRIEFING_FINAL_TOUT_COMPILE.md`
+- `🔫 VINCE/RAPPORT_COMPLET_VINCE.html`
+- `📚 MEMENTO/RAPPORT_TODOS_UPDATE_2025_01_26.md`
+- `🚬 JEAN/RAPPORTS_URGENTS/RAPPORT_RANGEMENT_BUREAU_2025_01_26.md`
 
 ### 6️⃣ **IMPLÉMENTATIONS SYSTÈMES**
 - **Pickup System** : Complet avec animations

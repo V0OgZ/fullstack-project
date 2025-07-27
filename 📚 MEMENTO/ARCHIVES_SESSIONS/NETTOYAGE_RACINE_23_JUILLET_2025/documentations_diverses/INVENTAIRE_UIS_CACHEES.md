@@ -23,7 +23,7 @@
 ## 🧪 **UIs EXPÉRIMENTALES & ÉTHÉRÉES**
 
 ### 🔮 **Quantum Runic Forge**
-- **Fichier** : `frontend/quantum-runic-forge.html`
+- **Fichier** : `🌐 frontend/quantum-runic-forge.html`
 - **Description** : Interface pour forge runique quantique
 - **Statut** : 🔍 À examiner
 
@@ -98,8 +98,8 @@
 
 ### 📜 **Histoire Heroes of Time (Multiple)**
 - **Fichiers** : 
-  - `MEMENTO/HISTOIRE_HEROES_OF_TIME.html`
-  - `MEMENTO/GUIDES_REFERENCE/HISTOIRE_HEROES_OF_TIME.html`
+  - `📚 MEMENTO/HISTOIRE_HEROES_OF_TIME.html`
+  - `📚 MEMENTO/GUIDES_REFERENCE/HISTOIRE_HEROES_OF_TIME.html`
   - `memento-backup/HISTOIRE_HEROES_OF_TIME.html`
 - **Description** : Histoire complète avec style parchemin brûlé
 - **Statut** : ✅ Style parchemin opérationnel

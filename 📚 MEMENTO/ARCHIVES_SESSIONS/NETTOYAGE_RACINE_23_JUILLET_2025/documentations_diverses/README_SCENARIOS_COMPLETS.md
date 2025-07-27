@@ -6,7 +6,7 @@
 
 ---
 
-## 🎭 **SCÉNARIOS PRINCIPAUX (game_assets/scenarios/hots/)**
+## 🎭 **SCÉNARIOS PRINCIPAUX (🎮 game_assets/scenarios/hots/)**
 
 ### 1. 🎪 **LES PIEDS NICKELÉS FOUS** 
 **Fichier** : `les_pieds_nickeles_fous.hots`  
@@ -365,7 +365,7 @@
 
 ---
 
-## 🧪 **SCÉNARIOS DE TEST (game_assets/tests/hots/)**
+## 🧪 **SCÉNARIOS DE TEST (🎮 game_assets/🧪 tests/hots/)**
 
 ### 1. 🌊 **QUANTUM INTERFERENCE TEST**
 **Fichier** : `quantum_interference_test.hots`  
@@ -479,7 +479,7 @@ curl -X POST http://localhost:8080/api/temporal/games/1/script \
   -d '{"script": "HERO(Arthur)"}'
 
 # Via Script de Test
-./scripts/test/test-pieds-nickeles-fous.sh
+./⚙️ scripts/test/test-pieds-nickeles-fous.sh
 ```
 
 ### 3. **Interface Web**

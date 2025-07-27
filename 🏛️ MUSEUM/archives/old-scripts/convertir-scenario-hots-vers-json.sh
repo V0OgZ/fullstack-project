@@ -14,8 +14,8 @@ RED='\033[0;31m'
 NC='\033[0m'
 
 # Variables
-HOTS_DIR="game_assets/scenarios/hots"
-JSON_DIR="game_assets/scenarios/visualizer"
+HOTS_DIR="🎮 game_assets/scenarios/hots"
+JSON_DIR="🎮 game_assets/scenarios/visualizer"
 
 usage() {
     echo -e "${BLUE}"

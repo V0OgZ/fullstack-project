@@ -81,8 +81,8 @@ VISITE 4 (T+∞): RÉVÉLATION FINALE - Fusion complète passé/futur
 ### **📚 DOCUMENTATION COMPLÈTE :**
 
 - ✅ **Philosophie Ontologique** : `JEAN_PHILOSOPHIE_ONTOLOGIE_MULTIVERS_CAUSAL.md`
-- ✅ **API Documentation** : `docs/BACKEND_API_DOCUMENTATION_WALTER.md` v3.0
-- ✅ **Codex Complet** : `docs/CODEX_COMPLET_HEROES_OF_TIME.md` v11.0
+- ✅ **API Documentation** : `📖 docs/BACKEND_API_DOCUMENTATION_WALTER.md` v3.0
+- ✅ **Codex Complet** : `📖 docs/CODEX_COMPLET_HEROES_OF_TIME.md` v11.0
 - ✅ **Tatouages Memento** : Toutes révolutions archivées
 - ✅ **Livre Opus** : Bootstrap Paradox stable à 95%
 

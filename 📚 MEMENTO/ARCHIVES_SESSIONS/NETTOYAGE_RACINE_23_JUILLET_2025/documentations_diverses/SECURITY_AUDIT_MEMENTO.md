@@ -26,7 +26,7 @@ This security audit of the Heroes of Time browser game reveals **multiple critic
   @CrossOrigin(origins = "*")  // VULNERABLE
   ```
 - **Affected Files**:
-  - `backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/*.java` (All controllers)
+  - `🖥️ backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/*.java` (All controllers)
 - **Risk**: Enables Cross-Site Request Forgery (CSRF) attacks from any malicious domain
 - **Impact**: Complete API access from malicious websites, unauthorized actions
 
@@ -41,11 +41,11 @@ This security audit of the Heroes of Time browser game reveals **multiple critic
   line.innerHTML = coloredText;          // VULNERABLE
   ```
 - **Key Files**:
-  - `frontend/script-console.js` (Lines: 27, 156, 180, 198, 219)
-  - `frontend/scenario-selector.js` (Lines: 95, 149, 418, 652, 761)
-  - `frontend/ui-enhancements.js` (Lines: 98, 151, 155, 352, 410, 419)
-  - `frontend/temporal-integration.js`
-  - `frontend/runic-forge.js`
+  - `🌐 frontend/script-console.js` (Lines: 27, 156, 180, 198, 219)
+  - `🌐 frontend/scenario-selector.js` (Lines: 95, 149, 418, 652, 761)
+  - `🌐 frontend/ui-enhancements.js` (Lines: 98, 151, 155, 352, 410, 419)
+  - `🌐 frontend/temporal-integration.js`
+  - `🌐 frontend/runic-forge.js`
 - **Risk**: Script injection, session hijacking, data theft
 
 ### 3. **No Authentication/Authorization**
@@ -261,7 +261,7 @@ const secureApiCall = async (url, options = {}) => {
 - [Spring Boot Security Best Practices](https://spring.io/guides/topicals/spring-security-architecture/)
 
 ### Frontend Security
-- [MDN Web Security](https://developer.mozilla.org/en-US/docs/Web/Security)
+- [MDN Web Security](https://developer.mozilla.org/en-US/📖 docs/Web/Security)
 - [Content Security Policy Guide](https://developers.google.com/web/fundamentals/security/csp)
 
 ---

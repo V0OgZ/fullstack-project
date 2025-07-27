@@ -8,10 +8,10 @@
 **Statut :** COMPLÉTÉ ET FONCTIONNEL
 
 #### Composants créés :
-- `frontend/html-interfaces/pickup-system-demo.html` - Démo interactive complète
-- `frontend/src/services/pickupService.js` - Service modulaire réutilisable
-- `game_assets/config/drop_tables.json` - Configuration des drops
-- `frontend/src/components/PickupNotification.js/.css` - Composants React
+- `🌐 frontend/html-interfaces/pickup-system-demo.html` - Démo interactive complète
+- `🌐 frontend/src/services/pickupService.js` - Service modulaire réutilisable
+- `🎮 game_assets/config/drop_tables.json` - Configuration des drops
+- `🌐 frontend/src/components/PickupNotification.js/.css` - Composants React
 
 #### Fonctionnalités :
 - ✨ **Drops intelligents** selon probabilités configurables
@@ -25,8 +25,8 @@
 **Statut :** COMPLÉTÉ ET JOUABLE
 
 #### Composants créés :
-- `frontend/components/CombatInterface.js` - Module complet de combat
-- `frontend/html-interfaces/combat-interface-demo.html` - Démo jouable
+- `🌐 frontend/components/CombatInterface.js` - Module complet de combat
+- `🌐 frontend/html-interfaces/combat-interface-demo.html` - Démo jouable
 
 #### Fonctionnalités :
 - ⬡ **Grille hexagonale 8x6** avec terrains variés

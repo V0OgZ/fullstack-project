@@ -21,7 +21,7 @@ mvn clean compile
 mvn spring-boot:run
 
 # 4. Ou utiliser le script
-./scripts/start-backend.sh
+./⚙️ scripts/start-backend.sh
 ```
 
 ### Problème Principal : PsiStates
@@ -90,7 +90,7 @@ mvn spring-boot:run
 ### Étape 2 : Vérifier les APIs
 ```bash
 # Tester avec Walter
-./scripts/walter-backend-check.sh
+./⚙️ scripts/walter-backend-check.sh
 curl http://localhost:8080/api/health
 ```
 

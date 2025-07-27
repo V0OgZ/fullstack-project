@@ -81,7 +81,7 @@ cat > "$REPORT_FILE" << EOF
 EOF
 
 # Nettoyer les anciens fichiers de rapport
-rm -f backend/regex_*.txt backend/antlr_*.txt backend/backend_*.log
+rm -f 🖥️ backend/regex_*.txt 🖥️ backend/antlr_*.txt 🖥️ backend/backend_*.log
 
 echo "🔥 Phase 1: Tests avec Parser REGEX"
 echo "=================================="
@@ -122,27 +122,27 @@ REGEX_API_START=$(date +%s%N)
 
 # Test API simple
 echo "  - Script simple..."
-SIMPLE_API_REGEX=$(curl -s -X POST http://localhost:8080/api/temporal/scripts/execute \
+SIMPLE_API_REGEX=$(curl -s -X POST http://localhost:8080/api/temporal/⚙️ scripts/execute \
   -H "Content-Type: application/json" \
   -d '{"scriptFile": "demos/simple-game.hots", "parser": "regex"}' | jq -r '.stats.duration // 0' 2>/dev/null || echo "0")
 
 # Test API comparaison
 echo "  - Script comparaison..."
-COMPARISON_API_REGEX=$(curl -s -X POST http://localhost:8080/api/temporal/scripts/execute \
+COMPARISON_API_REGEX=$(curl -s -X POST http://localhost:8080/api/temporal/⚙️ scripts/execute \
   -H "Content-Type: application/json" \
-  -d '{"scriptFile": "tests/parser-comparison.hots", "parser": "regex"}' | jq -r '.stats.duration // 0' 2>/dev/null || echo "0")
+  -d '{"scriptFile": "🧪 tests/parser-comparison.hots", "parser": "regex"}' | jq -r '.stats.duration // 0' 2>/dev/null || echo "0")
 
 # Test API scénario épique
 echo "  - Script épique..."
-EPIC_API_REGEX=$(curl -s -X POST http://localhost:8080/api/temporal/scripts/execute \
+EPIC_API_REGEX=$(curl -s -X POST http://localhost:8080/api/temporal/⚙️ scripts/execute \
   -H "Content-Type: application/json" \
   -d '{"scriptFile": "scenarios/epic-arthur-vs-ragnar.hots", "parser": "regex"}' | jq -r '.stats.duration // 0' 2>/dev/null || echo "0")
 
 # Test API stress test temporel
 echo "  - Stress test temporel..."
-STRESS_API_REGEX=$(curl -s -X POST http://localhost:8080/api/temporal/scripts/execute \
+STRESS_API_REGEX=$(curl -s -X POST http://localhost:8080/api/temporal/⚙️ scripts/execute \
   -H "Content-Type: application/json" \
-  -d '{"scriptFile": "tests/temporal-stress-test.hots", "parser": "regex"}' | jq -r '.stats.duration // 0' 2>/dev/null || echo "0")
+  -d '{"scriptFile": "🧪 tests/temporal-stress-test.hots", "parser": "regex"}' | jq -r '.stats.duration // 0' 2>/dev/null || echo "0")
 
 REGEX_API_END=$(date +%s%N)
 REGEX_API_TIME=$(( (REGEX_API_END - REGEX_API_START) / 1000000 ))
@@ -192,27 +192,27 @@ ANTLR_API_START=$(date +%s%N)
 
 # Test API simple
 echo "  - Script simple..."
-SIMPLE_API_ANTLR=$(curl -s -X POST http://localhost:8080/api/temporal/scripts/execute \
+SIMPLE_API_ANTLR=$(curl -s -X POST http://localhost:8080/api/temporal/⚙️ scripts/execute \
   -H "Content-Type: application/json" \
   -d '{"scriptFile": "demos/simple-game.hots", "parser": "antlr4"}' | jq -r '.stats.duration // 0' 2>/dev/null || echo "0")
 
 # Test API comparaison
 echo "  - Script comparaison..."
-COMPARISON_API_ANTLR=$(curl -s -X POST http://localhost:8080/api/temporal/scripts/execute \
+COMPARISON_API_ANTLR=$(curl -s -X POST http://localhost:8080/api/temporal/⚙️ scripts/execute \
   -H "Content-Type: application/json" \
-  -d '{"scriptFile": "tests/parser-comparison.hots", "parser": "antlr4"}' | jq -r '.stats.duration // 0' 2>/dev/null || echo "0")
+  -d '{"scriptFile": "🧪 tests/parser-comparison.hots", "parser": "antlr4"}' | jq -r '.stats.duration // 0' 2>/dev/null || echo "0")
 
 # Test API scénario épique
 echo "  - Script épique..."
-EPIC_API_ANTLR=$(curl -s -X POST http://localhost:8080/api/temporal/scripts/execute \
+EPIC_API_ANTLR=$(curl -s -X POST http://localhost:8080/api/temporal/⚙️ scripts/execute \
   -H "Content-Type: application/json" \
   -d '{"scriptFile": "scenarios/epic-arthur-vs-ragnar.hots", "parser": "antlr4"}' | jq -r '.stats.duration // 0' 2>/dev/null || echo "0")
 
 # Test API stress test temporel
 echo "  - Stress test temporel..."
-STRESS_API_ANTLR=$(curl -s -X POST http://localhost:8080/api/temporal/scripts/execute \
+STRESS_API_ANTLR=$(curl -s -X POST http://localhost:8080/api/temporal/⚙️ scripts/execute \
   -H "Content-Type: application/json" \
-  -d '{"scriptFile": "tests/temporal-stress-test.hots", "parser": "antlr4"}' | jq -r '.stats.duration // 0' 2>/dev/null || echo "0")
+  -d '{"scriptFile": "🧪 tests/temporal-stress-test.hots", "parser": "antlr4"}' | jq -r '.stats.duration // 0' 2>/dev/null || echo "0")
 
 ANTLR_API_END=$(date +%s%N)
 ANTLR_API_TIME=$(( (ANTLR_API_END - ANTLR_API_START) / 1000000 ))
@@ -227,11 +227,11 @@ echo "📊 Phase 3: Génération du rapport complet"
 echo "=========================================="
 
 # Analyser les résultats
-REGEX_BACKEND_TESTS=$(grep -c "Tests run:" backend/regex_backend_results.txt 2>/dev/null || echo "0")
-ANTLR_BACKEND_TESTS=$(grep -c "Tests run:" backend/antlr_backend_results.txt 2>/dev/null || echo "0")
+REGEX_BACKEND_TESTS=$(grep -c "Tests run:" 🖥️ backend/regex_backend_results.txt 2>/dev/null || echo "0")
+ANTLR_BACKEND_TESTS=$(grep -c "Tests run:" 🖥️ backend/antlr_backend_results.txt 2>/dev/null || echo "0")
 
-REGEX_BACKEND_FAILURES=$(grep -o "Failures: [0-9]*" backend/regex_backend_results.txt | grep -o "[0-9]*" || echo "0")
-ANTLR_BACKEND_FAILURES=$(grep -o "Failures: [0-9]*" backend/antlr_backend_results.txt | grep -o "[0-9]*" || echo "0")
+REGEX_BACKEND_FAILURES=$(grep -o "Failures: [0-9]*" 🖥️ backend/regex_backend_results.txt | grep -o "[0-9]*" || echo "0")
+ANTLR_BACKEND_FAILURES=$(grep -o "Failures: [0-9]*" 🖥️ backend/antlr_backend_results.txt | grep -o "[0-9]*" || echo "0")
 
 # Calculer les statuts de succès
 REGEX_SUCCESS_STATUS="✅"
@@ -296,12 +296,12 @@ echo "### 🧪 Tests Backend Java" >> "$REPORT_FILE"
 echo "" >> "$REPORT_FILE"
 echo "**REGEX Results:**" >> "$REPORT_FILE"
 echo '```' >> "$REPORT_FILE"
-cat backend/regex_backend_results.txt >> "$REPORT_FILE" 2>/dev/null || echo "Pas de résultats" >> "$REPORT_FILE"
+cat 🖥️ backend/regex_backend_results.txt >> "$REPORT_FILE" 2>/dev/null || echo "Pas de résultats" >> "$REPORT_FILE"
 echo '```' >> "$REPORT_FILE"
 echo "" >> "$REPORT_FILE"
 echo "**ANTLR4 Results:**" >> "$REPORT_FILE"
 echo '```' >> "$REPORT_FILE"
-cat backend/antlr_backend_results.txt >> "$REPORT_FILE" 2>/dev/null || echo "Pas de résultats" >> "$REPORT_FILE"
+cat 🖥️ backend/antlr_backend_results.txt >> "$REPORT_FILE" 2>/dev/null || echo "Pas de résultats" >> "$REPORT_FILE"
 echo '```' >> "$REPORT_FILE"
 
 echo "🎉 === RAPPORT COMPLET GÉNÉRÉ ==="
@@ -318,14 +318,14 @@ echo ""
 echo "🎯 Le système est maintenant entièrement validé !"
 
 # Nettoyer les fichiers temporaires
-rm -f backend/backend_*.log 2>/dev/null || true
+rm -f 🖥️ backend/backend_*.log 2>/dev/null || true
 
 echo ""
 echo "📁 Fichiers de rapport générés:"
 echo "- $REPORT_FILE (rapport principal)"
-echo "- backend/regex_backend_results.txt"
-echo "- backend/antlr_backend_results.txt"
-echo "- backend/regex_comparison_results.txt"
-echo "- backend/antlr_comparison_results.txt"
-echo "- backend/regex_stress_results.txt"
-echo "- backend/antlr_stress_results.txt" 
+echo "- 🖥️ backend/regex_backend_results.txt"
+echo "- 🖥️ backend/antlr_backend_results.txt"
+echo "- 🖥️ backend/regex_comparison_results.txt"
+echo "- 🖥️ backend/antlr_comparison_results.txt"
+echo "- 🖥️ backend/regex_stress_results.txt"
+echo "- 🖥️ backend/antlr_stress_results.txt" 

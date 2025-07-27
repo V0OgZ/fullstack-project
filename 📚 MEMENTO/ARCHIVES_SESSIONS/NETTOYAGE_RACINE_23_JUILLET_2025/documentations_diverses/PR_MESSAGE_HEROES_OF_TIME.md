@@ -51,7 +51,7 @@ Cette PR représente **plus de 100 commits** de développement intensif sur le s
 - 📚 **Documentation Technique** : Architecture, API, Gameplay
 - 🏛️ **Musée Légendaire** : Collection d'objets et héros
 - 📊 **Rapports de Progression** : Suivi complet du développement
-- 🎯 **Scripts Standardisés** : `/scripts/actifs/` avec commandes fixes
+- 🎯 **Scripts Standardisés** : `/⚙️ scripts/actifs/` avec commandes fixes
 
 #### **Ports Standardisés**
 - **9000** : Dashboard Unifié (PRINCIPAL)
@@ -119,13 +119,13 @@ Cette PR transforme Heroes of Time en un **système unifié complet** avec :
 
 ```bash
 # Démarrer tous les services
-./scripts/actifs/start-services-background.sh
+./⚙️ scripts/actifs/start-services-background.sh
 
 # Vérifier le statut
 lsof -i :9000,8000,8080,5174,8001,5175,8888 | grep LISTEN
 
 # Arrêter tous les services
-./scripts/actifs/stop-all-services.sh
+./⚙️ scripts/actifs/stop-all-services.sh
 ```
 
 ---

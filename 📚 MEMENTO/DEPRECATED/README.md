@@ -21,7 +21,7 @@ Analyses et rapports **PÉRIMÉS** ou remplacés :
 - Analyses architecture dépassées
 - Investigations techniques obsolètes
 
-### 📚 **superseded-docs/**
+### 📚 **superseded-📖 docs/**
 Documentation **REMPLACÉE** par de nouvelles versions :
 - Anciennes documentations techniques
 - Guides de référence obsolètes
@@ -35,7 +35,7 @@ Code et docs backend **LEGACY** :
 
 ---
 
-## ✅ **DOCUMENTS ACTIFS (gardés dans MEMENTO/)**
+## ✅ **DOCUMENTS ACTIFS (gardés dans 📚 MEMENTO/)**
 
 ### 🎯 **Session Courante**
 - `TODO_SESSION_ACTUELLE.md` - TODO list active
@@ -62,7 +62,7 @@ Code et docs backend **LEGACY** :
 
 1. **🔧 Problème résolu** → `fixes-resolved/`
 2. **📅 Date > 1 mois + remplacé** → `old-analysis/`
-3. **📚 Nouvelle version existe** → `superseded-docs/`
+3. **📚 Nouvelle version existe** → `superseded-📖 docs/`
 4. **🏗️ Backend changé** → `backend-legacy/`
 
 ---
@@ -75,4 +75,4 @@ Code et docs backend **LEGACY** :
 
 ---
 
-*Objectif : Garder MEMENTO/ propre et focalisé sur les documents actifs* 🎯 
+*Objectif : Garder 📚 MEMENTO/ propre et focalisé sur les documents actifs* 🎯 

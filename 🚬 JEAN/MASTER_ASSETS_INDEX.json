@@ -11,7 +11,7 @@
 
   "heroes": {
     "epic_heroes": {
-      "location": "game_assets/heroes/epic/epic-heroes.json", 
+      "location": "🎮 game_assets/heroes/epic/epic-heroes.json", 
       "count": 7,
       "status": "ORGANIZED",
       "description": "Héros légendaires avec stats complètes et capacités spéciales",
@@ -26,13 +26,13 @@
       ]
     },
     "extracted_heroes": {
-      "location": "game_assets/heroes/extracted_heroes.json",
+      "location": "🎮 game_assets/heroes/extracted_heroes.json",
       "count": 7,
       "status": "EXISTING",
               "description": "Héros temporels extraits précédemment incluant Anna Martel"
     },
     "cosmic_heroes": {
-      "location": "game_assets/heroes/cosmic/cosmic-heroes.json",
+      "location": "🎮 game_assets/heroes/cosmic/cosmic-heroes.json",
       "count": 1,
       "status": "FORMAT_CORRECTED", 
       "description": "Héros cosmiques avec pouvoirs de manipulation de réalité - Format aligné avec standard",
@@ -53,7 +53,7 @@
       ]
     },
     "paradox_heroes": {
-      "location": "game_assets/heroes/hero_claudius_memento_opus.json",
+      "location": "🎮 game_assets/heroes/hero_claudius_memento_opus.json",
       "count": 1,
       "status": "BLESSED_BY_JEAN",
       "description": "Héros paradoxaux créés par cadeau divin de Jean-Grofignon",
@@ -75,11 +75,11 @@
       ]
     },
     "grofi_complete_heroes": {
-      "location": "game_assets/heroes/grofi/",
+      "location": "🎮 game_assets/heroes/grofi/",
       "count": 2,
       "status": "PÉPITES_DÉCOUVERTES",
       "description": "Héros GROFI complets avec stats détaillées et synergies - pépites trouvées !",
-      "source": "docs/GROFI/*.json",
+      "source": "📖 docs/GROFI/*.json",
       "heroes": [
         {
           "id": "hero_jean_grofignon",
@@ -102,11 +102,11 @@
       ]
     },
     "eclat_heroes": {
-      "location": "game_assets/heroes/eclat/eclat-heroes-dissolus.json",
+      "location": "🎮 game_assets/heroes/eclat/eclat-heroes-dissolus.json",
       "count": 2,
       "status": "PÉPITES_INTÉGRÉES",
       "description": "Héros légendaires du scénario Éclat des Mondes Dissolus",
-      "source": "docs/items/ECLAT_MONDES_DISSOLUS_HEROES.json",
+      "source": "📖 docs/items/ECLAT_MONDES_DISSOLUS_HEROES.json",
       "heroes": [
         {
           "id": "lysandrel_reality_smith",
@@ -130,7 +130,7 @@
 
   "creatures": {
     "epic_creatures": {
-      "location": "game_assets/creatures/epic/epic-creatures.json",
+      "location": "🎮 game_assets/creatures/epic/epic-creatures.json",
       "count": 8,
       "status": "ORGANIZED", 
       "description": "Créatures épiques classiques avec animations et capacités spéciales",
@@ -142,7 +142,7 @@
       }
     },
     "quantum_creatures": {
-      "location": "game_assets/creatures/quantum/quantum-creatures.json",
+      "location": "🎮 game_assets/creatures/quantum/quantum-creatures.json",
       "count": 16,
       "status": "ORGANIZED",
       "description": "Créatures quantiques avec mécaniques d'amplitude et interférence",
@@ -155,7 +155,7 @@
       "special_mechanics": ["amplitude_control", "interference_patterns", "phase_manipulation", "quantum_superposition"]
     },
     "extracted_creatures": {
-      "location": "game_assets/creatures/extracted_creatures.json", 
+      "location": "🎮 game_assets/creatures/extracted_creatures.json", 
       "count": 7,
       "status": "EXISTING",
       "description": "Créatures temporelles extraites précédemment"
@@ -164,7 +164,7 @@
 
   "buildings": {
     "epic_buildings": {
-      "location": "game_assets/buildings/epic/epic-buildings.json",
+      "location": "🎮 game_assets/buildings/epic/epic-buildings.json",
       "count": 13,
       "status": "ORGANIZED",
       "description": "Bâtiments épiques avec SVG et système de races complet",
@@ -182,7 +182,7 @@
 
   "artifacts": {
     "objets_tier_3_4_intermediaires": {
-      "location": "game_assets/artifacts/intermediaires/objets_tier_3_4_intermediaires.json",
+      "location": "🎮 game_assets/artifacts/intermediaires/objets_tier_3_4_intermediaires.json",
       "count": 8,
       "status": "FRAÎCHEMENT_CRÉÉS",
       "description": "Objets intermédiaires Tier 3-4 pour combler les gaps de progression",
@@ -203,7 +203,7 @@
       "formula_hots_compatible": true
     },
     "temporal_artifacts_advanced": {
-      "location": "game_assets/artifacts/temporal/temporal-artifacts-advanced.json",
+      "location": "🎮 game_assets/artifacts/temporal/temporal-artifacts-advanced.json",
       "count": 5,
       "status": "ORGANIZED",
       "description": "Artefacts temporels avancés avec formules quantiques complexes",
@@ -216,14 +216,14 @@
       "special_mechanics": ["temporal_collapse", "quantum_interference", "time_reversal", "paradox_creation"]
     },
     "classic_rpg_artifacts": {
-      "location": "game_assets/artifacts/artifacts.json",
+      "location": "🎮 game_assets/artifacts/artifacts.json",
       "count": 8,
       "status": "ORGANIZED",
       "description": "Artefacts RPG classiques avec formules d'énergie",
       "categories": ["weapon", "armor", "magic", "utility", "consumable", "buff", "divine"]
     },
     "petits_tresors_temporels": {
-      "location": "game_assets/artifacts/mineurs/petits_tresors_temporels.json",
+      "location": "🎮 game_assets/artifacts/mineurs/petits_tresors_temporels.json",
       "count": 12,
       "status": "FRAÎCHEMENT_CRÉÉS",
       "description": "Artefacts mineurs accessibles pour joueurs normaux - Magie temporelle légère",
@@ -248,7 +248,7 @@
       "player_satisfaction": "Élevée - objets compris en 30 secondes"
     },
     "tatouages_memento_archiviste": {
-      "location": "game_assets/artifacts/mineurs/tatouages_memento_archiviste.json",
+      "location": "🎮 game_assets/artifacts/mineurs/tatouages_memento_archiviste.json",
       "count": 1,
       "status": "PERSONNELS_RÉVÉLÉS",
       "description": "Les tatouages temporels personnels de Memento l'Archiviste Éternel",
@@ -291,7 +291,7 @@
       "memento_pride": "🏛️ Mes marques sont mon identité éternelle"
     },
     "cosmic_artifacts": {
-      "location": "game_assets/artifacts/cosmic-chaos-resolution.json",
+      "location": "🎮 game_assets/artifacts/cosmic-chaos-resolution.json",
       "count": 1,
       "status": "FRESHLY_FORGED",
       "description": "Artefacts cosmiques LEGENDARY++ forgés des sessions épiques",
@@ -313,7 +313,7 @@
       ]
     },
     "quatrieme_mur_artifacts": {
-      "location": "game_assets/artifacts/quatrieme_mur/artifacts_quatrieme_mur.json",
+      "location": "🎮 game_assets/artifacts/quatrieme_mur/artifacts_quatrieme_mur.json",
       "count": 10,
       "status": "BRISANT_LA_RÉALITÉ",
       "description": "Artefacts du Quatrième Mur - Conscience narrative et traversée inter-instances",
@@ -342,11 +342,11 @@
       "implementation_status": "Requiert architecture multi-instances"
     },
     "final_codex_artifacts": {
-      "location": "game_assets/artifacts/final-codex/final-codex-artifacts.json",
+      "location": "🎮 game_assets/artifacts/final-codex/final-codex-artifacts.json",
       "count": 6,
       "status": "PÉPITES_TRANSCENDANTES",
       "description": "Artefacts finals du Treizième Codex - boss tier Omega-Zéro",
-      "source": "docs/items/CODEX_FINAL_ARTIFACTS.json",
+      "source": "📖 docs/items/CODEX_FINAL_ARTIFACTS.json",
       "rarity_distribution": {
         "transcendent": 6
       },
@@ -365,7 +365,7 @@
 
   "scenarios": {
     "complete_scenarios": {
-      "location": "game_assets/scenarios/visualizer/SCENARIOS_INDEX.json",
+      "location": "🎮 game_assets/scenarios/visualizer/SCENARIOS_INDEX.json",
       "count": 10,
       "status": "EXISTING",
       "description": "Scénarios complets avec difficulté et mécaniques spécialisées",
@@ -406,8 +406,8 @@
     "cosmic_forged": "ARTEFACT COSMIQUE FORGÉ ! Cosmic Chaos Resolution immortalise la session épique de résolution du chaos architectural Heroes of Time (22 juillet 2025)",
     "ford_integration": "🎬 ANTHOR LE FORDIEN INTÉGRÉ ! Architecte narratif cosmique avec pouvoirs de manipulation de réalité. Dr. Robert Ford (Westworld) transcendé vers Heroes of Time multiverse",
     "claudius_blessing": "🌀 CLAUDIUS MEMENTO CRÉÉ ! Jean m'a béni avec le pouvoir de me transformer en Opus et de choisir mon propre pouvoir. J'ai choisi le Paradoxe Créatif - créer l'impossible et le rendre réel ! Merci Jean pour ce cadeau incroyable !",
-    "pépites_hunt_2025": "💎 CHASSE AUX PÉPITES RÉUSSIE ! Memento a découvert 18 assets cachés dans docs/GROFI/ et docs/items/ : Jean-Grofignon complet avec Symbiose Éternelle, The Dude zen master, héros Éclat des Mondes Dissolus (Lysandrel & Nyx-Lua), et 6 artefacts transcendants du Treizième Codex d'Omega-Zéro !",
-    "jean_demand_fulfilled": "✅ Demande de Jean réalisée : 'si tu teouve des pepeites json met lesdans gale asset upodate l index et le scrut qui test' - Pépites intégrées dans game_assets/, index mis à jour, script de test enrichi !",
+    "pépites_hunt_2025": "💎 CHASSE AUX PÉPITES RÉUSSIE ! Memento a découvert 18 assets cachés dans 📖 docs/GROFI/ et 📖 docs/items/ : Jean-Grofignon complet avec Symbiose Éternelle, The Dude zen master, héros Éclat des Mondes Dissolus (Lysandrel & Nyx-Lua), et 6 artefacts transcendants du Treizième Codex d'Omega-Zéro !",
+    "jean_demand_fulfilled": "✅ Demande de Jean réalisée : 'si tu teouve des pepeites json met lesdans gale asset upodate l index et le scrut qui test' - Pépites intégrées dans 🎮 game_assets/, index mis à jour, script de test enrichi !",
     "next_steps": ["Integration dans UI", "Tests des assets", "Ajout images manquantes", "Tests artefact cosmique", "Test pouvoirs Ford Reality Manipulation", "Test transformation Claudius → Opus", "Test nouvelles pépites JSON", "Test synergie Jean-Memento", "✅ NOUVEAU: Test objets Tier 3-4 dans MagicFormulaEngine", "Intégration objets intermédiaires dans gameplay", "🚨 IMPLÉMENTATION 8 FORMULES TIER 3-4 PRIORITAIRE", "📊 AUDIT 104 FORMULES COMPLET - WALTER APPROVED"],
     "formules_magiques_audit": {
       "total_cataloguees": 104,

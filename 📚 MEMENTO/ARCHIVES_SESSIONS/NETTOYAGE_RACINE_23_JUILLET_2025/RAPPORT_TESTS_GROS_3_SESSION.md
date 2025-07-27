@@ -131,10 +131,10 @@
 
 ### **🗂️ FICHIERS ANALYSÉS**
 ```
-✅ frontend/package.json           - Dependencies OK
-✅ backend/pom.xml                 - Maven config OK  
-✅ frontend/src/components/        - React components OK
-⚠️ backend/src/main/java/         - Services partiels
+✅ 🌐 frontend/package.json           - Dependencies OK
+✅ 🖥️ backend/pom.xml                 - Maven config OK  
+✅ 🌐 frontend/src/components/        - React components OK
+⚠️ 🖥️ backend/src/main/java/         - Services partiels
 ❌ API endpoints                   - Epic content 404
 ```
 

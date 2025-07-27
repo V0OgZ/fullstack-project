@@ -10,13 +10,13 @@
 ### 1. 🚀 Backend Opérationnel
 - **État** : ✅ Démarré et fonctionnel sur port 8080
 - **Scripts créés** :
-  - `scripts/check-backend.sh` - Vérification complète
-  - `scripts/start-backend.sh` - Démarrage propre
-  - `scripts/stop-backend.sh` - Arrêt gracieux
+  - `⚙️ scripts/check-backend.sh` - Vérification complète
+  - `⚙️ scripts/start-backend.sh` - Démarrage propre
+  - `⚙️ scripts/stop-backend.sh` - Arrêt gracieux
 
 ### 2. 📖 Mode Histoire Implémenté
 
-#### Frontend (`frontend/story-mode.html`)
+#### Frontend (`🌐 frontend/story-mode.html`)
 - **Interface narrative complète** avec dialogues et choix
 - **Transitions visuelles spectaculaires** entre mondes :
   - Effet "reality shatter" (2D → 3D)
@@ -37,15 +37,15 @@
 ### 3. 💎 Système de Pickup
 
 #### Créatures communes créées :
-1. **Slime Temporel Bleu** (`game_assets/creatures/common/slime_bleu.json`)
+1. **Slime Temporel Bleu** (`🎮 game_assets/creatures/common/slime_bleu.json`)
    - Drop fréquent : potions, cristaux de temps
    - Créature inoffensive
 
-2. **Gobelin Collecteur** (`game_assets/creatures/common/gobelin_collecteur.json`)
+2. **Gobelin Collecteur** (`🎮 game_assets/creatures/common/gobelin_collecteur.json`)
    - Drop moyen : or, bois, potions
    - Peut voler de l'or au joueur
 
-3. **Imp Écarlate** (`game_assets/creatures/common/imp_rouge.json`)
+3. **Imp Écarlate** (`🎮 game_assets/creatures/common/imp_rouge.json`)
    - Drop rare : artefacts mineurs, buffs
    - Combat avec boules de feu
 
@@ -58,7 +58,7 @@
   - Support visuel pour le frontend
 
 ### 4. 🛠️ Outils & Scripts
-- **`scripts/launch-story-mode.sh`** - Lance le mode Histoire
+- **`⚙️ scripts/launch-story-mode.sh`** - Lance le mode Histoire
 - Vérifie le backend et ouvre automatiquement dans le navigateur
 
 ---
@@ -97,12 +97,12 @@ if (distance <= PICKUP_RANGE) {
 
 1. **Lancer le mode Histoire** :
    ```bash
-   ./scripts/launch-story-mode.sh
+   ./⚙️ scripts/launch-story-mode.sh
    ```
 
 2. **Ou manuellement** :
-   - Vérifier backend : `./scripts/check-backend.sh`
-   - Ouvrir : `frontend/story-mode.html`
+   - Vérifier backend : `./⚙️ scripts/check-backend.sh`
+   - Ouvrir : `🌐 frontend/story-mode.html`
 
 3. **Flow du jeu** :
    - Dialogue initial avec L'Évadé

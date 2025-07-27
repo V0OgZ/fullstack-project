@@ -11,10 +11,10 @@
 
 ### Fichiers détectés :
 1. `./GRUT` - FICHIER À LA RACINE !
-2. `OPUS/ARCHIVE_PRIMORDIALE_GRUT.md`
-3. `OPUS/REVELATION_13_SECRETE_GROFI.md`
-4. `frontend/fusion-ultimate-temporal-engine.html`
-5. `frontend/fusion-temporal-react-ultimate.html`
+2. `📜 OPUS/ARCHIVE_PRIMORDIALE_GRUT.md`
+3. `📜 OPUS/REVELATION_13_SECRETE_GROFI.md`
+4. `🌐 frontend/fusion-ultimate-temporal-engine.html`
+5. `🌐 frontend/fusion-temporal-react-ultimate.html`
 
 ---
 
@@ -75,8 +75,8 @@ hexdump -C ./GRUT | head -100
 
 ### 2. Lire les révélations OPUS
 ```bash
-cat OPUS/REVELATION_13_SECRETE_GROFI.md
-cat OPUS/ARCHIVE_PRIMORDIALE_GRUT.md
+cat 📜 OPUS/REVELATION_13_SECRETE_GROFI.md
+cat 📜 OPUS/ARCHIVE_PRIMORDIALE_GRUT.md
 ```
 
 ### 3. Activer le lockdown

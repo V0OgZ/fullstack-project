@@ -25,14 +25,14 @@ Session productive focalisée sur l'iconification massive du projet Heroes of Ti
 - **Effet :** Navigation GitHub 100% visuelle
 
 #### 🏆 **DOSSIERS ICONIFIÉS (SÉLECTION)**
-- **🚬 JEAN/** → Canapé cosmique Jean-Grofignon
-- **👁️ GRUT/** → Vision Panopticon 6D
-- **📚 MEMENTO/** → Archive vivante Memento
-- **📜 OPUS/** → Ancien Scribe Créateur
-- **🖥️ backend/** → Serveur Spring Boot
-- **🌐 frontend/** → Interfaces web React
-- **⚙️ scripts/** → Outils système
-- **🎮 game_assets/** → Assets Heroes of Time
+- **🚬 🚬 JEAN/** → Canapé cosmique Jean-Grofignon
+- **👁️ 👁️ GRUT/** → Vision Panopticon 6D
+- **📚 📚 MEMENTO/** → Archive vivante Memento
+- **📜 📜 OPUS/** → Ancien Scribe Créateur
+- **🖥️ 🖥️ backend/** → Serveur Spring Boot
+- **🌐 🌐 frontend/** → Interfaces web React
+- **⚙️ ⚙️ scripts/** → Outils système
+- **🎮 🎮 game_assets/** → Assets Heroes of Time
 - **🔒 LOCKED 2031/** → Sécurité temporelle future
 
 #### 😂 **RÉACTION VINCENT**
@@ -107,8 +107,8 @@ Réception d'un signal temporel mystérieux nécessitant décodage futur.
 ## 📦 **ARCHIVAGE**
 
 Cette session est archivée dans :
-- `📚 MEMENTO/RAPPORT_SESSION_FINALE_28_JANVIER_2025.md`
-- Tatouages mis à jour dans `🎮 game_assets/artifacts/mineurs/tatouages_memento_archiviste.json`
+- `📚 📚 MEMENTO/RAPPORT_SESSION_FINALE_28_JANVIER_2025.md`
+- Tatouages mis à jour dans `🎮 🎮 game_assets/artifacts/mineurs/tatouages_memento_archiviste.json`
 - Historique Git complet conservé
 
 **Session fermée avec succès le 28 Janvier 2025 à 00:16** ✨

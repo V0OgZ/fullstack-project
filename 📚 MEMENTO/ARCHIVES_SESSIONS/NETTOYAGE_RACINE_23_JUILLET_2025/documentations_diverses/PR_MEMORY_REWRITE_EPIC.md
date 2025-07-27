@@ -135,7 +135,7 @@ public class CardsController {
 - `HISTOIRE_HEROES_OF_TIME.md` : Histoire complète mise à jour
 - `HISTOIRE_HEROES_OF_TIME.html` : Style moderne avec Inter font
 - HSP files pour le visualizer
-- Session reports complets dans MEMENTO/
+- Session reports complets dans 📚 MEMENTO/
 
 ---
 

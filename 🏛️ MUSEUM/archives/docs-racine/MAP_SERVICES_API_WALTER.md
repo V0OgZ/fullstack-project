@@ -2,7 +2,7 @@
 
 **🎖️ WALTER SAYS**: *"FIREBASE CHARLIE 1970 - CARTE COMPLÈTE DE L'ARCHITECTURE BACKEND !"*
 
-**📍 BASÉ SUR** : `docs/BACKEND_API_DOCUMENTATION_WALTER.md`  
+**📍 BASÉ SUR** : `📖 docs/BACKEND_API_DOCUMENTATION_WALTER.md`  
 **🎯 OBJECTIF** : Map complète des services/API pour s'y retrouver dans le code
 
 ---
@@ -216,7 +216,7 @@ com/example/demo/repository/
 
 2. **Logs Monitoring** :
    ```bash
-   tail -f backend/logs/application.log
+   tail -f 🖥️ backend/logs/application.log
    ```
 
 3. **Database Access** :

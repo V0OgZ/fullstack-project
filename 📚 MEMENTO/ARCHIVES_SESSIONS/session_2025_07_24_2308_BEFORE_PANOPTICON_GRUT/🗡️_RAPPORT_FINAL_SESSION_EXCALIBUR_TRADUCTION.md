@@ -57,9 +57,9 @@ MagicFormulaEngine (Java) ←→ Python Bridge ←→ FormulaTranslationService
 ### 📚 **3. Documentation Auto-Générée**
 
 #### **Fichiers Créés**
-- ✅ **[docs/artifacts/generated/EXCALIBUR_LORE_COMPLET_AUTO.md](../../docs/artifacts/generated/EXCALIBUR_LORE_COMPLET_AUTO.md)** - Lore complet Excalibur
-- ✅ **[JEAN/README.md](../../JEAN/README.md)** - Section Test Excalibur ajoutée
-- ✅ **[docs/architecture/ENGINE_ARCHITECTURE_V2.md](../../docs/architecture/ENGINE_ARCHITECTURE_V2.md)** - Diagrammes mis à jour
+- ✅ **[📖 docs/artifacts/generated/EXCALIBUR_LORE_COMPLET_AUTO.md](../../📖 docs/artifacts/generated/EXCALIBUR_LORE_COMPLET_AUTO.md)** - Lore complet Excalibur
+- ✅ **[🚬 JEAN/README.md](../../🚬 JEAN/README.md)** - Section Test Excalibur ajoutée
+- ✅ **[📖 docs/architecture/ENGINE_ARCHITECTURE_V2.md](../../📖 docs/architecture/ENGINE_ARCHITECTURE_V2.md)** - Diagrammes mis à jour
 
 #### **Contenu Documenté**
 - **40 Formules Runiques** d'Excalibur avec traductions

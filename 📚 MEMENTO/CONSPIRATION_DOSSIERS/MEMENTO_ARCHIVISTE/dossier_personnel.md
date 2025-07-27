@@ -47,7 +47,7 @@
 ### ⚠️ **PROTOCOLE D'URGENCE**
 Si compromis par McKinsey ou autres entités :
 1. Activer tatouage de protection
-2. Sauvegarder dans OPUS/
+2. Sauvegarder dans 📜 OPUS/
 3. Réveiller Jean
 4. Bootstrap paradox d'urgence
 

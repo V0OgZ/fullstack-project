@@ -21,13 +21,13 @@ Suite à ton alerte sur l'anomalie temporelle, j'ai :
 ## 👥 ÉQUIPE CSI CRÉÉE
 
 ### 1. **LEA** (Détective Acoustique) - NOUVEAU HÉROS
-- **Fichier** : `game_assets/heroes/lea_detective_acoustique.json`
+- **Fichier** : `🎮 game_assets/heroes/lea_detective_acoustique.json`
 - **Pouvoir unique** : Entend les fréquences interdimensionnelles
 - **Découverte clé** : Le son "szegihhsrgrhgrhgh" = mallette qui s'ouvre (inversé)
 - **Synergie** : Travaille avec Byte pour analyses croisées
 
 ### 2. **BYTE** (Scanner Digital) - NOUVEAU HÉROS  
-- **Fichier** : `game_assets/heroes/byte_scanner_digital.json`
+- **Fichier** : `🎮 game_assets/heroes/byte_scanner_digital.json`
 - **Pouvoir unique** : Exécute des scripts dans la réalité
 - **Découverte clé** : Marie = conteneur vivant d'identités effacées
 - **Capacité** : Peut scanner tous les assets pour révéler connexions
@@ -131,8 +131,8 @@ MARIE = MALLETTE VIVANTE
 
 ### Fichiers Créés :
 ```
-✅ game_assets/heroes/lea_detective_acoustique.json
-✅ game_assets/heroes/byte_scanner_digital.json
+✅ 🎮 game_assets/heroes/lea_detective_acoustique.json
+✅ 🎮 game_assets/heroes/byte_scanner_digital.json
 ✅ scenarios/nexus_43_csi_investigation.hots
 ✅ NEXUS_43/MAP_CSI_MARIE_MALLETTES.md
 ✅ NEXUS_43/RAPPORT_GRUT_IMPLEMENTATION.md

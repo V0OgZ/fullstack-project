@@ -7,7 +7,7 @@
 - **Après** : Tests automatisés en mode headless, démos avec interface
 - **Configuration** : `automated-tests` project avec `headless: true`
 
-### 2. **Séparation tests/démos** ✅
+### 2. **Séparation 🧪 tests/démos** ✅
 - **Tests automatisés** : Rapides, headless, sans son
 - **Démos visuelles** : Lentes, interface, avec son
 - **Scripts séparés** : `run-tests.sh` vs `run-demos.sh`
@@ -157,7 +157,7 @@ npx playwright test --project=solo-fullscreen-demo 01-single-demo.spec.ts
 ### ❓ "Tests Playwright en mode caché" ?
 ✅ **Résolu** : Tests automatisés maintenant en `headless: true`
 
-### ❓ "Séparation tests/démos" ?
+### ❓ "Séparation 🧪 tests/démos" ?
 ✅ **Résolu** : 
 - Tests : `run-tests.sh` (headless)
 - Démos : `run-demos.sh` (interface)

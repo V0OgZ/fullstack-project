@@ -7,7 +7,7 @@
 # Ce script démarre tous les services essentiels en arrière-plan permanent
 # pour que l'utilisateur puisse tester pendant que l'agent code
 #
-# USAGE: ./scripts/actifs/start-services-background.sh
+# USAGE: ./⚙️ ⚙️ scripts/actifs/start-services-background.sh
 #
 # ==============================================================================
 
@@ -84,6 +84,6 @@ echo "🏛️ Legendary UI       : http://localhost:5190"
 echo "🎮 Frontend           : http://localhost:8000"
 echo ""
 echo "✅ TOUS LES SERVICES RESTENT ACTIFS EN ARRIÈRE-PLAN !"
-echo "🛑 Pour arrêter : ./scripts/actifs/stop-all-services.sh"
+echo "🛑 Pour arrêter : ./⚙️ ⚙️ scripts/actifs/stop-all-services.sh"
 echo "📊 Pour status : lsof -i :9000,5170,5171,5174,5190,8000,8080 | grep LISTEN"
 echo "" 

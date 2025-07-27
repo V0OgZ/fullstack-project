@@ -6,7 +6,7 @@
 ```
 Heroes-of-Time/
 │
-├── 📝 MEMENTO/ (Documents de session)
+├── 📝 📚 MEMENTO/ (Documents de session)
 │   ├── TODO_SESSION_ACTUELLE.md - État et objectifs
 │   ├── ARBORESCENCE_MAP_COMPLETE.md - Cette carte v3.0
 │   ├── JEAN_MESSAGES_BEST_OF.md - Vision du projet
@@ -16,7 +16,7 @@ Heroes-of-Time/
 │   └── benchmark_results_*.json - 📊 Résultats benchmarks
 │
 ├── 🎮 SCÉNARIOS .HOTS (66 fichiers!)
-│   ├── game_assets/scenarios/hots/
+│   ├── 🎮 game_assets/scenarios/hots/
 │   │   ├── oeil_de_wigner_scenario.hots - 👁️ L'Œil de Wigner
 │   │   ├── oeil_de_wigner_readme.hots - 📖 Histoire du README
 │   │   ├── epic-arthur-vs-ragnar.hots - ⚔️ Combat épique
@@ -24,7 +24,7 @@ Heroes-of-Time/
 │   │   ├── quantum_maze.hots - 🧩 PUZZLE QUANTIQUE COMPLET
 │   │   └── treasure_theft_test.hots - 🏴‍☠️ AXIS VOLE LE FUTUR!
 │   │
-│   ├── game_assets/tests/hots/
+│   ├── 🎮 game_assets/🧪 tests/hots/
 │   │   ├── bataille_temporelle_*.hots - 🗡️ Série bataille
 │   │   ├── quantum_artifacts_test.hots - 🔮 Test artefacts
 │   │   ├── quantum_interference_test.hots - 🌀 Test interférences
@@ -35,26 +35,26 @@ Heroes-of-Time/
 │       └── quantum_puzzle/scenarios/quantum_maze.hots - 🧩 Template puzzle
 │
 ├── 🧪 SCRIPTS DE TEST (94 scripts!)
-│   ├── scripts/test-jean-gros*.sh - 🎯 Tests Jean-Gros (v1, v2, simple)
-│   ├── scripts/test-causality-wall.sh - 🌀 Test mur causalité
-│   ├── scripts/test-vision-temporelle.sh - 🔮 Test vision futur
-│   ├── scripts/test-quantum-maze-complete.sh - 🧩 Test puzzle quantique
-│   ├── scripts/test-readme-story.sh - 📖 Test histoire README
-│   ├── scripts/test-axis-temporal.sh - 🏴‍☠️ Test vol temporel
-│   ├── scripts/test-all-complete.sh - 🏆 MASTER TEST SUITE
+│   ├── ⚙️ scripts/test-jean-gros*.sh - 🎯 Tests Jean-Gros (v1, v2, simple)
+│   ├── ⚙️ scripts/test-causality-wall.sh - 🌀 Test mur causalité
+│   ├── ⚙️ scripts/test-vision-temporelle.sh - 🔮 Test vision futur
+│   ├── ⚙️ scripts/test-quantum-maze-complete.sh - 🧩 Test puzzle quantique
+│   ├── ⚙️ scripts/test-readme-story.sh - 📖 Test histoire README
+│   ├── ⚙️ scripts/test-axis-temporal.sh - 🏴‍☠️ Test vol temporel
+│   ├── ⚙️ scripts/test-all-complete.sh - 🏆 MASTER TEST SUITE
 │   │
-│   ├── scripts/actifs/
+│   ├── ⚙️ scripts/actifs/
 │   │   ├── start-services-background.sh - 🚀 Démarre tout
 │   │   ├── stop-all-services.sh - 🛑 Arrête tout
 │   │   └── test-ui-quick.sh - ⚡ Test UI rapide
 │   │
-│   └── scripts/test/
+│   └── ⚙️ scripts/test/
 │       ├── test-complet-final.sh - 🏆 TEST FINAL COMPLET (28K!)
 │       ├── run-all-hots-scenarios.sh - 🎬 Lance TOUS les .hots
 │       └── benchmark-native-vs-script.sh - 📊 Benchmark performance
 │
 ├── 💾 BACKEND JAVA
-│   └── backend/src/main/java/com/heroesoftimepoc/temporalengine/
+│   └── 🖥️ backend/src/main/java/com/heroesoftimepoc/temporalengine/
 │       ├── service/
 │       │   ├── TemporalEngineService.java - 🎯 Moteur principal
 │       │   ├── PanopticonService.java - 🔮 PANOPTICΩN 5D→3D

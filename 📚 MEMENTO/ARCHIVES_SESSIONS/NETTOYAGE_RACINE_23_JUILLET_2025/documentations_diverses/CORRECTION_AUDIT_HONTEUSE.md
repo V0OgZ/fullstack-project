@@ -103,16 +103,16 @@ this.suggestions = [
 
 ### **❌ MES ERREURS MÉTHODOLOGIQUES :**
 1. **Recherche superficielle** → J'ai cherché seulement dans `/resources/heroes/` 
-2. **Ignoré les scénarios** → Pas regardé dans `game_assets/scenarios/hots/`
+2. **Ignoré les scénarios** → Pas regardé dans `🎮 game_assets/scenarios/hots/`
 3. **Ignoré les données de test** → Pas regardé `sample_data.json`
-4. **Ignoré les définitions JSON** → Pas regardé `docs/items/`
+4. **Ignoré les définitions JSON** → Pas regardé `📖 docs/items/`
 5. **Conclusion trop rapide** → Verdict sans vérification exhaustive
 
 ### **🎯 CE QUE J'AURAIS DÛ FAIRE :**
 1. **Recherche complète** dans tous les dossiers
 2. **Vérifier les scénarios .hots** (là où sont les vrais héros !)
 3. **Lire les sample_data.json** (données de test complètes)
-4. **Checker les définitions dans docs/** (héros complets)
+4. **Checker les définitions dans 📖 docs/** (héros complets)
 5. **Être moins catégorique** sans preuve absolue
 
 ---

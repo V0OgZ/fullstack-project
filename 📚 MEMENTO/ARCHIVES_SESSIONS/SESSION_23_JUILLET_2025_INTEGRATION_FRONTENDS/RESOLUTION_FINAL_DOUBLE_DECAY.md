@@ -24,7 +24,7 @@
 
 ### **Architecture Finale**
 ```
-backend/src/main/java/com/heroesoftimepoc/temporalengine/service/
+🖥️ backend/src/main/java/com/heroesoftimepoc/temporalengine/service/
 ├── TemporalDecayServiceLegacy.java     ✅ FONCTIONNEL
 ├── TemporalDecayServiceDK20.java       🔧 EN DÉVELOPPEMENT  
 └── TemporalEngineService.java          ✅ UTILISE LEGACY

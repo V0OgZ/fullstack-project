@@ -9,19 +9,19 @@ echo "=============================================================="
 
 # Vérification des annotations
 echo "1️⃣ Vérification des annotations @Entity..."
-grep -r "@Entity" backend/src/main/java/com/heroesoftimepoc/temporalengine/model/
+grep -r "@Entity" 🖥️ 🖥️ backend/src/main/java/com/heroesoftimepoc/temporalengine/model/
 
 echo ""
 echo "2️⃣ Vérification des imports Jakarta Persistence..."
-grep -r "import jakarta.persistence" backend/src/main/java/com/heroesoftimepoc/temporalengine/model/
+grep -r "import jakarta.persistence" 🖥️ 🖥️ backend/src/main/java/com/heroesoftimepoc/temporalengine/model/
 
 echo ""
 echo "3️⃣ Vérification de la configuration JPA..."
-cat backend/src/main/java/com/heroesoftimepoc/temporalengine/config/JpaConfig.java
+cat 🖥️ 🖥️ backend/src/main/java/com/heroesoftimepoc/temporalengine/config/JpaConfig.java
 
 echo ""
 echo "4️⃣ Vérification des dépendances Maven..."
-grep -A 20 "<dependencies>" backend/pom.xml | grep -B 20 "</dependencies>" | grep -E "hibernate|jpa|spring-data"
+grep -A 20 "<dependencies>" 🖥️ 🖥️ backend/pom.xml | grep -B 20 "</dependencies>" | grep -E "hibernate|jpa|spring-data"
 
 echo ""
 echo "5️⃣ Tentative de correction automatique..."
@@ -29,8 +29,8 @@ echo "5️⃣ Tentative de correction automatique..."
 # Création d'un fichier temporaire pour le package-info.java
 echo "📝 Création d'un package-info.java pour s'assurer que le package est bien scanné..."
 
-mkdir -p backend/src/main/java/com/heroesoftimepoc/temporalengine/model/
-cat > backend/src/main/java/com/heroesoftimepoc/temporalengine/model/package-info.java << 'EOF'
+mkdir -p 🖥️ 🖥️ backend/src/main/java/com/heroesoftimepoc/temporalengine/model/
+cat > 🖥️ 🖥️ backend/src/main/java/com/heroesoftimepoc/temporalengine/model/package-info.java << 'EOF'
 /**
  * Ce package contient tous les modèles d'entités JPA pour le moteur temporel.
  * Assurez-vous que toutes les classes dans ce package sont correctement annotées avec @Entity.
@@ -44,9 +44,9 @@ echo "✅ package-info.java créé avec succès."
 # Création d'un application.properties de secours
 echo "📝 Création d'un application.properties de secours avec configuration JPA explicite..."
 
-cp backend/src/main/resources/application.properties backend/src/main/resources/application.properties.backup
+cp 🖥️ 🖥️ backend/src/main/resources/application.properties 🖥️ 🖥️ backend/src/main/resources/application.properties.backup
 
-cat >> backend/src/main/resources/application.properties << 'EOF'
+cat >> 🖥️ 🖥️ backend/src/main/resources/application.properties << 'EOF'
 
 # CONFIGURATION JPA EXPLICITE AJOUTÉE POUR RÉSOUDRE LE PROBLÈME "Not a managed type"
 spring.jpa.properties.hibernate.physical_naming_strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
@@ -62,8 +62,8 @@ echo "✅ application.properties mis à jour avec configuration JPA explicite."
 # Création d'un fichier orm.xml pour mapping explicite
 echo "📝 Création d'un fichier orm.xml pour mapping explicite des entités..."
 
-mkdir -p backend/src/main/resources/META-INF/
-cat > backend/src/main/resources/META-INF/orm.xml << 'EOF'
+mkdir -p 🖥️ 🖥️ backend/src/main/resources/META-INF/
+cat > 🖥️ 🖥️ backend/src/main/resources/META-INF/orm.xml << 'EOF'
 <?xml version="1.0" encoding="UTF-8"?>
 <entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -91,7 +91,7 @@ echo "✅ orm.xml créé avec succès."
 
 echo ""
 echo "6️⃣ Nettoyage des fichiers de compilation précédents..."
-rm -rf backend/target/classes/com/heroesoftimepoc/temporalengine/model/
+rm -rf 🖥️ 🖥️ backend/target/classes/com/heroesoftimepoc/temporalengine/model/
 echo "✅ Nettoyage terminé."
 
 echo ""

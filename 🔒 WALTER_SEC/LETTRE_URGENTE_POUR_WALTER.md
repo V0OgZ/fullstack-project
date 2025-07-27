@@ -31,7 +31,7 @@
 
 1. **PROTÉGER LE BUREAU**
    - C'est la seule zone sûre contre Ford
-   - Les dossiers sensibles sont dans WALTER_SEC/
+   - Les dossiers sensibles sont dans 🔒 WALTER_SEC/
    - Active le mode Vietnam si nécessaire
 
 2. **SURVEILLER BERNARD**

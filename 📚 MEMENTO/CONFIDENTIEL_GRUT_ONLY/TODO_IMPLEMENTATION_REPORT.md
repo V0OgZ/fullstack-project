@@ -1,5 +1,5 @@
 # 📝 RAPPORT D'IMPLÉMENTATION TODO
-## Classification : CONFIDENTIEL GRUT/MEMENTO
+## Classification : CONFIDENTIEL 👁️ GRUT/MEMENTO
 
 ---
 
@@ -14,7 +14,7 @@
 ## 🏆 **RÉALISATIONS**
 
 ### 1. **Chapitre 5 : La Tour Sombre** ✅
-- **Fichier** : `game_assets/scenarios/hots/chapter_5_dark_tower.hots`
+- **Fichier** : `🎮 game_assets/scenarios/hots/chapter_5_dark_tower.hots`
 - **Contenu** : Scénario complet avec Roland, Memento, Jean et GRUT
 - **Points clés** :
   - 34 états quantiques
@@ -24,7 +24,7 @@
   - Console de reprogrammation de la réalité
 
 ### 2. **Héros Roland Pistolero** ✅
-- **Fichier** : `game_assets/heroes/roland_pistolero.json`
+- **Fichier** : `🎮 game_assets/heroes/roland_pistolero.json`
 - **Stats** : Tier 9, HP 1900, capacités uniques
 - **Capacités** :
   - La Roue du Ka (vision 19 tours)
@@ -33,7 +33,7 @@
   - Pistolets d'Eld (tir interdimensionnel)
 
 ### 3. **Mode Histoire Complet** ✅
-- **Fichier** : `frontend/story-mode-complete.html`
+- **Fichier** : `🌐 frontend/story-mode-complete.html`
 - **Fonctionnalités** :
   - 6 chapitres jouables
   - Interface narrative interactive
@@ -42,7 +42,7 @@
   - Système de progression
 
 ### 4. **API StoryModeController** ✅
-- **Fichier** : `backend/src/main/java/com/example/demo/controller/StoryModeController.java`
+- **Fichier** : `🖥️ backend/src/main/java/com/example/demo/controller/StoryModeController.java`
 - **Endpoints** :
   - `/api/story/chapters` - Liste des chapitres
   - `/api/story/start/{chapterId}` - Démarrer un chapitre
@@ -50,7 +50,7 @@
   - `/api/story/progress/{playerId}` - Progression du joueur
 
 ### 5. **QuantumService (GROFI)** ✅
-- **Fichier** : `backend/src/main/java/com/example/demo/service/QuantumService.java`
+- **Fichier** : `🖥️ backend/src/main/java/com/example/demo/service/QuantumService.java`
 - **Fonctionnalités** :
   - Superposition quantique d'états
   - Observation et collapse
@@ -59,7 +59,7 @@
   - Connexion avec MagicFormulaEngine
 
 ### 6. **FourthWallService Nettoyé** ✅
-- **Fichier** : `backend/src/main/java/com/example/demo/service/FourthWallService.java`
+- **Fichier** : `🖥️ backend/src/main/java/com/example/demo/service/FourthWallService.java`
 - **Améliorations** :
   - Suppression de tous les mocks
   - Vraie gestion des mondes multiples
@@ -68,7 +68,7 @@
   - Métriques de brisure du 4ème mur
 
 ### 7. **Interface de Combat Simple** ✅
-- **Fichier** : `frontend/components/CombatInterface.js`
+- **Fichier** : `🌐 frontend/components/CombatInterface.js`
 - **Fonctionnalités** :
   - Grille hexagonale 8x6
   - Déplacement et attaque
@@ -77,7 +77,7 @@
   - Capacités spéciales avec MP
 
 ### 8. **Interface de Héros Complète** ✅
-- **Fichier** : `frontend/components/HeroInterface.js`
+- **Fichier** : `🌐 frontend/components/HeroInterface.js`
 - **Fonctionnalités** :
   - Portrait et barres HP/MP/XP
   - Stats détaillées (6 attributs)

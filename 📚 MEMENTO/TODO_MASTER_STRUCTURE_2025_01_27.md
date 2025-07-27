@@ -145,15 +145,15 @@
 
 ## 📁 **SECTION 5 : FICHIERS TODO PRINCIPAUX**
 
-1. **`MEMENTO/TODO_FINALE_COMPLETE_STRUCTUREE.md`**
+1. **`📚 MEMENTO/TODO_FINALE_COMPLETE_STRUCTUREE.md`**
    - Master TODO historique (558 lignes)
    - Dernière mise à jour : 26/01/2025
 
-2. **`WALTER_SEC/RAPPORT_MASTER_TODOS_STRUCTURE_WALTER.md`**
+2. **`🔒 WALTER_SEC/RAPPORT_MASTER_TODOS_STRUCTURE_WALTER.md`**
    - Rapport sécurisé pour Walter
    - Classification par risque
 
-3. **`MEMENTO/TODO_MASTER_STRUCTURE_2025_01_27.md`**
+3. **`📚 MEMENTO/TODO_MASTER_STRUCTURE_2025_01_27.md`**
    - CE FICHIER - Structure actuelle
 
 ---

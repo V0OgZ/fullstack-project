@@ -91,7 +91,7 @@ Exemples de recherches :
 // Chargement depuis GitHub raw URLs
 const jsonFiles = [
     {
-        path: 'backend/src/main/resources/heroes/Arthur.json',
+        path: '🖥️ backend/src/main/resources/heroes/Arthur.json',
         url: 'https://raw.githubusercontent.com/V0OgZ/Heroes-of-Time/poc-heroes-of-time/...'
     },
     // ...

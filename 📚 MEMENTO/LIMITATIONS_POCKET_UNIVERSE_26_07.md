@@ -31,7 +31,7 @@ bash: lsof: command not found
 ### 3. Backend Spring Boot Non Compilé
 ```bash
 # Pas de JAR dans target/
-ls backend/target/
+ls 🖥️ backend/target/
 # Résultat : classes/ generated-sources/ maven-status/
 
 # Tentative java directe échoue (dépendances manquantes)
@@ -57,13 +57,13 @@ java -version
 
 ### 2. Code Source Présent
 ```bash
-ls backend/src/main/java/com/example/demo/
+ls 🖥️ backend/src/main/java/com/example/demo/
 # Tous les controllers et services présents
 ```
 
 ### 3. Classes Compilées Partiellement
 ```bash
-ls backend/target/classes/com/example/demo/
+ls 🖥️ backend/target/classes/com/example/demo/
 # .class files présents mais inutilisables sans dépendances
 ```
 

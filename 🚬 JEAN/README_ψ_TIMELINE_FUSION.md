@@ -136,9 +136,9 @@
 
 ### 📚 DOCUMENTATION FUSION
 - `INDEX_JEAN.md` (racine) - Index principal
-- `docs/CODEX_COMPLET_HEROES_OF_TIME.md` - Documentation système
-- `docs/GAMEPLAY_POUR_LES_NOOBS_LAMBDA.md` - Guide débutants
-- `docs/GROFI/PHILOSOPHIE_GROFI_REVOLUTION_MOTEUR.md` - Philosophie
+- `📖 docs/CODEX_COMPLET_HEROES_OF_TIME.md` - Documentation système
+- `📖 docs/GAMEPLAY_POUR_LES_NOOBS_LAMBDA.md` - Guide débutants
+- `📖 docs/GROFI/PHILOSOPHIE_GROFI_REVOLUTION_MOTEUR.md` - Philosophie
 
 ## 🌀 FORMULE FINALE JEAN
 

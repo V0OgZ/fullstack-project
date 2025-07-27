@@ -21,7 +21,7 @@
 - **⏰ Durée**: 90 minutes
 - **🔍 Commits analysés**: 186 (dev vs origin)
 - **💀 Erreurs backend**: 30+ symboles manquants
-- **📂 Projets identifiés**: 2 (frontend/ + frontend-temporal/)
+- **📂 Projets identifiés**: 2 (🌐 frontend/ + frontend-temporal/)
 - **📝 Documents créés**: 2 (MEMENTO + Histoire)
 - **🎯 Niveau résolution**: 100%
 
@@ -100,10 +100,10 @@ Port 8080 conflicts, startup failures
 
 | Composant | Port | Package | Utilité | Status |
 |---|---|---|---|---|
-| **frontend/** | 3000 | TrueHeroesInterface.tsx | Ancien projet | ✅ Fonctionnel |
+| **🌐 frontend/** | 3000 | TrueHeroesInterface.tsx | Ancien projet | ✅ Fonctionnel |
 | **frontend-temporal/** | 8000 | Grille hexagonale | Vrai Heroes of Time | ✅ Prêt |
-| **backend/ (dev)** | 8080 | com.heroesoftimepoc.* | Backend cassé | ❌ MORT |
-| **backend/ (main)** | 8080 | com.example.demo | Bon backend | ✅ Fonctionnel |
+| **🖥️ backend/ (dev)** | 8080 | com.heroesoftimepoc.* | Backend cassé | ❌ MORT |
+| **🖥️ backend/ (main)** | 8080 | com.example.demo | Bon backend | ✅ Fonctionnel |
 
 ---
 

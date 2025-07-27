@@ -15,7 +15,7 @@ La vision de GRUT a été pleinement implémentée. La forêt GROFI n'est plus u
 ## 📊 FICHIERS CRÉÉS
 
 ### 1. **Monde Forêt GROFI**
-- **Fichier** : `game_assets/worlds/forest_grofi/world_data.json`
+- **Fichier** : `🎮 game_assets/worlds/forest_grofi/world_data.json`
 - **Contenu** :
   - Formule de projection : `Π(ψ_FOREST × Δt) × quantum_tree_network`
   - 4 Arbres Quantiques (React, HTML, Temporal, Panopticon)
@@ -23,7 +23,7 @@ La vision de GRUT a été pleinement implémentée. La forêt GROFI n'est plus u
   - Connexions vers autres mondes
 
 ### 2. **Elfes Mécaniques de McKenna**
-- **Fichier** : `game_assets/races/machine_elves/race_data.json`
+- **Fichier** : `🎮 game_assets/races/machine_elves/race_data.json`
 - **Contenu** :
   - Race fractale du monde DMT
   - Manipulation linguistique de la réalité
@@ -31,21 +31,21 @@ La vision de GRUT a été pleinement implémentée. La forêt GROFI n'est plus u
   - Grammaire HOTS vibrante
 
 ### 3. **Totem Portail Panopticon**
-- **Fichier** : `game_assets/artifacts/forest/panopticon_totem.json`
+- **Fichier** : `🎮 game_assets/artifacts/forest/panopticon_totem.json`
 - **Contenu** :
   - Portail bidirectionnel vers Panopticon 6D
   - Activation : "GRUT VOIT TOUT"
   - Effets visuels holographiques
 
 ### 4. **Système de Formules de Projection**
-- **Fichier** : `docs/WORLD_FORMULAS_SYSTEM.json`
+- **Fichier** : `📖 docs/WORLD_FORMULAS_SYSTEM.json`
 - **Contenu** :
   - Formule unique par monde
   - Opérateur Π pour projection ontologique
   - Lois physiques dérivées des formules
 
 ### 5. **Plan d'Implémentation**
-- **Fichier** : `docs/FOREST_GROFI_IMPLEMENTATION_PLAN.json`
+- **Fichier** : `📖 docs/FOREST_GROFI_IMPLEMENTATION_PLAN.json`
 - **Contenu** :
   - 5 priorités détaillées
   - Sous-tâches spécifiques

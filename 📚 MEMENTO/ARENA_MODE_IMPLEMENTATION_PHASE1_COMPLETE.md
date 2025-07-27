@@ -41,7 +41,7 @@
 
 ### 🔧 **Backend (Java Spring Boot)**
 ```
-backend/src/main/java/com/example/demo/
+🖥️ backend/src/main/java/com/example/demo/
 ├── model/
 │   ├── ArenaWorld.java        ✅ Monde hexagonal avec observateurs
 │   └── ArenaJudge.java        ✅ Juge avec 40+ phrases contextuelles
@@ -54,7 +54,7 @@ backend/src/main/java/com/example/demo/
 
 ### 🎨 **Frontend (React)**
 ```
-frontend/src/components/
+🌐 frontend/src/components/
 ├── ArenaView.jsx              ✅ Interface complète avec états
 └── ArenaView.css              ✅ Thème sombre mystérieux
 ```

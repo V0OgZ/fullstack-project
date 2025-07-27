@@ -24,7 +24,7 @@
 
 ### 📋 **1. CODE BACKEND AJOUTÉ**
 
-**Fichier modifié** : `backend/src/main/java/com/example/demo/service/MagicFormulaEngine.java`
+**Fichier modifié** : `🖥️ backend/src/main/java/com/example/demo/service/MagicFormulaEngine.java`
 
 **Ajouts effectués :**
 ```java

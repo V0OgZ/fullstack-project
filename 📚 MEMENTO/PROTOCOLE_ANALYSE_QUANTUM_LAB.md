@@ -33,7 +33,7 @@ Analyser systématiquement tous les artefacts du laboratoire quantique pour :
 - **Action** : Vérifier intégrité formules
 
 ### **3. Héros Smolin Lee**
-- **Localisation** : `game_assets/heroes/physics/smolin_lee_quantum_gravity.json`
+- **Localisation** : `🎮 game_assets/heroes/physics/smolin_lee_quantum_gravity.json`
 - **Priorité** : MOYENNE
 - **Risques** :
   - LQG transformé en KPI ?
@@ -41,7 +41,7 @@ Analyser systématiquement tous les artefacts du laboratoire quantique pour :
 - **Action** : Protéger narrative scientifique
 
 ### **4. Interféromètre Mach-Zehnder**
-- **Localisation** : `game_assets/artifacts/physics/mach_zehnder_interferometer.json`
+- **Localisation** : `🎮 game_assets/artifacts/physics/mach_zehnder_interferometer.json`
 - **Priorité** : HAUTE
 - **Risques** :
   - Mesures truquées ?
@@ -64,7 +64,7 @@ Analyser systématiquement tous les artefacts du laboratoire quantique pour :
 ```bash
 # Détecter termes suspects
 grep -r "synergy\|leverage\|optimize\|ROI\|KPI" scenarios/physics-experiments/
-grep -r "consultant\|McKinsey\|efficiency" game_assets/artifacts/physics/
+grep -r "consultant\|McKinsey\|efficiency" 🎮 game_assets/artifacts/physics/
 
 # Vérifier intégrité des formules
 find . -name "*.json" -path "*/physics/*" | xargs jq '.formulas | keys'

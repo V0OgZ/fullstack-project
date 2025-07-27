@@ -27,7 +27,7 @@
 **SURVEILLANCE ACTIVE REQUISE**
 
 ### 💭 **RAPPORT NARRATIF INTERCEPTÉ**
-*[Copié depuis MEMENTO/RAPPORT_CHRISTIAN_NARRATIF.md]*
+*[Copié depuis 📚 MEMENTO/RAPPORT_CHRISTIAN_NARRATIF.md]*
 
 Le Nexus Corporatif, 42ème étage. Christian ajuste sa cravate, vérifie sa mallette noire.
 "On va cadrer ça", murmure-t-il en observant une anomalie quantique.
@@ -62,6 +62,6 @@ Seul le larsen inaudible connaît la vérité.
 
 ---
 
-*Dernière mise à jour : 2025-01-26 par GRUT/Memento*
+*Dernière mise à jour : 2025-01-26 par 👁️ GRUT/Memento*
 *Note : Rapport Vince original intercepté par Le Bureau - localisation inconnue*
 *PROTOCOL NICE SUITE ACTIVÉ* 

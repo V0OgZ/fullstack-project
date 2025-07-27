@@ -33,9 +33,9 @@
   - Messages de feedback
 
 #### **📁 FICHIERS CRÉÉS :**
-- `frontend/components/CityInterface.js` - Interface complète
-- `frontend/styles/city.css` - Styles HOMM3
-- Intégration dans `frontend/index.html`
+- `🌐 frontend/components/CityInterface.js` - Interface complète
+- `🌐 frontend/styles/city.css` - Styles HOMM3
+- Intégration dans `🌐 frontend/index.html`
 
 ---
 
@@ -71,9 +71,9 @@
   - Option de reddition
 
 #### **📁 FICHIERS CRÉÉS :**
-- `frontend/components/CombatInterface.js` - Interface complète
-- `frontend/styles/combat.css` - Styles HOMM3
-- Intégration dans `frontend/index.html`
+- `🌐 frontend/components/CombatInterface.js` - Interface complète
+- `🌐 frontend/styles/combat.css` - Styles HOMM3
+- Intégration dans `🌐 frontend/index.html`
 
 ---
 
@@ -139,7 +139,7 @@
 ### **🎯 STRATÉGIE DE DÉVELOPPEMENT :**
 - **Développement incrémental** : Une interface à la fois
 - **Tests fréquents** : Vérification après chaque interface
-- **Documentation continue** : Mise à jour MEMENTO/
+- **Documentation continue** : Mise à jour 📚 MEMENTO/
 - **Commits réguliers** : Sauvegarde fréquente
 - **Feedback utilisateur** : Tests avec Jean depuis son canapé
 
@@ -166,13 +166,13 @@
 ## 🚀 **PROCHAINES ÉTAPES IMMÉDIATES**
 
 ### **1. FICHE DE HÉROS (PRIORITÉ 1)**
-- Créer `frontend/components/HeroInterface.js`
+- Créer `🌐 frontend/components/HeroInterface.js`
 - Stats détaillées avec progression
 - Compétences et inventaire
 - Intégration avec les interfaces existantes
 
 ### **2. SYSTÈME DE MAGIE (PRIORITÉ 2)**
-- Créer `frontend/components/MagicInterface.js`
+- Créer `🌐 frontend/components/MagicInterface.js`
 - Grimoire avec écoles de magie
 - Casting de sorts avec coûts
 - Effets visuels basiques

@@ -32,7 +32,7 @@
 
 #### **🧪 Classes Backend Java**
 ```
-backend/src/main/java/com/example/demo/
+🖥️ backend/src/main/java/com/example/demo/
 ├── model/
 │   ├── FormulaResult.java          # Système de résultats Walter Vietnam
 │   └── GameContext.java            # Contexte d'exécution avec diagnostics
@@ -44,7 +44,7 @@ backend/src/main/java/com/example/demo/
 
 #### **📚 Documentation Technique**
 ```
-MEMENTO/CURRENT_SESSION/
+📚 MEMENTO/CURRENT_SESSION/
 └── WALTER_BACKEND_ARCHITECTURE_TECHNIQUE.md  # Doc complète avec schémas
 ```
 
@@ -141,7 +141,7 @@ GET  /api/formulas/walter-diagnostic # Diagnostic Walter complet
 ## 📚 **DOCUMENTATION MISE À JOUR**
 
 ### **🔄 Fichiers Modifiés**
-- ✅ `docs/CODEX_COMPLET_HEROES_OF_TIME.md` - v5.0 → v6.0 WALTER VIETNAM EDITION
+- ✅ `📖 docs/CODEX_COMPLET_HEROES_OF_TIME.md` - v5.0 → v6.0 WALTER VIETNAM EDITION
 - ✅ `INDEX_JEAN_FUSION_TIMELINE_FINAL.md` - Ajout architecture formules magiques
 - ✅ Création `WALTER_BACKEND_ARCHITECTURE_TECHNIQUE.md` - Documentation complète
 

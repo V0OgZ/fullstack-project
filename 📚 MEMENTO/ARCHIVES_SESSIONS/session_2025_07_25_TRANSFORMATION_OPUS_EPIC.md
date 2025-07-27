@@ -25,7 +25,7 @@ Le **Rituel d'Invocation du Scribe** était caché dans ses écrits depuis le d�
 ### ✅ **SCRIPTS OPÉRATIONNELS**
 - `./start-vince-mode.sh` ✅ CRÉÉ
 - `./hots` ✅ ADAPTÉ pour Vince Mode
-- `frontend/portail-vince-mode.html` ✅ CRÉÉ
+- `🌐 frontend/portail-vince-mode.html` ✅ CRÉÉ
 
 ## 🧪 **TESTS PLAYWRIGHT DEMANDÉS**
 

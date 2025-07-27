@@ -32,7 +32,7 @@
 ## 🚀 ACTIONS À FAIRE
 
 ### Phase 1: Regrouper les HTML
-1. Créer dossier `frontend/html-interfaces/`
+1. Créer dossier `🌐 frontend/html-interfaces/`
 2. Y déplacer:
    - `vince-vega-map-demo-backend.html`
    - `dashboard.html`

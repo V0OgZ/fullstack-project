@@ -52,7 +52,7 @@
 │   ├── portal_network_map.json
 │   ├── battlefield_hexagon_map.json
 │   ├── tour_ancrage_zone8_map.json (nouveau)
-│   └── [autres maps dans game_assets/maps/]
+│   └── [autres maps dans 🎮 game_assets/maps/]
 │
 ├── 📜 SCÉNARIOS .hots (50+ scénarios)
 │   │
@@ -175,7 +175,7 @@ Toute INTERFACE HTML est un PORTAIL :
 
 ### Création Rapide
 - **Nouveau Monde**: Créer world_config.json dans un dossier
-- **Nouvelle Map**: Ajouter .json dans game_assets/maps/
+- **Nouvelle Map**: Ajouter .json dans 🎮 game_assets/maps/
 - **Nouveau Scénario**: Écrire .hots avec syntaxe HOTS
 - **Nouvelle Interface**: Créer .html = nouveau monde
 

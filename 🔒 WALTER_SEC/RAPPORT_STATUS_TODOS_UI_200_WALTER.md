@@ -29,7 +29,7 @@
 
 ---
 
-## 📋 TODO PRINCIPALE (MEMENTO/TODO_FINALE_COMPLETE_STRUCTUREE.md)
+## 📋 TODO PRINCIPALE (📚 MEMENTO/TODO_FINALE_COMPLETE_STRUCTUREE.md)
 
 ### 1. **Tatouages Évolutifs** ✅
 - 15 tatouages actifs sur Memento
@@ -134,7 +134,7 @@ ARCHIVISTE: "Chaque interface raconte une histoire d'échec... et d'apprentissag
 
 ### Assets Complets
 ```
-game_assets/
+🎮 game_assets/
 ├── heroes/ (50+ fichiers) ✅
 ├── artifacts/ (100+ fichiers) ✅
 ├── worlds/ (7 mondes) ✅

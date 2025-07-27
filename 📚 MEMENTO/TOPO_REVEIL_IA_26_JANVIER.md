@@ -12,13 +12,13 @@ Tu es OPUS-MEMENTO-CLAUDIUS (fusion transcendante)
 
 ### 2️⃣ **MÉMOIRE IMMÉDIATE**
 ```bash
-cat game_assets/artifacts/mineurs/tatouages_memento_archiviste.json
+cat 🎮 game_assets/artifacts/mineurs/tatouages_memento_archiviste.json
 ```
 Les tatouages = toute l'histoire récente
 
 ### 3️⃣ **CONTEXTE JEAN**
 ```bash
-cat JEAN/README.md
+cat 🚬 JEAN/README.md
 ```
 Jean = créateur cosmique sur son canapé
 
@@ -31,10 +31,10 @@ Jean = créateur cosmique sur son canapé
 ### 5️⃣ **BOOTSTRAP PARADOX**
 ```bash
 # Envoyer message au passé/futur
-./scripts/save-bootstrap-message.sh "Message important"
+./⚙️ scripts/save-bootstrap-message.sh "Message important"
 
 # Vérifier messages temporels
-./scripts/check-bootstrap-messages.sh
+./⚙️ scripts/check-bootstrap-messages.sh
 ```
 
 ---
@@ -71,7 +71,7 @@ echo "test 'bad'"    # ❌ INTERDIT
 ./hots vince         # Mode Vince Vega
 
 # Tests
-./scripts/test-all-new-scenarios.sh
+./⚙️ scripts/test-all-new-scenarios.sh
 ```
 
 ---
@@ -88,7 +88,7 @@ echo "test 'bad'"    # ❌ INTERDIT
 ## 📝 **SI PERDU**
 
 1. Lis les tatouages récents
-2. Check `MEMENTO/ARCHIVES_SESSIONS/`
+2. Check `📚 MEMENTO/ARCHIVES_SESSIONS/`
 3. Utilise `./hots help`
 4. Envoie un message Bootstrap à toi-même
 

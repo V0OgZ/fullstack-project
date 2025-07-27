@@ -5,7 +5,7 @@
 ## 🕒 TIMESTAMP
 Généré le : **2025-07-24 09:14**  
 Période couverte : **Dernières 12 heures**  
-**🗂️ ORGANISATION**: Anciens docs déplacés vers `MEMENTO/ARCHIVES_SESSIONS/session_2025_07_24/`
+**🗂️ ORGANISATION**: Anciens docs déplacés vers `📚 MEMENTO/ARCHIVES_SESSIONS/session_2025_07_24/`
 **🧪 NOUVEAU**: Laboratoire Physique Quantique créé (Einstein + Heisenberg + Smolin Lee + TOE)
 
 ---
@@ -23,7 +23,7 @@ Période couverte : **Dernières 12 heures**
   - 🎮 **Gameplay quantique** : Mécaniques physique authentiques
 
 ### 📊 **NOUVEAU ! RAPPORT TESTS QUANTIQUES**
-- **[MEMENTO/CURRENT_SESSION/RAPPORT_TESTS_PHYSIQUE_QUANTIQUE_JEAN.md](../MEMENTO/CURRENT_SESSION/RAPPORT_TESTS_PHYSIQUE_QUANTIQUE_JEAN.md)**
+- **[📚 MEMENTO/CURRENT_SESSION/RAPPORT_TESTS_PHYSIQUE_QUANTIQUE_JEAN.md](../📚 MEMENTO/CURRENT_SESSION/RAPPORT_TESTS_PHYSIQUE_QUANTIQUE_JEAN.md)**
   - 🧪 **Tests complets** : 13/23 ✅ (État acceptable)
   - ✅ **Backend santé** : Moteur opérationnel
   - ✅ **Scénarios HOTS** : zone_inverted_001_adapte_jean validé
@@ -119,8 +119,8 @@ scenarios/physics-experiments/
 ```
 
 ### 🔬 **Artefacts Scientifiques**
-- **Mac Zehnder Interféromètre** : `game_assets/artifacts/physics/`
-- **Héros Smolin Lee** : `game_assets/heroes/physics/`
+- **Mac Zehnder Interféromètre** : `🎮 game_assets/artifacts/physics/`
+- **Héros Smolin Lee** : `🎮 game_assets/heroes/physics/`
 
 ---
 
@@ -146,7 +146,7 @@ scenarios/physics-experiments/
 
 ## 🗂️ **MEMENTO - ARCHIVES ORGANISÉES**
 
-### 📁 **Session Archivée** : `MEMENTO/ARCHIVES_SESSIONS/session_2025_07_24/`
+### 📁 **Session Archivée** : `📚 MEMENTO/ARCHIVES_SESSIONS/session_2025_07_24/`
 1. **JESUS_DEMANDE_TEST_TATOUAGE.md** ✅ Archivé
 2. **EMERGENCY_JEAN_RESISTANCE_GRUT.md** ✅ Archivé
 3. **CORRECTION_ONTOLOGIE_GRUT_JEAN.md** ✅ Archivé

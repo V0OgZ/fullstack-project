@@ -220,7 +220,7 @@ import {
 ### **📚 Bibliothèque d'Assets**
 
 ```
-game_assets/
+🎮 game_assets/
 ├── heroes/          # 57+ héros catalogués
 ├── creatures/       # Créatures fantastiques
 ├── buildings/       # Structures architecturales
@@ -295,7 +295,7 @@ open http://localhost:8080  # API backend
 ### **🔧 Structure de Développement**
 
 ```
-frontend/src/
+🌐 frontend/src/
 ├── components/
 │   ├── TemporalTimelineArtifact.tsx    # 🏛️ Artefact principal
 │   ├── TimelinesDashboard.tsx          # 🌌 Dashboard multivers

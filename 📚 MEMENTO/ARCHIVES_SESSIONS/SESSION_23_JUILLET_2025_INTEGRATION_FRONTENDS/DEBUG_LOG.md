@@ -28,7 +28,7 @@
 ./hots compile
 
 # 2. Vérifier les services existants
-find backend/src/main/java -name "*Service.java"
+find 🖥️ backend/src/main/java -name "*Service.java"
 
 # 3. Mettre à jour les imports dans les tests
 # 4. Supprimer les tests obsolètes si nécessaire
@@ -42,7 +42,7 @@ find backend/src/main/java -name "*Service.java"
 - **Problème :** `jakarta.persistence` non disponible
 - **Solution :** Remplacement par `javax.persistence`
 - **Fichiers corrigés :** Tous les modèles Java
-- **Commande :** `find backend/src/main/java -name "*.java" -exec sed -i '' 's/import jakarta.persistence/import javax.persistence/g' {} \;`
+- **Commande :** `find 🖥️ backend/src/main/java -name "*.java" -exec sed -i '' 's/import jakarta.persistence/import javax.persistence/g' {} \;`
 
 ### ✅ **Compilation Backend (22/07/2025)**
 - **Problème :** Erreurs de compilation bloquantes
@@ -131,7 +131,7 @@ pkill -f "mvn"
 
 ### 📋 **PRIORITÉ 3 - Documentation**
 1. **Mettre à jour l'architecture** : Services actuels
-2. **Documenter les changements** : MEMENTO/ARCHITECTURE_COMPREHENSION_OPUS.md
+2. **Documenter les changements** : 📚 MEMENTO/ARCHITECTURE_COMPREHENSION_OPUS.md
 3. **Créer un guide de debug** : Pour les développeurs
 
 ---

@@ -29,10 +29,10 @@ await page.addInitScript(() => {
 - `button:has-text("Start Battle")` → `[data-testid="create-new-game-btn"]`
 
 ### Files Modified
-1. `frontend/tests/e2e/terrain-vision-demo.spec.ts`
-2. `frontend/tests/e2e/terrain-vision.spec.ts`
-3. `frontend/tests/e2e/multiplayer-demo.spec.ts`
-4. `frontend/tests/e2e/02-multiplayer-demo.spec.ts`
+1. `🌐 frontend/🧪 tests/e2e/terrain-vision-demo.spec.ts`
+2. `🌐 frontend/🧪 tests/e2e/terrain-vision.spec.ts`
+3. `🌐 frontend/🧪 tests/e2e/multiplayer-demo.spec.ts`
+4. `🌐 frontend/🧪 tests/e2e/02-multiplayer-demo.spec.ts`
 
 ## Best Practices for Future Tests
 1. Always use `data-testid` attributes when available

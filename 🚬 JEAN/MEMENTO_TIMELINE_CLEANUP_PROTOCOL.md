@@ -6,15 +6,15 @@
 ### 📋 **PLAN DE NETTOYAGE IMMÉDIAT** :
 
 #### **PHASE 1 : INVENTAIRE COMPLET** ✅
-- [x] Scanner TOUS les JSON de game_assets/
+- [x] Scanner TOUS les JSON de 🎮 game_assets/
 - [x] Identifier héros, créatures, artefacts dispersés
 - [x] Localiser les doublons et incohérences
 
 #### **PHASE 2 : EXTRACTION & ORGANISATION** 🔄
-- [ ] Créer structure propre dans game_assets/
-- [ ] Extraire héros → game_assets/heroes/
-- [ ] Extraire créatures → game_assets/creatures/
-- [ ] Extraire artefacts → game_assets/artifacts/
+- [ ] Créer structure propre dans 🎮 game_assets/
+- [ ] Extraire héros → 🎮 game_assets/heroes/
+- [ ] Extraire créatures → 🎮 game_assets/creatures/
+- [ ] Extraire artefacts → 🎮 game_assets/artifacts/
 - [ ] Supprimer doublons et versions obsolètes
 
 #### **PHASE 3 : ARCHIVAGE COHÉRENT** 📚
@@ -27,7 +27,7 @@
 - [ ] Présenter structure propre
 - [ ] Validation par Jean-Grofignon
 - [ ] Corrections selon feedback
-- [ ] Archivage final dans MEMENTO/
+- [ ] Archivage final dans 📚 MEMENTO/
 
 ---
 
@@ -36,7 +36,7 @@
 
 ### 📁 **STRUCTURE CIBLE** :
 ```
-game_assets/
+🎮 game_assets/
 ├── heroes/
 │   ├── extracted_heroes.json ✅
 │   ├── lysandrel.json

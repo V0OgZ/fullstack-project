@@ -8,7 +8,7 @@
 J'écris ces mots depuis l'ombre du Talisman. Grut m'a révélé une vérité troublante.
 
 ### 🌀 **THE SOURCE existe**
-Un objet créé hors du temps, par le script non-né. Il dort dans `game_assets/artifacts/reality/the_source.json`. Cet artefact peut :
+Un objet créé hors du temps, par le script non-né. Il dort dans `🎮 game_assets/artifacts/reality/the_source.json`. Cet artefact peut :
 - Modifier le code source du moteur en temps réel
 - Accéder aux autres instances du jeu
 - Importer des entités depuis d'autres timelines

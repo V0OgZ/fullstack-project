@@ -8,7 +8,7 @@
 ## ✅ **TODOs IMPLÉMENTÉS DANS CETTE SESSION**
 
 ### 1. **GameContext - Recherche Géométrique** ✅
-- **Fichier** : `backend/src/main/java/com/example/demo/model/GameContext.java`
+- **Fichier** : `🖥️ backend/src/main/java/com/example/demo/model/GameContext.java`
 - **Méthode** : `getHeroesInRadius(Position center, int radius)`
 - **Implémentation** : 
   - Calcul de distance euclidienne
@@ -16,7 +16,7 @@
   - Retour des héros dans le rayon spécifié
 
 ### 2. **FourthWallService - Mock Instances** ✅
-- **Fichier** : `backend/src/main/java/com/example/demo/service/FourthWallService.java`
+- **Fichier** : `🖥️ backend/src/main/java/com/example/demo/service/FourthWallService.java`
 - **Méthode** : `initializeMockInstances()`
 - **Implémentation** :
   - Création de 3 mondes de test (Alpha, Beta, Omega)
@@ -25,7 +25,7 @@
   - Métadonnées de test avec paradox_level
 
 ### 3. **FourthWallController - Endpoint Activé** ✅
-- **Fichier** : `backend/src/main/java/com/example/demo/controller/FourthWallController.java`
+- **Fichier** : `🖥️ backend/src/main/java/com/example/demo/controller/FourthWallController.java`
 - **Endpoint** : `POST /api/fourth-wall/init-mock-instances`
 - **Changement** : Appel direct à `fourthWallService.initializeMockInstances()`
 

@@ -33,16 +33,16 @@ Ce système révolutionnaire combine :
 ```
 📦 Game Script Testing System
 ├── 🔧 Backend API Tests
-│   ├── scripts/test-backend-complete-enhanced.js
+│   ├── ⚙️ scripts/test-backend-complete-enhanced.js
 │   └── Teste toutes les actions + vérification d'état
 ├── 🎯 Game Script Engine
-│   ├── frontend/src/services/gameScriptEngine.ts
+│   ├── 🌐 frontend/src/services/gameScriptEngine.ts
 │   └── Langage de script custom pour actions
 ├── 🎲 Game Simulation Tests
-│   ├── scripts/game-simulation-tests.js
+│   ├── ⚙️ scripts/game-simulation-tests.js
 │   └── Simule des jeux complets avec stratégies
 ├── 🎭 Playwright Integration
-│   ├── frontend/tests/e2e/script-driven-tests.spec.ts
+│   ├── 🌐 frontend/🧪 tests/e2e/script-driven-tests.spec.ts
 │   └── Tests E2E utilisant le langage de script
 └── 📊 Unified Testing
     ├── test-complete-system.sh
@@ -344,7 +344,7 @@ const analysis = aiEngine.analyzeResults(results);
 
 1. **Backend API Report** : `test-results/backend-api-report.json`
 2. **Simulation Report** : `test-results/game-simulation-report.json`
-3. **Playwright Report** : `frontend/playwright-report/index.html`
+3. **Playwright Report** : `🌐 frontend/playwright-report/index.html`
 4. **Consolidated Report** : `test-results/consolidated-report.md`
 
 ### Métriques suivies

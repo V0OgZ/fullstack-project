@@ -34,7 +34,7 @@
 ### 4. **Création des Types Backend** ✅
 - **Problème** : Types TypeScript non alignés avec les modèles Java
 - **Solution** :
-  - Créé `frontend/src/types/backend.ts` avec :
+  - Créé `🌐 frontend/src/types/backend.ts` avec :
     - `BackendBuilding` interface alignée sur le modèle Java
     - `BackendUnit` interface alignée sur le modèle Java
     - Fonctions de conversion pour mapper backend → frontend

@@ -161,7 +161,7 @@ echo ""
 
 # Test 1: Complete Game Turns
 TOTAL_TESTS=$((TOTAL_TESTS + 1))
-if run_test "Complete Game Turns" "cd frontend && npx playwright test tests/e2e/complete-game-turns.spec.ts --timeout=60000"; then
+if run_test "Complete Game Turns" "cd frontend && npx playwright test 🧪 tests/e2e/complete-game-turns.spec.ts --timeout=60000"; then
     TESTS_PASSED=$((TESTS_PASSED + 1))
 else
     TESTS_FAILED=$((TESTS_FAILED + 1))
@@ -169,7 +169,7 @@ fi
 
 # Test 2: Complete Game Simulation
 TOTAL_TESTS=$((TOTAL_TESTS + 1))
-if run_test "Complete Game Simulation" "cd frontend && npx playwright test tests/e2e/complete-game-simulation.spec.ts --timeout=120000"; then
+if run_test "Complete Game Simulation" "cd frontend && npx playwright test 🧪 tests/e2e/complete-game-simulation.spec.ts --timeout=120000"; then
     TESTS_PASSED=$((TESTS_PASSED + 1))
 else
     TESTS_FAILED=$((TESTS_FAILED + 1))
@@ -177,7 +177,7 @@ fi
 
 # Test 3: Script Tester Demo
 TOTAL_TESTS=$((TOTAL_TESTS + 1))
-if run_test "Script Tester Demo" "cd frontend && npx playwright test tests/e2e/script-tester-demo.spec.ts --timeout=30000"; then
+if run_test "Script Tester Demo" "cd frontend && npx playwright test 🧪 tests/e2e/script-tester-demo.spec.ts --timeout=30000"; then
     TESTS_PASSED=$((TESTS_PASSED + 1))
 else
     TESTS_FAILED=$((TESTS_FAILED + 1))
@@ -185,7 +185,7 @@ fi
 
 # Test 4: Epic Content Test
 TOTAL_TESTS=$((TOTAL_TESTS + 1))
-if run_test "Epic Content Test" "cd frontend && npx playwright test tests/e2e/epic-content-test.spec.ts --timeout=30000"; then
+if run_test "Epic Content Test" "cd frontend && npx playwright test 🧪 tests/e2e/epic-content-test.spec.ts --timeout=30000"; then
     TESTS_PASSED=$((TESTS_PASSED + 1))
 else
     TESTS_FAILED=$((TESTS_FAILED + 1))
@@ -193,7 +193,7 @@ fi
 
 # Test 5: Multiplayer Demo
 TOTAL_TESTS=$((TOTAL_TESTS + 1))
-if run_test "Multiplayer Demo" "cd frontend && npx playwright test tests/e2e/multiplayer-demo.spec.ts --timeout=45000"; then
+if run_test "Multiplayer Demo" "cd frontend && npx playwright test 🧪 tests/e2e/multiplayer-demo.spec.ts --timeout=45000"; then
     TESTS_PASSED=$((TESTS_PASSED + 1))
 else
     TESTS_FAILED=$((TESTS_FAILED + 1))
@@ -201,7 +201,7 @@ fi
 
 # Test 6: Enhanced Sidebar Test
 TOTAL_TESTS=$((TOTAL_TESTS + 1))
-if run_test "Enhanced Sidebar Test" "cd frontend && npx playwright test tests/e2e/enhanced-sidebar-test.spec.ts --timeout=30000"; then
+if run_test "Enhanced Sidebar Test" "cd frontend && npx playwright test 🧪 tests/e2e/enhanced-sidebar-test.spec.ts --timeout=30000"; then
     TESTS_PASSED=$((TESTS_PASSED + 1))
 else
     TESTS_FAILED=$((TESTS_FAILED + 1))
@@ -209,7 +209,7 @@ fi
 
 # Test 7: Gameplay Complete
 TOTAL_TESTS=$((TOTAL_TESTS + 1))
-if run_test "Gameplay Complete" "cd frontend && npx playwright test tests/e2e/gameplay-complete.spec.ts --timeout=60000"; then
+if run_test "Gameplay Complete" "cd frontend && npx playwright test 🧪 tests/e2e/gameplay-complete.spec.ts --timeout=60000"; then
     TESTS_PASSED=$((TESTS_PASSED + 1))
 else
     TESTS_FAILED=$((TESTS_FAILED + 1))
@@ -222,7 +222,7 @@ echo ""
 
 # Test 8: Interface restaurée
 TOTAL_TESTS=$((TOTAL_TESTS + 1))
-if run_test "Interface Restoration Test" "cd frontend && npx playwright test tests/e2e/debug-current-interface.spec.ts --timeout=30000"; then
+if run_test "Interface Restoration Test" "cd frontend && npx playwright test 🧪 tests/e2e/debug-current-interface.spec.ts --timeout=30000"; then
     TESTS_PASSED=$((TESTS_PASSED + 1))
 else
     TESTS_FAILED=$((TESTS_FAILED + 1))
@@ -230,7 +230,7 @@ fi
 
 # Test 9: Full UI verification
 TOTAL_TESTS=$((TOTAL_TESTS + 1))
-if run_test "Full UI Verification" "cd frontend && npx playwright test tests/e2e/quick-verification.spec.ts --timeout=30000"; then
+if run_test "Full UI Verification" "cd frontend && npx playwright test 🧪 tests/e2e/quick-verification.spec.ts --timeout=30000"; then
     TESTS_PASSED=$((TESTS_PASSED + 1))
 else
     TESTS_FAILED=$((TESTS_FAILED + 1))
@@ -238,7 +238,7 @@ fi
 
 # Test 10: Performance verification
 TOTAL_TESTS=$((TOTAL_TESTS + 1))
-if run_test "Performance Verification" "cd frontend && npx playwright test tests/e2e/01-single-demo.spec.ts --timeout=60000"; then
+if run_test "Performance Verification" "cd frontend && npx playwright test 🧪 tests/e2e/01-single-demo.spec.ts --timeout=60000"; then
     TESTS_PASSED=$((TESTS_PASSED + 1))
 else
     TESTS_FAILED=$((TESTS_FAILED + 1))

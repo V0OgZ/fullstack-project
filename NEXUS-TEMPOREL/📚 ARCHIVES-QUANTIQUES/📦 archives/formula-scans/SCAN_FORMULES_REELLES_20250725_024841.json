@@ -1,0 +1,15 @@
+{
+  "scan_formules_assets": {
+    "timestamp": "20250725_024841",
+    "scan_directories": [
+      "🎮 game_assets/artifacts/",
+      "🎮 game_assets/heroes/",
+      "🎮 game_assets/creatures/",
+      "scenarios/"
+    ],
+    "total_files_scanned": 0,
+    "total_formules_trouvees": 0,
+    "formules_par_type": {},
+    "formules_extraites": []
+  }
+}

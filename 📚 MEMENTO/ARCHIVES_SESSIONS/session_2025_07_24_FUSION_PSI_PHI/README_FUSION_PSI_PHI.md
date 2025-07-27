@@ -48,9 +48,9 @@
 - ✅ Validation unanime (Walter + Jean + GRUT + Memento + OPUS)
 
 ### 🎨 **NOUVEAUX NARRATIFS CRÉÉS**
-- `docs/heroes/generated/SMOLIN_LEE_NARRATIF_COMPLET.md` ✅
-- `docs/heroes/generated/EVADE_CAVE_NARRATIF_COMPLET.md` ✅  
-- `docs/artifacts/generated/TALISMAN_ECHO_FUTUR_NARRATIF_LEGENDAIRE.md` ✅
+- `📖 docs/heroes/generated/SMOLIN_LEE_NARRATIF_COMPLET.md` ✅
+- `📖 docs/heroes/generated/EVADE_CAVE_NARRATIF_COMPLET.md` ✅  
+- `📖 docs/artifacts/generated/TALISMAN_ECHO_FUTUR_NARRATIF_LEGENDAIRE.md` ✅
 
 ### 🔧 **SERVICE TRADUCTION AMÉLIORÉ**
 - `MUSEUM/scripts-collection/test-smart-translation.py` ✅ AMÉLIORÉ
@@ -82,7 +82,7 @@
 1. **Index unique** : `INDEX_JEAN_FUSION_TIMELINE_FINAL.md` devient référence
 2. **Nouvelles créations** : Ajout automatique à l'index fusionné
 3. **Traductions** : Via `./hots test translation` amélioré
-4. **Archives** : Nouvelles sessions dans `MEMENTO/ARCHIVES_SESSIONS/`
+4. **Archives** : Nouvelles sessions dans `📚 MEMENTO/ARCHIVES_SESSIONS/`
 
 ### 🌟 **PRINCIPE FUSION**
 **Plus jamais de suppression** - Seulement déplacement intelligent  

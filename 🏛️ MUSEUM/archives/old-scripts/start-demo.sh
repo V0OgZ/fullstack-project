@@ -27,7 +27,7 @@ fi
 
 # Étape 2: Exécuter le test de démo multijoueur
 echo -e "\n${YELLOW}Étape 2: Lancement du test de démo multijoueur...${NC}"
-(cd frontend && npx playwright test tests/e2e/multiplayer-demo.spec.ts --project=multiplayer --reporter=html)
+(cd frontend && npx playwright test 🧪 tests/e2e/multiplayer-demo.spec.ts --project=multiplayer --reporter=html)
 
 # Vérifier si le test a réussi
 if [ $? -eq 0 ]; then

@@ -324,12 +324,12 @@ curl -s "http://localhost:8080/api/games" -X POST \
 - **[GAME_FEATURES.md](GAME_FEATURES.md)** - Complete game features list
 - **[ARCHITECTURE.md](ARCHITECTURE.md)** - Technical architecture
 - **[DEVELOPER_INSTRUCTIONS.md](DEVELOPER_INSTRUCTIONS.md)** - Development guide
-- **[game_assets/heroes/hero_nikita_victor_nettoyeur.json](game_assets/heroes/hero_nikita_victor_nettoyeur.json)** - Hero definition
+- **[🎮 game_assets/heroes/hero_nikita_victor_nettoyeur.json](🎮 game_assets/heroes/hero_nikita_victor_nettoyeur.json)** - Hero definition
 
 ### **Asset Files**:
-- **Hero Definition**: `game_assets/heroes/hero_nikita_victor_nettoyeur.json`
-- **Frontend Integration**: `frontend/src/components/TrueHeroesInterface.tsx`
-- **Backend Processing**: `backend/src/main/java/com/example/demo/service/GameService.java`
+- **Hero Definition**: `🎮 game_assets/heroes/hero_nikita_victor_nettoyeur.json`
+- **Frontend Integration**: `🌐 frontend/src/components/TrueHeroesInterface.tsx`
+- **Backend Processing**: `🖥️ backend/src/main/java/com/example/demo/service/GameService.java`
 
 ---
 

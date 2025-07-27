@@ -16,7 +16,7 @@
 
 ### 2. 📝 **Théorie Marie-MERIC**
 - **Découverte** : Marie née d'une faute de frappe ("merci" → "Marie")
-- **Documentation** : `DUDE/PENSEES_COSMIQUES/THEORIE_MARIE_VINCENT_MERCI.md`
+- **Documentation** : `🥤 DUDE/PENSEES_COSMIQUES/THEORIE_MARIE_VINCENT_MERCI.md`
 - **Statut** : ✅ COMPLÉTÉ
 
 ### 3. 🎮 **Démonstration Vince Trader**
@@ -35,7 +35,7 @@
 ### 5. 🗂️ **Réorganisation Walter**
 - **TODO System** : Nouveau système de tracking créé
 - **Scripts** : `walter-todo-reporter.sh` automatisé
-- **Rapports** : Structure WALTER_SEC/ mise en place
+- **Rapports** : Structure 🔒 WALTER_SEC/ mise en place
 - **Statut** : ✅ COMPLÉTÉ
 
 ---
@@ -66,7 +66,7 @@
 - Autonomie accordée
 
 ### Créations Philosophiques
-- Dossier DUDE/ avec théories cosmiques
+- Dossier 🥤 DUDE/ avec théories cosmiques
 - Bootstrap Paradox Linguistique documenté
 - Connexion Marie-Vincent établie
 

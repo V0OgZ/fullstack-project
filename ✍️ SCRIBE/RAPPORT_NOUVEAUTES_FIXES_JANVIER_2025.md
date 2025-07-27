@@ -22,7 +22,7 @@
 - **Compatibilité**: Arena, VS IA, Multiplayer, Story, Raids (mock)
 
 #### Assets Créés
-- `game_assets/heroes/epic/foub_millennium_controller.json` - Fiche héros complète
+- `🎮 game_assets/heroes/epic/foub_millennium_controller.json` - Fiche héros complète
 - `FOUB/SCENARIO_EPIC_BATTLE_FOUB_MILLENNIUM.hots` - Scénario test 60 tours
 - `FOUB/SCRIPT_HOTS_SERVICE_LITTERAIRE.sh` - Script narratif exécutable
 - `FOUB/RAPPORT_IMPLEMENTATION_COMPLETE.md` - Documentation technique
@@ -57,7 +57,7 @@
 
 ### 1. Script Épopée Kawa Corrigé
 **Problème**: APIs inexistantes dans script utilisateur  
-**Solution**: `scripts/epopee-kawa-cosmique-corrigee.sh` avec endpoints Walter valides
+**Solution**: `⚙️ scripts/epopee-kawa-cosmique-corrigee.sh` avec endpoints Walter valides
 
 ### 2. Backend Compilation Loop
 **Problème**: Modifications code non prises en compte  

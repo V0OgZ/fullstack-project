@@ -150,8 +150,8 @@
 ```bash
 [dev 3e3b0b1] TRIO HÉROS DÉBUTANTS COMPLET
 6 files changed, 375 insertions(+), 25 deletions(-)
-create mode 100644 game_assets/heroes/hero_elena_flamme_douce.json
-create mode 100644 game_assets/heroes/hero_marcus_bouclier_de_fer.json  
+create mode 100644 🎮 game_assets/heroes/hero_elena_flamme_douce.json
+create mode 100644 🎮 game_assets/heroes/hero_marcus_bouclier_de_fer.json  
 create mode 100644 test-trio-heroes-debutants.js
 ```
 

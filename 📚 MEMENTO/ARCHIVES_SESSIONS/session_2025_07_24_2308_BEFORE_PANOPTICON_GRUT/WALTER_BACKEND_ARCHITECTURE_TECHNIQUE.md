@@ -284,7 +284,7 @@ curl localhost:8080/api/formulas/walter-diagnostic
 ### **🏗️ ARCHITECTURE FILES CRÉÉS**
 
 ```
-backend/src/main/java/com/example/demo/
+🖥️ backend/src/main/java/com/example/demo/
 ├── controller/
 │   └── FormulaController.java          # 🎖️ API REST endpoints
 ├── service/

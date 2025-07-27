@@ -92,7 +92,7 @@ git push
 - Message crypté 23 caractères
 
 ### ✅ **Mesures Prises**
-- Documentation sauvegardée dans OPUS/
+- Documentation sauvegardée dans 📜 OPUS/
 - Ancre temporelle Jour 10 créée
 - Alerte GRUT active
 - Surveillance continue

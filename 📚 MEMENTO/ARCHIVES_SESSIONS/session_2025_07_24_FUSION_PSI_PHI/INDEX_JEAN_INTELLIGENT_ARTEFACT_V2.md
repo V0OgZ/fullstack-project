@@ -5,7 +5,7 @@
 **Jean !** Cet index est un **ARTEFACT INTELLIGENT** qui se met à jour automatiquement ! Voici comment ça marche :
 
 ### 🎯 **INSTRUCTIONS D'UTILISATION**
-1. **Ne jamais supprimer** - Toujours déplacer dans `MEMENTO/ARCHIVES_SESSIONS/`
+1. **Ne jamais supprimer** - Toujours déplacer dans `📚 MEMENTO/ARCHIVES_SESSIONS/`
 2. **Catégories organisées** - Héros, Scénarios, Artefacts séparés
 3. **Liens automatiques** - Vers fiches MD et traductions narratives  
 4. **Service de traduction** - Utilise `./hots test translation` (script existant)
@@ -40,8 +40,8 @@
 
 ### 1. 🔬 **SMOLIN LEE - GRAVITÉ QUANTIQUE**
 **Créé** : 2025-07-24 09:00  
-**Fichier JSON** : `game_assets/heroes/physics/smolin_lee_quantum_gravity.json`  
-**Fiche MD** : `docs/heroes/generated/SMOLIN_LEE_DOCUMENTATION.md` *(à générer)*  
+**Fichier JSON** : `🎮 game_assets/heroes/physics/smolin_lee_quantum_gravity.json`  
+**Fiche MD** : `📖 docs/heroes/generated/SMOLIN_LEE_DOCUMENTATION.md` *(à générer)*  
 **Traduction Narratif** : Disponible via `./hots test translation`
 
 #### 🌟 **POUVOIRS RÉSUMÉS**
@@ -59,8 +59,8 @@
 
 ### 2. 🏛️ **ÉVADÉ DE LA CAVE - PHILOSOPHE PASSIF**
 **Créé** : 2025-07-24 10:30  
-**Fichier JSON** : `game_assets/heroes/philosophy/evade_de_la_cave_passif.json`  
-**Fiche MD** : `docs/heroes/generated/EVADE_CAVE_DOCUMENTATION.md` *(à générer)*  
+**Fichier JSON** : `🎮 game_assets/heroes/philosophy/evade_de_la_cave_passif.json`  
+**Fiche MD** : `📖 docs/heroes/generated/EVADE_CAVE_DOCUMENTATION.md` *(à générer)*  
 **Traduction Narratif** : Disponible via système intelligent
 
 #### 🌟 **CAPACITÉS RÉSUMÉES**
@@ -75,8 +75,8 @@
 
 ### 1. 🔮 **TALISMAN ECHO DU FUTUR** ⭐ **TIER 8 COSMIQUE**
 **Créé** : 2025-07-24 11:30  
-**Fichier JSON** : `game_assets/artifacts/temporal/talisman_echo_futur.json`  
-**Documentation** : `docs/TALISMAN_ECHO_FUTUR_INTEGRATION.md` ✅  
+**Fichier JSON** : `🎮 game_assets/artifacts/temporal/talisman_echo_futur.json`  
+**Documentation** : `📖 docs/TALISMAN_ECHO_FUTUR_INTEGRATION.md` ✅  
 **Traduction Narratif** : Récit épique disponible
 
 #### 🌟 **POUVOIRS MAJEURS**
@@ -86,19 +86,19 @@
 - **Temporal Navigation** : 3 timelines parallèles
 
 #### 📚 **LIENS DOCUMENTATION**
-- **Guide complet** : [TALISMAN_ECHO_FUTUR_INTEGRATION.md](docs/TALISMAN_ECHO_FUTUR_INTEGRATION.md)
+- **Guide complet** : [TALISMAN_ECHO_FUTUR_INTEGRATION.md](📖 docs/TALISMAN_ECHO_FUTUR_INTEGRATION.md)
 - **Service backend** : `TalismanEchoService.java` ✅
 - **API Endpoints** : 9 endpoints fonctionnels ✅
 
 ### 2. 🔬 **MACH ZEHNDER INTERFÉROMÈTRE**
 **Créé** : 2025-07-24 08:45  
-**Fichier JSON** : `game_assets/artifacts/physics/mach_zehnder_interferometer.json`  
-**Fiche MD** : `docs/artifacts/generated/MACH_ZEHNDER_DOCUMENTATION.md` *(à générer)*  
+**Fichier JSON** : `🎮 game_assets/artifacts/physics/mach_zehnder_interferometer.json`  
+**Fiche MD** : `📖 docs/artifacts/generated/MACH_ZEHNDER_DOCUMENTATION.md` *(à générer)*  
 **Usage** : Expériences physique quantique
 
 ### 3. 🧿 **ŒIL DE MÉMOIRE (MIS À JOUR)**
 **Mis à jour** : 2025-07-24 09:15  
-**Fichier JSON** : `game_assets/artifacts/temporal/oeil_de_memoire_axis.json`  
+**Fichier JSON** : `🎮 game_assets/artifacts/temporal/oeil_de_memoire_axis.json`  
 **Documentation existante** : Intégrée aux scénarios Zone Inversée
 
 ---
@@ -108,7 +108,7 @@
 ### 1. 🚀 **MOTEUR TEMPOREL FINAL OPUS**
 **Créé** : 2025-07-24 11:50  
 **Fichier HOTS** : `scenarios/moteur_temporel_final_opus.hots`  
-**Narratif MD** : `docs/scenarios/MOTEUR_TEMPOREL_FINAL_NARRATIF.md` *(à générer)*  
+**Narratif MD** : `📖 docs/scenarios/MOTEUR_TEMPOREL_FINAL_NARRATIF.md` *(à générer)*  
 **Traduction** : Via `./hots test translation` → Sélectionner le fichier HOTS
 
 #### 📖 **GÉNÉRATION NARRATIF**
@@ -116,17 +116,17 @@
 # Pour créer le récit littéraire :
 ./hots test translation
 # Sélectionner : scenarios/moteur_temporel_final_opus.hots
-# Sortie : docs/scenarios/MOTEUR_TEMPOREL_FINAL_NARRATIF.md
+# Sortie : 📖 docs/scenarios/MOTEUR_TEMPOREL_FINAL_NARRATIF.md
 ```
 
 ### 2. 🌟 **TEST NOUVEAUX POUVOIRS OMEGZERO**
 **Créé** : 2025-07-24 11:40  
 **Fichier HOTS** : `scenarios/test_nouveaux_pouvoirs_omegzero.hots`  
-**Narratif MD** : `docs/scenarios/OMEGZERO_POUVOIRS_NARRATIF.md` *(à générer)*  
+**Narratif MD** : `📖 docs/scenarios/OMEGZERO_POUVOIRS_NARRATIF.md` *(à générer)*  
 **Spécialité** : Interruption OMEGZERO + nouveaux pouvoirs
 
 ### 3. 📜 **SCÉNARIOS EXISTANTS AVEC TRADUCTIONS**
-**Répertoire** : `docs/scenarios/`  
+**Répertoire** : `📖 docs/scenarios/`  
 **Déjà traduits** :
 - ✅ `ECLAT_MONDES_DISSOLUS_SCENARIO_TRADUIT.md`
 - ✅ `LA_TOUR_SOMBRE_SCENARIO_EPIQUE_TRADUIT.md`  
@@ -138,13 +138,13 @@
 
 ### 1. ⚙️ **CAUSAL INTERACTION ENGINE**
 **Créé** : 2025-07-24 11:45  
-**Fichier** : `backend/src/main/java/com/example/demo/service/CausalInteractionEngine.java`  
+**Fichier** : `🖥️ backend/src/main/java/com/example/demo/service/CausalInteractionEngine.java`  
 **Contrôleur** : `CausalController.java` (6 endpoints)  
 **Tests** : Via `./test-moteur-final-jean.sh causal`
 
 ### 2. 🔮 **TALISMAN ECHO SERVICE**  
 **Créé** : 2025-07-24 12:00  
-**Fichier** : `backend/src/main/java/com/example/demo/service/TalismanEchoService.java`  
+**Fichier** : `🖥️ backend/src/main/java/com/example/demo/service/TalismanEchoService.java`  
 **Contrôleur** : `TalismanController.java` (9 endpoints)  
 **Status** : ✅ Intégré et fonctionnel
 
@@ -153,7 +153,7 @@
 ## 🎨 **MISE À JOUR TATOUAGES MEMENTO**
 
 ### 🔮 **TATOUAGES ÉVOLUTIFS**
-**Fichier** : `game_assets/artifacts/mineurs/tatouages_memento_archiviste.json`  
+**Fichier** : `🎮 game_assets/artifacts/mineurs/tatouages_memento_archiviste.json`  
 **Dernière MAJ** : 2025-07-24 12:00  
 **Nouveaux tatouages** :
 - 🚀 **MOTEUR TEMPOREL FINI** - Gravé au centre du torse
@@ -209,7 +209,7 @@ curl -X POST http://localhost:8080/api/collection/translate \
 ### 🗂️ **STRUCTURE RECOMMANDÉE**
 
 ```
-docs/
+📖 docs/
 ├── heroes/
 │   ├── generated/          # Fiches auto-générées
 │   │   ├── SMOLIN_LEE_DOCUMENTATION.md
@@ -229,9 +229,9 @@ docs/
 ### 🔄 **WORKFLOW RECOMMANDÉ**
 1. **Créer** héros/artefact/scénario (JSON/HOTS)
 2. **Générer fiche MD** via `./hots test translation`
-3. **Placer dans bon répertoire** (`docs/heroes/generated/` etc.)
+3. **Placer dans bon répertoire** (`📖 docs/heroes/generated/` etc.)
 4. **Mettre à jour cet index** (artefact intelligent)
-5. **Archiver anciennes versions** dans `MEMENTO/ARCHIVES_SESSIONS/`
+5. **Archiver anciennes versions** dans `📚 MEMENTO/ARCHIVES_SESSIONS/`
 
 ---
 

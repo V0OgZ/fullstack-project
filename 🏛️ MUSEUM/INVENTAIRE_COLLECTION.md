@@ -28,7 +28,7 @@
 
 ## 🎯 **SCRIPTS ACTIFS (À GARDER)**
 
-### 📋 **Dans scripts/actifs/**
+### 📋 **Dans ⚙️ scripts/actifs/**
 - ✅ `start-services-background.sh` - **SCRIPT #152 UNIFIÉ** 
 - ✅ `stop-all-services.sh` - Script d'arrêt
 - ✅ `test-ui-quick.sh` - **SCRIPT #150** - Test rapide des UIs

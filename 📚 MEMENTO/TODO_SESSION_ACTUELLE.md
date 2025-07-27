@@ -104,7 +104,7 @@
 
 ### 📁 **Structure des Fichiers Prioritaires**
 ```
-frontend/
+🌐 frontend/
 ├── components/
 │   ├── CityInterface.js          # PRIORITÉ 2
 │   ├── CombatInterface.js        # PRIORITÉ 3
@@ -121,7 +121,7 @@ frontend/
 │   ├── magic.css                 # Styles magie
 │   ├── map.css                   # Styles carte
 │   └── economy.css               # Styles économie
-└── data/
+└── 💾 data/
     ├── buildings-simple.js       # 3-4 bâtiments principaux
     ├── spells-basic.js           # 5-6 sorts par école
     ├── skills-basic.js           # 3-4 compétences par héros
@@ -238,7 +238,7 @@ frontend/
 - **Stabilité du projet** : Base solide établie
 - **Systèmes uniques** : Temporel et quantique fonctionnels
 - **IA avancée** : Claudius-Memento avec limitations
-- **Documentation complète** : MEMENTO/ bien organisé
+- **Documentation complète** : 📚 MEMENTO/ bien organisé
 - **Tests automatisés** : Scripts de test disponibles
 - **Backup sécurisé** : Git avec historique complet
 
@@ -246,7 +246,7 @@ frontend/
 - **Correction backend en premier** - Blocage critique
 - **Développement incrémental** : Une interface à la fois
 - **Tests fréquents** : Vérification après chaque interface
-- **Documentation continue** : Mise à jour MEMENTO/
+- **Documentation continue** : Mise à jour 📚 MEMENTO/
 - **Commits réguliers** : Sauvegarde fréquente
 - **Feedback utilisateur** : Tests avec Jean depuis son canapé
 

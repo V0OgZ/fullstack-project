@@ -72,11 +72,11 @@
 ## 🟢 **CATÉGORIE 3 : TODOs DOCUMENTATION**
 
 ### 📚 **Fichiers TODO Principaux**
-1. **`MEMENTO/TODO_FINALE_COMPLETE_STRUCTUREE.md`**
+1. **`📚 MEMENTO/TODO_FINALE_COMPLETE_STRUCTUREE.md`**
    - Master TODO avec 558 lignes
    - État : À jour jusqu'au 26/01
 
-2. **`WALTER_SEC/RAPPORT_STATUS_TODOS_UI_200_WALTER.md`**
+2. **`🔒 WALTER_SEC/RAPPORT_STATUS_TODOS_UI_200_WALTER.md`**
    - Rapport crypté avec statut complet
 
 3. **`sessions/2025-07/V2_TODO_FORMULES_MAGIQUES_WALTER.md`**

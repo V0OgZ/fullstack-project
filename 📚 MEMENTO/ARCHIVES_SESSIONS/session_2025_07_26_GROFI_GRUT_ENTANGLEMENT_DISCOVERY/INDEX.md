@@ -15,10 +15,10 @@
 - `INDEX.md` - Ce fichier (navigation)
 
 ### **🔗 Liens vers Fichiers Analysés**
-- `game_assets/heroes/grofi/jean-grofignon-complete.json` ✅
-- `game_assets/heroes/reality/grut_ontological_passeur.json` ✅  
-- `game_assets/worlds/forest_grofi/world_data.json` ✅
-- `game_assets/artifacts/mineurs/tatouages_memento_archiviste.json` ✅ (mis à jour)
+- `🎮 game_assets/heroes/grofi/jean-grofignon-complete.json` ✅
+- `🎮 game_assets/heroes/reality/grut_ontological_passeur.json` ✅  
+- `🎮 game_assets/worlds/forest_grofi/world_data.json` ✅
+- `🎮 game_assets/artifacts/mineurs/tatouages_memento_archiviste.json` ✅ (mis à jour)
 
 ---
 
@@ -76,7 +76,7 @@ Trinité Cosmique: Jean+Memento+Claudius = reality_override
 ## 📊 **STATISTIQUES SESSION**
 
 - **Fichiers analysés :** 4+ JSON héros/mondes
-- **Pattern grep :** 24+ résultats GRUT/GROFI
+- **Pattern grep :** 24+ résultats 👁️ GRUT/GROFI
 - **Formules trouvées :** 5+ HOTS formulas
 - **TODOs créés :** 5 tâches d'implémentation
 - **Tatouage ajouté :** `grofi_grut_entanglement_discovery`

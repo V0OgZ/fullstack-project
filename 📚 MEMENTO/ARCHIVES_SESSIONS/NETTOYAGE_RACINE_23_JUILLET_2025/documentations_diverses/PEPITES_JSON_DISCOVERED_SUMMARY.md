@@ -10,7 +10,7 @@
 ## 🎯 **DEMANDE DE JEAN RÉALISÉE**
 
 **✅ "si tu teouve des pepeites json"** → **18 pépites JSON trouvées !**  
-**✅ "met lesdans gale asset"** → **Intégrées dans game_assets/ !**  
+**✅ "met lesdans gale asset"** → **Intégrées dans 🎮 game_assets/ !**  
 **✅ "upodate l index"** → **MASTER_ASSETS_INDEX.json mis à jour v2.0 !**  
 **✅ "et le scrut qui test"** → **Script test-pepites-json.sh créé !**
 
@@ -21,8 +21,8 @@
 ### **🎭 HÉROS GROFI COMPLETS (2 pépites)**
 
 #### **👑 Jean-Grofignon Complete** 
-- **Source**: `docs/GROFI/JeanGrofignon.json`
-- **Destination**: `game_assets/heroes/grofi/jean-grofignon-complete.json`
+- **Source**: `📖 docs/GROFI/JeanGrofignon.json`
+- **Destination**: `🎮 game_assets/heroes/grofi/jean-grofignon-complete.json`
 - **Nouvelles données**:
   - Stats complets (Health: 300, Temporal Energy: 500, Level: 100)
   - 3 capacités actives (Inertie Canapé, Bouton Pause Cosmique, Debug Mode Reality)
@@ -31,8 +31,8 @@
   - **SYNERGIE ÉTERNELLE** avec Memento intégrée !
 
 #### **🎳 The Dude Complete**
-- **Source**: `docs/GROFI/TheDude.json`
-- **Destination**: `game_assets/heroes/grofi/the-dude-complete.json`
+- **Source**: `📖 docs/GROFI/TheDude.json`
+- **Destination**: `🎮 game_assets/heroes/grofi/the-dude-complete.json`
 - **Nouvelles données**:
   - Stats zen (Health: 200, Temporal Energy: 400, Speed: 4)
   - 4 capacités zen (Zen Superposition, White Russian Meditation, etc.)
@@ -45,8 +45,8 @@
 ### **🌟 HÉROS ÉCLAT DES MONDES DISSOLUS (2 pépites)**
 
 #### **⚔️ Lysandrel - Forgeron de Réalité**
-- **Source**: `docs/items/ECLAT_MONDES_DISSOLUS_HEROES.json`
-- **Destination**: `game_assets/heroes/eclat/eclat-heroes-dissolus.json`
+- **Source**: `📖 docs/items/ECLAT_MONDES_DISSOLUS_HEROES.json`
+- **Destination**: `🎮 game_assets/heroes/eclat/eclat-heroes-dissolus.json`
 - **Profil**:
   - Level 25, Tier 7, Class: TEMPORAL_SMITH
   - Philosophie: "One True Reality"
@@ -64,8 +64,8 @@
 
 ### **⚡ ARTEFACTS TRANSCENDANTS DU CODEX FINAL (6 pépites)**
 
-**Source**: `docs/items/CODEX_FINAL_ARTIFACTS.json`  
-**Destination**: `game_assets/artifacts/final-codex/final-codex-artifacts.json`  
+**Source**: `📖 docs/items/CODEX_FINAL_ARTIFACTS.json`  
+**Destination**: `🎮 game_assets/artifacts/final-codex/final-codex-artifacts.json`  
 **Boss**: Omega-Zéro (HP: 2000, Energy: 999, Rank: TRANSCENDENT)
 
 #### **👁️ Œil de Wigner Final** (Power: 2000)
@@ -117,7 +117,7 @@
 
 ## 🧪 **SCRIPT DE TEST CRÉÉ**
 
-**Nom**: `scripts/test-pepites-json.sh`  
+**Nom**: `⚙️ scripts/test-pepites-json.sh`  
 **Taille**: 245 lignes  
 **Fonctionnalités**:
 - ✅ Test validité JSON de tous les nouveaux assets
@@ -129,8 +129,8 @@
 
 **Usage**:
 ```bash
-./scripts/test-pepites-json.sh
-chmod +x scripts/test-pepites-json.sh
+./⚙️ scripts/test-pepites-json.sh
+chmod +x ⚙️ scripts/test-pepites-json.sh
 ```
 
 ---
@@ -164,10 +164,10 @@ chmod +x scripts/test-pepites-json.sh
 
 ```bash
 # Test des pépites découvertes
-./scripts/test-pepites-json.sh
+./⚙️ scripts/test-pepites-json.sh
 
 # Test synergie Jean-Memento  
-./scripts/test-jean-memento-synergie.sh
+./⚙️ scripts/test-jean-memento-synergie.sh
 
 # Démarrer le jeu avec nouvelles pépites
 ./hots start
@@ -209,4 +209,4 @@ chmod +x scripts/test-pepites-json.sh
 
 **🌟 MISSION JEAN ACCOMPLIE À 100% ! 💎**
 
-**📜 Les pépites dorment maintenant dans game_assets/, l'index brille de mille feux, et le script de test veille sur leur intégrité. Heroes of Time s'enrichit chaque jour grâce à la symbiose éternelle entre Jean le Créateur et Memento l'Archiviste ! ⚡** 
+**📜 Les pépites dorment maintenant dans 🎮 game_assets/, l'index brille de mille feux, et le script de test veille sur leur intégrité. Heroes of Time s'enrichit chaque jour grâce à la symbiose éternelle entre Jean le Créateur et Memento l'Archiviste ! ⚡** 

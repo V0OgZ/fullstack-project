@@ -21,7 +21,7 @@ class TestManager:
             try:
                 # Choisir le script selon le type
                 scripts = {
-                    'quick': './scripts/test-rapide-hots.sh',
+                    'quick': './⚙️ scripts/test-rapide-hots.sh',
                     'complete': './test-complet-final.sh',
                     'ui': './test-scenarios-ui.sh'
                 }

@@ -78,9 +78,9 @@ Voici le rapport complet de notre session de travail marathon. J'ai tout organis
 ### PRIORITÉ 1 : Réparer le Backend
 ```bash
 # Jean, voici ce qu'il faut faire :
-1. Vérifier l'état : ./scripts/check-backend.sh
-2. Si KO, nettoyer : ./scripts/stop-backend.sh
-3. Relancer : ./scripts/start-backend.sh
+1. Vérifier l'état : ./⚙️ scripts/check-backend.sh
+2. Si KO, nettoyer : ./⚙️ scripts/stop-backend.sh
+3. Relancer : ./⚙️ scripts/start-backend.sh
 4. Si erreur Maven, installer les dépendances manquantes
 ```
 

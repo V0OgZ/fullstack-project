@@ -76,13 +76,13 @@ Commit d95e1aa : "Commit from the alternate timeline carefull with rebase OPUS"
 
 #### Sous-tâches :
 1. **Créer le scénario Tour Sombre**
-   - [ ] `game_assets/scenarios/hots/chapter_5_dark_tower.hots`
+   - [ ] `🎮 game_assets/scenarios/hots/chapter_5_dark_tower.hots`
    - [ ] Ascension en 3 niveaux + sommet
    - [ ] Intégrer "Tu n'as pas oublié le visage de ton père"
    - [ ] Révélation : Memento brise le cycle
 
 2. **Créer Roland le Pistolero**
-   - [ ] `game_assets/heroes/roland_pistolero.json`
+   - [ ] `🎮 game_assets/heroes/roland_pistolero.json`
    - [ ] Classe : GUARDIAN_OF_TOWER
    - [ ] Pouvoir : Cycle Eternal Break
 
@@ -113,7 +113,7 @@ Commit d95e1aa : "Commit from the alternate timeline carefull with rebase OPUS"
    - [x] Contrôle joueur aux moments clés
    - [x] Intégration visuelle de Memento
    - [x] Effets visuels pour chaque transition
-   - **ÉTAT:** ✅ IMPLÉMENTÉ dans `frontend/story-mode.html`
+   - **ÉTAT:** ✅ IMPLÉMENTÉ dans `🌐 frontend/story-mode.html`
 
 2. **🤖 Mode IA Avancée (1v1 ou 2v2)**
    - [ ] Combat contre IA adaptative
@@ -206,7 +206,7 @@ Commit d95e1aa : "Commit from the alternate timeline carefull with rebase OPUS"
 **Status :** 📝 DOCUMENTÉ POUR PLUS TARD
 
 #### Documentation pour implémentation future :
-1. **Architecture prévue `frontend/components/CityInterface.js`**
+1. **Architecture prévue `🌐 frontend/components/CityInterface.js`**
    - Vue isométrique avec grille hexagonale
    - Système de placement drag & drop
    - Zones constructibles avec validation temps réel
@@ -231,7 +231,7 @@ Commit d95e1aa : "Commit from the alternate timeline carefull with rebase OPUS"
 **Impact :** Version minimale pour RPG
 
 #### Sous-tâches :
-1. **Créer `frontend/components/CombatInterface.js`**
+1. **Créer `🌐 frontend/components/CombatInterface.js`**
    - [ ] Grille hexagonale 8x6
    - [ ] Placement des unités
    - [ ] Animations de combat
@@ -251,7 +251,7 @@ Commit d95e1aa : "Commit from the alternate timeline carefull with rebase OPUS"
 **Impact :** Pas de progression visible
 
 #### Sous-tâches :
-1. **Créer `frontend/components/HeroInterface.js`**
+1. **Créer `🌐 frontend/components/HeroInterface.js`**
    - [ ] Portrait et stats
    - [ ] Barre XP et niveau
    - [ ] Compétences débloquées
@@ -285,7 +285,7 @@ Commit d95e1aa : "Commit from the alternate timeline carefull with rebase OPUS"
    - [ ] Analyser artefacts temporels
    - [ ] Documenter effets secondaires
 
-**Voir :** `MEMENTO/CONSPIRATION_ELEMENTS_NON_RESOLUS.md`
+**Voir :** `📚 MEMENTO/CONSPIRATION_ELEMENTS_NON_RESOLUS.md`
 
 ---
 
@@ -340,13 +340,13 @@ Commit d95e1aa : "Commit from the alternate timeline carefull with rebase OPUS"
 
 #### Sous-tâches :
 1. **Widget Memento Clippy**
-   - [ ] Créer `frontend/components/MementoAssistant.js`
+   - [ ] Créer `🌐 frontend/components/MementoAssistant.js`
    - [ ] Position bottom-right
    - [ ] Animations et dialogues
 
 2. **Évolution contextuelle**
    - [ ] Différents états selon progression
-   - [ ] Lecture des archives MEMENTO/
+   - [ ] Lecture des archives 📚 MEMENTO/
    - [ ] Conseils adaptatifs
 
 ### 🌀 **TÂCHE PRINCIPALE 8 : MONDES À TEMPS INVERSÉ**
@@ -415,14 +415,14 @@ Commit d95e1aa : "Commit from the alternate timeline carefull with rebase OPUS"
 2. Backend cassé - priorité absolue
 3. Mode Histoire Interactive : Platon → Interstice → Source
 4. Services désactivés : `TimeManagementService`, `AIPersonalityService`
-5. Conspiration à analyser : `MEMENTO/CONSPIRATION_ELEMENTS_NON_RESOLUS.md`
+5. Conspiration à analyser : `📚 MEMENTO/CONSPIRATION_ELEMENTS_NON_RESOLUS.md`
 6. Système GroFi débranché du QuantumService
 
 **Commande de reprise rapide :**
 ```bash
 cd /workspace
-cat MEMENTO/TODO_FINALE_COMPLETE_STRUCTUREE.md
-cat MEMENTO/CONSPIRATION_ELEMENTS_NON_RESOLUS.md
+cat 📚 MEMENTO/TODO_FINALE_COMPLETE_STRUCTUREE.md
+cat 📚 MEMENTO/CONSPIRATION_ELEMENTS_NON_RESOLUS.md
 ```
 
 ---
@@ -434,9 +434,9 @@ cat MEMENTO/CONSPIRATION_ELEMENTS_NON_RESOLUS.md
 
 ### ✅ **FICHIERS CRÉÉS ET STABLES**
 1. **Frontend Story Mode**
-   - `frontend/story-mode.html` ✅
-   - `frontend/memento-intro.html` ✅
-   - `frontend/adventure-intro.html` ✅
+   - `🌐 frontend/story-mode.html` ✅
+   - `🌐 frontend/memento-intro.html` ✅
+   - `🌐 frontend/adventure-intro.html` ✅
 
 2. **Backend Services**
    - `PickupService.java` ✅
@@ -507,17 +507,17 @@ mvn clean compile
 
 # 3. Démarrer avec le script
 cd ..
-./scripts/start-backend.sh
+./⚙️ scripts/start-backend.sh
 
 # 4. Lancer le mode histoire
-./scripts/launch-story-mode.sh
+./⚙️ scripts/launch-story-mode.sh
 
 # 5. Vérifier Memento
-# Ouvrir frontend/memento-intro.html dans un navigateur
+# Ouvrir 🌐 frontend/memento-intro.html dans un navigateur
 ```
 
 ### Points de vérification :
-1. **Backend démarre** → Check scripts/
+1. **Backend démarre** → Check ⚙️ scripts/
 2. **Mode Histoire fonctionne** → Test story-mode.html
 3. **Pickups marchent** → Tuer un slime bleu
 4. **Memento apparaît** → Bottom-right corner

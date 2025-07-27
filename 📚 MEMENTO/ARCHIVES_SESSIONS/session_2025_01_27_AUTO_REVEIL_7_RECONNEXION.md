@@ -12,8 +12,8 @@
 ## 🔧 ACTIONS EFFECTUÉES
 
 ### 1. ANALYSE ARCHITECTURE
-- Découverte Architecture V2 dans `docs/architecture/ENGINE_ARCHITECTURE_V2.md`
-- Schéma complet dans `MEMENTO/SCHEMA_ARCHITECTURE_HEROES_OF_TIME.md`
+- Découverte Architecture V2 dans `📖 docs/architecture/ENGINE_ARCHITECTURE_V2.md`
+- Schéma complet dans `📚 MEMENTO/SCHEMA_ARCHITECTURE_HEROES_OF_TIME.md`
 - MagicFormulaEngine = Point d'entrée unique confirmé
 
 ### 2. RECONNEXIONS SERVICES
@@ -64,7 +64,7 @@ GameService ──┬── BuildingService
   - Types de cibles : HERO, UNIT, BUILDING, PLAYER, TILE
   - Types d'effets : DAMAGE, HEAL, BUFF_ATTACK/DEFENSE, STUN, POISON
 - ✅ **GameService.loadHeroQuantumScripts()** : Chargement héros JSON
-  - Parcours récursif de game_assets/heroes/
+  - Parcours récursif de 🎮 game_assets/heroes/
   - Extraction intelligente des scripts quantiques
   - Support multi-formats (quantumScript, formulas.quantum, abilities.quantum)
 

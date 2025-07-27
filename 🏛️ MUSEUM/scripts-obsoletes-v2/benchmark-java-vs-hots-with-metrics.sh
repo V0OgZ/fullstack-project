@@ -170,7 +170,7 @@ while IFS= read -r line; do
             -H "Content-Type: application/json" \
             -d "{\"script\": \"$line\"}" > /dev/null 2>&1
     fi
-done < "game_assets/scenarios/hots/bataille_temporelle_complete.hots" 2>/dev/null || echo "Fichier non trouvé"
+done < "🎮 🎮 game_assets/scenarios/hots/bataille_temporelle_complete.hots" 2>/dev/null || echo "Fichier non trouvé"
 HOTS_SCENARIO_TIME=$(($(date +%s%N) - START_TIME))
 HOTS_SCENARIO_MS=$((HOTS_SCENARIO_TIME / 1000000))
 
@@ -259,6 +259,6 @@ echo "{
         \"ratio\": $(awk "BEGIN {printf \"%.2f\", $HOTS_SCENARIO_MS/$JAVA_SCENARIO_MS}")
     },
     \"average_ratio\": $AVG_RATIO
-}" > "MEMENTO/$RESULTS_FILE"
+}" > "📚 📚 MEMENTO/$RESULTS_FILE"
 
-echo -e "\n📊 Résultats sauvegardés dans: MEMENTO/$RESULTS_FILE" 
+echo -e "\n📊 Résultats sauvegardés dans: 📚 📚 MEMENTO/$RESULTS_FILE" 

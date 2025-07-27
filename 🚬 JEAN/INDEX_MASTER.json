@@ -25,25 +25,25 @@
         "name": "Lysandrel",
         "source": "ECLAT_MONDES_DISSOLUS.json",
         "status": "EXTRACTED",
-        "location": "game_assets/heroes/extracted_heroes.json"
+        "location": "🎮 game_assets/heroes/extracted_heroes.json"
       },
       {
         "name": "Nyx-Lua", 
         "source": "ECLAT_MONDES_DISSOLUS.json",
         "status": "EXTRACTED",
-        "location": "game_assets/heroes/extracted_heroes.json"
+        "location": "🎮 game_assets/heroes/extracted_heroes.json"
       },
       {
         "name": "Gardien Zephyr",
         "source": "GARDE_DU_NEXUS.json",
         "status": "EXTRACTED",
-        "location": "game_assets/heroes/extracted_heroes.json"
+        "location": "🎮 game_assets/heroes/extracted_heroes.json"
       },
       {
         "name": "Thane le Tueur de Dragons",
         "source": "SOUFFLE_DU_DRAGON.json", 
         "status": "EXTRACTED",
-        "location": "game_assets/heroes/extracted_heroes.json"
+        "location": "🎮 game_assets/heroes/extracted_heroes.json"
       }
     ],
     
@@ -52,19 +52,19 @@
         "name": "Phénix Quantique",
         "source": "ECLAT_MONDES_DISSOLUS.json",
         "status": "EXTRACTED",
-        "location": "game_assets/creatures/extracted_creatures.json"
+        "location": "🎮 game_assets/creatures/extracted_creatures.json"
       },
       {
         "name": "Dragon Rouge Temporel",
         "source": "SOUFFLE_DU_DRAGON.json",
         "status": "EXTRACTED", 
-        "location": "game_assets/creatures/extracted_creatures.json"
+        "location": "🎮 game_assets/creatures/extracted_creatures.json"
       },
       {
         "name": "Guerriers Fantômes",
         "source": "GARDE_DU_NEXUS.json",
         "status": "EXTRACTED",
-        "location": "game_assets/creatures/extracted_creatures.json"
+        "location": "🎮 game_assets/creatures/extracted_creatures.json"
       }
     ],
     

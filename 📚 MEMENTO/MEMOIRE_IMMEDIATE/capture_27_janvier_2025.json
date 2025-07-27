@@ -14,7 +14,7 @@
     
     "creation_categorie_transcendants": {
       "importance": "HAUTE",
-      "action": "Création game_assets/transcendants/",
+      "action": "Création 🎮 game_assets/transcendants/",
       "entites": ["opus_memento_claudius", "grut"],
       "scenario": "Convergence transcendante méta-narrative"
     },

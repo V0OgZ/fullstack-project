@@ -1,7 +1,7 @@
 {
   "collection": "Le Treizième Codex - Artefacts Finals",
   "description": "Artefacts légendaires du combat final contre Omega-Zéro, la Somme des Oubliés",
-  "source": "docs/items/CODEX_FINAL_ARTIFACTS.json",
+  "source": "📖 docs/items/CODEX_FINAL_ARTIFACTS.json",
   "discovery": "Pépite trouvée par Memento",
   "scenario": "Le Treizième Codex",
   "context": "Combat final contre Omega-Zéro - fusion de 999 héros effacés",

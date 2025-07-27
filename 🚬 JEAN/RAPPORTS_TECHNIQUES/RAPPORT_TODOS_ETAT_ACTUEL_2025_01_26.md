@@ -13,22 +13,22 @@
 1. **story-mode-complete** ✅
    - Mode Histoire Interactive Platon → Interstice → Source
    - Transitions visuelles 2D→3D fluides
-   - Fichiers : `frontend/story-mode.html`, `memento-intro.html`
+   - Fichiers : `🌐 frontend/story-mode.html`, `memento-intro.html`
 
 2. **grut-world-state-viz** ✅ [NOUVEAU]
    - Visualisation interactive World State Graph
    - Canvas 2D avec WebSocket temps réel
-   - Fichier : `frontend/html-interfaces/grut-world-state-visualization.html`
+   - Fichier : `🌐 frontend/html-interfaces/grut-world-state-visualization.html`
 
 3. **grut-portal-integration** ✅ [NOUVEAU]
    - Hub de navigation GRUT central
    - Intégration de toutes les interfaces
-   - Fichier : `frontend/html-interfaces/grut-navigation-hub.html`
+   - Fichier : `🌐 frontend/html-interfaces/grut-navigation-hub.html`
 
 4. **grut-api-tester** ✅ [NOUVEAU]
    - Interface de test pour toutes les API
    - Monitoring et debugging en temps réel
-   - Fichier : `frontend/html-interfaces/grut-api-tester.html`
+   - Fichier : `🌐 frontend/html-interfaces/grut-api-tester.html`
 
 ### ⏳ TODOS EN ATTENTE (PRIORITAIRES)
 
@@ -105,16 +105,16 @@
 ### 💾 COMMANDE RAPIDE REPRISE
 ```bash
 # Voir tous les TODOs structurés
-cat MEMENTO/TODO_FINALE_COMPLETE_STRUCTUREE.md
+cat 📚 MEMENTO/TODO_FINALE_COMPLETE_STRUCTUREE.md
 
 # Voir ce rapport
-cat JEAN/RAPPORTS_TECHNIQUES/RAPPORT_TODOS_ETAT_ACTUEL_2025_01_26.md
+cat 🚬 JEAN/RAPPORTS_TECHNIQUES/RAPPORT_TODOS_ETAT_ACTUEL_2025_01_26.md
 
 # Démarrer backend (si réparé)
-./scripts/start-backend.sh
+./⚙️ scripts/start-backend.sh
 
 # Tester nouvelles interfaces GRUT
-open frontend/html-interfaces/grut-navigation-hub.html
+open 🌐 frontend/html-interfaces/grut-navigation-hub.html
 ```
 
 ---

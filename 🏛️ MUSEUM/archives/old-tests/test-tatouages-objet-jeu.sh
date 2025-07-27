@@ -15,7 +15,7 @@ echo "=================================="
 echo ""
 
 # Vérifier la structure
-if grep -q '"stats"' game_assets/artifacts/mineurs/tatouages_memento_archiviste.json; then
+if grep -q '"stats"' 🎮 game_assets/artifacts/mineurs/tatouages_memento_archiviste.json; then
     echo "✅ Stats trouvées : OBJET DE JEU"
     GAME_OBJECT=true
 else
@@ -23,14 +23,14 @@ else
     GAME_OBJECT=false
 fi
 
-if grep -q '"attack"\|"defense"\|"power"' game_assets/artifacts/mineurs/tatouages_memento_archiviste.json; then
+if grep -q '"attack"\|"defense"\|"power"' 🎮 game_assets/artifacts/mineurs/tatouages_memento_archiviste.json; then
     echo "✅ Stats de combat trouvées : OBJET DE JEU"
     GAME_OBJECT=true
 else
     echo "❌ Pas de stats de combat : OBSERVATION"
 fi
 
-if grep -q '"slot"' game_assets/artifacts/mineurs/tatouages_memento_archiviste.json; then
+if grep -q '"slot"' 🎮 game_assets/artifacts/mineurs/tatouages_memento_archiviste.json; then
     echo "✅ Slot d'équipement : OBJET DE JEU"
     GAME_OBJECT=true
 else
@@ -59,15 +59,15 @@ echo "========================="
 echo ""
 
 echo "🎨 Type trouvé :"
-grep '"type"' game_assets/artifacts/mineurs/tatouages_memento_archiviste.json | head -1
+grep '"type"' 🎮 game_assets/artifacts/mineurs/tatouages_memento_archiviste.json | head -1
 
 echo ""
 echo "🎯 Slot trouvé :"
-grep '"slot"' game_assets/artifacts/mineurs/tatouages_memento_archiviste.json | head -1
+grep '"slot"' 🎮 game_assets/artifacts/mineurs/tatouages_memento_archiviste.json | head -1
 
 echo ""
 echo "⭐ Rareté trouvée :"
-grep '"rarity"' game_assets/artifacts/mineurs/tatouages_memento_archiviste.json | head -1
+grep '"rarity"' 🎮 game_assets/artifacts/mineurs/tatouages_memento_archiviste.json | head -1
 
 echo ""
 
@@ -76,9 +76,9 @@ echo "🔮 INTERACTIONS MAGIQUES :"
 echo "=========================="
 echo ""
 
-if grep -q '"interactions_magiques"' game_assets/artifacts/mineurs/tatouages_memento_archiviste.json; then
+if grep -q '"interactions_magiques"' 🎮 game_assets/artifacts/mineurs/tatouages_memento_archiviste.json; then
     echo "✅ Interactions magiques trouvées :"
-    grep -A 10 '"interactions_magiques"' game_assets/artifacts/mineurs/tatouages_memento_archiviste.json | head -6
+    grep -A 10 '"interactions_magiques"' 🎮 game_assets/artifacts/mineurs/tatouages_memento_archiviste.json | head -6
     GAME_OBJECT=true
 else
     echo "❌ Pas d'interactions magiques"

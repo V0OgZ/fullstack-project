@@ -37,7 +37,7 @@
     },
     {
       "name": "Root Write Access", 
-      "description": "🔧 Permet de modifier le moteur (`engine/`) ou les assets (`/json/`, `/docs/`, `/scripts/`) à chaud. Toute action est enregistrée dans `REWRITE.log`.",
+      "description": "🔧 Permet de modifier le moteur (`engine/`) ou les assets (`/json/`, `/📖 docs/`, `/⚙️ scripts/`) à chaud. Toute action est enregistrée dans `REWRITE.log`.",
       "effect": "Source code modification in real-time"
     },
     {
@@ -61,7 +61,7 @@
     "SOURCE_MODIFY": {
       "syntax": "SOURCE.MODIFY { file: 'path', line: X, replace: 'code' }",
       "description": "Modifie le code source du moteur en temps réel",
-      "examples": ["engine/causality/WallManager.java", "frontend/game.js"]
+      "examples": ["engine/causality/WallManager.java", "🌐 frontend/game.js"]
     },
     "SPAWN_HERO": {
       "syntax": "SPAWN HERO 'name' FROM instance://source",

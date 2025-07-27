@@ -1,5 +1,5 @@
 # 🌀 STATUS RECONNEXION GROFI
-## Classification : CONFIDENTIEL GRUT/MEMENTO
+## Classification : CONFIDENTIEL 👁️ GRUT/MEMENTO
 
 ---
 

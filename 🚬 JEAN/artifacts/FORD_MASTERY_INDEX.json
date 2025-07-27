@@ -208,8 +208,8 @@
       "ford_observer": "FordObserver.java"
     },
     "data_storage": {
-      "timeline_configs": "game_assets/artifacts/timelines/",
-      "cosmic_spells": "game_assets/artifacts/cosmic_spells/",
+      "timeline_configs": "🎮 game_assets/artifacts/timelines/",
+      "cosmic_spells": "🎮 game_assets/artifacts/cosmic_spells/",
       "player_progress": "Database table: ford_mastery_progress"
     }
   },

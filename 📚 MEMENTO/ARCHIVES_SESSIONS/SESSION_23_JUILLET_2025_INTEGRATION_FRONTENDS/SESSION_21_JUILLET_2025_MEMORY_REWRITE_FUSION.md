@@ -112,7 +112,7 @@ h1, h2, h3 {
 ### 🚨 **ACTE I - PROBLÈME PORT 9000**
 <div class="bug-fix">BUG CRITIQUE</div>
 
-**17:30** - Jean signale : *"Port 9000 redirige vers MEMENTO/HISTOIRE au lieu du dashboard"*
+**17:30** - Jean signale : *"Port 9000 redirige vers 📚 MEMENTO/HISTOIRE au lieu du dashboard"*
 
 **Solution appliquée** :
 - ✅ Modification `index.html` → redirection vers `dashboard.html`

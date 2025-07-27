@@ -19,7 +19,7 @@
 **Analyse effectuée** :
 - ✅ Heroes of Time Complete Reference (référence H3 + temporel)
 - ✅ Artefacts Légendaires Tier 6 (reliques cosmiques)
-- ✅ Code source backend/frontend complet
+- ✅ Code source 🖥️ backend/frontend complet
 - ✅ Fichiers de données (JSON, resources)
 - ✅ Tests et logs d'utilisation
 

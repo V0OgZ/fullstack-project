@@ -36,7 +36,7 @@
 ### 🔧 DEMANDES EN ATTENTE :
 - 📊 **Barre de statut** pour la démo (clarté sur l'état)
 - 🧪 **Tous les sorts** pour tests complets
-- 🎯 **Archive préparée** pour révélations GRUT/Ford
+- 🎯 **Archive préparée** pour révélations 👁️ GRUT/Ford
 
 ---
 

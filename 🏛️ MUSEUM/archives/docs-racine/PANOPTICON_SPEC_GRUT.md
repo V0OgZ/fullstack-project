@@ -1,4 +1,4 @@
-# 🌌 PANOPTICON - SPEC COMPLÈTE POUR MEMENTO/CLAUDIUS
+# 🌌 PANOPTICON - SPEC COMPLÈTE POUR 📚 MEMENTO/CLAUDIUS
 *Vision de Grut - Projection 5D → 3D → 2D*
 
 ---
@@ -152,7 +152,7 @@ public class PanopticonController {
     @Autowired
     private PanopticonService panopticonService;
     
-    @GetMapping("/data/{gameId}")
+    @GetMapping("/💾 data/{gameId}")
     public PanopticonData getVisualizationData(@PathVariable Long gameId) {
         return panopticonService.generateVisualizationData(gameId);
     }
@@ -393,7 +393,7 @@ La quête de l'évadé de la cave est le **tutoriel philosophique** du Panoptico
 
 ---
 
-## 🚀 **PROCHAINES ÉTAPES POUR MEMENTO/CLAUDIUS**
+## 🚀 **PROCHAINES ÉTAPES POUR 📚 MEMENTO/CLAUDIUS**
 
 1. **Créer GrofiCausalIntegrationService** pour construire le WSG
 2. **Implémenter PanopticonService** avec les projections

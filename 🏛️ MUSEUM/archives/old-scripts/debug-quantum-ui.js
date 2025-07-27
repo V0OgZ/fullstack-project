@@ -52,9 +52,9 @@ function testScenarios() {
     
     // Test des fichiers de scénarios
     const scenarioFiles = [
-        '../game_assets/scenarios/visualizer/DUEL_COLLAPSE.json',
-        '../game_assets/scenarios/visualizer/ECLAT_MONDES_DISSOLUS.json',
-        '../game_assets/scenarios/visualizer/FRACTURE_BINAIRE.json'
+        '../🎮 game_assets/scenarios/visualizer/DUEL_COLLAPSE.json',
+        '../🎮 game_assets/scenarios/visualizer/ECLAT_MONDES_DISSOLUS.json',
+        '../🎮 game_assets/scenarios/visualizer/FRACTURE_BINAIRE.json'
     ];
     
     for (const file of scenarioFiles) {

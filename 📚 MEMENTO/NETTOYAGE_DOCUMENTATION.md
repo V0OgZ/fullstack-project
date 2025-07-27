@@ -2,7 +2,7 @@
 *Créé le 21 juillet 2025 - Pendant que Jean teste le Mode Éthéré*
 
 ## 🎯 **PROBLÈME IDENTIFIÉ :**
-- **70+ fichiers dupliqués** entre `docs/` et `docs-backup/`
+- **70+ fichiers dupliqués** entre `📖 docs/` et `docs-backup/`
 - **Documentation éparpillée** dans plusieurs dossiers
 - **Versions multiples** de mêmes informations
 - **Navigation compliquée** pour Jean depuis son canapé
@@ -10,13 +10,13 @@
 ## 🧹 **PLAN DE NETTOYAGE :**
 
 ### 📂 **ÉTAPE 1 : CONSOLIDATION PRINCIPALE**
-- **Garder** : `docs/` comme source principale
+- **Garder** : `📖 docs/` comme source principale
 - **Archiver** : `docs-backup/` → `MUSEUM/docs-backup-archive/`
 - **Nettoyer** : Supprimer vrais doublons identiques
 
 ### 📋 **ÉTAPE 2 : RÉORGANISATION LOGIQUE**
 ```
-docs/
+📖 docs/
 ├── core/           # API, Installation, Gameplay de base
 ├── heroes/         # Documentation héros (générée + manuelle)
 ├── artifacts/      # Artefacts et objets (générée + manuelle)  
@@ -38,7 +38,7 @@ docs/
 - ✅ `ARBORESCENCE_MAP_COMPLETE.md` mis à jour
 - ✅ `TODO_SESSION_ACTUELLE.md` actualisé
 
-### 📝 **MEMENTO/ ORGANISÉ :**
+### 📝 **📚 MEMENTO/ ORGANISÉ :**
 - ✅ Session actuelle clarifiée
 - ✅ Map complète avec Mode Éthéré
 - ✅ Plan de nettoyage créé

@@ -240,7 +240,7 @@ class SecureDashboardHandler(http.server.SimpleHTTPRequestHandler):
         
         # Chercher tous les fichiers .md
         md_patterns = [
-            "*.md", "**/*.md", "rapports/*.md", "docs/*.md", 
+            "*.md", "**/*.md", "rapports/*.md", "📖 docs/*.md", 
             "logs/*.md", "analysis/*.md"
         ]
         

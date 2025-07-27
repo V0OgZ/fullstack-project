@@ -21,25 +21,25 @@
 
 ### **Anciennes Versions Interface (SUPERPOSITION)**
 ```bash
-❌ frontend/src/components/TrueHeroesInterface_v1.tsx  (10,289 bytes)
-❌ frontend/src/components/TrueHeroesInterface_v2.tsx  (10,289 bytes) 
-❌ frontend/src/components/TrueHeroesInterface_v3.tsx  (6,004 bytes)
-✅ frontend/src/components/TrueHeroesInterface.tsx     (VERSION ACTUELLE)
+❌ 🌐 frontend/src/components/TrueHeroesInterface_v1.tsx  (10,289 bytes)
+❌ 🌐 frontend/src/components/TrueHeroesInterface_v2.tsx  (10,289 bytes) 
+❌ 🌐 frontend/src/components/TrueHeroesInterface_v3.tsx  (6,004 bytes)
+✅ 🌐 frontend/src/components/TrueHeroesInterface.tsx     (VERSION ACTUELLE)
 ```
 
 ### **CSS Temporaux Conflictuels (ANCIENNE TIMELINE)**
 ```bash
-❌ frontend/src/components/TemporalInterface.css  (17,517 bytes)
+❌ 🌐 frontend/src/components/TemporalInterface.css  (17,517 bytes)
    └── Classes: .timeline-section, .timeline-header, .temporal-interface
-❌ frontend/src/pages/TemporalGame.css           (11,363 bytes)
+❌ 🌐 frontend/src/pages/TemporalGame.css           (11,363 bytes)
    └── Ancien système temporal complet
-✅ frontend/src/components/TrueHeroesInterface.css (VERSION ACTUELLE)
+✅ 🌐 frontend/src/components/TrueHeroesInterface.css (VERSION ACTUELLE)
    └── Classes: .temporal-timeline, .timeline-bar, .timeline-progress
 ```
 
 ### **Pages de Test Obsolètes**
 ```bash
-❌ frontend/src/pages/HistoricalTestPages.tsx
+❌ 🌐 frontend/src/pages/HistoricalTestPages.tsx
    └── Importait toutes les anciennes versions v1, v2, v3
 ```
 

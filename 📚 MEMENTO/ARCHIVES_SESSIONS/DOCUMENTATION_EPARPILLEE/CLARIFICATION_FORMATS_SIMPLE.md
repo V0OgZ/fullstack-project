@@ -72,7 +72,7 @@ echo "✅ Bataille terminée !"
 
 ### **Option A : Via Script SH (Automatique)**
 ```bash
-./scripts/test-bataille-arthur.sh
+./⚙️ scripts/test-bataille-arthur.sh
 # → Le script lance tout automatiquement
 ```
 
@@ -93,7 +93,7 @@ curl -X POST "http://localhost:8080/api/scripts" \
 
 ### **📁 Scénarios HOTS**
 ```
-game_assets/scenarios/hots/
+🎮 game_assets/scenarios/hots/
 ├── simple-game.hots              ← Démo simple
 ├── bataille_temporelle_complete.hots ← Bataille épique
 ├── quantum_maze.hots             ← Labyrinthe quantique
@@ -102,7 +102,7 @@ game_assets/scenarios/hots/
 
 ### **📁 Scripts SH**
 ```
-scripts/
+⚙️ scripts/
 ├── test-heros-memento.sh         ← Test Memento
 ├── test-bataille-arthur.sh       ← Test Arthur
 └── start-services-background.sh  ← Démarrer tout
@@ -110,7 +110,7 @@ scripts/
 
 ### **📁 Fichiers JSON**
 ```
-backend/src/main/resources/
+🖥️ backend/src/main/resources/
 ├── heroes/memento.json           ← Stats de Memento
 ├── heroes/arthur.json            ← Stats d'Arthur
 └── artifacts/temporal_artifacts.json ← Objets magiques
@@ -178,7 +178,7 @@ python3 -m http.server 3000
 
 ### **Je veux tester avec le backend :**
 ```bash
-./scripts/test-simple-scenario.sh
+./⚙️ scripts/test-simple-scenario.sh
 ```
 
 ---

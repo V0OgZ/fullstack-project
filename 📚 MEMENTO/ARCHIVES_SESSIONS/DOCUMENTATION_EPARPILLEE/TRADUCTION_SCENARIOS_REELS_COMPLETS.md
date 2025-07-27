@@ -23,7 +23,7 @@
 
 ## 🏰 **SCÉNARIO COMPLEXE : LE TREIZIÈME CODEX**
 
-### **📄 Fichier source :** `game_assets/scenarios/hots/codex_final.hots`
+### **📄 Fichier source :** `🎮 game_assets/scenarios/hots/codex_final.hots`
 **Complexité :** NIGHTMARE - 30 tours - Boss Final  
 **Héros :** Jean-Grofignon, Claudius, Chlamydius vs Omega-Zéro
 
@@ -120,7 +120,7 @@
 
 ## 🎮 **SCÉNARIO SIMPLE : DÉMO BASIQUE**
 
-### **📄 Fichier source :** `game_assets/scenarios/hots/simple-game.hots`
+### **📄 Fichier source :** `🎮 game_assets/scenarios/hots/simple-game.hots`
 **Complexité :** DÉMO - <3 secondes - 7 commandes
 
 ### **🔧 TRADUCTIONS APPLIQUÉES :**

@@ -212,12 +212,12 @@
 ### 🎮 **Interfaces Jouables**
 - [Frontend Principal](http://localhost:8000) - Interface complète avec boutons Ville/Combat/Héros
 - [Dashboard](http://localhost:9000/dashboard.html) - Gestion et accès aux UIs cachées
-- [Joint Oublié](frontend/joint-panopticon-interface.html) - Expérience Panopticon
+- [Joint Oublié](🌐 frontend/joint-panopticon-interface.html) - Expérience Panopticon
 
 ### 📚 **Documentation**
-- [TODO Session Actuelle](MEMENTO/TODO_SESSION_ACTUELLE.md) - Objectifs Alpha
-- [Architecture Complète](MEMENTO/ARCHITECTURE_COMPREHENSION_OPUS.md) - Vue d'ensemble
-- [Catalogue Héros](MEMENTO/GUIDES_REFERENCE/CATALOGUE_COMPLET_HÉROS_ET_CRÉATURES_AVEC_TRADUCTIONS.md)
+- [TODO Session Actuelle](📚 MEMENTO/TODO_SESSION_ACTUELLE.md) - Objectifs Alpha
+- [Architecture Complète](📚 MEMENTO/ARCHITECTURE_COMPREHENSION_OPUS.md) - Vue d'ensemble
+- [Catalogue Héros](📚 MEMENTO/GUIDES_REFERENCE/CATALOGUE_COMPLET_HÉROS_ET_CRÉATURES_AVEC_TRADUCTIONS.md)
 
 ---
 

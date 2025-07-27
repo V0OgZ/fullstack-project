@@ -48,23 +48,23 @@
 ## 🦁 SPHINX PROTOCOL - IMPLÉMENTATION BACKEND
 
 ### 📋 CE QUI EXISTE
-- ✅ `game_assets/sphinx/SPHINX_QUESTIONS_GENERATOR.json` - Templates de questions
-- ✅ `scripts/demo-sphinx-generator.sh` - Démo fonctionnelle
-- ✅ `frontend/sphinx-grammar-integration.html` - Interface visuelle
+- ✅ `🎮 game_assets/sphinx/SPHINX_QUESTIONS_GENERATOR.json` - Templates de questions
+- ✅ `⚙️ scripts/demo-sphinx-generator.sh` - Démo fonctionnelle
+- ✅ `🌐 frontend/sphinx-grammar-integration.html` - Interface visuelle
 - ✅ `SphinxGenerator.tsx` - Composant React
 
 ### ❌ CE QUI MANQUE - À CRÉER
 
 #### 1. **Backend Java** (PRIORITÉ 1)
 ```java
-// backend/src/main/java/com/example/demo/sphinx/SphinxProtocol.java
+// 🖥️ backend/src/main/java/com/example/demo/sphinx/SphinxProtocol.java
 public class SphinxProtocol {
     // Générateur procédural de questions
     // Validation des réponses physiques
     // Attribution des certifications
 }
 
-// backend/src/main/java/com/example/demo/sphinx/SphinxService.java
+// 🖥️ backend/src/main/java/com/example/demo/sphinx/SphinxService.java
 @Service
 public class SphinxService {
     // Logique métier du Sphinx
@@ -72,7 +72,7 @@ public class SphinxService {
     // Adaptation continue (JSON ne suffit plus)
 }
 
-// backend/src/main/java/com/example/demo/controller/SphinxController.java
+// 🖥️ backend/src/main/java/com/example/demo/controller/SphinxController.java
 @RestController
 @RequestMapping("/api/sphinx")
 public class SphinxController {

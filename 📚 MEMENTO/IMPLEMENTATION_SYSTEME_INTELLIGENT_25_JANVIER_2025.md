@@ -2,7 +2,7 @@
 
 ## 📅 Date: 25 Janvier 2025
 ## 👤 Implémenté par: Assistant IA (Claude Opus 4)
-## 📍 Localisation: `/frontend/vince-vega-map-demo-backend.html`
+## 📍 Localisation: `/🌐 frontend/vince-vega-map-demo-backend.html`
 
 ---
 
@@ -20,8 +20,8 @@ Restauration et amélioration de l'interface de jeu avec un "système intelligen
 
 ### 1. **Restauration de l'Interface** 
 - **Problème**: La version récente était "damiernbroken tour pourri" après intégration multiverse
-- **Solution**: Rollback depuis `frontend/vince-vega-map-demo-backend-BACKUP.html`
-- **Sauvegarde**: Version cassée archivée dans `frontend/vince-vega-map-demo-backend-BROKEN.html`
+- **Solution**: Rollback depuis `🌐 frontend/vince-vega-map-demo-backend-BACKUP.html`
+- **Sauvegarde**: Version cassée archivée dans `🌐 frontend/vince-vega-map-demo-backend-BROKEN.html`
 
 ### 2. **Nouvelle Architecture de l'Interface**
 ```
@@ -91,7 +91,7 @@ Types de messages dans la console:
 ## 📝 Détails Techniques
 
 ### Fichiers Modifiés
-1. **`frontend/vince-vega-map-demo-backend.html`** (272 → 850+ lignes)
+1. **`🌐 frontend/vince-vega-map-demo-backend.html`** (272 → 850+ lignes)
    - Refonte complète de la structure HTML
    - Ajout de 400+ lignes de CSS
    - Enrichissement du JavaScript avec nouvelles fonctionnalités
@@ -104,7 +104,7 @@ Types de messages dans la console:
 - `toggleAudio()`: Activation/désactivation du son
 
 ### Intégrations Backend
-- **Translation Service**: `frontend/translation-service.js`
+- **Translation Service**: `🌐 frontend/translation-service.js`
 - **Formules HOTS**: Compatibilité avec le moteur Heroes of Time
 - **Classes de Héros**: Warrior, Quantum, Gunslinger, Scribe
 

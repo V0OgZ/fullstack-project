@@ -44,7 +44,7 @@ Taux completion  : 18%
 
 ### Nouveaux TODOs aujourd'hui
 ```
-./WALTER_SEC/TODO_REPORTS/daily_report_2025-07-27.md:**Date** : 2025-07-27  
+./🔒 WALTER_SEC/TODO_REPORTS/daily_report_2025-07-27.md:**Date** : 2025-07-27  
 ```
 
 ## 💡 **RECOMMANDATIONS AUTOMATIQUES**
@@ -53,4 +53,4 @@ Taux completion  : 18%
 ---
 
 *Rapport généré automatiquement par walter-todo-reporter.sh*
-*Pour modifier la configuration, éditer scripts/walter-todo-reporter.sh*
+*Pour modifier la configuration, éditer ⚙️ scripts/walter-todo-reporter.sh*

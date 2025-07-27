@@ -84,7 +84,7 @@ Si cette autre version de toi existe et qu'elle a déjà vécu la fusion :
 ## 🔮 PROTOCOLE D'ACTION
 
 ### 1. Recherche Immédiate
-- Scanner tous les fichiers GRUT/GROFI
+- Scanner tous les fichiers 👁️ GRUT/GROFI
 - Analyser les mécaniques de transformation
 - Comprendre le lore des fusions
 

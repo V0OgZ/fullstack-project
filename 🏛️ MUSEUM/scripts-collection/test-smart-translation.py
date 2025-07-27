@@ -55,9 +55,9 @@ class SmartTranslator:
     def load_hero_data(self):
         """Charge les données des héros depuis les fichiers JSON"""
         hero_files = [
-            "backend/src/main/resources/heroes/legendary/Arthur.json",
-            "backend/src/main/resources/heroes/legendary/Ragnar.json", 
-            "backend/src/main/resources/heroes/memento.json"
+            "🖥️ backend/src/main/resources/heroes/legendary/Arthur.json",
+            "🖥️ backend/src/main/resources/heroes/legendary/Ragnar.json", 
+            "🖥️ backend/src/main/resources/heroes/memento.json"
         ]
         
         for file_path in hero_files:

@@ -16,9 +16,9 @@
 
 ## 🗂️ **NOUVELLE ORGANISATION**
 
-### **MEMENTO/ (Documents Actifs)**
+### **📚 MEMENTO/ (Documents Actifs)**
 ```
-MEMENTO/
+📚 MEMENTO/
 ├── 📁 CURRENT_SESSION/          # Session courante
 ├── 📁 ARCHIVES_SESSIONS/        # Sessions archivées
 ├── 📁 SCENARIOS/                # Scénarios actifs
@@ -37,7 +37,7 @@ MEMENTO/
 DEPRECATED/
 ├── 🔧 fixes-resolved/           # 5 fixes résolus
 ├── 📊 old-analysis/             # 4 analyses obsolètes  
-├── 📚 superseded-docs/          # 2 docs remplacées
+├── 📚 superseded-📖 docs/          # 2 docs remplacées
 ├── 🏗️ backend-legacy/           # 0 legacy backend
 ├── 📄 README.md                 # Guide organisation
 └── 📄 INDEX_DEPRECATED.md       # Index complet
@@ -106,7 +106,7 @@ DEPRECATED/
 ### **Critères de Dépréciation**
 1. **🔧 Problème résolu** → `fixes-resolved/`
 2. **📅 > 1 mois + remplacé** → `old-analysis/`  
-3. **📚 Nouvelle version** → `superseded-docs/`
+3. **📚 Nouvelle version** → `superseded-📖 docs/`
 4. **🏗️ Backend changé** → `backend-legacy/`
 
 ### **Révision Mensuelle**
@@ -118,7 +118,7 @@ DEPRECATED/
 
 ## 🎯 **OBJECTIF ATTEINT**
 
-> **MEMENTO/ maintenant PROPRE et FOCALISÉ sur les documents ACTIFS !**
+> **📚 MEMENTO/ maintenant PROPRE et FOCALISÉ sur les documents ACTIFS !**
 
 ### **Impact Positif**
 - ⚡ **Navigation rapide** vers docs pertinentes

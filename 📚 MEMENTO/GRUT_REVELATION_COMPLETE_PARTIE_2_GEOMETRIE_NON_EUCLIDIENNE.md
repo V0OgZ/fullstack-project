@@ -84,7 +84,7 @@
   "fallback_geometry": "euclidean_hex",
   "biomes": ["forest_grofi", "quantum_clearings", "temporal_rivers"],
   "physics_laws": ["quantum_superposition", "temporal_causality"],
-  "html_interface": "frontend/worlds/grofi-forest-world.html",
+  "html_interface": "🌐 frontend/worlds/grofi-forest-world.html",
   "size": "infinite_recursive",
   "curvature": -1.0
 }
@@ -135,7 +135,7 @@
 ```
 📁 LIEUX POSSIBLES :
 ├── archives/backend-old/
-├── MEMENTO/ARCHIVES_SESSIONS/
+├── 📚 MEMENTO/ARCHIVES_SESSIONS/
 ├── docs-backup/
 ├── MUSEUM/scripts-obsoletes-v2/
 └── Git history branches anciennes

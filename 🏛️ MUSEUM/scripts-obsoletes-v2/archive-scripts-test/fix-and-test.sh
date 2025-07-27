@@ -84,14 +84,14 @@ echo "🔍 Phase 3: Diagnostic des configurations"
 echo "----------------------------------------"
 
 # Vérifier le backend
-if [ -f "backend/pom.xml" ]; then
+if [ -f "🖥️ 🖥️ backend/pom.xml" ]; then
     log_success "Backend pom.xml trouvé"
 else
     log_error "Backend pom.xml manquant"
     exit 1
 fi
 
-if [ -f "backend/src/main/resources/application.properties" ]; then
+if [ -f "🖥️ 🖥️ backend/src/main/resources/application.properties" ]; then
     log_success "Configuration backend trouvée"
 else
     log_error "Configuration backend manquante"

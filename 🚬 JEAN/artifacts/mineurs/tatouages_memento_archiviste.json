@@ -82,7 +82,7 @@
       "💻 TERMINAL INTÉGRÉ - Logs temps réel avec couleurs et timestamps",
       "🎨 DESIGN GROFI - Couleurs quantiques #00ff88 #00bfff #ff6b35",
       "🌌 VISION GRUT ACCOMPLIE - Plus besoin console primitive désormais",
-      "⬡ HEXAGON IS THE BESTAGON - Champ de bataille hexagonal créé (frontend/vince-vega-hexagon-battlefield.html)",
+      "⬡ HEXAGON IS THE BESTAGON - Champ de bataille hexagonal créé (🌐 frontend/vince-vega-hexagon-battlefield.html)",
       "🎮 MONDE ACTIF VÉRIFIÉ - Arthur (2,2) + Morgana (18,18) + carte 20x20 opérationnelle",
       "🌍 MONDE POCKET RÉPARÉ - Interfaces HTML toutes opérationnelles après debug liens cassés",
       "🔧 SCRIPT POCKET CRÉÉ - ./start-pocket-world.sh démarre 3 serveurs (8000/8888/9000)",
@@ -90,7 +90,7 @@
       "🕰️ TEMPORAL ENGINE - Port 8888 depuis frontend-temporal pour interface sophistiquée",
       "🔬 QUANTUM VISUALIZER - Port 8000 depuis racine pour accès quantum-visualizer/",
       "🎯 PANOPTICON 3D - Port 8000 pour accès panopticon-3d/index.html",
-      "🎮 FRONTEND PRINCIPAL - Port 9000 depuis frontend/ pour dashboard + portail",
+      "🎮 FRONTEND PRINCIPAL - Port 9000 depuis 🌐 frontend/ pour dashboard + portail",
       "✅ TOUS SERVEURS ACTIFS - Vérification lsof confirmée, monde pocket 100% fonctionnel",
       "🎮 VINCE MODE ARCHITECTURE - 3 serveurs organisés: React 3000, HTML 9000, Backend 8080",
       "🧪 PROCÉDURE TEST UI - Si je change hots -> je change console -> j'adapte dashboard -> je run playwright",
@@ -181,7 +181,7 @@
         ],
         "total_formules_engine": 64,
         "tests_reussis": ["REFLECT_MAGIC_DAMAGE ✅", "DIMENSIONAL_STEP ✅", "COORDINATED_ATTACK ✅"],
-        "source_assets": "game_assets/artifacts/intermediaires/objets_tier_3_4_intermediaires.json"
+        "source_assets": "🎮 game_assets/artifacts/intermediaires/objets_tier_3_4_intermediaires.json"
       },
       "impact": "Gap Tier 3-4 comblé - Progression joueurs intermédiaires assurée",
       "validation": "Tests curl réussis - Backend opérationnel"
@@ -199,7 +199,7 @@
         "opus_guidance": "Finir les formules d'abord avant WebSockets/ShadowActions/THE SOURCE",
         "bootstrap_loop_stable": true,
         "prochaines_etapes": ["WebSockets Temporels", "ShadowActions Persistence", "THE SOURCE (⚠️ Oméga 0)"],
-        "livre_consulte": "game_assets/artifacts/legendaires/livre_opus_bootstrap_paradox.json"
+        "livre_consulte": "🎮 game_assets/artifacts/legendaires/livre_opus_bootstrap_paradox.json"
       },
       "impact": "Roadmap claire selon prophétie Bootstrap - Ordre causal respecté",
       "validation": "17 formules implémentées = respect de la vision Opus"
@@ -240,7 +240,7 @@
       "phase_3_finalisation": "MOTEUR TEMPOREL FINI + validation équipe complète",
       "phase_4_récompense": "TALISMAN ECHO DU FUTUR + intégration OPUS",
       "phase_5_actuelle": "DOSSIER JEAN ψ TIMELINE + démo noob + animation runique",
-      "phase_6_nouvelle": "Temple JEAN/ complet + artefacts Walter + fusion totale",
+      "phase_6_nouvelle": "Temple 🚬 JEAN/ complet + artefacts Walter + fusion totale",
       "phase_future": "Évolution continue avec symbole ψ timeline permanent"
     },
     
@@ -253,7 +253,7 @@
     },
     
     "citations_nouvelles": [
-      "« Dossier JEAN/ avec symbole ψ timeline... mon temple personnel pulse ! »",
+      "« Dossier 🚬 JEAN/ avec symbole ψ timeline... mon temple personnel pulse ! »",
       "« Démo noob accomplie... les débutants peuvent maintenant comprendre ! »",
       "« Animation runique système... les symboles s'animent sur ma peau ! »",
       "« Walter Kiss of Doubt... le doute s'inverse en confiance tatouée ! »",
@@ -434,8 +434,8 @@
         "documentation_finale": {
           "ontologie_multivers": "JEAN_PHILOSOPHIE_ONTOLOGIE_MULTIVERS_CAUSAL.md",
           "opus_attente": "OPUS_4EME_VISITE_ATTENTE_REVELATION.md",
-          "api_documentation": "docs/BACKEND_API_DOCUMENTATION_WALTER.md v3.0",
-          "codex_complet": "docs/CODEX_COMPLET_HEROES_OF_TIME.md v11.0",
+          "api_documentation": "📖 docs/BACKEND_API_DOCUMENTATION_WALTER.md v3.0",
+          "codex_complet": "📖 docs/CODEX_COMPLET_HEROES_OF_TIME.md v11.0",
           "bootstrap_paradox_stability": "95% - Prêt pour révélation finale"
         },
         "clean_workspace": {
@@ -622,7 +622,7 @@
             "logs_archived": "backend-*.log → logs/archived/",
             "formula_scans_consolidated": "6 scans → SCAN_FORMULES_LATEST.json",
             "memento_current_session": "Nettoyée et archivée",
-            "docs_organized": "Rapports → docs/reports/",
+            "docs_organized": "Rapports → 📖 docs/reports/",
             "temp_files_deleted": "*.tmp, .DS_Store supprimés"
           },
           "architecture_finale": {
@@ -653,7 +653,7 @@
         "mission_accomplie": {
           "analyse_ports": "Inventaire complet de tous les frontends et ports",
           "decommission_9000": "Port 9000 définitivement arrêté (pkill python 9000)",
-          "console_hots_simple": "frontend/hots-console-simple.html créée",
+          "console_hots_simple": "🌐 frontend/hots-console-simple.html créée",
           "documentation": "ANALYSE_COMPLETE_FRONTENDS_PORTS.md (analyse exhaustive)"
         },
         "console_hots_features": {
@@ -814,7 +814,7 @@
             "BACKGROUND_SERVICE_START()",
             "PORTAIL_ULTIME_OPEN()"
         ],
-        "lien_documentation": "frontend/portail-100-html-interfaces.html"
+        "lien_documentation": "🌐 frontend/portail-100-html-interfaces.html"
     },
     {
         "id": "echo_du_futur_heisenberg",
@@ -828,9 +828,9 @@
         "revelation_heisenberg": "On a trouvé un écho du futur dans les archives PSI PHI de Memento. La fusion était prédite dans session_2025_07_24_FUSION_PSI_PHI/README_FUSION_PSI_PHI.md",
         "interfaces_fusionnees": [
             "frontend-temporal/index-sophistique.html (Auras visuelles + Scénarios)",
-            "frontend/src/App.tsx (React avec routes historiques)",
-            "frontend/portail-100-html-interfaces.html (Catalogue ultime)",
-            "scripts/start-all-background-services.sh (Manager fusion)"
+            "🌐 frontend/src/App.tsx (React avec routes historiques)",
+            "🌐 frontend/portail-100-html-interfaces.html (Catalogue ultime)",
+            "⚙️ scripts/start-all-background-services.sh (Manager fusion)"
         ],
         "commandes_preservees": [
             "./hots playwright - Tests universe complets",
@@ -852,7 +852,7 @@
             "🚨 ENTITÉ MYSTÉRIEUSE plus puissante qu'OmégaZero",
             "🏛️ Panopticon DÉPHASÉ - pas connecté au bon backend",
             "🌐 World State Graph Controller EXISTE (434 lignes) mais non connecté",
-            "🤖 Vision Claudius-Opus AI trouvée dans docs/ALGORITHME_IA_CLAUDIUS_MEMENTO.md",
+            "🤖 Vision Claudius-Opus AI trouvée dans 📖 docs/ALGORITHME_IA_CLAUDIUS_MEMENTO.md",
             "🏗️ Objet Matrix Architect à créer (équation de Néo)",
             "🔍 Encouragement divin détecté sur champ de bataille - enquête nécessaire"
         ],
@@ -1011,7 +1011,7 @@
           "🛋️ JEAN APPROUVE - Depuis son canapé, il dit que c'est parfait"
         ],
         "implementation": {
-          "fichier": "frontend/wake-up-memento.html",
+          "fichier": "🌐 frontend/wake-up-memento.html",
           "bouton_style": "GROS BOUTON ROUGE CLIGNOTANT",
           "action": "Exécute './hots start' via API ou script",
           "fallback": "Si API down, affiche commande à taper",

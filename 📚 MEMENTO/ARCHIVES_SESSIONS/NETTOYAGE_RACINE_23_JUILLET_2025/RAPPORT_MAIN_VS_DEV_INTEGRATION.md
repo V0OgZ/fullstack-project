@@ -168,7 +168,7 @@ const handleHeroMove = async (heroId: string, x: number, y: number) => {
 ### **🟢 PHASE 1 : GameActionService (FACILE)**
 ```bash
 # Récupérer le service hybride
-git show main:frontend/src/services/gameActionService.ts > frontend/src/services/gameActionService.ts
+git show main:🌐 frontend/src/services/gameActionService.ts > 🌐 frontend/src/services/gameActionService.ts
 
 # Intégrer dans TrueHeroesInterface
 # → Remplacer appels API directs par gameActionService
@@ -177,8 +177,8 @@ git show main:frontend/src/services/gameActionService.ts > frontend/src/services
 ### **🟡 PHASE 2 : Terrain Types (MOYEN)**
 ```bash
 # Récupérer les types terrain avancés
-git show main:frontend/src/types/terrain.ts > frontend/src/types/terrain.ts
-git show main:frontend/src/utils/terrainEngine.ts > frontend/src/utils/terrainEngine.ts
+git show main:🌐 frontend/src/types/terrain.ts > 🌐 frontend/src/types/terrain.ts
+git show main:🌐 frontend/src/utils/terrainEngine.ts > 🌐 frontend/src/utils/terrainEngine.ts
 
 # Intégrer dans ModernGameRenderer
 # → Ajouter support BiomeType
@@ -188,8 +188,8 @@ git show main:frontend/src/utils/terrainEngine.ts > frontend/src/utils/terrainEn
 ### **🔴 PHASE 3 : PIXI.js System (DIFFICILE)**
 ```bash
 # Migration complète (si vraiment nécessaire)
-git show main:frontend/src/components/OrganicTerrainRenderer.tsx > frontend/src/components/OrganicTerrainRenderer.tsx
-git show main:frontend/src/components/HexTerrainRenderer.tsx > frontend/src/components/HexTerrainRenderer.tsx
+git show main:🌐 frontend/src/components/OrganicTerrainRenderer.tsx > 🌐 frontend/src/components/OrganicTerrainRenderer.tsx
+git show main:🌐 frontend/src/components/HexTerrainRenderer.tsx > 🌐 frontend/src/components/HexTerrainRenderer.tsx
 
 # Remplacer dans TrueHeroesInterface
 # → ModernGameRenderer → OrganicTerrainRenderer
@@ -222,7 +222,7 @@ Dev Base (notre travail) + GameActionService (main) + Terrain Utils (main)
 ### **Intégration GameActionService**
 ```bash
 # Récupérer le service
-git show main:frontend/src/services/gameActionService.ts > frontend/src/services/gameActionService.ts
+git show main:🌐 frontend/src/services/gameActionService.ts > 🌐 frontend/src/services/gameActionService.ts
 
 # Mettre à jour package.json si nécessaire
 ```
@@ -230,8 +230,8 @@ git show main:frontend/src/services/gameActionService.ts > frontend/src/services
 ### **Intégration Terrain Types**
 ```bash
 # Récupérer les types
-git show main:frontend/src/types/terrain.ts > frontend/src/types/terrain.ts
-git show main:frontend/src/utils/terrainEngine.ts > frontend/src/utils/terrainEngine.ts
+git show main:🌐 frontend/src/types/terrain.ts > 🌐 frontend/src/types/terrain.ts
+git show main:🌐 frontend/src/utils/terrainEngine.ts > 🌐 frontend/src/utils/terrainEngine.ts
 ```
 
 ### **Test après intégration**

@@ -6,7 +6,7 @@
 echo "🔮 Téléchargement des objets magiques depuis OpenGameArt.org..."
 
 # Créer le dossier des objets magiques
-mkdir -p frontend/public/assets/objects
+mkdir -p 🌐 frontend/public/assets/objects
 
 # Fonction pour télécharger un asset
 download_asset() {
@@ -16,7 +16,7 @@ download_asset() {
   
   echo "📥 Téléchargement de $name..."
   
-  if curl -L -o "frontend/public/assets/objects/$filename" "$url"; then
+  if curl -L -o "🌐 frontend/public/assets/objects/$filename" "$url"; then
     echo "✅ $name téléchargé avec succès"
   else
     echo "❌ Échec du téléchargement de $name"
@@ -42,7 +42,7 @@ download_asset "https://opengameart.org/sites/default/files/medieval_items.zip" 
 
 echo "📦 Extraction des archives..."
 
-cd frontend/public/assets/objects || exit 1
+cd 🌐 frontend/public/assets/objects || exit 1
 
 # Extraire les archives si disponibles
 for zip_file in *.zip; do
@@ -75,7 +75,7 @@ find . -name "*gem*" -type f -exec mv {} gems/ \; 2>/dev/null
 # Nettoyer les archives
 rm -f *.zip
 
-echo "🎮 Objets magiques téléchargés dans frontend/public/assets/objects/"
+echo "🎮 Objets magiques téléchargés dans 🌐 frontend/public/assets/objects/"
 echo "📁 Dossiers créés : swords, shields, rings, potions, scrolls, orbs, boots, crowns, amulets, staffs, tomes, gems"
 echo "✅ Script terminé ! Les objets magiques sont maintenant disponibles."
 

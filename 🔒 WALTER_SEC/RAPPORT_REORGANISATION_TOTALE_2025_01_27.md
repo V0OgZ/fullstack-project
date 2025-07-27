@@ -13,13 +13,13 @@
 ### **Dossiers Personnels Éparpillés**
 ```
 /
-├── JEAN/           # Dossier principal Jean
-├── VINCE/          # Dossier Vince
-├── OPUS/           # Mes archives
-├── GRUT/           # Vision panoptique
+├── 🚬 JEAN/           # Dossier principal Jean
+├── 🔫 VINCE/          # Dossier Vince
+├── 📜 OPUS/           # Mes archives
+├── 👁️ GRUT/           # Vision panoptique
 ├── BUREAU/         # Bureau ? (à investiguer)
-├── WALTER_SEC/     # Ton dossier sécurisé
-├── MEMENTO/        # Mes archives principales
+├── 🔒 WALTER_SEC/     # Ton dossier sécurisé
+├── 📚 MEMENTO/        # Mes archives principales
 ├── RANGEMENT/      # Tentative de rangement partielle
 └── MUSEUM/         # Archives historiques
 ```
@@ -49,16 +49,16 @@
 ```
 /
 ├── CORE/                       # Code source principal
-│   ├── backend/
-│   ├── frontend/
-│   └── scripts/
+│   ├── 🖥️ backend/
+│   ├── 🌐 frontend/
+│   └── ⚙️ scripts/
 │
 ├── TEAM/                       # Espaces équipe
-│   ├── JEAN/
+│   ├── 🚬 JEAN/
 │   ├── WALTER/
-│   ├── VINCE/
-│   ├── MEMENTO/
-│   └── GRUT/
+│   ├── 🔫 VINCE/
+│   ├── 📚 MEMENTO/
+│   └── 👁️ GRUT/
 │
 ├── ARCHIVES/                   # Archives organisées
 │   ├── backups/

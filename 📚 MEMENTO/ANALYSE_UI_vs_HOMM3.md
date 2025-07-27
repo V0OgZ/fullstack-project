@@ -160,7 +160,7 @@
 
 ### 📁 **Structure des Fichiers**
 ```
-frontend/
+🌐 frontend/
 ├── components/
 │   ├── CityInterface.js          # Interface de ville
 │   ├── CombatInterface.js        # Interface de combat
@@ -175,7 +175,7 @@ frontend/
 │   ├── magic.css                 # Styles magie
 │   ├── map.css                   # Styles carte
 │   └── economy.css               # Styles économie
-└── data/
+└── 💾 data/
     ├── buildings.js              # Données bâtiments
     ├── spells.js                 # Données sorts
     ├── skills.js                 # Données compétences

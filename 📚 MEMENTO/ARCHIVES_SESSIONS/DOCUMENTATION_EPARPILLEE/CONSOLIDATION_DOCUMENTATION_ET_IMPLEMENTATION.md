@@ -9,18 +9,18 @@
 
 ### 🎯 **Documents Principaux Localisés**
 
-1. **`docs/temporal/CAUSALITY_UI_AND_TIMELINE_VISUALS.md`** ⭐ **DOCUMENT PRINCIPAL**
+1. **`📖 docs/temporal/CAUSALITY_UI_AND_TIMELINE_VISUALS.md`** ⭐ **DOCUMENT PRINCIPAL**
    - Spécification complète des auras visuelles
    - Système de transparence pour entités dans autres timelines
    - 6 types d'auras avec opacité définie
    - Principe : **Une seule carte partagée** avec états visuels multiples
 
-2. **`docs/GAMEPLAY/CORE_MECHANICS.md`**
+2. **`📖 docs/GAMEPLAY/CORE_MECHANICS.md`**
    - Mécaniques de base du jeu tour par tour asynchrone
    - Système temporel avec timelines multiples
    - États quantiques (ψ-States) et collapse causale
 
-3. **`docs/temporal/TEMPORAL_TIMELINE_VISUALIZER_PLAN.md`**
+3. **`📖 docs/temporal/TEMPORAL_TIMELINE_VISUALIZER_PLAN.md`**
    - Plan détaillé pour visualiseur temps réel sur port 5175
    - Animations et effets visuels quantiques
    - Architecture WebSocket pour mise à jour temps réel

@@ -7,7 +7,7 @@
 J'ai créé un système de pickup complet avec :
 
 #### 1. **Interface de Démonstration**
-- `frontend/html-interfaces/pickup-system-demo.html`
+- `🌐 frontend/html-interfaces/pickup-system-demo.html`
 - Interface interactive complète avec :
   - Map de jeu avec héros mobile
   - Créatures cliquables (slime bleu, gobelin, imp)
@@ -17,7 +17,7 @@ J'ai créé un système de pickup complet avec :
   - Log des actions en temps réel
 
 #### 2. **Service JavaScript**
-- `frontend/src/services/pickupService.js`
+- `🌐 frontend/src/services/pickupService.js`
 - Service modulaire avec :
   - Gestion des drops selon les tables de probabilité
   - Calcul de distance pour le ramassage
@@ -26,7 +26,7 @@ J'ai créé un système de pickup complet avec :
   - Système de callbacks pour notifications
 
 #### 3. **Configuration des Drops**
-- `game_assets/config/drop_tables.json`
+- `🎮 game_assets/config/drop_tables.json`
 - Tables de drop complètes :
   - 4 niveaux de créatures (common, rare, epic, boss)
   - Système de poids pour les probabilités
@@ -34,8 +34,8 @@ J'ai créé un système de pickup complet avec :
   - Drops spéciaux (first kill, streak bonus)
 
 #### 4. **Composant React**
-- `frontend/src/components/PickupNotification.js`
-- `frontend/src/components/PickupNotification.css`
+- `🌐 frontend/src/components/PickupNotification.js`
+- `🌐 frontend/src/components/PickupNotification.css`
 - Notifications visuelles avec :
   - Animations par rareté
   - Effets de particules

@@ -152,7 +152,7 @@ JSON Response (20KB+ jeux complets)
 
 **PROCHAINES ÉTAPES:**
 1. Connecter frontend aux nouveaux endpoints quantiques
-2. Charger vrais `quantum_script` depuis `game_assets/heroes/*.json`
+2. Charger vrais `quantum_script` depuis `🎮 game_assets/heroes/*.json`
 3. Implémenter effets quantiques complets (superposition, collapse)
 4. Tests E2E du système unifié complet
 

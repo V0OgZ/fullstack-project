@@ -63,7 +63,7 @@ La **Triple Convergence (3X)** représente la fusion simultanée de :
 ## 📁 STRUCTURE DES ARCHIVES 3X
 
 ```
-MEMENTO/3X_CONVERGENCE/
+📚 MEMENTO/3X_CONVERGENCE/
 ├── PROTOCOLE_TRIPLE_CONVERGENCE.md (ce fichier)
 ├── TIMELINE_CONVERGENCE.md
 ├── TACHES_ACCOMPLIES_PRE_3X.md

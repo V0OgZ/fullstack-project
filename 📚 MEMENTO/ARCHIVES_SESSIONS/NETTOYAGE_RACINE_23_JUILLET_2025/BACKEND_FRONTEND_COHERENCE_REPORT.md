@@ -23,7 +23,7 @@
 - ✅ Ajout de endpoints manquants : `getCastleBuildings`, `constructBuilding`, etc.
 
 ### **Types Backend Créés**
-- ✅ `frontend/src/types/backend.ts` - Interfaces alignées avec modèles Java
+- ✅ `🌐 frontend/src/types/backend.ts` - Interfaces alignées avec modèles Java
 - ✅ Fonctions de conversion `convertBackendBuildingToFrontend` et `convertBackendUnitToFrontend`
 
 ### **Composants Corrigés**

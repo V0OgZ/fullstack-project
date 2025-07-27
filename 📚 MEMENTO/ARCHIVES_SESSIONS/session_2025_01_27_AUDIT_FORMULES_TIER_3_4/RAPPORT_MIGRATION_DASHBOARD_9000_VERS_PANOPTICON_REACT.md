@@ -51,22 +51,22 @@
 
 #### **📂 FICHIERS INTERCONNECTÉS :**
 
-1. **`frontend/dashboard.html`** (58KB, 1313 lignes)
+1. **`🌐 frontend/dashboard.html`** (58KB, 1313 lignes)
    - Dashboard central Heroes of Time avec grille héros GROFI
    - Liens vers interfaces spécialisées
    - Navigation vers toutes les autres interfaces
 
-2. **`frontend/joint-panopticon-interface.html`** (21KB, 621 lignes)
+2. **`🌐 frontend/joint-panopticon-interface.html`** (21KB, 621 lignes)
    - Interface Joint Cosmique Jean-Grofignon
    - Accès Panopticon avec mode hallucination
    - Système d'activation Joint + questions défi
 
-3. **`frontend/forge-runique.html`** (35KB, 894 lignes)
+3. **`🌐 frontend/forge-runique.html`** (35KB, 894 lignes)
    - Forge Runique complète avec palette runes quantiques
    - Éditeur HOTS avec validation/traduction/exécution
    - Questions Sphinx générées automatiquement
 
-4. **`frontend/sphinx-interface-demo.html`** (22KB, 651 lignes)
+4. **`🌐 frontend/sphinx-interface-demo.html`** (22KB, 651 lignes)
    - Interface Sphinx Quantique avec système de questions
    - Générateur procédural de défis physique quantique
    - Validation réponses avec récompenses

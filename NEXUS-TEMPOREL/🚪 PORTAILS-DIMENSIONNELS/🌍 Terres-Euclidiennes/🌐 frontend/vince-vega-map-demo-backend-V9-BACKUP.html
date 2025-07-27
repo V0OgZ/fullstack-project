@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🗺️ Vince Vega Backend Demo - Jean Style</title>
+    <style>
+        body { 
+            background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460);
+            color: #fff; font-family: 'Courier New', monospace; 
+            margin: 0; padding: 20px; min-height: 100vh;
+        }
+        
+        .demo-container { max-width: 1400px; margin: 0 auto; }
+        
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 20px;
+        }
+        
+        .map-container {
+            display: grid;
+            grid-template-columns: repeat(10, 60px);
+            grid-template-rows: repeat(8, 60px);
+            gap: 2px;
+            background: rgba(0,0,0,0.5);
+            padding: 20px;
+            border-radius: 10px;
+            justify-content: center;
+        }
+        
+        .map-cell {
+            width: 60px;
+            height: 60px;
+            background: rgba(0,100,0,0.3);
+            border: 1px solid #444;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .map-cell:hover {
+            background: rgba(100,100,100,0.3);
+            transform: scale(1.1);
+        }
+        
+        .hero-arthur { background: rgba(255,215,0,0.5); }
+        .hero-vince { background: rgba(255,68,68,0.5); }
+        .hero-grut { background: rgba(116,75,162,0.5); }
+        
+        .controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none; color: white; padding: 10px 15px;
+            border-radius: 20px; cursor: pointer; font-size: 12px;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover { transform: scale(1.05); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .status-panel {
+            background: rgba(0,0,0,0.5);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        
+        .backend-panel {
+            background: rgba(0,0,0,0.7);
+            padding: 20px;
+            border-radius: 10px;
+            height: fit-content;
+        }
+        
+        .formula-log {
+            background: rgba(0,0,0,0.8);
+            padding: 15px;
+            border-radius: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-size: 12px;
+            line-height: 1.4;
+            margin: 10px 0;
+        }
+        
+        .log-entry {
+            margin: 5px 0;
+            padding: 5px;
+            border-left: 3px solid;
+            padding-left: 10px;
+        }
+        
+        .log-success { border-color: #4CAF50; color: #90EE90; }
+        .log-error { border-color: #f44336; color: #FFB6C1; }
+        .log-info { border-color: #2196F3; color: #87CEEB; }
+        
+        .formula-selector {
+            margin: 10px 0;
+        }
+        
+        .formula-selector select {
+            background: rgba(0,0,0,0.8);
+            color: white;
+            border: 1px solid #444;
+            padding: 8px;
+            border-radius: 5px;
+            width: 100%;
+        }
+        
+        .wormhole {
+            background: radial-gradient(circle, #ff00ff, #8000ff);
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        .explosion {
+            background: radial-gradient(circle, #ff4444, #ffaa00);
+            animation: explode 0.5s ease-out;
+        }
+        
+        @keyframes explode {
+            0% { transform: scale(1); }
+            50% { transform: scale(2); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .formula-effect {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: rgba(255,255,0,0.8);
+            color: black;
+            font-size: 10px;
+            padding: 2px 4px;
+            border-radius: 3px;
+            animation: fadeOut 2s forwards;
+        }
+        
+        @keyframes fadeOut {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0% { 
+                box-shadow: 0 0 15px rgba(255, 107, 107, 0.8);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 25px rgba(255, 107, 107, 1), 0 0 35px rgba(78, 205, 196, 0.8);
+                transform: scale(1.05);
+            }
+            100% { 
+                box-shadow: 0 0 15px rgba(255, 107, 107, 0.8);
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes wormhole-activate {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.5) rotate(180deg); }
+            100% { transform: scale(1) rotate(360deg); }
+        }
+        
+        .wormhole-active {
+            animation: wormhole-activate 1s ease-in-out;
+        }
+
+        @keyframes quantum-spin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+        
+        @keyframes cycle-rotate {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(90deg) scale(1.05); }
+            50% { transform: rotate(180deg); }
+            75% { transform: rotate(270deg) scale(1.05); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes origin-pulse {
+            0% { transform: scale(1); filter: brightness(1); }
+            50% { transform: scale(1.1); filter: brightness(1.5); }
+            100% { transform: scale(1); filter: brightness(1); }
+        }
+        
+        @keyframes tear-reality {
+            0% { transform: scaleX(1); }
+            50% { transform: scaleX(0.1) rotateY(90deg); }
+            100% { transform: scaleX(1) rotateY(0deg); }
+        }
+        
+        @keyframes quantum-tunnel {
+            0% { transform: scale(1) rotateZ(0deg); opacity: 1; }
+            50% { transform: scale(0.5) rotateZ(180deg); opacity: 0.3; }
+            100% { transform: scale(1) rotateZ(360deg); opacity: 1; }
+        }
+        
+        @keyframes vince-warp {
+            0% { transform: scale(1) skewX(0deg); }
+            50% { transform: scale(1.5) skewX(15deg); }
+            100% { transform: scale(1) skewX(0deg); }
+        }
+        
+        @keyframes john-travolta-dance {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg) scale(1.1); }
+            50% { transform: rotate(10deg) scale(0.9); }
+            75% { transform: rotate(-5deg) scale(1.05); }
+            100% { transform: rotate(0deg); }
+        }
+        
+        .wormhole-active {
+            animation: wormhole-activate 1s ease-in-out;
+        }
+        
+        .easter-egg-gold {
+            background: radial-gradient(circle, #FFD700, #FFA500, #FF8C00) !important;
+            animation: origin-pulse 0.5s infinite;
+        }
+        
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Courier New', monospace;
+            color: white;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1 style="text-align: center;">🗺️ VINCE VEGA BACKEND DEMO</h1>
+        
+        <div class="status-panel">
+            <div id="status">🛋️ Jean: "Backend connecté ! Prêt pour les formules !"</div>
+        </div>
+        
+        <div class="main-layout">
+            <div class="map-section">
+                <div class="map-container" id="gameMap">
+                    <!-- Map généré en JS -->
+                </div>
+                
+                <div class="controls">
+                    <button class="btn" onclick="initDemo()">🎬 Init Demo</button>
+                    <button class="btn" onclick="moveArthur()">⚔️ Move Arthur</button>
+                    <button class="btn" onclick="vinceWormhole()">🔫 Vince Wormhole</button>
+                    <button class="btn" onclick="grutVision()">🏛️ GRUT Vision</button>
+                    <button class="btn" onclick="executeFormula()">⚡ Execute Formula</button>
+                    <button class="btn" onclick="resetMap()">🔄 Reset</button>
+                </div>
+            </div>
+            
+            <div class="backend-panel">
+                <h3>🔧 Backend Connection</h3>
+                <div>Status: <span id="backendStatus">🔍 Checking...</span></div>
+                
+                <div class="formula-selector">
+                    <label>🧪 Select Formula:</label>
+                    <select id="formulaSelect">
+                        <option value="ENERGY_ACCUMULATE">⚡ Energy Accumulate</option>
+                        <option value="RELEASE_STORED_ENERGY">💥 Release Energy</option>
+                        <option value="REFLECT_MAGIC_DAMAGE">🛡️ Reflect Magic</option>
+                        <option value="AUTO_COUNTER_SPELL">🔄 Auto Counter</option>
+                        <option value="DIMENSIONAL_STEP">🌀 Dimensional Step</option>
+                        <option value="GHOST_MODE">👻 Ghost Mode</option>
+                        <option value="THE_SHARD">💎 THE SHARD</option>
+                        <option value="SORT_DE_PRECEDENCE">🎨 Sort de Précédence</option>
+                        <option value="GRUT_VISION_OMNISCIENTE">👁️ GRUT Vision</option>
+                    </select>
+                </div>
+                
+                <div class="formula-log" id="formulaLog">
+                    <div class="log-entry log-info">🚀 Backend Demo Ready!</div>
+                </div>
+                
+                <div style="margin-top: 15px;">
+                    <div><strong>Session:</strong> session_backend_demo</div>
+                    <div><strong>Mode:</strong> BACKEND_CONNECTED</div>
+                    <div><strong>API:</strong> http://localhost:8080</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let gameState = {
+            arthur: { x: 2, y: 3, energy: 100 },
+            vince: { x: 7, y: 4, energy: 100 },
+            grut: { x: 5, y: 1, energy: 100 },
+            wormholes: []
+        };
+        
+        const API_BASE = 'http://localhost:8080/api';
+        let backendConnected = false;
+        
+        function createMap() {
+            const map = document.getElementById('gameMap');
+            map.innerHTML = '';
+            
+            for (let y = 0; y < 8; y++) {
+                for (let x = 0; x < 10; x++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'map-cell';
+                    cell.id = `cell-${x}-${y}`;
+                    cell.onclick = () => cellClick(x, y);
+                    map.appendChild(cell);
+                }
+            }
+        }
+        
+        function updateMap() {
+            const mapContainer = document.getElementById('gameMap');
+            mapContainer.innerHTML = '';
+            
+            // Grille de base
+            for (let y = 0; y < 12; y++) {
+                for (let x = 0; x < 16; x++) {
+                    const cell = document.createElement('div');
+                    cell.style.cssText = `
+                        width: 30px;
+                        height: 30px;
+                        border: 1px solid #333;
+                        display: inline-block;
+                        background: linear-gradient(45deg, #1a1a2e, #16213e);
+                        position: relative;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                    `;
+                    
+                    // Vérifier si c'est un wormhole
+                    const worldWormholes = wormholes[currentWorld] || [];
+                    const wormhole = worldWormholes.find(w => w.x === x && w.y === y);
+                    
+                    if (wormhole) {
+                        const wormholeType = wormholeTypes[wormhole.type];
+                        
+                        cell.style.background = wormholeType.gradient;
+                        cell.style.animation = wormholeType.animation;
+                        cell.innerHTML = `<span style="font-size: 20px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">${wormholeType.symbol}</span>`;
+                        cell.title = wormhole.name;
+                        cell.style.boxShadow = '0 0 15px rgba(255, 107, 107, 0.8)';
+                        
+                        // Easter egg hover detection
+                        cell.onmouseover = () => {
+                            cell.style.transform = 'scale(1.2)';
+                            cell.style.zIndex = '100';
+                            
+                            // Easter egg: hover 10 secondes sans clic
+                            hoverTimer = setTimeout(() => {
+                                showCustomDialogue('"Tu danses ou tu traverses ?"');
+                                cell.style.animation = 'john-travolta-dance 2s ease-in-out';
+                                setTimeout(() => {
+                                    cell.style.animation = wormholeType.animation;
+                                }, 2000);
+                            }, 10000);
+                        };
+                        
+                        cell.onmouseout = () => {
+                            cell.style.transform = 'scale(1)';
+                            cell.style.zIndex = '1';
+                            clearTimeout(hoverTimer);
+                        };
+                        
+                        cell.onclick = () => {
+                            clearTimeout(hoverTimer);
+                            activateWormhole(wormhole);
+                        };
+                    } else {
+                        // Cellule normale
+                        cell.onmouseover = () => {
+                            cell.style.background = 'linear-gradient(45deg, #2a2a4e, #26335e)';
+                        };
+                        
+                        cell.onmouseout = () => {
+                            cell.style.background = 'linear-gradient(45deg, #1a1a2e, #16213e)';
+                        };
+                    }
+                    
+                    mapContainer.appendChild(cell);
+                }
+                mapContainer.appendChild(document.createElement('br'));
+            }
+        }
+        
+        function setStatus(message) {
+            document.getElementById('status').innerHTML = message;
+        }
+        
+        function addLog(message, type = 'info') {
+            const log = document.getElementById('formulaLog');
+            const entry = document.createElement('div');
+            entry.className = `log-entry log-${type}`;
+            entry.innerHTML = `[${new Date().toLocaleTimeString()}] ${message}`;
+            log.appendChild(entry);
+            log.scrollTop = log.scrollHeight;
+        }
+        
+        async function checkBackend() {
+            try {
+                const response = await fetch(`${API_BASE}/status`);
+                if (response.ok) {
+                    backendConnected = true;
+                    document.getElementById('backendStatus').innerHTML = '✅ Connected';
+                    addLog('Backend connection established!', 'success');
+                } else {
+                    throw new Error('Backend not responding');
+                }
+            } catch (error) {
+                backendConnected = false;
+                document.getElementById('backendStatus').innerHTML = '❌ Disconnected';
+                addLog('Backend connection failed - using demo mode', 'error');
+            }
+        }
+        
+        async function executeFormula() {
+            const formulaType = document.getElementById('formulaSelect').value;
+            addLog(`Executing formula: ${formulaType}`, 'info');
+            
+            if (backendConnected) {
+                try {
+                    const response = await fetch(`${API_BASE}/magic-formulas/execute`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            gameId: 'demo-backend',
+                            formulaType: formulaType,
+                            metadata: {
+                                heroPosition: `${gameState.arthur.x},${gameState.arthur.y}`,
+                                energy: gameState.arthur.energy.toString()
+                            }
+                        })
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        addLog(`✅ ${result.message}`, 'success');
+                        showFormulaEffect(gameState.arthur.x, gameState.arthur.y, formulaType);
+                        
+                        // Apply visual effects based on formula
+                        applyFormulaVisualEffect(formulaType);
+                    } else {
+                        addLog(`❌ Formula failed: ${result.message}`, 'error');
+                    }
+                } catch (error) {
+                    addLog(`❌ Network error: ${error.message}`, 'error');
+                }
+            } else {
+                // Demo mode
+                addLog(`🎭 Demo mode: ${formulaType} executed locally`, 'info');
+                showFormulaEffect(gameState.arthur.x, gameState.arthur.y, formulaType);
+                applyFormulaVisualEffect(formulaType);
+            }
+        }
+        
+        function showFormulaEffect(x, y, formula) {
+            const cell = document.getElementById(`cell-${x}-${y}`);
+            const effect = document.createElement('div');
+            effect.className = 'formula-effect';
+            effect.textContent = formula.substring(0, 3);
+            cell.appendChild(effect);
+            
+            setTimeout(() => {
+                if (effect.parentNode) {
+                    effect.parentNode.removeChild(effect);
+                }
+            }, 2000);
+        }
+        
+        function applyFormulaVisualEffect(formulaType) {
+            switch(formulaType) {
+                case 'DIMENSIONAL_STEP':
+                    vinceWormhole();
+                    break;
+                case 'GRUT_VISION_OMNISCIENTE':
+                    grutVision();
+                    break;
+                case 'GHOST_MODE':
+                    const arthurCell = document.getElementById(`cell-${gameState.arthur.x}-${gameState.arthur.y}`);
+                    arthurCell.style.opacity = '0.5';
+                    setTimeout(() => arthurCell.style.opacity = '1', 2000);
+                    break;
+                case 'THE_SHARD':
+                    epicBattle();
+                    break;
+            }
+        }
+        
+        function initDemo() {
+            setStatus('🎬 Jean: "Backend Demo initialisé ! Formules connectées !"');
+            updateMap();
+            checkBackend();
+        }
+        
+        function moveArthur() {
+            gameState.arthur.x = Math.min(9, gameState.arthur.x + 1);
+            setStatus('⚔️ Arthur avance avec Excalibur !');
+            updateMap();
+            addLog(`Arthur moved to (${gameState.arthur.x}, ${gameState.arthur.y})`, 'info');
+        }
+        
+        function vinceWormhole() {
+            const wormhole = {
+                x: Math.floor(Math.random() * 10),
+                y: Math.floor(Math.random() * 8)
+            };
+            gameState.wormholes.push(wormhole);
+            
+            setStatus('🔫 Vince: "Reality Shot!" - Wormhole créé !');
+            updateMap();
+            addLog(`Wormhole created at (${wormhole.x}, ${wormhole.y})`, 'info');
+            
+            setTimeout(() => {
+                gameState.wormholes = gameState.wormholes.filter(wh => 
+                    wh.x !== wormhole.x || wh.y !== wormhole.y);
+                updateMap();
+                addLog('Wormhole collapsed', 'info');
+            }, 3000);
+        }
+        
+        function grutVision() {
+            setStatus('🏛️ GRUT: "Vision omnisciente activée !"');
+            addLog('GRUT Vision: All possibilities revealed', 'success');
+            
+            document.querySelectorAll('.map-cell').forEach(cell => {
+                cell.style.background = 'rgba(116,75,162,0.3)';
+                setTimeout(() => {
+                    cell.style.background = '';
+                    updateMap();
+                }, 1000);
+            });
+        }
+        
+        function epicBattle() {
+            setStatus('💥 THE SHARD ACTIVATED ! Reality fractures !');
+            
+            const battleX = Math.floor((gameState.arthur.x + gameState.vince.x) / 2);
+            const battleY = Math.floor((gameState.arthur.y + gameState.vince.y) / 2);
+            
+            const battleCell = document.getElementById(`cell-${battleX}-${battleY}`);
+            battleCell.innerHTML = '💎';
+            battleCell.classList.add('explosion');
+            
+            setTimeout(() => {
+                setStatus('🏆 Jean: "THE SHARD contained ! Reality stabilized !"');
+                battleCell.innerHTML = '';
+                battleCell.classList.remove('explosion');
+            }, 2000);
+        }
+        
+        function resetMap() {
+            gameState = {
+                arthur: { x: 2, y: 3, energy: 100 },
+                vince: { x: 7, y: 4, energy: 100 },
+                grut: { x: 5, y: 1, energy: 100 },
+                wormholes: []
+            };
+            setStatus('🔄 Map reset ! Backend ready !');
+            updateMap();
+            addLog('Map reset to initial state', 'info');
+        }
+        
+        // ═══════════════════════════════════════════════════════════════
+        // 🌍 NAVIGATION A→B→C CYCLIQUE - THE DUDE FILM VIVANT
+        // ═══════════════════════════════════════════════════════════════
+        
+        let currentWorld = 'A';
+        const worlds = {
+            'A': {
+                name: '🛋️ Monde A - Canapé Jean',
+                color: '#1a1a2e',
+                description: 'Canapé Cosmique Jean-Grofignon',
+                character: 'Jean-Grofignon',
+                message: 'Depuis mon canapé, je vois tous les mondes possibles...',
+                mapStyle: 'classic'
+            },
+            'B': {
+                name: '🔫 Monde B - Vince Hexagones', 
+                color: '#4a90e2',
+                description: 'Battlefield Hexagonal Vince',
+                character: 'Vince Vega',
+                message: '🔫 HEXAGON IS THE BESTAGON ! Bienvenue dans mon monde !',
+                mapStyle: 'hexagonal'
+            },
+            'C': {
+                name: '🌀 Monde C - Antarctique Secret',
+                color: '#8e44ad',
+                description: 'Grande Roue Cachée - Ford écoute',
+                character: 'Ford + OmegaZero',
+                message: 'Chut... la grande roue est là-bas... OmegaZero écoute...',
+                mapStyle: 'mysterious'
+            }
+        };
+        
+        function switchToWorld(targetWorld) {
+            if (currentWorld === targetWorld) return;
+            
+            const world = worlds[targetWorld];
+            
+            // 🎥 ZOOM AUTO + FOCUS CINÉMATIQUE
+            cinematicTransition(currentWorld, targetWorld, world);
+        }
+        
+        function cinematicTransition(fromWorld, toWorld, worldData) {
+            // Phase 1: Zoom out dramatique
+            document.body.style.transform = 'scale(0.8)';
+            document.body.style.transition = 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            
+            setTimeout(() => {
+                // Phase 2: Changement de monde avec effet Dragon Ball
+                document.body.style.background = `
+                    radial-gradient(circle at center, 
+                    ${worldData.color} 0%, 
+                    #000 50%, 
+                    ${worldData.color} 100%)
+                `;
+                
+                // Update titre avec effet de frappe
+                typewriterEffect(document.querySelector('h1'), worldData.name);
+                
+                // Phase 3: Zoom in sur le nouveau monde
+                document.body.style.transform = 'scale(1.1)';
+                
+                setTimeout(() => {
+                    // Phase 4: Focus final
+                    document.body.style.transform = 'scale(1)';
+                    
+                    // Update status avec message du personnage
+                    setStatus(`🎬 ${worldData.character}: "${worldData.message}"`);
+                    
+                    // Activation QUANTUM LAB si Monde C
+                    if (toWorld === 'C') {
+                        activateQuantumLab();
+                    }
+                    
+                }, 600);
+                
+            }, 400);
+            
+            // Log de navigation Dragon Ball style
+            addLog(`⚡ ÉNERGIE TRANSPORT: Monde ${fromWorld} → Monde ${toWorld}`, 'success');
+            addLog(`🐉 Focus: ${worldData.character} - POWER LEVEL: ${Math.random() * 9000 | 0}`, 'info');
+            
+            // Update world
+            currentWorld = toWorld;
+            
+            // Update map avec transition cinématique
+            cinematicMapUpdate(worldData);
+            
+            // Update boutons navigation
+            updateNavigationButtons();
+        }
+        
+        function typewriterEffect(element, text) {
+            element.textContent = '';
+            let i = 0;
+            const timer = setInterval(() => {
+                element.textContent += text[i];
+                i++;
+                if (i >= text.length) {
+                    clearInterval(timer);
+                }
+            }, 50);
+        }
+        
+        function cinematicMapUpdate(world) {
+            const cells = document.querySelectorAll('.map-cell');
+            
+            // Animation séquentielle des cellules
+            cells.forEach((cell, index) => {
+                setTimeout(() => {
+                    cell.style.transition = 'all 0.3s ease';
+                    
+                    switch(world.mapStyle) {
+                        case 'classic':
+                            // Style Jean avec effet de vague
+                            cell.style.borderRadius = '5px';
+                            cell.style.backgroundColor = '#2c3e50';
+                            cell.style.transform = 'scale(1.1)';
+                            setTimeout(() => cell.style.transform = 'scale(1)', 200);
+                            break;
+                            
+                        case 'hexagonal':
+                            // Style Vince avec rotation Dragon Ball
+                            cell.style.borderRadius = '15px';
+                            cell.style.backgroundColor = '#4a90e2';
+                            cell.style.transform = 'rotate(360deg) scale(1.2)';
+                            setTimeout(() => cell.style.transform = 'rotate(45deg) scale(1)', 400);
+                            break;
+                            
+                        case 'mysterious':
+                            // Style Antarctique avec pulsation mystique
+                            cell.style.borderRadius = '50%';
+                            cell.style.backgroundColor = '#8e44ad';
+                            cell.style.boxShadow = '0 0 20px rgba(142, 68, 173, 0.8)';
+                            cell.style.transform = 'scale(1.3)';
+                            setTimeout(() => {
+                                cell.style.transform = 'scale(1)';
+                                cell.style.boxShadow = '0 0 10px rgba(142, 68, 173, 0.5)';
+                            }, 300);
+                            break;
+                    }
+                }, index * 50); // Délai progressif pour effet cascade
+            });
+        }
+        
+        // ⚛️ QUANTUM LAB MODE - Toujours en dessous avec Palmier
+        function activateQuantumLab() {
+            const quantumLab = document.getElementById('quantum-lab-container');
+            if (!quantumLab) {
+                createQuantumLab();
+            } else {
+                quantumLab.style.display = 'block';
+                quantumLab.style.animation = 'quantumPulse 2s ease-in-out';
+            }
+            
+            addLog('⚛️ QUANTUM LAB ACTIVÉ ! Palmier détecté !', 'success');
+            setStatus('⚛️ Mode Quantum Lab - Expériences quantiques disponibles');
+        }
+        
+        function createQuantumLab() {
+            const labHTML = `
+                <div id="quantum-lab-container" style="
+                    position: fixed;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    height: 150px;
+                    background: linear-gradient(45deg, rgba(0,255,0,0.1), rgba(0,0,255,0.1));
+                    border-top: 2px solid #00ff00;
+                    z-index: 1000;
+                    display: none;
+                    padding: 20px;
+                    overflow-x: auto;
+                ">
+                    <h4 style="color: #00ff00; margin: 0 0 10px 0;">⚛️ QUANTUM LAB - Mode Antarctique</h4>
+                    <div style="display: flex; gap: 15px; align-items: center;">
+                        <div class="quantum-instrument" onclick="activateInstrument('palmier')">
+                            🌴 Palmier<br>Quantique
+                        </div>
+                        <div class="quantum-instrument" onclick="activateInstrument('interferometer')">
+                            🔬 Interféro-<br>mètre
+                        </div>
+                        <div class="quantum-instrument" onclick="activateInstrument('collider')">
+                            ⚡ Collisionneur<br>Particules
+                        </div>
+                        <div class="quantum-instrument" onclick="activateInstrument('observatory')">
+                            🌌 Observatoire<br>Cosmique
+                        </div>
+                        <div class="quantum-instrument" onclick="activateInstrument('wheel')">
+                            🎡 Grande Roue<br>Cachée
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', labHTML);
+            
+            // Styles pour les instruments quantiques
+            const style = document.createElement('style');
+            style.textContent = `
+                .quantum-instrument {
+                    background: rgba(0, 255, 0, 0.2);
+                    border: 1px solid #00ff00;
+                    color: #00ff00;
+                    padding: 10px;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    text-align: center;
+                    font-size: 0.8em;
+                    min-width: 80px;
+                }
+                .quantum-instrument:hover {
+                    background: rgba(0, 255, 0, 0.4);
+                    transform: scale(1.1);
+                    box-shadow: 0 0 15px rgba(0, 255, 0, 0.6);
+                }
+                @keyframes quantumPulse {
+                    0%, 100% { opacity: 0.8; }
+                    50% { opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        function activateInstrument(instrumentType) {
+            const instruments = {
+                'palmier': 'Palmier Quantique active la résonance temporelle !',
+                'interferometer': 'Interféromètre détecte des ondes gravitationnelles !',
+                'collider': 'Collisionneur révèle de nouvelles particules !',
+                'observatory': 'Observatoire capte des signaux extra-dimensionnels !',
+                'wheel': 'Grande Roue révèle ses secrets antarctiques !'
+            };
+            
+            addLog(`⚛️ ${instruments[instrumentType]}`, 'success');
+            setStatus(`⚛️ Instrument activé: ${instrumentType.toUpperCase()}`);
+            
+            // Effet visuel Dragon Ball sur la map
+            const cells = document.querySelectorAll('.map-cell');
+            cells.forEach(cell => {
+                cell.style.boxShadow = '0 0 20px #00ff00';
+                setTimeout(() => cell.style.boxShadow = '', 1000);
+            });
+        }
+        
+        // 🐉 SYSTÈME ÉNERGIE DRAGON BALL
+        let powerLevel = 1000;
+        
+        function increasePowerLevel() {
+            powerLevel += Math.random() * 500 | 0;
+            updatePowerDisplay();
+            
+            if (powerLevel > 9000) {
+                addLog('🐉 IT\'S OVER 9000!!! POWER LEVEL MAXIMUM!', 'success');
+                // Effet visuel épique
+                document.body.style.animation = 'powerSurge 2s ease-in-out';
+            }
+        }
+        
+        function updatePowerDisplay() {
+            const powerDisplay = document.getElementById('power-level');
+            if (powerDisplay) {
+                powerDisplay.textContent = `⚡ POWER LEVEL: ${powerLevel}`;
+            }
+        }
+        
+        function updateMapForWorld(world) {
+            const cells = document.querySelectorAll('.map-cell');
+            
+            switch(world.mapStyle) {
+                case 'classic':
+                    // Style Jean classique
+                    cells.forEach(cell => {
+                        cell.style.borderRadius = '5px';
+                        cell.style.backgroundColor = '#2c3e50';
+                    });
+                    break;
+                    
+                case 'hexagonal':
+                    // Style Vince hexagonal
+                    cells.forEach(cell => {
+                        cell.style.borderRadius = '15px';
+                        cell.style.backgroundColor = '#4a90e2';
+                        cell.style.transform = 'rotate(45deg)';
+                    });
+                    break;
+                    
+                case 'mysterious':
+                    // Style Antarctique mystérieux
+                    cells.forEach(cell => {
+                        cell.style.borderRadius = '50%';
+                        cell.style.backgroundColor = '#8e44ad';
+                        cell.style.boxShadow = '0 0 10px rgba(142, 68, 173, 0.5)';
+                    });
+                    break;
+            }
+        }
+        
+        function updateNavigationButtons() {
+            const navContainer = document.querySelector('.world-navigation');
+            if (!navContainer) return;
+            
+            const buttons = navContainer.querySelectorAll('.world-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.world === currentWorld) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+        
+        function getNextWorld() {
+            const sequence = ['A', 'B', 'C'];
+            const currentIndex = sequence.indexOf(currentWorld);
+            return sequence[(currentIndex + 1) % sequence.length];
+        }
+        
+        function cyclicNavigation() {
+            const nextWorld = getNextWorld();
+            switchToWorld(nextWorld);
+            addLog(`🔄 Navigation cyclique: ${currentWorld} → ${nextWorld}`, 'success');
+        }
+        
+        // Digital messages cross-monde
+        function sendDigitalMessage(fromWorld, toWorld, message) {
+            addLog(`📱 Message ${fromWorld}→${toWorld}: "${message}"`, 'info');
+            setStatus(`📱 ${worlds[fromWorld].character} → ${worlds[toWorld].character}: ${message}`);
+        }
+        
+        function cellClick(x, y) {
+            setStatus(`📍 Cellule (${x},${y}) cliquée dans Monde ${currentWorld} !`);
+            addLog(`Cell (${x},${y}) clicked in World ${currentWorld}`, 'info');
+            
+            // Easter egg: triple click pour message cross-monde
+            if (window.clickCount && window.clickCount >= 2) {
+                const nextWorld = getNextWorld();
+                sendDigitalMessage(currentWorld, nextWorld, `Signal depuis (${x},${y}) !`);
+                window.clickCount = 0;
+            } else {
+                window.clickCount = (window.clickCount || 0) + 1;
+                setTimeout(() => { window.clickCount = 0; }, 1000);
+            }
+        }
+        
+        // 🎵 SHITTY OPEN SOURCE SOUNDS
+        const sounds = {
+            hexagon: new Audio('https://freesound.org/data/previews/316/316847_4990298-lq.mp3'),
+            powerup: new Audio('https://freesound.org/data/previews/249/249816_4404552-lq.mp3'),
+            quantum: new Audio('https://freesound.org/data/previews/203/203557_3162775-lq.mp3'),
+            gun: new Audio('https://freesound.org/data/previews/173/173859_2437358-lq.mp3')
+        };
+        
+        function playSound(soundName) {
+            try {
+                sounds[soundName].volume = 0.3;
+                sounds[soundName].play().catch(e => console.log('Sound blocked'));
+            } catch(e) { console.log('Sound error'); }
+        }
+        
+        // 🔷 BLUE ITEMS SYSTEM
+        const blueItems = [
+            { id: 'crystal', name: '🔷 Blue Hexagon Crystal', effect: '+200% hexagon power' },
+            { id: 'resonator', name: '🔵 Blue Quantum Resonator', effect: 'Quantum lab boost' },
+            { id: 'energy', name: '💙 Blue Energy Cell', effect: '+500 power level' }
+        ];
+        
+        function createBlueItem() {
+            const item = blueItems[Math.random() * blueItems.length | 0];
+            addLog(`🔷 BLUE ITEM CREATED: ${item.name}`, 'success');
+            setStatus(`🔷 New item: ${item.name} - ${item.effect}`);
+            playSound('powerup');
+            
+            // Add to inventory display
+            const inventory = document.getElementById('blue-inventory');
+            if (inventory) {
+                inventory.innerHTML += `<div class="blue-item">${item.name}</div>`;
+            }
+        }
+        
+        // 💬 SYSTÈME DE DIALOGUES FLOTTANTS
+        const dialogues = {
+            'A': [
+                '"Bon, on va où maintenant ?"',
+                '"Ce monde A me paraît familier..."',
+                '"Vince, tu sens quelque chose ?"',
+                '"Les hexagones commencent à vibrer !"'
+            ],
+            'B': [
+                '"Putain, l\'interstice encore !"',
+                '"Ça me rappelle Pulp Fiction..."',
+                '"Jules serait fier de moi ici !"',
+                '"L\'hexagone pulse de plus en plus fort !"'
+            ],
+            'C': [
+                '"Wow, le labo quantique !"',
+                '"Ces instruments sont dingues !"',
+                '"Einstein aurait adoré ça !"',
+                '"Le Palmier quantique... magnifique !"'
+            ]
+        };
+        
+        let currentDialogue = '';
+        let dialogueTimer = null;
+        
+        function showDialogue(worldId) {
+            const worldDialogues = dialogues[worldId] || dialogues['A'];
+            const randomDialogue = worldDialogues[Math.random() * worldDialogues.length | 0];
+            
+            currentDialogue = randomDialogue;
+            
+            // Afficher le dialogue
+            const dialogueDiv = document.getElementById('character-dialogue');
+            if (dialogueDiv) {
+                dialogueDiv.textContent = currentDialogue;
+                dialogueDiv.style.display = 'block';
+                dialogueDiv.style.opacity = '1';
+                
+                // Auto-hide après 4 secondes
+                clearTimeout(dialogueTimer);
+                dialogueTimer = setTimeout(() => {
+                    dialogueDiv.style.opacity = '0';
+                    setTimeout(() => {
+                        dialogueDiv.style.display = 'none';
+                    }, 500);
+                }, 4000);
+            }
+            
+            addLog(`💬 Dialogue: ${currentDialogue}`, 'info');
+        }
+        
+        // 🎭 DIALOGUE AUTOMATIQUE sur changement de monde
+        function changeWorldWithDialogue(targetWorld) {
+            changeWorld(targetWorld);
+            setTimeout(() => {
+                showDialogue(targetWorld);
+            }, 1500); // Après les transitions
+        }
+        
+        // 🎲 DIALOGUE ALÉATOIRE sur clic
+        function triggerRandomDialogue() {
+            showDialogue(currentWorld);
+            playSound('quantum');
+        }
+        
+        // 🌀 WORMHOLES INTERACTIFS VINCE - VERSION COMPLÈTE
+        const wormholeTypes = {
+            'portal_interstice': {
+                symbol: '🌀',
+                gradient: 'radial-gradient(circle, #FF6B6B, #4ECDC4, #45B7D1)',
+                animation: 'pulse 2s infinite',
+                sound: 'quantum',
+                dialogues: [
+                    '"Putain, ce wormhole déchire !"',
+                    '"L\'interstice m\'appelle !"',
+                    '"Portal Fiction, baby !"'
+                ]
+            },
+            'portal_quantique': {
+                symbol: '⚛️',
+                gradient: 'radial-gradient(circle, #9C27B0, #E91E63, #FF5722)',
+                animation: 'quantum-spin 3s infinite',
+                sound: 'quantum',
+                dialogues: [
+                    '"Einstein aurait kiffé ça !"',
+                    '"Quantum leap, motherfucker !"',
+                    '"La physique quantique, c\'est royal !"'
+                ]
+            },
+            'portal_retour': {
+                symbol: '🔄',
+                gradient: 'radial-gradient(circle, #4CAF50, #8BC34A, #CDDC39)',
+                animation: 'cycle-rotate 4s infinite',
+                sound: 'hexagon',
+                dialogues: [
+                    '"Retour aux sources !"',
+                    '"Cycle temporel activé !"',
+                    '"Back to the future, Vince style !"'
+                ]
+            },
+            'portal_origine': {
+                symbol: '🗺️',
+                gradient: 'radial-gradient(circle, #FF9800, #FFC107, #FFEB3B)',
+                animation: 'origin-pulse 2.5s infinite',
+                sound: 'powerup',
+                dialogues: [
+                    '"Retour à la base !"',
+                    '"L\'origine m\'attend !"',
+                    '"Home sweet home !"'
+                ]
+            }
+        };
+        
+        const wormholes = {
+            'A': [
+                { x: 8, y: 4, target: 'B', type: 'portal_interstice', name: 'Portal vers Interstice' },
+                { x: 12, y: 8, target: 'C', type: 'portal_quantique', name: 'Portal Quantique' },
+                { x: 3, y: 2, target: 'B', type: 'portal_retour', name: 'Cycle vers B' }
+            ],
+            'B': [
+                { x: 6, y: 6, target: 'A', type: 'portal_origine', name: 'Retour Monde A' },
+                { x: 10, y: 3, target: 'C', type: 'portal_quantique', name: 'Portal Labo' },
+                { x: 4, y: 9, target: 'A', type: 'portal_retour', name: 'Cycle Retour' },
+                { x: 13, y: 5, target: 'C', type: 'portal_interstice', name: 'Interstice→Quantum' }
+            ],
+            'C': [
+                { x: 7, y: 2, target: 'A', type: 'portal_origine', name: 'Retour Origine' },
+                { x: 11, y: 7, target: 'B', type: 'portal_interstice', name: 'Vers Interstice' },
+                { x: 5, y: 5, target: 'A', type: 'portal_retour', name: 'Cycle Complet' },
+                { x: 14, y: 10, target: 'B', type: 'portal_quantique', name: 'Quantum→Interstice' }
+            ]
+        };
+        
+        // 🎭 EASTER EGGS TRACKING
+        let portalClickCount = 0;
+        let hoverTimer = null;
+        let traversalCount = 0;
+        let lastTraversalTime = 0;
+        
+        // ⚡ ACTIVATION WORMHOLE AMÉLIORÉE
+        function activateWormhole(wormhole) {
+            const wormholeType = wormholeTypes[wormhole.type];
+            portalClickCount++;
+            traversalCount++;
+            
+            // Easter egg: 7 clics
+            if (portalClickCount === 7) {
+                showCustomDialogue('"Royale with cheese, mais en version quantique !"');
+                // Rendre le portal doré
+                setTimeout(() => {
+                    const cells = document.querySelectorAll('#gameMap div');
+                    cells.forEach(cell => {
+                        if (cell.title === wormhole.name) {
+                            cell.classList.add('easter-egg-gold');
+                            setTimeout(() => cell.classList.remove('easter-egg-gold'), 10000);
+                        }
+                    });
+                }, 500);
+            }
+            
+            addLog(`🌀 WORMHOLE ACTIVÉ: ${wormhole.name} (${wormhole.type})`, 'success');
+            setStatus(`🌀 Traversée vers Monde ${wormhole.target}...`);
+            
+            // Effet visuel spécialisé selon le type
+            const mapContainer = document.getElementById('gameMap');
+            if (wormhole.type === 'portal_quantique') {
+                mapContainer.style.filter = 'blur(8px) brightness(3) hue-rotate(90deg)';
+                mapContainer.style.animation = 'quantum-tunnel 2s ease-in-out';
+            } else if (wormhole.type === 'portal_retour') {
+                mapContainer.style.filter = 'blur(6px) brightness(2.5) saturate(2)';
+                mapContainer.style.animation = 'cycle-rotate 1.5s ease-in-out';
+            } else {
+                mapContainer.style.filter = 'blur(5px) brightness(2)';
+            }
+            
+            playSound(wormholeType.sound);
+            
+            setTimeout(() => {
+                changeWorldWithDialogue(wormhole.target);
+                mapContainer.style.filter = 'none';
+                mapContainer.style.animation = 'none';
+                addLog(`✅ Arrivée Monde ${wormhole.target} via ${wormhole.type} !`, 'success');
+                
+                // Power level boost
+                updatePowerLevel();
+                if (traversalCount % 3 === 0) {
+                    updatePowerLevel(); // Bonus triple traversal
+                    addLog('🏆 TRIPLE TRAVERSAL BONUS !', 'critical');
+                }
+                
+                // Dialogue spécialisé
+                setTimeout(() => {
+                    const dialogue = wormholeType.dialogues[Math.random() * wormholeType.dialogues.length | 0];
+                    showCustomDialogue(dialogue);
+                }, 2000);
+            }, 1000);
+        }
+        
+        // 💫 DIALOGUE CUSTOM POUR WORMHOLES
+        function showCustomDialogue(text) {
+            const dialogueDiv = document.getElementById('character-dialogue');
+            if (dialogueDiv) {
+                dialogueDiv.textContent = text;
+                dialogueDiv.style.display = 'block';
+                dialogueDiv.style.opacity = '1';
+                dialogueDiv.style.background = 'linear-gradient(45deg, #FF6B6B, #4ECDC4)';
+                dialogueDiv.style.borderColor = '#FF6B6B';
+                
+                setTimeout(() => {
+                    dialogueDiv.style.opacity = '0';
+                    setTimeout(() => {
+                        dialogueDiv.style.display = 'none';
+                        dialogueDiv.style.background = 'rgba(0, 0, 0, 0.9)';
+                        dialogueDiv.style.borderColor = '#FFD700';
+                    }, 500);
+                }, 4000);
+            }
+        }
+        
+        // Initialize on load
+        window.onload = function() {
+            createMap();
+            initDemo();
+            
+            // Ajouter navigation A→B→C après la map
+            const container = document.querySelector('.demo-container .main-layout');
+            const navHTML = `
+                <div class="world-navigation" style="grid-column: 1 / -1; margin-top: 20px;">
+                    <h3>🌍 Navigation Film Vivant A→B→C</h3>
+                    <div style="display: flex; gap: 10px; justify-content: center; margin: 15px 0;">
+                        <button onclick="triggerRandomDialogue()" style="
+                            background: linear-gradient(45deg, #FFD700, #FFA500);
+                            color: #000;
+                            border: none;
+                            padding: 10px 20px;
+                            border-radius: 15px;
+                            font-weight: bold;
+                            cursor: pointer;
+                            margin: 5px;
+                            transition: all 0.3s ease;
+                        " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                            💬 Dialogue
+                        </button>
+                        
+                        <button onclick="changeWorldWithDialogue('A')" style="
+                            background: linear-gradient(45deg, #4CAF50, #45a049);
+                            color: white;
+                            border: none;
+                            padding: 10px 20px;
+                            border-radius: 15px;
+                            font-weight: bold;
+                            cursor: pointer;
+                            margin: 5px;
+                        " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                            🗺️ Monde A
+                        </button>
+                        
+                        <button onclick="changeWorldWithDialogue('B')" style="
+                            background: linear-gradient(45deg, #FF9800, #F57C00);
+                            color: white;
+                            border: none;
+                            padding: 10px 20px;
+                            border-radius: 15px;
+                            font-weight: bold;
+                            cursor: pointer;
+                            margin: 5px;
+                        " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                            🌌 Monde B
+                        </button>
+                        
+                        <button onclick="changeWorldWithDialogue('C')" style="
+                            background: linear-gradient(45deg, #9C27B0, #7B1FA2);
+                            color: white;
+                            border: none;
+                            padding: 10px 20px;
+                            border-radius: 15px;
+                            font-weight: bold;
+                            cursor: pointer;
+                            margin: 5px;
+                        " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                            ⚛️ Monde C
+                        </button>
+                    </div>
+                    <p style="text-align: center; color: #ccc; font-size: 0.9em;">
+                        🎬 The Dude Film Vivant - Navigation A → B → C → A (infinie) !
+                    </p>
+                </div>
+            `;
+            
+            container.insertAdjacentHTML('beforeend', navHTML);
+            
+            // Styles pour les boutons navigation
+            const style = document.createElement('style');
+            style.textContent = `
+                .world-btn {
+                    background: rgba(0,0,0,0.7);
+                    border: 2px solid #4a90e2;
+                    color: white;
+                    padding: 15px 20px;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    font-family: 'Courier New', monospace;
+                    text-align: center;
+                }
+                .world-btn:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+                }
+                .world-btn.active {
+                    border-color: #ff6b6b;
+                    background: rgba(255, 107, 107, 0.2);
+                    box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Message de bienvenue
+            addLog('🎬 Film Vivant activé ! Navigation A→B→C opérationnelle', 'success');
+            setStatus('🌍 Monde A actif - Jean-Grofignon sur son canapé cosmique');
+
+            // 💬 DIALOGUE FLOTTANT
+            const dialogueDiv = document.getElementById('character-dialogue');
+            if (dialogueDiv) {
+                dialogueDiv.textContent = "Dialogue ici..."; // Initial text
+                dialogueDiv.style.display = 'block';
+                dialogueDiv.style.opacity = '1';
+            }
+
+            // 🌀 WORMHOLES INTERACTIFS VINCE
+            const mapContainer = document.getElementById('gameMap');
+            mapContainer.addEventListener('click', handleMapClick);
+        };
+    </script>
+</body>
+</html> 

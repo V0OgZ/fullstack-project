@@ -7,7 +7,7 @@
 echo "🏰 Downloading Race-Specific Buildings..."
 echo "========================================"
 
-BUILDINGS_DIR="frontend/public/assets/buildings"
+BUILDINGS_DIR="🌐 frontend/public/assets/buildings"
 
 # Créer les dossiers de races
 mkdir -p "$BUILDINGS_DIR/human"

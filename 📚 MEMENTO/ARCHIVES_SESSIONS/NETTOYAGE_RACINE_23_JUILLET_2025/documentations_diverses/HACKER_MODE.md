@@ -191,7 +191,7 @@ USE(ARTIFACT, wigner_eye, HERO:Arthur)
 - Commits fréquents pour sauvegarder
 
 ### **4. DOCUMENTER**
-- MEMENTO/ pour les découvertes
+- 📚 MEMENTO/ pour les découvertes
 - TODO_SESSION_ACTUELLE.md pour les objectifs
 - Commits avec messages clairs
 

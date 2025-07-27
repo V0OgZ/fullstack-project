@@ -10,9 +10,9 @@
 ## ✅ **CE QUI A ÉTÉ FAIT**
 
 ### **1. Système de Reporting pour Walter**
-- ✅ Rapport complet dans `WALTER_SEC/RAPPORT_REORGANISATION_TOTALE_2025_01_27.md`
-- ✅ Système de tracking TODO dans `WALTER_SEC/TODO_TRACKING_SYSTEM.md`
-- ✅ Script automatique `scripts/walter-todo-reporter.sh`
+- ✅ Rapport complet dans `🔒 WALTER_SEC/RAPPORT_REORGANISATION_TOTALE_2025_01_27.md`
+- ✅ Système de tracking TODO dans `🔒 WALTER_SEC/TODO_TRACKING_SYSTEM.md`
+- ✅ Script automatique `⚙️ scripts/walter-todo-reporter.sh`
 
 ### **2. Plan de Réorganisation**
 ```
@@ -87,7 +87,7 @@ Impact productivité   : +30% après rangement
 
 **Le script de reporting Walter est prêt :**
 ```bash
-./scripts/walter-todo-reporter.sh
+./⚙️ scripts/walter-todo-reporter.sh
 ```
 
 ---

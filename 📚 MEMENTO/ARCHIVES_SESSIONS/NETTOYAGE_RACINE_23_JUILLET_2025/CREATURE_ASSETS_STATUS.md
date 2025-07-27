@@ -80,7 +80,7 @@ const getAssetEmoji = (type: string, asset: any) => {
 ### 3. **Intégration facile**
 ```bash
 # Télécharger assets dans:
-frontend/public/assets/creatures/
+🌐 frontend/public/assets/creatures/
 
 # Puis mettre à jour EpicView.tsx:
 { id: 'new_creature', name: 'New Creature', image: '/assets/creatures/new_creature.png', tier: 3 }

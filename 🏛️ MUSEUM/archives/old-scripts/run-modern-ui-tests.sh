@@ -35,17 +35,17 @@ mkdir -p screenshots
 # Run UI Safari Photo Demo
 echo -e "${PURPLE}📸 Running UI Safari Photo Demo...${NC}"
 cd frontend
-npx playwright test tests/e2e/ui-safari-photo-demo.spec.ts --headed --reporter=line
+npx playwright test 🧪 tests/e2e/ui-safari-photo-demo.spec.ts --headed --reporter=line
 SAFARI_EXIT_CODE=$?
 
 # Run Modern Single Player Demo
 echo -e "${CYAN}🎮 Running Modern Single Player Demo...${NC}"
-npx playwright test tests/e2e/modern-single-demo.spec.ts --headed --reporter=line
+npx playwright test 🧪 tests/e2e/modern-single-demo.spec.ts --headed --reporter=line
 SINGLE_EXIT_CODE=$?
 
 # Run Modern Multiplayer Demo
 echo -e "${CYAN}🎮 Running Modern Multiplayer Demo...${NC}"
-npx playwright test tests/e2e/modern-multiplayer-demo.spec.ts --headed --reporter=line
+npx playwright test 🧪 tests/e2e/modern-multiplayer-demo.spec.ts --headed --reporter=line
 MULTI_EXIT_CODE=$?
 
 # Return to root directory

@@ -352,7 +352,7 @@ class ScenarioPlayer {
 ### **Étape 1 : Convertisseur Automatique**
 ```bash
 # Script de conversion
-./scripts/convert-to-hsp.sh
+./⚙️ scripts/convert-to-hsp.sh
 
 # Convertit :
 # - bataille_temporelle_complete.hots → bataille_temporelle.hsp

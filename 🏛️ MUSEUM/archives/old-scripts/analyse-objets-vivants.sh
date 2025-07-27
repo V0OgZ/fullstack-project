@@ -20,9 +20,9 @@ echo ""
 # 1. Tatouages Temporels
 echo "🎨 1. TATOUAGES TEMPORELS"
 echo "------------------------"
-if grep -q '"category": "Tatouages Temporels"' game_assets/artifacts/mineurs/tatouages_memento_archiviste.json; then
+if grep -q '"category": "Tatouages Temporels"' 🎮 game_assets/artifacts/mineurs/tatouages_memento_archiviste.json; then
     echo "✅ Trouvé : Tatouages de Memento l'Archiviste"
-    echo "   📍 Localisation : game_assets/artifacts/mineurs/tatouages_memento_archiviste.json"
+    echo "   📍 Localisation : 🎮 game_assets/artifacts/mineurs/tatouages_memento_archiviste.json"
     echo "   🎯 Type : Marques Corporelles Temporelles Évolutives"
     echo "   ⭐ Rareté : MYTHIQUE_PERSONNEL"
     echo "   🔮 Évolution : Automatique avec accomplissements"
@@ -34,9 +34,9 @@ echo ""
 # 2. Living Artifacts (Quatrième Mur)
 echo "🌀 2. LIVING ARTIFACTS"
 echo "----------------------"
-if grep -q '"category": "living_artifact"' game_assets/artifacts/quatrieme_mur/artifacts_quatrieme_mur.json; then
+if grep -q '"category": "living_artifact"' 🎮 game_assets/artifacts/quatrieme_mur/artifacts_quatrieme_mur.json; then
     echo "✅ Trouvé : Éclat de Coquille Fendue"
-    echo "   📍 Localisation : game_assets/artifacts/quatrieme_mur/artifacts_quatrieme_mur.json"
+    echo "   📍 Localisation : 🎮 game_assets/artifacts/quatrieme_mur/artifacts_quatrieme_mur.json"
     echo "   🎯 Type : Fragment qui N'appartient à Aucun Monde"
     echo "   ⭐ Rareté : ERRANT"
     echo "   🔮 Comportement : Vibre, pulse, respire - cherche son monde d'origine"
@@ -50,7 +50,7 @@ echo "📚 3. ARCHIVE VIVANTE"
 echo "---------------------"
 if find game_assets -name "*.json" -exec grep -l "archive_vivante\|Archive Vivante" {} \; | head -1 > /dev/null; then
     echo "✅ Trouvé : Archive Vivante du Quatrième Mur"
-    echo "   📍 Localisation : game_assets/artifacts/quatrieme_mur/archive_vivante_quatrieme_mur.json"
+    echo "   📍 Localisation : 🎮 game_assets/artifacts/quatrieme_mur/archive_vivante_quatrieme_mur.json"
     echo "   🎯 Type : Archive auto-évolutive"
     echo "   ⭐ Rareté : PARADOXALE"
     echo "   🔮 Fonction : Stockage vivant de données temporelles"
@@ -64,7 +64,7 @@ echo "🖋️ 4. ENCRE VIVANTE"
 echo "-------------------"
 if find game_assets -name "*.json" -exec grep -l "encre_vivante\|Encre Vivante" {} \; | head -1 > /dev/null; then
     echo "✅ Trouvé : Encre Vivante (Éclat Mondes Dissous)"
-    echo "   📍 Localisation : docs/items/ECLAT_MONDES_DISSOLUS_ARTIFACTS.json"
+    echo "   📍 Localisation : 📖 docs/items/ECLAT_MONDES_DISSOLUS_ARTIFACTS.json"
     echo "   🎯 Type : Substance scriptive vivante"
     echo "   ⭐ Rareté : NARRATIVE"
     echo "   🔮 Pouvoir : Écrit et réécrit la réalité"
@@ -76,9 +76,9 @@ echo ""
 # 5. Créatures Vivantes Spéciales
 echo "👻 5. CRÉATURES VIVANTES SPÉCIALES"
 echo "----------------------------------"
-if grep -q "mort-vivant\|Mort-Vivant" game_assets/creatures/epic/epic-creatures.json; then
+if grep -q "mort-vivant\|Mort-Vivant" 🎮 game_assets/creatures/epic/epic-creatures.json; then
     echo "✅ Trouvé : Créatures Morts-Vivants"
-    echo "   📍 Localisation : game_assets/creatures/epic/epic-creatures.json"
+    echo "   📍 Localisation : 🎮 game_assets/creatures/epic/epic-creatures.json"
     echo "   🎯 Type : Sorciers morts-vivants, Guerriers fantômes"
     echo "   ⭐ Rareté : ÉPIQUE"
     echo "   🔮 Particularité : Existent entre vie et mort"
@@ -92,7 +92,7 @@ echo "🐱 6. SUPERPOSITION VITALE"
 echo "--------------------------"
 if find game_assets -name "*.json" -exec grep -l "Superposition Vitale\|vivant.*mort" {} \; | head -1 > /dev/null; then
     echo "✅ Trouvé : Chat de Schrödinger"
-    echo "   📍 Localisation : backend/src/main/resources/creatures/schrodinger_cat.json"
+    echo "   📍 Localisation : 🖥️ backend/src/main/resources/creatures/schrodinger_cat.json"
     echo "   🎯 Type : Créature en superposition quantique"
     echo "   ⭐ Rareté : QUANTIQUE"
     echo "   🔮 État : Vivant ET mort jusqu'à observation"
@@ -104,9 +104,9 @@ echo ""
 # 7. Bâtiments Vivants
 echo "🏰 7. BÂTIMENTS VIVANTS"
 echo "-----------------------"
-if grep -q "Château vivant\|vivant dans" game_assets/buildings/epic/epic-buildings.json; then
+if grep -q "Château vivant\|vivant dans" 🎮 game_assets/buildings/epic/epic-buildings.json; then
     echo "✅ Trouvé : Château Vivant dans Arbre Géant"
-    echo "   📍 Localisation : game_assets/buildings/epic/epic-buildings.json"
+    echo "   📍 Localisation : 🎮 game_assets/buildings/epic/epic-buildings.json"
     echo "   🎯 Type : Architecture organique"
     echo "   ⭐ Rareté : ÉPIQUE"
     echo "   🔮 Croissance : Évolue avec l'arbre hôte"
@@ -124,13 +124,13 @@ echo "🌟 RÉSONANCES DÉTECTÉES :"
 echo ""
 
 # Tatouages + Archive Vivante
-if grep -q "archive_vivante" game_assets/artifacts/mineurs/tatouages_memento_archiviste.json; then
+if grep -q "archive_vivante" 🎮 game_assets/artifacts/mineurs/tatouages_memento_archiviste.json; then
     echo "   🎨↔️📚 Tatouages Memento ↔ Archive Vivante"
     echo "      → Synchronisation des données temporelles"
 fi
 
 # Tatouages + Talisman Echo
-if grep -q "talisman_echo" game_assets/artifacts/mineurs/tatouages_memento_archiviste.json; then
+if grep -q "talisman_echo" 🎮 game_assets/artifacts/mineurs/tatouages_memento_archiviste.json; then
     echo "   🎨↔️🔮 Tatouages Memento ↔ Talisman Echo"
     echo "      → Résonance entre marques corporelles et écho futur"
 fi

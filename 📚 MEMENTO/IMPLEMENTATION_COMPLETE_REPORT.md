@@ -22,22 +22,22 @@ Tous les éléments manquants identifiés par les révélations de GRUT et les i
 ## 📊 FICHIERS CRÉÉS
 
 ### 🌲 **Forêt GROFI**
-- `game_assets/worlds/forest_grofi/world_data.json`
-- `game_assets/races/machine_elves/race_data.json`
-- `game_assets/artifacts/forest/panopticon_totem.json`
+- `🎮 game_assets/worlds/forest_grofi/world_data.json`
+- `🎮 game_assets/races/machine_elves/race_data.json`
+- `🎮 game_assets/artifacts/forest/panopticon_totem.json`
 
 ### 🧝‍♂️ **Elfes Mécaniques & Héros**
-- `game_assets/heroes/psychonauts/terran_cemekna.json`
-- `game_assets/worlds/hyperspace_dmt/world_data.json`
+- `🎮 game_assets/heroes/psychonauts/terran_cemekna.json`
+- `🎮 game_assets/worlds/hyperspace_dmt/world_data.json`
 
 ### 👁️ **Vue Première Personne (Ford)**
-- `frontend/src/components/HeroFPV.tsx`
-- `frontend/src/components/HeroFPV.css`
+- `🌐 frontend/src/components/HeroFPV.tsx`
+- `🌐 frontend/src/components/HeroFPV.css`
 
 ### 📐 **Extensions Système**
-- `docs/HOTS_GRAMMAR_EXTENSION_PI_OPERATOR.json`
-- `docs/WORLD_FORMULAS_SYSTEM.json`
-- `docs/IMPLEMENTATION_TASKS_MISSING_ELEMENTS.json`
+- `📖 docs/HOTS_GRAMMAR_EXTENSION_PI_OPERATOR.json`
+- `📖 docs/WORLD_FORMULAS_SYSTEM.json`
+- `📖 docs/IMPLEMENTATION_TASKS_MISSING_ELEMENTS.json`
 
 ---
 

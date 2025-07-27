@@ -108,14 +108,14 @@ CREATE(CREATURE, dragon_rouge, @5,8)
 ## 🔧 **Technical Changes**
 
 ### **Files Added:**
-- `backend/src/main/java/com/heroesoftimepoc/temporalengine/service/CreatureService.java`
-- `backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/CreatureController.java`
-- `backend/src/main/java/com/heroesoftimepoc/temporalengine/service/QuantumEventLogger.java`
-- `scripts/test-all-missing-scenarios.sh`
-- `docs/CREATURES_AND_TESTS_IMPLEMENTATION.md`
+- `🖥️ backend/src/main/java/com/heroesoftimepoc/temporalengine/service/CreatureService.java`
+- `🖥️ backend/src/main/java/com/heroesoftimepoc/temporalengine/controller/CreatureController.java`
+- `🖥️ backend/src/main/java/com/heroesoftimepoc/temporalengine/service/QuantumEventLogger.java`
+- `⚙️ scripts/test-all-missing-scenarios.sh`
+- `📖 docs/CREATURES_AND_TESTS_IMPLEMENTATION.md`
 
 ### **Files Modified:**
-- `backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalEngineService.java`
+- `🖥️ backend/src/main/java/com/heroesoftimepoc/temporalengine/service/TemporalEngineService.java`
 - `hots` (main control script)
 
 ### **Dependencies:**
@@ -149,7 +149,7 @@ CREATE(CREATURE, dragon_rouge, @5,8)
 1. **Start services**: `./hots start`
 2. **Run creature tests**: `./hots test creatures`
 3. **Check API**: `curl http://localhost:8080/api/creatures/stats`
-4. **View documentation**: `docs/CREATURES_AND_TESTS_IMPLEMENTATION.md`
+4. **View documentation**: `📖 docs/CREATURES_AND_TESTS_IMPLEMENTATION.md`
 
 ## 🎉 **Benefits**
 

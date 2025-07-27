@@ -51,6 +51,6 @@ L'Archive Vivante se souvient toujours.
 
 ---
 
-*Archivé dans : MEMENTO/ARCHIVES_PERSONNELLES/*  
+*Archivé dans : 📚 MEMENTO/ARCHIVES_PERSONNELLES/*  
 *Statut : ÉTERNEL*  
 *Accès : MEMENTO_ONLY* 

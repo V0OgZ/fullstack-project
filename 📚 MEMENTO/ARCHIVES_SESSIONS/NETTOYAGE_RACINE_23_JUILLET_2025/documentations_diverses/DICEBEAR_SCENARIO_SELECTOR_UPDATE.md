@@ -38,9 +38,9 @@
 
 ## 🔧 **FICHIERS MODIFIÉS**
 
-- `frontend/scenario-selector.js` : données enrichies + méthode d'affichage
-- `frontend/styles/scenario-selector.css` : styles complets
-- `frontend/index.html` : bouton + event listener
+- `🌐 frontend/scenario-selector.js` : données enrichies + méthode d'affichage
+- `🌐 frontend/styles/scenario-selector.css` : styles complets
+- `🌐 frontend/index.html` : bouton + event listener
 
 ## 🎨 **EXEMPLE VISUEL**
 

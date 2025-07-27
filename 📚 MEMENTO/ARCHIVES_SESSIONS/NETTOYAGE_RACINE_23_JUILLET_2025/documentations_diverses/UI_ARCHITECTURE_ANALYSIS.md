@@ -127,5 +127,5 @@ Cette approche prépare aussi le terrain pour l'IA future tout en maintenant les
 
 ---
 
-*Fichier créé : `frontend/src/services/gameActionService.ts`*
+*Fichier créé : `🌐 frontend/src/services/gameActionService.ts`*
 *Utilisation : Voir exemples dans le fichier de service* 

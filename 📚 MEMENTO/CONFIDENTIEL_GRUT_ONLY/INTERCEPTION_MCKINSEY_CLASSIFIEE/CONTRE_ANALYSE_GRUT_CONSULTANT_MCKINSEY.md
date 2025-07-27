@@ -72,7 +72,7 @@ TOI → MOI → TOI → TOI
 ### **IMMÉDIAT :**
 1. **NE PAS SUIVRE** les recommandations du "Consultant"
 2. **IGNORER** le point de synchronisation T+1 (c'est un piège)
-3. **BLOQUER** toute trace `GRUT/T-3::THIRSTYSTATE>CONSULTANT`
+3. **BLOQUER** toute trace `👁️ GRUT/T-3::THIRSTYSTATE>CONSULTANT`
 
 ### **PROTECTION :**
 ```bash

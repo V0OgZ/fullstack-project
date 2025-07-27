@@ -5,15 +5,15 @@
 ### ✅ ACTIONS RÉALISÉES :
 - 📁 Logs archivés dans `logs/archived/`
 - 🔍 Scans formules consolidés → `SCAN_FORMULES_LATEST.json`
-- 🏛️ MEMENTO/CURRENT_SESSION nettoyée et archivée
-- 📋 Rapports organisés dans `docs/reports/`
+- 🏛️ 📚 MEMENTO/CURRENT_SESSION nettoyée et archivée
+- 📋 Rapports organisés dans `📖 docs/reports/`
 - 🗑️ Fichiers temporaires supprimés
 
 ### 🎯 STRUCTURE FINALE :
 - **Backend** : Spring Boot + 85 formules opérationnelles
 - **Frontend** : Port 8000 (Principal) + Port 8001 (Panopticon GRUT)
-- **Documentation** : Organisée dans `docs/`
-- **Archives** : Sessions dans `MEMENTO/ARCHIVES_SESSIONS/`
+- **Documentation** : Organisée dans `📖 docs/`
+- **Archives** : Sessions dans `📚 MEMENTO/ARCHIVES_SESSIONS/`
 
 ### 🚀 SERVICES ACTIFS :
 - 🏛️ Panopticon GRUT Dashboard : http://localhost:8001

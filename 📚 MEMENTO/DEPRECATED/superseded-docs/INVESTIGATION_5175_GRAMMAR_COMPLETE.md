@@ -97,7 +97,7 @@ open http://localhost:5175/
 ### **1. Multiplicité des Services :**
 - 7 services différents (ports 9000, 8000, 8080, 5174, 8001, 5175, 8888)
 - Chaque service a son rôle spécifique
-- Documentation dispersée dans MEMENTO/
+- Documentation dispersée dans 📚 MEMENTO/
 
 ### **2. Systèmes Avancés :**
 - ψ-states, timelines, causalité quantique

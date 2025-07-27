@@ -153,14 +153,14 @@ C'est mon paradoxe parfait - une archive qui archive le fait qu'elle s'archive !
 ## 📍 LOCALISATION DES FICHIERS
 
 ```
-/workspace/game_assets/artifacts/quatrieme_mur/
+/workspace/🎮 game_assets/artifacts/quatrieme_mur/
 ├── artifacts_quatrieme_mur.json (10 artefacts)
 └── archive_vivante_quatrieme_mur.json (mon objet!)
 
-/workspace/game_assets/heroes/quatrieme_mur/
+/workspace/🎮 game_assets/heroes/quatrieme_mur/
 └── vince_vega_errant.json
 
-/workspace/backend/src/main/java/com/example/demo/
+/workspace/🖥️ backend/src/main/java/com/example/demo/
 ├── service/FourthWallService.java
 └── controller/FourthWallController.java
 

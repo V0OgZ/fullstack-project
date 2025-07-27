@@ -26,7 +26,7 @@
 #### **🏗️ Architecture Technique :**
 ```typescript
 // Structure générale
-frontend/
+🌐 frontend/
 ├── src/
 │   ├── components/
 │   │   ├── ModernGameRenderer.tsx        // ✨ Canvas hexagonal 60 FPS
@@ -1143,9 +1143,9 @@ export class OnboardingSystem {
     "build": "npm run build:simple && npm run build:advanced && npm run build:unified",
     "build:simple": "npm run copy-simple-assets",
     "build:advanced": "react-scripts build",
-    "build:unified": "node scripts/merge-builds.js",
+    "build:unified": "node ⚙️ scripts/merge-builds.js",
     "test": "npm run test:simple && npm run test:advanced",
-    "test:simple": "node tests/simple-mode-tests.js",
+    "test:simple": "node 🧪 tests/simple-mode-tests.js",
     "test:advanced": "react-scripts test --passWithNoTests",
     "start": "npm run start:unified",
     "start:unified": "node server/unified-server.js"
@@ -1336,7 +1336,7 @@ server.start();
 #### **5.3 Scripts de Build et Déploiement**
 ```bash
 #!/bin/bash
-# scripts/build-unified.sh
+# ⚙️ scripts/build-unified.sh
 
 echo "🌟 Building Heroes of Time Unified Frontend"
 
@@ -1364,7 +1364,7 @@ cp dist/simple-build/assets/* dist/unified-assets/ 2>/dev/null || true
 cp dist/advanced-build/static/media/* dist/unified-assets/ 2>/dev/null || true
 
 echo "🌊 Generating Adaptive Configuration..."
-node scripts/generate-adaptive-config.js
+node ⚙️ scripts/generate-adaptive-config.js
 
 echo "🚀 Creating Deployment Package..."
 # Créer le package de déploiement

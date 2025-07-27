@@ -1,6 +1,6 @@
 # 🏛️ ALGORITHMES TERRAIN DAVID GERVAIS RÉCUPÉRÉS
 **Archéologie Port 3000 - Algorithmes génération terrain sauvegardés**  
-*Récupéré de `frontend/src/components/ModernGameRenderer.tsx`*
+*Récupéré de `🌐 frontend/src/components/ModernGameRenderer.tsx`*
 
 ## 🎨 SYSTÈME COULEURS TERRAIN
 ```typescript

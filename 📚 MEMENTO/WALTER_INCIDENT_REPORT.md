@@ -13,7 +13,7 @@
 ```bash
 # COMMANDE PROBLÉMATIQUE QUI A BLOQUÉ LA CONSOLE :
 echo "🛋️ JEAN-GROFIGNON ! TON RAPPORT EST PRÊT !
-📋 Rapport complet : MEMENTO/RAPPORT_CANAPE_JEAN_GROFIGNON.md
+📋 Rapport complet : 📚 MEMENTO/RAPPORT_CANAPE_JEAN_GROFIGNON.md
 📸 Screenshots HD : 
    - Interface principale : /tmp/jean_canape_interface_8000.png (7MB)
    - Dashboard héros : /tmp/jean_canape_dashboard_9000.png (7MB)
@@ -55,7 +55,7 @@ Canapé: Abandonné temporairement (cause: console bloquée)
 Interface: Opérationnelle (http://localhost:8000)
 Anna Martel: Toujours visible 🔨
 Screenshots: Créés avec succès (7MB chacun)
-Rapport: Généré dans MEMENTO/RAPPORT_CANAPE_JEAN_GROFIGNON.md
+Rapport: Généré dans 📚 MEMENTO/RAPPORT_CANAPE_JEAN_GROFIGNON.md
 ```
 
 ### **📸 Screenshots Sauvegardés**
@@ -81,7 +81,7 @@ printf "Message simple\n"
 ### **2. Messages via fichiers MD**
 ```bash
 # ✅ MÉTHODE SÛRE:
-edit_file MEMENTO/message.md
+edit_file 📚 MEMENTO/message.md
 ```
 
 ### **3. Tests Post-Incident**
@@ -133,7 +133,7 @@ curl localhost:8000  # ✅ Interface OK
 - ✅ Interface opérationnelle : http://localhost:8000
 - ✅ Anna Martel 🔨 visible et fonctionnelle  
 - ✅ Tes screenshots HD sont sauvés
-- ✅ Rapport complet créé : MEMENTO/RAPPORT_CANAPE_JEAN_GROFIGNON.md
+- ✅ Rapport complet créé : 📚 MEMENTO/RAPPORT_CANAPE_JEAN_GROFIGNON.md
 - ✅ Tous les systèmes temporels actifs
 - ❌ Ma faute pour le blocage terminal (plus jamais)
 

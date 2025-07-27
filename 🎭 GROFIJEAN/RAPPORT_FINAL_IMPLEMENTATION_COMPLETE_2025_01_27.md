@@ -36,7 +36,7 @@ Toutes les tâches critiques ont été accomplies. Le jeu Heroes of Time est mai
 
 ### ✅ Implémenté
 ```java
-backend/src/main/java/com/example/demo/sphinx/
+🖥️ backend/src/main/java/com/example/demo/sphinx/
 ├── SphinxProtocol.java     // Générateur quantique CRÉÉ
 ├── SphinxService.java      // À CRÉER
 └── SphinxController.java   // À CRÉER
@@ -81,7 +81,7 @@ backend/src/main/java/com/example/demo/sphinx/
 
 ### Transcendants
 ```json
-game_assets/transcendants/
+🎮 game_assets/transcendants/
 ├── opus_memento_claudius.json
 ├── grut.json
 └── [future: syllibus.json]
@@ -97,7 +97,7 @@ game_assets/transcendants/
 ## 🗺️ CARTE DES CARTES - GRUT LAIR
 
 ### Interface HTML Créée
-`frontend/html-interfaces/grut-carte-des-cartes-panopticon.html`
+`🌐 frontend/html-interfaces/grut-carte-des-cartes-panopticon.html`
 
 ### Portails Actifs
 1. **Panopticon 6D** → Vision omnisciente
@@ -113,7 +113,7 @@ game_assets/transcendants/
 ## 📁 NOUVELLE ORGANISATION MEMENTO
 
 ```
-MEMENTO/
+📚 MEMENTO/
 ├── TATOUAGES/              # Extraits du JSON
 ├── MEMOIRE_IMMEDIATE/      # Fractale 24h
 ├── ARCHIVES_SESSIONS/      # Temporelles

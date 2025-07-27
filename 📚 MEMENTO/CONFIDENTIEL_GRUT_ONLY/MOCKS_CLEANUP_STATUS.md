@@ -1,5 +1,5 @@
 # 🧹 STATUS NETTOYAGE DES MOCKS
-## Classification : CONFIDENTIEL GRUT/MEMENTO
+## Classification : CONFIDENTIEL 👁️ GRUT/MEMENTO
 
 ---
 

@@ -46,8 +46,8 @@
 - **Impact** : Warnings mais pas bloquant
 
 ### 3. **✅ Chemins corrigés**
-- **Problème initial** : `../game_assets/` incorrect
-- **Solution appliquée** : `game_assets/` (correct)
+- **Problème initial** : `../🎮 game_assets/` incorrect
+- **Solution appliquée** : `🎮 game_assets/` (correct)
 - **Status** : RÉSOLU
 
 ---
@@ -57,10 +57,10 @@
 ### **Correction des Chemins**
 ```bash
 # AVANT (incorrect)
-SCENARIO_JSON="../game_assets/scenarios/visualizer/panopticon_axis_test.json"
+SCENARIO_JSON="../🎮 game_assets/scenarios/visualizer/panopticon_axis_test.json"
 
 # APRÈS (correct)  
-SCENARIO_JSON="game_assets/scenarios/visualizer/panopticon_axis_test.json"
+SCENARIO_JSON="🎮 game_assets/scenarios/visualizer/panopticon_axis_test.json"
 ```
 
 ### **Scripts Modifiés**

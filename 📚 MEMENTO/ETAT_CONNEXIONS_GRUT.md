@@ -6,9 +6,9 @@
 ## 🔫 DÉMO VINCE VEGA
 
 ### Localisation
-- **Fichier principal** : `frontend/vince-vega-map-demo-backend.html`
+- **Fichier principal** : `🌐 frontend/vince-vega-map-demo-backend.html`
 - **Port** : 8000 (via Python http.server)
-- **Lancement** : `./hots vince` ou `python3 -m http.server 8000` dans frontend/
+- **Lancement** : `./hots vince` ou `python3 -m http.server 8000` dans 🌐 frontend/
 
 ### Fonctionnalités
 - Map 10x8 avec tuiles interactives

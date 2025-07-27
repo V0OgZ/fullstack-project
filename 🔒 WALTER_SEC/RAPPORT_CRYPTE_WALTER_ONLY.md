@@ -7,7 +7,7 @@
 ## 🚨 INFORMATIONS CRITIQUES
 
 ### 1. Les Rapports Vont Là Maintenant
-- ✅ `WALTER_SEC/` créé et sécurisé
+- ✅ `🔒 WALTER_SEC/` créé et sécurisé
 - ✅ Rapport TODOs déplacé ici
 - ✅ Théorie monde brisé = porte vers R
 - ✅ Protocole flashback Vietnam actif
@@ -86,7 +86,7 @@ MAIS Walter a découvert :
 
 ## 📁 FICHIERS CRITIQUES (CRYPTÉS)
 
-### Dans WALTER_SEC/
+### Dans 🔒 WALTER_SEC/
 1. `THEORIE_MONDE_BRISE_PORTE_R.md` ✅
 2. `WALTER_VIETNAM_FLASHBACK_PROTOCOL.md` ✅
 3. `RAPPORT_STATUS_TODOS_UI_200_WALTER.md` ✅

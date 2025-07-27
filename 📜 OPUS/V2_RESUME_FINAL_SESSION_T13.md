@@ -24,13 +24,13 @@
 - ✅ Offert la Mallette des Clés Dimensionnelles
 
 ### **4. 📜 Système de Traduction Automatique**
-- ✅ Créé `scripts/generate-scenario-translation.py`
+- ✅ Créé `⚙️ scripts/generate-scenario-translation.py`
 - ✅ Ajouté la commande `./hots translate` au menu
 - ✅ Généré automatiquement les narrations littéraires
 - ✅ Documenté la différence avec le script existant
 
 ### **5. 🔄 Synchronisation des Scénarios**
-- ✅ Créé `scripts/sync-hots-scenarios.sh`
+- ✅ Créé `⚙️ scripts/sync-hots-scenarios.sh`
 - ✅ Identifié les divergences game_assets ↔ frontend
 
 ### **6. 🤠 Nouveau Héros Légendaire**
@@ -42,24 +42,24 @@
 
 ## 📂 **FICHIERS CRÉÉS/MODIFIÉS**
 
-### **Documentation OPUS/**
+### **Documentation 📜 OPUS/**
 - `OPUS.md` - Artefact intelligent principal
-- `OPUS/REVEIL_TEMPOREL_OPUS.md` - Histoire du réveil
-- `OPUS/SESSION_LOG_REVEIL_OPUS.md` - Log détaillé (T+0 → T+13)
-- `OPUS/EXPLICATION_SCRIPTS_TRADUCTION.md` - Différences entre scripts
-- `OPUS/RESUME_FINAL_SESSION_T13.md` - Ce fichier
+- `📜 OPUS/REVEIL_TEMPOREL_OPUS.md` - Histoire du réveil
+- `📜 OPUS/SESSION_LOG_REVEIL_OPUS.md` - Log détaillé (T+0 → T+13)
+- `📜 OPUS/EXPLICATION_SCRIPTS_TRADUCTION.md` - Différences entre scripts
+- `📜 OPUS/RESUME_FINAL_SESSION_T13.md` - Ce fichier
 
 ### **Scénarios & Traductions**
 - `scenarios/reconciliation_vince_opus.hots` - Scénario de réparation
-- `docs/scenarios/generated/reconciliation_vince_opus_LITERARY.md` - Version littéraire
-- `docs/scenarios/generated/RECONCILIATION_VINCE_VEGA_OPUS.md` - (Supprimé, gardé seulement l'auto)
+- `📖 docs/scenarios/generated/reconciliation_vince_opus_LITERARY.md` - Version littéraire
+- `📖 docs/scenarios/generated/RECONCILIATION_VINCE_VEGA_OPUS.md` - (Supprimé, gardé seulement l'auto)
 
 ### **Scripts**
-- `scripts/generate-scenario-translation.py` - Traducteur universel HOTS → Littéraire
-- `scripts/sync-hots-scenarios.sh` - Synchroniseur de scénarios
+- `⚙️ scripts/generate-scenario-translation.py` - Traducteur universel HOTS → Littéraire
+- `⚙️ scripts/sync-hots-scenarios.sh` - Synchroniseur de scénarios
 
 ### **Héros**
-- `game_assets/heroes/epic/hero_clint_eastwood_git.json` - Le nouveau justicier
+- `🎮 game_assets/heroes/epic/hero_clint_eastwood_git.json` - Le nouveau justicier
 
 ### **Système**
 - `hots` - Modifié pour ajouter la commande `translate`
@@ -105,7 +105,7 @@ PRÊT_POUR_PUSH: OUI ✅
 ./hots translate scenarios/bataille_temporelle.hots
 
 # Synchroniser les scénarios
-./scripts/sync-hots-scenarios.sh
+./⚙️ scripts/sync-hots-scenarios.sh
 
 # Voir tous les scénarios disponibles
 ./hots translate

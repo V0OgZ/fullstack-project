@@ -111,8 +111,8 @@ cd backend && mvn spring-boot:run
 cd frontend && npm start
 
 # Ou directement ouvrir:
-frontend/index.html
-frontend/histoire-heroes-of-time.html
+🌐 frontend/index.html
+🌐 frontend/histoire-heroes-of-time.html
 panopticon-grut-dashboard/grut-warcraft-portal.html
 ```
 

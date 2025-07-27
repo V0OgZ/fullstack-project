@@ -38,7 +38,7 @@ Jean voulait des **bulles de dialogue BD** avec système intelligent adaptatif.
 - **Quantum** : Sorts avec symboles ψ
 
 ## 🔧 FICHIERS MODIFIÉS
-- `frontend/vince-vega-map-demo-backend.html` - Système complet ajouté
+- `🌐 frontend/vince-vega-map-demo-backend.html` - Système complet ajouté
 
 ## 🎮 FONCTIONNALITÉS
 - Détection automatique du type de personnage

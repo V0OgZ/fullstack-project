@@ -1,0 +1,324 @@
+{
+  "name": "Temporal Rift",
+  "description": "Une faille dans l'espace-temps où passé, présent et futur se mélangent",
+  "theme": "temporal",
+  "size": {
+    "width": 20,
+    "height": 15
+  },
+  "timeLines": [0, 1, 2, 3, 4],
+  "defaultTimeline": 2,
+  "specialZones": [
+    {
+      "name": "Nexus Temporel",
+      "type": "temporal_nexus",
+      "position": { "x": 10, "y": 7 },
+      "radius": 2,
+      "effect": "Permet de voyager entre les époques",
+      "stabilityModifier": -2
+    },
+    {
+      "name": "Portail du Passé",
+      "type": "past_portal",
+      "position": { "x": 3, "y": 3 },
+      "radius": 1,
+      "effect": "Accès aux événements passés",
+      "timeline": 0
+    },
+    {
+      "name": "Portail du Futur",
+      "type": "future_portal",
+      "position": { "x": 17, "y": 12 },
+      "radius": 1,
+      "effect": "Vision des possibilités futures",
+      "timeline": 4
+    },
+    {
+      "name": "Zone d'Instabilité",
+      "type": "unstable_zone",
+      "position": { "x": 6, "y": 10 },
+      "radius": 3,
+      "effect": "Entropie augmentée, effets temporels imprévisibles",
+      "entropyModifier": 2
+    },
+    {
+      "name": "Cristaux Temporels",
+      "type": "time_crystals",
+      "position": { "x": 14, "y": 4 },
+      "radius": 1,
+      "effect": "Source d'énergie temporelle",
+      "manaRegeneration": 2
+    }
+  ],
+  "terrain": [
+    {
+      "type": "void",
+      "name": "Vide Temporel",
+      "color": "#0a0a0a",
+      "passable": false,
+      "positions": [
+        { "x": 0, "y": 0 }, { "x": 1, "y": 0 }, { "x": 18, "y": 0 }, { "x": 19, "y": 0 },
+        { "x": 0, "y": 14 }, { "x": 1, "y": 14 }, { "x": 18, "y": 14 }, { "x": 19, "y": 14 }
+      ]
+    },
+    {
+      "type": "temporal_grass",
+      "name": "Herbe Temporelle",
+      "color": "#4a9f4a",
+      "passable": true,
+      "movementCost": 1,
+      "positions": "default"
+    },
+    {
+      "type": "chrono_forest",
+      "name": "Forêt Chronologique",
+      "color": "#2d5a2d",
+      "passable": true,
+      "movementCost": 2,
+      "positions": [
+        { "x": 2, "y": 2 }, { "x": 3, "y": 2 }, { "x": 4, "y": 2 },
+        { "x": 2, "y": 8 }, { "x": 3, "y": 8 }, { "x": 4, "y": 8 },
+        { "x": 15, "y": 3 }, { "x": 16, "y": 3 }, { "x": 17, "y": 3 },
+        { "x": 15, "y": 11 }, { "x": 16, "y": 11 }, { "x": 17, "y": 11 }
+      ]
+    },
+    {
+      "type": "time_river",
+      "name": "Rivière Temporelle",
+      "color": "#4a8fbf",
+      "passable": true,
+      "movementCost": 2,
+      "specialEffect": "Les unités peuvent voyager dans le temps en suivant le courant",
+      "positions": [
+        { "x": 8, "y": 1 }, { "x": 9, "y": 2 }, { "x": 10, "y": 3 }, { "x": 11, "y": 4 },
+        { "x": 12, "y": 5 }, { "x": 11, "y": 6 }, { "x": 10, "y": 7 }, { "x": 9, "y": 8 },
+        { "x": 8, "y": 9 }, { "x": 9, "y": 10 }, { "x": 10, "y": 11 }, { "x": 11, "y": 12 }
+      ]
+    },
+    {
+      "type": "crystal_mountains",
+      "name": "Montagnes de Cristal",
+      "color": "#8a7a5a",
+      "passable": true,
+      "movementCost": 3,
+      "positions": [
+        { "x": 13, "y": 1 }, { "x": 14, "y": 1 }, { "x": 15, "y": 1 },
+        { "x": 13, "y": 2 }, { "x": 14, "y": 2 }, { "x": 15, "y": 2 },
+        { "x": 5, "y": 12 }, { "x": 6, "y": 12 }, { "x": 7, "y": 12 },
+        { "x": 5, "y": 13 }, { "x": 6, "y": 13 }, { "x": 7, "y": 13 }
+      ]
+    },
+    {
+      "type": "temporal_desert",
+      "name": "Désert Temporel",
+      "color": "#d4a574",
+      "passable": true,
+      "movementCost": 1,
+      "positions": [
+        { "x": 12, "y": 8 }, { "x": 13, "y": 8 }, { "x": 14, "y": 8 },
+        { "x": 12, "y": 9 }, { "x": 13, "y": 9 }, { "x": 14, "y": 9 },
+        { "x": 12, "y": 10 }, { "x": 13, "y": 10 }, { "x": 14, "y": 10 }
+      ]
+    }
+  ],
+  "structures": [
+    {
+      "name": "Citadelle Temporelle",
+      "type": "temporal_citadel",
+      "position": { "x": 10, "y": 7 },
+      "owner": "neutral",
+      "garrison": ["time_guardian", "chrono_sentinel"],
+      "specialAbilities": ["temporal_anchor", "time_manipulation"],
+      "description": "Forteresse au centre du nexus temporel"
+    },
+    {
+      "name": "Observatoire du Temps",
+      "type": "time_observatory",
+      "position": { "x": 14, "y": 4 },
+      "owner": "neutral",
+      "effect": "Révèle les événements futurs possibles",
+      "description": "Permet de voir les lignes temporelles alternatives"
+    },
+    {
+      "name": "Sanctuaire du Passé",
+      "type": "past_sanctuary",
+      "position": { "x": 3, "y": 3 },
+      "owner": "neutral",
+      "effect": "Accès aux connaissances anciennes",
+      "description": "Gardien des secrets du passé"
+    },
+    {
+      "name": "Portail du Futur",
+      "type": "future_gate",
+      "position": { "x": 17, "y": 12 },
+      "owner": "neutral",
+      "effect": "Transport vers les époques futures",
+      "description": "Porte vers les possibilités infinies"
+    }
+  ],
+  "creatures": [
+    {
+      "name": "Gardien Temporel",
+      "type": "time_guardian",
+      "position": { "x": 10, "y": 6 },
+      "level": 5,
+      "abilities": ["temporal_shield", "chronostasis"],
+      "description": "Protecteur éternel du nexus"
+    },
+    {
+      "name": "Écho du Passé",
+      "type": "past_echo",
+      "position": { "x": 4, "y": 4 },
+      "level": 3,
+      "abilities": ["memory_drain", "past_vision"],
+      "description": "Vestige d'une époque révolue"
+    },
+    {
+      "name": "Oracle du Futur",
+      "type": "future_oracle",
+      "position": { "x": 16, "y": 11 },
+      "level": 4,
+      "abilities": ["prophecy", "future_sight"],
+      "description": "Prophète des temps à venir"
+    },
+    {
+      "name": "Anomalie Temporelle",
+      "type": "time_anomaly",
+      "position": { "x": 7, "y": 9 },
+      "level": 6,
+      "abilities": ["reality_distortion", "temporal_chaos"],
+      "description": "Entité née de l'instabilité temporelle"
+    }
+  ],
+  "objects": [
+    {
+      "name": "Cristal de Temps",
+      "type": "time_crystal",
+      "position": { "x": 5, "y": 5 },
+      "effect": "+2 Mana temporel par tour",
+      "description": "Énergie temporelle cristallisée"
+    },
+    {
+      "name": "Sablier Éternel",
+      "type": "eternal_hourglass",
+      "position": { "x": 15, "y": 8 },
+      "effect": "Permet de ralentir le temps local",
+      "description": "Relique des premiers chronurgistes"
+    },
+    {
+      "name": "Miroir des Époques",
+      "type": "epoch_mirror",
+      "position": { "x": 12, "y": 3 },
+      "effect": "Révèle les actions des autres timelines",
+      "description": "Reflet des réalités alternatives"
+    },
+    {
+      "name": "Coffre Temporel",
+      "type": "temporal_chest",
+      "position": { "x": 8, "y": 12 },
+      "effect": "Contient des artefacts de différentes époques",
+      "description": "Trésor perdu dans le temps"
+    },
+    {
+      "name": "Épée de l'Archange",
+      "type": "archangel_sword",
+      "position": { "x": 1, "y": 1 },
+      "effect": "+12 Attaque, +5 Puissance Magique, Résurrection automatique",
+      "description": "Arme divine bénie par les archanges"
+    },
+    {
+      "name": "Armure d'Écailles de Dragon",
+      "type": "dragon_scale_armor",
+      "position": { "x": 18, "y": 13 },
+      "effect": "+12 Défense, Résistance au feu 50%",
+      "description": "Armure forgée avec des écailles de dragon légendaire"
+    },
+    {
+      "name": "Couronne de Sagesse",
+      "type": "crown_of_wisdom",
+      "position": { "x": 10, "y": 1 },
+      "effect": "+10 Connaissance, +50 Mana",
+      "description": "Couronne royale augmentant la connaissance"
+    },
+    {
+      "name": "Bottes de Vitesse",
+      "type": "boots_of_speed",
+      "position": { "x": 9, "y": 13 },
+      "effect": "+3 Points de Mouvement",
+      "description": "Bottes enchantées augmentant la vitesse"
+    },
+    {
+      "name": "Orbe du Firmament",
+      "type": "orb_of_the_firmament",
+      "position": { "x": 19, "y": 1 },
+      "effect": "+15 Puissance Magique, +100 Mana, -50% coût sorts",
+      "description": "Orbe céleste contrôlant les forces cosmiques"
+    },
+    {
+      "name": "Amulette de Chronos",
+      "type": "chronos_amulet",
+      "position": { "x": 1, "y": 13 },
+      "effect": "+3 Mana temporel, Sort temporel gratuit par tour",
+      "description": "Amulette divine permettant de manipuler le flux temporel"
+    },
+    {
+      "name": "Essence Temporelle",
+      "type": "temporal_essence",
+      "position": { "x": 14, "y": 10 },
+      "effect": "+10 Mana temporel (consommable)",
+      "description": "Essence pure du temps permettant des manipulations temporelles"
+    },
+    {
+      "name": "Potion de Mana",
+      "type": "mana_potion",
+      "position": { "x": 6, "y": 4 },
+      "effect": "+50 Mana (consommable)",
+      "description": "Potion restaurant le mana magique"
+    }
+  ],
+  "startingPositions": [
+    {
+      "player": 1,
+      "position": { "x": 7, "y": 7 },
+      "timeline": 2,
+      "description": "Position de départ centrée dans le présent"
+    },
+    {
+      "player": 2,
+      "position": { "x": 13, "y": 7 },
+      "timeline": 2,
+      "description": "Position de départ centrée dans le présent"
+    }
+  ],
+  "victoryConditions": [
+    {
+      "type": "temporal_dominance",
+      "description": "Contrôler le Nexus Temporel pendant 5 tours consécutifs"
+    },
+    {
+      "type": "chronological_mastery",
+      "description": "Avoir des unités dans au moins 4 timelines différentes"
+    },
+    {
+      "type": "temporal_artifacts",
+      "description": "Collecter tous les artefacts temporels de la carte"
+    }
+  ],
+  "ambientEffects": [
+    {
+      "name": "Flux Temporel",
+      "description": "Les coûts en mana temporel varient selon la proximité du nexus",
+      "effect": "mana_cost_modifier"
+    },
+    {
+      "name": "Écho Temporel",
+      "description": "Les actions importantes créent des échos dans les autres timelines",
+      "effect": "action_echoes"
+    },
+    {
+      "name": "Instabilité Chronologique",
+      "description": "Certaines zones deviennent instables de manière aléatoire",
+      "effect": "random_instability"
+    }
+  ]
+} 

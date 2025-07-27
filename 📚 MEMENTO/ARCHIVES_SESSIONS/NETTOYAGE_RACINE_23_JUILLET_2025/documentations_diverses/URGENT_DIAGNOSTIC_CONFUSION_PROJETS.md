@@ -51,7 +51,7 @@ frontend-temporal/
 
 ## ❌ **FRONTEND/ = PROJET DÉMO REACT**
 
-**📍 Location**: `./frontend/`  
+**📍 Location**: `./🌐 frontend/`  
 **📝 Description**: React TypeScript avec TrueHeroesInterface  
 **🌐 Port**: 3000  
 **🎮 Caractéristiques**:

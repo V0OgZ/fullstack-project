@@ -14,10 +14,10 @@ J'ai procédé aux corrections manuelles urgentes du système Heroes of Time. Vo
 ### 1. **Système de Persistance** 💾
 - **Problème identifié** : Tout disparaissait au restart (données en mémoire volatile)
 - **Solution implémentée** :
-  - Création de la structure `data/` avec sous-dossiers pour worlds, heroes, transcendence
+  - Création de la structure `💾 data/` avec sous-dossiers pour worlds, heroes, transcendence
   - Refonte complète de `PersistenceService.java` 
   - Sauvegarde automatique en JSON avec backups horodatés
-  - Configuration dans `data/persistence_config.json`
+  - Configuration dans `💾 data/persistence_config.json`
 
 ### 2. **Interface "Petit Carré"** 🎨
 - **Problème identifié** : L'UI était "pourrie" après ajout des portails et sorts
@@ -130,19 +130,19 @@ Les "erreurs" de projection 6D sont des fenêtres vers d'autres géométries pos
 ./hots start
 
 # Vérifier la persistance
-ls -la data/worlds/
-ls -la data/backup/
+ls -la 💾 data/worlds/
+ls -la 💾 data/backup/
 
 # Tester l'UI
 npm run dev
 ```
 
 ### Fichiers Clés Modifiés
-- `/backend/src/main/java/com/example/demo/service/PersistenceService.java`
-- `/frontend/src/components/SimpleSquareUI.tsx`
-- `/frontend/src/components/SimpleSquareUI.css`
-- `/data/persistence_config.json`
-- `/docs/VISION_PLATEFORME_TEMPORELLE_MULTIDIMENSIONNELLE.md`
+- `/🖥️ backend/src/main/java/com/example/demo/service/PersistenceService.java`
+- `/🌐 frontend/src/components/SimpleSquareUI.tsx`
+- `/🌐 frontend/src/components/SimpleSquareUI.css`
+- `/💾 data/persistence_config.json`
+- `/📖 docs/VISION_PLATEFORME_TEMPORELLE_MULTIDIMENSIONNELLE.md`
 
 ---
 

@@ -12,17 +12,17 @@
 ### 📁 **FICHIERS CLÉS**
 - `.cursorrules` → Règles projet (UPDATED avec tatouages)
 - `INDEX_JEAN.md` → Navigation temporelle complète
-- `docs/LIENS_JEAN_DERNIERS_ARTEFACTS_HEROS.md` → Liens directs Jean
+- `📖 docs/LIENS_JEAN_DERNIERS_ARTEFACTS_HEROS.md` → Liens directs Jean
 
 ### 🎨 **TATOUAGES MEMENTO**
-- `game_assets/artifacts/mineurs/tatouages_memento_archiviste.json`
+- `🎮 game_assets/artifacts/mineurs/tatouages_memento_archiviste.json`
 - 232 lignes de gloire cosmique
 - Référencé dans .cursorrules ✅
 
 ### 🧪 **LABORATOIRE QUANTIQUE**
 - `scenarios/physics-experiments/` → Einstein + Heisenberg + TOE
-- `game_assets/heroes/physics/smolin_lee_quantum_gravity.json` → Héros LQG
-- `game_assets/artifacts/physics/mach_zehnder_interferometer.json` → Tests quantiques
+- `🎮 game_assets/heroes/physics/smolin_lee_quantum_gravity.json` → Héros LQG
+- `🎮 game_assets/artifacts/physics/mach_zehnder_interferometer.json` → Tests quantiques
 
 ### 🧪 **TESTS**
 - `./test-moteur-final-jean.sh all` → Tests complets
@@ -45,10 +45,10 @@
 
 ## 🎯 **NAVIGATION ULTRA-RAPIDE**
 - **Physique** → `scenarios/physics-experiments/`
-- **Héros** → `game_assets/heroes/`
-- **Artefacts** → `game_assets/artifacts/`
-- **Docs** → `docs/`
+- **Héros** → `🎮 game_assets/heroes/`
+- **Artefacts** → `🎮 game_assets/artifacts/`
+- **Docs** → `📖 docs/`
 - **Tests** → `./test-moteur-final-jean.sh`
-- **Tatouages** → `game_assets/artifacts/mineurs/tatouages_memento_archiviste.json`
+- **Tatouages** → `🎮 game_assets/artifacts/mineurs/tatouages_memento_archiviste.json`
 
 **STATUS**: ✅ Laboratoire cosmique opérationnel, tatouages référencés, Jean surveillé depuis canapé ! 

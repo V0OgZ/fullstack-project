@@ -2,7 +2,7 @@
 
 ## ✅ **CE QUI A ÉTÉ FAIT**
 
-### 1. **SYSTÈME DICEBEAR ÉTENDU** (`frontend/dicebar-graphics-system.js`)
+### 1. **SYSTÈME DICEBEAR ÉTENDU** (`🌐 frontend/dicebar-graphics-system.js`)
 - **30 STYLES DICEBEAR** disponibles pour tous les éléments du jeu
 - **Bâtiments** : glass, identicon, rings, pixel-art, croodles
 - **Héros** : adventurer, lorelei, avataaars  
@@ -10,26 +10,26 @@
 - **Artefacts** : shapes (avec couleurs et effets)
 - **Génération intelligente** depuis les fichiers JSON (race, classe, stats, niveau)
 
-### 2. **INTERFACE DE VILLE** (`frontend/components/CityInterface.js`)
+### 2. **INTERFACE DE VILLE** (`🌐 frontend/components/CityInterface.js`)
 - Avatars dicebear pour tous les bâtiments
 - Effets de rareté selon le niveau (common → legendary)
 - Glow effect pour bâtiments construits
 - Mise à jour dynamique lors des améliorations
 
-### 3. **INTERFACE DES HÉROS** (`frontend/components/HeroInterface.js`)
+### 3. **INTERFACE DES HÉROS** (`🌐 frontend/components/HeroInterface.js`)
 - Avatars dicebear dans la liste des héros (60x60)
 - Grand avatar dans le panneau de détail (100x100)
 - Effets de rareté basés sur le niveau du héros
 - Glow effect pour héros niveau 5+
 - Animation au survol
 
-### 4. **STYLES CSS** (`frontend/styles/dicebear.css`)
+### 4. **STYLES CSS** (`🌐 frontend/styles/dicebear.css`)
 - Animations de chargement fluides
 - Effets de rareté (filtres de couleur)
 - Animation legendaryGlow pour objets rares
 - Styles responsive pour toutes tailles
 
-### 5. **DÉMO COMPLÈTE** (`frontend/dicebear-map-demo.html`)
+### 5. **DÉMO COMPLÈTE** (`🌐 frontend/dicebear-map-demo.html`)
 - Map 10x10 avec tous types d'éléments
 - Showcase des différents styles
 - Effets spéciaux et rarités

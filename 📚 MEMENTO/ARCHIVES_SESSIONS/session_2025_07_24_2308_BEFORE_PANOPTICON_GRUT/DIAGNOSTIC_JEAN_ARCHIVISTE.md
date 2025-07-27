@@ -146,7 +146,7 @@ quantum_script: "∀enemy ∈ field : enemy.ARMOR = DISARMED (1t)"
 
 ### 🔧 **ÉTAPE 2: Implémenter le Parser Manquant**
 1. Créer `QuantumScriptParser.java` 
-2. Connecter aux JSON héros existants (`game_assets/heroes/`)
+2. Connecter aux JSON héros existants (`🎮 game_assets/heroes/`)
 3. Interpréter les formules `quantum_script`, `ultimate_power`
 
 ### 🔧 **ÉTAPE 3: Intégrer le Système Unifié**

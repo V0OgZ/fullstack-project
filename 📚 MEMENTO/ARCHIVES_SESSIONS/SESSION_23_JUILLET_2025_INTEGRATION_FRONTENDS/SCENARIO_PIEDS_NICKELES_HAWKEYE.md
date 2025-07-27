@@ -50,19 +50,19 @@ WIN("Les Pieds Nickelés et Hawkeye ont réussi !")
 ## 📁 **FICHIERS CRÉÉS**
 
 ### **Héros**
-- `backend/src/main/resources/heroes/grofi/Hawkeye.json` - Nouveau héros Hawkeye
+- `🖥️ backend/src/main/resources/heroes/grofi/Hawkeye.json` - Nouveau héros Hawkeye
 
 ### **Scénario**
-- `game_assets/scenarios/hots/scenario_pieds_nickeles_hawkeye_opticon.hots` - Script HOTS
+- `🎮 game_assets/scenarios/hots/scenario_pieds_nickeles_hawkeye_opticon.hots` - Script HOTS
 
 ### **Test**
-- `scripts/test-scenario-pieds-nickeles-hawkeye.sh` - Script de test automatisé
+- `⚙️ scripts/test-scenario-pieds-nickeles-hawkeye.sh` - Script de test automatisé
 
 ## 🚀 **UTILISATION**
 
 ### **Test rapide :**
 ```bash
-./scripts/test-scenario-pieds-nickeles-hawkeye.sh
+./⚙️ scripts/test-scenario-pieds-nickeles-hawkeye.sh
 ```
 
 ### **Test manuel :**
