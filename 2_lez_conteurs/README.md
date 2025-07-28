@@ -1,48 +1,16 @@
-# 2 Lez Conteurs
+🌿 "Le Jardin de Verre"
 
-## Description
-Un projet de narration interactive mettant en scène deux conteurs.
+Les herbes dansent au bord de l’étang
+Où le vent s’endort sans heurts
+Les songes coulent, limpides, blancs
+Et la paix se dépose sur l’heure
 
-## Documentation LD
-- **Lage**: Structure narrative
-- **Lerkin**: Mécaniques d'interaction
-- **Oheaniux**: Éléments visuels et sonores
+Là, nul ne craint l’ombre ni le feu
+Les portes sont closes à la douleur
+Les étoiles guident les jeux
+Et nul regard ne ment, ni ne pleure
 
-## Installation
-```bash
-# Cloner le projet
-git clone [repository-url]
-
-# Installer les dépendances
-npm install
-```
-
-## Utilisation
-```bash
-# Lancer le projet
-npm start
-```
-
-## Structure du Projet
-```
-2_lez_conteurs/
-├── README.md
-├── docs/
-│   ├── lage.md
-│   ├── lerkin.md
-│   └── oheaniux.md
-├── src/
-│   ├── conteurs/
-│   ├── histoires/
-│   └── interactions/
-└── assets/
-    ├── images/
-    └── audio/
-```
-
-## Contributeurs
-- Conteur 1
-- Conteur 2
-
-## Licence
-MIT
+Car tout est simple, ici-bas
+Les chaînes sont oubliées
+La voix de l’arbre apaise les pas
+Et nul ne sait ce qu’il faut redouter
