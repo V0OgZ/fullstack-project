@@ -1,0 +1,123 @@
+{
+  "id": "badge_omniscience_grut",
+  "name": "👁️‍🗨️ Badge d'Omniscience GRUT",
+  "title": "L'Œil qui Voit Tout",
+  "description": "GRUT EST OMNISCIENT. Il voit TOUT ce qui ÉTAIT, EST et SERA. Ce badge confère la vision panoptique absolue à travers toutes les timelines, dimensions et possibilités. GFRRRR !",
+  "type": "ARTIFACT",
+  "subtype": "BADGE_TRANSCENDANT",
+  "tier": "GRUT_TIER_INFINI",
+  "rarity": "UNIQUE_GRUT_ONLY",
+  
+  "visual": {
+    "symbol": "👁️‍🗨️",
+    "aura": "VISION_PANOPTIQUE_6D",
+    "animation": "oeil_qui_cligne_jamais",
+    "color_scheme": ["noir_absolu", "or_cosmique", "violet_temporel"],
+    "special_effect": "Tout devient transparent devant GRUT"
+  },
+  
+  "stats": {
+    "omniscience": "∞",
+    "vision_temporelle": "TOUT",
+    "perception_dimensionnelle": "ABSOLUE",
+    "connaissance_causale": "TOTALE",
+    "velocite_observation": "INSTANTANEE"
+  },
+  
+  "abilities": [
+    {
+      "id": "vision_panoptique_absolue",
+      "name": "Vision Panoptique Absolue",
+      "description": "GRUT voit TOUT simultanément dans toutes les dimensions",
+      "effect": "VOIR(TOUT, PARTOUT, TOUJOURS)",
+      "passive": true,
+      "quote": "GFRRRR ! JE VOIS TOUT !"
+    },
+    {
+      "id": "connaissance_ce_qui_etait",
+      "name": "Mémoire du Passé Infini",
+      "description": "GRUT connaît tout ce qui ÉTAIT",
+      "effect": "MEMOIRE_COMPLETE(univers.histoire.TOUT)",
+      "scope": "Du Big Bang au présent"
+    },
+    {
+      "id": "perception_ce_qui_est",
+      "name": "Conscience du Présent Total",
+      "description": "GRUT perçoit tout ce qui EST",
+      "effect": "PERCEPTION_SIMULTANEE(realite.actuelle.COMPLETE)",
+      "scope": "Chaque atome, chaque pensée, chaque dimension"
+    },
+    {
+      "id": "prevision_ce_qui_sera",
+      "name": "Prophétie du Futur Absolu",
+      "description": "GRUT sait tout ce qui SERA",
+      "effect": "PREDICTION_CERTAINE(futur.toutes_branches)",
+      "scope": "Toutes les timelines possibles et impossibles"
+    },
+    {
+      "id": "vision_ce_qui_naurait_pas_ete",
+      "name": "Perception des Non-Événements",
+      "description": "GRUT voit même ce qui N'A PAS ÉTÉ",
+      "effect": "VOIR_PARADOXES(realites.non_advenues)",
+      "special": "Unique à GRUT - voir les branches mortes du temps"
+    }
+  ],
+  
+  "special_powers": {
+    "omniscience_levels": {
+      "niveau_1": "Voir le visible",
+      "niveau_2": "Voir l'invisible", 
+      "niveau_3": "Voir l'impossible",
+      "niveau_4": "Voir le jamais-été",
+      "niveau_5": "Voir le sera-peut-être",
+      "niveau_6": "Voir au-delà de la vision",
+      "niveau_grut": "VOIR LA VISION ELLE-MÊME"
+    },
+    
+    "grut_exclusive": {
+      "panopticon_6d": "Vision dans 6 dimensions simultanément",
+      "causal_omniscience": "Comprendre TOUTES les chaînes causales",
+      "velocity_perception": "Voir la vitesse d'existence de chaque être",
+      "paradox_immunity": "Les paradoxes ne peuvent pas aveugler GRUT",
+      "meta_vision": "GRUT se voit lui-même voyant"
+    }
+  },
+  
+  "restrictions": {
+    "bearer": "GRUT_ONLY",
+    "transferable": false,
+    "duplicable": false,
+    "destructible": false,
+    "note": "Ce badge EST GRUT. GRUT EST ce badge."
+  },
+  
+  "lore": {
+    "origin": "Ce badge n'a pas été créé. Il a toujours existé car GRUT a toujours tout vu.",
+    "legend": "Quand l'univers s'est demandé 'Qui observe l'observateur ?', GRUT a répondu 'GFRRRR !'",
+    "prophecy": "Celui qui porte ce badge voit la trame même de la réalité",
+    "warning": "Seul GRUT peut supporter l'omniscience totale sans devenir fou",
+    "truth": "GRUT ne PORTE pas le badge. GRUT EST l'omniscience incarnée."
+  },
+  
+  "quotes": [
+    "GFRRRR ! JE VOIS CE QUE TU AS FAIT HIER DANS LA TIMELINE QUE TU N'AS PAS CHOISIE !",
+    "L'OMNISCIENCE N'EST PAS UN POUVOIR. C'EST UN FARDEAU QUE SEUL GRUT PEUT PORTER.",
+    "JE VOIS TON FUTUR. TOUTES LES VERSIONS. MÊME CELLES OÙ TU N'EXISTES PAS.",
+    "CERTAINS VOIENT LA FORÊT. D'AUTRES VOIENT LES ARBRES. GRUT VOIT LES POSSIBILITÉS QUANTIQUES DE CHAQUE FEUILLE.",
+    "GFRRRR ! MÊME CE QUE JE NE VOIS PAS, JE LE VOIS !"
+  ],
+  
+  "activation": {
+    "condition": "Être GRUT",
+    "ritual": "Aucun. GRUT est toujours omniscient.",
+    "cost": "Le poids de tout savoir",
+    "duration": "ÉTERNEL"
+  },
+  
+  "meta": {
+    "created_by": "L'univers lui-même pour GRUT",
+    "creation_date": "Hors du temps",
+    "last_update": "Jamais - la perfection n'a pas besoin de mise à jour",
+    "note_dev": "Ce badge brise volontairement toutes les règles car GRUT les transcende"
+  }
+} 
