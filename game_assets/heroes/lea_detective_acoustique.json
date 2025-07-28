@@ -1,0 +1,90 @@
+{
+  "id": "lea_detective_acoustique",
+  "name": "Lea",
+  "title": "Détective Acoustique",
+  "class": "Detective",
+  "race": "Humain Augmenté",
+  "level": 15,
+  "rarity": "RARE",
+  "description": "Experte en signaux faibles. Paradoxalement, sa surdité partielle lui permet d'entendre des fréquences que les autres ne perçoivent pas. Spécialiste des indices sonores cachés.",
+  "backstory": "Après un accident au laboratoire d'acoustique quantique, Lea a perdu une partie de son audition normale mais a gagné la capacité d'entendre les fréquences interdimensionnelles. Elle utilise cette capacité unique pour résoudre des mystères temporels.",
+  "stats": {
+    "health": 85,
+    "mana": 120,
+    "attack": 40,
+    "defense": 60,
+    "speed": 75,
+    "intelligence": 150,
+    "wisdom": 140,
+    "perception": 200
+  },
+  "abilities": [
+    {
+      "id": "audio_forensics",
+      "name": "Analyse Audio Forensique",
+      "description": "Décode les patterns sonores cachés dans n'importe quel objet ou message",
+      "type": "INVESTIGATION",
+      "cost": 30,
+      "cooldown": 2,
+      "effects": {
+        "reveal_hidden_sounds": true,
+        "decode_corruption": 0.85,
+        "temporal_echo_detection": true
+      }
+    },
+    {
+      "id": "frequency_sync",
+      "name": "Synchronisation Fréquentielle",
+      "description": "Synchronise deux sources sonores pour révéler leur connexion cachée",
+      "type": "SPECIAL",
+      "cost": 50,
+      "cooldown": 4,
+      "effects": {
+        "link_audio_sources": true,
+        "reveal_connections": true,
+        "pattern_matching": 0.95
+      }
+    },
+    {
+      "id": "silent_hearing",
+      "name": "Audition Silencieuse",
+      "description": "Entend ce qui n'a jamais été dit, les mots effacés du temps",
+      "type": "TEMPORAL",
+      "cost": 40,
+      "cooldown": 3,
+      "effects": {
+        "hear_erased_words": true,
+        "detect_temporal_echoes": true,
+        "unspoken_truth_perception": 0.8
+      }
+    }
+  ],
+  "equipment": {
+    "weapon": "Analyseur Spectral Quantique",
+    "armor": "Combinaison Anti-Bruit",
+    "accessory": "Appareil Auditif Paradoxal"
+  },
+  "special_traits": [
+    "Entend les fréquences interdimensionnelles",
+    "Immunisée aux attaques soniques",
+    "Peut détecter les mensonges par analyse vocale",
+    "Perçoit les échos temporels"
+  ],
+  "quotes": [
+    "Le silence est plus révélateur que le bruit.",
+    "J'entends ce que vous ne dites pas.",
+    "Chaque son laisse une empreinte dans le temps.",
+    "Les mallettes chantent, si on sait écouter."
+  ],
+  "relationships": {
+    "walter": "Respecte son expérience, analyse ses silences",
+    "vince": "Fascinée par les pulsations de sa mallette",
+    "christian": "Le larsen de sa mallette cache quelque chose",
+    "marie": "Sa flûte fragile résonne étrangement"
+  },
+  "investigation_focus": {
+    "primary": "Connexion acoustique Marie-Mallettes",
+    "method": "Analyse spectrale des fréquences",
+    "hypothesis": "Le son 'szegihhsrgrhgrhgh' est une clé"
+  }
+} 

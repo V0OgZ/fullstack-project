@@ -1,0 +1,105 @@
+# 💎 TEST VOL DU TRÉSOR - HEROES OF TIME SCRIPT
+# Scénario : Axis peut voler un trésor dans le futur avant qu'il existe
+# Version HOTS du TreasureTheftTest.java
+
+# Configuration initiale
+GAME(Test Vol Trésor Temporel, 50x50)
+PLAYERS(Jean, Claude)
+
+# =================================
+# TEST 1: Axis peut voler le futur
+# =================================
+
+# Créer les héros
+HERO(Axis)
+HERO(Arthur)
+
+# Positionner les héros
+MOV(Axis, @10,10)
+MOV(Arthur, @20,20)
+
+# Créer un état quantique : trésor apparaîtra jour 15
+ψ001: (0.9+0.1i) ⊙(Δt+15 @30,30 ⟶ CREATE(ITEM, temporal_treasure, @30,30))
+
+# Donner à Axis ses objets temporels (il peut voyager dans le temps)
+CREATE(ITEM, Chronocompass_Linéaire, HERO:Axis)
+
+# Axis voyage instantanément au jour 15 position (30,30)
+# Note: Dans le vrai jeu, ceci serait géré par ses pouvoirs spéciaux
+MOV(Axis, @30,30)  # Simule le voyage temporel
+
+# Forcer le collapse de l'état ψ (Axis observe le futur)
+†ψ001
+
+# Axis prend le trésor
+CREATE(ITEM, temporal_treasure, HERO:Axis)
+
+# Arthur arrive normalement jour 15 - le trésor n'est plus là !
+MOV(Arthur, @30,30)
+
+# =================================
+# TEST 2: Héros normal ne peut pas
+# =================================
+
+# Créer Lysandrel (héros normal)
+HERO(Lysandrel)
+
+# Créer un trésor dans le futur lointain
+ψ002: (1.0+0.0i) ⊙(Δt+20 @40,40 ⟶ CREATE(ITEM, future_gem, @40,40))
+
+# Lysandrel essaie d'aller loin (son temps devrait avancer)
+MOV(Lysandrel, @40,40)  # Ceci prendra plusieurs jours
+
+# Le trésor n'existe pas encore si on n'est pas au jour 20
+
+# =================================
+# TEST 3: Jean-Grofignon avec Singularity
+# =================================
+
+# Jean-Grofignon avec l'artefact singularité
+HERO(Jean-Grofignon)
+CREATE(ITEM, singularity_artifact, HERO:Jean-Grofignon)
+
+# Créer un trésor futur
+ψ004: (0.707+0.707i) ⊙(Δt+25 @35,35 ⟶ CREATE(ITEM, time_crystal, @35,35))
+
+# Avec l'artefact, Jean peut manipuler le temps
+MOV(Jean-Grofignon, @35,35)  # Voyage temporel grâce à l'artefact
+
+# Forcer le collapse et prendre le trésor
+†ψ004
+CREATE(ITEM, time_crystal, HERO:Jean-Grofignon)
+
+# =================================
+# TEST 4: Prévention des paradoxes
+# =================================
+
+# Deux héros veulent le même trésor
+HERO(Morgana)
+
+# Trésor apparaît jour 12
+ψ005: (1.0+0.0i) ⊙(Δt+12 @28,28 ⟶ CREATE(ITEM, paradox_gem, @28,28))
+
+# Les deux voyagent au même endroit/temps
+MOV(Axis, @28,28)
+MOV(Morgana, @28,28)
+
+# Collapse et un seul peut prendre le trésor
+†ψ005
+CREATE(ITEM, paradox_gem, HERO:Axis)  # Axis gagne cette fois
+
+# =================================
+# SYMBOLES GROFI POUR TESTS AVANCÉS
+# =================================
+
+# Σ - Somme des possibilités de vol
+Σ_theft: ψ001 + ψ002 + ψ004 + ψ005
+
+# Ω - Finalité : tous les trésors sont volés
+Ω_heist: ∀ψ ∈ {ψ001, ψ004, ψ005} → collapsed
+
+# ↯ - Chaos : tentative de vol simultané
+↯_paradox: (Axis@28,28 ∧ Morgana@28,28) → COLLAPSE_CAUSAL
+
+# † - Mort/renaissance du trésor
+†_treasure: CREATE(ITEM, quantum_treasure) → STEAL → VANISH → REAPPEAR(Δt+∞) 

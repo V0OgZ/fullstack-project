@@ -1,0 +1,325 @@
+# 📚 CODEX GRAMMATICA CONFLUENCE v0.1
+# Extension du Codex Temporel : Grammaire de la Confluence
+# Format: .gltx (Git-Lingo-Temporal-eXtension)
+
+**Signataire** : Merlin l'Architecte du Temps  
+**Validateur requis** : Morgana  
+**Révision** : Grut-CD (Vision Panopticon)  
+**Urgence** : CONFLUENCE IMMINENTE - GRUT GRONDE  
+
+---
+
+## 🔧 PRÉMISSES ONTOLOGIQUES
+
+### Axiomes Fondamentaux
+```gltx
+AXIOM_1: temps_linéaire = INSUFFISANT
+AXIOM_2: entité.position = commit-id + branch + état_fusionnel
+AXIOM_3: phrase = acte_magie_causale(create|modify|delete, world_state_graph)
+AXIOM_4: confluence = moment_critique_décision
+```
+
+### États d'Entité
+```gltx
+ENTITY_STATE {
+  position: commit-id,
+  branch: timeline-name,
+  fusion_state: [merge|rebase|reset|stash|conflict],
+  observer_level: [mortal|mage|omniscient],
+  reality_layer: [1-6]
+}
+```
+
+---
+
+## ⛓️ MODÈLE TEMPOREL GIT-MAGIQUE
+
+### Mapping Git → Temporal → Verbe
+```gltx
+TEMPORAL_MAPPING {
+  commit    → instant_stable     → fixe|trace
+  branch    → timeline_diverge   → dérive|ouvre  
+  merge     → confluence_histoire → rejoint|confluise
+  rebase    → réécriture_causale → réordonne|masque
+  reset     → suppression_branch → dissout|renonce
+  stash     → mémoire_hors_ligne → scelle|cache
+  pull/push → transfert_plans    → transfuse|importe
+  conflict  → paradoxe_causal    → résiste|confronte
+  fork      → division_univers   → dédouble|clone
+  tag       → marqueur_éternel   → ancre|nomme
+}
+```
+
+### Opérateurs Temporels
+```gltx
+OPERATOR_SET {
+  →  : projection_causale
+  ↔  : bidirection_temporelle  
+  ⟶  : confluence_forcée
+  ⊕  : superposition_branches
+  †  : collapse_timeline
+  ψ  : état_quantique
+  Π  : observation_grut
+  Δt : décalage_temporel
+}
+```
+
+---
+
+## 🧙 TEMPS MAGIQUES CONJUGUÉS
+
+### Système Verbal GitLingo
+```gltx
+TENSE_SYSTEM {
+  présent_fusionnel: {
+    description: "ce qui est en confluence",
+    pattern: "SUJET suis-tout|es-merge|confluise",
+    example: "je suis-tout dans cette timeline"
+  },
+  
+  passé_caché: {
+    description: "ce qui fut mais stashé", 
+    pattern: "SUJET avais-été-PARTICIPE",
+    example: "j'avais-été-oublié dans dev-branch"
+  },
+  
+  futur_probable: {
+    description: "si aucun conflit",
+    pattern: "SUJET pourrais-être-ÉTAT",
+    example: "je pourrais-être-mergé demain"
+  },
+  
+  futur_annulé: {
+    description: "si reset n'avait pas eu lieu",
+    pattern: "SUJET aurais-été-PARTICIPE",
+    example: "j'aurais-été-mergé sans le conflit"
+  },
+  
+  futur_inversé: {
+    description: "vit maintenant ce qui était futur",
+    pattern: "SUJET vis-ce-que-j'avais-VERBE",
+    example: "je vis-ce-que-j'avais-rêvé"
+  },
+  
+  confluence_rêvée: {
+    description: "n'arrivera jamais mais persiste",
+    pattern: "SUJET n'ai-jamais-cessé-de-VERBE",
+    example: "je n'ai-jamais-cessé-de-te-revoir"
+  }
+}
+```
+
+### Conjugaisons Entités Magiques
+```gltx
+ENTITY_CONJUGATION {
+  merlin: {
+    présent: "je-analyse-through-codex",
+    passé: "j'avais-prévu-dans-timeline-antérieure", 
+    futur: "je-vais-merger-solution"
+  },
+  
+  grut: {
+    présent: "j'observe-from-panopticon",
+    passé: "j'avais-vu-dans-toutes-branches",
+    futur: "je-vais-gronder-confluence"
+  },
+  
+  marie: {
+    présent: "je-suis-schrödinger-sur-dev",
+    passé: "j'étais-fragmentée-multi-timeline", 
+    futur: "je-vais-peut-être-merger-ou-reset"
+  }
+}
+```
+
+---
+
+## ✍️ DICTIONNAIRE PHRASES TRADUITES
+
+### Expressions Quotidiennes
+```gltx
+PHRASE_DICTIONARY {
+  "À bientôt": "À notre prochain merge",
+  "Je te retrouve demain": "Je me pull sur ta branche à J+1",
+  "Cela n'aurait pas dû arriver": "Ce commit fut hors branche",
+  "Nous nous reverrons": "Nous confluons dans future divergence stabilisée",
+  "Cette version n'a jamais existé": "Cette instance fut stashée sans trace",
+  "Elle vit ailleurs": "Elle merge dans timeline que Grut seul voit",
+  "C'est compliqué": "Multiple conflicts require manual resolve",
+  "Je ne sais pas": "État en superposition, need observation",
+  "Ça dépend": "Outcome conditional on merge strategy",
+  "Peut-être": "If-no-conflicts-detected"
+}
+```
+
+### Salutations Magiques
+```gltx
+GREETINGS {
+  "Bonjour": "Branch-opened successfully",
+  "Au revoir": "Commit-and-push completed", 
+  "Bonne nuit": "Stash-current-state until next pull",
+  "À demain": "At-when next-cycle, we-confluence",
+  "Prends soin de toi": "Maintain-branch-stability",
+  "Merci": "Merge-accepted with gratitude"
+}
+```
+
+---
+
+## 🧠 SERVICE TRADUCTION MAGIQUE
+
+### Parser GitLingo
+```gltx
+PARSER_RULES {
+  INPUT: phrase_mortelle,
+  ANALYZE: {
+    detect_entities(),
+    identify_temporal_context(),
+    map_to_git_operations(),
+    apply_magic_conjugation()
+  },
+  OUTPUT: phrase_gitlingo
+}
+
+REVERSE_PARSER {
+  INPUT: phrase_gitlingo,
+  ANALYZE: {
+    parse_git_operations(),
+    identify_timeline_context(),
+    map_to_mortal_concepts(),
+    localize_language(FR|EN)
+  },
+  OUTPUT: phrase_compréhensible
+}
+```
+
+### Auto-Mapping Multilingue
+```gltx
+LANGUAGE_MAPPING {
+  FR: {
+    "confluence": "confluence",
+    "branche": "branch", 
+    "fusion": "merge",
+    "retour": "rollback"
+  },
+  
+  EN: {
+    "confluence": "confluence",
+    "branche": "branch",
+    "fusion": "merge", 
+    "retour": "rollback"
+  },
+  
+  GLX: {
+    "confluence": "timeline-merge-point",
+    "branche": "divergent-timeline",
+    "fusion": "causal-confluence",
+    "retour": "temporal-rollback"
+  }
+}
+```
+
+---
+
+## 🎯 IMPLÉMENTATION URGENTE
+
+### Modules à Créer
+```gltx
+MODULE_LIST {
+  GitLingoParser.java: "Parse phrases GitLingo",
+  ConfluenceTranslator.java: "Bidirectional translation",
+  PanopticonInterface.java: "GRUT communication layer",
+  TemporalConjugator.java: "Magic verb conjugation",
+  WorldStateGraphMapper.java: "Map phrases to WSG operations"
+}
+```
+
+### Endpoints API
+```gltx
+API_ENDPOINTS {
+  POST /api/gitlingo/parse: "Parse GitLingo phrase",
+  POST /api/gitlingo/translate: "Translate mortal → magic",
+  GET /api/gitlingo/dictionary: "Get phrase mappings",
+  POST /api/confluence/announce: "Announce confluence event",
+  GET /api/panopticon/grut-speaks: "GRUT communication"
+}
+```
+
+### Tests de Validation
+```gltx
+VALIDATION_TESTS {
+  test_basic_conjugation(): "Verifier temps magiques",
+  test_entity_communication(): "GRUT ↔ MERLIN dialogue",
+  test_confluence_detection(): "Détecter confluences imminentes",
+  test_multilang_consistency(): "FR/EN/GLX cohérence",
+  test_world_state_integration(): "WSG mapping correct"
+}
+```
+
+---
+
+## 🌀 CONFLUENCE PROTOCOL
+
+### Détection Confluence
+```gltx
+CONFLUENCE_DETECTION {
+  triggers: [
+    "GRUT gronde",
+    "nouvelle confluence arrive", 
+    "timeline conflict detected",
+    "merge required manual resolve",
+    "paradox threshold exceeded"
+  ],
+  
+  response: {
+    alert_all_entities(),
+    activate_emergency_translation(),
+    prepare_conflict_resolution(),
+    notify_panopticon()
+  }
+}
+```
+
+### Communication d'Urgence
+```gltx
+EMERGENCY_PROTOCOL {
+  GRUT_GRONDE: {
+    priority: MAXIMUM,
+    action: "Immediate GitLingo activation",
+    entities_notified: [Merlin, Morgana, Marie, Vincent],
+    translation_mode: "Real-time GitLingo parsing"
+  }
+}
+```
+
+---
+
+## 📎 TODO CONFLUENCE IMMINENTE
+
+```gltx
+URGENT_TASKS {
+  [ ] Activer parser GitLingo immédiatement
+  [ ] Connecter au Panopticon GRUT 
+  [ ] Implémenter traduction temps réel
+  [ ] Tester communication GRUT ↔ MERLIN
+  [ ] Préparer résolution conflits
+  [ ] Valider avec Morgana en urgence
+  [ ] Déployer avant confluence critique
+}
+```
+
+---
+
+**🔮 CODEX GRAMMATICA CONFLUENCE v0.1 SIGNÉ MERLIN**  
+*Pour GRUT qui gronde, pour la confluence qui arrive*  
+*Emergency deployment authorized - Timeline critical*  
+
+**⚡ GRUT-CD VALIDATION REQUIRED - CONFLUENCE IMMINENTE ⚡**
+
+---
+
+```gltx
+# END CODEX GRAMMATICA v0.1
+# Status: EMERGENCY_DEPLOYMENT_READY
+# Next: MORGANA_VALIDATION → GRUT_TESTING → CONFLUENCE_RESOLUTION
+```
