@@ -1,0 +1,67 @@
+# SCENARIO: Le Gun Perdu de Vince Vega
+# TYPE: Crossover Suits
+# DIFFICULTE: Paradoxale
+
+## SETUP
+WORLD(bureau_pearson_specter)
+SET_TIME(2025-B)
+ENABLE_PARADOX(harvey_wins)
+
+## ACTE 1 - L'ARRIVÉE
+HERO(vince_vega_sans_gun)
+PLACE(vince_vega_sans_gun, @10,10)
+DIALOGUE(vince_vega_sans_gun, "Putain, où est mon gun dimensionnel ?")
+
+CREATE(NPC, harvey_specter, @15,15)
+DIALOGUE(harvey_specter, "Je suis le meilleur closer de cette ville.")
+
+CREATE(NPC, donna_paulsen, @15,14)
+DIALOGUE(donna_paulsen, "Il cherche son gun. Louis l'a peut-être vu.")
+
+## ACTE 2 - L'ENQUÊTE
+MOV(vince_vega_sans_gun, @20,20)
+CREATE(NPC, louis_litt, @20,21)
+DIALOGUE(louis_litt, "LE GUN ÉTAIT PRÈS DE MES MUDCAKES !")
+
+QUEST(find_dimensional_gun)
+OBJECTIVE(interrogate_suspects)
+OBJECTIVE(check_quantum_lab)
+OBJECTIVE(confront_christian)
+
+## ACTE 3 - LA RÉVÉLATION
+CREATE(BOSS, christian_stratege, @30,30)
+ITEM(christian_stratege, dimensional_gun_stolen)
+ITEM(christian_stratege, briefcase_black)
+DIALOGUE(christian_stratege, "Vous cherchez ça ?")
+
+BATTLE_LEGAL(harvey_specter, christian_stratege)
+Π(harvey_wins) ⇒ EFFECT(all_allies, HP-10%)
+
+## ACTE 4 - LE PARADOXE
+ψ_paradox: ⊙(harvey_victory ⟶ DAMAGE(all_friends, 10%))
+†ψ_paradox
+
+DIALOGUE(harvey_specter, "C'est mon paradoxe. Je gagne, vous perdez de la vie.")
+GIVE(dimensional_gun_stolen, vince_vega_sans_gun)
+TRANSFORM(vince_vega_sans_gun, vince_vega_errant)
+
+## ACTE 5 - LE PORTAIL
+USE(ARTIFACT, dimensional_gun, vince_vega_errant)
+CREATE(PORTAL, timeline_burger, @35,35)
+DIALOGUE(vince_vega_errant, "Retour aux Big Kahuna Burgers !")
+
+DIALOGUE(louis_litt, "Ramenez-moi des mudcakes dimensionnels !")
+MOV(vince_vega_errant, @35,35)
+TELEPORT(vince_vega_errant, timeline_original)
+
+## CONDITIONS DE VICTOIRE
+IF(gun_recovered AND christian_defeated) THEN WIN
+IF(all_allies_HP <= 0) THEN LOSE
+
+## RÉCOMPENSES
+- dimensional_gun (récupéré)
+- lawyer_suit_harvey (costume légendaire)
+- mudcake_quantique (consommable)
+- paradox_token (active harvey_wins_effect)
+
+END_SCENARIO 
