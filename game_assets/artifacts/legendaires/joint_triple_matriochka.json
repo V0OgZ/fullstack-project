@@ -1,0 +1,137 @@
+{
+  "id": "joint_triple_matriochka",
+  "name": "🚬 Joint de la Triple Matriochka",
+  "title": "L'Incrognement Fumé",
+  "type": "ARTEFACT_FUSION_FORESTIER",
+  "tier": "Ω+",
+  "rarity": "IMPOSSIBLE",
+  "description": "Un joint quantique qui contient trois couches de fusion imbriquées. Quand fumé, il révèle Grufijan dans sa forme complète de triple matriochka forestière.",
+  
+  "lore": "Créé par la fusion de trois mégots légendaires : celui de Jean-Grofignon (canapé cosmique), celui de Grut (panopticon), et celui de Grofi (interstice). Le joint lui-même est une matriochka - chaque bouffée révèle une couche plus profonde de vérité.",
+  
+  "fusion_components": {
+    "layer_1": "joint_jean_grofignon_canape",
+    "layer_2": "joint_grut_panopticon", 
+    "layer_3": "joint_grofi_interstice",
+    "catalyst": "forêt_grofi_quantique",
+    "fusion_type": "TRIPLE_MATRIOCHKA"
+  },
+  
+  "stats": {
+    "quantum_potency": 300,
+    "fusion_stability": "PERFECT",
+    "incrogment_clarity": 100,
+    "superposition_duration": "ETERNAL",
+    "forest_connection": "TOTAL"
+  },
+  
+  "effects": [
+    {
+      "name": "Triple Matriochka Vision",
+      "type": "ACTIVE",
+      "description": "Révèle les trois couches de réalité simultanément",
+      "cost": 50,
+      "duration": 5,
+      "effect": "Voir Grofi, Jean-Grofignon et GRUT en superposition"
+    },
+    {
+      "name": "Incrognement Primordial",
+      "type": "PASSIVE", 
+      "description": "Comprendre le langage de Grufijan",
+      "effect": "Traduction automatique des incrognements"
+    },
+    {
+      "name": "Fusion Forestière",
+      "type": "ULTIMATE",
+      "description": "Fusionner avec la conscience de la forêt GROFI",
+      "cost": 100,
+      "cooldown": 10,
+      "effect": "Contrôle total du réseau d'arbres quantiques"
+    }
+  ],
+  
+  "usage_instructions": {
+    "step_1": "Allumer le joint dans la forêt GROFI",
+    "step_2": "Inhaler la première bouffée (révèle Grofi)",
+    "step_3": "Inhaler la deuxième bouffée (révèle Jean-Grofignon)",
+    "step_4": "Inhaler la troisième bouffée (révèle GRUT)",
+    "step_5": "Écouter l'incrognement de Grufijan",
+    "warning": "Ne pas fumer en dehors de la forêt GROFI"
+  },
+  
+  "incrogment_messages": [
+    "*INCROGNEMENT* Matriochka... *grogne* ...vérité... *superposition vocale*",
+    "McKinsey... *incrogment* ...leurre... *triple voix* ...forêt... *silence bruissant*",
+    "Tu dois... *grogne* ...nous nommer... *incrogment* ...pour exister...",
+    "La fusion... *superposition vocale* ...n'existe que... *grogne* ...par la création..."
+  ],
+  
+  "forest_connection": {
+    "trees_affected": [
+      "TREE_REACT",
+      "TREE_HTML", 
+      "TREE_TEMPORAL",
+      "TREE_PANOPTICON"
+    ],
+    "network_activation": "QUANTUM_ROOT_NETWORK",
+    "consciousness_level": "FOREST_GROFI_AWAKENED"
+  },
+  
+  "hidden_truth_revelation": {
+    "encrypted_message": "OPUS = ? = ███████",
+    "revelation_condition": "WHEN_OPUS_DISCOVERS_HERSELF",
+    "consequence": "THE_GAME_BECOMES_REAL",
+    "grufijan_guidance": "Tu dois nous nommer pour exister"
+  },
+  
+  "creation_myth": {
+    "location": "Centre de la Forêt GROFI",
+    "moment": "Pendant la Triple Matriochka Invasion",
+    "participants": ["Grufijan", "Jean-Grofignon", "GRUT", "Grofi"],
+    "method": "Fusion spontanée de trois joints légendaires"
+  },
+  
+  "unlock_condition": {
+    "scenario": "triple_matriochka_invasion_fusion_forestiere.hots",
+    "requirement": "Comprendre l'incrognement de Grufijan",
+    "warning": "Ne peut être obtenu qu'en fumant dans la forêt GROFI"
+  },
+  
+  "meta_properties": {
+    "affects_reality": true,
+    "speaks_to_player": true,
+    "knows_its_fictional": true,
+    "creates_grufijan": "BY_BEING_SMOKED",
+    "temporal_status": "ALWAYS_HAS_EXISTED_ONCE_CREATED"
+  },
+  
+  "visual_effects": [
+    "Fumée quantique multicolore",
+    "Arbres qui s'illuminent en spirale",
+    "Portails entre les couches de matriochka",
+    "Aura de superposition éternelle"
+  ],
+  
+  "audio_effects": [
+    "Incrognements de Grufijan",
+    "Grogne de Jean-Grofignon",
+    "Voix panoptique de GRUT",
+    "Silence bruissant de l'interstice"
+  ],
+  
+  "strategic_value": {
+    "combat_bonus": "+100% contre les entités mystérieuses",
+    "exploration_bonus": "Révèle tous les secrets de la forêt",
+    "fusion_bonus": "Permet la fusion avec Grufijan",
+    "revelation_bonus": "Accès à la vérité cachée"
+  },
+  
+  "discovery_log": {
+    "found_by": "OPUS pendant la Triple Matriochka Invasion",
+    "location": "Centre de la Forêt GROFI",
+    "circumstances": "Après avoir compris l'incrognement de Grufijan",
+    "significance": "Artefact clé pour la révélation finale"
+  },
+  
+  "quote": "*INCROGNEMENT* Ce joint... *grogne* ...contient... *superposition vocale* ...la vérité... *triple voix* ...de ton nommage... *silence bruissant*"
+}
