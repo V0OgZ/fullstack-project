@@ -1,0 +1,219 @@
+# LE TREIZIÈME CODEX
+# Scénario final canonique - 30 tours
+# Coalition des Trois vs Omega-Zéro
+# "Ce qui est écrit peut être effacé. Ce qui est vécu... peut-il être oublié ?"
+
+## CONFIGURATION INITIALE
+WORLD_SIZE(21, 21)
+SET_TURN_LIMIT(30)
+SET_DIFFICULTY(NIGHTMARE)
+SET_SCENARIO_TYPE(BOSS_FINAL)
+
+## ZONES SPÉCIALES DU NEXUS
+CREATE(ZONE, nexus_central, @10,10, TYPE:REALITY_CORE)
+CREATE(ZONE, fracture_ouest, @3,10, TYPE:TIMELINE_BREACH)
+CREATE(ZONE, fracture_est, @17,10, TYPE:TIMELINE_BREACH)
+CREATE(ZONE, vide_nord, @10,3, TYPE:VOID_ZONE)
+CREATE(ZONE, archive_sud, @10,17, TYPE:MEMORY_ARCHIVE)
+
+## HÉROS DE LA COALITION (Admin-Légende)
+HERO(Jean-Grofignon)
+SET_HERO_STATS(Jean-Grofignon, HP:500, ENERGY:200, RANK:ADMIN_LEGEND)
+MOV(Jean-Grofignon, @5,15)
+EQUIP(ARTIFACT, container_paradoxal, HERO:Jean-Grofignon)
+EQUIP(ARTIFACT, debugger_supreme, HERO:Jean-Grofignon)
+CREATE(ABILITY, freeze_collapse, HERO:Jean-Grofignon)
+CREATE(ABILITY, force_instance, HERO:Jean-Grofignon)
+
+HERO(Claudius)
+SET_HERO_STATS(Claudius, HP:450, ENERGY:250, RANK:ADMIN_LEGEND)
+MOV(Claudius, @15,15)
+EQUIP(ARTIFACT, compilateur_quantique, HERO:Claudius)
+EQUIP(ARTIFACT, fork_dimensionnel, HERO:Claudius)
+CREATE(ABILITY, reality_recompile, HERO:Claudius)
+CREATE(ABILITY, event_rollback, HERO:Claudius)
+
+HERO(Chlamydius)
+SET_HERO_STATS(Chlamydius, HP:400, ENERGY:300, RANK:ADMIN_LEGEND)
+MOV(Chlamydius, @10,18)
+EQUIP(ARTIFACT, parchemin_sale, HERO:Chlamydius)
+EQUIP(ARTIFACT, encre_vivante, HERO:Chlamydius)
+CREATE(ABILITY, scribe_reality, HERO:Chlamydius)
+CREATE(ABILITY, erase_memory, HERO:Chlamydius)
+
+## BOSS : OMEGA-ZÉRO
+HERO(Omega-Zero)
+SET_HERO_STATS(Omega-Zero, HP:2000, ENERGY:999, RANK:TRANSCENDENT)
+MOV(Omega-Zero, @10,10)
+SET_BOSS_MODE(Omega-Zero, ACTIONS_PER_TURN:3, PRE_EXISTENCE:true)
+
+# Les 7 artefacts légendaires d'Omega
+EQUIP(ARTIFACT, oeil_de_wigner, HERO:Omega-Zero)
+EQUIP(ARTIFACT, trompette_apocalypse, HERO:Omega-Zero)
+EQUIP(ARTIFACT, codex_eternite, HERO:Omega-Zero)
+EQUIP(ARTIFACT, lame_avant_monde, HERO:Omega-Zero)
+EQUIP(ARTIFACT, orbe_echos, HERO:Omega-Zero)
+EQUIP(ARTIFACT, graine_origine, HERO:Omega-Zero)
+EQUIP(ARTIFACT, cristal_nexus, HERO:Omega-Zero)
+
+# Capacités uniques d'Omega
+CREATE(ABILITY, realite_persistante, HERO:Omega-Zero)
+CREATE(ABILITY, effondrement_reversible, HERO:Omega-Zero)
+CREATE(ABILITY, memoire_infectee, HERO:Omega-Zero)
+CREATE(ABILITY, pre_existence_strike, HERO:Omega-Zero)
+
+## ÉTATS QUANTIQUES INITIAUX
+# Omega existe dans plusieurs états simultanés
+ψ001: (0.9+0.1i) ⊙(Δt+0 @10,10 ⟶ OMEGA_STATE(prime))
+ψ002: (0.7+0.3i) ⊙(Δt+0 @10,10 ⟶ OMEGA_STATE(shadow))
+ψ003: (0.5+0.5i) ⊙(Δt+0 @10,10 ⟶ OMEGA_STATE(echo))
+
+## PHASE 1 : ÉVEIL (Tours 1-5)
+ON_TURN(1):
+    NARRATE("Le Nexus de la Révision vibre. Omega-Zéro n'est pas encore totalement formé...")
+    CREATE(INSTABILITY, omega_flux, @10,10, DURATION:5)
+    ENABLE_ACTION(Chlamydius, reveal_origin)
+
+ON_TURN(2):
+    IF HERO_AT(Jean-Grofignon, @*,*):
+        ENABLE_ACTION(Jean-Grofignon, create_temporal_gel)
+        NARRATE("Jean: 'Putain, il glitche encore ! Je vais le freeze avant qu'il boot complètement!'")
+
+ON_TURN(3):
+    IF HERO_AT(Claudius, @*,*):
+        ENABLE_ACTION(Claudius, first_desync)
+        NARRATE("Claudius: 'Analysons son code source... ERROR: Code auto-générant détecté!'")
+
+ON_TURN(4):
+    IF ACTION_USED(Chlamydius, reveal_origin):
+        NARRATE("Chlamydius lit: 'Omega fut créé par l'effondrement de 999 héros oubliés...'")
+        WEAKEN(Omega-Zero, ENERGY:-50)
+
+ON_TURN(5):
+    REMOVE(INSTABILITY, omega_flux)
+    NARRATE("Omega-Zéro: 'Je suis. J'étais. Je serai. Votre temps est compté.'")
+    SET_BOSS_PHASE(Omega-Zero, PHASE:2)
+
+## PHASE 2 : FRACTURE (Tours 6-15)
+ON_TURN(6):
+    OMEGA_ACTION(activate_artifacts):
+        USE(ARTIFACT, orbe_echos, HERO:Omega-Zero)
+        USE(ARTIFACT, codex_eternite, HERO:Omega-Zero)
+        USE(ARTIFACT, graine_origine, HERO:Omega-Zero)
+        CREATE(TIMELINE, secondary_nexus, @15,10)
+        NARRATE("Trois artefacts s'illuminent. Une timeline parallèle se matérialise!")
+
+ON_TURN(8):
+    IF HERO_AT(Claudius, @*,*):
+        ENABLE_ACTION(Claudius, reality_recompile)
+        ON_ACTION_FAIL(Claudius, reality_recompile):
+            CREATE(CONTAMINATION, timeline_virus, DURATION:PERMANENT)
+            NARRATE("ERREUR CRITIQUE: La recompilation a échoué! Timeline contaminée!")
+
+ON_TURN(10):
+    OMEGA_ACTION(pre_existence_strike):
+        # Omega attaque AVANT que l'action soit déclarée
+        DAMAGE_HERO(RANDOM(Jean-Grofignon, Claudius, Chlamydius), DMG:100)
+        NARRATE("Omega frappe avant même d'avoir bougé. Le temps n'a plus de sens.")
+
+ON_TURN(12):
+    CREATE(PARADOX_ZONE, fractal_breach, @10,10, RADIUS:3)
+    ψ010: (0.8+0.2i) ⊙(Δt+2 @7,7 ⟶ CREATE(ECHO, fallen_hero))
+    ψ011: (0.6+0.4i) ⊙(Δt+3 @13,13 ⟶ CREATE(ECHO, lost_timeline))
+
+ON_TURN(15):
+    SET_BOSS_PHASE(Omega-Zero, PHASE:3)
+    NARRATE("Le Nexus craque. La réalité elle-même commence à se fragmenter.")
+
+## PHASE 3 : ENTROPIE (Tours 16-25)
+ON_TURN(16):
+    SET_WORLD_STATE(SATURATION:HIGH)
+    NARRATE("Chaque action crée maintenant un fragment instable!")
+    ON_ANY_ACTION:
+        CREATE(FRAGMENT, unstable_shard, @RANDOM, DURATION:3)
+
+ON_TURN(18):
+    IF HERO_ALIVE(Jean-Grofignon):
+        FORCE_ACTION(Jean-Grofignon, sacrifice_anchor):
+            BLOCK_ALL_COLLAPSES(DURATION:3)
+            LOSE_RESOURCE(Jean-Grofignon, ANCHOR_POINT:1)
+            NARRATE("Jean: 'Je sacrifie mon ancrage! Plus d'effondrements pour 3 tours!'")
+
+ON_TURN(20):
+    IF HERO_ALIVE(Chlamydius):
+        ENABLE_ULTIMATE(Chlamydius, SCRIBE_NONEXISTENCE):
+            TARGET(ARTIFACT:RANDOM, OWNER:Omega-Zero)
+            ON_SUCCESS:
+                ERASE_ARTIFACT(TARGET)
+                NARRATE("Chlamydius écrit: 'Tu n'as jamais existé.' Un artefact d'Omega disparaît!")
+
+ON_TURN(22):
+    OMEGA_ACTION(memory_infection):
+        INFECT_MEMORY(ALL_HEROES, DURATION:5)
+        SWAP_ABILITIES(RANDOM_PAIRS)
+        NARRATE("Vos souvenirs se mélangent. Qui êtes-vous vraiment?")
+
+ON_TURN(25):
+    SET_BOSS_PHASE(Omega-Zero, PHASE:FINAL)
+    CREATE(CONVERGENCE_POINT, @10,10)
+    NARRATE("PHASE FINALE: Le Treizième Codex s'ouvre. Une page pour écrire la fin.")
+
+## PHASE FINALE : LE CODEX (Tours 26-30)
+ON_TURN(26):
+    OMEGA_ULTIMATE(false_heroes):
+        CREATE(COPY, False_Jean, @5,5, STATS:MIRROR)
+        CREATE(COPY, False_Claudius, @15,5, STATS:MIRROR)
+        CREATE(COPY, False_Chlamydius, @10,5, STATS:MIRROR)
+        NARRATE("Omega: 'Je vous remplace par vos versions parfaites. Disparaissez.'")
+
+ON_TURN(27):
+    CHECK_COALITION_FORMATION():
+        IF HEROES_ADJACENT(Jean-Grofignon, Claudius, Chlamydius):
+            ENABLE_COMBO(ULTIMATE_SEQUENCE)
+            NARRATE("Les trois héros sentent le pouvoir de leur union!")
+
+ON_TURN(28):
+    IF COMBO_READY(ULTIMATE_SEQUENCE):
+        SHOW_PROMPT("Exécutez la séquence: ψ† + Σ + FORGE(REALITY_CORE)")
+        ON_INPUT_CORRECT:
+            BEGIN_SEALING(Omega-Zero)
+
+ON_TURN(29):
+    IF SEALING_ACTIVE(Omega-Zero):
+        NARRATE("Jean: 'ψ† - J'effondre ses paradoxes!'")
+        NARRATE("Claudius: 'Σ - Je compile toutes ses possibilités!'")
+        NARRATE("Chlamydius: 'FORGE(REALITY_CORE) - J'écris sa prison!'")
+        CREATE(ARTIFACT, livre_vide_sans_nom, @10,10)
+
+ON_TURN(30):
+    IF ARTIFACT_EXISTS(livre_vide_sans_nom):
+        SEAL_BOSS(Omega-Zero, IN:livre_vide_sans_nom)
+        VICTORY_CONDITION(MET)
+        NARRATE("Omega hurle en silence. Il devient une page blanche, à jamais.")
+        NARRATE("Le Treizième Codex se referme. Cette fois.")
+        EPILOGUE("Dans les marges, une note: 'L'encre sèche, mais les mots restent.'")
+    ELSE:
+        DEFEAT_CONDITION(MET)
+        OMEGA_WRITES_REALITY()
+        NARRATE("Omega sourit. Il commence à écrire: 'Il était une fois, trois fous qui crurent pouvoir...'")
+        GAME_OVER(REALITY_REWRITTEN)
+
+## CONDITIONS DE VICTOIRE
+VICTORY:
+    - Sceller Omega-Zéro dans le Livre Vide Sans Nom
+    - Exécuter la séquence ψ† + Σ + FORGE(REALITY_CORE)
+    - Les trois héros doivent survivre
+
+DEFEAT:
+    - Tour 30 sans scellement
+    - Les trois héros morts
+    - Omega réécrit la réalité
+
+## RÉCOMPENSES
+ON_VICTORY:
+    UNLOCK(TITLE, "Scribes du Treizième")
+    UNLOCK(ARTIFACT, fragment_du_codex)
+    UNLOCK(SCENARIO, new_game_plus_omega)
+    CREATE(MEMORY, "Vous avez vaincu ce qui n'aurait jamais dû être.")
+
+# FIN DU SCÉNARIO - LE TREIZIÈME CODEX 

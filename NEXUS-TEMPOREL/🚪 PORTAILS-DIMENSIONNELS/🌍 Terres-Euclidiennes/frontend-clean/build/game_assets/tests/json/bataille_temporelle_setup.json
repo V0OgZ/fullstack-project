@@ -1,0 +1,161 @@
+{
+  "scenarioId": "bataille_temporelle_setup",
+  "title": "Bataille Temporelle - Configuration Initiale",
+  "description": "Script de configuration initiale du scénario avec héros, artefacts et zones temporelles",
+  "version": "1.0.0",
+  "difficulty": "INTERMEDIATE",
+  "estimatedDuration": "3-5 minutes",
+  "gameConfig": {
+    "mapSize": { "width": 20, "height": 20 },
+    "turnLimit": 15,
+    "playersCount": 2
+  },
+  "phases": [
+    {
+      "phaseId": 1,
+      "title": "Création des héros",
+      "actions": [
+        { "type": "HERO_CREATE", "name": "Arthur", "position": null },
+        { "type": "HERO_CREATE", "name": "Morgana", "position": null }
+      ]
+    },
+    {
+      "phaseId": 2,
+      "title": "Positionnement initial",
+      "actions": [
+        { "type": "HERO_MOVE", "hero": "Arthur", "position": { "x": 5, "y": 5 } },
+        { "type": "HERO_MOVE", "hero": "Morgana", "position": { "x": 15, "y": 15 } }
+      ]
+    },
+    {
+      "phaseId": 3,
+      "title": "Équipement initial",
+      "actions": [
+        { "type": "EQUIP", "hero": "Arthur", "item": "temporal_sword" },
+        { "type": "EQUIP", "hero": "Arthur", "item": "mystic_orb" },
+        { "type": "EQUIP", "hero": "Morgana", "item": "chrono_staff" },
+        { "type": "EQUIP", "hero": "Morgana", "item": "reality_gem" }
+      ]
+    },
+    {
+      "phaseId": 4,
+      "title": "Création des créatures",
+      "actions": [
+        {
+          "type": "CREATE_CREATURE",
+          "creatureType": "DragonRouge",
+          "position": { "x": 10, "y": 10 },
+          "stats": { "health": 150, "attack": 25, "defense": 15 }
+        },
+        {
+          "type": "CREATE_CREATURE",
+          "creatureType": "PhantomWarriors",
+          "position": { "x": 8, "y": 12 },
+          "stats": { "health": 80, "attack": 20, "defense": 10 }
+        }
+      ]
+    },
+    {
+      "phaseId": 5,
+      "title": "Placement des artefacts temporels",
+      "actions": [
+        {
+          "type": "CREATE_ARTIFACT",
+          "artifactType": "LameAvantMonde",
+          "position": { "x": 10, "y": 10 },
+          "properties": { "temporal": true, "power": 50 }
+        },
+        {
+          "type": "CREATE_ARTIFACT",
+          "artifactType": "HorlogeInversee",
+          "position": { "x": 3, "y": 17 },
+          "properties": { "temporal": true, "power": 40 }
+        },
+        {
+          "type": "CREATE_ARTIFACT",
+          "artifactType": "OrbeProbabilite",
+          "position": { "x": 12, "y": 6 },
+          "properties": { "temporal": true, "power": 35 }
+        }
+      ]
+    },
+    {
+      "phaseId": 6,
+      "title": "Configuration des zones temporelles",
+      "actions": [
+        {
+          "type": "CREATE_ZONE",
+          "zoneType": "TemporalZone",
+          "centerPosition": { "x": 9, "y": 9 },
+          "size": { "width": 3, "height": 3 },
+          "properties": { "temporal_flux": 1.5 }
+        },
+        {
+          "type": "CREATE_ZONE",
+          "zoneType": "QuantumField",
+          "centerPosition": { "x": 1, "y": 1 },
+          "size": { "width": 2, "height": 2 },
+          "properties": { "quantum_energy": 2.0 }
+        }
+      ]
+    },
+    {
+      "phaseId": 7,
+      "title": "États ψ initiaux pour démonstration",
+      "actions": [
+        {
+          "type": "CREATE_PSI_STATE",
+          "psiId": "ψ001",
+          "deltaT": 1,
+          "targetPosition": { "x": 6, "y": 5 },
+          "action": { "type": "MOVE", "hero": "Arthur", "position": { "x": 6, "y": 5 } },
+          "probability": 1.0
+        },
+        {
+          "type": "CREATE_PSI_STATE",
+          "psiId": "ψ002",
+          "deltaT": 2,
+          "targetPosition": { "x": 14, "y": 15 },
+          "action": { "type": "MOVE", "hero": "Morgana", "position": { "x": 14, "y": 15 } },
+          "probability": 1.0
+        }
+      ]
+    },
+    {
+      "phaseId": 8,
+      "title": "Triggers d'observation",
+      "actions": [
+        {
+          "type": "SETUP_TRIGGER",
+          "condition": "OBSERVE",
+          "observer": "DragonRouge",
+          "targetPsi": "ψ001",
+          "action": "COLLAPSE"
+        }
+      ]
+    },
+    {
+      "phaseId": 9,
+      "title": "Validation du setup",
+      "actions": [
+        { "type": "LOG", "message": "Bataille Temporelle - Setup terminé" },
+        { "type": "LOG", "message": "Héros créés: Arthur, Morgana" },
+        { "type": "LOG", "message": "Créatures placées: Dragon Rouge, Guerriers Fantômes" },
+        { "type": "LOG", "message": "Artefacts temporels: 3 objets placés" },
+        { "type": "LOG", "message": "États ψ actifs: 2 superpositions" }
+      ]
+    }
+  ],
+  "expectedOutcome": {
+    "heroesCount": 2,
+    "creaturesCount": 2,
+    "artifactsCount": 3,
+    "psiStatesCount": 2,
+    "zonesCount": 2
+  },
+  "metadata": {
+    "originalHots": "battle_temporelle_setup.hots",
+    "conversionDate": "2025-01-19",
+    "benchmarkType": "SCRIPT_VERSION"
+  }
+} 

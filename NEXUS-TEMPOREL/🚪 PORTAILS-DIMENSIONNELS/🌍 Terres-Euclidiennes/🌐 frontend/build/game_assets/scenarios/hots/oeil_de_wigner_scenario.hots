@@ -1,0 +1,141 @@
+# ===============================================================================
+# 👁️ L'ŒIL DE WIGNER - SCÉNARIO ÉPIQUE
+# ===============================================================================
+# Script Heroes of Time - Basé sur l'introduction du README
+# L'artefact qui force l'effondrement de toutes les réalités quantiques
+# ===============================================================================
+
+# 🎬 PROLOGUE : LA TOUR EN RUINES
+GAME: "L'Œil de Wigner"
+MAP_SIZE: 30x30
+
+# 🦸 HÉROS PRINCIPAUX
+HERO: Arthur         # Le Roi Temporel
+HERO: Lysandrel      # L'Archimage temporel
+HERO: Ragnar         # Chef de l'armée ennemie
+HERO: Morgana        # Conseillère mystique
+
+# 📍 POSITIONNEMENT INITIAL
+# Arthur s'approche de la tour
+MOV(Arthur, @15,20)
+# Lysandrel crie depuis la vallée
+MOV(Lysandrel, @10,5)  
+# L'armée ennemie approche
+MOV(Ragnar, @25,25)
+# Morgana observe depuis les collines
+MOV(Morgana, @5,15)
+
+# 🏗️ CONSTRUCTION DE LA SCÈNE
+# La tour en ruines au sommet
+CREATE(BUILDING, TourEnRuines, @15,25)
+# L'Œil de Wigner scintille au sommet
+CREATE(ARTIFACT, OeilDeWigner, @15,25)
+# Vallée d'où crie Lysandrel
+CREATE(TERRAIN, Vallée, @10,5)
+
+# ⚔️ PHASE 1: L'ARMÉE ENNEMIE APPROCHE
+# Créer des unités ennemies qui avancent
+CREATE(CREATURE, Chevalier, @25,25)
+CREATE(CREATURE, Archer, @26,24)
+CREATE(CREATURE, Catapulte, @24,26)
+
+# 🌀 PHASE 2: ÉTATS TEMPORELS PARALLÈLES
+# Arthur hésite - plusieurs futurs possibles
+ψ001: ⊙(Δt+1 @15,24 ⟶ MOV(Arthur, @15,24))  # S'approcher de la tour
+ψ002: ⊙(Δt+1 @14,19 ⟶ MOV(Arthur, @14,19))  # Reculer prudemment
+ψ003: ⊙(Δt+2 @15,25 ⟶ USE(ARTIFACT, OeilDeWigner, HERO:Arthur))  # Saisir l'Œil
+
+# Le dragon qu'il prévoyait d'invoquer dans 3 tours
+ψ101: ⊙(Δt+3 @20,15 ⟶ CREATE(CREATURE, DragonRouge, @20,15))
+# La bataille qui devait avoir lieu demain
+ψ102: ⊙(Δt+5 @18,20 ⟶ BATTLE(Arthur+DragonRouge, Ragnar+Chevalier))
+
+# 🗣️ PHASE 3: AVERTISSEMENT DE LYSANDREL
+# Lysandrel lance un sort de communication à distance
+USE(SPELL, MessageTelepathique, HERO:Lysandrel, TARGET:Arthur)
+# "Sire, ne le touchez pas !"
+
+# 💀 PHASE 4: L'ARMÉE SE RAPPROCHE DANGEREUSEMENT
+MOV(Ragnar, @22,22)
+MOV(Chevalier, @23,23)
+MOV(Archer, @24,22)
+# Arthur réalise qu'il sera submergé dans quelques tours
+
+# 👁️ PHASE 5: ACTIVATION DE L'ŒIL DE WIGNER
+# Arthur n'a pas le choix - il saisit l'artefact légendaire
+USE(ARTIFACT, OeilDeWigner, HERO:Arthur)
+
+# 🌊 EFFONDREMENT QUANTIQUE MASSIF
+# L'Œil force l'observation - toutes les possibilités s'effondrent !
+FORCER_OBSERVATION(ALL_PSI_STATES)
+
+# Effondrement contrôlé des états temporels
+†ψ001  # Arthur s'approche effectivement
+†ψ002  # Les autres choix s'effacent
+†ψ101  # Le dragon apparaît MAINTENANT au lieu de dans 3 tours
+†ψ102  # La bataille éclate IMMÉDIATEMENT
+
+# 🔥 PHASE 6: CONSÉQUENCES IMMÉDIATES
+# Le dragon invoqué apparaît instantanément
+CREATE(CREATURE, DragonRouge, @20,15)
+# La bataille future se matérialise maintenant
+BATTLE(Arthur, Ragnar)
+BATTLE(DragonRouge, Chevalier)
+
+# 🌀 PHASE 7: LA RÉALITÉ TREMBLE
+# Effets secondaires de l'effondrement forcé
+CREATE(EFFECT, DistorsionTemporelle, @15,25)
+CREATE(EFFECT, OndesQuantiques, ZONE:@10,10-@25,25)
+
+# Le temps se plie - certaines actions passées sont modifiées
+MODIFIER_PASSE(MOV(Lysandrel, @12,7))  # Lysandrel était plus proche
+MODIFIER_PASSE(CREATE(ITEM, Excalibur, Arthur))  # Arthur avait déjà son épée
+
+# 📈 PHASE 8: AMPLIFICATION DES CONSÉQUENCES
+# L'effondrement crée des effets en cascade
+ψ201: ⊙(Δt+0 @18,18 ⟶ TELEPORT(Morgana, @18,18))  # Instantané !
+ψ202: ⊙(Δt+0 @16,24 ⟶ CREATE(SPELL, BouclierTemporel, @16,24))
+
+# Effondrement immédiat des nouveaux états
+†ψ201
+†ψ202
+
+# ⚡ PHASE 9: BATAILLE ÉPIQUE RÉSULTANTE
+# Combat principal amplifié par la distorsion temporelle
+BATTLE(Arthur+Excalibur+BouclierTemporel, Ragnar+Chevalier+Archer)
+BATTLE(DragonRouge, Catapulte)
+# Lysandrel et Morgana joignent la bataille
+BATTLE(Lysandrel+Morgana, RésidusQuantiques)
+
+# 🌟 PHASE 10: RÉSOLUTION ET CONSÉQUENCES
+# L'Œil de Wigner continue d'émettre des ondes
+CREATE(EFFECT, ResonanceQuantique, @15,25)
+
+# Vérifier l'état final du monde
+ANALYSER_COHERENCE_TEMPORELLE()
+MESURER_DISTORSIONS(ZONE:@0,0-@30,30)
+
+# 📊 ÉVALUATION DES EFFETS
+# Calculer l'impact de l'effondrement forcé
+EVALUER_PARADOXES_TEMPORELS()
+COMPTABILISER_REALITES_EFFONDREES()
+
+# 🏆 PHASE 11: ÉPILOGUE
+# Arthur réalise l'ampleur de ce qu'il a déclenché
+# L'histoire elle-même a été réécrite
+AFFICHER_MESSAGE("La réalité tremble. Le temps se plie. L'histoire se réécrit.")
+AFFICHER_MESSAGE("Arthur tient l'Œil de Wigner - maître et prisonnier du temps.")
+
+# État final du jeu modifié par l'effondrement quantique
+SAVE_GAME_STATE(filename:"apres_oeil_de_wigner.json")
+
+# ===============================================================================
+# 🎯 ARTEFACT SPÉCIAL : L'ŒIL DE WIGNER
+# ===============================================================================
+# Propriétés uniques :
+# - Force l'effondrement de TOUS les états ψ simultanément
+# - Matérialise instantanément les futurs planifiés
+# - Réécrit l'histoire récente (3 derniers tours)
+# - Crée des distorsions temporelles permanentes
+# - Ne peut être utilisé qu'une seule fois par partie
+# =============================================================================== 
