@@ -10,6 +10,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+//« An old friend once told me something that gave me great comfort: these violent delights have violent ends. »
+
 
 @SpringBootApplication
 @EnableScheduling
