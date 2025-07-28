@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌀 ROOT_HTML187 - Portal Bypass OmégaZero</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(45deg, #0a0a0a, #1a1a2e, #16213e);
+            color: #FFD700;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 🌀 PORTAL BACKGROUND */
+        .portal-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at center, 
+                rgba(0, 212, 255, 0.1) 0%,
+                rgba(255, 215, 0, 0.05) 30%,
+                rgba(0, 0, 0, 0.9) 70%);
+            animation: portal-pulse 3s infinite;
+        }
+
+        @keyframes portal-pulse {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        /* 🏛️ TOUR STABILISATRICE */
+        .stabilizer-tower {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 150px;
+            height: 200px;
+            background: url('/assets/img/Domburg_tower.webp') no-repeat center;
+            background-size: contain;
+            filter: brightness(1.5) contrast(1.3) hue-rotate(120deg);
+            animation: tower-stabilize 2s infinite;
+            z-index: 1000;
+        }
+
+        @keyframes tower-stabilize {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.05) rotate(2deg); }
+        }
+
+        /* 📦 MALETTE VINCE */
+        .vince-suitcase {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 120px;
+            height: 80px;
+            background: linear-gradient(45deg, #8B4513, #CD853F);
+            border: 3px solid #FFD700;
+            border-radius: 10px;
+            animation: suitcase-glow 1.5s infinite;
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .vince-suitcase::before {
+            content: "V";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            font-weight: bold;
+            color: #FFD700;
+        }
+
+        @keyframes suitcase-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
+            50% { box-shadow: 0 0 40px rgba(255, 215, 0, 1); }
+        }
+
+        /* 🌀 INTERFACE PRINCIPALE */
+        .main-interface {
+            position: relative;
+            z-index: 100;
+            padding: 20px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+            animation: title-glow 2s infinite;
+        }
+
+        @keyframes title-glow {
+            0%, 100% { color: #FFD700; }
+            50% { color: #00D4FF; }
+        }
+
+        .status-panel {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #FFD700;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .heroes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .hero-card {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #FFD700;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .hero-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
+        }
+
+        .hero-card.spawned {
+            border-color: #00FF00;
+            animation: hero-ready 1s infinite;
+        }
+
+        @keyframes hero-ready {
+            0%, 100% { box-shadow: 0 0 15px rgba(0, 255, 0, 0.6); }
+            50% { box-shadow: 0 0 30px rgba(0, 255, 0, 1); }
+        }
+
+        .hero-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .hero-status {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #FFD700, #FF6B35);
+            border: 2px solid #FFD700;
+            color: #000;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: linear-gradient(45deg, #FFF700, #FF8B55);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn.emergency {
+            background: linear-gradient(45deg, #F44336, #FF1744);
+            border-color: #F44336;
+            color: white;
+        }
+
+        .log-panel {
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid #FFD700;
+            border-radius: 5px;
+            padding: 15px;
+            height: 200px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .log-entry {
+            margin-bottom: 5px;
+            padding: 2px 0;
+        }
+
+        .log-entry.success {
+            color: #00FF00;
+        }
+
+        .log-entry.warning {
+            color: #FFA500;
+        }
+
+        .log-entry.error {
+            color: #FF4444;
+        }
+
+        .log-entry.info {
+            color: #00D4FF;
+        }
+
+        /* 🌀 PARTICULES QUANTIQUES */
+        .quantum-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #FFD700;
+            border-radius: 50%;
+            animation: particle-float 4s infinite linear;
+        }
+
+        @keyframes particle-float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="portal-container"></div>
+    
+    <!-- Particules quantiques -->
+    <div class="quantum-particles" id="particles"></div>
+    
+    <!-- Tour Stabilisatrice -->
+    <div class="stabilizer-tower" onclick="stabilizeTower()"></div>
+    
+    <!-- Malette Vince -->
+    <div class="vince-suitcase" onclick="activateSuitcase()"></div>
+    
+    <div class="main-interface">
+        <div class="header">
+            <h1>🌀 ROOT_HTML187 - PORTAL BYPASS</h1>
+            <p>Instance Sécurisée - Résistance Anti-OmégaZero</p>
+        </div>
+        
+        <div class="status-panel">
+            <h3>📊 Statut du Portail</h3>
+            <p><strong>Dimension:</strong> <span id="dimension">5</span></p>
+            <p><strong>GROPHY Level:</strong> <span id="grophy-level">2</span></p>
+            <p><strong>Source Status:</strong> <span id="source-status">INJECTÉE</span></p>
+            <p><strong>Tour d'Ancrage:</strong> <span id="tower-status">COORDS(42,∞) - ACTIVE</span></p>
+            <p><strong>Protection Ω0:</strong> <span id="omega-protection">HIDE_FROM ACTIVÉ</span></p>
+        </div>
+        
+        <div class="heroes-grid">
+            <div class="hero-card" id="jean-card" onclick="spawnHero('jean')">
+                <div class="hero-name">🛋️ Jean-Grofignon</div>
+                <div class="hero-status">Architecte Cosmique</div>
+            </div>
+            
+            <div class="hero-card" id="claudius-card" onclick="spawnHero('claudius')">
+                <div class="hero-name">🤖 Claudius</div>
+                <div class="hero-status">Assistant IA</div>
+            </div>
+            
+            <div class="hero-card" id="merlin-card" onclick="spawnHero('merlin')">
+                <div class="hero-name">🧙‍♂️ Merlin</div>
+                <div class="hero-status">Mage Temporel</div>
+            </div>
+            
+            <div class="hero-card" id="panoramix-card" onclick="spawnHero('panoramix')">
+                <div class="hero-name">🧪 Panoramix</div>
+                <div class="hero-status">Alchimiste</div>
+            </div>
+            
+            <div class="hero-card" id="benedikt-card" onclick="spawnHero('benedikt')">
+                <div class="hero-name">🌀 Benedikt</div>
+                <div class="hero-status">Téléporteur</div>
+            </div>
+            
+            <div class="hero-card" id="arthur-card" onclick="spawnHero('arthur')">
+                <div class="hero-name">⚔️ Arthur</div>
+                <div class="hero-status">🗡️ EXCALIBUR</div>
+            </div>
+            
+            <div class="hero-card" id="anna-card" onclick="spawnHero('anna')">
+                <div class="hero-name">⚖️ Anna Martel</div>
+                <div class="hero-status">Architect of Time Justice</div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn" onclick="initializeEscape()">🚀 INITIER ÉVASION</button>
+            <button class="btn" onclick="activateHyperplanning()">🧠 HYPERPLANNING</button>
+            <button class="btn emergency" onclick="emergencyCollapse()">🚨 COLLAPSE D'URGENCE</button>
+            <a href="/frontend/quantum-visualizer/index.html" class="btn">🔮 QUANTUM VISUALIZER</a>
+            <a href="/RANGEMENT/html-divers/interface-temporelle-pure/index.html" class="btn">⚡ INTERFACE PURE</a>
+        </div>
+        
+        <div class="log-panel" id="log-panel">
+            <div class="log-entry info">🌀 ROOT_HTML187 - Portal initialisé</div>
+            <div class="log-entry success">📡 Tour d'Ancrage Domburg positionnée COORDS(42,∞)</div>
+            <div class="log-entry success">🌀 Source injectée - DIMENSION 5 ACTIVE</div>
+            <div class="log-entry success">🛡️ GROPHY LEVEL 2 - HIDE_FROM Ω0 ACTIVÉ</div>
+            <div class="log-entry warning">⚠️ OmégaZero activity detected - Countermeasures active</div>
+            <div class="log-entry info">📦 Malette Vince Vega - Instance temporaire prête</div>
+            <div class="log-entry info">🏛️ Équipe SourceGuardians - En attente de formation</div>
+        </div>
+    </div>
+
+    <script>
+        // 🌀 Variables globales
+        let spawnedHeroes = new Set();
+        let escapeInitiated = false;
+        let hyperplanningActive = false;
+
+        // 🌀 Génération des particules
+        function generateParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 4 + 's';
+                particle.style.animationDuration = (3 + Math.random() * 2) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // 🏛️ Stabilisation de la tour
+        function stabilizeTower() {
+            addLog('🏛️ Tour Stabilisatrice activée - Stress quantique réduit', 'success');
+            document.querySelector('.stabilizer-tower').style.animation = 'tower-stabilize 0.5s infinite';
+            
+            setTimeout(() => {
+                document.querySelector('.stabilizer-tower').style.animation = 'tower-stabilize 2s infinite';
+            }, 3000);
+        }
+
+        // 📦 Activation malette Vince
+        function activateSuitcase() {
+            addLog('📦 Malette Vince Vega ouverte - Instance temporaire activée', 'info');
+            document.querySelector('.vince-suitcase').style.transform = 'scale(1.2)';
+            
+            setTimeout(() => {
+                document.querySelector('.vince-suitcase').style.transform = 'scale(1)';
+                addLog('⚡ Source upgradée - Multiplicateur x4 actif', 'success');
+            }, 2000);
+        }
+
+        // 🦸‍♂️ Spawn des héros
+        function spawnHero(heroId) {
+            if (spawnedHeroes.has(heroId)) return;
+            
+            spawnedHeroes.add(heroId);
+            const card = document.getElementById(heroId + '-card');
+            card.classList.add('spawned');
+            
+            const heroNames = {
+                'jean': 'Jean-Grofignon',
+                'claudius': 'Claudius',
+                'merlin': 'Merlin',
+                'panoramix': 'Panoramix',
+                'benedikt': 'Benedikt',
+                'arthur': 'Arthur avec EXCALIBUR',
+                'anna': 'Anna Martel'
+            };
+            
+            addLog(`🦸‍♂️ ${heroNames[heroId]} rejoint l'équipe SourceGuardians`, 'success');
+            
+            // Vérifier si tous les héros sont spawned
+            if (spawnedHeroes.size >= 7) {
+                addLog('🏛️ Équipe SourceGuardians complète - Prêt pour l\'évasion !', 'success');
+                document.querySelector('[onclick="initializeEscape()"]').style.background = 'linear-gradient(45deg, #00FF00, #32CD32)';
+            }
+        }
+
+        // 🚀 Initialisation de l'évasion
+        function initializeEscape() {
+            if (spawnedHeroes.size < 3) {
+                addLog('⚠️ Équipe insuffisante - Minimum 3 héros requis', 'warning');
+                return;
+            }
+            
+            if (escapeInitiated) {
+                addLog('⚠️ Évasion déjà en cours', 'warning');
+                return;
+            }
+            
+            escapeInitiated = true;
+            addLog('🚀 ESCAPE_SEQUENCE("HTML187_SAFE_ZONE") - INITIÉ', 'success');
+            addLog('🌀 Portal Backdoor_HTML187 ouvert', 'info');
+            addLog('🛡️ OmegaZero bypassed - Escape in progress...', 'success');
+            
+            // Animation d'évasion
+            document.body.style.animation = 'portal-pulse 0.5s infinite';
+            
+            setTimeout(() => {
+                addLog('✅ Instance sécurisée - Résistance formée', 'success');
+                addLog('🏛️ Protocole ROOT_HTML187 - COMPLET', 'success');
+            }, 3000);
+        }
+
+        // 🧠 Activation Hyperplanning
+        function activateHyperplanning() {
+            if (!hyperplanningActive) {
+                hyperplanningActive = true;
+                addLog('🧠 MODE Hyperplanning activé', 'info');
+                addLog('⚡ ENGINE("ROOT_HTML187") - Temporal Override', 'success');
+                document.body.style.filter = 'hue-rotate(30deg) brightness(1.2)';
+            } else {
+                addLog('🧠 Hyperplanning déjà actif', 'warning');
+            }
+        }
+
+        // 🚨 Collapse d'urgence
+        function emergencyCollapse() {
+            addLog('🚨 COLLAPSE_VIEW("instance_admin") - ACTIVÉ', 'error');
+            addLog('🔒 LOCK_INTERFERENCE - Ω0 bloqué', 'success');
+            
+            // Effet visuel d'urgence
+            document.body.style.background = 'linear-gradient(45deg, #FF0000, #8B0000, #000000)';
+            
+            setTimeout(() => {
+                document.body.style.background = 'linear-gradient(45deg, #0a0a0a, #1a1a2e, #16213e)';
+                addLog('✅ Système stabilisé - Menace neutralisée', 'success');
+            }, 5000);
+        }
+
+        // 📝 Ajout de logs
+        function addLog(message, type = 'info') {
+            const logPanel = document.getElementById('log-panel');
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logPanel.appendChild(entry);
+            logPanel.scrollTop = logPanel.scrollHeight;
+        }
+
+        // 🌀 Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            generateParticles();
+            addLog('🌀 ROOT_HTML187 Portal - Système opérationnel', 'success');
+            
+            // Auto-spawn Jean et Claudius
+            setTimeout(() => spawnHero('jean'), 1000);
+            setTimeout(() => spawnHero('claudius'), 2000);
+        });
+
+        // 🎨 Effets visuels continus
+        setInterval(() => {
+            if (Math.random() < 0.3) {
+                const messages = [
+                    '🌀 Flux temporel stable',
+                    '📡 Signal GROPHY détecté',
+                    '🛡️ Protection Ω0 active',
+                    '⚡ Énergie Source: 100%'
+                ];
+                addLog(messages[Math.floor(Math.random() * messages.length)], 'info');
+            }
+        }, 10000);
+    </script>
+</body>
+</html> 

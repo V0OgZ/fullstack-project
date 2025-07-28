@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👁️ GRUT - LA CARTE DES CARTES - PANOPTICON</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: radial-gradient(circle at center, #0a0a0a, #1a0033, #000);
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+            position: relative;
+            height: 100vh;
+        }
+
+        /* L'Oeil de GRUT */
+        .grut-eye {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 200px;
+            animation: grut-pulse 3s infinite;
+            z-index: 0;
+            opacity: 0.3;
+        }
+
+        @keyframes grut-pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.6; }
+        }
+
+        /* Titre GRUT */
+        .grut-title {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 1000;
+        }
+
+        .grut-title h1 {
+            font-size: 48px;
+            color: #ffd700;
+            text-shadow: 0 0 30px #ffd700, 0 0 60px #ff6b00;
+            margin-bottom: 10px;
+        }
+
+        .grut-revelation {
+            font-size: 24px;
+            color: #00ffff;
+            text-shadow: 0 0 20px #00ffff;
+            animation: revelation-glow 2s infinite alternate;
+        }
+
+        @keyframes revelation-glow {
+            from { text-shadow: 0 0 20px #00ffff; }
+            to { text-shadow: 0 0 30px #00ffff, 0 0 40px #0088ff; }
+        }
+
+        /* La Carte Centrale */
+        .carte-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 600px;
+            perspective: 1000px;
+            z-index: 100;
+        }
+
+        .carte-centrale {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: carte-float 6s infinite ease-in-out;
+        }
+
+        @keyframes carte-float {
+            0%, 100% { transform: rotateY(0deg) translateY(0); }
+            50% { transform: rotateY(5deg) translateY(-20px); }
+        }
+
+        /* Les Mondes/Portes */
+        .monde-porte {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border: 3px solid;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.8);
+            text-decoration: none;
+            color: white;
+        }
+
+        .monde-porte:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px currentColor;
+            z-index: 1000;
+        }
+
+        /* Positions des Mondes */
+        .monde-interstice {
+            top: 10%;
+            left: 35%;
+            border-color: #8a2be2;
+            box-shadow: 0 0 20px #8a2be2;
+        }
+
+        .monde-ezith {
+            top: 10%;
+            right: 10%;
+            border-color: #00ffff;
+            box-shadow: 0 0 20px #00ffff;
+        }
+
+        .monde-grofi {
+            bottom: 10%;
+            left: 10%;
+            border-color: #00ff00;
+            box-shadow: 0 0 20px #00ff00;
+        }
+
+        .monde-bureau {
+            bottom: 10%;
+            right: 10%;
+            border-color: #ff6b00;
+            box-shadow: 0 0 20px #ff6b00;
+        }
+
+        .monde-goldorak {
+            top: 40%;
+            left: 5%;
+            border-color: #ff0000;
+            box-shadow: 0 0 20px #ff0000;
+        }
+
+        .monde-hyperspace {
+            top: 40%;
+            right: 5%;
+            border-color: #ff00ff;
+            box-shadow: 0 0 20px #ff00ff;
+        }
+
+        /* Centre - La Tour d'Ancrage */
+        .tour-ancrage {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            border-color: #ffd700;
+            box-shadow: 0 0 40px #ffd700;
+            z-index: 500;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.3), rgba(0, 0, 0, 0.9));
+        }
+
+        .monde-icon {
+            font-size: 60px;
+            margin-bottom: 10px;
+        }
+
+        .monde-name {
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .monde-type {
+            font-size: 12px;
+            opacity: 0.8;
+            text-align: center;
+        }
+
+        /* Lignes de connexion */
+        .connexion-line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+            height: 2px;
+            transform-origin: left center;
+            animation: pulse-line 2s infinite;
+            z-index: 1;
+        }
+
+        @keyframes pulse-line {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Message GRUT */
+        .grut-message {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 18px;
+            color: #ffd700;
+            animation: grut-speak 3s infinite;
+        }
+
+        @keyframes grut-speak {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Portails flottants */
+        .portal-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #00ffff;
+            border-radius: 50%;
+            animation: float-particle 10s infinite linear;
+        }
+
+        @keyframes float-particle {
+            from { transform: translateY(100vh) rotate(0deg); }
+            to { transform: translateY(-100vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- L'Oeil de GRUT observe -->
+    <div class="grut-eye">👁️</div>
+
+    <!-- Titre -->
+    <div class="grut-title">
+        <h1>LA CARTE DES CARTES</h1>
+        <div class="grut-revelation">LA MAP EST LE MONDE ! CHAQUE PORTE EST UN UNIVERS !</div>
+    </div>
+
+    <!-- Container de la Carte -->
+    <div class="carte-container">
+        <div class="carte-centrale">
+            <!-- Monde Interstice -->
+            <a href="http://localhost:8000/interstice-etheree.html" class="monde-porte monde-interstice">
+                <div class="monde-icon">🌌</div>
+                <div class="monde-name">INTERSTICE</div>
+                <div class="monde-type">Monde Éthéré</div>
+            </a>
+
+            <!-- Planet Ezith -->
+            <a href="http://localhost:8000/planet-ezith.html" class="monde-porte monde-ezith">
+                <div class="monde-icon">🪐</div>
+                <div class="monde-name">PLANET EZITH</div>
+                <div class="monde-type">Monde Scientifique</div>
+            </a>
+
+            <!-- Forest GROFI -->
+            <a href="http://localhost:8000/forest-grofi.html" class="monde-porte monde-grofi">
+                <div class="monde-icon">🌲</div>
+                <div class="monde-name">FOREST GROFI</div>
+                <div class="monde-type">Infrastructure Quantique</div>
+            </a>
+
+            <!-- Le Bureau -->
+            <a href="http://localhost:8000/le-bureau.html" class="monde-porte monde-bureau">
+                <div class="monde-icon">🏢</div>
+                <div class="monde-name">LE BUREAU</div>
+                <div class="monde-type">Centre Conspirations</div>
+            </a>
+
+            <!-- Goldorak 3D -->
+            <a href="http://localhost:8000/goldorak-3d.html" class="monde-porte monde-goldorak">
+                <div class="monde-icon">🤖</div>
+                <div class="monde-name">GOLDORAK 3D</div>
+                <div class="monde-type">Monde Mecha</div>
+            </a>
+
+            <!-- Hyperspace DMT -->
+            <a href="http://localhost:8000/hyperspace-dmt.html" class="monde-porte monde-hyperspace">
+                <div class="monde-icon">🌀</div>
+                <div class="monde-name">HYPERSPACE DMT</div>
+                <div class="monde-type">Dimension Psychédélique</div>
+            </a>
+
+            <!-- Tour d'Ancrage au Centre -->
+            <a href="http://localhost:8000/vince-vega-map-demo-backend.html" class="monde-porte tour-ancrage">
+                <div class="monde-icon">🏰</div>
+                <div class="monde-name">TOUR D'ANCRAGE</div>
+                <div class="monde-type">Zone 8 - Reset Universel</div>
+            </a>
+        </div>
+
+        <!-- Lignes de connexion -->
+        <svg style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 0;">
+            <line class="connexion-line" x1="50%" y1="50%" x2="35%" y2="20%" stroke="#ffd700" stroke-width="2" opacity="0.5"/>
+            <line class="connexion-line" x1="50%" y1="50%" x2="75%" y2="20%" stroke="#ffd700" stroke-width="2" opacity="0.5"/>
+            <line class="connexion-line" x1="50%" y1="50%" x2="20%" y2="80%" stroke="#ffd700" stroke-width="2" opacity="0.5"/>
+            <line class="connexion-line" x1="50%" y1="50%" x2="80%" y2="80%" stroke="#ffd700" stroke-width="2" opacity="0.5"/>
+            <line class="connexion-line" x1="50%" y1="50%" x2="10%" y2="50%" stroke="#ffd700" stroke-width="2" opacity="0.5"/>
+            <line class="connexion-line" x1="50%" y1="50%" x2="90%" y2="50%" stroke="#ffd700" stroke-width="2" opacity="0.5"/>
+        </svg>
+    </div>
+
+    <!-- Message de GRUT -->
+    <div class="grut-message">
+        GRUT VOIT TOUT... GRUT COMPREND... CLIQUEZ SUR UNE PORTE POUR ENTRER DANS UN MONDE
+    </div>
+
+    <!-- Particules flottantes -->
+    <script>
+        // Créer des particules flottantes
+        for (let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'portal-particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 10 + 's';
+            particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+            document.body.appendChild(particle);
+        }
+
+        // GRUT parle quand on survole une porte
+        const portes = document.querySelectorAll('.monde-porte');
+        const grutMessage = document.querySelector('.grut-message');
+        
+        portes.forEach(porte => {
+            porte.addEventListener('mouseenter', function() {
+                const mondeName = this.querySelector('.monde-name').textContent;
+                grutMessage.textContent = `GRUT OBSERVE... ${mondeName} ATTEND VOTRE VISITE...`;
+            });
+        });
+
+        document.body.addEventListener('mouseleave', () => {
+            grutMessage.textContent = 'GRUT VOIT TOUT... GRUT COMPREND... CLIQUEZ SUR UNE PORTE POUR ENTRER DANS UN MONDE';
+        });
+
+        // Animation de l'oeil de GRUT
+        const grutEye = document.querySelector('.grut-eye');
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 20;
+            const y = (e.clientY / window.innerHeight - 0.5) * 20;
+            grutEye.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+        });
+    </script>
+</body>
+</html> 

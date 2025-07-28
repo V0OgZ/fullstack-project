@@ -1,0 +1,64 @@
+{
+  "scenarioId": "conquest-classic",
+  "name": "scenarios.conquest-classic.name",
+  "description": "scenarios.conquest-classic.description",
+  "difficulty": "normal",
+  "maxPlayers": 1,
+  "recommendedPlayers": 1,
+  "mapSize": "medium",
+  "mapWidth": 30,
+  "mapHeight": 30,
+  "turnLimit": 200,
+  "timeLimit": null,
+  "victoryCondition": "conquest",
+  "victoryRequirement": "victory.conquest-classic",
+  "defeatCondition": "defeat.conquest-classic",
+  "isActive": true,
+  "isCampaign": false,
+  "defaultHero": "ARTHUR",
+  "heroConfig": {
+    "heroId": "ARTHUR",
+    "heroName": "Arthur",
+    "heroClass": "Knight",
+    "heroDescription": "Noble knight of the realm, skilled in combat and leadership",
+    "startingLevel": 1,
+    "startingStats": {
+      "attack": 10,
+      "defense": 8,
+      "spellPower": 2,
+      "knowledge": 3,
+      "health": 100,
+      "mana": 20
+    },
+    "startingSkills": ["Leadership", "Combat"],
+    "startingSpells": []
+  },
+  "objectives": [
+    {
+      "objectiveId": "obj1",
+      "objectiveType": "eliminate",
+      "objectiveTitle": "objectives.conquest-classic.obj1.title",
+      "objectiveDescription": "objectives.conquest-classic.obj1.description",
+      "targetValue": 5,
+      "isRequired": true
+    },
+    {
+      "objectiveId": "obj2",
+      "objectiveType": "capture",
+      "objectiveTitle": "objectives.conquest-classic.obj2.title",
+      "objectiveDescription": "objectives.conquest-classic.obj2.description",
+      "targetValue": 5,
+      "isRequired": true
+    }
+  ],
+  "startingPositions": [
+    {
+      "playerId": "player1",
+      "positionX": 15,
+      "positionY": 15,
+      "castleType": "castle",
+      "startingHero": "ARTHUR"
+    }
+  ],
+  "events": []
+} 

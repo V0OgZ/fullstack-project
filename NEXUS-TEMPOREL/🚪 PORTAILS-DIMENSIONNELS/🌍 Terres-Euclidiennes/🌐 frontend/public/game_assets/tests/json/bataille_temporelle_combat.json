@@ -1,0 +1,343 @@
+{
+  "scenarioId": "bataille_temporelle_combat",
+  "title": "Bataille Temporelle - Combat Avancé",
+  "description": "Script de combat avec mécaniques temporelles complexes, superpositions multiples et interférences",
+  "version": "1.0.0",
+  "difficulty": "ADVANCED",
+  "estimatedDuration": "8-12 minutes",
+  "prerequisites": ["bataille_temporelle_setup"],
+  "gameConfig": {
+    "mapSize": { "width": 20, "height": 20 },
+    "turnLimit": 25,
+    "quantumEnabled": true,
+    "complexAmplitudesEnabled": true
+  },
+  "phases": [
+    {
+      "phaseId": 1,
+      "title": "Mouvement avec superposition",
+      "description": "Création d'états quantiques multiples pour Arthur",
+      "actions": [
+        {
+          "type": "CREATE_PSI_STATE",
+          "psiId": "ψ003",
+          "deltaT": 1,
+          "targetPosition": { "x": 6, "y": 6 },
+          "action": { "type": "MOVE", "hero": "Arthur", "position": { "x": 6, "y": 6 } },
+          "probability": 0.33
+        },
+        {
+          "type": "CREATE_PSI_STATE", 
+          "psiId": "ψ004",
+          "deltaT": 1,
+          "targetPosition": { "x": 6, "y": 4 },
+          "action": { "type": "MOVE", "hero": "Arthur", "position": { "x": 6, "y": 4 } },
+          "probability": 0.33
+        },
+        {
+          "type": "CREATE_PSI_STATE",
+          "psiId": "ψ005", 
+          "deltaT": 1,
+          "targetPosition": { "x": 7, "y": 5 },
+          "action": { "type": "MOVE", "hero": "Arthur", "position": { "x": 7, "y": 5 } },
+          "probability": 0.34
+        }
+      ]
+    },
+    {
+      "phaseId": 2,
+      "title": "Observation et collapse",
+      "description": "Configuration des triggers d'observation quantique",
+      "actions": [
+        {
+          "type": "SETUP_TRIGGER",
+          "condition": "HERO_OBSERVES",
+          "observer": "Morgana",
+          "targetPosition": { "x": 6, "y": 6 },
+          "targetPsi": "ψ003",
+          "action": "COLLAPSE"
+        }
+      ]
+    },
+    {
+      "phaseId": 3, 
+      "title": "Utilisation d'artefact temporel",
+      "description": "Activation des pouvoirs temporels d'Arthur",
+      "actions": [
+        {
+          "type": "USE_ARTIFACT",
+          "hero": "Arthur", 
+          "artifact": "temporal_sword",
+          "effects": { "temporal_power": 50, "attack_boost": 25 }
+        },
+        {
+          "type": "CREATE_PSI_STATE",
+          "psiId": "ψ006",
+          "deltaT": 1,
+          "targetPosition": { "x": 9, "y": 9 },
+          "action": { 
+            "type": "BATTLE", 
+            "attacker": "Arthur", 
+            "defender": "DragonRouge" 
+          },
+          "probability": 0.8
+        }
+      ]
+    },
+    {
+      "phaseId": 4,
+      "title": "États quantiques multiples",  
+      "description": "Sorts quantiques avec amplitudes complexes",
+      "actions": [
+        {
+          "type": "CREATE_PSI_STATE",
+          "psiId": "ψ007",
+          "deltaT": 2,
+          "targetPosition": { "x": 10, "y": 8 },
+          "action": {
+            "type": "CAST_SPELL",
+            "caster": "Arthur",
+            "spell": "quantum_leap", 
+            "target": { "x": 10, "y": 8 }
+          },
+          "complexAmplitude": { "real": 0.8, "imaginary": 0.6 }
+        },
+        {
+          "type": "CREATE_PSI_STATE",
+          "psiId": "ψ008", 
+          "deltaT": 2,
+          "targetPosition": { "x": 10, "y": 12 },
+          "action": {
+            "type": "CAST_SPELL",
+            "caster": "Arthur", 
+            "spell": "time_anchor",
+            "target": { "x": 10, "y": 12 }
+          },
+          "complexAmplitude": { "real": 0.7, "imaginary": 0.7 }
+        }
+      ]
+    },
+    {
+      "phaseId": 5,
+      "title": "Contre-attaque de Morgana",
+      "description": "Riposte magique avec états temporels",
+      "actions": [
+        {
+          "type": "CREATE_PSI_STATE",
+          "psiId": "ψ009",
+          "deltaT": 1,
+          "targetPosition": { "x": 14, "y": 14 },
+          "action": { "type": "MOVE", "hero": "Morgana", "position": { "x": 14, "y": 14 } },
+          "probability": 1.0
+        },
+        {
+          "type": "USE_ARTIFACT",
+          "hero": "Morgana",
+          "artifact": "chrono_staff", 
+          "effects": { "temporal_control": 40, "magic_boost": 30 }
+        },
+        {
+          "type": "CREATE_PSI_STATE",
+          "psiId": "ψ010",
+          "deltaT": 2,
+          "targetPosition": { "x": 11, "y": 11 },
+          "action": {
+            "type": "CAST_SPELL",
+            "caster": "Morgana",
+            "spell": "temporal_shield",
+            "target": "Morgana"
+          },
+          "probability": 0.9
+        }
+      ]
+    },
+    {
+      "phaseId": 6,
+      "title": "Conflit temporel",
+      "description": "Deux héros tentent de collecter le même artefact",
+      "actions": [
+        {
+          "type": "CREATE_PSI_STATE",
+          "psiId": "ψ011",
+          "deltaT": 3,
+          "targetPosition": { "x": 10, "y": 10 },
+          "action": {
+            "type": "COLLECT",
+            "collector": "Arthur",
+            "item": "LameAvantMonde",
+            "quantity": 1
+          },
+          "probability": 0.5
+        },
+        {
+          "type": "CREATE_PSI_STATE", 
+          "psiId": "ψ012",
+          "deltaT": 3,
+          "targetPosition": { "x": 10, "y": 10 },
+          "action": {
+            "type": "COLLECT",
+            "collector": "Morgana", 
+            "item": "LameAvantMonde",
+            "quantity": 1
+          },
+          "probability": 0.5
+        }
+      ]
+    },
+    {
+      "phaseId": 7,
+      "title": "Résolution du conflit",
+      "description": "Collapse manuel pour résoudre le conflit temporel",
+      "actions": [
+        { "type": "COLLAPSE_PSI_STATE", "psiId": "ψ011" },
+        { "type": "COLLAPSE_PSI_STATE", "psiId": "ψ012" }
+      ]
+    },
+    {
+      "phaseId": 8,
+      "title": "Bataille fantôme",
+      "description": "Combat dans un état superposé",
+      "actions": [
+        {
+          "type": "CREATE_PSI_STATE",
+          "psiId": "ψ013",
+          "deltaT": 1,
+          "targetPosition": { "x": 8, "y": 12 },
+          "action": {
+            "type": "BATTLE",
+            "attacker": "Arthur",
+            "defender": "PhantomWarriors"
+          },
+          "probability": 0.75
+        },
+        {
+          "type": "COLLAPSE_PSI_STATE", 
+          "psiId": "ψ013",
+          "immediate": true,
+          "reason": "Ghost battle resolution"
+        }
+      ]
+    },
+    {
+      "phaseId": 9,
+      "title": "Effet de l'Horloge Inversée",
+      "description": "Manipulation temporelle pour recréer des états passés",
+      "actions": [
+        {
+          "type": "USE_ARTIFACT",
+          "hero": "Morgana",
+          "artifact": "HorlogeInversee",
+          "effects": { "time_rewind": 2, "temporal_flux": -1 }
+        },
+        {
+          "type": "CREATE_PSI_STATE",
+          "psiId": "ψ014",
+          "deltaT": 1,
+          "targetPosition": { "x": 12, "y": 14 },
+          "action": { "type": "MOVE", "hero": "Morgana", "position": { "x": 12, "y": 14 } },
+          "probability": 0.8,
+          "metadata": { "temporal_origin": "rewind_2_turns" }
+        },
+        {
+          "type": "CREATE_PSI_STATE",
+          "psiId": "ψ015",
+          "deltaT": 1, 
+          "targetPosition": { "x": 11, "y": 13 },
+          "action": { "type": "MOVE", "hero": "Arthur", "position": { "x": 11, "y": 13 } },
+          "probability": 0.8,
+          "metadata": { "temporal_origin": "rewind_2_turns" }
+        }
+      ]
+    },
+    {
+      "phaseId": 10,
+      "title": "Nouvelle stratégie post-correction",
+      "description": "Actions après la manipulation temporelle",
+      "actions": [
+        {
+          "type": "CREATE_PSI_STATE",
+          "psiId": "ψ016",
+          "deltaT": 1,
+          "targetPosition": { "x": 16, "y": 16 },
+          "action": { "type": "MOVE", "hero": "Morgana", "position": { "x": 16, "y": 16 } },
+          "probability": 1.0
+        },
+        {
+          "type": "CREATE_PSI_STATE",
+          "psiId": "ψ017", 
+          "deltaT": 2,
+          "targetPosition": { "x": 12, "y": 6 },
+          "action": {
+            "type": "COLLECT",
+            "collector": "Morgana",
+            "item": "OrbeProbabilite",
+            "quantity": 1
+          },
+          "probability": 0.85
+        }
+      ]
+    },
+    {
+      "phaseId": 11,
+      "title": "Manipulation de probabilités",
+      "description": "Usage de l'Orbe de Probabilité avec amplitudes complexes",
+      "actions": [
+        {
+          "type": "USE_ARTIFACT",
+          "hero": "Morgana",
+          "artifact": "OrbeProbabilite",
+          "effects": { "probability_boost": 1.2, "quantum_resonance": true }
+        },
+        {
+          "type": "CREATE_PSI_STATE",
+          "psiId": "ψ018",
+          "deltaT": 1,
+          "targetPosition": { "x": 11, "y": 10 },
+          "action": {
+            "type": "BATTLE",
+            "attacker": "Morgana",
+            "defender": "DragonRouge" 
+          },
+          "complexAmplitude": { "real": 0.9, "imaginary": 0.3 },
+          "metadata": { "enhanced_by": "OrbeProbabilite" }
+        }
+      ]
+    },
+    {
+      "phaseId": 12,
+      "title": "Combat final décisif",
+      "description": "Affrontement ultime entre Arthur et Morgana",
+      "actions": [
+        {
+          "type": "CREATE_PSI_STATE",
+          "psiId": "ψ019",
+          "deltaT": 2,
+          "targetPosition": { "x": 10, "y": 10 },
+          "action": {
+            "type": "BATTLE",
+            "attacker": "Arthur",
+            "defender": "Morgana",
+            "battleType": "ULTIMATE_DUEL"
+          },
+          "complexAmplitude": { "real": 0.8, "imaginary": 0.6 },
+          "metadata": { "decisive": true, "winner_takes_all": true }
+        }
+      ]
+    }
+  ],
+  "expectedOutcome": {
+    "psiStatesCreated": 19,
+    "manualCollapses": 5,
+    "estimatedTurns": 8,
+    "heroesInvolved": ["Arthur", "Morgana"],
+    "artifactsUsed": ["temporal_sword", "chrono_staff", "HorlogeInversee", "OrbeProbabilite"],
+    "finalConflictResolution": "DECISIVE_BATTLE"
+  },
+  "metadata": {
+    "originalHots": "bataille_temporelle_combat.hots",
+    "conversionDate": "2025-01-19", 
+    "benchmarkType": "SCRIPT_VERSION",
+    "complexity": "HIGH",
+    "quantumMechanics": ["superposition", "complex_amplitudes", "temporal_manipulation"]
+  }
+} 

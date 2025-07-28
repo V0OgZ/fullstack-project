@@ -1,0 +1,189 @@
+{
+  "scenario_info": {
+    "id": "duel_collapse",
+    "name": "Duel du Collapse",
+    "type": "PVP_SHORT",
+    "version": "1.0.0",
+    "description": "Un duel intense entre deux héros équipés de l'Œil de Wigner et du Grimoire de Schrödinger. Un seul pourra effondrer la timeline de l'autre.",
+    "max_turns": 8,
+    "players": 2,
+    "difficulty": "EXPERT",
+    "duration_estimate": "10-15 minutes",
+    "tags": ["PVP", "court", "collapse", "intense"]
+  },
+  
+  "game_settings": {
+    "map": {
+      "width": 15,
+      "height": 15,
+      "terrain": "quantum_arena",
+      "special_zones": [
+        {"type": "collapse_nexus", "x": 7, "y": 7, "effect": "amplify_collapse_attempts"}
+      ]
+    },
+    "turn_limits": {
+      "time_per_turn": 120,
+      "total_turns": 8
+    },
+    "victory_conditions": [
+      "Collapse de la timeline ennemie",
+      "Survie au tour 8 avec HP > 0",
+      "Contrôle du Nexus Central"
+    ]
+  },
+
+  "heroes": [
+    {
+      "id": "quantum_duelist_1",
+      "name": "Lysander",
+      "player": "player1",
+      "start_position": {"x": 3, "y": 7},
+      "level": 12,
+      "stats": {
+        "health": 120,
+        "max_health": 120,
+        "temporal_energy": 200,
+        "max_temporal_energy": 200,
+        "attack": 15,
+        "defense": 12,
+        "quantum_affinity": 0.8
+      },
+      "equipment": ["wigner_eye", "quantum_blade"],
+      "abilities": ["collapse_strike", "timeline_shield", "quantum_step"]
+    },
+    {
+      "id": "quantum_duelist_2", 
+      "name": "Morwyn",
+      "player": "player2",
+      "start_position": {"x": 11, "y": 7},
+      "level": 12,
+      "stats": {
+        "health": 100,
+        "max_health": 100,
+        "temporal_energy": 250,
+        "max_temporal_energy": 250,
+        "attack": 12,
+        "defense": 10,
+        "quantum_affinity": 0.9
+      },
+      "equipment": ["schrodinger_grimoire", "phase_armor"],
+      "abilities": ["probability_storm", "superposition_dodge", "quantum_bind"]
+    }
+  ],
+
+  "artifacts": [
+    {
+      "id": "wigner_eye",
+      "scenario_override": {
+        "max_uses": 3,
+        "cooldown": 2,
+        "effect_bonus": 0.3
+      }
+    },
+    {
+      "id": "schrodinger_grimoire",
+      "scenario_override": {
+        "max_uses": 4,
+        "cooldown": 1,
+        "stealth_duration": 3
+      }
+    }
+  ],
+
+  "creatures": [
+    {
+      "id": "phantom_warriors",
+      "count": 2,
+      "spawn_locations": [
+        {"x": 7, "y": 3},
+        {"x": 7, "y": 11}
+      ],
+      "behavior": "neutral_aggressive",
+      "spawn_turn": 3
+    },
+    {
+      "id": "temporal_elemental",
+      "count": 1,
+      "spawn_locations": [{"x": 7, "y": 7}],
+      "behavior": "guardian",
+      "spawn_turn": 5
+    }
+  ],
+
+  "turn_sequence": [
+    {
+      "turn": 1,
+      "phase": "opening",
+      "events": [
+        {"type": "message", "text": "Le duel commence ! Utilisez vos artefacts quantiques avec parcimonie."},
+        {"type": "enable_abilities", "heroes": ["quantum_duelist_1", "quantum_duelist_2"]}
+      ]
+    },
+    {
+      "turn": 3,
+      "phase": "escalation",
+      "events": [
+        {"type": "spawn_creatures", "creatures": ["phantom_warriors"]},
+        {"type": "message", "text": "Des Guerriers Fantômes apparaissent ! Ils attaquent le plus proche."}
+      ]
+    },
+    {
+      "turn": 5,
+      "phase": "climax",
+      "events": [
+        {"type": "spawn_creatures", "creatures": ["temporal_elemental"]},
+        {"type": "activate_zone", "zone": "collapse_nexus"},
+        {"type": "message", "text": "L'Élémentaire Temporel garde le Nexus ! Contrôlez-le pour la victoire."}
+      ]
+    },
+    {
+      "turn": 8,
+      "phase": "finale",
+      "events": [
+        {"type": "message", "text": "Dernier tour ! Qui survivra au collapse final ?"},
+        {"type": "force_collapse_check"}
+      ]
+    }
+  ],
+
+  "win_conditions": {
+    "collapse_enemy_timeline": {
+      "type": "instant_victory",
+      "description": "Effondrer complètement la timeline de l'adversaire"
+    },
+    "survive_turn_8": {
+      "type": "conditional_victory", 
+      "condition": "health > 0 AND turn >= 8",
+      "description": "Survivre jusqu'au tour 8 avec des HP"
+    },
+    "control_nexus": {
+      "type": "conditional_victory",
+      "condition": "control_collapse_nexus AND turn >= 6",
+      "description": "Contrôler le Nexus de Collapse pendant 2 tours"
+    }
+  },
+
+  "quantum_mechanics": {
+    "collapse_probability": 0.15,
+    "interference_zones": [
+      {"x": 7, "y": 7, "radius": 3, "type": "amplification"}
+    ],
+    "superposition_limit": 3,
+    "timeline_stability": 0.8
+  },
+
+  "testing_scenarios": [
+    {
+      "name": "Quick Collapse Test",
+      "description": "Test du collapse rapide au tour 2",
+      "setup": "player1 uses wigner_eye on player2 timeline",
+      "expected": "Collapse attempt with 45% success rate"
+    },
+    {
+      "name": "Nexus Control Test", 
+      "description": "Test du contrôle du Nexus Central",
+      "setup": "Move to center and hold position",
+      "expected": "Victory condition triggers after 2 turns"
+    }
+  ]
+} 

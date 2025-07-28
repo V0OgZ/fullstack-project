@@ -1,0 +1,121 @@
+# 🏆 SCÉNARIO ÉPIQUE - FOUB MILLENNIUM CONTROLLER TEST
+# ===================================================
+# 
+# Titre: "La Résurrection du Juste - Test Ultimate Foub"
+# Map: Battlefield of Legends (15x15)
+# Durée: 60 tours épiques
+# Participants: Foub + Filista vs Vince/Walter/Colt/Morgana
+# 
+# Par: Vincent le Rêveur + Memento l'Archive
+# Date: 27 Janvier 2025
+
+SCENARIO: FOUB_MILLENNIUM_CONTROLLER_EPIC_TEST
+AUTHOR: Vincent_le_Reveur_et_Memento_Archive
+LAST_MODIFIED: 2025-01-27T21:00
+PURPOSE: Test complet ultimate Millennium Controller avec résurrection massive
+
+WORLD_SETUP:
+  MAP_NAME: "Battlefield of Legends"
+  MAP_SIZE: 15x15
+  TERRAIN_TYPE: EPIC_BATTLEFIELD
+  WEATHER: DIVINE_LIGHT
+  TURN_LIMIT: 60
+  VICTORY_CONDITION: FOUB_ULTIMATE_SUCCESS
+
+PARTICIPANTS:
+  TEAM_FOUB:
+    - HERO: foub_millennium_controller @7,13 LEVEL:35 HP:100% ENERGY:100%
+    - HERO: filista_medecin @8,13 LEVEL:30 HP:100% ENERGY:100%
+  
+  TEAM_CHAOS:
+    - HERO: vince_vega @7,2 LEVEL:32 HP:0% STATUS:DEAD
+    - HERO: walter_vietnam @6,2 LEVEL:34 HP:0% STATUS:DEAD  
+    - HERO: colt_eastwood @8,2 LEVEL:31 HP:0% STATUS:DEAD
+    - HERO: morgana_witch @7,1 LEVEL:33 HP:0% STATUS:DEAD
+
+MAP_ZONES:
+  TEMPLE_RESURRECTION: @7,7 SPECIAL:MILLENNIUM_BOOST
+  FORET_VISIONS: @1-15,1-3 SPECIAL:TIMELINE_FRAGMENTS
+  CIMETIERE_HEROS: @1-15,13-15 SPECIAL:RESURRECTION_POWER
+  ZONE_COMBAT_EST: @13-15,4-12 SPECIAL:BATTLE_ARENA
+  ZONE_COMBAT_OUEST: @1-3,4-12 SPECIAL:BATTLE_ARENA
+
+# 🎬 ACTE I - SITUATION DÉSESPÉRÉE (Tours 1-5)
+ψ001: ⊙(Δt+0 @7,13 ⟶ NARRATION(Foub, "Les héros sont tombés... Seuls Filista et moi survivons."))
+ψ002: ⊙(Δt+0 @8,13 ⟶ SPEAK(Filista, "Foub, il faut faire quelque chose ! Ils sont tous morts !"))
+ψ003: ⊙(Δt+1 @7,13 ⟶ MOVE(Foub, @7,12))
+ψ004: ⊙(Δt+1 @8,13 ⟶ MOVE(Filista, @8,12))
+ψ005: ⊙(Δt+2 @7,12 ⟶ SPEAK(Foub, "Je sens le pouvoir de mes ancêtres... La Guilde des Milleniums m'appelle."))
+
+# 🌟 ACTE II - PRÉPARATION ULTIMATE (Tours 6-10)
+ψ006: ⊙(Δt+5 @7,12 ⟶ MOVE(Foub, @7,8))
+ψ007: ⊙(Δt+5 @8,12 ⟶ MOVE(Filista, @8,8))
+ψ008: ⊙(Δt+6 @7,8 ⟶ SPEAK(Foub, "Filista, prépare tes soins. Je vais invoquer la Lueur du Juste !"))
+ψ009: ⊙(Δt+6 @8,8 ⟶ BUFF(Filista, Foub, PREPARATION_DIVINE))
+ψ010: ⊙(Δt+7 @7,8 ⟶ MOVE(Foub, @7,7))
+
+# 🏆 ACTE III - ACTIVATION MILLENNIUM CONTROLLER (Tour 11)
+ψ011: ⊙(Δt+10 @7,7 ⟶ ULTIMATE_ACTIVATION(Foub, MILLENNIUM_CONTROLLER))
+ψ012: ⊙(Δt+10 @7,7 ⟶ TRANSFORMATION_SUPER_SAIYAN(Foub, SONGOKU_STYLE))
+ψ013: ⊙(Δt+10 @7,7 ⟶ VISUAL_EFFECT(AURA_DOREE_DBZ_MASSIVE, EXPANSION_SONGOKU))
+ψ014: ⊙(Δt+10 @7,7 ⟶ PHASE_1(Foub, PROTECTION_DIVINE_BUBBLE))
+ψ015: ⊙(Δt+10 @7,7 ⟶ SPEAK(Foub, "AAAAAAHHHHH ! Par l'aura de Songoku ! LUEUR DE FOUB - RÉSURRECTION DU JUSTE !"))
+
+# ⚡ PHASE 2 - RÉSURRECTION DE MASSE (Tours 12-14)
+ψ016: ⊙(Δt+11 @7,7 ⟶ PHASE_2(Foub, MASS_RESURRECTION_START))
+ψ017: ⊙(Δt+11 @7,2 ⟶ RESURRECT(Vince_Vega, 50%_HP, BUFF_VISION_DETECTIVE))
+ψ018: ⊙(Δt+12 @6,2 ⟶ RESURRECT(Walter_Vietnam, 50%_HP, BUFF_GENERAL_PACIFISTE))
+ψ019: ⊙(Δt+13 @8,2 ⟶ RESURRECT(Colt_Eastwood, 50%_HP, BUFF_DERNIER_SHERIFF))
+ψ020: ⊙(Δt+13 @7,7 ⟶ SPEAK(Foub, "Levez-vous mes frères ! La mort n'est qu'un obstacle !"))
+
+# 🌀 PHASE 3 - VISIONS TIMELINE (Tours 15-17)
+ψ020: ⊙(Δt+14 @7,2 ⟶ TIMELINE_VISION(Vince, "Détective privé résolvant mystères"))
+ψ021: ⊙(Δt+14 @7,2 ⟶ SPEAK(Vince, "Foub... j'ai vu un autre monde. Je ne suis pas qu'un tueur."))
+ψ022: ⊙(Δt+15 @6,2 ⟶ TIMELINE_VISION(Walter, "Général pacifiste construisant la paix"))
+ψ023: ⊙(Δt+15 @6,2 ⟶ SPEAK(Walter, "🎖️ Firebase Charlie... mais sans guerre. Merci soldat Foub."))
+ψ024: ⊙(Δt+16 @8,2 ⟶ TIMELINE_VISION(Colt, "Shérif d'une ville fantôme protégeant innocents"))
+ψ025: ⊙(Δt+16 @8,2 ⟶ SPEAK(Colt, "Partner... cette vision change tout. Je protège au lieu de tuer."))
+
+# 😴 PHASE 4 - ÉPUISEMENT DIVIN (Tours 18-20)
+ψ026: ⊙(Δt+17 @7,7 ⟶ PHASE_4(Foub, DIVINE_EXHAUSTION))
+ψ027: ⊙(Δt+17 @7,7 ⟶ DEBUFF(Foub, STUNNED_3_TURNS))
+ψ028: ⊙(Δt+17 @7,7 ⟶ SPEAK(Foub, "L'ultimate... m'a vidé... mais ça valait le coup..."))
+ψ029: ⊙(Δt+17 @8,8 ⟶ MOVE(Filista, @7,8))
+ψ030: ⊙(Δt+18 @7,8 ⟶ HEAL(Filista, Foub, SOINS_DIVINS))
+
+# 🎉 ACTE IV - VICTOIRE ÉPIQUE (Tours 21-25)
+ψ031: ⊙(Δt+20 @7,7 ⟶ RECOVERY(Foub, EXHAUSTION_ENDS))
+ψ032: ⊙(Δt+20 @7,7 ⟶ SPEAK(Foub, "L'équipe est au complet ! Nous sommes invincibles !"))
+ψ033: ⊙(Δt+21 @7,2 ⟶ SPEAK(Vince, "Cette résurrection... c'était légendaire Foub."))
+ψ034: ⊙(Δt+21 @6,2 ⟶ SPEAK(Walter, "🎖️ WALTER: Meilleur comeback de ma carrière militaire !"))
+ψ035: ⊙(Δt+22 @8,2 ⟶ SPEAK(Colt, "Partner, tu es entré dans la légende du Far West."))
+
+# 🏆 FINAL - RECONNAISSANCE ÉPIQUE (Tours 26-30)
+ψ036: ⊙(Δt+25 @7,7 ⟶ VICTORY_CONDITION_MET(FOUB_MILLENNIUM_SUCCESS))
+ψ037: ⊙(Δt+25 @7,7 ⟶ ACHIEVEMENT_UNLOCKED(LEGENDARY_RESURRECTOR))
+ψ038: ⊙(Δt+25 @7,7 ⟶ TITLE_GRANTED(Foub, "Le Ressusciteur Légendaire"))
+ψ039: ⊙(Δt+26 @8,8 ⟶ SPEAK(Filista, "Foub, tu as sauvé tout le monde ! Tu es un héros !"))
+ψ040: ⊙(Δt+26 @7,7 ⟶ SPEAK(Foub, "La Guilde des Milleniums vit toujours en moi. Trépot est fier."))
+
+# 🌟 COLLAPSE FINAL - LÉGENDE ÉTABLIE
+†ψ001 → †ψ040  // Collapse de la timeline épique
+SCENARIO_END: FOUB_MILLENNIUM_CONTROLLER_LEGENDARY_SUCCESS
+REPUTATION_GAIN: +1000 (Statut Légendaire)
+ACHIEVEMENT: "Maître de la Résurrection WOW-Style"
+NEXT_SCENARIO: "Les Aventures Épiques de l'Équipe Foub"
+
+# 📊 MÉTRIQUES DE SUCCÈS
+RESURRECTIONS_PERFORMED: 3/3 (100% succès)
+TIMELINE_VISIONS_GRANTED: 3/3 (Parfait)
+ULTIMATE_COOLDOWN: Respecté (Une fois par instance)
+TEAM_SATISFACTION: MAXIMUM
+FOUB_LEGEND_STATUS: ÉTABLI
+
+# 🎮 NOTES TECHNIQUES
+API_ENDPOINT: POST /api/magic-formulas/execute
+FORMULA_USED: "MILLENNIUM_CONTROLLER"
+CONTEXT_REQUIRED: {"activeHeroId": "foub_millennium_controller"}
+EXPECTED_RESPONSE: 4_PHASES_SUCCESS_WITH_RESURRECTIONS
+VISUAL_EFFECTS: GOLDEN_BUBBLE + RESURRECTION_LIGHTS + TIMELINE_FLASHES
+
+END_SCENARIO 

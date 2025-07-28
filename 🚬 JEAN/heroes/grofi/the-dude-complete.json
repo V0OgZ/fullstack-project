@@ -1,0 +1,168 @@
+{
+  "id": "hero_the_dude",
+  "name": "The Dude",
+  "title": "Le Maître du Zen Temporel",
+  "description": "Le monde peut trembler. The Dude, lui, sirote. Il stabilise les timelines en chillant si fort que les effondrements hésitent à venir.",
+  "rarity": "LEGENDARY",
+  "tier": 6,
+  "level": 50,
+  "role": "STABILIZER",
+  "class": "ZEN_MASTER",
+  "faction": "ZEN_COLLECTIVE",
+  "race": "ENLIGHTENED_HUMAN",
+  "gender": "COSMIC_DUDE",
+  
+  "stats": {
+    "health": 200,
+    "max_health": 200,
+    "attack": 25,
+    "defense": 45,
+    "speed": 4,
+    "temporal_energy": 400,
+    "max_temporal_energy": 400,
+    "movement_points": 6,
+    "max_movement_points": 6,
+    "spell_power": 60,
+    "mana_cost": 0.7,
+    "vision_radius": 8
+  },
+  
+  "quotes": [
+    "This aggression will not stand, man.",
+    "That's just, like, your opinion, man.",
+    "Je chill, donc je suis.",
+    "Yeah, well, that's just, like, your opinion, man."
+  ],
+  
+  "summoned_by": "hero_jean_grofignon",
+  
+  "immunities": [
+    "STRESS",
+    "OBSERVATION",
+    "TEMPORAL_ANXIETY",
+    "CHAOS_DAMAGE"
+  ],
+  
+  "ultimate_power": {
+    "name": "Zen Collapse",
+    "description": "Calme le stress causale et rétablit l'équilibre dans les timelines agitées.",
+    "quantum_script": "⊙[ZEN_MEDITATION {timeline.stress < 0.1}] ⟶ †[SERENITY_MODE]",
+    "cost": 120,
+    "cooldown": 4,
+    "range": 5,
+    "duration": 8,
+    "effects": {
+      "reduce_stress": 0.9,
+      "stabilize_timelines": true,
+      "serenity_aura": true
+    }
+  },
+  
+  "abilities": [
+    {
+      "name": "Zen Superposition",
+      "type": "PASSIVE",
+      "description": "Empêche tout effondrement dans une zone stable tant que The Dude est présent.",
+      "quantum_script": "†[MAINTAIN_SUPERPOSITION] ⊙ ZONE(centered_on=TheDude)",
+      "formula": "Ω[STABLE] ⊙ ZONE(radius=2, center=TheDude)",
+      "effects": {
+        "prevent_collapse": true,
+        "stabilization_radius": 2,
+        "stress_immunity": true
+      }
+    },
+    {
+      "name": "White Russian Meditation",
+      "type": "ACTIVE",
+      "description": "Restaure l'équilibre temporel et apaise les paradoxes.",
+      "cost": 40,
+      "cooldown": 3,
+      "effects": {
+        "restore_balance": true,
+        "heal_paradoxes": 0.6,
+        "calm_effect": 5
+      }
+    },
+    {
+      "name": "Bowling Ball of Destiny",
+      "type": "ACTIVE",
+      "description": "Projette l'harmonie en ligne droite, calmant tout sur son passage.",
+      "cost": 60,
+      "range": 8,
+      "effects": {
+        "harmonic_projectile": true,
+        "calm_line_effect": true,
+        "destiny_strike": 40
+      }
+    },
+    {
+      "name": "Temporal Serenity",
+      "type": "ACTIVE",
+      "description": "Apaise les paradoxes et calme les conflits causaux dans une zone.",
+      "cost": 80,
+      "range": 4,
+      "area": 3,
+      "effects": {
+        "resolve_paradoxes": true,
+        "calm_causal_conflicts": true,
+        "zen_field": 6
+      }
+    }
+  ],
+  
+  "starting_equipment": [
+    "tapis_sacre",
+    "white_russian_quantique",
+    "bowling_ball_destiny",
+    "robe_zen_temporel"
+  ],
+  
+  "starting_artifacts": [
+    {
+      "name": "Tapis Sacré",
+      "type": "ZONE_STABILIZER",
+      "formula": "Σ[VALUE:0.1] ⊙ ZONE(radius=3, center=TheDude)",
+      "description": "Maintient un stress causale très bas autour de The Dude",
+      "charges": -1
+    },
+    {
+      "name": "White Russian Quantique",
+      "type": "STRESS_REDUCER",
+      "formula": "Σ[REDUCE:0.5] ⊙ HERO(TheDude)",
+      "description": "Réduit le stress causale global quand consommé",
+      "charges": 3
+    }
+  ],
+  
+  "temporal_affinities": {
+    "stress_generation": -0.8,
+    "zone_stabilization": 0.9,
+    "chill_factor": 1.0,
+    "paradox_resolution": 0.7
+  },
+  
+  "personality": {
+    "style": "ZEN_MASTER",
+    "strategy": "PASSIVE_HARMONY",
+    "philosophy": "The Dude abides, man"
+  },
+  
+  "lore": {
+    "origin": "Bowling Alley of Eternity",
+    "creation_myth": "Evolved from the perfect strike that created cosmic balance",
+    "greatest_achievement": "Achieved perfect zen while the multiverse collapsed around him",
+    "relationship_with_jean": "Jean's chaos meets Dude's zen - perfect balance"
+  },
+  
+  "unlock_condition": "Summon via Jean-Grofignon's companion ability",
+  "icon": "🎳",
+  "color_theme": "ZEN_BEIGE",
+  
+  "meta": {
+    "created_by": "Memento", 
+    "source": "📖 docs/GROFI/TheDude.json",
+    "enhanced_with": "Zen Master abilities system",
+    "version": "2.0",
+    "blessed_by": "The Dude himself, man"
+  }
+} 

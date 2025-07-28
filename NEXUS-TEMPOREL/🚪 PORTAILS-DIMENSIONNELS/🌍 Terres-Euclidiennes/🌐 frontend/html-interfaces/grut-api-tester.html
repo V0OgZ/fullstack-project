@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔧 GRUT API Tester - Interface de Test</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #00ff00;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(116,75,162,0.1);
+            border: 2px solid #744ba2;
+            border-radius: 10px;
+        }
+
+        .header h1 {
+            margin: 0;
+            color: #9932cc;
+            text-shadow: 0 0 10px #744ba2;
+        }
+
+        .test-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .test-section {
+            background: rgba(0,255,0,0.05);
+            border: 1px solid #00ff00;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .test-section h2 {
+            color: #00ff00;
+            margin-top: 0;
+            border-bottom: 1px solid #00ff00;
+            padding-bottom: 10px;
+        }
+
+        .endpoint-test {
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 5px;
+        }
+
+        button {
+            background: #00ff00;
+            color: #000;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background: #00cc00;
+        }
+
+        .response {
+            margin-top: 10px;
+            padding: 10px;
+            background: #000;
+            border: 1px solid #333;
+            border-radius: 3px;
+            font-size: 0.9rem;
+            max-height: 200px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+
+        .status-ok { color: #00ff00; }
+        .status-error { color: #ff0000; }
+        .status-pending { color: #ffff00; }
+
+        .nav-link {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #744ba2;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .nav-link:hover {
+            background: #9932cc;
+        }
+    </style>
+</head>
+<body>
+    <a href="grut-navigation-hub.html" class="nav-link">← Retour au Hub</a>
+
+    <div class="container">
+        <div class="header">
+            <h1>🔧 GRUT API Tester</h1>
+            <p>Test en temps réel de toutes les API du système</p>
+        </div>
+
+        <div class="test-grid">
+            <!-- Section Health & Status -->
+            <div class="test-section">
+                <h2>📊 Health & Status</h2>
+                
+                <div class="endpoint-test">
+                    <h3>/api/health</h3>
+                    <button onclick="testEndpoint('/api/health', 'health-response')">TEST</button>
+                    <div id="health-response" class="response">En attente...</div>
+                </div>
+
+                <div class="endpoint-test">
+                    <h3>/api/world-state-graph/nodes</h3>
+                    <button onclick="testEndpoint('/api/world-state-graph/nodes', 'wsg-nodes-response')">TEST</button>
+                    <div id="wsg-nodes-response" class="response">En attente...</div>
+                </div>
+
+                <div class="endpoint-test">
+                    <h3>/api/world-state-graph/connections</h3>
+                    <button onclick="testEndpoint('/api/world-state-graph/connections', 'wsg-connections-response')">TEST</button>
+                    <div id="wsg-connections-response" class="response">En attente...</div>
+                </div>
+            </div>
+
+            <!-- Section Game Data -->
+            <div class="test-section">
+                <h2>🎮 Game Data</h2>
+                
+                <div class="endpoint-test">
+                    <h3>/api/heroes</h3>
+                    <button onclick="testEndpoint('/api/heroes', 'heroes-response')">TEST</button>
+                    <div id="heroes-response" class="response">En attente...</div>
+                </div>
+
+                <div class="endpoint-test">
+                    <h3>/api/scenarios</h3>
+                    <button onclick="testEndpoint('/api/scenarios', 'scenarios-response')">TEST</button>
+                    <div id="scenarios-response" class="response">En attente...</div>
+                </div>
+
+                <div class="endpoint-test">
+                    <h3>/api/worlds</h3>
+                    <button onclick="testEndpoint('/api/worlds', 'worlds-response')">TEST</button>
+                    <div id="worlds-response" class="response">En attente...</div>
+                </div>
+            </div>
+
+            <!-- Section Memory & Bootstrap -->
+            <div class="test-section">
+                <h2>🧠 Memory & Bootstrap</h2>
+                
+                <div class="endpoint-test">
+                    <h3>/api/memory/bootstrap/status</h3>
+                    <button onclick="testEndpoint('/api/memory/bootstrap/status', 'bootstrap-response')">TEST</button>
+                    <div id="bootstrap-response" class="response">En attente...</div>
+                </div>
+
+                <div class="endpoint-test">
+                    <h3>/api/memory/tatouages</h3>
+                    <button onclick="testEndpoint('/api/memory/tatouages', 'tatouages-response')">TEST</button>
+                    <div id="tatouages-response" class="response">En attente...</div>
+                </div>
+            </div>
+
+            <!-- Section WebSocket -->
+            <div class="test-section">
+                <h2>🔌 WebSocket</h2>
+                
+                <div class="endpoint-test">
+                    <h3>WS Connection Test</h3>
+                    <button onclick="testWebSocket()">CONNECT</button>
+                    <button onclick="disconnectWebSocket()">DISCONNECT</button>
+                    <div id="ws-status" class="response">Déconnecté</div>
+                    <div id="ws-messages" class="response" style="margin-top: 10px;">Messages:</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8080';
+        let ws = null;
+
+        async function testEndpoint(endpoint, responseId) {
+            const responseDiv = document.getElementById(responseId);
+            responseDiv.className = 'response status-pending';
+            responseDiv.textContent = 'Chargement...';
+            
+            try {
+                const start = Date.now();
+                const response = await fetch(API_BASE + endpoint);
+                const elapsed = Date.now() - start;
+                
+                const data = await response.text();
+                let parsed;
+                try {
+                    parsed = JSON.parse(data);
+                } catch {
+                    parsed = data;
+                }
+                
+                responseDiv.className = response.ok ? 'response status-ok' : 'response status-error';
+                responseDiv.textContent = `Status: ${response.status} (${elapsed}ms)\n\n${
+                    typeof parsed === 'object' ? JSON.stringify(parsed, null, 2) : parsed
+                }`;
+            } catch (error) {
+                responseDiv.className = 'response status-error';
+                responseDiv.textContent = `Erreur: ${error.message}`;
+            }
+        }
+
+        function testWebSocket() {
+            const statusDiv = document.getElementById('ws-status');
+            const messagesDiv = document.getElementById('ws-messages');
+            
+            if (ws) {
+                ws.close();
+            }
+            
+            ws = new WebSocket('ws://localhost:8080/ws/world-state');
+            
+            ws.onopen = () => {
+                statusDiv.className = 'response status-ok';
+                statusDiv.textContent = 'Connecté au WebSocket';
+                messagesDiv.textContent = 'Messages:\n';
+            };
+            
+            ws.onmessage = (event) => {
+                messagesDiv.textContent += `\n[${new Date().toLocaleTimeString()}] ${event.data}`;
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            };
+            
+            ws.onerror = (error) => {
+                statusDiv.className = 'response status-error';
+                statusDiv.textContent = 'Erreur WebSocket';
+            };
+            
+            ws.onclose = () => {
+                statusDiv.className = 'response status-error';
+                statusDiv.textContent = 'Déconnecté';
+            };
+        }
+
+        function disconnectWebSocket() {
+            if (ws) {
+                ws.close();
+                ws = null;
+            }
+        }
+
+        // Test automatique au chargement
+        window.onload = () => {
+            testEndpoint('/api/health', 'health-response');
+        };
+
+        console.log('%c🔧 GRUT API TESTER READY', 'color: #00ff00; font-size: 16px; font-weight: bold;');
+    </script>
+</body>
+</html> 

@@ -1,0 +1,199 @@
+{
+  "collection": "Le Treizième Codex - Artefacts Finals",
+  "description": "Artefacts légendaires du combat final contre Omega-Zéro, la Somme des Oubliés",
+  "source": "📖 docs/items/CODEX_FINAL_ARTIFACTS.json",
+  "discovery": "Pépite trouvée par Memento",
+  "scenario": "Le Treizième Codex",
+  "context": "Combat final contre Omega-Zéro - fusion de 999 héros effacés",
+  
+  "boss_context": {
+    "name": "Omega-Zéro",
+    "title": "La Somme des Oubliés",
+    "description": "Fusion de 999 héros effacés, existant avant d'être",
+    "stats": {
+      "hp": 2000,
+      "energy": 999,
+      "rank": "TRANSCENDENT",
+      "actions_per_turn": 3,
+      "pre_existence": true
+    }
+  },
+  
+  "legendary_artifacts": [
+    {
+      "id": "oeil_de_wigner_final",
+      "name": "Œil de Wigner",
+      "type": "OBSERVATION_ARTIFACT",
+      "tier": 7,
+      "rarity": "TRANSCENDENT",
+      "owner": "Omega-Zero",
+      "effects": [
+        "OBSERVE_ALL_TIMELINES",
+        "COLLAPSE_ON_OBSERVATION", 
+        "SEE_QUANTUM_STATES"
+      ],
+      "description": "Observe toutes les possibilités simultanément",
+      "power_level": 2000,
+      "unlock_condition": "Defeat Omega-Zero",
+      "warning": "⚠️ Using this artifact may cause reality collapse",
+      "quantum_formula": "Π(ALL_ψ_STATES) ⇒ †[SELECTED_REALITY]"
+    },
+    
+    {
+      "id": "trompette_apocalypse",
+      "name": "Trompette de l'Apocalypse",
+      "type": "DOOMSDAY_ARTIFACT",
+      "tier": 7,
+      "rarity": "TRANSCENDENT",
+      "owner": "Omega-Zero",
+      "effects": [
+        "ANNOUNCE_END_TIMES",
+        "FORCE_TIMELINE_COLLAPSE",
+        "SUMMON_FALLEN_HEROES"
+      ],
+      "description": "Annonce la fin de toutes choses",
+      "power_level": 2500,
+      "abilities": {
+        "apocalypse_call": {
+          "name": "Appel de l'Apocalypse",
+          "description": "Summons the end of current timeline",
+          "cost": 200,
+          "effects": "TIMELINE_END"
+        }
+      },
+      "unlock_condition": "Witness Omega-Zero's final form"
+    },
+    
+    {
+      "id": "codex_eternite",
+      "name": "Codex de l'Éternité",
+      "type": "KNOWLEDGE_ARTIFACT",
+      "tier": 7,
+      "rarity": "TRANSCENDENT",
+      "owner": "Omega-Zero",
+      "effects": [
+        "INFINITE_KNOWLEDGE",
+        "REWRITE_HISTORY",
+        "SELF_UPDATING_PAGES"
+      ],
+      "description": "Contient tous les savoirs passés et futurs",
+      "power_level": 1800,
+      "abilities": {
+        "rewrite_past": {
+          "name": "Réécriture du Passé",
+          "description": "Changes historical events",
+          "cost": 150,
+          "effects": "HISTORY_ALTERATION"
+        },
+        "future_prophecy": {
+          "name": "Prophétie Future",
+          "description": "Reveals upcoming events",
+          "cost": 100,
+          "effects": "FUTURE_SIGHT"
+        }
+      },
+      "pages": "∞",
+      "self_writing": true
+    },
+    
+    {
+      "id": "lame_avant_monde_finale",
+      "name": "Lame d'Avant-Monde",
+      "type": "WEAPON_ARTIFACT",
+      "tier": 7,
+      "rarity": "TRANSCENDENT",
+      "owner": "Omega-Zero",
+      "effects": [
+        "CUT_NONEXISTENCE",
+        "SEVER_TIMELINES",
+        "PRE_EMPTIVE_STRIKE"
+      ],
+      "description": "Coupe ce qui n'existe pas encore",
+      "power_level": 2200,
+      "damage": "UNDEFINED",
+      "abilities": {
+        "nonexistence_cut": {
+          "name": "Coupe du Non-Être",
+          "description": "Attacks things before they exist",
+          "cost": 180,
+          "effects": "PREEMPTIVE_DAMAGE"
+        }
+      },
+      "paradox_weapon": true
+    },
+    
+    {
+      "id": "orbe_echos",
+      "name": "Orbe des Échos",
+      "type": "NECROMANCY_ARTIFACT",
+      "tier": 7,
+      "rarity": "TRANSCENDENT",
+      "owner": "Omega-Zero",
+      "effects": [
+        "RESONATE_WITH_DEAD",
+        "CREATE_HERO_ECHOES",
+        "AMPLIFY_PAST_ACTIONS"
+      ],
+      "description": "Résonne avec les héros morts",
+      "power_level": 1900,
+      "abilities": {
+        "hero_echo": {
+          "name": "Écho Héroïque",
+          "description": "Summons echoes of fallen heroes",
+          "cost": 120,
+          "effects": "HERO_RESURRECTION"
+        }
+      },
+      "connected_souls": 999
+    },
+    
+    {
+      "id": "graine_origine",
+      "name": "Graine de l'Origine",
+      "type": "CREATION_ARTIFACT",
+      "tier": 7,
+      "rarity": "TRANSCENDENT",
+      "owner": "Omega-Zero",
+      "effects": [
+        "CREATE_NEW_TIMELINE",
+        "RESET_TO_BEGINNING",
+        "SPAWN_PRIMORDIAL_CHAOS"
+      ],
+      "description": "Contient le premier instant de création",
+      "power_level": 3000,
+      "abilities": {
+        "big_bang": {
+          "name": "Nouveau Big Bang",
+          "description": "Creates an entirely new universe",
+          "cost": 500,
+          "effects": "UNIVERSE_CREATION"
+        }
+      },
+      "contains": "PRIMORDIAL_ESSENCE",
+      "danger_level": "REALITY_THREATENING"
+    }
+  ],
+  
+  "usage_warnings": {
+    "general": "These artifacts were designed by Omega-Zero for transcendent beings",
+    "mortal_use": "Using these artifacts as a mortal hero may cause permanent damage",
+    "reality_risk": "Multiple artifacts used together may cause multiverse collapse",
+    "recommendation": "Use only in final boss scenarios"
+  },
+  
+  "lore": {
+    "origin": "Created during Omega-Zero's fusion with 999 forgotten heroes",
+    "purpose": "Tools for rewriting the fundamental laws of existence",
+    "current_status": "Scattered across the multiverse after Omega-Zero's defeat",
+    "prophecy": "Only when all seven are reunited will the true Thirteenth Codex be revealed"
+  },
+  
+  "meta": {
+    "extracted_by": "Memento",
+    "discovery_date": "January 2025",
+    "source_quality": "LEGENDARY - Boss-tier artifacts",
+    "integration_status": "READY",
+    "power_scale": "TRANSCENDENT",
+    "notes": "These represent the ultimate artifacts in Heroes of Time - use with extreme caution"
+  }
+} 

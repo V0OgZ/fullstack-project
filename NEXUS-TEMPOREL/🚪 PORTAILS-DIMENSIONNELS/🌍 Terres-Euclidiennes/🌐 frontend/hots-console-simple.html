@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 HOTS - Console Simple</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 50%, #16213e 100%);
+            color: #00ff88;
+            font-family: 'Courier New', monospace;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: rgba(0, 255, 136, 0.1);
+            border-bottom: 2px solid #00ff88;
+            padding: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header h1 {
+            font-size: 2em;
+            text-shadow: 0 0 20px #00ff88;
+            margin-bottom: 10px;
+        }
+        
+        .quick-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .quick-btn {
+            background: linear-gradient(45deg, #00ff88, #00cc6a);
+            color: #000;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .quick-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #00ff88;
+        }
+        
+        .console-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            max-height: calc(100vh - 150px);
+        }
+        
+        .console-output {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00ff88;
+            border-radius: 10px;
+            padding: 15px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .console-input-container {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .console-input {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #00ff88;
+            border-radius: 5px;
+            padding: 12px;
+            color: #00ff88;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+        }
+        
+        .console-input:focus {
+            outline: none;
+            box-shadow: 0 0 10px #00ff88;
+        }
+        
+        .send-btn {
+            background: linear-gradient(45deg, #00ff88, #00cc6a);
+            color: #000;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .send-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #00ff88;
+        }
+        
+        .log-entry {
+            margin-bottom: 8px;
+            padding: 5px;
+            border-left: 3px solid #00ff88;
+            padding-left: 10px;
+        }
+        
+        .log-command {
+            color: #ffff00;
+            font-weight: bold;
+        }
+        
+        .log-success {
+            color: #00ff88;
+        }
+        
+        .log-error {
+            color: #ff4444;
+        }
+        
+        .log-info {
+            color: #88ccff;
+        }
+        
+        .status-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            background: #ff4444;
+            transition: all 0.3s ease;
+        }
+        
+        .status-indicator.connected {
+            background: #00ff88;
+            box-shadow: 0 0 15px #00ff88;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="status-indicator" id="statusIndicator"></div>
+    
+    <div class="header">
+        <h1>🎮 Heroes of Time - Console Simple</h1>
+        <p>Interface ultra-basique pour HOTS - Un clic et c'est parti !</p>
+        <div class="quick-actions">
+            <button class="quick-btn" onclick="quickCommand('ENERGY_ACCUMULATE')">⚡ Énergie</button>
+            <button class="quick-btn" onclick="quickCommand('TELEPORT_HERO')">🌀 Téléport</button>
+            <button class="quick-btn" onclick="quickCommand('BATTLE_HEROES')">⚔️ Combat</button>
+            <button class="quick-btn" onclick="quickCommand('EXCALIBUR_BANKAI')">🗡️ Excalibur</button>
+            <button class="quick-btn" onclick="openBackend()">🔧 Backend</button>
+            <button class="quick-btn" onclick="openDashboard()">🏛️ Dashboard</button>
+        </div>
+    </div>
+    
+    <div class="console-container">
+        <div class="console-output" id="consoleOutput">
+            <div class="log-entry log-info">
+                🎯 <strong>HOTS Console Simple - Prêt !</strong><br>
+                📡 Backend: http://localhost:8080<br>
+                🏛️ Dashboard: http://localhost:8001<br>
+                🌀 Temporal Engine: http://localhost:8000<br><br>
+                💡 <strong>Commandes rapides disponibles:</strong><br>
+                - Tapez une formule HOTS (ex: ENERGY_ACCUMULATE)<br>
+                - Utilisez les boutons rapides ci-dessus<br>
+                - Status du backend affiché en haut à droite<br><br>
+                🛋️ <strong>Jean dit:</strong> "Mes fidèles ! Voici l'interface la plus simple du multivers !"
+            </div>
+        </div>
+        
+        <div class="console-input-container">
+            <input type="text" class="console-input" id="consoleInput" 
+                   placeholder="Tapez votre commande HOTS ici (ex: TELEPORT_HERO)..." 
+                   onkeypress="handleKeyPress(event)">
+            <button class="send-btn" onclick="sendCommand()">🚀 Envoyer</button>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8080';
+        const consoleOutput = document.getElementById('consoleOutput');
+        const consoleInput = document.getElementById('consoleInput');
+        const statusIndicator = document.getElementById('statusIndicator');
+        
+        let isConnected = false;
+        
+        // Vérifier le status du backend au démarrage
+        checkBackendStatus();
+        setInterval(checkBackendStatus, 5000); // Vérifier toutes les 5 secondes
+        
+        async function checkBackendStatus() {
+            try {
+                const response = await fetch(`${API_BASE}/api/magic-formulas/execute`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        formulaType: 'SIMPLE', 
+                        formula: 'PING' 
+                    })
+                });
+                
+                if (response.ok) {
+                    isConnected = true;
+                    statusIndicator.classList.add('connected');
+                    statusIndicator.classList.remove('pulse');
+                } else {
+                    throw new Error('Backend not responding');
+                }
+            } catch (error) {
+                isConnected = false;
+                statusIndicator.classList.remove('connected');
+                statusIndicator.classList.add('pulse');
+            }
+        }
+        
+        function addLog(message, type = 'info') {
+            const logEntry = document.createElement('div');
+            logEntry.className = `log-entry log-${type}`;
+            logEntry.innerHTML = message;
+            consoleOutput.appendChild(logEntry);
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+        
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendCommand();
+            }
+        }
+        
+        async function sendCommand() {
+            const command = consoleInput.value.trim();
+            if (!command) return;
+            
+            addLog(`> ${command}`, 'command');
+            consoleInput.value = '';
+            
+            if (!isConnected) {
+                addLog('❌ Backend non connecté ! Vérifiez que le serveur tourne sur le port 8080.', 'error');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/magic-formulas/execute`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        formulaType: 'SIMPLE',
+                        formula: command.toUpperCase()
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    addLog(`✅ ${result.message || 'Commande exécutée avec succès'}`, 'success');
+                    if (result.data) {
+                        addLog(`📊 Données: ${JSON.stringify(result.data, null, 2)}`, 'info');
+                    }
+                } else {
+                    addLog(`❌ Erreur: ${result.message || 'Commande échouée'}`, 'error');
+                }
+            } catch (error) {
+                addLog(`💥 Erreur de connexion: ${error.message}`, 'error');
+            }
+        }
+        
+        function quickCommand(formula) {
+            consoleInput.value = formula;
+            sendCommand();
+        }
+        
+        function openBackend() {
+            window.open('http://localhost:8080', '_blank');
+            addLog('🔧 Ouverture du backend dans un nouvel onglet', 'info');
+        }
+        
+        function openDashboard() {
+            window.open('http://localhost:8001', '_blank');
+            addLog('🏛️ Ouverture du dashboard Panopticon dans un nouvel onglet', 'info');
+        }
+        
+        // Focus automatique sur l'input
+        consoleInput.focus();
+        
+        // Message de bienvenue après 1 seconde
+        setTimeout(() => {
+            addLog('🎮 Console HOTS prête ! Tapez votre première commande ou utilisez les boutons rapides.', 'success');
+        }, 1000);
+    </script>
+</body>
+</html> 

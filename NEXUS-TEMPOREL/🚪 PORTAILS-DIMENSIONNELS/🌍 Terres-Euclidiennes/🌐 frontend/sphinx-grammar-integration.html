@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🦁 Sphinx Quantique + Grammaire HOTS - Integration</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: linear-gradient(135deg, #1a0a2e, #16213e, #0f3460);
+            color: #f0f0f0;
+            font-family: 'Courier New', monospace;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .integration-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            height: calc(100vh - 40px);
+        }
+
+        .sphinx-panel, .grammar-panel {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #ffd700;
+            border-radius: 15px;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .panel-title {
+            font-size: 24px;
+            color: #ffd700;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #ffd700;
+        }
+
+        .sphinx-avatar {
+            font-size: 80px;
+            text-align: center;
+            margin-bottom: 20px;
+            animation: sphinxGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes sphinxGlow {
+            from { text-shadow: 0 0 20px #ffd700; }
+            to { text-shadow: 0 0 30px #ffd700, 0 0 40px #ff8c00; }
+        }
+
+        .riddle-display {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid #ffd700;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            min-height: 120px;
+        }
+
+        .grammar-editor {
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid #00ffff;
+            border-radius: 10px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            color: #00ffff;
+            width: 100%;
+            height: 200px;
+            resize: vertical;
+        }
+
+        .rune-palette {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .rune-button {
+            background: rgba(138, 43, 226, 0.3);
+            border: 1px solid #8a2be2;
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+
+        .rune-button:hover {
+            background: rgba(138, 43, 226, 0.6);
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.8);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            color: #000;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #4ecdc4, #45b7d1);
+            color: #fff;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .result-display {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid #00ff00;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            min-height: 100px;
+        }
+
+        .physics-concepts {
+            background: rgba(255, 165, 0, 0.1);
+            border: 1px solid #ffa500;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .concept-tag {
+            display: inline-block;
+            background: rgba(255, 165, 0, 0.3);
+            color: #ffa500;
+            padding: 5px 10px;
+            margin: 5px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="integration-container">
+        <!-- Panel Sphinx -->
+        <div class="sphinx-panel">
+            <div class="panel-title">🦁 SPHINX QUANTIQUE</div>
+            <div class="sphinx-avatar">🦁</div>
+            
+            <div class="riddle-display" id="riddleDisplay">
+                <strong>🌀 Énigme Quantique Active :</strong><br><br>
+                <em>Cliquez sur "Nouvelle Énigme" pour commencer...</em>
+            </div>
+
+            <div class="physics-concepts" id="physicsConcepts">
+                <strong>📚 Concepts Physiques :</strong><br>
+                <div id="conceptTags"></div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="generateNewRiddle()">🎲 Nouvelle Énigme</button>
+                <button class="btn btn-secondary" onclick="validateAnswer()">✅ Valider Réponse</button>
+            </div>
+
+            <div class="result-display" id="resultDisplay">
+                <strong>🏆 Résultat :</strong><br>
+                <em>Résolvez l'énigme avec la grammaire HOTS...</em>
+            </div>
+        </div>
+
+        <!-- Panel Grammaire -->
+        <div class="grammar-panel">
+            <div class="panel-title">📜 GRAMMAIRE HOTS</div>
+            
+            <div class="rune-palette">
+                <button class="rune-button" onclick="insertRune('ψ')">ψ<br><small>Psi-State</small></button>
+                <button class="rune-button" onclick="insertRune('⊙')">⊙<br><small>Superposition</small></button>
+                <button class="rune-button" onclick="insertRune('†')">†<br><small>Collapse</small></button>
+                <button class="rune-button" onclick="insertRune('Π')">Π<br><small>Observation</small></button>
+                <button class="rune-button" onclick="insertRune('Δt')">Δt<br><small>Temps</small></button>
+                <button class="rune-button" onclick="insertRune('∞')">∞<br><small>Infini</small></button>
+                <button class="rune-button" onclick="insertRune('⚡')">⚡<br><small>Énergie</small></button>
+                <button class="rune-button" onclick="insertRune('ℏ')">ℏ<br><small>Planck</small></button>
+            </div>
+
+            <textarea class="grammar-editor" id="grammarEditor" placeholder="// Écrivez votre solution HOTS ici...
+// Utilisez les runes quantiques pour résoudre l'énigme du Sphinx
+
+HERO(Arthur, @10,10)
+ψ001: ⊙(quantum_state ⟶ solution)
+
+// Exemple :
+// IF(heisenberg_uncertainty) THEN
+//   Π(Δx × Δp) ≥ ℏ/2
+// END"></textarea>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="parseGrammar()">🔍 Analyser Grammaire</button>
+                <button class="btn btn-secondary" onclick="executeHOTS()">⚡ Exécuter HOTS</button>
+                <button class="btn btn-secondary" onclick="clearEditor()">🗑️ Effacer</button>
+            </div>
+
+            <div class="result-display" id="grammarResult">
+                <strong>📊 Analyse Grammaticale :</strong><br>
+                <em>Tapez du code HOTS pour voir l'analyse...</em>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Base de données d'énigmes quantiques
+        const QUANTUM_RIDDLES = [
+            {
+                question: "Comment l'équation de Schrödinger doit-elle être adaptée pour un héros qui se téléporte quantiquement entre deux positions simultanément ?",
+                concepts: ["schrodinger", "superposition", "teleportation"],
+                difficulty: "EXPERT",
+                solution_hint: "Utilisez ψ et ⊙ pour la superposition, † pour l'observation"
+            },
+            {
+                question: "Deux héros sont intriqués quantiquement. Si l'un attaque à 50 hexagones de distance, comment l'autre ressent-il instantanément l'effet selon le principe de non-localité ?",
+                concepts: ["entanglement", "non_locality", "instant_correlation"],
+                difficulty: "MASTER",
+                solution_hint: "Π(observation) sur un héros affecte instantanément l'autre"
+            },
+            {
+                question: "Un projectile magique présente une dualité onde-particule. Comment calculer sa probabilité de toucher ET sa position exacte simultanément dans un système hexagonal ?",
+                concepts: ["wave_particle_duality", "uncertainty_principle", "measurement"],
+                difficulty: "LEGENDARY",
+                solution_hint: "Impossible selon Heisenberg : Π(Δx × Δp) ≥ ℏ/2"
+            }
+        ];
+
+        let currentRiddle = null;
+
+        function generateNewRiddle() {
+            currentRiddle = QUANTUM_RIDDLES[Math.floor(Math.random() * QUANTUM_RIDDLES.length)];
+            
+            document.getElementById('riddleDisplay').innerHTML = `
+                <strong>🌀 Énigme Quantique (${currentRiddle.difficulty}) :</strong><br><br>
+                ${currentRiddle.question}<br><br>
+                <small>💡 Indice : ${currentRiddle.solution_hint}</small>
+            `;
+
+            // Afficher les concepts
+            const conceptsDiv = document.getElementById('conceptTags');
+            conceptsDiv.innerHTML = '';
+            currentRiddle.concepts.forEach(concept => {
+                const tag = document.createElement('span');
+                tag.className = 'concept-tag';
+                tag.textContent = concept.replace('_', ' ').toUpperCase();
+                conceptsDiv.appendChild(tag);
+            });
+        }
+
+        function insertRune(rune) {
+            const editor = document.getElementById('grammarEditor');
+            const cursorPos = editor.selectionStart;
+            const textBefore = editor.value.substring(0, cursorPos);
+            const textAfter = editor.value.substring(editor.selectionEnd);
+            
+            editor.value = textBefore + rune + textAfter;
+            editor.selectionStart = editor.selectionEnd = cursorPos + rune.length;
+            editor.focus();
+        }
+
+        function parseGrammar() {
+            const code = document.getElementById('grammarEditor').value;
+            const result = document.getElementById('grammarResult');
+            
+            // Analyse simple de la grammaire HOTS
+            let analysis = "📊 Analyse Grammaticale :\n\n";
+            
+            // Compter les runes
+            const runes = ['ψ', '⊙', '†', 'Π', 'Δt', '∞', '⚡', 'ℏ'];
+            runes.forEach(rune => {
+                const count = (code.match(new RegExp(rune.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length;
+                if (count > 0) {
+                    analysis += `• ${rune} : ${count} occurrence(s)\n`;
+                }
+            });
+
+            // Détecter les structures
+            if (code.includes('HERO(')) analysis += "• Structure HERO détectée\n";
+            if (code.includes('ψ')) analysis += "• États Psi-quantiques présents\n";
+            if (code.includes('IF(') && code.includes('THEN')) analysis += "• Logique conditionnelle détectée\n";
+            if (code.includes('⊙(') && code.includes('⟶')) analysis += "• Superposition quantique correcte\n";
+
+            result.innerHTML = `<pre>${analysis}</pre>`;
+        }
+
+        function executeHOTS() {
+            // Simulation d'exécution
+            const result = document.getElementById('grammarResult');
+            result.innerHTML = `
+                <strong>⚡ Exécution HOTS :</strong><br>
+                ✅ Code analysé et validé<br>
+                🌀 États quantiques initialisés<br>
+                ⚡ Simulation en cours...<br>
+                <em>Résultat : Code HOTS exécuté avec succès !</em>
+            `;
+        }
+
+        function validateAnswer() {
+            if (!currentRiddle) {
+                alert("Générez d'abord une énigme !");
+                return;
+            }
+
+            const code = document.getElementById('grammarEditor').value;
+            const result = document.getElementById('resultDisplay');
+            
+            // Validation simple basée sur les concepts requis
+            let score = 0;
+            let feedback = "🏆 Évaluation de votre solution :\n\n";
+
+            // Vérifier la présence des éléments requis selon l'énigme
+            if (currentRiddle.concepts.includes('superposition') && code.includes('⊙')) {
+                score += 30;
+                feedback += "✅ Superposition quantique utilisée (+30pts)\n";
+            }
+            
+            if (currentRiddle.concepts.includes('uncertainty_principle') && code.includes('ℏ')) {
+                score += 25;
+                feedback += "✅ Principe d'incertitude reconnu (+25pts)\n";
+            }
+
+            if (currentRiddle.concepts.includes('entanglement') && code.includes('Π')) {
+                score += 25;
+                feedback += "✅ Observation quantique correcte (+25pts)\n";
+            }
+
+            if (code.includes('ψ') && code.includes('†')) {
+                score += 20;
+                feedback += "✅ États Psi et collapse utilisés (+20pts)\n";
+            }
+
+            // Résultat final
+            if (score >= 70) {
+                feedback += `\n🎉 SUCCÈS ! Score: ${score}/100\n`;
+                feedback += "🏆 Le Sphinx vous accorde un artefact légendaire !";
+            } else if (score >= 40) {
+                feedback += `\n⚠️ Partiel. Score: ${score}/100\n`;
+                feedback += "🤔 Le Sphinx vous donne une seconde chance...";
+            } else {
+                feedback += `\n❌ Échec. Score: ${score}/100\n`;
+                feedback += "💀 Le Sphinx vous maudit temporairement...";
+            }
+
+            result.innerHTML = `<pre>${feedback}</pre>`;
+        }
+
+        function clearEditor() {
+            document.getElementById('grammarEditor').value = '';
+            document.getElementById('grammarResult').innerHTML = `
+                <strong>📊 Analyse Grammaticale :</strong><br>
+                <em>Tapez du code HOTS pour voir l'analyse...</em>
+            `;
+        }
+
+        // Initialisation
+        window.onload = function() {
+            generateNewRiddle();
+        };
+    </script>
+</body>
+</html> 

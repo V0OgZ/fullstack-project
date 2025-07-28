@@ -1,0 +1,79 @@
+{
+  "immediate": [
+    {
+      "task": "Créer Terran ceMekna",
+      "file": "🎮 game_assets/heroes/psychonauts/terran_cemekna.json",
+      "status": "READY",
+      "priority": 1
+    },
+    {
+      "task": "Créer Hyperspace DMT World",
+      "file": "🎮 game_assets/worlds/hyperspace_dmt/world_data.json",
+      "status": "READY",
+      "priority": 1
+    },
+    {
+      "task": "Implémenter HeroFPV Component",
+      "files": [
+        "🌐 frontend/src/components/HeroFPV.tsx",
+        "🌐 frontend/src/components/HeroFPV.css"
+      ],
+      "status": "READY",
+      "priority": 2
+    },
+    {
+      "task": "Étendre HOTS Grammar",
+      "file": "📖 docs/HOTS_GRAMMAR_EXTENSION_PI_OPERATOR.json",
+      "status": "READY",
+      "priority": 2
+    }
+  ],
+  "backend_updates": [
+    {
+      "task": "Ajouter world_formula à WorldEntity",
+      "file": "🖥️ backend/src/main/java/com/example/demo/model/World.java",
+      "changes": "Add String worldFormula field",
+      "priority": 3
+    },
+    {
+      "task": "Implémenter Π operator dans parser",
+      "file": "🖥️ backend/src/main/java/com/example/demo/parser/TemporalScriptParser.java",
+      "changes": "Add PI_OPERATOR token and parsing logic",
+      "priority": 3
+    },
+    {
+      "task": "Créer ProjectionEngine",
+      "file": "🖥️ backend/src/main/java/com/example/demo/engine/ProjectionEngine.java",
+      "description": "Engine pour appliquer formules de projection aux mondes",
+      "priority": 4
+    }
+  ],
+  "frontend_updates": [
+    {
+      "task": "Intégrer HeroFPV dans GameView",
+      "file": "🌐 frontend/src/views/GameView.tsx",
+      "changes": "Add HeroFPV component alongside MapView",
+      "priority": 3
+    },
+    {
+      "task": "Créer world-specific CSS",
+      "files": [
+        "🌐 frontend/src/styles/worlds/forest_grofi.css",
+        "🌐 frontend/src/styles/worlds/hyperspace_dmt.css"
+      ],
+      "priority": 4
+    }
+  ],
+  "testing": [
+    {
+      "task": "Test Terran ceMekna abilities",
+      "command": "curl -X POST http://localhost:8080/api/heroes/terran_cemekna/cast",
+      "priority": 5
+    },
+    {
+      "task": "Test world formula projection",
+      "command": "curl -X GET http://localhost:8080/api/worlds/HYPERSPACE_DMT_REALM/project",
+      "priority": 5
+    }
+  ]
+}

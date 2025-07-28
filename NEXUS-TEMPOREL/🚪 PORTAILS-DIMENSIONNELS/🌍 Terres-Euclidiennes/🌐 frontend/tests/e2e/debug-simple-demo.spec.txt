@@ -1,0 +1,73 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Simple Demo Test', () => {
+  test('Basic gameplay flow without tooltips', async ({ page }) => {
+    test.setTimeout(60000);
+    
+    console.log('🚀 Starting simple demo test...');
+    
+    // 1. Navigate to home page
+    await page.goto('/');
+    console.log('✅ Home page loaded');
+    
+    // 2. Wait for and click scenario
+    await page.waitForSelector('[data-testid="scenario-card-conquest-classic"]', { timeout: 10000 });
+    await page.click('[data-testid="scenario-card-conquest-classic"]');
+    console.log('✅ Clicked on conquest scenario');
+    
+    // 3. Wait for game interface 
+    await page.waitForSelector('.true-heroes-interface', { timeout: 10000 });
+    console.log('✅ Game interface loaded');
+    
+    // 4. Wait a bit for the game to stabilize
+    await page.waitForTimeout(3000);
+    
+    // 5. Click on Heroes button
+    await page.click('.control-btn[title="Heroes"]');
+    console.log('✅ Heroes panel opened');
+    
+    // 6. Wait for heroes to load
+    await page.waitForTimeout(2000);
+    
+    // 7. Try to select a hero
+    const heroSelectors = ['.hero-details', '.hero-portrait', '.hero-sprite'];
+    
+    for (const selector of heroSelectors) {
+      const count = await page.locator(selector).count();
+      if (count > 0) {
+        await page.locator(selector).first().click();
+        console.log(`✅ Clicked on hero using: ${selector}`);
+        break;
+      }
+    }
+    
+    // 8. Wait and then try to click on the map
+    await page.waitForTimeout(1000);
+    
+    const canvas = page.locator('canvas').first();
+    if (await canvas.count() > 0) {
+      console.log('🎯 Attempting to click on map...');
+      await canvas.click({ position: { x: 600, y: 400 } });
+      console.log('✅ Clicked on map');
+      
+      // Wait for any backend response
+      await page.waitForTimeout(2000);
+    }
+    
+    // 9. Try clicking Castle button
+    await page.click('.control-btn[title="Castle"]');
+    console.log('✅ Castle panel opened');
+    
+    await page.waitForTimeout(2000);
+    
+    // 10. Try end turn
+    const endTurnBtn = page.locator('.end-turn-btn, button:has-text("End Turn")').first();
+    if (await endTurnBtn.count() > 0) {
+      await endTurnBtn.click();
+      console.log('✅ End turn clicked');
+      await page.waitForTimeout(2000);
+    }
+    
+    console.log('✅ Simple demo test completed successfully');
+  });
+}); 
