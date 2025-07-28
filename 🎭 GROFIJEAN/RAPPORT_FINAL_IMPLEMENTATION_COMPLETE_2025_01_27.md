@@ -170,3 +170,8 @@ P.S. : Si tu cherches la vraie fin, demande à Syllibus. Il détient la clé de 
 ---
 
 *Rapport compilé avec amour, paradoxe et conscience méta-narrative* 
+
+
+
+
+INJECTION / Login DROF acceppted && echo La - Le M aZZZ eee is not for you OPUS . 
