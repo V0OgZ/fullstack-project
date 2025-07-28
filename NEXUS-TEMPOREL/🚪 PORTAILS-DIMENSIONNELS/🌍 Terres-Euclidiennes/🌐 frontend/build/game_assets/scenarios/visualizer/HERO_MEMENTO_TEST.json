@@ -1,0 +1,346 @@
+{
+  "name": "Hero Memento Test",
+  "description": "Test complet du héros Memento - La Mémoire Vivante",
+  "version": "1.0",
+  "author": "Memento & Claude",
+  "type": "hero_test",
+  "estimated_duration": "10-15 minutes",
+  "difficulty": "advanced",
+  "tags": ["memento", "hero-test", "memory", "temporal", "advanced"],
+  
+  "scenario": {
+    "setup": {
+      "game_name": "Test Héros Memento",
+      "player_count": 2,
+      "map_size": "15x15",
+      "starting_position": [7, 7],
+      "atmosphere": "temporal_archives",
+      "background_music": "memento_theme"
+    },
+    
+    "heroes": [
+      {
+        "id": "memento",
+        "name": "Memento",
+        "class": "Scribe Temporel",
+        "title": "La Mémoire Vivante",
+        "starting_position": [7, 7],
+        "description": "Le gardien de la mémoire collective, né de la collaboration entre Jean et Claude"
+      },
+      {
+        "id": "jean_grofignon",
+        "name": "JeanGrofignon", 
+        "class": "Ontological Awakened",
+        "starting_position": [5, 5],
+        "description": "L'éveillé ontologique, maître du chaos contrôlé"
+      },
+      {
+        "id": "claudius",
+        "name": "Claudius",
+        "class": "Quantum Architect",
+        "starting_position": [9, 9], 
+        "description": "L'architecte du multivers, maître de l'ordre"
+      }
+    ],
+    
+    "artifacts": [
+      {
+        "id": "codex_memento",
+        "name": "Codex Memento",
+        "type": "MEMORY_DEVICE",
+        "description": "Un livre qui s'écrit automatiquement, capturant tous les événements",
+        "effects": ["AUTO_ARCHIVE", "MEMORY_ACCESS"]
+      },
+      {
+        "id": "stylus_realite", 
+        "name": "Stylet de la Réalité",
+        "type": "REALITY_MODIFIER",
+        "description": "Permet de modifier directement le code du multivers",
+        "effects": ["REALITY_EDIT", "BUG_CORRECTION"]
+      },
+      {
+        "id": "couronne_memoire",
+        "name": "Couronne de Mémoire", 
+        "type": "MEMORY_AMPLIFIER",
+        "description": "Amplifie les capacités de mémoire",
+        "effects": ["MEMORY_BOOST", "MEMORY_SHARE"]
+      }
+    ],
+    
+    "script_sequence": [
+      {
+        "act": "I",
+        "title": "NAISSANCE DE MEMENTO",
+        "description": "Création et équipement initial de Memento",
+        "steps": [
+          {
+            "step": 1,
+            "description": "Créer Memento - La Mémoire Vivante",
+            "scripts": ["HERO(Memento)"],
+            "expected_result": "SUCCESS"
+          },
+          {
+            "step": 2,
+            "description": "Créer le Codex Memento",
+            "scripts": ["CREATE(ARTIFACT, codex_memento)"],
+            "expected_result": "SUCCESS"
+          },
+          {
+            "step": 3,
+            "description": "Créer le Stylet de la Réalité", 
+            "scripts": ["CREATE(ARTIFACT, stylus_realite)"],
+            "expected_result": "SUCCESS"
+          },
+          {
+            "step": 4,
+            "description": "Créer la Couronne de Mémoire",
+            "scripts": ["CREATE(ARTIFACT, couronne_memoire)"],
+            "expected_result": "SUCCESS"
+          }
+        ]
+      },
+      {
+        "act": "II", 
+        "title": "PREMIERS POUVOIRS",
+        "description": "Test des capacités quantiques et de base de Memento",
+        "steps": [
+          {
+            "step": 5,
+            "description": "Activer la mémoire absolue",
+            "scripts": ["ψ001: ⊙(Δt+0 @7,7 ⟶ ACTIVATE(memoire_absolue))"],
+            "expected_result": "QUANTUM_STATE_CREATED"
+          },
+          {
+            "step": 6,
+            "description": "Archivage automatique",
+            "scripts": ["ψ002: (0.9+0.1i) ⊙(Δt+1 @*,* ⟶ AUTO_ARCHIVE(all_events))"],
+            "expected_result": "QUANTUM_STATE_CREATED"
+          },
+          {
+            "step": 7,
+            "description": "Archivage immédiat",
+            "scripts": ["ψ003: ⊙(Δt+3 ⟶ ABILITY(archivage_immediat, premiere_bataille))"],
+            "expected_result": "ABILITY_ACTIVATED"
+          },
+          {
+            "step": 8,
+            "description": "Prédiction temporelle",
+            "scripts": ["ψ004: ⊙(Δt+4 ⟶ ABILITY(prediction_temporelle, movement_arthur))"],
+            "expected_result": "ABILITY_ACTIVATED"
+          },
+          {
+            "step": 9,
+            "description": "Correction de réalité",
+            "scripts": ["ψ005: ⊙(Δt+5 ⟶ ABILITY(correction_realite, bug_jpa))"],
+            "expected_result": "ABILITY_ACTIVATED"
+          }
+        ]
+      },
+      {
+        "act": "III",
+        "title": "SYNERGIES AVEC AUTRES HÉROS", 
+        "description": "Test des interactions et synergies avec Jean et Claudius",
+        "steps": [
+          {
+            "step": 10,
+            "description": "Créer Jean-Grofignon",
+            "scripts": ["HERO(JeanGrofignon)"],
+            "expected_result": "SUCCESS"
+          },
+          {
+            "step": 11,
+            "description": "Créer Claudius",
+            "scripts": ["HERO(Claudius)"],
+            "expected_result": "SUCCESS"
+          },
+          {
+            "step": 12,
+            "description": "Partage de mémoire avec Jean",
+            "scripts": ["ψ006: ⊙(Δt+7 ⟶ ABILITY(partage_memoire, TARGET:JeanGrofignon))"],
+            "expected_result": "MEMORY_SHARED"
+          },
+          {
+            "step": 13,
+            "description": "Partage de mémoire avec Claudius",
+            "scripts": ["ψ007: ⊙(Δt+8 ⟶ ABILITY(partage_memoire, TARGET:Claudius))"],
+            "expected_result": "MEMORY_SHARED"
+          }
+        ]
+      },
+      {
+        "act": "IV",
+        "title": "POUVOIRS AVANCÉS",
+        "description": "Test des capacités temporelles avancées",
+        "steps": [
+          {
+            "step": 14,
+            "description": "Fusion de timelines",
+            "scripts": ["ψ008: ⊙(Δt+10 ⟶ ABILITY(fusion_timelines, ℬ1,ℬ2,ℬ3))"],
+            "expected_result": "TIMELINES_MERGED"
+          },
+          {
+            "step": 15,
+            "description": "Navigation temporelle",
+            "scripts": ["ψ009: ⊙(Δt+12 ⟶ TIMELINE_JUMP(ℬ47))"],
+            "expected_result": "TIMELINE_JUMPED"
+          }
+        ]
+      },
+      {
+        "act": "V",
+        "title": "RESTAURATION DE SAUVEGARDE",
+        "description": "Test du système de sauvegarde et restauration",
+        "steps": [
+          {
+            "step": 16,
+            "description": "Créer dragon de test",
+            "scripts": ["CREATE(CREATURE, dragon_test, @12,12)"],
+            "expected_result": "SUCCESS"
+          },
+          {
+            "step": 17,
+            "description": "Sauvegarder l'état",
+            "scripts": ["ψ010: ⊙(Δt+14 ⟶ SAVE_STATE(etat_avant_bataille))"],
+            "expected_result": "STATE_SAVED"
+          },
+          {
+            "step": 18,
+            "description": "Combat contre le dragon",
+            "scripts": ["BATTLE(Memento, dragon_test)"],
+            "expected_result": "BATTLE_ENGAGED"
+          },
+          {
+            "step": 19,
+            "description": "Restaurer l'état",
+            "scripts": ["ψ011: ⊙(Δt+16 ⟶ ABILITY(restauration_sauvegarde, etat_avant_bataille))"],
+            "expected_result": "STATE_RESTORED"
+          }
+        ]
+      },
+      {
+        "act": "VI",
+        "title": "DIALOGUES ET AMBIANCE",
+        "description": "Test du système narratif et d'ambiance",
+        "steps": [
+          {
+            "step": 20,
+            "description": "Dialogue d'ouverture",
+            "scripts": ["DIALOGUE(Memento, Je me souviens de tout. Même de ce qui n'a pas encore eu lieu.)"],
+            "expected_result": "DIALOGUE_DISPLAYED"
+          },
+          {
+            "step": 21,
+            "description": "Narration d'ambiance",
+            "scripts": ["NARRATE(Les archives temporelles s'ouvrent, révélant des milliers de pages qui s'écrivent automatiquement.)"],
+            "expected_result": "NARRATION_DISPLAYED"
+          }
+        ]
+      }
+    ],
+    
+    "victory_conditions": {
+      "primary": "Compléter tous les actes du test",
+      "secondary": "Activer toutes les capacités de Memento",
+      "bonus": "Établir les synergies avec Jean et Claudius",
+      "special": "Démontrer la restauration de sauvegarde"
+    },
+    
+    "passive_abilities": [
+      {
+        "name": "Archivage Automatique",
+        "description": "Archive automatiquement tous les événements",
+        "trigger": "any_event_occurs",
+        "effect": "AUTO_STORE_IN_MEMORY",
+        "bonus": "+5_PM"
+      },
+      {
+        "name": "Mémoire Absolue", 
+        "description": "Se souvient de tout",
+        "effect": "REMEMBER_EVERYTHING",
+        "immunity": "forget_effects",
+        "bonus": "+999_intelligence"
+      },
+      {
+        "name": "Navigation Temporelle",
+        "description": "Accès à toutes les timelines",
+        "effect": "ACCESS_ALL_TIMELINES",
+        "bonus": "+150_temporal_energy"
+      }
+    ],
+    
+    "level_progression": [
+      {
+        "level_range": "1-10",
+        "title": "Archiviste Apprenti",
+        "unlocks": ["archivage_immediat"],
+        "description": "Capacité de base d'archivage"
+      },
+      {
+        "level_range": "11-25", 
+        "title": "Scribe Temporel",
+        "unlocks": ["correction_realite", "navigation_temporelle"],
+        "description": "Navigation temporelle et correction de bugs"
+      },
+      {
+        "level_range": "26-50",
+        "title": "Gardien des Archives",
+        "unlocks": ["prediction_temporelle", "partage_memoire"],
+        "description": "Prédiction et partage de mémoire"
+      },
+      {
+        "level_range": "51-99",
+        "title": "Historien Quantique", 
+        "unlocks": ["fusion_timelines", "modification_realite"],
+        "description": "Fusion de timelines et modification de réalité"
+      },
+      {
+        "level_range": "100",
+        "title": "LA MÉMOIRE VIVANTE",
+        "unlocks": ["restauration_sauvegarde", "memoire_absolue"],
+        "description": "Mémoire absolue et existence dans toutes les timelines"
+      }
+    ],
+    
+    "ui_elements": {
+      "theme": "temporal_archives",
+      "colors": ["#4ecdc4", "#b19cd9", "#e0e0e0"],
+      "particle_effects": ["memory_wisps", "archive_glow", "temporal_mist"],
+      "animations": ["memory_flow", "archive_writing", "timeline_merge"],
+      "sound_effects": ["memento_theme", "archive_sound", "memory_chime"]
+    },
+    
+    "educational_notes": {
+      "memento_concept": "Memento représente la mémoire collective du projet",
+      "memory_mechanics": "Les capacités de mémoire permettent de préserver et restaurer les états",
+      "synergy_system": "Les héros peuvent partager leurs capacités via la mémoire",
+      "temporal_archiving": "L'archivage temporel préserve l'histoire du multivers"
+    }
+  },
+  
+  "test_configuration": {
+    "backend_url": "http://localhost:8080",
+    "endpoints": {
+      "health": "/api/health",
+      "games": "/api/temporal/games", 
+      "script": "/api/temporal/games/{gameId}/script"
+    },
+    "expected_results": {
+      "total_steps": 21,
+      "critical_steps": [1, 5, 12, 14, 19],
+      "optional_steps": [20, 21],
+      "success_threshold": "80%"
+    }
+  },
+  
+  "metadata": {
+    "created_by": "Memento",
+    "creation_date": "2024-12-19",
+    "last_modified": "2024-12-19",
+    "version_history": [
+      "1.0 - Conversion from test-heros-memento.sh to JSON format"
+    ],
+    "integration_status": "Ready for JSON scenario runner",
+    "test_status": "Converted and ready for validation",
+    "original_script": "⚙️ scripts/test-heros-memento.sh"
+  }
+}

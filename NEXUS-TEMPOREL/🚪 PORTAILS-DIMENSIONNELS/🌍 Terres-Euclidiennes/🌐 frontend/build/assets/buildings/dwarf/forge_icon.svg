@@ -1,0 +1,5 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <rect x="4" y="8" width="24" height="16" fill="#FF4500" stroke="#000" stroke-width="1"/>
+  <polygon points="16,4 4,8 28,8" fill="#8B4513" stroke="#000"/>
+  <text x="16" y="28" text-anchor="middle" font-family="Arial" font-size="12" fill="#000">🔨</text>
+</svg>

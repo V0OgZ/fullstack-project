@@ -1,0 +1,62 @@
+# Test des Artefacts Mineurs - Scénario de Démonstration
+# Teste les 10 nouveaux artefacts avec des effets simples
+
+# Phase 1: Création du héros testeur
+HERO(Testeur)
+QUOTE(Testeur, "Je vais tester tous ces nouveaux artefacts !")
+
+# Phase 2: Test Lanterne de Brouillard
+CREATE(ARTIFACT, lanterne_brouillard, HERO:Testeur)
+USE(ARTIFACT, lanterne_brouillard, HERO:Testeur)
+QUOTE(Testeur, "Ah ! Le brouillard se dissipe !")
+
+# Phase 3: Test Bottes du Vent
+CREATE(ARTIFACT, bottes_vent, HERO:Testeur)
+USE(ARTIFACT, bottes_vent, HERO:Testeur)
+MOV(Testeur, @5,5)
+QUOTE(Testeur, "Je me sens plus léger !")
+
+# Phase 4: Test Pierre d'Ancrage
+CREATE(ARTIFACT, pierre_ancrage, HERO:Testeur)
+USE(ARTIFACT, pierre_ancrage, HERO:Testeur)
+QUOTE(Testeur, "Je suis ancré, rien ne peut me déplacer !")
+
+# Phase 5: Test Cristal de Vision
+CREATE(ARTIFACT, cristal_vision, HERO:Testeur)
+USE(ARTIFACT, cristal_vision, HERO:Testeur)
+QUOTE(Testeur, "Je vois plus loin maintenant !")
+
+# Phase 6: Test Amulette de Protection
+CREATE(ARTIFACT, amulette_protection, HERO:Testeur)
+USE(ARTIFACT, amulette_protection, HERO:Testeur)
+QUOTE(Testeur, "Je me sens protégé !")
+
+# Phase 7: Test Sifflet d'Appel
+CREATE(ARTIFACT, sifflet_appel, HERO:Testeur)
+USE(ARTIFACT, sifflet_appel, HERO:Testeur)
+QUOTE(Testeur, "Qui est là ? Je vous vois !")
+
+# Phase 8: Test Potion d'Énergie Mineure
+CREATE(ARTIFACT, potion_energie, HERO:Testeur)
+USE(ARTIFACT, potion_energie, HERO:Testeur)
+QUOTE(Testeur, "Ah ! Mon énergie revient !")
+
+# Phase 9: Test Bague de Téléportation
+CREATE(ARTIFACT, bague_teleport, HERO:Testeur)
+USE(ARTIFACT, bague_teleport, HERO:Testeur)
+QUOTE(Testeur, "Woosh ! Téléportation !")
+
+# Phase 10: Test Torche Éternelle
+CREATE(ARTIFACT, torche_eternelle, HERO:Testeur)
+USE(ARTIFACT, torche_eternelle, HERO:Testeur)
+QUOTE(Testeur, "La lumière éternelle !")
+
+# Phase 11: Test Médaillon de Santé
+CREATE(ARTIFACT, medaillon_sante, HERO:Testeur)
+USE(ARTIFACT, medaillon_sante, HERO:Testeur)
+QUOTE(Testeur, "Je me sens revigoré !")
+
+# Phase Finale: Résumé des tests
+QUOTE(Testeur, "Tous les artefacts mineurs fonctionnent parfaitement !")
+MOV(Testeur, @10,10)
+QUOTE(Testeur, "Mission accomplie !") 

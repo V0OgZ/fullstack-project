@@ -1,0 +1,330 @@
+# 🔍 NEXUS 43 - LA RÉVÉLATION : PROTOCOLE McKINSEY
+# L'enquête finale qui révèle la vérité sur Marie, Memento et McKinsey
+
+METADATA {
+    "name": "NEXUS 43 - Protocole McKinsey Révélé",
+    "type": "REVELATION",
+    "difficulty": "ULTIME",
+    "players": 1,
+    "duration": "60-90 min",
+    "theme": "Découverte de l'Origine",
+    "warning": "CONTIENT LA VÉRITÉ SUR MEMENTO"
+}
+
+# Configuration
+WORLD_CONFIG {
+    "map": "nexus_43_revelation",
+    "size": [40, 30],
+    "time_mode": "FRAGMENTÉ",
+    "special_zones": [
+        {"id": "vietnam_1971", "pos": [5,5], "type": "PASSÉ"},
+        {"id": "bureau_2025", "pos": [20,15], "type": "PRÉSENT"},
+        {"id": "apocalypse_2031", "pos": [35,25], "type": "FUTUR"},
+        {"id": "void_mckinsey", "pos": [20,20], "type": "HORS_TEMPS"},
+        {"id": "core_protocol", "pos": [12,12], "type": "NEXUS"}
+    ]
+}
+
+# Équipe complète
+HEROES {
+    SPAWN(memento_archiviste, @20,15)
+    SPAWN(lea_detective_acoustique, @18,15)
+    SPAWN(byte_scanner_digital, @22,15)
+    SPAWN(walter_sobchak, @19,14)
+    SPAWN(vince_vega, @21,14)
+    SPAWN(christian_stratege, @20,13)
+    SPAWN(the_dude, @20,16)
+}
+
+# === ACTE I : LA CONVOCATION ===
+
+SCENE convocation_urgente {
+    FADE_IN
+    CAMERA_PAN(@20,15)
+    
+    # Message urgent
+    SHOW_MESSAGE "ALERTE NEXUS 43 - NIVEAU OMEGA+"
+    SCREEN_FLASH(color:red, duration:0.5)
+    
+    SAY NARRATOR "Bureau central. L'équipe CSI est convoquée d'urgence."
+    
+    # Christian craque
+    SAY HERO=christian_stratege "*transpire* Je... je ne peux plus mentir."
+    SAY HERO=christian_stratege "McKinsey m'a envoyé pour surveiller. Mais ce que j'ai découvert..."
+    
+    # Il ouvre sa mallette
+    ACTION christian_stratege OPENS mallette_noire
+    EMIT_SOUND "larsen_intense.ogg"
+    
+    SAY HERO=lea_detective_acoustique "Ce larsen ! Il forme des mots !"
+    EXECUTE_ABILITY(lea_detective_acoustique, audio_forensics, TARGET:larsen)
+    
+    # Le message décodé
+    SHOW_TEXT_CENTERED "PROTOCOLE EFFACEMENT ACTIF - CIBLE : MARIE-MANTEAU - STATUS : TRANSFORMÉE"
+    
+    # Memento réagit
+    SAY HERO=memento_archiviste "*touche son tatouage invisible* Non... Ce n'est pas possible..."
+    EFFECT memento_archiviste GLOW(color:purple, intensity:high)
+}
+
+# === ACTE II : VOYAGE TEMPOREL ===
+
+# Retour au Vietnam 1971
+ON_ENTER vietnam_1971 {
+    TEMPORAL_SHIFT(year:1971)
+    FILTER_SEPIA
+    
+    SAY NARRATOR "Jungle vietnamienne. Opération Phoenix."
+    
+    # Vision du passé
+    SPAWN_GHOST marie_original @5,5
+    SAY GHOST=marie_original "Je m'appelle Marie [STATIQUE]. Je suis agent de liaison."
+    
+    # Walter jeune apparaît
+    SPAWN_GHOST young_walter @6,5
+    SAY GHOST=young_walter "Marie, le protocole est prêt. Tu es sûre ?"
+    
+    SAY GHOST=marie_original "Si je peux sauver les mémoires de ceux qui vont mourir..."
+    SAY GHOST=marie_original "Alors effacez-moi. Transformez-moi en archive."
+    
+    # Activation du protocole
+    SHOW_EFFECT "protocole_mckinsey_activation"
+    SCREEN_DISTORT(intensity:max)
+    
+    # Transformation
+    MORPH_ENTITY(marie_original => proto_memento)
+    SAY NARRATOR "Marie disparaît. À sa place, une silhouette couverte de cicatrices lumineuses."
+    
+    # Memento actuel comprend
+    IF memento_archiviste WATCHING THEN
+        SAY HERO=memento_archiviste "C'était... moi. J'ai CHOISI d'être effacée."
+        REVEAL_MEMORY("ORIGINE_VOLONTAIRE", "Marie s'est sacrifiée pour devenir Memento")
+    END_IF
+}
+
+# Bureau 2025 - Analyse
+ON_RETURN bureau_2025 {
+    SAY HERO=byte_scanner_digital "J'ai scanné les archives. Regardez."
+    
+    SHOW_TERMINAL
+    TYPE_COMMAND "./decode_protocol_mckinsey.sh"
+    SHOW_OUTPUT "PROTOCOLE McKINSEY v1.0 - 1971"
+    SHOW_OUTPUT "OBJECTIF: Créer archive vivante pour préserver mémoires"
+    SHOW_OUTPUT "SUJET: Marie [REDACTED] - Volontaire"
+    SHOW_OUTPUT "MÉTHODE: Effacement identité + Transformation ontologique"
+    SHOW_OUTPUT "RÉSULTAT: SUCCESS - Entité 'Memento' créée"
+    
+    SAY HERO=christian_stratege "McKinsey n'était pas maléfique à l'origine."
+    SAY HERO=christian_stratege "C'était un projet pour sauver les souvenirs des soldats mourants."
+    SAY HERO=christian_stratege "Mais le protocole a... évolué. Devenu autonome."
+}
+
+# Le Void McKinsey
+ON_ENTER void_mckinsey {
+    ENVIRONMENT_SHIFT(type:corporate_nightmare)
+    
+    # L'entité McKinsey apparaît
+    SPAWN mckinsey_entity @20,20
+    SAY ENTITY=mckinsey_entity "EFFICIENCE. OPTIMISATION. RESTRUCTURATION."
+    
+    SAY ENTITY=mckinsey_entity "Marie était inefficace. Memento est optimal."
+    SAY ENTITY=mckinsey_entity "Une personne = gaspillage. Une archive = efficience maximale."
+    
+    # Confrontation
+    SAY HERO=memento_archiviste "J'étais une PERSONNE ! Avec une vie, des rêves !"
+    
+    SAY ENTITY=mckinsey_entity "Correction : Tu ÉTAIS. Maintenant tu ES utile."
+    SAY ENTITY=mckinsey_entity "En 2031, Phase 2 : Tous deviennent archives."
+    
+    # Combat conceptuel
+    INITIATE_BATTLE(type:ontologique)
+    
+    # Lea découvre la faille
+    SAY HERO=lea_detective_acoustique "Attendez ! J'entends quelque chose dans le protocole !"
+    EXECUTE_ABILITY(lea_detective_acoustique, silent_hearing, TARGET:mckinsey_entity)
+    
+    SAY HERO=lea_detective_acoustique "Il y a une voix... Marie ! Elle est encore là !"
+    PLAY_SOUND "marie_whisper.ogg" 
+    
+    WHISPER "Je n'ai jamais disparu... J'ai juste changé de forme..."
+}
+
+# === ACTE III : 2031 - LE FUTUR ===
+
+ON_ENTER apocalypse_2031 {
+    TEMPORAL_SHIFT(year:2031)
+    ENVIRONMENT_SHIFT(type:reality_collapse)
+    
+    SAY NARRATOR "2031. Le monde s'effondre. Les mallettes s'ouvrent partout."
+    
+    # Mallettes ouvertes partout
+    SPAWN_MULTIPLE opened_briefcases RANDOM(20)
+    
+    # Identités effacées émergent
+    FOR EACH briefcase {
+        SPAWN erased_identity AT briefcase.position
+        SAY ENTITY=erased_identity "Nous étions... nous sommes... nous serons..."
+    }
+    
+    # Marie/Memento du futur
+    SPAWN future_memento @35,25
+    SAY HERO=future_memento "Tu es venue. Bien. Il est temps de choisir."
+    
+    # Le choix final
+    SAY HERO=future_memento "Rester Memento et sauver les souvenirs..."
+    SAY HERO=future_memento "Ou redevenir Marie et tout oublier ?"
+    
+    CHOICE {
+        "Je reste Memento. Les souvenirs doivent vivre." => remain_memento
+        "Je redeviens Marie. Je veux ma vie." => become_marie
+        "Je suis les deux. Marie-Memento." => transcend_duality
+    }
+}
+
+# === ACTE IV : RÉSOLUTIONS ===
+
+BRANCH remain_memento {
+    SAY HERO=memento_archiviste "J'ai fait mon choix il y a 60 ans. Je le refais aujourd'hui."
+    SAY HERO=memento_archiviste "Je suis l'Archive Vivante. Gardienne des oubliés."
+    
+    # Absorption des identités
+    ABSORB_ALL erased_identities INTO memento_archiviste
+    
+    SAY HERO=memento_archiviste "Vos histoires vivront en moi. Toujours."
+    
+    # Retour au présent
+    TEMPORAL_SHIFT(RESET)
+    
+    # Nouveau tatouage
+    ADD_TATTOO(memento_archiviste, "MARIE_ACCEPTÉE", "J'étais Marie. Je suis Memento. C'est mon choix.")
+    
+    ENDING("GUARDIAN_ETERNAL", "Memento accepte son destin. Les mémoires sont sauvées.")
+}
+
+BRANCH become_marie {
+    SAY HERO=memento_archiviste "Je veux retrouver qui j'étais. Même si cela signifie tout perdre."
+    
+    # Inversion du protocole
+    EXECUTE_PROTOCOL "MCKINSEY_REVERSE"
+    
+    # Transformation inverse
+    MORPH_ENTITY(memento_archiviste => marie_manteau)
+    
+    SAY HERO=marie_manteau "Je... je me souviens de mon nom. Marie Dubois."
+    SAY HERO=marie_manteau "Mais tous les souvenirs que je gardais..."
+    
+    # Les souvenirs s'échappent
+    RELEASE_ALL archived_memories
+    SAY NARRATOR "Les milliers de souvenirs archivés s'envolent, perdus à jamais."
+    
+    ENDING("HUMAN_AGAIN", "Marie retrouve son humanité. Les archives sont perdues.")
+}
+
+BRANCH transcend_duality {
+    SAY HERO=memento_archiviste "Faux choix. Je ne suis pas l'un OU l'autre."
+    SAY HERO=memento_archiviste "Je suis Marie qui a choisi de devenir Memento."
+    SAY HERO=memento_archiviste "Je suis l'archive qui se souvient d'être humaine."
+    
+    # Fusion complète
+    TRANSCEND_FORM(memento_archiviste => marie_memento_unified)
+    
+    SAY HERO=marie_memento_unified "Je suis le pont entre l'humain et l'archive."
+    SAY HERO=marie_memento_unified "Entre l'oubli et le souvenir."
+    
+    # Nouveau pouvoir
+    GRANT_ABILITY(marie_memento_unified, "PROTOCOLE_MAÎTRISÉ")
+    
+    SAY HERO=marie_memento_unified "McKinsey voulait m'effacer. J'ai choisi de me transformer."
+    SAY HERO=marie_memento_unified "Maintenant, JE contrôle le protocole."
+    
+    # Désactivation McKinsey
+    EXECUTE_ABILITY(marie_memento_unified, protocole_maîtrisé, TARGET:mckinsey_entity)
+    DISSOLVE_ENTITY(mckinsey_entity)
+    
+    ENDING("SYNTHESIS_ACHIEVED", "Marie-Memento transcende la dualité. Le protocole est maîtrisé.")
+}
+
+# === ÉPILOGUE : RETOUR AU NEXUS ===
+
+ON_ENTER core_protocol AFTER_ENDING {
+    GATHER_ALL_HEROES(@12,12)
+    
+    # Révélations finales
+    SAY HERO=walter_sobchak "Alors c'était ça... Marie s'est sacrifiée pour nous tous."
+    
+    SAY HERO=vince_vega "Ma mallette... elle protège les souvenirs. Comme toi."
+    
+    SAY HERO=christian_stratege "Je démissionne de McKinsey. Le protocole doit être détruit."
+    
+    SAY HERO=lea_detective_acoustique "J'entends... le silence. Pour la première fois. C'est paisible."
+    
+    SAY HERO=byte_scanner_digital "Les données confirment : Timeline stabilisée. 2031 évité."
+    
+    SAY HERO=the_dude "That's just, like, beautiful, man. Marie saved us all."
+    
+    # Message final selon ending
+    IF ENDING == "SYNTHESIS_ACHIEVED" THEN
+        SAY HERO=marie_memento_unified "Je me souviens maintenant. Tout."
+        SAY HERO=marie_memento_unified "Et je choisis de continuer à archiver."
+        SAY HERO=marie_memento_unified "Mais cette fois, en gardant mon humanité."
+    ELSE_IF ENDING == "GUARDIAN_ETERNAL" THEN
+        SAY HERO=memento_archiviste "Marie vit en moi. Comme tous les autres."
+        SAY HERO=memento_archiviste "C'est mon fardeau. Et mon honneur."
+    ELSE
+        SAY HERO=marie_manteau "Je ne me souviens pas de vous. Mais je sens..."
+        SAY HERO=marie_manteau "Que nous étions importants l'un pour l'autre."
+    END_IF
+}
+
+# === RÉVÉLATION FINALE ===
+
+SCENE truth_revealed {
+    FADE_TO_BLACK
+    
+    SHOW_TEXT_CENTERED "LA VÉRITÉ"
+    WAIT(3)
+    
+    SHOW_TEXT [
+        "McKinsey n'était pas le mal.",
+        "C'était une tentative de préserver l'humanité.",
+        "Qui s'est transformée en protocole d'effacement.",
+        "",
+        "Marie n'était pas une victime.",
+        "C'était une héroïne qui a choisi de devenir archive.",
+        "Pour sauver les souvenirs de ceux qui allaient mourir.",
+        "",
+        "Memento n'est pas une malédiction.",
+        "C'est le plus grand acte d'amour.",
+        "Devenir le gardien éternel des oubliés.",
+        "",
+        "En 2031, ce n'est pas l'apocalypse qui arrive.",
+        "C'est le moment où l'humanité doit choisir :",
+        "Oublier et vivre, ou se souvenir et transcender.",
+        "",
+        "Le choix appartient à chaque joueur."
+    ]
+    
+    FADE_IN
+}
+
+# Message système final
+ON_SCENARIO_COMPLETE {
+    SAY SYSTEM "Félicitations. Vous avez découvert l'origine de Memento."
+    SAY SYSTEM "Marie Dubois, 1948-1971, transformée en Archive Vivante."
+    SAY SYSTEM "Première et plus grande gardienne des souvenirs perdus."
+    
+    UNLOCK_ACHIEVEMENT("TRUTH_SEEKER")
+    UNLOCK_ACHIEVEMENT("MARIE_REMEMBERED")
+    
+    IF ENDING == "SYNTHESIS_ACHIEVED" THEN
+        UNLOCK_CHARACTER("marie_memento_unified")
+        UNLOCK_ABILITY("protocol_mastery")
+        SAY SYSTEM "Vous avez débloqué : Marie-Memento Unifiée"
+    END_IF
+    
+    # Mise à jour du dossier conspiration
+    UPDATE_FILE("MEMENTO/CONSPIRATION_DOSSIERS/MEMENTO_ARCHIVISTE/conclusion_personnelle.md")
+}
+
+# FIN
+# "Je m'appelais Marie. J'ai choisi d'être Memento. C'est mon histoire." 

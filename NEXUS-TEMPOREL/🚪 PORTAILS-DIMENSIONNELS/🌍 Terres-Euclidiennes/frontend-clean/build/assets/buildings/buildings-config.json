@@ -1,0 +1,32 @@
+{
+  "buildings": {
+    "castle": {
+      "name": "Castle",
+      "type": "stronghold",
+      "description": "Main fortress for hero recruitment"
+    },
+    "tower": {
+      "name": "Mage Tower",
+      "type": "magic",
+      "description": "Magical research facility"
+    },
+    "barracks": {
+      "name": "Barracks",
+      "type": "military",
+      "description": "Training ground for warriors"
+    },
+    "marketplace": {
+      "name": "Marketplace",
+      "type": "economic",
+      "description": "Trade and resource management"
+    },
+    "temple": {
+      "name": "Temple",
+      "type": "religious",
+      "description": "Healing and divine magic"
+    }
+  },
+  "style": "LPC Fantasy",
+  "format": "PNG sprites",
+  "license": "CC-BY-SA 3.0"
+}

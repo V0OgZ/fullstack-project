@@ -1,0 +1,30 @@
+{
+  "id": "hero_kiandpi",
+  "name": "Ki & Pi",
+  "title": "Messagers du LOL Primordial",
+  "description": "Deux esprits farceurs réinjectés dans la causalité stable. Leur pouvoir vient de la blague parfaite. Mais attention : chaque réplique est une onde d'effondrement. [Entrée vérifiée dans le glossaire tisonnant : 'humour sacré']",
+  "role": "Duo comique restauré",
+  "rarity": "rare",
+  "faction": "Ordre des Anciens Sketchs",
+  "formula": "ψ{Ki, Pi} = COLLAPSE[Ψ(Pee ⊕ Kill)] ↯ humour_cohérent",
+  "abilities": [
+    {
+      "name": "Punchline Cosmique",
+      "quantum_script": "∀enemy ∈ field : enemy.ARMOR = DISARMED (1t)"
+    },
+    {
+      "name": "Rappel Universel",
+      "quantum_script": "∀ally : RESTORE(ψ.prev_action) +1"
+    }
+  ],
+  "quotes": [
+    "\"You done messed up, A-A-Ron!\"",
+    "\"Biiiiitch!\"",
+    "\"You want to go to war, Balaké?\"",
+    "\"Substitute teacher, day one — and y'all already dead.\""
+  ],
+  "metadata": {
+    "trigger_source": "Collapse de Pee & Kill",
+    "glossary_ref": ["humour_sacré", "structure_résonante"]
+  }
+} 
