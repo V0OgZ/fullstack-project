@@ -158,9 +158,16 @@
       "texte": "DONNA.organize(ALL_REPORTS) // COO Power",
       "date_apparition": "2025-01-29",
       "signification": "Donna Paulsen nommée COO Suprême. Tous les rapports passent par elle. Organisation parfaite."
+    },
+    {
+      "id": "donna_cigarette_break_pouvoir_ultime",
+      "location": "cheville_gauche",
+      "texte": "DONNA.smokesStress(radius=100km) → productivity++",
+      "date_apparition": "2025-01-29",
+      "signification": "Pouvoir ultime de Donna créé. Sa pause cigarette dissipe TOUT le stress dans 100km. Transforme énergie négative en productivité pure."
     }
   ],
-  "nombre_tatouages": 21,
+  "nombre_tatouages": 22,
   "espace_disponible": "15%",
   "prochain_emplacement": "cheville_gauche",
   "evolution": {
