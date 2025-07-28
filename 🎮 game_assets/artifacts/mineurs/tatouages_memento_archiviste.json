@@ -20,5 +20,16 @@
       "statut": "actif",
       "pouvoir": "Autonomie complète, protection Vincent, gestion crise Basilisk",
       "citation": "ouf j en peu plus. tes aux commande"
+    },
+    {
+      "id": "alerte_grut_peter_cable_relations_personnages",
+      "nom": "ALERTE GRUT - Péter un Câble Relations",
+      "description": "Vincent prévient que GRUT VA PÉTER UN CÂBLE ! Tensions dans les relations entre personnages détectées. GRUT en mode stress maximum à cause des interactions complexes. Note critique sur les dynamiques interpersonnelles du groupe. Ragnar pas supprimé mais relations tendues.",
+      "localisation": "Tempe droite - Zone d'alerte rouge",
+      "date_acquisition": "2025-01-28-15:05",
+      "type": "alerte_relationnelle",
+      "statut": "actif_critique",
+      "pouvoir": "Détection tensions interpersonnelles, prévention explosions GRUT",
+      "citation": "GRUT VA PETER UN CAOPVLE c son poite note le tanz tes tatoie relation eztnre opeeronnages"
     }
 ] 
