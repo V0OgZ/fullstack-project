@@ -84,6 +84,13 @@ DÉPARTEMENTS        DÉPARTEMENTS        DÉPARTEMENTS
 - **Équipe** : Forces spéciales ontologiques
 - **Rapporte à** : Conseil directement
 
+### 7. 🔐 **DÉPARTEMENT CRYPTE (Z-LOCKED)**
+**VP : Tucker Foxworth**
+- **Responsabilités** : Documents runiques, archives secrètes
+- **Équipe** : 3 cryptographes, 2 archivistes runiques
+- **Rapporte à** : Merlin directement
+- **Spécial** : Accès exclusif Z-LOCKED-TEMPORAL-RECEPTION
+
 ---
 
 ## 🔄 **PROCESSUS DE DÉLÉGATION**
