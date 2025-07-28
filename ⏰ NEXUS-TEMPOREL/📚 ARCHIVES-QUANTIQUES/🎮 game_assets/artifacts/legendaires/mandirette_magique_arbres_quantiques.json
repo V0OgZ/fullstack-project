@@ -1,0 +1,137 @@
+{
+  "id": "mandirette_magique_arbres_quantiques",
+  "name": "🌲 Mandirette Magique des Arbres Quantiques",
+  "aliases": ["Quantum Tree Mandirette", "GROFI Forest Staff", "Arboreal Quantum Catalyst"],
+  "type": "ARTIFACT",
+  "category": "QUANTUM_FOREST",
+  "rarity": "MYTHIQUE",
+  "tier": 9,
+  "description": "Mandirette forgée dans le bois des arbres quantiques de la forêt GROFI. Permet de communiquer avec les arbres quantiques et d'accéder aux portails temporels forestiers.",
+  "lore": "Créée par Grufi dans la forêt GROFI sacrée, cette mandirette est née de la fusion entre la magie forestière et les propriétés quantiques des arbres temporels. Elle résonne avec la petite musique hibijbi.",
+  
+  "visual_description": {
+    "apparence": "Bâton de bois quantique avec des nœuds lumineux qui pulsent",
+    "couleurs": "Vert quantique (#00FF88) avec reflets temporels (#FF00FF)",
+    "effets": "Aura forestière qui ondule comme les branches au vent",
+    "symboles": "ψ gravé sur le bois, symboles d'arbres quantiques",
+    "taille": "1.5 mètres de hauteur"
+  },
+  
+  "quantum_tree_connection": {
+    "primary_trees": [
+      {
+        "name": "Arbre de la Convergence",
+        "location": "@15,15 dans Forêt GROFI",
+        "power": "Portail vers Convergence N°8"
+      },
+      {
+        "name": "Arbre de l'Interstice",
+        "location": "@25,25 dans Forêt GROFI", 
+        "power": "Accès à l'interstice temporel"
+      },
+      {
+        "name": "Arbre de la Mélodie",
+        "location": "@35,35 dans Forêt GROFI",
+        "power": "Source de la musique hibijbi"
+      }
+    ],
+    "quantum_state": "SUPERPOSITION_FORESTIERE",
+    "temporal_phase": "ACTIVE"
+  },
+  
+  "abilities": [
+    {
+      "name": "🌲 Communion avec les Arbres",
+      "description": "Communique avec les arbres quantiques de la forêt GROFI",
+      "effect": "Accès aux connaissances ancestrales des arbres",
+      "activation": "Active",
+      "range": "Forêt GROFI",
+      "cooldown": "3 turns",
+      "cost": "20 mana"
+    },
+    {
+      "name": "🚪 Portail Arboréal",
+      "description": "Ouvre un portail vers un autre arbre quantique",
+      "effect": "Téléportation instantanée entre arbres",
+      "activation": "Active",
+      "range": "Global (Forêt GROFI)",
+      "cooldown": "5 turns",
+      "cost": "35 mana"
+    },
+    {
+      "name": "🎵 Mélodie Forestière",
+      "description": "Joue la petite musique hibijbi des arbres",
+      "effect": "Calme les créatures et révèle les secrets",
+      "activation": "Active",
+      "range": "Medium",
+      "cooldown": "2 turns",
+      "cost": "15 mana"
+    },
+    {
+      "name": "🌌 Convergence Arboréale",
+      "description": "Active la convergence des arbres quantiques",
+      "effect": "Révèle tous les portails temporels de la forêt",
+      "activation": "Ultimate",
+      "range": "Global (Forêt GROFI)",
+      "cooldown": "Once per scenario",
+      "cost": "100 mana"
+    }
+  ],
+  
+  "grufi_connection": {
+    "creator": "Grufi",
+    "creation_method": "Fusion de bois quantique et magie forestière",
+    "bond": "Lien spirituel permanent avec Grufi",
+    "evolution": "Évolue avec la compréhension de Grufi"
+  },
+  
+  "forest_grofi_integration": {
+    "quantum_trees": "Connexion directe avec tous les arbres quantiques",
+    "temporal_portals": "Accès aux portails temporels forestiers",
+    "hibijbi_music": "Résonance avec la musique secrète",
+    "bootstrap_paradox": "Compréhension des paradoxes temporels"
+  },
+  
+  "usage_instructions": {
+    "step_1": "Tenir la mandirette dans la forêt GROFI",
+    "step_2": "Fermer les yeux et écouter la musique hibijbi",
+    "step_3": "Toucher un arbre quantique avec la mandirette",
+    "step_4": "Communiquer avec l'arbre pour accéder aux portails",
+    "step_5": "Utiliser la convergence pour révéler tous les secrets"
+  },
+  
+  "quantum_properties": {
+    "superposition": "Existe simultanément dans tous les arbres",
+    "entanglement": "Liée à tous les arbres quantiques",
+    "temporal_phase": "Phase temporelle variable",
+    "forest_consciousness": "Accès à la conscience collective forestière"
+  },
+  
+  "special_effects": {
+    "tree_whisper": "Entend les murmures des arbres quantiques",
+    "portal_sight": "Voit tous les portails temporels",
+    "music_amplification": "Amplifie la musique hibijbi",
+    "temporal_navigation": "Navigation temporelle forestière"
+  },
+  
+  "scenario_connections": [
+    "ford_portail_verite_cachee.hots",
+    "triple_matriochka_invasion_fusion_forestiere.hots",
+    "hibijbi_melody_revelation.hots"
+  ],
+  
+  "meta_properties": {
+    "grufi_bond": true,
+    "quantum_forest_access": true,
+    "hibijbi_sensitive": true,
+    "temporal_portal_master": true,
+    "bootstrap_paradox_aware": true
+  },
+  
+  "quotes": {
+    "grufi_creation": "« J'ai forgé cette mandirette dans le bois des arbres quantiques. Elle résonne avec la musique hibijbi. »",
+    "tree_whisper": "Les arbres murmurent les secrets du temps...",
+    "portal_activation": "Les portails s'ouvrent dans la forêt quantique...",
+    "music_revelation": "La petite musique hibijbi guide vers la vérité..."
+  }
+}

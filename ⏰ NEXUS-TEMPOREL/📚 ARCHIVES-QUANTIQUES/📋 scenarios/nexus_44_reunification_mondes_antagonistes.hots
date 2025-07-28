@@ -1,0 +1,166 @@
+// NEXUS 44 - RÉUNIFICATION DES MONDES ANTAGONISTES
+// Scénario de paix cosmique après la dispersion
+
+SCENARIO "Réunification des Mondes Antagonistes" {
+    VERSION: "1.0"
+    TYPE: "DIPLOMATIC_EPIC"
+    TURNS: 50
+    PLAYERS: 6
+    DIFFICULTY: "TRANSCENDENT"
+    
+    DESCRIPTION: "Après la grande dispersion, les factions antagonistes doivent s'unir face à une menace commune. Un Conseil de Paix Temporel est convoqué au Nexus de Réunification."
+    
+    // FACTIONS PARTICIPANTES
+    FACTIONS {
+        ORDER_OF_REALITY: {
+            LEADER: "lysandrel_reality_smith"
+            PHILOSOPHY: "Une seule vérité doit survivre"
+            STARTING_ATTITUDE: "HOSTILE_TO_SHADOW_WEAVERS"
+        }
+        
+        SHADOW_WEAVERS: {
+            LEADER: "nyx_lua_quantum_weaver"
+            PHILOSOPHY: "Tous les mondes possibles coexistent"
+            STARTING_ATTITUDE: "HOSTILE_TO_ORDER_OF_REALITY"
+        }
+        
+        HOST_CREATORS: {
+            LEADER: "anthor_le_fordien"
+            PHILOSOPHY: "Création de nouvelles réalités"
+            STARTING_ATTITUDE: "HOSTILE_TO_SOURCEGUARDIANS"
+        }
+        
+        SOURCEGUARDIANS: {
+            LEADER: "clint_eastwood_temporal_gunslinger"
+            PHILOSOPHY: "Protection des réalités existantes"
+            STARTING_ATTITUDE: "HOSTILE_TO_HOST_CREATORS"
+        }
+        
+        ANOMALY: {
+            LEADER: "jean_grofignon"
+            PHILOSOPHY: "Chaos créateur depuis le canapé"
+            STARTING_ATTITUDE: "NEUTRAL_CHAOTIC"
+        }
+        
+        ZEN_COLLECTIVE: {
+            LEADER: "the_dude"
+            PHILOSOPHY: "Harmonie et équilibre cosmique"
+            STARTING_ATTITUDE: "PEACEFUL_MEDIATOR"
+        }
+    }
+    
+    // PHASES DU SCÉNARIO
+    PHASE 1 "Arrivée au Nexus" (TURNS 1-10) {
+        EVENT TURN_1 {
+            MESSAGE: "Les représentants des six factions arrivent au Nexus de Réunification. Les tensions sont palpables."
+            SPAWN_LEADERS_AT_NEUTRAL_ZONES()
+            ACTIVATE_DIPLOMATIC_INTERFACE()
+        }
+        
+        EVENT TURN_5 {
+            MESSAGE: "The Dude propose un joint de paix cosmique pour détendre l'atmosphère."
+            TRIGGER: "JOINT_COSMIQUE_MEDITATION"
+            EFFECT: "ALL_FACTIONS_STRESS_-50%"
+        }
+        
+        OBJECTIVE: "Établir un contact diplomatique avec au moins 3 autres factions"
+    }
+    
+    PHASE 2 "Révélation de la Menace" (TURNS 11-20) {
+        EVENT TURN_12 {
+            MESSAGE: "ALERTE ! Une entité extradimensionnelle menace tous les mondes simultanément !"
+            SPAWN_ENTITY: "OMEGA_ZERO_ECHO"
+            TRIGGER: "MENACE_COMMUNE_REVELATION"
+        }
+        
+        EVENT TURN_15 {
+            MESSAGE: "Jean-Grofignon depuis son canapé : 'Putain, on va devoir bosser ensemble !'"
+            JEAN_ACTIVATION: "TELECOMMANDE_COSMIQUE_URGENCE"
+        }
+        
+        OBJECTIVE: "Survivre aux attaques d'OmégaZero Echo tout en négociant"
+    }
+    
+    PHASE 3 "Négociations Sous Pression" (TURNS 21-35) {
+        EVENT TURN_25 {
+            MESSAGE: "Lysandrel et Nyx-Lua doivent coopérer ou voir leurs mondes détruits !"
+            FORCED_COOPERATION: ["ORDER_OF_REALITY", "SHADOW_WEAVERS"]
+        }
+        
+        EVENT TURN_30 {
+            MESSAGE: "Clint Eastwood et Anthor trouvent un terrain d'entente face au danger."
+            ALLIANCE_OPPORTUNITY: ["SOURCEGUARDIANS", "HOST_CREATORS"]
+        }
+        
+        OBJECTIVE: "Former au moins 2 alliances temporaires"
+    }
+    
+    PHASE 4 "Union Sacrée" (TURNS 36-45) {
+        EVENT TURN_40 {
+            MESSAGE: "The Dude médite : 'Mec, on est tous dans le même multivers au final.'"
+            WISDOM_BONUS: "ALL_FACTIONS_UNITY_+30%"
+        }
+        
+        EVENT TURN_42 {
+            MESSAGE: "Jean active la Télécommande Cosmique Unifiée !"
+            JEAN_ULTIMATE: "FUSION_TEMPORAIRE_TOUTES_FACTIONS"
+        }
+        
+        OBJECTIVE: "Atteindre 80% d'unité entre toutes les factions"
+    }
+    
+    PHASE 5 "Traité de Paix Cosmique" (TURNS 46-50) {
+        EVENT TURN_48 {
+            MESSAGE: "Signature du Traité de Paix Cosmique au Nexus de Réunification !"
+            ACTIVATE: "TRAITE_PAIX_COSMIQUE_PROTOCOL"
+        }
+        
+        EVENT TURN_50 {
+            MESSAGE: "Les mondes antagonistes sont désormais unis ! La paix cosmique règne !"
+            VICTORY_CONDITION: "REUNIFICATION_COMPLETE"
+        }
+        
+        OBJECTIVE: "Signer le Traité de Paix Cosmique"
+    }
+    
+    // CONDITIONS DE VICTOIRE
+    WIN_CONDITIONS {
+        REUNIFICATION_TOTALE: {
+            CONDITION: "ALL_FACTIONS_ALLIED AND TRAITE_SIGNE"
+            REWARD: "PAIX_COSMIQUE_ETERNELLE"
+        }
+        
+        UNION_PARTIELLE: {
+            CONDITION: "4_FACTIONS_ALLIED AND MENACE_NEUTRALISEE"
+            REWARD: "ARMISTICE_TEMPOREL"
+        }
+        
+        ECHEC_DIPLOMATIQUE: {
+            CONDITION: "LESS_THAN_3_ALLIANCES AND TURN_50"
+            RESULT: "GUERRE_COSMIQUE_CONTINUE"
+        }
+    }
+    
+    // MÉCANIQUES SPÉCIALES
+    DIPLOMATIC_MECHANICS {
+        JOINT_COSMIQUE: "Bonus de médiation +50% pour The Dude"
+        TELECOMMANDE_JEAN: "Peut forcer des alliances temporaires"
+        DUEL_PHILOSOPHIQUE: "Lysandrel vs Nyx-Lua résolu par débat"
+        WESTERN_DIPLOMACY: "Clint peut intimider ou protéger"
+        FORD_PARADOX: "Anthor peut créer des réalités de compromis"
+    }
+    
+    // RÉCOMPENSES FINALES
+    REWARDS {
+        CONSEIL_PAIX_PERMANENT: "Structure diplomatique permanente"
+        NEXUS_REUNIFICATION: "Nouvelle map accessible à tous"
+        TITRE_PACIFICATEUR: "Titre spécial pour les médiateurs"
+        ARTEFACT_UNITE: "Artefact symbolisant l'unité cosmique"
+    }
+}
+
+// NOTES DE DÉVELOPPEMENT
+// Ce scénario transforme les antagonismes en coopération forcée
+// Chaque faction garde sa personnalité mais apprend à collaborer
+// La menace commune (OmégaZero Echo) force l'unité
+// Jean et The Dude servent de catalyseurs de paix 

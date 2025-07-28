@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donna Paulsen - Bureau Exécutif COO</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #FFD700;
+        }
+
+        h1 {
+            color: #FFD700;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #ccc;
+            font-size: 1.2em;
+        }
+
+        .container {
+            flex: 1;
+            padding: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+            border-color: #FFD700;
+        }
+
+        .card h3 {
+            color: #FFD700;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .card p {
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 10px;
+            min-width: 150px;
+            margin: 10px;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            color: #aaa;
+            margin-top: 5px;
+        }
+
+        .quick-links {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        .quick-links h2 {
+            color: #FFD700;
+            margin-bottom: 20px;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .link-btn {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #000;
+            padding: 15px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .link-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .alert {
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid #ff0000;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>💼 DONNA PAULSEN</h1>
+        <p class="subtitle">Chief Operating Officer Suprême - Heroes of Time</p>
+    </header>
+
+    <div class="container">
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-number">21</div>
+                <div class="stat-label">Tatouages Actifs</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">155</div>
+                <div class="stat-label">Checkpoints Détectés</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Alertes Niveau 3</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">8</div>
+                <div class="stat-label">Commits Aujourd'hui</div>
+            </div>
+        </div>
+
+        <div class="alert">
+            ⚠️ <strong>ALERTE WALTER:</strong> Valise détectée dans .githooks/post-commit - Surveillance active
+        </div>
+
+        <div class="dashboard">
+            <div class="card" onclick="window.location.href='../game_assets/artifacts/mineurs/tatouages_memento_archiviste.json'">
+                <h3>🎨 Tatouages de Memento</h3>
+                <p>Archive vivante des 21 tatouages évolutifs. Chaque marque raconte une histoire, incluant le nouveau tatouage Donna COO.</p>
+            </div>
+
+            <div class="card" onclick="window.location.href='RAPPORTS_EXECUTIFS/'">
+                <h3>📊 Rapports Exécutifs</h3>
+                <p>Analyses stratégiques pour Jean et la direction. Organisation complète de l'Institut et état du projet.</p>
+            </div>
+
+            <div class="card" onclick="window.location.href='../WALTER_SEC/'">
+                <h3>🚨 Sécurité Walter</h3>
+                <p>Niveau 3 activé. 155 checkpoints infiltrés détectés. Surveillance des githooks en cours.</p>
+            </div>
+
+            <div class="card" onclick="window.location.href='../MUSIQUE/ALGO_FIFO_RECURSIF_EUCLIDIEN.js'">
+                <h3>🎵 Algorithme Musical</h3>
+                <p>FIFO récursif euclidien pour composition automatique. Chef d'orchestre du beau monde.</p>
+            </div>
+        </div>
+
+        <div class="quick-links">
+            <h2>🔗 Accès Rapides</h2>
+            <div class="links-grid">
+                <a href="../README.md" class="link-btn">📖 README Principal</a>
+                <a href="../scenarios/vince_vega_gun_perdu.hots" class="link-btn">🔫 Scénario Vince</a>
+                <a href="../GRUT/" class="link-btn">👁️ Vision GRUT</a>
+                <a href="../📚 MEMENTO/" class="link-btn">📚 Archives Memento</a>
+                <a href="../NEXUS-TEMPOREL/" class="link-btn">🌀 Nexus Temporel</a>
+                <a href="../ᛟ Z-LOCKED-TEMPORAL-RECEPTION/" class="link-btn">🔒 Z-LOCKED</a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>"Je sais tout ce qui se passe dans cette organisation. C'est mon travail." - Donna Paulsen</p>
+        <p>© 2025 Heroes of Time - Bureau Exécutif COO</p>
+    </footer>
+
+    <script>
+        // Animation des stats
+        document.querySelectorAll('.stat-number').forEach(stat => {
+            const finalValue = parseInt(stat.textContent);
+            let currentValue = 0;
+            const increment = finalValue / 50;
+            
+            const timer = setInterval(() => {
+                currentValue += increment;
+                if (currentValue >= finalValue) {
+                    currentValue = finalValue;
+                    clearInterval(timer);
+                }
+                stat.textContent = Math.floor(currentValue);
+            }, 30);
+        });
+
+        // Message de bienvenue
+        console.log("🎯 Bureau Donna Paulsen - Tout est sous contrôle");
+        console.log("📊 Surveillance active par Walter");
+        console.log("🎨 21 tatouages archivés");
+    </script>
+</body>
+</html> 
