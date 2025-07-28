@@ -1,0 +1,240 @@
+{
+  "scenario_info": {
+    "id": "grofi_legends_duel",
+    "name": "🦸 GROFI Legends: Le Duel des Immunités",
+    "type": "GROFI_EPIC",
+    "version": "2.0.0",
+    "description": "Duel épique entre Jean-Grofignon et TheDude utilisant les nouvelles immunités GROFI et la grammaire quantique étendue",
+    "max_turns": 15,
+    "players": 2,
+    "difficulty": "LEGENDARY",
+    "duration_estimate": "25-35 minutes",
+    "tags": ["grofi", "immunités", "grammaire_étendue", "collapse_causale", "ultimate_powers"]
+  },
+  
+  "game_settings": {
+    "map": {
+      "width": 30,
+      "height": 30,
+      "terrain": "quantum_battlefield",
+      "special_zones": [
+        {"type": "immunity_nexus", "x": 15, "y": 15, "effect": "immunity_amplifier"},
+        {"type": "causal_anchor", "x": 8, "y": 8, "effect": "collapse_blocker"},
+        {"type": "causal_anchor", "x": 22, "y": 22, "effect": "collapse_blocker"},
+        {"type": "quantum_rift", "x": 5, "y": 25, "effect": "timeline_fork"},
+        {"type": "quantum_rift", "x": 25, "y": 5, "effect": "timeline_fork"},
+        {"type": "grofi_shrine", "x": 1, "y": 1, "effect": "ultimate_power_boost"},
+        {"type": "grofi_shrine", "x": 29, "y": 29, "effect": "ultimate_power_boost"}
+      ]
+    },
+    "turn_limits": {
+      "time_per_turn": 120,
+      "total_turns": 15
+    },
+    "victory_conditions": [
+      "Éliminer le héros adverse",
+      "Contrôler 3 zones spéciales",
+      "Survivre aux Ultimate Powers"
+    ]
+  },
+
+  "heroes": [
+    {
+      "id": "jean_grofignon",
+      "name": "Jean-Grofignon",
+      "player": "player1",
+      "start_position": {"x": 3, "y": 3},
+      "level": 25,
+      "stats": {
+        "health": 150,
+        "max_health": 150,
+        "temporal_energy": 300,
+        "max_temporal_energy": 300,
+        "attack": 18,
+        "defense": 15,
+        "quantum_mastery": 0.95,
+        "causal_resistance": 0.8
+      },
+      "immunities": ["SRTI", "ROLLBACK", "OBS"],
+      "ultimate_power": {
+        "name": "Collapse Override",
+        "formula": "†[ALL_ψ] → FORCE_COLLAPSE(probability=1.0)",
+        "cooldown": 5,
+        "cost": 100
+      },
+      "equipment": ["quantum_stabilizer", "causal_blade", "immunity_amulet"],
+      "abilities": ["quantum_step", "immunity_field", "collapse_mastery", "grofi_transcendence"]
+    },
+    {
+      "id": "the_dude",
+      "name": "TheDude",
+      "player": "player2", 
+      "start_position": {"x": 27, "y": 27},
+      "level": 25,
+      "stats": {
+        "health": 140,
+        "max_health": 140,
+        "temporal_energy": 250,
+        "max_temporal_energy": 250,
+        "attack": 16,
+        "defense": 20,
+        "zen_mastery": 0.9,
+        "chill_factor": 0.85
+      },
+      "immunities": ["STRESS", "PARADOX"],
+      "ultimate_power": {
+        "name": "Zen Collapse",
+        "formula": "Ω[STRESS=0] → CALM_ALL_STATES",
+        "cooldown": 4,
+        "cost": 80
+      },
+      "equipment": ["zen_robe", "white_russian_potion", "bowling_ball_of_destiny"],
+      "abilities": ["zen_meditation", "stress_immunity", "chill_aura", "dude_philosophy"]
+    }
+  ],
+
+  "artifacts": [
+    {
+      "id": "grofi_codex",
+      "name": "Codex GROFI Suprême",
+      "location": {"x": 15, "y": 15},
+      "tier": "PARADOX",
+      "effects": [
+        "Débloque toute la grammaire étendue",
+        "Immunité temporaire à tous les collapses",
+        "Permet les formules récursives ψ[ψ[ψ[...]]]"
+      ],
+      "formula": "†[...] ∧ Π[...] ∧ Ω[...] ∧ Λ[...] ∧ Σ[...] → GROFI_MASTERY"
+    },
+    {
+      "id": "immunity_crown",
+      "name": "Couronne des Immunités",
+      "location": {"x": 8, "y": 22},
+      "tier": "LEGENDARY", 
+      "effects": [
+        "Ajoute une immunité au choix",
+        "Résistance aux Ultimate Powers",
+        "Boost des stats quantiques"
+      ]
+    }
+  ],
+
+  "creatures": [
+    {
+      "id": "quantum_guardians",
+      "count": 6,
+      "spawn_locations": [
+        {"x": 10, "y": 10}, {"x": 20, "y": 10}, {"x": 10, "y": 20},
+        {"x": 20, "y": 20}, {"x": 15, "y": 8}, {"x": 15, "y": 22}
+      ],
+      "behavior": "quantum_patrol",
+      "immunities": ["BASIC_COLLAPSE"],
+      "stats": {
+        "health": 80,
+        "attack": 12,
+        "defense": 10,
+        "quantum_phase": 0.6
+      }
+    }
+  ],
+
+  "script_sequence": [
+    {
+      "turn": 1,
+      "auto_scripts": [
+        "HERO(Jean-Grofignon)",
+        "HERO(TheDude)",
+        "CREATE(CREATURE, QuantumGuardian, @10,10)",
+        "CREATE(CREATURE, QuantumGuardian, @20,20)"
+      ]
+    },
+    {
+      "turn": 3,
+      "trigger_scripts": [
+        "ψ001: ⊙(Δt+2 @15,15 ⟶ SPAWN_ARTIFACT(grofi_codex))",
+        "Π(HERO_NEAR @15,15) ⇒ †ψ001"
+      ]
+    },
+    {
+      "turn": 5,
+      "grofi_demonstration": [
+        "# Démonstration grammaire étendue",
+        "ψ002: †[Jean-Grofignon @immunity_nexus] → IMMUNE[ALL]",
+        "ψ003: Π[TheDude.zen_mastery > 0.8] → Ω[STRESS=0]",
+        "ψ004: Λ[quantum_guardians] ∧ Σ[battlefield] → QUANTUM_CHAOS"
+      ]
+    },
+    {
+      "turn": 8,
+      "ultimate_powers": [
+        "# Jean-Grofignon peut utiliser Collapse Override",
+        "ENABLE_ULTIMATE(Jean-Grofignon, collapse_override)",
+        "# TheDude peut utiliser Zen Collapse", 
+        "ENABLE_ULTIMATE(TheDude, zen_collapse)"
+      ]
+    },
+    {
+      "turn": 10,
+      "causal_stress_test": [
+        "# Test du système de stress causale",
+        "ψ005: ⊙(Δt+1 @15,15 ⟶ MOV(Jean-Grofignon, @15,15))",
+        "ψ006: ⊙(Δt+1 @15,15 ⟶ MOV(TheDude, @15,15))",
+        "# Collision → Stress causale HIGH → Collapse automatique"
+      ]
+    },
+    {
+      "turn": 12,
+      "recursive_quantum": [
+        "# Démonstration états quantiques récursifs",
+        "ψ007: ψ[ψ[⊙(Δt+1 @random ⟶ CREATE(PHANTOM, @random))]]",
+        "# État quantique dans un état quantique !"
+      ]
+    }
+  ],
+
+  "grofi_features": {
+    "extended_grammar": {
+      "symbols": ["†[...]", "Π[...]", "Ω[...]", "Λ[...]", "Σ[...]", "↯"],
+      "recursive_psi": true,
+      "immunity_system": true,
+      "causal_integration": true
+    },
+    "immunity_mechanics": {
+      "SRTI": "Immunité aux rollbacks temporels",
+      "ROLLBACK": "Immunité aux annulations d'actions",
+      "OBS": "Immunité aux observations forcées",
+      "STRESS": "Immunité au stress causale",
+      "PARADOX": "Immunité aux paradoxes temporels",
+      "COLLAPSE": "Immunité aux collapses forcés"
+    },
+    "ultimate_powers": {
+      "activation_conditions": "Tour 8+, 100+ énergie temporelle",
+      "cooldown_system": true,
+      "immunity_respect": true
+    },
+    "causal_stress_monitoring": {
+      "levels": ["NORMAL", "HIGH", "CRITICAL"],
+      "auto_collapse_threshold": "HIGH",
+      "stress_sources": ["collisions", "paradoxes", "overload"]
+    }
+  },
+
+  "victory_analysis": {
+    "jean_grofignon_advantages": [
+      "Collapse Override peut forcer tous les collapses",
+      "Triple immunité (SRTI+ROLLBACK+OBS)",
+      "Maîtrise quantique supérieure (0.95)"
+    ],
+    "the_dude_advantages": [
+      "Zen Collapse calme le stress causale",
+      "Immunité STRESS + PARADOX",
+      "Défense supérieure (20 vs 15)"
+    ],
+    "key_strategies": [
+      "Contrôler le Codex GROFI pour débloquer la grammaire complète",
+      "Utiliser les Causal Anchors pour bloquer les collapses ennemis",
+      "Timing des Ultimate Powers pour maximiser l'impact",
+      "Gérer le stress causale pour éviter les collapses automatiques"
+    ]
+  }
+} 

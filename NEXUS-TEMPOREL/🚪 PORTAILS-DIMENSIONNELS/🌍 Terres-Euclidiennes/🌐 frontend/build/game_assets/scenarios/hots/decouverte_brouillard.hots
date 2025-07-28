@@ -1,0 +1,61 @@
+# 🌫️ DÉCOUVERTE DU BROUILLARD - Scénario Débutant
+# Héros: Arthur - Le Roi Débutant
+# Objectif: Découvrir le brouillard et comprendre les mécaniques de base
+
+## PHASE 1: L'ARRIVÉE D'ARTHUR
+QUOTE("Arthur, jeune roi inexpérimenté, arrive dans un monde mystérieux...")
+HERO(Arthur)
+MOV(Arthur, @5,5)
+QUOTE("Il se trouve dans une clairière, mais au-delà règne un épais brouillard...")
+
+## PHASE 2: PREMIÈRE DÉCOUVERTE
+QUOTE("Arthur observe son environnement avec curiosité...")
+MOV(Arthur, @7,7)
+QUOTE("Il découvre qu'il peut voir seulement quelques cases autour de lui...")
+
+## PHASE 3: RENCONTRE AVEC UNE CRÉATURE
+QUOTE("Soudain, une forme se dessine dans le brouillard...")
+CREATE(CREATURE, loup_temporel, @10,10)
+QUOTE("Un loup temporel émerge des brumes, ses yeux brillent d'une lueur étrange...")
+
+## PHASE 4: PREMIER COMBAT
+QUOTE("Arthur doit se défendre contre cette créature mystérieuse...")
+BATTLE(Arthur, loup_temporel)
+QUOTE("Le combat est rude, mais Arthur apprend à se battre...")
+
+## PHASE 5: DÉCOUVERTE D'UN ITEM
+QUOTE("Après le combat, Arthur trouve quelque chose par terre...")
+CREATE(ITEM, torche_simple, HERO:Arthur)
+QUOTE("Une simple torche qui pourrait l'aider à voir dans le brouillard...")
+
+## PHASE 6: UTILISATION DE L'ITEM
+QUOTE("Arthur allume la torche et découvre son pouvoir...")
+USE(ITEM, torche_simple, HERO:Arthur)
+QUOTE("La lumière de la torche dissipe légèrement le brouillard autour de lui...")
+
+## PHASE 7: EXPLORATION AVANCÉE
+QUOTE("Encouragé par cette découverte, Arthur explore plus loin...")
+MOV(Arthur, @12,12)
+QUOTE("Il découvre de nouvelles zones grâce à la lumière de sa torche...")
+
+## PHASE 8: RENCONTRE D'UN AUTRE HÉROS
+QUOTE("Dans le brouillard, Arthur aperçoit une autre silhouette...")
+HERO(Lancelot)
+MOV(Lancelot, @15,15)
+QUOTE("C'est Lancelot, un autre aventurier perdu dans ce monde mystérieux...")
+
+## PHASE 9: COLLABORATION
+QUOTE("Les deux héros décident de s'unir pour explorer ensemble...")
+MOV(Arthur, @14,14)
+QUOTE("Ensemble, ils peuvent explorer plus efficacement le brouillard...")
+
+## PHASE 10: DÉCOUVERTE FINALE
+QUOTE("Au cœur du brouillard, ils trouvent quelque chose d'étrange...")
+CREATE(ITEM, cristal_vision, HERO:Arthur)
+QUOTE("Un cristal mystérieux qui semble réagir au brouillard...")
+
+## PHASE FINALE: COMPRÉHENSION
+QUOTE("Arthur comprend maintenant les mystères de ce monde...")
+USE(ITEM, cristal_vision, HERO:Arthur)
+QUOTE("Le cristal révèle des secrets cachés dans le brouillard...")
+QUOTE("Arthur a appris les bases de l'exploration temporelle...") 

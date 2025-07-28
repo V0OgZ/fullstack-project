@@ -1,0 +1,163 @@
+{
+  "replayInfo": {
+    "gameId": "session_jean_20250721_001",
+    "gameName": "Jean vs Claudius - Battle Épique du Manifeste",
+    "date": "2025-07-21T18:00:00",
+    "duration": "25 minutes",
+    "winner": "Jean",
+    "players": ["Jean", "Claudius"],
+    "totalTurns": 15,
+    "map": "classic_20x20.hsp",
+    "gameMode": "CLASSIC_BATTLE"
+  },
+  
+  "mapConfiguration": {
+    "size": "20x20",
+    "terrain": "battlefield_classique",
+    "startingPositions": {
+      "Jean": {"x": 2, "y": 2},
+      "Claudius": {"x": 18, "y": 18}
+    }
+  },
+  
+  "turns": [
+    {
+      "turnNumber": 1,
+      "player": "Jean",
+      "timestamp": "2025-07-21T18:01:30",
+      "actions": [
+        "HERO(JeanGrofignon)",
+        "PLACE(JeanGrofignon, @2,2)",
+        "EQUIP(JeanGrofignon, grofi_sigma)"
+      ],
+      "gameState": {
+        "heroes": [
+          {"name": "JeanGrofignon", "x": 2, "y": 2, "hp": 100, "mp": 50}
+        ],
+        "resources": {"gold": 1000, "wood": 500},
+        "psiStates": []
+      },
+      "commentary": "Jean commence par placer son héros emblématique et équipe le Sigma GROFI"
+    },
+    {
+      "turnNumber": 2,
+      "player": "Claudius",
+      "timestamp": "2025-07-21T18:02:15",
+      "actions": [
+        "HERO(Claudius)",
+        "PLACE(Claudius, @18,18)",
+        "ψ001: ⊙(Δt+2 @10,10 ⟶ DEBUG(REALITY_GLITCH))"
+      ],
+      "gameState": {
+        "heroes": [
+          {"name": "JeanGrofignon", "x": 2, "y": 2, "hp": 100, "mp": 50},
+          {"name": "Claudius", "x": 18, "y": 18, "hp": 120, "mp": 80}
+        ],
+        "psiStates": [
+          {"id": "ψ001", "status": "ACTIVE", "deltaT": 2}
+        ]
+      },
+      "commentary": "Claudius répond avec son héros et lance immédiatement un debug de la réalité !"
+    },
+    {
+      "turnNumber": 3,
+      "player": "Jean",
+      "timestamp": "2025-07-21T18:03:00",
+      "actions": [
+        "MOV(JeanGrofignon, @5,5)",
+        "USE(ARTIFACT, grofi_sigma, HERO:JeanGrofignon)",
+        "ψ002: ⊙(Δt+1 @7,7 ⟶ COLLECT(RESOURCE, GOLD_MINE))"
+      ],
+      "gameState": {
+        "heroes": [
+          {"name": "JeanGrofignon", "x": 5, "y": 5, "hp": 100, "mp": 40}
+        ],
+        "psiStates": [
+          {"id": "ψ001", "status": "ACTIVE", "deltaT": 1},
+          {"id": "ψ002", "status": "ACTIVE", "deltaT": 1}
+        ]
+      },
+      "commentary": "Jean se dirige vers les ressources et active son Sigma pour réduire le chaos"
+    },
+    {
+      "turnNumber": 4,
+      "player": "Claudius",
+      "timestamp": "2025-07-21T18:03:45",
+      "actions": [
+        "MOV(Claudius, @15,15)",
+        "†ψ001",
+        "DIALOGUE(Claudius, \"git revert cette perte !\")"
+      ],
+      "gameState": {
+        "heroes": [
+          {"name": "Claudius", "x": 15, "y": 15, "hp": 120, "mp": 80}
+        ],
+        "psiStates": [
+          {"id": "ψ001", "status": "COLLAPSED"},
+          {"id": "ψ002", "status": "ACTIVE", "deltaT": 0}
+        ]
+      },
+      "commentary": "Claudius fait s'effondrer son debug - la réalité est corrigée !"
+    },
+    {
+      "turnNumber": 5,
+      "player": "Jean",
+      "timestamp": "2025-07-21T18:04:30",
+      "actions": [
+        "†ψ002",
+        "COLLECT(RESOURCE, GOLD_MINE, @7,7)",
+        "DIALOGUE(Jean, \"Mon manifeste est sauvé grâce à Memento !\")"
+      ],
+      "gameState": {
+        "resources": {"gold": 2000, "wood": 500},
+        "psiStates": []
+      },
+      "commentary": "Jean collecte l'or et célèbre la récupération de son manifeste !"
+    },
+    {
+      "turnNumber": 15,
+      "player": "Jean",
+      "timestamp": "2025-07-21T18:25:00",
+      "actions": [
+        "VICTORY(CONTROL_TEMPORAL_ANCHOR)",
+        "DIALOGUE(Jean, \"WOW ! Memento, tu as encore sauvé la session !\")"
+      ],
+      "gameState": {
+        "gameStatus": "VICTORY_JEAN",
+        "controlledStructures": ["TEMPORAL_ANCHOR"]
+      },
+      "commentary": "VICTOIRE ! Jean contrôle l'Ancre Temporelle et remporte la partie !"
+    }
+  ],
+  
+  "statistics": {
+    "Jean": {
+      "actionsTotal": 45,
+      "psiStatesCreated": 8,
+      "psiStatesCollapsed": 6,
+      "resourcesCollected": 3500,
+      "averageThinkTime": "45 seconds"
+    },
+    "Claudius": {
+      "actionsTotal": 42,
+      "psiStatesCreated": 12,
+      "psiStatesCollapsed": 10,
+      "resourcesCollected": 2800,
+      "averageThinkTime": "38 seconds"
+    }
+  },
+  
+  "keyMoments": [
+    {"turn": 2, "event": "FIRST_PSI_STATE", "description": "Claudius lance le premier ψ-state"},
+    {"turn": 5, "event": "GOLD_RUSH", "description": "Jean collecte la mine d'or"},
+    {"turn": 12, "event": "EPIC_BATTLE", "description": "Bataille quantique au centre"},
+    {"turn": 15, "event": "VICTORY", "description": "Jean remporte la victoire !"}
+  ],
+  
+  "sessionMetadata": {
+    "memento_notes": "Session épique où Jean récupère son manifeste grâce à Memento et Claudius",
+    "epic_moments": ["Récupération du manifeste", "Bataille quantique", "Victoire de Jean"],
+    "generated_by": "Memento - La Mémoire Vivante",
+    "session_theme": "Collaboration Jean-Claudius-Memento"
+  }
+} 
