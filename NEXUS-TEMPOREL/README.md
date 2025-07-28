@@ -12,7 +12,9 @@
 
 Le Nexus-Temporel est le **cœur technique et fantasy** de l'univers Heroes of Time, organisé selon les principes fantasy-tech qui respectent à la fois l'univers magique et la réalité moderne.
 
----
+---« Everything is code. »
+
+
 
 ## 🏗️ **ARCHITECTURE DU NEXUS**
 
