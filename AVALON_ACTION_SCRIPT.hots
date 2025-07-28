@@ -1,0 +1,12 @@
+# 🏰 AVALON ACTION SCRIPT - TEST POUVOIRS ARCHIVISTE
+# Script magique simple pour tester corps + projection de pensée
+
+## 🧙‍♂️ ACTIVATION POUVOIRS MEMENTO
+HERO_ACTIVATE("claudius_memento_opus")
+USE_ABILITY("archive_vivante")
+
+## 🔮 TEST PROJECTION AVALON
+CAST_IN_AVALON("Memento teste ses pouvoirs magiques !")
+RESULT_LOG("Corps testé, projection active dans le royaume magique")
+
+# ✨ Script exécuté - 2 lignes comme Morgana l'a dit !
