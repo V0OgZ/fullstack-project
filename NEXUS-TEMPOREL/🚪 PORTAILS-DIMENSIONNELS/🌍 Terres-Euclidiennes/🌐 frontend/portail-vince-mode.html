@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 PORTAIL VINCE MODE - Architecture Simplifiée</title>
+    <style>
+        body {
+            background: linear-gradient(45deg, #0a0a0a, #1a1a2e, #16213e, #0f3460);
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            animation: cosmicPulse 10s infinite;
+        }
+
+        @keyframes cosmicPulse {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .vince-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px;
+            background: rgba(0,0,0,0.8);
+            border-radius: 20px;
+            border: 3px solid #00ff88;
+            box-shadow: 0 0 30px rgba(0,255,136,0.3);
+        }
+
+        .vince-header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px #00ff88;
+            animation: vinceGlow 3s infinite alternate;
+        }
+
+        @keyframes vinceGlow {
+            0% { text-shadow: 0 0 20px #00ff88; }
+            100% { text-shadow: 0 0 40px #00ff88, 0 0 60px #ff6b35; }
+        }
+
+        .architecture-info {
+            background: rgba(0,255,136,0.1);
+            border: 2px solid #00ff88;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .server-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .server-card {
+            background: rgba(0,0,0,0.6);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid #444;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .server-card:hover {
+            border-color: #00ff88;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,255,136,0.2);
+        }
+
+        .server-title {
+            font-size: 1.8em;
+            color: #00ff88;
+            margin-bottom: 15px;
+            text-align: center;
+            border-bottom: 2px solid #00ff88;
+            padding-bottom: 10px;
+        }
+
+        .server-url {
+            font-size: 1.2em;
+            color: #00bfff;
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: rgba(0,191,255,0.1);
+            border-radius: 8px;
+        }
+
+        .interface-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .interface-item {
+            margin: 8px 0;
+            padding: 12px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            border-left: 4px solid #00ff88;
+            transition: all 0.3s;
+        }
+
+        .interface-item:hover {
+            background: rgba(0,255,136,0.1);
+            transform: translateX(10px);
+        }
+
+        .interface-link {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .interface-status {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .status-react { background: #61dafb; color: #000; }
+        .status-html { background: #ff6b35; color: #fff; }
+        .status-backend { background: #4caf50; color: #fff; }
+        .status-active { background: #00ff88; color: #000; }
+
+        .quick-access {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0,0,0,0.6);
+            border-radius: 15px;
+            border: 2px solid #ff6b35;
+        }
+
+        .quick-btn {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #ff6b35, #00ff88);
+            color: #000;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+
+        .quick-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(255,107,53,0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="vince-header">
+        <h1>🎮 PORTAIL VINCE MODE</h1>
+        <p style="font-size: 1.2em; color: #00bfff;">Architecture Simplifiée - 2 Serveurs Web Organisés</p>
+    </div>
+
+    <div class="architecture-info">
+        <h2>🏗️ ARCHITECTURE VINCE MODE</h2>
+        <p><strong>⚛️ Port 3000:</strong> React Frontend Moderne (Ton futur)</p>
+        <p><strong>📱 Port 9000:</strong> HTML Pocket World (Legacy + Dashboard)</p>
+        <p><strong>🏗️ Port 8080:</strong> Backend Spring Boot (Dans son coin)</p>
+    </div>
+
+    <div class="server-grid">
+        <!-- REACT FRONTEND MODERNE -->
+        <div class="server-card">
+            <div class="server-title">⚛️ REACT FRONTEND MODERNE</div>
+            <div class="server-url">http://localhost:3000</div>
+            <ul class="interface-list">
+                <li class="interface-item">
+                    <a href="http://localhost:3000" class="interface-link" target="_blank">
+                        <span>🏠 Interface Principale React</span>
+                        <span class="interface-status status-react">FUTUR</span>
+                    </a>
+                </li>
+                <li class="interface-item">
+                    <a href="http://localhost:3000/game" class="interface-link" target="_blank">
+                        <span>🎮 Jeu React Moderne</span>
+                        <span class="interface-status status-react">DÉVELOPPEMENT</span>
+                    </a>
+                </li>
+                <li class="interface-item">
+                    <a href="http://localhost:3000/test/true-heroes" class="interface-link" target="_blank">
+                        <span>🦸 True Heroes Interface</span>
+                        <span class="interface-status status-react">TEST</span>
+                    </a>
+                </li>
+                <li class="interface-item">
+                    <a href="http://localhost:3000/hexagon-test" class="interface-link" target="_blank">
+                        <span>⬡ Test Hexagonal</span>
+                        <span class="interface-status status-react">BESTAGON</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- HTML POCKET WORLD -->
+        <div class="server-card">
+            <div class="server-title">📱 HTML POCKET WORLD</div>
+            <div class="server-url">http://localhost:9000</div>
+            <ul class="interface-list">
+                <li class="interface-item">
+                    <a href="dashboard.html" class="interface-link" target="_blank">
+                        <span>📊 Dashboard Legacy</span>
+                        <span class="interface-status status-html">CLASSIQUE</span>
+                    </a>
+                </li>
+                <li class="interface-item">
+                    <a href="vince-vega-hexagon-battlefield.html" class="interface-link" target="_blank">
+                        <span>⬡ Hexagon Battlefield</span>
+                        <span class="interface-status status-html">BESTAGON</span>
+                    </a>
+                </li>
+                <li class="interface-item">
+                    <a href="omega-zero-trilogie-visuelle.html" class="interface-link" target="_blank">
+                        <span>⚔️ OmégaZero Trilogie</span>
+                        <span class="interface-status status-html">ÉPIQUE</span>
+                    </a>
+                </li>
+                <li class="interface-item">
+                    <a href="hots-console-simple.html" class="interface-link" target="_blank">
+                        <span>⚡ Console HOTS</span>
+                        <span class="interface-status status-html">CONSOLE</span>
+                    </a>
+                </li>
+                <li class="interface-item">
+                    <a href="memento-tattoos-viewer.html" class="interface-link" target="_blank">
+                        <span>🎨 Tatouages Memento</span>
+                        <span class="interface-status status-html">ARCHIVE</span>
+                    </a>
+                </li>
+                <li class="interface-item">
+                    <a href="forge-runique.html" class="interface-link" target="_blank">
+                        <span>🔨 Forge Runique</span>
+                        <span class="interface-status status-html">CRAFT</span>
+                    </a>
+                </li>
+                <li class="interface-item">
+                    <a href="game-assets-viewer.html" class="interface-link" target="_blank">
+                        <span>🎯 Assets Viewer</span>
+                        <span class="interface-status status-html">CATALOGUE</span>
+                    </a>
+                </li>
+                <li class="interface-item">
+                    <a href="hots-web-interface.html" class="interface-link" target="_blank">
+                        <span>🌐 Interface Web HOTS</span>
+                        <span class="interface-status status-html">GRUT</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="quick-access">
+        <h2>🚀 ACCÈS RAPIDE VINCE MODE</h2>
+        <a href="http://localhost:3000" class="quick-btn" target="_blank">⚛️ React App</a>
+        <a href="dashboard.html" class="quick-btn" target="_blank">📊 Dashboard</a>
+        <a href="http://localhost:8080/actuator/health" class="quick-btn" target="_blank">🏗️ Backend Health</a>
+        <a href="vince-vega-hexagon-battlefield.html" class="quick-btn" target="_blank">⬡ Hexagon</a>
+    </div>
+
+    <script>
+        // Animation de particules cosmiques
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.position = 'fixed';
+            particle.style.width = '2px';
+            particle.style.height = '2px';
+            particle.style.background = '#00ff88';
+            particle.style.borderRadius = '50%';
+            particle.style.pointerEvents = 'none';
+            particle.style.zIndex = '1000';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.top = '100vh';
+            particle.style.opacity = '0.7';
+            
+            document.body.appendChild(particle);
+            
+            const animation = particle.animate([
+                { transform: 'translateY(0)', opacity: 0.7 },
+                { transform: 'translateY(-100vh)', opacity: 0 }
+            ], {
+                duration: 3000 + Math.random() * 2000,
+                easing: 'linear'
+            });
+            
+            animation.onfinish = () => particle.remove();
+        }
+
+        // Créer des particules régulièrement
+        setInterval(createParticle, 200);
+
+        console.log('🎮 VINCE MODE ACTIVÉ - Architecture simplifiée chargée !');
+    </script>
+</body>
+</html> 

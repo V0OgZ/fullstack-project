@@ -1,0 +1,38 @@
+{
+  "id": "hero_peekill",
+  "name": "Pee & Kill",
+  "title": "Les Apôtres de l'Incohérence",
+  "description": "Entités doubles issues d'une timeline instable, Pee & Kill réécrivent la causalité comme un sketch mal calibré. Parfois, il semble qu'ils aient été générés automatiquement... à des fins de test ? [Note système : traduction incomplète -- vérifier cohérence méta.]",
+  "role": "Anomalie bipersonnelle",
+  "rarity": "épique",
+  "faction": "Timelines Corrompues",
+  "formula": "Ψ(Pee ⊕ Kill) ↯ OBS[context=humour] ⇒ COLLAPSE ⟶ ψ{Ki, Pi}",
+  "passive_formula": "ψ ∈ superposition ∧ OBS(humour) ⇒ ψ → {Ki, Pi}",
+  "abilities": [
+    {
+      "name": "Routine Infernale",
+      "quantum_script": "∀x ∈ allies : x.ψ += CONTRADICTION_STRESS+1"
+    },
+    {
+      "name": "Impro Quantique",
+      "quantum_script": "SELECT enemy.action ↺ REWRITE(cause|target)"
+    },
+    {
+      "name": "Silence Scénique",
+      "quantum_script": "∀enemy ∈ area : enemy.VOICE = NULL (1t)"
+    }
+  ],
+  "quotes": [
+    "It's not a game — it's a one-man sketch with casualties.",
+    "If you understood that... you already lost."
+  ],
+  "collapse_effect": {
+    "condition": "Observation consciente dans un contexte comique",
+    "result": "Transformation en Ki & Pi (voir hero_kiandpi.json)",
+    "irreversible": true
+  },
+  "metadata": {
+    "origin_hint": "Fragment ∂LLM_SEQ[0xCLOWN_CORE]",
+    "translator_warning": "May trigger tisonnante fallback"
+  }
+} 

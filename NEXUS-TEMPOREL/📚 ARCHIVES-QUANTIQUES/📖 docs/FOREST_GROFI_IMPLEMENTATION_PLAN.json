@@ -1,0 +1,56 @@
+{
+  "priorities": [
+    {
+      "priority": 1,
+      "task": "Elfes Mécaniques McKenna",
+      "subtasks": [
+        "Créer race dans 🎮 game_assets/races/",
+        "Créer héros Terran ceMekna",
+        "Créer monde Hyperspace DMT",
+        "Implémenter syntaxe HOTS vibrante"
+      ]
+    },
+    {
+      "priority": 2,
+      "task": "Formules de projection",
+      "subtasks": [
+        "Ajouter champ world_formula aux JSON monde",
+        "Étendre parseur HOTS avec opérateur Π",
+        "Créer système de projection dans backend",
+        "Implémenter shaders visuels par monde"
+      ]
+    },
+    {
+      "priority": 3,
+      "task": "Audit backend complet",
+      "subtasks": [
+        "Réviser TemporalScriptParser",
+        "Vérifier WorldGraph",
+        "Valider GameService",
+        "Tester cohérence globale"
+      ]
+    },
+    {
+      "priority": 4,
+      "task": "Panopticon Forêt",
+      "subtasks": [
+        "Créer totem-portail dans la forêt",
+        "Lier au Panopticon existant",
+        "Ajouter vue 'Forêt du dedans'",
+        "Implémenter navigation forestière"
+      ]
+    },
+    {
+      "priority": 5,
+      "task": "Map + FPV hybride",
+      "subtasks": [
+        "Créer HeroFPV.tsx component",
+        "Synchroniser avec MapView",
+        "Générer portraits IA",
+        "CSS environnements par monde"
+      ]
+    }
+  ],
+  "estimated_time": "2-3 jours pour implémentation complète",
+  "next_action": "Commencer par créer les Elfes Mécaniques McKenna"
+}

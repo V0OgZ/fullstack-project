@@ -1,0 +1,95 @@
+{
+  "id": "ragnar_official",
+  "name": "Ragnar",
+  "title": "🏹 Le Chef de Guerre Temporel",
+  "class": "TEMPORAL_WARRIOR",
+  "level": 6,
+  "rarity": "LEGENDARY",
+  "faction": "NORDIC_RAIDERS",
+  "description": "Guerrier viking qui maîtrise les tempêtes temporelles et brandit Mjolnir",
+  
+  "stats": {
+    "health": 120,
+    "max_health": 120,
+    "mana": 60,
+    "max_mana": 80,
+    "temporal_energy": 18,
+    "max_temporal_energy": 25,
+    "attack": 42,
+    "defense": 35,
+    "speed": 7,
+    "movement_points": 4,
+    "max_movement_points": 4,
+    "timeline_affinity": 0.2,
+    "power": 0.9
+  },
+  
+  "position": {
+    "x": 25,
+    "y": 25,
+    "z": 0,
+    "timeline": "ℬ2",
+    "temporal_layer": 0
+  },
+  
+  "artifacts": [
+    "mjolnir",
+    "reverse_clock",
+    "storm_anchor"
+  ],
+  
+  "abilities": {
+    "temporal_storm": {
+      "name": "⛈️ Tempête Temporelle",
+      "description": "Déchaîne une tempête qui perturbe les ψ-states ennemies",
+      "cost": 35,
+      "range": 4,
+      "duration": 3,
+      "effects": {
+        "psi_disruption": 0.7,
+        "timeline_chaos": 0.5,
+        "area_damage": 25
+      }
+    },
+    "mjolnir_strike": {
+      "name": "🔨 Frappe de Mjolnir",
+      "description": "Attaque temporelle qui traverse les timelines pour toucher toutes les versions d'un ennemi",
+      "cost": 50,
+      "range": 2,
+      "damage": 55,
+      "effects": {
+        "multiversal_damage": true,
+        "lightning_effect": true,
+        "temporal_stun": 2
+      }
+    },
+    "berserker_rage": {
+      "name": "😤 Rage Berserker",
+      "description": "Entre en rage et ignore les effets temporels négatifs",
+      "cost": 20,
+      "range": 0,
+      "duration": 4,
+      "effects": {
+        "temporal_immunity": true,
+        "damage_boost": 1.5,
+        "speed_boost": 2
+      }
+    }
+  },
+  
+  "backstory": {
+    "origin": "Chef viking qui a conquis plusieurs timelines parallèles avec son armée temporelle",
+    "motivation": "Étendre son empire à travers toutes les réalités possibles et défier Arthur",
+    "weakness": "Sa rage l'aveugle parfois aux conséquences temporelles de ses actes"
+  },
+  
+  "scenarios": [
+    "epic-arthur-vs-ragnar.hots",
+    "bataille_temporelle_combat.hots",
+    "oeil_de_wigner_scenario.hots"
+  ],
+  
+  "status": "ACTIVE",
+  "created_at": "2025-01-27T10:00:00",
+  "version": "1.0"
+} 

@@ -1,0 +1,40 @@
+[
+    {
+      "id": "ports_scripts_correction_2025_07_19",
+      "title": "🚨 CORRECTION CRITIQUE - Scripts avec Ports Foireux",
+      "date": "2025-07-19",
+      "category": "CRITICAL_FIX",
+      "description": "Correction massive des scripts /⚙️ scripts/actifs/ qui utilisaient des ports incorrects",
+      "details": {
+        "problem": "Tous les scripts utilisaient des ports différents de ceux documentés dans .cursorrules",
+        "errors_found": [
+          "start-services-background.sh: utilisait ports 5170, 5171 (dépréciés) + cherchait 'dashboard-unified.html' inexistant",
+          "start-unified-ui.sh: utilisait ports 5170, 5171 au lieu de 5175 pour Object Viewer",
+          "test-ui-quick.sh: testait ports 5170, 5171 au lieu des ports corrects",
+          "stop-all-services.sh: arrêtait port 5173 au lieu de 5174, port 8001 au lieu de 5172"
+        ],
+        "ports_corrected": {
+          "old_wrong_ports": ["5170", "5171", "5173", "8001"],
+          "new_correct_ports": ["5175", "5172", "5174"],
+          "maintained_ports": ["9000", "8000", "8080", "5174", "8888"]
+        },
+        "files_corrected": [
+          "⚙️ scripts/actifs/start-services-background.sh",
+          "⚙️ scripts/actifs/start-unified-ui.sh", 
+          "⚙️ scripts/actifs/test-ui-quick.sh",
+          "⚙️ scripts/actifs/stop-all-services.sh",
+          ".cursorrules (documentation des ports)"
+        ],
+        "impact": "Scripts maintenant cohérents avec .cursorrules - Plus de confusion sur les ports !",
+        "lesson": "TOUJOURS vérifier que les scripts correspondent à la documentation !"
+      },
+      "technical_notes": [
+        "Les scripts utilisaient des ports dépréciés 5170/5171 remplacés par 5175 (Object Viewer unifié)",
+        "Le fichier 'dashboard-unified.html' n'existe pas, c'est 'dashboard.html'",
+        "Port 5173 était incorrect pour Temporal UI (c'est 5174)",
+        "Port 8001 était incorrect pour Quantum (c'est 5172)",
+        "Maintenant TOUS les scripts utilisent les mêmes ports documentés"
+      ],
+      "prevention": "Utiliser UNIQUEMENT ./⚙️ scripts/actifs/start-services-background.sh - Scripts corrigés et cohérents"
+    }
+] 

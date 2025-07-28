@@ -1,0 +1,323 @@
+/* 🌐 STYLES DE TRADUCTION - Heroes of Time */
+
+/* ==================== CARTES DE TRADUCTION ==================== */
+.translation-card {
+    background: linear-gradient(135deg, #1a0a2e 0%, #16213e 100%);
+    border: 2px solid rgba(78, 205, 196, 0.3);
+    border-radius: 12px;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.translation-card:hover {
+    border-color: rgba(78, 205, 196, 0.5);
+    box-shadow: 0 8px 25px rgba(78, 205, 196, 0.2);
+    transform: translateY(-2px);
+}
+
+.translation-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(78, 205, 196, 0.2);
+}
+
+.type-icon {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #4ecdc4;
+    text-shadow: 0 0 10px rgba(78, 205, 196, 0.5);
+}
+
+.script-type {
+    font-size: 0.9rem;
+    color: #bdc3c7;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.complexity-badge {
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid currentColor;
+    margin-left: auto;
+}
+
+.translation-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.original-script {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.5rem;
+    border-radius: 6px;
+    border-left: 3px solid #4ecdc4;
+}
+
+.original-script code {
+    color: #4ecdc4;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+}
+
+.translated-text {
+    color: #e0e0e0;
+    line-height: 1.4;
+    font-size: 0.95rem;
+}
+
+.script-details {
+    background: rgba(78, 205, 196, 0.1);
+    padding: 0.5rem;
+    border-radius: 6px;
+    border-left: 3px solid #f39c12;
+    font-size: 0.9rem;
+    color: #bdc3c7;
+}
+
+/* ==================== BOUTONS DE TRADUCTION ==================== */
+.translate-btn {
+    background: linear-gradient(45deg, #4ecdc4, #45b7d1);
+    color: #1a0a2e;
+    border: none;
+    border-radius: 20px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.translate-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
+}
+
+.translate-btn:active {
+    transform: translateY(0);
+}
+
+.translate-btn.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.translate-btn.loading::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* ==================== TOOLTIPS DE TRADUCTION ==================== */
+.translation-tooltip {
+    position: absolute;
+    background: linear-gradient(135deg, #1a0a2e 0%, #16213e 100%);
+    border: 2px solid rgba(78, 205, 196, 0.3);
+    border-radius: 8px;
+    padding: 0.75rem;
+    max-width: 300px;
+    z-index: 1000;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.translation-tooltip.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.translation-tooltip::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 20px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid rgba(78, 205, 196, 0.3);
+}
+
+/* ==================== INDICATEURS DE TRADUCTION ==================== */
+.translation-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.8rem;
+    color: #4ecdc4;
+    margin-left: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.translation-indicator:hover {
+    color: #45b7d1;
+    text-shadow: 0 0 10px rgba(78, 205, 196, 0.5);
+}
+
+.translation-indicator.available {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.translation-indicator.unavailable {
+    opacity: 0.5;
+    color: #95a5a6;
+}
+
+/* ==================== MODE TRADUCTION AUTO ==================== */
+.auto-translate-mode {
+    background: rgba(78, 205, 196, 0.1);
+    border: 1px solid rgba(78, 205, 196, 0.3);
+    border-radius: 8px;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.auto-translate-toggle {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.auto-translate-toggle.active {
+    background: #4ecdc4;
+}
+
+.auto-translate-toggle::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.auto-translate-toggle.active::after {
+    transform: translateX(20px);
+}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.translation-card {
+    animation: fadeInUp 0.3s ease-out;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+    .translation-card {
+        margin: 0.25rem 0;
+        padding: 0.75rem;
+    }
+    
+    .translation-header {
+        flex-wrap: wrap;
+        gap: 0.25rem;
+    }
+    
+    .complexity-badge {
+        margin-left: 0;
+    }
+    
+    .translation-tooltip {
+        max-width: 250px;
+        font-size: 0.9rem;
+    }
+    
+    .translate-btn {
+        padding: 0.25rem 0.6rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* ==================== THÈMES DE COULEUR ==================== */
+.translation-card.psi-state {
+    border-color: rgba(155, 89, 182, 0.3);
+}
+
+.translation-card.psi-state .type-icon {
+    color: #9b59b6;
+}
+
+.translation-card.collapse {
+    border-color: rgba(231, 76, 60, 0.3);
+}
+
+.translation-card.collapse .type-icon {
+    color: #e74c3c;
+}
+
+.translation-card.observation {
+    border-color: rgba(243, 156, 18, 0.3);
+}
+
+.translation-card.observation .type-icon {
+    color: #f39c12;
+}
+
+.translation-card.hero {
+    border-color: rgba(46, 204, 113, 0.3);
+}
+
+.translation-card.hero .type-icon {
+    color: #2ecc71;
+}
+
+.translation-card.artifact {
+    border-color: rgba(52, 152, 219, 0.3);
+}
+
+.translation-card.artifact .type-icon {
+    color: #3498db;
+} 

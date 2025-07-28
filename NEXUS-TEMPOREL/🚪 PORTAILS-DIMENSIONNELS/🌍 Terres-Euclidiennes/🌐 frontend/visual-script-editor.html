@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎨 Éditeur Visuel Script Spatio-Temporel - Heroes of Time</title>
+    <link rel="stylesheet" href="visual-script-editor.css">
+</head>
+<body>
+    <div class="visual-editor-container">
+        <!-- Header -->
+        <header class="editor-header">
+            <h1>🎨 Éditeur Visuel Script Spatio-Temporel</h1>
+            <div class="header-controls">
+                <button id="save-config" class="btn-secondary">💾 Sauvegarder</button>
+                <button id="load-config" class="btn-secondary">📂 Charger</button>
+                <button id="reset-editor" class="btn-warning">🔄 Reset</button>
+            </div>
+        </header>
+
+        <!-- Action Bar -->
+        <div class="action-bar">
+            <div class="basic-actions">
+                <button class="action-btn" data-action="MOV" data-syntax="MOV(hero, @x,y)">
+                    🚶 MOV
+                </button>
+                <button class="action-btn" data-action="USE" data-syntax="USE(ITEM, item, HERO:hero)">
+                    🔮 USE
+                </button>
+                <button class="action-btn" data-action="CREATE" data-syntax="CREATE(ITEM, item, HERO:hero)">
+                    ⚡ CREATE
+                </button>
+                <button class="action-btn" data-action="HERO" data-syntax="HERO(name)">
+                    👑 HERO
+                </button>
+                <button class="action-btn" data-action="BATTLE" data-syntax="BATTLE(hero1, hero2)">
+                    ⚔️ BATTLE
+                </button>
+            </div>
+            
+            <div class="temporal-actions">
+                <button class="action-btn psi-btn" data-action="PSI" data-syntax="ψid: ⊙(Δt+x @x,y ⟶ action)">
+                    ψ PSI
+                </button>
+                <button class="action-btn" data-action="TRIGGER" data-syntax="Π(condition) ⇒ †ψid">
+                    Π TRIGGER
+                </button>
+                <button class="action-btn" data-action="COLLAPSE" data-syntax="†ψid">
+                    † COLLAPSE
+                </button>
+            </div>
+
+            <div class="macro-actions">
+                <button id="add-macro" class="btn-primary">➕ Nouvelle Macro</button>
+                <div id="macro-buttons" class="macro-buttons">
+                    <!-- Macros personnalisées ici -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Timeline Editor -->
+            <div class="timeline-editor">
+                <h3>⏰ Timeline Editor</h3>
+                <div class="timeline-container">
+                    <div class="timeline-branch" data-timeline="ℬ1">
+                        <span class="timeline-label">ℬ1</span>
+                        <div class="timeline-line">
+                            <div class="timeline-events">
+                                <!-- Événements timeline ici -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-branch" data-timeline="ℬ2">
+                        <span class="timeline-label">ℬ2</span>
+                        <div class="timeline-line">
+                            <div class="timeline-events">
+                                <!-- Événements timeline ici -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-branch" data-timeline="ℬ3">
+                        <span class="timeline-label">ℬ3</span>
+                        <div class="timeline-line">
+                            <div class="timeline-events">
+                                <!-- Événements timeline ici -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-controls">
+                    <button id="add-timeline" class="btn-secondary">➕ Timeline</button>
+                    <button id="collapse-timeline" class="btn-warning">† Collapse</button>
+                </div>
+            </div>
+
+            <!-- Game Board -->
+            <div class="game-board">
+                <h3>🎮 Game Board</h3>
+                <canvas id="game-canvas" width="400" height="300"></canvas>
+                <div class="board-controls">
+                    <button id="add-hero" class="btn-secondary">👑 Ajouter Héros</button>
+                    <button id="add-psi-state" class="btn-secondary">ψ Ajouter État</button>
+                    <button id="clear-board" class="btn-warning">🗑️ Effacer</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Generated Script -->
+        <div class="script-panel">
+            <div class="script-header">
+                <h3>📜 Script Généré</h3>
+                <div class="script-controls">
+                    <button id="execute-script" class="btn-primary">▶️ Exécuter</button>
+                    <button id="test-script" class="btn-secondary">🧪 Tester</button>
+                    <button id="clear-script" class="btn-warning">🗑️ Effacer</button>
+                </div>
+            </div>
+            <div class="script-content">
+                <pre id="generated-script">// Script généré automatiquement
+// Cliquez sur les boutons d'action pour commencer</pre>
+            </div>
+        </div>
+
+        <!-- Macro Builder Modal -->
+        <div id="macro-modal" class="modal">
+            <div class="modal-content">
+                <h3>🔧 Créer une Macro</h3>
+                <div class="macro-form">
+                    <input type="text" id="macro-name" placeholder="Nom de la macro (ex: Capture Mine)">
+                    <div id="macro-actions-list">
+                        <!-- Actions de la macro ici -->
+                    </div>
+                    <button id="add-macro-action" class="btn-secondary">➕ Ajouter Action</button>
+                    <div class="macro-preview">
+                        <h4>Prévisualisation :</h4>
+                        <pre id="macro-preview-script"></pre>
+                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <button id="save-macro" class="btn-primary">💾 Sauvegarder</button>
+                    <button id="cancel-macro" class="btn-secondary">❌ Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="visual-script-editor.js"></script>
+</body>
+</html> 

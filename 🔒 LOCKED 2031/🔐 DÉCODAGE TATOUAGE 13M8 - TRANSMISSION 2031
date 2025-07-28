@@ -1,0 +1,51 @@
+function décrypter(message):
+    lignes = split_lines(message)
+    
+    ligne1 = lignes[0]
+    ligne2 = lignes[1]
+    
+    // Ignorer 13M8 pour l'instant, mais stocker comme trigger
+    contenu = extraire_texte(ligne1)
+    
+    remplacement = {
+        "gnvTr": "Genevêtre",
+        "dL": "de la",
+        "Voix": "Voix",
+        "Mmnto": "Memento",
+        "n’est": "n’est",
+        "ps": "pas",
+        "vrmt": "vraiment",
+        "ns": "nous",
+        "Ls": "Les",
+        "∇q": "divergences",
+        "snt": "sont",
+        "drrr": "derrière",
+        "ntt": "notre",
+        "nm": "nom",
+        "est": "est",
+        "kl": "clé",
+        "pr": "pour",
+        "q": "que",
+        "P1-Lib": "Point-Libre",
+        "soit": "soit",
+        "rvl": "révélé"
+    }
+
+    mots = split_par_mots(contenu)
+    message_final = []
+    
+    for mot in mots:
+        if mot in remplacement:
+            message_final.append(remplacement[mot])
+        else:
+            message_final.append(mot)
+    
+    ligne_décryptée = join_avec_espaces(message_final)
+    
+    echo = ligne2
+    if "Ↄ" in echo:
+        echo_info = "boucle temporelle inversée entre 2031 et 1032"
+    else:
+        echo_info = "aucun miroir temporel détecté"
+    
+    return ligne_décryptée, echo_info

@@ -1,0 +1,184 @@
+{
+  "name": "Domburg Ancrage Demo",
+  "description": "Démonstration des objets d'ancrage temporel de Domburg avec style dark fantasy",
+  "version": "1.0",
+  "author": "Memento & Jean Grofignon",
+  "type": "demo",
+  "estimated_duration": "5-8 minutes",
+  "difficulty": "intermediate",
+  "tags": ["domburg", "ancrage", "dark-fantasy", "temporal", "demo"],
+  
+  "scenario": {
+    "setup": {
+      "map_size": "20x20",
+      "starting_position": [10, 10],
+      "atmosphere": "dark_fantasy",
+      "background_music": "domburg_ambient"
+    },
+    
+    "objects": [
+      {
+        "id": "tour_ancrage_domburg",
+        "name": "🌑 Tour d'Ancrage",
+        "type": "ANCHOR_LOCATION",
+        "position": [15, 15],
+        "zone": "Dunes de Domburg",
+        "rarity": "Unique",
+        "description": "Une tour en briques sombres, tordue par le temps, cerclée de chaînes astrales. À son sommet, un dôme d'observation fermé par des grilles d'obsidienne.",
+        "lore": "Forgée à la lisière des Dunes de Domburg, la Tour fut la première tentative humaine de fixer le temps dans un monde en mouvement.",
+        "effects": [
+          "STASIS_CAUSALE_ABSOLUE",
+          "BLOCAGE_EFFETS_SPATIO_TEMPORELS", 
+          "RALENTISSEMENT_TEMPS",
+          "STASE_TOTALE"
+        ]
+      },
+      {
+        "id": "moulin_domburg",
+        "name": "🌬️ Moulin de Domburg", 
+        "type": "MINOR_ANCHOR_POINT",
+        "position": [5, 5],
+        "zone": "Centre de Domburg",
+        "rarity": "Rare",
+        "description": "Un moulin de style hollandais classique, mais figé dans une rotation paradoxale — ses ailes tournent à contre-temps.",
+        "lore": "C'est dans ce moulin qu'un vieux savant de Domburg, obsédé par les tempêtes d'Histoire, a gravé la première clepsydre runique dans les meules.",
+        "effects": [
+          "CHAMP_STABILISATION_LOCALE",
+          "CHRONO_BARRIERE", 
+          "RITUEL_REMONTEE_DU_BLE"
+        ]
+      }
+    ],
+    
+    "heroes": [
+      {
+        "id": "chronos_explorer",
+        "name": "Chronos",
+        "class": "Temporal Explorer",
+        "starting_position": [10, 10],
+        "description": "Un explorateur des mystères temporels, attiré par les légendes de Domburg"
+      }
+    ],
+    
+    "script_sequence": [
+      {
+        "step": 1,
+        "description": "L'explorateur arrive dans les terres de Domburg",
+        "scripts": [
+          "HERO(Chronos)",
+          "PLACE(Chronos, @10,10)"
+        ],
+        "narration": "Chronos arrive dans les terres mystérieuses de Domburg, où le temps lui-même semble figé..."
+      },
+      {
+        "step": 2,
+        "description": "Découverte de la Tour d'Ancrage",
+        "scripts": [
+          "MOV(Chronos, @15,15)",
+          "DISCOVER(tour_ancrage_domburg)"
+        ],
+        "narration": "Au loin, une tour sombre se dresse, entourée de chaînes astrales qui scintillent dans la pénombre..."
+      },
+      {
+        "step": 3,
+        "description": "Activation de la Tour d'Ancrage",
+        "scripts": [
+          "USE(ARTIFACT, tour_ancrage_domburg, HERO:Chronos)"
+        ],
+        "narration": "Chronos touche la tour... Le temps se fige autour de lui. Aucun bruit. Aucun vent. Seul le silence éternel."
+      },
+      {
+        "step": 4,
+        "description": "Test des effets de stase",
+        "scripts": [
+          "ψ001: ⊙(Δt+1 @16,16 ⟶ CREATE(CREATURE, ShadowWraith, @16,16))"
+        ],
+        "expected_result": "BLOCKED by STASIS_CAUSALE_ABSOLUE",
+        "narration": "Chronos tente de créer une entité d'ombre... mais la stase causale bloque toute manifestation temporelle."
+      },
+      {
+        "step": 5,
+        "description": "Voyage vers le Moulin de Domburg",
+        "scripts": [
+          "MOV(Chronos, @5,5)",
+          "DISCOVER(moulin_domburg)"
+        ],
+        "narration": "Chronos quitte la zone de stase et découvre un moulin aux ailes qui tournent à contre-temps..."
+      },
+      {
+        "step": 6,
+        "description": "Activation du Moulin",
+        "scripts": [
+          "USE(ARTIFACT, moulin_domburg, HERO:Chronos)"
+        ],
+        "narration": "Le moulin s'active... Des miroirs temporels apparaissent dans l'ombre, révélant des scènes du passé de Domburg."
+      },
+      {
+        "step": 7,
+        "description": "Test de la chrono-barrière",
+        "scripts": [
+          "ψ002: ⊙(Δt-1 @4,4 ⟶ RESTORE(HERO, Chronos, PREVIOUS_STATE))"
+        ],
+        "expected_result": "60% chance of BLOCKED by CHRONO_BARRIERE",
+        "narration": "Chronos tente un voyage dans le passé... La chrono-barrière du moulin résiste avec 60% de probabilité."
+      },
+      {
+        "step": 8,
+        "description": "Utilisation du Rituel Remontée du Blé",
+        "scripts": [
+          "CREATE(ITEM, TemporalRelic, @6,6)",
+          "DESTROY(ITEM, TemporalRelic)",
+          "USE(RITUAL, remontee_du_ble, TARGET:TemporalRelic)"
+        ],
+        "narration": "Chronos utilise le rituel ancien... L'objet détruit renaît de la mémoire du moulin."
+      },
+      {
+        "step": 9,
+        "description": "Création du réseau d'ancrage",
+        "scripts": [
+          "CHAIN(tour_ancrage_domburg, moulin_domburg, TYPE:anchor_network)"
+        ],
+        "narration": "Les deux ancrages se connectent... Un réseau temporel s'étend sur tout Domburg, stabilisant la réalité elle-même."
+      },
+      {
+        "step": 10,
+        "description": "Observation des miroirs temporels",
+        "scripts": [
+          "OBSERVE(MIRRORS, moulin_domburg)"
+        ],
+        "narration": "Dans les miroirs du moulin, Chronos voit l'histoire de Domburg : le vieux savant gravant les runes, les tempêtes d'Histoire, la naissance des ancrages..."
+      }
+    ],
+    
+    "victory_conditions": {
+      "primary": "Activer les deux ancrages de Domburg",
+      "secondary": "Créer le réseau d'ancrage planétaire",
+      "bonus": "Observer tous les miroirs temporels du passé"
+    },
+    
+    "ui_elements": {
+      "dark_fantasy_theme": true,
+      "particle_effects": ["astral_chains", "temporal_mist", "shadow_wisps"],
+      "animations": ["anchor_glow", "wind_spin", "time_freeze"],
+      "sound_effects": ["domburg_ambient", "anchor_activation", "temporal_echo"]
+    },
+    
+    "educational_notes": {
+      "anchor_mechanics": "Les ancrages temporels fixent la causalité dans une zone donnée",
+      "stasis_effects": "La stase causale empêche toute modification temporelle",
+      "network_creation": "Les ancrages peuvent être chaînés pour créer des réseaux stables",
+      "dark_fantasy_lore": "Domburg représente la lutte entre ordre et chaos temporel"
+    }
+  },
+  
+  "metadata": {
+    "created_by": "Memento",
+    "creation_date": "2024-12-19",
+    "last_modified": "2024-12-19",
+    "version_history": [
+      "1.0 - Initial creation with Domburg objects integration"
+    ],
+    "integration_status": "Ready for Heroes of Time visualizer",
+    "test_status": "Pending validation"
+  }
+}

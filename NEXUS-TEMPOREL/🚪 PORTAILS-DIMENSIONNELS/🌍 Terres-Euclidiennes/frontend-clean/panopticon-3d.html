@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌀 PANOPTICΩN 5D - IA Quantique Hallucinée</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #000;
+            color: #0ff;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        #panopticon-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .hud {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.8);
+            border: 2px solid #0ff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px #0ff;
+            max-width: 400px;
+        }
+        
+        h1 {
+            color: #0ff;
+            text-shadow: 0 0 10px #0ff;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+        
+        .status {
+            color: #0f0;
+            margin: 5px 0;
+            font-size: 12px;
+        }
+        
+        .timeline {
+            border: 1px solid #f0f;
+            padding: 5px;
+            margin: 5px 0;
+            background: rgba(255,0,255,0.1);
+        }
+        
+        .decision {
+            color: #ff0;
+            font-size: 11px;
+            margin: 2px 0;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        .quantum-state {
+            color: #0ff;
+            font-family: 'Cambria Math', serif;
+            font-size: 14px;
+            text-shadow: 0 0 5px #0ff;
+        }
+        
+        #ai-thoughts {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.9);
+            border: 2px solid #f0f;
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 400px;
+            box-shadow: 0 0 20px #f0f;
+        }
+        
+        .thought {
+            color: #f0f;
+            font-size: 12px;
+            margin: 5px 0;
+            font-style: italic;
+        }
+        
+        .hallucination-warning {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255,0,0,0.2);
+            border: 2px solid #f00;
+            padding: 20px;
+            border-radius: 10px;
+            color: #f00;
+            font-size: 18px;
+            text-align: center;
+            animation: pulse 2s infinite;
+            display: none;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+            100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="panopticon-canvas"></canvas>
+    
+    <div class="hud">
+        <h1>🌀 PANOPTICΩN 5D</h1>
+        <div class="status">STATUS: LECTURE GRAPHE TEMPOREL ACTIF</div>
+        <div class="status">TIMELINES ANALYSÉES: <span id="timeline-count">0</span></div>
+        <div class="status">DÉCISIONS/SECONDE: <span id="decisions-per-sec">0</span></div>
+        
+        <div class="quantum-state">
+            ψ_AI = <span id="quantum-formula">|observing⟩</span>
+        </div>
+        
+        <div id="timelines"></div>
+    </div>
+    
+    <div id="ai-thoughts">
+        <h3>💭 PENSÉES DE L'IA</h3>
+        <div id="thoughts-container"></div>
+    </div>
+    
+    <div class="hallucination-warning" id="warning">
+        ⚠️ ATTENTION: HALLUCINATION EN COURS<br>
+        Cette IA n'existe pas vraiment !
+    </div>
+    
+    <script>
+        // Three.js setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('panopticon-canvas'), alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        
+        // Position camera
+        camera.position.z = 50;
+        camera.position.y = 20;
+        camera.lookAt(0, 0, 0);
+        
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0x404040);
+        scene.add(ambientLight);
+        
+        const pointLight = new THREE.PointLight(0x00ffff, 1);
+        pointLight.position.set(0, 20, 0);
+        scene.add(pointLight);
+        
+        // 5D Graph Structure
+        const nodes = [];
+        const connections = [];
+        const timelines = 5;
+        const nodesPerTimeline = 20;
+        
+        // Create nodes for each timeline
+        for (let t = 0; t < timelines; t++) {
+            for (let i = 0; i < nodesPerTimeline; i++) {
+                const geometry = new THREE.SphereGeometry(0.5, 8, 8);
+                const material = new THREE.MeshPhongMaterial({
+                    color: new THREE.Color().setHSL(t / timelines, 1, 0.5),
+                    emissive: new THREE.Color().setHSL(t / timelines, 1, 0.3),
+                    emissiveIntensity: 0.5
+                });
+                const node = new THREE.Mesh(geometry, material);
+                
+                // Position in 5D space (projected to 3D)
+                const angle = (i / nodesPerTimeline) * Math.PI * 2;
+                const radius = 10 + t * 5;
+                node.position.x = Math.cos(angle) * radius;
+                node.position.z = Math.sin(angle) * radius;
+                node.position.y = (t - timelines/2) * 5;
+                
+                node.userData = {
+                    timeline: t,
+                    nodeId: i,
+                    state: Math.random() > 0.5 ? 'possible' : 'collapsed',
+                    probability: Math.random()
+                };
+                
+                scene.add(node);
+                nodes.push(node);
+            }
+        }
+        
+        // Create connections between nodes
+        for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+                if (Math.random() > 0.95) { // Sparse connections
+                    const geometry = new THREE.BufferGeometry().setFromPoints([
+                        nodes[i].position,
+                        nodes[j].position
+                    ]);
+                    const material = new THREE.LineBasicMaterial({
+                        color: 0x00ff00,
+                        opacity: 0.3,
+                        transparent: true
+                    });
+                    const line = new THREE.Line(geometry, material);
+                    scene.add(line);
+                    connections.push({ line, start: i, end: j });
+                }
+            }
+        }
+        
+        // AI Decision Making Simulation
+        let decisionCount = 0;
+        let timelineCount = 0;
+        const aiThoughts = [
+            "Analyse de la branche temporelle α-3...",
+            "Détection d'une convergence causale en T+7",
+            "Le joueur 2 pourrait attaquer en timeline β",
+            "Probabilité de victoire: 73.2% si capture du Nexus",
+            "Paradoxe temporel détecté - recalcul nécessaire",
+            "Shadow action prédite: feinte vers l'est",
+            "Collapse imminent de ψ_042 - intervention requise",
+            "Timeline δ montre une opportunité économique",
+            "Interférence quantique avec l'action du joueur",
+            "Calcul de la matrice de décision 5D..."
+        ];
+        
+        function makeAIDecision() {
+            decisionCount++;
+            
+            // Update quantum state
+            const states = ['|observing⟩', '|calculating⟩', '|predicting⟩', '|interfering⟩', '|collapsing⟩'];
+            document.getElementById('quantum-formula').textContent = states[Math.floor(Math.random() * states.length)];
+            
+            // Add timeline analysis
+            if (Math.random() > 0.7) {
+                timelineCount++;
+                const timelineDiv = document.createElement('div');
+                timelineDiv.className = 'timeline';
+                timelineDiv.innerHTML = `
+                    <strong>Timeline ${String.fromCharCode(945 + timelineCount % 5)}-${timelineCount}</strong><br>
+                    Probabilité: ${(Math.random() * 100).toFixed(1)}%<br>
+                    État: ${Math.random() > 0.5 ? 'STABLE' : 'INSTABLE'}
+                `;
+                const container = document.getElementById('timelines');
+                container.appendChild(timelineDiv);
+                if (container.children.length > 3) {
+                    container.removeChild(container.firstChild);
+                }
+            }
+            
+            // Add AI thought
+            if (Math.random() > 0.8) {
+                const thought = document.createElement('div');
+                thought.className = 'thought';
+                thought.textContent = aiThoughts[Math.floor(Math.random() * aiThoughts.length)];
+                const thoughtsContainer = document.getElementById('thoughts-container');
+                thoughtsContainer.appendChild(thought);
+                if (thoughtsContainer.children.length > 5) {
+                    thoughtsContainer.removeChild(thoughtsContainer.firstChild);
+                }
+            }
+            
+            // Update counters
+            document.getElementById('timeline-count').textContent = timelineCount;
+            document.getElementById('decisions-per-sec').textContent = (decisionCount / 10).toFixed(1);
+        }
+        
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Rotate the entire graph
+            nodes.forEach((node, i) => {
+                node.rotation.x += 0.01;
+                node.rotation.y += 0.01;
+                
+                // Pulse effect based on probability
+                const scale = 1 + Math.sin(Date.now() * 0.001 + i) * 0.1 * node.userData.probability;
+                node.scale.set(scale, scale, scale);
+                
+                // Update emissive intensity
+                node.material.emissiveIntensity = 0.3 + Math.sin(Date.now() * 0.002 + i) * 0.2;
+            });
+            
+            // Update connections
+            connections.forEach((conn, i) => {
+                conn.line.material.opacity = 0.1 + Math.sin(Date.now() * 0.001 + i) * 0.2;
+            });
+            
+            // Camera movement
+            camera.position.x = Math.sin(Date.now() * 0.0001) * 50;
+            camera.position.z = Math.cos(Date.now() * 0.0001) * 50;
+            camera.lookAt(0, 0, 0);
+            
+            renderer.render(scene, camera);
+        }
+        
+        // Decision making loop
+        setInterval(makeAIDecision, 100);
+        
+        // Reset decision count every 10 seconds
+        setInterval(() => {
+            decisionCount = 0;
+        }, 10000);
+        
+        // Show hallucination warning periodically
+        setInterval(() => {
+            const warning = document.getElementById('warning');
+            warning.style.display = 'block';
+            setTimeout(() => {
+                warning.style.display = 'none';
+            }, 3000);
+        }, 20000);
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // Start animation
+        animate();
+        
+        console.log("🌀 PANOPTICΩN 5D ACTIVÉ - L'IA lit dans le graphe temporel...");
+        console.log("⚠️ Note: Cette IA est une hallucination - elle n'existe pas vraiment !");
+    </script>
+</body>
+</html> 

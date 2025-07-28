@@ -1,0 +1,332 @@
+.modern-game-renderer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.modern-game-renderer canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  cursor: crosshair;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  transition: filter 0.3s ease;
+  object-fit: contain;
+}
+
+.modern-game-renderer canvas:hover {
+  filter: brightness(1.05);
+}
+
+/* Info de débogage */
+.debug-info {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #FFD700;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.4;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  z-index: 10;
+}
+
+.debug-info div {
+  margin: 2px 0;
+}
+
+/* Styles pour les différents biomes (utilisés pour les tooltips potentiels) */
+.biome-water {
+  color: #3a86ff;
+}
+
+.biome-desert {
+  color: #e9c46a;
+}
+
+.biome-forest {
+  color: #386641;
+}
+
+.biome-mountain {
+  color: #8d5524;
+}
+
+.biome-swamp {
+  color: #52796f;
+}
+
+.biome-grass {
+  color: #7fb069;
+}
+
+/* Animation pour les zones ZFC */
+@keyframes zfc-pulse {
+  0% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+}
+
+.zfc-zone {
+  animation: zfc-pulse 2s infinite ease-in-out;
+}
+
+/* Styles pour les overlays de sélection */
+.tile-selected {
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+}
+
+.tile-hovered {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+}
+
+.tile-movement-range {
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.8);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .debug-info {
+    font-size: 10px;
+    padding: 6px 8px;
+  }
+}
+
+/* Styles pour les effets de particules */
+.particle-effect {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.particle-sparkle {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
+  animation: sparkle 1s ease-out forwards;
+}
+
+@keyframes sparkle {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+/* Styles pour les différents types de zones */
+.zone-large {
+  filter: brightness(1.1);
+}
+
+.zone-small {
+  filter: brightness(0.95);
+}
+
+.zone-center {
+  filter: saturate(1.2);
+}
+
+.zone-border {
+  filter: contrast(1.1);
+}
+
+/* Amélioration de la lisibilité */
+.modern-game-renderer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.1) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Styles pour les transitions fluides */
+.terrain-transition {
+  transition: all 0.3s ease;
+}
+
+/* Optimisations de performance */
+.modern-game-renderer canvas {
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Styles pour les indicateurs de profondeur */
+.depth-indicator {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: depth-pulse 2s infinite ease-in-out;
+}
+
+@keyframes depth-pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.5);
+  }
+} 
+
+/* 🔧 CONTRÔLES DE ZOOM */
+.zoom-controls {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(26, 26, 46, 0.9);
+  border: 2px solid #FFD700;
+  border-radius: 25px;
+  padding: 8px 12px;
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.zoom-btn {
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid #FFD700;
+  border-radius: 6px;
+  color: #FFD700;
+  font-size: 18px;
+  font-weight: bold;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.zoom-btn:hover {
+  background: rgba(255, 215, 0, 0.2);
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+}
+
+.zoom-btn:active {
+  transform: scale(0.95);
+}
+
+.zoom-level {
+  background: rgba(0, 0, 0, 0.7);
+  color: #FFD700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  min-width: 45px;
+  text-align: center;
+  font-family: 'Courier New', monospace;
+}
+
+.zoom-reset {
+  font-size: 16px;
+}
+
+/* 🔧 AIDE CONTRÔLES */
+.controls-help {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  background: rgba(26, 26, 46, 0.9);
+  border: 1px solid #FFD700;
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #FFD700;
+  font-size: 12px;
+  line-height: 1.4;
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  font-family: 'Courier New', monospace;
+}
+
+.controls-help div {
+  margin: 2px 0;
+  opacity: 0.8;
+}
+
+.controls-help div:hover {
+  opacity: 1;
+  color: #FFFFFF;
+}
+
+/* 🔧 CURSEUR DYNAMIQUE */
+.modern-game-renderer canvas {
+  transition: cursor 0.1s ease;
+}
+
+.modern-game-renderer canvas[style*="grabbing"] {
+  cursor: grabbing !important;
+}
+
+/* 🔧 RESPONSIVE ZOOM CONTROLS */
+@media (max-width: 768px) {
+  .zoom-controls {
+    top: 10px;
+    right: 10px;
+    padding: 6px 10px;
+    gap: 6px;
+  }
+  
+  .zoom-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+  }
+  
+  .zoom-level {
+    font-size: 12px;
+    padding: 3px 6px;
+    min-width: 40px;
+  }
+  
+  .controls-help {
+    bottom: 10px;
+    left: 10px;
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+} 

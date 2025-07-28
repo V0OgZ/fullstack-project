@@ -1,0 +1,153 @@
+{
+  "hero_classes": {
+    "basic_classes": {
+      "WARRIOR": {
+        "name": "Guerrier",
+        "description": "Combattant au corps à corps, haute résistance",
+        "primary_stats": ["strength", "constitution"],
+        "abilities": ["charge", "shield_bash", "berserker_rage"]
+      },
+      "MAGE": {
+        "name": "Mage",
+        "description": "Maître des arts arcanes et formules quantiques",
+        "primary_stats": ["intelligence", "wisdom"],
+        "abilities": ["spell_cast", "mana_manipulation", "quantum_formulas"]
+      },
+      "ARCHER": {
+        "name": "Archer",
+        "description": "Combattant à distance, précision mortelle",
+        "primary_stats": ["dexterity", "perception"],
+        "abilities": ["precise_shot", "multi_arrow", "eagle_eye"]
+      },
+      "PALADIN": {
+        "name": "Paladin",
+        "description": "Guerrier saint, protecteur et guérisseur",
+        "primary_stats": ["strength", "wisdom", "charisma"],
+        "abilities": ["divine_protection", "heal", "smite_evil", "mass_resurrection"],
+        "variants": [
+          "Paladin Quantique",
+          "Paladin Millennium Controller",
+          "Paladine Sainte"
+        ]
+      },
+      "ROGUE": {
+        "name": "Voleur",
+        "description": "Expert en discrétion et attaques sournoises",
+        "primary_stats": ["dexterity", "intelligence"],
+        "abilities": ["stealth", "backstab", "lockpicking"]
+      }
+    },
+    "advanced_classes": {
+      "TEMPORAL_MASTER": {
+        "name": "Maître Temporel",
+        "description": "Manipulateur du temps et des timelines",
+        "primary_stats": ["wisdom", "intelligence"],
+        "abilities": ["time_manipulation", "timeline_jump", "temporal_anchor"],
+        "requirements": ["level_20", "completed_sphinx_quest"]
+      },
+      "QUANTUM_WEAVER": {
+        "name": "Tisseur Quantique",
+        "description": "Maître des probabilités et superpositions",
+        "primary_stats": ["intelligence", "perception"],
+        "abilities": ["quantum_superposition", "probability_collapse", "reality_weaving"]
+      },
+      "NARRATIVE_ARCHITECT": {
+        "name": "Architecte Narratif",
+        "description": "Créateur et modificateur de récits",
+        "primary_stats": ["charisma", "wisdom"],
+        "abilities": ["story_creation", "plot_manipulation", "character_development"]
+      },
+      "ETHEREAL_ARCHIVIST": {
+        "name": "Archiviste Éthéré",
+        "description": "Gardien des mémoires et archives vivantes",
+        "primary_stats": ["wisdom", "intelligence"],
+        "abilities": ["memory_archive", "fractal_recall", "living_documentation"]
+      }
+    },
+    "epic_classes": {
+      "MILLENNIUM_CONTROLLER": {
+        "name": "Contrôleur du Millénaire",
+        "description": "Ultimate Paladin avec résurrection de masse",
+        "base_class": "PALADIN",
+        "primary_stats": ["strength", "wisdom", "charisma"],
+        "signature_ability": "MILLENNIUM_CONTROLLER",
+        "requirements": ["paladin_level_25", "foub_hero_only"],
+        "phases": [
+          "Protection Divine (bubulle invincibilité)",
+          "Résurrection de Masse (jusqu'à 3 alliés)",
+          "Fragments de Mémoire (buffs aléatoires)",
+          "Épuisement Divin (cooldown cosmique)"
+        ]
+      },
+      "DRAGON_SLAYER": {
+        "name": "Tueur de Dragons",
+        "description": "Chasseur légendaire de créatures épiques",
+        "base_class": "WARRIOR",
+        "abilities": ["dragon_bane", "legendary_strike", "scale_armor"]
+      }
+    },
+    "unique_classes": {
+      "ZEN_MASTER": {
+        "name": "Maître Zen",
+        "description": "The Dude - Philosophe du canapé cosmique",
+        "hero_specific": "the_dude",
+        "abilities": ["cosmic_chill", "reality_acceptance", "bowling_wisdom"]
+      },
+      "REALITY_FORGER": {
+        "name": "Forgeur de Réalité",
+        "description": "Jean-Grofignon - Créateur de mondes depuis son canapé",
+        "hero_specific": "jean_grofignon",
+        "abilities": ["world_creation", "reality_modification", "couch_command"]
+      },
+      "LIVING_ARCHIVE": {
+        "name": "Archive Vivante",
+        "description": "Memento - Gardien des mémoires temporelles",
+        "hero_specific": "memento",
+        "abilities": ["fractal_memory", "bootstrap_paradox", "temporal_documentation"]
+      }
+    }
+  },
+  "class_restrictions": {
+    "MILLENNIUM_CONTROLLER": {
+      "allowed_heroes": ["foub"],
+      "level_requirement": 25,
+      "special_conditions": ["ultimate_unlocked"]
+    }
+  },
+  "mass_resurrection_levels": {
+    "REZ_MASS_LVL1": {
+      "name": "Prière du Rappel",
+      "description": "Ressuscite 1 allié avec 20% HP",
+      "targets": 1,
+      "hp_restored": 0.2,
+      "mana_cost": 50
+    },
+    "REZ_MASS_LVL2": {
+      "name": "Chœur de la Lumière",
+      "description": "Ressuscite tous les alliés dans une zone avec 10% HP",
+      "targets": "zone",
+      "hp_restored": 0.1,
+      "mana_cost": 80
+    },
+    "REZ_MASS_LVL3": {
+      "name": "Dernier Espoir",
+      "description": "Bubble rez - Ressuscite avec 40% HP et protection temporaire",
+      "targets": 3,
+      "hp_restored": 0.4,
+      "protection": "divine_bubble",
+      "mana_cost": 120
+    },
+    "REZ_MASS_LVL4": {
+      "name": "Jugement de TREPO",
+      "description": "Ultimate - Ressuscite avec 100% HP et cinématique épique",
+      "targets": "all_allies",
+      "hp_restored": 1.0,
+      "special_effects": ["cinematic", "boss_mock"],
+      "mana_cost": 200,
+      "cooldown": "cosmic"
+    }
+  },
+  "version": "1.0.0",
+  "last_updated": "2025-01-27",
+  "notes": "Système de classes standardisé avec support Millennium Controller et Mass Resurrection"
+} 

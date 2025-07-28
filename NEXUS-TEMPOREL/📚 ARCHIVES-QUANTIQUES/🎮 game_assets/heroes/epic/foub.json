@@ -1,0 +1,90 @@
+{
+  "id": "foub_dormeur_pro_gamer",
+  "name": "Foub - Le Dormeur Pro-Gamer",
+  "race": "Humain endormi",
+  "class": "Joueur latent",
+  "gender": "Male",
+  "level": 25,
+  "experience": 45000,
+  "role": "potentiel caché",
+  "stats": {
+    "attack": 8,
+    "defense": 12,
+    "spellPower": 15,
+    "knowledge": 25,
+    "morale": 10,
+    "luck": 20
+  },
+  "traits": [
+    "dort en combat",
+    "HUD buggé", 
+    "immense pouvoir latent"
+  ],
+  "specialAbility": "Sommeil Actif - Continue de jouer en dormant, actions aléatoires puissantes",
+  "ultimateSkill": "Connexion Millenium - Se transforme en Trépot, pouvoir inconnu",
+  "backstory": "Ancien joueur de la Guilde des Milleniums sous le nom 'Trépot'. Ami de Vincent qui dort constamment mais cache un potentiel gaming légendaire.",
+  "personality": "Sleepy_Genius",
+  "portraitStyle": "Gaming",
+  "voiceType": "Drowsy",
+  "favoriteCreatures": ["sleeping_dragon", "dream_elemental", "phantom_gamer"],
+  "hatedEnemies": ["insomnia", "lag", "noob_teammates"],
+  "portraitUrl": "/assets/heroes/epic/foub_dormeur.svg",
+  "skills": {
+    "connexion_millenium": {
+      "name": "Connexion Millenium",
+      "type": "ULTIMATE_SEALED",
+      "description": "Se transforme en Trépot, ancien maître de la Guilde des Milleniums - pouvoir inconnu",
+      "cooldown": 10,
+      "manaCost": 100,
+      "sealed": true,
+      "unlock_condition": "Réveil complet du Dormeur",
+      "effects": [
+        "TRANSFORMATION_TREPOT",
+        "GUILD_MILLENIUM_POWER",
+        "UNKNOWN_LEGENDARY_ABILITY",
+        "GAMING_MASTERY_ULTIMATE"
+      ]
+    },
+    "sommeil_actif": {
+      "name": "Sommeil Actif",
+      "type": "PASSIVE_BUGGED",
+      "description": "Continue de jouer en dormant, HUD buggé mais actions puissantes",
+      "cooldown": 0,
+      "manaCost": 0,
+      "effects": [
+        "SLEEP_COMBAT_MODE",
+        "RANDOM_POWERFUL_ACTIONS",
+        "BUGGED_HUD_DISPLAY",
+        "LATENT_POWER_SURGE"
+      ]
+    },
+    "hud_bugge": {
+      "name": "HUD Buggé",
+      "type": "QUIRK",
+      "description": "Interface utilisateur défaillante mais parfois révèle des informations cachées",
+      "effects": [
+        "DISPLAY_GLITCHES",
+        "RANDOM_INFO_LEAKS",
+        "GAMING_NOSTALGIA"
+      ]
+    }
+  },
+  "guild_history": {
+    "former_guild": "Guilde des Milleniums",
+    "gamer_tag": "Trépot",
+    "reputation": "LEGENDARY_DORMANT",
+    "mystery_level": "MAXIMUM"
+  },
+  "team_synergy": {
+    "best_with": ["dave", "mistabo", "shag", "guy", "filista", "dreu"],
+    "gaming_bonus": "+50% when with other Vincent's friends",
+    "leadership_style": "Sleepy Wisdom"
+  },
+  "metadata": {
+    "created_by": "Vincent's_Memory",
+    "importance": "FOUNDATIONAL_FRIEND",
+    "grut_blessing": "DONNE LEUR VIE - Grut du Lair",
+    "vincent_note": "Le Dormeur Pro-Gamer avec le mystère Trépot",
+    "guild_legacy": "Ancien des Milleniums - pouvoir scellé"
+  }
+} 

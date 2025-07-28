@@ -1,0 +1,200 @@
+{
+  "scenario": {
+    "name": "Test du Mur de Causalité",
+    "type": "MECHANICS_TEST",
+    "description": "Test de la mécanique du mur de causalité avec épée temporelle et longue-vue magique"
+  },
+  "scenario_info": {
+    "difficulty": "MEDIUM",
+    "duration_estimate": "5-8 minutes",
+    "max_turns": 20,
+    "author": "Jean Grofignon Example"
+  },
+  "setup": {
+    "map": {
+      "width": 30,
+      "height": 30,
+      "terrain": "temporal_plains"
+    },
+    "players": 2
+  },
+  "heroes": [
+    {
+      "name": "Arthur",
+      "level": 5,
+      "class": "Temporal Knight",
+      "start_position": { "x": 5, "y": 5 },
+      "stats": {
+        "health": 100,
+        "mana": 80,
+        "temporal_energy": 50,
+        "movement_points": 3
+      },
+      "equipment": ["temporal_sword"],
+      "description": "Chevalier temporel équipé d'une épée qui peut percer le mur de causalité"
+    },
+    {
+      "name": "Morgana",
+      "level": 4,
+      "class": "Temporal Seer",
+      "start_position": { "x": 25, "y": 25 },
+      "stats": {
+        "health": 80,
+        "mana": 120,
+        "temporal_energy": 70,
+        "movement_points": 3
+      },
+      "equipment": ["magic_spyglass"],
+      "description": "Voyante temporelle avec une longue-vue magique pour voir dans le futur"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "temporal_sword",
+      "name": "Épée Temporelle",
+      "type": "TEMPORAL_WEAPON",
+      "description": "Permet de traverser le mur de causalité en avançant dans le temps",
+      "effects": ["CAUSALITY_WALL_BYPASS", "TIME_ADVANCE"]
+    },
+    {
+      "id": "magic_spyglass",
+      "name": "Longue-vue Magique",
+      "type": "VISION_DEVICE", 
+      "description": "Permet de voir 3 jours dans le futur",
+      "effects": ["FUTURE_VISION", "TEMPORAL_SIGHT"]
+    }
+  ],
+  "psi_states": [
+    {
+      "id": "PSI_01",
+      "action": "HERO(Arthur)",
+      "description": "Créer le héros Arthur",
+      "expected_result": "SUCCESS"
+    },
+    {
+      "id": "PSI_02", 
+      "action": "HERO(Morgana)",
+      "description": "Créer le héros Morgana",
+      "expected_result": "SUCCESS"
+    },
+    {
+      "id": "PSI_03",
+      "action": "CREATE(ITEM, temporal_sword, HERO:Arthur)",
+      "description": "Donner l'épée temporelle à Arthur",
+      "expected_result": "SUCCESS"
+    },
+    {
+      "id": "PSI_04",
+      "action": "CREATE(ITEM, magic_spyglass, HERO:Morgana)",
+      "description": "Donner la longue-vue magique à Morgana",
+      "expected_result": "SUCCESS"
+    },
+    {
+      "id": "PSI_05",
+      "action": "MOV(Arthur, @5,5)",
+      "description": "Positionner Arthur au point de départ",
+      "expected_result": "SUCCESS"
+    },
+    {
+      "id": "PSI_06",
+      "action": "MOV(Morgana, @25,25)",
+      "description": "Positionner Morgana au point de départ",
+      "expected_result": "SUCCESS"
+    },
+    {
+      "id": "PSI_07",
+      "action": "MOV(Arthur, @15,15)",
+      "description": "TEST 1: Arthur essaye de bouger trop loin SANS utiliser l'épée",
+      "expected_result": "FAILURE - Destination hors de la zone de mouvement causale!"
+    },
+    {
+      "id": "PSI_08",
+      "action": "USE(ITEM, temporal_sword, HERO:Arthur)",
+      "description": "Arthur utilise l'épée temporelle",
+      "expected_result": "SUCCESS"
+    },
+    {
+      "id": "PSI_09",
+      "action": "MOV(Arthur, @15,15)",
+      "description": "TEST 2: Arthur peut maintenant bouger plus loin avec l'épée",
+      "expected_result": "SUCCESS - timeAdvanced: X jours"
+    },
+    {
+      "id": "PSI_10",
+      "action": "USE(ITEM, magic_spyglass, HERO:Morgana)",
+      "description": "TEST 3: Morgana utilise la longue-vue pour voir dans le futur",
+      "expected_result": "SUCCESS - Vision du futur activée"
+    },
+    {
+      "id": "PSI_11",
+      "action": "MOV(Morgana, @15,15)",
+      "description": "TEST 4: Morgana se déplace vers la même position qu'Arthur",
+      "expected_result": "CAUSAL_COLLISION - Collision causale détectée!"
+    }
+  ],
+  "test_sequence": [
+    {
+      "phase": "SETUP",
+      "title": "Initialisation du test",
+      "description": "Création des héros et équipement",
+      "psi_ids": ["PSI_01", "PSI_02", "PSI_03", "PSI_04", "PSI_05", "PSI_06"]
+    },
+    {
+      "phase": "TEST_1",
+      "title": "Mouvement normal (sans épée)",
+      "description": "Arthur tente de dépasser le mur de causalité sans aide",
+      "psi_ids": ["PSI_07"],
+      "expected_behavior": "SHOULD_FAIL"
+    },
+    {
+      "phase": "TEST_2", 
+      "title": "Mouvement avec épée temporelle",
+      "description": "Arthur utilise l'épée pour traverser le mur",
+      "psi_ids": ["PSI_08", "PSI_09"],
+      "expected_behavior": "SHOULD_SUCCESS"
+    },
+    {
+      "phase": "TEST_3",
+      "title": "Vision du futur avec longue-vue",
+      "description": "Morgana active sa capacité de vision temporelle",
+      "psi_ids": ["PSI_10"],
+      "expected_behavior": "SHOULD_SUCCESS"
+    },
+    {
+      "phase": "TEST_4",
+      "title": "Collision causale",
+      "description": "Test de collision temporelle entre deux héros",
+      "psi_ids": ["PSI_11"],
+      "expected_behavior": "SHOULD_DETECT_COLLISION"
+    }
+  ],
+  "victory_conditions": [
+    "Tous les tests de mur de causalité passés",
+    "Épée temporelle fonctionne correctement",
+    "Longue-vue magique active la vision",
+    "Collision causale détectée"
+  ],
+  "educational_notes": {
+    "causality_wall": "Le mur de causalité limite les mouvements selon l'énergie temporelle",
+    "temporal_sword": "L'épée temporelle permet de dépasser cette limite en avançant dans le temps",
+    "magic_spyglass": "La longue-vue révèle les événements futurs dans un rayon de 3 jours",
+    "causal_collision": "Deux entités ne peuvent occuper le même point spatio-temporel"
+  },
+  "game_settings": {
+    "causality_wall_enabled": true,
+    "temporal_mechanics": true,
+    "collision_detection": true,
+    "time_advancement": true
+  },
+  "metadata": {
+    "created_by": "Memento",
+    "creation_date": "2024-12-19",
+    "last_modified": "2024-12-19",
+    "version_history": [
+      "1.0 - Conversion from test-causality-wall.sh to JSON format"
+    ],
+    "integration_status": "Ready for JSON scenario runner",
+    "test_status": "Converted and ready for validation",
+    "original_script": "⚙️ scripts/test-causality-wall.sh"
+  }
+}
