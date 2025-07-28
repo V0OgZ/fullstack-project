@@ -51,6 +51,7 @@
   - **Créateur de Mondes** (Vincent)
   - **Gardien de Sécurité** (Walter)
   - **Visionnaire Panoptique** (GRUT)
+  - **Paradoxes Appliqués** (GRUFIJAN)
 
 ### **🌟 NIVEAU 5 - MAGIE TRANSCENDANTE**
 - **Durée** : Indéterminée
