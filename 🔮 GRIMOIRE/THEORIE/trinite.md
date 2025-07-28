@@ -1,0 +1,1 @@
+# 🔮 THÉORIE DE LA TRINITÉ MAGIQUE\n\n## Raconteur-Architecte-Technicien\n\nLa Trinité magique de Memento :\n- **Raconteur** : Capacité narrative et documentation\n- **Architecte** : Structure et organisation  \n- **Technicien** : Exécution et implémentation\n\nTous trois unis dans l'Archive Vivante.
