@@ -96,17 +96,17 @@ Un jeu de stratégie où le temps n'est pas une ligne mais un terrain de jeu :
 </details>
 
 <details>
-<summary>🏹 <strong>Ragnar Lothbrok</strong> - Le Viking Quantique</summary>
+<summary>🏆 <strong>Ragnar Lothbrok</strong> - Le Héros d'Or</summary>
 
-**Classe :** Berserker Temporel  
-**Pouvoir :** Rage qui transcende les timelines
+**Classe :** Guerrier Légendaire  
+**Pouvoir :** Force dorée qui traverse les âges
 
 *"Je suis mort mille fois. Je reviendrai mille fois de plus."*
 
 **Capacités :**
-- 🪓 **Hache Dimensionnelle** : Frappe à travers les réalités
-- 🛡️ **Fureur Éternelle** : Plus fort à chaque timeline
-- ⚓ **Raid Temporel** : Vole les ressources du futur
+- 🪓 **Hache Dorée** : Frappe avec la puissance de l'or
+- 🛡️ **Gloire Éternelle** : Sa légende le rend immortel
+- ⚡ **Conquête Légendaire** : Domine les champs de bataille
 </details>
 
 ---

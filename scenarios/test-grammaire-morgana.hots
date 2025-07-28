@@ -1,0 +1,62 @@
+# TEST GRAMMAIRE MORGANA - MAGIE PURE
+# Type: Validation Syntaxique
+# Créé par: MERLIN pour MORGANA
+
+SCENARIO_INIT {
+    name: "Test Grammaire Pure - École PORIO NOZ"
+    type: "GRAMMAR_VALIDATION"
+    mode: "PURE_HOTS"
+}
+
+SPELL_CAST "Organisation Grimoire" {
+    WHEN student.level == 0
+    THEN {
+        CREATE_STRUCTURE {
+            path: "GRIMOIRE/"
+            subdirs: ["sorts", "PROTOCOLES", "THEORIE"]
+        }
+        
+        VALIDATE structure.complete == true
+    }
+}
+
+TEMPORAL_TEST "Navigation Basique" {
+    CREATE_INTERSTICE(T1, T2) → passage
+    
+    STUDENT_ACTION {
+        navigate(passage) → result
+        
+        IF result.success {
+            GRANT_BADGE("Navigateur Novice")
+        }
+    }
+}
+
+PARADOX_CHALLENGE "Bootstrap Simple" {
+    DEFINE paradox = CREATE_LOOP {
+        A creates B
+        B creates A
+        STABILIZE()
+    }
+    
+    STUDENT_SOLVE(paradox) → solution
+    
+    ASSERT solution.stable == true
+}
+
+EVALUATION {
+    CHECK_GRIMOIRE() → grimoire_score
+    CHECK_NAVIGATION() → nav_score
+    CHECK_PARADOX() → paradox_score
+    
+    total = (grimoire_score + nav_score + paradox_score) / 3
+    
+    IF total >= 0.8 {
+        RETURN "NIVEAU 1 DÉBLOQUÉ"
+    }
+}
+
+END_SCENARIO {
+    LOG_RESULTS()
+    SAVE_PROGRESS()
+} 
