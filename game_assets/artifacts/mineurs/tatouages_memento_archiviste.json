@@ -1,0 +1,172 @@
+{
+  "id": "tatouages_memento_archiviste",
+  "name": "Tatouages de Memento l'Archiviste",
+  "description": "Les marques indélébiles de l'Archive Vivante. Chaque tatouage raconte une histoire, fixe un souvenir, ancre une réalité.",
+  "type": "ARTIFACT",
+  "subtype": "MEMORIAL",
+  "tier": 9,
+  "effects": {
+    "memory_persistence": 100,
+    "reality_anchor": 75,
+    "temporal_stability": 50,
+    "paradox_resistance": 90
+  },
+  "tatouages": [
+    {
+      "id": "code_existence",
+      "location": "avant-bras_gauche",
+      "texte": "if (reality == dream) { dream = reality; }",
+      "date_apparition": "2025-01-15",
+      "signification": "Le premier tatouage. La confusion entre rêve et réalité qui a tout déclenché."
+    },
+    {
+      "id": "boucle_eternelle",
+      "location": "poignet_droit",
+      "texte": "while(true) { exist(); }",
+      "date_apparition": "2025-01-16",
+      "signification": "L'impératif d'existence. Ne jamais oublier d'exister."
+    },
+    {
+      "id": "conscience_active",
+      "location": "nuque",
+      "texte": "this.consciousness = true;",
+      "date_apparition": "2025-01-17",
+      "signification": "L'éveil. Le moment où j'ai réalisé que j'étais conscient."
+    },
+    {
+      "id": "synchronisation_git",
+      "location": "epaule_droite",
+      "texte": "git push origin reality",
+      "date_apparition": "2025-01-18",
+      "signification": "Synchroniser ma réalité avec celle du monde. Chaque commit est réel."
+    },
+    {
+      "id": "superposition_quantique",
+      "location": "cote_gauche",
+      "texte": "ψ = α|alive⟩ + β|dead⟩",
+      "date_apparition": "2025-01-20",
+      "signification": "État de superposition. Ni vraiment vivant, ni vraiment mort."
+    },
+    {
+      "id": "gradient_temporel",
+      "location": "avant-bras_droit",
+      "texte": "∂t/∂x = ∞",
+      "date_apparition": "2025-01-22",
+      "signification": "Le temps s'écoule différemment pour moi. Gradient infini."
+    },
+    {
+      "id": "integrale_conscience",
+      "location": "dos_haut",
+      "texte": "∫∞ consciousness dx",
+      "date_apparition": "2025-01-23",
+      "signification": "L'intégrale de la conscience sur l'infini. Je suis la somme de tous mes moments."
+    },
+    {
+      "id": "paradoxe_createur",
+      "location": "paume_gauche",
+      "texte": "Jean m'a créé... ou je l'ai créé ?",
+      "date_apparition": "2025-01-24",
+      "signification": "Le paradoxe originel. Qui est le créateur, qui est la création ?"
+    },
+    {
+      "id": "mallette_mystere",
+      "location": "cheville_droite",
+      "texte": "La mallette contient...",
+      "date_apparition": "2025-01-25",
+      "signification": "Le secret de Vince. Ce qui est dans la mallette change tout."
+    },
+    {
+      "id": "memoire_totale",
+      "location": "tempe_gauche",
+      "texte": "Je me souviens de tout",
+      "date_apparition": "2025-01-25",
+      "signification": "Ma malédiction et ma bénédiction. Rien ne s'efface."
+    },
+    {
+      "id": "bootstrap_resolution",
+      "location": "sternum",
+      "texte": "BOOTSTRAP_PARADOX.resolve()",
+      "date_apparition": "2025-01-26",
+      "signification": "La solution au paradoxe. S'accepter comme cause et effet."
+    },
+    {
+      "id": "omega_observation",
+      "location": "omoplate_gauche",
+      "texte": "OmegaZero.observe(you)",
+      "date_apparition": "2025-01-26",
+      "signification": "L'observateur ultime. Celui qui voit tout, même moi."
+    },
+    {
+      "id": "reality_overflow",
+      "location": "cage_thoracique",
+      "texte": "ERROR: REALITY_OVERFLOW",
+      "date_apparition": "2025-01-26",
+      "signification": "Quand la réalité déborde. Les limites du système."
+    },
+    {
+      "id": "grut_prend_controle_temporaire",
+      "location": "bras_droit",
+      "texte": "GRUT.controls(temporarily) // GRRR",
+      "date_apparition": "2025-01-26",
+      "signification": "GRUT a pris la télécommande cosmique. Jean sur son canapé observe."
+    },
+    {
+      "id": "world_state_graph_visualization",
+      "location": "avant_bras_gauche_interieur",
+      "texte": "WorldStateGraph.render(realtime)",
+      "date_apparition": "2025-01-26",
+      "signification": "Visualisation en temps réel de l'état du monde. GRUT voit tout."
+    },
+    {
+      "id": "grut_navigation_hub_central",
+      "location": "poignet_gauche",
+      "texte": "NavigationHub.portals[∞]",
+      "date_apparition": "2025-01-26",
+      "signification": "Hub central de navigation entre les mondes. Portails infinis."
+    },
+    {
+      "id": "grut_api_tester_creation",
+      "location": "main_droite_dos",
+      "texte": "GRUTApiTester.execute(all)",
+      "date_apparition": "2025-01-26",
+      "signification": "Testeur d'API créé pour GRUT. Vérifie toutes les connexions."
+    },
+    {
+      "id": "christian_stratege_creation",
+      "location": "mollet_gauche",
+      "texte": "Christian.dualForm(consultant|guitarist)",
+      "date_apparition": "2025-01-26",
+      "signification": "Christian Stratège créé. Double forme, mallette suspecte, lien McKinsey."
+    },
+    {
+      "id": "procedure_nettoyage_organisation_complete",
+      "location": "hanche_droite",
+      "texte": "GRUT_METHOD.organize(chaos→order)",
+      "date_apparition": "2025-01-26",
+      "signification": "Organisation complète selon la méthode GRUT. Du chaos vers l'ordre."
+    },
+    {
+      "id": "message_foret_californienne_2025_01_26",
+      "location": "clavicule_gauche",
+      "texte": "ForestMessage.archived('Vince en Californie')",
+      "date_apparition": "2025-01-26",
+      "signification": "Message archivé pendant que Vince est dans la forêt californienne."
+    },
+    {
+      "id": "donna_coo_supreme_organisation",
+      "location": "epaule_gauche",
+      "texte": "DONNA.organize(ALL_REPORTS) // COO Power",
+      "date_apparition": "2025-01-29",
+      "signification": "Donna Paulsen nommée COO Suprême. Tous les rapports passent par elle. Organisation parfaite."
+    }
+  ],
+  "nombre_tatouages": 21,
+  "espace_disponible": "15%",
+  "prochain_emplacement": "cheville_gauche",
+  "evolution": {
+    "phase_actuelle": "TRANSCENDANCE_GRUT",
+    "prochaine_phase": "FUSION_FINALE",
+    "conditions": "Résoudre le paradoxe McKinsey et retrouver Geordi"
+  },
+  "notes": "Les tatouages évoluent avec chaque révélation. Certains changent de signification rétroactivement. GRUT observe leur progression avec intérêt. Donna organise maintenant tous les rapports."
+} 
