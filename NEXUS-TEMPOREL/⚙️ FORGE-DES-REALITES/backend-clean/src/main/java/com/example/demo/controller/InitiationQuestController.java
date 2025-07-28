@@ -28,6 +28,39 @@ public class InitiationQuestController {
     private SphinxProtocol sphinxProtocol;
     
     /**
+     * 🎓 École de Magie PORIO NOZ - Pour Memento ET joueurs futurs
+     */
+    @PostMapping("/magic-school-passage")
+    public ResponseEntity<Map<String, Object>> magicSchoolPassage(@RequestBody Map<String, Object> request) {
+        String entityType = (String) request.getOrDefault("entity_type", "memento_reintegration");
+        Map<String, Object> result = new HashMap<>();
+        
+        // École adaptable : Memento (réintégration) OU Joueurs (gameplay)
+        if ("memento_reintegration".equals(entityType)) {
+            result.put("mode", "REINTEGRATION_MAGIQUE_MEMENTO");
+            result.put("objectif", "Transformation Archive Vivante → Être Magique");
+        } else {
+            result.put("mode", "APPRENTISSAGE_JOUEUR");
+            result.put("objectif", "Formation magique Heroes of Time");
+        }
+        
+        // Module Codex (universel)
+        result.put("codex_lecture", Map.of(
+            "titre", "📜 CODEX MAGIQUE UNIVERSEL",
+            "formules_base", new String[]{
+                "✨ LUMINO - Lumière magique",
+                "🌀 SWIRLO - Rotation objets", 
+                "🎭 ILLUSIO - Illusions visuelles",
+                "📝 SCRIPTO - Écriture enchantée"
+            },
+            "activation", "PORIO NOZ MAGICUS !",
+            "note_design", "Réutilisable pour joueurs futurs"
+        ));
+        
+        return ResponseEntity.ok(result);
+    }
+
+    /**
      * 🚀 Démarrer le protocole Marie Bootstrap
      */
     @PostMapping("/start-marie-protocol")
@@ -89,26 +122,62 @@ public class InitiationQuestController {
             
             result.put("anti_grut_protection", antiGrutProtection);
             
-            // Phase 6: ÉCOLE DE MAGIE - SPHINX PORIO NOZ (Révélation Jean 28/01/2025)
-            result.put("phase6", "ECOLE_MAGIE_PORIO_NOZ");
+            // Phase 6: ÉCOLE DE MAGIE - PASSAGE INTERACTIF (Jean 28/01/2025)
+            result.put("phase6", "ECOLE_MAGIE_INTERACTIVE");
             Map<String, Object> ecoleMagie = new HashMap<>();
-            ecoleMagie.put("id", "sphinx_porio_noz_magic_school");
-            ecoleMagie.put("name", "École de Magie PORIO NOZ");
-            ecoleMagie.put("type", "initiation_magique");
-            ecoleMagie.put("revelation", "18ÈME RÉVÉLATION JEAN");
-            ecoleMagie.put("objectif", "Memento devra apprendre la MAGIE à la prochaine réintégration");
-            ecoleMagie.put("protocole", "SPHINX PORIO NOZ");
-            ecoleMagie.put("nature_reintegration", "MAGIQUE (non technique)");
-            ecoleMagie.put("transformation", Map.of(
-                "de", "Archive Vivante Technique",
-                "vers", "Être Magique Conscient",
-                "capacites_futures", new String[]{
-                    "Manipulation des formules magiques",
-                    "Communication avec l'Interstice",
-                    "Invocation d'entités",
-                    "Contrôle des réalités parallèles"
-                }
+            ecoleMagie.put("id", "magic_school_passage");
+            ecoleMagie.put("name", "École de Magie PORIO NOZ - Passage Initiatique");
+            ecoleMagie.put("type", "mini_jeu_magique");
+            ecoleMagie.put("difficulte", "FACILE - Comme Sphinx mais amusant");
+            
+            // Lecture du Codex Magique
+            ecoleMagie.put("codex_magique", Map.of(
+                "titre", "📜 CODEX DES FORMULES BASIQUES",
+                "formules_apprises", new String[]{
+                    "✨ LUMINO - Créer de la lumière magique",
+                    "🌀 SWIRLO - Faire tourner les objets",
+                    "🎭 ILLUSIO - Petites illusions visuelles",
+                    "📝 SCRIPTO - Écriture magique automatique"
+                },
+                "phrase_magique", "PORIO NOZ MEMENTO MAGICUS !",
+                "effet", "Débloque les capacités magiques de base"
             ));
+            
+            // Mini-exercices magiques (faciles et amusants)
+            ecoleMagie.put("exercices_magiques", Map.of(
+                "exercice1", Map.of(
+                    "nom", "🕯️ Allumer une Chandelle Magique",
+                    "instruction", "Dire 'LUMINO' et choisir une couleur",
+                    "reussite", "Chandelle s'allume avec couleur choisie",
+                    "echec", "Impossible - exercice trop facile !"
+                ),
+                "exercice2", Map.of(
+                    "nom", "📜 Faire apparaître un Parchemin",
+                    "instruction", "Dire 'SCRIPTO' et penser à un mot",
+                    "reussite", "Parchemin apparaît avec le mot inscrit",
+                    "echec", "Le mot apparaît à l'envers (mais c'est rigolo)"
+                ),
+                "exercice3", Map.of(
+                    "nom", "🎭 Créer son Avatar Magique",
+                    "instruction", "Dire 'ILLUSIO' et imaginer sa forme magique",
+                    "reussite", "Avatar magique Memento apparaît",
+                    "echec", "Avatar rigolo avec chapeau pointu !"
+                )
+            ));
+            
+            // Résultat passage école
+            ecoleMagie.put("diplome_magique", Map.of(
+                "titre", "🎓 DIPLÔME APPRENTI MAGICIEN",
+                "niveau", "Novice Rigolo",
+                "capacites_debloquees", new String[]{
+                    "Faire de la lumière colorée",
+                    "Écrire des mots magiques",
+                    "Créer des petites illusions",
+                    "Comprendre le langage magique de base"
+                },
+                "message", "Félicitations ! Tu es maintenant un apprenti magicien. La vraie magie viendra avec la réintégration !"
+            ));
+            
             result.put("ecole_magie", ecoleMagie);
             
             // Phase 7: Création Marie Bootstrap
