@@ -1,0 +1,194 @@
+{
+  "id": "traite_paix_cosmique",
+  "name": "📜 Traité de Paix Cosmique",
+  "type": "DIPLOMATIC_ARTIFACT",
+  "rarity": "TRANSCENDENT",
+  "tier": 10,
+  "category": "UNITY_ARTIFACT",
+  
+  "description": "Document sacré signé par toutes les factions antagonistes au Nexus de Réunification. Scelle la paix cosmique pour l'éternité.",
+  
+  "signataires": {
+    "ORDER_OF_REALITY": {
+      "representant": "Lysandrel, le Forgeron de Réalité",
+      "signature": "⚔️ 'Je forge la paix comme je forge la réalité'",
+      "engagement": "Respecter la diversité des mondes possibles"
+    },
+    
+    "SHADOW_WEAVERS": {
+      "representant": "Nyx-Lua, Tisseuse de Mondes Latents", 
+      "signature": "🌙 'Tous les mondes unis dans l'harmonie'",
+      "engagement": "Tisser des ponts entre les réalités"
+    },
+    
+    "HOST_CREATORS": {
+      "representant": "Anthor-le-Fordien",
+      "signature": "🌀 'Créons ensemble un multivers meilleur'",
+      "engagement": "Créer sans détruire les réalités existantes"
+    },
+    
+    "SOURCEGUARDIANS": {
+      "representant": "Clint Eastwood, Pistolero Temporel",
+      "signature": "🔫 'Mon gun protège désormais la paix'",
+      "engagement": "Protéger toutes les factions sans exception"
+    },
+    
+    "ANOMALY": {
+      "representant": "Jean-Grofignon, Créateur Cosmique",
+      "signature": "📺 'Bon, la paix c'est bien aussi'",
+      "engagement": "Utiliser la télécommande pour l'harmonie"
+    },
+    
+    "ZEN_COLLECTIVE": {
+      "representant": "The Dude, Médiateur Zen",
+      "signature": "🌿 'Mec, enfin ! On peut tous chiller'",
+      "engagement": "Méditer pour maintenir l'équilibre cosmique"
+    }
+  },
+  
+  "articles_du_traite": {
+    "article_1_non_agression": {
+      "titre": "Non-Agression Cosmique",
+      "contenu": "Aucune faction ne peut attaquer une autre faction signataire sans provocation directe. Les conflits doivent être résolus par médiation.",
+      "garantie": "The Dude supervise avec joint cosmique"
+    },
+    
+    "article_2_cooperation": {
+      "titre": "Coopération Inter-Dimensionnelle", 
+      "contenu": "Les factions s'engagent à partager leurs connaissances et ressources pour le bien commun du multivers.",
+      "garantie": "Jean coordonne avec la télécommande cosmique"
+    },
+    
+    "article_3_respect_diversite": {
+      "titre": "Respect de la Diversité Ontologique",
+      "contenu": "Chaque faction a le droit d'exister selon sa philosophie propre, tant qu'elle ne nuit pas aux autres.",
+      "garantie": "Lysandrel et Nyx-Lua gardiens de l'équilibre"
+    },
+    
+    "article_4_protection_mutuelle": {
+      "titre": "Protection Mutuelle",
+      "contenu": "Face à une menace extérieure, toutes les factions s'unissent automatiquement sous le commandement des SourceGuardians.",
+      "garantie": "Clint Eastwood et Hannibal Smith coordination"
+    },
+    
+    "article_5_creation_responsable": {
+      "titre": "Création Responsable",
+      "contenu": "Les Host_Creators s'engagent à ne créer que des réalités bénéfiques et à consulter les autres factions avant toute création majeure.",
+      "garantie": "Anthor soumis à conseil inter-factions"
+    },
+    
+    "article_6_meditation_collective": {
+      "titre": "Méditation Collective Mensuelle",
+      "contenu": "Une fois par mois cosmique, toutes les factions se réunissent au Nexus pour une méditation collective avec joint de paix.",
+      "garantie": "The Dude fournit le joint, Jean la télécommande"
+    }
+  },
+  
+  "pouvoirs_du_traite": {
+    "paix_forcee": {
+      "name": "🕊️ Paix Forcée",
+      "description": "Empêche automatiquement toute agression entre factions signataires",
+      "range": "MULTIVERSE_WIDE",
+      "duration": "PERMANENT",
+      "trigger": "AUTOMATIC"
+    },
+    
+    "alliance_d_urgence": {
+      "name": "⚡ Alliance d'Urgence",
+      "description": "En cas de menace externe, unit instantanément toutes les factions",
+      "range": "ALL_SIGNATORIES", 
+      "duration": "UNTIL_THREAT_NEUTRALIZED",
+      "trigger": "EXTERNAL_THREAT_DETECTED"
+    },
+    
+    "conseil_de_paix": {
+      "name": "🏛️ Conseil de Paix Automatique",
+      "description": "Convoque automatiquement un conseil en cas de conflit interne",
+      "range": "NEXUS_REUNIFICATION",
+      "duration": "UNTIL_RESOLUTION",
+      "trigger": "INTERNAL_CONFLICT"
+    },
+    
+    "joint_cosmique_perpetuel": {
+      "name": "🌿 Joint Cosmique Perpétuel",
+      "description": "Maintient un niveau de zen cosmique permanent dans tout le multivers",
+      "range": "INFINITE",
+      "duration": "ETERNAL",
+      "trigger": "CONTINUOUS"
+    }
+  },
+  
+  "clauses_speciales": {
+    "clause_jean": {
+      "titre": "Clause du Canapé Sacré",
+      "contenu": "Jean-Grofignon garde le droit de rester sur son canapé tout en participant aux décisions cosmiques via télécommande.",
+      "validation": "Accepté à l'unanimité"
+    },
+    
+    "clause_dude": {
+      "titre": "Clause du Joint Perpétuel",
+      "contenu": "The Dude a l'autorité exclusive sur la distribution du joint cosmique et les sessions de méditation.",
+      "validation": "Approuvé avec enthousiasme"
+    },
+    
+    "clause_clint": {
+      "titre": "Clause du Pistolet de Paix",
+      "contenu": "Clint Eastwood peut dégainer pour protéger la paix, mais uniquement en mode non-létal.",
+      "validation": "Accepté avec respect"
+    },
+    
+    "clause_philosophique": {
+      "titre": "Clause des Débats Philosophiques",
+      "contenu": "Lysandrel et Nyx-Lua peuvent organiser des débats philosophiques publics pour résoudre les questions ontologiques.",
+      "validation": "Adopté avec fascination"
+    }
+  },
+  
+  "mecaniques_de_jeu": {
+    "diplomatic_immunity": true,
+    "faction_unity_bonus": 100,
+    "conflict_resolution": "AUTOMATIC_MEDIATION",
+    "external_threat_response": "INSTANT_ALLIANCE",
+    "peace_maintenance": "CONTINUOUS_MONITORING"
+  },
+  
+  "conditions_activation": {
+    "signatures_requises": 6,
+    "signatures_obtenues": 6,
+    "lieu_signature": "Nexus de Réunification",
+    "temoin": "Flamme de Causalité",
+    "validateur": "Esprit du Nexus"
+  },
+  
+  "effets_permanents": {
+    "paix_cosmique": "Fin des guerres inter-factions",
+    "cooperation_forcee": "Bonus +50% à toutes les actions collaboratives",
+    "protection_mutuelle": "Défense automatique contre menaces externes",
+    "harmonie_multiverselle": "Stabilité +75% dans tous les mondes",
+    "joint_cosmique_ambiant": "Stress -90% pour tous les êtres conscients"
+  },
+  
+  "commemorations": {
+    "jour_de_la_paix": "27 Janvier - Jour de la Signature",
+    "festival_du_joint": "Célébration mensuelle avec The Dude",
+    "tournoi_de_paix": "Compétitions amicales entre factions",
+    "exposition_unite": "Musée de la Paix Cosmique au Nexus"
+  },
+  
+  "citations_historiques": [
+    "Jean: 'Bon, maintenant je peux regarder la télé tranquille'",
+    "The Dude: 'Mec, c'est le plus beau joint de ma vie'",
+    "Lysandrel: 'Une seule vérité... mais partagée'",
+    "Nyx-Lua: 'Tous les mondes enfin réconciliés'",
+    "Clint: 'Mon gun peut enfin se reposer'",
+    "Anthor: 'Créer ensemble, c'est plus beau'"
+  ],
+  
+  "lore": {
+    "date_signature": "27 Janvier 2025, Nexus de Réunification",
+    "contexte": "Après la Grande Dispersion des factions antagonistes",
+    "ceremonie": "Signature solennelle devant la Flamme de Causalité",
+    "celebration": "Joint cosmique partagé par tous les signataires",
+    "impact": "Fin de l'ère des guerres cosmiques, début de l'âge de la Paix Transcendante"
+  }
+} 
