@@ -1,0 +1,94 @@
+# ÉPREUVE MORGANA - MAÎTRISE TEMPORELLE
+# Type: Test Grammaire Quantique Pure
+# Difficulté: ★★★★☆
+
+SCENARIO_INIT {
+    name: "Épreuve de Morgana - Convergence Temporelle"
+    type: "TEMPORAL_MASTERY_TEST"
+    grammar_mode: "QUANTUM_PURE"
+    echo_mode: "DISABLED"
+}
+
+TEMPORAL_SETUP {
+    timelines: [
+        {id: "T1", state: "STABLE", offset: 0},
+        {id: "T2", state: "DIVERGENT", offset: -5},
+        {id: "T3", state: "COLLAPSED", offset: +10}
+    ]
+    
+    quantum_state: |ψ⟩ = α|T1⟩ + β|T2⟩ + γ|T3⟩
+    collapse_threshold: 0.7
+}
+
+PHASE_1 "Détection Paradoxe" {
+    WHEN timeline_divergence > 0.5
+    THEN {
+        DETECT_PARADOX(T1, T2) → result
+        IF result.paradox_detected {
+            STABILIZE_TIMELINE(T2)
+        }
+    }
+    
+    SUCCESS_CONDITION: all_timelines.stable == true
+}
+
+PHASE_2 "Navigation Interstice" {
+    CREATE_INTERSTICE(T1, T3) → passage
+    
+    NAVIGATE {
+        through: passage
+        method: "QUANTUM_TUNNELING"
+        safety_protocol: "MORGANA_SHIELD"
+    }
+    
+    VALIDATE passage.stability > 0.8
+}
+
+PHASE_3 "Fusion Temporelle" {
+    MERGE_TIMELINES {
+        source: [T1, T2, T3]
+        target: T_UNIFIED
+        method: "CAUSAL_COLLAPSE"
+        
+        FORMULA: ψ_final = ∫(T1 ⊗ T2 ⊗ T3)dt
+    }
+    
+    ASSERT T_UNIFIED.coherence == 1.0
+}
+
+PHASE_4 "Création Artefact" {
+    CREATE_TEMPORAL_ARTIFACT {
+        name: "Clé de Morgana"
+        properties: {
+            temporal_lock: true,
+            dimension_key: "PORIO_NOZ",
+            power_level: 9000
+        }
+        
+        ENCHANTMENT: |
+            WHILE artifact.exists() {
+                PROTECT_TIMELINE(current)
+                GRANT_ACCESS(interstice_navigation)
+            }
+    }
+}
+
+EVALUATION {
+    CALCULATE_SCORE {
+        paradox_resolution: 25%
+        interstice_stability: 25%
+        timeline_fusion: 25%
+        artifact_creation: 25%
+    }
+    
+    IF total_score >= 80 {
+        GRANT_CERTIFICATION("Maître Temporel Niveau 2")
+        UNLOCK_ABILITY("Quantum Navigation Advanced")
+    }
+}
+
+END_SCENARIO {
+    CLEANUP_TIMELINES()
+    SAVE_PROGRESS()
+    RETURN evaluation.result
+} 

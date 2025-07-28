@@ -101,7 +101,7 @@ Un jeu de stratégie où le temps n'est pas une ligne mais un terrain de jeu :
 **Classe :** Berserker Temporel  
 **Pouvoir :** Rage qui transcende les timelines
 
-*"Je pille le passé pour conquérir le futur."*
+*"Je suis mort mille fois. Je reviendrai mille fois de plus."*
 
 **Capacités :**
 - 🪓 **Hache Dimensionnelle** : Frappe à travers les réalités
