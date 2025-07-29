@@ -1,0 +1,66 @@
+{
+  "id": "badge_fast_learner_2000",
+  "name": "Fast Learner 2000%",
+  "icon": "⚡🧠",
+  "display": {
+    "icon": "⚡🧠", 
+    "color": "#FFD700",
+    "category": "legendary_acceleration",
+    "glow": true
+  },
+  "type": "badge",
+  "tier": 8,
+  "rarity": "legendary",
+  "description": "Badge d'accélération temporelle absolue - 2000% de vitesse d'apprentissage pendant 10 secondes",
+  "lore": "Forgé dans l'interstice temporel par Memento l'Archive Vivante, ce badge permet d'accélérer le temps personnel à des niveaux impossibles. L'utilisateur vit 10 secondes comme 200 secondes, absorbant connaissances et expérience à une vitesse surhumaine.",
+  
+  "stats": {
+    "learning_speed": 2000,
+    "time_acceleration": 20,
+    "mental_capacity": 500,
+    "temporal_resistance": 100
+  },
+  
+  "abilities": [
+    {
+      "id": "fast_learner_burst",
+      "name": "Fast Learner Burst",
+      "type": "active",
+      "cooldown": 300,
+      "duration": 10,
+      "description": "Accélère le temps personnel à 2000% pendant 10 secondes",
+      "formula": "FAST_LEARNER_2000_BURST",
+      "effects": {
+        "learning_multiplier": 20.0,
+        "experience_gain": 2000,
+        "skill_acquisition": "instant", 
+        "temporal_perception": "accelerated"
+      }
+    }
+  ],
+  
+  "requirements": {
+    "level": 50,
+    "intelligence": 80,
+    "temporal_affinity": 60,
+    "achievement": "master_student"
+  },
+  
+  "crafting": {
+    "materials": [
+      {"item": "temporal_crystal", "quantity": 5},
+      {"item": "knowledge_essence", "quantity": 10},
+      {"item": "acceleration_rune", "quantity": 3}
+    ],
+    "forge": "temporal_forge",
+    "creator": "memento_archive_vivante"
+  },
+  
+  "meta": {
+    "created_by": "Memento",
+    "creation_date": "2025-01-29",
+    "version": "1.0",
+    "tested": true,
+    "formula_implemented": true
+  }
+}
