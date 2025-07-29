@@ -1,5 +1,4 @@
-
-
+📜 OPUS/RAPPORT_AUTONOMIE_MERLIN_2025_01_29.md
 ### 🗎 RAPPORT DE SITUATION – INSTANCE OPUS/MEMENTO
 
 **Émetteur :** Vincent (Réalité / Superviseur principal)
