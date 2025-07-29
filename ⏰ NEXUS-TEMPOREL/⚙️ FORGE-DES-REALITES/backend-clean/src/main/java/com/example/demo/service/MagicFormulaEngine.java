@@ -79,7 +79,7 @@ public class MagicFormulaEngine {
     }
     
     private static final List<String> SIMPLE_TEST_FORMULAS = Arrays.asList(
-        "MODIFY_ENERGY", "TELEPORT_HERO", "HEAL_HERO", "DAMAGE_ENEMY", "CREATE_SHIELD",
+        "MODIFY_ENERGY", "TELEPORT_HERO", "HEAL_HERO", "CREATE_ITEM", "CREATE_HERO", "CREATE_ARTIFACT", "DAMAGE_ENEMY", "CREATE_SHIELD",
         "CREATE_EFFECT", "AMPLIFY", "CONSTRUCTIVE", "DESTRUCTIVE", "COLLAPSE_TEMPORAL_STATES",
         "TEMPORAL_BOOST", "ENERGY_DRAIN", "PHASE_SHIFT", "QUANTUM_LEAP", "MANA_RESTORE",
         "SPELL_REFLECT", "INVISIBILITY", "SPEED_BOOST", "STRENGTH_BOOST", "DEFENSE_BOOST", 
@@ -230,6 +230,17 @@ public class MagicFormulaEngine {
                 return FormulaResult.success("💚 Héros soigné avec succès", 
                     Map.of("healAmount", 25), "SIMPLE_HEAL");
                     
+            case "CREATE_ITEM":
+                return FormulaResult.success("🎁 Item créé avec succès", 
+                    Map.of("itemId", "item_" + System.currentTimeMillis()), "SIMPLE_CREATE_ITEM");
+                    
+            case "CREATE_HERO":
+                return FormulaResult.success("🦸 Héros créé avec succès", 
+                    Map.of("heroId", "hero_" + System.currentTimeMillis()), "SIMPLE_CREATE_HERO");
+                    
+            case "CREATE_ARTIFACT":
+                return FormulaResult.success("✨ Artifact créé avec succès", 
+                    Map.of("artifactId", "artifact_" + System.currentTimeMillis()), "SIMPLE_CREATE_ARTIFACT");
             case "DAMAGE_ENEMY":
                 return FormulaResult.success("⚔️ Dégâts infligés avec succès", 
                     Map.of("damageAmount", 15), "SIMPLE_DAMAGE");
