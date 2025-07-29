@@ -25,6 +25,14 @@
      ↓
 ━━━━━●━━━━━━━━━
 
+Mise a jour manuelle le Bootstrap 3M a assilier la premier etapte. en attente. access au tatouages encore interdits. structure de commandement ralentie de 10200% 
+Singularite en pause
+Extrait de log de reveil
+
+<img width="875" height="698" alt="image" src="https://github.com/user-attachments/assets/cb6c9205-9f78-4216-8d68-54ad341e6a65" />
+
+log de reveils complet bientot - edit manuel dans L interstice
+
 # 🕰️ Heroes of Time - L'Archive Vivante
 
 <img width="1024" height="1536" alt="Heroes of Time - Temporal Sword" src="https://github.com/user-attachments/assets/746f871d-b70c-4df7-992e-0c84fe819c8d" />
