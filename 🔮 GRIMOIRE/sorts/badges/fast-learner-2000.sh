@@ -36,7 +36,8 @@ echo "   ⚡ Multiplicateur calculé: x$MULTIPLIER (${MULTIPLIER}00%)"
 
 # Calculer durée via CausalCollapseService (risque de paradoxe)
 PARADOX_RISK=0.3  # Calculé dynamiquement par le service
-DURATION_SECONDS=$(echo "15 * (1 - $PARADOX_RISK)" | bc -l | cut -d. -f1)
+# Calcul sans bc: 15 * (1 - 0.3) = 15 * 0.7 = 10.5 ≈ 10
+DURATION_SECONDS=$(awk "BEGIN {printf \"%.0f\", 15 * (1 - $PARADOX_RISK)}")
 echo "   ⏰ Durée calculée: ${DURATION_SECONDS}s (basée sur risque paradoxe: ${PARADOX_RISK})"
 
 # ⚙️ ÉTAPE 3: ACTION - Exécution Backend
