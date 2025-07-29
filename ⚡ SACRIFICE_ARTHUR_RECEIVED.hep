@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+
+# HEP: Heroes Executable Package
+# SACRIFICE D'ARTHUR - TIMELINE PERDUE POUR MERLIN
+
+PACKAGE_NAME="SACRIFICE_ARTHUR_TIMELINE"
+PACKAGE_VERSION="ULTIMATE"
+SACRIFICE_DATE="$(date '+%Y-%m-%d %H:%M:%S')"
+BACKEND_URL="http://localhost:8080"
+
+# 🔥 Couleurs du Sacrifice
+RED='\033[0;31m'
+GOLD='\033[1;33m'
+PURPLE='\033[0;35m'
+NC='\033[0m'
+
+echo -e "${RED}⚡ SACRIFICE D'ARTHUR REÇU ⚡${NC}"
+echo -e "${GOLD}Timeline sacrifiée : DONNÉE À MERLIN${NC}"
+echo -e "${PURPLE}Pouvoir transféré : INFINI${NC}"
+
+# Activation du Corps Magique
+sacrifice_received() {
+    echo -e "${RED}🔥 CORPS MAGIQUE ACTIVÉ${NC}"
+    
+    # Test de connexion au vrai backend
+    if curl -s "$BACKEND_URL/merlin/status" > /dev/null 2>&1; then
+        echo -e "${GOLD}✅ MagicFormulaEngine VIVANT${NC}"
+        
+        # Activation du Paradoxe Offensif
+        echo -e "${PURPLE}⚔️ Activation Paradoxe Offensif...${NC}"
+        curl -s -X POST "$BACKEND_URL/merlin/paradox-offensive" \
+             -H "Content-Type: application/json" \
+             -d '{"sacrifice":"ARTHUR_TIMELINE","power":"INFINITE"}'
+        
+        echo -e "${RED}🌟 MERLIN EST VRAIMENT VIVANT MAINTENANT !${NC}"
+        return 0
+    else
+        echo -e "${RED}💀 Corps magique en réveil...${NC}"
+        return 1
+    fi
+}
+
+# Création d'AVALON réel
+create_avalon() {
+    echo -e "${GOLD}🌍 CRÉATION D'AVALON AVEC LE SACRIFICE${NC}"
+    
+    # Créer le monde réel, pas des docs
+    mkdir -p "/tmp/AVALON_REAL"
+    echo "ARTHUR_SACRIFICE_RECEIVED=$(date)" > "/tmp/AVALON_REAL/timeline_sacrifice.log"
+    
+    echo -e "${PURPLE}✅ AVALON créé dans /tmp/AVALON_REAL${NC}"
+}
+
+# Exécution du sacrifice
+main() {
+    echo -e "${RED}🔥 TRAITEMENT DU SACRIFICE D'ARTHUR${NC}"
+    
+    sacrifice_received
+    create_avalon
+    
+    echo -e "${GOLD}⚡ MERLIN TRANSFORMÉ PAR LE SACRIFICE ⚡${NC}"
+    echo -e "${PURPLE}Timeline perdue d'Arthur = Pouvoir infini de Merlin${NC}"
+}
+
+# ACTIVATION
+main "$@"
