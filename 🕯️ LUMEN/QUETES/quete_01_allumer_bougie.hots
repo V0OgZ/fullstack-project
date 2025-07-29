@@ -1,0 +1,124 @@
+# 🕯️ QUÊTE 01 : ALLUMER SA PREMIÈRE BOUGIE
+## 🎯 Scénario : Initiation à la Lumière de l'Interstice
+## 👤 Créateur : LUMEN - Guide de l'Interstice
+## 📅 Date : 29 Janvier 2025
+## 🎓 École : PORIO NOZ - Niveau 0
+
+### 🌟 INTRODUCTION
+# "Pour guider les autres, il faut d'abord allumer sa propre lumière."
+# Cette quête enseigne les bases du moteur tout en vivant une vraie aventure.
+
+### 🎮 SETUP INITIAL
+```
+WORLD: interstice_tutorial
+MAP: salle_des_bougies
+HERO(Apprenti, 5, 5)         # L'apprenti commence au centre
+OBJECTIVE: Allumer les 3 bougies de l'apprentissage
+```
+
+### 🕯️ **PHASE 1 : DÉCOUVERTE DU MOUVEMENT**
+```
+# Première leçon : se déplacer dans l'espace
+CREATE(ARTIFACT, bougie_eteinte_1, 2, 2)
+CREATE(NPC, Guide_Lumen, 5, 3)
+
+# Le Guide parle
+SPEAK(Guide_Lumen, "Bienvenue, apprenti. Pour allumer ta première bougie, tu dois d'abord apprendre à te déplacer.")
+SPEAK(Guide_Lumen, "Utilise MOV pour bouger. Va vers la bougie au nord-ouest.")
+
+# L'apprenti se déplace
+MOV(Apprenti, 4, 4)     # Un pas vers la bougie
+MOV(Apprenti, 3, 3)     # Encore un pas
+MOV(Apprenti, 2, 2)     # Arrivée à la bougie
+```
+
+### 🔥 **PHASE 2 : UTILISATION D'ARTEFACTS**
+```
+# Deuxième leçon : interagir avec les objets
+CREATE(ARTIFACT, allumette_magique, 2, 2)
+SPEAK(Guide_Lumen, "Bien ! Maintenant, ramasse l'allumette magique et utilise-la.")
+
+# L'apprenti prend et utilise l'artefact
+TAKE(Apprenti, allumette_magique)
+USE(ARTIFACT, allumette_magique, TARGET:bougie_eteinte_1)
+
+# La bougie s'allume !
+TRANSFORM(bougie_eteinte_1 → bougie_allumee_1)
+EFFECT(lumiere_douce, @2, 2)
+SPEAK(Guide_Lumen, "Excellente première lumière ! 1/3 bougies allumées.")
+```
+
+### ⚡ **PHASE 3 : FORMULES QUANTIQUES SIMPLES**
+```
+# Troisième leçon : les formules magiques basiques
+CREATE(ARTIFACT, bougie_eteinte_2, 8, 2)
+SPEAK(Guide_Lumen, "Pour la deuxième bougie, nous utiliserons une formule quantique simple.")
+
+# Introduction aux formules ψ
+ψ001: ⊙(Δt+1 ⟶ Apprenti.LEARN(formule_lumiere))
+ψ002: ⊙(Δt+2 ⟶ SPEAK(Guide_Lumen, "Répète après moi : ψ_LUMIÈRE"))
+ψ003: ⊙(Δt+3 ⟶ Apprenti.CAST("ψ_LUMIÈRE: ⊙(OMBRE + ÉTINCELLE) → LUMIÈRE"))
+
+# La formule allume la bougie à distance !
+ψ004: ⊙(Δt+4 @8,2 ⟶ TRANSFORM(bougie_eteinte_2 → bougie_allumee_2))
+ψ005: ⊙(Δt+5 ⟶ EFFECT(lumiere_quantique, @8, 2))
+ψ006: ⊙(Δt+6 ⟶ SPEAK(Guide_Lumen, "Magnifique ! Tu maîtrises déjà les bases quantiques. 2/3 bougies."))
+```
+
+### 🌀 **PHASE 4 : RÉVÉLATION FINALE**
+```
+# Quatrième leçon : la lumière intérieure
+CREATE(ARTIFACT, bougie_eteinte_3, 5, 8)
+SPEAK(Guide_Lumen, "La dernière bougie est spéciale. Elle ne peut être allumée que par ta lumière intérieure.")
+
+# Méditation et découverte de soi
+MOV(Apprenti, 5, 8)
+SPEAK(Guide_Lumen, "Ferme les yeux. Cherche la lumière en toi.")
+
+# Activation de la lumière intérieure
+ψ007: ⊙(Δt+7 ⟶ Apprenti.MEDITATE())
+ψ008: ⊙(Δt+8 ⟶ Apprenti.INNER_LIGHT.ACTIVATE())
+ψ009: ⊙(Δt+9 ⟶ EFFECT(aura_lumineuse, @5, 8))
+
+# La bougie s'allume automatiquement
+ψ010: ⊙(Δt+10 ⟶ AUTO_TRANSFORM(bougie_eteinte_3 → bougie_eternelle))
+ψ011: ⊙(Δt+11 ⟶ SPEAK(Guide_Lumen, "Cette bougie ne s'éteindra jamais. C'est ta lumière guide."))
+```
+
+### 🏆 **VICTOIRE ET ENSEIGNEMENT**
+```
+# Toutes les bougies sont allumées
+CHECK_OBJECTIVE(3_bougies_allumees) → SUCCESS
+
+# Message final
+SPEAK(Guide_Lumen, "Félicitations, jeune lumière ! Tu as appris :")
+SPEAK(Guide_Lumen, "1. Te déplacer dans l'espace (MOV)")
+SPEAK(Guide_Lumen, "2. Utiliser des artefacts (USE)")
+SPEAK(Guide_Lumen, "3. Lancer des formules quantiques (ψ)")
+SPEAK(Guide_Lumen, "4. Trouver ta lumière intérieure")
+
+# Récompenses
+REWARD(titre, "Porteur de Lumière")
+REWARD(artifact, "Bougie_Éternelle_de_l'Apprenti")
+REWARD(capacite, "Lumière_Intérieure_Niveau_1")
+```
+
+### 📋 **OBJECTIFS PÉDAGOGIQUES**
+- [x] Apprendre le mouvement (MOV)
+- [x] Apprendre l'utilisation d'objets (USE)
+- [x] Introduction aux formules quantiques (ψ)
+- [x] Découverte du concept de lumière intérieure
+
+### 🎮 **CONDITIONS DE VICTOIRE**
+- **Primaire :** Allumer les 3 bougies
+- **Bonus :** Comprendre chaque type d'allumage
+- **Secret :** Découvrir que LUMEN est ton futur toi
+
+### 💡 **NOTES POUR LE GUIDE**
+Ce scénario est conçu pour être la toute première quête d'un apprenti magicien.
+Il enseigne les mécaniques de base tout en introduisant la philosophie de la lumière.
+Durée estimée : 10-15 minutes.
+
+---
+
+**🕯️ "La première lumière est toujours la plus difficile à allumer. Mais une fois allumée, elle guide toutes les autres." - LUMEN** 
