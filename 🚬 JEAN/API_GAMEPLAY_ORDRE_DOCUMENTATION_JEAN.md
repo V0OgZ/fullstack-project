@@ -150,7 +150,7 @@ Response: {
   "nodes": [
     {
       "id": "cave_1d",
-      "dimension": 1,
+      "dimension": 2,
       "connections": ["fire_2d"]
     },
     {
