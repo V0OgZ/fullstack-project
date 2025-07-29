@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+
+# HEP: Heroes Executable Package  
+# FLASH VINCE VEGA MAP LAUNCHER
+
+PACKAGE_NAME="FLASH_VINCE_VEGA_LAUNCHER"
+PACKAGE_VERSION="SPEED_FORCE"
+
+# ⚡ Flash Colors
+YELLOW='\033[1;33m'
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+echo -e "${YELLOW}⚡ FLASH LAUNCHING VINCE VEGA MAP ⚡${NC}"
+
+# Find the best Vince Vega map
+find_vince_map() {
+    echo -e "${RED}🔍 Scanning for Vince Vega Map...${NC}"
+    
+    # Try the FIXED version first
+    VINCE_MAP_FIXED="/workspace/⏰ NEXUS-TEMPOREL/🚪 PORTAILS-DIMENSIONNELS/🌍 Terres-Euclidiennes/frontend-clean/vince-vega-map-demo-backend-FIXED.html"
+    
+    if [[ -f "$VINCE_MAP_FIXED" ]]; then
+        echo -e "${GREEN}✅ Found FIXED Vince Map!${NC}"
+        VINCE_MAP="$VINCE_MAP_FIXED"
+        return 0
+    fi
+    
+    # Fallback to regular version
+    VINCE_MAP_REGULAR="/workspace/⏰ NEXUS-TEMPOREL/🚪 PORTAILS-DIMENSIONNELS/🌍 Terres-Euclidiennes/frontend-clean/vince-vega-map-demo-backend.html"
+    
+    if [[ -f "$VINCE_MAP_REGULAR" ]]; then
+        echo -e "${GREEN}✅ Found Regular Vince Map!${NC}"
+        VINCE_MAP="$VINCE_MAP_REGULAR"
+        return 0
+    fi
+    
+    echo -e "${RED}❌ No Vince Map found!${NC}"
+    return 1
+}
+
+# Launch with Flash speed
+flash_launch() {
+    echo -e "${YELLOW}🏃‍♂️ FLASH SPEED LAUNCH!${NC}"
+    
+    # Start a simple HTTP server for the frontend
+    cd "/workspace/⏰ NEXUS-TEMPOREL/🚪 PORTAILS-DIMENSIONNELS/🌍 Terres-Euclidiennes/frontend-clean/"
+    
+    echo -e "${GREEN}🌐 Starting frontend server on port 8000...${NC}"
+    python3 -m http.server 8000 &
+    SERVER_PID=$!
+    
+    sleep 2
+    
+    echo -e "${YELLOW}⚡ VINCE VEGA MAP AVAILABLE AT:${NC}"
+    echo -e "${GREEN}🔗 http://localhost:8000/vince-vega-map-demo-backend-FIXED.html${NC}"
+    echo -e "${GREEN}🔗 http://localhost:8000/vince-vega-map-demo-backend.html${NC}"
+    
+    # Also run the Vince Vega HEP
+    echo -e "${RED}🍸 Running Vince Vega Cocktail...${NC}"
+    chmod +x "/workspace/📜 OPUS/vince_vega_fin_episode_cocktail.hep"
+    "/workspace/📜 OPUS/vince_vega_fin_episode_cocktail.hep" &
+    
+    echo -e "${YELLOW}⚡ FLASH: VINCE VEGA MAP LAUNCHED AT LIGHT SPEED! ⚡${NC}"
+    echo -e "${GREEN}Server PID: $SERVER_PID${NC}"
+    echo -e "${GREEN}Press Ctrl+C to stop server${NC}"
+    
+    # Keep server running
+    wait $SERVER_PID
+}
+
+# Main Flash execution
+main() {
+    echo -e "${YELLOW}⚡ THE FLASH: VINCE VEGA TIME! ⚡${NC}"
+    
+    find_vince_map
+    if [[ $? -eq 0 ]]; then
+        flash_launch
+    else
+        echo -e "${RED}❌ Flash couldn't find Vince Map!${NC}"
+    fi
+}
+
+# RUN BARRY RUN
+main "$@"
