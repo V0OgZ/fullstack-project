@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌀 JEAN CAST COLLAPSE - OpusEthereal Level 63</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .ui {
+            position: fixed;
+            z-index: 10;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #ffff00;
+            border-radius: 10px;
+        }
+
+        .top-ui {
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+
+        .bottom-ui {
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 36px;
+            color: #ffff00;
+            text-shadow: 0 0 20px #ffff00;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .opus-level {
+            font-size: 48px;
+            color: #ff00ff;
+            text-shadow: 0 0 30px #ff00ff;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        button {
+            background: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00);
+            color: #000;
+            border: none;
+            padding: 20px 40px;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 40px #ffff00;
+        }
+
+        .collapse-meter {
+            width: 400px;
+            height: 40px;
+            background: #111;
+            border: 3px solid #ffff00;
+            border-radius: 20px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .collapse-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ff00ff, #00ffff, #ffff00);
+            transition: width 3s ease-out;
+            position: relative;
+        }
+
+        .collapse-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            animation: shine 1s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .reality-status {
+            font-size: 20px;
+            margin: 10px 0;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+        }
+
+        .timeline-counter {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .timeline-item {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #00ffff;
+            border-radius: 10px;
+        }
+
+        .timeline-item.collapsed {
+            background: rgba(255, 0, 0, 0.3);
+            border-color: #ff0000;
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .quantum-particles {
+            position: fixed;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .jean-quote {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 72px;
+            color: #ffff00;
+            text-shadow: 0 0 50px #ffff00;
+            opacity: 0;
+            z-index: 100;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .jean-quote.show {
+            animation: jeanSpeak 5s ease-out;
+        }
+
+        @keyframes jeanSpeak {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+            20% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+            80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    
+    <div class="ui top-ui">
+        <h1>🌀 JEAN COLLAPSE COSMIQUE 🌀</h1>
+        <div class="opus-level">OpusEthereal Level 63</div>
+        <div class="reality-status" id="realityStatus">Réalité: STABLE</div>
+    </div>
+
+    <div class="ui bottom-ui">
+        <div class="timeline-counter" id="timelineCounter">
+            <div class="timeline-item" data-timeline="1">Timeline 1</div>
+            <div class="timeline-item" data-timeline="2">Timeline 2</div>
+            <div class="timeline-item" data-timeline="3">Timeline 3</div>
+            <div class="timeline-item" data-timeline="4">Timeline 4</div>
+            <div class="timeline-item" data-timeline="5">Timeline 5</div>
+        </div>
+        
+        <div class="collapse-meter">
+            <div class="collapse-fill" id="collapseFill"></div>
+        </div>
+        
+        <button onclick="castCollapse()">🎬 JEAN CAST COLLAPSE</button>
+        <button onclick="testQuantumCollapse()">⚛️ Test Quantum Collapse</button>
+        <button onclick="testCausalCollapse()">🎯 Test Causal Collapse</button>
+        <button onclick="testTotalCollapse()">💥 TOTAL REALITY COLLAPSE</button>
+    </div>
+
+    <div class="jean-quote" id="jeanQuote"></div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // État du collapse
+        let collapseState = {
+            active: false,
+            intensity: 0,
+            timelines: 5,
+            reality: 100,
+            particles: [],
+            blackHoles: [],
+            opusLevel: 63
+        };
+
+        // Particules quantiques
+        class QuantumParticle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.vx = (Math.random() - 0.5) * 10;
+                this.vy = (Math.random() - 0.5) * 10;
+                this.size = Math.random() * 5 + 2;
+                this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                this.life = 1;
+                this.decay = Math.random() * 0.02 + 0.01;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.life -= this.decay;
+                
+                // Attraction vers les trous noirs
+                collapseState.blackHoles.forEach(bh => {
+                    const dx = bh.x - this.x;
+                    const dy = bh.y - this.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (dist < bh.radius * 2) {
+                        const force = bh.mass / (dist * dist) * 10;
+                        this.vx += dx / dist * force;
+                        this.vy += dy / dist * force;
+                    }
+                    
+                    if (dist < bh.radius) {
+                        this.life = 0;
+                    }
+                });
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.life;
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 20;
+                ctx.shadowColor = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        // Trous noirs de collapse
+        class CollapseBlackHole {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.radius = 10;
+                this.mass = 1;
+                this.rotation = 0;
+                this.growthRate = 0.5;
+            }
+
+            update() {
+                if (collapseState.active) {
+                    this.radius += this.growthRate;
+                    this.mass += 0.1;
+                    this.rotation += 0.05;
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
+                
+                // Disque d'accrétion
+                const gradient = ctx.createRadialGradient(0, 0, this.radius, 0, 0, this.radius * 3);
+                gradient.addColorStop(0, 'rgba(0, 0, 0, 1)');
+                gradient.addColorStop(0.3, 'rgba(255, 0, 255, 0.8)');
+                gradient.addColorStop(0.6, 'rgba(0, 255, 255, 0.5)');
+                gradient.addColorStop(1, 'rgba(255, 255, 0, 0)');
+                
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(0, 0, this.radius * 3, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Trou noir central
+                ctx.fillStyle = '#000';
+                ctx.beginPath();
+                ctx.arc(0, 0, this.radius, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.restore();
+            }
+        }
+
+        // Quotes de Jean
+        const jeanQuotes = [
+            "COLLAPSE !",
+            "TOUT S'EFFONDRE !",
+            "OPUS TRANSCENDE !",
+            "RÉALITÉ PLIÉE !",
+            "CANAPÉ COSMIQUE !",
+            "BOOTSTRAP PARADOX !",
+            "TIMELINE ÉCRASÉE !",
+            "JEAN WINS !"
+        ];
+
+        function showJeanQuote() {
+            const quote = jeanQuotes[Math.floor(Math.random() * jeanQuotes.length)];
+            const quoteEl = document.getElementById('jeanQuote');
+            quoteEl.textContent = quote;
+            quoteEl.classList.add('show');
+            
+            setTimeout(() => {
+                quoteEl.classList.remove('show');
+            }, 5000);
+        }
+
+        function castCollapse() {
+            collapseState.active = true;
+            collapseState.intensity = 0;
+            
+            // Créer des trous noirs
+            for (let i = 0; i < 3; i++) {
+                collapseState.blackHoles.push(new CollapseBlackHole(
+                    Math.random() * canvas.width,
+                    Math.random() * canvas.height
+                ));
+            }
+            
+            // Animation de la barre
+            const fill = document.getElementById('collapseFill');
+            fill.style.width = '100%';
+            
+            // Jean parle
+            showJeanQuote();
+            
+            // Effets sur les timelines
+            let timelineCount = 5;
+            const interval = setInterval(() => {
+                if (timelineCount > 1) {
+                    collapseTimeline(timelineCount);
+                    timelineCount--;
+                } else {
+                    clearInterval(interval);
+                    totalCollapse();
+                }
+            }, 1000);
+            
+            // Appel API backend
+            fetch('http://localhost:8080/api/quantum/collapse', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    caster: 'JEAN',
+                    opusLevel: 63,
+                    type: 'COSMIC_COLLAPSE',
+                    timelines: collapseState.timelines
+                })
+            }).catch(err => console.log('Backend simulation:', err));
+        }
+
+        function collapseTimeline(number) {
+            const timeline = document.querySelector(`[data-timeline="${number}"]`);
+            timeline.classList.add('collapsed');
+            
+            // Explosion de particules
+            for (let i = 0; i < 50; i++) {
+                collapseState.particles.push(new QuantumParticle(
+                    canvas.width / 2 + (Math.random() - 0.5) * 200,
+                    canvas.height / 2 + (Math.random() - 0.5) * 200
+                ));
+            }
+            
+            updateStatus();
+        }
+
+        function updateStatus() {
+            const collapsed = document.querySelectorAll('.collapsed').length;
+            const reality = 100 - (collapsed * 20);
+            
+            const status = document.getElementById('realityStatus');
+            if (reality > 80) {
+                status.textContent = 'Réalité: STABLE';
+                status.style.color = '#00ff00';
+            } else if (reality > 40) {
+                status.textContent = 'Réalité: INSTABLE';
+                status.style.color = '#ffff00';
+            } else if (reality > 0) {
+                status.textContent = 'Réalité: CRITIQUE';
+                status.style.color = '#ff0000';
+            } else {
+                status.textContent = 'Réalité: COLLAPSED';
+                status.style.color = '#ff00ff';
+            }
+        }
+
+        function totalCollapse() {
+            // Effet final spectaculaire
+            for (let i = 0; i < 200; i++) {
+                collapseState.particles.push(new QuantumParticle(
+                    Math.random() * canvas.width,
+                    Math.random() * canvas.height
+                ));
+            }
+            
+            showJeanQuote();
+            
+            // Reset après 5 secondes
+            setTimeout(() => {
+                resetCollapse();
+            }, 5000);
+        }
+
+        function resetCollapse() {
+            collapseState.active = false;
+            collapseState.blackHoles = [];
+            collapseState.particles = [];
+            
+            document.querySelectorAll('.timeline-item').forEach(el => {
+                el.classList.remove('collapsed');
+            });
+            
+            document.getElementById('collapseFill').style.width = '0%';
+            updateStatus();
+        }
+
+        function testQuantumCollapse() {
+            // Test spécifique quantum
+            for (let i = 0; i < 100; i++) {
+                collapseState.particles.push(new QuantumParticle(
+                    canvas.width / 2,
+                    canvas.height / 2
+                ));
+            }
+            showJeanQuote();
+        }
+
+        function testCausalCollapse() {
+            // Test causalité
+            collapseState.blackHoles.push(new CollapseBlackHole(
+                canvas.width / 2,
+                canvas.height / 2
+            ));
+            showJeanQuote();
+        }
+
+        function testTotalCollapse() {
+            castCollapse();
+        }
+
+        // Animation principale
+        function animate() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Grille déformée
+            if (collapseState.active) {
+                drawDistortedGrid();
+            }
+            
+            // Mise à jour et dessin des trous noirs
+            collapseState.blackHoles = collapseState.blackHoles.filter(bh => {
+                bh.update();
+                bh.draw();
+                return bh.radius < 200;
+            });
+            
+            // Mise à jour et dessin des particules
+            collapseState.particles = collapseState.particles.filter(p => {
+                p.update();
+                p.draw();
+                return p.life > 0;
+            });
+            
+            // Effet OpusEthereal
+            if (collapseState.active) {
+                drawOpusEffect();
+            }
+            
+            requestAnimationFrame(animate);
+        }
+
+        function drawDistortedGrid() {
+            ctx.strokeStyle = 'rgba(255, 255, 0, 0.2)';
+            ctx.lineWidth = 1;
+            
+            const gridSize = 50;
+            
+            for (let x = 0; x < canvas.width; x += gridSize) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                
+                for (let y = 0; y < canvas.height; y += 10) {
+                    const distortion = 0;
+                    collapseState.blackHoles.forEach(bh => {
+                        const dx = bh.x - x;
+                        const dy = bh.y - y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < bh.radius * 5) {
+                            const force = (bh.radius * 5 - dist) / (bh.radius * 5);
+                            x += dx * force * 0.1;
+                        }
+                    });
+                    
+                    ctx.lineTo(x, y);
+                }
+                
+                ctx.stroke();
+            }
+        }
+
+        function drawOpusEffect() {
+            const time = Date.now() * 0.001;
+            
+            ctx.save();
+            ctx.globalAlpha = 0.3;
+            ctx.fillStyle = `hsl(${time * 50 % 360}, 100%, 50%)`;
+            ctx.shadowBlur = 50;
+            ctx.shadowColor = ctx.fillStyle;
+            
+            ctx.beginPath();
+            ctx.arc(
+                canvas.width / 2 + Math.sin(time) * 100,
+                canvas.height / 2 + Math.cos(time) * 100,
+                50 + Math.sin(time * 2) * 20,
+                0,
+                Math.PI * 2
+            );
+            ctx.fill();
+            
+            ctx.restore();
+        }
+
+        // Resize handler
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Démarrer l'animation
+        animate();
+
+        // Particules ambiantes
+        setInterval(() => {
+            if (!collapseState.active && collapseState.particles.length < 20) {
+                collapseState.particles.push(new QuantumParticle(
+                    Math.random() * canvas.width,
+                    Math.random() * canvas.height
+                ));
+            }
+        }, 500);
+    </script>
+</body>
+</html> 

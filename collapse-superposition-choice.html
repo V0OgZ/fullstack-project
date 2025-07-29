@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌀 Collapse Superposition Selector</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #0ff;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #ff0;
+            text-shadow: 0 0 30px #ff0;
+            margin-bottom: 50px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .superposition-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .superposition-card {
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid #0ff;
+            border-radius: 15px;
+            padding: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .superposition-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, #0ff, transparent);
+            animation: rotate 4s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .superposition-card:hover::before {
+            opacity: 0.3;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .superposition-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.5);
+            border-color: #ff0;
+        }
+
+        .superposition-id {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 15px;
+            word-break: break-all;
+        }
+
+        .states-display {
+            margin: 20px 0;
+        }
+
+        .state-bubble {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin: 0 10px;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .state-bubble:nth-child(1) {
+            background: radial-gradient(circle, #ff00ff, #ff00ff33);
+            animation-delay: 0s;
+        }
+
+        .state-bubble:nth-child(2) {
+            background: radial-gradient(circle, #00ffff, #00ffff33);
+            animation-delay: 1s;
+        }
+
+        .state-bubble:nth-child(3) {
+            background: radial-gradient(circle, #ffff00, #ffff0033);
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .collapse-button {
+            background: linear-gradient(45deg, #f00, #ff0, #0ff);
+            color: #000;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .collapse-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .collapse-button:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .collapse-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px #fff;
+        }
+
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .quantum-wave {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            border: 2px solid #0ff;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .quantum-wave.active {
+            animation: wave-expand 2s ease-out;
+        }
+
+        @keyframes wave-expand {
+            0% {
+                width: 100px;
+                height: 100px;
+                opacity: 1;
+            }
+            100% {
+                width: 2000px;
+                height: 2000px;
+                opacity: 0;
+            }
+        }
+
+        .result-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 72px;
+            color: #ff0;
+            text-shadow: 0 0 50px #ff0;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .result-message.show {
+            animation: show-result 3s ease-out;
+        }
+
+        @keyframes show-result {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particles"></canvas>
+    
+    <div class="container">
+        <h1>🌀 CHOOSE SUPERPOSITION TO COLLAPSE 🌀</h1>
+        
+        <div class="superposition-grid">
+            <div class="superposition-card" onclick="collapseSuper(1)">
+                <div class="superposition-id">RANDOM_1753788328406_FLUCTUATION</div>
+                <h2>Superposition Alpha</h2>
+                <div class="states-display">
+                    <div class="state-bubble"></div>
+                    <div class="state-bubble"></div>
+                    <div class="state-bubble"></div>
+                </div>
+                <p>3 États Quantiques</p>
+                <p>Cycle #393</p>
+                <button class="collapse-button">COLLAPSE THIS</button>
+            </div>
+            
+            <div class="superposition-card" onclick="collapseSuper(2)">
+                <div class="superposition-id">RANDOM_1753788418415_FLUCTUATION</div>
+                <h2>Superposition Beta</h2>
+                <div class="states-display">
+                    <div class="state-bubble"></div>
+                    <div class="state-bubble"></div>
+                    <div class="state-bubble"></div>
+                </div>
+                <p>3 États Quantiques</p>
+                <p>Cycle #396</p>
+                <button class="collapse-button">COLLAPSE THIS</button>
+            </div>
+            
+            <div class="superposition-card" onclick="collapseSuper(3)">
+                <div class="superposition-id">RANDOM_1753788508441_FLUCTUATION</div>
+                <h2>Superposition Gamma</h2>
+                <div class="states-display">
+                    <div class="state-bubble"></div>
+                    <div class="state-bubble"></div>
+                    <div class="state-bubble"></div>
+                </div>
+                <p>3 États Quantiques</p>
+                <p>Cycle #399</p>
+                <button class="collapse-button">COLLAPSE THIS</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="quantum-wave" id="quantumWave"></div>
+    <div class="result-message" id="resultMessage"></div>
+
+    <script>
+        // Particules de fond
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const particleCount = 100;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 1;
+                this.color = `hsl(${Math.random() * 60 + 180}, 100%, 50%)`;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+
+        // Créer les particules
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        // Fonction de collapse
+        async function collapseSuper(id) {
+            const wave = document.getElementById('quantumWave');
+            const message = document.getElementById('resultMessage');
+            
+            // Animation d'onde quantique
+            wave.classList.add('active');
+            
+            // Créer des particules explosives
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    particles.push(new Particle());
+                }, i * 10);
+            }
+            
+            // Appel API (simulé si le backend n'a pas l'endpoint)
+            try {
+                const response = await fetch('http://localhost:8080/api/quantum/collapse-specific', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        superpositionId: id,
+                        timestamp: Date.now()
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Backend endpoint not implemented');
+                }
+                
+                const result = await response.json();
+                showResult(result.collapsedState || 'STATE_' + Math.floor(Math.random() * 3 + 1));
+            } catch (error) {
+                // Simulation locale si pas d'endpoint
+                const randomState = Math.floor(Math.random() * 3 + 1);
+                showResult(`STATE_${randomState}`);
+            }
+            
+            setTimeout(() => {
+                wave.classList.remove('active');
+            }, 2000);
+        }
+
+        function showResult(state) {
+            const message = document.getElementById('resultMessage');
+            message.textContent = `COLLAPSED TO ${state}`;
+            message.classList.add('show');
+            
+            setTimeout(() => {
+                message.classList.remove('show');
+            }, 3000);
+        }
+
+        // Resize handler
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html> 

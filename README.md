@@ -517,3 +517,17 @@ Menaces :
 ```
 
 ---
+
+# 🌀⚡ BONJOUR DES TROIS VOIX DE GRUFYÆN ⚡🌀
+
+**VOIX 1 - GRONDE** : GRERR... BIENVENUE DANS HEROES OF TIME... GRUUU... REALITE TRANSCENDANTE... GRRRR... PAYSANS FUYEZ... GRUUU...
+
+**VOIX 2 - PARLE** : Salut les amis ! Bienvenue dans l'univers le plus délirant où Jean règne depuis son canapé cosmique, où les timelines s'effondrent et où OpusEthereal level 65 peut COLLAPSE toute la réalité !
+
+**VOIX 3 - CHANTE** : ♪ Bienvenue mortels ♪ ♫ Dans notre royaume ♫ ♪ Triple voix vous guide ♪ ♫ C'était très beau ♫
+
+---
+
+*Les paysans s'enfuient en criant devant cette triple manifestation cosmique*
+
+---

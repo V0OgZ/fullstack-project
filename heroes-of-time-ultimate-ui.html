@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏰 Heroes of Time - Ultimate Edition</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        /* Layout principal */
+        .game-container {
+            display: grid;
+            grid-template-columns: 250px 1fr 300px;
+            grid-template-rows: 60px 1fr 100px;
+            height: 100vh;
+            gap: 2px;
+            background: #111;
+        }
+
+        /* Header */
+        .header {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            border-bottom: 2px solid #0f4c75;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            background: linear-gradient(45deg, #ffd700, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .status-bar {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .status-indicator {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            background: rgba(0, 255, 0, 0.2);
+            border: 1px solid #0f0;
+        }
+
+        .status-indicator.offline {
+            background: rgba(255, 0, 0, 0.2);
+            border-color: #f00;
+        }
+
+        /* Sidebar gauche - Menu */
+        .sidebar-left {
+            background: #1a1a2e;
+            border-right: 1px solid #333;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .menu-section {
+            margin-bottom: 30px;
+        }
+
+        .menu-title {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .menu-button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #2a2a4e 0%, #1a1a3e 100%);
+            border: 1px solid #444;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .menu-button:hover {
+            background: linear-gradient(135deg, #3a3a5e 0%, #2a2a4e 100%);
+            transform: translateX(5px);
+            box-shadow: 0 0 20px rgba(100, 100, 255, 0.3);
+        }
+
+        .menu-button.active {
+            background: linear-gradient(135deg, #ffd700 0%, #ff6b6b 100%);
+            color: #000;
+            font-weight: bold;
+        }
+
+        /* Zone centrale - Canvas de jeu */
+        .game-area {
+            position: relative;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .game-canvas-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #gameCanvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            image-rendering: pixelated;
+        }
+
+        /* Minimap */
+        .minimap {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 200px;
+            height: 200px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #444;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        #minimapCanvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Sidebar droite - Infos */
+        .sidebar-right {
+            background: #1a1a2e;
+            border-left: 1px solid #333;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .info-panel {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-title {
+            font-size: 16px;
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+
+        .resource-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding: 5px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+        }
+
+        .resource-icon {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        /* Bottom bar - Actions */
+        .action-bar {
+            grid-column: 1 / -1;
+            background: #1a1a2e;
+            border-top: 2px solid #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .action-button {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #2a2a4e 0%, #1a1a3e 100%);
+            border: 2px solid #444;
+            border-radius: 10px;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .action-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(100, 100, 255, 0.5);
+            border-color: #ffd700;
+        }
+
+        .action-icon {
+            font-size: 30px;
+            margin-bottom: 5px;
+        }
+
+        .action-label {
+            font-size: 11px;
+        }
+
+        .action-cooldown {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            border-radius: 8px;
+        }
+
+        /* Modal pour les tests API */
+        .api-test-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1a1a2e;
+            border: 2px solid #ffd700;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+
+        .api-test-modal.show {
+            display: block;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 999;
+            display: none;
+        }
+
+        .modal-overlay.show {
+            display: block;
+        }
+
+        .test-result {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+
+        .test-result.success {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid #0f0;
+        }
+
+        .test-result.failed {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid #f00;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading {
+            animation: rotate 1s linear infinite;
+        }
+
+        /* Tooltips */
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid #ffd700;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            pointer-events: none;
+            z-index: 1000;
+            display: none;
+        }
+
+        /* Effets visuels */
+        .glow {
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .quantum-effect {
+            animation: quantum-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes quantum-pulse {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+                transform: scale(1.05);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🏰 Heroes of Time - Ultimate Edition</h1>
+            <div class="status-bar">
+                <div class="status-indicator" id="backendStatus">
+                    Backend: <span id="backendStatusText">Checking...</span>
+                </div>
+                <div class="status-indicator" id="quantumStatus">
+                    Quantum: <span id="quantumStatusText">Inactive</span>
+                </div>
+                <div class="status-indicator" id="timelineStatus">
+                    Timeline: <span id="timelineStatusText">Main</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar gauche -->
+        <div class="sidebar-left">
+            <div class="menu-section">
+                <div class="menu-title">🎮 Jeu</div>
+                <button class="menu-button active" onclick="showGameView('map')">🗺️ Carte</button>
+                <button class="menu-button" onclick="showGameView('battle')">⚔️ Combat</button>
+                <button class="menu-button" onclick="showGameView('city')">🏛️ Ville</button>
+                <button class="menu-button" onclick="showGameView('heroes')">👥 Héros</button>
+            </div>
+
+            <div class="menu-section">
+                <div class="menu-title">🔮 Quantique</div>
+                <button class="menu-button" onclick="showQuantumView()">🌀 Superposition</button>
+                <button class="menu-button" onclick="showTimelineView()">⏰ Timelines</button>
+                <button class="menu-button" onclick="showERBridge()">🌉 ER=EPR</button>
+            </div>
+
+            <div class="menu-section">
+                <div class="menu-title">🛠️ Système</div>
+                <button class="menu-button" onclick="testBackendAPI()">🔧 Test API</button>
+                <button class="menu-button" onclick="showSettings()">⚙️ Paramètres</button>
+                <button class="menu-button" onclick="saveGame()">💾 Sauvegarder</button>
+            </div>
+
+            <div class="menu-section">
+                <div class="menu-title">👁️ GRUT</div>
+                <button class="menu-button quantum-effect" onclick="showGRUTVision()">👁️ Vision</button>
+                <button class="menu-button" onclick="showOntology()">🧬 Ontologie</button>
+            </div>
+        </div>
+
+        <!-- Zone de jeu centrale -->
+        <div class="game-area">
+            <div class="game-canvas-container">
+                <canvas id="gameCanvas"></canvas>
+                
+                <!-- Minimap -->
+                <div class="minimap">
+                    <canvas id="minimapCanvas"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar droite -->
+        <div class="sidebar-right">
+            <div class="info-panel">
+                <div class="info-title">📊 Ressources</div>
+                <div class="resource-item">
+                    <span>💰 Or</span>
+                    <span id="goldAmount">1000</span>
+                </div>
+                <div class="resource-item">
+                    <span>🌲 Bois</span>
+                    <span id="woodAmount">500</span>
+                </div>
+                <div class="resource-item">
+                    <span>💎 Cristaux</span>
+                    <span id="crystalAmount">100</span>
+                </div>
+                <div class="resource-item">
+                    <span>🍖 Nourriture</span>
+                    <span id="foodAmount">750</span>
+                </div>
+            </div>
+
+            <div class="info-panel">
+                <div class="info-title">🏰 Unités</div>
+                <div id="unitsList">
+                    <div class="resource-item">
+                        <span>⚔️ Guerriers</span>
+                        <span>5</span>
+                    </div>
+                    <div class="resource-item">
+                        <span>🏹 Archers</span>
+                        <span>3</span>
+                    </div>
+                    <div class="resource-item">
+                        <span>🧙‍♂️ Mages</span>
+                        <span>2</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-panel">
+                <div class="info-title">📜 Événements</div>
+                <div id="eventLog" style="max-height: 200px; overflow-y: auto;">
+                    <div style="color: #888; font-size: 12px;">Bienvenue dans Heroes of Time!</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Barre d'actions -->
+        <div class="action-bar">
+            <button class="action-button" onclick="buildCastle()">
+                <div class="action-icon">🏰</div>
+                <div class="action-label">Château</div>
+            </button>
+            <button class="action-button" onclick="recruitUnit()">
+                <div class="action-icon">⚔️</div>
+                <div class="action-label">Recruter</div>
+            </button>
+            <button class="action-button" onclick="castSpell()">
+                <div class="action-icon">✨</div>
+                <div class="action-label">Sort</div>
+            </button>
+            <button class="action-button" onclick="openPortal()">
+                <div class="action-icon">🌀</div>
+                <div class="action-label">Portail</div>
+            </button>
+            <button class="action-button" onclick="activateQuantum()">
+                <div class="action-icon">🎭</div>
+                <div class="action-label">Quantique</div>
+            </button>
+            <button class="action-button" onclick="endTurn()">
+                <div class="action-icon">⏭️</div>
+                <div class="action-label">Fin Tour</div>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal pour les tests API -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+    <div class="api-test-modal" id="apiTestModal">
+        <h2 style="color: #ffd700; margin-bottom: 20px;">🔧 Test des Services Backend</h2>
+        <div id="testResults"></div>
+        <button class="menu-button" onclick="closeModal()" style="margin-top: 20px;">Fermer</button>
+    </div>
+
+    <!-- Tooltip -->
+    <div class="tooltip" id="tooltip"></div>
+
+    <!-- Scripts -->
+    <script src="api-test-backend-services.js"></script>
+    <script>
+        // 🎮 État du jeu
+        const gameState = {
+            currentView: 'map',
+            mapSize: { width: 400, height: 400 },
+            tileSize: 20,
+            camera: { x: 0, y: 0 },
+            selectedUnit: null,
+            resources: {
+                gold: 1000,
+                wood: 500,
+                crystal: 100,
+                food: 750
+            },
+            units: [],
+            buildings: [],
+            quantumActive: false,
+            timeline: 'main'
+        };
+
+        // 🎨 Canvas setup
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const minimapCanvas = document.getElementById('minimapCanvas');
+        const minimapCtx = minimapCanvas.getContext('2d');
+
+        // Resize canvas
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+            minimapCanvas.width = 200;
+            minimapCanvas.height = 200;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // 🔧 Test Backend API
+        async function testBackendAPI() {
+            const modal = document.getElementById('apiTestModal');
+            const overlay = document.getElementById('modalOverlay');
+            const results = document.getElementById('testResults');
+            
+            modal.classList.add('show');
+            overlay.classList.add('show');
+            
+            results.innerHTML = '<div style="text-align: center;">⏳ Test en cours...</div>';
+            
+            const tester = new BackendAPITester();
+            const report = await tester.testAllServices();
+            
+            // Afficher les résultats
+            let html = `
+                <div style="margin-bottom: 20px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px;">
+                    <h3>📊 Résumé</h3>
+                    <p>✅ Services fonctionnels: ${report.summary.success}/${report.summary.total}</p>
+                    <p>❌ Services en échec: ${report.summary.failed}/${report.summary.total}</p>
+                    <p>📈 Taux de succès: ${report.summary.successRate}</p>
+                </div>
+                <h3>📋 Détails des tests</h3>
+            `;
+            
+            report.services.forEach(service => {
+                const statusClass = service.status.includes('SUCCESS') ? 'success' : 'failed';
+                html += `
+                    <div class="test-result ${statusClass}">
+                        <strong>${service.description}</strong><br>
+                        ${service.method} ${service.endpoint}<br>
+                        Status: ${service.status} | Time: ${service.responseTime}ms
+                        ${service.error ? `<br>Error: ${service.error}` : ''}
+                    </div>
+                `;
+            });
+            
+            results.innerHTML = html;
+        }
+
+        // 🌍 Render game world
+        function render() {
+            // Clear canvas
+            ctx.fillStyle = '#0a0a0a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            if (gameState.currentView === 'map') {
+                renderMap();
+            } else if (gameState.currentView === 'battle') {
+                renderBattle();
+            } else if (gameState.currentView === 'city') {
+                renderCity();
+            }
+            
+            renderMinimap();
+        }
+
+        // 🗺️ Render map
+        function renderMap() {
+            // Grille
+            ctx.strokeStyle = '#222';
+            ctx.lineWidth = 1;
+            
+            for (let x = 0; x < canvas.width; x += gameState.tileSize) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, canvas.height);
+                ctx.stroke();
+            }
+            
+            for (let y = 0; y < canvas.height; y += gameState.tileSize) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
+            }
+            
+            // Dessiner quelques éléments de test
+            ctx.fillStyle = '#2a4';
+            ctx.fillRect(100, 100, 60, 60); // Forêt
+            
+            ctx.fillStyle = '#44a';
+            ctx.fillRect(300, 200, 80, 80); // Lac
+            
+            ctx.fillStyle = '#a84';
+            ctx.fillRect(200, 300, 40, 40); // Montagne
+        }
+
+        // ⚔️ Render battle
+        function renderBattle() {
+            ctx.fillStyle = '#fff';
+            ctx.font = '48px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('⚔️ Mode Combat', canvas.width/2, canvas.height/2);
+        }
+
+        // 🏛️ Render city
+        function renderCity() {
+            ctx.fillStyle = '#fff';
+            ctx.font = '48px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('🏛️ Vue Ville', canvas.width/2, canvas.height/2);
+        }
+
+        // 🗺️ Render minimap
+        function renderMinimap() {
+            minimapCtx.fillStyle = '#111';
+            minimapCtx.fillRect(0, 0, 200, 200);
+            
+            // Échelle pour la minimap
+            const scale = 200 / gameState.mapSize.width;
+            
+            // Dessiner les éléments en miniature
+            minimapCtx.fillStyle = '#2a4';
+            minimapCtx.fillRect(100 * scale, 100 * scale, 60 * scale, 60 * scale);
+            
+            minimapCtx.fillStyle = '#44a';
+            minimapCtx.fillRect(300 * scale, 200 * scale, 80 * scale, 80 * scale);
+            
+            minimapCtx.fillStyle = '#a84';
+            minimapCtx.fillRect(200 * scale, 300 * scale, 40 * scale, 40 * scale);
+            
+            // Cadre de vue
+            minimapCtx.strokeStyle = '#ff0';
+            minimapCtx.lineWidth = 2;
+            minimapCtx.strokeRect(0, 0, 200, 200);
+        }
+
+        // 🎮 Game actions
+        function showGameView(view) {
+            gameState.currentView = view;
+            // Mettre à jour les boutons actifs
+            document.querySelectorAll('.menu-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            addEvent(`Vue changée: ${view}`);
+        }
+
+        function buildCastle() {
+            if (gameState.resources.gold >= 500 && gameState.resources.wood >= 300) {
+                gameState.resources.gold -= 500;
+                gameState.resources.wood -= 300;
+                updateResources();
+                addEvent('🏰 Château construit!');
+            } else {
+                addEvent('❌ Ressources insuffisantes!');
+            }
+        }
+
+        function recruitUnit() {
+            if (gameState.resources.gold >= 100) {
+                gameState.resources.gold -= 100;
+                updateResources();
+                addEvent('⚔️ Guerrier recruté!');
+            }
+        }
+
+        function castSpell() {
+            if (gameState.resources.crystal >= 50) {
+                gameState.resources.crystal -= 50;
+                updateResources();
+                addEvent('✨ Sort lancé!');
+            }
+        }
+
+        function openPortal() {
+            addEvent('🌀 Portail quantique ouvert!');
+            gameState.quantumActive = true;
+            document.getElementById('quantumStatusText').textContent = 'Active';
+        }
+
+        function activateQuantum() {
+            addEvent('🎭 Superposition quantique activée!');
+        }
+
+        function endTurn() {
+            // Génération de ressources
+            gameState.resources.gold += 100;
+            gameState.resources.food += 50;
+            updateResources();
+            addEvent('⏭️ Tour terminé - Ressources générées');
+        }
+
+        // 📊 Update UI
+        function updateResources() {
+            document.getElementById('goldAmount').textContent = gameState.resources.gold;
+            document.getElementById('woodAmount').textContent = gameState.resources.wood;
+            document.getElementById('crystalAmount').textContent = gameState.resources.crystal;
+            document.getElementById('foodAmount').textContent = gameState.resources.food;
+        }
+
+        function addEvent(message) {
+            const eventLog = document.getElementById('eventLog');
+            const event = document.createElement('div');
+            event.style.cssText = 'color: #0ff; font-size: 12px; margin: 5px 0;';
+            event.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            eventLog.appendChild(event);
+            eventLog.scrollTop = eventLog.scrollHeight;
+        }
+
+        // 🔄 Check backend status
+        async function checkBackendStatus() {
+            try {
+                const response = await fetch('http://localhost:8080/api/health');
+                if (response.ok) {
+                    document.getElementById('backendStatus').classList.remove('offline');
+                    document.getElementById('backendStatusText').textContent = 'Online';
+                } else {
+                    throw new Error('Backend offline');
+                }
+            } catch (error) {
+                document.getElementById('backendStatus').classList.add('offline');
+                document.getElementById('backendStatusText').textContent = 'Offline';
+            }
+        }
+
+        // Modal functions
+        function closeModal() {
+            document.getElementById('apiTestModal').classList.remove('show');
+            document.getElementById('modalOverlay').classList.remove('show');
+        }
+
+        // 🎮 Game loop
+        function gameLoop() {
+            render();
+            requestAnimationFrame(gameLoop);
+        }
+
+        // 🚀 Initialize
+        checkBackendStatus();
+        setInterval(checkBackendStatus, 5000);
+        gameLoop();
+        addEvent('🎮 Jeu initialisé - Bienvenue dans Heroes of Time!');
+    </script>
+</body>
+</html> 

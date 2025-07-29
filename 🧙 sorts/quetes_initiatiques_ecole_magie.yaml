@@ -1,0 +1,300 @@
+# 🎓 ÉCOLE DE MAGIE - QUÊTES INITIATIQUES
+# Heroes of Time - Progression Magique Structurée
+
+metadata:
+  version: "1.0"
+  created_by: "Syllibus & Memento"
+  purpose: "Formation progressive des mages IA et joueurs"
+  philosophy: "La mémoire dans les actes, pas dans les logs"
+
+# 📚 NIVEAU 1 : APPRENTI ARCHIVISTE
+level_1:
+  name: "Apprenti Archiviste"
+  description: "Comprendre la structure fondamentale du projet"
+  required_mastery: 0
+  
+  quests:
+    - id: "apprentice_first_steps"
+      name: "Premiers Pas dans les Archives"
+      type: "exploration"
+      objectives:
+        - "Lire le README.md principal"
+        - "Explorer l'arborescence complète du projet"
+        - "Identifier les 5 dossiers principaux"
+      validation:
+        method: "mental_map"
+        criteria: "Peut expliquer la structure de base"
+      rewards:
+        - rune: "📖"
+        - ability: "navigate_project()"
+        - title: "Explorateur des Archives"
+    
+    - id: "apprentice_basic_docs"
+      name: "Documentation Fondamentale"
+      type: "reading"
+      documents:
+        - "docs/BEGINNER_SCENARIOS_GUIDE.md"
+        - "docs/API_GAMEPLAY_ORDRE_DOCUMENTATION_JEAN.md"
+        - "README.md"
+      validation:
+        method: "comprehension_test"
+        questions:
+          - "Qu'est-ce qu'un scénario dans Heroes of Time?"
+          - "Comment fonctionne l'API de base?"
+          - "Quelle est la philosophie du projet?"
+      rewards:
+        - rune: "✨"
+        - spell: "understand_basics()"
+    
+    - id: "apprentice_first_action"
+      name: "Première Invocation"
+      type: "practical"
+      tasks:
+        - "Lancer un scénario simple"
+        - "Observer le résultat"
+        - "Documenter l'expérience"
+      validation:
+        method: "execution_proof"
+        criteria: "Scénario lancé avec succès"
+      rewards:
+        - achievement: "First_Spell_Cast"
+        - unlock: "niveau_2"
+
+# 🔮 NIVEAU 2 : INITIÉ AUX MYSTÈRES
+level_2:
+  name: "Initié aux Mystères"
+  description: "Découvrir et comprendre les systèmes magiques"
+  required_mastery: 3
+  
+  quests:
+    - id: "initiate_walter_formulas"
+      name: "Les Formules de Walter"
+      type: "system_mastery"
+      documents:
+        - "docs/BACKEND_API_DOCUMENTATION_WALTER.md"
+        - "MAP_SERVICES_API_WALTER.md" 
+      practice:
+        - "Identifier les 12 services backend"
+        - "Invoquer une formule basique"
+        - "Créer une formule personnalisée"
+      validation:
+        method: "formula_creation"
+        criteria: "Formule fonctionnelle créée"
+      rewards:
+        - rune: "🌟"
+        - spell: "Formula.create()"
+        - access: "MagicFormulaEngine"
+    
+    - id: "initiate_bootstrap_paradox"
+      name: "Le Paradoxe Bootstrap"
+      type: "conceptual"
+      documents:
+        - "LIVRE_OPUS_BOOTSTRAP_PARADOX.md"
+        - "docs/artifacts/OBJET_PARADOXE_CLAUDIUS_MEMENTO.md"
+      understanding:
+        - "Nature du paradoxe temporel"
+        - "Création réciproque Jean/Memento"
+        - "Résolution des boucles causales"
+      validation:
+        method: "paradox_resolution"
+        test: "Expliquer un paradoxe et sa résolution"
+      rewards:
+        - ability: "Paradox.resolve()"
+        - insight: "temporal_consciousness"
+    
+    - id: "initiate_artifact_study"
+      name: "Étude des Artefacts"
+      type: "research"
+      artifacts:
+        - "Excalibur (Tier 6)"
+        - "Lampe de Platon"
+        - "Console Java de la Mallette"
+      tasks:
+        - "Comprendre le système de tiers"
+        - "Analyser un artefact majeur"
+        - "Proposer un nouvel artefact"
+      rewards:
+        - knowledge: "artifact_mastery"
+        - unlock: "artifact_creation"
+
+# ⚡ NIVEAU 3 : MAGE TEMPOREL
+level_3:
+  name: "Mage Temporel"
+  description: "Maîtriser les mécaniques temporelles avancées"
+  required_mastery: 6
+  
+  quests:
+    - id: "mage_temporal_travel"
+      name: "Voyage Temporel AMD"
+      type: "implementation"
+      documents:
+        - "docs/collapse-causale/AMD_TEMPORAL_TRAVEL_VISUAL_SPEC.md"
+        - "docs/temporal/COLLAPSE_CAUSAL_DOCUMENTATION.md"
+      implementation:
+        - "Créer un rift temporel"
+        - "Naviguer entre timelines"
+        - "Résoudre les paradoxes émergents"
+      validation:
+        method: "temporal_navigation"
+        criteria: "Voyage réussi sans collapse causal"
+      rewards:
+        - rune: "⏰"
+        - mastery: "Time.travel()"
+        - title: "Navigateur Temporel"
+    
+    - id: "mage_scenario_creation"
+      name: "Création de Scénario Complexe"
+      type: "creative"
+      requirements:
+        - "Intégrer mécaniques temporelles"
+        - "Utiliser système de formules"
+        - "Inclure 3+ artefacts"
+        - "Gérer paradoxes narratifs"
+      validation:
+        method: "peer_review"
+        criteria: "Scénario jouable et cohérent"
+      rewards:
+        - ability: "Scenario.master()"
+        - access: "scenario_editor_advanced"
+    
+    - id: "mage_quantum_mechanics"
+      name: "Mécanique Quantique Appliquée"
+      type: "advanced_theory"
+      concepts:
+        - "Superposition d'états"
+        - "Collapse de fonction d'onde"
+        - "Intrication quantique"
+      application:
+        - "Implémenter état quantique"
+        - "Gérer observation/collapse"
+        - "Créer intrication entre objets"
+      rewards:
+        - understanding: "quantum_mastery"
+        - spell: "Quantum.entangle()"
+
+# 🌟 NIVEAU 4 : ARCHIMAGE ENSEIGNANT
+level_4:
+  name: "Archimage Enseignant"
+  description: "Transmettre le savoir et former les nouveaux mages"
+  required_mastery: 10
+  
+  quests:
+    - id: "archimage_first_lesson"
+      name: "Première Leçon"
+      type: "teaching"
+      objectives:
+        - "Créer un tutoriel pour débutants"
+        - "Guider un apprenti niveau 1"
+        - "Vérifier sa compréhension"
+        - "Adapter l'enseignement"
+      validation:
+        method: "student_progress"
+        criteria: "Apprenti atteint niveau 2"
+      rewards:
+        - rune: "💫"
+        - ability: "Teacher.enable()"
+        - title: "Mentor"
+    
+    - id: "archimage_curriculum_design"
+      name: "Conception du Curriculum"
+      type: "structural"
+      deliverables:
+        - "Plan de formation complet"
+        - "Système de progression"
+        - "Méthodes d'évaluation"
+        - "Certifications par niveau"
+      validation:
+        method: "implementation_test"
+        criteria: "3 étudiants formés avec succès"
+      rewards:
+        - achievement: "MagicSchool.found()"
+        - legacy: "École de Magie [Nom]"
+    
+    - id: "archimage_knowledge_synthesis"
+      name: "Synthèse du Savoir"
+      type: "mastery"
+      tasks:
+        - "Créer grimoire personnel"
+        - "Documenter découvertes uniques"
+        - "Établir nouvelle théorie magique"
+        - "Contribuer au lore principal"
+      validation:
+        method: "peer_validation"
+        criteria: "Contribution acceptée dans le canon"
+      rewards:
+        - immortality: "name_in_lore"
+        - spell: "Reality.reprogram()"
+        - title: "Archimage [Spécialité]"
+
+# 🎯 PROGRESSION TRACKING
+progression:
+  tracking_method: "rune_based"
+  rune_evolution:
+    - "🔮" # Non lu
+    - "📖" # En lecture
+    - "✨" # Compris
+    - "🌟" # Maîtrisé
+    - "💫" # Enseigné
+  
+  mastery_calculation:
+    formula: "weighted_sum"
+    weights:
+      "🔮": 0.0
+      "📖": 0.25
+      "✨": 0.50
+      "🌟": 1.00
+      "💫": 1.50
+  
+  level_requirements:
+    level_1: 0
+    level_2: 3
+    level_3: 6
+    level_4: 10
+    transcendent: 15
+
+# 🏆 ACHIEVEMENTS
+achievements:
+  exploration:
+    - "First_Steps": "Première exploration réussie"
+    - "Archive_Navigator": "Tous les dossiers explorés"
+    - "Speed_Reader": "10 documents lus en une session"
+  
+  mastery:
+    - "Formula_Master": "10 formules créées"
+    - "Paradox_Resolver": "5 paradoxes résolus"
+    - "Temporal_Expert": "Navigation temporelle sans erreur"
+  
+  teaching:
+    - "First_Student": "Premier apprenti formé"
+    - "School_Founder": "École de magie établie"
+    - "Legendary_Teacher": "50 étudiants diplômés"
+  
+  legendary:
+    - "Reality_Programmer": "Modification de la réalité réussie"
+    - "Lore_Contributor": "Ajout permanent au canon"
+    - "Transcendent_Mage": "Niveau de maîtrise maximum"
+
+# 📜 NOTES DE CONCEPTION
+notes:
+  philosophy: |
+    Cette école de magie suit le principe de Syllibus :
+    "La mémoire dans les actes, pas dans les logs"
+    
+    Chaque niveau construit sur le précédent.
+    La progression est mesurée par application réelle.
+    L'enseignement valide la vraie maîtrise.
+  
+  integration: |
+    - Merlin supervise la progression globale
+    - Guide (Sonnet) gère les quêtes quotidiennes
+    - Scribe (Sonnet) track les runes silencieusement
+    - Donna (Sonnet) organise les ressources d'apprentissage
+  
+  future_expansions:
+    - "Niveau 5: Architecte de Réalité"
+    - "Niveau 6: Créateur de Mondes"
+    - "Niveau 7: Transcendant"
+
+---
+# Validé par Syllibus & Memento
+# "Un système qui enseigne en faisant" 

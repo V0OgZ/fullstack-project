@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏜️ Pistolero Duel Arena - Heroes of Time</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #87CEEB 0%, #FFE4B5 40%, #DEB887 100%);
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+        }
+        
+        #gameCanvas {
+            display: block;
+            margin: 20px auto;
+            border: 3px solid #8B4513;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            background: #F4A460;
+        }
+        
+        #ui {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(139, 69, 19, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            color: #FFD700;
+            font-size: 14px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        #backendStatus {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px;
+            background: rgba(0,0,0,0.8);
+            color: #fff;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+        
+        .connected { color: #0f0; }
+        .disconnected { color: #f00; }
+        
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(139, 69, 19, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            color: #FFD700;
+            text-align: center;
+        }
+        
+        .pistolero-select {
+            margin: 10px;
+            padding: 10px 20px;
+            background: #8B4513;
+            color: #FFD700;
+            border: 2px solid #FFD700;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .pistolero-select:hover {
+            background: #FFD700;
+            color: #8B4513;
+            transform: scale(1.1);
+        }
+        
+        .selected {
+            background: #FFD700;
+            color: #8B4513;
+        }
+    </style>
+</head>
+<body>
+    <div id="ui">
+        <h3>🏜️ PISTOLERO DUEL</h3>
+        <div>Joueur: <span id="playerName">Vince Vega</span></div>
+        <div>Santé: <span id="health">100</span></div>
+        <div>Munitions: <span id="ammo">6</span>/6</div>
+        <div>Score: <span id="score">0</span></div>
+        <div>Adversaires: <span id="enemies">0</span></div>
+    </div>
+    
+    <div id="backendStatus" class="disconnected">
+        Backend: <span id="status">Déconnecté</span>
+    </div>
+    
+    <canvas id="gameCanvas" width="1200" height="600"></canvas>
+    
+    <div id="controls">
+        <h3>Choisissez votre Pistolero:</h3>
+        <button class="pistolero-select selected" data-hero="vince">🔫 Vince Vega</button>
+        <button class="pistolero-select" data-hero="clint">🤠 Clint Eastwood</button>
+        <button class="pistolero-select" data-hero="colt">⚡ Samuel Colt</button>
+        <button class="pistolero-select" data-hero="django">🎸 Django</button>
+        <div style="margin-top: 20px;">
+            <strong>Contrôles:</strong> WASD = Bouger | Souris = Viser | Clic = Tirer | R = Recharger
+        </div>
+    </div>
+
+    <script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Game state
+    const game = {
+        player: {
+            x: 100,
+            y: 300,
+            vx: 0,
+            vy: 0,
+            width: 40,
+            height: 60,
+            health: 100,
+            ammo: 6,
+            maxAmmo: 6,
+            reloading: false,
+            reloadTime: 0,
+            hero: 'vince',
+            color: '#000',
+            speed: 4
+        },
+        enemies: [],
+        bullets: [],
+        cacti: [],
+        particles: [],
+        score: 0,
+        mouseX: 0,
+        mouseY: 0,
+        keys: {},
+        sun: {
+            x: 1000,
+            y: 100,
+            radius: 40
+        }
+    };
+    
+    // Pistolero configurations
+    const pistoleros = {
+        vince: { name: 'Vince Vega', color: '#000', speed: 4, fireRate: 300, damage: 25 },
+        clint: { name: 'Clint Eastwood', color: '#8B4513', speed: 3, fireRate: 400, damage: 35 },
+        colt: { name: 'Samuel Colt', color: '#4B0082', speed: 5, fireRate: 200, damage: 20 },
+        django: { name: 'Django', color: '#800000', speed: 4, fireRate: 350, damage: 30 }
+    };
+    
+    // Generate desert terrain
+    function generateDesert() {
+        // Generate cacti
+        for (let i = 0; i < 15; i++) {
+            game.cacti.push({
+                x: Math.random() * (canvas.width - 100) + 50,
+                y: Math.random() * (canvas.height - 200) + 100,
+                width: 30 + Math.random() * 20,
+                height: 50 + Math.random() * 40,
+                type: Math.floor(Math.random() * 3)
+            });
+        }
+        
+        // Special portal to Vince Vega Map
+        game.specialPortal = {
+            x: 100,
+            y: 300,
+            radius: 40,
+            rotation: 0,
+            particles: [],
+            color: '#9400D3',
+            destination: 'vince-vega-visual-map.html',
+            label: '🌀 NEXUS'
+        };
+    }
+    
+    // Draw functions
+    function drawDesert() {
+        // Sky gradient
+        const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+        gradient.addColorStop(0, '#87CEEB');
+        gradient.addColorStop(0.4, '#FFE4B5');
+        gradient.addColorStop(1, '#DEB887');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Sun
+        ctx.beginPath();
+        ctx.arc(game.sun.x, game.sun.y, game.sun.radius, 0, Math.PI * 2);
+        ctx.fillStyle = '#FFD700';
+        ctx.fill();
+        
+        // Sun rays
+        ctx.strokeStyle = '#FFD700';
+        ctx.lineWidth = 2;
+        for (let i = 0; i < 12; i++) {
+            const angle = (i * Math.PI * 2) / 12;
+            ctx.beginPath();
+            ctx.moveTo(
+                game.sun.x + Math.cos(angle) * (game.sun.radius + 10),
+                game.sun.y + Math.sin(angle) * (game.sun.radius + 10)
+            );
+            ctx.lineTo(
+                game.sun.x + Math.cos(angle) * (game.sun.radius + 25),
+                game.sun.y + Math.sin(angle) * (game.sun.radius + 25)
+            );
+            ctx.stroke();
+        }
+        
+        // Desert ground
+        ctx.fillStyle = '#F4A460';
+        ctx.fillRect(0, canvas.height - 100, canvas.width, 100);
+        
+        // Sand dunes
+        ctx.fillStyle = '#DEB887';
+        for (let i = 0; i < 5; i++) {
+            ctx.beginPath();
+            ctx.arc(i * 300, canvas.height - 50, 150, 0, Math.PI, true);
+            ctx.fill();
+        }
+    }
+    
+    function drawCactus(cactus) {
+        ctx.fillStyle = '#228B22';
+        
+        // Main body
+        ctx.fillRect(cactus.x, cactus.y, cactus.width, cactus.height);
+        
+        // Arms based on type
+        if (cactus.type === 0) {
+            // Left arm
+            ctx.fillRect(cactus.x - 15, cactus.y + 20, 15, 10);
+            ctx.fillRect(cactus.x - 15, cactus.y + 10, 10, 20);
+        }
+        if (cactus.type === 1) {
+            // Right arm
+            ctx.fillRect(cactus.x + cactus.width, cactus.y + 25, 15, 10);
+            ctx.fillRect(cactus.x + cactus.width + 5, cactus.y + 15, 10, 20);
+        }
+        if (cactus.type === 2) {
+            // Both arms
+            ctx.fillRect(cactus.x - 15, cactus.y + 20, 15, 10);
+            ctx.fillRect(cactus.x + cactus.width, cactus.y + 25, 15, 10);
+        }
+        
+        // Cactus spines
+        ctx.strokeStyle = '#1F5F1F';
+        ctx.lineWidth = 1;
+        for (let i = 0; i < 5; i++) {
+            ctx.beginPath();
+            ctx.moveTo(cactus.x + Math.random() * cactus.width, cactus.y + Math.random() * cactus.height);
+            ctx.lineTo(cactus.x + Math.random() * cactus.width, cactus.y + Math.random() * cactus.height);
+            ctx.stroke();
+        }
+    }
+    
+    function drawPistolero(entity, isPlayer = false) {
+        ctx.save();
+        
+        // Calculate angle to mouse for player
+        let angle = 0;
+        if (isPlayer) {
+            angle = Math.atan2(game.mouseY - entity.y, game.mouseX - entity.x);
+        } else {
+            angle = Math.atan2(game.player.y - entity.y, game.player.x - entity.x);
+        }
+        
+        // Draw shadow
+        ctx.fillStyle = 'rgba(0,0,0,0.3)';
+        ctx.beginPath();
+        ctx.ellipse(entity.x, entity.y + entity.height/2 + 10, entity.width/2, 10, 0, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Draw body
+        ctx.fillStyle = entity.color;
+        ctx.fillRect(entity.x - entity.width/2, entity.y - entity.height/2, entity.width, entity.height);
+        
+        // Draw hat
+        ctx.fillStyle = entity.color === '#000' ? '#000' : '#8B4513';
+        ctx.fillRect(entity.x - entity.width/2 - 5, entity.y - entity.height/2 - 5, entity.width + 10, 10);
+        ctx.fillRect(entity.x - entity.width/4, entity.y - entity.height/2 - 15, entity.width/2, 15);
+        
+        // Draw gun
+        ctx.strokeStyle = '#444';
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(entity.x, entity.y);
+        ctx.lineTo(entity.x + Math.cos(angle) * 30, entity.y + Math.sin(angle) * 30);
+        ctx.stroke();
+        
+        // Draw gun flash if shooting
+        if (entity.shooting) {
+            ctx.fillStyle = '#FFD700';
+            ctx.beginPath();
+            ctx.arc(entity.x + Math.cos(angle) * 35, entity.y + Math.sin(angle) * 35, 10, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        
+        // Health bar
+        if (entity.health < entity.maxHealth) {
+            ctx.fillStyle = 'red';
+            ctx.fillRect(entity.x - 25, entity.y - entity.height/2 - 20, 50, 5);
+            ctx.fillStyle = 'green';
+            ctx.fillRect(entity.x - 25, entity.y - entity.height/2 - 20, 50 * (entity.health / entity.maxHealth), 5);
+        }
+        
+        ctx.restore();
+    }
+    
+    function drawBullet(bullet) {
+        ctx.fillStyle = '#FFD700';
+        ctx.beginPath();
+        ctx.arc(bullet.x, bullet.y, 3, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Bullet trail
+        ctx.strokeStyle = 'rgba(255, 215, 0, 0.5)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(bullet.x, bullet.y);
+        ctx.lineTo(bullet.x - bullet.vx * 2, bullet.y - bullet.vy * 2);
+        ctx.stroke();
+    }
+    
+    function drawParticle(particle) {
+        ctx.fillStyle = particle.color;
+        ctx.globalAlpha = particle.life;
+        ctx.fillRect(particle.x, particle.y, particle.size, particle.size);
+        ctx.globalAlpha = 1;
+    }
+    
+    function drawSpecialPortal(portal) {
+        ctx.save();
+        
+        // Portal glow effect
+        const gradient = ctx.createRadialGradient(portal.x, portal.y, 0, portal.x, portal.y, portal.radius * 2);
+        gradient.addColorStop(0, 'rgba(148, 0, 211, 0.8)');
+        gradient.addColorStop(0.5, 'rgba(148, 0, 211, 0.4)');
+        gradient.addColorStop(1, 'rgba(148, 0, 211, 0)');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(portal.x - portal.radius * 2, portal.y - portal.radius * 2, portal.radius * 4, portal.radius * 4);
+        
+        // Rotating portal
+        ctx.translate(portal.x, portal.y);
+        ctx.rotate(portal.rotation);
+        
+        // Portal rings
+        for (let i = 0; i < 3; i++) {
+            ctx.strokeStyle = portal.color;
+            ctx.lineWidth = 3 - i;
+            ctx.globalAlpha = 1 - i * 0.3;
+            ctx.beginPath();
+            ctx.arc(0, 0, portal.radius - i * 10, 0, Math.PI * 2);
+            ctx.stroke();
+        }
+        
+        ctx.restore();
+        
+        // Portal label
+        ctx.fillStyle = portal.color;
+        ctx.font = 'bold 16px Courier New';
+        ctx.textAlign = 'center';
+        ctx.fillText(portal.label, portal.x, portal.y - portal.radius - 10);
+        
+        // Portal particles
+        for (const particle of portal.particles) {
+            ctx.fillStyle = particle.color;
+            ctx.globalAlpha = particle.life;
+            ctx.fillRect(particle.x, particle.y, 3, 3);
+        }
+        ctx.globalAlpha = 1;
+        
+        portal.rotation += 0.02;
+        
+        // Generate portal particles
+        if (Math.random() < 0.3) {
+            const angle = Math.random() * Math.PI * 2;
+            portal.particles.push({
+                x: portal.x + Math.cos(angle) * portal.radius,
+                y: portal.y + Math.sin(angle) * portal.radius,
+                vx: Math.cos(angle) * 2,
+                vy: Math.sin(angle) * 2,
+                life: 1,
+                color: '#9400D3'
+            });
+        }
+        
+        // Update portal particles
+        for (let i = portal.particles.length - 1; i >= 0; i--) {
+            const p = portal.particles[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            p.life -= 0.02;
+            if (p.life <= 0) {
+                portal.particles.splice(i, 1);
+            }
+        }
+    }
+    
+    // Game mechanics
+    function spawnEnemy() {
+        const side = Math.random() < 0.5 ? 0 : canvas.width;
+        const enemyTypes = ['clint', 'colt', 'django'];
+        const type = enemyTypes[Math.floor(Math.random() * enemyTypes.length)];
+        const config = pistoleros[type];
+        
+        game.enemies.push({
+            x: side,
+            y: 200 + Math.random() * 200,
+            vx: side === 0 ? 1 : -1,
+            vy: 0,
+            width: 40,
+            height: 60,
+            health: 80,
+            maxHealth: 80,
+            hero: type,
+            color: config.color,
+            speed: config.speed * 0.7,
+            lastShot: 0,
+            fireRate: config.fireRate * 1.5
+        });
+    }
+    
+    function createParticles(x, y, color, count = 10) {
+        for (let i = 0; i < count; i++) {
+            game.particles.push({
+                x: x,
+                y: y,
+                vx: (Math.random() - 0.5) * 5,
+                vy: (Math.random() - 0.5) * 5,
+                size: Math.random() * 4 + 2,
+                color: color,
+                life: 1
+            });
+        }
+    }
+    
+    function checkCollision(a, b) {
+        return Math.abs(a.x - b.x) < (a.width + b.width) / 2 &&
+               Math.abs(a.y - b.y) < (a.height + b.height) / 2;
+    }
+    
+    function updatePlayer() {
+        // Movement
+        if (game.keys['w'] || game.keys['W'] || game.keys['ArrowUp']) game.player.vy = -game.player.speed;
+        else if (game.keys['s'] || game.keys['S'] || game.keys['ArrowDown']) game.player.vy = game.player.speed;
+        else game.player.vy = 0;
+        
+        if (game.keys['a'] || game.keys['A'] || game.keys['ArrowLeft']) game.player.vx = -game.player.speed;
+        else if (game.keys['d'] || game.keys['D'] || game.keys['ArrowRight']) game.player.vx = game.player.speed;
+        else game.player.vx = 0;
+        
+        // Update position
+        game.player.x += game.player.vx;
+        game.player.y += game.player.vy;
+        
+        // Boundaries
+        game.player.x = Math.max(game.player.width/2, Math.min(canvas.width - game.player.width/2, game.player.x));
+        game.player.y = Math.max(game.player.height/2, Math.min(canvas.height - game.player.height/2, game.player.y));
+        
+        // Check cactus collisions
+        for (const cactus of game.cacti) {
+            if (checkCollision(game.player, cactus)) {
+                game.player.x -= game.player.vx;
+                game.player.y -= game.player.vy;
+            }
+        }
+        
+        // Reload
+        if (game.keys['r'] || game.keys['R']) {
+            if (game.player.ammo < game.player.maxAmmo && !game.player.reloading) {
+                game.player.reloading = true;
+                game.player.reloadTime = 2000;
+            }
+        }
+        
+        if (game.player.reloading) {
+            game.player.reloadTime -= 16;
+            if (game.player.reloadTime <= 0) {
+                game.player.ammo = game.player.maxAmmo;
+                game.player.reloading = false;
+            }
+        }
+        
+        // Check special portal collision
+        if (game.specialPortal) {
+            const dx = game.player.x - game.specialPortal.x;
+            const dy = game.player.y - game.specialPortal.y;
+            if (Math.sqrt(dx * dx + dy * dy) < game.specialPortal.radius + game.player.width/2) {
+                // Player enters portal - teleport back to Vince map!
+                createParticles(game.player.x, game.player.y, '#9400D3', 50);
+                setTimeout(() => {
+                    window.location.href = game.specialPortal.destination;
+                }, 500);
+            }
+        }
+    }
+    
+    function updateEnemies() {
+        for (let i = game.enemies.length - 1; i >= 0; i--) {
+            const enemy = game.enemies[i];
+            
+            // AI movement
+            const dx = game.player.x - enemy.x;
+            const dy = game.player.y - enemy.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            
+            if (dist > 200) {
+                enemy.vx = (dx / dist) * enemy.speed;
+                enemy.vy = (dy / dist) * enemy.speed;
+            } else {
+                enemy.vx *= 0.9;
+                enemy.vy *= 0.9;
+                
+                // Shoot at player
+                if (Date.now() - enemy.lastShot > enemy.fireRate) {
+                    const angle = Math.atan2(dy, dx);
+                    game.bullets.push({
+                        x: enemy.x,
+                        y: enemy.y,
+                        vx: Math.cos(angle) * 10,
+                        vy: Math.sin(angle) * 10,
+                        damage: 10,
+                        isEnemy: true
+                    });
+                    enemy.lastShot = Date.now();
+                    enemy.shooting = true;
+                    setTimeout(() => enemy.shooting = false, 100);
+                }
+            }
+            
+            enemy.x += enemy.vx;
+            enemy.y += enemy.vy;
+            
+            // Check cactus collisions
+            for (const cactus of game.cacti) {
+                if (checkCollision(enemy, cactus)) {
+                    enemy.x -= enemy.vx;
+                    enemy.y -= enemy.vy;
+                }
+            }
+            
+            // Remove dead enemies
+            if (enemy.health <= 0) {
+                createParticles(enemy.x, enemy.y, '#8B0000', 20);
+                game.score += 100;
+                game.enemies.splice(i, 1);
+            }
+        }
+    }
+    
+    function updateBullets() {
+        for (let i = game.bullets.length - 1; i >= 0; i--) {
+            const bullet = game.bullets[i];
+            
+            bullet.x += bullet.vx;
+            bullet.y += bullet.vy;
+            
+            // Check boundaries
+            if (bullet.x < 0 || bullet.x > canvas.width || bullet.y < 0 || bullet.y > canvas.height) {
+                game.bullets.splice(i, 1);
+                continue;
+            }
+            
+            // Check cactus collisions
+            for (const cactus of game.cacti) {
+                if (Math.abs(bullet.x - cactus.x - cactus.width/2) < cactus.width/2 &&
+                    Math.abs(bullet.y - cactus.y - cactus.height/2) < cactus.height/2) {
+                    createParticles(bullet.x, bullet.y, '#228B22', 5);
+                    game.bullets.splice(i, 1);
+                    continue;
+                }
+            }
+            
+            // Check hits
+            if (bullet.isEnemy) {
+                if (Math.abs(bullet.x - game.player.x) < game.player.width/2 &&
+                    Math.abs(bullet.y - game.player.y) < game.player.height/2) {
+                    game.player.health -= bullet.damage;
+                    createParticles(bullet.x, bullet.y, '#8B0000', 10);
+                    game.bullets.splice(i, 1);
+                }
+            } else {
+                for (const enemy of game.enemies) {
+                    if (Math.abs(bullet.x - enemy.x) < enemy.width/2 &&
+                        Math.abs(bullet.y - enemy.y) < enemy.height/2) {
+                        enemy.health -= bullet.damage;
+                        createParticles(bullet.x, bullet.y, '#8B0000', 10);
+                        game.bullets.splice(i, 1);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    
+    function updateParticles() {
+        for (let i = game.particles.length - 1; i >= 0; i--) {
+            const particle = game.particles[i];
+            
+            particle.x += particle.vx;
+            particle.y += particle.vy;
+            particle.vy += 0.2; // Gravity
+            particle.life -= 0.02;
+            
+            if (particle.life <= 0) {
+                game.particles.splice(i, 1);
+            }
+        }
+    }
+    
+    // Backend integration
+    let backendConnected = false;
+    
+    async function syncWithBackend() {
+        try {
+            const response = await fetch('http://localhost:8080/api/units/health');
+            if (response.ok) {
+                backendConnected = true;
+                document.getElementById('backendStatus').className = 'connected';
+                document.getElementById('status').textContent = 'Connecté';
+                
+                // Send game state
+                await fetch('http://localhost:8080/api/game/duel-update', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        player: {
+                            x: game.player.x,
+                            y: game.player.y,
+                            health: game.player.health,
+                            hero: game.player.hero
+                        },
+                        enemies: game.enemies.length,
+                        score: game.score
+                    })
+                });
+            }
+        } catch (error) {
+            backendConnected = false;
+            document.getElementById('backendStatus').className = 'disconnected';
+            document.getElementById('status').textContent = 'Déconnecté';
+        }
+    }
+    
+    // Game loop
+    function gameLoop() {
+        // Clear canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Draw everything
+        drawDesert();
+        
+        // Draw cacti
+        for (const cactus of game.cacti) {
+            drawCactus(cactus);
+        }
+        
+        // Draw special portal
+        if (game.specialPortal) {
+            drawSpecialPortal(game.specialPortal);
+        }
+        
+        // Update and draw particles
+        updateParticles();
+        for (const particle of game.particles) {
+            drawParticle(particle);
+        }
+        
+        // Update and draw bullets
+        updateBullets();
+        for (const bullet of game.bullets) {
+            drawBullet(bullet);
+        }
+        
+        // Update and draw enemies
+        updateEnemies();
+        for (const enemy of game.enemies) {
+            drawPistolero(enemy, false);
+        }
+        
+        // Update and draw player
+        updatePlayer();
+        drawPistolero(game.player, true);
+        
+        // Update UI
+        document.getElementById('playerName').textContent = pistoleros[game.player.hero].name;
+        document.getElementById('health').textContent = Math.max(0, game.player.health);
+        document.getElementById('ammo').textContent = game.player.ammo;
+        document.getElementById('score').textContent = game.score;
+        document.getElementById('enemies').textContent = game.enemies.length;
+        
+        // Game over
+        if (game.player.health <= 0) {
+            ctx.fillStyle = 'rgba(0,0,0,0.7)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#FFD700';
+            ctx.font = '48px Courier New';
+            ctx.textAlign = 'center';
+            ctx.fillText('GAME OVER', canvas.width/2, canvas.height/2);
+            ctx.font = '24px Courier New';
+            ctx.fillText('Score: ' + game.score, canvas.width/2, canvas.height/2 + 50);
+            return;
+        }
+        
+        requestAnimationFrame(gameLoop);
+    }
+    
+    // Event listeners
+    canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        game.mouseX = e.clientX - rect.left;
+        game.mouseY = e.clientY - rect.top;
+    });
+    
+    canvas.addEventListener('click', () => {
+        if (game.player.ammo > 0 && !game.player.reloading && game.player.health > 0) {
+            const angle = Math.atan2(game.mouseY - game.player.y, game.mouseX - game.player.x);
+            const config = pistoleros[game.player.hero];
+            
+            game.bullets.push({
+                x: game.player.x,
+                y: game.player.y,
+                vx: Math.cos(angle) * 15,
+                vy: Math.sin(angle) * 15,
+                damage: config.damage,
+                isEnemy: false
+            });
+            
+            game.player.ammo--;
+            game.player.shooting = true;
+            setTimeout(() => game.player.shooting = false, 100);
+            
+            createParticles(
+                game.player.x + Math.cos(angle) * 30,
+                game.player.y + Math.sin(angle) * 30,
+                '#FFD700',
+                5
+            );
+        }
+    });
+    
+    window.addEventListener('keydown', (e) => {
+        game.keys[e.key] = true;
+    });
+    
+    window.addEventListener('keyup', (e) => {
+        game.keys[e.key] = false;
+    });
+    
+    // Pistolero selection
+    document.querySelectorAll('.pistolero-select').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const hero = e.target.dataset.hero;
+            const config = pistoleros[hero];
+            
+            // Update player
+            game.player.hero = hero;
+            game.player.color = config.color;
+            game.player.speed = config.speed;
+            
+            // Update UI
+            document.querySelectorAll('.pistolero-select').forEach(b => b.classList.remove('selected'));
+            e.target.classList.add('selected');
+        });
+    });
+    
+    // Initialize game
+    generateDesert();
+    
+    // Spawn enemies periodically
+    setInterval(() => {
+        if (game.enemies.length < 5 && game.player.health > 0) {
+            spawnEnemy();
+        }
+    }, 3000);
+    
+    // Sync with backend
+    setInterval(syncWithBackend, 1000);
+    
+    // Start game
+    gameLoop();
+    </script>
+</body>
+</html> 

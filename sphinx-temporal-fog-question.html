@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔮 Sphinx Question - Brouillard Temporel</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1a0033 0%, #330066 50%, #660099 100%);
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+            max-width: 1200px;
+            padding: 40px;
+        }
+
+        .sphinx-header {
+            font-size: 48px;
+            color: #ffd700;
+            text-shadow: 0 0 30px #ffd700;
+            margin-bottom: 30px;
+            animation: sphinx-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes sphinx-glow {
+            0%, 100% { text-shadow: 0 0 30px #ffd700; }
+            50% { text-shadow: 0 0 50px #ffd700, 0 0 70px #ffd700; }
+        }
+
+        .question-box {
+            background: rgba(255, 215, 0, 0.1);
+            border: 3px solid #ffd700;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, #ffd700, transparent);
+            animation: rotate 8s linear infinite;
+            opacity: 0.1;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .question-text {
+            font-size: 24px;
+            color: #ffd700;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .fog-simulation {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .observer-panel {
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid #0ff;
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+        }
+
+        .observer-title {
+            font-size: 20px;
+            color: #0ff;
+            margin-bottom: 20px;
+        }
+
+        .observer-status {
+            font-size: 16px;
+            color: #fff;
+            margin: 10px 0;
+        }
+
+        .fog-visualization {
+            background: rgba(255, 0, 255, 0.1);
+            border: 2px solid #f0f;
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fog-title {
+            font-size: 20px;
+            color: #f0f;
+            margin-bottom: 20px;
+        }
+
+        .fog-canvas {
+            width: 100%;
+            height: 200px;
+            background: #000;
+            border: 1px solid #f0f;
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .fog-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 0%, rgba(255, 0, 255, 0.3) 50%, rgba(255, 0, 255, 0.8) 100%);
+            transition: all 2s ease;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .control-button {
+            background: linear-gradient(45deg, #ffd700, #ff0);
+            color: #000;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+
+        .control-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px #ffd700;
+        }
+
+        .control-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .time-display {
+            font-size: 18px;
+            color: #0ff;
+            margin: 20px 0;
+        }
+
+        .sphinx-answer {
+            background: rgba(255, 215, 0, 0.2);
+            border: 2px solid #ffd700;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .sphinx-answer.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .answer-text {
+            font-size: 20px;
+            color: #ffd700;
+            line-height: 1.6;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ffd700;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            50% { transform: translateY(-100px) rotate(180deg); opacity: 1; }
+        }
+
+        .quantum-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border: 3px solid #0ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #0ff;
+            animation: quantum-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes quantum-pulse {
+            0%, 100% { box-shadow: 0 0 20px #0ff; }
+            50% { box-shadow: 0 0 40px #0ff, 0 0 60px #0ff; }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    <div class="quantum-indicator">🔮</div>
+
+    <div class="container">
+        <div class="sphinx-header">🔮 SPHINX QUESTION 🔮</div>
+        
+        <div class="question-box">
+            <div class="question-text">
+                "Si deux observateurs ne font RIEN, le brouillard temporel évolue-t-il lentement ?<br>
+                Croissance lente ? Retrait lent ?"
+            </div>
+        </div>
+
+        <div class="fog-simulation">
+            <div class="observer-panel">
+                <div class="observer-title">👁️ Observateur Alpha</div>
+                <div class="observer-status" id="observer1-status">Statut: INERTE</div>
+                <div class="observer-status">Action: AUCUNE</div>
+                <div class="observer-status">Temps: <span id="observer1-time">0</span>s</div>
+            </div>
+
+            <div class="observer-panel">
+                <div class="observer-title">👁️ Observateur Beta</div>
+                <div class="observer-status" id="observer2-status">Statut: INERTE</div>
+                <div class="observer-status">Action: AUCUNE</div>
+                <div class="observer-status">Temps: <span id="observer2-time">0</span>s</div>
+            </div>
+        </div>
+
+        <div class="fog-visualization">
+            <div class="fog-title">🌫️ Brouillard Temporel</div>
+            <div class="fog-canvas" id="fogCanvas">
+                <div class="fog-layer" id="fogLayer"></div>
+            </div>
+            <div class="time-display">
+                Temps écoulé: <span id="elapsed-time">0</span>s | 
+                Évolution: <span id="fog-evolution">STABLE</span>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="control-button" onclick="startSimulation()">🚀 DÉMARRER SIMULATION</button>
+            <button class="control-button" onclick="resetSimulation()">🔄 RÉINITIALISER</button>
+            <button class="control-button" onclick="showSphinxAnswer()">🔮 RÉPONSE SPHINX</button>
+        </div>
+
+        <div class="sphinx-answer" id="sphinxAnswer">
+            <div class="answer-text">
+                <strong>🔮 RÉPONSE SPHINX :</strong><br><br>
+                
+                "Le brouillard temporel évolue MÊME avec des observateurs inertes !<br><br>
+                
+                <strong>Croissance lente :</strong> Le temps s'écoule, les possibilités futures s'éloignent<br>
+                <strong>Retrait lent :</strong> Les événements passés deviennent plus flous, moins accessibles<br><br>
+                
+                <em>L'inertie des observateurs ne bloque PAS l'évolution temporelle.<br>
+                Le brouillard grandit et se retire selon sa propre logique quantique.</em>"
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let simulationRunning = false;
+        let elapsedTime = 0;
+        let fogIntensity = 0.5;
+        let fogGrowth = 0.01;
+        let fogRetreat = 0.005;
+
+        // Créer les particules
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Simulation du brouillard
+        function updateFog() {
+            const fogLayer = document.getElementById('fogLayer');
+            const elapsedTimeSpan = document.getElementById('elapsed-time');
+            const fogEvolutionSpan = document.getElementById('fog-evolution');
+
+            if (simulationRunning) {
+                elapsedTime += 0.1;
+                elapsedTimeSpan.textContent = elapsedTime.toFixed(1);
+
+                // Évolution du brouillard
+                fogIntensity += fogGrowth - fogRetreat;
+                fogIntensity = Math.max(0.1, Math.min(0.9, fogIntensity));
+
+                // Appliquer l'évolution visuelle
+                fogLayer.style.background = `radial-gradient(circle, transparent 0%, rgba(255, 0, 255, ${fogIntensity * 0.3}) 50%, rgba(255, 0, 255, ${fogIntensity * 0.8}) 100%)`;
+
+                // Déterminer l'évolution
+                let evolution = 'STABLE';
+                if (fogIntensity > 0.6) evolution = 'CROISSANCE';
+                else if (fogIntensity < 0.4) evolution = 'RETRAIT';
+                else evolution = 'ÉQUILIBRE';
+
+                fogEvolutionSpan.textContent = evolution;
+
+                // Mise à jour des temps des observateurs
+                document.getElementById('observer1-time').textContent = elapsedTime.toFixed(1);
+                document.getElementById('observer2-time').textContent = elapsedTime.toFixed(1);
+            }
+        }
+
+        function startSimulation() {
+            if (!simulationRunning) {
+                simulationRunning = true;
+                document.getElementById('observer1-status').textContent = 'Statut: INERTE (SIMULATION)';
+                document.getElementById('observer2-status').textContent = 'Statut: INERTE (SIMULATION)';
+                
+                // Démarrer la boucle de simulation
+                const simulationInterval = setInterval(() => {
+                    if (simulationRunning) {
+                        updateFog();
+                    } else {
+                        clearInterval(simulationInterval);
+                    }
+                }, 100);
+            }
+        }
+
+        function resetSimulation() {
+            simulationRunning = false;
+            elapsedTime = 0;
+            fogIntensity = 0.5;
+            
+            document.getElementById('elapsed-time').textContent = '0';
+            document.getElementById('fog-evolution').textContent = 'STABLE';
+            document.getElementById('observer1-status').textContent = 'Statut: INERTE';
+            document.getElementById('observer2-status').textContent = 'Statut: INERTE';
+            document.getElementById('observer1-time').textContent = '0';
+            document.getElementById('observer2-time').textContent = '0';
+            
+            const fogLayer = document.getElementById('fogLayer');
+            fogLayer.style.background = `radial-gradient(circle, transparent 0%, rgba(255, 0, 255, 0.3) 50%, rgba(255, 0, 255, 0.8) 100%)`;
+        }
+
+        function showSphinxAnswer() {
+            const answer = document.getElementById('sphinxAnswer');
+            answer.classList.add('show');
+            
+            // Animation des particules dorées
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.animationDuration = '3s';
+                    document.getElementById('particles').appendChild(particle);
+                    
+                    setTimeout(() => particle.remove(), 3000);
+                }, i * 100);
+            }
+        }
+
+        // Initialisation
+        createParticles();
+        resetSimulation();
+    </script>
+</body>
+</html> 

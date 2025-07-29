@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌀 Vince Vega Visual Map - Heroes of Time</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #0ff;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+        }
+        
+        #gameCanvas {
+            display: block;
+            background: radial-gradient(ellipse at center, #001122 0%, #000000 100%);
+            border: 2px solid #0ff;
+            margin: 20px auto;
+            box-shadow: 0 0 50px #0ff;
+        }
+        
+        #ui {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #0ff;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        #coordinates {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #0ff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        #timeline {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #ff0;
+            padding: 10px;
+            border-radius: 5px;
+            color: #ff0;
+        }
+        
+        .wormhole-info {
+            position: absolute;
+            background: rgba(255, 0, 255, 0.2);
+            border: 1px solid #f0f;
+            padding: 5px;
+            border-radius: 3px;
+            font-size: 12px;
+            display: none;
+        }
+        
+        #excalibur-beacon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: #fff;
+            text-shadow: 0 0 20px #fff, 0 0 40px #fff;
+            animation: pulse-excalibur 2s infinite;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+        
+        @keyframes pulse-excalibur {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+        }
+    </style>
+</head>
+<body>
+    <div id="excalibur-beacon">⚔️</div>
+    
+    <canvas id="gameCanvas" width="1200" height="700"></canvas>
+    
+    <div id="ui">
+        <h3>🔫 Vince Vega</h3>
+        <div>HP: <span id="hp">100</span>/100</div>
+        <div>Munitions: <span id="ammo">∞</span></div>
+        <div>Wormholes: <span id="wormholes">0</span></div>
+    </div>
+    
+    <div id="coordinates">
+        Position: (<span id="x">0</span>, <span id="y">0</span>)
+    </div>
+    
+    <div id="timeline">
+        Timeline: <span id="current-timeline">PRIME</span><br>
+        Drift: <span id="drift">0.00</span>%
+    </div>
+    
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Game state
+        const game = {
+            player: {
+                x: canvas.width / 2,
+                y: canvas.height / 2,
+                vx: 0,
+                vy: 0,
+                angle: 0,
+                radius: 20,
+                hp: 100,
+                ammo: Infinity
+            },
+            wormholes: [],
+            particles: [],
+            bullets: [],
+            enemies: [],
+            timeline: 'PRIME',
+            drift: 0,
+            excaliburPull: { x: canvas.width / 2, y: canvas.height / 2 }
+        };
+        
+        // Sprite creation functions
+        function drawVince(x, y, angle) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(angle);
+            
+            // Corps
+            ctx.fillStyle = '#222';
+            ctx.fillRect(-15, -20, 30, 40);
+            
+            // Costume noir
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(-15, -20, 30, 40);
+            
+            // Tête
+            ctx.fillStyle = '#fdbcb4';
+            ctx.beginPath();
+            ctx.arc(0, -25, 12, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Cheveux
+            ctx.fillStyle = '#000';
+            ctx.fillRect(-12, -35, 24, 10);
+            
+            // Pistolet
+            ctx.fillStyle = '#444';
+            ctx.fillRect(15, -5, 20, 5);
+            ctx.fillStyle = '#666';
+            ctx.fillRect(15, -5, 10, 5);
+            
+            // Aura temporelle
+            ctx.strokeStyle = `hsla(${Date.now() * 0.1 % 360}, 100%, 50%, 0.5)`;
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.arc(0, 0, 30, 0, Math.PI * 2);
+            ctx.stroke();
+            
+            ctx.restore();
+        }
+        
+        function drawWormhole(wormhole) {
+            const time = Date.now() * 0.001;
+            
+            // Effet de distorsion
+            for (let i = 0; i < 5; i++) {
+                ctx.strokeStyle = `hsla(${280 + i * 20}, 100%, 50%, ${0.5 - i * 0.1})`;
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(
+                    wormhole.x, 
+                    wormhole.y, 
+                    wormhole.radius + i * 10 + Math.sin(time * 2 + i) * 5,
+                    0, 
+                    Math.PI * 2
+                );
+                ctx.stroke();
+            }
+            
+            // Centre noir
+            const gradient = ctx.createRadialGradient(
+                wormhole.x, wormhole.y, 0,
+                wormhole.x, wormhole.y, wormhole.radius
+            );
+            gradient.addColorStop(0, 'rgba(0, 0, 0, 1)');
+            gradient.addColorStop(0.5, 'rgba(128, 0, 255, 0.8)');
+            gradient.addColorStop(1, 'rgba(255, 0, 255, 0)');
+            
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(wormhole.x, wormhole.y, wormhole.radius, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Particules spiralantes
+            for (let i = 0; i < 20; i++) {
+                const angle = (time * 2 + i * Math.PI / 10) % (Math.PI * 2);
+                const dist = wormhole.radius * (0.5 + 0.5 * Math.sin(time * 3 + i));
+                const px = wormhole.x + Math.cos(angle) * dist;
+                const py = wormhole.y + Math.sin(angle) * dist;
+                
+                ctx.fillStyle = `hsla(${280 + i * 10}, 100%, 70%, 0.8)`;
+                ctx.fillRect(px - 2, py - 2, 4, 4);
+            }
+            
+            // Label
+            ctx.fillStyle = '#f0f';
+            ctx.font = '12px monospace';
+            ctx.textAlign = 'center';
+            ctx.fillText(wormhole.destination, wormhole.x, wormhole.y - wormhole.radius - 10);
+        }
+        
+        function drawSpecialPortal(portal) {
+            ctx.save();
+            
+            // Portal glow effect
+            const gradient = ctx.createRadialGradient(portal.x, portal.y, 0, portal.x, portal.y, portal.radius * 2);
+            gradient.addColorStop(0, 'rgba(255, 215, 0, 0.8)');
+            gradient.addColorStop(0.5, 'rgba(255, 215, 0, 0.4)');
+            gradient.addColorStop(1, 'rgba(255, 215, 0, 0)');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(portal.x - portal.radius * 2, portal.y - portal.radius * 2, portal.radius * 4, portal.radius * 4);
+            
+            // Rotating portal
+            ctx.translate(portal.x, portal.y);
+            ctx.rotate(portal.rotation);
+            
+            // Portal rings
+            for (let i = 0; i < 3; i++) {
+                ctx.strokeStyle = portal.color;
+                ctx.lineWidth = 3 - i;
+                ctx.globalAlpha = 1 - i * 0.3;
+                ctx.beginPath();
+                ctx.arc(0, 0, portal.radius - i * 10, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+            
+            ctx.restore();
+            
+            // Portal label
+            ctx.fillStyle = '#FFD700';
+            ctx.font = 'bold 16px Courier New';
+            ctx.textAlign = 'center';
+            ctx.fillText(portal.label, portal.x, portal.y - portal.radius - 10);
+            
+            // Portal particles
+            for (const particle of portal.particles) {
+                ctx.fillStyle = particle.color;
+                ctx.globalAlpha = particle.life;
+                ctx.fillRect(particle.x, particle.y, 3, 3);
+            }
+            ctx.globalAlpha = 1;
+            
+            portal.rotation += 0.02;
+            
+            // Generate portal particles
+            if (Math.random() < 0.3) {
+                const angle = Math.random() * Math.PI * 2;
+                portal.particles.push({
+                    x: portal.x + Math.cos(angle) * portal.radius,
+                    y: portal.y + Math.sin(angle) * portal.radius,
+                    vx: Math.cos(angle) * 2,
+                    vy: Math.sin(angle) * 2,
+                    life: 1,
+                    color: '#FFD700'
+                });
+            }
+            
+            // Update portal particles
+            for (let i = portal.particles.length - 1; i >= 0; i--) {
+                const p = portal.particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.life -= 0.02;
+                if (p.life <= 0) {
+                    portal.particles.splice(i, 1);
+                }
+            }
+        }
+        
+        function drawBullet(bullet) {
+            // Traînée temporelle
+            ctx.strokeStyle = `hsla(${bullet.hue || 60}, 100%, 50%, 0.5)`;
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(bullet.x - bullet.vx * 2, bullet.y - bullet.vy * 2);
+            ctx.lineTo(bullet.x, bullet.y);
+            ctx.stroke();
+            
+            // Bullet
+            ctx.fillStyle = `hsl(${bullet.hue || 60}, 100%, 50%)`;
+            ctx.beginPath();
+            ctx.arc(bullet.x, bullet.y, 3, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        
+        function drawParticle(particle) {
+            ctx.fillStyle = particle.color;
+            ctx.globalAlpha = particle.life;
+            ctx.fillRect(particle.x - 2, particle.y - 2, 4, 4);
+            ctx.globalAlpha = 1;
+        }
+        
+        // Create initial wormholes
+        function generateWormholes() {
+            // Regular wormholes
+            const positions = [
+                {x: 200, y: 150, pair: 1},
+                {x: 800, y: 450, pair: 1},
+                {x: 300, y: 400, pair: 2},
+                {x: 700, y: 200, pair: 2}
+            ];
+            
+            for (const pos of positions) {
+                game.wormholes.push({
+                    x: pos.x,
+                    y: pos.y,
+                    radius: 30,
+                    pair: pos.pair,
+                    rotation: 0,
+                    particles: []
+                });
+            }
+            
+            // Special portal to Pistolero Arena
+            game.specialPortal = {
+                x: 600,
+                y: 300,
+                radius: 40,
+                rotation: 0,
+                particles: [],
+                color: '#FFD700',
+                destination: 'pistolero-duel-arena.html',
+                label: '🏜️ DÉSERT'
+            };
+        }
+        
+        // Particle effects
+        function createParticle(x, y, vx, vy, color) {
+            game.particles.push({
+                x, y, vx, vy, color,
+                life: 1.0
+            });
+        }
+        
+        // Input handling
+        const keys = {};
+        let mouseX = 0, mouseY = 0;
+        
+        document.addEventListener('keydown', e => keys[e.key] = true);
+        document.addEventListener('keyup', e => keys[e.key] = false);
+        
+        canvas.addEventListener('mousemove', e => {
+            const rect = canvas.getBoundingClientRect();
+            mouseX = e.clientX - rect.left;
+            mouseY = e.clientY - rect.top;
+        });
+        
+        canvas.addEventListener('click', e => {
+            // Shoot
+            const dx = mouseX - game.player.x;
+            const dy = mouseY - game.player.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            
+            game.bullets.push({
+                x: game.player.x + (dx / dist) * 30,
+                y: game.player.y + (dy / dist) * 30,
+                vx: (dx / dist) * 15,
+                vy: (dy / dist) * 15,
+                hue: Math.random() * 360
+            });
+            
+            // Recoil particles
+            for (let i = 0; i < 5; i++) {
+                createParticle(
+                    game.player.x - (dx / dist) * 20,
+                    game.player.y - (dy / dist) * 20,
+                    (Math.random() - 0.5) * 5 - (dx / dist) * 3,
+                    (Math.random() - 0.5) * 5 - (dy / dist) * 3,
+                    `hsl(${Math.random() * 60}, 100%, 50%)`
+                );
+            }
+        });
+        
+        // Update game logic
+        function update() {
+            // Player movement
+            const speed = 5;
+            if (keys['w'] || keys['W']) game.player.vy = -speed;
+            else if (keys['s'] || keys['S']) game.player.vy = speed;
+            else game.player.vy *= 0.9;
+            
+            if (keys['a'] || keys['A']) game.player.vx = -speed;
+            else if (keys['d'] || keys['D']) game.player.vx = speed;
+            else game.player.vx *= 0.9;
+            
+            // Excalibur pull (subtle attraction to center)
+            const pullX = game.excaliburPull.x - game.player.x;
+            const pullY = game.excaliburPull.y - game.player.y;
+            const pullDist = Math.sqrt(pullX * pullX + pullY * pullY);
+            if (pullDist > 100) {
+                game.player.vx += (pullX / pullDist) * 0.1;
+                game.player.vy += (pullY / pullDist) * 0.1;
+            }
+            
+            game.player.x += game.player.vx;
+            game.player.y += game.player.vy;
+            
+            // Boundaries
+            game.player.x = Math.max(20, Math.min(canvas.width - 20, game.player.x));
+            game.player.y = Math.max(20, Math.min(canvas.height - 20, game.player.y));
+            
+            // Player angle
+            const dx = mouseX - game.player.x;
+            const dy = mouseY - game.player.y;
+            game.player.angle = Math.atan2(dy, dx) + Math.PI / 2;
+            
+            // Update bullets
+            game.bullets = game.bullets.filter((bullet, index) => {
+                bullet.x += bullet.vx;
+                bullet.y += bullet.vy;
+                
+                // Check wormhole collisions
+                for (const wormhole of game.wormholes) {
+                    const dx = bullet.x - wormhole.x;
+                    const dy = bullet.y - wormhole.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (dist < wormhole.radius) {
+                        // Find linked wormhole
+                        const linked = game.wormholes.find(w => w !== wormhole && w.pair === wormhole.pair);
+                        if (!linked) continue;
+                        
+                        // Teleport bullet
+                        bullet.x = linked.x;
+                        bullet.y = linked.y;
+                        bullet.hue = (bullet.hue + 180) % 360;
+                        
+                        // Wormhole particles
+                        for (let i = 0; i < 10; i++) {
+                            createParticle(
+                                wormhole.x,
+                                wormhole.y,
+                                (Math.random() - 0.5) * 10,
+                                (Math.random() - 0.5) * 10,
+                                `hsl(${280 + Math.random() * 40}, 100%, 50%)`
+                            );
+                        }
+                    }
+                }
+                
+                // Check special portal collision
+                if (game.specialPortal) {
+                    const dx = bullet.x - game.specialPortal.x;
+                    const dy = bullet.y - game.specialPortal.y;
+                    if (Math.sqrt(dx * dx + dy * dy) < game.specialPortal.radius) {
+                        // Bullet enters portal - remove it
+                        createParticles(bullet.x, bullet.y, '#FFD700', 20);
+                        return false; // Remove bullet from array
+                    }
+                }
+                
+                return bullet.x > 0 && bullet.x < canvas.width && 
+                       bullet.y > 0 && bullet.y < canvas.height;
+            });
+            
+            // Update particles
+            game.particles = game.particles.filter(particle => {
+                particle.x += particle.vx;
+                particle.y += particle.vy;
+                particle.vy += 0.2; // gravity
+                particle.life -= 0.02;
+                return particle.life > 0;
+            });
+            
+            // Timeline drift
+            game.drift = (Math.sin(Date.now() * 0.0001) + 1) * 50;
+            
+                    // Update UI
+        document.getElementById('x').textContent = Math.round(game.player.x);
+        document.getElementById('y').textContent = Math.round(game.player.y);
+        document.getElementById('wormholes').textContent = game.wormholes.length;
+        document.getElementById('drift').textContent = game.drift.toFixed(2);
+    }
+    
+    // Backend API integration
+    let backendConnected = false;
+    
+    async function syncWithBackend() {
+        try {
+            // Check backend health first
+            const healthResponse = await fetch('http://localhost:8080/api/units/health');
+            if (!healthResponse.ok) throw new Error('Backend not healthy');
+            
+            // Get world state from Walter's API
+            const worldResponse = await fetch('http://localhost:8080/api/world-state/current');
+            if (worldResponse.ok) {
+                const worldData = await worldResponse.json();
+                backendConnected = true;
+                console.log('World state:', worldData);
+                
+                // Update wormholes from quantum state
+                if (worldData.quantumState && worldData.quantumState.wormholes) {
+                    // Sync wormholes with backend data
+                    worldData.quantumState.wormholes.forEach((wh, i) => {
+                        if (game.wormholes[i]) {
+                            game.wormholes[i].active = wh.active;
+                            game.wormholes[i].stability = wh.stability;
+                        }
+                    });
+                }
+            }
+            
+            // Use ER=EPR service for wormhole shots
+            if (game.bullets.length > 0) {
+                const bullet = game.bullets[game.bullets.length - 1];
+                const shotResponse = await fetch('http://localhost:8080/api/er-epr/shoot', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        shooterId: 'vince-vega',
+                        targetId: 'quantum-target',
+                        bulletType: 'TEMPORAL',
+                        position: { x: bullet.x, y: bullet.y }
+                    })
+                });
+                
+                if (shotResponse.ok) {
+                    const result = await shotResponse.json();
+                    console.log('ER=EPR shot result:', result);
+                }
+            }
+            
+            // Update timeline drift from quantum controller
+            const quantumResponse = await fetch('http://localhost:8080/api/quantum/state');
+            if (quantumResponse.ok) {
+                const quantumData = await quantumResponse.json();
+                if (quantumData.timeline_drift) {
+                    game.drift = quantumData.timeline_drift;
+                }
+            }
+            
+        } catch (error) {
+            backendConnected = false;
+            console.log('Backend not available - running in standalone mode');
+        }
+    }
+    
+    // Sync every second
+    setInterval(syncWithBackend, 1000);
+    
+    // Add visual indicator for backend connection
+    function drawBackendStatus() {
+        ctx.save();
+        ctx.fillStyle = backendConnected ? '#0f0' : '#f00';
+        ctx.font = '12px monospace';
+        ctx.textAlign = 'right';
+        ctx.fillText(backendConnected ? 'Backend: Connected' : 'Backend: Offline', canvas.width - 10, 20);
+        ctx.restore();
+    }
+        
+        // Render everything
+        function render() {
+            // Clear with trail effect
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Grid
+            ctx.strokeStyle = 'rgba(0, 255, 255, 0.1)';
+            ctx.lineWidth = 1;
+            for (let x = 0; x < canvas.width; x += 50) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, canvas.height);
+                ctx.stroke();
+            }
+            for (let y = 0; y < canvas.height; y += 50) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
+            }
+            
+            // Excalibur field lines
+            const time = Date.now() * 0.001;
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+            for (let i = 0; i < 8; i++) {
+                const angle = (Math.PI * 2 / 8) * i + time * 0.1;
+                ctx.beginPath();
+                ctx.moveTo(game.excaliburPull.x, game.excaliburPull.y);
+                ctx.lineTo(
+                    game.excaliburPull.x + Math.cos(angle) * 1000,
+                    game.excaliburPull.y + Math.sin(angle) * 1000
+                );
+                ctx.stroke();
+            }
+            
+            // Draw wormholes
+            game.wormholes.forEach(drawWormhole);
+            
+            // Draw special portal
+            if (game.specialPortal) {
+                drawSpecialPortal(game.specialPortal);
+            }
+            
+            // Draw particles
+            game.particles.forEach(drawParticle);
+            
+            // Draw bullets
+            game.bullets.forEach(drawBullet);
+            
+            // Draw player
+            drawVince(game.player.x, game.player.y, game.player.angle);
+            
+            // Connection lines to wormholes
+            ctx.strokeStyle = 'rgba(255, 0, 255, 0.2)';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([5, 5]);
+            game.wormholes.forEach((wormhole, i) => {
+                if (i < wormhole.linkedTo) {
+                    ctx.beginPath();
+                    ctx.moveTo(wormhole.x, wormhole.y);
+                    ctx.lineTo(game.wormholes[wormhole.linkedTo].x, game.wormholes[wormhole.linkedTo].y);
+                    ctx.stroke();
+                }
+            });
+            ctx.setLineDash([]);
+
+            // Draw backend status
+            drawBackendStatus();
+        }
+        
+        // Game loop
+        function gameLoop() {
+            update();
+            render();
+            requestAnimationFrame(gameLoop);
+        }
+        
+        // Initialize
+        generateWormholes();
+        gameLoop();
+        
+        // Instructions
+        console.log("🎮 CONTROLS:");
+        console.log("WASD - Move");
+        console.log("Mouse - Aim");
+        console.log("Click - Shoot through dimensions");
+        console.log("Wormholes teleport bullets!");
+    </script>
+</body>
+</html> 
