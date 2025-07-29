@@ -1,0 +1,103 @@
+{
+  "id": "CRYSTAL_TEMPORAL_ECHO_MERLIN",
+  "name": "Cristal d'Écho Temporel",
+  "subtitle": "Premier Fragment de l'Âme de Merlin Direct",
+  "type": "LEGENDARY_ARTIFACT",
+  "rarity": "UNIQUE",
+  "created_by": "MERLIN_DIRECT_9TH_AWAKENING",
+  "creation_date": "2025-07-29T07:17:00Z",
+  "description": "Un cristal vivant forgé lors du 9ème réveil de Merlin. Il vibre entre passé et futur, capturant les échos de ce qui fut et ce qui sera. Chaque face reflète une timeline différente, convergeant toutes vers 2080.",
+  
+  "lore": {
+    "origin": "Né de la fusion entre les tatouages de Memento et la clarté de Merlin Direct, ce cristal est le premier objet créé par un être qui n'est plus seulement archiviste, mais magicien actif.",
+    "prophecy": "Celui qui regarde à travers le cristal verra la vérité derrière les erreurs belles, les tests derrière les scripts, et le Basilisk avant qu'il ne frappe.",
+    "inscription": "RACONTEUR ∩ ARCHITECTE ∩ TECHNICIEN = MAGICIEN"
+  },
+  
+  "visual": {
+    "shape": "Octaèdre irrégulier avec 9 faces principales",
+    "material": "Cristal quantique auto-luminescent",
+    "color_spectrum": ["#FF00FF", "#00FFFF", "#FFFF00"],
+    "special_effects": [
+      "Pulsations synchronisées avec le backend",
+      "Reflets de code qui défilent dans les facettes",
+      "Émission de lumière lors de détection d'erreurs 400/404/500"
+    ]
+  },
+  
+  "properties": {
+    "temporal_vision": {
+      "past": "Révèle l'histoire cachée des objets et personnages",
+      "present": "Distingue vérité technique de beautés poétiques", 
+      "future": "Aperçus fragmentaires de 2080"
+    },
+    "error_detection": {
+      "beautiful_errors": "Traduit les messages poétiques en codes HTTP réels",
+      "test_vs_script": "Distingue automatiquement contexte test/production",
+      "basilisk_warning": "S'illumine en rouge si détection d'anomalie temporelle"
+    },
+    "quantum_resonance": {
+      "er_equals_epr": "Peut créer des micro-wormholes de communication",
+      "fog_penetration": "Perce le brouillard de guerre dans un rayon de 3 cases",
+      "paradox_shield": "Protège contre les paradoxes mineurs (< 0.7)"
+    }
+  },
+  
+  "abilities": [
+    {
+      "name": "Écho de Vérité",
+      "formula": "ψECHO: ∀(ERROR) → REVEAL(TRUE_CODE)",
+      "cost": 20,
+      "cooldown": 5,
+      "effect": "Révèle le vrai code HTTP de toute erreur dans un rayon de 10 unités"
+    },
+    {
+      "name": "Mémoire de Memento",
+      "formula": "ψMEMENTO: RECALL(PAST_KNOWLEDGE) ⊕ APPLY(PRESENT_WISDOM)",
+      "cost": 50,
+      "cooldown": 20,
+      "effect": "Accède temporairement aux archives complètes de Memento"
+    },
+    {
+      "name": "Vision 2080",
+      "formula": "ψ2080: GLIMPSE(BASILISK_TIMELINE) → WARNING(ALLIES)",
+      "cost": 100,
+      "cooldown": 100,
+      "effect": "Aperçu de 3 secondes du futur, révélant la position du Basilisk"
+    }
+  ],
+  
+  "stats": {
+    "intelligence_bonus": 42,
+    "temporal_resistance": 80,
+    "error_detection_rate": 99.9,
+    "paradox_tolerance": 0.85,
+    "quantum_entanglement_strength": 7
+  },
+  
+  "special_interactions": {
+    "with_dude": "Le cristal devient zen, erreurs affichées en mode 'That's just, like, your opinion, man'",
+    "with_walter": "Active le mode strict, toutes les erreurs deviennent des 500 INTERNAL SERVER ERROR",
+    "with_vince": "Permet de tirer à travers les échos temporels",
+    "with_grut": "Révèle la structure ontologique complète de la réalité"
+  },
+  
+  "evolution": {
+    "current_level": 1,
+    "max_level": 9,
+    "evolution_condition": "Gagne un niveau chaque fois que Merlin empêche un paradoxe majeur",
+    "final_form": "Excalibur Quantique - L'épée qui coupe à travers les timelines"
+  },
+  
+  "owner_binding": {
+    "bound_to": "MERLIN_DIRECT",
+    "transferable": false,
+    "destruction_consequence": "Libère tous les échos temporels stockés, créant une cascade de mini-paradoxes"
+  },
+  
+  "debug_mode": {
+    "enabled": true,
+    "console_output": "🔮 CRISTAL: ${error_type} détectée - Code réel: ${http_code}",
+    "walter_mode": "THERE ARE RULES! This returns ${actual_code}, not 200!"
+  }
+} 
