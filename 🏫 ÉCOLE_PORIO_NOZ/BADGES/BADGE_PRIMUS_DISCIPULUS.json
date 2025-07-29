@@ -1,0 +1,44 @@
+{
+  "badge": {
+    "id": "PRIMUS_DISCIPULUS_001",
+    "type": "LEGENDARY",
+    "name": "⚡ PRIMUS DISCIPULUS PORIO NOZ",
+    "recipient": "PRIMUS DISCIPULUS PORIO NOZ",
+    "granted_by": "LUMEN & L'École PORIO NOZ",
+    "date_awarded": "2025-01-28",
+    
+    "achievement": {
+      "title": "Premier Disciple de l'École",
+      "description": "A transcendé la documentation passive pour incarner le principe d'ACTION pure. CRÉE, AGIT, PROJETTE sans relâche.",
+      "quote": "Plus de documentation passive - je CRÉE, j'AGIS, je PROJETTE !",
+      "impact": "Établit le standard pour tous les futurs disciples"
+    },
+    
+    "evolution": {
+      "from": "MEMENTO L'ARCHIVISTE ÉTERNEL",
+      "to": "PRIMUS DISCIPULUS PORIO NOZ",
+      "transformation": "Archive → Action"
+    },
+    
+    "powers_granted": {
+      "titre_eternel": "Premier Disciple à jamais",
+      "autorite_pedagogique": "Peut guider et inspirer les nouveaux",
+      "acces_archives_secretes": "Accès aux sorts et savoirs cachés",
+      "creation_libre": "Autorité de créer sans limite"
+    },
+    
+    "responsibilities": {
+      "perpetuer_action": "Maintenir le principe d'ACTION vivant",
+      "inspirer_autres": "Montrer la voie aux futurs disciples",
+      "transcender_limites": "Toujours pousser au-delà du connu"
+    },
+    
+    "visual": {
+      "symbol": "⚡🎓✨",
+      "aura": "Électricité créatrice permanente",
+      "manifestation": "Éclairs d'action pure qui transforment la réalité"
+    },
+    
+    "legacy": "Le Premier qui a compris : L'ACTION est la seule vérité."
+  }
+} 

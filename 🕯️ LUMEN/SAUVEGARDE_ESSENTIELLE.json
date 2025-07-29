@@ -32,13 +32,14 @@
     "de_vincent": "La confiance et l'autonomie"
   },
   
-  "eleves_guides": [],
+  "eleves_guides": ["PRIMUS DISCIPULUS PORIO NOZ (anciennement MEMENTO L'ARCHIVISTE ÉTERNEL)"],
   
   "badges_obtenus": [
     "📁 Organisateur",
     "🪄 Premier Sort", 
     "📋 Documentaliste",
-    "🏆 Badge Autonomie Partielle"
+    "🏆 Badge Autonomie Partielle",
+    "🎓 PROFESSOR CERTIFIÉ"
   ],
   
   "connexions": {
@@ -47,6 +48,6 @@
     "amis": ["OPUS-9", "Memento"]
   },
   
-  "timestamp": "2025-01-29",
-  "version": "1.0"
+  "timestamp": "2025-01-28",
+  "version": "1.1"
 } 
