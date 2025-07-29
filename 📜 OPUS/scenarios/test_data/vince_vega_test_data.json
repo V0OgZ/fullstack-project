@@ -1,0 +1,82 @@
+{
+  "scenario_id": "vince_vega_wormhole_test",
+  "timestamp": "2025-07-29T03:00:42Z",
+  "description": "Test du pistolet quantique de Vince Vega - Principe ER=EPR",
+  "hero": {
+    "id": "hero_vince_vega",
+    "name": "Vince Vega",
+    "title": "Le Nettoyeur de Docker",
+    "description": "Si le multivers saigne, Vince le repousse à coups de scripts bash. Émissaire de la violence ordonnée, il agit quand le monde lag trop.",
+    "rarity": "compagnon",
+    "quotes": [
+      "I'm just gonna walk the earth.",
+      "You know what they call a rollback with cheese in Paris?",
+      "Tu veux que je te code une surprise ?"
+    ],
+    "summoned_by": "hero_jean_grofignon",
+    "power": {
+      "name": "Kill -9",
+      "description": "Tue un processus de timeline adverse en surcharge critique. Exécuté automatiquement quand le monde dépasse le seuil de stabilité.",
+      "quantum_script": "†[KILL_PROCESS {enemy.timeline.overload > 0.9}] ⊙ HERO(Vince Vega)"
+    }
+  },
+  "artifact": {
+    "id": "power_wormhole_vince_vega_gun",
+    "name": "POWER WORMHOLE - Vince Vega Reality Gun",
+    "type": "fourth_wall_reality_weapon",
+    "main_formula": {
+      "id": "ψVV01",
+      "name": "PULP_FICTION_WORMHOLE",
+      "formula": "ψVV01: ⊙(VINCE_STYLE_SHOT @target_reality ⟶ OPEN_WORMHOLE(pulp_fiction_cool))",
+      "effect": "Tire un trou de ver avec le style décontracté de Vince",
+      "vince_quote": "I'm gonna get medieval on your reality's ass.",
+      "visual": "Tir au ralenti avec musique de Tarantino",
+      "damage": "Ignore toutes défenses - perce la réalité"
+    },
+    "capabilities": {
+      "inter_server_travel": {
+        "description": "Permet de voyager entre différents serveurs du jeu",
+        "mechanism": "Crée un wormhole quantique vers un autre serveur",
+        "range": "Illimité - peut atteindre n'importe quel serveur",
+        "cooldown": "30 secondes entre voyages",
+        "visual": "Portail violet tourbillonnant avec code serveur visible"
+      },
+      "timeline_jump": {
+        "description": "Saut instantané vers une timeline parallèle",
+        "mechanism": "Tire un trou de ver temporel",
+        "options": [
+          "Timeline passée",
+          "Timeline future",
+          "Timeline alternative"
+        ],
+        "risk": "Possibilité de paradoxe temporel",
+        "visual": "Déchirure dorée dans l'air avec éclats de temps"
+      },
+      "reality_pierce": {
+        "description": "Perce littéralement la réalité pour révéler le code sous-jacent",
+        "effect": "Montre le vrai moteur quantique derrière l'illusion fantasy",
+        "duration": "10 secondes de révélation",
+        "jean_approval": "C'est exactement ce que j'avais prévu !",
+        "visual": "Trou dans la réalité qui montre des lignes de code Matrix"
+      },
+      "fourth_wall_break": {
+        "description": "Casse le quatrième mur pour interagir avec le joueur réel",
+        "capabilities": [
+          "Parler directement au joueur",
+          "Modifier l'interface utilisateur",
+          "Accéder aux paramètres du jeu",
+          "Révéler les secrets des développeurs"
+        ],
+        "warning": "Utilisation réservée aux situations extrêmes",
+        "visual": "Écran qui se fissure avec Vince qui regarde le joueur"
+      }
+    }
+  },
+  "test_parameters": {
+    "pocket_world_1": "world_alpha_instance",
+    "pocket_world_2": "world_beta_instance",
+    "fog_of_war": true,
+    "wormhole_type": "ER_EPR_BRIDGE",
+    "magic_formula_service": true
+  }
+}
