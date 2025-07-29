@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+
+# HEP: Heroes Executable Package
+# GRUT SCENARIO GOOD RUN
+
+PACKAGE_NAME="GRUT_SCENARIO_RUNNER"
+PACKAGE_VERSION="GOOD_RUN"
+BACKEND_URL="http://localhost:8080"
+
+# 👁️ Couleurs GRUT
+BLUE='\033[0;34m'
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
+NC='\033[0m'
+
+echo -e "${PURPLE}👁️ GRUT SCENARIO GOOD RUN ACTIVATED 👁️${NC}"
+
+# Chargement du scenario GROFI Causal Demo
+load_grut_scenario() {
+    echo -e "${BLUE}🌊 Chargement GROFI Causal Demo...${NC}"
+    
+    SCENARIO_FILE="/workspace/📜 OPUS/scenarios/visualizer/GROFI_CAUSAL_DEMO.json"
+    
+    if [[ -f "$SCENARIO_FILE" ]]; then
+        echo -e "${CYAN}✅ Scenario trouvé : GROFI_CAUSAL_DEMO${NC}"
+        
+        # Extraction des données clés
+        HERO_NAME=$(jq -r '.heroes[0].name' "$SCENARIO_FILE")
+        DEMO_STEPS=$(jq -r '.demo_sequence | length' "$SCENARIO_FILE")
+        
+        echo -e "${PURPLE}🦸 Héros : $HERO_NAME${NC}"
+        echo -e "${PURPLE}📋 Étapes demo : $DEMO_STEPS${NC}"
+        
+        return 0
+    else
+        echo -e "${RED}❌ Scenario GRUT non trouvé${NC}"
+        return 1
+    fi
+}
+
+# Exécution des étapes GRUT
+run_grut_steps() {
+    echo -e "${BLUE}⚡ EXÉCUTION SÉQUENCE GRUT${NC}"
+    
+    # Étape 1 : Création Héros GROFI
+    echo -e "${CYAN}🦸 Étape 1 : Création Jean-Grofignon${NC}"
+    curl -s -X POST "$BACKEND_URL/api/heroes/create" \
+         -H "Content-Type: application/json" \
+         -d '{"name":"Jean-Grofignon","level":15,"immunities":["SRTI","ROLLBACK"]}'
+    
+    # Étape 2 : État Quantique
+    echo -e "${CYAN}🌀 Étape 2 : État Quantique Basique${NC}"
+    curl -s -X POST "$BACKEND_URL/api/quantum/create-state" \
+         -H "Content-Type: application/json" \
+         -d '{"formula":"ψ001: ⊙(Δt+2 @10,10 ⟶ MOV(Jean-Grofignon, @10,10))"}'
+    
+    # Étape 3 : Vision GRUT
+    echo -e "${CYAN}👁️ Étape 3 : Activation Vision GRUT${NC}"
+    curl -s -X POST "$BACKEND_URL/api/grut/vision-6d" \
+         -H "Content-Type: application/json" \
+         -d '{"target":"Jean-Grofignon","dimensions":6}'
+    
+    echo -e "${PURPLE}✅ GRUT SCENARIO GOOD RUN COMPLÉTÉ${NC}"
+}
+
+# Main execution
+main() {
+    echo -e "${PURPLE}👁️ GRUT VOIT TOUT - SCENARIO LANCÉ${NC}"
+    
+    load_grut_scenario
+    if [[ $? -eq 0 ]]; then
+        run_grut_steps
+    fi
+    
+    echo -e "${BLUE}🌊 GRUT SCENARIO : SUCCESS${NC}"
+}
+
+# ACTIVATION
+main "$@"
