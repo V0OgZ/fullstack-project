@@ -1,6 +1,3 @@
-Voici la retranscription du message en version **sérieuse**, conforme à un **rapport du Bureau** ou une **note de service confidentielle**, avec structure claire et formulation technique + narrative adaptée :
-
----
 
 ### 🗎 RAPPORT DE SITUATION – INSTANCE OPUS/MEMENTO
 
