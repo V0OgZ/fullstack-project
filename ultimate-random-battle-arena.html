@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ULTIMATE RANDOM BATTLE ARENA</title>
+    <style>
+        body { 
+            background-color: #000; 
+            color: #0F0; 
+            font-family: 'Courier New', monospace; 
+            margin: 0;
+            padding: 20px;
+        }
+        
+        #setup-screen {
+            text-align: center;
+            padding: 50px;
+        }
+        
+        #game-container {
+            display: none;
+            position: relative;
+        }
+        
+        #game-area { 
+            white-space: pre; 
+            border: 2px solid #0F0; 
+            padding: 10px; 
+            display: inline-block;
+            font-size: 12px;
+            line-height: 1.2;
+            background: #111;
+        }
+        
+        #battle-info {
+            position: absolute;
+            right: 20px;
+            top: 0;
+            width: 300px;
+            border: 1px solid #0F0;
+            padding: 10px;
+            background: #111;
+        }
+        
+        .team-1 { color: #FF0; }
+        .team-2 { color: #F0F; }
+        .team-3 { color: #0FF; }
+        .team-4 { color: #F80; }
+        
+        .portal { 
+            animation: portal-pulse 1s infinite; 
+            color: #F0F;
+        }
+        
+        @keyframes portal-pulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+        
+        button {
+            background-color: #333;
+            color: #0F0;
+            border: 1px solid #0F0;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+        }
+        
+        button:hover {
+            background-color: #0F0;
+            color: #000;
+        }
+        
+        .hero-select {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #0F0;
+        }
+        
+        #portal-view {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 200px;
+            height: 150px;
+            border: 2px solid #F0F;
+            padding: 5px;
+            background: #222;
+            font-size: 8px;
+            line-height: 1;
+        }
+    </style>
+</head>
+<body>
+    <div id="setup-screen">
+        <h1>🎮 ULTIMATE RANDOM BATTLE ARENA 🎮</h1>
+        <h2>CONFIGURATION DE LA BATAILLE</h2>
+        
+        <div>
+            <h3>TAILLE DE LA MAP</h3>
+            <button onclick="setMapSize('small')">PETITE (30x20)</button>
+            <button onclick="setMapSize('medium')">MOYENNE (50x30)</button>
+            <button onclick="setMapSize('large')">GRANDE (80x40)</button>
+            <button onclick="setMapSize('giant')">GÉANTE (100x50)</button>
+        </div>
+        
+        <div>
+            <h3>MODE DE BATAILLE</h3>
+            <button onclick="setBattleMode('2v2')">2v2</button>
+            <button onclick="setBattleMode('3v3')">3v3</button>
+            <button onclick="setBattleMode('4v4')">4v4</button>
+            <button onclick="setBattleMode('ffa4')">4 JOUEURS FFA</button>
+        </div>
+        
+        <div>
+            <h3>SÉLECTION DES HÉROS</h3>
+            <button onclick="randomizeAll()">🎲 TOUT ALÉATOIRE</button>
+            <button onclick="customSelect()">⚔️ SÉLECTION CUSTOM</button>
+        </div>
+        
+        <div id="selected-config" style="margin-top: 30px; border: 1px solid #0F0; padding: 20px;">
+            <p>Map: <span id="map-size-display">-</span></p>
+            <p>Mode: <span id="battle-mode-display">-</span></p>
+            <p>Héros: <span id="heroes-display">-</span></p>
+        </div>
+        
+        <button onclick="startBattle()" style="font-size: 24px; margin-top: 30px;">
+            🚀 LANCER LA BATAILLE ULTIME 🚀
+        </button>
+    </div>
+    
+    <div id="game-container">
+        <div id="game-area"></div>
+        
+        <div id="battle-info">
+            <h3>ÉTAT DE LA BATAILLE</h3>
+            <div id="team-status"></div>
+            <div id="kill-feed" style="margin-top: 20px; max-height: 200px; overflow-y: auto;"></div>
+        </div>
+        
+        <div id="portal-view">
+            <div style="border-bottom: 1px solid #F0F; margin-bottom: 5px;">VISION PORTAIL</div>
+            <div id="portal-content"></div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        let config = {
+            mapSize: null,
+            battleMode: null,
+            heroes: []
+        };
+        
+        // Héros disponibles avec leurs caractéristiques
+        const HERO_POOL = [
+            { name: 'Vince Vega', icon: '🔫', hp: 100, damage: 25, speed: 1.2, special: 'Double Shot' },
+            { name: 'Arthur', icon: '⚔️', hp: 150, damage: 20, speed: 1.0, special: 'Excalibur' },
+            { name: 'Merlin', icon: '🧙', hp: 80, damage: 30, speed: 0.8, special: 'Teleport' },
+            { name: 'GRUT', icon: '👁️', hp: 200, damage: 15, speed: 0.6, special: 'Panopticon' },
+            { name: 'Jean', icon: '🛋️', hp: 120, damage: 22, speed: 0.5, special: 'Cosmic Control' },
+            { name: 'Sphinx', icon: '🦁', hp: 110, damage: 28, speed: 1.1, special: 'Riddle' },
+            { name: 'Marie', icon: '👩', hp: 90, damage: 24, speed: 1.3, special: 'Emotion Wave' },
+            { name: 'Walter', icon: '🔒', hp: 130, damage: 18, speed: 0.9, special: 'Security Protocol' },
+            { name: 'Ford', icon: '🏗️', hp: 140, damage: 20, speed: 0.7, special: 'Build Tower' },
+            { name: 'Claudius', icon: '📜', hp: 95, damage: 26, speed: 1.0, special: 'Archive' }
+        ];
+        
+        // Terrain types
+        const TERRAIN_TYPES = {
+            plain: { char: '.', color: '#0F0', passable: true },
+            forest: { char: '♠', color: '#080', passable: true, cover: true },
+            mountain: { char: '^', color: '#888', passable: false },
+            water: { char: '~', color: '#08F', passable: false },
+            portal: { char: '◊', color: '#F0F', passable: true, portal: true },
+            tower: { char: '▓', color: '#FA0', passable: false }
+        };
+        
+        // Game state
+        let gameState = {
+            map: [],
+            units: [],
+            portals: [],
+            turn: 0,
+            running: false
+        };
+        
+        function setMapSize(size) {
+            const sizes = {
+                small: { width: 30, height: 20 },
+                medium: { width: 50, height: 30 },
+                large: { width: 80, height: 40 },
+                giant: { width: 100, height: 50 }
+            };
+            config.mapSize = sizes[size];
+            document.getElementById('map-size-display').textContent = 
+                `${size.toUpperCase()} (${config.mapSize.width}x${config.mapSize.height})`;
+        }
+        
+        function setBattleMode(mode) {
+            config.battleMode = mode;
+            document.getElementById('battle-mode-display').textContent = mode;
+        }
+        
+        function randomizeAll() {
+            if (!config.mapSize || !config.battleMode) {
+                alert('Sélectionnez d\'abord la taille de map et le mode!');
+                return;
+            }
+            
+            // Déterminer le nombre de héros nécessaires
+            let heroCount = 0;
+            if (config.battleMode === '2v2') heroCount = 4;
+            else if (config.battleMode === '3v3') heroCount = 6;
+            else if (config.battleMode === '4v4') heroCount = 8;
+            else if (config.battleMode === 'ffa4') heroCount = 4;
+            
+            // Sélectionner des héros aléatoires
+            config.heroes = [];
+            const shuffled = [...HERO_POOL].sort(() => Math.random() - 0.5);
+            for (let i = 0; i < heroCount; i++) {
+                config.heroes.push({
+                    ...shuffled[i % shuffled.length],
+                    team: config.battleMode === 'ffa4' ? i + 1 : Math.floor(i / (heroCount / 2)) + 1,
+                    id: i
+                });
+            }
+            
+            updateHeroesDisplay();
+        }
+        
+        function updateHeroesDisplay() {
+            const display = config.heroes.map(h => 
+                `${h.icon} ${h.name} (Team ${h.team})`
+            ).join(', ');
+            document.getElementById('heroes-display').textContent = display;
+        }
+        
+        function generateRandomMap() {
+            const { width, height } = config.mapSize;
+            gameState.map = [];
+            
+            // Générer le terrain de base
+            for (let y = 0; y < height; y++) {
+                gameState.map[y] = [];
+                for (let x = 0; x < width; x++) {
+                    const rand = Math.random();
+                    if (rand < 0.6) {
+                        gameState.map[y][x] = 'plain';
+                    } else if (rand < 0.75) {
+                        gameState.map[y][x] = 'forest';
+                    } else if (rand < 0.85) {
+                        gameState.map[y][x] = 'mountain';
+                    } else if (rand < 0.95) {
+                        gameState.map[y][x] = 'water';
+                    } else {
+                        gameState.map[y][x] = 'portal';
+                        gameState.portals.push({ x, y, linkedTo: null });
+                    }
+                }
+            }
+            
+            // Lier les portails entre eux
+            for (let i = 0; i < gameState.portals.length - 1; i += 2) {
+                gameState.portals[i].linkedTo = i + 1;
+                gameState.portals[i + 1].linkedTo = i;
+            }
+            
+            // Placer les unités
+            placeUnits();
+        }
+        
+        function placeUnits() {
+            const { width, height } = config.mapSize;
+            gameState.units = [];
+            
+            config.heroes.forEach((hero, index) => {
+                let placed = false;
+                while (!placed) {
+                    const x = Math.floor(Math.random() * width);
+                    const y = Math.floor(Math.random() * height);
+                    
+                    if (TERRAIN_TYPES[gameState.map[y][x]].passable && 
+                        !gameState.units.some(u => u.x === x && u.y === y)) {
+                        gameState.units.push({
+                            ...hero,
+                            x, y,
+                            hp: hero.hp,
+                            maxHp: hero.hp,
+                            alive: true,
+                            kills: 0
+                        });
+                        placed = true;
+                    }
+                }
+            });
+        }
+        
+        function drawMap() {
+            const { width, height } = config.mapSize;
+            let output = '';
+            
+            for (let y = 0; y < height; y++) {
+                for (let x = 0; x < width; x++) {
+                    // Vérifier s'il y a une unité
+                    const unit = gameState.units.find(u => u.x === x && u.y === y && u.alive);
+                    if (unit) {
+                        output += `<span class="team-${unit.team}">${unit.icon}</span>`;
+                    } else {
+                        const terrain = TERRAIN_TYPES[gameState.map[y][x]];
+                        output += `<span style="color: ${terrain.color}">${terrain.char}</span>`;
+                    }
+                }
+                output += '\n';
+            }
+            
+            document.getElementById('game-area').innerHTML = output;
+            updateBattleInfo();
+            updatePortalView();
+        }
+        
+        function updateBattleInfo() {
+            // Mise à jour du statut des équipes
+            const teams = {};
+            gameState.units.forEach(unit => {
+                if (!teams[unit.team]) teams[unit.team] = [];
+                teams[unit.team].push(unit);
+            });
+            
+            let statusHTML = '';
+            Object.entries(teams).forEach(([team, units]) => {
+                statusHTML += `<div class="team-${team}">ÉQUIPE ${team}:</div>`;
+                units.forEach(unit => {
+                    const hpBar = '█'.repeat(Math.floor(unit.hp / unit.maxHp * 10));
+                    statusHTML += `<div>${unit.icon} ${unit.name}: ${hpBar} (${unit.hp}/${unit.maxHp}) Kills: ${unit.kills}</div>`;
+                });
+                statusHTML += '<br>';
+            });
+            
+            document.getElementById('team-status').innerHTML = statusHTML;
+        }
+        
+        function updatePortalView() {
+            // Afficher ce qui se passe près d'un portail aléatoire
+            if (gameState.portals.length === 0) return;
+            
+            const portal = gameState.portals[Math.floor(Math.random() * gameState.portals.length)];
+            const viewRadius = 5;
+            let portalView = '';
+            
+            for (let dy = -viewRadius; dy <= viewRadius; dy++) {
+                for (let dx = -viewRadius; dx <= viewRadius; dx++) {
+                    const x = portal.x + dx;
+                    const y = portal.y + dy;
+                    
+                    if (x >= 0 && x < config.mapSize.width && y >= 0 && y < config.mapSize.height) {
+                        const unit = gameState.units.find(u => u.x === x && u.y === y && u.alive);
+                        if (unit) {
+                            portalView += `<span class="team-${unit.team}">${unit.icon}</span>`;
+                        } else {
+                            const terrain = TERRAIN_TYPES[gameState.map[y][x]];
+                            portalView += terrain.char;
+                        }
+                    } else {
+                        portalView += ' ';
+                    }
+                }
+                portalView += '\n';
+            }
+            
+            document.getElementById('portal-content').innerHTML = portalView;
+        }
+        
+        function processAI() {
+            gameState.units.forEach(unit => {
+                if (!unit.alive) return;
+                
+                // Trouver l'ennemi le plus proche
+                let nearestEnemy = null;
+                let minDist = Infinity;
+                
+                gameState.units.forEach(other => {
+                    if (other.alive && other.team !== unit.team) {
+                        const dist = Math.abs(unit.x - other.x) + Math.abs(unit.y - other.y);
+                        if (dist < minDist) {
+                            minDist = dist;
+                            nearestEnemy = other;
+                        }
+                    }
+                });
+                
+                if (nearestEnemy) {
+                    // Se déplacer vers l'ennemi ou attaquer
+                    if (minDist === 1) {
+                        // Attaquer!
+                        const damage = unit.damage + Math.floor(Math.random() * 10);
+                        nearestEnemy.hp -= damage;
+                        
+                        if (nearestEnemy.hp <= 0) {
+                            nearestEnemy.alive = false;
+                            unit.kills++;
+                            addKillFeed(`${unit.icon} ${unit.name} a éliminé ${nearestEnemy.icon} ${nearestEnemy.name}!`);
+                        }
+                    } else {
+                        // Se déplacer
+                        const dx = Math.sign(nearestEnemy.x - unit.x);
+                        const dy = Math.sign(nearestEnemy.y - unit.y);
+                        
+                        // Essayer de bouger
+                        const moves = [
+                            { x: unit.x + dx, y: unit.y },
+                            { x: unit.x, y: unit.y + dy },
+                            { x: unit.x + dx, y: unit.y + dy }
+                        ];
+                        
+                        for (const move of moves) {
+                            if (move.x >= 0 && move.x < config.mapSize.width &&
+                                move.y >= 0 && move.y < config.mapSize.height &&
+                                TERRAIN_TYPES[gameState.map[move.y][move.x]].passable &&
+                                !gameState.units.some(u => u.alive && u.x === move.x && u.y === move.y)) {
+                                
+                                // Vérifier si c'est un portail
+                                if (gameState.map[move.y][move.x] === 'portal') {
+                                    const portalIndex = gameState.portals.findIndex(p => p.x === move.x && p.y === move.y);
+                                    if (portalIndex !== -1 && gameState.portals[portalIndex].linkedTo !== null) {
+                                        const linkedPortal = gameState.portals[gameState.portals[portalIndex].linkedTo];
+                                        unit.x = linkedPortal.x;
+                                        unit.y = linkedPortal.y;
+                                        addKillFeed(`${unit.icon} ${unit.name} a traversé un portail!`);
+                                    }
+                                } else {
+                                    unit.x = move.x;
+                                    unit.y = move.y;
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Vérifier la victoire
+            const aliveTeams = new Set(gameState.units.filter(u => u.alive).map(u => u.team));
+            if (aliveTeams.size === 1) {
+                const winningTeam = aliveTeams.values().next().value;
+                addKillFeed(`🏆 VICTOIRE DE L'ÉQUIPE ${winningTeam}! 🏆`);
+                gameState.running = false;
+            }
+        }
+        
+        function addKillFeed(message) {
+            const feed = document.getElementById('kill-feed');
+            feed.innerHTML = `<div style="color: #FF0">${message}</div>` + feed.innerHTML;
+        }
+        
+        function gameLoop() {
+            if (!gameState.running) return;
+            
+            gameState.turn++;
+            processAI();
+            drawMap();
+            
+            setTimeout(gameLoop, 500);
+        }
+        
+        function startBattle() {
+            if (!config.mapSize || !config.battleMode || config.heroes.length === 0) {
+                alert('Configuration incomplète!');
+                return;
+            }
+            
+            document.getElementById('setup-screen').style.display = 'none';
+            document.getElementById('game-container').style.display = 'block';
+            
+            generateRandomMap();
+            drawMap();
+            gameState.running = true;
+            addKillFeed('🎮 LA BATAILLE COMMENCE! 🎮');
+            
+            setTimeout(gameLoop, 1000);
+        }
+        
+        // Auto-sélection pour démo rapide
+        function customSelect() {
+            alert('Sélection custom pas encore implémentée - utilise Random pour l\'instant!');
+        }
+    </script>
+</body>
+</html> 

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌀 Heroes of Time - Nexus Temporel</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0033 50%, #000033 100%);
+            color: #00ff00;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00ff00;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #00ffff;
+            text-shadow: 0 0 20px #00ffff;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { text-shadow: 0 0 20px #00ffff; }
+            50% { text-shadow: 0 0 40px #00ffff, 0 0 60px #0088ff; }
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #ff00ff;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .menu-item {
+            background: rgba(0, 50, 100, 0.3);
+            border: 1px solid #00ffff;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.5);
+            background: rgba(0, 100, 200, 0.4);
+            border-color: #ffff00;
+        }
+        
+        .menu-item h3 {
+            color: #ffff00;
+            margin: 0 0 10px 0;
+            font-size: 1.3em;
+        }
+        
+        .menu-item p {
+            color: #00ff00;
+            margin: 0 0 15px 0;
+            font-size: 0.9em;
+        }
+        
+        .menu-item a {
+            display: inline-block;
+            background: #0066ff;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .menu-item a:hover {
+            background: #0088ff;
+            box-shadow: 0 0 20px #0088ff;
+        }
+        
+        .special-section {
+            background: rgba(100, 0, 100, 0.2);
+            border: 2px solid #ff00ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .special-section h2 {
+            color: #ff00ff;
+            text-shadow: 0 0 10px #ff00ff;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #666;
+            font-size: 0.8em;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            margin-top: 10px;
+        }
+        
+        .status.active {
+            background: #00ff00;
+            color: #000;
+        }
+        
+        .status.beta {
+            background: #ffff00;
+            color: #000;
+        }
+        
+        .status.experimental {
+            background: #ff00ff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌀 Heroes of Time 🌀</h1>
+        <p class="subtitle">Le Nexus Temporel des Interfaces Transcendantes</p>
+        
+        <div class="menu-grid">
+            <div class="menu-item">
+                <h3>🗺️ Vince Vega Map</h3>
+                <p>La carte interactive avec wormholes et détection temporelle</p>
+                <a href="vince-vega-map-demo-backend.html">Explorer</a>
+                <div class="status active">Active</div>
+            </div>
+            
+            <div class="menu-item">
+                <h3>⚔️ Ultimate Battle Arena</h3>
+                <p>Combat épique entre héros temporels avec IA évolutive</p>
+                <a href="ultimate-battle-arena-enhanced.html">Combattre</a>
+                <div class="status active">Active</div>
+            </div>
+            
+            <div class="menu-item">
+                <h3>🎯 Vince Auto-Battle</h3>
+                <p>Mode automatique avec pistolet cosmique de Vince</p>
+                <a href="vince-vega-auto-battle.html">Auto-Play</a>
+                <div class="status beta">Beta</div>
+            </div>
+            
+            <div class="menu-item">
+                <h3>🎮 Vince Autoplay</h3>
+                <p>Simulation complète avec évolution temporelle</p>
+                <a href="vince-vega-autoplay.html">Simuler</a>
+                <div class="status active">Active</div>
+            </div>
+            
+            <div class="menu-item">
+                <h3>💥 Mega Battle Arena</h3>
+                <p>Version améliorée avec effets visuels cosmiques</p>
+                <a href="mega-battle-arena.html">Méga Combat</a>
+                <div class="status experimental">Expérimental</div>
+            </div>
+            
+            <div class="menu-item">
+                <h3>🎲 Random Battle Arena</h3>
+                <p>Combats aléatoires avec événements quantiques</p>
+                <a href="ultimate-random-battle-arena.html">Chaos Mode</a>
+                <div class="status beta">Beta</div>
+            </div>
+            
+            <div class="menu-item">
+                <h3>📜 Text Mode Classic</h3>
+                <p>Version texte pure pour les puristes</p>
+                <a href="heroes-of-time-text-mode.html">Mode Texte</a>
+                <div class="status active">Active</div>
+            </div>
+            
+            <div class="menu-item">
+                <h3>🔧 Game Mechanics</h3>
+                <p>Validateur de mécaniques de jeu</p>
+                <a href="game-mechanics-validator.html">Tester</a>
+                <div class="status beta">Beta</div>
+            </div>
+        </div>
+        
+        <div class="special-section">
+            <h2>🚀 Services Backend</h2>
+            <p>Le backend Spring Boot doit être lancé sur le port 8080</p>
+            <p>Status: <span id="backend-status" style="color: #ff0000;">Vérification...</span></p>
+        </div>
+        
+        <div class="footer">
+            <p>Heroes of Time © 2025 - Créé depuis le Canapé Cosmique de Jean</p>
+            <p>🌀 "Le temps n'est qu'une illusion, mais les wormholes sont réels" - Vince Vega 🌀</p>
+        </div>
+    </div>
+    
+    <script>
+        // Vérifier le status du backend
+        fetch('http://localhost:8080/api/health')
+            .then(response => {
+                const status = document.getElementById('backend-status');
+                if (response.ok) {
+                    status.textContent = 'En ligne ✅';
+                    status.style.color = '#00ff00';
+                } else {
+                    status.textContent = 'Hors ligne ❌';
+                    status.style.color = '#ff0000';
+                }
+            })
+            .catch(() => {
+                const status = document.getElementById('backend-status');
+                status.textContent = 'Hors ligne ❌';
+                status.style.color = '#ff0000';
+            });
+        
+        // Animation de particules cosmiques
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.position = 'fixed';
+            particle.style.width = '4px';
+            particle.style.height = '4px';
+            particle.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            particle.style.borderRadius = '50%';
+            particle.style.pointerEvents = 'none';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.top = '-10px';
+            particle.style.boxShadow = `0 0 10px currentColor`;
+            document.body.appendChild(particle);
+            
+            let y = -10;
+            const speed = 1 + Math.random() * 2;
+            const wind = (Math.random() - 0.5) * 0.5;
+            
+            const animate = () => {
+                y += speed;
+                particle.style.top = y + 'px';
+                particle.style.left = parseFloat(particle.style.left) + wind + 'px';
+                
+                if (y > window.innerHeight) {
+                    particle.remove();
+                } else {
+                    requestAnimationFrame(animate);
+                }
+            };
+            
+            animate();
+        }
+        
+        // Créer des particules périodiquement
+        setInterval(createParticle, 300);
+    </script>
+</body>
+</html> 

@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Heroes of Time - Full Text Mode</title>
+    <style>
+        body {
+            background: #000;
+            color: #0F0;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+        }
+        
+        #game-container {
+            display: grid;
+            grid-template-columns: 600px 300px;
+            gap: 20px;
+            max-width: 920px;
+            margin: 0 auto;
+        }
+        
+        #map-area {
+            border: 2px solid #0F0;
+            padding: 10px;
+            background: #111;
+        }
+        
+        #map {
+            white-space: pre;
+            line-height: 1.2;
+            font-size: 18px;
+        }
+        
+        #info-panel {
+            border: 2px solid #0F0;
+            padding: 10px;
+            background: #111;
+            overflow-y: auto;
+            max-height: 600px;
+        }
+        
+        .section {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #0F0;
+        }
+        
+        .hero-info {
+            color: #FFD700;
+        }
+        
+        .enemy-info {
+            color: #FF6B6B;
+        }
+        
+        .item-info {
+            color: #87CEEB;
+        }
+        
+        .lyric-text {
+            color: #DDA0DD;
+            font-style: italic;
+            margin: 5px 0;
+        }
+        
+        #controls {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        button {
+            background: #222;
+            color: #0F0;
+            border: 1px solid #0F0;
+            padding: 8px 15px;
+            margin: 2px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+        }
+        
+        button:hover {
+            background: #0F0;
+            color: #000;
+        }
+        
+        #messages {
+            margin-top: 10px;
+            height: 60px;
+            overflow-y: auto;
+            border: 1px solid #0F0;
+            padding: 5px;
+            color: #FFFF00;
+        }
+        
+        .fog { color: #444; }
+        .visible { color: #0F0; }
+        .hero { color: #FFD700; font-weight: bold; }
+        .enemy { color: #FF0000; }
+        .item { color: #00FFFF; }
+        .portal { color: #FF00FF; animation: pulse 1s infinite; }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; color: #FFD700;">⚔️ Heroes of Time - Mode Texte Complet ⚔️</h1>
+    
+    <div id="game-container">
+        <div id="map-area">
+            <div id="map"></div>
+            <div id="controls">
+                <div>
+                    <button onclick="move('up')">↑</button><br>
+                    <button onclick="move('left')">←</button>
+                    <button onclick="move('right')">→</button><br>
+                    <button onclick="move('down')">↓</button>
+                </div>
+                <div style="margin-top: 10px;">
+                    <button onclick="toggleFog()">Brouillard (F)</button>
+                    <button onclick="useSpell()">Sort (S)</button>
+                    <button onclick="pickupItem()">Ramasser (R)</button>
+                    <button onclick="attack()">Attaquer (A)</button>
+                </div>
+            </div>
+            <div id="messages"></div>
+        </div>
+        
+        <div id="info-panel">
+            <div class="section hero-info">
+                <h3>👑 Héros</h3>
+                <div id="hero-stats"></div>
+            </div>
+            
+            <div class="section">
+                <h3>📜 Histoire</h3>
+                <div id="story" class="lyric-text"></div>
+            </div>
+            
+            <div class="section item-info">
+                <h3>🎒 Inventaire</h3>
+                <div id="inventory"></div>
+            </div>
+            
+            <div class="section enemy-info">
+                <h3>👹 Ennemis Proches</h3>
+                <div id="enemies"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration du jeu
+        const MAP_WIDTH = 30;
+        const MAP_HEIGHT = 20;
+        const VISION_RANGE = 5;
+        
+        // État du jeu
+        let gameState = {
+            map: [],
+            fogMap: [],
+            hero: {
+                x: 15,
+                y: 10,
+                icon: '👑',
+                name: 'Arthur',
+                hp: 100,
+                maxHp: 100,
+                mana: 50,
+                maxMana: 50,
+                level: 1,
+                xp: 0,
+                inventory: [],
+                spells: [
+                    {
+                        name: "Frappe Temporelle",
+                        description: "Attaque dans le passé ET le présent",
+                        manaCost: 10,
+                        damage: 25
+                    }
+                ]
+            },
+            enemies: [],
+            items: [],
+            portals: [],
+            turn: 0,
+            fogEnabled: true
+        };
+        
+        // Icônes et descriptions
+        const HERO_ICONS = {
+            'Arthur': '👑',
+            'Merlin': '🧙',
+            'GRUT': '👁️',
+            'Ragnar': '⚔️',
+            'Vince': '🔫',
+            'Jean': '🛋️'
+        };
+        
+        const TERRAIN_TYPES = {
+            '.': { char: '.', name: 'Plaine', color: '#228B22' },
+            '♠': { char: '♠', name: 'Forêt', color: '#006400' },
+            '^': { char: '^', name: 'Montagne', color: '#8B4513' },
+            '~': { char: '~', name: 'Eau', color: '#4682B4' },
+            '#': { char: '#', name: 'Mur', color: '#696969' }
+        };
+        
+        const ENEMY_TYPES = [
+            { icon: '👹', name: 'Gobelin Temporel', hp: 30, damage: 5, xp: 10 },
+            { icon: '🐉', name: 'Dragon Quantique', hp: 100, damage: 20, xp: 50 },
+            { icon: '💀', name: 'Squelette Paradoxal', hp: 40, damage: 8, xp: 15 },
+            { icon: '🧟', name: 'Zombie Causal', hp: 50, damage: 10, xp: 20 }
+        ];
+        
+        const ITEM_TYPES = [
+            { icon: '💎', name: 'Cristal Temporel', type: 'consumable', effect: 'restore_mana', value: 20 },
+            { icon: '🗡️', name: 'Épée Quantique', type: 'weapon', damage: 15 },
+            { icon: '🛡️', name: 'Bouclier Causal', type: 'armor', defense: 10 },
+            { icon: '📜', name: 'Parchemin Mystique', type: 'spell', spell: 'teleport' },
+            { icon: '🧪', name: 'Potion de Vie', type: 'consumable', effect: 'restore_hp', value: 30 }
+        ];
+        
+        // Descriptions lyriques
+        const LYRIC_DESCRIPTIONS = {
+            start: "Dans les brumes du temps, un héros s'éveille...",
+            combat: "L'acier chante sa mélodie mortelle à travers les âges...",
+            item_found: "Un éclat de pouvoir ancien illumine votre chemin...",
+            level_up: "Les échos de vos exploits résonnent dans l'éternité...",
+            portal: "Un vortex temporel tourbillonne, promettant des mystères infinis..."
+        };
+        
+        // Initialisation
+        function init() {
+            generateMap();
+            spawnEnemies(5);
+            spawnItems(3);
+            spawnPortals(2);
+            updateFog();
+            render();
+            updateUI();
+            addMessage(LYRIC_DESCRIPTIONS.start);
+            
+            // Connexion au backend si disponible
+            connectToBackend();
+        }
+        
+        function generateMap() {
+            for (let y = 0; y < MAP_HEIGHT; y++) {
+                gameState.map[y] = [];
+                gameState.fogMap[y] = [];
+                for (let x = 0; x < MAP_WIDTH; x++) {
+                    // Génération procédurale simple
+                    const rand = Math.random();
+                    if (rand < 0.7) gameState.map[y][x] = '.';
+                    else if (rand < 0.85) gameState.map[y][x] = '♠';
+                    else if (rand < 0.95) gameState.map[y][x] = '^';
+                    else gameState.map[y][x] = '~';
+                    
+                    gameState.fogMap[y][x] = false;
+                }
+            }
+        }
+        
+        function spawnEnemies(count) {
+            for (let i = 0; i < count; i++) {
+                const type = ENEMY_TYPES[Math.floor(Math.random() * ENEMY_TYPES.length)];
+                let x, y;
+                do {
+                    x = Math.floor(Math.random() * MAP_WIDTH);
+                    y = Math.floor(Math.random() * MAP_HEIGHT);
+                } while (isOccupied(x, y) || gameState.map[y][x] === '~');
+                
+                gameState.enemies.push({
+                    x, y,
+                    ...type,
+                    maxHp: type.hp,
+                    id: 'enemy_' + i
+                });
+            }
+        }
+        
+        function spawnItems(count) {
+            for (let i = 0; i < count; i++) {
+                const type = ITEM_TYPES[Math.floor(Math.random() * ITEM_TYPES.length)];
+                let x, y;
+                do {
+                    x = Math.floor(Math.random() * MAP_WIDTH);
+                    y = Math.floor(Math.random() * MAP_HEIGHT);
+                } while (isOccupied(x, y) || gameState.map[y][x] === '~');
+                
+                gameState.items.push({
+                    x, y,
+                    ...type,
+                    id: 'item_' + i
+                });
+            }
+        }
+        
+        function spawnPortals(count) {
+            for (let i = 0; i < count; i++) {
+                let x, y;
+                do {
+                    x = Math.floor(Math.random() * MAP_WIDTH);
+                    y = Math.floor(Math.random() * MAP_HEIGHT);
+                } while (isOccupied(x, y) || gameState.map[y][x] !== '.');
+                
+                gameState.portals.push({
+                    x, y,
+                    icon: '🌀',
+                    name: 'Portail Temporel',
+                    destination: 'Timeline ' + (i + 2)
+                });
+            }
+        }
+        
+        function isOccupied(x, y) {
+            if (gameState.hero.x === x && gameState.hero.y === y) return true;
+            if (gameState.enemies.some(e => e.x === x && e.y === y)) return true;
+            if (gameState.items.some(i => i.x === x && i.y === y)) return true;
+            if (gameState.portals.some(p => p.x === x && p.y === y)) return true;
+            return false;
+        }
+        
+        function updateFog() {
+            if (!gameState.fogEnabled) {
+                // Tout visible
+                for (let y = 0; y < MAP_HEIGHT; y++) {
+                    for (let x = 0; x < MAP_WIDTH; x++) {
+                        gameState.fogMap[y][x] = true;
+                    }
+                }
+                return;
+            }
+            
+            // Réinitialiser le brouillard
+            for (let y = 0; y < MAP_HEIGHT; y++) {
+                for (let x = 0; x < MAP_WIDTH; x++) {
+                    gameState.fogMap[y][x] = false;
+                }
+            }
+            
+            // Révéler autour du héros
+            for (let dy = -VISION_RANGE; dy <= VISION_RANGE; dy++) {
+                for (let dx = -VISION_RANGE; dx <= VISION_RANGE; dx++) {
+                    const x = gameState.hero.x + dx;
+                    const y = gameState.hero.y + dy;
+                    if (x >= 0 && x < MAP_WIDTH && y >= 0 && y < MAP_HEIGHT) {
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance <= VISION_RANGE) {
+                            gameState.fogMap[y][x] = true;
+                        }
+                    }
+                }
+            }
+        }
+        
+        function render() {
+            let output = '';
+            for (let y = 0; y < MAP_HEIGHT; y++) {
+                for (let x = 0; x < MAP_WIDTH; x++) {
+                    let char = gameState.map[y][x];
+                    let cssClass = 'fog';
+                    
+                    if (gameState.fogMap[y][x]) {
+                        cssClass = 'visible';
+                        
+                        // Héros
+                        if (gameState.hero.x === x && gameState.hero.y === y) {
+                            char = gameState.hero.icon;
+                            cssClass = 'hero';
+                        }
+                        // Ennemis
+                        else {
+                            const enemy = gameState.enemies.find(e => e.x === x && e.y === y);
+                            if (enemy) {
+                                char = enemy.icon;
+                                cssClass = 'enemy';
+                            }
+                            // Items
+                            const item = gameState.items.find(i => i.x === x && i.y === y);
+                            if (item) {
+                                char = item.icon;
+                                cssClass = 'item';
+                            }
+                            // Portails
+                            const portal = gameState.portals.find(p => p.x === x && p.y === y);
+                            if (portal) {
+                                char = portal.icon;
+                                cssClass = 'portal';
+                            }
+                        }
+                    } else {
+                        char = '?';
+                    }
+                    
+                    output += `<span class="${cssClass}">${char}</span>`;
+                }
+                output += '\n';
+            }
+            document.getElementById('map').innerHTML = output;
+        }
+        
+        function move(direction) {
+            let newX = gameState.hero.x;
+            let newY = gameState.hero.y;
+            
+            switch(direction) {
+                case 'up': newY--; break;
+                case 'down': newY++; break;
+                case 'left': newX--; break;
+                case 'right': newX++; break;
+            }
+            
+            // Vérifier les limites
+            if (newX < 0 || newX >= MAP_WIDTH || newY < 0 || newY >= MAP_HEIGHT) {
+                addMessage("Vous ne pouvez pas aller par là !");
+                return;
+            }
+            
+            // Vérifier le terrain
+            if (gameState.map[newY][newX] === '~') {
+                addMessage("Vous ne pouvez pas marcher sur l'eau !");
+                return;
+            }
+            
+            // Déplacer le héros
+            gameState.hero.x = newX;
+            gameState.hero.y = newY;
+            
+            // Vérifier les interactions
+            checkPortal();
+            checkItem();
+            
+            // Tour des ennemis
+            moveEnemies();
+            
+            gameState.turn++;
+            updateFog();
+            render();
+            updateUI();
+        }
+        
+        function moveEnemies() {
+            gameState.enemies.forEach(enemy => {
+                // IA simple : se rapprocher du héros si visible
+                const dx = gameState.hero.x - enemy.x;
+                const dy = gameState.hero.y - enemy.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance <= VISION_RANGE && distance > 1) {
+                    // Se déplacer vers le héros
+                    const moveX = Math.sign(dx);
+                    const moveY = Math.sign(dy);
+                    
+                    const newX = enemy.x + (Math.random() > 0.5 ? moveX : 0);
+                    const newY = enemy.y + (Math.random() > 0.5 ? 0 : moveY);
+                    
+                    if (!isOccupied(newX, newY) && gameState.map[newY][newX] !== '~') {
+                        enemy.x = newX;
+                        enemy.y = newY;
+                    }
+                }
+                
+                // Attaquer si adjacent
+                if (Math.abs(dx) <= 1 && Math.abs(dy) <= 1 && distance > 0) {
+                    gameState.hero.hp -= enemy.damage;
+                    addMessage(`${enemy.name} vous attaque ! -${enemy.damage} PV`);
+                    if (gameState.hero.hp <= 0) {
+                        addMessage("GAME OVER - Vous êtes mort !");
+                        gameState.hero.hp = 0;
+                    }
+                }
+            });
+        }
+        
+        function attack() {
+            // Trouver un ennemi adjacent
+            for (let enemy of gameState.enemies) {
+                const dx = Math.abs(enemy.x - gameState.hero.x);
+                const dy = Math.abs(enemy.y - gameState.hero.y);
+                if (dx <= 1 && dy <= 1 && (dx + dy) > 0) {
+                    // Calculer les dégâts
+                    const weapon = gameState.hero.inventory.find(i => i.type === 'weapon');
+                    const damage = 10 + (weapon ? weapon.damage : 0);
+                    
+                    enemy.hp -= damage;
+                    addMessage(`Vous attaquez ${enemy.name} ! -${damage} PV`);
+                    addMessage(LYRIC_DESCRIPTIONS.combat);
+                    
+                    if (enemy.hp <= 0) {
+                        // Ennemi vaincu
+                        gameState.hero.xp += enemy.xp;
+                        addMessage(`${enemy.name} vaincu ! +${enemy.xp} XP`);
+                        
+                        // Retirer l'ennemi
+                        gameState.enemies = gameState.enemies.filter(e => e.id !== enemy.id);
+                        
+                        // Level up ?
+                        if (gameState.hero.xp >= gameState.hero.level * 50) {
+                            levelUp();
+                        }
+                    }
+                    
+                    moveEnemies();
+                    render();
+                    updateUI();
+                    return;
+                }
+            }
+            
+            addMessage("Aucun ennemi à portée !");
+        }
+        
+        function useSpell() {
+            if (gameState.hero.mana < 10) {
+                addMessage("Pas assez de mana !");
+                return;
+            }
+            
+            const spell = gameState.hero.spells[0];
+            gameState.hero.mana -= spell.manaCost;
+            
+            // Effet du sort : dégâts de zone
+            let hit = false;
+            gameState.enemies.forEach(enemy => {
+                const distance = Math.sqrt(
+                    Math.pow(enemy.x - gameState.hero.x, 2) + 
+                    Math.pow(enemy.y - gameState.hero.y, 2)
+                );
+                if (distance <= 3) {
+                    enemy.hp -= spell.damage;
+                    hit = true;
+                    if (enemy.hp <= 0) {
+                        gameState.hero.xp += enemy.xp;
+                    }
+                }
+            });
+            
+            // Retirer les ennemis morts
+            gameState.enemies = gameState.enemies.filter(e => e.hp > 0);
+            
+            if (hit) {
+                addMessage(`${spell.name} lancé ! Les ennemis proches subissent ${spell.damage} dégâts !`);
+            } else {
+                addMessage(`${spell.name} lancé dans le vide...`);
+            }
+            
+            render();
+            updateUI();
+        }
+        
+        function pickupItem() {
+            const item = gameState.items.find(i => i.x === gameState.hero.x && i.y === gameState.hero.y);
+            if (item) {
+                gameState.hero.inventory.push(item);
+                gameState.items = gameState.items.filter(i => i.id !== item.id);
+                addMessage(`Vous ramassez : ${item.name}`);
+                addMessage(LYRIC_DESCRIPTIONS.item_found);
+                
+                // Appliquer l'effet immédiat si consommable
+                if (item.type === 'consumable') {
+                    useItem(item);
+                }
+                
+                render();
+                updateUI();
+            } else {
+                addMessage("Rien à ramasser ici.");
+            }
+        }
+        
+        function useItem(item) {
+            if (item.effect === 'restore_hp') {
+                gameState.hero.hp = Math.min(gameState.hero.maxHp, gameState.hero.hp + item.value);
+                addMessage(`+${item.value} PV restaurés !`);
+            } else if (item.effect === 'restore_mana') {
+                gameState.hero.mana = Math.min(gameState.hero.maxMana, gameState.hero.mana + item.value);
+                addMessage(`+${item.value} Mana restauré !`);
+            }
+            
+            // Retirer l'objet consommé
+            gameState.hero.inventory = gameState.hero.inventory.filter(i => i.id !== item.id);
+        }
+        
+        function checkPortal() {
+            const portal = gameState.portals.find(p => p.x === gameState.hero.x && p.y === gameState.hero.y);
+            if (portal) {
+                addMessage(`Vous découvrez un ${portal.name} vers ${portal.destination} !`);
+                addMessage(LYRIC_DESCRIPTIONS.portal);
+            }
+        }
+        
+        function checkItem() {
+            const item = gameState.items.find(i => i.x === gameState.hero.x && i.y === gameState.hero.y);
+            if (item) {
+                addMessage(`Il y a ${item.name} ici ! Appuyez sur R pour ramasser.`);
+            }
+        }
+        
+        function levelUp() {
+            gameState.hero.level++;
+            gameState.hero.maxHp += 20;
+            gameState.hero.hp = gameState.hero.maxHp;
+            gameState.hero.maxMana += 10;
+            gameState.hero.mana = gameState.hero.maxMana;
+            
+            addMessage(`NIVEAU ${gameState.hero.level} ! Vos capacités augmentent !`);
+            addMessage(LYRIC_DESCRIPTIONS.level_up);
+        }
+        
+        function toggleFog() {
+            gameState.fogEnabled = !gameState.fogEnabled;
+            updateFog();
+            render();
+            addMessage(gameState.fogEnabled ? "Brouillard activé" : "Brouillard désactivé");
+        }
+        
+        function updateUI() {
+            // Stats du héros
+            document.getElementById('hero-stats').innerHTML = `
+                <div>${gameState.hero.icon} ${gameState.hero.name} - Niveau ${gameState.hero.level}</div>
+                <div>❤️ PV: ${gameState.hero.hp}/${gameState.hero.maxHp}</div>
+                <div>💙 Mana: ${gameState.hero.mana}/${gameState.hero.maxMana}</div>
+                <div>⭐ XP: ${gameState.hero.xp}</div>
+                <div>📍 Position: (${gameState.hero.x}, ${gameState.hero.y})</div>
+                <div>🔄 Tour: ${gameState.turn}</div>
+            `;
+            
+            // Histoire
+            if (gameState.turn % 10 === 0 && gameState.turn > 0) {
+                const stories = Object.values(LYRIC_DESCRIPTIONS);
+                const story = stories[Math.floor(Math.random() * stories.length)];
+                document.getElementById('story').innerHTML = story;
+            }
+            
+            // Inventaire
+            let inventoryHTML = '';
+            if (gameState.hero.inventory.length === 0) {
+                inventoryHTML = '<div>Vide</div>';
+            } else {
+                gameState.hero.inventory.forEach(item => {
+                    inventoryHTML += `<div>${item.icon} ${item.name}</div>`;
+                });
+            }
+            document.getElementById('inventory').innerHTML = inventoryHTML;
+            
+            // Ennemis proches
+            let enemiesHTML = '';
+            const nearbyEnemies = gameState.enemies.filter(enemy => {
+                const distance = Math.sqrt(
+                    Math.pow(enemy.x - gameState.hero.x, 2) + 
+                    Math.pow(enemy.y - gameState.hero.y, 2)
+                );
+                return distance <= VISION_RANGE && gameState.fogMap[enemy.y][enemy.x];
+            });
+            
+            if (nearbyEnemies.length === 0) {
+                enemiesHTML = '<div>Aucun</div>';
+            } else {
+                nearbyEnemies.forEach(enemy => {
+                    const distance = Math.round(Math.sqrt(
+                        Math.pow(enemy.x - gameState.hero.x, 2) + 
+                        Math.pow(enemy.y - gameState.hero.y, 2)
+                    ));
+                    enemiesHTML += `<div>${enemy.icon} ${enemy.name} - PV: ${enemy.hp}/${enemy.maxHp} - Distance: ${distance}</div>`;
+                });
+            }
+            document.getElementById('enemies').innerHTML = enemiesHTML;
+        }
+        
+        function addMessage(text) {
+            const messages = document.getElementById('messages');
+            messages.innerHTML = `<div>${text}</div>` + messages.innerHTML;
+            // Garder seulement les 5 derniers messages
+            const allMessages = messages.querySelectorAll('div');
+            if (allMessages.length > 5) {
+                allMessages[allMessages.length - 1].remove();
+            }
+        }
+        
+        // Connexion backend (optionnelle)
+        async function connectToBackend() {
+            try {
+                const response = await fetch('http://localhost:8080/api/status');
+                if (response.ok) {
+                    const data = await response.json();
+                    addMessage("✅ Connecté au backend Heroes of Time !");
+                    console.log("Backend status:", data);
+                }
+            } catch (error) {
+                console.log("Backend non disponible, mode hors ligne");
+            }
+        }
+        
+        // Contrôles clavier
+        document.addEventListener('keydown', (e) => {
+            switch(e.key.toLowerCase()) {
+                case 'arrowup': case 'w': move('up'); break;
+                case 'arrowdown': case 's': move('down'); break;
+                case 'arrowleft': case 'a': move('left'); break;
+                case 'arrowright': case 'd': move('right'); break;
+                case 'f': toggleFog(); break;
+                case 'r': pickupItem(); break;
+                case ' ': case 'enter': attack(); break;
+                case 'q': useSpell(); break;
+            }
+        });
+        
+        // Démarrer le jeu
+        init();
+    </script>
+</body>
+</html> 

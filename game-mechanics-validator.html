@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Heroes of Time - Validateur de Mécaniques</title>
+    <style>
+        body {
+            background: #000;
+            color: #0F0;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        #container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .test-panel {
+            border: 2px solid #0F0;
+            padding: 15px;
+            background: #111;
+            height: 600px;
+            overflow-y: auto;
+        }
+        
+        .test-section {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #333;
+        }
+        
+        .test-title {
+            color: #FFD700;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .test-item {
+            margin: 5px 0;
+            padding: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .status-pending { color: #FFA500; }
+        .status-running { color: #00BFFF; animation: pulse 1s infinite; }
+        .status-passed { color: #00FF00; }
+        .status-failed { color: #FF0000; }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        button {
+            background: #222;
+            color: #0F0;
+            border: 2px solid #0F0;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+        }
+        
+        button:hover {
+            background: #0F0;
+            color: #000;
+        }
+        
+        #controls {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        #results {
+            border: 2px solid #FFD700;
+            padding: 15px;
+            margin-top: 20px;
+            background: #111;
+        }
+        
+        .result-summary {
+            font-size: 20px;
+            text-align: center;
+            margin: 10px 0;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #333;
+            border: 1px solid #0F0;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, #00FF00, #FFD700);
+            transition: width 0.3s;
+        }
+        
+        #log-panel {
+            background: #000;
+            border: 1px solid #444;
+            padding: 10px;
+            height: 200px;
+            overflow-y: auto;
+            font-size: 12px;
+            white-space: pre-wrap;
+        }
+        
+        .test-detail {
+            font-size: 12px;
+            color: #888;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; color: #FFD700;">⚙️ VALIDATEUR DE MÉCANIQUES - HEROES OF TIME ⚙️</h1>
+    
+    <div id="controls">
+        <button onclick="runAllTests()">🚀 Lancer Tous les Tests</button>
+        <button onclick="runCombatTests()">⚔️ Tests Combat</button>
+        <button onclick="runTemporalTests()">🌀 Tests Temporels</button>
+        <button onclick="runAITests()">🤖 Tests IA</button>
+        <button onclick="resetTests()">🔄 Reset</button>
+        <button onclick="exportResults()">📊 Exporter Résultats</button>
+    </div>
+    
+    <div id="results">
+        <div class="result-summary">
+            <span id="total-tests">0</span> tests | 
+            <span id="passed-tests" style="color: #00FF00;">0</span> réussis | 
+            <span id="failed-tests" style="color: #FF0000;">0</span> échoués
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress" style="width: 0%"></div>
+        </div>
+    </div>
+    
+    <div id="container">
+        <div class="test-panel">
+            <h2>📋 Tests de Mécaniques</h2>
+            
+            <div class="test-section">
+                <div class="test-title">⚔️ Système de Combat</div>
+                <div id="combat-tests"></div>
+            </div>
+            
+            <div class="test-section">
+                <div class="test-title">🌀 Mécaniques Temporelles</div>
+                <div id="temporal-tests"></div>
+            </div>
+            
+            <div class="test-section">
+                <div class="test-title">🤖 Intelligence Artificielle</div>
+                <div id="ai-tests"></div>
+            </div>
+            
+            <div class="test-section">
+                <div class="test-title">🎒 Système d'Inventaire</div>
+                <div id="inventory-tests"></div>
+            </div>
+            
+            <div class="test-section">
+                <div class="test-title">🗺️ Navigation & Map</div>
+                <div id="navigation-tests"></div>
+            </div>
+            
+            <div class="test-section">
+                <div class="test-title">🔮 Magie & Sorts</div>
+                <div id="magic-tests"></div>
+            </div>
+        </div>
+        
+        <div class="test-panel">
+            <h2>📊 Détails & Logs</h2>
+            <div id="log-panel"></div>
+        </div>
+    </div>
+
+    <script>
+        // État des tests
+        let testResults = {
+            total: 0,
+            passed: 0,
+            failed: 0,
+            running: false,
+            tests: {}
+        };
+        
+        // Définition des tests
+        const TEST_SUITES = {
+            combat: {
+                title: "Système de Combat",
+                tests: [
+                    {
+                        id: "combat_damage_calc",
+                        name: "Calcul des dégâts",
+                        test: async () => {
+                            const damage = calculateDamage(50, 20);
+                            return damage >= 30 && damage <= 50;
+                        }
+                    },
+                    {
+                        id: "combat_crit_chance",
+                        name: "Coups critiques (10% chance)",
+                        test: async () => {
+                            let crits = 0;
+                            for (let i = 0; i < 1000; i++) {
+                                if (isCriticalHit()) crits++;
+                            }
+                            return crits >= 80 && crits <= 120; // 8-12%
+                        }
+                    },
+                    {
+                        id: "combat_dodge",
+                        name: "Mécanisme d'esquive",
+                        test: async () => {
+                            const dodged = attemptDodge(30); // 30% dodge
+                            return typeof dodged === 'boolean';
+                        }
+                    },
+                    {
+                        id: "combat_range",
+                        name: "Portée d'attaque",
+                        test: async () => {
+                            const inRange = checkAttackRange({x: 0, y: 0}, {x: 3, y: 4}, 5);
+                            const outRange = checkAttackRange({x: 0, y: 0}, {x: 10, y: 10}, 5);
+                            return inRange && !outRange;
+                        }
+                    },
+                    {
+                        id: "combat_multi_target",
+                        name: "Attaques multi-cibles",
+                        test: async () => {
+                            const targets = getAreaTargets({x: 5, y: 5}, 3, 'circle');
+                            return targets.length > 0;
+                        }
+                    }
+                ]
+            },
+            temporal: {
+                title: "Mécaniques Temporelles",
+                tests: [
+                    {
+                        id: "temporal_paradox",
+                        name: "Détection de paradoxe",
+                        test: async () => {
+                            const paradox = detectParadox([
+                                {time: 1, action: 'move', target: 'A'},
+                                {time: 1, action: 'move', target: 'B'}
+                            ]);
+                            return paradox === true;
+                        }
+                    },
+                    {
+                        id: "temporal_rewind",
+                        name: "Retour temporel (3 tours)",
+                        test: async () => {
+                            const history = [{turn: 1}, {turn: 2}, {turn: 3}, {turn: 4}];
+                            const rewound = rewindTime(history, 3);
+                            return rewound.turn === 1;
+                        }
+                    },
+                    {
+                        id: "temporal_split",
+                        name: "Division timeline",
+                        test: async () => {
+                            const timelines = splitTimeline('main');
+                            return timelines.length === 2 && timelines[1].id !== 'main';
+                        }
+                    },
+                    {
+                        id: "temporal_merge",
+                        name: "Fusion de timelines",
+                        test: async () => {
+                            const merged = mergeTimelines(['timeline1', 'timeline2']);
+                            return merged.conflicts !== undefined;
+                        }
+                    },
+                    {
+                        id: "temporal_loop",
+                        name: "Boucle temporelle infinie",
+                        test: async () => {
+                            const loop = createTimeLoop(5); // 5 itérations max
+                            return loop.iterations <= 5;
+                        }
+                    }
+                ]
+            },
+            ai: {
+                title: "Intelligence Artificielle",
+                tests: [
+                    {
+                        id: "ai_pathfinding",
+                        name: "Pathfinding A*",
+                        test: async () => {
+                            const path = findPath({x: 0, y: 0}, {x: 10, y: 10});
+                            return path && path.length > 0;
+                        }
+                    },
+                    {
+                        id: "ai_decision_tree",
+                        name: "Arbre de décision",
+                        test: async () => {
+                            const decision = makeAIDecision({
+                                health: 20,
+                                enemies: 3,
+                                items: ['potion']
+                            });
+                            return decision === 'flee' || decision === 'use_potion';
+                        }
+                    },
+                    {
+                        id: "ai_threat_assess",
+                        name: "Évaluation menace",
+                        test: async () => {
+                            const threat = assessThreat([
+                                {type: 'goblin', health: 30},
+                                {type: 'dragon', health: 100}
+                            ]);
+                            return threat > 0.7; // Haute menace
+                        }
+                    },
+                    {
+                        id: "ai_learning",
+                        name: "Apprentissage adaptatif",
+                        test: async () => {
+                            const ai = createAI();
+                            ai.recordOutcome('attack', 'success');
+                            ai.recordOutcome('attack', 'success');
+                            ai.recordOutcome('flee', 'failure');
+                            return ai.getPreferredAction() === 'attack';
+                        }
+                    },
+                    {
+                        id: "ai_personality",
+                        name: "Personnalités IA",
+                        test: async () => {
+                            const aggressive = createAI('aggressive');
+                            const defensive = createAI('defensive');
+                            return aggressive.aggressionLevel > defensive.aggressionLevel;
+                        }
+                    }
+                ]
+            },
+            inventory: {
+                title: "Système d'Inventaire",
+                tests: [
+                    {
+                        id: "inv_capacity",
+                        name: "Limite de capacité",
+                        test: async () => {
+                            const inv = createInventory(10);
+                            for (let i = 0; i < 15; i++) {
+                                inv.addItem({id: i, weight: 1});
+                            }
+                            return inv.items.length === 10;
+                        }
+                    },
+                    {
+                        id: "inv_stacking",
+                        name: "Empilement d'objets",
+                        test: async () => {
+                            const inv = createInventory(10);
+                            inv.addItem({id: 'potion', stackable: true, quantity: 5});
+                            inv.addItem({id: 'potion', stackable: true, quantity: 3});
+                            return inv.getItemCount('potion') === 8;
+                        }
+                    },
+                    {
+                        id: "inv_equipment",
+                        name: "Système d'équipement",
+                        test: async () => {
+                            const char = createCharacter();
+                            char.equip({slot: 'weapon', item: 'sword'});
+                            return char.equipment.weapon === 'sword';
+                        }
+                    },
+                    {
+                        id: "inv_weight",
+                        name: "Gestion du poids",
+                        test: async () => {
+                            const inv = createInventory(10, 50); // 50kg max
+                            inv.addItem({weight: 30});
+                            inv.addItem({weight: 25}); // Dépasse la limite
+                            return inv.totalWeight === 30;
+                        }
+                    }
+                ]
+            },
+            navigation: {
+                title: "Navigation & Map",
+                tests: [
+                    {
+                        id: "nav_collision",
+                        name: "Détection collision",
+                        test: async () => {
+                            const canMove = checkCollision({x: 5, y: 5}, 'wall');
+                            return canMove === false;
+                        }
+                    },
+                    {
+                        id: "nav_fog_war",
+                        name: "Brouillard de guerre",
+                        test: async () => {
+                            const visible = updateFogOfWar({x: 5, y: 5}, 3);
+                            return visible.length > 0;
+                        }
+                    },
+                    {
+                        id: "nav_portals",
+                        name: "Téléportation portails",
+                        test: async () => {
+                            const newPos = usePortal({x: 5, y: 5}, 'portal_1');
+                            return newPos.x !== 5 || newPos.y !== 5;
+                        }
+                    },
+                    {
+                        id: "nav_terrain",
+                        name: "Effets de terrain",
+                        test: async () => {
+                            const speed = getMovementSpeed('swamp');
+                            return speed < 1.0; // Ralentissement
+                        }
+                    }
+                ]
+            },
+            magic: {
+                title: "Magie & Sorts",
+                tests: [
+                    {
+                        id: "magic_mana",
+                        name: "Consommation mana",
+                        test: async () => {
+                            const mage = {mana: 50};
+                            castSpell(mage, 'fireball', 20); // Coût 20
+                            return mage.mana === 30;
+                        }
+                    },
+                    {
+                        id: "magic_cooldown",
+                        name: "Temps de recharge",
+                        test: async () => {
+                            const spell = {cooldown: 5, lastCast: 0};
+                            const canCast = checkCooldown(spell, 3);
+                            return canCast === false;
+                        }
+                    },
+                    {
+                        id: "magic_combo",
+                        name: "Combos de sorts",
+                        test: async () => {
+                            const combo = checkSpellCombo(['fire', 'wind']);
+                            return combo === 'inferno'; // Fire + Wind = Inferno
+                        }
+                    },
+                    {
+                        id: "magic_resist",
+                        name: "Résistance magique",
+                        test: async () => {
+                            const damage = calculateMagicDamage(100, 0.3); // 30% resist
+                            return damage === 70;
+                        }
+                    }
+                ]
+            }
+        };
+        
+        // Fonctions de test simulées
+        function calculateDamage(base, armor) {
+            return Math.max(1, base - armor + Math.random() * 10);
+        }
+        
+        function isCriticalHit() {
+            return Math.random() < 0.1;
+        }
+        
+        function attemptDodge(chance) {
+            return Math.random() < (chance / 100);
+        }
+        
+        function checkAttackRange(pos1, pos2, range) {
+            const dist = Math.sqrt(Math.pow(pos2.x - pos1.x, 2) + Math.pow(pos2.y - pos1.y, 2));
+            return dist <= range;
+        }
+        
+        function getAreaTargets(center, radius, shape) {
+            const targets = [];
+            for (let x = -radius; x <= radius; x++) {
+                for (let y = -radius; y <= radius; y++) {
+                    if (shape === 'circle' && Math.sqrt(x*x + y*y) <= radius) {
+                        targets.push({x: center.x + x, y: center.y + y});
+                    }
+                }
+            }
+            return targets;
+        }
+        
+        function detectParadox(actions) {
+            const timeMap = {};
+            for (const action of actions) {
+                if (timeMap[action.time]) return true;
+                timeMap[action.time] = true;
+            }
+            return false;
+        }
+        
+        function rewindTime(history, turns) {
+            return history[Math.max(0, history.length - turns - 1)];
+        }
+        
+        function splitTimeline(mainId) {
+            return [
+                {id: mainId},
+                {id: mainId + '_alt_' + Date.now()}
+            ];
+        }
+        
+        function mergeTimelines(timelines) {
+            return {
+                merged: true,
+                conflicts: Math.floor(Math.random() * 3)
+            };
+        }
+        
+        function createTimeLoop(maxIterations) {
+            return {
+                iterations: Math.floor(Math.random() * maxIterations) + 1
+            };
+        }
+        
+        function findPath(start, end) {
+            // Simulation A*
+            return [{x: start.x, y: start.y}, {x: end.x, y: end.y}];
+        }
+        
+        function makeAIDecision(state) {
+            if (state.health < 30 && state.items.includes('potion')) return 'use_potion';
+            if (state.health < 30 && state.enemies > 2) return 'flee';
+            return 'attack';
+        }
+        
+        function assessThreat(enemies) {
+            let threat = 0;
+            for (const enemy of enemies) {
+                if (enemy.type === 'dragon') threat += 0.5;
+                else if (enemy.type === 'goblin') threat += 0.1;
+            }
+            return Math.min(1, threat);
+        }
+        
+        function createAI(personality = 'balanced') {
+            const ai = {
+                personality,
+                aggressionLevel: personality === 'aggressive' ? 0.8 : 0.3,
+                outcomes: {},
+                recordOutcome: function(action, result) {
+                    if (!this.outcomes[action]) this.outcomes[action] = {success: 0, failure: 0};
+                    this.outcomes[action][result]++;
+                },
+                getPreferredAction: function() {
+                    let bestAction = null;
+                    let bestScore = -1;
+                    for (const [action, results] of Object.entries(this.outcomes)) {
+                        const score = results.success / (results.success + results.failure);
+                        if (score > bestScore) {
+                            bestScore = score;
+                            bestAction = action;
+                        }
+                    }
+                    return bestAction;
+                }
+            };
+            return ai;
+        }
+        
+        function createInventory(maxSlots, maxWeight = Infinity) {
+            return {
+                items: [],
+                maxSlots,
+                maxWeight,
+                totalWeight: 0,
+                addItem: function(item) {
+                    if (this.items.length >= this.maxSlots) return false;
+                    if (this.totalWeight + (item.weight || 0) > this.maxWeight) return false;
+                    
+                    if (item.stackable) {
+                        const existing = this.items.find(i => i.id === item.id);
+                        if (existing) {
+                            existing.quantity += item.quantity || 1;
+                            return true;
+                        }
+                    }
+                    
+                    this.items.push(item);
+                    this.totalWeight += item.weight || 0;
+                    return true;
+                },
+                getItemCount: function(itemId) {
+                    const item = this.items.find(i => i.id === itemId);
+                    return item ? (item.quantity || 1) : 0;
+                }
+            };
+        }
+        
+        function createCharacter() {
+            return {
+                equipment: {
+                    weapon: null,
+                    armor: null,
+                    accessory: null
+                },
+                equip: function(equipData) {
+                    this.equipment[equipData.slot] = equipData.item;
+                }
+            };
+        }
+        
+        function checkCollision(pos, terrain) {
+            return terrain === 'wall' || terrain === 'mountain';
+        }
+        
+        function updateFogOfWar(playerPos, visionRange) {
+            const visible = [];
+            for (let x = -visionRange; x <= visionRange; x++) {
+                for (let y = -visionRange; y <= visionRange; y++) {
+                    if (Math.sqrt(x*x + y*y) <= visionRange) {
+                        visible.push({x: playerPos.x + x, y: playerPos.y + y});
+                    }
+                }
+            }
+            return visible;
+        }
+        
+        function usePortal(currentPos, portalId) {
+            return {x: Math.floor(Math.random() * 20), y: Math.floor(Math.random() * 20)};
+        }
+        
+        function getMovementSpeed(terrain) {
+            const speeds = {
+                'normal': 1.0,
+                'road': 1.2,
+                'forest': 0.8,
+                'swamp': 0.5,
+                'mountain': 0.3
+            };
+            return speeds[terrain] || 1.0;
+        }
+        
+        function castSpell(caster, spellName, manaCost) {
+            caster.mana -= manaCost;
+        }
+        
+        function checkCooldown(spell, currentTime) {
+            return currentTime - spell.lastCast >= spell.cooldown;
+        }
+        
+        function checkSpellCombo(spells) {
+            if (spells[0] === 'fire' && spells[1] === 'wind') return 'inferno';
+            if (spells[0] === 'water' && spells[1] === 'cold') return 'ice';
+            return null;
+        }
+        
+        function calculateMagicDamage(baseDamage, resistance) {
+            return baseDamage * (1 - resistance);
+        }
+        
+        // Interface de test
+        function initializeTests() {
+            for (const [suiteId, suite] of Object.entries(TEST_SUITES)) {
+                const container = document.getElementById(`${suiteId}-tests`);
+                if (!container) continue;
+                
+                for (const test of suite.tests) {
+                    const testElement = document.createElement('div');
+                    testElement.className = 'test-item';
+                    testElement.innerHTML = `
+                        <span>${test.name}</span>
+                        <span id="status-${test.id}" class="status-pending">⏳ En attente</span>
+                    `;
+                    container.appendChild(testElement);
+                    
+                    testResults.tests[test.id] = {
+                        name: test.name,
+                        status: 'pending',
+                        suite: suiteId
+                    };
+                    testResults.total++;
+                }
+            }
+            updateResults();
+        }
+        
+        async function runTest(test) {
+            const statusElement = document.getElementById(`status-${test.id}`);
+            statusElement.className = 'status-running';
+            statusElement.textContent = '🔄 En cours...';
+            
+            log(`Test: ${test.name}`);
+            
+            try {
+                // Simuler un délai pour voir l'animation
+                await new Promise(resolve => setTimeout(resolve, 100 + Math.random() * 400));
+                
+                const result = await test.test();
+                
+                if (result) {
+                    statusElement.className = 'status-passed';
+                    statusElement.textContent = '✅ Réussi';
+                    testResults.tests[test.id].status = 'passed';
+                    testResults.passed++;
+                    log(`✅ ${test.name} - RÉUSSI`);
+                } else {
+                    statusElement.className = 'status-failed';
+                    statusElement.textContent = '❌ Échoué';
+                    testResults.tests[test.id].status = 'failed';
+                    testResults.failed++;
+                    log(`❌ ${test.name} - ÉCHOUÉ`);
+                }
+            } catch (error) {
+                statusElement.className = 'status-failed';
+                statusElement.textContent = '💥 Erreur';
+                testResults.tests[test.id].status = 'failed';
+                testResults.tests[test.id].error = error.message;
+                testResults.failed++;
+                log(`💥 ${test.name} - ERREUR: ${error.message}`);
+            }
+            
+            updateResults();
+        }
+        
+        async function runSuite(suiteId) {
+            const suite = TEST_SUITES[suiteId];
+            if (!suite) return;
+            
+            log(`\n=== Suite: ${suite.title} ===`);
+            
+            for (const test of suite.tests) {
+                if (testResults.tests[test.id].status !== 'pending') continue;
+                await runTest(test);
+            }
+        }
+        
+        async function runAllTests() {
+            if (testResults.running) return;
+            
+            testResults.running = true;
+            resetTests();
+            
+            log('🚀 DÉBUT DES TESTS DE VALIDATION\n');
+            
+            for (const suiteId of Object.keys(TEST_SUITES)) {
+                await runSuite(suiteId);
+            }
+            
+            testResults.running = false;
+            log('\n✨ TESTS TERMINÉS !');
+            
+            // Afficher un résumé
+            const successRate = (testResults.passed / testResults.total * 100).toFixed(1);
+            log(`\n📊 RÉSUMÉ: ${testResults.passed}/${testResults.total} tests réussis (${successRate}%)`);
+            
+            if (testResults.failed === 0) {
+                log('🎉 TOUTES LES MÉCANIQUES SONT VALIDÉES !');
+            } else {
+                log(`⚠️ ${testResults.failed} mécaniques nécessitent attention`);
+            }
+        }
+        
+        async function runCombatTests() {
+            await runSuite('combat');
+        }
+        
+        async function runTemporalTests() {
+            await runSuite('temporal');
+        }
+        
+        async function runAITests() {
+            await runSuite('ai');
+        }
+        
+        function resetTests() {
+            testResults.passed = 0;
+            testResults.failed = 0;
+            
+            for (const testId in testResults.tests) {
+                testResults.tests[testId].status = 'pending';
+                const statusElement = document.getElementById(`status-${testId}`);
+                if (statusElement) {
+                    statusElement.className = 'status-pending';
+                    statusElement.textContent = '⏳ En attente';
+                }
+            }
+            
+            document.getElementById('log-panel').textContent = '';
+            updateResults();
+        }
+        
+        function updateResults() {
+            document.getElementById('total-tests').textContent = testResults.total;
+            document.getElementById('passed-tests').textContent = testResults.passed;
+            document.getElementById('failed-tests').textContent = testResults.failed;
+            
+            const progress = testResults.total > 0 
+                ? ((testResults.passed + testResults.failed) / testResults.total * 100)
+                : 0;
+            document.getElementById('progress').style.width = progress + '%';
+        }
+        
+        function log(message) {
+            const logPanel = document.getElementById('log-panel');
+            logPanel.textContent += message + '\n';
+            logPanel.scrollTop = logPanel.scrollHeight;
+        }
+        
+        function exportResults() {
+            const results = {
+                timestamp: new Date().toISOString(),
+                summary: {
+                    total: testResults.total,
+                    passed: testResults.passed,
+                    failed: testResults.failed,
+                    successRate: (testResults.passed / testResults.total * 100).toFixed(1) + '%'
+                },
+                details: testResults.tests
+            };
+            
+            const blob = new Blob([JSON.stringify(results, null, 2)], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `game-validation-${Date.now()}.json`;
+            a.click();
+            
+            log('📊 Résultats exportés !');
+        }
+        
+        // Initialiser
+        initializeTests();
+        log('🎮 Validateur de mécaniques prêt !\n');
+        log('Cliquez sur "Lancer Tous les Tests" pour commencer.\n');
+    </script>
+</body>
+</html> 

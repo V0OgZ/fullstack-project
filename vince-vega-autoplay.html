@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vince Vega - Auto-Play Mode</title>
+    <style>
+        body {
+            background: #000;
+            color: #0F0;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        #game-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 800px 350px;
+            gap: 20px;
+        }
+        
+        #map-area {
+            border: 3px solid #FFD700;
+            padding: 10px;
+            background: #111;
+            position: relative;
+        }
+        
+        #map {
+            white-space: pre;
+            line-height: 1.2;
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+        
+        #ai-panel {
+            border: 3px solid #FF00FF;
+            padding: 15px;
+            background: #111;
+        }
+        
+        .vince { color: #FFD700; font-weight: bold; animation: pulse 0.5s infinite; }
+        .enemy { color: #FF0000; }
+        .item { color: #00FFFF; }
+        .portal { color: #FF00FF; animation: spin 2s infinite; }
+        .bullet { color: #FFFF00; }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        #controls {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        button {
+            background: #333;
+            color: #FFD700;
+            border: 2px solid #FFD700;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        button:hover {
+            background: #FFD700;
+            color: #000;
+        }
+        
+        button.active {
+            background: #FF00FF;
+            border-color: #FF00FF;
+        }
+        
+        #ai-log {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #444;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        
+        .ai-decision {
+            margin: 5px 0;
+            padding: 5px;
+            border-left: 3px solid #FFD700;
+        }
+        
+        .ai-thought {
+            color: #FF00FF;
+            font-style: italic;
+        }
+        
+        .ai-action {
+            color: #00FF00;
+        }
+        
+        #stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-box {
+            border: 1px solid #444;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .health { color: #FF6B6B; }
+        .ammo { color: #FFD700; }
+        .score { color: #00FF00; }
+        .ai-status { color: #FF00FF; }
+        
+        #story-panel {
+            border: 1px solid #444;
+            padding: 10px;
+            margin-top: 20px;
+            font-style: italic;
+            color: #DDA0DD;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; color: #FFD700;">🔫 VINCE VEGA - AUTO-PLAY MODE 🔫</h1>
+    <h2 style="text-align: center; color: #FF00FF;">L'IA contrôle Vince dans sa quête temporelle !</h2>
+    
+    <div id="game-container">
+        <div id="map-area">
+            <div id="map"></div>
+            <div id="controls">
+                <button onclick="toggleAutoPlay()" id="autoplay-btn">🤖 Start Auto-Play</button>
+                <button onclick="toggleSpeed()">⚡ Vitesse: Normal</button>
+                <button onclick="resetGame()">🔄 Reset</button>
+                <button onclick="toggleManual()">🎮 Mode: Auto</button>
+            </div>
+            <div id="story-panel">
+                "Les échos du temps murmurent... Vince cherche les fragments de réalité..."
+            </div>
+        </div>
+        
+        <div id="ai-panel">
+            <h3 style="color: #FF00FF;">🧠 CERVEAU IA</h3>
+            
+            <div id="stats">
+                <div class="stat-box">
+                    <div class="health">❤️ Santé: <span id="health">100</span></div>
+                    <div class="ammo">🔫 Munitions: <span id="ammo">50</span></div>
+                </div>
+                <div class="stat-box">
+                    <div class="score">⭐ Score: <span id="score">0</span></div>
+                    <div class="ai-status">🤖 IA: <span id="ai-status">Inactif</span></div>
+                </div>
+            </div>
+            
+            <h4>📊 Décisions IA</h4>
+            <div id="ai-log"></div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const MAP_WIDTH = 35;
+        const MAP_HEIGHT = 20;
+        const API_BASE = 'http://localhost:8080/api';
+        
+        // État du jeu
+        let gameState = {
+            gameId: 'vince-autoplay-' + Date.now(),
+            aiPlayerId: null,
+            autoPlay: false,
+            speed: 1000, // ms entre les actions
+            manualMode: false,
+            vince: {
+                x: 17,
+                y: 10,
+                health: 100,
+                ammo: 50,
+                icon: '🔫',
+                facing: 'right'
+            },
+            enemies: [],
+            items: [],
+            portals: [],
+            bullets: [],
+            score: 0,
+            turn: 0,
+            map: [],
+            aiDecisions: []
+        };
+        
+        // Initialisation
+        async function init() {
+            generateMap();
+            spawnEntities();
+            render();
+            
+            // Créer un joueur IA dans le backend
+            await createAIPlayer();
+            
+            // Démarrer la boucle de jeu
+            gameLoop();
+        }
+        
+        function generateMap() {
+            for (let y = 0; y < MAP_HEIGHT; y++) {
+                gameState.map[y] = [];
+                for (let x = 0; x < MAP_WIDTH; x++) {
+                    // Bordures
+                    if (x === 0 || x === MAP_WIDTH - 1 || y === 0 || y === MAP_HEIGHT - 1) {
+                        gameState.map[y][x] = '#';
+                    } else {
+                        // Terrain aléatoire
+                        const rand = Math.random();
+                        if (rand < 0.1) gameState.map[y][x] = '#'; // Murs
+                        else if (rand < 0.15) gameState.map[y][x] = '♠'; // Obstacles
+                        else gameState.map[y][x] = '.'; // Sol
+                    }
+                }
+            }
+        }
+        
+        function spawnEntities() {
+            // Ennemis
+            for (let i = 0; i < 5; i++) {
+                spawnEnemy();
+            }
+            
+            // Items
+            for (let i = 0; i < 3; i++) {
+                spawnItem();
+            }
+            
+            // Portails temporels
+            for (let i = 0; i < 2; i++) {
+                spawnPortal();
+            }
+        }
+        
+        function spawnEnemy() {
+            let x, y;
+            do {
+                x = Math.floor(Math.random() * (MAP_WIDTH - 2)) + 1;
+                y = Math.floor(Math.random() * (MAP_HEIGHT - 2)) + 1;
+            } while (gameState.map[y][x] !== '.' || isOccupied(x, y));
+            
+            gameState.enemies.push({
+                x, y,
+                icon: '👹',
+                health: 30,
+                type: 'temporal_demon',
+                id: 'enemy_' + Date.now() + '_' + Math.random()
+            });
+        }
+        
+        function spawnItem() {
+            let x, y;
+            do {
+                x = Math.floor(Math.random() * (MAP_WIDTH - 2)) + 1;
+                y = Math.floor(Math.random() * (MAP_HEIGHT - 2)) + 1;
+            } while (gameState.map[y][x] !== '.' || isOccupied(x, y));
+            
+            const items = [
+                { icon: '💊', type: 'health', value: 25 },
+                { icon: '📦', type: 'ammo', value: 20 },
+                { icon: '💎', type: 'time_crystal', value: 100 }
+            ];
+            
+            const item = items[Math.floor(Math.random() * items.length)];
+            gameState.items.push({
+                x, y,
+                ...item,
+                id: 'item_' + Date.now()
+            });
+        }
+        
+        function spawnPortal() {
+            let x, y;
+            do {
+                x = Math.floor(Math.random() * (MAP_WIDTH - 2)) + 1;
+                y = Math.floor(Math.random() * (MAP_HEIGHT - 2)) + 1;
+            } while (gameState.map[y][x] !== '.' || isOccupied(x, y));
+            
+            gameState.portals.push({
+                x, y,
+                icon: '🌀',
+                destination: 'Timeline-' + Math.floor(Math.random() * 1000),
+                id: 'portal_' + Date.now()
+            });
+        }
+        
+        function isOccupied(x, y) {
+            if (gameState.vince.x === x && gameState.vince.y === y) return true;
+            if (gameState.enemies.some(e => e.x === x && e.y === y)) return true;
+            if (gameState.items.some(i => i.x === x && i.y === y)) return true;
+            if (gameState.portals.some(p => p.x === x && p.y === y)) return true;
+            return false;
+        }
+        
+        function render() {
+            let output = '';
+            for (let y = 0; y < MAP_HEIGHT; y++) {
+                for (let x = 0; x < MAP_WIDTH; x++) {
+                    let char = gameState.map[y][x];
+                    let cssClass = '';
+                    
+                    // Vince
+                    if (gameState.vince.x === x && gameState.vince.y === y) {
+                        char = gameState.vince.icon;
+                        cssClass = 'vince';
+                    }
+                    // Balles
+                    else if (gameState.bullets.some(b => Math.floor(b.x) === x && Math.floor(b.y) === y)) {
+                        char = '•';
+                        cssClass = 'bullet';
+                    }
+                    // Ennemis
+                    else if (gameState.enemies.some(e => e.x === x && e.y === y)) {
+                        const enemy = gameState.enemies.find(e => e.x === x && e.y === y);
+                        char = enemy.icon;
+                        cssClass = 'enemy';
+                    }
+                    // Items
+                    else if (gameState.items.some(i => i.x === x && i.y === y)) {
+                        const item = gameState.items.find(i => i.x === x && i.y === y);
+                        char = item.icon;
+                        cssClass = 'item';
+                    }
+                    // Portails
+                    else if (gameState.portals.some(p => p.x === x && p.y === y)) {
+                        const portal = gameState.portals.find(p => p.x === x && p.y === y);
+                        char = portal.icon;
+                        cssClass = 'portal';
+                    }
+                    
+                    if (cssClass) {
+                        output += `<span class="${cssClass}">${char}</span>`;
+                    } else {
+                        output += char;
+                    }
+                }
+                output += '\n';
+            }
+            
+            document.getElementById('map').innerHTML = output;
+            updateStats();
+        }
+        
+        function updateStats() {
+            document.getElementById('health').textContent = gameState.vince.health;
+            document.getElementById('ammo').textContent = gameState.vince.ammo;
+            document.getElementById('score').textContent = gameState.score;
+            document.getElementById('ai-status').textContent = gameState.autoPlay ? 'Actif' : 'Inactif';
+        }
+        
+        // Boucle de jeu
+        async function gameLoop() {
+            // Mettre à jour les balles
+            updateBullets();
+            
+            // IA ou contrôle manuel
+            if (gameState.autoPlay && !gameState.manualMode) {
+                await processAITurn();
+            }
+            
+            // Déplacer les ennemis
+            moveEnemies();
+            
+            // Vérifier les collisions
+            checkCollisions();
+            
+            // Render
+            render();
+            
+            // Continuer la boucle
+            setTimeout(gameLoop, gameState.speed);
+        }
+        
+        // Créer le joueur IA
+        async function createAIPlayer() {
+            try {
+                const response = await fetch(`${API_BASE}/ai/create`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        gameId: gameState.gameId,
+                        playerName: 'Vince Vega',
+                        difficultyLevel: 'hard',
+                        aiPersonality: 'aggressive',
+                        faction: 'temporal_agent',
+                        positionX: gameState.vince.x,
+                        positionY: gameState.vince.y
+                    })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    gameState.aiPlayerId = data.aiPlayerId;
+                    logAI("IA Vince Vega initialisée", "ai-thought");
+                }
+            } catch (error) {
+                console.error("Erreur création IA:", error);
+                // Mode fallback sans backend
+                gameState.aiPlayerId = 'local-ai';
+                logAI("Mode IA local activé", "ai-thought");
+            }
+        }
+        
+        // Traiter le tour de l'IA
+        async function processAITurn() {
+            if (!gameState.aiPlayerId) return;
+            
+            try {
+                // Si on a une vraie connexion backend
+                if (gameState.aiPlayerId !== 'local-ai') {
+                    const response = await fetch(`${API_BASE}/ai/process-turn/${gameState.aiPlayerId}`, {
+                        method: 'POST'
+                    });
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.decisions) {
+                            for (const decision of data.decisions) {
+                                await executeAIDecision(decision);
+                            }
+                        }
+                        return;
+                    }
+                }
+            } catch (error) {
+                console.error("Erreur IA backend:", error);
+            }
+            
+            // Fallback: IA locale simple
+            executeLocalAI();
+        }
+        
+        // IA locale de secours
+        function executeLocalAI() {
+            // Analyser la situation
+            const nearestEnemy = findNearestEnemy();
+            const nearestItem = findNearestItem();
+            const danger = assessDanger();
+            
+            // Prendre une décision
+            if (danger > 0.7 && gameState.vince.health < 50) {
+                // Fuir si en danger et blessé
+                logAI("Danger détecté ! Fuite tactique", "ai-thought");
+                moveAwayFromEnemies();
+            } else if (nearestItem && distance(gameState.vince, nearestItem) < 5) {
+                // Ramasser un item proche
+                logAI(`Item détecté: ${nearestItem.type}`, "ai-thought");
+                moveToward(nearestItem);
+            } else if (nearestEnemy && gameState.vince.ammo > 0) {
+                // Attaquer l'ennemi le plus proche
+                logAI("Cible verrouillée !", "ai-thought");
+                if (distance(gameState.vince, nearestEnemy) < 8) {
+                    shoot(nearestEnemy);
+                } else {
+                    moveToward(nearestEnemy);
+                }
+            } else {
+                // Explorer
+                logAI("Exploration du secteur", "ai-thought");
+                exploreMap();
+            }
+        }
+        
+        function findNearestEnemy() {
+            let nearest = null;
+            let minDist = Infinity;
+            
+            for (const enemy of gameState.enemies) {
+                const dist = distance(gameState.vince, enemy);
+                if (dist < minDist) {
+                    minDist = dist;
+                    nearest = enemy;
+                }
+            }
+            
+            return nearest;
+        }
+        
+        function findNearestItem() {
+            let nearest = null;
+            let minDist = Infinity;
+            
+            for (const item of gameState.items) {
+                const dist = distance(gameState.vince, item);
+                if (dist < minDist) {
+                    minDist = dist;
+                    nearest = item;
+                }
+            }
+            
+            return nearest;
+        }
+        
+        function distance(a, b) {
+            return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
+        }
+        
+        function assessDanger() {
+            let danger = 0;
+            for (const enemy of gameState.enemies) {
+                const dist = distance(gameState.vince, enemy);
+                if (dist < 3) danger += 0.5;
+                else if (dist < 5) danger += 0.3;
+                else if (dist < 8) danger += 0.1;
+            }
+            return Math.min(1, danger);
+        }
+        
+        function moveToward(target) {
+            const dx = Math.sign(target.x - gameState.vince.x);
+            const dy = Math.sign(target.y - gameState.vince.y);
+            
+            // Essayer de bouger en diagonale d'abord
+            if (dx !== 0 && dy !== 0) {
+                if (canMove(gameState.vince.x + dx, gameState.vince.y + dy)) {
+                    moveVince(dx, dy);
+                    return;
+                }
+            }
+            
+            // Sinon essayer horizontal/vertical
+            if (dx !== 0 && canMove(gameState.vince.x + dx, gameState.vince.y)) {
+                moveVince(dx, 0);
+            } else if (dy !== 0 && canMove(gameState.vince.x, gameState.vince.y + dy)) {
+                moveVince(0, dy);
+            }
+        }
+        
+        function moveAwayFromEnemies() {
+            let bestX = 0, bestY = 0;
+            let maxSafety = -Infinity;
+            
+            // Tester toutes les directions
+            for (let dx = -1; dx <= 1; dx++) {
+                for (let dy = -1; dy <= 1; dy++) {
+                    if (dx === 0 && dy === 0) continue;
+                    
+                    const newX = gameState.vince.x + dx;
+                    const newY = gameState.vince.y + dy;
+                    
+                    if (canMove(newX, newY)) {
+                        // Calculer la sécurité de cette position
+                        let safety = 0;
+                        for (const enemy of gameState.enemies) {
+                            safety += distance({x: newX, y: newY}, enemy);
+                        }
+                        
+                        if (safety > maxSafety) {
+                            maxSafety = safety;
+                            bestX = dx;
+                            bestY = dy;
+                        }
+                    }
+                }
+            }
+            
+            if (bestX !== 0 || bestY !== 0) {
+                moveVince(bestX, bestY);
+            }
+        }
+        
+        function exploreMap() {
+            // Bouger aléatoirement mais intelligemment
+            const directions = [
+                {dx: 0, dy: -1}, {dx: 1, dy: 0}, {dx: 0, dy: 1}, {dx: -1, dy: 0},
+                {dx: 1, dy: -1}, {dx: 1, dy: 1}, {dx: -1, dy: 1}, {dx: -1, dy: -1}
+            ];
+            
+            // Mélanger les directions
+            directions.sort(() => Math.random() - 0.5);
+            
+            for (const dir of directions) {
+                if (canMove(gameState.vince.x + dir.dx, gameState.vince.y + dir.dy)) {
+                    moveVince(dir.dx, dir.dy);
+                    break;
+                }
+            }
+        }
+        
+        function canMove(x, y) {
+            if (x < 0 || x >= MAP_WIDTH || y < 0 || y >= MAP_HEIGHT) return false;
+            if (gameState.map[y][x] === '#' || gameState.map[y][x] === '♠') return false;
+            return true;
+        }
+        
+        function moveVince(dx, dy) {
+            const newX = gameState.vince.x + dx;
+            const newY = gameState.vince.y + dy;
+            
+            gameState.vince.x = newX;
+            gameState.vince.y = newY;
+            
+            // Mettre à jour la direction
+            if (dx > 0) gameState.vince.facing = 'right';
+            else if (dx < 0) gameState.vince.facing = 'left';
+            
+            logAI(`Déplacement vers (${newX}, ${newY})`, "ai-action");
+            
+            // Vérifier les items
+            checkItemPickup();
+        }
+        
+        function shoot(target) {
+            if (gameState.vince.ammo <= 0) return;
+            
+            gameState.vince.ammo--;
+            
+            const angle = Math.atan2(target.y - gameState.vince.y, target.x - gameState.vince.x);
+            
+            gameState.bullets.push({
+                x: gameState.vince.x,
+                y: gameState.vince.y,
+                vx: Math.cos(angle) * 2,
+                vy: Math.sin(angle) * 2,
+                damage: 25
+            });
+            
+            logAI(`Tir sur ${target.type || 'ennemi'} !`, "ai-action");
+            updateStoryPanel("Le pistolet de Vince crache le feu temporel...");
+        }
+        
+        function updateBullets() {
+            for (let i = gameState.bullets.length - 1; i >= 0; i--) {
+                const bullet = gameState.bullets[i];
+                bullet.x += bullet.vx;
+                bullet.y += bullet.vy;
+                
+                // Vérifier collision avec murs
+                if (bullet.x < 0 || bullet.x >= MAP_WIDTH || bullet.y < 0 || bullet.y >= MAP_HEIGHT ||
+                    gameState.map[Math.floor(bullet.y)][Math.floor(bullet.x)] === '#') {
+                    gameState.bullets.splice(i, 1);
+                    continue;
+                }
+                
+                // Vérifier collision avec ennemis
+                for (let j = gameState.enemies.length - 1; j >= 0; j--) {
+                    const enemy = gameState.enemies[j];
+                    if (Math.abs(bullet.x - enemy.x) < 1 && Math.abs(bullet.y - enemy.y) < 1) {
+                        enemy.health -= bullet.damage;
+                        if (enemy.health <= 0) {
+                            gameState.enemies.splice(j, 1);
+                            gameState.score += 100;
+                            logAI("Ennemi éliminé !", "ai-action");
+                            updateStoryPanel("Un démon temporel s'effondre dans le néant...");
+                            
+                            // Chance de spawn un nouvel ennemi
+                            if (Math.random() < 0.5) {
+                                spawnEnemy();
+                            }
+                        }
+                        gameState.bullets.splice(i, 1);
+                        break;
+                    }
+                }
+            }
+        }
+        
+        function moveEnemies() {
+            for (const enemy of gameState.enemies) {
+                // IA simple des ennemis
+                if (Math.random() < 0.7) {
+                    const dx = Math.sign(gameState.vince.x - enemy.x);
+                    const dy = Math.sign(gameState.vince.y - enemy.y);
+                    
+                    if (Math.random() < 0.5 && canMove(enemy.x + dx, enemy.y)) {
+                        enemy.x += dx;
+                    } else if (canMove(enemy.x, enemy.y + dy)) {
+                        enemy.y += dy;
+                    }
+                }
+            }
+        }
+        
+        function checkCollisions() {
+            // Collision avec ennemis
+            for (const enemy of gameState.enemies) {
+                if (enemy.x === gameState.vince.x && enemy.y === gameState.vince.y) {
+                    gameState.vince.health -= 10;
+                    logAI("Touché par un ennemi !", "ai-action");
+                    updateStoryPanel("La douleur traverse les timelines...");
+                    
+                    if (gameState.vince.health <= 0) {
+                        gameOver();
+                    }
+                }
+            }
+        }
+        
+        function checkItemPickup() {
+            for (let i = gameState.items.length - 1; i >= 0; i--) {
+                const item = gameState.items[i];
+                if (item.x === gameState.vince.x && item.y === gameState.vince.y) {
+                    // Appliquer l'effet
+                    switch (item.type) {
+                        case 'health':
+                            gameState.vince.health = Math.min(100, gameState.vince.health + item.value);
+                            logAI(`Santé restaurée: +${item.value}`, "ai-action");
+                            break;
+                        case 'ammo':
+                            gameState.vince.ammo += item.value;
+                            logAI(`Munitions récupérées: +${item.value}`, "ai-action");
+                            break;
+                        case 'time_crystal':
+                            gameState.score += item.value;
+                            logAI("Cristal temporel absorbé !", "ai-action");
+                            updateStoryPanel("Les fragments du temps se rassemblent...");
+                            break;
+                    }
+                    
+                    gameState.items.splice(i, 1);
+                    
+                    // Spawn un nouvel item
+                    setTimeout(spawnItem, 3000);
+                }
+            }
+            
+            // Vérifier les portails
+            for (const portal of gameState.portals) {
+                if (portal.x === gameState.vince.x && portal.y === gameState.vince.y) {
+                    logAI(`Portail découvert: ${portal.destination}`, "ai-thought");
+                    updateStoryPanel(`Un vortex s'ouvre vers ${portal.destination}...`);
+                }
+            }
+        }
+        
+        function gameOver() {
+            gameState.autoPlay = false;
+            logAI("GAME OVER - Vince a échoué dans sa mission", "ai-thought");
+            updateStoryPanel("Le temps s'effondre... Tout recommence...");
+            
+            setTimeout(resetGame, 3000);
+        }
+        
+        function logAI(message, type = "ai-decision") {
+            const log = document.getElementById('ai-log');
+            const entry = document.createElement('div');
+            entry.className = `ai-decision ${type}`;
+            entry.textContent = `[T${gameState.turn}] ${message}`;
+            log.insertBefore(entry, log.firstChild);
+            
+            // Garder seulement les 20 derniers logs
+            while (log.children.length > 20) {
+                log.removeChild(log.lastChild);
+            }
+            
+            gameState.turn++;
+        }
+        
+        function updateStoryPanel(text) {
+            document.getElementById('story-panel').textContent = `"${text}"`;
+        }
+        
+        // Contrôles
+        function toggleAutoPlay() {
+            gameState.autoPlay = !gameState.autoPlay;
+            const btn = document.getElementById('autoplay-btn');
+            btn.textContent = gameState.autoPlay ? '🤖 Stop Auto-Play' : '🤖 Start Auto-Play';
+            btn.classList.toggle('active', gameState.autoPlay);
+            
+            if (gameState.autoPlay) {
+                logAI("Auto-play activé - L'IA prend le contrôle", "ai-thought");
+            } else {
+                logAI("Auto-play désactivé", "ai-thought");
+            }
+        }
+        
+        function toggleSpeed() {
+            const speeds = [1000, 500, 200, 100];
+            const speedNames = ['Normal', 'Rapide', 'Très Rapide', 'Ultra'];
+            let currentIndex = speeds.indexOf(gameState.speed);
+            currentIndex = (currentIndex + 1) % speeds.length;
+            gameState.speed = speeds[currentIndex];
+            
+            event.target.textContent = `⚡ Vitesse: ${speedNames[currentIndex]}`;
+        }
+        
+        function toggleManual() {
+            gameState.manualMode = !gameState.manualMode;
+            event.target.textContent = gameState.manualMode ? '🎮 Mode: Manuel' : '🎮 Mode: Auto';
+        }
+        
+        function resetGame() {
+            location.reload();
+        }
+        
+        // Contrôles manuels
+        document.addEventListener('keydown', (e) => {
+            if (gameState.manualMode || !gameState.autoPlay) {
+                switch(e.key) {
+                    case 'ArrowUp': moveVince(0, -1); break;
+                    case 'ArrowDown': moveVince(0, 1); break;
+                    case 'ArrowLeft': moveVince(-1, 0); break;
+                    case 'ArrowRight': moveVince(1, 0); break;
+                    case ' ':
+                        const enemy = findNearestEnemy();
+                        if (enemy) shoot(enemy);
+                        break;
+                }
+                render();
+            }
+        });
+        
+        // Démarrer
+        init();
+    </script>
+</body>
+</html> 

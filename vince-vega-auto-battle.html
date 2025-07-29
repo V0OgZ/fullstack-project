@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VINCE VEGA AUTO-BATTLE</title>
+    <style>
+        body { 
+            background-color: #000; 
+            color: #0F0; 
+            font-family: 'Courier New', monospace; 
+            margin: 20px;
+        }
+        
+        #game-container {
+            display: flex;
+            gap: 20px;
+        }
+        
+        #map-area { 
+            border: 2px solid #0F0; 
+            padding: 10px; 
+            display: inline-block;
+            background: #111;
+        }
+        
+        .map-row {
+            display: flex;
+        }
+        
+        .map-cell {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            position: relative;
+            background: #000;
+        }
+        
+        .terrain-plain { background: #222; }
+        .terrain-forest { background: #0a3a0a; }
+        .terrain-mountain { background: #444; }
+        .terrain-water { background: #003366; }
+        
+        .portal {
+            background: radial-gradient(circle, #9d4edd, #240046);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(157, 78, 221, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(157, 78, 221, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(157, 78, 221, 0); }
+        }
+        
+        .unit {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            z-index: 10;
+        }
+        
+        .hp-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #333;
+        }
+        
+        .hp-fill {
+            height: 100%;
+            background: #0F0;
+            transition: width 0.3s;
+        }
+        
+        .team-1 { color: #00FF00; }
+        .team-2 { color: #FF0000; }
+        
+        #stats {
+            border: 1px solid #0F0;
+            padding: 10px;
+            width: 300px;
+        }
+        
+        .controls {
+            margin-top: 20px;
+        }
+        
+        button {
+            background: #333;
+            color: #0F0;
+            border: 1px solid #0F0;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+        }
+        
+        button:hover {
+            background: #0F0;
+            color: #000;
+        }
+        
+        #battle-log {
+            border: 1px solid #0F0;
+            padding: 10px;
+            height: 200px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+        
+        .log-entry {
+            margin: 2px 0;
+            font-size: 12px;
+        }
+        
+        .damage { color: #FF6666; }
+        .heal { color: #66FF66; }
+        .portal-use { color: #9d4edd; }
+        .death { color: #FF0000; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>🎮 VINCE VEGA AUTO-BATTLE 🎮</h1>
+    
+    <div id="game-container">
+        <div id="map-area"></div>
+        <div id="stats">
+            <h3>ÉTAT DE LA BATAILLE</h3>
+            <div id="team-stats"></div>
+            <div id="turn-counter">Tour: 0</div>
+        </div>
+    </div>
+    
+    <div class="controls">
+        <button onclick="startBattle()">▶️ DÉMARRER BATAILLE</button>
+        <button onclick="pauseBattle()">⏸️ PAUSE</button>
+        <button onclick="resetBattle()">🔄 RESET</button>
+        <button onclick="toggleSpeed()">⚡ VITESSE: NORMAL</button>
+    </div>
+    
+    <div id="battle-log"></div>
+
+    <script>
+        // Configuration
+        const MAP_WIDTH = 12;
+        const MAP_HEIGHT = 10;
+        const TERRAIN_TYPES = {
+            PLAIN: { symbol: '.', class: 'terrain-plain' },
+            FOREST: { symbol: '🌲', class: 'terrain-forest' },
+            MOUNTAIN: { symbol: '⛰️', class: 'terrain-mountain' },
+            WATER: { symbol: '💧', class: 'terrain-water' },
+            PORTAL: { symbol: '🌀', class: 'portal' }
+        };
+        
+        // Héros avec leurs stats
+        const HERO_TYPES = [
+            { name: 'Vince', emoji: '🔫', hp: 100, damage: 25, range: 5, speed: 1 },
+            { name: 'Arthur', emoji: '⚔️', hp: 150, damage: 40, range: 1, speed: 1 },
+            { name: 'Merlin', emoji: '🧙', hp: 80, damage: 30, range: 4, speed: 1 },
+            { name: 'GRUT', emoji: '👁️', hp: 120, damage: 35, range: 8, speed: 1 },
+            { name: 'Jean', emoji: '🛋️', hp: 90, damage: 20, range: 99, speed: 0.5 },
+            { name: 'Sphinx', emoji: '🦁', hp: 110, damage: 35, range: 1, speed: 2 }
+        ];
+        
+        // État du jeu
+        let gameState = {
+            map: [],
+            units: [],
+            portals: [],
+            turn: 0,
+            battleActive: false,
+            speed: 1000,
+            battleInterval: null
+        };
+        
+        // Initialisation de la map
+        function initMap() {
+            gameState.map = [];
+            gameState.portals = [];
+            
+            for (let y = 0; y < MAP_HEIGHT; y++) {
+                let row = [];
+                for (let x = 0; x < MAP_WIDTH; x++) {
+                    const rand = Math.random();
+                    let terrain;
+                    
+                    if (rand < 0.6) terrain = 'PLAIN';
+                    else if (rand < 0.75) terrain = 'FOREST';
+                    else if (rand < 0.85) terrain = 'MOUNTAIN';
+                    else if (rand < 0.95) terrain = 'WATER';
+                    else {
+                        terrain = 'PORTAL';
+                        gameState.portals.push({ x, y, linkedTo: null });
+                    }
+                    
+                    row.push(terrain);
+                }
+                gameState.map.push(row);
+            }
+            
+            // Lier les portails entre eux
+            for (let i = 0; i < gameState.portals.length - 1; i += 2) {
+                if (gameState.portals[i + 1]) {
+                    gameState.portals[i].linkedTo = gameState.portals[i + 1];
+                    gameState.portals[i + 1].linkedTo = gameState.portals[i];
+                }
+            }
+        }
+        
+        // Créer les unités
+        function initUnits() {
+            gameState.units = [];
+            
+            // 3v3 bataille
+            for (let i = 0; i < 3; i++) {
+                // Équipe 1
+                let hero1 = { ...HERO_TYPES[i % HERO_TYPES.length] };
+                hero1.id = `unit_${i}_team1`;
+                hero1.team = 1;
+                hero1.x = 1;
+                hero1.y = 2 + i * 3;
+                hero1.currentHp = hero1.hp;
+                hero1.maxHp = hero1.hp;
+                gameState.units.push(hero1);
+                
+                // Équipe 2
+                let hero2 = { ...HERO_TYPES[(i + 3) % HERO_TYPES.length] };
+                hero2.id = `unit_${i}_team2`;
+                hero2.team = 2;
+                hero2.x = MAP_WIDTH - 2;
+                hero2.y = 2 + i * 3;
+                hero2.currentHp = hero2.hp;
+                hero2.maxHp = hero2.hp;
+                gameState.units.push(hero2);
+            }
+        }
+        
+        // Afficher la map
+        function drawMap() {
+            const mapArea = document.getElementById('map-area');
+            mapArea.innerHTML = '';
+            
+            for (let y = 0; y < MAP_HEIGHT; y++) {
+                const rowDiv = document.createElement('div');
+                rowDiv.className = 'map-row';
+                
+                for (let x = 0; x < MAP_WIDTH; x++) {
+                    const cellDiv = document.createElement('div');
+                    cellDiv.className = 'map-cell';
+                    cellDiv.id = `cell_${x}_${y}`;
+                    
+                    const terrain = TERRAIN_TYPES[gameState.map[y][x]];
+                    cellDiv.className += ' ' + terrain.class;
+                    if (terrain.symbol !== '.') {
+                        cellDiv.textContent = terrain.symbol;
+                    }
+                    
+                    rowDiv.appendChild(cellDiv);
+                }
+                mapArea.appendChild(rowDiv);
+            }
+            
+            // Placer les unités
+            gameState.units.forEach(unit => {
+                if (unit.currentHp > 0) {
+                    const cell = document.getElementById(`cell_${unit.x}_${unit.y}`);
+                    if (cell) {
+                        const unitDiv = document.createElement('div');
+                        unitDiv.className = `unit team-${unit.team}`;
+                        unitDiv.innerHTML = `
+                            ${unit.emoji}
+                            <div class="hp-bar">
+                                <div class="hp-fill" style="width: ${(unit.currentHp / unit.maxHp) * 100}%"></div>
+                            </div>
+                        `;
+                        cell.appendChild(unitDiv);
+                    }
+                }
+            });
+            
+            updateStats();
+        }
+        
+        // Mise à jour des stats
+        function updateStats() {
+            const statsDiv = document.getElementById('team-stats');
+            const team1Units = gameState.units.filter(u => u.team === 1 && u.currentHp > 0);
+            const team2Units = gameState.units.filter(u => u.team === 2 && u.currentHp > 0);
+            
+            statsDiv.innerHTML = `
+                <div style="color: #00FF00">Équipe 1: ${team1Units.length} unités</div>
+                ${team1Units.map(u => `<div>- ${u.name}: ${u.currentHp}/${u.maxHp} HP</div>`).join('')}
+                <br>
+                <div style="color: #FF0000">Équipe 2: ${team2Units.length} unités</div>
+                ${team2Units.map(u => `<div>- ${u.name}: ${u.currentHp}/${u.maxHp} HP</div>`).join('')}
+            `;
+            
+            document.getElementById('turn-counter').textContent = `Tour: ${gameState.turn}`;
+            
+            // Vérifier la victoire
+            if (gameState.battleActive) {
+                if (team1Units.length === 0) {
+                    endBattle('Équipe 2 (Rouge) GAGNE!');
+                } else if (team2Units.length === 0) {
+                    endBattle('Équipe 1 (Verte) GAGNE!');
+                }
+            }
+        }
+        
+        // IA pour les unités
+        function processAI() {
+            gameState.turn++;
+            
+            gameState.units.forEach(unit => {
+                if (unit.currentHp <= 0) return;
+                
+                // Trouver l'ennemi le plus proche
+                const enemies = gameState.units.filter(u => u.team !== unit.team && u.currentHp > 0);
+                if (enemies.length === 0) return;
+                
+                let nearestEnemy = null;
+                let nearestDistance = Infinity;
+                
+                enemies.forEach(enemy => {
+                    const dist = Math.abs(enemy.x - unit.x) + Math.abs(enemy.y - unit.y);
+                    if (dist < nearestDistance) {
+                        nearestDistance = dist;
+                        nearestEnemy = enemy;
+                    }
+                });
+                
+                // Attaquer si à portée
+                if (nearestDistance <= unit.range) {
+                    const damage = unit.damage + Math.floor(Math.random() * 10) - 5;
+                    nearestEnemy.currentHp -= damage;
+                    addLog(`<span class="damage">${unit.name} attaque ${nearestEnemy.name} pour ${damage} dégâts!</span>`);
+                    
+                    if (nearestEnemy.currentHp <= 0) {
+                        nearestEnemy.currentHp = 0;
+                        addLog(`<span class="death">💀 ${nearestEnemy.name} est MORT!</span>`);
+                    }
+                } else {
+                    // Se déplacer vers l'ennemi
+                    const dx = Math.sign(nearestEnemy.x - unit.x);
+                    const dy = Math.sign(nearestEnemy.y - unit.y);
+                    
+                    let newX = unit.x;
+                    let newY = unit.y;
+                    
+                    // Essayer de bouger
+                    if (Math.random() < 0.5 && dx !== 0) {
+                        newX += dx * unit.speed;
+                    } else if (dy !== 0) {
+                        newY += dy * unit.speed;
+                    }
+                    
+                    // Vérifier les limites et le terrain
+                    if (newX >= 0 && newX < MAP_WIDTH && newY >= 0 && newY < MAP_HEIGHT) {
+                        const terrain = gameState.map[Math.floor(newY)][Math.floor(newX)];
+                        
+                        if (terrain !== 'WATER' && terrain !== 'MOUNTAIN') {
+                            // Vérifier les portails
+                            if (terrain === 'PORTAL') {
+                                const portal = gameState.portals.find(p => p.x === Math.floor(newX) && p.y === Math.floor(newY));
+                                if (portal && portal.linkedTo) {
+                                    unit.x = portal.linkedTo.x;
+                                    unit.y = portal.linkedTo.y;
+                                    addLog(`<span class="portal-use">${unit.name} utilise un portail! 🌀</span>`);
+                                }
+                            } else {
+                                unit.x = Math.floor(newX);
+                                unit.y = Math.floor(newY);
+                            }
+                        }
+                    }
+                }
+            });
+            
+            drawMap();
+        }
+        
+        // Ajouter au log
+        function addLog(message) {
+            const log = document.getElementById('battle-log');
+            const entry = document.createElement('div');
+            entry.className = 'log-entry';
+            entry.innerHTML = message;
+            log.appendChild(entry);
+            log.scrollTop = log.scrollHeight;
+            
+            // Limiter le nombre d'entrées
+            while (log.children.length > 50) {
+                log.removeChild(log.firstChild);
+            }
+        }
+        
+        // Contrôles
+        function startBattle() {
+            if (!gameState.battleActive) {
+                gameState.battleActive = true;
+                gameState.battleInterval = setInterval(processAI, gameState.speed);
+                addLog('<span style="color: #0F0">⚔️ BATAILLE COMMENCÉE!</span>');
+            }
+        }
+        
+        function pauseBattle() {
+            gameState.battleActive = false;
+            if (gameState.battleInterval) {
+                clearInterval(gameState.battleInterval);
+                gameState.battleInterval = null;
+            }
+            addLog('<span style="color: #FFD700">⏸️ Bataille en pause</span>');
+        }
+        
+        function resetBattle() {
+            pauseBattle();
+            gameState.turn = 0;
+            initMap();
+            initUnits();
+            drawMap();
+            document.getElementById('battle-log').innerHTML = '';
+            addLog('<span style="color: #0F0">🔄 Nouvelle bataille prête!</span>');
+        }
+        
+        function toggleSpeed() {
+            const speeds = [1000, 500, 200, 100];
+            const speedNames = ['NORMAL', 'RAPIDE', 'TRÈS RAPIDE', 'ULTRA'];
+            let currentIndex = speeds.indexOf(gameState.speed);
+            currentIndex = (currentIndex + 1) % speeds.length;
+            gameState.speed = speeds[currentIndex];
+            
+            event.target.textContent = `⚡ VITESSE: ${speedNames[currentIndex]}`;
+            
+            if (gameState.battleActive) {
+                pauseBattle();
+                startBattle();
+            }
+        }
+        
+        function endBattle(winner) {
+            pauseBattle();
+            addLog(`<span style="color: #FFD700; font-size: 16px">🏆 ${winner}</span>`);
+            addLog(`<span style="color: #FFD700">Bataille terminée en ${gameState.turn} tours!</span>`);
+        }
+        
+        // Initialisation
+        window.onload = function() {
+            resetBattle();
+            
+            // Auto-démarrer après 2 secondes
+            setTimeout(() => {
+                addLog('<span style="color: #9d4edd">🎮 Auto-démarrage dans 3...</span>');
+                setTimeout(() => {
+                    addLog('<span style="color: #9d4edd">🎮 2...</span>');
+                    setTimeout(() => {
+                        addLog('<span style="color: #9d4edd">🎮 1...</span>');
+                        setTimeout(startBattle, 1000);
+                    }, 1000);
+                }, 1000);
+            }, 1000);
+        };
+    </script>
+</body>
+</html> 

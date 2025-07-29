@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mode Texte - Heroes of Time</title>
+    <style>
+        body {
+            background: black;
+            color: lime;
+            font-family: monospace;
+            font-size: 16px;
+            padding: 20px;
+        }
+        #map {
+            white-space: pre;
+            line-height: 1.2;
+        }
+        #controls {
+            margin-top: 20px;
+            color: yellow;
+        }
+        button {
+            background: #333;
+            color: lime;
+            border: 1px solid lime;
+            padding: 5px 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: lime;
+            color: black;
+        }
+        #log {
+            margin-top: 20px;
+            color: cyan;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎮 MODE TEXTE - HEROES OF TIME 🎮</h1>
+    
+    <div id="map"></div>
+    
+    <div id="controls">
+        <h3>Contrôles :</h3>
+        <button onclick="moveHero('up')">↑ HAUT</button>
+        <button onclick="moveHero('down')">↓ BAS</button>
+        <button onclick="moveHero('left')">← GAUCHE</button>
+        <button onclick="moveHero('right')">→ DROITE</button>
+        <button onclick="toggleFog()">🌫️ BROUILLARD</button>
+        <button onclick="spawnEnemy()">👹 SPAWN ENNEMI</button>
+    </div>
+    
+    <div id="log">
+        <h3>Journal :</h3>
+        <div id="messages"></div>
+    </div>
+
+    <script>
+        // État du jeu
+        let mapWidth = 20;
+        let mapHeight = 10;
+        let heroX = 5;
+        let heroY = 5;
+        let fogEnabled = true;
+        let enemies = [];
+        let terrain = [];
+        
+        // Initialiser le terrain
+        function initTerrain() {
+            for (let y = 0; y < mapHeight; y++) {
+                terrain[y] = [];
+                for (let x = 0; x < mapWidth; x++) {
+                    let rand = Math.random();
+                    if (rand < 0.7) terrain[y][x] = '.'; // Plaine
+                    else if (rand < 0.85) terrain[y][x] = '♠'; // Forêt
+                    else if (rand < 0.95) terrain[y][x] = '^'; // Montagne
+                    else terrain[y][x] = '~'; // Eau
+                }
+            }
+        }
+        
+        // Calculer la distance
+        function distance(x1, y1, x2, y2) {
+            return Math.sqrt((x2-x1)**2 + (y2-y1)**2);
+        }
+        
+        // Afficher la map
+        function renderMap() {
+            let display = '';
+            
+            for (let y = 0; y < mapHeight; y++) {
+                for (let x = 0; x < mapWidth; x++) {
+                    // Brouillard de guerre
+                    if (fogEnabled && distance(x, y, heroX, heroY) > 3) {
+                        display += '?';
+                    }
+                    // Position du héros
+                    else if (x === heroX && y === heroY) {
+                        display += '@';
+                    }
+                    // Ennemis
+                    else if (enemies.find(e => e.x === x && e.y === y)) {
+                        display += '👹';
+                    }
+                    // Terrain
+                    else {
+                        display += terrain[y][x];
+                    }
+                    display += ' ';
+                }
+                display += '\n';
+            }
+            
+            document.getElementById('map').textContent = display;
+        }
+        
+        // Déplacer le héros
+        function moveHero(direction) {
+            let newX = heroX;
+            let newY = heroY;
+            
+            switch(direction) {
+                case 'up': newY--; break;
+                case 'down': newY++; break;
+                case 'left': newX--; break;
+                case 'right': newX++; break;
+            }
+            
+            // Vérifier les limites
+            if (newX >= 0 && newX < mapWidth && newY >= 0 && newY < mapHeight) {
+                // Vérifier le terrain
+                if (terrain[newY][newX] !== '~') { // Pas d'eau
+                    heroX = newX;
+                    heroY = newY;
+                    log(`Héros déplacé en (${heroX}, ${heroY})`);
+                    
+                    // Vérifier collision ennemi
+                    let enemy = enemies.find(e => e.x === heroX && e.y === heroY);
+                    if (enemy) {
+                        enemies = enemies.filter(e => e !== enemy);
+                        log("💥 ENNEMI VAINCU !");
+                    }
+                } else {
+                    log("⚠️ Impossible de traverser l'eau !");
+                }
+            } else {
+                log("⚠️ Hors limites !");
+            }
+            
+            // Faire bouger les ennemis
+            moveEnemies();
+            renderMap();
+        }
+        
+        // Déplacer les ennemis
+        function moveEnemies() {
+            enemies.forEach(enemy => {
+                // Mouvement aléatoire simple
+                let dir = Math.floor(Math.random() * 4);
+                let newX = enemy.x;
+                let newY = enemy.y;
+                
+                switch(dir) {
+                    case 0: newY--; break;
+                    case 1: newY++; break;
+                    case 2: newX--; break;
+                    case 3: newX++; break;
+                }
+                
+                // Vérifier validité
+                if (newX >= 0 && newX < mapWidth && 
+                    newY >= 0 && newY < mapHeight &&
+                    terrain[newY][newX] !== '~' &&
+                    !(newX === heroX && newY === heroY)) {
+                    enemy.x = newX;
+                    enemy.y = newY;
+                }
+            });
+        }
+        
+        // Toggle brouillard
+        function toggleFog() {
+            fogEnabled = !fogEnabled;
+            log(fogEnabled ? "🌫️ Brouillard activé" : "☀️ Brouillard désactivé");
+            renderMap();
+        }
+        
+        // Spawn ennemi
+        function spawnEnemy() {
+            let x, y;
+            do {
+                x = Math.floor(Math.random() * mapWidth);
+                y = Math.floor(Math.random() * mapHeight);
+            } while (terrain[y][x] === '~' || (x === heroX && y === heroY));
+            
+            enemies.push({x, y});
+            log(`👹 Ennemi apparu en (${x}, ${y})`);
+            renderMap();
+        }
+        
+        // Logger
+        function log(message) {
+            let messages = document.getElementById('messages');
+            messages.innerHTML = `<div>${new Date().toLocaleTimeString()} - ${message}</div>` + messages.innerHTML;
+        }
+        
+        // Initialisation
+        initTerrain();
+        
+        // Spawn quelques ennemis
+        for (let i = 0; i < 3; i++) {
+            spawnEnemy();
+        }
+        
+        renderMap();
+        log("🎮 JEU DÉMARRÉ - Utilisez les boutons pour bouger !");
+        
+        // Contrôles clavier
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case 'ArrowUp': moveHero('up'); break;
+                case 'ArrowDown': moveHero('down'); break;
+                case 'ArrowLeft': moveHero('left'); break;
+                case 'ArrowRight': moveHero('right'); break;
+                case 'f': toggleFog(); break;
+                case 'e': spawnEnemy(); break;
+            }
+        });
+    </script>
+</body>
+</html> 

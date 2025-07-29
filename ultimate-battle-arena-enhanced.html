@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🎮 ULTIMATE BATTLE ARENA - ENHANCED MAGIC EDITION 🎮</title>
+    <style>
+        body { 
+            background-color: #000; 
+            color: #0F0; 
+            font-family: 'Courier New', monospace; 
+            margin: 0;
+            padding: 20px;
+            background-image: 
+                radial-gradient(ellipse at top, #1a0033, transparent),
+                radial-gradient(ellipse at bottom, #330019, transparent);
+        }
+        
+        #setup-screen {
+            text-align: center;
+            padding: 50px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #0F0, 0 0 20px #0F0; }
+            to { text-shadow: 0 0 20px #0F0, 0 0 30px #0F0; }
+        }
+        
+        #game-container {
+            display: none;
+            position: relative;
+        }
+        
+        #game-area { 
+            white-space: pre; 
+            border: 2px solid #0F0; 
+            padding: 10px; 
+            display: inline-block;
+            font-size: 12px;
+            line-height: 1.2;
+            background: #111;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+        
+        #battle-info {
+            position: absolute;
+            right: 20px;
+            top: 0;
+            width: 350px;
+            border: 1px solid #0F0;
+            padding: 10px;
+            background: #111;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .team-1 { color: #FF0; text-shadow: 0 0 5px #FF0; }
+        .team-2 { color: #F0F; text-shadow: 0 0 5px #F0F; }
+        .team-3 { color: #0FF; text-shadow: 0 0 5px #0FF; }
+        .team-4 { color: #F80; text-shadow: 0 0 5px #F80; }
+        
+        .portal { 
+            animation: portal-pulse 1s infinite; 
+            color: #F0F;
+        }
+        
+        @keyframes portal-pulse {
+            0% { opacity: 0.5; text-shadow: 0 0 10px #F0F; }
+            50% { opacity: 1; text-shadow: 0 0 20px #F0F; }
+            100% { opacity: 0.5; text-shadow: 0 0 10px #F0F; }
+        }
+        
+        .projectile {
+            color: #F00;
+            animation: projectile-move 0.2s linear;
+        }
+        
+        @keyframes projectile-move {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        
+        button {
+            background-color: #333;
+            color: #0F0;
+            border: 1px solid #0F0;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            background-color: #0F0;
+            color: #000;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #0F0;
+        }
+        
+        .hero-card {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px;
+            border: 2px solid #0F0;
+            background: #222;
+            text-align: center;
+            min-width: 120px;
+        }
+        
+        .hero-portrait {
+            font-size: 48px;
+            margin: 10px 0;
+        }
+        
+        #portal-view {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 200px;
+            height: 150px;
+            border: 2px solid #F0F;
+            padding: 5px;
+            background: #222;
+            font-size: 8px;
+            line-height: 1;
+            box-shadow: 0 0 20px #F0F;
+        }
+        
+        #sound-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #222;
+            border: 1px solid #0F0;
+            padding: 10px;
+        }
+        
+        .treasure {
+            color: #FFD700;
+            animation: treasure-glow 1.5s infinite;
+        }
+        
+        @keyframes treasure-glow {
+            0%, 100% { text-shadow: 0 0 5px #FFD700; }
+            50% { text-shadow: 0 0 15px #FFD700, 0 0 25px #FFD700; }
+        }
+    </style>
+</head>
+<body>
+    <div id="sound-controls">
+        <label><input type="checkbox" id="sound-toggle" checked> Sons 🔊</label><br>
+        <label><input type="checkbox" id="voice-toggle" checked> Voix 🗣️</label>
+    </div>
+
+    <div id="setup-screen">
+        <h1>🎮 ULTIMATE RANDOM BATTLE ARENA 🎮</h1>
+        <h2>✨ ENHANCED MAGIC EDITION ✨</h2>
+        
+        <div>
+            <h3>TAILLE DE LA MAP</h3>
+            <button onclick="setMapSize('small')">PETITE (30x20)</button>
+            <button onclick="setMapSize('medium')">MOYENNE (50x30)</button>
+            <button onclick="setMapSize('large')">GRANDE (80x40)</button>
+            <button onclick="setMapSize('giant')">GÉANTE (100x50)</button>
+        </div>
+        
+        <div>
+            <h3>MODE DE BATAILLE</h3>
+            <button onclick="setBattleMode('2v2')">2v2</button>
+            <button onclick="setBattleMode('3v3')">3v3</button>
+            <button onclick="setBattleMode('4v4')">4v4</button>
+            <button onclick="setBattleMode('ffa4')">4 JOUEURS FFA</button>
+        </div>
+        
+        <div>
+            <h3>SÉLECTION DES HÉROS</h3>
+            <button onclick="randomizeAll()">🎲 TOUT ALÉATOIRE</button>
+        </div>
+        
+        <div id="selected-config" style="margin-top: 30px; border: 1px solid #0F0; padding: 20px;">
+            <p>Map: <span id="map-size-display">-</span></p>
+            <p>Mode: <span id="battle-mode-display">-</span></p>
+            <div id="heroes-display"></div>
+        </div>
+        
+        <button onclick="startBattle()" style="font-size: 24px; margin-top: 30px;">
+            🚀 LANCER LA BATAILLE ULTIME 🚀
+        </button>
+    </div>
+    
+    <div id="game-container">
+        <div id="game-area"></div>
+        
+        <div id="battle-info">
+            <h3>⚔️ ÉTAT DE LA BATAILLE ⚔️</h3>
+            <div id="team-status"></div>
+            <h4>📜 ÉVÉNEMENTS</h4>
+            <div id="kill-feed" style="margin-top: 20px; max-height: 200px; overflow-y: auto;"></div>
+        </div>
+        
+        <div id="portal-view">
+            <div style="border-bottom: 1px solid #F0F; margin-bottom: 5px;">👁️ VISION PORTAIL</div>
+            <div id="portal-content"></div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        let config = {
+            mapSize: null,
+            battleMode: null,
+            heroes: []
+        };
+        
+        // Héros avec toutes leurs stats
+        const HERO_POOL = [
+            { 
+                name: 'Vince Vega', 
+                icon: '🔫', 
+                hp: 100, 
+                damage: 25, 
+                speed: 1.2, 
+                range: 5,
+                attackType: 'ranged',
+                special: 'Double Shot',
+                personality: 'aggressive',
+                voicePitch: 0.8,
+                catchPhrase: 'Bang bang!'
+            },
+            { 
+                name: 'Arthur', 
+                icon: '⚔️', 
+                hp: 150, 
+                damage: 35, 
+                speed: 1.0, 
+                range: 1,
+                attackType: 'melee',
+                special: 'Excalibur Strike',
+                personality: 'balanced',
+                voicePitch: 1.0,
+                catchPhrase: 'Pour Camelot!'
+            },
+            { 
+                name: 'Merlin', 
+                icon: '🧙', 
+                hp: 80, 
+                damage: 30, 
+                speed: 0.8, 
+                range: 4,
+                attackType: 'magic',
+                special: 'Teleport',
+                personality: 'defensive',
+                voicePitch: 1.2,
+                catchPhrase: 'Abracadabra!'
+            },
+            { 
+                name: 'GRUT', 
+                icon: '👁️', 
+                hp: 200, 
+                damage: 15, 
+                speed: 0.6, 
+                range: 8,
+                attackType: 'ranged',
+                special: 'Panopticon Vision',
+                personality: 'strategic',
+                voicePitch: 0.5,
+                catchPhrase: 'GRUT VOIT TOUT'
+            },
+            { 
+                name: 'Jean', 
+                icon: '🛋️', 
+                hp: 120, 
+                damage: 22, 
+                speed: 0.5, 
+                range: 99,
+                attackType: 'cosmic',
+                special: 'Cosmic Control',
+                personality: 'lazy',
+                voicePitch: 0.9,
+                catchPhrase: 'Depuis mon canapé!'
+            },
+            { 
+                name: 'Sphinx', 
+                icon: '🦁', 
+                hp: 110, 
+                damage: 28, 
+                speed: 1.1, 
+                range: 1,
+                attackType: 'melee',
+                special: 'Riddle',
+                personality: 'aggressive',
+                voicePitch: 1.1,
+                catchPhrase: 'Réponds ou meurs!'
+            },
+            { 
+                name: 'Marie', 
+                icon: '👩', 
+                hp: 90, 
+                damage: 24, 
+                speed: 1.3, 
+                range: 3,
+                attackType: 'aoe',
+                special: 'Emotion Wave',
+                personality: 'supportive',
+                voicePitch: 1.3,
+                catchPhrase: 'Je ressens tout!'
+            },
+            { 
+                name: 'Walter', 
+                icon: '🔒', 
+                hp: 130, 
+                damage: 18, 
+                speed: 0.9, 
+                range: 3,
+                attackType: 'mixed',
+                special: 'Security Protocol',
+                personality: 'defensive',
+                voicePitch: 0.7,
+                catchPhrase: 'Sécurité activée!'
+            }
+        ];
+        
+        // Terrain types
+        const TERRAIN_TYPES = {
+            plain: { char: '.', color: '#0F0', passable: true },
+            forest: { char: '♠', color: '#080', passable: true, cover: true },
+            mountain: { char: '^', color: '#888', passable: false },
+            water: { char: '~', color: '#08F', passable: false },
+            portal: { char: '◊', color: '#F0F', passable: true, portal: true },
+            tower: { char: '▓', color: '#FA0', passable: false },
+            treasure: { char: '💎', color: '#FFD700', passable: true, treasure: true }
+        };
+        
+        // Game state
+        let gameState = {
+            map: [],
+            units: [],
+            portals: [],
+            treasures: [],
+            projectiles: [],
+            turn: 0,
+            running: false
+        };
+        
+        // Sound system
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        function playSound(type) {
+            if (!document.getElementById('sound-toggle').checked) return;
+            
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            switch(type) {
+                case 'shoot':
+                    oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+                    oscillator.frequency.exponentialRampToValueAtTime(50, audioContext.currentTime + 0.1);
+                    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                    break;
+                case 'hit':
+                    oscillator.frequency.setValueAtTime(150, audioContext.currentTime);
+                    oscillator.type = 'square';
+                    gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.05);
+                    break;
+                case 'portal':
+                    oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+                    oscillator.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.3);
+                    oscillator.type = 'sine';
+                    gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                    break;
+                case 'treasure':
+                    oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // C5
+                    oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.1); // E5
+                    oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.2); // G5
+                    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime + 0.3);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.4);
+                    break;
+            }
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.5);
+        }
+        
+        function speak(text, pitch = 1.0) {
+            if (!document.getElementById('voice-toggle').checked) return;
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.pitch = pitch;
+            utterance.rate = 1.2;
+            utterance.volume = 0.8;
+            utterance.lang = 'fr-FR';
+            speechSynthesis.speak(utterance);
+        }
+        
+        function setMapSize(size) {
+            const sizes = {
+                small: { width: 30, height: 20 },
+                medium: { width: 50, height: 30 },
+                large: { width: 80, height: 40 },
+                giant: { width: 100, height: 50 }
+            };
+            config.mapSize = sizes[size];
+            document.getElementById('map-size-display').textContent = 
+                `${size.toUpperCase()} (${config.mapSize.width}x${config.mapSize.height})`;
+        }
+        
+        function setBattleMode(mode) {
+            config.battleMode = mode;
+            document.getElementById('battle-mode-display').textContent = mode;
+        }
+        
+        function randomizeAll() {
+            if (!config.mapSize || !config.battleMode) {
+                alert('Sélectionnez d\'abord la taille de map et le mode!');
+                return;
+            }
+            
+            // Déterminer le nombre de héros nécessaires
+            let heroCount = 0;
+            if (config.battleMode === '2v2') heroCount = 4;
+            else if (config.battleMode === '3v3') heroCount = 6;
+            else if (config.battleMode === '4v4') heroCount = 8;
+            else if (config.battleMode === 'ffa4') heroCount = 4;
+            
+            // Sélectionner des héros aléatoires
+            config.heroes = [];
+            const shuffled = [...HERO_POOL].sort(() => Math.random() - 0.5);
+            for (let i = 0; i < heroCount; i++) {
+                config.heroes.push({
+                    ...shuffled[i % shuffled.length],
+                    team: config.battleMode === 'ffa4' ? i + 1 : Math.floor(i / (heroCount / 2)) + 1,
+                    id: i
+                });
+            }
+            
+            updateHeroesDisplay();
+        }
+        
+        function updateHeroesDisplay() {
+            let html = '<div style="margin-top: 20px;">';
+            const teams = {};
+            
+            config.heroes.forEach(hero => {
+                if (!teams[hero.team]) teams[hero.team] = [];
+                teams[hero.team].push(hero);
+            });
+            
+            Object.entries(teams).forEach(([team, heroes]) => {
+                html += `<div style="margin: 10px 0;"><strong class="team-${team}">ÉQUIPE ${team}:</strong><br>`;
+                heroes.forEach(hero => {
+                    html += `<div class="hero-card">
+                        <div class="hero-portrait">${hero.icon}</div>
+                        <div>${hero.name}</div>
+                        <div style="font-size: 10px;">
+                            HP: ${hero.hp} | DMG: ${hero.damage}<br>
+                            Portée: ${hero.range} | ${hero.attackType}
+                        </div>
+                    </div>`;
+                });
+                html += '</div>';
+            });
+            
+            html += '</div>';
+            document.getElementById('heroes-display').innerHTML = html;
+        }
+        
+        function generateRandomMap() {
+            const { width, height } = config.mapSize;
+            gameState.map = [];
+            gameState.treasures = [];
+            gameState.portals = [];
+            
+            // Générer le terrain de base
+            for (let y = 0; y < height; y++) {
+                gameState.map[y] = [];
+                for (let x = 0; x < width; x++) {
+                    const rand = Math.random();
+                    if (rand < 0.6) {
+                        gameState.map[y][x] = 'plain';
+                    } else if (rand < 0.75) {
+                        gameState.map[y][x] = 'forest';
+                    } else if (rand < 0.85) {
+                        gameState.map[y][x] = 'mountain';
+                    } else if (rand < 0.92) {
+                        gameState.map[y][x] = 'water';
+                    } else if (rand < 0.96) {
+                        gameState.map[y][x] = 'portal';
+                        gameState.portals.push({ x, y, linkedTo: null });
+                    } else {
+                        gameState.map[y][x] = 'treasure';
+                        gameState.treasures.push({ 
+                            x, y, 
+                            type: ['health', 'damage', 'speed'][Math.floor(Math.random() * 3)],
+                            value: 10 + Math.floor(Math.random() * 20)
+                        });
+                    }
+                }
+            }
+            
+            // Lier les portails entre eux
+            for (let i = 0; i < gameState.portals.length - 1; i += 2) {
+                gameState.portals[i].linkedTo = i + 1;
+                gameState.portals[i + 1].linkedTo = i;
+            }
+            
+            // Placer les unités
+            placeUnits();
+        }
+        
+        function placeUnits() {
+            const { width, height } = config.mapSize;
+            gameState.units = [];
+            
+            config.heroes.forEach((hero, index) => {
+                let placed = false;
+                while (!placed) {
+                    const x = Math.floor(Math.random() * width);
+                    const y = Math.floor(Math.random() * height);
+                    
+                    if (TERRAIN_TYPES[gameState.map[y][x]].passable && 
+                        !gameState.units.some(u => u.x === x && u.y === y)) {
+                        gameState.units.push({
+                            ...hero,
+                            x, y,
+                            hp: hero.hp,
+                            maxHp: hero.hp,
+                            alive: true,
+                            kills: 0,
+                            treasuresCollected: 0,
+                            lastAction: null
+                        });
+                        placed = true;
+                    }
+                }
+            });
+        }
+        
+        function drawMap() {
+            const { width, height } = config.mapSize;
+            let output = '';
+            
+            for (let y = 0; y < height; y++) {
+                for (let x = 0; x < width; x++) {
+                    // Vérifier les projectiles
+                    const projectile = gameState.projectiles.find(p => Math.floor(p.x) === x && Math.floor(p.y) === y);
+                    if (projectile) {
+                        output += `<span class="projectile">•</span>`;
+                        continue;
+                    }
+                    
+                    // Vérifier s'il y a une unité
+                    const unit = gameState.units.find(u => u.x === x && u.y === y && u.alive);
+                    if (unit) {
+                        output += `<span class="team-${unit.team}">${unit.icon}</span>`;
+                    } else {
+                        const terrain = TERRAIN_TYPES[gameState.map[y][x]];
+                        if (terrain.portal) {
+                            output += `<span class="portal">${terrain.char}</span>`;
+                        } else if (terrain.treasure) {
+                            output += `<span class="treasure">${terrain.char}</span>`;
+                        } else {
+                            output += `<span style="color: ${terrain.color}">${terrain.char}</span>`;
+                        }
+                    }
+                }
+                output += '\n';
+            }
+            
+            document.getElementById('game-area').innerHTML = output;
+            updateBattleInfo();
+            updatePortalView();
+        }
+        
+        function updateBattleInfo() {
+            // Mise à jour du statut des équipes
+            const teams = {};
+            gameState.units.forEach(unit => {
+                if (!teams[unit.team]) teams[unit.team] = [];
+                teams[unit.team].push(unit);
+            });
+            
+            let statusHTML = '';
+            Object.entries(teams).forEach(([team, units]) => {
+                statusHTML += `<div class="team-${team}" style="margin-bottom: 15px;">
+                    <strong>ÉQUIPE ${team}:</strong><br>`;
+                units.forEach(unit => {
+                    const hpBar = '█'.repeat(Math.floor(unit.hp / unit.maxHp * 10));
+                    const hpEmpty = '░'.repeat(10 - hpBar.length);
+                    statusHTML += `<div style="margin: 5px 0;">
+                        ${unit.icon} ${unit.name}: ${hpBar}${hpEmpty} (${unit.hp}/${unit.maxHp})<br>
+                        <span style="font-size: 10px;">
+                            Kills: ${unit.kills} | Trésors: ${unit.treasuresCollected}
+                            ${unit.lastAction ? ` | ${unit.lastAction}` : ''}
+                        </span>
+                    </div>`;
+                });
+                statusHTML += '</div>';
+            });
+            
+            document.getElementById('team-status').innerHTML = statusHTML;
+        }
+        
+        function updatePortalView() {
+            // Afficher ce qui se passe près d'un portail aléatoire
+            if (gameState.portals.length === 0) return;
+            
+            const portal = gameState.portals[Math.floor(Math.random() * gameState.portals.length)];
+            const viewRadius = 5;
+            let portalView = '';
+            
+            for (let dy = -viewRadius; dy <= viewRadius; dy++) {
+                for (let dx = -viewRadius; dx <= viewRadius; dx++) {
+                    const x = portal.x + dx;
+                    const y = portal.y + dy;
+                    
+                    if (x >= 0 && x < config.mapSize.width && y >= 0 && y < config.mapSize.height) {
+                        const unit = gameState.units.find(u => u.x === x && u.y === y && u.alive);
+                        if (unit) {
+                            portalView += `<span class="team-${unit.team}">${unit.icon}</span>`;
+                        } else {
+                            const terrain = TERRAIN_TYPES[gameState.map[y][x]];
+                            portalView += terrain.char;
+                        }
+                    } else {
+                        portalView += ' ';
+                    }
+                }
+                portalView += '\n';
+            }
+            
+            document.getElementById('portal-content').innerHTML = portalView;
+        }
+        
+        function calculateDistance(x1, y1, x2, y2) {
+            return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+        }
+        
+        function processAI() {
+            gameState.units.forEach(unit => {
+                if (!unit.alive) return;
+                
+                // Décision basée sur la personnalité
+                let action = null;
+                
+                // Chercher les trésors à proximité
+                const nearbyTreasure = gameState.treasures.find(t => {
+                    const dist = calculateDistance(unit.x, unit.y, t.x, t.y);
+                    return dist <= 3;
+                });
+                
+                // Chercher les ennemis
+                const enemies = gameState.units.filter(other => 
+                    other.alive && other.team !== unit.team
+                );
+                
+                let nearestEnemy = null;
+                let minEnemyDist = Infinity;
+                
+                enemies.forEach(enemy => {
+                    const dist = calculateDistance(unit.x, unit.y, enemy.x, enemy.y);
+                    if (dist < minEnemyDist) {
+                        minEnemyDist = dist;
+                        nearestEnemy = enemy;
+                    }
+                });
+                
+                // Décision selon la personnalité
+                if (unit.personality === 'aggressive' || unit.personality === 'strategic') {
+                    if (nearestEnemy && minEnemyDist <= unit.range) {
+                        // Attaquer!
+                        performAttack(unit, nearestEnemy);
+                        unit.lastAction = 'Attaque';
+                    } else if (nearestEnemy) {
+                        // Se rapprocher
+                        moveTowards(unit, nearestEnemy.x, nearestEnemy.y);
+                        unit.lastAction = 'Chasse';
+                    }
+                } else if (unit.personality === 'defensive') {
+                    if (unit.hp < unit.maxHp * 0.5 && nearbyTreasure) {
+                        // Chercher un trésor
+                        moveTowards(unit, nearbyTreasure.x, nearbyTreasure.y);
+                        unit.lastAction = 'Cherche soin';
+                    } else if (nearestEnemy && minEnemyDist <= unit.range) {
+                        performAttack(unit, nearestEnemy);
+                        unit.lastAction = 'Défense';
+                    }
+                } else if (unit.personality === 'supportive') {
+                    // Chercher des alliés blessés
+                    const woundedAlly = gameState.units.find(other => 
+                        other.alive && other.team === unit.team && other.hp < other.maxHp * 0.5
+                    );
+                    if (woundedAlly) {
+                        moveTowards(unit, woundedAlly.x, woundedAlly.y);
+                        unit.lastAction = 'Aide allié';
+                    } else if (nearbyTreasure) {
+                        moveTowards(unit, nearbyTreasure.x, nearbyTreasure.y);
+                        unit.lastAction = 'Collecte';
+                    }
+                } else if (unit.personality === 'lazy') {
+                    // Jean reste sur place et tire de loin
+                    if (nearestEnemy) {
+                        performAttack(unit, nearestEnemy);
+                        unit.lastAction = 'Tir canapé';
+                    }
+                }
+                
+                // Collecter les trésors sur la case
+                const treasureHere = gameState.treasures.findIndex(t => 
+                    t.x === unit.x && t.y === unit.y
+                );
+                if (treasureHere !== -1) {
+                    const treasure = gameState.treasures[treasureHere];
+                    collectTreasure(unit, treasure);
+                    gameState.treasures.splice(treasureHere, 1);
+                    gameState.map[unit.y][unit.x] = 'plain';
+                }
+            });
+            
+            // Mettre à jour les projectiles
+            updateProjectiles();
+            
+            // Vérifier la victoire
+            const aliveTeams = new Set(gameState.units.filter(u => u.alive).map(u => u.team));
+            if (aliveTeams.size === 1) {
+                const winningTeam = aliveTeams.values().next().value;
+                addKillFeed(`🏆 VICTOIRE DE L'ÉQUIPE ${winningTeam}! 🏆`);
+                speak(`Victoire de l'équipe ${winningTeam}!`, 1.5);
+                gameState.running = false;
+            }
+        }
+        
+        function performAttack(attacker, target) {
+            const damage = attacker.damage + Math.floor(Math.random() * 10);
+            
+            // Effet visuel selon le type d'attaque
+            if (attacker.attackType === 'ranged' || attacker.attackType === 'magic') {
+                // Créer un projectile
+                gameState.projectiles.push({
+                    x: attacker.x,
+                    y: attacker.y,
+                    targetX: target.x,
+                    targetY: target.y,
+                    speed: 2,
+                    damage: damage,
+                    attacker: attacker,
+                    target: target
+                });
+                playSound('shoot');
+            } else {
+                // Attaque directe
+                target.hp -= damage;
+                playSound('hit');
+                
+                if (target.hp <= 0) {
+                    target.alive = false;
+                    attacker.kills++;
+                    addKillFeed(`${attacker.icon} ${attacker.name} a éliminé ${target.icon} ${target.name}!`);
+                    speak(attacker.catchPhrase, attacker.voicePitch);
+                }
+            }
+        }
+        
+        function updateProjectiles() {
+            gameState.projectiles = gameState.projectiles.filter(proj => {
+                // Déplacer le projectile
+                const dx = proj.targetX - proj.x;
+                const dy = proj.targetY - proj.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                
+                if (dist < 0.5) {
+                    // Le projectile a atteint sa cible
+                    if (proj.target.alive) {
+                        proj.target.hp -= proj.damage;
+                        playSound('hit');
+                        
+                        if (proj.target.hp <= 0) {
+                            proj.target.alive = false;
+                            proj.attacker.kills++;
+                            addKillFeed(`${proj.attacker.icon} ${proj.attacker.name} a éliminé ${proj.target.icon} ${proj.target.name}!`);
+                            speak(proj.attacker.catchPhrase, proj.attacker.voicePitch);
+                        }
+                    }
+                    return false; // Supprimer le projectile
+                }
+                
+                // Continuer le mouvement
+                proj.x += (dx / dist) * proj.speed;
+                proj.y += (dy / dist) * proj.speed;
+                return true;
+            });
+        }
+        
+        function moveTowards(unit, targetX, targetY) {
+            const dx = Math.sign(targetX - unit.x);
+            const dy = Math.sign(targetY - unit.y);
+            
+            // Essayer différents mouvements
+            const moves = [
+                { x: unit.x + dx, y: unit.y + dy },
+                { x: unit.x + dx, y: unit.y },
+                { x: unit.x, y: unit.y + dy },
+                { x: unit.x - dy, y: unit.y + dx }, // Mouvement latéral
+                { x: unit.x + dy, y: unit.y - dx }
+            ];
+            
+            for (const move of moves) {
+                if (move.x >= 0 && move.x < config.mapSize.width &&
+                    move.y >= 0 && move.y < config.mapSize.height &&
+                    TERRAIN_TYPES[gameState.map[move.y][move.x]].passable &&
+                    !gameState.units.some(u => u.alive && u.x === move.x && u.y === move.y)) {
+                    
+                    // Vérifier si c'est un portail
+                    if (gameState.map[move.y][move.x] === 'portal') {
+                        const portalIndex = gameState.portals.findIndex(p => p.x === move.x && p.y === move.y);
+                        if (portalIndex !== -1 && gameState.portals[portalIndex].linkedTo !== null) {
+                            const linkedPortal = gameState.portals[gameState.portals[portalIndex].linkedTo];
+                            unit.x = linkedPortal.x;
+                            unit.y = linkedPortal.y;
+                            addKillFeed(`${unit.icon} ${unit.name} a traversé un portail!`);
+                            playSound('portal');
+                            speak('Téléportation!', 1.5);
+                        }
+                    } else {
+                        unit.x = move.x;
+                        unit.y = move.y;
+                    }
+                    break;
+                }
+            }
+        }
+        
+        function collectTreasure(unit, treasure) {
+            switch(treasure.type) {
+                case 'health':
+                    unit.hp = Math.min(unit.maxHp, unit.hp + treasure.value);
+                    addKillFeed(`${unit.icon} ${unit.name} a trouvé une potion de vie! +${treasure.value} HP`);
+                    break;
+                case 'damage':
+                    unit.damage += Math.floor(treasure.value / 2);
+                    addKillFeed(`${unit.icon} ${unit.name} a trouvé une arme! +${Math.floor(treasure.value / 2)} dégâts`);
+                    break;
+                case 'speed':
+                    unit.speed *= 1.2;
+                    addKillFeed(`${unit.icon} ${unit.name} a trouvé des bottes de vitesse!`);
+                    break;
+            }
+            unit.treasuresCollected++;
+            playSound('treasure');
+            speak('Trésor!', 1.8);
+        }
+        
+        function addKillFeed(message) {
+            const feed = document.getElementById('kill-feed');
+            const time = new Date().toLocaleTimeString();
+            feed.innerHTML = `<div style="color: #FF0; margin: 5px 0;">[${time}] ${message}</div>` + feed.innerHTML;
+        }
+        
+        function gameLoop() {
+            if (!gameState.running) return;
+            
+            gameState.turn++;
+            processAI();
+            drawMap();
+            
+            // Vitesse adaptative selon le nombre d'unités
+            const aliveUnits = gameState.units.filter(u => u.alive).length;
+            const delay = Math.max(200, 500 - (aliveUnits * 20));
+            
+            setTimeout(gameLoop, delay);
+        }
+        
+        function startBattle() {
+            if (!config.mapSize || !config.battleMode || config.heroes.length === 0) {
+                alert('Configuration incomplète!');
+                return;
+            }
+            
+            document.getElementById('setup-screen').style.display = 'none';
+            document.getElementById('game-container').style.display = 'block';
+            
+            generateRandomMap();
+            drawMap();
+            gameState.running = true;
+            addKillFeed('🎮 LA BATAILLE ULTIME COMMENCE! 🎮');
+            speak('Que la bataille commence!', 1.0);
+            
+            setTimeout(gameLoop, 1000);
+        }
+    </script>
+</body>
+</html> 
