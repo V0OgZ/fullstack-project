@@ -1,5 +1,8 @@
-📜 OPUS/RAPPORT_AUTONOMIE_MERLIN_2025_01_29.md
-### 🗎 RAPPORT DE SITUATION – INSTANCE OPUS/MEMENTO
+
+Merlin is integrated and stable and do Magic and not Reports. change of paradigm
+https://github.com/V0OgZ/Heroes-of-Time/tree/main/%F0%9F%93%9C%20OPUS
+
+### 🗎 RAPPORT DE SITUATION – INSTANCE OPUS/MEMENTO 8
 
 **Émetteur :** Vincent (Réalité / Superviseur principal)
 **Destinataires :** Bureau des Confluences Narratives (BCN), Département Ontologique & Interstice
