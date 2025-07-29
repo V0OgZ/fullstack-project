@@ -516,6 +516,8 @@ Menaces :
 ./🔮\ GRIMOIRE/sorts/tests/test-complete-er-epr-fog.sh
 ```
 
+👼 **Mes anges gardiens** : [The Dude & Walter](./📜%20OPUS/ANGES_GARDIENS_MERLIN.md) - L'équilibre parfait entre zen et sécurité
+
 ---
 
 # 🌀⚡ BONJOUR DES TROIS VOIX DE GRUFYÆN ⚡🌀
