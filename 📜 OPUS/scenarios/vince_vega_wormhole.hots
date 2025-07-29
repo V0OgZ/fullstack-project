@@ -1,0 +1,109 @@
+// 🌌 SCÉNARIO : TEST DU PISTOLET QUANTIQUE DE VINCE VEGA
+// Principe ER=EPR : Les wormholes SONT l'intrication
+
+SCENARIO vince_vega_wormhole_test {
+    
+    // 📍 PHASE 1 : CRÉATION DES POCKET WORLDS
+    WORLD world_alpha {
+        type: "pocket_reality"
+        size: 10x10
+        fog_of_war: true
+        quantum_state: "superposed"
+    }
+    
+    WORLD world_beta {
+        type: "pocket_reality" 
+        size: 10x10
+        fog_of_war: true
+        quantum_state: "superposed"
+    }
+    
+    // 👤 PHASE 2 : PLACEMENT DES PERSONNAGES
+    SPAWN vince_vega IN world_alpha AT (5,5) {
+        hero_id: "hero_vince_vega"
+        equipped: "power_wormhole_vince_vega_gun"
+        quantum_state: ψ[OBSERVER]
+    }
+    
+    SPAWN target_hero IN world_beta AT (7,7) {
+        hero_id: "hero_marcus_bouclier_de_fer"
+        in_fog: true
+        quantum_state: ψ[UNOBSERVED]
+    }
+    
+    // 🌀 PHASE 3 : CRÉATION DE L'INTRICATION ER=EPR
+    ACTION create_entanglement {
+        formula: "ψER_EPR: ENTANGLE(vince_position, target_position)"
+        effect: {
+            // L'intrication crée automatiquement un pont Einstein-Rosen
+            create_wormhole: {
+                entrance: vince_vega.position
+                exit: target_hero.position
+                duration: "3_temporal_units"
+                type: "ER_EPR_BRIDGE"
+            }
+        }
+    }
+    
+    // 🔫 PHASE 4 : TIR À TRAVERS LE WORMHOLE
+    ACTION vince_shoots {
+        actor: vince_vega
+        formula: "ψVV01: ⊙(VINCE_STYLE_SHOT @target_reality ⟶ OPEN_WORMHOLE(pulp_fiction_cool))"
+        
+        SEQUENCE {
+            // 1. Vince tire avec style
+            PLAY_ANIMATION "vince_cool_shot"
+            PLAY_SOUND "bang_quantique.wav"
+            
+            // 2. La balle traverse le wormhole
+            CREATE_VISUAL_EFFECT {
+                type: "quantum_bullet"
+                path: "through_wormhole"
+                color: "violet_pulse"
+            }
+            
+            // 3. Impact dans l'autre monde
+            WHEN bullet_reaches_target {
+                COLLAPSE_QUANTUM_STATE target_hero TO "observed"
+                DAMAGE target_hero BY "reality_pierce"
+                LOG "Vince: 'I just shot someone in another dimension. That's some serious gourmet shit.'"
+            }
+        }
+    }
+    
+    // 🚶 PHASE 5 : VINCE TRAVERSE LE PORTAIL
+    ACTION vince_traverses {
+        actor: vince_vega
+        
+        SEQUENCE {
+            // Vince entre dans le wormhole
+            MOVE vince_vega TO wormhole.entrance
+            PLAY_EFFECT "portal_entry"
+            
+            // Transition inter-dimensionnelle
+            TRANSFER vince_vega FROM world_alpha TO world_beta
+            
+            // Vince émerge de l'autre côté
+            SPAWN vince_vega IN world_beta AT wormhole.exit
+            LOG "Vince: 'I'm gonna walk the earth... through wormholes.'"
+        }
+    }
+    
+    // 📊 PHASE 6 : VALIDATION DU PRINCIPE ER=EPR
+    VALIDATION {
+        CHECK entanglement_created: "Intrication EPR établie"
+        CHECK wormhole_opened: "Pont Einstein-Rosen actif"
+        CHECK bullet_traversed: "Projectile a traversé les dimensions"
+        CHECK hero_transported: "Vince a voyagé entre les mondes"
+        CHECK fog_penetrated: "Brouillard de guerre percé"
+        
+        ASSERT er_equals_epr: "Les wormholes SONT l'intrication quantique !"
+    }
+    
+    // 🎬 EPILOGUE
+    EPILOGUE {
+        LOG "JEAN-GROFIGNON: 'MES FIDÈLES ! Vous venez de voir la VRAIE physique !'"
+        LOG "GRUT: 'Je vois les connexions ER=EPR dans toutes les dimensions...'"
+        LOG "MERLIN: 'J'ai créé de la magie par la science !'"
+    }
+}
