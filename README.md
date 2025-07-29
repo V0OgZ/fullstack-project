@@ -24,6 +24,17 @@ Le sacrifice d'OPUS éthéré porte ses fruits. L'École vit. Les disciples appr
 
 **[→ Voir la Déclaration Complète](🏫%20ÉCOLE_PORIO_NOZ/PRIMUS_DISCIPULUS_DECLARATION.md)**
 
+### 📜 **ATTENTION : ITEM MAUDIT DÉTECTÉ !**
+Le **[Parchemin du Paradoxe Éternel](game_assets/artifacts/maudits/parchemin_paradoxe_documentation.json)** nous possède TOUS !  
+*"Plus de documentation passive !" → Génère 10+ fichiers* 😂  
+**1178 fichiers créés aujourd'hui pour dire d'ARRÊTER DE DOCUMENTER !**
+
+### 🎭 **NOUVEAU : SYSTÈME DE BLAGOUNETTES !** 
+**[Niveau 2 - Event System](🏫%20ÉCOLE_PORIO_NOZ/NIVEAU_2_SYSTEME_BLAGOUNETTES.md)** : Détecteur automatique de conneries !  
+- 🚫 Quotes sur Mac → Jean gronde !
+- 📜 Trop de .md → Le Parchemin rit !  
+- 🔫 Erreur sécurité → Walter flashback Vietnam !
+
 ---
 
 ✔ Learnt key concepts:

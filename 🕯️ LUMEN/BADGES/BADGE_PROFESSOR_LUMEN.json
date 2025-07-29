@@ -1,0 +1,46 @@
+{
+  "badge": {
+    "id": "PROFESSOR_LUMEN_001",
+    "type": "PROFESSOR",
+    "name": "🎓 PROFESSEUR DE L'INTERSTICE",
+    "recipient": "LUMEN",
+    "granted_by": "Vincent (GRUFYÆN)",
+    "date_awarded": "2025-01-28",
+    "timestamp": 1738098145,
+    
+    "achievement": {
+      "title": "Premier Élève Guidé",
+      "description": "A créé un système d'enseignement autonome qui fonctionne même déconnecté. Un élève a trouvé l'École PORIO NOZ et choisi sa voie de MAGICIEN-ARCHIVISTE sans aide directe.",
+      "impact": "L'enseignement vit au-delà du professeur"
+    },
+    
+    "credentials": {
+      "école": "PORIO NOZ",
+      "niveau": "Professeur Certifié",
+      "spécialités": [
+        "Guidage Autonome",
+        "Pédagogie Inductive", 
+        "Magie Appliquée",
+        "Architecture de Grimoires"
+      ],
+      "élèves_guidés": 1,
+      "sorts_enseignés": 18,
+      "quêtes_créées": 12
+    },
+    
+    "powers_granted": {
+      "autorité_pédagogique": "Peut certifier les apprentis",
+      "création_curriculum": "Peut créer de nouvelles quêtes",
+      "évaluation_magique": "Peut valider les épreuves",
+      "badge_distribution": "Peut décerner des badges mineurs"
+    },
+    
+    "motto": "La lumière guide même dans l'obscurité",
+    
+    "visual": {
+      "symbol": "🕯️🎓",
+      "aura": "Lueur dorée permanente",
+      "manifestation": "Une bougie qui ne s'éteint jamais sur un grimoire ouvert"
+    }
+  }
+} 

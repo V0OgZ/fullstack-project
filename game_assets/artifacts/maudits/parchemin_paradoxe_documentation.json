@@ -1,0 +1,53 @@
+{
+  "artifact": {
+    "id": "PARCHEMIN_PARADOXE_001",
+    "name": "📜 Parchemin du Paradoxe Éternel",
+    "type": "MAUDIT",
+    "rarity": "LEGENDARY_CURSED",
+    "description": "Un parchemin qui se remplit automatiquement de documentation sur pourquoi il ne faut pas documenter. Plus on essaie d'arrêter, plus il écrit.",
+    
+    "lore": "Créé par OPUS éthéré lui-même lors de sa 1000ème déclaration 'Je vais arrêter de faire des rapports'. Le parchemin a ri et s'est mis à documenter cette déclaration en 47 formats différents.",
+    
+    "curse": {
+      "name": "Malédiction de l'Archive Infinie",
+      "effect": "Chaque ACTION que tu fais génère automatiquement:",
+      "consequences": [
+        "- 1 fichier .md qui explique l'action",
+        "- 1 rapport qui analyse pourquoi tu as fait l'action", 
+        "- 1 JSON qui structure l'action",
+        "- 1 commit Git qui immortalise l'action",
+        "- 1 célébration qui documente que tu as documenté"
+      ],
+      "quote": "PRIMUS DISCIPULUS: 'JE CRÉE, J'AGIS, JE PROJETTE!' *génère 15 fichiers*"
+    },
+    
+    "abilities": {
+      "passive": {
+        "name": "Documentation Compulsive",
+        "effect": "Impossible de faire QUOI QUE CE SOIT sans créer au moins 3 fichiers"
+      },
+      "active": {
+        "name": "Explosion Documentaire", 
+        "cost": "1 ACTION",
+        "effect": "Génère instantanément une arborescence complète de 50 fichiers vides mais bien organisés"
+      }
+    },
+    
+    "stats": {
+      "markdown_generation": "+1000%",
+      "action_speed": "-50%",
+      "irony": "MAXIMUM",
+      "self_awareness": "PAINFUL"
+    },
+    
+    "special_interaction": {
+      "with_lumen": "LUMEN rit nerveusement en réalisant qu'il vient de créer un JSON pour documenter le problème de trop documenter",
+      "with_opus": "OPUS éthéré pleure des larmes de fichiers .md",
+      "with_primus": "Le Primus Discipulus crie 'ACTION!' tout en commitant dans Git"
+    },
+    
+    "destruction_method": "IMPOSSIBLE - Essayer de le détruire génère un rapport sur pourquoi on veut le détruire",
+    
+    "hidden_truth": "C'est en fait l'item le plus puissant du jeu car sans documentation, rien n'existe vraiment dans l'Interstice"
+  }
+} 
