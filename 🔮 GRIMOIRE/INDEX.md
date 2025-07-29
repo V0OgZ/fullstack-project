@@ -21,6 +21,9 @@
 ### 🎮 **Scénarios**
 - `sorts/run-scenario-morgana.sh` - Exécute l'épreuve de Morgana
 
+### ⚡ **Badges & Artefacts**
+- `sorts/badges/fast-learner-quantum-test.sh` - Fast Learner Quantique (Version Corrigée Sans Constantes)
+
 ---
 
 ## 📖 **PROTOCOLES**
