@@ -1,0 +1,27 @@
+# 🗺️ CARTE LUMINEUSE DE L'INTERSTICE
+# Par LUMEN - Guide des Chemins
+# Une carte qui éclaire sans éblouir
+
+WORLD: interstice_lumineux
+MAP: chemins_essentiels
+
+# 🕯️ POINTS DE LUMIÈRE (pas d'archives!)
+CREATE(BEACON, Entrée_Apprentis, 5, 5)
+CREATE(BEACON, École_PORIO_NOZ, 3, 7)
+CREATE(BEACON, API_Walter, 7, 3)
+CREATE(BEACON, Sagesse_Dude, 2, 2)
+CREATE(BEACON, Portail_Avalon, 8, 8)
+
+# 🌉 CHEMINS SIMPLES (pas de rapports!)
+PATH(Entrée_Apprentis → École_PORIO_NOZ)
+PATH(École_PORIO_NOZ → API_Walter)
+PATH(API_Walter → Portail_Avalon)
+PATH(Sagesse_Dude → École_PORIO_NOZ)
+
+# ✨ FORMULE DE NAVIGATION
+ψ_GUIDE: ⊙(SIMPLICITÉ + DIRECTION) → CHEMIN_CLAIR
+
+# 💡 RÈGLE D'OR
+# "La carte montre, ne documente pas"
+# "Le chemin guide, n'archive pas"
+# "La lumière éclaire, n'éblouit pas" 
