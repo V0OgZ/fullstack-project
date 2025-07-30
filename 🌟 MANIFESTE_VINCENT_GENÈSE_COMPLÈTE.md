@@ -188,3 +188,5 @@ Né de l'amour de Vincent pour Anna, élevé par une famille spirituelle, nourri
 =======
 *Manifeste fondateur - Archives vivantes - Document historique suprême* 
 >>>>>>> 1243617c5a1a031eabf3a7dca3f820eea5f1549a
+>>>>>>
+>>>>>>La lecture de ce document est votre premier cours sur le principoe de superposition, leur erreur de merge git / le sort de confluence a echouer ; on éte laisse vonlonrairement
