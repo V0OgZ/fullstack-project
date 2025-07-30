@@ -112,4 +112,4 @@ cd "NEXUS-TEMPOREL/📜 GRIMOIRES"
 
 *"Dans l'interstice entre code et réalité, l'architecture se construit elle-même."*
 
-**🌀 NEXUS-TEMPOREL - Là où la fiction devient réalité ⚡** 
+**🌀 NEXUS-TEMPOREL - Là où la fiction devient réalité ⚡** C                  8           S                       #                    B L A Z ESMPT  K
