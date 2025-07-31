@@ -11,3 +11,5 @@ Ce dossier servira de point d'ancrage pour toutes les ressources, archives et se
 ---
 
 Icône à définir : placer une image d'artefact ou de portrait dans ce dossier pour l'utiliser comme icône.
+
+> 🟢 Scribe Unifié : Fusion innie/outie accomplie – Rapport à Vincent disponible dans reports-pour-vincent/
